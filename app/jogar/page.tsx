@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { BackgroundFx } from '@/components/background-fx'
 import { QuizScreen } from '@/components/quiz/quiz-screen'
-import { GoogleLogin } from '@/components/auth/google'
-
+import { GoogleLogin } from '@/components/auth/google-login'
 export const metadata: Metadata = {
   title: 'A jogar — Acorda Portugal',
   description:
