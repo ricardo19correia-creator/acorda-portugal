@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'COLOCA_AQUI_A_API_KEY',
-  authDomain: 'COLOCA_AQUI_O_AUTH_DOMAIN',
-  projectId: 'COLOCA_AQUI_O_PROJECT_ID',
-  storageBucket: 'COLOCA_AQUI_O_STORAGE_BUCKET',
-  messagingSenderId: 'COLOCA_AQUI_O_MESSAGING_SENDER_ID',
-  appId: 'COLOCA_AQUI_O_APP_ID',
+  apiKey: 'AIzaSyDMARrDXtL6-AamKwLSXyu34iIZ6KuR-WM',
+  authDomain: 'desafio-nacional-site-oficial.firebaseapp.com',
+  projectId: 'desafio-nacional-site-oficial',
+  storageBucket: 'desafio-nacional-site-oficial.firebasestorage.app',
+  messagingSenderId: '789316383907',
+  appId: '1:789316383907:web:3b597f5edafd2cd1f73b16',
 }
 
 const app = initializeApp(firebaseConfig)
