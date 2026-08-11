@@ -10,24 +10,34 @@ import { DistrictRanking } from '@/components/district-ranking'
 import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
 import { SiteFooter } from '@/components/site-footer'
+import { GoogleLogin } from '@/components/auth/google-login'
 
 export default function Page() {
   return (
     <div className="relative min-h-screen">
       <BackgroundFx />
-      <SiteHeader />
-      <main>
-        <Hero />
-        <PlayerHub />
-        <HowItWorks />
-        <Categories />
-        <Events />
-        <Ranking />
-        <DistrictRanking />
-        <Progression />
-        <Rewards />
-      </main>
-      <SiteFooter />
+
+      <div className="relative z-20">
+        <SiteHeader />
+
+        <div className="flex justify-center px-4 py-6">
+          <GoogleLogin />
+        </div>
+
+        <main>
+          <Hero />
+          <PlayerHub />
+          <HowItWorks />
+          <Categories />
+          <Events />
+          <Ranking />
+          <DistrictRanking />
+          <Progression />
+          <Rewards />
+        </main>
+
+        <SiteFooter />
+      </div>
     </div>
   )
 }
