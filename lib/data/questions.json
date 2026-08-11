@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "category": "Geografia",
+    "difficulty": "Fácil",
+    "question": "Qual é o distrito português com maior área?",
+    "options": [
+      "Bragança",
+      "Beja",
+      "Évora",
+      "Viseu"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Beja é o maior distrito de Portugal em área.",
+    "points": 500
+  },
+  {
+    "id": 2,
+    "category": "História",
+    "difficulty": "Médio",
+    "question": "Em que ano foi assinado o Tratado de Windsor entre Portugal e Inglaterra?",
+    "options": [
+      "1386",
+      "1415",
+      "1290",
+      "1500"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O Tratado de Windsor foi assinado em 1386 e consolidou a aliança entre Portugal e Inglaterra.",
+    "points": 500
+  },
+  {
+    "id": 3,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é a capital de Portugal?",
+    "options": [
+      "Porto",
+      "Coimbra",
+      "Lisboa",
+      "Braga"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Lisboa é a capital de Portugal.",
+    "points": 300
+  },
+  {
+    "id": 4,
+    "category": "Geografia",
+    "difficulty": "Fácil",
+    "question": "Qual é o rio que atravessa a cidade do Porto?",
+    "options": [
+      "Tejo",
+      "Douro",
+      "Mondego",
+      "Sado"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O rio Douro atravessa a cidade do Porto e desagua no Oceano Atlântico.",
+    "points": 300
+  },
+  {
+    "id": 5,
+    "category": "História",
+    "difficulty": "Fácil",
+    "question": "Quem foi o primeiro rei de Portugal?",
+    "options": [
+      "D. João I",
+      "D. Afonso Henriques",
+      "D. Manuel I",
+      "D. Pedro I"
+    ],
+    "correctAnswer": 1,
+    "explanation": "D. Afonso Henriques é tradicionalmente considerado o primeiro rei de Portugal.",
+    "points": 300
+  },
+  {
+    "id": 6,
+    "category": "Desporto",
+    "difficulty": "Fácil",
+    "question": "Qual destas modalidades é praticada com uma bola e uma baliza?",
+    "options": [
+      "Futebol",
+      "Natação",
+      "Atletismo",
+      "Ciclismo"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O futebol é jogado com uma bola e duas balizas.",
+    "points": 200
+  },
+  {
+    "id": 7,
+    "category": "Gastronomia",
+    "difficulty": "Fácil",
+    "question": "Qual destes pratos é tradicionalmente associado a Portugal?",
+    "options": [
+      "Bacalhau à Brás",
+      "Sushi",
+      "Tacos",
+      "Curry"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O Bacalhau à Brás é um dos pratos tradicionais da gastronomia portuguesa.",
+    "points": 300
+  },
+  {
+    "id": 8,
+    "category": "Música",
+    "difficulty": "Fácil",
+    "question": "Qual destes géneros musicais está fortemente associado a Portugal?",
+    "options": [
+      "Fado",
+      "Reggae",
+      "Country",
+      "K-pop"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O fado é uma das expressões musicais mais características de Portugal.",
+    "points": 300
+  },
+  {
+    "id": 9,
+    "category": "Geografia",
+    "difficulty": "Médio",
+    "question": "Qual é a serra mais alta de Portugal continental?",
+    "options": [
+      "Serra do Gerês",
+      "Serra da Estrela",
+      "Serra de Monchique",
+      "Serra do Marão"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Serra da Estrela é a serra mais alta de Portugal continental.",
+    "points": 400
+  },
+  {
+    "id": 10,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Quantos distritos existem em Portugal continental?",
+    "options": [
+      "16",
+      "18",
+      "20",
+      "22"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Portugal continental está dividido em 18 distritos.",
+    "points": 300
+  }
+]

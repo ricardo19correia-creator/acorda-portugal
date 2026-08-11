@@ -1,0 +1,312 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens — mapped to raw CSS vars so arbitrary values like     */
+/*  shadow-[...var(--primary)...] resolve correctly.                   */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-body);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Portuguese identity colors */
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-flag-red: var(--flag-red);
+  --color-flag-red-foreground: var(--flag-red-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* custom animations */
+  --animate-glow-pulse: glow-pulse 6s ease-in-out infinite;
+  --animate-drift: drift linear infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 26s linear infinite;
+  --animate-spin-reverse: spin-reverse 34s linear infinite;
+  --animate-pop: pop 0.5s cubic-bezier(0.22, 1.4, 0.4, 1) both;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dark-first Portuguese game palette                                 */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+
+  /* graphite-green depths */
+  --background: oklch(0.16 0.022 162);
+  --foreground: oklch(0.97 0.012 120);
+
+  --card: oklch(0.21 0.026 163);
+  --card-foreground: oklch(0.97 0.012 120);
+  --popover: oklch(0.19 0.024 163);
+  --popover-foreground: oklch(0.97 0.012 120);
+
+  /* Portuguese green */
+  --primary: oklch(0.7 0.17 152);
+  --primary-foreground: oklch(0.15 0.03 160);
+
+  --secondary: oklch(0.27 0.03 162);
+  --secondary-foreground: oklch(0.97 0.012 120);
+  --muted: oklch(0.27 0.03 162);
+  --muted-foreground: oklch(0.74 0.03 150);
+
+  /* brighter emerald — gradient partner */
+  --accent: oklch(0.8 0.16 168);
+  --accent-foreground: oklch(0.15 0.03 160);
+
+  /* reward gold */
+  --gold: oklch(0.83 0.15 86);
+  --gold-foreground: oklch(0.22 0.04 65);
+
+  /* Portuguese red */
+  --flag-red: oklch(0.6 0.21 26);
+  --flag-red-foreground: oklch(0.98 0.01 90);
+
+  --destructive: oklch(0.62 0.23 26);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.17 152);
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-background;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Signature utilities                                                */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .glass {
+    background: color-mix(in oklch, var(--card) 55%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* gradient wordmark: Portuguese green → emerald → gold */
+  .text-brand-gradient {
+    background-image: linear-gradient(
+      104deg,
+      var(--primary) 0%,
+      var(--accent) 42%,
+      var(--gold) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gold-gradient {
+    background-image: linear-gradient(100deg, var(--gold) 0%, oklch(0.92 0.09 92) 55%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* faint technical grid — map/digital feel */
+  .grid-tech {
+    background-image:
+      linear-gradient(to right, oklch(0.7 0.17 152 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.7 0.17 152 / 0.08) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+
+  /* animated diagonal light sweep for premium surfaces */
+  .sheen {
+    position: relative;
+  }
+  .sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      115deg,
+      transparent 20%,
+      oklch(1 0 0 / 0.22) 45%,
+      oklch(1 0 0 / 0.06) 55%,
+      transparent 75%
+    );
+    background-size: 240% 100%;
+    background-position: 180% 0;
+    animation: sheen-sweep 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* moving highlight for progress bars */
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(1 0 0 / 0.35) 50%,
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: shimmer-move 2.4s ease-in-out infinite;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Keyframes                                                          */
+/* ------------------------------------------------------------------ */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(24px);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes sheen-sweep {
+  0% {
+    background-position: 180% 0;
+  }
+  60%,
+  100% {
+    background-position: -80% 0;
+  }
+}
+
+@keyframes shimmer-move {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
