@@ -4,12 +4,12 @@ const LINKS = ['Jogar', 'Ranking', 'Categorias', 'Como jogar', 'Termos', 'Privac
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/5 bg-background/60">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
-          <div className="max-w-xs">
+    <footer className="relative">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-md">
             <BrandLogo />
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">
               O jogo de perguntas que junta todo o país. Joga, compete e mostra que sabes.
             </p>
           </div>
@@ -30,8 +30,20 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/5 pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-xs text-muted-foreground sm:flex-row">
+          {/* Esquerda */}
           <p>© 2026 Acorda Portugal</p>
+
+          {/* Centro — assinatura do criador */}
+          <p className="text-center font-medium tracking-wide">
+            Uma criação de{' '}
+            <span className="font-bold text-foreground">
+              Riky Moreira
+            </span>{' '}
+            🇵🇹
+          </p>
+
+          {/* Direita */}
           <p className="flex items-center gap-1.5">
             Feito com orgulho em Portugal
             <span className="inline-block h-3 w-4.5 overflow-hidden rounded-[2px] align-middle">
