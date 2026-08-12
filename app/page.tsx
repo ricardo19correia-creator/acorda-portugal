@@ -20,10 +20,6 @@ export default function Page() {
       <div className="relative z-20">
         <SiteHeader />
 
-        <div className="flex justify-center px-4 py-6">
-          <GoogleLogin />
-        </div>
-
         <main>
           <Hero />
           <PlayerHub />

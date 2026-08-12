@@ -2,6 +2,10 @@ import { SectionHeading } from '@/components/section-heading'
 import { PlayerCard } from '@/components/player-card'
 import { DailyMissions } from '@/components/daily-missions'
 import { StreakCard } from '@/components/streak-card'
+import dynamic from 'next/dynamic'
+
+// ProfilePanel is a client component; import dynamically to avoid server-side issues
+const ProfilePanel = dynamic(() => import('./profile-panel').then((m) => m.ProfilePanel), { ssr: false })
 
 export function PlayerHub() {
   return (
@@ -14,7 +18,8 @@ export function PlayerHub() {
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
         <div className="flex flex-col gap-6">
-          <PlayerCard />
+          {/* ProfilePanel handles guest/authenticated views */}
+          <ProfilePanel />
           <StreakCard />
         </div>
         <DailyMissions />
