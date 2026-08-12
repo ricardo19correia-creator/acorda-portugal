@@ -1,11 +1,10 @@
+'use client'
+
 import { SectionHeading } from '@/components/section-heading'
 import { PlayerCard } from '@/components/player-card'
 import { DailyMissions } from '@/components/daily-missions'
 import { StreakCard } from '@/components/streak-card'
-import dynamic from 'next/dynamic'
-
-// ProfilePanel is a client component; import dynamically to avoid server-side issues
-const ProfilePanel = dynamic(() => import('./profile-panel').then((m) => m.ProfilePanel), { ssr: false })
+import { ProfilePanel } from './profile-panel'
 
 export function PlayerHub() {
   return (
