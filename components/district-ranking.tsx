@@ -5,6 +5,7 @@ import { MapPin, Users, Sparkles, Medal } from 'lucide-react'
 import { DISTRICTS } from '@/lib/game-data'
 import { SectionHeading } from '@/components/section-heading'
 import { PortugalMap } from '@/components/portugal-map'
+import { PortugalMapSVG } from '@/components/portugal-map-svg'
 import { cn } from '@/lib/utils'
 
 const MEDAL_TONE = ['text-gold', 'text-white/80', 'text-flag-red']
@@ -25,21 +26,13 @@ export function DistrictRanking() {
         {/* Map + selected district detail */}
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">
           <div className="relative mx-auto max-w-xs">
-            <PortugalMap float={false} rings={false} />
-            {/* selectable district pins over the map */}
-            <button
-              type="button"
-              aria-label="Selecionar Vila Real"
-              onClick={() => setSelected('Vila Real')}
-              className={cn(
-                'absolute right-[30%] top-[24%] grid h-7 w-7 place-items-center rounded-full border transition-all',
-                selected === 'Vila Real'
-                  ? 'border-gold bg-gold/20 text-gold shadow-[0_0_18px_-2px_var(--gold)]'
-                  : 'border-white/20 bg-background/70 text-muted-foreground hover:border-primary/50',
-              )}
-            >
-              <MapPin className="h-4 w-4" />
-            </button>
+             {/* Use the new interactive SVG map for district selection */}
+             <div className="mx-auto max-w-[360px]">
+               <PortugalMapSVG
+                 selected={selected}
+                 onSelect={(name) => setSelected(name)}
+               />
+             </div>
           </div>
 
           <div className="mt-4 rounded-2xl border border-gold/20 bg-gold/[0.06] p-5 text-center">
