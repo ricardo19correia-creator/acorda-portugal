@@ -4,8 +4,7 @@ import { useState } from 'react'
 import { MapPin, Users, Sparkles, Medal } from 'lucide-react'
 import { DISTRICTS } from '@/lib/game-data'
 import { SectionHeading } from '@/components/section-heading'
-import { PortugalMap } from '@/components/portugal-map'
-import { PortugalMapSVG } from '@/components/portugal-map-svg'
+import { PortugalMapGeo } from '@/components/portugal-map-geo'
 import { cn } from '@/lib/utils'
 
 const MEDAL_TONE = ['text-gold', 'text-white/80', 'text-flag-red']
@@ -28,7 +27,7 @@ export function DistrictRanking() {
           <div className="relative mx-auto max-w-xs">
              {/* Use the new interactive SVG map for district selection */}
              <div className="mx-auto max-w-[360px]">
-               <PortugalMapSVG
+               <PortugalMapGeo
                  selected={selected}
                  onSelect={(name) => setSelected(name)}
                />

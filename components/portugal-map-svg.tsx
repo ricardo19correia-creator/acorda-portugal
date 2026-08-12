@@ -1,6 +1,5 @@
-'use client'
+﻿'use client'
 
-import React, { useCallback } from 'react'
 import { DISTRICT_MAP } from '@/lib/district-map'
 
 export function PortugalMapSVG({
@@ -9,285 +8,193 @@ export function PortugalMapSVG({
   onSelect,
 }: {
   className?: string
-  selected?: string // district name (display name) to keep compatibility
+  selected?: string
   onSelect?: (name: string) => void
 }) {
-  // helper to find svgId from name
-  const nameToSvgId = useCallback((name?: string) => {
-    if (!name) return undefined
-    const entry = DISTRICT_MAP.find((d) => d.name === name || d.slug === name)
-    return entry?.svgId
-  }, [])
+  const selectedId = DISTRICT_MAP.find((d) => d.name === selected || d.slug === selected)?.svgId
 
-  const handleSelect = (name: string) => {
-    onSelect?.(name)
-  }
+  const activate = (name: string) => onSelect?.(name)
 
-  const selectedId = nameToSvgId(selected)
-
-  // Inline SVG: stylised, simplified shapes for districts (designed for effect and interactivity)
-  // Each region has an id like district-porto etc. The geometric shapes are artistic blobs arranged to resemble Portugal.
-  // Islands (Açores, Madeira) are included as inset clusters on the left.
+  const districtProps = (name: string, svgId: string) => ({
+    id: svgId,
+    className: `district ${selectedId === svgId ? 'selected' : ''}`,
+    role: 'button',
+    tabIndex: 0,
+    'aria-label': name,
+    'aria-pressed': selectedId === svgId,
+    onClick: () => activate(name),
+    onKeyDown: (event: React.KeyboardEvent<SVGPathElement>) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        activate(name)
+      }
+    },
+  })
 
   return (
     <div className={className}>
       <svg
-        viewBox="0 0 800 1100"
+        viewBox="0 0 820 960"
         width="100%"
         height="100%"
         role="img"
-        aria-label="Mapa interativo de Portugal"
+        aria-label="Mapa geográfico interativo de Portugal"
         preserveAspectRatio="xMidYMid meet"
-        className="block w-full h-auto"
+        className="block h-auto w-full"
       >
         <defs>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+          <filter id="district-glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4.5" result="blur" />
             <feMerge>
-              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          <linearGradient id="mapFill" x1="0" x2="1">
-            <stop offset="0%" stopColor="#04221a" />
-            <stop offset="100%" stopColor="#072a1e" />
+          <linearGradient id="district-fill" x1="0" x2="1">
+            <stop offset="0%" stopColor="rgba(26, 81, 69, 0.96)" />
+            <stop offset="100%" stopColor="rgba(9, 24, 19, 0.96)" />
           </linearGradient>
 
-          <linearGradient id="edge" x1="0" x2="1">
-            <stop offset="0%" stopColor="#00ff9b" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#9bffb8" stopOpacity="0.6" />
+          <linearGradient id="district-edge" x1="0" x2="1">
+            <stop offset="0%" stopColor="#9ef7d4" stopOpacity="0.96" />
+            <stop offset="100%" stopColor="#54ffb6" stopOpacity="0.85" />
           </linearGradient>
-
         </defs>
 
-        {/* background vignette */}
-        <rect className="map-bg" x="0" y="0" width="800" height="1100" rx="8" />
+        <rect x="0" y="0" width="820" height="960" fill="#04150f" rx="18" />
 
-        {/* Mainland silhouette composed of multiple region shapes (artistic, stylised) */}
-        {/* Northern cluster */}
-        <g id="mainland" transform="translate(140,60)">
+        <g transform="translate(28,34)">
           <path
-            id="district-braga"
-            className={`region ${selectedId === 'district-braga' ? 'selected' : ''}`}
-            d="M140 0 C120 30 96 56 88 86 C80 116 84 152 70 182 C54 215 38 240 22 270 L8 300 C-4 330 6 366 30 386 C58 410 92 410 124 412 C152 414 178 410 206 398 C236 384 262 360 280 332 C298 304 312 268 308 232 C302 188 292 150 280 116 C266 78 248 44 220 20 C200 4 170 -4 140 0 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Braga"
-            onClick={() => handleSelect('Braga')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Braga') : undefined)}
+            d="M78 116 L150 58 L220 40 L310 54 L392 82 L458 68 L554 94 L626 130 L690 188 L704 256 L682 320 L700 392 L674 470 L690 550 L655 620 L618 692 L640 786 L586 862 L524 926 L440 942 L344 932 L278 890 L220 884 L168 836 L118 770 L92 708 L62 620 L50 528 L60 430 L78 332 L52 244 Z"
+            fill="rgba(7, 24, 20, 0.94)"
+            stroke="rgba(159, 247, 212, 0.2)"
+            strokeWidth="1.4"
           />
 
           <path
-            id="district-porto"
-            className={`region ${selectedId === 'district-porto' ? 'selected' : ''}`}
-            d="M160 160 C150 188 140 220 136 250 C132 280 134 310 146 336 C158 362 178 382 206 398 C236 414 270 418 300 418 C330 418 360 410 384 392 C408 374 428 350 444 322 C458 296 462 266 458 238 C452 202 442 170 430 140 C410 96 380 64 340 54 C320 50 280 56 260 86 C244 108 176 150 160 160 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Porto"
-            onClick={() => handleSelect('Porto')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Porto') : undefined)}
+            {...districtProps('Viana do Castelo', 'district-viana-do-castelo')}
+            d="M118 110 L171 70 L234 72 L270 104 L252 150 L200 172 L154 170 L120 144 Z"
           />
 
           <path
-            id="district-viana-do-castelo"
-            className={`region ${selectedId === 'district-viana-do-castelo' ? 'selected' : ''}`}
-            d="M74 40 C60 80 46 116 40 154 C36 184 38 214 50 242 C62 270 82 292 106 308 C128 322 154 330 180 332 C166 300 152 274 146 240 C140 206 138 172 150 138 C158 112 170 84 184 62 C160 48 132 36 104 34 C92 34 82 36 74 40 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Viana do Castelo"
-            onClick={() => handleSelect('Viana do Castelo')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Viana do Castelo') : undefined)}
+            {...districtProps('Vila Real', 'district-vila-real')}
+            d="M246 110 L306 88 L364 112 L362 166 L312 194 L260 184 L230 152 Z"
           />
 
           <path
-            id="district-braganca"
-            className={`region ${selectedId === 'district-braganca' ? 'selected' : ''}`}
-            d="M332 18 C320 46 314 82 312 112 C310 140 312 172 332 200 C352 230 376 252 402 268 C428 284 456 294 486 300 C510 304 538 302 560 288 C580 276 594 256 604 232 C616 204 624 172 620 140 C616 108 604 78 588 52 C556 20 496 6 452 10 C432 12 382 14 332 18 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Braganca"
-            onClick={() => handleSelect('Braganca')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Braganca') : undefined)}
-          />
-
-          {/* Central-north cluster (Porto / Aveiro / Viseu / Braga around) */}
-          <path
-            id="district-aveiro"
-            className={`region ${selectedId === 'district-aveiro' ? 'selected' : ''}`}
-            d="M180 220 C160 240 148 268 150 298 C152 326 164 352 188 372 C214 394 244 404 276 406 C300 408 326 404 348 392 C360 384 376 368 386 350 C398 328 402 304 398 280 C392 248 378 220 354 200 C330 180 206 196 180 220 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Aveiro"
-            onClick={() => handleSelect('Aveiro')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Aveiro') : undefined)}
+            {...districtProps('Braga', 'district-braga')}
+            d="M168 174 L246 152 L312 168 L332 214 L308 256 L232 272 L178 244 L154 206 Z"
           />
 
           <path
-            id="district-viseu"
-            className={`region ${selectedId === 'district-viseu' ? 'selected' : ''}`}
-            d="M304 240 C292 268 286 298 292 330 C298 362 316 388 340 404 C366 422 396 428 426 426 C452 424 480 414 502 396 C524 378 538 352 544 324 C550 292 542 260 526 234 C508 204 480 184 452 172 C422 158 362 170 334 196 C322 208 312 224 304 240 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Viseu"
-            onClick={() => handleSelect('Viseu')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Viseu') : undefined)}
+            {...districtProps('Porto', 'district-porto')}
+            d="M182 242 L238 224 L290 232 L314 278 L300 326 L250 344 L188 326 L162 284 Z"
           />
 
           <path
-            id="district-leiria"
-            className={`region ${selectedId === 'district-leiria' ? 'selected' : ''}`}
-            d="M120 320 C100 342 88 372 92 400 C96 430 112 452 136 468 C162 486 196 494 230 492 C262 490 292 480 318 464 C344 448 364 426 378 400 C392 372 396 338 392 304 C388 270 370 240 350 216 C334 196 200 264 120 320 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Leiria"
-            onClick={() => handleSelect('Leiria')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Leiria') : undefined)}
-          />
-
-          {/* Centre-south cluster */}
-          <path
-            id="district-coimbra"
-            className={`region ${selectedId === 'district-coimbra' ? 'selected' : ''}`}
-            d="M220 380 C204 404 190 434 192 466 C194 498 214 522 242 540 C272 560 306 566 340 562 C374 558 400 544 422 524 C446 502 462 476 468 444 C474 410 466 374 452 344 C438 314 412 292 382 278 C356 266 260 334 220 380 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Coimbra"
-            onClick={() => handleSelect('Coimbra')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Coimbra') : undefined)}
+            {...districtProps('Aveiro', 'district-aveiro')}
+            d="M152 324 L224 294 L302 308 L344 350 L330 404 L272 434 L186 426 L142 382 Z"
           />
 
           <path
-            id="district-evora"
-            className={`region ${selectedId === 'district-evora' ? 'selected' : ''}`}
-            d="M300 480 C288 512 280 546 290 576 C302 612 326 640 358 660 C392 682 430 686 466 678 C498 672 526 652 546 626 C566 596 576 562 576 528 C576 496 566 466 548 440 C530 412 498 392 466 384 C420 372 344 408 300 480 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Évora"
-            onClick={() => handleSelect('Évora')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Évora') : undefined)}
+            {...districtProps('Viseu', 'district-viseu')}
+            d="M266 218 L356 204 L420 228 L448 284 L438 344 L388 378 L318 370 L272 318 Z"
           />
 
           <path
-            id="district-faro"
-            className={`region ${selectedId === 'district-faro' ? 'selected' : ''}`}
-            d="M340 620 C332 652 334 688 356 712 C380 740 410 760 446 768 C478 774 512 768 538 748 C562 730 576 702 582 672 C588 642 580 614 562 590 C544 566 516 548 486 538 C452 526 412 532 384 552 C358 572 344 596 340 620 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Faro"
-            onClick={() => handleSelect('Faro')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Faro') : undefined)}
+            {...districtProps('Bragança', 'district-braganca')}
+            d="M374 96 L458 82 L536 108 L566 154 L548 210 L500 232 L428 220 L382 176 Z"
           />
 
           <path
-            id="district-setubal"
-            className={`region ${selectedId === 'district-setubal' ? 'selected' : ''}`}
-            d="M192 460 C168 482 152 510 150 540 C148 572 160 602 180 628 C204 660 238 682 276 692 C312 702 352 700 386 686 C418 672 444 648 462 618 C484 582 496 540 496 500 C496 468 486 438 468 412 C450 386 416 368 384 362 C350 356 254 400 192 460 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Setúbal"
-            onClick={() => handleSelect('Setúbal')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Setúbal') : undefined)}
+            {...districtProps('Guarda', 'district-guarda')}
+            d="M348 214 L430 198 L500 230 L534 292 L520 352 L470 388 L394 382 L334 332 L324 268 Z"
           />
 
           <path
-            id="district-santarem"
-            className={`region ${selectedId === 'district-santarem' ? 'selected' : ''}`}
-            d="M120 440 C100 468 90 504 96 540 C102 576 122 606 150 628 C180 652 216 668 252 674 C288 680 324 678 354 666 C384 654 404 634 420 606 C438 574 446 538 440 502 C434 468 418 436 392 410 C362 380 216 396 120 440 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Santarém"
-            onClick={() => handleSelect('Santarém')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Santarém') : undefined)}
-          />
-
-          {/* eastern districts: Guarda, Portalegre, Castelo Branco, Vila Real */}
-          <path
-            id="district-guarda"
-            className={`region ${selectedId === 'district-guarda' ? 'selected' : ''}`}
-            d="M420 180 C440 208 460 240 468 274 C476 308 476 344 468 378 C460 412 444 440 424 466 C404 494 378 514 350 532 C324 548 294 556 264 558 C232 560 202 548 176 524 C152 502 140 474 136 444 C132 412 146 376 166 344 C182 318 202 292 224 270 C248 246 372 154 420 180 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Guarda"
-            onClick={() => handleSelect('Guarda')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Guarda') : undefined)}
+            {...districtProps('Castelo Branco', 'district-castelo-branco')}
+            d="M482 382 L550 360 L620 392 L648 448 L634 514 L566 540 L500 524 L470 468 Z"
           />
 
           <path
-            id="district-portalegre"
-            className={`region ${selectedId === 'district-portalegre' ? 'selected' : ''}`}
-            d="M460 300 C480 330 494 366 498 404 C502 444 496 486 478 520 C458 558 428 588 392 604 C354 622 312 628 272 624 C234 620 198 606 166 582 C134 558 116 524 112 488 C108 452 124 418 150 388 C180 354 200 326 234 300 C266 276 416 272 460 300 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Portalegre"
-            onClick={() => handleSelect('Portalegre')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Portalegre') : undefined)}
+            {...districtProps('Leiria', 'district-leiria')}
+            d="M142 418 L216 392 L298 410 L334 456 L320 520 L250 554 L172 548 L120 500 Z"
           />
 
           <path
-            id="district-castelo-branco"
-            className={`region ${selectedId === 'district-castelo-branco' ? 'selected' : ''}`}
-            d="M360 360 C376 388 394 418 412 446 C430 476 452 502 476 526 C504 554 536 574 568 582 C602 592 640 588 672 572 C700 558 724 532 736 502 C748 470 754 434 744 400 C732 362 712 330 686 300 C662 272 596 268 560 286 C528 302 500 328 476 356 C456 380 418 354 360 360 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Castelo Branco"
-            onClick={() => handleSelect('Castelo Branco')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Castelo Branco') : undefined)}
+            {...districtProps('Coimbra', 'district-coimbra')}
+            d="M244 518 L324 492 L394 514 L426 576 L402 640 L332 664 L260 646 L214 582 Z"
           />
 
           <path
-            id="district-vila-real"
-            className={`region ${selectedId === 'district-vila-real' ? 'selected' : ''}`}
-            d="M280 40 C260 70 242 96 236 126 C230 156 234 188 250 216 C268 246 292 270 320 286 C350 306 384 316 422 318 C388 276 358 246 330 216 C303 188 292 146 280 112 C270 86 270 56 280 40 Z"
-            role="button"
-            tabIndex={0}
-            aria-label="Vila Real"
-            onClick={() => handleSelect('Vila Real')}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Vila Real') : undefined)}
+            {...districtProps('Santarém', 'district-santarem')}
+            d="M116 544 L196 526 L252 550 L292 606 L272 664 L204 696 L128 684 L94 624 Z"
           />
 
-          {/* northern-central label markers (visual) */}
-          <text x="190" y="100" className="region-label">Porto</text>
-          <text x="120" y="60" className="region-label">Braga</text>
-          <text x="220" y="220" className="region-label">Aveiro</text>
+          <path
+            {...districtProps('Lisboa', 'district-lisboa')}
+            d="M176 654 L242 638 L286 666 L286 720 L236 750 L176 742 L144 694 Z"
+          />
 
-          {/* southern labels */}
-          <text x="360" y="520" className="region-label">Évora</text>
-          <text x="444" y="700" className="region-label">Faro</text>
-          <text x="200" y="420" className="region-label">Coimbra</text>
-        </g>
+          <path
+            {...districtProps('Setúbal', 'district-setubal')}
+            d="M232 700 L308 684 L362 706 L382 764 L344 820 L280 826 L232 780 L214 734 Z"
+          />
 
-        {/* Islands group (left side inset) */}
-        <g id="islands" transform="translate(20,740)">
-          <g id="acores-group">
-            <path
-              id="district-acores"
-              className={`island ${selectedId === 'district-acores' ? 'selected' : ''}`}
-              d="M40 20 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z"
-              role="button"
-              tabIndex={0}
-              aria-label="Açores"
-              onClick={() => handleSelect('Açores')}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Açores') : undefined)}
-            />
-            <text x="40" y="60" className="region-label">Açores</text>
-          </g>
+          <path
+            {...districtProps('Évora', 'district-evora')}
+            d="M370 548 L446 528 L522 546 L548 608 L532 678 L474 716 L406 704 L362 642 Z"
+          />
 
-          <g id="madeira-group" transform="translate(120,20)">
-            <path
-              id="district-madeira"
-              className={`island ${selectedId === 'district-madeira' ? 'selected' : ''}`}
-              d="M10 10 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0 Z"
-              role="button"
-              tabIndex={0}
-              aria-label="Madeira"
-              onClick={() => handleSelect('Madeira')}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ' ? handleSelect('Madeira') : undefined)}
-            />
-            <text x="-4" y="40" className="region-label">Madeira</text>
+          <path
+            {...districtProps('Portalegre', 'district-portalegre')}
+            d="M540 510 L610 490 L674 516 L690 570 L660 626 L600 648 L548 620 L526 568 Z"
+          />
+
+          <path
+            {...districtProps('Beja', 'district-beja')}
+            d="M394 702 L470 682 L554 700 L590 756 L576 820 L514 850 L448 844 L402 786 Z"
+          />
+
+          <path
+            {...districtProps('Faro', 'district-faro')}
+            d="M482 824 L560 810 L620 836 L626 892 L576 930 L516 932 L482 894 Z"
+          />
+
+          <path
+            {...districtProps('Madeira', 'district-madeira')}
+            d="M68 818 L96 804 L122 820 L116 848 L82 860 L56 844 Z"
+          />
+
+          <path
+            {...districtProps('Açores', 'district-acores')}
+            d="M150 830 L192 814 L238 828 L232 868 L188 878 L152 860 Z"
+          />
+
+          <g fontSize="11" fill="#dfffe9" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" textAnchor="middle">
+            <text x="200" y="131">Viana</text>
+            <text x="286" y="145">Vila Real</text>
+            <text x="230" y="221">Braga</text>
+            <text x="212" y="288">Porto</text>
+            <text x="238" y="384">Aveiro</text>
+            <text x="350" y="296">Viseu</text>
+            <text x="468" y="160">Bragança</text>
+            <text x="430" y="286">Guarda</text>
+            <text x="544" y="462">Castelo Branco</text>
+            <text x="220" y="491">Leiria</text>
+            <text x="314" y="567">Coimbra</text>
+            <text x="184" y="618">Santarém</text>
+            <text x="224" y="702">Lisboa</text>
+            <text x="280" y="766">Setúbal</text>
+            <text x="456" y="617">Évora</text>
+            <text x="626" y="586">Portalegre</text>
+            <text x="494" y="780">Beja</text>
+            <text x="546" y="876">Faro</text>
+            <text x="88" y="840">Madeira</text>
+            <text x="194" y="853">Açores</text>
           </g>
         </g>
-
       </svg>
     </div>
   )
