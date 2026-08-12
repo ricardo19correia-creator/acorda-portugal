@@ -1083,7 +1083,7 @@ export const MODO_MALUCO_QUESTIONS: QuizQuestion[] = [
     explanation: 'O horizonte parece afastar-se Ã  medida que nos aproximamos dele.',
     points: 500,
   },
-  ,{
+  {
     category: 'Modo Maluco',
     index: 51,
     total: 70,
