@@ -2,22 +2,22 @@
   {
     "id": 1,
     "category": "Geografia",
-    "difficulty": "Fácil",
-    "question": "Qual é o distrito português com maior área?",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual \u00e9 o distrito portugu\u00eas com maior \u00e1rea?",
     "options": [
-      "Bragança",
+      "Bragan\u00e7a",
       "Beja",
-      "Évora",
+      "\u00c9vora",
       "Viseu"
     ],
     "correctAnswer": 1,
-    "explanation": "Beja é o maior distrito de Portugal em área.",
+    "explanation": "Beja \u00e9 o maior distrito de Portugal em \u00e1rea.",
     "points": 500
   },
   {
     "id": 2,
-    "category": "História",
-    "difficulty": "Médio",
+    "category": "Hist\u00f3ria",
+    "difficulty": "M\u00e9dio",
     "question": "Em que ano foi assinado o Tratado de Windsor entre Portugal e Inglaterra?",
     "options": [
       "1386",
@@ -26,14 +26,14 @@
       "1500"
     ],
     "correctAnswer": 0,
-    "explanation": "O Tratado de Windsor foi assinado em 1386 e consolidou a aliança entre Portugal e Inglaterra.",
+    "explanation": "O Tratado de Windsor foi assinado em 1386 e consolidou a alian\u00e7a entre Portugal e Inglaterra.",
     "points": 500
   },
   {
     "id": 3,
     "category": "Portugal",
-    "difficulty": "Fácil",
-    "question": "Qual é a capital de Portugal?",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual \u00e9 a capital de Portugal?",
     "options": [
       "Porto",
       "Coimbra",
@@ -41,14 +41,14 @@
       "Braga"
     ],
     "correctAnswer": 2,
-    "explanation": "Lisboa é a capital de Portugal.",
+    "explanation": "Lisboa \u00e9 a capital de Portugal.",
     "points": 300
   },
   {
     "id": 4,
     "category": "Geografia",
-    "difficulty": "Fácil",
-    "question": "Qual é o rio que atravessa a cidade do Porto?",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual \u00e9 o rio que atravessa a cidade do Porto?",
     "options": [
       "Tejo",
       "Douro",
@@ -56,59 +56,59 @@
       "Sado"
     ],
     "correctAnswer": 1,
-    "explanation": "O rio Douro atravessa a cidade do Porto e desagua no Oceano Atlântico.",
+    "explanation": "O rio Douro atravessa a cidade do Porto e desagua no Oceano Atl\u00e2ntico.",
     "points": 300
   },
   {
     "id": 5,
-    "category": "História",
-    "difficulty": "Fácil",
+    "category": "Hist\u00f3ria",
+    "difficulty": "F\u00e1cil",
     "question": "Quem foi o primeiro rei de Portugal?",
     "options": [
-      "D. João I",
+      "D. Jo\u00e3o I",
       "D. Afonso Henriques",
       "D. Manuel I",
       "D. Pedro I"
     ],
     "correctAnswer": 1,
-    "explanation": "D. Afonso Henriques é tradicionalmente considerado o primeiro rei de Portugal.",
+    "explanation": "D. Afonso Henriques \u00e9 tradicionalmente considerado o primeiro rei de Portugal.",
     "points": 300
   },
   {
     "id": 6,
     "category": "Desporto",
-    "difficulty": "Fácil",
-    "question": "Qual destas modalidades é praticada com uma bola e uma baliza?",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual destas modalidades \u00e9 praticada com uma bola e uma baliza?",
     "options": [
       "Futebol",
-      "Natação",
+      "Nata\u00e7\u00e3o",
       "Atletismo",
       "Ciclismo"
     ],
     "correctAnswer": 0,
-    "explanation": "O futebol é jogado com uma bola e duas balizas.",
+    "explanation": "O futebol \u00e9 jogado com uma bola e duas balizas.",
     "points": 200
   },
   {
     "id": 7,
     "category": "Gastronomia",
-    "difficulty": "Fácil",
-    "question": "Qual destes pratos é tradicionalmente associado a Portugal?",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual destes pratos \u00e9 tradicionalmente associado a Portugal?",
     "options": [
-      "Bacalhau à Brás",
+      "Bacalhau \u00e0 Br\u00e1s",
       "Sushi",
       "Tacos",
       "Curry"
     ],
     "correctAnswer": 0,
-    "explanation": "O Bacalhau à Brás é um dos pratos tradicionais da gastronomia portuguesa.",
+    "explanation": "O Bacalhau \u00e0 Br\u00e1s \u00e9 um dos pratos tradicionais da gastronomia portuguesa.",
     "points": 300
   },
   {
     "id": 8,
-    "category": "Música",
-    "difficulty": "Fácil",
-    "question": "Qual destes géneros musicais está fortemente associado a Portugal?",
+    "category": "M\u00fasica",
+    "difficulty": "F\u00e1cil",
+    "question": "Qual destes g\u00e9neros musicais est\u00e1 fortemente associado a Portugal?",
     "options": [
       "Fado",
       "Reggae",
@@ -116,28 +116,28 @@
       "K-pop"
     ],
     "correctAnswer": 0,
-    "explanation": "O fado é uma das expressões musicais mais características de Portugal.",
+    "explanation": "O fado \u00e9 uma das express\u00f5es musicais mais caracter\u00edsticas de Portugal.",
     "points": 300
   },
   {
     "id": 9,
     "category": "Geografia",
-    "difficulty": "Médio",
-    "question": "Qual é a serra mais alta de Portugal continental?",
+    "difficulty": "M\u00e9dio",
+    "question": "Qual \u00e9 a serra mais alta de Portugal continental?",
     "options": [
-      "Serra do Gerês",
+      "Serra do Ger\u00eas",
       "Serra da Estrela",
       "Serra de Monchique",
-      "Serra do Marão"
+      "Serra do Mar\u00e3o"
     ],
     "correctAnswer": 1,
-    "explanation": "A Serra da Estrela é a serra mais alta de Portugal continental.",
+    "explanation": "A Serra da Estrela \u00e9 a serra mais alta de Portugal continental.",
     "points": 400
   },
   {
     "id": 10,
     "category": "Portugal",
-    "difficulty": "Fácil",
+    "difficulty": "F\u00e1cil",
     "question": "Quantos distritos existem em Portugal continental?",
     "options": [
       "16",
@@ -146,7 +146,7 @@
       "22"
     ],
     "correctAnswer": 1,
-    "explanation": "Portugal continental está dividido em 18 distritos.",
+    "explanation": "Portugal continental est\u00e1 dividido em 18 distritos.",
     "points": 300
   }
 ]

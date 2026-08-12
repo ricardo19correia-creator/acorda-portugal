@@ -27,6 +27,14 @@ const MAX_SECONDS = 20
 
 type Phase = 'answering' | 'revealed' | 'finished'
 
+const normalizeText = (
+  value: unknown,
+  fallback = '',
+): string => {
+  if (typeof value !== 'string') return fallback
+  return value.normalize('NFC')
+}
+
 export function QuizScreen() {
   /*
    * Escolhe perguntas aleatórias para cada partida.
@@ -34,36 +42,57 @@ export function QuizScreen() {
    * Se existirem menos de 20, joga todas.
    */
   const quizQuestions = useMemo(() => {
-    const shuffled = [...questionData].sort(
+    const safeQuestionData = Array.isArray(questionData)
+      ? questionData
+      : []
+
+    const shuffled = [...safeQuestionData].sort(
       () => Math.random() - 0.5,
     )
 
     const selected = shuffled.slice(
       0,
-      Math.min(20, questionData.length),
+      Math.min(20, safeQuestionData.length),
     )
 
-    return selected.map((q, index) => ({
-      category: q.category,
-      index: index + 1,
-      total: selected.length,
-      question: q.question,
-      options: q.options.map((text, i) => ({
-        key: ['A', 'B', 'C', 'D'][i] as
-          | 'A'
-          | 'B'
-          | 'C'
-          | 'D',
-        text,
-      })),
-      correct: ['A', 'B', 'C', 'D'][q.correctAnswer] as
-        | 'A'
-        | 'B'
-        | 'C'
-        | 'D',
-      explanation: q.explanation,
-      points: q.points,
-    }))
+    return selected.map((q, index) => {
+      const options = Array.isArray(q.options)
+        ? q.options
+        : []
+
+      const indexOfCorrectAnswer =
+        Number.isInteger(q.correctAnswer) &&
+        q.correctAnswer >= 0 &&
+        q.correctAnswer < 4
+          ? q.correctAnswer
+          : 0
+
+      return {
+        category: normalizeText(q.category, 'Geral'),
+        index: index + 1,
+        total: selected.length,
+        question: normalizeText(
+          q.question,
+          'Pergunta sem texto disponível.',
+        ),
+        options: options.slice(0, 4).map((text, i) => ({
+          key: ['A', 'B', 'C', 'D'][i] as
+            | 'A'
+            | 'B'
+            | 'C'
+            | 'D',
+          text: normalizeText(text, `Opção ${i + 1}`),
+        })),
+        correct: ['A', 'B', 'C', 'D'][
+          indexOfCorrectAnswer
+        ] as 'A' | 'B' | 'C' | 'D',
+        explanation: normalizeText(
+          q.explanation,
+          'Sem explicação disponível.',
+        ),
+        points: typeof q.points === 'number' ? q.points : 0,
+      }
+    })
   }, [])
 
   const total = quizQuestions.length
