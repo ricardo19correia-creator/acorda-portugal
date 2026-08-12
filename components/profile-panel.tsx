@@ -8,23 +8,37 @@ import { cn } from '@/lib/utils'
 import { Sparkles, Coins } from 'lucide-react'
 
 export function ProfilePanel({ className }: { className?: string }) {
-  const [user, setUser] = useState<User | null>(null)
+  // user: undefined => not yet resolved; null => resolved and no user; User => authenticated
+  const [user, setUser] = useState<User | null | undefined>(undefined)
+  const [authResolved, setAuthResolved] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    let first = true
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+      // mark resolved on first callback
+      if (first) {
+        setAuthResolved(true)
+        first = false
+      }
     })
 
     return () => unsubscribe()
   }, [])
 
   const login = async () => {
+    setError(null)
     try {
       setLoading(true)
       await signInWithPopup(auth, googleProvider)
-    } catch (error) {
-      console.error('Erro no login Google:', error)
+    } catch (err: any) {
+      // keep user state untouched (stay as guest)
+      console.error('Erro no login Google:', err)
+      // handle common user-cancelled popup exception gracefully
+      const msg = err?.message ?? String(err)
+      setError('Falha ao iniciar sessão. Podes tentar de novo. ' + msg)
     } finally {
       setLoading(false)
     }
@@ -38,8 +52,8 @@ export function ProfilePanel({ className }: { className?: string }) {
     }
   }
 
-  // If user is authenticated, show the existing PlayerCard and a small sign-out control
-  if (user) {
+  // Show authenticated view only when auth resolved and user exists
+  if (authResolved && user) {
     return (
       <div className={cn('flex flex-col gap-6', className)}>
         <PlayerCard />
@@ -48,6 +62,7 @@ export function ProfilePanel({ className }: { className?: string }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={user.photoURL} alt={user.displayName ?? 'Utilizador'} className="h-10 w-10 rounded-full" />
           )}
+
           <div className="flex flex-col">
             <span className="font-bold text-white">{user.displayName ?? 'Jogador'}</span>
             <div className="flex gap-3 items-center">
@@ -61,7 +76,8 @@ export function ProfilePanel({ className }: { className?: string }) {
     )
   }
 
-  // Guest view
+  // While auth is resolving (authResolved=false) or when resolved and user is null, show guest UX.
+  // This guarantees the guest UI remains visible until the auth status is known and ensures it's shown for unauthenticated users.
   return (
     <div className={cn('flex flex-col gap-6', className)}>
       <div>
@@ -95,6 +111,16 @@ export function ProfilePanel({ className }: { className?: string }) {
               Talvez mais tarde
             </button>
           </div>
+
+          {error && (
+            <div className="mt-3 rounded-md bg-red-900/40 px-3 py-2 text-sm text-red-200">
+              {error}
+            </div>
+          )}
+
+          {!authResolved && (
+            <p className="mt-2 text-xs text-muted-foreground">A verificar estado de autenticação...</p>
+          )}
         </div>
       </div>
     </div>
