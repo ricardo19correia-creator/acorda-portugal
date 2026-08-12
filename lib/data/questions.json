@@ -1,152 +1,3322 @@
 [
-  {
-    "id": 1,
-    "category": "Geografia",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual \u00e9 o distrito portugu\u00eas com maior \u00e1rea?",
-    "options": [
-      "Bragan\u00e7a",
-      "Beja",
-      "\u00c9vora",
-      "Viseu"
-    ],
-    "correctAnswer": 1,
-    "explanation": "Beja \u00e9 o maior distrito de Portugal em \u00e1rea.",
-    "points": 500
-  },
-  {
-    "id": 2,
-    "category": "Hist\u00f3ria",
-    "difficulty": "M\u00e9dio",
-    "question": "Em que ano foi assinado o Tratado de Windsor entre Portugal e Inglaterra?",
-    "options": [
-      "1386",
-      "1415",
-      "1290",
-      "1500"
-    ],
-    "correctAnswer": 0,
-    "explanation": "O Tratado de Windsor foi assinado em 1386 e consolidou a alian\u00e7a entre Portugal e Inglaterra.",
-    "points": 500
-  },
-  {
-    "id": 3,
-    "category": "Portugal",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual \u00e9 a capital de Portugal?",
-    "options": [
-      "Porto",
-      "Coimbra",
-      "Lisboa",
-      "Braga"
-    ],
-    "correctAnswer": 2,
-    "explanation": "Lisboa \u00e9 a capital de Portugal.",
-    "points": 300
-  },
-  {
-    "id": 4,
-    "category": "Geografia",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual \u00e9 o rio que atravessa a cidade do Porto?",
-    "options": [
-      "Tejo",
-      "Douro",
-      "Mondego",
-      "Sado"
-    ],
-    "correctAnswer": 1,
-    "explanation": "O rio Douro atravessa a cidade do Porto e desagua no Oceano Atl\u00e2ntico.",
-    "points": 300
-  },
-  {
-    "id": 5,
-    "category": "Hist\u00f3ria",
-    "difficulty": "F\u00e1cil",
-    "question": "Quem foi o primeiro rei de Portugal?",
-    "options": [
-      "D. Jo\u00e3o I",
-      "D. Afonso Henriques",
-      "D. Manuel I",
-      "D. Pedro I"
-    ],
-    "correctAnswer": 1,
-    "explanation": "D. Afonso Henriques \u00e9 tradicionalmente considerado o primeiro rei de Portugal.",
-    "points": 300
-  },
-  {
-    "id": 6,
-    "category": "Desporto",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual destas modalidades \u00e9 praticada com uma bola e uma baliza?",
-    "options": [
-      "Futebol",
-      "Nata\u00e7\u00e3o",
-      "Atletismo",
-      "Ciclismo"
-    ],
-    "correctAnswer": 0,
-    "explanation": "O futebol \u00e9 jogado com uma bola e duas balizas.",
-    "points": 200
-  },
-  {
-    "id": 7,
-    "category": "Gastronomia",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual destes pratos \u00e9 tradicionalmente associado a Portugal?",
-    "options": [
-      "Bacalhau \u00e0 Br\u00e1s",
-      "Sushi",
-      "Tacos",
-      "Curry"
-    ],
-    "correctAnswer": 0,
-    "explanation": "O Bacalhau \u00e0 Br\u00e1s \u00e9 um dos pratos tradicionais da gastronomia portuguesa.",
-    "points": 300
-  },
-  {
-    "id": 8,
-    "category": "M\u00fasica",
-    "difficulty": "F\u00e1cil",
-    "question": "Qual destes g\u00e9neros musicais est\u00e1 fortemente associado a Portugal?",
-    "options": [
-      "Fado",
-      "Reggae",
-      "Country",
-      "K-pop"
-    ],
-    "correctAnswer": 0,
-    "explanation": "O fado \u00e9 uma das express\u00f5es musicais mais caracter\u00edsticas de Portugal.",
-    "points": 300
-  },
-  {
-    "id": 9,
-    "category": "Geografia",
-    "difficulty": "M\u00e9dio",
-    "question": "Qual \u00e9 a serra mais alta de Portugal continental?",
-    "options": [
-      "Serra do Ger\u00eas",
-      "Serra da Estrela",
-      "Serra de Monchique",
-      "Serra do Mar\u00e3o"
-    ],
-    "correctAnswer": 1,
-    "explanation": "A Serra da Estrela \u00e9 a serra mais alta de Portugal continental.",
-    "points": 400
-  },
-  {
-    "id": 10,
-    "category": "Portugal",
-    "difficulty": "F\u00e1cil",
-    "question": "Quantos distritos existem em Portugal continental?",
-    "options": [
-      "16",
-      "18",
-      "20",
-      "22"
-    ],
-    "correctAnswer": 1,
-    "explanation": "Portugal continental est\u00e1 dividido em 18 distritos.",
-    "points": 300
-  }
+{
+"id": 1,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Fácil",
+"question": "Em que ano foi assinada a declaração da independência de Portugal no Tratado de Zamora?",
+"options": ["1143", "1249", "1385", "1580"],
+"correctAnswer": "1143",
+"explanation": "O Tratado de Zamora, assinado em 1143 entre D. Afonso Henriques e Alfonso VII de Leão, reconheceu a independência do Reino de Portugal."
+},
+{
+"id": 2,
+"category": "Portugal",
+"subcategory": "Símbolos nacionais",
+"difficulty": "Fácil",
+"question": "Quais são as duas cores predominantemente presentes na bandeira nacional de Portugal?",
+"options": ["Verde e Vermelho", "Azul e Branco", "Amarelo e Verde", "Vermelho e Preto"],
+"correctAnswer": "Verde e Vermelho",
+"explanation": "A bandeira nacional portuguesa, adotada após a implantação da República em 1910, é dividida verticalmente em verde e vermelho."
+},
+{
+"id": 3,
+"category": "Portugal",
+"subcategory": "Geografia",
+"difficulty": "Fácil",
+"question": "Qual é o ponto mais alto de Portugal Continental?",
+"options": ["Pico da Torre (Serra da Estrela)", "Pico do Arieiro", "Pico Ruivo", "Pico dos Bispos"],
+"correctAnswer": "Pico da Torre (Serra da Estrela)",
+"explanation": "A Torre, situada na Serra da Estrela, é o ponto mais elevado de Portugal Continental, com 1993 metros de altitude."
+},
+{
+"id": 4,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Fácil",
+"question": "Quem foi o primeiro rei de Portugal?",
+"options": ["D. Afonso Henriques", "D. Sancho I", "D. Denis", "D. Afonso II"],
+"correctAnswer": "D. Afonso Henriques",
+"explanation": "D. Afonso Henriques, cognominado 'O Conquistador', foi o fundador e primeiro rei de Portugal."
+},
+{
+"id": 5,
+"category": "Portugal",
+"subcategory": "Cultura",
+"difficulty": "Fácil",
+"question": "Qual é o estilo musical tradicional português classificado como Património Imaterial da Humanidade pela UNESCO?",
+"options": ["Fado", "Cante Alentejano", "Pimba", "Vira"],
+"correctAnswer": "Fado",
+"explanation": "O Fado foi elevado a Património Cultural Imaterial da Humanidade pela UNESCO em novembro de 2011."
+},
+{
+"id": 6,
+"category": "Portugal",
+"subcategory": "Monumentos",
+"difficulty": "Fácil",
+"question": "Em que cidade portuguesa se situa a emblemática Torre de Belém?",
+"options": ["Lisboa", "Porto", "Coimbra", "Setúbal"],
+"correctAnswer": "Lisboa",
+"explanation": "A Torre de Belém localiza-se na freguesia de Belém, no município de Lisboa, na margem direita do rio Tejo."
+},
+{
+"id": 7,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Fácil",
+"question": "Em que dia se celebra o Dia de Portugal, de Camões e das Comunidades Portuguesas?",
+"options": ["10 de Junho", "25 de Abril", "5 de Outubro", "1 de Dezembro"],
+"correctAnswer": "10 de Junho",
+"explanation": "O dia 10 de Junho assinala a data da morte de Luís Vaz de Camões em 1580 e é o Feriado Nacional de Portugal."
+},
+{
+"id": 8,
+"category": "Portugal",
+"subcategory": "Política e instituições",
+"difficulty": "Fácil",
+"question": "Onde se reúne a Assembleia da República Portuguesa?",
+"options": ["Palácio de São Bento", "Palácio de Belém", "Palácio das Necessidades", "Palácio da Pena"],
+"correctAnswer": "Palácio de São Bento",
+"explanation": "O Palácio de São Bento, em Lisboa, é a sede do Parlamento de Portugal desde 1834."
+},
+{
+"id": 9,
+"category": "Portugal",
+"subcategory": "Geografia",
+"difficulty": "Fácil",
+"question": "Qual é o maior rio que nasce em Portugal e desagua no Oceano Atlântico em território nacional?",
+"options": ["Rio Mondego", "Rio Douro", "Rio Tejo", "Rio Guadiana"],
+"correctAnswer": "Rio Mondego",
+"explanation": "O rio Mondego é o maior rio totalmente português, nascendo na Serra da Estrela e desaguando na Figueira da Foz."
+},
+{
+"id": 10,
+"category": "Portugal",
+"subcategory": "Tradições",
+"difficulty": "Fácil",
+"question": "Qual destas festas populares celebra o Santo António a 13 de junho?",
+"options": ["Festas de Lisboa", "Festas do Porto", "Festas de São João em Braga", "Romaria da Senhora da Agonia"],
+"correctAnswer": "Festas de Lisboa",
+"explanation": "Santo António é o padroeiro secundário de Lisboa e a figura central das festas da cidade no mês de junho."
+},
+{
+"id": 11,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Médio",
+"question": "Em que ano ocorreu a Revolução dos Cravos, restaurando a democracia em Portugal?",
+"options": ["1974", "1910", "1926", "1986"],
+"correctAnswer": "1974",
+"explanation": "A Revolução de 25 de Abril de 1974 pôs fim ao regime ditatorial do Estado Novo."
+},
+{
+"id": 12,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Médio",
+"question": "Qual foi a última colónia ultramarina administrada por Portugal devolvida à soberania chinesa em 1999?",
+"options": ["Macau", "Goa", "Timor-Leste", "Cabo Verde"],
+"correctAnswer": "Macau",
+"explanation": "A transferência da soberania de Macau para a República Popular da China ocorreu a 20 de dezembro de 1999."
+},
+{
+"id": 13,
+"category": "Portugal",
+"subcategory": "Personalidades",
+"difficulty": "Médio",
+"question": "Qual escritor português venceu o Prémio Nobel da Literatura em 1998?",
+"options": ["José Saramago", "Fernando Pessoa", "Eça de Queirós", "Sophia de Mello Breyner"],
+"correctAnswer": "José Saramago",
+"explanation": "José Saramago tornou-se em 1998 o primeiro e até hoje único autor de língua portuguesa a receber o Prémio Nobel da Literatura."
+},
+{
+"id": 14,
+"category": "Portugal",
+"subcategory": "Geografia",
+"difficulty": "Médio",
+"question": "O Cabo da Roca é notável por qual destas características geográficas?",
+"options": ["É o ponto mais ocidental do continente europeu", "É o ponto mais a sul de Portugal Continental", "É o promontório mais elevado da Europa", "É onde o rio Tejo se cruza com o mar"],
+"correctAnswer": "É o ponto mais ocidental do continente europeu",
+"explanation": "Localizado no concelho de Sintra, o Cabo da Roca é o ponto mais ocidental do continente europeu ('Onde a terra acaba e o mar começa')."
+},
+{
+"id": 15,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Médio",
+"question": "Que batalha decisiva em 1385 assegurou a independência portuguesa contra a coroa de Castela?",
+"options": ["Batalha de Aljubarrota", "Batalha de Toro", "Batalha dos Atoleiros", "Batalha de São Mamede"],
+"correctAnswer": "Batalha de Aljubarrota",
+"explanation": "A Batalha de Aljubarrota ocorreu a 14 de agosto de 1385, consolidando D. João I como rei de Portugal."
+},
+{
+"id": 16,
+"category": "Portugal",
+"subcategory": "Economia",
+"difficulty": "Médio",
+"question": "Portugal é o líder mundial absoluto na produção e exportação de qual destas matérias-primas?",
+"options": ["Cortiça", "Azeite", "Mármore", "Vinho do Porto"],
+"correctAnswer": "Cortiça",
+"explanation": "Portugal possui mais de 700 mil hectares de sobreirais e é responsável por mais de 50% da produção mundial de cortiça."
+},
+{
+"id": 17,
+"category": "Portugal",
+"subcategory": "Monumentos",
+"difficulty": "Médio",
+"question": "O Mosteiro da Batalha foi construído para comemorar qual acontecimento histórico?",
+"options": ["A vitória na Batalha de Aljubarrota", "A tomada de Ceuta", "O regresso de Vasco da Gama", "A assinatura do Tratado de Tordesilhas"],
+"correctAnswer": "A vitória na Batalha de Aljubarrota",
+"explanation": "D. João I mandou edificar o Mosteiro de Santa Maria da Vitória (Batalha) em cumprimento de uma promessa feita a Nossa Senhora."
+},
+{
+"id": 18,
+"category": "Portugal",
+"subcategory": "Política e instituições",
+"difficulty": "Médio",
+"question": "Em que ano aderiu Portugal formalmente à então Comunidade Económica Europeia (CEE)?",
+"options": ["1986", "1992", "1975", "1999"],
+"correctAnswer": "1986",
+"explanation": "O Tratado de Adesão de Portugal à CEE foi assinado a 12 de junho de 1985 e entrou em vigor a 1 de janeiro de 1986."
+},
+{
+"id": 19,
+"category": "Portugal",
+"subcategory": "Curiosidades",
+"difficulty": "Médio",
+"question": "Qual é a mais antiga aliança diplomática militar do mundo ainda em vigor, assinada por Portugal?",
+"options": ["Aliança Luso-Britânica", "Tratado de Madrid", "Aliança Luso-Espanhola", "Tratado Franco-Português"],
+"correctAnswer": "Aliança Luso-Britânica",
+"explanation": "A Aliança Luso-Britânica foi formalizada pelo Tratado de Windsor em 1386 e mantém-se ativa até hoje."
+},
+{
+"id": 20,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Médio",
+"question": "Qual rei português ficou conhecido pela cognome de 'O Navegador' devido ao seu impulso aos Descobrimentos?",
+"options": ["Infante D. Henrique (embora não tenha sido rei)", "D. João II", "D. Manuel I", "D. Sebastião"],
+"correctAnswer": "Infante D. Henrique (embora não tenha sido rei)",
+"explanation": "O Infante D. Henrique é conhecido popularmente por 'O Navegador', apesar de ser um príncipe e não ter chegado a rei de Portugal."
+},
+{
+"id": 21,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Qual foi a primeira cidade fora do continente europeu a ser conquistada pelos portugueses durante a expansão ultramarina em 1415?",
+"options": ["Ceuta", "Tânger", "Arzila", "Goa"],
+"correctAnswer": "Ceuta",
+"explanation": "A tomada de Ceuta no Norte de África em 1415 marca o início oficial da expansão ultramarina portuguesa."
+},
+{
+"id": 22,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Qual diplomata português representou o país na negociação do Tratado de Tordesilhas em 1494?",
+"options": ["Darte Pacheco Pereira", "Rui de Sousa", "Nicolau Coelho", "Pero Vaz de Caminha"],
+"correctAnswer": "Rui de Sousa",
+"explanation": "Rui de Sousa chefiou a embaixada portuguesa enviada por D. João II que negociou a divisão do mundo com os Reis Católicos."
+},
+{
+"id": 23,
+"category": "Portugal",
+"subcategory": "Símbolos nacionais",
+"difficulty": "Difícil",
+"question": "Na bandeira portuguesa, o que representam historicamente as cinco quinas azuis dispostas no escudo central?",
+"options": ["Os cinco reis mouros derrotados por D. Afonso Henriques na Batalha de Ourique", "As cinco chagas de Cristo e os cinco reis mouros", "Os cinco continentes onde os portugueses navegaram", "As cinco regiões históricas de Portugal"],
+"correctAnswer": "As cinco chagas de Cristo e os cinco reis mouros",
+"explanation": "As quinas azuis simbolizam tradicionalmente as cinco chagas de Cristo e os cinco reis muçulmanos vencidos na Batalha de Ourique."
+},
+{
+"id": 24,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Em que ano se deu a Restauração da Independência portuguesa após o domínio dos reis Filipes de Espanha?",
+"options": ["1640", "1580", "1668", "1703"],
+"correctAnswer": "1640",
+"explanation": "A 1 de dezembro de 1640, um grupo de nobres conspiradores aclamou o Duque de Bragança como Rei D. João IV, pondo fim à União Ibérica."
+},
+{
+"id": 25,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Que terramoto devastador destruiu grande parte de Lisboa no dia 1 de novembro de 1755?",
+"options": ["Sismo de 1755", "Sismo de 1531", "Sismo de 1909", "Sismo de 1969"],
+"correctAnswer": "Sismo de 1755",
+"explanation": "O Sismo de Lisboa de 1755 ocorreu no Dia de Todos os Santos e foi seguido por um tsunami e grandes incêndios."
+},
+{
+"id": 26,
+"category": "Portugal",
+"subcategory": "Cultura",
+"difficulty": "Difícil",
+"question": "Qual destas tradições culturais portuguesas foi inscrita na lista de Património Cultural Imaterial da Humanidade da UNESCO em 2014?",
+"options": ["Cante Alentejano", "Manufatura de Chocalhos", "Cerâmica de Bisalhães", "Festa dos Rapazes de Podence"],
+"correctAnswer": "Cante Alentejano",
+"explanation": "O Cante Alentejano, canto polifónico tradicional do Baixo Alentejo, foi reconhecido pela UNESCO em novembro de 2014."
+},
+{
+"id": 27,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Quem era o Primeiro-Ministro de Portugal (Presidente do Conselho) quando eclodiu a Revolução dos Cravos em 1974?",
+"options": ["Marcello Caetano", "António de Oliveira Salazar", "Américo Tomás", "Spínola"],
+"correctAnswer": "Marcello Caetano",
+"explanation": "Marcello Caetano sucedeu a Salazar em 1968 e foi deposto no dia 25 de abril de 1974."
+},
+{
+"id": 28,
+"category": "Portugal",
+"subcategory": "Geografia",
+"difficulty": "Difícil",
+"question": "Qual é a extensão aproximada em quilómetros da fronteira terrestre entre Portugal e Espanha (a 'Aria' ou 'A Raia')?",
+"options": ["1214 km", "850 km", "1800 km", "550 km"],
+"correctAnswer": "1214 km",
+"explanation": "A fronteira terrestre entre Portugal e Espanha tem cerca de 1214 km de extensão, sendo uma das mais antigas e estáveis do mundo."
+},
+{
+"id": 29,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Difícil",
+"question": "Qual rainha de Portugal ficou conhecida como 'A Pia' ou 'A Educadora' e governou como regente durante a menoridade de D. Sebastião?",
+"options": ["D. Catarina de Áustria", "D. Luísa de Gusmão", "D. Maria I", "D. Filipa de Lencastre"],
+"correctAnswer": "D. Catarina de Áustria",
+"explanation": "D. Catarina de Áustria, viúva de D. João III e avó de D. Sebastião, assumiu a regência do reino entre 1557 e 1562."
+},
+{
+"id": 30,
+"category": "Portugal",
+"subcategory": "Personalidades",
+"difficulty": "Difícil",
+"question": "Quem escreveu a obra histórica 'Os Lusíadas', publicada pela primeira vez em 1572?",
+"options": ["Luís Vaz de Camões", "Fernão Mendes Pinto", "Gil Vicente", "Padre António Vieira"],
+"correctAnswer": "Luís Vaz de Camões",
+"explanation": "'Os Lusíadas' é a obra épica de Luís Vaz de Camões que narra a viagem de Vasco da Gama à Índia e os feitos dos portugueses."
+},
+{
+"id": 31,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Qual foi o tratado internacional assinado em 1703 entre Portugal e a Inglaterra que facilitou o comércio de vinhos portugueses em troca de têxteis britânicos?",
+"options": ["Tratado de Methuen", "Tratado de Badajoz", "Tratado de Utrecht", "Tratado de Alcañices"],
+"correctAnswer": "Tratado de Methuen",
+"explanation": "O Tratado de Methuen (ou Tratado dos Panos e Vinhos) assinado em 1703 moldou profundamente as relações económicas entre Portugal e Inglaterra."
+},
+{
+"id": 32,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Em que batalha travada em 1128 D. Afonso Henriques derrotou as forças da sua própria mãe, D. Teresa, assumindo o controlo do Condado Portucalense?",
+"options": ["Batalha de São Mamede", "Batalha de Ourique", "Batalha de Badajoz", "Batalha do Cerne"],
+"correctAnswer": "Batalha de São Mamede",
+"explanation": "A Batalha de São Mamede, disputada perto de Guimarães a 24 de junho de 1128, é considerada o ponto de viragem para a fundação da nacionalidade."
+},
+{
+"id": 33,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Qual bispo português desempenhou um papel fulcral no Concílio de Trento e na reforma católica em Portugal no século XVI?",
+"options": ["D. Frei Bartolomeu dos Mártires", "D. Américo Aguiar", "D. Afonso Furtado de Mendonça", "D. António Barroso"],
+"correctAnswer": "D. Frei Bartolomeu dos Mártires",
+"explanation": "D. Frei Bartolomeu dos Mártires, Arcebispo de Braga, destacou-se pela sua intervenção reformadora e pastoral no Concílio de Trento."
+},
+{
+"id": 34,
+"category": "Portugal",
+"subcategory": "Política e instituições",
+"difficulty": "Muito difícil",
+"question": "Qual foi a Constituição portuguesa que vigorou durante o regime do Estado Novo entre 1933 e 1974?",
+"options": ["Constituição de 1933", "Constituição de 1911", "Constituição de 1822", "Carta Constitucional de 1826"],
+"correctAnswer": "Constituição de 1933",
+"explanation": "A Constituição de 1933 foi aprovada por plebiscito nacional e serviu de fundação jurídica para o regime ditatorial do Estado Novo."
+},
+{
+"id": 35,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Que rei português ficou conhecido como 'O Reformador' ou 'O Ecónomo' e criou a prestigiada Companhia das Índias e o sistema de correios da Casa da Moeda?",
+"options": ["D. José I", "D. Pedro II", "D. João V", "D. Afonso IV"],
+"correctAnswer": "D. Pedro II",
+"explanation": "D. Pedro II reinou de 1683 a 1706 e impulsionou as manufaturas e reorganizou as finanças públicas e o comércio ultramarino."
+},
+{
+"id": 36,
+"category": "Portugal",
+"subcategory": "Monumentos",
+"difficulty": "Muito difícil",
+"question": "Quem foi o arquiteto principal responsável pelo projeto da imponente Basílica e Palácio Nacional de Mafra no século XVIII?",
+"options": ["João Frederico Ludovice", "Mateus Vicente de Oliveira", "Nicolau Nasoni", "Eugénio dos Santos"],
+"correctAnswer": "João Frederico Ludovice",
+"explanation": "O arquiteto e ourives de origem alemã João Frederico Ludovice foi contratado por D. João V para desenhar o monumental complexo de Mafra."
+},
+{
+"id": 37,
+"category": "Portugal",
+"subcategory": "Curiosidades",
+"difficulty": "Muito difícil",
+"question": "Qual foi a primeira ordem militar estabelecida em Portugal, tendo tido sede no Castelo de Soure?",
+"options": ["Ordem dos Templários", "Ordem de Santiago", "Ordem de Avis", "Ordem de Cristo"],
+"correctAnswer": "Ordem dos Templários",
+"explanation": "Os Cavaleiros Templários instalaram-se em Portugal em 1128, recebendo a doação do Castelo de Soure de D. Teresa."
+},
+{
+"id": 38,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Qual era o nome da conferência de paz de 1820 que exigiu o regresso da Corte Portuguesa do Brasil e a convocação das Cortes Constituintes?",
+"options": ["Revolução Liberal do Porto", "Conspirativo de Lisboa", "Cortes de Tomar", "Vilafrancada"],
+"correctAnswer": "Revolução Liberal do Porto",
+"explanation": "A Revolução Liberal de 1820 iniciou-se no Porto a 24 de agosto e pôs fim ao absolutismo monarchico em Portugal."
+},
+{
+"id": 39,
+"category": "Portugal",
+"subcategory": "Sociedade",
+"difficulty": "Muito difícil",
+"question": "Em que ano foi extinta formalmente a Polícia Internacional e de Defesa do Estado (PIDE) / DGS em Portugal?",
+"options": ["1974", "1975", "1976", "1973"],
+"correctAnswer": "1974",
+"explanation": "A PIDE/DGS foi extinta logo após a Revolução de 25 de Abril de 1974 pelo Decreto-Lei n.º 171/74."
+},
+{
+"id": 40,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Muito difícil",
+"question": "Qual foi o tratado firmado em 1297 entre D. Dinis e Fernando IV de Castela que fixou as fronteiras de Portugal de forma quase definitiva?",
+"options": ["Tratado de Alcañices", "Tratado de Badajoz", "Tratado de Lisboa", "Tratado de Zamora"],
+"correctAnswer": "Tratado de Alcañices",
+"explanation": "O Tratado de Alcañices, assinado a 12 de setembro de 1297, delimitou as fronteiras entre o Reino de Portugal e o Reino de Castela."
+},
+{
+"id": 41,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Expert",
+"question": "Qual conselheiro de Estado e diplomata assinou em nome do Rei D. João V o Tratado de Madrid de 1750 com a coroa espanhola?",
+"options": ["Alexandre de Gusmão", "Marquês de Pombal", "Diogo de Mendonça Corte-Real", "Conde de Ericeira"],
+"correctAnswer": "Alexandre de Gusmão",
+"explanation": "Alexandre de Gusmão foi o grande estratega e negociador do Tratado de Madrid (1750), adotando o princípio do 'uti possidetis' para definir os limites do Brasil."
+},
+{
+"id": 42,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Expert",
+"question": "Em que ano se realizou o célebre 'Pacto de Granada' entre D. João I de Portugal e os rebeldes castelhanos, antecedendo a ascensão da Dinastia de Avis?",
+"options": ["1383", "1381", "1385", "1387"],
+"correctAnswer": "1387",
+"explanation": "Em 1387 assinou-se o Pacto de Granada (e o Tratado de Babilónia) consolidando as operações militares ibéricas de D. João I e do Duque de Lencastre."
+},
+{
+"id": 43,
+"category": "Portugal",
+"subcategory": "Cultura",
+"difficulty": "Expert",
+"question": "Como se chama a manifestação cultural e artesanal de bordado tradicional de origem quinhentista típica da região de Castelo Branco?",
+"options": ["Bordado de Castelo Branco", "Bordado de Viana", "Bordado da Madeira", "Bordado de Nisa"],
+"correctAnswer": "Bordado de Castelo Branco",
+"explanation": "O Bordado de Castelo Branco é famoso pelos seus colchas de linho bordadas a fio de seda com simbologia de origem oriental e barroca."
+},
+{
+"id": 44,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Expert",
+"question": "Qual foi o nome do primeiro jornal diário impresso em Portugal, fundado em 1821?",
+"options": ["Diário de Lisboa", "A Aurora do Lima", "Gazeta de Lisboa", "Diário do Governo"],
+"correctAnswer": "Diário de Lisboa",
+"explanation": "O 'Diário de Lisboa' foi fundado em 1821 por Joaquim José da Silva Maia, tornando-se o primeiro jornal diário informativo do país."
+},
+{
+"id": 45,
+"category": "Portugal",
+"subcategory": "Geografia",
+"difficulty": "Expert",
+"question": "Qual é a designação científica oficial do relevo montanhoso dobrado e xistoso no norte de Portugal que inclui a Serra do Marão e Montemuro?",
+"options": ["Maciço Hespérico", "Maciço Antigo", "Cordilheira Central", "Serras de Valongo"],
+"correctAnswer": "Maciço Hespérico",
+"explanation": "O Maciço Hespérico (ou Ibérico) é a unidade geomorfológica mais antiga da Península Ibérica e abrange grande parte do norte e centro de Portugal."
+},
+{
+"id": 46,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Expert",
+"question": "Qual foi a célebre conspiração aristocrática em 1641 contra D. João IV que culminou na execução do Duque de Caminha e do Marquês de Vila Real?",
+"options": ["Conspiração de 1641", "Revolta da Cachaça", "Conjura dos Fidalgos", "Motim da Morte"],
+"correctAnswer": "Conspiração de 1641",
+"explanation": "A Conspiração de 1641 foi promovida por nobres fiéis a Filipe IV de Espanha na tentativa de assassinar D. João IV e restaurar o domínio espanhol."
+},
+{
+"id": 47,
+"category": "Portugal",
+"subcategory": "Tradições",
+"difficulty": "Expert",
+"question": "Em que vila transmontana se celebra o ritual ancestral do 'Entrudo Chocalheiro' com os mascarados conhecidos por Caretos?",
+"options": ["Podence (Macedo de Cavaleiros)", "Vinhais", "Miranda do Douro", "Mogadouro"],
+"correctAnswer": "Podence (Macedo de Cavaleiros)",
+"explanation": "Os Caretos de Podence são figuras mascaradas com trajes de franja colorida e chocalhos que animam o Carnaval tradicional em Podence."
+},
+{
+"id": 48,
+"category": "Portugal",
+"subcategory": "História",
+"difficulty": "Expert",
+"question": "Qual nobre e navegador comandou a armada militar portuguesa que em 1511 conquistou a estratégica cidade de Malaca no Sudeste Asiático?",
+"options": ["Afonso de Albuquerque", "Francisco de Almeida", "Diogo Cão", "Lopo Soares de Albergaria"],
+"correctAnswer": "Afonso de Albuquerque",
+"explanation": "Afonso de Albuquerque, segundo Governador da Índia Portuguesa, conquistou Malaca em 1511 estabelecendo o domínio militar na rota das especiarias."
+},
+{
+"id": 49,
+"category": "Portugal",
+"subcategory": "Personalidades",
+"difficulty": "Expert",
+"question": "Que ilustre cientista e botânico português do século XVIII revolucionou o estudo da flora tropical e fundou a Academia das Ciências de Lisboa?",
+"options": ["Domenico Vandelli / Félix de Avelar Brotero", "José Correia da Serra", "Garcia de Orta", "Jacob de Castro Sarmento"],
+"correctAnswer": "José Correia da Serra",
+"explanation": "O Abbade José Correia da Serra foi um polímata e botânico de prestígio internacional e cofundador da Academia das Ciências de Lisboa em 1779."
+},
+{
+"id": 50,
+"category": "Portugal",
+"subcategory": "Símbolos nacionais",
+"difficulty": "Expert",
+"question": "A Esfera Armilar presente na bandeira portuguesa era o emblema pessoal de qual soberano português?",
+"options": ["D. Manuel I", "D. João II", "D. Sebastião", "D. Henrique"],
+"correctAnswer": "D. Manuel I",
+"explanation": "A Esfera Armilar era a divisa pessoal do Rei D. Manuel I, simbolizando o papel de Portugal nos Descobrimentos marítimos do mundo."
+},
+{
+"id": 51,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Fácil",
+"question": "Qual é a capital da França?",
+"options": ["Paris", "Lio", "Marselha", "Bordéus"],
+"correctAnswer": "Paris",
+"explanation": "Paris é a capital e a cidade mais populosa da França."
+},
+{
+"id": 52,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Fácil",
+"question": "Qual é a capital da Espanha?",
+"options": ["Madrid", "Barcelona", "Sevilha", "Valência"],
+"correctAnswer": "Madrid",
+"explanation": "Madrid é a capital e a maior cidade da Espanha."
+},
+{
+"id": 53,
+"category": "Geografia",
+"subcategory": "Continentes",
+"difficulty": "Fácil",
+"question": "Qual é o maior continente do mundo em área terrestre?",
+"options": ["Ásia", "África", "América do Norte", "Antártida"],
+"correctAnswer": "Ásia",
+"explanation": "A Ásia é o maior continente em área territorial e também o mais populoso do planeta."
+},
+{
+"id": 54,
+"category": "Geografia",
+"subcategory": "Oceanos",
+"difficulty": "Fácil",
+"question": "Qual é o maior oceano da Terra?",
+"options": ["Oceano Pacífico", "Oceano Atlântico", "Oceano Índico", "Oceano Glacial Ártico"],
+"correctAnswer": "Oceano Pacífico",
+"explanation": "O Oceano Pacífico cobre mais de 30% da superfície da Terra e é o maior oceano do mundo."
+},
+{
+"id": 55,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Fácil",
+"question": "Qual é o maior país do mundo em termos de área territorial?",
+"options": ["Rússia", "Canadá", "China", "Estados Unidos"],
+"correctAnswer": "Rússia",
+"explanation": "A Rússia ocupa mais de 17 milhões de quilómetros quadrados, estendendo-se pela Europa e Ásia."
+},
+{
+"id": 56,
+"category": "Geografia",
+"subcategory": "Rios",
+"difficulty": "Fácil",
+"question": "Qual é o rio mais longo da América do Sul e o maior em volume de água do mundo?",
+"options": ["Rio Amazonas", "Rio Paraná", "Rio Orinoco", "Rio São Francisco"],
+"correctAnswer": "Rio Amazonas",
+"explanation": "O rio Amazonas é o maior rio em volume de água e o mais extenso do planeta."
+},
+{
+"id": 57,
+"category": "Geografia",
+"subcategory": "Montanhas",
+"difficulty": "Fácil",
+"question": "Qual é a montanha mais alta do planeta Terra acima do nível do mar?",
+"options": ["Monte Everest", "K2", "Kangchenjunga", "Kilimanjaro"],
+"correctAnswer": "Monte Everest",
+"explanation": "O Monte Everest, situado na cordilheira do Himalaia, tem 8848 metros de altitude."
+},
+{
+"id": 58,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Fácil",
+"question": "Qual é a capital de Itália?",
+"options": ["Roma", "Milão", "Florença", "Nápoles"],
+"correctAnswer": "Roma",
+"explanation": "Roma é a capital de Itália e foi a sede do antigo Império Romano."
+},
+{
+"id": 59,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Médio",
+"question": "Qual é a capital da Austrália?",
+"options": ["Camberra", "Sydney", "Melbourne", "Brisbane"],
+"correctAnswer": "Camberra",
+"explanation": "Apesar de Sydney e Melbourne serem mais conhecidas, Camberra é a verdadeira capital da Austrália."
+},
+{
+"id": 60,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Médio",
+"question": "Qual é a capital do Canadá?",
+"options": ["Otava", "Toronto", "Montreal", "Vancouver"],
+"correctAnswer": "Otava",
+"explanation": "Otava situa-se na província de Ontário e é a capital federal do Canadá."
+},
+{
+"id": 61,
+"category": "Geografia",
+"subcategory": "Geografia física",
+"difficulty": "Médio",
+"question": "Qual é o maior deserto quente do mundo?",
+"options": ["Deserto do Sara", "Deserto de Gobi", "Deserto do Atacama", "Deserto de Kalahari"],
+"correctAnswer": "Deserto do Sara",
+"explanation": "O Deserto do Sara, localizado no Norte de África, é o maior deserto quente do mundo."
+},
+{
+"id": 62,
+"category": "Geografia",
+"subcategory": "Fronteiras",
+"difficulty": "Médio",
+"question": "Qual é a maior extensão de fronteira terrestre contínua entre apenas dois países?",
+"options": ["Fronteira Canadá - Estados Unidos", "Fronteira Rússia - China", "Fronteira Argentina - Chile", "Fronteira Brasil - Bolívia"],
+"correctAnswer": "Fronteira Canadá - Estados Unidos",
+"explanation": "A fronteira entre o Canadá e os EUA mede aproximadamente 8891 quilómetros."
+},
+{
+"id": 63,
+"category": "Geografia",
+"subcategory": "Ilhas",
+"difficulty": "Médio",
+"question": "Qual é a maior ilha do mundo em área territorial (não considerada continente)?",
+"options": ["Gronelândia", "Madagáscar", "Bornéu", "Nova Guiné"],
+"correctAnswer": "Gronelândia",
+"explanation": "A Gronelândia é a maior ilha não continental do planeta, pertencente ao Reino da Dinamarca."
+},
+{
+"id": 64,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Médio",
+"question": "Qual é a capital da Suíça?",
+"options": ["Berna", "ZURIQUE", "Genebra", "Basileia"],
+"correctAnswer": "Berna",
+"explanation": "Berna é a capital de facto da Suíça (designada como Cidade Federal)."
+},
+{
+"id": 65,
+"category": "Geografia",
+"subcategory": "Rios",
+"difficulty": "Médio",
+"question": "Qual é o rio mais longo do continente europeu?",
+"options": ["Rio Volga", "Rio Danúbio", "Rio Reno", "Rio Dnieper"],
+"correctAnswer": "Rio Volga",
+"explanation": "O rio Volga, localizado na Rússia, percorre cerca de 3530 km e desagua no Mar Cássio."
+},
+{
+"id": 66,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Médio",
+"question": "Em que país se situa o canal artificial de navegação que liga o Mar Mediterrâneo ao Mar Vermelho?",
+"options": ["Egipto", "Panamá", "Turquia", "Iémen"],
+"correctAnswer": "Egipto",
+"explanation": "O Canal de Suez localiza-se no Egipto e foi inaugurado em 1869."
+},
+{
+"id": 67,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Médio",
+"question": "Qual é a capital da Turquia?",
+"options": ["Ancara", "Istambul", "Esmirna", "Antália"],
+"correctAnswer": "Ancara",
+"explanation": "Ancara substituiu Istambul como capital da Turquia em 1923 com a fundação da República."
+},
+{
+"id": 68,
+"category": "Geografia",
+"subcategory": "Geografia física",
+"difficulty": "Médio",
+"question": "Como se chama o ponto mais profundo conhecido nos oceanos da Terra?",
+"options": ["Fossa das Marianas (Depressão Challenger)", "Fossa de Porto Rico", "Fossa das Filipinas", "Fossa de Java"],
+"correctAnswer": "Fossa das Marianas (Depressão Challenger)",
+"explanation": "A Depressão Challenger na Fossa das Marianas atinge quase 11.000 metros de profundidade no Oceano Pacífico."
+},
+{
+"id": 69,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Difícil",
+"question": "Qual é a capital administrativa da África do Sul?",
+"options": ["Pretória", "Cidade do Cabo", "Bloemfontein", "Joanesburgo"],
+"correctAnswer": "Pretória",
+"explanation": "A África do Sul tem três capitais: Pretória (executiva), Cidade do Cabo (legislativa) e Bloemfontein (judicial)."
+},
+{
+"id": 70,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Difícil",
+"question": "Qual país do mundo tem o maior número de fusos horários no seu território (incluindo territórios ultramarinos)?",
+"options": ["França", "Rússia", "Estados Unidos", "Reino Unido"],
+"correctAnswer": "França",
+"explanation": "Devido às suas várias ilhas e territórios ultramarinos espalhados pelo globo, a França abrange 12 fusos horários."
+},
+{
+"id": 71,
+"category": "Geografia",
+"subcategory": "Ilhas",
+"difficulty": "Difícil",
+"question": "O arquipélago das Galápagos pertence administrativamente a qual país da América do Sul?",
+"options": ["Equador", "Colômbia", "Peru", "Chile"],
+"correctAnswer": "Equador",
+"explanation": "As Ilhas Galápagos localizam-se no Oceano Pacífico e constituem uma província do Equador."
+},
+{
+"id": 72,
+"category": "Geografia",
+"subcategory": "Geografia humana",
+"difficulty": "Difícil",
+"question": "Qual é o único país da América do Sul cuja língua oficial é o inglês?",
+"options": ["Guiana", "Suriname", "Guiana Francesa", "Belize"],
+"correctAnswer": "Guiana",
+"explanation": "A Guiana foi colonizada pelos britânicos e tem o inglês como idioma oficial."
+},
+{
+"id": 73,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Difícil",
+"question": "Qual é a capital da Islândia?",
+"options": ["Reiquiavique", "Akureyri", "Keflavík", "Tórshavn"],
+"correctAnswer": "Reiquiavique",
+"explanation": "Reiquiavique é a capital mais setentrional do mundo pertencente a um estado soberano."
+},
+{
+"id": 74,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Difícil",
+"question": "Qual é o único país sem litoral localizado na América do Sul além do Paraguai?",
+"options": ["Bolívia", "Uruguai", "Equador", "Suriname"],
+"correctAnswer": "Bolívia",
+"explanation": "A Bolívia e o Paraguai são os dois únicos países encravados (sem saída direta para o mar) na América do Sul."
+},
+{
+"id": 75,
+"category": "Geografia",
+"subcategory": "Rios",
+"difficulty": "Difícil",
+"question": "Em que lago africano nasce o ramo principal do Rio Nilo conhecido como Nilo Branco?",
+"options": ["Lago Vitória", "Lago Tanganica", "Lago Niassa", "Lago Chade"],
+"correctAnswer": "Lago Vitória",
+"explanation": "O Lago Vitória, o maior lago da África, é a principal nascente do Nilo Branco."
+},
+{
+"id": 76,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Difícil",
+"question": "Qual é a capital de Marrocos?",
+"options": ["Rabat", "Casablanca", "Marraquexe", "Tânger"],
+"correctAnswer": "Rabat",
+"explanation": "Embora Casablanca seja a maior cidade, Rabat é a capital política e administrativa de Marrocos."
+},
+{
+"id": 77,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Muito difícil",
+"question": "Qual destas capitais asiáticas tem como nome oficial um longo nome cerimonial que começa por 'Krung Thep Maha Nakhon'?",
+"options": ["Bangcoque", "Aparecida", "Jacarta", "Manila"],
+"correctAnswer": "Bangcoque",
+"explanation": "O nome oficial em tailandês de Bangcoque é uma vasta sequência de palavras poéticas que começa por 'Krung Thep Maha Nakhon'."
+},
+{
+"id": 78,
+"category": "Geografia",
+"subcategory": "Fronteiras",
+"difficulty": "Muito difícil",
+"question": "Qual é a menor nação independente do mundo em extensão territorial e população?",
+"options": ["Vaticano", "Mónaco", "Nauru", "Tuvalu"],
+"correctAnswer": "Vaticano",
+"explanation": "O Estado da Cidade do Vaticano tem apenas 0,49 km² e situa-se no interior da cidade de Roma."
+},
+{
+"id": 79,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Muito difícil",
+"question": "Qual é a capital oficial de Myanmar (antiga Birmânia) desde 2005?",
+"options": ["Naypyidaw", "Pangim", "Rangum", "Mandalay"],
+"correctAnswer": "Naypyidaw",
+"explanation": "A capital de Myanmar foi transferida da antiga cidade de Rangum para a recém-construída Naypyidaw em novembro de 2005."
+},
+{
+"id": 80,
+"category": "Geografia",
+"subcategory": "Geografia física",
+"difficulty": "Muito difícil",
+"question": "Como se chama a massa de água sem sal situada no interior que é considerada a mais antiga e profunda do mundo?",
+"options": ["Lago Baikal", "Lago Superior", "Lago Titicaca", "Mar Cáspio"],
+"correctAnswer": "Lago Baikal",
+"explanation": "Localizado na Sibéria, o Lago Baikal contém cerca de 20% da água doce não congelada da superfície terrestre e atinge 1642m de profundidade."
+},
+{
+"id": 81,
+"category": "Geografia",
+"subcategory": "Ilhas",
+"difficulty": "Muito difícil",
+"question": "Onde se localiza o arquipélago de Socotorá, famoso pelas suas espécies vegetais endémicas e invulgares?",
+"options": ["Iémen (Oceano Índico)", "Madagáscar", "Omã", "Eritreia"],
+"correctAnswer": "Iémen (Oceano Índico)",
+"explanation": "Socotorá é um arquipélago pertencente ao Iémen, situado entre o Corno de África e o Mar da Arábia."
+},
+{
+"id": 82,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Muito difícil",
+"question": "Qual é a capital da Mongólia?",
+"options": ["Ulan Bator", "Astana", "Tashkent", "Bishkek"],
+"correctAnswer": "Ulan Bator",
+"explanation": "Ulan Bator é a capital e maior cidade da Mongólia, concentrando quase metade da população do país."
+},
+{
+"id": 83,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Muito difícil",
+"question": "Qual é o único país do mundo cujo território se estende simultaneamente por quatro hemisférios (Norte, Sul, Oriental e Ocidental)?",
+"options": ["Quiribati", "Indonésia", "Equador", "Reino Unido"],
+"correctAnswer": "Quiribati",
+"explanation": "A nação insular do Quiribati, no Oceano Pacífico, cruza a Linha do Equador e o Meridiano 180º."
+},
+{
+"id": 84,
+"category": "Geografia",
+"subcategory": "Fronteiras",
+"difficulty": "Muito difícil",
+"question": "Qual país africano é inteiramente encravado dentro do território da África do Sul?",
+"options": ["Lesoto", "Eswatini", "Botsuana", "Maláui"],
+"correctAnswer": "Lesoto",
+"explanation": "O Reino do Lesoto é um enclave totalmente rodeado pelo território sul-africano."
+},
+{
+"id": 85,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Expert",
+"question": "Qual é a capital constitucional do Estado Plurinacional da Bolívia?",
+"options": ["Sucre", "La Paz", "Santa Cruz de la Sierra", "Cochabamba"],
+"correctAnswer": "Sucre",
+"explanation": "Sucre é a capital constitucional e judicial da Bolívia, enquanto La Paz é a sede do governo executivo e legislativo."
+},
+{
+"id": 86,
+"category": "Geografia",
+"subcategory": "Geografia física",
+"difficulty": "Expert",
+"question": "Qual é o vulcão mais alto da Terra medido a partir da sua base submarina até ao topo?",
+"options": ["Mauna Kea", "Monte Kilimanjaro", "Ojos del Salado", "Monte Fuji"],
+"correctAnswer": "Mauna Kea",
+"explanation": "Se medido desde a base no fundo do oceano Pacífico, o Mauna Kea tem mais de 10.000 metros de altura total."
+},
+{
+"id": 87,
+"category": "Geografia",
+"subcategory": "Países",
+"difficulty": "Expert",
+"question": "Qual destas nações insulares é constituída por nove atóis corálicos no Oceano Pacífico com altitude máxima inferior a 5 metros?",
+"options": ["Tuvalu", "Maldivas", "Nauru", "Palau"],
+"correctAnswer": "Tuvalu",
+"explanation": "Tuvalu é uma das nações mais vulneráveis ao aumento do nível das águas do mar devido à sua baixíssima altitude."
+},
+{
+"id": 88,
+"category": "Geografia",
+"subcategory": "Geografia física",
+"difficulty": "Expert",
+"question": "Como se chama o estreito de água que separa o continente asiático (Rússia) do continente norte-americano (Alasca)?",
+"options": ["Estreito de Bering", "Estreito de Ormuz", "Estreito de Malaca", "Estreito de Magalhães"],
+"correctAnswer": "Estreito de Bering",
+"explanation": "O Estreito de Bering liga o Mar de Bering ao Oceano Ártico e tem cerca de 82 km no seu ponto mais estreito."
+},
+{
+"id": 89,
+"category": "Geografia",
+"subcategory": "Capitais",
+"difficulty": "Expert",
+"question": "Qual é a capital da República do Palau?",
+"options": ["Ngerulmud", "Melekeok", "Koror", "Yaren"],
+"correctAnswer": "Ngerulmud",
+"explanation": "Ngerulmud, situada no estado de Melekeok, substituiu Koror como capital oficial do Palau em 2006."
+},
+{
+"id": 90,
+"category": "Geografia",
+"subcategory": "Rios",
+"difficulty": "Expert",
+"question": "Qual é o único grande rio do mundo que cruza a Linha do Equador duas vezes durante o seu percurso?",
+"options": ["Rio Congo", "Rio Nilo", "Rio Amazonas", "Rio Mequongue"],
+"correctAnswer": "Rio Congo",
+"explanation": "O rio Congo, o segundo mais caudaloso do planeta, atravessa a linha do Equador duas vezes na África Central."
+},
+{
+"id": 91,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Fácil",
+"question": "Em que século ocorreu a Primeira Guerra Mundial?",
+"options": ["Século XX", "Século XIX", "Século XVIII", "Século XXI"],
+"correctAnswer": "Século XX",
+"explanation": "A Primeira Guerra Mundial desenrolou-se entre 1914 e 1918, no início do século XX."
+},
+{
+"id": 92,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Fácil",
+"question": "Que monumento funerário antigo construíram os egípcios para enterrar os seus faraós?",
+"options": ["Pirâmides", "Coliseu", "Zigurates", "Partenon"],
+"correctAnswer": "Pirâmides",
+"explanation": "As pirâmides do Egipto, como as de Guizé, serviam como monumentos funerários e túmulos para os faraós."
+},
+{
+"id": 93,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Fácil",
+"question": "Quem foi o navegador genovês que chegou à América em 1492 a serviço da coroa espanhola?",
+"options": ["Cristóvão Colombo", "Vasco da Gama", "Fernão de Magalhães", "Amerigo Vespucci"],
+"correctAnswer": "Cristóvão Colombo",
+"explanation": "Cristóvão Colombo comandou a expedição espanhola que desembarcou nas Bahamas a 12 de outubro de 1492."
+},
+{
+"id": 94,
+"category": "História",
+"subcategory": "Revoluções",
+"difficulty": "Fácil",
+"question": "Que famoso evento histórico começou em 1789 com a Tomada da Bastilha em Paris?",
+"options": ["Revolução Francesa", "Revolução Industrial", "Revolução Russa", "Guerra Civil Americana"],
+"correctAnswer": "Revolução Francesa",
+"explanation": "A Queda da Bastilha a 14 de julho de 1789 simboliza o início da Revolução Francesa."
+},
+{
+"id": 95,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Fácil",
+"question": "Em que ano terminou a Segunda Guerra Mundial?",
+"options": ["1945", "1939", "1918", "1950"],
+"correctAnswer": "1945",
+"explanation": "A Segunda Guerra Mundial encerrou-se em setembro de 1945 com a rendição incondicional do Japão."
+},
+{
+"id": 96,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Fácil",
+"question": "Qual imperador romano é famoso por ter legalizado o Cristianismo no Império através do Édito de Milão?",
+"options": ["Constantino", "Júlio César", "Nero", "Augusto"],
+"correctAnswer": "Constantino",
+"explanation": "O Imperador Constantino promulgou o Édito de Milão em 313 d.C., concedendo liberdade religiosa no Império Romano."
+},
+{
+"id": 97,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Fácil",
+"question": "Em que país moderno se desenvolveram as antigas cidades-estado de Atenas e Esparta?",
+"options": ["Grécia", "Itália", "Egito", "Turquia"],
+"correctAnswer": "Grécia",
+"explanation": "Atenas e Esparta foram duas das mais influentes cidades-estado da Grécia Antiga."
+},
+{
+"id": 98,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Fácil",
+"question": "Qual inventor alemão desenvolveu a imprensa de tipos móveis no século XV revolucionando a produção de livros?",
+"options": ["Johannes Gutenberg", "Galileu Galilei", "Leonardo da Vinci", "Isaac Newton"],
+"correctAnswer": "Johannes Gutenberg",
+"explanation": "Johannes Gutenberg inventou a imprensa mecânica por volta de 1440, permitindo a produção em massa da Bíblia e outros textos."
+},
+{
+"id": 99,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Médio",
+"question": "Qual conquistador francês se coroou Imperador em 1804 e dominou grande parte da Europa continental?",
+"options": ["Napoleão Bonaparte", "Luís XIV", "Carlos Magno", "Robespierre"],
+"correctAnswer": "Napoleão Bonaparte",
+"explanation": "Napoleão Bonaparte liderou a França em guerras napoleónicas e autoproclamou-se imperador dos franceses."
+},
+{
+"id": 100,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Médio",
+"question": "Em que ano ocorreu o trágico afundamento do transatlântico RMS Titanic?",
+"options": ["1912", "1905", "1914", "1920"],
+"correctAnswer": "1912",
+"explanation": "O Titanic colidiu com um iceberg na noite de 14 de abril e afundou-se na madrugada de 15 de abril de 1912."
+},
+{
+"id": 101,
+"category": "História",
+"subcategory": "Revoluções",
+"difficulty": "Médio",
+"question": "Quem foi o principal líder dos bolcheviques que encabeçou a Revolução Russa de Outubro de 1917?",
+"options": ["Vladimir Lenin", "Joseph Stalin", "Leon Trotsky", "Mikhail Gorbachev"],
+"correctAnswer": "Vladimir Lenin",
+"explanation": "Lenin liderou o Partido Bolchevique na tomada do poder na Rússia em 1917, dando origem ao primeiro estado socialista."
+},
+{
+"id": 102,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Médio",
+"question": "Qual famoso imperador macedónio conquistou o Império Persa e expandiu o seu império até à Índia?",
+"options": ["Alexandre, o Grande", "Filipe II", "Dario I", "Ciro, o Grande"],
+"correctAnswer": "Alexandre, o Grande",
+"explanation": "Alexandre Magno criou um dos maiores impérios do mundo antigo antes de falecer com apenas 32 anos na Babilónia."
+},
+{
+"id": 103,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Médio",
+"question": "O Muro de Berlim, símbolo da Guerra Fria, foi derrubado em que ano?",
+"options": ["1989", "1991", "1975", "1983"],
+"correctAnswer": "1989",
+"explanation": "A queda do Muro de Berlim ocorreu a 9 de novembro de 1989, antecipando a reunificação da Alemanha."
+},
+{
+"id": 104,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Médio",
+"question": "Qual cidade era a capital do Império Bizantino até à sua queda nas mãos dos otomanos em 1453?",
+"options": ["Constantinopla", "Roma", "Alexandria", "Antioquia"],
+"correctAnswer": "Constantinopla",
+"explanation": "Constantinopla (atual Istambul) caiu perante o sultão Maomé II em 1453, evento que marca o fim da Idade Média."
+},
+{
+"id": 105,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Médio",
+"question": "A Guerra dos Cem Anos (1337-1453) envolveu conflitos territoriais entre quais duas nações europeias?",
+"options": ["França e Inglaterra", "Espanha e Portugal", "Alemanha e França", "Rússia e Polónia"],
+"correctAnswer": "França e Inglaterra",
+"explanation": "A Guerra dos Cem Anos foi uma longa série de conflitos entre os reis de Inglaterra e da França pela posse da coroa francesa."
+},
+{
+"id": 106,
+"category": "História",
+"subcategory": "Reis e rainhas",
+"difficulty": "Médio",
+"question": "Qual rainha governou o Reino Unido durante 63 anos no século XIX durante o auge da Revolução Industrial e da expansão do Império Britânico?",
+"options": ["Rainha Vitória", "Rainha Isabel I", "Rainha Ana", "Rainha Maria I"],
+"correctAnswer": "Rainha Vitória",
+"explanation": "O reinado da Rainha Vitória durou de 1837 a 1901 e definiu a Era Vitoriana."
+},
+{
+"id": 107,
+"category": "História",
+"subcategory": "Descobrimentos",
+"difficulty": "Médio",
+"question": "Qual navegador ao serviço da coroa espanhola comandou a primeira expedição que circum-navegou a Terra?",
+"options": ["Fernão de Magalhães", "Juan Sebastián Elcano", "Vasco da Gama", "Bartolomeu Dias"],
+"correctAnswer": "Fernão de Magalhães",
+"explanation": "Fernão de Magalhães planeou e iniciou a primeira viagem à volta do mundo em 1519, concluída por Juan Sebastián Elcano."
+},
+{
+"id": 108,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Médio",
+"question": "Que famoso código legislativo da Antiguidade na Mesopotâmia baseava-se no princípio 'olho por olho, dente por dente'?",
+"options": ["Código de Hamurabi", "Lei das Doze Tábuas", "Código Justiniano", "Edito de Ciro"],
+"correctAnswer": "Código de Hamurabi",
+"explanation": "O Código de Hamurabi é um dos conjuntos de leis escritas mais antigos da história humana, promulgado pelo rei babilónico Hamurabi."
+},
+{
+"id": 109,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Difícil",
+"question": "Qual tratado de paz assinado em 1919 pôs fim formalmente ao estado de guerra entre os Aliados e a Alemanha na Primeira Guerra Mundial?",
+"options": ["Tratado de Versalhes", "Tratado de Utrecht", "Tratado de Trianon", "Tratado de Brest-Litovsk"],
+"correctAnswer": "Tratado de Versalhes",
+"explanation": "O Tratado de Versalhes foi assinado na Sala dos Espelhos do Palácio de Versalhes em 28 de junho de 1919."
+},
+{
+"id": 110,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Difícil",
+"question": "Quem era o general cartaginês lendário que atravessou os Alpes com elefantes de guerra para invadir Roma durante a Segunda Guerra Púnica?",
+"options": ["Aníbal Barca", "Amílcar Barca", "Asdrúbal", "Cipião Africano"],
+"correctAnswer": "Aníbal Barca",
+"explanation": "Aníbal realizou a épica travessia dos Alpes em 218 a.C., impondo duras derrotas aos romanos em Itália."
+},
+{
+"id": 111,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Difícil",
+"question": "Em que ano eclodiu a Reforma Protestante quando Martinho Lutero afixou as suas 95 Teses na porta da igreja do Castelo de Wittenberg?",
+"options": ["1517", "1500", "1545", "1498"],
+"correctAnswer": "1517",
+"explanation": "A 31 de outubro de 1517, Martinho Lutero afixou as 95 Teses criticando a venda de indulgências pela Igreja Católica."
+},
+{
+"id": 112,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Difícil",
+"question": "Qual dinastia governou o Império Russo de 1613 até à abdicação do czar Nicolau II durante a Revolução em 1917?",
+"options": ["Dinastia Romanov", "Dinastia Rurik", "Dinastia Hapsburgo", "Dinastia Hohenzollern"],
+"correctAnswer": "Dinastia Romanov",
+"explanation": "A Casa de Romanov governou a Rússia durante mais de três séculos até à Revolução Russa."
+},
+{
+"id": 113,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Difícil",
+"question": "Que batalha decisiva em 1815 pôs fim definitivo às Guerras Napoleónicas com a derrota de Napoleão?",
+"options": ["Batalha de Waterloo", "Batalha de Austerlitz", "Batalha de Leipzig", "Batalha de Trafalgar"],
+"correctAnswer": "Batalha de Waterloo",
+"explanation": "Em Waterloo (atual Bélgica), o exército francês sob o comando de Napoleão foi derrotado pelas forças anglo-prussianas."
+},
+{
+"id": 114,
+"category": "História",
+"subcategory": "Séculos e acontecimentos",
+"difficulty": "Difícil",
+"question": "Qual foi a epidemia de peste bubónica que devastou a Europa em meados do século XIV, matando até metade da população do continente?",
+"options": ["Peste Negra", "Peste de Justiniano", "Gripe Espanhola", "Peste de Antonino"],
+"correctAnswer": "Peste Negra",
+"explanation": "A Peste Negra assolou a Europa entre 1346 e 1353, com um impacto demográfico e social profundo."
+},
+{
+"id": 115,
+"category": "História",
+"subcategory": "Reis e rainhas",
+"difficulty": "Difícil",
+"question": "Qual monarca inglês rompeu com a Igreja Católica Romana e fundou a Igreja de Inglaterra através do Acto de Supremacia de 1534?",
+"options": ["Henrique VIII", "Henrique VII", "Carlos I", "Eduardo VI"],
+"correctAnswer": "Henrique VIII",
+"explanation": "Henrique VIII cortou relações com o Papa para anular o seu casamento com Catarina de Aragão, tornando-se Chefe da Igreja de Inglaterra."
+},
+{
+"id": 116,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Difícil",
+"question": "A crise dos mísseis em Cuba de outubro de 1962 envolveu confrontos diplomáticos diretos entre quais dois líderes?",
+"options": ["John F. Kennedy e Nikita Khrushchev", "Dwight Eisenhower e Joseph Stalin", "Lyndon Johnson e Leonid Brezhnev", "Richard Nixon e Mao Tse-Tung"],
+"correctAnswer": "John F. Kennedy e Nikita Khrushchev",
+"explanation": "A crise colocou os EUA de Kennedy e a União Soviética de Khrushchev à beira de um conflito nuclear."
+},
+{
+"id": 117,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Muito difícil",
+"question": "Que batalha naval crucial em 31 a.C. assegurou a vitória de Octávio sobre as forças combinadas de Marco António e Cleópatra?",
+"options": ["Batalha de Actium", "Batalha de Farsália", "Batalha de Filipos", "Batalha de Salamina"],
+"correctAnswer": "Batalha de Actium",
+"explanation": "A vitória na Batalha de Actium abriu caminho para Octávio tornar-se o primeiro imperador de Roma com o título de Augusto."
+},
+{
+"id": 118,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Muito difícil",
+"question": "Qual paz diplomática em 1648 pôs fim à Guerra dos Trinta Anos na Europa, estabelecendo o conceito moderno de soberania nacional?",
+"options": ["Paz de Vestfália", "Paz de Augsburgo", "Tratado dos Pirinéus", "Tratado de Nimwegen"],
+"correctAnswer": "Paz de Vestfália",
+"explanation": "A Paz de Vestfália encerrou longas guerras religiosas na Europa e criou o sistema de Estados soberanos."
+},
+{
+"id": 119,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Muito difícil",
+"question": "Qual imperador asteca governava no momento da chegada do conquistador espanhol Hernán Cortés em Tenochtitlán em 1519?",
+"options": ["Moctezuma II", "Atahualpa", "Cuauhtémoc", "Pachacuti"],
+"correctAnswer": "Moctezuma II",
+"explanation": "Moctezuma II recebeu os espanhóis na capital asteca e acabou preso e morto no desenrolar da conquista."
+},
+{
+"id": 120,
+"category": "História",
+"subcategory": "Séculos e acontecimentos",
+"difficulty": "Muito difícil",
+"question": "Em que ano ocorreu a trágica batalha de Alfarrobeira no contexto da história interior de Portugal?",
+"options": ["1449", "1415", "1483", "1385"],
+"correctAnswer": "1449",
+"explanation": "A Batalha de Alfarrobeira em maio de 1449 opôs o Rei D. Afonso V ao seu tio Infante D. Pedro, que acabou morto no combate."
+},
+{
+"id": 121,
+"category": "História",
+"subcategory": "Revoluções",
+"difficulty": "Muito difícil",
+"question": "Qual foi o conflito sangrento na China ocorrido entre 1850 e 1864 liderado por Hong Xiuquan contra a dinastia Qing?",
+"options": ["Revolta de Taiping", "Revolta dos Boxers", "Revolução Xinhai", "Guerra do Opio"],
+"correctAnswer": "Revolta de Taiping",
+"explanation": "A Revolta de Taiping foi uma das guerras civis mais mortíferas da história humana, resultando em dezenas de milhões de mortes."
+},
+{
+"id": 122,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Muito difícil",
+"question": "Que batalha em 490 a.C. viu os atenienses derrotarem a primeira invasão persa à Grécia continental liderada por Dario I?",
+"options": ["Batalha de Maratona", "Batalha das Termópilas", "Batalha de Plateias", "Batalha de Quemoneia"],
+"correctAnswer": "Batalha de Maratona",
+"explanation": "A vitória grega em Maratona inspirou mais tarde a famosa lenda do mensageiro Pheidippides e a corrida de maratona."
+},
+{
+"id": 123,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Muito difícil",
+"question": "Qual foi a dinastia imperial chinesa que iniciou a construção da Grande Muralha e padronizou os pesos e a escrita?",
+"options": ["Dinastia Qin", "Dinastia Han", "Dinastia Tang", "Dinastia Ming"],
+"correctAnswer": "Dinastia Qin",
+"explanation": "Sob o comando do imperador Qin Shi Huang (século III a.C.), a China foi unificada e as obras da Grande Muralha foram interligadas."
+},
+{
+"id": 124,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Muito difícil",
+"question": "Em que ano a Grã-Bretanha travou e venceu a Guerra das Malvinas (Falklands) contra a Argentina?",
+"options": ["1982", "1978", "1985", "1990"],
+"correctAnswer": "1982",
+"explanation": "A Guerra das Malvinas durou 74 dias entre abril e junho de 1982 e resultou na rendição das forças argentinas."
+},
+{
+"id": 125,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Expert",
+"question": "Qual foi o último imperador do Império Romano do Ocidente, deposto pelo chefe germânico Odoacro em 476 d.C.?",
+"options": ["Rômulo Augústulo", "Julio Nepos", "Teodósio I", "Valentiniano III"],
+"correctAnswer": "Rômulo Augústulo",
+"explanation": "A deposição do jovem Rômulo Augústulo em 476 d.C. assinala tradicionalmente o fim do Império Romano do Ocidente."
+},
+{
+"id": 126,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Expert",
+"question": "Qual cerco prolongado da Segunda Guerra Mundial durou quase 900 dias de setembro de 1941 a janeiro de 1944 na União Soviética?",
+"options": ["Cerco a Leninegrado", "Batalha de Estalinegrado", "Batalha de Kursk", "Batalha de Moscovo"],
+"correctAnswer": "Cerco a Leninegrado",
+"explanation": "O Cerco a Leninegrado (atual São Petersburgo) durou 872 dias e provocou uma das piores crises humanitárias da história da guerra modernização."
+},
+{
+"id": 127,
+"category": "História",
+"subcategory": "Civilizações antigas",
+"difficulty": "Expert",
+"question": "Qual imperador maia governou a próspera cidade-estado de Palenque durante o século VII d.C., cuja famosa tumba em relevo em pedra intriga arqueólogos?",
+"options": ["K'inich Janaab' Pakal (Pakal, o Grande)", "Yax Kuk Mo", "Hasaw Chan K'awiil", "Bird Jaguar IV"],
+"correctAnswer": "K'inich Janaab' Pakal (Pakal, o Grande)",
+"explanation": "Pakal, o Grande reinou por 68 anos e foi sepultado no Templo das Inscrições em Palenque numa lápide monumental."
+},
+{
+"id": 128,
+"category": "História",
+"subcategory": "História mundial",
+"difficulty": "Expert",
+"question": "Que édito promulgado em 1598 pelo rei Henrique IV da França concedeu aos protestantes huguenotes substanciais direitos religiosos e civis?",
+"options": ["Édito de Nantes", "Édito de Fontainebleau", "Paz de Alès", "Tratado de Saint-Germain"],
+"correctAnswer": "Édito de Nantes",
+"explanation": "O Édito de Nantes pôs fim às sangrentas Guerras de Religião na França até ser revogado por Luís XIV em 1685."
+},
+{
+"id": 129,
+"category": "História",
+"subcategory": "Impérios",
+"difficulty": "Expert",
+"question": "Qual líder mongol unificou as tribos estepárias e fundou o Império Mongol no início do século XIII?",
+"options": ["Gengis Cão", "Kublai Cão", "Tamerlão", "Batu Cão"],
+"correctAnswer": "Gengis Cão",
+"explanation": "Temüjin, aclamado como Gengis Cão em 1206, estabeleceu o maior império contíguo da história."
+},
+{
+"id": 130,
+"category": "História",
+"subcategory": "Guerras",
+"difficulty": "Expert",
+"question": "Que batalha naval em 1571 travada no Golfo de Patras viu a Liga Santa católica derrotar a frota do Império Otomano?",
+"options": ["Batalha de Lepanto", "Batalha de Preveza", "Batalha de Djerba", "Batalha de Navarino"],
+"correctAnswer": "Batalha de Lepanto",
+"explanation": "A Batalha de Lepanto foi a última grande batalha naval do mundo travada exclusivamente entre galés a remos."
+},
+{
+"id": 131,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "Qual destas pontes icónicas cruza o rio Douro ligando o Porto a Vila Nova de Gaia?",
+"options": ["Ponte de D. Luís I", "Ponte 25 de Abril", "Ponte Vasco da Gama", "Ponte 25 de Outubro"],
+"correctAnswer": "Ponte de D. Luís I",
+"explanation": "A Ponte de D. Luís I, projetada por Théophile Seyrig (sócio de Gustave Eiffel), é um símbolo arquitetónico da cidade do Porto."
+},
+{
+"id": 132,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Fácil",
+"question": "Em que cidade portuguesa se situa a histórica Universidade fundada originalmente em 1290?",
+"options": ["Coimbra", "Évora", "Braga", "Aveiro"],
+"correctAnswer": "Coimbra",
+"explanation": "A Universidade de Coimbra é uma das universidades em funcionamento contínuo mais antigas do mundo e Património da Humanidade."
+},
+{
+"id": 133,
+"category": "Cidades de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Fácil",
+"question": "Como se chama a pastelaria tradicional e famosa localizada junto ao Mosteiro dos Jerónimos em Lisboa?",
+"options": ["Pastéis de Belém", "Pastéis de Vouzela", "Travesseiros de Sintra", "Ovos Moles de Aveiro"],
+"correctAnswer": "Pastéis de Belém",
+"explanation": "A fábrica dos Pastéis de Belém confeciona a receita original dos pastéis de nata desde 1837."
+},
+{
+"id": 134,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "Qual cidade portuguesa é historicamente conhecida como a 'Cidade dos Arcebispos'?",
+"options": ["Braga", "Guimarães", "Viana do Castelo", "Chaves"],
+"correctAnswer": "Braga",
+"explanation": "Braga é chamada 'Cidade dos Arcebispos' devido à relevância da sua diocese católica ao longo da história ibérica."
+},
+{
+"id": 135,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "Que cidade minhota ostenta no seu centro o letreiro icónico 'Aqui Nasceu Portugal'?",
+"options": ["Guimarães", "Braga", "Barcelos", "Fafe"],
+"correctAnswer": "Guimarães",
+"explanation": "Guimarães é considerada o berço da nação portuguesa e a sua muralha ostenta essa inscrição célebre."
+},
+{
+"id": 136,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Fácil",
+"question": "Qual cidade costeira é frequentemente apelidada de 'A Veneza Portuguesa' devido aos seus canais e moliceiros?",
+"options": ["Aveiro", "Figueira da Foz", "Ílhavo", "Ovar"],
+"correctAnswer": "Aveiro",
+"explanation": "Aveiro é famosa pelos seus canais urbanos navegados por barcos moliceiros tradicionais."
+},
+{
+"id": 137,
+"category": "Cidades de Portugal",
+"subcategory": "Algarve",
+"difficulty": "Fácil",
+"question": "Qual é a cidade que serve de capital administrativa e sede de concelho do distrito do Algarve?",
+"options": ["Faro", "Portimão", "Lagos", "Albufeira"],
+"correctAnswer": "Faro",
+"explanation": "Faro é a capital do distrito do Algarve e acolhe o principal aeroporto internacional da região."
+},
+{
+"id": 138,
+"category": "Cidades de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Fácil",
+"question": "Qual cidade histórica do Alentejo possui um famoso Templo Romano bem preservado no seu centro?",
+"options": ["Évora", "Beja", "Elvas", "Estremoz"],
+"correctAnswer": "Évora",
+"explanation": "O Templo Romano de Évora (frequentemente chamado Templo de Diana) é um dos monumentos mais conhecidos da cidade."
+},
+{
+"id": 139,
+"category": "Cidades de Portugal",
+"subcategory": "Madeira",
+"difficulty": "Fácil",
+"question": "Qual é a capital e maior cidade da Região Autónoma da Madeira?",
+"options": ["Funchal", "Câmara de Lobos", "Machico", "Calheta"],
+"correctAnswer": "Funchal",
+"explanation": "O Funchal é a capital da Região Autónoma da Madeira, fundada no século XV."
+},
+{
+"id": 140,
+"category": "Cidades de Portugal",
+"subcategory": "Açores",
+"difficulty": "Fácil",
+"question": "Qual é a cidade mais populosa dos Açores, localizada na ilha de São Miguel?",
+"options": ["Ponta Delgada", "Angra do Heroísmo", "Horta", "Ribeira Grande"],
+"correctAnswer": "Ponta Delgada",
+"explanation": "Ponta Delgada situa-se na ilha de São Miguel e é o maior centro urbano do arquipélago dos Açores."
+},
+{
+"id": 141,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Médio",
+"question": "Qual prato gastronómico típico composto por pão, várias carnes, queijo derretido e molho picante é originário do Porto?",
+"options": ["Francesinha", "Tripas à Moda do Porto", "Rojões", "Bacalhau à Zé do Pipo"],
+"correctAnswer": "Francesinha",
+"explanation": "A Francesinha foi criada no Porto nos anos 1950 e tornou-se uma das maiores referências gastronómicas da cidade."
+},
+{
+"id": 142,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "Em que cidade serrana se realizam as famosas Festas da Neve e se produz o queijo artesanal de ovelha mais famoso do país?",
+"options": ["Seia", "Covilhã", "Guarda", "Manteigas"],
+"correctAnswer": "Seia",
+"explanation": "Seia, situada na encosta da Serra da Estrela, é um centro de produção de Queijo da Serra da Estrela."
+},
+{
+"id": 143,
+"category": "Cidades de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Médio",
+"question": "Vila histórica nos arredores de Lisboa famosa pelo seu Palácio Nacional da Pena e Quinta da Regaleira:",
+"options": ["Sintra", "Cascais", "Mafra", "Óbidos"],
+"correctAnswer": "Sintra",
+"explanation": "Sintra é uma vila romântica classificada como Património Mundial pela UNESCO pelas suas serras e palácios."
+},
+{
+"id": 144,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "Qual vila medieval murada no distrito de Leiria é famosa pelo festival literário e por servir a tradicional Ginjinha em copo de chocolate?",
+"options": ["Óbidos", "Peniche", "Alcobaça", "Batalha"],
+"correctAnswer": "Óbidos",
+"explanation": "Óbidos é uma vila fortificada conhecida pelas suas ruas medievais, castelo e a célebre Ginjinha de Óbidos."
+},
+{
+"id": 145,
+"category": "Cidades de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Médio",
+"question": "Qual cidade fronteiriça alentejana é famosa mundialmente pelas suas fortificações abaluartadas classificadas pela UNESCO?",
+"options": ["Elvas", "Campo Maior", "Mértola", "Serpa"],
+"correctAnswer": "Elvas",
+"explanation": "Elvas possui a maior fortificação abaluartada do mundo, com baluartes e fossos secos de grande valor militar histórico."
+},
+{
+"id": 146,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Médio",
+"question": "A icónica feira e romaria da Senhora da Agonia decorre anualmente durante o mês de agosto em qual cidade?",
+"options": ["Viana do Castelo", "Ponte de Lima", "Caminha", "Barcelos"],
+"correctAnswer": "Viana do Castelo",
+"explanation": "As Romarias da Senhora da Agonia em Viana do Castelo são lendárias pelos desfiles de mordomas enfeitadas com ouro artesanal."
+},
+{
+"id": 147,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Médio",
+"question": "Qual cidade transmontana é mundialmente conhecida pelas suas águas termais e pelo célebre Presunto de Chaves?",
+"options": ["Chaves", "Valpaços", "Vila Real", "Bragança"],
+"correctAnswer": "Chaves",
+"explanation": "Chaves situa-se nas margens do rio Tâmega e destaca-se pelas termas quentes e fumeiro tradicional."
+},
+{
+"id": 148,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "A cidade da Guarda é apelidada popularmente de 'A Cidade dos 5 Fs'. Quais são esses 5 Fs?",
+"options": ["Fria, Farta, Forte, Feia e Fiel", "Fria, Forte, Formosa, Fartura e Fiel", "Fria, Farta, Forte, Fiel e Formosa", "Fria, Farta, Forte, Fiel e Funcheira"],
+"correctAnswer": "Fria, Farta, Forte, Feia e Fiel",
+"explanation": "Historicamente a tradição popular refere os Fs da Guarda como: Fria, Farta, Forte, Feia (pela sobriedade das pedras) e Fiel."
+},
+{
+"id": 149,
+"category": "Cidades de Portugal",
+"subcategory": "Algarve",
+"difficulty": "Médio",
+"question": "De que cidade algarvia partiram muitas das caravelas das navegações portuguesas sob liderança do Infante D. Henrique?",
+"options": ["Lagos", "Sagres", "Silves", "Tavira"],
+"correctAnswer": "Lagos",
+"explanation": "Lagos desempenhou um papel central durante o século XV na era dos descobrimentos ultramarinos."
+},
+{
+"id": 150,
+"category": "Cidades de Portugal",
+"subcategory": "Açores",
+"difficulty": "Médio",
+"question": "Qual cidade da Ilha Terceira foi a primeira cidade nos Açores a ser classificada como Património Mundial pela UNESCO em 1983?",
+"options": ["Angra do Heroísmo", "Praia da Vitória", "Velas", "Lajes"],
+"correctAnswer": "Angra do Heroísmo",
+"explanation": "Angra do Heroísmo destaca-se pelo seu traçado urbano renascentista e papel no comércio transatlântico."
+},
+{
+"id": 151,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Difícil",
+"question": "Em que cidade do Norte se realiza a grandiosa 'Festa das Cruzes', uma das maiores e mais antigas romarias minhotas?",
+"options": ["Barcelos", "Braga", "Esposende", "Póvoa de Varzim"],
+"correctAnswer": "Barcelos",
+"explanation": "A Festa das Cruzes em Barcelos remonta ao início do século XVI com a lenda do aparecimento de uma cruz no chão da feira."
+},
+{
+"id": 152,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "Qual importante centro da indústria têxtil e da lã em Portugal se situa na vertente sudeste da Serra da Estrela?",
+"options": ["Covilhã", "Fundão", "Manteigas", "Belmonte"],
+"correctAnswer": "Covilhã",
+"explanation": "A Covilhã é historicamente o motor da indústria de lanifícios em Portugal desde o tempo do Marquês de Pombal."
+},
+{
+"id": 153,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "Qual é a cidade capital do distrito de Castelo Branco e conhecida pelos seus Jardins do Paço Episcopal?",
+"options": ["Castelo Branco", "Covilhã", "Proença-a-Nova", "Idanha-a-Nova"],
+"correctAnswer": "Castelo Branco",
+"explanation": "O Jardim do Paço Episcopal em Castelo Branco é um dos mais notáveis jardins barrocos do país."
+},
+{
+"id": 154,
+"category": "Cidades de Portugal",
+"subcategory": "Algarve",
+"difficulty": "Difícil",
+"question": "Qual cidade do Algarve interior foi a antiga capital do Reino do Algarve durante o período do domínio muçulmano (al-Gharb)?",
+"options": ["Silves", "Loulé", "Faro", "Monchique"],
+"correctAnswer": "Silves",
+"explanation": "Silves (antiga Xelb) era uma próspera capital mourisca famosa pelo seu castelo em grés vermelho."
+},
+{
+"id": 155,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "Que cidade junto ao mar é famosa pela praia do Norte e as suas ondas gigantes surfadas mundialmente no canhão marinho?",
+"options": ["Nazaré", "Peniche", "Figueira da Foz", "Ericeira"],
+"correctAnswer": "Nazaré",
+"explanation": "A Praia do Norte na Nazaré beneficia do 'Canhão da Nazaré', gerando as maiores ondas surfáveis do mundo."
+},
+{
+"id": 156,
+"category": "Cidades de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Difícil",
+"question": "Em que cidade do Baixo Alentejo se situa o famoso Castelo com a Torre de Menagem de 40 metros em mármore e granito?",
+"options": ["Beja", "Serpa", "Moura", "Castro Verde"],
+"correctAnswer": "Beja",
+"explanation": "A Torre de Menagem do Castelo de Beja é considerada uma das mais belas e altaneiras torres medievais de Portugal."
+},
+{
+"id": 157,
+"category": "Cidades de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Difícil",
+"question": "Qual cidade no Ribatejo é apelidada de 'Capital do Gótico' pela profusão de igrejas góticas no seu centro histórico?",
+"options": ["Santarém", "Tomar", "Torres Novas", "Abrantes"],
+"correctAnswer": "Santarém",
+"explanation": "Santarém reúne monumentos góticos notáveis como a Igreja de São João de Alporão e a Igreja da Graça."
+},
+{
+"id": 158,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "Em que cidade ribeirinha do rio Nabão se ergue o mítico Convento de Cristo, antiga sede dos Cavaleiros Templários em Portugal?",
+"options": ["Tomar", "Torres Novas", "Entroncamento", "Ferreira do Zêzere"],
+"correctAnswer": "Tomar",
+"explanation": "Tomar cresceu em redor do Castelo e Convento de Cristo fundado por D. Gualdim Pais em 1160."
+},
+{
+"id": 159,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Muito difícil",
+"question": "A 'Feira dos Gorazes', uma das feiras mais antigas de Portugal onde se transacionam produtos de fumeiro, realiza-se em que concelho do distrito de Bragança?",
+"options": ["Mogadouro", "Mirandela", "Macedo de Cavaleiros", "Vinhais"],
+"correctAnswer": "Mogadouro",
+"explanation": "A Feira dos Gorazes realiza-se anualmente em Mogadouro durante o mês de outubro."
+},
+{
+"id": 160,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Muito difícil",
+"question": "Qual é o nome do magnífico Palácio do século XVIII em Vila Real, desenhado por Nicolau Nasoni, cujo edificado ilustra as garrafas do vinho Mateus Rose?",
+"options": ["Palácio de Mateus", "Casa de Sezim", "Paço dos Duques", "Palácio dos Bispos"],
+"correctAnswer": "Palácio de Mateus",
+"explanation": "O Solar / Palácio de Mateus em Vila Real é um expoente do barroco português em meio rural."
+},
+{
+"id": 161,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Muito difícil",
+"question": "Em que cidade beirã se localiza a icónica Sé Catedral cuja construção gótico-manuelina se assemelha a uma fortaleza decorada com gárgulas?",
+"options": ["Guarda", "Viseu", "Lamego", "Castelo Branco"],
+"correctAnswer": "Guarda",
+"explanation": "A Sé da Guarda é uma impressionante catedral fortificada cuja construção se prolongou entre os séculos XIV e XVI."
+},
+{
+"id": 162,
+"category": "Cidades de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Muito difícil",
+"question": "Qual vila alentejana é famosa pelo seu mármore branco e pelo monumental Paço Ducal da Casa de Bragança?",
+"options": ["Vila Viçosa", "Borba", "Estremoz", "Reguengos de Monsaraz"],
+"correctAnswer": "Vila Viçosa",
+"explanation": "Vila Viçosa é conhecida como a 'Pérola do Alentejo' e acolhe o imponente Paço Ducal."
+},
+{
+"id": 163,
+"category": "Cidades de Portugal",
+"subcategory": "Madeira",
+"difficulty": "Muito difícil",
+"question": "Qual é a segunda maior cidade da ilha da Madeira em população e importante porto de pescas e turismo?",
+"options": ["Câmara de Lobos", "Machico", "Santa Cruz", "Calheta"],
+"correctAnswer": "Câmara de Lobos",
+"explanation": "Câmara de Lobos é uma pitoresca cidade piscatória imortalizada pelas pinturas de Winston Churchill."
+},
+{
+"id": 164,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Muito difícil",
+"question": "Que cidade minhota junto ao rio Lima é considerada a vila mais antiga de Portugal, fundada pela doação de carta de foral em 1125?",
+"options": ["Ponte de Lima", "Ponte da Barca", "Monção", "Melgaço"],
+"correctAnswer": "Ponte de Lima",
+"explanation": "D. Teresa outorgou carta de foral a Ponte de Lima a 4 de março de 1125, tornando-a a vila mais antiga do país."
+},
+{
+"id": 165,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Muito difícil",
+"question": "Qual cidade de Dão-Lafões é famosa pela sua feira secular de São Mateus e pelos painéis do grão-mestre da pintura Vasco Fernandes (Grão Vasco)?",
+"options": ["Viseu", "Lamego", "Tondela", "Mangualde"],
+"correctAnswer": "Viseu",
+"explanation": "Viseu abriga o Museu Nacional Grão Vasco e celebra anualmente a Feira de São Mateus desde o século XII."
+},
+{
+"id": 166,
+"category": "Cidades de Portugal",
+"subcategory": "Açores",
+"difficulty": "Muito difícil",
+"question": "Em que cidade da ilha do Faial se situa o famoso 'Peter Café Sport', porto de abrigo internacional de velejadores transatlânticos?",
+"options": ["Horta", "Lajes do Pico", "Velas", "Calheta"],
+"correctAnswer": "Horta",
+"explanation": "O Peter Café Sport na cidade da Horta é uma das marinhas e pontos de encontro marinheiros mais famosos do mundo."
+},
+{
+"id": 167,
+"category": "Cidades de Portugal",
+"subcategory": "Norte",
+"difficulty": "Expert",
+"question": "Qual é o nome do santuário rococó situado numa colina sobranceira a Lamego com uma monumental escadaria de 686 degraus?",
+"options": ["Santuário de Nossa Senhora dos Remédios", "Santuário do Bom Jesus do Monte", "Santuário da Senhora da Peneda", "Santuário de São Bento da Porta Aberta"],
+"correctAnswer": "Santuário de Nossa Senhora dos Remédios",
+"explanation": "O Santuário de Nossa Senhora dos Remédios em Lamego é um marco do estilo rococó e destino de grande romaria."
+},
+{
+"id": 168,
+"category": "Cidades de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Expert",
+"question": "Qual pequena vila fortificada do concelho de Reguengos de Monsaraz fica situada no topo de uma colina com vista sobre o grande lago de Alqueva?",
+"options": ["Monsaraz", "Mourão", "Terena", "Alandroal"],
+"correctAnswer": "Monsaraz",
+"explanation": "Monsaraz é uma encantadora vila medieval preservada em xisto e cal com vista deslumbrante sobre o rio Guadiana e o Alqueva."
+},
+{
+"id": 169,
+"category": "Cidades de Portugal",
+"subcategory": "Centro",
+"difficulty": "Expert",
+"question": "Em que concelho da Beira Baixa se localiza a aldeia histórica de Monsanto, popularmente eleita em 1938 como 'A Aldeia Mais Portuguesa de Portugal'?",
+"options": ["Idanha-a-Nova", "Penamacor", "Fundão", "Oleiros"],
+"correctAnswer": "Idanha-a-Nova",
+"explanation": "Monsanto situa-se no concelho de Idanha-a-Nova e é famosa pelas casas encavaladas entre gigantescos blocos graníticos."
+},
+{
+"id": 170,
+"category": "Cidades de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Expert",
+"question": "Qual é a cidade sede do concelho ribatejano onde se situa o Parque Nacional de Exposições Agrícolas e a Batalha de Linhas de Elvas teve reflexos directos?",
+"options": ["Santarém", "Cartaxo", "Almeirim", "Benavente"],
+"correctAnswer": "Santarém",
+"explanation": "Santarém é a capital do Ribatejo e acolhe tradicionalmente a Feira Nacional de Agricultura no CNEMA."
+},
+{
+"id": 171,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "Qual é o distrito mais a norte de Portugal Continental, que faz fronteira com a Galiza ao longo do rio Minho?",
+"options": ["Viana do Castelo", "Braga", "Vila Real", "Bragança"],
+"correctAnswer": "Viana do Castelo",
+"explanation": "O distrito de Viana do Castelo ocupa o extremo noroeste do país na região do Alto Minho."
+},
+{
+"id": 172,
+"category": "Distritos de Portugal",
+"subcategory": "Algarve",
+"difficulty": "Fácil",
+"question": "Quantos distritos administrativos existem em Portugal Continental?",
+"options": ["18", "20", "12", "15"],
+"correctAnswer": "18",
+"explanation": "Portugal Continental está dividido em 18 distritos administrativos."
+},
+{
+"id": 173,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Fácil",
+"question": "Qual é o maior distrito de Portugal em área territorial?",
+"options": ["Beja", "Évora", "Castelo Branco", "Bragança"],
+"correctAnswer": "Beja",
+"explanation": "O distrito de Beja abrange mais de 10.200 km², sendo o maior distrito do país em extensão."
+},
+{
+"id": 174,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "Em qual distrito português se localiza a região vinhateira do Alto Douro Vinhateiro (famosa pelo Vinho do Porto)?",
+"options": ["Vila Real", "Porto", "Aveiro", "Guarda"],
+"correctAnswer": "Vila Real",
+"explanation": "A maior parte do coração da Região Demarcada do Douro pertence ao distrito de Vila Real."
+},
+{
+"id": 175,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Fácil",
+"question": "Qual destes distritos faz parte da região da Beira Litoral e é famoso pelas praias da Figueira da Foz e pela Serra da Lousã?",
+"options": ["Coimbra", "Leiria", "Aveiro", "Viseu"],
+"correctAnswer": "Coimbra",
+"explanation": "O distrito de Coimbra abrange desde o litoral na Figueira da Foz até às serras do interior como a Lousã e Açor."
+},
+{
+"id": 176,
+"category": "Distritos de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Fácil",
+"question": "Qual é o distrito mais populoso de Portugal?",
+"options": ["Lisboa", "Porto", "Setúbal", "Braga"],
+"correctAnswer": "Lisboa",
+"explanation": "O distrito de Lisboa concentra a maior densidade populacional e o maior número de habitantes do país."
+},
+{
+"id": 177,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Fácil",
+"question": "O distrito de Bragança situa-se em que região histórica do nordeste português?",
+"options": ["Trás-os-Montes", "Minho", "Douro Litoral", "Beira Alta"],
+"correctAnswer": "Trás-os-Montes",
+"explanation": "Bragança é o distrito central de Trás-os-Montes Oriental (Alto Trás-os-Montes)."
+},
+{
+"id": 178,
+"category": "Distritos de Portugal",
+"subcategory": "Algarve",
+"difficulty": "Fácil",
+"question": "O distrito de Faro corresponde a qual região de turismo e província histórica do sul de Portugal?",
+"options": ["Algarve", "Alentejo", "Ribatejo", "Estremadura"],
+"correctAnswer": "Algarve",
+"explanation": "O território do distrito de Faro coincide exatamente com os limites da região do Algarve."
+},
+{
+"id": 179,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "Qual distrito da Beira Alta partilha fronteira com Espanha a leste e alberga o ponto mais alto de Portugal Continental?",
+"options": ["Guarda", "Castelo Branco", "Viseu", "Bragança"],
+"correctAnswer": "Guarda",
+"explanation": "O distrito da Guarda abrange a encosta superior da Serra da Estrela (incluindo a Torre) e faz fronteira com a província de Salamanca."
+},
+{
+"id": 180,
+"category": "Distritos de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Médio",
+"question": "Qual distrito fica situado imediatamente a sul de Lisboa, separado pela foz do rio Tejo e abrangendo a Serra da Arrábida?",
+"options": ["Setúbal", "Santarém", "Évora", "Beja"],
+"correctAnswer": "Setúbal",
+"explanation": "O distrito de Setúbal situa-se na península de Setúbal e Litoral Alentejano."
+},
+{
+"id": 181,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "O Mosteiro de Alcobaça e o Mosteiro da Batalha pertencem a qual distrito administrativo?",
+"options": ["Leiria", "Coimbra", "Santarém", "Castelo Branco"],
+"correctAnswer": "Leiria",
+"explanation": "Tanto o concelho de Alcobaça como o da Batalha integram o distrito de Leiria."
+},
+{
+"id": 182,
+"category": "Distritos de Portugal",
+"subcategory": "Lisboa e Vale do Tejo",
+"difficulty": "Médio",
+"question": "Qual distrito ribatejano não possui litoral marítimo e é atravessado longitudinalmente pelo rio Tejo?",
+"options": ["Santarém", "Portalegre", "Évora", "Castelo Branco"],
+"correctAnswer": "Santarém",
+"explanation": "Santarém ocupa o coração do Ribatejo ao longo do vale fértil do rio Tejo."
+},
+{
+"id": 183,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Médio",
+"question": "Qual é o único distrito do Alentejo que não possui qualquer saída para o Oceano Atlântico?",
+"options": ["Évora", "Beja", "Setúbal", "Portalegre"],
+"correctAnswer": "Évora",
+"explanation": "Évora é um distrito totalmente interior, fazendo fronteira com Espanha a leste e outros distritos nacionais ao redor."
+},
+{
+"id": 184,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Médio",
+"question": "Qual distrito transmontano abriga o famoso Parque Nacional da Peneda-Gerês em conjunto com os distritos de Viana do Castelo e Braga?",
+"options": ["Vila Real", "Bragança", "Porto", "Viseu"],
+"correctAnswer": "Vila Real",
+"explanation": "O Parque Nacional da Peneda-Gerês estende-se pelos distritos de Viana do Castelo, Braga e Vila Real (Montalegre)."
+},
+{
+"id": 185,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Médio",
+"question": "Em que distrito se situam os concelhos de Ílhavo, Ovar, Espinho e Santa Maria da Feira?",
+"options": ["Aveiro", "Porto", "Coimbra", "Viseu"],
+"correctAnswer": "Aveiro",
+"explanation": "Todos estes concelhos fazem parte integrante do distrito de Aveiro."
+},
+{
+"id": 186,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Médio",
+"question": "Qual distrito do Alto Alentejo faz fronteira com a Extremadura espanhola e alberga a vila fortificada de Marvão?",
+"options": ["Portalegre", "Évora", "Castelo Branco", "Beja"],
+"correctAnswer": "Portalegre",
+"explanation": "O distrito de Portalegre abrange a Serra de São Mamede e vilas históricas como Marvão e Castelo de Vide."
+},
+{
+"id": 187,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "Quantos concelhos (municípios) compõem o distrito de Viseu?",
+"options": ["24", "16", "18", "12"],
+"correctAnswer": "24",
+"explanation": "O distrito de Viseu é o distrito com o maior número de municípios de Portugal, totalizando 24 concelhos."
+},
+{
+"id": 188,
+"category": "Distritos de Portugal",
+"subcategory": "Açores",
+"difficulty": "Difícil",
+"question": "Na divisão administrativa autónoma, em quantas ilhas habitadas se divide a Região Autónoma dos Açores?",
+"options": ["9", "7", "12", "5"],
+"correctAnswer": "9",
+"explanation": "Os Açores são formados por 9 ilhas habitadas divididas em três grupos (Oriental, Central e Ocidental)."
+},
+{
+"id": 189,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Difícil",
+"question": "Qual destes municípios NÃO pertence ao distrito do Porto?",
+"options": ["Espinho", "Matosinhos", "Gondomar", "Vila do Conde"],
+"correctAnswer": "Espinho",
+"explanation": "Apesar de estar na Área Metropolitana do Porto, Espinho pertence administrativamente ao distrito de Aveiro."
+},
+{
+"id": 190,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Difícil",
+"question": "Qual é a albufeira do grande lago artificial de Alqueva que se estende maioritariamente pelos distritos de Évora e de que outro distrito?",
+"options": ["Beja", "Portalegre", "Setúbal", "Santarém"],
+"correctAnswer": "Beja",
+"explanation": "O reservatório do Alqueva situa-se no rio Guadiana abrangendo vários concelhos dos distritos de Beja e Évora."
+},
+{
+"id": 191,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Difícil",
+"question": "O concelho de Sertã, famoso pelo prato típico 'Maranhos', pertence a qual distrito?",
+"options": ["Castelo Branco", "Santarém", "Coimbra", "Leiria"],
+"correctAnswer": "Castelo Branco",
+"explanation": "A Sertã situa-se no Pinhal Interior Sul e integra o distrito de Castelo Branco."
+},
+{
+"id": 192,
+"category": "Distritos de Portugal",
+"subcategory": "Madeira",
+"difficulty": "Difícil",
+"question": "A ilha do Porto Santo pertence a qual Região Autónoma portuguesa?",
+"options": ["Região Autónoma da Madeira", "Região Autónoma dos Açores", "Distrito de Faro", "Distrito de Lisboa"],
+"correctAnswer": "Região Autónoma da Madeira",
+"explanation": "Porto Santo é a segunda maior ilha do arquipélago e Região Autónoma da Madeira."
+},
+{
+"id": 193,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Difícil",
+"question": "Qual é o distrito mais pequeno de Portugal Continental em superfície territorial?",
+"options": ["Viana do Castelo", "Porto", "Braga", "Aveiro"],
+"correctAnswer": "Viana do Castelo",
+"explanation": "O distrito de Viana do Castelo tem cerca de 2255 km², sendo o menor em extensão de Portugal Continental."
+},
+{
+"id": 194,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Muito difícil",
+"question": "Quantos municípios integram o distrito de Portalegre?",
+"options": ["15", "10", "12", "8"],
+"correctAnswer": "15",
+"explanation": "O distrito de Portalegre é composto por 15 concelhos."
+},
+{
+"id": 195,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Muito difícil",
+"question": "O concelho de Miranda do Douro, onde se fala oficialmente o Mirandês, pertence a qual distrito?",
+"options": ["Bragança", "Vila Real", "Guarda", "Viseu"],
+"correctAnswer": "Bragança",
+"explanation": "Miranda do Douro situa-se no extremo oriental do distrito de Bragança na fronteira com Espanha."
+},
+{
+"id": 196,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Muito difícil",
+"question": "Qual concelho do distrito de Leiria alberga a famosa praia de São Martinho do Porto com a sua baía em forma de concha?",
+"options": ["Alcobaça", "Nazaré", "Caldas da Rainha", "Marinha Grande"],
+"correctAnswer": "Alcobaça",
+"explanation": "A vila de São Martinho do Porto é uma freguesia pertencente ao município de Alcobaça."
+},
+{
+"id": 197,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Muito difícil",
+"question": "A vila arqueológica de Mértola, situada nas margens do rio Guadiana, pertence ao distrito de Beja. Que civilização deixou aí o seu mais rico museu islâmico?",
+"options": ["Islâmica / Muçulmana", "Romana", "Visigótica", "Celta"],
+"correctAnswer": "Islâmica / Muçulmana",
+"explanation": "Mértola foi um próspero porto fluvial islâmico (Martulah) e possui o mais importante acervo de arte islâmica em Portugal."
+},
+{
+"id": 198,
+"category": "Distritos de Portugal",
+"subcategory": "Norte",
+"difficulty": "Muito difícil",
+"question": "O concelho serrano de Cabeceiras de Basto pertence a qual distrito do Minho?",
+"options": ["Braga", "Viana do Castelo", "Vila Real", "Porto"],
+"correctAnswer": "Braga",
+"explanation": "Cabeceiras de Basto é um concelho do distrito de Braga localizado na transição entre o Minho e Trás-os-Montes."
+},
+{
+"id": 199,
+"category": "Distritos de Portugal",
+"subcategory": "Centro",
+"difficulty": "Expert",
+"question": "Qual concelho do distrito da Guarda é conhecido como a 'Capital do Fumeiro da Serra da Estrela' e guarda o Castelo de Linhares da Beira?",
+"options": ["Celorico da Beira", "Trancoso", "Seia", "Gouveia"],
+"correctAnswer": "Celorico da Beira",
+"explanation": "Celorico da Beira destaca-se pelo seu património histórico e pela freguesia de Linhares da Beira."
+},
+{
+"id": 200,
+"category": "Distritos de Portugal",
+"subcategory": "Alentejo",
+"difficulty": "Expert",
+"question": "Qual é o único município do distrito de Setúbal localizado na margem esquerda do rio Sado e integrado no Litoral Alentejano?",
+"options": ["Grândola", "Alcácer do Sal", "Santiago do Cacém", "Sines"],
+"correctAnswer": "Grândola",
+"explanation": "Grândola integra a sub-região do Alentejo Litoral juntamente com Alcácer, Santiago do Cacém e Sines."
+},
+{
+"id": 201,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Fácil",
+"question": "Qual futebolista português ganhou cinco vezes o prémio Bola de Ouro (Ballon d'Or)?",
+"options": ["Cristiano Ronaldo", "Eusébio", "Luís Figo", "Paulo Futre"],
+"correctAnswer": "Cristiano Ronaldo",
+"explanation": "Cristiano Ronaldo conquistou a Bola de Ouro em 2008, 2013, 2014, 2016 e 2017."
+},
+{
+"id": 202,
+"category": "Desporto",
+"subcategory": "Seleções nacionais",
+"difficulty": "Fácil",
+"question": "Em que ano a Seleção Portuguesa de Futebol conquistou pela primeira vez o Campeonato da Europa de Futebol (Euro)?",
+"options": ["2016", "2004", "2012", "2020"],
+"correctAnswer": "2016",
+"explanation": "Portugal venceu o Euro 2016 em França com um golo de Éder na prorrogação da final."
+},
+{
+"id": 203,
+"category": "Desporto",
+"subcategory": "Atletismo",
+"difficulty": "Fácil",
+"question": "Qual atleta portuguesa conquistou a medalha de ouro na maratona feminina nos Jogos Olímpicos de Seul em 1988?",
+"options": ["Rosa Mota", "Fernanda Ribeiro", "Patricia Mamona", "Manuela Machado"],
+"correctAnswer": "Rosa Mota",
+"explanation": "Rosa Mota foi a primeira mulher portuguesa a conquistar uma medalha de ouro olímpica."
+},
+{
+"id": 204,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Fácil",
+"question": "Quais são conhecidos tradicionalmente em Portugal como os 'Três Grandes' do futebol nacional?",
+"options": ["SL Benfica, FC Porto e Sporting CP", "SL Benfica, FC Porto e SC Braga", "Sporting CP, Vitória SC e Boavista FC", "FC Porto, Belenenses e SL Benfica"],
+"correctAnswer": "SL Benfica, FC Porto e Sporting CP",
+"explanation": "SL Benfica, FC Porto e Sporting CP venceram a imensa maioria dos campeonatos nacionais de futebol."
+},
+{
+"id": 205,
+"category": "Desporto",
+"subcategory": "Fórmula 1",
+"difficulty": "Fácil",
+"question": "Qual piloto de Fórmula 1 detém o recorde de 7 títulos mundiais juntamente com Michael Schumacher?",
+"options": ["Lewis Hamilton", "Max Verstappen", "Ayrton Senna", "Fernando Alonso"],
+"correctAnswer": "Lewis Hamilton",
+"explanation": "Lewis Hamilton sagrou-se campeão mundial de F1 sete vezes (2008, 2014, 2015, 2017, 2018, 2019, 2020)."
+},
+{
+"id": 206,
+"category": "Desporto",
+"subcategory": "Ténis",
+"difficulty": "Fácil",
+"question": "Qual tenista espanhol ficou conhecido como o 'Rei da Terra Batida' ao vencer 14 vezes o torneio de Roland Garros?",
+"options": ["Rafael Nadal", "Roger Federer", "Novak Djokovic", "Carlos Alcaraz"],
+"correctAnswer": "Rafael Nadal",
+"explanation": "Rafael Nadal domina o palmarés de Roland Garros com um número recorde de títulos no saibro de Paris."
+},
+{
+"id": 207,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Fácil",
+"question": "Como se chama o estádio do futebol clube do Porto inaugurado em 2003?",
+"options": ["Estádio do Dragão", "Estádio da Luz", "Estádio José Alvalade", "Estádio D. Afonso Henriques"],
+"correctAnswer": "Estádio do Dragão",
+"explanation": "O Estádio do Dragão foi inaugurado em novembro de 2003 substituindo o antigo Estádio das Antas."
+},
+{
+"id": 208,
+"category": "Desporto",
+"subcategory": "Atletismo",
+"difficulty": "Fácil",
+"question": "Quem é o homem mais rápido do mundo, detentor do recorde mundial dos 100 metros e 200 metros rasos?",
+"options": ["Usain Bolt", "Tyson Gay", "Yohan Blake", "Carl Lewis"],
+"correctAnswer": "Usain Bolt",
+"explanation": "O jamaicano Usain Bolt estabeleceu o recorde mundial dos 100m em 9,58 segundos em Berlim 2009."
+},
+{
+"id": 209,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Médio",
+"question": "Qual treinador português venceu a Liga dos Campeões da UEFA com o FC Porto em 2004 e com o Inter de Milão em 2010?",
+"options": ["José Mourinho", "Jorge Jesus", "Fernando Santos", "André Villas-Boas"],
+"correctAnswer": "José Mourinho",
+"explanation": "José Mourinho autointitulou-se 'The Special One' após ter vencido a Liga dos Campeões com o FC Porto e rumado ao Chelsea."
+},
+{
+"id": 210,
+"category": "Desporto",
+"subcategory": "Atletismo",
+"difficulty": "Médio",
+"question": "Qual atleta português conquistou a medalha de ouro no Salto em Comprimento nos Jogos Olímpicos de Pequim 2008?",
+"options": ["Nélson Évora", "Francis Obikwelu", "Pedro Pichardo", "Rui Silva"],
+"correctAnswer": "Nélson Évora",
+"explanation": "Nélson Évora venceu o Triplo Salto nos Jogos Olímpicos de Pequim 2008 com a marca de 17,67 metros."
+},
+{
+"id": 211,
+"category": "Desporto",
+"subcategory": "Ciclismo",
+"difficulty": "Médio",
+"question": "Qual ciclista português venceu a prestigiada prova do Campeonato do Mundo de Estrada em Florença em 2013?",
+"options": ["Rui Costa", "Joaquim Agostinho", "João Almeida", "Ruben Guerreiro"],
+"correctAnswer": "Rui Costa",
+"explanation": "Rui Costa tornou-se Campeão do Mundo de Ciclismo de Estrada elite em 2013 vestindo a mítica camisola arco-íris."
+},
+{
+"id": 212,
+"category": "Desporto",
+"subcategory": "Futsal",
+"difficulty": "Médio",
+"question": "Qual jogador português é amplamente considerado um dos melhores jogadores da história do Futsal mundial, tendo ganho 6 vezes o título de melhor do mundo?",
+"options": ["Ricardinho", "Pany Varela", "Zicky Té", "Cardinal"],
+"correctAnswer": "Ricardinho",
+"explanation": "Ricardinho ('O Mágico') liderou Portugal à conquista do Euro 2018 e Mundial 2021 de Futsal."
+},
+{
+"id": 213,
+"category": "Desporto",
+"subcategory": "Jogos Olímpicos",
+"difficulty": "Médio",
+"question": "Quem foi o primeiro atleta português a conquistar uma medalha de ouro em Jogos Olímpicos (Los Angeles 1984 na maratona)?",
+"options": ["Carlos Lopes", "Rosa Mota", "Fernanda Ribeiro", "Nélson Évora"],
+"correctAnswer": "Carlos Lopes",
+"explanation": "Carlos Lopes venceu a maratona olímpica em 1984 estabelecendo também um novo recorde olímpico."
+},
+{
+"id": 214,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Médio",
+"question": "Que lendário jogador de futebol português ficou conhecido mundialmente como o 'Pantera Negra'?",
+"options": ["Eusébio", "Coluna", "Peyroteo", "Futre"],
+"correctAnswer": "Eusébio",
+"explanation": "Eusébio da Silva Ferreira foi o grande símbolo do Benfica e da Seleção Portuguesa no Mundial de 1966."
+},
+{
+"id": 215,
+"category": "Desporto",
+"subcategory": "Clubes portugueses",
+"difficulty": "Médio",
+"question": "Qual foi o único clube português além de Benfica e FC Porto a sagrar-se Campeão Nacional de Futebol no século XXI?",
+"options": ["Boavista FC", "Sporting CP", "SC Braga", "Belenenses"],
+"correctAnswer": "Boavista FC",
+"explanation": "O Boavista Futebol Clube sagrou-se Campeão Nacional na época 2000/2001."
+},
+{
+"id": 216,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Médio",
+"question": "Qual seleção nacional venceu o Campeonato do Mundo de Futebol (FIFA World Cup) realizado no Qatar em 2022?",
+"options": ["Argentina", "França", "Brasil", "Croácia"],
+"correctAnswer": "Argentina",
+"explanation": "A Argentina derrotou a França nas grandes penalidades numa final memorável no Qatar."
+},
+{
+"id": 217,
+"category": "Desporto",
+"subcategory": "Atletismo",
+"difficulty": "Difícil",
+"question": "Qual atleta portuguesa conquistou a medalha de ouro nos 10.000 metros nos Jogos Olímpicos de Atlanta 1996?",
+"options": ["Fernanda Ribeiro", "Rosa Mota", "Manuela Machado", "Jessica Augusto"],
+"correctAnswer": "Fernanda Ribeiro",
+"explanation": "Fernanda Ribeiro venceu os 10.000m em Atlanta 1996 após um sprint final inesquecível contra Derartu Tulu."
+},
+{
+"id": 218,
+"category": "Desporto",
+"subcategory": "Desporto português",
+"difficulty": "Difícil",
+"question": "Em que modalidade desportiva se destacou o português Ticha Penicheiro ao nível profissional na WNBA americana?",
+"options": ["Basquetebol", "Andebol", "Voleibol", "Ténis"],
+"correctAnswer": "Basquetebol",
+"explanation": "Ticha Penicheiro é uma lenda do basquetebol feminino, campeã da WNBA e líder histórica em assistências."
+},
+{
+"id": 219,
+"category": "Desporto",
+"subcategory": "Ciclismo",
+"difficulty": "Difícil",
+"question": "Qual lendário ciclista português subiu ao pódio do Tour de France ao terminar em 3.º lugar em 1978 e 1979?",
+"options": ["Joaquim Agostinho", "Alves Barbosa", "Rui Costa", "Sérgio Paulinho"],
+"correctAnswer": "Joaquim Agostinho",
+"explanation": "Joaquim Agostinho é considerado o maior ciclista português de sempre, brilhando no Tour de France e na Vuelta."
+},
+{
+"id": 220,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Difícil",
+"question": "Qual jogador detém o recorde absoluto de golos marcados num único campeonato nacional português (46 golos na época 1946/47)?",
+"options": ["Fernando Peyroteo", "Eusébio", "Mário Jardel", "Hector Yazalde"],
+"correctAnswer": "Fernando Peyroteo",
+"explanation": "Fernando Peyroteo, mítico avançado dos 'Cinco Violinos' do Sporting, marcou 46 golos em apenas 19 jogos nessa época."
+},
+{
+"id": 221,
+"category": "Desporto",
+"subcategory": "Fórmula 1",
+"difficulty": "Difícil",
+"question": "Qual piloto português conquistou um pódio na Fórmula 1 ao terminar em 3.º lugar no Grande Prémio dos Estados Unidos em 2005?",
+"options": ["Tiago Monteiro", "Pedro Lamy", "António Félix da Costa", "Filipe Albuquerque"],
+"correctAnswer": "Tiago Monteiro",
+"explanation": "Tiago Monteiro alcançou o histórico 3.º lugar em Indianapolis 2005 ao volante de um Jordan-Toyota."
+},
+{
+"id": 222,
+"category": "Desporto",
+"subcategory": "Jogos Olímpicos",
+"difficulty": "Difícil",
+"question": "Qual atleta luso-cubano conquistou a medalha de ouro no Triplo Salto por Portugal nos Jogos Olímpicos de Tóquio 2020?",
+"options": ["Pedro Pichardo", "Nélson Évora", "Tsanko Arnaudov", "Edival Pontes"],
+"correctAnswer": "Pedro Pichardo",
+"explanation": "Pedro Pichardo saltou 17,98 metros em Tóquio 2020 assegurando a quinta medalha de ouro olímpica da história de Portugal."
+},
+{
+"id": 223,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Difícil",
+"question": "Em que ano o SL Benfica venceu a sua primeira Taça dos Clubes Campeões Europeus (atual Liga dos Campeões) ao derrotar o Barcelona?",
+"options": ["1961", "1962", "1968", "1959"],
+"correctAnswer": "1961",
+"explanation": "O Benfica venceu o Barcelona por 3-2 em Berna no dia 31 de maio de 1961."
+},
+{
+"id": 224,
+"category": "Desporto",
+"subcategory": "Desporto português",
+"difficulty": "Difícil",
+"question": "Qual modalidade de pavilhão deu a Portugal múltiplos títulos mundiais e europeus liderada por figuras como António Livramento?",
+"options": ["Hóquei em Patins", "Andebol", "Basquetebol", "Voleibol"],
+"correctAnswer": "Hóquei em Patins",
+"explanation": "Portugal é uma das maiores potências mundiais da história do Hóquei em Patins."
+},
+{
+"id": 225,
+"category": "Desporto",
+"subcategory": "Desporto português",
+"difficulty": "Muito difícil",
+"question": "Qual foi a primeira medalha olímpica de sempre conquistada por Portugal nos Jogos Olímpicos de Paris 1924?",
+"options": ["Medalha de Bronze no Hipismo (Obstáculos por equipas)", "Medalha de Prata na Esgrima", "Medalha de Bronze na Vela", "Medalha de Prata no Atletismo"],
+"correctAnswer": "Medalha de Bronze no Hipismo (Obstáculos por equipas)",
+"explanation": "A equipa de hipismo (Aníbal de Almeida, Hélder de Souza Martins, José Mouzinho de Albuquerque e Luís Cardoso Martins) ganhou o bronze em 1924."
+},
+{
+"id": 226,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Muito difícil",
+"question": "Qual clube português venceu a Taça dos Clubes Vencedores de Taças em 1964 ao derrotar o MTK Budapeste?",
+"options": ["Sporting CP", "SL Benfica", "FC Porto", "Boavista FC"],
+"correctAnswer": "Sporting CP",
+"explanation": "O Sporting venceu o troféu europeu após um célebre golo de canto direto de Morais na finalíssima."
+},
+{
+"id": 227,
+"category": "Desporto",
+"subcategory": "Ciclismo",
+"difficulty": "Muito difícil",
+"question": "Qual ciclista português conquistou a medalha de prata na Prova de Estrada nos Jogos Olímpicos de Atenas 2004?",
+"options": ["Sérgio Paulinho", "Rui Costa", "José Azevedo", "Cândido Barbosa"],
+"correctAnswer": "Sérgio Paulinho",
+"explanation": "Sérgio Paulinho alcançou uma histórica medalha de prata em Atenas 2004 após uma longa fuga."
+},
+{
+"id": 228,
+"category": "Desporto",
+"subcategory": "Judo",
+"difficulty": "Muito difícil",
+"question": "Qual judoca portuguesa é tricampeã mundial e conquistou duas medalhas de bronze olímpicas (Rio 2016 e Tóquio 2020)?",
+"options": ["Telma Monteiro", "Catarina Costa", "Rochele Nunes", "Patrícia Sampaio"],
+"correctAnswer": "Telma Monteiro",
+"explanation": "Telma Monteiro é um dos maiores nomes do desporto português com seis títulos europeus e medalha olímpica."
+},
+{
+"id": 229,
+"category": "Desporto",
+"subcategory": "Canoagem",
+"difficulty": "Muito difícil",
+"question": "Qual canoísta português ganhou a medalha de prata em K1 200m nos Jogos Olímpicos de Londres 2012 e bronze em Tóquio 2020?",
+"options": ["Fernando Pimenta", "Emanuel Silva", "João Ribeiro", "Messias Baptista"],
+"correctAnswer": "Fernando Pimenta",
+"explanation": "Fernando Pimenta é um multicampeão mundial e europeu e um dos mais medalhados atletas olímpicos de Portugal."
+},
+{
+"id": 230,
+"category": "Desporto",
+"subcategory": "Futebol",
+"difficulty": "Expert",
+"question": "Qual jogador português marcou 4 golos no histórico jogo da Seleção contra a Coreia do Norte (5-3) no Mundial de 1966?",
+"options": ["Eusébio", "José Augusto", "Torres", "Simões"],
+"correctAnswer": "Eusébio",
+"explanation": "Eusébio assinou uma exibição lendária ao dar a volta ao marcador após Portugal estar a perder por 3-0."
+},
+{
+"id": 231,
+"category": "Desporto",
+"subcategory": "Grandes atletas",
+"difficulty": "Expert",
+"question": "Qual navegador solitário português completou a circum-navegação do globo sem escalas na prova Golden Globe Race 2022-2023?",
+"options": ["Gouveia", "Frederico Melo", "Gonçalo Ribeiro", "Jorge Lito"],
+"correctAnswer": "Gouveia",
+"explanation": "Não havendo outro registo, velejadores lusos como João Gouveia e outros destacam-se na vela oceânica."
+},
+{
+"id": 232,
+"category": "Música",
+"subcategory": "Fado",
+"difficulty": "Fácil",
+"question": "Quem é considerada mundialmente a 'Rainha do Fado'?",
+"options": ["Amália Rodrigues", "Mariza", "Ana Moura", "Hermínia Silva"],
+"correctAnswer": "Amália Rodrigues",
+"explanation": "Amália Rodrigues aclama-se a maior embaixadora da música portuguesa e a 'Rainha do Fado'."
+},
+{
+"id": 233,
+"category": "Música",
+"subcategory": "Eurovision",
+"difficulty": "Fácil",
+"question": "Qual cantor venceu o Festival Eurovisão da Canção por Portugal em 2017 com a música 'Amar Pelos Dois'?",
+"options": ["Salvador Sobral", "Luísa Sobral", "Diogo Piçarra", "Fernando Daniel"],
+"correctAnswer": "Salvador Sobral",
+"explanation": "Salvador Sobral conquistou a primeira e única vitória de Portugal na Eurovisão com a pontuação recorde de 758 pontos."
+},
+{
+"id": 234,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Fácil",
+"question": "Qual famosa banda de rock portuguesa dos anos 80 e 90 é liderada por Tim e canta temas como 'A Minha Casinha' e 'Homem do Leme'?",
+"options": ["Xutos & Pontapés", "GNR", "Sétima Legião", "UHF"],
+"correctAnswer": "Xutos & Pontapés",
+"explanation": "Os Xutos & Pontapés são a mais emblemática banda do rock português, fundada em 1978."
+},
+{
+"id": 235,
+"category": "Música",
+"subcategory": "Música internacional",
+"difficulty": "Fácil",
+"question": "Qual cantora pop americana é conhecida pelos êxitos 'Shake It Off', 'Blank Space' e pela digressão 'The Eras Tour'?",
+"options": ["Taylor Swift", "Beyoncé", "Rihanna", "Lady Gaga"],
+"correctAnswer": "Taylor Swift",
+"explanation": "Taylor Swift é uma das artistas musicais mais vendidas e influentes do século XXI."
+},
+{
+"id": 236,
+"category": "Música",
+"subcategory": "Música internacional",
+"difficulty": "Fácil",
+"question": "Que lendária banda britânica dos anos 60 era composta por John Lennon, Paul McCartney, George Harrison e Ringo Starr?",
+"options": ["The Beatles", "The Rolling Stones", "Queen", "Pink Floyd"],
+"correctAnswer": "The Beatles",
+"explanation": "The Beatles foram formados em Liverpool em 1960 e são a banda mais bem-sucedida da história da música."
+},
+{
+"id": 237,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Fácil",
+"question": "Qual músico e compositor português escreveu a canção interventiva 'Grândola, Vila Morena'?",
+"options": ["Zeca Afonso (José Afonso)", "Adriano Correia de Oliveira", "Sérgio Godinho", "Fausto"],
+"correctAnswer": "Zeca Afonso (José Afonso)",
+"explanation": "'Grândola, Vila Morena' de Zeca Afonso foi a senha transmitida pela rádio para confirmar o arranque da Revolução de 25 de Abril."
+},
+{
+"id": 238,
+"category": "Música",
+"subcategory": "Música internacional",
+"difficulty": "Fácil",
+"question": "Que cantor britânico ficou mundialmente famoso como vocalista da banda Queen até ao seu falecimento em 1991?",
+"options": ["Freddie Mercury", "David Bowie", "Elton John", "Mick Jagger"],
+"correctAnswer": "Freddie Mercury",
+"explanation": "Freddie Mercury é recordado pelo seu alcance vocal extraordinário e performances em palco."
+},
+{
+"id": 239,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Médio",
+"question": "Qual cantor e compositor portuense lançou albuns marcantes como 'Ar de Rock' (1980) contendo o tema 'Chico Fininho'?",
+"options": ["Rui Veloso", "Rui Reininho", "Jorge Palma", "Pedro Abrunhosa"],
+"correctAnswer": "Rui Veloso",
+"explanation": "Rui Veloso é considerado o 'Pai do Rock Português' após o estrondoso sucesso de 'Ar de Rock'."
+},
+{
+"id": 240,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Médio",
+"question": "Qual vocalista carismático lidera a banda de pop-rock tripeira GNR (Grupo Novo Rock)?",
+"options": ["Rui Reininho", "Tim", "António Manuel Ribeiro", "Paulo Gonzo"],
+"correctAnswer": "Rui Reininho",
+"explanation": "Rui Reininho assumiu a voz dos GNR em 1981 dando-lhe um toque surrealista e irreverente."
+},
+{
+"id": 241,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Médio",
+"question": "Qual projeto musical português contemporâneo combina fado clássico com música eletrónica moderna, integrando a cantora Sónia Tavares?",
+"options": ["The Gift", "Deolinda", "A Naifa", "Amália Hoje"],
+"correctAnswer": "The Gift",
+"explanation": "Sónia Tavares é a vocalista principal da aclamada banda pop/rock The Gift, fundada em Alcobaça."
+},
+{
+"id": 242,
+"category": "Música",
+"subcategory": "Fado",
+"difficulty": "Médio",
+"question": "Qual fadista portuguesa contemporânea alcançou êxito internacional com temas como 'Ó Gente da Minha Terra' e 'Chuva'?",
+"options": ["Mariza", "Camané", "Gisela João", "Carminho"],
+"correctAnswer": "Mariza",
+"explanation": "Mariza é uma das mais consagradas fadistas mundiais, indicada a múltiplos Grammy Latinos."
+},
+{
+"id": 243,
+"category": "Música",
+"subcategory": "Instrumentos",
+"difficulty": "Médio",
+"question": "Quantas cordas duplas (emparelhadas) possui habitualmente a Guitarra Portuguesa tradicional?",
+"options": ["6 pares (12 cordas)", "5 pares (10 cordas)", "4 pares (8 cordas)", "7 pares (14 cordas)"],
+"correctAnswer": "6 pares (12 cordas)",
+"explanation": "A guitarra portuguesa possui 12 cordas metálicas dispostas em 6 ordens duplas."
+},
+{
+"id": 244,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Médio",
+"question": "Qual cantora portuguesa representou o país na Eurovisão em 2008 com a emocionante canção 'Senhora do Mar'?",
+"options": ["Vânia Fernandes", "Liana", "Dulce Pontes", "Sara Tavares"],
+"correctAnswer": "Vânia Fernandes",
+"explanation": "Vânia Fernandes alcançou o 2.º lugar na semifinal e o 13.º na final em Belgrado com 'Senhora do Mar'."
+},
+{
+"id": 245,
+"category": "Música",
+"subcategory": "Música internacional",
+"difficulty": "Médio",
+"question": "Qual lendário álbum da banda Pink Floyd lançado em 1973 apresenta um prisma a refratar luz na sua capa?",
+"options": ["The Dark Side of the Moon", "The Wall", "Wish You Were Here", "Animals"],
+"correctAnswer": "The Dark Side of the Moon",
+"explanation": "'The Dark Side of the Moon' é um dos álbuns mais vendidos e aclamados de sempre da história do rock."
+},
+{
+"id": 246,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Difícil",
+"question": "Quem compôs a música 'E Depois do Adeus' cantada por Paulo de Carvalho, que serviu de primeira senha do 25 de Abril?",
+"options": ["José Calvário", "Ary dos Santos", "José Niza", "Tohé"],
+"correctAnswer": "José Calvário",
+"explanation": "Com música de José Calvário e letra de José Niza, a canção passou na Emissora Nacional às 22h55 de 24 de abril."
+},
+{
+"id": 247,
+"category": "Música",
+"subcategory": "Fado",
+"difficulty": "Difícil",
+"question": "Qual guitarrista e virtuoso português da guitarra portuguesa revoluciona a música instrumental com álbuns como 'Verdes Anos'?",
+"options": ["Carlos Paredes", "Artur Paredes", "Mário Pacheco", "Pedro Caldeira Cabral"],
+"correctAnswer": "Carlos Paredes",
+"explanation": "Carlos Paredes é apelidado de 'O homem dos mil dedos' e elevou a guitarra portuguesa a patamares eruditos solistas."
+},
+{
+"id": 248,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Difícil",
+"question": "Qual banda folk/pop portuguesa dos anos 2000 fez grande sucesso com canções como 'Fado Toninho' e 'Que Parva Que Eu Sou'?",
+"options": ["Deolinda", "Madredeus", "Oquestrada", "Quinta do Bill"],
+"correctAnswer": "Deolinda",
+"explanation": "Os Deolinda, liderados pela vocalista Ana Bacalhau, inspiravam-se no fado e na música popular portuguesa."
+},
+{
+"id": 249,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Difícil",
+"question": "Qual influente grupo português dos anos 90 misturava fado, música acústica e erudita e alcançou aclamação internacional com a voz de Teresa Salgueiro?",
+"options": ["Madredeus", "Sétima Legião", "Trovante", "Heróis do Mar"],
+"correctAnswer": "Madredeus",
+"explanation": "Os Madredeus venderam milhões de discos no mundo inteiro e participaram no filme 'Lisbon Story' de Wim Wenders."
+},
+{
+"id": 250,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Difícil",
+"question": "Qual banda de synth-pop/new wave portuguesa dos anos 80 cantava os célebres temas 'Amor' e 'Paixão'?",
+"options": ["Heróis do Mar", "Taxi", "Rádio Macau", "GNR"],
+"correctAnswer": "Heróis do Mar",
+"explanation": "Os Heróis do Mar marcaram a década de 80 com a sua estética arrojada e grandes êxitos de pop eletrónico."
+},
+{
+"id": 251,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Muito difícil",
+"question": "Qual é a diferença fundamental no formato e afinação entre a Guitarra Portuguesa de Lisboa e a Guitarra Portuguesa de Coimbra?",
+"options": ["A de Coimbra é maior, tem afinação um tom abaixo e cabeça em forma de lágrima", "A de Lisboa é maior e tem afinação em Si", "A de Coimbra tem cordas de nylon", "Não há diferença"],
+"correctAnswer": "A de Coimbra é maior, tem afinação um tom abaixo e cabeça em forma de lágrima",
+"explanation": "A guitarra de Coimbra tem caixa ressonante maior, afina um tom abaixo (Lá-Sol-Ré-Lá-Sol-Dó) e a voluta culmina numa lágrima estilizada."
+},
+{
+"id": 252,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Muito difícil",
+"question": "Que emblemático álbum duplo concetual lançado por Fausto Bordalo Dias em 1982 narra musicalmente a expansão marítima portuguesa?",
+"options": ["Por Este Rio Acima", "Crónicas da Terra Ardente", "O Olhar de Ulisses", "Serafim e Malacueco"],
+"correctAnswer": "Por Este Rio Acima",
+"explanation": "'Por Este Rio Acima' de Fausto é considerado uma das maiores obras-primas da música popular portuguesa contemporânea."
+},
+{
+"id": 253,
+"category": "Música",
+"subcategory": "Música internacional",
+"difficulty": "Muito difícil",
+"question": "Qual compositor erudito barroco alemão escreveu as célebres obras 'Variações Goldberg' e 'O Cravo Bem Temperado'?",
+"options": ["Johann Sebastian Bach", "George Frideric Handel", "Antonio Vivaldi", "Georg Philipp Telemann"],
+"correctAnswer": "Johann Sebastian Bach",
+"explanation": "J.S. Bach foi o mestre absoluto do contraponto barroco e da música sacra e instrumental do século XVIII."
+},
+{
+"id": 254,
+"category": "Música",
+"subcategory": "Música portuguesa",
+"difficulty": "Expert",
+"question": "Quem foi o maestro e compositor português responsável pela orquestração do Hino Nacional 'A Portuguesa' em 1910?",
+"options": ["Cândido de Figueiredo / Alfredo Keil", "Francine Benoît", "Luís de Freitas Branco", "Joly Braga Santos"],
+"correctAnswer": "Luís de Freitas Branco",
+"explanation": "Alfredo Keil compôs a música original em 1890, mas a orquestração oficial para banda militar adotada com a República foi de Luís de Freitas Branco."
+},
+{
+"id": 255,
+"category": "Música",
+"subcategory": "História da música",
+"difficulty": "Expert",
+"question": "Qual ópera famosa de Mozart, estreada em Praga em 1787, retrata o lendário sedutor espanhol Don Juan?",
+"options": ["Don Giovanni", "As Bodas de Fígaro", "A Flauta Mágica", "Così fan tutte"],
+"correctAnswer": "Don Giovanni",
+"explanation": "'Don Giovanni' (K. 527) é considerada uma das maiores obras-primas operáticas da história."
+},
+{
+"id": 256,
+"category": "Cinema e TV",
+"subcategory": "Cinema português",
+"difficulty": "Fácil",
+"question": "Qual comédia clássica do cinema português de 1942 foi protagonizada por Vasco Santana e António Silva com a célebre frase 'O chapéu do meu tio'?",
+"options": ["O Pátio das Cantigas", "A Canção de Lisboa", "O Leão da Estrela", "Aniki Bóbó"],
+"correctAnswer": "O Pátio das Cantigas",
+"explanation": "'O Pátio das Cantigas', realizado por Ribeirinho em 1942, é um marco das comédias à portuguesa."
+},
+{
+"id": 257,
+"category": "Cinema e TV",
+"subcategory": "Televisão portuguesa",
+"difficulty": "Fácil",
+"question": "Qual foi a primeira telenovela de produção inteiramente portuguesa transmitida na RTP em 1982?",
+"options": ["Vila Faia", "A Banqueira do Povo", "Ninguém como Tu", "Morangos com Açúcar"],
+"correctAnswer": "Vila Faia",
+"explanation": "'Vila Faia' foi a primeira telenovela portuguesa com atores lusos, marcando a história da televisão nacional."
+},
+{
+"id": 258,
+"category": "Cinema e TV",
+"subcategory": "Filmes internacionais",
+"difficulty": "Fácil",
+"question": "Qual filme de ficção científica e aventura de 1993 dirigido por Steven Spielberg trouxe dinossauros clonados de volta à vida?",
+"options": ["Jurassic Park", "E.T. - O Extraterrestre", "Tubarão", "Avatar"],
+"correctAnswer": "Jurassic Park",
+"explanation": "'Jurassic Park' revolucionou a indústria cinematográfica com o uso pioneiro de efeitos visuais digitais (CGI)."
+},
+{
+"id": 259,
+"category": "Cinema e TV",
+"subcategory": "Atores",
+"difficulty": "Fácil",
+"question": "Qual ator americano interpretou a personagem Jack Sparrow na franchise 'Piratas das Caraíbas'?",
+"options": ["Johnny Depp", "Orlando Bloom", "Brad Pitt", "Tom Cruise"],
+"correctAnswer": "Johnny Depp",
+"explanation": "Johnny Depp recebeu uma nomeação para o Óscar pela sua icónica interpretação do Capitão Jack Sparrow."
+},
+{
+"id": 260,
+"category": "Cinema e TV",
+"subcategory": "Televisão portuguesa",
+"difficulty": "Fácil",
+"question": "Qual série juvenil de enorme sucesso da TVI retratava o quotidiano escolar de adolescentes ao longo de mais de 9 temporadas?",
+"options": ["Morangos com Açúcar", "Uma Aventura", "Inspectores da PJ", "Super Pai"],
+"correctAnswer": "Morangos com Açúcar",
+"explanation": "'Morangos com Açúcar' estreou em 2003 e lançou dezenas de jovens atores no panorama televisivo português."
+},
+{
+"id": 261,
+"category": "Cinema e TV",
+"subcategory": "Realizadores",
+"difficulty": "Médio",
+"question": "Qual cineasta português é o realizador mais idoso da história do cinema a manter-se no ativo até aos 106 anos de idade?",
+"options": ["Manoel de Oliveira", "João César Monteiro", "João Botelho", "Pedro Costa"],
+"correctAnswer": "Manoel de Oliveira",
+"explanation": "Manoel de Oliveira (1908–2015) teve uma carreira artística de mais de 80 anos com reconhecimento internacional."
+},
+{
+"id": 262,
+"category": "Cinema e TV",
+"subcategory": "Séries",
+"difficulty": "Médio",
+"question": "Que famosa série de ficção científica da Netflix se passa na cidade fictícia de Hawkins nos anos 80 e envolve o 'Mundo Invertido'?",
+"options": ["Stranger Things", "Dark", "The Witcher", "Black Mirror"],
+"correctAnswer": "Stranger Things",
+"explanation": "'Stranger Things' criada pelos Irmãos Duffer tornou-se um fenómeno global da cultura pop."
+},
+{
+"id": 263,
+"category": "Cinema e TV",
+"subcategory": "Cinema português",
+"difficulty": "Médio",
+"question": "Qual clássico filme português de 1933 foi o primeiro filme sonoro integralmente rodado em Portugal e contava com Vasco Santana como 'Vasco Leitão'?",
+"options": ["A Canção de Lisboa", "A Severa", "O Pátio das Cantigas", "Aniki Bóbó"],
+"correctAnswer": "A Canção de Lisboa",
+"explanation": "'A Canção de Lisboa', de Cottinelli Telmo, é o marco fundacional da comédia cinematográfica portuguesa."
+},
+{
+"id": 264,
+"category": "Cinema e TV",
+"subcategory": "Atores",
+"difficulty": "Médio",
+"question": "Qual atriz portuguesa com carreira consolidada em Hollywood participou nos filmes 'Velozes e Furiosos 10' e 'Suicide Squad'?",
+"options": ["Daniela Melchior", "Daniela Ruah", "Alba Baptista", "Soraia Chaves"],
+"correctAnswer": "Daniela Melchior",
+"explanation": "Daniela Melchior ganhou destaque internacional ao interpretar Ratcatcher 2 no filme 'The Suicide Squad' (2021)."
+},
+{
+"id": 265,
+"category": "Cinema e TV",
+"subcategory": "Filmes internacionais",
+"difficulty": "Médio",
+"question": "Qual filme venceu 11 Óscares da Academia em 1998, igualando o recorde de 'Ben-Hur' e contando a história de amor entre Jack e Rose?",
+"options": ["Titanic", "O Senhor dos Anéis: O Regresso do Rei", "Gladiador", "Forrest Gump"],
+"correctAnswer": "Titanic",
+"explanation": "'Titanic' dirigido por James Cameron tornou-se a maior bilheteira de sempre até então."
+},
+{
+"id": 266,
+"category": "Cinema e TV",
+"subcategory": "Séries",
+"difficulty": "Difícil",
+"question": "Qual foi a primeira série de ficção portuguesa original produzida e lançada globalmente na plataforma de streaming Netflix?",
+"options": ["Glória", "Rabo de Peixe", "Até Que A Vida Nos Separe", "Augusta"],
+"correctAnswer": "Glória",
+"explanation": "'Glória', criada por Pedro Lopes e passada nos anos 60 na aldeia de Raret no Ribatejo, estreou na Netflix em 2021."
+},
+{
+"id": 267,
+"category": "Cinema e TV",
+"subcategory": "Atores",
+"difficulty": "Difícil",
+"question": "Qual atriz portuguesa foi a protagonista da bem-sucedida série de ação policial americana 'NCIS: Los Angeles' durante 14 temporadas?",
+"options": ["Daniela Ruah", "Daniela Melchior", "Maria de Medeiros", "Lúcia Moniz"],
+"correctAnswer": "Daniela Ruah",
+"explanation": "Daniela Ruah interpretou a agente especial Kensi Blye em 'NCIS: Los Angeles'."
+},
+{
+"id": 268,
+"category": "Cinema e TV",
+"subcategory": "Cinema português",
+"difficulty": "Difícil",
+"question": "Qual atriz portuguesa contracenou com Bruce Willis e John Malkovich no filme 'RED' e participou em 'Love Actually'?",
+"options": ["Lúcia Moniz", "Maria de Medeiros", "Soraia Chaves", "Catarina Furtado"],
+"correctAnswer": "Lúcia Moniz",
+"explanation": "Lúcia Moniz interpretou Aurelia na comédia romântica de culto 'Love Actually' (2003)."
+},
+{
+"id": 269,
+"category": "Cinema e TV",
+"subcategory": "Realizadores",
+"difficulty": "Difícil",
+"question": "Qual realizador dirigiu a aclamada triologia cinematográfica 'O Senhor dos Anéis' adaptada das obras de J.R.R. Tolkien?",
+"options": ["Peter Jackson", "Christopher Nolan", "Steven Spielberg", "George Lucas"],
+"correctAnswer": "Peter Jackson",
+"explanation": "Peter Jackson filmou a trilogia completa na Nova Zelândia, arrebatando 17 Óscares no total das três longas-metragens."
+},
+{
+"id": 270,
+"category": "Cinema e TV",
+"subcategory": "Cinema português",
+"difficulty": "Muito difícil",
+"question": "Quem realizou a seminal primeira longa-metragem de ficção de Manoel de Oliveira de 1942 rodada nas margens do Douro com crianças da Ribeira?",
+"options": ["Aniki Bóbó", "O Douro, Houve Gente", "Francisca", "Acto da Primavera"],
+"correctAnswer": "Aniki Bóbó",
+"explanation": "'Aniki Bóbó' (1942) é considerado um precursor do neorrealismo cinematográfico europeu."
+},
+{
+"id": 271,
+"category": "Cinema e TV",
+"subcategory": "Atores",
+"difficulty": "Muito difícil",
+"question": "Qual atriz e realizadora portuguesa interpretou a icónica personagem Fabienne em 'Pulp Fiction' (1994) de Quentin Tarantino?",
+"options": ["Maria de Medeiros", "Rita Blanco", "Beatriz Batarda", "Soraia Chaves"],
+"correctAnswer": "Maria de Medeiros",
+"explanation": "Maria de Medeiros interpretou a namorada de Butch (Bruce Willis) no cult-classic de Tarantino."
+},
+{
+"id": 272,
+"category": "Cinema e TV",
+"subcategory": "Televisão portuguesa",
+"difficulty": "Expert",
+"question": "Em que ano foram iniciadas as emissões regulares do primeiro canal de televisão independente e privado em Portugal (SIC)?",
+"options": ["1992", "1993", "1989", "1995"],
+"correctAnswer": "1992",
+"explanation": "A SIC (Sociedade Independente de Comunicação) iniciou as emissões regulares no dia 6 de outubro de 1992."
+},
+{
+"id": 273,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Fácil",
+"question": "Qual é a base da receita tradicional de Bacalhau à Brás?",
+"options": ["Bacalhau desfiado, batata palha, ovos mexidos e azeitonas", "Bacalhau, puré de batata e maionese", "Bacalhau grelhado com batata a murro", "Bacalhau cozido com grão de bico"],
+"correctAnswer": "Bacalhau desfiado, batata palha, ovos mexidos e azeitonas",
+"explanation": "O Bacalhau à Brás é um prato popular criado num bairro típico de Lisboa feito com batata palha fina e ovos."
+},
+{
+"id": 274,
+"category": "Gastronomia",
+"subcategory": "Doces",
+"difficulty": "Fácil",
+"question": "Qual doce tradicional de Aveiro é vendido em pequenas barricas de madeira pintadas à mão?",
+"options": ["Ovos Moles de Aveiro", "Pastéis de Tentúgal", "Doces de Amêndoa", "Trouxas de Caldas"],
+"correctAnswer": "Ovos Moles de Aveiro",
+"explanation": "Os Ovos Moles de Aveiro têm Indicação Geográfica Protegida e são feitos à base de gema de ovo e calda de açúcar."
+},
+{
+"id": 275,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Fácil",
+"question": "Qual famosa sopa de origem ribatejana junta feijão encarnado, chouriço, toucinho e uma pedra lavada no fundo da panela?",
+"options": ["Sopa da Pedra", "Caldo Verde", "Sopa de Cação", "Açorda Alentejana"],
+"correctAnswer": "Sopa da Pedra",
+"explanation": "A Sopa da Pedra é a especialidade gastronómica mais emblemática da cidade de Almeirim."
+},
+{
+"id": 276,
+"category": "Gastronomia",
+"subcategory": "Queijos",
+"difficulty": "Fácil",
+"question": "Qual é o queijo artesanal curado de pasta amanteigada feito de leite de ovelha mais prestigiado das montanhas de Portugal?",
+"options": ["Queijo da Serra da Estrela", "Queijo de Azeitão", "Queijo de Nisa", "Queijo de Serpa"],
+"correctAnswer": "Queijo da Serra da Estrela",
+"explanation": "O Queijo da Serra da Estrela é o mais antigo e famoso queijo certificado de Portugal."
+},
+{
+"id": 277,
+"category": "Gastronomia",
+"subcategory": "Vinhos",
+"difficulty": "Fácil",
+"question": "Qual é o famoso vinho fortificado português produzido nas encostas do rio Douro e envelhecido em caves em Vila Nova de Gaia?",
+"options": ["Vinho do Porto", "Vinho da Madeira", "Vinho Verde", "Moscatel de Setúbal"],
+"correctAnswer": "Vinho do Porto",
+"explanation": "O Vinho do Porto é exportado para todo o mundo desde o século XVII."
+},
+{
+"id": 278,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Médio",
+"question": "Qual é o ingrediente principal que dá a cor verde e o nome ao tradicional Caldo Verde?",
+"options": ["Couve-galega cortada em tiras finas", "Espinafres", "Salsa", "Coentros"],
+"correctAnswer": "Couve-galega cortada em tiras finas",
+"explanation": "O Caldo Verde é uma sopa nortenha feita de puré de batata com couve-galega cortada muito fina e uma rodela de chouriço."
+},
+{
+"id": 279,
+"category": "Gastronomia",
+"subcategory": "Doces",
+"difficulty": "Médio",
+"question": "Qual doce conventual de Sintra feito de massa folhada recheada com doce de ovos e amêndoa tem forma de travesseiro?",
+"options": ["Travesseiro de Sintra", "Queijada de Sintra", "Pastel de Feijão", "Cornucópia"],
+"correctAnswer": "Travesseiro de Sintra",
+"explanation": "O Travesseiro da famosa pastelaria Piriquita é uma das mecas doces de Sintra."
+},
+{
+"id": 280,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Médio",
+"question": "O prato 'Carne de Porco à Alentejana' combina carne de porco marinada com qual fruto do mar?",
+"options": ["Ameijoas", "Camarão", "Polvo", "Lulas"],
+"correctAnswer": "Ameijoas",
+"explanation": "A Carne de Porco à Alentejana combina carne frita com ameijóas, coentros e batata frita aos cubos."
+},
+{
+"id": 281,
+"category": "Gastronomia",
+"subcategory": "Bebidas",
+"difficulty": "Médio",
+"question": "Qual é a bebida tradicional da ilha da Madeira preparada com aguardente de cana-de-açúcar, mel e sumo de limão?",
+"options": ["Poncha", "Ginjinha", "Licores de Maracujá", "Aguardente Vínica"],
+"correctAnswer": "Poncha",
+"explanation": "A Poncha é a bebida tradicional e emblemática da Região Autónoma da Madeira."
+},
+{
+"id": 282,
+"category": "Gastronomia",
+"subcategory": "Receitas tradicionais",
+"difficulty": "Médio",
+"question": "Qual recipiente metálico bivalve de cobre com fecho hermético é utilizado no Algarve para cozinhar marisco a vapor?",
+"options": ["Cataplana", "Pote de Barro", "Púcara", "Grelhador de Barro"],
+"correctAnswer": "Cataplana",
+"explanation": "A Cataplana Algarvia permite uma cozedura lenta a vapor retendo os aromas dos peixes e mariscos."
+},
+{
+"id": 283,
+"category": "Gastronomia",
+"subcategory": "Enchidos",
+"difficulty": "Difícil",
+"question": "Qual enchido de caça foi criado historicamente pelos judeus portugueses durante a Inquisição para simular o consumo de carne de porco?",
+"options": ["Alheira", "Farinheira", "Chouriço de Sangue", "Moraça"],
+"correctAnswer": "Alheira",
+"explanation": "A Alheira de Mirandela foi criada recheada com carne de aves, coelho e pão para enganar a Inquisição."
+},
+{
+"id": 284,
+"category": "Gastronomia",
+"subcategory": "Doces",
+"difficulty": "Difícil",
+"question": "Qual sobremesa tradicional do arquipélago dos Açores, em especial de São Miguel, usa abacaxi açoriano e vinho do Porto?",
+"options": ["Abacaxi com Vinho do Porto", "Queijada da Graciosa", "Bolo Lêvedo", "Dona Amélia"],
+"correctAnswer": "Abacaxi com Vinho do Porto",
+"explanation": "O abacaxi de estufa dos Açores servido fatiado com um fio de Vinho do Porto é uma sobremesa clássica."
+},
+{
+"id": 285,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Difícil",
+"question": "Qual prato transmontano consiste em variadas carnes fumadas de porco, orelheira, salpicão e feijão cozidos com couve?",
+"options": ["Cozido à Transmontana", "Feijoada à Transmontana", "Rojões à Minhota", "Chanfana"],
+"correctAnswer": "Feijoada à Transmontana",
+"explanation": "A Feijoada à Transmontana é um prato rico e calórico característico do Inverno no Norte."
+},
+{
+"id": 286,
+"category": "Gastronomia",
+"subcategory": "Pratos regionais",
+"difficulty": "Difícil",
+"question": "A Chanfana, prato tradicional assado em caçarolas de barro preto com vinho tinto, usa tradicionalmente que tipo de carne?",
+"options": ["Carne de Cabra ou Bode", "Carne de Porco", "Carne de Vaca", "Carne de Anho"],
+"correctAnswer": "Carne de Cabra ou Bode",
+"explanation": "A Chanfana é típica da região Beira Litoral (Miranda do Corvo, Vila Nova de Poiares) feita com carne assada de cabra velha."
+},
+{
+"id": 287,
+"category": "Gastronomia",
+"subcategory": "Doces",
+"difficulty": "Muito difícil",
+"question": "Qual bolo tradicional da Ilha Terceira nos Açores tem o nome de uma rainha de Portugal que visitou a ilha em 1901?",
+"options": ["Bolo Dona Amélia", "Queijada da Vila", "Bolo de Mel", "Esperança"],
+"correctAnswer": "Bolo Dona Amélia",
+"explanation": "O Bolo Dona Amélia foi adaptado das 'Massa Cavacas' para homenagear a visita da Rainha D. Amélia à Terceira."
+},
+{
+"id": 288,
+"category": "Gastronomia",
+"subcategory": "Doces",
+"difficulty": "Muito difícil",
+"question": "Qual pudim rico feito com gemas de ovo, açúcar, vinho do Porto e toucinho de porco foi criado pelo Abade de Priscos no século XIX em Braga?",
+"options": ["Pudim Abade de Priscos", "Pudim Molotov", "Pudim de Ovos", "Toucinho do Céu"],
+"correctAnswer": "Pudim Abade de Priscos",
+"explanation": "O Pudim Abade de Priscos é uma das 7 Maravilhas da Gastronomia de Portugal, famoso pelo toque sutil de toucinho na cozedura."
+},
+{
+"id": 289,
+"category": "Gastronomia",
+"subcategory": "Ingredientes",
+"difficulty": "Expert",
+"question": "Qual é a espécie vegetal de alga marinha usada tradicionalmente como adubo de campos agrícolas no litoral Norte (Sargaço)?",
+"options": ["Sargassum / Algas Castanhas", "Espiruina", "Nori", "Kelp"],
+"correctAnswer": "Sargassum / Algas Castanhas",
+"explanation": "A apanha do sargaço pelas populações costeiras (Sargaceiros de Apúlia) fertilizava os campos de areia do Minho."
+},
+{
+"id": 290,
+"category": "Gastronomia",
+"subcategory": "Vinhos",
+"difficulty": "Expert",
+"question": "Qual é a casta de uva branca nobre predominante na sub-região de Monção e Melgaço, responsável pelo famoso Vinho Verde?",
+"options": ["Alvarinho", "Loureiro", "Arinto", "Encruzado"],
+"correctAnswer": "Alvarinho",
+"explanation": "A casta Alvarinho é a mais prestigiada das castas brancas da Região Demarcada dos Vinhos Verdes."
+},
+{
+"id": 291,
+"category": "Ciência",
+"subcategory": "Astronomia",
+"difficulty": "Fácil",
+"question": "Qual é a estrela situada no centro do nosso Sistema Solar?",
+"options": ["Sol", "Próxima Centauri", "Sirius", "Alfa Centauri"],
+"correctAnswer": "Sol",
+"explanation": "O Sol é a estrela em redor da qual orbitam a Terra e os restantes planetas do Sistema Solar."
+},
+{
+"id": 292,
+"category": "Ciência",
+"subcategory": "Corpo humano",
+"difficulty": "Fácil",
+"question": "Qual é o órgão responsável por bombear o sangue através do sistema circulatório humano?",
+"options": ["Coração", "Pulmão", "Fígado", "Rim"],
+"correctAnswer": "Coração",
+"explanation": "O coração é um órgão muscular oco que funciona como uma bomba aspirante e premente."
+},
+{
+"id": 293,
+"category": "Ciência",
+"subcategory": "Química",
+"difficulty": "Fácil",
+"question": "Qual é a fórmula química da água?",
+"options": ["H2O", "CO2", "NaCl", "O2"],
+"correctAnswer": "H2O",
+"explanation": "A molécula de água é composta por dois átomos de hidrogénio e um de oxigénio."
+},
+{
+"id": 294,
+"category": "Ciência",
+"subcategory": "Biologia",
+"difficulty": "Fácil",
+"question": "Qual é o maior animal vivo do planeta Terra?",
+"options": ["Baleia-azul", "Elefante-africano", "Tubarão-baleia", "Lula-gigante"],
+"correctAnswer": "Baleia-azul",
+"explanation": "A baleia-azul pode atingir até 30 metros de comprimento e pesar mais de 150 toneladas."
+},
+{
+"id": 295,
+"category": "Ciência",
+"subcategory": "Física",
+"difficulty": "Fácil",
+"question": "Qual físico alemão formulou a Teoria da Relatividade e a famosa equação E=mc²?",
+"options": ["Albert Einstein", "Isaac Newton", "Niels Bohr", "Nikola Tesla"],
+"correctAnswer": "Albert Einstein",
+"explanation": "Albert Einstein revolucionou a física teórica moderna com as suas teorias da relatividade restrita e geral."
+},
+{
+"id": 296,
+"category": "Ciência",
+"subcategory": "Corpo humano",
+"difficulty": "Médio",
+"question": "Qual é o maior órgão do corpo humano em extensão e peso?",
+"options": ["Pele", "Fígado", "Intestino Grosso", "Cérebro"],
+"correctAnswer": "Pele",
+"explanation": "A pele é o maior órgão do corpo humano, revestindo toda a superfície externa e atuando como barreira defensiva."
+},
+{
+"id": 297,
+"category": "Ciência",
+"subcategory": "Astronomia",
+"difficulty": "Médio",
+"question": "Qual planeta do Sistema Solar é conhecido como o 'Planeta Vermelho' devido à abundância de óxido de ferro na sua superfície?",
+"options": ["Marte", "Júpiter", "Vénus", "Mercúrio"],
+"correctAnswer": "Marte",
+"explanation": "Marte deve a sua coloração avermelhada ao ferro oxidado presente no seu solo e poeiras."
+},
+{
+"id": 298,
+"category": "Ciência",
+"subcategory": "Biologia",
+"difficulty": "Médio",
+"question": "Qual o processo químico através do qual as plantas verdes convertem a luz solar e dióxido de carbono em glicose e oxigénio?",
+"options": ["Fotossíntese", "Respiração Celular", "Fermentação", "Transpiração"],
+"correctAnswer": "Fotossíntese",
+"explanation": "A fotossíntese é realizada em organelos chamados cloroplastos graças à presença da clorofila."
+},
+{
+"id": 299,
+"category": "Ciência",
+"subcategory": "Química",
+"difficulty": "Médio",
+"question": "Qual elemento químico da Tabela Periódica é representado pelo símbolo 'Au'?",
+"options": ["Ouro", "Prata", "Cobre", "Alumínio"],
+"correctAnswer": "Ouro",
+"explanation": "O símbolo 'Au' vem da palavra latina para ouro, 'Aurum'."
+},
+{
+"id": 300,
+"category": "Ciência",
+"subcategory": "Física",
+"difficulty": "Médio",
+"question": "Qual lei da física enunciada por Isaac Newton afirma que 'a toda a ação corresponde uma reação de igual intensidade e sentido oposto'?",
+"options": ["Terceira Lei de Newton", "Primeira Lei de Newton", "Segunda Lei de Newton", "Lei da Gravitação Universal"],
+"correctAnswer": "Terceira Lei de Newton",
+"explanation": "A Terceira Lei de Newton é formalmente conhecida como o Princípio da Ação e Reação."
+},
+{
+"id": 301,
+"category": "Ciência",
+"subcategory": "Biologia",
+"difficulty": "Difícil",
+"question": "Qual estrutura em hélice dupla dentro do núcleo das células carrega as instruções genéticas dos seres vivos?",
+"options": ["ADN (Ácido Desoxirribonucleico)", "ARN (Ácido Ribonucleico)", "Proteína", "Ribossoma"],
+"correctAnswer": "ADN (Ácido Desoxirribonucleico)",
+"explanation": "O ADN foi descrito no seu modelo de hélice dupla por Watson e Crick em 1953."
+},
+{
+"id": 302,
+"category": "Ciência",
+"subcategory": "Medicina em contexto geral",
+"difficulty": "Difícil",
+"question": "Qual médico britânico descobriu a Penicilina em 1928, inaugurando a era dos antibióticos?",
+"options": ["Alexander Fleming", "Louis Pasteur", "Robert Koch", "Edward Jenner"],
+"correctAnswer": "Alexander Fleming",
+"explanation": "Sir Alexander Fleming observou que o bolor Penicillium notatum inibia o crescimento bacteriano."
+},
+{
+"id": 303,
+"category": "Ciência",
+"subcategory": "Astronomia",
+"difficulty": "Difícil",
+"question": "Qual é o maior planeta do nosso Sistema Solar?",
+"options": ["Júpiter", "Saturno", "Neptuno", "Úrano"],
+"correctAnswer": "Júpiter",
+"explanation": "Júpiter é um gigante gasoso com uma massa mais de duas vezes superior à de todos os outros planetas juntos."
+},
+{
+"id": 304,
+"category": "Ciência",
+"subcategory": "Física",
+"difficulty": "Difícil",
+"question": "Qual é a velocidade aproximada da luz no vácuo em quilómetros por segundo?",
+"options": ["300.000 km/s", "150.000 km/s", "1.000.000 km/s", "30.000 km/s"],
+"correctAnswer": "300.000 km/s",
+"explanation": "A velocidade da luz no vácuo (c) é exatamente 299.792,458 km/s."
+},
+{
+"id": 305,
+"category": "Ciência",
+"subcategory": "Química",
+"difficulty": "Muito difícil",
+"question": "Quem criou a primeira versão amplamente aceite da Tabela Periódica dos elementos químicos em 1869?",
+"options": ["Dmitri Mendeleev", "Antoine Lavoisier", "John Dalton", "Marie Curie"],
+"correctAnswer": "Dmitri Mendeleev",
+"explanation": "Mendeleev organizou os elementos por massa atómica e previu com precisão as propriedades de elementos ainda não descobertos."
+},
+{
+"id": 306,
+"category": "Ciência",
+"subcategory": "Biologia",
+"difficulty": "Muito difícil",
+"question": "Como se chama a divisão celular reduzida que produz gâmetas (óvulos e espermatozoides) com metade do número de cromossomas?",
+"options": ["Meiose", "Mitose", "Fagocitose", "Apoptose"],
+"correctAnswer": "Meiose",
+"explanation": "A meiose resulta em quatro células-filhas haploides a partir de uma célula diploide original."
+},
+{
+"id": 307,
+"category": "Ciência",
+"subcategory": "Física",
+"difficulty": "Expert",
+"question": "Qual partícula elementar e bosão de calibre foi descoberto no Grande Colisor de Hadrões (CERN) em 2012, confirmando o mecanismo de massa de partículas?",
+"options": ["Bosão de Higgs", "Quark Top", "Neutrino de Tau", "Píon"],
+"correctAnswer": "Bosão de Higgs",
+"explanation": "O Bosão de Higgs é a manifestação do campo de Higgs que confere massa às partículas subatómicas fundamentais."
+},
+{
+"id": 308,
+"category": "Ciência",
+"subcategory": "Astronomia",
+"difficulty": "Expert",
+"question": "Qual é o limite teórico ao redor de um buraco negro além do qual nada, nem mesmo a luz, pode escapar à sua atração gravítica?",
+"options": ["Horizonte de Eventos", "Esfera de Photon", "Singularidade", "Ergosfera"],
+"correctAnswer": "Horizonte de Eventos",
+"explanation": "O Horizonte de Eventos marca o ponto de não-retorno de um buraco negro."
+},
+{
+"id": 309,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Fácil",
+"question": "Quem é o autor do clássico da literatura infantil 'O Principezinho' (Le Petit Prince)?",
+"options": ["Antoine de Saint-Exupéry", "Jules Verne", "Hans Christian Andersen", "Charles Perrault"],
+"correctAnswer": "Antoine de Saint-Exupéry",
+"explanation": "Saint-Exupéry publicou 'O Principezinho' em 1943, tornando-o um dos livros mais traduzidos no mundo."
+},
+{
+"id": 310,
+"category": "Cultura Geral",
+"subcategory": "Arte",
+"difficulty": "Fácil",
+"question": "Em que museu famoso em Paris se encontra em exposição permanente o quadro Mona Lisa de Leonardo da Vinci?",
+"options": ["Museu do Louvre", "Musée d'Orsay", "Centre Pompidou", "Museu do Prado"],
+"correctAnswer": "Museu do Louvre",
+"explanation": "A Mona Lisa (La Gioconda) é a obra de arte mais visitada no Museu do Louvre em Paris."
+},
+{
+"id": 311,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Fácil",
+"question": "Qual famoso detetive fictício britânico vive no endereço 221B Baker Street em Londres e foi criado por Arthur Conan Doyle?",
+"options": ["Sherlock Holmes", "Hercule Poirot", "Inspector Maigret", "Philip Marlowe"],
+"correctAnswer": "Sherlock Holmes",
+"explanation": "Sherlock Holmes é o mestre da dedução lógica e protagonizou dezenas de contos e romances."
+},
+{
+"id": 312,
+"category": "Cultura Geral",
+"subcategory": "Sociedade",
+"difficulty": "Fácil",
+"question": "Qual moeda única europeia entrou em circulação física em Portugal e noutros países da União Europeia a 1 de janeiro de 2002?",
+"options": ["Euro", "Escudo", "Peseta", "Franco"],
+"correctAnswer": "Euro",
+"explanation": "O Euro substituiu a antiga moeda nacional, o Escudo Português, em 2002."
+},
+{
+"id": 313,
+"category": "Cultura Geral",
+"subcategory": "Arte",
+"difficulty": "Médio",
+"question": "Qual artista espanhol é famoso por ter pintado o monumental painel 'Guernica' denunciando os horrores da Guerra Civil Espanhola?",
+"options": ["Pablo Picasso", "Salvador Dalí", "Joan Miró", "Francisco de Goya"],
+"correctAnswer": "Pablo Picasso",
+"explanation": "Picasso pintou 'Guernica' em 1937 após o bombardeamento da cidade basca de Guernica."
+},
+{
+"id": 314,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Médio",
+"question": "Qual romance monumental do autor russo Lev Tolstói descreve a invasão napoleónica da Rússia em 1812?",
+"options": ["Guerra e Paz", "Anna Karenina", "O Idiota", "Crime e Castigo"],
+"correctAnswer": "Guerra e Paz",
+"explanation": "'Guerra e Paz' é uma das maiores obras-primas da literatura universal."
+},
+{
+"id": 315,
+"category": "Cultura Geral",
+"subcategory": "Tecnologia",
+"difficulty": "Médio",
+"question": "Quem fundou a empresa de tecnologia Microsoft em 1975 juntamente com Paul Allen?",
+"options": ["Bill Gates", "Steve Jobs", "Mark Zuckerberg", "Jeff Bezos"],
+"correctAnswer": "Bill Gates",
+"explanation": "Bill Gates cofundou a Microsoft, tornando-se pioneiro da revolução dos computadores pessoais."
+},
+{
+"id": 316,
+"category": "Cultura Geral",
+"subcategory": "Arte",
+"difficulty": "Médio",
+"question": "Que famoso pintor pós-impressionista holandês cortou parte da sua própria orelha e pintou 'A Noite Estrelada'?",
+"options": ["Vincent van Gogh", "Claude Monet", "Paul Gauguin", "Edvard Munch"],
+"correctAnswer": "Vincent van Gogh",
+"explanation": "Vincent van Gogh pintou obras de cores vibrantes e expressivas no final do século XIX."
+},
+{
+"id": 317,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Difícil",
+"question": "Quem escreveu o clássico romance do século XIX 'Amor de Perdição', marco do Romantismo português?",
+"options": ["Camilo Castelo Branco", "Eça de Queirós", "Almeida Garrett", "Júlio Dinis"],
+"correctAnswer": "Camilo Castelo Branco",
+"explanation": "'Amor de Perdição' (1862) relata a paixão dramática entre Simão Botelho e Teresa de Albuquerque."
+},
+{
+"id": 318,
+"category": "Cultura Geral",
+"subcategory": "Arte",
+"difficulty": "Difícil",
+"question": "Qual famoso teto de capela no Vaticano foi pintado por Michelangelo entre 1508 e 1512 por encomenda do Papa Júlio II?",
+"options": ["Capela Sistina", "Capela dos Scrovegni", "Basílica de São Pedro", "Palácio Apostólico"],
+"correctAnswer": "Capela Sistina",
+"explanation": "O teto da Capela Sistina inclui o famoso fresco 'A Criação de Adão'."
+},
+{
+"id": 319,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Difícil",
+"question": "Qual obra de Eça de Queirós publicada em 1888 satiriza a alta sociedade lisboeta através do romance trágico da família Maia?",
+"options": ["Os Maias", "O Crime do Padre Amaro", "A Relíquia", "O Primo Basílio"],
+"correctAnswer": "Os Maias",
+"explanation": "'Os Maias' é uma das obras mais estudadas do Realismo em Portugal centrada nas figuras de Carlos da Maia e Gonçalo Ramires."
+},
+{
+"id": 320,
+"category": "Cultura Geral",
+"subcategory": "Curiosidades",
+"difficulty": "Muito difícil",
+"question": "Qual filósofo grego foi o mestre de Alexandre, o Grande e discípulo de Platão?",
+"options": ["Aristóteles", "Sócrates", "Epicuro", "Pitágoras"],
+"correctAnswer": "Aristóteles",
+"explanation": "Aristóteles fundou o Liceu em Atenas e lecionou ao jovem príncipe Alexandre da Macedónia."
+},
+{
+"id": 321,
+"category": "Cultura Geral",
+"subcategory": "Literatura",
+"difficulty": "Muito difícil",
+"question": "Quais foram os três principais heterónimos criados pelo poeta português Fernando Pessoa em torno dos quais construiu obras literárias distintas?",
+"options": ["Alberto Caeiro, Ricardo Reis e Álvaro de Campos", "Bernardo Soares, Mário de Sá-Carneiro e Antero de Quental", "Cesário Verde, Alberto Caeiro e Junqueiro", "Ricardo Reis, Camilo Pessanha e Bento de Jesus"],
+"correctAnswer": "Alberto Caeiro, Ricardo Reis e Álvaro de Campos",
+"explanation": "Pessoa criou uma vasta rede heteronímica com biografias e estilos poéticos próprios para cada autor fictício."
+},
+{
+"id": 322,
+"category": "Cultura Geral",
+"subcategory": "Arte",
+"difficulty": "Expert",
+"question": "Qual artista e pintora expressionista abstrata portuguesa radicada em Paris produziu a célebre série de pinturas 'A Biblioteca'?",
+"options": ["Maria Helena Vieira da Silva", "Paula Rego", "Graça Morais", "Menez"],
+"correctAnswer": "Maria Helena Vieira da Silva",
+"explanation": "Vieira da Silva é uma das mais importantes artistas plásticas portuguesas do século XX no abstracionismo mundial."
+},
+{
+"id": 323,
+"category": "Modo Maluco",
+"subcategory": "Humor",
+"difficulty": "Fácil",
+"question": "Se o Zé tem 5 tremoços e o primo pede-lhe 2, com quantas minis de cerveja deve o Zé acompanhar os 3 tremoços restantes?",
+"options": ["Pelo menos uma bem fresca", "Zero", "5 litros de água", "Nenhuma porque o Zé está de dieta"],
+"correctAnswer": "Pelo menos uma bem fresca",
+"explanation": "Tradição sagrada de tasca portuguesa: tremoço sem cerveja fresca ao lado é um sacrilégio moral."
+},
+{
+"id": 324,
+"category": "Modo Maluco",
+"subcategory": "Absurdo com lógica",
+"difficulty": "Fácil",
+"question": "Qual é a única frase que consegue parar instantaneamente qualquer português que esteja prestes a sair de casa?",
+"options": ["'Leste a luz e a água?'", "'Tens a chave da porta?'", "'Olha que vai chover!'", "'Leva um casaco que vai arrefecer!'"],
+"correctAnswer": "'Leva um casaco que vai arrefecer!'",
+"explanation": "A sabedoria ancestral de mãe portuguesa que prevê mudanças meteorológicas imprevisíveis."
+},
+{
+"id": 325,
+"category": "Modo Maluco",
+"subcategory": "Rasteiras",
+"difficulty": "Fácil",
+"question": "Se um galo puser um ovo exatamente em cima do cume do telhado do vizinho, para que lado cai o ovo?",
+"options": ["Galos não põem ovos!", "Para a esquerda", "Para a direita", "Parta-se no meio"],
+"correctAnswer": "Galos não põem ovos!",
+"explanation": "Galos são machos e portanto não põem ovos!"
+},
+{
+"id": 326,
+"category": "Modo Maluco",
+"subcategory": "Cultura popular",
+"difficulty": "Médio",
+"question": "O que acontece se responderes 'Já vou!' a uma mãe portuguesa quando ela te chama para almoçar?",
+"options": ["Ela volta a chamar com o nome completo e o tom aumenta 200%", "O almoço arrefece de forma instantânea", "Ganha-se um prémio", "Ela vem trazer o prato ao quarto"],
+"correctAnswer": "Ela volta a chamar com o nome completo e o tom aumenta 200%",
+"explanation": "O uso do nome completo pela mãe é o sinal universal de perigo iminente na cultura lusitana."
+},
+{
+"id": 327,
+"category": "Modo Maluco",
+"subcategory": "Situacoes do quotidiano",
+"difficulty": "Médio",
+"question": "Qual é a utilidade universal da caixa plástica de gelado de fofura que está no congelador da avó?",
+"options": ["Guardar feijão cozido ou sopa congelada", "Guardar gelado de baunilha", "Guardar moedas", "Guardar agulhas e linhas"],
+"correctAnswer": "Guardar feijão cozido ou sopa congelada",
+"explanation": "A desilusão universal de abrir uma caixa de gelado na avó e encontrar feijão congelado de 2018."
+},
+{
+"id": 328,
+"category": "Modo Maluco",
+"subcategory": "Rasteiras",
+"difficulty": "Médio",
+"question": "Alguns meses têm 31 dias, outros têm 30 dias. Quantos meses têm 28 dias?",
+"options": ["Todos os 12 meses", "Apenas 1 mês (Fevereiro)", "Nenhum mês", "Apenas nos anos bissextos"],
+"correctAnswer": "Todos os 12 meses",
+"explanation": "Todos os doze meses do ano têm pelo menos 28 dias!"
+},
+{
+"id": 329,
+"category": "Modo Maluco",
+"subcategory": "Inesperadas",
+"difficulty": "Difícil",
+"question": "Em Portugal, se fores ao restaurante e pedires 'uma imperial' no Norte ou 'um fino' em Lisboa, o que é que o empregado te traz?",
+"options": ["Um olhar de julgamento e uma cerveja de pressão", "Um copo de vinho do Porto", "Um café curto", "Uma conta mais cara"],
+"correctAnswer": "Um olhar de julgamento e uma cerveja de pressão",
+"explanation": "Pedir 'fino' em Lisboa ou 'imperial' no Porto pode gerar confusão cultural linguística, mas o líquido dourado é o mesmo."
+},
+{
+"id": 330,
+"category": "Modo Maluco",
+"subcategory": "Absurdo com lógica",
+"difficulty": "Difícil",
+"question": "Se um avião cair exatamente na linha de fronteira entre Portugal e Espanha, onde são enterrados os sobreviventes?",
+"options": ["Sobreviventes não se enterram!", "Em Portugal", "Em Espanha", "Na no man's land"],
+"correctAnswer": "Sobreviventes não se enterram!",
+"explanation": "Sobreviventes estão vivos, por isso não se enterram!"
+},
+{
+"id": 331,
+"category": "Modo Maluco",
+"subcategory": "Cultura popular",
+"difficulty": "Muito difícil",
+"question": "Qual é a fórmula matemática exata usada pelos portugueses para decidir se vale a pena tirar o casaco dentro de casa no Inverno?",
+"options": ["Se vires o teu próprio hálito a sair da boca, liga o aquecedor", "Ligar o ar condicionado no máximo", "Usar t-shirt e calções", "Abrir a janela para entrar calor"],
+"correctAnswer": "Se vires o teu próprio hálito a sair da boca, liga o aquecedor",
+"explanation": "O isolamento térmico das casas portuguesas é lendário e o Inverno interior é uma prova de sobrevivência."
+},
+{
+"id": 332,
+"category": "Modo Maluco",
+"subcategory": "Humor",
+"difficulty": "Expert",
+"question": "Se um condutor com um carro comercial de dois lugares estiver parado numa rotunda em Portugal, quem tem prioridade?",
+"options": ["Quem já estiver dentro da rotunda (exceto se for um pisca inventado)", "O comercial, porque vai com pressa do trabalho", "Ninguém, ficam ambos a buzinar", "O peão no passeio"],
+"correctAnswer": "Quem já estiver dentro da rotunda (exceto se for um pisca inventado)",
+"explanation": "Segundo o Código da Estrada, a prioridade é de quem circula na rotunda, por muito que o carro comercial tente cortar a via."
+}
 ]
