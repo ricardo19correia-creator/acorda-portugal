@@ -10,7 +10,6 @@ import { DistrictRanking } from '@/components/district-ranking'
 import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
 import { SiteFooter } from '@/components/site-footer'
-import { GoogleLogin } from '@/components/auth/google-login'
 
 export default function Page() {
   return (
