@@ -1,0 +1,752 @@
+[
+  {
+    "id": 1,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é a capital de Portugal?",
+    "options": [
+      "Porto",
+      "Lisboa",
+      "Coimbra",
+      "Faro"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Lisboa é a capital e a cidade mais populosa de Portugal.",
+    "points": 100
+  },
+  {
+    "id": 2,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual era a moeda oficial de Portugal antes da introdução do Euro?",
+    "options": [
+      "Peseta",
+      "Escudo",
+      "Cruzeiro",
+      "Franco"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O escudo português foi a moeda de Portugal até ser substituído pelo euro em 2002.",
+    "points": 100
+  },
+  {
+    "id": 3,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é o oceano que banha a costa ocidental e meridional de Portugal continental?",
+    "options": [
+      "Oceano Pacífico",
+      "Oceano Índico",
+      "Oceano Atlântico",
+      "Mar Mediterrâneo"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Portugal continental é banhado a oeste e a sul pelo Oceano Atlântico.",
+    "points": 100
+  },
+  {
+    "id": 4,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual destes monumentos emblemáticos se situa na freguesia de Belém, em Lisboa?",
+    "options": [
+      "Torre de Belém",
+      "Mosteiro de Santa Maria da Vitória",
+      "Templo Romano de Évora",
+      "Castelo de Guimarães"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A Torre de Belém é um dos monumentos mais icónicos de Lisboa, construída no século XVI.",
+    "points": 100
+  },
+  {
+    "id": 5,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é o prato tradicional português feito com bacalhau desfiado, batata palha e ovo?",
+    "options": [
+      "Bacalhau à Gomes de Sá",
+      "Bacalhau à Brás",
+      "Bacalhau com Natas",
+      "Bacalhau Espiritual"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O bacalhau à Brás é uma receita clássica da culinária portuguesa.",
+    "points": 100
+  },
+  {
+    "id": 6,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Como se chama o estilo musical tradicional português reconhecido como Património Cultural Imaterial da Humanidade?",
+    "options": [
+      "Pimba",
+      "Cante Alentejano",
+      "Fado",
+      "Rancho Folclórico"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O Fado é a expressão musical emblemática da alma portuguesa.",
+    "points": 100
+  },
+  {
+    "id": 7,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual dos seguintes arquipélagos é uma Região Autónoma de Portugal localizada a sul do território continental?",
+    "options": [
+      "Açores",
+      "Madeira",
+      "Canárias",
+      "Cabo Verde"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Região Autónoma da Madeira situa-se no Oceano Atlântico, a sudoeste da costa portuguesa.",
+    "points": 100
+  },
+  {
+    "id": 8,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é o rio mais extenso que atravessa Portugal, desaguando no oceano Atlântico junto a Lisboa?",
+    "options": [
+      "Douro",
+      "Minho",
+      "Tejo",
+      "Guadiana"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O rio Tejo nasce em Espanha e deságua no estuário em Lisboa.",
+    "points": 100
+  },
+  {
+    "id": 9,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual destes símbolos artesanais coloridos é frequentemente associado aos Lenços de Minho e à cultura popular portuguesa?",
+    "options": [
+      "Galo de Barcelos",
+      "Andorinha de Bordallo",
+      "Boneco de Estremoz",
+      "Ovelha Choupeira"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O Galo de Barcelos é um dos símbolos turísticos e culturais mais populares de Portugal.",
+    "points": 100
+  },
+  {
+    "id": 10,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é o distrito mais a norte de Portugal continental?",
+    "options": [
+      "Braga",
+      "Bragança",
+      "Viana do Castelo",
+      "Porto"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Viana do Castelo é o distrito situado mais a noroeste do país.",
+    "points": 100
+  },
+  {
+    "id": 11,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual foi a primeira ponte sobre o rio Tejo construída em Lisboa?",
+    "options": [
+      "Ponte Vasco da Gama",
+      "Ponte 25 de Abril",
+      "Ponte do Ribatejo",
+      "Ponte de Vila Franca"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Ponte 25 de Abril foi inaugurada em 1966, inicialmente com o nome de Ponte Salazar.",
+    "points": 100
+  },
+  {
+    "id": 12,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Qual é a especialidade de pastelaria tradicional originária da vila de Sintra?",
+    "options": [
+      "Pastel de Belém",
+      "Queijada de Sintra",
+      "Ovos Moles",
+      "Pão de Ló de Ovar"
+    ],
+    "correctAnswer": 1,
+    "explanation": "As queijadas de Sintra são um doce conventual secular muito famoso na região.",
+    "points": 100
+  },
+  {
+    "id": 13,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Em que mês se celebram tradicionalmente as festas dos santos populares em Lisboa, com destaque para Santo António?",
+    "options": [
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto"
+    ],
+    "correctAnswer": 1,
+    "explanation": "As Festas de Lisboa decorrem ao longo do mês de junho, tendo o seu auge na noite de 12 para 13 de junho.",
+    "points": 100
+  },
+  {
+    "id": 14,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "A região demarcada do Douro é mundialmente famosa pela produção de que tipo de vinho?",
+    "options": [
+      "Vinho Verde",
+      "Vinho do Porto",
+      "Vinho da Madeira",
+      "Vinho do Alentejo"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O Vinho do Porto é produzido exclusivamente na Região Demarcada do Douro.",
+    "points": 100
+  },
+  {
+    "id": 15,
+    "category": "Portugal",
+    "difficulty": "Fácil",
+    "question": "Quem foi o primeiro Rei de Portugal?",
+    "options": [
+      "D. Dinis",
+      "D. João I",
+      "D. Afonso Henriques",
+      "D. Manuel I"
+    ],
+    "correctAnswer": 2,
+    "explanation": "D. Afonso Henriques foi o primeiro soberano de Portugal, aclamado após a fundação do reino.",
+    "points": 100
+  },
+  {
+    "id": 16,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é a montanha mais alta de Portugal continental?",
+    "options": [
+      "Montanha do Pico",
+      "Torre (Serra da Estrela)",
+      "Serra do Gerês",
+      "Serra de Monchique"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Torre, situada na Serra da Estrela, é o ponto mais alto de Portugal continental com quase 2000 metros.",
+    "points": 200
+  },
+  {
+    "id": 17,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual escritor português foi distinguido com o Prémio Nobel da Literatura em 1998?",
+    "options": [
+      "Eça de Queirós",
+      "Fernando Pessoa",
+      "José Saramago",
+      "António Lobo Antunes"
+    ],
+    "correctAnswer": 2,
+    "explanation": "José Saramago recebeu o Prémio Nobel da Literatura em 1998, sendo o único autor de língua portuguesa com esta distinção.",
+    "points": 200
+  },
+  {
+    "id": 18,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Em que ano foi assinado o Tratado de Tordesilhas, que dividiu o mundo entre Portugal e Espanha?",
+    "options": [
+      "1415",
+      "1494",
+      "1500",
+      "1580"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O Tratado de Tordesilhas foi assinado em 1494, estabelecendo a linha de demarcação dos territórios ultramarinos.",
+    "points": 200
+  },
+  {
+    "id": 19,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é o autor da épica obra literária Os Lusíadas?",
+    "options": [
+      "Gil Vicente",
+      "Luís de Camões",
+      "Almeida Garrett",
+      "Fernão Lopes"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Luís de Camões escreveu Os Lusíadas, publicado em 1572, celebrando os Descobrimentos portugueses.",
+    "points": 200
+  },
+  {
+    "id": 20,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Quantas ilhas principais compõem o arquipélago dos Açores?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O arquipélago dos Açores é constituído por 9 ilhas habitadas, divididas pelos grupos oriental, central e ocidental.",
+    "points": 200
+  },
+  {
+    "id": 21,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Que cidade portuguesa é frequentemente apelidada de Veneza de Portugal devido aos seus canais e barcos moliceiros?",
+    "options": [
+      "Figueira da Foz",
+      "Aveiro",
+      "Viana do Castelo",
+      "Setúbal"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Aveiro é conhecida pelos seus canais urbanos e pelos tradicionais barcos moliceiros.",
+    "points": 200
+  },
+  {
+    "id": 22,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual foi o rei português que mandou erguer o Mosteiro de Santa Maria da Vitória, na Batalha?",
+    "options": [
+      "D. Dinis",
+      "D. João I",
+      "D. Manuel I",
+      "D. João II"
+    ],
+    "correctAnswer": 1,
+    "explanation": "D. João I mandou construir o Mosteiro da Batalha em cumprimento de uma promessa feita antes da Batalha de Aljubarrota.",
+    "points": 200
+  },
+  {
+    "id": 23,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é o rio que banha a cidade do Porto e Vila Nova de Gaia antes de desaguar no Atlântico?",
+    "options": [
+      "Tejo",
+      "Douro",
+      "Mondego",
+      "Lima"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O rio Douro deságua no Oceano Atlântico entre o Porto e Vila Nova de Gaia, famoso pelas suas pontes.",
+    "points": 200
+  },
+  {
+    "id": 24,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Em que concelho português ocorreram as célebres aparições marianas em 1917?",
+    "options": [
+      "Ourém",
+      "Santarém",
+      "Tomar",
+      "Leiria"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Fátima pertence ao concelho de Ourém (distrito de Santarém), sendo um dos maiores santuários marianos do mundo.",
+    "points": 200
+  },
+  {
+    "id": 25,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual destas artistas plásticas portuguesas alcançou enorme projeção internacional com as suas figuras e pinturas narrativas expressivas?",
+    "options": [
+      "Maria Helena Vieira da Silva",
+      "Paula Rego",
+      "Salette Tavares",
+      "Julieta Pessanha"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Dame Paula Rego foi uma das pintoras portuguesas mais celebradas a nível internacional.",
+    "points": 200
+  },
+  {
+    "id": 26,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual árvore é considerada árvore nacional de Portugal, sendo o país o maior produtor mundial do seu produto derivado?",
+    "options": [
+      "Eucalipto",
+      "Pinheiro-bravo",
+      "Sobreiro",
+      "Oliveira"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O sobreiro é a árvore nacional de Portugal e a principal fonte de cortiça.",
+    "points": 200
+  },
+  {
+    "id": 27,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Em que ano ocorreu o grande terramoto que destruiu boa parte de Lisboa?",
+    "options": [
+      "1640",
+      "1755",
+      "1808",
+      "1910"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O sismo de 1755 devastou Lisboa, impulsionando a reconstrução pombalina da Baixa.",
+    "points": 200
+  },
+  {
+    "id": 28,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Como se chama o estádio de futebol que serve de casa ao Futebol Clube do Porto?",
+    "options": [
+      "Estádio da Luz",
+      "Estádio José Alvalade",
+      "Estádio do Dragão",
+      "Estádio D. Afonso Henriques"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O Estádio do Dragão foi inaugurado em 2003 e é a casa oficial do FC Porto.",
+    "points": 200
+  },
+  {
+    "id": 29,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é o ponto mais alto de todo o território português?",
+    "options": [
+      "Torre na Serra da Estrela",
+      "Montanha do Pico nos Açores",
+      "Pico Ruivo na Madeira",
+      "Serra do Gerês"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Montanha do Pico, nos Açores, eleva-se a cerca de 2351 metros, sendo o ponto mais alto de Portugal.",
+    "points": 200
+  },
+  {
+    "id": 30,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é a ilha mais populosa do arquipélago dos Açores?",
+    "options": [
+      "Terceira",
+      "São Miguel",
+      "Faial",
+      "Santa Maria"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A ilha de São Miguel abriga a maior população do arquipélago e a cidade de Ponta Delgada.",
+    "points": 200
+  },
+  {
+    "id": 31,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual foi o arquiteto português galardoado com o Prémio Pritzker que projetou o Pavilhão de Portugal na Expo 98?",
+    "options": [
+      "Eduardo Souto de Moura",
+      "Álvaro Siza Vieira",
+      "Fernando Távora",
+      "Manuel Salgado"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Álvaro Siza Vieira é um dos arquitetos portugueses mais prestigiados mundialmente, vencedor do Pritzker.",
+    "points": 200
+  },
+  {
+    "id": 32,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Em que cidade portuguesa se situa uma das universidades mais antigas do mundo em funcionamento contínuo?",
+    "options": [
+      "Lisboa",
+      "Porto",
+      "Coimbra",
+      "Évora"
+    ],
+    "correctAnswer": 2,
+    "explanation": "A Universidade de Coimbra foi fundada em 1290 e é Património Mundial da UNESCO.",
+    "points": 200
+  },
+  {
+    "id": 33,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual destes rios importantes nasce integralmente em território português?",
+    "options": [
+      "Tejo",
+      "Douro",
+      "Mondego",
+      "Guadiana"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O rio Mondego nasce na Serra da Estrela e é o maior rio inteiramente português.",
+    "points": 200
+  },
+  {
+    "id": 34,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Qual é o famoso doce tradicional de massa folhada recheada com feijão e amêndoa, típico de Torres Vedras?",
+    "options": [
+      "Pastel de Tentugal",
+      "Pastel de Feijão",
+      "Travesseiro de Sintra",
+      "Pastel de Nata"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O pastel de feijão é uma iguaria secular originária da cidade de Torres Vedras.",
+    "points": 200
+  },
+  {
+    "id": 35,
+    "category": "Portugal",
+    "difficulty": "Médio",
+    "question": "Que dinastia sucedeu à Dinastia de Avis em Portugal na sequência da crise dinástica de 1580?",
+    "options": [
+      "Dinastia de Bragança",
+      "Dinastia Filipina",
+      "Primeira República",
+      "Dinastia Afonsina"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Com a morte do Cardeal D. Henrique sem herdeiros, Filipe II de Espanha ascendeu ao trono, iniciando a Dinastia Filipina.",
+    "points": 200
+  },
+  {
+    "id": 36,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Em que ano foi assinado o Tratado de Londres, que deu origem à Aliança Luso-Britânica?",
+    "options": [
+      "1143",
+      "1297",
+      "1373",
+      "1580"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O Tratado de Londres foi assinado em 1373, consolidando a histórica aliança entre Portugal e a Inglaterra.",
+    "points": 300
+  },
+  {
+    "id": 37,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Qual navegador português comandou a armada que chegou pela primeira vez a Calecute, na Índia, em 1498?",
+    "options": [
+      "Bartolomeu Dias",
+      "Vasco da Gama",
+      "Pedro Álvares Cabral",
+      "Afonso de Albuquerque"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Vasco da Gama completou a viagem marítima para a Índia em 1498, abrindo a rota comercial marítima para o Oriente.",
+    "points": 300
+  },
+  {
+    "id": 38,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Qual é o nome exato do ponto geodésico mais alto da Serra da Estrela?",
+    "options": [
+      "Malhão da Serra",
+      "Torre",
+      "Penhas da Saúde",
+      "Cântaro Magro"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A Torre é o ponto mais alto de Portugal continental, coroada por uma construção em pedra e uma antena.",
+    "points": 300
+  },
+  {
+    "id": 39,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Em que cidade portuguesa nasceu o Infante D. Henrique, o Navegador, em 1394?",
+    "options": [
+      "Lisboa",
+      "Viseu",
+      "Porto",
+      "Coimbra"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O Infante D. Henrique nasceu na cidade do Porto, na zona histórica da Ribeira.",
+    "points": 300
+  },
+  {
+    "id": 40,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Como é conhecido o cabo que constitui o ponto mais ocidental da Europa continental?",
+    "options": [
+      "Cabo de São Vicente",
+      "Cabo Carvoeiro",
+      "Cabo da Roca",
+      "Cabo Espichel"
+    ],
+    "correctAnswer": 2,
+    "explanation": "O Cabo da Roca, no Parque Natural Sintra-Cascais, é o ponto mais ocidental da Europa continental.",
+    "points": 300
+  },
+  {
+    "id": 41,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Qual foi o tratado internacional assinado em 1668 que pôs formalmente fim à Guerra da Restauração?",
+    "options": [
+      "Tratado de Lisboa de 1668",
+      "Tratado dos Pirenéus",
+      "Tratado de Medina del Campo",
+      "Paz de Westfália"
+    ],
+    "correctAnswer": 0,
+    "explanation": "O Tratado de Lisboa de 1668, mediado pela coroa inglesa, selou o reconhecimento espanhol da independência de Portugal.",
+    "points": 300
+  },
+  {
+    "id": 42,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "A quem é atribuída a autoria dos famosos Painéis de São Vicente de Fora?",
+    "options": [
+      "Nuno Gonçalves",
+      "Vasco Fernandes",
+      "Jorge Afonso",
+      "Cristóvão de Figueiredo"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Nuno Gonçalves foi o pintor régio a quem se atribui a autoria dos Painéis de São Vicente de Fora.",
+    "points": 300
+  },
+  {
+    "id": 43,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Qual é o rio que estabelece a fronteira natural noroeste entre Portugal e a Galiza?",
+    "options": [
+      "Douro",
+      "Minho",
+      "Lima",
+      "Âncora"
+    ],
+    "correctAnswer": 1,
+    "explanation": "O rio Minho demarca grande parte da fronteira norte entre Portugal e a região autónoma da Galiza.",
+    "points": 300
+  },
+  {
+    "id": 44,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Quantos distritos administrativos possui atualmente Portugal continental?",
+    "options": [
+      "16",
+      "18",
+      "20",
+      "22"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Portugal continental está administrativamente dividido em 18 distritos.",
+    "points": 300
+  },
+  {
+    "id": 45,
+    "category": "Portugal",
+    "difficulty": "Difícil",
+    "question": "Qual foi a primeira cidade portuguesa a ser designada Capital Europeia da Cultura?",
+    "options": [
+      "Porto",
+      "Coimbra",
+      "Lisboa",
+      "Guimarães"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Lisboa foi Capital Europeia da Cultura em 1994, sendo seguida pelo Porto em 2001 e Guimarães em 2012.",
+    "points": 300
+  },
+  {
+    "id": 46,
+    "category": "Portugal",
+    "difficulty": "Expert",
+    "question": "Qual é a batalha lendária associada tradicionalmente ao mito fundacional e à proclamação da independência de Portugal em 1139?",
+    "options": [
+      "Batalha de Ourique",
+      "Batalha de Aljubarrota",
+      "Batalha de São Mamede",
+      "Batalha do Salado"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A Batalha de Ourique (1139) é o marco histórico-lendário associado à aclamação de D. Afonso Henriques como primeiro Rei de Portugal.",
+    "points": 500
+  },
+  {
+    "id": 47,
+    "category": "Portugal",
+    "difficulty": "Expert",
+    "question": "Quem foi o primeiro Vice-Rei e Governador da Índia portuguesa, nomeado em 1505?",
+    "options": [
+      "Afonso de Albuquerque",
+      "Francisco de Almeida",
+      "Nuno da Cunha",
+      "Pero da Covilhã"
+    ],
+    "correctAnswer": 1,
+    "explanation": "D. Francisco de Almeida foi o primeiro governador e vice-rei da Índia, estabelecendo a presença estratégica portuguesa no Oceano Índico.",
+    "points": 500
+  },
+  {
+    "id": 48,
+    "category": "Portugal",
+    "difficulty": "Expert",
+    "question": "Em que ano exato foi formalmente decretada pelo Marquês de Pombal a proibição de introdução de novos escravos em Portugal continental?",
+    "options": [
+      "1701",
+      "1761",
+      "1799",
+      "1836"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Em 1761, o Marquês de Pombal baniu a entrada de novos escravos em Portugal continental e ilhas adjacentes.",
+    "points": 500
+  },
+  {
+    "id": 49,
+    "category": "Portugal",
+    "difficulty": "Expert",
+    "question": "Qual é o romancista máximo do Ultra-romantismo português e autor da obra Amor de Perdição?",
+    "options": [
+      "Alexandre Herculano",
+      "Camilo Castelo Branco",
+      "Júlio Dinis",
+      "Antero de Quental"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Camilo Castelo Branco escreveu Amor de Perdição em 1862, sendo um dos expoentes máximos do romantismo trágico em Portugal.",
+    "points": 500
+  },
+  {
+    "id": 50,
+    "category": "Portugal",
+    "difficulty": "Expert",
+    "question": "Em que ano o médico e neurologista português Egas Moniz foi galardoado com o Prémio Nobel da Fisiologia ou Medicina?",
+    "options": [
+      "1927",
+      "1935",
+      "1949",
+      "1956"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Egas Moniz recebeu o Prémio Nobel em 1949 pelo desenvolvimento da angiografia cerebral e da leucotomia pré-frontal.",
+    "points": 500
+  }
+]
