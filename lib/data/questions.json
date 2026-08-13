@@ -1,4 +1,4 @@
-[
+﻿[
 {
 "id": 1,
 "category": "Portugal",
@@ -1884,7 +1884,7 @@
 "category": "Distritos de Portugal",
 "subcategory": "Norte",
 "difficulty": "Difícil",
-"question": "Qual destes municípios NÃO pertence ao distrito do Porto?",
+"question": "Qual destes municípios NÁO pertence ao distrito do Porto?",
 "options": ["Espinho", "Matosinhos", "Gondomar", "Vila do Conde"],
 "correctAnswer": "Espinho",
 "explanation": "Apesar de estar na Área Metropolitana do Porto, Espinho pertence administrativamente ao distrito de Aveiro."
