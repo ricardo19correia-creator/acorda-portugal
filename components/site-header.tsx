@@ -7,7 +7,7 @@ import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { cn } from '@/lib/utils'
 
-const NAV = [
+const NAV_HOME = [
   { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
   { label: 'Ranking', href: '#ranking', icon: Trophy },
   { label: 'Categorias', href: '#categorias', icon: LayoutGrid },
@@ -15,6 +15,13 @@ const NAV = [
 ]
 
 export function SiteHeader() {
+  const NAV = [
+    { label: 'Jogar', href: '/categorias', icon: Gamepad2 },
+    { label: 'Ranking', href: '/#ranking', icon: Trophy },
+    { label: 'Categorias', href: '/#categorias', icon: LayoutGrid },
+    { label: 'Perfil', href: '/#perfil', icon: User },
+  ]
+
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -51,7 +58,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <PlayButton size="md" label="Jogar" className="ml-2 rounded-xl px-5 py-2.5 text-sm" />
+          <PlayButton href="/categorias" size="md" label="Jogar" className="ml-2 rounded-xl px-5 py-2.5 text-sm" />
         </nav>
 
         {/* Mobile toggle */}
@@ -86,7 +93,7 @@ export function SiteHeader() {
           </ul>
           <PlayButton
             label="Jogar agora"
-            href="/jogar"
+            href="/categorias"
             className="mt-3 w-full rounded-xl py-4 text-base"
           />
         </nav>

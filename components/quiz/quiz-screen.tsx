@@ -1,5 +1,6 @@
 'use client'
 
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
@@ -12,6 +13,7 @@ Lightbulb,
 } from 'lucide-react'
 
 import {
+  ALL_QUIZ_QUESTIONS,
 MODO_MALUCO_QUESTIONS,
 type QuizQuestion,
 } from '@/lib/game-data'
@@ -45,10 +47,15 @@ const j = Math.floor(Math.random() * (i + 1))
 return copy
 }
 
-function createGameQuestions(): GameQuestion[] {
-const selected = shuffle(MODO_MALUCO_QUESTIONS).slice(
+function createGameQuestions(category: string): GameQuestion[] {
+  const questionPool =
+    category === 'Modo Maluco'
+      ? MODO_MALUCO_QUESTIONS
+      : ALL_QUIZ_QUESTIONS.filter((q) => q.category === category)
+
+const selected = shuffle(questionPool).slice(
 0,
-Math.min(QUESTIONS_PER_GAME, MODO_MALUCO_QUESTIONS.length),
+    Math.min(QUESTIONS_PER_GAME, questionPool.length),
 )
 
 return selected.map((question, index) => {
@@ -90,9 +97,11 @@ return {
 })
 }
 
-export function QuizScreen() {
+export function QuizScreen({ category }: { category: string }) {
+  const router = useRouter()
+
 const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
-createGameQuestions,
+    () => createGameQuestions(category),
 )
 
 const total = quizQuestions.length
@@ -183,7 +192,7 @@ setPhase('answering')
 }
 
 const restart = () => {
-setQuizQuestions(createGameQuestions())
+setQuizQuestions(createGameQuestions(category))
 setStep(0)
 setSelected(null)
 setSeconds(MAX_SECONDS)
@@ -215,7 +224,8 @@ bestStreak,
 
 if (!q) {
 return ( <div className="flex min-h-screen items-center justify-center px-6"> <div className="max-w-md text-center"> <h1 className="font-display text-2xl font-bold">
-Não existem perguntas do Modo Maluco. </h1>
+        Não existem perguntas para a categoria &quot;{category}&quot;.
+      </h1>
 
       <p className="mt-3 text-muted-foreground">
         Verifica o ficheiro lib/game-data.ts.
@@ -284,7 +294,7 @@ return ( <div className="mx-auto min-h-screen w-full max-w-3xl px-4 py-6 sm:px-6
   {/* MODO MALUCO */}
   <div className="mt-6 text-center">
     <span className="rounded-full border border-flag-red/40 bg-flag-red/10 px-4 py-2 text-sm font-bold text-flag-red">
-      🤪 Modo Maluco
+        🤪 {category}
     </span>
   </div>
 

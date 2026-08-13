@@ -332,6 +332,8 @@ export type QuizQuestion = {
   points: number
 }
 
+import questions from './data/questions.json'
+
 export const MODO_MALUCO_QUESTIONS: QuizQuestion[] = [
   {
     "category": "Modo Maluco",
@@ -3716,3 +3718,6 @@ export const ALL_QUIZ_QUESTIONS: QuizQuestion[] = [
   ...DEMO_QUIZ,
   ...MODO_MALUCO_QUESTIONS,
 ]
+const allQuestions = questions.map((q, i) => ({ ...q, index: i, total: questions.length, points: 100, options: q.options.map((text, i) => ({ key: ['A', 'B', 'C', 'D'][i] as 'A'|'B'|'C'|'D', text })), correct: ['A', 'B', 'C', 'D'][q.correctAnswer] as 'A'|'B'|'C'|'D' }))
+
+export const ALL_QUIZ_QUESTIONS: QuizQuestion[] = allQuestions

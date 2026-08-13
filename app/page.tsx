@@ -1,7 +1,6 @@
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
-import { PlayerHub } from '@/components/player-hub'
 import { HowItWorks } from '@/components/how-it-works'
 import { Categories } from '@/components/categories'
 import { Events } from '@/components/events'
@@ -21,7 +20,6 @@ export default function Page() {
 
         <main>
           <Hero />
-          <PlayerHub />
           <HowItWorks />
           <Categories />
           <Events />
