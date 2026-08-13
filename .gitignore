@@ -16,3 +16,5 @@ node_modules
 data/geo-portugal.zip
 data/geo-portugal/geo-portugal/*.csv
 data/geo-portugal/__MACOSX/
+.vercel
+.env*
