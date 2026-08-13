@@ -151,19 +151,22 @@ if (phase !== 'answering' || !q) return
 )
 
 useEffect(() => {
-if (phase !== 'answering') return
+  if (phase !== 'answering') return
 
-if (seconds <= 0) {
-  reveal(null)
-  return
-}
+  if (seconds <= 0) {
+    return
+  }
 
-const timer = setTimeout(() => {
-  setSeconds((current) => current - 1)
-}, 1000)
+  const timer = setTimeout(() => {
+    if (seconds <= 1) {
+      reveal(null)
+      return
+    }
 
-return () => clearTimeout(timer)
+    setSeconds((current) => current - 1)
+  }, 1000)
 
+  return () => clearTimeout(timer)
 }, [phase, seconds, reveal])
 
 const next = () => {
