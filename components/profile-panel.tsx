@@ -7,7 +7,7 @@ import {
   sendPasswordResetEmail,
   signOut,
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
   updateProfile,
   User,
 } from 'firebase/auth'
@@ -36,6 +36,11 @@ type FormData = {
 }
 
 const FIRESTORE_TIMEOUT_MS = 10_000
+
+type ProfileSyncFailure = {
+  operation: 'getDoc' | 'setDoc'
+  cause: unknown
+}
 
 function createDefaultUserProfile(user: User): UserProfile {
   return {
@@ -71,49 +76,96 @@ function withTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
   })
 }
 
-function mapAuthError(error: any, action: 'signin' | 'signup' | 'reset') {
-  const code = error?.code ?? error?.message ?? ''
+function getFirestoreDiagnostic(error: unknown) {
+  const firestoreError = error as { code?: unknown; message?: unknown }
+  const code = typeof firestoreError?.code === 'string' ? firestoreError.code : ''
+  const message = typeof firestoreError?.message === 'string' ? firestoreError.message : ''
+
+  return {
+    code,
+    message,
+    display: code || message || 'Erro Firestore sem código.',
+  }
+}
+
+function isFirestoreUnavailable(error: unknown) {
+  const { code } = getFirestoreDiagnostic(error)
+  return code === 'unavailable'
+}
+
+function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
+  const firebaseError = error as { code?: unknown; message?: unknown }
+  const code = typeof firebaseError?.code === 'string' ? firebaseError.code : ''
+  const message = typeof firebaseError?.message === 'string' ? firebaseError.message : ''
+  const diagnostic = code || message || 'Erro Firebase sem código.'
+
+  // Keep the Firebase diagnostic visible while the Auth configuration is being
+  // validated. In particular, auth/unauthorized-domain and
+  // auth/operation-not-allowed must not be hidden behind a generic message.
+  console.error(`Erro Firebase Auth (${action}):`, {
+    code: code || undefined,
+    message: message || undefined,
+    error,
+  })
+
+  const withDiagnostic = (userMessage: string) => `${userMessage} [Firebase: ${diagnostic}]`
 
   if (action === 'signup') {
     if (code.includes('auth/email-already-in-use')) {
-      return 'Este email já tem uma conta.'
+      return withDiagnostic('Este email já tem uma conta.')
     }
     if (code.includes('auth/invalid-email')) {
-      return 'O email não é válido.'
+      return withDiagnostic('O email não é válido.')
     }
     if (code.includes('auth/weak-password')) {
-      return 'A palavra-passe deve ter pelo menos 6 caracteres.'
+      return withDiagnostic('A palavra-passe deve ter pelo menos 6 caracteres.')
     }
   }
 
   if (action === 'signin') {
+    if (code.includes('auth/popup-blocked')) {
+      return withDiagnostic('O navegador bloqueou a janela de autenticação. O login Google usa agora redirecionamento seguro.')
+    }
+    if (code.includes('auth/popup-closed-by-user')) {
+      return withDiagnostic('A janela de autenticação foi fechada antes de terminar.')
+    }
+    if (code.includes('auth/cancelled-popup-request')) {
+      return withDiagnostic('Foi cancelado um pedido de autenticação Google anterior.')
+    }
     if (code.includes('auth/wrong-password') || code.includes('auth/user-not-found')) {
-      return 'Email ou palavra-passe incorretos.'
+      return withDiagnostic('Email ou palavra-passe incorretos.')
     }
     if (code.includes('auth/invalid-email')) {
-      return 'O email não é válido.'
+      return withDiagnostic('O email não é válido.')
+    }
+    if (code.includes('auth/unauthorized-domain')) {
+      return withDiagnostic('Este domínio não está autorizado no Firebase Authentication.')
+    }
+    if (code.includes('auth/operation-not-allowed')) {
+      return withDiagnostic('O login com Google não está ativado no Firebase Authentication.')
     }
   }
 
   if (action === 'reset') {
     if (code.includes('auth/user-not-found')) {
-      return 'Se o email existir, enviaremos um link para repor a palavra-passe.'
+      return withDiagnostic('Se o email existir, enviaremos um link para repor a palavra-passe.')
     }
     if (code.includes('auth/invalid-email')) {
-      return 'O email não é válido.'
+      return withDiagnostic('O email não é válido.')
     }
   }
 
-  return 'Não foi possível concluir a ação. Tenta novamente.'
+  return `Não foi possível concluir a ação. [Firebase: ${diagnostic}]`
 }
 
 export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
-  const { user, authResolved } = useAuth()
+  const { user, authResolved, redirectAuthError } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [profileError, setProfileError] = useState<string | null>(null)
+  const [profileRetry, setProfileRetry] = useState(0)
   const [message, setMessage] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
   const onAuthChangeRef = useRef(onAuthChange)
@@ -124,16 +176,29 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     onAuthChangeRef.current = onAuthChange
   }, [onAuthChange])
 
+  useEffect(() => {
+    if (redirectAuthError) {
+      setError(mapAuthError(redirectAuthError, 'signin'))
+    }
+  }, [redirectAuthError])
+
   const getOrCreateUserProfile = async (user: User): Promise<UserProfile> => {
     const userRef = doc(db, 'users', user.uid)
-    const userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil')
+    const userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil').catch((cause) => {
+      throw { operation: 'getDoc', cause } satisfies ProfileSyncFailure
+    })
 
     if (userSnap.exists()) {
       return userSnap.data() as UserProfile
     }
 
     const newUserProfile = createDefaultUserProfile(user)
-    await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+    try {
+      await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+    } catch (cause) {
+      throw { operation: 'setDoc', cause } satisfies ProfileSyncFailure
+    }
+
     return newUserProfile
   }
 
@@ -154,11 +219,24 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
         .then((profile) => {
           if (isMounted && profileRequestRef.current === requestId) setUserProfile(profile)
         })
-        .catch((profileLoadError) => {
-          console.error('Erro ao obter ou criar o perfil:', profileLoadError)
+        .catch((failure: ProfileSyncFailure) => {
+          const { code, message, display } = getFirestoreDiagnostic(failure.cause)
+          console.error('Erro Firestore ao sincronizar o perfil:', {
+            operation: failure.operation,
+            code: code || undefined,
+            message: message || undefined,
+            userId: user.uid,
+            error: failure.cause,
+          })
+
           if (isMounted && profileRequestRef.current === requestId) {
-            setUserProfile(createDefaultUserProfile(user))
-            setProfileError('Não foi possível sincronizar o perfil. Estamos a mostrar os teus dados locais temporariamente.')
+            if (isFirestoreUnavailable(failure.cause)) {
+              setUserProfile(createDefaultUserProfile(user))
+              setProfileError(`O Firestore está temporariamente indisponível. Estamos a mostrar os teus dados locais temporariamente. [Firebase: ${display}]`)
+              return
+            }
+
+            setProfileError(`Não foi possível sincronizar o perfil no Firestore. [Firebase: ${display}]`)
           }
         })
     }
@@ -168,7 +246,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
       isMounted = false
       profileRequestRef.current += 1
     }
-  }, [authResolved, user])
+  }, [authResolved, user, profileRetry])
 
   const resetForm = () => {
     setForm({ name: '', email: '', password: '', confirmPassword: '' })
@@ -228,12 +306,16 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
 
     try {
       const provider = new GoogleAuthProvider()
-      await signInWithPopup(auth, provider)
-      setMode('guest')
-      setMessage('Sessão iniciada com sucesso.')
+      // The popup briefly closing on acordaportugal.pt makes the popup flow
+      // unreliable. Redirect is not subject to popup blockers or embedded
+      // browser popup restrictions and Firebase restores the session on return.
+      console.info('Firebase Auth: a iniciar login Google por redirect.', {
+        origin: window.location.origin,
+        authDomain: auth.app.options.authDomain,
+      })
+      await signInWithRedirect(auth, provider)
     } catch (err: any) {
       setError(mapAuthError(err, 'signin'))
-    } finally {
       setLoading(false)
     }
   }
@@ -319,6 +401,21 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
         </div>
       )
     }
+
+    if (profileError) {
+      return (
+        <div className="rounded-3xl border border-red-500/30 bg-card/60 p-6 backdrop-blur">
+          <p className="text-sm text-red-200">{profileError}</p>
+          <button
+            onClick={() => setProfileRetry((current) => current + 1)}
+            className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+          >
+            Tentar novamente
+          </button>
+        </div>
+      )
+    }
+
     return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar perfil...</div>
   }
 
