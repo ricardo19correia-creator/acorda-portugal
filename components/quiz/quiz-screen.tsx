@@ -14,6 +14,7 @@ Lightbulb,
 
 import {
   ALL_QUIZ_QUESTIONS,
+  CATEGORIES,
 MODO_MALUCO_QUESTIONS,
 type QuizQuestion,
 } from '@/lib/game-data'
@@ -47,11 +48,16 @@ const j = Math.floor(Math.random() * (i + 1))
 return copy
 }
 
-function createGameQuestions(category: string): GameQuestion[] {
-  const questionPool =
-    category === 'Modo Maluco'
-      ? MODO_MALUCO_QUESTIONS
-      : ALL_QUIZ_QUESTIONS.filter((q) => q.category === category)
+function createGameQuestions(categorySlug: string): GameQuestion[] {
+  const category = CATEGORIES.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === categorySlug)
+  let questionPool: QuizQuestion[] = []
+
+  if (category) {
+    questionPool =
+      category.name === 'Modo Maluco'
+        ? MODO_MALUCO_QUESTIONS
+        : ALL_QUIZ_QUESTIONS.filter((q) => q.category === category.name)
+  }
 
 const selected = shuffle(questionPool).slice(
 0,
@@ -97,11 +103,12 @@ return {
 })
 }
 
-export function QuizScreen({ category }: { category: string }) {
+export function QuizScreen({ category: categorySlug }: { category: string }) {
   const router = useRouter()
+  const category = CATEGORIES.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === categorySlug)
 
 const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
-    () => createGameQuestions(category),
+    () => createGameQuestions(categorySlug),
 )
 
 const total = quizQuestions.length
@@ -192,7 +199,7 @@ setPhase('answering')
 }
 
 const restart = () => {
-setQuizQuestions(createGameQuestions(category))
+setQuizQuestions(createGameQuestions(categorySlug))
 setStep(0)
 setSelected(null)
 setSeconds(MAX_SECONDS)
@@ -224,7 +231,7 @@ bestStreak,
 
 if (!q) {
 return ( <div className="flex min-h-screen items-center justify-center px-6"> <div className="max-w-md text-center"> <h1 className="font-display text-2xl font-bold">
-        Não existem perguntas para a categoria &quot;{category}&quot;.
+        Não existem perguntas para a categoria &quot;{category?.name || categorySlug}&quot;.
       </h1>
 
       <p className="mt-3 text-muted-foreground">
@@ -232,7 +239,7 @@ return ( <div className="flex min-h-screen items-center justify-center px-6"> <d
       </p>
 
       <Link
-        href="/"
+        href="/jogar"
         className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground"
       >
         Voltar ao início
@@ -294,7 +301,7 @@ return ( <div className="mx-auto min-h-screen w-full max-w-3xl px-4 py-6 sm:px-6
   {/* MODO MALUCO */}
   <div className="mt-6 text-center">
     <span className="rounded-full border border-flag-red/40 bg-flag-red/10 px-4 py-2 text-sm font-bold text-flag-red">
-        🤪 {category}
+        🤪 {category?.name || categorySlug}
     </span>
   </div>
 

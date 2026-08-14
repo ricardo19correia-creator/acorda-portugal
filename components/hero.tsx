@@ -49,7 +49,7 @@ export function Hero() {
 
           {/* Main CTA */}
           <div className="animate-rise mt-8 flex w-full flex-col items-center gap-3 sm:w-auto lg:items-start" style={{ animationDelay: '300ms' }}>
-            <PlayButton className="w-full sm:w-auto" />
+            <PlayButton href="/jogar" className="w-full sm:w-auto" />
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
               Milhares de perguntas <span className="text-primary">•</span> Ranking Nacional{' '}
               <span className="text-primary">•</span> Desafios Diários

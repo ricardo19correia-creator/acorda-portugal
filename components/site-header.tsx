@@ -7,18 +7,11 @@ import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { cn } from '@/lib/utils'
 
-const NAV_HOME = [
-  { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-  { label: 'Ranking', href: '#ranking', icon: Trophy },
-  { label: 'Categorias', href: '#categorias', icon: LayoutGrid },
-  { label: 'Perfil', href: '#perfil', icon: User },
-]
-
 export function SiteHeader() {
   const NAV = [
-    { label: 'Jogar', href: '/categorias', icon: Gamepad2 },
+    { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Ranking', href: '/#ranking', icon: Trophy },
-    { label: 'Categorias', href: '/#categorias', icon: LayoutGrid },
+    { label: 'Categorias', href: '/#categorias', icon: LayoutGrid }, // This now correctly points to the homepage section
     { label: 'Perfil', href: '/#perfil', icon: User },
   ]
 
@@ -58,7 +51,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <PlayButton href="/categorias" size="md" label="Jogar" className="ml-2 rounded-xl px-5 py-2.5 text-sm" />
+          <PlayButton href="/jogar" size="md" label="Jogar" className="ml-2 rounded-xl px-5 py-2.5 text-sm" />
         </nav>
 
         {/* Mobile toggle */}
@@ -93,7 +86,7 @@ export function SiteHeader() {
           </ul>
           <PlayButton
             label="Jogar agora"
-            href="/categorias"
+            href="/jogar"
             className="mt-3 w-full rounded-xl py-4 text-base"
           />
         </nav>
