@@ -21,6 +21,7 @@ import {
   Flame,
   Sparkles,
   ChevronRight,
+  ArrowLeft,
   User as UserIcon,
   LogOut,
 } from 'lucide-react'
@@ -70,7 +71,7 @@ function mapAuthError(error: any, action: 'signin' | 'signup' | 'reset') {
   return 'Não foi possível concluir a ação. Tenta novamente.'
 }
 
-export function ProfilePanel({ className }: { className?: string }) {
+export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
   const [user, setUser] = useState<User | null | undefined>(undefined)
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [authResolved, setAuthResolved] = useState(false)
@@ -110,6 +111,7 @@ export function ProfilePanel({ className }: { className?: string }) {
       setUser(currentUser)
       if (currentUser) {
         getOrCreateUserProfile(currentUser)
+        onAuthChange?.()
       } else {
         setUserProfile(null)
       }
@@ -121,7 +123,7 @@ export function ProfilePanel({ className }: { className?: string }) {
     })
 
     return () => unsubscribe()
-  }, [])
+  }, [onAuthChange])
 
   const resetForm = () => {
     setForm({ name: '', email: '', password: '', confirmPassword: '' })
@@ -255,11 +257,11 @@ export function ProfilePanel({ className }: { className?: string }) {
   if (isAuthenticated) {
     if (userProfile) {
       return (
-        <div className={cn('flex flex-col gap-6', className)}>
+        <div className={cn('flex h-full flex-col gap-6 p-6', className)}>
           <PlayerCard user={user} profile={userProfile} />
           <button
             onClick={handleLogout}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             <LogOut className="h-4 w-4" />
             Terminar sessão
