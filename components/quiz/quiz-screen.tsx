@@ -1,5 +1,6 @@
 'use client'
 
+import { User, onAuthStateChanged } from 'firebase/auth'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
@@ -10,6 +11,9 @@ import {
   ChevronRight,
   Lightbulb,
 } from 'lucide-react'
+import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
+import type { UserProfile } from '@/components/player-card'
+import { auth, db } from '@/lib/firebase'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -114,6 +118,9 @@ export function QuizScreen({
     (item) => item.slug === categorySlug,
   )
 
+  const [user, setUser] = useState<User | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
     () => createGameQuestions(categorySlug),
   )
@@ -132,6 +139,22 @@ export function QuizScreen({
   const q = quizQuestions[step]
 
   const wasCorrect = selected === q?.correct
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser)
+      if (currentUser) {
+        const userRef = doc(db, 'users', currentUser.uid)
+        const userSnap = await getDoc(userRef)
+        if (userSnap.exists()) {
+          const profile = userSnap.data() as UserProfile
+          setUserProfile(profile)
+          setPreviousLevel(profile.level)
+        }
+      }
+    })
+    return () => unsubscribe()
+  }, [])
 
   const reveal = useCallback(
     (choice: OptionKey | null) => {
@@ -215,6 +238,37 @@ export function QuizScreen({
     setPhase('answering')
   }
 
+  const handleGameEnd = useCallback(async (result: QuizResult) => {
+    if (!user || !userProfile) return
+
+    try {
+      const userRef = doc(db, 'users', user.uid)
+      const currentProfile = userProfile
+      const newTotalXp = currentProfile.xp + result.xp
+
+      let newLevel = currentProfile.level
+      let xpForNextLevel = newLevel * 500
+
+      // Check for level up (can happen multiple times in one game)
+      while (newTotalXp >= xpForNextLevel) {
+        newLevel++
+        xpForNextLevel = newLevel * 500
+      }
+
+      await updateDoc(userRef, {
+        xp: increment(result.xp),
+        euros: increment(result.euros),
+        level: newLevel,
+        // TODO: Update streak based on more complex logic
+      })
+
+      // Update local state to reflect new level for the animation
+      setUserProfile(prev => prev ? { ...prev, level: newLevel, xp: newTotalXp, euros: prev.euros + result.euros } : null)
+    } catch (error) {
+      console.error("Error updating user profile:", error)
+    }
+  }, [user])
+
   const result: QuizResult = useMemo(
     () => ({
       score,
@@ -226,6 +280,11 @@ export function QuizScreen({
     }),
     [score, correctCount, total, bestStreak],
   )
+
+  const levelUpInfo =
+    previousLevel !== null && userProfile && userProfile.level > previousLevel
+      ? { from: previousLevel, to: userProfile.level }
+      : undefined
 
   if (!category || !q) {
     return (
@@ -256,6 +315,8 @@ export function QuizScreen({
         <div className="mx-auto max-w-2xl">
           <ResultScreen
             result={result}
+            levelUpInfo={levelUpInfo}
+            onGameEnd={handleGameEnd}
             onReplay={restart}
           />
         </div>

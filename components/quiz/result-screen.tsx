@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Trophy, Flame, Sparkles, Coins, RotateCcw, MapPin, Crown } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -13,17 +14,41 @@ export type QuizResult = {
   bestStreak: number
 }
 
+type LevelUpInfo = {
+  from: number
+  to: number
+}
+
 export function ResultScreen({
   result,
   onReplay,
+  onGameEnd,
+  levelUpInfo,
 }: {
   result: QuizResult
   onReplay?: () => void
+  onGameEnd?: (result: QuizResult) => void
+  levelUpInfo?: LevelUpInfo
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
+  const [showLevelUp, setShowLevelUp] = useState(false)
+
+  useEffect(() => {
+    // Save progress when the result screen is shown
+    onGameEnd?.(result)
+
+    if (levelUpInfo) {
+      const timer = setTimeout(() => setShowLevelUp(true), 500)
+      return () => clearTimeout(timer)
+    }
+  }, [result, onGameEnd])
 
   return (
     <div className="animate-rise mx-auto max-w-lg">
+      {showLevelUp && levelUpInfo && (
+        <LevelUpAnimation from={levelUpInfo.from} to={levelUpInfo.to} onAnimationEnd={() => setShowLevelUp(false)} />
+      )}
+
       <div className="sheen relative overflow-hidden rounded-4xl border border-gold/25 bg-gradient-to-b from-gold/10 via-card/70 to-card/70 p-8 text-center backdrop-blur">
         {/* corner glows */}
         <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
@@ -94,6 +119,32 @@ export function ResultScreen({
             Ver ranking
           </Link>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function LevelUpAnimation({ from, to, onAnimationEnd }: { from: number, to: number, onAnimationEnd: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onAnimationEnd, 3500) // Animation duration + delay
+    return () => clearTimeout(timer)
+  }, [onAnimationEnd])
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="animate-level-up-pop relative w-full max-w-sm overflow-hidden rounded-4xl border border-gold/50 bg-gradient-to-b from-card to-background p-8 text-center shadow-2xl shadow-gold/20">
+        <div className="sheen absolute inset-0" />
+        <div className="animate-level-up-glow absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-gold/30 to-transparent" />
+
+        <Trophy className="relative mx-auto h-16 w-16 text-gold drop-shadow-[0_0_15px_var(--gold)]" />
+        <h2 className="relative mt-4 font-display text-2xl font-black uppercase tracking-widest text-gold-gradient">
+          Subida de Nível!
+        </h2>
+        <p className="relative mt-4 font-display text-6xl font-black text-foreground">
+          {from}
+          <span className="mx-4 text-4xl text-gold">→</span>
+          {to}
+        </p>
       </div>
     </div>
   )

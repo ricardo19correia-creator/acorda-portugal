@@ -6,13 +6,24 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
   updateProfile,
   onAuthStateChanged,
   User,
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
-import { PlayerCard } from './player-card'
+import { doc, getDoc, setDoc, DocumentData } from 'firebase/firestore'
+import { PlayerCard, type UserProfile } from './player-card'
 import { cn } from '@/lib/utils'
+import {
+  Coins,
+  Flame,
+  Sparkles,
+  ChevronRight,
+  User as UserIcon,
+  LogOut,
+} from 'lucide-react'
 
 type AuthMode = 'guest' | 'signin' | 'signup'
 
@@ -61,6 +72,7 @@ function mapAuthError(error: any, action: 'signin' | 'signup' | 'reset') {
 
 export function ProfilePanel({ className }: { className?: string }) {
   const [user, setUser] = useState<User | null | undefined>(undefined)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [authResolved, setAuthResolved] = useState(false)
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
@@ -68,10 +80,40 @@ export function ProfilePanel({ className }: { className?: string }) {
   const [message, setMessage] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
 
+  const getOrCreateUserProfile = async (user: User) => {
+    const userRef = doc(db, 'users', user.uid)
+    const userSnap = await getDoc(userRef)
+
+    if (userSnap.exists()) {
+      setUserProfile(userSnap.data() as UserProfile)
+    } else {
+      const newUserProfile: UserProfile = {
+        uid: user.uid,
+        displayName: user.displayName ?? 'Jogador',
+        email: user.email ?? '',
+        photoURL: user.photoURL ?? '',
+        level: 1,
+        xp: 0,
+        euros: 100, // Starting bonus
+        district: 'Vila Real', // Default district
+        unlockedAchievements: [],
+        streak: 0,
+      }
+      await setDoc(userRef, newUserProfile)
+      setUserProfile(newUserProfile)
+    }
+  }
+
   useEffect(() => {
     let first = true
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+      if (currentUser) {
+        getOrCreateUserProfile(currentUser)
+      } else {
+        setUserProfile(null)
+      }
+
       if (first) {
         setAuthResolved(true)
         first = false
@@ -127,6 +169,23 @@ export function ProfilePanel({ className }: { className?: string }) {
       setMessage('Conta criada com sucesso. Bem-vindo!')
     } catch (err: any) {
       setError(mapAuthError(err, 'signup'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    setError(null)
+    setMessage(null)
+    setLoading(true)
+
+    try {
+      const provider = new GoogleAuthProvider()
+      await signInWithPopup(auth, provider)
+      setMode('guest')
+      setMessage('Sessão iniciada com sucesso.')
+    } catch (err: any) {
+      setError(mapAuthError(err, 'signin'))
     } finally {
       setLoading(false)
     }
@@ -194,26 +253,21 @@ export function ProfilePanel({ className }: { className?: string }) {
   const isAuthenticated = authResolved && user
 
   if (isAuthenticated) {
-    return (
-      <div className={cn('flex flex-col gap-6', className)}>
-        <PlayerCard />
-        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md">
-          {user?.photoURL && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={user.photoURL} alt={user.displayName ?? 'Utilizador'} className="h-10 w-10 rounded-full" />
-          )}
-
-          <div className="flex flex-col">
-            <span className="font-bold text-white">{user?.displayName ?? 'Jogador'}</span>
-            <div className="flex gap-3 items-center">
-              <button onClick={handleLogout} className="text-left text-sm text-white/60 hover:text-white">
-                Terminar sessão
-              </button>
-            </div>
-          </div>
+    if (userProfile) {
+      return (
+        <div className={cn('flex flex-col gap-6', className)}>
+          <PlayerCard user={user} profile={userProfile} />
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <LogOut className="h-4 w-4" />
+            Terminar sessão
+          </button>
         </div>
-      </div>
-    )
+      )
+    }
+    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar perfil...</div>
   }
 
   return (
@@ -235,6 +289,15 @@ export function ProfilePanel({ className }: { className?: string }) {
           </div>
 
           {mode === 'guest' && (
+            <>
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-60"
+            >
+              <GoogleIcon />
+              Continuar com Google
+            </button>
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => {
@@ -255,6 +318,7 @@ export function ProfilePanel({ className }: { className?: string }) {
                 JÁ TENHO CONTA
               </button>
             </div>
+            </>
           )}
 
           {mode === 'signup' && (
@@ -391,5 +455,16 @@ export function ProfilePanel({ className }: { className?: string }) {
         </div>
       </div>
     </div>
+  )
+}
+
+function GoogleIcon() {
+  return (
+    <svg className="h-5 w-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M48 24.4C48 22.8 47.9 21.2 47.6 19.7H24.5V28.5H37.8C37.2 31.4 35.9 33.8 33.9 35.3V41.3H41.8C45.8 37.3 48 31.4 48 24.4Z" fill="#4285F4" />
+      <path d="M24.5 48C31.2 48 36.8 45.7 39.7 42.2L32.8 36.8C30.6 38.2 27.8 39.1 24.5 39.1C18.2 39.1 12.9 35.1 11.1 29.5H3.1V35.1C6.1 42.8 14.6 48 24.5 48Z" fill="#34A853" />
+      <path d="M11.1 29.5C10.6 28.1 10.3 26.6 10.3 25C10.3 23.4 10.6 21.9 11.1 20.5V14.9H3.1C1.1 18.8 0 23.3 0 28C0 32.7 1.1 37.2 3.1 41.1L11.1 35.5V29.5Z" fill="#FBBC05" />
+      <path d="M24.5 10.2C28.1 10.2 31.4 11.5 33.9 13.8L40.5 7.2C36.8 3.9 31.2 1.5 24.5 1.5C14.6 1.5 6.1 6.7 3.1 14.4L11.1 20C12.9 14.4 18.2 10.2 24.5 10.2Z" fill="#EA4335" />
+    </svg>
   )
 }

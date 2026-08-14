@@ -12,7 +12,7 @@ export function SiteHeader() {
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Ranking', href: '/#ranking', icon: Trophy },
     { label: 'Categorias', href: '/#categorias', icon: LayoutGrid }, // This now correctly points to the homepage section
-    { label: 'Perfil', href: '/#perfil', icon: User },
+    { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
   const [open, setOpen] = useState(false)

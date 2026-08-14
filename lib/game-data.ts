@@ -293,6 +293,7 @@ export const EVENTS: GameEvent[] = [
 ]
 
 export type Achievement = {
+  id: string
   icon: 'coins' | 'star' | 'trophy' | 'flame' | 'crown'
   title: string
   text: string
@@ -301,30 +302,35 @@ export type Achievement = {
 
 export const ACHIEVEMENTS: Achievement[] = [
   {
+    id: 'euros-virtuais',
     icon: 'coins',
     title: 'Euros virtuais',
     text: 'Moeda do jogo para desbloquear extras.',
     tone: 'gold',
   },
   {
+    id: 'xp',
     icon: 'star',
     title: 'XP',
     text: 'Sobe de nível a cada resposta certa.',
     tone: 'primary',
   },
   {
+    id: 'conquistas',
     icon: 'trophy',
     title: 'Conquistas',
     text: 'Coleciona distintivos raros.',
     tone: 'gold',
   },
   {
+    id: 'streak',
     icon: 'flame',
     title: 'Streak',
     text: 'Joga todos os dias sem falhar.',
     tone: 'red',
   },
   {
+    id: 'rankings',
     icon: 'crown',
     title: 'Rankings',
     text: 'Chega ao topo nacional e do teu distrito.',
