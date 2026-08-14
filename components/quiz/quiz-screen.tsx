@@ -103,11 +103,11 @@ return {
 })
 }
 
-export function QuizScreen({ category: categorySlug }: { category: string }) {
+export function QuizScreen({ categorySlug }: { categorySlug: string }) {
   const router = useRouter()
-  const category = CATEGORIES.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === categorySlug)
+  const category = CATEGORIES.find(c => c.slug === categorySlug)
 
-const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
+  const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
     () => createGameQuestions(categorySlug),
 )
 

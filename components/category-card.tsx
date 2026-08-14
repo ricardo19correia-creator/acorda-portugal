@@ -30,11 +30,10 @@ const DIFFICULTY: Record<string, string> = {
 
 export function CategoryCard({ cat, className }: { cat: Category; className?: string }) {
   const special = cat.special
-  const slug = cat.name.toLowerCase().replace(/\s+/g, '-')
 
   return (
     <Link
-      href={`/jogar?cat=${slug}`}
+      href={`/jogar?cat=${cat.slug}`}
       className={cn(
         'group relative flex w-60 shrink-0 snap-start flex-col overflow-hidden rounded-3xl border p-5 text-left backdrop-blur transition-all duration-300 hover:-translate-y-1.5 sm:w-auto',
         special

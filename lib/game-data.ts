@@ -21,6 +21,7 @@ import {
 export type Tone = 'primary' | 'gold' | 'red' | 'accent'
 
 export type Category = {
+  slug: string
   name: string
   icon: LucideIcon
   tone: Tone
@@ -32,94 +33,106 @@ export type Category = {
 
 export const CATEGORIES: Category[] = [
   {
+    slug: 'portugal',
     name: 'Portugal',
     icon: Flag,
     tone: 'primary',
     description: 'Testa o que sabes sobre o país.',
-    questions: '1.240',
+    questions: '50',
     difficulty: 'Variado',
   },
   {
+    slug: 'historia',
     name: 'História',
     icon: Landmark,
     tone: 'gold',
     description: 'Dos Descobrimentos aos dias de hoje.',
-    questions: '980',
+    questions: '40',
     difficulty: 'Médio',
   },
   {
+    slug: 'geografia',
     name: 'Geografia',
     icon: Globe,
     tone: 'primary',
     description: 'Rios, serras, distritos e capitais.',
-    questions: '760',
+    questions: '40',
     difficulty: 'Médio',
   },
   {
+    slug: 'desporto',
     name: 'Desporto',
     icon: Medal,
     tone: 'red',
     description: 'Futebol, olímpicos e lendas nacionais.',
-    questions: '1.050',
+    questions: '32',
     difficulty: 'Fácil',
   },
   {
+    slug: 'musica',
     name: 'Música',
     icon: Music,
     tone: 'accent',
     description: 'Do fado ao pop português.',
-    questions: '640',
+    questions: '24',
     difficulty: 'Médio',
   },
   {
+    slug: 'cinema-tv',
     name: 'Cinema & TV',
     icon: Clapperboard,
     tone: 'accent',
     description: 'Filmes, séries e novelas icónicas.',
-    questions: '520',
+    questions: '17',
     difficulty: 'Médio',
   },
   {
+    slug: 'gastronomia',
     name: 'Gastronomia',
     icon: UtensilsCrossed,
     tone: 'gold',
     description: 'Pratos, doces e sabores de norte a sul.',
-    questions: '480',
+    questions: '18',
     difficulty: 'Fácil',
   },
   {
+    slug: 'cultura',
     name: 'Cultura',
     icon: Drama,
     tone: 'primary',
     description: 'Tradições, arte e património.',
-    questions: '610',
+    questions: '14',
     difficulty: 'Médio',
   },
   {
+    slug: 'ciencia',
     name: 'Ciência',
     icon: FlaskConical,
     tone: 'accent',
     description: 'Do átomo ao universo.',
-    questions: '720',
+    questions: '18',
     difficulty: 'Difícil',
   },
   {
+    slug: 'tecnologia',
     name: 'Tecnologia',
     icon: Cpu,
     tone: 'primary',
     description: 'Gadgets, código e inovação.',
-    questions: '540',
+    questions: '0',
     difficulty: 'Médio',
   },
   {
+    slug: 'mundo',
     name: 'Mundo',
     icon: Earth,
     tone: 'gold',
     description: 'Países, bandeiras e curiosidades.',
-    questions: '890',
+    questions: '0',
     difficulty: 'Médio',
   },
   {
+    slug: 'conhecimentos-gerais',
     name: 'Conhecimentos Gerais',
     icon: Lightbulb,
     tone: 'primary',
@@ -128,11 +141,12 @@ export const CATEGORIES: Category[] = [
     difficulty: 'Variado',
   },
   {
+    slug: 'modo-maluco',
     name: 'Modo Maluco',
     icon: Laugh,
     tone: 'red',
     description: 'Perguntas absurdas, armadilhas e lógica com um toque de caos.',
-    questions: '110',
+    questions: '10',
     difficulty: 'Variado',
     special: true,
   },
@@ -3714,6 +3728,18 @@ export const MODO_MALUCO_QUESTIONS: QuizQuestion[] = [
 
 export const DEMO_QUIZ: QuizQuestion[] = MODO_MALUCO_QUESTIONS.slice(0, 5)
 
-const allQuestions = questions.map((q, i) => ({ ...q, index: i, total: questions.length, points: 100, options: q.options.map((text, i) => ({ key: ['A', 'B', 'C', 'D'][i] as 'A'|'B'|'C'|'D', text })), correct: ['A', 'B', 'C', 'D'][q.correctAnswer] as 'A'|'B'|'C'|'D' }))
+const allQuestions = questions.map((q, i) => {
+  const correctIndex = q.options.indexOf(q.correctAnswer)
+  const correctKey = ['A', 'B', 'C', 'D'][correctIndex] as 'A' | 'B' | 'C' | 'D'
+
+  return {
+    ...q,
+    index: i + 1,
+    total: questions.length,
+    points: 100, // Placeholder, can be adjusted based on difficulty
+    options: q.options.map((text, i) => ({ key: ['A', 'B', 'C', 'D'][i] as 'A' | 'B' | 'C' | 'D', text })),
+    correct: correctKey,
+  }
+})
 
 export const ALL_QUIZ_QUESTIONS: QuizQuestion[] = allQuestions
