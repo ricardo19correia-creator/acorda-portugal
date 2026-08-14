@@ -10,6 +10,7 @@ import type { UserProfile } from '@/lib/game-data'
 type AuthState = {
   user: User | null
   authResolved: boolean
+  authInitializationError: string | null
   redirectAuthError: unknown | null
   profile: UserProfile | null
   profileLoading: boolean
@@ -19,12 +20,33 @@ type AuthState = {
 
 const AuthContext = createContext<AuthState | null>(null)
 const FIRESTORE_TIMEOUT_MS = 10_000
+const AUTH_RESOLUTION_TIMEOUT_MS = 12_000
+const REDIRECT_RESULT_TIMEOUT_MS = 12_000
 
 function withFirestoreTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timeoutId = setTimeout(() => {
       reject(new Error(`${operation} excedeu o tempo limite.`))
     }, FIRESTORE_TIMEOUT_MS)
+
+    promise.then(
+      (value) => {
+        clearTimeout(timeoutId)
+        resolve(value)
+      },
+      (error: unknown) => {
+        clearTimeout(timeoutId)
+        reject(error)
+      },
+    )
+  })
+}
+
+function withTimeout<T>(promise: Promise<T>, operation: string, timeoutMs: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error(`${operation} excedeu o tempo limite de ${timeoutMs / 1000} segundos.`))
+    }, timeoutMs)
 
     promise.then(
       (value) => {
@@ -81,6 +103,7 @@ function profileErrorMessage(error: unknown): string {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [authResolved, setAuthResolved] = useState(false)
+  const [authInitializationError, setAuthInitializationError] = useState<string | null>(null)
   const [redirectAuthError, setRedirectAuthError] = useState<unknown | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [profileLoading, setProfileLoading] = useState(false)
@@ -95,7 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let isMounted = true
 
-    void getRedirectResult(auth)
+    void withTimeout(Promise.resolve().then(() => getRedirectResult(auth)), 'A confirmação do login Google por redirect', REDIRECT_RESULT_TIMEOUT_MS)
       .then((result) => {
         if (result) {
           console.info('Firebase Auth: login Google por redirect concluído.', {
@@ -120,20 +143,82 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
-      auth,
-      (currentUser) => {
-        setUser(currentUser)
-        setAuthResolved(true)
-      },
-      (error) => {
-        console.error('Erro ao verificar a autenticação:', error)
+    let isMounted = true
+    let listenerDeliveredState = false
+
+    console.info('Firebase Auth: a registar onAuthStateChanged.', {
+      projectId: auth.app.options.projectId,
+      authDomain: auth.app.options.authDomain,
+      origin: window.location.origin,
+    })
+
+    const resolutionTimeout = window.setTimeout(() => {
+      if (listenerDeliveredState || !isMounted) return
+
+      const message = `Firebase Authentication não devolveu o estado da sessão em ${AUTH_RESOLUTION_TIMEOUT_MS / 1000} segundos.`
+      console.error('Firebase Auth: timeout ao aguardar onAuthStateChanged.', {
+        projectId: auth.app.options.projectId,
+        authDomain: auth.app.options.authDomain,
+        origin: window.location.origin,
+      })
+      setAuthInitializationError(message)
+      // This is a guarded fallback, not an optimistic resolution: the UI
+      // exposes the initialization failure and a later Firebase callback still
+      // replaces this state with the actual session.
+      setAuthResolved(true)
+    }, AUTH_RESOLUTION_TIMEOUT_MS)
+
+    const resolveAuthState = (currentUser: User | null) => {
+      listenerDeliveredState = true
+      window.clearTimeout(resolutionTimeout)
+      if (!isMounted) return
+
+      console.info('Firebase Auth: estado inicial resolvido.', {
+        hasUser: Boolean(currentUser),
+        userId: currentUser?.uid,
+      })
+      setAuthInitializationError(null)
+      setUser(currentUser)
+      setAuthResolved(true)
+    }
+
+    let unsubscribe: (() => void) | undefined
+    try {
+      unsubscribe = onAuthStateChanged(
+        auth,
+        (currentUser) => resolveAuthState(currentUser),
+        (error) => {
+          console.error('Erro ao verificar a autenticação:', error)
+          listenerDeliveredState = true
+          window.clearTimeout(resolutionTimeout)
+          if (!isMounted) return
+
+          const firebaseError = error as { code?: unknown; message?: unknown }
+          const detail = typeof firebaseError.code === 'string'
+            ? firebaseError.code
+            : typeof firebaseError.message === 'string'
+              ? firebaseError.message
+              : 'erro desconhecido'
+          setAuthInitializationError(`Não foi possível verificar a sessão no Firebase Authentication. [Firebase: ${detail}]`)
+          setUser(null)
+          setAuthResolved(true)
+        },
+      )
+    } catch (error) {
+      console.error('Firebase Auth: não foi possível registar onAuthStateChanged.', error)
+      window.clearTimeout(resolutionTimeout)
+      if (isMounted) {
+        setAuthInitializationError('Não foi possível iniciar Firebase Authentication.')
         setUser(null)
         setAuthResolved(true)
-      },
-    )
+      }
+    }
 
-    return unsubscribe
+    return () => {
+      isMounted = false
+      window.clearTimeout(resolutionTimeout)
+      unsubscribe?.()
+    }
   }, [])
 
   useEffect(() => {
@@ -191,7 +276,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [authResolved, user, profileRetry])
 
-  return <AuthContext.Provider value={{ user, authResolved, redirectAuthError, profile, profileLoading, profileError, retryProfile }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, authResolved, authInitializationError, redirectAuthError, profile, profileLoading, profileError, retryProfile }}>{children}</AuthContext.Provider>
 }
 
 export function useAuth() {

@@ -100,7 +100,7 @@ function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
 }
 
 export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
-  const { user, authResolved, redirectAuthError, profile, profileLoading, profileError, retryProfile } = useAuth()
+  const { user, authResolved, authInitializationError, redirectAuthError, profile, profileLoading, profileError, retryProfile } = useAuth()
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -264,6 +264,21 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
 
   if (!authResolved) {
     return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A verificar a tua conta...</div>
+  }
+
+  if (authInitializationError) {
+    return (
+      <div className="rounded-3xl border border-red-500/30 bg-card/60 p-6 backdrop-blur">
+        <p className="text-sm text-red-200">{authInitializationError}</p>
+        <p className="mt-2 text-sm text-muted-foreground">Consulta a consola do navegador para os diagnósticos do Firebase e volta a tentar.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+        >
+          Tentar novamente
+        </button>
+      </div>
+    )
   }
 
   if (user) {
