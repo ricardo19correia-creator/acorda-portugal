@@ -160,6 +160,29 @@ export type Player = {
   xp: string
 }
 
+export type UserProfile = {
+  uid: string
+  displayName: string
+  username?: string
+  email: string
+  photoURL: string
+  district: string
+  level: number
+  xp: number
+  euros: number
+  streak: number
+  gamesPlayed?: number
+  wins?: number
+  losses?: number
+  questionsAnswered?: number
+  correctAnswers?: number
+  bestStreak?: number
+  unlockedAchievements: string[]
+  badges?: string[]
+  createdAt?: any // Idealmente Timestamp
+  lastActiveAt?: any // Idealmente Timestamp
+}
+
 export const NATIONAL_TOP: Player[] = [
   { pos: 1, name: 'Zé_Mestre', district: 'Porto', level: 47, xp: '182 450' },
   { pos: 2, name: 'AnaQuiz', district: 'Lisboa', level: 44, xp: '176 120' },
