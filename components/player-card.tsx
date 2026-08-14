@@ -2,19 +2,9 @@ import { Coins, Flame, Sparkles, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import type { User } from 'firebase/auth'
+import type { UserProfile } from '@/lib/game-data'
 
-export type UserProfile = {
-  uid: string
-  displayName: string
-  email: string
-  photoURL: string
-  level: number
-  xp: number
-  euros: number
-  district: string
-  unlockedAchievements: string[]
-  streak: number
-}
+export type { UserProfile } from '@/lib/game-data'
 
 /**
  * Game-style player HUD. Visual only (no auth yet) — shows avatar, level badge,

@@ -179,8 +179,8 @@ export type UserProfile = {
   bestStreak?: number
   unlockedAchievements: string[]
   badges?: string[]
-  createdAt?: any // Idealmente Timestamp
-  lastActiveAt?: any // Idealmente Timestamp
+  createdAt?: unknown // Timestamp do Firestore quando disponível
+  lastActiveAt?: unknown // Timestamp do Firestore quando disponível
 }
 
 export const NATIONAL_TOP: Player[] = [

@@ -10,7 +10,7 @@ import {
   ChevronRight,
   Lightbulb,
 } from 'lucide-react'
-import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
+import { doc, updateDoc, increment } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -118,7 +118,7 @@ export function QuizScreen({
     (item) => item.slug === categorySlug,
   )
 
-  const { user } = useAuth()
+  const { user, profile } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
@@ -141,24 +141,9 @@ export function QuizScreen({
   const wasCorrect = selected === q?.correct
 
   useEffect(() => {
-    let active = true
-    setUserProfile(null)
-    setPreviousLevel(null)
-
-    if (user) {
-      void getDoc(doc(db, 'users', user.uid)).then((userSnap) => {
-        if (userSnap.exists()) {
-          const profile = userSnap.data() as UserProfile
-          if (active) {
-            setUserProfile(profile)
-            setPreviousLevel(profile.level)
-          }
-        }
-      })
-    }
-
-    return () => { active = false }
-  }, [user])
+    setUserProfile(profile)
+    setPreviousLevel(profile?.level ?? null)
+  }, [profile])
 
   const reveal = useCallback(
     (choice: OptionKey | null) => {
@@ -271,7 +256,7 @@ export function QuizScreen({
     } catch (error) {
       console.error("Error updating user profile:", error)
     }
-  }, [user])
+  }, [user, userProfile])
 
   const result: QuizResult = useMemo(
     () => ({
