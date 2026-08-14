@@ -1,7 +1,7 @@
 import { Coins, Sparkles } from 'lucide-react'
 
 /**
- * Visual-only status panel showing an example player. No auth yet.
+ * Visual-only guest status panel. It must not impersonate an authenticated user.
  */
 export function PlayerPreview() {
   return (
@@ -10,7 +10,7 @@ export function PlayerPreview() {
       <div className="flex items-center gap-4">
         {/* avatar */}
         <div className="relative grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 text-lg font-bold text-primary ring-1 ring-primary/40">
-          R
+          ?
           <span className="absolute -bottom-1.5 -right-1.5 grid h-6 w-6 place-items-center rounded-full bg-gold text-[0.6rem] font-black text-gold-foreground ring-2 ring-card">
             1
           </span>
@@ -18,9 +18,9 @@ export function PlayerPreview() {
 
         <div className="min-w-0 flex-1">
           <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-            Jogador
+            Convidado
           </p>
-          <p className="truncate font-display text-lg font-bold text-foreground">Riky</p>
+          <p className="truncate font-display text-lg font-bold text-foreground">A jogar como convidado</p>
           <p className="text-xs font-medium text-primary">Nível 1</p>
         </div>
 

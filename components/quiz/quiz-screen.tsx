@@ -1,6 +1,5 @@
 'use client'
 
-import { User, onAuthStateChanged } from 'firebase/auth'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
@@ -14,6 +13,7 @@ import {
 import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -118,7 +118,7 @@ export function QuizScreen({
     (item) => item.slug === categorySlug,
   )
 
-  const [user, setUser] = useState<User | null>(null)
+  const { user } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
@@ -141,20 +141,24 @@ export function QuizScreen({
   const wasCorrect = selected === q?.correct
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser)
-      if (currentUser) {
-        const userRef = doc(db, 'users', currentUser.uid)
-        const userSnap = await getDoc(userRef)
+    let active = true
+    setUserProfile(null)
+    setPreviousLevel(null)
+
+    if (user) {
+      void getDoc(doc(db, 'users', user.uid)).then((userSnap) => {
         if (userSnap.exists()) {
           const profile = userSnap.data() as UserProfile
-          setUserProfile(profile)
-          setPreviousLevel(profile.level)
+          if (active) {
+            setUserProfile(profile)
+            setPreviousLevel(profile.level)
+          }
         }
-      }
-    })
-    return () => unsubscribe()
-  }, [])
+      })
+    }
+
+    return () => { active = false }
+  }, [user])
 
   const reveal = useCallback(
     (choice: OptionKey | null) => {

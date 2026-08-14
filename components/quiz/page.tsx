@@ -1,40 +1,33 @@
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
-import { User, onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import Link from 'next/link'
-import { auth, db } from '@/lib/firebase'
+import { db } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 import type { UserProfile } from '@/components/player-card'
 import { ProfileDetails } from '@/components/profile/profile-details'
 import { BackgroundFx } from '@/components/background-fx'
 import { SectionHeading } from '@/components/section-heading'
 
 function ProfilePageContent() {
-  const [user, setUser] = useState<User | null>(null)
+  const { user, authResolved } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser)
-        const userRef = doc(db, 'users', currentUser.uid)
-        const userSnap = await getDoc(userRef)
-        if (userSnap.exists()) {
-          setUserProfile(userSnap.data() as UserProfile)
-        }
-      } else {
-        setUser(null)
-        setUserProfile(null)
-      }
-      setLoading(false)
+    let active = true
+    setUserProfile(null)
+
+    if (!user) return () => { active = false }
+
+    void getDoc(doc(db, 'users', user.uid)).then((userSnap) => {
+      if (active && userSnap.exists()) setUserProfile(userSnap.data() as UserProfile)
     })
 
-    return () => unsubscribe()
-  }, [])
+    return () => { active = false }
+  }, [user])
 
-  if (loading) {
+  if (!authResolved) {
     return <div className="flex min-h-screen items-center justify-center">A carregar perfil...</div>
   }
 

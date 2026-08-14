@@ -9,10 +9,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
-  onAuthStateChanged,
   User,
 } from 'firebase/auth'
 import { auth, db } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { PlayerCard, type UserProfile } from './player-card'
 import { cn } from '@/lib/utils'
@@ -108,9 +108,8 @@ function mapAuthError(error: any, action: 'signin' | 'signup' | 'reset') {
 }
 
 export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
-  const [user, setUser] = useState<User | null | undefined>(undefined)
+  const { user, authResolved } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [authResolved, setAuthResolved] = useState(false)
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -119,6 +118,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
   const onAuthChangeRef = useRef(onAuthChange)
   const profileRequestRef = useRef(0)
+  const previousUserRef = useRef<User | null | undefined>(undefined)
 
   useEffect(() => {
     onAuthChangeRef.current = onAuthChange
@@ -138,54 +138,37 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
   }
 
   useEffect(() => {
-    let isMounted = true
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      const requestId = ++profileRequestRef.current
+    if (!authResolved) return
 
-      if (!isMounted) {
-        return
+    let isMounted = true
+    const requestId = ++profileRequestRef.current
+    setUserProfile(null)
+    setProfileError(null)
+
+    if (user) {
+      if (previousUserRef.current === null) {
+        onAuthChangeRef.current?.()
       }
 
-      setUser(currentUser)
-      setUserProfile(null)
-      setProfileError(null)
-      setAuthResolved(true)
-
-      if (currentUser) {
-        onAuthChangeRef.current?.()
-
-        try {
-          const profile = await getOrCreateUserProfile(currentUser)
-          if (isMounted && profileRequestRef.current === requestId) {
-            setUserProfile(profile)
-          }
-        } catch (profileLoadError) {
+      void getOrCreateUserProfile(user)
+        .then((profile) => {
+          if (isMounted && profileRequestRef.current === requestId) setUserProfile(profile)
+        })
+        .catch((profileLoadError) => {
           console.error('Erro ao obter ou criar o perfil:', profileLoadError)
           if (isMounted && profileRequestRef.current === requestId) {
-            // The authenticated user can still access their account while
-            // Firestore recovers; do not leave the panel in a loading state.
-            setUserProfile(createDefaultUserProfile(currentUser))
+            setUserProfile(createDefaultUserProfile(user))
             setProfileError('Não foi possível sincronizar o perfil. Estamos a mostrar os teus dados locais temporariamente.')
           }
-        }
-      }
+        })
+    }
 
-    }, (authError) => {
-      console.error('Erro ao verificar a autenticação:', authError)
-      if (isMounted) {
-        setUser(null)
-        setUserProfile(null)
-        setAuthResolved(true)
-        setProfileError('Não foi possível verificar a tua sessão. Tenta novamente.')
-      }
-    })
-
+    previousUserRef.current = user
     return () => {
       isMounted = false
       profileRequestRef.current += 1
-      unsubscribe()
     }
-  }, [])
+  }, [authResolved, user])
 
   const resetForm = () => {
     setForm({ name: '', email: '', password: '', confirmPassword: '' })
