@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
-import { getRedirectResult, onAuthStateChanged, type User } from 'firebase/auth'
+import { getRedirectResult, onIdTokenChanged, type IdTokenResult, type User } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { auth } from '@/lib/firebase'
 import { db } from '@/lib/firebase'
@@ -95,6 +95,49 @@ function profileErrorMessage(error: unknown): string {
   return `Não foi possível carregar o teu perfil no Firestore. [Firebase: ${detail}]`
 }
 
+function getProfileAuthDiagnostic(user: User, tokenResult?: IdTokenResult, hasIdToken?: boolean) {
+  const currentUser = auth.currentUser
+
+  return {
+    useAuthUserUid: user.uid,
+    authCurrentUserUid: currentUser?.uid ?? null,
+    authCurrentUserEmail: currentUser?.email ?? null,
+    authCurrentUserEmailVerified: currentUser?.emailVerified ?? null,
+    authCurrentUserIsAnonymous: currentUser?.isAnonymous ?? null,
+    authCurrentUserProviderData: currentUser?.providerData.map((provider) => ({
+      providerId: provider.providerId,
+      uid: provider.uid,
+      email: provider.email,
+      displayName: provider.displayName,
+    })) ?? [],
+    firebaseProjectId: auth.app.options.projectId ?? null,
+    firebaseAuthDomain: auth.app.options.authDomain ?? null,
+    firestoreProjectId: db.app.options.projectId ?? null,
+    origin: window.location.origin,
+    profileDocumentPath: `users/${user.uid}`,
+    authCurrentUserMatchesUseAuthUid: currentUser?.uid === user.uid,
+    authCurrentUserIsUseAuthUser: currentUser === user,
+    idTokenAvailable: hasIdToken ?? false,
+    token: tokenResult
+      ? {
+          signInProvider: tokenResult.signInProvider,
+          authTime: tokenResult.authTime,
+          issuedAtTime: tokenResult.issuedAtTime,
+          expirationTime: tokenResult.expirationTime,
+          claims: {
+            aud: tokenResult.claims.aud,
+            iss: tokenResult.claims.iss,
+            auth_time: tokenResult.claims.auth_time,
+            exp: tokenResult.claims.exp,
+            user_id: tokenResult.claims.user_id,
+            email_verified: tokenResult.claims.email_verified,
+            firebase: tokenResult.claims.firebase,
+          },
+        }
+      : null,
+  }
+}
+
 /**
  * The single Firebase Auth subscription for the application. Components read
  * this state instead of creating their own listeners, so they always agree on
@@ -146,7 +189,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let isMounted = true
     let listenerDeliveredState = false
 
-    console.info('Firebase Auth: a registar onAuthStateChanged.', {
+    console.info('Firebase Auth: a registar onIdTokenChanged.', {
       projectId: auth.app.options.projectId,
       authDomain: auth.app.options.authDomain,
       origin: window.location.origin,
@@ -156,7 +199,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (listenerDeliveredState || !isMounted) return
 
       const message = `Firebase Authentication não devolveu o estado da sessão em ${AUTH_RESOLUTION_TIMEOUT_MS / 1000} segundos.`
-      console.error('Firebase Auth: timeout ao aguardar onAuthStateChanged.', {
+      console.error('Firebase Auth: timeout ao aguardar onIdTokenChanged.', {
         projectId: auth.app.options.projectId,
         authDomain: auth.app.options.authDomain,
         origin: window.location.origin,
@@ -184,7 +227,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     let unsubscribe: (() => void) | undefined
     try {
-      unsubscribe = onAuthStateChanged(
+      // Unlike onAuthStateChanged, this listener also tracks ID-token changes.
+      // The profile effect below then awaits getIdToken(), ensuring Firestore
+      // never starts its first read from a merely restored (but unusable) session.
+      unsubscribe = onIdTokenChanged(
         auth,
         (currentUser) => resolveAuthState(currentUser),
         (error) => {
@@ -240,8 +286,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setProfileError(null)
       setProfileLoading(true)
 
+      let authDiagnostic = getProfileAuthDiagnostic(user)
+
       try {
-        const userRef = doc(db, 'users', user.uid)
+        // Use the exact Auth instance that owns the ID-token subscription
+        // before issuing Firestore. This rejects stale/restored sessions
+        // locally instead of sending an unauthenticated Firestore request.
+
+        const currentAuthUser = auth.currentUser
+        if (!currentAuthUser) {
+          throw new Error('Firebase Auth inconsistency: useAuth() returned a user but auth.currentUser is null.')
+        }
+
+        if (currentAuthUser.uid !== user.uid) {
+          throw new Error(`Firebase Auth inconsistency: useAuth() uid (${user.uid}) differs from auth.currentUser uid (${currentAuthUser.uid}).`)
+        }
+
+        const idToken = await currentAuthUser.getIdToken()
+        const tokenResult = await currentAuthUser.getIdTokenResult()
+        authDiagnostic = getProfileAuthDiagnostic(user, tokenResult, Boolean(idToken))
+        console.info('Firebase profile diagnostic before getDoc:', authDiagnostic)
+
+        if (!idToken) {
+          throw new Error('Firebase Auth returned an empty ID token for the current user.')
+        }
+
+        if (auth.currentUser !== currentAuthUser) {
+          throw new Error('Firebase Auth changed user while the ID token was being prepared; profile read was cancelled.')
+        }
+
+        // This getDoc uses users/{auth.currentUser.uid} before any profile
+        // write, isolating the exact authenticated Firestore request.
+        const userRef = doc(db, 'users', currentAuthUser.uid)
         const snapshot = await withFirestoreTimeout(getDoc(userRef), 'A leitura do perfil')
         let nextProfile: UserProfile
 
@@ -258,7 +334,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setProfile(nextProfile)
         }
       } catch (error) {
-        console.error('Erro Firestore ao sincronizar o perfil:', { userId: user.uid, error })
+        const firebaseError = error as { name?: unknown; code?: unknown; message?: unknown; stack?: unknown }
+        console.error('Erro Firestore ao sincronizar o perfil:', {
+          diagnostic: authDiagnostic,
+          error: {
+            name: firebaseError.name,
+            code: firebaseError.code,
+            message: firebaseError.message,
+            stack: firebaseError.stack,
+          },
+          rawError: error,
+        })
         if (!cancelled) {
           setProfileError(profileErrorMessage(error))
         }
