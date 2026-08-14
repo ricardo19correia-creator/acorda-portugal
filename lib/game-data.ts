@@ -171,16 +171,19 @@ export type UserProfile = {
   xp: number
   euros: number
   streak: number
-  gamesPlayed?: number
+  gamesPlayed: number
   wins?: number
   losses?: number
   questionsAnswered?: number
-  correctAnswers?: number
-  bestStreak?: number
+  correctAnswers: number
+  incorrectAnswers: number
+  totalQuestions: number
+  bestStreak: number
   unlockedAchievements: string[]
   badges?: string[]
   createdAt?: unknown // Timestamp do Firestore quando disponível
   lastActiveAt?: unknown // Timestamp do Firestore quando disponível
+  updatedAt?: unknown
 }
 
 export const NATIONAL_TOP: Player[] = [

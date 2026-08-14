@@ -73,15 +73,38 @@ function createDefaultUserProfile(user: User): UserProfile {
     xp: 0,
     euros: 100,
     streak: 0,
+    bestStreak: 0,
+    totalQuestions: 0,
+    incorrectAnswers: 0,
     gamesPlayed: 0,
     wins: 0,
     losses: 0,
     questionsAnswered: 0,
     correctAnswers: 0,
-    bestStreak: 0,
     unlockedAchievements: [],
     badges: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }
+}
+
+function normalizeUserProfile(user: User, data: Record<string, unknown>): UserProfile {
+  const defaults = createDefaultUserProfile(user)
+  const legacyQuestionCount = typeof data.questionsAnswered === 'number' ? data.questionsAnswered : 0
+  const totalQuestions = typeof data.totalQuestions === 'number' ? data.totalQuestions : legacyQuestionCount
+  const correctAnswers = typeof data.correctAnswers === 'number' ? data.correctAnswers : 0
+
+  return {
+    ...defaults,
+    ...data,
+    uid: user.uid,
+    totalQuestions,
+    questionsAnswered: legacyQuestionCount || totalQuestions,
+    correctAnswers,
+    incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : Math.max(0, totalQuestions - correctAnswers),
+    createdAt: data.createdAt ?? defaults.createdAt,
+    updatedAt: data.updatedAt ?? defaults.updatedAt,
+  } as UserProfile
 }
 
 function profileErrorMessage(error: unknown): string {
@@ -342,13 +365,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // This getDoc uses users/{auth.currentUser.uid} before any profile
         // write, isolating the exact authenticated Firestore request.
         const userRef = doc(db, 'users', currentAuthUser.uid)
-        const snapshot = await withFirestoreTimeout(getDoc(userRef), 'A leitura do perfil')
+        let snapshot = await withFirestoreTimeout(getDoc(userRef), 'A leitura do perfil')
         let nextProfile: UserProfile
 
         if (snapshot.exists()) {
           // Merge older documents with the current schema so every consumer
           // receives a complete UserProfile.
-          nextProfile = { ...createDefaultUserProfile(user), ...snapshot.data(), uid: user.uid } as UserProfile
+          nextProfile = normalizeUserProfile(user, snapshot.data())
         } else {
           nextProfile = createDefaultUserProfile(user)
           await withFirestoreTimeout(setDoc(userRef, nextProfile), 'A criação do perfil')
