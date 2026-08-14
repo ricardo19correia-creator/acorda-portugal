@@ -11,10 +11,9 @@ const firebaseConfig = {
   appId: '1:789316383907:web:3b597f5edafd2cd1f73b16',
 }
 
-let app
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig)
-}
+// Reuse the existing app during Fast Refresh instead of passing an undefined
+// value to Auth/Firestore when Firebase has already been initialized.
+const app = getApps()[0] ?? initializeApp(firebaseConfig)
 
 export const auth = getAuth(app)
 export const db = getFirestore(app)

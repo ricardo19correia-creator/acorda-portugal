@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -12,8 +12,8 @@ import {
   onAuthStateChanged,
   User,
 } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
-import { doc, getDoc, setDoc, DocumentData } from 'firebase/firestore'
+import { auth, db } from '@/lib/firebase'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { PlayerCard, type UserProfile } from './player-card'
 import { cn } from '@/lib/utils'
 import {
@@ -33,6 +33,42 @@ type FormData = {
   email: string
   password: string
   confirmPassword: string
+}
+
+const FIRESTORE_TIMEOUT_MS = 10_000
+
+function createDefaultUserProfile(user: User): UserProfile {
+  return {
+    uid: user.uid,
+    displayName: user.displayName ?? 'Jogador',
+    email: user.email ?? '',
+    photoURL: user.photoURL ?? '',
+    level: 1,
+    xp: 0,
+    euros: 100,
+    district: 'Vila Real',
+    unlockedAchievements: [],
+    streak: 0,
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error(`${operation} excedeu o tempo limite.`))
+    }, FIRESTORE_TIMEOUT_MS)
+
+    promise.then(
+      (value) => {
+        window.clearTimeout(timeoutId)
+        resolve(value)
+      },
+      (reason) => {
+        window.clearTimeout(timeoutId)
+        reject(reason)
+      },
+    )
+  })
 }
 
 function mapAuthError(error: any, action: 'signin' | 'signup' | 'reset') {
@@ -78,52 +114,78 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [profileError, setProfileError] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
+  const onAuthChangeRef = useRef(onAuthChange)
+  const profileRequestRef = useRef(0)
 
-  const getOrCreateUserProfile = async (user: User) => {
+  useEffect(() => {
+    onAuthChangeRef.current = onAuthChange
+  }, [onAuthChange])
+
+  const getOrCreateUserProfile = async (user: User): Promise<UserProfile> => {
     const userRef = doc(db, 'users', user.uid)
-    const userSnap = await getDoc(userRef)
+    const userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil')
 
     if (userSnap.exists()) {
-      setUserProfile(userSnap.data() as UserProfile)
-    } else {
-      const newUserProfile: UserProfile = {
-        uid: user.uid,
-        displayName: user.displayName ?? 'Jogador',
-        email: user.email ?? '',
-        photoURL: user.photoURL ?? '',
-        level: 1,
-        xp: 0,
-        euros: 100, // Starting bonus
-        district: 'Vila Real', // Default district
-        unlockedAchievements: [],
-        streak: 0,
-      }
-      await setDoc(userRef, newUserProfile)
-      setUserProfile(newUserProfile)
+      return userSnap.data() as UserProfile
     }
+
+    const newUserProfile = createDefaultUserProfile(user)
+    await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+    return newUserProfile
   }
 
   useEffect(() => {
-    let first = true
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      if (currentUser) {
-        getOrCreateUserProfile(currentUser)
-        onAuthChange?.()
-      } else {
-        setUserProfile(null)
+    let isMounted = true
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      const requestId = ++profileRequestRef.current
+
+      if (!isMounted) {
+        return
       }
 
-      if (first) {
+      setUser(currentUser)
+      setUserProfile(null)
+      setProfileError(null)
+      setAuthResolved(true)
+
+      if (currentUser) {
+        onAuthChangeRef.current?.()
+
+        try {
+          const profile = await getOrCreateUserProfile(currentUser)
+          if (isMounted && profileRequestRef.current === requestId) {
+            setUserProfile(profile)
+          }
+        } catch (profileLoadError) {
+          console.error('Erro ao obter ou criar o perfil:', profileLoadError)
+          if (isMounted && profileRequestRef.current === requestId) {
+            // The authenticated user can still access their account while
+            // Firestore recovers; do not leave the panel in a loading state.
+            setUserProfile(createDefaultUserProfile(currentUser))
+            setProfileError('Não foi possível sincronizar o perfil. Estamos a mostrar os teus dados locais temporariamente.')
+          }
+        }
+      }
+
+    }, (authError) => {
+      console.error('Erro ao verificar a autenticação:', authError)
+      if (isMounted) {
+        setUser(null)
+        setUserProfile(null)
         setAuthResolved(true)
-        first = false
+        setProfileError('Não foi possível verificar a tua sessão. Tenta novamente.')
       }
     })
 
-    return () => unsubscribe()
-  }, [onAuthChange])
+    return () => {
+      isMounted = false
+      profileRequestRef.current += 1
+      unsubscribe()
+    }
+  }, [])
 
   const resetForm = () => {
     setForm({ name: '', email: '', password: '', confirmPassword: '' })
@@ -258,6 +320,11 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     if (userProfile) {
       return (
         <div className={cn('flex flex-col gap-6', className)}>
+          {profileError && (
+            <div className="rounded-md bg-red-900/40 px-3 py-2 text-sm text-red-200">
+              {profileError}
+            </div>
+          )}
           <PlayerCard user={user} profile={userProfile} />
           <button
             onClick={handleLogout}
@@ -441,13 +508,13 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
             </form>
           )}
 
-          {(error || message) && (
+          {(error || message || profileError) && (
             <div className={cn(
               'mt-3 rounded-md px-3 py-2 text-sm',
-              error ? 'bg-red-900/40 text-red-200' : 'bg-emerald-900/25 text-emerald-200',
+              error || profileError ? 'bg-red-900/40 text-red-200' : 'bg-emerald-900/25 text-emerald-200',
             )}
           >
-            {error ?? message}
+            {error ?? profileError ?? message}
           </div>
           )}
 
