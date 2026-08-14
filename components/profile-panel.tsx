@@ -257,11 +257,11 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
   if (isAuthenticated) {
     if (userProfile) {
       return (
-        <div className={cn('flex h-full flex-col gap-6 p-6', className)}>
+        <div className={cn('flex flex-col gap-6', className)}>
           <PlayerCard user={user} profile={userProfile} />
           <button
             onClick={handleLogout}
-            className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             <LogOut className="h-4 w-4" />
             Terminar sessão

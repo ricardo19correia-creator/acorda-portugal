@@ -1,12 +1,26 @@
 'use client'
 
-import { SectionHeading } from '@/components/section-heading'
-import { PlayerCard } from '@/components/player-card'
-import { DailyMissions } from '@/components/daily-missions'
-import { StreakCard } from '@/components/streak-card'
+import { useState, useEffect } from 'react'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { auth } from '@/lib/firebase'
+import { SectionHeading } from './section-heading'
 import { ProfilePanel } from './profile-panel'
 
+import { DailyMissions } from '@/components/daily-missions'
+import { StreakCard } from '@/components/streak-card'
+
 export function PlayerHub() {
+  const [user, setUser] = useState<User | null>(null)
+  const [authResolved, setAuthResolved] = useState(false)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      setAuthResolved(true)
+    })
+    return () => unsubscribe()
+  }, [])
+
   return (
     <section id="perfil" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
       <SectionHeading
