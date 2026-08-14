@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { getRedirectResult, onIdTokenChanged, type IdTokenResult, type User } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { usePathname, useRouter } from 'next/navigation'
 import { auth } from '@/lib/firebase'
 import { db } from '@/lib/firebase'
 import type { UserProfile } from '@/lib/game-data'
@@ -152,6 +153,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profileLoading, setProfileLoading] = useState(false)
   const [profileError, setProfileError] = useState<string | null>(null)
   const [profileRetry, setProfileRetry] = useState(0)
+  const [googleRedirectUserId, setGoogleRedirectUserId] = useState<string | null>(null)
+  const googleRedirectNavigationStartedRef = useRef(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
 
@@ -168,6 +173,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             providerId: result.providerId,
             userId: result.user.uid,
           })
+          // Wait for onIdTokenChanged to publish this user to the global state
+          // before navigating. This keeps the redirect flow to one navigation
+          // and lets /perfil render from the authenticated AuthProvider state.
+          if (isMounted) setGoogleRedirectUserId(result.user.uid)
         }
       })
       .catch((error: unknown) => {
@@ -184,6 +193,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isMounted = false
     }
   }, [])
+
+  useEffect(() => {
+    if (
+      !googleRedirectUserId ||
+      !authResolved ||
+      user?.uid !== googleRedirectUserId ||
+      pathname === '/perfil' ||
+      googleRedirectNavigationStartedRef.current
+    ) {
+      return
+    }
+
+    googleRedirectNavigationStartedRef.current = true
+    router.replace('/perfil')
+  }, [authResolved, googleRedirectUserId, pathname, router, user])
 
   useEffect(() => {
     let isMounted = true
