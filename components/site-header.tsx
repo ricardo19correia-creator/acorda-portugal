@@ -8,6 +8,7 @@ import { PlayButton } from '@/components/play-button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { ProfilePanel } from './profile-panel'
 import { useAuth } from '@/components/auth-provider'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -57,30 +58,31 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-            <SheetTrigger asChild>
-              {authResolved && user ? (
-                <button className="ml-2 flex items-center gap-2 rounded-full border border-white/10 bg-card/80 p-1.5 pr-4 text-sm font-semibold text-foreground transition-colors hover:bg-white/10">
-                  {user.photoURL ? (
-                    <img src={user.photoURL} alt={user.displayName ?? ''} className="h-7 w-7 rounded-full" />
-                  ) : (
-                    <div className="grid h-7 w-7 place-items-center rounded-full bg-primary/20 text-primary">
-                      <User className="h-4 w-4" />
-                    </div>
-                  )}
-                  <span className="truncate">{user.displayName?.split(' ')[0] ?? 'Conta'}</span>
-                </button>
+          {authResolved && user ? (
+            <Link href="/perfil" className="ml-2 flex items-center gap-2 rounded-full border border-white/10 bg-card/80 p-1.5 pr-4 text-sm font-semibold text-foreground transition-colors hover:bg-white/10">
+              {user.photoURL ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={user.photoURL} alt={user.displayName ?? ''} className="h-7 w-7 rounded-full object-cover" />
               ) : (
+                <div className="grid h-7 w-7 place-items-center rounded-full bg-primary/20 text-primary">
+                  <User className="h-4 w-4" />
+                </div>
+              )}
+              <span className="truncate">{user.displayName?.split(' ')[0] ?? 'Conta'}</span>
+            </Link>
+          ) : (
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
                 <button className="ml-2 flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-white/10">
                   <User className="h-4 w-4" />
                   Entrar
                 </button>
-              )}
-            </SheetTrigger>
-            <SheetContent className="w-full max-w-md border-l-white/10 bg-background/95 p-0 backdrop-blur-xl">
-              <ProfilePanel onAuthChange={() => setSheetOpen(false)} />
-            </SheetContent>
-          </Sheet>
+              </SheetTrigger>
+              <SheetContent className="w-full max-w-md border-l-white/10 bg-background/95 p-0 backdrop-blur-xl">
+                <ProfilePanel onAuthChange={() => setSheetOpen(false)} />
+              </SheetContent>
+            </Sheet>
+          )}
           <PlayButton href="/jogar" size="md" label="Jogar" className="ml-2 rounded-xl px-5 py-2.5 text-sm" />
         </nav>
 
