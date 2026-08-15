@@ -7,8 +7,6 @@ import { db } from '@/lib/firebase'
 export type GlobalCounters = {
   onlineCount: number
   playingCount: number
-  registeredPlayers: number;
-  gamesToday: number;
   loading: boolean
   error: string | null
 }
@@ -16,8 +14,6 @@ export type GlobalCounters = {
 export function useGlobalCounters(): GlobalCounters {
   const [onlineCount, setOnlineCount] = useState(0)
   const [playingCount, setPlayingCount] = useState(0)
-  const [registeredPlayers, setRegisteredPlayers] = useState(0);
-  const [gamesToday, setGamesToday] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null)
 
@@ -59,32 +55,9 @@ export function useGlobalCounters(): GlobalCounters {
     }
   }, [])
 
-  useEffect(() => {
-    const countersRef = doc(db, 'counters', 'global');
-
-    const unsubscribe = onSnapshot(countersRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
-        setRegisteredPlayers(typeof data.registeredPlayers === 'number' ? data.registeredPlayers : 0);
-        setGamesToday(typeof data.gamesToday === 'number' ? data.gamesToday : 0);
-      } else {
-        // Document does not exist, set to 0
-        setRegisteredPlayers(0);
-        setGamesToday(0);
-      }
-    }, (err) => {
-      console.error('[FIRESTORE GLOBAL COUNTERS]', err);
-      setError((prev) => prev ? `${prev} & counters` : 'Erro ao carregar contadores globais.');
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   return {
     onlineCount,
     playingCount,
-    registeredPlayers,
-    gamesToday,
     loading,
     error,
   }
