@@ -14,7 +14,6 @@ import { doc, updateDoc, increment } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { usePresence } from '@/hooks/use-presence'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -138,9 +137,6 @@ export function QuizScreen({
 
   const total = quizQuestions.length
   const q = quizQuestions[step]
-
-  // Set presence status to 'playing' for the duration of the quiz
-  usePresence('playing');
 
   const wasCorrect = selected === q?.correct
 
