@@ -1,8 +1,8 @@
-﻿﻿import { Analytics } from '@vercel/analytics/next'
+﻿import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
-import { PresenceManager } from '@/components/presence-manager';
+import { PresenceManager } from '@/components/presence-manager'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -47,3 +47,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+
