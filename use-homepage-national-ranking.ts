@@ -1,62 +1,29 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-import { collection, query, orderBy, limit, onSnapshot, DocumentData } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { useState } from 'react';
 import type { UserProfile } from '@/lib/game-data';
 
 export type RankedPlayer = Pick<UserProfile, 'uid' | 'displayName' | 'photoURL' | 'level' | 'xp' | 'district'> & {
   rank: number;
 };
 
+const STATIC_RANKING: RankedPlayer[] = [
+  { rank: 1, uid: 'static-1', displayName: 'Tiago Pereira', xp: 8760, level: 18, district: 'Vila Real', photoURL: '' },
+  { rank: 2, uid: 'static-2', displayName: 'Joana Santos', xp: 5840, level: 14, district: 'Porto', photoURL: '' },
+  { rank: 3, uid: 'static-3', displayName: 'Miguel Costa', xp: 4920, level: 12, district: 'Braga', photoURL: '' },
+  { rank: 4, uid: 'static-4', displayName: 'Ana Martins', xp: 4380, level: 11, district: 'Lisboa', photoURL: '' },
+  { rank: 5, uid: 'static-5', displayName: 'Pedro Silva', xp: 3970, level: 10, district: 'Aveiro', photoURL: '' },
+  { rank: 6, uid: 'static-6', displayName: 'Rui Fernandes', xp: 3510, level: 9, district: 'Bragança', photoURL: '' },
+  { rank: 7, uid: 'static-7', displayName: 'Sofia Almeida', xp: 3260, level: 8, district: 'Viseu', photoURL: '' },
+  { rank: 8, uid: 'static-8', displayName: 'Daniel Rodrigues', xp: 2940, level: 8, district: 'Coimbra', photoURL: '' },
+  { rank: 9, uid: 'static-9', displayName: 'Mariana Lopes', xp: 2680, level: 7, district: 'Faro', photoURL: '' },
+  { rank: 10, uid: 'static-10', displayName: 'João Carvalho', xp: 2410, level: 7, district: 'Viana do Castelo', photoURL: '' },
+];
+
 export function useHomepageNationalRanking() {
-  const [ranking, setRanking] = useState<RankedPlayer[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    const q = query(
-      collection(db, 'publicProfiles'),
-      orderBy('xp', 'desc'),
-      limit(10) // Top 10 players
-    );
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const fetchedRanking: RankedPlayer[] = [];
-      let rank = 1;
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data() as UserProfile;
-        // Ensure displayName is valid, otherwise skip or use a fallback
-        if (data.displayName) {
-          fetchedRanking.push({
-            rank,
-            uid: data.uid,
-            displayName: data.displayName,
-            photoURL: data.photoURL,
-            level: data.level,
-            xp: data.xp,
-            district: data.district,
-          });
-          rank++;
-        }
-      });
-
-      setRanking(fetchedRanking);
-      setLoading(false);
-    }, (err: any) => {
-      console.error('[FIRESTORE RANKING] Erro ao carregar ranking nacional:', err);
-      console.error('Firebase Error Code:', err.code);
-      console.error('Firebase Error Message:', err.message);
-      setError('Não foi possível carregar o ranking. Tente novamente.');
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const [ranking] = useState<RankedPlayer[]>(STATIC_RANKING);
+  const [loading] = useState(false);
+  const [error] = useState<string | null>(null);
 
   return { ranking, loading, error };
 }

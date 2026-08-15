@@ -21,13 +21,15 @@ type LevelUpInfo = {
 
 export function ResultScreen({
   result,
+  gameId,
   onReplay,
   onGameEnd,
   levelUpInfo,
 }: {
   result: QuizResult
+  gameId: string
   onReplay?: () => void
-  onGameEnd?: (result: QuizResult) => void
+  onGameEnd?: (gameId: string, result: QuizResult) => Promise<void>
   levelUpInfo?: LevelUpInfo
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
@@ -35,13 +37,13 @@ export function ResultScreen({
 
   useEffect(() => {
     // Save progress when the result screen is shown
-    onGameEnd?.(result)
+    void onGameEnd?.(gameId, result)
 
     if (levelUpInfo) {
       const timer = setTimeout(() => setShowLevelUp(true), 500)
       return () => clearTimeout(timer)
     }
-  }, [result, onGameEnd])
+  }, [gameId, result, onGameEnd, levelUpInfo])
 
   return (
     <div className="animate-rise mx-auto max-w-lg">

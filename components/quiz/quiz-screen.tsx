@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   ArrowLeft,
   Sparkles,
@@ -10,7 +11,7 @@ import {
   ChevronRight,
   Lightbulb,
 } from 'lucide-react'
-import { doc, updateDoc, increment } from 'firebase/firestore'
+import { doc, runTransaction, serverTimestamp } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -41,6 +42,10 @@ type Phase = 'answering' | 'revealed' | 'finished'
 type GameQuestion = QuizQuestion
 
 type OptionKey = 'A' | 'B' | 'C' | 'D'
+
+type GameCompletionOutcome =
+  | { awarded: false }
+  | { awarded: true; newLevel: number; newTotalXp: number; newEuros: number }
 
 function shuffle<T>(array: T[]): T[] {
   const copy = [...array]
@@ -111,9 +116,12 @@ function createGameQuestions(categorySlug: string): GameQuestion[] {
 
 export function QuizScreen({
   categorySlug,
+  gameId,
 }: {
   categorySlug: string
+  gameId: string
 }) {
+  const router = useRouter()
   const category = CATEGORIES.find(
     (item) => item.slug === categorySlug,
   )
@@ -216,6 +224,8 @@ export function QuizScreen({
   }
 
   const restart = () => {
+    const nextGameId = crypto.randomUUID()
+    router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
     setQuizQuestions(createGameQuestions(categorySlug))
     setStep(0)
     setSelected(null)
@@ -227,36 +237,60 @@ export function QuizScreen({
     setPhase('answering')
   }
 
-  const handleGameEnd = useCallback(async (result: QuizResult) => {
-    if (!user || !userProfile) return
+  const handleGameEnd = useCallback(async (completedGameId: string, result: QuizResult) => {
+    if (!user) return
 
     try {
       const userRef = doc(db, 'users', user.uid)
-      const currentProfile = userProfile
-      const newTotalXp = currentProfile.xp + result.xp
+      const gameRef = doc(db, 'users', user.uid, 'completedGames', completedGameId)
 
-      let newLevel = currentProfile.level
-      let xpForNextLevel = newLevel * 500
+      const outcome = await runTransaction<GameCompletionOutcome>(db, async (transaction) => {
+        const completedGameSnapshot = await transaction.get(gameRef)
 
-      // Check for level up (can happen multiple times in one game)
-      while (newTotalXp >= xpForNextLevel) {
-        newLevel++
-        xpForNextLevel = newLevel * 500
-      }
+        if (completedGameSnapshot.exists()) {
+          return { awarded: false }
+        }
 
-      await updateDoc(userRef, {
-        xp: increment(result.xp),
-        euros: increment(result.euros),
-        level: newLevel,
-        // TODO: Update streak based on more complex logic
+        const userSnapshot = await transaction.get(userRef)
+        if (!userSnapshot.exists()) {
+          throw new Error('O perfil do jogador não existe.')
+        }
+
+        const userData = userSnapshot.data()
+        const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+        const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
+        let newLevel = typeof userData.level === 'number' ? userData.level : 1
+        const newTotalXp = currentXp + result.xp
+
+        while (newTotalXp >= newLevel * 500) {
+          newLevel++
+        }
+
+        transaction.update(userRef, {
+          xp: newTotalXp,
+          euros: currentEuros + result.euros,
+          level: newLevel,
+        })
+        transaction.set(gameRef, {
+          gameId: completedGameId,
+          xp: result.xp,
+          euros: result.euros,
+          level: newLevel,
+          completedAt: serverTimestamp(),
+        })
+
+        return { awarded: true, newLevel, newTotalXp, newEuros: currentEuros + result.euros }
       })
 
-      // Update local state to reflect new level for the animation
-      setUserProfile(prev => prev ? { ...prev, level: newLevel, xp: newTotalXp, euros: prev.euros + result.euros } : null)
+      if (outcome.awarded) {
+        setUserProfile((currentProfile) => currentProfile
+          ? { ...currentProfile, level: outcome.newLevel, xp: outcome.newTotalXp, euros: outcome.newEuros }
+          : currentProfile)
+      }
     } catch (error) {
       console.error("Error updating user profile:", error)
     }
-  }, [user, userProfile])
+  }, [user])
 
   const result: QuizResult = useMemo(
     () => ({
@@ -304,6 +338,7 @@ export function QuizScreen({
         <div className="mx-auto max-w-2xl">
           <ResultScreen
             result={result}
+            gameId={gameId}
             levelUpInfo={levelUpInfo}
             onGameEnd={handleGameEnd}
             onReplay={restart}

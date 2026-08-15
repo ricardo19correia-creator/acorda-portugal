@@ -4,6 +4,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
       allow get, create, update: if request.auth != null && request.auth.uid == userId;
+
+      match /completedGames/{gameId} {
+        allow get, create: if request.auth != null && request.auth.uid == userId;
+      }
     }
   }
 }
