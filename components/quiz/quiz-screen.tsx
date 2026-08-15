@@ -10,7 +10,7 @@ import {
   ChevronRight,
   Lightbulb,
 } from 'lucide-react'
-import { doc, updateDoc, increment } from 'firebase/firestore'
+import { doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -140,7 +140,7 @@ export function QuizScreen({
   const q = quizQuestions[step]
 
   // Set presence status to 'playing' for the duration of the quiz
-  usePresence('playing');
+  usePresence('playing')
 
   const wasCorrect = selected === q?.correct
 
@@ -251,7 +251,7 @@ export function QuizScreen({
       await updateDoc(userRef, {
         xp: increment(result.xp),
         euros: increment(result.euros),
-        level: newLevel,
+        level: newLevel, // This should be handled by a transaction in a real-world scenario
         // TODO: Update streak based on more complex logic
       })
 

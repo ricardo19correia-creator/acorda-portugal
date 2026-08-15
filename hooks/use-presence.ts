@@ -1,18 +1,12 @@
-﻿'use client'
+﻿﻿'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
-import {
-  ref,
-  set,
-  onDisconnect,
-  serverTimestamp,
-  update,
-} from 'firebase/database'
-import { rtdb } from '@/lib/firebase'
+import { doc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
-const HEARTBEAT_INTERVAL_MS = 30000
 const GUEST_SESSION_ID_KEY = 'acorda-portugal-guest-session-id'
+const HEARTBEAT_INTERVAL_MS = 60 * 1000; // 1 minute heartbeat
 
 function createSessionId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`
@@ -20,7 +14,7 @@ function createSessionId() {
 
 export function usePresence(status: 'online' | 'playing' = 'online') {
   const { user, authResolved } = useAuth()
-  const presenceRef = useRef<ReturnType<typeof ref> | null>(null)
+  const sessionIdRef = useRef<string | null>(null)
   const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const getSessionId = useCallback(() => {
