@@ -9,6 +9,7 @@ import { DistrictRanking } from '@/components/district-ranking'
 import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
 import { SiteFooter } from '@/components/site-footer'
+import { GlobalCountersDisplay } from '@/components/global-counters'
 
 export default function Page() {
   return (
@@ -20,6 +21,9 @@ export default function Page() {
 
         <main>
           <Hero />
+          <div className="container mx-auto my-8 px-4">
+            <GlobalCountersDisplay />
+          </div>
           <HowItWorks />
           <Categories />
           <Events />
