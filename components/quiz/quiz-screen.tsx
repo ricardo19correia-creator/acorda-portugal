@@ -10,11 +10,12 @@ import {
   ChevronRight,
   Lightbulb,
 } from 'lucide-react'
-import { doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, increment, setDoc, runTransaction as runFirestoreTransaction, serverTimestamp } from 'firebase/firestore'
+import { ref, update, serverTimestamp as rtdbServerTimestamp } from 'firebase/database';
+import { rtdb } from '@/lib/firebase';
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { usePresence } from '@/hooks/use-presence'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -38,6 +39,8 @@ const MAX_SECONDS = 20
 const QUESTIONS_PER_GAME = 20
 
 type Phase = 'answering' | 'revealed' | 'finished'
+
+type PresenceStatus = 'online' | 'playing';
 
 type GameQuestion = QuizQuestion
 
@@ -119,7 +122,7 @@ export function QuizScreen({
     (item) => item.slug === categorySlug,
   )
 
-  const { user, profile } = useAuth()
+  const { user } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
@@ -135,19 +138,46 @@ export function QuizScreen({
   const [correctCount, setCorrectCount] = useState(0)
   const [streak, setStreak] = useState(0)
   const [bestStreak, setBestStreak] = useState(0)
+  const [currentPresenceStatus, setCurrentPresenceStatus] = useState<PresenceStatus>('online');
 
   const total = quizQuestions.length
   const q = quizQuestions[step]
 
-  // Set presence status to 'playing' for the duration of the quiz
-  usePresence('playing')
-
   const wasCorrect = selected === q?.correct
 
   useEffect(() => {
-    setUserProfile(profile)
-    setPreviousLevel(profile?.level ?? null)
-  }, [profile])
+    let active = true
+    setUserProfile(null)
+    setPreviousLevel(null)
+
+    if (user) {
+      void getDoc(doc(db, 'users', user.uid)).then((userSnap) => {
+        if (userSnap.exists()) {
+          const profile = userSnap.data() as UserProfile
+          if (active) {
+            setUserProfile(profile)
+            setPreviousLevel(profile.level)
+          }
+        }
+      })
+    }
+
+    return () => { active = false }
+  }, [user])
+
+  // Effect to update presence status in Realtime Database
+  useEffect(() => {
+    if (user && userProfile) {
+      const isAuthUser = !!user;
+      const path = isAuthUser ? `presence/users/${user.uid}` : `presence/guests-quiz-screen/${user.uid}`; // Use a different path for guests in quiz if needed, or rely on global presence
+      const presenceRef = ref(rtdb, path);
+      update(presenceRef, { status: currentPresenceStatus, lastSeen: rtdbServerTimestamp() })
+        .catch(console.error);
+    }
+  }, [currentPresenceStatus, user, userProfile]);
+
+  // Set status to 'playing' when quiz starts
+  useEffect(() => { setCurrentPresenceStatus('playing'); return () => setCurrentPresenceStatus('online'); }, []);
 
   const reveal = useCallback(
     (choice: OptionKey | null) => {
@@ -211,6 +241,7 @@ export function QuizScreen({
     if (step + 1 >= total) {
       setPhase('finished')
       return
+
     }
 
     setStep((current) => current + 1)
@@ -231,11 +262,14 @@ export function QuizScreen({
     setPhase('answering')
   }
 
+  // Handle game end logic
+
   const handleGameEnd = useCallback(async (result: QuizResult) => {
     if (!user || !userProfile) return
 
     try {
       const userRef = doc(db, 'users', user.uid)
+      const publicProfileRef = doc(db, 'publicProfiles', user.uid)
       const currentProfile = userProfile
       const newTotalXp = currentProfile.xp + result.xp
 
@@ -251,16 +285,103 @@ export function QuizScreen({
       await updateDoc(userRef, {
         xp: increment(result.xp),
         euros: increment(result.euros),
-        level: newLevel, // This should be handled by a transaction in a real-world scenario
+        level: newLevel,
+        gamesPlayed: increment(1),
+        wins: increment(result.correct === result.total ? 1 : 0),
+        losses: increment(result.correct !== result.total ? 1 : 0), // Assuming losses are tracked
+        questionsAnswered: increment(result.total),
+        correctAnswers: increment(result.correct),
+        bestStreak: Math.max(currentProfile.bestStreak || 0, result.bestStreak),
+        lastActiveAt: new Date(),
         // TODO: Update streak based on more complex logic
       })
 
       // Update local state to reflect new level for the animation
+      // Fetch the updated user document to ensure public profile consistency
+      const updatedUserSnap = await getDoc(userRef);
+      if (updatedUserSnap.exists()) {
+        const updatedUserData = updatedUserSnap.data() as UserProfile;
+
+        // Prepare data for public profile
+        const publicProfileData = {
+          uid: updatedUserData.uid,
+          displayName: updatedUserData.displayName,
+          photoURL: updatedUserData.photoURL,
+          district: updatedUserData.district,
+          level: updatedUserData.level,
+          xp: updatedUserData.xp,
+          euros: updatedUserData.euros,
+          // Include other public stats that are updated
+          gamesPlayed: updatedUserData.gamesPlayed,
+          wins: updatedUserData.wins,
+          losses: updatedUserData.losses,
+          questionsAnswered: updatedUserData.questionsAnswered,
+          correctAnswers: updatedUserData.correctAnswers,
+          bestStreak: updatedUserData.bestStreak,
+          unlockedAchievements: updatedUserData.unlockedAchievements,
+          badges: updatedUserData.badges,
+          lastActiveAt: updatedUserData.lastActiveAt,
+          username: updatedUserData.username,
+          streak: updatedUserData.streak, // Assuming streak is updated elsewhere or passed
+        };
+
+        // Update public profile (create if not exists, or merge update)
+        const publicProfileExists = (await getDoc(publicProfileRef)).exists();
+        await setDoc(publicProfileRef, publicProfileData, { merge: true }); // Always merge to avoid overwriting
+
+        // Increment registeredPlayers if this is a new public profile creation
+        if (!publicProfileExists) {
+          const countersRef = doc(db, 'counters', 'global');
+          await runFirestoreTransaction(db, async (transaction) => {
+            const sfDoc = await transaction.get(countersRef);
+            if (!sfDoc.exists()) {
+              transaction.set(countersRef, { registeredPlayers: 1, gamesToday: 0, lastGamesTodayReset: new Date() });
+            } else {
+              const newRegisteredPlayers = (sfDoc.data()?.registeredPlayers || 0) + 1;
+              transaction.update(countersRef, { registeredPlayers: newRegisteredPlayers });
+            }
+          });
+        }
+      }
+
+      // Increment gamesToday counter and handle daily reset
+      const countersRef = doc(db, 'counters', 'global');
+      await runFirestoreTransaction(db, async (transaction) => {
+        const sfDoc = await transaction.get(countersRef);
+        if (!sfDoc.exists()) {
+          // Initialize if it doesn't exist (should ideally be done once)
+          transaction.set(countersRef, { registeredPlayers: 0, gamesToday: 1, lastGamesTodayReset: new Date() });
+        } else {
+          const currentData = sfDoc.data();
+          const lastResetTimestamp = currentData?.lastGamesTodayReset;
+          const lastResetDate = lastResetTimestamp ? new Date(lastResetTimestamp.seconds * 1000) : null;
+          const now = new Date();
+
+          const isNewDay = !lastResetDate || lastResetDate.getDate() !== now.getDate() || lastResetDate.getMonth() !== now.getMonth() || lastResetDate.getFullYear() !== now.getFullYear();
+
+          let newGamesToday = (currentData?.gamesToday || 0);
+          let newLastGamesTodayReset = currentData?.lastGamesTodayReset;
+
+          if (isNewDay) {
+            newGamesToday = 1; // Reset and start new count
+            newLastGamesTodayReset = serverTimestamp(); // Correct serverTimestamp for Firestore
+          } else {
+            newGamesToday++;
+          }
+          transaction.update(countersRef, { gamesToday: newGamesToday, lastGamesTodayReset: newLastGamesTodayReset });
+        }
+      });
+
+      // Update local state to reflect new level for the animation
+      // This part is crucial for the LevelUpAnimation to trigger correctly
       setUserProfile(prev => prev ? { ...prev, level: newLevel, xp: newTotalXp, euros: prev.euros + result.euros } : null)
     } catch (error) {
       console.error("Error updating user profile:", error)
     }
   }, [user, userProfile])
+
+  // Set status back to 'online' when game finishes
+  useEffect(() => { if (phase === 'finished') setCurrentPresenceStatus('online'); }, [phase]);
 
   const result: QuizResult = useMemo(
     () => ({
