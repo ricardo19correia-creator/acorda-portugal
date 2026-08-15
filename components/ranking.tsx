@@ -1,84 +1,18 @@
-import { ChevronRight, Crown, MapPin } from 'lucide-react'
-import { NATIONAL_TOP, type Player } from '@/lib/game-data'
-import { SectionHeading } from '@/components/section-heading'
-import { cn } from '@/lib/utils'
+﻿'use client'
 
-const PODIUM_ORDER = [1, 0, 2] // silver, gold, bronze visual order
-
-export function Ranking() {
-  const top3 = NATIONAL_TOP.slice(0, 3)
-  const rest = NATIONAL_TOP.slice(3, 10)
-
-  return (
-    <section id="ranking" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-      <SectionHeading
-        eyebrow="A tabela nacional"
-        title="Top de Portugal"
-        description="Os melhores do país, atualizados a cada partida. Sobe, ultrapassa e reclama a coroa."
-      />
-
-      {/* Podium */}
-      <div className="mt-12 grid grid-cols-3 items-end gap-3 sm:gap-6">
-        {PODIUM_ORDER.map((idx) => (
-          <PodiumSpot key={idx} player={top3[idx]} />
-        ))}
-      </div>
-
-      {/* Positions 4–10 */}
-      <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-card/60 backdrop-blur">
-        <ul className="divide-y divide-white/5">
-          {rest.map((row) => (
-            <li
-              key={row.pos}
-              className="flex items-center gap-4 px-4 py-3.5 transition-colors hover:bg-white/[0.03] sm:px-5"
-            >
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/5 text-sm font-black text-muted-foreground">
-                {row.pos}
-              </span>
-              <Avatar name={row.name} className="h-10 w-10 shrink-0 text-sm" />
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold text-foreground">{row.name}</p>
-                <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <MapPin className="h-3 w-3" />
-                  {row.district} · Nível {row.level}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="font-display text-base font-bold text-foreground">{row.xp}</p>
-                <p className="text-[0.62rem] uppercase tracking-wider text-muted-foreground">XP</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="p-4">
-          <button
-            type="button"
-            className="flex w-full items-center justify-center gap-1 rounded-xl border border-primary/30 bg-primary/10 py-4 font-semibold text-primary transition-colors hover:bg-primary/20"
-          >
-            Ver ranking completo
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function PodiumSpot({ player }: { player: Player }) {
+import { useEffect, useState } from 'react'
 import { ChevronRight, Crown, MapPin } from 'lucide-react'
 import { collection, limit, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { SectionHeading } from '@/components/section-heading'
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
 
 type RankedPlayer = {
   uid: string
   displayName: string
-  photoURL?: string
-  level?: number
-  xp?: number
-  district?: string
+  level: number
+  xp: number
+  district: string
   rank: number
 }
 
@@ -110,7 +44,6 @@ export function Ranking() {
           players.push({
             uid: data.uid || doc.id,
             displayName: data.displayName,
-            photoURL: data.photoURL || '',
             level: Number(data.level) || 1,
             xp: Number(data.xp) || 0,
             district: data.district || 'Portugal',
@@ -205,9 +138,8 @@ export function Ranking() {
 
                   <div className="text-right">
                     <p className="font-display text-base font-bold text-foreground">
-                      {row.xp?.toLocaleString('pt-PT')}
+                      {row.xp.toLocaleString('pt-PT')}
                     </p>
-
                     <p className="text-[0.62rem] uppercase tracking-wider text-muted-foreground">
                       XP
                     </p>
@@ -292,7 +224,7 @@ function PodiumSpot({ player }: { player: RankedPlayer }) {
         </span>
 
         <span className="mt-2 font-display text-sm font-bold text-foreground sm:text-base">
-          {player.xp?.toLocaleString('pt-PT')}
+          {player.xp.toLocaleString('pt-PT')}
         </span>
 
         <span className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">
