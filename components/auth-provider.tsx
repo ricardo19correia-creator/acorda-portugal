@@ -1,9 +1,8 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
-import { getRedirectResult, onIdTokenChanged, type IdTokenResult, type User } from 'firebase/auth'
+import { onIdTokenChanged, type IdTokenResult, type User } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
-import { usePathname, useRouter } from 'next/navigation'
 import { auth } from '@/lib/firebase'
 import { db } from '@/lib/firebase'
 import type { UserProfile } from '@/lib/game-data'
@@ -12,7 +11,6 @@ type AuthState = {
   user: User | null
   authResolved: boolean
   authInitializationError: string | null
-  redirectAuthError: unknown | null
   profile: UserProfile | null
   profileLoading: boolean
   profileError: string | null
@@ -22,7 +20,6 @@ type AuthState = {
 const AuthContext = createContext<AuthState | null>(null)
 const FIRESTORE_TIMEOUT_MS = 10_000
 const AUTH_RESOLUTION_TIMEOUT_MS = 12_000
-const REDIRECT_RESULT_TIMEOUT_MS = 12_000
 
 function withFirestoreTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
@@ -148,66 +145,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [authResolved, setAuthResolved] = useState(false)
   const [authInitializationError, setAuthInitializationError] = useState<string | null>(null)
-  const [redirectAuthError, setRedirectAuthError] = useState<unknown | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [profileLoading, setProfileLoading] = useState(false)
   const [profileError, setProfileError] = useState<string | null>(null)
   const [profileRetry, setProfileRetry] = useState(0)
-  const [googleRedirectUserId, setGoogleRedirectUserId] = useState<string | null>(null)
-  const googleRedirectNavigationStartedRef = useRef(false)
-  const router = useRouter()
-  const pathname = usePathname()
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
-
-  // A redirect result must be consumed once for the whole app. Keeping this in
-  // the global AuthProvider avoids multiple ProfilePanel instances racing to
-  // consume the same Google redirect response.
-  useEffect(() => {
-    let isMounted = true
-
-    void withTimeout(Promise.resolve().then(() => getRedirectResult(auth)), 'A confirmação do login Google por redirect', REDIRECT_RESULT_TIMEOUT_MS)
-      .then((result) => {
-        if (result) {
-          console.info('Firebase Auth: login Google por redirect concluído.', {
-            providerId: result.providerId,
-            userId: result.user.uid,
-          })
-          // Wait for onIdTokenChanged to publish this user to the global state
-          // before navigating. This keeps the redirect flow to one navigation
-          // and lets /perfil render from the authenticated AuthProvider state.
-          if (isMounted) setGoogleRedirectUserId(result.user.uid)
-        }
-      })
-      .catch((error: unknown) => {
-        const firebaseError = error as { code?: unknown; message?: unknown }
-        console.error('Erro Firebase Auth (google-redirect):', {
-          code: firebaseError.code,
-          message: firebaseError.message,
-          error,
-        })
-        if (isMounted) setRedirectAuthError(error)
-      })
-
-    return () => {
-      isMounted = false
-    }
-  }, [])
-
-  useEffect(() => {
-    if (
-      !googleRedirectUserId ||
-      !authResolved ||
-      user?.uid !== googleRedirectUserId ||
-      pathname === '/perfil' ||
-      googleRedirectNavigationStartedRef.current
-    ) {
-      return
-    }
-
-    googleRedirectNavigationStartedRef.current = true
-    router.replace('/perfil')
-  }, [authResolved, googleRedirectUserId, pathname, router, user])
 
   useEffect(() => {
     let isMounted = true
@@ -386,7 +329,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [authResolved, user, profileRetry])
 
-  return <AuthContext.Provider value={{ user, authResolved, authInitializationError, redirectAuthError, profile, profileLoading, profileError, retryProfile }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, authResolved, authInitializationError, profile, profileLoading, profileError, retryProfile }}>{children}</AuthContext.Provider>
 }
 
 export function useAuth() {

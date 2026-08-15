@@ -1,4 +1,4 @@
-﻿'use client'
+﻿﻿'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -6,14 +6,15 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  updateProfile,
   User,
+  GoogleAuthProvider,
+  signInWithPopup,
+  updateProfile,
 } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { PlayerCard } from './player-card'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { PlayerCard, type UserProfile } from './player-card'
 import { cn } from '@/lib/utils'
 import {
   Coins,
@@ -32,6 +33,64 @@ type FormData = {
   email: string
   password: string
   confirmPassword: string
+}
+
+const FIRESTORE_TIMEOUT_MS = 10_000
+
+type ProfileSyncFailure = {
+  operation: 'getDoc' | 'setDoc'
+  cause: unknown
+}
+
+function createDefaultUserProfile(user: User): UserProfile {
+  return {
+    uid: user.uid,
+    displayName: user.displayName ?? 'Jogador',
+    email: user.email ?? '',
+    photoURL: user.photoURL ?? '',
+    level: 1,
+    xp: 0,
+    euros: 100,
+    district: 'Vila Real',
+    unlockedAchievements: [],
+    streak: 0,
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error(`${operation} excedeu o tempo limite.`))
+    }, FIRESTORE_TIMEOUT_MS)
+
+    promise.then(
+      (value) => {
+        window.clearTimeout(timeoutId)
+        resolve(value)
+      },
+      (reason) => {
+        window.clearTimeout(timeoutId)
+        reject(reason)
+      },
+    )
+  })
+}
+
+function getFirestoreDiagnostic(error: unknown) {
+  const firestoreError = error as { code?: unknown; message?: unknown }
+  const code = typeof firestoreError?.code === 'string' ? firestoreError.code : ''
+  const message = typeof firestoreError?.message === 'string' ? firestoreError.message : ''
+
+  return {
+    code,
+    message,
+    display: code || message || 'Erro Firestore sem código.',
+  }
+}
+
+function isFirestoreUnavailable(error: unknown) {
+  const { code } = getFirestoreDiagnostic(error)
+  return code === 'unavailable'
 }
 
 function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
@@ -100,36 +159,88 @@ function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
 }
 
 export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
-  const { user, authResolved, authInitializationError, redirectAuthError, profile, profileLoading, profileError, retryProfile } = useAuth()
+  const { user, authResolved } = useAuth()
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [mode, setMode] = useState<AuthMode>('guest')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [profileError, setProfileError] = useState<string | null>(null)
+  const [profileRetry, setProfileRetry] = useState(0)
   const [message, setMessage] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
   const onAuthChangeRef = useRef(onAuthChange)
+  const profileRequestRef = useRef(0)
   const previousUserRef = useRef<User | null | undefined>(undefined)
 
   useEffect(() => {
     onAuthChangeRef.current = onAuthChange
   }, [onAuthChange])
 
-  useEffect(() => {
-    if (redirectAuthError) {
-      setError(mapAuthError(redirectAuthError, 'signin'))
+  const getOrCreateUserProfile = async (user: User): Promise<UserProfile> => {
+    const userRef = doc(db, 'users', user.uid)
+    const userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil').catch((cause) => {
+      throw { operation: 'getDoc', cause } satisfies ProfileSyncFailure
+    })
+
+    if (userSnap.exists()) {
+      return userSnap.data() as UserProfile
     }
-  }, [redirectAuthError])
+
+    const newUserProfile = createDefaultUserProfile(user)
+    try {
+      await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+    } catch (cause) {
+      throw { operation: 'setDoc', cause } satisfies ProfileSyncFailure
+    }
+
+    return newUserProfile
+  }
 
   useEffect(() => {
     if (!authResolved) return
+
+    let isMounted = true
+    const requestId = ++profileRequestRef.current
+    setUserProfile(null)
+    setProfileError(null)
 
     if (user) {
       if (previousUserRef.current === null) {
         onAuthChangeRef.current?.()
       }
+
+      void getOrCreateUserProfile(user)
+        .then((profile) => {
+          if (isMounted && profileRequestRef.current === requestId) setUserProfile(profile)
+        })
+        .catch((failure: ProfileSyncFailure) => {
+          const { code, message, display } = getFirestoreDiagnostic(failure.cause)
+          console.error('Erro Firestore ao sincronizar o perfil:', {
+            operation: failure.operation,
+            code: code || undefined,
+            message: message || undefined,
+            userId: user.uid,
+            error: failure.cause,
+          })
+
+          if (isMounted && profileRequestRef.current === requestId) {
+            if (isFirestoreUnavailable(failure.cause)) {
+              setUserProfile(createDefaultUserProfile(user))
+              setProfileError(`O Firestore está temporariamente indisponível. Estamos a mostrar os teus dados locais temporariamente. [Firebase: ${display}]`)
+              return
+            }
+
+            setProfileError(`Não foi possível sincronizar o perfil no Firestore. [Firebase: ${display}]`)
+          }
+        })
     }
 
     previousUserRef.current = user
-  }, [authResolved, user])
+    return () => {
+      isMounted = false
+      profileRequestRef.current += 1
+    }
+  }, [authResolved, user, profileRetry])
 
   const resetForm = () => {
     setForm({ name: '', email: '', password: '', confirmPassword: '' })
@@ -187,18 +298,15 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     setMessage(null)
     setLoading(true)
 
+    const provider = new GoogleAuthProvider();
     try {
-      const provider = new GoogleAuthProvider()
-      // The popup briefly closing on acordaportugal.pt makes the popup flow
-      // unreliable. Redirect is not subject to popup blockers or embedded
-      // browser popup restrictions and Firebase restores the session on return.
-      console.info('Firebase Auth: a iniciar login Google por redirect.', {
-        origin: window.location.origin,
-        authDomain: auth.app.options.authDomain,
-      })
-      await signInWithRedirect(auth, provider)
+      await signInWithPopup(auth, provider);
+      // The onIdTokenChanged listener in AuthProvider will handle the user state.
+      // We can navigate to the profile page upon successful sign-in.
+      window.location.href = '/perfil'; // Using window.location to ensure a full page reload which helps AuthProvider to pick up the new state.
     } catch (err: any) {
       setError(mapAuthError(err, 'signin'))
+    } finally {
       setLoading(false)
     }
   }
@@ -262,30 +370,18 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     }
   }
 
-  if (!authResolved) {
-    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A verificar a tua conta...</div>
-  }
+  const isAuthenticated = authResolved && user
 
-  if (authInitializationError) {
-    return (
-      <div className="rounded-3xl border border-red-500/30 bg-card/60 p-6 backdrop-blur">
-        <p className="text-sm text-red-200">{authInitializationError}</p>
-        <p className="mt-2 text-sm text-muted-foreground">Consulta a consola do navegador para os diagnósticos do Firebase e volta a tentar.</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-        >
-          Tentar novamente
-        </button>
-      </div>
-    )
-  }
-
-  if (user) {
-    if (profile) {
+  if (isAuthenticated) {
+    if (userProfile) {
       return (
         <div className={cn('flex flex-col gap-6', className)}>
-          <PlayerCard user={user} profile={profile} />
+          {profileError && (
+            <div className="rounded-md bg-red-900/40 px-3 py-2 text-sm text-red-200">
+              {profileError}
+            </div>
+          )}
+          <PlayerCard user={user} profile={userProfile} />
           <button
             onClick={handleLogout}
             className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
@@ -302,7 +398,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
         <div className="rounded-3xl border border-red-500/30 bg-card/60 p-6 backdrop-blur">
           <p className="text-sm text-red-200">{profileError}</p>
           <button
-            onClick={retryProfile}
+            onClick={() => setProfileRetry((current) => current + 1)}
             className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
           >
             Tentar novamente
@@ -311,18 +407,17 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
       )
     }
 
-    if (profileLoading) {
-      return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar o teu perfil...</div>
-    }
-
-    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar o teu perfil...</div>
+    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar perfil...</div>
   }
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>
       <div>
-        <h3 className="text-2xl font-display font-bold text-foreground">Guarda o teu progresso.</h3>
-        <p className="mt-2 text-sm text-muted-foreground">Cria uma conta ou entra para sincronizares nível, conquistas e estatísticas.</p>
+        <p className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+          JOGADOR CONVIDADO
+        </p>
+        <h3 className="mt-2 text-2xl font-display font-bold text-foreground">O teu progresso está guardado neste dispositivo.</h3>
+        <p className="mt-2 text-sm text-muted-foreground">Continua a jogar como convidado. Quando quiseres, cria a tua conta ou entra na tua conta existente.</p>
       </div>
 
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-card/70 p-5 backdrop-blur-md">
@@ -335,15 +430,6 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
 
           {mode === 'guest' && (
             <>
-            <button
-              onClick={() => {
-                setMode('signin')
-                resetForm()
-              }}
-              className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,255,170,0.08)] hover:scale-[1.02]"
-            >
-              Criar Conta ou Entrar
-            </button>
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
@@ -493,14 +579,18 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
             </form>
           )}
 
-          {(error || message) && (
+          {(error || message || profileError) && (
             <div className={cn(
               'mt-3 rounded-md px-3 py-2 text-sm',
-              error ? 'bg-red-900/40 text-red-200' : 'bg-emerald-900/25 text-emerald-200',
+              error || profileError ? 'bg-red-900/40 text-red-200' : 'bg-emerald-900/25 text-emerald-200',
             )}
           >
-            {error ?? message}
+            {error ?? profileError ?? message}
           </div>
+          )}
+
+          {!authResolved && (
+            <p className="mt-2 text-xs text-muted-foreground">A verificar estado de autenticação...</p>
           )}
         </div>
       </div>
