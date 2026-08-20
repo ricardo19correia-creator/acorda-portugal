@@ -345,7 +345,7 @@ const SECTIONS = [
 
 export default function TermosPage() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-transparent text-foreground">
       <BackgroundFx />
 
       <div className="relative z-20 flex min-h-screen flex-col justify-between">

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#05130d',
+  themeColor: '#050706',
 }
 
 export default function RootLayout({
@@ -37,11 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="bg-background font-sans antialiased relative min-h-screen">
-        {/* Global Ambient Cyberpunk Portuguese 3D Atmosphere */}
-        <div className="bg-cyber-portugal-env" aria-hidden="true" />
-        <div className="pattern-azulejo-global" aria-hidden="true" />
-
+      <body className="font-sans antialiased min-h-screen">
         <AuthProvider>
           <PresenceProvider>{children}</PresenceProvider>
         </AuthProvider>

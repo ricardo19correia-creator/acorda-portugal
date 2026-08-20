@@ -7,7 +7,7 @@ import { ArrowLeft } from 'lucide-react'
 
 export default function PerfilPage() {
   return (
-    <div className="relative min-h-screen bg-background flex flex-col justify-between">
+    <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
       <BackgroundFx variant="results" />
 
       <div className="relative z-20 flex-1 flex flex-col justify-between">

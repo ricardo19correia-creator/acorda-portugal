@@ -27,7 +27,7 @@ function DuelPageContent() {
 
   if (!effectiveDuelId) {
     return (
-      <div className="relative min-h-screen bg-background flex flex-col justify-between">
+      <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
         <BackgroundFx variant="multiplayer" />
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
@@ -89,7 +89,7 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen bg-transparent">
       <BackgroundFx variant="multiplayer" />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <DuelArena

@@ -67,8 +67,8 @@ export function SiteHeader() {
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'border-b border-emerald-500/30 bg-black/85 backdrop-blur-2xl shadow-[0_12px_40px_-15px_rgba(0,0,0,0.9)]'
-          : 'border-b border-white/10 bg-black/40 backdrop-blur-md',
+          ? 'border-b border-emerald-500/30 bg-zinc-950/85 backdrop-blur-2xl shadow-[0_12px_40px_-15px_rgba(0,0,0,0.9)]'
+          : 'border-b border-white/10 bg-zinc-950/40 backdrop-blur-md',
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
