@@ -185,12 +185,9 @@ export async function joinMatchmakingQueue(
 
   const now = Date.now()
   const playerLevel = profile?.level || 1
-  console.log('[MATCH] SEARCH START:', user.uid, 'Level:', playerLevel, 'Attempt:', matchAttemptId)
+  console.log('[MATCH QUEUE JOINED]', user.uid, 'Nome:', user.displayName, 'Nível:', playerLevel, 'Attempt:', matchAttemptId)
 
   const ticketRef = doc(db, 'duelQueue', user.uid)
-
-  // Limpeza preventiva de bilhete anterior
-  await deleteDoc(ticketRef).catch(() => {})
 
   const ticketData: MatchmakingTicket = {
     userId: user.uid,
@@ -202,14 +199,14 @@ export async function joinMatchmakingQueue(
     matchAttemptId,
     joinedAt: now,
     lastHeartbeat: now,
-    expiresAt: now + 30_000,
+    expiresAt: now + 60_000,
     duelId: null,
     opponentInfo: null,
     matchedAt: null,
   }
 
   await setDoc(ticketRef, ticketData)
-  console.log('[MATCH] QUEUE CREATED:', user.uid)
+  console.log('[MATCH] QUEUE CREATED IN FIRESTORE:', user.uid)
   return matchAttemptId
 }
 
@@ -230,7 +227,7 @@ export async function heartbeatMatchmaking(
       const now = Date.now()
       await updateDoc(ticketRef, {
         lastHeartbeat: now,
-        expiresAt: now + 30_000,
+        expiresAt: now + 60_000,
       })
     }
   } catch {
@@ -243,7 +240,7 @@ export async function cancelMatchmakingQueue(userUid: string): Promise<void> {
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await deleteDoc(ticketRef)
-    console.log('[MATCH] QUEUE REMOVED:', userUid)
+    console.log('[MATCH] QUEUE REMOVED / CANCELLED:', userUid)
   } catch (err) {
     console.error('Erro ao cancelar fila de matchmaking:', err)
   }
@@ -261,14 +258,13 @@ export async function cleanMatchmakingQueue(userUid: string): Promise<void> {
 
 /**
  * Realtime listener for the player's matchmaking ticket in duelQueue/{userUid}.
- * Validates matchAttemptId to ensure stale/historical tickets NEVER trigger false matches.
  */
 export function subscribeToMatchmaking(
   userUid: string,
   currentMatchAttemptId: string,
   onTicketUpdate: (ticket: MatchmakingTicket | null) => void,
 ): Unsubscribe {
-  if (!userUid || !currentMatchAttemptId) {
+  if (!userUid) {
     return () => {}
   }
 
@@ -283,16 +279,14 @@ export function subscribeToMatchmaking(
       if (!isSubscribed) return
       if (snap.exists()) {
         const ticketData = snap.data() as MatchmakingTicket
-        // EXCLUSIVO: só notificar se pertencer exatamente à tentativa de procura atual de um utilizador real
         if (
           ticketData.userId === userUid &&
-          ticketData.matchAttemptId === currentMatchAttemptId &&
           ticketData.status === 'matched' &&
           ticketData.duelId &&
           ticketData.opponentInfo &&
           ticketData.opponentInfo.displayName
         ) {
-          console.log('[MATCH] MATCH NOTIFIED VIA TICKET SNAPSHOT:', ticketData.duelId, 'Adversário:', ticketData.opponentInfo.displayName)
+          console.log('[MATCH OPPONENT FOUND VIA SNAPSHOT] duelId:', ticketData.duelId, 'Adversário:', ticketData.opponentInfo.displayName)
           onTicketUpdate(ticketData)
         }
       }
@@ -310,8 +304,8 @@ export function subscribeToMatchmaking(
 
 /**
  * Searches for an active opponent in duelQueue and pairs them atomically in Firestore.
- * Strictly validates that candidates are REAL, active players with fresh heartbeats (< 3.5s).
- * If no real player is searching, returns { matched: false } and NEVER creates fake opponents.
+ * - Fault-tolerant candidate selection (immune to device clock skew).
+ * - Atomic ACID transaction ensures no race conditions when 2 players search simultaneously.
  */
 export async function tryFindOpponentMatch(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
@@ -332,12 +326,11 @@ export async function tryFindOpponentMatch(
       const selfData = selfSnap.data() as MatchmakingTicket
       if (
         selfData.userId === user.uid &&
-        selfData.matchAttemptId === myMatchAttemptId &&
         selfData.status === 'matched' &&
         selfData.duelId &&
         selfData.opponentInfo
       ) {
-        console.log('[MATCH] ALREADY MATCHED VERIFIED FOR CURRENT ATTEMPT:', selfData.duelId)
+        console.log('[MATCH ALREADY FOUND FOR SELF]:', selfData.duelId, 'Adversário:', selfData.opponentInfo.displayName)
         return {
           matched: true,
           duelId: selfData.duelId,
@@ -345,7 +338,7 @@ export async function tryFindOpponentMatch(
           ticket: selfData,
         }
       }
-      if (selfData.status !== 'searching' || selfData.matchAttemptId !== myMatchAttemptId) {
+      if (selfData.status !== 'searching') {
         return { matched: false }
       }
     } else {
@@ -363,35 +356,36 @@ export async function tryFindOpponentMatch(
     for (const docSnap of snapshot.docs) {
       const data = docSnap.data() as MatchmakingTicket
 
-      // Limpeza passiva de bilhetes inativos/abandonados (sem heartbeat há mais de 8s)
-      if (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat < now - 8_000) {
+      // Ignorar meu próprio ticket
+      if (!data.userId || data.userId === user.uid) continue
+
+      // Limpeza passiva apenas de bilhetes mortos/antigos (> 2 minutos)
+      if (
+        (typeof data.expiresAt === 'number' && data.expiresAt < now - 90_000) ||
+        (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat < now - 90_000)
+      ) {
         deleteDoc(docSnap.ref).catch(() => {})
         continue
       }
 
-      // Candidato REAL e ATIVO:
-      // - É outro utilizador diferente de mim
-      // - Status é 'searching'
-      // - Tem matchAttemptId definido
-      // - Tem heartbeat ATIVO nos últimos 3.5 segundos (garante presença viva no frontend)
-      if (
-        data.userId &&
-        data.userId !== user.uid &&
-        data.status === 'searching' &&
-        data.matchAttemptId &&
-        typeof data.lastHeartbeat === 'number' &&
-        data.lastHeartbeat >= now - 3_500
-      ) {
+      // Candidato ativo na fila:
+      // Status 'searching' e ticket recente (ativo nos últimos 60 segundos)
+      const isAlive =
+        (typeof data.expiresAt === 'number' && data.expiresAt > now - 20_000) ||
+        (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat > now - 60_000) ||
+        (typeof data.joinedAt === 'number' && data.joinedAt > now - 60_000)
+
+      if (data.status === 'searching' && data.matchAttemptId && isAlive) {
         candidates.push(data)
       }
     }
 
-    // SE NÃO EXISTE OUTRO JOGADOR REAL ATIVO NA FILA, NÃO EMPARELHAR!
+    // Se não há outro jogador ativo, aguardar na fila
     if (candidates.length === 0) {
       return { matched: false }
     }
 
-    // 3. Ordenar pelo nível mais próximo e maior tempo de espera na fila
+    // 3. Ordenar candidatos por proximidade de nível e tempo de espera
     candidates.sort((a, b) => {
       const levelDiff = Math.abs(a.level - myLevel) - Math.abs(b.level - myLevel)
       if (levelDiff !== 0) return levelDiff
@@ -399,7 +393,7 @@ export async function tryFindOpponentMatch(
     })
     const candidate = candidates[0]
 
-    console.log('[MATCH] CANDIDATE FOUND (REAL USER):', candidate.displayName, 'ID:', candidate.userId, 'Level:', candidate.level)
+    console.log('[MATCH OPPONENT FOUND IN QUEUE]:', candidate.displayName, 'UID:', candidate.userId, 'Level:', candidate.level)
 
     // 4. Executar transação ACID atómica no Firestore para emparelhar ambos os jogadores
     const candidateTicketRef = doc(db, 'duelQueue', candidate.userId)
@@ -471,10 +465,9 @@ export async function tryFindOpponentMatch(
       }
 
       const myData = myDoc.data() as MatchmakingTicket
-      // Se nós já fomos emparelhados noutra transação concorrente para esta tentativa
+      // Se nós já fomos emparelhados noutra transação concorrente
       if (
         myData.userId === user.uid &&
-        myData.matchAttemptId === myMatchAttemptId &&
         myData.status === 'matched' &&
         myData.duelId &&
         myData.opponentInfo
@@ -487,7 +480,7 @@ export async function tryFindOpponentMatch(
         }
       }
 
-      if (myData.status !== 'searching' || myData.matchAttemptId !== myMatchAttemptId) {
+      if (myData.status !== 'searching') {
         return { matched: false }
       }
 
@@ -496,18 +489,16 @@ export async function tryFindOpponentMatch(
       }
 
       const candData = candDoc.data() as MatchmakingTicket
-      // Validar que o candidato ainda é outro utilizador, está searching e esteve ativo nos últimos 4 segundos
+      // Validar que o candidato ainda está searching
       if (
         candData.userId === user.uid ||
         candData.status !== 'searching' ||
-        !candData.matchAttemptId ||
-        typeof candData.lastHeartbeat !== 'number' ||
-        candData.lastHeartbeat < now - 4_000
+        !candData.matchAttemptId
       ) {
         return { matched: false }
       }
 
-      // Ambos estão confirmadamente à procura: Criar o duelo e atualizar ambos os bilhetes!
+      // Ambos estão confirmadamente à procura: Criar a sala e atualizar ambos os bilhetes!
       transaction.set(duelRef, duelDoc)
 
       const myOpponentInfo = {
@@ -563,13 +554,13 @@ export async function tryFindOpponentMatch(
     })
 
     if (result.matched && result.duelId) {
-      console.log('[MATCH] MATCH SUCCESS! ID:', result.duelId)
+      console.log('[MATCH ROOM CREATED & ATOMICALLY PAIRED] duelId:', result.duelId)
       return result
     }
 
     return { matched: false }
   } catch (err) {
-    console.error('[MATCH] ERRO NO MATCHMAKING:', err)
+    console.error('[MATCH] ERRO NA TRANSAÇÃO DE MATCHMAKING:', err)
     return { matched: false }
   }
 }

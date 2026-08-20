@@ -72,16 +72,38 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
   const [customError, setCustomError] = useState<string | null>(null)
 
   const matchAttemptIdRef = useRef<string>('')
+  const matchedDuelIdRef = useRef<string | null>(null)
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const heartbeatIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const searchTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+  const playerPropsRef = useRef({ playerUid, playerName, playerPhoto, playerLevel, playerDistrict })
+  useEffect(() => {
+    playerPropsRef.current = { playerUid, playerName, playerPhoto, playerLevel, playerDistrict }
+  }, [playerUid, playerName, playerPhoto, playerLevel, playerDistrict])
+
   // Função para registar match encontrado
   const handleMatchFound = (duelId: string, opponentInfo?: any, incomingTicket?: MatchmakingTicket) => {
-    if (matchedDuelId) return
-    console.log('[MATCH FOUND EVENT] duelId:', duelId, 'Opponent:', opponentInfo?.displayName)
+    if (matchedDuelIdRef.current) return
+    matchedDuelIdRef.current = duelId
+    console.log('[MATCH OPPONENT FOUND EVENT] duelId:', duelId, 'Opponent:', opponentInfo?.displayName)
     setMatchedDuelId(duelId)
     setMmState('matched')
+
+    // Limpar imediatamente os intervalos de procura
+    if (pollIntervalRef.current) {
+      clearInterval(pollIntervalRef.current)
+      pollIntervalRef.current = null
+    }
+    if (heartbeatIntervalRef.current) {
+      clearInterval(heartbeatIntervalRef.current)
+      heartbeatIntervalRef.current = null
+    }
+    if (searchTimerRef.current) {
+      clearInterval(searchTimerRef.current)
+      searchTimerRef.current = null
+    }
+
     if (incomingTicket) {
       setTicket(incomingTicket)
     } else if (opponentInfo) {
@@ -98,7 +120,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
               matchAttemptId: matchAttemptIdRef.current,
               joinedAt: Date.now(),
               lastHeartbeat: Date.now(),
-              expiresAt: Date.now() + 30_000,
+              expiresAt: Date.now() + 60_000,
               duelId,
               opponentInfo,
               matchedAt: Date.now(),
@@ -115,6 +137,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
     const currentAttemptId = crypto.randomUUID()
     matchAttemptIdRef.current = currentAttemptId
+    matchedDuelIdRef.current = null
 
     setMmState('searching')
     setMatchedDuelId(null)
@@ -122,54 +145,61 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     setTicket(null)
     setSearchTimeSeconds(0)
 
-    const playerObj = { uid: playerUid, displayName: playerName, photoURL: playerPhoto }
-    const profileObj = { level: playerLevel, district: playerDistrict }
+    const playerObj = {
+      uid: playerUid,
+      displayName: playerPropsRef.current.playerName,
+      photoURL: playerPropsRef.current.playerPhoto,
+    }
+    const profileObj = {
+      level: playerPropsRef.current.playerLevel,
+      district: playerPropsRef.current.playerDistrict,
+    }
 
-    console.log('[MATCH] SEARCH START (REAL AUTH USER):', playerUid, 'Name:', playerName, 'Attempt:', currentAttemptId)
+    console.log('[MATCH QUEUE JOINED (REAL AUTH USER)] UID:', playerUid, 'Name:', playerObj.displayName, 'Attempt:', currentAttemptId)
 
     // Entrar na fila do Firestore com UID real e matchAttemptId único
     joinMatchmakingQueue(playerObj, profileObj, currentAttemptId).catch((err) => {
       console.error('[MATCH] ERRO AO ENTRAR NA FILA:', err)
     })
 
-    // Heartbeat ativo a cada 1.0s para renovar a validade do bilhete
+    // Heartbeat ativo a cada 2.0s para renovar a validade do bilhete
     heartbeatIntervalRef.current = setInterval(() => {
-      if (playerUid && matchAttemptIdRef.current === currentAttemptId) {
+      if (playerUid && matchAttemptIdRef.current === currentAttemptId && !matchedDuelIdRef.current) {
         heartbeatMatchmaking(playerUid, currentAttemptId).catch(() => {})
       }
-    }, 1000)
+    }, 2000)
 
     const handleBeforeUnload = () => {
-      if (playerUid) {
+      if (playerUid && !matchedDuelIdRef.current) {
         cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Escutar exclusivamente eventos associados a este jogador e a esta tentativa
+    // Escutar eventos da fila em tempo real (onSnapshot)
     const unsubscribe = subscribeToMatchmaking(playerUid, currentAttemptId, (updatedTicket) => {
       if (!updatedTicket) return
       if (updatedTicket.status === 'matched' && updatedTicket.duelId && updatedTicket.opponentInfo) {
-        console.log('[MATCH] ADVERSÁRIO ENCONTRADO (VIA LISTENER)! duelId:', updatedTicket.duelId)
+        console.log('[MATCH NOTIFIED VIA FIRESTORE SNAPSHOT] duelId:', updatedTicket.duelId)
         handleMatchFound(updatedTicket.duelId, updatedTicket.opponentInfo, updatedTicket)
       }
     })
 
-    // Executar verificação contínua via polling (1s)
+    // Executar verificação contínua e tentativa de pareamento via polling (1.2s)
     const runSearch = () => {
-      if (matchAttemptIdRef.current !== currentAttemptId || matchedDuelId) return
+      if (matchAttemptIdRef.current !== currentAttemptId || matchedDuelIdRef.current) return
       tryFindOpponentMatch(playerObj, profileObj, currentAttemptId)
         .then((res) => {
           if (res.matched && res.duelId && res.opponentInfo) {
-            console.log('[MATCH] ADVERSÁRIO ENCONTRADO (VIA POLLING)! duelId:', res.duelId)
+            console.log('[MATCH FOUND VIA POLLING ATOMIC PAIR] duelId:', res.duelId)
             handleMatchFound(res.duelId, res.opponentInfo, res.ticket || undefined)
           }
         })
         .catch((err) => console.warn('[MATCH] ERRO NO POLLING:', err))
     }
 
-    // Intervalo de 1s para consulta de adversário
-    pollIntervalRef.current = setInterval(runSearch, 1000)
+    // Intervalo de 1.2s para emparelhamento
+    pollIntervalRef.current = setInterval(runSearch, 1200)
 
     // Contador de segundos e timeout após 60s
     searchTimerRef.current = setInterval(() => {
@@ -177,7 +207,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
         if (s >= 60) {
           if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
           setMmState('timeout')
-          if (playerUid) {
+          if (playerUid && !matchedDuelIdRef.current) {
             cancelMatchmakingQueue(playerUid).catch(() => {})
           }
         }
@@ -191,11 +221,11 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
       if (searchTimerRef.current) clearInterval(searchTimerRef.current)
       unsubscribe()
-      if (playerUid && !matchedDuelId) {
+      if (playerUid && !matchedDuelIdRef.current) {
         cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
-  }, [isOpen, activeView, authResolved, isAuthenticated, playerUid, playerName, playerLevel, playerDistrict])
+  }, [isOpen, activeView, authResolved, isAuthenticated, playerUid])
 
   // 2. Transição e Contagem Regressiva Isolada e Segura (3 -> 2 -> 1 -> Início Automático)
   const navigatedRef = useRef(false)
@@ -209,20 +239,6 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     console.log('[MATCH EFFECT] INICIANDO CONTAGEM REGRESSIVA PARA DUEL:', matchedDuelId)
     setCountdown(3)
 
-    // Parar timers de busca
-    if (pollIntervalRef.current) {
-      clearInterval(pollIntervalRef.current)
-      pollIntervalRef.current = null
-    }
-    if (heartbeatIntervalRef.current) {
-      clearInterval(heartbeatIntervalRef.current)
-      heartbeatIntervalRef.current = null
-    }
-    if (searchTimerRef.current) {
-      clearInterval(searchTimerRef.current)
-      searchTimerRef.current = null
-    }
-
     try {
       router.prefetch?.(`/jogar/duelo?id=${matchedDuelId}`)
     } catch {}
@@ -230,7 +246,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     const triggerGameStart = () => {
       if (navigatedRef.current) return
       navigatedRef.current = true
-      console.log('[MATCH] DISPATCHING GAME START NOW FOR DUEL:', matchedDuelId)
+      console.log('[MATCH GAME START] DISPATCHING GAME START NOW FOR DUEL:', matchedDuelId)
 
       setCountdown(0)
 
