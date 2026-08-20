@@ -56,8 +56,8 @@ export function getPostLoginRedirectTarget(fallback = '/'): string {
 
 /**
  * Executa o Login Google de forma fiável em qualquer dispositivo:
- * - Em Telemóveis / Tablets: usa signInWithRedirect (evita que o Safari/Chrome feche o popup sem enviar token)
- * - Em Desktop: tenta signInWithPopup com fallback automático para signInWithRedirect caso haja bloqueio
+ * - Tenta signInWithPopup primeiro (em desktop e mobile através do toque direto, evitando o loop de redirecionamento do Safari/Chrome mobile)
+ * - Faz fallback transparente para signInWithRedirect apenas se o popup estiver bloqueado
  */
 export async function performGoogleSignIn(redirectTarget = '/'): Promise<UserCredential | void> {
   if (!auth) {
@@ -72,16 +72,15 @@ export async function performGoogleSignIn(redirectTarget = '/'): Promise<UserCre
   provider.setCustomParameters({ prompt: 'select_account' })
 
   const isMobile = isMobileDevice()
-  const functionToCall = isMobile ? 'signInWithRedirect' : 'signInWithPopup'
 
   // Logging diagnóstico detalhado antes da chamada Firebase
   console.log('=== [FIREBASE AUTH PRE-CALL DIAGNOSTIC] ===', {
-    funcaoChamada: functionToCall,
+    metodoPrimario: 'signInWithPopup',
+    isMobile,
     provider: {
       providerId: provider.providerId,
       scopes: provider.getScopes ? provider.getScopes() : [],
       isInstanceOfGoogleAuthProvider: provider instanceof GoogleAuthProvider,
-      typeOfProvider: typeof provider,
     },
     authInstance: {
       isAuthDefined: Boolean(auth),
@@ -89,26 +88,11 @@ export async function performGoogleSignIn(redirectTarget = '/'): Promise<UserCre
       currentUser: auth.currentUser ? auth.currentUser.uid : null,
       authDomain: auth.config?.authDomain,
       projectId: auth.app?.options?.projectId,
-      apiKeyConfigured: Boolean(auth.config?.apiKey),
-      typeOfAuth: typeof auth,
     },
     resolver: {
       isResolverDefined: Boolean(browserPopupRedirectResolver),
-      typeOfResolver: typeof browserPopupRedirectResolver,
-    },
-    environment: {
-      isMobile,
-      windowOrigin: typeof window !== 'undefined' ? window.location.origin : 'server',
-      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'server',
     },
   })
-
-  if (isMobile) {
-    // No telemóvel, o redirect direto é a norma recomendada e previne o bug do popup no Safari / Chrome
-    console.log('[AUTH] A invocar signInWithRedirect(auth, provider, browserPopupRedirectResolver)...')
-    await signInWithRedirect(auth, provider, browserPopupRedirectResolver)
-    return
-  }
 
   try {
     console.log('[AUTH] A invocar signInWithPopup(auth, provider, browserPopupRedirectResolver)...')
@@ -117,20 +101,23 @@ export async function performGoogleSignIn(redirectTarget = '/'): Promise<UserCre
     return cred
   } catch (err: any) {
     const code = err?.code || ''
-    console.warn('[AUTH] signInWithPopup retornou erro/código:', code, err?.message)
+    console.warn('[AUTH] signInWithPopup retornou código/erro:', code, err?.message)
 
-    // Se o popup falhar por bloqueio de popup no browser ou cancelamento, tentar redirect
+    // Se o popup for bloqueado pelo navegador, recorrer ao redirecionamento como fallback
     if (
       code === 'auth/popup-blocked' ||
-      code === 'auth/popup-closed-by-user' ||
-      code === 'auth/cancelled-popup-request' ||
-      code === 'auth/internal-error' ||
-      code === 'auth/network-request-failed'
+      code === 'auth/operation-not-supported-in-this-environment'
     ) {
-      console.log('[AUTH] Popup indisponível, a iniciar redirecionamento Google com fallback...')
+      console.log('[AUTH] Popup bloqueado pelo browser, a recorrer a signInWithRedirect como fallback...')
       await signInWithRedirect(auth, provider, browserPopupRedirectResolver)
       return
     }
+
+    // Se o utilizador apenas fechou a janela do popup, não fazer nada
+    if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+      return
+    }
+
     throw err
   }
 }
