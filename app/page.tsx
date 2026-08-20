@@ -1,3 +1,4 @@
+import React from 'react'
 import Image from 'next/image'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
@@ -21,7 +22,7 @@ export default function Page() {
       />
 
       {/* 2. CAMADA DE ESCURECIMENTO SUAVE PARA MÁXIMA LEGIBILIDADE E CONTRASTE */}
-      <div className="fixed inset-0 -z-10 bg-black/50 backdrop-blur-[1px] pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-black/50 pointer-events-none" />
 
       {/* 3. EFEITOS AMBIENTAIS SUBTIS */}
       <BackgroundFx variant="homepage" />
