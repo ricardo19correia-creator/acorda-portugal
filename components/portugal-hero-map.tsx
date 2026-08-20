@@ -423,96 +423,6 @@ export function PortugalHeroMap() {
         <div className="pointer-events-none absolute inset-12 rounded-full border border-dashed border-gold/25 animate-spin-reverse opacity-35" />
 
         {/* ========================================================= */}
-        {/* DESKTOP FLOATING TACTICAL BADGES (Hidden on Mobile) */}
-        {/* ========================================================= */}
-        {/* ========================================================= */}
-        {/* DESKTOP FLOATING TACTICAL BADGES (Holographic Cyber HUDs) */}
-        {/* ========================================================= */}
-        {/* 1. Top Leader Badge (Top Right) */}
-        <div
-          className="hidden lg:flex absolute top-2 right-0 z-20 animate-float"
-          style={{ animationDuration: '6.5s' }}
-        >
-          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:border-amber-300 hover:scale-105 transition-all">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-amber-400/30 to-amber-600/20 text-amber-300 ring-1 ring-amber-400/60 shadow-lg shadow-amber-500/20">
-              <Crown className="h-5 w-5 fill-current drop-shadow-md" />
-            </div>
-            <div>
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-amber-300 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-                Líder Nacional #1
-              </p>
-              <p className="font-display text-sm font-black text-foreground truncate max-w-[130px]">
-                {topPlayer ? topPlayer.name : 'A carregar...'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 2. Top District Badge (Top Left) */}
-        <div
-          className="hidden lg:flex absolute top-2 left-0 z-20 animate-float"
-          style={{ animationDuration: '7s', animationDelay: '1s' }}
-        >
-          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.25)] hover:border-cyan-300 hover:scale-105 transition-all">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-400/30 to-cyan-600/20 text-cyan-300 ring-1 ring-cyan-400/60 shadow-lg shadow-cyan-500/20">
-              <Trophy className="h-5 w-5 drop-shadow-md" />
-            </div>
-            <div>
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-cyan-300 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                Distrito no Topo
-              </p>
-              <p className="font-display text-sm font-black text-foreground">
-                {leadingDistrict.name} <span className="text-amber-300 text-xs font-black">#1</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 3. Streak / User District (Bottom Left) */}
-        <div
-          className="hidden lg:flex absolute bottom-6 left-0 z-20 animate-float"
-          style={{ animationDuration: '6.8s', animationDelay: '2s' }}
-        >
-          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-emerald-400/50 shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:border-emerald-300 hover:scale-105 transition-all">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-emerald-400/30 to-emerald-600/20 text-emerald-300 ring-1 ring-emerald-400/60 shadow-lg shadow-emerald-500/20">
-              <Shield className="h-5 w-5 fill-current drop-shadow-md" />
-            </div>
-            <div>
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-emerald-300 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                O Teu Distrito
-              </p>
-              <p className="font-display text-sm font-black text-foreground">
-                {userDistrictName} <span className="text-amber-300 text-xs font-black">#{userDistrictStat.pos}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 4. € Acorda / XP (Bottom Right) */}
-        <div
-          className="hidden lg:flex absolute bottom-6 right-0 z-20 animate-float"
-          style={{ animationDuration: '7.2s', animationDelay: '1.5s' }}
-        >
-          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-fuchsia-400/50 shadow-[0_0_20px_rgba(217,70,239,0.25)] hover:border-fuchsia-300 hover:scale-105 transition-all">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-fuchsia-400/30 to-fuchsia-600/20 text-fuchsia-300 ring-1 ring-fuchsia-400/60 shadow-lg shadow-fuchsia-500/20">
-              <Coins className="h-5 w-5 drop-shadow-md" />
-            </div>
-            <div>
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-fuchsia-300 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
-                {user ? 'Saldo € Acorda' : 'Recompensas'}
-              </p>
-              <p className="font-display text-sm font-black text-amber-300">
-                {user && profile ? `€${profile.euros.toLocaleString('pt-PT')}` : '+XP & € Virtuais'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ========================================================= */}
         {/* 3D VIDEO-GAME VECTOR MAP SVG */}
         {/* ========================================================= */}
         <div
@@ -913,37 +823,6 @@ export function PortugalHeroMap() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* ========================================================= */}
-      {/* MOBILE COMPACT TACTICAL STATUS BAR (Shown strictly on Mobile/Tablet) */}
-      {/* ========================================================= */}
-      <div className="lg:hidden mt-3 w-full max-w-sm flex items-center justify-center gap-2.5 px-2">
-        {/* 1. Mobile Leader Chip */}
-        <div className="flex-1 flex items-center gap-2 rounded-xl border border-gold/30 bg-card/80 px-3 py-2 backdrop-blur-md">
-          <Crown className="h-4 w-4 text-gold shrink-0 fill-current" />
-          <div className="min-w-0">
-            <p className="text-[0.55rem] font-black uppercase tracking-wider text-gold truncate">
-              #1 Nacional
-            </p>
-            <p className="font-display text-xs font-black text-foreground truncate">
-              {topPlayer ? topPlayer.name : 'A carregar...'}
-            </p>
-          </div>
-        </div>
-
-        {/* 2. Mobile District Chip */}
-        <div className="flex-1 flex items-center gap-2 rounded-xl border border-primary/30 bg-card/80 px-3 py-2 backdrop-blur-md">
-          <MapPin className="h-4 w-4 text-primary shrink-0" />
-          <div className="min-w-0">
-            <p className="text-[0.55rem] font-black uppercase tracking-wider text-primary truncate">
-              {userDistrictStat.name}
-            </p>
-            <p className="font-display text-xs font-black text-foreground truncate">
-              Posição <span className="text-gold font-bold">#{userDistrictStat.pos}</span>
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   )
