@@ -20,33 +20,33 @@ export function PortugalMap({
   children?: React.ReactNode
 }) {
   return (
-    <div className={cn('relative aspect-square w-full', className)}>
+    <div className={cn('relative aspect-square w-full pointer-events-none', className)}>
       {/* glow halo */}
-      <div className="animate-glow-pulse absolute inset-[12%] rounded-full bg-primary/25 blur-3xl" />
+      <div className="animate-glow-pulse pointer-events-none absolute inset-[12%] rounded-full bg-primary/25 blur-3xl" />
       <div
-        className="animate-glow-pulse absolute inset-[22%] rounded-full bg-gold/10 blur-2xl"
+        className="animate-glow-pulse pointer-events-none absolute inset-[22%] rounded-full bg-gold/10 blur-2xl"
         style={{ animationDelay: '1.6s' }}
       />
 
       {/* orbiting rings */}
       {rings && (
         <>
-          <div className="animate-spin-slow absolute inset-[6%] rounded-full border border-primary/15" />
-          <div className="animate-spin-reverse absolute inset-[16%] rounded-full border border-dashed border-primary/12" />
+          <div className="animate-spin-slow pointer-events-none absolute inset-[6%] rounded-full border border-primary/15" />
+          <div className="animate-spin-reverse pointer-events-none absolute inset-[16%] rounded-full border border-dashed border-primary/12" />
         </>
       )}
 
       {/* floating map */}
-      <div className={cn('relative h-full w-full', float && 'animate-float')}>
+      <div className={cn('relative h-full w-full pointer-events-none', float && 'animate-float')}>
         <Image
           src="/images/portugal-map.png"
           alt="Mapa estilizado de Portugal continental, Açores e Madeira"
           fill
           priority={priority}
           sizes="(max-width: 1024px) 90vw, 45vw"
-          className="object-contain drop-shadow-[0_0_40px_oklch(0.76_0.19_150_/_0.35)]"
+          className="pointer-events-none object-contain drop-shadow-[0_0_40px_oklch(0.76_0.19_150_/_0.35)]"
         />
-        {children}
+        <div className="pointer-events-auto contents">{children}</div>
       </div>
     </div>
   )

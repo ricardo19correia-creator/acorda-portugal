@@ -1,8 +1,16 @@
 'use client'
 
-import { Lock } from 'lucide-react'
+import { Lock, Coins, Sparkles, Trophy, Flame, Crown } from 'lucide-react'
 import type { Achievement, Tone } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
+
+const ICON_MAP = {
+  coins: Coins,
+  star: Sparkles,
+  trophy: Trophy,
+  flame: Flame,
+  crown: Crown,
+}
 
 const TONE_STYLES: Record<Tone, { icon: string; ring: string }> = {
   primary: {
@@ -24,7 +32,7 @@ const TONE_STYLES: Record<Tone, { icon: string; ring: string }> = {
 }
 
 export function AchievementCard({ achievement, unlocked }: { achievement: Achievement; unlocked: boolean }) {
-  const Icon = achievement.icon
+  const Icon = ICON_MAP[achievement.icon] || Trophy
   const s = TONE_STYLES[achievement.tone]
 
   return (

@@ -1,14 +1,11 @@
-﻿﻿'use client'
-
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
   User,
-  GoogleAuthProvider,
-  signInWithPopup,
   updateProfile,
 } from 'firebase/auth'
 import { auth, db } from '@/lib/firebase'
@@ -26,7 +23,7 @@ import {
   LogOut,
 } from 'lucide-react'
 
-type AuthMode = 'guest' | 'signin' | 'signup'
+type AuthMode = 'signin' | 'signup'
 
 type FormData = {
   name: string
@@ -52,6 +49,11 @@ function createDefaultUserProfile(user: User): UserProfile {
     xp: 0,
     euros: 100,
     district: 'Vila Real',
+    gamesPlayed: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    totalQuestions: 0,
+    bestStreak: 0,
     unlockedAchievements: [],
     streak: 0,
   }
@@ -99,9 +101,6 @@ function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
   const message = typeof firebaseError?.message === 'string' ? firebaseError.message : ''
   const diagnostic = code || message || 'Erro Firebase sem código.'
 
-  // Keep the Firebase diagnostic visible while the Auth configuration is being
-  // validated. In particular, auth/unauthorized-domain and
-  // auth/operation-not-allowed must not be hidden behind a generic message.
   console.error(`Erro Firebase Auth (${action}):`, {
     code: code || undefined,
     message: message || undefined,
@@ -138,6 +137,21 @@ function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
     if (code.includes('auth/invalid-email')) {
       return withDiagnostic('O email não é válido.')
     }
+    if (code.includes('auth/account-exists-with-different-credential')) {
+      return withDiagnostic('Já existe uma conta associada a este email com outro método de acesso.')
+    }
+    if (code.includes('auth/invalid-credential')) {
+      return withDiagnostic('Credenciais inválidas ou expiradas. Tenta novamente.')
+    }
+    if (code.includes('auth/network-request-failed')) {
+      return withDiagnostic('Erro de ligação de rede. Verifica a tua ligação à Internet.')
+    }
+    if (code.includes('auth/user-disabled')) {
+      return withDiagnostic('Esta conta de utilizador foi desativada.')
+    }
+    if (code.includes('auth/operation-not-supported-in-this-environment')) {
+      return withDiagnostic('Este ambiente de navegação não suporta esta operação.')
+    }
     if (code.includes('auth/unauthorized-domain')) {
       return withDiagnostic('Este domínio não está autorizado no Firebase Authentication.')
     }
@@ -155,19 +169,33 @@ function mapAuthError(error: unknown, action: 'signin' | 'signup' | 'reset') {
     }
   }
 
+  if (code.includes('auth/argument-error')) {
+    return withDiagnostic('Dados de autenticação inválidos ou incompletos.')
+  }
+
   return `Não foi possível concluir a ação. [Firebase: ${diagnostic}]`
 }
 
-export function ProfilePanel({ className, onAuthChange }: { className?: string; onAuthChange?: () => void }) {
-  const { user, authResolved } = useAuth()
+export function ProfilePanel({
+  className,
+  onAuthChange,
+  isModal,
+}: {
+  className?: string
+  onAuthChange?: () => void
+  isModal?: boolean
+}) {
+  const router = useRouter()
+  const { user, authResolved, profile } = useAuth()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [mode, setMode] = useState<AuthMode>('guest')
+  const [mode, setMode] = useState<AuthMode>('signin')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [profileError, setProfileError] = useState<string | null>(null)
   const [profileRetry, setProfileRetry] = useState(0)
   const [message, setMessage] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>({ name: '', email: '', password: '', confirmPassword: '' })
+
   const onAuthChangeRef = useRef(onAuthChange)
   const profileRequestRef = useRef(0)
   const previousUserRef = useRef<User | null | undefined>(undefined)
@@ -226,7 +254,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
           if (isMounted && profileRequestRef.current === requestId) {
             if (isFirestoreUnavailable(failure.cause)) {
               setUserProfile(createDefaultUserProfile(user))
-              setProfileError(`O Firestore está temporariamente indisponível. Estamos a mostrar os teus dados locais temporariamente. [Firebase: ${display}]`)
+              setProfileError(`O Firestore está temporariamente indisponível. [Firebase: ${display}]`)
               return
             }
 
@@ -248,15 +276,17 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     setMessage(null)
   }
 
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const handleCreateAccount = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setError(null)
     setMessage(null)
 
-    const name = form.name.trim()
-    const email = form.email.trim()
-    const password = form.password
-    const confirmPassword = form.confirmPassword
+    const name = typeof form.name === 'string' ? form.name.trim() : ''
+    const email = typeof form.email === 'string' ? form.email.trim() : ''
+    const password = typeof form.password === 'string' ? form.password : ''
+    const confirmPassword = typeof form.confirmPassword === 'string' ? form.confirmPassword : ''
 
     if (!name) {
       setError('O nome é obrigatório.')
@@ -265,6 +295,11 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
 
     if (!email) {
       setError('O email é obrigatório.')
+      return
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      setError('O email introduzido não tem um formato válido.')
       return
     }
 
@@ -278,14 +313,19 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
       return
     }
 
+    if (!auth) {
+      setError('Serviço de autenticação indisponível.')
+      return
+    }
+
     try {
       setLoading(true)
       const credential = await createUserWithEmailAndPassword(auth, email, password)
-      if (credential.user) {
+      if (credential?.user) {
         await updateProfile(credential.user, { displayName: name })
       }
-      setMode('guest')
       setMessage('Conta criada com sucesso. Bem-vindo!')
+      onAuthChangeRef.current?.()
     } catch (err: any) {
       setError(mapAuthError(err, 'signup'))
     } finally {
@@ -298,12 +338,13 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     setMessage(null)
     setLoading(true)
 
-    const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-      // The onIdTokenChanged listener in AuthProvider will handle the user state.
-      // We can navigate to the profile page upon successful sign-in.
-      window.location.href = '/perfil'; // Using window.location to ensure a full page reload which helps AuthProvider to pick up the new state.
+      const { performGoogleSignIn } = await import('@/lib/auth-helpers')
+      await performGoogleSignIn('/perfil')
+      onAuthChangeRef.current?.()
+      if (window.location.pathname === '/') {
+        window.location.href = '/perfil'
+      }
     } catch (err: any) {
       setError(mapAuthError(err, 'signin'))
     } finally {
@@ -311,16 +352,22 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     }
   }
 
+
   const handleSignin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setError(null)
     setMessage(null)
 
-    const email = form.email.trim()
-    const password = form.password
+    const email = typeof form.email === 'string' ? form.email.trim() : ''
+    const password = typeof form.password === 'string' ? form.password : ''
 
     if (!email) {
       setError('O email é obrigatório.')
+      return
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      setError('O email introduzido não tem um formato válido.')
       return
     }
 
@@ -329,11 +376,16 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
       return
     }
 
+    if (!auth) {
+      setError('Serviço de autenticação indisponível.')
+      return
+    }
+
     try {
       setLoading(true)
       await signInWithEmailAndPassword(auth, email, password)
-      setMode('guest')
       setMessage('Sessão iniciada com sucesso.')
+      onAuthChangeRef.current?.()
     } catch (err: any) {
       setError(mapAuthError(err, 'signin'))
     } finally {
@@ -345,9 +397,19 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
     setError(null)
     setMessage(null)
 
-    const email = form.email.trim()
+    const email = typeof form.email === 'string' ? form.email.trim() : ''
     if (!email) {
       setError('Introduz o email para receber o link de recuperação.')
+      return
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      setError('O email introduzido não tem um formato válido.')
+      return
+    }
+
+    if (!auth) {
+      setError('Serviço de autenticação indisponível.')
       return
     }
 
@@ -364,7 +426,10 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
 
   const handleLogout = async () => {
     try {
-      await signOut(auth)
+      if (auth) {
+        await signOut(auth)
+      }
+      onAuthChangeRef.current?.()
     } catch (err) {
       console.error('Erro ao terminar sessão:', err)
     }
@@ -384,7 +449,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
           <PlayerCard user={user} profile={userProfile} />
           <button
             onClick={handleLogout}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
           >
             <LogOut className="h-4 w-4" />
             Terminar sessão
@@ -399,7 +464,7 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
           <p className="text-sm text-red-200">{profileError}</p>
           <button
             onClick={() => setProfileRetry((current) => current + 1)}
-            className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+            className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer"
           >
             Tentar novamente
           </button>
@@ -407,200 +472,204 @@ export function ProfilePanel({ className, onAuthChange }: { className?: string; 
       )
     }
 
-    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">A carregar perfil...</div>
+    return <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur text-center text-sm text-muted-foreground">A carregar perfil...</div>
   }
 
   return (
-    <div className={cn('flex flex-col gap-6', className)}>
-      <div>
-        <p className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-          JOGADOR CONVIDADO
+    <div className={cn('flex flex-col w-full text-left', className)}>
+      {/* Header */}
+      <div className="text-center mb-6">
+        <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-primary/20 text-primary ring-2 ring-primary/40 shadow-lg mb-3">
+          <UserIcon className="h-6 w-6" />
+        </div>
+        <h3 className="font-display text-2xl font-black text-foreground">
+          {mode === 'signup' ? 'Criar Conta' : 'Entrar no Jogo'}
+        </h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Sincroniza o teu progresso na nuvem e representa o teu distrito no ranking nacional.
         </p>
-        <h3 className="mt-2 text-2xl font-display font-bold text-foreground">O teu progresso está guardado neste dispositivo.</h3>
-        <p className="mt-2 text-sm text-muted-foreground">Continua a jogar como convidado. Quando quiseres, cria a tua conta ou entra na tua conta existente.</p>
       </div>
 
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-card/70 p-5 backdrop-blur-md">
-        <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl" />
-        <div className="flex flex-col gap-4">
-          <div>
-            <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">CRIA A TUA CONTA</p>
-            <h4 className="mt-2 text-lg font-bold text-foreground">Guarda o teu progresso, conquistas, nível e estatísticas.</h4>
-          </div>
-
-          {mode === 'guest' && (
-            <>
-            <button
-              onClick={handleGoogleSignIn}
-              disabled={loading}
-              className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-60"
-            >
-              <GoogleIcon />
-              Continuar com Google
-            </button>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                onClick={() => {
-                  setMode('signup')
-                  resetForm()
-                }}
-                className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,255,170,0.08)] hover:scale-[1.02]"
-              >
-                CRIAR CONTA
-              </button>
-              <button
-                onClick={() => {
-                  setMode('signin')
-                  resetForm()
-                }}
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-              >
-                JÁ TENHO CONTA
-              </button>
-            </div>
-            </>
+      {/* Mode Switcher Tabs */}
+      <div className="flex rounded-2xl bg-white/5 p-1 border border-white/10 mb-5">
+        <button
+          type="button"
+          onClick={() => {
+            setMode('signin')
+            setError(null)
+          }}
+          className={cn(
+            'flex-1 rounded-xl py-2.5 text-xs font-bold transition-all cursor-pointer text-center',
+            mode === 'signin'
+              ? 'bg-primary text-primary-foreground shadow-md font-black'
+              : 'text-muted-foreground hover:text-foreground',
           )}
-
-          {mode === 'signup' && (
-            <form className="space-y-4" onSubmit={handleCreateAccount}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="space-y-2 text-sm text-muted-foreground">
-                  <span>Nome</span>
-                  <input
-                    value={form.name}
-                    onChange={(event) => setForm({ ...form, name: event.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="Nome completo"
-                  />
-                </label>
-                <label className="space-y-2 text-sm text-muted-foreground">
-                  <span>Email</span>
-                  <input
-                    type="email"
-                    value={form.email}
-                    onChange={(event) => setForm({ ...form, email: event.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="email@exemplo.com"
-                  />
-                </label>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="space-y-2 text-sm text-muted-foreground">
-                  <span>Palavra-passe</span>
-                  <input
-                    type="password"
-                    value={form.password}
-                    onChange={(event) => setForm({ ...form, password: event.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="Mínimo 6 caracteres"
-                  />
-                </label>
-                <label className="space-y-2 text-sm text-muted-foreground">
-                  <span>Confirmar palavra-passe</span>
-                  <input
-                    type="password"
-                    value={form.confirmPassword}
-                    onChange={(event) => setForm({ ...form, confirmPassword: event.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="Reescreve a palavra-passe"
-                  />
-                </label>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,255,170,0.08)] hover:scale-[1.02] disabled:opacity-60"
-                >
-                  {loading ? 'A criar conta...' : 'Criar conta'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMode('signin')
-                    resetForm()
-                  }}
-                  className="text-sm text-muted-foreground underline"
-                >
-                  Já tenho conta
-                </button>
-              </div>
-            </form>
+        >
+          Entrar
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setMode('signup')
+            setError(null)
+          }}
+          className={cn(
+            'flex-1 rounded-xl py-2.5 text-xs font-bold transition-all cursor-pointer text-center',
+            mode === 'signup'
+              ? 'bg-primary text-primary-foreground shadow-md font-black'
+              : 'text-muted-foreground hover:text-foreground',
           )}
+        >
+          Criar Conta
+        </button>
+      </div>
 
-          {mode === 'signin' && (
-            <form className="space-y-4" onSubmit={handleSignin}>
-              <label className="space-y-2 text-sm text-muted-foreground">
-                <span>Email</span>
-                <input
-                  type="email"
-                    value={form.email}
-                    onChange={(event) => setForm({ ...form, email: event.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    placeholder="email@exemplo.com"
-                  />
-              </label>
-              <label className="space-y-2 text-sm text-muted-foreground">
-                <span>Palavra-passe</span>
-                <input
-                  type="password"
-                  value={form.password}
-                  onChange={(event) => setForm({ ...form, password: event.target.value })}
-                  className="w-full rounded-2xl border border-white/10 bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  placeholder="Palavra-passe"
-                />
-              </label>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,255,170,0.08)] hover:scale-[1.02] disabled:opacity-60"
-                >
-                  {loading ? 'A entrar...' : 'Entrar'}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleResetPassword}
-                  className="text-sm text-muted-foreground underline"
-                >
-                  Esqueci-me da palavra-passe
-                </button>
-              </div>
+      {/* Google Sign In */}
+      <button
+        type="button"
+        onClick={handleGoogleSignIn}
+        disabled={loading}
+        className="flex w-full items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/5 py-3 px-4 text-sm font-bold text-foreground transition hover:bg-white/10 hover:border-white/25 active:scale-[0.99] disabled:opacity-60 cursor-pointer shadow-sm"
+      >
+        <GoogleIcon />
+        <span>Continuar com Google</span>
+      </button>
+
+      {/* Divider */}
+      <div className="relative my-5 flex items-center justify-center">
+        <div className="w-full border-t border-white/10" />
+        <span className="absolute bg-card px-3 text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">
+          ou com email
+        </span>
+      </div>
+
+      {/* Sign In Form */}
+      {mode === 'signin' && (
+        <form className="space-y-4" onSubmit={handleSignin}>
+          <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+            <span>Email</span>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+              placeholder="email@exemplo.com"
+            />
+          </label>
+
+          <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+            <div className="flex items-center justify-between">
+              <span>Palavra-passe</span>
               <button
                 type="button"
-                onClick={() => {
-                  setMode('signup')
-                  resetForm()
-                }}
-                className="text-sm text-muted-foreground underline"
+                onClick={handleResetPassword}
+                className="text-[0.7rem] text-primary hover:underline font-semibold cursor-pointer"
               >
-                Criar conta
+                Esqueceste-te?
               </button>
-            </form>
-          )}
+            </div>
+            <input
+              type="password"
+              required
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+              placeholder="••••••••"
+            />
+          </label>
 
-          {(error || message || profileError) && (
-            <div className={cn(
-              'mt-3 rounded-md px-3 py-2 text-sm',
-              error || profileError ? 'bg-red-900/40 text-red-200' : 'bg-emerald-900/25 text-emerald-200',
-            )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-2xl bg-primary py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.99] transition disabled:opacity-60 cursor-pointer mt-2"
           >
-            {error ?? profileError ?? message}
-          </div>
-          )}
+            {loading ? 'A entrar...' : 'Entrar'}
+          </button>
+        </form>
+      )}
 
-          {!authResolved && (
-            <p className="mt-2 text-xs text-muted-foreground">A verificar estado de autenticação...</p>
+      {/* Sign Up Form */}
+      {mode === 'signup' && (
+        <form className="space-y-3.5" onSubmit={handleCreateAccount}>
+          <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+            <span>Nome Completo</span>
+            <input
+              type="text"
+              required
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+              placeholder="O teu nome"
+            />
+          </label>
+
+          <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+            <span>Email</span>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+              placeholder="email@exemplo.com"
+            />
+          </label>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+              <span>Palavra-passe</span>
+              <input
+                type="password"
+                required
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+                placeholder="Mín. 6 caracteres"
+              />
+            </label>
+            <label className="block space-y-1.5 text-left text-xs font-bold text-muted-foreground">
+              <span>Confirmar</span>
+              <input
+                type="password"
+                required
+                value={form.confirmPassword}
+                onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
+                className="w-full rounded-2xl border border-white/10 bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/40"
+                placeholder="Repetir"
+              />
+            </label>
+          </div>
+
+        </form>
+      )}
+
+      {/* Notifications & Error feedback */}
+      {(error || message || profileError) && (
+        <div
+          className={cn(
+            'mt-4 rounded-xl px-4 py-3 text-xs font-bold text-left',
+            error || profileError
+              ? 'bg-red-950/60 text-red-200 border border-red-500/30'
+              : 'bg-emerald-950/60 text-emerald-200 border border-emerald-500/30',
           )}
+        >
+          {error ?? profileError ?? message}
         </div>
-      </div>
+      )}
+
+      {!authResolved && (
+        <p className="mt-3 text-center text-xs text-muted-foreground animate-pulse">
+          A verificar estado de autenticação...
+        </p>
+      )}
     </div>
   )
 }
 
 function GoogleIcon() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-5 w-5 shrink-0" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M48 24.4C48 22.8 47.9 21.2 47.6 19.7H24.5V28.5H37.8C37.2 31.4 35.9 33.8 33.9 35.3V41.3H41.8C45.8 37.3 48 31.4 48 24.4Z" fill="#4285F4" />
       <path d="M24.5 48C31.2 48 36.8 45.7 39.7 42.2L32.8 36.8C30.6 38.2 27.8 39.1 24.5 39.1C18.2 39.1 12.9 35.1 11.1 29.5H3.1V35.1C6.1 42.8 14.6 48 24.5 48Z" fill="#34A853" />
       <path d="M11.1 29.5C10.6 28.1 10.3 26.6 10.3 25C10.3 23.4 10.6 21.9 11.1 20.5V14.9H3.1C1.1 18.8 0 23.3 0 28C0 32.7 1.1 37.2 3.1 41.1L11.1 35.5V29.5Z" fill="#FBBC05" />

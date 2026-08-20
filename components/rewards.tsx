@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Coins, Star, Trophy, Flame, Crown, Info } from 'lucide-react'
 import { ACHIEVEMENTS, type Tone } from '@/lib/game-data'
 import { SectionHeading } from '@/components/section-heading'
@@ -38,11 +39,21 @@ export function Rewards() {
         })}
       </div>
 
-      <p className="mx-auto mt-8 flex max-w-xl items-center justify-center gap-2 rounded-2xl border border-gold/20 bg-gold/[0.06] px-5 py-3 text-center text-xs text-muted-foreground">
-        <Info className="h-4 w-4 shrink-0 text-gold" />
-        Os <span className="font-semibold text-gold">euros virtuais</span> são uma moeda do jogo,
-        sem valor monetário real. Servem para desbloquear extras dentro do Acorda Portugal.
-      </p>
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <p className="flex max-w-xl items-center justify-center gap-2 rounded-2xl border border-gold/20 bg-gold/[0.06] px-5 py-3 text-center text-xs text-muted-foreground">
+          <Info className="h-4 w-4 shrink-0 text-gold" />
+          <span>
+            Os <span className="font-semibold text-gold">euros virtuais (€ Acorda)</span> são uma moeda de jogo, sem valor monetário real. Servem para desbloquear cosméticos e extras.
+          </span>
+        </p>
+        <Link
+          href="/loja"
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-gold/20 via-card/90 to-primary/20 border border-gold/30 px-6 py-3 font-display text-sm font-black text-foreground shadow-lg hover:scale-105 transition"
+        >
+          <Coins className="h-4 w-4 text-gold" />
+          <span>Ver Loja Oficial</span>
+        </Link>
+      </div>
     </section>
   )
 }

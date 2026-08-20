@@ -3,21 +3,20 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import type { User } from 'firebase/auth'
 import type { UserProfile } from '@/lib/game-data'
+import { PlayerAvatar } from '@/components/player-avatar'
+import { getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { calculateLevelProgress } from '@/lib/progression'
 
 export type { UserProfile } from '@/lib/game-data'
 
 /**
- * Game-style player HUD. Visual only (no auth yet) — shows avatar, level badge,
+ * Game-style player HUD. Shows avatar, level badge,
  * XP progress bar, streak and virtual euros, styled like an in-game status panel.
  */
 export function PlayerCard({ user, profile, className }: { user: User; profile: UserProfile; className?: string }) {
-  const xpForCurrentLevel = (profile.level - 1) * 500
-  const xpForNextLevel = profile.level * 500
-  const xpInCurrentLevel = profile.xp - xpForCurrentLevel
-  const xpNeededForLevel = xpForNextLevel - xpForCurrentLevel
-
-  const xpProgress = (xpInCurrentLevel / xpNeededForLevel) * 100
-
+  const progressInfo = calculateLevelProgress(profile.xp)
+  const isMaxLevel = progressInfo.isMaxLevel
+  const displayTitle = getPlayerDisplayTitle(profile, progressInfo.currentLevel.title)
 
   return (
     <Link
@@ -35,22 +34,15 @@ export function PlayerCard({ user, profile, className }: { user: User; profile: 
       <div className="relative flex items-center gap-4">
         {/* avatar + level badge */}
         <div className="relative shrink-0 group">
-          {profile.photoURL ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={profile.photoURL} alt={profile.displayName} className="h-16 w-16 rounded-2xl ring-1 ring-primary/40" />
-          ) : (
-            <div className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-primary/35 to-accent/20 font-display text-2xl font-black text-primary ring-1 ring-primary/40">
-              {profile.displayName?.charAt(0).toUpperCase()}
-            </div>
-          )}
-          <span className="absolute -bottom-2 left-1/2 grid h-6 -translate-x-1/2 place-items-center rounded-full bg-gold px-2 text-[0.6rem] font-black uppercase tracking-wide text-gold-foreground ring-2 ring-card transition-transform group-hover:scale-110">
-            Nível {profile.level}
+          <PlayerAvatar profile={profile} size="md" />
+          <span className="absolute -bottom-2 left-1/2 grid h-6 -translate-x-1/2 place-items-center rounded-full bg-gold px-2 text-[0.6rem] font-black uppercase tracking-wide text-gold-foreground ring-2 ring-card transition-transform group-hover:scale-110 whitespace-nowrap">
+            {isMaxLevel ? '👑 Mestre' : `Nível ${progressInfo.currentLevel.level}`}
           </span>
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-            Jogador
+          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-primary font-display">
+            {displayTitle}
           </p>
           <p className="truncate font-display text-2xl font-bold text-foreground">{profile.displayName}</p>
           <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -74,13 +66,24 @@ export function PlayerCard({ user, profile, className }: { user: User; profile: 
             <Sparkles className="h-3.5 w-3.5" />
             XP
           </span>
-          <span>{profile.xp.toLocaleString('pt-PT')} / {(profile.level * 500).toLocaleString('pt-PT')}</span>
+          <span>
+            {profile.xp.toLocaleString('pt-PT')} / {progressInfo.nextLevel ? progressInfo.nextLevel.xpRequired.toLocaleString('pt-PT') : '3.000.000'}
+          </span>
         </div>
         <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
-          <div className="shimmer relative h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-500" style={{ width: `${xpProgress}%` }} />
+          <div
+            className="shimmer relative h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
+            style={{ width: `${Math.max(2, progressInfo.progressPercentage)}%` }}
+          />
         </div>
         <p className="mt-2 text-[0.7rem] text-muted-foreground">
-          Faltam <span className="font-semibold text-foreground">{(xpForNextLevel - profile.xp).toLocaleString('pt-PT')} XP</span> para o Nível {profile.level + 1}
+          {isMaxLevel ? (
+            <span className="font-semibold text-gold">👑 Topo máximo alcançado (Mestre de Portugal)</span>
+          ) : (
+            <>
+              Faltam <span className="font-semibold text-foreground">{progressInfo.xpRemaining.toLocaleString('pt-PT')} XP</span> para o Nível {progressInfo.nextLevel?.level} ({progressInfo.nextLevel?.title})
+            </>
+          )}
         </p>
       </div>
     </Link>

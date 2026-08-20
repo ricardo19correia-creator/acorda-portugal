@@ -37,25 +37,23 @@ function StatCard({
   )
 }
 
+import { PlayerAvatar } from '@/components/player-avatar'
+import { getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { calculateLevelProgress } from '@/lib/progression'
+
 export function ProfileDetails({ user, profile }: { user: User; profile: UserProfile }) {
-  const xpForCurrentLevel = (profile.level - 1) * 500
-  const xpForNextLevel = profile.level * 500
-  const xpInCurrentLevel = profile.xp - xpForCurrentLevel
-  const xpNeededForLevel = xpForNextLevel - xpForCurrentLevel
-  const xpProgress = (xpInCurrentLevel / xpNeededForLevel) * 100
+  const progressInfo = calculateLevelProgress(profile.xp)
+  const isMaxLevel = progressInfo.isMaxLevel
+  const displayTitle = getPlayerDisplayTitle(profile, progressInfo.currentLevel.title)
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
       <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
-        {profile.photoURL ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={profile.photoURL} alt={profile.displayName} className="h-24 w-24 rounded-full ring-2 ring-primary/50" />
-        ) : (
-          <div className="grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-primary/35 to-accent/20 font-display text-4xl font-black text-primary ring-1 ring-primary/40">
-            {profile.displayName?.charAt(0).toUpperCase()}
-          </div>
-        )}
+        <PlayerAvatar profile={profile} size="lg" />
         <div className="flex-1">
+          <div className="text-xs font-black uppercase tracking-widest text-primary font-display mb-1">
+            {displayTitle}
+          </div>
           <SectionHeading align="left" title={profile.displayName} description={profile.email} />
         </div>
       </div>
@@ -64,19 +62,25 @@ export function ProfileDetails({ user, profile }: { user: User; profile: UserPro
         <h3 className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">Progresso</h3>
         <div className="rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur">
           <div className="flex items-center justify-between text-sm font-semibold">
-            <span className="text-primary">Nível {profile.level}</span>
+            <span className="text-primary">{isMaxLevel ? '👑 Mestre de Portugal' : `Nível ${progressInfo.currentLevel.level} (${progressInfo.currentLevel.title})`}</span>
             <span className="text-muted-foreground">
-              {profile.xp.toLocaleString('pt-PT')} / {xpForNextLevel.toLocaleString('pt-PT')} XP
+              {profile.xp.toLocaleString('pt-PT')} / {progressInfo.nextLevel ? progressInfo.nextLevel.xpRequired.toLocaleString('pt-PT') : '3.000.000'} XP
             </span>
           </div>
           <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-white/10">
             <div
               className="shimmer relative h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
-              style={{ width: `${xpProgress}%` }}
+              style={{ width: `${Math.max(2, progressInfo.progressPercentage)}%` }}
             />
           </div>
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Faltam <span className="font-bold text-foreground">{(xpForNextLevel - profile.xp).toLocaleString('pt-PT')} XP</span> para o Nível {profile.level + 1}
+            {isMaxLevel ? (
+              <span className="font-bold text-gold">👑 Topo máximo alcançado</span>
+            ) : (
+              <>
+                Faltam <span className="font-bold text-foreground">{progressInfo.xpRemaining.toLocaleString('pt-PT')} XP</span> para o Nível {progressInfo.nextLevel?.level} ({progressInfo.nextLevel?.title})
+              </>
+            )}
           </p>
         </div>
       </div>

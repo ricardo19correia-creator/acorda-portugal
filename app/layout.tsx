@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
+import { PresenceProvider } from '@/components/presence-provider'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -36,7 +37,9 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="bg-background font-sans antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PresenceProvider>{children}</PresenceProvider>
+        </AuthProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

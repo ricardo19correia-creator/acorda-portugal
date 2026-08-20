@@ -3,17 +3,16 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE',
-  authDomain: 'desafio-nacional-5fe71.firebaseapp.com',
-  projectId: 'desafio-nacional-5fe71',
-  storageBucket: 'desafio-nacional-5fe71.firebasestorage.app',
-  messagingSenderId: '130539395859',
-  appId: '1:130539395859:web:e3b8153477ae41d6fe98e6',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE',
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'desafio-nacional-5fe71.firebaseapp.com',
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'desafio-nacional-5fe71',
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'desafio-nacional-5fe71.firebasestorage.app',
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '130539395859',
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '1:130539395859:web:e3b8153477ae41d6fe98e6',
 }
 
-const app = getApps().length > 0
-  ? getApp()
-  : initializeApp(firebaseConfig)
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig)
 
 export const auth = getAuth(app)
 export const db = getFirestore(app)
+

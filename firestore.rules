@@ -4,19 +4,53 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     match /users/{userId} {
-      allow read: if request.auth != null &&
-        (request.auth.uid == userId || resource.data.isPublic == true);
-
-      allow create: if request.auth != null &&
-        request.auth.uid == userId;
-
-      allow update: if request.auth != null &&
-        request.auth.uid == userId;
+      allow read: if true;
+      allow create, update, delete: if true;
 
       match /completedGames/{gameId} {
-        allow read, create: if request.auth != null &&
-          request.auth.uid == userId;
+        allow read, write: if true;
       }
+
+      match /transactions/{txId} {
+        allow read, write: if true;
+      }
+
+      match /match_rewards/{matchId} {
+        allow read, write: if true;
+      }
+    }
+
+    // Registo global de transações e comprovativos de pagamento
+    match /transactions/{txId} {
+      allow read, write: if true;
+    }
+
+
+    match /publicProfiles/{profileId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /presence/{presenceId} {
+      // Leitura pública permitida para contadores de presença e feed de atividade
+      allow read: if true;
+
+      // Utilizadores autenticados gerem apenas o seu próprio UID; visitantes gerem a sua sessão guest_
+      allow create, update: if (request.auth != null && request.auth.uid == presenceId) ||
+        (presenceId.matches('^guest_[a-zA-Z0-9_-]+$'));
+
+      allow delete: if (request.auth != null && request.auth.uid == presenceId) ||
+        (presenceId.matches('^guest_[a-zA-Z0-9_-]+$'));
+    }
+
+    // FILA DE MATCHMAKING 1V1 (Compatível com Google e Convidados)
+    match /duelQueue/{ticketId} {
+      allow read, create, update, delete: if true;
+    }
+
+    // SALAS E ARENAS DE DUELO (Compatível com Google e Convidados)
+    match /duels/{duelId} {
+      allow read, create, update, delete: if true;
     }
   }
 }

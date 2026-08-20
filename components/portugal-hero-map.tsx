@@ -1,0 +1,950 @@
+'use client'
+
+import React, { useState, useMemo, useEffect, useRef } from 'react'
+import {
+  PORTUGAL_GEO_DATA,
+  type DistrictGeoItem,
+} from '@/lib/portugal-geo-data'
+import { Trophy, Flame, Sparkles, MapPin, Coins, Crown, Users, Zap, Compass, Shield } from 'lucide-react'
+import { collection, onSnapshot, query } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
+import { calculateLevelProgress } from '@/lib/progression'
+import { cn } from '@/lib/utils'
+
+export type HeroDistrictStat = {
+  name: string
+  pos: number
+  players: number
+  xp: number
+}
+
+const ALL_20_DISTRICTS = [
+  'Aveiro',
+  'Beja',
+  'Braga',
+  'Bragança',
+  'Castelo Branco',
+  'Coimbra',
+  'Évora',
+  'Faro',
+  'Guarda',
+  'Leiria',
+  'Lisboa',
+  'Portalegre',
+  'Porto',
+  'Santarém',
+  'Setúbal',
+  'Viana do Castelo',
+  'Vila Real',
+  'Viseu',
+  'Açores',
+  'Madeira',
+]
+
+export type DistrictTheme = {
+  gradientId: string
+  from: string
+  to: string
+  accent: string
+  glowColor: string
+  name: string
+  label: string
+}
+
+export const DISTRICT_THEMES: Record<string, DistrictTheme> = {
+  'Viana do Castelo': {
+    gradientId: 'grad-viana',
+    from: '#059669',
+    to: '#10b981',
+    accent: '#34d399',
+    glowColor: 'rgba(16, 185, 129, 0.85)',
+    name: 'Viana do Castelo',
+    label: 'Alto Minho',
+  },
+  'Braga': {
+    gradientId: 'grad-braga',
+    from: '#7c3aed',
+    to: '#8b5cf6',
+    accent: '#c084fc',
+    glowColor: 'rgba(139, 92, 246, 0.85)',
+    name: 'Braga',
+    label: 'Minho',
+  },
+  'Porto': {
+    gradientId: 'grad-porto',
+    from: '#1d4ed8',
+    to: '#3b82f6',
+    accent: '#60a5fa',
+    glowColor: 'rgba(59, 130, 246, 0.9)',
+    name: 'Porto',
+    label: 'Grande Porto',
+  },
+  'Vila Real': {
+    gradientId: 'grad-vilareal',
+    from: '#d97706',
+    to: '#f59e0b',
+    accent: '#fbbf24',
+    glowColor: 'rgba(245, 158, 11, 0.9)',
+    name: 'Vila Real',
+    label: 'Trás-os-Montes',
+  },
+  'Bragança': {
+    gradientId: 'grad-braganca',
+    from: '#b91c1c',
+    to: '#ef4444',
+    accent: '#f87171',
+    glowColor: 'rgba(239, 68, 68, 0.9)',
+    name: 'Bragança',
+    label: 'Nordeste',
+  },
+  'Aveiro': {
+    gradientId: 'grad-aveiro',
+    from: '#0891b2',
+    to: '#06b6d4',
+    accent: '#67e8f9',
+    glowColor: 'rgba(6, 182, 212, 0.9)',
+    name: 'Aveiro',
+    label: 'Ria & Costa',
+  },
+  'Viseu': {
+    gradientId: 'grad-viseu',
+    from: '#4f46e5',
+    to: '#6366f1',
+    accent: '#a5b4fc',
+    glowColor: 'rgba(99, 102, 241, 0.9)',
+    name: 'Viseu',
+    label: 'Beira Alta',
+  },
+  'Guarda': {
+    gradientId: 'grad-guarda',
+    from: '#ea580c',
+    to: '#f97316',
+    accent: '#fdba74',
+    glowColor: 'rgba(249, 115, 22, 0.9)',
+    name: 'Guarda',
+    label: 'Serra da Estrela',
+  },
+  'Coimbra': {
+    gradientId: 'grad-coimbra',
+    from: '#65a30d',
+    to: '#84cc16',
+    accent: '#bef264',
+    glowColor: 'rgba(132, 204, 22, 0.9)',
+    name: 'Coimbra',
+    label: 'Centro',
+  },
+  'Castelo Branco': {
+    gradientId: 'grad-castelobranco',
+    from: '#0284c7',
+    to: '#0ea5e9',
+    accent: '#7dd3fc',
+    glowColor: 'rgba(14, 165, 233, 0.9)',
+    name: 'Castelo Branco',
+    label: 'Beira Baixa',
+  },
+  'Leiria': {
+    gradientId: 'grad-leiria',
+    from: '#0d9488',
+    to: '#14b8a6',
+    accent: '#5eead4',
+    glowColor: 'rgba(20, 184, 166, 0.9)',
+    name: 'Leiria',
+    label: 'Oeste Litoral',
+  },
+  'Santarém': {
+    gradientId: 'grad-santarem',
+    from: '#c026d3',
+    to: '#d946ef',
+    accent: '#f0abfc',
+    glowColor: 'rgba(217, 70, 239, 0.9)',
+    name: 'Santarém',
+    label: 'Ribatejo',
+  },
+  'Lisboa': {
+    gradientId: 'grad-lisboa',
+    from: '#ca8a04',
+    to: '#eab308',
+    accent: '#fef08a',
+    glowColor: 'rgba(234, 179, 8, 0.95)',
+    name: 'Lisboa',
+    label: 'Capital',
+  },
+  'Portalegre': {
+    gradientId: 'grad-portalegre',
+    from: '#16a34a',
+    to: '#22c55e',
+    accent: '#86efac',
+    glowColor: 'rgba(34, 197, 94, 0.9)',
+    name: 'Portalegre',
+    label: 'Alto Alentejo',
+  },
+  'Setúbal': {
+    gradientId: 'grad-setubal',
+    from: '#2563eb',
+    to: '#3b82f6',
+    accent: '#93c5fd',
+    glowColor: 'rgba(59, 130, 246, 0.9)',
+    name: 'Setúbal',
+    label: 'Península',
+  },
+  'Évora': {
+    gradientId: 'grad-evora',
+    from: '#e11d48',
+    to: '#f43f5e',
+    accent: '#fda4af',
+    glowColor: 'rgba(244, 63, 94, 0.9)',
+    name: 'Évora',
+    label: 'Alentejo Central',
+  },
+  'Beja': {
+    gradientId: 'grad-beja',
+    from: '#c2410c',
+    to: '#ea580c',
+    accent: '#fdba74',
+    glowColor: 'rgba(234, 88, 12, 0.9)',
+    name: 'Beja',
+    label: 'Baixo Alentejo',
+  },
+  'Faro': {
+    gradientId: 'grad-faro',
+    from: '#059669',
+    to: '#0d9488',
+    accent: '#6ee7b7',
+    glowColor: 'rgba(13, 148, 136, 0.9)',
+    name: 'Faro',
+    label: 'Algarve',
+  },
+  'Açores': {
+    gradientId: 'grad-acores',
+    from: '#0284c7',
+    to: '#06b6d4',
+    accent: '#67e8f9',
+    glowColor: 'rgba(6, 182, 212, 0.95)',
+    name: 'Açores',
+    label: 'Região Autónoma',
+  },
+  'Madeira': {
+    gradientId: 'grad-madeira',
+    from: '#16a34a',
+    to: '#22c55e',
+    accent: '#86efac',
+    glowColor: 'rgba(34, 197, 94, 0.95)',
+    name: 'Madeira',
+    label: 'Região Autónoma',
+  },
+}
+
+export function PortugalHeroMap() {
+  const { user, profile } = useAuth()
+  const [districtData, setDistrictData] = useState<Map<string, HeroDistrictStat>>(new Map())
+  const [topPlayer, setTopPlayer] = useState<{ name: string; xp: number; level: number } | null>(null)
+  const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null)
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('Vila Real')
+  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [tilt, setTilt] = useState<{ rotateX: number; rotateY: number }>({ rotateX: 12, rotateY: -2 })
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Listen to live publicProfiles for real district statistics
+  useEffect(() => {
+    let unsubscribe: (() => void) | undefined
+
+    try {
+      const q = query(collection(db, 'publicProfiles'))
+      unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          const tempMap = new Map<string, { players: number; xp: number }>()
+          for (const d of ALL_20_DISTRICTS) {
+            tempMap.set(d, { players: 0, xp: 0 })
+          }
+
+          let top: { name: string; xp: number; level: number } | null = null
+
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data()
+            if (!data) return
+
+            const rawDistrict = (data.district || '').trim()
+            const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
+            const rawName = (data.displayName || data.name || '').trim() || 'Jogador'
+
+            if (!top || xp > top.xp) {
+              const lvl = calculateLevelProgress(xp).currentLevel.level
+              top = { name: rawName, xp, level: lvl }
+            }
+
+            const matched = ALL_20_DISTRICTS.find(
+              (d) => d.toLowerCase() === rawDistrict.toLowerCase(),
+            )
+
+            if (matched) {
+              const cur = tempMap.get(matched)!
+              tempMap.set(matched, {
+                players: cur.players + 1,
+                xp: cur.xp + xp,
+              })
+            }
+          })
+
+          setTopPlayer(top)
+
+          // Rank all 20 districts by XP
+          const sorted = Array.from(tempMap.entries()).map(([name, s]) => ({
+            name,
+            players: s.players,
+            xp: s.xp,
+          }))
+
+          sorted.sort((a, b) => {
+            if (b.xp !== a.xp) return b.xp - a.xp
+            if (b.players !== a.players) return b.players - a.players
+            return a.name.localeCompare(b.name, 'pt-PT')
+          })
+
+          const finalMap = new Map<string, HeroDistrictStat>()
+          sorted.forEach((item, index) => {
+            finalMap.set(item.name, {
+              name: item.name,
+              pos: index + 1,
+              players: item.players,
+              xp: item.xp,
+            })
+          })
+
+          setDistrictData(finalMap)
+        },
+        (err) => {
+          console.warn('Erro ao carregar dados do mapa Hero:', err)
+        },
+      )
+    } catch (e) {
+      console.warn('Erro Firestore Hero Map:', e)
+    }
+
+    return () => unsubscribe && unsubscribe()
+  }, [])
+
+  // Identify top leading district
+  const leadingDistrict = useMemo(() => {
+    let topName = 'Lisboa'
+    let maxRank = 999
+    districtData.forEach((stat) => {
+      if (stat.pos < maxRank) {
+        maxRank = stat.pos
+        topName = stat.name
+      }
+    })
+    return { name: topName, stat: districtData.get(topName) }
+  }, [districtData])
+
+  const userDistrictName = useMemo(() => {
+    return profile?.district || 'Vila Real'
+  }, [profile])
+
+  const userDistrictStat = useMemo(() => {
+    return districtData.get(userDistrictName) || { name: userDistrictName, pos: 7, players: 0, xp: 0 }
+  }, [districtData, userDistrictName])
+
+  const activeDistrictStat = useMemo(() => {
+    const target = hoveredDistrict || selectedDistrict || userDistrictName
+    return districtData.get(target) || { name: target, pos: 1, players: 0, xp: 0 }
+  }, [hoveredDistrict, selectedDistrict, userDistrictName, districtData])
+
+  const mainlandDistricts = useMemo(
+    () => PORTUGAL_GEO_DATA.filter((d) => d.type === 'mainland'),
+    [],
+  )
+  const acoresDistrict = useMemo(
+    () => PORTUGAL_GEO_DATA.find((d) => d.name === 'Açores'),
+    [],
+  )
+  const madeiraDistrict = useMemo(
+    () => PORTUGAL_GEO_DATA.find((d) => d.name === 'Madeira'),
+    [],
+  )
+
+  const handleContainerMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    setMousePos({ x, y })
+
+    // Subtle 3D gyroscope tilt
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const deltaX = (x - centerX) / centerX
+    const deltaY = (y - centerY) / centerY
+
+    setTilt({
+      rotateX: 12 - deltaY * 6,
+      rotateY: -2 + deltaX * 6,
+    })
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredDistrict(null)
+    setTilt({ rotateX: 12, rotateY: -2 })
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleContainerMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full max-w-2xl mx-auto flex flex-col items-center justify-center select-none"
+    >
+      {/* ========================================================= */}
+      {/* 3D HOLOGRAPHIC STAGE CONTAINER */}
+      {/* ========================================================= */}
+      <div className="relative w-full aspect-[0.96/1] sm:aspect-[1.02/1] flex items-center justify-center [perspective:1400px]">
+        {/* Gaming Ambient Background Glows */}
+        <div className="pointer-events-none absolute inset-[10%] rounded-full bg-primary/25 blur-[100px] animate-pulse-glow" />
+        <div className="pointer-events-none absolute inset-[22%] rounded-full bg-gold/18 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-[10%] right-[15%] h-60 w-60 rounded-full bg-flag-red/20 blur-[100px]" />
+
+        {/* 3D Holo Floor Grid Underneath */}
+        <div
+          className="pointer-events-none absolute inset-x-6 bottom-4 h-64 opacity-40 transition-transform duration-500 ease-out"
+          style={{
+            transform: `rotateX(${tilt.rotateX + 45}deg) rotateY(${tilt.rotateY}deg) translateZ(-60px)`,
+            backgroundImage: `
+              linear-gradient(to right, rgba(0, 255, 162, 0.2) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 255, 162, 0.2) 1px, transparent 1px)
+            `,
+            backgroundSize: '30px 30px',
+            maskImage: 'radial-gradient(ellipse at center, black 35%, transparent 75%)',
+          }}
+        />
+
+        {/* Tactical Holographic Orbit Rings */}
+        <div className="pointer-events-none absolute inset-2 rounded-full border border-primary/20 animate-spin-slow opacity-40" />
+        <div className="pointer-events-none absolute inset-12 rounded-full border border-dashed border-gold/25 animate-spin-reverse opacity-35" />
+
+        {/* ========================================================= */}
+        {/* DESKTOP FLOATING TACTICAL BADGES (Hidden on Mobile) */}
+        {/* ========================================================= */}
+        {/* ========================================================= */}
+        {/* DESKTOP FLOATING TACTICAL BADGES (Holographic Cyber HUDs) */}
+        {/* ========================================================= */}
+        {/* 1. Top Leader Badge (Top Right) */}
+        <div
+          className="hidden lg:flex absolute top-2 right-0 z-20 animate-float"
+          style={{ animationDuration: '6.5s' }}
+        >
+          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-amber-400/50 shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:border-amber-300 hover:scale-105 transition-all">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-amber-400/30 to-amber-600/20 text-amber-300 ring-1 ring-amber-400/60 shadow-lg shadow-amber-500/20">
+              <Crown className="h-5 w-5 fill-current drop-shadow-md" />
+            </div>
+            <div>
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-amber-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                Líder Nacional #1
+              </p>
+              <p className="font-display text-sm font-black text-foreground truncate max-w-[130px]">
+                {topPlayer ? topPlayer.name : 'A carregar...'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Top District Badge (Top Left) */}
+        <div
+          className="hidden lg:flex absolute top-2 left-0 z-20 animate-float"
+          style={{ animationDuration: '7s', animationDelay: '1s' }}
+        >
+          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.25)] hover:border-cyan-300 hover:scale-105 transition-all">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-400/30 to-cyan-600/20 text-cyan-300 ring-1 ring-cyan-400/60 shadow-lg shadow-cyan-500/20">
+              <Trophy className="h-5 w-5 drop-shadow-md" />
+            </div>
+            <div>
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-cyan-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                Distrito no Topo
+              </p>
+              <p className="font-display text-sm font-black text-foreground">
+                {leadingDistrict.name} <span className="text-amber-300 text-xs font-black">#1</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Streak / User District (Bottom Left) */}
+        <div
+          className="hidden lg:flex absolute bottom-6 left-0 z-20 animate-float"
+          style={{ animationDuration: '6.8s', animationDelay: '2s' }}
+        >
+          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-emerald-400/50 shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:border-emerald-300 hover:scale-105 transition-all">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-emerald-400/30 to-emerald-600/20 text-emerald-300 ring-1 ring-emerald-400/60 shadow-lg shadow-emerald-500/20">
+              <Shield className="h-5 w-5 fill-current drop-shadow-md" />
+            </div>
+            <div>
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-emerald-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                O Teu Distrito
+              </p>
+              <p className="font-display text-sm font-black text-foreground">
+                {userDistrictName} <span className="text-amber-300 text-xs font-black">#{userDistrictStat.pos}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. € Acorda / XP (Bottom Right) */}
+        <div
+          className="hidden lg:flex absolute bottom-6 right-0 z-20 animate-float"
+          style={{ animationDuration: '7.2s', animationDelay: '1.5s' }}
+        >
+          <div className="card-hud-cyber flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-xl border border-fuchsia-400/50 shadow-[0_0_20px_rgba(217,70,239,0.25)] hover:border-fuchsia-300 hover:scale-105 transition-all">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-fuchsia-400/30 to-fuchsia-600/20 text-fuchsia-300 ring-1 ring-fuchsia-400/60 shadow-lg shadow-fuchsia-500/20">
+              <Coins className="h-5 w-5 drop-shadow-md" />
+            </div>
+            <div>
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-fuchsia-300 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
+                {user ? 'Saldo € Acorda' : 'Recompensas'}
+              </p>
+              <p className="font-display text-sm font-black text-amber-300">
+                {user && profile ? `€${profile.euros.toLocaleString('pt-PT')}` : '+XP & € Virtuais'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* 3D VIDEO-GAME VECTOR MAP SVG */}
+        {/* ========================================================= */}
+        <div
+          className="relative z-10 w-full h-full transition-transform duration-300 ease-out"
+          style={{
+            transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) rotateZ(-1deg)`,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <svg
+            viewBox="0 0 760 850"
+            className="w-full h-full filter drop-shadow-[0_30px_50px_rgba(0,0,0,0.85)]"
+          >
+            <defs>
+              {/* Vibrant Video-Game Gradients for Each District */}
+              {Object.values(DISTRICT_THEMES).map((t) => (
+                <linearGradient key={t.gradientId} id={t.gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor={t.from} stopOpacity="0.95" />
+                  <stop offset="100%" stopColor={t.to} stopOpacity="1" />
+                </linearGradient>
+              ))}
+
+              {/* Special Glow Filters */}
+              <filter id="game-glow-hover" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="0" stdDeviation="12" floodColor="#ffffff" floodOpacity="0.95" />
+              </filter>
+              <filter id="game-glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#fbbf24" floodOpacity="0.95" />
+              </filter>
+              <filter id="game-glow-player" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#34d399" floodOpacity="0.95" />
+              </filter>
+
+              {/* 3D Extrusion Shadow Gradients */}
+              <linearGradient id="extrusion-depth-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#0b1712" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#030805" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+
+            {/* LAYER 0: MECHATRONIC CYBERNETIC CIRCUITS & DATA CONDUITS */}
+            <g id="layer-mechatronic-base" className="pointer-events-none opacity-60">
+              {/* Sci-Fi Data Bus Lines between Hubs */}
+              <path
+                d="M 236 138 L 472 135 L 536 295 L 360 495 L 398 720"
+                fill="none"
+                stroke="#00ffa2"
+                strokeWidth="1.2"
+                strokeDasharray="4 8"
+                strokeOpacity="0.5"
+              />
+              <path
+                d="M 136 138 L 472 135 M 116 630 L 360 495"
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="1.2"
+                strokeDasharray="3 6"
+                strokeOpacity="0.4"
+              />
+              {/* Cybernetic Docking Clamps / Base Plate */}
+              <rect
+                x="320"
+                y="805"
+                width="160"
+                height="12"
+                rx="6"
+                fill="#030805"
+                stroke="rgba(0, 255, 162, 0.4)"
+                strokeWidth="1.5"
+              />
+              <circle cx="340" cy="811" r="3" fill="#00ffa2" />
+              <circle cx="460" cy="811" r="3" fill="#00ffa2" />
+            </g>
+
+            {/* LAYER 1: 3D EXTRUSION BASE LAYER (Deep Volumetric Shadow & Bevel) */}
+            <g id="layer-3d-extrusion-deep" transform="translate(8, 26)" className="opacity-90 pointer-events-none">
+              {mainlandDistricts.map((district) => (
+                <path
+                  key={`deep-${district.name}`}
+                  d={district.path}
+                  fill="#030805"
+                  stroke="#0f261d"
+                  strokeWidth="2.5"
+                  strokeLinejoin="round"
+                />
+              ))}
+            </g>
+
+            {/* LAYER 2: 3D EXTRUSION MID LAYER (Volume Rim) */}
+            <g id="layer-3d-extrusion-mid" transform="translate(4, 13)" className="opacity-95 pointer-events-none">
+              {mainlandDistricts.map((district) => {
+                const theme = DISTRICT_THEMES[district.name] || DISTRICT_THEMES['Lisboa']
+                return (
+                  <path
+                    key={`mid-${district.name}`}
+                    d={district.path}
+                    fill={theme.from}
+                    fillOpacity="0.4"
+                    stroke={theme.to}
+                    strokeOpacity="0.6"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                )
+              })}
+            </g>
+
+            {/* LAYER 3: TOP INTERACTIVE GAME SURFACE (18 Colorful Vibrant Districts) */}
+            <g id="layer-3d-surface">
+              {mainlandDistricts.map((district) => {
+                const isHovered = hoveredDistrict === district.name
+                const isSelected = selectedDistrict === district.name
+                const isPlayer = userDistrictName === district.name
+                const stat = districtData.get(district.name)
+                const isTop1 = (stat && stat.pos === 1) || (!stat && district.name === leadingDistrict.name)
+
+                const theme = DISTRICT_THEMES[district.name] || DISTRICT_THEMES['Lisboa']
+
+                let fill = `url(#${theme.gradientId})`
+                let stroke = 'rgba(255, 255, 255, 0.45)'
+                let strokeWidth = 1.6
+                let filter = undefined
+                let transform = undefined
+
+                if (isHovered) {
+                  stroke = '#ffffff'
+                  strokeWidth = 3.2
+                  filter = 'url(#game-glow-hover)'
+                  transform = 'translate(-3, -8) scale(1.02)'
+                } else if (isTop1) {
+                  stroke = '#fde047'
+                  strokeWidth = 2.8
+                  filter = 'url(#game-glow-gold)'
+                } else if (isPlayer) {
+                  stroke = '#34d399'
+                  strokeWidth = 2.6
+                  filter = 'url(#game-glow-player)'
+                } else if (isSelected) {
+                  stroke = '#ffffff'
+                  strokeWidth = 2.4
+                  transform = 'translate(-2, -5)'
+                }
+
+                return (
+                  <g
+                    key={district.name}
+                    transform={transform}
+                    style={{
+                      transformOrigin: `${district.centroid[0]}px ${district.centroid[1]}px`,
+                    }}
+                    className="transition-all duration-200 cursor-pointer pointer-events-auto"
+                    onMouseEnter={() => setHoveredDistrict(district.name)}
+                    onMouseLeave={() => setHoveredDistrict(null)}
+                    onClick={() => setSelectedDistrict(district.name)}
+                  >
+                    <path
+                      d={district.path}
+                      fill={fill}
+                      stroke={stroke}
+                      strokeWidth={strokeWidth}
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      filter={filter}
+                      className={cn(
+                        'transition-all duration-200',
+                        isHovered && 'brightness-125 saturate-125',
+                      )}
+                    />
+                  </g>
+                )
+              })}
+            </g>
+
+            {/* ========================================================= */}
+            {/* 3D SATELLITE PODS: AÇORES & MADEIRA (Gaming Radar Platforms) */}
+            {/* ========================================================= */}
+            {/* AÇORES POD (Northwest) */}
+            {acoresDistrict && (
+              <g
+                id="holo-acores-pod"
+                className="cursor-pointer pointer-events-auto transition-all duration-200"
+                onMouseEnter={() => setHoveredDistrict('Açores')}
+                onMouseLeave={() => setHoveredDistrict(null)}
+                onClick={() => setSelectedDistrict('Açores')}
+              >
+                {/* Pod 3D Base Shadow */}
+                <rect
+                  x="20"
+                  y="68"
+                  width="220"
+                  height="160"
+                  rx="20"
+                  fill="#030805"
+                  className="pointer-events-none opacity-80"
+                />
+                {/* Pod Main Plate */}
+                <rect
+                  x="16"
+                  y="58"
+                  width="220"
+                  height="160"
+                  rx="20"
+                  fill="rgba(10, 25, 35, 0.85)"
+                  stroke={
+                    hoveredDistrict === 'Açores' || selectedDistrict === 'Açores'
+                      ? '#38bdf8'
+                      : userDistrictName === 'Açores'
+                        ? '#34d399'
+                        : 'rgba(56, 189, 248, 0.5)'
+                  }
+                  strokeWidth="1.8"
+                  filter={
+                    hoveredDistrict === 'Açores' || selectedDistrict === 'Açores'
+                      ? 'url(#game-glow-hover)'
+                      : userDistrictName === 'Açores'
+                        ? 'url(#game-glow-player)'
+                        : undefined
+                  }
+                  className="backdrop-blur-md transition-all duration-200"
+                />
+                <text
+                  x="34"
+                  y="84"
+                  fill="#38bdf8"
+                  fontSize="12"
+                  fontWeight="900"
+                  letterSpacing="2.5"
+                >
+                  AÇORES
+                </text>
+                <text
+                  x="34"
+                  y="98"
+                  fill="rgba(255, 255, 255, 0.65)"
+                  fontSize="9"
+                  fontWeight="700"
+                  letterSpacing="1"
+                >
+                  9 ILHAS • REG. AUTÓNOMA
+                </text>
+                <g
+                  transform="translate(130, 150) scale(1.22) translate(-130, -150)"
+                  className={cn(
+                    'transition-all duration-200',
+                    hoveredDistrict === 'Açores' && 'brightness-125 saturate-125',
+                  )}
+                >
+                  <path
+                    d={acoresDistrict.path}
+                    fill="url(#grad-acores)"
+                    stroke={
+                      hoveredDistrict === 'Açores' || selectedDistrict === 'Açores'
+                        ? '#ffffff'
+                        : userDistrictName === 'Açores'
+                          ? '#34d399'
+                          : 'rgba(255, 255, 255, 0.7)'
+                    }
+                    strokeWidth="1.6"
+                    filter={hoveredDistrict === 'Açores' ? 'url(#game-glow-hover)' : undefined}
+                    className="transition-all duration-200"
+                  />
+                </g>
+              </g>
+            )}
+
+            {/* MADEIRA POD (Southwest) */}
+            {madeiraDistrict && (
+              <g
+                id="holo-madeira-pod"
+                className="cursor-pointer pointer-events-auto transition-all duration-200"
+                onMouseEnter={() => setHoveredDistrict('Madeira')}
+                onMouseLeave={() => setHoveredDistrict(null)}
+                onClick={() => setSelectedDistrict('Madeira')}
+              >
+                {/* Pod 3D Base Shadow */}
+                <rect
+                  x="20"
+                  y="525"
+                  width="200"
+                  height="235"
+                  rx="20"
+                  fill="#030805"
+                  className="pointer-events-none opacity-80"
+                />
+                {/* Pod Main Plate */}
+                <rect
+                  x="16"
+                  y="515"
+                  width="200"
+                  height="235"
+                  rx="20"
+                  fill="rgba(10, 30, 20, 0.85)"
+                  stroke={
+                    hoveredDistrict === 'Madeira' || selectedDistrict === 'Madeira'
+                      ? '#4ade80'
+                      : userDistrictName === 'Madeira'
+                        ? '#34d399'
+                        : 'rgba(74, 222, 128, 0.5)'
+                  }
+                  strokeWidth="1.8"
+                  filter={
+                    hoveredDistrict === 'Madeira' || selectedDistrict === 'Madeira'
+                      ? 'url(#game-glow-hover)'
+                      : userDistrictName === 'Madeira'
+                        ? 'url(#game-glow-player)'
+                        : undefined
+                  }
+                  className="backdrop-blur-md transition-all duration-200"
+                />
+                <text
+                  x="34"
+                  y="542"
+                  fill="#4ade80"
+                  fontSize="12"
+                  fontWeight="900"
+                  letterSpacing="2.5"
+                >
+                  MADEIRA
+                </text>
+                <text
+                  x="34"
+                  y="556"
+                  fill="rgba(255, 255, 255, 0.65)"
+                  fontSize="9"
+                  fontWeight="700"
+                  letterSpacing="1"
+                >
+                  ARQUIPÉLAGO • REG. AUTÓNOMA
+                </text>
+                <g
+                  transform="translate(104, 620) scale(1.15) translate(-104, -620)"
+                  className={cn(
+                    'transition-all duration-200',
+                    hoveredDistrict === 'Madeira' && 'brightness-125 saturate-125',
+                  )}
+                >
+                  <path
+                    d={madeiraDistrict.path}
+                    fill="url(#grad-madeira)"
+                    stroke={
+                      hoveredDistrict === 'Madeira' || selectedDistrict === 'Madeira'
+                        ? '#ffffff'
+                        : userDistrictName === 'Madeira'
+                          ? '#34d399'
+                          : 'rgba(255, 255, 255, 0.7)'
+                    }
+                    strokeWidth="1.6"
+                    filter={hoveredDistrict === 'Madeira' ? 'url(#game-glow-hover)' : undefined}
+                    className="transition-all duration-200"
+                  />
+                </g>
+              </g>
+            )}
+          </svg>
+        </div>
+
+        {/* Dynamic Hover Tooltip HUD (Desktop only) */}
+        {hoveredDistrict && (
+          <div
+            className="hidden lg:block pointer-events-none absolute z-30 transform -translate-x-1/2 -translate-y-full mb-3"
+            style={{
+              left: Math.max(120, Math.min(mousePos.x, 420)),
+              top: Math.max(80, mousePos.y - 15),
+            }}
+          >
+            <div className="rounded-2xl border border-white/20 bg-card/95 p-3.5 backdrop-blur-2xl shadow-2xl animate-rise text-left min-w-[190px]">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <span
+                    className="h-3 w-3 rounded-full shadow-sm"
+                    style={{
+                      backgroundColor:
+                        DISTRICT_THEMES[activeDistrictStat.name]?.accent || '#34d399',
+                    }}
+                  />
+                  <span className="font-display text-sm font-black text-foreground">
+                    {activeDistrictStat.name}
+                  </span>
+                </div>
+                <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[0.65rem] font-black text-gold border border-gold/30">
+                  #{activeDistrictStat.pos}
+                </span>
+              </div>
+              <div className="mt-2.5 space-y-1 text-xs">
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Jogadores:</span>
+                  <strong className="text-foreground font-bold">
+                    {activeDistrictStat.players.toLocaleString('pt-PT')}
+                  </strong>
+                </div>
+                <div className="flex justify-between text-muted-foreground">
+                  <span>XP Acumulado:</span>
+                  <strong className="text-primary font-bold">
+                    {activeDistrictStat.xp.toLocaleString('pt-PT')} XP
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ========================================================= */}
+      {/* MOBILE COMPACT TACTICAL STATUS BAR (Shown strictly on Mobile/Tablet) */}
+      {/* ========================================================= */}
+      <div className="lg:hidden mt-3 w-full max-w-sm flex items-center justify-center gap-2.5 px-2">
+        {/* 1. Mobile Leader Chip */}
+        <div className="flex-1 flex items-center gap-2 rounded-xl border border-gold/30 bg-card/80 px-3 py-2 backdrop-blur-md">
+          <Crown className="h-4 w-4 text-gold shrink-0 fill-current" />
+          <div className="min-w-0">
+            <p className="text-[0.55rem] font-black uppercase tracking-wider text-gold truncate">
+              #1 Nacional
+            </p>
+            <p className="font-display text-xs font-black text-foreground truncate">
+              {topPlayer ? topPlayer.name : 'A carregar...'}
+            </p>
+          </div>
+        </div>
+
+        {/* 2. Mobile District Chip */}
+        <div className="flex-1 flex items-center gap-2 rounded-xl border border-primary/30 bg-card/80 px-3 py-2 backdrop-blur-md">
+          <MapPin className="h-4 w-4 text-primary shrink-0" />
+          <div className="min-w-0">
+            <p className="text-[0.55rem] font-black uppercase tracking-wider text-primary truncate">
+              {userDistrictStat.name}
+            </p>
+            <p className="font-display text-xs font-black text-foreground truncate">
+              Posição <span className="text-gold font-bold">#{userDistrictStat.pos}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

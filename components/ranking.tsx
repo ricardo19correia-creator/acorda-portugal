@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ChevronRight, Crown, MapPin } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
+import { Crown, MapPin, Trophy, Sparkles, User, Play, ChevronRight } from 'lucide-react'
 import {
   collection,
   limit,
@@ -11,67 +12,151 @@ import {
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { SectionHeading } from '@/components/section-heading'
+import { useAuth } from '@/components/auth-provider'
+import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 
-type RankedPlayer = {
+export type RankedPlayer = {
   uid: string
   name: string
+  photoURL?: string | null
   level: number
   xp: number
   district: string
   pos: number
 }
 
-const PODIUM_ORDER = [1, 0, 2]
+const PODIUM_ORDER = [1, 0, 2] // 2º (left), 1º (center), 3º (right)
 
 export function Ranking() {
   const [ranking, setRanking] = useState<RankedPlayer[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const { user, profile, authResolved } = useAuth()
 
   useEffect(() => {
-    const rankingQuery = query(
-      collection(db, 'publicProfiles'),
-      orderBy('xp', 'desc'),
-      limit(10),
-    )
+    let unsubscribe: (() => void) | undefined
 
-    const unsubscribe = onSnapshot(
-      rankingQuery,
-      (snapshot) => {
-        const players: RankedPlayer[] = []
+    const processSnapshot = (snapshot: any) => {
+      const playersMap = new Map<string, RankedPlayer>()
 
-        snapshot.forEach((doc) => {
-          const data = doc.data()
+      snapshot.forEach((docSnap: any) => {
+        const data = docSnap.data()
+        if (!data) return
 
-          if (!data.displayName && !data.name) return
+        const rawName = (data.displayName || data.name || data.email?.split('@')[0] || '').trim()
+        const name = rawName || 'Jogador'
+        const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
+        const level = calculateLevelProgress(xp).currentLevel.level
+        const district = data.district || 'Portugal'
+        const photoURL = data.photoURL || null
 
-          players.push({
-            uid: data.uid || doc.id,
-            name: data.displayName || data.name,
-            level: Number(data.level) || 1,
-            xp: Number(data.xp) || 0,
-            district: data.district || 'Portugal',
-            pos: players.length + 1,
-          })
+        playersMap.set(docSnap.id, {
+          uid: docSnap.id,
+          name,
+          photoURL,
+          level,
+          xp,
+          district,
+          pos: 0,
         })
+      })
 
-        setRanking(players)
-        setLoading(false)
-        setError(null)
-      },
-      (err) => {
-        console.error('[RANKING] Erro Firestore:', err)
-        setError('Não foi possível carregar o ranking.')
-        setLoading(false)
-      },
-    )
+      // Convert to array and sort descending by XP, then level
+      const sorted = Array.from(playersMap.values()).sort((a, b) => {
+        if (b.xp !== a.xp) return b.xp - a.xp
+        return b.level - a.level
+      })
 
-    return () => unsubscribe()
-  }, [])
+      // Assign official ranks (1-based)
+      sorted.forEach((p, idx) => {
+        p.pos = idx + 1
+      })
 
-  const top3 = ranking.slice(0, 3)
-  const rest = ranking.slice(3, 10)
+      setRanking(sorted)
+      setLoading(false)
+      setError(null)
+    }
+
+    try {
+      // Primary query: publicProfiles collection ordered by XP descending
+      const rankingQuery = query(
+        collection(db, 'publicProfiles'),
+        orderBy('xp', 'desc'),
+        limit(50),
+      )
+
+      unsubscribe = onSnapshot(
+        rankingQuery,
+        (snapshot) => {
+          processSnapshot(snapshot)
+        },
+        (err) => {
+          console.warn('[RANKING] Query com orderBy falhou, a tentar fallback:', err)
+          // Fallback query without orderBy in case single field index is still indexing
+          try {
+            const fallbackQuery = query(collection(db, 'publicProfiles'), limit(50))
+            unsubscribe = onSnapshot(
+              fallbackQuery,
+              (fallbackSnap) => {
+                processSnapshot(fallbackSnap)
+              },
+              (fallbackErr) => {
+                console.error('[RANKING] Fallback query error:', fallbackErr)
+                setError('Não foi possível carregar a tabela de classificação.')
+                setLoading(false)
+              },
+            )
+          } catch (innerErr) {
+            console.error('[RANKING] Erro ao iniciar fallback query:', innerErr)
+            setError('Não foi possível carregar a tabela de classificação.')
+            setLoading(false)
+          }
+        },
+      )
+    } catch (queryErr) {
+      console.error('[RANKING] Erro ao criar query de ranking:', queryErr)
+      setError('Erro ao iniciar a consulta do ranking.')
+      setLoading(false)
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe()
+      }
+    }
+  }, []) // Empty dependency array: stable Firestore listener
+
+  const top3 = useMemo(() => ranking.slice(0, 3), [ranking])
+  const rest = useMemo(() => ranking.slice(3, 10), [ranking])
+
+  // Determine current user rank status
+  const currentUserEntry = useMemo(() => {
+    if (!user?.uid) return null
+    const foundInTop = ranking.find((p) => p.uid === user.uid)
+    if (foundInTop) return foundInTop
+
+    if (profile) {
+      const userXp = profile.xp ?? 0
+      const rankPos = ranking.filter((p) => p.xp > userXp).length + 1
+      return {
+        uid: user.uid,
+        name: profile.displayName || user.displayName || 'Jogador',
+        photoURL: profile.photoURL || user.photoURL || null,
+        level: profile.level ?? 1,
+        xp: userXp,
+        district: profile.district || 'Portugal',
+        pos: rankPos,
+      } as RankedPlayer
+    }
+
+    return null
+  }, [ranking, user, profile])
+
+  const isCurrentUserInTop10 = useMemo(() => {
+    if (!user?.uid) return false
+    return ranking.slice(0, 10).some((p) => p.uid === user.uid)
+  }, [ranking, user])
 
   return (
     <section
@@ -84,157 +169,303 @@ export function Ranking() {
         description="Os melhores do país, atualizados a cada partida. Sobe, ultrapassa e reclama a coroa."
       />
 
+      {/* Loading Skeleton */}
       {loading && (
-        <div className="mt-12 text-center text-muted-foreground">
-          A carregar ranking nacional...
+        <div className="mt-12 space-y-6">
+          <div className="grid grid-cols-3 items-end gap-3 sm:gap-6 max-w-3xl mx-auto">
+            <div className="h-32 sm:h-40 rounded-t-3xl bg-white/[0.03] animate-pulse border border-white/5" />
+            <div className="h-44 sm:h-52 rounded-t-3xl bg-white/[0.05] animate-pulse border border-primary/20" />
+            <div className="h-28 sm:h-36 rounded-t-3xl bg-white/[0.03] animate-pulse border border-white/5" />
+          </div>
+          <div className="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-card/40 p-6 space-y-4">
+            <div className="h-12 w-full rounded-2xl bg-white/[0.03] animate-pulse" />
+            <div className="h-12 w-full rounded-2xl bg-white/[0.03] animate-pulse" />
+            <div className="h-12 w-full rounded-2xl bg-white/[0.03] animate-pulse" />
+          </div>
         </div>
       )}
 
+      {/* Error state */}
       {!loading && error && (
-        <div className="mt-12 text-center text-red-400">
-          {error}
+        <div className="mt-12 mx-auto max-w-lg rounded-3xl border border-flag-red/30 bg-flag-red/10 p-6 text-center">
+          <p className="font-semibold text-flag-red">{error}</p>
+          <p className="mt-1 text-xs text-muted-foreground">Tenta recarregar a página para atualizar a tabela.</p>
         </div>
       )}
 
+      {/* Empty State */}
       {!loading && !error && ranking.length === 0 && (
-        <div className="mt-12 text-center text-muted-foreground">
-          Ainda não existem jogadores no ranking.
+        <div className="mt-12 mx-auto max-w-md rounded-3xl border border-white/10 bg-card/60 p-8 text-center backdrop-blur">
+          <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/30">
+            <Trophy className="h-7 w-7" />
+          </div>
+          <h3 className="mt-4 font-display text-xl font-bold text-foreground">A temporada começou!</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Sê o primeiro jogador a concluir uma partida e a liderar a classificação de Portugal.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/jogar"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-display text-sm font-bold text-primary-foreground transition hover:opacity-90 shadow-[0_0_20px_-3px_var(--primary)]"
+            >
+              <Play className="h-4 w-4 fill-current" />
+              Jogar primeira partida
+            </Link>
+          </div>
         </div>
       )}
 
+      {/* Populated Leaderboard */}
       {!loading && !error && ranking.length > 0 && (
-        <>
-          {top3.length >= 3 && (
-            <div className="mt-12 grid grid-cols-3 items-end gap-3 sm:gap-6">
-              {PODIUM_ORDER.map((idx) => (
-                <PodiumSpot
-                  key={top3[idx].uid}
-                  player={top3[idx]}
-                />
-              ))}
+        <div className="mt-12">
+          {/* TOP 3 Podium */}
+          {top3.length > 0 && (
+            <div className="mx-auto max-w-3xl">
+              <div className="grid grid-cols-3 items-end gap-2.5 sm:gap-6">
+                {PODIUM_ORDER.map((posIndex) => {
+                  const player = top3[posIndex]
+                  if (!player) {
+                    return <div key={`empty-pos-${posIndex}`} className="h-28" />
+                  }
+                  return (
+                    <PodiumCard
+                      key={player.uid}
+                      player={player}
+                      isCurrentUser={player.uid === user?.uid}
+                    />
+                  )
+                })}
+              </div>
             </div>
           )}
 
-          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-card/60 backdrop-blur">
-            <ul className="divide-y divide-white/5">
-              {rest.map((row) => (
-                <li
-                  key={row.uid}
-                  className="flex items-center gap-4 px-4 py-3.5 transition-colors hover:bg-white/[0.03] sm:px-5"
-                >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/5 text-sm font-black text-muted-foreground">
-                    {row.pos}
+          {/* Leaderboard list (ranks 4 to 10) */}
+          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-card/60 backdrop-blur shadow-xl">
+            {rest.length > 0 && (
+              <ul className="divide-y divide-white/5">
+                {rest.map((row) => {
+                  const isCurrent = row.uid === user?.uid
+                  return (
+                    <li
+                      key={row.uid}
+                      className={cn(
+                        'flex items-center gap-3.5 px-4 py-3.5 transition-colors sm:gap-4 sm:px-6',
+                        isCurrent
+                          ? 'bg-primary/10 border-l-4 border-primary'
+                          : 'hover:bg-white/[0.03]',
+                      )}
+                    >
+                      {/* Position Badge */}
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white/5 font-display text-sm font-black text-muted-foreground">
+                        {row.pos}
+                      </span>
+
+                      {/* Player Avatar */}
+                      <PlayerAvatar
+                        name={row.name}
+                        photoURL={row.photoURL}
+                        className="h-10 w-10 shrink-0 text-sm ring-1 ring-white/15"
+                      />
+
+                      {/* Name + District + Level */}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="truncate font-display font-bold text-foreground">
+                            {row.name}
+                          </p>
+                          {isCurrent && (
+                            <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-primary ring-1 ring-primary/40">
+                              Tu
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground truncate">
+                          <MapPin className="h-3 w-3 shrink-0 text-primary/70" />
+                          <span className="truncate">{row.district}</span>
+                          <span>•</span>
+                          <span className="font-medium text-foreground/70">Nível {row.level}</span>
+                        </p>
+                      </div>
+
+                      {/* XP Score */}
+                      <div className="text-right shrink-0">
+                        <p className="font-display text-base font-black text-brand-gradient sm:text-lg">
+                          {row.xp.toLocaleString('pt-PT')}
+                        </p>
+                        <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
+                          XP
+                        </p>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+
+            {/* Current user card if outside Top 10 */}
+            {currentUserEntry && !isCurrentUserInTop10 && (
+              <div className="border-t border-white/10 bg-gradient-to-r from-primary/15 via-card to-primary/10 p-4 sm:p-5">
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.24em] text-primary">
+                  A tua classificação
+                </p>
+                <div className="mt-2 flex items-center gap-3.5 sm:gap-4">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/20 font-display text-base font-black text-primary ring-1 ring-primary/40">
+                    {currentUserEntry.pos}
                   </span>
 
-                  <Avatar
-                    name={row.name}
-                    className="h-10 w-10 shrink-0 text-sm"
+                  <PlayerAvatar
+                    name={currentUserEntry.name}
+                    photoURL={currentUserEntry.photoURL}
+                    className="h-10 w-10 shrink-0 text-sm ring-2 ring-primary/40"
                   />
 
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-semibold text-foreground">
-                      {row.name}
-                    </p>
-
-                    <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
-                      {row.district} · Nível {row.level}
+                    <div className="flex items-center gap-2">
+                      <p className="truncate font-display font-bold text-foreground">
+                        {currentUserEntry.name}
+                      </p>
+                      <span className="rounded-full bg-primary/25 px-2 py-0.5 text-[0.65rem] font-black uppercase text-primary">
+                        Tu
+                      </span>
+                    </div>
+                    <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground truncate">
+                      <MapPin className="h-3 w-3 shrink-0 text-primary" />
+                      <span>{currentUserEntry.district}</span>
+                      <span>•</span>
+                      <span>Nível {currentUserEntry.level}</span>
                     </p>
                   </div>
 
-                  <div className="text-right">
-                    <p className="font-display text-base font-bold text-foreground">
-                      {row.xp.toLocaleString('pt-PT')}
+                  <div className="text-right shrink-0">
+                    <p className="font-display text-lg font-black text-brand-gradient">
+                      {currentUserEntry.xp.toLocaleString('pt-PT')}
                     </p>
-
-                    <p className="text-[0.62rem] uppercase tracking-wider text-muted-foreground">
+                    <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
                       XP
                     </p>
                   </div>
-                </li>
-              ))}
-            </ul>
+                </div>
+              </div>
+            )}
 
-            <div className="p-4">
-              <button
-                type="button"
-                className="flex w-full items-center justify-center gap-1 rounded-xl border border-primary/30 bg-primary/10 py-4 font-semibold text-primary transition-colors hover:bg-primary/20"
+            {/* Call to action at bottom */}
+            <div className="border-t border-white/5 p-4 sm:p-5 text-center bg-card/30">
+              <Link
+                href="/jogar"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-2xl bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border border-primary/30 px-6 py-3 font-display text-sm font-bold uppercase tracking-wider text-primary transition-all hover:border-primary/50 hover:bg-primary/25"
               >
-                Ver ranking completo
+                <Sparkles className="h-4 w-4" />
+                Jogar agora e subir no ranking
                 <ChevronRight className="h-4 w-4" />
-              </button>
+              </Link>
             </div>
           </div>
-        </>
+        </div>
       )}
     </section>
   )
 }
 
-function PodiumSpot({ player }: { player: RankedPlayer }) {
-  const styles = {
+function PodiumCard({
+  player,
+  isCurrentUser,
+}: {
+  player: RankedPlayer
+  isCurrentUser: boolean
+}) {
+  const isFirst = player.pos === 1
+  const isSecond = player.pos === 2
+  const isThird = player.pos === 3
+
+  const config = {
     1: {
-      pedestal:
-        'h-32 sm:h-40 bg-gradient-to-b from-gold/30 to-gold/5 border-gold/40',
-      ring: 'ring-gold/60 shadow-[0_0_40px_-6px_var(--gold)]',
-      badge: 'bg-gold text-gold-foreground',
+      pedestal: 'h-40 sm:h-52 bg-gradient-to-b from-gold/30 via-gold/10 to-transparent border-gold/40 shadow-[0_0_40px_-10px_var(--gold)]',
+      badge: 'bg-gold text-gold-foreground font-black ring-2 ring-gold/50 shadow-[0_0_15px_var(--gold)]',
+      crown: true,
+      ringColor: 'ring-gold/60',
+      labelColor: 'text-gold',
     },
     2: {
-      pedestal:
-        'h-24 sm:h-32 bg-gradient-to-b from-white/15 to-white/[0.03] border-white/25',
-      ring: 'ring-white/40',
-      badge: 'bg-white/85 text-background',
+      pedestal: 'h-32 sm:h-40 bg-gradient-to-b from-white/15 via-white/5 to-transparent border-white/20',
+      badge: 'bg-white/90 text-background font-black ring-2 ring-white/30',
+      crown: false,
+      ringColor: 'ring-white/40',
+      labelColor: 'text-foreground/90',
     },
     3: {
-      pedestal:
-        'h-20 sm:h-28 bg-gradient-to-b from-flag-red/25 to-flag-red/5 border-flag-red/35',
-      ring: 'ring-flag-red/50',
-      badge: 'bg-flag-red text-flag-red-foreground',
+      pedestal: 'h-28 sm:h-36 bg-gradient-to-b from-flag-red/25 via-flag-red/5 to-transparent border-flag-red/30',
+      badge: 'bg-flag-red text-flag-red-foreground font-black ring-2 ring-flag-red/40',
+      crown: false,
+      ringColor: 'ring-flag-red/50',
+      labelColor: 'text-flag-red',
     },
-  }[player.pos as 1 | 2 | 3]
+  }[player.pos as 1 | 2 | 3] || {
+    pedestal: 'h-28 bg-white/5 border-white/10',
+    badge: 'bg-white/10 text-foreground',
+    crown: false,
+    ringColor: 'ring-white/20',
+    labelColor: 'text-foreground',
+  }
 
   return (
-    <div className="animate-rise flex flex-col items-center">
-      {player.pos === 1 && (
-        <Crown className="mb-1 h-7 w-7 fill-gold text-gold drop-shadow-[0_0_10px_var(--gold)]" />
+    <div className="flex flex-col items-center">
+      {/* Crown above 1st place */}
+      {config.crown ? (
+        <div className="animate-glow-pulse mb-1 grid h-8 w-8 place-items-center">
+          <Crown className="h-7 w-7 fill-gold text-gold drop-shadow-[0_0_12px_var(--gold)]" />
+        </div>
+      ) : (
+        <div className="h-8 mb-1" />
       )}
 
-      <Avatar
-        name={player.name}
-        className={cn(
-          'h-14 w-14 text-lg ring-2 sm:h-16 sm:w-16',
-          styles.ring,
+      {/* Avatar with position halo */}
+      <div className="relative">
+        <PlayerAvatar
+          name={player.name}
+          photoURL={player.photoURL}
+          className={cn(
+            'ring-2 transition-transform duration-300',
+            config.ringColor,
+            isFirst ? 'h-16 w-16 sm:h-20 sm:w-20 text-xl' : 'h-13 w-13 sm:h-16 sm:w-16 text-base',
+            isCurrentUser && 'ring-4 ring-primary',
+          )}
+        />
+        {isCurrentUser && (
+          <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-primary px-1.5 py-0.2 text-[0.55rem] font-black uppercase text-primary-foreground ring-1 ring-background">
+            Tu
+          </span>
         )}
-      />
+      </div>
 
-      <p className="mt-2 max-w-full truncate text-center text-sm font-bold text-foreground">
+      {/* Player name & District */}
+      <p className="mt-2.5 max-w-[100px] sm:max-w-[140px] truncate text-center font-display text-xs sm:text-sm font-bold text-foreground">
         {player.name}
       </p>
-
-      <p className="text-[0.68rem] text-muted-foreground">
+      <p className="max-w-[90px] sm:max-w-[130px] truncate text-center text-[0.62rem] sm:text-xs text-muted-foreground">
         {player.district}
       </p>
 
+      {/* Pedestal block */}
       <div
         className={cn(
-          'mt-3 flex w-full flex-col items-center justify-end rounded-t-2xl border border-b-0 pb-3 pt-4',
-          styles.pedestal,
+          'mt-3 flex w-full flex-col items-center justify-end rounded-t-3xl border border-b-0 pb-3 pt-3 transition-all',
+          config.pedestal,
         )}
       >
         <span
           className={cn(
-            'grid h-9 w-9 place-items-center rounded-full font-display text-lg font-black',
-            styles.badge,
+            'grid h-8 w-8 sm:h-10 sm:w-10 place-items-center rounded-2xl font-display text-sm sm:text-base font-black',
+            config.badge,
           )}
         >
-          {player.pos}
+          {player.pos}º
         </span>
 
-        <span className="mt-2 font-display text-sm font-bold text-foreground sm:text-base">
+        <span className="mt-2 font-display text-xs sm:text-base font-black text-foreground">
           {player.xp.toLocaleString('pt-PT')}
         </span>
 
-        <span className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">
+        <span className="text-[0.58rem] sm:text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">
           XP
         </span>
       </div>
@@ -242,21 +473,36 @@ function PodiumSpot({ player }: { player: RankedPlayer }) {
   )
 }
 
-function Avatar({
+function PlayerAvatar({
   name,
+  photoURL,
   className,
 }: {
   name: string
+  photoURL?: string | null
   className?: string
 }) {
+  if (photoURL) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={photoURL}
+        alt={name}
+        className={cn('rounded-2xl object-cover', className)}
+      />
+    )
+  }
+
+  const initial = name?.trim() ? name.trim().charAt(0).toUpperCase() : 'P'
+
   return (
-    <span
+    <div
       className={cn(
-        'grid place-items-center rounded-xl bg-gradient-to-br from-primary/30 to-accent/15 font-display font-bold text-primary',
+        'grid place-items-center rounded-2xl bg-gradient-to-br from-primary/30 via-accent/20 to-gold/15 font-display font-black text-foreground',
         className,
       )}
     >
-      {name.charAt(0).toUpperCase()}
-    </span>
+      {initial}
+    </div>
   )
 }

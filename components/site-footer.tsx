@@ -1,6 +1,16 @@
+import Link from 'next/link'
 import { BrandLogo } from '@/components/brand-logo'
 
-const LINKS = ['Jogar', 'Ranking', 'Categorias', 'Como jogar', 'Termos', 'Privacidade']
+const LINKS = [
+  { label: 'Jogar', href: '/jogar' },
+  { label: 'Rankings', href: '/rankings' },
+  { label: 'Categorias', href: '/categorias' },
+  { label: 'Portugal & Mapa', href: '/portugal' },
+  { label: 'Eventos', href: '/eventos' },
+  { label: 'Explorar & Sobre', href: '/explorar' },
+  { label: 'Loja', href: '/loja' },
+  { label: 'Termos', href: '/termos' },
+]
 
 export function SiteFooter() {
   return (
@@ -16,14 +26,14 @@ export function SiteFooter() {
 
           <nav aria-label="Rodapé">
             <ul className="flex flex-wrap justify-center gap-x-6 gap-y-3 md:justify-end">
-              {LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#top"
+              {LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
                     className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                   >
-                    {link}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>

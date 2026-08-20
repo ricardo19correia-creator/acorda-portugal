@@ -1,13 +1,12 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
-import { onIdTokenChanged, type IdTokenResult, type User } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
-import { auth } from '@/lib/firebase'
-import { db } from '@/lib/firebase'
+import { getRedirectResult, onIdTokenChanged, browserPopupRedirectResolver, type IdTokenResult, type User } from 'firebase/auth'
+import { doc, getDoc, setDoc, onSnapshot, type Unsubscribe } from 'firebase/firestore'
+import { auth, db } from '@/lib/firebase'
 import type { UserProfile } from '@/lib/game-data'
 
-type AuthState = {
+export type AuthState = {
   user: User | null
   authResolved: boolean
   authInitializationError: string | null
@@ -40,25 +39,6 @@ function withFirestoreTimeout<T>(promise: Promise<T>, operation: string): Promis
   })
 }
 
-function withTimeout<T>(promise: Promise<T>, operation: string, timeoutMs: number): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
-      reject(new Error(`${operation} excedeu o tempo limite de ${timeoutMs / 1000} segundos.`))
-    }, timeoutMs)
-
-    promise.then(
-      (value) => {
-        clearTimeout(timeoutId)
-        resolve(value)
-      },
-      (error: unknown) => {
-        clearTimeout(timeoutId)
-        reject(error)
-      },
-    )
-  })
-}
-
 function createDefaultUserProfile(user: User): UserProfile {
   return {
     uid: user.uid,
@@ -75,6 +55,8 @@ function createDefaultUserProfile(user: User): UserProfile {
     losses: 0,
     questionsAnswered: 0,
     correctAnswers: 0,
+    incorrectAnswers: 0,
+    totalQuestions: 0,
     bestStreak: 0,
     unlockedAchievements: [],
     badges: [],
@@ -111,35 +93,17 @@ function getProfileAuthDiagnostic(user: User, tokenResult?: IdTokenResult, hasId
     firebaseProjectId: auth.app.options.projectId ?? null,
     firebaseAuthDomain: auth.app.options.authDomain ?? null,
     firestoreProjectId: db.app.options.projectId ?? null,
-    origin: window.location.origin,
+    origin: typeof window !== 'undefined' ? window.location.origin : '',
     profileDocumentPath: `users/${user.uid}`,
     authCurrentUserMatchesUseAuthUid: currentUser?.uid === user.uid,
     authCurrentUserIsUseAuthUser: currentUser === user,
     idTokenAvailable: hasIdToken ?? false,
-    token: tokenResult
-      ? {
-          signInProvider: tokenResult.signInProvider,
-          authTime: tokenResult.authTime,
-          issuedAtTime: tokenResult.issuedAtTime,
-          expirationTime: tokenResult.expirationTime,
-          claims: {
-            aud: tokenResult.claims.aud,
-            iss: tokenResult.claims.iss,
-            auth_time: tokenResult.claims.auth_time,
-            exp: tokenResult.claims.exp,
-            user_id: tokenResult.claims.user_id,
-            email_verified: tokenResult.claims.email_verified,
-            firebase: tokenResult.claims.firebase,
-          },
-        }
-      : null,
   }
 }
 
 /**
- * The single Firebase Auth subscription for the application. Components read
- * this state instead of creating their own listeners, so they always agree on
- * whether a session has been restored.
+ * The single Firebase Authentication subscription for the application.
+ * Manages real user identity and Firestore profile synchronization.
  */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -152,73 +116,88 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
 
+  // Firebase Auth resolution
   useEffect(() => {
     let isMounted = true
-    let listenerDeliveredState = false
+    let redirectCheckComplete = false
+    let authListenerFired = false
+    let pendingUser: User | null = null
 
-    console.info('Firebase Auth: a registar onIdTokenChanged.', {
-      projectId: auth.app.options.projectId,
-      authDomain: auth.app.options.authDomain,
-      origin: window.location.origin,
-    })
-
-    const resolutionTimeout = window.setTimeout(() => {
-      if (listenerDeliveredState || !isMounted) return
-
-      const message = `Firebase Authentication não devolveu o estado da sessão em ${AUTH_RESOLUTION_TIMEOUT_MS / 1000} segundos.`
-      console.error('Firebase Auth: timeout ao aguardar onIdTokenChanged.', {
-        projectId: auth.app.options.projectId,
-        authDomain: auth.app.options.authDomain,
-        origin: window.location.origin,
-      })
-      setAuthInitializationError(message)
-      // This is a guarded fallback, not an optimistic resolution: the UI
-      // exposes the initialization failure and a later Firebase callback still
-      // replaces this state with the actual session.
-      setAuthResolved(true)
-    }, AUTH_RESOLUTION_TIMEOUT_MS)
-
-    const resolveAuthState = (currentUser: User | null) => {
-      listenerDeliveredState = true
-      window.clearTimeout(resolutionTimeout)
+    const finalizeResolution = () => {
       if (!isMounted) return
 
-      console.info('Firebase Auth: estado inicial resolvido.', {
-        hasUser: Boolean(currentUser),
-        userId: currentUser?.uid,
-      })
+      const finalUser = auth.currentUser || pendingUser
+      setUser(finalUser)
       setAuthInitializationError(null)
-      setUser(currentUser)
       setAuthResolved(true)
     }
 
+    const resolutionTimeout = window.setTimeout(() => {
+      if (!isMounted) return
+      console.warn('[AUTH DIAGNOSTIC] Timeout de resolução de autenticação atingido.')
+      finalizeResolution()
+    }, AUTH_RESOLUTION_TIMEOUT_MS)
+
+    // 1. Process redirect result from OAuth flow
+    getRedirectResult(auth, browserPopupRedirectResolver)
+      .then((result) => {
+        redirectCheckComplete = true
+        if (result?.user) {
+          pendingUser = result.user
+          if (isMounted) {
+            setUser(result.user)
+          }
+        }
+        if (authListenerFired) {
+          window.clearTimeout(resolutionTimeout)
+          finalizeResolution()
+        }
+      })
+      .catch((error) => {
+        redirectCheckComplete = true
+        console.error('[AUTH DIAGNOSTIC] Erro em getRedirectResult:', error)
+        if (authListenerFired) {
+          window.clearTimeout(resolutionTimeout)
+          finalizeResolution()
+        }
+      })
+
+    // 2. Subscribe to auth / token changes
     let unsubscribe: (() => void) | undefined
     try {
-      // Unlike onAuthStateChanged, this listener also tracks ID-token changes.
-      // The profile effect below then awaits getIdToken(), ensuring Firestore
-      // never starts its first read from a merely restored (but unusable) session.
       unsubscribe = onIdTokenChanged(
         auth,
-        (currentUser) => resolveAuthState(currentUser),
-        (error) => {
-          console.error('Erro ao verificar a autenticação:', error)
-          listenerDeliveredState = true
-          window.clearTimeout(resolutionTimeout)
-          if (!isMounted) return
+        (currentUser) => {
+          authListenerFired = true
+          pendingUser = currentUser
 
-          const firebaseError = error as { code?: unknown; message?: unknown }
-          const detail = typeof firebaseError.code === 'string'
-            ? firebaseError.code
-            : typeof firebaseError.message === 'string'
-              ? firebaseError.message
-              : 'erro desconhecido'
-          setAuthInitializationError(`Não foi possível verificar a sessão no Firebase Authentication. [Firebase: ${detail}]`)
-          setUser(null)
-          setAuthResolved(true)
+          if (currentUser) {
+            window.clearTimeout(resolutionTimeout)
+            finalizeResolution()
+          } else if (redirectCheckComplete) {
+            window.clearTimeout(resolutionTimeout)
+            finalizeResolution()
+          }
+        },
+        (error) => {
+          authListenerFired = true
+          console.error('[AUTH DIAGNOSTIC] Erro em onIdTokenChanged:', error)
+          window.clearTimeout(resolutionTimeout)
+          if (isMounted) {
+            const firebaseError = error as { code?: unknown; message?: unknown }
+            const detail = typeof firebaseError.code === 'string'
+              ? firebaseError.code
+              : typeof firebaseError.message === 'string'
+                ? firebaseError.message
+                : 'erro desconhecido'
+            setAuthInitializationError(`Não foi possível verificar a sessão no Firebase Authentication. [Firebase: ${detail}]`)
+            setUser(null)
+            setAuthResolved(true)
+          }
         },
       )
     } catch (error) {
-      console.error('Firebase Auth: não foi possível registar onAuthStateChanged.', error)
+      console.error('[AUTH DIAGNOSTIC] Falha ao registar listener:', error)
       window.clearTimeout(resolutionTimeout)
       if (isMounted) {
         setAuthInitializationError('Não foi possível iniciar Firebase Authentication.')
@@ -234,12 +213,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  // Cloud Profile Synchronization (com onSnapshot em tempo real)
   useEffect(() => {
     if (!authResolved) {
       return
     }
 
-    let cancelled = false
+    let isMounted = true
+    let unsubSnapshot: Unsubscribe | null = null
 
     if (!user) {
       setProfile(null)
@@ -248,96 +229,127 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return
     }
 
-    const loadProfile = async () => {
-      setProfile(null)
+    const initializeAndSubscribeProfile = async () => {
       setProfileError(null)
       setProfileLoading(true)
 
       let authDiagnostic = getProfileAuthDiagnostic(user)
 
       try {
-        // Use the exact Auth instance that owns the ID-token subscription
-        // before issuing Firestore. This rejects stale/restored sessions
-        // locally instead of sending an unauthenticated Firestore request.
-
         const currentAuthUser = auth.currentUser
         if (!currentAuthUser) {
           throw new Error('Firebase Auth inconsistency: useAuth() returned a user but auth.currentUser is null.')
         }
 
-        if (currentAuthUser.uid !== user.uid) {
-          throw new Error(`Firebase Auth inconsistency: useAuth() uid (${user.uid}) differs from auth.currentUser uid (${currentAuthUser.uid}).`)
-        }
-
         const idToken = await currentAuthUser.getIdToken()
         const tokenResult = await currentAuthUser.getIdTokenResult()
         authDiagnostic = getProfileAuthDiagnostic(user, tokenResult, Boolean(idToken))
-        console.info('Firebase profile diagnostic before getDoc:', authDiagnostic)
 
         if (!idToken) {
           throw new Error('Firebase Auth returned an empty ID token for the current user.')
         }
 
-        if (auth.currentUser !== currentAuthUser) {
-          throw new Error('Firebase Auth changed user while the ID token was being prepared; profile read was cancelled.')
-        }
-
-        // This getDoc uses users/{auth.currentUser.uid} before any profile
-        // write, isolating the exact authenticated Firestore request.
         const userRef = doc(db, 'users', currentAuthUser.uid)
         const snapshot = await withFirestoreTimeout(getDoc(userRef), 'A leitura do perfil')
-        let nextProfile: UserProfile
+        let initialProfile: UserProfile
 
         if (snapshot.exists()) {
-          // Merge older documents with the current schema so every consumer
-          // receives a complete UserProfile.
-          nextProfile = { ...createDefaultUserProfile(user), ...snapshot.data(), uid: user.uid } as UserProfile
+          const cloudData = snapshot.data() as UserProfile
+          initialProfile = {
+            ...createDefaultUserProfile(user),
+            ...cloudData,
+            uid: user.uid,
+          }
         } else {
-          nextProfile = createDefaultUserProfile(user)
-          await withFirestoreTimeout(setDoc(userRef, nextProfile), 'A criação do perfil')
+          initialProfile = createDefaultUserProfile(user)
+          await withFirestoreTimeout(setDoc(userRef, initialProfile), 'A criação do perfil')
         }
 
-        if (!cancelled) {
-          setProfile(nextProfile)
+        // Sincronizar perfil público para ranking nacional
+        try {
+          const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
+          await setDoc(
+            publicProfileRef,
+            {
+              uid: currentAuthUser.uid,
+              displayName: initialProfile.displayName || 'Jogador',
+              photoURL: initialProfile.photoURL || null,
+              district: initialProfile.district || 'Portugal',
+              level: initialProfile.level || 1,
+              xp: initialProfile.xp || 0,
+            },
+            { merge: true },
+          )
+        } catch (syncErr) {
+          console.warn('[AUTH DIAGNOSTIC] Aviso ao sincronizar perfil público:', syncErr)
         }
-      } catch (error) {
-        const firebaseError = error as { name?: unknown; code?: unknown; message?: unknown; stack?: unknown }
-        console.error('Erro Firestore ao sincronizar o perfil:', {
-          diagnostic: authDiagnostic,
-          error: {
-            name: firebaseError.name,
-            code: firebaseError.code,
-            message: firebaseError.message,
-            stack: firebaseError.stack,
+
+        if (isMounted) {
+          setProfile(initialProfile)
+          setProfileLoading(false)
+        }
+
+        // Subscrição em TEMPO REAL para refletir compras, cosméticos e saldo instantaneamente
+        unsubSnapshot = onSnapshot(
+          userRef,
+          (docSnap) => {
+            if (!isMounted) return
+            if (docSnap.exists()) {
+              const liveData = docSnap.data() as UserProfile
+              setProfile((prev) => ({
+                ...(prev || createDefaultUserProfile(user)),
+                ...liveData,
+                uid: user.uid,
+              }))
+            }
           },
-          rawError: error,
+          (err) => {
+            console.warn('[AUTH DIAGNOSTIC] Erro no listener do perfil:', err)
+          },
+        )
+      } catch (error) {
+        console.error('[AUTH DIAGNOSTIC] Erro Firestore ao sincronizar perfil:', {
+          diagnostic: authDiagnostic,
+          error,
         })
-        if (!cancelled) {
+        if (isMounted) {
           setProfileError(profileErrorMessage(error))
-        }
-      } finally {
-        if (!cancelled) {
           setProfileLoading(false)
         }
       }
     }
 
-    void loadProfile()
+    void initializeAndSubscribeProfile()
 
     return () => {
-      cancelled = true
+      isMounted = false
+      if (unsubSnapshot) {
+        unsubSnapshot()
+      }
     }
   }, [authResolved, user, profileRetry])
 
-  return <AuthContext.Provider value={{ user, authResolved, authInitializationError, profile, profileLoading, profileError, retryProfile }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        authResolved,
+        authInitializationError,
+        profile,
+        profileLoading,
+        profileError,
+        retryProfile,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export function useAuth() {
-  const state = useContext(AuthContext)
-
-  if (!state) {
-    throw new Error('useAuth tem de ser utilizado dentro de AuthProvider.')
+export function useAuth(): AuthState {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error('useAuth deve ser utilizado dentro de um AuthProvider.')
   }
-
-  return state
+  return context
 }

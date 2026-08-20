@@ -26,13 +26,13 @@ export function PlayButton({
         className,
       )}
     >
-      <span className="relative grid place-items-center">
-        <span className="absolute h-9 w-9 rounded-full bg-primary-foreground/20 animate-pulse-ring" />
-        <span className="relative grid h-8 w-8 place-items-center rounded-full bg-primary-foreground/15">
+      <span className="pointer-events-none relative grid place-items-center">
+        <span className="pointer-events-none absolute h-9 w-9 rounded-full bg-primary-foreground/20 animate-pulse-ring" />
+        <span className="pointer-events-none relative grid h-8 w-8 place-items-center rounded-full bg-primary-foreground/15">
           <Play className={cn('fill-current', size === 'lg' ? 'h-4.5 w-4.5' : 'h-4 w-4')} />
         </span>
       </span>
-      {label}
+      <span className="pointer-events-none">{label}</span>
     </Link>
   )
 }

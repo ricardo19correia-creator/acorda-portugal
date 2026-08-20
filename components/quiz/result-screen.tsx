@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Trophy, Flame, Sparkles, Coins, RotateCcw, MapPin, Crown } from 'lucide-react'
+import { Trophy, Flame, Sparkles, Coins, RotateCcw, MapPin, Crown, ArrowLeft, Award, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export type QuizResult = {
@@ -46,80 +46,105 @@ export function ResultScreen({
   }, [gameId, result, onGameEnd, levelUpInfo])
 
   return (
-    <div className="animate-rise mx-auto max-w-lg">
+    <div className="animate-rise mx-auto max-w-lg px-2 sm:px-0">
       {showLevelUp && levelUpInfo && (
         <LevelUpAnimation from={levelUpInfo.from} to={levelUpInfo.to} onAnimationEnd={() => setShowLevelUp(false)} />
       )}
 
-      <div className="sheen relative overflow-hidden rounded-4xl border border-gold/25 bg-gradient-to-b from-gold/10 via-card/70 to-card/70 p-8 text-center backdrop-blur">
-        {/* corner glows */}
-        <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full bg-gold/20 blur-3xl" />
+      <div className="relative overflow-hidden rounded-4xl border border-white/15 bg-card/90 p-6 sm:p-8 text-center backdrop-blur-2xl shadow-2xl">
+        {/* Subtle Portuguese Azulejo & Calçada decoration */}
+        <div className="pattern-azulejo pointer-events-none absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
+        
+        {/* Ambient Corner Glows */}
+        <div className="pointer-events-none absolute -left-12 -top-12 h-36 w-36 rounded-full bg-primary/25 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-gold/25 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-gold to-flag-red" />
 
-        <div className="relative mx-auto grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br from-gold/30 to-gold/5 text-gold ring-1 ring-gold/40">
-          <Crown className="h-10 w-10" />
+        {/* Hero Crown / Medal Badge */}
+        <div className="relative mx-auto grid h-20 w-20 sm:h-24 sm:w-24 place-items-center rounded-3xl bg-gradient-to-br from-gold/30 via-gold/10 to-transparent text-gold ring-2 ring-gold/40 shadow-[0_0_30px_rgba(255,200,0,0.25)] animate-pop">
+          <Crown className="h-10 w-10 sm:h-12 sm:w-12 drop-shadow-[0_0_12px_rgba(255,200,0,0.5)]" />
         </div>
 
-        <p className="relative mt-5 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-          Fim de partida
-        </p>
-        <h1 className="relative mt-1 font-display text-4xl font-black uppercase tracking-tight text-brand-gradient sm:text-5xl">
-          Parabéns!
-        </h1>
+        <div className="relative mt-5">
+          <span className="inline-block rounded-full bg-white/5 px-3.5 py-1 text-[0.65rem] font-black uppercase tracking-[0.28em] text-primary border border-primary/25">
+            Partida Concluída
+          </span>
+          <h1 className="mt-2 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-foreground">
+            {accuracy >= 80 ? 'Excelente Desempenho!' : accuracy >= 50 ? 'Bom Trabalho!' : 'Continua a Tentar!'}
+          </h1>
+          <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+            O teu conhecimento de Portugal foi testado.
+          </p>
+        </div>
 
-        {/* score */}
-        <p className="relative mt-6 font-display text-6xl font-black tabular-nums text-gold-gradient sm:text-7xl">
-          {result.score.toLocaleString('pt-PT')}
-        </p>
-        <p className="relative text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-          Pontos
-        </p>
+        {/* Score Display */}
+        <div className="relative mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 backdrop-blur-md">
+          <p className="font-display text-5xl sm:text-6xl font-black tabular-nums text-gold-gradient drop-shadow-sm">
+            {result.score.toLocaleString('pt-PT')}
+          </p>
+          <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+            Pontos Conquistados
+          </p>
+        </div>
 
-        {/* accuracy */}
-        <div className="relative mx-auto mt-6 flex max-w-xs items-center justify-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3">
-          <div>
-            <p className="font-display text-2xl font-black text-foreground">
-              {result.correct} <span className="text-base text-muted-foreground">/ {result.total}</span>
+        {/* Accuracy & Corrects HUD */}
+        <div className="relative mt-4 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-3.5 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-primary mb-1">
+              <CheckCircle2 className="h-4 w-4" />
+              <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted-foreground">Certas</span>
+            </div>
+            <p className="font-display text-xl sm:text-2xl font-black text-foreground">
+              {result.correct} <span className="text-xs text-muted-foreground">/ {result.total}</span>
             </p>
-            <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Certas</p>
           </div>
-          <div className="h-8 w-px bg-white/10" />
-          <div>
-            <p className="font-display text-2xl font-black text-primary">{accuracy}%</p>
-            <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Acerto</p>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-3.5 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-primary mb-1">
+              <Award className="h-4 w-4" />
+              <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted-foreground">Precisão</span>
+            </div>
+            <p className="font-display text-xl sm:text-2xl font-black text-primary">
+              {accuracy}%
+            </p>
           </div>
         </div>
 
-        {/* rewards */}
-        <div className="relative mt-6 grid grid-cols-3 gap-3">
-          <Reward icon={Sparkles} tone="primary" value={`+${result.xp}`} label="XP" />
+        {/* Rewards Grid */}
+        <div className="relative mt-4 grid grid-cols-3 gap-2.5 sm:gap-3">
+          <Reward icon={Sparkles} tone="primary" value={`+${result.xp}`} label="XP Ganho" />
           <Reward icon={Coins} tone="gold" value={`+€${result.euros}`} label="Euros" />
-          <Reward icon={Flame} tone="red" value={`${result.bestStreak}`} label="Seguidas" />
+          <Reward icon={Flame} tone="red" value={`${result.bestStreak}x`} label="Sequência" />
         </div>
 
-        {/* ranking */}
-        <div className="relative mt-6 grid grid-cols-2 gap-3">
-          <RankTile icon={Trophy} label="Nacional" value="#127" />
-          <RankTile icon={MapPin} label="Vila Real" value="#8" />
-        </div>
-
-        {/* actions */}
-        <div className="relative mt-7 flex flex-col gap-3">
+        {/* Actions */}
+        <div className="relative mt-6 flex flex-col gap-3">
           <button
             type="button"
             onClick={onReplay}
-            className="sheen group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] px-6 py-4 font-display font-bold uppercase tracking-wide text-primary-foreground shadow-[0_12px_40px_-8px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[position:100%_0] focus-visible:ring-4 focus-visible:ring-primary/40"
+            className="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-emerald-400 to-primary bg-[length:200%_100%] py-4 px-6 font-display text-base font-black uppercase tracking-wider text-primary-foreground shadow-[0_12px_40px_-5px_rgba(0,255,162,0.4)] transition-all duration-300 hover:scale-[1.01] hover:bg-[position:100%_0] active:scale-[0.99] cursor-pointer"
           >
-            <RotateCcw className="h-5 w-5" />
-            Jogar novamente
+            <RotateCcw className="h-5 w-5 transition-transform duration-300 group-hover:-rotate-45" />
+            <span>Jogar Novamente</span>
           </button>
-          <Link
-            href="/#ranking"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3.5 font-semibold text-foreground transition-colors hover:bg-white/10"
-          >
-            <Trophy className="h-5 w-5 text-gold" />
-            Ver ranking
-          </Link>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              href="/#ranking"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 py-3 px-4 text-xs sm:text-sm font-bold text-foreground transition-all hover:bg-white/10 hover:border-white/20"
+            >
+              <Trophy className="h-4 w-4 text-gold" />
+              <span>Ver Ranking</span>
+            </Link>
+
+            <Link
+              href="/jogar"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 py-3 px-4 text-xs sm:text-sm font-bold text-foreground transition-all hover:bg-white/10 hover:border-white/20"
+            >
+              <ArrowLeft className="h-4 w-4 text-primary" />
+              <span>Central de Jogo</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -128,12 +153,12 @@ export function ResultScreen({
 
 function LevelUpAnimation({ from, to, onAnimationEnd }: { from: number, to: number, onAnimationEnd: () => void }) {
   useEffect(() => {
-    const timer = setTimeout(onAnimationEnd, 3500) // Animation duration + delay
+    const timer = setTimeout(onAnimationEnd, 3500)
     return () => clearTimeout(timer)
   }, [onAnimationEnd])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md">
       <div className="animate-level-up-pop relative w-full max-w-sm overflow-hidden rounded-4xl border border-gold/50 bg-gradient-to-b from-card to-background p-8 text-center shadow-2xl shadow-gold/20">
         <div className="sheen absolute inset-0" />
         <div className="animate-level-up-glow absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-gold/30 to-transparent" />
@@ -164,35 +189,15 @@ function Reward({
   label: string
 }) {
   const tones = {
-    primary: 'text-primary',
-    gold: 'text-gold',
-    red: 'text-flag-red',
+    primary: 'text-primary border-primary/20 bg-primary/10',
+    gold: 'text-gold border-gold/20 bg-gold/10',
+    red: 'text-flag-red border-flag-red/20 bg-flag-red/10',
   }
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-4">
-      <Icon className={cn('mx-auto h-5 w-5', tones[tone])} />
-      <p className="mt-2 font-display text-lg font-black text-foreground">{value}</p>
-      <p className="text-[0.58rem] uppercase tracking-wider text-muted-foreground">{label}</p>
-    </div>
-  )
-}
-
-function RankTile({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: React.ComponentType<{ className?: string }>
-  label: string
-  value: string
-}) {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left">
-      <Icon className="h-5 w-5 shrink-0 text-primary" />
-      <div>
-        <p className="font-display text-lg font-black text-foreground">{value}</p>
-        <p className="text-[0.58rem] uppercase tracking-wider text-muted-foreground">{label}</p>
-      </div>
+    <div className={cn('rounded-2xl border p-3 text-center backdrop-blur-sm', tones[tone])}>
+      <Icon className="mx-auto h-5 w-5 drop-shadow-sm" />
+      <p className="mt-1.5 font-display text-base sm:text-lg font-black text-foreground">{value}</p>
+      <p className="text-[0.58rem] font-bold uppercase tracking-wider text-muted-foreground">{label}</p>
     </div>
   )
 }

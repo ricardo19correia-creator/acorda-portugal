@@ -8,7 +8,7 @@ export function Categories() {
       <SectionHeading
         eyebrow="Escolhe uma arena"
         title="Escolhe o teu desafio"
-        description="Treze temas, das raízes de Portugal ao Modo Maluco. Cada partida vale XP, euros virtuais e posição no ranking."
+        description="18 temas oficiais, das raízes de Portugal ao Modo Maluco e Desafio Visual. Cada partida vale XP, euros virtuais e posição no ranking."
       />
 
       {/* Horizontal scroll on mobile, grid on larger screens */}

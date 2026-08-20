@@ -1,146 +1,177 @@
-import { Star, Trophy, Flame, Zap } from 'lucide-react'
-import { PlayButton } from '@/components/play-button'
-import { PortugalMap } from '@/components/portugal-map'
+'use client'
 
-const STATS = [
-  { value: '+1.000', label: 'Perguntas' },
-  { value: '18', label: 'Distritos' },
-  { value: '2', label: 'Regiões Autónomas' },
-  { value: '∞', label: 'Desafios' },
+import Link from 'next/link'
+import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight } from 'lucide-react'
+import { PortugalHeroMap } from '@/components/portugal-hero-map'
+import { cn } from '@/lib/utils'
+
+const HERO_STATS = [
+  {
+    icon: Sparkles,
+    value: '+1.000',
+    label: 'Perguntas Oficiais',
+    sub: '18 categorias temáticas',
+    tone: 'text-primary',
+  },
+  {
+    icon: MapPin,
+    value: '18 + 2',
+    label: 'Distritos & Regiões',
+    sub: 'Continente, Açores e Madeira',
+    tone: 'text-accent',
+  },
+  {
+    icon: Award,
+    value: '21 Níveis',
+    label: 'Progressão RPG',
+    sub: 'De Curioso a Mestre',
+    tone: 'text-gold',
+  },
+  {
+    icon: Crown,
+    value: '1 Topo',
+    label: 'Rei do Distrito',
+    sub: 'Conquista territorial',
+    tone: 'text-flag-red',
+  },
 ]
 
 export function Hero() {
   return (
-    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 lg:px-8 lg:pb-16 lg:pt-14">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6">
-        {/* ---------- Left: copy + CTAs ---------- */}
-        <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
-          <span
-            className="animate-rise inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary"
+    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-6">
+      {/* Main Hero Grid: Left Copy & Right 3D Living Hologram Map */}
+      <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+        {/* Top/Left: Copy & Action Controls */}
+        <div className="order-1 flex flex-col items-center text-center lg:items-start lg:text-left">
+          {/* Live Eyebrow Cyber Tag */}
+          <div
+            className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-emerald-400/40 bg-emerald-950/60 px-4 py-1.5 text-xs font-black uppercase tracking-[0.24em] text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] backdrop-blur-xl"
             style={{ animationDelay: '40ms' }}
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981]" />
             </span>
-            O grande quiz nacional
-          </span>
-
-          <h1
-            className="animate-rise mt-5 font-display text-6xl font-bold leading-[0.9] tracking-tight text-balance sm:text-7xl lg:text-8xl"
-            style={{ animationDelay: '120ms' }}
-          >
-            <span className="block">ACORDA</span>
-            <span className="text-brand-gradient block">PORTUGAL</span>
-          </h1>
-          <span
-            className="animate-rise mt-3 block font-display text-lg font-semibold uppercase tracking-[0.34em] text-muted-foreground sm:text-2xl"
-            style={{ animationDelay: '180ms' }}
-          >
-            Desafio Nacional
-          </span>
-
-          <p
-            className="animate-rise mt-6 max-w-md text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
-            style={{ animationDelay: '240ms' }}
-          >
-            Testa o teu conhecimento. Representa o teu distrito. Conquista o topo de Portugal.
-          </p>
-
-          {/* Main CTA */}
-          <div className="animate-rise mt-8 flex w-full flex-col items-center gap-3 sm:w-auto lg:items-start" style={{ animationDelay: '300ms' }}>
-            <PlayButton href="/jogar" className="w-full sm:w-auto" />
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Milhares de perguntas <span className="text-primary">•</span> Ranking Nacional{' '}
-              <span className="text-primary">•</span> Desafios Diários
-            </p>
+            <span>O Grande Quiz Nacional 🇵🇹</span>
           </div>
 
-          {/* Mini stats */}
-          <dl
-            className="animate-rise mt-10 grid w-full max-w-lg grid-cols-2 gap-3 sm:grid-cols-4"
-            style={{ animationDelay: '380ms' }}
+          {/* 3D Volumetric Chrome Headline */}
+          <h1
+            className="animate-rise mt-3 sm:mt-5 font-display text-5xl sm:text-7xl lg:text-8xl font-black leading-[0.88] tracking-tight uppercase select-none"
+            style={{ animationDelay: '120ms' }}
           >
-            {STATS.map((s) => (
-              <div
-                key={s.label}
-                className="glass rounded-2xl border border-white/10 px-3 py-4 text-center"
-              >
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-2xl font-black text-brand-gradient sm:text-3xl">
-                  {s.value}
-                </dd>
-                <p className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </dl>
+            <span className="block text-3d-chrome">ACORDA</span>
+            <span className="block text-3d-neon-green mt-1">PORTUGAL</span>
+          </h1>
+
+          {/* Placa Digital LED / Arcade Futurista */}
+          <div
+            className="animate-rise mt-3 sm:mt-4 plate-led-arcade"
+            style={{ animationDelay: '180ms' }}
+          >
+            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
+            <span className="font-display text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-amber-300">
+              Desafio Nacional • Edição Oficial
+            </span>
+            <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
+          </div>
+
+          <p
+            className="animate-rise mt-4 max-w-md sm:max-w-lg text-pretty text-sm sm:text-base leading-relaxed text-muted-foreground font-medium"
+            style={{ animationDelay: '240ms' }}
+          >
+            Testa o teu conhecimento. Representa o teu distrito. Conquista o topo de Portugal no maior videojogo de trivia nacional.
+          </p>
+
+          {/* Action CTAs: 3D Console/Mech Gaming Buttons */}
+          <div
+            className="animate-rise mt-7 flex w-full flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4"
+            style={{ animationDelay: '300ms' }}
+          >
+            {/* Primary Mech Emerald Button */}
+            <Link
+              href="/jogar"
+              className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-xl"
+            >
+              <Play className="h-5 w-5 fill-current text-emerald-950 drop-shadow-sm" />
+              <span>Jogar Agora</span>
+            </Link>
+
+            {/* Duelo 1v1 Fast Match Mech Button */}
+            <Link
+              href="/jogar/duelo"
+              className="btn-mech-purple w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-white cursor-pointer shadow-xl"
+            >
+              <Swords className="h-5 w-5 drop-shadow-sm" />
+              <span>Duelo 1v1</span>
+            </Link>
+
+            {/* Rankings Mech Gold Button */}
+            <Link
+              href="/rankings"
+              className="btn-mech-gold w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-bold uppercase tracking-wider text-gold-foreground backdrop-blur-xl cursor-pointer shadow-xl"
+            >
+              <Trophy className="h-4 w-4 text-gold" />
+              <span className="text-gold">Rankings</span>
+            </Link>
+          </div>
+
+          {/* Quick Hub Links */}
+          <div
+            className="animate-rise mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs font-bold text-muted-foreground"
+            style={{ animationDelay: '360ms' }}
+          >
+            <Link href="/categorias" className="hover:text-primary transition flex items-center gap-1.5 group">
+              <span className="group-hover:translate-x-0.5 transition">📚 18 Categorias</span>
+            </Link>
+            <span className="text-white/20">•</span>
+            <Link href="/portugal" className="hover:text-accent transition flex items-center gap-1.5 group">
+              <span className="group-hover:translate-x-0.5 transition">🇵🇹 Mapa Territorial</span>
+            </Link>
+            <span className="text-white/20">•</span>
+            <Link href="/explorar" className="hover:text-gold transition flex items-center gap-1.5 group">
+              <span className="group-hover:translate-x-0.5 transition">✨ Explorar / Sobre</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition" />
+            </Link>
+          </div>
         </div>
 
-        {/* ---------- Right: Portugal map visual ---------- */}
-        <div className="order-1 lg:order-2">
-          <PortugalMap priority className="mx-auto max-w-md lg:max-w-none">
-            <FloatingChip
-              className="left-2 top-6 sm:left-6"
-              delay="0s"
-              icon={<Star className="h-4 w-4 fill-current" />}
-              tone="gold"
-              label="+250 XP"
-            />
-            <FloatingChip
-              className="right-0 top-20 sm:right-2"
-              delay="1.4s"
-              icon={<Trophy className="h-4 w-4" />}
-              tone="primary"
-              label="Top 1%"
-            />
-            <FloatingChip
-              className="bottom-24 left-0"
-              delay="2.6s"
-              icon={<Flame className="h-4 w-4 fill-current" />}
-              tone="red"
-              label="Sequência 12"
-            />
-            <FloatingChip
-              className="bottom-8 right-4 sm:right-10"
-              delay="3.4s"
-              icon={<Zap className="h-4 w-4 fill-current" />}
-              tone="primary"
-              label="Nível a subir"
-            />
-          </PortugalMap>
+        {/* Bottom/Right: 3D Holographic Portugal Map with Pedestal */}
+        <div className="order-2 w-full animate-rise mt-2 lg:mt-0 holo-pedestal" style={{ animationDelay: '200ms' }}>
+          <PortugalHeroMap />
+        </div>
+      </div>
+
+      {/* Transition Statistics Bar: Holographic Glassmorphism Cards */}
+      <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10">
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-5 lg:grid-cols-4">
+          {HERO_STATS.map((stat) => {
+            const Icon = stat.icon
+            return (
+              <div
+                key={stat.label}
+                className="card-hud-cyber group relative overflow-hidden rounded-3xl p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)]"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/[0.06] transition-transform duration-300 group-hover:scale-110 shadow-md">
+                    <Icon className={cn('h-5 w-5', stat.tone)} />
+                  </div>
+                  <div>
+                    <dd className="font-display text-xl sm:text-2xl font-black text-foreground">
+                      {stat.value}
+                    </dd>
+                    <dt className="text-xs font-bold text-foreground/90 uppercase tracking-wider">{stat.label}</dt>
+                  </div>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground leading-snug font-medium">
+                  {stat.sub}
+                </p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
   )
 }
 
-function FloatingChip({
-  className,
-  delay,
-  icon,
-  label,
-  tone,
-}: {
-  className?: string
-  delay: string
-  icon: React.ReactNode
-  label: string
-  tone: 'gold' | 'primary' | 'red'
-}) {
-  const tones = {
-    gold: 'text-gold border-gold/40 shadow-[0_0_24px_-6px_var(--gold)]',
-    primary: 'text-primary border-primary/40 shadow-[0_0_24px_-6px_var(--primary)]',
-    red: 'text-flag-red border-flag-red/40 shadow-[0_0_24px_-6px_var(--flag-red)]',
-  }
-  return (
-    <div
-      className={`animate-float absolute flex items-center gap-2 rounded-full border bg-card/80 px-3 py-1.5 text-xs font-bold backdrop-blur-md ${tones[tone]} ${className}`}
-      style={{ animationDelay: delay, animationDuration: '6s' }}
-    >
-      {icon}
-      <span className="text-foreground">{label}</span>
-    </div>
-  )
-}
