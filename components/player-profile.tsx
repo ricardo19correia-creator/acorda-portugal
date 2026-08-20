@@ -63,7 +63,8 @@ import {
   type WalletTransaction,
 } from '@/lib/economy'
 import { getEquippedCosmetics, getPlayerDisplayTitle } from '@/lib/cosmetics'
-import { getInventory, equipTheme, type InventoryState } from '@/lib/inventory'
+import { getInventory, equipTheme, equipAvatar, type InventoryState } from '@/lib/inventory'
+import { AVATAR_CATALOG, type AvatarItem } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
 
 const districts = [
@@ -110,7 +111,17 @@ function formatRelativeTime(date: Date): string {
   return `há ${d} dias`
 }
 
-function Avatar({ profile, small = false }: { profile: UserProfile; small?: boolean }) {
+function Avatar({ profile, small = false, avatarIcon }: { profile: UserProfile; small?: boolean; avatarIcon?: string }) {
+  if (avatarIcon && avatarIcon !== '👤') {
+    return (
+      <div className={cn(
+        "grid place-items-center rounded-3xl bg-zinc-900 border-2 border-primary/40 shadow-xl select-none",
+        small ? "h-16 w-16 text-2xl" : "h-28 w-28 sm:h-32 sm:w-32 text-5xl"
+      )}>
+        {avatarIcon}
+      </div>
+    )
+  }
   return <PlayerAvatar profile={profile} size={small ? 'md' : 'xl'} />
 }
 
@@ -461,6 +472,8 @@ export function PlayerProfile() {
     [Flame, 'Melhor sequência', `${player.bestStreak ?? 0} dias`, 'text-flag-red'],
   ] as const
 
+  const equippedAvatarItem = AVATAR_CATALOG.find((a) => a.id === (invState.equippedAvatar || 'av_default'))
+
   return (
     <div className="animate-rise space-y-8 sm:space-y-10">
 
@@ -472,7 +485,7 @@ export function PlayerProfile() {
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
             <div className={invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder ? 'rounded-full p-1 bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-600 shadow-[0_0_25px_rgba(245,158,11,0.7)] animate-pulse' : ''}>
-              <Avatar profile={player} />
+              <Avatar profile={player} avatarIcon={equippedAvatarItem?.icon} />
             </div>
             <div className="min-w-0 flex-1">
               {(invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder) && (
@@ -488,6 +501,12 @@ export function PlayerProfile() {
                 {equippedFrameItem && (
                   <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-muted-foreground">
                     {equippedFrameItem.name}
+                  </span>
+                )}
+                {equippedAvatarItem && (
+                  <span className="rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2.5 py-0.5 text-[0.62rem] font-black text-cyan-300 flex items-center gap-1">
+                    <span>{equippedAvatarItem.icon}</span>
+                    <span>{equippedAvatarItem.name}</span>
                   </span>
                 )}
               </div>
@@ -525,6 +544,14 @@ export function PlayerProfile() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2 shrink-0">
+            <a
+              href="#avatares-section"
+              className="inline-flex items-center gap-1.5 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-2.5 text-xs font-bold text-cyan-300 hover:bg-cyan-500/20 transition cursor-pointer"
+            >
+              <span>{equippedAvatarItem?.icon || '👤'}</span>
+              <span>Alterar Avatar</span>
+            </a>
+
             <button
               type="button"
               onClick={() => {
@@ -1229,6 +1256,77 @@ export function PlayerProfile() {
         </div>
       </Section>
 
+      {/* SEÇÃO DE IDENTIDADE & AVATARES */}
+      <Section
+        id="avatares-section"
+        title="Os Meus Avatares & Identidade de Jogador"
+        description="Equipa o teu avatar favorito para personalizares a tua presença no topo do ranking e nas partidas."
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {AVATAR_CATALOG.map((av) => {
+            const isOwned = (invState.ownedAvatars || ['av_default', 'av_galo_barcelos']).includes(av.id);
+            const isEquipped = (invState.equippedAvatar || 'av_default') === av.id;
+
+            return (
+              <div
+                key={av.id}
+                className={cn(
+                  'relative flex flex-col justify-between p-5 rounded-3xl border backdrop-blur-xl transition-all shadow-lg',
+                  isEquipped
+                    ? 'border-cyan-400 bg-cyan-950/20 ring-2 ring-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                    : isOwned
+                    ? 'border-white/15 bg-card/65 hover:border-white/30'
+                    : 'border-white/5 bg-card/30 opacity-60'
+                )}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-3xl">{av.icon}</span>
+                    {isEquipped ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-400/50">
+                        ✓ Equipado
+                      </span>
+                    ) : isOwned ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/10 text-zinc-300">
+                        Desbloqueado
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-zinc-800 text-zinc-500">
+                        Na Loja
+                      </span>
+                    )}
+                  </div>
+                  <h4 className="font-display font-black text-base text-foreground mt-2">{av.name}</h4>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{av.description}</p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  {isEquipped ? (
+                    <button disabled className="w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 cursor-default">
+                      ✓ Em Uso no Perfil
+                    </button>
+                  ) : isOwned ? (
+                    <button
+                      onClick={() => equipAvatar(av.id)}
+                      className="w-full py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-cyan-500 hover:bg-cyan-400 text-black shadow-md transition-all active:scale-95"
+                    >
+                      Equipar Avatar
+                    </button>
+                  ) : (
+                    <Link
+                      href="/loja"
+                      className="block text-center w-full py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-zinc-800 hover:bg-zinc-700 text-white transition-all"
+                    >
+                      Ver na Loja
+                    </Link>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
       {/* SEÇÃO VIP & ARENAS DE JOGO */}
       <Section
         title="O Meu Inventário & Arenas de Jogo"
@@ -1362,16 +1460,18 @@ function ErrorCard({ message, onRetry }: { message: string; onRetry: () => void 
 }
 
 function Section({
+  id,
   title,
   description,
   children,
 }: {
+  id?: string
   title: string
   description: string
   children: ReactNode
 }) {
   return (
-    <section>
+    <section id={id}>
       <div className="mb-5">
         <h2 className="font-display text-2xl sm:text-3xl font-black text-foreground">{title}</h2>
         <p className="mt-1 text-xs sm:text-sm text-muted-foreground">{description}</p>

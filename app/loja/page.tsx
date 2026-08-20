@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import MbwayModal from '@/components/MbwayModal';
-import { getInventory, unlockItem, equipTheme, type InventoryState } from '@/lib/inventory';
+import { getInventory, unlockItem, equipTheme, unlockAvatar, equipAvatar, type InventoryState } from '@/lib/inventory';
+import { AVATAR_CATALOG, type AvatarItem } from '@/lib/avatars';
 
 interface ShopItem {
   id: string;
@@ -99,153 +100,159 @@ const ALL_SHOP_ITEMS: ShopItem[] = [
     priceEuros: 2.99,
     rarity: 'epico',
     icon: '🏦',
-    badge: '+30% BÓNUS',
+    popular: true,
   },
   {
     id: 'coins_pack_large',
-    title: 'Tesouro dos Descobrimentos (250 000 € Acorda)',
-    description: 'O maior cofre de moedas para dominares a loja por completo.',
+    title: 'Tesouro Real Lusitano (250 000 € Acorda)',
+    description: 'Crédito imediato de 250.000 moedas virtuais + Título "Milionário da Pátria".',
     category: 'coins',
     currency: 'real_money',
     priceEuros: 7.99,
-    rarity: 'lendario',
+    rarity: 'mitico',
     icon: '💎',
-    badge: '+60% BÓNUS',
+    badge: '+50% BÓNUS',
   },
 
-  // ==================== 2. AJUDAS & UTILIDADES DE JOGO ====================
+  // ==================== 2. CONSUMÍVEIS (AJUDAS DE JOGO) ====================
   {
-    id: 'help_5050',
-    title: 'Ajudas 50/50 (Pack x3)',
-    description: 'Elimina 2 respostas erradas instantaneamente durante a partida.',
+    id: 'consumable_5050',
+    title: 'Ajuda 50/50 (Elimina 2 Erradas)',
+    description: 'Remove 2 opções incorretas instantaneamente da pergunta atual.',
     category: 'consumable',
     currency: 'coins',
-    priceCoins: 600,
+    priceCoins: 150,
     rarity: 'comum',
-    icon: '✨',
-    badge: 'UTILIDADE',
+    icon: '✂️',
   },
   {
-    id: 'help_freeze_time',
-    title: 'Congelar Tempo (Pack x3)',
-    description: 'Congela o cronómetro por 15 segundos numa pergunta difícil.',
+    id: 'consumable_extra_time',
+    title: 'Tempo Extra (+15 Segundos)',
+    description: 'Ganha 15 segundos adicionais para pensar numa pergunta difícil.',
     category: 'consumable',
     currency: 'coins',
-    priceCoins: 900,
+    priceCoins: 100,
+    rarity: 'comum',
+    icon: '⏳',
+  },
+  {
+    id: 'consumable_skip',
+    title: 'Salto Estratégico de Pergunta',
+    description: 'Passa à próxima pergunta sem perder a sequência nem sofrer penalizações.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 200,
     rarity: 'raro',
-    icon: '⏱️',
-    badge: 'UTILIDADE',
+    icon: '⏭️',
   },
   {
-    id: 'help_hint',
-    title: 'Pista Nacional (Pack x2)',
-    description: 'Revela uma dica histórica/geográfica essencial sobre a questão.',
+    id: 'consumable_shield',
+    title: 'Escudo de Sequência (Proteção)',
+    description: 'Evita a perda do teu combo de respostas certas caso erres uma resposta.',
     category: 'consumable',
     currency: 'coins',
-    priceCoins: 1200,
-    rarity: 'raro',
-    icon: '💡',
-    badge: 'UTILIDADE',
-  },
-  {
-    id: 'consumable_shield_afonso',
-    title: 'Escudo de D. Afonso Henriques',
-    description: 'Anula 1 resposta errada em Duelo 1v1 sem perder o streak de pontos.',
-    category: 'consumable',
-    currency: 'coins',
-    priceCoins: 1800,
+    priceCoins: 350,
     rarity: 'epico',
     icon: '🛡️',
-    badge: 'DUELO 1V1',
+  },
+  {
+    id: 'consumable_second_chance',
+    title: 'Segunda Oportunidade',
+    description: 'Permite tentar uma segunda resposta na mesma questão se a primeira falhar.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 400,
+    rarity: 'epico',
+    icon: '🔄',
+  },
+  {
+    id: 'consumable_double_xp',
+    title: 'Bónus Duplo de XP (1 Partida)',
+    description: 'Duplica todos os pontos de experiência ganhos no final da partida.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 500,
+    rarity: 'lendario',
+    icon: '⚡',
   },
 
   // ==================== 3. MOLDURAS DE AVATAR ====================
   {
-    id: 'frame_green_hope',
-    title: 'Moldura Verde Esperança',
-    description: 'Moldura de avatar clássica com o brilho verde nacional.',
-    category: 'frame',
-    currency: 'coins',
-    priceCoins: 500,
-    rarity: 'comum',
-    icon: '🟢',
-  },
-  {
     id: 'frame_wave_nazare',
-    title: 'Moldura Mar Português / Nazaré',
-    description: 'Vórtice aquático azul-marinho translúcido com reflexos ciano.',
+    title: 'Moldura: Onda da Nazaré',
+    description: 'Borda aquática animada inspirada nas maiores ondas do planeta.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 1500,
+    priceCoins: 1200,
     rarity: 'raro',
     icon: '🌊',
   },
   {
-    id: 'frame_azulejo_nobre',
-    title: 'Moldura Azulejo Nobre',
-    description: 'Padrão tradicional de azulejo português refinado com reflexos prateados.',
+    id: 'frame_azulejo_real',
+    title: 'Moldura: Azulejo Nobre',
+    description: 'Padrão tradicional de cerâmica portuguesa com detalhes em azul cobalto.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 5000,
+    priceCoins: 2500,
     rarity: 'epico',
-    icon: '🔷',
+    icon: '🏛️',
   },
   {
-    id: 'frame_cyber_galo',
-    title: 'Moldura Cyber Galo de Barcelos',
-    description: 'Crista néon multicolor com rotação de brilho cyberpunk.',
+    id: 'frame_astrolabe_gold',
+    title: 'Moldura: Astrolábio Dourado',
+    description: 'Instrumento dourado dos Descobrimentos com brilho rotativo suave.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 8500,
-    rarity: 'epico',
-    icon: '🐓',
-  },
-  {
-    id: 'frame_gold_royal',
-    title: 'Moldura Ouro Real',
-    description: 'Moldura lendária banhada a ouro para verdadeiros mestres do quiz.',
-    category: 'frame',
-    currency: 'coins',
-    priceCoins: 15000,
+    priceCoins: 6000,
     rarity: 'lendario',
-    icon: '🏆',
+    icon: '🧭',
   },
   {
-    id: 'frame_flame_sebastiao',
-    title: 'Moldura Chama de D. Sebastião',
-    description: 'Moldura holográfica mítica com chamas rubi/douradas em movimento.',
+    id: 'frame_neon_cyber_lisbon',
+    title: 'Moldura: Cyber Lisboa 2088',
+    description: 'Néon magenta e ciano pulsante com feixes laser futuristas.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 25000,
+    priceCoins: 10000,
     rarity: 'mitico',
-    icon: '🔥',
+    icon: '⚡',
   },
 
   // ==================== 4. TÍTULOS DE PRESTÍGIO ====================
   {
-    id: 'title_patriota',
-    title: 'Título: «O Patriota»',
-    description: 'Exibe o título de Patriota no teu perfil e nos rankings.',
+    id: 'title_tripeiro_garra',
+    title: 'Título: «Tripeiro com Garra»',
+    description: 'Mostra a determinação e honra do Norte em todos os confrontos.',
     category: 'title',
     currency: 'coins',
-    priceCoins: 750,
+    priceCoins: 800,
     rarity: 'comum',
-    icon: '📜',
+    icon: '🍲',
   },
   {
     id: 'title_guardiao_lusitano',
     title: 'Título: «Guardião Lusitano»',
-    description: 'Título especial para defensores da história e cultura do país.',
+    description: 'Distintivo de veterano para quem defende a cultura com paixão.',
     category: 'title',
     currency: 'coins',
-    priceCoins: 2500,
-    rarity: 'epico',
-    icon: '⚔️',
+    priceCoins: 1500,
+    rarity: 'raro',
+    icon: '🛡️',
   },
   {
-    id: 'title_rei_distritos',
-    title: 'Título: «Rei dos 18 Distritos»',
-    description: 'Título lendário com brilho contínuo de ouro.',
+    id: 'title_almirante_saber',
+    title: 'Título: «Almirante do Saber»',
+    description: 'Para quem navega com mestria pelos mares do conhecimento nacional.',
+    category: 'title',
+    currency: 'coins',
+    priceCoins: 3500,
+    rarity: 'epico',
+    icon: '⚓',
+  },
+  {
+    id: 'title_mestre_portugal',
+    title: 'Título: «Mestre Absoluto de Portugal»',
+    description: 'O título mais cobiçado da nação, reservado aos grandes campeões.',
     category: 'title',
     currency: 'coins',
     priceCoins: 18000,
@@ -279,7 +286,8 @@ const ALL_SHOP_ITEMS: ShopItem[] = [
 ];
 
 export default function LojaPage() {
-  const [activeTab, setActiveTab] = useState<'real_money' | 'all' | 'consumable' | 'frame' | 'title' | 'theme'>('real_money');
+  const [activeTab, setActiveTab] = useState<'real_money' | 'all' | 'avatar' | 'consumable' | 'frame' | 'title' | 'theme'>('real_money');
+  const [avatarCategory, setAvatarCategory] = useState<'todos' | 'historia' | 'geografia' | 'desporto' | 'cultura' | 'geral'>('todos');
   const [userCoins, setUserCoins] = useState<number>(4395);
   const [invState, setInvState] = useState<InventoryState>(() => getInventory());
   const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
@@ -288,7 +296,7 @@ export default function LojaPage() {
     theme: 'theme_noite_fado',
   });
 
-  const [selectedVipItem, setSelectedVipItem] = useState<ShopItem | null>(null);
+  const [selectedVipItem, setSelectedVipItem] = useState<ShopItem | { id: string; title: string; priceEuros?: number } | null>(null);
   const [isMbwayOpen, setIsMbwayOpen] = useState(false);
 
   useEffect(() => {
@@ -340,7 +348,7 @@ export default function LojaPage() {
     alert(`Parabéns! Resgataste "${item.title}" gratuitamente! A arena foi equipada.`);
   };
 
-  const handleRealMoneyCheckout = (item: ShopItem) => {
+  const handleRealMoneyCheckout = (item: ShopItem | { id: string; title: string; priceEuros?: number }) => {
     setSelectedVipItem(item);
     setIsMbwayOpen(true);
   };
@@ -355,10 +363,41 @@ export default function LojaPage() {
     alert(`Equipaste "${item.title}"!`);
   };
 
+  // Funções específicas de Avatar
+  const handleBuyAvatarCoins = (av: AvatarItem) => {
+    if (userCoins < av.price) {
+      alert('Saldo insuficiente de € Acorda!');
+      return;
+    }
+    const newCoins = userCoins - av.price;
+    setUserCoins(newCoins);
+    localStorage.setItem('ap_user_coins', newCoins.toString());
+
+    unlockAvatar(av.id);
+    equipAvatar(av.id);
+    alert(`Compraste e equipaste o avatar "${av.name}" com sucesso!`);
+  };
+
+  const handleClaimFreeAvatar = (av: AvatarItem) => {
+    unlockAvatar(av.id);
+    equipAvatar(av.id);
+    alert(`Desbloqueaste e equipaste o avatar "${av.name}" gratuitamente!`);
+  };
+
+  const handleEquipAvatarDirect = (av: AvatarItem) => {
+    equipAvatar(av.id);
+    alert(`Avatar "${av.name}" equipado!`);
+  };
+
   const filteredItems = ALL_SHOP_ITEMS.filter((item) => {
     if (activeTab === 'real_money') return item.currency === 'real_money';
     if (activeTab === 'all') return item.currency === 'coins';
     return item.currency === 'coins' && item.category === activeTab;
+  });
+
+  const filteredAvatars = AVATAR_CATALOG.filter((av) => {
+    if (avatarCategory === 'todos') return true;
+    return av.category === avatarCategory;
   });
 
   const rarityStyles: Record<string, string> = {
@@ -377,7 +416,7 @@ export default function LojaPage() {
           <span className="text-xs font-bold tracking-widest text-emerald-400 uppercase">Economia Oficial & Mercado</span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">LOJA ACORDA PORTUGAL</h1>
           <p className="text-zinc-400 text-sm mt-1">
-            Adquire ajudas de jogo, molduras vivas, títulos, arenas 3D e pacotes exclusivos.
+            Adquire avatares épicos, ajudas de jogo, molduras vivas, títulos e arenas 3D exclusivas.
           </p>
         </div>
         <div className="flex items-center gap-4 bg-black/40 px-5 py-3 rounded-xl border border-amber-500/30">
@@ -398,7 +437,17 @@ export default function LojaPage() {
               : 'bg-zinc-900/80 border border-amber-500/30 text-amber-400 hover:bg-zinc-800'
           }`}
         >
-          💎 PACOTES VIP (STRIPE)
+          💎 EXCLUSIVOS VIP (€)
+        </button>
+        <button
+          onClick={() => setActiveTab('avatar')}
+          className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'avatar'
+              ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-black shadow-[0_0_20px_rgba(6,182,212,0.4)] scale-105'
+              : 'bg-zinc-900/80 border border-cyan-500/30 text-cyan-400 hover:bg-zinc-800'
+          }`}
+        >
+          👤 LOJA DE AVATARES
         </button>
         <button
           onClick={() => setActiveTab('all')}
@@ -452,69 +501,224 @@ export default function LojaPage() {
         </button>
       </div>
 
-      {/* GRELHA */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredItems.map((item) => {
-          const isOwned = invState.ownedItems.includes(item.id);
-          const isEquipped = item.category === 'theme' ? invState.equippedTheme === item.id : equippedItems[item.category] === item.id;
+      {/* ABA DE AVATARES */}
+      {activeTab === 'avatar' && (
+        <div className="space-y-6">
+          {/* Sub-filtro de Categoria de Avatar */}
+          <div className="flex flex-wrap gap-2 p-3 bg-zinc-950/60 rounded-2xl border border-zinc-800 backdrop-blur-md">
+            {[
+              { id: 'todos', label: 'Todos os Avatares' },
+              { id: 'historia', label: '⚔️ História' },
+              { id: 'geografia', label: '🌍 Geografia' },
+              { id: 'desporto', label: '⚽ Desporto' },
+              { id: 'cultura', label: '🎸 Cultura & Fado' },
+              { id: 'geral', label: '👤 Gerais' },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setAvatarCategory(cat.id as any)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                  avatarCategory === cat.id
+                    ? 'bg-cyan-500 text-black shadow-md'
+                    : 'bg-zinc-900/80 text-zinc-400 hover:text-white'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
 
-          return (
-            <div
-              key={item.id}
-              className={`relative flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
-                item.popular ? 'border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.2)]' : 'border-zinc-800 hover:border-emerald-500/40'
-              }`}
-            >
-              {item.badge && (
-                <span className="absolute -top-3 right-4 bg-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  {item.badge}
-                </span>
-              )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredAvatars.map((av) => {
+              const isOwned = (invState.ownedAvatars || ['av_default', 'av_galo_barcelos']).includes(av.id);
+              const isEquipped = (invState.equippedAvatar || 'av_default') === av.id;
 
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[item.rarity]}`}>
-                    {item.rarity}
-                  </span>
-                  <span className="text-3xl">{item.icon}</span>
+              return (
+                <div
+                  key={av.id}
+                  className={`relative flex flex-col justify-between p-5 rounded-3xl bg-zinc-950/70 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
+                    isEquipped
+                      ? 'border-cyan-400 bg-cyan-950/20 ring-2 ring-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.3)]'
+                      : av.currency === 'real_money'
+                      ? 'border-amber-400/60 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
+                      : 'border-zinc-800 hover:border-cyan-500/40'
+                  }`}
+                >
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[av.rarity || 'comum']}`}>
+                        {av.rarity || 'comum'}
+                      </span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-400 uppercase font-bold">
+                        {av.category}
+                      </span>
+                    </div>
+
+                    <div className="grid place-items-center my-3">
+                      <div className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl bg-zinc-900 border-2 ${
+                        av.borderGlow || 'border-zinc-700'
+                      }`}>
+                        {av.icon}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-center text-white mt-1 mb-1.5">{av.name}</h3>
+                    <p className="text-xs text-zinc-400 text-center leading-relaxed mb-4">{av.description}</p>
+                  </div>
+
+                  <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
+                      <span className="text-base font-extrabold text-white">
+                        {av.currency === 'free'
+                          ? <span className="text-emerald-400 font-black">GRÁTIS</span>
+                          : av.currency === 'real_money'
+                          ? `€${av.price.toFixed(2)}`
+                          : `€${av.price.toLocaleString('pt-PT')} Acorda`}
+                      </span>
+                    </div>
+
+                    {isEquipped ? (
+                      <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-400/50">
+                        ✓ Avatar em Uso
+                      </button>
+                    ) : isOwned ? (
+                      <button
+                        onClick={() => handleEquipAvatarDirect(av)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg transition-all"
+                      >
+                        Equipar Avatar
+                      </button>
+                    ) : av.currency === 'free' ? (
+                      <button
+                        onClick={() => handleClaimFreeAvatar(av)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black transition-all"
+                      >
+                        🎁 Resgatar Grátis
+                      </button>
+                    ) : av.currency === 'coins' ? (
+                      <button
+                        onClick={() => handleBuyAvatarCoins(av)}
+                        disabled={userCoins < av.price}
+                        className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
+                          userCoins >= av.price
+                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                            : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
+                        }`}
+                      >
+                        {userCoins >= av.price ? `Comprar por €${av.price} Acorda` : 'Saldo Insuficiente'}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleRealMoneyCheckout({ id: av.id, title: `Avatar: ${av.name}`, priceEuros: av.price })}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                      >
+                        Comprar por €{av.price.toFixed(2)}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-1.5">{item.title}</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">{item.description}</p>
-              </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-              <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
-                  <span className="text-base font-extrabold text-white">
-                    {item.currency === 'real_money'
-                      ? item.priceEuros === 0
-                        ? <span className="text-emerald-400 font-black">100% GRÁTIS</span>
-                        : `€${item.priceEuros?.toFixed(2)}`
-                      : `€${item.priceCoins?.toLocaleString('pt-PT')}`}
+      {/* GRELHA GERAL (OUTRAS ABAS) */}
+      {activeTab !== 'avatar' && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredItems.map((item) => {
+            const isOwned = invState.ownedItems.includes(item.id);
+            const isEquipped = item.category === 'theme' ? invState.equippedTheme === item.id : equippedItems[item.category] === item.id;
+
+            return (
+              <div
+                key={item.id}
+                className={`relative flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
+                  item.popular ? 'border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.2)]' : 'border-zinc-800 hover:border-emerald-500/40'
+                }`}
+              >
+                {item.badge && (
+                  <span className="absolute -top-3 right-4 bg-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    {item.badge}
                   </span>
+                )}
+
+                <div>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[item.rarity]}`}>
+                      {item.rarity}
+                    </span>
+                    <span className="text-3xl">{item.icon}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1.5">{item.title}</h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-4">{item.description}</p>
                 </div>
 
-                {item.currency === 'real_money' ? (
-                  item.priceEuros === 0 ? (
-                    isEquipped ? (
+                <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
+                    <span className="text-base font-extrabold text-white">
+                      {item.currency === 'real_money'
+                        ? item.priceEuros === 0
+                          ? <span className="text-emerald-400 font-black">100% GRÁTIS</span>
+                          : `€${item.priceEuros?.toFixed(2)}`
+                        : `€${item.priceCoins?.toLocaleString('pt-PT')}`}
+                    </span>
+                  </div>
+
+                  {item.currency === 'real_money' ? (
+                    item.priceEuros === 0 ? (
+                      isEquipped ? (
+                        <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                          ✓ Arena em Uso
+                        </button>
+                      ) : isOwned ? (
+                        <button
+                          onClick={() => handleEquip(item)}
+                          className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg transition-all"
+                        >
+                          Equipar Arena
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleClaimFree(item)}
+                          className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:brightness-110 shadow-[0_0_20px_rgba(16,185,129,0.6)] animate-pulse transition-all"
+                        >
+                          🎁 Resgatar Oferta Grátis
+                        </button>
+                      )
+                    ) : isEquipped ? (
                       <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-                        ✓ Arena em Uso
+                        ✓ Equipado
                       </button>
                     ) : isOwned ? (
                       <button
                         onClick={() => handleEquip(item)}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg transition-all"
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-600 transition-all"
                       >
-                        Equipar Arena
+                        Equipar
                       </button>
                     ) : (
                       <button
-                        onClick={() => handleClaimFree(item)}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:brightness-110 shadow-[0_0_20px_rgba(16,185,129,0.6)] animate-pulse transition-all"
+                        onClick={() => handleRealMoneyCheckout(item)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
                       >
-                        🎁 Resgatar Oferta Grátis
+                        Comprar por €{item.priceEuros?.toFixed(2)}
                       </button>
                     )
+                  ) : item.category === 'consumable' ? (
+                    <button
+                      onClick={() => handleBuyCoinsItem(item)}
+                      disabled={userCoins < (item.priceCoins || 0)}
+                      className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
+                        userCoins >= (item.priceCoins || 0)
+                          ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                          : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
+                      }`}
+                    >
+                      {userCoins >= (item.priceCoins || 0) ? 'Comprar Utilidade' : 'Saldo Insuficiente'}
+                    </button>
                   ) : isEquipped ? (
                     <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                       ✓ Equipado
@@ -528,53 +732,23 @@ export default function LojaPage() {
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleRealMoneyCheckout(item)}
-                      className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                      onClick={() => handleBuyCoinsItem(item)}
+                      disabled={userCoins < (item.priceCoins || 0)}
+                      className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
+                        userCoins >= (item.priceCoins || 0)
+                          ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                          : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
+                      }`}
                     >
-                      Comprar por €{item.priceEuros?.toFixed(2)}
+                      {userCoins >= (item.priceCoins || 0) ? 'Comprar Item' : 'Saldo Insuficiente'}
                     </button>
-                  )
-                ) : item.category === 'consumable' ? (
-                  <button
-                    onClick={() => handleBuyCoinsItem(item)}
-                    disabled={userCoins < (item.priceCoins || 0)}
-                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
-                      userCoins >= (item.priceCoins || 0)
-                        ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
-                        : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
-                    }`}
-                  >
-                    {userCoins >= (item.priceCoins || 0) ? 'Comprar Utilidade' : 'Saldo Insuficiente'}
-                  </button>
-                ) : isEquipped ? (
-                  <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-                    ✓ Equipado
-                  </button>
-                ) : isOwned ? (
-                  <button
-                    onClick={() => handleEquip(item)}
-                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-600 transition-all"
-                  >
-                    Equipar
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleBuyCoinsItem(item)}
-                    disabled={userCoins < (item.priceCoins || 0)}
-                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
-                      userCoins >= (item.priceCoins || 0)
-                        ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
-                        : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
-                    }`}
-                  >
-                    {userCoins >= (item.priceCoins || 0) ? 'Comprar Item' : 'Saldo Insuficiente'}
-                  </button>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* MODAL DE CHECKOUT DIRETO MB WAY */}
       <MbwayModal
