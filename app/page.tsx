@@ -9,27 +9,21 @@ import { SiteFooter } from '@/components/site-footer'
 export default function Page() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-transparent text-foreground flex flex-col justify-between">
-      {/* 1. ELEMENTO DE FUNDO FORÇADO COM ESTILOS INLINE */}
+      {/* FORÇAR FUNDO HERO-BG */}
       <div 
+        className="fixed inset-0 -z-20 w-full h-full pointer-events-none"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-bg.jpg')",
+          backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/images/hero-bg.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: -20,
-          pointerEvents: 'none'
-        }} 
+          backgroundRepeat: 'no-repeat'
+        }}
       />
 
-      {/* 2. EFEITOS AMBIENTAIS SUBTIS */}
+      {/* EFEITOS AMBIENTAIS SUBTIS */}
       <BackgroundFx variant="homepage" />
 
-      {/* 3. CONTEÚDO DO SITE ENCAPSULADO COM Z-10 */}
+      {/* CONTEÚDO DO SITE ENCAPSULADO COM Z-10 */}
       <div className="relative z-10 flex-1 flex flex-col justify-between bg-transparent">
         <SiteHeader />
 
