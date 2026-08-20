@@ -111,7 +111,18 @@ function formatRelativeTime(date: Date): string {
   return `há ${d} dias`
 }
 
-function Avatar({ profile, small = false, avatarIcon }: { profile: UserProfile; small?: boolean; avatarIcon?: string }) {
+function Avatar({ profile, small = false, avatarIcon, avatarImage }: { profile: UserProfile; small?: boolean; avatarIcon?: string; avatarImage?: string }) {
+  if (avatarImage) {
+    return (
+      <div className={cn(
+        "overflow-hidden rounded-3xl bg-zinc-900 border-2 border-primary/40 shadow-xl select-none",
+        small ? "h-16 w-16" : "h-28 w-28 sm:h-32 sm:w-32"
+      )}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover object-center" />
+      </div>
+    )
+  }
   if (avatarIcon && avatarIcon !== '👤') {
     return (
       <div className={cn(
@@ -485,7 +496,7 @@ export function PlayerProfile() {
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
             <div className={invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder ? 'rounded-full p-1 bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-600 shadow-[0_0_25px_rgba(245,158,11,0.7)] animate-pulse' : ''}>
-              <Avatar profile={player} avatarIcon={equippedAvatarItem?.icon} />
+              <Avatar profile={player} avatarIcon={equippedAvatarItem?.icon} avatarImage={equippedAvatarItem?.image} />
             </div>
             <div className="min-w-0 flex-1">
               {(invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder) && (
@@ -1281,7 +1292,16 @@ export function PlayerProfile() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-3xl">{av.icon}</span>
+                    <div className="flex items-center gap-2">
+                      {av.image ? (
+                        <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/20 bg-zinc-900">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={av.image} alt={av.name} className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <span className="text-3xl">{av.icon || '👤'}</span>
+                      )}
+                    </div>
                     {isEquipped ? (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-400/50">
                         ✓ Equipado
@@ -1297,7 +1317,7 @@ export function PlayerProfile() {
                     )}
                   </div>
                   <h4 className="font-display font-black text-base text-foreground mt-2">{av.name}</h4>
-                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{av.description}</p>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{av.subtitle || av.description}</p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-white/10">

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import MbwayModal from '@/components/MbwayModal';
 import { getInventory, unlockItem, equipTheme, unlockAvatar, equipAvatar, type InventoryState } from '@/lib/inventory';
-import { AVATAR_CATALOG, type AvatarItem } from '@/lib/avatars';
+import { AVATAR_CATALOG, AVATARS_2050, type AvatarItem } from '@/lib/avatars';
 
 interface ShopItem {
   id: string;
@@ -364,11 +364,12 @@ export default function LojaPage() {
 
   // Funções específicas de Avatar
   const handleBuyAvatarCoins = (av: AvatarItem) => {
-    if (userCoins < av.price) {
+    const priceNum = typeof av.price === 'number' ? av.price : parseInt(String(av.price).replace(/\D/g, '')) || 0;
+    if (userCoins < priceNum) {
       alert('Saldo insuficiente de € Acorda!');
       return;
     }
-    const newCoins = userCoins - av.price;
+    const newCoins = userCoins - priceNum;
     setUserCoins(newCoins);
     localStorage.setItem('ap_user_coins', newCoins.toString());
 
@@ -548,55 +549,78 @@ export default function LojaPage() {
             {filteredAvatars.map((av) => {
               const isOwned = (invState.ownedAvatars || ['av_default', 'av_galo_barcelos']).includes(av.id);
               const isEquipped = (invState.equippedAvatar || 'av_default') === av.id;
+              const isEur = av.currency === 'eur' || av.currency === 'real_money';
+              const isPoints = av.currency === 'points' || av.currency === 'coins';
+              const priceNum = typeof av.price === 'number' ? av.price : parseInt(String(av.price).replace(/\D/g, '')) || 0;
+              const priceEurNum = typeof av.price === 'number' ? av.price : parseFloat(String(av.price).replace(/[^0-9.]/g, '')) || 0;
 
               return (
                 <div
                   key={av.id}
-                  className={`relative flex flex-col justify-between p-5 rounded-3xl bg-zinc-950/70 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
+                  className={`group relative flex flex-col justify-between p-5 rounded-3xl bg-zinc-950/80 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
                     isEquipped
-                      ? 'border-cyan-400 bg-cyan-950/20 ring-2 ring-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.3)]'
-                      : av.currency === 'real_money'
+                      ? 'border-cyan-400 bg-cyan-950/25 ring-2 ring-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.35)]'
+                      : av.glowColor
+                      ? av.glowColor
+                      : isEur
                       ? 'border-amber-400/60 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
                       : 'border-zinc-800 hover:border-cyan-500/40'
                   }`}
                 >
-                  {av.currency === 'real_money' && (
-                    <span className="absolute -top-3 right-4 bg-amber-500/90 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+                  {/* BADGES NO CANTO SUPERIOR */}
+                  {isEur ? (
+                    <span className="absolute -top-3 right-4 z-20 bg-amber-500/95 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
                       ⚙️ Manutenção
                     </span>
-                  )}
+                  ) : av.badge ? (
+                    <span className="absolute -top-3 right-4 z-20 bg-cyan-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+                      {av.badge}
+                    </span>
+                  ) : null}
 
                   <div>
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex justify-between items-center mb-3">
                       <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[av.rarity || 'comum']}`}>
-                        {av.rarity || 'comum'}
+                        {av.badge || av.rarity || 'comum'}
                       </span>
                       <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-400 uppercase font-bold">
                         {av.category}
                       </span>
                     </div>
 
-                    <div className="grid place-items-center my-3">
-                      <div className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl bg-zinc-900 border-2 ${
-                        av.borderGlow || 'border-zinc-700'
-                      }`}>
-                        {av.icon}
-                      </div>
+                    {/* IMAGEM RETRATO CYBERPUNK 2050 HD */}
+                    <div className="relative overflow-hidden rounded-xl mb-3 border-2 border-white/10 bg-zinc-900 shadow-inner">
+                      {av.image ? (
+                        <div className="aspect-[4/5] w-full overflow-hidden">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={av.image}
+                            alt={av.name}
+                            className="w-full h-full object-cover object-center rounded-xl border-2 transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-[4/5] w-full flex items-center justify-center text-6xl bg-zinc-900">
+                          {av.icon || '👤'}
+                        </div>
+                      )}
                     </div>
 
-                    <h3 className="text-lg font-bold text-center text-white mt-1 mb-1.5">{av.name}</h3>
-                    <p className="text-xs text-zinc-400 text-center leading-relaxed mb-4">{av.description}</p>
+                    <h3 className="text-lg font-bold text-center text-white mt-1 mb-1">{av.name}</h3>
+                    <p className="text-xs text-zinc-400 text-center leading-relaxed mb-3">
+                      {av.subtitle || av.description}
+                    </p>
                   </div>
 
-                  <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
+                  <div className="pt-3 border-t border-zinc-800/80 flex flex-col gap-2.5">
                     <div className="flex justify-between items-center">
                       <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
                       <span className="text-base font-extrabold text-white">
                         {av.currency === 'free'
                           ? <span className="text-emerald-400 font-black">GRÁTIS</span>
-                          : av.currency === 'real_money'
-                          ? `€${av.price.toFixed(2)}`
-                          : `€${av.price.toLocaleString('pt-PT')} Acorda`}
+                          : isEur
+                          ? `€${priceEurNum.toFixed(2)}`
+                          : `${priceNum.toLocaleString('pt-PT')} Acorda`}
                       </span>
                     </div>
 
@@ -607,33 +631,33 @@ export default function LojaPage() {
                     ) : isOwned ? (
                       <button
                         onClick={() => handleEquipAvatarDirect(av)}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg transition-all"
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg transition-all cursor-pointer"
                       >
                         Equipar Avatar
                       </button>
                     ) : av.currency === 'free' ? (
                       <button
                         onClick={() => handleClaimFreeAvatar(av)}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black transition-all"
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black transition-all cursor-pointer"
                       >
                         🎁 Resgatar Grátis
                       </button>
-                    ) : av.currency === 'coins' ? (
+                    ) : isPoints ? (
                       <button
                         onClick={() => handleBuyAvatarCoins(av)}
-                        disabled={userCoins < av.price}
+                        disabled={userCoins < priceNum}
                         className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
-                          userCoins >= av.price
-                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                          userCoins >= priceNum
+                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md cursor-pointer'
                             : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
                         }`}
                       >
-                        {userCoins >= av.price ? `Comprar por €${av.price} Acorda` : 'Saldo Insuficiente'}
+                        {userCoins >= priceNum ? `Comprar por ${priceNum} Acorda` : 'Saldo Insuficiente'}
                       </button>
                     ) : (
                       <button
                         disabled
-                        onClick={() => handleRealMoneyCheckout({ id: av.id, title: `Avatar: ${av.name}`, priceEuros: av.price })}
+                        onClick={() => handleRealMoneyCheckout({ id: av.id, title: `Avatar: ${av.name}`, priceEuros: priceEurNum })}
                         className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800/80 text-zinc-400 border border-zinc-700/60 opacity-60 cursor-not-allowed transition-all"
                       >
                         ⚙️ Indisponível (Manutenção)
