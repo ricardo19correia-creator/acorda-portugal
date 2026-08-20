@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { BackgroundFx } from '@/components/background-fx'
+import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
 import { GameHub } from '@/components/game-hub'
 import { QuizScreen } from '@/components/quiz/quiz-screen'
 
@@ -52,6 +53,7 @@ function QuizPageContent() {
 export function QuizPage() {
   return (
     <div className="relative min-h-screen">
+      <ArenaDynamicBackground />
       <BackgroundFx />
 
       <Suspense fallback={null}>

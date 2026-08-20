@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { PresenceProvider } from '@/components/presence-provider'
+import { GameThemeProvider } from '@/context/game-theme-context'
 import TawkChat from '@/components/TawkChat'
 import TronCyberBackground from '@/components/TronCyberBackground'
 import './globals.css'
@@ -41,7 +42,9 @@ export default function RootLayout({
       <body className="relative min-h-screen text-zinc-100 antialiased overflow-x-hidden">
         <TronCyberBackground />
         <AuthProvider>
-          <PresenceProvider>{children}</PresenceProvider>
+          <GameThemeProvider>
+            <PresenceProvider>{children}</PresenceProvider>
+          </GameThemeProvider>
         </AuthProvider>
         <TawkChat />
         {process.env.NODE_ENV === 'production' && <Analytics />}

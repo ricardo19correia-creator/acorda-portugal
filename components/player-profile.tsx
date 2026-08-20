@@ -360,6 +360,10 @@ export function PlayerProfile() {
   const ownedFrames = SHOP_CATALOG.filter((i) => i.id.startsWith('frame_') && (inventory[i.id] || 0) > 0)
   const ownedTitles = SHOP_CATALOG.filter((i) => i.id.startsWith('title_') && (inventory[i.id] || 0) > 0)
   const ownedThemes = SHOP_CATALOG.filter((i) => i.id.startsWith('theme_') && (inventory[i.id] || 0) > 0)
+  const ownedSoundpacks = SHOP_CATALOG.filter((i) => i.id.startsWith('soundpack_') && (inventory[i.id] || 0) > 0)
+  const ownedStreaks = SHOP_CATALOG.filter(
+    (i) => (i.id.startsWith('streak_') || i.id.startsWith('sfx_')) && (inventory[i.id] || 0) > 0,
+  )
   const totalConsumables = SHOP_CATALOG.filter(
     (i) => i.type === 'consumable' && (inventory[i.id] || 0) > 0,
   ).reduce((acc, curr) => acc + (inventory[curr.id] || 0), 0)
@@ -368,6 +372,8 @@ export function PlayerProfile() {
   const equippedFrameItem = SHOP_CATALOG.find((i) => i.id === equipped.frame)
   const equippedTitleItem = SHOP_CATALOG.find((i) => i.id === equipped.title)
   const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === equipped.theme)
+  const equippedSoundpackItem = SHOP_CATALOG.find((i) => i.id === equipped.soundpack)
+  const equippedStreakItem = SHOP_CATALOG.find((i) => i.id === (equipped.streak_effect || equipped.sfx))
 
   const effectiveUid = user?.uid || profile?.uid || ''
   const cosmeticsList = SHOP_CATALOG.filter(
@@ -384,9 +390,11 @@ export function PlayerProfile() {
         ? 'title'
         : item.id.startsWith('theme_')
           ? 'theme'
-          : item.id.startsWith('sfx_')
-            ? 'sfx'
-            : 'aura'
+          : item.id.startsWith('soundpack_')
+            ? 'soundpack'
+            : item.id.startsWith('streak_') || item.id.startsWith('sfx_')
+              ? 'streak_effect'
+              : 'aura'
     const isEquipped = (equipped as any)?.[slot] === item.id
     const nextItemId = isEquipped ? null : item.id
 
@@ -437,6 +445,20 @@ export function PlayerProfile() {
               </h1>
 
               <div className="mt-3 flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-bold">
+                {((player as any)?.is_founder || (player as any)?.isFounder) && (
+                  <span className="rounded-full bg-gradient-to-r from-amber-500/25 via-yellow-400/25 to-amber-500/25 px-3 py-1 text-amber-300 font-black border border-amber-400/60 shadow-[0_0_15px_rgba(245,158,11,0.4)] flex items-center gap-1.5">
+                    <Crown className="h-3.5 w-3.5 text-amber-400 fill-current" />
+                    <span>Fundador (+25% XP/Moedas)</span>
+                  </span>
+                )}
+
+                {((player as any)?.can_submit_questions || (player as any)?.hasAuthorLicense) && (
+                  <span className="rounded-full bg-purple-500/20 px-3 py-1 text-purple-300 font-black border border-purple-400/50 flex items-center gap-1.5">
+                    <Sparkles className="h-3.5 w-3.5 text-purple-400" />
+                    <span>Autor Oficial</span>
+                  </span>
+                )}
+
                 <span className="rounded-full bg-gold/15 px-3 py-1 text-gold font-display border border-gold/20">
                   {isMaxLevel ? '👑 MESTRE DE PORTUGAL' : `NÍVEL ${progressInfo.currentLevel.level} — ${progressInfo.currentLevel.title}`}
                 </span>
@@ -873,6 +895,32 @@ export function PlayerProfile() {
 
               <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-3.5">
                 <div className="flex items-center gap-3">
+                  <Palette className="h-5 w-5 text-purple-400" />
+                  <div>
+                    <p className="text-xs font-bold text-foreground">Tema de Arena Vivo</p>
+                    <p className="text-[0.65rem] text-muted-foreground">
+                      {equippedThemeItem ? equippedThemeItem.name.replace(/^Tema:\s*/, '') : 'Arena Clássica Nacional'}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-purple-400">Ativo</span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-3.5">
+                <div className="flex items-center gap-3">
+                  <Zap className="h-5 w-5 text-cyan-400" />
+                  <div>
+                    <p className="text-xs font-bold text-foreground">Vozes / Soundpack</p>
+                    <p className="text-[0.65rem] text-muted-foreground">
+                      {equippedSoundpackItem ? equippedSoundpackItem.name.replace(/^Pack Vozes:\s*/, '') : 'Áudio Padrão'}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-cyan-400">Ativo</span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-3.5">
+                <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-accent" />
                   <div>
                     <p className="text-xs font-bold text-foreground">Distrito Representado</p>
@@ -914,7 +962,7 @@ export function PlayerProfile() {
             </div>
 
             {/* Categorias do Inventário */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
                 <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
                   Molduras
@@ -933,10 +981,26 @@ export function PlayerProfile() {
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
                 <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
-                  Temas
+                  Temas Arena
                 </p>
-                <p className="mt-1 font-display text-2xl font-black text-accent">
+                <p className="mt-1 font-display text-2xl font-black text-purple-400">
                   {ownedThemes.length}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
+                <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
+                  Soundpacks
+                </p>
+                <p className="mt-1 font-display text-2xl font-black text-cyan-400">
+                  {ownedSoundpacks.length}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
+                <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
+                  Efeitos 1v1
+                </p>
+                <p className="mt-1 font-display text-2xl font-black text-flag-red">
+                  {ownedStreaks.length}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
@@ -952,7 +1016,7 @@ export function PlayerProfile() {
 
           <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">
-              Total de itens: {ownedFrames.length + ownedTitles.length + ownedThemes.length + totalConsumables}
+              Total de itens: {ownedFrames.length + ownedTitles.length + ownedThemes.length + ownedSoundpacks.length + ownedStreaks.length + totalConsumables}
             </span>
             <Link
               href="/loja"

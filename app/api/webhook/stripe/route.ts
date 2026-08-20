@@ -101,6 +101,21 @@ export async function POST(request: Request) {
             inventory: updatedInventory,
             badges: updatedBadges,
             ...(reward.vipPass ? { isVip: true, vipPassPurchasedAt: serverTimestamp() } : {}),
+            ...(reward.isFounder
+              ? {
+                  is_founder: true,
+                  isFounder: true,
+                  founderMultiplier: 1.25,
+                  founderPurchasedAt: serverTimestamp(),
+                }
+              : {}),
+            ...(reward.authorLicense
+              ? {
+                  can_submit_questions: true,
+                  hasAuthorLicense: true,
+                  authorLicensePurchasedAt: serverTimestamp(),
+                }
+              : {}),
             updatedAt: serverTimestamp(),
           })
 

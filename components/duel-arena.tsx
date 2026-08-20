@@ -30,6 +30,7 @@ import {
   Snowflake,
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
+import { useGameTheme } from '@/context/game-theme-context'
 import {
   type DuelDocument,
   type DuelPlayerData,
@@ -48,9 +49,14 @@ import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
+import {
+  QUESTION_TIME_SECONDS,
+  WARNING_TIME_THRESHOLD,
+  calculateTimePercentage,
+} from '@/config/quiz'
 import { cn } from '@/lib/utils'
 
-const QUESTION_TIME_LIMIT = 60
+const QUESTION_TIME_LIMIT = QUESTION_TIME_SECONDS
 
 interface AnswerFeedback {
   status: DuelAnswerStatus
@@ -68,6 +74,7 @@ export function DuelArena({
 }) {
   const router = useRouter()
   const { user, profile } = useAuth()
+  const { playSound, streakEffectId } = useGameTheme()
 
   const currentPlayer = useMemo(() => {
     return {
@@ -293,6 +300,8 @@ export function DuelArena({
     if (isSubmitting || !currentPlayer.uid || !duel || !currentQuestion) return
     setIsSubmitting(true)
 
+    playSound('wrong')
+
     setFeedback({
       status: 'TIMEOUT',
       message: '⏰ TEMPO ESGOTADO! Não respondeste a tempo.',
@@ -320,6 +329,16 @@ export function DuelArena({
 
     const timeSpent = Math.max(1, Math.round((Date.now() - questionStartTime) / 1000))
     const isCorrect = optionKey === currentQuestion.correct
+
+    if (isCorrect) {
+      if (timeLeft <= WARNING_TIME_THRESHOLD) {
+        playSound('last_second_correct')
+      } else {
+        playSound('correct')
+      }
+    } else {
+      playSound('wrong')
+    }
 
     setFeedback({
       status: isCorrect ? 'CORRECT' : 'WRONG',
@@ -585,9 +604,14 @@ export function DuelArena({
     }
 
     // Ecrã ativo de resposta (Timer individual de 60s)
-    const timePercentage = (timeLeft / QUESTION_TIME_LIMIT) * 100
+    const timePercentage = calculateTimePercentage(timeLeft, QUESTION_TIME_LIMIT)
+    const isUrgent = timeLeft <= WARNING_TIME_THRESHOLD
     const timeColor =
-      timeLeft > 20 ? 'bg-primary' : timeLeft > 10 ? 'bg-gold' : 'bg-flag-red'
+      timeLeft > 30
+        ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
+        : timeLeft > WARNING_TIME_THRESHOLD
+          ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
+          : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
       <div className="mx-auto w-full max-w-3xl px-4 py-4 sm:py-6 animate-rise">
@@ -596,18 +620,43 @@ export function DuelArena({
         {/* ========================================================= */}
         <div className="card-game flex items-center justify-between gap-2 rounded-3xl p-3.5 sm:p-5 shadow-2xl border border-white/20 relative overflow-hidden">
           {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-          {feedback?.status === 'CORRECT' && profile?.equipped?.sfx === 'sfx_raio_lusitano' && (
+          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
           )}
 
           {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-          {feedback?.status === 'CORRECT' && profile?.equipped?.sfx === 'sfx_cravos_abril' && (
+          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
               <span className="text-3xl animate-bounce">🌺</span>
               <span className="text-2xl animate-ping ml-4">🌸</span>
               <span className="text-3xl animate-bounce ml-4">🌺</span>
             </div>
           )}
+
+          {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+            <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_40px_rgba(16,185,129,0.7)] animate-pulse" />
+          )}
+
+          {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+              <span className="text-3xl animate-bounce">🪙</span>
+              <span className="text-4xl animate-ping">✨</span>
+              <span className="text-3xl animate-bounce">🪙</span>
+            </div>
+          )}
+
+          {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+          {feedback?.status === 'CORRECT' &&
+            (streakEffectId === 'sfx_espada_conquistador' ||
+              streakEffectId === 'streak_espada_conquistador') && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                <span className="text-5xl sm:text-6xl animate-bounce drop-shadow-[0_0_25px_rgba(234,179,8,0.95)]">
+                  ⚔️
+                </span>
+              </div>
+            )}
 
           {/* Player Left (Me) */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0">
@@ -617,6 +666,11 @@ export function DuelArena({
                 <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
                   {me?.displayName || 'Jogador'} <span className="text-primary">(Tu)</span>
                 </span>
+                {((profile as any)?.is_founder || (profile as any)?.isFounder) && (
+                  <span className="rounded-full bg-amber-500/25 border border-amber-400/60 px-1.5 py-0.2 text-[0.55rem] font-black text-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                    👑 Fundador
+                  </span>
+                )}
                 {profile?.equipped?.title && (
                   <span className={cn('rounded-full px-2 py-0.2 text-[0.55rem] font-bold shrink-0', getTitleBadgeStyle(profile.equipped.title))}>
                     {SHOP_CATALOG.find(i => i.id === profile.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
@@ -661,22 +715,25 @@ export function DuelArena({
         <div className="mt-4">
           <div className="flex items-center justify-between text-xs font-bold text-muted-foreground mb-1.5 px-1">
             <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5 text-primary" /> Tempo de Resposta
+              <Clock className="h-3.5 w-3.5 text-primary" /> Tempo de Resposta (60s)
             </span>
             <span
               className={cn(
                 'font-mono font-black transition-all duration-300',
-                timeLeft <= 5
-                  ? 'text-flag-red text-base animate-ping'
-                  : timeLeft <= 10
-                    ? 'text-flag-red text-sm animate-pulse'
-                    : 'text-foreground',
+                isUrgent
+                  ? 'text-flag-red text-sm animate-pulse'
+                  : 'text-foreground',
               )}
             >
               ⏱️ {timeLeft}s
             </span>
           </div>
-          <div className="h-3 w-full rounded-full bg-white/10 overflow-hidden shadow-inner p-0.5 border border-white/10">
+          <div
+            className={cn(
+              'h-3 w-full rounded-full bg-white/10 overflow-hidden shadow-inner p-0.5 border transition-colors duration-300',
+              isUrgent ? 'border-flag-red/60 bg-flag-red/10' : 'border-white/10',
+            )}
+          >
             <div
               className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-lg', timeColor)}
               style={{ width: `${timePercentage}%` }}

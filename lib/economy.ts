@@ -16,7 +16,7 @@ import {
   Timestamp,
 } from 'firebase/firestore'
 
-export type ItemCategory = 'personalizacao' | 'utilidade' | 'prestigio' | 'packs'
+export type ItemCategory = 'arenas' | 'soundpacks' | 'streaks' | 'personalizacao' | 'utilidade' | 'prestigio' | 'packs'
 export type ItemRarity = 'comum' | 'raro' | 'epico' | 'lendario'
 export type ItemType = 'permanent' | 'consumable'
 
@@ -43,7 +43,7 @@ export function formatItemStatusBadge(rarity: ItemRarity, isEquipped: boolean): 
   return rarityLabel
 }
 
-export type EquipSlot = 'frame' | 'title' | 'theme' | 'aura' | 'sfx'
+export type EquipSlot = 'frame' | 'title' | 'theme' | 'aura' | 'sfx' | 'soundpack' | 'streak_effect'
 
 export type ShopItem = {
   id: string
@@ -66,6 +66,8 @@ export function getItemSlot(item: ShopItem): EquipSlot | null {
   if (item.id.startsWith('frame_')) return 'frame'
   if (item.id.startsWith('title_')) return 'title'
   if (item.id.startsWith('theme_')) return 'theme'
+  if (item.id.startsWith('soundpack_')) return 'soundpack'
+  if (item.id.startsWith('streak_')) return 'streak_effect'
   if (item.id.startsWith('prestige_aura_')) return 'aura'
   if (item.id.startsWith('sfx_')) return 'sfx'
   return null
@@ -250,15 +252,146 @@ export const SHOP_CATALOG: ShopItem[] = [
     icon: 'Award',
   },
 
-  // 💥 PERSONALIZAÇÃO: EFEITOS DE RESPOSTA NO DUELO 1V1
+  // 🌌 ARENAS DINÂMICAS & TEMAS DE JOGO (Alteram o fundo da partida)
   {
-    id: 'sfx_cravos_abril',
-    name: 'Efeito 1v1: Cravos de Abril',
-    description: 'Quando acertas uma pergunta no duelo 1v1, explode uma rajada de pétalas e cravos vermelhos 3D no teu lado.',
-    category: 'personalizacao',
+    id: 'theme_matriz_tron',
+    name: 'Tema: Tron Cyber Nacional',
+    description: 'Grelha digital em verde-esmeralda vibrante e circuitos a pulsar ao ritmo do cronómetro da pergunta. (Desbloqueado para todos).',
+    category: 'arenas',
+    rarity: 'comum',
+    type: 'permanent',
+    slot: 'theme',
+    price: 0,
+    icon: 'Cpu',
+    previewColor: 'from-emerald-950/90 via-teal-950/60 to-black',
+  },
+  {
+    id: 'theme_ondas_nazare',
+    name: 'Tema: Ondas da Nazaré',
+    description: 'Fundo azul-marinho profundo com feixes de luz bio-luminescentes e partículas de espuma néon em movimento.',
+    category: 'arenas',
+    rarity: 'raro',
+    type: 'permanent',
+    slot: 'theme',
+    price: 6000,
+    icon: 'Sparkles',
+    previewColor: 'from-cyan-950/90 via-blue-950/70 to-black',
+  },
+  {
+    id: 'theme_fado_cyberpunk',
+    name: 'Tema: Noite de Fado em Alfama',
+    description: 'Fundo em tons púrpura e néon âmbar com silhuetas de calçada portuguesa e névoa animada.',
+    category: 'arenas',
     rarity: 'epico',
     type: 'permanent',
-    slot: 'sfx',
+    slot: 'theme',
+    price: 12500,
+    icon: 'Palette',
+    previewColor: 'from-purple-950/90 via-amber-950/60 to-black',
+  },
+  {
+    id: 'theme_vulcao_acores',
+    name: 'Tema: Fogo dos Açores / Vulcão',
+    description: 'Fundo com brasas e faíscas incandescentes em ascensão com rebordo de ecrã a pulsar em vermelho-lava.',
+    category: 'arenas',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'theme',
+    price: 25000,
+    icon: 'Flame',
+    previewColor: 'from-red-950/90 via-amber-950/70 to-black',
+  },
+  {
+    id: 'theme_templo_dinis',
+    name: 'Tema VIP: Templo de Ouro de D. Dinis',
+    description: 'Reflexos dourados volumétricos e chuva de partículas de ouro nobre reluzente. (Exclusivo VIP).',
+    category: 'arenas',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'theme',
+    price: 35000,
+    icon: 'Crown',
+    previewColor: 'from-yellow-950/90 via-amber-950/80 to-black',
+  },
+  {
+    id: 'theme_matriz_cosmica',
+    name: 'Tema VIP: Matriz Cósmica dos Descobrimentos',
+    description: 'Constelações holográficas e ondas de choque néon violeta e ciano nas sequências de acertos. (Exclusivo VIP).',
+    category: 'arenas',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'theme',
+    price: 45000,
+    icon: 'Sparkles',
+    previewColor: 'from-indigo-950/95 via-purple-950/80 to-black',
+  },
+
+  // 🎙️ VOZES & ÁUDIOS DE RESPOSTA (Soundpacks Tugas com reações ativadas na partida)
+  {
+    id: 'soundpack_comentador_futebol',
+    name: 'Pack Vozes: Comentador de Futebol Tuga',
+    description: 'Grito de "É GOOOOLO!" ao acertar no último segundo, "Foi ao poste!" ao errar e narração desportiva vibrante.',
+    category: 'soundpacks',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'soundpack',
+    price: 6000,
+    icon: 'Volume2',
+  },
+  {
+    id: 'soundpack_taberna_antiga',
+    name: 'Pack Vozes: Taberna Antiga',
+    description: 'Som de brinde com copos de vinho, "Saúde, carago!" e gargalhadas clássicas de vitória com alma portuguesa.',
+    category: 'soundpacks',
+    rarity: 'raro',
+    type: 'permanent',
+    slot: 'soundpack',
+    price: 4500,
+    icon: 'UtensilsCrossed',
+  },
+  {
+    id: 'soundpack_scifi_80s',
+    name: 'Pack Áudio: Sintetizador Sci-Fi 80s',
+    description: 'Sons retro/arcade com sintetizadores espaciais analógicos e arpeggios laser eletrónicos.',
+    category: 'soundpacks',
+    rarity: 'raro',
+    type: 'permanent',
+    slot: 'soundpack',
+    price: 3000,
+    icon: 'Zap',
+  },
+
+  // 💥 EFEITOS DE RESPOSTA E STREAK DE FOGO
+  {
+    id: 'streak_chama_tripla',
+    name: 'Efeito: Chama Tripla Verde-Néon',
+    description: 'Atinge 3x Streak e incendeia o cronómetro e a tua pontuação com labaredas verde-néon incandescentes.',
+    category: 'streaks',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'streak_effect',
+    price: 7500,
+    icon: 'Flame',
+  },
+  {
+    id: 'streak_moedas_ouro',
+    name: 'Efeito: Explosão de Moedas de Ouro',
+    description: 'Moedas 3D reluzentes voam pelo ecrã ao acertar perguntas em sequência ou cravar 10/10 no duelo.',
+    category: 'streaks',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'streak_effect',
+    price: 10000,
+    icon: 'Coins',
+  },
+  {
+    id: 'sfx_cravos_abril',
+    name: 'Efeito 1v1: Cravos de Abril 3D',
+    description: 'Quando acertas uma pergunta no duelo 1v1, explode uma rajada de pétalas e cravos vermelhos 3D no teu lado.',
+    category: 'streaks',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'streak_effect',
     price: 7500,
     icon: 'Sparkles',
   },
@@ -266,25 +399,45 @@ export const SHOP_CATALOG: ShopItem[] = [
     id: 'sfx_raio_lusitano',
     name: 'Efeito 1v1: Raio Néon Lusitano',
     description: 'Ao acertar em sequência no 1v1, dispara um relâmpago verde e dourado na tua barra de pontuação.',
-    category: 'personalizacao',
+    category: 'streaks',
     rarity: 'lendario',
     type: 'permanent',
-    slot: 'sfx',
+    slot: 'streak_effect',
     price: 12000,
     icon: 'Zap',
   },
-
-  // 🎨 TEMAS & AURAS
   {
-    id: 'theme_noite_fado',
-    name: 'Tema: Noite de Fado',
-    description: 'Aparência visual exclusiva com tons aveludados e atmosfera de Alfama.',
-    category: 'personalizacao',
-    rarity: 'epico',
+    id: 'sfx_espada_conquistador',
+    name: 'Efeito 1v1: Espada de D. Afonso Henriques',
+    description: 'Espada lendária em aço e ouro desce em chamas ao vencer duelos ou acertar sequências épicas.',
+    category: 'streaks',
+    rarity: 'lendario',
     type: 'permanent',
-    slot: 'theme',
-    price: 5000,
-    icon: 'Palette',
+    slot: 'streak_effect',
+    price: 15000,
+    icon: 'Swords',
+  },
+  {
+    id: 'frame_fundador_ouro',
+    name: 'Moldura Fundador da Nação',
+    description: 'Moldura exclusiva em ouro nobre com a bandeira de Portugal animada.',
+    category: 'personalizacao',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'frame',
+    price: 25000,
+    icon: 'Crown',
+  },
+  {
+    id: 'title_conquistador_supremo',
+    name: 'Título: «O Conquistador Supremo»',
+    description: 'Título régio 3D banhado a ouro em honra ao primeiro Rei de Portugal.',
+    category: 'personalizacao',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'title',
+    price: 20000,
+    icon: 'Award',
   },
   {
     id: 'prestige_aura_dourada',
@@ -512,7 +665,8 @@ export async function equipItem(
       const inventory = data.inventory || {}
       const equipped = data.equipped || {}
 
-      if (itemId && !inventory[itemId]) {
+      // theme_matriz_tron é grátis e desbloqueado para todos
+      if (itemId && itemId !== 'theme_matriz_tron' && !inventory[itemId]) {
         throw new Error('Não possuis este item no inventário.')
       }
 
@@ -523,10 +677,16 @@ export async function equipItem(
         delete updatedEquipped[targetSlot!]
       }
 
-      transaction.update(userRef, {
+      const updatePayload: Record<string, any> = {
         equipped: updatedEquipped,
         updatedAt: serverTimestamp(),
-      })
+      }
+
+      if (targetSlot === 'theme') {
+        updatePayload.equipped_game_theme = itemId || 'theme_matriz_tron'
+      }
+
+      transaction.update(userRef, updatePayload)
     })
 
     return { success: true, message: itemId ? 'Item equipado com sucesso!' : 'Item desequipado.' }

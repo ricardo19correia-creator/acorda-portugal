@@ -219,6 +219,8 @@ export type EquippedCosmetics = {
   theme?: string | null
   aura?: string | null
   sfx?: string | null
+  soundpack?: string | null
+  streak_effect?: string | null
 }
 
 export type UserProfile = {

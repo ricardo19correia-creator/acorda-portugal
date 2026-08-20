@@ -1,10 +1,15 @@
+import {
+  QUESTION_TIME_SECONDS,
+  WARNING_TIME_THRESHOLD,
+  calculateTimePercentage,
+} from '@/config/quiz'
 import { cn } from '@/lib/utils'
 
 export function QuizProgress({
   index,
   total,
   seconds,
-  maxSeconds = 20,
+  maxSeconds = 60,
 }: {
   index: number
   total: number
@@ -12,13 +17,14 @@ export function QuizProgress({
   maxSeconds?: number
 }) {
   const pct = Math.min(100, Math.round((index / total) * 100))
-  const timePct = Math.max(0, Math.min(100, (seconds / maxSeconds) * 100))
-  const danger = seconds <= 5
+  const currentSeconds = Math.max(0, Math.min(60, seconds))
+  const timePct = (currentSeconds / 60) * 100
+  const danger = currentSeconds <= 10
 
-  // SVG circular radius
+  // SVG circular radius (r = 24)
   const radius = 24
   const circumference = 2 * Math.PI * radius
-  const strokeDashoffset = circumference - (timePct / 100) * circumference
+  const strokeDashoffset = circumference - (currentSeconds / 60) * circumference
 
   return (
     <div className="flex items-center gap-4 rounded-3xl border border-white/10 bg-card/75 p-3.5 sm:p-4 backdrop-blur-xl shadow-lg">

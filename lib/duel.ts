@@ -20,6 +20,7 @@ import {
 import { db } from '@/lib/firebase'
 import { ALL_QUIZ_QUESTIONS, type QuizQuestion } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
+import { QUESTION_TIME_MS } from '@/config/quiz'
 
 export type DuelStatus = 'waiting' | 'matched' | 'playing' | 'finished' | 'expired' | 'cancelled'
 export type DuelAnswerStatus = 'CORRECT' | 'WRONG' | 'TIMEOUT'
@@ -666,7 +667,7 @@ export async function joinDuelByCode(
 
   const now = Date.now()
   const startedAt = now + 3500
-  const firstDeadline = startedAt + 60_000
+  const firstDeadline = startedAt + QUESTION_TIME_MS
 
   const playerB: DuelPlayerData = {
     uid: user.uid,
@@ -770,7 +771,7 @@ export async function submitDuelAnswer(
     } else {
       // INICIAR 60s EXCLUSIVAMENTE PARA ESTE JOGADOR NA PRÓXIMA PERGUNTA
       player.questionStartedAt = now
-      player.questionDeadline = now + 60_000
+      player.questionDeadline = now + QUESTION_TIME_MS
     }
 
     let newStatus: DuelStatus = duel.status === 'matched' ? 'playing' : duel.status

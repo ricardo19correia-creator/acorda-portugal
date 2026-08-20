@@ -1,1009 +1,331 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import {
-  ShoppingBag,
-  Coins,
-  Sparkles,
-  Shield,
-  Palette,
-  Lightbulb,
-  Timer,
-  Flame,
-  Award,
-  Crown,
-  Sun,
-  Package,
-  PackageCheck,
-  CheckCircle2,
-  Lock,
-  ArrowRight,
-  Info,
-  Wallet,
-  Zap,
-  CreditCard,
-  History,
-  AlertCircle,
-  ExternalLink,
-  Loader2,
-  Calendar,
-  X,
-} from 'lucide-react'
-import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
-import { BackgroundFx } from '@/components/background-fx'
-import { useAuth } from '@/components/auth-provider'
-import {
-  SHOP_CATALOG,
-  buyShopItem,
-  equipItem,
-  getItemSlot,
-  formatRarityLabel,
-  type ItemCategory,
-  type ItemRarity,
-  type ShopItem,
-  type EquipSlot,
-  type WalletTransaction,
-} from '@/lib/economy'
-import {
-  REAL_PRODUCTS_CATALOG,
-  type RealProduct,
-} from '@/lib/real-products'
-import { WalletModal } from '@/components/wallet-modal'
-import { collection, onSnapshot, orderBy, query, limit } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-type ShopMainTab = 'virtual_items' | 'real_packs' | 'history'
-
-const CATEGORY_TABS: { id: ItemCategory | 'all'; label: string; icon: typeof Sparkles }[] = [
-  { id: 'all', label: 'Todos os Itens', icon: ShoppingBag },
-  { id: 'personalizacao', label: '🎨 Personalização', icon: Palette },
-  { id: 'utilidade', label: '⚡ Utilidade', icon: Zap },
-  { id: 'prestigio', label: '🏆 Prestígio', icon: Crown },
-  { id: 'packs', label: '🎁 Packs', icon: Package },
-]
-
-const RARITY_COLORS: Record<ItemRarity, { text: string; bg: string; border: string; glow: string }> = {
-  comum: {
-    text: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
-    border: 'border-emerald-500/30',
-    glow: 'group-hover:border-emerald-500/50',
-  },
-  raro: {
-    text: 'text-cyan-400',
-    bg: 'bg-cyan-500/10',
-    border: 'border-cyan-500/30',
-    glow: 'group-hover:border-cyan-500/50',
-  },
-  epico: {
-    text: 'text-purple-400',
-    bg: 'bg-purple-500/10',
-    border: 'border-purple-500/30',
-    glow: 'group-hover:border-purple-500/50',
-  },
-  lendario: {
-    text: 'text-gold',
-    bg: 'bg-gold/15',
-    border: 'border-gold/40',
-    glow: 'group-hover:border-gold/60',
-  },
+interface ShopItem {
+  id: string;
+  title: string;
+  description: string;
+  category: 'frame' | 'title' | 'theme' | 'consumable' | 'vip_pass' | 'coins';
+  currency: 'coins' | 'real_money';
+  priceCoins?: number;
+  priceEuros?: number;
+  rarity: 'comum' | 'raro' | 'epico' | 'lendario' | 'mitico';
+  icon: string;
+  badge?: string;
+  popular?: boolean;
 }
 
-const ICON_MAP: Record<string, typeof Sparkles> = {
-  Shield,
-  Sparkles,
-  Award,
-  Crown,
-  Palette,
-  Lightbulb,
-  Timer,
-  Flame,
-  Sun,
-  Package,
-  PackageCheck,
-  Coins,
-}
+const SHOP_ITEMS: ShopItem[] = [
+  // --- EXCLUSIVOS A DINHEIRO REAL (STRIPE / MB WAY) ---
+  {
+    id: 'vip_founder_pass',
+    title: 'Passe Fundador da Nação',
+    description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D animada.',
+    category: 'vip_pass',
+    currency: 'real_money',
+    priceEuros: 2.99,
+    rarity: 'mitico',
+    icon: '👑',
+    badge: 'VITALÍCIO',
+    popular: true,
+  },
+  {
+    id: 'theme_arena_gold_temple',
+    title: 'Arena VIP: Templo de Ouro Real',
+    description: 'Fundo 3D em ouro escovado com partículas volumétricas durante qualquer partida.',
+    category: 'theme',
+    currency: 'real_money',
+    priceEuros: 1.99,
+    rarity: 'mitico',
+    icon: '🏛️',
+    badge: 'TEMA DE JOGO',
+  },
+  {
+    id: 'theme_arena_cosmic_matrix',
+    title: 'Arena VIP: Matriz Cósmica Portuguesa',
+    description: 'Nebulosa com constelações das caravelas e ondas de choque em streaks.',
+    category: 'theme',
+    currency: 'real_money',
+    priceEuros: 2.49,
+    rarity: 'lendario',
+    icon: '🌌',
+    badge: 'TEMA DE JOGO',
+  },
+  {
+    id: 'bundle_all_arenas_vip',
+    title: 'Mega Passe: Todas as Arenas VIP',
+    description: 'Desbloqueio imediato de todas as arenas pagas atuais e futuras.',
+    category: 'theme',
+    currency: 'real_money',
+    priceEuros: 4.99,
+    rarity: 'mitico',
+    icon: '📦',
+    badge: 'MELHOR VALOR',
+  },
+  {
+    id: 'coins_pack_small',
+    title: 'Saco da Tasca (20 000 € Acorda)',
+    description: 'Crédito imediato de 20.000 moedas virtuais na tua carteira de jogo.',
+    category: 'coins',
+    currency: 'real_money',
+    priceEuros: 0.99,
+    rarity: 'comum',
+    icon: '💰',
+  },
+  {
+    id: 'coins_pack_medium',
+    title: 'Cofre Forte Nacional (80 000 € Acorda)',
+    description: 'Crédito imediato de 80.000 moedas virtuais + Moldura Néon bónus.',
+    category: 'coins',
+    currency: 'real_money',
+    priceEuros: 2.99,
+    rarity: 'epico',
+    icon: '🏦',
+    badge: '+30% BÓNUS',
+  },
+  {
+    id: 'coins_pack_large',
+    title: 'Tesouro dos Descobrimentos (250 000 € Acorda)',
+    description: 'O maior pacote de moedas para dominares a loja por completo.',
+    category: 'coins',
+    currency: 'real_money',
+    priceEuros: 7.99,
+    rarity: 'lendario',
+    icon: '💎',
+    badge: '+60% BÓNUS',
+  },
 
-export default function ShopPage() {
-  const { user, profile } = useAuth()
+  // --- ITENS ADQUIRÍVEIS POR MOEDAS (€ ACORDA) ---
+  {
+    id: 'frame_flame_sebastiao',
+    title: 'Moldura Chama de D. Sebastião',
+    description: 'Moldura holográfica mítica com chamas rubi/douradas em movimento.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 25000,
+    rarity: 'mitico',
+    icon: '🔥',
+  },
+  {
+    id: 'frame_cyber_galo',
+    title: 'Moldura Cyber Galo de Barcelos',
+    description: 'Crista néon multicolor com rotação de brilho cyberpunk.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 8500,
+    rarity: 'epico',
+    icon: '🐓',
+  },
+  {
+    id: 'frame_wave_nazare',
+    title: 'Moldura Onda da Nazaré',
+    description: 'Vórtice aquático azul-marinho translúcido com reflexos ciano.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 3200,
+    rarity: 'raro',
+    icon: '🌊',
+  },
+  {
+    id: 'theme_arena_fado_alfama',
+    title: 'Arena: Noite de Fado em Alfama',
+    description: 'Muda o fundo das tuas partidas para uma atmosfera aveludada e calçada iluminada.',
+    category: 'theme',
+    currency: 'coins',
+    priceCoins: 12500,
+    rarity: 'epico',
+    icon: '🎸',
+    badge: 'TEMA DE JOGO',
+  },
+  {
+    id: 'consumable_shield_afonso',
+    title: 'Escudo de D. Afonso Henriques',
+    description: 'Anula 1 resposta errada em Duelo 1v1 sem perder o streak de pontos.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 1800,
+    rarity: 'raro',
+    icon: '🛡️',
+  },
+];
 
-  const [activeTab, setActiveTab] = useState<ShopMainTab>('virtual_items')
-  const [selectedCategory, setSelectedCategory] = useState<ItemCategory | 'all'>('all')
-  const [selectedRarity, setSelectedRarity] = useState<ItemRarity | 'all'>('all')
-  const [walletOpen, setWalletOpen] = useState(false)
-  const [purchasingId, setPurchasingId] = useState<string | null>(null)
-  const [equippingId, setEquippingId] = useState<string | null>(null)
-  const [checkoutLoadingId, setCheckoutLoadingId] = useState<string | null>(null)
-  const [authPromptOpen, setAuthPromptOpen] = useState(false)
-  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+export default function LojaPage() {
+  const [activeTab, setActiveTab] = useState<'coins' | 'real_money'>('real_money');
+  const [userCoins, setUserCoins] = useState<number>(4395);
+  const [inventory, setInventory] = useState<string[]>([]);
+  const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
+    frame: 'frame_flame_sebastiao',
+    theme: 'default_tron',
+  });
 
-  // Transaction History State
-  const [transactions, setTransactions] = useState<WalletTransaction[]>([])
-  const [historyLoading, setHistoryLoading] = useState(false)
-  const [historyFilter, setHistoryFilter] = useState<'all' | 'stripe' | 'earn' | 'spend'>('all')
-
-  const effectiveUid = user?.uid || profile?.uid || ''
-  const isPermanentUser = !!user?.uid
-  const balance = profile?.euros ?? 0
-  const inventory: Record<string, number> = (profile as any)?.inventory || {}
-
-  // Carregar histórico de transações quando a aba de histórico é aberta
   useEffect(() => {
-    if (activeTab !== 'history' || !user?.uid) {
-      setTransactions([])
-      setHistoryLoading(false)
-      return
-    }
-
-    setHistoryLoading(true)
-    const q = query(
-      collection(db, 'users', user.uid, 'transactions'),
-      orderBy('createdAt', 'desc'),
-      limit(50),
-    )
-
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const list: any[] = []
-        snapshot.forEach((docSnap) => {
-          const d = docSnap.data()
-          list.push({
-            id: docSnap.id,
-            userId: d.userId,
-            type: d.type || (d.amount >= 0 ? 'earn' : 'spend'),
-            status: d.status || 'completed',
-            amount: d.amount || (d.amountInCents ? d.amountInCents / 100 : 0),
-            amountInCents: d.amountInCents,
-            reason: d.reason || (d.productName ? `Compra: ${d.productName}` : 'Transação'),
-            itemId: d.itemId,
-            productId: d.productId,
-            matchId: d.matchId,
-            stripeSessionId: d.stripeSessionId,
-            createdAt: d.createdAt?.toDate ? d.createdAt.toDate() : new Date(),
-          })
-        })
-        setTransactions(list)
-        setHistoryLoading(false)
-      },
-      (err) => {
-        console.warn('Erro ao carregar transações:', err)
-        setHistoryLoading(false)
-      },
-    )
-
-    return () => unsubscribe()
-  }, [activeTab, user?.uid])
-
-  const filteredItems = SHOP_CATALOG.filter((item) => {
-    if (selectedCategory !== 'all' && item.category !== selectedCategory) return false
-    if (selectedRarity !== 'all' && item.rarity !== selectedRarity) return false
-    return true
-  })
-
-  // Compra com Moeda Virtual (€ Acorda)
-  const handleVirtualPurchase = async (item: ShopItem) => {
-    if (!effectiveUid || !user?.uid) {
-      setAuthPromptOpen(true)
-      return
-    }
-
-    if (balance < item.price) {
-      setFeedback({
-        type: 'error',
-        message: `Não tens € Acorda suficientes. Necessitas de €${item.price.toLocaleString('pt-PT')}.`,
-      })
-      return
-    }
-
     try {
-      setPurchasingId(item.id)
-      setFeedback(null)
-      const res = await buyShopItem(effectiveUid, item.id)
-
-      if (res.success) {
-        setFeedback({ type: 'success', message: res.message })
-      } else {
-        setFeedback({ type: 'error', message: res.message })
-      }
-    } catch (e: any) {
-      setFeedback({ type: 'error', message: e?.message || 'Erro inesperado na transação.' })
-    } finally {
-      setPurchasingId(null)
+      const savedCoins = localStorage.getItem('ap_user_coins');
+      if (savedCoins) setUserCoins(Number(savedCoins));
+      const savedInv = localStorage.getItem('ap_user_inventory');
+      if (savedInv) setInventory(JSON.parse(savedInv));
+    } catch (e) {
+      console.error(e);
     }
-  }
+  }, []);
 
-  // Equipar / Desequipar Cosmético
-  const handleEquipToggle = async (item: ShopItem) => {
-    if (!effectiveUid || !user?.uid) {
-      setAuthPromptOpen(true)
-      return
+  const handleBuyCoinsItem = (item: ShopItem) => {
+    if (!item.priceCoins) return;
+    if (userCoins < item.priceCoins) {
+      alert('Saldo insuficiente de € Acorda!');
+      return;
     }
+    const newCoins = userCoins - item.priceCoins;
+    const newInv = [...inventory, item.id];
+    setUserCoins(newCoins);
+    setInventory(newInv);
+    localStorage.setItem('ap_user_coins', newCoins.toString());
+    localStorage.setItem('ap_user_inventory', JSON.stringify(newInv));
+    alert(`Compraste "${item.title}" com sucesso!`);
+  };
 
-    const slot = getItemSlot(item)
-    if (!slot) return
+  const handleRealMoneyCheckout = (item: ShopItem) => {
+    alert(`A redirecionar para o pagamento seguro de €${item.priceEuros?.toFixed(2)} (${item.title})...`);
+    // Integração Stripe/MB WAY: window.location.href = `/api/checkout?item=${item.id}`;
+  };
 
-    const isCurrentlyEquipped = (profile as any)?.equipped?.[slot] === item.id
+  const handleEquip = (item: ShopItem) => {
+    const updated = { ...equippedItems, [item.category]: item.id };
+    setEquippedItems(updated);
+    localStorage.setItem('ap_equipped_items', JSON.stringify(updated));
+    alert(`Equipaste "${item.title}"!`);
+  };
 
-    try {
-      setEquippingId(item.id)
-      setFeedback(null)
-      const res = await equipItem(effectiveUid, isCurrentlyEquipped ? null : item.id, slot)
-      if (res.success) {
-        setFeedback({
-          type: 'success',
-          message: isCurrentlyEquipped
-            ? `«${item.name}» desequipado.`
-            : `«${item.name}» equipado com sucesso!`,
-        })
-      } else {
-        setFeedback({ type: 'error', message: res.message })
-      }
-    } catch (e: any) {
-      setFeedback({ type: 'error', message: e?.message || 'Erro ao equipar item.' })
-    } finally {
-      setEquippingId(null)
-    }
-  }
+  const filteredItems = SHOP_ITEMS.filter((item) => item.currency === activeTab);
 
-  // Compra com Dinheiro Real (Stripe Checkout)
-  const handleRealPurchase = async (product: RealProduct) => {
-    // Exigir login/registo para associar a compra à conta
-    if (!isPermanentUser) {
-      setAuthPromptOpen(true)
-      return
-    }
-
-    try {
-      setCheckoutLoadingId(product.id)
-      setFeedback(null)
-
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId: product.id,
-          userId: user.uid,
-          userEmail: user.email || profile?.email || '',
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok || !data.success) {
-        if (data.requiresAuth) {
-          setAuthPromptOpen(true)
-        } else {
-          setFeedback({
-            type: 'error',
-            message: data.message || 'Erro ao inicializar sessão de pagamento.',
-          })
-        }
-        return
-      }
-
-      if (data.url) {
-        // Redirecionamento seguro para a página de checkout oficial do Stripe
-        window.location.href = data.url
-      } else {
-        throw new Error('URL de checkout não retornado pelo servidor.')
-      }
-    } catch (err: any) {
-      setFeedback({
-        type: 'error',
-        message: err?.message || 'Erro ao comunicar com o servidor de pagamentos.',
-      })
-    } finally {
-      setCheckoutLoadingId(null)
-    }
-  }
+  const rarityStyles: Record<string, string> = {
+    comum: 'border-zinc-700 text-zinc-300',
+    raro: 'border-cyan-500/40 text-cyan-400 bg-cyan-950/20',
+    epico: 'border-purple-500/40 text-purple-400 bg-purple-950/20',
+    lendario: 'border-amber-500/40 text-amber-400 bg-amber-950/20',
+    mitico: 'border-rose-500/50 text-rose-400 bg-rose-950/20',
+  };
 
   return (
-    <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
-      <BackgroundFx variant="shop" />
-      <div className="relative z-20 flex-1 flex flex-col justify-between">
-        <SiteHeader />
-        <main className="flex-1 pb-20 pt-8 sm:pt-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Shop Hero Header */}
-          <div className="relative overflow-hidden rounded-4xl border border-white/10 bg-card/60 p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-gold/15 blur-3xl" />
+    <main className="min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto bg-transparent text-zinc-100">
+      {/* HEADER DA LOJA */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 bg-zinc-950/60 backdrop-blur-xl p-6 rounded-2xl border border-emerald-500/20">
+        <div>
+          <span className="text-xs font-bold tracking-widest text-emerald-400 uppercase">Economia Oficial & Mercado</span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">LOJA ACORDA PORTUGAL</h1>
+          <p className="text-zinc-400 text-sm mt-1">
+            Adquire itens míticos, arenas de fundo 3D, cosméticos e pacotes VIP com dinheiro real ou moedas ganhas em jogo.
+          </p>
+        </div>
+        <div className="flex items-center gap-4 bg-black/40 px-5 py-3 rounded-xl border border-amber-500/30">
+          <div>
+            <p className="text-[10px] uppercase font-bold text-amber-400 tracking-wider">O Teu Saldo Virtual</p>
+            <p className="text-2xl font-black text-white">€{userCoins.toLocaleString('pt-PT')} <span className="text-xs text-zinc-400">€ Acorda</span></p>
+          </div>
+        </div>
+      </div>
 
-            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      {/* SELETOR DE ABAS PRINCIPAIS */}
+      <div className="flex flex-wrap gap-3 mb-8">
+        <button
+          onClick={() => setActiveTab('real_money')}
+          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+            activeTab === 'real_money'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-105'
+              : 'bg-zinc-900/80 border border-amber-500/30 text-amber-400 hover:bg-zinc-800'
+          }`}
+        >
+          <span>💎</span> PACOTES VIP & EXCLUSIVOS (STRIPE / DINHEIRO REAL)
+        </button>
+        <button
+          onClick={() => setActiveTab('coins')}
+          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+            activeTab === 'coins'
+              ? 'bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-105'
+              : 'bg-zinc-900/80 border border-emerald-500/30 text-emerald-400 hover:bg-zinc-800'
+          }`}
+        >
+          <span>🪙</span> COSMÉTICOS & ARENAS (€ ACORDA)
+        </button>
+      </div>
+
+      {/* GRELHA DE PRODUTOS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredItems.map((item) => {
+          const isOwned = inventory.includes(item.id);
+          const isEquipped = equippedItems[item.category] === item.id;
+
+          return (
+            <div
+              key={item.id}
+              className={`relative flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/70 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.02] ${
+                item.popular ? 'border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.2)]' : 'border-zinc-800 hover:border-emerald-500/40'
+              }`}
+            >
+              {item.badge && (
+                <span className="absolute -top-3 right-4 bg-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  {item.badge}
+                </span>
+              )}
+
               <div>
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">
-                  Economia Oficial & Mercado
-                </p>
-                <h1 className="mt-2 font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-3d-chrome">
-                  Loja Acorda Portugal
-                </h1>
-                <p className="mt-2 max-w-xl text-sm sm:text-base text-muted-foreground">
-                  Adquire molduras, títulos de prestígio, consumíveis e pacotes de moedas para enriqueceres a tua jornada patriótica.
-                </p>
+                <div className="flex justify-between items-center mb-4">
+                  <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[item.rarity]}`}>
+                    {item.rarity}
+                  </span>
+                  <span className="text-3xl">{item.icon}</span>
+                </div>
+
+                <h3 className="text-lg font-bold text-white mb-1.5">{item.title}</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed mb-4">{item.description}</p>
               </div>
 
-              {/* Player Wallet Display Card */}
-              <div className="rounded-3xl border border-gold/30 bg-gradient-to-br from-gold/20 via-card/90 to-primary/15 p-5 text-center sm:text-right backdrop-blur shadow-xl shrink-0">
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.24em] text-gold">
-                  O Teu Saldo Virtual
-                </p>
-                <div className="mt-1 flex items-center justify-center sm:justify-end gap-2">
-                  <Coins className="h-6 w-6 text-gold animate-pulse" />
-                  <span className="font-display text-3xl sm:text-4xl font-black text-foreground">
-                    €{balance.toLocaleString('pt-PT')}
+              <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
+                  <span className="text-base font-extrabold text-white">
+                    {item.currency === 'real_money' ? `€${item.priceEuros?.toFixed(2)}` : `€${item.priceCoins?.toLocaleString('pt-PT')}`}
                   </span>
                 </div>
-                <p className="text-[0.68rem] text-muted-foreground mt-0.5">
-                  € Acorda (Moeda ganha a jogar)
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setWalletOpen(true)}
-                  className="mt-3 inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-foreground hover:bg-white/10 transition cursor-pointer"
-                >
-                  <Wallet className="h-3.5 w-3.5 text-primary" />
-                  <span>Ver Carteira</span>
-                </button>
-              </div>
-            </div>
 
-            {/* Main Navigation Tabs */}
-            <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-white/10 pt-6">
-              <button
-                type="button"
-                onClick={() => setActiveTab('virtual_items')}
-                className={cn(
-                  'inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-xs sm:text-sm font-black uppercase tracking-wider transition cursor-pointer',
-                  activeTab === 'virtual_items'
-                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105'
-                    : 'border border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground',
-                )}
-              >
-                <ShoppingBag className="h-4 w-4" />
-                <span>Itens & Cosméticos (€ Acorda)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('real_packs')}
-                className={cn(
-                  'inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-xs sm:text-sm font-black uppercase tracking-wider transition cursor-pointer',
-                  activeTab === 'real_packs'
-                    ? 'bg-gradient-to-r from-gold to-amber-500 text-black font-black shadow-lg shadow-gold/25 scale-105'
-                    : 'border border-gold/30 bg-gold/10 text-gold hover:bg-gold/20',
-                )}
-              >
-                <CreditCard className="h-4 w-4" />
-                <span>Pacotes de Moedas & VIP (Stripe)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('history')}
-                className={cn(
-                  'inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-xs sm:text-sm font-black uppercase tracking-wider transition cursor-pointer',
-                  activeTab === 'history'
-                    ? 'bg-white/20 text-foreground border border-white/30 shadow-lg scale-105'
-                    : 'border border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground',
-                )}
-              >
-                <History className="h-4 w-4" />
-                <span>Histórico de Compras</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Feedback Message Alert */}
-          {feedback && (
-            <div
-              className={cn(
-                'mt-6 rounded-2xl p-4 text-sm font-bold flex items-center justify-between border transition-all animate-rise',
-                feedback.type === 'success'
-                  ? 'bg-primary/15 border-primary/40 text-primary'
-                  : 'bg-flag-red/15 border-flag-red/40 text-flag-red',
-              )}
-            >
-              <div className="flex items-center gap-2">
-                {feedback.type === 'success' ? (
-                  <CheckCircle2 className="h-5 w-5 shrink-0" />
+                {item.currency === 'real_money' ? (
+                  <button
+                    onClick={() => handleRealMoneyCheckout(item)}
+                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                  >
+                    Comprar por €{item.priceEuros?.toFixed(2)}
+                  </button>
+                ) : isEquipped ? (
+                  <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    ✓ Equipado
+                  </button>
+                ) : isOwned ? (
+                  <button
+                    onClick={() => handleEquip(item)}
+                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-600 transition-all"
+                  >
+                    Equipar
+                  </button>
                 ) : (
-                  <AlertCircle className="h-5 w-5 shrink-0" />
+                  <button
+                    onClick={() => handleBuyCoinsItem(item)}
+                    disabled={userCoins < (item.priceCoins || 0)}
+                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
+                      userCoins >= (item.priceCoins || 0)
+                        ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                        : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
+                    }`}
+                  >
+                    {userCoins >= (item.priceCoins || 0) ? 'Comprar com Moedas' : 'Saldo Insuficiente'}
+                  </button>
                 )}
-                <span>{feedback.message}</span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setFeedback(null)}
-                className="text-xs uppercase tracking-wider opacity-80 hover:opacity-100 cursor-pointer"
-              >
-                Fechar
-              </button>
-            </div>
-          )}
-
-          {/* ========================================================================= */}
-          {/* TAB 1: ITENS & COSMÉTICOS (€ ACORDA) */}
-          {/* ========================================================================= */}
-          {activeTab === 'virtual_items' && (
-            <div className="mt-8 animate-fade">
-              {/* Category Filter Chips */}
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                {CATEGORY_TABS.map((tab) => {
-                  const active = selectedCategory === tab.id
-                  return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      onClick={() => setSelectedCategory(tab.id)}
-                      className={cn(
-                        'flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer outline-none',
-                        active
-                          ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105'
-                          : 'border border-white/10 bg-card/60 text-muted-foreground hover:bg-white/10 hover:text-foreground',
-                      )}
-                    >
-                      <span>{tab.label}</span>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {/* Rarity Filter Chips */}
-              <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                <span className="text-muted-foreground font-semibold">Raridade:</span>
-                {(['all', 'comum', 'raro', 'epico', 'lendario'] as const).map((r) => {
-                  const active = selectedRarity === r
-                  return (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => setSelectedRarity(r)}
-                      className={cn(
-                        'rounded-xl px-3 py-1 font-bold uppercase tracking-wider transition cursor-pointer',
-                        active
-                          ? 'bg-white/15 text-foreground ring-1 ring-white/30'
-                          : 'bg-white/5 text-muted-foreground hover:text-foreground',
-                      )}
-                    >
-                      {r === 'all' ? 'Todas' : r}
-                    </button>
-                  )
-                })}
-              </div>
-
-              {/* Products Catalog Grid */}
-              <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filteredItems.map((item) => {
-                  const rarityStyle = RARITY_COLORS[item.rarity]
-                  const Icon = ICON_MAP[item.icon] || Sparkles
-                  const ownedCount = inventory[item.id] || 0
-                  const isPermanentOwned = item.type === 'permanent' && ownedCount > 0
-                  const isBuying = purchasingId === item.id
-                  const canAfford = balance >= item.price
-
-                  const slot = getItemSlot(item)
-                  const isEquipped = slot ? (profile as any)?.equipped?.[slot] === item.id : false
-                  const isEquipping = equippingId === item.id
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={cn(
-                        'group relative flex flex-col justify-between overflow-hidden rounded-3xl border bg-card/60 p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 shadow-lg',
-                        isEquipped ? 'border-emerald-400 ring-2 ring-emerald-500/30 shadow-[0_0_25px_rgba(16,185,129,0.25)]' : rarityStyle.border,
-                        rarityStyle.glow,
-                      )}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-2">
-                          <span
-                            className={cn(
-                              'rounded-full px-2.5 py-0.5 text-[0.62rem] font-black uppercase tracking-wider',
-                              rarityStyle.bg,
-                              rarityStyle.text,
-                            )}
-                          >
-                            {formatRarityLabel(item.rarity)}
-                          </span>
-                          {item.type === 'consumable' && ownedCount > 0 && (
-                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.62rem] font-bold text-muted-foreground">
-                              No inventário: {ownedCount}×
-                            </span>
-                          )}
-                          {isPermanentOwned && (
-                            <span
-                              className={cn(
-                                'rounded-full px-2 py-0.5 text-[0.62rem] font-black uppercase flex items-center gap-1',
-                                isEquipped
-                                  ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-400/40'
-                                  : 'bg-primary/20 text-primary',
-                              )}
-                            >
-                              <CheckCircle2 className="h-3 w-3" />
-                              {isEquipped ? 'Equipado' : 'Adquirido'}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="mt-4 mx-auto grid h-20 w-20 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] transition-transform duration-300 group-hover:scale-110 shadow-inner">
-                          <Icon className={cn('h-10 w-10', rarityStyle.text)} />
-                        </div>
-
-                        <h3 className="mt-4 font-display text-lg font-bold text-foreground">
-                          {item.name}
-                        </h3>
-                        <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-
-                      <div className="mt-6 border-t border-white/5 pt-4">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">
-                            Preço
-                          </span>
-                          <span className="font-display text-lg font-black text-foreground flex items-center gap-1">
-                            <Coins className="h-4 w-4 text-gold" />
-                            €{item.price.toLocaleString('pt-PT')}
-                          </span>
-                        </div>
-
-                        {isPermanentOwned ? (
-                          <div className="flex flex-col gap-2">
-                            {isEquipped ? (
-                              <div className="flex items-center gap-2">
-                                <div className="flex-1 flex items-center justify-center gap-1.5 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 py-2.5 text-xs font-black uppercase text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                                  <span>Em Uso</span>
-                                </div>
-                                <button
-                                  type="button"
-                                  disabled={isEquipping}
-                                  onClick={() => handleEquipToggle(item)}
-                                  className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-bold text-muted-foreground hover:bg-white/10 hover:text-foreground transition cursor-pointer"
-                                  title="Desequipar este cosmético"
-                                >
-                                  {isEquipping ? '...' : 'Remover'}
-                                </button>
-                              </div>
-                            ) : (
-                              <button
-                                type="button"
-                                disabled={isEquipping}
-                                onClick={() => handleEquipToggle(item)}
-                                className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-2.5 text-xs font-black uppercase tracking-wider text-black shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer font-sans"
-                              >
-                                <Sparkles className="h-4 w-4 fill-current" />
-                                <span>{isEquipping ? 'A equipar...' : 'Equipar'}</span>
-                              </button>
-                            )}
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            disabled={isBuying || !canAfford}
-                            onClick={() => handleVirtualPurchase(item)}
-                            className={cn(
-                              'w-full flex items-center justify-center gap-2 rounded-2xl py-3 text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg',
-                              canAfford
-                                ? 'bg-primary text-primary-foreground shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]'
-                                : 'bg-white/5 text-muted-foreground/60 cursor-not-allowed border border-white/5',
-                            )}
-                          >
-                            {isBuying ? (
-                              <span>A processar...</span>
-                            ) : canAfford ? (
-                              <>
-                                <ShoppingBag className="h-4 w-4" />
-                                <span>Comprar Item</span>
-                              </>
-                            ) : (
-                              <>
-                                <Lock className="h-4 w-4" />
-                                <span>Saldo Insuficiente</span>
-                              </>
-                            )}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
               </div>
             </div>
-          )}
-
-          {/* ========================================================================= */}
-          {/* TAB 2: PACOTES DE MOEDAS & VIP (STRIPE CHECKOUT REAL) */}
-          {/* ========================================================================= */}
-          {activeTab === 'real_packs' && (
-            <div className="mt-8 animate-fade">
-              <div className="rounded-3xl border border-gold/30 bg-gradient-to-r from-gold/15 via-card/80 to-purple-500/15 p-6 mb-8 backdrop-blur">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/20 px-3 py-1 text-xs font-black uppercase tracking-wider text-gold border border-gold/40">
-                      <Shield className="h-3.5 w-3.5" />
-                      Pagamento Seguro com Stripe
-                    </span>
-                    <h2 className="mt-2 font-display text-xl sm:text-2xl font-black text-foreground">
-                      Pacotes Oficiais & Vantagens Exclusivas
-                    </h2>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-                      Pagamentos reais processados e encriptados com Cartão bancário, Apple Pay e Google Pay.
-                    </p>
-                  </div>
-                  <div className="text-xs text-muted-foreground bg-white/5 border border-white/10 rounded-2xl p-3 shrink-0">
-                    <p className="font-bold text-foreground">🛡️ Garantia de Entrega</p>
-                    <p className="text-[0.7rem]">Itens creditados instantaneamente após confirmação.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Real Money Packages Grid */}
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {REAL_PRODUCTS_CATALOG.map((product) => {
-                  const isProcessing = checkoutLoadingId === product.id
-                  const Icon = ICON_MAP[product.icon] || Sparkles
-
-                  return (
-                    <div
-                      key={product.id}
-                      className={cn(
-                        'relative flex flex-col justify-between overflow-hidden rounded-3xl border bg-card/70 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 shadow-xl',
-                        product.bestValue
-                          ? 'border-gold/60 ring-2 ring-gold/40 shadow-gold/15'
-                          : product.popular
-                            ? 'border-primary/50 ring-1 ring-primary/30'
-                            : 'border-white/10',
-                      )}
-                    >
-                      {/* Top Badge */}
-                      <div className="flex items-center justify-between">
-                        {product.badgeText ? (
-                          <span
-                            className={cn(
-                              'rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider',
-                              product.bestValue
-                                ? 'bg-gold/20 text-gold border border-gold/40'
-                                : product.popular
-                                  ? 'bg-primary/20 text-primary border border-primary/40'
-                                  : 'bg-white/10 text-muted-foreground',
-                            )}
-                          >
-                            {product.badgeText}
-                          </span>
-                        ) : <span />}
-
-                        <span className="font-display text-2xl font-black text-foreground">
-                          €{(product.priceInCents / 100).toFixed(2).replace('.', ',')}
-                        </span>
-                      </div>
-
-                      {/* Visual Icon */}
-                      <div className="my-6 mx-auto grid h-20 w-20 place-items-center rounded-3xl border border-white/10 bg-white/[0.03] shadow-inner">
-                        <Icon className={cn('h-10 w-10', product.bestValue ? 'text-gold' : 'text-primary')} />
-                      </div>
-
-                      {/* Product Content Details */}
-                      <div>
-                        <h3 className="font-display text-xl font-black text-foreground">
-                          {product.name}
-                        </h3>
-                        <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                          {product.description}
-                        </p>
-
-                        {/* Rewards Included Box */}
-                        <div className="mt-4 rounded-2xl bg-white/[0.03] border border-white/5 p-3.5 space-y-1.5 text-xs">
-                          <p className="text-[0.68rem] font-black uppercase tracking-wider text-muted-foreground">
-                            Inclui no pacote:
-                          </p>
-                          {product.reward.euros > 0 && (
-                            <div className="flex items-center gap-2 font-bold text-gold">
-                              <Coins className="h-4 w-4" />
-                              <span>+€{product.reward.euros.toLocaleString('pt-PT')} € Acorda</span>
-                            </div>
-                          )}
-                          {product.reward.xp && (
-                            <div className="flex items-center gap-2 font-bold text-primary">
-                              <Sparkles className="h-4 w-4" />
-                              <span>+{product.reward.xp} XP</span>
-                            </div>
-                          )}
-                          {product.reward.vipPass && (
-                            <div className="flex items-center gap-2 font-bold text-purple-400">
-                              <Shield className="h-4 w-4" />
-                              <span>Passe Patriota VIP</span>
-                            </div>
-                          )}
-                          {product.reward.items && (
-                            <div className="text-[0.72rem] text-muted-foreground pt-1 border-t border-white/5">
-                              {Object.entries(product.reward.items).map(([id, q]) => (
-                                <span key={id} className="block text-foreground font-semibold">
-                                  • {q}x {id.replace(/_/g, ' ')}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Checkout CTA Button */}
-                      <button
-                        type="button"
-                        disabled={isProcessing}
-                        onClick={() => handleRealPurchase(product)}
-                        className={cn(
-                          'mt-6 w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 font-display text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-xl',
-                          product.bestValue
-                            ? 'bg-gradient-to-r from-gold to-amber-500 text-black hover:brightness-110 shadow-gold/25'
-                            : 'bg-primary text-primary-foreground hover:brightness-110 shadow-primary/25',
-                        )}
-                      >
-                        {isProcessing ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            <span>A Iniciar Checkout...</span>
-                          </>
-                        ) : (
-                          <>
-                            <CreditCard className="h-4 w-4" />
-                            <span>Comprar por €{(product.priceInCents / 100).toFixed(2).replace('.', ',')}</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* ========================================================================= */}
-          {/* TAB 3: HISTÓRICO DE TRANSAÇÕES */}
-          {/* ========================================================================= */}
-          {activeTab === 'history' && (
-            <div className="mt-8 animate-fade">
-              <div className="overflow-hidden rounded-4xl border border-white/10 bg-card/60 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
-                  <div>
-                    <h2 className="font-display text-xl font-black text-foreground flex items-center gap-2">
-                      <History className="h-5 w-5 text-primary" />
-                      Histórico Oficial de Compras & Transações
-                    </h2>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Registo completo e auditado de pagamentos Stripe e movimentações de saldo no jogo.
-                    </p>
-                  </div>
-
-                  {/* Filter chips */}
-                  <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-2xl border border-white/10 text-xs">
-                    <button
-                      type="button"
-                      onClick={() => setHistoryFilter('all')}
-                      className={cn(
-                        'px-3 py-1.5 rounded-xl font-bold transition cursor-pointer',
-                        historyFilter === 'all' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
-                      )}
-                    >
-                      Todas
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setHistoryFilter('stripe')}
-                      className={cn(
-                        'px-3 py-1.5 rounded-xl font-bold transition cursor-pointer',
-                        historyFilter === 'stripe' ? 'bg-gold text-black' : 'text-muted-foreground hover:text-foreground',
-                      )}
-                    >
-                      Pagamentos Reais
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setHistoryFilter('spend')}
-                      className={cn(
-                        'px-3 py-1.5 rounded-xl font-bold transition cursor-pointer',
-                        historyFilter === 'spend' ? 'bg-white/20 text-foreground' : 'text-muted-foreground hover:text-foreground',
-                      )}
-                    >
-                      Gastos
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setHistoryFilter('earn')}
-                      className={cn(
-                        'px-3 py-1.5 rounded-xl font-bold transition cursor-pointer',
-                        historyFilter === 'earn' ? 'bg-emerald-500 text-white' : 'text-muted-foreground hover:text-foreground',
-                      )}
-                    >
-                      Ganhos
-                    </button>
-                  </div>
-                </div>
-
-                {/* List Container */}
-                <div className="mt-6 space-y-3">
-                  {historyLoading && (
-                    <div className="p-12 text-center text-sm text-muted-foreground">
-                      <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary mb-3" />
-                      A carregar histórico...
-                    </div>
-                  )}
-
-                  {!historyLoading && !isPermanentUser && (
-                    <div className="p-8 text-center rounded-3xl border border-dashed border-white/10 bg-white/[0.02]">
-                      <Lock className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
-                      <p className="font-bold text-foreground">Histórico Protegido</p>
-                      <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
-                        Inicia sessão com a tua conta para consultares o histórico de transações e comprovativos de pagamento.
-                      </p>
-                      <Link
-                        href="/entrar"
-                        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground hover:brightness-110 transition"
-                      >
-                        Entrar na Conta
-                      </Link>
-                    </div>
-                  )}
-
-                  {!historyLoading && isPermanentUser && transactions.length === 0 && (
-                    <div className="p-12 text-center rounded-3xl border border-dashed border-white/10 bg-white/[0.02]">
-                      <Coins className="mx-auto h-10 w-10 text-muted-foreground/40 mb-3" />
-                      <p className="font-bold text-foreground">Sem transações registadas</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        As tuas compras na loja ou recompensas de quizzes aparecerão aqui.
-                      </p>
-                    </div>
-                  )}
-
-                  {!historyLoading &&
-                    isPermanentUser &&
-                    transactions
-                      .filter((t: any) => {
-                        if (historyFilter === 'stripe') return t.type === 'stripe_purchase'
-                        if (historyFilter === 'earn') return t.amount > 0 && t.type !== 'stripe_purchase'
-                        if (historyFilter === 'spend') return t.amount < 0 || t.type === 'spend'
-                        return true
-                      })
-                      .map((t: any) => {
-                        const isStripe = t.type === 'stripe_purchase'
-                        const isEarn = t.amount > 0 && !isStripe
-
-                        return (
-                          <div
-                            key={t.id}
-                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition"
-                          >
-                            <div className="flex items-center gap-3.5">
-                              <div
-                                className={cn(
-                                  'grid h-10 w-10 place-items-center rounded-xl font-bold shrink-0',
-                                  isStripe
-                                    ? 'bg-gold/20 text-gold border border-gold/30'
-                                    : isEarn
-                                      ? 'bg-primary/20 text-primary border border-primary/30'
-                                      : 'bg-flag-red/20 text-flag-red border border-flag-red/30',
-                                )}
-                              >
-                                {isStripe ? <CreditCard className="h-5 w-5" /> : <Coins className="h-5 w-5" />}
-                              </div>
-
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <p className="font-display text-sm font-bold text-foreground">
-                                    {t.reason}
-                                  </p>
-                                  {isStripe && (
-                                    <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[0.62rem] font-black uppercase tracking-wider text-gold border border-gold/40">
-                                      {t.status === 'paid' ? 'Pago' : t.status}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-[0.68rem] text-muted-foreground flex items-center gap-1.5 mt-0.5">
-                                  <Calendar className="h-3 w-3" />
-                                  {t.createdAt?.toLocaleDateString
-                                    ? t.createdAt.toLocaleDateString('pt-PT', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                      })
-                                    : 'Recente'}
-                                  {t.id && (
-                                    <span className="font-mono text-[0.62rem] opacity-60 ml-2">
-                                      ID: {t.id.slice(0, 16)}...
-                                    </span>
-                                  )}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="font-display text-base font-black shrink-0">
-                              {isStripe ? (
-                                <span className="text-gold">
-                                  €{((t.amountInCents || 0) / 100).toFixed(2).replace('.', ',')}
-                                </span>
-                              ) : isEarn ? (
-                                <span className="text-primary">+€{t.amount?.toLocaleString('pt-PT')}</span>
-                              ) : (
-                                <span className="text-flag-red">-€{Math.abs(t.amount || 0).toLocaleString('pt-PT')}</span>
-                              )}
-                            </div>
-                          </div>
-                        )
-                      })}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Legal / Disclaimer Notice */}
-          <div className="mt-16 rounded-3xl border border-white/10 bg-card/40 p-6 text-center backdrop-blur">
-            <p className="text-xs text-muted-foreground max-w-2xl mx-auto flex items-center justify-center gap-2">
-              <Info className="h-4 w-4 text-gold shrink-0" />
-              <span>
-                <strong>Aviso de Transparência:</strong> Os <strong>€ Acorda</strong> são uma moeda virtual de jogo destinada à personalização e progressão dentro da plataforma Acorda Portugal. Todos os pagamentos com dinheiro real são processados com encriptação bancária através do Stripe.
-              </span>
-            </p>
-          </div>
-        </div>
-      </main>
-
-      {/* Guest Account Required Modal for Real Purchases */}
-      {authPromptOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade">
-          <div className="relative w-full max-w-md rounded-4xl border border-gold/40 bg-card/95 p-8 text-center backdrop-blur-2xl shadow-2xl animate-scale-in">
-            <button
-              type="button"
-              onClick={() => setAuthPromptOpen(false)}
-              className="absolute right-5 top-5 grid h-8 w-8 place-items-center rounded-full bg-white/10 text-muted-foreground hover:text-foreground transition cursor-pointer"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-gold/20 text-gold border border-gold/40">
-              <Lock className="h-8 w-8" />
-            </div>
-
-            <h3 className="mt-4 font-display text-xl font-black text-foreground">
-              Conta Necessária para Compras
-            </h3>
-
-            <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Para adquirir pacotes com dinheiro real e garantir que os teus itens, saldo e distintivos ficam guardados permanentemente, entra ou cria a tua conta.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-2.5">
-              <Link
-                href="/entrar"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3.5 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-xl shadow-primary/25 hover:brightness-110 transition"
-              >
-                <span>Entrar ou Criar Conta</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <button
-                type="button"
-                onClick={() => setAuthPromptOpen(false)}
-                className="w-full rounded-2xl bg-white/5 py-3 text-xs font-bold text-muted-foreground hover:bg-white/10 transition cursor-pointer"
-              >
-                Voltar à Loja
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Wallet Modal Drawer */}
-      <WalletModal open={walletOpen} onOpenChange={setWalletOpen} />
-
-      <SiteFooter />
+          );
+        })}
       </div>
-    </div>
-  )
+    </main>
+  );
 }
-

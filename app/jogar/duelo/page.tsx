@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { BackgroundFx } from '@/components/background-fx'
+import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
@@ -28,6 +29,7 @@ function DuelPageContent() {
   if (!effectiveDuelId) {
     return (
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
+        <ArenaDynamicBackground />
         <BackgroundFx variant="multiplayer" />
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
@@ -90,6 +92,7 @@ function DuelPageContent() {
 
   return (
     <div className="relative min-h-screen bg-transparent">
+      <ArenaDynamicBackground />
       <BackgroundFx variant="multiplayer" />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <DuelArena

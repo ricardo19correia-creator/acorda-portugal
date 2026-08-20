@@ -8,38 +8,43 @@ export function useOnlineUsers() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Gera ou recupera um ID único por aba/dispositivo
-    let sessionId = sessionStorage.getItem('client_presence_id')
-    if (!sessionId) {
-      sessionId = 'sess_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now()
-      sessionStorage.setItem('client_presence_id', sessionId)
+    let devId = localStorage.getItem('ap_dev_id') || localStorage.getItem('ap_device_id')
+    if (!devId) {
+      devId = 'dev_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36)
+      localStorage.setItem('ap_dev_id', devId)
+      localStorage.setItem('ap_device_id', devId)
     }
 
-    const sendPing = async () => {
+    let isMounted = true
+
+    const updatePresence = async () => {
       try {
-        const res = await fetch('/api/presence/ping', {
+        const res = await fetch('/api/presence', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId }),
+          body: JSON.stringify({ clientId: devId }),
+          cache: 'no-store',
         })
-        if (res.ok) {
+        if (res.ok && isMounted) {
           const data = await res.json()
-          if (data && typeof data.onlineCount === 'number') {
+          if (typeof data?.online === 'number') {
+            setOnlineCount(Math.max(1, data.online))
+          } else if (typeof data?.onlineCount === 'number') {
             setOnlineCount(Math.max(1, data.onlineCount))
           }
         }
-      } catch (err) {
-        console.error('Erro ao atualizar contador online:', err)
+      } catch (e) {
+        // fallback
       }
     }
 
-    // Ping imediato ao carregar
-    sendPing()
+    updatePresence()
+    const interval = setInterval(updatePresence, 3000)
 
-    // Ping a cada 5 segundos
-    const interval = setInterval(sendPing, 5000)
-
-    return () => clearInterval(interval)
+    return () => {
+      isMounted = false
+      clearInterval(interval)
+    }
   }, [])
 
   return onlineCount

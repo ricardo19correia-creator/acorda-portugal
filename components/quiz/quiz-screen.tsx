@@ -18,6 +18,7 @@ import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { usePresence } from '@/components/presence-provider'
+import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
@@ -43,9 +44,14 @@ import {
   ResultScreen,
   type QuizResult,
 } from '@/components/quiz/result-screen'
+import {
+  QUESTION_TIME_SECONDS,
+  calculateTimeBonus,
+  WARNING_TIME_THRESHOLD,
+} from '@/config/quiz'
 import { cn } from '@/lib/utils'
 
-const MAX_SECONDS = 20
+const MAX_SECONDS = QUESTION_TIME_SECONDS
 const QUESTIONS_PER_GAME = 20
 
 type Phase = 'answering' | 'revealed' | 'finished'
@@ -228,6 +234,7 @@ export function QuizScreen({
 
   const { user, profile, authResolved } = useAuth()
   const { setActivity } = usePresence()
+  const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
@@ -262,7 +269,7 @@ export function QuizScreen({
     }
   }, [gameId, setActivity])
 
-  const [seconds, setSeconds] = useState(MAX_SECONDS)
+  const [seconds, setSeconds] = useState(60)
   const [score, setScore] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
   const [streak, setStreak] = useState(0)
@@ -270,6 +277,11 @@ export function QuizScreen({
 
   const total = quizQuestions.length
   const q = quizQuestions[step]
+
+  // Garantir que a cada nova pergunta o cronómetro começa estritamente nos 60s
+  useEffect(() => {
+    setSeconds(60)
+  }, [step])
 
   const wasCorrect = selected === q?.correct
 
@@ -344,9 +356,7 @@ export function QuizScreen({
       const hit = choice === q.correct
 
       if (hit) {
-        const timeBonus = Math.round(
-          (seconds / MAX_SECONDS) * 200,
-        )
+        const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
 
         const nextStreak = streak + 1
 
@@ -357,17 +367,31 @@ export function QuizScreen({
 
         setCorrectCount((current) => current + 1)
         setStreak(nextStreak)
+        setCurrentStreak(nextStreak)
 
         setBestStreak((best) =>
           Math.max(best, nextStreak),
         )
+
+        // Som de acerto ou último segundo
+        if (seconds <= WARNING_TIME_THRESHOLD) {
+          playSound('last_second_correct')
+        } else {
+          playSound('correct')
+        }
+
+        if (nextStreak > 1 && nextStreak % 3 === 0) {
+          setTimeout(() => playSound('streak'), 400)
+        }
       } else {
         setStreak(0)
+        setCurrentStreak(0)
+        playSound('wrong')
       }
 
       setPhase('revealed')
     },
-    [phase, q, seconds, streak],
+    [phase, q, seconds, streak, playSound, setCurrentStreak],
   )
 
   // Main Question Countdown Timer (Pausado se isFrozen === true)
@@ -404,7 +428,7 @@ export function QuizScreen({
     setActiveClue(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
-    setSeconds(MAX_SECONDS)
+    setSeconds(60)
     setPhase('answering')
   }
 
@@ -418,7 +442,7 @@ export function QuizScreen({
     setActiveClue(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
-    setSeconds(MAX_SECONDS)
+    setSeconds(60)
     setScore(0)
     setCorrectCount(0)
     setStreak(0)
@@ -597,8 +621,22 @@ export function QuizScreen({
         {/* Dynamic HUD badges */}
         <div className="flex items-center gap-2">
           {streak > 1 && (
-            <div className="flex items-center gap-1.5 rounded-2xl border border-flag-red/40 bg-flag-red/15 px-3 py-2 text-xs font-black text-flag-red shadow-[0_0_15px_rgba(244,63,94,0.25)] animate-pop">
-              <Flame className="h-4 w-4 fill-current" />
+            <div
+              className={cn(
+                'flex items-center gap-1.5 rounded-2xl border px-3 py-2 text-xs font-black animate-pop',
+                streakEffectId === 'streak_chama_tripla' && streak >= 3
+                  ? 'border-emerald-400/80 bg-emerald-500/25 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.6)] animate-pulse'
+                  : streakEffectId === 'streak_moedas_ouro' && streak >= 3
+                    ? 'border-gold/80 bg-gold/25 text-gold shadow-[0_0_25px_rgba(234,179,8,0.6)] animate-bounce'
+                    : 'border-flag-red/40 bg-flag-red/15 text-flag-red shadow-[0_0_15px_rgba(244,63,94,0.25)]',
+              )}
+            >
+              <Flame
+                className={cn(
+                  'h-4 w-4 fill-current',
+                  streakEffectId === 'streak_chama_tripla' && streak >= 3 && 'text-emerald-400 animate-spin',
+                )}
+              />
               <span>{streak}x Seguidas</span>
             </div>
           )}

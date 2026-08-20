@@ -168,6 +168,18 @@ function SuccessContent() {
                         <span>+{data.product.reward.xp} XP de Nível</span>
                       </li>
                     )}
+                    {data.product.reward.isFounder && (
+                      <li className="flex items-center gap-2 text-amber-300">
+                        <Shield className="h-4 w-4 text-amber-400" />
+                        <span>Estatuto Fundador (+25% XP e Moedas Vitalício)</span>
+                      </li>
+                    )}
+                    {data.product.reward.authorLicense && (
+                      <li className="flex items-center gap-2 text-purple-300">
+                        <Sparkles className="h-4 w-4 text-purple-400" />
+                        <span>Licença de Autor de Perguntas Ativada</span>
+                      </li>
+                    )}
                     {data.product.reward.vipPass && (
                       <li className="flex items-center gap-2">
                         <Shield className="h-4 w-4 text-purple-400" />
@@ -175,9 +187,18 @@ function SuccessContent() {
                       </li>
                     )}
                     {data.product.reward.badge && (
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center gap-2 text-gold">
                         <Sparkles className="h-4 w-4 text-gold" />
-                        <span>Distintivo: «{data.product.reward.badge}»</span>
+                        <span>Distintivo Exclusivo: «{data.product.reward.badge}»</span>
+                      </li>
+                    )}
+                    {data.product.reward.items && (
+                      <li className="text-[0.72rem] text-muted-foreground pt-1 border-t border-white/10">
+                        {Object.entries(data.product.reward.items).map(([itemId, qty]) => (
+                          <span key={itemId} className="block text-foreground font-semibold">
+                            • {qty}x {itemId.replace(/_/g, ' ')}
+                          </span>
+                        ))}
                       </li>
                     )}
                   </ul>
