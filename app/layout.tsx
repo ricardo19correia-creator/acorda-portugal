@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { PresenceProvider } from '@/components/presence-provider'
+import TawkChat from '@/components/TawkChat'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <AuthProvider>
           <PresenceProvider>{children}</PresenceProvider>
         </AuthProvider>
+        <TawkChat />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
