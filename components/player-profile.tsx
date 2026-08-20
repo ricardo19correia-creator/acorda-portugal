@@ -63,6 +63,7 @@ import {
   type WalletTransaction,
 } from '@/lib/economy'
 import { getEquippedCosmetics, getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { getInventory, equipTheme, type InventoryState } from '@/lib/inventory'
 import { cn } from '@/lib/utils'
 
 const districts = [
@@ -246,6 +247,15 @@ export function PlayerProfile() {
     return () => unsubscribe()
   }, [user?.uid])
 
+  const [invState, setInvState] = useState<InventoryState>(() => getInventory())
+
+  useEffect(() => {
+    const sync = () => setInvState(getInventory())
+    sync()
+    window.addEventListener('inventory_updated', sync)
+    return () => window.removeEventListener('inventory_updated', sync)
+  }, [])
+
   const accuracy = useMemo(() => {
     const total = (player as any)?.totalQuestions ?? (player as any)?.questionsAnswered ?? 0
     const correct = player?.correctAnswers ?? 0
@@ -427,8 +437,16 @@ export function PlayerProfile() {
 
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-            <Avatar profile={player} />
+            <div className={invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder ? 'rounded-full p-1 bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-600 shadow-[0_0_25px_rgba(245,158,11,0.7)] animate-pulse' : ''}>
+              <Avatar profile={player} />
+            </div>
             <div className="min-w-0 flex-1">
+              {(invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder) && (
+                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500/30 via-yellow-400/30 to-amber-500/30 px-3 py-1 text-amber-300 font-black text-[11px] uppercase tracking-widest border border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                  <span>👑</span>
+                  <span>FUNDADOR DA NAÇÃO (VIP VITALÍCIO)</span>
+                </div>
+              )}
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <span className="text-xs font-black uppercase tracking-[0.28em] text-primary">
                   {equippedTitleItem ? equippedTitleItem.name.replace('Título: ', '') : progressInfo.currentLevel.title}
@@ -445,13 +463,6 @@ export function PlayerProfile() {
               </h1>
 
               <div className="mt-3 flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm font-bold">
-                {((player as any)?.is_founder || (player as any)?.isFounder) && (
-                  <span className="rounded-full bg-gradient-to-r from-amber-500/25 via-yellow-400/25 to-amber-500/25 px-3 py-1 text-amber-300 font-black border border-amber-400/60 shadow-[0_0_15px_rgba(245,158,11,0.4)] flex items-center gap-1.5">
-                    <Crown className="h-3.5 w-3.5 text-amber-400 fill-current" />
-                    <span>Fundador (+25% XP/Moedas)</span>
-                  </span>
-                )}
-
                 {((player as any)?.can_submit_questions || (player as any)?.hasAuthorLicense) && (
                   <span className="rounded-full bg-purple-500/20 px-3 py-1 text-purple-300 font-black border border-purple-400/50 flex items-center gap-1.5">
                     <Sparkles className="h-3.5 w-3.5 text-purple-400" />
@@ -1180,6 +1191,83 @@ export function PlayerProfile() {
                 </div>
               </div>
             )
+          })}
+        </div>
+      </Section>
+
+      {/* SEÇÃO VIP & ARENAS DE JOGO */}
+      <Section
+        title="O Meu Inventário & Arenas de Jogo"
+        description="Seleciona e equipa o teu fundo de partida exclusivo para brilhares em qualquer quiz."
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { id: 'theme_arena_lisboa_cyber_free', name: 'Arena VIP: Lisboa Neon 2088', icon: '🌉', desc: 'Silhuetas cyberpunk e reflexos ciano no Tejo.' },
+            { id: 'theme_arena_gold_temple', name: 'Arena VIP: Templo de Ouro Real', icon: '🏛️', desc: 'Reflexos em ouro escovado 3D e luz volumétrica.' },
+            { id: 'theme_volcano_acores', name: 'Arena: Fogo dos Açores', icon: '🌋', desc: 'Basalto ardente e pulso térmico de lava.' },
+            { id: 'theme_noite_fado', name: 'Arena: Noite de Fado em Alfama', icon: '🎸', desc: 'Atmosfera aveludada ambarina e calçada portuguesa.' },
+            { id: 'theme_arena_cosmic_matrix', name: 'Arena VIP: Matriz Cósmica Portuguesa', icon: '🌌', desc: 'Nebulosa cósmica e constelações das caravelas.' },
+            { id: 'default_tron', name: 'Arena Padrão Tron Cyber', icon: '🟩', desc: 'Grelha clássica verde esmeralda nacional.' },
+          ].map((arena) => {
+            const isOwned = invState.ownedItems.includes(arena.id) || arena.id === 'default_tron';
+            const isEquipped = (invState.equippedTheme || 'default_tron') === arena.id;
+
+            return (
+              <div
+                key={arena.id}
+                className={cn(
+                  'relative flex flex-col justify-between p-5 rounded-3xl border backdrop-blur-xl transition-all shadow-lg',
+                  isEquipped
+                    ? 'border-emerald-400/80 bg-emerald-950/20 ring-2 ring-emerald-400/40 shadow-[0_0_20px_rgba(16,185,129,0.25)]'
+                    : isOwned
+                    ? 'border-white/15 bg-card/65 hover:border-white/30'
+                    : 'border-white/5 bg-card/30 opacity-60'
+                )}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-3xl">{arena.icon}</span>
+                    {isEquipped ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/50">
+                        ✓ Equipada
+                      </span>
+                    ) : isOwned ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/10 text-zinc-300">
+                        Desbloqueada
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-zinc-800 text-zinc-500">
+                        Na Loja
+                      </span>
+                    )}
+                  </div>
+                  <h4 className="font-display font-black text-base text-foreground mt-2">{arena.name}</h4>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{arena.desc}</p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  {isEquipped ? (
+                    <button disabled className="w-full py-2.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-default">
+                      ✓ Em Uso no Jogo
+                    </button>
+                  ) : isOwned ? (
+                    <button
+                      onClick={() => equipTheme(arena.id)}
+                      className="w-full py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-500 hover:bg-emerald-400 text-black shadow-md transition-all active:scale-95"
+                    >
+                      Equipar Arena
+                    </button>
+                  ) : (
+                    <Link
+                      href="/loja"
+                      className="block text-center w-full py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-zinc-800 hover:bg-zinc-700 text-white transition-all"
+                    >
+                      Ver na Loja
+                    </Link>
+                  )}
+                </div>
+              </div>
+            );
           })}
         </div>
       </Section>

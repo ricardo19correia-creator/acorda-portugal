@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import MbwayModal from '@/components/MbwayModal';
+import { getInventory, unlockItem, equipTheme, type InventoryState } from '@/lib/inventory';
 
 interface ShopItem {
   id: string;
@@ -280,7 +281,7 @@ const ALL_SHOP_ITEMS: ShopItem[] = [
 export default function LojaPage() {
   const [activeTab, setActiveTab] = useState<'real_money' | 'all' | 'consumable' | 'frame' | 'title' | 'theme'>('real_money');
   const [userCoins, setUserCoins] = useState<number>(4395);
-  const [inventory, setInventory] = useState<string[]>(['frame_green_hope', 'frame_wave_nazare', 'title_guardiao_lusitano', 'theme_noite_fado']);
+  const [invState, setInvState] = useState<InventoryState>(() => getInventory());
   const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
     frame: 'frame_wave_nazare',
     title: 'title_guardiao_lusitano',
@@ -291,11 +292,23 @@ export default function LojaPage() {
   const [isMbwayOpen, setIsMbwayOpen] = useState(false);
 
   useEffect(() => {
+    const sync = () => {
+      setInvState(getInventory());
+    };
+    sync();
+    window.addEventListener('inventory_updated', sync);
+    return () => window.removeEventListener('inventory_updated', sync);
+  }, []);
+
+  useEffect(() => {
     try {
       const savedCoins = localStorage.getItem('ap_user_coins');
       if (savedCoins) setUserCoins(Number(savedCoins));
-      const savedInv = localStorage.getItem('ap_user_inventory');
-      if (savedInv) setInventory(JSON.parse(savedInv));
+      const savedEquipped = localStorage.getItem('ap_equipped_items');
+      if (savedEquipped) {
+        const parsed = JSON.parse(savedEquipped);
+        setEquippedItems((prev) => ({ ...prev, ...parsed }));
+      }
     } catch (e) {
       console.error(e);
     }
@@ -308,20 +321,23 @@ export default function LojaPage() {
       return;
     }
     const newCoins = userCoins - item.priceCoins;
-    const newInv = [...inventory, item.id];
     setUserCoins(newCoins);
-    setInventory(newInv);
     localStorage.setItem('ap_user_coins', newCoins.toString());
-    localStorage.setItem('ap_user_inventory', JSON.stringify(newInv));
+
+    unlockItem(item.id);
+    if (item.category === 'theme') {
+      equipTheme(item.id);
+    }
+
     alert(`Compraste "${item.title}" com sucesso!`);
   };
 
   const handleClaimFree = (item: ShopItem) => {
-    if (inventory.includes(item.id)) return;
-    const newInv = [...inventory, item.id];
-    setInventory(newInv);
-    localStorage.setItem('ap_user_inventory', JSON.stringify(newInv));
-    alert(`Parabéns! Resgataste "${item.title}" gratuitamente! Podes equipá-la de imediato.`);
+    unlockItem(item.id, item.id === 'vip_founder_pass');
+    if (item.category === 'theme') {
+      equipTheme(item.id);
+    }
+    alert(`Parabéns! Resgataste "${item.title}" gratuitamente! A arena foi equipada.`);
   };
 
   const handleRealMoneyCheckout = (item: ShopItem) => {
@@ -330,6 +346,9 @@ export default function LojaPage() {
   };
 
   const handleEquip = (item: ShopItem) => {
+    if (item.category === 'theme') {
+      equipTheme(item.id);
+    }
     const updated = { ...equippedItems, [item.category]: item.id };
     setEquippedItems(updated);
     localStorage.setItem('ap_equipped_items', JSON.stringify(updated));
@@ -436,8 +455,8 @@ export default function LojaPage() {
       {/* GRELHA */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredItems.map((item) => {
-          const isOwned = inventory.includes(item.id);
-          const isEquipped = equippedItems[item.category] === item.id;
+          const isOwned = invState.ownedItems.includes(item.id);
+          const isEquipped = item.category === 'theme' ? invState.equippedTheme === item.id : equippedItems[item.category] === item.id;
 
           return (
             <div
