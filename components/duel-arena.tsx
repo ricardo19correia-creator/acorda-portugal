@@ -199,6 +199,58 @@ export function DuelArena({
     }
   }, [currentQIndex, isFinishedForMe])
 
+  // 3. Simulação realista de respostas do Bot (quando o adversário é um Bot simulado)
+  const botTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const botAnsweredIndexRef = useRef<number>(-1)
+
+  useEffect(() => {
+    if (
+      !duel ||
+      !opponent ||
+      !opponent.uid.startsWith('bot_') ||
+      opponent.finished ||
+      duel.status === 'finished' ||
+      !duel.questions
+    ) {
+      return
+    }
+
+    const botQIndex = opponent.currentQuestionIndex
+    if (botQIndex >= duel.questions.length || botAnsweredIndexRef.current === botQIndex) {
+      return
+    }
+
+    const currentBotQ = duel.questions[botQIndex]
+    if (!currentBotQ) return
+
+    // Tempo de resposta realista entre 2.5s e 5.0s por pergunta
+    const humanDelayMs = Math.floor(Math.random() * 2500) + 2500
+
+    botTimerRef.current = setTimeout(() => {
+      botAnsweredIndexRef.current = botQIndex
+      // ~70% de taxa de acerto humano realista
+      const isCorrect = Math.random() < 0.72
+      let chosenKey: 'A' | 'B' | 'C' | 'D' = currentBotQ.correct
+
+      if (!isCorrect) {
+        const wrongKeys = (['A', 'B', 'C', 'D'] as const).filter((k) => k !== currentBotQ.correct)
+        chosenKey = wrongKeys[Math.floor(Math.random() * wrongKeys.length)]
+      }
+
+      const timeSpent = Math.round(humanDelayMs / 1000)
+      submitDuelAnswer(duel.id, opponent.uid, botQIndex, chosenKey, timeSpent).catch((err) => {
+        console.warn('[BOT SIMULATOR] Erro ao submeter resposta do bot:', err)
+      })
+    }, humanDelayMs)
+
+    return () => {
+      if (botTimerRef.current) {
+        clearTimeout(botTimerRef.current)
+        botTimerRef.current = null
+      }
+    }
+  }, [duel?.id, duel?.status, opponent?.uid, opponent?.currentQuestionIndex, opponent?.finished])
+
   // Handlers dos Power-Ups no Duelo
   const handleUse5050 = async () => {
     if (feedback !== null || isSubmitting || eliminatedOptions.length > 0 || !currentQuestion) return

@@ -25,6 +25,7 @@ import {
   cancelMatchmakingQueue,
   subscribeToMatchmaking,
   tryFindOpponentMatch,
+  createBotDuelMatch,
   createDuel,
   joinDuelByCode,
 } from '@/lib/duel'
@@ -185,33 +186,55 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       }
     })
 
-    // Executar verificação contínua e tentativa de pareamento via polling (1.2s)
+    const searchSecondsRef = { current: 0 }
+
+    // Executar verificação contínua e tentativa de pareamento via polling (1.0s)
     const runSearch = () => {
       if (matchAttemptIdRef.current !== currentAttemptId || matchedDuelIdRef.current) return
+
+      // 1. Tentar emparelhamento humano com qualquer jogador disponível
       tryFindOpponentMatch(playerObj, profileObj, currentAttemptId)
         .then((res) => {
           if (res.matched && res.duelId && res.opponentInfo) {
             console.log('[MATCH FOUND VIA POLLING ATOMIC PAIR] duelId:', res.duelId)
             handleMatchFound(res.duelId, res.opponentInfo, res.ticket || undefined)
+          } else if (searchSecondsRef.current >= 6 && !matchedDuelIdRef.current) {
+            // 2. Fallback obrigatório para Bot (máximo 6-8 segundos sem esperar)
+            console.log('[MATCH BOT FALLBACK] Criando partida simulada contra bot aos', searchSecondsRef.current, 's')
+            createBotDuelMatch(playerObj, profileObj, currentAttemptId)
+              .then((botRes) => {
+                if (botRes.matched && botRes.duelId && botRes.opponentInfo) {
+                  console.log('[MATCH BOT CREATED VIA POLLING FALLBACK] duelId:', botRes.duelId)
+                  handleMatchFound(botRes.duelId, botRes.opponentInfo, botRes.ticket || undefined)
+                }
+              })
+              .catch((err) => console.error('[MATCH BOT FALLBACK ERROR]:', err))
           }
         })
         .catch((err) => console.warn('[MATCH] ERRO NO POLLING:', err))
     }
 
-    // Intervalo de 1.2s para emparelhamento
-    pollIntervalRef.current = setInterval(runSearch, 1200)
+    // Intervalo de 1.0s para emparelhamento
+    pollIntervalRef.current = setInterval(runSearch, 1000)
 
-    // Contador de segundos e timeout após 60s
+    // Contador de segundos e acionamento automático de Bot
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
-        if (s >= 60) {
-          if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
-          setMmState('timeout')
-          if (playerUid && !matchedDuelIdRef.current) {
-            cancelMatchmakingQueue(playerUid).catch(() => {})
-          }
+        const next = s + 1
+        searchSecondsRef.current = next
+
+        if (next >= 6 && !matchedDuelIdRef.current && matchAttemptIdRef.current === currentAttemptId) {
+          createBotDuelMatch(playerObj, profileObj, currentAttemptId)
+            .then((botRes) => {
+              if (botRes.matched && botRes.duelId && botRes.opponentInfo) {
+                console.log('[MATCH BOT CREATED VIA TIMER FALLBACK] duelId:', botRes.duelId)
+                handleMatchFound(botRes.duelId, botRes.opponentInfo, botRes.ticket || undefined)
+              }
+            })
+            .catch((err) => console.error('[MATCH BOT FALLBACK ERROR]:', err))
         }
-        return s + 1
+
+        return next
       })
     }, 1000)
 
