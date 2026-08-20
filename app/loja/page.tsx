@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ArrowLeft, Home } from 'lucide-react';
 import MbwayModal from '@/components/MbwayModal';
 import { getInventory, unlockItem, equipTheme, unlockAvatar, equipAvatar, type InventoryState } from '@/lib/inventory';
 import { AVATAR_CATALOG, AVATARS_2050, type AvatarItem } from '@/lib/avatars';
@@ -413,6 +415,17 @@ export default function LojaPage() {
 
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto bg-transparent text-zinc-100">
+      {/* BOTÃO DE NAVEGAÇÃO NO TOPO */}
+      <div className="mb-4 flex items-center justify-between">
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 transition-all duration-200 text-sm font-medium backdrop-blur-md shadow-sm hover:border-emerald-500/50"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Voltar ao Início</span>
+        </Link>
+      </div>
+
       {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 bg-zinc-950/60 backdrop-blur-xl p-6 rounded-2xl border border-emerald-500/20">
         <div>
