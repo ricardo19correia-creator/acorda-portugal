@@ -5,26 +5,41 @@ import { QuizPage } from '@/components/quiz/page';
 import CinematicLibraryCinemagraph from '@/components/CinematicLibraryCinemagraph';
 
 export default function JogarPage() {
-  // Fallback imediato para cyberpunk para garantir visual espetacular
-  const [theme, setTheme] = useState<string>('theme_arena_lisboa_cyber_free');
+  const [theme, setTheme] = useState<string>('arena_ponte_2077');
 
   useEffect(() => {
-    try {
-      const inv = localStorage.getItem('ap_user_inventory_v3') || localStorage.getItem('ap_equipped_items');
-      if (inv) {
-        const parsed = JSON.parse(inv);
-        if (parsed.equippedTheme) setTheme(parsed.equippedTheme);
-        else if (parsed.theme) setTheme(parsed.theme);
+    const sync = () => {
+      try {
+        const equippedArena = localStorage.getItem('equipped_arena');
+        if (equippedArena) {
+          setTheme(equippedArena);
+          return;
+        }
+        const inv = localStorage.getItem('ap_user_inventory_v3') || localStorage.getItem('ap_equipped_items');
+        if (inv) {
+          const parsed = JSON.parse(inv);
+          if (parsed.equippedTheme) setTheme(parsed.equippedTheme);
+          else if (parsed.theme) setTheme(parsed.theme);
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
+    };
+    sync();
+    window.addEventListener('arenaChanged', sync);
+    window.addEventListener('inventory_updated', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener('arenaChanged', sync);
+      window.removeEventListener('inventory_updated', sync);
+      window.removeEventListener('storage', sync);
+    };
   }, []);
 
   return (
     <main className="relative min-h-screen w-full bg-[#020512] overflow-x-hidden text-white">
       {/* ========================================================= */}
-      {/* CENÁRIO OFICIAL: ARENA LISBOA NEON 2088 & OUTRAS ARENAS */}
+      {/* CENÁRIO OFICIAL: ARENA PONTE DO INFINITO 2077 & OUTRAS */}
       {/* ========================================================= */}
       <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none select-none bg-[#020512]">
         {/* 0. ARENA CINEMAGRAPH: BIBLIOTECA SAGRADA & ALTAR DOS REIS */}
@@ -32,15 +47,15 @@ export default function JogarPage() {
           <CinematicLibraryCinemagraph />
         )}
 
-        {/* 1. ARENA LISBOA CYBERPUNK 2088 (IMAGEM OFICIAL) */}
-        {theme === 'theme_arena_lisboa_cyber_free' && (
+        {/* 1. ARENA PONTE DO INFINITO 2077 (IMAGEM OFICIAL) */}
+        {(theme === 'arena_ponte_2077' || theme === 'theme_arena_lisboa_cyber_free' || !theme) && (
           <div className="relative w-full h-full">
             {/* 1. Imagem Oficial com Movimento Lento de Profundidade */}
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
               style={{
-                backgroundImage: `url('/arenas/lisboa-cyber.jpg')`,
-                filter: 'brightness(0.42) contrast(1.2) saturate(1.35)',
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('/arenas/arena-ponte-2077.jpg')`,
+                filter: 'brightness(0.75) contrast(1.15) saturate(1.2)',
               }}
             />
 

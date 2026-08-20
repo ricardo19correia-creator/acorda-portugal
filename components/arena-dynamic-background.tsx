@@ -292,6 +292,24 @@ export function ArenaDynamicBackground({
     }
   }, [effectiveThemeId])
 
+  const [arenaImg, setArenaImg] = useState<string>('/arenas/arena-ponte-2077.jpg')
+
+  useEffect(() => {
+    const sync = () => {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('equipped_arena_image') || '/arenas/arena-ponte-2077.jpg'
+        setArenaImg(saved)
+      }
+    }
+    sync()
+    window.addEventListener('arenaChanged', sync)
+    window.addEventListener('storage', sync)
+    return () => {
+      window.removeEventListener('arenaChanged', sync)
+      window.removeEventListener('storage', sync)
+    }
+  }, [])
+
   return (
     <div
       aria-hidden="true"
@@ -300,6 +318,15 @@ export function ArenaDynamicBackground({
         className,
       )}
     >
+      {/* Cenário de Fundo da Arena Equipado */}
+      <div 
+        className="absolute inset-0 w-full h-full opacity-35 bg-cover bg-center transition-all duration-700"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${arenaImg}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
       {/* VULCÃO DOS AÇORES: REBORDO DE ECRÃ A PULSAR EM VERMELHO-LAVA NOS STREAKS ALTOS (>= 3) */}

@@ -261,29 +261,49 @@ const ALL_SHOP_ITEMS: ShopItem[] = [
     rarity: 'lendario',
     icon: '👑',
   },
+];
 
-  // ==================== 5. TEMAS E ARENAS ====================
+// ==================== 5. TEMAS E ARENAS 2077 HD ====================
+export interface ArenaItem {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  image: string;
+  price: string;
+  priceValue: number;
+  currency: 'free' | 'points' | 'eur' | 'vip';
+  badge?: string;
+  glowBorder?: string;
+  rarity: 'comum' | 'raro' | 'epico' | 'lendario' | 'mitico';
+}
+
+export const ARENAS_2077: ArenaItem[] = [
   {
-    id: 'theme_noite_fado',
-    title: 'Arena: Noite de Fado em Alfama',
-    description: 'Aparência visual exclusiva com tons aveludados e atmosfera de Alfama ao jogar.',
-    category: 'theme',
-    currency: 'coins',
-    priceCoins: 5000,
-    rarity: 'epico',
-    icon: '🎸',
-    badge: 'TEMA DE JOGO',
+    id: 'arena_ponte_2077',
+    name: 'Ponte do Infinito 2077',
+    category: 'arena',
+    description: 'Cenário cyberpunk sobre o Tejo sob nevoeiro denso, lasers e arranha-céus colossais.',
+    image: '/arenas/arena-ponte-2077.jpg',
+    price: 'GRÁTIS',
+    priceValue: 0,
+    currency: 'free',
+    badge: 'Exclusivo',
+    glowBorder: 'border-cyan-500/70 shadow-[0_0_20px_rgba(6,182,212,0.35)]',
+    rarity: 'lendario',
   },
   {
-    id: 'theme_volcano_acores',
-    title: 'Arena: Fogo dos Açores',
-    description: 'Partículas de brasas em ascensão e rebordo incandescente nas partidas.',
-    category: 'theme',
-    currency: 'coins',
-    priceCoins: 20000,
+    id: 'theme_arena_biblioteca_sagrada',
+    name: 'Biblioteca Sagrada & Altar dos Reis',
+    category: 'arena',
+    description: 'Ambiente majestoso barroco iluminado por vitrais ancestrais e partículas místicas.',
+    image: '/arenas/biblioteca-sagrada.jpg',
+    price: 'VIP / Fundador',
+    priceValue: 0,
+    currency: 'vip',
+    badge: 'Mítico VIP',
+    glowBorder: 'border-amber-500/70 shadow-[0_0_20px_rgba(245,158,11,0.35)]',
     rarity: 'mitico',
-    icon: '🌋',
-    badge: 'TEMA DE JOGO',
   },
 ];
 
@@ -292,10 +312,11 @@ export default function LojaPage() {
   const [avatarCategory, setAvatarCategory] = useState<'todos' | 'historia' | 'geografia' | 'desporto' | 'cultura' | 'geral'>('todos');
   const [userCoins, setUserCoins] = useState<number>(4395);
   const [invState, setInvState] = useState<InventoryState>(() => getInventory());
+  const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077');
   const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
     frame: 'frame_wave_nazare',
     title: 'title_guardiao_lusitano',
-    theme: 'theme_noite_fado',
+    theme: 'arena_ponte_2077',
   });
 
   const [selectedVipItem, setSelectedVipItem] = useState<ShopItem | { id: string; title: string; priceEuros?: number } | null>(null);
@@ -304,11 +325,35 @@ export default function LojaPage() {
   useEffect(() => {
     const sync = () => {
       setInvState(getInventory());
+      if (typeof window !== 'undefined') {
+        const savedArena = localStorage.getItem('equipped_arena') || 'arena_ponte_2077';
+        setEquippedArena(savedArena);
+      }
     };
     sync();
     window.addEventListener('inventory_updated', sync);
-    return () => window.removeEventListener('inventory_updated', sync);
+    window.addEventListener('arenaChanged', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener('inventory_updated', sync);
+      window.removeEventListener('arenaChanged', sync);
+      window.removeEventListener('storage', sync);
+    };
   }, []);
+
+  const handleEquipArena = (arena: ArenaItem) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('equipped_arena', arena.id);
+      localStorage.setItem('equipped_arena_image', arena.image);
+      equipTheme(arena.id);
+      setEquippedArena(arena.id);
+      setInvState(getInventory());
+      window.dispatchEvent(new Event('arenaChanged'));
+      window.dispatchEvent(new Event('inventory_updated'));
+      window.dispatchEvent(new Event('storage'));
+    }
+    alert(`Arena "${arena.name}" equipada com sucesso!`);
+  };
 
   useEffect(() => {
     try {
@@ -679,8 +724,74 @@ export default function LojaPage() {
         </div>
       )}
 
+      {/* SELEÇÃO DE ARENAS 2077 HD COM RENDERING PANORÂMICO */}
+      {activeTab === 'theme' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {ARENAS_2077.map((arena) => {
+              const isEquipped = equippedArena === arena.id || invState.equippedTheme === arena.id;
+
+              return (
+                <div
+                  key={arena.id}
+                  className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-zinc-950/80 backdrop-blur-xl border transition-all duration-300 hover:scale-[1.01] ${
+                    arena.glowBorder || 'border-zinc-800'
+                  }`}
+                >
+                  {arena.badge && (
+                    <span className="absolute top-4 right-4 z-10 bg-cyan-500/90 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                      {arena.badge}
+                    </span>
+                  )}
+
+                  <div>
+                    {/* Imagem panorâmica da arena em alta definição */}
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-3 bg-slate-900 border border-cyan-500/30">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={arena.image}
+                        alt={arena.name}
+                        className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white mb-1.5">{arena.name}</h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed mb-4">{arena.description}</p>
+                  </div>
+
+                  <div className="pt-4 border-t border-zinc-800/80 flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
+                      <span className="text-base font-extrabold text-emerald-400">
+                        {arena.price}
+                      </span>
+                    </div>
+
+                    {isEquipped ? (
+                      <button
+                        disabled
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-default"
+                      >
+                        ✓ Equipado
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleEquipArena(arena)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg transition-all cursor-pointer"
+                      >
+                        Equipar Arena
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* GRELHA GERAL (OUTRAS ABAS) */}
-      {activeTab !== 'avatar' && (
+      {activeTab !== 'avatar' && activeTab !== 'theme' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredItems.map((item) => {
             const isOwned = invState.ownedItems.includes(item.id);
