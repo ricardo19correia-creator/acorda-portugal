@@ -9,19 +9,19 @@ import { SiteFooter } from '@/components/site-footer'
 export default function Page() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground flex flex-col justify-between">
-      {/* 1. IMAGEM DE FUNDO NATIVA NEXT/IMAGE EM CAMADA FIXA HD (SEM ESTICAMENTO NEM ZOOM EXCESSIVO) */}
+      {/* 1. IMAGEM DE FUNDO TOTALMENTE FIXA ATRÁS DE TODO O SITE */}
       <Image
         src="/images/hero-bg.jpg"
-        alt="Fundo Biblioteca Sagrada de Portugal"
+        alt="Fundo Oficial Acorda Portugal"
         fill
         priority
         quality={100}
         sizes="100vw"
-        className="object-cover object-center -z-20 pointer-events-none select-none"
+        className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none"
       />
 
-      {/* 2. SOBREPOSIÇÃO SUAVE DE CONTRASTE */}
-      <div className="absolute inset-0 bg-black/45 backdrop-blur-[1.5px] -z-10 pointer-events-none" />
+      {/* 2. CAMADA DE ESCURECIMENTO SUAVE PARA MÁXIMA LEGIBILIDADE E CONTRASTE */}
+      <div className="fixed inset-0 -z-10 bg-black/50 backdrop-blur-[1px] pointer-events-none" />
 
       {/* 3. EFEITOS AMBIENTAIS SUBTIS */}
       <BackgroundFx variant="homepage" />
