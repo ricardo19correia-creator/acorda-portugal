@@ -375,17 +375,20 @@ export default function LojaPage() {
 
     unlockAvatar(av.id);
     equipAvatar(av.id);
+    setInvState(getInventory());
     alert(`Compraste e equipaste o avatar "${av.name}" com sucesso!`);
   };
 
   const handleClaimFreeAvatar = (av: AvatarItem) => {
     unlockAvatar(av.id);
     equipAvatar(av.id);
+    setInvState(getInventory());
     alert(`Desbloqueaste e equipaste o avatar "${av.name}" gratuitamente!`);
   };
 
   const handleEquipAvatarDirect = (av: AvatarItem) => {
     equipAvatar(av.id);
+    setInvState(getInventory());
     alert(`Avatar "${av.name}" equipado!`);
   };
 

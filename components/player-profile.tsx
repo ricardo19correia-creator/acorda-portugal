@@ -275,7 +275,13 @@ export function PlayerProfile() {
     const sync = () => setInvState(getInventory())
     sync()
     window.addEventListener('inventory_updated', sync)
-    return () => window.removeEventListener('inventory_updated', sync)
+    window.addEventListener('avatarChanged', sync)
+    window.addEventListener('storage', sync)
+    return () => {
+      window.removeEventListener('inventory_updated', sync)
+      window.removeEventListener('avatarChanged', sync)
+      window.removeEventListener('storage', sync)
+    }
   }, [])
 
   const accuracy = useMemo(() => {
@@ -483,7 +489,7 @@ export function PlayerProfile() {
     [Flame, 'Melhor sequência', `${player.bestStreak ?? 0} dias`, 'text-flag-red'],
   ] as const
 
-  const equippedAvatarItem = AVATAR_CATALOG.find((a) => a.id === (invState.equippedAvatar || 'av_default'))
+  const equippedAvatarItem = AVATAR_CATALOG.find((a) => a.id === (invState.equippedAvatar || 'camoes_2050')) || AVATAR_CATALOG[0]
 
   return (
     <div className="animate-rise space-y-8 sm:space-y-10">
@@ -495,7 +501,11 @@ export function PlayerProfile() {
 
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-            <div className={invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder ? 'rounded-full p-1 bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-600 shadow-[0_0_25px_rgba(245,158,11,0.7)] animate-pulse' : ''}>
+            <div className={cn(
+              "rounded-4xl p-1 transition-all duration-300",
+              equippedAvatarItem?.glowColor ? equippedAvatarItem.glowColor : "border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.35)]",
+              (invState.isVip || (player as any)?.is_founder || (player as any)?.isFounder) && 'bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-600 shadow-[0_0_25px_rgba(245,158,11,0.7)] animate-pulse'
+            )}>
               <Avatar profile={player} avatarIcon={equippedAvatarItem?.icon} avatarImage={equippedAvatarItem?.image} />
             </div>
             <div className="min-w-0 flex-1">

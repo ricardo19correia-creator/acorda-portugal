@@ -660,7 +660,7 @@ export function DuelArena({
 
           {/* Player Left (Me) */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0">
-            <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} size="sm" />
+            <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
@@ -952,6 +952,7 @@ export function DuelArena({
               <PlayerAvatar
                 profile={duel.playerA?.uid === currentPlayer.uid ? (profile ?? undefined) : undefined}
                 displayName={duel.playerA?.displayName || 'Jogador'}
+                isCurrentUser={duel.playerA?.uid === currentPlayer.uid}
                 size="xl"
               />
               {duel.winnerUid === duel.playerA?.uid && (
@@ -978,6 +979,7 @@ export function DuelArena({
               <PlayerAvatar
                 profile={duel.playerB?.uid === currentPlayer.uid ? (profile ?? undefined) : undefined}
                 displayName={duel.playerB?.displayName || 'Adversário'}
+                isCurrentUser={duel.playerB?.uid === currentPlayer.uid}
                 size="xl"
               />
               {duel.winnerUid === duel.playerB?.uid && (

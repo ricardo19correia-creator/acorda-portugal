@@ -1,18 +1,22 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { getFrameStyle, getEquippedCosmetics } from '@/lib/cosmetics'
 import type { UserProfile } from '@/lib/game-data'
+import { getEquippedAvatarImage } from '@/lib/inventory'
 import { cn } from '@/lib/utils'
 
 export interface PlayerAvatarProps {
   profile?: Partial<UserProfile> | null
   photoURL?: string | null
+  avatarImage?: string | null
+  name?: string | null
   displayName?: string | null
   frameId?: string | null
   auraId?: string | null
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   className?: string
+  isCurrentUser?: boolean
 }
 
 const SIZE_CLASSES = {
@@ -26,17 +30,56 @@ const SIZE_CLASSES = {
 export function PlayerAvatar({
   profile,
   photoURL,
+  avatarImage,
+  name,
   displayName,
   frameId,
   auraId,
   size = 'md',
   className,
+  isCurrentUser = false,
 }: PlayerAvatarProps) {
+  const [globalEquippedAvatar, setGlobalEquippedAvatar] = useState<string | null>(null)
+
+  useEffect(() => {
+    const updateAvatar = () => {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('user_equipped_avatar')
+        setGlobalEquippedAvatar(stored || getEquippedAvatarImage())
+      }
+    }
+
+    updateAvatar()
+    window.addEventListener('avatarChanged', updateAvatar)
+    window.addEventListener('inventory_updated', updateAvatar)
+    window.addEventListener('storage', updateAvatar)
+
+    return () => {
+      window.removeEventListener('avatarChanged', updateAvatar)
+      window.removeEventListener('inventory_updated', updateAvatar)
+      window.removeEventListener('storage', updateAvatar)
+    }
+  }, [])
+
   const cosmetics = getEquippedCosmetics(profile)
   const effectiveFrameId = frameId ?? cosmetics.frameId
   const effectiveAuraId = auraId ?? cosmetics.auraId
-  const effectivePhotoURL = photoURL ?? profile?.photoURL ?? null
-  const effectiveName = displayName ?? profile?.displayName ?? 'Jogador'
+
+  // Prioridade de resolução de imagem:
+  // 1. avatarImage direto
+  // 2. Se for o utilizador atual (isCurrentUser ou quando profile é o próprio), usa o avatar equipado
+  // 3. photoURL passado
+  // 4. profile?.photoURL
+  // 5. Fallback para avatar global
+  const effectivePhotoURL =
+    avatarImage ??
+    (isCurrentUser ? globalEquippedAvatar : null) ??
+    photoURL ??
+    profile?.photoURL ??
+    (isCurrentUser ? globalEquippedAvatar : null) ??
+    (profile ? globalEquippedAvatar : null)
+
+  const effectiveName = displayName ?? name ?? profile?.displayName ?? 'Jogador'
   const initial = effectiveName.trim().charAt(0).toUpperCase() || 'J'
 
   const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md
@@ -57,7 +100,7 @@ export function PlayerAvatar({
           alt={effectiveName}
           className={cn(
             sizeClass,
-            'object-cover transition-all duration-300 pointer-events-none',
+            'object-cover object-center transition-all duration-300 pointer-events-none',
             frameClass,
           )}
         />

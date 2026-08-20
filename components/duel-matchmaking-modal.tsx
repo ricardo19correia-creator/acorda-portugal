@@ -581,7 +581,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                 <div className="mt-6 flex items-center justify-center gap-3 sm:gap-6 rounded-3xl border border-emerald-500/50 bg-black/60 p-5 sm:p-7 shadow-2xl backdrop-blur-xl">
                   {/* Player A */}
                   <div className="flex flex-col items-center flex-1 min-w-0">
-                    <PlayerAvatar profile={profile ?? undefined} displayName={playerName || 'Tu'} size="lg" />
+                    <PlayerAvatar profile={profile ?? undefined} displayName={playerName || 'Tu'} isCurrentUser={true} size="lg" />
                     <span className="mt-2.5 font-display text-xs sm:text-sm font-black text-foreground truncate max-w-[110px]">
                       {playerName || 'Tu'}
                     </span>

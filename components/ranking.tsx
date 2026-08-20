@@ -315,6 +315,7 @@ export function Ranking() {
                       <PlayerAvatar
                         name={row.name}
                         photoURL={row.photoURL}
+                        isCurrentUser={isCurrentUser}
                         className="h-10 w-10 shrink-0 text-sm ring-1 ring-white/15"
                       />
 
@@ -375,6 +376,7 @@ export function Ranking() {
                   <PlayerAvatar
                     name={currentUserEntry.name}
                     photoURL={currentUserEntry.photoURL}
+                    isCurrentUser={true}
                     className="h-10 w-10 shrink-0 text-sm ring-2 ring-primary/40"
                   />
 
@@ -494,6 +496,7 @@ function PodiumCard({
         <PlayerAvatar
           name={player.name}
           photoURL={player.photoURL}
+          isCurrentUser={isCurrentUser}
           className={cn(
             'ring-2 transition-transform duration-300',
             config.ringColor,

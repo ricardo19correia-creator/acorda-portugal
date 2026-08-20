@@ -1,3 +1,5 @@
+import { AVATARS_2050, type AvatarItem } from './avatars';
+
 export interface InventoryState {
   ownedItems: string[];
   equippedTheme: string;
@@ -15,8 +17,8 @@ export const getInventory = (): InventoryState => {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: ['av_default', 'av_galo_barcelos'],
-      equippedAvatar: 'av_default',
+      ownedAvatars: ['camoes_2050'],
+      equippedAvatar: 'camoes_2050',
     };
   }
   try {
@@ -48,18 +50,18 @@ export const getInventory = (): InventoryState => {
         equippedTheme: legacyTheme,
         isVip: legacyOwned.includes('vip_founder_pass'),
         vipTitle: legacyOwned.includes('vip_founder_pass') ? 'Fundador da Nação' : undefined,
-        ownedAvatars: ['av_default', 'av_galo_barcelos'],
-        equippedAvatar: 'av_default',
+        ownedAvatars: ['camoes_2050'],
+        equippedAvatar: 'camoes_2050',
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
       return initial;
     }
     const parsed = JSON.parse(data);
     if (!parsed.ownedAvatars || !Array.isArray(parsed.ownedAvatars)) {
-      parsed.ownedAvatars = ['av_default', 'av_galo_barcelos'];
+      parsed.ownedAvatars = ['camoes_2050'];
     }
     if (!parsed.equippedAvatar) {
-      parsed.equippedAvatar = 'av_default';
+      parsed.equippedAvatar = 'camoes_2050';
     }
     return parsed;
   } catch (e) {
@@ -67,8 +69,8 @@ export const getInventory = (): InventoryState => {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: ['av_default', 'av_galo_barcelos'],
-      equippedAvatar: 'av_default',
+      ownedAvatars: ['camoes_2050'],
+      equippedAvatar: 'camoes_2050',
     };
   }
 };
@@ -83,8 +85,18 @@ export const saveInventory = (state: InventoryState) => {
       'ap_equipped_items',
       JSON.stringify({ theme: state.equippedTheme, avatar: state.equippedAvatar })
     );
+    if (state.equippedAvatar) {
+      const av = AVATARS_2050.find(a => a.id === state.equippedAvatar);
+      if (av?.image) {
+        localStorage.setItem('user_equipped_avatar', av.image);
+        localStorage.setItem('user_equipped_avatar_id', av.id);
+        localStorage.setItem('user_equipped_avatar_glow', av.glowColor || '');
+      }
+    }
   } catch {}
+  window.dispatchEvent(new Event('avatarChanged'));
   window.dispatchEvent(new Event('inventory_updated'));
+  window.dispatchEvent(new Event('storage'));
 };
 
 export const unlockItem = (itemId: string, isVipPass: boolean = false) => {
@@ -105,7 +117,7 @@ export const unlockItem = (itemId: string, isVipPass: boolean = false) => {
 export const unlockAvatar = (avatarId: string) => {
   const current = getInventory();
   if (!current.ownedAvatars) {
-    current.ownedAvatars = ['av_default', 'av_galo_barcelos'];
+    current.ownedAvatars = ['camoes_2050'];
   }
   if (!current.ownedAvatars.includes(avatarId)) {
     current.ownedAvatars.push(avatarId);
@@ -122,11 +134,34 @@ export const equipTheme = (themeId: string) => {
 export const equipAvatar = (avatarId: string) => {
   const current = getInventory();
   if (!current.ownedAvatars) {
-    current.ownedAvatars = ['av_default', 'av_galo_barcelos'];
+    current.ownedAvatars = ['camoes_2050'];
   }
   if (!current.ownedAvatars.includes(avatarId)) {
     current.ownedAvatars.push(avatarId);
   }
   current.equippedAvatar = avatarId;
+
+  const av = AVATARS_2050.find(a => a.id === avatarId);
+  if (av?.image && typeof window !== 'undefined') {
+    localStorage.setItem('user_equipped_avatar', av.image);
+    localStorage.setItem('user_equipped_avatar_id', av.id);
+    localStorage.setItem('user_equipped_avatar_glow', av.glowColor || '');
+  }
+
   saveInventory(current);
+};
+
+export const getEquippedAvatarImage = (): string => {
+  if (typeof window === 'undefined') return '/images/avatars/camoes-2050.jpg';
+  const direct = localStorage.getItem('user_equipped_avatar');
+  if (direct) return direct;
+  const inv = getInventory();
+  const found = AVATARS_2050.find(a => a.id === inv.equippedAvatar);
+  if (found?.image) return found.image;
+  return '/images/avatars/camoes-2050.jpg';
+};
+
+export const getEquippedAvatarItem = (): AvatarItem => {
+  const inv = getInventory();
+  return AVATARS_2050.find(a => a.id === inv.equippedAvatar) || AVATARS_2050[0];
 };

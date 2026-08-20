@@ -108,7 +108,7 @@ export function SiteHeader() {
               aria-label={`Ver perfil de ${user.displayName ?? 'Jogador'}`}
               className="ml-2 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-card/90 p-1.5 pr-4 text-xs font-black uppercase tracking-wider text-foreground shadow-md transition-all duration-200 hover:border-primary/50 hover:shadow-[0_0_20px_-4px_oklch(0.7_0.17_152/0.4)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <PlayerAvatar profile={profile} size="xs" />
+              <PlayerAvatar profile={profile} size="xs" isCurrentUser={true} />
               <div className="flex flex-col text-left leading-none">
                 <span className="truncate max-w-[100px] pointer-events-none font-black text-foreground">
                   {user.displayName?.split(' ')[0] ?? 'Jogador'}
@@ -166,7 +166,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-card/80 p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
             >
-              <PlayerAvatar profile={profile} size="sm" />
+              <PlayerAvatar profile={profile} size="sm" isCurrentUser={true} />
               <div className="flex flex-col min-w-0 pointer-events-none">
                 <span className="truncate font-bold text-foreground">
                   {user.displayName ?? 'Conta'}
