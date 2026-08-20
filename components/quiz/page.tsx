@@ -33,7 +33,7 @@ function QuizPageContent() {
   }, [categorySlug, subcategorySlug, difficulty, district, city, gameIdFromUrl, generatedGameId, router])
 
   return (
-    <main className="relative">
+    <div className="relative bg-transparent">
       {categorySlug ? (
         <QuizScreen
           categorySlug={categorySlug}
@@ -46,14 +46,13 @@ function QuizPageContent() {
       ) : (
         <GameHub />
       )}
-    </main>
+    </div>
   )
 }
 
 export function QuizPage() {
   return (
-    <div className="relative min-h-screen">
-      <ArenaDynamicBackground />
+    <div className="relative min-h-screen bg-transparent">
       <BackgroundFx />
 
       <Suspense fallback={null}>
