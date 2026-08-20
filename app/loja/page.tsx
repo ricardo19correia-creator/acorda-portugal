@@ -348,9 +348,8 @@ export default function LojaPage() {
     alert(`Parabéns! Resgataste "${item.title}" gratuitamente! A arena foi equipada.`);
   };
 
-  const handleRealMoneyCheckout = (item: ShopItem | { id: string; title: string; priceEuros?: number }) => {
-    setSelectedVipItem(item);
-    setIsMbwayOpen(true);
+  const handleRealMoneyCheckout = (_item: ShopItem | { id: string; title: string; priceEuros?: number }) => {
+    alert('Os pagamentos em dinheiro real estão temporariamente indisponíveis para manutenção do sistema. Volte em breve!');
   };
 
   const handleEquip = (item: ShopItem) => {
@@ -501,6 +500,23 @@ export default function LojaPage() {
         </button>
       </div>
 
+      {/* BANNER INFORMATIVO DE MANUTENÇÃO PARA PAGAMENTOS EM DINHEIRO REAL (€) */}
+      {activeTab === 'real_money' && (
+        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 backdrop-blur-xl flex items-center gap-4 text-amber-200 shadow-[0_0_20px_rgba(245,158,11,0.1)]">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-xl shrink-0">
+            ⚙️
+          </div>
+          <div>
+            <p className="text-sm font-bold text-amber-300">
+              Aviso: O sistema de pagamentos por dinheiro real encontra-se em manutenção e temporariamente indisponível. Agradecemos a compreensão.
+            </p>
+            <p className="text-xs text-amber-200/70 mt-0.5">
+              Todos os itens, ajudas e avatares adquiridos com moedas virtuais (€ Acorda) continuam 100% ativos e disponíveis para compra.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* ABA DE AVATARES */}
       {activeTab === 'avatar' && (
         <div className="space-y-6">
@@ -544,6 +560,12 @@ export default function LojaPage() {
                       : 'border-zinc-800 hover:border-cyan-500/40'
                   }`}
                 >
+                  {av.currency === 'real_money' && (
+                    <span className="absolute -top-3 right-4 bg-amber-500/90 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+                      ⚙️ Manutenção
+                    </span>
+                  )}
+
                   <div>
                     <div className="flex justify-between items-center mb-4">
                       <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border ${rarityStyles[av.rarity || 'comum']}`}>
@@ -610,10 +632,11 @@ export default function LojaPage() {
                       </button>
                     ) : (
                       <button
+                        disabled
                         onClick={() => handleRealMoneyCheckout({ id: av.id, title: `Avatar: ${av.name}`, priceEuros: av.price })}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800/80 text-zinc-400 border border-zinc-700/60 opacity-60 cursor-not-allowed transition-all"
                       >
-                        Comprar por €{av.price.toFixed(2)}
+                        ⚙️ Indisponível (Manutenção)
                       </button>
                     )}
                   </div>
@@ -638,11 +661,15 @@ export default function LojaPage() {
                   item.popular ? 'border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.2)]' : 'border-zinc-800 hover:border-emerald-500/40'
                 }`}
               >
-                {item.badge && (
+                {item.currency === 'real_money' && (item.priceEuros ?? 0) > 0 ? (
+                  <span className="absolute -top-3 right-4 bg-amber-500/90 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+                    ⚙️ Manutenção
+                  </span>
+                ) : item.badge ? (
                   <span className="absolute -top-3 right-4 bg-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                     {item.badge}
                   </span>
-                )}
+                ) : null}
 
                 <div>
                   <div className="flex justify-between items-center mb-4">
@@ -701,10 +728,11 @@ export default function LojaPage() {
                       </button>
                     ) : (
                       <button
+                        disabled
                         onClick={() => handleRealMoneyCheckout(item)}
-                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800/80 text-zinc-400 border border-zinc-700/60 opacity-60 cursor-not-allowed transition-all"
                       >
-                        Comprar por €{item.priceEuros?.toFixed(2)}
+                        ⚙️ Indisponível (Manutenção)
                       </button>
                     )
                   ) : item.category === 'consumable' ? (
