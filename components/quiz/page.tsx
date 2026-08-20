@@ -53,8 +53,6 @@ function QuizPageContent() {
 export function QuizPage() {
   return (
     <div className="relative min-h-screen bg-transparent">
-      <BackgroundFx />
-
       <Suspense fallback={null}>
         <QuizPageContent />
       </Suspense>

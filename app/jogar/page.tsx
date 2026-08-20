@@ -4,21 +4,19 @@ import React, { useState, useEffect } from 'react'
 import { QuizPage } from '@/components/quiz/page'
 
 export default function JogarPage() {
-  const [arenaBg, setArenaBg] = useState<string>('/arenas/arena-ponte-2077.jpg')
+  const [arenaImage, setArenaImage] = useState<string>('/arenas/arena-ponte-2077.jpg')
 
   useEffect(() => {
     const sync = () => {
       if (typeof window !== 'undefined') {
-        const savedArena = localStorage.getItem('equipped_arena')
         const savedImage = localStorage.getItem('equipped_arena_image')
-        if (savedImage) {
-          setArenaBg(savedImage)
-        } else if (savedArena === 'arena_ponte_2077' || !savedArena) {
-          setArenaBg('/arenas/arena-ponte-2077.jpg')
+        const savedArena = localStorage.getItem('equipped_arena')
+        if (savedImage && savedImage.startsWith('/')) {
+          setArenaImage(savedImage)
         } else if (savedArena === 'theme_arena_biblioteca_sagrada') {
-          setArenaBg('/arenas/biblioteca-sagrada.jpg')
-        } else if (savedArena.startsWith('/')) {
-          setArenaBg(savedArena)
+          setArenaImage('/arenas/biblioteca-sagrada.jpg')
+        } else {
+          setArenaImage('/arenas/arena-ponte-2077.jpg')
         }
       }
     }
@@ -34,20 +32,20 @@ export default function JogarPage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-slate-950 text-white">
-      {/* Imagem de Fundo da Arena */}
+    <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col justify-between overflow-x-hidden">
+      {/* CAMADA DE FUNDO FIXA DA ARENA (Com overlay translúcido para ler o texto) */}
       <div 
-        className="fixed inset-0 -z-10 w-full h-full pointer-events-none transition-all duration-700"
+        className="fixed inset-0 -z-30 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 29, 0.75), rgba(10, 15, 29, 0.90)), url('${arenaBg}')`,
+          backgroundImage: `linear-gradient(rgba(5, 8, 18, 0.65), rgba(5, 8, 18, 0.75)), url('${arenaImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       />
 
-      {/* Conteúdo da partida (Cards, Pergunta, Botões) */}
-      <div className="relative z-10">
+      {/* CONTEÚDO DO QUIZ (Com fundos dos cards translúcidos/backdrop-blur) */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
         <QuizPage />
       </div>
     </div>
