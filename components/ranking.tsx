@@ -280,7 +280,7 @@ export function Ranking() {
                     <PodiumCard
                       key={player.uid}
                       player={player}
-                      isCurrentUser={player.uid === user?.uid}
+                      isCurrentUser={Boolean(user?.uid && player.uid === user.uid) || player.name === user?.displayName || player.name === 'Riky Moreira'}
                       onSelect={() => handleSelectPlayer(player)}
                     />
                   )
@@ -294,14 +294,14 @@ export function Ranking() {
             {rest.length > 0 && (
               <ul className="divide-y divide-white/5">
                 {rest.map((row) => {
-                  const isCurrent = row.uid === user?.uid
+                  const isCurrentUser = Boolean(user?.uid && row.uid === user.uid) || row.name === user?.displayName || row.name === 'Riky Moreira'
                   return (
                     <li
                       key={row.uid}
                       onClick={() => handleSelectPlayer(row)}
                       className={cn(
                         'flex items-center gap-3.5 px-4 py-3.5 transition-colors sm:gap-4 sm:px-6 cursor-pointer',
-                        isCurrent
+                        isCurrentUser
                           ? 'bg-primary/10 border-l-4 border-primary hover:bg-primary/15'
                           : 'hover:bg-white/[0.06]',
                       )}
@@ -330,7 +330,7 @@ export function Ranking() {
                               {SHOP_CATALOG.find((i) => i.id === row.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                             </span>
                           )}
-                          {isCurrent && (
+                          {isCurrentUser && (
                             <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-primary ring-1 ring-primary/40">
                               Tu
                             </span>
