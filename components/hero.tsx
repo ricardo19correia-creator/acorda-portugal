@@ -1,7 +1,6 @@
-'use client'
-
+import Image from 'next/image'
 import Link from 'next/link'
-import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight } from 'lucide-react'
+import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight, Flame } from 'lucide-react'
 import { PortugalHeroMap } from '@/components/portugal-hero-map'
 import { cn } from '@/lib/utils'
 
@@ -43,16 +42,39 @@ export function Hero() {
       <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         {/* Top/Left: Copy & Action Controls */}
         <div className="order-1 flex flex-col items-center text-center lg:items-start lg:text-left">
-          {/* Live Eyebrow Cyber Tag */}
-          <div
-            className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-emerald-400/40 bg-emerald-950/60 px-4 py-1.5 text-xs font-black uppercase tracking-[0.24em] text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] backdrop-blur-xl"
-            style={{ animationDelay: '40ms' }}
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981]" />
-            </span>
-            <span>O Grande Quiz Nacional 🇵🇹</span>
+          {/* Live Eyebrows & Guzmania Symbol Badge */}
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+            {/* Live Eyebrow Cyber Tag */}
+            <div
+              className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-emerald-400/40 bg-emerald-950/60 px-4 py-1.5 text-xs font-black uppercase tracking-[0.24em] text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] backdrop-blur-xl"
+              style={{ animationDelay: '40ms' }}
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981]" />
+              </span>
+              <span>O Grande Quiz Nacional 🇵🇹</span>
+            </div>
+
+            {/* Guzmania Symbol Mini Badge */}
+            <a
+              href="#simbolo"
+              className="animate-rise group inline-flex items-center gap-2 rounded-full border border-rose-500/40 bg-rose-950/60 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-rose-300 shadow-[0_0_12px_rgba(244,63,94,0.3)] backdrop-blur-xl transition hover:scale-105 hover:border-rose-400"
+              style={{ animationDelay: '80ms' }}
+            >
+              <div className="relative h-4 w-4 overflow-hidden rounded-full border border-rose-400/60">
+                <Image
+                  src="/images/guzmania-hero.png"
+                  alt="Guzmania"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <span className="flex items-center gap-1">
+                <Flame className="h-3 w-3 text-rose-400" />
+                A Chama do Saber
+              </span>
+            </a>
           </div>
 
           {/* 3D Volumetric Chrome Headline */}
@@ -91,7 +113,7 @@ export function Hero() {
             {/* Primary Mech Emerald Button */}
             <Link
               href="/jogar"
-              className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-xl"
+              className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-emerald-500/30"
             >
               <Play className="h-5 w-5 fill-current text-emerald-950 drop-shadow-sm" />
               <span>Jogar Agora</span>
@@ -100,7 +122,7 @@ export function Hero() {
             {/* Duelo 1v1 Fast Match Mech Button */}
             <Link
               href="/jogar/duelo"
-              className="btn-mech-purple w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-white cursor-pointer shadow-xl"
+              className="btn-mech-purple w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-white cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-purple-500/30"
             >
               <Swords className="h-5 w-5 drop-shadow-sm" />
               <span>Duelo 1v1</span>
@@ -109,7 +131,7 @@ export function Hero() {
             {/* Rankings Mech Gold Button */}
             <Link
               href="/rankings"
-              className="btn-mech-gold w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-bold uppercase tracking-wider text-gold-foreground backdrop-blur-xl cursor-pointer shadow-xl"
+              className="btn-mech-gold w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-bold uppercase tracking-wider text-gold-foreground backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-amber-500/30"
             >
               <Trophy className="h-4 w-4 text-gold" />
               <span className="text-gold">Rankings</span>

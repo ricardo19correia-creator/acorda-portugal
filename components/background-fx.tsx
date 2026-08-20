@@ -79,21 +79,21 @@ export function BackgroundFx({ variant = 'default', className }: BackgroundFxPro
       ) : variant === 'shop' ? (
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_-10%,_rgba(6,182,212,0.3),_transparent_70%),radial-gradient(ellipse_70%_50%_at_80%_85%,_rgba(234,179,8,0.28),_transparent_70%),linear-gradient(180deg,#091216_0%,#060c10_50%,#04070a_100%)]" />
       ) : (
-        /* Homepage & Default: Rich Portuguese National Video Game Cosmos */
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_65%_at_50%_-12%,_rgba(16,185,129,0.32),_transparent_70%),radial-gradient(ellipse_75%_55%_at_15%_65%,_rgba(239,68,68,0.2),_transparent_65%),radial-gradient(ellipse_75%_55%_at_85%_85%,_rgba(245,158,11,0.22),_transparent_65%),linear-gradient(180deg,#06140d_0%,#040d09_50%,#080406_100%)]" />
+        /* Homepage & Default: Rich Portuguese National Video Game Cosmos (Emerald, Ruby Red, Cyan & Amber Gold) */
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_95%_70%_at_50%_-10%,_rgba(16,185,129,0.42),_transparent_72%),radial-gradient(ellipse_80%_60%_at_12%_55%,_rgba(244,63,94,0.32),_transparent_68%),radial-gradient(ellipse_80%_60%_at_88%_75%,_rgba(245,158,11,0.3),_transparent_68%),radial-gradient(ellipse_60%_50%_at_50%_90%,_rgba(6,182,212,0.25),_transparent_70%),linear-gradient(180deg,#041109_0%,#030a06_45%,#08040a_100%)]" />
       )}
 
       {/* 2. SUBTLE PORTUGUESE CYBER PATTERNS */}
-      <div className="pattern-azulejo-cyber absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_90%)]" />
-      <div className="pattern-calcada absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_bottom,black_40%,transparent_90%)]" />
-      <div className="grid-tech absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top,black_50%,transparent_90%)]" />
+      <div className="pattern-azulejo-cyber absolute inset-0 opacity-45 [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]" />
+      <div className="pattern-calcada absolute inset-0 opacity-25 [mask-image:radial-gradient(ellipse_at_bottom,black_45%,transparent_90%)]" />
+      <div className="grid-tech absolute inset-0 opacity-25 [mask-image:radial-gradient(ellipse_at_top,black_55%,transparent_90%)]" />
 
       {/* 2.1. DARK EDGE VIGNETTE & CONTRAST GRADIENT OVERLAY */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.1)_0%,_rgba(0,0,0,0.75)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.05)_0%,_rgba(0,0,0,0.65)_100%)]" />
 
       {/* 3. ABSTRACT 3D ROTATING RINGS (Subtle, slow, futuristic) */}
-      <div className="hidden lg:block absolute -top-40 left-1/2 -translate-x-1/2 w-[55rem] h-[55rem] rounded-full border border-emerald-500/[0.08] animate-spin-slow pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
-      <div className="hidden lg:block absolute -top-44 left-1/2 -translate-x-1/2 w-[70rem] h-[70rem] rounded-full border border-dashed border-cyan-500/[0.06] animate-spin-reverse pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <div className="hidden lg:block absolute -top-40 left-1/2 -translate-x-1/2 w-[55rem] h-[55rem] rounded-full border border-emerald-500/[0.12] animate-spin-slow pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
+      <div className="hidden lg:block absolute -top-44 left-1/2 -translate-x-1/2 w-[70rem] h-[70rem] rounded-full border border-dashed border-cyan-500/[0.1] animate-spin-reverse pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       {/* 4. VOLUMETRIC GLOWING LIGHT BLOBS (Floating & Breathing Néons) */}
       {variant === 'multiplayer' ? (
@@ -141,19 +141,19 @@ export function BackgroundFx({ variant = 'default', className }: BackgroundFxPro
           />
         </>
       ) : (
-        /* Default / Homepage: Cyberpunk Português (Verde Esmeralda, Ciano, Magenta) */
+        /* Default / Homepage: Cyberpunk Português Vibrante (Esmeralda Neon, Flor Rubi, Âmbar Dourado) */
         <>
-          <div className="animate-glow-pulse absolute -right-32 -top-20 h-[42rem] w-[42rem] rounded-full bg-emerald-500/26 blur-3xl" />
+          <div className="animate-glow-pulse absolute -right-32 -top-20 h-[44rem] w-[44rem] rounded-full bg-emerald-500/32 blur-3xl" />
           <div
-            className="animate-glow-pulse absolute -left-28 top-1/3 h-[36rem] w-[36rem] rounded-full bg-cyan-500/20 blur-3xl"
+            className="animate-glow-pulse absolute -left-28 top-1/4 h-[38rem] w-[38rem] rounded-full bg-rose-600/26 blur-3xl"
             style={{ animationDelay: '2.5s' }}
           />
           <div
-            className="animate-glow-pulse absolute right-12 -bottom-28 h-[38rem] w-[38rem] rounded-full bg-fuchsia-600/18 blur-3xl"
+            className="animate-glow-pulse absolute right-12 -bottom-28 h-[40rem] w-[40rem] rounded-full bg-amber-500/24 blur-3xl"
             style={{ animationDelay: '4.2s' }}
           />
           <div
-            className="hidden lg:block animate-glow-pulse absolute left-1/3 -top-32 h-[32rem] w-[32rem] rounded-full bg-emerald-400/15 blur-3xl"
+            className="hidden lg:block animate-glow-pulse absolute left-1/3 -top-32 h-[34rem] w-[34rem] rounded-full bg-emerald-400/22 blur-3xl"
             style={{ animationDelay: '1.8s' }}
           />
         </>
