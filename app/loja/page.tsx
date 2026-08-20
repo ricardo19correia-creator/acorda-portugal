@@ -589,21 +589,13 @@ export default function LojaPage() {
                     </div>
 
                     {/* IMAGEM RETRATO CYBERPUNK 2050 HD */}
-                    <div className="relative overflow-hidden rounded-xl mb-3 border-2 border-white/10 bg-zinc-900 shadow-inner">
-                      {av.image ? (
-                        <div className="aspect-[4/5] w-full overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={av.image}
-                            alt={av.name}
-                            className="w-full h-full object-cover object-center rounded-xl border-2 transition-transform duration-300 group-hover:scale-105"
-                          />
-                        </div>
-                      ) : (
-                        <div className="aspect-[4/5] w-full flex items-center justify-center text-6xl bg-zinc-900">
-                          {av.icon || '👤'}
-                        </div>
-                      )}
+                    <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-slate-900 mb-3 border-2 border-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={av.image}
+                        alt={av.name}
+                        className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
 
                     <h3 className="text-lg font-bold text-center text-white mt-1 mb-1">{av.name}</h3>
