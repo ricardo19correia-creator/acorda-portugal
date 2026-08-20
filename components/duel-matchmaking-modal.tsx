@@ -15,6 +15,9 @@ import {
   Shield,
   Clock,
   Sparkles,
+  RotateCcw,
+  ArrowLeft,
+  RefreshCw,
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { PlayerAvatar } from '@/components/player-avatar'
@@ -25,7 +28,6 @@ import {
   cancelMatchmakingQueue,
   subscribeToMatchmaking,
   tryFindOpponentMatch,
-  createBotDuelMatch,
   createDuel,
   joinDuelByCode,
 } from '@/lib/duel'
@@ -56,42 +58,58 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     }
   }, [playerUid, playerName, playerPhoto])
 
-  // Views: 'matchmaking' | 'custom_room'
+  // Active view: 'matchmaking' | 'custom_room'
   const [activeView, setActiveView] = useState<'matchmaking' | 'custom_room'>('matchmaking')
 
-  // Matchmaking states: 'searching' | 'matched' | 'timeout'
-  const [mmState, setMmState] = useState<'searching' | 'matched' | 'timeout'>('searching')
+  // Matchmaking states: 'idle' | 'searching' | 'matched' | 'timeout'
+  const [mmState, setMmState] = useState<'idle' | 'searching' | 'matched' | 'timeout'>('idle')
+  const [searchTimeSeconds, setSearchTimeSeconds] = useState<number>(0)
+  const [retryTrigger, setRetryTrigger] = useState<number>(0)
   const [matchedDuelId, setMatchedDuelId] = useState<string | null>(null)
-  const [ticket, setTicket] = useState<MatchmakingTicket | null>(null)
   const [countdown, setCountdown] = useState<number | null>(null)
-  const [searchTimeSeconds, setSearchTimeSeconds] = useState(0)
+  const [ticket, setTicket] = useState<MatchmakingTicket | null>(null)
 
   // Custom room states
   const [customTab, setCustomTab] = useState<'create' | 'join'>('create')
-  const [codeInputValue, setCodeInputValue] = useState('')
+  const [createdRoomCode, setCreatedRoomCode] = useState<string | null>(null)
+  const [createdDuelId, setCreatedDuelId] = useState<string | null>(null)
+  const [codeInputValue, setCodeInputValue] = useState<string>('')
   const [customLoading, setCustomLoading] = useState(false)
   const [customError, setCustomError] = useState<string | null>(null)
 
-  const matchAttemptIdRef = useRef<string>('')
-  const matchedDuelIdRef = useRef<string | null>(null)
+  // Refs de sincronização e cleanup estrito
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const heartbeatIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const searchTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const matchAttemptIdRef = useRef<string | null>(null)
+  const matchedDuelIdRef = useRef<string | null>(null)
 
-  const playerPropsRef = useRef({ playerUid, playerName, playerPhoto, playerLevel, playerDistrict })
-  useEffect(() => {
-    playerPropsRef.current = { playerUid, playerName, playerPhoto, playerLevel, playerDistrict }
-  }, [playerUid, playerName, playerPhoto, playerLevel, playerDistrict])
+  const playerPropsRef = useRef({
+    playerName,
+    playerPhoto,
+    playerLevel,
+    playerDistrict,
+  })
+  playerPropsRef.current = {
+    playerName,
+    playerPhoto,
+    playerLevel,
+    playerDistrict,
+  }
 
-  // Função para registar match encontrado
-  const handleMatchFound = (duelId: string, opponentInfo?: any, incomingTicket?: MatchmakingTicket) => {
+  // Handler seguro e atómico de Match Found
+  const handleMatchFound = (
+    duelId: string,
+    opponentInfo?: { displayName: string; photoURL?: string | null; level: number; district?: string } | null,
+    incomingTicket?: MatchmakingTicket,
+  ) => {
     if (matchedDuelIdRef.current) return
+    console.log('[MATCH ATOMIC FOUND - 100% REAL PVP] duelId:', duelId, 'Opponent:', opponentInfo?.displayName)
     matchedDuelIdRef.current = duelId
-    console.log('[MATCH OPPONENT FOUND EVENT] duelId:', duelId, 'Opponent:', opponentInfo?.displayName)
     setMatchedDuelId(duelId)
     setMmState('matched')
 
-    // Limpar imediatamente os intervalos de procura
+    // Limpar imediatamente todos os timers e polling
     if (pollIntervalRef.current) {
       clearInterval(pollIntervalRef.current)
       pollIntervalRef.current = null
@@ -108,9 +126,15 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     if (incomingTicket) {
       setTicket(incomingTicket)
     } else if (opponentInfo) {
+      const normalizedOpponent = {
+        displayName: opponentInfo.displayName,
+        photoURL: opponentInfo.photoURL ?? null,
+        level: opponentInfo.level ?? 1,
+        district: opponentInfo.district ?? 'Portugal',
+      }
       setTicket((prev) =>
         prev
-          ? { ...prev, status: 'matched', duelId, opponentInfo }
+          ? { ...prev, status: 'matched', duelId, opponentInfo: normalizedOpponent }
           : {
               userId: playerUid,
               displayName: playerName,
@@ -118,19 +142,19 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
               level: playerLevel,
               district: playerDistrict,
               status: 'matched',
-              matchAttemptId: matchAttemptIdRef.current,
+              matchAttemptId: matchAttemptIdRef.current || '',
               joinedAt: Date.now(),
               lastHeartbeat: Date.now(),
               expiresAt: Date.now() + 60_000,
               duelId,
-              opponentInfo,
+              opponentInfo: normalizedOpponent,
               matchedAt: Date.now(),
             },
       )
     }
   }
 
-  // 1. Iniciar tentativa de Matchmaking fresca
+  // 1. Iniciar tentativa de Matchmaking fresca (100% Real PVP)
   useEffect(() => {
     if (!isOpen || activeView !== 'matchmaking' || !authResolved || !isAuthenticated || !playerUid) {
       return
@@ -156,7 +180,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       district: playerPropsRef.current.playerDistrict,
     }
 
-    console.log('[MATCH QUEUE JOINED (REAL AUTH USER)] UID:', playerUid, 'Name:', playerObj.displayName, 'Attempt:', currentAttemptId)
+    console.log('[MATCH QUEUE JOINED (100% REAL PVP)] UID:', playerUid, 'Name:', playerObj.displayName, 'Attempt:', currentAttemptId)
 
     // Entrar na fila do Firestore com UID real e matchAttemptId único
     joinMatchmakingQueue(playerObj, profileObj, currentAttemptId).catch((err) => {
@@ -181,57 +205,44 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     const unsubscribe = subscribeToMatchmaking(playerUid, currentAttemptId, (updatedTicket) => {
       if (!updatedTicket) return
       if (updatedTicket.status === 'matched' && updatedTicket.duelId && updatedTicket.opponentInfo) {
-        console.log('[MATCH NOTIFIED VIA FIRESTORE SNAPSHOT] duelId:', updatedTicket.duelId)
+        console.log('[MATCH NOTIFIED VIA FIRESTORE SNAPSHOT (REAL PVP)] duelId:', updatedTicket.duelId)
         handleMatchFound(updatedTicket.duelId, updatedTicket.opponentInfo, updatedTicket)
       }
     })
-
-    const searchSecondsRef = { current: 0 }
 
     // Executar verificação contínua e tentativa de pareamento via polling (1.0s)
     const runSearch = () => {
       if (matchAttemptIdRef.current !== currentAttemptId || matchedDuelIdRef.current) return
 
-      // 1. Tentar emparelhamento humano com qualquer jogador disponível
+      // Tentar emparelhamento humano com qualquer outro jogador real ativo
       tryFindOpponentMatch(playerObj, profileObj, currentAttemptId)
         .then((res) => {
           if (res.matched && res.duelId && res.opponentInfo) {
-            console.log('[MATCH FOUND VIA POLLING ATOMIC PAIR] duelId:', res.duelId)
+            console.log('[MATCH FOUND VIA POLLING ATOMIC PAIR (REAL PVP)] duelId:', res.duelId)
             handleMatchFound(res.duelId, res.opponentInfo, res.ticket || undefined)
-          } else if (searchSecondsRef.current >= 6 && !matchedDuelIdRef.current) {
-            // 2. Fallback obrigatório para Bot (máximo 6-8 segundos sem esperar)
-            console.log('[MATCH BOT FALLBACK] Criando partida simulada contra bot aos', searchSecondsRef.current, 's')
-            createBotDuelMatch(playerObj, profileObj, currentAttemptId)
-              .then((botRes) => {
-                if (botRes.matched && botRes.duelId && botRes.opponentInfo) {
-                  console.log('[MATCH BOT CREATED VIA POLLING FALLBACK] duelId:', botRes.duelId)
-                  handleMatchFound(botRes.duelId, botRes.opponentInfo, botRes.ticket || undefined)
-                }
-              })
-              .catch((err) => console.error('[MATCH BOT FALLBACK ERROR]:', err))
           }
         })
         .catch((err) => console.warn('[MATCH] ERRO NO POLLING:', err))
     }
 
-    // Intervalo de 1.0s para emparelhamento
+    // Intervalo de 1.0s para emparelhamento estritamente humano
     pollIntervalRef.current = setInterval(runSearch, 1000)
 
-    // Contador de segundos e acionamento automático de Bot
+    // Contador de segundos e timeout rigoroso de 30 segundos (SEM BOTS)
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
-        searchSecondsRef.current = next
 
-        if (next >= 6 && !matchedDuelIdRef.current && matchAttemptIdRef.current === currentAttemptId) {
-          createBotDuelMatch(playerObj, profileObj, currentAttemptId)
-            .then((botRes) => {
-              if (botRes.matched && botRes.duelId && botRes.opponentInfo) {
-                console.log('[MATCH BOT CREATED VIA TIMER FALLBACK] duelId:', botRes.duelId)
-                handleMatchFound(botRes.duelId, botRes.opponentInfo, botRes.ticket || undefined)
-              }
-            })
-            .catch((err) => console.error('[MATCH BOT FALLBACK ERROR]:', err))
+        if (next >= 30) {
+          console.log('[MATCHMAKING 30S TIMEOUT REACHED - NO REAL PLAYER FOUND]')
+          if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
+          if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
+          if (searchTimerRef.current) clearInterval(searchTimerRef.current)
+
+          setMmState('timeout')
+          if (playerUid && !matchedDuelIdRef.current) {
+            cancelMatchmakingQueue(playerUid).catch(() => {})
+          }
         }
 
         return next
@@ -248,7 +259,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
         cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
-  }, [isOpen, activeView, authResolved, isAuthenticated, playerUid])
+  }, [isOpen, activeView, authResolved, isAuthenticated, playerUid, retryTrigger])
 
   // 2. Transição e Contagem Regressiva Isolada e Segura (3 -> 2 -> 1 -> Início Automático)
   const navigatedRef = useRef(false)
@@ -593,6 +604,54 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       Nível {ticket?.opponentInfo?.level || 1}
                     </span>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* STATE: TIMEOUT (30 SEGUNDOS SEM ADVERSÁRIO) */}
+            {mmState === 'timeout' && (
+              <div className="py-2 animate-rise">
+                <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-amber-500/20 text-amber-400 ring-1 ring-amber-500/40 shadow-xl shadow-amber-500/20">
+                  <Clock className="h-8 w-8" />
+                </div>
+
+                <div className="badge-hud mt-4 text-amber-300 border-amber-500/50 bg-amber-500/20 shadow-md shadow-amber-500/20">
+                  <AlertCircle className="h-3.5 w-3.5 text-amber-400" />
+                  <span>Tempo de Espera Esgotado (30s)</span>
+                </div>
+
+                <h2 className="mt-3.5 font-display text-2xl sm:text-3xl font-black uppercase text-foreground text-glow-gold tracking-tight">
+                  Nenhum Adversário Encontrado
+                </h2>
+
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
+                  Nenhum adversário encontrado de momento. Faz refresh ou tenta novamente dentro de instantes!
+                </p>
+
+                <div className="mt-6 flex flex-col gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMmState('searching')
+                      setRetryTrigger((prev) => prev + 1)
+                    }}
+                    className="button-game-purple w-full inline-flex items-center justify-center gap-2.5 rounded-2xl py-3.5 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-lg shadow-purple-500/30 hover:scale-102 transition"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                    <span>Tentar Novamente / Refresh</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose()
+                      router.push('/jogar')
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 py-3 font-display text-xs font-bold uppercase tracking-wider text-muted-foreground hover:bg-white/20 hover:text-foreground transition cursor-pointer"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span>Voltar à Central</span>
+                  </button>
                 </div>
               </div>
             )}
