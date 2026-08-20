@@ -36,7 +36,7 @@ const HERO_STATS = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-6">
+    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-6 bg-transparent">
       {/* Main Hero Grid: Left Copy & Right 3D Living Hologram Map */}
       <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         {/* Top/Left: Copy & Action Controls */}
