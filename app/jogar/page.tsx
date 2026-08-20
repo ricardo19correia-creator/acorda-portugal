@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { QuizPage } from '@/components/quiz/page';
+import CinematicLibraryCinemagraph from '@/components/CinematicLibraryCinemagraph';
 
 export default function JogarPage() {
   // Fallback imediato para cyberpunk para garantir visual espetacular
@@ -26,6 +27,11 @@ export default function JogarPage() {
       {/* CENÁRIO OFICIAL: ARENA LISBOA NEON 2088 & OUTRAS ARENAS */}
       {/* ========================================================= */}
       <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none select-none bg-[#020512]">
+        {/* 0. ARENA CINEMAGRAPH: BIBLIOTECA SAGRADA & ALTAR DOS REIS */}
+        {theme === 'theme_arena_biblioteca_sagrada' && (
+          <CinematicLibraryCinemagraph />
+        )}
+
         {/* 1. ARENA LISBOA CYBERPUNK 2088 (IMAGEM OFICIAL) */}
         {theme === 'theme_arena_lisboa_cyber_free' && (
           <div className="relative w-full h-full">
