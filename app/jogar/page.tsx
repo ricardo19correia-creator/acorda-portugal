@@ -5,15 +5,15 @@ import { QuizPage } from '@/components/quiz/page';
 
 export default function JogarPage() {
   // Fallback imediato para cyberpunk para garantir visual espetacular
-  const [currentTheme, setCurrentTheme] = useState<string>('theme_arena_lisboa_cyber_free');
+  const [theme, setTheme] = useState<string>('theme_arena_lisboa_cyber_free');
 
   useEffect(() => {
     try {
       const inv = localStorage.getItem('ap_user_inventory_v3') || localStorage.getItem('ap_equipped_items');
       if (inv) {
         const parsed = JSON.parse(inv);
-        if (parsed.equippedTheme) setCurrentTheme(parsed.equippedTheme);
-        else if (parsed.theme) setCurrentTheme(parsed.theme);
+        if (parsed.equippedTheme) setTheme(parsed.equippedTheme);
+        else if (parsed.theme) setTheme(parsed.theme);
       }
     } catch (e) {
       console.error(e);
@@ -23,95 +23,100 @@ export default function JogarPage() {
   return (
     <main className="relative min-h-screen w-full bg-[#020512] overflow-x-hidden text-white">
       {/* ========================================================= */}
-      {/* CENÁRIO VISUAL COMPLETO: ARENA LISBOA NEON 2088 CYBERPUNK */}
+      {/* CENÁRIO CINEMATOGRÁFICO VIVO E REALISTA */}
       {/* ========================================================= */}
-      {currentTheme === 'theme_arena_lisboa_cyber_free' && (
-        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-          {/* 1. Gradientes de Luz Neon de Fundo */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#1e1b4b_0%,#020512_75%)]" />
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-cyan-500/20 blur-[130px] rounded-full animate-pulse" />
-          <div className="absolute top-1/3 right-10 w-[500px] h-[350px] bg-fuchsia-600/15 blur-[120px] rounded-full" />
-          <div className="absolute bottom-1/4 left-5 w-[400px] h-[300px] bg-indigo-600/20 blur-[100px] rounded-full" />
-
-          {/* 2. Feixes Laser Verticais Dinâmicos */}
-          <div className="absolute left-[12%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
-          <div className="absolute left-[30%] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-fuchsia-500/40 to-transparent" />
-          <div className="absolute right-[28%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-cyan-300/40 to-transparent" />
-          <div className="absolute right-[10%] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-indigo-400/50 to-transparent" />
-
-          {/* 3. Grelha de Perspetiva 3D Futurista Néon */}
-          <div className="absolute bottom-0 inset-x-0 h-80 [perspective:600px]">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        {/* 1. ARENA LISBOA CYBERPUNK / PONTE 25 DE ABRIL & TEJO */}
+        {theme === 'theme_arena_lisboa_cyber_free' && (
+          <div className="relative w-full h-full">
+            {/* Imagem Cinematográfica com Movimento Lento 3D */}
             <div
-              className="w-full h-[250%] origin-bottom bg-[linear-gradient(to_right,rgba(6,182,212,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.3)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]"
-              style={{ transform: 'rotateX(70deg) translateY(-15%)' }}
+              className="absolute inset-0 bg-cover bg-center scale-105 animate-[pulse_8s_ease-in-out_infinite]"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.38) contrast(1.2) saturate(1.4)',
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020512] via-transparent to-[#020512]" />
+            {/* Atmosfera Cyberpunk Néon e Profundidade */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020512] via-[#020512]/60 to-[#0b132b]/80 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.18)_0%,transparent_75%)]" />
           </div>
+        )}
 
-          {/* 4. Silhueta Gráfica da Ponte 25 de Abril & Skyline de Lisboa */}
-          <div className="absolute bottom-0 inset-x-0 h-52 flex items-end justify-center opacity-70">
-            <svg viewBox="0 0 1200 300" className="w-full h-full text-cyan-400 drop-shadow-[0_0_20px_rgba(6,182,212,0.9)]" fill="none" preserveAspectRatio="none">
-              {/* Pilares da Ponte */}
-              <path d="M 160,300 L 160,40 L 175,40 L 175,300" fill="#06b6d4" opacity="0.7" />
-              <path d="M 440,300 L 440,40 L 455,40 L 455,300" fill="#06b6d4" opacity="0.7" />
-              {/* Cabos de Suspensão */}
-              <path d="M 0,180 Q 167,55 300,180 Q 447,55 600,180" stroke="#06b6d4" strokeWidth="3" opacity="0.85" />
-              {/* Tabuleiro Vermelho Néon */}
-              <line x1="0" y1="185" x2="600" y2="185" stroke="#f43f5e" strokeWidth="4" opacity="0.9" />
-              {/* Skyline de Lisboa com Luzes */}
-              <polygon points="640,300 640,150 660,130 680,150 680,300" fill="#3b82f6" opacity="0.5" />
-              <polygon points="700,300 700,100 730,100 730,300" fill="#06b6d4" opacity="0.6" />
-              <polygon points="750,300 750,180 770,160 790,180 790,300" fill="#a855f7" opacity="0.5" />
-              <polygon points="810,300 810,80 825,50 840,80 840,300" fill="#ec4899" opacity="0.7" />
-              <polygon points="860,300 860,130 900,130 900,300" fill="#06b6d4" opacity="0.5" />
-              <polygon points="920,300 920,160 950,160 950,300" fill="#3b82f6" opacity="0.4" />
-              <polygon points="970,300 970,110 1000,110 1000,300" fill="#8b5cf6" opacity="0.6" />
-              <polygon points="1020,300 1020,190 1060,190 1060,300" fill="#06b6d4" opacity="0.4" />
-            </svg>
+        {/* 2. ARENA TEMPLO DOURADO / MOSTEIRO DOS JERÓNIMOS / PALÁCIO REAL */}
+        {theme === 'theme_arena_gold_temple' && (
+          <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-105 animate-[pulse_10s_ease-in-out_infinite]"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1585208798174-6cedd86e019a?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.35) contrast(1.25) sepia(0.3)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0902] via-[#0d0902]/65 to-[#1c1204]/80" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.2)_0%,transparent_70%)]" />
           </div>
+        )}
 
-          {/* 5. Linha de Brilho do Rio Tejo */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-cyan-500/25 to-transparent blur-sm" />
-          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_25px_#06b6d4]" />
-        </div>
-      )}
+        {/* 3. ARENA VULCÃO / LAGOA DAS SETE CIDADES (AÇORES) */}
+        {theme === 'theme_volcano_acores' && (
+          <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-105"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.32) contrast(1.3)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#140404] via-[#140404]/70 to-transparent" />
+          </div>
+        )}
 
-      {/* ARENA TEMPLO DE OURO (VIP) */}
-      {currentTheme === 'theme_arena_gold_temple' && (
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[#0c0802] overflow-hidden select-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#f59e0b_0%,transparent_65%)] opacity-25 animate-pulse" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#d97706_0%,transparent_60%)] opacity-30" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b18_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b18_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]" />
-          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-amber-950/60 to-transparent border-t border-amber-500/20" />
-        </div>
-      )}
+        {/* 4. ARENA NOITE DE FADO EM ALFAMA */}
+        {theme === 'theme_noite_fado' && (
+          <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-105"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1509840841025-9088ba78a826?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.32) contrast(1.2) hue-rotate(270deg)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0514] via-[#0b0514]/70 to-transparent" />
+          </div>
+        )}
 
-      {/* ARENA FOGO DOS AÇORES */}
-      {currentTheme === 'theme_volcano_acores' && (
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[#120303] overflow-hidden select-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#ef4444_0%,transparent_65%)] opacity-35 animate-pulse" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ef444415_1px,transparent_1px),linear-gradient(to_bottom,#ef444415_1px,transparent_1px)] bg-[size:3rem_3rem]" />
-          <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-red-950/80 to-transparent border-t border-red-500/30" />
-        </div>
-      )}
+        {/* 5. ARENA MATRIZ CÓSMICA PORTUGUESA */}
+        {theme === 'theme_arena_cosmic_matrix' && (
+          <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-105 animate-[pulse_12s_ease-in-out_infinite]"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.35) contrast(1.25) saturate(1.3)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070514] via-[#070514]/70 to-transparent" />
+          </div>
+        )}
 
-      {/* ARENA NOITE DE FADO EM ALFAMA */}
-      {currentTheme === 'theme_noite_fado' && (
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[#0b0514] overflow-hidden select-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#a855f7_0%,transparent_70%)] opacity-25" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#a855f710_1px,transparent_1px),linear-gradient(to_bottom,#a855f710_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]" />
-          <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-purple-950/60 to-transparent border-t border-purple-500/20" />
-        </div>
-      )}
+        {/* 6. PADRÃO / PORTO & RIBEIRA DO DOURO NOTURNA */}
+        {(!theme || theme === 'default_tron') && (
+          <div className="relative w-full h-full">
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-105"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=2000&q=80')`,
+                filter: 'brightness(0.30) contrast(1.15)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#040807] via-[#040807]/75 to-transparent" />
+          </div>
+        )}
 
-      {/* ARENA MATRIZ CÓSMICA PORTUGUESA */}
-      {currentTheme === 'theme_arena_cosmic_matrix' && (
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[#070514] overflow-hidden select-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#8b5cf6_0%,transparent_70%)] opacity-30 animate-pulse" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8b5cf612_1px,transparent_1px),linear-gradient(to_bottom,#8b5cf612_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-          <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-indigo-950/70 to-transparent border-t border-indigo-500/30" />
-        </div>
-      )}
+        {/* Vinheta de Foco Cinematográfico Suave */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
+      </div>
 
       {/* CONTEÚDO DO QUIZ COM Z-10 RELATIVO */}
       <div className="relative z-10 w-full bg-transparent">
