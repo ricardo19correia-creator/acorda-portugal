@@ -17,7 +17,13 @@ function DuelPageContent() {
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
 
-  const effectiveDuelId = activeDuelId || duelIdFromUrl
+  // Prioridade ao ID da URL para navegação limpa na revanche
+  const effectiveDuelId = duelIdFromUrl || activeDuelId
+
+  const handleDuelChange = (newDuelId: string) => {
+    setActiveDuelId(newDuelId)
+    router.push(`/jogar/duelo?id=${newDuelId}`)
+  }
 
   if (!effectiveDuelId) {
     return (
@@ -74,7 +80,7 @@ function DuelPageContent() {
           onClose={() => setModalOpen(false)}
           onMatchStart={(id) => {
             console.log('[DUEL PAGE] MATCH INICIADO -> TRANSIÇÃO IMEDIATA PARA ARENA:', id)
-            setActiveDuelId(id)
+            handleDuelChange(id)
             setModalOpen(false)
           }}
         />
@@ -86,7 +92,11 @@ function DuelPageContent() {
     <div className="relative min-h-screen bg-background">
       <BackgroundFx variant="multiplayer" />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <DuelArena duelId={effectiveDuelId} />
+        <DuelArena
+          key={effectiveDuelId}
+          duelId={effectiveDuelId}
+          onDuelChange={handleDuelChange}
+        />
       </div>
     </div>
   )

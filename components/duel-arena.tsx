@@ -58,7 +58,13 @@ interface AnswerFeedback {
   correctKey: 'A' | 'B' | 'C' | 'D'
 }
 
-export function DuelArena({ duelId }: { duelId: string }) {
+export function DuelArena({
+  duelId,
+  onDuelChange,
+}: {
+  duelId: string
+  onDuelChange?: (newDuelId: string) => void
+}) {
   const router = useRouter()
   const { user, profile } = useAuth()
 
@@ -142,13 +148,17 @@ export function DuelArena({ duelId }: { duelId: string }) {
       if (updatedDuel.rematch?.status === 'accepted' && updatedDuel.rematch.newDuelId) {
         if (updatedDuel.rematch.newDuelId !== duelId) {
           console.log('[REMATCH ACCEPTED] Redirecionando para novo duelId:', updatedDuel.rematch.newDuelId)
-          router.push(`/jogar/duelo?id=${updatedDuel.rematch.newDuelId}`)
+          if (onDuelChange) {
+            onDuelChange(updatedDuel.rematch.newDuelId)
+          } else {
+            router.push(`/jogar/duelo?id=${updatedDuel.rematch.newDuelId}`)
+          }
         }
       }
     })
 
     return () => unsubscribe()
-  }, [duelId, currentPlayer.uid, router])
+  }, [duelId, currentPlayer.uid, router, onDuelChange])
 
   // Identificar papel do jogador atual (Player A ou Player B)
   const me = useMemo<DuelPlayerData | null>(() => {
@@ -352,7 +362,11 @@ export function DuelArena({ duelId }: { duelId: string }) {
     try {
       const res = await respondDuelRematch(duel.id, true, currentPlayer)
       if (res.newDuelId) {
-        router.push(`/jogar/duelo?id=${res.newDuelId}`)
+        if (onDuelChange) {
+          onDuelChange(res.newDuelId)
+        } else {
+          router.push(`/jogar/duelo?id=${res.newDuelId}`)
+        }
       }
     } catch (err) {
       console.error('Erro ao aceitar revanche:', err)
@@ -1090,6 +1104,14 @@ export function DuelArena({ duelId }: { duelId: string }) {
       <DuelMatchmakingModal
         isOpen={matchmakingModalOpen}
         onClose={() => setMatchmakingModalOpen(false)}
+        onMatchStart={(newMatchId) => {
+          setMatchmakingModalOpen(false)
+          if (onDuelChange) {
+            onDuelChange(newMatchId)
+          } else {
+            router.push(`/jogar/duelo?id=${newMatchId}`)
+          }
+        }}
       />
     </div>
   )
