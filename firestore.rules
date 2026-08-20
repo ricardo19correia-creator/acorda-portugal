@@ -32,15 +32,7 @@ service cloud.firestore {
     }
 
     match /presence/{presenceId} {
-      // Leitura pública permitida para contadores de presença e feed de atividade
-      allow read: if true;
-
-      // Utilizadores autenticados gerem apenas o seu próprio UID; visitantes gerem a sua sessão guest_
-      allow create, update: if (request.auth != null && request.auth.uid == presenceId) ||
-        (presenceId.matches('^guest_[a-zA-Z0-9_-]+$'));
-
-      allow delete: if (request.auth != null && request.auth.uid == presenceId) ||
-        (presenceId.matches('^guest_[a-zA-Z0-9_-]+$'));
+      allow read, create, update, delete: if true;
     }
 
     // FILA DE MATCHMAKING 1V1 (Compatível com Google e Convidados)

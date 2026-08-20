@@ -25,9 +25,7 @@ import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import {
   ACTIVITY_LABELS,
-  HEARTBEAT_INTERVAL_MS,
   OFFLINE_THRESHOLD_MS,
-  getOrCreateGuestSessionId,
   sanitizeDisplayName,
   type PresenceData,
   type PublicActiveUser,
@@ -48,7 +46,7 @@ type PresenceContextValue = {
 const PresenceContext = createContext<PresenceContextValue | null>(null)
 
 export function PresenceProvider({ children }: { children: ReactNode }) {
-  const { user, profile, authResolved } = useAuth()
+  const { user, profile } = useAuth()
   const pathname = usePathname()
 
   // Track activity state
@@ -68,6 +66,9 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     if (pathname.startsWith('/perfil')) {
       return 'profile'
     }
+    if (pathname.startsWith('/ranking')) {
+      return 'ranking'
+    }
     return 'browsing'
   }, [explicitActivity, pathname])
 
@@ -80,13 +81,20 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     setExplicitActivity(null)
   }, [pathname])
 
-  // Current session identifier
+  // Gera um ID único por aba/sessão do browser (para contar instâncias e dispositivos ativos reais)
   const sessionId = useMemo(() => {
-    if (authResolved && user?.uid) {
-      return user.uid
+    if (typeof window === 'undefined') return 'guest_server'
+    try {
+      let id = sessionStorage.getItem('client_presence_id')
+      if (!id) {
+        id = `guest_${Math.random().toString(36).substring(2, 10)}_${Date.now().toString(36)}`
+        sessionStorage.setItem('client_presence_id', id)
+      }
+      return id
+    } catch {
+      return `guest_${Math.random().toString(36).substring(2, 10)}`
     }
-    return null
-  }, [authResolved, user])
+  }, [])
 
   // Local state for all online users retrieved from Firestore
   const [rawPresenceDocs, setRawPresenceDocs] = useState<PresenceData[]>([])
@@ -116,16 +124,16 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   // Heartbeat sender
   const sendHeartbeat = useCallback(async (isOnline = true) => {
     const { sessionId: currentSessionId, user: currentUser, profile: currentProfile, currentActivity: currentAct, gameId: currentGameId } = presenceInfoRef.current
-    if (!currentSessionId || !currentUser?.uid) return
+    if (!currentSessionId) return
 
     const username = sanitizeDisplayName(
       currentUser?.displayName ?? currentProfile?.displayName,
-      false,
+      !currentUser,
       currentProfile?.district
     )
 
     const payload: PresenceData = {
-      userId: currentSessionId,
+      userId: currentUser?.uid || currentSessionId,
       online: isOnline,
       lastSeen: Date.now(),
       activity: currentAct,
@@ -133,7 +141,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       district: currentProfile?.district || 'Portugal',
       username,
       photoURL: currentUser?.photoURL || currentProfile?.photoURL || null,
-      isAnonymous: false,
+      isAnonymous: !currentUser,
       updatedAt: serverTimestamp(),
     }
 
@@ -152,15 +160,10 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     // Send immediate heartbeat on mount or activity/session change
     void sendHeartbeat(true)
 
-    // Schedule periodic heartbeat
+    // Schedule periodic heartbeat (a cada 10s para presença ágil)
     const heartbeatTimer = setInterval(() => {
-      if (typeof document !== 'undefined' && document.visibilityState === 'hidden') {
-        // If tab is hidden, still send heartbeat but keep interval
-        void sendHeartbeat(true)
-      } else {
-        void sendHeartbeat(true)
-      }
-    }, HEARTBEAT_INTERVAL_MS)
+      void sendHeartbeat(true)
+    }, 10_000)
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
@@ -170,16 +173,18 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
 
     const handleBeforeUnload = () => {
       // Mark offline on unload
-      const docRef = doc(db, 'presence', sessionId)
-      void setDoc(
-        docRef,
-        {
-          online: false,
-          lastSeen: Date.now(),
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      )
+      try {
+        const docRef = doc(db, 'presence', sessionId)
+        void setDoc(
+          docRef,
+          {
+            online: false,
+            lastSeen: Date.now(),
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true }
+        )
+      } catch {}
     }
 
     if (typeof window !== 'undefined') {
@@ -201,7 +206,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     const presenceQuery = query(
       collection(db, 'presence'),
       where('online', '==', true),
-      limit(100)
+      limit(200)
     )
 
     const unsubscribe = onSnapshot(
@@ -245,7 +250,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const ticker = setInterval(() => {
       setNow(Date.now())
-    }, 3_000)
+    }, 2_000)
     return () => clearInterval(ticker)
   }, [])
 
@@ -285,7 +290,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     })
 
     return {
-      onlineCount: validUsers.length,
+      onlineCount: Math.max(1, validUsers.length),
       playingCount: playing,
       duelCount: duel,
       activeUsers: formattedList,
