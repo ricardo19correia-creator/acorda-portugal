@@ -14,7 +14,7 @@ const LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative">
+    <footer className="relative border-t border-emerald-500/20 bg-black/40 backdrop-blur-md mt-16">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-md">

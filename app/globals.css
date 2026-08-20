@@ -52,28 +52,30 @@
 
 :root {
   color-scheme: dark;
-  --background: oklch(0.16 0.022 162);
-  --foreground: oklch(0.97 0.012 120);
-  --card: oklch(0.21 0.026 163);
-  --card-foreground: oklch(0.97 0.012 120);
-  --popover: oklch(0.19 0.024 163);
-  --popover-foreground: oklch(0.97 0.012 120);
-  --primary: oklch(0.7 0.17 152);
-  --primary-foreground: oklch(0.15 0.03 160);
-  --secondary: oklch(0.27 0.03 162);
-  --secondary-foreground: oklch(0.97 0.012 120);
-  --muted: oklch(0.27 0.03 162);
-  --muted-foreground: oklch(0.74 0.03 150);
-  --accent: oklch(0.8 0.16 168);
-  --accent-foreground: oklch(0.15 0.03 160);
-  --gold: oklch(0.83 0.15 86);
-  --gold-foreground: oklch(0.22 0.04 65);
-  --flag-red: oklch(0.6 0.21 26);
-  --flag-red-foreground: oklch(0.98 0.01 90);
-  --destructive: oklch(0.62 0.23 26);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.17 152);
+  /* Deep textured black background */
+  --background: #0a0d0c;
+  --foreground: #f8fafc;
+  /* Cyber Glass card */
+  --card: rgba(10, 15, 13, 0.7);
+  --card-foreground: #f8fafc;
+  --popover: rgba(10, 15, 13, 0.85);
+  --popover-foreground: #f8fafc;
+  --primary: #10b981;
+  --primary-foreground: #022c22;
+  --secondary: #141c18;
+  --secondary-foreground: #f8fafc;
+  --muted: #141c18;
+  --muted-foreground: #94a3b8;
+  --accent: #06b6d4;
+  --accent-foreground: #082f49;
+  --gold: #f59e0b;
+  --gold-foreground: #451a03;
+  --flag-red: #ef4444;
+  --flag-red-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #10b981;
   --radius: 0.75rem;
 }
 
@@ -83,20 +85,65 @@
   }
 
   html {
-    @apply bg-background;
+    background-color: #0a0d0c;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: #0a0d0c;
+    color: var(--foreground);
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
 }
 
 @layer utilities {
+  /* =========================================================
+     CYBERPUNK PORTUGUÊS 3D GLOBAL BACKGROUND & ENVIRONMENT
+     ========================================================= */
+  .bg-cyber-portugal-env {
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    pointer-events: none;
+    background-color: #0a0d0c;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.18), transparent 45%),
+      radial-gradient(circle at 90% 15%, rgba(245, 158, 11, 0.12), transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(239, 68, 68, 0.10), transparent 50%),
+      radial-gradient(circle at 50% 30%, rgba(6, 182, 212, 0.08), transparent 60%);
+  }
+
+  .pattern-azulejo-global {
+    position: fixed;
+    inset: 0;
+    z-index: -19;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%2300ffa2' stroke-width='0.75' stroke-opacity='0.12'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z'/%3E%3Cpath d='M40 12 L68 40 L40 68 L12 40 Z'/%3E%3Ccircle cx='40' cy='40' r='8' stroke='%2338bdf8' stroke-opacity='0.14'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23fbbf24' fill-opacity='0.14'/%3E%3Cpath d='M0 0 L20 20 M80 0 L60 20 M80 80 L60 60 M0 80 L20 60' stroke='%2338bdf8' stroke-opacity='0.10'/%3E%3Ccircle cx='0' cy='0' r='6' stroke='%23fbbf24' stroke-opacity='0.12'/%3E%3Ccircle cx='80' cy='0' r='6' stroke='%23fbbf24' stroke-opacity='0.12'/%3E%3Ccircle cx='80' cy='80' r='6' stroke='%23fbbf24' stroke-opacity='0.12'/%3E%3Ccircle cx='0' cy='80' r='6' stroke='%23fbbf24' stroke-opacity='0.12'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    mask-image: radial-gradient(ellipse at center, black 65%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 65%, transparent 95%);
+  }
+
+  /* 3D Glassmorphic Cards across All Game Screens */
+  .card-game,
+  .card-hud-cyber,
+  .card-premium,
   .glass {
-    background: color-mix(in oklch, var(--card) 55%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 15, 13, 0.65) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border: 1px solid rgba(16, 185, 129, 0.22) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(16, 185, 129, 0.03) !important;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  }
+
+  .card-game:hover,
+  .card-hud-cyber:hover,
+  .card-premium:hover {
+    border-color: rgba(16, 185, 129, 0.5) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 25px rgba(16, 185, 129, 0.08) !important;
   }
 
   .text-brand-gradient {
@@ -113,19 +160,11 @@
   }
 
   .text-gold-gradient {
-    background-image: linear-gradient(100deg, var(--gold) 0%, oklch(0.92 0.09 92) 55%, var(--gold) 100%);
+    background-image: linear-gradient(100deg, var(--gold) 0%, #fef08a 55%, var(--gold) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-  }
-
-  .pattern-azulejo {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%2300ffa2' stroke-width='0.75' stroke-opacity='0.07'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z'/%3E%3Ccircle cx='30' cy='30' r='6'/%3E%3Cpath d='M0 0 L15 15 M60 0 L45 15 M60 60 L45 45 M0 60 L15 45'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .pattern-calcada {
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q10 10 20 20 T40 20' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='0.04'/%3E%3Cpath d='M0 40 Q10 30 20 40 T40 40' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='0.04'/%3E%3C/svg%3E");
   }
 
   .border-pt-gradient {
@@ -133,15 +172,7 @@
   }
 
   .shadow-pt-glow {
-    box-shadow: 0 10px 30px -10px oklch(0.7 0.17 152 / 0.25), 0 0 20px -5px oklch(0.83 0.15 86 / 0.15);
-  }
-
-  .card-premium {
-    background: linear-gradient(145deg, color-mix(in oklch, var(--card) 90%, transparent), color-mix(in oklch, var(--card) 65%, transparent));
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.35), 0 0 20px -5px rgba(245, 158, 11, 0.25);
   }
 
   /* =========================================================
@@ -212,15 +243,6 @@
       inset 0 -1px 0 rgba(0, 0, 0, 0.8),
       0 0 15px rgba(245, 158, 11, 0.25),
       0 4px 12px rgba(0, 0, 0, 0.7);
-  }
-
-  .plate-led-arcade::before {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    border-radius: 0.7rem;
-    border: 1px solid rgba(245, 158, 11, 0.15);
-    pointer-events: none;
   }
 
   /* 3. Botões Mech / Console 3D */
@@ -306,29 +328,23 @@
     transform: translateY(1px) scale(0.98);
   }
 
-  /* 4. Cartões Holográficos Cyberpunk Glassmorphism */
-  .card-hud-cyber {
+  /* 4. Badges e Seletores de Nível Metálicos (Nvl 1 a Nvl 5) */
+  .badge-level-selector {
     position: relative;
-    background: linear-gradient(145deg, rgba(12, 22, 18, 0.82) 0%, rgba(6, 12, 10, 0.92) 100%);
-    border: 1px solid rgba(0, 255, 162, 0.22);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow:
-      0 16px 36px -10px rgba(0, 0, 0, 0.8),
-      inset 0 0 15px rgba(0, 255, 162, 0.05);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: linear-gradient(180deg, rgba(20, 30, 25, 0.85) 0%, rgba(10, 15, 12, 0.95) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .card-hud-cyber::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    border-top: 2px solid #00ffa2;
-    border-left: 2px solid #00ffa2;
-    pointer-events: none;
+  .badge-level-selector:hover,
+  .badge-level-selector.active {
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.35) 0%, rgba(5, 150, 105, 0.45) 100%);
+    border-color: #34d399;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 0 6px 18px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
   }
 
   /* Efeito de Varredura de Luz (Light Sweep) */
@@ -364,10 +380,6 @@
     }
   }
 
-  .pattern-azulejo-cyber {
-    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%2300ffa2' stroke-width='0.8' stroke-opacity='0.09'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z'/%3E%3Cpath d='M40 12 L68 40 L40 68 L12 40 Z'/%3E%3Ccircle cx='40' cy='40' r='8' stroke='%2338bdf8' stroke-opacity='0.12'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0 L20 20 M80 0 L60 20 M80 80 L60 60 M0 80 L20 60' stroke='%2338bdf8' stroke-opacity='0.08'/%3E%3Ccircle cx='0' cy='0' r='6' stroke='%23fbbf24' stroke-opacity='0.09'/%3E%3Ccircle cx='80' cy='0' r='6' stroke='%23fbbf24' stroke-opacity='0.09'/%3E%3Ccircle cx='80' cy='80' r='6' stroke='%23fbbf24' stroke-opacity='0.09'/%3E%3Ccircle cx='0' cy='80' r='6' stroke='%23fbbf24' stroke-opacity='0.09'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
   .holo-pedestal {
     position: relative;
   }
@@ -379,7 +391,7 @@
     left: 10%;
     right: 10%;
     height: 30px;
-    background: radial-gradient(ellipse at center, oklch(0.7 0.17 152 / 0.4) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.4) 0%, transparent 70%);
     filter: blur(10px);
     pointer-events: none;
     border-radius: 50%;
@@ -387,8 +399,8 @@
 
   .grid-tech {
     background-image:
-      linear-gradient(to right, oklch(0.7 0.17 152 / 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.7 0.17 152 / 0.08) 1px, transparent 1px);
+      linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
     background-size: 46px 46px;
   }
 
@@ -404,28 +416,14 @@
     background: linear-gradient(
       115deg,
       transparent 20%,
-      oklch(1 0 0 / 0.22) 45%,
-      oklch(1 0 0 / 0.06) 55%,
+      rgba(255, 255, 255, 0.22) 45%,
+      rgba(255, 255, 255, 0.06) 55%,
       transparent 75%
     );
     background-size: 240% 100%;
     background-position: 180% 0;
     animation: sheen-sweep 4.5s ease-in-out infinite;
     pointer-events: none;
-  }
-
-  .shimmer::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      oklch(1 0 0 / 0.35) 50%,
-      transparent
-    );
-    transform: translateX(-100%);
-    animation: shimmer-move 2.4s ease-in-out infinite;
   }
 }
 
@@ -518,15 +516,6 @@
   }
 }
 
-@keyframes shimmer-move {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 @keyframes sonar-wave {
   0% {
     transform: scale(0.6);
@@ -548,4 +537,3 @@
     scroll-behavior: auto !important;
   }
 }
-

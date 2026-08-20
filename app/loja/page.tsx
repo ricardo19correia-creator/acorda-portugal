@@ -281,7 +281,7 @@ export default function ShopPage() {
                 <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">
                   Economia Oficial & Mercado
                 </p>
-                <h1 className="mt-2 font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground">
+                <h1 className="mt-2 font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-3d-chrome">
                   Loja Acorda Portugal
                 </h1>
                 <p className="mt-2 max-w-xl text-sm sm:text-base text-muted-foreground">

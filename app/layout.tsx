@@ -37,7 +37,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="bg-background font-sans antialiased">
+      <body className="bg-background font-sans antialiased relative min-h-screen">
+        {/* Global Ambient Cyberpunk Portuguese 3D Atmosphere */}
+        <div className="bg-cyber-portugal-env" aria-hidden="true" />
+        <div className="pattern-azulejo-global" aria-hidden="true" />
+
         <AuthProvider>
           <PresenceProvider>{children}</PresenceProvider>
         </AuthProvider>

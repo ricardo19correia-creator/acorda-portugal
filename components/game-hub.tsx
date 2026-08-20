@@ -122,7 +122,7 @@ export function GameHub() {
             <ArrowLeft className="h-4 w-4" />
             Menu Inicial
           </Link>
-          <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-foreground">
+          <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-3d-chrome">
             Central de Jogo
           </h1>
           <p className="mt-1 text-sm sm:text-base text-muted-foreground">
@@ -184,10 +184,8 @@ export function GameHub() {
                 key={lvl}
                 onClick={() => setSelectedDifficulty(lvl)}
                 className={cn(
-                  'rounded-xl px-2.5 py-2 text-xs font-black uppercase transition-all duration-200 cursor-pointer flex flex-col sm:flex-row items-center gap-1',
-                  isSelected
-                    ? `${cfg.badgeClass} ring-2 ring-white/20 shadow-md scale-105`
-                    : 'border border-white/10 bg-white/[0.03] text-muted-foreground hover:bg-white/[0.08] hover:text-foreground',
+                  'badge-level-selector rounded-xl px-2.5 py-2 text-xs font-black uppercase cursor-pointer flex flex-col sm:flex-row items-center gap-1',
+                  isSelected && 'active scale-105 ring-1 ring-emerald-400',
                 )}
               >
                 <span>Nvl {lvl}</span>
