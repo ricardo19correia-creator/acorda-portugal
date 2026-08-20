@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { usePresence } from '@/components/presence-provider'
+import { useOnlineUsers } from '@/hooks/use-online-users'
 import { cn } from '@/lib/utils'
 
 interface OnlineUsersBadgeProps {
@@ -10,10 +10,10 @@ interface OnlineUsersBadgeProps {
 }
 
 export function OnlineUsersBadge({ className, variant = 'default' }: OnlineUsersBadgeProps) {
-  const { onlineCount, loading } = usePresence()
+  const onlineCount = useOnlineUsers()
 
   // Garante contagem mínima de 1 (o próprio utilizador conectado)
-  const displayCount = loading ? 1 : Math.max(1, onlineCount)
+  const displayCount = Math.max(1, onlineCount)
 
   if (variant === 'hero') {
     return (
@@ -46,7 +46,7 @@ export function OnlineUsersBadge({ className, variant = 'default' }: OnlineUsers
         'flex items-center gap-2 px-3 py-1 bg-zinc-900/80 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-lg backdrop-blur-md select-none transition-all hover:border-emerald-500/60',
         className,
       )}
-      title={`${displayCount} jogadores ativos em tempo real`}
+      title={`${displayCount} conexões ativas em tempo real`}
     >
       <span className="relative flex h-2.5 w-2.5">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
