@@ -36,10 +36,13 @@ import { useAuth } from '@/components/auth-provider'
 import {
   SHOP_CATALOG,
   buyShopItem,
+  equipItem,
+  getItemSlot,
   formatRarityLabel,
   type ItemCategory,
   type ItemRarity,
   type ShopItem,
+  type EquipSlot,
   type WalletTransaction,
 } from '@/lib/economy'
 import {
@@ -112,6 +115,7 @@ export default function ShopPage() {
   const [selectedRarity, setSelectedRarity] = useState<ItemRarity | 'all'>('all')
   const [walletOpen, setWalletOpen] = useState(false)
   const [purchasingId, setPurchasingId] = useState<string | null>(null)
+  const [equippingId, setEquippingId] = useState<string | null>(null)
   const [checkoutLoadingId, setCheckoutLoadingId] = useState<string | null>(null)
   const [authPromptOpen, setAuthPromptOpen] = useState(false)
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
@@ -209,6 +213,39 @@ export default function ShopPage() {
       setFeedback({ type: 'error', message: e?.message || 'Erro inesperado na transação.' })
     } finally {
       setPurchasingId(null)
+    }
+  }
+
+  // Equipar / Desequipar Cosmético
+  const handleEquipToggle = async (item: ShopItem) => {
+    if (!effectiveUid || !user?.uid) {
+      setAuthPromptOpen(true)
+      return
+    }
+
+    const slot = getItemSlot(item)
+    if (!slot) return
+
+    const isCurrentlyEquipped = (profile as any)?.equipped?.[slot] === item.id
+
+    try {
+      setEquippingId(item.id)
+      setFeedback(null)
+      const res = await equipItem(effectiveUid, isCurrentlyEquipped ? null : item.id, slot)
+      if (res.success) {
+        setFeedback({
+          type: 'success',
+          message: isCurrentlyEquipped
+            ? `«${item.name}» desequipado.`
+            : `«${item.name}» equipado com sucesso!`,
+        })
+      } else {
+        setFeedback({ type: 'error', message: res.message })
+      }
+    } catch (e: any) {
+      setFeedback({ type: 'error', message: e?.message || 'Erro ao equipar item.' })
+    } finally {
+      setEquippingId(null)
     }
   }
 
@@ -448,12 +485,16 @@ export default function ShopPage() {
                   const isBuying = purchasingId === item.id
                   const canAfford = balance >= item.price
 
+                  const slot = getItemSlot(item)
+                  const isEquipped = slot ? (profile as any)?.equipped?.[slot] === item.id : false
+                  const isEquipping = equippingId === item.id
+
                   return (
                     <div
                       key={item.id}
                       className={cn(
                         'group relative flex flex-col justify-between overflow-hidden rounded-3xl border bg-card/60 p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 shadow-lg',
-                        rarityStyle.border,
+                        isEquipped ? 'border-emerald-400 ring-2 ring-emerald-500/30 shadow-[0_0_25px_rgba(16,185,129,0.25)]' : rarityStyle.border,
                         rarityStyle.glow,
                       )}
                     >
@@ -474,9 +515,16 @@ export default function ShopPage() {
                             </span>
                           )}
                           {isPermanentOwned && (
-                            <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.62rem] font-black uppercase text-primary flex items-center gap-1">
+                            <span
+                              className={cn(
+                                'rounded-full px-2 py-0.5 text-[0.62rem] font-black uppercase flex items-center gap-1',
+                                isEquipped
+                                  ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-400/40'
+                                  : 'bg-primary/20 text-primary',
+                              )}
+                            >
                               <CheckCircle2 className="h-3 w-3" />
-                              Adquirido
+                              {isEquipped ? 'Equipado' : 'Adquirido'}
                             </span>
                           )}
                         </div>
@@ -505,13 +553,35 @@ export default function ShopPage() {
                         </div>
 
                         {isPermanentOwned ? (
-                          <button
-                            type="button"
-                            disabled
-                            className="w-full rounded-2xl bg-white/5 py-2.5 text-xs font-bold text-muted-foreground cursor-not-allowed border border-white/5"
-                          >
-                            Item já adquirido
-                          </button>
+                          <div className="flex flex-col gap-2">
+                            {isEquipped ? (
+                              <div className="flex items-center gap-2">
+                                <div className="flex-1 flex items-center justify-center gap-1.5 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 py-2.5 text-xs font-black uppercase text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                                  <span>Em Uso</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  disabled={isEquipping}
+                                  onClick={() => handleEquipToggle(item)}
+                                  className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-bold text-muted-foreground hover:bg-white/10 hover:text-foreground transition cursor-pointer"
+                                  title="Desequipar este cosmético"
+                                >
+                                  {isEquipping ? '...' : 'Remover'}
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                type="button"
+                                disabled={isEquipping}
+                                onClick={() => handleEquipToggle(item)}
+                                className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-2.5 text-xs font-black uppercase tracking-wider text-black shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer font-sans"
+                              >
+                                <Sparkles className="h-4 w-4 fill-current" />
+                                <span>{isEquipping ? 'A equipar...' : 'Equipar'}</span>
+                              </button>
+                            )}
+                          </div>
                         ) : (
                           <button
                             type="button"

@@ -14,6 +14,9 @@ import { db } from '@/lib/firebase'
 import { SectionHeading } from '@/components/section-heading'
 import { useAuth } from '@/components/auth-provider'
 import { calculateLevelProgress } from '@/lib/progression'
+import { getTitleBadgeStyle } from '@/lib/cosmetics'
+import { SHOP_CATALOG } from '@/lib/economy'
+import type { EquippedCosmetics } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 
 export type RankedPlayer = {
@@ -24,6 +27,7 @@ export type RankedPlayer = {
   xp: number
   district: string
   pos: number
+  equipped?: EquippedCosmetics
 }
 
 const PODIUM_ORDER = [1, 0, 2] // 2º (left), 1º (center), 3º (right)
@@ -50,6 +54,7 @@ export function Ranking() {
         const level = calculateLevelProgress(xp).currentLevel.level
         const district = data.district || 'Portugal'
         const photoURL = data.photoURL || null
+        const equipped = data.equipped || {}
 
         playersMap.set(docSnap.id, {
           uid: docSnap.id,
@@ -59,6 +64,7 @@ export function Ranking() {
           xp,
           district,
           pos: 0,
+          equipped,
         })
       })
 
@@ -269,10 +275,15 @@ export function Ranking() {
 
                       {/* Name + District + Level */}
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <p className="truncate font-display font-bold text-foreground">
                             {row.name}
                           </p>
+                          {row.equipped?.title && (
+                            <span className={cn('rounded-full px-2 py-0.5 text-[0.6rem] font-bold shrink-0', getTitleBadgeStyle(row.equipped.title))}>
+                              {SHOP_CATALOG.find((i) => i.id === row.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                            </span>
+                          )}
                           {isCurrent && (
                             <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-primary ring-1 ring-primary/40">
                               Tu
@@ -437,11 +448,16 @@ function PodiumCard({
         )}
       </div>
 
-      {/* Player name & District */}
+      {/* Player name & Title & District */}
       <p className="mt-2.5 max-w-[100px] sm:max-w-[140px] truncate text-center font-display text-xs sm:text-sm font-bold text-foreground">
         {player.name}
       </p>
-      <p className="max-w-[90px] sm:max-w-[130px] truncate text-center text-[0.62rem] sm:text-xs text-muted-foreground">
+      {player.equipped?.title && (
+        <span className={cn('mt-0.5 rounded-full px-2 py-0.5 text-[0.55rem] font-bold truncate max-w-[110px] sm:max-w-[130px]', getTitleBadgeStyle(player.equipped.title))}>
+          {SHOP_CATALOG.find((i) => i.id === player.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+        </span>
+      )}
+      <p className="mt-0.5 max-w-[90px] sm:max-w-[130px] truncate text-center text-[0.62rem] sm:text-xs text-muted-foreground">
         {player.district}
       </p>
 

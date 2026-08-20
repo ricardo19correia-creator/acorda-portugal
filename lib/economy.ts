@@ -43,6 +43,8 @@ export function formatItemStatusBadge(rarity: ItemRarity, isEquipped: boolean): 
   return rarityLabel
 }
 
+export type EquipSlot = 'frame' | 'title' | 'theme' | 'aura' | 'sfx'
+
 export type ShopItem = {
   id: string
   name: string
@@ -52,10 +54,21 @@ export type ShopItem = {
   type: ItemType
   price: number
   icon: string
+  slot?: EquipSlot
   badgeText?: string
   effectValue?: number
   previewColor?: string
   active?: boolean
+}
+
+export function getItemSlot(item: ShopItem): EquipSlot | null {
+  if (item.slot) return item.slot
+  if (item.id.startsWith('frame_')) return 'frame'
+  if (item.id.startsWith('title_')) return 'title'
+  if (item.id.startsWith('theme_')) return 'theme'
+  if (item.id.startsWith('prestige_aura_')) return 'aura'
+  if (item.id.startsWith('sfx_')) return 'sfx'
+  return null
 }
 
 export type WalletTransaction = {
@@ -71,60 +84,137 @@ export type WalletTransaction = {
 
 // Configuração centralizada de preços e produtos da loja
 export const SHOP_CATALOG: ShopItem[] = [
-  // 🎨 PERSONALIZAÇÃO (Cosméticos permanentes)
+  // 🎨 PERSONALIZAÇÃO: MOLDURAS DE AVATAR (Cosméticos permanentes animados)
   {
-    id: 'frame_verde_esperanca',
-    name: 'Moldura Verde Esperança',
-    description: 'Moldura de avatar clássica com o brilho verde nacional.',
+    id: 'frame_chama_sebastiao',
+    name: 'Moldura Chama de D. Sebastião',
+    description: 'Moldura mítica em chamas holográficas rubi e douradas com partículas e fumo néon a subir.',
     category: 'personalizacao',
-    rarity: 'comum',
+    rarity: 'lendario',
     type: 'permanent',
-    price: 500,
-    icon: 'Shield',
-    previewColor: 'border-primary',
+    slot: 'frame',
+    price: 25000,
+    icon: 'Flame',
+    previewColor: 'border-amber-500',
   },
   {
-    id: 'frame_mar_portugues',
-    name: 'Moldura Mar Português',
-    description: 'Moldura aquática inspirada na epopeia dos navegadores portugueses.',
+    id: 'frame_cyber_galo',
+    name: 'Moldura Cyber Galo de Barcelos',
+    description: 'Crista e arestas néon multicolor com rotação de brilho e reflexos cyberpunk.',
+    category: 'personalizacao',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'frame',
+    price: 8500,
+    icon: 'Crown',
+    previewColor: 'border-emerald-400',
+  },
+  {
+    id: 'frame_onda_nazare',
+    name: 'Moldura Onda da Nazaré',
+    description: 'Vórtice de água translúcida com reflexos azuis néon e maré pulsante em tempo real.',
     category: 'personalizacao',
     rarity: 'raro',
     type: 'permanent',
-    price: 1500,
+    slot: 'frame',
+    price: 3200,
     icon: 'Sparkles',
     previewColor: 'border-cyan-400',
   },
   {
-    id: 'frame_azulejo_nobre',
-    name: 'Moldura Azulejo Nobre',
-    description: 'Padrão tradicional de azulejo português refinado com reflexos prateados.',
+    id: 'frame_padrao_descobrimentos',
+    name: 'Moldura Padrão dos Descobrimentos',
+    description: 'Acabamento nobre em pedra calcária cinzelada com iluminação laser verde esmeralda.',
     category: 'personalizacao',
-    rarity: 'epico',
+    rarity: 'comum',
     type: 'permanent',
-    price: 5000,
-    icon: 'Sparkles',
-    previewColor: 'border-purple-400',
+    slot: 'frame',
+    price: 1200,
+    icon: 'Shield',
+    previewColor: 'border-emerald-600',
   },
   {
     id: 'frame_ouro_real',
     name: 'Moldura Ouro Real',
-    description: 'Moldura lendária banhada a ouro para verdadeiros mestres do quiz.',
+    description: 'Moldura lendária banhada a ouro maciço com brilho reluzente para mestres do saber.',
     category: 'personalizacao',
     rarity: 'lendario',
     type: 'permanent',
+    slot: 'frame',
     price: 15000,
     icon: 'Crown',
     previewColor: 'border-gold',
   },
   {
-    id: 'title_patriota',
-    name: 'Título: «O Patriota»',
-    description: 'Exibe o título de Patriota no teu perfil e nos rankings.',
+    id: 'frame_azulejo_nobre',
+    name: 'Moldura Azulejo Nobre',
+    description: 'Padrão tradicional de azulejo português refinado com reflexos prateados e violeta.',
+    category: 'personalizacao',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'frame',
+    price: 5000,
+    icon: 'Sparkles',
+    previewColor: 'border-purple-400',
+  },
+  {
+    id: 'frame_mar_portugues',
+    name: 'Moldura Mar Português',
+    description: 'Moldura aquática inspirada na epopeia e bravura dos navegadores portugueses.',
+    category: 'personalizacao',
+    rarity: 'raro',
+    type: 'permanent',
+    slot: 'frame',
+    price: 1500,
+    icon: 'Sparkles',
+    previewColor: 'border-cyan-400',
+  },
+  {
+    id: 'frame_verde_esperanca',
+    name: 'Moldura Verde Esperança',
+    description: 'Moldura de avatar clássica com o anel de luz verde néon nacional.',
     category: 'personalizacao',
     rarity: 'comum',
     type: 'permanent',
-    price: 750,
-    icon: 'Award',
+    slot: 'frame',
+    price: 500,
+    icon: 'Shield',
+    previewColor: 'border-primary',
+  },
+
+  // 🏷️ PERSONALIZAÇÃO: TÍTULOS DE PERFIL COM ANIMAÇÃO
+  {
+    id: 'title_rei_18_distritos',
+    name: 'Título: «Rei dos 18 Distritos»',
+    description: 'Título lendário dourado com efeito de brilho metálico contínuo (shimmer animation).',
+    category: 'personalizacao',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'title',
+    price: 18000,
+    icon: 'Crown',
+  },
+  {
+    id: 'title_tuga_cibernetico',
+    name: 'Título: «Tuga Cibernético»',
+    description: 'Título futurista com efeito glitch e luz néon esmeralda pulsante.',
+    category: 'personalizacao',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'title',
+    price: 6000,
+    icon: 'Zap',
+  },
+  {
+    id: 'title_terror_do_quiz',
+    name: 'Título: «Terror do Quiz»',
+    description: 'Título temido com aura carmesim e contorno néon de alta intensidade.',
+    category: 'personalizacao',
+    rarity: 'raro',
+    type: 'permanent',
+    slot: 'title',
+    price: 2800,
+    icon: 'Flame',
   },
   {
     id: 'title_guardiao_lusitano',
@@ -133,9 +223,58 @@ export const SHOP_CATALOG: ShopItem[] = [
     category: 'personalizacao',
     rarity: 'epico',
     type: 'permanent',
+    slot: 'title',
     price: 2500,
     icon: 'Award',
   },
+  {
+    id: 'title_voz_do_povo',
+    name: 'Título: «Voz do Povo»',
+    description: 'Título clássico em relevo prateado para os grandes mestres do saber popular.',
+    category: 'personalizacao',
+    rarity: 'comum',
+    type: 'permanent',
+    slot: 'title',
+    price: 850,
+    icon: 'Award',
+  },
+  {
+    id: 'title_patriota',
+    name: 'Título: «O Patriota»',
+    description: 'Exibe o título de Patriota no teu perfil, rankings e duelos 1v1.',
+    category: 'personalizacao',
+    rarity: 'comum',
+    type: 'permanent',
+    slot: 'title',
+    price: 750,
+    icon: 'Award',
+  },
+
+  // 💥 PERSONALIZAÇÃO: EFEITOS DE RESPOSTA NO DUELO 1V1
+  {
+    id: 'sfx_cravos_abril',
+    name: 'Efeito 1v1: Cravos de Abril',
+    description: 'Quando acertas uma pergunta no duelo 1v1, explode uma rajada de pétalas e cravos vermelhos 3D no teu lado.',
+    category: 'personalizacao',
+    rarity: 'epico',
+    type: 'permanent',
+    slot: 'sfx',
+    price: 7500,
+    icon: 'Sparkles',
+  },
+  {
+    id: 'sfx_raio_lusitano',
+    name: 'Efeito 1v1: Raio Néon Lusitano',
+    description: 'Ao acertar em sequência no 1v1, dispara um relâmpago verde e dourado na tua barra de pontuação.',
+    category: 'personalizacao',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'sfx',
+    price: 12000,
+    icon: 'Zap',
+  },
+
+  // 🎨 TEMAS & AURAS
   {
     id: 'theme_noite_fado',
     name: 'Tema: Noite de Fado',
@@ -143,8 +282,31 @@ export const SHOP_CATALOG: ShopItem[] = [
     category: 'personalizacao',
     rarity: 'epico',
     type: 'permanent',
+    slot: 'theme',
     price: 5000,
     icon: 'Palette',
+  },
+  {
+    id: 'prestige_aura_dourada',
+    name: 'Aura Dourada Radiante',
+    description: 'Efeito luminoso permanente à volta do teu avatar nos rankings, duelos e perfil.',
+    category: 'prestigio',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'aura',
+    price: 25000,
+    icon: 'Sun',
+  },
+  {
+    id: 'title_lenda_viva',
+    name: 'Título: «Lenda Viva»',
+    description: 'O título de maior prestígio para quem domina todos os desafios de Portugal.',
+    category: 'prestigio',
+    rarity: 'lendario',
+    type: 'permanent',
+    slot: 'title',
+    price: 30000,
+    icon: 'Crown',
   },
 
   // ⚡ UTILIDADE (Consumíveis de jogo)
@@ -187,28 +349,6 @@ export const SHOP_CATALOG: ShopItem[] = [
     type: 'consumable',
     price: 750,
     icon: 'Flame',
-  },
-
-  // 🏆 PRESTÍGIO (Itens de estatuto)
-  {
-    id: 'prestige_aura_dourada',
-    name: 'Aura Dourada Radiante',
-    description: 'Efeito luminoso permanente à volta do teu avatar nos rankings e perfil.',
-    category: 'prestigio',
-    rarity: 'lendario',
-    type: 'permanent',
-    price: 25000,
-    icon: 'Sun',
-  },
-  {
-    id: 'title_lenda_viva',
-    name: 'Título: «Lenda Viva»',
-    description: 'O título de maior prestígio para quem domina todos os desafios.',
-    category: 'prestigio',
-    rarity: 'lendario',
-    type: 'permanent',
-    price: 30000,
-    icon: 'Crown',
   },
 
   // 🎁 PACKS (Conjuntos com desconto)
@@ -343,8 +483,24 @@ export async function buyShopItem(userId: string, itemId: string): Promise<Purch
 /**
  * Equipa um cosmético do inventário
  */
-export async function equipItem(userId: string, itemId: string | null, slot: 'frame' | 'title' | 'theme' | 'aura'): Promise<{ success: boolean; message: string }> {
+export async function equipItem(
+  userId: string,
+  itemId: string | null,
+  slot?: EquipSlot,
+): Promise<{ success: boolean; message: string }> {
   if (!userId || userId.startsWith('guest_')) return { success: false, message: 'Inicia sessão para equipar itens.' }
+
+  let targetSlot = slot
+  if (!targetSlot && itemId) {
+    const item = SHOP_CATALOG.find((i) => i.id === itemId)
+    if (item) {
+      targetSlot = getItemSlot(item) || undefined
+    }
+  }
+
+  if (!targetSlot) {
+    return { success: false, message: 'Tipo de slot cosmético inválido.' }
+  }
 
   try {
     const userRef = doc(db, 'users', userId)
@@ -362,9 +518,9 @@ export async function equipItem(userId: string, itemId: string | null, slot: 'fr
 
       const updatedEquipped = { ...equipped }
       if (itemId) {
-        updatedEquipped[slot] = itemId
+        updatedEquipped[targetSlot!] = itemId
       } else {
-        delete updatedEquipped[slot]
+        delete updatedEquipped[targetSlot!]
       }
 
       transaction.update(userRef, {

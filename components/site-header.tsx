@@ -6,6 +6,7 @@ import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Fla
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { OnlineUsersBadge } from '@/components/online-users-badge'
+import { PlayerAvatar } from '@/components/player-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
 
@@ -23,41 +24,27 @@ export function SiteHeader() {
 
   const MOBILE_NAV = [
     { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
-    { label: 'Rankings & Competição', href: '/rankings', icon: Trophy },
-    { label: 'Explorar & Sobre', href: '/explorar', icon: Sparkles },
-    { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
-    { label: 'Portugal & Mapa', href: '/portugal', icon: Flag },
-    { label: 'Eventos', href: '/eventos', icon: Flame },
-    { label: 'Loja Acorda', href: '/loja', icon: ShoppingBag },
+    { label: 'Explorar o Desafio', href: '/explorar', icon: Sparkles },
+    { label: 'Categorias de Quiz', href: '/categorias', icon: LayoutGrid },
+    { label: 'Ranking Nacional', href: '/rankings', icon: Trophy },
+    { label: 'Mapa de Portugal', href: '/portugal', icon: Flag },
+    { label: 'Eventos em Direto', href: '/eventos', icon: Flame },
+    { label: 'Loja € Acorda', href: '/loja', icon: ShoppingBag },
     { label: 'O Meu Perfil', href: '/perfil', icon: User },
   ]
 
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavLink = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (href.startsWith('/#')) {
-      const sectionId = href.substring(2)
-      if (typeof window !== 'undefined' && window.location.pathname === '/') {
-        const target = document.getElementById(sectionId)
-        if (target) {
-          e.preventDefault()
-          target.scrollIntoView({ behavior: 'smooth' })
-          window.history.pushState(null, '', href)
-        }
-      }
-    }
-  }
-
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoClick = () => {
     if (typeof window !== 'undefined' && window.location.pathname === '/') {
-      e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
@@ -78,55 +65,45 @@ export function SiteHeader() {
             href="/"
             onClick={handleLogoClick}
             aria-label="Acorda Portugal — início"
-            className="shrink-0 hover:scale-102 transition-transform duration-200"
+            className="group flex items-center transition-transform hover:scale-105"
           >
             <BrandLogo />
           </Link>
         </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavLink(item.href, e)}
-              className="group relative flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs lg:text-sm font-bold uppercase tracking-wider text-muted-foreground transition-all duration-200 hover:text-foreground hover:bg-white/[0.06]"
-            >
-              <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors pointer-events-none" />
-              <span className="pointer-events-none">{item.label}</span>
-              <span className="absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 rounded-full bg-gradient-to-r from-primary to-accent transition-transform duration-200 group-hover:scale-x-100" />
-            </Link>
-          ))}
+        {/* Center: Desktop Navigation */}
+        <nav aria-label="Navegação principal" className="hidden items-center gap-1 md:flex">
+          {NAV.map((item) => {
+            const Icon = item.icon
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-foreground"
+              >
+                <Icon className="h-4 w-4" />
+                <span>{item.label}</span>
+              </Link>
+            )
+          })}
+        </nav>
 
-          {/* Online Players Live Badge */}
-          <div className="ml-2 mr-1">
-            <OnlineUsersBadge />
-          </div>
+        {/* Right: Online Users Badge + Auth + CTA */}
+        <nav aria-label="Ações de utilizador" className="hidden items-center gap-2.5 md:flex">
+          <OnlineUsersBadge />
 
           {!authResolved ? (
-            <div className="ml-2 flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2 text-xs font-medium text-muted-foreground animate-pulse">
-              <div className="h-4 w-4 rounded-full bg-white/10" />
+            <div className="ml-2 flex items-center gap-2 rounded-2xl border border-white/5 bg-white/[0.03] px-3.5 py-2 text-xs font-bold text-muted-foreground animate-pulse">
+              <div className="h-3.5 w-3.5 rounded-full bg-white/10" />
               <span>A carregar...</span>
             </div>
           ) : user ? (
             <Link
               href="/perfil"
               aria-label={`Ver perfil de ${user.displayName ?? 'Jogador'}`}
-              className="ml-2 flex items-center gap-2 rounded-2xl border border-white/15 bg-card/90 p-1.5 pr-4 text-xs font-black uppercase tracking-wider text-foreground shadow-md transition-all duration-200 hover:border-primary/50 hover:shadow-[0_0_20px_-4px_oklch(0.7_0.17_152/0.4)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="ml-2 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-card/90 p-1.5 pr-4 text-xs font-black uppercase tracking-wider text-foreground shadow-md transition-all duration-200 hover:border-primary/50 hover:shadow-[0_0_20px_-4px_oklch(0.7_0.17_152/0.4)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              {user.photoURL ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName ?? ''}
-                  className="h-7 w-7 rounded-xl object-cover pointer-events-none ring-1 ring-white/30"
-                />
-              ) : (
-                <div className="grid h-7 w-7 place-items-center rounded-xl bg-primary/20 text-primary pointer-events-none ring-1 ring-primary/40">
-                  <User className="h-4 w-4 pointer-events-none" />
-                </div>
-              )}
+              <PlayerAvatar profile={profile} size="xs" />
               <div className="flex flex-col text-left leading-none">
                 <span className="truncate max-w-[100px] pointer-events-none font-black text-foreground">
                   {user.displayName?.split(' ')[0] ?? 'Jogador'}
@@ -183,18 +160,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-card/80 p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
             >
-              {user.photoURL ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName ?? ''}
-                  className="h-10 w-10 rounded-full object-cover ring-2 ring-primary/30 pointer-events-none"
-                />
-              ) : (
-                <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/20 text-primary ring-2 ring-primary/30 pointer-events-none">
-                  <User className="h-5 w-5 pointer-events-none" />
-                </div>
-              )}
+              <PlayerAvatar profile={profile} size="sm" />
               <div className="flex flex-col min-w-0 pointer-events-none">
                 <span className="truncate font-bold text-foreground">
                   {user.displayName ?? 'Conta'}
@@ -220,10 +186,7 @@ export function SiteHeader() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  onClick={(e) => {
-                    setOpen(false)
-                    handleNavLink(item.href, e)
-                  }}
+                  onClick={() => setOpen(false)}
                   className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
                 >
                   <item.icon className="h-4 w-4 text-primary pointer-events-none" />

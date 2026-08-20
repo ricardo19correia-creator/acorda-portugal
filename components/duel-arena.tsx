@@ -44,7 +44,8 @@ import {
 } from '@/lib/duel'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
-import { useConsumablePowerUp } from '@/lib/economy'
+import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
+import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { cn } from '@/lib/utils'
@@ -593,15 +594,34 @@ export function DuelArena({
         {/* ========================================================= */}
         {/* TOP CLASH HUD: PLAYER A vs PLAYER B */}
         {/* ========================================================= */}
-        <div className="card-game flex items-center justify-between gap-2 rounded-3xl p-3.5 sm:p-5 shadow-2xl border border-white/20">
+        <div className="card-game flex items-center justify-between gap-2 rounded-3xl p-3.5 sm:p-5 shadow-2xl border border-white/20 relative overflow-hidden">
+          {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+          {feedback?.status === 'CORRECT' && profile?.equipped?.sfx === 'sfx_raio_lusitano' && (
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
+          )}
+
+          {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+          {feedback?.status === 'CORRECT' && profile?.equipped?.sfx === 'sfx_cravos_abril' && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+              <span className="text-3xl animate-bounce">🌺</span>
+              <span className="text-2xl animate-ping ml-4">🌸</span>
+              <span className="text-3xl animate-bounce ml-4">🌺</span>
+            </div>
+          )}
+
           {/* Player Left (Me) */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0">
             <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} size="sm" />
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
                   {me?.displayName || 'Jogador'} <span className="text-primary">(Tu)</span>
                 </span>
+                {profile?.equipped?.title && (
+                  <span className={cn('rounded-full px-2 py-0.2 text-[0.55rem] font-bold shrink-0', getTitleBadgeStyle(profile.equipped.title))}>
+                    {SHOP_CATALOG.find(i => i.id === profile.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                  </span>
+                )}
               </div>
               <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
                 {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>

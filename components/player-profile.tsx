@@ -384,8 +384,10 @@ export function PlayerProfile() {
         ? 'title'
         : item.id.startsWith('theme_')
           ? 'theme'
-          : 'aura'
-    const isEquipped = equipped[slot] === item.id
+          : item.id.startsWith('sfx_')
+            ? 'sfx'
+            : 'aura'
+    const isEquipped = (equipped as any)?.[slot] === item.id
     const nextItemId = isEquipped ? null : item.id
 
     await equipItem(effectiveUid, nextItemId, slot as any)
@@ -977,8 +979,10 @@ export function PlayerProfile() {
                   ? 'title'
                   : item.id.startsWith('theme_')
                     ? 'theme'
-                    : 'aura'
-              const isEquipped = equipped[slot] === item.id
+                    : item.id.startsWith('sfx_')
+                      ? 'sfx'
+                      : 'aura'
+              const isEquipped = (equipped as any)?.[slot] === item.id
 
               return (
                 <div

@@ -218,6 +218,7 @@ export type EquippedCosmetics = {
   title?: string | null
   theme?: string | null
   aura?: string | null
+  sfx?: string | null
 }
 
 export type UserProfile = {
