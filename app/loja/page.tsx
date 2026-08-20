@@ -18,16 +18,31 @@ interface ShopItem {
 
 const ALL_SHOP_ITEMS: ShopItem[] = [
   // ==================== 1. EXCLUSIVOS VIP (DINHEIRO REAL) ====================
+  // 1. ARENA TOTALMENTE GRÁTIS NA ABA VIP
+  {
+    id: 'theme_arena_lisboa_cyber_free',
+    title: 'Arena VIP: Lisboa Neon 2088 (OFERTA)',
+    description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril e reflexos no Tejo.',
+    category: 'theme',
+    currency: 'real_money',
+    priceEuros: 0.00,
+    rarity: 'lendario',
+    icon: '🌉',
+    badge: '100% GRÁTIS',
+    popular: true,
+  },
+
+  // 2. PASSE FUNDADOR COM ARENA INCLUÍDA
   {
     id: 'vip_founder_pass',
     title: 'Passe Fundador da Nação',
-    description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D animada.',
+    description: 'Selo permanente de Fundador, +25% XP vitalício, Moldura Real 3D e OFERTA da Arena Templo de Ouro.',
     category: 'vip_pass',
     currency: 'real_money',
     priceEuros: 2.99,
     rarity: 'mitico',
     icon: '👑',
-    badge: 'VITALÍCIO',
+    badge: 'VITALÍCIO + ARENA',
     popular: true,
   },
   {
@@ -297,6 +312,14 @@ export default function LojaPage() {
     alert(`Compraste "${item.title}" com sucesso!`);
   };
 
+  const handleClaimFree = (item: ShopItem) => {
+    if (inventory.includes(item.id)) return;
+    const newInv = [...inventory, item.id];
+    setInventory(newInv);
+    localStorage.setItem('ap_user_inventory', JSON.stringify(newInv));
+    alert(`Parabéns! Resgataste "${item.title}" gratuitamente! Podes equipá-la de imediato.`);
+  };
+
   const handleRealMoneyCheckout = (item: ShopItem) => {
     alert(`A iniciar checkout de €${item.priceEuros?.toFixed(2)} para ${item.title}...`);
   };
@@ -439,17 +462,54 @@ export default function LojaPage() {
                 <div className="flex justify-between items-center">
                   <span className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">Preço</span>
                   <span className="text-base font-extrabold text-white">
-                    {item.currency === 'real_money' ? `€${item.priceEuros?.toFixed(2)}` : `€${item.priceCoins?.toLocaleString('pt-PT')}`}
+                    {item.currency === 'real_money'
+                      ? item.priceEuros === 0
+                        ? <span className="text-emerald-400 font-black">100% GRÁTIS</span>
+                        : `€${item.priceEuros?.toFixed(2)}`
+                      : `€${item.priceCoins?.toLocaleString('pt-PT')}`}
                   </span>
                 </div>
 
                 {item.currency === 'real_money' ? (
-                  <button
-                    onClick={() => handleRealMoneyCheckout(item)}
-                    className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
-                  >
-                    Comprar por €{item.priceEuros?.toFixed(2)}
-                  </button>
+                  item.priceEuros === 0 ? (
+                    isEquipped ? (
+                      <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                        ✓ Arena em Uso
+                      </button>
+                    ) : isOwned ? (
+                      <button
+                        onClick={() => handleEquip(item)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg transition-all"
+                      >
+                        Equipar Arena
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleClaimFree(item)}
+                        className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:brightness-110 shadow-[0_0_20px_rgba(16,185,129,0.6)] animate-pulse transition-all"
+                      >
+                        🎁 Resgatar Oferta Grátis
+                      </button>
+                    )
+                  ) : isEquipped ? (
+                    <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                      ✓ Equipado
+                    </button>
+                  ) : isOwned ? (
+                    <button
+                      onClick={() => handleEquip(item)}
+                      className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-600 transition-all"
+                    >
+                      Equipar
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleRealMoneyCheckout(item)}
+                      className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
+                    >
+                      Comprar por €{item.priceEuros?.toFixed(2)}
+                    </button>
+                  )
                 ) : item.category === 'consumable' ? (
                   <button
                     onClick={() => handleBuyCoinsItem(item)}
