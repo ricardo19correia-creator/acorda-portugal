@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import MbwayModal from '@/components/MbwayModal';
 
 interface ShopItem {
   id: string;
@@ -286,6 +287,9 @@ export default function LojaPage() {
     theme: 'theme_noite_fado',
   });
 
+  const [selectedVipItem, setSelectedVipItem] = useState<ShopItem | null>(null);
+  const [isMbwayOpen, setIsMbwayOpen] = useState(false);
+
   useEffect(() => {
     try {
       const savedCoins = localStorage.getItem('ap_user_coins');
@@ -321,7 +325,8 @@ export default function LojaPage() {
   };
 
   const handleRealMoneyCheckout = (item: ShopItem) => {
-    alert(`A iniciar checkout de €${item.priceEuros?.toFixed(2)} para ${item.title}...`);
+    setSelectedVipItem(item);
+    setIsMbwayOpen(true);
   };
 
   const handleEquip = (item: ShopItem) => {
@@ -551,6 +556,16 @@ export default function LojaPage() {
           );
         })}
       </div>
+
+      {/* MODAL DE CHECKOUT DIRETO MB WAY */}
+      <MbwayModal
+        isOpen={isMbwayOpen}
+        onClose={() => {
+          setIsMbwayOpen(false);
+          setSelectedVipItem(null);
+        }}
+        item={selectedVipItem}
+      />
     </main>
   );
 }
