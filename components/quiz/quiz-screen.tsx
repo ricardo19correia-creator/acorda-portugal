@@ -157,14 +157,22 @@ function createGameQuestions(
       difficulty: difficultyParam || undefined,
     })
 
-    if (filtered.length >= 5) {
+    if (filtered.length >= 1) {
       questionPool = filtered as unknown as QuizQuestion[]
     } else {
       // Fallback para categoria normalizada ou pool geral
       const normalizedCat = normalizeCategorySlug(categorySlug)
       const catMatches = ALL_QUIZ_QUESTIONS.filter((q) => {
         const qCatNorm = normalizeCategorySlug(q.category)
-        return qCatNorm === normalizedCat || q.category.toLowerCase().includes(categorySlug.toLowerCase())
+        const matchCat = qCatNorm === normalizedCat || q.category.toLowerCase().includes(categorySlug.toLowerCase())
+        if (!matchCat) return false
+        if (subcategorySlug && subcategorySlug !== 'all' && subcategorySlug !== 'todas' && subcategorySlug !== 'todos') {
+          if (!q.subcategory) return false
+          const subNorm = subcategorySlug.toLowerCase().trim()
+          const qSubNorm = q.subcategory.toLowerCase().trim()
+          return qSubNorm === subNorm || qSubNorm.includes(subNorm) || subNorm.includes(qSubNorm)
+        }
+        return true
       })
       questionPool = catMatches.length > 0 ? catMatches : ALL_QUIZ_QUESTIONS
     }

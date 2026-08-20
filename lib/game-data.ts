@@ -462,15 +462,17 @@ export type QuizQuestion = {
 import questions from './data/questions.json'
 
 const allQuestions: QuizQuestion[] = (questions as any[]).map((q, i) => {
-  const correctIndex = q.options.indexOf(q.correctAnswer)
-  const correctKey = ['A', 'B', 'C', 'D'][correctIndex !== -1 ? correctIndex : 0] as 'A' | 'B' | 'C' | 'D'
+  const correctIndex = typeof q.correctAnswer === 'number' ? q.correctAnswer : q.options.indexOf(q.correctAnswer)
+  const correctKey = ['A', 'B', 'C', 'D'][correctIndex >= 0 && correctIndex < 4 ? correctIndex : 0] as 'A' | 'B' | 'C' | 'D'
+  const diff = String(q.difficulty || '').toLowerCase()
+  const points = diff === 'difícil' || diff === 'dificil' ? 300 : diff === 'médio' || diff === 'medio' ? 200 : 100
 
   return {
     ...q,
     id: q.id || `q_${i + 1}`,
     index: i + 1,
     total: questions.length,
-    points: q.difficulty === 'Difícil' ? 300 : q.difficulty === 'Médio' ? 200 : 100,
+    points,
     options: q.options.map((text: string, optIdx: number) => ({ key: ['A', 'B', 'C', 'D'][optIdx] as 'A' | 'B' | 'C' | 'D', text })),
     correct: correctKey,
   }

@@ -1131,11 +1131,15 @@ export function filterQuizQuestions(
       }
     }
 
-    if (criteria.subcategorySlug && q.subcategory) {
+    if (criteria.subcategorySlug) {
       const subNorm = criteria.subcategorySlug.toLowerCase().trim()
-      const qSubNorm = q.subcategory.toLowerCase().trim()
-      if (subNorm !== 'todas' && subNorm !== 'todos' && qSubNorm !== subNorm) {
-        return false
+      if (subNorm !== 'all' && subNorm !== 'todas' && subNorm !== 'todos') {
+        if (!q.subcategory) return false
+        const qSubNorm = q.subcategory.toLowerCase().trim()
+        const qSubSlug = normalizeCategorySlug(q.subcategory)
+        if (qSubNorm !== subNorm && qSubSlug !== subNorm && !qSubNorm.includes(subNorm) && !subNorm.includes(qSubNorm)) {
+          return false
+        }
       }
     }
 

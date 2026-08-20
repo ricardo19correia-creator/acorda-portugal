@@ -1,5 +1,110 @@
 [
   {
+    "id": "fut-clb-01",
+    "category": "futebol-portugues",
+    "subcategory": "clubes",
+    "question": "Qual é a alcunha histórica comummente associada ao Belenenses?",
+    "options": [
+      "Os Conquistadores",
+      "Os Azuis do Restelo",
+      "Os Guerreiros do Minho",
+      "Os Cónegos"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "facil",
+    "explanation": "O Belenenses é historicamente conhecido como 'Os Azuis do Restelo'."
+  },
+  {
+    "id": "fut-clb-02",
+    "category": "futebol-portugues",
+    "subcategory": "clubes",
+    "question": "Em que ano foi fundado o Boavista Futebol Clube?",
+    "options": [
+      "1903",
+      "1906",
+      "1910",
+      "1922"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "medio",
+    "explanation": "O Boavista FC foi fundado em 1903 no Porto."
+  },
+  {
+    "id": "fut-jog-01",
+    "category": "futebol-portugues",
+    "subcategory": "jogadores",
+    "question": "Quantas Bolas de Ouro conquistou Cristiano Ronaldo ao longo da sua carreira?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "facil",
+    "explanation": "Cristiano Ronaldo venceu 5 Bolas de Ouro (2008, 2013, 2014, 2016 e 2017)."
+  },
+  {
+    "id": "fut-jog-02",
+    "category": "futebol-portugues",
+    "subcategory": "jogadores",
+    "question": "Qual destes jogadores portugueses conquistou a Bola de Ouro em 1965?",
+    "options": [
+      "Luís Figo",
+      "Paulo Futre",
+      "Eusébio",
+      "Fernando Chalana"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "facil",
+    "explanation": "Eusébio da Silva Ferreira venceu a Bola de Ouro em 1965 com a camisola do Benfica."
+  },
+  {
+    "id": "fut-fem-01",
+    "category": "futebol-portugues",
+    "subcategory": "jogadoras",
+    "question": "Quem marcou o golo decisivo de penálti que apurou Portugal para o Mundial Feminino de 2023?",
+    "options": [
+      "Jéssica Silva",
+      "Carole Costa",
+      "Kika Nazareth",
+      "Dolores Silva"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medio",
+    "explanation": "Carole Costa converteu o penálti contra os Camarões aos 94 minutos."
+  },
+  {
+    "id": "fut-est-01",
+    "category": "futebol-portugues",
+    "subcategory": "estadios",
+    "question": "Em que cidade se localiza o Estádio Municipal de Braga (conhecido como 'A Pedreira')?",
+    "options": [
+      "Guimarães",
+      "Braga",
+      "Vila Real",
+      "Barcelos"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "facil",
+    "explanation": "O Estádio Municipal de Braga, projetado por Eduardo Souto de Moura, situa-se em Braga."
+  },
+  {
+    "id": "fut-cmp-01",
+    "category": "futebol-portugues",
+    "subcategory": "competicoes",
+    "question": "Quem marcou o golo da vitória de Portugal na final do Euro 2016 contra a França?",
+    "options": [
+      "Nani",
+      "Ricardo Quaresma",
+      "Éder",
+      "Cristiano Ronaldo"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "facil",
+    "explanation": "Éder marcou aos 109 minutos no prolongamento no Stade de France."
+  },
+  {
     "id": "portugal_0001",
     "category": "Portugal",
     "subcategory": "História",
