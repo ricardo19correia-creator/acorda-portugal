@@ -366,10 +366,44 @@ export function PlayerProfile() {
   const inventory: Record<string, number> = (player as any)?.inventory || {}
   const equipped = (player as any)?.equipped || {}
 
-  // Contagens do inventário
-  const ownedFrames = SHOP_CATALOG.filter((i) => i.id.startsWith('frame_') && (inventory[i.id] || 0) > 0)
-  const ownedTitles = SHOP_CATALOG.filter((i) => i.id.startsWith('title_') && (inventory[i.id] || 0) > 0)
-  const ownedThemes = SHOP_CATALOG.filter((i) => i.id.startsWith('theme_') && (inventory[i.id] || 0) > 0)
+  // Contagens do inventário sincronizadas com o estado global e Firebase
+  const localOwnedList = invState.ownedItems || []
+  const allOwnedThemeIds = Array.from(
+    new Set([
+      'default_tron',
+      ...SHOP_CATALOG.filter((i) => i.id.startsWith('theme_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
+      ...localOwnedList.filter((id) => id.startsWith('theme_') || id.includes('arena')),
+    ]),
+  )
+  const allOwnedFrameIds = Array.from(
+    new Set([
+      ...SHOP_CATALOG.filter((i) => i.id.startsWith('frame_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
+      ...localOwnedList.filter((id) => id.startsWith('frame_')),
+    ]),
+  )
+  const allOwnedTitleIds = Array.from(
+    new Set([
+      ...SHOP_CATALOG.filter((i) => i.id.startsWith('title_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
+      ...localOwnedList.filter((id) => id.startsWith('title_')),
+    ]),
+  )
+
+  const temasArenaCount = allOwnedThemeIds.length
+  const moldurasCount = allOwnedFrameIds.length
+  const titulosCount = allOwnedTitleIds.length
+
+  const THEME_NAMES: Record<string, string> = {
+    theme_arena_lisboa_cyber_free: 'Lisboa Neon 2088 (Cyberpunk)',
+    theme_arena_gold_temple: 'Templo de Ouro Real (VIP)',
+    theme_volcano_acores: 'Fogo dos Açores / Vulcão',
+    theme_noite_fado: 'Noite de Fado em Alfama',
+    theme_arena_cosmic_matrix: 'Matriz Cósmica Portuguesa',
+    default_tron: 'Arena Clássica Nacional (Tron)',
+  }
+  const activeThemeDisplayName =
+    THEME_NAMES[invState.equippedTheme || ''] ||
+    (equippedThemeItem ? equippedThemeItem.name.replace(/^Tema:\s*/, '') : 'Arena Clássica Nacional')
+
   const ownedSoundpacks = SHOP_CATALOG.filter((i) => i.id.startsWith('soundpack_') && (inventory[i.id] || 0) > 0)
   const ownedStreaks = SHOP_CATALOG.filter(
     (i) => (i.id.startsWith('streak_') || i.id.startsWith('sfx_')) && (inventory[i.id] || 0) > 0,
@@ -381,7 +415,7 @@ export function PlayerProfile() {
   // Cosméticos equipados atualmente
   const equippedFrameItem = SHOP_CATALOG.find((i) => i.id === equipped.frame)
   const equippedTitleItem = SHOP_CATALOG.find((i) => i.id === equipped.title)
-  const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === equipped.theme)
+  const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === (invState.equippedTheme || equipped.theme))
   const equippedSoundpackItem = SHOP_CATALOG.find((i) => i.id === equipped.soundpack)
   const equippedStreakItem = SHOP_CATALOG.find((i) => i.id === (equipped.streak_effect || equipped.sfx))
 
@@ -909,8 +943,8 @@ export function PlayerProfile() {
                   <Palette className="h-5 w-5 text-purple-400" />
                   <div>
                     <p className="text-xs font-bold text-foreground">Tema de Arena Vivo</p>
-                    <p className="text-[0.65rem] text-muted-foreground">
-                      {equippedThemeItem ? equippedThemeItem.name.replace(/^Tema:\s*/, '') : 'Arena Clássica Nacional'}
+                    <p className="text-[0.65rem] text-purple-300 font-bold">
+                      {activeThemeDisplayName}
                     </p>
                   </div>
                 </div>
@@ -979,7 +1013,7 @@ export function PlayerProfile() {
                   Molduras
                 </p>
                 <p className="mt-1 font-display text-2xl font-black text-primary">
-                  {ownedFrames.length}
+                  {moldurasCount}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
@@ -987,7 +1021,7 @@ export function PlayerProfile() {
                   Títulos
                 </p>
                 <p className="mt-1 font-display text-2xl font-black text-gold">
-                  {ownedTitles.length}
+                  {titulosCount}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
@@ -995,7 +1029,7 @@ export function PlayerProfile() {
                   Temas Arena
                 </p>
                 <p className="mt-1 font-display text-2xl font-black text-purple-400">
-                  {ownedThemes.length}
+                  {temasArenaCount}
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
@@ -1027,7 +1061,7 @@ export function PlayerProfile() {
 
           <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">
-              Total de itens: {ownedFrames.length + ownedTitles.length + ownedThemes.length + ownedSoundpacks.length + ownedStreaks.length + totalConsumables}
+              Total de itens: {moldurasCount + titulosCount + temasArenaCount + ownedSoundpacks.length + ownedStreaks.length + totalConsumables}
             </span>
             <Link
               href="/loja"

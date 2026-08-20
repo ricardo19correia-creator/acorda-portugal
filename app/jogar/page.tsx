@@ -21,11 +21,11 @@ export default function JogarPage() {
       {/* 1. ARENA LISBOA NEON 2088 (CYBERPUNK) */}
       {theme === 'theme_arena_lisboa_cyber_free' && (
         <div className="fixed inset-0 -z-20 bg-[#020512] overflow-hidden pointer-events-none">
-          {/* Feixes laser e néon ciano no horizonte */}
+          {/* Feixes Laser e Brilho Ciano Tejo */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#06b6d4_0%,transparent_60%)] opacity-40 animate-pulse" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#3b82f6_0%,transparent_50%)] opacity-20" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d415_1px,transparent_1px),linear-gradient(to_bottom,#06b6d415_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-          <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-cyan-950/70 via-cyan-900/20 to-transparent border-t border-cyan-500/30" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#8b5cf6_0%,transparent_40%)] opacity-25" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d415_1px,transparent_1px),linear-gradient(to_bottom,#06b6d415_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]" />
+          <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-cyan-950/80 via-cyan-900/20 to-transparent border-t border-cyan-500/30" />
         </div>
       )}
 
