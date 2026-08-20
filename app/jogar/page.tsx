@@ -23,23 +23,30 @@ export default function JogarPage() {
   return (
     <main className="relative min-h-screen w-full bg-[#020512] overflow-x-hidden text-white">
       {/* ========================================================= */}
-      {/* CENÁRIO CINEMATOGRÁFICO VIVO E REALISTA */}
+      {/* CENÁRIO OFICIAL: ARENA LISBOA NEON 2088 & OUTRAS ARENAS */}
       {/* ========================================================= */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        {/* 1. ARENA LISBOA CYBERPUNK / PONTE 25 DE ABRIL & TEJO */}
+      <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none select-none bg-[#020512]">
+        {/* 1. ARENA LISBOA CYBERPUNK 2088 (IMAGEM OFICIAL) */}
         {theme === 'theme_arena_lisboa_cyber_free' && (
           <div className="relative w-full h-full">
-            {/* Imagem Cinematográfica com Movimento Lento 3D */}
+            {/* 1. Imagem Oficial com Movimento Lento de Profundidade */}
             <div
-              className="absolute inset-0 bg-cover bg-center scale-105 animate-[pulse_8s_ease-in-out_infinite]"
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
               style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=2000&q=80')`,
-                filter: 'brightness(0.38) contrast(1.2) saturate(1.4)',
+                backgroundImage: `url('/arenas/lisboa-cyber.jpg')`,
+                filter: 'brightness(0.42) contrast(1.2) saturate(1.35)',
               }}
             />
-            {/* Atmosfera Cyberpunk Néon e Profundidade */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020512] via-[#020512]/60 to-[#0b132b]/80 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.18)_0%,transparent_75%)]" />
+
+            {/* 2. Feixes Néon e Brilho Tejo Dinâmico */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(6,182,212,0.25)_0%,transparent_70%)] animate-pulse" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(217,70,239,0.18)_0%,transparent_60%)]" />
+
+            {/* 3. Linha Néon Laser na Base do Ecrã */}
+            <div className="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_25px_#06b6d4]" />
+
+            {/* 4. Vinheta de Alto Contraste para Foco nas Perguntas */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(2,5,18,0.85)_100%)]" />
           </div>
         )}
 
@@ -55,6 +62,7 @@ export default function JogarPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0d0902] via-[#0d0902]/65 to-[#1c1204]/80" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.2)_0%,transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(13,9,2,0.85)_100%)]" />
           </div>
         )}
 
@@ -69,6 +77,7 @@ export default function JogarPage() {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#140404] via-[#140404]/70 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(20,4,4,0.85)_100%)]" />
           </div>
         )}
 
@@ -83,6 +92,7 @@ export default function JogarPage() {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b0514] via-[#0b0514]/70 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(11,5,20,0.85)_100%)]" />
           </div>
         )}
 
@@ -97,6 +107,7 @@ export default function JogarPage() {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#070514] via-[#070514]/70 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(7,5,20,0.85)_100%)]" />
           </div>
         )}
 
@@ -111,11 +122,9 @@ export default function JogarPage() {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#040807] via-[#040807]/75 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(4,8,7,0.85)_100%)]" />
           </div>
         )}
-
-        {/* Vinheta de Foco Cinematográfico Suave */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
       </div>
 
       {/* CONTEÚDO DO QUIZ COM Z-10 RELATIVO */}
