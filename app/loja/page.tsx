@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 interface ShopItem {
   id: string;
@@ -17,8 +16,8 @@ interface ShopItem {
   popular?: boolean;
 }
 
-const SHOP_ITEMS: ShopItem[] = [
-  // --- EXCLUSIVOS A DINHEIRO REAL (STRIPE / MB WAY) ---
+const ALL_SHOP_ITEMS: ShopItem[] = [
+  // ==================== 1. EXCLUSIVOS VIP (DINHEIRO REAL) ====================
   {
     id: 'vip_founder_pass',
     title: 'Passe Fundador da Nação',
@@ -67,7 +66,7 @@ const SHOP_ITEMS: ShopItem[] = [
   {
     id: 'coins_pack_small',
     title: 'Saco da Tasca (20 000 € Acorda)',
-    description: 'Crédito imediato de 20.000 moedas virtuais na tua carteira de jogo.',
+    description: 'Crédito imediato de 20.000 moedas virtuais na tua carteira.',
     category: 'coins',
     currency: 'real_money',
     priceEuros: 0.99,
@@ -88,7 +87,7 @@ const SHOP_ITEMS: ShopItem[] = [
   {
     id: 'coins_pack_large',
     title: 'Tesouro dos Descobrimentos (250 000 € Acorda)',
-    description: 'O maior pacote de moedas para dominares a loja por completo.',
+    description: 'O maior cofre de moedas para dominares a loja por completo.',
     category: 'coins',
     currency: 'real_money',
     priceEuros: 7.99,
@@ -97,16 +96,82 @@ const SHOP_ITEMS: ShopItem[] = [
     badge: '+60% BÓNUS',
   },
 
-  // --- ITENS ADQUIRÍVEIS POR MOEDAS (€ ACORDA) ---
+  // ==================== 2. AJUDAS & UTILIDADES DE JOGO ====================
   {
-    id: 'frame_flame_sebastiao',
-    title: 'Moldura Chama de D. Sebastião',
-    description: 'Moldura holográfica mítica com chamas rubi/douradas em movimento.',
+    id: 'help_5050',
+    title: 'Ajudas 50/50 (Pack x3)',
+    description: 'Elimina 2 respostas erradas instantaneamente durante a partida.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 600,
+    rarity: 'comum',
+    icon: '✨',
+    badge: 'UTILIDADE',
+  },
+  {
+    id: 'help_freeze_time',
+    title: 'Congelar Tempo (Pack x3)',
+    description: 'Congela o cronómetro por 15 segundos numa pergunta difícil.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 900,
+    rarity: 'raro',
+    icon: '⏱️',
+    badge: 'UTILIDADE',
+  },
+  {
+    id: 'help_hint',
+    title: 'Pista Nacional (Pack x2)',
+    description: 'Revela uma dica histórica/geográfica essencial sobre a questão.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 1200,
+    rarity: 'raro',
+    icon: '💡',
+    badge: 'UTILIDADE',
+  },
+  {
+    id: 'consumable_shield_afonso',
+    title: 'Escudo de D. Afonso Henriques',
+    description: 'Anula 1 resposta errada em Duelo 1v1 sem perder o streak de pontos.',
+    category: 'consumable',
+    currency: 'coins',
+    priceCoins: 1800,
+    rarity: 'epico',
+    icon: '🛡️',
+    badge: 'DUELO 1V1',
+  },
+
+  // ==================== 3. MOLDURAS DE AVATAR ====================
+  {
+    id: 'frame_green_hope',
+    title: 'Moldura Verde Esperança',
+    description: 'Moldura de avatar clássica com o brilho verde nacional.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 25000,
-    rarity: 'mitico',
-    icon: '🔥',
+    priceCoins: 500,
+    rarity: 'comum',
+    icon: '🟢',
+  },
+  {
+    id: 'frame_wave_nazare',
+    title: 'Moldura Mar Português / Nazaré',
+    description: 'Vórtice aquático azul-marinho translúcido com reflexos ciano.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 1500,
+    rarity: 'raro',
+    icon: '🌊',
+  },
+  {
+    id: 'frame_azulejo_nobre',
+    title: 'Moldura Azulejo Nobre',
+    description: 'Padrão tradicional de azulejo português refinado com reflexos prateados.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 5000,
+    rarity: 'epico',
+    icon: '🔷',
   },
   {
     id: 'frame_cyber_galo',
@@ -119,45 +184,91 @@ const SHOP_ITEMS: ShopItem[] = [
     icon: '🐓',
   },
   {
-    id: 'frame_wave_nazare',
-    title: 'Moldura Onda da Nazaré',
-    description: 'Vórtice aquático azul-marinho translúcido com reflexos ciano.',
+    id: 'frame_gold_royal',
+    title: 'Moldura Ouro Real',
+    description: 'Moldura lendária banhada a ouro para verdadeiros mestres do quiz.',
     category: 'frame',
     currency: 'coins',
-    priceCoins: 3200,
-    rarity: 'raro',
-    icon: '🌊',
+    priceCoins: 15000,
+    rarity: 'lendario',
+    icon: '🏆',
   },
   {
-    id: 'theme_arena_fado_alfama',
+    id: 'frame_flame_sebastiao',
+    title: 'Moldura Chama de D. Sebastião',
+    description: 'Moldura holográfica mítica com chamas rubi/douradas em movimento.',
+    category: 'frame',
+    currency: 'coins',
+    priceCoins: 25000,
+    rarity: 'mitico',
+    icon: '🔥',
+  },
+
+  // ==================== 4. TÍTULOS DE PRESTÍGIO ====================
+  {
+    id: 'title_patriota',
+    title: 'Título: «O Patriota»',
+    description: 'Exibe o título de Patriota no teu perfil e nos rankings.',
+    category: 'title',
+    currency: 'coins',
+    priceCoins: 750,
+    rarity: 'comum',
+    icon: '📜',
+  },
+  {
+    id: 'title_guardiao_lusitano',
+    title: 'Título: «Guardião Lusitano»',
+    description: 'Título especial para defensores da história e cultura do país.',
+    category: 'title',
+    currency: 'coins',
+    priceCoins: 2500,
+    rarity: 'epico',
+    icon: '⚔️',
+  },
+  {
+    id: 'title_rei_distritos',
+    title: 'Título: «Rei dos 18 Distritos»',
+    description: 'Título lendário com brilho contínuo de ouro.',
+    category: 'title',
+    currency: 'coins',
+    priceCoins: 18000,
+    rarity: 'lendario',
+    icon: '👑',
+  },
+
+  // ==================== 5. TEMAS E ARENAS ====================
+  {
+    id: 'theme_noite_fado',
     title: 'Arena: Noite de Fado em Alfama',
-    description: 'Muda o fundo das tuas partidas para uma atmosfera aveludada e calçada iluminada.',
+    description: 'Aparência visual exclusiva com tons aveludados e atmosfera de Alfama ao jogar.',
     category: 'theme',
     currency: 'coins',
-    priceCoins: 12500,
+    priceCoins: 5000,
     rarity: 'epico',
     icon: '🎸',
     badge: 'TEMA DE JOGO',
   },
   {
-    id: 'consumable_shield_afonso',
-    title: 'Escudo de D. Afonso Henriques',
-    description: 'Anula 1 resposta errada em Duelo 1v1 sem perder o streak de pontos.',
-    category: 'consumable',
+    id: 'theme_volcano_acores',
+    title: 'Arena: Fogo dos Açores',
+    description: 'Partículas de brasas em ascensão e rebordo incandescente nas partidas.',
+    category: 'theme',
     currency: 'coins',
-    priceCoins: 1800,
-    rarity: 'raro',
-    icon: '🛡️',
+    priceCoins: 20000,
+    rarity: 'mitico',
+    icon: '🌋',
+    badge: 'TEMA DE JOGO',
   },
 ];
 
 export default function LojaPage() {
-  const [activeTab, setActiveTab] = useState<'coins' | 'real_money'>('real_money');
+  const [activeTab, setActiveTab] = useState<'real_money' | 'all' | 'consumable' | 'frame' | 'title' | 'theme'>('real_money');
   const [userCoins, setUserCoins] = useState<number>(4395);
-  const [inventory, setInventory] = useState<string[]>([]);
+  const [inventory, setInventory] = useState<string[]>(['frame_green_hope', 'frame_wave_nazare', 'title_guardiao_lusitano', 'theme_noite_fado']);
   const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
-    frame: 'frame_flame_sebastiao',
-    theme: 'default_tron',
+    frame: 'frame_wave_nazare',
+    title: 'title_guardiao_lusitano',
+    theme: 'theme_noite_fado',
   });
 
   useEffect(() => {
@@ -187,8 +298,7 @@ export default function LojaPage() {
   };
 
   const handleRealMoneyCheckout = (item: ShopItem) => {
-    alert(`A redirecionar para o pagamento seguro de €${item.priceEuros?.toFixed(2)} (${item.title})...`);
-    // Integração Stripe/MB WAY: window.location.href = `/api/checkout?item=${item.id}`;
+    alert(`A iniciar checkout de €${item.priceEuros?.toFixed(2)} para ${item.title}...`);
   };
 
   const handleEquip = (item: ShopItem) => {
@@ -198,7 +308,11 @@ export default function LojaPage() {
     alert(`Equipaste "${item.title}"!`);
   };
 
-  const filteredItems = SHOP_ITEMS.filter((item) => item.currency === activeTab);
+  const filteredItems = ALL_SHOP_ITEMS.filter((item) => {
+    if (activeTab === 'real_money') return item.currency === 'real_money';
+    if (activeTab === 'all') return item.currency === 'coins';
+    return item.currency === 'coins' && item.category === activeTab;
+  });
 
   const rarityStyles: Record<string, string> = {
     comum: 'border-zinc-700 text-zinc-300',
@@ -210,13 +324,13 @@ export default function LojaPage() {
 
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto bg-transparent text-zinc-100">
-      {/* HEADER DA LOJA */}
+      {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 bg-zinc-950/60 backdrop-blur-xl p-6 rounded-2xl border border-emerald-500/20">
         <div>
           <span className="text-xs font-bold tracking-widest text-emerald-400 uppercase">Economia Oficial & Mercado</span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">LOJA ACORDA PORTUGAL</h1>
           <p className="text-zinc-400 text-sm mt-1">
-            Adquire itens míticos, arenas de fundo 3D, cosméticos e pacotes VIP com dinheiro real ou moedas ganhas em jogo.
+            Adquire ajudas de jogo, molduras vivas, títulos, arenas 3D e pacotes exclusivos.
           </p>
         </div>
         <div className="flex items-center gap-4 bg-black/40 px-5 py-3 rounded-xl border border-amber-500/30">
@@ -227,31 +341,71 @@ export default function LojaPage() {
         </div>
       </div>
 
-      {/* SELETOR DE ABAS PRINCIPAIS */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      {/* SELETORES DE ABAS / FILTROS */}
+      <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
         <button
           onClick={() => setActiveTab('real_money')}
-          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+          className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
             activeTab === 'real_money'
               ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-105'
               : 'bg-zinc-900/80 border border-amber-500/30 text-amber-400 hover:bg-zinc-800'
           }`}
         >
-          <span>💎</span> PACOTES VIP & EXCLUSIVOS (STRIPE / DINHEIRO REAL)
+          💎 PACOTES VIP (STRIPE)
         </button>
         <button
-          onClick={() => setActiveTab('coins')}
-          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-            activeTab === 'coins'
+          onClick={() => setActiveTab('all')}
+          className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'all'
               ? 'bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-105'
               : 'bg-zinc-900/80 border border-emerald-500/30 text-emerald-400 hover:bg-zinc-800'
           }`}
         >
-          <span>🪙</span> COSMÉTICOS & ARENAS (€ ACORDA)
+          🪙 Todos os Itens (€ Acorda)
+        </button>
+        <button
+          onClick={() => setActiveTab('consumable')}
+          className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'consumable'
+              ? 'bg-emerald-500 text-black'
+              : 'bg-zinc-900/60 border border-zinc-800 text-zinc-300 hover:bg-zinc-800'
+          }`}
+        >
+          ⚡ Ajudas & Utilidades
+        </button>
+        <button
+          onClick={() => setActiveTab('frame')}
+          className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'frame'
+              ? 'bg-emerald-500 text-black'
+              : 'bg-zinc-900/60 border border-zinc-800 text-zinc-300 hover:bg-zinc-800'
+          }`}
+        >
+          🎭 Molduras
+        </button>
+        <button
+          onClick={() => setActiveTab('title')}
+          className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'title'
+              ? 'bg-emerald-500 text-black'
+              : 'bg-zinc-900/60 border border-zinc-800 text-zinc-300 hover:bg-zinc-800'
+          }`}
+        >
+          🏆 Títulos
+        </button>
+        <button
+          onClick={() => setActiveTab('theme')}
+          className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+            activeTab === 'theme'
+              ? 'bg-emerald-500 text-black'
+              : 'bg-zinc-900/60 border border-zinc-800 text-zinc-300 hover:bg-zinc-800'
+          }`}
+        >
+          🌌 Arenas de Jogo
         </button>
       </div>
 
-      {/* GRELHA DE PRODUTOS */}
+      {/* GRELHA */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredItems.map((item) => {
           const isOwned = inventory.includes(item.id);
@@ -277,7 +431,6 @@ export default function LojaPage() {
                   </span>
                   <span className="text-3xl">{item.icon}</span>
                 </div>
-
                 <h3 className="text-lg font-bold text-white mb-1.5">{item.title}</h3>
                 <p className="text-xs text-zinc-400 leading-relaxed mb-4">{item.description}</p>
               </div>
@@ -296,6 +449,18 @@ export default function LojaPage() {
                     className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 text-black hover:brightness-110 shadow-lg transition-all"
                   >
                     Comprar por €{item.priceEuros?.toFixed(2)}
+                  </button>
+                ) : item.category === 'consumable' ? (
+                  <button
+                    onClick={() => handleBuyCoinsItem(item)}
+                    disabled={userCoins < (item.priceCoins || 0)}
+                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all ${
+                      userCoins >= (item.priceCoins || 0)
+                        ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-md'
+                        : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
+                    }`}
+                  >
+                    {userCoins >= (item.priceCoins || 0) ? 'Comprar Utilidade' : 'Saldo Insuficiente'}
                   </button>
                 ) : isEquipped ? (
                   <button disabled className="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
@@ -318,7 +483,7 @@ export default function LojaPage() {
                         : 'bg-zinc-800/60 text-zinc-500 border border-zinc-800 cursor-not-allowed'
                     }`}
                   >
-                    {userCoins >= (item.priceCoins || 0) ? 'Comprar com Moedas' : 'Saldo Insuficiente'}
+                    {userCoins >= (item.priceCoins || 0) ? 'Comprar Item' : 'Saldo Insuficiente'}
                   </button>
                 )}
               </div>
