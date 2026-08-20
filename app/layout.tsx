@@ -6,6 +6,7 @@ import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import TawkChat from '@/components/TawkChat'
 import TronCyberBackground from '@/components/TronCyberBackground'
+import AudioPlayer from '@/components/AudioPlayer'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -46,6 +47,7 @@ export default function RootLayout({
             <PresenceProvider>{children}</PresenceProvider>
           </GameThemeProvider>
         </AuthProvider>
+        <AudioPlayer />
         <TawkChat />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
