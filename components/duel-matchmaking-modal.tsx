@@ -182,65 +182,77 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
     console.log('[MATCH QUEUE JOINED (100% REAL PVP)] UID:', playerUid, 'Name:', playerObj.displayName, 'Attempt:', currentAttemptId)
 
-    // Entrar na fila do Firestore com UID real e matchAttemptId único
-    joinMatchmakingQueue(playerObj, profileObj, currentAttemptId).catch((err) => {
-      console.error('[MATCH] ERRO AO ENTRAR NA FILA:', err)
-    })
-
-    // Heartbeat ativo a cada 2.0s para renovar a validade do bilhete
-    heartbeatIntervalRef.current = setInterval(() => {
-      if (playerUid && matchAttemptIdRef.current === currentAttemptId && !matchedDuelIdRef.current) {
-        heartbeatMatchmaking(playerUid, currentAttemptId).catch(() => {})
+    // Iniciar pesquisa no backend atómico / RPC
+    const checkMatchServer = async () => {
+      if (matchedDuelIdRef.current) return
+      try {
+        const res = await fetch('/api/duel/match', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: playerUid,
+            displayName: playerPropsRef.current.playerName,
+            photoURL: playerPropsRef.current.playerPhoto,
+            level: playerPropsRef.current.playerLevel,
+            district: playerPropsRef.current.playerDistrict,
+          }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          if (data.status === 'matched' && data.match_id) {
+            console.log('[MATCH ATOMIC SERVER RPC RESULT: MATCHED] duelId:', data.match_id)
+            handleMatchFound(data.match_id, data.opponentInfo)
+          }
+        }
+      } catch (err) {
+        console.warn('[/api/duel/match poll error]:', err)
       }
-    }, 2000)
+    }
+
+    // Primeira chamada imediata
+    checkMatchServer()
+
+    // Intervalo de 1.0s para polling atómico do backend
+    pollIntervalRef.current = setInterval(checkMatchServer, 1000)
 
     const handleBeforeUnload = () => {
       if (playerUid && !matchedDuelIdRef.current) {
+        fetch('/api/duel/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: playerUid }),
+        }).catch(() => {})
         cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Escutar eventos da fila em tempo real (onSnapshot)
+    // Escutar eventos da fila em tempo real (onSnapshot como canal paralelo ultra-rápido)
     const unsubscribe = subscribeToMatchmaking(playerUid, currentAttemptId, (updatedTicket) => {
       if (!updatedTicket) return
       if (updatedTicket.status === 'matched' && updatedTicket.duelId && updatedTicket.opponentInfo) {
-        console.log('[MATCH NOTIFIED VIA FIRESTORE SNAPSHOT (REAL PVP)] duelId:', updatedTicket.duelId)
+        console.log('[MATCH NOTIFIED VIA REALTIME SNAPSHOT] duelId:', updatedTicket.duelId)
         handleMatchFound(updatedTicket.duelId, updatedTicket.opponentInfo, updatedTicket)
       }
     })
 
-    // Executar verificação contínua e tentativa de pareamento via polling (1.0s)
-    const runSearch = () => {
-      if (matchAttemptIdRef.current !== currentAttemptId || matchedDuelIdRef.current) return
-
-      // Tentar emparelhamento humano com qualquer outro jogador real ativo
-      tryFindOpponentMatch(playerObj, profileObj, currentAttemptId)
-        .then((res) => {
-          if (res.matched && res.duelId && res.opponentInfo) {
-            console.log('[MATCH FOUND VIA POLLING ATOMIC PAIR (REAL PVP)] duelId:', res.duelId)
-            handleMatchFound(res.duelId, res.opponentInfo, res.ticket || undefined)
-          }
-        })
-        .catch((err) => console.warn('[MATCH] ERRO NO POLLING:', err))
-    }
-
-    // Intervalo de 1.0s para emparelhamento estritamente humano
-    pollIntervalRef.current = setInterval(runSearch, 1000)
-
-    // Contador de segundos e timeout rigoroso de 30 segundos (SEM BOTS)
+    // Contador de segundos e timeout rigoroso de 30 segundos
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
 
         if (next >= 30) {
-          console.log('[MATCHMAKING 30S TIMEOUT REACHED - NO REAL PLAYER FOUND]')
+          console.log('[MATCHMAKING 30S TIMEOUT REACHED]')
           if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
-          if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
           if (searchTimerRef.current) clearInterval(searchTimerRef.current)
 
           setMmState('timeout')
           if (playerUid && !matchedDuelIdRef.current) {
+            fetch('/api/duel/cancel', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId: playerUid }),
+            }).catch(() => {})
             cancelMatchmakingQueue(playerUid).catch(() => {})
           }
         }
@@ -252,10 +264,14 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
-      if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
       if (searchTimerRef.current) clearInterval(searchTimerRef.current)
       unsubscribe()
       if (playerUid && !matchedDuelIdRef.current) {
+        fetch('/api/duel/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: playerUid }),
+        }).catch(() => {})
         cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
@@ -331,16 +347,17 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       clearInterval(pollIntervalRef.current)
       pollIntervalRef.current = null
     }
-    if (heartbeatIntervalRef.current) {
-      clearInterval(heartbeatIntervalRef.current)
-      heartbeatIntervalRef.current = null
-    }
     if (searchTimerRef.current) {
       clearInterval(searchTimerRef.current)
       searchTimerRef.current = null
     }
 
     if (playerUid && !matchedDuelId) {
+      fetch('/api/duel/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: playerUid }),
+      }).catch(() => {})
       await cancelMatchmakingQueue(playerUid).catch(() => {})
     }
     onClose()
