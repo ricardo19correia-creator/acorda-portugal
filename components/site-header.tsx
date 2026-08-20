@@ -7,6 +7,7 @@ import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { OnlineUsersBadge } from '@/components/online-users-badge'
 import { PlayerAvatar } from '@/components/player-avatar'
+import AudioPlayer from '@/components/AudioPlayer'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
 
@@ -88,8 +89,12 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Right: Online Users Badge + Auth + CTA */}
+        {/* Right: Audio Player + Online Users Badge + Auth + CTA */}
         <nav aria-label="Ações de utilizador" className="hidden items-center gap-2.5 md:flex">
+          {/* Botão Compacto de Áudio */}
+          <AudioPlayer />
+
+          {/* Indicador de Utilizadores Online */}
           <OnlineUsersBadge />
 
           {!authResolved ? (
@@ -126,8 +131,9 @@ export function SiteHeader() {
           <PlayButton href="/jogar" size="md" label="Jogar" className="ml-2" />
         </nav>
 
-        {/* Mobile: Online Badge + Mobile Toggle */}
+        {/* Mobile: Audio + Online Badge + Mobile Toggle */}
         <div className="flex items-center gap-2 md:hidden">
+          <AudioPlayer />
           <OnlineUsersBadge />
           <button
             type="button"
@@ -145,7 +151,7 @@ export function SiteHeader() {
       {/* Mobile menu */}
       {open && (
         <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden">
-          <div className="mb-3 flex justify-center">
+          <div className="mb-3 flex flex-col gap-2">
             <OnlineUsersBadge variant="default" className="w-full justify-center" />
           </div>
 
