@@ -72,7 +72,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand Logo + Live Online Badge */}
+        {/* Left: Brand Logo */}
         <div className="flex items-center gap-3">
           <Link
             href="/"
@@ -82,8 +82,6 @@ export function SiteHeader() {
           >
             <BrandLogo />
           </Link>
-
-          <OnlineUsersBadge variant="compact" className="hidden sm:inline-flex" />
         </div>
 
         {/* Desktop nav */}
@@ -100,6 +98,11 @@ export function SiteHeader() {
               <span className="absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 rounded-full bg-gradient-to-r from-primary to-accent transition-transform duration-200 group-hover:scale-x-100" />
             </Link>
           ))}
+
+          {/* Online Players Live Badge */}
+          <div className="ml-2 mr-1">
+            <OnlineUsersBadge />
+          </div>
 
           {!authResolved ? (
             <div className="ml-2 flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2 text-xs font-medium text-muted-foreground animate-pulse">
@@ -146,17 +149,20 @@ export function SiteHeader() {
           <PlayButton href="/jogar" size="md" label="Jogar" className="ml-2" />
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
-          className="grid h-11 w-11 place-items-center rounded-2xl border border-white/15 bg-white/5 text-foreground transition-all hover:bg-white/10 hover:border-white/30 md:hidden cursor-pointer"
-        >
-          {open ? <X className="h-5 w-5 pointer-events-none" /> : <Menu className="h-5 w-5 pointer-events-none" />}
-        </button>
+        {/* Mobile: Online Badge + Mobile Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <OnlineUsersBadge />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+            className="grid h-11 w-11 place-items-center rounded-2xl border border-white/15 bg-white/5 text-foreground transition-all hover:bg-white/10 hover:border-white/30 cursor-pointer"
+          >
+            {open ? <X className="h-5 w-5 pointer-events-none" /> : <Menu className="h-5 w-5 pointer-events-none" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
