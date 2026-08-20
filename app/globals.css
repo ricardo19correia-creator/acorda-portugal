@@ -505,3 +505,18 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Ocultar widgets flutuantes indesejados */
+#tawk-bubble-container,
+.tawk-min-container,
+.tawk-custom-bubble,
+iframe[title*="chat"],
+[id*="chat-widget"],
+[class*="tawk"],
+#crisp-chatbox,
+.crisp-client {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+

@@ -4,7 +4,6 @@ import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
-import TawkChat from '@/components/TawkChat'
 import TronCyberBackground from '@/components/TronCyberBackground'
 import AudioPlayer from '@/components/AudioPlayer'
 import './globals.css'
@@ -48,7 +47,6 @@ export default function RootLayout({
           </GameThemeProvider>
         </AuthProvider>
         <AudioPlayer />
-        <TawkChat />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
