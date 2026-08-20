@@ -38,8 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="relative min-h-screen text-zinc-100 antialiased overflow-x-hidden">
-        <TronCyberBackground />
+      <body className="relative min-h-screen bg-transparent text-zinc-100 antialiased overflow-x-hidden">
         <AuthProvider>
           <GameThemeProvider>
             <PresenceProvider>{children}</PresenceProvider>
