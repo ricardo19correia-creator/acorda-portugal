@@ -2,6 +2,7 @@ import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
 import { GuzmaniaSection } from '@/components/guzmania-section'
+import { FAQSection } from '@/components/faq-section'
 import { SiteFooter } from '@/components/site-footer'
 
 export default function Page() {
@@ -17,6 +18,7 @@ export default function Page() {
           <div id="simbolo">
             <GuzmaniaSection />
           </div>
+          <FAQSection />
         </main>
 
         <SiteFooter />
