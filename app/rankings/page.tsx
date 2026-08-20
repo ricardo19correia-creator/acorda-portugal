@@ -1,3 +1,5 @@
+'use client'
+
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Ranking } from '@/components/ranking'

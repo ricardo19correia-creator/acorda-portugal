@@ -269,7 +269,13 @@ export function PlayerProfile() {
     return () => unsubscribe()
   }, [user?.uid])
 
-  const [invState, setInvState] = useState<InventoryState>(() => getInventory())
+  const [invState, setInvState] = useState<InventoryState>({
+    ownedItems: ['default_tron'],
+    equippedTheme: 'default_tron',
+    isVip: false,
+    ownedAvatars: ['camoes_2050'],
+    equippedAvatar: 'camoes_2050',
+  })
 
   useEffect(() => {
     const sync = () => setInvState(getInventory())

@@ -77,9 +77,8 @@ export const getInventory = (): InventoryState => {
 
 export const saveInventory = (state: InventoryState) => {
   if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  // Manter compatibilidade com chaves legadas
   try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     localStorage.setItem('ap_user_inventory', JSON.stringify(state.ownedItems));
     localStorage.setItem(
       'ap_equipped_items',
@@ -93,10 +92,10 @@ export const saveInventory = (state: InventoryState) => {
         localStorage.setItem('user_equipped_avatar_glow', av.glowColor || '');
       }
     }
+    window.dispatchEvent(new Event('avatarChanged'));
+    window.dispatchEvent(new Event('inventory_updated'));
+    window.dispatchEvent(new Event('storage'));
   } catch {}
-  window.dispatchEvent(new Event('avatarChanged'));
-  window.dispatchEvent(new Event('inventory_updated'));
-  window.dispatchEvent(new Event('storage'));
 };
 
 export const unlockItem = (itemId: string, isVipPass: boolean = false) => {
@@ -141,11 +140,15 @@ export const equipAvatar = (avatarId: string) => {
   }
   current.equippedAvatar = avatarId;
 
-  const av = AVATARS_2050.find(a => a.id === avatarId);
-  if (av?.image && typeof window !== 'undefined') {
-    localStorage.setItem('user_equipped_avatar', av.image);
-    localStorage.setItem('user_equipped_avatar_id', av.id);
-    localStorage.setItem('user_equipped_avatar_glow', av.glowColor || '');
+  if (typeof window !== 'undefined') {
+    const av = AVATARS_2050.find(a => a.id === avatarId);
+    if (av?.image) {
+      try {
+        localStorage.setItem('user_equipped_avatar', av.image);
+        localStorage.setItem('user_equipped_avatar_id', av.id);
+        localStorage.setItem('user_equipped_avatar_glow', av.glowColor || '');
+      } catch {}
+    }
   }
 
   saveInventory(current);
@@ -153,11 +156,13 @@ export const equipAvatar = (avatarId: string) => {
 
 export const getEquippedAvatarImage = (): string => {
   if (typeof window === 'undefined') return '/images/avatars/camoes-2050.jpg';
-  const direct = localStorage.getItem('user_equipped_avatar');
-  if (direct) return direct;
-  const inv = getInventory();
-  const found = AVATARS_2050.find(a => a.id === inv.equippedAvatar);
-  if (found?.image) return found.image;
+  try {
+    const direct = localStorage.getItem('user_equipped_avatar');
+    if (direct) return direct;
+    const inv = getInventory();
+    const found = AVATARS_2050.find(a => a.id === inv.equippedAvatar);
+    if (found?.image) return found.image;
+  } catch {}
   return '/images/avatars/camoes-2050.jpg';
 };
 
