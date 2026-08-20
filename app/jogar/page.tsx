@@ -33,20 +33,22 @@ export default function JogarPage() {
 
   return (
     <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col justify-between overflow-x-hidden">
-      {/* CAMADA DE FUNDO FIXA DA ARENA (Com overlay translúcido para ler o texto) */}
+      {/* CAMADA DA ARENA (Fica por cima do fundo global do site com z-0) */}
       <div 
-        className="fixed inset-0 -z-30 w-full h-full pointer-events-none"
+        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(5, 8, 18, 0.65), rgba(5, 8, 18, 0.75)), url('${arenaImage}')`,
+          backgroundImage: `linear-gradient(rgba(5, 8, 18, 0.60), rgba(5, 8, 18, 0.70)), url('${arenaImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       />
 
-      {/* CONTEÚDO DO QUIZ (Com fundos dos cards translúcidos/backdrop-blur) */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
-        <QuizPage />
+      {/* CONTEÚDO DO QUIZ (Fica por cima da arena com z-10) */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
+        <div className="w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
+          <QuizPage />
+        </div>
       </div>
     </div>
   )
