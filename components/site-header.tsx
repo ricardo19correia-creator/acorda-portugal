@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Flag, Flame } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
+import { OnlineUsersBadge } from '@/components/online-users-badge'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
 
@@ -71,7 +72,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand Logo + Live Beacon */}
+        {/* Left: Brand Logo + Live Online Badge */}
         <div className="flex items-center gap-3">
           <Link
             href="/"
@@ -81,6 +82,8 @@ export function SiteHeader() {
           >
             <BrandLogo />
           </Link>
+
+          <OnlineUsersBadge variant="compact" className="hidden sm:inline-flex" />
         </div>
 
         {/* Desktop nav */}
@@ -159,6 +162,10 @@ export function SiteHeader() {
       {/* Mobile menu */}
       {open && (
         <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden">
+          <div className="mb-3 flex justify-center">
+            <OnlineUsersBadge variant="default" className="w-full justify-center" />
+          </div>
+
           {!authResolved ? (
             <div className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-white/5 bg-white/[0.03] py-3 text-xs text-muted-foreground animate-pulse">
               <div className="h-4 w-4 rounded-full bg-white/10" />
