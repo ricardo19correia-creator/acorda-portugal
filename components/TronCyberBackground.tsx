@@ -49,9 +49,7 @@ export default function TronCyberBackground() {
     }))
 
     const render = () => {
-      // Fundo preto com ligeira transparência para efeito de rasto suave
-      ctx.fillStyle = '#060807'
-      ctx.fillRect(0, 0, width, height)
+      ctx.clearRect(0, 0, width, height)
 
       // 1. Desenhar Grelha Tron Subtil
       const gridSize = isMobile ? 50 : 60
@@ -124,8 +122,7 @@ export default function TronCyberBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[-1] w-full h-full"
-      style={{ background: '#050706' }}
+      className="fixed inset-0 pointer-events-none -z-10 w-full h-full bg-transparent"
     />
   )
 }

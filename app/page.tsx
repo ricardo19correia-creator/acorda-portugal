@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
@@ -9,25 +8,22 @@ import { SiteFooter } from '@/components/site-footer'
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground flex flex-col justify-between">
-      {/* 1. IMAGEM DE FUNDO TOTALMENTE FIXA ATRÁS DE TODO O SITE */}
-      <Image
-        src="/images/hero-bg.jpg"
-        alt="Fundo Oficial Acorda Portugal"
-        fill
-        priority
-        quality={100}
-        sizes="100vw"
-        className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none"
-      />
+    <div className="relative min-h-screen w-full overflow-hidden bg-transparent text-foreground flex flex-col justify-between">
+      {/* 1. CAMADA DE IMAGEM ABSOLUTA FIXA */}
+      <div className="fixed inset-0 -z-30 w-full h-full overflow-hidden pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-bg.jpg"
+          alt="Background Lisboa 2077"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
-      {/* 2. CAMADA DE ESCURECIMENTO SUAVE PARA MÁXIMA LEGIBILIDADE E CONTRASTE */}
-      <div className="fixed inset-0 -z-10 bg-black/50 pointer-events-none" />
-
-      {/* 3. EFEITOS AMBIENTAIS SUBTIS */}
+      {/* 2. EFEITOS AMBIENTAIS SUBTIS */}
       <BackgroundFx variant="homepage" />
 
-      {/* 4. CONTEÚDO DO SITE ENCAPSULADO COM Z-10 */}
+      {/* 3. CONTEÚDO DO SITE ENCAPSULADO COM Z-10 */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">
         <SiteHeader />
 
