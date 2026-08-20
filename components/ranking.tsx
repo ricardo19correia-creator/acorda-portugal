@@ -39,6 +39,31 @@ export function Ranking() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { user, profile, authResolved } = useAuth()
+  const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>('/images/avatars/camoes-2050.jpg')
+
+  useEffect(() => {
+    const updateAvatar = () => {
+      if (typeof window !== 'undefined') {
+        const equipped = localStorage.getItem('user_equipped_avatar')
+        if (equipped) {
+          setUserDisplayAvatar(equipped)
+        } else if (user?.photoURL) {
+          setUserDisplayAvatar(user.photoURL)
+        }
+      }
+    }
+
+    updateAvatar()
+    window.addEventListener('avatarChanged', updateAvatar)
+    window.addEventListener('inventory_updated', updateAvatar)
+    window.addEventListener('storage', updateAvatar)
+
+    return () => {
+      window.removeEventListener('avatarChanged', updateAvatar)
+      window.removeEventListener('inventory_updated', updateAvatar)
+      window.removeEventListener('storage', updateAvatar)
+    }
+  }, [user?.photoURL])
 
   useEffect(() => {
     let unsubscribe: (() => void) | undefined
@@ -281,6 +306,7 @@ export function Ranking() {
                       key={player.uid}
                       player={player}
                       isCurrentUser={Boolean(user?.uid && player.uid === user.uid) || player.name === user?.displayName || player.name === 'Riky Moreira'}
+                      userDisplayAvatar={userDisplayAvatar}
                       onSelect={() => handleSelectPlayer(player)}
                     />
                   )
@@ -314,7 +340,8 @@ export function Ranking() {
                       {/* Player Avatar */}
                       <PlayerAvatar
                         name={row.name}
-                        photoURL={row.photoURL}
+                        photoURL={isCurrentUser ? userDisplayAvatar : row.photoURL}
+                        avatarImage={isCurrentUser ? userDisplayAvatar : undefined}
                         isCurrentUser={isCurrentUser}
                         className="h-10 w-10 shrink-0 text-sm ring-1 ring-white/15"
                       />
@@ -375,7 +402,8 @@ export function Ranking() {
 
                   <PlayerAvatar
                     name={currentUserEntry.name}
-                    photoURL={currentUserEntry.photoURL}
+                    photoURL={userDisplayAvatar}
+                    avatarImage={userDisplayAvatar}
                     isCurrentUser={true}
                     className="h-10 w-10 shrink-0 text-sm ring-2 ring-primary/40"
                   />
@@ -437,10 +465,12 @@ export function Ranking() {
 function PodiumCard({
   player,
   isCurrentUser,
+  userDisplayAvatar,
   onSelect,
 }: {
   player: RankedPlayer
   isCurrentUser: boolean
+  userDisplayAvatar?: string
   onSelect?: () => void
 }) {
   const isFirst = player.pos === 1
@@ -493,17 +523,27 @@ function PodiumCard({
 
       {/* Avatar with position halo */}
       <div className="relative">
-        <PlayerAvatar
-          name={player.name}
-          photoURL={player.photoURL}
-          isCurrentUser={isCurrentUser}
-          className={cn(
-            'ring-2 transition-transform duration-300',
-            config.ringColor,
-            isFirst ? 'h-16 w-16 sm:h-20 sm:w-20 text-xl' : 'h-13 w-13 sm:h-16 sm:w-16 text-base',
-            isCurrentUser && 'ring-4 ring-primary',
-          )}
-        />
+        {isFirst && (isCurrentUser || player.name.includes('Riky')) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={userDisplayAvatar || '/images/avatars/camoes-2050.jpg'}
+            alt={player.name}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)] transition-transform duration-300 pointer-events-none"
+          />
+        ) : (
+          <PlayerAvatar
+            name={player.name}
+            photoURL={isCurrentUser ? userDisplayAvatar : player.photoURL}
+            avatarImage={isCurrentUser ? userDisplayAvatar : undefined}
+            isCurrentUser={isCurrentUser}
+            className={cn(
+              'ring-2 transition-transform duration-300',
+              config.ringColor,
+              isFirst ? 'h-16 w-16 sm:h-20 sm:w-20 text-xl' : 'h-13 w-13 sm:h-16 sm:w-16 text-base',
+              isCurrentUser && 'ring-4 ring-primary',
+            )}
+          />
+        )}
         {isCurrentUser && (
           <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-primary px-1.5 py-0.2 text-[0.55rem] font-black uppercase text-primary-foreground ring-1 ring-background">
             Tu
