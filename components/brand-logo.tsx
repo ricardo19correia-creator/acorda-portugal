@@ -1,42 +1,43 @@
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
-/**
- * Compact video game brand lockup: glowing shield mark with metallic gradient + wordmark.
- */
 export function BrandLogo({
   className,
   markOnly = false,
+  size = 'md',
 }: {
   className?: string
   markOnly?: boolean
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }) {
   return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary via-emerald-400 to-gold shadow-[0_0_20px_-2px_oklch(0.7_0.17_152/0.7)] ring-2 ring-white/20">
-        <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/40" />
-        <svg
-          viewBox="0 0 24 24"
-          className="h-5 w-5 text-black drop-shadow-sm font-black"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M12 2 4 5v6c0 4.5 3.2 8.4 8 11 4.8-2.6 8-6.5 8-11V5l-8-3Z" fill="currentColor" fillOpacity="0.2" />
-          <path d="m9 12 2 2 4-4" />
-        </svg>
-      </span>
+    <div className={cn('flex items-center gap-3 group transition-transform duration-200 hover:scale-105', className)}>
+      <div className="relative shrink-0 flex items-center justify-center">
+        <Image
+          src="/logo-oficial.png"
+          alt="Acorda Portugal — Desafio Nacional"
+          width={56}
+          height={56}
+          className={cn(
+            'w-auto object-contain drop-shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all duration-300 group-hover:drop-shadow-[0_0_20px_rgba(16,185,129,0.65)]',
+            size === 'sm' && 'h-8',
+            size === 'md' && 'h-10 sm:h-11',
+            size === 'lg' && 'h-14',
+            size === 'xl' && 'h-20',
+            !size && 'h-10 sm:h-11'
+          )}
+          priority
+        />
+      </div>
       {!markOnly && (
-        <span className="flex flex-col leading-tight">
-          <span className="font-display text-base font-black tracking-tight text-foreground uppercase">
-            ACORDA <span className="text-brand-gradient">PORTUGAL</span>
+        <div className="flex flex-col text-left leading-none">
+          <span className="font-display font-black text-sm sm:text-base tracking-wider text-white group-hover:text-emerald-400 transition-colors uppercase">
+            ACORDA PORTUGAL
           </span>
-          <span className="text-[0.62rem] font-black uppercase tracking-[0.26em] text-gold">
+          <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-400 mt-1">
             Desafio Nacional
           </span>
-        </span>
+        </div>
       )}
     </div>
   )
