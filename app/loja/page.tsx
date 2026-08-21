@@ -87,11 +87,11 @@ export default function LojaPage() {
 
   return (
     <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col items-center p-4 md:p-8">
-      {/* CAMADA DE FUNDO FIXA (Cofre Real Manuelino 2050) */}
+      {/* CAMADA FIXA DA IMAGEM ANEXADA (Sobrepõe a grelha verde do site) */}
       <div 
-        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
+        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(7, 13, 20, 0.70), rgba(7, 13, 20, 0.85)), url('/images/bg-loja.jpg')`,
+          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 18, 0.65), rgba(5, 10, 18, 0.85)), url('/images/bg-loja.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -99,7 +99,7 @@ export default function LojaPage() {
         }}
       />
 
-      {/* CONTEÚDO DA LOJA (Header, Abas, Cards com backdrop-blur) */}
+      {/* CONTEÚDO DA LOJA POR CIMA */}
       <div className="relative z-10 w-full flex flex-col items-center">
         {/* Top Navigation */}
         <div className="w-full max-w-6xl flex items-center justify-between mb-4">
