@@ -24,7 +24,7 @@ export type DistrictStat = {
 
 export type DistrictTheme = {
   gradientId: string
-  terrainGradientId: string
+  slug: string
   from: string
   mid: string
   to: string
@@ -35,10 +35,10 @@ export type DistrictTheme = {
   fontSize: string
 }
 
-export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
+export const DISTRICT_MAP_THEMES: Record<string, DistrictTheme> = {
   'Viana do Castelo': {
     gradientId: 'grad-viana',
-    terrainGradientId: 'terrain-viana',
+    slug: 'viana-do-castelo',
     from: '#064e3b',
     mid: '#047857',
     to: '#10b981',
@@ -46,11 +46,11 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
     glowColor: 'rgba(0, 242, 255, 0.95)',
     name: 'Viana do Castelo',
     label: 'Alto Minho',
-    fontSize: '8.5px',
+    fontSize: '8px',
   },
   'Braga': {
     gradientId: 'grad-braga',
-    terrainGradientId: 'terrain-braga',
+    slug: 'braga',
     from: '#4c1d95',
     mid: '#6d28d9',
     to: '#8b5cf6',
@@ -58,11 +58,11 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
     glowColor: 'rgba(192, 132, 252, 0.95)',
     name: 'Braga',
     label: 'Minho',
-    fontSize: '9.5px',
+    fontSize: '9px',
   },
   'Porto': {
     gradientId: 'grad-porto',
-    terrainGradientId: 'terrain-porto',
+    slug: 'porto',
     from: '#1e3a8a',
     mid: '#1d4ed8',
     to: '#3b82f6',
@@ -70,11 +70,11 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
     glowColor: 'rgba(0, 242, 255, 0.95)',
     name: 'Porto',
     label: 'Grande Porto',
-    fontSize: '9px',
+    fontSize: '8.5px',
   },
   'Vila Real': {
     gradientId: 'grad-vilareal',
-    terrainGradientId: 'terrain-vilareal',
+    slug: 'vila-real',
     from: '#78350f',
     mid: '#b45309',
     to: '#f59e0b',
@@ -86,7 +86,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Bragança': {
     gradientId: 'grad-braganca',
-    terrainGradientId: 'terrain-braganca',
+    slug: 'braganca',
     from: '#7f1d1d',
     mid: '#991b1b',
     to: '#ef4444',
@@ -98,7 +98,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Aveiro': {
     gradientId: 'grad-aveiro',
-    terrainGradientId: 'terrain-aveiro',
+    slug: 'aveiro',
     from: '#164e63',
     mid: '#0e7490',
     to: '#06b6d4',
@@ -110,7 +110,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Viseu': {
     gradientId: 'grad-viseu',
-    terrainGradientId: 'terrain-viseu',
+    slug: 'viseu',
     from: '#312e81',
     mid: '#4338ca',
     to: '#6366f1',
@@ -122,7 +122,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Guarda': {
     gradientId: 'grad-guarda',
-    terrainGradientId: 'terrain-guarda',
+    slug: 'guarda',
     from: '#064e3b',
     mid: '#047857',
     to: '#059669',
@@ -134,7 +134,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Coimbra': {
     gradientId: 'grad-coimbra',
-    terrainGradientId: 'terrain-coimbra',
+    slug: 'coimbra',
     from: '#172554',
     mid: '#1e3a8a',
     to: '#2563eb',
@@ -146,7 +146,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Castelo Branco': {
     gradientId: 'grad-castelobranco',
-    terrainGradientId: 'terrain-castelobranco',
+    slug: 'castelo-branco',
     from: '#713f12',
     mid: '#92400e',
     to: '#d97706',
@@ -158,7 +158,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Leiria': {
     gradientId: 'grad-leiria',
-    terrainGradientId: 'terrain-leiria',
+    slug: 'leiria',
     from: '#134e4a',
     mid: '#0f766e',
     to: '#14b8a6',
@@ -170,7 +170,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Santarém': {
     gradientId: 'grad-santarem',
-    terrainGradientId: 'terrain-santarem',
+    slug: 'santarem',
     from: '#713f12',
     mid: '#854d0e',
     to: '#ca8a04',
@@ -182,7 +182,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Lisboa': {
     gradientId: 'grad-lisboa',
-    terrainGradientId: 'terrain-lisboa',
+    slug: 'lisboa',
     from: '#881337',
     mid: '#9f1239',
     to: '#f43f5e',
@@ -190,11 +190,11 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
     glowColor: 'rgba(0, 242, 255, 0.95)',
     name: 'Lisboa',
     label: 'Capital & Tejo',
-    fontSize: '9px',
+    fontSize: '8.5px',
   },
   'Portalegre': {
     gradientId: 'grad-portalegre',
-    terrainGradientId: 'terrain-portalegre',
+    slug: 'portalegre',
     from: '#3b0764',
     mid: '#581c87',
     to: '#9333ea',
@@ -206,7 +206,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Setúbal': {
     gradientId: 'grad-setubal',
-    terrainGradientId: 'terrain-setubal',
+    slug: 'setubal',
     from: '#083344',
     mid: '#155e75',
     to: '#0284c7',
@@ -218,7 +218,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Évora': {
     gradientId: 'grad-evora',
-    terrainGradientId: 'terrain-evora',
+    slug: 'evora',
     from: '#422006',
     mid: '#713f12',
     to: '#eab308',
@@ -230,19 +230,19 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Beja': {
     gradientId: 'grad-beja',
-    terrainGradientId: 'terrain-beja',
+    slug: 'beja',
     from: '#431407',
     mid: '#7c2d12',
     to: '#ea580c',
     accent: '#fb923c',
     glowColor: 'rgba(251, 146, 60, 0.95)',
     name: 'Beja',
-    label: 'Planície Alentejana',
+    label: 'Baixo Alentejo',
     fontSize: '12px',
   },
   'Faro': {
     gradientId: 'grad-faro',
-    terrainGradientId: 'terrain-faro',
+    slug: 'faro',
     from: '#431407',
     mid: '#9a3412',
     to: '#f97316',
@@ -250,11 +250,11 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
     glowColor: 'rgba(0, 242, 255, 0.95)',
     name: 'Faro',
     label: 'Algarve',
-    fontSize: '11px',
+    fontSize: '11.5px',
   },
   'Açores': {
     gradientId: 'grad-acores',
-    terrainGradientId: 'terrain-acores',
+    slug: 'acores',
     from: '#082f49',
     mid: '#0369a1',
     to: '#06b6d4',
@@ -266,7 +266,7 @@ export const DISTRICT_TERRAIN_THEMES: Record<string, DistrictTheme> = {
   },
   'Madeira': {
     gradientId: 'grad-madeira',
-    terrainGradientId: 'terrain-madeira',
+    slug: 'madeira',
     from: '#4c0519',
     mid: '#9f1239',
     to: '#fb7185',
@@ -297,8 +297,8 @@ export function PortugalMap3D({
   const [districtData, setDistrictData] = useState<Map<string, DistrictStat>>(new Map())
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // 3D Isometric dynamic mouse tilt (perspetiva suave)
-  const [tilt, setTilt] = useState({ rotateX: 12, rotateY: -8 })
+  // 3D Isometric dynamic mouse tilt
+  const [tilt, setTilt] = useState({ rotateX: 10, rotateY: -6 })
 
   // Real-time online counts per district
   const districtOnlineCounts = useMemo(() => {
@@ -361,17 +361,17 @@ export function PortugalMap3D({
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
 
-    const rotX = 12 - (y / rect.height) * 8
-    const rotY = -8 + (x / rect.width) * 10
+    const rotX = 10 - (y / rect.height) * 8
+    const rotY = -6 + (x / rect.width) * 10
 
     setTilt({
-      rotateX: Math.max(4, Math.min(20, rotX)),
-      rotateY: Math.max(-16, Math.min(4, rotY)),
+      rotateX: Math.max(2, Math.min(18, rotX)),
+      rotateY: Math.max(-14, Math.min(4, rotY)),
     })
   }
 
   const handleMouseLeave = () => {
-    setTilt({ rotateX: 12, rotateY: -8 })
+    setTilt({ rotateX: 10, rotateY: -6 })
     setHoveredDistrict(null)
   }
 
@@ -383,7 +383,7 @@ export function PortugalMap3D({
   const activeHoverOrSelected = hoveredDistrict || selectedDistrict || 'Lisboa'
   const activeStat = districtData.get(activeHoverOrSelected)
   const activeOnline = districtOnlineCounts[activeHoverOrSelected] || 0
-  const activeTheme = DISTRICT_TERRAIN_THEMES[activeHoverOrSelected] || DISTRICT_TERRAIN_THEMES['Lisboa']
+  const activeTheme = DISTRICT_MAP_THEMES[activeHoverOrSelected] || DISTRICT_MAP_THEMES['Lisboa']
 
   return (
     <div
@@ -402,11 +402,11 @@ export function PortugalMap3D({
           perspective: '1000px',
         }}
       >
-        {/* Futuristic Cyber Radar Grid Glow */}
+        {/* Radar Ambient Glow */}
         <div className="pointer-events-none absolute inset-0 rounded-full bg-cyan-500/10 blur-[100px] animate-pulse" />
         <div className="pointer-events-none absolute inset-[20%] rounded-full bg-emerald-500/10 blur-[120px]" />
 
-        {/* 3D Rotated Isometric Scene (preserve-3d) */}
+        {/* 3D Rotated Isometric Scene */}
         <div
           className="relative z-10 w-full h-full transition-transform duration-300 ease-out"
           style={{
@@ -417,63 +417,38 @@ export function PortugalMap3D({
         >
           {/* MAIN VECTOR SVG WITH OFFICIAL BORDERS */}
           <svg
-            viewBox="0 0 800 900"
+            viewBox="0 0 800 950"
             className="w-full h-full filter drop-shadow-[0_30px_45px_rgba(0,0,0,0.9)] overflow-visible"
             role="img"
             aria-label="Mapa Geográfico Oficial 3D de Portugal e Ilhas com Relevo Topográfico"
           >
             <defs>
-              {/* Topographic Relief Shading & Sun Simulation (Directional Lighting 315°) */}
-              <filter id="terrain-elevation-relief" x="-20%" y="-20%" width="150%" height="150%">
-                <feDropShadow dx="3" dy="6" stdDeviation="5" floodColor="#000000" floodOpacity="0.8" />
-                <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
-                <feSpecularLighting
-                  in="blur"
-                  surfaceScale="4"
-                  specularConstant="0.8"
-                  specularExponent="18"
-                  lightingColor="#ffffff"
-                  result="specOut"
-                >
-                  <fePointLight x="150" y="80" z="220" />
-                </feSpecularLighting>
-                <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="0.3" k4="0" />
-              </filter>
-
               {/* Dynamic Theme Gradients with Topographic Depth */}
-              {Object.values(DISTRICT_TERRAIN_THEMES).map((t) => (
+              {Object.values(DISTRICT_MAP_THEMES).map((t) => (
                 <g key={`def-${t.gradientId}`}>
-                  {/* Surface Elevation Gradient */}
-                  <linearGradient id={t.gradientId} x1="20%" y1="0%" x2="80%" y2="100%">
+                  <linearGradient id={t.gradientId} x1="15%" y1="0%" x2="85%" y2="100%">
                     <stop offset="0%" stopColor={t.to} stopOpacity="0.95" />
-                    <stop offset="50%" stopColor={t.mid} stopOpacity="0.90" />
+                    <stop offset="45%" stopColor={t.mid} stopOpacity="0.90" />
                     <stop offset="100%" stopColor={t.from} stopOpacity="0.98" />
-                  </linearGradient>
-
-                  {/* Topographic Bevel Lighting */}
-                  <linearGradient id={t.terrainGradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35" />
-                    <stop offset="40%" stopColor="transparent" stopOpacity="0" />
-                    <stop offset="100%" stopColor="#000000" stopOpacity="0.5" />
                   </linearGradient>
                 </g>
               ))}
 
               {/* High-intensity Neon Cyan Glow */}
               <filter id="neon-cyan-glow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#00f2ff" floodOpacity="0.9" />
-                <feDropShadow dx="0" dy="0" stdDeviation="16" floodColor="#00f2ff" floodOpacity="0.5" />
+                <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#00f2ff" floodOpacity="0.9" />
+                <feDropShadow dx="0" dy="0" stdDeviation="14" floodColor="#00f2ff" floodOpacity="0.5" />
               </filter>
             </defs>
 
             {/* LAYER 1: Deep Volumetric Shadow (3D Extrusion Foundation) */}
-            <g id="layer-3d-extrusion-shadow" transform="translate(8, 24)" className="opacity-90 pointer-events-none">
+            <g id="layer-3d-extrusion-shadow" transform="translate(6, 18)" className="opacity-90 pointer-events-none">
               {PORTUGAL_GEO_DATA.map((d) => (
                 <path
                   key={`shadow-${d.name}`}
                   d={d.path}
-                  fill="#030805"
-                  stroke="#081812"
+                  fill="#020604"
+                  stroke="#07170f"
                   strokeWidth="2.5"
                   strokeLinejoin="round"
                 />
@@ -481,17 +456,17 @@ export function PortugalMap3D({
             </g>
 
             {/* LAYER 2: 3D Topographic Terrain Rim (Mid Elevation) */}
-            <g id="layer-3d-mid-terrain" transform="translate(4, 12)" className="opacity-95 pointer-events-none">
+            <g id="layer-3d-mid-terrain" transform="translate(3, 9)" className="opacity-95 pointer-events-none">
               {PORTUGAL_GEO_DATA.map((d) => {
-                const theme = DISTRICT_TERRAIN_THEMES[d.name] || DISTRICT_TERRAIN_THEMES['Lisboa']
+                const theme = DISTRICT_MAP_THEMES[d.name] || DISTRICT_MAP_THEMES['Lisboa']
                 return (
                   <path
                     key={`mid-${d.name}`}
                     d={d.path}
                     fill={theme.from}
-                    fillOpacity="0.7"
+                    fillOpacity="0.6"
                     stroke="#00f2ff"
-                    strokeOpacity="0.3"
+                    strokeOpacity="0.25"
                     strokeWidth="1.2"
                     strokeLinejoin="round"
                   />
@@ -499,13 +474,13 @@ export function PortugalMap3D({
               })}
             </g>
 
-            {/* LAYER 3: OFFICIAL 18 MAINLAND DISTRICTS (Accurate Topographic Surface) */}
+            {/* LAYER 3: OFFICIAL 18 MAINLAND DISTRICTS */}
             <g id="layer-3d-official-surface">
               {PORTUGAL_GEO_DATA.map((d) => {
                 const isHovered = hoveredDistrict === d.name
                 const isSelected = selectedDistrict === d.name
                 const isPlayerDistrict = profile?.district === d.name
-                const theme = DISTRICT_TERRAIN_THEMES[d.name] || DISTRICT_TERRAIN_THEMES['Lisboa']
+                const theme = DISTRICT_MAP_THEMES[d.name] || DISTRICT_MAP_THEMES['Lisboa']
                 const onlineCount = districtOnlineCounts[d.name] || 0
 
                 return (
@@ -518,6 +493,7 @@ export function PortugalMap3D({
                   >
                     {/* District Real Shape Path */}
                     <path
+                      id={`distrito-${theme.slug}`}
                       d={d.path}
                       fill={`url(#${theme.gradientId})`}
                       stroke={
@@ -527,11 +503,11 @@ export function PortugalMap3D({
                             ? '#00f2ff'
                             : isPlayerDistrict
                               ? '#34d399'
-                              : 'rgba(0, 242, 255, 0.45)'
+                              : 'rgba(0, 242, 255, 0.40)'
                       }
-                      strokeWidth={isSelected ? 3.0 : isHovered ? 2.4 : 1.2}
+                      strokeWidth={isSelected ? 2.8 : isHovered ? 2.2 : 1.1}
                       strokeLinejoin="round"
-                      filter={isHovered ? 'url(#neon-cyan-glow)' : 'url(#terrain-elevation-relief)'}
+                      filter={isHovered ? 'url(#neon-cyan-glow)' : undefined}
                       className={cn(
                         'transition-all duration-300',
                         isHovered && 'brightness-125',
@@ -540,27 +516,19 @@ export function PortugalMap3D({
                       style={{
                         transformOrigin: `${d.centroid[0]}px ${d.centroid[1]}px`,
                         transform: isHovered
-                          ? 'scale(1.025) translateZ(14px)'
+                          ? 'scale(1.02) translateZ(12px)'
                           : isSelected
-                            ? 'scale(1.015) translateZ(8px)'
+                            ? 'scale(1.01) translateZ(6px)'
                             : 'none',
                         transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease',
                       }}
                     />
 
-                    {/* Shading Overlay for Relief Simulation */}
-                    <path
-                      d={d.path}
-                      fill={`url(#${theme.terrainGradientId})`}
-                      pointerEvents="none"
-                      className="opacity-70"
-                    />
-
                     {/* Capital Beacon Pulse Indicator */}
                     {onlineCount > 0 && (
                       <g transform={`translate(${d.centroid[0]}, ${d.centroid[1] - 8})`}>
-                        <circle r="9" fill="#10b981" opacity="0.45" className="animate-ping" />
-                        <circle r="4" fill="#34d399" stroke="#ffffff" strokeWidth="1.2" />
+                        <circle r="8" fill="#10b981" opacity="0.45" className="animate-ping" />
+                        <circle r="3.5" fill="#34d399" stroke="#ffffff" strokeWidth="1.2" />
                       </g>
                     )}
 
@@ -586,24 +554,24 @@ export function PortugalMap3D({
 
                     {/* Mini Online Badge */}
                     {onlineCount > 0 && (
-                      <g transform={`translate(${d.centroid[0]}, ${d.centroid[1] + 19})`}>
+                      <g transform={`translate(${d.centroid[0]}, ${d.centroid[1] + 18})`}>
                         <rect
-                          x="-22"
-                          y="-6.5"
-                          width="44"
-                          height="13"
-                          rx="6.5"
+                          x="-20"
+                          y="-6"
+                          width="40"
+                          height="12"
+                          rx="6"
                           fill="rgba(5, 20, 15, 0.90)"
                           stroke="rgba(0, 242, 255, 0.75)"
-                          strokeWidth="1"
+                          strokeWidth="0.9"
                         />
-                        <circle cx="-13" cy="0" r="2.2" fill="#34d399" className="animate-pulse" />
+                        <circle cx="-12" cy="0" r="2" fill="#34d399" className="animate-pulse" />
                         <text
                           x="3"
                           y="0.5"
                           textAnchor="middle"
                           dominantBaseline="central"
-                          className="fill-emerald-300 font-display text-[7.5px] font-black tracking-tight"
+                          className="fill-emerald-300 font-display text-[7px] font-black tracking-tight"
                         >
                           {onlineCount} ON
                         </text>
@@ -617,17 +585,17 @@ export function PortugalMap3D({
         </div>
 
         {/* ========================================================================= */}
-        {/* ENLARGED 2.5X+ HOLOGRAPHIC GLASS INSET: AÇORES (9 ILHAS VULCÂNICAS) */}
+        {/* ENLARGED 4X HOLOGRAPHIC GLASS INSET: AÇORES (9 ILHAS VULCÂNICAS) */}
         {/* ========================================================================= */}
         <div
           onClick={() => handleDistrictClick('Açores')}
           onMouseEnter={() => setHoveredDistrict('Açores')}
           onMouseLeave={() => setHoveredDistrict(null)}
           className={cn(
-            'absolute top-2 left-2 sm:left-4 z-20 w-44 sm:w-64 rounded-3xl border p-3.5 sm:p-4.5 backdrop-blur-xl transition-all duration-300 cursor-pointer shadow-2xl',
+            'absolute top-2 left-2 sm:left-4 z-20 w-48 sm:w-72 rounded-3xl border p-3.5 sm:p-5 backdrop-blur-xl transition-all duration-300 cursor-pointer shadow-2xl',
             selectedDistrict === 'Açores' || hoveredDistrict === 'Açores'
-              ? 'border-cyan-400 bg-slate-900/90 shadow-[0_0_30px_rgba(0,242,255,0.4)] scale-105'
-              : 'border-cyan-500/35 bg-slate-950/80 hover:border-cyan-400/70 hover:bg-slate-900/85',
+              ? 'border-cyan-400 bg-slate-900/95 shadow-[0_0_35px_rgba(0,242,255,0.45)] scale-105'
+              : 'border-cyan-500/35 bg-slate-950/85 hover:border-cyan-400/70 hover:bg-slate-900/90',
           )}
         >
           {/* Header Card */}
@@ -647,14 +615,15 @@ export function PortugalMap3D({
             </span>
           </div>
 
-          {/* High-Definition 9 Islands Vector Shape */}
-          <div className="w-full h-20 sm:h-28 flex items-center justify-center">
-            <svg viewBox="0 0 320 180" className="w-full h-full filter drop-shadow-[0_0_12px_rgba(0,242,255,0.45)]">
+          {/* High-Definition 9 Islands Vector Shape (70%+ Card Coverage) */}
+          <div className="w-full h-24 sm:h-32 flex items-center justify-center">
+            <svg viewBox="0 0 400 220" className="w-full h-full filter drop-shadow-[0_0_14px_rgba(0,242,255,0.55)]">
               <path
+                id="distrito-acores"
                 d={ACORES_DETAILED_PATH}
                 fill="url(#grad-acores)"
                 stroke="#00f2ff"
-                strokeWidth="2.2"
+                strokeWidth="2.4"
                 strokeLinejoin="round"
               />
             </svg>
@@ -662,17 +631,17 @@ export function PortugalMap3D({
         </div>
 
         {/* ========================================================================= */}
-        {/* ENLARGED 2.5X+ HOLOGRAPHIC GLASS INSET: MADEIRA & PORTO SANTO */}
+        {/* ENLARGED 4X HOLOGRAPHIC GLASS INSET: MADEIRA & PORTO SANTO */}
         {/* ========================================================================= */}
         <div
           onClick={() => handleDistrictClick('Madeira')}
           onMouseEnter={() => setHoveredDistrict('Madeira')}
           onMouseLeave={() => setHoveredDistrict(null)}
           className={cn(
-            'absolute bottom-2 left-2 sm:left-4 z-20 w-44 sm:w-64 rounded-3xl border p-3.5 sm:p-4.5 backdrop-blur-xl transition-all duration-300 cursor-pointer shadow-2xl',
+            'absolute bottom-2 left-2 sm:left-4 z-20 w-48 sm:w-72 rounded-3xl border p-3.5 sm:p-5 backdrop-blur-xl transition-all duration-300 cursor-pointer shadow-2xl',
             selectedDistrict === 'Madeira' || hoveredDistrict === 'Madeira'
-              ? 'border-rose-400 bg-slate-900/90 shadow-[0_0_30px_rgba(251,113,133,0.4)] scale-105'
-              : 'border-rose-500/35 bg-slate-950/80 hover:border-rose-400/70 hover:bg-slate-900/85',
+              ? 'border-rose-400 bg-slate-900/95 shadow-[0_0_35px_rgba(251,113,133,0.45)] scale-105'
+              : 'border-rose-500/35 bg-slate-950/85 hover:border-rose-400/70 hover:bg-slate-900/90',
           )}
         >
           {/* Header Card */}
@@ -693,13 +662,14 @@ export function PortugalMap3D({
           </div>
 
           {/* High-Definition Madeira Archipelago Vector Shape */}
-          <div className="w-full h-20 sm:h-28 flex items-center justify-center">
-            <svg viewBox="0 0 320 180" className="w-full h-full filter drop-shadow-[0_0_12px_rgba(251,113,133,0.45)]">
+          <div className="w-full h-24 sm:h-32 flex items-center justify-center">
+            <svg viewBox="0 0 400 220" className="w-full h-full filter drop-shadow-[0_0_14px_rgba(251,113,133,0.55)]">
               <path
+                id="distrito-madeira"
                 d={MADEIRA_DETAILED_PATH}
                 fill="url(#grad-madeira)"
                 stroke="#fb7185"
-                strokeWidth="2.2"
+                strokeWidth="2.4"
                 strokeLinejoin="round"
               />
             </svg>
