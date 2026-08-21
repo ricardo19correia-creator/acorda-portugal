@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check } from 'lucide-react'
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
@@ -26,8 +26,8 @@ const SHOP_ITEMS: ShopItem[] = [
   { id: 'passe_fundador', name: 'Passe Fundador da Nação', category: 'vip', description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D.', price: '2,99 €', priceValue: 2.99, isRealMoney: true, image: '/images/shop/passe-fundador.jpg', badge: 'Mítico' },
   
   // AVATARES
+  { id: 'avatar_vulcao_acores', name: 'Guardião Vulcânico Açores', category: 'avatars', description: 'Armadura forjada nas profundezas geotérmicas de São Miguel.', price: '€3.500', priceValue: 3500, image: '/images/avatars/guardiao-vulcanico.jpg', badge: 'Épico' },
   { id: 'avatar_camoes_2050', name: 'Luís de Camões 2050', category: 'avatars', description: 'O poeta épico renascido com visor cibernético e louros digitais.', price: '€2.500', priceValue: 2500, image: '/images/avatars/camoes-2050.jpg', badge: 'Lendário' },
-  { id: 'avatar_vulcao_acores', name: 'Guardião Vulcânico Açores', category: 'avatars', description: 'Armadura forjada nas profundezas geotérmicas de São Miguel.', price: '€3.500', priceValue: 3500, image: '/images/avatars/vulcao-acores.jpg', badge: 'Épico' },
   { id: 'avatar_lenda_futebol', name: 'Cyborg Camisola das Quinas', category: 'avatars', description: 'O derradeiro goleador cibernético nacional.', price: '€5.000', priceValue: 5000, image: '/images/shop/cyborg-quinas.jpg', badge: 'Exclusivo' },
   { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', price: '€1.500', priceValue: 1500, image: '/images/shop/fadista-cyber.jpg', badge: 'Raro' },
 
@@ -37,8 +37,8 @@ const SHOP_ITEMS: ShopItem[] = [
   { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
 
   // AJUDAS & UTILIDADES
-  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível' },
-  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível' },
+  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)' },
+  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)' },
 
   // MOLDURAS
   { id: 'moldura_ouro_real', name: 'Moldura Ouro Real 3D', category: 'molduras', description: 'Rebordo dourado pulsante ao redor do teu avatar.', price: '€4.000', priceValue: 4000, image: '/images/shop/moldura-ouro.jpg', badge: 'Exclusivo' },
@@ -51,24 +51,31 @@ const SHOP_ITEMS: ShopItem[] = [
 export default function LojaPage() {
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<Category>('vip')
-  const [equippedAvatar, setEquippedAvatar] = useState<string>('')
+  const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
   const [equippedFrame, setEquippedFrame] = useState<string>('')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [userBalance, setUserBalance] = useState<number>(803845)
-  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077'])
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
+  const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[] }>({
+    avatars: ['avatar_vulcao_acores', 'avatar_camoes_2050'],
+    frames: ['moldura_padrao'],
+    arenas: ['arena_ponte_2077', 'arena_neon_2088'],
+    titles: ['titulo_iniciante']
+  })
+  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077', 'avatar_vulcao_acores', 'avatar_camoes_2050'])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
   useEffect(() => {
     setMounted(true)
     try {
       const savedAvatar = localStorage.getItem('user_equipped_avatar')
-      if (savedAvatar) setEquippedAvatar(savedAvatar)
+      if (savedAvatar && !savedAvatar.includes('moldura')) setEquippedAvatar(savedAvatar)
       
       const savedArena = localStorage.getItem('equipped_arena')
       if (savedArena) setEquippedArena(savedArena)
 
-      const savedFrame = localStorage.getItem('equipped_frame')
+      const savedFrame = localStorage.getItem('equipped_frame') || localStorage.getItem('user_equipped_frame')
       if (savedFrame) setEquippedFrame(savedFrame)
 
       const savedTitle = localStorage.getItem('equipped_title')
@@ -76,6 +83,33 @@ export default function LojaPage() {
 
       const savedEuros = localStorage.getItem('user_euros')
       if (savedEuros) setUserBalance(Number(savedEuros))
+
+      const savedConsumables = localStorage.getItem('user_consumables')
+      if (savedConsumables) {
+        try {
+          const parsedCons = JSON.parse(savedConsumables)
+          if (parsedCons) setConsumables((prev) => ({ ...prev, ...parsedCons }))
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const savedInventory = localStorage.getItem('user_inventory')
+      if (savedInventory) {
+        try {
+          const parsedInv = JSON.parse(savedInventory)
+          if (parsedInv) {
+            setInventory((prev) => ({
+              avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
+              frames: Array.from(new Set([...prev.frames, ...(parsedInv.frames || [])])),
+              arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
+              titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
+            }))
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      }
 
       const savedUnlocked = localStorage.getItem('user_unlocked_items')
       if (savedUnlocked) {
@@ -99,50 +133,129 @@ export default function LojaPage() {
   }
 
   const handleAction = async (item: ShopItem) => {
-    const isUnlocked = item.priceValue === 0 || unlockedItems.includes(item.id)
+    // 1. CONSUMÍVEIS (SEMPRE COMPRA)
+    if (item.category === 'ajudas') {
+      if (userBalance < item.priceValue) {
+        showToast(`Saldo insuficiente! Precisas de mais €${(item.priceValue - userBalance).toLocaleString('pt-PT')} € Acorda.`, 'error')
+        return
+      }
+
+      const newBalance = userBalance - item.priceValue
+      setUserBalance(newBalance)
+      localStorage.setItem('user_euros', String(newBalance))
+
+      let updatedConsumables = { ...consumables }
+      let amountAdded = 0
+      let consumableKey = ''
+
+      if (item.id === 'ajuda_5050') {
+        amountAdded = 5
+        consumableKey = 'consumables.help5050'
+        updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 5
+      } else if (item.id === 'ajuda_congelar') {
+        amountAdded = 3
+        consumableKey = 'consumables.freezeTime'
+        updatedConsumables.freezeTime = (updatedConsumables.freezeTime || 0) + 3
+      }
+
+      setConsumables(updatedConsumables)
+      localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
+
+      if (auth.currentUser && consumableKey) {
+        try {
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            euros: newBalance,
+            [consumableKey]: increment(amountAdded)
+          })
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      window.dispatchEvent(new Event('consumables_updated'))
+      window.dispatchEvent(new Event('inventory_updated'))
+      showToast(`Sucesso! Adquiriste ${item.name}! Total: ${item.id === 'ajuda_5050' ? updatedConsumables.help5050 : updatedConsumables.freezeTime}`)
+      return
+    }
+
+    // 2. COSMÉTICOS (EQUIPAR SE DESBLOQUEADO, COMPRAR SE NÃO)
+    const isUnlocked = 
+      item.priceValue === 0 || 
+      unlockedItems.includes(item.id) ||
+      (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
+      (item.category === 'molduras' && inventory.frames.includes(item.id)) ||
+      (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
+      (item.category === 'titulos' && inventory.titles.includes(item.id))
 
     if (isUnlocked) {
       // EQUIPAR
       if (item.category === 'avatars' && item.image) {
         setEquippedAvatar(item.image)
         localStorage.setItem('user_equipped_avatar', item.image)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.avatar': item.image,
+              avatar: item.image
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
         window.dispatchEvent(new Event('avatarChanged'))
         showToast(`Avatar "${item.name}" equipado com sucesso!`)
       } else if (item.category === 'arenas') {
         setEquippedArena(item.id)
         localStorage.setItem('equipped_arena', item.id)
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
-        window.dispatchEvent(new Event('arenaChanged'))
-        showToast(`Arena "${item.name}" equipada no jogo!`)
-      } else if (item.category === 'molduras' && item.image) {
-        setEquippedFrame(item.id)
-        localStorage.setItem('user_equipped_frame', item.image)
-        localStorage.setItem('equipped_frame', item.id)
         if (auth.currentUser) {
           try {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              equippedFrame: item.id,
-              frameImage: item.image
+              'equipped.arena': item.id
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('arenaChanged'))
+        showToast(`Arena "${item.name}" equipada no jogo!`)
+      } else if (item.category === 'molduras') {
+        setEquippedFrame(item.id)
+        localStorage.setItem('equipped_frame', item.id)
+        localStorage.setItem('user_equipped_frame', item.id)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.frame': item.id,
+              equippedFrame: item.id
             })
           } catch (e) {
             console.error(e)
           }
         }
         window.dispatchEvent(new Event('frameChanged'))
-        window.dispatchEvent(new Event('inventory_updated'))
         showToast(`Moldura "${item.name}" equipada!`)
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)
         localStorage.setItem('equipped_title', item.name)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.title': item.name
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
         window.dispatchEvent(new Event('titleChanged'))
         showToast(`Título "${item.name}" ativado no perfil!`)
-      } else if (item.category === 'ajudas') {
-        showToast(`Pack "${item.name}" pronto a usar na tua próxima partida!`)
       } else if (item.category === 'vip') {
         showToast(`Benefício VIP "${item.name}" ativado!`)
       }
+
+      window.dispatchEvent(new Event('inventory_updated'))
     } else {
-      // COMPRAR
+      // COMPRAR COSMÉTICO
       if (item.isRealMoney) {
         showToast(`A redirecionar para o checkout seguro de ${item.price}...`)
         return
@@ -156,6 +269,27 @@ export default function LojaPage() {
       const newBalance = userBalance - item.priceValue
       setUserBalance(newBalance)
       localStorage.setItem('user_euros', String(newBalance))
+
+      // Atualizar Inventário
+      let updatedInv = { ...inventory }
+      let firestoreInvField = ''
+
+      if (item.category === 'avatars') {
+        updatedInv.avatars = Array.from(new Set([...updatedInv.avatars, item.id]))
+        firestoreInvField = 'inventory.avatars'
+      } else if (item.category === 'molduras') {
+        updatedInv.frames = Array.from(new Set([...updatedInv.frames, item.id]))
+        firestoreInvField = 'inventory.frames'
+      } else if (item.category === 'arenas') {
+        updatedInv.arenas = Array.from(new Set([...updatedInv.arenas, item.id]))
+        firestoreInvField = 'inventory.arenas'
+      } else if (item.category === 'titulos') {
+        updatedInv.titles = Array.from(new Set([...updatedInv.titles, item.id]))
+        firestoreInvField = 'inventory.titles'
+      }
+
+      setInventory(updatedInv)
+      localStorage.setItem('user_inventory', JSON.stringify(updatedInv))
 
       const updatedUnlocked = Array.from(new Set([...unlockedItems, item.id]))
       setUnlockedItems(updatedUnlocked)
@@ -171,25 +305,40 @@ export default function LojaPage() {
         localStorage.setItem('equipped_arena', item.id)
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         window.dispatchEvent(new Event('arenaChanged'))
-      } else if (item.category === 'molduras' && item.image) {
+      } else if (item.category === 'molduras') {
         setEquippedFrame(item.id)
-        localStorage.setItem('user_equipped_frame', item.image)
         localStorage.setItem('equipped_frame', item.id)
-        if (auth.currentUser) {
-          try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              equippedFrame: item.id,
-              frameImage: item.image
-            })
-          } catch (e) {
-            console.error(e)
-          }
-        }
+        localStorage.setItem('user_equipped_frame', item.id)
         window.dispatchEvent(new Event('frameChanged'))
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)
         localStorage.setItem('equipped_title', item.name)
         window.dispatchEvent(new Event('titleChanged'))
+      }
+
+      if (auth.currentUser) {
+        try {
+          const updatePayload: any = {
+            euros: newBalance,
+          }
+          if (firestoreInvField) {
+            updatePayload[firestoreInvField] = arrayUnion(item.id)
+          }
+          if (item.category === 'avatars' && item.image) {
+            updatePayload['equipped.avatar'] = item.image
+            updatePayload.avatar = item.image
+          } else if (item.category === 'molduras') {
+            updatePayload['equipped.frame'] = item.id
+            updatePayload.equippedFrame = item.id
+          } else if (item.category === 'arenas') {
+            updatePayload['equipped.arena'] = item.id
+          } else if (item.category === 'titulos') {
+            updatePayload['equipped.title'] = item.name
+          }
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
+        } catch (e) {
+          console.error(e)
+        }
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
@@ -348,12 +497,21 @@ export default function LojaPage() {
         {/* Items Grid */}
         <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filteredItems.map((item) => {
-            const isUnlocked = item.priceValue === 0 || unlockedItems.includes(item.id)
-            const isEquipped = 
+            const isConsumable = item.category === 'ajudas'
+            const isUnlocked = !isConsumable && (
+              item.priceValue === 0 || 
+              unlockedItems.includes(item.id) ||
+              (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
+              (item.category === 'molduras' && inventory.frames.includes(item.id)) ||
+              (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
+              (item.category === 'titulos' && inventory.titles.includes(item.id))
+            )
+            const isEquipped = !isConsumable && (
               (item.category === 'avatars' && equippedAvatar === item.image) || 
               (item.category === 'arenas' && equippedArena === item.id) ||
               (item.category === 'molduras' && equippedFrame === item.id) ||
               (item.category === 'titulos' && equippedTitle === item.name)
+            )
 
             const isGoldFrame = item.id === 'moldura_ouro_real'
             const isNeonFrame = item.id === 'moldura_neon_portugal'
@@ -373,6 +531,11 @@ export default function LojaPage() {
                       {isUnlocked && (
                         <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
                           <Check className="w-3 h-3" /> Desbloqueado
+                        </span>
+                      )}
+                      {isConsumable && (
+                        <span className="text-[10px] font-bold text-amber-400">
+                          {item.id === 'ajuda_5050' ? `Tens: ${consumables.help5050 || 0}` : `Tens: ${consumables.freezeTime || 0}`}
                         </span>
                       )}
                     </div>
@@ -414,14 +577,16 @@ export default function LojaPage() {
                   <button
                     onClick={() => handleAction(item)}
                     className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
-                      isEquipped
+                      isConsumable
+                        ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                        : isEquipped
                         ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
                         : isUnlocked
                         ? 'bg-purple-600 text-white hover:bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]'
                         : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                     }`}
                   >
-                    {isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
+                    {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
                   </button>
                 </div>
               </div>
