@@ -21,18 +21,18 @@ interface ShopItem {
 const SHOP_ITEMS: ShopItem[] = [
   // VIP
   { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'vip', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', price: 'OFERTA GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.jpg', badge: 'Lendário' },
-  { id: 'passe_fundador', name: 'Passe Fundador da Nação', category: 'vip', description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D.', price: '2,99 €', priceValue: 2.99, isRealMoney: true, badge: 'Mítico' },
+  { id: 'passe_fundador', name: 'Passe Fundador da Nação', category: 'vip', description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D.', price: '2,99 €', priceValue: 2.99, isRealMoney: true, image: '/images/shop/passe-fundador.jpg', badge: 'Mítico' },
   
   // AVATARES
   { id: 'avatar_camoes_2050', name: 'Luís de Camões 2050', category: 'avatars', description: 'O poeta épico renascido com visor cibernético e louros digitais.', price: '€2.500', priceValue: 2500, image: '/images/avatars/camoes-2050.jpg', badge: 'Lendário' },
   { id: 'avatar_vulcao_acores', name: 'Guardião Vulcânico Açores', category: 'avatars', description: 'Armadura forjada nas profundezas geotérmicas de São Miguel.', price: '€3.500', priceValue: 3500, image: '/images/avatars/vulcao-acores.jpg', badge: 'Épico' },
-  { id: 'avatar_lenda_futebol', name: 'Cyborg Camisola das Quinas', category: 'avatars', description: 'O derradeiro goleador cibernético nacional.', price: '€5.000', priceValue: 5000, badge: 'Exclusivo' },
-  { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', price: '€1.500', priceValue: 1500, badge: 'Raro' },
+  { id: 'avatar_lenda_futebol', name: 'Cyborg Camisola das Quinas', category: 'avatars', description: 'O derradeiro goleador cibernético nacional.', price: '€5.000', priceValue: 5000, image: '/images/shop/cyborg-quinas.jpg', badge: 'Exclusivo' },
+  { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', price: '€1.500', priceValue: 1500, image: '/images/shop/fadista-cyber.jpg', badge: 'Raro' },
 
   // ARENAS
   { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', price: 'GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.jpg', badge: 'Desbloqueado' },
-  { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', price: '€5.000', priceValue: 5000, badge: 'Épico' },
-  { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, badge: 'Mítico' },
+  { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', price: '€5.000', priceValue: 5000, image: '/images/shop/arena-fado-alfama.jpg', badge: 'Épico' },
+  { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
 
   // AJUDAS & UTILIDADES
   { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, badge: 'Consumível' },
