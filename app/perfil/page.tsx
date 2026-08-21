@@ -6,19 +6,38 @@ import {
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Edit3 
 } from 'lucide-react'
+import { UserAvatar } from '@/components/user-avatar'
 
 export default function PerfilPage() {
   const [mounted, setMounted] = useState(false)
   const [avatar, setAvatar] = useState('/images/avatars/camoes-2050.jpg')
+  const [frame, setFrame] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'inventario' | 'conquistas' | 'historico'>('inventario')
 
   useEffect(() => {
     setMounted(true)
-    try {
-      const saved = localStorage.getItem('user_equipped_avatar')
-      if (saved) setAvatar(saved)
-    } catch (err) {
-      console.error(err)
+    const syncProfile = () => {
+      try {
+        const saved = localStorage.getItem('user_equipped_avatar')
+        if (saved) setAvatar(saved)
+        const savedFrame = localStorage.getItem('user_equipped_frame')
+        if (savedFrame) setFrame(savedFrame)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    syncProfile()
+    window.addEventListener('avatarChanged', syncProfile)
+    window.addEventListener('frameChanged', syncProfile)
+    window.addEventListener('inventory_updated', syncProfile)
+    window.addEventListener('storage', syncProfile)
+
+    return () => {
+      window.removeEventListener('avatarChanged', syncProfile)
+      window.removeEventListener('frameChanged', syncProfile)
+      window.removeEventListener('inventory_updated', syncProfile)
+      window.removeEventListener('storage', syncProfile)
     }
   }, [])
 
@@ -47,14 +66,8 @@ export default function PerfilPage() {
       <div className="w-full max-w-5xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl mb-8">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative">
-            <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border-2 border-emerald-400/80 shadow-[0_0_25px_rgba(52,211,153,0.35)] bg-slate-900">
-              <img 
-                src={avatar} 
-                alt="Avatar Equipado" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <span className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-lg">
+            <UserAvatar src={avatar} frameSrc={frame || undefined} size="xl" isCurrentUser={true} />
+            <span className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-lg z-20">
               NÍVEL 2
             </span>
           </div>
@@ -143,8 +156,8 @@ export default function PerfilPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             <div className="bg-slate-900/70 border-2 border-emerald-500/80 rounded-xl p-4 flex flex-col items-center text-center relative group">
               <span className="absolute top-2 right-2 text-[10px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded">EQUIPADO</span>
-              <div className="w-20 h-20 rounded-xl overflow-hidden my-2 border border-slate-700">
-                <img src={avatar} alt="Equipado" className="w-full h-full object-cover" />
+              <div className="my-2">
+                <UserAvatar src={avatar} frameSrc={frame || undefined} size="md" isCurrentUser={true} />
               </div>
               <h3 className="font-bold text-sm text-white">Avatar Ativo</h3>
               <p className="text-xs text-slate-400 mt-1">Lendário • Coleção 2050</p>

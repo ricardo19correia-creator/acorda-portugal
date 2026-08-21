@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check } from 'lucide-react'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db, auth } from '@/lib/firebase'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
 
@@ -96,7 +98,7 @@ export default function LojaPage() {
     setTimeout(() => setFeedbackMessage(null), 3500)
   }
 
-  const handleAction = (item: ShopItem) => {
+  const handleAction = async (item: ShopItem) => {
     const isUnlocked = item.priceValue === 0 || unlockedItems.includes(item.id)
 
     if (isUnlocked) {
@@ -112,10 +114,22 @@ export default function LojaPage() {
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         window.dispatchEvent(new Event('arenaChanged'))
         showToast(`Arena "${item.name}" equipada no jogo!`)
-      } else if (item.category === 'molduras') {
+      } else if (item.category === 'molduras' && item.image) {
         setEquippedFrame(item.id)
+        localStorage.setItem('user_equipped_frame', item.image)
         localStorage.setItem('equipped_frame', item.id)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              frameImage: item.image
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
         window.dispatchEvent(new Event('frameChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
         showToast(`Moldura "${item.name}" equipada!`)
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)
@@ -157,9 +171,20 @@ export default function LojaPage() {
         localStorage.setItem('equipped_arena', item.id)
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         window.dispatchEvent(new Event('arenaChanged'))
-      } else if (item.category === 'molduras') {
+      } else if (item.category === 'molduras' && item.image) {
         setEquippedFrame(item.id)
+        localStorage.setItem('user_equipped_frame', item.image)
         localStorage.setItem('equipped_frame', item.id)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              frameImage: item.image
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
         window.dispatchEvent(new Event('frameChanged'))
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)

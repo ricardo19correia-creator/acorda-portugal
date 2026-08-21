@@ -40,24 +40,29 @@ export function PlayerAvatar({
   isCurrentUser = false,
 }: PlayerAvatarProps) {
   const [globalEquippedAvatar, setGlobalEquippedAvatar] = useState<string | null>(null)
+  const [globalEquippedFrame, setGlobalEquippedFrame] = useState<string | null>(null)
 
   useEffect(() => {
-    const updateAvatar = () => {
+    const updateCosmetics = () => {
       if (typeof window !== 'undefined') {
         const stored = localStorage.getItem('user_equipped_avatar')
         setGlobalEquippedAvatar(stored || getEquippedAvatarImage())
+        const storedFrame = localStorage.getItem('user_equipped_frame')
+        setGlobalEquippedFrame(storedFrame || null)
       }
     }
 
-    updateAvatar()
-    window.addEventListener('avatarChanged', updateAvatar)
-    window.addEventListener('inventory_updated', updateAvatar)
-    window.addEventListener('storage', updateAvatar)
+    updateCosmetics()
+    window.addEventListener('avatarChanged', updateCosmetics)
+    window.addEventListener('frameChanged', updateCosmetics)
+    window.addEventListener('inventory_updated', updateCosmetics)
+    window.addEventListener('storage', updateCosmetics)
 
     return () => {
-      window.removeEventListener('avatarChanged', updateAvatar)
-      window.removeEventListener('inventory_updated', updateAvatar)
-      window.removeEventListener('storage', updateAvatar)
+      window.removeEventListener('avatarChanged', updateCosmetics)
+      window.removeEventListener('frameChanged', updateCosmetics)
+      window.removeEventListener('inventory_updated', updateCosmetics)
+      window.removeEventListener('storage', updateCosmetics)
     }
   }, [])
 
@@ -65,12 +70,6 @@ export function PlayerAvatar({
   const effectiveFrameId = frameId ?? cosmetics.frameId
   const effectiveAuraId = auraId ?? cosmetics.auraId
 
-  // Prioridade de resolução de imagem:
-  // 1. avatarImage direto
-  // 2. Se for o utilizador atual (isCurrentUser ou quando profile é o próprio), usa o avatar equipado
-  // 3. photoURL passado
-  // 4. profile?.photoURL
-  // 5. Fallback para avatar global
   const effectivePhotoURL =
     avatarImage ??
     (isCurrentUser ? globalEquippedAvatar : null) ??
@@ -79,12 +78,17 @@ export function PlayerAvatar({
     (isCurrentUser ? globalEquippedAvatar : null) ??
     (profile ? globalEquippedAvatar : null)
 
+  const effectiveFrameURL = (isCurrentUser ? globalEquippedFrame : null) || (profile as any)?.frameImage || null
+
   const effectiveName = displayName ?? name ?? profile?.displayName ?? 'Jogador'
   const initial = effectiveName.trim().charAt(0).toUpperCase() || 'J'
 
   const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md
   const frameClass = getFrameStyle(effectiveFrameId)
   const hasAura = effectiveAuraId === 'prestige_aura_dourada'
+
+  const isGoldFrame = effectiveFrameURL?.includes('moldura-ouro') || effectiveFrameURL?.includes('moldura_ouro_real')
+  const isNeonFrame = effectiveFrameURL?.includes('moldura-neon') || effectiveFrameURL?.includes('moldura_neon_portugal')
 
   return (
     <div className={cn('relative inline-flex shrink-0 items-center justify-center select-none', className)}>
@@ -114,6 +118,18 @@ export function PlayerAvatar({
         >
           {initial}
         </div>
+      )}
+
+      {/* Frame overlay */}
+      {effectiveFrameURL && (
+        <img
+          src={effectiveFrameURL}
+          alt="Moldura"
+          className={cn(
+            'absolute inset-0 z-10 w-full h-full object-contain pointer-events-none scale-110',
+            isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : 'animate-pulse'
+          )}
+        />
       )}
     </div>
   )
