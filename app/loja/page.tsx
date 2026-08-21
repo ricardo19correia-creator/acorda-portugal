@@ -86,13 +86,27 @@ export default function LojaPage() {
   })
 
   return (
-    <div className="min-h-screen w-full bg-[#070d14] text-white p-4 md:p-8 flex flex-col items-center">
-      {/* Top Navigation */}
-      <div className="w-full max-w-6xl flex items-center justify-between mb-4">
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all"
-        >
+    <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col items-center p-4 md:p-8">
+      {/* CAMADA DE FUNDO FIXA (Cofre Real Manuelino 2050) */}
+      <div 
+        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(7, 13, 20, 0.70), rgba(7, 13, 20, 0.85)), url('/images/bg-loja.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      />
+
+      {/* CONTEÚDO DA LOJA (Header, Abas, Cards com backdrop-blur) */}
+      <div className="relative z-10 w-full flex flex-col items-center">
+        {/* Top Navigation */}
+        <div className="w-full max-w-6xl flex items-center justify-between mb-4">
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all"
+          >
           <ArrowLeft className="w-4 h-4" />
           <span>Voltar ao Início</span>
         </Link>
@@ -253,6 +267,7 @@ export default function LojaPage() {
             </div>
           )
         })}
+      </div>
       </div>
     </div>
   )
