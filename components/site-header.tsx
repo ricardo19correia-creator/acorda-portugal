@@ -89,46 +89,16 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Right: Audio Player + Online Users Badge + Auth + CTA */}
-        <nav aria-label="Ações de utilizador" className="hidden items-center gap-2.5 md:flex">
+        {/* Right: Audio Player + Online Users Badge + Play CTA */}
+        <nav aria-label="Ações de utilizador" className="hidden items-center gap-3 md:flex">
           {/* Botão Compacto de Áudio */}
           <AudioPlayer />
 
           {/* Indicador de Utilizadores Online */}
           <OnlineUsersBadge />
 
-          {!authResolved ? (
-            <div className="ml-2 flex items-center gap-2 rounded-2xl border border-white/5 bg-white/[0.03] px-3.5 py-2 text-xs font-bold text-muted-foreground animate-pulse">
-              <div className="h-3.5 w-3.5 rounded-full bg-white/10" />
-              <span>A carregar...</span>
-            </div>
-          ) : user ? (
-            <Link
-              href="/perfil"
-              aria-label={`Ver perfil de ${user.displayName ?? 'Jogador'}`}
-              className="ml-2 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-card/90 p-1.5 pr-4 text-xs font-black uppercase tracking-wider text-foreground shadow-md transition-all duration-200 hover:border-primary/50 hover:shadow-[0_0_20px_-4px_oklch(0.7_0.17_152/0.4)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <PlayerAvatar profile={profile} size="xs" isCurrentUser={true} />
-              <div className="flex flex-col text-left leading-none">
-                <span className="truncate max-w-[100px] pointer-events-none font-black text-foreground">
-                  {user.displayName?.split(' ')[0] ?? 'Jogador'}
-                </span>
-                <span className="text-[0.62rem] text-gold font-bold pointer-events-none">
-                  Nível {profile?.level || 1}
-                </span>
-              </div>
-            </Link>
-          ) : (
-            <Link
-              href="/entrar"
-              className="ml-2 flex items-center gap-1.5 rounded-xl border border-primary/50 bg-primary/15 px-3.5 py-2 text-xs font-black uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-pointer shadow-sm shadow-primary/20"
-            >
-              <User className="h-3.5 w-3.5" />
-              <span>Entrar</span>
-            </Link>
-          )}
-
-          <PlayButton href="/jogar" size="md" label="Jogar" className="ml-2" />
+          {/* Botão Principal Jogar */}
+          <PlayButton href="/jogar" size="md" label="Jogar" />
         </nav>
 
         {/* Mobile: Audio + Online Badge + Mobile Toggle */}
