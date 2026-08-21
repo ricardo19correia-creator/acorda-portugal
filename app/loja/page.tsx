@@ -35,15 +35,15 @@ const SHOP_ITEMS: ShopItem[] = [
   { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
 
   // AJUDAS & UTILIDADES
-  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, badge: 'Consumível' },
-  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, badge: 'Consumível' },
+  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível' },
+  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível' },
 
   // MOLDURAS
-  { id: 'moldura_ouro_real', name: 'Moldura Ouro Real 3D', category: 'molduras', description: 'Rebordo dourado pulsante ao redor do teu avatar.', price: '€4.000', priceValue: 4000, badge: 'Exclusivo' },
-  { id: 'moldura_neon_portugal', name: 'Moldura Quinas Neon', category: 'molduras', description: 'Efeito luminoso verde e rubro vivo.', price: '€2.500', priceValue: 2500, badge: 'Raro' },
+  { id: 'moldura_ouro_real', name: 'Moldura Ouro Real 3D', category: 'molduras', description: 'Rebordo dourado pulsante ao redor do teu avatar.', price: '€4.000', priceValue: 4000, image: '/images/shop/moldura-ouro.jpg', badge: 'Exclusivo' },
+  { id: 'moldura_neon_portugal', name: 'Moldura Quinas Neon', category: 'molduras', description: 'Efeito luminoso verde e rubro vivo.', price: '€2.500', priceValue: 2500, image: '/images/shop/moldura-neon.jpg', badge: 'Raro' },
 
   // TÍTULOS
-  { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', price: '€1.000', priceValue: 1000, badge: 'Honorífico' }
+  { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', price: '€1.000', priceValue: 1000, image: '/images/shop/titulo-conquistador.jpg', badge: 'Honorífico' }
 ]
 
 export default function LojaPage() {
