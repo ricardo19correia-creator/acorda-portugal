@@ -750,7 +750,7 @@ export function QuizScreen({
       </div>
 
       {/* 4. QUESTION CARD */}
-      <div className="relative mt-6 overflow-hidden rounded-3xl sm:rounded-4xl border border-white/15 bg-card/85 p-6 sm:p-9 text-center backdrop-blur-2xl shadow-2xl">
+      <div className="relative mt-6 overflow-hidden rounded-3xl sm:rounded-4xl border border-slate-800/80 bg-slate-900/80 p-6 sm:p-9 text-center backdrop-blur-md shadow-2xl">
         {/* Subtle decorative corners */}
         <div className="pattern-azulejo pointer-events-none absolute -right-6 -top-6 h-28 w-28 opacity-25 [mask-image:radial-gradient(circle,black,transparent_70%)]" />
         <div className="pattern-azulejo pointer-events-none absolute -bottom-6 -left-6 h-28 w-28 opacity-25 [mask-image:radial-gradient(circle,black,transparent_70%)]" />

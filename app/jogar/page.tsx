@@ -44,20 +44,19 @@ export default function JogarPage() {
 
   return (
     <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col justify-between overflow-x-hidden">
-      {/* Fundo Animado da Arena */}
+      {/* Camada de Fundo GIF Animado Forçado */}
       <div 
-        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
+        className="fixed inset-0 -z-50 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.55), rgba(5, 10, 20, 0.85)), url('${arenaImage}')`,
+          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.50), rgba(5, 10, 20, 0.80)), url('${arenaImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed'
+          backgroundRepeat: 'no-repeat'
         }}
       />
 
       {/* CONTEÚDO DO QUIZ */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between bg-transparent">
         <div className="w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
           <QuizPage />
         </div>
