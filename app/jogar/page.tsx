@@ -4,26 +4,37 @@ import React, { useState, useEffect } from 'react'
 import { QuizPage } from '@/components/quiz/page'
 
 export default function JogarPage() {
-  const [arenaImage, setArenaImage] = useState<string>('/arenas/arena-ponte-2077.jpg')
+  const [arenaImage, setArenaImage] = useState<string>('/arenas/fundo-espaco.gif')
 
   useEffect(() => {
     const sync = () => {
       if (typeof window !== 'undefined') {
         const savedImage = localStorage.getItem('equipped_arena_image')
         const savedArena = localStorage.getItem('equipped_arena')
+
         if (savedImage && savedImage.startsWith('/')) {
           setArenaImage(savedImage)
+        } else if (savedArena === 'arena_matriz_cosmica' || savedArena === 'theme_arena_cosmic_matrix') {
+          setArenaImage('/arenas/fundo-espaco.gif')
+        } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
+          setArenaImage('/arenas/arena-ponte-2077.gif')
+        } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
+          setArenaImage('/images/shop/arena-fado-alfama.jpg')
+        } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores') {
+          setArenaImage('/images/shop/arena-fogo-acores.jpg')
         } else if (savedArena === 'theme_arena_biblioteca_sagrada') {
           setArenaImage('/arenas/biblioteca-sagrada.jpg')
         } else {
-          setArenaImage('/arenas/arena-ponte-2077.jpg')
+          setArenaImage('/arenas/fundo-espaco.gif')
         }
       }
     }
+
     sync()
     window.addEventListener('arenaChanged', sync)
     window.addEventListener('inventory_updated', sync)
     window.addEventListener('storage', sync)
+
     return () => {
       window.removeEventListener('arenaChanged', sync)
       window.removeEventListener('inventory_updated', sync)
@@ -33,18 +44,19 @@ export default function JogarPage() {
 
   return (
     <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col justify-between overflow-x-hidden">
-      {/* CAMADA DA ARENA (Fica por cima do fundo global do site com z-0) */}
+      {/* Fundo Animado da Arena */}
       <div 
-        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
+        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(5, 8, 18, 0.60), rgba(5, 8, 18, 0.70)), url('${arenaImage}')`,
+          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.55), rgba(5, 10, 20, 0.85)), url('${arenaImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
         }}
       />
 
-      {/* CONTEÚDO DO QUIZ (Fica por cima da arena com z-10) */}
+      {/* CONTEÚDO DO QUIZ */}
       <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
         <div className="w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
           <QuizPage />
