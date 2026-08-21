@@ -51,30 +51,124 @@ export default function LojaPage() {
   const [activeTab, setActiveTab] = useState<Category>('vip')
   const [equippedAvatar, setEquippedAvatar] = useState<string>('')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
+  const [equippedFrame, setEquippedFrame] = useState<string>('')
+  const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [userBalance, setUserBalance] = useState<number>(803845)
+  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077'])
+  const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
   useEffect(() => {
     setMounted(true)
     try {
       const savedAvatar = localStorage.getItem('user_equipped_avatar')
       if (savedAvatar) setEquippedAvatar(savedAvatar)
+      
       const savedArena = localStorage.getItem('equipped_arena')
       if (savedArena) setEquippedArena(savedArena)
+
+      const savedFrame = localStorage.getItem('equipped_frame')
+      if (savedFrame) setEquippedFrame(savedFrame)
+
+      const savedTitle = localStorage.getItem('equipped_title')
+      if (savedTitle) setEquippedTitle(savedTitle)
+
       const savedEuros = localStorage.getItem('user_euros')
       if (savedEuros) setUserBalance(Number(savedEuros))
+
+      const savedUnlocked = localStorage.getItem('user_unlocked_items')
+      if (savedUnlocked) {
+        try {
+          const parsed = JSON.parse(savedUnlocked)
+          if (Array.isArray(parsed)) {
+            setUnlockedItems(Array.from(new Set([...unlockedItems, ...parsed])))
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      }
     } catch (e) {
       console.error(e)
     }
   }, [])
 
-  const handleEquipItem = (item: ShopItem) => {
-    if (item.category === 'avatars' && item.image) {
-      setEquippedAvatar(item.image)
-      localStorage.setItem('user_equipped_avatar', item.image)
-      window.dispatchEvent(new Event('avatarChanged'))
-    } else if (item.category === 'arenas') {
-      setEquippedArena(item.id)
-      localStorage.setItem('equipped_arena', item.id)
+  const showToast = (text: string, type: 'success' | 'error' = 'success') => {
+    setFeedbackMessage({ text, type })
+    setTimeout(() => setFeedbackMessage(null), 3500)
+  }
+
+  const handleAction = (item: ShopItem) => {
+    const isUnlocked = item.priceValue === 0 || unlockedItems.includes(item.id)
+
+    if (isUnlocked) {
+      // EQUIPAR
+      if (item.category === 'avatars' && item.image) {
+        setEquippedAvatar(item.image)
+        localStorage.setItem('user_equipped_avatar', item.image)
+        window.dispatchEvent(new Event('avatarChanged'))
+        showToast(`Avatar "${item.name}" equipado com sucesso!`)
+      } else if (item.category === 'arenas') {
+        setEquippedArena(item.id)
+        localStorage.setItem('equipped_arena', item.id)
+        if (item.image) localStorage.setItem('equipped_arena_image', item.image)
+        window.dispatchEvent(new Event('arenaChanged'))
+        showToast(`Arena "${item.name}" equipada no jogo!`)
+      } else if (item.category === 'molduras') {
+        setEquippedFrame(item.id)
+        localStorage.setItem('equipped_frame', item.id)
+        window.dispatchEvent(new Event('frameChanged'))
+        showToast(`Moldura "${item.name}" equipada!`)
+      } else if (item.category === 'titulos') {
+        setEquippedTitle(item.name)
+        localStorage.setItem('equipped_title', item.name)
+        window.dispatchEvent(new Event('titleChanged'))
+        showToast(`Título "${item.name}" ativado no perfil!`)
+      } else if (item.category === 'ajudas') {
+        showToast(`Pack "${item.name}" pronto a usar na tua próxima partida!`)
+      } else if (item.category === 'vip') {
+        showToast(`Benefício VIP "${item.name}" ativado!`)
+      }
+    } else {
+      // COMPRAR
+      if (item.isRealMoney) {
+        showToast(`A redirecionar para o checkout seguro de ${item.price}...`)
+        return
+      }
+
+      if (userBalance < item.priceValue) {
+        showToast(`Saldo insuficiente! Precisas de mais €${(item.priceValue - userBalance).toLocaleString('pt-PT')} € Acorda.`, 'error')
+        return
+      }
+
+      const newBalance = userBalance - item.priceValue
+      setUserBalance(newBalance)
+      localStorage.setItem('user_euros', String(newBalance))
+
+      const updatedUnlocked = Array.from(new Set([...unlockedItems, item.id]))
+      setUnlockedItems(updatedUnlocked)
+      localStorage.setItem('user_unlocked_items', JSON.stringify(updatedUnlocked))
+
+      // Auto-equipar após compra
+      if (item.category === 'avatars' && item.image) {
+        setEquippedAvatar(item.image)
+        localStorage.setItem('user_equipped_avatar', item.image)
+        window.dispatchEvent(new Event('avatarChanged'))
+      } else if (item.category === 'arenas') {
+        setEquippedArena(item.id)
+        localStorage.setItem('equipped_arena', item.id)
+        if (item.image) localStorage.setItem('equipped_arena_image', item.image)
+        window.dispatchEvent(new Event('arenaChanged'))
+      } else if (item.category === 'molduras') {
+        setEquippedFrame(item.id)
+        localStorage.setItem('equipped_frame', item.id)
+        window.dispatchEvent(new Event('frameChanged'))
+      } else if (item.category === 'titulos') {
+        setEquippedTitle(item.name)
+        localStorage.setItem('equipped_title', item.name)
+        window.dispatchEvent(new Event('titleChanged'))
+      }
+
+      window.dispatchEvent(new Event('inventory_updated'))
+      showToast(`Parabéns! Adquiriste "${item.name}" por €${item.priceValue.toLocaleString('pt-PT')}!`)
     }
   }
 
@@ -105,169 +199,210 @@ export default function LojaPage() {
         <div className="w-full max-w-6xl flex items-center justify-between mb-4">
           <Link 
             href="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md"
           >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Voltar ao Início</span>
-        </Link>
-      </div>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Voltar ao Início</span>
+          </Link>
 
-      {/* Store Header Banner */}
-      <div className="w-full max-w-6xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-        <div>
-          <span className="text-xs font-black tracking-widest text-emerald-400 uppercase block mb-1">
-            ECONOMIA OFICIAL & MERCADO
-          </span>
-          <h1 className="text-2xl md:text-3xl font-black tracking-wider text-white">
-            LOJA ACORDA PORTUGAL
-          </h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Adquire avatares épicos, ajudas de jogo, molduras vivas, títulos e arenas 3D exclusivas.
-          </p>
+          {feedbackMessage && (
+            <div className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xl animate-fade-in ${
+              feedbackMessage.type === 'success' 
+                ? 'bg-emerald-500/90 text-slate-950 border border-emerald-400' 
+                : 'bg-rose-500/90 text-white border border-rose-400'
+            }`}>
+              {feedbackMessage.text}
+            </div>
+          )}
         </div>
 
-        <div className="bg-black/50 border border-amber-500/30 rounded-2xl px-6 py-3 text-right shadow-inner min-w-[220px]">
-          <span className="text-[10px] font-black tracking-widest text-amber-400 uppercase block mb-0.5">
-            O TEU SALDO VIRTUAL
-          </span>
-          <div className="text-2xl font-black text-amber-300">
-            €{userBalance.toLocaleString('pt-PT')} <span className="text-xs text-amber-400 font-bold">€ Acorda</span>
+        {/* Store Header Banner */}
+        <div className="w-full max-w-6xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl backdrop-blur-md">
+          <div>
+            <span className="text-xs font-black tracking-widest text-emerald-400 uppercase block mb-1">
+              ECONOMIA OFICIAL & MERCADO
+            </span>
+            <h1 className="text-2xl md:text-3xl font-black tracking-wider text-white">
+              LOJA ACORDA PORTUGAL
+            </h1>
+            <p className="text-xs text-slate-400 mt-1">
+              Adquire avatares épicos, ajudas de jogo, molduras vivas, títulos e arenas 3D exclusivas.
+            </p>
+          </div>
+
+          <div className="bg-black/60 border border-amber-500/40 rounded-2xl px-6 py-3 text-right shadow-inner min-w-[220px]">
+            <span className="text-[10px] font-black tracking-widest text-amber-400 uppercase block mb-0.5">
+              O TEU SALDO VIRTUAL
+            </span>
+            <div className="text-2xl font-black text-amber-300">
+              €{userBalance.toLocaleString('pt-PT')} <span className="text-xs text-amber-400 font-bold">€ Acorda</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Categories Bar */}
-      <div className="w-full max-w-6xl flex flex-wrap gap-2 mb-8">
-        <button
-          onClick={() => setActiveTab('vip')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
-            activeTab === 'vip'
-              ? 'bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
-              : 'bg-slate-900/70 text-amber-400 border border-amber-500/30 hover:bg-slate-800'
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5" /> EXCLUSIVOS VIP (€)
-        </button>
+        {/* Categories Bar */}
+        <div className="w-full max-w-6xl flex flex-wrap gap-2 mb-8">
+          <button
+            onClick={() => setActiveTab('vip')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
+              activeTab === 'vip'
+                ? 'bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                : 'bg-slate-900/70 text-amber-400 border border-amber-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" /> EXCLUSIVOS VIP (€)
+          </button>
 
-        <button
-          onClick={() => setActiveTab('avatars')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
-            activeTab === 'avatars'
-              ? 'bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-              : 'bg-slate-900/70 text-cyan-400 border border-cyan-500/30 hover:bg-slate-800'
-          }`}
-        >
-          <User className="w-3.5 h-3.5" /> LOJA DE AVATARES
-        </button>
+          <button
+            onClick={() => setActiveTab('avatars')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
+              activeTab === 'avatars'
+                ? 'bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                : 'bg-slate-900/70 text-cyan-400 border border-cyan-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <User className="w-3.5 h-3.5" /> LOJA DE AVATARES
+          </button>
 
-        <button
-          onClick={() => setActiveTab('todos')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-            activeTab === 'todos'
-              ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
-              : 'bg-slate-900/70 text-emerald-400 border border-emerald-500/30 hover:bg-slate-800'
-          }`}
-        >
-          <Layers className="w-3.5 h-3.5" /> Todos os Itens (€ Acorda)
-        </button>
+          <button
+            onClick={() => setActiveTab('todos')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'todos'
+                ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+                : 'bg-slate-900/70 text-emerald-400 border border-emerald-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" /> Todos os Itens (€ Acorda)
+          </button>
 
-        <button
-          onClick={() => setActiveTab('ajudas')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-            activeTab === 'ajudas'
-              ? 'bg-amber-400 text-slate-950'
-              : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:bg-slate-800'
-          }`}
-        >
-          <Zap className="w-3.5 h-3.5" /> Ajudas & Utilidades
-        </button>
+          <button
+            onClick={() => setActiveTab('ajudas')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'ajudas'
+                ? 'bg-amber-400 text-slate-950 shadow-[0_0_15px_rgba(251,191,36,0.4)]'
+                : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:bg-slate-800'
+            }`}
+          >
+            <Zap className="w-3.5 h-3.5" /> Ajudas & Utilidades
+          </button>
 
-        <button
-          onClick={() => setActiveTab('molduras')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-            activeTab === 'molduras'
-              ? 'bg-purple-500 text-slate-950'
-              : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:bg-slate-800'
-          }`}
-        >
-          <Palette className="w-3.5 h-3.5" /> Molduras
-        </button>
+          <button
+            onClick={() => setActiveTab('molduras')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'molduras'
+                ? 'bg-purple-500 text-slate-950 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
+                : 'bg-slate-900/70 text-purple-300 border border-purple-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <Palette className="w-3.5 h-3.5" /> Molduras
+          </button>
 
-        <button
-          onClick={() => setActiveTab('titulos')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-            activeTab === 'titulos'
-              ? 'bg-yellow-500 text-slate-950'
-              : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:bg-slate-800'
-          }`}
-        >
-          <Trophy className="w-3.5 h-3.5" /> Títulos
-        </button>
+          <button
+            onClick={() => setActiveTab('titulos')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'titulos'
+                ? 'bg-yellow-500 text-slate-950 shadow-[0_0_15px_rgba(234,179,8,0.4)]'
+                : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:bg-slate-800'
+            }`}
+          >
+            <Trophy className="w-3.5 h-3.5" /> Títulos
+          </button>
 
-        <button
-          onClick={() => setActiveTab('arenas')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-            activeTab === 'arenas'
-              ? 'bg-blue-500 text-slate-950 shadow-[0_0_15px_rgba(59,130,246,0.4)]'
-              : 'bg-slate-900/70 text-blue-400 border border-blue-500/30 hover:bg-slate-800'
-          }`}
-        >
-          <Globe className="w-3.5 h-3.5" /> Arenas de Jogo
-        </button>
-      </div>
+          <button
+            onClick={() => setActiveTab('arenas')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'arenas'
+                ? 'bg-blue-500 text-slate-950 shadow-[0_0_15px_rgba(59,130,246,0.4)]'
+                : 'bg-slate-900/70 text-blue-400 border border-blue-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <Globe className="w-3.5 h-3.5" /> Arenas de Jogo
+          </button>
+        </div>
 
-      {/* Items Grid */}
-      <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {filteredItems.map((item) => {
-          const isEquipped = (item.category === 'avatars' && equippedAvatar === item.image) || (item.category === 'arenas' && equippedArena === item.id)
+        {/* Items Grid */}
+        <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {filteredItems.map((item) => {
+            const isUnlocked = item.priceValue === 0 || unlockedItems.includes(item.id)
+            const isEquipped = 
+              (item.category === 'avatars' && equippedAvatar === item.image) || 
+              (item.category === 'arenas' && equippedArena === item.id) ||
+              (item.category === 'molduras' && equippedFrame === item.id) ||
+              (item.category === 'titulos' && equippedTitle === item.name)
 
-          return (
-            <div 
-              key={item.id}
-              className="bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 flex flex-col justify-between backdrop-blur-md transition-all shadow-lg"
-            >
-              <div>
-                {/* Badge */}
-                {item.badge && (
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                      {item.badge}
-                    </span>
+            const isGoldFrame = item.id === 'moldura_ouro_real'
+            const isNeonFrame = item.id === 'moldura_neon_portugal'
+
+            return (
+              <div 
+                key={item.id}
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] shadow-lg"
+              >
+                <div>
+                  {/* Badge */}
+                  {item.badge && (
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        {item.badge}
+                      </span>
+                      {isUnlocked && (
+                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                          <Check className="w-3 h-3" /> Desbloqueado
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Image / Preview */}
+                  <div className="relative aspect-video sm:aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
+                    {item.image ? (
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                          isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : ''
+                        }`} 
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-slate-600">
+                        <Sparkles className="w-8 h-8" />
+                      </div>
+                    )}
+                    {/* Efeito de brilho pulsante para itens especiais */}
+                    <div className="pointer-events-none absolute inset-0 animate-pulse bg-gradient-to-t from-purple-500/10 via-transparent to-transparent" />
                   </div>
-                )}
 
-                {/* Image / Preview */}
-                {item.image ? (
-                  <div className="w-full h-36 rounded-xl overflow-hidden mb-3 bg-black/40 border border-slate-800">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                  </div>
-                ) : (
-                  <div className="w-full h-28 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-center mb-3 text-slate-600">
-                    <Sparkles className="w-8 h-8" />
-                  </div>
-                )}
+                  <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-400 line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
 
-                <h3 className="font-bold text-sm text-white">{item.name}</h3>
-                <p className="text-xs text-slate-400 mt-1 line-clamp-2">{item.description}</p>
+                {/* Ação e Preço */}
+                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                  <span className="font-mono text-sm font-semibold text-yellow-400">
+                    {item.price}
+                  </span>
+
+                  <button
+                    onClick={() => handleAction(item)}
+                    className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
+                      isEquipped
+                        ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
+                        : isUnlocked
+                        ? 'bg-purple-600 text-white hover:bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]'
+                        : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                    }`}
+                  >
+                    {isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
+                  </button>
+                </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
-                <span className="text-sm font-black text-amber-400">{item.price}</span>
-                <button
-                  onClick={() => handleEquipItem(item)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    isEquipped 
-                      ? 'bg-emerald-500 text-slate-950'
-                      : 'bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-white'
-                  }`}
-                >
-                  {isEquipped ? 'Equipado ✓' : 'Equipar'}
-                </button>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
