@@ -34,6 +34,7 @@ import {
   filterQuizQuestions,
 } from '@/lib/game-data'
 import vilaRealQuestionsRaw from '@/data/perguntas_vila_real_500.json'
+import modoMalucoQuestionsRaw from '@/data/perguntas_modo_maluco_5000.json'
 import { calculateLevelProgress } from '@/lib/progression'
 
 import { QuizProgress } from '@/components/quiz/quiz-progress'
@@ -81,6 +82,29 @@ const VILA_REAL_QUESTIONS: QuizQuestion[] = (vilaRealQuestionsRaw as any[]).map(
     })),
     correct: correctKey,
     explanation: `Resposta correta: ${q.correct}`,
+    points,
+  }
+})
+
+const MODO_MALUCO_5000_QUESTIONS: QuizQuestion[] = (modoMalucoQuestionsRaw as any[]).map((q, i) => {
+  const correctOptionText = q.correct
+  const correctIdx = q.options.indexOf(correctOptionText)
+  const correctKey = (['A', 'B', 'C', 'D'][correctIdx >= 0 && correctIdx < 4 ? correctIdx : 0]) as OptionKey
+  const points = q.difficulty === 3 ? 300 : q.difficulty === 2 ? 200 : 100
+
+  return {
+    category: 'modo-maluco',
+    subcategory: q.subcategory,
+    id: q.id || `mm_${i + 1}`,
+    index: i + 1,
+    total: modoMalucoQuestionsRaw.length,
+    question: q.question,
+    options: q.options.map((text: string, optIdx: number) => ({
+      key: (['A', 'B', 'C', 'D'][optIdx] as OptionKey),
+      text,
+    })),
+    correct: correctKey,
+    explanation: q.explanation || `Resposta correta: ${q.correct}`,
     points,
   }
 })
@@ -176,7 +200,16 @@ function createGameQuestions(
   ) {
     questionPool = VILA_REAL_QUESTIONS
   } else if (categorySlug === 'modo-maluco' || categorySlug === 'perguntas-idiotas') {
-    questionPool = MODO_MALUCO_QUESTIONS
+    if (subcategorySlug && subcategorySlug !== 'all' && subcategorySlug !== 'todas' && subcategorySlug !== 'todos') {
+      const subNorm = subcategorySlug.toLowerCase().trim()
+      const filteredSub = MODO_MALUCO_5000_QUESTIONS.filter((q) => {
+        const qSub = (q.subcategory || '').toLowerCase().trim()
+        return qSub === subNorm || qSub.includes(subNorm) || subNorm.includes(qSub)
+      })
+      questionPool = filteredSub.length > 0 ? filteredSub : MODO_MALUCO_5000_QUESTIONS
+    } else {
+      questionPool = MODO_MALUCO_5000_QUESTIONS
+    }
   } else {
     // 1. Filtrar pelo sistema completo de categorias
     const filtered = filterQuizQuestions(ALL_QUIZ_QUESTIONS as any, {
