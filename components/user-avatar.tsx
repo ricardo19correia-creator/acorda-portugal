@@ -3,40 +3,53 @@
 import React, { useState, useEffect } from 'react'
 
 export interface UserAvatarProps {
+  avatarUrl?: string
   src?: string
-  frameSrc?: string
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  frameId?: string | null
+  size?: 'sm' | 'md' | 'lg' | 'xl'
   className?: string
   isCurrentUser?: boolean
   alt?: string
 }
 
 export function UserAvatar({
-  src = '/images/avatars/camoes-2050.jpg',
-  frameSrc,
-  size = 'md',
+  avatarUrl,
+  src,
+  frameId,
+  size = 'lg',
   className = '',
   isCurrentUser = false,
   alt = 'Avatar de Jogador',
 }: UserAvatarProps) {
-  const [activeAvatar, setActiveAvatar] = useState<string>(src)
-  const [activeFrame, setActiveFrame] = useState<string | null>(frameSrc || null)
+  const [currentAvatar, setCurrentAvatar] = useState<string>(avatarUrl || src || '/images/avatars/guardiao-vulcanico.jpg')
+  const [currentFrame, setCurrentFrame] = useState<string | null>(frameId || null)
 
   useEffect(() => {
     const syncCosmetics = () => {
       if (typeof window !== 'undefined') {
         const localAvatar = localStorage.getItem('user_equipped_avatar')
-        if (localAvatar && (isCurrentUser || !src || src === '/images/avatars/camoes-2050.jpg')) {
-          setActiveAvatar(localAvatar)
-        } else if (src) {
-          setActiveAvatar(src)
+        if (localAvatar && (isCurrentUser || (!avatarUrl && !src))) {
+          // Garante que se o avatar guardado for incorretamente uma moldura, faz fallback para personagem
+          if (localAvatar.includes('moldura')) {
+            setCurrentAvatar('/images/avatars/guardiao-vulcanico.jpg')
+            localStorage.setItem('user_equipped_avatar', '/images/avatars/guardiao-vulcanico.jpg')
+          } else {
+            setCurrentAvatar(localAvatar)
+          }
+        } else if (avatarUrl || src) {
+          const given = avatarUrl || src
+          if (given && !given.includes('moldura')) {
+            setCurrentAvatar(given)
+          } else {
+            setCurrentAvatar('/images/avatars/guardiao-vulcanico.jpg')
+          }
         }
 
-        if (!frameSrc) {
-          const localFrame = localStorage.getItem('user_equipped_frame')
-          setActiveFrame(localFrame || null)
+        if (frameId !== undefined && frameId !== null) {
+          setCurrentFrame(frameId)
         } else {
-          setActiveFrame(frameSrc)
+          const localFrame = localStorage.getItem('equipped_frame') || localStorage.getItem('user_equipped_frame')
+          setCurrentFrame(localFrame || null)
         }
       }
     }
@@ -54,47 +67,39 @@ export function UserAvatar({
       window.removeEventListener('inventory_updated', syncCosmetics)
       window.removeEventListener('storage', syncCosmetics)
     }
-  }, [src, frameSrc, isCurrentUser])
+  }, [avatarUrl, src, frameId, isCurrentUser])
 
   const sizeClasses = {
-    xs: 'w-8 h-8',
     sm: 'w-10 h-10',
     md: 'w-16 h-16',
     lg: 'w-24 h-24',
     xl: 'w-28 h-28 md:w-36 md:h-36',
   }
 
-  const isGoldFrame = activeFrame?.includes('moldura-ouro') || activeFrame?.includes('moldura_ouro_real')
-  const isNeonFrame = activeFrame?.includes('moldura-neon') || activeFrame?.includes('moldura_neon_portugal')
+  // Efeitos visuais dinâmicos para cada moldura
+  const getFrameStyle = () => {
+    if (currentFrame === 'moldura_quinas_neon' || currentFrame === 'moldura_neon_portugal' || currentFrame?.includes('neon')) {
+      return 'p-1 rounded-2xl bg-gradient-to-tr from-emerald-500 via-red-500 to-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.7)] animate-pulse'
+    }
+    if (currentFrame === 'moldura_ouro_real' || currentFrame?.includes('ouro')) {
+      return 'p-1.5 rounded-2xl bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-200 shadow-[0_0_22px_rgba(234,179,8,0.8)] animate-pulse'
+    }
+    return 'p-0.5 rounded-2xl bg-slate-700/50'
+  }
 
   return (
-    <div className={`relative flex items-center justify-center shrink-0 ${sizeClasses[size] || sizeClasses.md} ${className}`}>
-      {/* Avatar Base Image */}
-      <div className="w-[82%] h-[82%] rounded-2xl overflow-hidden bg-slate-900 shadow-inner border border-slate-800/80">
+    <div className={`relative flex items-center justify-center shrink-0 ${sizeClasses[size] || sizeClasses.lg} ${getFrameStyle()} ${className}`}>
+      {/* Imagem Real do Avatar no Interior */}
+      <div className="w-full h-full rounded-xl overflow-hidden bg-slate-900 shadow-inner">
         <img
-          src={activeAvatar}
+          src={currentAvatar}
           alt={alt}
           className="w-full h-full object-cover"
           onError={(e) => {
-            ;(e.currentTarget as HTMLImageElement).src = '/images/avatars/camoes-2050.jpg'
+            ;(e.currentTarget as HTMLImageElement).src = '/images/avatars/guardiao-vulcanico.jpg'
           }}
         />
       </div>
-
-      {/* Active Equipped Frame Overlay */}
-      {activeFrame && (
-        <img
-          src={activeFrame}
-          alt="Moldura Ativa"
-          className={`absolute inset-0 z-10 w-full h-full object-contain pointer-events-none ${
-            isGoldFrame
-              ? 'animate-frame-gold drop-shadow-[0_0_12px_rgba(245,158,11,0.6)]'
-              : isNeonFrame
-              ? 'animate-frame-neon drop-shadow-[0_0_12px_rgba(16,185,129,0.6)]'
-              : 'animate-pulse drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]'
-          }`}
-        />
-      )}
     </div>
   )
 }

@@ -10,7 +10,7 @@ import { UserAvatar } from '@/components/user-avatar'
 
 export default function PerfilPage() {
   const [mounted, setMounted] = useState(false)
-  const [avatar, setAvatar] = useState('/images/avatars/camoes-2050.jpg')
+  const [avatar, setAvatar] = useState('/images/avatars/guardiao-vulcanico.jpg')
   const [frame, setFrame] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'inventario' | 'conquistas' | 'historico'>('inventario')
 
@@ -19,8 +19,12 @@ export default function PerfilPage() {
     const syncProfile = () => {
       try {
         const saved = localStorage.getItem('user_equipped_avatar')
-        if (saved) setAvatar(saved)
-        const savedFrame = localStorage.getItem('user_equipped_frame')
+        if (saved && !saved.includes('moldura')) {
+          setAvatar(saved)
+        } else {
+          setAvatar('/images/avatars/guardiao-vulcanico.jpg')
+        }
+        const savedFrame = localStorage.getItem('equipped_frame') || localStorage.getItem('user_equipped_frame')
         if (savedFrame) setFrame(savedFrame)
       } catch (err) {
         console.error(err)
@@ -66,7 +70,7 @@ export default function PerfilPage() {
       <div className="w-full max-w-5xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl mb-8">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative">
-            <UserAvatar src={avatar} frameSrc={frame || undefined} size="xl" isCurrentUser={true} />
+            <UserAvatar avatarUrl={avatar} frameId={frame} size="xl" isCurrentUser={true} />
             <span className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-lg z-20">
               NÍVEL 2
             </span>
@@ -157,7 +161,7 @@ export default function PerfilPage() {
             <div className="bg-slate-900/70 border-2 border-emerald-500/80 rounded-xl p-4 flex flex-col items-center text-center relative group">
               <span className="absolute top-2 right-2 text-[10px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded">EQUIPADO</span>
               <div className="my-2">
-                <UserAvatar src={avatar} frameSrc={frame || undefined} size="md" isCurrentUser={true} />
+                <UserAvatar avatarUrl={avatar} frameId={frame} size="md" isCurrentUser={true} />
               </div>
               <h3 className="font-bold text-sm text-white">Avatar Ativo</h3>
               <p className="text-xs text-slate-400 mt-1">Lendário • Coleção 2050</p>

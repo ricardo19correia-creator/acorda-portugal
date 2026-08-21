@@ -70,13 +70,17 @@ export function PlayerAvatar({
   const effectiveFrameId = frameId ?? cosmetics.frameId
   const effectiveAuraId = auraId ?? cosmetics.auraId
 
-  const effectivePhotoURL =
+  let effectivePhotoURL =
     avatarImage ??
     (isCurrentUser ? globalEquippedAvatar : null) ??
     photoURL ??
     profile?.photoURL ??
     (isCurrentUser ? globalEquippedAvatar : null) ??
     (profile ? globalEquippedAvatar : null)
+
+  if (effectivePhotoURL && effectivePhotoURL.includes('moldura')) {
+    effectivePhotoURL = '/images/avatars/guardiao-vulcanico.jpg'
+  }
 
   const effectiveFrameURL = (isCurrentUser ? globalEquippedFrame : null) || (profile as any)?.frameImage || null
 
