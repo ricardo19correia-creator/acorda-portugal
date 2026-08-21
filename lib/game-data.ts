@@ -248,6 +248,10 @@ export type UserProfile = {
   bestStreak: number
   unlockedAchievements: string[]
   badges?: string[]
+  consumables?: {
+    help5050?: number
+    freezeTime?: number
+  }
   inventory?: Record<string, number>
   equipped?: EquippedCosmetics
   createdAt?: unknown

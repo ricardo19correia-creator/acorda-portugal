@@ -13,7 +13,7 @@ import {
   Flame,
   Snowflake,
 } from 'lucide-react'
-import { collection, doc, runTransaction, serverTimestamp } from 'firebase/firestore'
+import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -316,20 +316,59 @@ export function QuizScreen({
   const [phase, setPhase] = useState<Phase>('answering')
   const [selected, setSelected] = useState<OptionKey | null>(null)
 
-  // Power-Ups State
+  // Power-Ups Stock State
+  const [stock5050, setStock5050] = useState<number>(5)
+  const [stockFreeze, setStockFreeze] = useState<number>(3)
   const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
-  const [activeClue, setActiveClue] = useState<string | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
-  // Real-time local inventory representation
-  const effectiveUid = user?.uid || profile?.uid || ''
-  const rawInventory: Record<string, number> = (profile as any)?.inventory || {}
-  const [inventory, setInventory] = useState<Record<string, number>>(rawInventory)
-
+  // Real-time stock synchronization
   useEffect(() => {
-    const inv: Record<string, number> = (profile as any)?.inventory || {}
-    setInventory(inv)
+    const syncStock = () => {
+      try {
+        let h5050 = 5
+        let fTime = 3
+
+        const savedConsumables = localStorage.getItem('user_consumables')
+        if (savedConsumables) {
+          const parsed = JSON.parse(savedConsumables)
+          if (typeof parsed.help5050 === 'number') h5050 = parsed.help5050
+          if (typeof parsed.freezeTime === 'number') fTime = parsed.freezeTime
+        }
+
+        const savedH = localStorage.getItem('user_help5050')
+        if (savedH !== null) h5050 = Number(savedH) || 0
+
+        const savedF = localStorage.getItem('user_freezeTime')
+        if (savedF !== null) fTime = Number(savedF) || 0
+
+        if (profile?.consumables) {
+          if (typeof profile.consumables.help5050 === 'number') h5050 = profile.consumables.help5050
+          if (typeof profile.consumables.freezeTime === 'number') fTime = profile.consumables.freezeTime
+        } else if ((profile as any)?.inventory) {
+          const inv = (profile as any).inventory
+          if (typeof inv.consumable_50_50 === 'number') h5050 = inv.consumable_50_50
+          if (typeof inv.consumable_congelar_tempo === 'number') fTime = inv.consumable_congelar_tempo
+        }
+
+        setStock5050(h5050)
+        setStockFreeze(fTime)
+      } catch (err) {
+        console.error('Erro ao sincronizar stock:', err)
+      }
+    }
+
+    syncStock()
+    window.addEventListener('consumables_updated', syncStock)
+    window.addEventListener('inventory_updated', syncStock)
+    window.addEventListener('storage', syncStock)
+
+    return () => {
+      window.removeEventListener('consumables_updated', syncStock)
+      window.removeEventListener('inventory_updated', syncStock)
+      window.removeEventListener('storage', syncStock)
+    }
   }, [profile])
 
   // Mark activity as 'playing' during quiz lifetime
@@ -352,6 +391,9 @@ export function QuizScreen({
   // Garantir que a cada nova pergunta o cronómetro começa estritamente nos 60s
   useEffect(() => {
     setSeconds(60)
+    setEliminatedOptions([])
+    setIsFrozen(false)
+    setFreezeTimeLeft(0)
   }, [step])
 
   const wasCorrect = selected === q?.correct
@@ -361,40 +403,67 @@ export function QuizScreen({
     setPreviousLevel(profile?.level ?? null)
   }, [profile])
 
-  // Handlers para os 3 Power-Ups
+  // Handlers para os Power-Ups 50/50 e Congelar Tempo
   const handleUse5050 = async () => {
     if (phase !== 'answering' || eliminatedOptions.length > 0 || !q) return
-    if ((inventory['consumable_50_50'] || 0) <= 0) return
+    if (stock5050 <= 0) return
 
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_50_50')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_50_50: res.remainingCount }))
-      const toEliminate = calculate5050Eliminated(q.options, q.correct)
-      setEliminatedOptions(toEliminate)
-    }
-  }
+    // 1. Identifica a resposta correta e oculta/desativa instantaneamente 2 opções incorretas
+    const toEliminate = calculate5050Eliminated(q.options, q.correct)
+    setEliminatedOptions(toEliminate)
 
-  const handleUseClue = async () => {
-    if (phase !== 'answering' || activeClue !== null || !q) return
-    if ((inventory['consumable_pista'] || 0) <= 0) return
+    // 2. Decrementa 1 unidade no estado, no Firestore e no localStorage
+    const newStock = Math.max(0, stock5050 - 1)
+    setStock5050(newStock)
 
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_pista')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_pista: res.remainingCount }))
-      const clue = generateQuestionClue(q)
-      setActiveClue(clue)
+    try {
+      localStorage.setItem('user_help5050', String(newStock))
+      const saved = localStorage.getItem('user_consumables')
+      const parsed = saved ? JSON.parse(saved) : {}
+      localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, help5050: newStock }))
+
+      if (auth.currentUser) {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          'consumables.help5050': increment(-1),
+          'inventory.consumable_50_50': increment(-1),
+        })
+      }
+      window.dispatchEvent(new Event('consumables_updated'))
+      window.dispatchEvent(new Event('inventory_updated'))
+    } catch (e) {
+      console.error('Erro ao debitar 50/50:', e)
     }
   }
 
   const handleUseFreeze = async () => {
-    if (phase !== 'answering' || isFrozen || seconds <= 0) return
-    if ((inventory['consumable_congelar_tempo'] || 0) <= 0) return
+    if (phase !== 'answering' || seconds <= 0) return
+    if (stockFreeze <= 0) return
 
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_congelar_tempo')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_congelar_tempo: res.remainingCount }))
-      setIsFrozen(true)
-      setFreezeTimeLeft(15)
+    // 1. Acrescenta +15 segundos ao temporizador ativo da questão
+    setSeconds((s) => s + 15)
+    setIsFrozen(true)
+    setFreezeTimeLeft(15)
+
+    // 2. Decrementa 1 unidade no estado, no Firestore e no localStorage
+    const newStock = Math.max(0, stockFreeze - 1)
+    setStockFreeze(newStock)
+
+    try {
+      localStorage.setItem('user_freezeTime', String(newStock))
+      const saved = localStorage.getItem('user_consumables')
+      const parsed = saved ? JSON.parse(saved) : {}
+      localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, freezeTime: newStock }))
+
+      if (auth.currentUser) {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          'consumables.freezeTime': increment(-1),
+          'inventory.consumable_congelar_tempo': increment(-1),
+        })
+      }
+      window.dispatchEvent(new Event('consumables_updated'))
+      window.dispatchEvent(new Event('inventory_updated'))
+    } catch (e) {
+      console.error('Erro ao debitar Congelar Tempo:', e)
     }
   }
 
@@ -496,7 +565,6 @@ export function QuizScreen({
     setStep((current) => current + 1)
     setSelected(null)
     setEliminatedOptions([])
-    setActiveClue(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
     setSeconds(60)
@@ -510,7 +578,6 @@ export function QuizScreen({
     setStep(0)
     setSelected(null)
     setEliminatedOptions([])
-    setActiveClue(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
     setSeconds(60)
@@ -776,31 +843,17 @@ export function QuizScreen({
         </h1>
       </div>
 
-      {/* 4.5. POWER-UPS BAR (50/50, Pista, Congelar Tempo) */}
+      {/* 4.5. POWER-UPS BAR (50/50 e Congelar Tempo) */}
       <QuizPowerUpsBar
-        inventory={inventory}
+        stock5050={stock5050}
+        stockFreeze={stockFreeze}
         disabled={phase !== 'answering'}
         used5050={eliminatedOptions.length > 0}
-        usedClue={activeClue !== null}
         isFrozen={isFrozen}
         freezeTimeLeft={freezeTimeLeft}
         onUse5050={handleUse5050}
-        onUseClue={handleUseClue}
         onUseFreeze={handleUseFreeze}
       />
-
-      {/* Active Clue Box (Pista Histórica) */}
-      {activeClue && (
-        <div className="mb-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-3.5 sm:p-4 text-xs sm:text-sm text-amber-100 flex items-start gap-3 backdrop-blur-xl animate-rise shadow-lg shadow-amber-500/10">
-          <Lightbulb className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
-          <div>
-            <span className="font-black uppercase tracking-wider text-amber-300 block text-[0.68rem] mb-0.5">
-              💡 Pista Histórica Contextual:
-            </span>
-            <span className="font-medium leading-relaxed">{activeClue}</span>
-          </div>
-        </div>
-      )}
 
       {/* Active Freeze Banner */}
       {isFrozen && (
