@@ -1,5 +1,5 @@
 // Acorda Portugal — Game Data
-// Base de dados local/demo do protótipo.
+// Base de dados local/demo do protótipo com tipos estritos.
 
 import type { ComponentType } from 'react'
 import {
@@ -22,8 +22,12 @@ import {
   Vote,
   Eye,
 } from 'lucide-react'
+import { PROGRESSION_LEVELS, calculateLevelProgress, type LevelTier, type LevelProgressInfo } from '@/lib/progression'
+import questions from './data/questions.json'
 
 export * from '@/lib/categories-data'
+export type { LevelTier, LevelProgressInfo }
+export { PROGRESSION_LEVELS, calculateLevelProgress }
 
 export type Tone = 'primary' | 'gold' | 'red' | 'accent'
 
@@ -138,65 +142,65 @@ export const CATEGORIES: Category[] = [
     tone: 'accent',
     description: 'Artes plásticas, literatura, teatro, folclore e património.',
     questions: '130',
-    difficulty: 'Variado',
+    difficulty: 'Médio',
+  },
+  {
+    slug: 'musica-portuguesa',
+    name: 'Música Portuguesa',
+    icon: Music,
+    tone: 'gold',
+    description: 'Fado, pop/rock nacional, festivais, bandas e artistas de renome.',
+    questions: '150',
+    difficulty: 'Médio',
   },
   {
     slug: 'gastronomia',
-    name: 'Gastronomia',
+    name: 'Gastronomia e Vinhos',
     icon: UtensilsCrossed,
-    tone: 'gold',
-    description: 'Pratos típicos, doçaria, vinhos, queijos e gastronomia mundial.',
-    questions: '150',
-    difficulty: 'Fácil',
-  },
-  {
-    slug: 'desporto',
-    name: 'Desporto',
-    icon: Medal,
     tone: 'red',
-    description: 'Jogos Olímpicos, atletismo, ténis, ciclismo, surf e F1.',
-    questions: '140',
-    difficulty: 'Variado',
-  },
-  {
-    slug: 'humor',
-    name: 'Humor',
-    icon: Laugh,
-    tone: 'gold',
-    description: 'Expressões portuguesas, piadas, memes e tiradas inesquecíveis.',
-    questions: '120',
+    description: 'Pratos típicos, doçaria conventual, queijos, petiscos e néctares.',
+    questions: '170',
     difficulty: 'Fácil',
-  },
-  {
-    slug: 'musica',
-    name: 'Música',
-    icon: Music,
-    tone: 'accent',
-    description: 'Do Fado ao Rock, do Pop aos festivais e bandas lendárias.',
-    questions: '150',
-    difficulty: 'Variado',
   },
   {
     slug: 'cinema-tv',
     name: 'Cinema e Televisão',
     icon: Clapperboard,
-    tone: 'red',
-    description: 'Filmes icónicos, séries, novelas portuguesas e realizadores.',
-    questions: '130',
+    tone: 'accent',
+    description: 'Filmes icónicos, séries, atores, realizadores e grandes clássicos.',
+    questions: '120',
     difficulty: 'Médio',
   },
   {
-    slug: 'personalidades',
-    name: 'Personalidades',
+    slug: 'desporto-geral',
+    name: 'Desporto Geral',
+    icon: Medal,
+    tone: 'gold',
+    description: 'Modalidades olímpicas, atletismo, ciclismo, hóquei e campeões.',
+    questions: '160',
+    difficulty: 'Médio',
+  },
+  {
+    slug: 'curiosidades',
+    name: 'Curiosidades e Factos',
     icon: Lightbulb,
     tone: 'primary',
-    description: 'Figuras históricas, escritores, cientistas, artistas e atletas.',
-    questions: '140',
+    description: 'Recordes mundiais, acontecimentos insólitos e factos surpreendentes.',
+    questions: '190',
+    difficulty: 'Fácil',
+  },
+  {
+    slug: 'cultura-pop-gaming',
+    name: 'Cultura Pop e Gaming',
+    icon: Cpu,
+    tone: 'accent',
+    description: 'Videojogos, anime, banda desenhada, tecnologia e tendências digitais.',
+    questions: '150',
     difficulty: 'Médio',
   },
   {
-    slug: 'mundo',
-    name: 'Mundo',
+    slug: 'mundo-sociedade',
+    name: 'Mundo e Sociedade',
     icon: Earth,
     tone: 'primary',
     description: 'Culturas globais, capitais, história mundial e geopolítica.',
@@ -246,8 +250,8 @@ export type UserProfile = {
   badges?: string[]
   inventory?: Record<string, number>
   equipped?: EquippedCosmetics
-  createdAt?: unknown // Timestamp do Firestore quando disponível
-  lastActiveAt?: unknown // Timestamp do Firestore quando disponível
+  createdAt?: unknown
+  lastActiveAt?: unknown
   updatedAt?: unknown
 }
 
@@ -293,11 +297,6 @@ export const DISTRICTS: District[] = [
   { pos: 19, name: 'Açores', players: '0', xp: '0' },
   { pos: 20, name: 'Madeira', players: '0', xp: '0' },
 ]
-
-import { PROGRESSION_LEVELS, calculateLevelProgress, type LevelTier, type LevelProgressInfo } from '@/lib/progression'
-
-export type { LevelTier, LevelProgressInfo }
-export { PROGRESSION_LEVELS, calculateLevelProgress }
 
 export type Level = {
   level: number
@@ -446,7 +445,12 @@ export const ACHIEVEMENTS: Achievement[] = [
 ]
 
 export type QuizQuestion = {
+  id?: string | number
   category: string
+  subcategory?: string
+  district?: string
+  city?: string
+  difficulty?: string | number
   index: number
   total: number
   question: string
@@ -457,9 +461,8 @@ export type QuizQuestion = {
   correct: 'A' | 'B' | 'C' | 'D'
   explanation: string
   points: number
+  image?: string
 }
-
-import questions from './data/questions.json'
 
 const allQuestions: QuizQuestion[] = (questions as any[]).map((q, i) => {
   const correctIndex = typeof q.correctAnswer === 'number' ? q.correctAnswer : q.options.indexOf(q.correctAnswer)

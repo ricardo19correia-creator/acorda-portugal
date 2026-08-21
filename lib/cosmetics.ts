@@ -1,7 +1,7 @@
 import { SHOP_CATALOG, type ShopItem } from '@/lib/economy'
 import type { UserProfile, EquippedCosmetics } from '@/lib/game-data'
 
-export type { EquippedCosmetics }
+export type { EquippedCosmetics, ShopItem }
 
 export type GameThemeId =
   | 'theme_fado_cyberpunk'

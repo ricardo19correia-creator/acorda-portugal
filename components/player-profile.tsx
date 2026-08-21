@@ -426,6 +426,13 @@ export function PlayerProfile() {
   const moldurasCount = allOwnedFrameIds.length
   const titulosCount = allOwnedTitleIds.length
 
+  // Cosméticos equipados atualmente
+  const equippedFrameItem = SHOP_CATALOG.find((i) => i.id === equipped.frame)
+  const equippedTitleItem = SHOP_CATALOG.find((i) => i.id === equipped.title)
+  const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === (invState.equippedTheme || equipped.theme))
+  const equippedSoundpackItem = SHOP_CATALOG.find((i) => i.id === equipped.soundpack)
+  const equippedStreakItem = SHOP_CATALOG.find((i) => i.id === (equipped.streak_effect || equipped.sfx))
+
   const THEME_NAMES: Record<string, string> = {
     theme_arena_lisboa_cyber_free: 'Lisboa Neon 2088 (Cyberpunk)',
     theme_arena_gold_temple: 'Templo de Ouro Real (VIP)',
@@ -445,13 +452,6 @@ export function PlayerProfile() {
   const totalConsumables = SHOP_CATALOG.filter(
     (i) => i.type === 'consumable' && (inventory[i.id] || 0) > 0,
   ).reduce((acc, curr) => acc + (inventory[curr.id] || 0), 0)
-
-  // Cosméticos equipados atualmente
-  const equippedFrameItem = SHOP_CATALOG.find((i) => i.id === equipped.frame)
-  const equippedTitleItem = SHOP_CATALOG.find((i) => i.id === equipped.title)
-  const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === (invState.equippedTheme || equipped.theme))
-  const equippedSoundpackItem = SHOP_CATALOG.find((i) => i.id === equipped.soundpack)
-  const equippedStreakItem = SHOP_CATALOG.find((i) => i.id === (equipped.streak_effect || equipped.sfx))
 
   const effectiveUid = user?.uid || profile?.uid || ''
   const cosmeticsList = SHOP_CATALOG.filter(

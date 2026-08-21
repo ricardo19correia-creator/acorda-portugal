@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useRef, useMemo, useState } from 'react'
 import { useGameTheme } from '@/context/game-theme-context'
 import { normalizeThemeId } from '@/lib/cosmetics'
 import { cn } from '@/lib/utils'

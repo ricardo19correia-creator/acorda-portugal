@@ -786,10 +786,19 @@ export async function submitDuelAnswer(
       const scoreA = isPlayerA ? player.score : opponent.score
       const scoreB = isPlayerA ? opponent.score : player.score
 
+      const timeA = (isPlayerA ? player.answers : opponent.answers).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
+      const timeB = (isPlayerA ? opponent.answers : player.answers).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
+
       if (scoreA > scoreB) {
         winnerUid = duel.playerA.uid
         winnerReason = 'score'
       } else if (scoreB > scoreA) {
+        winnerUid = duel.playerB!.uid
+        winnerReason = 'score'
+      } else if (timeA < timeB) {
+        winnerUid = duel.playerA.uid
+        winnerReason = 'score'
+      } else if (timeB < timeA) {
         winnerUid = duel.playerB!.uid
         winnerReason = 'score'
       } else {

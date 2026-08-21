@@ -196,7 +196,7 @@ function SuccessContent() {
                       <li className="text-[0.72rem] text-muted-foreground pt-1 border-t border-white/10">
                         {Object.entries(data.product.reward.items).map(([itemId, qty]) => (
                           <span key={itemId} className="block text-foreground font-semibold">
-                            • {qty}x {itemId.replace(/_/g, ' ')}
+                            • {String(qty)}x {itemId.replace(/_/g, ' ')}
                           </span>
                         ))}
                       </li>

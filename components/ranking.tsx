@@ -19,6 +19,7 @@ import { SHOP_CATALOG } from '@/lib/economy'
 import type { EquippedCosmetics } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
+import { PlayerAvatar } from '@/components/player-avatar'
 
 export type RankedPlayer = {
   uid: string
@@ -588,40 +589,6 @@ function PodiumCard({
           XP
         </span>
       </div>
-    </div>
-  )
-}
-
-function PlayerAvatar({
-  name,
-  photoURL,
-  className,
-}: {
-  name: string
-  photoURL?: string | null
-  className?: string
-}) {
-  if (photoURL) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={photoURL}
-        alt={name}
-        className={cn('rounded-2xl object-cover', className)}
-      />
-    )
-  }
-
-  const initial = name?.trim() ? name.trim().charAt(0).toUpperCase() : 'P'
-
-  return (
-    <div
-      className={cn(
-        'grid place-items-center rounded-2xl bg-gradient-to-br from-primary/30 via-accent/20 to-gold/15 font-display font-black text-foreground',
-        className,
-      )}
-    >
-      {initial}
     </div>
   )
 }
