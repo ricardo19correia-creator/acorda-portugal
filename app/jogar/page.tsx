@@ -43,24 +43,22 @@ export default function JogarPage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col justify-between overflow-x-hidden">
-      {/* Camada de Fundo GIF Animado Forçado */}
+    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
+      {/* 1. CAMADA DE FUNDO FIXA (Atrás de tudo com -z-10 e sem bloquear cliques) */}
       <div 
-        className="fixed inset-0 -z-50 w-full h-full pointer-events-none"
+        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.50), rgba(5, 10, 20, 0.80)), url('${arenaImage}')`,
+          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.60), rgba(5, 10, 20, 0.85)), url('${arenaImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       />
 
-      {/* CONTEÚDO DO QUIZ */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between bg-transparent">
-        <div className="w-full max-w-4xl mx-auto px-4 py-6 flex-1 flex flex-col justify-between bg-transparent">
-          <QuizPage />
-        </div>
-      </div>
+      {/* 2. CONTEÚDO DO JOGO (À frente e 100% interativo com z-10) */}
+      <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
+        <QuizPage />
+      </main>
     </div>
   )
 }
