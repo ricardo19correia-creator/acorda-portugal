@@ -22,7 +22,7 @@ interface ShopItem {
 
 const SHOP_ITEMS: ShopItem[] = [
   // VIP
-  { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'vip', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', price: 'OFERTA GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.jpg', badge: 'Lendário' },
+  { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'vip', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', price: 'OFERTA GRÁTIS', priceValue: 0, image: '/images/lisboa-2077.jpg', badge: 'Lendário' },
   { id: 'passe_fundador', name: 'Passe Fundador da Nação', category: 'vip', description: 'Selo permanente de Fundador, +25% XP vitalício e Moldura Real 3D.', price: '2,99 €', priceValue: 2.99, isRealMoney: true, image: '/images/shop/passe-fundador.jpg', badge: 'Mítico' },
   
   // AVATARES
@@ -32,7 +32,7 @@ const SHOP_ITEMS: ShopItem[] = [
   { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', price: '€1.500', priceValue: 1500, image: '/images/shop/fadista-cyber.jpg', badge: 'Raro' },
 
   // ARENAS
-  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', price: 'GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.jpg', badge: 'Desbloqueado' },
+  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', price: 'GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
   { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', price: '€5.000', priceValue: 5000, image: '/images/shop/arena-fado-alfama.jpg', badge: 'Épico' },
   { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
 
@@ -550,6 +550,9 @@ export default function LojaPage() {
                         className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
                           isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : ''
                         }`} 
+                        onError={(e) => {
+                          e.currentTarget.src = '/arenas/fundo-espaco.gif';
+                        }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-slate-600">

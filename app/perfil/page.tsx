@@ -32,8 +32,8 @@ const CATALOG_ITEMS: InventoryItem[] = [
   { id: 'moldura_neon_portugal', name: 'Moldura Quinas Neon', category: 'molduras', description: 'Efeito luminoso verde e rubro vivo.', image: '/images/shop/moldura-neon.jpg', badge: 'Raro' },
 
   // ARENAS
-  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', image: '/arenas/arena-ponte-2077.jpg', badge: 'Desbloqueado' },
-  { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'arenas', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', image: '/arenas/arena-ponte-2077.jpg', badge: 'Lendário' },
+  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
+  { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'arenas', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', image: '/images/lisboa-2077.jpg', badge: 'Lendário' },
   { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', image: '/images/shop/arena-fado-alfama.jpg', badge: 'Épico' },
   { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
 
@@ -566,7 +566,14 @@ export default function PerfilPage() {
                           ) : item.category === 'molduras' ? (
                             <UserAvatar avatarUrl={avatar} frameId={item.id} size="lg" />
                           ) : item.image ? (
-                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                            <img 
+                              src={item.image} 
+                              alt={item.name} 
+                              className="w-full h-full object-cover" 
+                              onError={(e) => {
+                                e.currentTarget.src = '/arenas/fundo-espaco.gif';
+                              }}
+                            />
                           ) : (
                             <div className="flex flex-col items-center justify-center text-slate-500">
                               <Trophy className="w-8 h-8 text-amber-400 mb-1" />
