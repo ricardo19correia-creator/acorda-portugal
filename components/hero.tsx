@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight } from 'lucide-react'
-import { PortugalHeroMap } from '@/components/portugal-hero-map'
+import { PortugalMap3D } from '@/components/PortugalMap3D'
 import { cn } from '@/lib/utils'
 
 const HERO_STATS = [
@@ -140,7 +140,7 @@ export function Hero() {
 
         {/* Bottom/Right: 3D Holographic Portugal Map with Pedestal */}
         <div className="order-2 w-full animate-rise mt-2 lg:mt-0 holo-pedestal" style={{ animationDelay: '200ms' }}>
-          <PortugalHeroMap />
+          <PortugalMap3D />
         </div>
       </div>
 
