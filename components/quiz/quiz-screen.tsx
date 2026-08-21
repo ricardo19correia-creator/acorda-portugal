@@ -33,6 +33,7 @@ import {
   getDistrictTerritory,
   filterQuizQuestions,
 } from '@/lib/game-data'
+import vilaRealQuestionsRaw from '@/data/perguntas_vila_real_500.json'
 import { calculateLevelProgress } from '@/lib/progression'
 
 import { QuizProgress } from '@/components/quiz/quiz-progress'
@@ -59,6 +60,30 @@ type Phase = 'answering' | 'revealed' | 'finished'
 type GameQuestion = QuizQuestion & { image?: string }
 
 type OptionKey = 'A' | 'B' | 'C' | 'D'
+
+const VILA_REAL_QUESTIONS: QuizQuestion[] = (vilaRealQuestionsRaw as any[]).map((q, i) => {
+  const correctOptionText = q.correct
+  const correctIdx = q.options.indexOf(correctOptionText)
+  const correctKey = (['A', 'B', 'C', 'D'][correctIdx >= 0 && correctIdx < 4 ? correctIdx : 0]) as OptionKey
+  const points = q.difficulty === 3 ? 300 : q.difficulty === 2 ? 200 : 100
+
+  return {
+    category: 'desafio-cidade',
+    city: 'Vila Real',
+    district: 'Vila Real',
+    id: q.id || `vr_${i + 1}`,
+    index: i + 1,
+    total: vilaRealQuestionsRaw.length,
+    question: q.question,
+    options: q.options.map((text: string, optIdx: number) => ({
+      key: (['A', 'B', 'C', 'D'][optIdx] as OptionKey),
+      text,
+    })),
+    correct: correctKey,
+    explanation: `Resposta correta: ${q.correct}`,
+    points,
+  }
+})
 
 type GameCompletionOutcome =
   | { awarded: false }
@@ -145,7 +170,12 @@ function createGameQuestions(
 ): GameQuestion[] {
   let questionPool: QuizQuestion[] = []
 
-  if (categorySlug === 'modo-maluco' || categorySlug === 'perguntas-idiotas') {
+  if (
+    categorySlug === 'desafio-cidade' &&
+    (!cityParam || cityParam.toLowerCase().includes('vila real'))
+  ) {
+    questionPool = VILA_REAL_QUESTIONS
+  } else if (categorySlug === 'modo-maluco' || categorySlug === 'perguntas-idiotas') {
     questionPool = MODO_MALUCO_QUESTIONS
   } else {
     // 1. Filtrar pelo sistema completo de categorias
