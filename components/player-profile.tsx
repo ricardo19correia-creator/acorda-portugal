@@ -1291,8 +1291,8 @@ export function PlayerProfile() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {AVATAR_CATALOG.map((av) => {
-            const isOwned = (invState.ownedAvatars || ['av_default', 'av_galo_barcelos']).includes(av.id);
-            const isEquipped = (invState.equippedAvatar || 'av_default') === av.id;
+            const isOwned = (invState.ownedAvatars || ['camoes_2050']).includes(av.id);
+            const isEquipped = (invState.equippedAvatar || 'camoes_2050') === av.id;
 
             return (
               <div
