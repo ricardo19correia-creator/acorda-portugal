@@ -1,35 +1,53 @@
-'use client'
-
-import React from 'react'
-import { PortugalMap3D } from '@/components/PortugalMap3D'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 /**
- * Interactive 3D Vector Portugal Map Component (replacing static PNG map)
+ * Reusable stylised Portugal map visual: glowing halo, faint orbiting rings and
+ * a floating holographic map (mainland + Açores + Madeira, baked into the art).
+ * `children` can be used to layer floating chips / markers on top.
  */
 export function PortugalMap({
   className,
-  selected,
-  onSelect,
+  float = true,
+  rings = true,
+  priority = false,
   children,
 }: {
   className?: string
-  selected?: string | null
-  onSelect?: (name: string) => void
   float?: boolean
   rings?: boolean
   priority?: boolean
   children?: React.ReactNode
 }) {
   return (
-    <div className={cn('relative w-full', className)}>
-      <PortugalMap3D
-        selectedDistrict={selected}
-        onSelectDistrict={onSelect}
+    <div className={cn('relative aspect-square w-full pointer-events-none', className)}>
+      {/* glow halo */}
+      <div className="animate-glow-pulse pointer-events-none absolute inset-[12%] rounded-full bg-primary/25 blur-3xl" />
+      <div
+        className="animate-glow-pulse pointer-events-none absolute inset-[22%] rounded-full bg-gold/10 blur-2xl"
+        style={{ animationDelay: '1.6s' }}
       />
-      {children && <div className="mt-4">{children}</div>}
+
+      {/* orbiting rings */}
+      {rings && (
+        <>
+          <div className="animate-spin-slow pointer-events-none absolute inset-[6%] rounded-full border border-primary/15" />
+          <div className="animate-spin-reverse pointer-events-none absolute inset-[16%] rounded-full border border-dashed border-primary/12" />
+        </>
+      )}
+
+      {/* floating map */}
+      <div className={cn('relative h-full w-full pointer-events-none', float && 'animate-float')}>
+        <Image
+          src="/images/portugal-map.png"
+          alt="Mapa estilizado de Portugal continental, Açores e Madeira"
+          fill
+          priority={priority}
+          sizes="(max-width: 1024px) 90vw, 45vw"
+          className="pointer-events-none object-contain drop-shadow-[0_0_40px_oklch(0.76_0.19_150_/_0.35)]"
+        />
+        <div className="pointer-events-auto contents">{children}</div>
+      </div>
     </div>
   )
 }
-
-export default PortugalMap

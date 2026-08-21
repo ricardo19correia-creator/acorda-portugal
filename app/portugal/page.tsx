@@ -1,6 +1,6 @@
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
-import { PortugalMap3D } from '@/components/PortugalMap3D'
+import { PortugalHeroMap } from '@/components/portugal-hero-map'
 import { DistrictRanking } from '@/components/district-ranking'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
@@ -50,9 +50,9 @@ export default function PortugalPage() {
             </div>
 
             {/* Interactive Map Showcase */}
-            <div className="card-game mt-8 overflow-hidden rounded-4xl p-4 sm:p-8 shadow-2xl holo-pedestal border border-white/15">
-              <div className="mx-auto max-w-2xl">
-                <PortugalMap3D />
+            <div className="card-game mt-8 overflow-hidden rounded-4xl p-6 sm:p-10 shadow-2xl holo-pedestal border border-white/15">
+              <div className="mx-auto max-w-xl">
+                <PortugalHeroMap />
               </div>
             </div>
           </div>
