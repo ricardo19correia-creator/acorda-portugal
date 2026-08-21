@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Home } from 'lucide-react';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { db, auth } from '@/lib/firebase';
 import MbwayModal from '@/components/MbwayModal';
 import { getInventory, unlockItem, equipTheme, unlockAvatar, equipAvatar, type InventoryState } from '@/lib/inventory';
 import { AVATAR_CATALOG, AVATARS_2050, type AvatarItem } from '@/lib/avatars';
@@ -310,7 +312,7 @@ export const ARENAS_2077: ArenaItem[] = [
 export default function LojaPage() {
   const [activeTab, setActiveTab] = useState<'real_money' | 'all' | 'avatar' | 'consumable' | 'frame' | 'title' | 'theme'>('real_money');
   const [avatarCategory, setAvatarCategory] = useState<'todos' | 'historia' | 'geografia' | 'desporto' | 'cultura' | 'geral'>('todos');
-  const [userCoins, setUserCoins] = useState<number>(4395);
+  const [userBalance, setUserBalance] = useState<number>(0);
   const [invState, setInvState] = useState<InventoryState>(() => getInventory());
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077');
   const [equippedItems, setEquippedItems] = useState<Record<string, string>>({
@@ -321,6 +323,48 @@ export default function LojaPage() {
 
   const [selectedVipItem, setSelectedVipItem] = useState<ShopItem | { id: string; title: string; priceEuros?: number } | null>(null);
   const [isMbwayOpen, setIsMbwayOpen] = useState(false);
+
+  // 1. SINCRONIZAÇÃO EM TEMPO REAL DO SALDO FIRESTORE
+  useEffect(() => {
+    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // Fallback caso use localStorage/demo
+        try {
+          const localEuros = localStorage.getItem('user_euros') || localStorage.getItem('ap_user_coins');
+          if (localEuros) setUserBalance(Number(localEuros));
+        } catch (e) {
+          console.error(e);
+        }
+        return;
+      }
+
+      const userDocRef = doc(db, 'users', user.uid);
+      const unsubscribeDoc = onSnapshot(
+        userDocRef,
+        (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            // Lê o campo 'euros' exatamente como está no Firestore
+            const balance = data.euros !== undefined ? data.euros : (data.coins || 0);
+            setUserBalance(balance);
+            try {
+              localStorage.setItem('user_euros', balance.toString());
+              localStorage.setItem('ap_user_coins', balance.toString());
+            } catch (e) {
+              console.error(e);
+            }
+          }
+        },
+        (err) => {
+          console.error('Erro ao subscrever saldo no Firestore:', err);
+        }
+      );
+
+      return () => unsubscribeDoc();
+    });
+
+    return () => unsubscribeAuth();
+  }, []);
 
   useEffect(() => {
     const sync = () => {
@@ -357,8 +401,6 @@ export default function LojaPage() {
 
   useEffect(() => {
     try {
-      const savedCoins = localStorage.getItem('ap_user_coins');
-      if (savedCoins) setUserCoins(Number(savedCoins));
       const savedEquipped = localStorage.getItem('ap_equipped_items');
       if (savedEquipped) {
         const parsed = JSON.parse(savedEquipped);
@@ -369,15 +411,30 @@ export default function LojaPage() {
     }
   }, []);
 
-  const handleBuyCoinsItem = (item: ShopItem) => {
+  const handleBuyCoinsItem = async (item: ShopItem) => {
     if (!item.priceCoins) return;
-    if (userCoins < item.priceCoins) {
+    if (userBalance < item.priceCoins) {
       alert('Saldo insuficiente de € Acorda!');
       return;
     }
-    const newCoins = userCoins - item.priceCoins;
-    setUserCoins(newCoins);
-    localStorage.setItem('ap_user_coins', newCoins.toString());
+    const newBalance = userBalance - item.priceCoins;
+    setUserBalance(newBalance);
+    try {
+      localStorage.setItem('user_euros', newBalance.toString());
+      localStorage.setItem('ap_user_coins', newBalance.toString());
+    } catch (e) {
+      console.error(e);
+    }
+
+    if (auth.currentUser) {
+      try {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          euros: newBalance,
+        });
+      } catch (e) {
+        console.error('Erro ao atualizar saldo no Firestore:', e);
+      }
+    }
 
     unlockItem(item.id);
     if (item.category === 'theme') {
@@ -410,15 +467,30 @@ export default function LojaPage() {
   };
 
   // Funções específicas de Avatar
-  const handleBuyAvatarCoins = (av: AvatarItem) => {
+  const handleBuyAvatarCoins = async (av: AvatarItem) => {
     const priceNum = typeof av.price === 'number' ? av.price : parseInt(String(av.price).replace(/\D/g, '')) || 0;
-    if (userCoins < priceNum) {
+    if (userBalance < priceNum) {
       alert('Saldo insuficiente de € Acorda!');
       return;
     }
-    const newCoins = userCoins - priceNum;
-    setUserCoins(newCoins);
-    localStorage.setItem('ap_user_coins', newCoins.toString());
+    const newBalance = userBalance - priceNum;
+    setUserBalance(newBalance);
+    try {
+      localStorage.setItem('user_euros', newBalance.toString());
+      localStorage.setItem('ap_user_coins', newBalance.toString());
+    } catch (e) {
+      console.error(e);
+    }
+
+    if (auth.currentUser) {
+      try {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          euros: newBalance,
+        });
+      } catch (e) {
+        console.error('Erro ao atualizar saldo no Firestore:', e);
+      }
+    }
 
     unlockAvatar(av.id);
     equipAvatar(av.id);
@@ -480,10 +552,14 @@ export default function LojaPage() {
             Adquire avatares épicos, ajudas de jogo, molduras vivas, títulos e arenas 3D exclusivas.
           </p>
         </div>
-        <div className="flex items-center gap-4 bg-black/40 px-5 py-3 rounded-xl border border-amber-500/30">
-          <div>
-            <p className="text-[10px] uppercase font-bold text-amber-400 tracking-wider">O Teu Saldo Virtual</p>
-            <p className="text-2xl font-black text-white">€{userCoins.toLocaleString('pt-PT')} <span className="text-xs text-zinc-400">€ Acorda</span></p>
+        {/* BLOCO DO SALDO VIRTUAL SINCRONIZADO */}
+        <div className="bg-black/40 border border-amber-500/30 rounded-2xl px-5 py-3 text-right shadow-inner">
+          <span className="text-[10px] font-black tracking-widest text-amber-400 uppercase block mb-0.5">
+            O TEU SALDO VIRTUAL
+          </span>
+          <div className="text-2xl md:text-3xl font-black text-amber-300 flex items-center justify-end gap-1">
+            <span>€{userBalance.toLocaleString('pt-PT')}</span>
+            <span className="text-xs text-amber-400/80 font-bold ml-1">€ Acorda</span>
           </div>
         </div>
       </div>
