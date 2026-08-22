@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, X, ChevronRight, Ban } from 'lucide-react'
+import { Check, X, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export type AnswerState = 'idle' | 'correct' | 'wrong' | 'muted'
@@ -24,15 +24,15 @@ export function AnswerOption({
     return (
       <div
         aria-hidden="true"
-        className="flex w-full items-center gap-3.5 sm:gap-4.5 rounded-3xl border border-white/5 bg-white/[0.01] p-3 sm:p-4 text-left opacity-35 select-none cursor-not-allowed transition-all"
+        className="flex w-full items-center gap-3.5 sm:gap-4.5 rounded-3xl border-2 border-slate-800/60 bg-slate-950/90 p-3.5 sm:p-4.5 text-left opacity-35 select-none cursor-not-allowed transition-all shadow-inner"
       >
-        <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl border border-white/5 bg-white/5 font-display text-sm font-black text-muted-foreground line-through">
+        <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl border border-slate-800 bg-slate-900 font-display text-sm font-black text-slate-500 line-through">
           {optionKey}
         </span>
-        <span className="flex-1 text-sm font-bold text-muted-foreground line-through">
+        <span className="flex-1 text-sm font-bold text-slate-500 line-through">
           {text}
         </span>
-        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[0.62rem] font-bold text-muted-foreground/60 uppercase">
+        <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-[0.62rem] font-black text-slate-400 uppercase tracking-wider">
           Eliminada (50/50)
         </span>
       </div>
@@ -46,14 +46,14 @@ export function AnswerOption({
       onClick={onSelect}
       aria-label={`Opção ${optionKey}: ${text}`}
       className={cn(
-        'group relative flex w-full items-center gap-3.5 sm:gap-4.5 rounded-3xl border p-3.5 sm:p-5 text-left transition-all duration-250 outline-none select-none cursor-pointer',
+        'group relative flex w-full items-center gap-3.5 sm:gap-4.5 rounded-3xl p-3.5 sm:p-5 text-left transition-all duration-200 outline-none select-none cursor-pointer',
         state === 'idle' &&
-          'border-white/12 bg-card/75 backdrop-blur-xl shadow-md hover:-translate-y-0.5 hover:border-primary/50 hover:bg-card/95 hover:shadow-[0_12px_28px_-8px_rgba(0,0,0,0.5)] active:translate-y-0',
+          'bg-slate-900/95 border-2 border-slate-700/80 text-white shadow-xl hover:border-emerald-400 hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0',
         state === 'correct' &&
-          'border-primary bg-primary/18 backdrop-blur-2xl ring-2 ring-primary/50 shadow-[0_0_35px_-5px_rgba(0,255,162,0.35)] animate-pop',
+          'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-4 ring-emerald-500/30 shadow-[0_0_35px_rgba(16,185,129,0.45)] scale-[1.01] animate-pop',
         state === 'wrong' &&
-          'border-flag-red bg-flag-red/18 backdrop-blur-2xl ring-2 ring-flag-red/50 shadow-[0_0_35px_-5px_rgba(244,63,94,0.35)] animate-pop',
-        state === 'muted' && 'border-white/5 bg-card/30 opacity-40 cursor-default',
+          'bg-rose-950/95 border-2 border-rose-500 text-white ring-4 ring-rose-500/30 shadow-[0_0_35px_rgba(244,63,94,0.45)] scale-[1.01] animate-pop',
+        state === 'muted' && 'bg-slate-900/80 border-2 border-slate-800/80 text-slate-500 opacity-40 cursor-default',
       )}
     >
       {/* Option Key Badge */}
@@ -61,12 +61,12 @@ export function AnswerOption({
         className={cn(
           'grid h-11 w-11 sm:h-12 sm:w-12 shrink-0 place-items-center rounded-2xl font-display text-base sm:text-lg font-black transition-all duration-200 border',
           state === 'idle' &&
-            'border-white/10 bg-white/5 text-muted-foreground group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_15px_rgba(0,255,162,0.35)]',
+            'bg-slate-800 border border-slate-600 text-emerald-400 font-bold group-hover:border-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]',
           state === 'correct' &&
-            'border-primary bg-primary text-primary-foreground shadow-[0_0_20px_rgba(0,255,162,0.6)] scale-105',
+            'bg-emerald-500 border border-emerald-300 text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.7)] scale-105',
           state === 'wrong' &&
-            'border-flag-red bg-flag-red text-white shadow-[0_0_20px_rgba(244,63,94,0.6)] scale-105',
-          state === 'muted' && 'border-white/5 bg-white/5 text-muted-foreground/60',
+            'bg-rose-600 border border-rose-400 text-white shadow-[0_0_20px_rgba(244,63,94,0.7)] scale-105',
+          state === 'muted' && 'bg-slate-800/50 border border-slate-700/40 text-slate-500',
         )}
       >
         {state === 'correct' ? (
@@ -82,10 +82,10 @@ export function AnswerOption({
       <span
         className={cn(
           'flex-1 text-pretty text-sm sm:text-base md:text-lg font-bold transition-colors leading-snug',
-          state === 'idle' && 'text-foreground group-hover:text-white',
-          state === 'correct' && 'text-white font-black',
-          state === 'wrong' && 'text-red-100 font-black',
-          state === 'muted' && 'text-muted-foreground',
+          state === 'idle' && 'text-white group-hover:text-emerald-300',
+          state === 'correct' && 'text-emerald-100 font-black',
+          state === 'wrong' && 'text-rose-100 font-black',
+          state === 'muted' && 'text-slate-500',
         )}
       >
         {text}
@@ -93,12 +93,10 @@ export function AnswerOption({
 
       {/* Interactive trailing indicator for idle hover */}
       {state === 'idle' && (
-        <span className="hidden sm:grid h-8 w-8 place-items-center rounded-xl bg-white/0 text-muted-foreground/0 transition-all duration-200 group-hover:bg-white/5 group-hover:text-primary">
+        <span className="hidden sm:grid h-8 w-8 place-items-center rounded-xl bg-slate-800/0 text-slate-400/0 transition-all duration-200 group-hover:bg-slate-800 group-hover:text-emerald-400">
           <ChevronRight className="h-5 w-5" />
         </span>
       )}
     </button>
   )
 }
-
-

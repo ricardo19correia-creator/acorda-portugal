@@ -905,11 +905,11 @@ export function DuelArena({
         )}
 
         {/* Texto da Pergunta */}
-        <div className="card-game mt-4 rounded-3xl p-6 sm:p-8 shadow-2xl text-center border border-white/15">
+        <div className="mt-4 rounded-3xl p-6 sm:p-8 shadow-2xl text-center border-2 border-slate-700/80 bg-slate-900/95">
           <span className="badge-hud mb-3 text-muted-foreground border-white/15 bg-white/5">
             {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
           </span>
-          <h1 className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-snug text-balance">
+          <h1 className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-white leading-snug text-balance">
             {currentQuestion?.question}
           </h1>
         </div>
@@ -964,33 +964,33 @@ export function DuelArena({
               return (
                 <div
                   key={opt.key}
-                  className="flex items-center gap-3.5 rounded-2xl border border-white/5 bg-white/[0.02] p-4 text-left opacity-30 select-none cursor-not-allowed"
+                  className="flex items-center gap-3.5 rounded-2xl border-2 border-slate-800/60 bg-slate-950/90 p-4 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
                 >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white/5 font-mono text-xs font-black text-muted-foreground line-through">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-slate-900 border border-slate-800 font-mono text-xs font-black text-slate-500 line-through">
                     {opt.key}
                   </span>
-                  <span className="text-sm sm:text-base leading-snug line-through text-muted-foreground flex-1">
+                  <span className="text-sm sm:text-base leading-snug line-through text-slate-500 flex-1">
                     {opt.text}
                   </span>
-                  <span className="rounded-full bg-white/5 px-2 py-0.5 text-[0.62rem] font-bold text-muted-foreground/60 uppercase">
+                  <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[0.62rem] font-bold text-slate-400 uppercase">
                     50/50
                   </span>
                 </div>
               )
             }
 
-            let buttonStyles = 'card-game-interactive text-foreground'
+            let buttonStyles = 'bg-slate-900/95 border-2 border-slate-700/80 text-white shadow-xl hover:border-purple-400 hover:bg-slate-800'
 
             if (showFeedback) {
               if (isCorrectOption) {
-                buttonStyles = 'border-2 border-primary bg-primary/30 text-primary ring-2 ring-primary shadow-xl shadow-primary/30 scale-[1.02]'
+                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-4 ring-emerald-500/30 shadow-xl shadow-emerald-500/30 scale-[1.01]'
               } else if (isSelected && !isCorrectOption) {
-                buttonStyles = 'border-2 border-flag-red bg-flag-red/30 text-flag-red ring-2 ring-flag-red/40 opacity-90'
+                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-4 ring-rose-500/30 shadow-xl shadow-rose-500/30'
               } else {
-                buttonStyles = 'border-white/5 bg-white/[0.02] opacity-35'
+                buttonStyles = 'bg-slate-900/80 border-2 border-slate-800/80 opacity-35 text-slate-500'
               }
             } else if (isSelected) {
-              buttonStyles = 'border-2 border-purple-500 bg-purple-500/25 ring-2 ring-purple-500/50 scale-[1.01] text-foreground'
+              buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-4 ring-purple-500/30 text-white scale-[1.01]'
             }
 
             return (
@@ -1005,12 +1005,12 @@ export function DuelArena({
               >
                 <span
                   className={cn(
-                    'grid h-8 w-8 shrink-0 place-items-center rounded-xl font-mono text-xs font-black transition',
+                    'grid h-8 w-8 shrink-0 place-items-center rounded-xl font-mono text-xs font-black transition border',
                     showFeedback && isCorrectOption
-                      ? 'bg-primary text-primary-foreground'
+                      ? 'bg-emerald-500 border-emerald-300 text-slate-950'
                       : showFeedback && isSelected
-                        ? 'bg-flag-red text-white'
-                        : 'bg-white/10 text-foreground group-hover:bg-primary group-hover:text-primary-foreground',
+                        ? 'bg-rose-600 border-rose-400 text-white'
+                        : 'bg-slate-800 border-slate-600 text-purple-300 group-hover:border-purple-400 group-hover:bg-purple-500 group-hover:text-white',
                   )}
                 >
                   {opt.key}

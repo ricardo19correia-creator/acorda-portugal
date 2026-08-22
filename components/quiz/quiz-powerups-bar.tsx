@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Sparkles, Timer, Snowflake, Check } from 'lucide-react'
+import { Snowflake, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface QuizPowerUpsBarProps {
@@ -43,7 +43,7 @@ export function QuizPowerUpsBar({
   const canUseFreeze = !disabled && countFreeze > 0
 
   return (
-    <div className="my-4 flex flex-wrap items-center justify-center gap-3">
+    <div className="my-3 flex flex-wrap items-center justify-center gap-3">
       {/* 1. POWER-UP 50/50 */}
       <button
         type="button"
@@ -51,37 +51,29 @@ export function QuizPowerUpsBar({
         onClick={onUse5050}
         aria-label="Usar Ajuda 50/50"
         className={cn(
-          'group relative flex items-center gap-2 rounded-2xl border px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 select-none shadow-sm',
+          'flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-xl backdrop-blur-md transition-all select-none',
           used5050
-            ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400 opacity-80 cursor-default'
+            ? 'bg-slate-900/95 border-2 border-emerald-500/60 text-emerald-400 opacity-80 cursor-default'
             : canUse5050
-              ? 'border-cyan-500/40 bg-cyan-500/10 text-cyan-300 hover:border-cyan-400 hover:bg-cyan-500/20 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.2)]'
-              : 'border-white/5 bg-white/[0.02] text-muted-foreground/50 opacity-50 cursor-not-allowed',
+              ? 'bg-slate-900/95 border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-950/80 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+              : 'bg-slate-900/80 border-2 border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <div
+        <span className="text-sm flex items-center gap-1.5">
+          {used5050 ? <Check className="h-4 w-4 text-emerald-400 stroke-[3]" /> : '✨ 50/50'}
+        </span>
+        <span
           className={cn(
-            'grid h-6 w-6 place-items-center rounded-lg',
+            'px-2 py-0.5 rounded-md text-xs font-black',
             used5050
-              ? 'bg-emerald-500/20 text-emerald-400'
-              : canUse5050
-                ? 'bg-cyan-500/20 text-cyan-300'
-                : 'bg-white/5 text-muted-foreground/50',
+              ? 'bg-emerald-500/20 text-emerald-300'
+              : count5050 > 0
+                ? 'bg-cyan-500/25 border border-cyan-400/40 text-white'
+                : 'bg-slate-800 text-slate-400',
           )}
         >
-          {used5050 ? <Check className="h-3.5 w-3.5" /> : <Sparkles className="h-3.5 w-3.5" />}
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span>50/50</span>
-          <span
-            className={cn(
-              'rounded-full px-2 py-0.5 text-[0.68rem] font-black',
-              count5050 > 0 ? 'bg-cyan-500/30 text-cyan-200' : 'bg-white/10 text-muted-foreground',
-            )}
-          >
-            ×{count5050}
-          </span>
-        </div>
+          {used5050 ? 'Usada' : `x${count5050}`}
+        </span>
       </button>
 
       {/* 2. POWER-UP CONGELAR TEMPO (+15s) */}
@@ -91,37 +83,29 @@ export function QuizPowerUpsBar({
         onClick={onUseFreeze}
         aria-label="Usar Congelar Tempo (+15s)"
         className={cn(
-          'group relative flex items-center gap-2 rounded-2xl border px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 select-none shadow-sm',
+          'flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-xl backdrop-blur-md transition-all select-none',
           isFrozen
-            ? 'border-blue-400 bg-blue-500/25 text-blue-200 shadow-[0_0_20px_rgba(96,165,250,0.5)] animate-pulse'
+            ? 'bg-slate-900/95 border-2 border-blue-400 text-blue-200 shadow-[0_0_25px_rgba(96,165,250,0.6)] animate-pulse'
             : canUseFreeze
-              ? 'border-blue-500/40 bg-blue-500/10 text-blue-300 hover:border-blue-400 hover:bg-blue-500/20 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(59,130,246,0.2)]'
-              : 'border-white/5 bg-white/[0.02] text-muted-foreground/50 opacity-50 cursor-not-allowed',
+              ? 'bg-slate-900/95 border-2 border-amber-400 text-amber-300 hover:bg-amber-950/80 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+              : 'bg-slate-900/80 border-2 border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <div
+        <span className="text-sm flex items-center gap-1.5">
+          {isFrozen ? <Snowflake className="h-4 w-4 animate-spin text-blue-300" /> : '⏳ Congelar'}
+        </span>
+        <span
           className={cn(
-            'grid h-6 w-6 place-items-center rounded-lg',
+            'px-2 py-0.5 rounded-md text-xs font-black',
             isFrozen
-              ? 'bg-blue-400 text-black'
-              : canUseFreeze
-                ? 'bg-blue-500/20 text-blue-300'
-                : 'bg-white/5 text-muted-foreground/50',
+              ? 'bg-blue-500/30 text-white'
+              : countFreeze > 0
+                ? 'bg-amber-500/25 border border-amber-400/40 text-white'
+                : 'bg-slate-800 text-slate-400',
           )}
         >
-          {isFrozen ? <Snowflake className="h-3.5 w-3.5 animate-spin" /> : <Timer className="h-3.5 w-3.5" />}
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span>{isFrozen ? `❄️ +15s (${freezeTimeLeft}s)` : 'Congelar (+15s)'}</span>
-          <span
-            className={cn(
-              'rounded-full px-2 py-0.5 text-[0.68rem] font-black',
-              countFreeze > 0 ? 'bg-blue-500/30 text-blue-200' : 'bg-white/10 text-muted-foreground',
-            )}
-          >
-            ×{countFreeze}
-          </span>
-        </div>
+          {isFrozen ? `${freezeTimeLeft}s` : `+15s (x${countFreeze})`}
+        </span>
       </button>
     </div>
   )
