@@ -7,6 +7,7 @@ import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
+import { TITLE_SHOP_CATALOG, type TitleItem, type TitleGroup, type TitleRarity, getTitleRarityBadge } from '@/data/shopTitles'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
@@ -16,9 +17,10 @@ interface ShopItem {
   name: string
   category: Category
   categoryKey?: string
+  group?: TitleGroup
   avatarCategory?: string
   avatarCategoryLabel?: string
-  rarity?: AvatarRarity
+  rarity?: AvatarRarity | TitleRarity
   description: string
   price: string
   priceValue: number
@@ -67,6 +69,24 @@ const AVATAR_SHOP_ITEMS: ShopItem[] = avatarShopList.map((av) => ({
   badgeColor: getRarityBadgeColor(av.rarity),
 }))
 
+const TITLE_SHOP_ITEMS: ShopItem[] = TITLE_SHOP_CATALOG.map((t) => ({
+  id: t.id,
+  name: t.name,
+  category: 'titulos',
+  categoryKey: t.categoryKey,
+  group: t.group,
+  avatarCategoryLabel: t.categoryTitle,
+  rarity: t.rarity,
+  description: t.requirement ? `Desbloqueio: ${t.requirement}` : `Título oficial exibido no teu perfil, duelos e rankings.`,
+  price: t.price !== null ? `€${t.price.toLocaleString('pt-PT')}` : 'POR MÉRITO',
+  priceValue: t.price ?? 0,
+  isExclusive: t.price === null,
+  unlockCondition: t.requirement,
+  image: '/images/shop/titulo-conquistador.jpg',
+  badge: t.rarity,
+  badgeColor: t.badgeColor,
+}))
+
 const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) => ({
   id: p.id,
   name: `Pack: ${p.name}`,
@@ -88,12 +108,9 @@ const OTHER_SHOP_ITEMS: ShopItem[] = [
   // AJUDAS & UTILIDADES
   { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)' },
   { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)' },
-
-  // TÍTULOS
-  { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', price: '€1.000', priceValue: 1000, image: '/images/shop/titulo-conquistador.jpg', badge: 'Honorífico' }
 ]
 
-const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
+const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
 const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
 const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
@@ -103,6 +120,8 @@ export default function LojaPage() {
   const [activeTab, setActiveTab] = useState<Category>('avatars')
   const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
+  const [titleSubFilter, setTitleSubFilter] = useState<'todos' | 'tematico' | 'competicao' | 'exclusivo'>('todos')
+  const [titleThemeCategory, setTitleThemeCategory] = useState<string>('todas')
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
@@ -187,15 +206,23 @@ export default function LojaPage() {
 
   const isItemUnlocked = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
-    if (item.id === 'exclusivo_fundador') {
+    if (item.id === 'exclusivo_fundador' || item.id === 'tit_excl_fundador' || item.name === 'Fundador') {
       const isFounder = Boolean(localStorage.getItem('user_is_founder') === 'true')
       if (isFounder) return true
     }
     if (item.isExclusive) {
+      if (item.category === 'titulos') {
+        return (
+          inventory.titles.includes(item.id) ||
+          inventory.titles.includes(item.name) ||
+          unlockedItems.includes(item.id) ||
+          unlockedItems.includes(item.name)
+        )
+      }
       return unlockedItems.includes(item.id) || inventory.avatars.includes(item.id)
     }
     if (item.priceValue === 0 && !item.isExclusive) return true
-    if (unlockedItems.includes(item.id)) return true
+    if (unlockedItems.includes(item.id) || unlockedItems.includes(item.name)) return true
     if (item.category === 'avatars') {
       if (inventory.avatars.includes(item.id)) return true
       if (item.id === 'guardiao-vulcanico' && (inventory.avatars.includes('avatar_vulcao_acores') || unlockedItems.includes('avatar_vulcao_acores'))) return true
@@ -204,7 +231,7 @@ export default function LojaPage() {
       if (item.id === 'fadista-cyber-alfama' && (inventory.avatars.includes('avatar_fadista_cyber') || unlockedItems.includes('avatar_fadista_cyber'))) return true
     }
     if (item.category === 'arenas' && inventory.arenas.includes(item.id)) return true
-    if (item.category === 'titulos' && inventory.titles.includes(item.id)) return true
+    if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
     if (item.category === 'taunts') {
       const localTaunts = JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]')
       return item.priceValue === 0 || unlockedItems.includes(item.id) || localTaunts.includes(item.id)
@@ -216,7 +243,7 @@ export default function LojaPage() {
     if (item.category === 'ajudas' || item.category === 'taunts') return false
     if (item.category === 'avatars') return equippedAvatar === item.image
     if (item.category === 'arenas') return equippedArena === item.id
-    if (item.category === 'titulos') return equippedTitle === item.name
+    if (item.category === 'titulos') return equippedTitle === item.name || equippedTitle === item.id
     return false
   }
 
@@ -228,7 +255,25 @@ export default function LojaPage() {
         showToast(`Item exclusivo por mérito: ${item.unlockCondition}`, 'error')
         return
       }
-      if (item.image) {
+      if (item.category === 'titulos') {
+        setEquippedTitle(item.name)
+        localStorage.setItem('equipped_title', item.name)
+        localStorage.setItem('user_equipped_title', item.name)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.title': item.name,
+              equippedTitle: item.name,
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('titleChanged'))
+        showToast(`Título exclusivo "${item.name}" ativado com sucesso!`)
+        return
+      }
+      if (item.category === 'avatars' && item.image) {
         setEquippedAvatar(item.image)
         localStorage.setItem('user_equipped_avatar', item.image)
         if (auth.currentUser) {
@@ -243,6 +288,7 @@ export default function LojaPage() {
         }
         window.dispatchEvent(new Event('avatarChanged'))
         showToast(`Avatar exclusivo "${item.name}" equipado com sucesso!`)
+        return
       }
       return
     }
@@ -439,6 +485,22 @@ export default function LojaPage() {
       if (item.category !== 'avatars') return false
       if (avatarCategoryFilter !== 'todos' && item.categoryKey !== avatarCategoryFilter) return false
       if (avatarRarityFilter !== 'todas' && item.rarity !== avatarRarityFilter) return false
+      return true
+    }
+    if (activeTab === 'titulos') {
+      if (item.category !== 'titulos') return false
+      if (titleSubFilter === 'todos') return true
+      if (titleSubFilter === 'tematico') {
+        if (item.group !== 'tematico') return false
+        if (titleThemeCategory !== 'todas' && item.categoryKey !== titleThemeCategory) return false
+        return true
+      }
+      if (titleSubFilter === 'competicao') {
+        return ['progressao', 'competicao', 'streaks', 'precisao', 'distrito'].includes(item.group as string)
+      }
+      if (titleSubFilter === 'exclusivo') {
+        return item.group === 'exclusivo' || item.isExclusive
+      }
       return true
     }
     return item.category === activeTab
@@ -662,6 +724,77 @@ export default function LojaPage() {
           </div>
         )}
 
+        {/* SUB-FILTROS DE TÍTULOS (TODOS, TEMÁTICAS, COMPETIÇÃO & PERFIL, EXCLUSIVOS) */}
+        {activeTab === 'titulos' && (
+          <div className="w-full max-w-6xl space-y-3 mb-6 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 backdrop-blur-md">
+            {/* Grupo de Títulos */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1 flex items-center gap-1.5">
+                <Filter className="w-3.5 h-3.5 text-yellow-400" /> Grupo:
+              </span>
+              {[
+                { key: 'todos', label: '✨ Todos os Títulos' },
+                { key: 'tematico', label: '🏛️ Categorias Temáticas (18 Temas)' },
+                { key: 'competicao', label: '⚔️ Competição & Perfil' },
+                { key: 'exclusivo', label: '👑 Exclusivos de Mérito' },
+              ].map((filter) => {
+                const isSelected = titleSubFilter === filter.key
+                const isExcl = filter.key === 'exclusivo'
+                return (
+                  <button
+                    key={filter.key}
+                    onClick={() => setTitleSubFilter(filter.key as any)}
+                    className={`cursor-pointer shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      isSelected
+                        ? isExcl
+                          ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] font-black'
+                          : 'bg-yellow-500 text-slate-950 shadow-[0_0_12px_rgba(234,179,8,0.4)] font-black'
+                        : isExcl
+                        ? 'bg-rose-950/60 text-rose-300 border border-rose-500/40 hover:bg-rose-900/60'
+                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                    }`}
+                  >
+                    <span>{filter.label}</span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Se o filtro temático estiver ativo, exibir seletor das 18 categorias */}
+            {titleSubFilter === 'tematico' && (
+              <div className="flex items-center gap-2 overflow-x-auto pt-1.5 border-t border-slate-800/60 scrollbar-none">
+                <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+                  Tema:
+                </span>
+                <button
+                  onClick={() => setTitleThemeCategory('todas')}
+                  className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
+                    titleThemeCategory === 'todas'
+                      ? 'bg-yellow-500 text-slate-950 font-black shadow-sm'
+                      : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-slate-700/40'
+                  }`}
+                >
+                  Todos os Temas
+                </button>
+                {AVATAR_18_CATEGORIES.filter((c) => c.key !== 'todos' && c.key !== 'exclusivos').map((c) => (
+                  <button
+                    key={c.key}
+                    onClick={() => setTitleThemeCategory(c.key)}
+                    className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 ${
+                      titleThemeCategory === c.key
+                        ? 'bg-yellow-500 text-slate-950 font-black shadow-sm'
+                        : 'bg-slate-800/50 text-slate-400 hover:text-slate-200 border border-slate-700/40'
+                    }`}
+                  >
+                    <span>{c.icon}</span>
+                    <span>{c.title.replace(/^[^a-zA-ZÀ-ÿ0-9]+\s*/, '')}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* VIP Tab Coming Soon Teaser */}
         {activeTab === 'vip' ? (
           <div className="w-full max-w-6xl py-16 px-6 text-center rounded-3xl bg-slate-900/50 border border-amber-500/20 backdrop-blur-xl relative overflow-hidden my-6">
@@ -757,24 +890,37 @@ export default function LojaPage() {
                       </div>
 
                       {/* Image / Preview */}
-                      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
-                        {item.image ? (
-                          <img 
-                            src={item.image} 
-                            alt={item.name} 
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                            onError={(e) => {
-                              e.currentTarget.src = '/images/avatars/guardiao-vulcanico.jpg'
-                            }}
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-600">
-                            <Sparkles className="w-8 h-8" />
-                          </div>
-                        )}
-                        {/* Efeito de brilho pulsante */}
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                      </div>
+                      {item.category === 'titulos' ? (
+                        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-950 via-slate-900 to-black border border-slate-800 mb-3 flex flex-col items-center justify-center p-3 text-center shadow-inner group-hover:border-yellow-500/50 transition-colors">
+                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1.5 flex items-center gap-1">
+                            <Trophy className="w-3 h-3 text-yellow-400" /> TÍTULO OFICIAL
+                          </span>
+                          <span className={`inline-block px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wide border shadow-md ${
+                            item.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                          }`}>
+                            « {item.name} »
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
+                          {item.image ? (
+                            <img 
+                              src={item.image} 
+                              alt={item.name} 
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                              onError={(e) => {
+                                e.currentTarget.src = '/images/avatars/guardiao-vulcanico.jpg'
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-600">
+                              <Sparkles className="w-8 h-8" />
+                            </div>
+                          )}
+                          {/* Efeito de brilho pulsante */}
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                        </div>
+                      )}
 
                       <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
                         {item.name}

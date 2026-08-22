@@ -53,6 +53,7 @@ import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
+import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
@@ -773,9 +774,9 @@ export function DuelArena({
                     👑 Fundador
                   </span>
                 )}
-                {profile?.equipped?.title && (
-                  <span className={cn('rounded-full px-2 py-0.2 text-[0.55rem] font-bold shrink-0', getTitleBadgeStyle(profile.equipped.title))}>
-                    {SHOP_CATALOG.find(i => i.id === profile.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                {((profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title')))) && (
+                  <span className={cn('rounded-full px-2 py-0.2 text-[0.55rem] font-bold shrink-0', getTitleBadgeStyle(profile?.equipped?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : '')))}>
+                    {(TITLE_SHOP_CATALOG.find(i => i.id === (profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || SHOP_CATALOG.find(i => i.id === (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                   </span>
                 )}
               </div>

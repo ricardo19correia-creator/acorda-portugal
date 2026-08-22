@@ -16,6 +16,7 @@ import { useAuth } from '@/components/auth-provider'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { SHOP_CATALOG } from '@/lib/economy'
+import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 import type { EquippedCosmetics } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
@@ -200,10 +201,9 @@ export function Ranking() {
       p.equipped?.frame?.includes('gold') ||
       p.equipped?.theme?.includes('gold')
     )
-    const titleItem = SHOP_CATALOG.find((i) => i.id === p.equipped?.title)
-    const displayTitle = titleItem
-      ? titleItem.name.replace(/^Título:\s*«?/, '«').replace(/»?$/, '»')
-      : '«Cidadão Conquistador»'
+    const titleItem = TITLE_SHOP_CATALOG.find((i) => i.id === p.equipped?.title || i.name === p.equipped?.title) || SHOP_CATALOG.find((i) => i.id === p.equipped?.title)
+    const rawTitle = titleItem?.name || p.equipped?.title || 'Cidadão Conquistador'
+    const displayTitle = `«${rawTitle.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}»`
 
     const duelsWon = Math.max(2, Math.floor(p.level * 3.4))
     const duelsTotal = Math.max(duelsWon + 1, Math.floor(p.level * 4.1))
@@ -355,7 +355,7 @@ export function Ranking() {
                           </p>
                           {row.equipped?.title && (
                             <span className={cn('rounded-full px-2 py-0.5 text-[0.6rem] font-bold shrink-0', getTitleBadgeStyle(row.equipped.title))}>
-                              {SHOP_CATALOG.find((i) => i.id === row.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                              {(TITLE_SHOP_CATALOG.find((i) => i.id === row.equipped?.title || i.name === row.equipped?.title)?.name || SHOP_CATALOG.find((i) => i.id === row.equipped?.title)?.name || row.equipped?.title)?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                             </span>
                           )}
                           {isCurrentUser && (
@@ -558,7 +558,7 @@ function PodiumCard({
       </p>
       {player.equipped?.title && (
         <span className={cn('mt-0.5 rounded-full px-2 py-0.5 text-[0.55rem] font-bold truncate max-w-[110px] sm:max-w-[130px]', getTitleBadgeStyle(player.equipped.title))}>
-          {SHOP_CATALOG.find((i) => i.id === player.equipped?.title)?.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+          {(TITLE_SHOP_CATALOG.find((i) => i.id === player.equipped?.title || i.name === player.equipped?.title)?.name || SHOP_CATALOG.find((i) => i.id === player.equipped?.title)?.name || player.equipped?.title)?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
         </span>
       )}
       <p className="mt-0.5 max-w-[90px] sm:max-w-[130px] truncate text-center text-[0.62rem] sm:text-xs text-muted-foreground">
