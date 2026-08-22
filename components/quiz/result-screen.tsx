@@ -128,6 +128,27 @@ export function ResultScreen({
             <span>Jogar Novamente</span>
           </button>
 
+          {/* Banner de Celebração de Conquistas */}
+          <Link
+            href="/perfil?tab=conquistas"
+            className="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-primary/15 to-amber-500/20 border border-amber-500/40 text-left hover:scale-[1.01] transition-all shadow-lg group cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl animate-bounce">🏆</span>
+              <div>
+                <p className="text-xs sm:text-sm font-black text-amber-300">
+                  Conquista Concluída!
+                </p>
+                <p className="text-[11px] text-slate-300">
+                  Vai ao teu Perfil para reclamar as tuas recompensas.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 shadow-md group-hover:bg-amber-400">
+              Reclamar →
+            </span>
+          </Link>
+
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/#ranking"

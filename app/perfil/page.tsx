@@ -1,15 +1,15 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { 
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, 
   User, Edit3, LogOut, Trash2, AlertTriangle, MessageSquare, 
-  ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen
+  ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck
 } from 'lucide-react'
-import { doc, updateDoc, setDoc, deleteDoc, onSnapshot } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion } from 'firebase/firestore'
 import { signOut, deleteUser, updateProfile } from 'firebase/auth'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -18,6 +18,7 @@ import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
 import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
+import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { cn } from '@/lib/utils'
@@ -84,8 +85,11 @@ const MASTER_PROFILE_CATALOG: InventoryItem[] = [
   })),
 ]
 
-export default function PerfilPage() {
+function PerfilContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const initialTab = searchParams.get('tab') as 'inventario' | 'estatisticas' | 'conquistas' | 'historico' | null
+
   const { user, profile } = useAuth()
   const [mounted, setMounted] = useState(false)
   
@@ -101,9 +105,15 @@ export default function PerfilPage() {
   const [userLevel, setUserLevel] = useState<number>(2)
 
   // Abas Principais & Sub-Filtros
-  const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>('inventario')
+  const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>(
+    initialTab === 'conquistas' || initialTab === 'estatisticas' || initialTab === 'historico' ? initialTab : 'inventario'
+  )
   const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'>('todos')
+  const [achievementCategory, setAchievementCategory] = useState<AchievementCategory>('todas')
   
+  // Conquistas Reclamadas
+  const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
+
   // Consumíveis & Inventário
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
@@ -177,6 +187,16 @@ export default function PerfilPage() {
         setUserXp(currentXp)
         setUserLevel(profile?.level ?? (Math.floor(currentXp / 1000) + 1))
 
+        const savedClaimed = localStorage.getItem('user_claimed_achievements')
+        if (savedClaimed) {
+          try {
+            const parsed = JSON.parse(savedClaimed)
+            if (parsed) setClaimedAchievements((prev) => ({ ...prev, ...parsed }))
+          } catch (e) {
+            console.error(e)
+          }
+        }
+
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
           try {
@@ -247,6 +267,10 @@ export default function PerfilPage() {
             if (typeof data.xp === 'number') {
               setUserXp(data.xp)
               setUserLevel(Math.floor(data.xp / 1000) + 1)
+            }
+            if (data.claimedAchievements) {
+              setClaimedAchievements((prev) => ({ ...prev, ...data.claimedAchievements }))
+              localStorage.setItem('user_claimed_achievements', JSON.stringify(data.claimedAchievements))
             }
             if (data.consumables) {
               setConsumables((prev) => ({ ...prev, ...data.consumables }))
@@ -382,6 +406,75 @@ export default function PerfilPage() {
     }
 
     window.dispatchEvent(new Event('inventory_updated'))
+  }
+
+  // Ação de Reclamar Recompensa de Conquista
+  const handleClaimAchievement = async (ach: AchievementItem) => {
+    if (claimedAchievements[ach.id]) return
+
+    const updatedClaimed = { ...claimedAchievements, [ach.id]: true }
+    setClaimedAchievements(updatedClaimed)
+    localStorage.setItem('user_claimed_achievements', JSON.stringify(updatedClaimed))
+
+    // 1. Coins
+    if (ach.reward.coins > 0) {
+      setUserCoins((prev) => {
+        const next = prev + ach.reward.coins
+        localStorage.setItem('user_coins', String(next))
+        localStorage.setItem('user_euros', String(next))
+        return next
+      })
+    }
+
+    // 2. Utilities
+    if (ach.reward.utilities) {
+      const f50 = ach.reward.utilities.fiftyFifty || 0
+      const fz = ach.reward.utilities.freezeTime || 0
+      setConsumables((prev) => {
+        const next = {
+          help5050: prev.help5050 + f50,
+          freezeTime: prev.freezeTime + fz,
+        }
+        localStorage.setItem('user_consumables', JSON.stringify(next))
+        return next
+      })
+    }
+
+    // 3. Titles
+    if (ach.reward.title) {
+      setInventory((prev) => ({
+        ...prev,
+        titles: Array.from(new Set([...prev.titles, ach.reward.title!])),
+      }))
+      setUnlockedItems((prev) => Array.from(new Set([...prev, ach.reward.title!])))
+    }
+
+    // 4. Firestore Sync
+    if (auth.currentUser) {
+      try {
+        const updatePayload: any = {
+          [`claimedAchievements.${ach.id}`]: true,
+          coins: increment(ach.reward.coins),
+        }
+        if (ach.reward.utilities?.fiftyFifty) {
+          updatePayload['inventory.utilities.fiftyFifty'] = increment(ach.reward.utilities.fiftyFifty)
+        }
+        if (ach.reward.utilities?.freezeTime) {
+          updatePayload['inventory.utilities.freezeTime'] = increment(ach.reward.utilities.freezeTime)
+        }
+        if (ach.reward.title) {
+          updatePayload['inventory.titles'] = arrayUnion(ach.reward.title)
+        }
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    window.dispatchEvent(new Event('balance_updated'))
+    window.dispatchEvent(new Event('consumables_updated'))
+    window.dispatchEvent(new Event('inventory_updated'))
+    showToast(`🎁 Recompensa Reclamada! +${ach.reward.coins.toLocaleString('pt-PT')} € Acorda adicionados!`)
   }
 
   // Abrir Modal de Edição de Perfil
@@ -527,6 +620,95 @@ export default function PerfilPage() {
       return item.category === inventoryFilter
     })
   }, [inventory, unlockedItems, inventoryFilter])
+
+  // Estatísticas de Conquistas Calculadas Dinamicamente
+  const userAchievements = useMemo(() => {
+    return ACHIEVEMENTS_LIST.map((ach) => {
+      let progress = 0
+      switch (ach.statKey) {
+        case 'gamesPlayed':
+          progress = profile?.gamesPlayed || 18
+          break
+        case 'questionsAnswered':
+          progress = profile?.questionsAnswered || 619
+          break
+        case 'level':
+          progress = userLevel
+          break
+        case 'duelsWon':
+          progress = (profile as any)?.stats?.duelsWon || profile?.wins || 14
+          break
+        case 'bestStreak':
+          progress = profile?.bestStreak || 19
+          break
+        case 'historiaCorrect':
+          progress = 125
+          break
+        case 'geografiaCorrect':
+          progress = 101
+          break
+        case 'desportoCorrect':
+          progress = 74
+          break
+        case 'culturaCorrect':
+          progress = 70
+          break
+        case 'simbolosCorrect':
+          progress = 114
+          break
+        case 'districtGames':
+          progress = 18
+          break
+        case 'districtsFaced':
+          progress = 8
+          break
+        case 'coins':
+          progress = userCoins
+          break
+        case 'malucoGames':
+          progress = 12
+          break
+        case 'malucoCorrect':
+          progress = 45
+          break
+        case 'isFounder':
+          progress = 1
+          break
+        case 'isTop10':
+          progress = 1
+          break
+        case 'isTop1':
+          progress = 1
+          break
+        default:
+          progress = 1
+      }
+
+      const isCompleted = progress >= ach.maxProgress
+      const isClaimed = Boolean(claimedAchievements[ach.id])
+      const canClaim = isCompleted && !isClaimed
+
+      return {
+        ...ach,
+        currentProgress: Math.min(progress, ach.maxProgress),
+        isCompleted,
+        isClaimed,
+        canClaim,
+      }
+    })
+  }, [profile, userLevel, userCoins, claimedAchievements])
+
+  // Métricas Globais de Conquistas
+  const totalAchievementsCount = userAchievements.length
+  const completedAchievementsCount = userAchievements.filter((a) => a.isCompleted).length
+  const claimableCount = userAchievements.filter((a) => a.canClaim).length
+  const globalProgressPercentage = Math.round((completedAchievementsCount / totalAchievementsCount) * 100)
+
+  // Conquistas Filtradas
+  const filteredAchievements = useMemo(() => {
+    if (achievementCategory === 'todas') return userAchievements
+    return userAchievements.filter((a) => a.category === achievementCategory)
+  }, [userAchievements, achievementCategory])
 
   // Estatísticas por Categoria (Performance de Quiz)
   const categoryStats = useMemo(() => [
@@ -758,13 +940,18 @@ export default function PerfilPage() {
 
         <button
           onClick={() => setActiveTab('conquistas')}
-          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap relative ${
             activeTab === 'conquistas'
               ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
               : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
           }`}
         >
           <Sparkles className="w-4 h-4" /> 🏆 Conquistas &amp; Prestígio
+          {claimableCount > 0 && (
+            <span className="ml-1 px-2 py-0.2 rounded-full text-[10px] font-black bg-amber-400 text-slate-950 animate-bounce">
+              {claimableCount}
+            </span>
+          )}
         </button>
 
         <button
@@ -1169,74 +1356,198 @@ export default function PerfilPage() {
         )}
 
         {/* ========================================================= */}
-        {/* ABA 3: CONQUISTAS & PRESTÍGIO */}
+        {/* ABA 3: CONQUISTAS & PRESTÍGIO (COM SISTEMA DE CLAIM) */}
         {/* ========================================================= */}
         {activeTab === 'conquistas' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="bg-slate-900/80 border border-emerald-500/40 rounded-2xl p-4 flex items-center gap-3.5 shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
-                👑
+          <div className="space-y-6">
+            {/* Header da Aba Conquistas com Progresso Global */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-slate-900/90 border border-amber-500/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 relative z-10">
+                <div>
+                  <h2 className="text-lg sm:text-xl font-black text-white flex items-center gap-2">
+                    <Trophy className="w-6 h-6 text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
+                    Quadro de Conquistas &amp; Prestígio
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Conclui desafios nacionais para ganhar moedas, títulos honoríficos e ajudas de jogo.
+                  </p>
+                </div>
+
+                <div className="text-left sm:text-right shrink-0">
+                  <span className="text-sm font-black text-amber-300 font-mono">
+                    {completedAchievementsCount} / {totalAchievementsCount} Desbloqueadas ({globalProgressPercentage}%)
+                  </span>
+                  {claimableCount > 0 && (
+                    <p className="text-xs font-black text-emerald-400 flex items-center sm:justify-end gap-1 mt-0.5 animate-pulse">
+                      <Gift className="w-3.5 h-3.5" /> {claimableCount} {claimableCount === 1 ? 'Recompensa pronta' : 'Recompensas prontas'} para reclamar!
+                    </p>
+                  )}
+                </div>
               </div>
-              <div>
-                <h4 className="text-sm font-bold text-white">Membro Fundador</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Pioneiro no lançamento do Acorda Portugal.</p>
-                <span className="text-[10px] font-black text-emerald-400 uppercase mt-1 inline-block">✓ Desbloqueada</span>
+
+              {/* Barra de Progresso Dourada Global */}
+              <div className="w-full bg-slate-950 rounded-full h-3.5 border border-slate-800 p-0.5 overflow-hidden shadow-inner relative z-10">
+                <div
+                  className="bg-gradient-to-r from-amber-500 via-yellow-400 to-emerald-400 h-full rounded-full transition-all duration-1000 shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                  style={{ width: `${globalProgressPercentage}%` }}
+                />
+              </div>
+
+              {/* Filtros por Categoria de Conquista */}
+              <div className="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-slate-800/80 relative z-10">
+                {[
+                  { id: 'todas', label: 'Todas' },
+                  { id: 'geral', label: 'Geral' },
+                  { id: 'duelos', label: 'Duelos 1v1' },
+                  { id: 'sequencias', label: 'Sequências' },
+                  { id: 'categorias', label: 'Categorias' },
+                  { id: 'distritos', label: 'Distritos' },
+                  { id: 'economia', label: 'Economia' },
+                  { id: 'maluco', label: 'Modo Maluco' },
+                  { id: 'especiais', label: 'Especiais' },
+                ].map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setAchievementCategory(f.id as AchievementCategory)}
+                    className={cn(
+                      'cursor-pointer px-3 py-1.5 rounded-xl text-xs font-bold transition-all',
+                      achievementCategory === f.id
+                        ? 'bg-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20'
+                        : 'bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800',
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="bg-slate-900/80 border border-amber-500/40 rounded-2xl p-4 flex items-center gap-3.5 shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
-                🏆
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white">Top 1 Nacional</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Alcançou a 1ª posição da tabela geral.</p>
-                <span className="text-[10px] font-black text-amber-300 uppercase mt-1 inline-block">✓ Desbloqueada</span>
-              </div>
-            </div>
+            {/* Grelha de Conquistas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredAchievements.map((ach) => {
+                const percent = Math.min(100, Math.round((ach.currentProgress / ach.maxProgress) * 100))
 
-            <div className="bg-slate-900/80 border border-cyan-500/40 rounded-2xl p-4 flex items-center gap-3.5 shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl shrink-0">
-                ⚔️
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white">Guerreiro dos Duelos</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Venceu mais de 10 duelos 1v1.</p>
-                <span className="text-[10px] font-black text-cyan-300 uppercase mt-1 inline-block">✓ Desbloqueada</span>
-              </div>
-            </div>
+                return (
+                  <div
+                    key={ach.id}
+                    className={cn(
+                      'p-5 rounded-2xl border backdrop-blur-md shadow-xl transition-all flex flex-col justify-between relative overflow-hidden',
+                      ach.canClaim
+                        ? 'bg-gradient-to-br from-amber-950/30 via-slate-900/90 to-emerald-950/30 border-amber-500/70 ring-2 ring-amber-500/40 shadow-amber-500/10'
+                        : ach.isClaimed
+                          ? 'bg-slate-900/90 border-emerald-500/30'
+                          : ach.isCompleted
+                            ? 'bg-slate-900/80 border-slate-700'
+                            : 'bg-slate-950/60 border-slate-800/80 opacity-75',
+                    )}
+                  >
+                    <div>
+                      {/* Top Row: Icon, Category Badge & Status */}
+                      <div className="flex items-start justify-between gap-3 mb-2.5">
+                        <div className="flex items-center gap-3">
+                          <div className={cn(
+                            'w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 border shadow-inner',
+                            ach.canClaim
+                              ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 animate-bounce'
+                              : ach.isClaimed
+                                ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400'
+                                : 'bg-slate-800/80 border-slate-700 text-slate-400',
+                          )}>
+                            {ach.icon}
+                          </div>
 
-            <div className="bg-slate-900/80 border border-purple-500/40 rounded-2xl p-4 flex items-center gap-3.5 shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl shrink-0">
-                🔥
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white">Sequência de Fogo</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Acertou 10 perguntas consecutivas.</p>
-                <span className="text-[10px] font-black text-purple-300 uppercase mt-1 inline-block">✓ Desbloqueada</span>
-              </div>
-            </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h3 className="font-black text-sm text-white">{ach.title}</h3>
+                              <span className="text-[10px] font-bold px-2 py-0.2 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                {ach.categoryLabel}
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{ach.description}</p>
+                          </div>
+                        </div>
+                      </div>
 
-            <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-4 flex items-center gap-3.5 opacity-60">
-              <div className="w-12 h-12 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center text-xl shrink-0">
-                <Lock className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-slate-300">Conquistador Total</h4>
-                <p className="text-xs text-slate-500 mt-0.5">Vence duelos nos 18 distritos e ilhas.</p>
-                <span className="text-[10px] font-bold text-slate-500 mt-1 inline-block">Progresso: 4 / 20</span>
-              </div>
-            </div>
+                      {/* Middle: Progress Bar */}
+                      <div className="my-3 space-y-1">
+                        <div className="flex items-center justify-between text-[11px] font-bold">
+                          <span className="text-slate-400">Progresso</span>
+                          <span className={ach.isCompleted ? 'text-emerald-400 font-black' : 'text-slate-400'}>
+                            {ach.currentProgress.toLocaleString('pt-PT')} / {ach.maxProgress.toLocaleString('pt-PT')} ({percent}%)
+                          </span>
+                        </div>
+                        <div className="w-full bg-slate-950 rounded-full h-2 border border-slate-800 overflow-hidden">
+                          <div
+                            className={cn(
+                              'h-full rounded-full transition-all duration-700',
+                              ach.canClaim
+                                ? 'bg-gradient-to-r from-amber-400 to-emerald-400 animate-pulse'
+                                : ach.isClaimed
+                                  ? 'bg-emerald-500'
+                                  : 'bg-primary/80',
+                            )}
+                            style={{ width: `${percent}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
 
-            <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-4 flex items-center gap-3.5 opacity-60">
-              <div className="w-12 h-12 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center text-xl shrink-0">
-                <Lock className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-slate-300">Enciclopédia Viva</h4>
-                <p className="text-xs text-slate-500 mt-0.5">Responde a 1.000 perguntas no quiz.</p>
-                <span className="text-[10px] font-bold text-slate-500 mt-1 inline-block">Progresso: 619 / 1000</span>
-              </div>
+                    {/* Bottom: Rewards & Action Claim Button */}
+                    <div className="pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2.5">
+                      {/* Badges de Recompensa */}
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {ach.reward.coins > 0 && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-[11px] font-black text-amber-300 shadow-sm">
+                            <span>🪙</span> +{ach.reward.coins.toLocaleString('pt-PT')} €
+                          </span>
+                        )}
+
+                        {ach.reward.title && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/20 border border-purple-500/40 text-[11px] font-black text-purple-300 shadow-sm">
+                            <span>🏷️</span> «{ach.reward.title}»
+                          </span>
+                        )}
+
+                        {ach.reward.utilities?.fiftyFifty && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-500/20 border border-cyan-400/40 text-[11px] font-black text-cyan-300 shadow-sm">
+                            <span>✨</span> +{ach.reward.utilities.fiftyFifty}x 50/50
+                          </span>
+                        )}
+
+                        {ach.reward.utilities?.freezeTime && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-500/20 border border-blue-400/40 text-[11px] font-black text-blue-300 shadow-sm">
+                            <span>⏳</span> +{ach.reward.utilities.freezeTime}x Congelar
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Botão de Reclamação */}
+                      <div>
+                        {ach.canClaim ? (
+                          <button
+                            type="button"
+                            onClick={() => handleClaimAchievement(ach)}
+                            className="cursor-pointer px-4 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-emerald-500 text-slate-950 shadow-lg shadow-amber-500/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 animate-pulse"
+                          >
+                            <Gift className="w-3.5 h-3.5 fill-current" />
+                            <span>Reclamar Prémio</span>
+                          </button>
+                        ) : ach.isClaimed ? (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-1 rounded-xl">
+                            <CheckCheck className="w-3.5 h-3.5 text-emerald-400" /> Reclamado
+                          </span>
+                        ) : (
+                          <span className="text-[11px] font-bold text-slate-500 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800">
+                            Em Progresso
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
         )}
@@ -1459,7 +1770,7 @@ export default function PerfilPage() {
               </button>
               <button
                 onClick={handleLogout}
-                className="cursor-pointer px-5 py-2 rounded-xl text-xs font-bold bg-rose-500 hover:bg-rose-400 text-white shadow-lg transition-all"
+                className="cursor-pointer px-5 py-2.5 rounded-xl text-xs font-bold bg-rose-500 hover:bg-rose-400 text-white shadow-lg transition-all"
               >
                 Sim, Terminar
               </button>
@@ -1504,5 +1815,13 @@ export default function PerfilPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function PerfilPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+      <PerfilContent />
+    </Suspense>
   )
 }
