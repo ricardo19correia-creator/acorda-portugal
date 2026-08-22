@@ -360,12 +360,10 @@ export function Ranking() {
                           <p className="truncate font-display font-bold text-foreground">
                             {row.name}
                           </p>
-                          {row.equippedTitle || row.equipped?.title ? (
-                            <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide shrink-0">
+                          {(row.equippedTitle || row.equipped?.title) && (
+                            <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-[10px] sm:text-xs font-bold text-amber-300 tracking-wide shrink-0">
                               {(TITLE_SHOP_CATALOG.find((i) => i.id === (row.equippedTitle || row.equipped?.title) || i.name === (row.equippedTitle || row.equipped?.title))?.name || (row.equippedTitle || row.equipped?.title))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                             </span>
-                          ) : (
-                            <span className="text-[10px] text-slate-500 shrink-0">Recruta</span>
                           )}
                           {isCurrentUser && (
                             <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-primary ring-1 ring-primary/40">
@@ -423,12 +421,10 @@ export function Ranking() {
                       <p className="truncate font-display font-bold text-foreground">
                         {currentUserEntry.name}
                       </p>
-                      {(currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title'))) ? (
-                        <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide shrink-0">
+                      {(currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title'))) && (
+                        <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-[10px] sm:text-xs font-bold text-amber-300 tracking-wide shrink-0">
                           {(TITLE_SHOP_CATALOG.find((i) => i.id === (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                         </span>
-                      ) : (
-                        <span className="text-[10px] text-slate-500 shrink-0">Recruta</span>
                       )}
                       <span className="rounded-full bg-primary/25 px-2 py-0.5 text-[0.65rem] font-black uppercase text-primary">
                         Tu
@@ -560,12 +556,10 @@ function PodiumCard({
         </span>
 
         {/* Badge do Título Equipado */}
-        {player.equippedTitle || player.equipped?.title ? (
-          <span className="inline-block mt-0.5 max-w-[110px] sm:max-w-[140px] truncate px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide">
+        {(player.equippedTitle || player.equipped?.title) && (
+          <span className="inline-block mt-0.5 max-w-[110px] sm:max-w-[140px] truncate px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-[10px] sm:text-xs font-bold text-amber-300 tracking-wide">
             {(TITLE_SHOP_CATALOG.find((i) => i.id === (player.equippedTitle || player.equipped?.title) || i.name === (player.equippedTitle || player.equipped?.title))?.name || (player.equippedTitle || player.equipped?.title))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
           </span>
-        ) : (
-          <span className="text-[10px] text-slate-500 mt-0.5">Recruta</span>
         )}
 
         <span className="text-[0.62rem] sm:text-xs text-slate-400 mt-0.5 max-w-[90px] sm:max-w-[130px] truncate">

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X } from 'lucide-react'
-import { doc, updateDoc, increment, arrayUnion, onSnapshot } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
@@ -476,6 +476,12 @@ export default function LojaPage() {
               'equipped.avatar': item.image,
               avatar: item.image,
             })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              photoURL: item.image,
+              avatar: item.image,
+              'equipped.avatar': item.image,
+              equippedAvatar: item.id,
+            }, { merge: true })
           } catch (e) {
             console.error(e)
           }
@@ -507,6 +513,11 @@ export default function LojaPage() {
               equippedTitle: item.name,
               'equipped.title': item.name,
             })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedTitle: item.name,
+              'equipped.title': item.name,
+              title: item.name,
+            }, { merge: true })
           } catch (e) {
             console.error(e)
           }

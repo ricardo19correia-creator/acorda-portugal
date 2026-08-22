@@ -6,7 +6,7 @@ import {
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, Palette, User, Eye
 } from 'lucide-react'
-import { doc, updateDoc, onSnapshot } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { UserAvatar } from '@/components/user-avatar'
 import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
@@ -266,6 +266,12 @@ export default function PerfilPage() {
             'equipped.avatar': imgToSet,
             avatar: imgToSet,
           })
+          await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+            photoURL: imgToSet,
+            avatar: imgToSet,
+            'equipped.avatar': imgToSet,
+            equippedAvatar: item.id,
+          }, { merge: true })
         } catch (e) {
           console.error(e)
         }
@@ -298,6 +304,11 @@ export default function PerfilPage() {
             equippedTitle: item.name,
             'equipped.title': item.name,
           })
+          await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+            equippedTitle: item.name,
+            'equipped.title': item.name,
+            title: item.name,
+          }, { merge: true })
         } catch (e) {
           console.error(e)
         }
