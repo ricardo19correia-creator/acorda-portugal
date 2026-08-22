@@ -1987,6 +1987,50 @@ function PerfilContent() {
       </div>
 
       {/* ========================================================= */}
+      {/* SECÇÃO: SUPORTE & REPORTE DE PROBLEMAS */}
+      {/* ========================================================= */}
+      <div className="w-full max-w-5xl mt-6">
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-emerald-950/40 p-6 sm:p-8 text-center backdrop-blur-2xl shadow-xl">
+          <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-emerald-500/10 blur-3xl" />
+          <div className="pointer-events-none absolute -left-12 -bottom-12 h-36 w-36 rounded-full bg-cyan-500/10 blur-3xl" />
+
+          <div className="relative z-10 max-w-xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-300 mb-3">
+              <AlertTriangle className="h-3.5 w-3.5" />
+              <span>Problemas &amp; Assistência</span>
+            </div>
+
+            <h4 className="font-display text-xl sm:text-2xl font-black uppercase text-white">
+              Precisas de Ajuda ou Encontraste um Erro?
+            </h4>
+            <p className="mt-2 text-xs sm:text-sm text-slate-400 font-medium leading-relaxed">
+              A nossa equipa está pronta para ajudar. Reporta qualquer anomalia técnica ou entra em contacto direto.
+            </p>
+
+            <div className="mt-5 flex flex-col items-center justify-center">
+              <a
+                href={`mailto:suporte@acordaportugal.pt?subject=${encodeURIComponent('[Reporte de Erro / Suporte] - Acorda Portugal')}&body=${encodeURIComponent(`Descrição detalhada do problema:\n\n---\nNome de Utilizador (se aplicável): ${displayName || user?.displayName || ''}\nDispositivo / Navegador:`)}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-7 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-105 hover:brightness-110 shadow-xl shadow-emerald-500/25 transition cursor-pointer"
+              >
+                <AlertCircle className="h-4 w-4 text-slate-950" />
+                <span>⚠️ REPORTAR UM PROBLEMA</span>
+              </a>
+
+              <p className="mt-4 text-xs text-slate-400">
+                Para suporte geral, dúvidas ou parcerias:{' '}
+                <a
+                  href="mailto:suporte@acordaportugal.pt"
+                  className="underline hover:opacity-80 transition-opacity text-emerald-400"
+                >
+                  suporte@acordaportugal.pt
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ========================================================= */}
       {/* MODAL: ALTERAR EMAIL */}
       {/* ========================================================= */}
       {isEmailModalOpen && (

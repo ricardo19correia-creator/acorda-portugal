@@ -701,22 +701,21 @@ export default function AjudaPage() {
 
               {/* Action Button: Center single button */}
               <div className="mt-6 flex flex-col items-center justify-center">
-                <button
-                  type="button"
-                  onClick={() => setReportModalOpen(true)}
+                <a
+                  href={`mailto:suporte@acordaportugal.pt?subject=${encodeURIComponent('[Reporte de Erro / Suporte] - Acorda Portugal')}&body=${encodeURIComponent('Descrição detalhada do problema:\n\n---\nNome de Utilizador (se aplicável):\nDispositivo / Navegador:')}`}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-8 py-4 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-105 hover:brightness-110 shadow-xl shadow-emerald-500/25 transition cursor-pointer"
                 >
                   <AlertCircle className="h-4 w-4 text-slate-950" />
                   <span>⚠️ REPORTAR UM PROBLEMA</span>
-                </button>
+                </a>
 
                 <p className="mt-4 text-xs text-slate-400">
-                  Para outros assuntos ou parcerias:{' '}
+                  Para suporte geral, dúvidas ou parcerias:{' '}
                   <a
-                    href="mailto:acorda.portugal.desafio.nacional@gmail.com"
-                    className="text-emerald-400 hover:underline"
+                    href="mailto:suporte@acordaportugal.pt"
+                    className="underline hover:opacity-80 transition-opacity text-emerald-400"
                   >
-                    acorda.portugal.desafio.nacional@gmail.com
+                    suporte@acordaportugal.pt
                   </a>
                 </p>
               </div>
