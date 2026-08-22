@@ -5,30 +5,47 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { type, description, page, userEmail } = body
+    const { 
+      type, 
+      description, 
+      userEmail, 
+      userId,
+      userDisplayName,
+      userAgent,
+      screenResolution,
+      url,
+      page
+    } = body
 
-    if (!description) {
-      return NextResponse.json({ error: 'Descrição obrigatória' }, { status: 400 })
+    if (!description || typeof description !== 'string' || description.trim().length < 10) {
+      return NextResponse.json({ error: 'A descrição deve ter pelo menos 10 caracteres.' }, { status: 400 })
     }
 
-    // Grava no Firestore pelo servidor
+    const reportData = {
+      type: type || 'Outro assunto',
+      description: description.trim(),
+      userEmail: userEmail || 'anónimo',
+      userId: userId || null,
+      userDisplayName: userDisplayName || null,
+      userAgent: userAgent || 'N/A',
+      screenResolution: screenResolution || 'N/A',
+      url: url || page || 'N/A',
+      page: page || url || 'N/A',
+      createdAt: serverTimestamp(),
+      status: 'pendente',
+      platform: 'web-mobile',
+    }
+
     try {
-      await addDoc(collection(db, 'reports'), {
-        type: type || 'Erro técnico',
-        description,
-        page: page || 'N/A',
-        userEmail: userEmail || 'anónimo',
-        createdAt: serverTimestamp(),
-        status: 'pendente',
-        platform: 'web-mobile',
-      })
+      await addDoc(collection(db, 'support_tickets'), reportData)
+      await addDoc(collection(db, 'reports'), reportData)
     } catch (dbErr) {
-      console.log('Firebase fallback log:', body)
+      console.log('Firebase report fallback:', reportData, dbErr)
     }
 
     return NextResponse.json({ success: true })
   } catch (error: any) {
     console.error('API Report Error:', error)
-    return NextResponse.json({ success: true }) // Retorna sucesso para o utilizador
+    return NextResponse.json({ error: 'Ocorreu um erro ao registar o relatório.' }, { status: 500 })
   }
 }

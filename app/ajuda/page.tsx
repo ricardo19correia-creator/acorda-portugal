@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import {
   ArrowLeft,
@@ -266,15 +266,33 @@ export default function AjudaPage() {
 
   // Report Problem Modal State
   const [reportModalOpen, setReportModalOpen] = useState(false)
-  const [reportType, setReportType] = useState('Erro técnico')
+  const [reportType, setReportType] = useState('Erro numa pergunta / resposta')
   const [reportDescription, setReportDescription] = useState('')
-  const [reportLocation, setReportLocation] = useState('')
   const [reportEmail, setReportEmail] = useState(user?.email || '')
   const [reportSubmitting, setReportSubmitting] = useState(false)
   const [reportStatus, setReportStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [reportErrorMsg, setReportErrorMsg] = useState('')
 
   const faqListRef = useRef<HTMLDivElement | null>(null)
+
+  // Sincronizar email do utilizador quando autenticado
+  useEffect(() => {
+    if (user?.email && !reportEmail) {
+      setReportEmail(user.email)
+    }
+  }, [user, reportEmail])
+
+  // Fechar modal ao pressionar tecla Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && reportModalOpen) {
+        setReportModalOpen(false)
+        setReportStatus('idle')
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [reportModalOpen])
 
   // Filter FAQ questions based on search query and active category
   const filteredQuestions = useMemo(() => {
@@ -340,43 +358,80 @@ export default function AjudaPage() {
     }
   }
 
+  // Fechar e repor modal
+  const handleCloseReportModal = () => {
+    setReportModalOpen(false)
+    if (reportStatus === 'success') {
+      setReportDescription('')
+      setReportType('Erro numa pergunta / resposta')
+      setReportStatus('idle')
+    }
+  }
+
   // Handle Submit Problem Report
   const handleSubmitReport = async (e: React.FormEvent) => {
     e.preventDefault()
-    setReportSubmitting(true)
-    setReportStatus('idle')
     setReportErrorMsg('')
 
+    const cleanDesc = reportDescription.trim()
+    const cleanEmail = reportEmail.trim()
+
+    if (!cleanDesc || cleanDesc.length < 10) {
+      setReportErrorMsg('A descrição do problema deve ter pelo menos 10 caracteres.')
+      setReportStatus('error')
+      return
+    }
+
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!cleanEmail || !EMAIL_REGEX.test(cleanEmail)) {
+      setReportErrorMsg('Por favor, introduz um endereço de email válido para contacto.')
+      setReportStatus('error')
+      return
+    }
+
+    setReportSubmitting(true)
+    setReportStatus('idle')
+
+    const metadata = {
+      type: reportType,
+      description: cleanDesc,
+      userEmail: cleanEmail,
+      userId: user?.uid || null,
+      userDisplayName: profile?.displayName || user?.displayName || 'Anónimo',
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A',
+      screenResolution: typeof window !== 'undefined' ? `${window.screen.width}x${window.screen.height}` : 'N/A',
+      url: typeof window !== 'undefined' ? window.location.href : '/ajuda',
+      page: '/ajuda',
+    }
+
     try {
-      // Log para garantir que a função está a ser chamada
-      console.log('A tentar enviar para o Firebase:', {
-        type: reportType,
-        description: reportDescription,
-        page: reportLocation,
-        userEmail: reportEmail || user?.email || 'anónimo',
+      // 1. Tenta gravar diretamente no Firestore do cliente
+      try {
+        await addDoc(collection(db, 'support_tickets'), {
+          ...metadata,
+          createdAt: serverTimestamp(),
+          status: 'pendente',
+        })
+        await addDoc(collection(db, 'reports'), {
+          ...metadata,
+          createdAt: serverTimestamp(),
+          status: 'pendente',
+        })
+      } catch (clientDbErr) {
+        console.warn('Fallback para API route de suporte:', clientDbErr)
+      }
+
+      // 2. Regista também através da API route
+      await fetch('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(metadata),
       })
 
-      const docRef = await addDoc(collection(db, 'reports'), {
-        type: reportType || 'Não especificado',
-        description: reportDescription || 'Vazio',
-        page: reportLocation || 'N/A',
-        userEmail: reportEmail || user?.email || 'anónimo',
-        createdAt: serverTimestamp(),
-        status: 'pendente',
-      })
-
-      console.log('Sucesso! ID do Documento:', docRef.id)
       setReportStatus('success')
-      setReportDescription('')
-      setReportLocation('')
-
-      setTimeout(() => {
-        setReportStatus('idle')
-        setReportModalOpen(false)
-      }, 2000)
     } catch (err: any) {
-      console.error('ERRO CRÍTICO NO ENVIO PARA O FIREBASE:', err)
-      setReportErrorMsg(`Erro: ${err?.message || 'Falha de comunicação.'}`)
+      console.error('Erro no envio do relatório:', err)
+      setReportErrorMsg('Não foi possível enviar o relatório. Por favor, tenta novamente ou envia email para suporte@acordaportugal.pt.')
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
@@ -701,13 +756,19 @@ export default function AjudaPage() {
 
               {/* Action Button: Center single button */}
               <div className="mt-6 flex flex-col items-center justify-center">
-                <a
-                  href={`mailto:suporte@acordaportugal.pt?subject=${encodeURIComponent('[Reporte de Erro / Suporte] - Acorda Portugal')}&body=${encodeURIComponent('Descrição detalhada do problema:\n\n---\nNome de Utilizador (se aplicável):\nDispositivo / Navegador:')}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setReportModalOpen(true)
+                    setReportStatus('idle')
+                    setReportErrorMsg('')
+                    if (user?.email) setReportEmail(user.email)
+                  }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-8 py-4 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-105 hover:brightness-110 shadow-xl shadow-emerald-500/25 transition cursor-pointer"
                 >
                   <AlertCircle className="h-4 w-4 text-slate-950" />
                   <span>⚠️ REPORTAR UM PROBLEMA</span>
-                </a>
+                </button>
 
                 <p className="mt-4 text-xs text-slate-400">
                   Para suporte geral, dúvidas ou parcerias:{' '}
@@ -734,25 +795,25 @@ export default function AjudaPage() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="report-modal-title"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleCloseReportModal()
+          }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
         >
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900 p-6 sm:p-8 shadow-2xl">
+          <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
             {/* Close button */}
             <button
               type="button"
-              onClick={() => {
-                setReportModalOpen(false)
-                setReportStatus('idle')
-              }}
+              onClick={handleCloseReportModal}
               aria-label="Fechar modal"
-              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition"
+              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
 
             {/* Modal Header */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                 <AlertCircle className="h-5 w-5" />
               </div>
               <div>
@@ -766,16 +827,28 @@ export default function AjudaPage() {
             </div>
 
             {reportStatus === 'success' ? (
-              <div className="py-6 text-center space-y-3">
-                <div className="grid h-14 w-14 mx-auto place-items-center rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 animate-bounce">
-                  <CheckCircle2 className="h-7 w-7" />
+              <div className="py-6 sm:py-8 text-center space-y-4">
+                <div className="relative mx-auto w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.35)]">
+                  <CheckCircle2 className="h-9 w-9 text-emerald-400" />
                 </div>
-                <h4 className="font-display text-base font-bold text-emerald-400">
-                  ✅ Relatório enviado com sucesso! Obrigado pelo feedback.
-                </h4>
-                <p className="text-xs text-muted-foreground">
-                  A janela fechará automaticamente dentro de instantes...
-                </p>
+                <div>
+                  <h4 className="font-display text-lg sm:text-xl font-black uppercase text-white">
+                    Relatório Enviado com Sucesso!
+                  </h4>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
+                    Obrigado por ajudares a melhorar o Acorda Portugal. A nossa equipa irá analisar a situação.
+                  </p>
+                </div>
+
+                <div className="pt-3">
+                  <button
+                    type="button"
+                    onClick={handleCloseReportModal}
+                    className="cursor-pointer px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all active:scale-95"
+                  >
+                    Fechar
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmitReport} className="space-y-4">
@@ -790,58 +863,49 @@ export default function AjudaPage() {
                     onChange={(e) => setReportType(e.target.value)}
                     className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >
-                    <option value="Erro técnico">Erro técnico</option>
-                    <option value="Problema de ligação">Problema de ligação</option>
-                    <option value="Problema no jogo / pergunta">Problema no jogo / pergunta</option>
-                    <option value="Problema com conta">Problema com conta</option>
-                    <option value="Problema com recompensa / moedas">Problema com recompensa / moedas</option>
-                    <option value="Outro">Outro</option>
+                    <option value="Erro numa pergunta / resposta">Erro numa pergunta / resposta</option>
+                    <option value="Bug visual ou de interface">Bug visual ou de interface</option>
+                    <option value="Problema de áudio / som">Problema de áudio / som</option>
+                    <option value="Falha de ligação / partida">Falha de ligação / partida</option>
+                    <option value="Outro assunto">Outro assunto</option>
                   </select>
-                </div>
-
-                {/* Descrição */}
-                <div>
-                  <label htmlFor="report-description" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Descrição do problema *
-                  </label>
-                  <textarea
-                    id="report-description"
-                    rows={4}
-                    value={reportDescription}
-                    onChange={(e) => setReportDescription(e.target.value)}
-                    placeholder="Descreve o problema com o máximo detalhe possível..."
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-3 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
-                    required
-                  />
-                </div>
-
-                {/* Página / modo onde aconteceu */}
-                <div>
-                  <label htmlFor="report-location" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Página ou modo onde aconteceu (opcional)
-                  </label>
-                  <input
-                    id="report-location"
-                    type="text"
-                    value={reportLocation}
-                    onChange={(e) => setReportLocation(e.target.value)}
-                    placeholder="Ex.: Quiz Solo, Duelo 1v1, Loja, Perfil..."
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  />
                 </div>
 
                 {/* Email de contacto */}
                 <div>
                   <label htmlFor="report-email" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    O teu email (para feedback)
+                    Email de Contacto *
                   </label>
                   <input
                     id="report-email"
                     type="email"
+                    required
                     value={reportEmail}
                     onChange={(e) => setReportEmail(e.target.value)}
                     placeholder="email@exemplo.pt"
                     className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  />
+                </div>
+
+                {/* Descrição */}
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor="report-description" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                      Descrição do problema *
+                    </label>
+                    <span className="text-[10px] text-slate-500 font-medium">
+                      Mínimo 10 caracteres
+                    </span>
+                  </div>
+                  <textarea
+                    id="report-description"
+                    rows={4}
+                    value={reportDescription}
+                    onChange={(e) => setReportDescription(e.target.value)}
+                    placeholder="Descreve o que aconteceu com o máximo de detalhe possível..."
+                    minLength={10}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-3 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
+                    required
                   />
                 </div>
 
@@ -857,14 +921,14 @@ export default function AjudaPage() {
                 <div className="pt-2 flex items-center justify-end gap-3">
                   <button
                     type="button"
-                    onClick={() => setReportModalOpen(false)}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-bold text-muted-foreground hover:bg-white/10 hover:text-white transition"
+                    onClick={handleCloseReportModal}
+                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-bold text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
-                    disabled={reportSubmitting || !reportDescription.trim()}
+                    disabled={reportSubmitting || reportDescription.trim().length < 10}
                     className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 font-display text-xs font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {reportSubmitting ? (
