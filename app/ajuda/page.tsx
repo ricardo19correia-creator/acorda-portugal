@@ -384,9 +384,20 @@ export default function AjudaPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-foreground flex flex-col justify-between overflow-x-hidden">
-      <BackgroundFx variant="default" />
+    <div className="relative min-h-screen text-foreground flex flex-col justify-between overflow-x-hidden bg-slate-950">
+      {/* 1. FUNDO HERO CYBERPUNK FIXO EM Z-0 */}
+      <div 
+        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(rgba(2,6,23,0.85), rgba(2,6,23,0.92)), url('/images/hero-bg.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-slate-950/90 via-slate-950/75 to-slate-950 pointer-events-none backdrop-blur-[2px]" />
 
+      {/* 2. CONTEÚDO DA CENTRAL DE AJUDA COM Z-INDEX SUPERIOR */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">
         <SiteHeader />
 
@@ -397,7 +408,7 @@ export default function AjudaPage() {
           <div className="mb-6">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-800/80 bg-slate-900/60 px-4 py-2 text-xs font-bold text-muted-foreground transition hover:border-slate-700 hover:bg-slate-900 hover:text-white backdrop-blur-md cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>Voltar ao Início</span>
@@ -431,14 +442,14 @@ export default function AjudaPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Pesquisar na Central de Ajuda..."
-                className="w-full rounded-2xl border border-white/15 bg-slate-900/80 py-4 pl-12 pr-12 text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground backdrop-blur-xl shadow-xl transition-all focus:border-emerald-500 focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-2xl border border-slate-800/80 bg-slate-900/70 py-4 pl-12 pr-12 text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground backdrop-blur-xl shadow-xl transition-all focus:border-emerald-500 focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
                   aria-label="Limpar pesquisa"
-                  className="absolute right-4 grid h-7 w-7 place-items-center rounded-lg bg-white/10 text-muted-foreground transition hover:bg-white/20 hover:text-white"
+                  className="absolute right-4 grid h-7 w-7 place-items-center rounded-lg bg-white/10 text-muted-foreground transition hover:bg-white/20 hover:text-white cursor-pointer"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -464,7 +475,7 @@ export default function AjudaPage() {
                     setSearchQuery('')
                     setSelectedCategory('todos')
                   }}
-                  className="font-bold text-emerald-400 hover:underline"
+                  className="font-bold text-emerald-400 hover:underline cursor-pointer"
                 >
                   Limpar filtros
                 </button>
@@ -484,7 +495,7 @@ export default function AjudaPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory('todos')}
-                  className="text-xs font-bold text-emerald-400 hover:text-emerald-300 transition"
+                  className="text-xs font-bold text-emerald-400 hover:text-emerald-300 transition cursor-pointer"
                 >
                   Ver Todas as Categorias ➔
                 </button>
@@ -505,7 +516,7 @@ export default function AjudaPage() {
                       'group flex items-start gap-4 rounded-2xl border p-4 sm:p-5 text-left backdrop-blur-xl transition-all duration-200 cursor-pointer shadow-lg outline-none',
                       isActive
                         ? 'border-emerald-500 bg-emerald-500/15 ring-2 ring-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.2)]'
-                        : 'border-white/10 bg-slate-900/60 hover:bg-slate-900 hover:border-white/20 hover:-translate-y-0.5',
+                        : 'border-slate-800/80 bg-slate-900/60 hover:bg-slate-900/80 hover:border-emerald-500/40 hover:-translate-y-0.5',
                     )}
                   >
                     <div
@@ -546,7 +557,7 @@ export default function AjudaPage() {
                   key={q.id}
                   type="button"
                   onClick={() => handleSelectPopular(q.id)}
-                  className="rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2 text-xs font-semibold text-slate-300 transition hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300 cursor-pointer shadow-sm"
+                  className="rounded-xl border border-slate-800/80 bg-slate-900/70 px-3.5 py-2 text-xs font-semibold text-slate-300 transition hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300 cursor-pointer shadow-sm"
                 >
                   ❓ {q.question}
                 </button>
@@ -558,7 +569,7 @@ export default function AjudaPage() {
           {/* 5. FAQ EM ACORDEÃO */}
           {/* ========================================================= */}
           <section ref={faqListRef} aria-label="Perguntas Frequentes" className="mb-14 scroll-mt-24">
-            <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
+            <div className="flex items-center justify-between mb-4 border-b border-slate-800/80 pb-3">
               <h2 className="font-display text-lg sm:text-xl font-black uppercase tracking-wide text-foreground flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-emerald-400" />
                 <span>Dúvidas Frequentes</span>
@@ -570,7 +581,7 @@ export default function AjudaPage() {
 
             {/* Empty State */}
             {filteredQuestions.length === 0 ? (
-              <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 sm:p-12 text-center backdrop-blur-xl">
+              <div className="rounded-3xl border border-slate-800/80 bg-slate-900/60 p-8 sm:p-12 text-center backdrop-blur-xl">
                 <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-muted-foreground mb-3">
                   <Search className="h-6 w-6" />
                 </div>
@@ -594,9 +605,9 @@ export default function AjudaPage() {
                   <button
                     type="button"
                     onClick={() => setReportModalOpen(true)}
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-foreground hover:bg-white/10 transition cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-800/80 bg-slate-900/60 px-4 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-foreground hover:bg-slate-900 hover:border-slate-700 transition cursor-pointer"
                   >
-                    Fazer Pergunta ao Suporte
+                    Reportar um Problema
                   </button>
                 </div>
               </div>
@@ -613,7 +624,7 @@ export default function AjudaPage() {
                         'overflow-hidden rounded-2xl border transition-all duration-200 backdrop-blur-xl',
                         isOpen
                           ? 'border-emerald-500/40 bg-slate-900/90 shadow-xl shadow-emerald-950/20'
-                          : 'border-white/10 bg-slate-900/50 hover:border-white/20 hover:bg-slate-900/70',
+                          : 'border-slate-800/80 bg-slate-900/60 hover:border-slate-700/80 hover:bg-slate-900/80',
                       )}
                     >
                       <button
