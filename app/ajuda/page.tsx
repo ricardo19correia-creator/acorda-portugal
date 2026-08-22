@@ -392,46 +392,55 @@ export default function AjudaPage() {
     setReportSubmitting(true)
     setReportStatus('idle')
 
-    const metadata = {
+    const payload = {
+      problemType: reportType,
       type: reportType,
-      description: cleanDesc,
+      email: cleanEmail,
       userEmail: cleanEmail,
-      userId: user?.uid || null,
-      userDisplayName: profile?.displayName || user?.displayName || 'Anónimo',
-      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A',
-      screenResolution: typeof window !== 'undefined' ? `${window.screen.width}x${window.screen.height}` : 'N/A',
-      url: typeof window !== 'undefined' ? window.location.href : '/ajuda',
-      page: '/ajuda',
+      description: cleanDesc,
+      metadata: {
+        userId: user?.uid || null,
+        userDisplayName: profile?.displayName || user?.displayName || 'Anónimo',
+        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A',
+        screenResolution: typeof window !== 'undefined' ? `${window.screen.width}x${window.screen.height}` : 'N/A',
+        url: typeof window !== 'undefined' ? window.location.href : '/ajuda',
+        page: '/ajuda',
+        timestamp: new Date().toISOString(),
+      },
     }
 
     try {
       // 1. Tenta gravar diretamente no Firestore do cliente
       try {
         await addDoc(collection(db, 'support_tickets'), {
-          ...metadata,
-          createdAt: serverTimestamp(),
-          status: 'pendente',
-        })
-        await addDoc(collection(db, 'reports'), {
-          ...metadata,
+          type: reportType,
+          description: cleanDesc,
+          userEmail: cleanEmail,
+          ...payload.metadata,
           createdAt: serverTimestamp(),
           status: 'pendente',
         })
       } catch (clientDbErr) {
-        console.warn('Fallback para API route de suporte:', clientDbErr)
+        console.warn('Fallback direto Firestore para API route:', clientDbErr)
       }
 
-      // 2. Regista também através da API route
-      await fetch('/api/report', {
+      // 2. Disparo do Email e Registo no Servidor via /api/support
+      const res = await fetch('/api/support', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(metadata),
+        body: JSON.stringify(payload),
       })
+
+      const data = await res.json()
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || 'Erro na resposta do servidor.')
+      }
 
       setReportStatus('success')
     } catch (err: any) {
       console.error('Erro no envio do relatório:', err)
-      setReportErrorMsg('Não foi possível enviar o relatório. Por favor, tenta novamente ou envia email para suporte@acordaportugal.pt.')
+      setReportErrorMsg(err?.message || 'Não foi possível enviar o relatório. Por favor, tenta novamente ou envia email para suporte@acordaportugal.pt.')
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
