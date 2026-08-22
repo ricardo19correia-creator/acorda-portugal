@@ -176,7 +176,7 @@ const FAQ_DATABASE: FAQQuestion[] = [
     isPopular: true,
     question: 'O que são e para que servem as moedas "€ Acorda"?',
     answer:
-      'O saldo "€ Acorda" é a moeda virtual oficial ganha através de vitórias em Duelos 1v1, desafios diários, subida de nível e conquistas. Pode ser usada na Loja para adquirir packs de ajudas, avatares épicos, molduras de perfil, títulos honoríficos e arenas visuais personalizadas.',
+      'O saldo "€ Acorda" é a moeda virtual oficial ganha através de vitórias em Duelos 1v1, desafios diários, subida de nível e conquistas. Pode ser usada na Loja para adquirir packs de ajudas, avatares lendários, títulos honoríficos e arenas visuais animadas.',
   },
   {
     id: 'faq-ganhar-xp',
@@ -226,7 +226,7 @@ const FAQ_DATABASE: FAQQuestion[] = [
     id: 'faq-equipar-itens',
     category: 'loja',
     categoryLabel: 'Loja & Cosméticos',
-    question: 'Como posso equipar molduras, títulos e cenários de arena?',
+    question: 'Como posso equipar avatares, títulos e cenários de arena?',
     answer:
       'Na página da Loja ou no teu Perfil (separador "O Meu Inventário"), basta clicares no item desbloqueado e selecionar "Equipar". O item fica imediatamente ativo em todos os teus jogos, rankings e cartão de jogador.',
   },
@@ -236,7 +236,7 @@ const FAQ_DATABASE: FAQQuestion[] = [
     categoryLabel: 'Loja & Cosméticos',
     question: 'O que é o Passe Fundador da Nação?',
     answer:
-      'O Passe Fundador é uma vantagem VIP exclusiva para os primeiros apoiantes da plataforma. Inclui o selo de Membro Fundador no perfil, bónus vitalício de +25% XP em todas as partidas e a Moldura Real 3D.',
+      'O Passe Fundador é uma vantagem VIP exclusiva para os primeiros apoiantes da plataforma. Inclui o selo de Membro Fundador no perfil, bónus vitalício de +25% XP em todas as partidas e acesso antecipado a itens lendários.',
   },
 
   // 6. PROBLEMAS & SUPORTE

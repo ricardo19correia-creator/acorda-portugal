@@ -409,12 +409,6 @@ export function PlayerProfile() {
       ...localOwnedList.filter((id) => id.startsWith('theme_') || id.includes('arena')),
     ]),
   )
-  const allOwnedFrameIds = Array.from(
-    new Set([
-      ...SHOP_CATALOG.filter((i) => i.id.startsWith('frame_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
-      ...localOwnedList.filter((id) => id.startsWith('frame_')),
-    ]),
-  )
   const allOwnedTitleIds = Array.from(
     new Set([
       ...SHOP_CATALOG.filter((i) => i.id.startsWith('title_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
@@ -423,11 +417,9 @@ export function PlayerProfile() {
   )
 
   const temasArenaCount = allOwnedThemeIds.length
-  const moldurasCount = allOwnedFrameIds.length
   const titulosCount = allOwnedTitleIds.length
 
   // Cosméticos equipados atualmente
-  const equippedFrameItem = SHOP_CATALOG.find((i) => i.id === equipped.frame)
   const equippedTitleItem = SHOP_CATALOG.find((i) => i.id === equipped.title)
   const equippedThemeItem = SHOP_CATALOG.find((i) => i.id === (invState.equippedTheme || equipped.theme))
   const equippedSoundpackItem = SHOP_CATALOG.find((i) => i.id === equipped.soundpack)
@@ -525,11 +517,6 @@ export function PlayerProfile() {
                 <span className="text-xs font-black uppercase tracking-[0.28em] text-primary">
                   {equippedTitleItem ? equippedTitleItem.name.replace('Título: ', '') : progressInfo.currentLevel.title}
                 </span>
-                {equippedFrameItem && (
-                  <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-muted-foreground">
-                    {equippedFrameItem.name}
-                  </span>
-                )}
                 {equippedAvatarItem && (
                   <span className="rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2.5 py-0.5 text-[0.62rem] font-black text-cyan-300 flex items-center gap-1">
                     <span>{equippedAvatarItem.icon}</span>
@@ -966,18 +953,6 @@ export function PlayerProfile() {
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-3.5">
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-xs font-bold text-foreground">Moldura de Avatar</p>
-                    <p className="text-[0.65rem] text-muted-foreground">
-                      {equippedFrameItem ? equippedFrameItem.name : 'Moldura Padrão'}
-                    </p>
-                  </div>
-                </div>
-                <span className="text-xs font-bold text-primary">Equipada</span>
-              </div>
 
               <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-3.5">
                 <div className="flex items-center gap-3">
@@ -1064,14 +1039,6 @@ export function PlayerProfile() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
                 <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
-                  Molduras
-                </p>
-                <p className="mt-1 font-display text-2xl font-black text-primary">
-                  {moldurasCount}
-                </p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 text-center">
-                <p className="text-[0.62rem] font-bold uppercase tracking-wider text-muted-foreground">
                   Títulos
                 </p>
                 <p className="mt-1 font-display text-2xl font-black text-gold">
@@ -1115,7 +1082,7 @@ export function PlayerProfile() {
 
           <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">
-              Total de itens: {moldurasCount + titulosCount + temasArenaCount + ownedSoundpacks.length + ownedStreaks.length + totalConsumables}
+              Total de itens: {titulosCount + temasArenaCount + ownedSoundpacks.length + ownedStreaks.length + totalConsumables}
             </span>
             <Link
               href="/loja"

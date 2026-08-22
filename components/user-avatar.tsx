@@ -15,7 +15,6 @@ export interface UserAvatarProps {
 export function UserAvatar({
   avatarUrl,
   src,
-  frameId,
   size = 'md',
   className = '',
   alt = 'Avatar do Jogador',

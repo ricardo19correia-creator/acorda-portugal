@@ -198,7 +198,6 @@ export function Ranking() {
       (p as any)?.is_founder ||
       (p as any)?.isFounder ||
       (p as any)?.isVip ||
-      p.equipped?.frame?.includes('gold') ||
       p.equipped?.theme?.includes('gold')
     )
     const titleItem = TITLE_SHOP_CATALOG.find((i) => i.id === p.equipped?.title || i.name === p.equipped?.title) || SHOP_CATALOG.find((i) => i.id === p.equipped?.title)

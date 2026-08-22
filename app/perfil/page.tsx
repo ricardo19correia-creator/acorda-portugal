@@ -13,7 +13,7 @@ import { UserAvatar } from '@/components/user-avatar'
 interface InventoryItem {
   id: string
   name: string
-  category: 'avatars' | 'molduras' | 'arenas' | 'titulos'
+  category: 'avatars' | 'arenas' | 'titulos'
   description: string
   image?: string
   badge?: string
@@ -25,11 +25,6 @@ const CATALOG_ITEMS: InventoryItem[] = [
   { id: 'avatar_camoes_2050', name: 'Luís de Camões 2050', category: 'avatars', description: 'O poeta épico renascido com visor cibernético e louros digitais.', image: '/images/avatars/camoes-2050.jpg', badge: 'Lendário' },
   { id: 'avatar_lenda_futebol', name: 'Cyborg Camisola das Quinas', category: 'avatars', description: 'O derradeiro goleador cibernético nacional.', image: '/images/shop/cyborg-quinas.jpg', badge: 'Exclusivo' },
   { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', image: '/images/shop/fadista-cyber.jpg', badge: 'Raro' },
-
-  // MOLDURAS
-  { id: 'moldura_padrao', name: 'Moldura Padrão Manuelina', category: 'molduras', description: 'Rebordo clássico em aço escovado.', badge: 'Padrão' },
-  { id: 'moldura_ouro_real', name: 'Moldura Ouro Real 3D', category: 'molduras', description: 'Rebordo dourado pulsante ao redor do teu avatar.', image: '/images/shop/moldura-ouro.jpg', badge: 'Exclusivo' },
-  { id: 'moldura_neon_portugal', name: 'Moldura Quinas Neon', category: 'molduras', description: 'Efeito luminoso verde e rubro vivo.', image: '/images/shop/moldura-neon.jpg', badge: 'Raro' },
 
   // ARENAS
   { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
@@ -45,20 +40,18 @@ const CATALOG_ITEMS: InventoryItem[] = [
 export default function PerfilPage() {
   const [mounted, setMounted] = useState(false)
   const [avatar, setAvatar] = useState('/images/avatars/guardiao-vulcanico.jpg')
-  const [frame, setFrame] = useState<string | null>(null)
   const [arena, setArena] = useState<string>('arena_ponte_2077')
   const [title, setTitle] = useState<string>('Título: Noviço da Nação')
   const [activeTab, setActiveTab] = useState<'inventario' | 'conquistas' | 'historico'>('inventario')
-  const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'molduras' | 'arenas' | 'titulos'>('todos')
+  const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'arenas' | 'titulos'>('todos')
   
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
-  const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[] }>({
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
     avatars: ['avatar_vulcao_acores', 'avatar_camoes_2050'],
-    frames: ['moldura_padrao'],
     arenas: ['arena_ponte_2077', 'arena_neon_2088'],
     titles: ['titulo_iniciante']
   })
-  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077', 'avatar_vulcao_acores', 'avatar_camoes_2050', 'moldura_padrao', 'titulo_iniciante'])
+  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077', 'avatar_vulcao_acores', 'avatar_camoes_2050', 'titulo_iniciante'])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   const showToast = (msg: string) => {
@@ -76,9 +69,6 @@ export default function PerfilPage() {
         } else {
           setAvatar('/images/avatars/guardiao-vulcanico.jpg')
         }
-
-        const savedFrame = localStorage.getItem('equipped_frame') || localStorage.getItem('user_equipped_frame')
-        if (savedFrame) setFrame(savedFrame)
 
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setArena(savedArena)
@@ -103,7 +93,6 @@ export default function PerfilPage() {
             if (parsed) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(parsed.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(parsed.frames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(parsed.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(parsed.titles || [])])),
               }))
@@ -146,7 +135,6 @@ export default function PerfilPage() {
             if (data.inventory) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(data.inventory.frames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
               }))
@@ -156,10 +144,6 @@ export default function PerfilPage() {
               if (data.equipped.avatar && !data.equipped.avatar.includes('moldura')) {
                 setAvatar(data.equipped.avatar)
                 localStorage.setItem('user_equipped_avatar', data.equipped.avatar)
-              }
-              if (data.equipped.frame) {
-                setFrame(data.equipped.frame)
-                localStorage.setItem('equipped_frame', data.equipped.frame)
               }
               if (data.equipped.arena) {
                 setArena(data.equipped.arena)
@@ -178,7 +162,6 @@ export default function PerfilPage() {
     }
 
     window.addEventListener('avatarChanged', syncProfile)
-    window.addEventListener('frameChanged', syncProfile)
     window.addEventListener('arenaChanged', syncProfile)
     window.addEventListener('titleChanged', syncProfile)
     window.addEventListener('consumables_updated', syncProfile)
@@ -188,7 +171,6 @@ export default function PerfilPage() {
     return () => {
       if (unsubscribeSnapshot) unsubscribeSnapshot()
       window.removeEventListener('avatarChanged', syncProfile)
-      window.removeEventListener('frameChanged', syncProfile)
       window.removeEventListener('arenaChanged', syncProfile)
       window.removeEventListener('titleChanged', syncProfile)
       window.removeEventListener('consumables_updated', syncProfile)
@@ -213,22 +195,6 @@ export default function PerfilPage() {
       }
       window.dispatchEvent(new Event('avatarChanged'))
       showToast(`Avatar "${item.name}" equipado!`)
-    } else if (item.category === 'molduras') {
-      setFrame(item.id)
-      localStorage.setItem('equipped_frame', item.id)
-      localStorage.setItem('user_equipped_frame', item.id)
-      if (auth.currentUser) {
-        try {
-          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            'equipped.frame': item.id,
-            equippedFrame: item.id
-          })
-        } catch (e) {
-          console.error(e)
-        }
-      }
-      window.dispatchEvent(new Event('frameChanged'))
-      showToast(`Moldura "${item.name}" equipada!`)
     } else if (item.category === 'arenas') {
       setArena(item.id)
       localStorage.setItem('equipped_arena', item.id)
@@ -270,7 +236,6 @@ export default function PerfilPage() {
     const isUnlocked = 
       unlockedItems.includes(item.id) ||
       (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
-      (item.category === 'molduras' && inventory.frames.includes(item.id)) ||
       (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
       (item.category === 'titulos' && inventory.titles.includes(item.id))
 
@@ -309,7 +274,7 @@ export default function PerfilPage() {
       <div className="w-full max-w-5xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl mb-8">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative">
-            <UserAvatar avatarUrl={avatar} frameId={frame} size="xl" isCurrentUser={true} />
+            <UserAvatar avatarUrl={avatar} size="xl" isCurrentUser={true} />
             <span className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-lg z-20">
               NÍVEL 2
             </span>
@@ -472,7 +437,7 @@ export default function PerfilPage() {
                   <h2 className="text-lg font-black text-white flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-purple-400" /> Personalização & Cosméticos Desbloqueados
                   </h2>
-                  <p className="text-xs text-slate-400">Gere as tuas personagens, molduras dinâmicas, arenas e títulos em uso.</p>
+                  <p className="text-xs text-slate-400">Gere as tuas personagens, arenas e títulos em uso.</p>
                 </div>
 
                 {/* Sub-tabs */}
@@ -496,16 +461,6 @@ export default function PerfilPage() {
                     }`}
                   >
                     Avatares
-                  </button>
-                  <button
-                    onClick={() => setInventoryFilter('molduras')}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      inventoryFilter === 'molduras'
-                        ? 'bg-purple-600 text-white shadow-md'
-                        : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
-                    }`}
-                  >
-                    Molduras
                   </button>
                   <button
                     onClick={() => setInventoryFilter('arenas')}
@@ -534,7 +489,6 @@ export default function PerfilPage() {
                 {unlockedCosmetics.map((item) => {
                   const isEquipped = 
                     (item.category === 'avatars' && (avatar === item.image || (item.id === 'avatar_vulcao_acores' && avatar.includes('vulcao-acores')))) ||
-                    (item.category === 'molduras' && (frame === item.id || (!frame && item.id === 'moldura_padrao'))) ||
                     (item.category === 'arenas' && arena === item.id) ||
                     (item.category === 'titulos' && (title === item.name || (!title && item.id === 'titulo_iniciante')))
 
@@ -562,9 +516,7 @@ export default function PerfilPage() {
                         {/* Preview */}
                         <div className="w-full h-32 rounded-xl overflow-hidden bg-black/40 border border-slate-800 flex items-center justify-center mb-3">
                           {item.category === 'avatars' && item.image ? (
-                            <UserAvatar avatarUrl={item.image} frameId={frame} size="lg" />
-                          ) : item.category === 'molduras' ? (
-                            <UserAvatar avatarUrl={avatar} frameId={item.id} size="lg" />
+                            <UserAvatar avatarUrl={item.image} size="lg" />
                           ) : item.image ? (
                             <img 
                               src={item.image} 
@@ -606,7 +558,7 @@ export default function PerfilPage() {
                 <div className="bg-slate-900/40 border-2 border-dashed border-slate-800 hover:border-purple-500/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center transition-all group min-h-[220px]">
                   <ShoppingBag className="w-8 h-8 text-purple-400 mb-2 group-hover:scale-110 transition-transform" />
                   <h3 className="font-bold text-sm text-white">Desbloquear Mais Cosméticos</h3>
-                  <p className="text-xs text-slate-400 mt-1 mb-4 max-w-[200px]">Visita a Loja para adquirir novos avatares, molduras e arenas.</p>
+                  <p className="text-xs text-slate-400 mt-1 mb-4 max-w-[200px]">Visita a Loja para adquirir novos avatares, arenas e títulos.</p>
                   <Link
                     href="/loja"
                     className="px-4 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/40 text-purple-300 border border-purple-500/40 text-xs font-bold transition-all"
