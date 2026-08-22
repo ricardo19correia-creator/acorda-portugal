@@ -409,10 +409,15 @@ export function Ranking() {
                   />
 
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <p className="truncate font-display font-bold text-foreground">
                         {currentUserEntry.name}
                       </p>
+                      {(currentUserEntry.equipped?.title || profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title'))) && (
+                        <span className={cn('rounded-full px-2 py-0.5 text-[0.6rem] font-bold shrink-0', getTitleBadgeStyle(currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))}>
+                          {(TITLE_SHOP_CATALOG.find((i) => i.id === (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                        </span>
+                      )}
                       <span className="rounded-full bg-primary/25 px-2 py-0.5 text-[0.65rem] font-black uppercase text-primary">
                         Tu
                       </span>

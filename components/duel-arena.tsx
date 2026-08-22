@@ -190,6 +190,7 @@ export function DuelArena({
     }
 
     const newBalance = savedEuros - pack.price
+    localStorage.setItem('user_coins', String(newBalance))
     localStorage.setItem('user_euros', String(newBalance))
 
     const newUnlocked = Array.from(new Set([...unlockedTaunts, pack.id]))
@@ -199,6 +200,7 @@ export function DuelArena({
     if (auth.currentUser) {
       try {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          coins: newBalance,
           euros: newBalance,
           'inventory.taunts': arrayUnion(pack.id),
         })

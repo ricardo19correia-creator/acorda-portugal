@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X } from 'lucide-react'
-import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
+import { doc, updateDoc, increment, arrayUnion, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
@@ -162,58 +162,136 @@ export default function LojaPage() {
 
   useEffect(() => {
     setMounted(true)
-    try {
-      const savedAvatar = localStorage.getItem('user_equipped_avatar')
-      if (savedAvatar && !savedAvatar.includes('moldura')) setEquippedAvatar(savedAvatar)
-      
-      const savedArena = localStorage.getItem('equipped_arena')
-      if (savedArena) setEquippedArena(savedArena)
+    const syncStore = () => {
+      try {
+        const savedAvatar = localStorage.getItem('user_equipped_avatar')
+        if (savedAvatar && !savedAvatar.includes('moldura')) setEquippedAvatar(savedAvatar)
+        
+        const savedArena = localStorage.getItem('equipped_arena')
+        if (savedArena) setEquippedArena(savedArena)
 
-      const savedTitle = localStorage.getItem('equipped_title')
-      if (savedTitle) setEquippedTitle(savedTitle)
+        const savedTitle = localStorage.getItem('equipped_title')
+        if (savedTitle) setEquippedTitle(savedTitle)
 
-      const savedEuros = localStorage.getItem('user_euros')
-      if (savedEuros) setUserBalance(Number(savedEuros))
+        const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
+        if (savedCoins) setUserBalance(Number(savedCoins))
 
-      const savedConsumables = localStorage.getItem('user_consumables')
-      if (savedConsumables) {
-        try {
-          const parsedCons = JSON.parse(savedConsumables)
-          if (parsedCons) setConsumables((prev) => ({ ...prev, ...parsedCons }))
-        } catch (e) {
-          console.error(e)
-        }
-      }
-
-      const savedInventory = localStorage.getItem('user_inventory')
-      if (savedInventory) {
-        try {
-          const parsedInv = JSON.parse(savedInventory)
-          if (parsedInv) {
-            setInventory((prev) => ({
-              avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
-              arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
-              titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
-            }))
+        const savedConsumables = localStorage.getItem('user_consumables')
+        if (savedConsumables) {
+          try {
+            const parsedCons = JSON.parse(savedConsumables)
+            if (parsedCons) setConsumables((prev) => ({ ...prev, ...parsedCons }))
+          } catch (e) {
+            console.error(e)
           }
-        } catch (e) {
-          console.error(e)
         }
-      }
 
-      const savedUnlocked = localStorage.getItem('user_unlocked_items')
-      if (savedUnlocked) {
-        try {
-          const parsed = JSON.parse(savedUnlocked)
-          if (Array.isArray(parsed)) {
-            setUnlockedItems(Array.from(new Set([...unlockedItems, ...parsed])))
+        const savedInventory = localStorage.getItem('user_inventory')
+        if (savedInventory) {
+          try {
+            const parsedInv = JSON.parse(savedInventory)
+            if (parsedInv) {
+              setInventory((prev) => ({
+                avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
+                arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
+                titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
+              }))
+            }
+          } catch (e) {
+            console.error(e)
           }
-        } catch (e) {
-          console.error(e)
         }
+
+        const savedUnlocked = localStorage.getItem('user_unlocked_items')
+        if (savedUnlocked) {
+          try {
+            const parsed = JSON.parse(savedUnlocked)
+            if (Array.isArray(parsed)) {
+              setUnlockedItems((prev) => Array.from(new Set([...prev, ...parsed])))
+            }
+          } catch (e) {
+            console.error(e)
+          }
+        }
+      } catch (e) {
+        console.error(e)
       }
-    } catch (e) {
-      console.error(e)
+    }
+
+    syncStore()
+
+    let unsubscribeSnapshot: (() => void) | undefined
+    if (auth.currentUser) {
+      try {
+        const userRef = doc(db, 'users', auth.currentUser.uid)
+        unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data()
+            const balance = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : null
+            if (balance !== null) {
+              setUserBalance(balance)
+              localStorage.setItem('user_coins', String(balance))
+              localStorage.setItem('user_euros', String(balance))
+            }
+            if (data.inventory) {
+              setInventory((prev) => ({
+                avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
+                arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
+                titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
+              }))
+              localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
+            }
+            if (data.consumables) {
+              setConsumables((prev) => ({ ...prev, ...data.consumables }))
+              localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
+            } else if (data.inventory?.utilities) {
+              const utils = data.inventory.utilities
+              setConsumables({
+                help5050: utils.fiftyFifty || 5,
+                freezeTime: utils.freezeTime || 3,
+              })
+            }
+            if (data.equippedAvatar || data.equipped?.avatar) {
+              const av = data.equipped?.avatar || data.equippedAvatar
+              if (av && !av.includes('moldura')) {
+                setEquippedAvatar(av)
+                localStorage.setItem('user_equipped_avatar', av)
+              }
+            }
+            if (data.equippedArena || data.equipped?.arena) {
+              const ar = data.equipped?.arena || data.equippedArena
+              setEquippedArena(ar)
+              localStorage.setItem('equipped_arena', ar)
+            }
+            if (data.equippedTitle || data.equipped?.title) {
+              const tit = data.equipped?.title || data.equippedTitle
+              setEquippedTitle(tit)
+              localStorage.setItem('equipped_title', tit)
+            }
+          }
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    window.addEventListener('avatarChanged', syncStore)
+    window.addEventListener('arenaChanged', syncStore)
+    window.addEventListener('titleChanged', syncStore)
+    window.addEventListener('consumables_updated', syncStore)
+    window.addEventListener('inventory_updated', syncStore)
+    window.addEventListener('balance_updated', syncStore)
+    window.addEventListener('storage', syncStore)
+
+    return () => {
+      if (unsubscribeSnapshot) unsubscribeSnapshot()
+      window.removeEventListener('avatarChanged', syncStore)
+      window.removeEventListener('arenaChanged', syncStore)
+      window.removeEventListener('titleChanged', syncStore)
+      window.removeEventListener('consumables_updated', syncStore)
+      window.removeEventListener('inventory_updated', syncStore)
+      window.removeEventListener('balance_updated', syncStore)
+      window.removeEventListener('storage', syncStore)
     }
   }, [])
 
@@ -358,12 +436,20 @@ export default function LojaPage() {
       setConsumables(updatedConsumables)
       localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
 
-      if (auth.currentUser && consumableKey) {
+      if (auth.currentUser) {
         try {
-          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          const updatePayload: any = {
+            coins: newBalance,
             euros: newBalance,
-            [consumableKey]: increment(amountAdded)
-          })
+          }
+          if (item.id === 'ajuda_5050') {
+            updatePayload['inventory.utilities.fiftyFifty'] = increment(5)
+            updatePayload['consumables.help5050'] = increment(5)
+          } else if (item.id === 'ajuda_congelar') {
+            updatePayload['inventory.utilities.freezeTime'] = increment(3)
+            updatePayload['consumables.freezeTime'] = increment(3)
+          }
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
         } catch (e) {
           console.error(e)
         }
@@ -386,8 +472,9 @@ export default function LojaPage() {
         if (auth.currentUser) {
           try {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedAvatar: item.id,
               'equipped.avatar': item.image,
-              avatar: item.image
+              avatar: item.image,
             })
           } catch (e) {
             console.error(e)
@@ -402,7 +489,8 @@ export default function LojaPage() {
         if (auth.currentUser) {
           try {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              'equipped.arena': item.id
+              equippedArena: item.id,
+              'equipped.arena': item.id,
             })
           } catch (e) {
             console.error(e)
@@ -416,7 +504,8 @@ export default function LojaPage() {
         if (auth.currentUser) {
           try {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              'equipped.title': item.name
+              equippedTitle: item.name,
+              'equipped.title': item.name,
             })
           } catch (e) {
             console.error(e)
@@ -443,6 +532,7 @@ export default function LojaPage() {
 
       const newBalance = userBalance - item.priceValue
       setUserBalance(newBalance)
+      localStorage.setItem('user_coins', String(newBalance))
       localStorage.setItem('user_euros', String(newBalance))
 
       // Atualizar Inventário
@@ -490,17 +580,21 @@ export default function LojaPage() {
       if (auth.currentUser) {
         try {
           const updatePayload: any = {
+            coins: newBalance,
             euros: newBalance,
           }
           if (firestoreInvField) {
             updatePayload[firestoreInvField] = arrayUnion(item.id)
           }
-          if (item.category === 'avatars' && item.image) {
-            updatePayload['equipped.avatar'] = item.image
-            updatePayload.avatar = item.image
+          if (item.category === 'avatars') {
+            updatePayload.equippedAvatar = item.id
+            updatePayload['equipped.avatar'] = item.image || item.id
+            updatePayload.avatar = item.image || item.id
           } else if (item.category === 'arenas') {
+            updatePayload.equippedArena = item.id
             updatePayload['equipped.arena'] = item.id
           } else if (item.category === 'titulos') {
+            updatePayload.equippedTitle = item.name
             updatePayload['equipped.title'] = item.name
           }
           await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)

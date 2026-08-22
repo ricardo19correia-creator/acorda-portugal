@@ -4,11 +4,15 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
-  ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, Palette, User
+  ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, Palette, User, Eye
 } from 'lucide-react'
 import { doc, updateDoc, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { UserAvatar } from '@/components/user-avatar'
+import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
+import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
+import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
+import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 
 interface InventoryItem {
   id: string
@@ -17,41 +21,83 @@ interface InventoryItem {
   description: string
   image?: string
   badge?: string
+  badgeColor?: string
+  effect?: string
 }
 
-const CATALOG_ITEMS: InventoryItem[] = [
-  // AVATARES
-  { id: 'avatar_vulcao_acores', name: 'Guardião Vulcânico Açores', category: 'avatars', description: 'Armadura forjada nas profundezas geotérmicas de São Miguel.', image: '/images/avatars/guardiao-vulcanico.jpg', badge: 'Épico' },
-  { id: 'avatar_camoes_2050', name: 'Luís de Camões 2050', category: 'avatars', description: 'O poeta épico renascido com visor cibernético e louros digitais.', image: '/images/avatars/camoes-2050.jpg', badge: 'Lendário' },
-  { id: 'avatar_lenda_futebol', name: 'Cyborg Camisola das Quinas', category: 'avatars', description: 'O derradeiro goleador cibernético nacional.', image: '/images/shop/cyborg-quinas.jpg', badge: 'Exclusivo' },
-  { id: 'avatar_fadista_cyber', name: 'Fadista Cyber-Alfama', category: 'avatars', description: 'Manto de néon roxo sob as vielas clássicas de Lisboa.', image: '/images/shop/fadista-cyber.jpg', badge: 'Raro' },
+const getAvatarBadgeColor = (rarity: string) => {
+  switch (rarity) {
+    case 'Exclusivo':
+      return 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+    case 'Lendário':
+      return 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+    case 'Épico':
+      return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40'
+    case 'Raro':
+      return 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+    default:
+      return 'bg-slate-500/20 text-slate-300 border-slate-500/40'
+  }
+}
 
-  // ARENAS
-  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
-  { id: 'arena_neon_2088', name: 'Arena VIP: Lisboa Neon 2088', category: 'arenas', description: 'Tema de jogo futurista exclusivo com silhuetas cyberpunk da Ponte 25 de Abril.', image: '/images/lisboa-2077.jpg', badge: 'Lendário' },
-  { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', image: '/images/shop/arena-fado-alfama.jpg', badge: 'Épico' },
-  { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
-
-  // TÍTULOS
-  { id: 'titulo_iniciante', name: 'Título: Noviço da Nação', category: 'titulos', description: 'O ponto de partida de todos os heróis portugueses.', badge: 'Iniciante' },
-  { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', image: '/images/shop/titulo-conquistador.jpg', badge: 'Honorífico' }
+// Catálogo Global Unificado para cruzamento de inventário
+const MASTER_PROFILE_CATALOG: InventoryItem[] = [
+  ...avatarShopList.map((a) => ({
+    id: a.id,
+    name: a.name,
+    category: 'avatars' as const,
+    description: a.description,
+    image: a.image,
+    badge: a.rarity,
+    badgeColor: getAvatarBadgeColor(a.rarity),
+  })),
+  ...ARENA_SHOP_CATALOG.map((ar) => ({
+    id: ar.id,
+    name: ar.name,
+    category: 'arenas' as const,
+    description: ar.description,
+    image: ar.image,
+    badge: ar.rarity,
+    badgeColor: ar.badgeColor,
+    effect: ar.effect,
+  })),
+  ...TITLE_SHOP_CATALOG.map((t) => ({
+    id: t.id,
+    name: t.name,
+    category: 'titulos' as const,
+    description: t.requirement || 'Título oficial concedido ao jogador.',
+    image: '/images/shop/titulo-conquistador.jpg',
+    badge: t.rarity,
+    badgeColor: t.badgeColor,
+  })),
 ]
 
 export default function PerfilPage() {
   const [mounted, setMounted] = useState(false)
-  const [avatar, setAvatar] = useState('/images/avatars/guardiao-vulcanico.jpg')
+  const [avatar, setAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
+  const [equippedAvatarId, setEquippedAvatarId] = useState<string>('guardiao-vulcanico')
   const [arena, setArena] = useState<string>('arena_ponte_2077')
-  const [title, setTitle] = useState<string>('Título: Noviço da Nação')
+  const [title, setTitle] = useState<string>('Filho de Portugal')
+  const [userCoins, setUserCoins] = useState<number>(803845)
   const [activeTab, setActiveTab] = useState<'inventario' | 'conquistas' | 'historico'>('inventario')
   const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'arenas' | 'titulos'>('todos')
   
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
-    avatars: ['avatar_vulcao_acores', 'avatar_camoes_2050'],
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts?: string[] }>({
+    avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
     arenas: ['arena_ponte_2077', 'arena_neon_2088'],
-    titles: ['titulo_iniciante']
+    titles: ['tit_filho_portugal', 'tit_novico', 'Filho de Portugal', 'Noviço da Nação']
   })
-  const [unlockedItems, setUnlockedItems] = useState<string[]>(['arena_neon_2088', 'arena_ponte_2077', 'avatar_vulcao_acores', 'avatar_camoes_2050', 'titulo_iniciante'])
+  const [unlockedItems, setUnlockedItems] = useState<string[]>([
+    'guardiao-vulcanico', 
+    'camoes-2050', 
+    'arena_neon_2088', 
+    'arena_ponte_2077', 
+    'avatar_vulcao_acores', 
+    'avatar_camoes_2050',
+    'tit_filho_portugal',
+    'Filho de Portugal'
+  ])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   const showToast = (msg: string) => {
@@ -70,11 +116,17 @@ export default function PerfilPage() {
           setAvatar('/images/avatars/guardiao-vulcanico.jpg')
         }
 
+        const savedAvatarId = localStorage.getItem('equipped_avatar_id')
+        if (savedAvatarId) setEquippedAvatarId(savedAvatarId)
+
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setArena(savedArena)
 
         const savedTitle = localStorage.getItem('equipped_title')
         if (savedTitle) setTitle(savedTitle)
+
+        const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
+        if (savedCoins) setUserCoins(Number(savedCoins))
 
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
@@ -128,9 +180,21 @@ export default function PerfilPage() {
         unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
           if (snap.exists()) {
             const data = snap.data()
+            const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : null
+            if (coinsVal !== null) {
+              setUserCoins(coinsVal)
+              localStorage.setItem('user_coins', String(coinsVal))
+              localStorage.setItem('user_euros', String(coinsVal))
+            }
             if (data.consumables) {
               setConsumables((prev) => ({ ...prev, ...data.consumables }))
               localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
+            } else if (data.inventory?.utilities) {
+              const utils = data.inventory.utilities
+              setConsumables({
+                help5050: utils.fiftyFifty || 5,
+                freezeTime: utils.freezeTime || 3,
+              })
             }
             if (data.inventory) {
               setInventory((prev) => ({
@@ -140,19 +204,26 @@ export default function PerfilPage() {
               }))
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
             }
-            if (data.equipped) {
-              if (data.equipped.avatar && !data.equipped.avatar.includes('moldura')) {
-                setAvatar(data.equipped.avatar)
-                localStorage.setItem('user_equipped_avatar', data.equipped.avatar)
+            if (data.equippedAvatar || data.equipped?.avatar || data.avatar) {
+              const avImg = data.equipped?.avatar || data.avatar
+              if (avImg && !avImg.includes('moldura')) {
+                setAvatar(avImg)
+                localStorage.setItem('user_equipped_avatar', avImg)
               }
-              if (data.equipped.arena) {
-                setArena(data.equipped.arena)
-                localStorage.setItem('equipped_arena', data.equipped.arena)
+              if (data.equippedAvatar) {
+                setEquippedAvatarId(data.equippedAvatar)
+                localStorage.setItem('equipped_avatar_id', data.equippedAvatar)
               }
-              if (data.equipped.title) {
-                setTitle(data.equipped.title)
-                localStorage.setItem('equipped_title', data.equipped.title)
-              }
+            }
+            if (data.equippedArena || data.equipped?.arena) {
+              const ar = data.equipped?.arena || data.equippedArena
+              setArena(ar)
+              localStorage.setItem('equipped_arena', ar)
+            }
+            if (data.equippedTitle || data.equipped?.title) {
+              const tit = data.equipped?.title || data.equippedTitle
+              setTitle(tit)
+              localStorage.setItem('equipped_title', tit)
             }
           }
         })
@@ -166,6 +237,7 @@ export default function PerfilPage() {
     window.addEventListener('titleChanged', syncProfile)
     window.addEventListener('consumables_updated', syncProfile)
     window.addEventListener('inventory_updated', syncProfile)
+    window.addEventListener('balance_updated', syncProfile)
     window.addEventListener('storage', syncProfile)
 
     return () => {
@@ -175,19 +247,24 @@ export default function PerfilPage() {
       window.removeEventListener('titleChanged', syncProfile)
       window.removeEventListener('consumables_updated', syncProfile)
       window.removeEventListener('inventory_updated', syncProfile)
+      window.removeEventListener('balance_updated', syncProfile)
       window.removeEventListener('storage', syncProfile)
     }
   }, [])
 
-  const handleEquipCosmetic = async (item: InventoryItem) => {
-    if (item.category === 'avatars' && item.image) {
-      setAvatar(item.image)
-      localStorage.setItem('user_equipped_avatar', item.image)
+  const handleEquipItem = async (item: InventoryItem) => {
+    if (item.category === 'avatars') {
+      const imgToSet = item.image || '/images/avatars/guardiao-vulcanico.jpg'
+      setAvatar(imgToSet)
+      setEquippedAvatarId(item.id)
+      localStorage.setItem('user_equipped_avatar', imgToSet)
+      localStorage.setItem('equipped_avatar_id', item.id)
       if (auth.currentUser) {
         try {
           await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            'equipped.avatar': item.image,
-            avatar: item.image
+            equippedAvatar: item.id,
+            'equipped.avatar': imgToSet,
+            avatar: imgToSet,
           })
         } catch (e) {
           console.error(e)
@@ -202,7 +279,8 @@ export default function PerfilPage() {
       if (auth.currentUser) {
         try {
           await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            'equipped.arena': item.id
+            equippedArena: item.id,
+            'equipped.arena': item.id,
           })
         } catch (e) {
           console.error(e)
@@ -213,10 +291,12 @@ export default function PerfilPage() {
     } else if (item.category === 'titulos') {
       setTitle(item.name)
       localStorage.setItem('equipped_title', item.name)
+      localStorage.setItem('equipped_title_id', item.id)
       if (auth.currentUser) {
         try {
           await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            'equipped.title': item.name
+            equippedTitle: item.name,
+            'equipped.title': item.name,
           })
         } catch (e) {
           console.error(e)
@@ -231,13 +311,25 @@ export default function PerfilPage() {
 
   if (!mounted) return <div className="min-h-screen bg-slate-950" />
 
-  // Filtrar itens desbloqueados
-  const unlockedCosmetics = CATALOG_ITEMS.filter((item) => {
-    const isUnlocked = 
-      unlockedItems.includes(item.id) ||
-      (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
-      (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
-      (item.category === 'titulos' && inventory.titles.includes(item.id))
+  // Cruzamento do inventário do utilizador com os catálogos globais
+  const unlockedCosmetics = MASTER_PROFILE_CATALOG.filter((item) => {
+    let isUnlocked = false
+
+    if (item.category === 'avatars') {
+      const isDefault = item.id === 'guardiao-vulcanico' || item.id === 'camoes-2050' || item.id === 'avatar_vulcao_acores' || item.id === 'avatar_camoes_2050'
+      isUnlocked = inventory.avatars.includes(item.id) || unlockedItems.includes(item.id) || isDefault
+    } else if (item.category === 'arenas') {
+      const isDefault = item.id === 'arena_ponte_2077'
+      isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
+    } else if (item.category === 'titulos') {
+      const isDefault = item.id === 'tit_filho_portugal' || item.name === 'Filho de Portugal' || item.id === 'tit_novico' || item.name === 'Noviço da Nação'
+      isUnlocked = 
+        inventory.titles.includes(item.id) ||
+        inventory.titles.includes(item.name) ||
+        unlockedItems.includes(item.id) ||
+        unlockedItems.includes(item.name) ||
+        isDefault
+    }
 
     if (!isUnlocked) return false
     if (inventoryFilter === 'todos') return true
@@ -262,12 +354,19 @@ export default function PerfilPage() {
           </div>
         )}
 
-        <Link 
-          href="/loja"
-          className="px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 text-sm font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]"
-        >
-          Ir para a Loja
-        </Link>
+        <div className="flex items-center gap-3">
+          <div className="px-3.5 py-1.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono text-xs font-black flex items-center gap-1.5 shadow-inner">
+            <span>🪙</span>
+            <span>{userCoins.toLocaleString('pt-PT')} €</span>
+          </div>
+
+          <Link 
+            href="/loja"
+            className="px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 text-sm font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+          >
+            Ir para a Loja
+          </Link>
+        </div>
       </div>
 
       {/* Profile Header Card */}
@@ -289,8 +388,10 @@ export default function PerfilPage() {
                 <Shield className="w-3 h-3" /> Vila Real
               </span>
             </div>
-            <p className="text-sm text-slate-300 font-medium">
-              {title} • Membro Fundador
+            <p className="text-sm text-slate-300 font-medium flex items-center justify-center md:justify-start gap-2">
+              <span className="text-amber-400 font-bold">« {title} »</span>
+              <span>•</span>
+              <span className="text-slate-400">Membro Fundador</span>
             </p>
             <div className="w-full bg-slate-800/80 rounded-full h-2.5 max-w-md mt-2">
               <div className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2.5 rounded-full w-[65%]" />
@@ -444,9 +545,9 @@ export default function PerfilPage() {
                 <div className="flex flex-wrap gap-1.5">
                   <button
                     onClick={() => setInventoryFilter('todos')}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                       inventoryFilter === 'todos'
-                        ? 'bg-purple-600 text-white shadow-md'
+                        ? 'bg-purple-600 text-white shadow-md font-black'
                         : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
@@ -454,33 +555,33 @@ export default function PerfilPage() {
                   </button>
                   <button
                     onClick={() => setInventoryFilter('avatars')}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                       inventoryFilter === 'avatars'
-                        ? 'bg-purple-600 text-white shadow-md'
+                        ? 'bg-purple-600 text-white shadow-md font-black'
                         : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
-                    Avatares
+                    Avatares ({MASTER_PROFILE_CATALOG.filter((i) => i.category === 'avatars' && (inventory.avatars.includes(i.id) || unlockedItems.includes(i.id) || i.id === 'guardiao-vulcanico')).length})
                   </button>
                   <button
                     onClick={() => setInventoryFilter('arenas')}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                       inventoryFilter === 'arenas'
-                        ? 'bg-purple-600 text-white shadow-md'
+                        ? 'bg-purple-600 text-white shadow-md font-black'
                         : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
-                    Arenas
+                    Arenas ({MASTER_PROFILE_CATALOG.filter((i) => i.category === 'arenas' && (inventory.arenas.includes(i.id) || unlockedItems.includes(i.id) || i.id === 'arena_ponte_2077')).length})
                   </button>
                   <button
                     onClick={() => setInventoryFilter('titulos')}
-                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                       inventoryFilter === 'titulos'
-                        ? 'bg-purple-600 text-white shadow-md'
+                        ? 'bg-purple-600 text-white shadow-md font-black'
                         : 'bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
-                    Títulos
+                    Títulos ({MASTER_PROFILE_CATALOG.filter((i) => i.category === 'titulos' && (inventory.titles.includes(i.id) || inventory.titles.includes(i.name) || unlockedItems.includes(i.id) || unlockedItems.includes(i.name) || i.id === 'tit_filho_portugal')).length})
                   </button>
                 </div>
               </div>
@@ -488,25 +589,27 @@ export default function PerfilPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {unlockedCosmetics.map((item) => {
                   const isEquipped = 
-                    (item.category === 'avatars' && (avatar === item.image || (item.id === 'avatar_vulcao_acores' && avatar.includes('vulcao-acores')))) ||
+                    (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || (item.id === 'guardiao-vulcanico' && avatar.includes('guardiao-vulcanico')))) ||
                     (item.category === 'arenas' && arena === item.id) ||
-                    (item.category === 'titulos' && (title === item.name || (!title && item.id === 'titulo_iniciante')))
+                    (item.category === 'titulos' && (title === item.name || title === item.id))
 
                   return (
                     <div 
                       key={item.id}
                       className={`bg-slate-900/80 border rounded-2xl p-4 flex flex-col justify-between backdrop-blur-md transition-all shadow-lg ${
-                        isEquipped ? 'border-emerald-500/80 ring-1 ring-emerald-500/30' : 'border-slate-800 hover:border-slate-700'
+                        isEquipped ? 'border-emerald-500/80 ring-2 ring-emerald-500/40 bg-emerald-950/20' : 'border-slate-800 hover:border-slate-700'
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                          <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${
+                            item.badgeColor || 'bg-purple-500/20 text-purple-300 border-purple-500/30'
+                          }`}>
                             {item.badge || item.category}
                           </span>
                           {isEquipped ? (
-                            <span className="text-[10px] font-black text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded flex items-center gap-1">
-                              <Check className="w-3 h-3" /> EQUIPADO
+                            <span className="text-[10px] font-black text-emerald-300 bg-emerald-950/80 border border-emerald-500/60 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                              <Check className="w-3 h-3 text-emerald-400" /> Equipado ✓
                             </span>
                           ) : (
                             <span className="text-[10px] font-bold text-slate-400">Desbloqueado</span>
@@ -514,16 +617,39 @@ export default function PerfilPage() {
                         </div>
 
                         {/* Preview */}
-                        <div className="w-full h-32 rounded-xl overflow-hidden bg-black/40 border border-slate-800 flex items-center justify-center mb-3">
+                        <div className="w-full h-32 rounded-xl overflow-hidden bg-black/40 border border-slate-800 flex items-center justify-center mb-3 relative">
                           {item.category === 'avatars' && item.image ? (
                             <UserAvatar avatarUrl={item.image} size="lg" />
+                          ) : item.category === 'arenas' && item.image ? (
+                            <div className="relative w-full h-full overflow-hidden">
+                              <img 
+                                src={item.image} 
+                                alt={item.name} 
+                                className="w-full h-full object-cover" 
+                                onError={(e) => {
+                                  e.currentTarget.src = '/images/hero-bg.jpg'
+                                }}
+                              />
+                              <ArenaEffectsLayer effect={(item.effect as any) || 'particles'} intensity="low" showContrastOverlay={false} />
+                            </div>
+                          ) : item.category === 'titulos' ? (
+                            <div className="flex flex-col items-center justify-center p-3 text-center w-full h-full bg-slate-950">
+                              <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 flex items-center gap-1">
+                                <Trophy className="w-3 h-3 text-yellow-400" /> TÍTULO OFICIAL
+                              </span>
+                              <span className={`px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-wide border ${
+                                item.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                              }`}>
+                                « {item.name} »
+                              </span>
+                            </div>
                           ) : item.image ? (
                             <img 
                               src={item.image} 
                               alt={item.name} 
                               className="w-full h-full object-cover" 
                               onError={(e) => {
-                                e.currentTarget.src = '/arenas/fundo-espaco.gif';
+                                e.currentTarget.src = '/images/hero-bg.jpg'
                               }}
                             />
                           ) : (
@@ -540,11 +666,13 @@ export default function PerfilPage() {
 
                       <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-end">
                         {isEquipped ? (
-                          <span className="text-xs font-bold text-emerald-400">Em Uso Atualmente</span>
+                          <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                            <Check className="w-3.5 h-3.5" /> Em Uso Atualmente
+                          </span>
                         ) : (
                           <button
-                            onClick={() => handleEquipCosmetic(item)}
-                            className="cursor-pointer px-4 py-1.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-md transition-all active:scale-95"
+                            onClick={() => handleEquipItem(item)}
+                            className="cursor-pointer px-4 py-1.5 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-md transition-all active:scale-95 flex items-center gap-1"
                           >
                             Equipar
                           </button>
