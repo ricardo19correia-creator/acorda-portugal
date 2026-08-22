@@ -7,10 +7,20 @@ import {
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, 
   User, Edit3, LogOut, Trash2, AlertTriangle, MessageSquare, 
-  ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck
+  ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
+  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle
 } from 'lucide-react'
 import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion } from 'firebase/firestore'
-import { signOut, deleteUser, updateProfile } from 'firebase/auth'
+import { 
+  signOut, 
+  deleteUser, 
+  updateProfile,
+  verifyBeforeUpdateEmail,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  sendEmailVerification
+} from 'firebase/auth'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { UserAvatar } from '@/components/user-avatar'
@@ -140,6 +150,207 @@ function PerfilContent() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isSavingEdit, setIsSavingEdit] = useState(false)
+
+  // Identificação do Provedor de Conta (Google vs Email/Password)
+  const isGoogleUser = useMemo(() => {
+    return user?.providerData?.some((p) => p.providerId === 'google.com') || false
+  }, [user])
+
+  // Verificação de Email
+  const [isSendingVerification, setIsSendingVerification] = useState(false)
+  const [verificationSentMessage, setVerificationSentMessage] = useState<string | null>(null)
+  const [verificationError, setVerificationError] = useState<string | null>(null)
+
+  // Modal: Alterar Email
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
+  const [newEmail, setNewEmail] = useState('')
+  const [confirmNewEmail, setConfirmNewEmail] = useState('')
+  const [emailCurrentPassword, setEmailCurrentPassword] = useState('')
+  const [emailLoading, setEmailLoading] = useState(false)
+  const [emailSuccessMessage, setEmailSuccessMessage] = useState<string | null>(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null)
+  const [emailRequiresRecentLogin, setEmailRequiresRecentLogin] = useState(false)
+
+  // Modal: Alterar Palavra-passe
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmNewPassword, setConfirmNewPassword] = useState('')
+  const [passwordLoading, setPasswordLoading] = useState(false)
+  const [passwordSuccessMessage, setPasswordSuccessMessage] = useState<string | null>(null)
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null)
+  const [showCurrentPass, setShowCurrentPass] = useState(false)
+  const [showNewPass, setShowNewPass] = useState(false)
+  const [showConfirmPass, setShowConfirmPass] = useState(false)
+
+  // Tradução amigável de erros de segurança de conta
+  const mapAccountError = (error: any): string => {
+    const code = error?.code || ''
+    const message = error?.message || ''
+
+    if (code === 'auth/requires-recent-login') {
+      return 'Por segurança, confirma novamente a tua palavra-passe atual.'
+    }
+    if (code === 'auth/email-already-in-use') {
+      return 'Esse email já está associado a outra conta.'
+    }
+    if (code === 'auth/invalid-email') {
+      return 'Introduz um email válido.'
+    }
+    if (code === 'auth/weak-password') {
+      return 'A palavra-passe não cumpre os requisitos de segurança (mínimo 6 caracteres).'
+    }
+    if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      return 'A palavra-passe atual está incorreta.'
+    }
+    if (code === 'auth/too-many-requests') {
+      return 'Foram feitas demasiadas tentativas. Tenta novamente mais tarde.'
+    }
+
+    return message || 'Ocorreu um erro ao processar o pedido.'
+  }
+
+  // Reenviar email de verificação
+  const handleSendVerification = async () => {
+    if (!auth.currentUser) return
+    setVerificationError(null)
+    setVerificationSentMessage(null)
+    setIsSendingVerification(true)
+
+    try {
+      await sendEmailVerification(auth.currentUser)
+      setVerificationSentMessage('Email de verificação enviado! Verifica a tua caixa de correio.')
+    } catch (err: any) {
+      setVerificationError(mapAccountError(err))
+    } finally {
+      setIsSendingVerification(false)
+    }
+  }
+
+  // Alterar Email
+  const handleUpdateEmail = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setEmailErrorMessage(null)
+    setEmailSuccessMessage(null)
+
+    const cleanNewEmail = newEmail.trim()
+    const cleanConfirmNewEmail = confirmNewEmail.trim()
+
+    if (!cleanNewEmail || !cleanConfirmNewEmail) {
+      setEmailErrorMessage('Preenche todos os campos de email.')
+      return
+    }
+
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!EMAIL_REGEX.test(cleanNewEmail)) {
+      setEmailErrorMessage('Introduz um email válido.')
+      return
+    }
+
+    if (cleanNewEmail.toLowerCase() !== cleanConfirmNewEmail.toLowerCase()) {
+      setEmailErrorMessage('Os dois endereços de email não coincidem.')
+      return
+    }
+
+    if (!auth.currentUser) {
+      setEmailErrorMessage('Sessão expirada. Volta a entrar.')
+      return
+    }
+
+    if (cleanNewEmail.toLowerCase() === auth.currentUser.email?.toLowerCase()) {
+      setEmailErrorMessage('O novo email deve ser diferente do email atual.')
+      return
+    }
+
+    setEmailLoading(true)
+
+    try {
+      if (emailCurrentPassword && auth.currentUser.email) {
+        try {
+          const credential = EmailAuthProvider.credential(auth.currentUser.email, emailCurrentPassword)
+          await reauthenticateWithCredential(auth.currentUser, credential)
+        } catch (reauthErr: any) {
+          setEmailErrorMessage(mapAccountError(reauthErr))
+          setEmailLoading(false)
+          return
+        }
+      }
+
+      await verifyBeforeUpdateEmail(auth.currentUser, cleanNewEmail)
+      setEmailSuccessMessage('Enviámos um email de confirmação para o teu novo endereço.')
+      setNewEmail('')
+      setConfirmNewEmail('')
+      setEmailCurrentPassword('')
+      setEmailRequiresRecentLogin(false)
+    } catch (err: any) {
+      if (err?.code === 'auth/requires-recent-login') {
+        setEmailRequiresRecentLogin(true)
+        setEmailErrorMessage('Por segurança, introduz a tua palavra-passe atual para confirmar a alteração.')
+      } else {
+        setEmailErrorMessage(mapAccountError(err))
+      }
+    } finally {
+      setEmailLoading(false)
+    }
+  }
+
+  // Alterar Palavra-passe
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPasswordErrorMessage(null)
+    setPasswordSuccessMessage(null)
+
+    const cleanCurrent = currentPassword
+    const cleanNew = newPassword
+    const cleanConfirm = confirmNewPassword
+
+    if (!cleanCurrent) {
+      setPasswordErrorMessage('Introduz a tua palavra-passe atual.')
+      return
+    }
+
+    if (!cleanNew || !cleanConfirm) {
+      setPasswordErrorMessage('Preenche a nova palavra-passe e a sua confirmação.')
+      return
+    }
+
+    if (cleanNew.length < 6) {
+      setPasswordErrorMessage('A nova palavra-passe deve conter pelo menos 6 caracteres.')
+      return
+    }
+
+    if (cleanNew !== cleanConfirm) {
+      setPasswordErrorMessage('A nova palavra-passe e a confirmação não coincidem.')
+      return
+    }
+
+    if (cleanNew === cleanCurrent) {
+      setPasswordErrorMessage('A nova palavra-passe não pode ser igual à atual.')
+      return
+    }
+
+    if (!auth.currentUser || !auth.currentUser.email) {
+      setPasswordErrorMessage('Sessão expirada. Volta a entrar.')
+      return
+    }
+
+    setPasswordLoading(true)
+
+    try {
+      const credential = EmailAuthProvider.credential(auth.currentUser.email, cleanCurrent)
+      await reauthenticateWithCredential(auth.currentUser, credential)
+      await updatePassword(auth.currentUser, cleanNew)
+
+      setPasswordSuccessMessage('Palavra-passe alterada com sucesso.')
+      setCurrentPassword('')
+      setNewPassword('')
+      setConfirmNewPassword('')
+    } catch (err: any) {
+      setPasswordErrorMessage(mapAccountError(err))
+    } finally {
+      setPasswordLoading(false)
+    }
+  }
 
   // Formulário do Modal de Edição
   const [editName, setEditName] = useState('')
@@ -1614,37 +1825,379 @@ function PerfilContent() {
       </div>
 
       {/* ========================================================= */}
-      {/* ÁREA DE GESTÃO DE CONTA & ZONA DE PERIGO */}
+      {/* SECÇÃO: SEGURANÇA E CONTA */}
       {/* ========================================================= */}
       <div className="w-full max-w-5xl mt-12 pt-8 border-t border-slate-800/80">
-        <div className="p-6 rounded-3xl bg-slate-900/50 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <h4 className="text-sm font-black text-white flex items-center gap-2">
-              <Shield className="w-4 h-4 text-slate-400" /> Definições de Conta &amp; Segurança
-            </h4>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Conectado como <strong>{user?.email || displayName}</strong> • Todos os dados guardados em nuvem.
-            </p>
+        <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-xl backdrop-blur-md">
+          {/* Cabeçalho da Secção */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shadow-inner">
+                <Shield className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-base font-black text-white">Segurança e conta</h4>
+                <p className="text-xs text-slate-400">Gere o teu método de acesso, credenciais e verificação de identidade.</p>
+              </div>
+            </div>
+
+            {isGoogleUser ? (
+              <span className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs font-bold shadow-sm">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+                Conta Google
+              </span>
+            ) : (
+              <span className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold shadow-sm">
+                <Mail className="w-3.5 h-3.5" />
+                Conta Email / Palavra-passe
+              </span>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsLogoutModalOpen(true)}
-              className="cursor-pointer px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all"
-            >
-              Terminar Sessão
-            </button>
+          {/* Grelha de Informações de Segurança */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {/* Bloco 1: Email */}
+            <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Email da Conta</span>
+                <p className="text-sm font-bold text-white truncate">{user?.email || 'Nenhum email associado'}</p>
+                
+                {/* Estado de Verificação */}
+                <div className="mt-2.5 flex items-center gap-2">
+                  {user?.emailVerified ? (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Email verificado
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold">
+                      <AlertTriangle className="w-3.5 h-3.5" /> Email não verificado
+                    </span>
+                  )}
+                </div>
 
-            <button
-              onClick={() => setIsDeleteModalOpen(true)}
-              className="cursor-pointer px-4 py-2 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 transition-all flex items-center gap-1.5"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>Eliminar Conta</span>
-            </button>
+                {!user?.emailVerified && !isGoogleUser && (
+                  <div className="mt-3">
+                    <button
+                      type="button"
+                      onClick={handleSendVerification}
+                      disabled={isSendingVerification}
+                      className="cursor-pointer text-xs font-bold text-cyan-400 hover:text-cyan-300 bg-cyan-950/40 border border-cyan-800/60 hover:border-cyan-500/50 px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+                    >
+                      <RefreshCw className={cn("w-3 h-3", isSendingVerification && "animate-spin")} />
+                      <span>{isSendingVerification ? 'A enviar...' : 'Reenviar email de verificação'}</span>
+                    </button>
+                    {verificationSentMessage && (
+                      <p className="text-[11px] text-emerald-400 font-medium mt-1.5">{verificationSentMessage}</p>
+                    )}
+                    {verificationError && (
+                      <p className="text-[11px] text-rose-400 font-medium mt-1.5">{verificationError}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {!isGoogleUser && (
+                <div className="mt-4 pt-3 border-t border-slate-800/80">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmailErrorMessage(null)
+                      setEmailSuccessMessage(null)
+                      setIsEmailModalOpen(true)
+                    }}
+                    className="cursor-pointer px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Alterar email</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Bloco 2: Palavra-passe / Google Info */}
+            <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">
+                  {isGoogleUser ? 'Método de Autenticação' : 'Palavra-passe'}
+                </span>
+
+                {isGoogleUser ? (
+                  <div className="mt-1">
+                    <p className="text-sm font-bold text-slate-200">Esta conta utiliza o Google para autenticação.</p>
+                    <p className="text-xs text-slate-400 mt-1">A gestão de credenciais e segurança é assegurada diretamente pela Google.</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-sm font-mono tracking-widest text-slate-300 font-bold">••••••••••••</p>
+                    <p className="text-[11px] text-slate-400 mt-1">Protegida por cifra padrão Firebase Authentication.</p>
+                  </div>
+                )}
+              </div>
+
+              {!isGoogleUser && (
+                <div className="mt-4 pt-3 border-t border-slate-800/80">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPasswordErrorMessage(null)
+                      setPasswordSuccessMessage(null)
+                      setIsPasswordModalOpen(true)
+                    }}
+                    className="cursor-pointer px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+                  >
+                    <Lock className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Alterar palavra-passe</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Zona de Perigo & Ações Globais da Conta */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-800/80">
+            <p className="text-xs text-slate-400 text-center sm:text-left">
+              Conectado como <strong>{user?.email || displayName}</strong> • Todos os dados guardados em nuvem.
+            </p>
+
+            <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => setIsLogoutModalOpen(true)}
+                className="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all shadow-sm active:scale-95"
+              >
+                Terminar Sessão
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsDeleteModalOpen(true)}
+                className="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Eliminar Conta</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* ========================================================= */}
+      {/* MODAL: ALTERAR EMAIL */}
+      {/* ========================================================= */}
+      {isEmailModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-white">
+            <h3 className="text-lg font-black text-white flex items-center gap-2 mb-1">
+              <Mail className="w-5 h-5 text-indigo-400" /> Alterar Email da Conta
+            </h3>
+            <p className="text-xs text-slate-400 mb-5">
+              Email atual: <strong>{user?.email}</strong>
+            </p>
+
+            {emailErrorMessage && (
+              <div className="mb-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-xs font-bold text-rose-400 flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>{emailErrorMessage}</span>
+              </div>
+            )}
+
+            {emailSuccessMessage && (
+              <div className="mb-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-400 flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>{emailSuccessMessage}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleUpdateEmail} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  Novo Endereço de Email
+                </label>
+                <input
+                  type="email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  required
+                  placeholder="novo.email@exemplo.pt"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-400 focus:outline-none text-sm text-white font-medium shadow-inner"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  Confirmar Novo Email
+                </label>
+                <input
+                  type="email"
+                  value={confirmNewEmail}
+                  onChange={(e) => setConfirmNewEmail(e.target.value)}
+                  required
+                  placeholder="Confirma o novo email"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-400 focus:outline-none text-sm text-white font-medium shadow-inner"
+                />
+              </div>
+
+              {emailRequiresRecentLogin && (
+                <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/40">
+                  <label className="block text-xs font-bold text-amber-300 mb-1.5">
+                    Palavra-passe Atual (Confirmação de Segurança)
+                  </label>
+                  <input
+                    type="password"
+                    value={emailCurrentPassword}
+                    onChange={(e) => setEmailCurrentPassword(e.target.value)}
+                    required
+                    placeholder="A tua palavra-passe atual"
+                    className="w-full px-4 py-2 rounded-lg bg-slate-900 border border-amber-500/50 focus:border-amber-400 focus:outline-none text-sm text-white font-medium"
+                  />
+                </div>
+              )}
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => setIsEmailModalOpen(false)}
+                  className="cursor-pointer px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-colors"
+                >
+                  Fechar
+                </button>
+                <button
+                  type="submit"
+                  disabled={emailLoading}
+                  className="cursor-pointer px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-lg transition-all active:scale-95 disabled:opacity-50"
+                >
+                  {emailLoading ? 'A processar...' : 'Guardar Novo Email'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* MODAL: ALTERAR PALAVRA-PASSE */}
+      {/* ========================================================= */}
+      {isPasswordModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-white">
+            <h3 className="text-lg font-black text-white flex items-center gap-2 mb-1">
+              <Lock className="w-5 h-5 text-indigo-400" /> Alterar Palavra-passe
+            </h3>
+            <p className="text-xs text-slate-400 mb-5">
+              Introduz a tua palavra-passe atual para definir uma nova chave de acesso.
+            </p>
+
+            {passwordErrorMessage && (
+              <div className="mb-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-xs font-bold text-rose-400 flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>{passwordErrorMessage}</span>
+              </div>
+            )}
+
+            {passwordSuccessMessage && (
+              <div className="mb-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-400 flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>{passwordSuccessMessage}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleUpdatePassword} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  Palavra-passe Atual
+                </label>
+                <div className="relative">
+                  <input
+                    type={showCurrentPass ? 'text' : 'password'}
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    required
+                    placeholder="A tua palavra-passe atual"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-400 focus:outline-none text-sm text-white font-medium pr-10 shadow-inner"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPass(!showCurrentPass)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                  >
+                    {showCurrentPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  Nova Palavra-passe
+                </label>
+                <div className="relative">
+                  <input
+                    type={showNewPass ? 'text' : 'password'}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    minLength={6}
+                    required
+                    placeholder="Mínimo 6 caracteres"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-400 focus:outline-none text-sm text-white font-medium pr-10 shadow-inner"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPass(!showNewPass)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                  >
+                    {showNewPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  Confirmar Nova Palavra-passe
+                </label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPass ? 'text' : 'password'}
+                    value={confirmNewPassword}
+                    onChange={(e) => setConfirmNewPassword(e.target.value)}
+                    minLength={6}
+                    required
+                    placeholder="Confirma a nova palavra-passe"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-400 focus:outline-none text-sm text-white font-medium pr-10 shadow-inner"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPass(!showConfirmPass)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                  >
+                    {showConfirmPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => setIsPasswordModalOpen(false)}
+                  className="cursor-pointer px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-colors"
+                >
+                  Fechar
+                </button>
+                <button
+                  type="submit"
+                  disabled={passwordLoading}
+                  className="cursor-pointer px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-lg transition-all active:scale-95 disabled:opacity-50"
+                >
+                  {passwordLoading ? 'A guardar...' : 'Alterar Palavra-passe'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ========================================================= */}
       {/* MODAL 1: EDITAR PERFIL */}
