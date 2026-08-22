@@ -369,28 +369,34 @@ export default function AjudaPage() {
     setReportErrorMsg('')
 
     try {
-      await addDoc(collection(db, 'reports'), {
-        type: reportType || 'Erro técnico',
-        description: reportDescription.trim(),
-        page: reportLocation.trim() || 'N/A',
-        userEmail: reportEmail.trim() || user?.email || 'anónimo',
-        createdAt: serverTimestamp(),
-        status: 'pendente',
-        platform: 'web-mobile',
+      const res = await fetch('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: reportType || 'Erro técnico',
+          description: reportDescription.trim(),
+          page: reportLocation.trim() || 'N/A',
+          userEmail: reportEmail.trim() || user?.email || 'anónimo',
+        }),
       })
 
-      setReportStatus('success')
-      setReportDescription('')
-      setReportLocation('')
+      if (res.ok) {
+        setReportStatus('success')
+        setReportDescription('')
+        setReportLocation('')
 
-      // Limpar formulário após 2 segundos e fechar modal
-      setTimeout(() => {
-        setReportStatus('idle')
-        setReportModalOpen(false)
-      }, 2000)
+        // Limpar formulário após 2 segundos e fechar modal
+        setTimeout(() => {
+          setReportStatus('idle')
+          setReportModalOpen(false)
+        }, 2000)
+      } else {
+        setReportErrorMsg('Ocorreu um erro ao enviar. Tenta novamente.')
+        setReportStatus('error')
+      }
     } catch (err: any) {
       console.error('Erro ao submeter relatório:', err)
-      setReportErrorMsg('Ocorreu um erro ao enviar. Tenta novamente.')
+      setReportErrorMsg('Erro de ligação. Tenta novamente.')
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
