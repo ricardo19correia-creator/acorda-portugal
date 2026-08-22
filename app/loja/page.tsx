@@ -494,108 +494,141 @@ export default function LojaPage() {
           </button>
         </div>
 
-        {/* Items Grid */}
-        <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filteredItems.map((item) => {
-            const isConsumable = item.category === 'ajudas'
-            const isUnlocked = !isConsumable && (
-              item.priceValue === 0 || 
-              unlockedItems.includes(item.id) ||
-              (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
-              (item.category === 'molduras' && inventory.frames.includes(item.id)) ||
-              (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
-              (item.category === 'titulos' && inventory.titles.includes(item.id))
-            )
-            const isEquipped = !isConsumable && (
-              (item.category === 'avatars' && equippedAvatar === item.image) || 
-              (item.category === 'arenas' && equippedArena === item.id) ||
-              (item.category === 'molduras' && equippedFrame === item.id) ||
-              (item.category === 'titulos' && equippedTitle === item.name)
-            )
+        {/* VIP Tab Coming Soon Teaser */}
+        {activeTab === 'vip' ? (
+          <div className="w-full max-w-6xl py-16 px-6 text-center rounded-3xl bg-slate-900/50 border border-amber-500/20 backdrop-blur-xl relative overflow-hidden my-6">
+            {/* Glow néon âmbar */}
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 max-w-md mx-auto space-y-4">
+              <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(245,158,11,0.2)]">
+                🔒
+              </div>
+              
+              <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black tracking-widest uppercase">
+                Acesso Antecipado
+              </span>
+              
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                EXCLUSIVOS VIP <span className="text-amber-400">BREVEMENTE</span>
+              </h3>
+              
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Estamos a preparar o Passe Fundador da Nação, pacotes de cosméticos lendários e arenas animadas com suporte a MB WAY.
+              </p>
+              
+              <div className="pt-2">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  Lançamento na Temporada 1
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* Items Grid */
+          <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {filteredItems.map((item) => {
+              const isConsumable = item.category === 'ajudas'
+              const isUnlocked = !isConsumable && (
+                item.priceValue === 0 || 
+                unlockedItems.includes(item.id) ||
+                (item.category === 'avatars' && inventory.avatars.includes(item.id)) ||
+                (item.category === 'molduras' && inventory.frames.includes(item.id)) ||
+                (item.category === 'arenas' && inventory.arenas.includes(item.id)) ||
+                (item.category === 'titulos' && inventory.titles.includes(item.id))
+              )
+              const isEquipped = !isConsumable && (
+                (item.category === 'avatars' && equippedAvatar === item.image) || 
+                (item.category === 'arenas' && equippedArena === item.id) ||
+                (item.category === 'molduras' && equippedFrame === item.id) ||
+                (item.category === 'titulos' && equippedTitle === item.name)
+              )
 
-            const isGoldFrame = item.id === 'moldura_ouro_real'
-            const isNeonFrame = item.id === 'moldura_neon_portugal'
+              const isGoldFrame = item.id === 'moldura_ouro_real'
+              const isNeonFrame = item.id === 'moldura_neon_portugal'
 
-            return (
-              <div 
-                key={item.id}
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] shadow-lg"
-              >
-                <div>
-                  {/* Badge */}
-                  {item.badge && (
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        {item.badge}
-                      </span>
-                      {isUnlocked && (
-                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
-                          <Check className="w-3 h-3" /> Desbloqueado
+              return (
+                <div 
+                  key={item.id}
+                  className="group relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] shadow-lg"
+                >
+                  <div>
+                    {/* Badge */}
+                    {item.badge && (
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                          {item.badge}
                         </span>
-                      )}
-                      {isConsumable && (
-                        <span className="text-[10px] font-bold text-amber-400">
-                          {item.id === 'ajuda_5050' ? `Tens: ${consumables.help5050 || 0}` : `Tens: ${consumables.freezeTime || 0}`}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Image / Preview */}
-                  <div className="relative aspect-video sm:aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
-                    {item.image ? (
-                      <img 
-                        src={item.image} 
-                        alt={item.name} 
-                        className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                          isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : ''
-                        }`} 
-                        onError={(e) => {
-                          e.currentTarget.src = '/arenas/fundo-espaco.gif';
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-600">
-                        <Sparkles className="w-8 h-8" />
+                        {isUnlocked && (
+                          <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                            <Check className="w-3 h-3" /> Desbloqueado
+                          </span>
+                        )}
+                        {isConsumable && (
+                          <span className="text-[10px] font-bold text-amber-400">
+                            {item.id === 'ajuda_5050' ? `Tens: ${consumables.help5050 || 0}` : `Tens: ${consumables.freezeTime || 0}`}
+                          </span>
+                        )}
                       </div>
                     )}
-                    {/* Efeito de brilho pulsante para itens especiais */}
-                    <div className="pointer-events-none absolute inset-0 animate-pulse bg-gradient-to-t from-purple-500/10 via-transparent to-transparent" />
+
+                    {/* Image / Preview */}
+                    <div className="relative aspect-video sm:aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
+                      {item.image ? (
+                        <img 
+                          src={item.image} 
+                          alt={item.name} 
+                          className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                            isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : ''
+                          }`} 
+                          onError={(e) => {
+                            e.currentTarget.src = '/arenas/fundo-espaco.gif';
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-600">
+                          <Sparkles className="w-8 h-8" />
+                        </div>
+                      )}
+                      {/* Efeito de brilho pulsante para itens especiais */}
+                      <div className="pointer-events-none absolute inset-0 animate-pulse bg-gradient-to-t from-purple-500/10 via-transparent to-transparent" />
+                    </div>
+
+                    <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-400 line-clamp-2">
+                      {item.description}
+                    </p>
                   </div>
 
-                  <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
-                    {item.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-400 line-clamp-2">
-                    {item.description}
-                  </p>
-                </div>
+                  {/* Ação e Preço */}
+                  <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                    <span className="font-mono text-sm font-semibold text-yellow-400">
+                      {item.price}
+                    </span>
 
-                {/* Ação e Preço */}
-                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
-                  <span className="font-mono text-sm font-semibold text-yellow-400">
-                    {item.price}
-                  </span>
-
-                  <button
-                    onClick={() => handleAction(item)}
-                    className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
-                      isConsumable
-                        ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
-                        : isEquipped
-                        ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
-                        : isUnlocked
-                        ? 'bg-purple-600 text-white hover:bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]'
-                        : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
-                    }`}
-                  >
-                    {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
-                  </button>
+                    <button
+                      onClick={() => handleAction(item)}
+                      className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
+                        isConsumable
+                          ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                          : isEquipped
+                          ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
+                          : isUnlocked
+                          ? 'bg-purple-600 text-white hover:bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]'
+                          : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                      }`}
+                    >
+                      {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )
