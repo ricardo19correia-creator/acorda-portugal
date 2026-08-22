@@ -274,15 +274,6 @@ export default function AjudaPage() {
   const [reportStatus, setReportStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [reportErrorMsg, setReportErrorMsg] = useState('')
 
-  // Contact Support Modal State
-  const [contactModalOpen, setContactModalOpen] = useState(false)
-  const [contactEmail, setContactEmail] = useState(user?.email || '')
-  const [contactSubject, setContactSubject] = useState('Dúvida Geral')
-  const [contactMessage, setContactMessage] = useState('')
-  const [contactSubmitting, setContactSubmitting] = useState(false)
-  const [contactStatus, setContactStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [contactErrorMsg, setContactErrorMsg] = useState('')
-
   const faqListRef = useRef<HTMLDivElement | null>(null)
 
   // Filter FAQ questions based on search query and active category
@@ -346,59 +337,6 @@ export default function AjudaPage() {
 
     if (faqListRef.current) {
       faqListRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
-
-  // Handle Contact Support Action
-  const handleContactSupport = () => {
-    setContactModalOpen(true)
-    setContactStatus('idle')
-    setContactErrorMsg('')
-    if (!contactEmail && user?.email) {
-      setContactEmail(user.email)
-    }
-  }
-
-  // Handle Submit Contact Message
-  const handleSubmitContact = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!contactEmail.trim() || !contactMessage.trim()) {
-      setContactErrorMsg('Por favor preenche o teu email e a mensagem.')
-      setContactStatus('error')
-      return
-    }
-
-    setContactSubmitting(true)
-    setContactStatus('idle')
-    setContactErrorMsg('')
-
-    try {
-      await addDoc(collection(db, 'support_messages'), {
-        subject: contactSubject || 'Dúvida Geral',
-        message: contactMessage.trim(),
-        senderEmail: contactEmail.trim(),
-        recipientEmail: 'acorda.portugal.desafio.nacional@gmail.com',
-        userId: user?.uid || null,
-        userDisplayName: profile?.displayName || user?.displayName || 'Jogador',
-        createdAt: serverTimestamp(),
-        status: 'novo',
-      })
-
-      setContactStatus('success')
-      setContactMessage('')
-
-      // Limpar formulário após 2 segundos e fechar modal
-      setTimeout(() => {
-        setContactStatus('idle')
-        setContactModalOpen(false)
-      }, 2000)
-    } catch (err: any) {
-      console.error('Erro ao enviar mensagem de suporte:', err)
-      setContactErrorMsg(`Erro: ${err?.message || 'Falha de comunicação.'}`)
-      setContactStatus('error')
-    } finally {
-      setContactSubmitting(false)
     }
   }
 
@@ -750,25 +688,26 @@ export default function AjudaPage() {
                 A nossa equipa está aqui para ajudar. Entra em contacto direto connosco ou reporta qualquer anomalia técnica.
               </p>
 
-              {/* Action Buttons: Stack on mobile, inline on tablet/desktop */}
-              <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleContactSupport}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-6 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-102 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  <span>Contactar Suporte</span>
-                </button>
-
+              {/* Action Button: Center single button */}
+              <div className="mt-6 flex flex-col items-center justify-center">
                 <button
                   type="button"
                   onClick={() => setReportModalOpen(true)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-6 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-foreground hover:bg-white/20 transition cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-8 py-4 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-105 hover:brightness-110 shadow-xl shadow-emerald-500/25 transition cursor-pointer"
                 >
-                  <AlertCircle className="h-4 w-4 text-rose-400" />
-                  <span>Reportar um Problema</span>
+                  <AlertCircle className="h-4 w-4 text-slate-950" />
+                  <span>⚠️ REPORTAR UM PROBLEMA</span>
                 </button>
+
+                <p className="mt-4 text-xs text-slate-400">
+                  Para outros assuntos ou parcerias:{' '}
+                  <a
+                    href="mailto:acorda.portugal.desafio.nacional@gmail.com"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    acorda.portugal.desafio.nacional@gmail.com
+                  </a>
+                </p>
               </div>
             </div>
           </section>
@@ -930,170 +869,6 @@ export default function AjudaPage() {
                       </>
                     )}
                   </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================= */}
-      {/* 8. MODAL: CONTACTAR SUPORTE */}
-      {/* ========================================================= */}
-      {contactModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="contact-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
-        >
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900 p-6 sm:p-8 shadow-2xl">
-            {/* Close button */}
-            <button
-              type="button"
-              onClick={() => {
-                setContactModalOpen(false)
-                setContactStatus('idle')
-              }}
-              aria-label="Fechar modal"
-              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Modal Header */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                <MessageSquare className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 id="contact-modal-title" className="font-display text-lg font-black uppercase text-foreground">
-                  Contactar Suporte
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  Envia a tua dúvida, sugestão ou proposta para a equipa oficial.
-                </p>
-              </div>
-            </div>
-
-            {contactStatus === 'success' ? (
-              <div className="py-6 text-center space-y-3">
-                <div className="grid h-14 w-14 mx-auto place-items-center rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 animate-bounce">
-                  <CheckCircle2 className="h-7 w-7" />
-                </div>
-                <h4 className="font-display text-base font-bold text-emerald-400">
-                  ✅ Mensagem enviada com sucesso! Responderemos brevemente.
-                </h4>
-                <p className="text-xs text-muted-foreground">
-                  A janela fechará automaticamente dentro de instantes...
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmitContact} className="space-y-4">
-                {/* Email de contacto */}
-                <div>
-                  <label htmlFor="contact-email" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    O teu Email *
-                  </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    required
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    placeholder="email@exemplo.pt"
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  />
-                </div>
-
-                {/* Motivo do Contacto */}
-                <div>
-                  <label htmlFor="contact-subject" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Motivo do Contacto *
-                  </label>
-                  <select
-                    id="contact-subject"
-                    value={contactSubject}
-                    onChange={(e) => setContactSubject(e.target.value)}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  >
-                    <option value="Dúvida Geral">Dúvida Geral</option>
-                    <option value="Sugestão de Pergunta">Sugestão de Pergunta</option>
-                    <option value="Parcerias">Parcerias</option>
-                    <option value="Conta / Apoio Fundador">Conta / Apoio Fundador</option>
-                    <option value="Outro">Outro</option>
-                  </select>
-                </div>
-
-                {/* Mensagem */}
-                <div>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <label htmlFor="contact-message" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
-                      Mensagem *
-                    </label>
-                    <span className="text-[10px] text-muted-foreground">
-                      {contactMessage.length}/1000
-                    </span>
-                  </div>
-                  <textarea
-                    id="contact-message"
-                    rows={4}
-                    maxLength={1000}
-                    value={contactMessage}
-                    onChange={(e) => setContactMessage(e.target.value)}
-                    placeholder="Escreve a tua mensagem aqui com detalhe..."
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-3 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
-                    required
-                  />
-                </div>
-
-                {/* Mensagem de Erro */}
-                {contactStatus === 'error' && (
-                  <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-xs text-rose-200 flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
-                    <span>{contactErrorMsg || 'Não foi possível enviar a mensagem. Tenta novamente.'}</span>
-                  </div>
-                )}
-
-                {/* Submit Action & Shortcut */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-                  {/* Atalho de Email Direto */}
-                  <div className="text-[11px] text-muted-foreground text-center sm:text-left w-full sm:w-auto">
-                    Email direto:{' '}
-                    <a
-                      href="mailto:acorda.portugal.desafio.nacional@gmail.com?subject=[Suporte%20Acorda%20Portugal]"
-                      className="text-emerald-400 font-semibold hover:underline block sm:inline"
-                    >
-                      acorda.portugal.desafio.nacional@gmail.com
-                    </a>
-                  </div>
-
-                  <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                    <button
-                      type="button"
-                      onClick={() => setContactModalOpen(false)}
-                      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-muted-foreground hover:bg-white/10 hover:text-white transition"
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={contactSubmitting || !contactMessage.trim() || !contactEmail.trim()}
-                      className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2 font-display text-xs font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {contactSubmitting ? (
-                        <>
-                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                          <span>A enviar...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-3.5 w-3.5" />
-                          <span>ENVIAR</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
               </form>
             )}
