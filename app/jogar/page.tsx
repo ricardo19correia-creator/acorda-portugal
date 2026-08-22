@@ -1,10 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
+import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 
-export default function JogarPage() {
-  const [arenaImage, setArenaImage] = useState<string>('/arenas/fundo-espaco.gif')
+function JogarContainer() {
+  const searchParams = useSearchParams()
+  const categoryParam = searchParams.get('cat')
+  const gameParam = searchParams.get('game')
+  const isPlaying = Boolean(categoryParam || gameParam)
+  
+  const [arenaImage, setArenaImage] = useState<string>('/images/hero-bg.jpg')
 
   useEffect(() => {
     const sync = () => {
@@ -12,20 +19,23 @@ export default function JogarPage() {
         const savedImage = localStorage.getItem('equipped_arena_image')
         const savedArena = localStorage.getItem('equipped_arena')
 
-        if (savedImage && savedImage.startsWith('/')) {
+        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('fundo-espaco')) {
           setArenaImage(savedImage)
-        } else if (savedArena === 'arena_matriz_cosmica' || savedArena === 'theme_arena_cosmic_matrix') {
-          setArenaImage('/arenas/fundo-espaco.gif')
-        } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
-          setArenaImage('/arenas/arena-ponte-2077.gif')
-        } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
-          setArenaImage('/images/shop/arena-fado-alfama.jpg')
-        } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores') {
-          setArenaImage('/images/shop/arena-fogo-acores.jpg')
-        } else if (savedArena === 'theme_arena_biblioteca_sagrada') {
-          setArenaImage('/arenas/biblioteca-sagrada.jpg')
+        } else if (savedArena) {
+          const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
+          if (catalogItem?.image) {
+            setArenaImage(catalogItem.image)
+          } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
+            setArenaImage('/arenas/arena-ponte-2077.gif')
+          } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
+            setArenaImage('/images/shop/arena-fado-alfama.jpg')
+          } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores' || savedArena === 'arena_vulcao_erupcao') {
+            setArenaImage('/images/shop/arena-fogo-acores.jpg')
+          } else {
+            setArenaImage('/images/hero-bg.jpg')
+          }
         } else {
-          setArenaImage('/arenas/fundo-espaco.gif')
+          setArenaImage('/images/hero-bg.jpg')
         }
       }
     }
@@ -43,22 +53,32 @@ export default function JogarPage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
-      {/* 1. CAMADA DE FUNDO FIXA (Atrás de tudo com -z-10 e sem bloquear cliques) */}
-      <div 
-        className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(5, 10, 20, 0.60), rgba(5, 10, 20, 0.85)), url('${arenaImage}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
+    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+      {/* 1. SE A PARTIDA ESTIVER ATIVA (isPlaying === true): Exibe a imagem da arena equipada COM 100% DE BRILHO E NITIDEZ, SEM OVERLAYS ESCUROS */}
+      {isPlaying && arenaImage && (
+        <div 
+          className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: `url('${arenaImage}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
 
-      {/* 2. CONTEÚDO DO JOGO (À frente e 100% interativo com z-10) */}
+      {/* 2. CONTEÚDO DA CENTRAL DE JOGO / SESSÃO ATIVA DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
         <QuizPage />
       </main>
     </div>
+  )
+}
+
+export default function JogarPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
+      <JogarContainer />
+    </Suspense>
   )
 }

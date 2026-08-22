@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { BackgroundFx } from '@/components/background-fx'
 import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
@@ -9,7 +9,8 @@ import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
-import { ArrowLeft, Swords, Play, Key, Sparkles, Trophy } from 'lucide-react'
+import { ArrowLeft, Swords, Sparkles } from 'lucide-react'
+import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 
 function DuelPageContent() {
   const router = useRouter()
@@ -17,6 +18,7 @@ function DuelPageContent() {
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
+  const [arenaImage, setArenaImage] = useState<string>('/images/hero-bg.jpg')
 
   // Prioridade ao ID da URL para navegação limpa na revanche
   const effectiveDuelId = duelIdFromUrl || activeDuelId
@@ -25,6 +27,43 @@ function DuelPageContent() {
     setActiveDuelId(newDuelId)
     router.push(`/jogar/duelo?id=${newDuelId}`)
   }
+
+  useEffect(() => {
+    const sync = () => {
+      if (typeof window !== 'undefined') {
+        const savedImage = localStorage.getItem('equipped_arena_image')
+        const savedArena = localStorage.getItem('equipped_arena')
+
+        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('fundo-espaco')) {
+          setArenaImage(savedImage)
+        } else if (savedArena) {
+          const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
+          if (catalogItem?.image) {
+            setArenaImage(catalogItem.image)
+          } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
+            setArenaImage('/arenas/arena-ponte-2077.gif')
+          } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
+            setArenaImage('/images/shop/arena-fado-alfama.jpg')
+          } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores' || savedArena === 'arena_vulcao_erupcao') {
+            setArenaImage('/images/shop/arena-fogo-acores.jpg')
+          } else {
+            setArenaImage('/images/hero-bg.jpg')
+          }
+        } else {
+          setArenaImage('/images/hero-bg.jpg')
+        }
+      }
+    }
+
+    sync()
+    window.addEventListener('arenaChanged', sync)
+    window.addEventListener('storage', sync)
+
+    return () => {
+      window.removeEventListener('arenaChanged', sync)
+      window.removeEventListener('storage', sync)
+    }
+  }, [])
 
   if (!effectiveDuelId) {
     return (
@@ -92,8 +131,18 @@ function DuelPageContent() {
 
   return (
     <div className="relative min-h-screen bg-transparent">
-      <ArenaDynamicBackground />
-      <BackgroundFx variant="multiplayer" />
+      {/* Imagem nítida e brilhante da Arena Equipada durante o Duelo */}
+      {arenaImage && (
+        <div 
+          className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: `url('${arenaImage}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <DuelArena
           key={effectiveDuelId}
@@ -107,7 +156,7 @@ function DuelPageContent() {
 
 export default function DuelPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
       <DuelPageContent />
     </Suspense>
   )
