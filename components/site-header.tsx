@@ -8,6 +8,7 @@ import { PlayButton } from '@/components/play-button'
 import { OnlineUsersBadge } from '@/components/online-users-badge'
 import { PlayerAvatar } from '@/components/player-avatar'
 import AudioPlayer from '@/components/AudioPlayer'
+import { UserAvatar } from '@/components/user-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { cn } from '@/lib/utils'
 
@@ -136,7 +137,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-card/80 p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
             >
-              <PlayerAvatar profile={profile} size="sm" isCurrentUser={true} />
+              <UserAvatar avatarUrl={profile?.photoURL || user?.photoURL || undefined} size="md" />
               <div className="flex flex-col min-w-0 pointer-events-none">
                 <span className="truncate font-bold text-foreground">
                   {user.displayName ?? 'Conta'}
