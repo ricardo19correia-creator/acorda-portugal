@@ -63,8 +63,12 @@ function mapAuthError(error: any): string {
   }
   if (code === 'auth/email-already-in-use') return 'Já existe uma conta com este endereço de email.'
   if (code === 'auth/weak-password') return 'A palavra-passe deve ter pelo menos 6 caracteres.'
+  if (code === 'auth/operation-not-allowed') {
+    return 'O método de registo com Email/Palavra-passe está desativado no Firebase Authentication Console.'
+  }
   if (code === 'auth/popup-closed-by-user') return 'A janela de autenticação Google foi cancelada.'
   if (code === 'auth/network-request-failed') return 'Erro de ligação. Verifica a tua internet.'
+  if (code === 'auth/too-many-requests') return 'Demasiadas tentativas de login. Tenta novamente mais tarde.'
   if (code === 'auth/argument-error') return 'Dados de autenticação inválidos ou incompletos.'
 
   return message || 'Ocorreu um erro ao processar a autenticação.'
