@@ -26,7 +26,7 @@ import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { BrandLogo } from '@/components/brand-logo'
 import { BackgroundFx } from '@/components/background-fx'
-import { performGoogleSignIn, getPostLoginRedirectTarget, setPostLoginRedirectTarget } from '@/lib/auth-helpers'
+import { handleGoogleLogin, performGoogleSignIn, useCheckRedirectLogin, getPostLoginRedirectTarget, setPostLoginRedirectTarget } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 const DISTRICTS_LIST = [
@@ -74,7 +74,10 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 function EntrarPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectTarget = searchParams.get('redirect') || '/'
+  const redirectTarget = searchParams.get('redirect') || '/jogar'
+
+  // Hook que verifica retorno do redirecionamento do Google
+  useCheckRedirectLogin(redirectTarget)
 
   const { user, authResolved } = useAuth()
   const [mode, setMode] = useState<'login' | 'register' | 'reset'>('login')
@@ -100,18 +103,13 @@ function EntrarPageContent() {
     }
   }, [user, authResolved, redirectTarget, router])
 
-  // Google Login Universal (Móvel via Redirect 1st-Party / Desktop via Popup com Fallback)
-  const handleGoogleLogin = async () => {
+  // Google Login via signInWithRedirect (WebView / APK / Mobile / Browser)
+  const onGoogleLoginClick = async () => {
     setError(null)
     setGoogleLoading(true)
 
     try {
-      setPostLoginRedirectTarget(redirectTarget)
-      const cred = await performGoogleSignIn(redirectTarget)
-      if (cred?.user) {
-        const destination = getPostLoginRedirectTarget(redirectTarget)
-        router.push(destination)
-      }
+      await handleGoogleLogin(redirectTarget)
     } catch (err: any) {
       setError(mapAuthError(err))
       setGoogleLoading(false)
@@ -373,7 +371,7 @@ function EntrarPageContent() {
             <div className="mt-5">
               <button
                 type="button"
-                onClick={handleGoogleLogin}
+                onClick={onGoogleLoginClick}
                 disabled={googleLoading || loading}
                 className="w-full flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] py-3.5 px-4 font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground hover:bg-white/10 hover:border-white/25 active:scale-[0.98] transition cursor-pointer shadow-md"
               >

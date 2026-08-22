@@ -1,16 +1,19 @@
+'use client'
+
+import { useEffect } from 'react'
 import {
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
-  browserPopupRedirectResolver,
+  getRedirectResult,
   type UserCredential,
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
+import { useRouter } from 'next/navigation'
 
 const REDIRECT_TARGET_KEY = 'acorda_auth_redirect_target'
 
 /**
- * Deteta se o utilizador está num dispositivo móvel (iOS, Android, etc.)
+ * Deteta se o utilizador está num dispositivo móvel ou wrapper
  */
 export function isMobileDevice(): boolean {
   if (typeof window === 'undefined' || typeof navigator === 'undefined') return false
@@ -39,7 +42,7 @@ export function setPostLoginRedirectTarget(target: string) {
 /**
  * Recupera e limpa o URL de destino pretendido após o login
  */
-export function getPostLoginRedirectTarget(fallback = '/'): string {
+export function getPostLoginRedirectTarget(fallback = '/jogar'): string {
   if (typeof window === 'undefined') return fallback
   try {
     const target =
@@ -55,69 +58,47 @@ export function getPostLoginRedirectTarget(fallback = '/'): string {
 }
 
 /**
- * Executa o Login Google de forma fiável em qualquer dispositivo:
- * - Tenta signInWithPopup primeiro (em desktop e mobile através do toque direto, evitando o loop de redirecionamento do Safari/Chrome mobile)
- * - Faz fallback transparente para signInWithRedirect apenas se o popup estiver bloqueado
+ * Executa o Login Google via signInWithRedirect para suporte a WebView, APK e browsers
  */
-export async function performGoogleSignIn(redirectTarget = '/'): Promise<UserCredential | void> {
+export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void> => {
   if (!auth) {
     console.error('[AUTH DIAGNOSTIC] Erro: auth está nulo ou indefinido.')
     throw new Error('Firebase Auth não está inicializado.')
   }
 
-  const validTarget = typeof redirectTarget === 'string' && redirectTarget.trim() ? redirectTarget.trim() : '/'
+  const validTarget = typeof redirectTarget === 'string' && redirectTarget.trim() ? redirectTarget.trim() : '/jogar'
   setPostLoginRedirectTarget(validTarget)
 
   const provider = new GoogleAuthProvider()
   provider.setCustomParameters({ prompt: 'select_account' })
 
-  const isMobile = isMobileDevice()
+  console.log('[AUTH] A iniciar signInWithRedirect com Google para destino:', validTarget)
+  await signInWithRedirect(auth, provider)
+}
 
-  // Logging diagnóstico detalhado antes da chamada Firebase
-  console.log('=== [FIREBASE AUTH PRE-CALL DIAGNOSTIC] ===', {
-    metodoPrimario: 'signInWithPopup',
-    isMobile,
-    provider: {
-      providerId: provider.providerId,
-      scopes: provider.getScopes ? provider.getScopes() : [],
-      isInstanceOfGoogleAuthProvider: provider instanceof GoogleAuthProvider,
-    },
-    authInstance: {
-      isAuthDefined: Boolean(auth),
-      appName: auth.app?.name,
-      currentUser: auth.currentUser ? auth.currentUser.uid : null,
-      authDomain: auth.config?.authDomain,
-      projectId: auth.app?.options?.projectId,
-    },
-    resolver: {
-      isResolverDefined: Boolean(browserPopupRedirectResolver),
-    },
-  })
+/**
+ * Alias mantido para compatibilidade em toda a aplicação
+ */
+export const performGoogleSignIn = handleGoogleLogin
 
-  try {
-    console.log('[AUTH] A invocar signInWithPopup(auth, provider, browserPopupRedirectResolver)...')
-    const cred = await signInWithPopup(auth, provider, browserPopupRedirectResolver)
-    console.log('[AUTH] signInWithPopup bem-sucedido! UID:', cred.user?.uid)
-    return cred
-  } catch (err: any) {
-    const code = err?.code || ''
-    console.warn('[AUTH] signInWithPopup retornou código/erro:', code, err?.message)
+/**
+ * Hook para processar o regresso da autenticação na página de login:
+ */
+export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
+  const router = useRouter()
 
-    // Se o popup for bloqueado pelo navegador, recorrer ao redirecionamento como fallback
-    if (
-      code === 'auth/popup-blocked' ||
-      code === 'auth/operation-not-supported-in-this-environment'
-    ) {
-      console.log('[AUTH] Popup bloqueado pelo browser, a recorrer a signInWithRedirect como fallback...')
-      await signInWithRedirect(auth, provider, browserPopupRedirectResolver)
-      return
-    }
+  useEffect(() => {
+    if (!auth) return
 
-    // Se o utilizador apenas fechou a janela do popup, não fazer nada
-    if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
-      return
-    }
-
-    throw err
-  }
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          const destination = getPostLoginRedirectTarget(defaultFallback)
+          router.push(destination)
+        }
+      })
+      .catch((error) => {
+        console.error('Erro no retorno do login Google:', error)
+      })
+  }, [router, defaultFallback])
 }
