@@ -5,42 +5,66 @@ import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check, Filter, MessageSquare } from 'lucide-react'
 import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
-import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
+import { cn } from '@/lib/utils'
+import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
-type AvatarCategory = 'todos' | 'historia' | 'geografia' | 'desporto' | 'cultura' | 'simbolos'
-type AvatarRarity = 'todas' | 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Exclusivo'
 
 interface ShopItem {
   id: string
   name: string
   category: Category
-  avatarCategory?: 'historia' | 'geografia' | 'desporto' | 'cultura' | 'simbolos'
+  categoryKey?: string
+  avatarCategory?: string
   avatarCategoryLabel?: string
-  rarity?: 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Exclusivo'
+  rarity?: AvatarRarity
   description: string
   price: string
   priceValue: number
   isRealMoney?: boolean
+  isExclusive?: boolean
+  unlockCondition?: string
+  icon?: string
   image?: string
   badge?: string
   badgeColor?: string
+}
+
+const getRarityBadgeColor = (rarity: AvatarRarity) => {
+  switch (rarity) {
+    case 'Comum':
+      return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+    case 'Raro':
+      return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
+    case 'Épico':
+      return 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+    case 'Lendário':
+      return 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
+    case 'Exclusivo':
+      return 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(244,63,94,0.35)]'
+    default:
+      return 'bg-slate-700 text-slate-300 border-slate-600'
+  }
 }
 
 const AVATAR_SHOP_ITEMS: ShopItem[] = avatarShopList.map((av) => ({
   id: av.id,
   name: av.name,
   category: 'avatars',
-  avatarCategory: av.category,
-  avatarCategoryLabel: av.categoryLabel,
+  categoryKey: av.categoryKey,
+  avatarCategory: av.categoryKey,
+  avatarCategoryLabel: av.categoryTitle,
   rarity: av.rarity,
   description: av.description,
-  price: `€${av.price.toLocaleString('pt-PT')}`,
-  priceValue: av.price,
+  price: av.price !== null ? `€${av.price.toLocaleString('pt-PT')}` : 'POR MÉRITO',
+  priceValue: av.price ?? 0,
+  isExclusive: av.isExclusive,
+  unlockCondition: av.unlockCondition,
+  icon: av.icon,
   image: av.image,
   badge: av.rarity,
-  badgeColor: av.badgeColor,
+  badgeColor: getRarityBadgeColor(av.rarity),
 }))
 
 const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) => ({
@@ -75,22 +99,14 @@ const OTHER_SHOP_ITEMS: ShopItem[] = [
 
 const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
-const AVATAR_CATEGORIES = [
-  { key: 'todos' as AvatarCategory, label: 'Todos os Avatares' },
-  { key: 'historia' as AvatarCategory, label: '🏛️ História' },
-  { key: 'geografia' as AvatarCategory, label: '🌍 Geografia' },
-  { key: 'desporto' as AvatarCategory, label: '⚽ Desporto' },
-  { key: 'cultura' as AvatarCategory, label: '🎭 Cultura & Fado' },
-  { key: 'simbolos' as AvatarCategory, label: '🇵🇹 Símbolos' },
-]
-
-const AVATAR_RARITIES: AvatarRarity[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
+const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
+const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
 
 export default function LojaPage() {
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<Category>('avatars')
-  const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<AvatarCategory>('todos')
-  const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity>('todas')
+  const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
+  const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
   const [equippedFrame, setEquippedFrame] = useState<string>('')
@@ -181,7 +197,14 @@ export default function LojaPage() {
 
   const isItemUnlocked = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
-    if (item.priceValue === 0) return true
+    if (item.id === 'exclusivo_fundador') {
+      const isFounder = Boolean(localStorage.getItem('user_is_founder') === 'true')
+      if (isFounder) return true
+    }
+    if (item.isExclusive) {
+      return unlockedItems.includes(item.id) || inventory.avatars.includes(item.id)
+    }
+    if (item.priceValue === 0 && !item.isExclusive) return true
     if (unlockedItems.includes(item.id)) return true
     if (item.category === 'avatars') {
       if (inventory.avatars.includes(item.id)) return true
@@ -210,6 +233,31 @@ export default function LojaPage() {
   }
 
   const handleAction = async (item: ShopItem) => {
+    // 0. ITENS EXCLUSIVOS POR MÉRITO
+    if (item.isExclusive) {
+      const unlocked = isItemUnlocked(item)
+      if (!unlocked) {
+        showToast(`Item exclusivo por mérito: ${item.unlockCondition}`, 'error')
+        return
+      }
+      if (item.image) {
+        setEquippedAvatar(item.image)
+        localStorage.setItem('user_equipped_avatar', item.image)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.avatar': item.image,
+              avatar: item.image,
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('avatarChanged'))
+        showToast(`Avatar exclusivo "${item.name}" equipado com sucesso!`)
+      }
+      return
+    }
     // 1. CONSUMÍVEIS (SEMPRE COMPRA)
     if (item.category === 'ajudas') {
       if (userBalance < item.priceValue) {
@@ -428,7 +476,7 @@ export default function LojaPage() {
     if (activeTab === 'todos') return true
     if (activeTab === 'avatars') {
       if (item.category !== 'avatars') return false
-      if (avatarCategoryFilter !== 'todos' && item.avatarCategory !== avatarCategoryFilter) return false
+      if (avatarCategoryFilter !== 'todos' && item.categoryKey !== avatarCategoryFilter) return false
       if (avatarRarityFilter !== 'todas' && item.rarity !== avatarRarityFilter) return false
       return true
     }
@@ -450,15 +498,14 @@ export default function LojaPage() {
       />
 
       {/* CONTEÚDO DA LOJA POR CIMA */}
-      <div className="relative z-10 w-full flex flex-col items-center">
-        {/* Top Navigation */}
-        <div className="w-full max-w-6xl flex items-center justify-between mb-4">
-          <Link 
-            href="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md cursor-pointer"
+      <div className="relative z-10 w-full max-w-6xl flex flex-col items-center">
+        {/* Navigation & Feedback Toast */}
+        <div className="w-full flex items-center justify-between mb-4">
+          <Link
+            href="/jogar"
+            className="inline-flex items-center gap-2 text-xs font-black tracking-wider uppercase text-slate-400 hover:text-white transition-colors bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-800 backdrop-blur-sm"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Voltar ao Início</span>
+            <ArrowLeft className="w-4 h-4" /> Voltar ao Menu
           </Link>
 
           {feedbackMessage && (
@@ -482,7 +529,7 @@ export default function LojaPage() {
               LOJA ACORDA PORTUGAL
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Adquire avatares épicos, ajudas de jogo, molduras vivas, títulos e arenas 3D exclusivas.
+              Adquire avatares temáticos das 18 categorias, títulos, ajudas e desbloqueia troféus exclusivos por mérito.
             </p>
           </div>
 
@@ -587,47 +634,80 @@ export default function LojaPage() {
           </button>
         </div>
 
-        {/* SUB-FILTROS DE AVATARES (CATEGORIAS E RARIDADES) */}
+        {/* SUB-FILTROS DE AVATARES (18 CATEGORIAS + EXCLUSIVOS & 5 RARIDADES) */}
         {activeTab === 'avatars' && (
           <div className="w-full max-w-6xl space-y-3 mb-6 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 backdrop-blur-md">
             {/* Categorias Temáticas */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
               <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1 flex items-center gap-1.5">
                 <Filter className="w-3.5 h-3.5 text-cyan-400" /> Categoria:
               </span>
-              {AVATAR_CATEGORIES.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => setAvatarCategoryFilter(cat.key)}
-                  className={`cursor-pointer shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                    avatarCategoryFilter === cat.key
-                      ? 'bg-cyan-500 text-slate-950 shadow-[0_0_12px_rgba(6,182,212,0.35)]'
-                      : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+              {AVATAR_CATEGORIES.map((cat) => {
+                const isSelected = avatarCategoryFilter === cat.key
+                const isExclusives = cat.key === 'exclusivos'
+
+                return (
+                  <button
+                    key={cat.key}
+                    onClick={() => setAvatarCategoryFilter(cat.key)}
+                    className={`cursor-pointer shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      isSelected
+                        ? isExclusives
+                          ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] font-black'
+                          : 'bg-cyan-500 text-slate-950 shadow-[0_0_12px_rgba(6,182,212,0.35)] font-black'
+                        : isExclusives
+                        ? 'bg-rose-950/60 text-rose-300 border border-rose-500/40 hover:bg-rose-900/60'
+                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                    }`}
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.title}</span>
+                  </button>
+                )
+              })}
             </div>
 
             {/* Raridades */}
-            <div className="flex items-center gap-2 overflow-x-auto pt-1 border-t border-slate-800/60 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pt-1.5 border-t border-slate-800/60 scrollbar-none">
               <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1">
                 Raridade:
               </span>
-              {AVATAR_RARITIES.map((rarity) => (
-                <button
-                  key={rarity}
-                  onClick={() => setAvatarRarityFilter(rarity)}
-                  className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
-                    avatarRarityFilter === rarity
-                      ? 'bg-purple-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.4)]'
-                      : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-700/40'
-                  }`}
-                >
-                  {rarity === 'todas' ? 'Todas' : rarity}
-                </button>
-              ))}
+              {AVATAR_RARITIES.map((rarity) => {
+                const isSelected = avatarRarityFilter === rarity
+                let badgeStyle = 'bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-700/40'
+
+                if (isSelected) {
+                  switch (rarity) {
+                    case 'Comum':
+                      badgeStyle = 'bg-emerald-500 text-slate-950 font-black shadow-[0_0_10px_rgba(16,185,129,0.4)]'
+                      break
+                    case 'Raro':
+                      badgeStyle = 'bg-cyan-500 text-slate-950 font-black shadow-[0_0_10px_rgba(6,182,212,0.4)]'
+                      break
+                    case 'Épico':
+                      badgeStyle = 'bg-purple-500 text-white font-black shadow-[0_0_10px_rgba(168,85,247,0.4)]'
+                      break
+                    case 'Lendário':
+                      badgeStyle = 'bg-amber-500 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.4)]'
+                      break
+                    case 'Exclusivo':
+                      badgeStyle = 'bg-rose-500 text-white font-black shadow-[0_0_12px_rgba(244,63,94,0.5)]'
+                      break
+                    default:
+                      badgeStyle = 'bg-white text-slate-950 font-black'
+                  }
+                }
+
+                return (
+                  <button
+                    key={rarity}
+                    onClick={() => setAvatarRarityFilter(rarity)}
+                    className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${badgeStyle}`}
+                  >
+                    {rarity === 'todas' ? 'Todas' : rarity}
+                  </button>
+                )
+              })}
             </div>
           </div>
         )}
@@ -684,6 +764,7 @@ export default function LojaPage() {
                 const isConsumable = item.category === 'ajudas'
                 const isUnlocked = isItemUnlocked(item)
                 const isEquipped = isItemEquipped(item)
+                const isExclusive = item.isExclusive
 
                 const isGoldFrame = item.id === 'moldura_ouro_real'
                 const isNeonFrame = item.id === 'moldura_neon_portugal'
@@ -691,7 +772,12 @@ export default function LojaPage() {
                 return (
                   <div 
                     key={item.id}
-                    className="group relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)] shadow-lg"
+                    className={cn(
+                      "group relative flex flex-col justify-between rounded-2xl border bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 shadow-lg",
+                      isExclusive
+                        ? "border-rose-500/40 hover:border-rose-400 hover:shadow-[0_0_25px_rgba(244,63,94,0.3)] bg-gradient-to-b from-slate-900/90 to-rose-950/20"
+                        : "border-slate-800 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]"
+                    )}
                   >
                     <div>
                       {/* Badge & Category Tag */}
@@ -753,26 +839,46 @@ export default function LojaPage() {
                       </p>
                     </div>
 
-                    {/* Ação e Preço */}
-                    <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
-                      <span className="font-mono text-sm font-semibold text-yellow-400">
-                        {item.price}
-                      </span>
+                    {/* Ação e Preço / Condição de Mérito */}
+                    <div className="mt-4 pt-3 border-t border-slate-800/80">
+                      {isExclusive && !isUnlocked ? (
+                        <div className="space-y-2">
+                          <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-2.5 py-1 text-[10px] font-bold text-rose-300 flex items-center gap-1.5 leading-tight">
+                            <span>{item.icon || '🏅'}</span>
+                            <span className="truncate">{item.unlockCondition}</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="font-mono text-xs font-black text-rose-400 uppercase tracking-wider">
+                              POR MÉRITO
+                            </span>
+                            <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-rose-500/40 bg-rose-500/15 text-[11px] font-black uppercase text-rose-300 shadow-sm select-none">
+                              <span>🔒</span>
+                              <span>Desbloquear por Desafio</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-sm font-semibold text-yellow-400">
+                            {item.price}
+                          </span>
 
-                      <button
-                        onClick={() => handleAction(item)}
-                        className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
-                          isConsumable
-                            ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
-                            : isEquipped
-                            ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
-                            : isUnlocked
-                            ? 'bg-cyan-600 text-white hover:bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]'
-                            : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
-                        }`}
-                      >
-                        {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
-                      </button>
+                          <button
+                            onClick={() => handleAction(item)}
+                            className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
+                              isConsumable
+                                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                                : isEquipped
+                                ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
+                                : isUnlocked
+                                ? 'bg-cyan-600 text-white hover:bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]'
+                                : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                            }`}
+                          >
+                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )
