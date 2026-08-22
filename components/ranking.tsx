@@ -30,6 +30,7 @@ export type RankedPlayer = {
   xp: number
   district: string
   pos: number
+  equippedTitle?: string
   equipped?: EquippedCosmetics
 }
 
@@ -84,6 +85,7 @@ export function Ranking() {
         const district = data.district || 'Portugal'
         const photoURL = data.photoURL || null
         const equipped = data.equipped || {}
+        const equippedTitle = data.equippedTitle || data.equipped?.title || data.title || ''
 
         playersMap.set(docSnap.id, {
           uid: docSnap.id,
@@ -93,6 +95,7 @@ export function Ranking() {
           xp,
           district,
           pos: 0,
+          equippedTitle,
           equipped,
         })
       })
@@ -174,6 +177,7 @@ export function Ranking() {
     if (profile) {
       const userXp = profile.xp ?? 0
       const rankPos = ranking.filter((p) => p.xp > userXp).length + 1
+      const equippedTitle = (profile as any)?.equippedTitle || profile?.equipped?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : '') || ''
       return {
         uid: user.uid,
         name: profile.displayName || user.displayName || 'Jogador',
@@ -182,6 +186,8 @@ export function Ranking() {
         xp: userXp,
         district: profile.district || 'Portugal',
         pos: rankPos,
+        equippedTitle,
+        equipped: profile.equipped,
       } as RankedPlayer
     }
 
@@ -198,15 +204,17 @@ export function Ranking() {
       (p as any)?.is_founder ||
       (p as any)?.isFounder ||
       (p as any)?.isVip ||
-      p.equipped?.theme?.includes('gold')
+      (p.equipped as any)?.avatar?.includes('camoes') ||
+      p.photoURL?.includes('camoes') ||
+      p.name.includes('Riky'),
     )
-    const titleItem = TITLE_SHOP_CATALOG.find((i) => i.id === p.equipped?.title || i.name === p.equipped?.title) || SHOP_CATALOG.find((i) => i.id === p.equipped?.title)
-    const rawTitle = titleItem?.name || p.equipped?.title || 'Cidadão Conquistador'
-    const displayTitle = `«${rawTitle.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}»`
 
-    const duelsWon = Math.max(2, Math.floor(p.level * 3.4))
-    const duelsTotal = Math.max(duelsWon + 1, Math.floor(p.level * 4.1))
-    const accuracy = Math.min(98, 76 + (p.level % 18))
+    const rawTitle = (
+      p.equippedTitle ||
+      p.equipped?.title ||
+      (p as any)?.title ||
+      (p.pos === 1 ? 'Lenda Nacional' : p.pos <= 3 ? 'Mestre Distrital' : 'Noviço da Nação')
+    )
 
     setSelectedPlayer({
       id: p.uid,
@@ -218,11 +226,11 @@ export function Ranking() {
       rankPosition: p.pos,
       virtualMoney: Math.max(150, Math.floor(p.xp * 1.5)),
       isVip,
-      title: displayTitle,
+      title: rawTitle,
       stats: {
-        duelsWon,
-        duelsTotal,
-        accuracyRate: accuracy,
+        duelsWon: p.pos === 1 ? 24 : Math.max(3, 16 - p.pos),
+        duelsTotal: 18 + p.level * 3,
+        accuracyRate: p.pos === 1 ? 94 : Math.max(65, 90 - p.pos * 2),
       },
       badges: [
         { icon: '🇵🇹', name: p.district || 'Portugal' },
@@ -352,10 +360,12 @@ export function Ranking() {
                           <p className="truncate font-display font-bold text-foreground">
                             {row.name}
                           </p>
-                          {row.equipped?.title && (
-                            <span className={cn('rounded-full px-2 py-0.5 text-[0.6rem] font-bold shrink-0', getTitleBadgeStyle(row.equipped.title))}>
-                              {(TITLE_SHOP_CATALOG.find((i) => i.id === row.equipped?.title || i.name === row.equipped?.title)?.name || SHOP_CATALOG.find((i) => i.id === row.equipped?.title)?.name || row.equipped?.title)?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                          {row.equippedTitle || row.equipped?.title ? (
+                            <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide shrink-0">
+                              {(TITLE_SHOP_CATALOG.find((i) => i.id === (row.equippedTitle || row.equipped?.title) || i.name === (row.equippedTitle || row.equipped?.title))?.name || (row.equippedTitle || row.equipped?.title))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                             </span>
+                          ) : (
+                            <span className="text-[10px] text-slate-500 shrink-0">Recruta</span>
                           )}
                           {isCurrentUser && (
                             <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-primary ring-1 ring-primary/40">
@@ -413,10 +423,12 @@ export function Ranking() {
                       <p className="truncate font-display font-bold text-foreground">
                         {currentUserEntry.name}
                       </p>
-                      {(currentUserEntry.equipped?.title || profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title'))) && (
-                        <span className={cn('rounded-full px-2 py-0.5 text-[0.6rem] font-bold shrink-0', getTitleBadgeStyle(currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))}>
-                          {(TITLE_SHOP_CATALOG.find((i) => i.id === (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (currentUserEntry.equipped?.title || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+                      {(currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title'))) ? (
+                        <span className="inline-block px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide shrink-0">
+                          {(TITLE_SHOP_CATALOG.find((i) => i.id === (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (currentUserEntry.equippedTitle || currentUserEntry.equipped?.title || (profile as any)?.equippedTitle || profile?.equipped?.title || localStorage.getItem('equipped_title') || ''))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
                         </span>
+                      ) : (
+                        <span className="text-[10px] text-slate-500 shrink-0">Recruta</span>
                       )}
                       <span className="rounded-full bg-primary/25 px-2 py-0.5 text-[0.65rem] font-black uppercase text-primary">
                         Tu
@@ -479,8 +491,6 @@ function PodiumCard({
   onSelect?: () => void
 }) {
   const isFirst = player.pos === 1
-  const isSecond = player.pos === 2
-  const isThird = player.pos === 3
 
   const config = {
     1: {
@@ -488,28 +498,24 @@ function PodiumCard({
       badge: 'bg-gold text-gold-foreground font-black ring-2 ring-gold/50 shadow-[0_0_15px_var(--gold)]',
       crown: true,
       ringColor: 'ring-gold/60',
-      labelColor: 'text-gold',
     },
     2: {
       pedestal: 'h-32 sm:h-40 bg-gradient-to-b from-white/15 via-white/5 to-transparent border-white/20',
       badge: 'bg-white/90 text-background font-black ring-2 ring-white/30',
       crown: false,
       ringColor: 'ring-white/40',
-      labelColor: 'text-foreground/90',
     },
     3: {
       pedestal: 'h-28 sm:h-36 bg-gradient-to-b from-flag-red/25 via-flag-red/5 to-transparent border-flag-red/30',
       badge: 'bg-flag-red text-flag-red-foreground font-black ring-2 ring-flag-red/40',
       crown: false,
       ringColor: 'ring-flag-red/50',
-      labelColor: 'text-flag-red',
     },
   }[player.pos as 1 | 2 | 3] || {
     pedestal: 'h-28 bg-white/5 border-white/10',
     badge: 'bg-white/10 text-foreground',
     crown: false,
     ringColor: 'ring-white/20',
-    labelColor: 'text-foreground',
   }
 
   return (
@@ -528,27 +534,18 @@ function PodiumCard({
 
       {/* Avatar with position halo */}
       <div className="relative">
-        {isFirst && (isCurrentUser || player.name.includes('Riky')) ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={userDisplayAvatar || '/images/avatars/camoes-2050.jpg'}
-            alt={player.name}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)] transition-transform duration-300 pointer-events-none"
-          />
-        ) : (
-          <PlayerAvatar
-            name={player.name}
-            photoURL={isCurrentUser ? userDisplayAvatar : player.photoURL}
-            avatarImage={isCurrentUser ? userDisplayAvatar : undefined}
-            isCurrentUser={isCurrentUser}
-            className={cn(
-              'ring-2 transition-transform duration-300',
-              config.ringColor,
-              isFirst ? 'h-16 w-16 sm:h-20 sm:w-20 text-xl' : 'h-13 w-13 sm:h-16 sm:w-16 text-base',
-              isCurrentUser && 'ring-4 ring-primary',
-            )}
-          />
-        )}
+        <PlayerAvatar
+          name={player.name}
+          photoURL={isCurrentUser ? userDisplayAvatar : player.photoURL}
+          avatarImage={isCurrentUser ? userDisplayAvatar : undefined}
+          isCurrentUser={isCurrentUser}
+          className={cn(
+            'ring-2 transition-transform duration-300',
+            config.ringColor,
+            isFirst ? 'h-16 w-16 sm:h-20 sm:w-20 text-xl' : 'h-13 w-13 sm:h-16 sm:w-16 text-base',
+            isCurrentUser && 'ring-4 ring-primary',
+          )}
+        />
         {isCurrentUser && (
           <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-primary px-1.5 py-0.2 text-[0.55rem] font-black uppercase text-primary-foreground ring-1 ring-background">
             Tu
@@ -557,17 +554,24 @@ function PodiumCard({
       </div>
 
       {/* Player name & Title & District */}
-      <p className="mt-2.5 max-w-[100px] sm:max-w-[140px] truncate text-center font-display text-xs sm:text-sm font-bold text-foreground">
-        {player.name}
-      </p>
-      {player.equipped?.title && (
-        <span className={cn('mt-0.5 rounded-full px-2 py-0.5 text-[0.55rem] font-bold truncate max-w-[110px] sm:max-w-[130px]', getTitleBadgeStyle(player.equipped.title))}>
-          {(TITLE_SHOP_CATALOG.find((i) => i.id === player.equipped?.title || i.name === player.equipped?.title)?.name || SHOP_CATALOG.find((i) => i.id === player.equipped?.title)?.name || player.equipped?.title)?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+      <div className="mt-2.5 flex flex-col items-center text-center w-full px-1">
+        <span className="max-w-[100px] sm:max-w-[140px] truncate text-xs sm:text-base font-bold text-white tracking-tight">
+          {player.name}
         </span>
-      )}
-      <p className="mt-0.5 max-w-[90px] sm:max-w-[130px] truncate text-center text-[0.62rem] sm:text-xs text-muted-foreground">
-        {player.district}
-      </p>
+
+        {/* Badge do Título Equipado */}
+        {player.equippedTitle || player.equipped?.title ? (
+          <span className="inline-block mt-0.5 max-w-[110px] sm:max-w-[140px] truncate px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-[10px] sm:text-xs font-semibold text-amber-300 tracking-wide">
+            {(TITLE_SHOP_CATALOG.find((i) => i.id === (player.equippedTitle || player.equipped?.title) || i.name === (player.equippedTitle || player.equipped?.title))?.name || (player.equippedTitle || player.equipped?.title))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
+          </span>
+        ) : (
+          <span className="text-[10px] text-slate-500 mt-0.5">Recruta</span>
+        )}
+
+        <span className="text-[0.62rem] sm:text-xs text-slate-400 mt-0.5 max-w-[90px] sm:max-w-[130px] truncate">
+          {player.district}
+        </span>
+      </div>
 
       {/* Pedestal block */}
       <div
