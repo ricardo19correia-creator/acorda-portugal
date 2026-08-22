@@ -4,6 +4,7 @@ import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
+import DeepLinkHandler from '@/components/DeepLinkHandler'
 import TronCyberBackground from '@/components/TronCyberBackground'
 import './globals.css'
 
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="relative min-h-screen bg-transparent text-zinc-100 antialiased overflow-x-hidden">
         <AuthProvider>
+          <DeepLinkHandler />
           <GameThemeProvider>
             <PresenceProvider>{children}</PresenceProvider>
           </GameThemeProvider>

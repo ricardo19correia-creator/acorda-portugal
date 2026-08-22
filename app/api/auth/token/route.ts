@@ -1,0 +1,74 @@
+import { NextResponse } from 'next/server'
+import { getApps, getApp, initializeApp, cert } from 'firebase-admin/app'
+import { getAuth } from 'firebase-admin/auth'
+
+function getAdminApp() {
+  if (getApps().length > 0) {
+    return getApp()
+  }
+
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'desafio-nacional-5fe71'
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL
+  const rawKey = process.env.FIREBASE_PRIVATE_KEY
+
+  if (clientEmail && rawKey) {
+    return initializeApp({
+      credential: cert({
+        projectId,
+        clientEmail,
+        privateKey: rawKey.replace(/\\n/g, '\n'),
+      }),
+      projectId,
+    })
+  }
+
+  return initializeApp({
+    projectId,
+  })
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json().catch(() => ({}))
+    const { idToken } = body
+
+    if (!idToken || typeof idToken !== 'string') {
+      return NextResponse.json({ error: 'idToken is required' }, { status: 400 })
+    }
+
+    const app = getAdminApp()
+    const adminAuth = getAuth(app)
+
+    let uid: string | null = null
+
+    // 1. Try verifyIdToken
+    try {
+      const decoded = await adminAuth.verifyIdToken(idToken)
+      uid = decoded.uid
+    } catch {
+      // 2. Fallback to Google OAuth tokeninfo endpoint
+      try {
+        const tokenRes = await fetch(
+          `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`
+        )
+        if (tokenRes.ok) {
+          const data = await tokenRes.json()
+          uid = data.sub || data.user_id || null
+        }
+      } catch (e) {
+        console.error('Failed to verify tokeninfo:', e)
+      }
+    }
+
+    if (!uid) {
+      return NextResponse.json({ error: 'Invalid or expired idToken' }, { status: 401 })
+    }
+
+    // 3. Create custom token
+    const customToken = await adminAuth.createCustomToken(uid)
+    return NextResponse.json({ customToken, uid })
+  } catch (error: any) {
+    console.error('[API AUTH TOKEN ERROR]', error)
+    return NextResponse.json({ error: error.message || 'Internal error generating custom token' }, { status: 500 })
+  }
+}
