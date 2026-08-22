@@ -369,23 +369,28 @@ export default function AjudaPage() {
     setReportErrorMsg('')
 
     try {
-      await addDoc(collection(db, 'support_reports'), {
-        type: reportType,
+      await addDoc(collection(db, 'reports'), {
+        type: reportType || 'Erro técnico',
         description: reportDescription.trim(),
-        location: reportLocation.trim() || 'Não especificado',
-        userEmail: reportEmail.trim() || user?.email || 'Anónimo',
-        userId: user?.uid || null,
-        userDisplayName: profile?.displayName || user?.displayName || 'Jogador',
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+        page: reportLocation.trim() || 'N/A',
+        userEmail: reportEmail.trim() || user?.email || 'anónimo',
         createdAt: serverTimestamp(),
+        status: 'pendente',
+        platform: 'web-mobile',
       })
 
       setReportStatus('success')
       setReportDescription('')
       setReportLocation('')
-    } catch (err) {
-      console.error('Erro ao enviar relatório de suporte:', err)
-      setReportErrorMsg('Não foi possível enviar o relatório. Tenta novamente.')
+
+      // Limpar formulário após 2 segundos e fechar modal
+      setTimeout(() => {
+        setReportStatus('idle')
+        setReportModalOpen(false)
+      }, 2000)
+    } catch (err: any) {
+      console.error('Erro ao submeter relatório:', err)
+      setReportErrorMsg('Ocorreu um erro ao enviar. Tenta novamente.')
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
@@ -768,22 +773,12 @@ export default function AjudaPage() {
                 <div className="grid h-14 w-14 mx-auto place-items-center rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 animate-bounce">
                   <CheckCircle2 className="h-7 w-7" />
                 </div>
-                <h4 className="font-display text-base font-bold text-foreground">
-                  Obrigado! O teu problema foi enviado para a equipa.
+                <h4 className="font-display text-base font-bold text-emerald-400">
+                  ✅ Relatório enviado com sucesso! Obrigado pelo feedback.
                 </h4>
                 <p className="text-xs text-muted-foreground">
-                  Vamos analisar a ocorrência e trabalhar numa correção com a maior brevidade.
+                  A janela fechará automaticamente dentro de instantes...
                 </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setReportModalOpen(false)
-                    setReportStatus('idle')
-                  }}
-                  className="mt-4 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-5 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 transition cursor-pointer"
-                >
-                  Concluir
-                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmitReport} className="space-y-4">
@@ -873,7 +868,7 @@ export default function AjudaPage() {
                   <button
                     type="submit"
                     disabled={reportSubmitting || !reportDescription.trim()}
-                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 font-display text-xs font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {reportSubmitting ? (
                       <>
@@ -883,7 +878,7 @@ export default function AjudaPage() {
                     ) : (
                       <>
                         <Send className="h-4 w-4" />
-                        <span>Enviar Relatório</span>
+                        <span>ENVIAR RELATÓRIO</span>
                       </>
                     )}
                   </button>
