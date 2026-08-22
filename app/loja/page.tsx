@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare } from 'lucide-react'
+import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X } from 'lucide-react'
 import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
 import { TITLE_SHOP_CATALOG, type TitleItem, type TitleGroup, type TitleRarity, getTitleRarityBadge } from '@/data/shopTitles'
+import { ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRarity, type ArenaEffect, getArenaRarityBadge } from '@/data/shopArenas'
+import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
@@ -20,7 +22,7 @@ interface ShopItem {
   group?: TitleGroup
   avatarCategory?: string
   avatarCategoryLabel?: string
-  rarity?: AvatarRarity | TitleRarity
+  rarity?: AvatarRarity | TitleRarity | ArenaRarity
   description: string
   price: string
   priceValue: number
@@ -29,6 +31,7 @@ interface ShopItem {
   unlockCondition?: string
   icon?: string
   image?: string
+  effect?: ArenaEffect
   badge?: string
   badgeColor?: string
 }
@@ -87,6 +90,24 @@ const TITLE_SHOP_ITEMS: ShopItem[] = TITLE_SHOP_CATALOG.map((t) => ({
   badgeColor: t.badgeColor,
 }))
 
+const ARENA_SHOP_ITEMS: ShopItem[] = ARENA_SHOP_CATALOG.map((a) => ({
+  id: a.id,
+  name: a.name,
+  category: 'arenas',
+  categoryKey: a.category,
+  avatarCategoryLabel: a.categoryLabel,
+  rarity: a.rarity,
+  description: a.description,
+  price: a.price !== null ? (a.price === 0 ? 'GRÁTIS' : `€${a.price.toLocaleString('pt-PT')}`) : 'POR MÉRITO',
+  priceValue: a.price ?? 0,
+  isExclusive: a.price === null,
+  unlockCondition: a.unlockCondition,
+  image: a.image,
+  effect: a.effect,
+  badge: a.rarity,
+  badgeColor: a.badgeColor,
+}))
+
 const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) => ({
   id: p.id,
   name: `Pack: ${p.name}`,
@@ -100,17 +121,12 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) 
 }))
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
-  // ARENAS
-  { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', price: 'GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
-  { id: 'arena_fado_alfama', name: 'Noite de Fado em Alfama', category: 'arenas', description: 'Aparência visual com tons aveludados e atmosfera intimista.', price: '€5.000', priceValue: 5000, image: '/images/shop/arena-fado-alfama.jpg', badge: 'Épico' },
-  { id: 'arena_fogo_acores', name: 'Fogo dos Açores', category: 'arenas', description: 'Brasas em ascensão e rebordo incandescente nas partidas.', price: '€20.000', priceValue: 20000, image: '/images/shop/arena-fogo-acores.jpg', badge: 'Mítico' },
-
   // AJUDAS & UTILIDADES
   { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)' },
   { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)' },
 ]
 
-const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
+const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
 const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
 const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
@@ -122,6 +138,8 @@ export default function LojaPage() {
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
   const [titleSubFilter, setTitleSubFilter] = useState<'todos' | 'tematico' | 'competicao' | 'exclusivo'>('todos')
   const [titleThemeCategory, setTitleThemeCategory] = useState<string>('todas')
+  const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
+  const [previewArenaItem, setPreviewArenaItem] = useState<ShopItem | null>(null)
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
@@ -206,7 +224,7 @@ export default function LojaPage() {
 
   const isItemUnlocked = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
-    if (item.id === 'exclusivo_fundador' || item.id === 'tit_excl_fundador' || item.name === 'Fundador') {
+    if (item.id === 'exclusivo_fundador' || item.id === 'tit_excl_fundador' || item.id === 'arena_excl_fundadores' || item.name === 'Fundador') {
       const isFounder = Boolean(localStorage.getItem('user_is_founder') === 'true')
       if (isFounder) return true
     }
@@ -219,6 +237,9 @@ export default function LojaPage() {
           unlockedItems.includes(item.name)
         )
       }
+      if (item.category === 'arenas') {
+        return inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
+      }
       return unlockedItems.includes(item.id) || inventory.avatars.includes(item.id)
     }
     if (item.priceValue === 0 && !item.isExclusive) return true
@@ -230,7 +251,7 @@ export default function LojaPage() {
       if (item.id === 'cyborg-quinas' && (inventory.avatars.includes('avatar_lenda_futebol') || unlockedItems.includes('avatar_lenda_futebol'))) return true
       if (item.id === 'fadista-cyber-alfama' && (inventory.avatars.includes('avatar_fadista_cyber') || unlockedItems.includes('avatar_fadista_cyber'))) return true
     }
-    if (item.category === 'arenas' && inventory.arenas.includes(item.id)) return true
+    if (item.category === 'arenas' && (inventory.arenas.includes(item.id) || item.priceValue === 0)) return true
     if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
     if (item.category === 'taunts') {
       const localTaunts = JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]')
@@ -271,6 +292,23 @@ export default function LojaPage() {
         }
         window.dispatchEvent(new Event('titleChanged'))
         showToast(`Título exclusivo "${item.name}" ativado com sucesso!`)
+        return
+      }
+      if (item.category === 'arenas') {
+        setEquippedArena(item.id)
+        localStorage.setItem('equipped_arena', item.id)
+        if (item.image) localStorage.setItem('equipped_arena_image', item.image)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              'equipped.arena': item.id,
+            })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('arenaChanged'))
+        showToast(`Arena exclusiva "${item.name}" equipada no jogo!`)
         return
       }
       if (item.category === 'avatars' && item.image) {
@@ -502,6 +540,11 @@ export default function LojaPage() {
         return item.group === 'exclusivo' || item.isExclusive
       }
       return true
+    }
+    if (activeTab === 'arenas') {
+      if (item.category !== 'arenas') return false
+      if (arenaCategoryFilter === 'todos') return true
+      return item.categoryKey === arenaCategoryFilter
     }
     return item.category === activeTab
   })
@@ -795,6 +838,39 @@ export default function LojaPage() {
           </div>
         )}
 
+        {/* SUB-FILTROS DE ARENAS DE JOGO */}
+        {activeTab === 'arenas' && (
+          <div className="w-full max-w-6xl space-y-3 mb-6 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 backdrop-blur-md">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1 flex items-center gap-1.5">
+                <Filter className="w-3.5 h-3.5 text-blue-400" /> Coleção:
+              </span>
+              {ARENA_CATEGORIES_LIST.map((cat) => {
+                const isSelected = arenaCategoryFilter === cat.key
+                const isExcl = cat.key === 'exclusivas'
+                return (
+                  <button
+                    key={cat.key}
+                    onClick={() => setArenaCategoryFilter(cat.key)}
+                    className={`cursor-pointer shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      isSelected
+                        ? isExcl
+                          ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] font-black'
+                          : 'bg-blue-500 text-slate-950 shadow-[0_0_12px_rgba(59,130,246,0.4)] font-black'
+                        : isExcl
+                        ? 'bg-rose-950/60 text-rose-300 border border-rose-500/40 hover:bg-rose-900/60'
+                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                    }`}
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.label}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         {/* VIP Tab Coming Soon Teaser */}
         {activeTab === 'vip' ? (
           <div className="w-full max-w-6xl py-16 px-6 text-center rounded-3xl bg-slate-900/50 border border-amber-500/20 backdrop-blur-xl relative overflow-hidden my-6">
@@ -901,6 +977,36 @@ export default function LojaPage() {
                             « {item.name} »
                           </span>
                         </div>
+                      ) : item.category === 'arenas' ? (
+                        <div 
+                          onClick={() => setPreviewArenaItem(item)}
+                          className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3 cursor-pointer group/arena"
+                        >
+                          {item.image ? (
+                            <img 
+                              src={item.image} 
+                              alt={item.name} 
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
+                              onError={(e) => {
+                                e.currentTarget.src = '/images/hero-bg.jpg'
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-600">
+                              <Globe className="w-8 h-8" />
+                            </div>
+                          )}
+                          <ArenaEffectsLayer effect={item.effect || 'particles'} intensity="low" showContrastOverlay={false} className="z-10" />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                          <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-black z-20">
+                            <span className="px-2 py-0.5 rounded bg-black/70 border border-white/10 text-slate-300 flex items-center gap-1 backdrop-blur-xs">
+                              {item.effect === 'fire' ? '🔥 Fogo' : item.effect === 'lava' ? '🌋 Lava' : item.effect === 'rain' ? '🌧️ Chuva' : item.effect === 'stars' ? '⭐ Estrelas' : item.effect === 'waves' ? '🌊 Ondas' : item.effect === 'lightning' ? '⚡ Trovões' : item.effect === 'fireworks' ? '🎆 Pirotecnia' : item.effect === 'fog' ? '🌫️ Névoa' : '✨ Partículas'}
+                            </span>
+                            <span className="px-2 py-0.5 rounded bg-blue-500/80 text-white flex items-center gap-1 shadow-sm opacity-90 group-hover/arena:opacity-100">
+                              <Eye className="w-3 h-3" /> Testar
+                            </span>
+                          </div>
+                        </div>
                       ) : (
                         <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
                           {item.image ? (
@@ -975,6 +1081,113 @@ export default function LojaPage() {
                 )
               })
             )}
+          </div>
+        )}
+
+        {/* MODAL DE PRÉ-VISUALIZAÇÃO DE ARENA COM EFEITOS DINÂMICOS */}
+        {previewArenaItem && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+            <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-blue-500/40 bg-slate-950 shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+              {/* Arena Background Layer with Particle Engine */}
+              <div 
+                className="relative h-72 sm:h-96 w-full bg-cover bg-center overflow-hidden flex flex-col justify-between p-6"
+                style={{ backgroundImage: `url('${previewArenaItem.image || '/images/hero-bg.jpg'}')` }}
+              >
+                <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={true} />
+                
+                {/* Header Preview */}
+                <div className="relative z-20 flex items-center justify-between">
+                  <span className={`px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider border shadow-md backdrop-blur-md ${
+                    previewArenaItem.badgeColor || 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+                  }`}>
+                    {previewArenaItem.badge} • {previewArenaItem.avatarCategoryLabel}
+                  </span>
+                  
+                  <button
+                    onClick={() => setPreviewArenaItem(null)}
+                    className="p-2 rounded-xl bg-black/60 border border-white/20 text-white hover:bg-black/90 transition cursor-pointer backdrop-blur-md"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Mock Question Preview HUD */}
+                <div className="relative z-20 max-w-lg mx-auto w-full rounded-2xl bg-slate-950/80 border border-white/15 p-4 backdrop-blur-md text-center shadow-2xl space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                    SIMULAÇÃO DE DUELO 1V1
+                  </span>
+                  <h4 className="text-sm sm:text-base font-bold text-white leading-tight">
+                    Qual foi a primeira capital de Portugal após a fundação da nacionalidade?
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <div className="rounded-xl border border-emerald-500/60 bg-emerald-500/20 py-2 text-xs font-bold text-emerald-300">
+                      A) Guimarães ✓
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-black/40 py-2 text-xs font-medium text-slate-300">
+                      B) Coimbra
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Info */}
+                <div className="relative z-20 flex items-center justify-between text-xs text-slate-300">
+                  <span className="bg-black/60 px-3 py-1 rounded-xl border border-white/10 backdrop-blur-md">
+                    Efeito: <strong className="text-white capitalize">{previewArenaItem.effect || 'Partículas'}</strong>
+                  </span>
+                  <span className="bg-black/60 px-3 py-1 rounded-xl border border-white/10 backdrop-blur-md">
+                    {previewArenaItem.isExclusive ? 'Mérito / Conquista' : previewArenaItem.price}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Bar */}
+              <div className="p-6 bg-slate-900 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-black text-white">{previewArenaItem.name}</h3>
+                  <p className="text-xs text-slate-400 mt-0.5">{previewArenaItem.description}</p>
+                  {previewArenaItem.isExclusive && !isItemUnlocked(previewArenaItem) && (
+                    <p className="text-xs font-bold text-rose-400 mt-1 flex items-center gap-1">
+                      <span>🔒 Requisito:</span> {previewArenaItem.unlockCondition}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-3 w-full sm:w-auto shrink-0">
+                  <button
+                    onClick={() => setPreviewArenaItem(null)}
+                    className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-xs font-bold text-slate-300 hover:bg-slate-700 transition cursor-pointer"
+                  >
+                    Fechar
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handleAction(previewArenaItem)
+                      if (isItemUnlocked(previewArenaItem)) {
+                        setPreviewArenaItem(null)
+                      }
+                    }}
+                    className={`flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-xs font-black transition cursor-pointer ${
+                      isItemEquipped(previewArenaItem)
+                        ? 'bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+                        : isItemUnlocked(previewArenaItem)
+                        ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                        : previewArenaItem.isExclusive
+                        ? 'bg-rose-500/30 border border-rose-500/50 text-rose-300 cursor-not-allowed'
+                        : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                    }`}
+                  >
+                    {isItemEquipped(previewArenaItem)
+                      ? 'Equipada ✓'
+                      : isItemUnlocked(previewArenaItem)
+                      ? 'Equipar Arena'
+                      : previewArenaItem.isExclusive
+                      ? '🔒 Bloqueada'
+                      : `Comprar ${previewArenaItem.price}`}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
