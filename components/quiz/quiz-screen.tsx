@@ -883,41 +883,30 @@ export function QuizScreen({
       {/* 6. FEEDBACK & NEXT QUESTION ACTION */}
       {phase === 'revealed' && (
         <div className="animate-rise mt-5 space-y-4">
+          {/* Card de Feedback da Resposta com 100% de Contraste */}
           <div
             className={cn(
-              'flex flex-col sm:flex-row items-start sm:items-center gap-3.5 rounded-3xl border p-4 sm:p-5 backdrop-blur-2xl shadow-xl',
+              'w-full max-w-xl mx-auto my-3 p-4 sm:p-5 rounded-2xl bg-slate-950/95 border shadow-2xl backdrop-blur-md transition-all',
               wasCorrect
-                ? 'border-primary/50 bg-primary/15 shadow-[0_0_30px_rgba(0,255,162,0.15)]'
-                : 'border-flag-red/50 bg-flag-red/15 shadow-[0_0_30px_rgba(244,63,94,0.15)]',
+                ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.25)]'
+                : 'border-red-500/40 shadow-[0_0_30px_rgba(239,68,68,0.25)]',
             )}
           >
-            <div className="flex items-center gap-3">
-              {wasCorrect ? (
-                <CheckCircle2 className="h-8 w-8 shrink-0 text-primary drop-shadow-[0_0_10px_var(--primary)]" />
-              ) : (
-                <XCircle className="h-8 w-8 shrink-0 text-flag-red drop-shadow-[0_0_10px_var(--flag-red)]" />
-              )}
-              <div className="sm:hidden">
-                <p
-                  className={cn(
-                    'font-display text-lg font-black uppercase tracking-wide',
-                    wasCorrect ? 'text-primary' : 'text-flag-red',
-                  )}
-                >
-                  {wasCorrect
-                    ? 'Correto!'
-                    : selected
-                      ? 'Incorreto!'
-                      : 'Tempo esgotado!'}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex-1">
-              <p
+            <div className="flex items-center gap-2 mb-1.5">
+              <span
                 className={cn(
-                  'hidden sm:block font-display text-lg font-black uppercase tracking-wide',
-                  wasCorrect ? 'text-primary' : 'text-flag-red',
+                  'inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-black shrink-0',
+                  wasCorrect
+                    ? 'bg-emerald-500/20 text-emerald-400'
+                    : 'bg-red-500/20 text-red-400',
+                )}
+              >
+                {wasCorrect ? '✓' : '✕'}
+              </span>
+              <h4
+                className={cn(
+                  'text-sm sm:text-base font-black tracking-wide uppercase',
+                  wasCorrect ? 'text-emerald-400' : 'text-red-400',
                 )}
               >
                 {wasCorrect
@@ -925,15 +914,15 @@ export function QuizScreen({
                   : selected
                     ? 'Resposta Incorreta!'
                     : 'Tempo Esgotado!'}
-              </p>
-
-              {q.explanation && (
-                <p className="mt-1 flex items-start gap-1.5 text-xs sm:text-sm text-foreground/90 font-medium leading-relaxed">
-                  <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                  <span>{q.explanation}</span>
-                </p>
-              )}
+              </h4>
             </div>
+
+            {q.explanation && (
+              <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed flex items-start gap-2 pt-1 border-t border-slate-800">
+                <span className="text-amber-400 mt-0.5 shrink-0">💡</span>
+                <span>{q.explanation}</span>
+              </p>
+            )}
           </div>
 
           {/* NEXT QUESTION BUTTON */}
