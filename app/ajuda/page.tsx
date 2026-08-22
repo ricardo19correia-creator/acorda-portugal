@@ -357,46 +357,40 @@ export default function AjudaPage() {
   // Handle Submit Problem Report
   const handleSubmitReport = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!reportDescription.trim()) {
-      setReportErrorMsg('Por favor, descreve o problema antes de enviar.')
-      setReportStatus('error')
-      return
-    }
-
     setReportSubmitting(true)
     setReportStatus('idle')
     setReportErrorMsg('')
 
     try {
-      const res = await fetch('/api/report', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: reportType || 'Erro técnico',
-          description: reportDescription.trim(),
-          page: reportLocation.trim() || 'N/A',
-          userEmail: reportEmail.trim() || user?.email || 'anónimo',
-        }),
+      // Log para garantir que a função está a ser chamada
+      console.log('A tentar enviar para o Firebase:', {
+        type: reportType,
+        description: reportDescription,
+        page: reportLocation,
+        userEmail: reportEmail || user?.email || 'anónimo',
       })
 
-      if (res.ok) {
-        setReportStatus('success')
-        setReportDescription('')
-        setReportLocation('')
+      const docRef = await addDoc(collection(db, 'reports'), {
+        type: reportType || 'Não especificado',
+        description: reportDescription || 'Vazio',
+        page: reportLocation || 'N/A',
+        userEmail: reportEmail || user?.email || 'anónimo',
+        createdAt: serverTimestamp(),
+        status: 'pendente',
+      })
 
-        // Limpar formulário após 2 segundos e fechar modal
-        setTimeout(() => {
-          setReportStatus('idle')
-          setReportModalOpen(false)
-        }, 2000)
-      } else {
-        setReportErrorMsg('Ocorreu um erro ao enviar. Tenta novamente.')
-        setReportStatus('error')
-      }
+      console.log('Sucesso! ID do Documento:', docRef.id)
+      setReportStatus('success')
+      setReportDescription('')
+      setReportLocation('')
+
+      setTimeout(() => {
+        setReportStatus('idle')
+        setReportModalOpen(false)
+      }, 2000)
     } catch (err: any) {
-      console.error('Erro ao submeter relatório:', err)
-      setReportErrorMsg('Erro de ligação. Tenta novamente.')
+      console.error('ERRO CRÍTICO NO ENVIO PARA O FIREBASE:', err)
+      setReportErrorMsg(`Erro: ${err?.message || 'Falha de comunicação.'}`)
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
