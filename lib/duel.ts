@@ -71,6 +71,13 @@ export interface DuelRematchState {
   requestedAt: number
 }
 
+export interface DuelTaunt {
+  senderId: string
+  senderName?: string
+  text: string
+  timestamp: number
+}
+
 export interface DuelDocument {
   id: string
   code: string // e.g. "AP-7K42"
@@ -89,6 +96,7 @@ export interface DuelDocument {
   winnerReason?: 'score' | 'draw' | 'abandon' | null
   rewardsClaimed?: Record<string, boolean>
   rematch?: DuelRematchState | null
+  lastTaunt?: DuelTaunt | null
 }
 
 export interface MatchmakingTicket {
@@ -1126,6 +1134,31 @@ export async function respondDuelRematch(
   })
 
   return { newDuelId }
+}
+
+/**
+ * Envia uma provocação / taunt em tempo real para o adversário no duelo
+ */
+export async function sendDuelTaunt(
+  duelId: string,
+  senderId: string,
+  senderName: string,
+  text: string
+): Promise<void> {
+  if (!duelId || !senderId || !text) return
+  try {
+    const duelRef = doc(db, 'duels', duelId)
+    await updateDoc(duelRef, {
+      lastTaunt: {
+        senderId,
+        senderName,
+        text,
+        timestamp: Date.now(),
+      },
+    })
+  } catch (error) {
+    console.error('Erro ao enviar provocação:', error)
+  }
 }
 
 

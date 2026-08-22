@@ -28,7 +28,12 @@ import {
   Award,
   Lightbulb,
   Snowflake,
+  MessageSquare,
+  Lock,
+  X,
 } from 'lucide-react'
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
+import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { useGameTheme } from '@/context/game-theme-context'
 import {
@@ -42,7 +47,9 @@ import {
   cleanMatchmakingQueue,
   requestDuelRematch,
   respondDuelRematch,
+  sendDuelTaunt,
 } from '@/lib/duel'
+import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
@@ -119,6 +126,88 @@ export function DuelArena({
 
   // Rematch action state
   const [rematchLoading, setRematchLoading] = useState(false)
+
+  // Taunt / Quick Reactions System State
+  const [tauntModalOpen, setTauntModalOpen] = useState(false)
+  const [tauntCooldown, setTauntCooldown] = useState(0)
+  const [activeTaunt, setActiveTaunt] = useState<{ senderId: string; text: string; timestamp: number } | null>(null)
+  const lastProcessedTauntTs = useRef<number>(0)
+  const [unlockedTaunts, setUnlockedTaunts] = useState<string[]>(['pack_basico'])
+
+  // Load user unlocked taunts
+  useEffect(() => {
+    try {
+      const userTaunts: string[] = (profile as any)?.inventory?.taunts || []
+      const localTaunts = localStorage.getItem('user_inventory_taunts')
+      let parsedLocal: string[] = []
+      if (localTaunts) {
+        try {
+          parsedLocal = JSON.parse(localTaunts)
+        } catch (e) {}
+      }
+      const combined = Array.from(new Set(['pack_basico', ...userTaunts, ...parsedLocal]))
+      setUnlockedTaunts(combined)
+    } catch (e) {}
+  }, [profile])
+
+  // Anti-spam 4-second cooldown timer
+  useEffect(() => {
+    if (tauntCooldown <= 0) return
+    const timer = setInterval(() => {
+      setTauntCooldown((prev) => Math.max(0, prev - 1))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [tauntCooldown])
+
+  // Real-time speech bubble trigger & 2.5s auto-dismiss
+  useEffect(() => {
+    if (duel?.lastTaunt && duel.lastTaunt.timestamp > lastProcessedTauntTs.current) {
+      lastProcessedTauntTs.current = duel.lastTaunt.timestamp
+      setActiveTaunt(duel.lastTaunt)
+
+      const timer = setTimeout(() => {
+        setActiveTaunt(null)
+      }, 2500)
+      return () => clearTimeout(timer)
+    }
+  }, [duel?.lastTaunt])
+
+  // Handle sending a taunt
+  const handleSendTaunt = async (tauntText: string) => {
+    if (tauntCooldown > 0 || !duelId) return
+    setTauntCooldown(4)
+    setTauntModalOpen(false)
+    await sendDuelTaunt(duelId, currentPlayer.uid, currentPlayer.displayName, tauntText)
+  }
+
+  // Handle buying a taunt pack directly
+  const handleBuyTauntPack = async (pack: TauntPack) => {
+    const savedEuros = Number(localStorage.getItem('user_euros') || '803845')
+    if (savedEuros < pack.price) {
+      alert(`Saldo insuficiente! Precisas de €${(pack.price - savedEuros).toLocaleString('pt-PT')} € Acorda.`)
+      return
+    }
+
+    const newBalance = savedEuros - pack.price
+    localStorage.setItem('user_euros', String(newBalance))
+
+    const newUnlocked = Array.from(new Set([...unlockedTaunts, pack.id]))
+    setUnlockedTaunts(newUnlocked)
+    localStorage.setItem('user_inventory_taunts', JSON.stringify(newUnlocked))
+
+    if (auth.currentUser) {
+      try {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          euros: newBalance,
+          'inventory.taunts': arrayUnion(pack.id),
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    window.dispatchEvent(new Event('inventory_updated'))
+  }
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -659,8 +748,21 @@ export function DuelArena({
             )}
 
           {/* Player Left (Me) */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0">
-            <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+          <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0 relative">
+            <div className="relative shrink-0">
+              <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+              
+              {/* Balão de Provocação (Jogador Atual) */}
+              {activeTaunt && activeTaunt.senderId === me?.uid && (
+                <div className="absolute -top-12 left-0 sm:-left-2 z-50 animate-bounce pointer-events-none">
+                  <div className="relative rounded-2xl border-2 border-emerald-400 bg-slate-950/95 px-3 py-1.5 text-xs font-black text-white shadow-[0_0_15px_rgba(16,185,129,0.7)] whitespace-nowrap backdrop-blur-md">
+                    {activeTaunt.text}
+                    <div className="absolute -bottom-1.5 left-4 w-2.5 h-2.5 bg-slate-950 border-r-2 border-b-2 border-emerald-400 transform rotate-45" />
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
@@ -677,9 +779,37 @@ export function DuelArena({
                   </span>
                 )}
               </div>
-              <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
-                {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
-              </p>
+
+              <div className="flex items-center gap-2">
+                <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
+                  {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
+                </p>
+
+                {/* Botão de Provocação / Mensagens Rápidas */}
+                <button
+                  type="button"
+                  disabled={tauntCooldown > 0}
+                  onClick={() => setTauntModalOpen(true)}
+                  className={cn(
+                    'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider transition shadow-md cursor-pointer select-none',
+                    tauntCooldown > 0
+                      ? 'bg-slate-800/80 text-slate-400 border border-slate-700/60 cursor-not-allowed'
+                      : 'bg-purple-600/90 hover:bg-purple-500 text-white border border-purple-400/50 shadow-[0_0_10px_rgba(168,85,247,0.4)] hover:scale-105 active:scale-95'
+                  )}
+                >
+                  {tauntCooldown > 0 ? (
+                    <>
+                      <span className="text-[10px] animate-spin">⏳</span>
+                      <span>{tauntCooldown}s</span>
+                    </>
+                  ) : (
+                    <>
+                      <MessageSquare className="h-3 w-3 text-purple-200" />
+                      <span>💬 Provocar</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -694,7 +824,7 @@ export function DuelArena({
           </div>
 
           {/* Player Right (Opponent) */}
-          <div className="flex items-center justify-end gap-2.5 sm:gap-3.5 flex-1 min-w-0 text-right">
+          <div className="flex items-center justify-end gap-2.5 sm:gap-3.5 flex-1 min-w-0 text-right relative">
             <div className="min-w-0">
               <div className="flex items-center justify-end gap-1.5">
                 <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
@@ -705,7 +835,20 @@ export function DuelArena({
                 Pergunta {Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)} / 10
               </p>
             </div>
-            <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
+
+            <div className="relative shrink-0">
+              <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
+
+              {/* Balão de Provocação (Adversário) */}
+              {activeTaunt && activeTaunt.senderId === opponent?.uid && (
+                <div className="absolute -top-12 right-0 sm:-right-2 z-50 animate-bounce pointer-events-none">
+                  <div className="relative rounded-2xl border-2 border-purple-400 bg-slate-950/95 px-3 py-1.5 text-xs font-black text-white shadow-[0_0_15px_rgba(168,85,247,0.7)] whitespace-nowrap backdrop-blur-md">
+                    {activeTaunt.text}
+                    <div className="absolute -bottom-1.5 right-4 w-2.5 h-2.5 bg-slate-950 border-r-2 border-b-2 border-purple-400 transform rotate-45" />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -1192,6 +1335,106 @@ export function DuelArena({
           }
         }}
       />
+
+      {/* ========================================================= */}
+      {/* MODAL DE PROVOCAÇÕES & REAÇÕES RÁPIDAS 1V1 */}
+      {/* ========================================================= */}
+      {tauntModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
+        >
+          <div className="relative w-full max-w-lg rounded-3xl border border-purple-500/30 bg-slate-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-2xl">
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setTauntModalOpen(false)}
+              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                <MessageSquare className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-display text-base sm:text-lg font-black uppercase text-white">
+                  Provocações de Quiz 1v1
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Envia mensagens psicológicas em tempo real (Cooldown: 4s)
+                </p>
+              </div>
+            </div>
+
+            {/* Packs & Taunts */}
+            <div className="space-y-3.5 max-h-[60vh] overflow-y-auto pr-1">
+              {TAUNT_PACKS.map((pack) => {
+                const isUnlocked = pack.isFree || unlockedTaunts.includes(pack.id)
+
+                return (
+                  <div
+                    key={pack.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-950/60 p-3.5 sm:p-4"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-base">{pack.icon}</span>
+                        <span className="font-display text-xs sm:text-sm font-bold text-white">
+                          {pack.name}
+                        </span>
+                      </div>
+
+                      {!isUnlocked ? (
+                        <button
+                          type="button"
+                          onClick={() => handleBuyTauntPack(pack)}
+                          className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black tracking-wider uppercase transition flex items-center gap-1 cursor-pointer shadow-sm"
+                        >
+                          <Lock className="w-3 h-3" />
+                          <span>€{pack.price.toLocaleString('pt-PT')}</span>
+                        </button>
+                      ) : (
+                        <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${pack.badgeColor}`}>
+                          {pack.isFree ? 'Grátis' : 'Desbloqueado'}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-[11px] text-slate-400 mb-2.5 leading-snug">
+                      {pack.description}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {pack.taunts.map((t) => (
+                        <button
+                          key={t.id}
+                          type="button"
+                          disabled={!isUnlocked || tauntCooldown > 0}
+                          onClick={() => handleSendTaunt(t.text)}
+                          className={cn(
+                            'px-3 py-2 rounded-xl text-xs font-bold text-left transition border',
+                            !isUnlocked
+                              ? 'bg-slate-900/30 border-slate-800/50 text-slate-500 opacity-60 cursor-not-allowed'
+                              : tauntCooldown > 0
+                              ? 'bg-slate-900 border-slate-800 text-slate-400 cursor-not-allowed'
+                              : 'bg-slate-900/90 hover:bg-purple-500/20 text-slate-200 hover:text-white border-slate-800 hover:border-purple-500/50 hover:scale-102 cursor-pointer shadow-sm'
+                          )}
+                        >
+                          {t.text}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

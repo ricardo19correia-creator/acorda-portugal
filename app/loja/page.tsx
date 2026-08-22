@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check, Filter } from 'lucide-react'
+import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check, Filter, MessageSquare } from 'lucide-react'
 import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
+import { TAUNT_PACKS } from '@/data/tauntPacks'
 
-type Category = 'vip' | 'avatars' | 'todos' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
+type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
 type AvatarCategory = 'todos' | 'historia' | 'geografia' | 'desporto' | 'cultura' | 'simbolos'
 type AvatarRarity = 'todas' | 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Exclusivo'
 
@@ -42,6 +43,18 @@ const AVATAR_SHOP_ITEMS: ShopItem[] = avatarShopList.map((av) => ({
   badgeColor: av.badgeColor,
 }))
 
+const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) => ({
+  id: p.id,
+  name: `Pack: ${p.name}`,
+  category: 'taunts',
+  description: p.description,
+  price: `€${p.price.toLocaleString('pt-PT')}`,
+  priceValue: p.price,
+  badge: 'Provocação 1v1',
+  badgeColor: p.badgeColor,
+  image: '/images/hero-bg.jpg',
+}))
+
 const OTHER_SHOP_ITEMS: ShopItem[] = [
   // ARENAS
   { id: 'arena_ponte_2077', name: 'Ponte do Infinito 2077', category: 'arenas', description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus.', price: 'GRÁTIS', priceValue: 0, image: '/arenas/arena-ponte-2077.gif', badge: 'Desbloqueado' },
@@ -60,7 +73,7 @@ const OTHER_SHOP_ITEMS: ShopItem[] = [
   { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', price: '€1.000', priceValue: 1000, image: '/images/shop/titulo-conquistador.jpg', badge: 'Honorífico' }
 ]
 
-const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
+const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
 const AVATAR_CATEGORIES = [
   { key: 'todos' as AvatarCategory, label: 'Todos os Avatares' },
@@ -180,11 +193,15 @@ export default function LojaPage() {
     if (item.category === 'molduras' && inventory.frames.includes(item.id)) return true
     if (item.category === 'arenas' && inventory.arenas.includes(item.id)) return true
     if (item.category === 'titulos' && inventory.titles.includes(item.id)) return true
+    if (item.category === 'taunts') {
+      const localTaunts = JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]')
+      return item.priceValue === 0 || unlockedItems.includes(item.id) || localTaunts.includes(item.id)
+    }
     return false
   }
 
   const isItemEquipped = (item: ShopItem) => {
-    if (item.category === 'ajudas') return false
+    if (item.category === 'ajudas' || item.category === 'taunts') return false
     if (item.category === 'avatars') return equippedAvatar === item.image
     if (item.category === 'arenas') return equippedArena === item.id
     if (item.category === 'molduras') return equippedFrame === item.id
@@ -303,6 +320,8 @@ export default function LojaPage() {
         }
         window.dispatchEvent(new Event('titleChanged'))
         showToast(`Título "${item.name}" ativado no perfil!`)
+      } else if (item.category === 'taunts') {
+        showToast(`Pack de provocações pronto para uso nos Duelos 1v1!`)
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
@@ -338,6 +357,10 @@ export default function LojaPage() {
       } else if (item.category === 'titulos') {
         updatedInv.titles = Array.from(new Set([...updatedInv.titles, item.id]))
         firestoreInvField = 'inventory.titles'
+      } else if (item.category === 'taunts') {
+        const localTaunts = Array.from(new Set([...JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]'), item.id]))
+        localStorage.setItem('user_inventory_taunts', JSON.stringify(localTaunts))
+        firestoreInvField = 'inventory.taunts'
       }
 
       setInventory(updatedInv)
@@ -539,6 +562,17 @@ export default function LojaPage() {
             }`}
           >
             <Globe className="w-3.5 h-3.5" /> Arenas de Jogo
+          </button>
+
+          <button
+            onClick={() => setActiveTab('taunts')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
+              activeTab === 'taunts'
+                ? 'bg-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.4)]'
+                : 'bg-slate-900/70 text-rose-300 border border-rose-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <MessageSquare className="w-3.5 h-3.5" /> Provocações 1v1
           </button>
 
           <button
