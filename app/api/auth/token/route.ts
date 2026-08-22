@@ -36,13 +36,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'idToken is required' }, { status: 400 })
     }
 
-    const app = getAdminApp()
-    const adminAuth = getAuth(app)
-
     let uid: string | null = null
 
     // 1. Try verifyIdToken
     try {
+      const app = getAdminApp()
+      const adminAuth = getAuth(app)
       const decoded = await adminAuth.verifyIdToken(idToken)
       uid = decoded.uid
     } catch {
@@ -64,9 +63,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid or expired idToken' }, { status: 401 })
     }
 
-    // 3. Create custom token
-    const customToken = await adminAuth.createCustomToken(uid)
-    return NextResponse.json({ customToken, uid })
+    // 3. Create custom token if possible
+    try {
+      const app = getAdminApp()
+      const adminAuth = getAuth(app)
+      const customToken = await adminAuth.createCustomToken(uid)
+      return NextResponse.json({ customToken, uid })
+    } catch (e) {
+      console.warn('Could not create custom token via admin SDK, returning idToken payload:', e)
+      return NextResponse.json({ customToken: null, idToken, uid })
+    }
   } catch (error: any) {
     console.error('[API AUTH TOKEN ERROR]', error)
     return NextResponse.json({ error: error.message || 'Internal error generating custom token' }, { status: 500 })
