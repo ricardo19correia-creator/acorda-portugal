@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Flag, Flame } from 'lucide-react'
+import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Flag, Flame, HelpCircle } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { OnlineUsersBadge } from '@/components/online-users-badge'
@@ -32,6 +32,7 @@ export function SiteHeader() {
     { label: 'Mapa de Portugal', href: '/portugal', icon: Flag },
     { label: 'Eventos em Direto', href: '/eventos', icon: Flame },
     { label: 'Loja € Acorda', href: '/loja', icon: ShoppingBag },
+    { label: 'Central de Ajuda', href: '/ajuda', icon: HelpCircle },
     { label: 'O Meu Perfil', href: '/perfil', icon: User },
   ]
 

@@ -15,7 +15,7 @@ export default function Footer() {
         <Link href="/explorar" className="hover:text-emerald-400 transition-colors">Explorar &amp; Sobre</Link>
         <Link href="/loja" className="hover:text-emerald-400 transition-colors">Loja</Link>
         <Link href="/termos" className="hover:text-emerald-400 transition-colors">Termos &amp; Privacidade</Link>
-        <Link href="/termos#suporte" className="text-emerald-400 font-semibold hover:underline">Suporte &amp; Ajuda</Link>
+        <Link href="/ajuda" className="text-emerald-400 font-semibold hover:underline">Central de Ajuda</Link>
       </div>
       <p className="mt-4 text-[11px] text-zinc-600">
         © {new Date().getFullYear()} Acorda Portugal — Todos os direitos reservados.

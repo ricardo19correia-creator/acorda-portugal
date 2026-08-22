@@ -127,7 +127,7 @@ export function Hero() {
               <span className="group-hover:translate-x-0.5 transition">🇵🇹 Mapa Territorial</span>
             </Link>
             <span className="text-white/20">•</span>
-            <Link href="#faq" className="hover:text-emerald-300 transition flex items-center gap-1.5 group">
+            <Link href="/ajuda" className="hover:text-emerald-300 transition flex items-center gap-1.5 group">
               <span className="group-hover:translate-x-0.5 transition">❓ Perguntas Frequentes</span>
             </Link>
             <span className="text-white/20">•</span>

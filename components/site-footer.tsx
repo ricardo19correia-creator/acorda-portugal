@@ -10,7 +10,7 @@ const LINKS = [
   { label: 'Explorar & Sobre', href: '/explorar' },
   { label: 'Loja', href: '/loja' },
   { label: 'Termos', href: '/termos' },
-  { label: 'Suporte & Ajuda', href: '/termos#suporte' },
+  { label: 'Central de Ajuda', href: '/ajuda' },
 ]
 
 export function SiteFooter() {
