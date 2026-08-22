@@ -1234,16 +1234,16 @@ function PerfilContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {TAUNT_PACKS.map((pack) => {
-                    const isUnlocked = pack.isFree || inventory.taunts.includes(pack.id) || unlockedItems.includes(pack.id)
+                    const isOwned = pack.isFree || pack.id === 'pack_basico' || pack.id === 'pack-basic' || inventory.taunts?.includes(pack.id) || unlockedItems.includes(pack.id)
 
                     return (
                       <div
                         key={pack.id}
                         className={cn(
                           'p-5 rounded-2xl border backdrop-blur-md shadow-xl transition-all',
-                          isUnlocked
+                          isOwned
                             ? 'bg-slate-900/90 border-slate-700/80 shadow-purple-950/20'
-                            : 'bg-slate-950/60 border-slate-800 opacity-60',
+                            : 'bg-slate-950/60 border-slate-800 opacity-70',
                         )}
                       >
                         <div className="flex items-center justify-between mb-3">
@@ -1251,22 +1251,26 @@ function PerfilContent() {
                             <span className="text-2xl">{pack.icon}</span>
                             <div>
                               <h3 className="font-black text-sm text-white">{pack.name}</h3>
-                              <span className={cn('text-[10px] font-bold px-2 py-0.5 rounded border mt-0.5 inline-block', pack.badgeColor)}>
-                                {pack.isFree ? 'Grátis' : 'Desbloqueado'}
+                              <span className={cn(
+                                'text-[10px] font-bold px-2 py-0.5 rounded border mt-0.5 inline-block',
+                                isOwned ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'
+                              )}>
+                                {isOwned ? (pack.isFree ? 'Grátis (Base)' : 'Desbloqueado') : `€${pack.price.toLocaleString('pt-PT')} na Loja`}
                               </span>
                             </div>
                           </div>
 
-                          {isUnlocked ? (
-                            <span className="text-xs font-black text-emerald-400 flex items-center gap-1 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-1 rounded-full">
+                          {isOwned ? (
+                            <span className="text-xs font-black text-emerald-400 flex items-center gap-1 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-1 rounded-full shadow-sm">
                               <Check className="w-3 h-3" /> Ativo
                             </span>
                           ) : (
                             <Link
                               href="/loja"
-                              className="text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-3 py-1 rounded-xl hover:bg-amber-500/30 transition-all"
+                              className="text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-3 py-1 rounded-xl hover:bg-amber-500/30 transition-all shadow-sm flex items-center gap-1"
                             >
-                              Adquirir
+                              <span>Adquirir na Loja</span>
+                              <span>→</span>
                             </Link>
                           )}
                         </div>

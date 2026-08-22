@@ -34,6 +34,7 @@ interface ShopItem {
   effect?: ArenaEffect
   badge?: string
   badgeColor?: string
+  phrases?: string[]
 }
 
 const getRarityBadgeColor = (rarity: AvatarRarity) => {
@@ -117,7 +118,7 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) 
   priceValue: p.price,
   badge: 'Provocação 1v1',
   badgeColor: p.badgeColor,
-  image: '/images/hero-bg.jpg',
+  phrases: p.taunts.map((t) => t.text),
 }))
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
@@ -1111,6 +1112,22 @@ export default function LojaPage() {
                               <Eye className="w-3 h-3" /> Testar
                             </span>
                           </div>
+                        </div>
+                      ) : item.category === 'taunts' ? (
+                        <div className="w-full h-40 rounded-xl bg-slate-950/80 border border-slate-800 p-3 flex flex-col justify-center gap-2 overflow-hidden mb-3">
+                          {(item.phrases || []).slice(0, 2).map((phrase, idx) => (
+                            <div
+                              key={idx}
+                              className={cn(
+                                "px-3 py-1.5 rounded-full bg-slate-900 text-xs font-semibold max-w-[90%] truncate shadow-sm",
+                                idx % 2 === 0
+                                  ? "self-start border border-cyan-500/30 text-cyan-300"
+                                  : "self-end border border-amber-500/30 text-amber-300"
+                              )}
+                            >
+                              💬 "{phrase}"
+                            </div>
+                          ))}
                         </div>
                       ) : (
                         <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
