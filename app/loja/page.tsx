@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, User, Layers, Zap, Palette, Trophy, Globe, Check, Filter, MessageSquare } from 'lucide-react'
+import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare } from 'lucide-react'
 import { doc, updateDoc, increment, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 
-type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'molduras' | 'titulos' | 'arenas'
+type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
 interface ShopItem {
   id: string
@@ -89,10 +89,6 @@ const OTHER_SHOP_ITEMS: ShopItem[] = [
   { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)' },
   { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)' },
 
-  // MOLDURAS
-  { id: 'moldura_ouro_real', name: 'Moldura Ouro Real 3D', category: 'molduras', description: 'Rebordo dourado pulsante ao redor do teu avatar.', price: '€4.000', priceValue: 4000, image: '/images/shop/moldura-ouro.jpg', badge: 'Exclusivo' },
-  { id: 'moldura_neon_portugal', name: 'Moldura Quinas Neon', category: 'molduras', description: 'Efeito luminoso verde e rubro vivo.', price: '€2.500', priceValue: 2500, image: '/images/shop/moldura-neon.jpg', badge: 'Raro' },
-
   // TÍTULOS
   { id: 'titulo_patriota', name: 'Título: O Conquistador', category: 'titulos', description: 'Exibido por baixo do teu nome em todos os rankings e duelos.', price: '€1.000', priceValue: 1000, image: '/images/shop/titulo-conquistador.jpg', badge: 'Honorífico' }
 ]
@@ -109,13 +105,11 @@ export default function LojaPage() {
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
-  const [equippedFrame, setEquippedFrame] = useState<string>('')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [userBalance, setUserBalance] = useState<number>(803845)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
-  const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[] }>({
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
     avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
-    frames: ['moldura_padrao'],
     arenas: ['arena_ponte_2077', 'arena_neon_2088'],
     titles: ['titulo_iniciante']
   })
@@ -137,9 +131,6 @@ export default function LojaPage() {
       
       const savedArena = localStorage.getItem('equipped_arena')
       if (savedArena) setEquippedArena(savedArena)
-
-      const savedFrame = localStorage.getItem('equipped_frame') || localStorage.getItem('user_equipped_frame')
-      if (savedFrame) setEquippedFrame(savedFrame)
 
       const savedTitle = localStorage.getItem('equipped_title')
       if (savedTitle) setEquippedTitle(savedTitle)
@@ -164,7 +155,6 @@ export default function LojaPage() {
           if (parsedInv) {
             setInventory((prev) => ({
               avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
-              frames: Array.from(new Set([...prev.frames, ...(parsedInv.frames || [])])),
               arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
               titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
             }))
@@ -213,7 +203,6 @@ export default function LojaPage() {
       if (item.id === 'cyborg-quinas' && (inventory.avatars.includes('avatar_lenda_futebol') || unlockedItems.includes('avatar_lenda_futebol'))) return true
       if (item.id === 'fadista-cyber-alfama' && (inventory.avatars.includes('avatar_fadista_cyber') || unlockedItems.includes('avatar_fadista_cyber'))) return true
     }
-    if (item.category === 'molduras' && inventory.frames.includes(item.id)) return true
     if (item.category === 'arenas' && inventory.arenas.includes(item.id)) return true
     if (item.category === 'titulos' && inventory.titles.includes(item.id)) return true
     if (item.category === 'taunts') {
@@ -227,7 +216,6 @@ export default function LojaPage() {
     if (item.category === 'ajudas' || item.category === 'taunts') return false
     if (item.category === 'avatars') return equippedAvatar === item.image
     if (item.category === 'arenas') return equippedArena === item.id
-    if (item.category === 'molduras') return equippedFrame === item.id
     if (item.category === 'titulos') return equippedTitle === item.name
     return false
   }
@@ -338,22 +326,6 @@ export default function LojaPage() {
         }
         window.dispatchEvent(new Event('arenaChanged'))
         showToast(`Arena "${item.name}" equipada no jogo!`)
-      } else if (item.category === 'molduras') {
-        setEquippedFrame(item.id)
-        localStorage.setItem('equipped_frame', item.id)
-        localStorage.setItem('user_equipped_frame', item.id)
-        if (auth.currentUser) {
-          try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              'equipped.frame': item.id,
-              equippedFrame: item.id
-            })
-          } catch (e) {
-            console.error(e)
-          }
-        }
-        window.dispatchEvent(new Event('frameChanged'))
-        showToast(`Moldura "${item.name}" equipada!`)
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)
         localStorage.setItem('equipped_title', item.name)
@@ -396,9 +368,6 @@ export default function LojaPage() {
       if (item.category === 'avatars') {
         updatedInv.avatars = Array.from(new Set([...updatedInv.avatars, item.id]))
         firestoreInvField = 'inventory.avatars'
-      } else if (item.category === 'molduras') {
-        updatedInv.frames = Array.from(new Set([...updatedInv.frames, item.id]))
-        firestoreInvField = 'inventory.frames'
       } else if (item.category === 'arenas') {
         updatedInv.arenas = Array.from(new Set([...updatedInv.arenas, item.id]))
         firestoreInvField = 'inventory.arenas'
@@ -428,11 +397,6 @@ export default function LojaPage() {
         localStorage.setItem('equipped_arena', item.id)
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         window.dispatchEvent(new Event('arenaChanged'))
-      } else if (item.category === 'molduras') {
-        setEquippedFrame(item.id)
-        localStorage.setItem('equipped_frame', item.id)
-        localStorage.setItem('user_equipped_frame', item.id)
-        window.dispatchEvent(new Event('frameChanged'))
       } else if (item.category === 'titulos') {
         setEquippedTitle(item.name)
         localStorage.setItem('equipped_title', item.name)
@@ -450,9 +414,6 @@ export default function LojaPage() {
           if (item.category === 'avatars' && item.image) {
             updatePayload['equipped.avatar'] = item.image
             updatePayload.avatar = item.image
-          } else if (item.category === 'molduras') {
-            updatePayload['equipped.frame'] = item.id
-            updatePayload.equippedFrame = item.id
           } else if (item.category === 'arenas') {
             updatePayload['equipped.arena'] = item.id
           } else if (item.category === 'titulos') {
@@ -576,17 +537,6 @@ export default function LojaPage() {
             }`}
           >
             <Zap className="w-3.5 h-3.5" /> Ajudas & Utilidades
-          </button>
-
-          <button
-            onClick={() => setActiveTab('molduras')}
-            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-              activeTab === 'molduras'
-                ? 'bg-purple-500 text-slate-950 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
-                : 'bg-slate-900/70 text-purple-300 border border-purple-500/30 hover:bg-slate-800'
-            }`}
-          >
-            <Palette className="w-3.5 h-3.5" /> Molduras
           </button>
 
           <button
@@ -766,9 +716,6 @@ export default function LojaPage() {
                 const isEquipped = isItemEquipped(item)
                 const isExclusive = item.isExclusive
 
-                const isGoldFrame = item.id === 'moldura_ouro_real'
-                const isNeonFrame = item.id === 'moldura_neon_portugal'
-
                 return (
                   <div 
                     key={item.id}
@@ -815,9 +762,7 @@ export default function LojaPage() {
                           <img 
                             src={item.image} 
                             alt={item.name} 
-                            className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                              isGoldFrame ? 'animate-frame-gold' : isNeonFrame ? 'animate-frame-neon' : ''
-                            }`} 
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
                             onError={(e) => {
                               e.currentTarget.src = '/images/avatars/guardiao-vulcanico.jpg'
                             }}
