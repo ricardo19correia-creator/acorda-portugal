@@ -67,8 +67,7 @@ function DuelPageContent() {
 
   if (!effectiveDuelId) {
     return (
-      <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
-        <ArenaDynamicBackground />
+      <div className="relative min-h-screen bg-slate-950 flex flex-col justify-between">
         <BackgroundFx variant="multiplayer" />
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
@@ -130,19 +129,13 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-transparent">
-      {/* Imagem nítida e brilhante da Arena Equipada durante o Duelo */}
-      {arenaImage && (
-        <div 
-          className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
-          style={{
-            backgroundImage: `url('${arenaImage}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      )}
+    <div className="relative min-h-screen bg-slate-950">
+      {/* Fundo Oficial 12 (Duelo 1v1) ou Imagem da Arena Equipada */}
+      <BackgroundFx
+        variant="duel"
+        customImage={arenaImage && !arenaImage.includes('hero-bg') ? arenaImage : undefined}
+        contrastIntensity="subtle"
+      />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <DuelArena
           key={effectiveDuelId}

@@ -7,8 +7,8 @@ import { ArrowLeft, Play, Flame, Calendar } from 'lucide-react'
 
 export default function EventosPage() {
   return (
-    <div className="relative min-h-screen bg-transparent flex flex-col">
-      <BackgroundFx variant="ranking" />
+    <div className="relative min-h-screen bg-slate-950 flex flex-col">
+      <BackgroundFx variant="challenges" />
 
       <div className="relative z-20 flex-1 flex flex-col">
         <SiteHeader />

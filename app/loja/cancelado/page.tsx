@@ -52,8 +52,8 @@ function CancelContent() {
 
 export default function ShopCancelPage() {
   return (
-    <div className="min-h-screen bg-background flex flex-col justify-between">
-      <BackgroundFx />
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-between">
+      <BackgroundFx variant="shop" />
       <SiteHeader />
       <Suspense fallback={null}>
         <CancelContent />

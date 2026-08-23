@@ -9,8 +9,8 @@ import { ArrowLeft, Gamepad2, Trophy, LayoutGrid, Sparkles } from 'lucide-react'
 
 export default function ExplorarPage() {
   return (
-    <div className="relative min-h-screen bg-transparent flex flex-col">
-      <BackgroundFx variant="explore" />
+    <div className="relative min-h-screen bg-slate-950 flex flex-col">
+      <BackgroundFx variant="about" />
 
       <div className="relative z-20 flex-1 flex flex-col">
         <SiteHeader />

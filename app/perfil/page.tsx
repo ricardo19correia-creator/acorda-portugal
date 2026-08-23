@@ -31,6 +31,7 @@ import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
+import { AppBackground } from '@/components/AppBackground'
 import { cn } from '@/lib/utils'
 
 interface InventoryItem {
@@ -1000,7 +1001,10 @@ function PerfilContent() {
   if (!mounted) return <div className="min-h-screen bg-slate-950" />
 
   return (
-    <div className="min-h-screen w-full bg-slate-950 text-white p-4 md:p-8 flex flex-col items-center">
+    <div className="relative min-h-screen w-full bg-slate-950 text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
+      {/* 1. FUNDO OFICIAL 04: PERFIL */}
+      <AppBackground variant="profile" />
+
       {/* Top Navigation */}
       <div className="w-full max-w-5xl flex items-center justify-between mb-6">
         <Link 

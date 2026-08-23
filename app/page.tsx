@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { AppBackground } from '@/components/AppBackground'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
 import { GuzmaniaSection } from '@/components/guzmania-section'
@@ -8,17 +9,9 @@ import { SiteFooter } from '@/components/site-footer'
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-transparent text-foreground flex flex-col justify-between">
-      {/* 1. FUNDO HERO-BG FIXO EM Z-0 */}
-      <div 
-        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/images/hero-bg.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
+    <div className="relative min-h-screen w-full overflow-hidden bg-slate-950 text-foreground flex flex-col justify-between">
+      {/* 1. FUNDO OFICIAL 03: HOME / MENU PRINCIPAL */}
+      <AppBackground variant="home" contrastIntensity="subtle" />
       
       {/* 2. CONTEÚDO DO SITE ENCAPSULADO EM RELATIVE Z-10 */}
       <div className="relative z-10 flex-1 flex flex-col justify-between bg-transparent">

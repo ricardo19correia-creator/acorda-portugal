@@ -232,8 +232,8 @@ function SuccessContent() {
 
 export default function ShopSuccessPage() {
   return (
-    <div className="min-h-screen bg-background flex flex-col justify-between">
-      <BackgroundFx />
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-between">
+      <BackgroundFx variant="rewards" />
       <SiteHeader />
       <Suspense fallback={null}>
         <SuccessContent />

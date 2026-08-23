@@ -4,6 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
 import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
+import { AppBackground } from '@/components/AppBackground'
 
 function JogarContainer() {
   const searchParams = useSearchParams()
@@ -11,7 +12,7 @@ function JogarContainer() {
   const gameParam = searchParams.get('game')
   const isPlaying = Boolean(categoryParam || gameParam)
   
-  const [arenaImage, setArenaImage] = useState<string>('/images/hero-bg.jpg')
+  const [arenaImage, setArenaImage] = useState<string>('')
 
   useEffect(() => {
     const sync = () => {
@@ -32,10 +33,10 @@ function JogarContainer() {
           } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores' || savedArena === 'arena_vulcao_erupcao') {
             setArenaImage('/images/shop/arena-fogo-acores.jpg')
           } else {
-            setArenaImage('/images/hero-bg.jpg')
+            setArenaImage('')
           }
         } else {
-          setArenaImage('/images/hero-bg.jpg')
+          setArenaImage('')
         }
       }
     }
@@ -53,19 +54,13 @@ function JogarContainer() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
-      {/* 1. SE A PARTIDA ESTIVER ATIVA (isPlaying === true): Exibe a imagem da arena equipada COM 100% DE BRILHO E NITIDEZ, SEM OVERLAYS ESCUROS */}
-      {isPlaying && arenaImage && (
-        <div 
-          className="fixed inset-0 -z-10 w-full h-full pointer-events-none"
-          style={{
-            backgroundImage: `url('${arenaImage}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      )}
+    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
+      {/* 1. FUNDO DO QUIZ (Fundo Oficial 06 ou Arena Cosmética Equipada) */}
+      <AppBackground
+        variant="quiz"
+        customImage={isPlaying && arenaImage ? arenaImage : undefined}
+        contrastIntensity={isPlaying ? 'subtle' : 'normal'}
+      />
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / SESSÃO ATIVA DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">

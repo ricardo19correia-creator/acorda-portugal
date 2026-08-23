@@ -449,17 +449,8 @@ export default function AjudaPage() {
 
   return (
     <div className="relative min-h-screen text-foreground flex flex-col justify-between overflow-x-hidden bg-slate-950">
-      {/* 1. FUNDO HERO CYBERPUNK FIXO EM Z-0 */}
-      <div 
-        className="fixed inset-0 z-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(rgba(2,6,23,0.85), rgba(2,6,23,0.92)), url('/images/hero-bg.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-slate-950/90 via-slate-950/75 to-slate-950 pointer-events-none backdrop-blur-[2px]" />
+      {/* 1. FUNDO OFICIAL 22: SUPORTE / CENTRAL DE AJUDA */}
+      <BackgroundFx variant="support" contrastIntensity="normal" />
 
       {/* 2. CONTEÚDO DA CENTRAL DE AJUDA COM Z-INDEX SUPERIOR */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">
