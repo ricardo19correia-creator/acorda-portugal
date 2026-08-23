@@ -33,7 +33,7 @@ export type AppBackgroundVariant =
 const VARIANT_IMAGE_MAP: Record<AppBackgroundVariant, string> = {
   splash: '/images/backgrounds/bg-01-splash.svg',
   auth: '/images/backgrounds/bg-02-auth.svg',
-  home: '/images/backgrounds/bg-03-home.svg',
+  home: '/images/afonso-henriques-hero.jpg',
   profile: '/images/backgrounds/bg-04-profile.svg',
   categories: '/images/backgrounds/bg-05-categories.svg',
   quiz: '/images/backgrounds/bg-06-quiz.svg',
@@ -55,7 +55,7 @@ const VARIANT_IMAGE_MAP: Record<AppBackgroundVariant, string> = {
   support: '/images/backgrounds/bg-22-support.svg',
   offline: '/images/backgrounds/bg-23-offline.svg',
   'not-found': '/images/backgrounds/bg-24-not-found.svg',
-  default: '/images/backgrounds/bg-03-home.svg',
+  default: '/images/afonso-henriques-hero.jpg',
 }
 
 interface AppBackgroundProps {
