@@ -52,18 +52,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfileLoading(true)
         const userDocRef = doc(db, 'users', currentAuthUser.uid)
 
-        // 1. Ouvir atualizações em tempo real sem sobrescrever
+        // 1. Ouvir atualizações em tempo real sem sobrescrever dados
         unsubscribeSnapshot = onSnapshot(
           userDocRef,
           async (docSnap) => {
             if (docSnap.exists()) {
               const data = docSnap.data()
-              const coinsVal = data.coins ?? data.euros ?? data.acordaCoins ?? 803845
-              const xpVal = data.xp ?? 5980
-              const levelVal = data.level ?? calculateLevelProgress(xpVal).currentLevel.level
-              const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || 'Riky Moreira'
-              const districtVal = data.district || 'Vila Real'
-              const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Membro Fundador'
+              const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
+              const xpVal = typeof data.xp === 'number' ? data.xp : 0
+              const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
+              const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
+              const districtVal = data.district || 'Portugal'
+              const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
               const avatarVal = data.avatar || data.photoURL || currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg'
 
               const loadedProfile: UserProfile = {
@@ -78,24 +78,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 coins: coinsVal,
                 euros: coinsVal,
                 photoURL: avatarVal,
-                streak: data.streak ?? 7,
-                gamesPlayed: data.gamesPlayed ?? 24,
-                wins: data.wins ?? 18,
-                losses: data.losses ?? 6,
-                questionsAnswered: data.questionsAnswered ?? 180,
-                correctAnswers: data.correctAnswers ?? 162,
-                incorrectAnswers: data.incorrectAnswers ?? 18,
-                totalQuestions: data.totalQuestions ?? 180,
-                bestStreak: data.bestStreak ?? 12,
-                unlockedAchievements: data.unlockedAchievements || ['first_win', 'streak_3', 'level_5'],
-                badges: data.badges || ['founder', 'top_district'],
+                streak: typeof data.streak === 'number' ? data.streak : 0,
+                gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
+                wins: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
+                losses: typeof data.losses === 'number' ? data.losses : Math.max(0, (data.gamesPlayed || 0) - (data.wins || 0)),
+                questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : (data.totalQuestions || 0),
+                correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
+                incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
+                totalQuestions: typeof data.totalQuestions === 'number' ? data.totalQuestions : 0,
+                bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
+                unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
+                badges: Array.isArray(data.badges) ? data.badges : ['novico'],
                 inventory: data.inventory || {},
                 equipped: data.equipped || {
                   avatar: avatarVal,
                   title: titleVal,
                   arena: 'arena_1',
                 },
-                consumables: data.consumables || { help5050: 5, freezeTime: 3 },
+                consumables: data.consumables || {
+                  help5050: data.inventory?.utilities?.fiftyFifty || 0,
+                  freezeTime: data.inventory?.utilities?.freezeTime || 0,
+                },
               }
 
               setProfile(loadedProfile)
@@ -133,22 +136,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               }
             } else {
               // 2. Criar apenas se o documento REALMENTE não existir, USANDO MERGE
+              const fallbackName = currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
+              const fallbackAvatar = currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg'
+
               const defaultProfileData = {
                 uid: currentAuthUser.uid,
-                displayName: currentAuthUser.displayName || 'Riky Moreira',
-                name: currentAuthUser.displayName || 'Riky Moreira',
+                displayName: fallbackName,
+                name: fallbackName,
                 email: currentAuthUser.email || '',
-                photoURL: currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg',
-                avatar: currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg',
-                district: 'Vila Real',
-                level: 6,
-                xp: 5980,
-                coins: 803845,
-                euros: 803845,
-                title: 'Membro Fundador',
-                equippedTitle: 'Membro Fundador',
-                streak: 7,
-                gamesPlayed: 24,
+                photoURL: fallbackAvatar,
+                avatar: fallbackAvatar,
+                district: 'Portugal',
+                level: 1,
+                xp: 0,
+                coins: 100,
+                euros: 100,
+                title: 'Noviço da Nação',
+                equippedTitle: 'Noviço da Nação',
+                streak: 0,
+                gamesPlayed: 0,
+                wins: 0,
+                losses: 0,
+                correctAnswers: 0,
+                incorrectAnswers: 0,
+                totalQuestions: 0,
+                bestStreak: 0,
+                unlockedAchievements: [],
+                badges: ['novico'],
+                inventory: {
+                  avatars: ['guardiao-vulcanico'],
+                  arenas: ['arena_1'],
+                  titles: ['tit_novico'],
+                  taunts: ['pack_basico'],
+                },
+                equipped: {
+                  avatar: fallbackAvatar,
+                  title: 'Noviço da Nação',
+                  arena: 'arena_1',
+                },
+                consumables: { help5050: 3, freezeTime: 2 },
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),
               }
@@ -161,29 +187,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
               setProfile({
                 uid: currentAuthUser.uid,
-                displayName: currentAuthUser.displayName || 'Riky Moreira',
+                displayName: fallbackName,
                 email: currentAuthUser.email || '',
-                photoURL: currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg',
-                district: 'Vila Real',
-                level: 6,
-                xp: 5980,
-                coins: 803845,
-                euros: 803845,
-                streak: 7,
-                gamesPlayed: 24,
-                wins: 18,
-                losses: 6,
-                correctAnswers: 162,
-                incorrectAnswers: 18,
-                totalQuestions: 180,
-                bestStreak: 12,
-                unlockedAchievements: ['first_win', 'streak_3', 'level_5'],
-                badges: ['founder', 'top_district'],
-                equippedTitle: 'Membro Fundador',
-                inventory: {},
+                photoURL: fallbackAvatar,
+                district: 'Portugal',
+                level: 1,
+                xp: 0,
+                coins: 100,
+                euros: 100,
+                streak: 0,
+                gamesPlayed: 0,
+                wins: 0,
+                losses: 0,
+                correctAnswers: 0,
+                incorrectAnswers: 0,
+                totalQuestions: 0,
+                bestStreak: 0,
+                unlockedAchievements: [],
+                badges: ['novico'],
+                equippedTitle: 'Noviço da Nação',
+                inventory: {
+                  avatars: ['guardiao-vulcanico'],
+                  arenas: ['arena_1'],
+                  titles: ['tit_novico'],
+                  taunts: ['pack_basico'],
+                },
                 equipped: {
-                  avatar: '/images/avatars/guardiao-vulcanico.jpg',
-                  title: 'Membro Fundador',
+                  avatar: fallbackAvatar,
+                  title: 'Noviço da Nação',
                   arena: 'arena_1',
                 },
               })
@@ -200,6 +231,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (unsubscribeSnapshot) unsubscribeSnapshot()
         setProfile(null)
         setProfileLoading(false)
+        setProfileError(null)
       }
     })
 
@@ -229,7 +261,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth(): AuthState {
   const context = useContext(AuthContext)
   if (!context) {
-    throw new Error('useAuth deve ser utilizado dentro de um AuthProvider.')
+    throw new Error('useAuth deve ser utilizado dentro de um AuthProvider')
   }
   return context
 }
