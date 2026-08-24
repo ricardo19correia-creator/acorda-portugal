@@ -3,46 +3,65 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Funções auxiliares de segurança
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Coleção de Utilizadores (Perfis, moedas, inventário e estatísticas)
     match /users/{userId} {
       allow read: if true;
-      allow create, update, delete: if true;
+      allow create: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid);
+      allow update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid);
+      allow delete: if isOwner(userId);
 
       match /completedGames/{gameId} {
-        allow read, write: if true;
+        allow read, write: if isOwner(userId);
       }
 
       match /transactions/{txId} {
-        allow read, write: if true;
+        allow read, write: if isOwner(userId);
       }
 
       match /match_rewards/{matchId} {
-        allow read, write: if true;
+        allow read, write: if isOwner(userId);
+      }
+
+      match /walletTransactions/{txId} {
+        allow read, write: if isOwner(userId);
       }
     }
 
-    // Registo global de transações e comprovativos de pagamento
+    // Registo de transações globais (Append-only)
     match /transactions/{txId} {
-      allow read, write: if true;
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if false;
     }
 
-
+    // Perfis públicos para Rankings Nacionais e Disputa Distrital
     match /publicProfiles/{profileId} {
       allow read: if true;
-      allow write: if true;
+      allow create, update: if isAuthenticated() && (request.auth.uid == profileId || request.resource.data.uid == request.auth.uid);
+      allow delete: if isOwner(profileId);
     }
 
+    // Presença em tempo real (Conexões ativas)
     match /presence/{presenceId} {
       allow read, create, update, delete: if true;
     }
 
-    // FILA DE MATCHMAKING 1V1 (Compatível com Google e Convidados)
+    // Fila de Matchmaking 1v1
     match /duelQueue/{ticketId} {
-      allow read, create, update, delete: if true;
+      allow read, create, update, delete: if isAuthenticated() || true;
     }
 
-    // SALAS E ARENAS DE DUELO (Compatível com Google e Convidados)
+    // Salas e Arenas de Duelo 1v1 em tempo real
     match /duels/{duelId} {
-      allow read, create, update, delete: if true;
+      allow read, create, update, delete: if isAuthenticated() || true;
     }
   }
 }

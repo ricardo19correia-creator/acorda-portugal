@@ -1,6 +1,6 @@
 'use client'
 
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -9,8 +9,16 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { doc, increment, onSnapshot, serverTimestamp, setDoc, updateDoc, addDoc, collection } from 'firebase/firestore'
-import { auth, db } from '@/lib/firebase'
+import {
+  doc,
+  increment,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc,
+  addDoc,
+  collection,
+} from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
 export interface EconomyContextType {
@@ -25,11 +33,11 @@ export interface EconomyContextType {
 const EconomyContext = createContext<EconomyContextType | null>(null)
 
 export function EconomyProvider({ children }: { children: ReactNode }) {
-  const { user, profile } = useAuth()
+  const { user } = useAuth()
   const [coins, setCoins] = useState<number>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
-      if (saved !== null && !isNaN(Number(saved))) {
+      if (saved && !isNaN(Number(saved))) {
         return Number(saved)
       }
     }
@@ -43,31 +51,12 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer)
   }, [])
 
-  // 1. Sincronizar com o perfil carregado em tempo real
+  // 1. Subscrição em Tempo Real ao Firestore (users/{uid})
   useEffect(() => {
-    if (profile) {
-      const profileBalance =
-        typeof profile.coins === 'number'
-          ? profile.coins
-          : typeof profile.euros === 'number'
-            ? profile.euros
-            : 0
-
-      if (profileBalance !== coins) {
-        setCoins(profileBalance)
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('user_coins', String(profileBalance))
-          localStorage.setItem('user_euros', String(profileBalance))
-        }
-      }
-    } else if (!user) {
+    if (!user?.uid) {
       setCoins(0)
+      return
     }
-  }, [profile, user])
-
-  // 2. Subscrição em Tempo Real ao Firestore (users/{uid})
-  useEffect(() => {
-    if (!user?.uid) return
 
     let unsubscribe: (() => void) | undefined
     try {
@@ -80,22 +69,19 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
               ? data.coins
               : typeof data.euros === 'number'
                 ? data.euros
-                : 0
+                : typeof data.acordaCoins === 'number'
+                  ? data.acordaCoins
+                  : 0
 
-          setCoins((current) => {
-            if (current !== firestoreBalance) {
-              if (typeof window !== 'undefined') {
-                localStorage.setItem('user_coins', String(firestoreBalance))
-                localStorage.setItem('user_euros', String(firestoreBalance))
-              }
-              return firestoreBalance
-            }
-            return current
-          })
+          setCoins(firestoreBalance)
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('user_coins', String(firestoreBalance))
+            localStorage.setItem('user_euros', String(firestoreBalance))
+          }
         }
       })
     } catch (err) {
-      console.warn('[ECONOMY] Erro na subscrição em tempo real:', err)
+      console.warn('[ECONOMY] Aviso no listener de saldo:', err)
     }
 
     return () => {
@@ -103,23 +89,18 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
     }
   }, [user?.uid])
 
-  // 3. Ouvir eventos locais de atualização de saldo entre tabs / componentes
+  // 2. Ouvir eventos de sincronização local entre abas
   useEffect(() => {
     const handleLocalBalanceUpdate = (e: Event) => {
-      try {
-        const customEvent = e as CustomEvent<{ coins?: number }>
-        if (customEvent.detail && typeof customEvent.detail.coins === 'number') {
-          setCoins(customEvent.detail.coins)
-          triggerPulse()
-        } else if (typeof window !== 'undefined') {
-          const saved = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
-          if (saved !== null && !isNaN(Number(saved))) {
-            setCoins(Number(saved))
-            triggerPulse()
-          }
+      const customEvt = e as CustomEvent<{ coins?: number }>
+      if (typeof customEvt.detail?.coins === 'number') {
+        setCoins(customEvt.detail.coins)
+        triggerPulse()
+      } else if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
+        if (saved && !isNaN(Number(saved))) {
+          setCoins(Number(saved))
         }
-      } catch (err) {
-        console.warn('[ECONOMY] Erro ao sincronizar evento local:', err)
       }
     }
 
@@ -137,16 +118,19 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
     async (amount: number, reason = 'Recompensa de Jogo'): Promise<number> => {
       if (amount <= 0) return coins
 
-      const newBalance = coins + amount
-      setCoins(newBalance)
+      let nextVal = coins + amount
+      setCoins((prev) => {
+        nextVal = prev + amount
+        return nextVal
+      })
       triggerPulse()
 
       if (typeof window !== 'undefined') {
-        localStorage.setItem('user_coins', String(newBalance))
-        localStorage.setItem('user_euros', String(newBalance))
+        localStorage.setItem('user_coins', String(nextVal))
+        localStorage.setItem('user_euros', String(nextVal))
         window.dispatchEvent(
           new CustomEvent('balance_updated', {
-            detail: { coins: newBalance, amount, reason, type: 'earn' },
+            detail: { coins: nextVal, amount, reason, type: 'earn' },
           }),
         )
       }
@@ -176,9 +160,9 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      return newBalance
+      return nextVal
     },
-    [coins, triggerPulse, user?.uid],
+    [coins, triggerPulse, user],
   )
 
   // Função para subtrair moedas (€ Acorda) após compras
@@ -189,16 +173,19 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
         return false
       }
 
-      const newBalance = coins - amount
-      setCoins(newBalance)
+      let nextVal = coins - amount
+      setCoins((prev) => {
+        nextVal = Math.max(0, prev - amount)
+        return nextVal
+      })
       triggerPulse()
 
       if (typeof window !== 'undefined') {
-        localStorage.setItem('user_coins', String(newBalance))
-        localStorage.setItem('user_euros', String(newBalance))
+        localStorage.setItem('user_coins', String(nextVal))
+        localStorage.setItem('user_euros', String(nextVal))
         window.dispatchEvent(
           new CustomEvent('balance_updated', {
-            detail: { coins: newBalance, amount, reason, type: 'spend' },
+            detail: { coins: nextVal, amount, reason, type: 'spend' },
           }),
         )
       }
@@ -230,7 +217,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
 
       return true
     },
-    [coins, triggerPulse, user?.uid],
+    [coins, triggerPulse, user],
   )
 
   const refreshBalance = useCallback(async (): Promise<number> => {
@@ -240,7 +227,12 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
         const snap = await getDoc(doc(db, 'users', user.uid))
         if (snap.exists()) {
           const data = snap.data()
-          const b = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : 0
+          const b =
+            typeof data.coins === 'number'
+              ? data.coins
+              : typeof data.euros === 'number'
+                ? data.euros
+                : 0
           setCoins(b)
           if (typeof window !== 'undefined') {
             localStorage.setItem('user_coins', String(b))
@@ -253,7 +245,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
       }
     }
     return coins
-  }, [coins, user?.uid])
+  }, [coins, user])
 
   const formattedCoins = useMemo(() => {
     return new Intl.NumberFormat('pt-PT').format(coins)
@@ -278,7 +270,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
 export function useEconomy(): EconomyContextType {
   const context = useContext(EconomyContext)
   if (!context) {
-    throw new Error('useEconomy deve ser utilizado dentro de um EconomyProvider.')
+    throw new Error('useEconomy deve ser utilizado dentro de um EconomyProvider')
   }
   return context
 }

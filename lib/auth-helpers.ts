@@ -107,12 +107,9 @@ export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
 /**
  * Limpeza total e definitiva da sessão (Firebase, Storage, Cookies e Memória)
  */
-/**
- * Limpeza total e definitiva da sessão (Firebase, IndexedDB, Storage, Cookies e Memória)
- */
 export async function performLogout(redirectUrl = '/'): Promise<void> {
   try {
-    // 1. Firebase Auth SignOut
+    // 1. Firebase Auth SignOut oficial e seguro
     if (auth) {
       const { signOut } = await import('firebase/auth')
       await signOut(auth)
@@ -121,27 +118,33 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
     console.warn('[AUTH] Aviso ao terminar sessão no Firebase:', err)
   }
 
-  // 2. Limpar IndexedDB (onde o Firebase Auth armazena os tokens de persistência de sessão)
-  if (typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined') {
-    try {
-      window.indexedDB.deleteDatabase('firebaseLocalStorageDb')
-      window.indexedDB.deleteDatabase('firebase-heartbeat-database')
-      window.indexedDB.deleteDatabase('firebase-installations-database')
-    } catch (e) {
-      console.warn('[AUTH] Erro ao limpar IndexedDB:', e)
-    }
-  }
-
-  // 3. Limpeza total do Storage local e de sessão
+  // 2. Limpeza segura de dados de sessão em localStorage e sessionStorage
   if (typeof window !== 'undefined') {
     try {
-      localStorage.clear()
+      const keysToRemove = [
+        'user_coins',
+        'user_euros',
+        'user_display_name',
+        'user_district',
+        'user_equipped_avatar',
+        'equipped_avatar_id',
+        'equipped_arena',
+        'equipped_arena_image',
+        'equipped_title',
+        'equipped_emotes',
+        'equipped_taunts',
+        'ap_auth_token',
+        'acorda_auth_redirect_target',
+        'guest_duel_session_id',
+        'firebase_user_cache',
+      ]
+      keysToRemove.forEach((key) => localStorage.removeItem(key))
       sessionStorage.clear()
     } catch (e) {
       console.warn('[AUTH] Erro ao limpar Storage:', e)
     }
 
-    // 4. Limpeza total de cookies em todos os caminhos e domínios
+    // 3. Limpeza de cookies de autenticação da aplicação
     if (typeof document !== 'undefined') {
       try {
         const cookies = document.cookie.split(';')
@@ -160,7 +163,7 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
       }
     }
 
-    // 5. Hard redirect para descarregar qualquer cache de sessão em memória
+    // 4. Redirecionamento limpo
     window.location.href = redirectUrl
   }
 }
