@@ -22,6 +22,7 @@ import { ALL_QUIZ_QUESTIONS, type QuizQuestion } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import { QUESTION_TIME_MS } from '@/config/quiz'
 import { getArenaById, getRandomArena, OFFICIAL_ARENAS } from '@/src/data/arenas'
+import { getEmoteById, type EmoteItem } from '@/src/data/emotes'
 
 export type DuelStatus = 'waiting' | 'matched' | 'playing' | 'finished' | 'expired' | 'cancelled'
 export type DuelAnswerStatus = 'CORRECT' | 'WRONG' | 'TIMEOUT'
@@ -79,6 +80,18 @@ export interface DuelTaunt {
   timestamp: number
 }
 
+export interface DuelEmoteEvent {
+  id: string
+  duelId: string
+  senderId: string
+  senderName: string
+  emoteId: string
+  emoji: string
+  label: string
+  text: string
+  timestamp: number
+}
+
 export interface DuelDocument {
   id: string
   code: string // e.g. "AP-7K42"
@@ -102,6 +115,7 @@ export interface DuelDocument {
   rewardsClaimed?: Record<string, boolean>
   rematch?: DuelRematchState | null
   lastTaunt?: DuelTaunt | null
+  lastEmote?: DuelEmoteEvent | null
 }
 
 export interface MatchmakingTicket {
@@ -1320,6 +1334,43 @@ export async function sendDuelTaunt(
     console.error('Erro ao enviar provocação:', error)
   }
 }
+
+/**
+ * Envia um Emote oficial sincronizado em tempo real no duelo 1v1
+ */
+export async function sendDuelEmote(
+  duelId: string,
+  senderId: string,
+  senderName: string,
+  emoteId: string,
+  customText?: string
+): Promise<void> {
+  if (!duelId || !senderId || !emoteId) return
+  try {
+    const emote = getEmoteById(emoteId)
+    const emoji = emote?.emoji || '💬'
+    const label = emote?.label || customText || 'Reação'
+    const text = emote?.text || customText || `${emoji} ${label}`
+
+    const duelRef = doc(db, 'duels', duelId)
+    await updateDoc(duelRef, {
+      lastEmote: {
+        id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        duelId,
+        senderId,
+        senderName: senderName || 'Jogador',
+        emoteId,
+        emoji,
+        label,
+        text,
+        timestamp: Date.now(),
+      },
+    })
+  } catch (error) {
+    console.error('[Duel Engine] Erro ao enviar emote:', error)
+  }
+}
+
 
 
 

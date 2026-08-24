@@ -12,6 +12,7 @@ import { ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRa
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
+import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -110,16 +111,19 @@ const ARENA_SHOP_ITEMS: ShopItem[] = ARENA_SHOP_CATALOG.map((a) => ({
   badgeColor: a.badgeColor,
 }))
 
-const TAUNT_SHOP_ITEMS: ShopItem[] = TAUNT_PACKS.filter(p => !p.isFree).map((p) => ({
-  id: p.id,
-  name: `Pack: ${p.name}`,
+const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
+  id: e.id,
+  name: e.text,
   category: 'taunts',
-  description: p.description,
-  price: `€${p.price.toLocaleString('pt-PT')}`,
-  priceValue: p.price,
-  badge: 'Provocação 1v1',
-  badgeColor: p.badgeColor,
-  phrases: p.taunts.map((t) => t.text),
+  categoryKey: e.category,
+  rarity: e.rarity as any,
+  description: `Reação oficial para duelos multiplayer 1v1 (${e.category}).`,
+  price: e.price === 0 ? 'GRÁTIS' : `€${e.price.toLocaleString('pt-PT')}`,
+  priceValue: e.price,
+  badge: e.rarity,
+  badgeColor: getEmoteRarityBadge(e.rarity),
+  icon: e.emoji,
+  phrases: [e.text],
 }))
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
@@ -145,6 +149,8 @@ export default function LojaPage() {
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
+  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
+  const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userBalance, setUserBalance] = useState<number>(803845)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
@@ -174,6 +180,10 @@ export default function LojaPage() {
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setEquippedArena(savedArena)
 
+        const savedEmotes = localStorage.getItem('equipped_emotes')
+        if (savedEmotes) {
+          try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
+        }
         const savedTitle = localStorage.getItem('equipped_title')
         if (savedTitle) setEquippedTitle(savedTitle)
 
@@ -336,14 +346,18 @@ export default function LojaPage() {
     if (item.category === 'arenas' && (inventory.arenas.includes(item.id) || item.priceValue === 0)) return true
     if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
     if (item.category === 'taunts') {
-      const localTaunts = JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]')
-      return item.priceValue === 0 || unlockedItems.includes(item.id) || localTaunts.includes(item.id)
+      let localEmotes: string[] = []
+      try {
+        localEmotes = JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]')
+      } catch {}
+      return item.priceValue === 0 || unlockedItems.includes(item.id) || localEmotes.includes(item.id) || DEFAULT_EQUIPPED_EMOTES.includes(item.id)
     }
     return false
   }
 
   const isItemEquipped = (item: ShopItem) => {
-    if (item.category === 'ajudas' || item.category === 'taunts') return false
+    if (item.category === 'ajudas') return false
+    if (item.category === 'taunts') return equippedEmotes.includes(item.id)
     if (item.category === 'avatars') return equippedAvatar === item.image
     if (item.category === 'arenas') return equippedArena === item.id
     if (item.category === 'titulos') return equippedTitle === item.name || equippedTitle === item.id
@@ -529,7 +543,33 @@ export default function LojaPage() {
         window.dispatchEvent(new Event('titleChanged'))
         showToast(`Título "${item.name}" ativado no perfil!`)
       } else if (item.category === 'taunts') {
-        showToast(`Pack de provocações pronto para uso nos Duelos 1v1!`)
+        let currentEquipped = [...equippedEmotes]
+        if (currentEquipped.includes(item.id)) {
+          if (currentEquipped.length <= 1) {
+            showToast('Precisas de manter pelo menos 1 emote equipado!', 'error')
+            return
+          }
+          currentEquipped = currentEquipped.filter((id) => id !== item.id)
+          showToast(`Emote "${item.name}" desequipado do HUD 1v1!`)
+        } else {
+          if (currentEquipped.length >= 8) {
+            showToast('Já tens 8 emotes equipados! Desequipa um primeiro no perfil.', 'error')
+            return
+          }
+          currentEquipped.push(item.id)
+          showToast(`Emote "${item.name}" equipado com sucesso no slot de 1v1!`)
+        }
+        setEquippedEmotes(currentEquipped)
+        localStorage.setItem('equipped_emotes', JSON.stringify(currentEquipped))
+        if (auth.currentUser) {
+          try {
+            updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedEmotes: currentEquipped,
+              'equipped.emotes': currentEquipped,
+            }).catch(() => {})
+          } catch {}
+        }
+        window.dispatchEvent(new Event('emotesChanged'))
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
@@ -564,9 +604,10 @@ export default function LojaPage() {
         updatedInv.titles = Array.from(new Set([...updatedInv.titles, item.id]))
         firestoreInvField = 'inventory.titles'
       } else if (item.category === 'taunts') {
-        const localTaunts = Array.from(new Set([...JSON.parse(localStorage.getItem('user_inventory_taunts') || '["pack_basico"]'), item.id]))
+        const localTaunts = Array.from(new Set([...JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]'), item.id]))
         localStorage.setItem('user_inventory_taunts', JSON.stringify(localTaunts))
-        firestoreInvField = 'inventory.taunts'
+        localStorage.setItem('user_inventory_emotes', JSON.stringify(localTaunts))
+        firestoreInvField = 'inventory.emotes'
       }
 
       setInventory(updatedInv)
@@ -1106,20 +1147,31 @@ export default function LojaPage() {
                           </div>
                         </div>
                       ) : item.category === 'taunts' ? (
-                        <div className="w-full h-40 rounded-xl bg-slate-950/80 border border-slate-800 p-3 flex flex-col justify-center gap-2 overflow-hidden mb-3">
-                          {(item.phrases || []).slice(0, 2).map((phrase, idx) => (
-                            <div
-                              key={idx}
-                              className={cn(
-                                "px-3 py-1.5 rounded-full bg-slate-900 text-xs font-semibold max-w-[90%] truncate shadow-sm",
-                                idx % 2 === 0
-                                  ? "self-start border border-cyan-500/30 text-cyan-300"
-                                  : "self-end border border-amber-500/30 text-amber-300"
-                              )}
-                            >
-                              💬 "{phrase}"
+                        <div className="relative w-full h-40 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/30 border border-purple-500/30 p-4 flex flex-col items-center justify-center overflow-hidden mb-3 group/emote shadow-inner">
+                          {/* Animated Preview Bubble */}
+                          <div className={cn(
+                            "transition-all duration-300 transform",
+                            testingEmoteId === item.id ? "scale-115 animate-bounce" : "scale-100"
+                          )}>
+                            <div className="flex items-center gap-2.5 rounded-2xl bg-slate-900/90 border border-purple-400/50 px-4 py-2.5 shadow-[0_0_20px_rgba(168,85,247,0.35)] backdrop-blur-md">
+                              <span className="text-3xl filter drop-shadow">{item.icon || '💬'}</span>
+                              <span className="font-display text-sm font-black text-white">{item.name.replace(/^[\p{Emoji}\s]+/u, '')}</span>
                             </div>
-                          ))}
+                          </div>
+
+                          {/* Testar Button */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setTestingEmoteId(item.id)
+                              setTimeout(() => setTestingEmoteId(null), 2500)
+                            }}
+                            className="absolute top-2 right-2 px-2.5 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-black text-[10px] uppercase tracking-wider flex items-center gap-1 shadow-md transition-all active:scale-95 cursor-pointer z-20"
+                          >
+                            <Sparkles className="w-3 h-3 text-purple-200" />
+                            <span>{testingEmoteId === item.id ? 'A Testar...' : 'Testar'}</span>
+                          </button>
                         </div>
                       ) : (
                         <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-slate-800/80 mb-3">

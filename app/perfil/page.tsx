@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { 
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, 
-  User, Edit3, LogOut, Trash2, AlertTriangle, MessageSquare, 
+  User, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
   Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle
 } from 'lucide-react'
@@ -28,6 +28,7 @@ import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
 import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
+import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -111,6 +112,8 @@ function PerfilContent() {
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>('guardiao-vulcanico')
   const [arena, setArena] = useState<string>('arena_1')
   const [title, setTitle] = useState<string>('Filho de Portugal')
+  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
+  const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userCoins, setUserCoins] = useState<number>(803845)
   const [userXp, setUserXp] = useState<number>(5980)
   const [userLevel, setUserLevel] = useState<number>(2)
@@ -391,6 +394,10 @@ function PerfilContent() {
         const savedArena = localStorage.getItem('equipped_arena') || (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_ponte_2077'
         if (savedArena) setArena(savedArena)
 
+        const savedEmotes = localStorage.getItem('equipped_emotes')
+        if (savedEmotes) {
+          try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
+        }
         const savedTitle = localStorage.getItem('equipped_title') || (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || 'Filho de Portugal'
         if (savedTitle) setTitle(savedTitle)
 
@@ -521,6 +528,13 @@ function PerfilContent() {
               setArena(ar)
               localStorage.setItem('equipped_arena', ar)
             }
+            if (data.equippedEmotes || data.equipped?.emotes) {
+              const em = data.equipped?.emotes || data.equippedEmotes
+              if (Array.isArray(em)) {
+                setEquippedEmotes(em)
+                localStorage.setItem('equipped_emotes', JSON.stringify(em))
+              }
+            }
             if (data.equippedTitle || data.equipped?.title) {
               const tit = data.equipped?.title || data.equippedTitle
               setTitle(tit)
@@ -552,6 +566,53 @@ function PerfilContent() {
       window.removeEventListener('storage', syncProfile)
     }
   }, [user, profile])
+
+  // Ação de Equipar / Desequipar Emotes no HUD 1v1
+  const handleEquipEmote = async (emoteId: string) => {
+    let updated = [...equippedEmotes]
+    if (updated.includes(emoteId)) return
+    if (updated.length >= 8) {
+      showToast('Já tens 8 emotes equipados! Desequipa um slot primeiro.')
+      return
+    }
+    updated.push(emoteId)
+    setEquippedEmotes(updated)
+    localStorage.setItem('equipped_emotes', JSON.stringify(updated))
+    if (auth.currentUser) {
+      try {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          equippedEmotes: updated,
+          'equipped.emotes': updated,
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    window.dispatchEvent(new Event('emotesChanged'))
+    showToast('Emote equipado no slot de 1v1!')
+  }
+
+  const handleUnequipEmote = async (emoteId: string) => {
+    if (equippedEmotes.length <= 1) {
+      showToast('Precisas de manter pelo menos 1 emote equipado!')
+      return
+    }
+    const updated = equippedEmotes.filter((id) => id !== emoteId)
+    setEquippedEmotes(updated)
+    localStorage.setItem('equipped_emotes', JSON.stringify(updated))
+    if (auth.currentUser) {
+      try {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          equippedEmotes: updated,
+          'equipped.emotes': updated,
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    window.dispatchEvent(new Event('emotesChanged'))
+    showToast('Emote desequipado do slot.')
+  }
 
   // Ação de Equipar Cosmético Universal
   const handleEquipItem = async (item: InventoryItem) => {
@@ -1431,84 +1492,183 @@ function PerfilContent() {
               </div>
             )}
 
-            {/* SEÇÃO: PROVOCAÇÕES (TAUNTS) */}
+            {/* SEÇÃO: EMOTES & REAÇÕES 1V1 (8 SLOTS EQUIPADOS) */}
             {(inventoryFilter === 'todos' || inventoryFilter === 'taunts') && (
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h2 className="text-lg font-black text-white flex items-center gap-2">
-                      <MessageSquare className="w-5 h-5 text-purple-400" /> Packs de Provocações (Duelos 1v1)
-                    </h2>
-                    <p className="text-xs text-slate-400">Mensagens rápidas e balões de diálogo para usar durante o duelo contra adversários.</p>
+              <div className="space-y-6">
+                {/* 1. PAINEL DE 8 SLOTS EQUIPADOS NO HUD 1V1 */}
+                <div className="p-5 rounded-3xl bg-gradient-to-br from-slate-900/90 via-slate-900 to-purple-950/30 border border-purple-500/30 shadow-2xl backdrop-blur-xl">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                      <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                        <MessageSquare className="w-5 h-5 text-purple-400" /> Emotes Equipados no HUD 1v1 (8 Slots)
+                      </h2>
+                      <p className="text-xs text-slate-400">Estes 8 emotes ficam disponíveis no botão 💬 durante as tuas partidas multiplayer em tempo real.</p>
+                    </div>
+                    <span className="text-xs font-black px-3 py-1 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 shrink-0">
+                      {equippedEmotes.length} / 8 Slots Usados
+                    </span>
                   </div>
-                  <Link
-                    href="/loja"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors"
-                  >
-                    <Plus className="w-3.5 h-3.5" /> Ver Packs na Loja
-                  </Link>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {TAUNT_PACKS.map((pack) => {
-                    const isOwned = pack.isFree || pack.id === 'pack_basico' || pack.id === 'pack-basic' || inventory.taunts?.includes(pack.id) || unlockedItems.includes(pack.id)
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {Array.from({ length: 8 }).map((_, slotIdx) => {
+                      const emoteId = equippedEmotes[slotIdx]
+                      const emote = emoteId ? getEmoteById(emoteId) : null
 
-                    return (
-                      <div
-                        key={pack.id}
-                        className={cn(
-                          'p-5 rounded-2xl border backdrop-blur-md shadow-xl transition-all',
-                          isOwned
-                            ? 'bg-slate-900/90 border-slate-700/80 shadow-purple-950/20'
-                            : 'bg-slate-950/60 border-slate-800 opacity-70',
-                        )}
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-2.5">
-                            <span className="text-2xl">{pack.icon}</span>
-                            <div>
-                              <h3 className="font-black text-sm text-white">{pack.name}</h3>
-                              <span className={cn(
-                                'text-[10px] font-bold px-2 py-0.5 rounded border mt-0.5 inline-block',
-                                isOwned ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'
-                              )}>
-                                {isOwned ? (pack.isFree ? 'Grátis (Base)' : 'Desbloqueado') : `€${pack.price.toLocaleString('pt-PT')} na Loja`}
-                              </span>
-                            </div>
-                          </div>
+                      return (
+                        <div
+                          key={slotIdx}
+                          className={cn(
+                            'relative flex flex-col justify-between p-3 rounded-2xl border transition-all min-h-[95px]',
+                            emote
+                              ? 'bg-slate-950/80 border-purple-500/40 shadow-lg shadow-purple-950/30'
+                              : 'bg-slate-950/30 border-dashed border-slate-800 items-center justify-center text-center'
+                          )}
+                        >
+                          <span className="absolute top-2 left-2 text-[9px] font-black uppercase text-slate-500">
+                            Slot {slotIdx + 1}
+                          </span>
 
-                          {isOwned ? (
-                            <span className="text-xs font-black text-emerald-400 flex items-center gap-1 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-1 rounded-full shadow-sm">
-                              <Check className="w-3 h-3" /> Ativo
-                            </span>
+                          {emote ? (
+                            <>
+                              <button
+                                onClick={() => handleUnequipEmote(emote.id)}
+                                title="Desequipar deste slot"
+                                className="absolute top-2 right-2 text-slate-400 hover:text-rose-400 p-0.5 rounded transition cursor-pointer"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+
+                              <div className="mt-3 flex items-center gap-2">
+                                <span className="text-2xl">{emote.emoji}</span>
+                                <div className="min-w-0">
+                                  <p className="font-display text-xs font-black text-white truncate">{emote.label}</p>
+                                  <span className={cn('text-[8px] font-bold px-1.5 py-0.2 rounded border inline-block mt-0.5', getEmoteRarityBadge(emote.rarity))}>
+                                    {emote.rarity}
+                                  </span>
+                                </div>
+                              </div>
+                            </>
                           ) : (
-                            <Link
-                              href="/loja"
-                              className="text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-3 py-1 rounded-xl hover:bg-amber-500/30 transition-all shadow-sm flex items-center gap-1"
-                            >
-                              <span>Adquirir na Loja</span>
-                              <span>→</span>
-                            </Link>
+                            <span className="text-[11px] font-bold text-slate-600">Vazio</span>
                           )}
                         </div>
+                      )
+                    })}
+                  </div>
+                </div>
 
-                        <p className="text-xs text-slate-400 mb-4">{pack.description}</p>
+                {/* 2. CATÁLOGO DE TODOS OS EMOTES DISPONÍVEIS */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-base font-black text-white flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-emerald-400" /> Todos os Emotes Desbloqueados & da Coleção
+                      </h3>
+                      <p className="text-xs text-slate-400">Equipa ou testa as animações das tuas reações antes de entrar na arena 1v1.</p>
+                    </div>
+                    <Link
+                      href="/loja"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Obter Mais na Loja
+                    </Link>
+                  </div>
 
-                        {/* Balões de Diálogo com as Frases do Pack */}
-                        <div className="grid grid-cols-2 gap-2 pt-3 border-t border-slate-800">
-                          {pack.taunts.map((t) => (
-                            <div
-                              key={t.id}
-                              className="px-2.5 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-bold text-slate-200 text-center truncate hover:border-purple-400 transition-colors"
-                              title={t.text}
-                            >
-                              {t.text}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {OFFICIAL_EMOTES.map((emote) => {
+                      let localEmotes: string[] = []
+                      try {
+                        localEmotes = JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]')
+                      } catch {}
+                      const isUnlocked = emote.price === 0 || unlockedItems.includes(emote.id) || localEmotes.includes(emote.id) || DEFAULT_EQUIPPED_EMOTES.includes(emote.id)
+                      const isEquipped = equippedEmotes.includes(emote.id)
+
+                      return (
+                        <div
+                          key={emote.id}
+                          className={cn(
+                            'p-4 rounded-2xl border backdrop-blur-md shadow-xl transition-all flex flex-col justify-between',
+                            isEquipped
+                              ? 'bg-gradient-to-br from-slate-900/90 to-purple-950/40 border-purple-500/60 ring-2 ring-purple-500/20'
+                              : isUnlocked
+                              ? 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+                              : 'bg-slate-950/60 border-slate-800 opacity-60'
+                          )}
+                        >
+                          <div>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className={cn('text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border', getEmoteRarityBadge(emote.rarity))}>
+                                {emote.rarity}
+                              </span>
+                              {isEquipped ? (
+                                <span className="text-[10px] font-black text-purple-300 bg-purple-950/80 border border-purple-500/60 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                  <Check className="w-3 h-3" /> Equipado
+                                </span>
+                              ) : isUnlocked ? (
+                                <span className="text-[10px] font-bold text-emerald-400">Desbloqueado</span>
+                              ) : (
+                                <span className="text-[10px] font-bold text-amber-400 font-mono">€{emote.price.toLocaleString('pt-PT')}</span>
+                              )}
                             </div>
-                          ))}
+
+                            {/* Preview Animation Bubble */}
+                            <div className="relative w-full h-28 rounded-xl bg-slate-950/90 border border-slate-800 p-3 flex flex-col items-center justify-center mb-3 overflow-hidden">
+                              <div className={cn(
+                                'transition-all duration-300 transform',
+                                testingEmoteId === emote.id ? 'scale-115 animate-bounce' : 'scale-100'
+                              )}>
+                                <div className="flex items-center gap-2 rounded-2xl bg-slate-900 border border-white/20 px-3.5 py-1.5 shadow-lg">
+                                  <span className="text-2xl">{emote.emoji}</span>
+                                  <span className="font-display text-xs font-black text-white">{emote.label}</span>
+                                </div>
+                              </div>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setTestingEmoteId(emote.id)
+                                  setTimeout(() => setTestingEmoteId(null), 2500)
+                                }}
+                                className="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-black text-[9px] uppercase tracking-wider flex items-center gap-1 transition cursor-pointer"
+                              >
+                                <Sparkles className="w-2.5 h-2.5 text-purple-300" />
+                                <span>{testingEmoteId === emote.id ? 'A Testar...' : 'Testar'}</span>
+                              </button>
+                            </div>
+
+                            <h4 className="font-display text-sm font-black text-white">{emote.text}</h4>
+                            <p className="text-[11px] text-slate-400 mt-0.5">Reação rápida ({emote.category}).</p>
+                          </div>
+
+                          <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-end">
+                            {isEquipped ? (
+                              <button
+                                onClick={() => handleUnequipEmote(emote.id)}
+                                className="cursor-pointer px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-rose-600/80 text-rose-300 hover:text-white transition-all shadow-sm"
+                              >
+                                Desequipar
+                              </button>
+                            ) : isUnlocked ? (
+                              <button
+                                onClick={() => handleEquipEmote(emote.id)}
+                                className="cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-md transition-all active:scale-95 flex items-center gap-1"
+                              >
+                                Equipar no Slot
+                              </button>
+                            ) : (
+                              <Link
+                                href="/loja"
+                                className="text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/40 px-3 py-1.5 rounded-xl hover:bg-amber-500/30 transition-all shadow-sm flex items-center gap-1"
+                              >
+                                <span>Comprar na Loja</span>
+                                <span>→</span>
+                              </Link>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             )}
