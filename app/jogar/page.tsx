@@ -49,23 +49,14 @@ function JogarContainer() {
 
   return (
     <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
-      {/* 1. FUNDO DINÂMICO DA ARENA ATIVA (Game Board Background) */}
-      <div 
-        className="game-arena-container pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-500 will-change-transform scale-[1.01]" 
-        style={{
-          backgroundImage: `url(${arenaImage || '/arenas/arena-1.jpg'})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100vw",
-          height: "100vh"
-        }}
+      {/* 1. FUNDO GLOBAL OFICIAL (FORA DE JOGO) OU ARENA EQUIPADA (DURANTE O JOGO) */}
+      <AppBackground
+        variant="quiz"
+        customImage={isPlaying ? (arenaImage || '/arenas/arena-1.jpg') : undefined}
+        contrastIntensity={isPlaying ? 'subtle' : 'normal'}
       />
 
-      {/* 2. MÁSCARA SUBTIL PARA LEGIBILIDADE DAS QUESTÕES */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-slate-950/40" />
-
-      {/* 3. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
+      {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
         <QuizPage />
       </main>

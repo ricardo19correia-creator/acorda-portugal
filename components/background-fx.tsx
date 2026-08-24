@@ -1,15 +1,15 @@
 'use client'
 
 import React from 'react'
-import { AppBackground, AppBackgroundVariant } from '@/components/AppBackground'
+import { AppBackground, AppBackgroundVariant, GLOBAL_OFFICIAL_BACKGROUND } from '@/components/AppBackground'
 
 export type BackgroundVariant =
   | AppBackgroundVariant
   | 'homepage'
   | 'explore'
 
-interface BackgroundFxProps {
-  variant?: BackgroundVariant
+export interface BackgroundFxProps {
+  variant?: BackgroundVariant | string
   customImage?: string
   contrastIntensity?: 'subtle' | 'normal' | 'strong'
   showParticles?: boolean
@@ -18,32 +18,21 @@ interface BackgroundFxProps {
 }
 
 /**
- * Enhanced BackgroundFx component:
- * Renders the official Acorda Portugal 24-background system
- * with contrast safe-zones and ambient particle effects.
+ * Componente BackgroundFx:
+ * Renders the single global official background across all screens
+ * or the active arena customImage during in-game matches.
  */
 export function BackgroundFx({
-  variant = 'default',
+  variant = 'home',
   customImage,
   contrastIntensity = 'normal',
   showParticles = true,
   className,
   children,
 }: BackgroundFxProps) {
-  // Mapeamento de variantes legadas para o sistema de 24 fundos oficiais
-  let mappedVariant: AppBackgroundVariant = 'home'
-
-  if (variant === 'homepage' || variant === 'default') {
-    mappedVariant = 'home'
-  } else if (variant === 'explore') {
-    mappedVariant = 'about'
-  } else {
-    mappedVariant = variant as AppBackgroundVariant
-  }
-
   return (
     <AppBackground
-      variant={mappedVariant}
+      variant={variant as AppBackgroundVariant}
       customImage={customImage}
       contrastIntensity={contrastIntensity}
       showParticles={showParticles}
@@ -53,4 +42,8 @@ export function BackgroundFx({
     </AppBackground>
   )
 }
+
+export { AppBackground, GLOBAL_OFFICIAL_BACKGROUND }
+export const GlobalAppBackground = AppBackground
+
 
