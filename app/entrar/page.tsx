@@ -64,10 +64,6 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTarget = sanitizeRedirectUrl(searchParams.get('redirect'), '/jogar')
-
-  // Hook que verifica retorno do redirecionamento do Google
-  useCheckRedirectLogin(redirectTarget)
-
   const { user, authResolved } = useAuth()
   const initialMode = searchParams.get('mode') === 'register' ? 'register' : (searchParams.get('mode') === 'reset' ? 'reset' : defaultMode)
   const [mode, setMode] = useState<'login' | 'register' | 'reset'>(initialMode)
@@ -83,6 +79,9 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
+
+  // Hook que processa retorno do redirecionamento do Google de forma resiliente
+  useCheckRedirectLogin(redirectTarget, (err) => setError(err))
 
   // Redirect if already logged in (resolvendo qualquer target guardado de redirect móvel de forma segura)
   useEffect(() => {

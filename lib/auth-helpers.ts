@@ -103,6 +103,15 @@ export function mapAuthErrorMessage(error: any): string {
   const code = error?.code || ''
   const message = error?.message || ''
 
+  console.error('[AUTH ERROR FULL DIAGNOSTIC]', {
+    code,
+    message,
+    name: error?.name,
+    stack: error?.stack,
+    customData: error?.customData,
+    rawError: error,
+  })
+
   switch (code) {
     case 'auth/popup-closed-by-user':
       return 'A janela de autenticação foi fechada antes de concluir o login.'
@@ -111,7 +120,7 @@ export function mapAuthErrorMessage(error: any): string {
     case 'auth/cancelled-popup-request':
       return 'O pedido de autenticação anterior foi substituído. Tenta novamente.'
     case 'auth/unauthorized-domain':
-      return 'Domínio não autorizado nas configurações de segurança do Firebase.'
+      return 'Domínio não autorizado nas configurações de segurança do Firebase (auth/unauthorized-domain). Confirma se acordaportugal.pt está em Authentication > Settings > Authorized domains.'
     case 'auth/invalid-credential':
     case 'auth/user-not-found':
     case 'auth/wrong-password':
@@ -121,22 +130,25 @@ export function mapAuthErrorMessage(error: any): string {
     case 'auth/weak-password':
       return 'A palavra-passe deve conter pelo menos 6 caracteres.'
     case 'auth/operation-not-allowed':
-      return 'Este método de autenticação não está ativo no momento.'
+      return 'Este método de autenticação não está ativo no Firebase Console (auth/operation-not-allowed).'
     case 'auth/network-request-failed':
-      return 'Erro de ligação à rede. Verifica a tua ligação à internet.'
+      return 'Erro de ligação à rede. Verifica a tua ligação à internet (auth/network-request-failed).'
     case 'auth/too-many-requests':
-      return 'Demasiadas tentativas de autenticação. Por favor, aguarda alguns momentos.'
+      return 'Demasiadas tentativas de autenticação. Por favor, aguarda alguns momentos (auth/too-many-requests).'
     case 'auth/account-exists-with-different-credential':
-      return 'Já existe uma conta associada a este email com outro método de login.'
+      return 'Já existe uma conta associada a este email com outro método de login (auth/account-exists-with-different-credential).'
     case 'auth/requires-recent-login':
       return 'Por motivos de segurança, deves iniciar sessão novamente antes de continuar.'
     case 'auth/invalid-api-key':
-      return 'Chave de configuração de autenticação inválida.'
+      return 'Chave de configuração de autenticação inválida (auth/invalid-api-key).'
     default:
       if (message.includes('invalid_client') || message.includes('OAuth client was not found')) {
         return 'Erro na configuração do cliente OAuth Google (invalid_client).'
       }
-      return 'Não foi possível iniciar sessão com o Google. Tenta novamente.'
+      if (code) {
+        return `Erro na autenticação (${code}): ${message || 'Tenta novamente.'}`
+      }
+      return message || 'Não foi possível iniciar sessão com o Google. Tenta novamente.'
   }
 }
 
@@ -179,7 +191,10 @@ export const performGoogleSignIn = handleGoogleLogin
 /**
  * Hook para processar o regresso da autenticação via redirect
  */
-export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
+export const useCheckRedirectLogin = (
+  defaultFallback = '/jogar',
+  onError?: (errorMsg: string) => void
+) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -195,8 +210,11 @@ export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
       })
       .catch((error) => {
         console.error('[AUTH REDIRECT ERROR] Erro no retorno do login Google:', error)
+        if (error && error?.code && onError) {
+          onError(mapAuthErrorMessage(error))
+        }
       })
-  }, [router, defaultFallback])
+  }, [router, defaultFallback, onError])
 }
 
 /**
