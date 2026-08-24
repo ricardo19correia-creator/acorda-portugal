@@ -8,8 +8,23 @@ import { AppBackground } from '@/components/AppBackground'
 
 function JogarContainer() {
   const searchParams = useSearchParams()
-  const categoryParam = searchParams.get('cat')
-  const gameParam = searchParams.get('game')
+  const categoryParam =
+    searchParams.get('cat') ||
+    searchParams.get('category') ||
+    searchParams.get('categoria') ||
+    searchParams.get('theme') ||
+    searchParams.get('tema') ||
+    searchParams.get('mode') ||
+    searchParams.get('modo') ||
+    searchParams.get('topic') ||
+    searchParams.get('topico') ||
+    searchParams.get('event') ||
+    searchParams.get('evento') ||
+    searchParams.get('dist') ||
+    searchParams.get('distrito') ||
+    searchParams.get('city') ||
+    searchParams.get('cidade')
+  const gameParam = searchParams.get('game') || searchParams.get('gameId')
   const isPlaying = Boolean(categoryParam || gameParam)
   
   const [arenaImage, setArenaImage] = useState<string>('')

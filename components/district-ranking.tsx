@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 import { MapPin, Users, Sparkles, Medal, Trophy, ChevronRight } from 'lucide-react'
 import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
@@ -252,6 +253,17 @@ export function DistrictRanking() {
                 value={`${current.xp.toLocaleString('pt-PT')} XP`}
                 label="XP Total"
               />
+            </div>
+
+            {/* Direct Play CTA for Selected District */}
+            <div className="mt-5">
+              <Link
+                href={`/jogar?cat=o-meu-distrito&dist=${encodeURIComponent(current.name)}`}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 py-3.5 px-6 font-display text-sm font-black uppercase tracking-wider text-black shadow-lg shadow-emerald-500/25 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+              >
+                <span>⚔️ Jogar por {current.name}</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>

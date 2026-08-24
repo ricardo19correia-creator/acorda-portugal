@@ -11,12 +11,34 @@ import { QuizScreen } from '@/components/quiz/quiz-screen'
 function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const categorySlug = searchParams.get('cat')
-  const subcategorySlug = searchParams.get('subcat')
-  const difficulty = searchParams.get('diff')
-  const district = searchParams.get('dist')
-  const city = searchParams.get('city')
-  const gameIdFromUrl = searchParams.get('game')
+
+  // Extrair parâmetros flexíveis (qualquer nome de parâmetro suportado)
+  const rawCategorySlug =
+    searchParams.get('cat') ||
+    searchParams.get('category') ||
+    searchParams.get('categoria') ||
+    searchParams.get('theme') ||
+    searchParams.get('tema') ||
+    searchParams.get('mode') ||
+    searchParams.get('modo') ||
+    searchParams.get('topic') ||
+    searchParams.get('topico') ||
+    searchParams.get('event') ||
+    searchParams.get('evento')
+
+  const subcategorySlug = searchParams.get('subcat') || searchParams.get('subcategoria')
+  const difficulty = searchParams.get('diff') || searchParams.get('dificuldade')
+  const district = searchParams.get('dist') || searchParams.get('distrito')
+  const city = searchParams.get('city') || searchParams.get('cidade')
+  const gameIdFromUrl = searchParams.get('game') || searchParams.get('gameId')
+
+  // Se passou distrito ou cidade sem cat explícito, ativa o modo correspondente
+  const categorySlug =
+    rawCategorySlug ||
+    (district ? 'o-meu-distrito' : null) ||
+    (city ? 'desafio-cidade' : null) ||
+    (gameIdFromUrl ? 'desafio-nacional' : null)
+
   const [generatedGameId] = useState(() => crypto.randomUUID())
   const gameId = gameIdFromUrl ?? generatedGameId
 

@@ -33,6 +33,15 @@ const TONE_STYLES: Record<Tone, { wash: string; icon: string; tag: string; ring:
   },
 }
 
+function getEventSlug(title: string): string {
+  const t = title.toLowerCase()
+  if (t.includes('nacional')) return 'desafio-nacional'
+  if (t.includes('portugal')) return 'portugal'
+  if (t.includes('desporto')) return 'futebol-portugues'
+  if (t.includes('maluco')) return 'modo-maluco'
+  return 'desafio-nacional'
+}
+
 export function Events() {
   return (
     <section id="eventos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
@@ -54,43 +63,47 @@ export function Events() {
 function EventCard({ event }: { event: GameEvent }) {
   const Icon = ICONS[event.icon]
   const s = TONE_STYLES[event.tone]
+  const eventSlug = getEventSlug(event.title)
 
   return (
-    <div
+    <Link
+      href={`/jogar?cat=${eventSlug}&event=${encodeURIComponent(event.title)}`}
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1.5',
+        'group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 cursor-pointer shadow-lg',
         s.wash,
         s.ring,
       )}
     >
       <div className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/5 blur-2xl" />
 
-      <div className="relative flex items-center justify-between">
-        <span
-          className={cn(
-            'grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110',
-            s.icon,
-          )}
-        >
-          <Icon className="h-7 w-7" />
-        </span>
-        <span
-          className={cn(
-            'rounded-full px-2.5 py-1 text-[0.6rem] font-black uppercase tracking-wide',
-            s.tag,
-          )}
-        >
-          {event.tag}
-        </span>
-      </div>
+      <div>
+        <div className="relative flex items-center justify-between">
+          <span
+            className={cn(
+              'grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110 shadow-md',
+              s.icon,
+            )}
+          >
+            <Icon className="h-7 w-7" />
+          </span>
+          <span
+            className={cn(
+              'rounded-full px-2.5 py-1 text-[0.6rem] font-black uppercase tracking-wide',
+              s.tag,
+            )}
+          >
+            {event.tag}
+          </span>
+        </div>
 
-      <h3 className="relative mt-4 font-display text-lg font-bold uppercase tracking-tight text-foreground">
-        {event.title}
-      </h3>
+        <h3 className="relative mt-4 font-display text-lg font-bold uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
+          {event.title}
+        </h3>
 
-      <div className="relative mt-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-        <Clock className="h-3.5 w-3.5" />
-        {event.timeLeft}
+        <div className="relative mt-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <Clock className="h-3.5 w-3.5" />
+          {event.timeLeft}
+        </div>
       </div>
 
       <div className="relative mt-4 flex items-center justify-between border-t border-white/10 pt-3">
@@ -98,14 +111,12 @@ function EventCard({ event }: { event: GameEvent }) {
           <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Recompensa</p>
           <p className="font-display text-sm font-bold text-gold">{event.reward}</p>
         </div>
-        <Link
-          href="/jogar"
-          aria-label={`Participar em ${event.title}`}
-          className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10"
+        <span
+          className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-foreground transition-all group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-transparent group-hover:translate-x-1"
         >
           <ChevronRight className="h-5 w-5" />
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   )
 }

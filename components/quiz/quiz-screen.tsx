@@ -228,10 +228,10 @@ function createGameQuestions(
       questionPool = filtered as unknown as QuizQuestion[]
     } else {
       // Fallback para categoria normalizada ou pool geral
-      const normalizedCat = normalizeCategorySlug(categorySlug)
+      const normalizedCat = normalizeCategorySlug(categorySlug || '')
       const catMatches = ALL_QUIZ_QUESTIONS.filter((q) => {
-        const qCatNorm = normalizeCategorySlug(q.category)
-        const matchCat = qCatNorm === normalizedCat || q.category.toLowerCase().includes(categorySlug.toLowerCase())
+        const qCatNorm = normalizeCategorySlug(q.category || '')
+        const matchCat = qCatNorm === normalizedCat || (q.category && categorySlug && q.category.toLowerCase().includes(categorySlug.toLowerCase()))
         if (!matchCat) return false
         if (subcategorySlug && subcategorySlug !== 'all' && subcategorySlug !== 'todas' && subcategorySlug !== 'todos') {
           if (!q.subcategory) return false
@@ -245,14 +245,21 @@ function createGameQuestions(
     }
   }
 
+  // Garantir que a pool nunca está vazia
   if (!questionPool || questionPool.length === 0) {
     questionPool = ALL_QUIZ_QUESTIONS
   }
 
-  const selected = shuffle(questionPool).slice(
-    0,
-    Math.min(QUESTIONS_PER_GAME, questionPool.length),
-  )
+  // Se houver menos que 10 perguntas na pool temática, suplementar com perguntas gerais de Portugal
+  let selected = shuffle(questionPool)
+  if (selected.length < QUESTIONS_PER_GAME) {
+    const needed = QUESTIONS_PER_GAME - selected.length
+    const existingIds = new Set(selected.map((q) => String(q.id)))
+    const remaining = shuffle(ALL_QUIZ_QUESTIONS).filter((q) => !existingIds.has(String(q.id)))
+    selected = [...selected, ...remaining.slice(0, needed)]
+  }
+
+  selected = selected.slice(0, QUESTIONS_PER_GAME)
 
   return selected.map((question, index) => {
     const shuffledOptions = shuffle(question.options)
@@ -747,23 +754,12 @@ export function QuizScreen({
 
   if (!category || !q) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6">
-        <div className="max-w-md text-center">
-          <h1 className="font-display text-2xl font-bold">
-            Não existem perguntas para esta categoria.
-          </h1>
-
-          <p className="mt-3 text-muted-foreground">
-            Verifica a categoria e o ficheiro lib/game-data.ts.
-          </p>
-
-          <Link
-            href="/jogar"
-            className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground"
-          >
-            Voltar ao início
-          </Link>
-        </div>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
+        <div className="h-12 w-12 rounded-full border-4 border-primary/30 border-t-primary animate-spin" />
+        <p className="mt-4 font-display text-lg font-bold text-foreground">
+          A preparar o teu desafio...
+        </p>
+        <p className="text-xs text-muted-foreground">A carregar perguntas de {category?.name || 'Portugal'}.</p>
       </div>
     )
   }
