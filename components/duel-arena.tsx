@@ -56,6 +56,7 @@ import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock } from '@/componen
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
+import { GameExitControl } from '@/components/game-exit-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
@@ -568,6 +569,33 @@ export function DuelArena({
     } finally {
       setRematchLoading(false)
     }
+  }
+
+  // Sair / Desistir da Partida 1v1
+  const handleSurrenderAndExit = async () => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel()
+    }
+    if (duelId && currentPlayer.uid) {
+      try {
+        await sendDuelEmote(duelId, currentPlayer.uid, currentPlayer.displayName, 'emote_quase', 'Desistiu da partida')
+        fetch('/api/duel/cancel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ duelId, uid: currentPlayer.uid }),
+        }).catch(() => {})
+      } catch (e) {}
+    }
+    router.push('/jogar')
+  }
+
+  const handleCancelWaitingAndExit = async () => {
+    if (duelId && currentPlayer.uid) {
+      try {
+        await cleanMatchmakingQueue(currentPlayer.uid)
+      } catch (e) {}
+    }
+    router.push('/jogar')
   }
 
   // Claim rewards when finished

@@ -22,6 +22,7 @@ import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
+import { GameExitControl } from '@/components/game-exit-modal'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -364,7 +365,14 @@ export function QuizScreen({
     window.addEventListener('inventory_updated', syncStock)
     window.addEventListener('storage', syncStock)
 
-    return () => {
+    const handleExitQuiz = () => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel()
+    }
+    router.push('/jogar')
+  }
+
+  return () => {
       window.removeEventListener('consumables_updated', syncStock)
       window.removeEventListener('inventory_updated', syncStock)
       window.removeEventListener('storage', syncStock)
