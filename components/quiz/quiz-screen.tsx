@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -58,7 +58,7 @@ import {
 import { cn } from '@/lib/utils'
 
 const MAX_SECONDS = QUESTION_TIME_SECONDS
-const QUESTIONS_PER_GAME = 20
+const QUESTIONS_PER_GAME = 10
 
 type Phase = 'answering' | 'revealed' | 'finished'
 
@@ -118,13 +118,12 @@ type GameCompletionOutcome =
   | { awarded: true; newLevel: number; newTotalXp: number; newEuros: number }
 
 function shuffle<T>(array: T[]): T[] {
+  if (!Array.isArray(array)) return []
   const copy = [...array]
-
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[copy[i], copy[j]] = [copy[j], copy[i]]
   }
-
   return copy
 }
 
@@ -184,7 +183,6 @@ function resolveCategoryInfo(
     return { name: category.name, emoji: '🇵🇹', special: category.special }
   }
 
-  // Capitalize fallback slug
   const formatted = categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
   return { name: formatted, emoji: '🇵🇹', special: false }
 }
@@ -215,7 +213,6 @@ function createGameQuestions(
       questionPool = MODO_MALUCO_5000_QUESTIONS
     }
   } else {
-    // 1. Filtrar pelo sistema completo de categorias
     const filtered = filterQuizQuestions(ALL_QUIZ_QUESTIONS as any, {
       categorySlug: categorySlug !== 'desafio-nacional' && categorySlug !== 'nacional' && categorySlug !== 'quick' ? categorySlug : undefined,
       subcategorySlug: subcategorySlug || undefined,
@@ -227,7 +224,6 @@ function createGameQuestions(
     if (filtered.length >= 1) {
       questionPool = filtered as unknown as QuizQuestion[]
     } else {
-      // Fallback para categoria normalizada ou pool geral
       const normalizedCat = normalizeCategorySlug(categorySlug || '')
       const catMatches = ALL_QUIZ_QUESTIONS.filter((q) => {
         const qCatNorm = normalizeCategorySlug(q.category || '')
@@ -245,12 +241,10 @@ function createGameQuestions(
     }
   }
 
-  // Garantir que a pool nunca está vazia
   if (!questionPool || questionPool.length === 0) {
     questionPool = ALL_QUIZ_QUESTIONS
   }
 
-  // Se houver menos que 10 perguntas na pool temática, suplementar com perguntas gerais de Portugal
   let selected = shuffle(questionPool)
   if (selected.length < QUESTIONS_PER_GAME) {
     const needed = QUESTIONS_PER_GAME - selected.length
@@ -262,19 +256,22 @@ function createGameQuestions(
   selected = selected.slice(0, QUESTIONS_PER_GAME)
 
   return selected.map((question, index) => {
-    const shuffledOptions = shuffle(question.options)
-
-    const correctOption = shuffledOptions.find(
-      (option) => option.key === question.correct,
-    )
-
-    if (!correctOption) {
-      return {
-        ...question,
-        index: index + 1,
-        total: selected.length,
+    const rawOptions = Array.isArray(question.options) ? question.options : []
+    const normalizedOptions = rawOptions.map((opt: any, optIdx: number) => {
+      if (typeof opt === 'string') {
+        return { key: (['A', 'B', 'C', 'D'][optIdx] || 'A') as OptionKey, text: opt }
       }
-    }
+      return {
+        key: (opt.key || ['A', 'B', 'C', 'D'][optIdx] || 'A') as OptionKey,
+        text: opt.text || '',
+      }
+    })
+
+    const correctOption = normalizedOptions.find(
+      (option) => option.key === question.correct || option.text === question.correct,
+    ) || normalizedOptions[0]
+
+    const shuffledOptions = shuffle(normalizedOptions)
 
     const options = shuffledOptions.map((option, optionIndex) => ({
       key: ['A', 'B', 'C', 'D'][optionIndex] as OptionKey,
@@ -283,7 +280,7 @@ function createGameQuestions(
 
     const newCorrectKey =
       options.find(
-        (option) => option.text === correctOption.text,
+        (option) => option.text === correctOption?.text,
       )?.key ?? 'A'
 
     return {
@@ -312,18 +309,43 @@ export function QuizScreen({
   gameId: string
 }) {
   const router = useRouter()
-  const category = resolveCategoryInfo(categorySlug, subcategorySlug, districtParam, cityParam)
-
-  const { user, profile, authResolved } = useAuth()
-  const { setActivity } = usePresence()
-  const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [previousLevel, setPreviousLevel] = useState<number | null>(null)
-  const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(
-    () => createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam),
+  const category = useMemo(
+    () => resolveCategoryInfo(categorySlug, subcategorySlug, districtParam, cityParam),
+    [categorySlug, subcategorySlug, districtParam, cityParam]
   )
 
-    // Sincronizar estado completo quando inicia uma nova partida ou muda de categoria
+  const { user, profile } = useAuth()
+  const { setActivity } = usePresence()
+  const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
+
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [previousLevel, setPreviousLevel] = useState<number | null>(null)
+  const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(() =>
+    createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+  )
+
+  const [step, setStep] = useState(0)
+  const [phase, setPhase] = useState<Phase>('answering')
+  const [selected, setSelected] = useState<OptionKey | null>(null)
+  const [seconds, setSeconds] = useState(60)
+  const [score, setScore] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
+  const [streak, setStreak] = useState(0)
+  const [bestStreak, setBestStreak] = useState(0)
+
+  // Power-Ups Stock State
+  const [stock5050, setStock5050] = useState<number>(5)
+  const [stockFreeze, setStockFreeze] = useState<number>(3)
+  const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
+  const [isFrozen, setIsFrozen] = useState(false)
+  const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
+
+  // Provocações / Reações no Tabuleiro
+  const [reactionModalOpen, setReactionModalOpen] = useState(false)
+  const [reactionCooldown, setReactionCooldown] = useState(0)
+  const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
+
+  // Sincronizar estado completo quando inicia uma nova partida ou muda de categoria
   useEffect(() => {
     const questions = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
     setQuizQuestions(questions)
@@ -340,18 +362,16 @@ export function QuizScreen({
     setPhase('answering')
   }, [gameId, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
 
-  const [step, setStep] = useState(0)
-  const [phase, setPhase] = useState<Phase>('answering')
-  const [selected, setSelected] = useState<OptionKey | null>(null)
+  // Cooldown de reações
+  useEffect(() => {
+    if (reactionCooldown <= 0) return
+    const timer = setInterval(() => {
+      setReactionCooldown((prev) => Math.max(0, prev - 1))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [reactionCooldown])
 
-  // Power-Ups Stock State
-  const [stock5050, setStock5050] = useState<number>(5)
-  const [stockFreeze, setStockFreeze] = useState<number>(3)
-  const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
-  const [isFrozen, setIsFrozen] = useState(false)
-  const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
-
-  // Real-time stock synchronization
+  // Real-time power-ups stock synchronization
   useEffect(() => {
     const syncStock = () => {
       try {
@@ -392,59 +412,7 @@ export function QuizScreen({
     window.addEventListener('inventory_updated', syncStock)
     window.addEventListener('storage', syncStock)
 
-    const handleExitQuiz = () => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.cancel()
-    }
-    router.push('/jogar')
-  }
-
-  // Provocações / Reações no Tabuleiro
-  const [reactionModalOpen, setReactionModalOpen] = useState(false)
-  const [reactionCooldown, setReactionCooldown] = useState(0)
-  const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
-
-  useEffect(() => {
-    if (reactionCooldown <= 0) return
-    const timer = setInterval(() => {
-      setReactionCooldown((prev) => Math.max(0, prev - 1))
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [reactionCooldown])
-
-  const handleTriggerReaction = (emote: EmoteItem) => {
-    if (reactionCooldown > 0) return
-    setReactionCooldown(3)
-    setReactionModalOpen(false)
-
-    // 1. Som de áudio instantâneo
-    playEmoteSound(emote.label)
-
-    // 2. Balão animado por cima do jogador (2.5s)
-    const now = Date.now()
-    setActiveReaction({
-      icon: emote.emoji,
-      text: emote.label,
-      timestamp: now,
-    })
-    setTimeout(() => {
-      setActiveReaction(null)
-    }, 2500)
-
-    // 3. Emissão em tempo real para a sala
-    try {
-      const eventPayload = {
-        event: 'taunt',
-        type: 'PLAYER_REACTION',
-        senderId: user?.uid || profile?.uid || 'player',
-        taunt: { icon: emote.emoji, text: emote.label },
-        timestamp: now,
-      }
-      window.dispatchEvent(new CustomEvent('PLAYER_REACTION', { detail: eventPayload }))
-    } catch {}
-  }
-
-  return () => {
+    return () => {
       window.removeEventListener('consumables_updated', syncStock)
       window.removeEventListener('inventory_updated', syncStock)
       window.removeEventListener('storage', syncStock)
@@ -459,40 +427,45 @@ export function QuizScreen({
     }
   }, [gameId, setActivity])
 
-  const [seconds, setSeconds] = useState(60)
-  const [score, setScore] = useState(0)
-  const [correctCount, setCorrectCount] = useState(0)
-  const [streak, setStreak] = useState(0)
-  const [bestStreak, setBestStreak] = useState(0)
-
   const total = quizQuestions.length
-  const q = quizQuestions[step]
+  const q = quizQuestions[step] || quizQuestions[0]
 
-  // Garantir que a cada nova pergunta o cronómetro começa estritamente nos 60s
-  useEffect(() => {
-    setSeconds(60)
-    setEliminatedOptions([])
-    setIsFrozen(false)
-    setFreezeTimeLeft(0)
-  }, [step])
+  const handleTriggerReaction = (emote: EmoteItem) => {
+    if (reactionCooldown > 0) return
+    setReactionCooldown(3)
+    setReactionModalOpen(false)
 
-  const wasCorrect = selected === q?.correct
+    playEmoteSound(emote.label)
 
-  useEffect(() => {
-    setUserProfile(profile)
-    setPreviousLevel(profile?.level ?? null)
-  }, [profile])
+    const now = Date.now()
+    setActiveReaction({
+      icon: emote.emoji,
+      text: emote.label,
+      timestamp: now,
+    })
+    setTimeout(() => {
+      setActiveReaction(null)
+    }, 2500)
 
-  // Handlers para os Power-Ups 50/50 e Congelar Tempo
+    try {
+      const eventPayload = {
+        event: 'taunt',
+        type: 'PLAYER_REACTION',
+        senderId: user?.uid || profile?.uid || 'player',
+        taunt: { icon: emote.emoji, text: emote.label },
+        timestamp: now,
+      }
+      window.dispatchEvent(new CustomEvent('PLAYER_REACTION', { detail: eventPayload }))
+    } catch {}
+  }
+
+  // 1. Power-Up: 50/50
   const handleUse5050 = async () => {
-    if (phase !== 'answering' || eliminatedOptions.length > 0 || !q) return
-    if (stock5050 <= 0) return
+    if (stock5050 <= 0 || eliminatedOptions.length > 0 || phase !== 'answering' || !q) return
 
-    // 1. Identifica a resposta correta e oculta/desativa instantaneamente 2 opções incorretas
-    const toEliminate = calculate5050Eliminated(q.options, q.correct)
-    setEliminatedOptions(toEliminate)
+    const eliminated = calculate5050Eliminated(q.options, q.correct)
+    setEliminatedOptions(eliminated)
 
-    // 2. Decrementa 1 unidade no estado, no Firestore e no localStorage
     const newStock = Math.max(0, stock5050 - 1)
     setStock5050(newStock)
 
@@ -515,16 +488,13 @@ export function QuizScreen({
     }
   }
 
+  // 2. Power-Up: Freeze Time
   const handleUseFreeze = async () => {
-    if (phase !== 'answering' || seconds <= 0) return
-    if (stockFreeze <= 0) return
+    if (stockFreeze <= 0 || isFrozen || phase !== 'answering') return
 
-    // 1. Acrescenta +15 segundos ao temporizador ativo da questão
-    setSeconds((s) => s + 15)
     setIsFrozen(true)
     setFreezeTimeLeft(15)
 
-    // 2. Decrementa 1 unidade no estado, no Firestore e no localStorage
     const newStock = Math.max(0, stockFreeze - 1)
     setStockFreeze(newStock)
 
@@ -547,7 +517,7 @@ export function QuizScreen({
     }
   }
 
-  // Freeze Countdown loop (pausa durante 15s)
+  // Freeze Countdown loop
   useEffect(() => {
     if (!isFrozen || freezeTimeLeft <= 0 || phase !== 'answering') return
 
@@ -577,23 +547,15 @@ export function QuizScreen({
 
       if (hit) {
         const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
-
         const nextStreak = streak + 1
 
-        setScore(
-          (currentScore) =>
-            currentScore + q.points + timeBonus,
-        )
-
+        setScore((currentScore) => currentScore + q.points + timeBonus)
         setCorrectCount((current) => current + 1)
         setStreak(nextStreak)
         setCurrentStreak(nextStreak)
 
-        setBestStreak((best) =>
-          Math.max(best, nextStreak),
-        )
+        setBestStreak((best) => Math.max(best, nextStreak))
 
-        // Som de acerto ou último segundo
         if (seconds <= WARNING_TIME_THRESHOLD) {
           playSound('last_second_correct')
         } else {
@@ -614,7 +576,7 @@ export function QuizScreen({
     [phase, q, seconds, streak, playSound, setCurrentStreak],
   )
 
-  // Main Question Countdown Timer (Pausado se isFrozen === true)
+  // Main Question Countdown Timer
   useEffect(() => {
     if (phase !== 'answering' || isFrozen) {
       return
@@ -677,78 +639,80 @@ export function QuizScreen({
     }
   }, [profile, previousLevel])
 
-  const handleGameEnd = useCallback(async (completedGameId: string, result: QuizResult) => {
-    if (user && user.uid) {
-      try {
-        const userRef = doc(db, 'users', user.uid)
-        const gameRef = doc(db, 'users', user.uid, 'completedGames', completedGameId)
+  const handleGameEnd = useCallback(async (gid: string, finalResult: QuizResult) => {
+    if (!user) return
 
-        const outcome = await runTransaction<GameCompletionOutcome>(db, async (transaction) => {
-          const completedGameSnapshot = await transaction.get(gameRef)
+    const userRef = doc(db, "users", user.uid)
+    const publicProfileRef = doc(db, "publicProfiles", user.uid)
 
-          if (completedGameSnapshot.exists()) {
-            return { awarded: false }
-          }
+    try {
+      const outcome = await runTransaction(db, async (transaction) => {
+        const userSnap = await transaction.get(userRef)
+        if (!userSnap.exists()) {
+          return { awarded: false } as GameCompletionOutcome
+        }
 
-          const userSnapshot = await transaction.get(userRef)
-          if (!userSnapshot.exists()) {
-            throw new Error('O perfil do jogador não existe.')
-          }
+        const currentProfile = userSnap.data() as UserProfile
+        const nextTotalXp = (currentProfile.xp || 0) + finalResult.xp
+        const nextEuros = (currentProfile.euros || 0) + finalResult.euros
+        const nextQuestionsAnswered = (currentProfile.questionsAnswered || 0) + finalResult.total
+        const nextCorrectAnswers = (currentProfile.correctAnswers || 0) + finalResult.correct
+        const nextIncorrectAnswers = (currentProfile.incorrectAnswers || 0) + (finalResult.total - finalResult.correct)
+        const nextTotalQuestions = (currentProfile.totalQuestions || 0) + finalResult.total
+        const nextBestStreak = Math.max(currentProfile.bestStreak || 0, finalResult.bestStreak)
+        const nextGamesPlayed = (currentProfile.gamesPlayed || 0) + 1
 
-          const userData = userSnapshot.data()
-          const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-          const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
-          const newTotalXp = currentXp + result.xp
-          const levelProgress = calculateLevelProgress(newTotalXp)
-          const newLevel = levelProgress.currentLevel.level
+        const levelInfo = calculateLevelProgress(nextTotalXp)
+        const newLevel = levelInfo.currentLevel.level
 
-          const publicProfileRef = doc(db, 'publicProfiles', user.uid)
-
-          transaction.update(userRef, {
-            xp: newTotalXp,
-            euros: currentEuros + result.euros,
-            level: newLevel,
-          })
-          transaction.set(publicProfileRef, {
-            uid: user.uid,
-            displayName: userData.displayName || 'Jogador',
-            photoURL: userData.photoURL || null,
-            district: userData.district || 'Portugal',
-            xp: newTotalXp,
-            level: newLevel,
-            updatedAt: serverTimestamp(),
-          }, { merge: true })
-          transaction.set(gameRef, {
-            gameId: completedGameId,
-            xp: result.xp,
-            euros: result.euros,
-            level: newLevel,
-            completedAt: serverTimestamp(),
-          })
-
-          // Registar no histórico oficial de transações da carteira (€ Acorda)
-          const txRef = doc(collection(db, 'users', user.uid, 'transactions'))
-          transaction.set(txRef, {
-            id: txRef.id,
-            userId: user.uid,
-            type: 'earn',
-            amount: result.euros,
-            reason: `Partida concluída (${result.correct}/${result.total} certas)`,
-            matchId: completedGameId,
-            createdAt: serverTimestamp(),
-          })
-
-          return { awarded: true, newLevel, newTotalXp, newEuros: currentEuros + result.euros }
+        transaction.update(userRef, {
+          xp: nextTotalXp,
+          euros: nextEuros,
+          level: newLevel,
+          gamesPlayed: nextGamesPlayed,
+          questionsAnswered: nextQuestionsAnswered,
+          correctAnswers: nextCorrectAnswers,
+          incorrectAnswers: nextIncorrectAnswers,
+          totalQuestions: nextTotalQuestions,
+          bestStreak: nextBestStreak,
+          lastPlayedAt: serverTimestamp(),
         })
 
-        if (outcome.awarded) {
-          setUserProfile((currentProfile) => currentProfile
-            ? { ...currentProfile, level: outcome.newLevel, xp: outcome.newTotalXp, euros: outcome.newEuros }
-            : currentProfile)
-        }
-      } catch (error) {
-        console.error("Error updating user profile:", error)
+        transaction.set(
+          publicProfileRef,
+          {
+            uid: user.uid,
+            displayName: currentProfile.displayName || "Jogador",
+            photoURL: currentProfile.photoURL || null,
+            district: currentProfile.district || "Portugal",
+            level: newLevel,
+            xp: nextTotalXp,
+          },
+          { merge: true }
+        )
+
+        return {
+          awarded: true,
+          newLevel,
+          newTotalXp: nextTotalXp,
+          newEuros: nextEuros,
+        } as GameCompletionOutcome
+      })
+
+      if (outcome.awarded) {
+        setUserProfile((currentProfile) =>
+          currentProfile
+            ? {
+                ...currentProfile,
+                level: outcome.newLevel,
+                xp: outcome.newTotalXp,
+                euros: outcome.newEuros,
+              }
+            : currentProfile
+        )
       }
+    } catch (error) {
+      console.error("Error updating user profile:", error)
     }
   }, [user])
 
@@ -769,7 +733,7 @@ export function QuizScreen({
       ? { from: previousLevel, to: userProfile.level }
       : undefined
 
-  if (!category || !q) {
+  if (!q) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
         <div className="h-12 w-12 rounded-full border-4 border-primary/30 border-t-primary animate-spin" />
@@ -801,15 +765,12 @@ export function QuizScreen({
     if (phase === 'answering') {
       return 'idle'
     }
-
     if (key === q.correct) {
       return 'correct'
     }
-
     if (key === selected) {
       return 'wrong'
     }
-
     return 'muted'
   }
 
@@ -819,7 +780,7 @@ export function QuizScreen({
       <div className="flex items-center justify-between gap-3">
         <Link
           href="/jogar"
-          className="inline-flex items-center gap-2 rounded-2xl border border-white/12 bg-card/70 px-4 py-2.5 text-xs sm:text-sm font-bold text-muted-foreground transition hover:border-white/25 hover:bg-card hover:text-white backdrop-blur-xl shadow-sm"
+          className="inline-flex items-center gap-2 rounded-2xl border border-white/12 bg-card/70 px-4 py-2.5 text-xs sm:text-sm font-bold text-muted-foreground transition hover:border-white/25 hover:bg-card hover:text-white backdrop-blur-xl shadow-sm cursor-pointer"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Sair</span>
@@ -859,24 +820,24 @@ export function QuizScreen({
       <div className="mt-5 text-center flex flex-col items-center gap-1.5">
         <span
           className={cn(
-            'inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs sm:text-sm font-black uppercase tracking-wider backdrop-blur-xl shadow-sm',
+            'inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-black uppercase tracking-wider',
             category.special
-              ? 'border-flag-red/50 bg-flag-red/15 text-flag-red shadow-[0_0_15px_rgba(244,63,94,0.15)]'
-              : 'border-primary/40 bg-primary/10 text-primary shadow-[0_0_15px_rgba(0,255,162,0.15)]',
+              ? 'border-flag-red/50 bg-flag-red/20 text-flag-red shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+              : 'border-white/10 bg-card/60 text-muted-foreground',
           )}
         >
-          <span>{category.emoji || (category.special ? '🤪' : '🇵🇹')}</span>
+          <span>{category.emoji}</span>
           <span>{category.name}</span>
+          {category.subtitle && (
+            <span className="text-[0.68rem] text-primary/80 font-normal">
+              • {category.subtitle}
+            </span>
+          )}
         </span>
-        {category.subtitle && category.subtitle !== category.name && (
-          <span className="text-[0.7rem] font-bold text-muted-foreground uppercase tracking-wider">
-            {category.subtitle}
-          </span>
-        )}
       </div>
 
-      {/* 3. PROGRESS + TIMER HUD */}
-      <div className="mt-4">
+      {/* 3. PROGRESS BAR & COUNTDOWN TIMER */}
+      <div className="mt-6">
         <QuizProgress
           index={step + 1}
           total={total}
@@ -886,128 +847,100 @@ export function QuizScreen({
       </div>
 
       {/* 4. QUESTION CARD */}
-      <div className="relative mt-6 overflow-hidden rounded-3xl sm:rounded-4xl border-2 border-slate-700/80 bg-slate-900/95 p-6 sm:p-9 text-center backdrop-blur-md shadow-2xl">
-        {/* Subtle decorative corners */}
-        <div className="pattern-azulejo pointer-events-none absolute -right-6 -top-6 h-28 w-28 opacity-25 [mask-image:radial-gradient(circle,black,transparent_70%)]" />
-        <div className="pattern-azulejo pointer-events-none absolute -bottom-6 -left-6 h-28 w-28 opacity-25 [mask-image:radial-gradient(circle,black,transparent_70%)]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-
-        <div className="mb-3 inline-block rounded-full bg-white/5 px-3 py-1 text-[0.62rem] font-black uppercase tracking-[0.25em] text-muted-foreground border border-white/5">
-          Pergunta {String(step + 1).padStart(2, '0')}
+      <div
+        className={cn(
+          'mt-6 rounded-4xl border p-6 sm:p-10 backdrop-blur-2xl shadow-2xl transition-all relative overflow-hidden',
+          category.special
+            ? 'border-flag-red/30 bg-gradient-to-br from-flag-red/10 via-card/90 to-card/90'
+            : 'border-white/12 bg-card/85',
+        )}
+      >
+        <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <span>Pergunta {step + 1} de {total}</span>
+          <span className="text-primary font-black">+{q.points} Pontos</span>
         </div>
 
-        {/* Visual Question Image if present */}
-        {q.image && (
-          <div className="mx-auto mb-4 max-w-sm sm:max-w-md overflow-hidden rounded-2xl border border-white/20 shadow-lg">
-            <img
-              src={q.image}
-              alt="Desafio Visual"
-              className="h-44 sm:h-56 w-full object-cover"
-            />
+        <h2 className="mt-4 font-display text-xl sm:text-2xl md:text-3xl font-black text-foreground leading-snug">
+          {q.question}
+        </h2>
+
+        {/* 5. 4 RESPOSTAS */}
+        <div className="mt-8 grid gap-3.5 sm:grid-cols-2">
+          {q.options.map((option) => {
+            const isEliminated = eliminatedOptions.includes(option.key)
+            if (isEliminated) {
+              return (
+                <div
+                  key={option.key}
+                  className="flex items-center gap-3.5 rounded-2xl border-2 border-slate-800/60 bg-slate-950/80 p-4 opacity-30 select-none cursor-not-allowed"
+                >
+                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-slate-900 font-mono text-xs font-black text-slate-500 line-through">
+                    {option.key}
+                  </span>
+                  <span className="text-sm line-through text-slate-500 flex-1">{option.text}</span>
+                  <span className="text-[0.62rem] font-bold text-slate-500 uppercase">50/50</span>
+                </div>
+              )
+            }
+
+            return (
+              <AnswerOption
+                key={option.key}
+                optionKey={option.key}
+                text={option.text}
+                state={stateFor(option.key)}
+                disabled={phase !== 'answering'}
+                onSelect={() => reveal(option.key)}
+              />
+            )
+          })}
+        </div>
+
+        {/* 6. EXPLICAÇÃO E FEEDBACK */}
+        {phase === 'revealed' && (
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-xs sm:text-sm animate-rise">
+            <div className="flex items-center gap-2 font-bold mb-1">
+              {selected === q.correct ? (
+                <span className="text-emerald-400 flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4" /> Resposta Correta!
+                </span>
+              ) : (
+                <span className="text-rose-400 flex items-center gap-1">
+                  <XCircle className="h-4 w-4" /> Resposta Incorreta
+                </span>
+              )}
+            </div>
+            <p className="text-slate-300">{q.explanation}</p>
           </div>
         )}
 
-        <h1 className="relative text-balance font-display text-xl sm:text-2xl md:text-3xl font-black leading-snug sm:leading-tight text-foreground">
-          {q.question}
-        </h1>
-      </div>
-
-      {/* 4.5. POWER-UPS BAR (50/50 e Congelar Tempo) */}
-      <QuizPowerUpsBar
-        stock5050={stock5050}
-        stockFreeze={stockFreeze}
-        disabled={phase !== 'answering'}
-        used5050={eliminatedOptions.length > 0}
-        isFrozen={isFrozen}
-        freezeTimeLeft={freezeTimeLeft}
-        onUse5050={handleUse5050}
-        onUseFreeze={handleUseFreeze}
-      />
-
-      {/* Active Freeze Banner */}
-      {isFrozen && (
-        <div className="mb-4 rounded-2xl border border-blue-400/50 bg-blue-500/15 p-3 text-xs sm:text-sm text-blue-100 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-lg shadow-blue-500/20">
-          <Snowflake className="h-4 w-4 text-blue-300 animate-spin" />
-          <span className="font-bold">
-            ❄️ Cronómetro Congelado! Tens <strong>{freezeTimeLeft}s</strong> para pensar com calma sem perder tempo.
-          </span>
-        </div>
-      )}
-
-      {/* 5. ANSWERS LIST */}
-      <div className="mt-2 grid gap-3 sm:gap-3.5">
-        {q.options.map((option) => (
-          <AnswerOption
-            key={option.key}
-            optionKey={option.key}
-            text={option.text}
-            state={stateFor(option.key)}
-            disabled={phase !== 'answering' || eliminatedOptions.includes(option.key)}
-            eliminated={eliminatedOptions.includes(option.key)}
-            onSelect={() => reveal(option.key)}
-          />
-        ))}
-      </div>
-
-      {/* 6. FEEDBACK & NEXT QUESTION ACTION */}
-      {phase === 'revealed' && (
-        <div className="animate-rise mt-5 space-y-4">
-          {/* Card de Feedback da Resposta com 100% de Contraste */}
-          <div
-            className={cn(
-              'w-full max-w-xl mx-auto my-3 p-4 sm:p-5 rounded-2xl bg-slate-950/95 border shadow-2xl backdrop-blur-md transition-all',
-              wasCorrect
-                ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.25)]'
-                : 'border-red-500/40 shadow-[0_0_30px_rgba(239,68,68,0.25)]',
-            )}
-          >
-            <div className="flex items-center gap-2 mb-1.5">
-              <span
-                className={cn(
-                  'inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-black shrink-0',
-                  wasCorrect
-                    ? 'bg-emerald-500/20 text-emerald-400'
-                    : 'bg-red-500/20 text-red-400',
-                )}
-              >
-                {wasCorrect ? '✓' : '✕'}
-              </span>
-              <h4
-                className={cn(
-                  'text-sm sm:text-base font-black tracking-wide uppercase',
-                  wasCorrect ? 'text-emerald-400' : 'text-red-400',
-                )}
-              >
-                {wasCorrect
-                  ? 'Resposta Correta!'
-                  : selected
-                    ? 'Resposta Incorreta!'
-                    : 'Tempo Esgotado!'}
-              </h4>
-            </div>
-
-            {q.explanation && (
-              <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed flex items-start gap-2 pt-1 border-t border-slate-800">
-                <span className="text-amber-400 mt-0.5 shrink-0">💡</span>
-                <span>{q.explanation}</span>
-              </p>
-            )}
+        {/* 7. BOTÃO PRÓXIMA PERGUNTA */}
+        {phase === 'revealed' && (
+          <div className="mt-6 flex justify-end">
+            <button
+              type="button"
+              onClick={next}
+              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-emerald-400 px-7 py-3.5 font-display text-sm font-black uppercase tracking-wider text-primary-foreground shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+            >
+              <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima'}</span>
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
+        )}
+      </div>
 
-          {/* NEXT QUESTION BUTTON */}
-          <button
-            type="button"
-            onClick={next}
-            className="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-emerald-400 to-primary bg-[length:200%_100%] py-4 px-6 font-display text-base font-black uppercase tracking-wider text-primary-foreground shadow-[0_12px_40px_-5px_rgba(0,255,162,0.4)] transition-all duration-300 hover:scale-[1.01] hover:bg-[position:100%_0] active:scale-[0.99] cursor-pointer"
-          >
-            <span>
-              {step + 1 >= total ? 'Ver Resultado Final' : 'Próxima Pergunta'}
-            </span>
-            <ChevronRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-          </button>
-        </div>
-      )}
+      {/* 8. BARRA DE POWER-UPS */}
+      <div className="mt-6">
+        <QuizPowerUpsBar
+          stock5050={stock5050}
+          stockFreeze={stockFreeze}
+          used5050={eliminatedOptions.length > 0}
+          isFrozen={isFrozen}
+          freezeTimeLeft={freezeTimeLeft}
+          onUse5050={handleUse5050}
+          onUseFreeze={handleUseFreeze}
+        />
+      </div>
     </div>
   )
 }
-
