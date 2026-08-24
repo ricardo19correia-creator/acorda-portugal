@@ -33,63 +33,37 @@ export const ALL_20_DISTRICTS = [
   'Madeira',
 ]
 
-const BASE_DISTRICT_STATS: Record<string, { players: number; xp: number }> = {
-  'Porto': { players: 1420, xp: 48900 },
-  'Lisboa': { players: 1890, xp: 47200 },
-  'Braga': { players: 980, xp: 35400 },
-  'Vila Real': { players: 740, xp: 28900 },
-  'Coimbra': { players: 680, xp: 24100 },
-  'Aveiro': { players: 620, xp: 21800 },
-  'Setúbal': { players: 590, xp: 19400 },
-  'Faro': { players: 530, xp: 17800 },
-  'Viseu': { players: 470, xp: 15600 },
-  'Açores': { players: 410, xp: 14200 },
-  'Madeira': { players: 390, xp: 13500 },
-  'Leiria': { players: 360, xp: 12100 },
-  'Santarém': { players: 320, xp: 10900 },
-  'Viana do Castelo': { players: 290, xp: 9800 },
-  'Castelo Branco': { players: 250, xp: 8700 },
-  'Évora': { players: 230, xp: 7600 },
-  'Guarda': { players: 210, xp: 6900 },
-  'Bragança': { players: 190, xp: 6200 },
-  'Beja': { players: 170, xp: 5400 },
-  'Portalegre': { players: 150, xp: 4800 },
-}
-
 const MEDAL_ICONS = ['🥇', '🥈', '🥉']
-const MEDAL_TONES = ['text-gold', 'text-white/90', 'text-flag-red']
 
 export function DistrictRanking() {
   const { profile } = useAuth()
-  const [selected, setSelected] = useState<string>('Vila Real')
+  const [selected, setSelected] = useState<string>(profile?.district || 'Vila Real')
   const [hasInitializedSelection, setHasInitializedSelection] = useState(false)
   const [districtData, setDistrictData] = useState<Map<string, DistrictStatItem>>(() => {
     const initialMap = new Map<string, DistrictStatItem>()
-    const sorted = Object.entries(BASE_DISTRICT_STATS).sort((a, b) => b[1].xp - a[1].xp)
-    sorted.forEach(([name, stat], idx) => {
+    ALL_20_DISTRICTS.forEach((name, idx) => {
       initialMap.set(name, {
         name,
         pos: idx + 1,
-        players: stat.players,
-        xp: stat.xp,
+        players: 0,
+        xp: 0,
       })
     })
     return initialMap
   })
 
-  // Real-time listener to aggregate player counts and XP per district from Firestore publicProfiles
+  // Subscrição em Tempo Real aos pontos distritais reais dos utilizadores no Firestore
   useEffect(() => {
     let unsubscribe: (() => void) | undefined
 
     try {
-      const q = query(collection(db, 'publicProfiles'), limit(100))
+      const q = query(collection(db, 'publicProfiles'), limit(500))
       unsubscribe = onSnapshot(
         q,
         (snapshot) => {
           const tempMap = new Map<string, { players: number; xp: number }>()
           for (const d of ALL_20_DISTRICTS) {
-            const base = BASE_DISTRICT_STATS[d] || { players: 100, xp: 3000 }
-            tempMap.set(d, { players: base.players, xp: base.xp })
+            tempMap.set(d, { players: 0, xp: 0 })
           }
 
           if (snapshot && !snapshot.empty) {
@@ -114,17 +88,20 @@ export function DistrictRanking() {
             })
           }
 
-          // Se o utilizador atual estiver autenticado e com XP, adiciona ao seu distrito
-          if (profile?.district && profile.xp) {
+          // Se o utilizador atual estiver autenticado e não constar ainda do snapshot
+          if (profile?.district && profile.xp && snapshot) {
             const userDist = ALL_20_DISTRICTS.find(
               (d) => d.toLowerCase() === profile.district.toLowerCase(),
             )
             if (userDist) {
-              const current = tempMap.get(userDist)!
-              tempMap.set(userDist, {
-                players: current.players + 1,
-                xp: current.xp + profile.xp,
-              })
+              const hasUserInSnap = snapshot.docs.some((d: any) => d.id === profile.uid)
+              if (!hasUserInSnap) {
+                const current = tempMap.get(userDist)!
+                tempMap.set(userDist, {
+                  players: current.players + 1,
+                  xp: current.xp + profile.xp,
+                })
+              }
             }
           }
 
@@ -163,7 +140,7 @@ export function DistrictRanking() {
     return () => {
       if (unsubscribe) unsubscribe()
     }
-  }, [profile?.district, profile?.xp])
+  }, [profile?.district, profile?.xp, profile?.uid])
 
   useEffect(() => {
     if (!hasInitializedSelection) {
@@ -171,23 +148,17 @@ export function DistrictRanking() {
       if (userDistrict && ALL_20_DISTRICTS.includes(userDistrict)) {
         setSelected(userDistrict)
         setHasInitializedSelection(true)
-      } else if (districtData.size > 0) {
-        const first = Array.from(districtData.values())[0]
-        if (first) {
-          setSelected(first.name)
-          setHasInitializedSelection(true)
-        }
       }
     }
-  }, [profile?.district, hasInitializedSelection, districtData])
+  }, [profile?.district, hasInitializedSelection])
 
   const selectedStat = useMemo(() => {
     return (
       districtData.get(selected) ?? {
         name: selected,
         pos: 1,
-        players: 740,
-        xp: 28900,
+        players: 0,
+        xp: 0,
       }
     )
   }, [districtData, selected])
@@ -209,7 +180,7 @@ export function DistrictRanking() {
       <SectionHeading
         eyebrow="Guerra Territorial dos 18 Distritos e 2 Regiões"
         title="Disputa Distrital"
-        description="Cada resposta certa soma pontos ao teu distrito. Clica no mapa para explorar a classificação territorial."
+        description="Cada resposta certa soma pontos ao teu distrito. Clica no mapa para explorar a classificação territorial real."
       />
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -293,7 +264,7 @@ export function DistrictRanking() {
             <div className="space-y-2">
               {sortedDistricts.map((dist) => {
                 const isSel = dist.name === selected
-                const percent = Math.max(8, Math.round((dist.xp / maxDistrictXp) * 100))
+                const percent = maxDistrictXp > 0 ? Math.max(4, Math.round((dist.xp / maxDistrictXp) * 100)) : 4
                 return (
                   <div
                     key={dist.name}
