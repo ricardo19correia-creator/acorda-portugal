@@ -877,36 +877,9 @@ export function DuelArena({
                 )}
               </div>
 
-              <div className="flex items-center gap-2">
-                <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
-                  {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
-                </p>
-
-                {/* Botão de Reações Rápidas 1v1 */}
-                <button
-                  type="button"
-                  disabled={tauntCooldown > 0}
-                  onClick={() => setTauntModalOpen(true)}
-                  className={cn(
-                    'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider transition shadow-md cursor-pointer select-none',
-                    tauntCooldown > 0
-                      ? 'bg-slate-800/80 text-slate-400 border border-slate-700/60 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.4)] hover:scale-105 active:scale-95'
-                  )}
-                >
-                  {tauntCooldown > 0 ? (
-                    <>
-                      <span className="text-[10px] animate-spin">⏳</span>
-                      <span>{tauntCooldown}s</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-xs">💬</span>
-                      <span>Reagir</span>
-                    </>
-                  )}
-                </button>
-              </div>
+              <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
+                {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
+              </p>
             </div>
           </div>
 
@@ -935,12 +908,66 @@ export function DuelArena({
 
             <div className="relative shrink-0">
               <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
-
-              {/* Balão de Emote Sincronizado em Tempo Real (Adversário) */}
-              {activeEmote && activeEmote.senderId === opponent?.uid && (
+                {/* Balão de Fala Animado (Adversário) */}
+              {activeEmote && (activeEmote.senderId === opponent?.uid || (activeEmote.senderId !== me?.uid && activeEmote.senderId !== currentPlayer.uid)) && (
                 <DuelEmoteBubble emote={activeEmote} isMe={false} />
               )}
             </div>
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* ÁREA LIMPA E EQUILIBRADA: BOTÃO REAGIR COM POPOVER */}
+        {/* ========================================================= */}
+        <div className="mt-3 flex items-center justify-between px-1.5">
+          <div className="relative">
+            <button
+              type="button"
+              disabled={tauntCooldown > 0}
+              onClick={() => setTauntModalOpen(!tauntModalOpen)}
+              style={{
+                background: 'rgba(147, 51, 234, 0.2)',
+                border: '1px solid rgba(168, 85, 247, 0.6)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                borderRadius: '9999px',
+                padding: '4px 14px',
+                fontSize: '13px',
+                fontWeight: '600',
+                color: '#fff',
+              }}
+              className={cn(
+                'inline-flex items-center gap-1.5 transition-all duration-200 cursor-pointer select-none active:scale-95 shadow-md',
+                tauntCooldown > 0
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:bg-purple-600/40 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]'
+              )}
+            >
+              {tauntCooldown > 0 ? (
+                <>
+                  <span className="text-[11px] animate-spin">⏳</span>
+                  <span>{tauntCooldown}s</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-sm">💬</span>
+                  <span>Reagir</span>
+                </>
+              )}
+            </button>
+
+            {/* Menu Pop-over Flutuante de Emotes */}
+            <DuelEmoteFloatingBar
+              isOpen={tauntModalOpen}
+              onClose={() => setTauntModalOpen(false)}
+              onSendEmote={handleSendEmote}
+              cooldown={tauntCooldown}
+              equippedEmoteIds={(profile as any)?.equipped?.emotes}
+            />
+          </div>
+
+          <div className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
+            <span>🛡️ Duelo 1v1</span>
           </div>
         </div>
 
