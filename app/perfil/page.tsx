@@ -892,7 +892,9 @@ function PerfilContent() {
     setDeleteError(null)
     try {
       const { GoogleAuthProvider, reauthenticateWithPopup } = await import('firebase/auth')
-      await reauthenticateWithPopup(auth.currentUser, new GoogleAuthProvider())
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
+      await reauthenticateWithPopup(auth.currentUser, provider)
       setNeedsReauth(false)
       await handleDeleteAccount()
     } catch (e: any) {

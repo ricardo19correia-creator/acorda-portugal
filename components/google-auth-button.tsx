@@ -2,9 +2,15 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { signInWithPopup, signInWithRedirect } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
-import { getPostLoginRedirectTarget, setPostLoginRedirectTarget } from '@/lib/auth'
+import {
+  getGoogleAuthProvider,
+  getPostLoginRedirectTarget,
+  setPostLoginRedirectTarget,
+  sanitizeRedirectUrl,
+  mapAuthErrorMessage,
+} from '@/lib/auth'
 
 interface GoogleAuthButtonProps {
   redirectTarget?: string
@@ -24,47 +30,44 @@ export default function GoogleAuthButton({
     if (loading) return
     setLoading(true)
 
+    const safeTarget = sanitizeRedirectUrl(redirectTarget, '/jogar')
+
     try {
       if (!auth) {
         throw new Error('Firebase Auth não está inicializado.')
       }
 
-      setPostLoginRedirectTarget(redirectTarget)
-
-      const provider = new GoogleAuthProvider()
-      provider.setCustomParameters({ prompt: 'select_account' })
+      setPostLoginRedirectTarget(safeTarget)
+      const provider = getGoogleAuthProvider()
 
       console.log('[AUTH] A iniciar login Google com signInWithPopup...')
       const userCred = await signInWithPopup(auth, provider)
 
       console.log('[AUTH] Login Google efetuado com sucesso:', userCred.user.uid)
-      const destination = getPostLoginRedirectTarget(redirectTarget)
+      const destination = getPostLoginRedirectTarget(safeTarget)
       router.push(destination)
     } catch (error: any) {
-      console.warn('[AUTH] Erro ou popup bloqueado:', error?.code, error?.message)
+      console.warn('[AUTH] Erro ou aviso durante autenticação Google:', error?.code, error?.message)
 
-      // Se o popup for bloqueado no browser móvel ou WebView, tenta fallback para redirect
+      // Fallback para signInWithRedirect em caso de bloqueio de popup pelo navegador ou WebView
       if (
         error?.code === 'auth/popup-blocked' ||
         error?.code === 'auth/cancelled-popup-request'
       ) {
         try {
-          console.log('[AUTH] A tentar fallback para signInWithRedirect...')
-          const provider = new GoogleAuthProvider()
-          provider.setCustomParameters({ prompt: 'select_account' })
+          console.log('[AUTH] Popup bloqueado ou cancelado. A executar fallback para signInWithRedirect...')
+          const provider = getGoogleAuthProvider()
           await signInWithRedirect(auth, provider)
           return
         } catch (redirectErr: any) {
-          console.error('[AUTH] Erro no signInWithRedirect:', redirectErr)
+          console.error('[AUTH] Erro no fallback signInWithRedirect:', redirectErr)
         }
       }
 
       setLoading(false)
+
       if (error?.code !== 'auth/popup-closed-by-user') {
-        const errorMsg =
-          error?.code === 'auth/unauthorized-domain'
-            ? 'Domínio não autorizado no Firebase Console. Adiciona o domínio em Authentication > Settings > Authorized domains.'
-            : error?.message || 'Erro ao iniciar sessão com o Google.'
+        const errorMsg = mapAuthErrorMessage(error)
         if (onError) onError(errorMsg)
       }
     }
@@ -108,4 +111,5 @@ export default function GoogleAuthButton({
     </button>
   )
 }
+
 

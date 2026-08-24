@@ -13,7 +13,7 @@ import {
   Flame,
   Snowflake,
 } from 'lucide-react'
-import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment } from 'firebase/firestore'
+import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -646,8 +646,35 @@ export function QuizScreen({
 
     const userRef = doc(db, "users", user.uid)
     const publicProfileRef = doc(db, "publicProfiles", user.uid)
+    const catSlug = category?.slug || 'geral'
 
     try {
+      // 1. Gravar documento persistente da partida na coleção 'games'
+      try {
+        const gameDocRef = doc(db, 'games', gid)
+        await setDoc(
+          gameDocRef,
+          {
+            id: gid,
+            userId: user.uid,
+            userDisplayName: user.displayName || profile?.displayName || 'Jogador',
+            category: catSlug,
+            categoryName: category?.name || 'Portugal',
+            score: finalResult.score,
+            correctAnswers: finalResult.correct,
+            totalQuestions: finalResult.total,
+            xpEarned: finalResult.xp,
+            eurosEarned: finalResult.euros,
+            bestStreak: finalResult.bestStreak,
+            createdAt: serverTimestamp(),
+          },
+          { merge: true }
+        )
+      } catch (gameSaveErr) {
+        console.warn('[QUIZ] Aviso ao gravar registo na coleção games:', gameSaveErr)
+      }
+
+      // 2. Atualizar utilizador e perfil público via transação
       const outcome = await runTransaction(db, async (transaction) => {
         const userSnap = await transaction.get(userRef)
         if (!userSnap.exists()) {
@@ -664,6 +691,18 @@ export function QuizScreen({
         const nextBestStreak = Math.max(currentProfile.bestStreak || 0, finalResult.bestStreak)
         const nextGamesPlayed = (currentProfile.gamesPlayed || 0) + 1
 
+        const existingCategoryStats = (currentProfile as any).categoryStats || {}
+        const currentCat = existingCategoryStats[catSlug] || { totalQuestions: 0, correctAnswers: 0, gamesPlayed: 0, score: 0 }
+        const nextCategoryStats = {
+          ...existingCategoryStats,
+          [catSlug]: {
+            totalQuestions: (currentCat.totalQuestions || 0) + finalResult.total,
+            correctAnswers: (currentCat.correctAnswers || 0) + finalResult.correct,
+            gamesPlayed: (currentCat.gamesPlayed || 0) + 1,
+            score: (currentCat.score || 0) + finalResult.score,
+          }
+        }
+
         const levelInfo = calculateLevelProgress(nextTotalXp)
         const newLevel = levelInfo.currentLevel.level
 
@@ -677,6 +716,7 @@ export function QuizScreen({
           incorrectAnswers: nextIncorrectAnswers,
           totalQuestions: nextTotalQuestions,
           bestStreak: nextBestStreak,
+          categoryStats: nextCategoryStats,
           lastPlayedAt: serverTimestamp(),
         })
 
@@ -684,8 +724,8 @@ export function QuizScreen({
           publicProfileRef,
           {
             uid: user.uid,
-            displayName: currentProfile.displayName || "Jogador",
-            photoURL: currentProfile.photoURL || null,
+            displayName: currentProfile.displayName || user.displayName || "Jogador",
+            photoURL: currentProfile.photoURL || user.photoURL || null,
             district: currentProfile.district || "Portugal",
             level: newLevel,
             xp: nextTotalXp,
@@ -719,7 +759,7 @@ export function QuizScreen({
     } catch (error) {
       console.error("Error updating user profile:", error)
     }
-  }, [user])
+  }, [user, category, profile, addCoins])
 
   const result: QuizResult = useMemo(
     () => ({

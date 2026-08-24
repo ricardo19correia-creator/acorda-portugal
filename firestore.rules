@@ -56,12 +56,26 @@ service cloud.firestore {
 
     // Fila de Matchmaking 1v1
     match /duelQueue/{ticketId} {
-      allow read, create, update, delete: if isAuthenticated() || true;
+      allow read, create, update, delete: if true;
     }
 
     // Salas e Arenas de Duelo 1v1 em tempo real
     match /duels/{duelId} {
-      allow read, create, update, delete: if isAuthenticated() || true;
+      allow read, create, update, delete: if true;
+    }
+
+    // Histórico de Jogos e Partidas Concluídas
+    match /games/{gameId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+
+    // Reportes de Perguntas e Suporte
+    match /reports/{reportId} {
+      allow read: if isAuthenticated();
+      allow create: if true;
+      allow update, delete: if false;
     }
   }
 }

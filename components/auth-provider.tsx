@@ -185,6 +185,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 console.warn('[AUTH] Erro ao criar documento inicial com merge:', createErr)
               }
 
+              // Sincronizar perfil público inicial para novos utilizadores Google / Email
+              try {
+                const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
+                await setDoc(
+                  publicProfileRef,
+                  {
+                    uid: currentAuthUser.uid,
+                    displayName: fallbackName,
+                    photoURL: fallbackAvatar,
+                    district: 'Portugal',
+                    level: 1,
+                    xp: 0,
+                    equippedTitle: 'Noviço da Nação',
+                    updatedAt: serverTimestamp(),
+                  },
+                  { merge: true },
+                )
+              } catch (pubErr) {
+                console.warn('[AUTH] Erro ao sincronizar perfil público inicial:', pubErr)
+              }
+
+              if (typeof window !== 'undefined') {
+                localStorage.setItem('user_coins', '100')
+                localStorage.setItem('user_euros', '100')
+                localStorage.setItem('user_display_name', fallbackName)
+                localStorage.setItem('user_district', 'Portugal')
+                localStorage.setItem('user_equipped_avatar', fallbackAvatar)
+                localStorage.setItem('equipped_title', 'Noviço da Nação')
+              }
+
               setProfile({
                 uid: currentAuthUser.uid,
                 displayName: fallbackName,

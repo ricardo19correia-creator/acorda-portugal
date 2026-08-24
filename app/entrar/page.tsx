@@ -27,7 +27,12 @@ import { useAuth } from '@/components/auth-provider'
 import { BrandLogo } from '@/components/brand-logo'
 import { BackgroundFx } from '@/components/background-fx'
 import GoogleAuthButton from '@/components/google-auth-button'
-import { handleGoogleLogin, performGoogleSignIn, useCheckRedirectLogin, getPostLoginRedirectTarget, setPostLoginRedirectTarget } from '@/lib/auth'
+import {
+  useCheckRedirectLogin,
+  getPostLoginRedirectTarget,
+  sanitizeRedirectUrl,
+  mapAuthErrorMessage,
+} from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 const DISTRICTS_LIST = [
@@ -53,33 +58,12 @@ const DISTRICTS_LIST = [
   'Madeira',
 ]
 
-function mapAuthError(error: any): string {
-  const code = error?.code || ''
-  const message = error?.message || ''
-
-  if (code === 'auth/invalid-email') return 'O formato do email não é válido.'
-  if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
-    return 'Email ou palavra-passe incorretos.'
-  }
-  if (code === 'auth/email-already-in-use') return 'Já existe uma conta com este endereço de email.'
-  if (code === 'auth/weak-password') return 'A palavra-passe deve ter pelo menos 6 caracteres.'
-  if (code === 'auth/operation-not-allowed') {
-    return 'O método de registo com Email/Palavra-passe está desativado no Firebase Authentication Console.'
-  }
-  if (code === 'auth/popup-closed-by-user') return 'A janela de autenticação Google foi cancelada.'
-  if (code === 'auth/network-request-failed') return 'Erro de ligação. Verifica a tua internet.'
-  if (code === 'auth/too-many-requests') return 'Demasiadas tentativas de login. Tenta novamente mais tarde.'
-  if (code === 'auth/argument-error') return 'Dados de autenticação inválidos ou incompletos.'
-
-  return message || 'Ocorreu um erro ao processar a autenticação.'
-}
-
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function EntrarPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectTarget = searchParams.get('redirect') || '/jogar'
+  const redirectTarget = sanitizeRedirectUrl(searchParams.get('redirect'), '/jogar')
 
   // Hook que verifica retorno do redirecionamento do Google
   useCheckRedirectLogin(redirectTarget)
@@ -96,11 +80,10 @@ function EntrarPageContent() {
 
   // State
   const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
-  // Redirect if already logged in (resolvendo qualquer target guardado de redirect móvel)
+  // Redirect if already logged in (resolvendo qualquer target guardado de redirect móvel de forma segura)
   useEffect(() => {
     if (authResolved && user) {
       const destination = getPostLoginRedirectTarget(redirectTarget)
@@ -108,18 +91,6 @@ function EntrarPageContent() {
     }
   }, [user, authResolved, redirectTarget, router])
 
-  // Google Login via signInWithRedirect (WebView / APK / Mobile / Browser)
-  const onGoogleLoginClick = async () => {
-    setError(null)
-    setGoogleLoading(true)
-
-    try {
-      await handleGoogleLogin(redirectTarget)
-    } catch (err: any) {
-      setError(mapAuthError(err))
-      setGoogleLoading(false)
-    }
-  }
 
 
   // Email / Password Login
@@ -152,7 +123,7 @@ function EntrarPageContent() {
       const destination = getPostLoginRedirectTarget(redirectTarget)
       router.push(destination)
     } catch (err: any) {
-      setError(mapAuthError(err))
+      setError(mapAuthErrorMessage(err))
       setLoading(false)
     }
   }
@@ -244,7 +215,7 @@ function EntrarPageContent() {
       const destination = getPostLoginRedirectTarget(redirectTarget)
       router.push(destination)
     } catch (err: any) {
-      setError(mapAuthError(err))
+      setError(mapAuthErrorMessage(err))
       setLoading(false)
     }
   }
@@ -277,7 +248,7 @@ function EntrarPageContent() {
       setSuccessMessage('Email de recuperação enviado com sucesso! Verifica a tua caixa de correio.')
       setLoading(false)
     } catch (err: any) {
-      setError(mapAuthError(err))
+      setError(mapAuthErrorMessage(err))
       setLoading(false)
     }
   }

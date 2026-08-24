@@ -14,6 +14,42 @@ import { useRouter } from 'next/navigation'
 const REDIRECT_TARGET_KEY = 'acorda_auth_redirect_target'
 
 /**
+ * Valida e sanitiza URLs de redirecionamento para prevenir vulnerabilidades de Open Redirect.
+ * Apenas rotas internas (iniciadas por '/' e sem barras duplas ou esquemas de protocolo) são permitidas.
+ */
+export function sanitizeRedirectUrl(target: unknown, fallback = '/jogar'): string {
+  if (typeof target !== 'string') return fallback
+  const trimmed = target.trim()
+  if (!trimmed) return fallback
+
+  // Rejeitar protocolos externos (http:, https:, javascript:, mailto:, etc.)
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmed)) {
+    return fallback
+  }
+
+  // Rejeitar URLs relativos a protocolo (//malicious.com) ou caminhos invertidos (/\)
+  if (trimmed.startsWith('//') || trimmed.startsWith('/\\') || trimmed.startsWith('\\')) {
+    return fallback
+  }
+
+  // Deve começar com '/'
+  if (!trimmed.startsWith('/')) {
+    return fallback
+  }
+
+  return trimmed
+}
+
+/**
+ * Retorna uma instância configurada do GoogleAuthProvider
+ */
+export function getGoogleAuthProvider(): GoogleAuthProvider {
+  const provider = new GoogleAuthProvider()
+  provider.setCustomParameters({ prompt: 'select_account' })
+  return provider
+}
+
+/**
  * Deteta se o utilizador está num dispositivo móvel ou wrapper
  */
 export function isMobileDevice(): boolean {
@@ -28,33 +64,79 @@ export function isMobileDevice(): boolean {
 }
 
 /**
- * Guarda o URL de destino pretendido antes de iniciar o fluxo de login
+ * Guarda o URL de destino pretendido antes de iniciar o fluxo de login (sanitizado)
  */
 export function setPostLoginRedirectTarget(target: string) {
   if (typeof window === 'undefined') return
+  const safeTarget = sanitizeRedirectUrl(target)
   try {
-    sessionStorage.setItem(REDIRECT_TARGET_KEY, target)
-    localStorage.setItem(REDIRECT_TARGET_KEY, target)
+    sessionStorage.setItem(REDIRECT_TARGET_KEY, safeTarget)
+    localStorage.setItem(REDIRECT_TARGET_KEY, safeTarget)
   } catch (err) {
-    console.warn('Não foi possível gravar redirect target no storage:', err)
+    console.warn('[AUTH] Não foi possível gravar redirect target no storage:', err)
   }
 }
 
 /**
- * Recupera e limpa o URL de destino pretendido após o login
+ * Recupera e limpa o URL de destino pretendido após o login (sanitizado)
  */
 export function getPostLoginRedirectTarget(fallback = '/jogar'): string {
-  if (typeof window === 'undefined') return fallback
+  const safeFallback = sanitizeRedirectUrl(fallback, '/jogar')
+  if (typeof window === 'undefined') return safeFallback
   try {
-    const target =
+    const rawTarget =
       sessionStorage.getItem(REDIRECT_TARGET_KEY) ||
       localStorage.getItem(REDIRECT_TARGET_KEY) ||
-      fallback
+      safeFallback
     sessionStorage.removeItem(REDIRECT_TARGET_KEY)
     localStorage.removeItem(REDIRECT_TARGET_KEY)
-    return target
+    return sanitizeRedirectUrl(rawTarget, safeFallback)
   } catch {
-    return fallback
+    return safeFallback
+  }
+}
+
+/**
+ * Tradução e mapeamento amigável de erros de autenticação Firebase / OAuth
+ */
+export function mapAuthErrorMessage(error: any): string {
+  const code = error?.code || ''
+  const message = error?.message || ''
+
+  switch (code) {
+    case 'auth/popup-closed-by-user':
+      return 'A janela de autenticação foi fechada antes de concluir o login.'
+    case 'auth/popup-blocked':
+      return 'O navegador bloqueou a janela de autenticação. Permite popups ou tenta novamente.'
+    case 'auth/cancelled-popup-request':
+      return 'O pedido de autenticação anterior foi substituído. Tenta novamente.'
+    case 'auth/unauthorized-domain':
+      return 'Domínio não autorizado nas configurações de segurança do Firebase.'
+    case 'auth/invalid-credential':
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+      return 'Email ou palavra-passe incorretos.'
+    case 'auth/email-already-in-use':
+      return 'Já existe uma conta registada com este endereço de email.'
+    case 'auth/weak-password':
+      return 'A palavra-passe deve conter pelo menos 6 caracteres.'
+    case 'auth/operation-not-allowed':
+      return 'Este método de autenticação não está ativo no momento.'
+    case 'auth/network-request-failed':
+      return 'Erro de ligação à rede. Verifica a tua ligação à internet.'
+    case 'auth/too-many-requests':
+      return 'Demasiadas tentativas de autenticação. Por favor, aguarda alguns momentos.'
+    case 'auth/account-exists-with-different-credential':
+      return 'Já existe uma conta associada a este email com outro método de login.'
+    case 'auth/requires-recent-login':
+      return 'Por motivos de segurança, deves iniciar sessão novamente antes de continuar.'
+    case 'auth/invalid-api-key':
+      return 'Chave de configuração de autenticação inválida.'
+    default:
+      if (message.includes('invalid_client') || message.includes('OAuth client was not found')) {
+        return 'Erro na configuração do cliente OAuth Google (invalid_client).'
+      }
+      return 'Não foi possível iniciar sessão com o Google. Tenta novamente.'
   }
 }
 
@@ -67,15 +149,13 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
     throw new Error('Firebase Auth não está inicializado.')
   }
 
-  const provider = new GoogleAuthProvider()
-  provider.setCustomParameters({ prompt: 'select_account' })
-
+  const provider = getGoogleAuthProvider()
   console.log('[AUTH] A iniciar signInWithPopup com Google...')
   return await signInWithPopup(auth, provider)
 }
 
 /**
- * Executa o Login Google via signInWithRedirect para suporte a WebView, APK e browsers
+ * Executa o Login Google via signInWithRedirect para suporte a WebView, APK e browsers com popups bloqueados
  */
 export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void> => {
   if (!auth) {
@@ -83,13 +163,11 @@ export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void
     throw new Error('Firebase Auth não está inicializado.')
   }
 
-  const validTarget = typeof redirectTarget === 'string' && redirectTarget.trim() ? redirectTarget.trim() : '/jogar'
-  setPostLoginRedirectTarget(validTarget)
+  const safeTarget = sanitizeRedirectUrl(redirectTarget)
+  setPostLoginRedirectTarget(safeTarget)
 
-  const provider = new GoogleAuthProvider()
-  provider.setCustomParameters({ prompt: 'select_account' })
-
-  console.log('[AUTH] A iniciar signInWithRedirect com Google para destino:', validTarget)
+  const provider = getGoogleAuthProvider()
+  console.log('[AUTH] A iniciar signInWithRedirect com Google para destino:', safeTarget)
   await signInWithRedirect(auth, provider)
 }
 
@@ -99,7 +177,7 @@ export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void
 export const performGoogleSignIn = handleGoogleLogin
 
 /**
- * Hook para processar o regresso da autenticação na página de login:
+ * Hook para processar o regresso da autenticação via redirect
  */
 export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
   const router = useRouter()
@@ -110,23 +188,24 @@ export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
     getRedirectResult(auth)
       .then((result) => {
         if (result?.user) {
+          console.log('[AUTH REDIRECT RESULT] Utilizador autenticado via redirect:', result.user.uid)
           const destination = getPostLoginRedirectTarget(defaultFallback)
           router.push(destination)
         }
       })
       .catch((error) => {
-        console.error('Erro no retorno do login Google:', error)
+        console.error('[AUTH REDIRECT ERROR] Erro no retorno do login Google:', error)
       })
   }, [router, defaultFallback])
 }
-
 
 /**
  * Limpeza total e definitiva da sessão (Firebase, Storage, Cookies e Memória)
  */
 export async function performLogout(redirectUrl = '/'): Promise<void> {
+  const safeRedirect = sanitizeRedirectUrl(redirectUrl, '/')
+
   try {
-    // 1. Firebase Auth SignOut oficial e seguro
     if (auth) {
       const { signOut } = await import('firebase/auth')
       await signOut(auth)
@@ -135,7 +214,7 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
     console.warn('[AUTH] Aviso ao terminar sessão no Firebase:', err)
   }
 
-  // 2. Limpeza segura de dados de sessão em localStorage e sessionStorage
+  // Limpeza segura de dados de sessão em localStorage e sessionStorage
   if (typeof window !== 'undefined') {
     try {
       const keysToRemove = [
@@ -161,7 +240,7 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
       console.warn('[AUTH] Erro ao limpar Storage:', e)
     }
 
-    // 3. Limpeza de cookies de autenticação da aplicação
+    // Limpeza de cookies de autenticação da aplicação
     if (typeof document !== 'undefined') {
       try {
         const cookies = document.cookie.split(';')
@@ -180,9 +259,10 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
       }
     }
 
-    // 4. Redirecionamento limpo
-    window.location.href = redirectUrl
+    // Redirecionamento limpo e seguro
+    window.location.href = safeRedirect
   }
 }
 
 export const logoutUser = performLogout
+
