@@ -3,23 +3,26 @@ import { db } from '@/lib/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { getEmoteById } from '@/src/data/emotes'
 
-// In-memory rate limiting map for 2-second cooldown per player
+// In-memory rate limiting map for 3-second cooldown per player
 const playerCooldowns = new Map<string, number>()
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { duelId, senderId, senderName, emoteId } = body
+    const duelId = body.duelId || body.roomId
+    const senderId = body.senderId
+    const senderName = body.senderName
+    const emoteId = body.emoteId || body.reaction?.id
 
     if (!duelId || !senderId || !emoteId) {
       return NextResponse.json({ error: 'Parâmetros em falta.' }, { status: 400 })
     }
 
-    // 1. Anti-spam Cooldown Check (2 segundos)
+    // 1. Anti-spam Cooldown Check (3 segundos)
     const now = Date.now()
     const lastSent = playerCooldowns.get(senderId) || 0
-    if (now - lastSent < 1800) {
-      return NextResponse.json({ error: 'Cooldown ativo. Aguarda um momento.', waitMs: 2000 - (now - lastSent) }, { status: 429 })
+    if (now - lastSent < 2500) {
+      return NextResponse.json({ error: 'Cooldown ativo. Aguarda um momento.', waitMs: 3000 - (now - lastSent) }, { status: 429 })
     }
 
     // 2. Validate Emote
@@ -43,9 +46,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Jogador não pertence a esta partida.' }, { status: 403 })
     }
 
-    // 4. Update Emote on Firestore
+    // 4. Update Emote & Reaction on Firestore Realtime
     const emotePayload = {
       id: crypto.randomUUID(),
+      type: 'PLAYER_REACTION',
+      roomId: duelId,
       duelId,
       senderId,
       senderName: senderName || (isPlayerA ? duelData.playerA?.displayName : duelData.playerB?.displayName) || 'Jogador',
@@ -53,11 +58,17 @@ export async function POST(req: NextRequest) {
       emoji: emote.emoji,
       label: emote.label,
       text: emote.text,
+      reaction: {
+        id: emote.id,
+        icon: emote.emoji,
+        text: emote.label,
+      },
       timestamp: now,
     }
 
     await updateDoc(duelRef, {
       lastEmote: emotePayload,
+      lastReaction: emotePayload,
     })
 
     playerCooldowns.set(senderId, now)

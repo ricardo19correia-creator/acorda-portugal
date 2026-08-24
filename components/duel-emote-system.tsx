@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { MessageSquare, Sparkles, X, Clock, Flame, Zap, Shield, Crown } from 'lucide-react'
+import { MessageSquare, Sparkles, X, Clock } from 'lucide-react'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { cn } from '@/lib/utils'
@@ -11,24 +11,29 @@ interface DuelEmoteBubbleProps {
     emoji: string
     label: string
     text: string
-    senderId: string
+    senderId?: string
   }
   isMe: boolean
   className?: string
 }
 
 /**
- * Bolha animada de Provocação/Emote flutuante junto ao avatar (3 segundos com fade-out e som)
+ * Balão de Reação Animado 1v1 (2.5s de duração com fade-out e som)
+ * Estilo visual:
+ * - position: absolute; top: -50px;
+ * - background: rgba(18, 24, 27, 0.95);
+ * - border: 1px solid rgba(0, 255, 136, 0.4);
+ * - box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+ * - border-radius: 12px; padding: 6px 14px;
  */
 export function DuelEmoteBubble({ emote, isMe, className }: DuelEmoteBubbleProps) {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     setVisible(true)
-    playEmoteSound(emote.label)
     const timer = setTimeout(() => {
       setVisible(false)
-    }, 3000)
+    }, 2500)
     return () => clearTimeout(timer)
   }, [emote])
 
@@ -37,30 +42,41 @@ export function DuelEmoteBubble({ emote, isMe, className }: DuelEmoteBubbleProps
   return (
     <div
       className={cn(
-        'pointer-events-none absolute z-50 transition-all duration-300 transform animate-rise',
-        isMe ? 'right-0 -top-14 origin-bottom-right' : 'left-0 -top-14 origin-bottom-left',
+        'pointer-events-none absolute z-50 transition-all duration-300 animate-in zoom-in-75 fade-in duration-200 select-none whitespace-nowrap',
+        isMe ? 'right-0 -top-[52px] origin-bottom-right' : 'left-0 -top-[52px] origin-bottom-left',
         className
       )}
+      style={{
+        position: 'absolute',
+        top: '-50px',
+        background: 'rgba(18, 24, 27, 0.95)',
+        border: isMe ? '1px solid rgba(0, 255, 136, 0.5)' : '1px solid rgba(168, 85, 247, 0.5)',
+        boxShadow: isMe ? '0 4px 15px rgba(0, 255, 136, 0.25)' : '0 4px 15px rgba(168, 85, 247, 0.25)',
+        borderRadius: '12px',
+        padding: '6px 14px',
+      }}
     >
+      <div className="flex items-center gap-2">
+        <span className="text-2xl animate-bounce filter drop-shadow">{emote.emoji || '💬'}</span>
+        <span className={cn(
+          "font-display font-black text-sm tracking-wide drop-shadow",
+          isMe ? "text-emerald-300" : "text-purple-300"
+        )}>
+          {emote.label || emote.text}
+        </span>
+      </div>
+
+      {/* Cauda / Ponteiro do Balão de Diálogo */}
       <div
         className={cn(
-          'relative flex items-center gap-2.5 rounded-2xl px-4 py-2 text-xs sm:text-sm font-black shadow-2xl backdrop-blur-xl border border-white/20 animate-bounce',
-          isMe
-            ? 'bg-gradient-to-r from-emerald-950/95 to-slate-900/95 text-emerald-300 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
-            : 'bg-gradient-to-r from-purple-950/95 to-slate-900/95 text-purple-300 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+          'absolute -bottom-1.5 w-3 h-3 rotate-45 border-r border-b',
+          isMe ? 'right-4' : 'left-4'
         )}
-      >
-        <span className="text-2xl filter drop-shadow-md">{emote.emoji}</span>
-        <span className="font-display uppercase tracking-wider text-white drop-shadow">{emote.label}</span>
-
-        {/* Cauda da bolha de fala */}
-        <div
-          className={cn(
-            'absolute -bottom-2 w-3 h-3 rotate-45 border-b border-r border-white/20',
-            isMe ? 'right-5 bg-slate-900 border-emerald-500/50' : 'left-5 bg-slate-900 border-purple-500/50'
-          )}
-        />
-      </div>
+        style={{
+          background: 'rgba(18, 24, 27, 0.95)',
+          borderColor: isMe ? 'rgba(0, 255, 136, 0.5)' : 'rgba(168, 85, 247, 0.5)',
+        }}
+      />
     </div>
   )
 }
@@ -74,7 +90,7 @@ interface DuelEmotePickerProps {
 }
 
 /**
- * Painel rápido e modal de seleção das 4 provocações ativas durante o duelo 1v1
+ * Menu rápido suspenso com as 4 reações equipadas do jogador
  */
 export function DuelEmotePicker({
   isOpen,
@@ -117,17 +133,21 @@ export function DuelEmotePicker({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm rounded-3xl border border-purple-500/40 bg-slate-900/95 p-5 shadow-2xl backdrop-blur-2xl text-white animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-sm rounded-3xl border border-emerald-500/40 bg-slate-900/95 p-5 shadow-2xl backdrop-blur-2xl text-white animate-in zoom-in-95 duration-200"
+        style={{
+          background: 'rgba(18, 24, 27, 0.98)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 136, 0.15)',
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
           <div className="flex items-center gap-2">
-            <span className="grid h-7 w-7 place-items-center rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+            <span className="grid h-7 w-7 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
               <MessageSquare className="h-4 w-4" />
             </span>
             <h3 className="font-display text-sm font-black uppercase tracking-wider text-white">
-              4 Atalhos de Reações 1v1
+              Reações Rápidas 1v1
             </h3>
           </div>
           <button
@@ -146,7 +166,7 @@ export function DuelEmotePicker({
           </div>
         )}
 
-        {/* 4 Quick Shortcut Slots Grid */}
+        {/* 4 Quick Reaction Buttons */}
         <div className="grid grid-cols-2 gap-3">
           {equippedList.map((emote, idx) => {
             return (
@@ -159,10 +179,10 @@ export function DuelEmotePicker({
                   onClose()
                 }}
                 className={cn(
-                  'group relative flex flex-col items-center justify-center gap-1.5 rounded-2xl p-3 text-center border transition-all active:scale-95',
+                  'group relative flex flex-col items-center justify-center gap-1.5 rounded-2xl p-3 text-center border transition-all active:scale-95 cursor-pointer',
                   cooldown > 0
                     ? 'opacity-40 cursor-not-allowed border-white/5 bg-white/5'
-                    : 'cursor-pointer border-purple-500/30 bg-purple-950/20 hover:bg-purple-900/40 hover:border-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                    : 'border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/40 hover:border-emerald-400 hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]'
                 )}
               >
                 <span className="text-3xl group-hover:scale-125 transition-transform duration-200">
@@ -171,8 +191,8 @@ export function DuelEmotePicker({
                 <span className="font-display text-xs font-black text-white group-hover:text-emerald-300">
                   {emote.label}
                 </span>
-                <span className="text-[9px] text-purple-300/80 font-bold uppercase tracking-wider">
-                  Atalho {idx + 1}
+                <span className="text-[9px] text-emerald-400/80 font-bold uppercase tracking-wider">
+                  Reação {idx + 1}
                 </span>
               </button>
             )
@@ -181,7 +201,7 @@ export function DuelEmotePicker({
 
         {/* Footer info */}
         <p className="mt-4 text-center text-[10px] text-slate-400 font-medium">
-          Configura os teus 4 atalhos favoritos na Loja ou no Perfil.
+          Personaliza os teus 4 atalhos na Loja ou no Perfil.
         </p>
       </div>
     </div>
@@ -227,7 +247,7 @@ export function DuelEmoteQuickDock({
   }, [equippedEmoteIds])
 
   return (
-    <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-purple-500/30 shadow-lg backdrop-blur-md">
+    <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-emerald-500/30 shadow-lg backdrop-blur-md">
       {emotes.map((emote) => (
         <button
           key={emote.id}
@@ -241,7 +261,7 @@ export function DuelEmoteQuickDock({
             'flex items-center justify-center w-8 h-8 rounded-xl text-lg transition-all active:scale-95 cursor-pointer select-none',
             cooldown > 0
               ? 'opacity-30 cursor-not-allowed'
-              : 'hover:bg-purple-600/30 hover:scale-115 hover:shadow-md'
+              : 'hover:bg-emerald-600/30 hover:scale-115 hover:shadow-md'
           )}
         >
           <span>{emote.emoji}</span>

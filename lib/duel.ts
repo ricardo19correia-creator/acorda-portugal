@@ -1351,20 +1351,31 @@ export async function sendDuelEmote(
     const emoji = emote?.emoji || '💬'
     const label = emote?.label || customText || 'Reação'
     const text = emote?.text || customText || `${emoji} ${label}`
+    const now = Date.now()
+
+    const reactionPayload = {
+      id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(now),
+      type: 'PLAYER_REACTION',
+      roomId: duelId,
+      duelId,
+      senderId,
+      senderName: senderName || 'Jogador',
+      emoteId,
+      emoji,
+      label,
+      text,
+      reaction: {
+        id: emoteId,
+        icon: emoji,
+        text: label,
+      },
+      timestamp: now,
+    }
 
     const duelRef = doc(db, 'duels', duelId)
     await updateDoc(duelRef, {
-      lastEmote: {
-        id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-        duelId,
-        senderId,
-        senderName: senderName || 'Jogador',
-        emoteId,
-        emoji,
-        label,
-        text,
-        timestamp: Date.now(),
-      },
+      lastEmote: reactionPayload,
+      lastReaction: reactionPayload,
     })
   } catch (error) {
     console.error('[Duel Engine] Erro ao enviar emote:', error)
