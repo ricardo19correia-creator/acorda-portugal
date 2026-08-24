@@ -143,18 +143,20 @@ export default function LojaPage() {
   const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
   const [previewArenaItem, setPreviewArenaItem] = useState<ShopItem | null>(null)
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
-  const [equippedArena, setEquippedArena] = useState<string>('arena_ponte_2077')
+  const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [userBalance, setUserBalance] = useState<number>(803845)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
     avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
-    arenas: ['arena_ponte_2077', 'arena_neon_2088'],
+    arenas: ['arena_1', 'arena_2', 'arena_ponte_2077', 'arena_neon_2088'],
     titles: ['titulo_iniciante']
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
     'guardiao-vulcanico', 
     'camoes-2050', 
+    'arena_1',
+    'arena_2',
     'arena_neon_2088', 
     'arena_ponte_2077', 
     'avatar_vulcao_acores', 
@@ -1078,7 +1080,7 @@ export default function LojaPage() {
                       ) : item.category === 'arenas' ? (
                         <div 
                           onClick={() => setPreviewArenaItem(item)}
-                          className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3 cursor-pointer group/arena"
+                          className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md"
                         >
                           {item.image ? (
                             <img 
@@ -1086,7 +1088,7 @@ export default function LojaPage() {
                               alt={item.name} 
                               className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
                               onError={(e) => {
-                                e.currentTarget.src = '/images/hero-bg.jpg'
+                                e.currentTarget.src = '/arenas/arena-1.jpg'
                               }}
                             />
                           ) : (
@@ -1095,12 +1097,10 @@ export default function LojaPage() {
                             </div>
                           )}
                           <ArenaEffectsLayer effect={item.effect || 'particles'} intensity="low" showContrastOverlay={false} className="z-10" />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                          <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-black z-20">
-                            <span className="px-2 py-0.5 rounded bg-black/70 border border-white/10 text-slate-300 flex items-center gap-1 backdrop-blur-xs">
-                              {item.effect === 'fire' ? '🔥 Fogo' : item.effect === 'lava' ? '🌋 Lava' : item.effect === 'rain' ? '🌧️ Chuva' : item.effect === 'stars' ? '⭐ Estrelas' : item.effect === 'waves' ? '🌊 Ondas' : item.effect === 'lightning' ? '⚡ Trovões' : item.effect === 'fireworks' ? '🎆 Pirotecnia' : item.effect === 'fog' ? '🌫️ Névoa' : '✨ Partículas'}
-                            </span>
-                            <span className="px-2 py-0.5 rounded bg-blue-500/80 text-white flex items-center gap-1 shadow-sm opacity-90 group-hover/arena:opacity-100">
+                          
+                          {/* Botão de Testar (canto superior direito, sem overlay escuro na imagem) */}
+                          <div className="absolute top-2 right-2 z-20">
+                            <span className="px-2 py-0.5 rounded-lg bg-blue-600 text-white font-black text-[10px] flex items-center gap-1 shadow-md opacity-90 group-hover/arena:opacity-100 transition">
                               <Eye className="w-3 h-3" /> Testar
                             </span>
                           </div>
@@ -1122,7 +1122,7 @@ export default function LojaPage() {
                           ))}
                         </div>
                       ) : (
-                        <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-black/40 border border-slate-800/80 mb-3">
+                        <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-slate-800/80 mb-3">
                           {item.image ? (
                             <img 
                               src={item.image} 
@@ -1137,14 +1137,19 @@ export default function LojaPage() {
                               <Sparkles className="w-8 h-8" />
                             </div>
                           )}
-                          {/* Efeito de brilho pulsante */}
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                         </div>
                       )}
 
-                      <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
-                        {item.name}
-                      </h3>
+                      <div className="flex items-center justify-between mt-1 mb-0.5">
+                        <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                          {item.name}
+                        </h3>
+                        {item.category === 'arenas' && (
+                          <span className="text-[10px] font-bold text-slate-400 shrink-0 ml-1">
+                            {item.effect === 'fire' ? '🔥 Fogo' : item.effect === 'lava' ? '🌋 Lava' : item.effect === 'rain' ? '🌧️ Chuva' : item.effect === 'stars' ? '⭐ Estrelas' : item.effect === 'waves' ? '🌊 Ondas' : item.effect === 'lightning' ? '⚡ Trovões' : item.effect === 'fireworks' ? '🎆 Pirotecnia' : item.effect === 'fog' ? '🌫️ Névoa' : '✨ Partículas'}
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 text-xs text-slate-400 line-clamp-2 leading-relaxed">
                         {item.description}
                       </p>
@@ -1205,9 +1210,9 @@ export default function LojaPage() {
               {/* Arena Background Layer with Particle Engine */}
               <div 
                 className="relative h-72 sm:h-96 w-full bg-cover bg-center overflow-hidden flex flex-col justify-between p-6"
-                style={{ backgroundImage: `url('${previewArenaItem.image || '/images/hero-bg.jpg'}')` }}
+                style={{ backgroundImage: `url('${previewArenaItem.image || '/arenas/arena-1.jpg'}')` }}
               >
-                <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={true} />
+                <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={false} />
                 
                 {/* Header Preview */}
                 <div className="relative z-20 flex items-center justify-between">

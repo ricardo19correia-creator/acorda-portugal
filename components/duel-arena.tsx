@@ -76,9 +76,11 @@ interface AnswerFeedback {
 export function DuelArena({
   duelId,
   onDuelChange,
+  onArenaLoaded,
 }: {
   duelId: string
   onDuelChange?: (newDuelId: string) => void
+  onArenaLoaded?: (arenaImage: string) => void
 }) {
   const router = useRouter()
   const { user, profile } = useAuth()
@@ -243,6 +245,10 @@ export function DuelArena({
         updatedDuel.playerB?.currentQuestionIndex,
       )
       setDuel(updatedDuel)
+
+      if (updatedDuel.arenaImage && onArenaLoaded) {
+        onArenaLoaded(updatedDuel.arenaImage)
+      }
 
       // Se a revanche foi aceite, redirecionar ambos os jogadores para o novo duelo
       if (updatedDuel.rematch?.status === 'accepted' && updatedDuel.rematch.newDuelId) {

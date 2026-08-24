@@ -19,18 +19,22 @@ import {
   ArrowLeft,
   RefreshCw,
 } from 'lucide-react'
+import { signInAnonymously } from 'firebase/auth'
+import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { PlayerAvatar } from '@/components/player-avatar'
 import {
   type MatchmakingTicket,
-  joinMatchmakingQueue,
-  heartbeatMatchmaking,
-  cancelMatchmakingQueue,
-  subscribeToMatchmaking,
-  tryFindOpponentMatch,
+  type DuelPlayerData,
+  findOrCreateMatchmakingRoom,
+  checkAndJoinWaitingRoom,
+  subscribeToWaitingRoom,
+  cancelWaitingRoom,
+  sendRoomHeartbeat,
   createDuel,
   joinDuelByCode,
 } from '@/lib/duel'
+import { OFFICIAL_ARENAS, getArenaById, type Arena } from '@/data/shopArenas'
 import { cn } from '@/lib/utils'
 
 interface DuelMatchmakingModalProps {
@@ -43,9 +47,35 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
   const router = useRouter()
   const { user, profile, authResolved } = useAuth()
 
-  const isAuthenticated = authResolved && !!user?.uid
-  const playerUid = user?.uid || ''
-  const playerName = profile?.displayName || user?.displayName || 'Jogador'
+  // Sessão Única por Separador/Browser para impedir colisões em testes locais ou convidados
+  const [sessionGuestId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      let saved = sessionStorage.getItem('guest_duel_session_id')
+      if (!saved) {
+        saved = `guest_${Math.random().toString(36).substring(2, 9)}`
+        sessionStorage.setItem('guest_duel_session_id', saved)
+      }
+      return saved
+    }
+    return `guest_${Date.now()}`
+  })
+
+  const [playAsGuest, setPlayAsGuest] = useState(false)
+
+  // Assegurar token autenticado anónimo para convidados no Firebase
+  useEffect(() => {
+    if (isOpen && authResolved && !auth.currentUser) {
+      signInAnonymously(auth).catch((err) => {
+        console.warn('[Matchmaking Auth] Anonymous login notice:', err)
+      })
+    }
+  }, [isOpen, authResolved])
+
+  const isAccountUser = authResolved && !!user?.uid
+  const canEnterMatchmaking = isAccountUser || playAsGuest
+
+  const playerUid = user?.uid || auth.currentUser?.uid || sessionGuestId
+  const playerName = profile?.displayName || user?.displayName || (playAsGuest ? `Convidado #${sessionGuestId.slice(-4)}` : 'Jogador')
   const playerPhoto = user?.photoURL || null
   const playerLevel = profile?.level || 1
   const playerDistrict = profile?.district || 'Portugal'
@@ -77,11 +107,27 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
   const [customLoading, setCustomLoading] = useState(false)
   const [customError, setCustomError] = useState<string | null>(null)
 
+  // Arena states
+  const [selectedArenaId, setSelectedArenaId] = useState<string>('arena_1')
+  const [showArenaPicker, setShowArenaPicker] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('equipped_arena') || 'arena_1'
+      setSelectedArenaId(saved)
+    }
+  }, [isOpen])
+
+  const selectedArena = useMemo(() => {
+    return getArenaById(selectedArenaId) || OFFICIAL_ARENAS[0]
+  }, [selectedArenaId])
+
   // Refs de sincronização e cleanup estrito
-  const pollIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const waitingRoomIdRef = useRef<string | null>(null)
   const heartbeatIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const pollIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const searchTimerRef = useRef<NodeJS.Timeout | null>(null)
-  const matchAttemptIdRef = useRef<string | null>(null)
+  const roomUnsubscribeRef = useRef<(() => void) | null>(null)
   const matchedDuelIdRef = useRef<string | null>(null)
 
   const playerPropsRef = useRef({
@@ -104,23 +150,27 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     incomingTicket?: MatchmakingTicket,
   ) => {
     if (matchedDuelIdRef.current) return
-    console.log('[MATCH ATOMIC FOUND - 100% REAL PVP] duelId:', duelId, 'Opponent:', opponentInfo?.displayName)
+    console.log('[Matchmaking] Room joined:', duelId, 'Adversário:', opponentInfo?.displayName)
     matchedDuelIdRef.current = duelId
     setMatchedDuelId(duelId)
     setMmState('matched')
 
-    // Limpar imediatamente todos os timers e polling
-    if (pollIntervalRef.current) {
-      clearInterval(pollIntervalRef.current)
-      pollIntervalRef.current = null
-    }
+    // Limpar imediatamente todos os timers e subscrições de busca
     if (heartbeatIntervalRef.current) {
       clearInterval(heartbeatIntervalRef.current)
       heartbeatIntervalRef.current = null
     }
+    if (pollIntervalRef.current) {
+      clearInterval(pollIntervalRef.current)
+      pollIntervalRef.current = null
+    }
     if (searchTimerRef.current) {
       clearInterval(searchTimerRef.current)
       searchTimerRef.current = null
+    }
+    if (roomUnsubscribeRef.current) {
+      roomUnsubscribeRef.current()
+      roomUnsubscribeRef.current = null
     }
 
     if (incomingTicket) {
@@ -132,37 +182,32 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
         level: opponentInfo.level ?? 1,
         district: opponentInfo.district ?? 'Portugal',
       }
-      setTicket((prev) =>
-        prev
-          ? { ...prev, status: 'matched', duelId, opponentInfo: normalizedOpponent }
-          : {
-              userId: playerUid,
-              displayName: playerName,
-              photoURL: playerPhoto,
-              level: playerLevel,
-              district: playerDistrict,
-              status: 'matched',
-              matchAttemptId: matchAttemptIdRef.current || '',
-              joinedAt: Date.now(),
-              lastHeartbeat: Date.now(),
-              expiresAt: Date.now() + 60_000,
-              duelId,
-              opponentInfo: normalizedOpponent,
-              matchedAt: Date.now(),
-            },
-      )
+      setTicket({
+        userId: playerUid,
+        displayName: playerName,
+        photoURL: playerPhoto,
+        level: playerLevel,
+        district: playerDistrict,
+        status: 'matched',
+        matchAttemptId: duelId,
+        joinedAt: Date.now(),
+        lastHeartbeat: Date.now(),
+        expiresAt: Date.now() + 60_000,
+        duelId,
+        opponentInfo: normalizedOpponent,
+        matchedAt: Date.now(),
+      })
     }
   }
 
-  // 1. Iniciar tentativa de Matchmaking fresca (100% Real PVP)
+  // 1. Iniciar tentativa de Matchmaking fresca (Atomic 100% Real PVP)
   useEffect(() => {
-    if (!isOpen || activeView !== 'matchmaking' || !authResolved || !isAuthenticated || !playerUid) {
+    if (!isOpen || activeView !== 'matchmaking' || !authResolved || !canEnterMatchmaking || !playerUid) {
       return
     }
 
-    const currentAttemptId = crypto.randomUUID()
-    matchAttemptIdRef.current = currentAttemptId
     matchedDuelIdRef.current = null
+    waitingRoomIdRef.current = null
 
     setMmState('searching')
     setMatchedDuelId(null)
@@ -180,80 +225,145 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       district: playerPropsRef.current.playerDistrict,
     }
 
-    console.log('[MATCH QUEUE JOINED (100% REAL PVP)] UID:', playerUid, 'Name:', playerObj.displayName, 'Attempt:', currentAttemptId)
+    console.log('[Matchmaking] A iniciar busca de partida para:', playerUid, `(${playerObj.displayName})`)
 
-    // Iniciar pesquisa no backend atómico / RPC
-    const checkMatchServer = async () => {
-      if (matchedDuelIdRef.current) return
+    let isSubscribed = true
+
+    const startMatchFlow = async () => {
+      if (!isSubscribed || matchedDuelIdRef.current) return
       try {
-        const res = await fetch('/api/duel/match', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: playerUid,
-            displayName: playerPropsRef.current.playerName,
-            photoURL: playerPropsRef.current.playerPhoto,
-            level: playerPropsRef.current.playerLevel,
-            district: playerPropsRef.current.playerDistrict,
-          }),
+        const res = await findOrCreateMatchmakingRoom(playerObj, profileObj, {
+          arenaId: selectedArena.id,
+          arenaImage: selectedArena.imagePath,
+          arenaName: selectedArena.name,
         })
-        if (res.ok) {
-          const data = await res.json()
-          if (data.status === 'matched' && data.match_id) {
-            console.log('[MATCH ATOMIC SERVER RPC RESULT: MATCHED] duelId:', data.match_id)
-            handleMatchFound(data.match_id, data.opponentInfo)
+        if (!isSubscribed || matchedDuelIdRef.current) {
+          // Se já cancelado ou emparelhado, limpar se foi criada sala
+          if (res.role === 'host' && !res.matched) {
+            cancelWaitingRoom(res.roomId, playerUid).catch(() => {})
           }
+          return
+        }
+
+        if (res.matched && res.opponent) {
+          // Entrou como Convidado (Player 2)
+          console.log('[Matchmaking] Room joined as Player 2:', res.roomId, 'Host:', res.opponent.displayName)
+          handleMatchFound(res.roomId, res.opponent)
+        } else if (res.role === 'host') {
+          // Criou a sala como Host (Player 1), subscrever em tempo real via onSnapshot
+          waitingRoomIdRef.current = res.roomId
+          console.log('[Matchmaking] Room created as Player 1:', res.roomId, 'Aguardando adversário...')
+
+          // Subscrever às atualizações da sala
+          if (roomUnsubscribeRef.current) {
+            roomUnsubscribeRef.current()
+          }
+
+          roomUnsubscribeRef.current = subscribeToWaitingRoom(
+            res.roomId,
+            (matchedDuel, opponent) => {
+              if (!isSubscribed || matchedDuelIdRef.current) return
+              console.log('[Matchmaking] Adversário entrou na sala:', opponent.displayName, 'Room:', res.roomId)
+              handleMatchFound(res.roomId, opponent)
+            },
+            () => {
+              // Sala cancelada ou removida
+            },
+          )
+
+          // Enviar heartbeat e resolução de emparelhamento a cada 2.5 segundos
+          heartbeatIntervalRef.current = setInterval(async () => {
+            if (!isSubscribed || matchedDuelIdRef.current || !waitingRoomIdRef.current) return
+            
+            // 1. Manter heartbeat ativo
+            sendRoomHeartbeat(waitingRoomIdRef.current).catch(() => {})
+
+            // 2. Verificar se outro host criou sala em simultâneo (tie-breaker determinístico)
+            try {
+              const checkRes = await checkAndJoinWaitingRoom(playerObj, profileObj, waitingRoomIdRef.current)
+              if (checkRes.matched && checkRes.opponent && checkRes.roomId) {
+                console.log('[Matchmaking] Host resolvido em tempo real -> Sala:', checkRes.roomId, 'Adversário:', checkRes.opponent.displayName)
+                waitingRoomIdRef.current = null
+                handleMatchFound(checkRes.roomId, checkRes.opponent)
+              }
+            } catch (pollErr) {
+              console.warn('[Matchmaking] Notice na verificação de sala:', pollErr)
+            }
+          }, 2500)
         }
       } catch (err) {
-        console.warn('[/api/duel/match poll error]:', err)
+        console.error('[Matchmaking] Erro ao iniciar matchmaking:', err)
       }
     }
 
-    // Primeira chamada imediata
-    checkMatchServer()
+    startMatchFlow()
 
-    // Intervalo de 1.0s para polling atómico do backend
-    pollIntervalRef.current = setInterval(checkMatchServer, 1000)
+    // 2. POLLING HTTP FORÇADO A CADA 1.5 SEGUNDOS (Fallback à prova de falhas para Vercel Serverless / Mobile)
+    pollIntervalRef.current = setInterval(async () => {
+      if (!isSubscribed || matchedDuelIdRef.current) return
+      try {
+        const queryParams = new URLSearchParams({
+          userId: playerUid,
+          name: playerPropsRef.current.playerName,
+          photo: playerPropsRef.current.playerPhoto || '',
+          level: String(playerPropsRef.current.playerLevel),
+          district: playerPropsRef.current.playerDistrict,
+          arenaId: selectedArena.id,
+          arenaImage: selectedArena.imagePath || selectedArena.image || '',
+          arenaName: selectedArena.name,
+        })
+        const res = await fetch(`/api/matchmaking/status?${queryParams.toString()}`, {
+          method: 'GET',
+          cache: 'no-store',
+        })
+        if (res.ok) {
+          const data = await res.json()
+          if (data.status === 'matched' && data.match_id && !matchedDuelIdRef.current) {
+            console.log('[Matchmaking Engine] Match detectado via Polling HTTP Fallback:', data.match_id, data.opponentInfo)
+            handleMatchFound(data.match_id, data.opponentInfo || {
+              displayName: 'Adversário',
+              photoURL: null,
+              level: 1,
+              district: 'Portugal',
+            })
+          }
+        }
+      } catch (pollErr) {
+        console.warn('[Matchmaking Polling Notice]:', pollErr)
+      }
+    }, 1500)
 
     const handleBeforeUnload = () => {
-      if (playerUid && !matchedDuelIdRef.current) {
+      if (waitingRoomIdRef.current && !matchedDuelIdRef.current) {
+        cancelWaitingRoom(waitingRoomIdRef.current, playerUid).catch(() => {})
         fetch('/api/duel/cancel', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: playerUid }),
+          body: JSON.stringify({ userId: playerUid, duelId: waitingRoomIdRef.current }),
         }).catch(() => {})
-        cancelMatchmakingQueue(playerUid).catch(() => {})
       }
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Escutar eventos da fila em tempo real (onSnapshot como canal paralelo ultra-rápido)
-    const unsubscribe = subscribeToMatchmaking(playerUid, currentAttemptId, (updatedTicket) => {
-      if (!updatedTicket) return
-      if (updatedTicket.status === 'matched' && updatedTicket.duelId && updatedTicket.opponentInfo) {
-        console.log('[MATCH NOTIFIED VIA REALTIME SNAPSHOT] duelId:', updatedTicket.duelId)
-        handleMatchFound(updatedTicket.duelId, updatedTicket.opponentInfo, updatedTicket)
-      }
-    })
-
-    // Contador de segundos e timeout rigoroso de 30 segundos
+    // Contador de segundos e timeout de 30 segundos
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
 
         if (next >= 30) {
-          console.log('[MATCHMAKING 30S TIMEOUT REACHED]')
+          console.log('[Matchmaking] Timeout de 30 segundos atingido!')
           if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
+          if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
           if (searchTimerRef.current) clearInterval(searchTimerRef.current)
+          if (roomUnsubscribeRef.current) {
+            roomUnsubscribeRef.current()
+            roomUnsubscribeRef.current = null
+          }
 
           setMmState('timeout')
-          if (playerUid && !matchedDuelIdRef.current) {
-            fetch('/api/duel/cancel', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ userId: playerUid }),
-            }).catch(() => {})
-            cancelMatchmakingQueue(playerUid).catch(() => {})
+          if (waitingRoomIdRef.current && !matchedDuelIdRef.current) {
+            cancelWaitingRoom(waitingRoomIdRef.current, playerUid).catch(() => {})
+            waitingRoomIdRef.current = null
           }
         }
 
@@ -262,20 +372,21 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     }, 1000)
 
     return () => {
+      isSubscribed = false
       window.removeEventListener('beforeunload', handleBeforeUnload)
       if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
+      if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
       if (searchTimerRef.current) clearInterval(searchTimerRef.current)
-      unsubscribe()
-      if (playerUid && !matchedDuelIdRef.current) {
-        fetch('/api/duel/cancel', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: playerUid }),
-        }).catch(() => {})
-        cancelMatchmakingQueue(playerUid).catch(() => {})
+      if (roomUnsubscribeRef.current) {
+        roomUnsubscribeRef.current()
+        roomUnsubscribeRef.current = null
+      }
+      if (waitingRoomIdRef.current && !matchedDuelIdRef.current) {
+        cancelWaitingRoom(waitingRoomIdRef.current, playerUid).catch(() => {})
+        waitingRoomIdRef.current = null
       }
     }
-  }, [isOpen, activeView, authResolved, isAuthenticated, playerUid, retryTrigger])
+  }, [isOpen, activeView, authResolved, canEnterMatchmaking, playerUid, retryTrigger])
 
   // 2. Transição e Contagem Regressiva Isolada e Segura (3 -> 2 -> 1 -> Início Automático)
   const navigatedRef = useRef(false)
@@ -286,7 +397,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       return
     }
 
-    console.log('[MATCH EFFECT] INICIANDO CONTAGEM REGRESSIVA PARA DUEL:', matchedDuelId)
+    console.log('[Matchmaking] Confronto pronto! A iniciar contagem regressiva para duelId:', matchedDuelId)
     setCountdown(3)
 
     try {
@@ -296,7 +407,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     const triggerGameStart = () => {
       if (navigatedRef.current) return
       navigatedRef.current = true
-      console.log('[MATCH GAME START] DISPATCHING GAME START NOW FOR DUEL:', matchedDuelId)
+      console.log('[Matchmaking] Game starting:', matchedDuelId)
 
       setCountdown(0)
 
@@ -310,7 +421,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       // Fallback de segurança se o router demorar
       setTimeout(() => {
         if (typeof window !== 'undefined' && !window.location.search.includes(matchedDuelId)) {
-          console.log('[MATCH RESILIENT FALLBACK] window.location.assign...')
+          console.log('[Matchmaking] Fallback de navegação window.location.assign...')
           window.location.assign(`/jogar/duelo?id=${matchedDuelId}`)
         }
       }, 500)
@@ -319,7 +430,6 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     let c = 3
     const interval = setInterval(() => {
       c -= 1
-      console.log('[COUNTDOWN TICK]:', c)
       if (c > 0) {
         setCountdown(c)
       } else {
@@ -330,7 +440,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
     // Deadlock safety fallback: 4.2 segundos no máximo
     const deadlockFallback = setTimeout(() => {
-      console.log('[DEADLOCK SAFETY FALLBACK TRIGGERED] 4.2s timeout')
+      console.log('[Matchmaking] Fallback de segurança de 4.2s acionado')
       clearInterval(interval)
       triggerGameStart()
     }, 4200)
@@ -347,18 +457,29 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       clearInterval(pollIntervalRef.current)
       pollIntervalRef.current = null
     }
+    if (heartbeatIntervalRef.current) {
+      clearInterval(heartbeatIntervalRef.current)
+      heartbeatIntervalRef.current = null
+    }
     if (searchTimerRef.current) {
       clearInterval(searchTimerRef.current)
       searchTimerRef.current = null
     }
+    if (roomUnsubscribeRef.current) {
+      roomUnsubscribeRef.current()
+      roomUnsubscribeRef.current = null
+    }
 
-    if (playerUid && !matchedDuelId) {
+    if (!matchedDuelId) {
+      if (waitingRoomIdRef.current) {
+        await cancelWaitingRoom(waitingRoomIdRef.current, playerUid).catch(() => {})
+        waitingRoomIdRef.current = null
+      }
       fetch('/api/duel/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: playerUid }),
       }).catch(() => {})
-      await cancelMatchmakingQueue(playerUid).catch(() => {})
     }
     onClose()
   }
@@ -368,7 +489,11 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     setCustomLoading(true)
     setCustomError(null)
     try {
-      const res = await createDuel(currentPlayer, profile ?? undefined)
+      const res = await createDuel(currentPlayer, profile ?? undefined, {
+        arenaId: selectedArena.id,
+        arenaImage: selectedArena.imagePath,
+        arenaName: selectedArena.name,
+      })
       onClose()
       router.push(`/jogar/duelo?id=${res.duelId}`)
     } catch (err: any) {
@@ -400,7 +525,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
   if (!isOpen) return null
 
-  if (authResolved && (!user || !user.uid)) {
+  if (authResolved && !canEnterMatchmaking && (!user || !user.uid)) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
         <div className="card-game-purple relative w-full max-w-md rounded-4xl p-6 sm:p-8 shadow-2xl animate-scale-in text-center overflow-hidden border border-purple-500/50">
@@ -424,11 +549,11 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
           </div>
 
           <h2 className="mt-3 font-display text-2xl sm:text-3xl font-black uppercase text-foreground text-glow-purple tracking-tight">
-            Conta Obrigatória
+            Multiplayer 1v1
           </h2>
 
           <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            O modo <strong>Duelo 1v1 em Direto</strong> decorre em tempo real entre contas reais para validação de estatísticas, subida no ranking nacional e atribuição de vitórias.
+            Entra com a tua conta para guardar XP, moedas e subir no ranking nacional, ou joga imediatamente como Convidado.
           </p>
 
           <div className="mt-6 flex flex-col gap-3">
@@ -438,6 +563,14 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
             >
               <span>Entrar / Criar Conta</span>
             </Link>
+
+            <button
+              type="button"
+              onClick={() => setPlayAsGuest(true)}
+              className="w-full rounded-2xl border border-purple-500/40 bg-purple-500/15 py-3 font-display text-xs font-black uppercase tracking-wider text-purple-300 hover:bg-purple-500/25 transition cursor-pointer"
+            >
+              ⚡ Jogar como Convidado
+            </button>
 
             <button
               onClick={onClose}
@@ -534,8 +667,84 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                   </div>
                 </div>
 
+                {/* SELETOR DE ARENA COM PREVIEW DAS 10 IMAGENS */}
+                <div className="mt-4 rounded-2xl border border-white/15 bg-white/5 p-3 backdrop-blur-md">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div
+                        className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
+                        style={{
+                          backgroundImage: `url('${selectedArena.imagePath}')`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      />
+                      <div className="text-left min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[0.65rem] font-bold text-muted-foreground uppercase tracking-wider">Arena</span>
+                          <span className={cn('rounded px-1.5 py-0.5 text-[0.6rem] font-black', selectedArena.badgeColor || 'text-emerald-400 bg-emerald-500/10')}>
+                            {selectedArena.rarity}
+                          </span>
+                        </div>
+                        <p className="font-display text-xs font-black text-foreground truncate">{selectedArena.name}</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowArenaPicker(!showArenaPicker)}
+                      className="rounded-xl border border-purple-500/40 bg-purple-500/20 px-2.5 py-1.5 text-[0.7rem] font-bold text-purple-300 hover:bg-purple-500/30 transition cursor-pointer shrink-0"
+                    >
+                      {showArenaPicker ? 'Fechar' : 'Mudar Arena'}
+                    </button>
+                  </div>
+
+                  {/* Grelha de Seleção das 10 Arenas Oficiais */}
+                  {showArenaPicker && (
+                    <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 sm:grid-cols-5 gap-2 max-h-48 overflow-y-auto pr-1">
+                      {OFFICIAL_ARENAS.map((arena) => {
+                        const isSelected = arena.id === selectedArena.id
+                        return (
+                          <button
+                            key={arena.id}
+                            type="button"
+                            onClick={() => {
+                              setSelectedArenaId(arena.id)
+                              if (typeof window !== 'undefined') {
+                                localStorage.setItem('equipped_arena', arena.id)
+                                localStorage.setItem('equipped_arena_image', arena.imagePath || arena.image || '')
+                                window.dispatchEvent(new Event('arenaChanged'))
+                              }
+                              setShowArenaPicker(false)
+                            }}
+                            className={cn(
+                              'group relative rounded-xl overflow-hidden border p-1 text-left transition flex flex-col items-center cursor-pointer',
+                              isSelected
+                                ? 'border-purple-400 ring-2 ring-purple-400/60 bg-purple-500/20'
+                                : 'border-white/10 bg-black/40 hover:border-white/30'
+                            )}
+                          >
+                            <div
+                              className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
+                              style={{
+                                backgroundImage: `url('${arena.imagePath || arena.image}')`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                              }}
+                            />
+                            <span className="mt-1 font-display text-[0.65rem] font-black text-foreground truncate w-full text-center">
+                              {arena.name}
+                            </span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+
                 {/* Match Details HUD */}
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground font-bold">
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground font-bold">
                   <span className="text-gold flex items-center gap-1">
                     <Sparkles className="h-3.5 w-3.5" /> 10 Perguntas
                   </span>
@@ -740,6 +949,83 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                 <p className="text-xs sm:text-sm text-muted-foreground">
                   Gera um código único de sala (ex: <strong className="text-gold font-bold">AP-7K42</strong>) para enviares ao teu amigo.
                 </p>
+
+                {/* SELETOR DE ARENA PARA SALA PERSONALIZADA */}
+                <div className="mt-4 rounded-2xl border border-white/15 bg-white/5 p-3 backdrop-blur-md text-left">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div
+                        className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
+                        style={{
+                          backgroundImage: `url('${selectedArena.imagePath}')`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      />
+                      <div className="text-left min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[0.65rem] font-bold text-muted-foreground uppercase tracking-wider">Arena</span>
+                          <span className={cn('rounded px-1.5 py-0.5 text-[0.6rem] font-black', selectedArena.badgeColor || 'text-emerald-400 bg-emerald-500/10')}>
+                            {selectedArena.rarity}
+                          </span>
+                        </div>
+                        <p className="font-display text-xs font-black text-foreground truncate">{selectedArena.name}</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowArenaPicker(!showArenaPicker)}
+                      className="rounded-xl border border-purple-500/40 bg-purple-500/20 px-2.5 py-1.5 text-[0.7rem] font-bold text-purple-300 hover:bg-purple-500/30 transition cursor-pointer shrink-0"
+                    >
+                      {showArenaPicker ? 'Fechar' : 'Mudar Arena'}
+                    </button>
+                  </div>
+
+                  {/* Grelha de Seleção */}
+                  {showArenaPicker && (
+                    <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 sm:grid-cols-5 gap-2 max-h-48 overflow-y-auto pr-1">
+                      {OFFICIAL_ARENAS.map((arena) => {
+                        const isSelected = arena.id === selectedArena.id
+                        return (
+                          <button
+                            key={arena.id}
+                            type="button"
+                            onClick={() => {
+                              setSelectedArenaId(arena.id)
+                              if (typeof window !== 'undefined') {
+                                localStorage.setItem('equipped_arena', arena.id)
+                                localStorage.setItem('equipped_arena_image', arena.imagePath || arena.image || '')
+                                window.dispatchEvent(new Event('arenaChanged'))
+                              }
+                              setShowArenaPicker(false)
+                            }}
+                            className={cn(
+                              'group relative rounded-xl overflow-hidden border p-1 text-left transition flex flex-col items-center cursor-pointer',
+                              isSelected
+                                ? 'border-purple-400 ring-2 ring-purple-400/60 bg-purple-500/20'
+                                : 'border-white/10 bg-black/40 hover:border-white/30'
+                            )}
+                          >
+                            <div
+                              className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
+                              style={{
+                                backgroundImage: `url('${arena.imagePath || arena.image}')`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                              }}
+                            />
+                            <span className="mt-1 font-display text-[0.65rem] font-black text-foreground truncate w-full text-center">
+                              {arena.name}
+                            </span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+
                 <button
                   onClick={handleCreateCustom}
                   disabled={customLoading}

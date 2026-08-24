@@ -1,19 +1,6 @@
-export type ArenaRarity = 'Comum' | 'Rara' | 'Épica' | 'Lendária' | 'Mítica' | 'Exclusiva'
-export type ArenaEffect = 'none' | 'rain' | 'fire' | 'lava' | 'particles' | 'waves' | 'snow' | 'lightning' | 'stars' | 'fog' | 'fireworks'
+import type { Arena, ArenaItem, ArenaRarity, ArenaEffect } from '@/src/types/arena'
 
-export interface ArenaItem {
-  id: string
-  name: string
-  category: 'portugal' | 'ilhas' | 'historia' | 'cultura' | 'futebol' | 'futuristas' | 'maluco' | 'exclusivas'
-  categoryLabel: string
-  rarity: ArenaRarity
-  price: number | null // null = Desbloqueio por Conquista/Prestígio
-  unlockCondition?: string
-  description: string
-  image: string
-  effect: ArenaEffect
-  badgeColor: string
-}
+export type { Arena, ArenaItem, ArenaRarity, ArenaEffect }
 
 export const getArenaRarityBadge = (rarity: ArenaRarity): string => {
   switch (rarity) {
@@ -58,7 +45,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Rara',
     price: 3000,
     description: 'Cenário clássico da emblemática praça portuense com partículas solares douradas.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-praca-liberdade.jpg',
+    imagePath: '/arenas/arena-praca-liberdade.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Rara'),
   },
@@ -70,7 +58,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 7500,
     description: 'Muralhas medievais iluminadas por tochas ardentes ao cair da noite.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-castelo-obidos.jpg',
+    imagePath: '/arenas/arena-castelo-obidos.jpg',
     effect: 'fire',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -82,7 +71,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 5000,
     description: 'Falésias majestosas batidas pelas ondas vivas do Atlântico e névoa marinha.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-costa-atlantica.jpg',
+    imagePath: '/arenas/arena-costa-atlantica.jpg',
     effect: 'waves',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -94,7 +84,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 8000,
     description: 'A icónica travessia do Douro envolta no brilho dourado do pôr-do-sol ribeirinho.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-ponte-d-luis.jpg',
+    imagePath: '/arenas/arena-ponte-d-luis.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -106,7 +97,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 10000,
     description: 'Praça do Comércio e Terreiro do Paço banhados por partículas solares reluzentes.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-lisboa-imperial.jpg',
+    imagePath: '/arenas/arena-lisboa-imperial.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -122,7 +114,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 12500,
     description: 'Cratera açoriana em plena atividade com lava incandescente e fagulhas em ascensão.',
-    image: '/images/shop/arena-fogo-acores.jpg',
+    image: '/arenas/arena-vulcao-erupcao.jpg',
+    imagePath: '/arenas/arena-vulcao-erupcao.jpg',
     effect: 'lava',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -134,7 +127,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 8000,
     description: 'Floresta Laurissilva envolta numa suave névoa oceânica e vegetação luxuriante.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-madeira-tropical.jpg',
+    imagePath: '/arenas/arena-madeira-tropical.jpg',
     effect: 'fog',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -146,7 +140,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 15000,
     description: 'O ponto mais alto de Portugal sob um manto cósmico e constelações cintilantes.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-pico-estrelas.jpg',
+    imagePath: '/arenas/arena-pico-estrelas.jpg',
     effect: 'stars',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -158,7 +153,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 10000,
     description: 'Luzes cintilantes do anfiteatro do Funchal refletidas no oceano escuro.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-madeira-noite.jpg',
+    imagePath: '/arenas/arena-madeira-noite.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -174,7 +170,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 9000,
     description: 'Povoado fortificado do século XII com tochas crepitantes e bandeiras históricas.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-portugal-medieval.jpg',
+    imagePath: '/arenas/arena-portugal-medieval.jpg',
     effect: 'fire',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -186,7 +183,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 15000,
     description: 'Naus a cruzar mares desconhecidos orientadas pelo astrolábio e estrelas guia.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-era-descobrimentos.jpg',
+    imagePath: '/arenas/arena-era-descobrimentos.jpg',
     effect: 'stars',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -198,7 +196,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 18000,
     description: 'Cenário épico de Aljubarrota com névoa densa e estandartes ao vento.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-batalha-medieval.jpg',
+    imagePath: '/arenas/arena-batalha-medieval.jpg',
     effect: 'fog',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -210,7 +209,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 20000,
     description: 'Salão nobre do Palácio Nacional com lustres de cristal e faíscas de ouro real.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-corte-portuguesa.jpg',
+    imagePath: '/arenas/arena-corte-portuguesa.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -226,7 +226,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 7500,
     description: 'Arraial festivo de São João e Santo António com fogos de artifício e cor.',
-    image: '/images/shop/arena-fado-alfama.jpg',
+    image: '/arenas/arena-6.jpg',
+    imagePath: '/arenas/arena-6.jpg',
     effect: 'fireworks',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -238,7 +239,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 8000,
     description: 'Cenário dramático do D. Maria II com foco de luz cénica e partículas suaves.',
-    image: '/images/shop/arena-fado-alfama.jpg',
+    image: '/arenas/arena-4.jpg',
+    imagePath: '/arenas/arena-4.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -250,7 +252,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Rara',
     price: 6000,
     description: 'Ambiente minimalista e elegante em azulejos azuis e brancos com foco clean.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-1.jpg',
+    imagePath: '/arenas/arena-1.jpg',
     effect: 'none',
     badgeColor: getArenaRarityBadge('Rara'),
   },
@@ -266,7 +269,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 10000,
     description: 'O relvado mítico do Jamor com flashes de câmaras e holofotes de gala.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-9.jpg',
+    imagePath: '/arenas/arena-9.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -278,7 +282,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 15000,
     description: 'Clássico sob chuva torrencial e atmosfera eletrizante de bancadas a ferver.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-9.jpg',
+    imagePath: '/arenas/arena-9.jpg',
     effect: 'rain',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -290,7 +295,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 20000,
     description: 'O momento da consagração máxima com chuva de confetes e pirotecnia de campeão.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-5.jpg',
+    imagePath: '/arenas/arena-5.jpg',
     effect: 'fireworks',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -302,7 +308,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 25000,
     description: 'A nação unida em campo sob trovões de entusiasmo e feixes de laser verde e rubro.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-9.jpg',
+    imagePath: '/arenas/arena-9.jpg',
     effect: 'lightning',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -318,7 +325,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Comum',
     price: 0,
     description: 'Cenário cyberpunk sobre o Tejo com lasers e arranha-céus flutuantes.',
-    image: '/arenas/arena-ponte-2077.gif',
+    image: '/arenas/arena-10.gif',
+    imagePath: '/arenas/arena-10.gif',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Comum'),
   },
@@ -330,7 +338,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 12000,
     description: 'A baixa lisboeta no ano 2088 com néon magenta, chuva digital e hologramas das Quinas.',
-    image: '/arenas/arena-ponte-2077.gif',
+    image: '/arenas/arena-10.gif',
+    imagePath: '/arenas/arena-10.gif',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -342,7 +351,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 25000,
     description: 'Base espacial em órbita geoestacionária com vista panorâmica sobre o território nacional.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-8.jpg',
+    imagePath: '/arenas/arena-8.jpg',
     effect: 'stars',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -354,7 +364,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 30000,
     description: 'Vórtice dimensional quântico com pulsação hipnótica e distorção de espaço-tempo.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-8.jpg',
+    imagePath: '/arenas/arena-8.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -370,7 +381,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Épica',
     price: 8000,
     description: 'Gravidade invertida: o mar está no teto e as montanhas apontam para o abismo!',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-3.jpg',
+    imagePath: '/arenas/arena-3.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Épica'),
   },
@@ -382,7 +394,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Lendária',
     price: 10000,
     description: 'Invasão cósmica de patos amarelos gigantes a flutuar pelo ecrã de duelo!',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-5.jpg',
+    imagePath: '/arenas/arena-5.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
@@ -394,7 +407,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 15000,
     description: 'Chuva torrencial e doce de pastéis de nata estaladiços saídos do forno cósmico!',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-vulcao-erupcao.jpg',
+    imagePath: '/arenas/arena-vulcao-erupcao.jpg',
     effect: 'lava',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -406,7 +420,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     rarity: 'Mítica',
     price: 20000,
     description: 'Viagem elétrica ao centro dos neurónios do quiz com tempestades de sinapses.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-8.jpg',
+    imagePath: '/arenas/arena-8.jpg',
     effect: 'lightning',
     badgeColor: getArenaRarityBadge('Mítica'),
   },
@@ -423,7 +438,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     price: null,
     unlockCondition: 'Exclusiva para o atual Campeão Nacional do Acorda Portugal',
     description: 'Trono sagrado de ouro e rubi concedido apenas ao líder absoluto de Portugal.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-corte-portuguesa.jpg',
+    imagePath: '/arenas/arena-corte-portuguesa.jpg',
     effect: 'fireworks',
     badgeColor: getArenaRarityBadge('Exclusiva'),
   },
@@ -436,7 +452,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     price: null,
     unlockCondition: 'Alcançar e manter o 1º lugar do Ranking Nacional',
     description: 'A arena dourada do número um com coroa celestial e feixes de prestígio.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-5.jpg',
+    imagePath: '/arenas/arena-5.jpg',
     effect: 'lightning',
     badgeColor: getArenaRarityBadge('Exclusiva'),
   },
@@ -449,7 +466,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     price: null,
     unlockCondition: 'Exclusiva de Lançamento / Passe Fundador',
     description: 'Monumento imortal com as Quinas em néon perpétuo e aura mística dos pioneiros.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-lisboa-imperial.jpg',
+    imagePath: '/arenas/arena-lisboa-imperial.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Exclusiva'),
   },
@@ -462,7 +480,8 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     price: null,
     unlockCondition: 'Conquista de 100 Vitórias em Duelos 1v1',
     description: 'Arena dos guerreiros imortais forjada no fogo de 100 batalhas vitoriosas.',
-    image: '/images/shop/arena-fogo-acores.jpg',
+    image: '/arenas/arena-batalha-medieval.jpg',
+    imagePath: '/arenas/arena-batalha-medieval.jpg',
     effect: 'fire',
     badgeColor: getArenaRarityBadge('Exclusiva'),
   },
@@ -475,8 +494,30 @@ export const ARENA_SHOP_CATALOG: ArenaItem[] = [
     price: null,
     unlockCondition: 'Recompensa de vitória em Torneio ou Evento Especial',
     description: 'Coliseu vibrante de duelo final onde os campeões de torneio são coroados.',
-    image: '/images/hero-bg.jpg',
+    image: '/arenas/arena-5.jpg',
+    imagePath: '/arenas/arena-5.jpg',
     effect: 'particles',
     badgeColor: getArenaRarityBadge('Lendária'),
   },
 ]
+
+export function getArenaById(id: string): ArenaItem | undefined {
+  if (!id) return undefined
+  const cleanId = id.toLowerCase().replace(/-/g, '_')
+  return (
+    ARENA_SHOP_CATALOG.find((a) => a.id === id || a.id.toLowerCase() === cleanId) ||
+    ARENA_SHOP_CATALOG.find((a) => a.image?.includes(id) || a.imagePath?.includes(id)) ||
+    (id === 'arena_1' ? ARENA_SHOP_CATALOG[0] : undefined) ||
+    (id === 'arena_2' ? ARENA_SHOP_CATALOG[1] : undefined) ||
+    (id === 'arena_ponte_2077' || id === 'arena_neon_2088' || id === 'arena_10' ? ARENA_SHOP_CATALOG[20] : undefined)
+  )
+}
+
+export function getDefaultArena(): ArenaItem {
+  return ARENA_SHOP_CATALOG[0]
+}
+
+export function getRandomArena(): ArenaItem {
+  const idx = Math.floor(Math.random() * ARENA_SHOP_CATALOG.length)
+  return ARENA_SHOP_CATALOG[idx]
+}

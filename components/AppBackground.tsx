@@ -107,9 +107,16 @@ export function AppBackground({
     })
   }, [variant, showParticles])
 
+  const isCustomArena = !!customImage
+
   // Intensidade das camadas de contraste
-  const vignetteOverlayClass =
-    contrastIntensity === 'strong'
+  const vignetteOverlayClass = isCustomArena
+    ? contrastIntensity === 'strong'
+      ? 'bg-gradient-to-b from-black/50 via-transparent to-black/60'
+      : contrastIntensity === 'normal'
+      ? 'bg-gradient-to-b from-black/30 via-transparent to-black/40'
+      : 'bg-transparent'
+    : contrastIntensity === 'strong'
       ? 'bg-gradient-to-b from-slate-950/95 via-slate-950/85 to-slate-950/98'
       : contrastIntensity === 'subtle'
       ? 'bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/80'
@@ -125,25 +132,31 @@ export function AppBackground({
     >
       {/* 1. Imagem de Fundo Oficial Vetorial com Aceleração de Hardware */}
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-700 will-change-transform opacity-90 scale-[1.01]"
+        className={cn(
+          'absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-700 will-change-transform scale-[1.01]',
+          isCustomArena ? 'opacity-100' : 'opacity-90'
+        )}
         style={{
           backgroundImage: `url('${bgImage}')`,
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
         }}
       />
 
-      {/* 2. Máscara Radial de Segurança Central (Protege Textos, Botões, Perguntas e Cartões) */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 75% 65% at 50% 45%, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.8) 75%, rgba(2, 6, 23, 0.98) 100%)',
-        }}
-      />
+      {/* 2. Máscara Radial de Segurança Central (Apenas se não for arena limpa ou se contrastIntensity exigir) */}
+      {!isCustomArena && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 75% 65% at 50% 45%, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.8) 75%, rgba(2, 6, 23, 0.98) 100%)',
+          }}
+        />
+      )}
 
       {/* 3. Camada de Gradiente Linear Vertical Suave */}
-      <div className={cn('absolute inset-0 pointer-events-none backdrop-blur-[1px]', vignetteOverlayClass)} />
+      <div className={cn('absolute inset-0 pointer-events-none', vignetteOverlayClass)} />
 
       {/* 4. Micropartículas Lançadas em Segundo Plano */}
       {showParticles && (

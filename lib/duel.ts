@@ -21,6 +21,7 @@ import { db } from '@/lib/firebase'
 import { ALL_QUIZ_QUESTIONS, type QuizQuestion } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import { QUESTION_TIME_MS } from '@/config/quiz'
+import { getArenaById, getRandomArena, OFFICIAL_ARENAS } from '@/src/data/arenas'
 
 export type DuelStatus = 'waiting' | 'matched' | 'playing' | 'finished' | 'expired' | 'cancelled'
 export type DuelAnswerStatus = 'CORRECT' | 'WRONG' | 'TIMEOUT'
@@ -89,6 +90,10 @@ export interface DuelDocument {
   startedAt?: number | null
   finishedAt?: number | null
   expiresAt: number
+  lastHeartbeat?: number
+  arenaId?: string
+  arenaImage?: string
+  arenaName?: string
   playerA: DuelPlayerData
   playerB?: DuelPlayerData | null
   questions: DuelQuestion[]
@@ -180,42 +185,449 @@ export function generateDuelQuestions(count = 10): DuelQuestion[] {
 }
 
 // =========================================================================
-// 1. AUTOMATIC 1V1 MATCHMAKING (ATOMIC TRANSACTION & CROSS-DEVICE SYNC)
+// 1. AUTOMATIC 1V1 MATCHMAKING (ATOMIC FIRESTORE TRANSACTIONS & REAL-TIME ON SNAPSHOT)
 // =========================================================================
 
-export async function joinMatchmakingQueue(
+export interface MatchmakingRoomResult {
+  role: 'host' | 'guest'
+  matched: boolean
+  roomId: string
+  duel: DuelDocument
+  opponent?: DuelPlayerData | null
+}
+
+/**
+ * Procura uma sala aberta com status 'waiting' e entra via transação Firestore,
+ * ou cria uma nova sala como Host aguardando adversário em tempo real.
+ */
+export async function findOrCreateMatchmakingRoom(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
-  profile?: { level?: number; district?: string },
-  matchAttemptId: string = crypto.randomUUID(),
-): Promise<string> {
+  profile?: { level?: number; district?: string; equippedArena?: string },
+  options?: { arenaId?: string; arenaImage?: string; arenaName?: string },
+): Promise<MatchmakingRoomResult> {
   if (!user || !user.uid) {
     throw new Error('Identificador de jogador ausente.')
   }
 
   const now = Date.now()
   const playerLevel = profile?.level || 1
-  console.log('[MATCH QUEUE JOINED]', user.uid, 'Nome:', user.displayName, 'Nível:', playerLevel, 'Attempt:', matchAttemptId)
+  const playerName = (profile as any)?.displayName || user.displayName || 'Jogador'
+  const playerDistrict = profile?.district || 'Portugal'
+  const playerPhoto = user.photoURL || null
 
-  const ticketRef = doc(db, 'duelQueue', user.uid)
-
-  const ticketData: MatchmakingTicket = {
-    userId: user.uid,
-    displayName: (profile as any)?.displayName || user.displayName || 'Jogador',
-    photoURL: user.photoURL || null,
+  const myPlayerData: DuelPlayerData = {
+    uid: user.uid,
+    displayName: playerName,
+    photoURL: playerPhoto,
     level: playerLevel,
-    district: profile?.district || 'Portugal',
-    status: 'searching',
-    matchAttemptId,
-    joinedAt: now,
-    lastHeartbeat: now,
-    expiresAt: now + 60_000,
-    duelId: null,
-    opponentInfo: null,
-    matchedAt: null,
+    district: playerDistrict,
+    score: 0,
+    correctCount: 0,
+    currentQuestionIndex: 0,
+    answers: [],
+    finished: false,
+    finishedAt: null,
   }
 
-  await setDoc(ticketRef, ticketData)
-  console.log('[MATCH] QUEUE CREATED IN FIRESTORE:', user.uid)
+  console.log('[Matchmaking] A procurar sala para:', user.uid, `(${playerName}, Nível ${playerLevel})`)
+
+  // 1. Consultar todas as salas abertas com status: 'waiting'
+  const q = query(
+    collection(db, 'duels'),
+    where('status', '==', 'waiting'),
+  )
+  const snap = await getDocs(q)
+
+  // 1.1 Pre-cleanup: Limpar salas abandonadas do próprio utilizador ou com mais de 45 segundos
+  for (const d of snap.docs) {
+    const data = d.data() as DuelDocument
+    if (data.playerA?.uid === user.uid) {
+      deleteDoc(d.ref).catch(() => {})
+    } else if (
+      typeof data.createdAt === 'number' &&
+      data.createdAt < now - 45_000 &&
+      (!data.lastHeartbeat || data.lastHeartbeat < now - 15_000)
+    ) {
+      deleteDoc(d.ref).catch(() => {})
+    }
+  }
+
+  const candidateDocs = snap.docs.filter((d) => {
+    const data = d.data() as DuelDocument
+    if (data.playerA?.uid === user.uid) return false
+    const isRecent =
+      (typeof data.createdAt === 'number' && data.createdAt > now - 45_000) ||
+      (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat > now - 20_000)
+    return isRecent && !data.playerB && data.status === 'waiting'
+  })
+
+  // 2. Se existirem salas de outro jogador, tentar entrar via transação atómica
+  if (candidateDocs.length > 0) {
+    // Ordenar por proximidade de nível e salas mais antigas primeiro
+    candidateDocs.sort((a, b) => {
+      const dataA = a.data() as DuelDocument
+      const dataB = b.data() as DuelDocument
+      const diffA = Math.abs((dataA.playerA?.level || 1) - playerLevel)
+      const diffB = Math.abs((dataB.playerA?.level || 1) - playerLevel)
+      if (diffA !== diffB) return diffA - diffB
+      return (dataA.createdAt || 0) - (dataB.createdAt || 0)
+    })
+
+    for (const candDoc of candidateDocs) {
+      const candRoomId = candDoc.id
+      const candRef = doc(db, 'duels', candRoomId)
+
+      try {
+        const txResult = await runTransaction(db, async (transaction) => {
+          const roomSnap = await transaction.get(candRef)
+          if (!roomSnap.exists()) {
+            return { matched: false as const }
+          }
+
+          const roomData = roomSnap.data() as DuelDocument
+          if (
+            roomData.status !== 'waiting' ||
+            roomData.playerB ||
+            roomData.playerA?.uid === user.uid
+          ) {
+            return { matched: false as const }
+          }
+
+          const startedAt = Date.now() + 3500
+          const firstDeadline = startedAt + QUESTION_TIME_MS
+
+          const guestPlayer: DuelPlayerData = {
+            ...myPlayerData,
+            questionStartedAt: startedAt,
+            questionDeadline: firstDeadline,
+          }
+
+          const updatedDoc: Record<string, any> = {
+            status: 'matched',
+            playerB: guestPlayer,
+            playerUids: [roomData.playerA.uid, user.uid],
+            startedAt,
+            'playerA.questionStartedAt': startedAt,
+            'playerA.questionDeadline': firstDeadline,
+          }
+
+          transaction.update(candRef, updatedDoc)
+
+          const fullDuel: DuelDocument = {
+            ...roomData,
+            status: 'matched',
+            playerB: guestPlayer,
+            playerUids: [roomData.playerA.uid, user.uid],
+            startedAt,
+            playerA: {
+              ...roomData.playerA,
+              questionStartedAt: startedAt,
+              questionDeadline: firstDeadline,
+            },
+          }
+
+          return {
+            matched: true as const,
+            roomId: candRoomId,
+            duel: fullDuel,
+            opponent: roomData.playerA,
+          }
+        })
+
+        if (txResult.matched && txResult.roomId && txResult.duel) {
+          console.log('[Matchmaking] Room joined as Player 2:', txResult.roomId, 'Adversário:', txResult.opponent?.displayName)
+          return {
+            role: 'guest',
+            matched: true,
+            roomId: txResult.roomId,
+            duel: txResult.duel,
+            opponent: txResult.opponent,
+          }
+        }
+      } catch (txErr) {
+        console.warn('[Matchmaking] Colisão de transação na sala:', candRoomId, txErr)
+      }
+    }
+  }
+
+  // 3. Se nenhuma sala foi associada, criar uma nova sala como Host
+  const newRoomId = `duel_${crypto.randomUUID()}`
+  const newCode = generateDuelCode()
+  const questions = generateDuelQuestions(10)
+  const expiresAt = now + 15 * 60 * 1000
+
+  // Selecionar arena do Host ou aleatória
+  const selectedArena = options?.arenaId
+    ? getArenaById(options.arenaId)
+    : profile?.equippedArena
+    ? getArenaById(profile.equippedArena)
+    : getRandomArena()
+
+  const chosenArenaId = selectedArena?.id || 'arena_1'
+  const chosenArenaImage = options?.arenaImage || selectedArena?.imagePath || '/arenas/arena-1.jpg'
+  const chosenArenaName = options?.arenaName || selectedArena?.name || 'Praça do Império'
+
+  const hostPlayer: DuelPlayerData = {
+    ...myPlayerData,
+  }
+
+  const newDuelDoc: DuelDocument = {
+    id: newRoomId,
+    code: newCode,
+    status: 'waiting',
+    playerUids: [user.uid],
+    createdAt: now,
+    lastHeartbeat: now,
+    expiresAt,
+    arenaId: chosenArenaId,
+    arenaImage: chosenArenaImage,
+    arenaName: chosenArenaName,
+    playerA: hostPlayer,
+    playerB: null,
+    questions,
+    winnerUid: null,
+    winnerReason: null,
+    rewardsClaimed: {},
+  }
+
+  const roomRef = doc(db, 'duels', newRoomId)
+  await setDoc(roomRef, newDuelDoc)
+  console.log('[Matchmaking] Room created as Player 1:', newRoomId, 'Arena:', chosenArenaName, 'Aguardando adversário...')
+
+  return {
+    role: 'host',
+    matched: false,
+    roomId: newRoomId,
+    duel: newDuelDoc,
+    opponent: null,
+  }
+}
+
+/**
+ * Permite a um Host ativo verificar e associar-se a outra sala criada simultaneamente
+ * SEM criar salas adicionais órfãs.
+ */
+export async function checkAndJoinWaitingRoom(
+  user: { uid: string; displayName?: string | null; photoURL?: string | null },
+  profile?: { level?: number; district?: string },
+  currentWaitingRoomId?: string | null,
+): Promise<{ matched: boolean; roomId?: string; duel?: DuelDocument; opponent?: DuelPlayerData | null }> {
+  if (!user || !user.uid) return { matched: false }
+
+  const now = Date.now()
+  const playerLevel = profile?.level || 1
+  const playerName = (profile as any)?.displayName || user.displayName || 'Jogador'
+  const playerDistrict = profile?.district || 'Portugal'
+  const playerPhoto = user.photoURL || null
+
+  const myPlayerData: DuelPlayerData = {
+    uid: user.uid,
+    displayName: playerName,
+    photoURL: playerPhoto,
+    level: playerLevel,
+    district: playerDistrict,
+    score: 0,
+    correctCount: 0,
+    currentQuestionIndex: 0,
+    answers: [],
+    finished: false,
+    finishedAt: null,
+  }
+
+  try {
+    const q = query(collection(db, 'duels'), where('status', '==', 'waiting'))
+    const snap = await getDocs(q)
+
+    const candidates = snap.docs.filter((d) => {
+      const data = d.data() as DuelDocument
+      if (data.playerA?.uid === user.uid || d.id === currentWaitingRoomId) return false
+      const isRecent =
+        (typeof data.createdAt === 'number' && data.createdAt > now - 45_000) ||
+        (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat > now - 20_000)
+      return isRecent && !data.playerB && data.status === 'waiting'
+    })
+
+    if (candidates.length === 0) return { matched: false }
+
+    for (const candDoc of candidates) {
+      const candRoomId = candDoc.id
+      const candRef = doc(db, 'duels', candRoomId)
+
+      try {
+        const txResult = await runTransaction(db, async (transaction) => {
+          const roomSnap = await transaction.get(candRef)
+          if (!roomSnap.exists()) return { matched: false as const }
+
+          const roomData = roomSnap.data() as DuelDocument
+          if (roomData.status !== 'waiting' || roomData.playerB || roomData.playerA?.uid === user.uid) {
+            return { matched: false as const }
+          }
+
+          const startedAt = Date.now() + 3500
+          const firstDeadline = startedAt + QUESTION_TIME_MS
+
+          const guestPlayer: DuelPlayerData = {
+            ...myPlayerData,
+            questionStartedAt: startedAt,
+            questionDeadline: firstDeadline,
+          }
+
+          const updatedDoc: Record<string, any> = {
+            status: 'matched',
+            playerB: guestPlayer,
+            playerUids: [roomData.playerA.uid, user.uid],
+            startedAt,
+            'playerA.questionStartedAt': startedAt,
+            'playerA.questionDeadline': firstDeadline,
+          }
+
+          transaction.update(candRef, updatedDoc)
+
+          const fullDuel: DuelDocument = {
+            ...roomData,
+            status: 'matched',
+            playerB: guestPlayer,
+            playerUids: [roomData.playerA.uid, user.uid],
+            startedAt,
+            playerA: {
+              ...roomData.playerA,
+              questionStartedAt: startedAt,
+              questionDeadline: firstDeadline,
+            },
+          }
+
+          return {
+            matched: true as const,
+            roomId: candRoomId,
+            duel: fullDuel,
+            opponent: roomData.playerA,
+          }
+        })
+
+        if (txResult.matched && txResult.roomId && txResult.duel) {
+          // Se entramos noutra sala com sucesso, eliminar a nossa sala de espera anterior
+          if (currentWaitingRoomId) {
+            cancelWaitingRoom(currentWaitingRoomId, user.uid).catch(() => {})
+          }
+          console.log('[Matchmaking] Host resolvido e emparelhado com sucesso na sala:', txResult.roomId)
+          return {
+            matched: true,
+            roomId: txResult.roomId,
+            duel: txResult.duel,
+            opponent: txResult.opponent,
+          }
+        }
+      } catch (txErr) {
+        console.warn('[Matchmaking] Tentativa de resolução de host colidiu:', candRoomId, txErr)
+      }
+    }
+  } catch (err) {
+    console.warn('[Matchmaking] Erro em checkAndJoinWaitingRoom:', err)
+  }
+
+  return { matched: false }
+}
+
+/**
+ * Subscreve em tempo real à sala de espera de duelo no Firestore.
+ */
+export function subscribeToWaitingRoom(
+  roomId: string,
+  onMatched: (duel: DuelDocument, opponent: DuelPlayerData) => void,
+  onCancelled?: () => void,
+): Unsubscribe {
+  if (!roomId) return () => {}
+
+  const roomRef = doc(db, 'duels', roomId)
+  console.log('[Matchmaking] Listener de sala ativo para:', roomId)
+
+  return onSnapshot(
+    roomRef,
+    (snap) => {
+      if (!snap.exists()) {
+        if (onCancelled) onCancelled()
+        return
+      }
+
+      const duel = snap.data() as DuelDocument
+
+      if (duel.status === 'matched' && duel.playerB) {
+        console.log('[Matchmaking] Room matched via onSnapshot! Room:', roomId, 'Adversário:', duel.playerB.displayName)
+        onMatched(duel, duel.playerB)
+      } else if (duel.status === 'cancelled') {
+        if (onCancelled) onCancelled()
+      }
+    },
+    (err) => {
+      console.warn('[Matchmaking] Erro no listener da sala:', roomId, err)
+    },
+  )
+}
+
+/**
+ * Cancela e elimina a sala de espera do utilizador.
+ */
+export async function cancelWaitingRoom(roomId: string, userUid?: string): Promise<void> {
+  if (!roomId) return
+  try {
+    const roomRef = doc(db, 'duels', roomId)
+    const snap = await getDoc(roomRef)
+    if (snap.exists()) {
+      const data = snap.data() as DuelDocument
+      if (data.status === 'waiting' && (!userUid || data.playerA?.uid === userUid)) {
+        await deleteDoc(roomRef)
+        console.log('[Matchmaking] Room cancelled & deleted:', roomId)
+      }
+    }
+  } catch (err) {
+    console.warn('[Matchmaking] Erro ao cancelar sala:', roomId, err)
+  }
+}
+
+/**
+ * Envia heartbeat para manter a sala de espera ativa.
+ */
+export async function sendRoomHeartbeat(roomId: string): Promise<void> {
+  if (!roomId) return
+  try {
+    const roomRef = doc(db, 'duels', roomId)
+    await updateDoc(roomRef, {
+      lastHeartbeat: Date.now(),
+    })
+  } catch {
+    // Sala pode já ter sido transicionada ou removida
+  }
+}
+
+// -------------------------------------------------------------------------
+// Funções de compatibilidade para duelQueue
+// -------------------------------------------------------------------------
+
+export async function joinMatchmakingQueue(
+  user: { uid: string; displayName?: string | null; photoURL?: string | null },
+  profile?: { level?: number; district?: string },
+  matchAttemptId: string = crypto.randomUUID(),
+): Promise<string> {
+  if (!user || !user.uid) return matchAttemptId
+  try {
+    const now = Date.now()
+    const ticketRef = doc(db, 'duelQueue', user.uid)
+    await setDoc(ticketRef, {
+      userId: user.uid,
+      displayName: (profile as any)?.displayName || user.displayName || 'Jogador',
+      photoURL: user.photoURL || null,
+      level: profile?.level || 1,
+      district: profile?.district || 'Portugal',
+      status: 'searching',
+      matchAttemptId,
+      joinedAt: now,
+      lastHeartbeat: now,
+      expiresAt: now + 60_000,
+      duelId: null,
+      opponentInfo: null,
+      matchedAt: null,
+    })
+  } catch {}
   return matchAttemptId
 }
 
@@ -223,25 +635,14 @@ export async function heartbeatMatchmaking(
   userUid: string,
   matchAttemptId: string,
 ): Promise<void> {
-  if (!userUid || !matchAttemptId) return
+  if (!userUid) return
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
-    const snap = await getDoc(ticketRef)
-    if (snap.exists()) {
-      const data = snap.data() as MatchmakingTicket
-      // Se não pertencer a esta tentativa ou já estiver emparelhado, não alterar
-      if (data.matchAttemptId !== matchAttemptId || data.status === 'matched') {
-        return
-      }
-      const now = Date.now()
-      await updateDoc(ticketRef, {
-        lastHeartbeat: now,
-        expiresAt: now + 60_000,
-      })
-    }
-  } catch {
-    // Ticket pode já ter sido transicionado ou removido
-  }
+    await updateDoc(ticketRef, {
+      lastHeartbeat: Date.now(),
+      expiresAt: Date.now() + 60_000,
+    })
+  } catch {}
 }
 
 export async function cancelMatchmakingQueue(userUid: string): Promise<void> {
@@ -249,7 +650,7 @@ export async function cancelMatchmakingQueue(userUid: string): Promise<void> {
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await deleteDoc(ticketRef)
-    console.log('[MATCH] QUEUE REMOVED / CANCELLED:', userUid)
+    console.log('[Matchmaking] Queue ticket cancelled:', userUid)
   } catch (err) {
     console.error('Erro ao cancelar fila de matchmaking:', err)
   }
@@ -260,316 +661,57 @@ export async function cleanMatchmakingQueue(userUid: string): Promise<void> {
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await deleteDoc(ticketRef)
-  } catch {
-    // Ignore
-  }
+  } catch {}
 }
 
-/**
- * Realtime listener for the player's matchmaking ticket in duelQueue/{userUid}.
- */
 export function subscribeToMatchmaking(
   userUid: string,
   currentMatchAttemptId: string,
   onTicketUpdate: (ticket: MatchmakingTicket | null) => void,
 ): Unsubscribe {
-  if (!userUid) {
-    return () => {}
-  }
-
-  let isSubscribed = true
+  if (!userUid) return () => {}
   const ticketRef = doc(db, 'duelQueue', userUid)
-
-  console.log('[MATCH] LISTENER ATIVO PARA:', userUid, 'Attempt:', currentMatchAttemptId)
-
-  const unsubQueue = onSnapshot(
+  return onSnapshot(
     ticketRef,
     (snap) => {
-      if (!isSubscribed) return
       if (snap.exists()) {
         const ticketData = snap.data() as MatchmakingTicket
         if (
           ticketData.userId === userUid &&
           ticketData.status === 'matched' &&
           ticketData.duelId &&
-          ticketData.opponentInfo &&
-          ticketData.opponentInfo.displayName
+          ticketData.opponentInfo
         ) {
-          console.log('[MATCH OPPONENT FOUND VIA SNAPSHOT] duelId:', ticketData.duelId, 'Adversário:', ticketData.opponentInfo.displayName)
           onTicketUpdate(ticketData)
         }
       }
     },
-    (err) => {
-      console.warn('[MATCH] QUEUE LISTENER ERROR:', err)
-    },
+    () => {},
   )
-
-  return () => {
-    isSubscribed = false
-    unsubQueue()
-  }
 }
 
-/**
- * Searches for an active opponent in duelQueue and pairs them atomically in Firestore.
- * - Fault-tolerant candidate selection (immune to device clock skew).
- * - Atomic ACID transaction ensures no race conditions when 2 players search simultaneously.
- */
 export async function tryFindOpponentMatch(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
   profile?: { level?: number; district?: string },
   myMatchAttemptId?: string,
 ): Promise<MatchmakingResult> {
-  if (!user || !user.uid || !myMatchAttemptId) return { matched: false }
-
-  const myLevel = profile?.level || 1
-  const now = Date.now()
-
   try {
-    const selfTicketRef = doc(db, 'duelQueue', user.uid)
-
-    // 1. Verificar se já fomos emparelhados previamente nesta tentativa atual
-    const selfSnap = await getDoc(selfTicketRef)
-    if (selfSnap.exists()) {
-      const selfData = selfSnap.data() as MatchmakingTicket
-      if (
-        selfData.userId === user.uid &&
-        selfData.status === 'matched' &&
-        selfData.duelId &&
-        selfData.opponentInfo
-      ) {
-        console.log('[MATCH ALREADY FOUND FOR SELF]:', selfData.duelId, 'Adversário:', selfData.opponentInfo.displayName)
-        return {
-          matched: true,
-          duelId: selfData.duelId,
-          opponentInfo: selfData.opponentInfo,
-          ticket: selfData,
-        }
-      }
-      if (selfData.status !== 'searching') {
-        return { matched: false }
-      }
-    } else {
-      return { matched: false }
-    }
-
-    // 2. Consultar candidatos ativos na fila com status 'searching'
-    const q = query(
-      collection(db, 'duelQueue'),
-      where('status', '==', 'searching'),
-    )
-    const snapshot = await getDocs(q)
-
-    const candidates: MatchmakingTicket[] = []
-    for (const docSnap of snapshot.docs) {
-      const data = docSnap.data() as MatchmakingTicket
-
-      // Ignorar meu próprio ticket
-      if (!data.userId || data.userId === user.uid) continue
-
-      // Limpeza passiva apenas de bilhetes mortos/antigos (> 2 minutos)
-      if (
-        (typeof data.expiresAt === 'number' && data.expiresAt < now - 90_000) ||
-        (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat < now - 90_000)
-      ) {
-        deleteDoc(docSnap.ref).catch(() => {})
-        continue
-      }
-
-      // Candidato ativo na fila:
-      // Status 'searching' e ticket recente (ativo nos últimos 60 segundos)
-      const isAlive =
-        (typeof data.expiresAt === 'number' && data.expiresAt > now - 20_000) ||
-        (typeof data.lastHeartbeat === 'number' && data.lastHeartbeat > now - 60_000) ||
-        (typeof data.joinedAt === 'number' && data.joinedAt > now - 60_000)
-
-      if (data.status === 'searching' && data.matchAttemptId && isAlive) {
-        candidates.push(data)
-      }
-    }
-
-    // Se não há outro jogador ativo, aguardar na fila
-    if (candidates.length === 0) {
-      return { matched: false }
-    }
-
-    // 3. Ordenar candidatos por proximidade de nível e tempo de espera
-    candidates.sort((a, b) => {
-      const levelDiff = Math.abs(a.level - myLevel) - Math.abs(b.level - myLevel)
-      if (levelDiff !== 0) return levelDiff
-      return a.joinedAt - b.joinedAt
-    })
-    const candidate = candidates[0]
-
-    console.log('[MATCH OPPONENT FOUND IN QUEUE]:', candidate.displayName, 'UID:', candidate.userId, 'Level:', candidate.level)
-
-    // 4. Executar transação ACID atómica no Firestore para emparelhar ambos os jogadores
-    const candidateTicketRef = doc(db, 'duelQueue', candidate.userId)
-    const duelId = `duel_${crypto.randomUUID()}`
-    const duelRef = doc(db, 'duels', duelId)
-
-    const questions = generateDuelQuestions(10)
-    const code = generateDuelCode()
-    const expiresAt = now + 15 * 60 * 1000
-    const duelStartedAt = now + 3500
-    const firstDeadline = duelStartedAt + 60_000
-
-    const playerA: DuelPlayerData = {
-      uid: candidate.userId,
-      displayName: candidate.displayName || 'Adversário',
-      photoURL: candidate.photoURL || null,
-      level: candidate.level || 1,
-      district: candidate.district || 'Portugal',
-      score: 0,
-      correctCount: 0,
-      currentQuestionIndex: 0,
-      questionStartedAt: duelStartedAt,
-      questionDeadline: firstDeadline,
-      answers: [],
-      finished: false,
-      finishedAt: null,
-    }
-
-    const playerB: DuelPlayerData = {
-      uid: user.uid,
-      displayName: (profile as any)?.displayName || user.displayName || 'Jogador',
-      photoURL: user.photoURL || null,
-      level: profile?.level || 1,
-      district: profile?.district || 'Portugal',
-      score: 0,
-      correctCount: 0,
-      currentQuestionIndex: 0,
-      questionStartedAt: duelStartedAt,
-      questionDeadline: firstDeadline,
-      answers: [],
-      finished: false,
-      finishedAt: null,
-    }
-
-    const duelDoc: DuelDocument = {
-      id: duelId,
-      code,
-      status: 'matched',
-      playerUids: [candidate.userId, user.uid],
-      matchAttemptA: candidate.matchAttemptId,
-      matchAttemptB: myMatchAttemptId,
-      createdAt: now,
-      startedAt: duelStartedAt,
-      expiresAt,
-      playerA,
-      playerB,
-      questions,
-      winnerUid: null,
-      winnerReason: null,
-      rewardsClaimed: {},
-    }
-
-    const result = await runTransaction(db, async (transaction) => {
-      const myDoc = await transaction.get(selfTicketRef)
-      const candDoc = await transaction.get(candidateTicketRef)
-
-      if (!myDoc.exists()) {
-        return { matched: false }
-      }
-
-      const myData = myDoc.data() as MatchmakingTicket
-      // Se nós já fomos emparelhados noutra transação concorrente
-      if (
-        myData.userId === user.uid &&
-        myData.status === 'matched' &&
-        myData.duelId &&
-        myData.opponentInfo
-      ) {
-        return {
-          matched: true,
-          duelId: myData.duelId,
-          opponentInfo: myData.opponentInfo,
-          ticket: myData,
-        }
-      }
-
-      if (myData.status !== 'searching') {
-        return { matched: false }
-      }
-
-      if (!candDoc.exists()) {
-        return { matched: false }
-      }
-
-      const candData = candDoc.data() as MatchmakingTicket
-      // Validar que o candidato ainda está searching
-      if (
-        candData.userId === user.uid ||
-        candData.status !== 'searching' ||
-        !candData.matchAttemptId
-      ) {
-        return { matched: false }
-      }
-
-      // Ambos estão confirmadamente à procura: Criar a sala e atualizar ambos os bilhetes!
-      transaction.set(duelRef, duelDoc)
-
-      const myOpponentInfo = {
-        displayName: playerA.displayName,
-        photoURL: playerA.photoURL,
-        level: playerA.level,
-        district: playerA.district,
-      }
-
-      const candOpponentInfo = {
-        displayName: playerB.displayName,
-        photoURL: playerB.photoURL,
-        level: playerB.level,
-        district: playerB.district,
-      }
-
-      transaction.set(
-        selfTicketRef,
-        {
-          ...myData,
-          status: 'matched',
-          duelId,
-          opponentInfo: myOpponentInfo,
-          matchedAt: now,
-        },
-        { merge: true },
-      )
-
-      transaction.set(
-        candidateTicketRef,
-        {
-          ...candData,
-          status: 'matched',
-          duelId,
-          opponentInfo: candOpponentInfo,
-          matchedAt: now,
-        },
-        { merge: true },
-      )
-
+    const res = await findOrCreateMatchmakingRoom(user, profile)
+    if (res.matched && res.opponent) {
       return {
         matched: true,
-        duelId,
-        opponentInfo: myOpponentInfo,
-        ticket: {
-          ...myData,
-          status: 'matched' as const,
-          duelId,
-          opponentInfo: myOpponentInfo,
-          matchedAt: now,
+        duelId: res.roomId,
+        opponentInfo: {
+          displayName: res.opponent.displayName,
+          photoURL: res.opponent.photoURL,
+          level: res.opponent.level,
+          district: res.opponent.district,
         },
       }
-    })
-
-    if (result.matched && result.duelId) {
-      console.log('[MATCH ROOM CREATED & ATOMICALLY PAIRED] duelId:', result.duelId)
-      return result
     }
-
     return { matched: false }
   } catch (err) {
-    console.error('[MATCH] ERRO NA TRANSAÇÃO DE MATCHMAKING:', err)
+    console.error('[Matchmaking] tryFindOpponentMatch error:', err)
     return { matched: false }
   }
 }
@@ -581,7 +723,8 @@ export async function tryFindOpponentMatch(
 
 export async function createDuel(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
-  profile?: { level?: number; district?: string },
+  profile?: { level?: number; district?: string; equippedArena?: string },
+  options?: { arenaId?: string; arenaImage?: string; arenaName?: string },
 ): Promise<{ duelId: string; code: string }> {
   if (!user || !user.uid) {
     throw new Error('Identificador de jogador ausente.')
@@ -593,6 +736,16 @@ export async function createDuel(
   const expiresAt = now + 15 * 60 * 1000
 
   const questions = generateDuelQuestions(10)
+
+  const selectedArena = options?.arenaId
+    ? getArenaById(options.arenaId)
+    : profile?.equippedArena
+    ? getArenaById(profile.equippedArena)
+    : getRandomArena()
+
+  const chosenArenaId = selectedArena?.id || 'arena_1'
+  const chosenArenaImage = options?.arenaImage || selectedArena?.imagePath || '/arenas/arena-1.jpg'
+  const chosenArenaName = options?.arenaName || selectedArena?.name || 'Praça do Império'
 
   const playerA: DuelPlayerData = {
     uid: user.uid,
@@ -614,7 +767,11 @@ export async function createDuel(
     status: 'waiting',
     playerUids: [user.uid],
     createdAt: now,
+    lastHeartbeat: now,
     expiresAt,
+    arenaId: chosenArenaId,
+    arenaImage: chosenArenaImage,
+    arenaName: chosenArenaName,
     playerA,
     playerB: null,
     questions,
@@ -1110,6 +1267,9 @@ export async function respondDuelRematch(
     createdAt: now,
     startedAt: duelStartedAt,
     expiresAt: now + 15 * 60 * 1000,
+    arenaId: duel.arenaId || 'arena_1',
+    arenaImage: duel.arenaImage || '/arenas/arena-1.jpg',
+    arenaName: duel.arenaName || 'Praça do Império',
     playerA: newPlayerA,
     playerB: newPlayerB,
     questions,

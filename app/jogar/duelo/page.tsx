@@ -18,7 +18,7 @@ function DuelPageContent() {
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
-  const [arenaImage, setArenaImage] = useState<string>('/images/hero-bg.jpg')
+  const [arenaImage, setArenaImage] = useState<string>('/arenas/arena-1.jpg')
 
   // Prioridade ao ID da URL para navegação limpa na revanche
   const effectiveDuelId = duelIdFromUrl || activeDuelId
@@ -34,23 +34,17 @@ function DuelPageContent() {
         const savedImage = localStorage.getItem('equipped_arena_image')
         const savedArena = localStorage.getItem('equipped_arena')
 
-        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('fundo-espaco')) {
+        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('hero-bg') && !savedImage.includes('fundo-espaco')) {
           setArenaImage(savedImage)
         } else if (savedArena) {
           const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
           if (catalogItem?.image) {
             setArenaImage(catalogItem.image)
-          } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
-            setArenaImage('/arenas/arena-ponte-2077.gif')
-          } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
-            setArenaImage('/images/shop/arena-fado-alfama.jpg')
-          } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores' || savedArena === 'arena_vulcao_erupcao') {
-            setArenaImage('/images/shop/arena-fogo-acores.jpg')
           } else {
-            setArenaImage('/images/hero-bg.jpg')
+            setArenaImage('/arenas/arena-1.jpg')
           }
         } else {
-          setArenaImage('/images/hero-bg.jpg')
+          setArenaImage('/arenas/arena-1.jpg')
         }
       }
     }
@@ -130,10 +124,10 @@ function DuelPageContent() {
 
   return (
     <div className="relative min-h-screen bg-slate-950">
-      {/* Fundo Oficial 12 (Duelo 1v1) ou Imagem da Arena Equipada */}
+      {/* Fundo Sincronizado do Duelo 1v1 */}
       <BackgroundFx
         variant="duel"
-        customImage={arenaImage && !arenaImage.includes('hero-bg') ? arenaImage : undefined}
+        customImage={arenaImage}
         contrastIntensity="subtle"
       />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
@@ -141,6 +135,9 @@ function DuelPageContent() {
           key={effectiveDuelId}
           duelId={effectiveDuelId}
           onDuelChange={handleDuelChange}
+          onArenaLoaded={(img) => {
+            if (img && img !== arenaImage) setArenaImage(img)
+          }}
         />
       </div>
     </div>

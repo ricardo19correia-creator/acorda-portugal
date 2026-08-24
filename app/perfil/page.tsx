@@ -109,7 +109,7 @@ function PerfilContent() {
   const [district, setDistrict] = useState<string>('Portugal')
   const [avatar, setAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>('guardiao-vulcanico')
-  const [arena, setArena] = useState<string>('arena_ponte_2077')
+  const [arena, setArena] = useState<string>('arena_1')
   const [title, setTitle] = useState<string>('Filho de Portugal')
   const [userCoins, setUserCoins] = useState<number>(803845)
   const [userXp, setUserXp] = useState<number>(5980)
@@ -129,13 +129,15 @@ function PerfilContent() {
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
     avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
-    arenas: ['arena_ponte_2077', 'arena_neon_2088'],
+    arenas: ['arena_1', 'arena_2', 'arena_ponte_2077', 'arena_neon_2088'],
     titles: ['tit_filho_portugal', 'tit_novico', 'Filho de Portugal', 'Noviço da Nação'],
     taunts: ['pack_basico'],
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
     'guardiao-vulcanico', 
     'camoes-2050', 
+    'arena_1',
+    'arena_2',
     'arena_neon_2088', 
     'arena_ponte_2077', 
     'avatar_vulcao_acores', 
@@ -815,7 +817,7 @@ function PerfilContent() {
         const isDefault = item.id === 'guardiao-vulcanico' || item.id === 'camoes-2050' || item.id === 'avatar_vulcao_acores' || item.id === 'avatar_camoes_2050'
         isUnlocked = inventory.avatars.includes(item.id) || unlockedItems.includes(item.id) || isDefault
       } else if (item.category === 'arenas') {
-        const isDefault = item.id === 'arena_ponte_2077'
+        const isDefault = item.id === 'arena_1' || item.id === 'arena_2' || item.id === 'arena_ponte_2077' || item.price === 0
         isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
       } else if (item.category === 'titulos') {
         const isDefault = item.id === 'tit_filho_portugal' || item.name === 'Filho de Portugal' || item.id === 'tit_novico' || item.name === 'Noviço da Nação'
@@ -1381,7 +1383,7 @@ function PerfilContent() {
                                   alt={item.name} 
                                   className="w-full h-full object-cover" 
                                   onError={(e) => {
-                                    e.currentTarget.src = '/images/hero-bg.jpg'
+                                    e.currentTarget.src = '/arenas/arena-1.jpg'
                                   }}
                                 />
                                 <ArenaEffectsLayer effect={(item.effect as any) || 'particles'} intensity="low" showContrastOverlay={false} />

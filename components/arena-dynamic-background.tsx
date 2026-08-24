@@ -292,12 +292,12 @@ export function ArenaDynamicBackground({
     }
   }, [effectiveThemeId])
 
-  const [arenaImg, setArenaImg] = useState<string>('/arenas/arena-ponte-2077.jpg')
+  const [arenaImg, setArenaImg] = useState<string>('/arenas/arena-1.jpg')
 
   useEffect(() => {
     const sync = () => {
       if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem('equipped_arena_image') || '/arenas/arena-ponte-2077.jpg'
+        const saved = localStorage.getItem('equipped_arena_image') || '/arenas/arena-1.jpg'
         setArenaImg(saved)
       }
     }
@@ -320,14 +320,15 @@ export function ArenaDynamicBackground({
     >
       {/* Cenário de Fundo da Arena Equipado */}
       <div 
-        className="absolute inset-0 w-full h-full opacity-35 bg-cover bg-center transition-all duration-700"
+        className="absolute inset-0 w-full h-full opacity-100 bg-cover bg-center bg-no-repeat transition-all duration-700"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${arenaImg}')`,
+          backgroundImage: `url('${arenaImg}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       />
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-70 pointer-events-none" />
 
       {/* VULCÃO DOS AÇORES: REBORDO DE ECRÃ A PULSAR EM VERMELHO-LAVA NOS STREAKS ALTOS (>= 3) */}
       {effectiveThemeId === 'theme_vulcao_acores' && effectiveStreak >= 3 && (

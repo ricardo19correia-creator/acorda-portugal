@@ -13,7 +13,7 @@ interface ArenaEffectsLayerProps {
 export function ArenaEffectsLayer({
   effect = 'particles',
   intensity = 'medium',
-  showContrastOverlay = true,
+  showContrastOverlay = false,
   className = '',
 }: ArenaEffectsLayerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -257,12 +257,7 @@ export function ArenaEffectsLayer({
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {/* Dynamic Particle Canvas */}
       {effect !== 'none' && (
-        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-80" />
-      )}
-
-      {/* Camada de contraste escuro e legibilidade máxima para o Quiz */}
-      {showContrastOverlay && (
-        <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[1px]" />
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-90" />
       )}
     </div>
   )

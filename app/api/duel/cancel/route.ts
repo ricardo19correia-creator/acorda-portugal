@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { doc, deleteDoc } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { cancelWaitingRoom, cancelMatchmakingQueue } from '@/lib/duel'
 
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { userId } = body
+    const { userId, duelId } = body
+
+    if (duelId) {
+      await cancelWaitingRoom(duelId, userId).catch(() => {})
+      console.log('[/api/duel/cancel] Waiting room cancelled:', duelId)
+    }
 
     if (userId) {
-      const ticketRef = doc(db, 'duelQueue', userId)
-      await deleteDoc(ticketRef)
+      await cancelMatchmakingQueue(userId).catch(() => {})
       console.log('[/api/duel/cancel] User removed from queue:', userId)
     }
 
@@ -21,3 +24,4 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: err?.message }, { status: 500 })
   }
 }
+

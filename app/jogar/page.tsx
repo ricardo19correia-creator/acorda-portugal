@@ -20,20 +20,14 @@ function JogarContainer() {
         const savedImage = localStorage.getItem('equipped_arena_image')
         const savedArena = localStorage.getItem('equipped_arena')
 
-        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('fundo-espaco')) {
+        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('hero-bg') && !savedImage.includes('fundo-espaco')) {
           setArenaImage(savedImage)
         } else if (savedArena) {
           const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
           if (catalogItem?.image) {
             setArenaImage(catalogItem.image)
-          } else if (savedArena === 'arena_ponte_2077' || savedArena === 'arena_neon_2088') {
-            setArenaImage('/arenas/arena-ponte-2077.gif')
-          } else if (savedArena === 'arena_fado_alfama' || savedArena === 'theme_noite_fado') {
-            setArenaImage('/images/shop/arena-fado-alfama.jpg')
-          } else if (savedArena === 'arena_fogo_acores' || savedArena === 'theme_volcano_acores' || savedArena === 'arena_vulcao_erupcao') {
-            setArenaImage('/images/shop/arena-fogo-acores.jpg')
           } else {
-            setArenaImage('')
+            setArenaImage('/arenas/arena-1.jpg')
           }
         } else {
           setArenaImage('')
@@ -55,14 +49,23 @@ function JogarContainer() {
 
   return (
     <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
-      {/* 1. FUNDO DO QUIZ (Fundo Oficial 06 ou Arena Cosmética Equipada) */}
-      <AppBackground
-        variant="quiz"
-        customImage={isPlaying && arenaImage ? arenaImage : undefined}
-        contrastIntensity={isPlaying ? 'subtle' : 'normal'}
+      {/* 1. FUNDO DINÂMICO DA ARENA ATIVA (Game Board Background) */}
+      <div 
+        className="game-arena-container pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-500 will-change-transform scale-[1.01]" 
+        style={{
+          backgroundImage: `url(${arenaImage || '/arenas/arena-1.jpg'})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100vw",
+          height: "100vh"
+        }}
       />
 
-      {/* 2. CONTEÚDO DA CENTRAL DE JOGO / SESSÃO ATIVA DE QUIZ */}
+      {/* 2. MÁSCARA SUBTIL PARA LEGIBILIDADE DAS QUESTÕES */}
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-slate-950/40" />
+
+      {/* 3. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
         <QuizPage />
       </main>
