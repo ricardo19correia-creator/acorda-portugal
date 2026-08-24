@@ -105,7 +105,7 @@ function PerfilContent() {
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') as 'inventario' | 'estatisticas' | 'conquistas' | 'historico' | null
 
-  const { user, profile } = useAuth()
+  const { user, profile, profileLoading } = useAuth()
   const [mounted, setMounted] = useState(false)
   
   // Perfil Base
@@ -1072,7 +1072,17 @@ function PerfilContent() {
     },
   ], [])
 
-  if (!mounted) return <div className="min-h-screen bg-transparent" />
+  if (!mounted || (profileLoading && !profile)) {
+    return (
+      <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center justify-center overflow-x-hidden">
+        <AppBackground />
+        <div className="relative z-10 flex flex-col items-center gap-4 bg-slate-900/80 border border-slate-800 p-8 rounded-3xl backdrop-blur-xl shadow-2xl">
+          <div className="h-12 w-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
+          <p className="text-sm font-bold text-slate-300 animate-pulse">A carregar o perfil oficial...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
