@@ -14,6 +14,7 @@ import { AppBackground } from '@/components/AppBackground'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
+import { useEconomy } from '@/context/economy-context'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -139,6 +140,7 @@ const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
 const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
 
 export default function LojaPage() {
+  const { coins: userBalance, formattedCoins, deductCoins, isBalancePulsing } = useEconomy()
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<Category>('avatars')
   const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
@@ -152,7 +154,6 @@ export default function LojaPage() {
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [userBalance, setUserBalance] = useState<number>(803845)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
     avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
@@ -187,9 +188,6 @@ export default function LojaPage() {
         }
         const savedTitle = localStorage.getItem('equipped_title')
         if (savedTitle) setEquippedTitle(savedTitle)
-
-        const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
-        if (savedCoins) setUserBalance(Number(savedCoins))
 
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
@@ -242,12 +240,6 @@ export default function LojaPage() {
         unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
           if (snap.exists()) {
             const data = snap.data()
-            const balance = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : null
-            if (balance !== null) {
-              setUserBalance(balance)
-              localStorage.setItem('user_coins', String(balance))
-              localStorage.setItem('user_euros', String(balance))
-            }
             if (data.inventory) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
@@ -435,13 +427,15 @@ export default function LojaPage() {
     // 1. CONSUMÍVEIS (SEMPRE COMPRA)
     if (item.category === 'ajudas') {
       if (userBalance < item.priceValue) {
-        showToast(`Saldo insuficiente! Precisas de mais €${(item.priceValue - userBalance).toLocaleString('pt-PT')} € Acorda.`, 'error')
+        showToast('Saldo de € Acorda insuficiente!', 'error')
         return
       }
 
-      const newBalance = userBalance - item.priceValue
-      setUserBalance(newBalance)
-      localStorage.setItem('user_euros', String(newBalance))
+      const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
+      if (!deductSuccess) {
+        showToast('Saldo de € Acorda insuficiente!', 'error')
+        return
+      }
 
       let updatedConsumables = { ...consumables }
       let amountAdded = 0
@@ -462,10 +456,7 @@ export default function LojaPage() {
 
       if (auth.currentUser) {
         try {
-          const updatePayload: any = {
-            coins: newBalance,
-            euros: newBalance,
-          }
+          const updatePayload: any = {}
           if (item.id === 'ajuda_5050') {
             updatePayload['inventory.utilities.fiftyFifty'] = increment(5)
             updatePayload['consumables.help5050'] = increment(5)
@@ -594,14 +585,15 @@ export default function LojaPage() {
       }
 
       if (userBalance < item.priceValue) {
-        showToast(`Saldo insuficiente! Precisas de mais €${(item.priceValue - userBalance).toLocaleString('pt-PT')} € Acorda.`, 'error')
+        showToast('Saldo de € Acorda insuficiente!', 'error')
         return
       }
 
-      const newBalance = userBalance - item.priceValue
-      setUserBalance(newBalance)
-      localStorage.setItem('user_coins', String(newBalance))
-      localStorage.setItem('user_euros', String(newBalance))
+      const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
+      if (!deductSuccess) {
+        showToast('Saldo de € Acorda insuficiente!', 'error')
+        return
+      }
 
       // Atualizar Inventário
       let updatedInv = { ...inventory }
@@ -648,10 +640,7 @@ export default function LojaPage() {
 
       if (auth.currentUser) {
         try {
-          const updatePayload: any = {
-            coins: newBalance,
-            euros: newBalance,
-          }
+          const updatePayload: any = {}
           if (firestoreInvField) {
             updatePayload[firestoreInvField] = arrayUnion(item.id)
           }

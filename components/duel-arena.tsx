@@ -36,6 +36,7 @@ import {
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { useEconomy } from '@/context/economy-context'
 import { useGameTheme } from '@/context/game-theme-context'
 import {
   type DuelDocument,
@@ -92,6 +93,7 @@ export function DuelArena({
 }) {
   const router = useRouter()
   const { user, profile } = useAuth()
+  const { addCoins, deductCoins } = useEconomy()
   const { playSound, streakEffectId } = useGameTheme()
 
   const currentPlayer = useMemo(() => {
@@ -255,15 +257,11 @@ export function DuelArena({
 
   // Handle buying a taunt pack directly
   const handleBuyTauntPack = async (pack: TauntPack) => {
-    const savedEuros = Number(localStorage.getItem('user_euros') || '803845')
-    if (savedEuros < pack.price) {
-      alert(`Saldo insuficiente! Precisas de €${(pack.price - savedEuros).toLocaleString('pt-PT')} € Acorda.`)
+    const deductSuccess = await deductCoins(pack.price, `Compra: Pack ${pack.name}`)
+    if (!deductSuccess) {
+      alert(`Saldo de € Acorda insuficiente!`)
       return
     }
-
-    const newBalance = savedEuros - pack.price
-    localStorage.setItem('user_coins', String(newBalance))
-    localStorage.setItem('user_euros', String(newBalance))
 
     const newUnlocked = Array.from(new Set([...unlockedTaunts, pack.id]))
     setUnlockedTaunts(newUnlocked)
@@ -272,8 +270,6 @@ export function DuelArena({
     if (auth.currentUser) {
       try {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-          coins: newBalance,
-          euros: newBalance,
           'inventory.taunts': arrayUnion(pack.id),
         })
       } catch (e) {
@@ -631,10 +627,15 @@ export function DuelArena({
   useEffect(() => {
     if (duel?.status === 'finished' && currentPlayer.uid && !claimedReward) {
       claimDuelRewards(duel.id, currentPlayer.uid)
-        .then((res) => setClaimedReward(res))
+        .then((res) => {
+          setClaimedReward(res)
+          if (res?.euros && res.euros > 0) {
+            void addCoins(res.euros, 'Vitória em Duelo 1v1')
+          }
+        })
         .catch((e) => console.error('Erro ao resgatar recompensas:', e))
     }
-  }, [duel?.status, currentPlayer.uid, claimedReward])
+  }, [duel?.status, currentPlayer.uid, claimedReward, addCoins])
 
   const copyCode = () => {
     if (!duel) return

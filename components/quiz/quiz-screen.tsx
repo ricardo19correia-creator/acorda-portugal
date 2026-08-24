@@ -17,6 +17,7 @@ import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment 
 import type { UserProfile } from '@/components/player-card'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { useEconomy } from '@/context/economy-context'
 import { usePresence } from '@/components/presence-provider'
 import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
@@ -315,6 +316,7 @@ export function QuizScreen({
   )
 
   const { user, profile } = useAuth()
+  const { addCoins } = useEconomy()
   const { setActivity } = usePresence()
   const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
 
@@ -700,6 +702,9 @@ export function QuizScreen({
       })
 
       if (outcome.awarded) {
+        if (finalResult.euros > 0) {
+          void addCoins(finalResult.euros, `Quiz: ${category?.name || 'Portugal'}`)
+        }
         setUserProfile((currentProfile) =>
           currentProfile
             ? {

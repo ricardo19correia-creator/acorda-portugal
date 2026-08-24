@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
+import { EconomyProvider } from '@/context/economy-context'
 import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
@@ -40,10 +41,12 @@ export default function RootLayout({
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="relative min-h-screen bg-transparent text-zinc-100 antialiased overflow-x-hidden">
         <AuthProvider>
-          <DeepLinkHandler />
-          <GameThemeProvider>
-            <PresenceProvider>{children}</PresenceProvider>
-          </GameThemeProvider>
+          <EconomyProvider>
+            <DeepLinkHandler />
+            <GameThemeProvider>
+              <PresenceProvider>{children}</PresenceProvider>
+            </GameThemeProvider>
+          </EconomyProvider>
         </AuthProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

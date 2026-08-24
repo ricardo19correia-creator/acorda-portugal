@@ -237,6 +237,7 @@ export type UserProfile = {
   level: number
   xp: number
   euros: number
+  coins?: number
   streak: number
   gamesPlayed: number
   wins?: number

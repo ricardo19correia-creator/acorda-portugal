@@ -10,10 +10,12 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import AudioPlayer from '@/components/AudioPlayer'
 import { UserAvatar } from '@/components/user-avatar'
 import { useAuth } from '@/components/auth-provider'
+import { useEconomy } from '@/context/economy-context'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
   const { user, profile, authResolved } = useAuth()
+  const { formattedCoins, isBalancePulsing } = useEconomy()
   const [open, setOpen] = useState(false)
 
   const NAV = [
@@ -97,8 +99,23 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Right: Audio Player + Online Users Badge + Play CTA */}
+        {/* Right: Audio Player + Economy Badge + Online Users Badge + Play CTA */}
         <nav aria-label="Ações de utilizador" className="hidden items-center gap-3 md:flex">
+          {/* Badge Global de Saldo de Moedas (€ Acorda) */}
+          <Link
+            href="/loja"
+            title="O teu Saldo de € Acorda - Clica para abrir a Loja"
+            className={cn(
+              'flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-black transition-all cursor-pointer shadow-sm active:scale-95',
+              isBalancePulsing
+                ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_20px_rgba(16,185,129,0.8)] scale-105 ring-2 ring-emerald-400/50'
+                : 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:border-emerald-400 hover:bg-emerald-500/25 hover:shadow-[0_0_12px_rgba(16,185,129,0.35)]',
+            )}
+          >
+            <span className="font-extrabold text-emerald-400">€</span>
+            <span className="tabular-nums tracking-wide">{formattedCoins}</span>
+          </Link>
+
           {/* Botão Compacto de Áudio */}
           <AudioPlayer />
 
@@ -109,8 +126,22 @@ export function SiteHeader() {
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </nav>
 
-        {/* Mobile: Audio + Online Badge + Mobile Toggle */}
+        {/* Mobile: Economy Badge + Audio + Online Badge + Mobile Toggle */}
         <div className="flex items-center gap-2 md:hidden">
+          <Link
+            href="/loja"
+            title="Saldo € Acorda"
+            className={cn(
+              'flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-black transition-all cursor-pointer',
+              isBalancePulsing
+                ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.7)] scale-105'
+                : 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
+            )}
+          >
+            <span className="font-extrabold text-emerald-400">€</span>
+            <span className="tabular-nums tracking-wide">{formattedCoins}</span>
+          </Link>
+
           <AudioPlayer />
           <OnlineUsersBadge />
           <button
@@ -130,6 +161,16 @@ export function SiteHeader() {
       {open && (
         <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden">
           <div className="mb-3 flex flex-col gap-2">
+            <Link
+              href="/loja"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-2.5 text-xs font-black text-emerald-300 transition-all hover:bg-emerald-500/25"
+            >
+              <span className="text-muted-foreground uppercase tracking-wider text-[11px]">O Teu Saldo Virtual:</span>
+              <span className="flex items-center gap-1 text-sm text-emerald-300 font-black">
+                <span className="text-emerald-400 font-extrabold">€</span> {formattedCoins}
+              </span>
+            </Link>
             <OnlineUsersBadge variant="default" className="w-full justify-center" />
           </div>
 
