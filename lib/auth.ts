@@ -1,4 +1,5 @@
 export {
+  signInWithGoogle,
   handleGoogleLogin,
   performGoogleSignIn,
   useCheckRedirectLogin,
@@ -8,3 +9,4 @@ export {
   performLogout,
   logoutUser,
 } from '@/lib/auth-helpers'
+

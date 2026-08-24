@@ -1,124 +1,89 @@
 'use client'
 
-import React, { useEffect, useState, useCallback } from 'react'
-import Script from 'next/script'
-import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getPostLoginRedirectTarget } from '@/lib/auth'
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { auth } from '@/lib/firebase'
+import { getPostLoginRedirectTarget, setPostLoginRedirectTarget } from '@/lib/auth'
 
 interface GoogleAuthButtonProps {
   redirectTarget?: string
   onError?: (error: string) => void
+  className?: string
 }
 
-export default function GoogleAuthButton({ redirectTarget = '/jogar', onError }: GoogleAuthButtonProps) {
+export default function GoogleAuthButton({
+  redirectTarget = '/jogar',
+  onError,
+  className,
+}: GoogleAuthButtonProps) {
   const router = useRouter()
-  const [gisLoaded, setGisLoaded] = useState(false)
-  const [isSigningIn, setIsSigningIn] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleCredentialResponse = useCallback(
-    async (response: any) => {
-      try {
-        if (!response?.credential) return
-        setIsSigningIn(true)
-        console.log('[AUTH GIS] Resposta de credencial recebida. A autenticar no Firebase...')
-
-        const credential = GoogleAuthProvider.credential(response.credential)
-        const userCred = await signInWithCredential(auth, credential)
-
-        console.log('[AUTH GIS] signInWithCredential concluído com sucesso para UID:', userCred.user.uid)
-        const destination = getPostLoginRedirectTarget(redirectTarget)
-        router.push(destination)
-      } catch (error: any) {
-        console.error('[AUTH GIS] Erro ao autenticar com Google GIS:', error)
-        setIsSigningIn(false)
-        if (onError) {
-          onError(error?.message || 'Erro na autenticação com o Google.')
-        }
-      }
-    },
-    [redirectTarget, router, onError],
-  )
-
-  const initGis = useCallback(() => {
-    if (typeof window === 'undefined' || !(window as any).google?.accounts?.id) return
+  const handleGoogleClick = async () => {
+    if (loading) return
+    setLoading(true)
 
     try {
-      const clientId =
-        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
-        '130539395859-b1dvd01dckqj0f456rbbjksb543j9qgq.apps.googleusercontent.com'
-
-      ;(window as any).google.accounts.id.initialize({
-        client_id: clientId,
-        callback: handleCredentialResponse,
-        auto_select: false,
-        cancel_on_tap_outside: true,
-      })
-
-      const btnContainer = document.getElementById('googleSignInDiv')
-      if (btnContainer) {
-        btnContainer.innerHTML = ''
-        ;(window as any).google.accounts.id.renderButton(btnContainer, {
-          theme: 'filled_black',
-          size: 'large',
-          width: '100%',
-          text: 'continue_with',
-          shape: 'pill',
-          logo_alignment: 'left',
-        })
+      if (!auth) {
+        throw new Error('Firebase Auth não está inicializado.')
       }
 
-      setGisLoaded(true)
-    } catch (err) {
-      console.warn('[AUTH GIS] Aviso na inicialização do GIS:', err)
-    }
-  }, [handleCredentialResponse])
+      setPostLoginRedirectTarget(redirectTarget)
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
-      initGis()
-    }
-  }, [initGis])
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
 
-  // Inicia o fluxo de autenticação externa para retorno via deep link
-  const handleGoogleDeepLinkAuth = () => {
-    setIsSigningIn(true)
-    const callbackUrl = 'https://acordaportugal.pt/auth/callback'
+      console.log('[AUTH] A iniciar login Google com signInWithPopup...')
+      const userCred = await signInWithPopup(auth, provider)
 
-    if (typeof window !== 'undefined') {
-      const opened = window.open(callbackUrl, '_blank')
-      if (!opened) {
-        window.location.href = callbackUrl
+      console.log('[AUTH] Login Google efetuado com sucesso:', userCred.user.uid)
+      const destination = getPostLoginRedirectTarget(redirectTarget)
+      router.push(destination)
+    } catch (error: any) {
+      console.warn('[AUTH] Erro ou popup bloqueado:', error?.code, error?.message)
+
+      // Se o popup for bloqueado no browser móvel ou WebView, tenta fallback para redirect
+      if (
+        error?.code === 'auth/popup-blocked' ||
+        error?.code === 'auth/cancelled-popup-request'
+      ) {
+        try {
+          console.log('[AUTH] A tentar fallback para signInWithRedirect...')
+          const provider = new GoogleAuthProvider()
+          provider.setCustomParameters({ prompt: 'select_account' })
+          await signInWithRedirect(auth, provider)
+          return
+        } catch (redirectErr: any) {
+          console.error('[AUTH] Erro no signInWithRedirect:', redirectErr)
+        }
+      }
+
+      setLoading(false)
+      if (error?.code !== 'auth/popup-closed-by-user') {
+        const errorMsg =
+          error?.code === 'auth/unauthorized-domain'
+            ? 'Domínio não autorizado no Firebase Console. Adiciona o domínio em Authentication > Settings > Authorized domains.'
+            : error?.message || 'Erro ao iniciar sessão com o Google.'
+        if (onError) onError(errorMsg)
       }
     }
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center my-2">
-      <Script
-        src="https://accounts.google.com/gsi/client"
-        strategy="afterInteractive"
-        onLoad={initGis}
-      />
-
-      {isSigningIn && (
-        <div className="flex items-center gap-2 text-xs text-primary font-bold mb-2 animate-pulse">
+    <button
+      type="button"
+      onClick={handleGoogleClick}
+      disabled={loading}
+      className={`w-full flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] py-3.5 px-4 font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground hover:bg-white/10 hover:border-white/25 active:scale-[0.98] transition cursor-pointer shadow-md ${className || ''}`}
+    >
+      {loading ? (
+        <div className="flex items-center gap-2">
           <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          <span>A abrir autenticação Google...</span>
+          <span>A autenticar...</span>
         </div>
-      )}
-
-      {/* Contentor do botão nativo GIS One Tap */}
-      <div id="googleSignInDiv" className="w-full min-h-[44px] flex justify-center items-center" />
-
-      {/* Botão de Autenticação com retorno Deep Link */}
-      {!gisLoaded && (
-        <button
-          type="button"
-          onClick={handleGoogleDeepLinkAuth}
-          className="w-full flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] py-3.5 px-4 font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-foreground hover:bg-white/10 hover:border-white/25 active:scale-[0.98] transition cursor-pointer shadow-md mt-2"
-        >
+      ) : (
+        <>
           <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
             <path
               fill="#4285F4"
@@ -138,8 +103,9 @@ export default function GoogleAuthButton({ redirectTarget = '/jogar', onError }:
             />
           </svg>
           <span>Continuar com o Google</span>
-        </button>
+        </>
       )}
-    </div>
+    </button>
   )
 }
+

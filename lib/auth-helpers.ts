@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import {
   GoogleAuthProvider,
+  signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
   type UserCredential,
@@ -55,6 +56,22 @@ export function getPostLoginRedirectTarget(fallback = '/jogar'): string {
   } catch {
     return fallback
   }
+}
+
+/**
+ * Executa o Login com Google utilizando o fluxo padrão do Firebase (signInWithPopup)
+ */
+export const signInWithGoogle = async (): Promise<UserCredential> => {
+  if (!auth) {
+    console.error('[AUTH DIAGNOSTIC] Erro: auth está nulo ou indefinido.')
+    throw new Error('Firebase Auth não está inicializado.')
+  }
+
+  const provider = new GoogleAuthProvider()
+  provider.setCustomParameters({ prompt: 'select_account' })
+
+  console.log('[AUTH] A iniciar signInWithPopup com Google...')
+  return await signInWithPopup(auth, provider)
 }
 
 /**
