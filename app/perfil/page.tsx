@@ -116,18 +116,18 @@ function PerfilContent() {
     }
   }, [authResolved, user, router])
   
-  // Perfil Base
-  const [displayName, setDisplayName] = useState<string>('Jogador')
-  const [district, setDistrict] = useState<string>('Portugal')
-  const [avatar, setAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
-  const [equippedAvatarId, setEquippedAvatarId] = useState<string>('guardiao-vulcanico')
-  const [arena, setArena] = useState<string>('arena_1')
-  const [title, setTitle] = useState<string>('Filho de Portugal')
+  // Perfil Base (100% Dinâmico do Firestore / Auth)
+  const [displayName, setDisplayName] = useState<string>(() => profile?.displayName || user?.displayName || user?.email?.split('@')[0] || '')
+  const [district, setDistrict] = useState<string>(() => profile?.district || '')
+  const [avatar, setAvatar] = useState<string>(() => (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || '/images/avatars/guardiao-vulcanico.jpg')
+  const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => (profile as any)?.equippedAvatar || 'guardiao-vulcanico')
+  const [arena, setArena] = useState<string>(() => (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_1')
+  const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || profile?.equipped?.title || '')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [userCoins, setUserCoins] = useState<number>(0)
-  const [userXp, setUserXp] = useState<number>(0)
-  const [userLevel, setUserLevel] = useState<number>(1)
+  const [userCoins, setUserCoins] = useState<number>(() => profile?.coins ?? profile?.euros ?? 0)
+  const [userXp, setUserXp] = useState<number>(() => profile?.xp ?? 0)
+  const [userLevel, setUserLevel] = useState<number>(() => profile?.level ?? 1)
 
   // Abas Principais & Sub-Filtros
   const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>(
@@ -139,26 +139,22 @@ function PerfilContent() {
   // Conquistas Reclamadas
   const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
 
-  // Consumíveis & Inventário
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
-    avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
-    arenas: ['arena_1', 'arena_2', 'arena_ponte_2077', 'arena_neon_2088'],
-    titles: ['tit_filho_portugal', 'tit_novico', 'Filho de Portugal', 'Noviço da Nação'],
-    taunts: ['pack_basico'],
+  // Consumíveis & Inventário Reais
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({
+    help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? 0,
+    freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? 0,
   })
-  const [unlockedItems, setUnlockedItems] = useState<string[]>([
-    'guardiao-vulcanico', 
-    'camoes-2050', 
-    'arena_1',
-    'arena_2',
-    'arena_neon_2088', 
-    'arena_ponte_2077', 
-    'avatar_vulcao_acores', 
-    'avatar_camoes_2050',
-    'tit_filho_portugal',
-    'Filho de Portugal',
-    'pack_basico',
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
+    avatars: (profile as any)?.inventory?.avatars || ['guardiao-vulcanico'],
+    arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
+    titles: (profile as any)?.inventory?.titles || [],
+    taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
+  })
+  const [unlockedItems, setUnlockedItems] = useState<string[]>(() => [
+    ...((profile as any)?.inventory?.avatars || ['guardiao-vulcanico']),
+    ...((profile as any)?.inventory?.arenas || ['arena_1']),
+    ...((profile as any)?.inventory?.titles || []),
+    ...((profile as any)?.inventory?.taunts || ['pack_basico']),
   ])
 
   // Modais de Ação
@@ -418,7 +414,7 @@ function PerfilContent() {
 
     const syncProfile = () => {
       try {
-        const savedName = profile?.displayName || user?.displayName || (typeof window !== 'undefined' ? localStorage.getItem('user_display_name') : null) || 'Jogador'
+        const savedName = profile?.displayName || user?.displayName || user?.email?.split('@')[0] || (typeof window !== 'undefined' ? localStorage.getItem('user_display_name') : null) || 'Conta'
         setDisplayName(savedName)
 
         const savedDistrict = profile?.district || (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) || 'Portugal'
