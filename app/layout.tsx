@@ -5,7 +5,6 @@ import { AuthProvider } from '@/components/auth-provider'
 import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
-import TronCyberBackground from '@/components/TronCyberBackground'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({

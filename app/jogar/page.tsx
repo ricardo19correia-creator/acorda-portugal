@@ -48,12 +48,10 @@ function JogarContainer() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-slate-950 text-white flex flex-col justify-between">
+    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
       {/* 1. FUNDO GLOBAL OFICIAL (FORA DE JOGO) OU ARENA EQUIPADA (DURANTE O JOGO) */}
       <AppBackground
-        variant="quiz"
         customImage={isPlaying ? (arenaImage || '/arenas/arena-1.jpg') : undefined}
-        contrastIntensity={isPlaying ? 'subtle' : 'normal'}
       />
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}

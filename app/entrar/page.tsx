@@ -283,7 +283,7 @@ function EntrarPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-950 flex flex-col justify-between px-4 py-8 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-transparent flex flex-col justify-between px-4 py-8 sm:px-6 lg:px-8">
       <BackgroundFx variant="auth" />
 
       {/* Top Header Link */}

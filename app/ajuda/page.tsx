@@ -448,9 +448,9 @@ export default function AjudaPage() {
   }
 
   return (
-    <div className="relative min-h-screen text-foreground flex flex-col justify-between overflow-x-hidden bg-slate-950">
-      {/* 1. FUNDO OFICIAL 22: SUPORTE / CENTRAL DE AJUDA */}
-      <BackgroundFx variant="support" contrastIntensity="normal" />
+    <div className="relative min-h-screen text-foreground flex flex-col justify-between overflow-x-hidden bg-transparent">
+      {/* 1. FUNDO OFICIAL: CENTRAL DE AJUDA */}
+      <BackgroundFx />
 
       {/* 2. CONTEÚDO DA CENTRAL DE AJUDA COM Z-INDEX SUPERIOR */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">

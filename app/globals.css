@@ -83,21 +83,13 @@
   }
 
   html {
-    background-color: #050706 !important;
+    background-color: transparent !important;
   }
 
   body {
     color: #f4f4f5;
-    background-color: #050706 !important;
-    background-image: 
-      radial-gradient(at 15% 15%, rgba(16, 185, 129, 0.22) 0px, transparent 50%),
-      radial-gradient(at 85% 20%, rgba(245, 158, 11, 0.16) 0px, transparent 45%),
-      radial-gradient(at 50% 85%, rgba(239, 68, 68, 0.14) 0px, transparent 50%),
-      radial-gradient(at 80% 80%, rgba(16, 185, 129, 0.12) 0px, transparent 40%),
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-    background-attachment: fixed;
+    background-color: transparent !important;
+    background-image: none !important;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;

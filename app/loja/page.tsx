@@ -623,7 +623,7 @@ export default function LojaPage() {
     }
   }
 
-  if (!mounted) return <div className="min-h-screen bg-slate-950" />
+  if (!mounted) return <div className="min-h-screen bg-transparent" />
 
   const filteredItems = SHOP_ITEMS.filter((item) => {
     if (activeTab === 'vip') return false
@@ -659,9 +659,9 @@ export default function LojaPage() {
   })
 
   return (
-    <div className="relative min-h-screen w-full text-white bg-slate-950 flex flex-col items-center p-4 md:p-8 overflow-x-hidden">
-      {/* 1. FUNDO OFICIAL 18 (LOJA) / 19 (AJUDAS & POWER-UPS) */}
-      <AppBackground variant={activeTab === 'ajudas' ? 'powerups' : 'shop'} contrastIntensity="normal" />
+    <div className="relative min-h-screen w-full text-white bg-transparent flex flex-col items-center p-4 md:p-8 overflow-x-hidden">
+      {/* 1. FUNDO OFICIAL (LOJA) */}
+      <AppBackground />
 
       {/* CONTEÚDO DA LOJA POR CIMA */}
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center">

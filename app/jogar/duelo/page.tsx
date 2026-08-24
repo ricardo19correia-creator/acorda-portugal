@@ -61,8 +61,8 @@ function DuelPageContent() {
 
   if (!effectiveDuelId) {
     return (
-      <div className="relative min-h-screen bg-slate-950 flex flex-col justify-between">
-        <BackgroundFx variant="multiplayer" />
+      <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
+        <BackgroundFx />
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
 
@@ -123,7 +123,7 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-950">
+    <div className="relative min-h-screen bg-transparent">
       {/* Fundo Sincronizado do Duelo 1v1 */}
       <BackgroundFx
         variant="duel"

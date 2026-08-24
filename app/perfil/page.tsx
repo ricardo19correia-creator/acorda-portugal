@@ -1000,12 +1000,12 @@ function PerfilContent() {
     },
   ], [])
 
-  if (!mounted) return <div className="min-h-screen bg-slate-950" />
+  if (!mounted) return <div className="min-h-screen bg-transparent" />
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
-      {/* 1. FUNDO OFICIAL 04: PERFIL */}
-      <AppBackground variant="profile" />
+    <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
+      {/* 1. FUNDO OFICIAL: PERFIL */}
+      <AppBackground />
 
       {/* Top Navigation */}
       <div className="w-full max-w-5xl flex items-center justify-between mb-6">

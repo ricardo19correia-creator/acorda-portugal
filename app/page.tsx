@@ -9,9 +9,9 @@ import { AppBackground } from '@/components/AppBackground'
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-slate-950 text-foreground flex flex-col justify-between">
+    <div className="relative min-h-screen w-full overflow-hidden bg-transparent text-foreground flex flex-col justify-between">
       {/* 1. FUNDO GLOBAL OFICIAL DO ACORDA PORTUGAL */}
-      <AppBackground variant="home" contrastIntensity="subtle" />
+      <AppBackground />
       
       {/* 2. CONTEÚDO DO SITE ENCAPSULADO EM RELATIVE Z-10 */}
       <div className="relative z-10 flex-1 flex flex-col justify-between bg-transparent">
