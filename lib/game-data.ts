@@ -469,10 +469,26 @@ export type QuizQuestion = {
 }
 
 const allQuestions: QuizQuestion[] = (questions as any[]).map((q, i) => {
-  const correctIndex = typeof q.correctAnswer === 'number' ? q.correctAnswer : q.options.indexOf(q.correctAnswer)
+  let correctIndex = -1
+  if (typeof q.correctAnswer === 'number') {
+    correctIndex = q.correctAnswer
+  } else if (typeof q.correct === 'string' && ['A', 'B', 'C', 'D'].includes(q.correct)) {
+    correctIndex = ['A', 'B', 'C', 'D'].indexOf(q.correct)
+  } else if (Array.isArray(q.options)) {
+    const rawOptions = q.options.map((opt: any) => typeof opt === 'string' ? opt : opt.text)
+    correctIndex = rawOptions.indexOf(q.correctAnswer || q.correct)
+  }
+
   const correctKey = ['A', 'B', 'C', 'D'][correctIndex >= 0 && correctIndex < 4 ? correctIndex : 0] as 'A' | 'B' | 'C' | 'D'
   const diff = String(q.difficulty || '').toLowerCase()
   const points = diff === 'difícil' || diff === 'dificil' ? 300 : diff === 'médio' || diff === 'medio' ? 200 : 100
+
+  const options = Array.isArray(q.options)
+    ? q.options.map((opt: any, optIdx: number) => {
+        const text = typeof opt === 'string' ? opt : opt.text || ''
+        return { key: ['A', 'B', 'C', 'D'][optIdx] as 'A' | 'B' | 'C' | 'D', text }
+      })
+    : []
 
   return {
     ...q,
@@ -480,8 +496,9 @@ const allQuestions: QuizQuestion[] = (questions as any[]).map((q, i) => {
     index: i + 1,
     total: questions.length,
     points,
-    options: q.options.map((text: string, optIdx: number) => ({ key: ['A', 'B', 'C', 'D'][optIdx] as 'A' | 'B' | 'C' | 'D', text })),
+    options,
     correct: correctKey,
+    explanation: q.explanation || `Resposta correta: ${correctKey}`,
   }
 })
 

@@ -58,6 +58,7 @@ function QuizPageContent() {
     <div className="relative bg-transparent">
       {categorySlug ? (
         <QuizScreen
+          key={gameId}
           categorySlug={categorySlug}
           subcategorySlug={subcategorySlug}
           difficultyParam={difficulty}

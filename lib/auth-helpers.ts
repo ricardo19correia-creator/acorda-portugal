@@ -107,6 +107,9 @@ export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
 /**
  * Limpeza total e definitiva da sessão (Firebase, Storage, Cookies e Memória)
  */
+/**
+ * Limpeza total e definitiva da sessão (Firebase, IndexedDB, Storage, Cookies e Memória)
+ */
 export async function performLogout(redirectUrl = '/'): Promise<void> {
   try {
     // 1. Firebase Auth SignOut
@@ -118,71 +121,46 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
     console.warn('[AUTH] Aviso ao terminar sessão no Firebase:', err)
   }
 
-  // 2. Limpeza manual de todos os vestígios no Storage
+  // 2. Limpar IndexedDB (onde o Firebase Auth armazena os tokens de persistência de sessão)
+  if (typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined') {
+    try {
+      window.indexedDB.deleteDatabase('firebaseLocalStorageDb')
+      window.indexedDB.deleteDatabase('firebase-heartbeat-database')
+      window.indexedDB.deleteDatabase('firebase-installations-database')
+    } catch (e) {
+      console.warn('[AUTH] Erro ao limpar IndexedDB:', e)
+    }
+  }
+
+  // 3. Limpeza total do Storage local e de sessão
   if (typeof window !== 'undefined') {
     try {
-      const keysToRemove = [
-        'user',
-        'token',
-        'sb-*-auth-token',
-        'auth_user',
-        'user_display_name',
-        'user_district',
-        'user_equipped_avatar',
-        'equipped_avatar_id',
-        'equipped_arena',
-        'equipped_arena_image',
-        'equipped_title',
-        'user_equipped_title',
-        'user_coins',
-        'user_euros',
-        'user_claimed_achievements',
-        'user_consumables',
-        'user_inventory',
-        'user_unlocked_items',
-        'user_is_founder',
-        'user_inventory_emotes',
-        'user_inventory_taunts',
-        'equipped_emotes',
-        'equipped_taunts',
-        'acorda_auth_redirect_target',
-      ]
-
-      keysToRemove.forEach((k) => localStorage.removeItem(k))
-
-      // Remove tokens dinâmicos
-      const storageLength = localStorage.length
-      const keysToDelete: string[] = []
-      for (let i = 0; i < storageLength; i++) {
-        const key = localStorage.key(i)
-        if (key && (key.startsWith('sb-') || key.includes('auth-token') || key.includes('firebase:authUser'))) {
-          keysToDelete.push(key)
-        }
-      }
-      keysToDelete.forEach((k) => localStorage.removeItem(k))
-
+      localStorage.clear()
       sessionStorage.clear()
     } catch (e) {
       console.warn('[AUTH] Erro ao limpar Storage:', e)
     }
 
-    // 3. Limpeza total de cookies
+    // 4. Limpeza total de cookies em todos os caminhos e domínios
     if (typeof document !== 'undefined') {
       try {
-        document.cookie.split(';').forEach((cookie) => {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i]
           const eqPos = cookie.indexOf('=')
-          const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim()
+          const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim()
           if (name) {
-            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';'
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname};`
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${window.location.hostname};`
           }
-        })
+        }
       } catch (e) {
         console.warn('[AUTH] Erro ao limpar cookies:', e)
       }
     }
 
-    // 4. Hard redirect para descarregar qualquer cache de sessão em memória
+    // 5. Hard redirect para descarregar qualquer cache de sessão em memória
     window.location.href = redirectUrl
   }
 }

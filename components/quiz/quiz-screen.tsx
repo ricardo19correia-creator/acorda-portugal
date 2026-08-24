@@ -323,6 +323,23 @@ export function QuizScreen({
     () => createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam),
   )
 
+    // Sincronizar estado completo quando inicia uma nova partida ou muda de categoria
+  useEffect(() => {
+    const questions = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+    setQuizQuestions(questions)
+    setStep(0)
+    setSelected(null)
+    setEliminatedOptions([])
+    setIsFrozen(false)
+    setFreezeTimeLeft(0)
+    setSeconds(60)
+    setScore(0)
+    setCorrectCount(0)
+    setStreak(0)
+    setBestStreak(0)
+    setPhase('answering')
+  }, [gameId, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
+
   const [step, setStep] = useState(0)
   const [phase, setPhase] = useState<Phase>('answering')
   const [selected, setSelected] = useState<OptionKey | null>(null)
