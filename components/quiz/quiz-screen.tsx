@@ -23,7 +23,7 @@ import { useConsumablePowerUp } from '@/lib/economy'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { GameExitControl } from '@/components/game-exit-modal'
-import { DuelEmoteBubble, DuelEmotePicker } from '@/components/duel-emote-system'
+import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 

@@ -52,7 +52,7 @@ import {
   sendDuelEmote,
 } from '@/lib/duel'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
-import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock } from '@/components/duel-emote-system'
+import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'

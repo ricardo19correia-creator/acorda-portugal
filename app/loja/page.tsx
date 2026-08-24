@@ -150,7 +150,7 @@ export default function LojaPage() {
   const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
-  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
+  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userBalance, setUserBalance] = useState<number>(803845)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
@@ -358,7 +358,12 @@ export default function LojaPage() {
 
   const isItemEquipped = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
-    if (item.category === 'taunts') return equippedEmotes.includes(item.id)
+    if (item.category === 'taunts') {
+      const active = (equippedEmotes && equippedEmotes.length > 0)
+        ? equippedEmotes
+        : ['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa']
+      return active.includes(item.id)
+    }
     if (item.category === 'avatars') return equippedAvatar === item.image
     if (item.category === 'arenas') return equippedArena === item.id
     if (item.category === 'titulos') return equippedTitle === item.name || equippedTitle === item.id

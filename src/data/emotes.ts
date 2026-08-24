@@ -322,10 +322,6 @@ export const DEFAULT_EQUIPPED_EMOTES = [
   'emote_boa_sorte',
   'emote_vamos',
   'emote_boa',
-  'emote_quase',
-  'emote_gg',
-  'emote_ahahah',
-  'emote_forca',
 ]
 
 export const DEFAULT_UNLOCKED_EMOTES = OFFICIAL_EMOTES.filter(e => e.price === 0).map(e => e.id)
