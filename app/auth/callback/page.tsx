@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import Link from 'next/link'
 import { CheckCircle2, Smartphone, ArrowRight, RefreshCw } from 'lucide-react'
 import GoogleAuthButton from '@/components/google-auth-button'
+import { AppBackground } from '@/components/AppBackground'
 
 function AuthCallbackContent() {
   const [status, setStatus] = useState<'checking' | 'requesting_token' | 'redirecting' | 'manual_login' | 'error'>('checking')
@@ -65,7 +66,8 @@ function AuthCallbackContent() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 text-center text-white">
+    <div className="relative min-h-screen bg-transparent flex flex-col items-center justify-center p-6 text-center text-white">
+      <AppBackground />
       <div className="max-w-md w-full bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl backdrop-blur-xl flex flex-col items-center">
         {status === 'redirecting' ? (
           <>
@@ -162,7 +164,7 @@ function AuthCallbackContent() {
 
 export default function AuthCallback() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+    <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
       <AuthCallbackContent />
     </Suspense>
   )
