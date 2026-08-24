@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { getApps, getApp, initializeApp, cert } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 
+export const dynamic = 'force-dynamic'
+
 function getAdminApp() {
   if (getApps().length > 0) {
     return getApp()

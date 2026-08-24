@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { db } from '@/lib/firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: Request) {
   try {
     const body = await req.json()

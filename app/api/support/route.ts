@@ -3,6 +3,8 @@ import nodemailer from 'nodemailer'
 import { db } from '@/lib/firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
+export const dynamic = 'force-dynamic'
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(req: Request) {

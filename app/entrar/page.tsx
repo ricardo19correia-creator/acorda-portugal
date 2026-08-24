@@ -60,7 +60,7 @@ const DISTRICTS_LIST = [
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function EntrarPageContent() {
+export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'login' | 'register' | 'reset' }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTarget = sanitizeRedirectUrl(searchParams.get('redirect'), '/jogar')
@@ -69,7 +69,8 @@ function EntrarPageContent() {
   useCheckRedirectLogin(redirectTarget)
 
   const { user, authResolved } = useAuth()
-  const [mode, setMode] = useState<'login' | 'register' | 'reset'>('login')
+  const initialMode = searchParams.get('mode') === 'register' ? 'register' : (searchParams.get('mode') === 'reset' ? 'reset' : defaultMode)
+  const [mode, setMode] = useState<'login' | 'register' | 'reset'>(initialMode)
 
   // Form fields
   const [name, setName] = useState('')

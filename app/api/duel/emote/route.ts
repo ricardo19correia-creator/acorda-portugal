@@ -3,6 +3,8 @@ import { db } from '@/lib/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { getEmoteById } from '@/src/data/emotes'
 
+export const dynamic = 'force-dynamic'
+
 // In-memory rate limiting map for 3-second cooldown per player
 const playerCooldowns = new Map<string, number>()
 
