@@ -10,7 +10,7 @@ import {
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
   Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle
 } from 'lucide-react'
-import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
 import { 
   signOut, 
   deleteUser, 
@@ -105,8 +105,16 @@ function PerfilContent() {
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') as 'inventario' | 'estatisticas' | 'conquistas' | 'historico' | null
 
-  const { user, profile, profileLoading } = useAuth()
+  const { user, profile, profileLoading, authResolved } = useAuth()
   const [mounted, setMounted] = useState(false)
+  const [nationalRank, setNationalRank] = useState<number | null>(null)
+
+  // Redirecionamento de utilizadores não autenticados
+  useEffect(() => {
+    if (authResolved && !user) {
+      router.push('/entrar?redirect=/perfil')
+    }
+  }, [authResolved, user, router])
   
   // Perfil Base
   const [displayName, setDisplayName] = useState<string>('Jogador')
@@ -381,6 +389,33 @@ function PerfilContent() {
 
   useEffect(() => {
     setMounted(true)
+    // Sincronizar Posição no Ranking Nacional
+    let unsubRank: (() => void) | undefined
+    if (user?.uid) {
+      try {
+        const qRank = query(collection(db, 'publicProfiles'), limit(100))
+        unsubRank = onSnapshot(qRank, (snap: any) => {
+          if (!snap || snap.empty) {
+            setNationalRank(1)
+            return
+          }
+          const sorted = snap.docs.map((d: any) => ({
+            id: d.id,
+            xp: typeof d.data()?.xp === 'number' ? d.data().xp : 0,
+          })).sort((a: { xp: number }, b: { xp: number }) => b.xp - a.xp)
+
+          const idx = sorted.findIndex((p: { id: string }) => p.id === user.uid)
+          if (idx !== -1) {
+            setNationalRank(idx + 1)
+          } else {
+            const userXp = profile?.xp ?? 0
+            const higher = sorted.filter((p: { xp: number }) => p.xp > userXp).length
+            setNationalRank(higher + 1)
+          }
+        })
+      } catch (e) {}
+    }
+
     const syncProfile = () => {
       try {
         const savedName = profile?.displayName || user?.displayName || (typeof window !== 'undefined' ? localStorage.getItem('user_display_name') : null) || 'Jogador'
@@ -565,6 +600,7 @@ function PerfilContent() {
 
     return () => {
       if (unsubscribeSnapshot) unsubscribeSnapshot()
+      if (unsubRank) unsubRank()
       window.removeEventListener('avatarChanged', syncProfile)
       window.removeEventListener('arenaChanged', syncProfile)
       window.removeEventListener('titleChanged', syncProfile)
@@ -1020,46 +1056,46 @@ function PerfilContent() {
           progress = profile?.bestStreak || 19
           break
         case 'historiaCorrect':
-          progress = 125
+          progress = (profile as any)?.categoryStats?.historia?.correct || 0
           break
         case 'geografiaCorrect':
-          progress = 101
+          progress = (profile as any)?.categoryStats?.geografia?.correct || 0
           break
         case 'desportoCorrect':
-          progress = 74
+          progress = (profile as any)?.categoryStats?.desporto?.correct || 0
           break
         case 'culturaCorrect':
-          progress = 70
+          progress = (profile as any)?.categoryStats?.cultura?.correct || 0
           break
         case 'simbolosCorrect':
-          progress = 114
+          progress = (profile as any)?.categoryStats?.simbolos?.correct || 0
           break
         case 'districtGames':
-          progress = 18
+          progress = (profile as any)?.categoryStats?.distrito?.games || 0
           break
         case 'districtsFaced':
-          progress = 8
+          progress = (profile as any)?.stats?.districtsFaced || 0
           break
         case 'coins':
           progress = userCoins
           break
         case 'malucoGames':
-          progress = 12
+          progress = (profile as any)?.categoryStats?.maluco?.games || 0
           break
         case 'malucoCorrect':
-          progress = 45
+          progress = (profile as any)?.categoryStats?.maluco?.correct || 0
           break
         case 'isFounder':
           progress = 1
           break
         case 'isTop10':
-          progress = 1
+          progress = nationalRank ? (nationalRank <= 10 ? 1 : 0) : 0
           break
         case 'isTop1':
-          progress = 1
+          progress = nationalRank === 1 ? 1 : 0
           break
         default:
-          progress = 1
+          progress = 0
       }
 
       const isCompleted = progress >= ach.maxProgress
@@ -1088,83 +1124,106 @@ function PerfilContent() {
     return userAchievements.filter((a) => a.category === achievementCategory)
   }, [userAchievements, achievementCategory])
 
-  // Estatísticas por Categoria (Performance de Quiz)
-  const categoryStats = useMemo(() => [
-    {
-      id: 'historia',
-      name: 'História de Portugal',
-      icon: '🏛️',
-      accuracy: 88,
-      answered: 142,
-      correct: 125,
-      levelName: 'Mestre da Lusitânia',
-      gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
-      borderColor: 'border-amber-500/40',
-      barColor: 'bg-amber-500',
-    },
-    {
-      id: 'geografia',
-      name: 'Geografia & Território',
-      icon: '🌍',
-      accuracy: 92,
-      answered: 110,
-      correct: 101,
-      levelName: 'Navegador Cartógrafo',
-      gradient: 'from-emerald-500/20 via-teal-500/10 to-transparent',
-      borderColor: 'border-emerald-500/40',
-      barColor: 'bg-emerald-500',
-    },
-    {
-      id: 'desporto',
-      name: 'Desporto Nacional',
-      icon: '⚽',
-      accuracy: 78,
-      answered: 95,
-      correct: 74,
-      levelName: 'Campeão Ibérico',
-      gradient: 'from-blue-500/20 via-indigo-500/10 to-transparent',
-      borderColor: 'border-blue-500/40',
-      barColor: 'bg-blue-500',
-    },
-    {
-      id: 'cultura',
-      name: 'Cultura & Tradições',
-      icon: '🎭',
-      accuracy: 80,
-      answered: 88,
-      correct: 70,
-      levelName: 'Erudito das Beiras',
-      gradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
-      borderColor: 'border-purple-500/40',
-      barColor: 'bg-purple-500',
-    },
-    {
-      id: 'simbolos',
-      name: 'Símbolos & Gastronomia',
-      icon: '🇵🇹',
-      accuracy: 95,
-      answered: 120,
-      correct: 114,
-      levelName: 'Paladar Lusitano',
-      gradient: 'from-red-500/20 via-amber-500/10 to-transparent',
-      borderColor: 'border-red-500/40',
-      barColor: 'bg-red-500',
-    },
-    {
-      id: 'maluco',
-      name: 'Modo Maluco',
-      icon: '🤪',
-      accuracy: 70,
-      answered: 64,
-      correct: 45,
-      levelName: 'Maluco Veterano',
-      gradient: 'from-yellow-500/20 via-lime-500/10 to-transparent',
-      borderColor: 'border-yellow-500/40',
-      barColor: 'bg-yellow-500',
-    },
-  ], [])
+  // Estatísticas por Categoria (Performance Real de Quiz)
+  const categoryStats = useMemo(() => {
+    const userCatStats = (profile as any)?.categoryStats || {}
+    return [
+      {
+        id: 'historia',
+        name: 'História de Portugal',
+        icon: '🏛️',
+        accuracy:
+          userCatStats.historia?.total > 0
+            ? Math.round((userCatStats.historia.correct / userCatStats.historia.total) * 100)
+            : profile?.totalQuestions && profile.totalQuestions > 0
+              ? Math.round(((profile.correctAnswers || 0) / profile.totalQuestions) * 100)
+              : 0,
+        answered: userCatStats.historia?.total || (profile?.totalQuestions ? Math.round(profile.totalQuestions / 6) : 0),
+        correct: userCatStats.historia?.correct || (profile?.correctAnswers ? Math.round(profile.correctAnswers / 6) : 0),
+        levelName: 'Mestre da Lusitânia',
+        gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
+        borderColor: 'border-amber-500/40',
+        barColor: 'bg-amber-500',
+      },
+      {
+        id: 'geografia',
+        name: 'Geografia & Território',
+        icon: '🌍',
+        accuracy:
+          userCatStats.geografia?.total > 0
+            ? Math.round((userCatStats.geografia.correct / userCatStats.geografia.total) * 100)
+            : 0,
+        answered: userCatStats.geografia?.total || 0,
+        correct: userCatStats.geografia?.correct || 0,
+        levelName: 'Navegador Cartógrafo',
+        gradient: 'from-emerald-500/20 via-teal-500/10 to-transparent',
+        borderColor: 'border-emerald-500/40',
+        barColor: 'bg-emerald-500',
+      },
+      {
+        id: 'desporto',
+        name: 'Desporto Nacional',
+        icon: '⚽',
+        accuracy:
+          userCatStats.desporto?.total > 0
+            ? Math.round((userCatStats.desporto.correct / userCatStats.desporto.total) * 100)
+            : 0,
+        answered: userCatStats.desporto?.total || 0,
+        correct: userCatStats.desporto?.correct || 0,
+        levelName: 'Campeão Ibérico',
+        gradient: 'from-blue-500/20 via-indigo-500/10 to-transparent',
+        borderColor: 'border-blue-500/40',
+        barColor: 'bg-blue-500',
+      },
+      {
+        id: 'cultura',
+        name: 'Cultura & Tradições',
+        icon: '🎭',
+        accuracy:
+          userCatStats.cultura?.total > 0
+            ? Math.round((userCatStats.cultura.correct / userCatStats.cultura.total) * 100)
+            : 0,
+        answered: userCatStats.cultura?.total || 0,
+        correct: userCatStats.cultura?.correct || 0,
+        levelName: 'Erudito das Beiras',
+        gradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
+        borderColor: 'border-purple-500/40',
+        barColor: 'bg-purple-500',
+      },
+      {
+        id: 'simbolos',
+        name: 'Símbolos & Gastronomia',
+        icon: '🇵🇹',
+        accuracy:
+          userCatStats.simbolos?.total > 0
+            ? Math.round((userCatStats.simbolos.correct / userCatStats.simbolos.total) * 100)
+            : 0,
+        answered: userCatStats.simbolos?.total || 0,
+        correct: userCatStats.simbolos?.correct || 0,
+        levelName: 'Paladar Lusitano',
+        gradient: 'from-red-500/20 via-amber-500/10 to-transparent',
+        borderColor: 'border-red-500/40',
+        barColor: 'bg-red-500',
+      },
+      {
+        id: 'maluco',
+        name: 'Modo Maluco',
+        icon: '🤪',
+        accuracy:
+          userCatStats.maluco?.total > 0
+            ? Math.round((userCatStats.maluco.correct / userCatStats.maluco.total) * 100)
+            : 0,
+        answered: userCatStats.maluco?.total || 0,
+        correct: userCatStats.maluco?.correct || 0,
+        levelName: 'Maluco Veterano',
+        gradient: 'from-yellow-500/20 via-lime-500/10 to-transparent',
+        borderColor: 'border-yellow-500/40',
+        barColor: 'bg-yellow-500',
+      },
+    ]
+  }, [profile])
 
-  if (!mounted || (profileLoading && !profile)) {
+  if (!mounted || !authResolved || (profileLoading && !profile) || !user) {
     return (
       <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center justify-center overflow-x-hidden">
         <AppBackground />
@@ -1244,7 +1303,7 @@ function PerfilContent() {
               <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-slate-400">
                 <span className="text-emerald-400 font-bold">Membro Fundador</span>
                 <span>•</span>
-                <span>ID: {user?.uid ? user.uid.slice(0, 8) : '2026-PT'}</span>
+                <span>ID: {user?.uid ? user.uid.slice(0, 8).toUpperCase() : '-'}</span>
               </div>
 
               {/* Barra de Progresso de Nível */}
@@ -1289,17 +1348,27 @@ function PerfilContent() {
           </div>
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
             <Award className="w-5 h-5 text-emerald-400 mb-1" />
-            <span className="text-xl font-black text-emerald-400">#1</span>
+            <span className="text-xl font-black text-emerald-400">
+              {nationalRank ? `#${nationalRank}` : '-'}
+            </span>
             <span className="text-xs text-slate-400">Posição Nacional</span>
           </div>
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
             <Zap className="w-5 h-5 text-cyan-400 mb-1" />
-            <span className="text-xl font-black text-white">88%</span>
+            <span className="text-xl font-black text-white">
+              {profile?.totalQuestions && profile.totalQuestions > 0
+                ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
+                : profile?.questionsAnswered && profile.questionsAnswered > 0
+                  ? Math.round(((profile.correctAnswers || 0) / profile.questionsAnswered) * 100)
+                  : (profile as any)?.stats?.accuracyRate ?? 0}%
+            </span>
             <span className="text-xs text-slate-400">Taxa de Acerto</span>
           </div>
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
             <Flame className="w-5 h-5 text-orange-400 mb-1" />
-            <span className="text-xl font-black text-orange-400">14</span>
+            <span className="text-xl font-black text-orange-400">
+              {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
+            </span>
             <span className="text-xs text-slate-400">Vitórias em Duelo</span>
           </div>
         </div>
@@ -2051,55 +2120,57 @@ function PerfilContent() {
         {/* ABA 4: HISTÓRICO DE DUELOS */}
         {/* ========================================================= */}
         {activeTab === 'historico' && (
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl">
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between pb-3 border-b border-slate-800">
               <h3 className="text-sm font-black text-white flex items-center gap-2">
-                <Swords className="w-4 h-4 text-purple-400" /> Últimos Confrontos 1v1
+                <Swords className="w-4 h-4 text-purple-400" /> Histórico de Confrontos 1v1
               </h3>
-              <span className="text-xs text-slate-400">Total: 16 Duelos</span>
+              <span className="text-xs text-slate-400">
+                Total: {profile?.gamesPlayed ?? (profile as any)?.stats?.totalDuels ?? 0} Duelos
+              </span>
             </div>
 
-            <div className="flex items-center justify-between p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80 hover:border-slate-700 transition-colors">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-black text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-1 rounded-lg">VITÓRIA</span>
-                <div>
-                  <p className="text-sm font-bold text-white">vs Suice guy (Lisboa)</p>
-                  <p className="text-xs text-slate-500">História &amp; Geografia • 1850 vs 1420 pts</p>
-                </div>
+            {/* Resumo Estatístico do Histórico 1v1 */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                <span className="text-xs text-slate-400 font-bold block mb-1">Vitórias</span>
+                <span className="text-lg font-black text-emerald-400">
+                  {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
+                </span>
               </div>
-              <div className="text-right">
-                <span className="text-sm font-black text-emerald-400">+250 XP</span>
-                <p className="text-[10px] text-slate-500">Há 2 horas</p>
+              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                <span className="text-xs text-slate-400 font-bold block mb-1">Derrotas</span>
+                <span className="text-lg font-black text-rose-400">
+                  {Math.max(0, (profile?.gamesPlayed ?? 0) - (profile?.wins ?? 0))}
+                </span>
               </div>
-            </div>
-
-            <div className="flex items-center justify-between p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80 hover:border-slate-700 transition-colors">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-black text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-1 rounded-lg">VITÓRIA</span>
-                <div>
-                  <p className="text-sm font-bold text-white">vs Neymar (Vila Real)</p>
-                  <p className="text-xs text-slate-500">Desporto Nacional • 1600 vs 1200 pts</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-black text-emerald-400">+250 XP</span>
-                <p className="text-[10px] text-slate-500">Ontem</p>
+              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                <span className="text-xs text-slate-400 font-bold block mb-1">Taxa de Vitória</span>
+                <span className="text-lg font-black text-cyan-400">
+                  {profile?.gamesPlayed && profile.gamesPlayed > 0
+                    ? Math.round(((profile.wins || 0) / profile.gamesPlayed) * 100)
+                    : 0}%
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80 hover:border-slate-700 transition-colors">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-black text-rose-400 bg-rose-950/80 border border-rose-800 px-2.5 py-1 rounded-lg">DERROTA</span>
-                <div>
-                  <p className="text-sm font-bold text-white">vs Lusitano (Porto)</p>
-                  <p className="text-xs text-slate-500">Cultura &amp; Tradições • 1350 vs 1580 pts</p>
+            {(!profile?.gamesPlayed || profile.gamesPlayed === 0) && (
+              <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center justify-center mx-auto text-xl">
+                  ⚔️
                 </div>
+                <p className="text-sm font-bold text-slate-300">Nenhum duelo registado ainda</p>
+                <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                  Entra na Arena de Duelos 1v1 para desafiar outros jogadores e acumular vitórias no teu histórico oficial.
+                </p>
+                <Link
+                  href="/jogar/duelo"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-purple-600/30"
+                >
+                  <Swords className="w-4 h-4" /> Jogar Duelo 1v1
+                </Link>
               </div>
-              <div className="text-right">
-                <span className="text-sm font-black text-slate-400">+50 XP</span>
-                <p className="text-[10px] text-slate-500">Há 2 dias</p>
-              </div>
-            </div>
+            )}
           </div>
         )}
       </div>
