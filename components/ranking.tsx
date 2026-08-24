@@ -324,24 +324,38 @@ export function Ranking() {
           )}
 
           {/* Leaderboard list (ranks 4 to 10) */}
-          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-card/60 backdrop-blur shadow-xl">
+          <div
+            className="mx-auto mt-8 max-w-3xl overflow-hidden transition-all duration-300"
+            style={{
+              background: 'rgba(18, 24, 27, 0.75)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(0, 255, 136, 0.15)',
+              borderRadius: '16px',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+            }}
+          >
             {rest.length > 0 && (
-              <ul className="divide-y divide-white/5">
+              <ul className="divide-y divide-white/5 p-2 space-y-1">
                 {rest.map((row) => {
                   const isCurrentUser = Boolean(user?.uid && row.uid === user.uid) || row.name === user?.displayName || row.name === 'Riky Moreira'
                   return (
                     <li
                       key={row.uid}
                       onClick={() => handleSelectPlayer(row)}
+                      style={{
+                        background: isCurrentUser ? 'rgba(0, 255, 136, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                        borderLeft: isCurrentUser ? '4px solid #00ff88' : '4px solid transparent',
+                      }}
                       className={cn(
-                        'flex items-center gap-3.5 px-4 py-3.5 transition-colors sm:gap-4 sm:px-6 cursor-pointer',
+                        'flex items-center gap-3.5 px-4 py-3.5 rounded-xl transition-all sm:gap-4 sm:px-6 cursor-pointer border border-transparent',
                         isCurrentUser
-                          ? 'bg-primary/10 border-l-4 border-primary hover:bg-primary/15'
-                          : 'hover:bg-white/[0.06]',
+                          ? 'shadow-[0_0_15px_rgba(0,255,136,0.15)] border-emerald-500/30'
+                          : 'hover:!bg-[rgba(0,255,136,0.08)] hover:!border-[rgba(0,255,136,0.3)]',
                       )}
                     >
                       {/* Position Badge */}
-                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white/5 font-display text-sm font-black text-muted-foreground">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/5 font-display text-sm font-bold text-white">
                         {row.pos}
                       </span>
 

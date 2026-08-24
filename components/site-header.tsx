@@ -57,9 +57,15 @@ export function SiteHeader() {
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'border-b border-emerald-500/25 bg-slate-950/60 backdrop-blur-xl shadow-lg'
-          : 'border-b border-white/10 bg-transparent backdrop-blur-[2px]',
+          ? 'shadow-lg shadow-black/40'
+          : '',
       )}
+      style={{
+        background: 'rgba(10, 15, 20, 0.85)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+      }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Left: Brand Logo */}

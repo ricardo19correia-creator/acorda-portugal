@@ -13,6 +13,15 @@ export default function RankingsPage() {
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="ranking" />
 
+      {/* 1. Camada de Sombra e Contraste Subtil sobre o bg-loja */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          background: 'linear-gradient(180deg, rgba(10, 15, 20, 0.75) 0%, rgba(5, 8, 12, 0.88) 100%)',
+        }}
+      />
+
       <div className="relative z-20 flex-1 flex flex-col">
         <SiteHeader />
 
@@ -34,10 +43,13 @@ export default function RankingsPage() {
                     Tabela de Liderança Nacional
                   </span>
                 </div>
-                <h1 className="mt-2 font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-foreground text-glow-gold">
+                <h1
+                  className="mt-2 font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-foreground text-glow-gold"
+                  style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)' }}
+                >
                   Rankings &amp; Competição
                 </h1>
-                <p className="mt-1.5 text-sm sm:text-base text-muted-foreground font-medium">
+                <p className="mt-1.5 text-sm sm:text-base text-slate-300 font-medium" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.7)' }}>
                   Acompanha os melhores jogadores de Portugal e a disputa territorial entre os 18 distritos e 2 regiões autónomas.
                 </p>
               </div>

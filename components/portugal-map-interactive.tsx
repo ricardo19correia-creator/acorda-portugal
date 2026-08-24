@@ -37,19 +37,19 @@ export function PortugalMapInteractive({
   const getDistrictColor = (name: string, isSelected: boolean, isHovered: boolean) => {
     if (isSelected) {
       return {
-        fill: 'oklch(0.76 0.19 150 / 0.85)',
-        stroke: 'oklch(0.88 0.22 150)',
-        strokeWidth: 2.2,
-        filter: 'drop-shadow(0 0 12px oklch(0.76 0.19 150 / 0.6))',
+        fill: 'rgba(0, 255, 136, 0.85)',
+        stroke: '#00ff88',
+        strokeWidth: 2.5,
+        filter: 'drop-shadow(0 0 14px rgba(0, 255, 136, 0.75))',
       }
     }
 
     if (isHovered) {
       return {
-        fill: 'oklch(0.76 0.19 150 / 0.55)',
-        stroke: 'oklch(0.85 0.18 150 / 0.9)',
-        strokeWidth: 1.8,
-        filter: 'drop-shadow(0 0 8px oklch(0.76 0.19 150 / 0.4))',
+        fill: 'rgba(0, 255, 136, 0.5)',
+        stroke: '#00ff88',
+        strokeWidth: 2,
+        filter: 'drop-shadow(0 0 10px rgba(0, 255, 136, 0.5))',
       }
     }
 
@@ -59,17 +59,17 @@ export function PortugalMapInteractive({
 
     if (xp === 0) {
       return {
-        fill: 'oklch(0.24 0.03 160 / 0.6)',
-        stroke: 'oklch(0.45 0.06 160 / 0.35)',
+        fill: 'rgba(18, 28, 24, 0.55)',
+        stroke: 'rgba(0, 255, 136, 0.18)',
         strokeWidth: 1,
       }
     }
 
-    // Gradient between emerald and gold based on performance
-    const opacity = 0.3 + ratio * 0.45
+    // Dynamic emerald green shading based on performance
+    const opacity = 0.18 + ratio * 0.42
     return {
-      fill: `oklch(0.48 0.12 150 / ${opacity.toFixed(2)})`,
-      stroke: 'oklch(0.70 0.14 150 / 0.6)',
+      fill: `rgba(0, 255, 136, ${opacity.toFixed(2)})`,
+      stroke: 'rgba(0, 255, 136, 0.45)',
       strokeWidth: 1.2,
     }
   }
@@ -85,10 +85,15 @@ export function PortugalMapInteractive({
   const hoveredStat = hovered ? districtStats.get(hovered.name) : null
 
   return (
-    <div className={cn('relative select-none w-full', className)}>
+    <div
+      className={cn('relative select-none w-full transition-all duration-300', className)}
+      style={{
+        filter: 'drop-shadow(0 0 10px rgba(0, 255, 136, 0.25))',
+      }}
+    >
       <svg
         viewBox="0 0 720 820"
-        className="w-full h-auto block drop-shadow-2xl overflow-visible cursor-pointer"
+        className="w-full h-auto block overflow-visible cursor-pointer"
         role="img"
         aria-label="Mapa competitivo interativo de Portugal com 18 distritos, Açores e Madeira"
         onMouseMove={handleMouseMove}
@@ -111,8 +116,8 @@ export function PortugalMapInteractive({
           width="708"
           height="808"
           rx="28"
-          fill="rgba(8, 16, 12, 0.4)"
-          stroke="rgba(255, 255, 255, 0.07)"
+          fill="rgba(10, 18, 15, 0.5)"
+          stroke="rgba(0, 255, 136, 0.12)"
           strokeWidth="1.2"
         />
 
@@ -124,15 +129,15 @@ export function PortugalMapInteractive({
             width="215"
             height="225"
             rx="18"
-            fill="rgba(10, 22, 18, 0.65)"
-            stroke="rgba(150, 240, 190, 0.15)"
+            fill="rgba(18, 24, 27, 0.75)"
+            stroke="rgba(0, 255, 136, 0.25)"
             strokeWidth="1.2"
             strokeDasharray="4 4"
           />
           <text
             x="32"
             y="58"
-            fill="oklch(0.78 0.16 150)"
+            fill="#00ff88"
             fontSize="11"
             fontFamily="var(--font-display), system-ui, sans-serif"
             fontWeight="900"
@@ -150,15 +155,15 @@ export function PortugalMapInteractive({
             width="215"
             height="215"
             rx="18"
-            fill="rgba(10, 22, 18, 0.65)"
-            stroke="rgba(150, 240, 190, 0.15)"
+            fill="rgba(18, 24, 27, 0.75)"
+            stroke="rgba(0, 255, 136, 0.25)"
             strokeWidth="1.2"
             strokeDasharray="4 4"
           />
           <text
             x="32"
             y="568"
-            fill="oklch(0.78 0.16 150)"
+            fill="#00ff88"
             fontSize="11"
             fontFamily="var(--font-display), system-ui, sans-serif"
             fontWeight="900"
