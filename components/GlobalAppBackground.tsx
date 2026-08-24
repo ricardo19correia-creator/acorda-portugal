@@ -4,10 +4,10 @@ import React, { useMemo } from 'react'
 import { cn } from '@/lib/utils'
 
 /**
- * IMAGEM OFICIAL DO BACKGROUND GLOBAL DO ACORDA PORTUGAL
+ * IMAGEM OFICIAL DO BACKGROUND GLOBAL DO ACORDA PORTUGAL (bg-loja)
  * Única fonte de verdade para todas as páginas da aplicação fora de jogo.
  */
-export const GLOBAL_OFFICIAL_BACKGROUND = '/images/afonso-henriques-hero.jpg'
+export const GLOBAL_OFFICIAL_BACKGROUND = '/images/bg-loja.jpg'
 
 export interface GlobalAppBackgroundProps {
   /** Permite sobrepor uma imagem de arena quando o jogador está em partida ativa (gameplay) */

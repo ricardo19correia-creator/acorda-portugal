@@ -31,10 +31,10 @@ export type AppBackgroundVariant =
   | 'default'
 
 /**
- * IMAGEM OFICIAL DO BACKGROUND GLOBAL DO ACORDA PORTUGAL
+ * IMAGEM OFICIAL DO BACKGROUND GLOBAL DO ACORDA PORTUGAL (bg-loja)
  * Única fonte de verdade para todas as páginas da aplicação fora de jogo.
  */
-export const GLOBAL_OFFICIAL_BACKGROUND = '/images/afonso-henriques-hero.jpg'
+export const GLOBAL_OFFICIAL_BACKGROUND = '/images/bg-loja.jpg'
 
 export interface AppBackgroundProps {
   variant?: AppBackgroundVariant | string
