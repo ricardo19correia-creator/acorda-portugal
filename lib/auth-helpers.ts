@@ -102,3 +102,89 @@ export const useCheckRedirectLogin = (defaultFallback = '/jogar') => {
       })
   }, [router, defaultFallback])
 }
+
+
+/**
+ * Limpeza total e definitiva da sessão (Firebase, Storage, Cookies e Memória)
+ */
+export async function performLogout(redirectUrl = '/'): Promise<void> {
+  try {
+    // 1. Firebase Auth SignOut
+    if (auth) {
+      const { signOut } = await import('firebase/auth')
+      await signOut(auth)
+    }
+  } catch (err) {
+    console.warn('[AUTH] Aviso ao terminar sessão no Firebase:', err)
+  }
+
+  // 2. Limpeza manual de todos os vestígios no Storage
+  if (typeof window !== 'undefined') {
+    try {
+      const keysToRemove = [
+        'user',
+        'token',
+        'sb-*-auth-token',
+        'auth_user',
+        'user_display_name',
+        'user_district',
+        'user_equipped_avatar',
+        'equipped_avatar_id',
+        'equipped_arena',
+        'equipped_arena_image',
+        'equipped_title',
+        'user_equipped_title',
+        'user_coins',
+        'user_euros',
+        'user_claimed_achievements',
+        'user_consumables',
+        'user_inventory',
+        'user_unlocked_items',
+        'user_is_founder',
+        'user_inventory_emotes',
+        'user_inventory_taunts',
+        'equipped_emotes',
+        'equipped_taunts',
+        'acorda_auth_redirect_target',
+      ]
+
+      keysToRemove.forEach((k) => localStorage.removeItem(k))
+
+      // Remove tokens dinâmicos
+      const storageLength = localStorage.length
+      const keysToDelete: string[] = []
+      for (let i = 0; i < storageLength; i++) {
+        const key = localStorage.key(i)
+        if (key && (key.startsWith('sb-') || key.includes('auth-token') || key.includes('firebase:authUser'))) {
+          keysToDelete.push(key)
+        }
+      }
+      keysToDelete.forEach((k) => localStorage.removeItem(k))
+
+      sessionStorage.clear()
+    } catch (e) {
+      console.warn('[AUTH] Erro ao limpar Storage:', e)
+    }
+
+    // 3. Limpeza total de cookies
+    if (typeof document !== 'undefined') {
+      try {
+        document.cookie.split(';').forEach((cookie) => {
+          const eqPos = cookie.indexOf('=')
+          const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim()
+          if (name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';'
+          }
+        })
+      } catch (e) {
+        console.warn('[AUTH] Erro ao limpar cookies:', e)
+      }
+    }
+
+    // 4. Hard redirect para descarregar qualquer cache de sessão em memória
+    window.location.href = redirectUrl
+  }
+}
+
+export const logoutUser = performLogout

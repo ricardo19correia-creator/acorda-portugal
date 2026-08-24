@@ -5,4 +5,6 @@ export {
   getPostLoginRedirectTarget,
   setPostLoginRedirectTarget,
   isMobileDevice,
+  performLogout,
+  logoutUser,
 } from '@/lib/auth-helpers'

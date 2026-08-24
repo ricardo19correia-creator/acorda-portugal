@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import { getRedirectResult, onIdTokenChanged, browserPopupRedirectResolver, type IdTokenResult, type User } from 'firebase/auth'
 import { doc, getDoc, setDoc, onSnapshot, type Unsubscribe } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
+import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
 
 export type AuthState = {
@@ -115,6 +116,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profileRetry, setProfileRetry] = useState(0)
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
+
+  const logout = useCallback(async (redirectUrl = '/') => {
+    setUser(null)
+    setProfile(null)
+    await performLogout(redirectUrl)
+  }, [])
 
   // Firebase Auth resolution
   useEffect(() => {

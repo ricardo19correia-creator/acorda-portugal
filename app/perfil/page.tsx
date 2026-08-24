@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { 
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, 
-  User, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
+  User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
   Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle
 } from 'lucide-react'
@@ -23,6 +23,7 @@ import {
 } from 'firebase/auth'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { performLogout, handleGoogleLogin } from '@/lib/auth-helpers'
 import { UserAvatar } from '@/components/user-avatar'
 import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
 import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
@@ -832,13 +833,10 @@ function PerfilContent() {
     }
   }
 
-  // Logout de Sessão
+  // Logout de Sessão Definitivo
   const handleLogout = async () => {
     try {
-      await signOut(auth)
-      localStorage.removeItem('user_display_name')
-      showToast('Sessão terminada.')
-      router.push('/')
+      await performLogout('/')
     } catch (err) {
       console.error(err)
     }

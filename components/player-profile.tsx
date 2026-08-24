@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { signOut, updateProfile } from 'firebase/auth'
+import { updateProfile } from 'firebase/auth'
+import { performLogout } from '@/lib/auth-helpers'
 import {
   collection,
   doc,
@@ -351,10 +352,7 @@ export function PlayerProfile() {
   const logout = async () => {
     setOverride(null)
     setDraft({ displayName: '', district: 'Vila Real' })
-    if (auth) {
-      await signOut(auth)
-    }
-    router.replace('/')
+    await performLogout('/')
   }
 
   if (!authResolved) return <StateCard text="A verificar a tua conta..." />
