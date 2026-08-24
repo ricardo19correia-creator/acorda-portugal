@@ -156,8 +156,13 @@ function PerfilContent() {
   // Modais de Ação
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [deleteConfirmationText, setDeleteConfirmationText] = useState('')
+  const [deletePassword, setDeletePassword] = useState('')
+  const [deleteError, setDeleteError] = useState<string | null>(null)
+  const [needsReauth, setNeedsReauth] = useState(false)
   const [isSavingEdit, setIsSavingEdit] = useState(false)
 
   // Identificação do Provedor de Conta (Google vs Email/Password)
@@ -836,39 +841,126 @@ function PerfilContent() {
 
   // Logout de Sessão Definitivo
   const handleLogout = async () => {
+    setIsLoggingOut(true)
     try {
+      showToast('A terminar sessão...')
       await performLogout('/')
     } catch (err) {
-      console.error(err)
+      console.error('[LOGOUT ERROR]', err)
+      window.location.href = '/'
+    } finally {
+      setIsLoggingOut(false)
     }
   }
 
-  // Eliminar Conta
-  const handleDeleteAccount = async () => {
+  // Reautenticação com Google para eliminação
+  const handleReauthGoogle = async () => {
+    if (!auth.currentUser) return
     setIsDeleting(true)
+    setDeleteError(null)
     try {
-      if (auth.currentUser) {
-        const uid = auth.currentUser.uid
-        try {
-          await deleteDoc(doc(db, 'users', uid))
-          await deleteDoc(doc(db, 'publicProfiles', uid))
-        } catch (e) {
-          console.warn('Erro ao limpar documentos Firestore:', e)
-        }
-        await deleteUser(auth.currentUser)
+      const { GoogleAuthProvider, reauthenticateWithPopup } = await import('firebase/auth')
+      await reauthenticateWithPopup(auth.currentUser, new GoogleAuthProvider())
+      setNeedsReauth(false)
+      await handleDeleteAccount()
+    } catch (e: any) {
+      setDeleteError('Falha na reautenticação com a Google: ' + (e?.message || 'Tenta novamente.'))
+      setIsDeleting(false)
+    }
+  }
+
+  // Eliminar Conta Definitivamente com Limpeza em Cascata
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmationText.trim().toUpperCase() !== 'ELIMINAR') {
+      setDeleteError('Por favor escreve "ELIMINAR" para confirmar a remoção permanente.')
+      return
+    }
+
+    setIsDeleting(true)
+    setDeleteError(null)
+
+    try {
+      const currentUser = auth.currentUser
+      if (!currentUser) {
+        throw new Error('Sessão expirada. Inicia sessão novamente.')
       }
-      localStorage.clear()
-      router.push('/')
+
+      const uid = currentUser.uid
+
+      // Se for exigida reautenticação por password
+      if (needsReauth) {
+        if (!deletePassword) {
+          setDeleteError('Por favor introduz a tua palavra-passe atual para confirmar.')
+          setIsDeleting(false)
+          return
+        }
+        if (currentUser.email) {
+          const credential = EmailAuthProvider.credential(currentUser.email, deletePassword)
+          await reauthenticateWithCredential(currentUser, credential)
+        }
+      }
+
+      // 1. Limpeza em cascata no Firestore
+      try {
+        await deleteDoc(doc(db, 'users', uid))
+      } catch (e) {
+        console.warn('[DELETE] Aviso ao apagar doc users:', e)
+      }
+
+      try {
+        await deleteDoc(doc(db, 'publicProfiles', uid))
+      } catch (e) {
+        console.warn('[DELETE] Aviso ao apagar doc publicProfiles:', e)
+      }
+
+      // 2. Apagar subcoleção walletTransactions se existir
+      try {
+        const { getDocs, collection } = await import('firebase/firestore')
+        const txSnap = await getDocs(collection(db, 'users', uid, 'walletTransactions'))
+        for (const d of txSnap.docs) {
+          await deleteDoc(d.ref).catch(() => {})
+        }
+      } catch (e) {
+        console.warn('[DELETE] Aviso ao limpar walletTransactions:', e)
+      }
+
+      // 3. Eliminar conta no Firebase Authentication
+      await deleteUser(currentUser)
+
+      // 4. Limpeza total de cache local, storage e indexedDB
+      if (typeof window !== 'undefined') {
+        localStorage.clear()
+        sessionStorage.clear()
+        try {
+          window.indexedDB.deleteDatabase('firebaseLocalStorageDb')
+          window.indexedDB.deleteDatabase('firebase-heartbeat-database')
+        } catch (e) {}
+      }
+
+      // 5. Redirecionar imediatamente para a página inicial
+      window.location.href = '/?account_deleted=1'
     } catch (err: any) {
-      console.error(err)
-      if (err.code === 'auth/requires-recent-login') {
-        alert('Por motivos de segurança, por favor faz login novamente antes de eliminar a conta.')
+      console.error('[DELETE ACCOUNT ERROR]', err)
+      const code = err?.code || ''
+      if (code === 'auth/requires-recent-login' || code === 'auth/user-token-expired') {
+        setNeedsReauth(true)
+        const isGoogle = auth.currentUser?.providerData.some((p) => p.providerId === 'google.com')
+        if (isGoogle) {
+          setDeleteError('Por motivos de segurança, reautentica a tua conta Google antes de prosseguir. Clica no botão abaixo:')
+        } else {
+          setDeleteError('Por motivos de segurança, introduz a tua palavra-passe atual para confirmar a eliminação definitiva.')
+        }
+      } else if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+        setDeleteError('A palavra-passe introduzida está incorreta.')
+      } else if (code === 'auth/network-request-failed') {
+        setDeleteError('Falha de ligação à rede. Verifica a tua conexão com a Internet.')
+      } else if (code === 'auth/too-many-requests') {
+        setDeleteError('Muitas tentativas falhadas. Aguarda alguns instantes antes de tentar novamente.')
       } else {
-        alert('Erro ao eliminar a conta. Tenta novamente mais tarde.')
+        setDeleteError(err?.message || 'Ocorreu um erro ao eliminar a conta. Tenta novamente mais tarde.')
       }
     } finally {
       setIsDeleting(false)
-      setIsDeleteModalOpen(false)
     }
   }
 
@@ -2548,20 +2640,27 @@ function PerfilContent() {
               <LogOut className="w-6 h-6" />
             </div>
             <h3 className="text-base font-black text-white mb-1">Terminar Sessão?</h3>
-            <p className="text-xs text-slate-400 mb-6">Poderás voltar a entrar com a tua conta em qualquer altura.</p>
+            <p className="text-xs text-slate-400 mb-6">
+              Todos os teus dados de progresso e saldo estão guardados na nuvem. Poderás voltar a entrar a qualquer momento.
+            </p>
 
             <div className="flex items-center justify-center gap-3">
               <button
+                type="button"
+                disabled={isLoggingOut}
                 onClick={() => setIsLogoutModalOpen(false)}
-                className="cursor-pointer px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all"
+                className="cursor-pointer px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all disabled:opacity-50"
               >
                 Cancelar
               </button>
               <button
+                type="button"
+                disabled={isLoggingOut}
                 onClick={handleLogout}
-                className="cursor-pointer px-5 py-2.5 rounded-xl text-xs font-bold bg-rose-500 hover:bg-rose-400 text-white shadow-lg transition-all"
+                className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30 transition-all disabled:opacity-50"
               >
-                Sim, Terminar
+                {isLoggingOut && <div className="h-3.5 w-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />}
+                <span>{isLoggingOut ? 'A sair...' : 'Sim, Terminar Sessão'}</span>
               </button>
             </div>
           </div>
@@ -2572,32 +2671,99 @@ function PerfilContent() {
       {/* MODAL 3: ZONA DE PERIGO - ELIMINAR CONTA */}
       {/* ========================================================= */}
       {isDeleteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-md bg-slate-950 border border-rose-500/40 rounded-3xl p-6 shadow-2xl text-center">
-            <div className="w-14 h-14 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+          <div className="relative w-full max-w-md bg-slate-950 border border-rose-500/40 rounded-3xl p-6 shadow-2xl text-center my-8">
+            <div className="w-14 h-14 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-rose-500/20">
               <AlertTriangle className="w-7 h-7" />
             </div>
 
             <h3 className="text-lg font-black text-white mb-2">Eliminar Conta Definitivamente?</h3>
-            <p className="text-xs text-slate-300 leading-relaxed mb-6 bg-rose-950/40 border border-rose-500/30 p-3 rounded-xl text-left">
-              ⚠️ <strong>Atenção:</strong> Esta ação é irreversível e apagará permanentemente todo o teu progresso, XP acumulado, euros virtuais e itens cosméticos desbloqueados.
-            </p>
+            <div className="text-xs text-slate-300 leading-relaxed mb-5 bg-rose-950/40 border border-rose-500/30 p-3.5 rounded-xl text-left space-y-1.5">
+              <p className="font-bold text-rose-300 flex items-center gap-1.5">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+                Esta ação é irreversível e permanente.
+              </p>
+              <p className="text-[11px] text-slate-400">
+                Serão apagados todos os teus dados: perfil, progresso de nível, moedas virtuais, cosméticos desbloqueados e histórico de partidas.
+              </p>
+            </div>
+
+            {/* Caixa de Erro */}
+            {deleteError && (
+              <div className="mb-4 p-3 rounded-xl bg-rose-500/20 border border-rose-500/50 text-rose-300 text-xs font-semibold text-left flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-400" />
+                <span>{deleteError}</span>
+              </div>
+            )}
+
+            {/* Campo de Confirmação por Texto */}
+            <div className="space-y-3 mb-6 text-left">
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                  Para confirmar, escreve <span className="text-rose-400 font-mono font-black">ELIMINAR</span> abaixo:
+                </label>
+                <input
+                  type="text"
+                  value={deleteConfirmationText}
+                  onChange={(e) => setDeleteConfirmationText(e.target.value)}
+                  placeholder="ELIMINAR"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white font-mono text-sm tracking-wider uppercase placeholder:normal-case placeholder:text-slate-600 transition-all"
+                />
+              </div>
+
+              {/* Se for necessária reautenticação */}
+              {needsReauth && (
+                <div className="pt-2 border-t border-slate-800 space-y-3 animate-fade-in">
+                  {auth.currentUser?.providerData.some((p) => p.providerId === 'google.com') ? (
+                    <button
+                      type="button"
+                      disabled={isDeleting}
+                      onClick={handleReauthGoogle}
+                      className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
+                    >
+                      <span>Reautenticar com Google</span>
+                    </button>
+                  ) : (
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-400 mb-1">
+                        Palavra-passe Atual:
+                      </label>
+                      <input
+                        type="password"
+                        value={deletePassword}
+                        onChange={(e) => setDeletePassword(e.target.value)}
+                        placeholder="A tua palavra-passe"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-rose-500 text-white text-sm transition-all"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             <div className="flex items-center justify-center gap-3">
               <button
                 type="button"
-                onClick={() => setIsDeleteModalOpen(false)}
-                className="cursor-pointer px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all"
+                disabled={isDeleting}
+                onClick={() => {
+                  setIsDeleteModalOpen(false)
+                  setDeleteConfirmationText('')
+                  setDeletePassword('')
+                  setDeleteError(null)
+                  setNeedsReauth(false)
+                }}
+                className="cursor-pointer px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all disabled:opacity-50"
               >
                 Cancelar
               </button>
               <button
                 type="button"
-                disabled={isDeleting}
+                disabled={isDeleting || deleteConfirmationText.trim().toUpperCase() !== 'ELIMINAR'}
                 onClick={handleDeleteAccount}
-                className="cursor-pointer px-5 py-2.5 rounded-xl text-xs font-black bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30 transition-all"
+                className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {isDeleting ? 'A eliminar...' : 'Sim, Eliminar Tudo'}
+                {isDeleting && <div className="h-3.5 w-3.5 rounded-full border-2 border-white/30 border-t-white animate-spin" />}
+                <span>{isDeleting ? 'A eliminar conta...' : 'Sim, Eliminar Tudo'}</span>
               </button>
             </div>
           </div>
