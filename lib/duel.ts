@@ -111,7 +111,8 @@ export interface DuelDocument {
   playerB?: DuelPlayerData | null
   questions: DuelQuestion[]
   winnerUid?: string | null
-  winnerReason?: 'score' | 'draw' | 'abandon' | null
+  winnerReason?: 'score' | 'draw' | 'abandon' | 'surrender' | null
+  surrenderedBy?: string | null
   rewardsClaimed?: Record<string, boolean>
   rematch?: DuelRematchState | null
   lastTaunt?: DuelTaunt | null
@@ -955,7 +956,7 @@ export async function submitDuelAnswer(
 
     let newStatus: DuelStatus = duel.status === 'matched' ? 'playing' : duel.status
     let winnerUid: string | null = duel.winnerUid || null
-    let winnerReason: 'score' | 'draw' | 'abandon' | null = duel.winnerReason || null
+    let winnerReason: 'score' | 'draw' | 'abandon' | 'surrender' | null = duel.winnerReason || null
     let finishedAt: number | null = duel.finishedAt || null
 
     if (player.finished && opponent?.finished) {
@@ -1386,3 +1387,65 @@ export async function sendDuelEmote(
 
 
 
+
+/**
+ * Desistir / Abandonar Partida de Duelo 1v1
+ * Atribui vitória imediata ao adversário com reason: 'surrender'
+ */
+export async function surrenderDuel(duelId: string, surrenderingUid: string): Promise<{ success: boolean; winnerUid?: string }> {
+  try {
+    const duelRef = doc(db, 'duels', duelId)
+    const now = Date.now()
+
+    return await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(duelRef)
+      if (!snap.exists()) {
+        return { success: false }
+      }
+
+      const duel = snap.data() as DuelDocument
+      const isPlayerA = duel.playerA?.uid === surrenderingUid
+      const isPlayerB = duel.playerB?.uid === surrenderingUid
+
+      // Se a partida já estiver terminada ou o jogador não pertencer à partida
+      if (duel.status === 'finished' || (!isPlayerA && !isPlayerB)) {
+        return { success: true, winnerUid: duel.winnerUid || undefined }
+      }
+
+      const opponentUid = isPlayerA ? duel.playerB?.uid : duel.playerA?.uid
+      const winnerUid = opponentUid || null
+
+      const surrenderEvent = {
+        type: 'PLAYER_SURRENDERED',
+        event: 'player_surrendered',
+        senderId: surrenderingUid,
+        duelId,
+        surrenderedBy: surrenderingUid,
+        winnerUid,
+        timestamp: now,
+      }
+
+      const updates: Partial<DuelDocument> & Record<string, any> = {
+        status: 'finished',
+        winnerUid,
+        winnerReason: 'surrender',
+        surrenderedBy: surrenderingUid,
+        finishedAt: now,
+        lastEvent: surrenderEvent,
+      }
+
+      if (isPlayerA && duel.playerA) {
+        updates.playerA = { ...duel.playerA, finished: true, finishedAt: now }
+      } else if (isPlayerB && duel.playerB) {
+        updates.playerB = { ...duel.playerB, finished: true, finishedAt: now }
+      }
+
+      transaction.update(duelRef, updates)
+
+      return { success: true, winnerUid: winnerUid || undefined }
+    })
+  } catch (err) {
+    console.error('Erro ao desistir do duelo:', err)
+    return { success: false }
+  }
+}

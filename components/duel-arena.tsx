@@ -31,6 +31,7 @@ import {
   MessageSquare,
   Lock,
   X,
+  AlertTriangle,
 } from 'lucide-react'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
@@ -50,6 +51,7 @@ import {
   respondDuelRematch,
   sendDuelTaunt,
   sendDuelEmote,
+  surrenderDuel,
 } from '@/lib/duel'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
@@ -117,6 +119,8 @@ export function DuelArena({
   const [eliminatedOptions, setEliminatedOptions] = useState<('A' | 'B' | 'C' | 'D')[]>([])
   const [activeClue, setActiveClue] = useState<string | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
+  const [isSurrenderModalOpen, setIsSurrenderModalOpen] = useState(false)
+  const [isSurrendering, setIsSurrendering] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
   // Live Inventory
@@ -571,22 +575,47 @@ export function DuelArena({
     }
   }
 
-  // Sair / Desistir da Partida 1v1
-  const handleSurrenderAndExit = async () => {
+  // Sair / Desistir da Partida 1v1 Definitivo
+  const handleConfirmSurrender = async () => {
+    if (isSurrendering) return
+    setIsSurrendering(true)
+
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel()
     }
+
     if (duelId && currentPlayer.uid) {
       try {
-        await sendDuelEmote(duelId, currentPlayer.uid, currentPlayer.displayName, 'emote_quase', 'Desistiu da partida')
+        // 1. Notificar Firebase via surrenderDuel
+        await surrenderDuel(duelId, currentPlayer.uid)
+
+        // 2. Broadcast local e API
+        const surrenderPayload = {
+          event: 'player_surrendered',
+          type: 'PLAYER_SURRENDERED',
+          senderId: currentPlayer.uid,
+          duelId,
+          surrenderedBy: currentPlayer.uid,
+          winnerUid: opponent?.uid,
+        }
+        window.dispatchEvent(new CustomEvent('player_surrendered', { detail: surrenderPayload }))
+
         fetch('/api/duel/cancel', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ duelId, uid: currentPlayer.uid }),
+          body: JSON.stringify({ duelId, userId: currentPlayer.uid, uid: currentPlayer.uid }),
         }).catch(() => {})
-      } catch (e) {}
+      } catch (e) {
+        console.error('Erro ao desistir:', e)
+      }
     }
+
+    setIsSurrenderModalOpen(false)
     router.push('/jogar')
+  }
+
+  const handleSurrenderAndExit = () => {
+    setIsSurrenderModalOpen(true)
   }
 
   const handleCancelWaitingAndExit = async () => {
