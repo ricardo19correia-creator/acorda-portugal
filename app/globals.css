@@ -84,6 +84,7 @@
 
   html {
     background-color: transparent !important;
+    background-image: none !important;
   }
 
   body {
@@ -93,6 +94,13 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+
+  main,
+  #__next,
+  [data-nextjs-scroll-focus-boundary] {
+    background: transparent !important;
+    background-color: transparent !important;
   }
 }
 

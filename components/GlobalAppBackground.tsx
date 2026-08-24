@@ -49,6 +49,11 @@ export function GlobalAppBackground({
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
+          opacity: 1,
+          filter: 'none',
+          WebkitFilter: 'none',
+          mixBlendMode: 'normal',
+          backgroundColor: 'transparent',
         }}
       />
 
