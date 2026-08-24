@@ -13,6 +13,7 @@ import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
+import { playEmoteSound } from '@/lib/sound-engine'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -546,30 +547,37 @@ export default function LojaPage() {
         let currentEquipped = [...equippedEmotes]
         if (currentEquipped.includes(item.id)) {
           if (currentEquipped.length <= 1) {
-            showToast('Precisas de manter pelo menos 1 emote equipado!', 'error')
+            showToast('Precisas de manter pelo menos 1 provocação equipada!', 'error')
             return
           }
           currentEquipped = currentEquipped.filter((id) => id !== item.id)
-          showToast(`Emote "${item.name}" desequipado do HUD 1v1!`)
+          showToast(`Provocação "${item.name}" desequipada dos 4 atalhos!`)
         } else {
-          if (currentEquipped.length >= 8) {
-            showToast('Já tens 8 emotes equipados! Desequipa um primeiro no perfil.', 'error')
-            return
+          if (currentEquipped.length >= 4) {
+            // Replace first or add up to 4
+            currentEquipped = [item.id, currentEquipped[0], currentEquipped[1], currentEquipped[2]]
+            showToast(`Provocação "${item.name}" equipada nos teus 4 atalhos 1v1!`)
+          } else {
+            currentEquipped.push(item.id)
+            showToast(`Provocação "${item.name}" adicionada aos teus atalhos de 1v1!`)
           }
-          currentEquipped.push(item.id)
-          showToast(`Emote "${item.name}" equipado com sucesso no slot de 1v1!`)
         }
+        playEmoteSound(item.name)
         setEquippedEmotes(currentEquipped)
         localStorage.setItem('equipped_emotes', JSON.stringify(currentEquipped))
+        localStorage.setItem('equipped_taunts', JSON.stringify(currentEquipped))
         if (auth.currentUser) {
           try {
             updateDoc(doc(db, 'users', auth.currentUser.uid), {
               equippedEmotes: currentEquipped,
               'equipped.emotes': currentEquipped,
+              equippedTaunts: currentEquipped,
+              'equipped.taunts': currentEquipped,
             }).catch(() => {})
           } catch {}
         }
         window.dispatchEvent(new Event('emotesChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
@@ -1164,6 +1172,7 @@ export default function LojaPage() {
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation()
+                              playEmoteSound(item.name)
                               setTestingEmoteId(item.id)
                               setTimeout(() => setTestingEmoteId(null), 2500)
                             }}

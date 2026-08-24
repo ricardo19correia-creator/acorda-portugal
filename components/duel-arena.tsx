@@ -52,7 +52,8 @@ import {
   sendDuelEmote,
 } from '@/lib/duel'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
-import { DuelEmoteBubble, DuelEmotePicker } from '@/components/duel-emote-system'
+import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock } from '@/components/duel-emote-system'
+import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
@@ -203,10 +204,11 @@ export function DuelArena({
   // Handle sending an Emote
   const handleSendEmote = async (emote: EmoteItem) => {
     if (tauntCooldown > 0 || !duelId) return
-    setTauntCooldown(2)
+    setTauntCooldown(3)
     setTauntModalOpen(false)
 
-    // Immediate local feedback
+    // Immediate local feedback & audio chime
+    playEmoteSound(emote.label)
     const now = Date.now()
     lastProcessedEmoteTs.current = now
     setActiveEmote({

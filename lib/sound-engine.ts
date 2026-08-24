@@ -354,3 +354,38 @@ export function triggerSoundpackAudio(soundpackId: string | null | undefined, ev
     }
   }
 }
+
+// 10. Som de Reação / Emote Rápido Pop & Chime para Duelos 1v1
+export function playEmoteSound(labelOrText?: string) {
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+    const osc1 = ctx.createOscillator()
+    const osc2 = ctx.createOscillator()
+    const gain = ctx.createGain()
+
+    osc1.type = 'sine'
+    osc2.type = 'triangle'
+
+    // Dual-tone ascending pop chime (E5 -> B5 -> E6)
+    osc1.frequency.setValueAtTime(659.25, t)
+    osc1.frequency.exponentialRampToValueAtTime(1318.51, t + 0.12)
+
+    osc2.frequency.setValueAtTime(987.77, t)
+    osc2.frequency.exponentialRampToValueAtTime(1975.53, t + 0.12)
+
+    gain.gain.setValueAtTime(0.01, t)
+    gain.gain.linearRampToValueAtTime(0.28, t + 0.03)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35)
+
+    osc1.connect(gain)
+    osc2.connect(gain)
+    gain.connect(ctx.destination)
+
+    osc1.start(t)
+    osc2.start(t)
+    osc1.stop(t + 0.35)
+    osc2.stop(t + 0.35)
+  } catch (e) {}
+}

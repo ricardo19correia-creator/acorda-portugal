@@ -29,6 +29,7 @@ import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
+import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -567,51 +568,62 @@ function PerfilContent() {
     }
   }, [user, profile])
 
-  // Ação de Equipar / Desequipar Emotes no HUD 1v1
+  // Ação de Equipar / Desequipar Provocações nos 4 Atalhos Rápidos 1v1
   const handleEquipEmote = async (emoteId: string) => {
     let updated = [...equippedEmotes]
     if (updated.includes(emoteId)) return
-    if (updated.length >= 8) {
-      showToast('Já tens 8 emotes equipados! Desequipa um slot primeiro.')
-      return
+    if (updated.length >= 4) {
+      updated = [emoteId, updated[0], updated[1], updated[2]]
+      showToast('Provocação equipada nos teus 4 atalhos!')
+    } else {
+      updated.push(emoteId)
+      showToast('Provocação adicionada aos teus atalhos de 1v1!')
     }
-    updated.push(emoteId)
+    const emoteItem = getEmoteById(emoteId)
+    if (emoteItem) playEmoteSound(emoteItem.label)
     setEquippedEmotes(updated)
     localStorage.setItem('equipped_emotes', JSON.stringify(updated))
+    localStorage.setItem('equipped_taunts', JSON.stringify(updated))
     if (auth.currentUser) {
       try {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), {
           equippedEmotes: updated,
           'equipped.emotes': updated,
+          equippedTaunts: updated,
+          'equipped.taunts': updated,
         })
       } catch (e) {
         console.error(e)
       }
     }
     window.dispatchEvent(new Event('emotesChanged'))
-    showToast('Emote equipado no slot de 1v1!')
+    window.dispatchEvent(new Event('inventory_updated'))
   }
 
   const handleUnequipEmote = async (emoteId: string) => {
     if (equippedEmotes.length <= 1) {
-      showToast('Precisas de manter pelo menos 1 emote equipado!')
+      showToast('Precisas de manter pelo menos 1 provocação equipada!')
       return
     }
     const updated = equippedEmotes.filter((id) => id !== emoteId)
     setEquippedEmotes(updated)
     localStorage.setItem('equipped_emotes', JSON.stringify(updated))
+    localStorage.setItem('equipped_taunts', JSON.stringify(updated))
     if (auth.currentUser) {
       try {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), {
           equippedEmotes: updated,
           'equipped.emotes': updated,
+          equippedTaunts: updated,
+          'equipped.taunts': updated,
         })
       } catch (e) {
         console.error(e)
       }
     }
     window.dispatchEvent(new Event('emotesChanged'))
-    showToast('Emote desequipado do slot.')
+    window.dispatchEvent(new Event('inventory_updated'))
+    showToast('Provocação desequipada do atalho.')
   }
 
   // Ação de Equipar Cosmético Universal
@@ -1500,17 +1512,17 @@ function PerfilContent() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
                       <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
-                        <MessageSquare className="w-5 h-5 text-purple-400" /> Emotes Equipados no HUD 1v1 (8 Slots)
+                        <MessageSquare className="w-5 h-5 text-purple-400" /> 4 Atalhos de Provocações & Reações (1v1)
                       </h2>
-                      <p className="text-xs text-slate-400">Estes 8 emotes ficam disponíveis no botão 💬 durante as tuas partidas multiplayer em tempo real.</p>
+                      <p className="text-xs text-slate-400">Estes 4 atalhos rápidos ficam imediatamente disponíveis no botão 💬 durante as tuas partidas 1v1 em tempo real.</p>
                     </div>
                     <span className="text-xs font-black px-3 py-1 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 shrink-0">
-                      {equippedEmotes.length} / 8 Slots Usados
+                      {Math.min(4, equippedEmotes.length)} / 4 Atalhos Ativos
                     </span>
                   </div>
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {Array.from({ length: 8 }).map((_, slotIdx) => {
+                    {Array.from({ length: 4 }).map((_, slotIdx) => {
                       const emoteId = equippedEmotes[slotIdx]
                       const emote = emoteId ? getEmoteById(emoteId) : null
 
@@ -1626,6 +1638,7 @@ function PerfilContent() {
                               <button
                                 type="button"
                                 onClick={() => {
+                                  playEmoteSound(emote.label)
                                   setTestingEmoteId(emote.id)
                                   setTimeout(() => setTestingEmoteId(null), 2500)
                                 }}
