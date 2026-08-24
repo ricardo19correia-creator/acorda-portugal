@@ -23,6 +23,9 @@ import { useConsumablePowerUp } from '@/lib/economy'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { GameExitControl } from '@/components/game-exit-modal'
+import { DuelEmoteBubble, DuelEmotePicker } from '@/components/duel-emote-system'
+import { playEmoteSound } from '@/lib/sound-engine'
+import { type EmoteItem } from '@/src/data/emotes'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -370,6 +373,51 @@ export function QuizScreen({
       window.speechSynthesis.cancel()
     }
     router.push('/jogar')
+  }
+
+  // Provocações / Reações no Tabuleiro
+  const [reactionModalOpen, setReactionModalOpen] = useState(false)
+  const [reactionCooldown, setReactionCooldown] = useState(0)
+  const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
+
+  useEffect(() => {
+    if (reactionCooldown <= 0) return
+    const timer = setInterval(() => {
+      setReactionCooldown((prev) => Math.max(0, prev - 1))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [reactionCooldown])
+
+  const handleTriggerReaction = (emote: EmoteItem) => {
+    if (reactionCooldown > 0) return
+    setReactionCooldown(3)
+    setReactionModalOpen(false)
+
+    // 1. Som de áudio instantâneo
+    playEmoteSound(emote.label)
+
+    // 2. Balão animado por cima do jogador (2.5s)
+    const now = Date.now()
+    setActiveReaction({
+      icon: emote.emoji,
+      text: emote.label,
+      timestamp: now,
+    })
+    setTimeout(() => {
+      setActiveReaction(null)
+    }, 2500)
+
+    // 3. Emissão em tempo real para a sala
+    try {
+      const eventPayload = {
+        event: 'taunt',
+        type: 'PLAYER_REACTION',
+        senderId: user?.uid || profile?.uid || 'player',
+        taunt: { icon: emote.emoji, text: emote.label },
+        timestamp: now,
+      }
+      window.dispatchEvent(new CustomEvent('PLAYER_REACTION', { detail: eventPayload }))
+    } catch {}
   }
 
   return () => {
