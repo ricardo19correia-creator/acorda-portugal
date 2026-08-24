@@ -35,6 +35,7 @@ import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } fro
 import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
+import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 
 interface InventoryItem {
@@ -116,9 +117,9 @@ function PerfilContent() {
   const [title, setTitle] = useState<string>('Filho de Portugal')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [userCoins, setUserCoins] = useState<number>(803845)
-  const [userXp, setUserXp] = useState<number>(5980)
-  const [userLevel, setUserLevel] = useState<number>(2)
+  const [userCoins, setUserCoins] = useState<number>(0)
+  const [userXp, setUserXp] = useState<number>(0)
+  const [userLevel, setUserLevel] = useState<number>(1)
 
   // Abas Principais & Sub-Filtros
   const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>(
@@ -377,38 +378,38 @@ function PerfilContent() {
     setMounted(true)
     const syncProfile = () => {
       try {
-        const savedName = localStorage.getItem('user_display_name') || user?.displayName || profile?.displayName || 'Riky Moreira'
+        const savedName = profile?.displayName || user?.displayName || (typeof window !== 'undefined' ? localStorage.getItem('user_display_name') : null) || 'Jogador'
         setDisplayName(savedName)
 
-        const savedDistrict = localStorage.getItem('user_district') || profile?.district || 'Vila Real'
+        const savedDistrict = profile?.district || (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) || 'Portugal'
         setDistrict(savedDistrict)
 
-        const savedAvatar = localStorage.getItem('user_equipped_avatar') || (profile as any)?.equipped?.avatar || (profile as any)?.avatar || user?.photoURL || '/images/avatars/guardiao-vulcanico.jpg'
+        const savedAvatar = (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null) || '/images/avatars/guardiao-vulcanico.jpg'
         if (savedAvatar && !savedAvatar.includes('moldura')) {
           setAvatar(savedAvatar)
         } else {
           setAvatar('/images/avatars/guardiao-vulcanico.jpg')
         }
 
-        const savedAvatarId = localStorage.getItem('equipped_avatar_id') || (profile as any)?.equippedAvatar || 'guardiao-vulcanico'
+        const savedAvatarId = (profile as any)?.equippedAvatar || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null) || 'guardiao-vulcanico'
         if (savedAvatarId) setEquippedAvatarId(savedAvatarId)
 
-        const savedArena = localStorage.getItem('equipped_arena') || (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_ponte_2077'
+        const savedArena = (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || (typeof window !== 'undefined' ? localStorage.getItem('equipped_arena') : null) || 'arena_1'
         if (savedArena) setArena(savedArena)
 
-        const savedEmotes = localStorage.getItem('equipped_emotes')
+        const savedEmotes = typeof window !== 'undefined' ? localStorage.getItem('equipped_emotes') : null
         if (savedEmotes) {
           try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
         }
-        const savedTitle = localStorage.getItem('equipped_title') || (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || 'Filho de Portugal'
+        const savedTitle = (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : null) || 'Membro Fundador'
         if (savedTitle) setTitle(savedTitle)
 
-        const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || (profile?.euros ?? 803845)
-        if (savedCoins) setUserCoins(Number(savedCoins))
+        const liveBalance = profile?.coins ?? profile?.euros ?? (typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || 0) : 0)
+        setUserCoins(liveBalance)
 
-        const currentXp = profile?.xp ?? 5980
+        const currentXp = profile?.xp ?? 0
         setUserXp(currentXp)
-        setUserLevel(profile?.level ?? (Math.floor(currentXp / 1000) + 1))
+        setUserLevel(profile?.level ?? calculateLevelProgress(currentXp).currentLevel.level)
 
         const savedClaimed = localStorage.getItem('user_claimed_achievements')
         if (savedClaimed) {
@@ -489,7 +490,7 @@ function PerfilContent() {
             }
             if (typeof data.xp === 'number') {
               setUserXp(data.xp)
-              setUserLevel(Math.floor(data.xp / 1000) + 1)
+              setUserLevel(data.level ?? calculateLevelProgress(data.xp).currentLevel.level)
             }
             if (data.claimedAchievements) {
               setClaimedAchievements((prev) => ({ ...prev, ...data.claimedAchievements }))

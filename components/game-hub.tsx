@@ -147,7 +147,7 @@ export function GameHub() {
             <div className="flex items-center gap-3 mt-1 text-xs">
               <span className="flex items-center gap-1 font-bold text-gold">
                 <Coins className="h-3.5 w-3.5" />
-                €{(profile?.euros || 0).toLocaleString('pt-PT')}
+                €{((profile?.coins ?? profile?.euros) || 0).toLocaleString('pt-PT')}
               </span>
               <span className="flex items-center gap-1 font-bold text-flag-red">
                 <Flame className="h-3.5 w-3.5 fill-current" />

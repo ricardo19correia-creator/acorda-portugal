@@ -481,7 +481,7 @@ export function PlayerProfile() {
     [Sparkles, 'Taxa de acerto', `${accuracy.toFixed(1)}%`, 'text-gold'],
     [Gamepad2, 'Partidas jogadas', format(player.gamesPlayed ?? 0), 'text-primary'],
     [Sparkles, 'XP total acumulado', format(player.xp ?? 0), 'text-accent'],
-    [Coins, 'Euros Acorda ganhos', `€${format(player.euros ?? 0)}`, 'text-gold'],
+    [Coins, 'Euros Acorda ganhos', `€${format(player.coins ?? player.euros ?? 0)}`, 'text-gold'],
     [Flame, 'Melhor sequência', `${player.bestStreak ?? 0} dias`, 'text-flag-red'],
   ] as const
 
@@ -767,7 +767,7 @@ export function PlayerProfile() {
                 Saldo Disponível
               </p>
               <p className="mt-0.5 font-display text-4xl font-black text-foreground tracking-tight">
-                €{format(player.euros)}
+                €{format(player.coins ?? player.euros ?? 0)}
               </p>
               <p className="text-[0.68rem] text-muted-foreground mt-0.5">
                 € Acorda (Moeda virtual para extras e cosméticos)

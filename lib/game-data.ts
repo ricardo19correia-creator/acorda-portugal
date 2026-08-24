@@ -218,6 +218,8 @@ export type Player = {
 }
 
 export type EquippedCosmetics = {
+  avatar?: string | null
+  arena?: string | null
   frame?: string | null
   title?: string | null
   theme?: string | null
@@ -249,11 +251,12 @@ export type UserProfile = {
   bestStreak: number
   unlockedAchievements: string[]
   badges?: string[]
+  equippedTitle?: string
   consumables?: {
     help5050?: number
     freezeTime?: number
   }
-  inventory?: Record<string, number>
+  inventory?: any
   equipped?: EquippedCosmetics
   createdAt?: unknown
   lastActiveAt?: unknown

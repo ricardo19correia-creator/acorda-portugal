@@ -52,7 +52,7 @@ export function PlayerCard({ user, profile, className }: { user: User; profile: 
             </span>
             <span className="flex items-center gap-1.5 rounded-lg bg-gold/15 px-2 py-1 text-xs font-bold text-gold">
               <Coins className="h-3.5 w-3.5" />
-              €{profile.euros.toLocaleString('pt-PT')}
+              €{(profile.coins ?? profile.euros ?? 0).toLocaleString('pt-PT')}
             </span>
           </div>
         </div>

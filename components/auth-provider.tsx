@@ -2,10 +2,11 @@
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { getRedirectResult, onIdTokenChanged, browserPopupRedirectResolver, type IdTokenResult, type User } from 'firebase/auth'
-import { doc, getDoc, setDoc, onSnapshot, type Unsubscribe } from 'firebase/firestore'
+import { doc, getDoc, setDoc, onSnapshot, serverTimestamp, type Unsubscribe } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
+import { calculateLevelProgress } from '@/lib/progression'
 
 export type AuthState = {
   user: User | null
@@ -18,38 +19,19 @@ export type AuthState = {
 }
 
 const AuthContext = createContext<AuthState | null>(null)
-const FIRESTORE_TIMEOUT_MS = 10_000
 const AUTH_RESOLUTION_TIMEOUT_MS = 12_000
-
-function withFirestoreTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
-      reject(new Error(`${operation} excedeu o tempo limite.`))
-    }, FIRESTORE_TIMEOUT_MS)
-
-    promise.then(
-      (value) => {
-        clearTimeout(timeoutId)
-        resolve(value)
-      },
-      (error: unknown) => {
-        clearTimeout(timeoutId)
-        reject(error)
-      },
-    )
-  })
-}
 
 function createDefaultUserProfile(user: User): UserProfile {
   return {
     uid: user.uid,
     displayName: user.displayName ?? 'Jogador',
     email: user.email ?? '',
-    photoURL: user.photoURL ?? '',
+    photoURL: user.photoURL ?? '/images/avatars/guardiao-vulcanico.jpg',
     district: 'Vila Real',
     level: 1,
     xp: 0,
-    euros: 100,
+    euros: 0,
+    coins: 0,
     streak: 0,
     gamesPlayed: 0,
     wins: 0,
@@ -61,6 +43,12 @@ function createDefaultUserProfile(user: User): UserProfile {
     bestStreak: 0,
     unlockedAchievements: [],
     badges: [],
+    equipped: {
+      avatar: '/images/avatars/guardiao-vulcanico.jpg',
+      title: 'Membro Fundador',
+      arena: 'arena_1',
+    },
+    equippedTitle: 'Membro Fundador',
   }
 }
 
@@ -76,35 +64,9 @@ function profileErrorMessage(error: unknown): string {
   return `Não foi possível carregar o teu perfil no Firestore. [Firebase: ${detail}]`
 }
 
-function getProfileAuthDiagnostic(user: User, tokenResult?: IdTokenResult, hasIdToken?: boolean) {
-  const currentUser = auth.currentUser
-
-  return {
-    useAuthUserUid: user.uid,
-    authCurrentUserUid: currentUser?.uid ?? null,
-    authCurrentUserEmail: currentUser?.email ?? null,
-    authCurrentUserEmailVerified: currentUser?.emailVerified ?? null,
-    authCurrentUserIsAnonymous: currentUser?.isAnonymous ?? null,
-    authCurrentUserProviderData: currentUser?.providerData.map((provider) => ({
-      providerId: provider.providerId,
-      uid: provider.uid,
-      email: provider.email,
-      displayName: provider.displayName,
-    })) ?? [],
-    firebaseProjectId: auth.app.options.projectId ?? null,
-    firebaseAuthDomain: auth.app.options.authDomain ?? null,
-    firestoreProjectId: db.app.options.projectId ?? null,
-    origin: typeof window !== 'undefined' ? window.location.origin : '',
-    profileDocumentPath: `users/${user.uid}`,
-    authCurrentUserMatchesUseAuthUid: currentUser?.uid === user.uid,
-    authCurrentUserIsUseAuthUser: currentUser === user,
-    idTokenAvailable: hasIdToken ?? false,
-  }
-}
-
 /**
  * The single Firebase Authentication subscription for the application.
- * Manages real user identity and Firestore profile synchronization.
+ * Manages real user identity and Firestore profile synchronization in real-time.
  */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -118,93 +80,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
 
   const logout = useCallback(async (redirectUrl = '/') => {
-    setUser(null)
-    setProfile(null)
-    await performLogout(redirectUrl)
+    try {
+      await performLogout(redirectUrl)
+    } catch (err) {
+      console.error('[AUTH] Erro ao terminar sessão:', err)
+      window.location.href = redirectUrl
+    }
   }, [])
 
-  // Firebase Auth resolution
+  // 1. Firebase Auth state listener
   useEffect(() => {
     let isMounted = true
-    let redirectCheckComplete = false
-    let authListenerFired = false
-    let pendingUser: User | null = null
-
-    const finalizeResolution = () => {
-      if (!isMounted) return
-
-      const finalUser = auth.currentUser || pendingUser
-      setUser(finalUser)
-      setAuthInitializationError(null)
-      setAuthResolved(true)
-    }
+    let unsubscribe: (() => void) | undefined
 
     const resolutionTimeout = window.setTimeout(() => {
       if (!isMounted) return
-      console.warn('[AUTH DIAGNOSTIC] Timeout de resolução de autenticação atingido.')
-      finalizeResolution()
+      setAuthResolved((resolved) => {
+        if (!resolved) {
+          console.warn('[AUTH DIAGNOSTIC] Timeout ao aguardar autenticação inicial do Firebase.')
+          return true
+        }
+        return resolved
+      })
     }, AUTH_RESOLUTION_TIMEOUT_MS)
 
-    // 1. Process redirect result from OAuth flow
-    getRedirectResult(auth, browserPopupRedirectResolver)
-      .then((result) => {
-        redirectCheckComplete = true
-        if (result?.user) {
-          pendingUser = result.user
-          if (isMounted) {
-            setUser(result.user)
-          }
-        }
-        if (authListenerFired) {
-          window.clearTimeout(resolutionTimeout)
-          finalizeResolution()
-        }
-      })
-      .catch((error) => {
-        redirectCheckComplete = true
-        console.error('[AUTH DIAGNOSTIC] Erro em getRedirectResult:', error)
-        if (authListenerFired) {
-          window.clearTimeout(resolutionTimeout)
-          finalizeResolution()
-        }
+    try {
+      // Process redirect login result if any
+      getRedirectResult(auth, browserPopupRedirectResolver).catch((redirectError) => {
+        console.warn('[AUTH DIAGNOSTIC] Aviso getRedirectResult:', redirectError)
       })
 
-    // 2. Subscribe to auth / token changes
-    let unsubscribe: (() => void) | undefined
-    try {
       unsubscribe = onIdTokenChanged(
         auth,
-        (currentUser) => {
-          authListenerFired = true
-          pendingUser = currentUser
-
-          if (currentUser) {
-            window.clearTimeout(resolutionTimeout)
-            finalizeResolution()
-          } else if (redirectCheckComplete) {
-            window.clearTimeout(resolutionTimeout)
-            finalizeResolution()
-          }
+        (currentAuthUser) => {
+          if (!isMounted) return
+          window.clearTimeout(resolutionTimeout)
+          setUser(currentAuthUser)
+          setAuthInitializationError(null)
+          setAuthResolved(true)
         },
         (error) => {
-          authListenerFired = true
-          console.error('[AUTH DIAGNOSTIC] Erro em onIdTokenChanged:', error)
+          if (!isMounted) return
           window.clearTimeout(resolutionTimeout)
-          if (isMounted) {
-            const firebaseError = error as { code?: unknown; message?: unknown }
-            const detail = typeof firebaseError.code === 'string'
-              ? firebaseError.code
-              : typeof firebaseError.message === 'string'
-                ? firebaseError.message
-                : 'erro desconhecido'
-            setAuthInitializationError(`Não foi possível verificar a sessão no Firebase Authentication. [Firebase: ${detail}]`)
-            setUser(null)
-            setAuthResolved(true)
-          }
+          const detail = typeof error?.message === 'string' ? error.message : 'erro de autenticação'
+          setAuthInitializationError(`Não foi possível verificar a sessão no Firebase Authentication. [${detail}]`)
+          setUser(null)
+          setAuthResolved(true)
         },
       )
     } catch (error) {
-      console.error('[AUTH DIAGNOSTIC] Falha ao registar listener:', error)
       window.clearTimeout(resolutionTimeout)
       if (isMounted) {
         setAuthInitializationError('Não foi possível iniciar Firebase Authentication.')
@@ -220,121 +144,120 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Cloud Profile Synchronization (com onSnapshot em tempo real)
+  // 2. SUBSCRIÇÃO EM TEMPO REAL CENTRAL (Firestore onSnapshot)
   useEffect(() => {
-    if (!authResolved) {
-      return
-    }
-
-    let isMounted = true
-    let unsubSnapshot: Unsubscribe | null = null
-
-    if (!user) {
+    if (!user?.uid) {
       setProfile(null)
-      setProfileError(null)
       setProfileLoading(false)
+      setProfileError(null)
       return
     }
 
-    const initializeAndSubscribeProfile = async () => {
-      setProfileError(null)
-      setProfileLoading(true)
+    setProfileLoading(true)
+    let isMounted = true
+    const userDocRef = doc(db, 'users', user.uid)
 
-      let authDiagnostic = getProfileAuthDiagnostic(user)
+    const unsubscribe = onSnapshot(
+      userDocRef,
+      async (docSnap) => {
+        if (!isMounted) return
 
-      try {
-        const currentAuthUser = auth.currentUser
-        if (!currentAuthUser) {
-          throw new Error('Firebase Auth inconsistency: useAuth() returned a user but auth.currentUser is null.')
-        }
+        if (docSnap.exists()) {
+          const userData = docSnap.data()
+          const liveBalance = userData.coins ?? userData.euros ?? userData.acordaCoins ?? 0
+          const liveXp = userData.xp ?? 0
+          const liveLevel = userData.level ?? calculateLevelProgress(liveXp).currentLevel.level
 
-        const idToken = await currentAuthUser.getIdToken()
-        const tokenResult = await currentAuthUser.getIdTokenResult()
-        authDiagnostic = getProfileAuthDiagnostic(user, tokenResult, Boolean(idToken))
-
-        if (!idToken) {
-          throw new Error('Firebase Auth returned an empty ID token for the current user.')
-        }
-
-        const userRef = doc(db, 'users', currentAuthUser.uid)
-        const snapshot = await withFirestoreTimeout(getDoc(userRef), 'A leitura do perfil')
-        let initialProfile: UserProfile
-
-        if (snapshot.exists()) {
-          const cloudData = snapshot.data() as UserProfile
-          initialProfile = {
-            ...createDefaultUserProfile(user),
-            ...cloudData,
+          const liveProfile: UserProfile = {
             uid: user.uid,
+            displayName: userData.displayName || userData.username || userData.name || user.displayName || 'Jogador',
+            email: user.email || userData.email || '',
+            photoURL: userData.photoURL || userData.avatar || user.photoURL || '/images/avatars/guardiao-vulcanico.jpg',
+            district: userData.district || 'Portugal',
+            level: liveLevel,
+            xp: liveXp,
+            coins: liveBalance,
+            euros: liveBalance,
+            streak: userData.streak ?? 0,
+            gamesPlayed: userData.gamesPlayed ?? 0,
+            wins: userData.wins ?? 0,
+            losses: userData.losses ?? 0,
+            questionsAnswered: userData.questionsAnswered ?? 0,
+            correctAnswers: userData.correctAnswers ?? 0,
+            incorrectAnswers: userData.incorrectAnswers ?? 0,
+            totalQuestions: userData.totalQuestions ?? 0,
+            bestStreak: userData.bestStreak ?? 0,
+            unlockedAchievements: userData.unlockedAchievements || [],
+            badges: userData.badges || [],
+            equipped: userData.equipped || {},
+            equippedTitle: userData.equippedTitle || userData.title || (userData.equipped as any)?.title || 'Membro Fundador',
+            inventory: userData.inventory || {},
+          }
+
+          setProfile(liveProfile)
+          setProfileLoading(false)
+          setProfileError(null)
+
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('user_coins', String(liveBalance))
+            localStorage.setItem('user_euros', String(liveBalance))
+            localStorage.setItem('user_display_name', liveProfile.displayName)
+            localStorage.setItem('user_district', liveProfile.district)
+            if (liveProfile.photoURL) localStorage.setItem('user_equipped_avatar', liveProfile.photoURL)
+            if (liveProfile.equippedTitle) localStorage.setItem('equipped_title', liveProfile.equippedTitle)
+          }
+
+          // Sincronizar publicProfiles para rankings nacionais
+          try {
+            const publicProfileRef = doc(db, 'publicProfiles', user.uid)
+            await setDoc(
+              publicProfileRef,
+              {
+                uid: user.uid,
+                displayName: liveProfile.displayName,
+                photoURL: liveProfile.photoURL || null,
+                district: liveProfile.district,
+                level: liveProfile.level,
+                xp: liveProfile.xp,
+                equippedTitle: liveProfile.equippedTitle,
+                updatedAt: serverTimestamp(),
+              },
+              { merge: true },
+            )
+          } catch (syncErr) {
+            console.warn('[AUTH] Aviso ao sincronizar publicProfiles:', syncErr)
           }
         } else {
-          initialProfile = createDefaultUserProfile(user)
-          await withFirestoreTimeout(setDoc(userRef, initialProfile), 'A criação do perfil')
+          // Documento não existe ainda -> cria perfil padrão no Firestore
+          const defaultProf: UserProfile = {
+            ...createDefaultUserProfile(user),
+            uid: user.uid,
+          }
+          try {
+            await setDoc(userDocRef, defaultProf, { merge: true })
+          } catch (createErr) {
+            console.warn('[AUTH] Erro ao criar documento inicial no Firestore:', createErr)
+          }
+          if (isMounted) {
+            setProfile(defaultProf)
+            setProfileLoading(false)
+          }
         }
-
-        // Sincronizar perfil público para ranking nacional
-        try {
-          const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
-          await setDoc(
-            publicProfileRef,
-            {
-              uid: currentAuthUser.uid,
-              displayName: initialProfile.displayName || 'Jogador',
-              photoURL: initialProfile.photoURL || null,
-              district: initialProfile.district || 'Portugal',
-              level: initialProfile.level || 1,
-              xp: initialProfile.xp || 0,
-            },
-            { merge: true },
-          )
-        } catch (syncErr) {
-          console.warn('[AUTH DIAGNOSTIC] Aviso ao sincronizar perfil público:', syncErr)
-        }
-
-        if (isMounted) {
-          setProfile(initialProfile)
-          setProfileLoading(false)
-        }
-
-        // Subscrição em TEMPO REAL para refletir compras, cosméticos e saldo instantaneamente
-        unsubSnapshot = onSnapshot(
-          userRef,
-          (docSnap) => {
-            if (!isMounted) return
-            if (docSnap.exists()) {
-              const liveData = docSnap.data() as UserProfile
-              setProfile((prev) => ({
-                ...(prev || createDefaultUserProfile(user)),
-                ...liveData,
-                uid: user.uid,
-              }))
-            }
-          },
-          (err) => {
-            console.warn('[AUTH DIAGNOSTIC] Erro no listener do perfil:', err)
-          },
-        )
-      } catch (error) {
-        console.error('[AUTH DIAGNOSTIC] Erro Firestore ao sincronizar perfil:', {
-          diagnostic: authDiagnostic,
-          error,
-        })
+      },
+      (error) => {
+        console.error('Erro no listener de dados do utilizador:', error)
         if (isMounted) {
           setProfileError(profileErrorMessage(error))
           setProfileLoading(false)
         }
-      }
-    }
-
-    void initializeAndSubscribeProfile()
+      },
+    )
 
     return () => {
       isMounted = false
-      if (unsubSnapshot) {
-        unsubSnapshot()
-      }
+      unsubscribe()
     }
-  }, [authResolved, user, profileRetry])
+  }, [user?.uid, profileRetry])
 
   return (
     <AuthContext.Provider
