@@ -33,6 +33,7 @@ import {
   sendRoomHeartbeat,
   createDuel,
   joinDuelByCode,
+  resolveUserAvatar,
 } from '@/lib/duel'
 import { OFFICIAL_ARENAS, getArenaById, type Arena } from '@/data/shopArenas'
 import { cn } from '@/lib/utils'
@@ -76,7 +77,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
   const playerUid = user?.uid || auth.currentUser?.uid || sessionGuestId
   const playerName = profile?.displayName || user?.displayName || (playAsGuest ? `Convidado #${sessionGuestId.slice(-4)}` : 'Jogador')
-  const playerPhoto = user?.photoURL || null
+  const playerPhoto = resolveUserAvatar(user, profile)
   const playerLevel = profile?.level || 1
   const playerDistrict = profile?.district || 'Portugal'
 
@@ -176,9 +177,14 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     if (incomingTicket) {
       setTicket(incomingTicket)
     } else if (opponentInfo) {
+      const oppPhoto =
+        opponentInfo.photoURL ||
+        (opponentInfo as any).avatarUrl ||
+        (opponentInfo as any).avatar ||
+        null
       const normalizedOpponent = {
         displayName: opponentInfo.displayName,
-        photoURL: opponentInfo.photoURL ?? null,
+        photoURL: oppPhoto,
         level: opponentInfo.level ?? 1,
         district: opponentInfo.district ?? 'Portugal',
       }
@@ -790,7 +796,13 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                 <div className="mt-6 flex items-center justify-center gap-3 sm:gap-6 rounded-3xl border border-emerald-500/50 bg-black/60 p-5 sm:p-7 shadow-2xl backdrop-blur-xl">
                   {/* Player A */}
                   <div className="flex flex-col items-center flex-1 min-w-0">
-                    <PlayerAvatar profile={profile ?? undefined} displayName={playerName || 'Tu'} isCurrentUser={true} size="lg" />
+                    <PlayerAvatar
+                      profile={profile ?? undefined}
+                      photoURL={playerPhoto}
+                      displayName={playerName || 'Tu'}
+                      isCurrentUser={true}
+                      size="lg"
+                    />
                     <span className="mt-2.5 font-display text-xs sm:text-sm font-black text-foreground truncate max-w-[110px]">
                       {playerName || 'Tu'}
                     </span>
