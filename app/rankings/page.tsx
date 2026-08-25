@@ -189,6 +189,9 @@ export default function RankingsPage() {
     )
   }, [districtStatsMap, selectedDistrict])
 
+  const firstPlayer = useMemo(() => players[0] || null, [players])
+  const secondPlayer = useMemo(() => players[1] || null, [players])
+  const thirdPlayer = useMemo(() => players[2] || null, [players])
   const top3 = useMemo(() => players.slice(0, 3), [players])
   const restPlayers = useMemo(() => players.slice(3, rankingLimit), [players, rankingLimit])
 
@@ -573,17 +576,40 @@ export default function RankingsPage() {
               </div>
             )}
 
-            {/* PÓDIO DOS 3 PRIMEIROS CLASSIFICADOS */}
-            {!loading && top3.length > 0 && (
+            {/* PÓDIO DOS 3 PRIMEIROS CLASSIFICADOS (Condicional Estrita Sem Mocks/Bots) */}
+            {!loading && (firstPlayer || secondPlayer || thirdPlayer) && (
               <div className="mb-10 max-w-3xl mx-auto">
                 <div className="grid grid-cols-3 items-end gap-2.5 sm:gap-6">
-                  {PODIUM_ORDER.map((posIndex) => {
-                    const player = top3[posIndex]
-                    if (!player) {
-                      const emptyPos = posIndex === 1 ? 2 : posIndex === 0 ? 1 : 3
+                  {[
+                    {
+                      slotPlayer: secondPlayer,
+                      slotRank: 2,
+                      heightClass: 'h-36 sm:h-44',
+                      podiumBg: 'bg-gradient-to-b from-slate-300/20 via-slate-300/5 to-transparent border-slate-300/30 shadow-[0_0_20px_rgba(203,213,225,0.2)]',
+                      badgeBg: 'bg-slate-200 text-slate-950 ring-2 ring-white/50',
+                      avatarSize: 'lg' as const,
+                    },
+                    {
+                      slotPlayer: firstPlayer,
+                      slotRank: 1,
+                      heightClass: 'h-44 sm:h-52',
+                      podiumBg: 'bg-gradient-to-b from-amber-500/25 via-amber-500/10 to-transparent border-amber-500/40 shadow-[0_0_30px_rgba(245,158,11,0.3)]',
+                      badgeBg: 'bg-amber-400 text-slate-950 ring-2 ring-amber-300',
+                      avatarSize: 'xl' as const,
+                    },
+                    {
+                      slotPlayer: thirdPlayer,
+                      slotRank: 3,
+                      heightClass: 'h-32 sm:h-38',
+                      podiumBg: 'bg-gradient-to-b from-amber-700/25 via-amber-700/5 to-transparent border-amber-700/30 shadow-[0_0_20px_rgba(180,83,9,0.2)]',
+                      badgeBg: 'bg-amber-700 text-white ring-2 ring-amber-600',
+                      avatarSize: 'lg' as const,
+                    },
+                  ].map(({ slotPlayer, slotRank, heightClass, podiumBg, badgeBg, avatarSize }) => {
+                    if (!slotPlayer) {
                       return (
                         <div
-                          key={`empty-podium-${posIndex}`}
+                          key={`empty-podium-slot-${slotRank}`}
                           className="flex flex-col items-center opacity-40 hover:opacity-70 transition-opacity"
                         >
                           <div className="h-8 mb-1" />
@@ -592,18 +618,18 @@ export default function RankingsPage() {
                           </div>
                           <div className="mt-3 text-center">
                             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
-                              Posição {emptyPos}º
+                              Posição {slotRank}º
                             </span>
                             <span className="text-[9px] text-slate-600">Disponível</span>
                           </div>
                           <div
                             className={cn(
                               'mt-3 flex w-full flex-col items-center justify-end rounded-t-3xl border border-dashed border-white/10 pb-3 pt-3 bg-white/[0.02]',
-                              posIndex === 0 ? 'h-44 sm:h-52' : posIndex === 1 ? 'h-36 sm:h-44' : 'h-32 sm:h-38'
+                              heightClass
                             )}
                           >
                             <span className="grid h-7 w-7 place-items-center rounded-xl bg-slate-900 text-slate-500 text-xs font-black border border-white/10">
-                              {emptyPos}º
+                              {slotRank}º
                             </span>
                             <span className="mt-1 text-[10px] text-slate-500 font-mono">-- XP</span>
                           </div>
@@ -611,15 +637,13 @@ export default function RankingsPage() {
                       )
                     }
 
-                    const isCurrent = Boolean(user?.uid && player.uid === user.uid)
-                    const isFirst = player.pos === 1
-                    const isSecond = player.pos === 2
-                    const isThird = player.pos === 3
+                    const isCurrent = Boolean(user?.uid && slotPlayer.uid === user.uid)
+                    const isFirst = slotRank === 1
 
                     return (
                       <div
-                        key={player.uid}
-                        onClick={() => handleSelectPlayer(player)}
+                        key={slotPlayer.uid}
+                        onClick={() => handleSelectPlayer(slotPlayer)}
                         className="cursor-pointer group flex flex-col items-center transition-all duration-300 hover:-translate-y-1.5"
                       >
                         {/* Coroa no 1º Lugar */}
@@ -634,11 +658,11 @@ export default function RankingsPage() {
                         {/* Avatar com Moldura Viva */}
                         <div className="relative">
                           <UserAvatar
-                            src={isCurrent ? userDisplayAvatar : player.photoURL}
-                            activeFrame={player.equippedFrame}
-                            equippedFrame={player.equippedFrame}
-                            size={isFirst ? 'xl' : 'lg'}
-                            rank={player.pos}
+                            src={isCurrent ? userDisplayAvatar : slotPlayer.photoURL}
+                            activeFrame={slotPlayer.equippedFrame}
+                            equippedFrame={slotPlayer.equippedFrame}
+                            size={avatarSize}
+                            rank={slotRank}
                             isCurrentUser={isCurrent}
                           />
                         </div>
@@ -646,13 +670,13 @@ export default function RankingsPage() {
                         {/* Nome e Título */}
                         <div className="mt-3 flex flex-col items-center text-center w-full px-1">
                           <span className="truncate max-w-[110px] sm:max-w-[160px] text-xs sm:text-base font-black text-white group-hover:text-emerald-300 transition-colors">
-                            {player.displayName}
+                            {slotPlayer.displayName}
                           </span>
                           <span className="inline-block mt-0.5 max-w-[100px] sm:max-w-[140px] truncate px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-[9px] sm:text-[10px] font-bold text-amber-300 tracking-wide">
-                            {player.title || 'Jogador'}
+                            {slotPlayer.title || 'Jogador'}
                           </span>
                           <span className="text-[10px] text-slate-400 mt-0.5 truncate">
-                            {player.district}
+                            {slotPlayer.district}
                           </span>
                         </div>
 
@@ -660,34 +684,27 @@ export default function RankingsPage() {
                         <div
                           className={cn(
                             'mt-3 flex w-full flex-col items-center justify-end rounded-t-3xl border border-b-0 pb-4 pt-4 transition-all shadow-xl',
-                            isFirst
-                              ? 'h-44 sm:h-52 bg-gradient-to-b from-amber-500/25 via-amber-500/10 to-transparent border-amber-500/40 shadow-[0_0_30px_rgba(245,158,11,0.3)]'
-                              : isSecond
-                              ? 'h-36 sm:h-44 bg-gradient-to-b from-slate-300/20 via-slate-300/5 to-transparent border-slate-300/30 shadow-[0_0_20px_rgba(203,213,225,0.2)]'
-                              : 'h-32 sm:h-38 bg-gradient-to-b from-amber-700/25 via-amber-700/5 to-transparent border-amber-700/30 shadow-[0_0_20px_rgba(180,83,9,0.2)]'
+                            podiumBg,
+                            heightClass
                           )}
                         >
                           <span
                             className={cn(
                               'grid h-8 w-8 sm:h-10 sm:w-10 place-items-center rounded-2xl font-display text-sm sm:text-base font-black shadow-md',
-                              isFirst
-                                ? 'bg-amber-400 text-slate-950 ring-2 ring-amber-300'
-                                : isSecond
-                                ? 'bg-slate-200 text-slate-950 ring-2 ring-white/50'
-                                : 'bg-amber-700 text-white ring-2 ring-amber-600'
+                              badgeBg
                             )}
                           >
-                            {player.pos}º
+                            {slotRank}º
                           </span>
 
                           <span className="mt-2 font-display text-xs sm:text-base font-black text-white">
                             {mode === 'duelos'
-                              ? `${player.wins1v1 || 0} Vitórias`
-                              : `${player.xp.toLocaleString('pt-PT')} XP`}
+                              ? `${slotPlayer.wins1v1 || 0} Vitórias`
+                              : `${slotPlayer.xp.toLocaleString('pt-PT')} XP`}
                           </span>
 
                           <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-400">
-                            Nível {player.level}
+                            Nível {slotPlayer.level}
                           </span>
                         </div>
                       </div>
