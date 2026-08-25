@@ -1,4 +1,4 @@
-export const PORTUGAL_DISTRICTS = [
+export const VALID_DISTRICTS = [
   'Aveiro',
   'Beja',
   'Braga',
@@ -21,4 +21,6 @@ export const PORTUGAL_DISTRICTS = [
   'Madeira',
 ] as const
 
-export type PortugalDistrict = (typeof PORTUGAL_DISTRICTS)[number]
+export const PORTUGAL_DISTRICTS = VALID_DISTRICTS
+export type ValidDistrict = (typeof VALID_DISTRICTS)[number]
+export type PortugalDistrict = ValidDistrict

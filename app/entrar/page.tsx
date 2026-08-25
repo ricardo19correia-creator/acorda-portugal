@@ -44,7 +44,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTarget = sanitizeRedirectUrl(searchParams.get('redirect'), '/jogar')
-  const { user, profile, authResolved } = useAuth()
+  const { user, profile, authResolved, needsDistrictSelection } = useAuth()
   const initialMode =
     searchParams.get('mode') === 'register'
       ? 'register'
@@ -65,32 +65,16 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   const [error, setError] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
-  // Onboarding de Primeiro Acesso (caso falte distrito ou não esteja bloqueado)
-  const [showOnboarding, setShowOnboarding] = useState(false)
-  const [onboardingDistrict, setOnboardingDistrict] = useState<string>('')
-  const [onboardingSaving, setOnboardingSaving] = useState(false)
-
   // Hook que processa retorno do redirecionamento do Google de forma resiliente
   useCheckRedirectLogin(redirectTarget, (err) => setError(err))
 
-  // Verificar se o utilizador autenticado precisa de Onboarding de Distrito
+  // Redirecionar apenas quando o utilizador estiver autenticado E já tiver distrito confirmado
   useEffect(() => {
-    if (authResolved && user) {
-      if (profile) {
-        const needsDistrict =
-          !profile.district ||
-          profile.district === 'Portugal' ||
-          !profile.districtLocked
-
-        if (needsDistrict) {
-          setShowOnboarding(true)
-        } else {
-          const destination = getPostLoginRedirectTarget(redirectTarget)
-          router.push(destination)
-        }
-      }
+    if (authResolved && user && profile && !needsDistrictSelection) {
+      const destination = getPostLoginRedirectTarget(redirectTarget)
+      router.push(destination)
     }
-  }, [user, profile, authResolved, redirectTarget, router])
+  }, [user, profile, authResolved, needsDistrictSelection, redirectTarget, router])
 
   // Email / Password Login
   const handleEmailLogin = async (e: React.FormEvent) => {
@@ -231,113 +215,9 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
     }
   }
 
-  // Guardar Onboarding de Distrito para Google Login
-  const handleConfirmOnboardingDistrict = async () => {
-    if (!user?.uid || !db) return
-    if (!onboardingDistrict) {
-      setError('Por favor escolhe obrigatoriamente o teu Distrito de Representação.')
-      return
-    }
-    setOnboardingSaving(true)
-    try {
-      const userRef = doc(db, 'users', user.uid)
-      await updateDoc(userRef, {
-        district: onboardingDistrict,
-        districtLocked: true,
-        updatedAt: serverTimestamp(),
-      })
-
-      const publicRef = doc(db, 'publicProfiles', user.uid)
-      await setDoc(
-        publicRef,
-        {
-          district: onboardingDistrict,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      )
-
-      setShowOnboarding(false)
-      const destination = getPostLoginRedirectTarget(redirectTarget)
-      router.push(destination)
-    } catch (err) {
-      console.error('[ONBOARDING] Erro ao guardar distrito:', err)
-      setError('Não foi possível guardar o distrito. Tenta novamente.')
-      setOnboardingSaving(false)
-    }
-  }
-
   return (
     <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden bg-background">
       <BackgroundFx variant="home" />
-
-      {/* MODAL DE ONBOARDING TERRITORIAL (PRIMEIRO LOGIN GOOGLE / SEM DISTRITO BLOQUEADO) */}
-      {showOnboarding && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-slate-950 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-100 overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-emerald-500/20 to-transparent pointer-events-none" />
-
-            <div className="text-center relative z-10">
-              <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/20">
-                <MapPin className="h-7 w-7 text-emerald-400 animate-bounce" />
-              </div>
-
-              <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 font-mono">
-                ONBOARDING DE JOGADOR
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black text-white font-display mt-1 leading-snug">
-                Bem-vindo ao Acorda Portugal! Escolhe o teu Distrito de Representação
-              </h2>
-              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                Seleciona a tua região de origem para representar o teu distrito nos{' '}
-                <strong className="text-emerald-300">Rankings Territoriais Nacionais</strong>.
-              </p>
-
-              {/* Aviso Imutável */}
-              <div className="mt-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 flex items-start gap-2.5 text-left text-xs text-emerald-300">
-                <MapPin className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>
-                  📍 O teu distrito de representação fica associado ao teu perfil para os Rankings Territoriais.
-                </span>
-              </div>
-
-              {/* Seletor de Distrito */}
-              <div className="mt-5 text-left">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 font-mono">
-                  Distrito / Ilhas:
-                </label>
-                <div className="relative">
-                  <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-400" />
-                  <select
-                    required
-                    value={onboardingDistrict}
-                    onChange={(e) => setOnboardingDistrict(e.target.value)}
-                    className="w-full rounded-2xl border border-emerald-500/40 bg-slate-900 pl-10 pr-4 py-3 text-sm font-bold text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer"
-                  >
-                    <option value="" disabled className="text-slate-500">
-                      Seleciona o teu distrito...
-                    </option>
-                    {PORTUGAL_DISTRICTS.map((dist) => (
-                      <option key={dist} value={dist}>
-                        {dist}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                disabled={onboardingSaving || !onboardingDistrict}
-                onClick={handleConfirmOnboardingDistrict}
-                className="w-full mt-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-emerald-500/25 hover:brightness-110 active:scale-[0.98] transition cursor-pointer disabled:opacity-50"
-              >
-                {onboardingSaving ? 'A registar distrito...' : 'Confirmar e Entrar no Jogo'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Header com Navegação */}
       <div className="relative z-20 mx-auto max-w-7xl w-full px-4 pt-6 sm:px-6 lg:px-8">

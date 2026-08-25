@@ -22,7 +22,7 @@ import {
   clearLocalSession,
 } from '@/lib/session-manager'
 import { SessionConflictModal } from '@/components/session-conflict-modal'
-import { DistrictOnboardingModal } from '@/components/DistrictOnboardingModal'
+import { VALID_DISTRICTS } from '@/data/districts'
 
 export type AuthState = {
   user: User | null
@@ -31,6 +31,8 @@ export type AuthState = {
   profile: UserProfile | null
   profileLoading: boolean
   profileError: string | null
+  needsDistrictSelection: boolean
+  setNeedsDistrictSelection: (needs: boolean) => void
   retryProfile: () => void
 }
 
@@ -46,6 +48,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profileLoading, setProfileLoading] = useState(true)
   const [profileError, setProfileError] = useState<string | null>(null)
   const [profileRetry, setProfileRetry] = useState(0)
+  const [needsDistrictSelection, setNeedsDistrictSelection] = useState(false)
+  const [selectedDistrictInput, setSelectedDistrictInput] = useState('')
+  const [isSubmittingDistrict, setIsSubmittingDistrict] = useState(false)
   const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
@@ -108,8 +113,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               const xpVal = typeof data.xp === 'number' ? data.xp : 0
               const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
               const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
-              const districtVal = data.district && data.district !== 'Portugal' ? data.district : ''
-              const districtLockedVal = Boolean(data.districtLocked && data.district && data.district !== 'Portugal')
+              
+              // Verificação estrita de validade do distrito nos 20 distritos oficiais
+              const rawDistrict = typeof data.district === 'string' ? data.district.trim() : ''
+              const isValidDistrict = VALID_DISTRICTS.includes(rawDistrict as any)
+              const districtVal = isValidDistrict ? rawDistrict : ''
+              const districtLockedVal = Boolean(data.districtLocked && isValidDistrict)
+              const needsDistrict = !districtVal || !isValidDistrict || !districtLockedVal
+              setNeedsDistrictSelection(needsDistrict)
+
               const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
               
               // Resolução canónica e migração transparente dos 5 avatares reais
@@ -308,6 +320,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 },
               })
               setProfileLoading(false)
+              setNeedsDistrictSelection(true)
             }
           },
           (error) => {
@@ -321,6 +334,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile(null)
         setProfileLoading(false)
         setProfileError(null)
+        setNeedsDistrictSelection(false)
       }
     })
 
@@ -346,18 +360,102 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profile,
         profileLoading,
         profileError,
+        needsDistrictSelection,
+        setNeedsDistrictSelection,
         retryProfile,
       }}
     >
       {children}
-      {authResolved && user && profile && (!profile.district || profile.district === 'Portugal' || !profile.districtLocked) && (
-        <DistrictOnboardingModal
-          user={user}
-          onComplete={(newDistrict) => {
-            setProfile((prev) => (prev ? { ...prev, district: newDistrict, districtLocked: true } : null))
-          }}
-        />
+
+      {/* BLOQUEIO GLOBAL NO APP WRAPPER: MODAL DE SELEÇÃO OBRIGATÓRIA DE DISTRITO */}
+      {needsDistrictSelection && user && (
+        <div className="fixed inset-0 z-[9999] bg-slate-950/98 backdrop-blur-xl flex items-center justify-center p-4">
+          <div className="bg-slate-900 border-2 border-emerald-500 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(16,185,129,0.3)] space-y-6 animate-in fade-in duration-200">
+            <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/40 rounded-2xl flex items-center justify-center mx-auto text-3xl">
+              📍
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider font-display">
+                Escolhe o teu Distrito
+              </h2>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Para representar a tua região no Ranking Nacional, seleciona a tua origem. Esta escolha é{' '}
+                <strong className="text-amber-400">única e definitiva</strong>.
+              </p>
+            </div>
+
+            <select
+              id="select-district-input"
+              value={selectedDistrictInput}
+              onChange={(e) => setSelectedDistrictInput(e.target.value)}
+              className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 rounded-xl py-3.5 px-4 text-white text-sm outline-none cursor-pointer"
+            >
+              <option value="" disabled>
+                Seleciona o teu distrito ou arquipélago...
+              </option>
+              {VALID_DISTRICTS.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </select>
+
+            <button
+              type="button"
+              disabled={!selectedDistrictInput || isSubmittingDistrict}
+              onClick={async () => {
+                const select = document.getElementById('select-district-input') as HTMLSelectElement
+                const val = select?.value || selectedDistrictInput
+                if (!val || !VALID_DISTRICTS.includes(val as any)) {
+                  alert('Por favor seleciona um distrito!')
+                  return
+                }
+
+                setIsSubmittingDistrict(true)
+                try {
+                  // Atualiza no Firestore
+                  await setDoc(
+                    doc(db, 'users', user.uid),
+                    {
+                      district: val,
+                      districtLocked: true,
+                      updatedAt: serverTimestamp(),
+                    },
+                    { merge: true }
+                  )
+
+                  await setDoc(
+                    doc(db, 'publicProfiles', user.uid),
+                    {
+                      district: val,
+                      updatedAt: serverTimestamp(),
+                    },
+                    { merge: true }
+                  )
+
+                  if (typeof window !== 'undefined') {
+                    localStorage.setItem('user_district', val)
+                  }
+
+                  // Atualiza estado local
+                  setNeedsDistrictSelection(false)
+                  setProfile((prev) => (prev ? { ...prev, district: val, districtLocked: true } : null))
+                } catch (e) {
+                  console.error('[AUTH] Erro ao gravar distrito:', e)
+                  alert('Erro ao guardar distrito. Tenta novamente.')
+                } finally {
+                  setIsSubmittingDistrict(false)
+                }
+              }}
+              className="w-full py-4 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/30 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmittingDistrict ? 'A registar...' : 'Confirmar Distrito e Jogar →'}
+            </button>
+          </div>
+        </div>
       )}
+
       <SessionConflictModal
         isOpen={isSessionConflictOpen}
         onConfirm={handleSessionConflictConfirm}
