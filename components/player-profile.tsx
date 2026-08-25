@@ -65,7 +65,7 @@ import {
 } from '@/lib/economy'
 import { getEquippedCosmetics, getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { getInventory, equipTheme, equipAvatar, type InventoryState } from '@/lib/inventory'
-import { AVATAR_CATALOG, type AvatarItem } from '@/lib/avatars'
+import { AVATAR_CATALOG, getAvatarById, DEFAULT_AVATAR, type AvatarItem } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
 
 const districts = [
@@ -485,7 +485,7 @@ export function PlayerProfile() {
     [Flame, 'Melhor sequência', `${player.bestStreak ?? 0} dias`, 'text-flag-red'],
   ] as const
 
-  const equippedAvatarItem = AVATAR_CATALOG.find((a) => a.id === (invState.equippedAvatar || 'camoes_2050')) || AVATAR_CATALOG[0]
+  const equippedAvatarItem = getAvatarById(invState.equippedAvatar)
 
   return (
     <div className="animate-rise space-y-8 sm:space-y-10">
@@ -1277,7 +1277,14 @@ export function PlayerProfile() {
                       {av.image ? (
                         <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/20 bg-zinc-900">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={av.image} alt={av.name} className="w-full h-full object-cover" />
+                          <img
+                            src={av.image}
+                            alt={av.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.src = DEFAULT_AVATAR.image
+                            }}
+                          />
                         </div>
                       ) : (
                         <span className="text-3xl">{av.icon || '👤'}</span>

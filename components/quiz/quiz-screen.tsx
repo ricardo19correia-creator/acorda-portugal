@@ -646,7 +646,7 @@ export function QuizScreen({
 
     const userRef = doc(db, "users", user.uid)
     const publicProfileRef = doc(db, "publicProfiles", user.uid)
-    const catSlug = category?.slug || 'geral'
+    const catSlug = categorySlug || 'geral'
 
     try {
       // 1. Gravar documento persistente da partida na coleção 'games'

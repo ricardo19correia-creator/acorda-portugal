@@ -17,6 +17,7 @@ import type { EquippedCosmetics } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import { PlayerAvatar } from '@/components/player-avatar'
+import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 
 export type RankedPlayer = {
   uid: string
@@ -41,16 +42,18 @@ export function Ranking() {
   const [loading, setLoading] = useState(true)
   const [filterMode, setFilterMode] = useState<'nacional' | 'distrito' | 'duelos'>('nacional')
   const { user, profile } = useAuth()
-  const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
+  const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
 
   useEffect(() => {
     const updateAvatar = () => {
       if (typeof window !== 'undefined') {
         const equipped = localStorage.getItem('user_equipped_avatar')
         if (equipped) {
-          setUserDisplayAvatar(equipped)
+          setUserDisplayAvatar(getAvatarImage(equipped))
         } else if (user?.photoURL) {
-          setUserDisplayAvatar(user.photoURL)
+          setUserDisplayAvatar(getAvatarImage(user.photoURL))
+        } else {
+          setUserDisplayAvatar(DEFAULT_AVATAR.image)
         }
       }
     }
@@ -85,7 +88,7 @@ export function Ranking() {
           const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
           const level = typeof data.level === 'number' ? data.level : calculateLevelProgress(xp).currentLevel.level
           const district = data.district || 'Portugal'
-          const photoURL = data.photoURL || data.avatar || null
+          const photoURL = getAvatarImage(data.photoURL || data.avatar || data.avatarId || null)
           const equipped = data.equipped || {}
           const equippedTitle = data.equippedTitle || data.title || data.equipped?.title || ''
 

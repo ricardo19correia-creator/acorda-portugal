@@ -7,6 +7,13 @@ import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot } from 'fireb
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
+import {
+  getAvatarById,
+  getAvatarImage,
+  normalizeAvatarId,
+  DEFAULT_AVATAR,
+  REAL_AVATARS,
+} from '@/lib/avatars'
 import { TITLE_SHOP_CATALOG, type TitleItem, type TitleGroup, type TitleRarity, getTitleRarityBadge } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRarity, type ArenaEffect, getArenaRarityBadge } from '@/data/shopArenas'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -149,26 +156,23 @@ export default function LojaPage() {
   const [titleThemeCategory, setTitleThemeCategory] = useState<string>('todas')
   const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
   const [previewArenaItem, setPreviewArenaItem] = useState<ShopItem | null>(null)
-  const [equippedAvatar, setEquippedAvatar] = useState<string>('/images/avatars/guardiao-vulcanico.jpg')
+  const [equippedAvatar, setEquippedAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
-    avatars: ['guardiao-vulcanico', 'camoes-2050', 'avatar_vulcao_acores', 'avatar_camoes_2050'],
+    avatars: REAL_AVATARS.map((a) => a.id),
     arenas: ['arena_1', 'arena_2', 'arena_ponte_2077', 'arena_neon_2088'],
     titles: ['titulo_iniciante']
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
-    'guardiao-vulcanico', 
-    'camoes-2050', 
+    ...REAL_AVATARS.map((a) => a.id),
     'arena_1',
     'arena_2',
     'arena_neon_2088', 
-    'arena_ponte_2077', 
-    'avatar_vulcao_acores', 
-    'avatar_camoes_2050'
+    'arena_ponte_2077',
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
@@ -177,7 +181,7 @@ export default function LojaPage() {
     const syncStore = () => {
       try {
         const savedAvatar = localStorage.getItem('user_equipped_avatar')
-        if (savedAvatar && !savedAvatar.includes('moldura')) setEquippedAvatar(savedAvatar)
+        if (savedAvatar) setEquippedAvatar(getAvatarImage(savedAvatar))
         
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setEquippedArena(savedArena)
@@ -330,11 +334,7 @@ export default function LojaPage() {
     if (item.priceValue === 0 && !item.isExclusive) return true
     if (unlockedItems.includes(item.id) || unlockedItems.includes(item.name)) return true
     if (item.category === 'avatars') {
-      if (inventory.avatars.includes(item.id)) return true
-      if (item.id === 'guardiao-vulcanico' && (inventory.avatars.includes('avatar_vulcao_acores') || unlockedItems.includes('avatar_vulcao_acores'))) return true
-      if (item.id === 'camoes-2050' && (inventory.avatars.includes('avatar_camoes_2050') || unlockedItems.includes('avatar_camoes_2050'))) return true
-      if (item.id === 'cyborg-quinas' && (inventory.avatars.includes('avatar_lenda_futebol') || unlockedItems.includes('avatar_lenda_futebol'))) return true
-      if (item.id === 'fadista-cyber-alfama' && (inventory.avatars.includes('avatar_fadista_cyber') || unlockedItems.includes('avatar_fadista_cyber'))) return true
+      return true
     }
     if (item.category === 'arenas' && (inventory.arenas.includes(item.id) || item.priceValue === 0)) return true
     if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
@@ -356,7 +356,7 @@ export default function LojaPage() {
         : ['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa']
       return active.includes(item.id)
     }
-    if (item.category === 'avatars') return equippedAvatar === item.image
+    if (item.category === 'avatars') return equippedAvatar === item.image || normalizeAvatarId(equippedAvatar) === normalizeAvatarId(item.id)
     if (item.category === 'arenas') return equippedArena === item.id
     if (item.category === 'titulos') return equippedTitle === item.name || equippedTitle === item.id
     return false
@@ -481,27 +481,37 @@ export default function LojaPage() {
 
     if (unlocked) {
       // EQUIPAR
-      if (item.category === 'avatars' && item.image) {
-        setEquippedAvatar(item.image)
-        localStorage.setItem('user_equipped_avatar', item.image)
+      if (item.category === 'avatars') {
+        const canonicalImg = getAvatarImage(item.image || item.id)
+        const canonicalId = normalizeAvatarId(item.id)
+        setEquippedAvatar(canonicalImg)
+        localStorage.setItem('user_equipped_avatar', canonicalImg)
+        localStorage.setItem('user_equipped_avatar_id', canonicalId)
+        localStorage.setItem('equipped_avatar_id', canonicalId)
         if (auth.currentUser) {
           try {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              equippedAvatar: item.id,
-              'equipped.avatar': item.image,
-              avatar: item.image,
+              equippedAvatar: canonicalId,
+              avatarId: canonicalId,
+              'equipped.avatar': canonicalImg,
+              'equipped.avatarId': canonicalId,
+              avatar: canonicalImg,
+              photoURL: canonicalImg,
             })
             await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
-              photoURL: item.image,
-              avatar: item.image,
-              'equipped.avatar': item.image,
-              equippedAvatar: item.id,
+              photoURL: canonicalImg,
+              avatar: canonicalImg,
+              avatarId: canonicalId,
+              'equipped.avatar': canonicalImg,
+              equippedAvatar: canonicalId,
             }, { merge: true })
           } catch (e) {
             console.error(e)
           }
         }
         window.dispatchEvent(new Event('avatarChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
+        window.dispatchEvent(new Event('storage'))
         showToast(`Avatar "${item.name}" equipado com sucesso!`)
       } else if (item.category === 'arenas') {
         setEquippedArena(item.id)
@@ -738,7 +748,7 @@ export default function LojaPage() {
               LOJA ACORDA PORTUGAL
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Adquire avatares temáticos das 18 categorias, títulos, ajudas e desbloqueia troféus exclusivos por mérito.
+              Escolhe e equipa os 9 avatares oficiais de Portugal, títulos, ajudas e cenários exclusivos para as tuas partidas.
             </p>
           </div>
 
@@ -762,7 +772,7 @@ export default function LojaPage() {
                 : 'bg-slate-900/70 text-cyan-400 border border-cyan-500/30 hover:bg-slate-800'
             }`}
           >
-            <User className="w-3.5 h-3.5" /> LOJA DE AVATARES
+            <User className="w-3.5 h-3.5" /> LOJA DE AVATARES (9)
           </button>
 
           <button
@@ -1184,7 +1194,7 @@ export default function LojaPage() {
                               alt={item.name} 
                               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
                               onError={(e) => {
-                                e.currentTarget.src = '/images/avatars/guardiao-vulcanico.jpg'
+                                e.currentTarget.src = DEFAULT_AVATAR.image
                               }}
                             />
                           ) : (

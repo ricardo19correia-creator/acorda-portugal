@@ -26,6 +26,13 @@ import { useAuth } from '@/components/auth-provider'
 import { performLogout, handleGoogleLogin } from '@/lib/auth-helpers'
 import { UserAvatar } from '@/components/user-avatar'
 import { avatarShopList, type AvatarItem } from '@/data/shopAvatars'
+import {
+  getAvatarById,
+  getAvatarImage,
+  normalizeAvatarId,
+  DEFAULT_AVATAR,
+  REAL_AVATARS,
+} from '@/lib/avatars'
 import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
@@ -119,8 +126,8 @@ function PerfilContent() {
   // Perfil Base (100% Dinâmico do Firestore / Auth)
   const [displayName, setDisplayName] = useState<string>(() => profile?.displayName || user?.displayName || user?.email?.split('@')[0] || '')
   const [district, setDistrict] = useState<string>(() => profile?.district || '')
-  const [avatar, setAvatar] = useState<string>(() => (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || '/images/avatars/guardiao-vulcanico.jpg')
-  const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => (profile as any)?.equippedAvatar || 'guardiao-vulcanico')
+  const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)))
+  const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
   const [arena, setArena] = useState<string>(() => (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_1')
   const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || profile?.equipped?.title || '')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
@@ -145,13 +152,13 @@ function PerfilContent() {
     freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? 0,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
-    avatars: (profile as any)?.inventory?.avatars || ['guardiao-vulcanico'],
+    avatars: REAL_AVATARS.map((a) => a.id),
     arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
     titles: (profile as any)?.inventory?.titles || [],
     taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>(() => [
-    ...((profile as any)?.inventory?.avatars || ['guardiao-vulcanico']),
+    ...REAL_AVATARS.map((a) => a.id),
     ...((profile as any)?.inventory?.arenas || ['arena_1']),
     ...((profile as any)?.inventory?.titles || []),
     ...((profile as any)?.inventory?.taunts || ['pack_basico']),
@@ -373,8 +380,8 @@ function PerfilContent() {
   // Formulário do Modal de Edição
   const [editName, setEditName] = useState('')
   const [editDistrict, setEditDistrict] = useState('Lisboa')
-  const [editAvatar, setEditAvatar] = useState('/images/avatars/guardiao-vulcanico.jpg')
-  const [editAvatarId, setEditAvatarId] = useState('guardiao-vulcanico')
+  const [editAvatar, setEditAvatar] = useState(DEFAULT_AVATAR.image)
+  const [editAvatarId, setEditAvatarId] = useState(DEFAULT_AVATAR.id)
 
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
@@ -420,15 +427,13 @@ function PerfilContent() {
         const savedDistrict = profile?.district || (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) || 'Portugal'
         setDistrict(savedDistrict)
 
-        const savedAvatar = (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null) || '/images/avatars/guardiao-vulcanico.jpg'
-        if (savedAvatar && !savedAvatar.includes('moldura')) {
-          setAvatar(savedAvatar)
-        } else {
-          setAvatar('/images/avatars/guardiao-vulcanico.jpg')
-        }
+        const rawSavedAvatar = (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)
+        const resolvedSavedAvatar = getAvatarImage(rawSavedAvatar)
+        setAvatar(resolvedSavedAvatar)
 
-        const savedAvatarId = (profile as any)?.equippedAvatar || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null) || 'guardiao-vulcanico'
-        if (savedAvatarId) setEquippedAvatarId(savedAvatarId)
+        const rawSavedAvatarId = (profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null) || rawSavedAvatar
+        const resolvedSavedAvatarId = normalizeAvatarId(rawSavedAvatarId)
+        setEquippedAvatarId(resolvedSavedAvatarId)
 
         const savedArena = (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || (typeof window !== 'undefined' ? localStorage.getItem('equipped_arena') : null) || 'arena_1'
         if (savedArena) setArena(savedArena)
@@ -668,29 +673,37 @@ function PerfilContent() {
   // Ação de Equipar Cosmético Universal
   const handleEquipItem = async (item: InventoryItem) => {
     if (item.category === 'avatars') {
-      const imgToSet = item.image || '/images/avatars/guardiao-vulcanico.jpg'
+      const imgToSet = getAvatarImage(item.image || item.id)
+      const idToSet = normalizeAvatarId(item.id)
       setAvatar(imgToSet)
-      setEquippedAvatarId(item.id)
+      setEquippedAvatarId(idToSet)
       localStorage.setItem('user_equipped_avatar', imgToSet)
-      localStorage.setItem('equipped_avatar_id', item.id)
+      localStorage.setItem('user_equipped_avatar_id', idToSet)
+      localStorage.setItem('equipped_avatar_id', idToSet)
       if (auth.currentUser) {
         try {
           await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            equippedAvatar: item.id,
+            equippedAvatar: idToSet,
+            avatarId: idToSet,
             'equipped.avatar': imgToSet,
+            'equipped.avatarId': idToSet,
             avatar: imgToSet,
+            photoURL: imgToSet,
           })
           await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
             photoURL: imgToSet,
             avatar: imgToSet,
+            avatarId: idToSet,
             'equipped.avatar': imgToSet,
-            equippedAvatar: item.id,
+            equippedAvatar: idToSet,
           }, { merge: true })
         } catch (e) {
           console.error(e)
         }
       }
       window.dispatchEvent(new Event('avatarChanged'))
+      window.dispatchEvent(new Event('inventory_updated'))
+      window.dispatchEvent(new Event('storage'))
       showToast(`Avatar "${item.name}" equipado com sucesso!`)
     } else if (item.category === 'arenas') {
       setArena(item.id)
@@ -820,8 +833,9 @@ function PerfilContent() {
     try {
       const newName = editName.trim() || displayName
       const newDistrict = editDistrict || district
-      const newAvatar = editAvatar || avatar
-      const newAvatarId = editAvatarId || equippedAvatarId
+      const rawAvatar = editAvatar || avatar
+      const newAvatar = getAvatarImage(rawAvatar)
+      const newAvatarId = normalizeAvatarId(editAvatarId || equippedAvatarId || rawAvatar)
 
       setDisplayName(newName)
       setDistrict(newDistrict)
@@ -831,6 +845,7 @@ function PerfilContent() {
       localStorage.setItem('user_display_name', newName)
       localStorage.setItem('user_district', newDistrict)
       localStorage.setItem('user_equipped_avatar', newAvatar)
+      localStorage.setItem('user_equipped_avatar_id', newAvatarId)
       localStorage.setItem('equipped_avatar_id', newAvatarId)
 
       if (auth.currentUser) {
@@ -845,8 +860,10 @@ function PerfilContent() {
           district: newDistrict,
           avatar: newAvatar,
           photoURL: newAvatar,
+          avatarId: newAvatarId,
           equippedAvatar: newAvatarId,
           'equipped.avatar': newAvatar,
+          'equipped.avatarId': newAvatarId,
         })
 
         await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
@@ -855,12 +872,15 @@ function PerfilContent() {
           district: newDistrict,
           avatar: newAvatar,
           photoURL: newAvatar,
+          avatarId: newAvatarId,
           equippedAvatar: newAvatarId,
           'equipped.avatar': newAvatar,
         }, { merge: true })
       }
 
       window.dispatchEvent(new Event('avatarChanged'))
+      window.dispatchEvent(new Event('inventory_updated'))
+      window.dispatchEvent(new Event('storage'))
       showToast('Perfil atualizado com sucesso!')
       setIsEditModalOpen(false)
     } catch (err) {
@@ -998,13 +1018,10 @@ function PerfilContent() {
     }
   }
 
-  // Lista de Avatares Desbloqueados para o Seletor do Modal
+  // Lista de Avatares Desbloqueados para o Seletor do Modal (Exclusivamente os 5 avatares reais)
   const availableUnlockedAvatars = useMemo(() => {
-    return avatarShopList.filter((a) => {
-      const isDefault = a.id === 'guardiao-vulcanico' || a.id === 'camoes-2050' || a.id === 'avatar_vulcao_acores' || a.id === 'avatar_camoes_2050'
-      return isDefault || inventory.avatars.includes(a.id) || unlockedItems.includes(a.id)
-    })
-  }, [inventory.avatars, unlockedItems])
+    return REAL_AVATARS
+  }, [])
 
   // Cosméticos Desbloqueados no Inventário
   const unlockedCosmetics = useMemo(() => {
@@ -1012,8 +1029,7 @@ function PerfilContent() {
       let isUnlocked = false
 
       if (item.category === 'avatars') {
-        const isDefault = item.id === 'guardiao-vulcanico' || item.id === 'camoes-2050' || item.id === 'avatar_vulcao_acores' || item.id === 'avatar_camoes_2050'
-        isUnlocked = inventory.avatars.includes(item.id) || unlockedItems.includes(item.id) || isDefault
+        isUnlocked = true
       } else if (item.category === 'arenas') {
         const isDefault = item.id === 'arena_1' || item.id === 'arena_2' || item.id === 'arena_ponte_2077' || item.price === 0
         isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
@@ -1584,7 +1600,7 @@ function PerfilContent() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {unlockedCosmetics.map((item) => {
                     const isEquipped = 
-                      (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || (item.id === 'guardiao-vulcanico' && avatar.includes('guardiao-vulcanico')))) ||
+                      (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || normalizeAvatarId(avatar) === normalizeAvatarId(item.id))) ||
                       (item.category === 'arenas' && arena === item.id) ||
                       (item.category === 'titulos' && (title === item.name || title === item.id))
 
@@ -2662,9 +2678,17 @@ function PerfilContent() {
                             : 'border-slate-800 bg-slate-950/80 hover:border-slate-700',
                         )}
                       >
-                        <img src={av.image} alt={av.name} className="w-12 h-12 rounded-lg object-cover" />
-                        <span className="text-[10px] font-bold text-slate-300 truncate w-full text-center">
-                          {av.name.split(' ')[0]}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={av.image}
+                          alt={av.name}
+                          className="w-12 h-12 rounded-lg object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = DEFAULT_AVATAR.image
+                          }}
+                        />
+                        <span className="text-[10px] font-bold text-slate-300 truncate w-full text-center" title={av.name}>
+                          {av.name}
                         </span>
                         {isSelected && (
                           <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-emerald-500 text-slate-950 text-[10px] font-black flex items-center justify-center">

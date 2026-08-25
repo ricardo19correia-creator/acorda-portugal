@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 
 export interface UserAvatarProps {
   avatarUrl?: string
@@ -26,21 +27,21 @@ export function UserAvatar({
     xl: 'w-28 h-28',
   }
 
-  const fallbackAvatar = '/images/avatars/guardiao-vulcanico.jpg'
   const given = avatarUrl || src
-  const imageSrc = given && !given.includes('moldura') ? given : fallbackAvatar
+  const imageSrc = getAvatarImage(given)
 
   return (
     <div
       className={`relative shrink-0 aspect-square rounded-2xl p-[2px] bg-gradient-to-tr from-emerald-500 to-cyan-500 shadow-[0_0_12px_rgba(16,185,129,0.4)] ${sizeClasses[size]} ${className}`}
     >
       <div className="w-full h-full rounded-[14px] overflow-hidden bg-slate-950">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imageSrc}
           alt={alt}
           className="w-full h-full object-cover object-center block"
           onError={(e) => {
-            e.currentTarget.src = fallbackAvatar
+            e.currentTarget.src = DEFAULT_AVATAR.image
           }}
         />
       </div>
@@ -49,3 +50,4 @@ export function UserAvatar({
 }
 
 export default UserAvatar
+

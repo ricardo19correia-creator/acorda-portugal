@@ -1,38 +1,19 @@
-import { REAL_AVATARS, type AvatarItem as CoreAvatarItem } from '@/lib/avatars'
+﻿import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, deleteDoc, doc, setDoc } from 'firebase/firestore';
 
-export type AvatarRarity = 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Mítico' | 'Exclusivo'
+const firebaseConfig = {
+  apiKey: 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE',
+  authDomain: 'desafio-nacional-5fe71.firebaseapp.com',
+  projectId: 'desafio-nacional-5fe71',
+  storageBucket: 'desafio-nacional-5fe71.firebasestorage.app',
+  messagingSenderId: '130539395859',
+  appId: '1:130539395859:web:e3b8153477ae41d6fe98e6',
+};
 
-export interface AvatarItem {
-  id: string
-  name: string
-  categoryKey: string
-  categoryTitle: string
-  rarity: AvatarRarity
-  price: number | null
-  unlockCondition?: string
-  description: string
-  image: string
-  icon: string
-  isExclusive: boolean
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-export interface AvatarCategoryMeta {
-  key: string
-  title: string
-  icon: string
-}
-
-export const AVATAR_18_CATEGORIES: AvatarCategoryMeta[] = [
-  { key: 'todos', title: 'Todos os Avatares', icon: '✨' },
-  { key: 'cultura', title: '📜 Cultura & Literatura', icon: '📜' },
-  { key: 'geografia', title: '🌍 Geografia & Açores', icon: '🌍' },
-  { key: 'desporto', title: '⚽ Desporto & Futebol', icon: '⚽' },
-  { key: 'musica', title: '🎸 Música & Fado', icon: '🎸' },
-  { key: 'historia', title: '👑 História de Portugal', icon: '👑' },
-  { key: 'geral', title: '🇵🇹 Conquistas Nacionais', icon: '🇵🇹' },
-]
-
-export const avatarShopList: AvatarItem[] = [
+const REAL_9_AVATARS = [
   {
     id: 'camoes_2050',
     name: 'Luís de Camões',
@@ -141,6 +122,41 @@ export const avatarShopList: AvatarItem[] = [
     icon: '🥇',
     isExclusive: false,
   },
-]
+];
 
+async function syncFirestore() {
+  console.log('A verificar colecoes de avatares no Firestore...');
+  const collectionsToCheck = ['avatars', 'shop_avatars', 'store_avatars', 'shopAvatars'];
 
+  for (const colName of collectionsToCheck) {
+    try {
+      const snap = await getDocs(collection(db, colName));
+      if (!snap.empty) {
+        console.log('A limpar ' + snap.size + ' documentos na colecao ' + colName + '...');
+        for (const d of snap.docs) {
+          await deleteDoc(d.ref);
+        }
+      }
+    } catch (e) {
+      console.log('Colecao ' + colName + ': ' + e.message);
+    }
+  }
+
+  console.log('A gravar os 9 avatares oficiais na colecao Firestore avatars...');
+  for (const av of REAL_9_AVATARS) {
+    try {
+      await setDoc(doc(db, 'avatars', av.id), av);
+      console.log('  Gravado no Firestore: ' + av.name + ' (' + av.id + ')');
+    } catch (e) {
+      console.log('  Aviso ao gravar ' + av.id + ': ' + e.message);
+    }
+  }
+
+  console.log('Sincronizacao Firestore concluida com sucesso!');
+  process.exit(0);
+}
+
+syncFirestore().catch((err) => {
+  console.error('Erro na sincronizacao:', err);
+  process.exit(0);
+});

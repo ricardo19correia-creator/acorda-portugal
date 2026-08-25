@@ -13,6 +13,7 @@ import { db } from '@/lib/firebase'
 import { generateDuelQuestions, generateDuelCode, type DuelDocument, type DuelPlayerData } from '@/lib/duel'
 import { getArenaById, getRandomArena } from '@/src/data/arenas'
 import { QUESTION_TIME_MS } from '@/config/quiz'
+import { getAvatarImage } from '@/lib/avatars'
 
 export const dynamic = 'force-dynamic'
 
@@ -55,7 +56,7 @@ async function handleMatchmaking(params: {
 
   const now = Date.now()
   const userName = params.name || 'Jogador'
-  const userPhoto = params.photo || null
+  const userPhoto = getAvatarImage(params.photo)
   const userLevel = Number(params.level) || 1
   const userDistrict = params.district || 'Portugal'
   const arena = params.arenaId ? getArenaById(params.arenaId) : getRandomArena()

@@ -2,11 +2,18 @@
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
 import { onAuthStateChanged, type User } from 'firebase/auth'
-import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
+import {
+  getAvatarById,
+  getAvatarImage,
+  normalizeAvatarId,
+  DEFAULT_AVATAR,
+  REAL_AVATARS,
+} from '@/lib/avatars'
 
 export type AuthState = {
   user: User | null
@@ -19,6 +26,8 @@ export type AuthState = {
 }
 
 const AuthContext = createContext<AuthState | null>(null)
+
+const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -64,7 +73,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
               const districtVal = data.district || 'Portugal'
               const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
-              const avatarVal = data.avatar || data.photoURL || currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg'
+              
+              // Resolução canónica e migração transparente dos 5 avatares reais
+              const rawAvatarCandidate = data.avatarId || data.equippedAvatar || data.avatar || data.photoURL || currentAuthUser.photoURL
+              const resolvedAvatar = getAvatarById(rawAvatarCandidate)
+              const avatarVal = resolvedAvatar.image
+              const avatarIdVal = resolvedAvatar.id
 
               const loadedProfile: UserProfile = {
                 uid: currentAuthUser.uid,
@@ -89,11 +103,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
                 unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
                 badges: Array.isArray(data.badges) ? data.badges : ['novico'],
-                inventory: data.inventory || {},
-                equipped: data.equipped || {
+                inventory: {
+                  ...(data.inventory || {}),
+                  avatars: ALL_REAL_AVATAR_IDS,
+                },
+                equipped: {
+                  ...(data.equipped || {}),
                   avatar: avatarVal,
+                  avatarId: avatarIdVal,
                   title: titleVal,
-                  arena: 'arena_1',
+                  arena: (data.equipped as any)?.arena || 'arena_1',
                 },
                 consumables: data.consumables || {
                   help5050: data.inventory?.utilities?.fiftyFifty || 0,
@@ -111,10 +130,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_display_name', nameVal)
                 localStorage.setItem('user_district', districtVal)
                 localStorage.setItem('user_equipped_avatar', avatarVal)
+                localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
+                localStorage.setItem('equipped_avatar_id', avatarIdVal)
                 localStorage.setItem('equipped_title', titleVal)
               }
 
-              // Sincronizar perfil público para ranking nacional
+              // Sincronizar perfil público para ranking nacional com os 5 avatares reais
               try {
                 const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
                 await setDoc(
@@ -123,6 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     uid: currentAuthUser.uid,
                     displayName: nameVal,
                     photoURL: avatarVal,
+                    avatarId: avatarIdVal,
                     district: districtVal,
                     level: levelVal,
                     xp: xpVal,
@@ -137,7 +159,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             } else {
               // 2. Criar apenas se o documento REALMENTE não existir, USANDO MERGE
               const fallbackName = currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
-              const fallbackAvatar = currentAuthUser.photoURL || '/images/avatars/guardiao-vulcanico.jpg'
+              const fallbackAvatar = DEFAULT_AVATAR.image
+              const fallbackAvatarId = DEFAULT_AVATAR.id
 
               const defaultProfileData = {
                 uid: currentAuthUser.uid,
@@ -146,6 +169,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 email: currentAuthUser.email || '',
                 photoURL: fallbackAvatar,
                 avatar: fallbackAvatar,
+                avatarId: fallbackAvatarId,
+                equippedAvatar: fallbackAvatarId,
                 district: 'Portugal',
                 level: 1,
                 xp: 0,
@@ -164,13 +189,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 unlockedAchievements: [],
                 badges: ['novico'],
                 inventory: {
-                  avatars: ['guardiao-vulcanico'],
+                  avatars: ALL_REAL_AVATAR_IDS,
                   arenas: ['arena_1'],
                   titles: ['tit_novico'],
                   taunts: ['pack_basico'],
                 },
                 equipped: {
                   avatar: fallbackAvatar,
+                  avatarId: fallbackAvatarId,
                   title: 'Noviço da Nação',
                   arena: 'arena_1',
                 },
@@ -194,6 +220,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     uid: currentAuthUser.uid,
                     displayName: fallbackName,
                     photoURL: fallbackAvatar,
+                    avatarId: fallbackAvatarId,
                     district: 'Portugal',
                     level: 1,
                     xp: 0,
@@ -212,6 +239,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_display_name', fallbackName)
                 localStorage.setItem('user_district', 'Portugal')
                 localStorage.setItem('user_equipped_avatar', fallbackAvatar)
+                localStorage.setItem('user_equipped_avatar_id', fallbackAvatarId)
+                localStorage.setItem('equipped_avatar_id', fallbackAvatarId)
                 localStorage.setItem('equipped_title', 'Noviço da Nação')
               }
 
@@ -237,7 +266,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 badges: ['novico'],
                 equippedTitle: 'Noviço da Nação',
                 inventory: {
-                  avatars: ['guardiao-vulcanico'],
+                  avatars: ALL_REAL_AVATAR_IDS,
                   arenas: ['arena_1'],
                   titles: ['tit_novico'],
                   taunts: ['pack_basico'],

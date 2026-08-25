@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars';
 
 export interface PlayerProfileData {
   id: string;
@@ -53,12 +54,15 @@ export default function PlayerProfileModal({ player, isOpen, onClose }: PlayerPr
                 player.isVip ? 'border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.4)]' : 'border-emerald-500/60'
               }`}
             >
-              {player.avatarUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={player.avatarUrl} alt={player.username} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-3xl font-black text-zinc-300">{player.username.charAt(0).toUpperCase()}</span>
-              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getAvatarImage(player.avatarUrl)}
+                alt={player.username}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = DEFAULT_AVATAR.image
+                }}
+              />
             </div>
             {player.rankPosition && (
               <span className="absolute -bottom-2 -right-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500 text-black border border-black shadow">

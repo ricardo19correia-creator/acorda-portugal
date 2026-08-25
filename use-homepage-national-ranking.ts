@@ -5,6 +5,8 @@ import { collection, limit, onSnapshot, orderBy, query } from 'firebase/firestor
 import { db } from '@/lib/firebase'
 import type { UserProfile } from '@/lib/game-data'
 
+import { getAvatarImage } from '@/lib/avatars'
+
 export type RankedPlayer = Pick<UserProfile, 'uid' | 'displayName' | 'photoURL' | 'level' | 'xp' | 'district'> & {
   rank: number
 }
@@ -33,7 +35,7 @@ export function useHomepageNationalRanking() {
             list.push({
               uid: docSnap.id,
               displayName: data.displayName || data.name || 'Jogador',
-              photoURL: data.photoURL || data.avatar || '',
+              photoURL: getAvatarImage(data.photoURL || data.avatar || data.avatarId || null),
               level: data.level || 1,
               xp: data.xp || 0,
               district: data.district || 'Portugal',

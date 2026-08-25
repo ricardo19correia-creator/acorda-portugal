@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import type { UserProfile } from '@/lib/game-data'
 import { getEquippedAvatarImage } from '@/lib/inventory'
+import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
 
 export interface PlayerAvatarProps {
@@ -20,11 +21,11 @@ export interface PlayerAvatarProps {
 }
 
 const SIZE_CLASSES = {
-  xs: 'h-7 w-7 rounded-xl text-xs',
-  sm: 'h-10 w-10 rounded-xl text-sm',
-  md: 'h-16 w-16 rounded-2xl text-2xl',
-  lg: 'h-20 w-20 rounded-3xl text-3xl',
-  xl: 'h-28 w-28 sm:h-32 sm:w-32 rounded-4xl text-4xl sm:text-5xl',
+  xs: 'h-7 w-7 rounded-xl',
+  sm: 'h-10 w-10 rounded-xl',
+  md: 'h-16 w-16 rounded-2xl',
+  lg: 'h-20 w-20 rounded-3xl',
+  xl: 'h-28 w-28 sm:h-32 sm:w-32 rounded-4xl',
 }
 
 export function PlayerAvatar({
@@ -44,7 +45,7 @@ export function PlayerAvatar({
     const updateCosmetics = () => {
       if (typeof window !== 'undefined') {
         const stored = localStorage.getItem('user_equipped_avatar')
-        setGlobalEquippedAvatar(stored || getEquippedAvatarImage())
+        setGlobalEquippedAvatar(stored ? getAvatarImage(stored) : getEquippedAvatarImage())
       }
     }
 
@@ -62,20 +63,18 @@ export function PlayerAvatar({
 
   const effectiveAuraId = auraId ?? (profile as any)?.equipped?.auraId
 
-  let effectivePhotoURL =
+  const rawCandidate =
     avatarImage ??
     (isCurrentUser ? globalEquippedAvatar : null) ??
     photoURL ??
     profile?.photoURL ??
-    (isCurrentUser ? globalEquippedAvatar : null) ??
-    (profile ? globalEquippedAvatar : null)
+    (profile as any)?.avatar ??
+    (profile as any)?.equippedAvatar ??
+    (profile as any)?.equipped?.avatar ??
+    globalEquippedAvatar
 
-  if (effectivePhotoURL && effectivePhotoURL.includes('moldura')) {
-    effectivePhotoURL = '/images/avatars/guardiao-vulcanico.jpg'
-  }
-
+  const effectivePhotoURL = getAvatarImage(rawCandidate)
   const effectiveName = displayName ?? name ?? profile?.displayName ?? 'Jogador'
-  const initial = effectiveName.trim().charAt(0).toUpperCase() || 'J'
 
   const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md
   const hasAura = effectiveAuraId === 'prestige_aura_dourada'
@@ -87,30 +86,20 @@ export function PlayerAvatar({
         <div className="pointer-events-none absolute -inset-2.5 rounded-full bg-gold/25 blur-md animate-pulse" />
       )}
 
-      {effectivePhotoURL ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={effectivePhotoURL}
-          alt={effectiveName}
-          className={cn(
-            sizeClass,
-            'object-cover object-center transition-all duration-300 pointer-events-none border border-slate-700/80 shadow-md',
-          )}
-          onError={(e) => {
-            e.currentTarget.src = '/images/avatars/guardiao-vulcanico.jpg'
-          }}
-        />
-      ) : (
-        <div
-          className={cn(
-            sizeClass,
-            'grid place-items-center bg-gradient-to-br from-primary/35 to-accent/20 font-display font-black text-primary transition-all duration-300 pointer-events-none border border-slate-700/80 shadow-md',
-          )}
-        >
-          {initial}
-        </div>
-      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={effectivePhotoURL}
+        alt={effectiveName}
+        className={cn(
+          sizeClass,
+          'object-cover object-center transition-all duration-300 pointer-events-none border border-slate-700/80 shadow-md',
+        )}
+        onError={(e) => {
+          e.currentTarget.src = DEFAULT_AVATAR.image
+        }}
+      />
     </div>
   )
 }
 export default PlayerAvatar
+
