@@ -30,20 +30,16 @@ function DuelPageContent() {
   if (!effectiveDuelId) {
     return (
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
-        {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS */}
-        <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={DUEL_ARENA_BACKGROUND}
-            alt="Arena de Guerra 1v1"
-            className="w-full h-full object-cover object-center select-none pointer-events-none"
-            onError={(e) => {
-              ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
-            }}
-          />
-          {/* Overlay escuro translúcido */}
-          <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px] pointer-events-none" />
-        </div>
+        {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS (100% NÍTIDO E SEM OVERLAYS) */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={DUEL_ARENA_BACKGROUND}
+          alt="Arena de Duelos"
+          className="fixed inset-0 -z-10 w-full h-full object-cover object-center pointer-events-none select-none"
+          onError={(e) => {
+            ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
+          }}
+        />
 
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
@@ -106,20 +102,16 @@ function DuelPageContent() {
 
   return (
     <div className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-transparent">
-      {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS */}
-      <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={DUEL_ARENA_BACKGROUND}
-          alt="Arena de Guerra 1v1"
-          className="w-full h-full object-cover object-center select-none pointer-events-none"
-          onError={(e) => {
-            ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
-          }}
-        />
-        {/* Overlay escuro translúcido para contraste da pergunta e botões */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] pointer-events-none" />
-      </div>
+      {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS (100% NÍTIDO E SEM OVERLAYS) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={DUEL_ARENA_BACKGROUND}
+        alt="Arena de Duelos"
+        className="fixed inset-0 -z-10 w-full h-full object-cover object-center pointer-events-none select-none"
+        onError={(e) => {
+          ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
+        }}
+      />
 
       {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}
       <div className="relative z-10 w-full h-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto bg-transparent">
