@@ -860,12 +860,12 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="w-full max-w-2xl mx-auto flex flex-col justify-between p-1 sm:p-2 select-none animate-rise">
+      <div className="h-[100dvh] w-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto select-none animate-rise">
         {/* ========================================================= */}
-        {/* A. TOPO / VS HEADER (Compacto py-1)                       */}
+        {/* 1. TOPO: VS HEADER + REAGIR + TEMPO (SHRINK-0)            */}
         {/* ========================================================= */}
         <div className="w-full shrink-0">
-          <div className="card-game flex items-center justify-between gap-1.5 rounded-xl py-1 px-2.5 shadow-md border border-white/15 relative overflow-hidden bg-slate-900/90">
+          <div className="card-game flex items-center justify-between gap-2 rounded-2xl py-1.5 px-3 shadow-lg border border-white/15 relative overflow-hidden bg-slate-900/90">
             {/* 1v1 VFX OVERLAY: Raio Lusitano */}
             {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
@@ -904,8 +904,8 @@ export function DuelArena({
               )}
 
             {/* Linha dos Jogadores VS */}
-            <div className="flex items-center gap-1.5 flex-1 min-w-0 relative">
-              <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+            <div className="flex items-center gap-2 flex-1 min-w-0 relative">
+              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
                 <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
                 {playerReaction && (
                   <ProvocationBubble
@@ -917,19 +917,19 @@ export function DuelArena({
               </div>
 
               <div className="min-w-0">
-                <span className="font-display text-[11px] font-black text-foreground truncate block leading-none">
-                  {me?.displayName || 'Jogador'} <span className="text-primary text-[9px]">(Tu)</span>
+                <span className="font-display text-xs font-black text-foreground truncate block leading-none">
+                  {me?.displayName || 'Jogador'} <span className="text-primary text-[10px]">(Tu)</span>
                 </span>
-                <p className="font-display text-[11px] font-black text-primary text-glow-primary leading-none mt-0.5">
-                  {me?.score || 0} <span className="text-[0.55rem] text-muted-foreground font-normal">pts</span>
+                <p className="font-display text-xs font-black text-primary text-glow-primary leading-none mt-1">
+                  {me?.score || 0} <span className="text-[0.6rem] text-muted-foreground font-normal">pts</span>
                 </p>
               </div>
             </div>
 
             {/* Center VS Indicator + Reagir Button */}
-            <div className="flex flex-col items-center px-1 shrink-0">
+            <div className="flex flex-col items-center px-1.5 shrink-0">
               <div className="flex items-center gap-1">
-                <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1 text-[9px] font-black">
+                <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1.5 text-[9px] font-black">
                   VS
                 </span>
                 <span className="font-mono text-[10px] font-black text-gold">
@@ -938,13 +938,13 @@ export function DuelArena({
               </div>
 
               {/* Botão Mini Reagir */}
-              <div className="relative mt-0.5">
+              <div className="relative mt-1">
                 <button
                   type="button"
                   disabled={tauntCooldown > 0}
                   onClick={() => setTauntModalOpen(!tauntModalOpen)}
                   className={cn(
-                    'px-1.5 py-0.2 rounded-full border border-purple-500/40 bg-purple-500/15 text-purple-300 text-[9px] font-bold transition flex items-center gap-0.5 active:scale-95 cursor-pointer',
+                    'px-2 py-0.5 rounded-full border border-purple-500/40 bg-purple-500/15 text-purple-300 text-[10px] font-bold transition flex items-center gap-0.5 active:scale-95 cursor-pointer',
                     tauntCooldown > 0 && 'opacity-50 cursor-not-allowed'
                   )}
                 >
@@ -963,17 +963,17 @@ export function DuelArena({
             </div>
 
             {/* Player Right (Opponent) */}
-            <div className="flex items-center justify-end gap-1.5 flex-1 min-w-0 text-right relative">
+            <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right relative">
               <div className="min-w-0">
-                <span className="font-display text-[11px] font-black text-foreground truncate block leading-none">
+                <span className="font-display text-xs font-black text-foreground truncate block leading-none">
                   {opponent?.displayName || 'Adversário'}
                 </span>
-                <p className="font-display text-[10px] font-bold text-muted-foreground truncate leading-none mt-0.5">
+                <p className="font-display text-xs font-bold text-muted-foreground truncate leading-none mt-1">
                   P{Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10
                 </p>
               </div>
 
-              <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
                 <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
                 {opponentReaction && (
                   <ProvocationBubble
@@ -987,7 +987,7 @@ export function DuelArena({
           </div>
 
           {/* Barra de Tempo Compacta */}
-          <div className="flex items-center gap-1 mt-1 w-full px-0.5">
+          <div className="flex items-center gap-1.5 mt-1.5 w-full px-0.5">
             <div
               className={cn(
                 'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
@@ -999,146 +999,147 @@ export function DuelArena({
                 style={{ width: `${timePercentage}%` }}
               />
             </div>
-            <span className={cn('font-mono font-bold text-[10px] shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
+            <span className={cn('font-mono font-bold text-xs shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
               {timeLeft}s
             </span>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* B. ZONA DA PERGUNTA (py-2 px-3 text-xs sm:text-sm max-h-[140px]) */}
+        {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, MIN-H-140, MAX-H-220)*/}
         {/* ========================================================= */}
-        <div className="my-1.5 w-full flex flex-col items-center justify-center relative">
+        <div className="my-auto w-full flex flex-col items-center justify-center relative">
           {/* Feedback visual instantâneo overlay */}
           {feedback && (
             <div
               className={cn(
-                'mb-1 px-2.5 py-0.5 rounded-lg font-display text-[10px] sm:text-xs font-black tracking-wide shadow-md transition-all duration-300 animate-pop z-20 flex items-center gap-1 shrink-0',
+                'mb-2 px-3 py-1 rounded-xl font-display text-xs font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0',
                 feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
                 feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
                 feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
               )}
             >
-              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-3 w-3 shrink-0" />}
-              {feedback.status === 'WRONG' && <XCircle className="h-3 w-3 shrink-0" />}
-              {feedback.status === 'TIMEOUT' && <Clock className="h-3 w-3 shrink-0" />}
+              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />}
+              {feedback.status === 'WRONG' && <XCircle className="h-3.5 w-3.5 shrink-0" />}
+              {feedback.status === 'TIMEOUT' && <Clock className="h-3.5 w-3.5 shrink-0" />}
               <span>{feedback.message}</span>
             </div>
           )}
 
-          {/* Caixa da Pergunta com max-h-[140px] */}
-          <div className="py-2 px-3 sm:py-3 sm:px-4 bg-slate-900/90 rounded-xl border border-slate-700/60 max-h-[140px] overflow-y-auto w-full text-center flex flex-col items-center justify-center shadow-lg">
-            <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mb-0.5 shrink-0">
+          {/* Card com corpo e presença visual elegante */}
+          <div className="w-full min-h-[140px] max-h-[220px] p-4 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-cyan-500/30 rounded-2xl shadow-xl shadow-black/40 backdrop-blur-md overflow-y-auto">
+            <span className="text-[11px] text-cyan-400 font-bold uppercase tracking-wider mb-1 shrink-0">
               {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
             </span>
-            <h1 className="text-xs sm:text-sm font-bold text-center leading-snug text-white text-balance line-clamp-4">
+            <h1 className="text-sm sm:text-base font-bold text-center leading-snug text-white text-balance line-clamp-4">
               {currentQuestion?.question}
             </h1>
           </div>
 
           {/* Pista Histórica no Duelo */}
           {activeClue && (
-            <div className="mt-1 rounded border border-amber-500/50 bg-amber-500/15 px-2 py-0.5 text-[10px] text-amber-100 flex items-center gap-1 backdrop-blur-xl animate-rise shadow-sm shrink-0">
-              <Lightbulb className="h-3 w-3 text-amber-400 shrink-0" />
+            <div className="mt-1.5 rounded-xl border border-amber-500/50 bg-amber-500/15 px-3 py-1 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
+              <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
               <span className="font-medium truncate">{activeClue}</span>
             </div>
           )}
 
           {/* Freeze Banner no Duelo */}
           {isFrozen && (
-            <div className="mt-1 rounded border border-blue-400/60 bg-blue-500/20 px-2 py-0.5 text-[10px] text-blue-100 flex items-center justify-center gap-1 backdrop-blur-xl animate-pulse shadow-sm shrink-0">
-              <Snowflake className="h-3 w-3 text-blue-300 animate-spin" />
+            <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+              <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
               <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
             </div>
           )}
         </div>
 
         {/* ========================================================= */}
-        {/* C. AJUDAS / POWER-UPS (my-1 scale-90)                     */}
+        {/* 3. FUNDO: AJUDAS + GRELHA DE RESPOSTAS 2x2 (SHRINK-0)     */}
         {/* ========================================================= */}
-        <div className="my-1 scale-90 origin-center flex items-center justify-center gap-2 shrink-0 w-full">
-          <QuizPowerUpsBar
-            inventory={inventory}
-            disabled={feedback !== null || isSubmitting || timeLeft <= 0}
-            used5050={eliminatedOptions.length > 0}
-            usedClue={activeClue !== null}
-            isFrozen={isFrozen}
-            freezeTimeLeft={freezeTimeLeft}
-            onUse5050={handleUse5050}
-            onUseClue={handleUseClue}
-            onUseFreeze={handleUseFreeze}
-          />
-        </div>
+        <div className="w-full flex flex-col gap-2 shrink-0">
+          {/* Barra de Ajudas */}
+          <div className="flex justify-center gap-3 mb-1">
+            <QuizPowerUpsBar
+              inventory={inventory}
+              disabled={feedback !== null || isSubmitting || timeLeft <= 0}
+              used5050={eliminatedOptions.length > 0}
+              usedClue={activeClue !== null}
+              isFrozen={isFrozen}
+              freezeTimeLeft={freezeTimeLeft}
+              onUse5050={handleUse5050}
+              onUseClue={handleUseClue}
+              onUseFreeze={handleUseFreeze}
+            />
+          </div>
 
-        {/* ========================================================= */}
-        {/* D. GRELHA DE RESPOSTAS 2x2 (h-11 sm:h-12 py-1 text-xs)    */}
-        {/* ========================================================= */}
-        <div className="grid grid-cols-2 gap-1.5 pb-1 shrink-0 w-full">
-          {currentQuestion?.options.map((opt, idx) => {
-            const isSelected = selectedOption === opt.key
-            const isCorrectOption = opt.key === currentQuestion.correct
-            const showFeedback = feedback !== null
-            const isEliminated = eliminatedOptions.includes(opt.key)
-            const optionKey = (['A', 'B', 'C', 'D'][idx] || opt.key) as 'A' | 'B' | 'C' | 'D'
+          {/* Grelha 2x2 com botões h-16 confortáveis */}
+          <div className="grid grid-cols-2 gap-2 w-full">
+            {currentQuestion?.options.map((opt, idx) => {
+              const isSelected = selectedOption === opt.key
+              const isCorrectOption = opt.key === currentQuestion.correct
+              const showFeedback = feedback !== null
+              const isEliminated = eliminatedOptions.includes(opt.key)
+              const optionKey = (['A', 'B', 'C', 'D'][idx] || opt.key) as 'A' | 'B' | 'C' | 'D'
 
-            if (isEliminated) {
-              return (
-                <div
-                  key={opt.key}
-                  className="h-11 sm:h-12 px-2 py-1 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-1.5 text-left opacity-35 select-none cursor-not-allowed"
-                >
-                  <span className="w-5 h-5 rounded-full bg-slate-900 border border-slate-800 text-slate-500 font-black text-[10px] flex items-center justify-center shrink-0 line-through">
-                    {optionKey}
-                  </span>
-                  <span className="text-[11px] font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
-                    {opt.text}
-                  </span>
-                </div>
-              )
-            }
-
-            let buttonStyles = 'bg-slate-900/95 border border-slate-700 active:border-cyan-400 active:bg-cyan-950/40 shadow-sm'
-
-            if (showFeedback) {
-              if (isCorrectOption) {
-                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-md shadow-emerald-500/30'
-              } else if (isSelected && !isCorrectOption) {
-                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-md shadow-rose-500/30'
-              } else {
-                buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+              if (isEliminated) {
+                return (
+                  <div
+                    key={opt.key}
+                    className="h-16 w-full p-2.5 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                  >
+                    <span className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs flex items-center justify-center shrink-0 line-through">
+                      {optionKey}
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
+                      {opt.text}
+                    </span>
+                  </div>
+                )
               }
-            } else if (isSelected) {
-              buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white'
-            }
 
-            return (
-              <button
-                key={opt.key}
-                disabled={selectedOption !== null || isSubmitting}
-                onClick={() => handleSelectOption(opt.key)}
-                className={cn(
-                  'h-11 sm:h-12 px-2 py-1 rounded-xl flex items-center gap-1.5 text-left transition select-none cursor-pointer active:scale-98',
-                  buttonStyles,
-                )}
-              >
-                <span
+              let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
+
+              if (showFeedback) {
+                if (isCorrectOption) {
+                  buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
+                } else if (isSelected && !isCorrectOption) {
+                  buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+                } else {
+                  buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+                }
+              } else if (isSelected) {
+                buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white'
+              }
+
+              return (
+                <button
+                  key={opt.key}
+                  disabled={selectedOption !== null || isSubmitting}
+                  onClick={() => handleSelectOption(opt.key)}
                   className={cn(
-                    'w-5 h-5 rounded-full font-black text-[10px] flex items-center justify-center shrink-0 border transition-colors',
-                    showFeedback && isCorrectOption
-                      ? 'bg-emerald-500 border-emerald-300 text-slate-950'
-                      : showFeedback && isSelected
-                        ? 'bg-rose-600 border-rose-400 text-white'
-                        : 'bg-slate-800 text-cyan-400 border-slate-700',
+                    'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98',
+                    buttonStyles,
                   )}
                 >
-                  {optionKey}
-                </span>
-                <span className="text-[11px] font-semibold text-slate-100 leading-tight line-clamp-2 flex-1">
-                  {opt.text}
-                </span>
-              </button>
-            )
-          })}
+                  <span
+                    className={cn(
+                      'w-7 h-7 rounded-lg font-extrabold text-xs flex items-center justify-center shrink-0 border transition-colors',
+                      showFeedback && isCorrectOption
+                        ? 'bg-emerald-500 border-emerald-300 text-slate-950'
+                        : showFeedback && isSelected
+                          ? 'bg-rose-600 border-rose-400 text-white'
+                          : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30',
+                    )}
+                  >
+                    {optionKey}
+                  </span>
+                  <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
+                    {opt.text}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       </div>
     )

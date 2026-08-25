@@ -43,7 +43,7 @@ export function QuizPowerUpsBar({
   const canUseFreeze = !disabled && countFreeze > 0
 
   return (
-    <div className="h-[7vh] flex items-center justify-center gap-2 select-none shrink-0">
+    <div className="flex items-center justify-center gap-2.5 sm:gap-3 select-none shrink-0">
       {/* 1. POWER-UP 50/50 */}
       <button
         type="button"
@@ -51,20 +51,20 @@ export function QuizPowerUpsBar({
         onClick={onUse5050}
         aria-label="Usar Ajuda 50/50"
         className={cn(
-          'h-7 px-3 py-0.5 rounded-lg border font-bold text-[10px] flex items-center gap-1 active:scale-95 transition select-none cursor-pointer',
+          'h-8 px-3.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1.5 active:scale-95 transition-all select-none cursor-pointer shadow-sm',
           used5050
             ? 'bg-slate-900 border-emerald-500/60 text-emerald-400 opacity-80 cursor-default'
             : canUse5050
-              ? 'bg-slate-800 border-slate-700 text-cyan-400 hover:border-cyan-400 shadow-sm'
+              ? 'bg-slate-800/90 border-slate-700 text-cyan-300 hover:border-cyan-400 hover:bg-slate-800'
               : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <span className="flex items-center gap-0.5">
+        <span className="flex items-center gap-1">
           {used5050 ? <Check className="h-3.5 w-3.5 text-emerald-400 stroke-[3]" /> : '✨ 50/50'}
         </span>
         <span
           className={cn(
-            'px-1 py-0 rounded text-[9px] font-black',
+            'px-1.5 py-0.2 rounded text-[10px] font-black',
             used5050
               ? 'bg-emerald-500/20 text-emerald-300'
               : count5050 > 0
@@ -83,20 +83,20 @@ export function QuizPowerUpsBar({
         onClick={onUseFreeze}
         aria-label="Usar Congelar Tempo (+15s)"
         className={cn(
-          'h-7 px-3 py-0.5 rounded-lg border font-bold text-[10px] flex items-center gap-1 active:scale-95 transition select-none cursor-pointer',
+          'h-8 px-3.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1.5 active:scale-95 transition-all select-none cursor-pointer shadow-sm',
           isFrozen
-            ? 'bg-slate-900 border-blue-400 text-blue-200 shadow-[0_0_12px_rgba(96,165,250,0.5)] animate-pulse'
+            ? 'bg-slate-900 border-blue-400 text-blue-200 shadow-[0_0_15px_rgba(96,165,250,0.5)] animate-pulse'
             : canUseFreeze
-              ? 'bg-slate-800 border-slate-700 text-amber-300 hover:border-amber-400 shadow-sm'
+              ? 'bg-slate-800/90 border-slate-700 text-amber-300 hover:border-amber-400 hover:bg-slate-800'
               : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <span className="flex items-center gap-0.5">
+        <span className="flex items-center gap-1">
           {isFrozen ? <Snowflake className="h-3.5 w-3.5 animate-spin text-blue-300" /> : '⏳ Congelar'}
         </span>
         <span
           className={cn(
-            'px-1 py-0 rounded text-[9px] font-black',
+            'px-1.5 py-0.2 rounded text-[10px] font-black',
             isFrozen
               ? 'bg-blue-500/30 text-white'
               : countFreeze > 0
