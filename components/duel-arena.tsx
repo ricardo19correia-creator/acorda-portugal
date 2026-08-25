@@ -724,6 +724,17 @@ export function DuelArena({
     router.push('/jogar')
   }
 
+  // Prevenção de saída/fecho de janela acidental durante duelo ativo
+  useEffect(() => {
+    if (!duel || duel.status === 'finished') return
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [duel?.status])
+
   const handleSurrenderAndExit = () => {
     setIsSurrenderModalOpen(true)
   }
@@ -996,7 +1007,12 @@ export function DuelArena({
             </div>
 
             {/* Linha dos Jogadores VS */}
-            <div className="flex items-center gap-2 flex-1 min-w-0 relative">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0 relative">
+              {/* Botão Discreto de Desistência 1v1 */}
+              <GameExitControl
+                mode="1v1"
+                onConfirmExit={handleConfirmSurrender}
+              />
               <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
                 <PlayerAvatar
                   profile={profile ?? undefined}
@@ -1371,11 +1387,15 @@ export function DuelArena({
           {isWinner ? '🏆 VITÓRIA!' : isDraw ? '🤝 EMPATE!' : '💪 BOA PARTIDA!'}
         </h1>
         <p className="mt-2 text-sm sm:text-base text-muted-foreground max-w-lg mx-auto font-medium">
-          {isWinner
-            ? 'Dominaste o duelo com conhecimento e rapidez imbatível.'
-            : isDraw
-              ? 'Foi taco a taco até à última pergunta.'
-              : 'Ficaste a um passo da vitória. Pede uma revanche!'}
+          {duel.winnerReason === 'opponent_forfeit' || duel.winnerReason === 'surrender' || duel.abandonedBy
+            ? isWinner
+              ? 'O adversário desistiu da partida! Vitória concedida por abandono.'
+              : 'Abandonaste a partida. Vitória concedida ao adversário.'
+            : isWinner
+              ? 'Dominaste o duelo com conhecimento e rapidez imbatível.'
+              : isDraw
+                ? 'Foi taco a taco até à última pergunta.'
+                : 'Ficaste a um passo da vitória. Pede uma revanche!'}
         </p>
 
         {/* 2. HEAD TO HEAD VERSUS CARD */}

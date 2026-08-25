@@ -135,7 +135,8 @@ export interface DuelDocument {
   playerB?: DuelPlayerData | null
   questions: DuelQuestion[]
   winnerUid?: string | null
-  winnerReason?: 'score' | 'draw' | 'abandon' | 'surrender' | null
+  winnerReason?: 'score' | 'draw' | 'abandon' | 'surrender' | 'opponent_forfeit' | null
+  abandonedBy?: string | null
   surrenderedBy?: string | null
   rewardsClaimed?: Record<string, boolean>
   rematch?: DuelRematchState | null
@@ -996,7 +997,7 @@ export async function submitDuelAnswer(
 
     let newStatus: DuelStatus = duel.status === 'matched' ? 'playing' : duel.status
     let winnerUid: string | null = duel.winnerUid || null
-    let winnerReason: 'score' | 'draw' | 'abandon' | 'surrender' | null = duel.winnerReason || null
+    let winnerReason: 'score' | 'draw' | 'abandon' | 'surrender' | 'opponent_forfeit' | null = duel.winnerReason || null
     let finishedAt: number | null = duel.finishedAt || null
 
     if (player.finished && opponent?.finished) {
@@ -1468,7 +1469,8 @@ export async function surrenderDuel(duelId: string, surrenderingUid: string): Pr
       const updates: Partial<DuelDocument> & Record<string, any> = {
         status: 'finished',
         winnerUid,
-        winnerReason: 'surrender',
+        winnerReason: 'opponent_forfeit',
+        abandonedBy: surrenderingUid,
         surrenderedBy: surrenderingUid,
         finishedAt: now,
         lastEvent: surrenderEvent,
@@ -1489,3 +1491,5 @@ export async function surrenderDuel(duelId: string, surrenderingUid: string): Pr
     return { success: false }
   }
 }
+
+export const forfeitDuel = surrenderDuel

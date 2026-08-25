@@ -367,6 +367,21 @@ export function QuizScreen({
     setPhase('answering')
   }, [gameId, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
 
+  // Prevenção de fecho acidental no meio de uma partida
+  useEffect(() => {
+    if (phase === 'finished') return
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [phase])
+
+  const handleAbandonSolo = useCallback(() => {
+    router.push('/jogar')
+  }, [router])
+
   // Cooldown de reações
   useEffect(() => {
     if (reactionCooldown <= 0) return
@@ -829,15 +844,12 @@ export function QuizScreen({
       {/* ========================================================= */}
       <div className="w-full shrink-0">
         <div className="w-full flex items-center justify-between px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl shadow-md">
-          {/* Lado Esquerdo: Botão Sair + Avatar + Nome/Nível */}
+          {/* Lado Esquerdo: Botão Desistir/Sair + Avatar + Nome/Nível */}
           <div className="flex items-center gap-2 min-w-0">
-            <Link
-              href="/jogar"
-              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer shrink-0"
-              title="Sair para a Central"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Link>
+            <GameExitControl
+              mode="solo"
+              onConfirmExit={handleAbandonSolo}
+            />
             <div className="shrink-0 w-8 h-8 flex items-center justify-center">
               <PlayerAvatar profile={profile ?? undefined} displayName={user?.displayName || profile?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
             </div>
