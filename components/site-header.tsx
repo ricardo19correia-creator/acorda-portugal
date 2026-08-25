@@ -69,28 +69,43 @@ export function SiteHeader() {
         borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
       }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand Logo */}
-        <div className="flex items-center gap-3">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
+        {/* Esquerda: Brand Logo (Oculta subtítulos longos no mobile para evitar sobreposição) */}
+        <div className="flex items-center min-w-0 shrink">
           <Link
             href="/"
             onClick={handleLogoClick}
             aria-label="Acorda Portugal — início"
-            className="group flex items-center transition-transform hover:scale-105"
+            className="group flex items-center min-w-0"
           >
             <BrandLogo />
           </Link>
         </div>
 
-        {/* Center: Desktop Navigation */}
-        <nav aria-label="Navegação principal" className="hidden items-center gap-1 md:flex">
+        {/* Centro: Badge Global de Saldo de Moedas (€ Acorda) com shrink-0 */}
+        <Link
+          href="/loja"
+          title="O teu Saldo de € Acorda - Clica para abrir a Loja"
+          className={cn(
+            'flex items-center gap-1 sm:gap-1.5 rounded-full border px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95 shrink-0 select-none',
+            isBalancePulsing
+              ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.8)] scale-105 ring-2 ring-emerald-400/50'
+              : 'border-emerald-500/40 bg-emerald-950/80 text-emerald-300 hover:border-emerald-400 hover:bg-emerald-900/60 hover:shadow-[0_0_12px_rgba(16,185,129,0.35)]',
+          )}
+        >
+          <span className="font-extrabold text-emerald-400">€</span>
+          <span className="tabular-nums tracking-wide">{formattedCoins}</span>
+        </Link>
+
+        {/* Desktop Navigation (lg+) */}
+        <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">
           {NAV.map((item) => {
             const Icon = item.icon
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-foreground"
+                className="flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-foreground"
               >
                 <Icon className="h-4 w-4" />
                 <span>{item.label}</span>
@@ -99,60 +114,32 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Right: Audio Player + Economy Badge + Online Users Badge + Play CTA */}
-        <nav aria-label="Ações de utilizador" className="hidden items-center gap-3 md:flex">
-          {/* Badge Global de Saldo de Moedas (€ Acorda) */}
-          <Link
-            href="/loja"
-            title="O teu Saldo de € Acorda - Clica para abrir a Loja"
-            className={cn(
-              'flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-black transition-all cursor-pointer shadow-sm active:scale-95',
-              isBalancePulsing
-                ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_20px_rgba(16,185,129,0.8)] scale-105 ring-2 ring-emerald-400/50'
-                : 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:border-emerald-400 hover:bg-emerald-500/25 hover:shadow-[0_0_12px_rgba(16,185,129,0.35)]',
-            )}
-          >
-            <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums tracking-wide">{formattedCoins}</span>
-          </Link>
-
-          {/* Botão Compacto de Áudio */}
+        {/* Desktop Controls (lg+) */}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
           <AudioPlayer />
-
-          {/* Indicador de Utilizadores Online */}
           <OnlineUsersBadge />
-
-          {/* Botão Principal Jogar */}
           <PlayButton href="/jogar" size="md" label="Jogar" />
-        </nav>
+        </div>
 
-        {/* Mobile: Economy Badge + Audio + Online Badge + Mobile Toggle */}
-        <div className="flex items-center gap-2 md:hidden">
-          <Link
-            href="/loja"
-            title="Saldo € Acorda"
-            className={cn(
-              'flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-black transition-all cursor-pointer',
-              isBalancePulsing
-                ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.7)] scale-105'
-                : 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
-            )}
-          >
-            <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums tracking-wide">{formattedCoins}</span>
-          </Link>
+        {/* Mobile / Tablet Controls (< lg): Som compacto, Online compacto e Botão Hambúrguer sempre visível */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 lg:hidden">
+          <AudioPlayer variant="compact" />
+          <OnlineUsersBadge variant="compact" />
 
-          <AudioPlayer />
-          <OnlineUsersBadge />
+          {/* Botão Hambúrguer (Mobile) */}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Fechar menu' : 'Abrir menu'}
-            className="grid h-11 w-11 place-items-center rounded-2xl border border-white/15 bg-white/5 text-foreground transition-all hover:bg-white/10 hover:border-white/30 cursor-pointer"
+            className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl border border-white/15 bg-slate-900/90 text-white transition-all hover:bg-slate-800 hover:border-white/30 cursor-pointer active:scale-95 shrink-0 shadow-md"
           >
-            {open ? <X className="h-5 w-5 pointer-events-none" /> : <Menu className="h-5 w-5 pointer-events-none" />}
+            {open ? (
+              <X className="h-5 w-5 pointer-events-none text-rose-400" />
+            ) : (
+              <Menu className="h-5 w-5 pointer-events-none text-slate-100" />
+            )}
           </button>
         </div>
       </div>

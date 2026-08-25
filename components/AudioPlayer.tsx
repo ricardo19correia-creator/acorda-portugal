@@ -2,7 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function AudioPlayer({ className = '' }: { className?: string }) {
+export default function AudioPlayer({
+  className = '',
+  variant = 'default',
+}: {
+  className?: string
+  variant?: 'default' | 'compact'
+}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -36,8 +42,28 @@ export default function AudioPlayer({ className = '' }: { className?: string }) 
     setIsPlaying((prev) => !prev);
   };
 
+  if (variant === 'compact') {
+    return (
+      <div className={`flex items-center select-none shrink-0 ${className}`}>
+        <audio ref={audioRef} src="/audio/theme-bg.mp3" loop preload="auto" playsInline />
+        <button
+          type="button"
+          onClick={togglePlay}
+          className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200 cursor-pointer ${
+            isPlaying
+              ? 'bg-emerald-500/20 border-emerald-500/60 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.3)]'
+              : 'bg-zinc-900/80 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+          }`}
+          title={isPlaying ? 'Desligar Música' : 'Ligar Música'}
+        >
+          <span className="text-xs select-none">{isPlaying ? '🔊' : '🔇'}</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className={`flex items-center select-none ${className}`}>
+    <div className={`flex items-center select-none shrink-0 ${className}`}>
       <audio ref={audioRef} src="/audio/theme-bg.mp3" loop preload="auto" playsInline />
       <button
         type="button"

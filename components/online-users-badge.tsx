@@ -39,6 +39,24 @@ export function OnlineUsersBadge({ className, variant = 'default' }: OnlineUsers
     )
   }
 
+  if (variant === 'compact') {
+    return (
+      <div
+        className={cn(
+          'flex items-center gap-1.5 px-2 py-1 bg-zinc-900/80 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-md backdrop-blur-md select-none shrink-0',
+          className
+        )}
+        title={`${displayCount} jogadores online em tempo real`}
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+        </span>
+        <strong className="text-emerald-400 font-mono font-black text-[11px]">{displayCount}</strong>
+      </div>
+    )
+  }
+
   // Header / Default variant
   return (
     <div
