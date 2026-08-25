@@ -90,7 +90,21 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     animation: 'sparkle',
   },
 
-  // 2. COMUNS (500 MOEDAS)
+  // 2. PROVOCAÇÕES EM DESTAQUE (250 MOEDAS)
+  {
+    id: 'PROV_010',
+    emoji: '👑',
+    label: 'Quem manda aqui soy yoo',
+    text: '👑 Quem manda aqui soy yoo',
+    category: 'competicao',
+    rarity: 'Épico',
+    price: 250,
+    isDefault: false,
+    sortOrder: 0,
+    animation: 'flame',
+  },
+
+  // 3. COMUNS (500 MOEDAS)
   {
     id: 'emote_ahahah',
     emoji: '😂',

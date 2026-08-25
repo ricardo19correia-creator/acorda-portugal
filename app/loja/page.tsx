@@ -664,6 +664,9 @@ export default function LojaPage() {
           } else if (item.category === 'titulos') {
             updatePayload.equippedTitle = item.name
             updatePayload['equipped.title'] = item.name
+          } else if (item.category === 'taunts') {
+            updatePayload['inventory.taunts'] = arrayUnion(item.id)
+            updatePayload['inventory.emotes'] = arrayUnion(item.id)
           }
           await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
         } catch (e) {
@@ -1165,9 +1168,17 @@ export default function LojaPage() {
                             "transition-all duration-300 transform",
                             testingEmoteId === item.id ? "scale-115 animate-bounce" : "scale-100"
                           )}>
-                            <div className="flex items-center gap-2.5 rounded-2xl bg-slate-900/90 border border-purple-400/50 px-4 py-2.5 shadow-[0_0_20px_rgba(168,85,247,0.35)] backdrop-blur-md">
-                              <span className="text-3xl filter drop-shadow">{item.icon || '💬'}</span>
-                              <span className="font-display text-sm font-black text-white">{item.name.replace(/^[\p{Emoji}\s]+/u, '')}</span>
+                            <div className="flex items-center gap-2.5 rounded-2xl bg-slate-900/90 border border-cyan-400/50 px-4 py-2.5 shadow-[0_0_20px_rgba(6,182,212,0.35)] backdrop-blur-md">
+                              <span className="text-3xl filter drop-shadow">{item.icon || '👑'}</span>
+                              {item.id === 'PROV_010' ? (
+                                <h3 className="taunt-title text-center text-cyan-400 font-extrabold leading-tight text-xs sm:text-sm">
+                                  QUEM MANDA AQUI<br/>SOY YOO
+                                </h3>
+                              ) : (
+                                <h3 className="taunt-title text-center text-cyan-400 font-extrabold leading-tight text-xs sm:text-sm">
+                                  {item.name.replace(/^[\p{Emoji}\s]+/u, '')}
+                                </h3>
+                              )}
                             </div>
                           </div>
 

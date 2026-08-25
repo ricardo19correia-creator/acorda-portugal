@@ -461,6 +461,18 @@ export const SHOP_CATALOG: ShopItem[] = [
     price: 30000,
     icon: 'Crown',
   },
+  // 💬 PROVOCAÇÕES & REAÇÕES 1v1
+  {
+    id: 'PROV_010',
+    name: 'Quem manda aqui soy yoo',
+    description: 'Provocação oficial assertiva para duelos 1v1 com balão de fala.',
+    category: 'provocacao_1v1' as any,
+    rarity: 'epico',
+    type: 'taunt' as any,
+    slot: 'taunt' as any,
+    price: 250,
+    icon: 'Crown',
+  },
 
   // ⚡ UTILIDADE (Consumíveis de jogo)
   {

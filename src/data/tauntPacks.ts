@@ -41,6 +41,7 @@ export const TAUNT_PACKS: TauntPack[] = [
     badgeColor: 'bg-rose-500/20 text-rose-300 border-rose-500/40',
     icon: '⏳',
     taunts: [
+      { id: 'PROV_010', text: 'Quem manda aqui soy yoo 👑' },
       { id: 't_tempo_voar', text: 'O tempo está a voar! ⏳' },
       { id: 't_sorte', text: 'Respondeste à sorte? 🎲' },
       { id: 't_chuto', text: 'Chutaste para o ar! 🚀' },
