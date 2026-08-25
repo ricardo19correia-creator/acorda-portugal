@@ -56,6 +56,7 @@ import {
 } from '@/lib/duel'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
+import { ProvocationBubble } from '@/components/ProvocationBubble'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
@@ -142,11 +143,13 @@ export function DuelArena({
   // Rematch action state
   const [rematchLoading, setRematchLoading] = useState(false)
 
-  // Emotes & Quick Reactions System State (2s Cooldown Anti-Spam)
+  // Emotes & Quick Reactions System State (Bi-directional Network Synchronization)
   const [tauntModalOpen, setTauntModalOpen] = useState(false)
   const [tauntCooldown, setTauntCooldown] = useState(0)
+  const [playerReaction, setPlayerReaction] = useState<{ message: string; timestamp: number } | null>(null)
+  const [opponentReaction, setOpponentReaction] = useState<{ message: string; timestamp: number } | null>(null)
   const [activeEmote, setActiveEmote] = useState<{ senderId: string; emoji: string; label: string; text: string; timestamp: number } | null>(null)
-  const lastProcessedEmoteTs = useRef<number>(0)
+  const lastProcessedEmoteId = useRef<string>('')
   const [unlockedTaunts, setUnlockedTaunts] = useState<string[]>(['pack_basico'])
 
   // Load user unlocked taunts and equipped emotes
@@ -174,39 +177,55 @@ export function DuelArena({
     return () => clearInterval(timer)
   }, [tauntCooldown])
 
-  // Real-time Emote synchronization & 2.8s auto-dismiss
+  // Real-time Bi-directional Emote & Reaction Synchronization (Creator <-> Guest)
   useEffect(() => {
-    if (duel?.lastEmote && duel.lastEmote.timestamp > lastProcessedEmoteTs.current) {
-      lastProcessedEmoteTs.current = duel.lastEmote.timestamp
-      setActiveEmote({
-        senderId: duel.lastEmote.senderId,
-        emoji: duel.lastEmote.emoji || '💬',
-        label: duel.lastEmote.label || duel.lastEmote.text,
-        text: duel.lastEmote.text,
-        timestamp: duel.lastEmote.timestamp,
-      })
+    const rawReaction = duel?.lastEmote || (duel as any)?.lastReaction || (duel?.lastTaunt ? {
+      id: `taunt_${duel.lastTaunt.timestamp}`,
+      senderId: duel.lastTaunt.senderId,
+      senderName: duel.lastTaunt.senderName,
+      text: duel.lastTaunt.text,
+      label: duel.lastTaunt.text,
+      emoji: '💬',
+      timestamp: duel.lastTaunt.timestamp,
+    } : null)
 
+    if (!rawReaction) return
+
+    const reactionKey = (rawReaction as any).id || `${rawReaction.senderId}_${rawReaction.timestamp}`
+    if (reactionKey === lastProcessedEmoteId.current) return
+    lastProcessedEmoteId.current = reactionKey
+
+    const myUid = currentPlayer.uid || user?.uid
+    const isFromMe = rawReaction.senderId === myUid
+    const displayMsg = rawReaction.text || (rawReaction.emoji ? `${rawReaction.emoji} ${rawReaction.label || ''}` : rawReaction.label) || 'Reação'
+
+    const emoteObj = {
+      senderId: rawReaction.senderId,
+      emoji: rawReaction.emoji || '💬',
+      label: rawReaction.label || rawReaction.text,
+      text: rawReaction.text,
+      timestamp: rawReaction.timestamp,
+    }
+
+    setActiveEmote(emoteObj)
+
+    if (isFromMe) {
+      setPlayerReaction({ message: displayMsg, timestamp: rawReaction.timestamp })
       const timer = setTimeout(() => {
+        setPlayerReaction(null)
         setActiveEmote(null)
-      }, 2800)
+      }, 3500)
       return () => clearTimeout(timer)
-    } else if (duel?.lastTaunt && duel.lastTaunt.timestamp > lastProcessedEmoteTs.current) {
-      // Compatibility with legacy lastTaunt
-      lastProcessedEmoteTs.current = duel.lastTaunt.timestamp
-      setActiveEmote({
-        senderId: duel.lastTaunt.senderId,
-        emoji: '💬',
-        label: duel.lastTaunt.text,
-        text: duel.lastTaunt.text,
-        timestamp: duel.lastTaunt.timestamp,
-      })
-
+    } else {
+      playEmoteSound(rawReaction.label || rawReaction.text)
+      setOpponentReaction({ message: displayMsg, timestamp: rawReaction.timestamp })
       const timer = setTimeout(() => {
+        setOpponentReaction(null)
         setActiveEmote(null)
-      }, 2800)
+      }, 3500)
       return () => clearTimeout(timer)
     }
-  }, [duel?.lastEmote, duel?.lastTaunt])
+  }, [duel?.lastEmote, (duel as any)?.lastReaction, duel?.lastTaunt, currentPlayer.uid, user?.uid])
 
   // Handle sending an Emote
   const handleSendEmote = async (emote: EmoteItem) => {
@@ -217,7 +236,11 @@ export function DuelArena({
     // Immediate local feedback & audio chime
     playEmoteSound(emote.label)
     const now = Date.now()
-    lastProcessedEmoteTs.current = now
+    const uniqueLocalId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `local_${now}`
+    lastProcessedEmoteId.current = uniqueLocalId
+
+    const msg = emote.text || `${emote.emoji} ${emote.label}`
+    setPlayerReaction({ message: msg, timestamp: now })
     setActiveEmote({
       senderId: currentPlayer.uid,
       emoji: emote.emoji,
@@ -225,11 +248,13 @@ export function DuelArena({
       text: emote.text,
       timestamp: now,
     })
-    setTimeout(() => {
-      setActiveEmote(null)
-    }, 2800)
 
-    // Direct Realtime Broadcast to Duel opponent
+    setTimeout(() => {
+      setPlayerReaction(null)
+      setActiveEmote(null)
+    }, 3500)
+
+    // Direct Realtime Broadcast to Duel opponent on Firestore
     await sendDuelEmote(duelId, currentPlayer.uid, currentPlayer.displayName, emote.id, emote.text)
 
     // Optional API rate-limit validation in background
@@ -884,9 +909,13 @@ export function DuelArena({
             <div className="relative shrink-0">
               <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
               
-              {/* Balão de Emote Sincronizado em Tempo Real (Jogador Atual) */}
-              {activeEmote && activeEmote.senderId === me?.uid && (
-                <DuelEmoteBubble emote={activeEmote} isMe={true} />
+              {/* Balão de Provocação / Reação (Jogador Atual - Esquerda) */}
+              {playerReaction && (
+                <ProvocationBubble
+                  message={playerReaction.message}
+                  sender="player"
+                  onDismiss={() => setPlayerReaction(null)}
+                />
               )}
             </div>
 
@@ -938,9 +967,13 @@ export function DuelArena({
 
             <div className="relative shrink-0">
               <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
-                {/* Balão de Fala Animado (Adversário) */}
-              {activeEmote && (activeEmote.senderId === opponent?.uid || (activeEmote.senderId !== me?.uid && activeEmote.senderId !== currentPlayer.uid)) && (
-                <DuelEmoteBubble emote={activeEmote} isMe={false} />
+              {/* Balão de Provocação / Reação (Adversário - Direita) */}
+              {opponentReaction && (
+                <ProvocationBubble
+                  message={opponentReaction.message}
+                  sender="opponent"
+                  onDismiss={() => setOpponentReaction(null)}
+                />
               )}
             </div>
           </div>

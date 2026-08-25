@@ -43,8 +43,9 @@ export async function POST(req: NextRequest) {
     const duelData = duelSnap.data()
     const isPlayerA = duelData.playerA?.uid === senderId
     const isPlayerB = duelData.playerB?.uid === senderId
+    const isInPlayerUids = Array.isArray(duelData.playerUids) && duelData.playerUids.includes(senderId)
 
-    if (!isPlayerA && !isPlayerB) {
+    if (!isPlayerA && !isPlayerB && !isInPlayerUids) {
       return NextResponse.json({ error: 'Jogador não pertence a esta partida.' }, { status: 403 })
     }
 
