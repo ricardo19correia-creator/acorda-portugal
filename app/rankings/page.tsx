@@ -117,7 +117,7 @@ export default function RankingsPage() {
                 equippedTitle: userTitle,
                 equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
                 wins1v1: userWins,
-                isFounder: true,
+                isFounder: Boolean((profile as any)?.isFounder),
               })
             }
           }
@@ -172,7 +172,7 @@ export default function RankingsPage() {
               equippedTitle: userTitle,
               equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
               wins1v1: userWins,
-              isFounder: true,
+              isFounder: Boolean((profile as any)?.isFounder),
             })
           }
         }

@@ -838,12 +838,19 @@ function PerfilContent() {
         const updatePayload: any = {
           [`claimedAchievements.${ach.id}`]: true,
           coins: increment(ach.reward.coins),
+          euros: increment(ach.reward.coins),
         }
         if (ach.reward.utilities?.fiftyFifty) {
           updatePayload['inventory.utilities.fiftyFifty'] = increment(ach.reward.utilities.fiftyFifty)
+          updatePayload['consumables.help5050'] = increment(ach.reward.utilities.fiftyFifty)
         }
         if (ach.reward.utilities?.freezeTime) {
           updatePayload['inventory.utilities.freezeTime'] = increment(ach.reward.utilities.freezeTime)
+          updatePayload['consumables.freezeTime'] = increment(ach.reward.utilities.freezeTime)
+        }
+        if ((ach.reward.utilities as any)?.publicVote) {
+          updatePayload['inventory.utilities.publicVote'] = increment((ach.reward.utilities as any).publicVote)
+          updatePayload['consumables.publicVote'] = increment((ach.reward.utilities as any).publicVote)
         }
         if (ach.reward.title) {
           updatePayload['inventory.titles'] = arrayUnion(ach.reward.title)
