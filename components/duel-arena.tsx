@@ -227,6 +227,15 @@ export function DuelArena({
     }
   }, [duel?.lastEmote, (duel as any)?.lastReaction, duel?.lastTaunt, currentPlayer.uid, user?.uid])
 
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('game-active')
+      return () => {
+        document.body.classList.remove('game-active')
+      }
+    }
+  }, [])
+
   // Handle sending an Emote
   const handleSendEmote = async (emote: EmoteItem) => {
     if (tauntCooldown > 0 || !duelId) return

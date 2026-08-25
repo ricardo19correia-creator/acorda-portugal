@@ -123,23 +123,21 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative h-[100dvh] max-h-[100dvh] w-full overflow-hidden bg-transparent select-none flex flex-col">
+    <div className="fixed inset-0 w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-slate-950 select-none overscroll-none touch-none z-30 flex flex-col justify-between">
       {/* Fundo Sincronizado do Duelo 1v1 */}
       <BackgroundFx
         variant="duel"
         customImage={arenaImage}
         contrastIntensity="subtle"
       />
-      <div className="relative z-10 w-full h-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden p-1 sm:p-3">
-        <DuelArena
-          key={effectiveDuelId}
-          duelId={effectiveDuelId}
-          onDuelChange={handleDuelChange}
-          onArenaLoaded={(img) => {
-            if (img && img !== arenaImage) setArenaImage(img)
-          }}
-        />
-      </div>
+      <DuelArena
+        key={effectiveDuelId}
+        duelId={effectiveDuelId}
+        onDuelChange={handleDuelChange}
+        onArenaLoaded={(img) => {
+          if (img && img !== arenaImage) setArenaImage(img)
+        }}
+      />
     </div>
   )
 }

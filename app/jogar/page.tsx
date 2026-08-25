@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
 import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 import { AppBackground } from '@/components/AppBackground'
+import { cn } from '@/lib/utils'
 
 function JogarContainer() {
   const searchParams = useSearchParams()
@@ -63,14 +64,26 @@ function JogarContainer() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+    <div
+      className={cn(
+        'w-full isolate text-white select-none',
+        isPlaying
+          ? 'fixed inset-0 h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none touch-none flex flex-col justify-between p-1 sm:p-2 bg-slate-950'
+          : 'relative min-h-screen overflow-x-hidden bg-transparent flex flex-col justify-between',
+      )}
+    >
       {/* 1. FUNDO GLOBAL OFICIAL (FORA DE JOGO) OU ARENA EQUIPADA (DURANTE O JOGO) */}
       <AppBackground
         customImage={isPlaying ? (arenaImage || '/arenas/arena-1.jpg') : undefined}
       />
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
+      <main
+        className={cn(
+          'relative z-10 w-full max-w-4xl mx-auto flex flex-col justify-between bg-transparent',
+          isPlaying ? 'h-full max-h-[100dvh] overflow-hidden p-1 sm:p-2' : 'min-h-screen p-4',
+        )}
+      >
         <QuizPage />
       </main>
     </div>
@@ -79,7 +92,7 @@ function JogarContainer() {
 
 export default function JogarPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
+    <Suspense fallback={<div className="fixed inset-0 bg-slate-950" />}>
       <JogarContainer />
     </Suspense>
   )
