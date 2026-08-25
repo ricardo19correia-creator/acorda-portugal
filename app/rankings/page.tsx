@@ -402,7 +402,7 @@ export default function RankingsPage() {
                     </div>
 
                     {/* Cartão do Rei / Campeão do Distrito */}
-                    {top3[0] && (
+                    {top3[0] ? (
                       <div
                         onClick={() => handleSelectPlayer(top3[0])}
                         className="rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-slate-900 to-amber-500/10 p-3.5 sm:p-4 flex items-center justify-between gap-3 shadow-lg cursor-pointer hover:border-amber-400 transition-all group"
@@ -436,6 +436,23 @@ export default function RankingsPage() {
                           </span>
                           <span className="text-[9px] font-bold uppercase text-slate-400">Líder</span>
                         </div>
+                      </div>
+                    ) : (
+                      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-3.5 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2.5">
+                          <Trophy className="h-5 w-5 text-amber-400/60 shrink-0" />
+                          <div>
+                            <span className="text-xs font-bold text-white block">Trono de {selectedDistrict} Vago</span>
+                            <span className="text-[11px] text-slate-400">Joga uma partida para liderar este distrito!</span>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleStartGame('/jogar')}
+                          className="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 text-xs font-black uppercase tracking-wide border border-amber-500/40 cursor-pointer transition-colors"
+                        >
+                          Conquistar
+                        </button>
                       </div>
                     )}
 
@@ -562,7 +579,37 @@ export default function RankingsPage() {
                 <div className="grid grid-cols-3 items-end gap-2.5 sm:gap-6">
                   {PODIUM_ORDER.map((posIndex) => {
                     const player = top3[posIndex]
-                    if (!player) return <div key={`empty-${posIndex}`} className="h-32" />
+                    if (!player) {
+                      const emptyPos = posIndex === 1 ? 2 : posIndex === 0 ? 1 : 3
+                      return (
+                        <div
+                          key={`empty-podium-${posIndex}`}
+                          className="flex flex-col items-center opacity-40 hover:opacity-70 transition-opacity"
+                        >
+                          <div className="h-8 mb-1" />
+                          <div className="h-14 w-14 rounded-2xl border border-dashed border-white/20 grid place-items-center bg-white/5 text-slate-500 text-xs font-mono">
+                            Vago
+                          </div>
+                          <div className="mt-3 text-center">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+                              Posição {emptyPos}º
+                            </span>
+                            <span className="text-[9px] text-slate-600">Disponível</span>
+                          </div>
+                          <div
+                            className={cn(
+                              'mt-3 flex w-full flex-col items-center justify-end rounded-t-3xl border border-dashed border-white/10 pb-3 pt-3 bg-white/[0.02]',
+                              posIndex === 0 ? 'h-44 sm:h-52' : posIndex === 1 ? 'h-36 sm:h-44' : 'h-32 sm:h-38'
+                            )}
+                          >
+                            <span className="grid h-7 w-7 place-items-center rounded-xl bg-slate-900 text-slate-500 text-xs font-black border border-white/10">
+                              {emptyPos}º
+                            </span>
+                            <span className="mt-1 text-[10px] text-slate-500 font-mono">-- XP</span>
+                          </div>
+                        </div>
+                      )
+                    }
 
                     const isCurrent = Boolean(user?.uid && player.uid === user.uid)
                     const isFirst = player.pos === 1

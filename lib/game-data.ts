@@ -263,18 +263,7 @@ export type UserProfile = {
   updatedAt?: unknown
 }
 
-export const NATIONAL_TOP: Player[] = [
-  { pos: 1, name: 'Zé_Mestre', district: 'Porto', level: 47, xp: '182 450' },
-  { pos: 2, name: 'AnaQuiz', district: 'Lisboa', level: 44, xp: '176 120' },
-  { pos: 3, name: 'TugaBrain', district: 'Braga', level: 42, xp: '168 900' },
-  { pos: 4, name: 'MiaSabe', district: 'Aveiro', level: 40, xp: '154 210' },
-  { pos: 5, name: 'RuiRelâmpago', district: 'Coimbra', level: 39, xp: '149 640' },
-  { pos: 6, name: 'CarlaGeo', district: 'Faro', level: 38, xp: '141 300' },
-  { pos: 7, name: 'PedroPro', district: 'Setúbal', level: 37, xp: '138 470' },
-  { pos: 8, name: 'InêsFado', district: 'Viseu', level: 36, xp: '132 090' },
-  { pos: 9, name: 'JoãoFlash', district: 'Leiria', level: 35, xp: '127 800' },
-  { pos: 10, name: 'SaraSpeed', district: 'Évora', level: 34, xp: '121 560' },
-]
+export const NATIONAL_TOP: Player[] = []
 
 export type District = {
   pos: number
