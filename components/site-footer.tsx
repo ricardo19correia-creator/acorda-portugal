@@ -10,6 +10,7 @@ const LINKS = [
   { label: 'Explorar & Sobre', href: '/explorar' },
   { label: 'Loja', href: '/loja' },
   { label: 'Termos', href: '/termos' },
+  { label: 'Privacidade', href: '/privacidade' },
   { label: 'Central de Ajuda', href: '/ajuda' },
 ]
 

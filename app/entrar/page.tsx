@@ -562,12 +562,34 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
               </button>
             </form>
           )}
+          {/* Termos & Privacidade no rodapé do cartão */}
+          <div className="pt-4 border-t border-white/5 text-center text-[11px] text-muted-foreground/80 leading-relaxed">
+            Ao continuar, concordas com os nossos{' '}
+            <Link href="/termos" className="text-primary hover:underline font-semibold">
+              Termos
+            </Link>{' '}
+            e{' '}
+            <Link href="/privacidade" className="text-cyan-400 hover:underline font-semibold">
+              Política de Privacidade
+            </Link>
+            .
+          </div>
         </div>
       </div>
 
       {/* Bottom Footer Note */}
-      <div className="relative z-20 text-center text-xs text-muted-foreground pb-4">
-        © 2026 Acorda Portugal • Jogo de Perguntas Nacional
+      <div className="relative z-20 text-center text-xs text-muted-foreground pb-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+        <span>© 2026 Acorda Portugal • Jogo de Perguntas Nacional</span>
+        <span className="hidden sm:inline">•</span>
+        <div className="flex items-center gap-3">
+          <Link href="/termos" className="hover:text-foreground transition-colors">
+            Termos
+          </Link>
+          <span>•</span>
+          <Link href="/privacidade" className="hover:text-cyan-300 text-cyan-400/80 transition-colors">
+            Privacidade
+          </Link>
+        </div>
       </div>
     </div>
   )
