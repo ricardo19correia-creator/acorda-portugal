@@ -119,7 +119,11 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
     setLoading(true)
     try {
-      await signInWithEmailAndPassword(auth, cleanEmail, cleanPassword)
+      const userCred = await signInWithEmailAndPassword(auth, cleanEmail, cleanPassword)
+      if (userCred.user) {
+        const { registerUserSession } = await import('@/lib/session-manager')
+        await registerUserSession(userCred.user)
+      }
       const destination = getPostLoginRedirectTarget(redirectTarget)
       router.push(destination)
     } catch (err: any) {
@@ -210,6 +214,9 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
             xp: 0,
           }, { merge: true })
         } catch {}
+
+        const { registerUserSession } = await import('@/lib/session-manager')
+        await registerUserSession(newUser)
       }
 
       const destination = getPostLoginRedirectTarget(redirectTarget)

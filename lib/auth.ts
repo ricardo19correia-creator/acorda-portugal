@@ -13,4 +13,12 @@ export {
   logoutUser,
 } from '@/lib/auth-helpers'
 
+export {
+  registerUserSession,
+  getLocalSessionId,
+  setLocalSessionId,
+  clearLocalSession,
+} from '@/lib/session-manager'
+
+
 

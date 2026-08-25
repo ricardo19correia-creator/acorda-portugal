@@ -163,7 +163,12 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
 
   const provider = getGoogleAuthProvider()
   console.log('[AUTH] A iniciar signInWithPopup com Google...')
-  return await signInWithPopup(auth, provider)
+  const cred = await signInWithPopup(auth, provider)
+  if (cred?.user) {
+    const { registerUserSession } = await import('@/lib/session-manager')
+    await registerUserSession(cred.user)
+  }
+  return cred
 }
 
 /**
@@ -201,9 +206,11 @@ export const useCheckRedirectLogin = (
     if (!auth) return
 
     getRedirectResult(auth)
-      .then((result) => {
+      .then(async (result) => {
         if (result?.user) {
           console.log('[AUTH REDIRECT RESULT] Utilizador autenticado via redirect:', result.user.uid)
+          const { registerUserSession } = await import('@/lib/session-manager')
+          await registerUserSession(result.user)
           const destination = getPostLoginRedirectTarget(defaultFallback)
           router.push(destination)
         }

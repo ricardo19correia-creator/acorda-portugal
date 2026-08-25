@@ -10,6 +10,7 @@ import {
   setPostLoginRedirectTarget,
   sanitizeRedirectUrl,
   mapAuthErrorMessage,
+  registerUserSession,
 } from '@/lib/auth'
 
 interface GoogleAuthButtonProps {
@@ -44,6 +45,7 @@ export default function GoogleAuthButton({
       const userCred = await signInWithPopup(auth, provider)
 
       console.log('[AUTH] Login Google efetuado com sucesso:', userCred.user.uid)
+      await registerUserSession(userCred.user)
       const destination = getPostLoginRedirectTarget(safeTarget)
       router.push(destination)
     } catch (error: any) {

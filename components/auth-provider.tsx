@@ -15,6 +15,14 @@ import {
   REAL_AVATARS,
 } from '@/lib/avatars'
 
+import {
+  registerUserSession,
+  getLocalSessionId,
+  setLocalSessionId,
+  clearLocalSession,
+} from '@/lib/session-manager'
+import { SessionConflictModal } from '@/components/session-conflict-modal'
+
 export type AuthState = {
   user: User | null
   authResolved: boolean
@@ -37,11 +45,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profileLoading, setProfileLoading] = useState(true)
   const [profileError, setProfileError] = useState<string | null>(null)
   const [profileRetry, setProfileRetry] = useState(0)
+  const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
 
   const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
 
   const logout = useCallback(async (redirectUrl = '/') => {
     try {
+      clearLocalSession()
       await performLogout(redirectUrl)
     } catch (err) {
       console.error('[AUTH] Erro ao terminar sessão:', err)
@@ -67,6 +77,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           async (docSnap) => {
             if (docSnap.exists()) {
               const data = docSnap.data()
+
+              // Verificação de Sessão Única Ativa (Single Active Session)
+              const remoteSessionId = data.currentSessionId
+              const localSessionId = getLocalSessionId()
+
+              if (!remoteSessionId) {
+                // Primeira sessão ou migração: registar sessão atual
+                void registerUserSession(currentAuthUser)
+              } else if (!localSessionId) {
+                // Sessão local ainda não gravada (ex: refresh ou login direto): adotar a sessão remota
+                setLocalSessionId(remoteSessionId)
+              } else if (remoteSessionId !== localSessionId) {
+                // Conflito de sessão detetado: outro dispositivo/navegador iniciou sessão
+                console.warn('[SESSION CONFLICT] Sessão sobreposta por outro login:', {
+                  remote: remoteSessionId,
+                  local: localSessionId,
+                })
+                clearLocalSession()
+                setIsSessionConflictOpen(true)
+                try {
+                  await auth.signOut()
+                } catch (e) {}
+                setProfile(null)
+                setProfileLoading(false)
+                return
+              }
               const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
               const xpVal = typeof data.xp === 'number' ? data.xp : 0
               const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
@@ -300,6 +336,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [profileRetry])
 
+  const handleSessionConflictConfirm = useCallback(() => {
+    setIsSessionConflictOpen(false)
+    if (typeof window !== 'undefined') {
+      window.location.href = '/entrar'
+    }
+  }, [])
+
   return (
     <AuthContext.Provider
       value={{
@@ -313,6 +356,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      <SessionConflictModal
+        isOpen={isSessionConflictOpen}
+        onConfirm={handleSessionConflictConfirm}
+      />
     </AuthContext.Provider>
   )
 }
