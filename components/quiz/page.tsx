@@ -134,7 +134,7 @@ function QuizPageContent() {
 
 export function QuizPage() {
   return (
-    <div className="relative min-h-screen bg-transparent">
+    <div className="relative h-full w-full bg-transparent">
       <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
         <QuizPageContent />
       </Suspense>

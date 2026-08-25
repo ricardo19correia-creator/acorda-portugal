@@ -12,9 +12,12 @@ import {
   Lightbulb,
   Flame,
   Snowflake,
+  Clock,
+  Coins,
 } from 'lucide-react'
 import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
+import { PlayerAvatar } from '@/components/player-avatar'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { useEconomy } from '@/context/economy-context'
@@ -820,171 +823,232 @@ export function QuizScreen({
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-3xl px-4 py-5 sm:px-6 sm:py-8">
-      {/* 1. TOP BAR */}
-      <div className="flex items-center justify-between gap-3">
-        <Link
-          href="/jogar"
-          className="inline-flex items-center gap-2 rounded-2xl border border-white/12 bg-card/70 px-4 py-2.5 text-xs sm:text-sm font-bold text-muted-foreground transition hover:border-white/25 hover:bg-card hover:text-white backdrop-blur-xl shadow-sm cursor-pointer"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span>Sair</span>
-        </Link>
+    <div className="h-[100dvh] w-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto overflow-hidden select-none animate-rise">
+      {/* ========================================================= */}
+      {/* 1. CABEÇALHO SOLO (TOPO COMPACTO SHRINK-0)                 */}
+      {/* ========================================================= */}
+      <div className="w-full shrink-0">
+        <div className="w-full flex items-center justify-between px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl shadow-md">
+          {/* Lado Esquerdo: Botão Sair + Avatar + Nome/Nível */}
+          <div className="flex items-center gap-2 min-w-0">
+            <Link
+              href="/jogar"
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer shrink-0"
+              title="Sair para a Central"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+            <div className="shrink-0 w-8 h-8 flex items-center justify-center">
+              <PlayerAvatar profile={profile ?? undefined} displayName={user?.displayName || profile?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+            </div>
+            <div className="min-w-0">
+              <span className="font-display text-xs font-bold text-white truncate block leading-none">
+                {user?.displayName || profile?.displayName || 'Jogador'}
+              </span>
+              <span className="text-[10px] text-muted-foreground leading-none mt-0.5 block font-medium">
+                Nível {profile?.level || 1}
+              </span>
+            </div>
+          </div>
 
-        {/* Dynamic HUD badges */}
-        <div className="flex items-center gap-2">
-          {streak > 1 && (
+          {/* Centro: Progresso da Ronda */}
+          <div className="flex items-center px-1.5 shrink-0">
+            <span className="badge-hud text-gold border-gold/50 bg-gold/20 py-0.5 px-2 text-[10px] font-black rounded-lg">
+              Q{step + 1}/{total}
+            </span>
+          </div>
+
+          {/* Lado Direito: Pontuação Atual + Tempo */}
+          <div className="flex flex-col items-end shrink-0">
+            <div className="flex items-center gap-1 font-display text-xs font-bold text-cyan-400">
+              <Sparkles className="h-3 w-3 text-gold" />
+              <span>{score} pts</span>
+            </div>
+            <span className={cn(
+              'font-mono text-[10px] font-bold mt-0.5 leading-none',
+              seconds <= WARNING_TIME_THRESHOLD ? 'text-flag-red animate-pulse' : 'text-slate-400'
+            )}>
+              {seconds}s
+            </span>
+          </div>
+        </div>
+
+        {/* Barra de Tempo Compacta */}
+        <div className="flex items-center gap-1 mt-1.5 w-full px-0.5">
+          <div className={cn(
+            'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+            seconds <= WARNING_TIME_THRESHOLD ? 'border-flag-red/60' : 'border-slate-700/40'
+          )}>
             <div
               className={cn(
-                'flex items-center gap-1.5 rounded-2xl border px-3 py-2 text-xs font-black animate-pop',
-                streakEffectId === 'streak_chama_tripla' && streak >= 3
-                  ? 'border-emerald-400/80 bg-emerald-500/25 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.6)] animate-pulse'
-                  : streakEffectId === 'streak_moedas_ouro' && streak >= 3
-                    ? 'border-gold/80 bg-gold/25 text-gold shadow-[0_0_25px_rgba(234,179,8,0.6)] animate-bounce'
-                    : 'border-flag-red/40 bg-flag-red/15 text-flag-red shadow-[0_0_15px_rgba(244,63,94,0.25)]',
+                'h-full rounded-full transition-all duration-1000 ease-linear shadow-sm',
+                seconds > 15
+                  ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
+                  : seconds > WARNING_TIME_THRESHOLD
+                    ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
+                    : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
               )}
-            >
-              <Flame
-                className={cn(
-                  'h-4 w-4 fill-current',
-                  streakEffectId === 'streak_chama_tripla' && streak >= 3 && 'text-emerald-400 animate-spin',
-                )}
-              />
-              <span>{streak}x Seguidas</span>
-            </div>
-          )}
-
-          <div className="flex items-center gap-1.5 rounded-2xl border border-gold/30 bg-gold/10 px-3.5 py-2 text-xs sm:text-sm font-black text-gold shadow-[0_0_15px_rgba(255,200,0,0.15)]">
-            <Sparkles className="h-4 w-4" />
-            <span>+{q.points} XP</span>
+              style={{ width: `${(seconds / MAX_SECONDS) * 100}%` }}
+            />
           </div>
         </div>
       </div>
 
-      {/* 2. CATEGORY PILL */}
-      <div className="mt-5 text-center flex flex-col items-center gap-1.5">
-        <span
-          className={cn(
-            'inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-black uppercase tracking-wider',
-            category.special
-              ? 'border-flag-red/50 bg-flag-red/20 text-flag-red shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-              : 'border-white/10 bg-card/60 text-muted-foreground',
-          )}
-        >
-          <span>{category.emoji}</span>
-          <span>{category.name}</span>
-          {category.subtitle && (
-            <span className="text-[0.68rem] text-primary/80 font-normal">
-              • {category.subtitle}
-            </span>
-          )}
-        </span>
-      </div>
-
-      {/* 3. PROGRESS BAR & COUNTDOWN TIMER */}
-      <div className="mt-6">
-        <QuizProgress
-          index={step + 1}
-          total={total}
-          seconds={seconds}
-          maxSeconds={MAX_SECONDS}
-        />
-      </div>
-
-      {/* 4. QUESTION CARD */}
-      <div
-        className={cn(
-          'mt-6 rounded-4xl border p-6 sm:p-10 backdrop-blur-2xl shadow-2xl transition-all relative overflow-hidden',
-          category.special
-            ? 'border-flag-red/30 bg-gradient-to-br from-flag-red/10 via-card/90 to-card/90'
-            : 'border-white/12 bg-card/85',
+      {/* ========================================================= */}
+      {/* 2. ZONA CENTRAL: CARD DA PERGUNTA (MY-AUTO)                */}
+      {/* ========================================================= */}
+      <div className="my-auto w-full flex flex-col items-center justify-center relative">
+        {/* Feedback visual instantâneo overlay */}
+        {phase === 'revealed' && (
+          <div
+            className={cn(
+              'mb-2 px-3 py-1 rounded-xl font-display text-xs font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0',
+              selected === q.correct
+                ? 'bg-primary/30 border border-primary text-primary text-glow-primary'
+                : selected === null
+                  ? 'bg-gold/30 border border-gold text-gold text-glow-gold'
+                  : 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red'
+            )}
+          >
+            {selected === q.correct ? (
+              <>
+                <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
+                <span>Resposta Correta! (+{q.points} pts)</span>
+              </>
+            ) : selected === null ? (
+              <>
+                <Clock className="h-3.5 w-3.5 shrink-0" />
+                <span>Tempo Esgotado!</span>
+              </>
+            ) : (
+              <>
+                <XCircle className="h-3.5 w-3.5 shrink-0" />
+                <span>Resposta Incorreta</span>
+              </>
+            )}
+          </div>
         )}
-      >
-        <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          <span>Pergunta {step + 1} de {total}</span>
-          <span className="text-primary font-black">+{q.points} Pontos</span>
+
+        {/* Card da Pergunta com corpo elegante */}
+        <div className="w-full min-h-[140px] max-h-[220px] p-4 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-cyan-500/30 rounded-2xl shadow-xl shadow-black/40 backdrop-blur-md overflow-y-auto relative">
+          <span className="text-[10px] sm:text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1 shrink-0">
+            {category.emoji} {category.name} · Pergunta {step + 1} de {total}
+          </span>
+          <h1 className="text-sm sm:text-base font-bold text-center leading-snug text-white text-balance line-clamp-4">
+            {q.question}
+          </h1>
+
+          {/* Explicação resumida quando revelada */}
+          {phase === 'revealed' && q.explanation && (
+            <p className="mt-2 text-xs text-slate-300 border-t border-white/10 pt-1.5 line-clamp-2">
+              {q.explanation}
+            </p>
+          )}
         </div>
 
-        <h2 className="mt-4 font-display text-xl sm:text-2xl md:text-3xl font-black text-foreground leading-snug">
-          {q.question}
-        </h2>
+        {/* Freeze Banner no Solo */}
+        {isFrozen && (
+          <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+            <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
+            <span className="font-bold">Tempo Congelado ({freezeTimeLeft}s)</span>
+          </div>
+        )}
+      </div>
 
-        {/* 5. 4 RESPOSTAS */}
-        <div className="mt-8 grid gap-3.5 sm:grid-cols-2">
-          {q.options.map((option) => {
+      {/* ========================================================= */}
+      {/* 3. FUNDO: PODERES + GRELHA DE RESPOSTAS 2x2 (SHRINK-0)     */}
+      {/* ========================================================= */}
+      <div className="w-full flex flex-col gap-2 shrink-0">
+        {/* Barra de Ajudas OU Botão Próxima Pergunta */}
+        {phase === 'revealed' ? (
+          <div className="flex justify-center my-1 shrink-0">
+            <button
+              type="button"
+              onClick={next}
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+            >
+              <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-center gap-3 my-1 shrink-0">
+            <QuizPowerUpsBar
+              stock5050={stock5050}
+              stockFreeze={stockFreeze}
+              used5050={eliminatedOptions.length > 0}
+              isFrozen={isFrozen}
+              freezeTimeLeft={freezeTimeLeft}
+              onUse5050={handleUse5050}
+              onUseFreeze={handleUseFreeze}
+            />
+          </div>
+        )}
+
+        {/* Grelha de Respostas 2x2 com botões h-16 */}
+        <div className="grid grid-cols-2 gap-2 w-full">
+          {q.options.map((option, idx) => {
             const isEliminated = eliminatedOptions.includes(option.key)
+            const state = stateFor(option.key)
+            const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
+
             if (isEliminated) {
               return (
                 <div
                   key={option.key}
-                  className="flex items-center gap-3.5 rounded-2xl border-2 border-slate-800/60 bg-slate-950/80 p-4 opacity-30 select-none cursor-not-allowed"
+                  className="h-16 w-full p-2.5 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
                 >
-                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-slate-900 font-mono text-xs font-black text-slate-500 line-through">
-                    {option.key}
+                  <span className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs flex items-center justify-center shrink-0 line-through">
+                    {optionKey}
                   </span>
-                  <span className="text-sm line-through text-slate-500 flex-1">{option.text}</span>
-                  <span className="text-[0.62rem] font-bold text-slate-500 uppercase">50/50</span>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
+                    {option.text}
+                  </span>
                 </div>
               )
             }
 
+            let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
+
+            if (phase === 'revealed') {
+              if (state === 'correct') {
+                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
+              } else if (state === 'wrong') {
+                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+              } else {
+                buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+              }
+            }
+
             return (
-              <AnswerOption
+              <button
                 key={option.key}
-                optionKey={option.key}
-                text={option.text}
-                state={stateFor(option.key)}
                 disabled={phase !== 'answering'}
-                onSelect={() => reveal(option.key)}
-              />
+                onClick={() => reveal(option.key)}
+                className={cn(
+                  'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98',
+                  buttonStyles
+                )}
+              >
+                <span
+                  className={cn(
+                    'w-7 h-7 rounded-lg font-extrabold text-xs flex items-center justify-center shrink-0 border transition-colors',
+                    phase === 'revealed' && state === 'correct'
+                      ? 'bg-emerald-500 border-emerald-300 text-slate-950'
+                      : phase === 'revealed' && state === 'wrong'
+                        ? 'bg-rose-600 border-rose-400 text-white'
+                        : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30'
+                  )}
+                >
+                  {optionKey}
+                </span>
+                <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
+                  {option.text}
+                </span>
+              </button>
             )
           })}
         </div>
-
-        {/* 6. EXPLICAÇÃO E FEEDBACK */}
-        {phase === 'revealed' && (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-xs sm:text-sm animate-rise">
-            <div className="flex items-center gap-2 font-bold mb-1">
-              {selected === q.correct ? (
-                <span className="text-emerald-400 flex items-center gap-1">
-                  <CheckCircle2 className="h-4 w-4" /> Resposta Correta!
-                </span>
-              ) : (
-                <span className="text-rose-400 flex items-center gap-1">
-                  <XCircle className="h-4 w-4" /> Resposta Incorreta
-                </span>
-              )}
-            </div>
-            <p className="text-slate-300">{q.explanation}</p>
-          </div>
-        )}
-
-        {/* 7. BOTÃO PRÓXIMA PERGUNTA */}
-        {phase === 'revealed' && (
-          <div className="mt-6 flex justify-end">
-            <button
-              type="button"
-              onClick={next}
-              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-emerald-400 px-7 py-3.5 font-display text-sm font-black uppercase tracking-wider text-primary-foreground shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
-            >
-              <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima'}</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* 8. BARRA DE POWER-UPS */}
-      <div className="mt-6">
-        <QuizPowerUpsBar
-          stock5050={stock5050}
-          stockFreeze={stockFreeze}
-          used5050={eliminatedOptions.length > 0}
-          isFrozen={isFrozen}
-          freezeTimeLeft={freezeTimeLeft}
-          onUse5050={handleUse5050}
-          onUseFreeze={handleUseFreeze}
-        />
       </div>
     </div>
   )

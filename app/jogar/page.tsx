@@ -64,14 +64,24 @@ function JogarContainer() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+    <div
+      className={cn(
+        'relative w-full isolate text-white flex flex-col justify-between',
+        isPlaying ? 'h-[100dvh] overflow-hidden bg-slate-950' : 'min-h-screen overflow-x-hidden bg-transparent'
+      )}
+    >
       {/* 1. FUNDO GLOBAL OFICIAL (FORA DE JOGO) OU ARENA EQUIPADA (DURANTE O JOGO) */}
       <AppBackground
         customImage={isPlaying ? (arenaImage || '/arenas/arena-1.jpg') : undefined}
       />
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto min-h-screen p-4 flex flex-col justify-between bg-transparent">
+      <main
+        className={cn(
+          'relative z-10 w-full mx-auto flex flex-col justify-between bg-transparent',
+          isPlaying ? 'h-full p-0 max-w-lg' : 'min-h-screen p-4 max-w-4xl'
+        )}
+      >
         <QuizPage />
       </main>
     </div>
