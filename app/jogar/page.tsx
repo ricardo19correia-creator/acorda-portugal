@@ -1,14 +1,28 @@
 'use client'
 
 import React, { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
 import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 import { AppBackground } from '@/components/AppBackground'
+import { useAuth } from '@/components/auth-provider'
+import { auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 
 function JogarContainer() {
+  const router = useRouter()
   const searchParams = useSearchParams()
+  const { user, authResolved } = useAuth()
+
+  // Bloqueio Total: Redirecionamento obrigatório para /entrar para utilizadores não autenticados
+  useEffect(() => {
+    if (authResolved && !user && !auth?.currentUser) {
+      const search = searchParams?.toString()
+      const currentUrl = search ? `/jogar?${search}` : '/jogar'
+      router.replace(`/entrar?redirect=${encodeURIComponent(currentUrl)}`)
+    }
+  }, [user, authResolved, router, searchParams])
+
   const categoryParam =
     searchParams.get('cat') ||
     searchParams.get('category') ||
@@ -62,6 +76,17 @@ function JogarContainer() {
       window.removeEventListener('storage', sync)
     }
   }, [])
+
+  // Enquanto verifica autenticação ou se não houver utilizador autenticado, bloqueia renderização
+  if (!authResolved || (!user && !auth?.currentUser)) {
+    return (
+      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4">
+        <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-cyan-400 font-bold text-lg">A verificar autenticação...</p>
+        <p className="text-slate-400 text-sm mt-1">Redirecionando para o ecrã de início de sessão.</p>
+      </main>
+    )
+  }
 
   return (
     <div className="relative min-h-screen w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
