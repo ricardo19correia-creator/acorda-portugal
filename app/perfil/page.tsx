@@ -151,14 +151,28 @@ function PerfilContent() {
     help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? 0,
     freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? 0,
   })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
-    avatars: REAL_AVATARS.map((a) => a.id),
-    arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
-    titles: (profile as any)?.inventory?.titles || [],
-    taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = JSON.parse(localStorage.getItem('user_inventory') || '{}')
+        return {
+          avatars: Array.isArray(saved?.avatars) ? saved.avatars : (profile as any)?.inventory?.avatars || ['camoes_2050'],
+          arenas: Array.isArray(saved?.arenas) ? saved.arenas : (profile as any)?.inventory?.arenas || ['arena_1'],
+          titles: Array.isArray(saved?.titles) ? saved.titles : (profile as any)?.inventory?.titles || [],
+          taunts: Array.isArray(saved?.taunts) ? saved.taunts : (profile as any)?.inventory?.taunts || ['pack_basico'],
+        }
+      } catch {}
+    }
+    return {
+      avatars: (profile as any)?.inventory?.avatars || ['camoes_2050'],
+      arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
+      titles: (profile as any)?.inventory?.titles || [],
+      taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
+    }
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>(() => [
-    ...REAL_AVATARS.map((a) => a.id),
+    'camoes_2050',
+    ...((profile as any)?.inventory?.avatars || []),
     ...((profile as any)?.inventory?.arenas || ['arena_1']),
     ...((profile as any)?.inventory?.titles || []),
     ...((profile as any)?.inventory?.taunts || ['pack_basico']),
@@ -1029,9 +1043,10 @@ function PerfilContent() {
       let isUnlocked = false
 
       if (item.category === 'avatars') {
-        isUnlocked = true
+        const isFree = item.id === 'camoes_2050' || !item.price || item.price === 0
+        isUnlocked = isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
       } else if (item.category === 'arenas') {
-        const isDefault = item.id === 'arena_1' || item.id === 'arena_2' || item.id === 'arena_ponte_2077' || item.price === 0
+        const isDefault = item.id === 'arena_1' || item.price === 0
         isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
       } else if (item.category === 'titulos') {
         const isDefault = item.id === 'tit_filho_portugal' || item.name === 'Filho de Portugal' || item.id === 'tit_novico' || item.name === 'Noviço da Nação'
@@ -2656,46 +2671,76 @@ function PerfilContent() {
 
               {/* Seletor de Avatar Ativo */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-2">
-                  Escolher Avatar Ativo (Desbloqueados)
-                </label>
-                <div className="grid grid-cols-4 gap-2.5 max-h-48 overflow-y-auto p-2 bg-slate-900/50 rounded-2xl border border-slate-800">
-                  {availableUnlockedAvatars.map((av) => {
-                    const isSelected = editAvatar === av.image || editAvatarId === av.id
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-bold text-slate-300">
+                    Escolher Avatar Ativo
+                  </label>
+                  <Link
+                    href="/loja"
+                    className="text-[11px] font-bold text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
+                  >
+                    <ShoppingBag className="w-3 h-3" /> Obter Mais na Loja
+                  </Link>
+                </div>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 max-h-56 overflow-y-auto p-2.5 bg-slate-900/60 rounded-2xl border border-slate-800">
+                  {REAL_AVATARS.map((avatarItem) => {
+                    const isFree = avatarItem.currency === 'free' || avatarItem.id === 'camoes_2050' || avatarItem.price === 'Grátis' || avatarItem.price === 0
+                    const isOwned = isFree || inventory.avatars.includes(avatarItem.id) || unlockedItems.includes(avatarItem.id)
+                    const isSelected = editAvatar === avatarItem.image || editAvatarId === avatarItem.id
 
                     return (
-                      <button
-                        type="button"
-                        key={av.id}
-                        onClick={() => {
-                          if (av.image) setEditAvatar(av.image)
-                          setEditAvatarId(av.id)
-                        }}
-                        className={cn(
-                          'cursor-pointer relative p-1.5 rounded-xl border flex flex-col items-center gap-1 transition-all',
-                          isSelected
-                            ? 'border-emerald-400 bg-emerald-950/40 ring-2 ring-emerald-500/50'
-                            : 'border-slate-800 bg-slate-950/80 hover:border-slate-700',
-                        )}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={av.image}
-                          alt={av.name}
-                          className="w-12 h-12 rounded-lg object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = DEFAULT_AVATAR.image
+                      <div key={avatarItem.id} className="relative group">
+                        <button
+                          type="button"
+                          disabled={!isOwned}
+                          onClick={() => {
+                            if (isOwned) {
+                              if (avatarItem.image) setEditAvatar(avatarItem.image)
+                              setEditAvatarId(avatarItem.id)
+                            }
                           }}
-                        />
-                        <span className="text-[10px] font-bold text-slate-300 truncate w-full text-center" title={av.name}>
-                          {av.name}
-                        </span>
-                        {isSelected && (
-                          <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-emerald-500 text-slate-950 text-[10px] font-black flex items-center justify-center">
-                            ✓
-                          </div>
-                        )}
-                      </button>
+                          className={cn(
+                            'w-full relative aspect-square p-1.5 rounded-2xl border-2 flex flex-col items-center justify-between transition-all select-none',
+                            isOwned
+                              ? isSelected
+                                ? 'border-cyan-400 bg-cyan-950/40 ring-2 ring-cyan-500/50 cursor-pointer shadow-md'
+                                : 'border-slate-800 bg-slate-950/80 hover:border-slate-600 cursor-pointer'
+                              : 'border-red-900/60 bg-slate-950/90 cursor-not-allowed'
+                          )}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={avatarItem.image}
+                            alt={avatarItem.name}
+                            className={cn(
+                              'w-12 h-12 rounded-xl object-cover transition-all',
+                              !isOwned && 'opacity-30 grayscale'
+                            )}
+                            onError={(e) => {
+                              e.currentTarget.src = DEFAULT_AVATAR.image
+                            }}
+                          />
+
+                          <span className="text-[10px] font-bold text-slate-300 truncate w-full text-center mt-1" title={avatarItem.name}>
+                            {avatarItem.name}
+                          </span>
+
+                          {/* Marcador de Seleção Ativa */}
+                          {isSelected && isOwned && (
+                            <div className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-cyan-400 text-slate-950 text-[10px] font-black flex items-center justify-center shadow-md">
+                              ✓
+                            </div>
+                          )}
+
+                          {/* Máscara e ícone de Cadeado para itens não comprados */}
+                          {!isOwned && (
+                            <div className="absolute inset-0 bg-black/60 rounded-xl flex flex-col items-center justify-center p-1 backdrop-blur-[0.5px]">
+                              <Lock className="w-5 h-5 text-red-400 animate-pulse" />
+                              <span className="text-[10px] text-red-400 font-bold uppercase mt-1">Loja</span>
+                            </div>
+                          )}
+                        </button>
+                      </div>
                     )
                   })}
                 </div>
