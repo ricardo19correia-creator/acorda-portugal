@@ -70,10 +70,10 @@ export function PortugalMapInteractive({
     if (isSelected) {
       return {
         fill: colorInfo.hex,
-        fillOpacity: 0.9,
+        fillOpacity: 0.92,
         stroke: '#ffffff',
-        strokeWidth: 2.5,
-        filter: `drop-shadow(0 0 20px ${colorInfo.hex}) drop-shadow(0 0 8px #ffffff)`,
+        strokeWidth: 2.8,
+        filter: `drop-shadow(0 0 22px ${colorInfo.hex}) drop-shadow(0 0 8px #ffffff)`,
         glowColor: colorInfo.hex,
       }
     }
@@ -81,25 +81,25 @@ export function PortugalMapInteractive({
     if (isHovered) {
       return {
         fill: colorInfo.hex,
-        fillOpacity: 0.75,
+        fillOpacity: 0.8,
         stroke: '#ffffff',
-        strokeWidth: 2,
-        filter: `drop-shadow(0 0 16px ${colorInfo.hex})`,
+        strokeWidth: 2.2,
+        filter: `drop-shadow(0 0 18px ${colorInfo.hex})`,
         glowColor: colorInfo.hex,
       }
     }
 
     // Heatmap dinâmico baseado no XP da região
-    const baseOpacity = xp === 0 ? 0.22 : 0.35 + ratio * 0.45
-    const strokeOpacity = xp === 0 ? 0.45 : 0.75 + ratio * 0.25
+    const baseOpacity = xp === 0 ? 0.28 : 0.4 + ratio * 0.45
+    const strokeOpacity = xp === 0 ? 0.5 : 0.8 + ratio * 0.2
 
     return {
       fill: colorInfo.hex,
       fillOpacity: baseOpacity,
       stroke: colorInfo.hex,
       strokeOpacity: strokeOpacity,
-      strokeWidth: xp > 0 ? 1.4 : 1,
-      filter: xp > 0 ? `drop-shadow(0 0 ${Math.max(4, ratio * 12)}px ${colorInfo.hex})` : undefined,
+      strokeWidth: xp > 0 ? 1.5 : 1.1,
+      filter: xp > 0 ? `drop-shadow(0 0 ${Math.max(5, ratio * 14)}px ${colorInfo.hex})` : undefined,
       glowColor: colorInfo.hex,
     }
   }
@@ -114,6 +114,22 @@ export function PortugalMapInteractive({
 
   const hoveredStat = hovered ? districtStats.get(hovered.name) : null
   const hoveredColorInfo = hovered ? getDistrictColorInfo(hovered.name) : null
+
+  // Dados das Regiões Autónomas
+  const isAzoresSelected = selected.toLowerCase() === 'açores' || selected.toLowerCase() === 'acores'
+  const isAzoresHovered = hovered?.name.toLowerCase() === 'açores'
+  const azoresStats = districtStats.get('Açores')
+  const azoresStyle = getDistrictStyle('Açores', isAzoresSelected, isAzoresHovered)
+
+  const isMadeiraSelected = selected.toLowerCase() === 'madeira'
+  const isMadeiraHovered = hovered?.name.toLowerCase() === 'madeira'
+  const madeiraStats = districtStats.get('Madeira')
+  const madeiraStyle = getDistrictStyle('Madeira', isMadeiraSelected, isMadeiraHovered)
+
+  // Filtrar distritos continentais para a camada principal
+  const mainlandDistricts = useMemo(() => {
+    return PORTUGAL_GEO_DATA.filter((d) => d.type === 'mainland')
+  }, [])
 
   return (
     <div
@@ -182,100 +198,321 @@ export function PortugalMapInteractive({
         </g>
 
         {/* ========================================================= */}
-        {/* CAIXA HOLOGRÁFICA: AÇORES (SETOR ATLÂNTICO NORTE) */}
+        {/* CAIXA HOLOGRÁFICA: AÇORES (AMPLIADA 4X • 9 ILHAS NÍTIDAS) */}
         {/* ========================================================= */}
-        <g className="transition-all duration-300">
-          {/* Caixa com Chanfro Tático HUD */}
+        <g
+          id="tactical-box-acores"
+          className="cursor-pointer transition-all duration-300 group"
+          role="button"
+          tabIndex={0}
+          aria-label="Região Autónoma dos Açores (9 Ilhas)"
+          aria-pressed={isAzoresSelected}
+          onClick={() => onSelect('Açores')}
+          onMouseEnter={() =>
+            setHovered({
+              name: 'Açores',
+              type: 'island',
+              path: '',
+              centroid: [130, 150],
+            })
+          }
+          onFocus={() => {
+            setHovered({
+              name: 'Açores',
+              type: 'island',
+              path: '',
+              centroid: [130, 150],
+            })
+            setMousePos({ x: 130, y: 150 })
+          }}
+          onBlur={() => setHovered(null)}
+        >
+          {/* Caixa Tática HUD com Chanfros */}
           <rect
             x="20"
             y="35"
-            width="215"
-            height="225"
-            rx="16"
-            fill="rgba(15, 23, 42, 0.85)"
-            stroke={selected === 'Açores' ? '#14b8a6' : 'rgba(20, 184, 166, 0.4)'}
-            strokeWidth={selected === 'Açores' ? '2.5' : '1.2'}
-            strokeDasharray={selected === 'Açores' ? 'none' : '6 4'}
-            filter={selected === 'Açores' ? 'drop-shadow(0 0 15px rgba(20, 184, 166, 0.6))' : undefined}
+            width="220"
+            height="235"
+            rx="18"
+            fill="rgba(15, 23, 42, 0.9)"
+            stroke={isAzoresSelected ? '#14b8a6' : isAzoresHovered ? '#2dd4bf' : 'rgba(20, 184, 166, 0.45)'}
+            strokeWidth={isAzoresSelected ? '2.8' : isAzoresHovered ? '2' : '1.3'}
+            strokeDasharray={isAzoresSelected ? 'none' : '6 4'}
+            filter={
+              isAzoresSelected
+                ? 'drop-shadow(0 0 25px rgba(20, 184, 166, 0.75))'
+                : isAzoresHovered
+                ? 'drop-shadow(0 0 15px rgba(20, 184, 166, 0.5))'
+                : undefined
+            }
           />
+
+          {/* Chanfros HUD Militares nos Cantos */}
           <path
-            d="M20 47 L32 35 M223 35 L235 47 M20 248 L32 260 M223 260 L235 248"
-            stroke="rgba(20, 184, 166, 0.8)"
-            strokeWidth="1.5"
+            d="M20 50 L35 35 M225 35 L240 50 M20 255 L35 270 M225 270 L240 255"
+            stroke="#14b8a6"
+            strokeWidth="2"
             fill="none"
           />
+
+          {/* Sub-grelha tática interna */}
+          <line x1="20" y1="90" x2="240" y2="90" stroke="rgba(20, 184, 166, 0.15)" strokeDasharray="3 3" />
+          <line x1="20" y1="200" x2="240" y2="200" stroke="rgba(20, 184, 166, 0.15)" strokeDasharray="3 3" />
+          <line x1="90" y1="35" x2="90" y2="270" stroke="rgba(20, 184, 166, 0.15)" strokeDasharray="3 3" />
+
+          {/* Header da Mini-Tela */}
           <text
-            x="34"
-            y="58"
+            x="32"
+            y="56"
             fill="#14b8a6"
-            fontSize="10"
+            fontSize="11"
             fontFamily="var(--font-mono), monospace"
             fontWeight="900"
-            letterSpacing="0.15em"
+            letterSpacing="0.12em"
           >
-            [01] AÇORES // 9 ILHAS
+            [01] AÇORES (9 ILHAS)
           </text>
           <text
-            x="34"
+            x="32"
             y="70"
-            fill="rgba(255, 255, 255, 0.4)"
-            fontSize="8"
+            fill="rgba(255, 255, 255, 0.6)"
+            fontSize="8.5"
             fontFamily="var(--font-mono), monospace"
+            fontWeight="700"
           >
-            SETOR OCIDENTAL
+            {azoresStats?.xp ? `${azoresStats.xp.toLocaleString('pt-PT')} XP • #${azoresStats.pos} no País` : 'SETOR OCIDENTAL ATLÂNTICO'}
           </text>
+
+          {/* ILHAS DOS AÇORES (AMPLIADAS 4X PARA MÁXIMA VISIBILIDADE) */}
+          <g
+            className="transition-all duration-300"
+            style={{
+              filter: azoresStyle.filter,
+            }}
+          >
+            {/* 1. Corvo */}
+            <path
+              d="M58,64 C62,58 70,60 69,69 C67,75 60,75 57,69 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2"
+            />
+            <text x="50" y="58" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">Corvo</text>
+
+            {/* 2. Flores */}
+            <path
+              d="M48,84 C54,76 66,78 65,92 C64,105 53,108 47,98 C43,91 44,85 48,84 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.2"
+            />
+            <text x="32" y="96" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">Flores</text>
+
+            {/* 3. Graciosa */}
+            <path
+              d="M106,94 C111,86 123,88 124,96 C123,104 113,108 107,102 C104,98 104,96 106,94 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2"
+            />
+            <text x="100" y="86" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">Graciosa</text>
+
+            {/* 4. Terceira */}
+            <path
+              d="M148,114 C158,102 180,106 182,120 C180,133 162,136 152,128 C146,122 146,116 148,114 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.4"
+            />
+            <text x="156" y="102" fill="rgba(20, 184, 166, 0.9)" fontSize="7.5" fontFamily="var(--font-mono), monospace" fontWeight="bold">Terceira</text>
+
+            {/* 5. São Jorge */}
+            <path
+              d="M102,124 C112,116 138,112 152,116 C150,122 126,128 108,130 C102,128 100,126 102,124 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.2"
+            />
+            <text x="96" y="116" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">S. Jorge</text>
+
+            {/* 6. Faial */}
+            <path
+              d="M82,136 C88,128 102,130 104,140 C102,150 90,154 82,146 C79,141 79,138 82,136 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.2"
+            />
+            <text x="64" y="142" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">Faial</text>
+
+            {/* 7. Pico */}
+            <path
+              d="M105,145 C116,135 140,140 148,150 C144,160 120,164 108,156 C103,152 102,148 105,145 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.4"
+            />
+            <text x="124" y="166" fill="rgba(20, 184, 166, 0.9)" fontSize="7.5" fontFamily="var(--font-mono), monospace" fontWeight="bold">Pico</text>
+
+            {/* 8. São Miguel */}
+            <path
+              d="M152,180 C166,166 200,164 218,172 C220,184 196,194 168,192 C156,189 150,185 152,180 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.5"
+            />
+            <text x="165" y="202" fill="rgba(20, 184, 166, 0.95)" fontSize="8" fontFamily="var(--font-mono), monospace" fontWeight="bold">São Miguel</text>
+
+            {/* 9. Santa Maria */}
+            <path
+              d="M198,218 C206,210 220,214 220,224 C218,234 206,236 200,229 C196,224 196,220 198,218 Z"
+              fill={azoresStyle.fill}
+              fillOpacity={azoresStyle.fillOpacity}
+              stroke={azoresStyle.stroke}
+              strokeWidth="2.2"
+            />
+            <text x="180" y="244" fill="rgba(20, 184, 166, 0.8)" fontSize="7" fontFamily="var(--font-mono), monospace" fontWeight="bold">Santa Maria</text>
+          </g>
         </g>
 
         {/* ========================================================= */}
-        {/* CAIXA HOLOGRÁFICA: MADEIRA (SETOR ATLÂNTICO SUL) */}
+        {/* CAIXA HOLOGRÁFICA: MADEIRA & PORTO SANTO (AMPLIADA 4X)    */}
         {/* ========================================================= */}
-        <g className="transition-all duration-300">
-          {/* Caixa com Chanfro Tático HUD */}
+        <g
+          id="tactical-box-madeira"
+          className="cursor-pointer transition-all duration-300 group"
+          role="button"
+          tabIndex={0}
+          aria-label="Região Autónoma da Madeira e Porto Santo"
+          aria-pressed={isMadeiraSelected}
+          onClick={() => onSelect('Madeira')}
+          onMouseEnter={() =>
+            setHovered({
+              name: 'Madeira',
+              type: 'island',
+              path: '',
+              centroid: [130, 650],
+            })
+          }
+          onFocus={() => {
+            setHovered({
+              name: 'Madeira',
+              type: 'island',
+              path: '',
+              centroid: [130, 650],
+            })
+            setMousePos({ x: 130, y: 650 })
+          }}
+          onBlur={() => setHovered(null)}
+        >
+          {/* Caixa Tática HUD com Chanfros */}
           <rect
             x="20"
             y="545"
-            width="215"
-            height="215"
-            rx="16"
-            fill="rgba(15, 23, 42, 0.85)"
-            stroke={selected === 'Madeira' ? '#06b6d4' : 'rgba(6, 182, 212, 0.4)'}
-            strokeWidth={selected === 'Madeira' ? '2.5' : '1.2'}
-            strokeDasharray={selected === 'Madeira' ? 'none' : '6 4'}
-            filter={selected === 'Madeira' ? 'drop-shadow(0 0 15px rgba(6, 182, 212, 0.6))' : undefined}
+            width="220"
+            height="225"
+            rx="18"
+            fill="rgba(15, 23, 42, 0.9)"
+            stroke={isMadeiraSelected ? '#06b6d4' : isMadeiraHovered ? '#38bdf8' : 'rgba(6, 182, 212, 0.45)'}
+            strokeWidth={isMadeiraSelected ? '2.8' : isMadeiraHovered ? '2' : '1.3'}
+            strokeDasharray={isMadeiraSelected ? 'none' : '6 4'}
+            filter={
+              isMadeiraSelected
+                ? 'drop-shadow(0 0 25px rgba(6, 182, 212, 0.75))'
+                : isMadeiraHovered
+                ? 'drop-shadow(0 0 15px rgba(6, 182, 212, 0.5))'
+                : undefined
+            }
           />
+
+          {/* Chanfros HUD Militares nos Cantos */}
           <path
-            d="M20 557 L32 545 M223 545 L235 557 M20 748 L32 760 M223 760 L235 748"
-            stroke="rgba(6, 182, 212, 0.8)"
-            strokeWidth="1.5"
+            d="M20 560 L35 545 M225 545 L240 560 M20 755 L35 770 M225 770 L240 755"
+            stroke="#06b6d4"
+            strokeWidth="2"
             fill="none"
           />
+
+          {/* Sub-grelha tática interna */}
+          <line x1="20" y1="600" x2="240" y2="600" stroke="rgba(6, 182, 212, 0.15)" strokeDasharray="3 3" />
+          <line x1="20" y1="710" x2="240" y2="710" stroke="rgba(6, 182, 212, 0.15)" strokeDasharray="3 3" />
+          <line x1="160" y1="545" x2="160" y2="770" stroke="rgba(6, 182, 212, 0.15)" strokeDasharray="3 3" />
+
+          {/* Header da Mini-Tela */}
           <text
-            x="34"
-            y="568"
+            x="32"
+            y="566"
             fill="#06b6d4"
-            fontSize="10"
+            fontSize="11"
             fontFamily="var(--font-mono), monospace"
             fontWeight="900"
-            letterSpacing="0.15em"
+            letterSpacing="0.12em"
           >
             [02] MADEIRA &amp; PORTO SANTO
           </text>
           <text
-            x="34"
+            x="32"
             y="580"
-            fill="rgba(255, 255, 255, 0.4)"
-            fontSize="8"
+            fill="rgba(255, 255, 255, 0.6)"
+            fontSize="8.5"
             fontFamily="var(--font-mono), monospace"
+            fontWeight="700"
           >
-            SETOR AUSTRAL
+            {madeiraStats?.xp ? `${madeiraStats.xp.toLocaleString('pt-PT')} XP • #${madeiraStats.pos} no País` : 'SETOR AUSTRAL ATLÂNTICO'}
           </text>
+
+          {/* ILHAS DA MADEIRA (AMPLIADAS 4X PARA MÁXIMA VISIBILIDADE) */}
+          <g
+            className="transition-all duration-300"
+            style={{
+              filter: madeiraStyle.filter,
+            }}
+          >
+            {/* 1. Ilha da Madeira (Principal, Ampla e Nítida) */}
+            <path
+              d="M45,652 C52,638 86,628 126,628 C158,629 184,640 186,649 C188,653 176,660 162,658 C150,666 122,678 84,678 C58,676 44,664 45,652 Z"
+              fill={madeiraStyle.fill}
+              fillOpacity={madeiraStyle.fillOpacity}
+              stroke={madeiraStyle.stroke}
+              strokeWidth="2.8"
+            />
+            <text x="80" y="660" fill="#ffffff" fontSize="9.5" fontFamily="var(--font-mono), monospace" fontWeight="900">ILHA DA MADEIRA</text>
+            <text x="96" y="694" fill="rgba(6, 182, 212, 0.9)" fontSize="7.5" fontFamily="var(--font-mono), monospace" fontWeight="bold">Funchal</text>
+
+            {/* 2. Ilha de Porto Santo (Nordeste) */}
+            <path
+              d="M172,582 C182,570 200,574 202,588 C198,600 182,604 174,594 C170,588 170,584 172,582 Z"
+              fill={madeiraStyle.fill}
+              fillOpacity={madeiraStyle.fillOpacity}
+              stroke={madeiraStyle.stroke}
+              strokeWidth="2.2"
+            />
+            <text x="156" y="574" fill="rgba(6, 182, 212, 0.95)" fontSize="8" fontFamily="var(--font-mono), monospace" fontWeight="bold">Porto Santo</text>
+
+            {/* 3. Ilhas Desertas (Sudeste) */}
+            <path
+              d="M184,692 C188,688 194,696 192,710 C190,724 184,730 182,726 C180,720 182,698 184,692 Z"
+              fill={madeiraStyle.fill}
+              fillOpacity={madeiraStyle.fillOpacity}
+              stroke={madeiraStyle.stroke}
+              strokeWidth="2"
+            />
+            <text x="160" y="742" fill="rgba(6, 182, 212, 0.8)" fontSize="7.5" fontFamily="var(--font-mono), monospace" fontWeight="bold">Desertas</text>
+          </g>
         </g>
 
         {/* ========================================================= */}
-        {/* CAMADA DE DISTRITOS COM CORES VIVAS E HEATMAP NEON */}
+        {/* CAMADA DE DISTRITOS CONTINENTAIS (CORES VIVAS & HEATMAP)  */}
         {/* ========================================================= */}
-        <g id="districts-tactical-layer">
-          {PORTUGAL_GEO_DATA.map((district) => {
+        <g id="districts-tactical-mainland-layer">
+          {mainlandDistricts.map((district) => {
             const isSelected = selected.toLowerCase() === district.name.toLowerCase()
             const isHovered = hovered?.name.toLowerCase() === district.name.toLowerCase()
             const style = getDistrictStyle(district.name, isSelected, isHovered)
@@ -325,9 +562,9 @@ export function PortugalMapInteractive({
         </g>
 
         {/* ========================================================= */}
-        {/* LEGENDA HOLOGRÁFICA DO RADAR */}
+        {/* LEGENDA HOLOGRÁFICA DO RADAR                              */}
         {/* ========================================================= */}
-        <g transform="translate(32, 285)">
+        <g transform="translate(32, 290)">
           <text
             x="0"
             y="0"
