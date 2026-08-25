@@ -123,14 +123,14 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen bg-transparent">
+    <div className="relative h-[100dvh] max-h-[100dvh] w-full overflow-hidden bg-transparent select-none flex flex-col">
       {/* Fundo Sincronizado do Duelo 1v1 */}
       <BackgroundFx
         variant="duel"
         customImage={arenaImage}
         contrastIntensity="subtle"
       />
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full h-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden p-1 sm:p-3">
         <DuelArena
           key={effectiveDuelId}
           duelId={effectiveDuelId}

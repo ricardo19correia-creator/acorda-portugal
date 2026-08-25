@@ -43,7 +43,7 @@ export function QuizPowerUpsBar({
   const canUseFreeze = !disabled && countFreeze > 0
 
   return (
-    <div className="my-3 flex flex-wrap items-center justify-center gap-3">
+    <div className="my-1 sm:my-1.5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 shrink-0">
       {/* 1. POWER-UP 50/50 */}
       <button
         type="button"
@@ -51,20 +51,20 @@ export function QuizPowerUpsBar({
         onClick={onUse5050}
         aria-label="Usar Ajuda 50/50"
         className={cn(
-          'flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-xl backdrop-blur-md transition-all select-none',
+          'flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl font-bold shadow-md backdrop-blur-md transition-all select-none text-xs',
           used5050
             ? 'bg-slate-900/95 border-2 border-emerald-500/60 text-emerald-400 opacity-80 cursor-default'
             : canUse5050
               ? 'bg-slate-900/95 border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-950/80 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-              : 'bg-slate-900/80 border-2 border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
+              : 'bg-slate-900/80 border border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <span className="text-sm flex items-center gap-1.5">
-          {used5050 ? <Check className="h-4 w-4 text-emerald-400 stroke-[3]" /> : '✨ 50/50'}
+        <span className="flex items-center gap-1">
+          {used5050 ? <Check className="h-3.5 w-3.5 text-emerald-400 stroke-[3]" /> : '✨ 50/50'}
         </span>
         <span
           className={cn(
-            'px-2 py-0.5 rounded-md text-xs font-black',
+            'px-1.5 py-0.2 rounded text-[10px] sm:text-xs font-black',
             used5050
               ? 'bg-emerald-500/20 text-emerald-300'
               : count5050 > 0
@@ -83,20 +83,20 @@ export function QuizPowerUpsBar({
         onClick={onUseFreeze}
         aria-label="Usar Congelar Tempo (+15s)"
         className={cn(
-          'flex items-center gap-2 px-4 py-2 rounded-xl font-bold shadow-xl backdrop-blur-md transition-all select-none',
+          'flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl font-bold shadow-md backdrop-blur-md transition-all select-none text-xs',
           isFrozen
             ? 'bg-slate-900/95 border-2 border-blue-400 text-blue-200 shadow-[0_0_25px_rgba(96,165,250,0.6)] animate-pulse'
             : canUseFreeze
               ? 'bg-slate-900/95 border-2 border-amber-400 text-amber-300 hover:bg-amber-950/80 hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.3)]'
-              : 'bg-slate-900/80 border-2 border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
+              : 'bg-slate-900/80 border border-slate-700/60 text-slate-500 opacity-50 cursor-not-allowed',
         )}
       >
-        <span className="text-sm flex items-center gap-1.5">
-          {isFrozen ? <Snowflake className="h-4 w-4 animate-spin text-blue-300" /> : '⏳ Congelar'}
+        <span className="flex items-center gap-1">
+          {isFrozen ? <Snowflake className="h-3.5 w-3.5 animate-spin text-blue-300" /> : '⏳ Congelar'}
         </span>
         <span
           className={cn(
-            'px-2 py-0.5 rounded-md text-xs font-black',
+            'px-1.5 py-0.2 rounded text-[10px] sm:text-xs font-black',
             isFrozen
               ? 'bg-blue-500/30 text-white'
               : countFreeze > 0

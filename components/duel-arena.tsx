@@ -860,279 +860,253 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="mx-auto w-full max-w-3xl px-4 py-4 sm:py-6 animate-rise">
+      <div className="h-full max-h-[100dvh] w-full max-w-3xl mx-auto flex flex-col justify-between overflow-hidden p-1 sm:p-2 select-none animate-rise">
         {/* ========================================================= */}
-        {/* TOP CLASH HUD: PLAYER A vs PLAYER B */}
+        {/* 1. TOP CLASH HUD: PLAYER A vs PLAYER B + TIMER (SHRINK-0) */}
         {/* ========================================================= */}
-        <div className="card-game flex items-center justify-between gap-2 rounded-3xl p-3.5 sm:p-5 shadow-2xl border border-white/20 relative overflow-hidden">
-          {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
-          )}
+        <div className="shrink-0 w-full">
+          <div className="card-game flex items-center justify-between gap-2 rounded-2xl p-2 sm:p-3 shadow-xl border border-white/20 relative overflow-hidden">
+            {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
+            )}
 
-          {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-              <span className="text-3xl animate-bounce">🌺</span>
-              <span className="text-2xl animate-ping ml-4">🌸</span>
-              <span className="text-3xl animate-bounce ml-4">🌺</span>
-            </div>
-          )}
-
-          {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
-          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
-            <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_40px_rgba(16,185,129,0.7)] animate-pulse" />
-          )}
-
-          {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
-          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
-              <span className="text-3xl animate-bounce">🪙</span>
-              <span className="text-4xl animate-ping">✨</span>
-              <span className="text-3xl animate-bounce">🪙</span>
-            </div>
-          )}
-
-          {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
-          {feedback?.status === 'CORRECT' &&
-            (streakEffectId === 'sfx_espada_conquistador' ||
-              streakEffectId === 'streak_espada_conquistador') && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
-                <span className="text-5xl sm:text-6xl animate-bounce drop-shadow-[0_0_25px_rgba(234,179,8,0.95)]">
-                  ⚔️
-                </span>
+            {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+                <span className="text-2xl animate-bounce">🌺</span>
+                <span className="text-xl animate-ping ml-3">🌸</span>
+                <span className="text-2xl animate-bounce ml-3">🌺</span>
               </div>
             )}
 
-          {/* Player Left (Me) */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0 relative">
-            <div className="relative shrink-0">
-              <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
-              
-              {/* Balão de Provocação / Reação (Jogador Atual - Esquerda) */}
-              {playerReaction && (
-                <ProvocationBubble
-                  message={playerReaction.message}
-                  sender="player"
-                  onDismiss={() => setPlayerReaction(null)}
-                />
-              )}
-            </div>
+            {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+              <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_40px_rgba(16,185,129,0.7)] animate-pulse" />
+            )}
 
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
-                  {me?.displayName || 'Jogador'} <span className="text-primary">(Tu)</span>
-                </span>
-                {((profile as any)?.is_founder || (profile as any)?.isFounder) && (
-                  <span className="rounded-full bg-amber-500/25 border border-amber-400/60 px-1.5 py-0.2 text-[0.55rem] font-black text-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]">
-                    👑 Fundador
+            {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+                <span className="text-2xl animate-bounce">🪙</span>
+                <span className="text-3xl animate-ping">✨</span>
+                <span className="text-2xl animate-bounce">🪙</span>
+              </div>
+            )}
+
+            {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+            {feedback?.status === 'CORRECT' &&
+              (streakEffectId === 'sfx_espada_conquistador' ||
+                streakEffectId === 'streak_espada_conquistador') && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                  <span className="text-4xl sm:text-5xl animate-bounce drop-shadow-[0_0_25px_rgba(234,179,8,0.95)]">
+                    ⚔️
                   </span>
-                )}
-                {((profile?.equipped?.title || (typeof window !== 'undefined' && localStorage.getItem('equipped_title')))) && (
-                  <span className={cn('rounded-full px-2 py-0.2 text-[0.55rem] font-bold shrink-0', getTitleBadgeStyle(profile?.equipped?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : '')))}>
-                    {(TITLE_SHOP_CATALOG.find(i => i.id === (profile?.equipped?.title || localStorage.getItem('equipped_title')) || i.name === (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || SHOP_CATALOG.find(i => i.id === (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.name || (profile?.equipped?.title || localStorage.getItem('equipped_title')))?.replace(/^Título:\s*«?/, '').replace(/»?$/, '')}
-                  </span>
+                </div>
+              )}
+
+            {/* Player Left (Me) */}
+            <div className="flex items-center gap-2 flex-1 min-w-0 relative">
+              <div className="relative shrink-0">
+                <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+                
+                {/* Balão de Provocação / Reação (Jogador Atual - Esquerda) */}
+                {playerReaction && (
+                  <ProvocationBubble
+                    message={playerReaction.message}
+                    sender="player"
+                    onDismiss={() => setPlayerReaction(null)}
+                  />
                 )}
               </div>
 
-              <p className="font-display text-base sm:text-lg font-black text-primary text-glow-primary">
-                {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
-              </p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1 flex-wrap">
+                  <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
+                    {me?.displayName || 'Jogador'} <span className="text-primary text-[10px]">(Tu)</span>
+                  </span>
+                </div>
+
+                <p className="font-display text-xs sm:text-sm font-black text-primary text-glow-primary leading-tight">
+                  {me?.score || 0} <span className="text-[0.65rem] text-muted-foreground font-normal">pts</span>
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Center VS Indicator */}
-          <div className="flex flex-col items-center px-3">
-            <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 shadow-md shadow-flag-red/20">
-              ⚔️ VS
-            </span>
-            <span className="mt-1 font-mono text-[0.7rem] font-black text-gold">
-              Q{currentQIndex + 1} / 10
-            </span>
-          </div>
+            {/* Center VS Indicator */}
+            <div className="flex flex-col items-center px-2 shrink-0">
+              <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 shadow-sm py-0.5 px-2 text-[10px] sm:text-xs">
+                ⚔️ VS
+              </span>
+              <span className="mt-0.5 font-mono text-[0.65rem] sm:text-xs font-black text-gold">
+                Q{currentQIndex + 1}/10
+              </span>
+            </div>
 
-          {/* Player Right (Opponent) */}
-          <div className="flex items-center justify-end gap-2.5 sm:gap-3.5 flex-1 min-w-0 text-right relative">
-            <div className="min-w-0">
-              <div className="flex items-center justify-end gap-1.5">
-                <span className="font-display text-xs sm:text-sm font-black text-foreground truncate">
+            {/* Player Right (Opponent) */}
+            <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right relative">
+              <div className="min-w-0">
+                <span className="font-display text-xs sm:text-sm font-black text-foreground truncate block">
                   {opponent?.displayName || 'Adversário'}
                 </span>
+                <p className="font-display text-[10px] sm:text-xs font-bold text-muted-foreground truncate leading-tight">
+                  P{Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10
+                </p>
               </div>
-              <p className="font-display text-xs sm:text-sm font-bold text-muted-foreground truncate">
-                Pergunta {Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)} / 10
-              </p>
-            </div>
 
-            <div className="relative shrink-0">
-              <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
-              {/* Balão de Provocação / Reação (Adversário - Direita) */}
-              {opponentReaction && (
-                <ProvocationBubble
-                  message={opponentReaction.message}
-                  sender="opponent"
-                  onDismiss={() => setOpponentReaction(null)}
-                />
-              )}
+              <div className="relative shrink-0">
+                <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
+                {/* Balão de Provocação / Reação (Adversário - Direita) */}
+                {opponentReaction && (
+                  <ProvocationBubble
+                    message={opponentReaction.message}
+                    sender="opponent"
+                    onDismiss={() => setOpponentReaction(null)}
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* ========================================================= */}
-        {/* ÁREA LIMPA E EQUILIBRADA: BOTÃO REAGIR COM POPOVER */}
-        {/* ========================================================= */}
-        <div className="mt-3 flex items-center justify-between px-1.5">
-          <div className="relative">
-            <button
-              type="button"
-              disabled={tauntCooldown > 0}
-              onClick={() => setTauntModalOpen(!tauntModalOpen)}
-              style={{
-                background: 'rgba(147, 51, 234, 0.2)',
-                border: '1px solid rgba(168, 85, 247, 0.6)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
-                borderRadius: '9999px',
-                padding: '4px 14px',
-                fontSize: '13px',
-                fontWeight: '600',
-                color: '#fff',
-              }}
-              className={cn(
-                'inline-flex items-center gap-1.5 transition-all duration-200 cursor-pointer select-none active:scale-95 shadow-md',
-                tauntCooldown > 0
-                  ? 'opacity-50 cursor-not-allowed'
-                  : 'hover:bg-purple-600/40 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]'
-              )}
-            >
-              {tauntCooldown > 0 ? (
-                <>
-                  <span className="text-[11px] animate-spin">⏳</span>
-                  <span>{tauntCooldown}s</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-sm">💬</span>
-                  <span>Reagir</span>
-                </>
-              )}
-            </button>
+          {/* Sub-bar: Reagir & Duelo + Barra de Tempo */}
+          <div className="mt-1 flex items-center justify-between px-1">
+            <div className="relative">
+              <button
+                type="button"
+                disabled={tauntCooldown > 0}
+                onClick={() => setTauntModalOpen(!tauntModalOpen)}
+                style={{
+                  background: 'rgba(147, 51, 234, 0.2)',
+                  border: '1px solid rgba(168, 85, 247, 0.6)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  borderRadius: '9999px',
+                  padding: '2px 10px',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  color: '#fff',
+                }}
+                className={cn(
+                  'inline-flex items-center gap-1 transition-all duration-200 cursor-pointer select-none active:scale-95 shadow-sm',
+                  tauntCooldown > 0
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'hover:bg-purple-600/40 hover:border-purple-400'
+                )}
+              >
+                {tauntCooldown > 0 ? (
+                  <>
+                    <span className="text-[10px] animate-spin">⏳</span>
+                    <span>{tauntCooldown}s</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-xs">💬</span>
+                    <span>Reagir</span>
+                  </>
+                )}
+              </button>
 
-            {/* Menu Pop-over Flutuante de Emotes */}
-            <DuelEmoteFloatingBar
-              isOpen={tauntModalOpen}
-              onClose={() => setTauntModalOpen(false)}
-              onSendEmote={handleSendEmote}
-              cooldown={tauntCooldown}
-              equippedEmoteIds={(profile as any)?.equipped?.emotes}
-            />
+              {/* Menu Pop-over Flutuante de Emotes */}
+              <DuelEmoteFloatingBar
+                isOpen={tauntModalOpen}
+                onClose={() => setTauntModalOpen(false)}
+                onSendEmote={handleSendEmote}
+                cooldown={tauntCooldown}
+                equippedEmoteIds={(profile as any)?.equipped?.emotes}
+              />
+            </div>
+
+            <div className="flex items-center gap-1 text-[11px] font-bold text-slate-300">
+              <Clock className="h-3 w-3 text-primary" />
+              <span className={cn('font-mono font-black', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-200')}>
+                {timeLeft}s
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
-            <span>🛡️ Duelo 1v1</span>
-          </div>
-        </div>
-
-        {/* ========================================================= */}
-        {/* TIME BAR & QUESTION CARD (60s Individuais) */}
-        {/* ========================================================= */}
-        <div className="mt-4">
-          <div className="flex items-center justify-between text-xs font-bold text-muted-foreground mb-1.5 px-1">
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5 text-primary" /> Tempo de Resposta (60s)
-            </span>
-            <span
-              className={cn(
-                'font-mono font-black transition-all duration-300',
-                isUrgent
-                  ? 'text-flag-red text-sm animate-pulse'
-                  : 'text-foreground',
-              )}
-            >
-              ⏱️ {timeLeft}s
-            </span>
-          </div>
+          {/* Time Progress Bar */}
           <div
             className={cn(
-              'h-3 w-full rounded-full bg-white/10 overflow-hidden shadow-inner p-0.5 border transition-colors duration-300',
+              'mt-1 h-1.5 sm:h-2 w-full rounded-full bg-white/10 overflow-hidden shadow-inner p-0.5 border transition-colors duration-300',
               isUrgent ? 'border-flag-red/60 bg-flag-red/10' : 'border-white/10',
             )}
           >
             <div
-              className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-lg', timeColor)}
+              className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-md', timeColor)}
               style={{ width: `${timePercentage}%` }}
             />
           </div>
         </div>
 
-        {/* Feedback visual instantâneo */}
-        {feedback && (
-          <div
-            className={cn(
-              'mt-4 flex items-center justify-center gap-2.5 rounded-2xl p-4 font-display text-sm font-black tracking-wide shadow-2xl transition-all duration-300 animate-pop',
-              feedback.status === 'CORRECT' && 'bg-primary/25 border-2 border-primary text-primary ring-4 ring-primary/30 text-glow-primary',
-              feedback.status === 'WRONG' && 'bg-flag-red/25 border-2 border-flag-red text-flag-red ring-4 ring-flag-red/30 text-glow-red',
-              feedback.status === 'TIMEOUT' && 'bg-gold/25 border-2 border-gold text-gold ring-4 ring-gold/30 text-glow-gold',
-            )}
-          >
-            {feedback.status === 'CORRECT' && <CheckCircle2 className="h-5 w-5 shrink-0" />}
-            {feedback.status === 'WRONG' && <XCircle className="h-5 w-5 shrink-0" />}
-            {feedback.status === 'TIMEOUT' && <Clock className="h-5 w-5 shrink-0" />}
-            <span>{feedback.message}</span>
-          </div>
-        )}
+        {/* ========================================================= */}
+        {/* 2. CARD DA PERGUNTA & FEEDBACK (FLEX-1, CONTIDO, MIN-H-0) */}
+        {/* ========================================================= */}
+        <div className="flex-1 flex flex-col items-center justify-center my-1 sm:my-2 min-h-0 relative w-full">
+          {/* Feedback visual instantâneo */}
+          {feedback && (
+            <div
+              className={cn(
+                'mb-1.5 flex items-center justify-center gap-1.5 rounded-xl px-3 py-1.5 font-display text-xs sm:text-sm font-black tracking-wide shadow-xl transition-all duration-300 animate-pop z-20 shrink-0',
+                feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
+                feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
+                feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
+              )}
+            >
+              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-4 w-4 shrink-0" />}
+              {feedback.status === 'WRONG' && <XCircle className="h-4 w-4 shrink-0" />}
+              {feedback.status === 'TIMEOUT' && <Clock className="h-4 w-4 shrink-0" />}
+              <span>{feedback.message}</span>
+            </div>
+          )}
 
-        {/* Texto da Pergunta */}
-        <div className="mt-4 rounded-3xl p-6 sm:p-8 shadow-2xl text-center border-2 border-slate-700/80 bg-slate-900/95">
-          <span className="badge-hud mb-3 text-muted-foreground border-white/15 bg-white/5">
-            {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
-          </span>
-          <h1 className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-white leading-snug text-balance">
-            {currentQuestion?.question}
-          </h1>
+          {/* Texto da Pergunta */}
+          <div className="rounded-2xl p-3 sm:p-5 shadow-2xl text-center border-2 border-slate-700/80 bg-slate-900/95 w-full flex flex-col items-center justify-center overflow-hidden">
+            <span className="badge-hud mb-1.5 text-muted-foreground border-white/15 bg-white/5 text-[10px] sm:text-xs py-0.5 px-2 shrink-0">
+              {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
+            </span>
+            <h1 className="font-display text-xs sm:text-base md:text-xl font-black text-white leading-snug text-balance line-clamp-4">
+              {currentQuestion?.question}
+            </h1>
+          </div>
+
+          {/* Pista Histórica no Duelo */}
+          {activeClue && (
+            <div className="mt-1 rounded-xl border border-amber-500/50 bg-amber-500/15 p-2 text-xs text-amber-100 flex items-center gap-2 backdrop-blur-xl animate-rise shadow-md shrink-0 w-full">
+              <Lightbulb className="h-4 w-4 text-amber-400 shrink-0" />
+              <span className="font-medium truncate">{activeClue}</span>
+            </div>
+          )}
+
+          {/* Freeze Banner no Duelo */}
+          {isFrozen && (
+            <div className="mt-1 rounded-xl border border-blue-400/60 bg-blue-500/20 p-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-md shrink-0 w-full">
+              <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
+              <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
+            </div>
+          )}
         </div>
 
-        {/* Barra de Power-Ups 100% Individual (50/50, Pista, Congelar) */}
-        <QuizPowerUpsBar
-          inventory={inventory}
-          disabled={feedback !== null || isSubmitting || timeLeft <= 0}
-          used5050={eliminatedOptions.length > 0}
-          usedClue={activeClue !== null}
-          isFrozen={isFrozen}
-          freezeTimeLeft={freezeTimeLeft}
-          onUse5050={handleUse5050}
-          onUseClue={handleUseClue}
-          onUseFreeze={handleUseFreeze}
-        />
-
-        {/* Pista Histórica no Duelo */}
-        {activeClue && (
-          <div className="my-3 rounded-2xl border border-amber-500/50 bg-amber-500/15 p-4 text-xs sm:text-sm text-amber-100 flex items-start gap-3 backdrop-blur-xl animate-rise shadow-lg shadow-amber-500/20">
-            <Lightbulb className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
-            <div>
-              <span className="font-black uppercase tracking-wider text-amber-300 block text-[0.7rem] mb-0.5">
-                💡 Pista Histórica:
-              </span>
-              <span className="font-medium leading-relaxed">{activeClue}</span>
-            </div>
-          </div>
-        )}
-
-        {/* Freeze Banner no Duelo */}
-        {isFrozen && (
-          <div className="my-3 rounded-2xl border border-blue-400/60 bg-blue-500/20 p-3.5 text-xs sm:text-sm text-blue-100 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-lg shadow-blue-500/25">
-            <Snowflake className="h-4 w-4 text-blue-300 animate-spin" />
-            <span className="font-bold">
-              ❄️ Tempo Congelado! O teu cronómetro está pausado por <strong>{freezeTimeLeft}s</strong>.
-            </span>
-          </div>
-        )}
+        {/* ========================================================= */}
+        {/* 3. BARRA DE POWER-UPS (SHRINK-0)                         */}
+        {/* ========================================================= */}
+        <div className="shrink-0 w-full flex justify-center">
+          <QuizPowerUpsBar
+            inventory={inventory}
+            disabled={feedback !== null || isSubmitting || timeLeft <= 0}
+            used5050={eliminatedOptions.length > 0}
+            usedClue={activeClue !== null}
+            isFrozen={isFrozen}
+            freezeTimeLeft={freezeTimeLeft}
+            onUse5050={handleUse5050}
+            onUseClue={handleUseClue}
+            onUseFreeze={handleUseFreeze}
+          />
+        </div>
 
         {/* ========================================================= */}
-        {/* 4 BOTÕES DE RESPOSTA (Otimizados para Touch Mobile) */}
+        {/* 4. AS 4 OPÇÕES DE RESPOSTA (SHRINK-0, SEMPRE VISÍVEIS)   */}
         {/* ========================================================= */}
-        <div className="mt-4 grid gap-3.5 sm:grid-cols-2">
+        <div className="shrink-0 grid gap-1.5 sm:gap-2 grid-cols-1 sm:grid-cols-2 pb-1 w-full">
           {currentQuestion?.options.map((opt) => {
             const isSelected = selectedOption === opt.key
             const isCorrectOption = opt.key === currentQuestion.correct
@@ -1143,33 +1117,33 @@ export function DuelArena({
               return (
                 <div
                   key={opt.key}
-                  className="flex items-center gap-3.5 rounded-2xl border-2 border-slate-800/60 bg-slate-950/90 p-4 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                  className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/80 px-3 py-2 sm:py-2.5 text-left opacity-35 select-none cursor-not-allowed min-h-[40px] sm:min-h-[48px]"
                 >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-slate-900 border border-slate-800 font-mono text-xs font-black text-slate-500 line-through">
+                  <span className="grid h-6 w-6 sm:h-7 sm:w-7 shrink-0 place-items-center rounded-lg bg-slate-900 border border-slate-800 font-mono text-xs font-black text-slate-500 line-through">
                     {opt.key}
                   </span>
-                  <span className="text-sm sm:text-base leading-snug line-through text-slate-500 flex-1">
+                  <span className="text-xs sm:text-sm leading-tight line-through text-slate-500 flex-1 truncate">
                     {opt.text}
                   </span>
-                  <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[0.62rem] font-bold text-slate-400 uppercase">
+                  <span className="rounded bg-slate-800 px-1.5 py-0.2 text-[9px] font-bold text-slate-400 uppercase">
                     50/50
                   </span>
                 </div>
               )
             }
 
-            let buttonStyles = 'bg-slate-900/95 border-2 border-slate-700/80 text-white shadow-xl hover:border-purple-400 hover:bg-slate-800'
+            let buttonStyles = 'bg-slate-900/95 border border-slate-700/80 text-white shadow-md hover:border-purple-400 hover:bg-slate-800'
 
             if (showFeedback) {
               if (isCorrectOption) {
-                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-4 ring-emerald-500/30 shadow-xl shadow-emerald-500/30 scale-[1.01]'
+                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30 scale-[1.01]'
               } else if (isSelected && !isCorrectOption) {
-                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-4 ring-rose-500/30 shadow-xl shadow-rose-500/30'
+                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
               } else {
-                buttonStyles = 'bg-slate-900/80 border-2 border-slate-800/80 opacity-35 text-slate-500'
+                buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
               }
             } else if (isSelected) {
-              buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-4 ring-purple-500/30 text-white scale-[1.01]'
+              buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white scale-[1.01]'
             }
 
             return (
@@ -1178,13 +1152,13 @@ export function DuelArena({
                 disabled={selectedOption !== null || isSubmitting}
                 onClick={() => handleSelectOption(opt.key)}
                 className={cn(
-                  'group flex items-center gap-3.5 rounded-2xl border p-4 sm:p-5 text-left font-display font-bold transition-all duration-200 cursor-pointer shadow-md',
+                  'group flex items-center gap-2.5 rounded-xl sm:rounded-2xl border px-3 py-2 sm:py-2.5 text-left font-display font-bold transition-all duration-200 cursor-pointer shadow-md min-h-[40px] sm:min-h-[48px] active:scale-98 select-none',
                   buttonStyles,
                 )}
               >
                 <span
                   className={cn(
-                    'grid h-8 w-8 shrink-0 place-items-center rounded-xl font-mono text-xs font-black transition border',
+                    'grid h-6 w-6 sm:h-7 sm:w-7 shrink-0 place-items-center rounded-lg font-mono text-xs font-black transition border',
                     showFeedback && isCorrectOption
                       ? 'bg-emerald-500 border-emerald-300 text-slate-950'
                       : showFeedback && isSelected
@@ -1194,7 +1168,7 @@ export function DuelArena({
                 >
                   {opt.key}
                 </span>
-                <span className="text-sm sm:text-base leading-snug">{opt.text}</span>
+                <span className="text-xs sm:text-sm leading-tight flex-1 line-clamp-2">{opt.text}</span>
               </button>
             )
           })}
