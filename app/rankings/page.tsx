@@ -25,7 +25,7 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { UserAvatar } from '@/components/ui/UserAvatar'
-import { PortugalMapInteractive, type DistrictStatItem } from '@/components/portugal-map-interactive'
+import { PortugalMapInteractive, getDistrictColorInfo, type DistrictStatItem } from '@/components/portugal-map-interactive'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import {
   ALL_DISTRICTS_LIST,
@@ -339,72 +339,151 @@ export default function RankingsPage() {
           {/* Secção do Mapa Interativo Territorial (Ativada no Modo 'distrito' ou Expansível) */}
           {mode === 'distrito' && (
             <div className="mx-auto max-w-7xl px-4 mt-8 sm:px-6 lg:px-8">
-              <div className="rounded-3xl border border-amber-500/30 bg-slate-950/80 p-5 sm:p-8 backdrop-blur-xl shadow-2xl">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                  {/* Lado Esquerdo: Seletor Dropdown e Estatísticas do Distrito */}
-                  <div className="w-full lg:w-1/2 space-y-6">
+              <div className="rounded-3xl border border-cyan-500/30 bg-slate-950/90 p-5 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                {/* Glow decorativo de fundo */}
+                <div
+                  className="absolute -top-24 -left-24 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
+                  style={{ backgroundColor: getDistrictColorInfo(selectedDistrict).hex }}
+                />
+
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+                  {/* Lado Esquerdo: Seletor Dropdown e Painel Tático do Distrito */}
+                  <div className="w-full lg:w-1/2 space-y-5">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-amber-400 flex items-center gap-1.5 mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400" /> SELECIONA O TEU DISTRITO NO MAPA
-                      </span>
-                      <h2 className="text-2xl sm:text-3xl font-black text-white">
-                        {selectedDistrict}
-                      </h2>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span
+                          className="h-2.5 w-2.5 rounded-full animate-ping"
+                          style={{ backgroundColor: getDistrictColorInfo(selectedDistrict).hex }}
+                        />
+                        <span
+                          className="text-[10px] font-black uppercase tracking-widest font-mono"
+                          style={{ color: getDistrictColorInfo(selectedDistrict).hex }}
+                        >
+                          SETOR TÁTICO // {getDistrictColorInfo(selectedDistrict).tag}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <h2 className="text-2xl sm:text-4xl font-black text-white font-display">
+                          {selectedDistrict}
+                        </h2>
+                        <span
+                          className="px-2.5 py-1 rounded-xl text-xs font-black uppercase font-mono border"
+                          style={{
+                            backgroundColor: `${getDistrictColorInfo(selectedDistrict).hex}20`,
+                            color: getDistrictColorInfo(selectedDistrict).hex,
+                            borderColor: `${getDistrictColorInfo(selectedDistrict).hex}50`,
+                          }}
+                        >
+                          #{selectedDistrictStats.pos} no País
+                        </span>
+                      </div>
                       <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                        Clica em qualquer região no mapa de Portugal ao lado ou seleciona no menu abaixo para
-                        filtrar a tabela de liderança.
+                        Clica no mapa de radar tático holográfico ou seleciona abaixo para inspecionar os dados territoriais.
                       </p>
                     </div>
 
                     {/* Dropdown Sincronizado */}
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                        Escolher Distrito / Região:
+                      <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-mono">
+                        Região Selecionada:
                       </label>
                       <select
                         value={selectedDistrict}
                         onChange={(e) => setSelectedDistrict(e.target.value)}
-                        className="w-full rounded-2xl border border-amber-500/40 bg-slate-900 px-4 py-3.5 text-sm font-bold text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
+                        className="w-full rounded-2xl border border-cyan-500/40 bg-slate-900/90 px-4 py-3 text-sm font-bold text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
                       >
                         {ALL_DISTRICTS_LIST.map((dist) => (
                           <option key={dist} value={dist}>
-                            {dist} (Posição #{districtStatsMap.get(dist)?.pos || '-'})
+                            {dist} (Classificação #{districtStatsMap.get(dist)?.pos || '-'})
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    {/* Grid de Estatísticas do Distrito Selecionado */}
-                    <div className="grid grid-cols-2 gap-3.5 pt-2">
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                        <span className="text-xs text-slate-400 font-bold block mb-1">Posição Territorial</span>
-                        <span className="text-2xl font-black text-amber-400 font-display">
-                          #{selectedDistrictStats.pos}
-                        </span>
+                    {/* Cartão do Rei / Campeão do Distrito */}
+                    {top3[0] && (
+                      <div
+                        onClick={() => handleSelectPlayer(top3[0])}
+                        className="rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-slate-900 to-amber-500/10 p-3.5 sm:p-4 flex items-center justify-between gap-3 shadow-lg cursor-pointer hover:border-amber-400 transition-all group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="relative shrink-0">
+                            <Crown className="h-4 w-4 text-amber-400 absolute -top-2.5 left-1/2 -translate-x-1/2 fill-amber-400 animate-bounce" />
+                            <UserAvatar
+                              src={top3[0].photoURL}
+                              activeFrame={top3[0].equippedFrame}
+                              equippedFrame={top3[0].equippedFrame}
+                              size="md"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 block font-mono">
+                              👑 REI DE {selectedDistrict.toUpperCase()}
+                            </span>
+                            <span className="font-bold text-sm text-white truncate block group-hover:text-amber-300 transition-colors">
+                              {top3[0].displayName}
+                            </span>
+                            <span className="text-[11px] text-slate-400">
+                              Nível {top3[0].level} • {top3[0].title || 'Campeão Distrital'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="text-right shrink-0">
+                          <span className="text-sm sm:text-base font-black text-amber-400 font-mono block">
+                            {top3[0].xp.toLocaleString('pt-PT')} XP
+                          </span>
+                          <span className="text-[9px] font-bold uppercase text-slate-400">Líder</span>
+                        </div>
                       </div>
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                        <span className="text-xs text-slate-400 font-bold block mb-1">Jogadores Ativos</span>
-                        <span className="text-2xl font-black text-emerald-400 font-display">
-                          {selectedDistrictStats.players}
-                        </span>
-                      </div>
-                      <div className="col-span-2 rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between">
-                        <div>
-                          <span className="text-xs text-slate-400 font-bold block">XP Acumulado do Distrito</span>
-                          <span className="text-lg font-black text-white font-mono">
-                            {selectedDistrictStats.xp.toLocaleString('pt-PT')} XP
+                    )}
+
+                    {/* Domínio Territorial & Métricas */}
+                    <div className="space-y-3 pt-1">
+                      <div>
+                        <div className="flex items-center justify-between text-xs font-mono mb-1">
+                          <span className="text-slate-400">Domínio Territorial Nacional</span>
+                          <span
+                            className="font-bold font-mono"
+                            style={{ color: getDistrictColorInfo(selectedDistrict).hex }}
+                          >
+                            {Math.min(100, Math.max(1, Math.round(((selectedDistrictStats.xp || 1) / (players.reduce((sum, p) => sum + p.xp, 0) || 1)) * 100)))}%
                           </span>
                         </div>
-                        <span className="px-3 py-1 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-black border border-amber-500/30">
-                          {selectedDistrict}
-                        </span>
+                        <div className="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-white/10">
+                          <div
+                            className="h-full rounded-full transition-all duration-700"
+                            style={{
+                              backgroundColor: getDistrictColorInfo(selectedDistrict).hex,
+                              width: `${Math.min(100, Math.max(2, Math.round(((selectedDistrictStats.xp || 1) / (players.reduce((sum, p) => sum + p.xp, 0) || 1)) * 100)))}%`,
+                              boxShadow: `0 0 10px ${getDistrictColorInfo(selectedDistrict).hex}`,
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Grid de Estatísticas */}
+                      <div className="grid grid-cols-2 gap-3 pt-1">
+                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-3 text-center">
+                          <span className="text-[11px] text-slate-400 font-bold block mb-0.5">Jogadores Ativos</span>
+                          <span className="text-xl font-black text-emerald-400 font-display">
+                            {selectedDistrictStats.players}
+                          </span>
+                        </div>
+                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-3 text-center">
+                          <span className="text-[11px] text-slate-400 font-bold block mb-0.5">XP da Região</span>
+                          <span className="text-base sm:text-lg font-black text-cyan-400 font-mono">
+                            {selectedDistrictStats.xp.toLocaleString('pt-PT')}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Lado Direito: Mapa Interativo SVG */}
-                  <div className="w-full lg:w-1/2 flex items-center justify-center p-2">
-                    <div className="w-full max-w-[420px]">
+                  {/* Lado Direito: Mapa Radar Tático SVG */}
+                  <div className="w-full lg:w-1/2 flex items-center justify-center p-1">
+                    <div className="w-full max-w-[460px]">
                       <PortugalMapInteractive
                         selected={selectedDistrict}
                         onSelect={(distName) => setSelectedDistrict(distName)}
