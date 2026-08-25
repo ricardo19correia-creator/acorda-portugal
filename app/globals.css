@@ -87,13 +87,16 @@
     background-image: none !important;
   }
 
+  html,
   body {
     color: #f4f4f5;
     background-color: transparent !important;
     background-image: none !important;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    height: auto;
+    overflow-y: auto;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   main,

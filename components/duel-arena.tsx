@@ -1318,7 +1318,7 @@ export function DuelArena({
   const avgTime = myAnswers.length > 0 ? (totalTimeSpent / myAnswers.length).toFixed(1) : '0.0'
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12 animate-rise">
+    <div className="mx-auto w-full max-w-3xl min-h-screen overflow-y-auto px-3 sm:px-4 py-6 sm:py-10 pb-24 animate-rise">
       <div className="relative overflow-hidden rounded-4xl border border-white/15 bg-card/90 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl text-center">
         {/* Glow ambient background */}
         <div
