@@ -506,6 +506,16 @@ export const SHOP_CATALOG: ShopItem[] = [
     icon: 'Timer',
   },
   {
+    id: 'HELP_005',
+    name: 'Pergunta ao Público',
+    description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.',
+    category: 'ajudas_utilidades' as any,
+    rarity: 'raro',
+    type: 'consumable',
+    price: 500,
+    icon: 'Users',
+  },
+  {
     id: 'consumable_protecao_streak',
     name: 'Proteção de Sequência',
     description: 'Salva a tua sequência de dias se te esqueceres de jogar durante 24 horas.',
@@ -778,6 +788,9 @@ export type ConsumablePowerUpId =
   | 'consumable_50_50'
   | 'consumable_pista'
   | 'consumable_congelar_tempo'
+  | 'consumable_public_vote'
+  | 'HELP_005'
+  | 'ajuda_publico'
 
 /**
  * Consome 1 unidade de power-up do inventário de forma atómica no Firestore
@@ -799,19 +812,40 @@ export async function useConsumablePowerUp(
 
       const data = userDoc.data()
       const inventory: Record<string, number> = data.inventory || {}
-      const currentCount = inventory[powerUpId] || 0
+      
+      const count1 = inventory[powerUpId] || 0
+      const count2 = (powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico')
+        ? (inventory['HELP_005'] || inventory['consumable_public_vote'] || data.consumables?.publicVote || 0)
+        : 0
+      const currentCount = Math.max(count1, count2)
 
       if (currentCount <= 0) {
         throw new Error('Não tens este power-up disponível no inventário.')
       }
 
       const newCount = currentCount - 1
-      const updatedInventory = { ...inventory, [powerUpId]: newCount }
+      const updatedInventory = {
+        ...inventory,
+        [powerUpId]: newCount,
+        ...(powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico'
+          ? { HELP_005: newCount, consumable_public_vote: newCount }
+          : {}),
+      }
 
-      transaction.update(userRef, {
+      const updatePayload: Record<string, any> = {
         inventory: updatedInventory,
         updatedAt: serverTimestamp(),
-      })
+      }
+
+      if (powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico') {
+        updatePayload['consumables.publicVote'] = newCount
+      } else if (powerUpId === 'consumable_50_50') {
+        updatePayload['consumables.help5050'] = newCount
+      } else if (powerUpId === 'consumable_congelar_tempo') {
+        updatePayload['consumables.freezeTime'] = newCount
+      }
+
+      transaction.update(userRef, updatePayload)
 
       return { remainingCount: newCount }
     })

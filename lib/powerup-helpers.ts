@@ -60,3 +60,32 @@ export function generateQuestionClue(question: {
 
   return 'Analisa cuidadosamente a cronologia e a relevância histórica das opções apresentadas.'
 }
+
+/**
+ * Simula a votação da plateia/público ("Pergunta ao Público").
+ * Gera percentagens para as 4 opções que totalizam 100%, dando uma tendência
+ * forte para a resposta correta (58% - 76%) e distribuindo o restante pelas restantes opções.
+ */
+export function simulatePublicVote(correctIndex: number): number[] {
+  const safeIndex = Math.max(0, Math.min(3, correctIndex))
+  const percentages = [0, 0, 0, 0]
+  const total = 100
+  // Percentagem base para a correta: entre 58% e 76%
+  const correctBoost = Math.floor(Math.random() * 19) + 58
+  percentages[safeIndex] = correctBoost
+  let remaining = total - correctBoost
+
+  const otherIndices = [0, 1, 2, 3].filter((i) => i !== safeIndex)
+  otherIndices.forEach((index, i) => {
+    if (i === otherIndices.length - 1) {
+      percentages[index] = remaining
+    } else {
+      const maxVote = Math.max(1, Math.floor(remaining * 0.65))
+      const vote = Math.floor(Math.random() * maxVote) + 1
+      percentages[index] = vote
+      remaining -= vote
+    }
+  })
+
+  return percentages
+}

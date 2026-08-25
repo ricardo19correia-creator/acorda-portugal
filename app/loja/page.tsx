@@ -137,8 +137,9 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
   // AJUDAS & UTILIDADES
-  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)' },
-  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)' },
+  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)', icon: '✨' },
+  { id: 'HELP_005', name: 'Pack x3 Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-publico.jpg', badge: 'Consumível (+3)', icon: '👥' },
+  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)', icon: '⏳' },
 ]
 
 const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
@@ -167,7 +168,11 @@ export default function LojaPage() {
   })
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
+    help5050: 5,
+    freezeTime: 3,
+    publicVote: 3,
+  })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
     avatars: ['camoes_2050'],
     arenas: ['arena_1'],
@@ -276,6 +281,7 @@ export default function LojaPage() {
               setConsumables({
                 help5050: utils.fiftyFifty || 5,
                 freezeTime: utils.freezeTime || 3,
+                publicVote: utils.publicVote || 3,
               })
             }
             if (data.equippedAvatar || data.equipped?.avatar) {
@@ -486,6 +492,10 @@ export default function LojaPage() {
         amountAdded = 5
         consumableKey = 'consumables.help5050'
         updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 5
+      } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico') {
+        amountAdded = 3
+        consumableKey = 'consumables.publicVote'
+        updatedConsumables.publicVote = (updatedConsumables.publicVote || 0) + 3
       } else if (item.id === 'ajuda_congelar') {
         amountAdded = 3
         consumableKey = 'consumables.freezeTime'
@@ -501,6 +511,11 @@ export default function LojaPage() {
           if (item.id === 'ajuda_5050') {
             updatePayload['inventory.utilities.fiftyFifty'] = increment(5)
             updatePayload['consumables.help5050'] = increment(5)
+          } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico') {
+            updatePayload['inventory.utilities.publicVote'] = increment(3)
+            updatePayload['inventory.HELP_005'] = increment(3)
+            updatePayload['inventory.helps'] = arrayUnion('HELP_005')
+            updatePayload['consumables.publicVote'] = increment(3)
           } else if (item.id === 'ajuda_congelar') {
             updatePayload['inventory.utilities.freezeTime'] = increment(3)
             updatePayload['consumables.freezeTime'] = increment(3)
@@ -513,7 +528,12 @@ export default function LojaPage() {
 
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
-      showToast(`Sucesso! Adquiriste ${item.name}! Total: ${item.id === 'ajuda_5050' ? updatedConsumables.help5050 : updatedConsumables.freezeTime}`)
+      const totalAmount = item.id === 'ajuda_5050'
+        ? updatedConsumables.help5050
+        : item.id === 'HELP_005' || item.id === 'ajuda_publico'
+          ? updatedConsumables.publicVote
+          : updatedConsumables.freezeTime
+      showToast(`Sucesso! Adquiriste ${item.name}! Total: ${totalAmount}`)
       return
     }
 
@@ -1182,7 +1202,11 @@ export default function LojaPage() {
                         )}
                         {isConsumable && (
                           <span className="text-[10px] font-bold text-amber-400 shrink-0">
-                            {item.id === 'ajuda_5050' ? `Tens: ${consumables.help5050 || 0}` : `Tens: ${consumables.freezeTime || 0}`}
+                            {item.id === 'ajuda_5050'
+                              ? `Tens: ${consumables.help5050 || 0}`
+                              : item.id === 'HELP_005' || item.id === 'ajuda_publico'
+                                ? `Tens: ${consumables.publicVote || 0}`
+                                : `Tens: ${consumables.freezeTime || 0}`}
                           </span>
                         )}
                       </div>

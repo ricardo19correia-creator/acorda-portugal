@@ -66,7 +66,7 @@ import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 import { getArenaById } from '@/data/shopArenas'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
-import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
+import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import {
   QUESTION_TIME_SECONDS,
@@ -122,6 +122,7 @@ export function DuelArena({
   // Power-Ups State (100% individual para este jogador no Duelo)
   const [eliminatedOptions, setEliminatedOptions] = useState<('A' | 'B' | 'C' | 'D')[]>([])
   const [activeClue, setActiveClue] = useState<string | null>(null)
+  const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
   const [isSurrenderModalOpen, setIsSurrenderModalOpen] = useState(false)
   const [isSurrendering, setIsSurrendering] = useState(false)
@@ -483,6 +484,7 @@ export function DuelArena({
       setIsSubmitting(false)
       setEliminatedOptions([])
       setActiveClue(null)
+      setPublicVoteResults(null)
       setIsFrozen(false)
       setFreezeTimeLeft(0)
       setQuestionStartTime(Date.now())
@@ -524,6 +526,25 @@ export function DuelArena({
       setInventory((prev) => ({ ...prev, consumable_congelar_tempo: res.remainingCount }))
       setIsFrozen(true)
       setFreezeTimeLeft(15)
+    }
+  }
+
+  const handleUsePublicVote = async () => {
+    if (feedback !== null || isSubmitting || publicVoteResults !== null || !currentQuestion) return
+    const currentStock =
+      inventory['HELP_005'] ?? inventory['consumable_public_vote'] ?? (profile as any)?.consumables?.publicVote ?? 0
+    if (currentStock <= 0) return
+
+    const res = await useConsumablePowerUp(effectiveUid, 'HELP_005')
+    if (res.success) {
+      setInventory((prev) => ({
+        ...prev,
+        HELP_005: res.remainingCount,
+        consumable_public_vote: res.remainingCount,
+      }))
+      const correctIdx = currentQuestion.options.findIndex((o) => o.key === currentQuestion.correct)
+      const results = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
+      setPublicVoteResults(results)
     }
   }
 
@@ -1184,10 +1205,12 @@ export function DuelArena({
               inventory={inventory}
               disabled={feedback !== null || isSubmitting || timeLeft <= 0}
               used5050={eliminatedOptions.length > 0}
+              usedPublicVote={publicVoteResults !== null}
               usedClue={activeClue !== null}
               isFrozen={isFrozen}
               freezeTimeLeft={freezeTimeLeft}
               onUse5050={handleUse5050}
+              onUsePublicVote={handleUsePublicVote}
               onUseClue={handleUseClue}
               onUseFreeze={handleUseFreeze}
             />
@@ -1238,7 +1261,7 @@ export function DuelArena({
                   disabled={selectedOption !== null || isSubmitting}
                   onClick={() => handleSelectOption(opt.key)}
                   className={cn(
-                    'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98',
+                    'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98 relative',
                     buttonStyles,
                   )}
                 >
@@ -1257,6 +1280,14 @@ export function DuelArena({
                   <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
                     {opt.text}
                   </span>
+
+                  {/* Exibe a percentagem se a votação do público foi usada */}
+                  {publicVoteResults && publicVoteResults[idx] !== undefined && (
+                    <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
+                      <span className="text-[10px]">👥</span>
+                      <span>{publicVoteResults[idx]}%</span>
+                    </div>
+                  )}
                 </button>
               )
             })}

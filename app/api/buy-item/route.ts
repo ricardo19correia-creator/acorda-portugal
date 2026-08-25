@@ -55,7 +55,12 @@ export async function POST(req: NextRequest) {
       euros: increment(-itemPrice),
     }
 
-    if (itemCategory === 'taunts' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
+    if (itemId === 'HELP_005' || itemId === 'ajuda_publico') {
+      updatePayload['inventory.helps'] = arrayUnion('HELP_005')
+      updatePayload['inventory.HELP_005'] = increment(3)
+      updatePayload['inventory.utilities.publicVote'] = increment(3)
+      updatePayload['consumables.publicVote'] = increment(3)
+    } else if (itemCategory === 'taunts' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
       updatePayload['inventory.taunts'] = arrayUnion(itemId)
       updatePayload['inventory.emotes'] = arrayUnion(itemId)
     } else if (itemCategory === 'avatars') {

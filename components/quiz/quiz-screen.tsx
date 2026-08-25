@@ -24,7 +24,7 @@ import { useEconomy } from '@/context/economy-context'
 import { usePresence } from '@/components/presence-provider'
 import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
-import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
+import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { GameExitControl } from '@/components/game-exit-modal'
 import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
@@ -341,7 +341,9 @@ export function QuizScreen({
   // Power-Ups Stock State
   const [stock5050, setStock5050] = useState<number>(5)
   const [stockFreeze, setStockFreeze] = useState<number>(3)
+  const [stockPublicVote, setStockPublicVote] = useState<number>(3)
   const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
+  const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
@@ -357,6 +359,7 @@ export function QuizScreen({
     setStep(0)
     setSelected(null)
     setEliminatedOptions([])
+    setPublicVoteResults(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
     setSeconds(60)
@@ -397,12 +400,14 @@ export function QuizScreen({
       try {
         let h5050 = 5
         let fTime = 3
+        let pVote = 3
 
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
           const parsed = JSON.parse(savedConsumables)
           if (typeof parsed.help5050 === 'number') h5050 = parsed.help5050
           if (typeof parsed.freezeTime === 'number') fTime = parsed.freezeTime
+          if (typeof parsed.publicVote === 'number') pVote = parsed.publicVote
         }
 
         const savedH = localStorage.getItem('user_help5050')
@@ -410,18 +415,24 @@ export function QuizScreen({
 
         const savedF = localStorage.getItem('user_freezeTime')
         if (savedF !== null) fTime = Number(savedF) || 0
+        
+        const savedP = localStorage.getItem('user_publicVote')
+        if (savedP !== null) pVote = Number(savedP) || 0
 
         if (profile?.consumables) {
           if (typeof profile.consumables.help5050 === 'number') h5050 = profile.consumables.help5050
           if (typeof profile.consumables.freezeTime === 'number') fTime = profile.consumables.freezeTime
+          if (typeof (profile.consumables as any).publicVote === 'number') pVote = (profile.consumables as any).publicVote
         } else if ((profile as any)?.inventory) {
           const inv = (profile as any).inventory
           if (typeof inv.consumable_50_50 === 'number') h5050 = inv.consumable_50_50
           if (typeof inv.consumable_congelar_tempo === 'number') fTime = inv.consumable_congelar_tempo
+          if (typeof inv.consumable_public_vote === 'number') pVote = inv.consumable_public_vote
         }
 
         setStock5050(h5050)
         setStockFreeze(fTime)
+        setStockPublicVote(pVote)
       } catch (err) {
         console.error('Erro ao sincronizar stock:', err)
       }
@@ -537,6 +548,37 @@ export function QuizScreen({
     }
   }
 
+  // 3. Power-Up: Pergunta ao Público (Votação Simulada)
+  const handleUsePublicVote = async () => {
+    if (stockPublicVote <= 0 || publicVoteResults !== null || phase !== 'answering' || !q) return
+
+    const correctIdx = q.options.findIndex((opt) => opt.key === q.correct)
+    const results = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
+    setPublicVoteResults(results)
+
+    const newStock = Math.max(0, stockPublicVote - 1)
+    setStockPublicVote(newStock)
+
+    try {
+      localStorage.setItem('user_publicVote', String(newStock))
+      const saved = localStorage.getItem('user_consumables')
+      const parsed = saved ? JSON.parse(saved) : {}
+      localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, publicVote: newStock }))
+
+      if (auth.currentUser) {
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          'consumables.publicVote': increment(-1),
+          'inventory.HELP_005': increment(-1),
+          'inventory.consumable_public_vote': increment(-1),
+        })
+      }
+      window.dispatchEvent(new Event('consumables_updated'))
+      window.dispatchEvent(new Event('inventory_updated'))
+    } catch (e) {
+      console.error('Erro ao debitar Pergunta ao Público:', e)
+    }
+  }
+
   // Freeze Countdown loop
   useEffect(() => {
     if (!isFrozen || freezeTimeLeft <= 0 || phase !== 'answering') return
@@ -627,6 +669,7 @@ export function QuizScreen({
     setStep((current) => current + 1)
     setSelected(null)
     setEliminatedOptions([])
+    setPublicVoteResults(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
     setSeconds(60)
@@ -988,11 +1031,14 @@ export function QuizScreen({
             <QuizPowerUpsBar
               stock5050={stock5050}
               stockFreeze={stockFreeze}
+              stockPublicVote={stockPublicVote}
               used5050={eliminatedOptions.length > 0}
+              usedPublicVote={publicVoteResults !== null}
               isFrozen={isFrozen}
               freezeTimeLeft={freezeTimeLeft}
               onUse5050={handleUse5050}
               onUseFreeze={handleUseFreeze}
+              onUsePublicVote={handleUsePublicVote}
             />
           </div>
         )}
@@ -1038,7 +1084,7 @@ export function QuizScreen({
                 disabled={phase !== 'answering'}
                 onClick={() => reveal(option.key)}
                 className={cn(
-                  'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98',
+                  'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98 relative',
                   buttonStyles
                 )}
               >
@@ -1057,6 +1103,14 @@ export function QuizScreen({
                 <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
                   {option.text}
                 </span>
+
+                {/* Exibe a percentagem se a votação do público foi usada */}
+                {publicVoteResults && publicVoteResults[idx] !== undefined && (
+                  <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
+                    <span className="text-[10px]">👥</span>
+                    <span>{publicVoteResults[idx]}%</span>
+                  </div>
+                )}
               </button>
             )
           })}

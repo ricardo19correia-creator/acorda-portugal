@@ -147,9 +147,10 @@ function PerfilContent() {
   const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
 
   // Consumíveis & Inventário Reais
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({
-    help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? 0,
-    freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? 0,
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
+    help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? (profile as any)?.consumables?.help5050 ?? 5,
+    freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? (profile as any)?.consumables?.freezeTime ?? 3,
+    publicVote: (profile as any)?.inventory?.utilities?.publicVote ?? (profile as any)?.consumables?.publicVote ?? 3,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
     if (typeof window !== 'undefined') {
@@ -559,6 +560,7 @@ function PerfilContent() {
               setConsumables({
                 help5050: utils.fiftyFifty || 5,
                 freezeTime: utils.freezeTime || 3,
+                publicVote: utils.publicVote || 3,
               })
             }
             if (data.inventory) {
@@ -783,10 +785,12 @@ function PerfilContent() {
     if (ach.reward.utilities) {
       const f50 = ach.reward.utilities.fiftyFifty || 0
       const fz = ach.reward.utilities.freezeTime || 0
+      const pv = (ach.reward.utilities as any).publicVote || 0
       setConsumables((prev) => {
         const next = {
           help5050: prev.help5050 + f50,
           freezeTime: prev.freezeTime + fz,
+          publicVote: (prev.publicVote || 0) + pv,
         }
         localStorage.setItem('user_consumables', JSON.stringify(next))
         return next
@@ -1553,25 +1557,49 @@ function PerfilContent() {
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* 50/50 Card */}
                   <div className="bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 rounded-2xl p-4 flex items-center justify-between backdrop-blur-md transition-all shadow-lg">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-black/40 border border-cyan-500/30 flex items-center justify-center text-2xl shrink-0">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-black/40 border border-cyan-500/30 flex items-center justify-center text-xl shrink-0">
                         ✨
                       </div>
                       <div>
                         <h3 className="font-bold text-sm text-white">Ajuda 50/50</h3>
-                        <p className="text-xs text-slate-400 mt-0.5">Elimina duas opções erradas instantaneamente.</p>
+                        <p className="text-[11px] text-slate-400 mt-0.5 leading-tight">Elimina duas opções erradas instantaneamente.</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-mono text-base font-black border border-cyan-400/40 shadow-inner">
+                    <div className="flex items-center gap-2 shrink-0 ml-2">
+                      <span className="px-2.5 py-1 rounded-xl bg-cyan-500/20 text-cyan-300 font-mono text-sm font-black border border-cyan-400/40 shadow-inner">
                         x{consumables.help5050 || 0}
                       </span>
                       <Link
                         href="/loja"
-                        className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-200 transition-all"
+                        className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-200 transition-all"
+                      >
+                        Loja
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Pergunta ao Público Card */}
+                  <div className="bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 rounded-2xl p-4 flex items-center justify-between backdrop-blur-md transition-all shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-black/40 border border-purple-500/30 flex items-center justify-center text-xl shrink-0">
+                        👥
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm text-white">Pergunta ao Público</h3>
+                        <p className="text-[11px] text-slate-400 mt-0.5 leading-tight">Votação simulada da plateia com percentagens.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0 ml-2">
+                      <span className="px-2.5 py-1 rounded-xl bg-purple-500/20 text-purple-300 font-mono text-sm font-black border border-purple-400/40 shadow-inner">
+                        x{consumables.publicVote || 0}
+                      </span>
+                      <Link
+                        href="/loja"
+                        className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-800 hover:bg-purple-500 hover:text-slate-950 text-slate-200 transition-all"
                       >
                         Loja
                       </Link>
@@ -1581,21 +1609,21 @@ function PerfilContent() {
                   {/* Congelar Tempo Card */}
                   <div className="bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-4 flex items-center justify-between backdrop-blur-md transition-all shadow-lg">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-black/40 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-black/40 border border-amber-500/30 flex items-center justify-center text-xl shrink-0">
                         ⏳
                       </div>
                       <div>
-                        <h3 className="font-bold text-sm text-white">Congelar Tempo (+15s)</h3>
-                        <p className="text-xs text-slate-400 mt-0.5">Pausa o cronómetro e dá tempo extra para pensar.</p>
+                        <h3 className="font-bold text-sm text-white">Congelar (+15s)</h3>
+                        <p className="text-[11px] text-slate-400 mt-0.5 leading-tight">Pausa o cronómetro e dá tempo extra.</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 font-mono text-base font-black border border-amber-400/40 shadow-inner">
+                    <div className="flex items-center gap-2 shrink-0 ml-2">
+                      <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 font-mono text-sm font-black border border-amber-400/40 shadow-inner">
                         x{consumables.freezeTime || 0}
                       </span>
                       <Link
                         href="/loja"
-                        className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 transition-all"
+                        className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 transition-all"
                       >
                         Loja
                       </Link>
