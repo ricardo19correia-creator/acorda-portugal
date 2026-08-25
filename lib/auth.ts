@@ -11,6 +11,7 @@ export {
   isMobileDevice,
   performLogout,
   logoutUser,
+  createNewUserDocument,
 } from '@/lib/auth-helpers'
 
 export {

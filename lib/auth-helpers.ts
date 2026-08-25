@@ -291,3 +291,98 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
 
 export const logoutUser = performLogout
 
+/**
+ * Criação padronizada e imutável do documento do novo utilizador no Firestore
+ */
+export async function createNewUserDocument(
+  user: any,
+  selectedDistrict: string,
+  username?: string,
+  customAvatarUrl?: string
+): Promise<void> {
+  if (!user?.uid) return
+  const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
+  const { db } = await import('@/lib/firebase')
+  const { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } = await import('@/data/constants')
+  const { REAL_AVATARS } = await import('@/lib/avatars')
+
+  const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id)
+  const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
+  const photoURL = customAvatarUrl || user.photoURL || DEFAULT_AVATAR_URL
+
+  const initialData = {
+    uid: user.uid,
+    displayName: cleanName,
+    name: cleanName,
+    email: user.email || '',
+    photoURL: photoURL,
+    avatar: photoURL,
+    avatarId: DEFAULT_AVATAR_ID,
+    equippedAvatar: DEFAULT_AVATAR_ID,
+    district: selectedDistrict, // Definido no registo/onboarding e permanente
+    districtLocked: true,
+    level: 1,
+    xp: 0,
+    coins: 50,
+    euros: 50,
+    streak: 0,
+    gamesPlayed: 0,
+    wins: 0,
+    losses: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    totalQuestions: 0,
+    bestStreak: 0,
+    title: 'Noviço da Nação',
+    equippedTitle: 'Noviço da Nação',
+    equippedFrame: 'default',
+    unlockedFrames: ['default'],
+    unlockedAvatars: [photoURL, DEFAULT_AVATAR_URL],
+    unlockedAchievements: [],
+    badges: ['novico'],
+    inventory: {
+      avatars: ALL_REAL_AVATAR_IDS,
+      arenas: ['arena_1'],
+      titles: ['tit_novico'],
+      taunts: ['pack_basico'],
+      frames: ['default'],
+    },
+    equipped: {
+      avatar: photoURL,
+      avatarId: DEFAULT_AVATAR_ID,
+      title: 'Noviço da Nação',
+      arena: 'arena_1',
+      frameId: 'default',
+    },
+    consumables: { help5050: 3, freezeTime: 2 },
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  }
+
+  const userRef = doc(db, 'users', user.uid)
+  await setDoc(userRef, initialData, { merge: true })
+
+  try {
+    const publicProfileRef = doc(db, 'publicProfiles', user.uid)
+    await setDoc(
+      publicProfileRef,
+      {
+        uid: user.uid,
+        displayName: cleanName,
+        photoURL: photoURL,
+        avatarId: DEFAULT_AVATAR_ID,
+        district: selectedDistrict,
+        level: 1,
+        xp: 0,
+        equippedTitle: 'Noviço da Nação',
+        equippedFrame: 'default',
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    )
+  } catch (err) {
+    console.warn('[AUTH] Aviso ao sincronizar publicProfiles inicial:', err)
+  }
+}
+
+

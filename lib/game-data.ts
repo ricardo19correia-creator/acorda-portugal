@@ -236,6 +236,7 @@ export type UserProfile = {
   email: string
   photoURL: string
   district: string
+  districtLocked?: boolean
   level: number
   xp: number
   euros: number
@@ -252,6 +253,7 @@ export type UserProfile = {
   unlockedAchievements: string[]
   badges?: string[]
   equippedTitle?: string
+  equippedFrame?: string
   consumables?: {
     help5050?: number
     freezeTime?: number

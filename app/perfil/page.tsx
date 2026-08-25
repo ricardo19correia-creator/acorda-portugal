@@ -922,18 +922,18 @@ function PerfilContent() {
 
     try {
       const newName = editName.trim() || displayName
-      const newDistrict = editDistrict || district
+      const permanentDistrict = district || 'Portugal'
       const rawAvatar = editAvatar || avatar
       const newAvatar = getAvatarImage(rawAvatar)
       const newAvatarId = normalizeAvatarId(editAvatarId || equippedAvatarId || rawAvatar)
 
       setDisplayName(newName)
-      setDistrict(newDistrict)
+      setDistrict(permanentDistrict)
       setAvatar(newAvatar)
       setEquippedAvatarId(newAvatarId)
 
       localStorage.setItem('user_display_name', newName)
-      localStorage.setItem('user_district', newDistrict)
+      localStorage.setItem('user_district', permanentDistrict)
       localStorage.setItem('user_equipped_avatar', newAvatar)
       localStorage.setItem('user_equipped_avatar_id', newAvatarId)
       localStorage.setItem('equipped_avatar_id', newAvatarId)
@@ -947,7 +947,8 @@ function PerfilContent() {
         await updateDoc(doc(db, 'users', auth.currentUser.uid), {
           displayName: newName,
           name: newName,
-          district: newDistrict,
+          district: permanentDistrict,
+          districtLocked: true,
           avatar: newAvatar,
           photoURL: newAvatar,
           avatarId: newAvatarId,
@@ -959,7 +960,7 @@ function PerfilContent() {
         await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
           displayName: newName,
           name: newName,
-          district: newDistrict,
+          district: permanentDistrict,
           avatar: newAvatar,
           photoURL: newAvatar,
           avatarId: newAvatarId,
@@ -2771,22 +2772,24 @@ function PerfilContent() {
                 />
               </div>
 
-              {/* Distrito */}
+              {/* Distrito Permanente / Imutável */}
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1.5">
                   Distrito de Origem / Representação
                 </label>
-                <select
-                  value={editDistrict}
-                  onChange={(e) => setEditDistrict(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-emerald-400 focus:outline-none text-sm text-white font-medium shadow-inner"
-                >
-                  {DISTRICT_MAP.map((d) => (
-                    <option key={d.slug} value={d.name} className="bg-slate-900 text-white">
-                      {d.name}
-                    </option>
-                  ))}
-                </select>
+                <div className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-sm text-amber-300 font-bold shadow-inner">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-amber-400" />
+                    <span>{district || 'Portugal'}</span>
+                  </div>
+                  <span className="flex items-center gap-1 text-[10px] font-mono uppercase bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-lg border border-amber-500/40">
+                    <Lock className="w-3 h-3" />
+                    Imutável
+                  </span>
+                </div>
+                <p className="text-[10px] text-slate-400 mt-1">
+                  * A tua afiliação territorial é definitiva para garantir a integridade dos rankings distritais.
+                </p>
               </div>
 
               {/* Seletor de Avatar Ativo */}

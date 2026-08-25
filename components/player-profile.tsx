@@ -44,6 +44,7 @@ import {
   Info,
   Calendar,
   Layers,
+  Lock,
 } from 'lucide-react'
 
 import { useAuth } from '@/components/auth-provider'
@@ -308,7 +309,7 @@ export function PlayerProfile() {
   const save = async () => {
     if (!player) return
     const displayName = typeof draft.displayName === 'string' ? draft.displayName.trim() : ''
-    const district = typeof draft.district === 'string' && draft.district.trim() ? draft.district.trim() : 'Vila Real'
+    const permanentDistrict = player.district || 'Portugal'
 
     if (!displayName) {
       setSaveError('O nome não pode ficar vazio.')
@@ -321,18 +322,19 @@ export function PlayerProfile() {
         setSaveError(null)
         await updateDoc(doc(db, 'users', user.uid), {
           displayName,
-          district,
+          district: permanentDistrict,
+          districtLocked: true,
           updatedAt: serverTimestamp(),
         })
         await setDoc(
           doc(db, 'publicProfiles', user.uid),
-          { displayName, district, updatedAt: serverTimestamp() },
+          { displayName, district: permanentDistrict, updatedAt: serverTimestamp() },
           { merge: true },
         )
         if (typeof (user as any).getIdToken === 'function') {
           await updateProfile(user, { displayName })
         }
-        setOverride({ ...player, displayName, district, updatedAt: new Date() })
+        setOverride({ ...player, displayName, district: permanentDistrict, updatedAt: new Date() })
         setEditing(false)
         retryProfile()
       } catch (error) {
@@ -610,20 +612,24 @@ export function PlayerProfile() {
                   className="mt-1.5 w-full rounded-2xl border border-white/15 bg-background/80 px-4 py-2.5 text-sm font-semibold text-foreground focus:border-primary outline-none"
                 />
               </label>
-              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                Distrito Representado
-                <select
-                  value={draft.district}
-                  onChange={(e) => setDraft({ ...draft, district: e.target.value })}
-                  className="mt-1.5 w-full rounded-2xl border border-white/15 bg-background/80 px-4 py-2.5 text-sm font-semibold text-foreground focus:border-primary outline-none"
-                >
-                  {districts.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
+                  Distrito de Representação
+                </label>
+                <div className="flex items-center justify-between gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-300">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-amber-400" />
+                    <span>{player.district || 'Portugal'}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] font-mono uppercase bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-lg border border-amber-500/40">
+                    <Lock className="h-3 w-3" />
+                    <span>Imutável</span>
+                  </div>
+                </div>
+                <p className="text-[10px] text-slate-400 mt-1">
+                  * O distrito de origem é permanente e intransferível para integridade dos rankings.
+                </p>
+              </div>
               <div className="sm:col-span-2 flex items-center gap-3 mt-2">
                 <button
                   type="button"
