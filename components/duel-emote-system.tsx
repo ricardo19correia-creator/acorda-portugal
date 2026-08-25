@@ -106,11 +106,15 @@ export function DuelEmoteFloatingBar({
     let ids = equippedEmoteIds
     if (!ids || ids.length === 0) {
       if (typeof window !== 'undefined') {
+        const savedTaunt = localStorage.getItem('equipped_taunt_id')
         const saved = localStorage.getItem('equipped_emotes') || localStorage.getItem('equipped_taunts')
         if (saved) {
           try {
             ids = JSON.parse(saved)
           } catch {}
+        }
+        if (savedTaunt) {
+          ids = [savedTaunt, ...(ids || []).filter((x) => x !== savedTaunt)]
         }
       }
     }
@@ -198,11 +202,15 @@ export function DuelEmotePicker({
     let ids = equippedEmoteIds
     if (!ids || ids.length === 0) {
       if (typeof window !== 'undefined') {
+        const savedTaunt = localStorage.getItem('equipped_taunt_id')
         const saved = localStorage.getItem('equipped_emotes') || localStorage.getItem('equipped_taunts')
         if (saved) {
           try {
             ids = JSON.parse(saved)
           } catch {}
+        }
+        if (savedTaunt) {
+          ids = [savedTaunt, ...(ids || []).filter((x) => x !== savedTaunt)]
         }
       }
     }
@@ -319,11 +327,15 @@ export function DuelEmoteQuickDock({
     let ids = equippedEmoteIds
     if (!ids || ids.length === 0) {
       if (typeof window !== 'undefined') {
+        const savedTaunt = localStorage.getItem('equipped_taunt_id')
         const saved = localStorage.getItem('equipped_emotes') || localStorage.getItem('equipped_taunts')
         if (saved) {
           try {
             ids = JSON.parse(saved)
           } catch {}
+        }
+        if (savedTaunt) {
+          ids = [savedTaunt, ...(ids || []).filter((x) => x !== savedTaunt)]
         }
       }
     }

@@ -159,20 +159,25 @@ export default function LojaPage() {
   const [equippedAvatar, setEquippedAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
-  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa'])
+  const [equippedTauntId, setEquippedTauntId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('equipped_taunt_id') || 'PROV_010'
+    }
+    return 'PROV_010'
+  })
+  const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number }>({ help5050: 5, freezeTime: 3 })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[] }>({
-    avatars: REAL_AVATARS.map((a) => a.id),
-    arenas: ['arena_1', 'arena_2', 'arena_ponte_2077', 'arena_neon_2088'],
-    titles: ['titulo_iniciante']
+  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
+    avatars: ['camoes_2050'],
+    arenas: ['arena_1'],
+    titles: ['tit_filho_portugal'],
+    taunts: ['pack_basico', 'PROV_010'],
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
-    ...REAL_AVATARS.map((a) => a.id),
+    'camoes_2050',
     'arena_1',
-    'arena_2',
-    'arena_neon_2088', 
-    'arena_ponte_2077',
+    'PROV_010',
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
@@ -186,7 +191,10 @@ export default function LojaPage() {
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setEquippedArena(savedArena)
 
-        const savedEmotes = localStorage.getItem('equipped_emotes')
+        const savedTaunt = localStorage.getItem('equipped_taunt_id')
+        if (savedTaunt) setEquippedTauntId(savedTaunt)
+
+        const savedEmotes = localStorage.getItem('equipped_emotes') || localStorage.getItem('equipped_taunts')
         if (savedEmotes) {
           try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
         }
@@ -212,6 +220,7 @@ export default function LojaPage() {
                 avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
+                taunts: Array.from(new Set([...prev.taunts, ...(parsedInv.taunts || []), ...(parsedInv.emotes || [])])),
               }))
             }
           } catch (e) {
@@ -245,12 +254,19 @@ export default function LojaPage() {
           if (snap.exists()) {
             const data = snap.data()
             if (data.inventory) {
+              const invTaunts = Array.from(new Set([
+                'pack_basico',
+                ...(data.inventory.taunts || []),
+                ...(data.inventory.emotes || []),
+              ]))
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
+                taunts: invTaunts,
               }))
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
+              localStorage.setItem('user_inventory_taunts', JSON.stringify(invTaunts))
             }
             if (data.consumables) {
               setConsumables((prev) => ({ ...prev, ...data.consumables }))
@@ -279,6 +295,19 @@ export default function LojaPage() {
               setEquippedTitle(tit)
               localStorage.setItem('equipped_title', tit)
             }
+            if (data.equippedTauntId || data.equipped?.taunt) {
+              const tId = data.equippedTauntId || data.equipped?.taunt
+              setEquippedTauntId(tId)
+              localStorage.setItem('equipped_taunt_id', tId)
+            }
+            if (data.equippedEmotes || data.equipped?.emotes || data.equipped?.taunts) {
+              const em = data.equipped?.emotes || data.equipped?.taunts || data.equippedEmotes
+              if (Array.isArray(em)) {
+                setEquippedEmotes(em)
+                localStorage.setItem('equipped_emotes', JSON.stringify(em))
+                localStorage.setItem('equipped_taunts', JSON.stringify(em))
+              }
+            }
           }
         })
       } catch (e) {
@@ -289,6 +318,8 @@ export default function LojaPage() {
     window.addEventListener('avatarChanged', syncStore)
     window.addEventListener('arenaChanged', syncStore)
     window.addEventListener('titleChanged', syncStore)
+    window.addEventListener('tauntsChanged', syncStore)
+    window.addEventListener('emotesChanged', syncStore)
     window.addEventListener('consumables_updated', syncStore)
     window.addEventListener('inventory_updated', syncStore)
     window.addEventListener('balance_updated', syncStore)
@@ -299,6 +330,8 @@ export default function LojaPage() {
       window.removeEventListener('avatarChanged', syncStore)
       window.removeEventListener('arenaChanged', syncStore)
       window.removeEventListener('titleChanged', syncStore)
+      window.removeEventListener('tauntsChanged', syncStore)
+      window.removeEventListener('emotesChanged', syncStore)
       window.removeEventListener('consumables_updated', syncStore)
       window.removeEventListener('inventory_updated', syncStore)
       window.removeEventListener('balance_updated', syncStore)
@@ -334,7 +367,8 @@ export default function LojaPage() {
     if (item.priceValue === 0 && !item.isExclusive) return true
     if (unlockedItems.includes(item.id) || unlockedItems.includes(item.name)) return true
     if (item.category === 'avatars') {
-      return true
+      const isFree = item.id === 'camoes_2050' || item.priceValue === 0
+      return isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
     }
     if (item.category === 'arenas' && (inventory.arenas.includes(item.id) || item.priceValue === 0)) return true
     if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
@@ -343,7 +377,13 @@ export default function LojaPage() {
       try {
         localEmotes = JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]')
       } catch {}
-      return item.priceValue === 0 || unlockedItems.includes(item.id) || localEmotes.includes(item.id) || DEFAULT_EQUIPPED_EMOTES.includes(item.id)
+      return (
+        item.priceValue === 0 ||
+        unlockedItems.includes(item.id) ||
+        inventory.taunts?.includes(item.id) ||
+        localEmotes.includes(item.id) ||
+        DEFAULT_EQUIPPED_EMOTES.includes(item.id)
+      )
     }
     return false
   }
@@ -351,9 +391,10 @@ export default function LojaPage() {
   const isItemEquipped = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
     if (item.category === 'taunts') {
+      if (equippedTauntId && equippedTauntId === item.id) return true
       const active = (equippedEmotes && equippedEmotes.length > 0)
         ? equippedEmotes
-        : ['emote_ola', 'emote_boa_sorte', 'emote_vamos', 'emote_boa']
+        : ['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos']
       return active.includes(item.id)
     }
     if (item.category === 'avatars') return equippedAvatar === item.image || normalizeAvatarId(equippedAvatar) === normalizeAvatarId(item.id)
@@ -557,16 +598,21 @@ export default function LojaPage() {
             return
           }
           currentEquipped = currentEquipped.filter((id) => id !== item.id)
+          if (equippedTauntId === item.id) {
+            const nextId = currentEquipped[0] || ''
+            setEquippedTauntId(nextId)
+            localStorage.setItem('equipped_taunt_id', nextId)
+          }
           showToast(`Provocação "${item.name}" desequipada dos 4 atalhos!`)
         } else {
+          setEquippedTauntId(item.id)
+          localStorage.setItem('equipped_taunt_id', item.id)
           if (currentEquipped.length >= 4) {
-            // Replace first or add up to 4
             currentEquipped = [item.id, currentEquipped[0], currentEquipped[1], currentEquipped[2]]
-            showToast(`Provocação "${item.name}" equipada nos teus 4 atalhos 1v1!`)
           } else {
-            currentEquipped.push(item.id)
-            showToast(`Provocação "${item.name}" adicionada aos teus atalhos de 1v1!`)
+            currentEquipped = [item.id, ...currentEquipped]
           }
+          showToast(`Provocação "${item.name}" equipada com sucesso!`)
         }
         playEmoteSound(item.name)
         setEquippedEmotes(currentEquipped)
@@ -575,6 +621,8 @@ export default function LojaPage() {
         if (auth.currentUser) {
           try {
             updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedTauntId: item.id,
+              'equipped.taunt': item.id,
               equippedEmotes: currentEquipped,
               'equipped.emotes': currentEquipped,
               equippedTaunts: currentEquipped,
@@ -583,6 +631,7 @@ export default function LojaPage() {
           } catch {}
         }
         window.dispatchEvent(new Event('emotesChanged'))
+        window.dispatchEvent(new Event('tauntsChanged'))
         window.dispatchEvent(new Event('inventory_updated'))
       }
 
@@ -622,6 +671,12 @@ export default function LojaPage() {
         const localTaunts = Array.from(new Set([...JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]'), item.id]))
         localStorage.setItem('user_inventory_taunts', JSON.stringify(localTaunts))
         localStorage.setItem('user_inventory_emotes', JSON.stringify(localTaunts))
+        setEquippedTauntId(item.id)
+        localStorage.setItem('equipped_taunt_id', item.id)
+        let newEquipped = [item.id, ...equippedEmotes.filter((id) => id !== item.id)].slice(0, 4)
+        setEquippedEmotes(newEquipped)
+        localStorage.setItem('equipped_emotes', JSON.stringify(newEquipped))
+        localStorage.setItem('equipped_taunts', JSON.stringify(newEquipped))
         firestoreInvField = 'inventory.emotes'
       }
 
@@ -646,6 +701,11 @@ export default function LojaPage() {
         setEquippedTitle(item.name)
         localStorage.setItem('equipped_title', item.name)
         window.dispatchEvent(new Event('titleChanged'))
+      } else if (item.category === 'taunts') {
+        setEquippedTauntId(item.id)
+        localStorage.setItem('equipped_taunt_id', item.id)
+        window.dispatchEvent(new Event('tauntsChanged'))
+        window.dispatchEvent(new Event('emotesChanged'))
       }
 
       if (auth.currentUser) {
@@ -665,8 +725,14 @@ export default function LojaPage() {
             updatePayload.equippedTitle = item.name
             updatePayload['equipped.title'] = item.name
           } else if (item.category === 'taunts') {
+            updatePayload.equippedTauntId = item.id
+            updatePayload['equipped.taunt'] = item.id
             updatePayload['inventory.taunts'] = arrayUnion(item.id)
             updatePayload['inventory.emotes'] = arrayUnion(item.id)
+            const newEm = [item.id, ...equippedEmotes.filter((id) => id !== item.id)].slice(0, 4)
+            updatePayload.equippedEmotes = newEm
+            updatePayload['equipped.emotes'] = newEm
+            updatePayload['equipped.taunts'] = newEm
           }
           await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
         } catch (e) {
@@ -1256,18 +1322,19 @@ export default function LojaPage() {
                           </span>
 
                           <button
+                            type="button"
                             onClick={() => handleAction(item)}
-                            className={`cursor-pointer rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 z-20 ${
+                            className={`cursor-pointer rounded-xl px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 active:scale-95 z-20 ${
                               isConsumable
-                                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                                 : isEquipped
-                                ? 'bg-emerald-600 text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
+                                ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/50'
                                 : isUnlocked
-                                ? 'bg-cyan-600 text-white hover:bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]'
-                                : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                                ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                                : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                             }`}
                           >
-                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✓' : isUnlocked ? 'Equipar' : 'Comprar'}
+                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✅' : isUnlocked ? 'Equipar' : `Comprar ${item.price}`}
                           </button>
                         </div>
                       )}
