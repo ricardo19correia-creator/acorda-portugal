@@ -22,7 +22,7 @@ import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { useEconomy } from '@/context/economy-context'
-import { ANIMATED_FRAMES } from '@/src/data/frames'
+import { ANIMATED_FRAMES } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'

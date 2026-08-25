@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import type { UserProfile } from '@/lib/game-data'
 import { getEquippedAvatarImage } from '@/lib/inventory'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
-import { ANIMATED_FRAMES, getFrameById } from '@/src/data/frames'
+import { ANIMATED_FRAMES, getFrameById } from '@/data/frames'
 import { cn } from '@/lib/utils'
 
 export interface PlayerAvatarProps {
@@ -23,6 +23,7 @@ export interface PlayerAvatarProps {
   onClick?: () => void
   frameId?: string | null
   activeFrame?: string | null
+  equippedFrame?: string | null
 }
 
 const SIZE_CLASSES = {
@@ -49,6 +50,7 @@ export function PlayerAvatar({
   onClick,
   frameId,
   activeFrame,
+  equippedFrame,
 }: PlayerAvatarProps) {
   const [globalEquippedAvatar, setGlobalEquippedAvatar] = useState<string | null>(null)
   const [globalEquippedFrame, setGlobalEquippedFrame] = useState<string | null>(null)
@@ -100,6 +102,7 @@ export function PlayerAvatar({
   const effectiveFrameId =
     frameId ||
     activeFrame ||
+    equippedFrame ||
     (profile as any)?.equippedFrame ||
     (profile as any)?.equipped?.frameId ||
     (isCurrentUser ? globalEquippedFrame : null)

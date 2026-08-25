@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
-import { ANIMATED_FRAMES, getFrameById } from '@/src/data/frames'
+import { ANIMATED_FRAMES, getFrameById } from '@/data/frames'
 import { cn } from '@/lib/utils'
 
 export interface UserAvatarProps {
@@ -15,6 +15,7 @@ export interface UserAvatarProps {
   rank?: number
   frameId?: string | null
   activeFrame?: string | null
+  equippedFrame?: string | null
   borderGlowColor?: string
   className?: string
   onClick?: () => void
@@ -30,6 +31,7 @@ export function UserAvatar({
   rank,
   frameId,
   activeFrame,
+  equippedFrame,
   borderGlowColor,
   className = '',
   onClick,
@@ -68,7 +70,7 @@ export function UserAvatar({
   const rawCandidate = src || avatarUrl
   const imageSrc = getAvatarImage(rawCandidate)
 
-  const effectiveFrameId = frameId || activeFrame || (isCurrentUser ? localFrame : null)
+  const effectiveFrameId = frameId || activeFrame || equippedFrame || (isCurrentUser ? localFrame : null)
   const frameConfig = getFrameById(effectiveFrameId)
 
   const rankBorderClass = frameConfig
