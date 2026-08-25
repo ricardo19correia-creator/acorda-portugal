@@ -5,6 +5,7 @@ import type { UserProfile } from '@/lib/game-data'
 import { getEquippedAvatarImage } from '@/lib/inventory'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { ANIMATED_FRAMES, getFrameById } from '@/data/frames'
+import { AnimatedFrameWrapper } from '@/components/ui/AnimatedFrameWrapper'
 import { cn } from '@/lib/utils'
 
 export interface PlayerAvatarProps {
@@ -109,9 +110,37 @@ export function PlayerAvatar({
 
   const frameConfig = getFrameById(effectiveFrameId)
 
-  const rankBorderClass = frameConfig
-    ? frameConfig.cssClass
-    : rank === 1
+  if (frameConfig) {
+    return (
+      <div
+        onClick={onClick}
+        className={cn('relative inline-flex shrink-0 aspect-square select-none items-center justify-center', SIZE_CLASSES[size] || SIZE_CLASSES.md, className)}
+      >
+        {hasAura && (
+          <div className="pointer-events-none absolute -inset-2.5 rounded-full bg-gold/25 blur-md animate-pulse" />
+        )}
+        <AnimatedFrameWrapper frameId={effectiveFrameId} className="w-full h-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={effectivePhotoURL}
+            alt={effectiveName}
+            className="w-full h-full object-cover object-center rounded-[inherit] pointer-events-none"
+            onError={(e) => {
+              e.currentTarget.src = DEFAULT_AVATAR.image
+            }}
+          />
+        </AnimatedFrameWrapper>
+
+        {isCurrentUser && showBadge && size !== 'xs' && (
+          <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 font-black text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-md z-20 pointer-events-none leading-none">
+            TU
+          </span>
+        )}
+      </div>
+    )
+  }
+
+  const rankBorderClass = rank === 1
     ? 'border-2 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.6)]'
     : rank === 2
     ? 'border-2 border-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.5)]'
@@ -131,14 +160,14 @@ export function PlayerAvatar({
         <div className="pointer-events-none absolute -inset-2.5 rounded-full bg-gold/25 blur-md animate-pulse" />
       )}
 
-      {/* Moldura Externa com Brilho / Squircle Padronizado / Moldura Viva */}
+      {/* Moldura Externa com Brilho / Squircle Padronizado */}
       <div
         className={cn(
           'w-full h-full p-0.5 overflow-hidden transition-all duration-300 bg-slate-950 flex items-center justify-center',
           SIZE_CLASSES[size] || SIZE_CLASSES.md,
           rankBorderClass,
         )}
-        style={borderGlowColor && !frameConfig ? { borderColor: borderGlowColor } : undefined}
+        style={borderGlowColor ? { borderColor: borderGlowColor } : undefined}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

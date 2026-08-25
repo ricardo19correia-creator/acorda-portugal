@@ -550,19 +550,97 @@ iframe[title*="chat"],
 }
 
 /* ========================================================= */
-/* 5 MOLDURAS VIVAS / ANIMADAS                               */
+/* 5 MOLDURAS VIVAS / ANIMADAS COM MOVIMENTO REAL            */
 /* ========================================================= */
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 8px currentColor); }
-  50% { opacity: 1; filter: drop-shadow(0 0 18px currentColor); }
+/* Animação Contínua 360 Graus */
+@keyframes spin-beam {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.frame-cyber-neon { position: relative; border: 2px solid transparent !important; background: linear-gradient(#090d16, #090d16) padding-box, conic-gradient(from 0deg, #06b6d4, #10b981, #3b82f6, #06b6d4) border-box !important; animation: pulse-glow 3s infinite ease-in-out; border-radius: 1.25rem; color: #06b6d4; }
-.frame-solar-flame { position: relative; border: 2px solid transparent !important; background: linear-gradient(#090d16, #090d16) padding-box, conic-gradient(from 180deg, #f59e0b, #ef4444, #fbbf24, #f59e0b) border-box !important; animation: pulse-glow 2s infinite alternate; border-radius: 1.25rem; color: #f59e0b; }
-.frame-portugal-glory { position: relative; border: 2px solid transparent !important; background: linear-gradient(#090d16, #090d16) padding-box, conic-gradient(from 90deg, #15803d, #dc2626, #eab308, #15803d) border-box !important; animation: pulse-glow 2.5s infinite ease-in-out; border-radius: 1.25rem; color: #22c55e; }
-.frame-void-abyss { position: relative; border: 2px solid transparent !important; background: linear-gradient(#090d16, #090d16) padding-box, conic-gradient(from 0deg, #7e22ce, #c084fc, #3b0764, #7e22ce) border-box !important; animation: pulse-glow 3.5s infinite ease-in-out; border-radius: 1.25rem; color: #a855f7; }
-.frame-quantum-matrix { position: relative; border: 2px solid transparent !important; background: linear-gradient(#090d16, #090d16) padding-box, conic-gradient(from 270deg, #10b981, #06b6d4, #6ee7b7, #10b981) border-box !important; animation: pulse-glow 1.8s infinite alternate; border-radius: 1.25rem; color: #10b981; }
+/* Animação do Fogo em Combustão */
+@keyframes flame-rise {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 50% 100%; }
+  100% { background-position: 100% 0%; }
+}
+
+/* Scanner Laser Quântico */
+@keyframes matrix-scan-line {
+  0% { top: -10%; opacity: 0; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* Pulsação de Vórtice Cósmico */
+@keyframes void-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #9333ea) hue-rotate(0deg); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 25px #c084fc) hue-rotate(45deg); }
+}
+
+/* 1. Efeito Chama Viva */
+.frame-effect-flame {
+  position: relative;
+  background: linear-gradient(0deg, #ff0000, #ff7700, #ffdd00, #ff3300);
+  background-size: 200% 200%;
+  animation: flame-rise 2s ease infinite;
+  box-shadow: 0 0 20px rgba(255, 68, 0, 0.8), inset 0 0 10px rgba(255, 200, 0, 0.6);
+}
+
+/* 2. Efeito Feixe Laser 360° */
+.frame-container-laser {
+  position: relative;
+  overflow: hidden;
+}
+.frame-container-laser::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, #06b6d4, #10b981, transparent 40%);
+  animation: spin-beam 2.5s linear infinite;
+  z-index: 0;
+}
+
+/* 3. Efeito Glória Lusitana */
+.frame-effect-quinas {
+  position: relative;
+  background: linear-gradient(135deg, #15803d, #dc2626, #eab308, #15803d);
+  background-size: 300% 300%;
+  animation: flame-rise 3s ease infinite;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.6), 0 0 22px rgba(220, 38, 38, 0.6);
+}
+
+/* 4. Efeito Vazio Cósmico */
+.frame-effect-void {
+  position: relative;
+  background: radial-gradient(circle, #3b0764 0%, #7e22ce 70%, #000 100%);
+  animation: void-pulse 2.2s infinite ease-in-out;
+}
+
+/* 5. Efeito Matriz Quântica com Linha de Scanner */
+.frame-container-matrix {
+  position: relative;
+  border: 2px solid #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.7);
+  overflow: hidden;
+}
+.frame-matrix-laser {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #34d399, #ffffff, #34d399, transparent);
+  box-shadow: 0 0 12px #10b981;
+  animation: matrix-scan-line 1.8s ease-in-out infinite;
+  z-index: 10;
+  pointer-events: none;
+}
+
 
 
 
