@@ -37,6 +37,7 @@ import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
+import { ANIMATED_FRAMES, type AnimatedFrame } from '@/src/data/frames'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { DISTRICT_MAP } from '@/lib/district-map'
@@ -48,7 +49,7 @@ import { cn } from '@/lib/utils'
 interface InventoryItem {
   id: string
   name: string
-  category: 'avatars' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'
+  category: 'avatars' | 'molduras' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'
   description: string
   image?: string
   badge?: string
@@ -61,6 +62,8 @@ const getAvatarBadgeColor = (rarity: string) => {
   switch (rarity) {
     case 'Exclusivo':
       return 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+    case 'Mítico':
+      return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
     case 'Lendário':
       return 'bg-purple-500/20 text-purple-300 border-purple-500/40'
     case 'Épico':
@@ -83,6 +86,15 @@ const MASTER_PROFILE_CATALOG: InventoryItem[] = [
     badge: a.rarity,
     badgeColor: getAvatarBadgeColor(a.rarity),
     price: a.price,
+  })),
+  ...ANIMATED_FRAMES.map((f) => ({
+    id: f.id,
+    name: f.name,
+    category: 'molduras' as const,
+    description: f.description,
+    badge: f.rarity,
+    badgeColor: getAvatarBadgeColor(f.rarity),
+    price: f.price,
   })),
   ...ARENA_SHOP_CATALOG.map((ar) => ({
     id: ar.id,
@@ -128,6 +140,7 @@ function PerfilContent() {
   const [district, setDistrict] = useState<string>(() => profile?.district || '')
   const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)))
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
+  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId || null))
   const [arena, setArena] = useState<string>(() => (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_1')
   const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || profile?.equipped?.title || '')
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
@@ -140,7 +153,7 @@ function PerfilContent() {
   const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>(
     initialTab === 'conquistas' || initialTab === 'estatisticas' || initialTab === 'historico' ? initialTab : 'inventario'
   )
-  const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'>('todos')
+  const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'molduras' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'>('todos')
   const [achievementCategory, setAchievementCategory] = useState<AchievementCategory>('todas')
   
   // Conquistas Reclamadas
@@ -152,12 +165,13 @@ function PerfilContent() {
     freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? (profile as any)?.consumables?.freezeTime ?? 3,
     publicVote: (profile as any)?.inventory?.utilities?.publicVote ?? (profile as any)?.consumables?.publicVote ?? 3,
   })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
+  const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
     if (typeof window !== 'undefined') {
       try {
         const saved = JSON.parse(localStorage.getItem('user_inventory') || '{}')
         return {
           avatars: Array.isArray(saved?.avatars) ? saved.avatars : (profile as any)?.inventory?.avatars || ['camoes_2050'],
+          frames: Array.isArray(saved?.frames) ? saved.frames : (profile as any)?.inventory?.frames || [],
           arenas: Array.isArray(saved?.arenas) ? saved.arenas : (profile as any)?.inventory?.arenas || ['arena_1'],
           titles: Array.isArray(saved?.titles) ? saved.titles : (profile as any)?.inventory?.titles || [],
           taunts: Array.isArray(saved?.taunts) ? saved.taunts : (profile as any)?.inventory?.taunts || ['pack_basico'],
@@ -166,6 +180,7 @@ function PerfilContent() {
     }
     return {
       avatars: (profile as any)?.inventory?.avatars || ['camoes_2050'],
+      frames: (profile as any)?.inventory?.frames || [],
       arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
       titles: (profile as any)?.inventory?.titles || [],
       taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
@@ -487,6 +502,9 @@ function PerfilContent() {
           }
         }
 
+        const savedFrame = localStorage.getItem('user_equipped_frame')
+        if (savedFrame) setEquippedFrame(savedFrame)
+
         const savedInventory = localStorage.getItem('user_inventory')
         if (savedInventory) {
           try {
@@ -494,6 +512,7 @@ function PerfilContent() {
             if (parsed) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(parsed.avatars || [])])),
+                frames: Array.from(new Set([...prev.frames, ...(parsed.frames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(parsed.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(parsed.titles || [])])),
                 taunts: Array.from(new Set([...prev.taunts, ...(parsed.taunts || ['pack_basico'])])),
@@ -566,11 +585,16 @@ function PerfilContent() {
             if (data.inventory) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
+                frames: Array.from(new Set([...prev.frames, ...(data.inventory.frames || []), ...(data.unlockedFrames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
                 taunts: Array.from(new Set([...prev.taunts, ...(data.inventory.taunts || ['pack_basico'])])),
               }))
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
+            }
+            if (data.unlockedFrames && Array.isArray(data.unlockedFrames)) {
+              setUnlockedItems((prev) => Array.from(new Set([...prev, ...data.unlockedFrames])))
+              setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
             }
             if (data.equippedAvatar || data.equipped?.avatar || data.avatar) {
               const avImg = data.equipped?.avatar || data.avatar
@@ -582,6 +606,11 @@ function PerfilContent() {
                 setEquippedAvatarId(data.equippedAvatar)
                 localStorage.setItem('equipped_avatar_id', data.equippedAvatar)
               }
+            }
+            if (data.equippedFrame || data.equipped?.frameId) {
+              const fr = data.equippedFrame || data.equipped?.frameId
+              setEquippedFrame(fr)
+              localStorage.setItem('user_equipped_frame', fr)
             }
             if (data.equippedArena || data.equipped?.arena) {
               const ar = data.equipped?.arena || data.equippedArena
@@ -608,6 +637,7 @@ function PerfilContent() {
     }
 
     window.addEventListener('avatarChanged', syncProfile)
+    window.addEventListener('frameChanged', syncProfile)
     window.addEventListener('arenaChanged', syncProfile)
     window.addEventListener('titleChanged', syncProfile)
     window.addEventListener('consumables_updated', syncProfile)
@@ -721,6 +751,48 @@ function PerfilContent() {
       window.dispatchEvent(new Event('inventory_updated'))
       window.dispatchEvent(new Event('storage'))
       showToast(`Avatar "${item.name}" equipado com sucesso!`)
+    } else if (item.category === 'molduras') {
+      if (equippedFrame === item.id) {
+        setEquippedFrame(null)
+        localStorage.removeItem('user_equipped_frame')
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedFrame: null,
+              'equipped.frameId': null,
+            })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedFrame: null,
+              'equipped.frameId': null,
+            }, { merge: true })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('frameChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
+        showToast(`Moldura "${item.name}" desequipada!`)
+      } else {
+        setEquippedFrame(item.id)
+        localStorage.setItem('user_equipped_frame', item.id)
+        if (auth.currentUser) {
+          try {
+            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              'equipped.frameId': item.id,
+            })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              'equipped.frameId': item.id,
+            }, { merge: true })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('frameChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
+        showToast(`Moldura "${item.name}" equipada no teu avatar!`)
+      }
     } else if (item.category === 'arenas') {
       setArena(item.id)
       localStorage.setItem('equipped_arena', item.id)
@@ -1049,6 +1121,11 @@ function PerfilContent() {
       if (item.category === 'avatars') {
         const isFree = item.id === 'camoes_2050' || !item.price || item.price === 0
         isUnlocked = isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
+      } else if (item.category === 'molduras') {
+        isUnlocked =
+          inventory.frames.includes(item.id) ||
+          unlockedItems.includes(item.id) ||
+          ((profile as any)?.unlockedFrames && (profile as any)?.unlockedFrames.includes(item.id))
       } else if (item.category === 'arenas') {
         const isDefault = item.id === 'arena_1' || item.price === 0
         isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
@@ -1312,7 +1389,7 @@ function PerfilContent() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
             <div className="relative">
-              <UserAvatar avatarUrl={avatar} size="xl" isCurrentUser={true} />
+              <UserAvatar avatarUrl={avatar} activeFrame={equippedFrame} size="xl" isCurrentUser={true} />
               <span className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-lg z-20">
                 NÍVEL {userLevel}
               </span>
@@ -1497,6 +1574,16 @@ function PerfilContent() {
                   Avatares ({unlockedCosmetics.filter((i) => i.category === 'avatars').length})
                 </button>
                 <button
+                  onClick={() => setInventoryFilter('molduras')}
+                  className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    inventoryFilter === 'molduras'
+                      ? 'bg-purple-600 text-white shadow-md font-black'
+                      : 'bg-slate-900/80 text-purple-300 hover:text-white border border-purple-500/30'
+                  }`}
+                >
+                  Molduras Vivas ({unlockedCosmetics.filter((i) => i.category === 'molduras').length})
+                </button>
+                <button
                   onClick={() => setInventoryFilter('arenas')}
                   className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     inventoryFilter === 'arenas'
@@ -1633,8 +1720,8 @@ function PerfilContent() {
               </div>
             )}
 
-            {/* SEÇÃO: COSMÉTICOS (AVATARES, ARENAS, TÍTULOS) */}
-            {(inventoryFilter === 'todos' || inventoryFilter === 'avatars' || inventoryFilter === 'arenas' || inventoryFilter === 'titulos') && (
+            {/* SEÇÃO: COSMÉTICOS (AVATARES, MOLDURAS, ARENAS, TÍTULOS) */}
+            {(inventoryFilter === 'todos' || inventoryFilter === 'avatars' || inventoryFilter === 'molduras' || inventoryFilter === 'arenas' || inventoryFilter === 'titulos') && (
               <div>
                 <h2 className="text-lg font-black text-white flex items-center gap-2 mb-4">
                   <Star className="w-5 h-5 text-purple-400" /> Coleção de Cosméticos Ativos
@@ -1644,6 +1731,7 @@ function PerfilContent() {
                   {unlockedCosmetics.map((item) => {
                     const isEquipped = 
                       (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || normalizeAvatarId(avatar) === normalizeAvatarId(item.id))) ||
+                      (item.category === 'molduras' && equippedFrame === item.id) ||
                       (item.category === 'arenas' && arena === item.id) ||
                       (item.category === 'titulos' && (title === item.name || title === item.id))
 
@@ -1675,6 +1763,10 @@ function PerfilContent() {
                             {item.category === 'avatars' && item.image ? (
                               <div className="w-full h-36 flex items-center justify-center p-2">
                                 <img src={item.image} alt={item.name} className="w-24 h-24 rounded-2xl object-cover border border-slate-700 shadow-md" />
+                              </div>
+                            ) : item.category === 'molduras' ? (
+                              <div className="w-full h-36 flex flex-col items-center justify-center p-2">
+                                <UserAvatar avatarUrl={avatar} activeFrame={item.id} size="lg" showBadge={false} />
                               </div>
                             ) : item.category === 'arenas' && item.image ? (
                               <div className="relative w-full h-36 overflow-hidden">

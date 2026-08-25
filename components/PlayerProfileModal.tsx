@@ -9,6 +9,7 @@ export interface PlayerProfileData {
   id: string;
   username: string;
   avatarUrl?: string;
+  equippedFrame?: string;
   level: number;
   xp: number;
   title?: string;
@@ -52,6 +53,7 @@ export default function PlayerProfileModal({ player, isOpen, onClose }: PlayerPr
           <div className="relative mb-3">
             <UserAvatar
               src={player.avatarUrl}
+              activeFrame={player.equippedFrame}
               alt={player.username}
               size="lg"
               rank={player.rankPosition}

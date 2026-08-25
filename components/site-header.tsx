@@ -172,7 +172,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-card/80 p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
             >
-              <UserAvatar avatarUrl={profile?.photoURL || user?.photoURL || undefined} size="md" />
+              <UserAvatar avatarUrl={profile?.photoURL || user?.photoURL || undefined} isCurrentUser={true} size="md" />
               <div className="flex flex-col min-w-0 pointer-events-none">
                 <span className="truncate font-bold text-foreground">
                   {user.displayName ?? 'Conta'}

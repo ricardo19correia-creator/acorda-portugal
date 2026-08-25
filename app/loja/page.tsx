@@ -22,8 +22,10 @@ import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { useEconomy } from '@/context/economy-context'
+import { ANIMATED_FRAMES } from '@/src/data/frames'
+import { UserAvatar } from '@/components/user-avatar'
 
-type Category = 'vip' | 'avatars' | 'todos' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
+type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
 interface ShopItem {
   id: string
@@ -135,6 +137,19 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
   phrases: [e.text],
 }))
 
+const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
+  id: f.id,
+  name: f.name,
+  category: 'molduras',
+  rarity: f.rarity as any,
+  description: f.description,
+  price: `€${f.price.toLocaleString('pt-PT')}`,
+  priceValue: f.price,
+  badge: f.rarity,
+  badgeColor: getRarityBadgeColor(f.rarity as any),
+  icon: '✨',
+}))
+
 const OTHER_SHOP_ITEMS: ShopItem[] = [
   // AJUDAS & UTILIDADES
   { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)', icon: '✨' },
@@ -142,7 +157,7 @@ const OTHER_SHOP_ITEMS: ShopItem[] = [
   { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)', icon: '⏳' },
 ]
 
-const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
+const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...FRAME_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
 const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
 const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
@@ -158,6 +173,7 @@ export default function LojaPage() {
   const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
   const [previewArenaItem, setPreviewArenaItem] = useState<ShopItem | null>(null)
   const [equippedAvatar, setEquippedAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
+  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null))
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitle, setEquippedTitle] = useState<string>('')
   const [equippedTauntId, setEquippedTauntId] = useState<string>(() => {
@@ -173,8 +189,9 @@ export default function LojaPage() {
     freezeTime: 3,
     publicVote: 3,
   })
-  const [inventory, setInventory] = useState<{ avatars: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
+  const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
     avatars: ['camoes_2050'],
+    frames: [],
     arenas: ['arena_1'],
     titles: ['tit_filho_portugal'],
     taunts: ['pack_basico', 'PROV_010'],
@@ -192,6 +209,9 @@ export default function LojaPage() {
       try {
         const savedAvatar = localStorage.getItem('user_equipped_avatar')
         if (savedAvatar) setEquippedAvatar(getAvatarImage(savedAvatar))
+
+        const savedFrame = localStorage.getItem('user_equipped_frame')
+        if (savedFrame) setEquippedFrame(savedFrame)
         
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setEquippedArena(savedArena)
@@ -223,6 +243,7 @@ export default function LojaPage() {
             if (parsedInv) {
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
+                frames: Array.from(new Set([...prev.frames, ...(parsedInv.frames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
                 taunts: Array.from(new Set([...prev.taunts, ...(parsedInv.taunts || []), ...(parsedInv.emotes || [])])),
@@ -266,12 +287,17 @@ export default function LojaPage() {
               ]))
               setInventory((prev) => ({
                 avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
+                frames: Array.from(new Set([...prev.frames, ...(data.inventory.frames || []), ...(data.unlockedFrames || [])])),
                 arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
                 titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
                 taunts: invTaunts,
               }))
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
               localStorage.setItem('user_inventory_taunts', JSON.stringify(invTaunts))
+            }
+            if (data.unlockedFrames && Array.isArray(data.unlockedFrames)) {
+              setUnlockedItems((prev) => Array.from(new Set([...prev, ...data.unlockedFrames])))
+              setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
             }
             if (data.consumables) {
               setConsumables((prev) => ({ ...prev, ...data.consumables }))
@@ -290,6 +316,11 @@ export default function LojaPage() {
                 setEquippedAvatar(av)
                 localStorage.setItem('user_equipped_avatar', av)
               }
+            }
+            if (data.equippedFrame || data.equipped?.frameId) {
+              const fr = data.equippedFrame || data.equipped?.frameId
+              setEquippedFrame(fr)
+              localStorage.setItem('user_equipped_frame', fr)
             }
             if (data.equippedArena || data.equipped?.arena) {
               const ar = data.equipped?.arena || data.equippedArena
@@ -370,6 +401,13 @@ export default function LojaPage() {
       }
       return unlockedItems.includes(item.id) || inventory.avatars.includes(item.id)
     }
+    if (item.category === 'molduras') {
+      return (
+        unlockedItems.includes(item.id) ||
+        inventory.frames.includes(item.id) ||
+        (inventory as any)?.unlockedFrames?.includes(item.id)
+      )
+    }
     if (item.priceValue === 0 && !item.isExclusive) return true
     if (unlockedItems.includes(item.id) || unlockedItems.includes(item.name)) return true
     if (item.category === 'avatars') {
@@ -396,6 +434,7 @@ export default function LojaPage() {
 
   const isItemEquipped = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
+    if (item.category === 'molduras') return equippedFrame === item.id
     if (item.category === 'taunts') {
       if (equippedTauntId && equippedTauntId === item.id) return true
       const active = (equippedEmotes && equippedEmotes.length > 0)
@@ -610,6 +649,48 @@ export default function LojaPage() {
         }
         window.dispatchEvent(new Event('titleChanged'))
         showToast(`Título "${item.name}" ativado no perfil!`)
+      } else if (item.category === 'molduras') {
+        if (equippedFrame === item.id) {
+          setEquippedFrame(null)
+          localStorage.removeItem('user_equipped_frame')
+          if (auth.currentUser) {
+            try {
+              await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+                equippedFrame: null,
+                'equipped.frameId': null,
+              })
+              await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+                equippedFrame: null,
+                'equipped.frameId': null,
+              }, { merge: true })
+            } catch (e) {
+              console.error(e)
+            }
+          }
+          window.dispatchEvent(new Event('frameChanged'))
+          window.dispatchEvent(new Event('inventory_updated'))
+          showToast(`Moldura "${item.name}" desequipada!`)
+        } else {
+          setEquippedFrame(item.id)
+          localStorage.setItem('user_equipped_frame', item.id)
+          if (auth.currentUser) {
+            try {
+              await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+                equippedFrame: item.id,
+                'equipped.frameId': item.id,
+              })
+              await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+                equippedFrame: item.id,
+                'equipped.frameId': item.id,
+              }, { merge: true })
+            } catch (e) {
+              console.error(e)
+            }
+          }
+          window.dispatchEvent(new Event('frameChanged'))
+          window.dispatchEvent(new Event('inventory_updated'))
+          showToast(`Moldura "${item.name}" equipada no teu avatar!`)
+        }
       } else if (item.category === 'taunts') {
         let currentEquipped = [...equippedEmotes]
         if (currentEquipped.includes(item.id)) {
@@ -681,6 +762,9 @@ export default function LojaPage() {
       if (item.category === 'avatars') {
         updatedInv.avatars = Array.from(new Set([...updatedInv.avatars, item.id]))
         firestoreInvField = 'inventory.avatars'
+      } else if (item.category === 'molduras') {
+        updatedInv.frames = Array.from(new Set([...(updatedInv.frames || []), item.id]))
+        firestoreInvField = 'inventory.frames'
       } else if (item.category === 'arenas') {
         updatedInv.arenas = Array.from(new Set([...updatedInv.arenas, item.id]))
         firestoreInvField = 'inventory.arenas'
@@ -712,6 +796,10 @@ export default function LojaPage() {
         setEquippedAvatar(item.image)
         localStorage.setItem('user_equipped_avatar', item.image)
         window.dispatchEvent(new Event('avatarChanged'))
+      } else if (item.category === 'molduras') {
+        setEquippedFrame(item.id)
+        localStorage.setItem('user_equipped_frame', item.id)
+        window.dispatchEvent(new Event('frameChanged'))
       } else if (item.category === 'arenas') {
         setEquippedArena(item.id)
         localStorage.setItem('equipped_arena', item.id)
@@ -738,6 +826,10 @@ export default function LojaPage() {
             updatePayload.equippedAvatar = item.id
             updatePayload['equipped.avatar'] = item.image || item.id
             updatePayload.avatar = item.image || item.id
+          } else if (item.category === 'molduras') {
+            updatePayload.equippedFrame = item.id
+            updatePayload['equipped.frameId'] = item.id
+            updatePayload.unlockedFrames = arrayUnion(item.id)
           } else if (item.category === 'arenas') {
             updatePayload.equippedArena = item.id
             updatePayload['equipped.arena'] = item.id
@@ -755,6 +847,12 @@ export default function LojaPage() {
             updatePayload['equipped.taunts'] = newEm
           }
           await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
+          if (item.category === 'molduras') {
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              'equipped.frameId': item.id,
+            }, { merge: true })
+          }
         } catch (e) {
           console.error(e)
         }
@@ -862,6 +960,17 @@ export default function LojaPage() {
             }`}
           >
             <User className="w-3.5 h-3.5" /> LOJA DE AVATARES (9)
+          </button>
+
+          <button
+            onClick={() => setActiveTab('molduras')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
+              activeTab === 'molduras'
+                ? 'bg-purple-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]'
+                : 'bg-slate-900/70 text-purple-300 border border-purple-500/30 hover:bg-slate-800'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-purple-300" /> MOLDURAS VIVAS (5)
           </button>
 
           <button
@@ -1212,7 +1321,19 @@ export default function LojaPage() {
                       </div>
 
                       {/* Image / Preview */}
-                      {item.category === 'titulos' ? (
+                      {item.category === 'molduras' ? (
+                        <div className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/30 border border-purple-500/30 p-4 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame">
+                          <UserAvatar
+                            avatarUrl={equippedAvatar}
+                            activeFrame={item.id}
+                            size="lg"
+                            showBadge={false}
+                          />
+                          <span className="mt-2 text-[10px] font-black uppercase tracking-wider text-purple-300">
+                            Pré-visualização
+                          </span>
+                        </div>
+                      ) : item.category === 'titulos' ? (
                         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-950 via-slate-900 to-black border border-slate-800 mb-3 flex flex-col items-center justify-center p-3 text-center shadow-inner group-hover:border-yellow-500/50 transition-colors">
                           <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1.5 flex items-center gap-1">
                             <Trophy className="w-3 h-3 text-yellow-400" /> TÍTULO OFICIAL

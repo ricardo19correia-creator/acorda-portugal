@@ -549,3 +549,63 @@ iframe[title*="chat"],
   animation: border-neon-glow 3s infinite ease-in-out;
 }
 
+/* ========================================================= */
+/* 5 MOLDURAS VIVAS / ANIMADAS                               */
+/* ========================================================= */
+
+@keyframes rotate-gradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 8px currentColor); }
+  50% { opacity: 1; filter: drop-shadow(0 0 18px currentColor); }
+}
+
+.frame-cyber-neon {
+  position: relative;
+  border: 2px solid transparent !important;
+  background: linear-gradient(#090d16, #090d16) padding-box,
+              conic-gradient(from 0deg, #06b6d4, #10b981, #3b82f6, #06b6d4) border-box !important;
+  color: #06b6d4;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.frame-solar-flame {
+  position: relative;
+  border: 2px solid transparent !important;
+  background: linear-gradient(#090d16, #090d16) padding-box,
+              conic-gradient(from 180deg, #f59e0b, #ef4444, #fbbf24, #f59e0b) border-box !important;
+  color: #f59e0b;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+.frame-portugal-glory {
+  position: relative;
+  border: 2px solid transparent !important;
+  background: linear-gradient(#090d16, #090d16) padding-box,
+              conic-gradient(from 90deg, #15803d, #dc2626, #eab308, #15803d) border-box !important;
+  color: #22c55e;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+.frame-void-abyss {
+  position: relative;
+  border: 2px solid transparent !important;
+  background: linear-gradient(#090d16, #090d16) padding-box,
+              conic-gradient(from 0deg, #7e22ce, #c084fc, #3b0764, #7e22ce) border-box !important;
+  color: #a855f7;
+  animation: pulse-glow 3.5s infinite ease-in-out;
+}
+
+.frame-quantum-matrix {
+  position: relative;
+  border: 2px solid transparent !important;
+  background: linear-gradient(#090d16, #090d16) padding-box,
+              conic-gradient(from 270deg, #10b981, #06b6d4, #6ee7b7, #10b981) border-box !important;
+  color: #10b981;
+  animation: pulse-glow 1.8s infinite alternate;
+}
+
+

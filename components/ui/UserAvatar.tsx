@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
+import { ANIMATED_FRAMES, getFrameById } from '@/src/data/frames'
 import { cn } from '@/lib/utils'
 
 export interface UserAvatarProps {
@@ -12,6 +13,8 @@ export interface UserAvatarProps {
   isCurrentUser?: boolean
   showBadge?: boolean
   rank?: number
+  frameId?: string | null
+  activeFrame?: string | null
   borderGlowColor?: string
   className?: string
   onClick?: () => void
@@ -25,10 +28,34 @@ export function UserAvatar({
   isCurrentUser = false,
   showBadge = true,
   rank,
+  frameId,
+  activeFrame,
   borderGlowColor,
   className = '',
   onClick,
 }: UserAvatarProps) {
+  const [localFrame, setLocalFrame] = useState<string | null>(null)
+
+  useEffect(() => {
+    const syncFrame = () => {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('user_equipped_frame')
+        setLocalFrame(stored || null)
+      }
+    }
+
+    syncFrame()
+    window.addEventListener('frameChanged', syncFrame)
+    window.addEventListener('inventory_updated', syncFrame)
+    window.addEventListener('storage', syncFrame)
+
+    return () => {
+      window.removeEventListener('frameChanged', syncFrame)
+      window.removeEventListener('inventory_updated', syncFrame)
+      window.removeEventListener('storage', syncFrame)
+    }
+  }, [])
+
   // Estilos de dimensão padronizados (sempre 1:1 aspect ratio e squircle / cantos curvos)
   const sizeClasses = {
     xs: 'w-7 h-7 rounded-lg',
@@ -41,30 +68,34 @@ export function UserAvatar({
   const rawCandidate = src || avatarUrl
   const imageSrc = getAvatarImage(rawCandidate)
 
-  const rankBorderClass =
-    rank === 1
-      ? 'border-2 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.6)]'
-      : rank === 2
-      ? 'border-2 border-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.5)]'
-      : rank === 3
-      ? 'border-2 border-amber-700 shadow-[0_0_15px_rgba(180,83,9,0.5)]'
-      : isCurrentUser
-      ? 'border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]'
-      : 'border border-slate-700/80 shadow-md'
+  const effectiveFrameId = frameId || activeFrame || (isCurrentUser ? localFrame : null)
+  const frameConfig = getFrameById(effectiveFrameId)
+
+  const rankBorderClass = frameConfig
+    ? frameConfig.cssClass
+    : rank === 1
+    ? 'border-2 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.6)]'
+    : rank === 2
+    ? 'border-2 border-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.5)]'
+    : rank === 3
+    ? 'border-2 border-amber-700 shadow-[0_0_15px_rgba(180,83,9,0.5)]'
+    : isCurrentUser
+    ? 'border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]'
+    : 'border border-slate-700/80 shadow-md'
 
   return (
     <div
       onClick={onClick}
       className={cn('relative inline-flex shrink-0 aspect-square select-none', className)}
     >
-      {/* Moldura Externa com Brilho / Border Curvo Padronizado */}
+      {/* Moldura Externa com Brilho / Border Curvo Padronizado / Moldura Viva */}
       <div
         className={cn(
           'w-full h-full p-0.5 overflow-hidden transition-all duration-300 bg-slate-950 flex items-center justify-center',
           sizeClasses[size] || sizeClasses.md,
           rankBorderClass,
         )}
-        style={borderGlowColor ? { borderColor: borderGlowColor } : undefined}
+        style={borderGlowColor && !frameConfig ? { borderColor: borderGlowColor } : undefined}
       >
         {/* Imagem Interna com Recorte Curvo Inherit */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
