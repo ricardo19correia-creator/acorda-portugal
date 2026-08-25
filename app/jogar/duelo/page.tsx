@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
@@ -8,9 +8,9 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
 import { ArrowLeft, Swords, Sparkles } from 'lucide-react'
-import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 
-const DEFAULT_ARENA_BG = '/arenas/arena-1.jpg'
+// IMAGEM DE FUNDO FIXA E PERMANENTE DA ARENA 1v1
+const DUEL_ARENA_BACKGROUND = '/images/arenas/arena-1v1.png'
 
 function DuelPageContent() {
   const router = useRouter()
@@ -18,7 +18,6 @@ function DuelPageContent() {
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
-  const [arenaImage, setArenaImage] = useState<string>(DEFAULT_ARENA_BG)
 
   // Prioridade ao ID da URL para navegação limpa na revanche
   const effectiveDuelId = duelIdFromUrl || activeDuelId
@@ -28,55 +27,22 @@ function DuelPageContent() {
     router.push(`/jogar/duelo?id=${newDuelId}`)
   }
 
-  useEffect(() => {
-    const sync = () => {
-      if (typeof window !== 'undefined') {
-        const savedImage = localStorage.getItem('equipped_arena_image')
-        const savedArena = localStorage.getItem('equipped_arena')
-
-        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('hero-bg') && !savedImage.includes('fundo-espaco')) {
-          setArenaImage(savedImage)
-        } else if (savedArena) {
-          const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
-          if (catalogItem?.image) {
-            setArenaImage(catalogItem.image)
-          } else {
-            setArenaImage(DEFAULT_ARENA_BG)
-          }
-        } else {
-          setArenaImage(DEFAULT_ARENA_BG)
-        }
-      }
-    }
-
-    sync()
-    window.addEventListener('arenaChanged', sync)
-    window.addEventListener('storage', sync)
-
-    return () => {
-      window.removeEventListener('arenaChanged', sync)
-      window.removeEventListener('storage', sync)
-    }
-  }, [])
-
-  const currentBg = arenaImage || DEFAULT_ARENA_BG
-
   if (!effectiveDuelId) {
     return (
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
-        {/* 1. Imagem de Fundo da Arena */}
+        {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS */}
         <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={currentBg}
-            alt="Cenário da Arena"
-            className="w-full h-full object-cover object-center"
+            src={DUEL_ARENA_BACKGROUND}
+            alt="Arena de Guerra 1v1"
+            className="w-full h-full object-cover object-center select-none pointer-events-none"
             onError={(e) => {
-              ;(e.target as HTMLImageElement).src = DEFAULT_ARENA_BG
+              ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
             }}
           />
-          {/* Overlay para manter o texto 100% legível */}
-          <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]" />
+          {/* Overlay escuro translúcido */}
+          <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px] pointer-events-none" />
         </div>
 
         <div className="relative z-20 flex-1 flex flex-col">
@@ -139,31 +105,28 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen w-full bg-transparent flex flex-col justify-between overflow-x-hidden">
-      {/* 1. Imagem de Fundo da Arena com Prioridade Máxima */}
+    <div className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-transparent">
+      {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS */}
       <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={currentBg}
-          alt="Cenário da Arena"
-          className="w-full h-full object-cover object-center"
+          src={DUEL_ARENA_BACKGROUND}
+          alt="Arena de Guerra 1v1"
+          className="w-full h-full object-cover object-center select-none pointer-events-none"
           onError={(e) => {
-            ;(e.target as HTMLImageElement).src = DEFAULT_ARENA_BG
+            ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
           }}
         />
-        {/* Overlay para manter o texto 100% legível */}
-        <div className="absolute inset-0 bg-black/45 backdrop-blur-[1px]" />
+        {/* Overlay escuro translúcido para contraste da pergunta e botões */}
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] pointer-events-none" />
       </div>
 
-      {/* 2. Conteúdo do Jogo (Transparente) */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between bg-transparent">
+      {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}
+      <div className="relative z-10 w-full h-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto bg-transparent">
         <DuelArena
           key={effectiveDuelId}
           duelId={effectiveDuelId}
           onDuelChange={handleDuelChange}
-          onArenaLoaded={(img) => {
-            if (img && img !== arenaImage) setArenaImage(img)
-          }}
         />
       </div>
     </div>
