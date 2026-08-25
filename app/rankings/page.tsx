@@ -147,45 +147,108 @@ export default function RankingsPage() {
     }
   }, [mode, selectedDistrict, rankingLimit, user?.uid, profile, userDisplayAvatar])
 
-  // Calcular Estatísticas Distritais para o Mapa Interativo
+  // Subscrição Nacional Global para alimentar o Radar Tático e Rankings Territoriais de todos os 20 Distritos
+  const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
+
+  useEffect(() => {
+    const unsub = subscribeRankings(
+      'all',
+      'xp',
+      (data) => {
+        let allList = [...data]
+        if (user?.uid && profile) {
+          const userXp = profile.xp ?? 0
+          const userWins = profile.wins ?? 0
+          const userLevel = profile.level ?? calculateLevelProgress(userXp).currentLevel.level
+          const userTitle = profile.equippedTitle || (profile as any)?.title || 'Membro Fundador'
+          const userDistrict = profile.district || 'Portugal'
+          const hasCurrentUser = allList.some((p) => p.uid === user.uid)
+          if (!hasCurrentUser) {
+            allList.push({
+              uid: user.uid,
+              displayName: profile.displayName || user.displayName || 'Jogador',
+              photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+              level: userLevel,
+              xp: userXp,
+              district: userDistrict,
+              title: userTitle,
+              equippedTitle: userTitle,
+              equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
+              wins1v1: userWins,
+              isFounder: true,
+            })
+          }
+        }
+        setNationalPlayers(allList)
+      },
+      500
+    )
+    return () => unsub()
+  }, [user?.uid, profile, userDisplayAvatar])
+
+  // Total Nacional de XP Acumulado
+  const totalNationalXP = useMemo(() => {
+    return nationalPlayers.reduce((sum, p) => sum + (p.xp || 0), 0)
+  }, [nationalPlayers])
+
+  // Calcular Estatísticas Distritais para o Mapa Interativo e Classificação Territorial
   const districtStatsMap = useMemo(() => {
-    const map = new Map<string, DistrictStatItem>()
-    ALL_DISTRICTS_LIST.forEach((name, idx) => {
-      map.set(name, {
+    const tempMap = new Map<string, { name: string; players: number; xp: number }>()
+    ALL_DISTRICTS_LIST.forEach((name) => {
+      tempMap.set(name, {
         name,
-        pos: idx + 1,
         players: 0,
         xp: 0,
       })
     })
 
-    players.forEach((p) => {
+    nationalPlayers.forEach((p) => {
       const match = ALL_DISTRICTS_LIST.find((d) => d.toLowerCase() === p.district.toLowerCase())
       if (match) {
-        const current = map.get(match)!
-        map.set(match, {
-          ...current,
+        const current = tempMap.get(match)!
+        tempMap.set(match, {
+          name: match,
           players: current.players + 1,
-          xp: current.xp + p.xp,
+          xp: current.xp + (p.xp || 0),
         })
       }
     })
 
-    // Ordenar distritos por XP acumulado
-    const sorted = Array.from(map.values()).sort((a, b) => b.xp - a.xp)
+    // Separar distritos com XP (>0) dos que têm 0 XP
+    const withXP = Array.from(tempMap.values())
+      .filter((d) => d.xp > 0)
+      .sort((a, b) => b.xp - a.xp || b.players - a.players)
+
+    const zeroXP = Array.from(tempMap.values())
+      .filter((d) => d.xp === 0)
+      .sort((a, b) => a.name.localeCompare(b.name, 'pt-PT'))
+
     const rankedMap = new Map<string, DistrictStatItem>()
-    sorted.forEach((item, index) => {
-      rankedMap.set(item.name, { ...item, pos: index + 1 })
+
+    // Distritos com XP recebem posição 1, 2, 3...
+    withXP.forEach((item, index) => {
+      rankedMap.set(item.name, {
+        ...item,
+        pos: index + 1,
+      })
+    })
+
+    // Distritos com 0 XP recebem pos: 0 (sem classificação)
+    zeroXP.forEach((item) => {
+      rankedMap.set(item.name, {
+        ...item,
+        pos: 0,
+      })
     })
 
     return rankedMap
-  }, [players])
+  }, [nationalPlayers])
 
   const selectedDistrictStats = useMemo(() => {
     return (
       districtStatsMap.get(selectedDistrict) || {
         name: selectedDistrict,
-        pos: 1,
+        pos: 0,
         players: 0,
         xp: 0,
       }
@@ -369,20 +432,26 @@ export default function RankingsPage() {
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 flex-wrap">
                         <h2 className="text-2xl sm:text-4xl font-black text-white font-display">
                           {selectedDistrict}
                         </h2>
-                        <span
-                          className="px-2.5 py-1 rounded-xl text-xs font-black uppercase font-mono border"
-                          style={{
-                            backgroundColor: `${getDistrictColorInfo(selectedDistrict).hex}20`,
-                            color: getDistrictColorInfo(selectedDistrict).hex,
-                            borderColor: `${getDistrictColorInfo(selectedDistrict).hex}50`,
-                          }}
-                        >
-                          #{selectedDistrictStats.pos} no País
-                        </span>
+                        {selectedDistrictStats.xp > 0 && selectedDistrictStats.pos > 0 ? (
+                          <span
+                            className="px-2.5 py-1 rounded-xl text-xs font-black uppercase font-mono border"
+                            style={{
+                              backgroundColor: `${getDistrictColorInfo(selectedDistrict).hex}20`,
+                              color: getDistrictColorInfo(selectedDistrict).hex,
+                              borderColor: `${getDistrictColorInfo(selectedDistrict).hex}50`,
+                            }}
+                          >
+                            #{selectedDistrictStats.pos} no País
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-1 rounded-xl text-xs font-semibold uppercase font-mono border border-slate-700 bg-slate-800/80 text-slate-400">
+                            Território Não Conquistado
+                          </span>
+                        )}
                       </div>
                       <p className="text-xs sm:text-sm text-slate-400 mt-1">
                         Clica no mapa de radar tático holográfico ou seleciona abaixo para inspecionar os dados territoriais.
@@ -399,11 +468,15 @@ export default function RankingsPage() {
                         onChange={(e) => setSelectedDistrict(e.target.value)}
                         className="w-full rounded-2xl border border-cyan-500/40 bg-slate-900/90 px-4 py-3 text-sm font-bold text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
                       >
-                        {ALL_DISTRICTS_LIST.map((dist) => (
-                          <option key={dist} value={dist}>
-                            {dist} (Classificação #{districtStatsMap.get(dist)?.pos || '-'})
-                          </option>
-                        ))}
+                        {ALL_DISTRICTS_LIST.map((dist) => {
+                          const stat = districtStatsMap.get(dist)
+                          const isConquered = stat && stat.xp > 0 && stat.pos > 0
+                          return (
+                            <option key={dist} value={dist}>
+                              {dist} {isConquered ? `(#${stat.pos} • ${stat.xp.toLocaleString('pt-PT')} XP)` : '(Sem Pontos • 0 XP)'}
+                            </option>
+                          )
+                        })}
                       </select>
                     </div>
 
@@ -454,8 +527,8 @@ export default function RankingsPage() {
                         </div>
                         <button
                           type="button"
-                          onClick={() => handleStartGame('/jogar')}
-                          className="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 text-xs font-black uppercase tracking-wide border border-amber-500/40 cursor-pointer transition-colors"
+                          onClick={() => handleStartGame(`/jogar?distrito=${encodeURIComponent(selectedDistrict)}`)}
+                          className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 text-xs font-black uppercase tracking-wide border border-amber-500/40 cursor-pointer transition-colors"
                         >
                           Conquistar
                         </button>
@@ -469,18 +542,26 @@ export default function RankingsPage() {
                           <span className="text-slate-400">Domínio Territorial Nacional</span>
                           <span
                             className="font-bold font-mono"
-                            style={{ color: getDistrictColorInfo(selectedDistrict).hex }}
+                            style={{
+                              color: selectedDistrictStats.xp > 0 ? getDistrictColorInfo(selectedDistrict).hex : '#94a3b8',
+                            }}
                           >
-                            {Math.min(100, Math.max(1, Math.round(((selectedDistrictStats.xp || 1) / (players.reduce((sum, p) => sum + p.xp, 0) || 1)) * 100)))}%
+                            {totalNationalXP > 0 && selectedDistrictStats.xp > 0
+                              ? Math.min(100, Math.max(1, Math.round((selectedDistrictStats.xp / totalNationalXP) * 100)))
+                              : 0}%
                           </span>
                         </div>
                         <div className="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-white/10">
                           <div
                             className="h-full rounded-full transition-all duration-700"
                             style={{
-                              backgroundColor: getDistrictColorInfo(selectedDistrict).hex,
-                              width: `${Math.min(100, Math.max(2, Math.round(((selectedDistrictStats.xp || 1) / (players.reduce((sum, p) => sum + p.xp, 0) || 1)) * 100)))}%`,
-                              boxShadow: `0 0 10px ${getDistrictColorInfo(selectedDistrict).hex}`,
+                              backgroundColor: selectedDistrictStats.xp > 0 ? getDistrictColorInfo(selectedDistrict).hex : '#334155',
+                              width: `${
+                                totalNationalXP > 0 && selectedDistrictStats.xp > 0
+                                  ? Math.min(100, Math.max(1, Math.round((selectedDistrictStats.xp / totalNationalXP) * 100)))
+                                  : 0
+                              }%`,
+                              boxShadow: selectedDistrictStats.xp > 0 ? `0 0 10px ${getDistrictColorInfo(selectedDistrict).hex}` : 'none',
                             }}
                           />
                         </div>

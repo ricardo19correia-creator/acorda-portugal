@@ -622,7 +622,9 @@ export function PortugalMapInteractive({
               </p>
             </div>
             <p className="mt-0.5 text-sm font-black text-white">
-              {hoveredStat?.pos ? `#${hoveredStat.pos} no País` : 'Sem classificação'}
+              {hoveredStat && hoveredStat.xp > 0 && hoveredStat.pos > 0
+                ? `#${hoveredStat.pos} no País`
+                : 'Território Não Conquistado'}
             </p>
             <div className="mt-1 flex items-center justify-center gap-2 text-[10px] text-slate-400 font-mono">
               <span>{hoveredStat?.players ?? 0} {hoveredStat?.players === 1 ? 'jogador' : 'jogadores'}</span>

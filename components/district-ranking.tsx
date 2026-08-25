@@ -117,11 +117,22 @@ export function DistrictRanking() {
             return a.name.localeCompare(b.name, 'pt-PT')
           })
 
+          const withXP = sortedList.filter((d) => d.xp > 0)
+          const zeroXP = sortedList.filter((d) => d.xp === 0)
+
           const finalMap = new Map<string, DistrictStatItem>()
-          sortedList.forEach((item, index) => {
+          withXP.forEach((item, index) => {
             finalMap.set(item.name, {
               name: item.name,
               pos: index + 1,
+              players: item.players,
+              xp: item.xp,
+            })
+          })
+          zeroXP.forEach((item) => {
+            finalMap.set(item.name, {
+              name: item.name,
+              pos: 0,
               players: item.players,
               xp: item.xp,
             })
@@ -218,9 +229,15 @@ export function DistrictRanking() {
                 </h3>
               </div>
               <div className="text-right">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold text-gold-foreground font-display text-lg font-black shadow-lg shadow-gold/30">
-                  {selectedStat.pos}º
-                </span>
+                {selectedStat.xp > 0 && selectedStat.pos > 0 ? (
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold text-gold-foreground font-display text-lg font-black shadow-lg shadow-gold/30">
+                    {selectedStat.pos}º
+                  </span>
+                ) : (
+                  <span className="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 font-mono text-[10px] font-bold border border-slate-700 block text-center">
+                    NÃO CONQUISTADO
+                  </span>
+                )}
               </div>
             </div>
 
@@ -286,7 +303,11 @@ export function DistrictRanking() {
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <span className="font-display text-xs font-black w-6 text-center text-muted-foreground">
-                        {dist.pos <= 3 ? MEDAL_ICONS[dist.pos - 1] : `#${dist.pos}`}
+                        {dist.xp > 0 && dist.pos > 0
+                          ? dist.pos <= 3
+                            ? MEDAL_ICONS[dist.pos - 1]
+                            : `#${dist.pos}`
+                          : '-'}
                       </span>
                       <span className="font-bold text-sm truncate">{dist.name}</span>
                     </div>
