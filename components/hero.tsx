@@ -1,7 +1,13 @@
+'use client'
+
+import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight } from 'lucide-react'
 import { PortugalHeroMap } from '@/components/portugal-hero-map'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 const HERO_STATS = [
   {
@@ -35,37 +41,27 @@ const HERO_STATS = [
 ]
 
 export function Hero() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleStartGame = (gameRoute: string) => {
+    if (!user && !auth.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
+
   return (
     <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-6 bg-transparent">
       {/* Main Hero Grid: Left Copy & Right 3D Living Hologram Map */}
-      <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-        {/* Top/Left: Copy & Action Controls */}
-        <div className="order-1 flex flex-col items-center text-center lg:items-start lg:text-left">
-          {/* Live Eyebrow Cyber Tag */}
+      <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+        {/* Left Column: Game Typography & CTAs */}
+        <div className="text-center lg:text-left lg:col-span-7">
+          {/* Official Badge Pill */}
           <div
-            className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-emerald-400/40 bg-emerald-950/60 px-4 py-1.5 text-xs font-black uppercase tracking-[0.24em] text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] backdrop-blur-xl"
-            style={{ animationDelay: '40ms' }}
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981]" />
-            </span>
-            <span>O Grande Quiz Nacional 🇵🇹</span>
-          </div>
-
-          {/* 3D Volumetric Chrome Headline */}
-          <h1
-            className="animate-rise mt-3 sm:mt-5 font-display text-5xl sm:text-7xl lg:text-8xl font-black leading-[0.88] tracking-tight uppercase select-none"
-            style={{ animationDelay: '120ms' }}
-          >
-            <span className="block text-3d-chrome">ACORDA</span>
-            <span className="block text-3d-neon-green mt-1">PORTUGAL</span>
-          </h1>
-
-          {/* Placa Digital LED / Arcade Futurista */}
-          <div
-            className="animate-rise mt-3 sm:mt-4 plate-led-arcade"
-            style={{ animationDelay: '180ms' }}
+            className="animate-rise inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 backdrop-blur-md shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+            style={{ animationDelay: '60ms' }}
           >
             <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
             <span className="font-display text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-amber-300">
@@ -73,6 +69,14 @@ export function Hero() {
             </span>
             <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
           </div>
+
+          {/* Main 3D Title with Neon Glint */}
+          <h1
+            className="animate-rise mt-5 font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-foreground text-3d-chrome leading-[0.95]"
+            style={{ animationDelay: '140ms' }}
+          >
+            Acorda Portugal
+          </h1>
 
           <p
             className="animate-rise mt-4 max-w-md sm:max-w-lg text-pretty text-sm sm:text-base leading-relaxed text-muted-foreground font-medium"
@@ -87,22 +91,24 @@ export function Hero() {
             style={{ animationDelay: '300ms' }}
           >
             {/* Primary Mech Emerald Button */}
-            <Link
-              href="/jogar"
+            <button
+              type="button"
+              onClick={() => handleStartGame('/jogar')}
               className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-emerald-500/30"
             >
               <Play className="h-5 w-5 fill-current text-emerald-950 drop-shadow-sm" />
               <span>Jogar Agora</span>
-            </Link>
+            </button>
 
             {/* Duelo 1v1 Fast Match Mech Button */}
-            <Link
-              href="/jogar/duelo"
+            <button
+              type="button"
+              onClick={() => handleStartGame('/jogar/duelo')}
               className="btn-mech-purple w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-white cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-purple-500/30"
             >
               <Swords className="h-5 w-5 drop-shadow-sm" />
               <span>Duelo 1v1</span>
-            </Link>
+            </button>
 
             {/* Rankings Mech Gold Button */}
             <Link

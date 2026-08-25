@@ -1,6 +1,11 @@
-import Link from 'next/link'
+'use client'
+
+import React from 'react'
+import { useRouter } from 'next/navigation'
 import { Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 /**
  * The primary call-to-action of the whole app. Glowing gradient, animated sheen,
@@ -17,11 +22,24 @@ export function PlayButton({
   label?: string
   href?: string
 }) {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!user && !auth.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
+      return
+    }
+    router.push(href)
+  }
+
   return (
-    <Link
-      href={href}
+    <button
+      type="button"
+      onClick={handleClick}
       className={cn(
-        'sheen group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] font-display font-bold uppercase tracking-wide text-primary-foreground shadow-[0_12px_40px_-8px_var(--primary)] outline-none ring-primary/50 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[position:100%_0] hover:shadow-[0_18px_54px_-6px_var(--primary)] focus-visible:ring-4 active:translate-y-0',
+        'sheen group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] font-display font-bold uppercase tracking-wide text-primary-foreground shadow-[0_12px_40px_-8px_var(--primary)] outline-none ring-primary/50 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[position:100%_0] hover:shadow-[0_18px_54px_-6px_var(--primary)] focus-visible:ring-4 active:translate-y-0 cursor-pointer',
         size === 'lg' ? 'px-9 py-5 text-lg sm:px-11 sm:py-6 sm:text-xl' : 'px-6 py-3.5 text-base',
         className,
       )}
@@ -33,6 +51,6 @@ export function PlayButton({
         </span>
       </span>
       <span className="pointer-events-none">{label}</span>
-    </Link>
+    </button>
   )
 }

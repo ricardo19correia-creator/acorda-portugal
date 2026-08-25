@@ -555,11 +555,11 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
           </div>
 
           <h2 className="mt-3 font-display text-2xl sm:text-3xl font-black uppercase text-foreground text-glow-purple tracking-tight">
-            Multiplayer 1v1
+            Login Obrigatório para 1v1
           </h2>
 
           <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            Entra com a tua conta para guardar XP, moedas e subir no ranking nacional, ou joga imediatamente como Convidado.
+            Para disputar partidas multiplayer 1v1, acumular vitórias e subir na classificação nacional, precisas de iniciar sessão.
           </p>
 
           <div className="mt-6 flex flex-col gap-3">
@@ -569,14 +569,6 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
             >
               <span>Entrar / Criar Conta</span>
             </Link>
-
-            <button
-              type="button"
-              onClick={() => setPlayAsGuest(true)}
-              className="w-full rounded-2xl border border-purple-500/40 bg-purple-500/15 py-3 font-display text-xs font-black uppercase tracking-wider text-purple-300 hover:bg-purple-500/25 transition cursor-pointer"
-            >
-              ⚡ Jogar como Convidado
-            </button>
 
             <button
               onClick={onClose}

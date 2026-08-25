@@ -24,6 +24,7 @@ import {
   Award,
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
+import { auth } from '@/lib/firebase'
 import {
   HUB_CATEGORIES,
   PORTUGUESE_CITIES,
@@ -83,7 +84,7 @@ export function GameHub() {
     )
   }, [searchCity])
 
-  // Handlers to launch solo games
+  // Handlers to launch solo games with strict authentication requirement
   const handleLaunchGame = (params: {
     categorySlug: string
     subcategorySlug?: string
@@ -103,7 +104,21 @@ export function GameHub() {
     if (params.city) {
       url += `&city=${encodeURIComponent(params.city)}`
     }
+
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(url)}`)
+      return
+    }
+
     router.push(url)
+  }
+
+  const handleOpenDuelModal = () => {
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent('/jogar/duelo')}`)
+      return
+    }
+    setShowDuelModal(true)
   }
 
   const currentDiffConfig = DIFFICULTY_LEVELS[selectedDifficulty]
@@ -441,7 +456,7 @@ export function GameHub() {
           </div>
 
           <button
-            onClick={() => setShowDuelModal(true)}
+            onClick={handleOpenDuelModal}
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-3 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:brightness-110 shadow-lg shadow-purple-600/30 transition-all cursor-pointer"
           >
             <Swords className="h-4 w-4" />

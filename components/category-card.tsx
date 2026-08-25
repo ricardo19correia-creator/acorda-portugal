@@ -1,7 +1,12 @@
-import Link from 'next/link'
+'use client'
+
+import React from 'react'
+import { useRouter } from 'next/navigation'
 import { Sparkles } from 'lucide-react'
 import type { Category, Tone } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 const TONE_TEXT: Record<Tone, string> = {
   primary: 'text-primary',
@@ -29,13 +34,26 @@ const DIFFICULTY: Record<string, string> = {
 }
 
 export function CategoryCard({ cat, className }: { cat: Category; className?: string }) {
+  const router = useRouter()
+  const { user } = useAuth()
   const special = cat.special
+  const targetUrl = `/jogar?cat=${cat.slug}`
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(targetUrl)}`)
+      return
+    }
+    router.push(targetUrl)
+  }
 
   return (
-    <Link
-      href={`/jogar?cat=${cat.slug}`}
+    <button
+      type="button"
+      onClick={handleClick}
       className={cn(
-        'group relative flex w-60 shrink-0 snap-start flex-col overflow-hidden rounded-3xl border p-5 text-left backdrop-blur transition-all duration-300 hover:-translate-y-1.5 sm:w-auto',
+        'group relative flex w-60 shrink-0 snap-start flex-col overflow-hidden rounded-3xl border p-5 text-left backdrop-blur transition-all duration-300 hover:-translate-y-1.5 sm:w-auto cursor-pointer',
         special
           ? 'border-flag-red/30 bg-gradient-to-br from-flag-red/15 via-card/70 to-gold/10'
           : cn('border-white/10 bg-card/60 hover:bg-card/90', TONE_RING[cat.tone]),
@@ -84,6 +102,6 @@ export function CategoryCard({ cat, className }: { cat: Category; className?: st
         </span>
         <span className={DIFFICULTY[cat.difficulty]}>{cat.difficulty}</span>
       </div>
-    </Link>
+    </button>
   )
 }

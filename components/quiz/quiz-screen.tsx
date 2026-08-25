@@ -14,6 +14,7 @@ import {
   Snowflake,
   Clock,
   Coins,
+  Lock,
 } from 'lucide-react'
 import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
@@ -318,10 +319,18 @@ export function QuizScreen({
     [categorySlug, subcategorySlug, districtParam, cityParam]
   )
 
-  const { user, profile } = useAuth()
+  const { user, profile, authResolved } = useAuth()
   const { addCoins } = useEconomy()
   const { setActivity } = usePresence()
   const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
+
+  // Bloqueio Absoluto: Jogadores não autenticados não podem aceder ao Quiz
+  useEffect(() => {
+    if (authResolved && !user && !auth?.currentUser) {
+      const currentUrl = typeof window !== 'undefined' ? window.location.pathname + window.location.search : '/jogar'
+      router.replace(`/entrar?redirect=${encodeURIComponent(currentUrl)}`)
+    }
+  }, [authResolved, user, router])
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
@@ -878,6 +887,31 @@ export function QuizScreen({
       return 'wrong'
     }
     return 'muted'
+  }
+
+  // Barreira Visual Imediata: Não renderizar perguntas a jogadores não autenticados
+  if (authResolved && !user && !auth?.currentUser) {
+    return (
+      <div className="flex min-h-[70vh] flex-col items-center justify-center text-center px-4">
+        <div className="rounded-3xl border border-amber-500/40 bg-slate-900/95 p-8 max-w-md backdrop-blur-xl shadow-2xl text-white">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 animate-pulse">
+            <Lock className="h-7 w-7" />
+          </div>
+          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-white">
+            Login Obrigatório
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Para responder a perguntas e pontuar em qualquer modo de jogo, precisas de ter sessão iniciada.
+          </p>
+          <Link
+            href={`/entrar?redirect=${encodeURIComponent(typeof window !== 'undefined' ? window.location.pathname + window.location.search : '/jogar')}`}
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-emerald-500/25 transition cursor-pointer"
+          >
+            Entrar com a Minha Conta
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (

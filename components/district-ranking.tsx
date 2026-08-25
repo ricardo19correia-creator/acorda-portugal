@@ -36,7 +36,7 @@ export const ALL_20_DISTRICTS = [
 const MEDAL_ICONS = ['🥇', '🥈', '🥉']
 
 export function DistrictRanking() {
-  const { profile } = useAuth()
+  const { user, profile } = useAuth()
   const [selected, setSelected] = useState<string>(profile?.district || 'Vila Real')
   const [hasInitializedSelection, setHasInitializedSelection] = useState(false)
   const [districtData, setDistrictData] = useState<Map<string, DistrictStatItem>>(() => {
@@ -245,13 +245,21 @@ export function DistrictRanking() {
             </div>
 
             <div className="mt-6">
-              <Link
-                href={`/jogar?cat=o-meu-distrito&dist=${encodeURIComponent(selectedStat.name)}`}
+              <button
+                type="button"
+                onClick={() => {
+                  const target = `/jogar?cat=o-meu-distrito&dist=${encodeURIComponent(selectedStat.name)}`
+                  if (!user) {
+                    window.location.href = `/entrar?redirect=${encodeURIComponent(target)}`
+                    return
+                  }
+                  window.location.href = target
+                }}
                 className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-gold via-amber-400 to-gold px-6 py-3.5 font-display text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-gold/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
               >
                 <Swords className="h-4 w-4" />
                 <span>Jogar e pontuar por {selectedStat.name}</span>
-              </Link>
+              </button>
             </div>
           </div>
 

@@ -94,13 +94,20 @@ export function DuelArena({
   onArenaLoaded?: (arenaImage: string) => void
 }) {
   const router = useRouter()
-  const { user, profile } = useAuth()
+  const { user, profile, authResolved } = useAuth()
   const { addCoins, deductCoins } = useEconomy()
   const { playSound, streakEffectId } = useGameTheme()
 
+  // Bloqueio Absoluto: Redirecionar se não autenticado
+  useEffect(() => {
+    if (authResolved && !user && !auth?.currentUser) {
+      router.replace('/entrar?redirect=%2Fjogar%2Fduelo')
+    }
+  }, [authResolved, user, router])
+
   const currentPlayer = useMemo(() => {
     return {
-      uid: user?.uid || profile?.uid || 'anonymous',
+      uid: user?.uid || profile?.uid || '',
       displayName: profile?.displayName || user?.displayName || 'Jogador',
       photoURL: user?.photoURL || null,
     }
@@ -822,6 +829,30 @@ export function DuelArena({
           A ligar à arena de duelo...
         </p>
         <p className="text-xs text-muted-foreground">Sincronizando com o servidor.</p>
+      </div>
+    )
+  }
+
+  if (authResolved && !user && !auth?.currentUser) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
+        <div className="rounded-3xl border border-purple-500/40 bg-slate-900/95 p-8 max-w-md backdrop-blur-xl shadow-2xl text-white">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/40 animate-pulse">
+            <Lock className="h-7 w-7" />
+          </div>
+          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-white">
+            Login Obrigatório
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Para participar no duelo 1v1, precisas de iniciar sessão com a tua conta.
+          </p>
+          <Link
+            href="/entrar?redirect=%2Fjogar%2Fduelo"
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-white shadow-lg shadow-purple-500/25 transition cursor-pointer"
+          >
+            Entrar com a Minha Conta
+          </Link>
+        </div>
       </div>
     )
   }

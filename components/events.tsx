@@ -1,8 +1,13 @@
-import Link from 'next/link'
+'use client'
+
+import React from 'react'
+import { useRouter } from 'next/navigation'
 import { Flag, Flame, Medal, Laugh, Clock, ChevronRight } from 'lucide-react'
 import { EVENTS, type GameEvent, type Tone } from '@/lib/game-data'
 import { SectionHeading } from '@/components/section-heading'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 const ICONS = { flag: Flag, flame: Flame, medal: Medal, laugh: Laugh }
 
@@ -38,15 +43,14 @@ function getEventSlug(title: string): string {
   if (t.includes('nacional')) return 'desafio-nacional'
   if (t.includes('portugal')) return 'portugal'
   if (t.includes('desporto')) return 'futebol-portugues'
-  if (t.includes('maluco')) return 'modo-maluco'
-  return 'desafio-nacional'
+  return 'modo-maluco'
 }
 
 export function Events() {
   return (
-    <section id="eventos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section id="eventos" className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-transparent">
       <SectionHeading
-        eyebrow="Por tempo limitado"
+        eyebrow="Competições"
         title="Eventos"
         description="Desafios especiais com recompensas dobradas. Participa antes que o tempo acabe."
       />
@@ -61,15 +65,28 @@ export function Events() {
 }
 
 function EventCard({ event }: { event: GameEvent }) {
+  const router = useRouter()
+  const { user } = useAuth()
   const Icon = ICONS[event.icon]
   const s = TONE_STYLES[event.tone]
   const eventSlug = getEventSlug(event.title)
+  const targetUrl = `/jogar?cat=${eventSlug}&event=${encodeURIComponent(event.title)}`
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(targetUrl)}`)
+      return
+    }
+    router.push(targetUrl)
+  }
 
   return (
-    <Link
-      href={`/jogar?cat=${eventSlug}&event=${encodeURIComponent(event.title)}`}
+    <button
+      type="button"
+      onClick={handleClick}
       className={cn(
-        'group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 cursor-pointer shadow-lg',
+        'group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 cursor-pointer shadow-lg text-left',
         s.wash,
         s.ring,
       )}
@@ -117,6 +134,6 @@ function EventCard({ event }: { event: GameEvent }) {
           <ChevronRight className="h-5 w-5" />
         </span>
       </div>
-    </Link>
+    </button>
   )
 }

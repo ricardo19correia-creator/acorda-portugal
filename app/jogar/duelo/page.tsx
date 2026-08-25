@@ -1,13 +1,15 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
-import { ArrowLeft, Swords, Sparkles } from 'lucide-react'
+import { ArrowLeft, Swords, Sparkles, Lock } from 'lucide-react'
+import { useAuth } from '@/components/auth-provider'
+import { auth } from '@/lib/firebase'
 
 // IMAGEM DE FUNDO FIXA E PERMANENTE DA ARENA 1v1
 const DUEL_ARENA_BACKGROUND = '/images/arenas/arena-1v1.png'
@@ -18,6 +20,14 @@ function DuelPageContent() {
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
+  const { user, authResolved } = useAuth()
+
+  // Bloqueio Absoluto: Redirecionar utilizadores não autenticados
+  useEffect(() => {
+    if (authResolved && !user && !auth?.currentUser) {
+      router.replace('/entrar?redirect=%2Fjogar%2Fduelo')
+    }
+  }, [authResolved, user, router])
 
   // Prioridade ao ID da URL para navegação limpa na revanche
   const effectiveDuelId = duelIdFromUrl || activeDuelId
@@ -25,6 +35,42 @@ function DuelPageContent() {
   const handleDuelChange = (newDuelId: string) => {
     setActiveDuelId(newDuelId)
     router.push(`/jogar/duelo?id=${newDuelId}`)
+  }
+
+  const handleOpenMatchmaking = () => {
+    if (!user && !auth?.currentUser) {
+      router.push('/entrar?redirect=%2Fjogar%2Fduelo')
+      return
+    }
+    setModalOpen(true)
+  }
+
+  if (authResolved && !user && !auth?.currentUser) {
+    return (
+      <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
+        <SiteHeader />
+        <main className="flex-1 mx-auto w-full max-w-md px-4 py-12 flex items-center justify-center">
+          <div className="rounded-4xl border border-purple-500/40 bg-slate-900/95 p-8 text-center backdrop-blur-xl shadow-2xl">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-purple-500/20 text-purple-400 border border-purple-500/40 animate-pulse">
+              <Lock className="h-8 w-8" />
+            </div>
+            <h2 className="font-display text-2xl font-black uppercase tracking-tight text-white">
+              Login Obrigatório
+            </h2>
+            <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Os Duelos 1v1 exigem autenticação para registar vitórias, pontuações e atribuir recompensas no ranking nacional.
+            </p>
+            <Link
+              href="/entrar?redirect=%2Fjogar%2Fduelo"
+              className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-white shadow-lg shadow-purple-500/25 transition cursor-pointer"
+            >
+              Iniciar Sessão para Jogar 1v1
+            </Link>
+          </div>
+        </main>
+        <SiteFooter />
+      </div>
+    )
   }
 
   if (!effectiveDuelId) {
@@ -74,7 +120,7 @@ function DuelPageContent() {
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                   type="button"
-                  onClick={() => setModalOpen(true)}
+                  onClick={handleOpenMatchmaking}
                   className="button-game-purple w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-10 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider cursor-pointer"
                 >
                   <Swords className="h-5 w-5 fill-current" />
