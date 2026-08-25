@@ -3,7 +3,7 @@ import { getFirestore, collection, getDocs, deleteDoc, doc, setDoc } from 'fireb
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE',
-  authDomain: 'desafio-nacional-5fe71.firebaseapp.com',
+  authDomain: 'acordaportugal.pt',
   projectId: 'desafio-nacional-5fe71',
   storageBucket: 'desafio-nacional-5fe71.firebasestorage.app',
   messagingSenderId: '130539395859',
