@@ -2,8 +2,6 @@
 
 import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { BackgroundFx } from '@/components/background-fx'
-import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
@@ -12,13 +10,15 @@ import Link from 'next/link'
 import { ArrowLeft, Swords, Sparkles } from 'lucide-react'
 import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
 
+const DEFAULT_ARENA_BG = '/arenas/arena-1.jpg'
+
 function DuelPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
-  const [arenaImage, setArenaImage] = useState<string>('/arenas/arena-1.jpg')
+  const [arenaImage, setArenaImage] = useState<string>(DEFAULT_ARENA_BG)
 
   // Prioridade ao ID da URL para navegação limpa na revanche
   const effectiveDuelId = duelIdFromUrl || activeDuelId
@@ -41,10 +41,10 @@ function DuelPageContent() {
           if (catalogItem?.image) {
             setArenaImage(catalogItem.image)
           } else {
-            setArenaImage('/arenas/arena-1.jpg')
+            setArenaImage(DEFAULT_ARENA_BG)
           }
         } else {
-          setArenaImage('/arenas/arena-1.jpg')
+          setArenaImage(DEFAULT_ARENA_BG)
         }
       }
     }
@@ -59,10 +59,26 @@ function DuelPageContent() {
     }
   }, [])
 
+  const currentBg = arenaImage || DEFAULT_ARENA_BG
+
   if (!effectiveDuelId) {
     return (
-      <div className="relative min-h-screen bg-transparent flex flex-col justify-between">
-        <BackgroundFx />
+      <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
+        {/* 1. Imagem de Fundo da Arena */}
+        <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={currentBg}
+            alt="Cenário da Arena"
+            className="w-full h-full object-cover object-center"
+            onError={(e) => {
+              ;(e.target as HTMLImageElement).src = DEFAULT_ARENA_BG
+            }}
+          />
+          {/* Overlay para manter o texto 100% legível */}
+          <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]" />
+        </div>
+
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
 
@@ -123,14 +139,24 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 flex flex-col justify-between overflow-x-hidden">
-      {/* Fundo Sincronizado do Duelo 1v1 */}
-      <BackgroundFx
-        variant="duel"
-        customImage={arenaImage}
-        contrastIntensity="subtle"
-      />
-      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
+    <div className="relative min-h-screen w-full bg-transparent flex flex-col justify-between overflow-x-hidden">
+      {/* 1. Imagem de Fundo da Arena com Prioridade Máxima */}
+      <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={currentBg}
+          alt="Cenário da Arena"
+          className="w-full h-full object-cover object-center"
+          onError={(e) => {
+            ;(e.target as HTMLImageElement).src = DEFAULT_ARENA_BG
+          }}
+        />
+        {/* Overlay para manter o texto 100% legível */}
+        <div className="absolute inset-0 bg-black/45 backdrop-blur-[1px]" />
+      </div>
+
+      {/* 2. Conteúdo do Jogo (Transparente) */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between bg-transparent">
         <DuelArena
           key={effectiveDuelId}
           duelId={effectiveDuelId}

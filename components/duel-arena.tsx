@@ -64,6 +64,7 @@ import { GameExitControl } from '@/components/game-exit-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
+import { getArenaById } from '@/data/shopArenas'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { calculate5050Eliminated, generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
@@ -426,8 +427,12 @@ export function DuelArena({
       )
       setDuel(updatedDuel)
 
-      if (updatedDuel.arenaImage && onArenaLoaded) {
-        onArenaLoaded(updatedDuel.arenaImage)
+      if (onArenaLoaded) {
+        const resolvedImage =
+          updatedDuel.arenaImage ||
+          (updatedDuel.arenaId ? getArenaById(updatedDuel.arenaId)?.imagePath : null) ||
+          '/arenas/arena-1.jpg'
+        onArenaLoaded(resolvedImage)
       }
 
       // Se a revanche foi aceite, redirecionar ambos os jogadores para o novo duelo
