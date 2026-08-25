@@ -347,10 +347,10 @@ export function QuizScreen({
   const [streak, setStreak] = useState(0)
   const [bestStreak, setBestStreak] = useState(0)
 
-  // Power-Ups Stock State
-  const [stock5050, setStock5050] = useState<number>(5)
-  const [stockFreeze, setStockFreeze] = useState<number>(3)
-  const [stockPublicVote, setStockPublicVote] = useState<number>(3)
+  // Power-Ups Stock State (Zero por defeito se não comprados)
+  const [stock5050, setStock5050] = useState<number>(0)
+  const [stockFreeze, setStockFreeze] = useState<number>(0)
+  const [stockPublicVote, setStockPublicVote] = useState<number>(0)
   const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
   const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
@@ -407,9 +407,9 @@ export function QuizScreen({
   useEffect(() => {
     const syncStock = () => {
       try {
-        let h5050 = 5
-        let fTime = 3
-        let pVote = 3
+        let h5050 = 0
+        let fTime = 0
+        let pVote = 0
 
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
@@ -432,11 +432,11 @@ export function QuizScreen({
           if (typeof profile.consumables.help5050 === 'number') h5050 = profile.consumables.help5050
           if (typeof profile.consumables.freezeTime === 'number') fTime = profile.consumables.freezeTime
           if (typeof (profile.consumables as any).publicVote === 'number') pVote = (profile.consumables as any).publicVote
-        } else if ((profile as any)?.inventory) {
-          const inv = (profile as any).inventory
-          if (typeof inv.consumable_50_50 === 'number') h5050 = inv.consumable_50_50
-          if (typeof inv.consumable_congelar_tempo === 'number') fTime = inv.consumable_congelar_tempo
-          if (typeof inv.consumable_public_vote === 'number') pVote = inv.consumable_public_vote
+        } else if ((profile as any)?.inventory?.utilities) {
+          const utils = (profile as any).inventory.utilities
+          if (typeof utils.fiftyFifty === 'number') h5050 = utils.fiftyFifty
+          if (typeof utils.freezeTime === 'number') fTime = utils.freezeTime
+          if (typeof utils.publicVote === 'number') pVote = utils.publicVote
         }
 
         setStock5050(h5050)

@@ -37,9 +37,6 @@ import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 const PODIUM_ORDER = [1, 0, 2] // 2º Lugar (Esquerda), 1º Lugar (Centro), 3º Lugar (Direita)
 
 export default function RankingsPage() {

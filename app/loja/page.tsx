@@ -24,6 +24,7 @@ import { playEmoteSound } from '@/lib/sound-engine'
 import { useEconomy } from '@/context/economy-context'
 import { ANIMATED_FRAMES } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
+import { DEFAULT_AVATAR_ID } from '@/data/constants'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -185,21 +186,22 @@ export default function LojaPage() {
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
-    help5050: 5,
-    freezeTime: 3,
-    publicVote: 3,
+    help5050: 0,
+    freezeTime: 0,
+    publicVote: 0,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
-    avatars: ['camoes_2050'],
-    frames: [],
+    avatars: [DEFAULT_AVATAR_ID],
+    frames: ['default'],
     arenas: ['arena_1'],
-    titles: ['tit_filho_portugal'],
-    taunts: ['pack_basico', 'PROV_010'],
+    titles: ['tit_novico'],
+    taunts: ['pack_basico'],
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
-    'camoes_2050',
+    DEFAULT_AVATAR_ID,
     'arena_1',
-    'PROV_010',
+    'tit_novico',
+    'pack_basico',
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
 
@@ -225,48 +227,8 @@ export default function LojaPage() {
         }
         const savedTitle = localStorage.getItem('equipped_title')
         if (savedTitle) setEquippedTitle(savedTitle)
-
-        const savedConsumables = localStorage.getItem('user_consumables')
-        if (savedConsumables) {
-          try {
-            const parsedCons = JSON.parse(savedConsumables)
-            if (parsedCons) setConsumables((prev) => ({ ...prev, ...parsedCons }))
-          } catch (e) {
-            console.error(e)
-          }
-        }
-
-        const savedInventory = localStorage.getItem('user_inventory')
-        if (savedInventory) {
-          try {
-            const parsedInv = JSON.parse(savedInventory)
-            if (parsedInv) {
-              setInventory((prev) => ({
-                avatars: Array.from(new Set([...prev.avatars, ...(parsedInv.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(parsedInv.frames || [])])),
-                arenas: Array.from(new Set([...prev.arenas, ...(parsedInv.arenas || [])])),
-                titles: Array.from(new Set([...prev.titles, ...(parsedInv.titles || [])])),
-                taunts: Array.from(new Set([...prev.taunts, ...(parsedInv.taunts || []), ...(parsedInv.emotes || [])])),
-              }))
-            }
-          } catch (e) {
-            console.error(e)
-          }
-        }
-
-        const savedUnlocked = localStorage.getItem('user_unlocked_items')
-        if (savedUnlocked) {
-          try {
-            const parsed = JSON.parse(savedUnlocked)
-            if (Array.isArray(parsed)) {
-              setUnlockedItems((prev) => Array.from(new Set([...prev, ...parsed])))
-            }
-          } catch (e) {
-            console.error(e)
-          }
-        }
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        console.error(err)
       }
     }
 
@@ -285,13 +247,13 @@ export default function LojaPage() {
                 ...(data.inventory.taunts || []),
                 ...(data.inventory.emotes || []),
               ]))
-              setInventory((prev) => ({
-                avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(data.inventory.frames || []), ...(data.unlockedFrames || [])])),
-                arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
-                titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
+              setInventory({
+                avatars: Array.isArray(data.inventory.avatars) && data.inventory.avatars.length > 0 ? data.inventory.avatars : [DEFAULT_AVATAR_ID],
+                frames: Array.isArray(data.inventory.frames) ? data.inventory.frames : ['default'],
+                arenas: Array.isArray(data.inventory.arenas) && data.inventory.arenas.length > 0 ? data.inventory.arenas : ['arena_1'],
+                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : ['tit_novico'],
                 taunts: invTaunts,
-              }))
+              })
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
               localStorage.setItem('user_inventory_taunts', JSON.stringify(invTaunts))
             }
@@ -300,15 +262,21 @@ export default function LojaPage() {
               setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
             }
             if (data.consumables) {
-              setConsumables((prev) => ({ ...prev, ...data.consumables }))
+              setConsumables({
+                help5050: typeof data.consumables.help5050 === 'number' ? data.consumables.help5050 : 0,
+                freezeTime: typeof data.consumables.freezeTime === 'number' ? data.consumables.freezeTime : 0,
+                publicVote: typeof data.consumables.publicVote === 'number' ? data.consumables.publicVote : 0,
+              })
               localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
             } else if (data.inventory?.utilities) {
               const utils = data.inventory.utilities
               setConsumables({
-                help5050: utils.fiftyFifty || 5,
-                freezeTime: utils.freezeTime || 3,
-                publicVote: utils.publicVote || 3,
+                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : 0,
+                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : 0,
+                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : 0,
               })
+            } else {
+              setConsumables({ help5050: 0, freezeTime: 0, publicVote: 0 })
             }
             if (data.equippedAvatar || data.equipped?.avatar) {
               const av = data.equipped?.avatar || data.equippedAvatar
@@ -387,45 +355,31 @@ export default function LojaPage() {
       const isFounder = Boolean(localStorage.getItem('user_is_founder') === 'true')
       if (isFounder) return true
     }
-    if (item.isExclusive) {
-      if (item.category === 'titulos') {
-        return (
-          inventory.titles.includes(item.id) ||
-          inventory.titles.includes(item.name) ||
-          unlockedItems.includes(item.id) ||
-          unlockedItems.includes(item.name)
-        )
-      }
-      if (item.category === 'arenas') {
-        return inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
-      }
-      return unlockedItems.includes(item.id) || inventory.avatars.includes(item.id)
-    }
     if (item.category === 'molduras') {
       return (
+        item.id === 'default' ||
         unlockedItems.includes(item.id) ||
         inventory.frames.includes(item.id) ||
         (inventory as any)?.unlockedFrames?.includes(item.id)
       )
     }
-    if (item.priceValue === 0 && !item.isExclusive) return true
-    if (unlockedItems.includes(item.id) || unlockedItems.includes(item.name)) return true
     if (item.category === 'avatars') {
-      const isFree = item.id === 'camoes_2050' || item.priceValue === 0
+      const isFree = item.id === DEFAULT_AVATAR_ID
       return isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
     }
-    if (item.category === 'arenas' && (inventory.arenas.includes(item.id) || item.priceValue === 0)) return true
-    if (item.category === 'titulos' && (inventory.titles.includes(item.id) || inventory.titles.includes(item.name))) return true
+    if (item.category === 'arenas') {
+      const isDefault = item.id === 'arena_1'
+      return isDefault || inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
+    }
+    if (item.category === 'titulos') {
+      const isDefault = item.id === 'tit_novico' || item.name === 'Noviço da Nação'
+      return isDefault || inventory.titles.includes(item.id) || inventory.titles.includes(item.name) || unlockedItems.includes(item.id) || unlockedItems.includes(item.name)
+    }
     if (item.category === 'taunts') {
-      let localEmotes: string[] = []
-      try {
-        localEmotes = JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]')
-      } catch {}
       return (
-        item.priceValue === 0 ||
-        unlockedItems.includes(item.id) ||
+        item.id === 'pack_basico' ||
         inventory.taunts?.includes(item.id) ||
-        localEmotes.includes(item.id) ||
+        unlockedItems.includes(item.id) ||
         DEFAULT_EQUIPPED_EMOTES.includes(item.id)
       )
     }

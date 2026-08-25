@@ -237,7 +237,7 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
     console.warn('[AUTH] Aviso ao terminar sessão no Firebase:', err)
   }
 
-  // Limpeza segura de dados de sessão em localStorage e sessionStorage
+  // Limpeza segura e total de dados de sessão em localStorage e sessionStorage
   if (typeof window !== 'undefined') {
     try {
       const keysToRemove = [
@@ -246,12 +246,29 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
         'user_display_name',
         'user_district',
         'user_equipped_avatar',
+        'user_equipped_avatar_id',
         'equipped_avatar_id',
+        'user_equipped_frame',
         'equipped_arena',
         'equipped_arena_image',
         'equipped_title',
+        'user_equipped_title',
+        'equipped_taunt_id',
         'equipped_emotes',
         'equipped_taunts',
+        'user_inventory',
+        'user_inventory_taunts',
+        'user_inventory_emotes',
+        'user_unlocked_items',
+        'user_consumables',
+        'user_claimed_achievements',
+        'user_help5050',
+        'user_freezeTime',
+        'user_publicVote',
+        'user_is_founder',
+        'ap_user_inventory_v3',
+        'ap_user_inventory',
+        'ap_equipped_items',
         'ap_auth_token',
         'acorda_auth_redirect_target',
         'guest_duel_session_id',
@@ -302,9 +319,7 @@ export async function createNewUserDocument(
   const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
   const { db } = await import('@/lib/firebase')
   const { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } = await import('@/data/constants')
-  const { REAL_AVATARS } = await import('@/lib/avatars')
 
-  const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id)
   const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
   const photoURL = customAvatarUrl || user.photoURL || DEFAULT_AVATAR_URL
 
@@ -321,8 +336,8 @@ export async function createNewUserDocument(
     districtLocked: true,
     level: 1,
     xp: 0,
-    coins: 50,
-    euros: 50,
+    coins: 100,
+    euros: 100,
     streak: 0,
     gamesPlayed: 0,
     wins: 0,
@@ -335,15 +350,21 @@ export async function createNewUserDocument(
     equippedTitle: 'Noviço da Nação',
     equippedFrame: 'default',
     unlockedFrames: ['default'],
-    unlockedAvatars: [photoURL, DEFAULT_AVATAR_URL],
+    unlockedAvatars: [DEFAULT_AVATAR_ID],
     unlockedAchievements: [],
+    claimedAchievements: {},
     badges: ['novico'],
     inventory: {
-      avatars: ALL_REAL_AVATAR_IDS,
+      avatars: [DEFAULT_AVATAR_ID],
       arenas: ['arena_1'],
       titles: ['tit_novico'],
       taunts: ['pack_basico'],
       frames: ['default'],
+      utilities: {
+        fiftyFifty: 0,
+        freezeTime: 0,
+        publicVote: 0,
+      },
     },
     equipped: {
       avatar: photoURL,
@@ -352,7 +373,11 @@ export async function createNewUserDocument(
       arena: 'arena_1',
       frameId: 'default',
     },
-    consumables: { help5050: 3, freezeTime: 2 },
+    consumables: {
+      help5050: 0,
+      freezeTime: 0,
+      publicVote: 0,
+    },
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   }

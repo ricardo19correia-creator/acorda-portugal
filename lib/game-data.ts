@@ -251,12 +251,14 @@ export type UserProfile = {
   totalQuestions: number
   bestStreak: number
   unlockedAchievements: string[]
+  claimedAchievements?: Record<string, boolean>
   badges?: string[]
   equippedTitle?: string
   equippedFrame?: string
   consumables?: {
     help5050?: number
     freezeTime?: number
+    publicVote?: number
   }
   inventory?: any
   equipped?: EquippedCosmetics

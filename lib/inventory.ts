@@ -18,15 +18,13 @@ export interface InventoryState {
 
 const STORAGE_KEY = 'ap_user_inventory_v3';
 
-const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id);
-
 export const getInventory = (): InventoryState => {
   if (typeof window === 'undefined') {
     return {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: ALL_REAL_AVATAR_IDS,
+      ownedAvatars: [DEFAULT_AVATAR.id],
       equippedAvatar: DEFAULT_AVATAR.id,
     };
   }
@@ -62,14 +60,16 @@ export const getInventory = (): InventoryState => {
         equippedTheme: legacyTheme,
         isVip: legacyOwned.includes('vip_founder_pass'),
         vipTitle: legacyOwned.includes('vip_founder_pass') ? 'Fundador da Nação' : undefined,
-        ownedAvatars: ALL_REAL_AVATAR_IDS,
-        equippedAvatar: normalizedEquippedAvatar,
+        ownedAvatars: [normalizedEquippedAvatar || DEFAULT_AVATAR.id],
+        equippedAvatar: normalizedEquippedAvatar || DEFAULT_AVATAR.id,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
       return initial;
     }
     const parsed = JSON.parse(data);
-    parsed.ownedAvatars = ALL_REAL_AVATAR_IDS;
+    if (!Array.isArray(parsed.ownedAvatars) || parsed.ownedAvatars.length === 0) {
+      parsed.ownedAvatars = [DEFAULT_AVATAR.id];
+    }
     parsed.equippedAvatar = normalizeAvatarId(parsed.equippedAvatar);
     return parsed;
   } catch (e) {
@@ -77,7 +77,7 @@ export const getInventory = (): InventoryState => {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: ALL_REAL_AVATAR_IDS,
+      ownedAvatars: [DEFAULT_AVATAR.id],
       equippedAvatar: DEFAULT_AVATAR.id,
     };
   }
@@ -86,7 +86,6 @@ export const getInventory = (): InventoryState => {
 export const saveInventory = (state: InventoryState) => {
   if (typeof window === 'undefined') return;
   try {
-    state.ownedAvatars = ALL_REAL_AVATAR_IDS;
     state.equippedAvatar = normalizeAvatarId(state.equippedAvatar);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -125,7 +124,11 @@ export const unlockItem = (itemId: string, isVipPass: boolean = false) => {
 
 export const unlockAvatar = (avatarId: string) => {
   const current = getInventory();
-  current.ownedAvatars = ALL_REAL_AVATAR_IDS;
+  const normalizedId = normalizeAvatarId(avatarId);
+  if (!current.ownedAvatars) current.ownedAvatars = [DEFAULT_AVATAR.id];
+  if (!current.ownedAvatars.includes(normalizedId)) {
+    current.ownedAvatars.push(normalizedId);
+  }
   saveInventory(current);
 };
 
@@ -139,7 +142,6 @@ export const equipAvatar = (avatarId: string) => {
   const current = getInventory();
   const normalizedId = normalizeAvatarId(avatarId);
   current.equippedAvatar = normalizedId;
-  current.ownedAvatars = ALL_REAL_AVATAR_IDS;
 
   if (typeof window !== 'undefined') {
     const av = getAvatarById(normalizedId);

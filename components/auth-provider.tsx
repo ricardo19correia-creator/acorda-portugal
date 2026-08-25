@@ -38,8 +38,6 @@ export type AuthState = {
 
 const AuthContext = createContext<AuthState | null>(null)
 
-const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id)
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [authResolved, setAuthResolved] = useState(false)
@@ -156,7 +154,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 badges: Array.isArray(data.badges) ? data.badges : ['novico'],
                 inventory: {
                   ...(data.inventory || {}),
-                  avatars: ALL_REAL_AVATAR_IDS,
+                  avatars: Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [DEFAULT_AVATAR.id],
+                  arenas: Array.isArray(data.inventory?.arenas) ? data.inventory.arenas : ['arena_1'],
+                  titles: Array.isArray(data.inventory?.titles) ? data.inventory.titles : ['tit_novico'],
+                  taunts: Array.isArray(data.inventory?.taunts) ? data.inventory.taunts : ['pack_basico'],
+                  frames: Array.isArray(data.inventory?.frames) ? data.inventory.frames : ['default'],
+                  utilities: {
+                    fiftyFifty: data.inventory?.utilities?.fiftyFifty ?? data.consumables?.help5050 ?? 0,
+                    freezeTime: data.inventory?.utilities?.freezeTime ?? data.consumables?.freezeTime ?? 0,
+                    publicVote: data.inventory?.utilities?.publicVote ?? data.consumables?.publicVote ?? 0,
+                  },
                 },
                 equipped: {
                   ...(data.equipped || {}),
@@ -165,9 +172,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   title: titleVal,
                   arena: (data.equipped as any)?.arena || 'arena_1',
                 },
-                consumables: data.consumables || {
-                  help5050: data.inventory?.utilities?.fiftyFifty || 0,
-                  freezeTime: data.inventory?.utilities?.freezeTime || 0,
+                consumables: {
+                  help5050: data.consumables?.help5050 ?? data.inventory?.utilities?.fiftyFifty ?? 0,
+                  freezeTime: data.consumables?.freezeTime ?? data.inventory?.utilities?.freezeTime ?? 0,
+                  publicVote: data.consumables?.publicVote ?? data.inventory?.utilities?.publicVote ?? 0,
                 },
               }
 
@@ -238,23 +246,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 equippedTitle: 'Noviço da Nação',
                 equippedFrame: 'default',
                 unlockedFrames: ['default'],
-                unlockedAvatars: [fallbackAvatar, DEFAULT_AVATAR.image],
-                streak: 0,
-                gamesPlayed: 0,
-                wins: 0,
-                losses: 0,
-                correctAnswers: 0,
-                incorrectAnswers: 0,
-                totalQuestions: 0,
-                bestStreak: 0,
+                unlockedAvatars: [fallbackAvatarId],
                 unlockedAchievements: [],
+                claimedAchievements: {},
                 badges: ['novico'],
                 inventory: {
-                  avatars: ALL_REAL_AVATAR_IDS,
+                  avatars: [fallbackAvatarId],
                   arenas: ['arena_1'],
                   titles: ['tit_novico'],
                   taunts: ['pack_basico'],
                   frames: ['default'],
+                  utilities: {
+                    fiftyFifty: 0,
+                    freezeTime: 0,
+                    publicVote: 0,
+                  },
                 },
                 equipped: {
                   avatar: fallbackAvatar,
@@ -263,7 +269,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   arena: 'arena_1',
                   frameId: 'default',
                 },
-                consumables: { help5050: 3, freezeTime: 2 },
+                consumables: {
+                  help5050: 0,
+                  freezeTime: 0,
+                  publicVote: 0,
+                },
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),
               }
@@ -308,15 +318,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 badges: ['novico'],
                 equippedTitle: 'Noviço da Nação',
                 inventory: {
-                  avatars: ALL_REAL_AVATAR_IDS,
+                  avatars: [fallbackAvatarId],
                   arenas: ['arena_1'],
                   titles: ['tit_novico'],
                   taunts: ['pack_basico'],
+                  frames: ['default'],
+                  utilities: {
+                    fiftyFifty: 0,
+                    freezeTime: 0,
+                    publicVote: 0,
+                  },
                 },
                 equipped: {
                   avatar: fallbackAvatar,
                   title: 'Noviço da Nação',
                   arena: 'arena_1',
+                },
+                consumables: {
+                  help5050: 0,
+                  freezeTime: 0,
+                  publicVote: 0,
                 },
               })
               setProfileLoading(false)

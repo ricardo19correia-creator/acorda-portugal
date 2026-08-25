@@ -48,7 +48,7 @@ function createDefaultUserProfile(user: User): UserProfile {
     level: 1,
     xp: 0,
     euros: 100,
-    district: 'Vila Real',
+    district: '',
     gamesPlayed: 0,
     correctAnswers: 0,
     incorrectAnswers: 0,

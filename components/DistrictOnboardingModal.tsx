@@ -25,7 +25,6 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
     try {
       const cleanName = (user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
       const photoURL = user.photoURL || DEFAULT_AVATAR_URL
-      const ALL_REAL_AVATAR_IDS = REAL_AVATARS.map((a) => a.id)
 
       // 1. Grava o documento completo do utilizador no Firestore
       await setDoc(
@@ -49,15 +48,21 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           equippedTitle: 'Noviço da Nação',
           equippedFrame: 'default',
           unlockedFrames: ['default'],
-          unlockedAvatars: [photoURL, DEFAULT_AVATAR_URL],
+          unlockedAvatars: [DEFAULT_AVATAR_ID],
           unlockedAchievements: [],
+          claimedAchievements: {},
           badges: ['novico'],
           inventory: {
-            avatars: ALL_REAL_AVATAR_IDS,
+            avatars: [DEFAULT_AVATAR_ID],
             arenas: ['arena_1'],
             titles: ['tit_novico'],
             taunts: ['pack_basico'],
             frames: ['default'],
+            utilities: {
+              fiftyFifty: 0,
+              freezeTime: 0,
+              publicVote: 0,
+            },
           },
           equipped: {
             avatar: photoURL,
@@ -66,7 +71,11 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             arena: 'arena_1',
             frameId: 'default',
           },
-          consumables: { help5050: 3, freezeTime: 2 },
+          consumables: {
+            help5050: 0,
+            freezeTime: 0,
+            publicVote: 0,
+          },
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
         },

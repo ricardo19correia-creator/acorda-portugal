@@ -622,6 +622,7 @@ export async function buyShopItem(userId: string, itemId: string): Promise<Purch
       // 1. Atualizar documento do utilizador
       transaction.update(userRef, {
         euros: newBalance,
+        coins: newBalance,
         inventory: updatedInventory,
         updatedAt: serverTimestamp(),
       })

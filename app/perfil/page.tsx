@@ -40,9 +40,9 @@ import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityB
 import { ANIMATED_FRAMES, type AnimatedFrame } from '@/data/frames'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
-import { DISTRICT_MAP } from '@/lib/district-map'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
+import { DEFAULT_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 
@@ -159,39 +159,29 @@ function PerfilContent() {
   // Conquistas Reclamadas
   const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
 
-  // Consumíveis & Inventário Reais
+  // Consumíveis & Inventário Reais (Zero por defeito se não adquiridos)
   const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
-    help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? (profile as any)?.consumables?.help5050 ?? 5,
-    freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? (profile as any)?.consumables?.freezeTime ?? 3,
-    publicVote: (profile as any)?.inventory?.utilities?.publicVote ?? (profile as any)?.consumables?.publicVote ?? 3,
+    help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? (profile as any)?.consumables?.help5050 ?? 0,
+    freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? (profile as any)?.consumables?.freezeTime ?? 0,
+    publicVote: (profile as any)?.inventory?.utilities?.publicVote ?? (profile as any)?.consumables?.publicVote ?? 0,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const saved = JSON.parse(localStorage.getItem('user_inventory') || '{}')
-        return {
-          avatars: Array.isArray(saved?.avatars) ? saved.avatars : (profile as any)?.inventory?.avatars || ['camoes_2050'],
-          frames: Array.isArray(saved?.frames) ? saved.frames : (profile as any)?.inventory?.frames || [],
-          arenas: Array.isArray(saved?.arenas) ? saved.arenas : (profile as any)?.inventory?.arenas || ['arena_1'],
-          titles: Array.isArray(saved?.titles) ? saved.titles : (profile as any)?.inventory?.titles || [],
-          taunts: Array.isArray(saved?.taunts) ? saved.taunts : (profile as any)?.inventory?.taunts || ['pack_basico'],
-        }
-      } catch {}
-    }
     return {
-      avatars: (profile as any)?.inventory?.avatars || ['camoes_2050'],
-      frames: (profile as any)?.inventory?.frames || [],
-      arenas: (profile as any)?.inventory?.arenas || ['arena_1'],
-      titles: (profile as any)?.inventory?.titles || [],
-      taunts: (profile as any)?.inventory?.taunts || ['pack_basico'],
+      avatars: Array.isArray((profile as any)?.inventory?.avatars) && (profile as any).inventory.avatars.length > 0 ? (profile as any).inventory.avatars : [DEFAULT_AVATAR_ID],
+      frames: Array.isArray((profile as any)?.inventory?.frames) ? (profile as any).inventory.frames : ['default'],
+      arenas: Array.isArray((profile as any)?.inventory?.arenas) && (profile as any).inventory.arenas.length > 0 ? (profile as any).inventory.arenas : ['arena_1'],
+      titles: Array.isArray((profile as any)?.inventory?.titles) && (profile as any).inventory.titles.length > 0 ? (profile as any).inventory.titles : ['tit_novico'],
+      taunts: Array.isArray((profile as any)?.inventory?.taunts) ? (profile as any).inventory.taunts : ['pack_basico'],
     }
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>(() => [
-    'camoes_2050',
+    DEFAULT_AVATAR_ID,
+    'arena_1',
+    'tit_novico',
     ...((profile as any)?.inventory?.avatars || []),
-    ...((profile as any)?.inventory?.arenas || ['arena_1']),
+    ...((profile as any)?.inventory?.arenas || []),
     ...((profile as any)?.inventory?.titles || []),
-    ...((profile as any)?.inventory?.taunts || ['pack_basico']),
+    ...((profile as any)?.inventory?.taunts || []),
   ])
 
   // Modais de Ação
@@ -482,57 +472,15 @@ function PerfilContent() {
         setUserXp(currentXp)
         setUserLevel(profile?.level ?? calculateLevelProgress(currentXp).currentLevel.level)
 
-        const savedClaimed = localStorage.getItem('user_claimed_achievements')
-        if (savedClaimed) {
-          try {
-            const parsed = JSON.parse(savedClaimed)
-            if (parsed) setClaimedAchievements((prev) => ({ ...prev, ...parsed }))
-          } catch (e) {
-            console.error(e)
-          }
+        if (profile?.claimedAchievements) {
+          setClaimedAchievements(profile.claimedAchievements)
         }
-
-        const savedConsumables = localStorage.getItem('user_consumables')
-        if (savedConsumables) {
-          try {
-            const parsed = JSON.parse(savedConsumables)
-            if (parsed) setConsumables((prev) => ({ ...prev, ...parsed }))
-          } catch (e) {
-            console.error(e)
-          }
-        }
-
-        const savedFrame = localStorage.getItem('user_equipped_frame')
-        if (savedFrame) setEquippedFrame(savedFrame)
-
-        const savedInventory = localStorage.getItem('user_inventory')
-        if (savedInventory) {
-          try {
-            const parsed = JSON.parse(savedInventory)
-            if (parsed) {
-              setInventory((prev) => ({
-                avatars: Array.from(new Set([...prev.avatars, ...(parsed.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(parsed.frames || [])])),
-                arenas: Array.from(new Set([...prev.arenas, ...(parsed.arenas || [])])),
-                titles: Array.from(new Set([...prev.titles, ...(parsed.titles || [])])),
-                taunts: Array.from(new Set([...prev.taunts, ...(parsed.taunts || ['pack_basico'])])),
-              }))
-            }
-          } catch (e) {
-            console.error(e)
-          }
-        }
-
-        const savedUnlocked = localStorage.getItem('user_unlocked_items')
-        if (savedUnlocked) {
-          try {
-            const parsed = JSON.parse(savedUnlocked)
-            if (Array.isArray(parsed)) {
-              setUnlockedItems((prev) => Array.from(new Set([...prev, ...parsed])))
-            }
-          } catch (e) {
-            console.error(e)
-          }
+        if (profile?.consumables) {
+          setConsumables({
+            help5050: typeof profile.consumables.help5050 === 'number' ? profile.consumables.help5050 : 0,
+            freezeTime: typeof profile.consumables.freezeTime === 'number' ? profile.consumables.freezeTime : 0,
+            publicVote: typeof (profile.consumables as any).publicVote === 'number' ? (profile.consumables as any).publicVote : 0,
+          })
         }
       } catch (err) {
         console.error(err)
@@ -568,28 +516,34 @@ function PerfilContent() {
               setUserLevel(data.level ?? calculateLevelProgress(data.xp).currentLevel.level)
             }
             if (data.claimedAchievements) {
-              setClaimedAchievements((prev) => ({ ...prev, ...data.claimedAchievements }))
+              setClaimedAchievements(data.claimedAchievements)
               localStorage.setItem('user_claimed_achievements', JSON.stringify(data.claimedAchievements))
             }
             if (data.consumables) {
-              setConsumables((prev) => ({ ...prev, ...data.consumables }))
+              setConsumables({
+                help5050: typeof data.consumables.help5050 === 'number' ? data.consumables.help5050 : 0,
+                freezeTime: typeof data.consumables.freezeTime === 'number' ? data.consumables.freezeTime : 0,
+                publicVote: typeof data.consumables.publicVote === 'number' ? data.consumables.publicVote : 0,
+              })
               localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
             } else if (data.inventory?.utilities) {
               const utils = data.inventory.utilities
               setConsumables({
-                help5050: utils.fiftyFifty || 5,
-                freezeTime: utils.freezeTime || 3,
-                publicVote: utils.publicVote || 3,
+                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : 0,
+                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : 0,
+                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : 0,
               })
+            } else {
+              setConsumables({ help5050: 0, freezeTime: 0, publicVote: 0 })
             }
             if (data.inventory) {
-              setInventory((prev) => ({
-                avatars: Array.from(new Set([...prev.avatars, ...(data.inventory.avatars || [])])),
-                frames: Array.from(new Set([...prev.frames, ...(data.inventory.frames || []), ...(data.unlockedFrames || [])])),
-                arenas: Array.from(new Set([...prev.arenas, ...(data.inventory.arenas || [])])),
-                titles: Array.from(new Set([...prev.titles, ...(data.inventory.titles || [])])),
-                taunts: Array.from(new Set([...prev.taunts, ...(data.inventory.taunts || ['pack_basico'])])),
-              }))
+              setInventory({
+                avatars: Array.isArray(data.inventory.avatars) && data.inventory.avatars.length > 0 ? data.inventory.avatars : [DEFAULT_AVATAR_ID],
+                frames: Array.isArray(data.inventory.frames) ? data.inventory.frames : ['default'],
+                arenas: Array.isArray(data.inventory.arenas) && data.inventory.arenas.length > 0 ? data.inventory.arenas : ['arena_1'],
+                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : ['tit_novico'],
+                taunts: Array.isArray(data.inventory.taunts) ? data.inventory.taunts : ['pack_basico'],
+              })
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
             }
             if (data.unlockedFrames && Array.isArray(data.unlockedFrames)) {
@@ -1153,31 +1107,32 @@ function PerfilContent() {
       let isUnlocked = false
 
       if (item.category === 'avatars') {
-        const isFree = item.id === 'camoes_2050' || !item.price || item.price === 0
+        const isFree = item.id === DEFAULT_AVATAR_ID
         isUnlocked = isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
       } else if (item.category === 'molduras') {
         isUnlocked =
+          item.id === 'default' ||
           inventory.frames.includes(item.id) ||
           unlockedItems.includes(item.id) ||
           ((profile as any)?.unlockedFrames && (profile as any)?.unlockedFrames.includes(item.id))
       } else if (item.category === 'arenas') {
-        const isDefault = item.id === 'arena_1' || item.price === 0
-        isUnlocked = inventory.arenas.includes(item.id) || unlockedItems.includes(item.id) || isDefault
+        const isDefault = item.id === 'arena_1'
+        isUnlocked = isDefault || inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
       } else if (item.category === 'titulos') {
-        const isDefault = item.id === 'tit_filho_portugal' || item.name === 'Filho de Portugal' || item.id === 'tit_novico' || item.name === 'Noviço da Nação'
+        const isDefault = item.id === 'tit_novico' || item.name === 'Noviço da Nação'
         isUnlocked = 
+          isDefault ||
           inventory.titles.includes(item.id) ||
           inventory.titles.includes(item.name) ||
           unlockedItems.includes(item.id) ||
-          unlockedItems.includes(item.name) ||
-          isDefault
+          unlockedItems.includes(item.name)
       }
 
       if (!isUnlocked) return false
       if (inventoryFilter === 'todos') return true
       return item.category === inventoryFilter
     })
-  }, [inventory, unlockedItems, inventoryFilter])
+  }, [inventory, unlockedItems, inventoryFilter, profile])
 
   // Estatísticas de Conquistas Calculadas Dinamicamente
   const userAchievements = useMemo(() => {
@@ -1185,52 +1140,52 @@ function PerfilContent() {
       let progress = 0
       switch (ach.statKey) {
         case 'gamesPlayed':
-          progress = profile?.gamesPlayed || 18
+          progress = profile?.gamesPlayed ?? 0
           break
         case 'questionsAnswered':
-          progress = profile?.questionsAnswered || 619
+          progress = profile?.questionsAnswered ?? (profile?.totalQuestions ?? 0)
           break
         case 'level':
           progress = userLevel
           break
         case 'duelsWon':
-          progress = (profile as any)?.stats?.duelsWon || profile?.wins || 14
+          progress = (profile as any)?.stats?.duelsWon ?? (profile?.wins ?? 0)
           break
         case 'bestStreak':
-          progress = profile?.bestStreak || 19
+          progress = profile?.bestStreak ?? 0
           break
         case 'historiaCorrect':
-          progress = (profile as any)?.categoryStats?.historia?.correct || 0
+          progress = (profile as any)?.categoryStats?.historia?.correct ?? 0
           break
         case 'geografiaCorrect':
-          progress = (profile as any)?.categoryStats?.geografia?.correct || 0
+          progress = (profile as any)?.categoryStats?.geografia?.correct ?? 0
           break
         case 'desportoCorrect':
-          progress = (profile as any)?.categoryStats?.desporto?.correct || 0
+          progress = (profile as any)?.categoryStats?.desporto?.correct ?? 0
           break
         case 'culturaCorrect':
-          progress = (profile as any)?.categoryStats?.cultura?.correct || 0
+          progress = (profile as any)?.categoryStats?.cultura?.correct ?? 0
           break
         case 'simbolosCorrect':
-          progress = (profile as any)?.categoryStats?.simbolos?.correct || 0
+          progress = (profile as any)?.categoryStats?.simbolos?.correct ?? 0
           break
         case 'districtGames':
-          progress = (profile as any)?.categoryStats?.distrito?.games || 0
+          progress = (profile as any)?.categoryStats?.distrito?.games ?? 0
           break
         case 'districtsFaced':
-          progress = (profile as any)?.stats?.districtsFaced || 0
+          progress = (profile as any)?.stats?.districtsFaced ?? 0
           break
         case 'coins':
           progress = userCoins
           break
         case 'malucoGames':
-          progress = (profile as any)?.categoryStats?.maluco?.games || 0
+          progress = (profile as any)?.categoryStats?.maluco?.games ?? 0
           break
         case 'malucoCorrect':
-          progress = (profile as any)?.categoryStats?.maluco?.correct || 0
+          progress = (profile as any)?.categoryStats?.maluco?.correct ?? 0
           break
         case 'isFounder':
-          progress = 1
+          progress = (profile as any)?.isFounder ? 1 : 0
           break
         case 'isTop10':
           progress = nationalRank ? (nationalRank <= 10 ? 1 : 0) : 0
@@ -1254,7 +1209,7 @@ function PerfilContent() {
         canClaim,
       }
     })
-  }, [profile, userLevel, userCoins, claimedAchievements])
+  }, [profile, userLevel, userCoins, claimedAchievements, nationalRank])
 
   // Métricas Globais de Conquistas
   const totalAchievementsCount = userAchievements.length
@@ -1941,11 +1896,11 @@ function PerfilContent() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {OFFICIAL_EMOTES.map((emote) => {
-                      let localEmotes: string[] = []
-                      try {
-                        localEmotes = JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]')
-                      } catch {}
-                      const isUnlocked = emote.price === 0 || unlockedItems.includes(emote.id) || localEmotes.includes(emote.id) || DEFAULT_EQUIPPED_EMOTES.includes(emote.id)
+                      const isUnlocked =
+                        emote.id === 'pack_basico' ||
+                        DEFAULT_EQUIPPED_EMOTES.includes(emote.id) ||
+                        inventory.taunts.includes(emote.id) ||
+                        unlockedItems.includes(emote.id)
                       const isEquipped = equippedEmotes.includes(emote.id)
 
                       return (
@@ -2054,7 +2009,7 @@ function PerfilContent() {
                 <p className="text-xs text-slate-400">Analisa a tua taxa de acerto e evolução em cada tema de Portugal.</p>
               </div>
               <span className="text-xs font-bold px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                Total: 619 Questões
+                Total: {profile?.totalQuestions || profile?.questionsAnswered || 0} Questões
               </span>
             </div>
 
