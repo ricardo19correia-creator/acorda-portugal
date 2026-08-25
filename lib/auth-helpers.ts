@@ -211,8 +211,6 @@ export const useCheckRedirectLogin = (
           console.log('[AUTH REDIRECT RESULT] Utilizador autenticado via redirect:', result.user.uid)
           const { registerUserSession } = await import('@/lib/session-manager')
           await registerUserSession(result.user)
-          const destination = getPostLoginRedirectTarget(defaultFallback)
-          router.push(destination)
         }
       })
       .catch((error) => {
@@ -221,7 +219,7 @@ export const useCheckRedirectLogin = (
           onError(mapAuthErrorMessage(error))
         }
       })
-  }, [router, defaultFallback, onError])
+  }, [onError])
 }
 
 /**

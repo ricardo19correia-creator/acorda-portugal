@@ -22,6 +22,7 @@ import {
   clearLocalSession,
 } from '@/lib/session-manager'
 import { SessionConflictModal } from '@/components/session-conflict-modal'
+import { DistrictOnboardingModal } from '@/components/DistrictOnboardingModal'
 
 export type AuthState = {
   user: User | null
@@ -107,7 +108,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               const xpVal = typeof data.xp === 'number' ? data.xp : 0
               const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
               const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
-              const districtVal = data.district || 'Portugal'
+              const districtVal = data.district && data.district !== 'Portugal' ? data.district : ''
+              const districtLockedVal = Boolean(data.districtLocked && data.district && data.district !== 'Portugal')
               const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
               
               // Resolução canónica e migração transparente dos 5 avatares reais
@@ -122,6 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 displayName: nameVal,
                 username: data.username || nameVal,
                 district: districtVal,
+                districtLocked: districtLockedVal,
                 equippedTitle: titleVal,
                 level: levelVal,
                 xp: xpVal,
@@ -164,33 +167,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_coins', String(coinsVal))
                 localStorage.setItem('user_euros', String(coinsVal))
                 localStorage.setItem('user_display_name', nameVal)
-                localStorage.setItem('user_district', districtVal)
+                if (districtVal) {
+                  localStorage.setItem('user_district', districtVal)
+                } else {
+                  localStorage.removeItem('user_district')
+                }
                 localStorage.setItem('user_equipped_avatar', avatarVal)
                 localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
                 localStorage.setItem('equipped_avatar_id', avatarIdVal)
                 localStorage.setItem('equipped_title', titleVal)
               }
 
-              // Sincronizar perfil público para ranking nacional com os 5 avatares reais
-              try {
-                const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
-                await setDoc(
-                  publicProfileRef,
-                  {
-                    uid: currentAuthUser.uid,
-                    displayName: nameVal,
-                    photoURL: avatarVal,
-                    avatarId: avatarIdVal,
-                    district: districtVal,
-                    level: levelVal,
-                    xp: xpVal,
-                    equippedTitle: titleVal,
-                    updatedAt: serverTimestamp(),
-                  },
-                  { merge: true },
-                )
-              } catch (syncErr) {
-                console.warn('[AUTH] Aviso ao sincronizar publicProfiles:', syncErr)
+              // Sincronizar perfil público para ranking nacional se tiver distrito definido
+              if (districtVal) {
+                try {
+                  const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
+                  await setDoc(
+                    publicProfileRef,
+                    {
+                      uid: currentAuthUser.uid,
+                      displayName: nameVal,
+                      photoURL: avatarVal,
+                      avatarId: avatarIdVal,
+                      district: districtVal,
+                      level: levelVal,
+                      xp: xpVal,
+                      equippedTitle: titleVal,
+                      updatedAt: serverTimestamp(),
+                    },
+                    { merge: true },
+                  )
+                } catch (syncErr) {
+                  console.warn('[AUTH] Aviso ao sincronizar publicProfiles:', syncErr)
+                }
               }
             } else {
               // 2. Criar apenas se o documento REALMENTE não existir, USANDO MERGE
@@ -207,12 +216,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 avatar: fallbackAvatar,
                 avatarId: fallbackAvatarId,
                 equippedAvatar: fallbackAvatarId,
-                district: 'Portugal',
+                district: '',
                 districtLocked: false,
                 level: 1,
                 xp: 0,
-                coins: 50,
-                euros: 50,
+                coins: 100,
+                euros: 100,
                 title: 'Noviço da Nação',
                 equippedTitle: 'Noviço da Nação',
                 equippedFrame: 'default',
@@ -253,33 +262,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 console.warn('[AUTH] Erro ao criar documento inicial com merge:', createErr)
               }
 
-              // Sincronizar perfil público inicial para novos utilizadores Google / Email
-              try {
-                const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
-                await setDoc(
-                  publicProfileRef,
-                  {
-                    uid: currentAuthUser.uid,
-                    displayName: fallbackName,
-                    photoURL: fallbackAvatar,
-                    avatarId: fallbackAvatarId,
-                    district: 'Portugal',
-                    level: 1,
-                    xp: 0,
-                    equippedTitle: 'Noviço da Nação',
-                    updatedAt: serverTimestamp(),
-                  },
-                  { merge: true },
-                )
-              } catch (pubErr) {
-                console.warn('[AUTH] Erro ao sincronizar perfil público inicial:', pubErr)
-              }
-
               if (typeof window !== 'undefined') {
                 localStorage.setItem('user_coins', '100')
                 localStorage.setItem('user_euros', '100')
                 localStorage.setItem('user_display_name', fallbackName)
-                localStorage.setItem('user_district', 'Portugal')
+                localStorage.removeItem('user_district')
                 localStorage.setItem('user_equipped_avatar', fallbackAvatar)
                 localStorage.setItem('user_equipped_avatar_id', fallbackAvatarId)
                 localStorage.setItem('equipped_avatar_id', fallbackAvatarId)
@@ -291,7 +278,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 displayName: fallbackName,
                 email: currentAuthUser.email || '',
                 photoURL: fallbackAvatar,
-                district: 'Portugal',
+                district: '',
+                districtLocked: false,
                 level: 1,
                 xp: 0,
                 coins: 100,
@@ -362,6 +350,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      {authResolved && user && profile && (!profile.district || profile.district === 'Portugal' || !profile.districtLocked) && (
+        <DistrictOnboardingModal
+          user={user}
+          onComplete={(newDistrict) => {
+            setProfile((prev) => (prev ? { ...prev, district: newDistrict, districtLocked: true } : null))
+          }}
+        />
+      )}
       <SessionConflictModal
         isOpen={isSessionConflictOpen}
         onConfirm={handleSessionConflictConfirm}
