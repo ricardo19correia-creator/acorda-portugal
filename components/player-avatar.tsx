@@ -16,16 +16,19 @@ export interface PlayerAvatarProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   className?: string
   isCurrentUser?: boolean
-  // Deprecated / removed
+  showBadge?: boolean
+  rank?: number
+  borderGlowColor?: string
+  onClick?: () => void
   frameId?: string | null
 }
 
 const SIZE_CLASSES = {
-  xs: 'h-7 w-7 rounded-xl',
-  sm: 'h-10 w-10 rounded-xl',
-  md: 'h-16 w-16 rounded-2xl',
-  lg: 'h-20 w-20 rounded-3xl',
-  xl: 'h-28 w-28 sm:h-32 sm:w-32 rounded-4xl',
+  xs: 'w-7 h-7 rounded-lg',
+  sm: 'w-10 h-10 rounded-xl',
+  md: 'w-16 h-16 rounded-2xl',
+  lg: 'w-24 h-24 rounded-3xl',
+  xl: 'w-32 h-32 rounded-[28px]',
 }
 
 export function PlayerAvatar({
@@ -38,6 +41,10 @@ export function PlayerAvatar({
   size = 'md',
   className,
   isCurrentUser = false,
+  showBadge = true,
+  rank,
+  borderGlowColor,
+  onClick,
 }: PlayerAvatarProps) {
   const [globalEquippedAvatar, setGlobalEquippedAvatar] = useState<string | null>(null)
 
@@ -78,30 +85,56 @@ export function PlayerAvatar({
   const effectivePhotoURL = getAvatarImage(rawCandidate)
   const effectiveName = displayName ?? name ?? profile?.displayName ?? 'Jogador'
 
-  const sizeClass = SIZE_CLASSES[size] || SIZE_CLASSES.md
   const hasAura = effectiveAuraId === 'prestige_aura_dourada'
 
+  const rankBorderClass =
+    rank === 1
+      ? 'border-2 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.6)]'
+      : rank === 2
+      ? 'border-2 border-slate-300 shadow-[0_0_15px_rgba(203,213,225,0.5)]'
+      : rank === 3
+      ? 'border-2 border-amber-700 shadow-[0_0_15px_rgba(180,83,9,0.5)]'
+      : isCurrentUser
+      ? 'border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]'
+      : 'border border-slate-700/80 shadow-md'
+
   return (
-    <div className={cn('relative inline-flex shrink-0 items-center justify-center select-none', className)}>
+    <div
+      onClick={onClick}
+      className={cn('relative inline-flex shrink-0 aspect-square select-none items-center justify-center', className)}
+    >
       {/* Radiant Golden Aura effect */}
       {hasAura && (
         <div className="pointer-events-none absolute -inset-2.5 rounded-full bg-gold/25 blur-md animate-pulse" />
       )}
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={effectivePhotoURL}
-        alt={effectiveName}
+      {/* Moldura Externa com Brilho / Squircle Padronizado */}
+      <div
         className={cn(
-          sizeClass,
-          'object-cover object-center transition-all duration-300 pointer-events-none border border-slate-700/80 shadow-md',
+          'w-full h-full p-0.5 overflow-hidden transition-all duration-300 bg-slate-950 flex items-center justify-center',
+          SIZE_CLASSES[size] || SIZE_CLASSES.md,
+          rankBorderClass,
         )}
-        onError={(e) => {
-          e.currentTarget.src = DEFAULT_AVATAR.image
-        }}
-      />
+        style={borderGlowColor ? { borderColor: borderGlowColor } : undefined}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={effectivePhotoURL}
+          alt={effectiveName}
+          className="w-full h-full object-cover object-center rounded-[inherit] pointer-events-none"
+          onError={(e) => {
+            e.currentTarget.src = DEFAULT_AVATAR.image
+          }}
+        />
+      </div>
+
+      {/* Crachá 'TU' (caso seja o próprio utilizador) */}
+      {isCurrentUser && showBadge && size !== 'xs' && (
+        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 font-black text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-md z-10 pointer-events-none leading-none">
+          TU
+        </span>
+      )}
     </div>
   )
 }
 export default PlayerAvatar
-

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars';
+import { UserAvatar } from '@/components/user-avatar';
 
 export interface PlayerProfileData {
   id: string;
@@ -49,21 +50,13 @@ export default function PlayerProfileModal({ player, isOpen, onClose }: PlayerPr
         {/* Cabeçalho do Perfil */}
         <div className="relative flex flex-col items-center text-center mt-2 mb-6">
           <div className="relative mb-3">
-            <div
-              className={`w-20 h-20 rounded-full border-2 overflow-hidden flex items-center justify-center bg-zinc-900 ${
-                player.isVip ? 'border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.4)]' : 'border-emerald-500/60'
-              }`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getAvatarImage(player.avatarUrl)}
-                alt={player.username}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = DEFAULT_AVATAR.image
-                }}
-              />
-            </div>
+            <UserAvatar
+              src={player.avatarUrl}
+              alt={player.username}
+              size="lg"
+              rank={player.rankPosition}
+              borderGlowColor={player.isVip ? '#fbbf24' : undefined}
+            />
             {player.rankPosition && (
               <span className="absolute -bottom-2 -right-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500 text-black border border-black shadow">
                 #{player.rankPosition}
