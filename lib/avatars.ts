@@ -171,8 +171,11 @@ const ALIAS_MAP: Record<string, string> = {
   'avatar-01': 'camoes_2050',
   camoes: 'camoes_2050',
   '/images/avatars/camoes-2050.jpg': 'camoes_2050',
+  '/images/avatars/camoes-2050.png': 'camoes_2050',
   '/imagens/avatar/camoes-2050.jpg': 'camoes_2050',
+  '/imagens/avatar/camoes-2050.png': 'camoes_2050',
   '/avatars/camoes-2050.jpg': 'camoes_2050',
+  '/avatars/camoes-2050.png': 'camoes_2050',
 
   // 2. Guardião dos Açores
   guardiao_acores: 'guardiao_acores',
@@ -182,10 +185,13 @@ const ALIAS_MAP: Record<string, string> = {
   'avatar-02': 'guardiao_acores',
   'acores-guardiao-2050': 'guardiao_acores',
   '/images/avatars/vulcao-acores.jpg': 'guardiao_acores',
+  '/images/avatars/vulcao-acores.png': 'guardiao_acores',
   '/images/avatars/guardiao-vulcanico.jpg': 'guardiao_acores',
   '/images/avatars/acores-guardiao-2050.jpg': 'guardiao_acores',
   '/imagens/avatar/vulcao-acores.jpg': 'guardiao_acores',
+  '/imagens/avatar/vulcao-acores.png': 'guardiao_acores',
   '/avatars/vulcao-acores.jpg': 'guardiao_acores',
+  '/avatars/vulcao-acores.png': 'guardiao_acores',
 
   // 3. Lenda do Futebol
   lenda_futebol: 'lenda_futebol',
@@ -194,9 +200,12 @@ const ALIAS_MAP: Record<string, string> = {
   'cyborg-quinas': 'lenda_futebol',
   'avatar-03': 'lenda_futebol',
   '/images/avatars/lenda-futebol-2050.jpg': 'lenda_futebol',
+  '/images/avatars/lenda-futebol-2050.png': 'lenda_futebol',
   '/images/shop/cyborg-quinas.jpg': 'lenda_futebol',
   '/imagens/avatar/lenda-futebol-2050.jpg': 'lenda_futebol',
+  '/imagens/avatar/lenda-futebol-2050.png': 'lenda_futebol',
   '/avatars/lenda-futebol-2050.jpg': 'lenda_futebol',
+  '/avatars/lenda-futebol-2050.png': 'lenda_futebol',
 
   // 4. Alma de Alfama
   alma_alfama: 'alma_alfama',
@@ -206,9 +215,12 @@ const ALIAS_MAP: Record<string, string> = {
   avatar_fadista_cyber: 'alma_alfama',
   'avatar-04': 'alma_alfama',
   '/images/avatars/alma-alfama-2050.jpg': 'alma_alfama',
+  '/images/avatars/alma-alfama-2050.png': 'alma_alfama',
   '/images/shop/fadista-cyber.jpg': 'alma_alfama',
   '/imagens/avatar/alma-alfama-2050.jpg': 'alma_alfama',
+  '/imagens/avatar/alma-alfama-2050.png': 'alma_alfama',
   '/avatars/alma-alfama-2050.jpg': 'alma_alfama',
+  '/avatars/alma-alfama-2050.png': 'alma_alfama',
 
   // 5. D. Sebastião
   sebastiao_nevoeiro: 'sebastiao_nevoeiro',
@@ -217,8 +229,11 @@ const ALIAS_MAP: Record<string, string> = {
   sebastiao: 'sebastiao_nevoeiro',
   'avatar-05': 'sebastiao_nevoeiro',
   '/images/avatars/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
+  '/images/avatars/sebastiao-2050.png': 'sebastiao_nevoeiro',
   '/imagens/avatar/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
+  '/imagens/avatar/sebastiao-2050.png': 'sebastiao_nevoeiro',
   '/avatars/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
+  '/avatars/sebastiao-2050.png': 'sebastiao_nevoeiro',
 
   // 6. Campeão Nacional
   campeao_nacional: 'campeao_nacional',

@@ -1,6 +1,17 @@
-import { REAL_AVATARS, type AvatarItem as CoreAvatarItem } from '@/lib/avatars'
-
+export type ShopAvatarRarity = 'COMUM' | 'RARO' | 'EPICO' | 'LENDARIO' | 'EXCLUSIVO'
 export type AvatarRarity = 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Mítico' | 'Exclusivo'
+
+export interface ShopAvatar {
+  id: string
+  name: string
+  description: string
+  image: string
+  category: string
+  rarity: ShopAvatarRarity
+  price: number
+  isAchievementOnly?: boolean
+  unlockRequirement?: string
+}
 
 export interface AvatarItem {
   id: string
@@ -22,125 +33,137 @@ export interface AvatarCategoryMeta {
   icon: string
 }
 
-export const AVATAR_18_CATEGORIES: AvatarCategoryMeta[] = [
-  { key: 'todos', title: 'Todos os Avatares', icon: '✨' },
-  { key: 'cultura', title: '📜 Cultura & Literatura', icon: '📜' },
-  { key: 'geografia', title: '🌍 Geografia & Açores', icon: '🌍' },
-  { key: 'desporto', title: '⚽ Desporto & Futebol', icon: '⚽' },
-  { key: 'musica', title: '🎸 Música & Fado', icon: '🎸' },
-  { key: 'historia', title: '👑 História de Portugal', icon: '👑' },
-  { key: 'geral', title: '🇵🇹 Conquistas Nacionais', icon: '🇵🇹' },
+export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
+  {
+    id: 'alma-alfama-2050',
+    name: 'Alma de Alfama 2050',
+    description: 'A melodia do fado imortalizada na guitarra do futuro.',
+    image: '/images/avatars/alma-alfama-2050.png',
+    category: 'Cultura',
+    rarity: 'COMUM',
+    price: 25000,
+  },
+  {
+    id: 'vulcao-acores',
+    name: 'Vulcão dos Açores',
+    description: 'A força telúrica e o fogo primordial das ilhas açorianas.',
+    image: '/images/avatars/vulcao-acores.png',
+    category: 'Cultura',
+    rarity: 'COMUM',
+    price: 35000,
+  },
+  {
+    id: 'representante-distrital',
+    name: 'Representante Distrital',
+    description: 'A voz e a honra cívica do teu distrito em cada resposta.',
+    image: '/images/avatars/REPRESENTANTE DISTRITAL.png',
+    category: 'Cidadania',
+    rarity: 'RARO',
+    price: 75000,
+  },
+  {
+    id: 'camoes-2050',
+    name: 'Camões 2050',
+    description: 'Engenho e arte cibernética a cantar feitos nunca dantes navegados.',
+    image: '/images/avatars/camoes-2050.png',
+    category: 'História',
+    rarity: 'RARO',
+    price: 120000,
+  },
+  {
+    id: 'lenda-futebol-2050',
+    name: 'Lenda Futebol 2050',
+    description: 'A perícia dos relvados e a glória dos maiores troféus.',
+    image: '/images/avatars/lenda-futebol-2050.png',
+    category: 'Desporto',
+    rarity: 'EPICO',
+    price: 250000,
+  },
+  {
+    id: 'sebastiao-2050',
+    name: 'D. Sebastião 2050',
+    description: 'O regresso triunfal por entre o nevoeiro digital de uma nova era.',
+    image: '/images/avatars/sebastiao-2050.png',
+    category: 'História',
+    rarity: 'EPICO',
+    price: 400000,
+  },
+  {
+    id: 'campeao-nacional',
+    name: 'Campeão Nacional',
+    description: 'Destinado aos mestres que conquistam o topo de Portugal.',
+    image: '/images/avatars/Campeão Nacional.png',
+    category: 'Desporto',
+    rarity: 'LENDARIO',
+    price: 750000,
+  },
+  {
+    id: 'tita-top-10',
+    name: 'Titã do Top 10',
+    description: 'Reservado exclusivamente para os 10 melhores cérebros do país.',
+    image: '/images/avatars/TITÃ DO TOP 10.png',
+    category: 'Exclusivos',
+    rarity: 'EXCLUSIVO',
+    price: 0,
+    isAchievementOnly: true,
+    unlockRequirement: 'Alcançar o Top 10 no Ranking Nacional',
+  },
+  {
+    id: 'lenda-suprema-acorda',
+    name: 'Lenda Suprema do Acorda',
+    description: 'Forjado na glória imortal de 100 batalhas invictas no modo 1v1.',
+    image: '/images/avatars/LENDA SUPREMA DO ACORDA.png',
+    category: 'Exclusivos',
+    rarity: 'EXCLUSIVO',
+    price: 0,
+    isAchievementOnly: true,
+    unlockRequirement: 'Conquista de 100 Vitórias Consecutivas 1v1',
+  },
 ]
 
-export const avatarShopList: AvatarItem[] = [
-  {
-    id: 'camoes_2050',
-    name: 'Luís de Camões',
-    categoryKey: 'cultura',
-    categoryTitle: 'Cultura & Literatura',
-    rarity: 'Lendário',
-    price: 0,
-    description: 'O Poeta das Quinas e símbolo imortal da cultura portuguesa.',
-    image: '/images/avatars/camoes-2050.jpg',
-    icon: '📜',
-    isExclusive: false,
-  },
-  {
-    id: 'guardiao_acores',
-    name: 'Guardião dos Açores',
-    categoryKey: 'geografia',
-    categoryTitle: 'Geografia & Açores',
-    rarity: 'Épico',
-    price: 0,
-    description: 'A força vulcânica e a majestade do arquipélago atlântico.',
-    image: '/images/avatars/vulcao-acores.jpg',
-    icon: '🌋',
-    isExclusive: false,
-  },
-  {
-    id: 'lenda_futebol',
-    name: 'Lenda do Futebol',
-    categoryKey: 'desporto',
-    categoryTitle: 'Desporto & Futebol',
-    rarity: 'Lendário',
-    price: 0,
-    description: 'A garra e mestria do desporto rei português.',
-    image: '/images/avatars/lenda-futebol-2050.jpg',
-    icon: '⚽',
-    isExclusive: false,
-  },
-  {
-    id: 'alma_alfama',
-    name: 'Alma de Alfama',
-    categoryKey: 'musica',
-    categoryTitle: 'Música & Fado',
-    rarity: 'Raro',
-    price: 0,
-    description: 'A voz profunda do fado e a alma das vielas históricas de Lisboa.',
-    image: '/images/avatars/alma-alfama-2050.jpg',
-    icon: '🎸',
-    isExclusive: false,
-  },
-  {
-    id: 'sebastiao_nevoeiro',
-    name: 'D. Sebastião',
-    categoryKey: 'historia',
-    categoryTitle: 'História de Portugal',
-    rarity: 'Mítico',
-    price: 0,
-    description: 'O Rei adormecido na névoa, mito e esperança de Portugal.',
-    image: '/images/avatars/sebastiao-2050.jpg',
-    icon: '👑',
-    isExclusive: false,
-  },
-  {
-    id: 'campeao_nacional',
-    name: 'Campeão Nacional',
-    categoryKey: 'geral',
-    categoryTitle: 'Conquistas Nacionais',
-    rarity: 'Épico',
-    price: 0,
-    description: 'A distinção máxima outorgada ao grande campeão de Portugal.',
-    image: '/images/avatars/Campeão Nacional.png',
-    icon: '🏆',
-    isExclusive: false,
-  },
-  {
-    id: 'lenda_suprema_acorda',
-    name: 'Lenda Suprema do Acorda',
-    categoryKey: 'historia',
-    categoryTitle: 'História de Portugal',
-    rarity: 'Mítico',
-    price: 0,
-    description: 'Forjado na glória imortal das maiores conquistas do Acorda Portugal.',
-    image: '/images/avatars/LENDA SUPREMA DO ACORDA.png',
-    icon: '🔥',
-    isExclusive: false,
-  },
-  {
-    id: 'representante_distrital',
-    name: 'Representante Distrital',
-    categoryKey: 'geografia',
-    categoryTitle: 'Geografia & Açores',
-    rarity: 'Épico',
-    price: 0,
-    description: 'O guardião e líder supremo com o brasão honorífico do seu distrito.',
-    image: '/images/avatars/REPRESENTANTE DISTRITAL.png',
-    icon: '🇵🇹',
-    isExclusive: false,
-  },
-  {
-    id: 'tita_top_10',
-    name: 'Titã do Top 10',
-    categoryKey: 'geral',
-    categoryTitle: 'Conquistas Nacionais',
-    rarity: 'Lendário',
-    price: 0,
-    description: 'Consagrado entre a elite dos melhores estrategas da nação.',
-    image: '/images/avatars/TITÃ DO TOP 10.png',
-    icon: '🥇',
-    isExclusive: false,
-  },
+export const AVATAR_18_CATEGORIES: AvatarCategoryMeta[] = [
+  { key: 'todos', title: 'Todos os Avatares', icon: '✨' },
+  { key: 'Cultura', title: '📜 Cultura', icon: '📜' },
+  { key: 'Cidadania', title: '🇵🇹 Cidadania', icon: '🇵🇹' },
+  { key: 'História', title: '👑 História', icon: '👑' },
+  { key: 'Desporto', title: '⚽ Desporto', icon: '⚽' },
+  { key: 'Exclusivos', title: '⭐ Exclusivos por Mérito', icon: '⭐' },
 ]
+
+export const avatarShopList: AvatarItem[] = OFFICIAL_SHOP_AVATARS.map((av) => {
+  const rarityMap: Record<ShopAvatarRarity, AvatarRarity> = {
+    COMUM: 'Comum',
+    RARO: 'Raro',
+    EPICO: 'Épico',
+    LENDARIO: 'Lendário',
+    EXCLUSIVO: 'Exclusivo',
+  }
+
+  const iconMap: Record<string, string> = {
+    'alma-alfama-2050': '🎸',
+    'vulcao-acores': '🌋',
+    'representante-distrital': '🇵🇹',
+    'camoes-2050': '📜',
+    'lenda-futebol-2050': '⚽',
+    'sebastiao-2050': '👑',
+    'campeao-nacional': '🏆',
+    'tita-top-10': '🥇',
+    'lenda-suprema-acorda': '🔥',
+  }
+
+  return {
+    id: av.id,
+    name: av.name,
+    categoryKey: av.category,
+    categoryTitle: av.category,
+    rarity: rarityMap[av.rarity] || 'Comum',
+    price: av.isAchievementOnly ? null : av.price,
+    unlockCondition: av.unlockRequirement,
+    description: av.description,
+    image: av.image,
+    icon: iconMap[av.id] || '✨',
+    isExclusive: Boolean(av.isAchievementOnly),
+  }
+})
 
 
