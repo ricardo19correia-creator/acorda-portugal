@@ -1,11 +1,27 @@
+'use client'
+
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Events } from '@/components/events'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, Play, Flame, Calendar } from 'lucide-react'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 export default function EventosPage() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleStartGame = (gameRoute: string) => {
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
+
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="challenges" />
@@ -39,13 +55,14 @@ export default function EventosPage() {
                 </p>
               </div>
 
-              <Link
-                href="/jogar"
+              <button
+                type="button"
+                onClick={() => handleStartGame('/jogar')}
                 className="button-game-gold inline-flex items-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-xl"
               >
                 <Play className="h-4 w-4 fill-current" />
                 <span>Jogar Eventos</span>
-              </Link>
+              </button>
             </div>
           </div>
 

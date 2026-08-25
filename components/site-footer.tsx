@@ -1,5 +1,10 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { BrandLogo } from '@/components/brand-logo'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 const LINKS = [
   { label: 'Jogar', href: '/jogar' },
@@ -15,6 +20,20 @@ const LINKS = [
 ]
 
 export function SiteFooter() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
+    if (href === '/jogar' || href.startsWith('/jogar')) {
+      e.preventDefault()
+      if (!user && !auth?.currentUser) {
+        router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
+        return
+      }
+      router.push(href)
+    }
+  }
+
   return (
     <footer className="relative border-t border-white/10 bg-zinc-950/40 backdrop-blur-md mt-16">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -32,7 +51,8 @@ export function SiteFooter() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                    onClick={(e) => handleLinkClick(e, item.href)}
+                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary cursor-pointer"
                   >
                     {item.label}
                   </Link>

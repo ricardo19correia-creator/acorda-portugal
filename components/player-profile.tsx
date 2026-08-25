@@ -149,6 +149,14 @@ export function PlayerProfile() {
   } = useAuth()
   const router = useRouter()
 
+  const handleStartGame = (gameRoute: string) => {
+    if (!user) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
+
   const [walletOpen, setWalletOpen] = useState(false)
   const [equipping, setEquipping] = useState<string | null>(null)
   const [editing, setEditing] = useState(false)
@@ -920,13 +928,14 @@ export function PlayerProfile() {
             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
               Completa a tua primeira partida para ganhares XP, subires no ranking e acumulares € Acorda.
             </p>
-            <Link
-              href="/jogar"
-              className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/25 hover:scale-105 transition"
+            <button
+              type="button"
+              onClick={() => handleStartGame('/jogar')}
+              className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/25 hover:scale-105 transition cursor-pointer"
             >
               <Gamepad2 className="h-4 w-4" />
               <span>Jogar Agora</span>
-            </Link>
+            </button>
           </div>
         )}
       </Section>

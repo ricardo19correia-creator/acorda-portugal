@@ -2,12 +2,27 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { auth } from '@/lib/firebase';
+import { useAuth } from '@/components/auth-provider';
 
 export default function Footer() {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  const handleStartGame = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!user && !auth?.currentUser) {
+      router.push('/entrar?redirect=/jogar');
+      return;
+    }
+    router.push('/jogar');
+  };
+
   return (
     <footer className="w-full border-t border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md py-8 px-4 text-center text-xs text-zinc-400">
       <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-medium">
-        <Link href="/jogar" className="hover:text-emerald-400 transition-colors">Jogar</Link>
+        <button type="button" onClick={handleStartGame} className="hover:text-emerald-400 transition-colors cursor-pointer">Jogar</button>
         <Link href="/ranking" className="hover:text-emerald-400 transition-colors">Rankings</Link>
         <Link href="/explorar" className="hover:text-emerald-400 transition-colors">Categorias</Link>
         <Link href="/portugal" className="hover:text-emerald-400 transition-colors">Portugal &amp; Mapa</Link>

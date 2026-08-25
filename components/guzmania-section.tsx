@@ -2,10 +2,24 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Sparkles, Flame, Crown, Trees, Swords, Trophy, ArrowRight, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 export function GuzmaniaSection() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleStartJourney = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!user && !auth?.currentUser) {
+      router.push('/entrar?redirect=/jogar')
+      return
+    }
+    router.push('/jogar')
+  }
   return (
     <section className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       {/* Decorative Glow Ambient Layer */}
@@ -132,14 +146,15 @@ export function GuzmaniaSection() {
 
             {/* CTA Link to Play */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
-              <Link
-                href="/jogar"
+              <button
+                type="button"
+                onClick={handleStartJourney}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 px-6 py-3.5 font-display text-sm font-black uppercase tracking-wider text-black shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-105 hover:brightness-110 cursor-pointer"
               >
                 <Sparkles className="h-4 w-4" />
                 <span>Iniciar a Tua Jornada</span>
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
 
               <Link
                 href="/explorar"

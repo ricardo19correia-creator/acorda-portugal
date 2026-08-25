@@ -1,12 +1,28 @@
+'use client'
+
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { PortugalHeroMap } from '@/components/portugal-hero-map'
 import { DistrictRanking } from '@/components/district-ranking'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, Play, MapPin, Flag } from 'lucide-react'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 export default function PortugalPage() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleStartGame = (gameRoute: string) => {
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
+
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="about" />
@@ -40,13 +56,14 @@ export default function PortugalPage() {
                 </p>
               </div>
 
-              <Link
-                href="/jogar?cat=o-meu-distrito"
+              <button
+                type="button"
+                onClick={() => handleStartGame('/jogar?cat=o-meu-distrito')}
                 className="button-game-primary inline-flex items-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-xl"
               >
                 <Play className="h-4 w-4 fill-current" />
                 <span>Conquistar Distrito</span>
-              </Link>
+              </button>
             </div>
 
             {/* Interactive Map Showcase */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Flag, Flame, HelpCircle } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -10,13 +11,28 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import AudioPlayer from '@/components/AudioPlayer'
 import { UserAvatar } from '@/components/user-avatar'
 import { useAuth } from '@/components/auth-provider'
+import { auth } from '@/lib/firebase'
 import { useEconomy } from '@/context/economy-context'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
+  const router = useRouter()
   const { user, profile, authResolved } = useAuth()
   const { formattedCoins, isBalancePulsing } = useEconomy()
   const [open, setOpen] = useState(false)
+
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    if (href === '/jogar' || href.startsWith('/jogar')) {
+      e.preventDefault()
+      if (!user && !auth?.currentUser) {
+        router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
+        setOpen(false)
+        return
+      }
+      router.push(href)
+      setOpen(false)
+    }
+  }
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
@@ -105,6 +121,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-foreground"
               >
                 <Icon className="h-4 w-4" />
@@ -198,7 +215,7 @@ export function SiteHeader() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
                 >
                   <item.icon className="h-4 w-4 text-primary pointer-events-none" />

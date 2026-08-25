@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Crown, MapPin, Trophy, Sparkles, Play, ChevronRight, Swords, Globe } from 'lucide-react'
 import {
   collection,
@@ -9,7 +10,7 @@ import {
   onSnapshot,
   query,
 } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { db, auth } from '@/lib/firebase'
 import { SectionHeading } from '@/components/section-heading'
 import { useAuth } from '@/components/auth-provider'
 import { calculateLevelProgress } from '@/lib/progression'
@@ -37,11 +38,20 @@ export type RankedPlayer = {
 const PODIUM_ORDER = [1, 0, 2] // 2º (left), 1º (center), 3º (right)
 
 export function Ranking() {
+  const router = useRouter()
+  const { user, profile } = useAuth()
   const [ranking, setRanking] = useState<RankedPlayer[]>([])
+
+  const handleStartGame = (gameRoute: string) => {
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerProfileData | null>(null)
   const [loading, setLoading] = useState(true)
   const [filterMode, setFilterMode] = useState<'nacional' | 'distrito' | 'duelos'>('nacional')
-  const { user, profile } = useAuth()
   const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
 
   useEffect(() => {
@@ -331,13 +341,14 @@ export function Ranking() {
             Sê o primeiro jogador a concluir uma partida e a liderar a classificação oficial de Portugal.
           </p>
           <div className="mt-6">
-            <Link
-              href="/jogar"
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-display text-sm font-bold text-primary-foreground transition hover:opacity-90 shadow-[0_0_20px_-3px_var(--primary)]"
+            <button
+              type="button"
+              onClick={() => handleStartGame('/jogar')}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-display text-sm font-bold text-primary-foreground transition hover:opacity-90 shadow-[0_0_20px_-3px_var(--primary)] cursor-pointer"
             >
               <Play className="h-4 w-4 fill-current" />
               Jogar primeira partida
-            </Link>
+            </button>
           </div>
         </div>
       )}
@@ -508,14 +519,15 @@ export function Ranking() {
 
             {/* Call to action at bottom */}
             <div className="border-t border-white/5 p-4 sm:p-5 text-center bg-card/30">
-              <Link
-                href="/jogar"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-2xl bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border border-primary/30 px-6 py-3 font-display text-sm font-bold uppercase tracking-wider text-primary transition-all hover:border-primary/50 hover:bg-primary/25"
+              <button
+                type="button"
+                onClick={() => handleStartGame('/jogar')}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-2xl bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border border-primary/30 px-6 py-3 font-display text-sm font-bold uppercase tracking-wider text-primary transition-all hover:border-primary/50 hover:bg-primary/25 cursor-pointer"
               >
                 <Sparkles className="h-4 w-4" />
                 Jogar agora e subir no ranking
                 <ChevronRight className="h-4 w-4" />
-              </Link>
+              </button>
             </div>
           </div>
         </div>

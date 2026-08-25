@@ -1,3 +1,5 @@
+'use client'
+
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { HowItWorks } from '@/components/how-it-works'
@@ -5,9 +7,23 @@ import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, Gamepad2, Trophy, LayoutGrid, Sparkles } from 'lucide-react'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 export default function ExplorarPage() {
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleStartGame = (gameRoute: string) => {
+    if (!user && !auth?.currentUser) {
+      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      return
+    }
+    router.push(gameRoute)
+  }
+
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="about" />
@@ -37,13 +53,14 @@ export default function ExplorarPage() {
 
               {/* Quick Jump Action Links */}
               <div className="flex flex-wrap items-center gap-2.5">
-                <Link
-                  href="/jogar"
+                <button
+                  type="button"
+                  onClick={() => handleStartGame('/jogar')}
                   className="button-game-primary inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg"
                 >
                   <Gamepad2 className="h-4 w-4" />
                   <span>Jogar Agora</span>
-                </Link>
+                </button>
                 <Link
                   href="/rankings"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-xs font-bold text-foreground hover:bg-white/20 transition shadow-md"

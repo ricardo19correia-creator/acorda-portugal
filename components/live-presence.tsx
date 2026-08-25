@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   Users,
   Gamepad2,
@@ -15,9 +16,22 @@ import { usePresence } from '@/components/presence-provider'
 import { SectionHeading } from '@/components/section-heading'
 import { ACTIVITY_LABELS, type PublicActiveUser } from '@/lib/presence'
 import { cn } from '@/lib/utils'
+import { auth } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 
 export function LivePresence() {
+  const router = useRouter()
+  const { user } = useAuth()
   const { onlineCount, playingCount, duelCount, activeUsers, loading } = usePresence()
+
+  const handleStartGame = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!user && !auth?.currentUser) {
+      router.push('/entrar?redirect=/jogar')
+      return
+    }
+    router.push('/jogar')
+  }
 
   return (
     <section className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
@@ -117,13 +131,14 @@ export function LivePresence() {
                 Atividade Recente da Comunidade
               </h3>
             </div>
-            <Link
-              href="/jogar"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-primary transition hover:text-primary/80"
+            <button
+              type="button"
+              onClick={handleStartGame}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-primary transition hover:text-primary/80 cursor-pointer"
             >
               Entrar numa partida
               <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
+            </button>
           </div>
 
           {activeUsers.length === 0 ? (
