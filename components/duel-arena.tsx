@@ -860,54 +860,53 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="fixed inset-0 h-[100dvh] w-screen overflow-hidden flex flex-col justify-between p-2 sm:p-2.5 select-none overscroll-none touch-none z-30">
+      <div className="fixed inset-0 w-screen h-[100dvh] bg-slate-950 flex flex-col justify-between p-2 overflow-hidden select-none overscroll-none touch-none z-30">
         {/* ========================================================= */}
-        {/* 1. TOPO: VS HEADER + REAGIR + TIMER (SHRINK-0)            */}
+        {/* A. TOPO / VS HEADER (Máx 15% da altura / h-[14vh])        */}
         {/* ========================================================= */}
-        <div className="shrink-0 w-full max-w-2xl mx-auto">
-          <div className="card-game flex items-center justify-between gap-1.5 rounded-xl py-1 px-2.5 shadow-xl border border-white/20 relative overflow-hidden">
-            {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
-            )}
+        <div className="h-[14vh] min-h-[70px] max-h-[90px] flex flex-col justify-center px-2 py-1 bg-slate-900/80 rounded-xl border border-slate-800 shrink-0 w-full max-w-2xl mx-auto relative overflow-hidden">
+          {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
+          )}
 
-            {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-                <span className="text-xl animate-bounce">🌺</span>
-                <span className="text-lg animate-ping ml-2">🌸</span>
-                <span className="text-xl animate-bounce ml-2">🌺</span>
+          {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+              <span className="text-lg animate-bounce">🌺</span>
+              <span className="text-base animate-ping ml-2">🌸</span>
+            </div>
+          )}
+
+          {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+            <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
+          )}
+
+          {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+              <span className="text-lg animate-bounce">🪙</span>
+              <span className="text-xl animate-ping">✨</span>
+            </div>
+          )}
+
+          {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+          {feedback?.status === 'CORRECT' &&
+            (streakEffectId === 'sfx_espada_conquistador' ||
+              streakEffectId === 'streak_espada_conquistador') && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
+                  ⚔️
+                </span>
               </div>
             )}
 
-            {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
-            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
-              <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_40px_rgba(16,185,129,0.7)] animate-pulse" />
-            )}
-
-            {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
-            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
-                <span className="text-xl animate-bounce">🪙</span>
-                <span className="text-2xl animate-ping">✨</span>
-                <span className="text-xl animate-bounce">🪙</span>
-              </div>
-            )}
-
-            {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
-            {feedback?.status === 'CORRECT' &&
-              (streakEffectId === 'sfx_espada_conquistador' ||
-                streakEffectId === 'streak_espada_conquistador') && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
-                  <span className="text-3xl sm:text-4xl animate-bounce drop-shadow-[0_0_20px_rgba(234,179,8,0.95)]">
-                    ⚔️
-                  </span>
-                </div>
-              )}
-
+          {/* Linha dos Jogadores VS */}
+          <div className="flex items-center justify-between gap-1.5 w-full">
             {/* Player Left (Me) */}
             <div className="flex items-center gap-1.5 flex-1 min-w-0 relative">
-              <div className="relative shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
+              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
                 <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
                 {playerReaction && (
                   <ProvocationBubble
@@ -919,29 +918,55 @@ export function DuelArena({
               </div>
 
               <div className="min-w-0">
-                <span className="font-display text-xs font-black text-foreground truncate block leading-tight">
-                  {me?.displayName || 'Jogador'} <span className="text-primary text-[10px]">(Tu)</span>
+                <span className="font-display text-[11px] font-black text-foreground truncate block leading-none">
+                  {me?.displayName || 'Jogador'} <span className="text-primary text-[9px]">(Tu)</span>
                 </span>
-                <p className="font-display text-xs font-black text-primary text-glow-primary leading-none mt-0.5">
-                  {me?.score || 0} <span className="text-[0.6rem] text-muted-foreground font-normal">pts</span>
+                <p className="font-display text-[11px] font-black text-primary text-glow-primary leading-none mt-0.5">
+                  {me?.score || 0} <span className="text-[0.55rem] text-muted-foreground font-normal">pts</span>
                 </p>
               </div>
             </div>
 
-            {/* Center VS Indicator */}
+            {/* Center VS Indicator + Reagir Button */}
             <div className="flex flex-col items-center px-1 shrink-0">
-              <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 shadow-sm py-0.2 px-1.5 text-[9px] font-black">
-                ⚔️ VS
-              </span>
-              <span className="mt-0.5 font-mono text-[0.65rem] font-black text-gold">
-                Q{currentQIndex + 1}/10
-              </span>
+              <div className="flex items-center gap-1">
+                <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1 text-[9px] font-black">
+                  VS
+                </span>
+                <span className="font-mono text-[10px] font-black text-gold">
+                  Q{currentQIndex + 1}/10
+                </span>
+              </div>
+
+              {/* Botão Mini Reagir */}
+              <div className="relative mt-0.5">
+                <button
+                  type="button"
+                  disabled={tauntCooldown > 0}
+                  onClick={() => setTauntModalOpen(!tauntModalOpen)}
+                  className={cn(
+                    'px-1.5 py-0.2 rounded-full border border-purple-500/40 bg-purple-500/15 text-purple-300 text-[9px] font-bold transition flex items-center gap-0.5 active:scale-95 cursor-pointer',
+                    tauntCooldown > 0 && 'opacity-50 cursor-not-allowed'
+                  )}
+                >
+                  <span>💬</span>
+                  <span>{tauntCooldown > 0 ? `${tauntCooldown}s` : 'Reagir'}</span>
+                </button>
+
+                <DuelEmoteFloatingBar
+                  isOpen={tauntModalOpen}
+                  onClose={() => setTauntModalOpen(false)}
+                  onSendEmote={handleSendEmote}
+                  cooldown={tauntCooldown}
+                  equippedEmoteIds={(profile as any)?.equipped?.emotes}
+                />
+              </div>
             </div>
 
             {/* Player Right (Opponent) */}
             <div className="flex items-center justify-end gap-1.5 flex-1 min-w-0 text-right relative">
               <div className="min-w-0">
-                <span className="font-display text-xs font-black text-foreground truncate block leading-tight">
+                <span className="font-display text-[11px] font-black text-foreground truncate block leading-none">
                   {opponent?.displayName || 'Adversário'}
                 </span>
                 <p className="font-display text-[10px] font-bold text-muted-foreground truncate leading-none mt-0.5">
@@ -949,7 +974,7 @@ export function DuelArena({
                 </p>
               </div>
 
-              <div className="relative shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
+              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
                 <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
                 {opponentReaction && (
                   <ProvocationBubble
@@ -962,118 +987,67 @@ export function DuelArena({
             </div>
           </div>
 
-          {/* Sub-bar: Mini Reagir & Tempo */}
-          <div className="mt-1 flex items-center justify-between px-1">
-            <div className="relative">
-              <button
-                type="button"
-                disabled={tauntCooldown > 0}
-                onClick={() => setTauntModalOpen(!tauntModalOpen)}
-                style={{
-                  background: 'rgba(147, 51, 234, 0.25)',
-                  border: '1px solid rgba(168, 85, 247, 0.6)',
-                  backdropFilter: 'blur(8px)',
-                  WebkitBackdropFilter: 'blur(8px)',
-                  borderRadius: '9999px',
-                  padding: '1px 8px',
-                  fontSize: '10px',
-                  fontWeight: '700',
-                  color: '#fff',
-                }}
-                className={cn(
-                  'inline-flex items-center gap-1 transition-all duration-200 cursor-pointer select-none active:scale-95 shadow-sm',
-                  tauntCooldown > 0
-                    ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-purple-600/40 hover:border-purple-400'
-                )}
-              >
-                {tauntCooldown > 0 ? (
-                  <>
-                    <span className="text-[9px] animate-spin">⏳</span>
-                    <span>{tauntCooldown}s</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[10px]">💬</span>
-                    <span>Reagir</span>
-                  </>
-                )}
-              </button>
-
-              {/* Menu Pop-over Flutuante de Emotes */}
-              <DuelEmoteFloatingBar
-                isOpen={tauntModalOpen}
-                onClose={() => setTauntModalOpen(false)}
-                onSendEmote={handleSendEmote}
-                cooldown={tauntCooldown}
-                equippedEmoteIds={(profile as any)?.equipped?.emotes}
+          {/* Barra de Tempo Compacta (h-1 mt-1) */}
+          <div className="flex items-center gap-1 mt-1 w-full">
+            <div
+              className={cn(
+                'h-1 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+                isUrgent ? 'border-flag-red/60' : 'border-slate-700/40',
+              )}
+            >
+              <div
+                className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-sm', timeColor)}
+                style={{ width: `${timePercentage}%` }}
               />
             </div>
-
-            <div className="flex items-center gap-1 text-[11px] font-bold text-slate-300">
-              <Clock className="h-3 w-3 text-primary" />
-              <span className={cn('font-mono font-black', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-200')}>
-                {timeLeft}s
-              </span>
-            </div>
-          </div>
-
-          {/* Time Progress Bar */}
-          <div
-            className={cn(
-              'my-1 h-1.5 w-full rounded-full bg-white/10 overflow-hidden shadow-inner p-0.5 border transition-colors duration-300',
-              isUrgent ? 'border-flag-red/60 bg-flag-red/10' : 'border-white/10',
-            )}
-          >
-            <div
-              className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-md', timeColor)}
-              style={{ width: `${timePercentage}%` }}
-            />
+            <span className={cn('font-mono font-bold text-[10px] shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
+              {timeLeft}s
+            </span>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* 2. CENTRO: CARTÃO DA PERGUNTA & FEEDBACK (FLEX-1, MIN-H-0)*/}
+        {/* B. ZONA DA PERGUNTA (Máx 35% da altura / h-[34vh])        */}
         {/* ========================================================= */}
-        <div className="flex-1 flex flex-col items-center justify-center my-1 min-h-0 relative w-full max-w-2xl mx-auto">
-          {/* Feedback visual instantâneo */}
+        <div className="h-[34vh] flex flex-col items-center justify-center p-3 bg-slate-900/90 rounded-2xl border border-slate-700/60 text-center my-1 shrink-0 w-full max-w-2xl mx-auto relative overflow-hidden">
+          {/* Feedback visual instantâneo overlay */}
           {feedback && (
             <div
               className={cn(
-                'mb-1 flex items-center justify-center gap-1.5 rounded-xl px-2.5 py-1 font-display text-xs font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 shrink-0',
+                'absolute top-1.5 px-2.5 py-0.5 rounded-lg font-display text-[10px] sm:text-xs font-black tracking-wide shadow-md transition-all duration-300 animate-pop z-20 flex items-center gap-1',
                 feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
                 feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
                 feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
               )}
             >
-              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />}
-              {feedback.status === 'WRONG' && <XCircle className="h-3.5 w-3.5 shrink-0" />}
-              {feedback.status === 'TIMEOUT' && <Clock className="h-3.5 w-3.5 shrink-0" />}
+              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-3 w-3 shrink-0" />}
+              {feedback.status === 'WRONG' && <XCircle className="h-3 w-3 shrink-0" />}
+              {feedback.status === 'TIMEOUT' && <Clock className="h-3 w-3 shrink-0" />}
               <span>{feedback.message}</span>
             </div>
           )}
 
-          {/* Caixa da Pergunta com max-h-[32vh] e scroll se necessário */}
-          <div className="p-2.5 sm:p-3 bg-slate-900/90 rounded-xl border border-slate-700/60 max-h-[32vh] overflow-y-auto w-full text-center flex flex-col items-center justify-center shadow-xl">
-            <span className="badge-hud mb-1 text-muted-foreground border-white/15 bg-white/5 text-[9px] sm:text-[10px] py-0.2 px-2 shrink-0">
-              {currentQuestion?.category || 'Portugal'} · Q{currentQIndex + 1}/10
-            </span>
-            <h1 className="text-xs sm:text-sm font-bold text-center leading-snug text-white text-balance">
-              {currentQuestion?.question}
-            </h1>
-          </div>
+          {/* Categoria / Número */}
+          <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mb-1 shrink-0">
+            {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
+          </span>
+
+          {/* Texto da Pergunta com line-clamp-5 */}
+          <h1 className="text-xs sm:text-sm font-bold text-center leading-relaxed text-white text-balance line-clamp-5 max-w-xl">
+            {currentQuestion?.question}
+          </h1>
 
           {/* Pista Histórica no Duelo */}
           {activeClue && (
-            <div className="mt-1 rounded-lg border border-amber-500/50 bg-amber-500/15 p-1.5 text-[11px] text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
-              <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+            <div className="mt-1 rounded border border-amber-500/50 bg-amber-500/15 px-2 py-0.5 text-[10px] text-amber-100 flex items-center gap-1 backdrop-blur-xl animate-rise shadow-sm shrink-0">
+              <Lightbulb className="h-3 w-3 text-amber-400 shrink-0" />
               <span className="font-medium truncate">{activeClue}</span>
             </div>
           )}
 
           {/* Freeze Banner no Duelo */}
           {isFrozen && (
-            <div className="mt-1 rounded-lg border border-blue-400/60 bg-blue-500/20 p-1 text-[11px] text-blue-100 flex items-center justify-center gap-1 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+            <div className="mt-1 rounded border border-blue-400/60 bg-blue-500/20 px-2 py-0.5 text-[10px] text-blue-100 flex items-center justify-center gap-1 backdrop-blur-xl animate-pulse shadow-sm shrink-0">
               <Snowflake className="h-3 w-3 text-blue-300 animate-spin" />
               <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
             </div>
@@ -1081,9 +1055,9 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* 3. PODERES / AJUDAS (50/50 E CONGELAR - ULTRA-FINA H-7)   */}
+        {/* C. AJUDAS / POWER-UPS (Máx 8% da altura / h-[7vh])         */}
         {/* ========================================================= */}
-        <div className="h-7 flex items-center justify-center gap-2 my-0.5 shrink-0 w-full max-w-2xl mx-auto">
+        <div className="h-[7vh] flex items-center justify-center gap-2 shrink-0 w-full max-w-2xl mx-auto">
           <QuizPowerUpsBar
             inventory={inventory}
             disabled={feedback !== null || isSubmitting || timeLeft <= 0}
@@ -1098,9 +1072,9 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* 4. RESPOSTAS EM GRELHA 2x2 (OBRIGATÓRIO, SHRINK-0, PB-1)  */}
+        {/* D. GRELHA DE RESPOSTAS 2x2 (Máx 38% da altura / h-[36vh])  */}
         {/* ========================================================= */}
-        <div className="grid grid-cols-2 gap-1.5 w-full max-w-2xl mx-auto shrink-0 pb-1">
+        <div className="h-[36vh] grid grid-cols-2 gap-1.5 pb-1 shrink-0 w-full max-w-2xl mx-auto">
           {currentQuestion?.options.map((opt, idx) => {
             const isSelected = selectedOption === opt.key
             const isCorrectOption = opt.key === currentQuestion.correct
@@ -1112,25 +1086,25 @@ export function DuelArena({
               return (
                 <div
                   key={opt.key}
-                  className="h-12 sm:h-14 px-2 py-1 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-1.5 text-left opacity-35 select-none cursor-not-allowed"
+                  className="h-full min-h-[50px] max-h-[70px] p-2 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed"
                 >
-                  <span className="w-5 h-5 rounded-full bg-slate-900 border border-slate-800 text-slate-500 font-black text-[11px] flex items-center justify-center shrink-0 line-through">
+                  <span className="w-5 h-5 rounded-full bg-slate-900 border border-slate-800 text-slate-500 font-black text-[10px] flex items-center justify-center shrink-0 line-through">
                     {optionKey}
                   </span>
-                  <span className="text-[11px] sm:text-xs leading-tight line-through text-slate-500 flex-1 truncate">
+                  <span className="text-[11px] font-semibold text-slate-500 leading-tight line-through line-clamp-3 flex-1">
                     {opt.text}
                   </span>
                 </div>
               )
             }
 
-            let buttonStyles = 'bg-slate-900/95 hover:bg-cyan-950/70 border border-slate-700 active:border-cyan-400 shadow-md'
+            let buttonStyles = 'bg-slate-900/95 border border-slate-700 active:border-cyan-400 active:bg-cyan-950/40 shadow-sm'
 
             if (showFeedback) {
               if (isCorrectOption) {
-                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
+                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-md shadow-emerald-500/30'
               } else if (isSelected && !isCorrectOption) {
-                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-md shadow-rose-500/30'
               } else {
                 buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
               }
@@ -1144,13 +1118,13 @@ export function DuelArena({
                 disabled={selectedOption !== null || isSubmitting}
                 onClick={() => handleSelectOption(opt.key)}
                 className={cn(
-                  'h-12 sm:h-14 px-2 py-1 rounded-xl flex items-center gap-1.5 text-left transition-all cursor-pointer active:scale-98 select-none',
+                  'h-full min-h-[50px] max-h-[70px] p-2 rounded-xl flex items-center gap-2 text-left transition select-none cursor-pointer active:scale-98',
                   buttonStyles,
                 )}
               >
                 <span
                   className={cn(
-                    'w-5 h-5 rounded-full font-black text-[11px] flex items-center justify-center shrink-0 border transition-colors',
+                    'w-5 h-5 rounded-full font-black text-[10px] flex items-center justify-center shrink-0 border transition-colors',
                     showFeedback && isCorrectOption
                       ? 'bg-emerald-500 border-emerald-300 text-slate-950'
                       : showFeedback && isSelected
@@ -1160,7 +1134,7 @@ export function DuelArena({
                 >
                   {optionKey}
                 </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-white leading-tight line-clamp-2 flex-1">
+                <span className="text-[11px] font-semibold text-slate-100 leading-tight line-clamp-3 flex-1">
                   {opt.text}
                 </span>
               </button>
