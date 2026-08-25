@@ -3,7 +3,23 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Menu, X, Gamepad2, Trophy, LayoutGrid, User, ShoppingBag, Sparkles, Flag, Flame, HelpCircle } from 'lucide-react'
+import {
+  Menu,
+  X,
+  Gamepad2,
+  Trophy,
+  LayoutGrid,
+  User,
+  ShoppingBag,
+  Sparkles,
+  Flag,
+  Flame,
+  HelpCircle,
+  LogIn,
+  UserPlus,
+  LogOut,
+  ChevronRight,
+} from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { OnlineUsersBadge } from '@/components/online-users-badge'
@@ -12,6 +28,8 @@ import AudioPlayer from '@/components/AudioPlayer'
 import { UserAvatar } from '@/components/user-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
+import { performLogout } from '@/lib/auth-helpers'
+import { calculateLevelProgress } from '@/lib/progression'
 import { useEconomy } from '@/context/economy-context'
 import { cn } from '@/lib/utils'
 
@@ -20,6 +38,15 @@ export function SiteHeader() {
   const { user, profile, authResolved } = useAuth()
   const { formattedCoins, isBalancePulsing } = useEconomy()
   const [open, setOpen] = useState(false)
+
+  const progressInfo = profile?.xp ? calculateLevelProgress(profile.xp) : null
+  const userLevel = profile?.level || progressInfo?.currentLevel.level || 1
+  const userTier = progressInfo?.currentLevel.cleanTitle || 'Curioso'
+
+  const handleLogout = async () => {
+    setOpen(false)
+    await performLogout('/')
+  }
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     if (href === '/jogar' || href.startsWith('/jogar')) {
@@ -184,28 +211,64 @@ export function SiteHeader() {
               <span>A verificar sessão...</span>
             </div>
           ) : user ? (
-            <Link
-              href="/perfil"
-              onClick={() => setOpen(false)}
-              className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-card/80 p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
-            >
-              <UserAvatar avatarUrl={profile?.photoURL || user?.photoURL || undefined} isCurrentUser={true} size="md" />
-              <div className="flex flex-col min-w-0 pointer-events-none">
-                <span className="truncate font-bold text-foreground">
-                  {user.displayName ?? 'Conta'}
-                </span>
-                <span className="text-xs text-primary">Ver perfil e estatísticas →</span>
-              </div>
-            </Link>
+            <div className="mb-4 flex flex-col gap-2.5">
+              {/* Mini-cartão do Utilizador Autenticado */}
+              <Link
+                href="/perfil"
+                onClick={() => setOpen(false)}
+                className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-card/90 p-3.5 text-sm font-semibold text-foreground transition-all hover:border-emerald-500/40 hover:bg-card shadow-lg"
+              >
+                <UserAvatar
+                  avatarUrl={profile?.photoURL || user?.photoURL || undefined}
+                  isCurrentUser={true}
+                  size="md"
+                />
+                <div className="flex flex-col min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="truncate font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      {user.displayName || profile?.displayName || 'Jogador'}
+                    </span>
+                    <span className="shrink-0 rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-black text-amber-400 border border-amber-500/30">
+                      Nível {userLevel}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-0.5">
+                    <span className="text-emerald-400 font-medium truncate">{userTier}</span>
+                    <span>•</span>
+                    <span className="text-muted-foreground">{profile?.district || 'Portugal'}</span>
+                  </div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-slate-500 group-hover:text-emerald-400 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+
+              {/* Botão de Destaque Vermelho: Terminar Sessão (Logout) */}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="cursor-pointer flex w-full items-center justify-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 py-2.5 text-xs font-bold text-rose-300 transition-all hover:bg-rose-600 hover:text-white hover:border-rose-600 shadow-sm active:scale-98"
+              >
+                <LogOut className="h-4 w-4 text-rose-400" />
+                <span>Terminar Sessão</span>
+              </button>
+            </div>
           ) : (
-            <div className="mb-4">
+            <div className="mb-4 flex flex-col sm:flex-row gap-2">
               <Link
                 href="/entrar"
                 onClick={() => setOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-xl border border-primary/40 bg-primary/10 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/20 cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/15 py-3 text-xs font-black uppercase tracking-wider text-emerald-300 transition-all hover:bg-emerald-500/25 hover:border-emerald-400 cursor-pointer shadow-md"
               >
-                <User className="h-4 w-4 pointer-events-none" />
-                <span className="pointer-events-none">Entrar / Criar Conta</span>
+                <LogIn className="h-4 w-4" />
+                <span>Iniciar Sessão</span>
+              </Link>
+
+              <Link
+                href="/entrar?mode=register"
+                onClick={() => setOpen(false)}
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 py-3 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-white/10 hover:border-white/30 cursor-pointer"
+              >
+                <UserPlus className="h-4 w-4 text-cyan-400" />
+                <span>Criar Conta</span>
               </Link>
             </div>
           )}
