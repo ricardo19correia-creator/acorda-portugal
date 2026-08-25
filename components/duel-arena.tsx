@@ -227,15 +227,6 @@ export function DuelArena({
     }
   }, [duel?.lastEmote, (duel as any)?.lastReaction, duel?.lastTaunt, currentPlayer.uid, user?.uid])
 
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.body.classList.add('game-active')
-      return () => {
-        document.body.classList.remove('game-active')
-      }
-    }
-  }, [])
-
   // Handle sending an Emote
   const handleSendEmote = async (emote: EmoteItem) => {
     if (tauntCooldown > 0 || !duelId) return
@@ -869,53 +860,52 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="fixed inset-0 w-screen h-[100dvh] bg-slate-950 flex flex-col justify-between p-2 overflow-hidden select-none overscroll-none touch-none z-30">
+      <div className="w-full max-w-2xl mx-auto flex flex-col justify-between p-1 sm:p-2 select-none animate-rise">
         {/* ========================================================= */}
-        {/* A. TOPO / VS HEADER (Máx 15% da altura / h-[14vh])        */}
+        {/* A. TOPO / VS HEADER (Compacto py-1)                       */}
         {/* ========================================================= */}
-        <div className="h-[14vh] min-h-[70px] max-h-[90px] flex flex-col justify-center px-2 py-1 bg-slate-900/80 rounded-xl border border-slate-800 shrink-0 w-full max-w-2xl mx-auto relative overflow-hidden">
-          {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
-          )}
+        <div className="w-full shrink-0">
+          <div className="card-game flex items-center justify-between gap-1.5 rounded-xl py-1 px-2.5 shadow-md border border-white/15 relative overflow-hidden bg-slate-900/90">
+            {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
+            )}
 
-          {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-          {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-              <span className="text-lg animate-bounce">🌺</span>
-              <span className="text-base animate-ping ml-2">🌸</span>
-            </div>
-          )}
-
-          {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
-          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
-            <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
-          )}
-
-          {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
-          {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
-              <span className="text-lg animate-bounce">🪙</span>
-              <span className="text-xl animate-ping">✨</span>
-            </div>
-          )}
-
-          {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
-          {feedback?.status === 'CORRECT' &&
-            (streakEffectId === 'sfx_espada_conquistador' ||
-              streakEffectId === 'streak_espada_conquistador') && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
-                <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
-                  ⚔️
-                </span>
+            {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+                <span className="text-lg animate-bounce">🌺</span>
+                <span className="text-base animate-ping ml-2">🌸</span>
               </div>
             )}
 
-          {/* Linha dos Jogadores VS */}
-          <div className="flex items-center justify-between gap-1.5 w-full">
-            {/* Player Left (Me) */}
+            {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+              <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
+            )}
+
+            {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+                <span className="text-lg animate-bounce">🪙</span>
+                <span className="text-xl animate-ping">✨</span>
+              </div>
+            )}
+
+            {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+            {feedback?.status === 'CORRECT' &&
+              (streakEffectId === 'sfx_espada_conquistador' ||
+                streakEffectId === 'streak_espada_conquistador') && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                  <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
+                    ⚔️
+                  </span>
+                </div>
+              )}
+
+            {/* Linha dos Jogadores VS */}
             <div className="flex items-center gap-1.5 flex-1 min-w-0 relative">
-              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
+              <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
                 <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
                 {playerReaction && (
                   <ProvocationBubble
@@ -983,7 +973,7 @@ export function DuelArena({
                 </p>
               </div>
 
-              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
+              <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
                 <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
                 {opponentReaction && (
                   <ProvocationBubble
@@ -996,11 +986,11 @@ export function DuelArena({
             </div>
           </div>
 
-          {/* Barra de Tempo Compacta (h-1 mt-1) */}
-          <div className="flex items-center gap-1 mt-1 w-full">
+          {/* Barra de Tempo Compacta */}
+          <div className="flex items-center gap-1 mt-1 w-full px-0.5">
             <div
               className={cn(
-                'h-1 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+                'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
                 isUrgent ? 'border-flag-red/60' : 'border-slate-700/40',
               )}
             >
@@ -1016,14 +1006,14 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* B. ZONA DA PERGUNTA (Máx 35% da altura / h-[34vh])        */}
+        {/* B. ZONA DA PERGUNTA (py-2 px-3 text-xs sm:text-sm max-h-[140px]) */}
         {/* ========================================================= */}
-        <div className="h-[34vh] flex flex-col items-center justify-center p-3 bg-slate-900/90 rounded-2xl border border-slate-700/60 text-center my-1 shrink-0 w-full max-w-2xl mx-auto relative overflow-hidden">
+        <div className="my-1.5 w-full flex flex-col items-center justify-center relative">
           {/* Feedback visual instantâneo overlay */}
           {feedback && (
             <div
               className={cn(
-                'absolute top-1.5 px-2.5 py-0.5 rounded-lg font-display text-[10px] sm:text-xs font-black tracking-wide shadow-md transition-all duration-300 animate-pop z-20 flex items-center gap-1',
+                'mb-1 px-2.5 py-0.5 rounded-lg font-display text-[10px] sm:text-xs font-black tracking-wide shadow-md transition-all duration-300 animate-pop z-20 flex items-center gap-1 shrink-0',
                 feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
                 feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
                 feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
@@ -1036,15 +1026,15 @@ export function DuelArena({
             </div>
           )}
 
-          {/* Categoria / Número */}
-          <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mb-1 shrink-0">
-            {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
-          </span>
-
-          {/* Texto da Pergunta com line-clamp-5 */}
-          <h1 className="text-xs sm:text-sm font-bold text-center leading-relaxed text-white text-balance line-clamp-5 max-w-xl">
-            {currentQuestion?.question}
-          </h1>
+          {/* Caixa da Pergunta com max-h-[140px] */}
+          <div className="py-2 px-3 sm:py-3 sm:px-4 bg-slate-900/90 rounded-xl border border-slate-700/60 max-h-[140px] overflow-y-auto w-full text-center flex flex-col items-center justify-center shadow-lg">
+            <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mb-0.5 shrink-0">
+              {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
+            </span>
+            <h1 className="text-xs sm:text-sm font-bold text-center leading-snug text-white text-balance line-clamp-4">
+              {currentQuestion?.question}
+            </h1>
+          </div>
 
           {/* Pista Histórica no Duelo */}
           {activeClue && (
@@ -1064,9 +1054,9 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* C. AJUDAS / POWER-UPS (Máx 8% da altura / h-[7vh])         */}
+        {/* C. AJUDAS / POWER-UPS (my-1 scale-90)                     */}
         {/* ========================================================= */}
-        <div className="h-[7vh] flex items-center justify-center gap-2 shrink-0 w-full max-w-2xl mx-auto">
+        <div className="my-1 scale-90 origin-center flex items-center justify-center gap-2 shrink-0 w-full">
           <QuizPowerUpsBar
             inventory={inventory}
             disabled={feedback !== null || isSubmitting || timeLeft <= 0}
@@ -1081,9 +1071,9 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* D. GRELHA DE RESPOSTAS 2x2 (Máx 38% da altura / h-[36vh])  */}
+        {/* D. GRELHA DE RESPOSTAS 2x2 (h-11 sm:h-12 py-1 text-xs)    */}
         {/* ========================================================= */}
-        <div className="h-[36vh] grid grid-cols-2 gap-1.5 pb-1 shrink-0 w-full max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 gap-1.5 pb-1 shrink-0 w-full">
           {currentQuestion?.options.map((opt, idx) => {
             const isSelected = selectedOption === opt.key
             const isCorrectOption = opt.key === currentQuestion.correct
@@ -1095,12 +1085,12 @@ export function DuelArena({
               return (
                 <div
                   key={opt.key}
-                  className="h-full min-h-[50px] max-h-[70px] p-2 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed"
+                  className="h-11 sm:h-12 px-2 py-1 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-1.5 text-left opacity-35 select-none cursor-not-allowed"
                 >
                   <span className="w-5 h-5 rounded-full bg-slate-900 border border-slate-800 text-slate-500 font-black text-[10px] flex items-center justify-center shrink-0 line-through">
                     {optionKey}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 leading-tight line-through line-clamp-3 flex-1">
+                  <span className="text-[11px] font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
                     {opt.text}
                   </span>
                 </div>
@@ -1127,7 +1117,7 @@ export function DuelArena({
                 disabled={selectedOption !== null || isSubmitting}
                 onClick={() => handleSelectOption(opt.key)}
                 className={cn(
-                  'h-full min-h-[50px] max-h-[70px] p-2 rounded-xl flex items-center gap-2 text-left transition select-none cursor-pointer active:scale-98',
+                  'h-11 sm:h-12 px-2 py-1 rounded-xl flex items-center gap-1.5 text-left transition select-none cursor-pointer active:scale-98',
                   buttonStyles,
                 )}
               >
@@ -1143,7 +1133,7 @@ export function DuelArena({
                 >
                   {optionKey}
                 </span>
-                <span className="text-[11px] font-semibold text-slate-100 leading-tight line-clamp-3 flex-1">
+                <span className="text-[11px] font-semibold text-slate-100 leading-tight line-clamp-2 flex-1">
                   {opt.text}
                 </span>
               </button>
