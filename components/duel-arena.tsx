@@ -998,7 +998,13 @@ export function DuelArena({
             {/* Linha dos Jogadores VS */}
             <div className="flex items-center gap-2 flex-1 min-w-0 relative">
               <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
-                <PlayerAvatar profile={profile ?? undefined} displayName={me?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+                <PlayerAvatar
+                  profile={profile ?? undefined}
+                  photoURL={me?.photoURL || (me as any)?.avatarUrl || (me as any)?.avatar}
+                  displayName={me?.displayName || 'Tu'}
+                  isCurrentUser={true}
+                  size="sm"
+                />
                 {playerReaction && (
                   <ProvocationBubble
                     message={playerReaction.message}
@@ -1063,7 +1069,12 @@ export function DuelArena({
               </div>
 
               <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
-                <PlayerAvatar displayName={opponent?.displayName || 'Adversário'} size="sm" />
+                <PlayerAvatar
+                  photoURL={opponent?.photoURL || (opponent as any)?.avatarUrl || (opponent as any)?.avatar}
+                  displayName={opponent?.displayName || 'Adversário'}
+                  isCurrentUser={false}
+                  size="sm"
+                />
                 {opponentReaction && (
                   <ProvocationBubble
                     message={opponentReaction.message}
@@ -1374,6 +1385,7 @@ export function DuelArena({
             <div className="relative inline-block">
               <PlayerAvatar
                 profile={duel.playerA?.uid === currentPlayer.uid ? (profile ?? undefined) : undefined}
+                photoURL={duel.playerA?.photoURL || (duel.playerA as any)?.avatarUrl || (duel.playerA as any)?.avatar}
                 displayName={duel.playerA?.displayName || 'Jogador'}
                 isCurrentUser={duel.playerA?.uid === currentPlayer.uid}
                 size="xl"
@@ -1401,6 +1413,7 @@ export function DuelArena({
             <div className="relative inline-block">
               <PlayerAvatar
                 profile={duel.playerB?.uid === currentPlayer.uid ? (profile ?? undefined) : undefined}
+                photoURL={duel.playerB?.photoURL || (duel.playerB as any)?.avatarUrl || (duel.playerB as any)?.avatar}
                 displayName={duel.playerB?.displayName || 'Adversário'}
                 isCurrentUser={duel.playerB?.uid === currentPlayer.uid}
                 size="xl"

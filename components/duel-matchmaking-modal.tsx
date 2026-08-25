@@ -822,7 +822,12 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
                   {/* Player B (Opponent) */}
                   <div className="flex flex-col items-center flex-1 min-w-0">
-                    <PlayerAvatar displayName={ticket?.opponentInfo?.displayName || 'Adversário'} size="lg" />
+                    <PlayerAvatar
+                      photoURL={ticket?.opponentInfo?.photoURL || (ticket?.opponentInfo as any)?.avatarUrl || (ticket?.opponentInfo as any)?.avatar}
+                      displayName={ticket?.opponentInfo?.displayName || 'Adversário'}
+                      isCurrentUser={false}
+                      size="lg"
+                    />
                     <span className="mt-2.5 font-display text-xs sm:text-sm font-black text-foreground truncate max-w-[110px]">
                       {ticket?.opponentInfo?.displayName || 'Adversário'}
                     </span>

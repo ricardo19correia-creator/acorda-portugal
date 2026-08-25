@@ -68,10 +68,12 @@ export function PlayerAvatar({
     (isCurrentUser ? globalEquippedAvatar : null) ??
     photoURL ??
     profile?.photoURL ??
+    (profile as any)?.avatarUrl ??
     (profile as any)?.avatar ??
     (profile as any)?.equippedAvatar ??
     (profile as any)?.equipped?.avatar ??
-    globalEquippedAvatar
+    (isCurrentUser ? globalEquippedAvatar : null) ??
+    DEFAULT_AVATAR.image
 
   const effectivePhotoURL = getAvatarImage(rawCandidate)
   const effectiveName = displayName ?? name ?? profile?.displayName ?? 'Jogador'

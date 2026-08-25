@@ -23,6 +23,28 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { QUESTION_TIME_MS } from '@/config/quiz'
 import { getArenaById, getRandomArena, OFFICIAL_ARENAS } from '@/src/data/arenas'
 import { getEmoteById, type EmoteItem } from '@/src/data/emotes'
+import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
+import { getEquippedAvatarImage } from '@/lib/inventory'
+
+export function resolveUserAvatar(
+  user?: { photoURL?: string | null } | null,
+  profile?: any
+): string {
+  if (typeof window !== 'undefined') {
+    const directLocal = localStorage.getItem('user_equipped_avatar') || localStorage.getItem('equipped_avatar_id')
+    if (directLocal) return getAvatarImage(directLocal)
+  }
+  const candidate =
+    (profile as any)?.equipped?.avatar ||
+    (profile as any)?.equippedAvatar ||
+    profile?.photoURL ||
+    (profile as any)?.avatar ||
+    (profile as any)?.avatarUrl ||
+    user?.photoURL
+
+  if (candidate) return getAvatarImage(candidate)
+  return getEquippedAvatarImage()
+}
 
 export type DuelStatus = 'waiting' | 'matched' | 'playing' | 'finished' | 'expired' | 'cancelled'
 export type DuelAnswerStatus = 'CORRECT' | 'WRONG' | 'TIMEOUT'
@@ -43,6 +65,8 @@ export interface DuelPlayerData {
   uid: string
   displayName: string
   photoURL?: string | null
+  avatarUrl?: string | null
+  avatar?: string | null
   level: number
   district: string
   score: number
@@ -228,12 +252,14 @@ export async function findOrCreateMatchmakingRoom(
   const playerLevel = profile?.level || 1
   const playerName = (profile as any)?.displayName || user.displayName || 'Jogador'
   const playerDistrict = profile?.district || 'Portugal'
-  const playerPhoto = user.photoURL || null
+  const playerPhoto = resolveUserAvatar(user, profile)
 
   const myPlayerData: DuelPlayerData = {
     uid: user.uid,
     displayName: playerName,
     photoURL: playerPhoto,
+    avatarUrl: playerPhoto,
+    avatar: playerPhoto,
     level: playerLevel,
     district: playerDistrict,
     score: 0,
@@ -433,12 +459,14 @@ export async function checkAndJoinWaitingRoom(
   const playerLevel = profile?.level || 1
   const playerName = (profile as any)?.displayName || user.displayName || 'Jogador'
   const playerDistrict = profile?.district || 'Portugal'
-  const playerPhoto = user.photoURL || null
+  const playerPhoto = resolveUserAvatar(user, profile)
 
   const myPlayerData: DuelPlayerData = {
     uid: user.uid,
     displayName: playerName,
     photoURL: playerPhoto,
+    avatarUrl: playerPhoto,
+    avatar: playerPhoto,
     level: playerLevel,
     district: playerDistrict,
     score: 0,
@@ -626,11 +654,14 @@ export async function joinMatchmakingQueue(
   if (!user || !user.uid) return matchAttemptId
   try {
     const now = Date.now()
+    const playerPhoto = resolveUserAvatar(user, profile)
     const ticketRef = doc(db, 'duelQueue', user.uid)
     await setDoc(ticketRef, {
       userId: user.uid,
       displayName: (profile as any)?.displayName || user.displayName || 'Jogador',
-      photoURL: user.photoURL || null,
+      photoURL: playerPhoto,
+      avatarUrl: playerPhoto,
+      avatar: playerPhoto,
       level: profile?.level || 1,
       district: profile?.district || 'Portugal',
       status: 'searching',
@@ -736,7 +767,7 @@ export async function tryFindOpponentMatch(
 // 2. ROOM & CODE CREATION (SECONDARY FRIEND DUEL)
 // =========================================================================
 
-export async function createDuel(
+export async function createDuelRoom(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
   profile?: { level?: number; district?: string; equippedArena?: string },
   options?: { arenaId?: string; arenaImage?: string; arenaName?: string },
@@ -762,10 +793,14 @@ export async function createDuel(
   const chosenArenaImage = options?.arenaImage || selectedArena?.imagePath || '/arenas/arena-1.jpg'
   const chosenArenaName = options?.arenaName || selectedArena?.name || 'Praça do Império'
 
+  const playerPhoto = resolveUserAvatar(user, profile)
+
   const playerA: DuelPlayerData = {
     uid: user.uid,
     displayName: (profile as any)?.displayName || user.displayName || 'Jogador A',
-    photoURL: user.photoURL || null,
+    photoURL: playerPhoto,
+    avatarUrl: playerPhoto,
+    avatar: playerPhoto,
     level: profile?.level || 1,
     district: profile?.district || 'Portugal',
     score: 0,
@@ -800,6 +835,8 @@ export async function createDuel(
 
   return { duelId, code }
 }
+
+export const createDuel = createDuelRoom
 
 export async function joinDuelByCode(
   code: string,
@@ -848,11 +885,14 @@ export async function joinDuelByCode(
   const now = Date.now()
   const startedAt = now + 3500
   const firstDeadline = startedAt + QUESTION_TIME_MS
+  const playerPhoto = resolveUserAvatar(user, profile)
 
   const playerB: DuelPlayerData = {
     uid: user.uid,
     displayName: (profile as any)?.displayName || user.displayName || 'Jogador B',
-    photoURL: user.photoURL || null,
+    photoURL: playerPhoto,
+    avatarUrl: playerPhoto,
+    avatar: playerPhoto,
     level: profile?.level || 1,
     district: profile?.district || 'Portugal',
     score: 0,
