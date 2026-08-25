@@ -30,27 +30,27 @@ export const ProvocationBubble: React.FC<ProvocationBubbleProps> = ({
 
   return (
     <div
-      className={`absolute z-50 animate-in fade-in zoom-in duration-200 pointer-events-none top-14 ${
-        isPlayer ? 'left-2' : 'right-2'
+      className={`absolute top-11 sm:top-12 z-40 animate-in fade-in zoom-in duration-200 pointer-events-none whitespace-nowrap min-w-[100px] max-w-[140px] ${
+        isPlayer ? 'left-0' : 'right-0'
       }`}
     >
       <div
-        className={`relative px-3 py-1.5 rounded-xl text-xs font-bold text-white shadow-2xl backdrop-blur-md max-w-[150px] sm:max-w-[180px] break-words text-center border ${
+        className={`relative px-2.5 py-1 rounded-xl text-xs font-bold text-white shadow-xl backdrop-blur-md border text-center ${
           isPlayer
-            ? 'bg-cyan-950/95 border-cyan-400/80 shadow-cyan-950/50'
-            : 'bg-purple-950/95 border-purple-400/80 shadow-purple-950/50'
+            ? 'bg-slate-900/95 border-cyan-400 shadow-cyan-950/50'
+            : 'bg-slate-900/95 border-purple-400 shadow-purple-950/50'
         }`}
       >
-        {/* Seta/Pointer virada para o avatar acima */}
+        {/* Seta virada para o avatar acima */}
         <div
-          className={`absolute -top-1.5 w-3 h-3 rotate-45 border-t border-l ${
+          className={`absolute -top-1 w-2.5 h-2.5 rotate-45 border-t border-l ${
             isPlayer
-              ? 'left-4 bg-cyan-950/95 border-cyan-400/80'
-              : 'right-4 bg-purple-950/95 border-purple-400/80'
+              ? 'left-3 bg-slate-900 border-cyan-400'
+              : 'right-3 bg-slate-900 border-purple-400'
           }`}
         />
 
-        <span className="relative z-10 block leading-tight drop-shadow-sm">
+        <span className="relative z-10 block leading-tight truncate">
           {message}
         </span>
       </div>

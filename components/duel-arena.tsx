@@ -33,7 +33,7 @@ import {
   X,
   AlertTriangle,
 } from 'lucide-react'
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
+import { doc, updateDoc, arrayUnion, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { useEconomy } from '@/context/economy-context'
@@ -150,6 +150,7 @@ export function DuelArena({
   const [opponentReaction, setOpponentReaction] = useState<{ message: string; timestamp: number } | null>(null)
   const [activeEmote, setActiveEmote] = useState<{ senderId: string; emoji: string; label: string; text: string; timestamp: number } | null>(null)
   const lastProcessedEmoteId = useRef<string>('')
+  const lastProcessedReactionDocId = useRef<string>('')
   const [unlockedTaunts, setUnlockedTaunts] = useState<string[]>(['pack_basico'])
 
   // Load user unlocked taunts and equipped emotes
@@ -177,7 +178,7 @@ export function DuelArena({
     return () => clearInterval(timer)
   }, [tauntCooldown])
 
-  // Real-time Bi-directional Emote & Reaction Synchronization (Creator <-> Guest)
+  // Real-time Bi-directional Emote & Reaction Synchronization (Creator <-> Guest via document)
   useEffect(() => {
     const rawReaction = duel?.lastEmote || (duel as any)?.lastReaction || (duel?.lastTaunt ? {
       id: `taunt_${duel.lastTaunt.timestamp}`,
@@ -227,6 +228,76 @@ export function DuelArena({
     }
   }, [duel?.lastEmote, (duel as any)?.lastReaction, duel?.lastTaunt, currentPlayer.uid, user?.uid])
 
+  // Sub-coleção em tempo real Firestore (gameRooms/${duelId}/reactions e duels/${duelId}/reactions)
+  useEffect(() => {
+    if (!duelId) return
+    let unsub1: (() => void) | undefined
+    let unsub2: (() => void) | undefined
+
+    try {
+      const q1 = query(
+        collection(db, `gameRooms/${duelId}/reactions`),
+        orderBy('timestamp', 'desc'),
+        limit(1)
+      )
+      unsub1 = onSnapshot(q1, (snap) => {
+        if (!snap.empty) {
+          const docData = snap.docs[0].data()
+          const docId = snap.docs[0].id
+          if (docId === lastProcessedReactionDocId.current) return
+          lastProcessedReactionDocId.current = docId
+
+          const myUid = currentPlayer.uid || user?.uid
+          const isFromMe = docData.senderId === myUid
+          const msg = docData.message || 'Reação'
+
+          if (isFromMe) {
+            setPlayerReaction({ message: msg, timestamp: Date.now() })
+            setTimeout(() => setPlayerReaction(null), 3500)
+          } else {
+            playEmoteSound(msg)
+            setOpponentReaction({ message: msg, timestamp: Date.now() })
+            setTimeout(() => setOpponentReaction(null), 3500)
+          }
+        }
+      }, () => {})
+    } catch {}
+
+    try {
+      const q2 = query(
+        collection(db, `duels/${duelId}/reactions`),
+        orderBy('timestamp', 'desc'),
+        limit(1)
+      )
+      unsub2 = onSnapshot(q2, (snap) => {
+        if (!snap.empty) {
+          const docData = snap.docs[0].data()
+          const docId = snap.docs[0].id
+          if (docId === lastProcessedReactionDocId.current) return
+          lastProcessedReactionDocId.current = docId
+
+          const myUid = currentPlayer.uid || user?.uid
+          const isFromMe = docData.senderId === myUid
+          const msg = docData.message || 'Reação'
+
+          if (isFromMe) {
+            setPlayerReaction({ message: msg, timestamp: Date.now() })
+            setTimeout(() => setPlayerReaction(null), 3500)
+          } else {
+            playEmoteSound(msg)
+            setOpponentReaction({ message: msg, timestamp: Date.now() })
+            setTimeout(() => setOpponentReaction(null), 3500)
+          }
+        }
+      }, () => {})
+    } catch {}
+
+    return () => {
+      if (unsub1) unsub1()
+      if (unsub2) unsub2()
+    }
+  }, [duelId, currentPlayer.uid, user?.uid])
+
   // Handle sending an Emote
   const handleSendEmote = async (emote: EmoteItem) => {
     if (tauntCooldown > 0 || !duelId) return
@@ -254,8 +325,26 @@ export function DuelArena({
       setActiveEmote(null)
     }, 3500)
 
-    // Direct Realtime Broadcast to Duel opponent on Firestore
+    // 1. Direct Realtime Broadcast to Duel opponent on Firestore doc
     await sendDuelEmote(duelId, currentPlayer.uid, currentPlayer.displayName, emote.id, emote.text)
+
+    // 2. Write to subcollection gameRooms/${duelId}/reactions for multi-layer redundancy
+    try {
+      addDoc(collection(db, `gameRooms/${duelId}/reactions`), {
+        senderId: currentPlayer.uid,
+        message: msg,
+        timestamp: serverTimestamp(),
+      }).catch(() => {})
+    } catch {}
+
+    // 3. Write to subcollection duels/${duelId}/reactions
+    try {
+      addDoc(collection(db, `duels/${duelId}/reactions`), {
+        senderId: currentPlayer.uid,
+        message: msg,
+        timestamp: serverTimestamp(),
+      }).catch(() => {})
+    } catch {}
 
     // Optional API rate-limit validation in background
     try {
@@ -865,43 +954,46 @@ export function DuelArena({
         {/* 1. TOPO: VS HEADER + REAGIR + TEMPO (SHRINK-0)            */}
         {/* ========================================================= */}
         <div className="w-full shrink-0">
-          <div className="card-game flex items-center justify-between gap-2 rounded-2xl py-1.5 px-3 shadow-lg border border-white/15 relative overflow-hidden bg-slate-900/90">
-            {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
-            )}
+          <div className="card-game flex items-center justify-between gap-2 rounded-2xl py-1.5 px-3 shadow-lg border border-white/15 relative overflow-visible bg-slate-900/90">
+            {/* 1v1 VFX OVERLAYS CLIPPED INSIDE INNER CONTAINER */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+              {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+              {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
+              )}
 
-            {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-            {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-                <span className="text-lg animate-bounce">🌺</span>
-                <span className="text-base animate-ping ml-2">🌸</span>
-              </div>
-            )}
-
-            {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
-            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
-              <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
-            )}
-
-            {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
-            {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
-                <span className="text-lg animate-bounce">🪙</span>
-                <span className="text-xl animate-ping">✨</span>
-              </div>
-            )}
-
-            {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
-            {feedback?.status === 'CORRECT' &&
-              (streakEffectId === 'sfx_espada_conquistador' ||
-                streakEffectId === 'streak_espada_conquistador') && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
-                  <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
-                    ⚔️
-                  </span>
+              {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+              {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+                  <span className="text-lg animate-bounce">🌺</span>
+                  <span className="text-base animate-ping ml-2">🌸</span>
                 </div>
               )}
+
+              {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+              {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+                <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
+              )}
+
+              {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+              {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+                  <span className="text-lg animate-bounce">🪙</span>
+                  <span className="text-xl animate-ping">✨</span>
+                </div>
+              )}
+
+              {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+              {feedback?.status === 'CORRECT' &&
+                (streakEffectId === 'sfx_espada_conquistador' ||
+                  streakEffectId === 'streak_espada_conquistador') && (
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                    <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
+                      ⚔️
+                    </span>
+                  </div>
+                )}
+            </div>
 
             {/* Linha dos Jogadores VS */}
             <div className="flex items-center gap-2 flex-1 min-w-0 relative">
@@ -927,7 +1019,7 @@ export function DuelArena({
             </div>
 
             {/* Center VS Indicator + Reagir Button */}
-            <div className="flex flex-col items-center px-1.5 shrink-0">
+            <div className="flex flex-col items-center px-1.5 shrink-0 relative z-30">
               <div className="flex items-center gap-1">
                 <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1.5 text-[9px] font-black">
                   VS
@@ -937,28 +1029,25 @@ export function DuelArena({
                 </span>
               </div>
 
-              {/* Botão Mini Reagir */}
+              {/* Botão Mini Reagir Desbloqueado */}
               <div className="relative mt-1">
                 <button
                   type="button"
                   disabled={tauntCooldown > 0}
-                  onClick={() => setTauntModalOpen(!tauntModalOpen)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setTauntModalOpen((prev) => !prev)
+                  }}
                   className={cn(
-                    'px-2 py-0.5 rounded-full border border-purple-500/40 bg-purple-500/15 text-purple-300 text-[10px] font-bold transition flex items-center gap-0.5 active:scale-95 cursor-pointer',
-                    tauntCooldown > 0 && 'opacity-50 cursor-not-allowed'
+                    'relative z-30 pointer-events-auto px-2.5 py-1 rounded-full border border-purple-500/50 bg-purple-500/20 text-purple-300 text-[10px] font-black transition flex items-center gap-1 active:scale-95 cursor-pointer shadow-sm',
+                    tauntCooldown > 0
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:bg-purple-600/30 hover:border-purple-400'
                   )}
                 >
                   <span>💬</span>
                   <span>{tauntCooldown > 0 ? `${tauntCooldown}s` : 'Reagir'}</span>
                 </button>
-
-                <DuelEmoteFloatingBar
-                  isOpen={tauntModalOpen}
-                  onClose={() => setTauntModalOpen(false)}
-                  onSendEmote={handleSendEmote}
-                  cooldown={tauntCooldown}
-                  equippedEmoteIds={(profile as any)?.equipped?.emotes}
-                />
               </div>
             </div>
 
@@ -1141,6 +1230,73 @@ export function DuelArena({
             })}
           </div>
         </div>
+
+        {/* ========================================================= */}
+        {/* MODAL / POPUP DE SELEÇÃO DE REAÇÕES (FIXED Z-50)           */}
+        {/* ========================================================= */}
+        {tauntModalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-150 select-none"
+            onClick={() => setTauntModalOpen(false)}
+          >
+            <div
+              className="fixed z-50 inset-x-4 bottom-24 max-w-sm mx-auto bg-slate-900/95 border border-cyan-500/40 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md text-white animate-in zoom-in-95 duration-150"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header com título e botão fechar X */}
+              <div className="flex items-center justify-between border-b border-slate-700/60 pb-2 mb-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-base">💬</span>
+                  <h3 className="font-display text-xs font-black uppercase tracking-wider text-cyan-300">
+                    Enviar Provocação
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setTauntModalOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Lista de Provocações Rápidas */}
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { id: 'boa_sorte', emoji: '🍀', label: 'Boa Sorte!' },
+                  { id: 'facil', emoji: '⚡', label: 'Essa era fácil!' },
+                  { id: 'medo', emoji: '😱', label: 'Estás com medo?' },
+                  { id: 'campeao', emoji: '🏆', label: 'O título é meu!' },
+                  { id: 'foco', emoji: '🎯', label: 'Na mouche!' },
+                  { id: 'adeus', emoji: '👋', label: 'Já foste!' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    disabled={tauntCooldown > 0}
+                    onClick={() => {
+                      handleSendEmote({
+                        id: item.id,
+                        emoji: item.emoji,
+                        label: item.label,
+                        text: `${item.emoji} ${item.label}`,
+                        category: 'provocacao',
+                        price: 0,
+                        rarity: 'COMUM',
+                      } as any)
+                    }}
+                    className="flex items-center gap-2 p-2 rounded-xl bg-slate-800/90 border border-slate-700 hover:border-cyan-400 hover:bg-cyan-950/40 active:scale-95 transition-all text-left cursor-pointer"
+                  >
+                    <span className="text-lg shrink-0">{item.emoji}</span>
+                    <span className="text-xs font-bold text-slate-100 leading-tight truncate">
+                      {item.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
