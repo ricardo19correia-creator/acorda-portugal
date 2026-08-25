@@ -55,7 +55,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
   // Form fields
   const [name, setName] = useState('')
-  const [district, setDistrict] = useState<string>('Vila Real')
+  const [district, setDistrict] = useState<string>('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -67,7 +67,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
   // Onboarding de Primeiro Acesso (caso falte distrito ou não esteja bloqueado)
   const [showOnboarding, setShowOnboarding] = useState(false)
-  const [onboardingDistrict, setOnboardingDistrict] = useState<string>('Lisboa')
+  const [onboardingDistrict, setOnboardingDistrict] = useState<string>('')
   const [onboardingSaving, setOnboardingSaving] = useState(false)
 
   // Hook que processa retorno do redirecionamento do Google de forma resiliente
@@ -140,10 +140,14 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
     const cleanEmail = typeof email === 'string' ? email.trim() : ''
     const cleanPassword = typeof password === 'string' ? password : ''
     const cleanConfirmPassword = typeof confirmPassword === 'string' ? confirmPassword : ''
-    const cleanDistrict = typeof district === 'string' && district.trim() ? district.trim() : 'Vila Real'
+    const cleanDistrict = typeof district === 'string' ? district.trim() : ''
 
     if (!cleanName) {
       setError('Por favor, escolhe um nome ou nickname.')
+      return
+    }
+    if (!cleanDistrict) {
+      setError('Por favor, escolhe obrigatoriamente o teu Distrito de Origem.')
       return
     }
     if (!cleanEmail || !cleanPassword) {
@@ -230,6 +234,10 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   // Guardar Onboarding de Distrito para Google Login
   const handleConfirmOnboardingDistrict = async () => {
     if (!user?.uid || !db) return
+    if (!onboardingDistrict) {
+      setError('Por favor escolhe obrigatoriamente o teu Distrito de Representação.')
+      return
+    }
     setOnboardingSaving(true)
     try {
       const userRef = doc(db, 'users', user.uid)
@@ -277,20 +285,19 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
               <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 font-mono">
                 ONBOARDING DE JOGADOR
               </span>
-              <h2 className="text-2xl font-black text-white font-display mt-1">
-                Escolhe o Teu Distrito
+              <h2 className="text-xl sm:text-2xl font-black text-white font-display mt-1 leading-snug">
+                Bem-vindo ao Acorda Portugal! Escolhe o teu Distrito de Representação
               </h2>
-              <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 Seleciona a tua região de origem para representar o teu distrito nos{' '}
-                <strong className="text-emerald-300">Rankings Nacionais</strong> e disputas territoriais.
+                <strong className="text-emerald-300">Rankings Territoriais Nacionais</strong>.
               </p>
 
               {/* Aviso Imutável */}
-              <div className="mt-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-3.5 flex items-start gap-2.5 text-left text-xs text-amber-300">
-                <AlertCircle className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
+              <div className="mt-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 flex items-start gap-2.5 text-left text-xs text-emerald-300">
+                <MapPin className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong>⚠️ Escolha Definitiva:</strong> A tua afiliação territorial é permanente e
-                  não poderá ser alterada após a confirmação.
+                  📍 O teu distrito de representação fica associado ao teu perfil para os Rankings Territoriais.
                 </span>
               </div>
 
@@ -302,10 +309,14 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
                 <div className="relative">
                   <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-400" />
                   <select
+                    required
                     value={onboardingDistrict}
                     onChange={(e) => setOnboardingDistrict(e.target.value)}
                     className="w-full rounded-2xl border border-emerald-500/40 bg-slate-900 pl-10 pr-4 py-3 text-sm font-bold text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer"
                   >
+                    <option value="" disabled className="text-slate-500">
+                      Seleciona o teu distrito...
+                    </option>
                     {PORTUGAL_DISTRICTS.map((dist) => (
                       <option key={dist} value={dist}>
                         {dist}
@@ -317,7 +328,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
               <button
                 type="button"
-                disabled={onboardingSaving}
+                disabled={onboardingSaving || !onboardingDistrict}
                 onClick={handleConfirmOnboardingDistrict}
                 className="w-full mt-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-emerald-500/25 hover:brightness-110 active:scale-[0.98] transition cursor-pointer disabled:opacity-50"
               >
@@ -527,6 +538,9 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
                     onChange={(e) => setDistrict(e.target.value)}
                     className="w-full rounded-2xl border border-emerald-500/40 bg-card pl-10 pr-4 py-2.5 text-sm font-bold text-foreground focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 cursor-pointer"
                   >
+                    <option value="" disabled className="bg-card text-muted-foreground">
+                      Seleciona obrigatoriamente o teu distrito...
+                    </option>
                     {PORTUGAL_DISTRICTS.map((dist) => (
                       <option key={dist} value={dist} className="bg-card text-foreground">
                         {dist}
@@ -534,11 +548,11 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
                     ))}
                   </select>
                 </div>
-                {/* Aviso Imutável */}
-                <div className="mt-2 rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 flex items-start gap-2 text-[11px] text-amber-300">
-                  <AlertCircle className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
+                {/* Aviso em destaque */}
+                <div className="mt-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-2.5 flex items-start gap-2 text-[11px] text-emerald-300">
+                  <MapPin className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Escolha definitiva:</strong> O teu distrito de representação é permanente e não poderá ser alterado após o registo.
+                    📍 O teu distrito de representação fica associado ao teu perfil para os Rankings Territoriais.
                   </span>
                 </div>
               </div>
