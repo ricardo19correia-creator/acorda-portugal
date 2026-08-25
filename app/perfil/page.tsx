@@ -1122,10 +1122,10 @@ function PerfilContent() {
         } catch (e) {}
       }
 
-      // 5. Redirecionar imediatamente para a página inicial
+      // 5. Redirecionar imediatamente para a página de confirmação /conta-eliminada
       setIsDeleting(false)
       setIsDeleteModalOpen(false)
-      window.location.href = '/?account_deleted=1'
+      window.location.href = '/conta-eliminada'
     } catch (err: any) {
       console.error('[DELETE ACCOUNT ERROR]', err)
       setIsDeleting(false)
