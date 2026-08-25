@@ -1014,10 +1014,25 @@ function PerfilContent() {
     }
   }
 
-  // Eliminar Conta Definitivamente com Limpeza em Cascata
+  // Eliminar Conta Definitivamente com Limpeza em Cascata e Reautenticação Segura
   const handleDeleteAccount = async () => {
     if (deleteConfirmationText.trim().toUpperCase() !== 'ELIMINAR') {
       setDeleteError('Por favor escreve "ELIMINAR" para confirmar a remoção permanente.')
+      return
+    }
+
+    const currentUser = auth.currentUser
+    if (!currentUser) {
+      setDeleteError('Sessão expirada. Inicia sessão novamente.')
+      return
+    }
+
+    // Proteção de Segurança para a Conta Oficial
+    if (
+      currentUser.email === 'ricardo19correia@gmail.com' ||
+      currentUser.uid === 'A4tBQnNi8ySw2lYUI7rlxAo2bKE2'
+    ) {
+      setDeleteError('Esta conta oficial de Administrador/Fundador está protegida contra eliminação.')
       return
     }
 
@@ -1025,35 +1040,31 @@ function PerfilContent() {
     setDeleteError(null)
 
     try {
-      const currentUser = auth.currentUser
-      if (!currentUser) {
-        throw new Error('Sessão expirada. Inicia sessão novamente.')
-      }
-
       const uid = currentUser.uid
 
-      // Se for exigida reautenticação por password
-      if (needsReauth) {
-        if (!deletePassword) {
-          setDeleteError('Por favor introduz a tua palavra-passe atual para confirmar.')
-          setIsDeleting(false)
-          return
-        }
-        if (currentUser.email) {
+      // Se for exigida reautenticação por password prévia
+      if (needsReauth && deletePassword && currentUser.email) {
+        try {
           const credential = EmailAuthProvider.credential(currentUser.email, deletePassword)
           await reauthenticateWithCredential(currentUser, credential)
+        } catch (credErr: any) {
+          setIsDeleting(false)
+          setDeleteError('A palavra-passe introduzida está incorreta.')
+          return
         }
       }
 
-      // 1. Limpeza em cascata no Firestore
+      // 1. Apagar documento do Firestore primeiro (enquanto o utilizador ainda está autenticado)
       try {
-        await deleteDoc(doc(db, 'users', uid))
+        const userDocRef = doc(db, 'users', uid)
+        await deleteDoc(userDocRef)
       } catch (e) {
         console.warn('[DELETE] Aviso ao apagar doc users:', e)
       }
 
       try {
-        await deleteDoc(doc(db, 'publicProfiles', uid))
+        const publicDocRef = doc(db, 'publicProfiles', uid)
+        await deleteDoc(publicDocRef)
       } catch (e) {
         console.warn('[DELETE] Aviso ao apagar doc publicProfiles:', e)
       }
@@ -1069,8 +1080,37 @@ function PerfilContent() {
         console.warn('[DELETE] Aviso ao limpar walletTransactions:', e)
       }
 
-      // 3. Eliminar conta no Firebase Authentication
-      await deleteUser(currentUser)
+      // 3. Eliminar conta no Firebase Authentication com reautenticação se necessário
+      try {
+        await deleteUser(currentUser)
+      } catch (authError: any) {
+        // Se exigir login recente (auth/requires-recent-login), dispara popup de reautenticação
+        if (authError?.code === 'auth/requires-recent-login' || authError?.code === 'auth/user-token-expired') {
+          const isGoogle = currentUser.providerData.some((p) => p.providerId === 'google.com')
+          if (isGoogle) {
+            const { GoogleAuthProvider, reauthenticateWithPopup } = await import('firebase/auth')
+            const provider = new GoogleAuthProvider()
+            provider.setCustomParameters({ prompt: 'select_account' })
+            await reauthenticateWithPopup(currentUser, provider)
+            await deleteUser(currentUser)
+          } else if (deletePassword && currentUser.email) {
+            const credential = EmailAuthProvider.credential(currentUser.email, deletePassword)
+            await reauthenticateWithCredential(currentUser, credential)
+            await deleteUser(currentUser)
+          } else {
+            setNeedsReauth(true)
+            setIsDeleting(false)
+            setDeleteError(
+              isGoogle
+                ? 'Por motivos de segurança, clica no botão abaixo para reautenticar com o Google antes de eliminar.'
+                : 'Por motivos de segurança, introduz a tua palavra-passe atual abaixo para confirmar a eliminação.'
+            )
+            return
+          }
+        } else {
+          throw authError
+        }
+      }
 
       // 4. Limpeza total de cache local, storage e indexedDB
       if (typeof window !== 'undefined') {
@@ -1083,29 +1123,22 @@ function PerfilContent() {
       }
 
       // 5. Redirecionar imediatamente para a página inicial
+      setIsDeleting(false)
+      setIsDeleteModalOpen(false)
       window.location.href = '/?account_deleted=1'
     } catch (err: any) {
       console.error('[DELETE ACCOUNT ERROR]', err)
+      setIsDeleting(false)
       const code = err?.code || ''
-      if (code === 'auth/requires-recent-login' || code === 'auth/user-token-expired') {
-        setNeedsReauth(true)
-        const isGoogle = auth.currentUser?.providerData.some((p) => p.providerId === 'google.com')
-        if (isGoogle) {
-          setDeleteError('Por motivos de segurança, reautentica a tua conta Google antes de prosseguir. Clica no botão abaixo:')
-        } else {
-          setDeleteError('Por motivos de segurança, introduz a tua palavra-passe atual para confirmar a eliminação definitiva.')
-        }
-      } else if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
         setDeleteError('A palavra-passe introduzida está incorreta.')
       } else if (code === 'auth/network-request-failed') {
         setDeleteError('Falha de ligação à rede. Verifica a tua conexão com a Internet.')
-      } else if (code === 'auth/too-many-requests') {
-        setDeleteError('Muitas tentativas falhadas. Aguarda alguns instantes antes de tentar novamente.')
+      } else if (code === 'auth/popup-closed-by-user') {
+        setDeleteError('A janela de autenticação Google foi fechada antes de concluir.')
       } else {
         setDeleteError(err?.message || 'Ocorreu um erro ao eliminar a conta. Tenta novamente mais tarde.')
       }
-    } finally {
-      setIsDeleting(false)
     }
   }
 
