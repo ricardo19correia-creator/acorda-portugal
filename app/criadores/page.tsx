@@ -2,62 +2,59 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 import {
-  Sparkles,
-  Search,
-  PenSquare,
-  Plus,
-  Flame,
-  Clock,
-  Heart,
-  MessageSquare,
-  Award,
-  TrendingUp,
-  MapPin,
-  Filter,
-  CheckCircle,
-  AlertCircle,
-  HelpCircle,
-} from 'lucide-react'
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  updateDoc,
+  increment,
+} from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import { useAuth } from '@/components/auth-provider'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { CreatorsHero } from '@/components/creators/CreatorsHero'
-import { CreatorsCategoriesBar } from '@/components/creators/CreatorsCategoriesBar'
-import { CreatorPostCard } from '@/components/creators/CreatorPostCard'
-import { CreatePostModal } from '@/components/creators/CreatePostModal'
-import { CreatorsCommentsDrawer } from '@/components/creators/CreatorsCommentsDrawer'
 import { CreatorsSidebar } from '@/components/creators/CreatorsSidebar'
-import { ReportPostModal } from '@/components/creators/ReportPostModal'
-import {
-  getCreatorPosts,
-  createCreatorPost,
-  togglePostLike,
-  togglePostSave,
-  voteOnPoll,
-  voteOnSuggestion,
-} from '@/lib/creators-service'
-import type { CreatorPost, CreatorCategorySlug } from '@/src/types/creators'
 import { VALID_DISTRICTS } from '@/data/districts'
 import { cn } from '@/lib/utils'
+import { Heart, MessageSquare, Sparkles, Send, PenSquare, Search, Filter } from 'lucide-react'
+
+export interface PublicacaoComunidade {
+  id: string
+  autor: string
+  tag: string
+  distrito: string
+  conteudo: string
+  categoria: string
+  destaque: boolean
+  oficial: boolean
+  likes: number
+  comentariosCount: number
+  createdAt: any
+}
 
 export default function CriadoresPage() {
-  const [posts, setPosts] = useState<CreatorPost[]>([])
+  const { user, profile } = useAuth()
+  const [publicacoes, setPublicacoes] = useState<PublicacaoComunidade[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Filtros de Feed
-  const [selectedCategory, setSelectedCategory] = useState<CreatorCategorySlug | 'todas'>('todas')
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('Todos os Distritos')
-  const [sortBy, setSortBy] = useState<'destaques' | 'recentes' | 'populares' | 'comentadas' | 'tendencias'>('destaques')
+  // Formulário de publicação
+  const [novoTexto, setNovoTexto] = useState('')
+  const [categoria, setCategoria] = useState('Ideias')
+  const [distrito, setDistrito] = useState('Lisboa')
+  const [carregando, setCarregando] = useState(false)
+
+  // Filtros de visualização
+  const [filtroAba, setFiltroAba] = useState<'destaque' | 'recentes'>('destaque')
+  const [categoriaFiltro, setCategoriaFiltro] = useState<string>('todas')
+  const [distritoFiltro, setDistritoFiltro] = useState<string>('Todos os Distritos')
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Modais e Gavetas
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
-  const [activeCommentPost, setActiveCommentPost] = useState<CreatorPost | null>(null)
-  const [isCommentsDrawerOpen, setIsCommentsDrawerOpen] = useState(false)
-  const [activeReportPost, setActiveReportPost] = useState<CreatorPost | null>(null)
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
-
-  // Feedback Toast
+  // Toast de feedback
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   const showToast = (msg: string) => {
@@ -65,107 +62,135 @@ export default function CriadoresPage() {
     setTimeout(() => setToastMessage(null), 3000)
   }
 
-  // Carregamento de Publicações
-  const loadPosts = async () => {
+  // Preencher distrito com o do perfil autenticado
+  useEffect(() => {
+    if (profile?.district) {
+      setDistrito(profile.district)
+    }
+  }, [profile?.district])
+
+  // 1. Escuta em TEMPO REAL 100% ligada ao Firestore (Coleção: publicacoes_comunidade)
+  useEffect(() => {
     setLoading(true)
     try {
-      const data = await getCreatorPosts({
-        category: selectedCategory,
-        district: selectedDistrict,
-        sortBy,
-        searchQuery,
-      })
-      setPosts(data)
-    } catch (err) {
-      console.error('[CREATORS] Erro ao carregar posts:', err)
-    } finally {
+      const q = query(
+        collection(db, 'publicacoes_comunidade'),
+        orderBy('createdAt', 'desc')
+      )
+
+      const unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          const docs = snapshot.docs.map((docSnap) => {
+            const data = docSnap.data()
+            return {
+              id: docSnap.id,
+              autor: data.autor || 'Jogador',
+              tag: data.tag || 'jogador_pt',
+              distrito: data.distrito || 'Portugal',
+              conteudo: data.conteudo || '',
+              categoria: data.categoria || 'Geral',
+              destaque: Boolean(data.destaque),
+              oficial: Boolean(data.oficial),
+              likes: typeof data.likes === 'number' ? data.likes : 0,
+              comentariosCount: typeof data.comentariosCount === 'number' ? data.comentariosCount : 0,
+              createdAt: data.createdAt,
+            } as PublicacaoComunidade
+          })
+
+          setPublicacoes(docs)
+          setLoading(false)
+        },
+        (error) => {
+          console.warn('[CRIADORES] Firestore listener notice:', error)
+          setLoading(false)
+        }
+      )
+
+      return () => unsubscribe()
+    } catch (e) {
+      console.warn('[CRIADORES] Erro ao iniciar listener Firestore:', e)
       setLoading(false)
     }
-  }
+  }, [])
 
-  useEffect(() => {
-    loadPosts()
-  }, [selectedCategory, selectedDistrict, sortBy, searchQuery])
+  // 2. Envio e publicação imediata na coleção oficial
+  const handlePublicar = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!novoTexto.trim() || carregando) return
 
-  // Contadores por Categoria
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { todas: posts.length }
-    posts.forEach((p) => {
-      counts[p.category] = (counts[p.category] || 0) + 1
-      if (p.isFeatured || Boolean(p.highlightBadge)) {
-        counts['destaques'] = (counts['destaques'] || 0) + 1
-      }
-    })
-    return counts
-  }, [posts])
-
-  // Handlers de Interação
-  const handleLike = async (postId: string) => {
+    setCarregando(true)
     try {
-      const { liked, newCount } = await togglePostLike(postId)
-      setPosts((prev) =>
-        prev.map((p) => (p.id === postId ? { ...p, hasLiked: liked, likesCount: newCount } : p)),
-      )
-      if (liked) {
-        showToast('Gosto registado! ❤️')
-      }
-    } catch (e) {}
-  }
+      const autorFinal = profile?.displayName || user?.displayName || 'Jogador'
+      const tagFinal = profile?.username || (user?.email ? user.email.split('@')[0] : 'jogador_pt')
 
-  const handleSave = (postId: string) => {
-    const isSaved = togglePostSave(postId)
-    setPosts((prev) =>
-      prev.map((p) => (p.id === postId ? { ...p, hasSaved: isSaved } : p)),
-    )
-    showToast(isSaved ? 'Publicação guardada nos favoritos! 🔖' : 'Removido dos favoritos.')
-  }
+      await addDoc(collection(db, 'publicacoes_comunidade'), {
+        autor: autorFinal,
+        tag: tagFinal,
+        distrito: distrito,
+        conteudo: novoTexto.trim(),
+        categoria: categoria,
+        destaque: false,
+        oficial: false,
+        likes: 0,
+        comentariosCount: 0,
+        createdAt: serverTimestamp(),
+      })
 
-  const handleOpenComments = (post: CreatorPost) => {
-    setActiveCommentPost(post)
-    setIsCommentsDrawerOpen(true)
-  }
-
-  const handleCommentAdded = (postId: string) => {
-    setPosts((prev) =>
-      prev.map((p) => (p.id === postId ? { ...p, commentsCount: p.commentsCount + 1 } : p)),
-    )
-    showToast('Comentário publicado! 💬')
-  }
-
-  const handleVotePoll = async (postId: string, optionId: string) => {
-    const updatedPost = await voteOnPoll(postId, optionId)
-    if (updatedPost) {
-      setPosts((prev) => prev.map((p) => (p.id === postId ? updatedPost : p)))
-      showToast('Voto no debate registado! 🔥')
+      setNovoTexto('')
+      showToast('Publicação criada com sucesso! 🇵🇹')
+    } catch (error) {
+      console.error('Erro ao publicar mensagem:', error)
+      showToast('Erro ao publicar mensagem. Tenta novamente.')
+    } finally {
+      setCarregando(false)
     }
   }
 
-  const handleVoteSuggestion = (postId: string, vote: 'up' | 'down') => {
-    const { upvotes, downvotes } = voteOnSuggestion(postId, vote)
-    setPosts((prev) =>
-      prev.map((p) =>
-        p.id === postId
-          ? {
-              ...p,
-              upvotesCount: upvotes,
-              downvotesCount: downvotes,
-              userVote: p.userVote === vote ? null : vote,
-            }
-          : p,
-      ),
-    )
-    showToast(vote === 'up' ? 'Apoiado! 👍' : 'Voto registado. 👎')
+  // 3. Gosto / Like em tempo real
+  const handleLike = async (postId: string) => {
+    try {
+      const postRef = doc(db, 'publicacoes_comunidade', postId)
+      await updateDoc(postRef, {
+        likes: increment(1),
+      })
+      showToast('Gosto registado! ❤️')
+    } catch (err) {
+      console.error('Erro ao dar like:', err)
+    }
   }
 
-  const handleReport = (post: CreatorPost) => {
-    setActiveReportPost(post)
-    setIsReportModalOpen(true)
-  }
+  // 4. Filtragem dinâmica
+  const publicacoesFiltradas = useMemo(() => {
+    return publicacoes.filter((p) => {
+      // Filtro de Abas (Destaques vs Recentes)
+      if (filtroAba === 'destaque') {
+        const isHighlight = p.destaque || p.oficial || p.likes > 5
+        if (!isHighlight && publicacoes.length > 5) return false
+      }
 
-  const handlePostCreated = (newPost: CreatorPost) => {
-    setPosts((prev) => [newPost, ...prev])
-    showToast('Publicação criada com sucesso! 🇵🇹')
-  }
+      // Filtro de Categoria
+      if (categoriaFiltro !== 'todas') {
+        if (p.categoria.toLowerCase() !== categoriaFiltro.toLowerCase()) return false
+      }
+
+      // Filtro de Distrito
+      if (distritoFiltro !== 'Todos os Distritos') {
+        if (p.distrito.toLowerCase() !== distritoFiltro.toLowerCase()) return false
+      }
+
+      // Pesquisa Textual
+      if (searchQuery.trim()) {
+        const queryNorm = searchQuery.toLowerCase()
+        const matchText = p.conteudo.toLowerCase().includes(queryNorm)
+        const matchAuthor = p.autor.toLowerCase().includes(queryNorm)
+        const matchTag = p.tag.toLowerCase().includes(queryNorm)
+        if (!matchText && !matchAuthor && !matchTag) return false
+      }
+
+      return true
+    })
+  }, [publicacoes, filtroAba, categoriaFiltro, distritoFiltro, searchQuery])
 
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
@@ -185,196 +210,261 @@ export default function CriadoresPage() {
           <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-6 space-y-6">
             {/* Hero Principal Oficial */}
             <CreatorsHero
-              onOpenCreateModal={() => setIsCreateModalOpen(true)}
-              onSelectHighlights={() => setSelectedCategory('destaques')}
-              totalPostsCount={posts.length}
+              onOpenCreateModal={() => {
+                const el = document.getElementById('caixa-publicacao')
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                  const textarea = el.querySelector('textarea')
+                  if (textarea) textarea.focus()
+                }
+              }}
+              onSelectHighlights={() => {
+                setFiltroAba('destaque')
+                const feed = document.getElementById('feed-publicacoes')
+                if (feed) {
+                  feed.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}
+              totalPostsCount={publicacoes.length}
             />
-
-            {/* Barra de Categorias */}
-            <CreatorsCategoriesBar
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-              categoryCounts={categoryCounts}
-            />
-
-            {/* Barra de Filtros, Ordenação e Pesquisa */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 backdrop-blur-md">
-              {/* Abas de Ordenação */}
-              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-1 md:pb-0">
-                {[
-                  { id: 'destaques', label: '🔥 Em Destaque' },
-                  { id: 'recentes', label: '🆕 Mais Recentes' },
-                  { id: 'populares', label: '❤️ Populares' },
-                  { id: 'comentadas', label: '💬 Comentadas' },
-                  { id: 'tendencias', label: '📈 Tendências' },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => setSortBy(tab.id as any)}
-                    className={cn(
-                      'shrink-0 rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer',
-                      sortBy === tab.id
-                        ? 'bg-emerald-500 text-slate-950 font-black shadow-sm'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5',
-                    )}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Controlo de Pesquisa & Filtro Distrital */}
-              <div className="flex items-center gap-2">
-                {/* Filtro por Distrito */}
-                <div className="relative">
-                  <select
-                    value={selectedDistrict}
-                    onChange={(e) => setSelectedDistrict(e.target.value)}
-                    className="rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-emerald-400 cursor-pointer"
-                  >
-                    <option value="Todos os Distritos">📍 Todos os Distritos</option>
-                    {VALID_DISTRICTS.map((d) => (
-                      <option key={d} value={d}>
-                        {d}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Caixa de Pesquisa Textual */}
-                <div className="relative flex-1 sm:w-56">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Procurar publicações..."
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 pl-8 pr-3 py-2 text-xs text-white placeholder:text-slate-600 outline-none focus:border-emerald-400"
-                  />
-                </div>
-              </div>
-            </div>
 
             {/* Layout Principal: 2 Colunas (Feed + Sidebar) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Coluna Central: Feed de Publicações (8 colunas no Desktop) */}
-              <div id="feed-publicacoes" className="lg:col-span-8 space-y-4">
-                {/* Botão Superior Rápido para Criar Publicação */}
-                <div
-                  onClick={() => setIsCreateModalOpen(true)}
-                  className="flex items-center gap-3 rounded-3xl border border-white/10 bg-slate-900/60 p-4 shadow-md backdrop-blur-md transition-all hover:border-emerald-500/40 hover:bg-slate-900 cursor-pointer group"
+              {/* Coluna Central: Feed em Tempo Real (8 Colunas) */}
+              <div className="lg:col-span-8 space-y-5">
+                {/* Caixa de Criação de Publicação em Tempo Real */}
+                <form
+                  id="caixa-publicacao"
+                  onSubmit={handlePublicar}
+                  className="bg-slate-900/90 border border-emerald-500/30 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl space-y-4"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-300 text-lg border border-emerald-500/30 group-hover:scale-105 transition-transform">
-                    ✍️
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 font-black text-lg flex items-center justify-center border border-emerald-500/30 shrink-0">
+                      ✍️
+                    </div>
+                    <textarea
+                      value={novoTexto}
+                      onChange={(e) => setNovoTexto(e.target.value)}
+                      placeholder="Tens uma ideia, história, desabafo ou piada? Publica aqui na comunidade de Portugal..."
+                      rows={3}
+                      className="w-full bg-slate-950/80 rounded-2xl p-3.5 text-sm text-white placeholder-slate-500 border border-white/10 focus:outline-none focus:border-emerald-500 resize-none transition-colors"
+                    />
                   </div>
-                  <div className="flex-1 text-xs text-slate-400 group-hover:text-slate-200 transition-colors font-medium">
-                    Tens uma ideia, história, desabafo ou piada? <span className="text-emerald-400 font-bold">Publica aqui...</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="rounded-xl bg-emerald-500 px-4 py-2 text-xs font-black text-slate-950 uppercase tracking-wider group-hover:bg-emerald-400 transition-colors shadow"
-                  >
-                    Publicar
-                  </button>
-                </div>
 
-                {/* Lista de Cartões do Feed */}
-                {loading ? (
-                  <div className="space-y-4 py-8">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="h-44 rounded-3xl border border-white/5 bg-slate-900/40 animate-pulse"
-                      />
-                    ))}
-                  </div>
-                ) : posts.length === 0 ? (
-                  <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-12 text-center space-y-4">
-                    <div className="text-4xl">🇵🇹</div>
-                    <h3 className="font-display text-lg font-black uppercase text-white">
-                      Ainda Não Há Publicações
-                    </h3>
-                    <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-                      {selectedCategory !== 'todas'
-                        ? `Ninguém publicou nada na categoria "${selectedCategory}" ainda. Queres ser o primeiro?`
-                        : 'Se calhar és tu quem vai começar a conversa no Acorda Portugal.'}
-                    </p>
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/10">
+                    <div className="flex items-center gap-2 text-xs flex-wrap">
+                      <select
+                        value={categoria}
+                        onChange={(e) => setCategoria(e.target.value)}
+                        className="bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-emerald-400 cursor-pointer font-bold"
+                      >
+                        <option value="Ideias">💡 Ideias</option>
+                        <option value="Desabafos">🗣️ Desabafos</option>
+                        <option value="Humor">😂 Humor</option>
+                        <option value="Histórias">📖 Histórias</option>
+                        <option value="Sugestões">🎯 Sugestões</option>
+                        <option value="Portugal">🇵🇹 Portugal</option>
+                        <option value="Opiniões">💬 Opiniões</option>
+                        <option value="Debates">🔥 Debates</option>
+                      </select>
+
+                      <select
+                        value={distrito}
+                        onChange={(e) => setDistrito(e.target.value)}
+                        className="bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-emerald-400 cursor-pointer font-bold"
+                      >
+                        {VALID_DISTRICTS.map((d) => (
+                          <option key={d} value={d}>
+                            📍 {d}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
                     <button
-                      type="button"
-                      onClick={() => setIsCreateModalOpen(true)}
-                      className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-6 py-3 text-xs font-black text-slate-950 uppercase tracking-wider hover:bg-emerald-400 transition-all shadow-lg"
+                      type="submit"
+                      disabled={carregando || !novoTexto.trim()}
+                      className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 disabled:opacity-50 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/25 transition-transform active:scale-95 cursor-pointer inline-flex items-center gap-2"
                     >
-                      <PenSquare className="h-4 w-4" />
-                      <span>Criar Primeira Publicação</span>
+                      <Send className="h-3.5 w-3.5" />
+                      <span>{carregando ? 'A publicar...' : 'PUBLICAR'}</span>
                     </button>
                   </div>
-                ) : (
-                  posts.map((post) => (
-                    <CreatorPostCard
-                      key={post.id}
-                      post={post}
-                      onLike={handleLike}
-                      onSave={handleSave}
-                      onOpenComments={handleOpenComments}
-                      onVotePoll={handleVotePoll}
-                      onVoteSuggestion={handleVoteSuggestion}
-                      onReport={handleReport}
-                    />
-                  ))
-                )}
+                </form>
+
+                {/* Abas e Filtros de Pesquisa do Feed */}
+                <div
+                  id="feed-publicacoes"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 backdrop-blur-md"
+                >
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setFiltroAba('destaque')}
+                      className={cn(
+                        'rounded-xl px-4 py-2 text-xs font-black transition-all cursor-pointer',
+                        filtroAba === 'destaque'
+                          ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                          : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                      )}
+                    >
+                      🔥 Em Destaque
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFiltroAba('recentes')}
+                      className={cn(
+                        'rounded-xl px-4 py-2 text-xs font-black transition-all cursor-pointer',
+                        filtroAba === 'recentes'
+                          ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                          : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                      )}
+                    >
+                      💬 Mais Recentes
+                    </button>
+                  </div>
+
+                  {/* Filtro por Distrito & Pesquisa Rápida */}
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={distritoFiltro}
+                      onChange={(e) => setDistritoFiltro(e.target.value)}
+                      className="rounded-xl border border-white/15 bg-slate-950 px-3 py-1.5 text-xs font-bold text-slate-300 outline-none focus:border-emerald-400 cursor-pointer"
+                    >
+                      <option value="Todos os Distritos">📍 Todos os Distritos</option>
+                      {VALID_DISTRICTS.map((d) => (
+                        <option key={d} value={d}>
+                          {d}
+                        </option>
+                      ))}
+                    </select>
+
+                    <div className="relative flex-1 sm:w-44">
+                      <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Pesquisar..."
+                        className="w-full rounded-xl border border-white/15 bg-slate-950 pl-7 pr-2.5 py-1.5 text-xs text-white placeholder:text-slate-600 outline-none focus:border-emerald-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Lista de Mensagens em Tempo Real */}
+                <div className="space-y-4">
+                  {loading ? (
+                    <div className="space-y-4 py-8">
+                      {[1, 2, 3].map((i) => (
+                        <div
+                          key={i}
+                          className="h-36 rounded-3xl border border-white/5 bg-slate-900/40 animate-pulse"
+                        />
+                      ))}
+                    </div>
+                  ) : publicacoesFiltradas.length === 0 ? (
+                    /* Mensagem Elegante de Coleção Vazia */
+                    <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-12 text-center space-y-4">
+                      <div className="text-4xl">🇵🇹</div>
+                      <h3 className="font-display text-lg font-black uppercase text-white">
+                        Ainda não existem publicações. Sê o primeiro a partilhar!
+                      </h3>
+                      <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
+                        Este espaço está agora 100% conectado à comunidade em tempo real. Partilha a primeira ideia ou história da tua terra!
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const el = document.getElementById('caixa-publicacao')
+                          if (el) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                            const textarea = el.querySelector('textarea')
+                            if (textarea) textarea.focus()
+                          }
+                        }}
+                        className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-6 py-3 text-xs font-black text-slate-950 uppercase tracking-wider hover:bg-emerald-400 transition-all shadow-lg cursor-pointer"
+                      >
+                        <PenSquare className="h-4 w-4" />
+                        <span>Escrever Publicação</span>
+                      </button>
+                    </div>
+                  ) : (
+                    publicacoesFiltradas.map((post) => (
+                      <div
+                        key={post.id}
+                        className="bg-slate-900/80 border border-white/10 hover:border-emerald-500/40 p-5 rounded-3xl shadow-xl transition-all space-y-3 backdrop-blur-md"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center border border-emerald-500/30 shrink-0">
+                              {post.autor?.[0]?.toUpperCase() || 'P'}
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-bold text-sm text-white">{post.autor}</span>
+                                {post.oficial && (
+                                  <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">
+                                    EQUIPA OFICIAL
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-xs text-slate-400">
+                                @{post.tag} • {post.distrito}
+                              </span>
+                            </div>
+                          </div>
+
+                          <span className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 font-bold">
+                            {post.categoria}
+                          </span>
+                        </div>
+
+                        <p className="text-sm text-slate-200 whitespace-pre-line leading-relaxed">
+                          {post.conteudo}
+                        </p>
+
+                        <div className="flex items-center gap-6 pt-3 border-t border-white/5 text-xs text-slate-400">
+                          <button
+                            type="button"
+                            onClick={() => handleLike(post.id)}
+                            className="flex items-center gap-1.5 hover:text-emerald-400 cursor-pointer transition-colors active:scale-95 font-bold"
+                          >
+                            <Heart className="h-4 w-4 fill-emerald-500/20 text-emerald-400" />
+                            <span>{post.likes || 0}</span>
+                          </button>
+                          <span className="flex items-center gap-1.5 font-bold">
+                            <MessageSquare className="h-4 w-4 text-slate-500" />
+                            <span>{post.comentariosCount || 0}</span>
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
 
-              {/* Coluna Direita: Sidebar Comunitária (4 colunas no Desktop) */}
+              {/* Coluna Lateral: Desafios e Informações Oficiais (4 Colunas) */}
               <div className="lg:col-span-4">
                 <CreatorsSidebar
-                  onSelectTopic={(topic) => setSearchQuery(topic)}
                   onOpenCreateForChallenge={() => {
-                    setSelectedCategory('opinioes')
-                    setIsCreateModalOpen(true)
+                    const el = document.getElementById('caixa-publicacao')
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                      setCategoria('Debates')
+                      const textarea = el.querySelector('textarea')
+                      if (textarea) {
+                        textarea.value = 'Em resposta ao Desafio do Dia: '
+                        setNovoTexto('Em resposta ao Desafio do Dia: ')
+                        textarea.focus()
+                      }
+                    }
                   }}
                 />
               </div>
             </div>
           </div>
         </main>
-
-        {/* Floating Action Button (FAB) Mobile para Criar Publicação */}
-        <button
-          type="button"
-          onClick={() => setIsCreateModalOpen(true)}
-          aria-label="Criar Publicação"
-          className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all hover:scale-110 active:scale-95 sm:hidden cursor-pointer"
-        >
-          <Plus className="h-7 w-7 stroke-[3]" />
-        </button>
-
-        {/* Modais e Gavetas */}
-        <CreatePostModal
-          isOpen={isCreateModalOpen}
-          onClose={() => setIsCreateModalOpen(false)}
-          onPostCreated={handlePostCreated}
-          createPostFn={createCreatorPost}
-        />
-
-        <CreatorsCommentsDrawer
-          post={activeCommentPost}
-          isOpen={isCommentsDrawerOpen}
-          onClose={() => {
-            setIsCommentsDrawerOpen(false)
-            setActiveCommentPost(null)
-          }}
-          onCommentAdded={handleCommentAdded}
-        />
-
-        <ReportPostModal
-          post={activeReportPost}
-          isOpen={isReportModalOpen}
-          onClose={() => {
-            setIsReportModalOpen(false)
-            setActiveReportPost(null)
-          }}
-        />
 
         <SiteFooter />
       </div>
