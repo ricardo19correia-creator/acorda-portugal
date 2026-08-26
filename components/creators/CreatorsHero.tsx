@@ -56,11 +56,18 @@ export function CreatorsHero({
 
           <button
             type="button"
-            onClick={onSelectHighlights}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-6 py-3.5 text-sm font-bold text-amber-300 shadow-md backdrop-blur-md transition-all hover:bg-amber-500/20 hover:border-amber-400 active:scale-95 cursor-pointer"
+            onClick={() => {
+              if (onSelectHighlights) {
+                onSelectHighlights()
+              }
+              const feedElement = document.getElementById('feed-publicacoes')
+              if (feedElement) {
+                feedElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 transition-all cursor-pointer font-bold shadow-lg hover:scale-105 active:scale-95 text-sm"
           >
-            <Flame className="h-4 w-4 text-amber-400" />
-            <span>🔥 Ver Destaques</span>
+            🔥 <span>Ver Destaques</span>
           </button>
         </div>
 

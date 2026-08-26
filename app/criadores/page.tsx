@@ -259,7 +259,7 @@ export default function CriadoresPage() {
             {/* Layout Principal: 2 Colunas (Feed + Sidebar) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Coluna Central: Feed de Publicações (8 colunas no Desktop) */}
-              <div className="lg:col-span-8 space-y-4">
+              <div id="feed-publicacoes" className="lg:col-span-8 space-y-4">
                 {/* Botão Superior Rápido para Criar Publicação */}
                 <div
                   onClick={() => setIsCreateModalOpen(true)}
