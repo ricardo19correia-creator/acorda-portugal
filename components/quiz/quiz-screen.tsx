@@ -1072,6 +1072,27 @@ export function QuizScreen({
               {q.explanation}
             </p>
           )}
+
+          {/* HUD Diagnóstico de Runtime (Auditável em Tempo Real) */}
+          <div className="mt-3 w-full flex flex-wrap items-center justify-center gap-1.5 px-2.5 py-1 rounded-xl border border-white/10 bg-black/40 text-[10px] font-mono text-slate-400 select-all">
+            <span className="text-emerald-400 font-bold">ID: {q.id}</span>
+            <span className="text-white/20">•</span>
+            <span>Fonte: <strong className="text-slate-200">QuestionRegistry</strong></span>
+            <span className="text-white/20">•</span>
+            <span>Cat: <strong className="text-cyan-300">{q.category}</strong></span>
+            {q.subcategory && (
+              <>
+                <span className="text-white/20">•</span>
+                <span>Sub: <strong className="text-amber-300">{q.subcategory}</strong></span>
+              </>
+            )}
+            <span className="text-white/20">•</span>
+            <span>Sessão: <strong className="text-purple-300">NVL {diffLevel}</strong></span>
+            <span className="text-white/20">•</span>
+            <span>Torneio: <strong className="text-slate-300">{gameId ? gameId.slice(0, 8) : 'SOLO'}</strong></span>
+            <span className="text-white/20">•</span>
+            <span>Dif: <strong className="text-rose-300">{q.difficulty}/5</strong></span>
+          </div>
         </div>
 
         {/* Freeze Banner no Solo */}

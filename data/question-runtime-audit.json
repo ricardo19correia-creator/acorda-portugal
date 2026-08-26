@@ -1,0 +1,2681 @@
+{
+  "timestamp": "2026-08-26T16:04:57.391Z",
+  "totalQuestionsInRegistry": 20050,
+  "totalThemes": 18,
+  "totalSubthemes": 233,
+  "themes": [
+    {
+      "categoriaId": "portugal",
+      "categoriaSlug": "portugal",
+      "categoriaNome": "Portugal",
+      "totalPerguntasTema": 1250,
+      "subcategorias": [
+        {
+          "subcategoriaId": "historia-portugal",
+          "subcategoriaNome": "História de Portugal",
+          "subcategoriaSlug": "historia-portugal",
+          "perguntasFuncionais": 72,
+          "sampleIds": [
+            "portugal_0001",
+            "portugal_0004",
+            "portugal_0007"
+          ]
+        },
+        {
+          "subcategoriaId": "geografia-portugal",
+          "subcategoriaNome": "Geografia de Portugal",
+          "subcategoriaSlug": "geografia-portugal",
+          "perguntasFuncionais": 55,
+          "sampleIds": [
+            "portugal_0003",
+            "portugal_0009",
+            "portugal_0014"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-portuguesa",
+          "subcategoriaNome": "Cultura Portuguesa",
+          "subcategoriaSlug": "cultura-portuguesa",
+          "perguntasFuncionais": 53,
+          "sampleIds": [
+            "portugal_0005",
+            "portugal_0026",
+            "portugal_0043"
+          ]
+        },
+        {
+          "subcategoriaId": "tradicoes",
+          "subcategoriaNome": "Tradições",
+          "subcategoriaSlug": "tradicoes",
+          "perguntasFuncionais": 1250,
+          "sampleIds": [
+            "portugal_0001",
+            "portugal_0002",
+            "portugal_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "monumentos",
+          "subcategoriaNome": "Monumentos",
+          "subcategoriaSlug": "monumentos",
+          "perguntasFuncionais": 73,
+          "sampleIds": [
+            "portugal_0006",
+            "portugal_0017",
+            "portugal_0036"
+          ]
+        },
+        {
+          "subcategoriaId": "cidades",
+          "subcategoriaNome": "Cidades",
+          "subcategoriaSlug": "cidades",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "AP-PT-CID-001",
+            "AP-PT-CID-002",
+            "AP-PT-CID-003"
+          ]
+        },
+        {
+          "subcategoriaId": "vilas-aldeias",
+          "subcategoriaNome": "Vilas e Aldeias",
+          "subcategoriaSlug": "vilas-aldeias",
+          "perguntasFuncionais": 1250,
+          "sampleIds": [
+            "portugal_0001",
+            "portugal_0002",
+            "portugal_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "praias",
+          "subcategoriaNome": "Praias",
+          "subcategoriaSlug": "praias",
+          "perguntasFuncionais": 55,
+          "sampleIds": [
+            "portugal_0075",
+            "portugal_0095",
+            "portugal_0102"
+          ]
+        },
+        {
+          "subcategoriaId": "regioes",
+          "subcategoriaNome": "Regiões",
+          "subcategoriaSlug": "regioes",
+          "perguntasFuncionais": 1250,
+          "sampleIds": [
+            "portugal_0001",
+            "portugal_0002",
+            "portugal_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "gastronomia-portuguesa",
+          "subcategoriaNome": "Gastronomia Portuguesa",
+          "subcategoriaSlug": "gastronomia-portuguesa",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "PT_GAST_0001",
+            "PT_GAST_0002",
+            "PT_GAST_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personalidades-portuguesas",
+          "subcategoriaNome": "Personalidades Portuguesas",
+          "subcategoriaSlug": "personalidades-portuguesas",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "portugal_0030"
+          ]
+        },
+        {
+          "subcategoriaId": "curiosidades-portugal",
+          "subcategoriaNome": "Curiosidades de Portugal",
+          "subcategoriaSlug": "curiosidades-portugal",
+          "perguntasFuncionais": 1250,
+          "sampleIds": [
+            "portugal_0001",
+            "portugal_0002",
+            "portugal_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "atualidade",
+      "categoriaSlug": "atualidade",
+      "categoriaNome": "Atualidade — Portugal Agora",
+      "totalPerguntasTema": 750,
+      "subcategorias": [
+        {
+          "subcategoriaId": "politica-governo",
+          "subcategoriaNome": "Política e Governo",
+          "subcategoriaSlug": "politica-governo",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "assembleia-republica",
+          "subcategoriaNome": "Assembleia da República",
+          "subcategoriaSlug": "assembleia-republica",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "partidos-politicos",
+          "subcategoriaNome": "Partidos Políticos",
+          "subcategoriaSlug": "partidos-politicos",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "lideres-politicos",
+          "subcategoriaNome": "Líderes Políticos",
+          "subcategoriaSlug": "lideres-politicos",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "economia",
+          "subcategoriaNome": "Economia",
+          "subcategoriaSlug": "economia",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "salario-minimo",
+          "subcategoriaNome": "Salário Mínimo",
+          "subcategoriaSlug": "salario-minimo",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "inflacao",
+          "subcategoriaNome": "Inflação",
+          "subcategoriaSlug": "inflacao",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "pib",
+          "subcategoriaNome": "PIB",
+          "subcategoriaSlug": "pib",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "emprego",
+          "subcategoriaNome": "Emprego",
+          "subcategoriaSlug": "emprego",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "habitacao",
+          "subcategoriaNome": "Habitação",
+          "subcategoriaSlug": "habitacao",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "euribor",
+          "subcategoriaNome": "Euribor",
+          "subcategoriaSlug": "euribor",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "turismo",
+          "subcategoriaNome": "Turismo",
+          "subcategoriaSlug": "turismo",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresas-portuguesas-atual",
+          "subcategoriaNome": "Empresas Portuguesas",
+          "subcategoriaSlug": "empresas-portuguesas-atual",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-atual",
+          "subcategoriaNome": "Cultura",
+          "subcategoriaSlug": "cultura-atual",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "desporto-atual",
+          "subcategoriaNome": "Desporto",
+          "subcategoriaSlug": "desporto-atual",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "acontecimentos-nacionais",
+          "subcategoriaNome": "Acontecimentos Nacionais",
+          "subcategoriaSlug": "acontecimentos-nacionais",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "noticias-verificaveis",
+          "subcategoriaNome": "Notícias e Factos Verificáveis",
+          "subcategoriaSlug": "noticias-verificaveis",
+          "perguntasFuncionais": 750,
+          "sampleIds": [
+            "atualidade_0001",
+            "atualidade_0002",
+            "atualidade_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "portugal-politico",
+      "categoriaSlug": "portugal-politico",
+      "categoriaNome": "Portugal Político",
+      "totalPerguntasTema": 950,
+      "subcategorias": [
+        {
+          "subcategoriaId": "partidos",
+          "subcategoriaNome": "Partidos",
+          "subcategoriaSlug": "partidos",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "POL_PAR_0001",
+            "POL_PAR_0002",
+            "POL_PAR_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "representacao-parlamentar",
+          "subcategoriaNome": "Representação Parlamentar",
+          "subcategoriaSlug": "representacao-parlamentar",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "lideres",
+          "subcategoriaNome": "Líderes",
+          "subcategoriaSlug": "lideres",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-politica",
+          "subcategoriaNome": "História Política",
+          "subcategoriaSlug": "historia-politica",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "instituicoes",
+          "subcategoriaNome": "Instituições",
+          "subcategoriaSlug": "instituicoes",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "constituicao",
+          "subcategoriaNome": "Constituição",
+          "subcategoriaSlug": "constituicao",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "sistema-politico",
+          "subcategoriaNome": "Sistema Político",
+          "subcategoriaSlug": "sistema-politico",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "eleicoes",
+          "subcategoriaNome": "Eleições",
+          "subcategoriaSlug": "eleicoes",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "propostas-politicas",
+          "subcategoriaNome": "Propostas Políticas",
+          "subcategoriaSlug": "propostas-politicas",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "governos",
+          "subcategoriaNome": "Governos",
+          "subcategoriaSlug": "governos",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "POL_GOV_0001",
+            "POL_GOV_0002",
+            "POL_GOV_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "presidentes-republica",
+          "subcategoriaNome": "Presidentes da República",
+          "subcategoriaSlug": "presidentes-republica",
+          "perguntasFuncionais": 950,
+          "sampleIds": [
+            "portugal-politico_0001",
+            "portugal-politico_0002",
+            "portugal-politico_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "primeiros-ministros",
+          "subcategoriaNome": "Primeiros-Ministros",
+          "subcategoriaSlug": "primeiros-ministros",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "POL_PM_0001",
+            "POL_PM_0002",
+            "POL_PM_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "empresas-portuguesas",
+      "categoriaSlug": "empresas-portuguesas",
+      "categoriaNome": "Empresas Portuguesas",
+      "totalPerguntasTema": 850,
+      "subcategorias": [
+        {
+          "subcategoriaId": "empresas",
+          "subcategoriaNome": "Empresas",
+          "subcategoriaSlug": "empresas",
+          "perguntasFuncionais": 100,
+          "sampleIds": [
+            "EMP_EHI_0001",
+            "EMP_EHI_0002",
+            "EMP_EHI_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "marcas",
+          "subcategoriaNome": "Marcas",
+          "subcategoriaSlug": "marcas",
+          "perguntasFuncionais": 58,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0004"
+          ]
+        },
+        {
+          "subcategoriaId": "fundadores",
+          "subcategoriaNome": "Fundadores",
+          "subcategoriaSlug": "fundadores",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-empresarial",
+          "subcategoriaNome": "História Empresarial",
+          "subcategoriaSlug": "historia-empresarial",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "setores",
+          "subcategoriaNome": "Setores",
+          "subcategoriaSlug": "setores",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "produtos",
+          "subcategoriaNome": "Produtos",
+          "subcategoriaSlug": "produtos",
+          "perguntasFuncionais": 2,
+          "sampleIds": [
+            "empresas-portuguesas_0003",
+            "empresas-portuguesas_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "servicos",
+          "subcategoriaNome": "Serviços",
+          "subcategoriaSlug": "servicos",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresas-historicas",
+          "subcategoriaNome": "Empresas Históricas",
+          "subcategoriaSlug": "empresas-historicas",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresas-atuais",
+          "subcategoriaNome": "Empresas Atuais",
+          "subcategoriaSlug": "empresas-atuais",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresas-tecnologicas",
+          "subcategoriaNome": "Empresas Tecnológicas",
+          "subcategoriaSlug": "empresas-tecnologicas",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresas-internacionais",
+          "subcategoriaNome": "Empresas Internacionais Portuguesas",
+          "subcategoriaSlug": "empresas-internacionais",
+          "perguntasFuncionais": 850,
+          "sampleIds": [
+            "empresas-portuguesas_0001",
+            "empresas-portuguesas_0002",
+            "empresas-portuguesas_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "futebol-portugues",
+      "categoriaSlug": "futebol-portugues",
+      "categoriaNome": "Futebol Português",
+      "totalPerguntasTema": 1110,
+      "subcategorias": [
+        {
+          "subcategoriaId": "clubes",
+          "subcategoriaNome": "Clubes",
+          "subcategoriaSlug": "clubes",
+          "perguntasFuncionais": 3,
+          "sampleIds": [
+            "PT_FUT_PILOT_003",
+            "PT_FUT_PILOT_008",
+            "PT_FUT_PILOT_009"
+          ]
+        },
+        {
+          "subcategoriaId": "jogadores",
+          "subcategoriaNome": "Jogadores",
+          "subcategoriaSlug": "jogadores",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_FUT_PILOT_002"
+          ]
+        },
+        {
+          "subcategoriaId": "jogadoras",
+          "subcategoriaNome": "Jogadoras",
+          "subcategoriaSlug": "jogadoras",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "FUT_JOG_0001",
+            "FUT_JOG_0002",
+            "FUT_JOG_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "estadios",
+          "subcategoriaNome": "Estádios",
+          "subcategoriaSlug": "estadios",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "competicoes",
+          "subcategoriaNome": "Competições",
+          "subcategoriaSlug": "competicoes",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "liga-portuguesa",
+          "subcategoriaNome": "Liga Portuguesa",
+          "subcategoriaSlug": "liga-portuguesa",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "FUT_LIG_0001",
+            "FUT_LIG_0002",
+            "FUT_LIG_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "taca-portugal",
+          "subcategoriaNome": "Taça de Portugal",
+          "subcategoriaSlug": "taca-portugal",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "selecao-nacional",
+          "subcategoriaNome": "Seleção Nacional",
+          "subcategoriaSlug": "selecao-nacional",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "futebol-feminino",
+          "subcategoriaNome": "Futebol Feminino",
+          "subcategoriaSlug": "futebol-feminino",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "AP-FUT-FEM-001",
+            "AP-FUT-FEM-002",
+            "AP-FUT-FEM-003"
+          ]
+        },
+        {
+          "subcategoriaId": "treinadores",
+          "subcategoriaNome": "Treinadores",
+          "subcategoriaSlug": "treinadores",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_FUT_PILOT_007"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-futebol",
+          "subcategoriaNome": "História do Futebol",
+          "subcategoriaSlug": "historia-futebol",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "momentos-marcantes",
+          "subcategoriaNome": "Momentos Marcantes",
+          "subcategoriaSlug": "momentos-marcantes",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "FUT_MOM_0001",
+            "FUT_MOM_0002",
+            "FUT_MOM_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "derbis",
+          "subcategoriaNome": "Dérbis & Clássicos",
+          "subcategoriaSlug": "derbis",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "recordes-futebol",
+          "subcategoriaNome": "Recordes",
+          "subcategoriaSlug": "recordes-futebol",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_FUT_PILOT_006"
+          ]
+        },
+        {
+          "subcategoriaId": "transferencias",
+          "subcategoriaNome": "Transferências",
+          "subcategoriaSlug": "transferencias",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "equipamentos",
+          "subcategoriaNome": "Equipamentos",
+          "subcategoriaSlug": "equipamentos",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "futebol-europeu",
+          "subcategoriaNome": "Futebol Europeu & Clubes Portugueses",
+          "subcategoriaSlug": "futebol-europeu",
+          "perguntasFuncionais": 1110,
+          "sampleIds": [
+            "futebol-portugues_0001",
+            "futebol-portugues_0002",
+            "futebol-portugues_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "desafio-visual",
+      "categoriaSlug": "desafio-visual",
+      "categoriaNome": "Desafio Visual",
+      "totalPerguntasTema": 650,
+      "subcategorias": [
+        {
+          "subcategoriaId": "que-lugar-e-este",
+          "subcategoriaNome": "Que lugar é este?",
+          "subcategoriaSlug": "que-lugar-e-este",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "quem-e-esta-pessoa",
+          "subcategoriaNome": "Quem é esta pessoa?",
+          "subcategoriaSlug": "quem-e-esta-pessoa",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "bandeiras",
+          "subcategoriaNome": "Bandeiras",
+          "subcategoriaSlug": "bandeiras",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "bracoes",
+          "subcategoriaNome": "Brasões",
+          "subcategoriaSlug": "bracoes",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "simbolos",
+          "subcategoriaNome": "Símbolos",
+          "subcategoriaSlug": "simbolos",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "gastronomia-visual",
+          "subcategoriaNome": "Gastronomia",
+          "subcategoriaSlug": "gastronomia-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "futebol-visual",
+          "subcategoriaNome": "Futebol",
+          "subcategoriaSlug": "futebol-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "estadios-visual",
+          "subcategoriaNome": "Estádios",
+          "subcategoriaSlug": "estadios-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "monumentos-visual",
+          "subcategoriaNome": "Monumentos",
+          "subcategoriaSlug": "monumentos-visual",
+          "perguntasFuncionais": 10,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cidades-visual",
+          "subcategoriaNome": "Cidades",
+          "subcategoriaSlug": "cidades-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "praias-visual",
+          "subcategoriaNome": "Praias",
+          "subcategoriaSlug": "praias-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "vilas-aldeias-visual",
+          "subcategoriaNome": "Vilas e Aldeias",
+          "subcategoriaSlug": "vilas-aldeias-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "onde-fica-visual",
+          "subcategoriaNome": "Onde fica?",
+          "subcategoriaSlug": "onde-fica-visual",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "encontra-detalhe",
+          "subcategoriaNome": "Encontra o detalhe",
+          "subcategoriaSlug": "encontra-detalhe",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "fotografias-historicas",
+          "subcategoriaNome": "Fotografias Históricas",
+          "subcategoriaSlug": "fotografias-historicas",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "imagens-objetos",
+          "subcategoriaNome": "Imagens de Objetos",
+          "subcategoriaSlug": "imagens-objetos",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "imagens-animais",
+          "subcategoriaNome": "Imagens de Animais",
+          "subcategoriaSlug": "imagens-animais",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "imagens-natureza",
+          "subcategoriaNome": "Imagens de Natureza",
+          "subcategoriaSlug": "imagens-natureza",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "desafio-visual-maluco",
+          "subcategoriaNome": "Desafio Visual Maluco",
+          "subcategoriaSlug": "desafio-visual-maluco",
+          "perguntasFuncionais": 650,
+          "sampleIds": [
+            "desafio-visual_0001",
+            "desafio-visual_0002",
+            "desafio-visual_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "modo-maluco",
+      "categoriaSlug": "modo-maluco",
+      "categoriaNome": "Modo Maluco",
+      "totalPerguntasTema": 1418,
+      "subcategorias": [
+        {
+          "subcategoriaId": "perguntas-absurdas",
+          "subcategoriaNome": "Perguntas Absurdas",
+          "subcategoriaSlug": "perguntas-absurdas",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_0001",
+            "mm_0002",
+            "mm_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "perguntas-inesperadas",
+          "subcategoriaNome": "Perguntas Inesperadas",
+          "subcategoriaSlug": "perguntas-inesperadas",
+          "perguntasFuncionais": 141,
+          "sampleIds": [
+            "modo-maluco_0007",
+            "mm_0501",
+            "mm_0502"
+          ]
+        },
+        {
+          "subcategoriaId": "humor-maluco",
+          "subcategoriaNome": "Humor & Rir",
+          "subcategoriaSlug": "humor-maluco",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_1001",
+            "mm_1002",
+            "mm_1003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-popular-maluca",
+          "subcategoriaNome": "Cultura Popular Insólita",
+          "subcategoriaSlug": "cultura-popular-maluca",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_1501",
+            "mm_1502",
+            "mm_1503"
+          ]
+        },
+        {
+          "subcategoriaId": "regras-aleatorias",
+          "subcategoriaNome": "Regras Aleatórias",
+          "subcategoriaSlug": "regras-aleatorias",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_2001",
+            "mm_2002",
+            "mm_2003"
+          ]
+        },
+        {
+          "subcategoriaId": "desafios-rapidos",
+          "subcategoriaNome": "Desafios Rápidos",
+          "subcategoriaSlug": "desafios-rapidos",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_2501",
+            "mm_2502",
+            "mm_2503"
+          ]
+        },
+        {
+          "subcategoriaId": "efeitos-especiais",
+          "subcategoriaNome": "Efeitos Especiais",
+          "subcategoriaSlug": "efeitos-especiais",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_3001",
+            "mm_3002",
+            "mm_3003"
+          ]
+        },
+        {
+          "subcategoriaId": "modificadores-jogo",
+          "subcategoriaNome": "Modificadores de Jogo",
+          "subcategoriaSlug": "modificadores-jogo",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_3501",
+            "mm_3502",
+            "mm_3503"
+          ]
+        },
+        {
+          "subcategoriaId": "perguntas-logica-diferente",
+          "subcategoriaNome": "Perguntas com Lógica Diferente",
+          "subcategoriaSlug": "perguntas-logica-diferente",
+          "perguntasFuncionais": 139,
+          "sampleIds": [
+            "mm_4001",
+            "mm_4002",
+            "mm_4004"
+          ]
+        },
+        {
+          "subcategoriaId": "modo-caos",
+          "subcategoriaNome": "Modo Caos",
+          "subcategoriaSlug": "modo-caos",
+          "perguntasFuncionais": 140,
+          "sampleIds": [
+            "mm_4501",
+            "mm_4502",
+            "mm_4503"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "historia",
+      "categoriaSlug": "historia",
+      "categoriaNome": "História",
+      "totalPerguntasTema": 1304,
+      "subcategorias": [
+        {
+          "subcategoriaId": "historia-de-portugal",
+          "subcategoriaNome": "História de Portugal",
+          "subcategoriaSlug": "historia-de-portugal",
+          "perguntasFuncionais": 5,
+          "sampleIds": [
+            "PT_HIST_PILOT_001",
+            "PT_HIST_PILOT_009",
+            "PT_HIST_PILOT_010"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-mundial",
+          "subcategoriaNome": "História Mundial",
+          "subcategoriaSlug": "historia-mundial",
+          "perguntasFuncionais": 5,
+          "sampleIds": [
+            "PT_HIST_PILOT_001",
+            "PT_HIST_PILOT_009",
+            "PT_HIST_PILOT_010"
+          ]
+        },
+        {
+          "subcategoriaId": "reis-e-rainhas",
+          "subcategoriaNome": "Reis e Rainhas",
+          "subcategoriaSlug": "reis-e-rainhas",
+          "perguntasFuncionais": 5,
+          "sampleIds": [
+            "historia_0016",
+            "historia_0025",
+            "PT_HIST_PILOT_004"
+          ]
+        },
+        {
+          "subcategoriaId": "descobrimentos",
+          "subcategoriaNome": "Descobrimentos & Navegações",
+          "subcategoriaSlug": "descobrimentos",
+          "perguntasFuncionais": 53,
+          "sampleIds": [
+            "historia_0017",
+            "PT_HIST_PILOT_003",
+            "PT_HIST_PILOT_007"
+          ]
+        },
+        {
+          "subcategoriaId": "batalhas",
+          "subcategoriaNome": "Batalhas & Conflitos",
+          "subcategoriaSlug": "batalhas",
+          "perguntasFuncionais": 101,
+          "sampleIds": [
+            "PT_HIST_PILOT_002",
+            "HIST_BAT_0001",
+            "HIST_BAT_0002"
+          ]
+        },
+        {
+          "subcategoriaId": "imperios",
+          "subcategoriaNome": "Impérios Históricos",
+          "subcategoriaSlug": "imperios",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "revolucoes",
+          "subcategoriaNome": "Revoluções",
+          "subcategoriaSlug": "revolucoes",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "republica",
+          "subcategoriaNome": "Implantação da República",
+          "subcategoriaSlug": "republica",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "estado-novo",
+          "subcategoriaNome": "Estado Novo",
+          "subcategoriaSlug": "estado-novo",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_HIST_PILOT_011"
+          ]
+        },
+        {
+          "subcategoriaId": "vinte-cinco-abril",
+          "subcategoriaNome": "25 de Abril & Cravos",
+          "subcategoriaSlug": "vinte-cinco-abril",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personalidades-historicas",
+          "subcategoriaNome": "Personalidades Históricas",
+          "subcategoriaSlug": "personalidades-historicas",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "civilizacoes-antigas",
+          "subcategoriaNome": "Civilizações Antigas",
+          "subcategoriaSlug": "civilizacoes-antigas",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "idade-media",
+          "subcategoriaNome": "Idade Média",
+          "subcategoriaSlug": "idade-media",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "idade-moderna",
+          "subcategoriaNome": "Idade Moderna",
+          "subcategoriaSlug": "idade-moderna",
+          "perguntasFuncionais": 1304,
+          "sampleIds": [
+            "historia_0001",
+            "historia_0002",
+            "historia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-contemporanea",
+          "subcategoriaNome": "História Contemporânea",
+          "subcategoriaSlug": "historia-contemporanea",
+          "perguntasFuncionais": 5,
+          "sampleIds": [
+            "PT_HIST_PILOT_001",
+            "PT_HIST_PILOT_009",
+            "PT_HIST_PILOT_010"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "geografia",
+      "categoriaSlug": "geografia",
+      "categoriaNome": "Geografia",
+      "totalPerguntasTema": 905,
+      "subcategorias": [
+        {
+          "subcategoriaId": "geografia-portugal",
+          "subcategoriaNome": "Geografia de Portugal",
+          "subcategoriaSlug": "geografia-portugal",
+          "perguntasFuncionais": 7,
+          "sampleIds": [
+            "PT_GEO_PILOT_001",
+            "PT_GEO_PILOT_003",
+            "PT_GEO_PILOT_004"
+          ]
+        },
+        {
+          "subcategoriaId": "geografia-europa",
+          "subcategoriaNome": "Europa",
+          "subcategoriaSlug": "geografia-europa",
+          "perguntasFuncionais": 7,
+          "sampleIds": [
+            "PT_GEO_PILOT_001",
+            "PT_GEO_PILOT_003",
+            "PT_GEO_PILOT_004"
+          ]
+        },
+        {
+          "subcategoriaId": "geografia-mundo",
+          "subcategoriaNome": "Mundo",
+          "subcategoriaSlug": "geografia-mundo",
+          "perguntasFuncionais": 7,
+          "sampleIds": [
+            "PT_GEO_PILOT_001",
+            "PT_GEO_PILOT_003",
+            "PT_GEO_PILOT_004"
+          ]
+        },
+        {
+          "subcategoriaId": "paises",
+          "subcategoriaNome": "Países",
+          "subcategoriaSlug": "paises",
+          "perguntasFuncionais": 905,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "capitais",
+          "subcategoriaNome": "Capitais",
+          "subcategoriaSlug": "capitais",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "cidades-mundo",
+          "subcategoriaNome": "Grandes Cidades",
+          "subcategoriaSlug": "cidades-mundo",
+          "perguntasFuncionais": 905,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "rios",
+          "subcategoriaNome": "Rios",
+          "subcategoriaSlug": "rios",
+          "perguntasFuncionais": 7,
+          "sampleIds": [
+            "geografia_0006",
+            "geografia_0015",
+            "geografia_0025"
+          ]
+        },
+        {
+          "subcategoriaId": "montanhas",
+          "subcategoriaNome": "Montanhas & Serras",
+          "subcategoriaSlug": "montanhas",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "geografia_0007"
+          ]
+        },
+        {
+          "subcategoriaId": "ilhas",
+          "subcategoriaNome": "Ilhas & Arquipélagos",
+          "subcategoriaSlug": "ilhas",
+          "perguntasFuncionais": 4,
+          "sampleIds": [
+            "geografia_0013",
+            "geografia_0021",
+            "geografia_0031"
+          ]
+        },
+        {
+          "subcategoriaId": "oceanos-mares",
+          "subcategoriaNome": "Oceanos & Mares",
+          "subcategoriaSlug": "oceanos-mares",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "geografia_0004"
+          ]
+        },
+        {
+          "subcategoriaId": "fronteiras",
+          "subcategoriaNome": "Fronteiras & Tratados",
+          "subcategoriaSlug": "fronteiras",
+          "perguntasFuncionais": 4,
+          "sampleIds": [
+            "geografia_0012",
+            "geografia_0028",
+            "geografia_0034"
+          ]
+        },
+        {
+          "subcategoriaId": "regioes-mundo",
+          "subcategoriaNome": "Regiões",
+          "subcategoriaSlug": "regioes-mundo",
+          "perguntasFuncionais": 905,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "mapas",
+          "subcategoriaNome": "Mapas & Cartografia",
+          "subcategoriaSlug": "mapas",
+          "perguntasFuncionais": 905,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "localizacao-geografica",
+          "subcategoriaNome": "Localização Geográfica",
+          "subcategoriaSlug": "localizacao-geografica",
+          "perguntasFuncionais": 905,
+          "sampleIds": [
+            "geografia_0001",
+            "geografia_0002",
+            "geografia_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "ciencia-tecnologia",
+      "categoriaSlug": "ciencia-tecnologia",
+      "categoriaNome": "Ciência e Tecnologia",
+      "totalPerguntasTema": 918,
+      "subcategorias": [
+        {
+          "subcategoriaId": "ciencia-geral",
+          "subcategoriaNome": "Ciência Geral",
+          "subcategoriaSlug": "ciencia-geral",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "fisica",
+          "subcategoriaNome": "Física",
+          "subcategoriaSlug": "fisica",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "quimica",
+          "subcategoriaNome": "Química",
+          "subcategoriaSlug": "quimica",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "biologia",
+          "subcategoriaNome": "Biologia",
+          "subcategoriaSlug": "biologia",
+          "perguntasFuncionais": 4,
+          "sampleIds": [
+            "ciencia-tecnologia_0004",
+            "ciencia-tecnologia_0008",
+            "ciencia-tecnologia_0011"
+          ]
+        },
+        {
+          "subcategoriaId": "astronomia-espaco",
+          "subcategoriaNome": "Astronomia & Espaço",
+          "subcategoriaSlug": "astronomia-espaco",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "corpo-humano",
+          "subcategoriaNome": "Corpo Humano",
+          "subcategoriaSlug": "corpo-humano",
+          "perguntasFuncionais": 2,
+          "sampleIds": [
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0006"
+          ]
+        },
+        {
+          "subcategoriaId": "animais-natureza",
+          "subcategoriaNome": "Animais & Natureza",
+          "subcategoriaSlug": "animais-natureza",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "tecnologia-geral",
+          "subcategoriaNome": "Tecnologia",
+          "subcategoriaSlug": "tecnologia-geral",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "informatica-internet",
+          "subcategoriaNome": "Informática & Internet",
+          "subcategoriaSlug": "informatica-internet",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "inteligencia-artificial",
+          "subcategoriaNome": "Inteligência Artificial",
+          "subcategoriaSlug": "inteligencia-artificial",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "invencoes",
+          "subcategoriaNome": "Invenções",
+          "subcategoriaSlug": "invencoes",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "descobertas-cientificas",
+          "subcategoriaNome": "Descobertas Científicas",
+          "subcategoriaSlug": "descobertas-cientificas",
+          "perguntasFuncionais": 918,
+          "sampleIds": [
+            "ciencia-tecnologia_0001",
+            "ciencia-tecnologia_0002",
+            "ciencia-tecnologia_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "cultura",
+      "categoriaSlug": "cultura",
+      "categoriaNome": "Cultura",
+      "totalPerguntasTema": 1274,
+      "subcategorias": [
+        {
+          "subcategoriaId": "cultura-portuguesa-geral",
+          "subcategoriaNome": "Cultura Portuguesa",
+          "subcategoriaSlug": "cultura-portuguesa-geral",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_CULT_PILOT_003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-mundial",
+          "subcategoriaNome": "Cultura Mundial",
+          "subcategoriaSlug": "cultura-mundial",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_CULT_PILOT_003"
+          ]
+        },
+        {
+          "subcategoriaId": "arte-pintura-escultura",
+          "subcategoriaNome": "Arte, Pintura e Escultura",
+          "subcategoriaSlug": "arte-pintura-escultura",
+          "perguntasFuncionais": 51,
+          "sampleIds": [
+            "PT_CULT_PILOT_003",
+            "CULT_ESC_0001",
+            "CULT_ESC_0002"
+          ]
+        },
+        {
+          "subcategoriaId": "literatura",
+          "subcategoriaNome": "Literatura",
+          "subcategoriaSlug": "literatura",
+          "perguntasFuncionais": 658,
+          "sampleIds": [
+            "cultura_0001",
+            "cultura_0003",
+            "cultura_0006"
+          ]
+        },
+        {
+          "subcategoriaId": "teatro",
+          "subcategoriaNome": "Teatro",
+          "subcategoriaSlug": "teatro",
+          "perguntasFuncionais": 52,
+          "sampleIds": [
+            "cultura_0018",
+            "PT_CULT_PILOT_009",
+            "CULT_TEA_0001"
+          ]
+        },
+        {
+          "subcategoriaId": "fotografia",
+          "subcategoriaNome": "Fotografia",
+          "subcategoriaSlug": "fotografia",
+          "perguntasFuncionais": 1274,
+          "sampleIds": [
+            "cultura_0001",
+            "cultura_0002",
+            "cultura_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "musica-cultura",
+          "subcategoriaNome": "Música Erudita & Tradicional",
+          "subcategoriaSlug": "musica-cultura",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_CULT_PILOT_003"
+          ]
+        },
+        {
+          "subcategoriaId": "cinema-cultura",
+          "subcategoriaNome": "Cinema de Autor",
+          "subcategoriaSlug": "cinema-cultura",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_CULT_PILOT_003"
+          ]
+        },
+        {
+          "subcategoriaId": "televisao-cultura",
+          "subcategoriaNome": "Televisão Cultural",
+          "subcategoriaSlug": "televisao-cultura",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "PT_CULT_PILOT_003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-popular",
+          "subcategoriaNome": "Cultura Popular",
+          "subcategoriaSlug": "cultura-popular",
+          "perguntasFuncionais": 2,
+          "sampleIds": [
+            "PT_CULT_PILOT_004",
+            "PT_CULT_PILOT_010"
+          ]
+        },
+        {
+          "subcategoriaId": "tradicoes-folclore",
+          "subcategoriaNome": "Tradições & Folclore",
+          "subcategoriaSlug": "tradicoes-folclore",
+          "perguntasFuncionais": 1274,
+          "sampleIds": [
+            "cultura_0001",
+            "cultura_0002",
+            "cultura_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "gastronomia",
+      "categoriaSlug": "gastronomia",
+      "categoriaNome": "Gastronomia",
+      "totalPerguntasTema": 1068,
+      "subcategorias": [
+        {
+          "subcategoriaId": "gastronomia-portuguesa-geral",
+          "subcategoriaNome": "Gastronomia Portuguesa",
+          "subcategoriaSlug": "gastronomia-portuguesa-geral",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "pratos-portugueses",
+          "subcategoriaNome": "Pratos Típicos Portugueses",
+          "subcategoriaSlug": "pratos-portugueses",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "doces-portugueses",
+          "subcategoriaNome": "Doces & Sobremesas Tradicionais",
+          "subcategoriaSlug": "doces-portugueses",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "bebidas-vinhos",
+          "subcategoriaNome": "Bebidas & Vinhos de Portugal",
+          "subcategoriaSlug": "bebidas-vinhos",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "gastronomia_0009"
+          ]
+        },
+        {
+          "subcategoriaId": "ingredientes",
+          "subcategoriaNome": "Ingredientes & Especiarias",
+          "subcategoriaSlug": "ingredientes",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "gastronomia_0017"
+          ]
+        },
+        {
+          "subcategoriaId": "receitas-tradicionais",
+          "subcategoriaNome": "Receitas Tradicionais",
+          "subcategoriaSlug": "receitas-tradicionais",
+          "perguntasFuncionais": 1,
+          "sampleIds": [
+            "gastronomia_0010"
+          ]
+        },
+        {
+          "subcategoriaId": "regioes-gastronomicas",
+          "subcategoriaNome": "Regiões Gastronómicas",
+          "subcategoriaSlug": "regioes-gastronomicas",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "gastronomia-mundial",
+          "subcategoriaNome": "Gastronomia Mundial",
+          "subcategoriaSlug": "gastronomia-mundial",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "comida-internacional",
+          "subcategoriaNome": "Comida Internacional",
+          "subcategoriaSlug": "comida-internacional",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "identificacao-visual-pratos",
+          "subcategoriaNome": "Identificação Visual de Pratos",
+          "subcategoriaSlug": "identificacao-visual-pratos",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "curiosidades-gastronomicas",
+          "subcategoriaNome": "Curiosidades Gastronómicas",
+          "subcategoriaSlug": "curiosidades-gastronomicas",
+          "perguntasFuncionais": 1068,
+          "sampleIds": [
+            "gastronomia_0001",
+            "gastronomia_0002",
+            "gastronomia_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "desporto",
+      "categoriaSlug": "desporto",
+      "categoriaNome": "Desporto",
+      "totalPerguntasTema": 830,
+      "subcategorias": [
+        {
+          "subcategoriaId": "futebol-modalidade",
+          "subcategoriaNome": "Futebol Geral",
+          "subcategoriaSlug": "futebol-modalidade",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "atletismo",
+          "subcategoriaNome": "Atletismo & Maratonas",
+          "subcategoriaSlug": "atletismo",
+          "perguntasFuncionais": 643,
+          "sampleIds": [
+            "desporto_0003",
+            "desporto_0008",
+            "desporto_0010"
+          ]
+        },
+        {
+          "subcategoriaId": "tenis",
+          "subcategoriaNome": "Ténis",
+          "subcategoriaSlug": "tenis",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "ciclismo",
+          "subcategoriaNome": "Ciclismo & Volta a Portugal",
+          "subcategoriaSlug": "ciclismo",
+          "perguntasFuncionais": 4,
+          "sampleIds": [
+            "desporto_0011",
+            "desporto_0019",
+            "desporto_0027"
+          ]
+        },
+        {
+          "subcategoriaId": "basquetebol",
+          "subcategoriaNome": "Basquetebol & NBA",
+          "subcategoriaSlug": "basquetebol",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "formula-1",
+          "subcategoriaNome": "Fórmula 1 & Motores",
+          "subcategoriaSlug": "formula-1",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "surf",
+          "subcategoriaNome": "Surf & Ondas Gigantes",
+          "subcategoriaSlug": "surf",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "natacao",
+          "subcategoriaNome": "Natação & Desportos Aquáticos",
+          "subcategoriaSlug": "natacao",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "jogos-olimpicos",
+          "subcategoriaNome": "Jogos Olímpicos",
+          "subcategoriaSlug": "jogos-olimpicos",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "artes-marciais",
+          "subcategoriaNome": "Artes Marciais & Judo",
+          "subcategoriaSlug": "artes-marciais",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "motociclismo",
+          "subcategoriaNome": "Motociclismo & MotoGP",
+          "subcategoriaSlug": "motociclismo",
+          "perguntasFuncionais": 4,
+          "sampleIds": [
+            "desporto_0011",
+            "desporto_0019",
+            "desporto_0027"
+          ]
+        },
+        {
+          "subcategoriaId": "desporto-portugues",
+          "subcategoriaNome": "Desporto Português",
+          "subcategoriaSlug": "desporto-portugues",
+          "perguntasFuncionais": 3,
+          "sampleIds": [
+            "desporto_0018",
+            "desporto_0024",
+            "desporto_0025"
+          ]
+        },
+        {
+          "subcategoriaId": "desporto-internacional",
+          "subcategoriaNome": "Desporto Internacional",
+          "subcategoriaSlug": "desporto-internacional",
+          "perguntasFuncionais": 3,
+          "sampleIds": [
+            "desporto_0018",
+            "desporto_0024",
+            "desporto_0025"
+          ]
+        },
+        {
+          "subcategoriaId": "recordes-desportivos",
+          "subcategoriaNome": "Recordes Mundiais",
+          "subcategoriaSlug": "recordes-desportivos",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "competicoes-desportivas",
+          "subcategoriaNome": "Grandes Competições",
+          "subcategoriaSlug": "competicoes-desportivas",
+          "perguntasFuncionais": 830,
+          "sampleIds": [
+            "desporto_0001",
+            "desporto_0002",
+            "desporto_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "humor",
+      "categoriaSlug": "humor",
+      "categoriaNome": "Humor",
+      "totalPerguntasTema": 800,
+      "subcategorias": [
+        {
+          "subcategoriaId": "humor-portugues",
+          "subcategoriaNome": "Humor Português",
+          "subcategoriaSlug": "humor-portugues",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "expressoes-portuguesas",
+          "subcategoriaNome": "Expressões Populares Portuguesas",
+          "subcategoriaSlug": "expressoes-portuguesas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "memes",
+          "subcategoriaNome": "Memes & Internet",
+          "subcategoriaSlug": "memes",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "HUM_MEM_0001",
+            "HUM_MEM_0002",
+            "HUM_MEM_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-popular-humor",
+          "subcategoriaNome": "Comédia na TV & Cinema",
+          "subcategoriaSlug": "cultura-popular-humor",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "situacoes-quotidiano",
+          "subcategoriaNome": "Situações do Quotidiano",
+          "subcategoriaSlug": "situacoes-quotidiano",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "perguntas-engracadas",
+          "subcategoriaNome": "Perguntas Engraçadas",
+          "subcategoriaSlug": "perguntas-engracadas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "curiosidades-engracadas",
+          "subcategoriaNome": "Curiosidades Hilariantes",
+          "subcategoriaSlug": "curiosidades-engracadas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "modo-maluco-humor",
+          "subcategoriaNome": "Humor Absurdo",
+          "subcategoriaSlug": "modo-maluco-humor",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "humor_0001",
+            "humor_0002",
+            "humor_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "musica",
+      "categoriaSlug": "musica",
+      "categoriaNome": "Música",
+      "totalPerguntasTema": 824,
+      "subcategorias": [
+        {
+          "subcategoriaId": "musica-portuguesa-geral",
+          "subcategoriaNome": "Música Portuguesa",
+          "subcategoriaSlug": "musica-portuguesa-geral",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "musica_0003",
+            "musica_0006",
+            "musica_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "fado",
+          "subcategoriaNome": "Fado & Guitarra Portuguesa",
+          "subcategoriaSlug": "fado",
+          "perguntasFuncionais": 3,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0011",
+            "musica_0016"
+          ]
+        },
+        {
+          "subcategoriaId": "musica-popular-portuguesa",
+          "subcategoriaNome": "Música Popular & Pimba",
+          "subcategoriaSlug": "musica-popular-portuguesa",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "musica_0003",
+            "musica_0006",
+            "musica_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "artistas-portugueses",
+          "subcategoriaNome": "Artistas & Cantores Portugueses",
+          "subcategoriaSlug": "artistas-portugueses",
+          "perguntasFuncionais": 824,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0002",
+            "musica_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "bandas-portuguesas",
+          "subcategoriaNome": "Bandas Portuguesas",
+          "subcategoriaSlug": "bandas-portuguesas",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUS_BAN_0001",
+            "MUS_BAN_0002",
+            "MUS_BAN_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "musica-internacional",
+          "subcategoriaNome": "Música Internacional",
+          "subcategoriaSlug": "musica-internacional",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "musica_0003",
+            "musica_0006",
+            "musica_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "artistas-internacionais",
+          "subcategoriaNome": "Artistas Internacionais",
+          "subcategoriaSlug": "artistas-internacionais",
+          "perguntasFuncionais": 824,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0002",
+            "musica_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "bandas-internacionais",
+          "subcategoriaNome": "Bandas Internacionais Lendárias",
+          "subcategoriaSlug": "bandas-internacionais",
+          "perguntasFuncionais": 824,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0002",
+            "musica_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cancoes",
+          "subcategoriaNome": "Grandes Canções",
+          "subcategoriaSlug": "cancoes",
+          "perguntasFuncionais": 824,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0002",
+            "musica_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "albuns",
+          "subcategoriaNome": "Álbuns Históricos",
+          "subcategoriaSlug": "albuns",
+          "perguntasFuncionais": 824,
+          "sampleIds": [
+            "musica_0001",
+            "musica_0002",
+            "musica_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "instrumentos",
+          "subcategoriaNome": "Instrumentos Musicais",
+          "subcategoriaSlug": "instrumentos",
+          "perguntasFuncionais": 638,
+          "sampleIds": [
+            "musica_0012",
+            "musica_0038",
+            "musica_0039"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-musica",
+          "subcategoriaNome": "História da Música",
+          "subcategoriaSlug": "historia-musica",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "musica_0003",
+            "musica_0006",
+            "musica_0008"
+          ]
+        },
+        {
+          "subcategoriaId": "festivais-musica",
+          "subcategoriaNome": "Festivais de Música",
+          "subcategoriaSlug": "festivais-musica",
+          "perguntasFuncionais": 13,
+          "sampleIds": [
+            "musica_0003",
+            "musica_0006",
+            "musica_0008"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "cinema-tv",
+      "categoriaSlug": "cinema-tv",
+      "categoriaNome": "Cinema e Televisão",
+      "totalPerguntasTema": 917,
+      "subcategorias": [
+        {
+          "subcategoriaId": "filmes",
+          "subcategoriaNome": "Grandes Filmes",
+          "subcategoriaSlug": "filmes",
+          "perguntasFuncionais": 52,
+          "sampleIds": [
+            "cinema-tv_0003",
+            "cinema-tv_0010",
+            "TV_FIL_0001"
+          ]
+        },
+        {
+          "subcategoriaId": "series",
+          "subcategoriaNome": "Séries Marcantes",
+          "subcategoriaSlug": "series",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "atores-atrizes",
+          "subcategoriaNome": "Atores e Atrizes",
+          "subcategoriaSlug": "atores-atrizes",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personagens",
+          "subcategoriaNome": "Personagens Inesquecíveis",
+          "subcategoriaSlug": "personagens",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "realizadores",
+          "subcategoriaNome": "Realizadores",
+          "subcategoriaSlug": "realizadores",
+          "perguntasFuncionais": 2,
+          "sampleIds": [
+            "cinema-tv_0006",
+            "cinema-tv_0014"
+          ]
+        },
+        {
+          "subcategoriaId": "cinema-portugues",
+          "subcategoriaNome": "Cinema Português",
+          "subcategoriaSlug": "cinema-portugues",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "televisao-portuguesa",
+          "subcategoriaNome": "Televisão Portuguesa",
+          "subcategoriaSlug": "televisao-portuguesa",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "programas-televisao",
+          "subcategoriaNome": "Programas de Televisão Clássicos",
+          "subcategoriaSlug": "programas-televisao",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "streaming",
+          "subcategoriaNome": "Streaming & Novas Séries",
+          "subcategoriaSlug": "streaming",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-pop",
+          "subcategoriaNome": "Cultura Pop & Geek",
+          "subcategoriaSlug": "cultura-pop",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "filmes-classicos",
+          "subcategoriaNome": "Filmes Clássicos",
+          "subcategoriaSlug": "filmes-classicos",
+          "perguntasFuncionais": 917,
+          "sampleIds": [
+            "cinema-tv_0001",
+            "cinema-tv_0002",
+            "cinema-tv_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "personalidades",
+      "categoriaSlug": "personalidades",
+      "categoriaNome": "Personalidades",
+      "totalPerguntasTema": 800,
+      "subcategorias": [
+        {
+          "subcategoriaId": "figuras-historicas",
+          "subcategoriaNome": "Figuras Históricas",
+          "subcategoriaSlug": "figuras-historicas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "politicos",
+          "subcategoriaNome": "Políticos & Estadistas",
+          "subcategoriaSlug": "politicos",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "artistas",
+          "subcategoriaNome": "Artistas & Pintores",
+          "subcategoriaSlug": "artistas",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "PERS_PIN_0001",
+            "PERS_PIN_0002",
+            "PERS_PIN_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "atletas",
+          "subcategoriaNome": "Atletas Lendários",
+          "subcategoriaSlug": "atletas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cientistas",
+          "subcategoriaNome": "Cientistas & Pensadores",
+          "subcategoriaSlug": "cientistas",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "PERS_CIE_0001",
+            "PERS_CIE_0002",
+            "PERS_CIE_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "empresarios",
+          "subcategoriaNome": "Empresários & Empreendedores",
+          "subcategoriaSlug": "empresarios",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "escritores",
+          "subcategoriaNome": "Escritores & Poetas",
+          "subcategoriaSlug": "escritores",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "musicos",
+          "subcategoriaNome": "Músicos & Compositores",
+          "subcategoriaSlug": "musicos",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "atores",
+          "subcategoriaNome": "Atores & Intérpretes",
+          "subcategoriaSlug": "atores",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "criadores",
+          "subcategoriaNome": "Criadores & Inovadores",
+          "subcategoriaSlug": "criadores",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personalidades-internacionais",
+          "subcategoriaNome": "Personalidades Internacionais",
+          "subcategoriaSlug": "personalidades-internacionais",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personalidades-portuguesas",
+          "subcategoriaNome": "Personalidades Portuguesas",
+          "subcategoriaSlug": "personalidades-portuguesas",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "personalidades_0001",
+            "personalidades_0002",
+            "personalidades_0003"
+          ]
+        }
+      ]
+    },
+    {
+      "categoriaId": "mundo",
+      "categoriaSlug": "mundo",
+      "categoriaNome": "Mundo",
+      "totalPerguntasTema": 800,
+      "subcategorias": [
+        {
+          "subcategoriaId": "paises-mundo",
+          "subcategoriaNome": "Países & Continentes",
+          "subcategoriaSlug": "paises-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "capitais-mundo",
+          "subcategoriaNome": "Capitais do Mundo",
+          "subcategoriaSlug": "capitais-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "historia-mundial-geral",
+          "subcategoriaNome": "História Mundial",
+          "subcategoriaSlug": "historia-mundial-geral",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "mundo_0001",
+            "mundo_0002",
+            "mundo_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "geografia-mundial-geral",
+          "subcategoriaNome": "Geografia Mundial",
+          "subcategoriaSlug": "geografia-mundial-geral",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "mundo_0001",
+            "mundo_0002",
+            "mundo_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cultura-mundo",
+          "subcategoriaNome": "Culturas & Costumes Globais",
+          "subcategoriaSlug": "cultura-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "ciencia-tecnologia-mundo",
+          "subcategoriaNome": "Ciência & Tecnologia no Mundo",
+          "subcategoriaSlug": "ciencia-tecnologia-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "economia-mundo",
+          "subcategoriaNome": "Economia Global",
+          "subcategoriaSlug": "economia-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "desporto-mundo",
+          "subcategoriaNome": "Desporto Mundial",
+          "subcategoriaSlug": "desporto-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "musica-mundo",
+          "subcategoriaNome": "Música do Mundo",
+          "subcategoriaSlug": "musica-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "cinema-mundo",
+          "subcategoriaNome": "Cinema Internacional",
+          "subcategoriaSlug": "cinema-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "personalidades-mundo",
+          "subcategoriaNome": "Personalidades do Mundo",
+          "subcategoriaSlug": "personalidades-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "curiosidades-mundo",
+          "subcategoriaNome": "Curiosidades Mundiais",
+          "subcategoriaSlug": "curiosidades-mundo",
+          "perguntasFuncionais": 50,
+          "sampleIds": [
+            "MUN_GEO_0001",
+            "MUN_GEO_0002",
+            "MUN_GEO_0003"
+          ]
+        },
+        {
+          "subcategoriaId": "atualidade-internacional",
+          "subcategoriaNome": "Atualidade Internacional",
+          "subcategoriaSlug": "atualidade-internacional",
+          "perguntasFuncionais": 800,
+          "sampleIds": [
+            "mundo_0001",
+            "mundo_0002",
+            "mundo_0003"
+          ]
+        }
+      ]
+    }
+  ]
+}
