@@ -97,5 +97,11 @@ service cloud.firestore {
       allow create: if true;
       allow update, delete: if false;
     }
+
+    // Publicações da Comunidade (CriadoresFeed)
+    match /publicacoes_comunidade/{postId} {
+      allow read, create, update: if true;
+      allow delete: if isAuthenticated();
+    }
   }
 }
