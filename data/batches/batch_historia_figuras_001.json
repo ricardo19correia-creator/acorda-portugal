@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_FIG_0001",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que diplomata português servindo como Cônsul-Geral de Portugal em Bordéus em junho de 1940 salvou mais de 30.000 refugiados (incluindo cerca de 10.000 judeus) da perseguição nazi ao emitir vistos contra as ordens expressas de Salazar («Circular 14»)?",
+    "opcoes": [
+      "Aristides de Sousa Mendes",
+      "Carlos Sampaio Garrido",
+      "Alberto Teixeira Branquinho",
+      "Luís Martins de Sousa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Aristides de Sousa Mendes foi reconhecido pelo Memorial Yad Vashem de Israel como «Justo entre as Nações» e homenageado no Panteão Nacional em 2021.",
+    "fonte": "Fundação Aristides de Sousa Mendes / Panteão Nacional / Yad Vashem",
+    "factClusterId": "fc_fig_sousamendes1940_01"
+  },
+  {
+    "id": "HIST_FIG_0002",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que capitão de Cavalaria da Escola Prática de Santarém liderou as colunas de blindados na madrugada de 25 de Abril de 1974, comandando as operações no Terreiro do Paço e o cerco ao Quartel do Carmo sem disparar um único tiro?",
+    "opcoes": [
+      "Ernesto Melo Antunes",
+      "Fernando Salgueiro Maia",
+      "Otelo Saraiva de Carvalho",
+      "Vasco Gonçalves"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Salgueiro Maia é o símbolo incontornável da coragem, serenidade e espírito cívico da Revolução dos Cravos.",
+    "fonte": "Associação 25 de Abril / Município de Santarém / Castelo de Vide",
+    "factClusterId": "fc_fig_salgueiromaia_01"
+  },
+  {
+    "id": "HIST_FIG_0003",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que general da Força Aérea Portuguesa («O General Sem Medo») candidatou-se à Presidência da República em 1958 desafiando a ditadura do Estado Novo com a célebre resposta «Obviamente, demito-o!» sobre Salazar?",
+    "opcoes": [
+      "Manuel Gomes da Costa",
+      "António de Spínola",
+      "Humberto Delgado",
+      "Norton de Matos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Humberto Delgado galvanizou a oposição democrática em multidões históricas e foi assassinado pela PIDE em Villanueva del Fresno em 1965, repousando no Panteão Nacional.",
+    "fonte": "Panteão Nacional / Comissão de Homenagem a Humberto Delgado",
+    "factClusterId": "fc_fig_humbertodelgado_01"
+  },
+  {
+    "id": "HIST_FIG_0004",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que general e nobre cavaleiro português («O Santo Condestável»), braço militar de D. João I na crise de 1383-1385 e vencedor invicto de Aljubarrota e Atoleiros, ingressou como frade no Convento do Carmo em Lisboa?",
+    "opcoes": [
+      "Martim Moniz",
+      "Egas Moniz",
+      "Gonçalo Mendes da Maia",
+      "D. Nuno Álvares Pereira (São Nuno de Santa Maria)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Nuno Álvares Pereira distribuiu os seus imensos bens pelos veteranos de guerra e foi canonizado pelo Papa Bento XVI em 2009.",
+    "fonte": "Igreja do Santo Condestável / Patriarcado de Lisboa / Vaticano",
+    "factClusterId": "fc_fig_nunoalvares_01"
+  },
+  {
+    "id": "HIST_FIG_0005",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que médico e investigador português natural de Avanca (Estarreja) inventou a angiografia cerebral em 1927 e foi galardoado com o Prémio Nobel da Fisiologia ou Medicina em 1949?",
+    "opcoes": [
+      "António Egas Moniz (António Caetano de Abreu Freire Egas Moniz)",
+      "Sousa Martins",
+      "Abel Salazar",
+      "Pulido Valente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz foi o primeiro cidadão português a ser galardoado com um Prémio Nobel.",
+    "fonte": "Fundação Nobel / Casa-Museu Egas Moniz / Universidade de Lisboa",
+    "factClusterId": "fc_fig_egamoniznobel_01"
+  },
+  {
+    "id": "HIST_FIG_0006",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que poderoso Secretário de Estado de D. José I (1750-1777), nascido em Lisboa em 1699, liderou a reconstrução iluminista da Baixa Pombalina após o terramoto de 1755 e expulsou a Companhia de Jesus em 1759?",
+    "opcoes": [
+      "Manuel da Maia",
+      "Sebastião José de Carvalho e Melo (Marquês de Pombal)",
+      "Eugénio dos Santos",
+      "Luís da Cunha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Marquês de Pombal aboliu a escravatura no território continental português (1761) e acabou com a distinção entre cristãos-velhos e cristãos-novos (1773).",
+    "fonte": "Museu de Lisboa / Palácio dos Marqueses de Pombal em Oeiras",
+    "factClusterId": "fc_fig_marquesdepombal_01"
+  },
+  {
+    "id": "HIST_FIG_0007",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que lendário cavaleiro medieval português («O Lidador»), natural da Maia, combateu os mouros até aos 95 anos de idade na Batalha de Ourique e na defesa da fronteira alentejana?",
+    "opcoes": [
+      "Mem Ramires",
+      "Giraldo Sem Pavor",
+      "Gonçalo Mendes da Maia («O Lidador»)",
+      "Martim Freitas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Gonçalo Mendes da Maia deu a alcunha histórica à cidade da Maia ('Terra do Lidador').",
+    "fonte": "Município da Maia / Crónicas Medievais Portuguesas",
+    "factClusterId": "fc_fig_goncalomendesmaia_01"
+  },
+  {
+    "id": "HIST_FIG_0008",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que nobre e salteador medieval português conquistou a cidade de Évora aos mouros em 1165 através de um ardil noturno escalando a torre com lanças espetadas nas muralhas, tornando-se o seu primeiro alcaide?",
+    "opcoes": [
+      "Martim Moniz",
+      "Paio Peres Correia",
+      "Fuás Roupinho",
+      "Giraldo Geraldes («Giraldo Sem Pavor»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A figura de Giraldo Sem Pavor com a sua espada e cabeças decepadas figura no brasão de armas da cidade de Évora e na Praça do Giraldo.",
+    "fonte": "Câmara Municipal de Évora / Dicionário de História Medieval",
+    "factClusterId": "fc_fig_geraldosempavor_01"
+  },
+  {
+    "id": "HIST_FIG_0009",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que cavaleiro e nobre português teria sacrificado o seu próprio corpo atravessando-se na porta do Castelo de São Jorge durante o Cerco de Lisboa em 1147 para permitir a entrada dos soldados cristãos?",
+    "opcoes": [
+      "Martim Moniz (Porta de Martim Moniz)",
+      "Egas Moniz",
+      "D. Soeiro Mendes",
+      "D. Afonso Sanches"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Porta de Martim Moniz e a praça com o seu nome em Lisboa homenageiam o seu ato heróico imortalizado na tradição oral.",
+    "fonte": "Castelo de São Jorge / EGIREP / BNP",
+    "factClusterId": "fc_fig_martimmoniz_01"
+  },
+  {
+    "id": "HIST_FIG_0010",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que frade jesuíta, orador sagrado e diplomata português (1608-1697), autor do «Sermão de Santo António aos Peixes» e defensor dos direitos dos povos indígenas do Brasil e dos judeus conversos, foi chamado por Fernando Pessoa de «O Imperador da Língua Portuguesa»?",
+    "opcoes": [
+      "Padre Manuel da Nóbrega",
+      "Padre António Vieira",
+      "Frei Luís de Sousa",
+      "Frei Heitor Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Sermões do Padre António Vieira são o monumento cimeiro da prosa barroca em língua portuguesa.",
+    "fonte": "Biblioteca Nacional de Portugal / Imprensa Nacional-Casa da Moeda",
+    "factClusterId": "fc_fig_padreantoniovieira_01"
+  },
+  {
+    "id": "HIST_FIG_0011",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que jurista e conselheiro régio português defendeu com eloquência a causa do Mestre de Avis nas Cortes de Coimbra de 1385, demonstrando através do direito canónico e civil a legitimidade da aclamação de D. João I?",
+    "opcoes": [
+      "Álvaro Pais",
+      "Fernão Lopes",
+      "Doutor João das Regras",
+      "Gonçalo Teles"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "João das Regras desfez juridicamente as pretensões dos reis de Castela e dos filhos de Inês de Castro.",
+    "fonte": "Fernão Lopes / Mosteiro da Batalha",
+    "factClusterId": "fc_fig_joaodasregras_01"
+  },
+  {
+    "id": "HIST_FIG_0012",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que grande Mestre da Ordem Militar de Santiago no século XIII liderou as campanhas militares que conquistaram Tavira, Aljezur, Faro e Cacela, assegurando a Reconquista do Algarve para a coroa portuguesa?",
+    "opcoes": [
+      "D. Lourenço Fernandes da Cunha",
+      "D. Mem Ramires",
+      "D. Lopo Vaz",
+      "D. Paio Peres Correia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Paio Peres Correia é homenageado em estátuas e toponímia no Algarve e em Sevilha como um dos maiores estrategas da Reconquista.",
+    "fonte": "Município de Tavira / Ordem de Santiago",
+    "factClusterId": "fc_fig_paioperescorreia_01"
+  },
+  {
+    "id": "HIST_FIG_0013",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que magistrado e político liberal alentejano (nascido em Castelo de Vide em 1780) elaborou a reforma jurídica e administrativa de 1832 que aboliu os morgadios pequenos, os dízimos eclesiásticos e os forais medievais?",
+    "opcoes": [
+      "José Xavier Mouzinho da Silveira",
+      "Manuel Fernandes Tomás",
+      "Manuel da Silva Passos",
+      "Bernardo de Sá Nogueira (Sá da Bandeira)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mouzinho da Silveira foi o arquiteto do Estado moderno, fiscal e judiciário em Portugal.",
+    "fonte": "Assembleia da República / Município de Castelo de Vide",
+    "factClusterId": "fc_fig_mouzinhodasilveira_01"
+  },
+  {
+    "id": "HIST_FIG_0014",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que primeiro-ministro liberal e líder militar («O Marquês de Sá da Bandeira») aboliu definitivamente a escravatura nas colónias portuguesas em 1836 e 1869 e fundou a Academia de Belas-Artes e a Escola Politécnica?",
+    "opcoes": [
+      "Duque de Saldanha",
+      "Bernardo de Sá Nogueira de Figueiredo (Marquês de Sá da Bandeira)",
+      "Duque de Palmela",
+      "Duque de Terceira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá da Bandeira perdeu o braço direito na defesa liberal do Alto da Bandeira em Gaia durante o Cerco do Porto.",
+    "fonte": "Assembleia da República / Sociedade de Geografia de Lisboa",
+    "factClusterId": "fc_fig_sadabandeira_01"
+  },
+  {
+    "id": "HIST_FIG_0015",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que militar e herói de Moçambique («O Leão de Gaza») comandou a célebre captura do imperador vátua Gungunhana em Chaimite em 28 de dezembro de 1895?",
+    "opcoes": [
+      "António Enes",
+      "Freire de Andrade",
+      "Joaquim Augusto Mouzinho de Albuquerque",
+      "Paiva Couceiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mouzinho de Albuquerque entrou no acampamento de Chaimite com apenas algumas dezenas de homens numa das mais arrojadas operações militares coloniais.",
+    "fonte": "Arquivo Histórico Militar / Museu Militar de Lisboa",
+    "factClusterId": "fc_fig_mouzinhoalbuquerque_01"
+  },
+  {
+    "id": "HIST_FIG_0016",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que diplomata e político português da 1.ª República, presidente do Ministério em 1916 («O Grande Republicano»), liderou a participação de Portugal na Primeira Guerra Mundial na Flandres e chefiou a delegação na Conferência de Paz de Paris?",
+    "opcoes": [
+      "Bernardino Machado",
+      "António José de Almeida",
+      "Brito Camacho",
+      "Afonso Costa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Afonso Costa presidiu à Assembleia da Sociedade das Nações em Genebra em 1926 e repousa no Panteão Nacional.",
+    "fonte": "Panteão Nacional / Assembleia da República",
+    "factClusterId": "fc_fig_afonsocosta_01"
+  },
+  {
+    "id": "HIST_FIG_0017",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escritor e médico português (1889-1955), autor das obras «Manhã Submersa» e «Terra Prometida», foi um dos mais destacados opositores culturais e políticos ao regime do Estado Novo?",
+    "opcoes": [
+      "Vergílio Ferreira (e Fernando Namora)",
+      "Aquilino Ribeiro",
+      "Miguel Torga",
+      "José Rodrigues Miguéis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Vergílio Ferreira e Miguel Torga marcaram a consciência ética e literária de Portugal no século XX.",
+    "fonte": "Biblioteca Nacional de Portugal / DGLAB",
+    "factClusterId": "fc_fig_escritoresoposicao_01"
+  },
+  {
+    "id": "HIST_FIG_0018",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que médico e escritor transmontano (pseudónimo de Adolfo Correia da Rocha, 1907-1995), autor dos «Contos da Montanha» e do monumental «Diário» em 16 volumes, foi o primeiro laureado com o Prémio Camões em 1989?",
+    "opcoes": [
+      "Eugénio de Andrade",
+      "Miguel Torga",
+      "António Ramos Rosa",
+      "Jorge de Sena"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Miguel Torga celebrou a força da terra transmontana e a resistência humanista universal a partir da sua casa em Coimbra.",
+    "fonte": "Casa-Museu Miguel Torga em Coimbra / Prémio Camões",
+    "factClusterId": "fc_fig_migueltorga_01"
+  },
+  {
+    "id": "HIST_FIG_0019",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escritora e poetisa portuguesa (1894-1930), natural de Vila Viçosa, publicou obras imortais do lirismo erótico e existencialista feminino como «Charneca em Flor» e «Livro de Sóror Saudade»?",
+    "opcoes": [
+      "Sophia de Mello Breyner",
+      "Natália Correia",
+      "Florbela Espanca",
+      "Maria Amália Vaz de Carvalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Florbela Espanca foi uma pioneira da emancipação lírica e da sensibilidade poética da mulher no século XX.",
+    "fonte": "Biblioteca Municipal Florbela Espanca / Município de Matosinhos",
+    "factClusterId": "fc_fig_florbelaespanca_01"
+  },
+  {
+    "id": "HIST_FIG_0020",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que poetisa e escritora portuguesa (1919-2004), nascida no Porto e autora de «Mar Novo» e «O Cavaleiro da Dinamarca», foi a primeira mulher a receber o Prémio Camões (1999) e repousa no Panteão Nacional?",
+    "opcoes": [
+      "Agustina Bessa-Luís",
+      "Matilde Rosa Araújo",
+      "Ilse Losa",
+      "Sophia de Mello Breyner Andresen"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Sophia de Mello Breyner Andresen é uma das vozes poéticas mais puras e aclamadas de Portugal e defensora da liberdade democrática.",
+    "fonte": "Panteão Nacional / DGLAB / Centro de Estudos Marianos",
+    "factClusterId": "fc_fig_sophiademello_01"
+  },
+  {
+    "id": "HIST_FIG_0021",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escritora portuguesa natural de Amarante (1922-2019), autora da obra-prima «A Sibila» (1954) e de «Fanny Owen», recebeu o Prémio Camões em 2004 pelo seu estilo inconfundível?",
+    "opcoes": [
+      "Agustina Bessa-Luís",
+      "Hélia Correia",
+      "Lídia Jorge",
+      "Teolinda Gersão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Agustina Bessa-Luís retratou a alma e as contradições da sociedade do Norte de Portugal e colaborou intensamente com o cineasta Manoel de Oliveira.",
+    "fonte": "DGLAB / Fundação Agustina Bessa-Luís",
+    "factClusterId": "fc_fig_agustinabessaluis_01"
+  },
+  {
+    "id": "HIST_FIG_0022",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que romancista português (1922-2010), natural da Azinhaga (Golegã) e autor de «Memorial do Convento» e «Ensaio sobre a Cegueira», foi o primeiro e único escritor de língua portuguesa laureado com o Prémio Nobel da Literatura em 1998?",
+    "opcoes": [
+      "António Lobo Antunes",
+      "José Saramago",
+      "Eça de Queirós",
+      "Fernando Pessoa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As cinzas de José Saramago repousam junto à Fundação José Saramago na Casa dos Bicos em Lisboa à sombra de uma oliveira da Azinhaga.",
+    "fonte": "Fundação Nobel / Fundação José Saramago / Casa dos Bicos",
+    "factClusterId": "fc_fig_josesaramagonobel_01"
+  },
+  {
+    "id": "HIST_FIG_0023",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que poeta universal português (1888-1935), autor da «Mensagem» e criador dos heterónimos Álvaro de Campos, Alberto Caeiro, Ricardo Reis e do semi-heterónimo Bernardo Soares («Livro do Desassossego»), repousa no Mosteiro dos Jerónimos?",
+    "opcoes": [
+      "Mário de Sá-Carneiro",
+      "Almada Negreiros",
+      "Fernando Pessoa",
+      "Camilo Pessanha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pessoa é uma das figuras mais geniais e influentes da literatura mundial do século XX.",
+    "fonte": "Casa Fernando Pessoa / BNP / Mosteiro dos Jerónimos",
+    "factClusterId": "fc_fig_fernandopessoa_01"
+  },
+  {
+    "id": "HIST_FIG_0024",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que mestre supremo do Realismo português (1845-1900), natural da Póvoa de Varzim e autor de «Os Maias», «O Crime do Padre Amaro», «O Primo Basílio» e «A Cidade e as Serras», repousa no Panteão Nacional?",
+    "opcoes": [
+      "Camilo Castelo Branco",
+      "Antero de Quental",
+      "Ramalho Ortigão",
+      "Eça de Queirós"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eça de Queirós foi diplomata e o maior prosador realista da língua portuguesa, membro da Geração de 70.",
+    "fonte": "Fundação Eça de Queiroz (Tormes) / Panteão Nacional",
+    "factClusterId": "fc_fig_ecadequeiros_01"
+  },
+  {
+    "id": "HIST_FIG_0025",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que prolífico romancista romântico português (1825-1890), 1.º Visconde de Correia Botelho e autor da obra-prima «Amor de Perdição» e de «A Queda dum Anjo», viveu na Casa de Seide em Famalicão?",
+    "opcoes": [
+      "Camilo Castelo Branco",
+      "Almeida Garrett",
+      "Alexandre Herculano",
+      "Júlio Dinis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Camilo Castelo Branco escreveu mais de 260 obras com uma riqueza vocabular extraordinária, retratando as paixões trágicas do Minho e do Douro.",
+    "fonte": "Casa de Camilo em Seide / Município de Vila Nova de Famalicão",
+    "factClusterId": "fc_fig_camilocastelobranco_01"
+  },
+  {
+    "id": "HIST_FIG_0026",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escritor e dramaturgo liberal português (1799-1854), natural do Porto e autor de «Frei Luís de Sousa», «Viagens na Minha Terra» e «Folhas Caídas», fundou o Teatro Nacional D. Maria II e o Conservatório Nacional?",
+    "opcoes": [
+      "Alexandre Herculano",
+      "João Baptista da Silva Leitão de Almeida Garrett",
+      "Gomes de Amorim",
+      "António Feliciano de Castilho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Almeida Garrett foi o grande renovador do teatro nacional e introdutor do Romantismo em Portugal.",
+    "fonte": "Teatro Nacional D. Maria II / Panteão Nacional",
+    "factClusterId": "fc_fig_almeidagarrett_01"
+  },
+  {
+    "id": "HIST_FIG_0027",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que historiador, romancista e político liberal português (1810-1877), autor da monumental «História de Portugal» e de «Eurico, o Presbítero», retirou-se na velhice como agricultor na sua quinta em Vale de Lobos (Santarém)?",
+    "opcoes": [
+      "Rebelo da Silva",
+      "Oliveira Martins",
+      "Alexandre Herculano",
+      "António Sérgio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Herculano fundou a historiografia científica moderna em Portugal com base em rigorosa pesquisa documental na Torre do Tombo.",
+    "fonte": "Mosteiro dos Jerónimos / BNP / Município de Santarém",
+    "factClusterId": "fc_fig_alexandreherculano_01"
+  },
+  {
+    "id": "HIST_FIG_0028",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que filósofo, ensaísta e historiador da cultura portuguesa (1924-2019), natural de Santa Marinha (Seia) e autor de «O Labirinto da Saudade» e «Portugal como Problema», repousa no Panteão Nacional?",
+    "opcoes": [
+      "António José Saraiva",
+      "Agostinho da Silva",
+      "Vitorino Magalhães Godinho",
+      "Eduardo Lourenço"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Lourenço foi o maior pensador da identidade cultural e destino histórico de Portugal contemporâneo.",
+    "fonte": "Panteão Nacional / Centro de Estudos Ibéricos da Guarda",
+    "factClusterId": "fc_fig_eduardolourenco_01"
+  },
+  {
+    "id": "HIST_FIG_0029",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que filósofo, filólogo e ensaísta português (1906-1994), grande divulgador da cultura lusófona e do pensamento do Quinto Império e do Espírito Santo, viveu no Brasil onde fundou universidades?",
+    "opcoes": [
+      "Agostinho da Silva",
+      "Leonardo Coimbra",
+      "Sampaio Bruno",
+      "Delfim Santos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Agostinho da Silva tornou-se uma figura de enorme culto popular pelas suas conversas filosóficas na RTP na série 'Conversas Vadias'.",
+    "fonte": "RTP Arquivos / Associação Agostinho da Silva",
+    "factClusterId": "fc_fig_agostinhodasilva_01"
+  },
+  {
+    "id": "HIST_FIG_0030",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que fadista portuguesa (1920-1999), natural de Lisboa e conhecida internacionalmente como «A Rainha do Fado», levou a música e os poetas de Portugal a palcos de todo o mundo e repousa no Panteão Nacional?",
+    "opcoes": [
+      "Hermínia Silva",
+      "Amália Rodrigues",
+      "Lucília do Carmo",
+      "Maria Teresa de Noronha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Amália Rodrigues revolucionou o Fado cantando Camões, Ary dos Santos, David Mourão-Ferreira e Alexandre O'Neill acompanhada pelo compositor Alain Oulman.",
+    "fonte": "Fundação Amália Rodrigues / Panteão Nacional / Museu do Fado",
+    "factClusterId": "fc_fig_amaliarodrigues_01"
+  },
+  {
+    "id": "HIST_FIG_0031",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que cantautor, poeta e compositor português (1929-1987), autor da canção libertária «Grândola, Vila Morena» que serviu de senha rádio ao golpe de 25 de Abril de 1974, é o:",
+    "opcoes": [
+      "Adriano Correia de Oliveira",
+      "José Mário Branco",
+      "José Afonso (Zeca Afonso)",
+      "Manuel Freire"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Zeca Afonso é a voz mais marcante da música de intervenção e da fraternidade popular da história contemporânea de Portugal.",
+    "fonte": "Associação José Afonso (AJA) / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_fig_zecaafonso_01"
+  },
+  {
+    "id": "HIST_FIG_0032",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que cineasta português natural do Porto (1908-2015) foi o mais longevo realizador em atividade na história do cinema mundial («Aniki-Bóbó», «O Vale Abraão»), dirigindo filmes até aos 106 anos de idade?",
+    "opcoes": [
+      "Paulo Rocha",
+      "João César Monteiro",
+      "Fernando Lopes",
+      "Manoel de Oliveira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manoel de Oliveira foi distinguido com dois Leões de Ouro de Carreira no Festival de Veneza e com a Palma de Ouro de Carreira em Cannes.",
+    "fonte": "Casa do Cinema Manoel de Oliveira em Serralves / Cinemateca Portuguesa",
+    "factClusterId": "fc_fig_manoeldeoliveira_01"
+  },
+  {
+    "id": "HIST_FIG_0033",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que arquiteto português natural de Matosinhos (nascido em 1933) é o único português vencedor do Prémio Pritzker de Arquitetura (1992) ao lado de Eduardo Souto de Moura (2011)?",
+    "opcoes": [
+      "Álvaro Siza Vieira",
+      "Gonçalo Byrne",
+      "Fernando Távora",
+      "Manuel Aires Mateus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Siza Vieira projetou o Museu de Serralves no Porto, a Reconstrução do Chiado em Lisboa e o Pavilhão de Portugal na Expo 98.",
+    "fonte": "The Pritzker Architecture Prize / Fundação de Serralves",
+    "factClusterId": "fc_fig_sizavieira_01"
+  },
+  {
+    "id": "HIST_FIG_0034",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que arquiteto português natural do Porto (nascido em 1952), discípulo de Siza Vieira, venceu o Prémio Pritzker de Arquitetura em 2011 pelo projeto do Estádio Municipal de Braga («A Pedreira»)?",
+    "opcoes": [
+      "Carrilho da Graça",
+      "Eduardo Souto de Moura",
+      "Manuel Graça Dias",
+      "Pancho Guedes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Souto de Moura projetou também a Casa das Histórias Paula Rego em Cascais e a Torre Burgo no Porto.",
+    "fonte": "The Pritzker Architecture Prize / Casa das Histórias Paula Rego",
+    "factClusterId": "fc_fig_soutodemoura_01"
+  },
+  {
+    "id": "HIST_FIG_0035",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que pintora figurativa e artista plástica portuguesa (1935-2022), nascida em Lisboa e radicada em Londres, notabilizou-se internacionalmente pelas séries de pinturas «As Meninas», «O Crime do Padre Amaro» e «A Dança»?",
+    "opcoes": [
+      "Helena Almeida",
+      "Maria Helena Vieira da Silva",
+      "Paula Rego",
+      "Graça Morais"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paula Rego foi uma das mais aclamadas artistas visuais britânicas e portuguesas com obras expostas na Tate Britain e National Gallery.",
+    "fonte": "Casa das Histórias Paula Rego / Tate Britain",
+    "factClusterId": "fc_fig_paularego_01"
+  },
+  {
+    "id": "HIST_FIG_0036",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que pintora abstrata luso-francesa (1908-1992), nascida em Lisboa e radicada em Paris com o seu marido Arpad Szenes, foi uma das figuras centrais da Escola de Paris no pós-guerra?",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "Eduardo Viana",
+      "Mily Possoz",
+      "Maria Helena Vieira da Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Arpad Szenes-Vieira da Silva em Lisboa acolhe o espólio permanente dos labirintos e malhas geométricas da pintora.",
+    "fonte": "Fundação Arpad Szenes-Vieira da Silva / Centre Pompidou",
+    "factClusterId": "fc_fig_vieiradasilva_01"
+  },
+  {
+    "id": "HIST_FIG_0037",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que pintor modernista português (1887-1918), natural de Manhufe (Amarante) e amigo íntimo de Modigliani e Robert Delaunay em Paris, criou obras de vanguarda antes de falecer tragicamente com a pneumónica aos 30 anos?",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "Almada Negreiros",
+      "Santa-Rita Pintor",
+      "Dórdio Gomes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Amadeo de Souza-Cardoso participou no histórico Armory Show de Nova Iorque em 1913 e tem o museu municipal em Amarante.",
+    "fonte": "Museu Municipal Amadeo de Souza-Cardoso / Centro de Arte Moderna da Gulbenkian",
+    "factClusterId": "fc_fig_amadeosouzacardoso_01"
+  },
+  {
+    "id": "HIST_FIG_0038",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que artista multidisciplinar e futurista português (1893-1970), autor do «Manifesto Anti-Dantas» e dos famosos painéis de azulejos e tapeçarias na Gare Marítima de Alcântara e Gare da Rocha do Conde de Óbidos, é:",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "José de Almada Negreiros",
+      "Guilherme de Santa-Rita",
+      "Columbano Bordalo Pinheiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Almada Negreiros pintou o célebre 'Retrato de Fernando Pessoa' que se encontra no Museu da Fundação Calouste Gulbenkian.",
+    "fonte": "Fundação Calouste Gulbenkian / Porto de Lisboa",
+    "factClusterId": "fc_fig_almadanegreiros_01"
+  },
+  {
+    "id": "HIST_FIG_0039",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que caricaturista, ceramista e artista plástico lisboeta (1846-1905) fundou a Fábrica de Faianças das Caldas da Rainha em 1884 e criou a personagem satírica do «Zé Povinho»?",
+    "opcoes": [
+      "Columbano Bordalo Pinheiro",
+      "Manuel Gustavo Bordalo Pinheiro",
+      "Rafael Bordalo Pinheiro",
+      "Soares dos Reis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Zé Povinho de Bordalo Pinheiro a fazer o 'manguito' tornou-se a personificação crítica e bem-humorada do povo português.",
+    "fonte": "Museu Bordalo Pinheiro em Lisboa / Museu de Cerâmica das Caldas da Rainha",
+    "factClusterId": "fc_fig_rafaelbordalopinheiro_01"
+  },
+  {
+    "id": "HIST_FIG_0040",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escultor natural de Vila Nova de Gaia (1847-1889), mestre do Realismo e autor da estátua de mármore «O Desterrado» (1872), dá o nome ao principal museu nacional de arte na cidade do Porto?",
+    "opcoes": [
+      "Teixeira Lopes",
+      "Machado de Castro",
+      "Canto da Maia",
+      "António Soares dos Reis (Museu Nacional de Soares dos Reis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional Soares dos Reis no Palácio dos Carrancas alberga a obra-prima 'O Desterrado'.",
+    "fonte": "Museu Nacional de Soares dos Reis / DGPC",
+    "factClusterId": "fc_fig_soaresdosreis_01"
+  },
+  {
+    "id": "HIST_FIG_0041",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que escultor barroco português (1731-1822), natural de Coimbra, foi o autor da estátua equestre de D. José I no Terreiro do Paço e do monumental presépio de terracota da Basílica da Estrela?",
+    "opcoes": [
+      "Joaquim Machado de Castro",
+      "João da Silva",
+      "António Ferreira",
+      "Manuel Dias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional de Machado de Castro em Coimbra homenageia o grande mestre da escultura portuguesa.",
+    "fonte": "Museu Nacional de Machado de Castro / DGPC",
+    "factClusterId": "fc_fig_machadodecastro_01"
+  },
+  {
+    "id": "HIST_FIG_0042",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que político e diplomata arménio naturalizado britânico (1869-1955) radicou-se em Lisboa em 1942 e legou ao povo português a extraordinária Fundação Calouste Gulbenkian com a sua coleção privada de arte?",
+    "opcoes": [
+      "Kevorkian",
+      "Calouste Sarkis Gulbenkian («Senhor Cinco Por Cento»)",
+      "Arpad Szenes",
+      "Berardo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Calouste Gulbenkian é a maior instituição filantrópica e cultural privada de Portugal nas áreas da arte, educação, ciência e caridade.",
+    "fonte": "Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_fig_caloustegulbenkian_01"
+  },
+  {
+    "id": "HIST_FIG_0043",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que exploradores portugueses do século XIX («Hermenegildo Capelo e Roberto Ivens») realizaram entre 1884 e 1885 a histórica travessia a pé de África de costa a costa (de Angola a Moçambique)?",
+    "opcoes": [
+      "Serpa Pinto e Alexandre de Serpa Pinto",
+      "Gago Coutinho e Sacadura Cabral",
+      "Hermenegildo Capelo e Roberto Ivens",
+      "Silva Porto e António Maria Cardoso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A expedição de Capelo e Ivens percorreu mais de 4.500 km em território inexplorado, descrita na obra 'De Angola à Contra-Costa'.",
+    "fonte": "Sociedade de Geografia de Lisboa / Arquivo Histórico Ultramarino",
+    "factClusterId": "fc_fig_capeloeivens_01"
+  },
+  {
+    "id": "HIST_FIG_0044",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que explorador militar português (1846-1900) realizou a épica travessia a pé de Benguela a Durban entre 1877 e 1879, autor do relato «Como Eu Atravessei a África»?",
+    "opcoes": [
+      "Hermenegildo Capelo",
+      "Roberto Ivens",
+      "Mouzinho de Albuquerque",
+      "Alexandre Alberto da Rocha de Serpa Pinto (Major Serpa Pinto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Serpa Pinto foi distinguido pela Royal Geographical Society de Londres e promovido a general.",
+    "fonte": "Sociedade de Geografia de Lisboa / BNP",
+    "factClusterId": "fc_fig_serpapinto_01"
+  },
+  {
+    "id": "HIST_FIG_0045",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que dois pioneiros da aviação portuguesa realizaram a primeira travessia aérea do Atlântico Sul em 1922 (de Lisboa ao Rio de Janeiro no hidroavião Fairey IIID «Lusitânia» e «Pátria»), utilizando o sextante de horizonte artificial?",
+    "opcoes": [
+      "Gago Coutinho e Sacadura Cabral",
+      "Sarbento Valente e Jorge de Castilho",
+      "Brito Pais e Sarmento de Beires",
+      "Pinheiro Correia e Moreira de Campos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gago Coutinho inventou o sextante com horizonte artificial que revolucionou para sempre a navegação aérea mundial.",
+    "fonte": "Museu de Marinha / Força Aérea Portuguesa",
+    "factClusterId": "fc_fig_gagocoutinhosacaduracabral1922_01"
+  },
+  {
+    "id": "HIST_FIG_0046",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que jurista e político socialista português (1924-2017), fundador do Partido Socialista e resistente antifascista exilado em Paris, foi Primeiro-Ministro (1976-1978, 1983-1985) e Presidente da República (1986-1996)?",
+    "opcoes": [
+      "Francisco Sá Carneiro",
+      "Mário Soares («O Pai da Democracia»)",
+      "Álvaro Cunhal",
+      "Freitas do Amaral"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Soares liderou a adesão de Portugal à Comunidade Económica Europeia (CEE) assinada no Mosteiro dos Jerónimos em 1985 e repousa no Panteão Nacional.",
+    "fonte": "Fundação Mário Soares / Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_fig_mariosoares_01"
+  },
+  {
+    "id": "HIST_FIG_0047",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que político e advogado portuense (1934-1980), fundador do Partido Social Democrata (PPD/PSD) e Primeiro-Ministro da Aliança Democrática (AD) em 1980, faleceu tragicamente no acidente de aviação de Camarate a 4 de dezembro de 1980?",
+    "opcoes": [
+      "Adelino Amaro da Costa",
+      "Francisco Pinto Balsemão",
+      "Francisco Sá Carneiro",
+      "Mota Pinto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sá Carneiro foi uma das figuras mais carismáticas da transição democrática portuguesa, dando o nome ao Aeroporto Internacional do Porto.",
+    "fonte": "Assembleia da República / Instituto Francisco Sá Carneiro",
+    "factClusterId": "fc_fig_sacarneiro_01"
+  },
+  {
+    "id": "HIST_FIG_0048",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que líder histórico do Partido Comunista Português (1913-2005), escritor sob o pseudónimo de Manuel Tiago («Até Amanhã, Camaradas») e protagonista da célebre fuga da Fortaleza de Peniche em 1960, é:",
+    "opcoes": [
+      "Bento Gonçalves",
+      "Octávio Pato",
+      "Carlos Brito",
+      "Álvaro Cunhal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Álvaro Cunhal foi a figura central do comunismo português e da resistência clandestina ao regime do Estado Novo durante décadas.",
+    "fonte": "Fundação Dinarte / Museu da Resistência e da Liberdade de Peniche",
+    "factClusterId": "fc_fig_alvarocunhal_01"
+  },
+  {
+    "id": "HIST_FIG_0049",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que militar português nascido em Alcains (Castelo Branco) em 1935 foi o primeiro Presidente da República democraticamente eleito por sufrágio universal direto após o 25 de Abril, governando de 1976 a 1986?",
+    "opcoes": [
+      "General António Ramalho Eanes",
+      "General António de Spínola",
+      "General Francisco da Costa Gomes",
+      "Mário Soares"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ramalho Eanes desempenhou um papel estabilizador decisivo na consolidação das instituições democráticas e no respeito escrupuloso pela Constituição de 1976.",
+    "fonte": "Presidência da República Portuguesa",
+    "factClusterId": "fc_fig_ramalhoeanes_01"
+  },
+  {
+    "id": "HIST_FIG_0050",
+    "tema": "História",
+    "subtema": "Figuras Históricas",
+    "pergunta": "Que diplomata e político português nascido em Lisboa em 1949 foi Primeiro-Ministro de Portugal (1995-2002), Alto Comissário das Nações Unidas para os Refugiados (ACNUR, 2005-2015) e Secretário-Geral da Organização das Nações Unidas (ONU) desde 2017?",
+    "opcoes": [
+      "Durão Barroso",
+      "Jorge Sampaio",
+      "António Guterres",
+      "António Vitorino"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Guterres é o primeiro líder de governo de um país e o primeiro lusófono a liderar a Organização das Nações Unidas.",
+    "fonte": "Nações Unidas (UN.org) / Presidência da República",
+    "factClusterId": "fc_fig_antonioguterres_01"
+  }
+]

@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-08-26T03:35:05.137Z",
+  "totalAudited": 350,
+  "interrogativePatterns": {
+    "Qual / Quais": 283,
+    "Quem": 17,
+    "Onde / Em que local": 12,
+    "Quando / Em que ano": 10,
+    "Que / O que": 1,
+    "Como / Porquê": 7,
+    "Outros": 20
+  },
+  "topEntities": [
+    {
+      "name": "Portugal",
+      "count": 56,
+      "percentage": 16
+    },
+    {
+      "name": "Lisboa",
+      "count": 32,
+      "percentage": 9.14
+    },
+    {
+      "name": "Rio",
+      "count": 28,
+      "percentage": 8
+    },
+    {
+      "name": "Em",
+      "count": 22,
+      "percentage": 6.29
+    },
+    {
+      "name": "São",
+      "count": 21,
+      "percentage": 6
+    },
+    {
+      "name": "Porto",
+      "count": 17,
+      "percentage": 4.86
+    },
+    {
+      "name": "Prémio",
+      "count": 15,
+      "percentage": 4.29
+    },
+    {
+      "name": "João",
+      "count": 12,
+      "percentage": 3.43
+    },
+    {
+      "name": "Douro",
+      "count": 12,
+      "percentage": 3.43
+    },
+    {
+      "name": "Vila",
+      "count": 12,
+      "percentage": 3.43
+    },
+    {
+      "name": "Universidade",
+      "count": 11,
+      "percentage": 3.14
+    },
+    {
+      "name": "Açores",
+      "count": 11,
+      "percentage": 3.14
+    },
+    {
+      "name": "Serra",
+      "count": 10,
+      "percentage": 2.86
+    },
+    {
+      "name": "Portuguesa",
+      "count": 10,
+      "percentage": 2.86
+    },
+    {
+      "name": "Alentejo",
+      "count": 10,
+      "percentage": 2.86
+    }
+  ],
+  "factClusterConcentration": {
+    "maxEntity": "Portugal",
+    "maxCount": 56,
+    "concentrationPercentage": 16,
+    "status": "NEEDS_REVIEW"
+  }
+}

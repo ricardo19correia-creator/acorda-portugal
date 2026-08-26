@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_XIX_0001",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e histórico general francês comandou a 1.ª Invasão Francesa de Portugal em novembro de 1807 («General Junot»), provocando a transferência de urgência da Corte de D. João VI e da família real para o Rio de Janeiro?",
+    "opcoes": [
+      "General Jean-Andoche Junot (1807)",
+      "Marechal Nicolas Soult",
+      "Marechal André Massena",
+      "Marechal Michel Ney"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A corte portuguesa embarcou a 29 de novembro de 1807 sob escolta britânica transferindo a capital da monarquia para o Brasil.",
+    "fonte": "Dicionário de História de Portugal / Academia Portuguesa da História",
+    "factClusterId": "fc_hist_xix_primeirainvasao_junot_01"
+  },
+  {
+    "id": "HIST_XIX_0002",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que trágico acontecimento histórico ocorrido no Porto a 29 de março de 1809 durante a 2.ª Invasão Francesa comandada pelo Marechal Soult («Desastre da Ponte das Barcas»), provocou a morte de milhares de civis que fugiam das tropas invasoras?",
+    "opcoes": [
+      "O incêndio da Sé do Porto",
+      "O colapso da Ponte das Barcas no rio Douro",
+      "A explosão do Castelo da Foz",
+      "O naufrágio na barra do Douro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A ponte improvisada de barcas unidas por cordas e pranchas cedeu ao peso da multidão em pânico perante o ataque francês.",
+    "fonte": "Arquivo Municipal do Porto / DHP",
+    "factClusterId": "fc_hist_xix_pontedasbarcas_1809_01"
+  },
+  {
+    "id": "HIST_XIX_0003",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que impressionante e quase intransponível sistema defensivo militar de fortificações construído a norte de Lisboa em 1809-1810 sob a liderança do Duque de Wellington («Linhas de Torres Vedras»), travou definitivamente a 3.ª Invasão Francesa do Marechal Massena?",
+    "opcoes": [
+      "Muralhas Fernandinas",
+      "Linha de Elvas",
+      "Linhas de Torres Vedras (1809-1810)",
+      "Cintura Defensiva de Abrantes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Linhas de Torres Vedras contavam com 152 redutos fortificados e 600 canhões forçando Massena a retirar no inverno de 1810/1811.",
+    "fonte": "Rota Histórica das Linhas de Torres / Direção de História e Cultura Militar",
+    "factClusterId": "fc_hist_xix_linhasdetorres_1810_01"
+  },
+  {
+    "id": "HIST_XIX_0004",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Em que data histórica eclodiu no Porto a Revolução Liberal de 1820 («Revolução Liberal do Porto»), preparada pela sociedade secreta Sinédrio e liderada pelo magistrado Manuel Fernandes Tomás, que pôs fim ao absolutismo em Portugal?",
+    "opcoes": [
+      "5 de outubro de 1820",
+      "25 de abril de 1820",
+      "1 de dezembro de 1820",
+      "24 de agosto de 1820"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A revolução começou no Campo de Santo Ovídio no Porto exigindo o regresso do Rei e a convocação de Cortes Constituintes.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_revliberal_24agosto1820_01"
+  },
+  {
+    "id": "HIST_XIX_0005",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que sociedade secreta patriótica e conspiratória fundada no Porto em 1818 por Manuel Fernandes Tomás, José Ferreira Borges, José da Silva Carvalho e João Ferreira Viana («O Sinédrio»), foi o cérebro organizador da Revolução Liberal de 1820?",
+    "opcoes": [
+      "O Sinédrio (1818)",
+      "Carbonária Portuguesa",
+      "Sociedade dos Jardineiros",
+      "Maçonaria do Sul"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os membros do Sinédrio reuniam-se na Foz do Douro para preparar a insurreição militar contra o marechal inglês Beresford.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Histórico Municipal do Porto",
+    "factClusterId": "fc_hist_xix_osinedrio_1818_01"
+  },
+  {
+    "id": "HIST_XIX_0006",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e histórico desembarque militar anfíbio ocorrido a 8 de julho de 1832 na praia de Arnosa de Pampelido («Desembarque do Mindelo»), levou os 7.500 soldados do exército liberal comandados por D. Pedro IV a conquistar o Porto e iniciar a Guerra Civil?",
+    "opcoes": [
+      "Desembarque de Peniche",
+      "Desembarque do Mindelo (8 de julho de 1832)",
+      "Desembarque de Cascais",
+      "Desembarque de Lagos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os 'Bravos do Mindelo' partiram dos Açores e marcharam sobre a cidade do Porto onde resistiram a um cerco militar heróico de quase um ano.",
+    "fonte": "Academia Militar / DHP / Município de Vila do Conde",
+    "factClusterId": "fc_hist_xix_desembarquemindelo_1832_01"
+  },
+  {
+    "id": "HIST_XIX_0007",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que prolongado e heróico confronto militar (julho de 1832 a agosto de 1833) em que as tropas liberais de D. Pedro IV resistiram dentro da cidade invicta ao bombardeamento do exército absolutista («Cerco do Porto»), valeu à cidade o título de «Invicta»?",
+    "opcoes": [
+      "Batalha de Ponte Ferreira",
+      "Cerco de Lisboa",
+      "Cerco do Porto (1832-1833)",
+      "Batalha de Almoster"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Em reconhecimento pelo sacrifício da população do Porto, D. Pedro IV doou o seu próprio coração à cidade guardado na Igreja da Lapa.",
+    "fonte": "Câmara Municipal do Porto / Igreja da Lapa / DHP",
+    "factClusterId": "fc_hist_xix_cercodoporto_1832_01"
+  },
+  {
+    "id": "HIST_XIX_0008",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que convenção e tratado de paz assinado a 26 de maio de 1834 («Convenção de Évora-Monte»), pôs termo formal às Guerras Liberais em Portugal, determinando a rendição do exército absolutista e o exílio perpétuo do infante D. Miguel?",
+    "opcoes": [
+      "Convenção de Sintra",
+      "Convenção de Gramido",
+      "Tratado de Valençay",
+      "Convenção de Évora-Monte (26 de maio de 1834)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A convenção foi assinada pelos generais liberais Duque da Terceira e Saldanha e pelo general miguelista Lemos na vila de Évora-Monte.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_evoramonte_1834_01"
+  },
+  {
+    "id": "HIST_XIX_0009",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que visionário jurista, magistrado e estadista alentejano de Castelo de Vide (1780-1849), Mouzinho da Silveira («Mouzinho da Silveira»), Ministro da Fazenda e da Justiça de D. Pedro IV, revolucionou a economia portuguesa extinguindo os dízimos eclesiásticos, os senhorios feudais e os morgados menores?",
+    "opcoes": [
+      "Mouzinho da Silveira (1780-1849)",
+      "Joaquim António de Aguiar",
+      "Passos Manuel",
+      "Costa Cabral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os decretos de 1832 de Mouzinho da Silveira nos Açores e no Porto lançaram as bases estruturais do Estado de Direito e da livre iniciativa em Portugal.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_hist_xix_mouzinhodasilveira_01"
+  },
+  {
+    "id": "HIST_XIX_0010",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que famoso ministro da Justiça e estadista de Coimbra (1792-1884), Joaquim António de Aguiar, promulgou o histórico decreto de 28 de maio de 1834 que extinguiu todas as ordens religiosas masculinas em Portugal nacionalizando os seus conventos e mosteiros («O Mata-Frades»)?",
+    "opcoes": [
+      "Mouzinho da Silveira",
+      "Joaquim António de Aguiar («O Mata-Frades»)",
+      "Duque de Saldanha",
+      "Duque da Terceira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A desamortização e venda em hasta pública dos bens nacionais dos conventos financiou a dívida pública da monarquia liberal.",
+    "fonte": "Torre do Tombo / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_matafrades_aguiar_1834_01"
+  },
+  {
+    "id": "HIST_XIX_0011",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e histórica revolução liberal e popular ocorrida a 9 de setembro de 1836 em Lisboa («Revolução de Setembro»), liderada por Passos Manuel e Sá da Bandeira, derrubou o cartismo e restabeleceu os princípios democráticos da Constituição de 1822?",
+    "opcoes": [
+      "Regeneração",
+      "Patuleia",
+      "Revolução de Setembro (Setembrismo, 1836)",
+      "Vilafrancada"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O governo setembrista de Passos Manuel reformou profundamente o ensino criando a Academia de Belas-Artes e as Escolas Médicas.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_hist_xix_revolucaodesetembro_1836_01"
+  },
+  {
+    "id": "HIST_XIX_0012",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que ilustre estadista e jurista de Bouçôes / Valpaços (1801-1862), Manuel da Silva Passos («Passos Manuel»), Ministro do Reino no governo setembrista de 1836, foi o criador dos Liceus Nacionais, da Biblioteca Nacional moderna e do:",
+    "opcoes": [
+      "Banco de Portugal",
+      "Caminho de Ferro de Lisboa",
+      "Tribunal Constitucional",
+      "Teatro Nacional D. Maria II e Conservatório Nacional"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Passos Manuel incumbiu Almeida Garrett de fundar o Teatro Nacional e o Conservatório de Arte Dramática.",
+    "fonte": "Dicionário de História de Portugal / Ministério da Educação",
+    "factClusterId": "fc_hist_xix_passosmanuel_liceus_01"
+  },
+  {
+    "id": "HIST_XIX_0013",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que célebre revolta popular e camponesa iniciada no Minho em março de 1846 («Revolta da Maria da Fonte»), liderada por mulheres na freguesia de Fonte Arcada (Póvoa de Lanhoso) com Maria Luísa Balaio, eclodiu contra as Leis da Saúde de Costa Cabral que proibiam os enterramentos nas igrejas?",
+    "opcoes": [
+      "Revolta da Maria da Fonte (1846)",
+      "Guerra da Patuleia",
+      "Revolta dos Tabuleiros",
+      "Revolta da Farroupilha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A revolta armada dos camponeses minhotos alastrou a todo o Norte forçando a demissão do ministro Costa Cabral pela Rainha D. Maria II.",
+    "fonte": "Dicionário de História de Portugal / Município da Póvoa de Lanhoso",
+    "factClusterId": "fc_hist_xix_mariadafonte_1846_01"
+  },
+  {
+    "id": "HIST_XIX_0014",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que intensa e sangrenta guerra civil que se seguiu à Maria da Fonte (outubro de 1846 a junho de 1847) («Guerra da Patuleia»), opôs os cartistas leais à Rainha D. Maria II e ao Duque de Saldanha contra os setembristas e miguelistas da Junta do Porto?",
+    "opcoes": [
+      "Guerras Liberais",
+      "Guerra da Patuleia (1846-1847)",
+      "Guerra Peninsular",
+      "Revolução da Belenzada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Patuleia terminou apenas com a intervenção militar estrangeira da Quádrupla Aliança (tropas espanholas e navios britânicos).",
+    "fonte": "Dicionário de História de Portugal / Exército Português",
+    "factClusterId": "fc_hist_xix_patuleia_1846_01"
+  },
+  {
+    "id": "HIST_XIX_0015",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que tratado e acordo de paz assinado a 29 de junho de 1847 na Casa Branca de Gramido em Gondomar («Convenção de Gramido»), pôs fim formal à Guerra da Patuleia com a amnistia geral sob a mediação de Espanha e Grã-Bretanha?",
+    "opcoes": [
+      "Convenção de Évora-Monte",
+      "Tratado de Sintra",
+      "Convenção de Gramido (29 de junho de 1847)",
+      "Pacto da Granja"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa Branca de Gramido em Valbom acolhe hoje o Museu da Memória da Convenção de Gramido.",
+    "fonte": "Município de Gondomar / DHP",
+    "factClusterId": "fc_hist_xix_convencaogramido_1847_01"
+  },
+  {
+    "id": "HIST_XIX_0016",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que histórico período político iniciado em 1851 com o golpe militar do Marechal Duque de Saldanha («A Regeneração»), pôs fim a décadas de guerras civis e instabilidade política inaugurando uma era de paz e desenvolvimento infraestrutural?",
+    "opcoes": [
+      "O Setembrismo",
+      "O Cabralismo",
+      "A Restauração",
+      "A Regeneração (1851)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Regeneração foi viabilizada pelo Ato Adicional à Carta de 1852 e pela alternância pacífica no poder entre Regeneradores e Históricos ('Rotativismo').",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_hist_xix_aregeneracao_1851_01"
+  },
+  {
+    "id": "HIST_XIX_0017",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que eminente engenheiro, líder político e estadista de Lisboa (1819-1887), António Maria de Fontes Pereira de Melo («Fontes Pereira de Melo»), foi a figura máxima da Regeneração através da política de modernização material de caminhos de ferro, pontes e estradas conhecida como:",
+    "opcoes": [
+      "O Fontismo (política de obras públicas)",
+      "O Cabralismo",
+      "O Pombalismo",
+      "O Passismo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Fontismo ligou Portugal por ferrovia e telégrafo à Europa e promoveu a primeira Exposição Industrial do Porto de 1865.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_fontespereirademelo_fontismo_01"
+  },
+  {
+    "id": "HIST_XIX_0018",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Em que ano histórico foi inaugurada pelo jovem Rei D. Pedro V a primeira linha de caminho de ferro em Portugal ligando a estação de Santa Apolónia em Lisboa ao Carregado?",
+    "opcoes": [
+      "1834",
+      "1856 (28 de outubro)",
+      "1870",
+      "1888"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A viagem inaugural de 36 quilómetros foi feita na locomotiva D. Luís e demorou cerca de 40 minutos.",
+    "fonte": "Museu Nacional Ferroviário / CP",
+    "factClusterId": "fc_hist_xix_primeirocomboio_1856_01"
+  },
+  {
+    "id": "HIST_XIX_0019",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que culto, bondoso e amado monarca português (1837-1861), D. Pedro V («O Esperançoso»), fundou o Curso Superior de Letras em Lisboa e morreu tragicamente com apenas 24 anos vitimado por febre tifóide?",
+    "opcoes": [
+      "D. Luís I",
+      "D. Carlos I",
+      "D. Pedro V («O Esperançoso»)",
+      "D. Fernando II"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Pedro V visitava hospitais e doentes durante as epidemias de cólera e febre amarela sendo idolatrado pelo povo lisboeta.",
+    "fonte": "Dicionário de História de Portugal / Palácio Nacional da Ajuda",
+    "factClusterId": "fc_hist_xix_dpedrov_esperancoso_01"
+  },
+  {
+    "id": "HIST_XIX_0020",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que monarca português (1838-1889), D. Luís I («O Popular» / «O Bom»), tradutor das obras de William Shakespeare para língua portuguesa e oceanógrafo amador com o iate D. Amélia, reinou durante 28 anos de estabilidade política e reformas liberais?",
+    "opcoes": [
+      "D. Pedro V",
+      "D. Carlos I",
+      "D. Manuel II",
+      "D. Luís I (1861-1889)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "No reinado de D. Luís foi abolida a pena de morte, abolida a escravatura e construída a Ponte D. Luís I no Porto.",
+    "fonte": "Palácio Nacional da Ajuda / Aquário Vasco da Gama / DHP",
+    "factClusterId": "fc_hist_xix_dluisi_1861_01"
+  },
+  {
+    "id": "HIST_XIX_0021",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Em que ano histórico Portugal tornou-se o primeiro país soberano do mundo a abolir legalmente a pena de morte para crimes civis através da Carta de Lei de 1 de julho outorgada pelo Rei D. Luís I?",
+    "opcoes": [
+      "1867 (Carta de Lei de 1 de julho)",
+      "1822",
+      "1889",
+      "1911"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Carta de Lei de 1867 aboliu simultaneamente as penas corporais e a prisão perpétua, sendo elogiada em carta por Victor Hugo.",
+    "fonte": "Torre do Tombo / Ministério da Justiça / DHP",
+    "factClusterId": "fc_hist_xix_abolicaopenademorte_1867_01"
+  },
+  {
+    "id": "HIST_XIX_0022",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que insigne estadista, general e pioneiro da causa abolicionista portuguesa de Coimbra (1795-1876), Bernardo de Sá Nogueira de Figueiredo («Marquês de Sá da Bandeira»), promulgou o decreto de 1836 contra o tráfico de escravos e o decreto de 25 de fevereiro de 1869 que aboliu definitivamente a escravatura em todo o Império Português?",
+    "opcoes": [
+      "Duque de Saldanha",
+      "Marquês de Sá da Bandeira",
+      "Fontes Pereira de Melo",
+      "Duque de Loulé"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá da Bandeira perdeu o braço direito na Guerra Civil e dedicou a sua vida parlamentar à abolição total da escravatura.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_sadabandeira_abolicaoescravatura_01"
+  },
+  {
+    "id": "HIST_XIX_0023",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que célebre movimento cultural e literário protagonizado em 1871 por jovens intelectuais em Lisboa («Conferências Democráticas do Casino Lisbonense» / Geração de 70), foi organizado por Antero de Quental e Eça de Queiroz para agitar o pensamento político, científico e estético nacional?",
+    "opcoes": [
+      "Questão Coimbrã",
+      "Grupo do Cenáculo",
+      "Conferências do Casino (Geração de 70, 1871)",
+      "Orpheu"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As conferências foram proibidas pelo governo do Duque de Ávila ao fim da quinta sessão sob a acusação de atentarem contra a religião e o Estado.",
+    "fonte": "Dicionário de História de Portugal / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_hist_xix_conferenciasdocasino_1871_01"
+  },
+  {
+    "id": "HIST_XIX_0024",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que histórica polémica literária e académica ocorrida em 1865 («A Questão Coimbrã»), opôs os jovens estudantes inovadores de Coimbra liderados por Antero de Quental («Bom-Senso e Bom-Gosto») contra a velha guarda romântica e conservadora de António Feliciano de Castilho?",
+    "opcoes": [
+      "Conferências do Casino",
+      "Geração d'Orpheu",
+      "Polémica das Faianças",
+      "A Questão Coimbrã (1865)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Questão Coimbrã marcou a rutura definitiva com o ultrarromantismo e abriu as portas ao Realismo em Portugal.",
+    "fonte": "Dicionário de Literatura Portuguesa / DHP",
+    "factClusterId": "fc_hist_xix_questaocoimbra_1865_01"
+  },
+  {
+    "id": "HIST_XIX_0025",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que ambicioso e histórico projeto cartográfico e diplomático apresentado por Portugal em 1886 («O Mapa Cor-de-Rosa»), reivindicava a soberania portuguesa sobre o território africano situado entre as colónias de Angola e Moçambique (território das atuais Zâmbia e Zimbabué)?",
+    "opcoes": [
+      "O Mapa Cor-de-Rosa (1886)",
+      "O Tratado de Berlim",
+      "A Carta Imperial de Luanda",
+      "O Tratado de Pretória"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O projeto chocava frontalmente com o plano imperial britânico de Cecil Rhodes de ligar a ferrovia 'do Cabo ao Cairo'.",
+    "fonte": "Sociedade de Geografia de Lisboa / Arquivo Histórico Ultramarino",
+    "factClusterId": "fc_hist_xix_mapacorderosa_1886_01"
+  },
+  {
+    "id": "HIST_XIX_0026",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que grave crise diplomática internacional culminou a 11 de janeiro de 1890 («O Ultimato Britânico de 1890»), quando o Primeiro-Ministro britânico Lord Salisbury exigiu a retirada militar imediata das forças portuguesas chefiadas por Serpa Pinto da região do Chire e terras dos Macololos?",
+    "opcoes": [
+      "O Tratado de Windsor",
+      "O Ultimato Britânico de 1890",
+      "A Crise de Fachoda",
+      "A Conferência de Berlim"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A cedência incondicional do Rei D. Carlos I ao ultimato provocou uma onda nacional de revolta popular e o crescimento imparável do republicanismo.",
+    "fonte": "Arquivo Histórico Diplomático / DHP",
+    "factClusterId": "fc_hist_xix_ultimatobritanico_1890_01"
+  },
+  {
+    "id": "HIST_XIX_0027",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que hino patriótico e de protesto composto no início de 1890 pelo maestro Alfredo Keil com letra do poeta Henrique Lopes de Mendonça («A Portuguesa»), nasceu em resposta à humilhação do Ultimato Britânico tornando-se em 1910 o Hino Nacional da República?",
+    "opcoes": [
+      "Hino da Carta",
+      "Hino da Maria da Fonte",
+      "A Portuguesa (Alfredo Keil e Lopes de Mendonça, 1890)",
+      "Grândola, Vila Morena"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O verso original do refrão dizia 'Contra os bretões marchar, marchar!' sendo mais tarde adaptado para 'Contra os canhões marchar, marchar!'.",
+    "fonte": "Museu da Presidência da República / Assembleia da República",
+    "factClusterId": "fc_hist_xix_aportuguesa_keil_1890_01"
+  },
+  {
+    "id": "HIST_XIX_0028",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que primeira e histórica tentativa armada de implantação da República em Portugal eclodiu no Porto a 31 de janeiro de 1891 («Revolta de 31 de Janeiro de 1891»), quando sargentos e praças proclamaram a República na varanda da Câmara Municipal?",
+    "opcoes": [
+      "Revolta de 5 de Outubro",
+      "Revolta dos Marinheiros",
+      "Golpe de Monsanto",
+      "Revolta de 31 de Janeiro de 1891 (no Porto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A revolta foi travada no cimo da Rua de Santo António (atual Rua 31 de Janeiro) pela Guarda Municipal leal à Monarquia.",
+    "fonte": "Museu Cívico do Porto / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_revolta31janeiro1891_01"
+  },
+  {
+    "id": "HIST_XIX_0029",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que dois exploradores e oficiais da Marinha Portuguesa (Hermenegildo Capelo e Roberto Ivens), realizaram entre 1884 e 1885 a heróica expedição científica e geográfica africana que ligou a costa de Angola à costa de Moçambique («De Angola à Contra-Costa»)?",
+    "opcoes": [
+      "Hermenegildo Capelo e Roberto Ivens (1884-1885)",
+      "Serpa Pinto e Silva Porto",
+      "Gago Coutinho e Sacadura Cabral",
+      "Mouzinho de Albuquerque e Caldas Xavier"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A viagem de mais de 4.500 km através de territórios inexplorados consagrou-os internacionalmente como gigantes da geografia africana.",
+    "fonte": "Sociedade de Geografia de Lisboa / Arquivo Histórico Ultramarino",
+    "factClusterId": "fc_hist_xix_capeloeivens_1884_01"
+  },
+  {
+    "id": "HIST_XIX_0030",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que destemido oficial e explorador militar de Cinfães (1846-1900), Alexandre de Serpa Pinto («Serpa Pinto»), realizou entre 1877 e 1879 a célebre travessia de África de Benguela até às Cataratas Vitória e Pretória narrada no livro «Como Eu Atravessei a África»?",
+    "opcoes": [
+      "Roberto Ivens",
+      "Major Alexandre de Serpa Pinto (1877-1879)",
+      "Silva Porto",
+      "Hermenegildo Capelo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Serpa Pinto foi recebido em apoteose em Lisboa e condecorado por todas as principais sociedades científicas da Europa.",
+    "fonte": "Sociedade de Geografia de Lisboa / DHP",
+    "factClusterId": "fc_hist_xix_serpapinto_travessia_01"
+  },
+  {
+    "id": "HIST_XIX_0031",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que oficial de cavalaria e governador de Moçambique (1855-1902), Joaquim Augusto Mouzinho de Albuquerque («Mouzinho de Albuquerque»), liderou a 28 de dezembro de 1895 a captura do imperador de Gaza («Gungunhana») na aldeia fortificada de Chaimite?",
+    "opcoes": [
+      "Paiva Couceiro",
+      "Eduardo Galhardo",
+      "Mouzinho de Albuquerque (Prisão de Gungunhana, 1895)",
+      "Gomes da Costa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mouzinho de Albuquerque entrou em Chaimite com apenas algumas dezenas de soldados apresando Gungunhana e trazendo-o prisioneiro para Lisboa e Açores.",
+    "fonte": "Museu Militar de Lisboa / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_mouzinhodealbuquerque_chaimite_01"
+  },
+  {
+    "id": "HIST_XIX_0032",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que histórica e primeira conferência internacional sobre a partilha colonial de África realizada entre novembro de 1884 e fevereiro de 1885 («Conferência de Berlim»), substituiu o princípio histórico dos 'direitos de descoberta' pelo princípio da 'ocupação efetiva' de território?",
+    "opcoes": [
+      "Conferência de Viena",
+      "Tratado de Utrecht",
+      "Congresso de Paris",
+      "Conferência de Berlim (1884-1885)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Conferência de Berlim organizada por Bismarck obrigou Portugal a enviar sucessivas expedições militares de ocupação efetiva para África.",
+    "fonte": "Arquivo Histórico Diplomático / DHP",
+    "factClusterId": "fc_hist_xix_conferenciadeberlim_1884_01"
+  },
+  {
+    "id": "HIST_XIX_0033",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que grande e genial escritor e dramaturgo romântico do Porto (1799-1854), João Baptista da Silva Leitão de Almeida Garrett («Almeida Garrett»), Ministro nos governos liberais e autor de «Frei Luís de Sousa» e «Viagens na Minha Terra», fundou o Teatro Nacional e o Conservatório?",
+    "opcoes": [
+      "Almeida Garrett (1799-1854)",
+      "Alexandre Herculano",
+      "Camilo Castelo Branco",
+      "Júlio Dinis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Garrett combateu como soldado voluntário no Cerco do Porto e compilou o 'Romanceiro' tradicional da literatura oral portuguesa.",
+    "fonte": "Dicionário de Literatura Portuguesa / Panteão Nacional",
+    "factClusterId": "fc_hist_xix_almeidagarrett_01"
+  },
+  {
+    "id": "HIST_XIX_0034",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que monumental historiador, escritor e pensador liberal lisboeta (1810-1877), Alexandre Herculano («Alexandre Herculano»), pioneiro do romance histórico com «Eurico, o Presbítero» e da historiografia científica com a «História de Portugal», introduziu o registo civil em Portugal e viveu como agricultor em Vale de Lobos?",
+    "opcoes": [
+      "Oliveira Martins",
+      "Alexandre Herculano (1810-1877)",
+      "Rebelo da Silva",
+      "Pinheiro Chagas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Herculano recusou títulos honoríficos e dedicou-se à produção do afamado azeite de Vale de Lobos em Santarém.",
+    "fonte": "Panteão Nacional (Mosteiro dos Jerónimos) / DHP",
+    "factClusterId": "fc_hist_xix_alexandreherculano_01"
+  },
+  {
+    "id": "HIST_XIX_0035",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que prolífico e genial romancista lisboeta e duriense (1825-1890), Camilo Castelo Branco («Camilo Castelo Branco»), 1.º Visconde de Correia Botelho e autor de «Amor de Perdição» e «A Queda dum Anjo», esteve preso na Cadeia da Relação do Porto por crime de adultério com Ana Plácido?",
+    "opcoes": [
+      "Eça de Queiroz",
+      "Júlio Dinis",
+      "Camilo Castelo Branco (1825-1890)",
+      "Trindade Coelho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Camilo escreveu a obra-prima 'Amor de Perdição' em apenas 15 dias enquanto esteve encarcerado na cela da Relação do Porto em 1861.",
+    "fonte": "Casa de Camilo (São Miguel de Seide) / Dicionário de Literatura Portuguesa",
+    "factClusterId": "fc_hist_xix_camilocastelobranco_01"
+  },
+  {
+    "id": "HIST_XIX_0036",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que extraordinário diplomata e romancista da Póvoa de Varzim (1845-1900), José Maria de Eça de Queiroz («Eça de Queiroz»), expoente máximo do Realismo em Portugal e autor de «Os Maias», «O Crime do Padre Amaro» e «A Ilustre Casa de Ramires», retratou magistralmente a sociedade oitocentista da Regeneração?",
+    "opcoes": [
+      "Antero de Quental",
+      "Ramalho Ortigão",
+      "Fialho de Almeida",
+      "Eça de Queiroz (1845-1900)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eça e Ramalho Ortigão criaram os célebres folhetos satíricos 'As Farpas' e o corpo de Eça foi trasladado para o Panteão Nacional em 2023.",
+    "fonte": "Fundação Eça de Queiroz (Tormes) / Panteão Nacional",
+    "factClusterId": "fc_hist_xix_ecadequeiroz_01"
+  },
+  {
+    "id": "HIST_XIX_0037",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e histórico golpe absolutista liderado pelo infante D. Miguel a 27 de maio de 1823 em Vila Franca de Xira («A Vilafrancada»), apoiado pela rainha D. Carlota Joaquina, suspendeu a Constituição Liberal de 1822?",
+    "opcoes": [
+      "A Vilafrancada (27 de maio de 1823)",
+      "A Abrilada (1824)",
+      "A Belenzada (1836)",
+      "A Maria da Fonte"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Vilafrancada restaurou provisoriamente os poderes absolutos de D. João VI que prometeu outorgar uma nova carta fundamental.",
+    "fonte": "Dicionário de História de Portugal / Assembleia da República",
+    "factClusterId": "fc_hist_xix_vilafrancada_1823_01"
+  },
+  {
+    "id": "HIST_XIX_0038",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que insurreição absolutista radical liderada pelo infante D. Miguel a 30 de abril de 1824 em Lisboa («A Abrilada»), que prendeu ministros e cercou o Palácio da Bemposta, levou o Rei D. João VI a refugiar-se a bordo da nau de guerra britânica «Windsor Castle»?",
+    "opcoes": [
+      "A Vilafrancada",
+      "A Abrilada (30 de abril de 1824)",
+      "A Novembrada",
+      "A Patuleia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Após o fracasso da Abrilada, o Rei D. João VI demitiu D. Miguel do comando do exército e ordenou o seu exílio para Viena de Áustria.",
+    "fonte": "Dicionário de História de Portugal / Torre do Tombo",
+    "factClusterId": "fc_hist_xix_aabrilada_1824_01"
+  },
+  {
+    "id": "HIST_XIX_0039",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que monarca português (1863-1908), D. Carlos I («O Martirizado» / «O Diplomata»), oceanógrafo empenhado e pintor talentoso, reinou de 1889 até ser tragicamente assassinado no Regicídio de 1 de fevereiro de 1908 no Terreiro do Paço em Lisboa?",
+    "opcoes": [
+      "D. Luís I",
+      "D. Manuel II",
+      "D. Carlos I (1889-1908)",
+      "D. Pedro V"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Carlos I realizou mais de 20 campanhas oceanográficas pioneiras no iate 'Amélia' cujos resultados foram publicados na Europa.",
+    "fonte": "Aquário Vasco da Gama / Panteão Real dos Braganças / DHP",
+    "factClusterId": "fc_hist_xix_dcarlosi_1889_01"
+  },
+  {
+    "id": "HIST_XIX_0040",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que virtuoso e amado Rei-Consorte de Portugal (1816-1885), D. Fernando II de Saxe-Coburgo-Gota («O Rei-Artista»), marido da Rainha D. Maria II, foi o visionário criador do Palácio Nacional da Pena e do Parque Botânico da Pena na Serra de Sintra?",
+    "opcoes": [
+      "D. Pedro V",
+      "D. Miguel I",
+      "D. Augusto de Bragança",
+      "D. Fernando II («O Rei-Artista»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Fernando II transformou as ruínas de um mosteiro jerónimo no mais sublime exemplo de arquitetura romântica revivalista do mundo.",
+    "fonte": "Parques de Sintra — Monte da Lua / Palácio da Pena",
+    "factClusterId": "fc_hist_xix_dfernandoii_palaciopena_01"
+  },
+  {
+    "id": "HIST_XIX_0041",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e pioneira instituição bancária central de Portugal fundada em novembro de 1846 pelo governo liberal através da fusão do Banco de Lisboa e da Companhia Confiança Nacional («Banco de Portugal»), assumiu a exclusividade da emissão de notas de banco?",
+    "opcoes": [
+      "Banco de Portugal (1846)",
+      "Caixa Geral de Depósitos",
+      "Banco Nacional Ultramarino",
+      "Banco Comercial do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Banco de Portugal desempenhou um papel decisivo na estabilização monetária e no financiamento das obras públicas da Regeneração.",
+    "fonte": "Banco de Portugal / Museu do Dinheiro",
+    "factClusterId": "fc_hist_xix_bancodeportugal_1846_01"
+  },
+  {
+    "id": "HIST_XIX_0042",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que importante e pioneira instituição pública bancária fundada em 1876 pelo Rei D. Luís I («Caixa Geral de Depósitos» / CGD), foi criada para recolher as poupanças e depósitos obrigatórios sob a garantia e supervisão do Estado Português?",
+    "opcoes": [
+      "Banco de Portugal",
+      "Caixa Geral de Depósitos (1876)",
+      "Banco Borges & Irmão",
+      "Montepio Geral"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A CGD expandiu-se com a criação da Caixa Económica Portuguesa em 1880 fomentando o microcrédito e as poupanças populares.",
+    "fonte": "Caixa Geral de Depósitos / Arquivo Histórico CGD",
+    "factClusterId": "fc_hist_xix_cgd_1876_01"
+  },
+  {
+    "id": "HIST_XIX_0043",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que famoso arquiteto e engenheiro francês (Gustave Eiffel), projetou em 1877 no Porto a espetacular ponte ferroviária metálica em arco sobre o rio Douro batizada em honra da Rainha consorte («Ponte Maria Pia»)?",
+    "opcoes": [
+      "Ponte Luís I",
+      "Ponte da Arrábida",
+      "Ponte Maria Pia (Gustave Eiffel, 1877)",
+      "Ponte de São João"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ponte Maria Pia foi considerada uma proeza da engenharia mundial com o seu arco parabólico de ferro forjado de 160 metros de vão.",
+    "fonte": "Museu Nacional Ferroviário / IHRU / CP",
+    "factClusterId": "fc_hist_xix_pontemariapia_eiffel_1877_01"
+  },
+  {
+    "id": "HIST_XIX_0044",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que célebre engenheiro e discípulo belga de Eiffel (Théophile Seyrig), projetou a monumental ponte metálica de dois tabuleiros inaugurada a 31 de outubro de 1886 entre o Porto e Vila Nova de Gaia («Ponte Luís I»)?",
+    "opcoes": [
+      "Ponte Maria Pia",
+      "Ponte D. Fernando",
+      "Ponte Infante D. Henrique",
+      "Ponte Luís I (Théophile Seyrig / Sociedade Willebroeck, 1886)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Na data da sua inauguração, o arco da Ponte Luís I era o maior arco em ferro forjado do mundo com 172 metros de corda.",
+    "fonte": "Câmara Municipal do Porto / IHRU / UNESCO",
+    "factClusterId": "fc_hist_xix_ponteluisi_seyrig_1886_01"
+  },
+  {
+    "id": "HIST_XIX_0045",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que emblemático e luxuoso edifício neoclássico construído no Porto entre 1842 e 1891 para sede dos comerciantes da Associação Comercial («Palácio da Bolsa»), abriga o deslumbrante e faustoso «Salão Árabe» estucado a ouro pelo mestre Gustavo Adolfo Gonçalves de Sousa?",
+    "opcoes": [
+      "Palácio da Bolsa (Associação Comercial do Porto)",
+      "Palácio de São Bento",
+      "Palácio das Necessidades",
+      "Palácio de Cristal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Palácio da Bolsa foi erguido sobre as ruínas do antigo Convento de São Francisco e é Monumento Nacional da UNESCO.",
+    "fonte": "Associação Comercial do Porto / UNESCO",
+    "factClusterId": "fc_hist_xix_palaciodabolsa_salaoarabe_01"
+  },
+  {
+    "id": "HIST_XIX_0046",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que histórico edifício de ferro fundido e cristal inaugurado em 1865 no Porto pelo Rei D. Luís I («Palácio de Cristal do Porto»), inspirado no Crystal Palace de Londres, acolheu a primeira Grande Exposição Internacional do Porto?",
+    "opcoes": [
+      "Palácio da Bolsa",
+      "Palácio de Cristal do Porto (1865)",
+      "Coliseu do Porto",
+      "Teatro São João"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O edifício original foi demolido em 1951 para dar lugar ao atual Pavilhão Rosa Mota / Super Bock Arena mantendo os deslumbrantes jardins românticos.",
+    "fonte": "Arquivo Municipal do Porto / DHP",
+    "factClusterId": "fc_hist_xix_palaciodecristal_porto_1865_01"
+  },
+  {
+    "id": "HIST_XIX_0047",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que famoso e influente político conservador de Fornos de Algodres (1803-1889), António Bernardo da Costa Cabral («1.º Marquês de Tomar» / Costa Cabral), governou autoritariamente o país entre 1842 e 1846 no período conhecido como:",
+    "opcoes": [
+      "O Setembrismo",
+      "O Fontismo",
+      "O Cabralismo",
+      "O Miguelismo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Costa Cabral restaurou a Carta Constitucional de 1826 através de um pronunciamento militar no Porto em janeiro de 1842.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_xix_costacabral_cabralismo_01"
+  },
+  {
+    "id": "HIST_XIX_0048",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que grande e talentoso escultor romântico e naturalista de Vila Nova de Gaia e Porto (1847-1889), António Soares dos Reis («Soares dos Reis»), mestre do mármore e autor da escultura genial «O Desterrado», dá nome ao Museu Nacional de Arte no Porto?",
+    "opcoes": [
+      "Machado de Castro",
+      "Teixeira Lopes",
+      "Simões de Almeida",
+      "António Soares dos Reis (1847-1889)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'O Desterrado' é a obra-prima incontornável da escultura do século XIX em Portugal esculpida em mármore de Carrara em Roma.",
+    "fonte": "Museu Nacional Soares dos Reis (Porto) / DGPC",
+    "factClusterId": "fc_hist_xix_soaresdosreis_desterrado_01"
+  },
+  {
+    "id": "HIST_XIX_0049",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que eminente e histórico pintor romântico de Viseu e Porto (1803-1866), Francisco José Resende («Francisco Resende») e António Manuel da Fonseca, retrataram as grandes figuras históricas e as cenas da Guerra Peninsular e do Cerco do Porto?",
+    "opcoes": [
+      "Francisco José Resende",
+      "Henrique Pousão",
+      "Columbano Bordalo Pinheiro",
+      "José Malhoa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Francisco Resende foi também um dos fundadores da Sociedade Promotora de Belas-Artes e professor na Academia Portuense.",
+    "fonte": "Museu Nacional Soares dos Reis / DHP",
+    "factClusterId": "fc_hist_xix_franciscoresende_pintura_01"
+  },
+  {
+    "id": "HIST_XIX_0050",
+    "tema": "História de Portugal",
+    "subtema": "Século XIX",
+    "pergunta": "Que heróico capitão de cavalaria e líder militar de Campo Maior e Sintra (1858-1925), Henrique Mitchell de Paiva Couceiro («Paiva Couceiro»), destacou-se nas campanhas de pacificação de Angola e Moçambique e tornou-se a figura máxima das incursões monárquicas contra a República?",
+    "opcoes": [
+      "Mouzinho de Albuquerque",
+      "Gomes da Costa",
+      "Henrique Paiva Couceiro (1858-1925)",
+      "Artur de Paiva"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paiva Couceiro proclamou a efémera 'Monarquia do Norte' no Porto em 1919 mantendo a lealdade inabalável a D. Manuel II.",
+    "fonte": "Dicionário de História de Portugal / Academia Militar",
+    "factClusterId": "fc_hist_xix_paivacouceiro_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_IMP_0001",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórica conquista militar no norte de África liderada pelo Rei D. João I e pelos seus filhos (a Ínclita Geração dos Infantes D. Duarte, D. Pedro e D. Henrique) a 21 de agosto de 1415 («Conquista de Ceuta»), marcou o início oficial da expansão marítima e do Império Português?",
+    "opcoes": [
+      "Conquista de Ceuta (1415)",
+      "Conquista de Tânger",
+      "Conquista de Arzila",
+      "Conquista de Alcácer-Ceguer"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A tomada de Ceuta abriu as portas do Mediterrâneo e do Atlântico e permitiu aos portugueses o controlo estratégico do Estreito de Gibraltar.",
+    "fonte": "Gomes Eanes de Zurara / Crónica da Tomada de Ceuta / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_ceuta1415_01"
+  },
+  {
+    "id": "HIST_IMP_0002",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que célebre navegador de Lagos (Gil Eanes), ao serviço do Infante D. Henrique em 1434, superou o mítico terror medieval do «Mar Tenebroso» ao dobrar pela primeira vez o temido cabo na costa ocidental africana («Cabo Bojador»), provando que o oceano era navegável para sul?",
+    "opcoes": [
+      "Cabo das Tormentas",
+      "Cabo Bojador (Gil Eanes, 1434)",
+      "Cabo Verde",
+      "Cabo Branco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ao ultrapassar o Cabo Bojador, Gil Eanes colheu e levou ao Infante D. Henrique as famosas 'Rosas de Santa Maria' como prova biológica da vida a sul.",
+    "fonte": "Crónica dos Feitos da Guiné (Zurara) / Academia de Marinha",
+    "factClusterId": "fc_hist_imp_gileanes_bojador_01"
+  },
+  {
+    "id": "HIST_IMP_0003",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e monumental fortaleza e feitoria comercial fundada em 1482 no Golfo da Guiné (Gana) pelo fidalgo Diogo de Azambuja por ordem de D. João II («Castelo de São Jorge da Mina»), foi a principal base de comércio de ouro, escravizados e marfim da Coroa Portuguesa em África?",
+    "opcoes": [
+      "Forte de Arguim",
+      "Forte de Axim",
+      "Castelo de São Jorge da Mina (Elmina)",
+      "Fortaleza de Ouidah"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "São Jorge da Mina foi a primeira grande edificação europeia permanente a sul do Sara e Cristóvão Colombo esteve presente na sua edificação.",
+    "fonte": "Dicionário de História de Portugal / UNESCO World Heritage",
+    "factClusterId": "fc_hist_imp_castelodamina_1482_01"
+  },
+  {
+    "id": "HIST_IMP_0004",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que audacioso navegador português (Bartolomeu Dias), ao comando de duas caravelas em 1488 por ordem de D. João II, dobrou pela primeira vez o extremo sul do continente africano («Cabo das Tormentas»), rebaptizado pelo monarca como «Cabo da Boa Esperança» por abrir o caminho marítimo para a Índia?",
+    "opcoes": [
+      "Vasco da Gama",
+      "Diogo Cão",
+      "Pedro Álvares Cabral",
+      "Bartolomeu Dias (Cabo da Boa Esperança, 1488)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A passagem do Cabo da Boa Esperança uniu os oceanos Atlântico e Índico provando a ligação marítima direta à Ásia.",
+    "fonte": "João de Barros (Décadas da Ásia) / Marinha Portuguesa",
+    "factClusterId": "fc_hist_imp_bartolomeudias_1488_01"
+  },
+  {
+    "id": "HIST_IMP_0005",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórico tratado diplomático assinado a 7 de junho de 1494 entre D. João II de Portugal e os Reis Católicos de Castela («Tratado de Tordesilhas»), dividiu o mundo descoberto e por descobrir através de um meridiano traçado a 370 léguas a oeste do arquipélago de Cabo Verde?",
+    "opcoes": [
+      "Tratado de Tordesilhas (1494)",
+      "Tratado de Alcáçovas (1479)",
+      "Tratado de Saragoça (1529)",
+      "Bula Inter Caetera"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A insistência diplomática de D. João II em afastar a linha de 100 para 370 léguas garantiu a posse portuguesa do Brasil antes da sua descoberta oficial em 1500.",
+    "fonte": "Torre do Tombo / Arquivo Geral de Simancas / UNESCO Memory of the World",
+    "factClusterId": "fc_hist_imp_tordesilhas_1494_01"
+  },
+  {
+    "id": "HIST_IMP_0006",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Em que data histórica Pedro Álvares Cabral e a sua armada de 13 navios chegaram à costa de Porto Seguro na Bahia avistando o Monte Pascoal («Descobrimento do Brasil»), terra batizada inicialmente como «Ilha de Vera Cruz» e relatada na famosa Carta de Pero Vaz de Caminha?",
+    "opcoes": [
+      "8 de março de 1500",
+      "22 de abril de 1500",
+      "1 de janeiro de 1501",
+      "12 de outubro de 1492"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Carta de Pero Vaz de Caminha a D. Manuel I é considerada a 'certidão de nascimento' oficial do Brasil.",
+    "fonte": "Torre do Tombo / Fundação Biblioteca Nacional do Brasil",
+    "factClusterId": "fc_hist_imp_cabral_brasil_1500_01"
+  },
+  {
+    "id": "HIST_IMP_0007",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que navegador e almirante português de Sines (c. 1469-1524), Vasco da Gama («Vasco da Gama»), completou a maior epopeia marítima da história humana em maio de 1498 ao desembarcar na praia de Kappad em Calecute (Índia), estabelecendo a Rota do Cabo?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "Francisco de Almeida",
+      "Vasco da Gama (Calecute, 1498)",
+      "Tristão da Cunha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Vasco da Gama foi acolhido pelo Samorim de Calecute e regressou a Lisboa com pimenta, canela e pedras preciosas recebendo o título de Almirante dos Mares da Índia.",
+    "fonte": "Relação da Viagem de Vasco da Gama (Álvaro Velho) / Mosteiro dos Jerónimos",
+    "factClusterId": "fc_hist_imp_vascodagama_1498_01"
+  },
+  {
+    "id": "HIST_IMP_0008",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que nobre português (1450-1510), D. Francisco de Almeida («D. Francisco de Almeida»), nomeado por D. Manuel I como o primeiro Vice-Rei do Estado Português da Índia em 1505, defendeu a teoria do poder naval absoluto nos oceanos («Se formos fortes no mar, a Índia será nossa») e esmagou a armada mameluco-otomana na Batalha Naval de Diu em 1509?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "D. João de Castro",
+      "Lopo Soares de Albergaria",
+      "D. Francisco de Almeida (1.º Vice-Rei da Índia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A vitória na Batalha Naval de Diu garantiu a supremacia naval indiscutível de Portugal no Oceano Índico durante mais de um século.",
+    "fonte": "João de Barros / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_franciscodealmeida_1505_01"
+  },
+  {
+    "id": "HIST_IMP_0009",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que genial estratega militar e Governador da Índia (1453-1515), Afonso de Albuquerque («O Leão dos Mares» / «O Terramoto do Oriente»), edificou a espinha dorsal do Império Português na Ásia ao conquistar as três chaves marítimas do comércio oriental: Goa (1510), Malaca (1511) e Ormuz (1515)?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "D. Francisco de Almeida",
+      "Vasco da Gama",
+      "D. Lourenço de Almeida"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Afonso de Albuquerque fez de Goa a capital administrativa do Estado da Índia e instituiu a 'política dos casamentos' luso-indianos.",
+    "fonte": "Cartas de Afonso de Albuquerque / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_hist_imp_afonsodealbuquerque_01"
+  },
+  {
+    "id": "HIST_IMP_0010",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórica praça comercial e enclave português no sul da China («Macau»), estabelecido em 1557 por acordo com as autoridades imperiais da Dinastia Ming com centro nas Ruínas de São Paulo e no Leal Senado, foi administrado por Portugal durante 442 anos até à sua transferência em 1999?",
+    "opcoes": [
+      "Hong Kong",
+      "Macau (1557-1999)",
+      "Cantão",
+      "Taiwan"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Macau foi a mais duradoura presença ocidental na Ásia Oriental e o Centro Histórico de Macau é Património Mundial da UNESCO.",
+    "fonte": "Instituto Cultural de Macau / UNESCO",
+    "factClusterId": "fc_hist_imp_macau_1557_01"
+  },
+  {
+    "id": "HIST_IMP_0011",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que famosa e riquíssima rota comercial anual marítima ligava Macau a Nagasáqui no Japão entre 1570 e 1639 («A Nau do Trato» / Navio Negro / Kurofune), onde os portugueses trocavam a seda crua da China pela prata japonesa com lucros fabulosos?",
+    "opcoes": [
+      "O Galeão de Manila",
+      "A Carreira das Molucas",
+      "A Nau do Trato (Comércio de Macau a Nagasáqui)",
+      "A Frota da Prata"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os portugueses foram os primeiros ocidentais a chegar ao Japão em 1543 em Tanegashima introduzindo as armas de fogo e o cristianismo.",
+    "fonte": "Charles Boxer / The Christian Century in Japan / Museu do Oriente",
+    "factClusterId": "fc_hist_imp_naudotrato_japao_01"
+  },
+  {
+    "id": "HIST_IMP_0012",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e místico arquipélago no leste da Indonésia («Ilhas Molucas» / Ilhas das Especiarias — Ternate, Tidore, Banda e Amboina), descoberto em 1512 por Francisco Serrão e António de Abreu, era a única fonte mundial de:",
+    "opcoes": [
+      "Canela e Pimenta-preta",
+      "Café e Açúcar",
+      "Chá e Ópio",
+      "Cravo-da-índia e Noz-moscada (com macis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O monopólio das Molucas levou à assinatura do Tratado de Saragoça em 1529 onde Portugal comprou os direitos espanhóis sobre a região por 350.000 ducados de ouro.",
+    "fonte": "Damião de Góis (Crónica de D. Manuel) / Tratado de Saragoça",
+    "factClusterId": "fc_hist_imp_molucas_especiarias_01"
+  },
+  {
+    "id": "HIST_IMP_0013",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que primeiro donatário e pioneiro administrador colonial do Brasil nomeado por D. João III («Martim Afonso de Sousa»), comandou a primeira expedição colonizadora em 1530 e fundou a primeira vila e povoamento oficial do Brasil em 1532:",
+    "opcoes": [
+      "Vila de São Vicente (São Paulo, 1532)",
+      "Salvador da Bahia",
+      "Olinda",
+      "Porto Seguro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Martim Afonso de Sousa instalou o primeiro engenho de cana-de-açúcar (Engenho dos Erasmos) e a primeira Câmara Municipal das Américas em São Vicente.",
+    "fonte": "História Geral do Brasil (Varnhagen) / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_saovicente_martimafonso_01"
+  },
+  {
+    "id": "HIST_IMP_0014",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que sistema de divisão territorial e administrativa foi instituído pela Coroa de D. João III no Brasil em 1534, dividindo a costa em 15 faixas de terra perpendiculares entregues a 12 capitães-donatários com direitos de jurisdição e exploração («Capitanias Hereditárias»)?",
+    "opcoes": [
+      "Governo-Geral das Sesmarias",
+      "Capitanias Hereditárias (1534)",
+      "Vice-Reinado do Brasil",
+      "Províncias Reais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As duas únicas capitanias que prosperaram fortemente de imediato foram a de São Vicente (Martim Afonso) e a de Pernambuco (Duarte Coelho) devido ao cultivo do açúcar.",
+    "fonte": "Torre do Tombo / História de Portugal (José Hermano Saraiva)",
+    "factClusterId": "fc_hist_imp_capitaniashereditarias_1534_01"
+  },
+  {
+    "id": "HIST_IMP_0015",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que fidalgo português (1503-1579), Tomé de Sousa («Tomé de Sousa»), foi nomeado em 1549 por D. João III como o primeiro Governador-Geral do Brasil, trazendo consigo o arquiteto Luís Dias e o padre Manuel da Nóbrega para fundar a primeira capital do Brasil:",
+    "opcoes": [
+      "Rio de Janeiro",
+      "Recife",
+      "Cidade de São Salvador da Bahia de Todos os Santos (1549)",
+      "Olinda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Salvador da Bahia foi a capital do Brasil colonial durante mais de 200 anos até à transferência para o Rio de Janeiro em 1763.",
+    "fonte": "Governo-Geral do Brasil / Regimento de Tomé de Sousa (1548)",
+    "factClusterId": "fc_hist_imp_tomedesousa_salvador1549_01"
+  },
+  {
+    "id": "HIST_IMP_0016",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que capitão português (1520-1567), Estácio de Sá («Estácio de Sá»), sobrinho do governador-geral Mem de Sá, fundou a 1 de março de 1565 a cidade de «São Sebastião do Rio de Janeiro» junto ao Pão de Açúcar após expulsar os invasores franceses de Nicolas Durand de Villegaignon («França Antártica»)?",
+    "opcoes": [
+      "Mem de Sá",
+      "Tomé de Sousa",
+      "Duarte da Costa",
+      "Estácio de Sá (Fundador do Rio de Janeiro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Estácio de Sá faleceu em combate ferido por uma flecha envenenada dos índios tamoios aliados dos franceses.",
+    "fonte": "Prefeitura do Rio de Janeiro / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_estaciodesa_riodejaneiro_01"
+  },
+  {
+    "id": "HIST_IMP_0017",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que jesuíta navarro (1506-1552), São Francisco Xavier («O Apóstolo do Oriente»), enviado por D. João III e pela Santa Sé, evangelizou a Índia (Goa e Costa da Pescaria), Malaca e o Japão, estando o seu corpo incorrupto sepultado na:",
+    "opcoes": [
+      "Basílica do Bom Jesus em Goa Velha (Património Mundial da UNESCO)",
+      "Sé de Macau",
+      "Catedral de Manila",
+      "Igreja de São Paulo em Malaca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Basílica do Bom Jesus em Goa Velha acolhe o mausoléu de prata de São Francisco Xavier e atrai peregrinos de todo o mundo.",
+    "fonte": "UNESCO / Arquidiocese de Goa e Damão",
+    "factClusterId": "fc_hist_imp_saofranciscoxavier_goa_01"
+  },
+  {
+    "id": "HIST_IMP_0018",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que lendário fidalgo, cientista e 4.º Vice-Rei da Índia (1500-1548), D. João de Castro («D. João de Castro»), escreveu os monumentais «Roteiros do Mar Roxo» e liderou a heroica resistência dos portugueses no Segundo Cerco da Fortaleza de Diu em 1546?",
+    "opcoes": [
+      "D. Lourenço de Almeida",
+      "D. João de Castro",
+      "Garcia de Orta",
+      "Diogo Lopes de Sequeira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Para financiar a reconstrução de Diu, D. João de Castro enviou a sua própria barba aos cidadãos de Goa como penhor da sua honra recebendo ouro e prata de volta.",
+    "fonte": "Vida de D. João de Castro (Jacinto Freire de Andrade) / Academia de Marinha",
+    "factClusterId": "fc_hist_imp_djoaodecastro_diu1546_01"
+  },
+  {
+    "id": "HIST_IMP_0019",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que médico e botânico cristão-novo de Castelo de Vide radicado em Goa (c. 1501-1568), Garcia de Orta («Garcia de Orta»), publicou em Goa em 1563 a obra científica pioneira da farmacologia e medicina tropical «Colóquios dos Simples e Drogas da Índia» (com o primeiro poema impresso de Luís de Camões)?",
+    "opcoes": [
+      "Amato Lusitano",
+      "Cristóvão da Costa",
+      "Garcia de Orta",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os 'Colóquios dos Simples' de Garcia de Orta descreveram cientificamente pela primeira vez na Europa plantas como o ópio, ruibarbo, noz-moscada e o cólera.",
+    "fonte": "Biblioteca Nacional de Portugal / Universidade de Coimbra",
+    "factClusterId": "fc_hist_imp_garciadeorta_1563_01"
+  },
+  {
+    "id": "HIST_IMP_0020",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e monumental fortaleza militar triangular do século XVI construída na Ilha de Moçambique («Fortaleza de São Sebastião»), desenhada pelo arquiteto Miguel de Arruda, era a escala obrigatória de reabastecimento da Carreira da Índia protegendo as rotas do ouro de Monomotapa?",
+    "opcoes": [
+      "Forte Jesus de Mombaça",
+      "Fortaleza de São Miguel de Luanda",
+      "Forte de São Caetano de Sofala",
+      "Fortaleza de São Sebastião (Ilha de Moçambique)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de São Sebastião na Ilha de Moçambique é a mais antiga fortaleza completa de arquitetura renascentista sobrevivente na África Subsaariana.",
+    "fonte": "UNESCO / Monumentos de Moçambique",
+    "factClusterId": "fc_hist_imp_ilhaddemocambique_saosebastiao_01"
+  },
+  {
+    "id": "HIST_IMP_0021",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que imponente e histórico forte renascentista construído pelos portugueses em 1593 na costa do Quénia («Forte Jesus de Mombaça»), projetado pelo arquiteto italiano Giovanni Battista Cairati por ordem de Filipe I de Portugal, é hoje Património Mundial da UNESCO?",
+    "opcoes": [
+      "Forte Jesus de Mombaça (Quénia)",
+      "Fortaleza de São Sebastião",
+      "Forte de Mascate",
+      "Fortaleza da Mina"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Forte Jesus possui a planta em forma de corpo humano e controlou a entrada do porto de Mombaça no Oceano Índico.",
+    "fonte": "UNESCO / National Museums of Kenya",
+    "factClusterId": "fc_hist_imp_fortejessus_mombaca_01"
+  },
+  {
+    "id": "HIST_IMP_0022",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que trágica batalha travada no norte de Marrocos a 4 de agosto de 1578 («Batalha de Alcácer Quibir» / Batalha dos Três Reis), resultou na morte de três reis e no desaparecimento do jovem monarca português D. Sebastião, originando o mito do Sebastianismo e a Crise Dinástica de 1580?",
+    "opcoes": [
+      "Batalha de Toro",
+      "Batalha de Alcácer Quibir (1578)",
+      "Batalha de Aljubarrota",
+      "Batalha de Ourique"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A derrota em Alcácer Quibir aniquilou a nobreza militar portuguesa e abriu caminho à união pessoal das coroas ibéricas sob a dinastia filipina em 1580.",
+    "fonte": "Dicionário de História de Portugal / Chagas / Saraiva",
+    "factClusterId": "fc_hist_imp_alcacerquibir_1578_01"
+  },
+  {
+    "id": "HIST_IMP_0023",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e decisiva batalha travada em Pernambuco em 1648 e 1649 («Batalhas dos Montes Guararapes»), liderada por luso-brasileiros como Fernandes Vieira, Henrique Dias e Filipe Camarão, ditou a expulsão definitiva dos invasores holandeses (WIC) do Nordeste do Brasil?",
+    "opcoes": [
+      "Batalha de Tabocas",
+      "Batalha dos Três Reis",
+      "Batalhas dos Montes Guararapes (1648/1649)",
+      "Batalha de São Vicente"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Batalhas dos Guararapes são simbolicamente consideradas o berço histórico e institucional do Exército Brasileiro.",
+    "fonte": "Exército Brasileiro / Instituto Arqueológico Histórico e Geográfico Pernambucano",
+    "factClusterId": "fc_hist_imp_guararapes_holandeses_01"
+  },
+  {
+    "id": "HIST_IMP_0024",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e rico ciclo económico do Brasil colonial no século XVIII, impulsionado pela descoberta de aluviões de ouro e pedras preciosas em 1695 («Ciclo do Ouro e Diamantes»), originou cidades barrocas monumentais como Vila Rica (Ouro Preto), Mariana e Diamantina?",
+    "opcoes": [
+      "Ciclo do Pau-Brasil",
+      "Ciclo do Café",
+      "Ciclo da Borracha",
+      "Ciclo do Ouro e Diamantes de Minas Gerais"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O ouro brasileiro financiou os monumentos do Barroco Joanino em Portugal, como o Palácio-Convento de Mafra, a Capela de São João Batista e o Aqueduto das Águas Livres.",
+    "fonte": "Museu da Inconfidência (Ouro Preto) / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_ciclodoouro_minasgerais_01"
+  },
+  {
+    "id": "HIST_IMP_0025",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que genial diplomata luso-brasileiro de Santos (1695-1753), Alexandre de Gusmão («Alexandre de Gusmão»), negociou o histórico Tratado de Madrid de 1750 aplicando o princípio de direito internacional do «Uti Possidetis» (a terra pertence a quem efetivamente a povoa), triplicando o território do Brasil?",
+    "opcoes": [
+      "Alexandre de Gusmão (Tratado de Madrid de 1750)",
+      "Bartolomeu de Gusmão",
+      "Marquês de Pombal",
+      "Luís da Cunha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Madrid anulou a linha de Tordesilhas e garantiu para a Coroa Portuguesa a posse da Amazónia, Mato Grosso e sul do Brasil.",
+    "fonte": "Ministério das Relações Exteriores / Instituto Rio Branco / DHP",
+    "factClusterId": "fc_hist_imp_alexandregusmao_madrid1750_01"
+  },
+  {
+    "id": "HIST_IMP_0026",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórica e grandiosa cidade portuguesa na Índia («Bombaim» / Mumbai), integrada em sete ilhas cedidas a Portugal em 1534 pelo Sultão de Guzerate, foi entregue à Inglaterra em 1661 como parte do dote do casamento da infanta portuguesa:",
+    "opcoes": [
+      "D. Maria Pia de Saboia",
+      "D. Catarina de Bragança (com o Rei Carlos II de Inglaterra)",
+      "D. Carlota Joaquina",
+      "D. Leopoldina de Áustria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Catarina de Bragança levou no seu dote a cidade de Bombaim e Tânger e introduziu o hábito de tomar chá da tarde ('Five o'clock tea') na corte britânica.",
+    "fonte": "British Library / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_bombaim_catarinadebraganca_01"
+  },
+  {
+    "id": "HIST_IMP_0027",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórico acontecimento geopolítico ocorreu em novembro de 1807 quando a Família Real Portuguesa e a Corte de D. João VI embarcaram para o Rio de Janeiro escoltados pela Marinha Real britânica para fugir à invasão napoleónica de Junot («Transferência da Corte Portuguesa para o Brasil»)?",
+    "opcoes": [
+      "Inconfidência Mineira",
+      "Revolução Liberal do Porto",
+      "Transferência da Corte Portuguesa para o Brasil (1807-1808)",
+      "Grito do Ipiranga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Foi a única vez na história da humanidade em que uma corte e monarquia europeia transferiram a sua sede de governo para uma colónia americana.",
+    "fonte": "Museu Histórico Nacional (Rio de Janeiro) / Torre do Tombo",
+    "factClusterId": "fc_hist_imp_transferenciacorte_1807_01"
+  },
+  {
+    "id": "HIST_IMP_0028",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico decreto real foi assinado por D. João VI em Salvador da Bahia a 28 de janeiro de 1808 («Abertura dos Portos às Nações Amigas»), extinguindo o antigo Pacto Colonial e permitindo o comércio direto entre o Brasil e todos os países?",
+    "opcoes": [
+      "Decreto da Independência",
+      "Tratado de Aliança e Amizade",
+      "Alvará de Liberdade Fabril",
+      "Carta Régia de Abertura dos Portos às Nações Amigas (1808)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A abertura dos portos pôs fim ao exclusivo colonial português e inseriu o Brasil de imediato no comércio capitalista internacional.",
+    "fonte": "Fundação Biblioteca Nacional / Arquivo Nacional do Brasil",
+    "factClusterId": "fc_hist_imp_aberturadosportos_1808_01"
+  },
+  {
+    "id": "HIST_IMP_0029",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que célebre ato político realizado em 1815 pelo Príncipe Regente D. João VI elevou o Brasil à mesma categoria jurídica e política da metrópole europeia criando o «Reino Unido de Portugal, Brasil e Algarves»?",
+    "opcoes": [
+      "Elevação do Brasil a Reino Unido de Portugal, Brasil e Algarves (1815)",
+      "Independência da América Portuguesa",
+      "Constituição de Cádis",
+      "Criação do Império Luso-Brasileiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A elevação do Brasil permitiu a D. João VI participar no Congresso de Viena como chefe de um reino soberano plenamente constituído.",
+    "fonte": "Colecção Oficial de Legislação Portuguesa / DHP",
+    "factClusterId": "fc_hist_imp_reinounidobrasil_1815_01"
+  },
+  {
+    "id": "HIST_IMP_0030",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Em que data histórica o Príncipe Real D. Pedro proclamou a independência do Brasil às margens do riacho Ipiranga em São Paulo com o grito «Independência ou Morte!» («Grito do Ipiranga»), sendo aclamado como D. Pedro I, Imperador Constitucional do Brasil?",
+    "opcoes": [
+      "22 de abril de 1822",
+      "7 de setembro de 1822",
+      "1 de dezembro de 1822",
+      "15 de novembro de 1889"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A independência foi reconhecida oficialmente por Portugal e D. João VI em 1825 através do Tratado do Rio de Janeiro mediado pela Grã-Bretanha.",
+    "fonte": "Museu Paulista (Museu do Ipiranga) / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_gritodoipiranga_1822_01"
+  },
+  {
+    "id": "HIST_IMP_0031",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico mapa geopolítico desenhado em 1886 pelo Ministro dos Negócios Estrangeiros Henrique de Barros Gomes («O Mapa Cor-de-Rosa»), reclamava para Portugal o território entre Angola e Moçambique (atuais Zâmbia e Zimbabué)?",
+    "opcoes": [
+      "O Mapa de Tordesilhas",
+      "O Tratado de Berlim",
+      "O Mapa Cor-de-Rosa (1886)",
+      "O Mapa dos Sertões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A pretensão do Mapa Cor-de-Rosa colidia diretamente com o projeto britânico de Cecil Rhodes de ligar a ferrovia 'do Cabo ao Cairo'.",
+    "fonte": "Sociedade de Geografia de Lisboa / Arquivo Histórico Militar",
+    "factClusterId": "fc_hist_imp_mapacorderosa_1886_01"
+  },
+  {
+    "id": "HIST_IMP_0032",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que ultimato diplomático e militar humilhante foi enviado a 11 de janeiro de 1890 pelo Primeiro-Ministro britânico Lord Salisbury ao Rei D. Carlos I («Ultimato Britânico de 1890»), exigindo a retirada imediata das tropas portuguesas de Serpa Pinto do território entre Angola e Moçambique?",
+    "opcoes": [
+      "Tratado de Windsor",
+      "Conferência de Berlim",
+      "Convenção de Londres",
+      "Ultimato Britânico de 1890"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cedência monárquica ao Ultimato Britânico provocou uma vaga de indignação nacional que inspirou a canção 'A Portuguesa' (o Hino Nacional) e a revolta de 31 de janeiro de 1891.",
+    "fonte": "Arquivo Histórico Diplomático / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_ultimatobritanico_1890_01"
+  },
+  {
+    "id": "HIST_IMP_0033",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que intrépidos exploradores e oficiais da Marinha Portuguesa (Hermenegildo Capelo e Roberto Ivens), realizaram a histórica travessia a pé de África entre a costa ocidental (Angola) e a costa oriental (Moçambique) entre 1884 e 1885 («De Angola à Contra-Costa»)?",
+    "opcoes": [
+      "Hermenegildo Capelo e Roberto Ivens",
+      "Serpa Pinto e Silva Porto",
+      "David Livingstone e Henry Stanley",
+      "Brito Camacho e Mouzinho de Albuquerque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Capelo e Ivens percorreram mais de 4.500 km recolhendo milhares de espécimes botânicos, zoológicos e cartas geográficas fundamentais.",
+    "fonte": "Sociedade de Geografia de Lisboa / Marinha Portuguesa",
+    "factClusterId": "fc_hist_imp_capeloeivens_1884_01"
+  },
+  {
+    "id": "HIST_IMP_0034",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que fidalgo e explorador português do século XIX (1846-1900), Alexandre Alberto da Rocha de Serpa Pinto («Serpa Pinto»), realizou a famosa travessia transafricana entre Benguela (Angola) e Durban (África do Sul) em 1877-1879 narrada na obra «Como Eu Atravessei a África»?",
+    "opcoes": [
+      "Roberto Ivens",
+      "Serpa Pinto (Alexandre de Serpa Pinto)",
+      "Paiva Couceiro",
+      "Silva Porto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Serpa Pinto mapeou o curso do rio Zambeze e as cataratas de Vitória sendo aclamado pelas sociedades geográficas de Londres e Paris.",
+    "fonte": "Sociedade de Geografia de Lisboa / DHP",
+    "factClusterId": "fc_hist_imp_serpapinto_1877_01"
+  },
+  {
+    "id": "HIST_IMP_0035",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que oficial de cavalaria português (1855-1902), Joaquim Augusto Mouzinho de Albuquerque («Mouzinho de Albuquerque»), celebrizou-se pela ousada captura do imperador de Gaza, Ngungunhane (Gungunhana), a 28 de dezembro de 1895 na povoação fortificada de Chaimite (Moçambique)?",
+    "opcoes": [
+      "António Enes",
+      "Caldas Xavier",
+      "Mouzinho de Albuquerque (Prisão de Gungunhana)",
+      "Eduardo Galhardo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mouzinho de Albuquerque entrou em Chaimite com apenas algumas dezenas de soldados e foi nomeado Governador-Geral de Moçambique.",
+    "fonte": "Museu Militar de Lisboa / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_mouzinhodealbuquerque_chaimite_01"
+  },
+  {
+    "id": "HIST_IMP_0036",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico complexo de enclaves territoriais portugueses na costa ocidental da Índia («Índia Portuguesa» — Goa, Damão e Diu, com Dadrá e Nagar Aveli), permaneceu sob soberania de Portugal durante 451 anos até à invasão e anexação militar pelas tropas da União Indiana («Operação Vijay») em dezembro de 1961?",
+    "opcoes": [
+      "Ceilão Português",
+      "Macau e Timor",
+      "Cochim e Baçaim",
+      "Estado Português da Índia (Goa, Damão e Diu — 1510-1961)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O General Manuel António Vassalo e Silva foi o último Governador-Geral da Índia Portuguesa assinando a rendição perante forças indianas largamente superiores.",
+    "fonte": "Arquivo Histórico Militar / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_hist_imp_fim_indiaportuguesa_1961_01"
+  },
+  {
+    "id": "HIST_IMP_0037",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Em que data histórica solene foram transmitidos os poderes de administração de Macau por Portugal à República Popular da China no Centro Cultural de Macau com a presença do Presidente Jorge Sampaio e de Jiang Zemin («Transição de Macau»), encerrando o ciclo de 442 anos do Império Português?",
+    "opcoes": [
+      "20 de dezembro de 1999",
+      "1 de julho de 1997",
+      "25 de abril de 1974",
+      "31 de dezembro de 2000"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O General Vasco Rocha Vieira foi o último Governador de Macau e o encerramento do império fez-se sob o princípio 'Um País, Dois Sistemas'.",
+    "fonte": "Gabinete de Coordenação da Transição de Macau / Presidência da República",
+    "factClusterId": "fc_hist_imp_transicaomacau_1999_01"
+  },
+  {
+    "id": "HIST_IMP_0038",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico navegador português (c. 1460-1521), Fernão de Magalhães («Fernão de Magalhães»), ao serviço de Carlos I de Espanha, liderou entre 1519 e 1522 a expedição que descobriu o estreito interoceânico no sul da América e realizou a histórica primeira viagem de:",
+    "opcoes": [
+      "Descoberta da Antártida",
+      "Circum-navegação de todo o globo terrestre (com Juan Sebastián Elcano)",
+      "Descoberta da Austrália",
+      "Navegação até ao Polo Norte"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A viagem da nau Victoria provou experimentalmente pela primeira vez a esfericidade do planeta Terra e a interligação de todos os oceanos.",
+    "fonte": "Primeira Viagem ao Redor do Mundo (Antonio Pigafetta) / Academia de Marinha",
+    "factClusterId": "fc_hist_imp_fernaodemagalhaes_1519_01"
+  },
+  {
+    "id": "HIST_IMP_0039",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante navegador português ao serviço da Coroa de D. João II (Diogo Cão), foi o primeiro europeu a atingir a foz do rio Zaire (rio Congo) em 1482 e a costa da Namíbia em 1485, assinalando a soberania portuguesa com:",
+    "opcoes": [
+      "Bandeiras de seda bordada",
+      "Cruzes de madeira de carvalho",
+      "Padrões de pedra de calcário com a Cruz de Cristo e o Escudo Real",
+      "Fortalezas de tijolo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Padrões de Diogo Cão (como o de Santa Maria em Cabo de Santa Maria e o de Cape Cross) são peças de arqueologia marítima de valor incalculável.",
+    "fonte": "Sociedade de Geografia de Lisboa / Museu de Marinha",
+    "factClusterId": "fc_hist_imp_diogocao_padroes_1482_01"
+  },
+  {
+    "id": "HIST_IMP_0040",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórico e secular arquipélago no Atlântico Médio descoberto em 1460 por Diogo Gomes e Alvise Cadamosto («Arquipélago de Cabo Verde»), foi povoado a partir de 1462 com a fundação da «Ribeira Grande» (Cidade Velha na Ilha de Santiago), a primeira cidade colonial europeia construída nos trópicos?",
+    "opcoes": [
+      "Praia",
+      "Mindelo",
+      "São Filipe do Fogo",
+      "Cidade Velha (Ribeira Grande de Santiago, Cabo Verde)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Cidade Velha com a sua Sé Catedral renascentista e o Pelourinho de mármore é Património Mundial da UNESCO.",
+    "fonte": "UNESCO / Instituto do Património Cultural de Cabo Verde",
+    "factClusterId": "fc_hist_imp_caboverde_cidadevelha_01"
+  },
+  {
+    "id": "HIST_IMP_0041",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico arquipélago no Golfo da Guiné descoberto em 1470 e 1471 pelos navegadores João de Santarém e Pedro Escobar («Ilhas de São Tomé e Príncipe»), tornou-se no século XVI o maior produtor e exportador mundial de:",
+    "opcoes": [
+      "Açúcar de cana (com mais de 60 engenhos de açúcar)",
+      "Café e Cacau",
+      "Pimenta e Canela",
+      "Algodão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "No século XIX e XX, São Tomé e Príncipe reinventou-se com as roças históricas (como Água Izé e Monte Café) tornando-se o maior produtor de cacau do mundo.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Histórico Ultramarino",
+    "factClusterId": "fc_hist_imp_saotomeeprincipe_acucar_01"
+  },
+  {
+    "id": "HIST_IMP_0042",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que primeiro donatário e fidalgo português (Duarte Coelho Pereira), recebeu em 1534 a Capitania de Pernambuco («Nova Lusitânia»), fundando as históricas cidades de Olinda e Recife e transformando a região no maior centro produtor de açúcar do mundo?",
+    "opcoes": [
+      "Martim Afonso de Sousa",
+      "Duarte Coelho (Capitania de Pernambuco)",
+      "Pero Lopes de Sousa",
+      "Mem de Sá"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Duarte Coelho estabeleceu a aristocracia dos 'senhores de engenho' e cunhou a famosa frase de Olinda: 'Ó linda situação para se fundar uma vila!'.",
+    "fonte": "História da Colonização Portuguesa do Brasil / DHP",
+    "factClusterId": "fc_hist_imp_duartecoelho_pernambuco_01"
+  },
+  {
+    "id": "HIST_IMP_0043",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que famosa instituição régia e alfandegária sediada no Terreiro do Paço em Lisboa («Casa da Índia» / Casa da Guiné e da Mina), centralizava todo o comércio das especiarias, cobrava os direitos da vintena real e geria as armadas da Carreira da Índia?",
+    "opcoes": [
+      "Conselho Ultramarino",
+      "Banco de Portugal",
+      "Casa da Índia (Lisboa)",
+      "Feitoria Real de Flandres"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa da Índia geria o mapa secreto oficial das rotas mundiais ('Padrão Real') e foi destruída no Terramoto de 1755.",
+    "fonte": "Torre do Tombo / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_imp_casadaindia_01"
+  },
+  {
+    "id": "HIST_IMP_0044",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que importante e histórico órgão político da administração central criado em Lisboa em 1642 pelo Rei D. João IV («Conselho Ultramarino»), tinha a missão de gerir todos os assuntos políticos, militares, fiscais e eclesiásticos do Império Português no Brasil, África e Ásia?",
+    "opcoes": [
+      "Mesa da Consciência e Ordens",
+      "Conselho de Estado",
+      "Desembargo do Paço",
+      "Conselho Ultramarino (1642)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Arquivo Histórico Ultramarino em Lisboa preserva hoje milhões de documentos e cartas régias produzidas pelo Conselho Ultramarino ao longo de séculos.",
+    "fonte": "Arquivo Histórico Ultramarino (AHU) / DHP",
+    "factClusterId": "fc_hist_imp_conselhoultramarino_1642_01"
+  },
+  {
+    "id": "HIST_IMP_0045",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que influente e notável orador sacro e diplomata jesuíta de Lisboa e da Bahia (1608-1697), Padre António Vieira («Padre António Vieira»), «O Imperador da Língua Portuguesa», defendeu corajosamente a liberdade dos povos indígenas do Brasil e os direitos dos cristãos-novos nos seus sermões imortais?",
+    "opcoes": [
+      "Padre António Vieira",
+      "Padre Manuel da Nóbrega",
+      "São José de Anchieta",
+      "Frei Luís de Sousa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pessoa apelidou o Padre António Vieira de 'O Imperador da Língua Portuguesa' no poema 'Mensagem'.",
+    "fonte": "Academia Brasileira de Letras / Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_hist_imp_padreantoniovieira_01"
+  },
+  {
+    "id": "HIST_IMP_0046",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que jovem jesuíta canário e português (1534-1597), São José de Anchieta («O Apóstolo do Brasil»), fundou com Manuel da Nóbrega o Colégio dos Jesuítas em 1554 que deu origem à cidade de São Paulo e escreveu a primeira gramática da língua tupi?",
+    "opcoes": [
+      "Padre António Vieira",
+      "São José de Anchieta",
+      "Padre Manuel da Nóbrega",
+      "Frei Vicente do Salvador"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Anchieta compôs poemas em latim e tupi na areia da praia de Ubatuba e foi canonizado pelo Papa Francisco em 2014.",
+    "fonte": "Vatican News / Arquidiocese de São Paulo",
+    "factClusterId": "fc_hist_imp_joseanchieta_1554_01"
+  },
+  {
+    "id": "HIST_IMP_0047",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórico povoamento colonial português fundado em 1680 por D. Manuel Lobo na margem esquerda do Rio da Prata (em frente a Buenos Aires, no atual Uruguai), «Colónia do Sacramento», foi alvo de guerras seculares entre Portugal e Espanha pela posse da foz do Prata?",
+    "opcoes": [
+      "Montevideu",
+      "Forte de Santa Teresa",
+      "Colónia do Sacramento (Uruguai, 1680)",
+      "São Pedro do Rio Grande"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bairro Histórico de Colónia do Sacramento com calçada portuguesa e azulejos do século XVII é Património Mundial da UNESCO.",
+    "fonte": "UNESCO / Comissão do Património do Uruguai",
+    "factClusterId": "fc_hist_imp_coloniadosacramento_1680_01"
+  },
+  {
+    "id": "HIST_IMP_0048",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórica e valiosa ilha de Ceilão (atual Sri Lanka), com as suas praças fortificadas em Colombo, Gale e Jaffna, foi controlada pelos portugueses entre 1505 e 1658 pelo monopólio mundial da mais pura e aromática:",
+    "opcoes": [
+      "Pimenta-da-Jamaica",
+      "Noz-moscada",
+      "Açafrão",
+      "Canela-do-Ceilão (Cinnamomum verum)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A língua e costumes cingaleses incorporaram centenas de palavras portuguesas (como 'kamisa', 'sapattu', 'pan') e apelidos como Pereira, Silva e Fernando.",
+    "fonte": "Charles Boxer / The Portuguese in Ceylon / DHP",
+    "factClusterId": "fc_hist_imp_ceilaoportugues_canela_01"
+  },
+  {
+    "id": "HIST_IMP_0049",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que histórico território do Sudeste Asiático na metade oriental da ilha de Timor («Timor Português» / Timor-Leste), com capitais em Lifau e Díli desde o século XVI, resistiu à ocupação indonésia (1975-1999) alcançando a restauração da independência em 2002?",
+    "opcoes": [
+      "Timor-Leste (Timor Português)",
+      "Flores",
+      "Solor",
+      "Sumba"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Timor-Leste tem o português e o tétum como línguas oficiais integrando a Comunidade dos Países de Língua Portuguesa (CPLP).",
+    "fonte": "Governo de Timor-Leste / CPLP / ONU",
+    "factClusterId": "fc_hist_imp_timorportugues_01"
+  },
+  {
+    "id": "HIST_IMP_0050",
+    "tema": "História de Portugal",
+    "subtema": "Império Português",
+    "pergunta": "Que comunidade internacional e multilateral de cooperação política, económica e cultural foi fundada a 17 de julho de 1996 em Lisboa («CPLP» — Comunidade dos Países de Língua Portuguesa), unindo nove estados soberanos que partilham a língua de Camões?",
+    "opcoes": [
+      "União Latina",
+      "Secretaria Geral Ibero-Americana",
+      "CPLP (Comunidade dos Países de Língua Portuguesa)",
+      "Organização da Lusofonia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A CPLP reúne mais de 300 milhões de cidadãos em quatro continentes (Angola, Brasil, Cabo Verde, Guiné-Bissau, Guiné Equatorial, Moçambique, Portugal, São Tomé e Príncipe e Timor-Leste) com sede no Palácio Penafiel em Lisboa.",
+    "fonte": "CPLP / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_hist_imp_cplp_1996_01"
+  }
+]

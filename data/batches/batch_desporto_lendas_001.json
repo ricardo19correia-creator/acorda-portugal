@@ -1,0 +1,852 @@
+[
+  {
+    "id": "DESP_LEN_0001",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que lendário atleta português natural de Vildemoinhos (Viseu), nascido em 1947, conquistou a primeira medalha de ouro olímpica da história de Portugal ao vencer a Maratona dos Jogos Olímpicos de Los Angeles em 1984 com o recorde olímpico de 2h09m21s?",
+    "opcoes": [
+      "Carlos Alberto de Sousa Lopes (Carlos Lopes)",
+      "António Leitão",
+      "Fernando Mamede",
+      "Armando Aldegalega"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Carlos Lopes foi também medalha de prata nos 10.000 metros em Montreal 1976 e tricampeão mundial de corta-mato (Cross Country).",
+    "fonte": "Comité Olímpico de Portugal (COP) / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_carloslopes1984_01"
+  },
+  {
+    "id": "DESP_LEN_0002",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que célebre atleta portuense («A Nossa Rosinha»), primeira campeã olímpica feminina de Portugal ao vencer a Maratona dos Jogos Olímpicos de Seul em 1988 (após o bronze em Los Angeles 1984), foi campeã mundial em Roma 1987 e tricampeã europeia consecutiva?",
+    "opcoes": [
+      "Fernanda Ribeiro",
+      "Rosa Maria Correia dos Santos Mota (Rosa Mota)",
+      "Aurora Cunha",
+      "Manuela Machado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rosa Mota foi distinguida com o Prémio Abebe Bikila e a Grã-Cruz da Ordem do Infante D. Henrique e é a única atleta portuguesa campeã olímpica, mundial e europeia em maratona.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_desp_rosamota_01"
+  },
+  {
+    "id": "DESP_LEN_0003",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que extraordinária fundista de Penafiel (nascida em 1969) conquistou a medalha de ouro olímpica nos 10.000 metros dos Jogos Olímpicos de Atlanta em 1996 com uma ponta final épica sobre a chinesa Wang Junxia e o bronze em Sydney 2000?",
+    "opcoes": [
+      "Rosa Mota",
+      "Albertina Dias",
+      "Maria Fernanda Ribeiro (Fernanda Ribeiro)",
+      "Conceição Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernanda Ribeiro foi também campeã mundial em Gotemburgo 1995 e campeã europeia em Helsínquia 1994 nos 10.000 metros.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_fernandaribeiro1996_01"
+  },
+  {
+    "id": "DESP_LEN_0004",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta natural da Costa do Marfim e naturalizado português conquistou a medalha de ouro olímpica no Triplo Salto nos Jogos Olímpicos de Pequim em 2008 com a marca de 17,67 metros e o título mundial em Osaka 2007?",
+    "opcoes": [
+      "Pedro Pichardo",
+      "Carlos Calado",
+      "Francis Obikwelu",
+      "Nelson Évora"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nelson Évora venceu todas as quatro grandes competições internacionais do triplo salto: Jogos Olímpicos, Mundiais ao Ar Livre, Mundiais de Pista Coberta e Europeus.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_desp_nelsonevora2008_01"
+  },
+  {
+    "id": "DESP_LEN_0005",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta luso-cubano do Benfica sagrou-se campeão olímpico do Triplo Salto nos Jogos Olímpicos de Tóquio 2020 com o salto de 17,98 metros e conquistou a medalha de prata em Paris 2024 e o título mundial em Eugene 2022?",
+    "opcoes": [
+      "Pedro Pablo Pichardo Peralta",
+      "Nelson Évora",
+      "Tiago Pereira",
+      "Marcos Chuva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Pichardo detém o recorde nacional absoluto de Portugal no triplo salto com a marca estratosférica de 18,08 metros.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_desp_pedropichardo_01"
+  },
+  {
+    "id": "DESP_LEN_0006",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que canoísta limiano de Ponte de Lima (nascido em 1989), um dos atletas mais titulados de sempre do desporto português com duas medalhas olímpicas (prata em Londres 2012 em K2 1000m e bronze em Tóquio 2020 em K1 1000m) e mais de 100 medalhas internacionais, é:",
+    "opcoes": [
+      "Emanuel Silva",
+      "Fernando Pimenta (Fernando Érnani Silva Pimenta)",
+      "João Ribeiro",
+      "Messias Baptista"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pimenta é hexacampeão mundial e heptacampeão europeu de canoagem de velocidade em K1 1000m e K1 5000m.",
+    "fonte": "Federação Portuguesa de Canoagem / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_fernandopimenta_01"
+  },
+  {
+    "id": "DESP_LEN_0007",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que judoca portuguesa do Benfica (nascida em Lisboa em 1985 na categoria de -57 kg), que conquistou a medalha de bronze olímpica no Rio 2016 e é a recordista de seis títulos de Campeã da Europa de Judo (2006, 2007, 2009, 2012, 2015 e 2021), é:",
+    "opcoes": [
+      "Catarina Costa",
+      "Bárbara Timo",
+      "Telma Alexandra Pinto Monteiro (Telma Monteiro)",
+      "Patrícia Sampaio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Telma Monteiro esteve presente em seis edições consecutivas dos Jogos Olímpicos (2004 a 2024) sendo a judoca mais laureada da história de Portugal.",
+    "fonte": "Federação Portuguesa de Judo / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_telmamonteiro_01"
+  },
+  {
+    "id": "DESP_LEN_0008",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que judoca português do Sporting CP (-100 kg), natural de São Tomé e Príncipe (nascido em 1992), fez história ao sagrar-se bicampeão mundial de judo em Tóquio 2019 e Budapeste 2021 e conquistar a medalha de bronze olímpica em Tóquio 2020?",
+    "opcoes": [
+      "Nuno Delgado",
+      "Rochele Nunes",
+      "Anri Egutidze",
+      "Jorge Ivayr Rodrigues da Fonseca (Jorge Fonseca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jorge Fonseca superou um cancro em 2015 antes de se tornar o primeiro judoca português campeão mundial da história.",
+    "fonte": "Federação Internacional de Judo (IJF) / COP",
+    "factClusterId": "fc_desp_jorgefonseca_01"
+  },
+  {
+    "id": "DESP_LEN_0009",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta do Sporting CP (nascida em São Tomé em 1988) conquistou a medalha de prata olímpica no Triplo Salto nos Jogos Olímpicos de Tóquio 2020 ao superar a mítica barreira dos 15 metros com o recorde nacional de 15,01 metros?",
+    "opcoes": [
+      "Patrícia Rodrigues Mamona (Patrícia Mamona)",
+      "Susana Costa",
+      "Evelise Veiga",
+      "Naide Gomes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Patrícia Mamona é licenciada em Medicina e Engenharia Biomédica e foi campeã da Europa ao ar livre em Amesterdão 2016 e de pista coberta em Torun 2021.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_desp_patriciamamona_01"
+  },
+  {
+    "id": "DESP_LEN_0010",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que ciclista de pista natural de Viana do Castelo (nascido em 1998) fez história nos Jogos Olímpicos de Paris 2024 ao conquistar a medalha de ouro no Madison (em dupla com Rui Oliveira) e a medalha de prata no Omnium, tornando-se o primeiro português campeão olímpico fora do atletismo e o primeiro com duas medalhas na mesma edição?",
+    "opcoes": [
+      "Rui Oliveira",
+      "Iúri Gabriel Dantas Leitão (Iúri Leitão)",
+      "Ivo Oliveira",
+      "João Almeida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Iúri Leitão e Rui Oliveira dominaram a prova de Madison no Velódromo Nacional de Saint-Quentin-en-Yvelines com uma atuação tática magistral.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Ciclismo",
+    "factClusterId": "fc_desp_iurileitao_paris2024_01"
+  },
+  {
+    "id": "DESP_LEN_0011",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que velocista nascido na Nigéria e naturalizado português (nascido em 1978) conquistou a medalha de prata olímpica nos 100 metros dos Jogos Olímpicos de Atenas 2004 com a incrível marca de 9,86 segundos, que foi recorde da Europa durante 17 anos?",
+    "opcoes": [
+      "Yazaldes Nascimento",
+      "Arnaldo Abrantes",
+      "Francis Obiorah Obikwelu (Francis Obikwelu)",
+      "Carlos Calado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Obikwelu fez a dobradinha de ouro nos 100m e 200m nos Campeonatos da Europa de Gotemburgo 2006 pelo Sporting e por Portugal.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_desp_francisobikwelu2004_01"
+  },
+  {
+    "id": "DESP_LEN_0012",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que meio-fundista de Santarém (nascido em 1977), especialista nos 1.500 metros pelo Sporting CP, conquistou a medalha de bronze olímpica nos Jogos Olímpicos de Atenas 2004 e foi campeão mundial de pista coberta em Lisboa 2001?",
+    "opcoes": [
+      "Rui Pedro Silva",
+      "Manuel Silva",
+      "Hélder Ornelas",
+      "Rui Manuel Monteiro Silva (Rui Silva)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rui Silva detém o recorde nacional dos 1.500 metros com a marca de 3m30s07 obtida na Taça do Mundo no Mónaco.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_ruisilva2004_01"
+  },
+  {
+    "id": "DESP_LEN_0013",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que triatleta de Vila Nova de Gaia (nascida em 1985), campeã mundial de Triatlo em Hamburgo 2007 e pentacampeã europeia consecutiva, conquistou a medalha de prata olímpica nos Jogos Olímpicos de Pequim 2008?",
+    "opcoes": [
+      "Vanessa de Sousa Fernandes (Vanessa Fernandes)",
+      "Melanie Santos",
+      "Helena Carvalho",
+      "Ana Filipa Ferreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vanessa Fernandes detém o recorde mundial absoluto de 20 vitórias em etapas da Taça do Mundo de Triatlo da ITU.",
+    "fonte": "World Triathlon / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_vanessafernandes_01"
+  },
+  {
+    "id": "DESP_LEN_0014",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que judoca luso-santomeense (nascido em 1973 na categoria de -81 kg) fez história em Sydney 2000 ao conquistar a primeira medalha olímpica de sempre do judo português (medalha de bronze)?",
+    "opcoes": [
+      "Jorge Fonseca",
+      "Nuno Miguel Delgado (Nuno Delgado)",
+      "João Pina",
+      "Pedro Dias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nuno Delgado foi campeão da Europa em Bratislava 1999 e fundou a Escola de Judo Nuno Delgado para a inclusão de jovens carenciados.",
+    "fonte": "Comité Olímpico de Portugal / EJND",
+    "factClusterId": "fc_desp_nunodelgado2000_01"
+  },
+  {
+    "id": "DESP_LEN_0015",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que canoísta de Braga (nascido em 1985), em dupla com Fernando Pimenta no K2 1000m, conquistou a medalha de prata olímpica nos Jogos Olímpicos de Londres 2012 na pista de Dorney Lake?",
+    "opcoes": [
+      "João Ribeiro",
+      "David Varela",
+      "Emanuel Radu Silva (Emanuel Silva)",
+      "Kevin Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Emanuel Silva esteve presente em cinco edições dos Jogos Olímpicos (2004 a 2020) e foi campeão da Europa e do Mundo em K2 e K4.",
+    "fonte": "Federação Portuguesa de Canoagem / COP",
+    "factClusterId": "fc_desp_emanuelsilva2012_01"
+  },
+  {
+    "id": "DESP_LEN_0016",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que jovem judoca tomarense do Judo Clube de Tomar (-78 kg, nascida em 1999) conquistou com brilhantismo a medalha de bronze nos Jogos Olímpicos de Paris 2024 com vitórias categóricas por Ippon sobre a vice-campeã olímpica e a campeã mundial?",
+    "opcoes": [
+      "Telma Monteiro",
+      "Bárbara Timo",
+      "Rochele Nunes",
+      "Patrícia Fernandes Sampaio (Patrícia Sampaio)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Patrícia Sampaio é bicampeã europeia de juniores e militar da Guarda Nacional Republicana (GNR).",
+    "fonte": "Comité Olímpico de Portugal / FPJ / Município de Tomar",
+    "factClusterId": "fc_desp_patriciasampaio_paris2024_01"
+  },
+  {
+    "id": "DESP_LEN_0017",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que lendário ciclista de Torres Vedras (1943-1984), considerado o maior ciclista de estrada de sempre de Portugal, subiu duas vezes ao pódio final da Volta a França (Tour de France) como 3.º classificado em 1978 e 1979 e venceu três Voltas a Portugal consecutivas?",
+    "opcoes": [
+      "Joaquim Francisco Agostinho (Joaquim Agostinho)",
+      "Rui Costa",
+      "Alves Barbosa",
+      "Joaquim Gomes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Joaquim Agostinho venceu a mítica etapa do Alpe d'Huez no Tour de France em 1979 e tem um monumento e museu em Torres Vedras.",
+    "fonte": "Federação Portuguesa de Ciclismo / Município de Torres Vedras",
+    "factClusterId": "fc_desp_joaquimagostinho_01"
+  },
+  {
+    "id": "DESP_LEN_0018",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que ciclista da Póvoa de Varzim (nascido em 1986) sagrou-se Campeão Mundial de Ciclismo de Estrada em Florença em 2013 ao vencer a prova de fundo de elite com a camisola arco-íris, tendo vencido três etapas da Volta a França e a Volta à Suíça por três anos seguidos?",
+    "opcoes": [
+      "João Almeida",
+      "Rui Alberto Faria da Costa (Rui Costa)",
+      "José Azevedo",
+      "Sérgio Paulinho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Costa foi o primeiro e único ciclista português da história a conquistar o título de campeão mundial de fundo de elite masculina da UCI.",
+    "fonte": "UCI / Federação Portuguesa de Ciclismo",
+    "factClusterId": "fc_desp_ruicosta_campeaomundial_01"
+  },
+  {
+    "id": "DESP_LEN_0019",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que jovem prodígio do ciclismo de Caldas da Rainha (nascido em A-dos-Francos em 1998, pela equipa UAE Team Emirates), terminou no pódio (3.º lugar) do Giro d'Italia em 2023 com vitória no Monte Bondone e conquistou a camisola branca da juventude?",
+    "opcoes": [
+      "Rui Costa",
+      "Rúben Guerreiro",
+      "João Pedro Gonçalves Almeida (João Almeida)",
+      "Nelson Oliveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "João Almeida envergou a camisola rosa de líder da Volta a Itália durante 15 etapas consecutivas na sua estreia em 2020.",
+    "fonte": "Giro d'Italia / UCI / UAE Team Emirates",
+    "factClusterId": "fc_desp_joaoalmeida_ciclismo_01"
+  },
+  {
+    "id": "DESP_LEN_0020",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto de motociclismo de Almada (nascido em 1995 com o número 88), formado em Medicina Dentária, tornou-se o primeiro português a competir e a vencer corridas no Campeonato do Mundo de MotoGP (vitórias em Spielberg e Portimão em 2020 pela KTM Tech3 e Indonésia e Tailândia em 2022)?",
+    "opcoes": [
+      "Ivo Lopes",
+      "Diogo Moreira",
+      "Alexandre Camacho",
+      "Miguel Ângelo Falcão de Oliveira (Miguel Oliveira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Miguel Oliveira venceu o Grande Prémio de Portugal de MotoGP no Autódromo Internacional do Algarve em novembro de 2020 com pole position, volta mais rápida e liderança de todas as voltas.",
+    "fonte": "MotoGP / FIM / FMP",
+    "factClusterId": "fc_desp_migueloliveira88_01"
+  },
+  {
+    "id": "DESP_LEN_0021",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto portuense de Fórmula 1 («Tiago Monteiro»), ao volante do Jordan-Toyota no Grande Prémio dos Estados Unidos em Indianápolis em junho de 2005, subiu ao pódio no 3.º lugar, o único pódio de sempre de um piloto português na história da F1?",
+    "opcoes": [
+      "Tiago Vagaroso da Costa Monteiro (Tiago Monteiro)",
+      "Pedro Lamy",
+      "Pedro Matos Chaves",
+      "Mário Silva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Tiago Monteiro estabeleceu o recorde de 16 provas consecutivas a terminar na sua época de estreia na Fórmula 1 e venceu mais tarde no WTCR.",
+    "fonte": "Fórmula 1 / FIA / FPAK",
+    "factClusterId": "fc_desp_tiagomonteiro_f1_01"
+  },
+  {
+    "id": "DESP_LEN_0022",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que primeiro piloto português a pontuar no Campeonato do Mundo de Fórmula 1 (6.º lugar no GP da Austrália em Adelaide em 1995 pela Minardi), piloto de Aldeia Galega (Alenquer, nascido em 1972) que venceu as 24 Horas de Le Mans na classe GTE e as 24 Horas de Nürburgring com a Peugeot e Aston Martin, é:",
+    "opcoes": [
+      "Tiago Monteiro",
+      "Pedro Mourão Ferreira Lamy Viçoso (Pedro Lamy)",
+      "António Félix da Costa",
+      "Filipe Albuquerque"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pedro Lamy foi campeão da Fórmula 3 Alemã e um dos mais vitoriosos pilotos de resistência em carros de Turismo da história do automobilismo.",
+    "fonte": "FIA / FPAK / 24 Heures du Mans",
+    "factClusterId": "fc_desp_pedrolamy_01"
+  },
+  {
+    "id": "DESP_LEN_0023",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto de Cascais (nascido em 1991), campeão mundial de Fórmula E na época 2019-2020 pela equipa DS Techeetah e piloto oficial da Porsche, venceu duas vezes o histórico Grande Prémio de Macau de Fórmula 3 e as 24 Horas de Le Mans na classe LMP2 em 2022?",
+    "opcoes": [
+      "Filipe Albuquerque",
+      "Álvaro Parente",
+      "António Maria de Mello Breyner Félix da Costa",
+      "Armindo Araújo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Félix da Costa é o piloto português com mais vitórias internacionais em monolugares e provas de fábrica mundiais.",
+    "fonte": "FIA Formula E / Porsche Motorsport / FPAK",
+    "factClusterId": "fc_desp_antoniofelixdacosta_01"
+  },
+  {
+    "id": "DESP_LEN_0024",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto de Coimbra (nascido em 1985), que venceu as 24 Horas de Daytona e as 24 Horas de Le Mans em LMP2 com a equipa United Autosports e foi campeão do World Endurance Championship (WEC) e da European Le Mans Series, é:",
+    "opcoes": [
+      "Álvaro Parente",
+      "Armindo Araújo",
+      "Bernardo Sousa",
+      "Filipe Miguel Delgadinho Albuquerque (Filipe Albuquerque)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Filipe Albuquerque venceu a prestigiada Corrida dos Campeões (Race of Champions) em 2010 derrotando Sebastian Vettel e Sébastien Loeb.",
+    "fonte": "FIA WEC / IMSA / FPAK",
+    "factClusterId": "fc_desp_filipealbuquerque_01"
+  },
+  {
+    "id": "DESP_LEN_0025",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto de ralis de Santo Tirso (nascido em 1977), bicampeão mundial de ralis na categoria Produção (PWRC) em 2009 e 2010 e recordista de sete títulos de Campeão Nacional de Ralis de Portugal, é:",
+    "opcoes": [
+      "Armindo Araújo (Armindo José Salgado da Silva Araújo)",
+      "Bernardo Sousa",
+      "Bruno Magalhães",
+      "Ricardo Teodósio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Armindo Araújo representou a equipa oficial da MINI no Campeonato do Mundo de Ralis (WRC).",
+    "fonte": "WRC / FPAK / Federação Internacional do Automóvel",
+    "factClusterId": "fc_desp_armindoaraujo_01"
+  },
+  {
+    "id": "DESP_LEN_0026",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que piloto de todo-o-terreno de Lisboa (nascido em 1971), o piloto português mais bem-sucedido de sempre no Rali Dakar na categoria de automóveis com o 2.º lugar da geral no Dakar 2009 com a Volkswagen e múltiplas Taças do Mundo de Todo-o-Terreno, é:",
+    "opcoes": [
+      "Hélder Rodrigues",
+      "Carlos Sousa",
+      "Paulo Gonçalves",
+      "Ruben Faria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carlos Sousa foi o pioneiro dos grandes resultados portugueses no Rali Dakar com mais de 10 presenças no Top 10 final.",
+    "fonte": "Dakar Rally / FPAK / ASO",
+    "factClusterId": "fc_desp_carlossousa_dakar_01"
+  },
+  {
+    "id": "DESP_LEN_0027",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que histórico piloto de motas de Esposende (1979-2020), carinhosamente conhecido como «Speedy Gonçalves», campeão mundial de Todo-o-Terreno em 2013 e vice-campeão do Rali Dakar em 2015 pela Honda, faleceu heroicamente a disputar a prova na Arábia Saudita?",
+    "opcoes": [
+      "Hélder Rodrigues",
+      "Ruben Faria",
+      "Paulo Gonçalves («Speedy Gonçalves»)",
+      "António Maio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paulo Gonçalves recebeu o Prémio Fair Play do Comité Olímpico Internacional por ter socorrido um rival acidentado no deserto em pleno andamento.",
+    "fonte": "Dakar Rally / FIM / Município de Esposende",
+    "factClusterId": "fc_desp_paulogoncalves_dakar_01"
+  },
+  {
+    "id": "DESP_LEN_0028",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que surfista profissional de Cascais (nascido em 1992), o primeiro português campeão mundial de juniores da WSL e o primeiro a vencer uma etapa do circuito mundial de elite Championship Tour (em Peniche no Rip Curl Pro 2018 e Hossegor 2019), é:",
+    "opcoes": [
+      "Tiago Pires («Saca»)",
+      "Vasco Ribeiro",
+      "Afonso Antunes",
+      "Frederico Morais («Kikas»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Frederico Morais consolidou Portugal na elite dos 32 melhores surfistas do mundo na World Surf League (WSL).",
+    "fonte": "World Surf League (WSL) / Federação Portuguesa de Surf",
+    "factClusterId": "fc_desp_fredericomorais_kikas_01"
+  },
+  {
+    "id": "DESP_LEN_0029",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que surfista profissional da Ericeira (nascido em 1980), carinhosamente apelidado de «Saca», foi o pioneiro absoluto que abriu caminho ao surf português ao tornar-se o primeiro português a qualificar-se para o World Championship Tour (WCT) da WSL em 2008?",
+    "opcoes": [
+      "Tiago Pires («Saca»)",
+      "Frederico Morais",
+      "João de Macedo",
+      "Nic von Rupp"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Tiago Pires competiu durante 7 anos na primeira divisão mundial do surf vencendo lendas mundiais como Kelly Slater em Coxos e Supertubos.",
+    "fonte": "Federação Portuguesa de Surf / WSL",
+    "factClusterId": "fc_desp_tiagopires_saca_01"
+  },
+  {
+    "id": "DESP_LEN_0030",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que surfista profissional de Carcavelos (nascida em 1993), tricampeã europeia e primeira surfista portuguesa feminina a qualificar-se para o Championship Tour feminino e a representar Portugal nos Jogos Olímpicos de Tóquio 2020 e Paris 2024 (onde foi 5.ª classificada no Taiti), é:",
+    "opcoes": [
+      "Yolanda Hopkins",
+      "Teresa Bonvalot",
+      "Francisca Veselko",
+      "Camila Cardoso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Teresa Bonvalot é uma das surfistas mais técnicas da Europa com múltiplos títulos juniores e da Qualifying Series da WSL.",
+    "fonte": "WSL / Comité Olímpico de Portugal / FPS",
+    "factClusterId": "fc_desp_teresabonvalot_01"
+  },
+  {
+    "id": "DESP_LEN_0031",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que surfista algarvia de Quarteira (nascida em 1997, filha de mãe galesa e pai português), conquistou o histórico 5.º lugar com Diploma Olímpico nos Jogos Olímpicos de Tóquio 2020 e o título de Campeã da Europa da WSL em 2023?",
+    "opcoes": [
+      "Teresa Bonvalot",
+      "Francisca Veselko",
+      "Yolanda Hopkins (Yolanda Sequeira)",
+      "Carolina Mendes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Yolanda Hopkins é conhecida pela sua força física e manobras radicais em ondas de grande impacto.",
+    "fonte": "Comité Olímpico de Portugal / FPS",
+    "factClusterId": "fc_desp_yolandahopkins_01"
+  },
+  {
+    "id": "DESP_LEN_0032",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta natural de São Tomé e radicada em Portugal (nascida em 1979), que competiu no Heptatlo e Salto em Comprimento pelo Sporting CP, conquistou a medalha de ouro no Salto em Comprimento nos Mundiais de Pista Coberta de Valência 2008 e Doha 2010?",
+    "opcoes": [
+      "Patrícia Mamona",
+      "Lucrécia Jardim",
+      "Marta Onofre",
+      "Enezaide do Rosário da Vera Cruz Gomes (Naide Gomes)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Naide Gomes detém o recorde nacional de salto em comprimento com a extraordinária marca de 7,12 metros.",
+    "fonte": "World Athletics / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_naidegomes_01"
+  },
+  {
+    "id": "DESP_LEN_0033",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que consagrada atleta de Viana do Castelo (nascida em 1963), campeã mundial da Maratona em Gotemburgo 1995 e bicampeã europeia consecutiva de maratona (Helsínquia 1994 e Budapeste 1998), é:",
+    "opcoes": [
+      "Maria Manuela Castro Machado (Manuela Machado)",
+      "Rosa Mota",
+      "Aurora Cunha",
+      "Albertina Dias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuela Machado subiu ao pódio em três campeonatos mundiais consecutivos de maratona (prata em Estugarda 1993, ouro em Gotemburgo 1995 e prata em Atenas 1997).",
+    "fonte": "World Athletics / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_manuelamachado_01"
+  },
+  {
+    "id": "DESP_LEN_0034",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta de Guimarães (nascida em Ronfe em 1959), tricampeã mundial de estrada nos 15 km (1984, 1985 e 1986) e vencedora das maratonas de Paris, Tóquio, Chicago e Roterdão pelo FC Porto («Aurora Cunha»), é:",
+    "opcoes": [
+      "Rosa Mota",
+      "Aurora Cunha",
+      "Manuela Machado",
+      "Albertina Machado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Aurora Cunha foi pioneira do atletismo feminino de pista e estrada com dezenas de recordes nacionais.",
+    "fonte": "Federação Portuguesa de Atletismo / FC Porto",
+    "factClusterId": "fc_desp_auroracunha_01"
+  },
+  {
+    "id": "DESP_LEN_0035",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que fundista alentejano de Vimieiro (Arraiolos, 1951-2024), que conquistou o recorde mundial dos 10.000 metros no Estádio José Alvalade em 1984 com o tempo de 27m13s81 («Fernando Mamede»), é uma das maiores lendas da pista do Sporting CP?",
+    "opcoes": [
+      "Carlos Lopes",
+      "António Leitão",
+      "Fernando Eugénio Pacheco Mamede (Fernando Mamede)",
+      "Ezequiel Canário"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Mamede bateu múltiplos recordes mundiais e europeus e foi condecorado com a Ordem do Infante D. Henrique.",
+    "fonte": "Sporting Clube de Portugal / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_fernandomamede_01"
+  },
+  {
+    "id": "DESP_LEN_0036",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta de Espinho (1960-2012), especialista nos 5.000 metros pelo Benfica, conquistou a medalha de bronze olímpica nos Jogos Olímpicos de Los Angeles 1984 com o tempo de 13m09s20?",
+    "opcoes": [
+      "Fernando Mamede",
+      "Ezequiel Canário",
+      "João Campos",
+      "António Leitão (António Carlos Carvalho Nogueira Leitão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Leitão protagonizou uma prova memorável ao ritmo de Said Aouita para conquistar o segundo bronze olímpico de Portugal em 1984.",
+    "fonte": "Comité Olímpico de Portugal / SL Benfica",
+    "factClusterId": "fc_desp_antonioleitao1984_01"
+  },
+  {
+    "id": "DESP_LEN_0037",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta paralímpico português natural de Vila Nova de Gaia (nascido em 1982), especialista em salto em comprimento e triplo salto para atletas com deficiência intelectual, é o atleta mais medalhado do mundo na história do desporto com mais de 2.000 medalhas e um lugar no Livro Guinness de Recordes?",
+    "opcoes": [
+      "Lenine Cunha (Lenine Francisco da Silva Cunha)",
+      "Miguel Monteiro",
+      "Gabriel Potra",
+      "José Alves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Lenine Cunha conquistou a medalha de bronze nos Jogos Paralímpicos de Londres 2012 e dezenas de títulos mundiais pela Federação Internacional INAS/VIRTUS.",
+    "fonte": "Comité Paralímpico de Portugal / Guinness World Records",
+    "factClusterId": "fc_desp_leninecunha_paralimpico_01"
+  },
+  {
+    "id": "DESP_LEN_0038",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta paralímpico de Mangualde (nascido em 2000 na classe F40 de baixa estatura), campeão paralímpico no Lançamento do Peso nos Jogos Paralímpicos de Paris 2024 com o recorde paralímpico de 11,21 metros (após o bronze em Tóquio 2020), é:",
+    "opcoes": [
+      "Lenine Cunha",
+      "Miguel Monteiro",
+      "Sandro Baessa",
+      "Manuel Mendes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Miguel Monteiro é também recordista mundial da categoria e atleta da Casa do Povo de Mangualde.",
+    "fonte": "Comité Paralímpico de Portugal / World Para Athletics",
+    "factClusterId": "fc_desp_miguelmonteiro_paris2024_01"
+  },
+  {
+    "id": "DESP_LEN_0039",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que atleta paralímpica de Boccia de Lisboa (nascida em 1977 na classe individual BC2), que conquistou a medalha de ouro nos Jogos Paralímpicos de Paris 2024 (a sua 4.ª medalha de ouro e 6.ª medalha paralímpica no total ao longo de 6 edições dos Jogos desde Atenas 2004), é:",
+    "opcoes": [
+      "Simone Fragoso",
+      "Carolina Duarte",
+      "Cristina Gonçalves",
+      "Beatriz Monteiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cristina Gonçalves é a atleta paralímpica portuguesa mais titulada de sempre na modalidade de Boccia pela Associação de Paralisia Cerebral de Lisboa (APCL).",
+    "fonte": "Comité Paralímpico de Portugal / BISFed",
+    "factClusterId": "fc_desp_cristinagoncalves_boccia_01"
+  },
+  {
+    "id": "DESP_LEN_0040",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que marchador olímpico de Rio Maior (nascido em 1976), que conquistou a medalha de bronze nos 20 km marcha nos Campeonatos do Mundo de Paris 2003 e participou em seis edições dos Jogos Olímpicos pelo CN Rio Maior, é:",
+    "opcoes": [
+      "Sérgio Vieira",
+      "José Pinto",
+      "Jorge Costa",
+      "João Vieira (João Pedro Pires Vieira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João Vieira conquistou a medalha de prata nos 50 km marcha nos Mundiais de Doha 2019 aos 43 anos, tornando-se o medalhado mais velho da história dos mundiais de atletismo.",
+    "fonte": "World Athletics / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_joaovieira_marcha_01"
+  },
+  {
+    "id": "DESP_LEN_0041",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que marchadora olímpica de Olhão (nascida em 1984), que conquistou a medalha de bronze nos 20 km marcha nos Campeonatos do Mundo de Daegu 2011 e foi campeã da Europa em Zurique 2014 pelo Sporting Clube Olhanense e Sporting CP, é:",
+    "opcoes": [
+      "Ana Cabecinha",
+      "Inês Henriques",
+      "Susana Feitor",
+      "Vera Santos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ana Cabecinha conquistou múltiplos diplomas olímpicos com lugares de finalista em Pequim 2008, Londres 2012 e Rio 2016.",
+    "fonte": "Federação Portuguesa de Atletismo / COP",
+    "factClusterId": "fc_desp_anacabecinha_01"
+  },
+  {
+    "id": "DESP_LEN_0042",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que marchadora de Rio Maior (nascida em 1980) fez história mundial ao sagrar-se a primeira Campeã do Mundo dos 50 km Marcha em Londres 2017 e a primeira recordista mundial oficial da distância (4h05m56s)?",
+    "opcoes": [
+      "Susana Feitor",
+      "Inês Pereira Henriques (Inês Henriques)",
+      "Ana Cabecinha",
+      "Vera Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Inês Henriques foi também a primeira campeã europeia dos 50 km marcha em Berlim 2018.",
+    "fonte": "World Athletics / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_ineshenriques_50km_01"
+  },
+  {
+    "id": "DESP_LEN_0043",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que marchadora de Alcoentre (Rio Maior, nascida em 1975) conquistou a medalha de bronze nos 20 km marcha nos Campeonatos do Mundo de Helsínquia 2005 e esteve presente em cinco edições dos Jogos Olímpicos?",
+    "opcoes": [
+      "Inês Henriques",
+      "Ana Cabecinha",
+      "Susana Paula Cristina Feitor (Susana Feitor)",
+      "Sofia Avoila"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Susana Feitor foi campeã mundial de juniores em Plovdiv 1990 aos 15 anos e é presidente da Fundação do Desporto.",
+    "fonte": "Fundação do Desporto / Federação Portuguesa de Atletismo",
+    "factClusterId": "fc_desp_susanafeitor_01"
+  },
+  {
+    "id": "DESP_LEN_0044",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que nadador de elite de Coimbra (nascido em 2004 pelo Sporting CP), especialista em 50m e 100m mariposa e livres, sagrou-se tricampeão mundial de juniores em Lima 2022 e vice-campeão mundial absoluto em Doha 2024 com 22,81s nos 50m mariposa, sendo finalista olímpico em Paris 2024?",
+    "opcoes": [
+      "Miguel Nascimento",
+      "Gabriel Lopes",
+      "Alexis Santos",
+      "Diogo Matos Ribeiro (Diogo Ribeiro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Diogo Ribeiro conquistou as duas primeiras medalhas de ouro mundiais da história da natação pura portuguesa em Doha 2024 (50m mariposa e 100m mariposa).",
+    "fonte": "World Aquatics / Federação Portuguesa de Natação",
+    "factClusterId": "fc_desp_diogoribeiro_natacao_01"
+  },
+  {
+    "id": "DESP_LEN_0045",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que mesa-tenista luso-chinês do Sporting CP (nascido na China em 1979 e naturalizado português em 2007), que conquistou a medalha de ouro por equipas no Europeu de Lisboa 2014 e nos Jogos Europeus de Baku 2015, alcançando os quartos-de-final olímpicos em Londres 2012 e Rio 2016, é:",
+    "opcoes": [
+      "Marcos Freitas e Fu Yu (Fu Yu e Marcos Freitas / Tiago Apolónia / João Monteiro)",
+      "João Geraldo",
+      "Diogo Chen",
+      "Diogo Carvalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Marcos Freitas, Tiago Apolónia e João Monteiro formaram a 'Geração de Ouro' do ténis de mesa português que venceu a Alemanha em 2014 na MEO Arena.",
+    "fonte": "Federação Portuguesa de Ténis de Mesa (FPTM) / COP",
+    "factClusterId": "fc_desp_tenisdemesa_marcosfreitas_01"
+  },
+  {
+    "id": "DESP_LEN_0046",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que mesa-tenista madeirense (nascido no Funchal em 1988), vencedor do Top 16 Europeu em 2014 e medalha de prata nos Jogos Europeus de Minsk 2019, que atingiu o 7.º lugar no ranking mundial individual da ITTF, é:",
+    "opcoes": [
+      "Tiago Apolónia",
+      "Marcos André Sousa da Silva Freitas (Marcos Freitas)",
+      "João Monteiro",
+      "Bode Abiodun"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Marcos Freitas é o jogador português mais bem classificado de sempre no ranking mundial de ténis de mesa.",
+    "fonte": "ITTF / FPTM / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_marcosfreitas_ittf_01"
+  },
+  {
+    "id": "DESP_LEN_0047",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que mesa-tenista chinesa naturalizada portuguesa pelo GDCP Madalena e Clube de Ténis de Mesa de Mirandela (nascida em 1978), campeã da Europa de singulares femininos em Alicante 2018 e medalha de ouro nos Jogos Europeus de Minsk 2019, é:",
+    "opcoes": [
+      "Shao Jieni",
+      "Leila Oliveira",
+      "Fu Yu",
+      "Patrícia Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fu Yu representou Portugal nos Jogos Olímpicos do Rio 2016, Tóquio 2020 e Paris 2024 no topo do ténis de mesa europeu.",
+    "fonte": "ETTU / FPTM / COP",
+    "factClusterId": "fc_desp_fuyu_tenisdemesa_01"
+  },
+  {
+    "id": "DESP_LEN_0048",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que tenista de Guimarães (nascido em 1989), considerado o melhor tenista português de singulares de todos os tempos ao conquistar 4 títulos do circuito ATP Tour (incluindo o histórico Millennium Estoril Open em 2018) e atingir o 28.º lugar no ranking ATP, é:",
+    "opcoes": [
+      "Nuno Borges",
+      "Gastão Elias",
+      "Frederico Gil",
+      "João Pedro Coelho Marinho de Sousa (João Sousa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João Sousa atingiu os oitavos-de-final em Wimbledon e no US Open e representou Portugal na Taça Davis durante 16 anos consecutivos.",
+    "fonte": "ATP Tour / Federação Portuguesa de Ténis",
+    "factClusterId": "fc_desp_joaosousa_tenis_01"
+  },
+  {
+    "id": "DESP_LEN_0049",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que tenista maiato da Maia (nascido em 1997), formado no ténis universitário norte-americano (Mississippi State), fez história ao vencer o torneio ATP 250 de Bastad em 2024 e alcançar os oitavos-de-final do Open da Austrália e do US Open, entrando no Top 30 mundial?",
+    "opcoes": [
+      "Nuno Borges",
+      "João Sousa",
+      "Henrique Rocha",
+      "Jaime Faria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nuno Borges venceu a lenda Rafael Nadal na final do torneio de Bastad em julho de 2024 conquistando o seu primeiro título ATP.",
+    "fonte": "ATP Tour / Federação Portuguesa de Ténis",
+    "factClusterId": "fc_desp_nunoborges_tenis_01"
+  },
+  {
+    "id": "DESP_LEN_0050",
+    "tema": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "pergunta": "Que velejadora olímpica de Cascais (nascida em 1999 na classe Laser Radial / ILCA 6), campeã mundial de juniores e medalha de bronze nos Mundiais de Haia 2023, que conquistou o 5.º lugar com Diploma Olímpico nos Jogos Olímpicos de Paris 2024 na marina de Marselha, é:",
+    "opcoes": [
+      "Mariana Lobato",
+      "Catarina Branco",
+      "Carolina João e Diogo Costa (Carolina João / Carolina João e Mafalda Pires de Lima / Carolina João)",
+      "Sofia Bastero"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A vela é uma das modalidades históricas de maior tradição olímpica em Portugal com quatro medalhas conquistadas (1948, 1952, 1960 e 1996).",
+    "fonte": "Federação Portuguesa de Vela / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_carolinajoao_vela_01"
+  }
+]

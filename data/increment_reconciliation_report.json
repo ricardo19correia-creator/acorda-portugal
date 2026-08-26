@@ -1,0 +1,193 @@
+{
+  "timestamp": "2026-08-26T02:50:38.595Z",
+  "totalApproved": 14343,
+  "totalTarget": 466000,
+  "totalMissing": 451657,
+  "productionSessionNew": {
+    "total": 300,
+    "batches": [
+      {
+        "batchId": "BATCH_PT_HIST_001",
+        "tema": "Portugal",
+        "subtema": "História de Portugal",
+        "quantidade": 50,
+        "prefixo": "PT_HIST_B01_"
+      },
+      {
+        "batchId": "BATCH_PT_GEO_001",
+        "tema": "Portugal",
+        "subtema": "Geografia de Portugal",
+        "quantidade": 50,
+        "prefixo": "PT_GEO_B01_"
+      },
+      {
+        "batchId": "BATCH_PT_CULT_001",
+        "tema": "Portugal",
+        "subtema": "Cultura Portuguesa",
+        "quantidade": 50,
+        "prefixo": "PT_CULT_B01_"
+      },
+      {
+        "batchId": "BATCH_PT_MONUM_001",
+        "tema": "Portugal",
+        "subtema": "Monumentos",
+        "quantidade": 50,
+        "prefixo": "PT_MONUM_B01_"
+      },
+      {
+        "batchId": "BATCH_CINE_PT_001",
+        "tema": "Cinema e Televisão",
+        "subtema": "Cinema Português",
+        "quantidade": 50,
+        "prefixo": "AP-CINE-PT-"
+      },
+      {
+        "batchId": "BATCH_PT_CID_001",
+        "tema": "Portugal",
+        "subtema": "Cidades",
+        "quantidade": 50,
+        "prefixo": "AP-PT-CID-"
+      }
+    ]
+  },
+  "legacyRecognized": {
+    "total": 14043,
+    "sources": [
+      {
+        "ficheiro": "lib/data/categories/atualidade.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/ciencia-tecnologia.json",
+        "totalDocumentos": 668,
+        "perguntasAprovadas": 668,
+        "producaoSessao": 0,
+        "legadoReconhecido": 668
+      },
+      {
+        "ficheiro": "lib/data/categories/cinema-tv.json",
+        "totalDocumentos": 717,
+        "perguntasAprovadas": 717,
+        "producaoSessao": 50,
+        "legadoReconhecido": 667
+      },
+      {
+        "ficheiro": "lib/data/categories/cultura.json",
+        "totalDocumentos": 674,
+        "perguntasAprovadas": 674,
+        "producaoSessao": 0,
+        "legadoReconhecido": 674
+      },
+      {
+        "ficheiro": "lib/data/categories/desafio-visual.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/desporto.json",
+        "totalDocumentos": 680,
+        "perguntasAprovadas": 680,
+        "producaoSessao": 0,
+        "legadoReconhecido": 680
+      },
+      {
+        "ficheiro": "lib/data/categories/empresas-portuguesas.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/futebol-portugues.json",
+        "totalDocumentos": 660,
+        "perguntasAprovadas": 660,
+        "producaoSessao": 0,
+        "legadoReconhecido": 660
+      },
+      {
+        "ficheiro": "lib/data/categories/gastronomia.json",
+        "totalDocumentos": 668,
+        "perguntasAprovadas": 668,
+        "producaoSessao": 0,
+        "legadoReconhecido": 668
+      },
+      {
+        "ficheiro": "lib/data/categories/geografia.json",
+        "totalDocumentos": 705,
+        "perguntasAprovadas": 705,
+        "producaoSessao": 0,
+        "legadoReconhecido": 705
+      },
+      {
+        "ficheiro": "lib/data/categories/historia.json",
+        "totalDocumentos": 704,
+        "perguntasAprovadas": 704,
+        "producaoSessao": 0,
+        "legadoReconhecido": 704
+      },
+      {
+        "ficheiro": "lib/data/categories/humor.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/modo-maluco.json",
+        "totalDocumentos": 660,
+        "perguntasAprovadas": 660,
+        "producaoSessao": 0,
+        "legadoReconhecido": 660
+      },
+      {
+        "ficheiro": "lib/data/categories/mundo.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/musica.json",
+        "totalDocumentos": 674,
+        "perguntasAprovadas": 674,
+        "producaoSessao": 0,
+        "legadoReconhecido": 674
+      },
+      {
+        "ficheiro": "lib/data/categories/personalidades.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/portugal-politico.json",
+        "totalDocumentos": 650,
+        "perguntasAprovadas": 650,
+        "producaoSessao": 0,
+        "legadoReconhecido": 650
+      },
+      {
+        "ficheiro": "lib/data/categories/portugal.json",
+        "totalDocumentos": 1000,
+        "perguntasAprovadas": 1000,
+        "producaoSessao": 250,
+        "legadoReconhecido": 750
+      },
+      {
+        "ficheiro": "src/data/questions_desafio_nacional.json",
+        "totalDocumentos": 2000,
+        "perguntasAprovadas": 1983,
+        "producaoSessao": 0,
+        "legadoReconhecido": 1983
+      }
+    ]
+  },
+  "reconciliationFormula": "300 + 14043 === 14343",
+  "reconciliationExact": true
+}

@@ -1,0 +1,2343 @@
+{
+  "timestamp": "2026-08-26T03:31:46.674Z",
+  "resumo": {
+    "totalSubthemes": 233,
+    "inProduction": 59,
+    "notStarted": 174,
+    "complete": 0,
+    "totalEditorialApproved": 3782,
+    "sumCheckExact": false
+  },
+  "transicoes": [
+    {
+      "tema": "Portugal",
+      "subtema": "História de Portugal",
+      "approvedCountAnterior": 74,
+      "approvedCountAtual": 74,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Geografia de Portugal",
+      "approvedCountAnterior": 55,
+      "approvedCountAtual": 55,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Cultura Portuguesa",
+      "approvedCountAnterior": 53,
+      "approvedCountAtual": 53,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Tradições",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Monumentos",
+      "approvedCountAnterior": 73,
+      "approvedCountAtual": 73,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Cidades",
+      "approvedCountAnterior": 50,
+      "approvedCountAtual": 50,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Vilas e Aldeias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Praias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Regiões",
+      "approvedCountAnterior": 35,
+      "approvedCountAtual": 35,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Gastronomia Portuguesa",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Personalidades Portuguesas",
+      "approvedCountAnterior": 3,
+      "approvedCountAtual": 3,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Curiosidades de Portugal",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Clubes",
+      "approvedCountAnterior": 3,
+      "approvedCountAtual": 3,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Jogadores",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Jogadoras",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Estádios",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Competições",
+      "approvedCountAnterior": 638,
+      "approvedCountAtual": 638,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Liga Portuguesa",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Taça de Portugal",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Seleção Nacional",
+      "approvedCountAnterior": 3,
+      "approvedCountAtual": 3,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Futebol Feminino",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Treinadores",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "História do Futebol",
+      "approvedCountAnterior": 12,
+      "approvedCountAtual": 12,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Momentos Marcantes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Dérbis & Clássicos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Recordes",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Curiosidades do Futebol",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Futsal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Futebol de Praia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Notícias Recentes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Política Atual",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Economia Atual",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Sociedade Atual",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Cultura Hoje",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Desporto Hoje",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Inovação & Startups",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Ambiente & Clima",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Habitação & Urbanismo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Saúde & Bem-Estar",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Educação & Juventude",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Infraestruturas & Transportes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Portugal no Mundo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Tendências & Estilos de Vida",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Eventos do Ano",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Grandes Debates Nacionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Personalidades do Momento",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Constituição da República",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Presidentes da República",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Primeiros-Ministros",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Assembleia da República",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Governos Constitucionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Partidos Políticos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Eleições Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Poder Local",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Regiões Autónomas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Revolução de Abril",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Integração Europeia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Portugal Político",
+      "subtema": "Diplomacia Portuguesa",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Grandes Marcas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "História Empresarial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Setores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Produtos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 2,
+      "mudanca": 2,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Serviços",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Empresas Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Empresas Atuais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Empresas Tecnológicas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Empresas Internacionais Portuguesas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Lojas e Comércio Tradicional",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Empresas Portuguesas",
+      "subtema": "Inovação Empresarial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Pré-História & Antiguidade",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Idade Média",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Descobrimentos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 3,
+      "mudanca": 3,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "História",
+      "subtema": "Dinastias Portuguesas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Império Português",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Século XIX",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Implantação da República",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Estado Novo",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Guerra Colonial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "25 de Abril de 1974",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "História",
+      "subtema": "História Contemporânea",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Batalhas Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Tratados & Diplomacia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Figuras Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "História",
+      "subtema": "Curiosidades Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Distritos de Portugal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Concelhos e Freguesias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Ilhas e Arquipélagos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 3,
+      "mudanca": 3,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Rios e Bacias Hidrográficas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 7,
+      "mudanca": 7,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Serras e Relevo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Litoral & Praias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Clima & Meteorologia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Fronteiras e Raia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 3,
+      "mudanca": 3,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Geografia Humana",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Geografia Económica",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Paisagens Naturais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Parques e Reservas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Mapas & Cartografia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Geografia",
+      "subtema": "Curiosidades Geográficas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Cientistas Portugueses",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Invenções & Descobertas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Astronomia & Espaço",
+      "approvedCountAnterior": 4,
+      "approvedCountAtual": 4,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Natureza & Biodiversidade",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Medicina & Saúde",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Física & Química",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 7,
+      "mudanca": 7,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Tecnologia & Informática",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Inovação em Portugal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Mares & Oceanografia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Energia & Ambiente",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Telecomunicações",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Ciência e Tecnologia",
+      "subtema": "Futuro & Inteligência Artificial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Literatura Portuguesa",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 650,
+      "mudanca": 650,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Poesia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Arte & Pintura",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 7,
+      "mudanca": 7,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Escultura",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Teatro",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 2,
+      "mudanca": 1,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Arquitetura",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Património da Humanidade",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Museus de Portugal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Folclore & Etnografia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Língua Portuguesa",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cultura",
+      "subtema": "Mitos & Lendas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Pratos Tradicionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Doces Conventuais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 5,
+      "mudanca": 5,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Vinhos de Portugal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 2,
+      "mudanca": 2,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Queijos Portugueses",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Pão & Azeite",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Marisco & Peixe",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Petiscos & Enchidos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Gastronomia Regional",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Produtos DOP & IGP",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "Chefs & Restaurantes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Gastronomia",
+      "subtema": "História da Gastronomia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Figuras Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Políticos & Estadistas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Artistas & Pintores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Atletas Lendários",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Cientistas & Pensadores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Empresários & Empreendedores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Escritores & Poetas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Músicos & Compositores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Atores & Intérpretes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Criadores & Inovadores",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Personalidades Internacionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Personalidades",
+      "subtema": "Personalidades Portuguesas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Países & Capitais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Bandeiras do Mundo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "História Mundial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Geografia Mundial",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Maravilhas do Mundo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Culturas & Povos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Organizações Internacionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 641,
+      "mudanca": 641,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Línguas do Mundo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Grandes Líderes Mundiais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Cidades Globais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Monumentos Mundiais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Economia Global",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Mundo",
+      "subtema": "Curiosidades do Mundo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Futebol Internacional",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 10,
+      "mudanca": 10,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Jogos Olímpicos",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Atletismo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 643,
+      "mudanca": 643,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Ciclismo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 4,
+      "mudanca": 4,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Modalidades de Pavilhão",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Desportos Motorizados",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Ténis & Raquetes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 1,
+      "mudanca": 1,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Produção nova de lote validado e importado nesta sessão"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Desportos de Combate",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Desportos Náuticos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Desporto em Portugal",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Lendas do Desporto",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Grandes Equipas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Momentos Épicos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Recordes Mundiais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desporto",
+      "subtema": "Grandes Competições",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Humor Português",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Expressões Populares Portuguesas",
+      "approvedCountAnterior": 15,
+      "approvedCountAtual": 15,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Memes & Internet",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Comédia na TV & Cinema",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Situações do Quotidiano",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Perguntas Engraçadas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Curiosidades Hilariantes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Humor",
+      "subtema": "Humor Absurdo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Música Portuguesa",
+      "approvedCountAnterior": 13,
+      "approvedCountAtual": 13,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Fado & Guitarra Portuguesa",
+      "approvedCountAnterior": 3,
+      "approvedCountAtual": 3,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Música Popular & Pimba",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Artistas & Cantores Portugueses",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Bandas Portuguesas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Música Internacional",
+      "approvedCountAnterior": 5,
+      "approvedCountAtual": 5,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Artistas Internacionais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Bandas Internacionais Lendárias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Grandes Canções",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Álbuns Históricos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Instrumentos Musicais",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "História da Música",
+      "approvedCountAnterior": 14,
+      "approvedCountAtual": 14,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Música",
+      "subtema": "Festivais de Música",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Grandes Filmes",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Séries Marcantes",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Atores e Atrizes",
+      "approvedCountAnterior": 4,
+      "approvedCountAtual": 4,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Personagens Inesquecíveis",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Realizadores",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Cinema Português",
+      "approvedCountAnterior": 54,
+      "approvedCountAtual": 54,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Televisão Portuguesa",
+      "approvedCountAnterior": 3,
+      "approvedCountAtual": 3,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Programas de Televisão Clássicos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Streaming & Novas Séries",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 0,
+      "mudanca": -2,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Isolamento de perguntas do pool geral/wildcard sem correspondência exata a subtema"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Cultura Pop & Geek",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Cinema e Televisão",
+      "subtema": "Filmes Clássicos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Que lugar é este?",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Quem é esta pessoa?",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Bandeiras",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Brasões",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Símbolos",
+      "approvedCountAnterior": 640,
+      "approvedCountAtual": 640,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Gastronomia",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Futebol",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Estádios",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Monumentos",
+      "approvedCountAnterior": 10,
+      "approvedCountAtual": 10,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Cidades",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Praias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Vilas e Aldeias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Onde fica?",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Encontra o detalhe",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Fotografias Históricas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Imagens de Objetos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Imagens de Animais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Imagens de Natureza",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Desafio Visual",
+      "subtema": "Desafio Visual Maluco",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Perguntas Absurdas",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Perguntas Inesperadas",
+      "approvedCountAnterior": 1,
+      "approvedCountAtual": 1,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Humor & Rir",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Cultura Popular Insólita",
+      "approvedCountAnterior": 2,
+      "approvedCountAtual": 2,
+      "mudanca": 0,
+      "estadoAnterior": "IN_PRODUCTION",
+      "estadoAtual": "IN_PRODUCTION",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Regras Aleatórias",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Desafios Rápidos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Efeitos Especiais",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Modificadores de Jogo",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Perguntas com Lógica Diferente",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    },
+    {
+      "tema": "Modo Maluco",
+      "subtema": "Modo Caos",
+      "approvedCountAnterior": 0,
+      "approvedCountAtual": 0,
+      "mudanca": 0,
+      "estadoAnterior": "NOT_STARTED",
+      "estadoAtual": "NOT_STARTED",
+      "motivoDaMudanca": "Sem alteração"
+    }
+  ]
+}

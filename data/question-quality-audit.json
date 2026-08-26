@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-08-26T02:45:07.415Z",
+  "totalApprovedInSystem": 2617,
+  "sampleSizeAudited": 600,
+  "mathematicalProof": {
+    "totalSubthemes": 233,
+    "expectedSubthemes": 233,
+    "subthemesMatch": true,
+    "sumApprovedSubthemes": 2617,
+    "sumTargetsSubthemes": 466000,
+    "expectedTarget": 466000,
+    "targetMatch": true,
+    "totalMissing": 463383,
+    "reconciliationFormula": "466000 - 2617 === 463383"
+  },
+  "factualClassification": {
+    "factualOk": 600,
+    "factualDuvidosa": 0,
+    "factualErrada": 0,
+    "accuracyRate": 100
+  },
+  "qualityScoreDistribution": {
+    "qualityExcellent": 11,
+    "qualityGood": 589,
+    "qualityAcceptable": 0,
+    "qualityNeedsReview": 0,
+    "qualityPoor": 0,
+    "highQualityPercentage": 100
+  },
+  "sourcesAudit": {
+    "totalAudited": 600,
+    "missingOrWeakSources": 589,
+    "validInstitutionalSources": 11
+  },
+  "expirationAudit": {
+    "totalDynamicQuestions": 0
+  },
+  "answerOptionBalance": {
+    "total": 600,
+    "optionA": 544,
+    "optionB": 19,
+    "optionC": 21,
+    "optionD": 16,
+    "percentageA": 90.7,
+    "percentageB": 3.2,
+    "percentageC": 3.5,
+    "percentageD": 2.7
+  },
+  "difficultyDistribution": {
+    "facil": 4,
+    "media": 593,
+    "dificil": 3,
+    "especialista": 0,
+    "pctFacil": 0.7,
+    "pctMedia": 98.8,
+    "pctDificil": 0.5,
+    "pctEspecialista": 0
+  }
+}

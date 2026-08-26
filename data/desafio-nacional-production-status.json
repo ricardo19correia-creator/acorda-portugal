@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-08-26T15:00:00.000Z",
+  "systemStatus": "PRODUCTION_IN_PROGRESS",
+  "auditReportPath": "data/desafio-nacional-audit.json",
+  "reconciliationReportPath": "data/desafio-nacional-reconciliation.json",
+  "subthemePriorityPath": "data/desafio-nacional-subtheme-priority.json",
+  "counters": {
+    "physicalQuestionCount": 18810,
+    "validQuestionCount": 18793,
+    "approvedQuestionCount": 18793,
+    "editorialApprovedCount": 8244,
+    "newProductionCount": 4750,
+    "classifiedLegacyCount": 3494,
+    "unmappedPoolCount": 10549,
+    "rejectedQuestionCount": 17,
+    "needsReviewCount": 0
+  },
+  "globalTarget": 466000,
+  "completionPercentage": 1.77,
+  "subthemesStatus": {
+    "total": 233,
+    "complete": 0,
+    "inProduction": 131,
+    "notStarted": 102
+  },
+  "lastBatch": {
+    "batchId": "BATCH_HUM_MEMES_001",
+    "theme": "Humor",
+    "subtheme": "Memes & Internet",
+    "targetCategoryFile": "lib/data/categories/humor.json",
+    "count": 50,
+    "balanceABCD": "A:13, B:12, C:13, D:12",
+    "qualityScore": 100.0,
+    "status": "APPROVED_AND_INTEGRATED"
+  }
+}

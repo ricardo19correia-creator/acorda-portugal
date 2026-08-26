@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_LIG_0001",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que dois únicos clubes fora dos chamados «Três Grandes» (Benfica, Porto e Sporting) conquistaram o título de Campeão Nacional da 1.ª Divisão na história do futebol português?",
+    "opcoes": [
+      "CF «Os Belenenses» (1945/46) e Boavista FC (2000/01)",
+      "Vitória de Guimarães e SC Braga",
+      "Vitória de Setúbal e Académica",
+      "Marítimo e Leixões"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Belenenses de 1946 e o Boavista de Jaime Pacheco em 2001 foram os dois únicos clubes a quebrar a hegemonia dos três grandes no campeonato português.",
+    "fonte": "Liga Portugal / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_lig_campeoes_01"
+  },
+  {
+    "id": "FUT_LIG_0002",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado argentino do Sporting CP conquistou a Bota de Ouro europeia em 1973/74 ao fixar o recorde histórico absoluto de 46 golos marcados numa só edição da Liga Portuguesa?",
+    "opcoes": [
+      "Mário Jardel",
+      "Héctor Yazalde («Chirola»)",
+      "Fernando Peyroteo",
+      "Eusébio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Yazalde marcou 46 golos em 30 jornadas pelo Sporting CP de Mário Lino, um recorde imbatível no futebol nacional.",
+    "fonte": "Sporting CP / UEFA / Liga Portugal",
+    "factClusterId": "fc_lig_yazalde_01"
+  },
+  {
+    "id": "FUT_LIG_0003",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Em que ano foi disputada a primeira edição do Campeonato da 1.ª Liga Experimental em Portugal, conquistada pelo Futebol Clube do Porto?",
+    "opcoes": [
+      "1922/23",
+      "1940/41",
+      "1934/35",
+      "1950/51"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Liga Experimental foi criada pela FPF em 1934/35 com 8 equipas em formato de todos contra todos.",
+    "fonte": "FPF / Liga Portugal / História do Futebol em Portugal",
+    "factClusterId": "fc_lig_primeiraedicao_01"
+  },
+  {
+    "id": "FUT_LIG_0004",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador inglês conduziu o SL Benfica à primeira época da história da Liga Portuguesa sem qualquer derrota (campeão invicto com 28 vitórias e 2 empates em 30 jogos) em 1972/73?",
+    "opcoes": [
+      "Sven-Göran Eriksson",
+      "Béla Guttmann",
+      "John Mortimore",
+      "Jimmy Hagan"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Benfica de Jimmy Hagan e Eusébio estabeleceu uma das mais perfeitas campanhas do futebol mundial.",
+    "fonte": "SL Benfica / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_lig_jimmyhagan_01"
+  },
+  {
+    "id": "FUT_LIG_0005",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Quantas vezes conquistou Eusébio da Silva Ferreira o troféu da «Bola de Prata» como melhor marcador da 1.ª Divisão portuguesa pelo SL Benfica?",
+    "opcoes": [
+      "7 vezes",
+      "5 vezes",
+      "6 vezes",
+      "8 vezes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Eusébio foi o rei dos marcadores da Liga em 1964, 1965, 1966, 1967, 1968, 1970 e 1973.",
+    "fonte": "Liga Portugal / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_lig_eusebioboladeprata_01"
+  },
+  {
+    "id": "FUT_LIG_0006",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Em que época conquistou o Boavista Futebol Clube o seu histórico e único título de Campeão Nacional da Primeira Liga, festejado com os adeptos no Estádio do Bessa?",
+    "opcoes": [
+      "1998/99",
+      "2000/01",
+      "2002/03",
+      "1995/96"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Boavista de Jaime Pacheco sagrou-se campeão na penúltima jornada ao bater o Desportivo das Aves por 3-0 a 18 de maio de 2001.",
+    "fonte": "Boavista FC / Liga Portugal",
+    "factClusterId": "fc_lig_boavista2001_01"
+  },
+  {
+    "id": "FUT_LIG_0007",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado brasileiro («Super Mário») conquistou a Bola de Prata por 5 vezes na Liga Portuguesa (3 pelo FC Porto e 2 pelo Sporting CP)?",
+    "opcoes": [
+      "Jonas",
+      "Liedson",
+      "Mário Jardel",
+      "Hulk"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jardel marcou 130 golos na Liga pelo FC Porto e 53 pelo Sporting CP com uma eficácia lendária no jogo de cabeça.",
+    "fonte": "Liga Portugal / Zerozero",
+    "factClusterId": "fc_lig_jardel_01"
+  },
+  {
+    "id": "FUT_LIG_0008",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Quantos clubes disputam atualmente a 1.ª Divisão profissional do futebol português (Liga Portugal Betclic)?",
+    "opcoes": [
+      "16 clubes (30 jornadas)",
+      "20 clubes (38 jornadas)",
+      "14 clubes (26 jornadas)",
+      "18 clubes (34 jornadas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Liga Portugal é disputada por 18 equipas em sistema de duas voltas (34 jornadas de futebol).",
+    "fonte": "Liga Portugal / Regulamento das Competições",
+    "factClusterId": "fc_lig_formato_01"
+  },
+  {
+    "id": "FUT_LIG_0009",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que inovação tecnológica de arbitragem foi implementada em todos os jogos da 1.ª Liga Portuguesa na época 2017/18, sendo uma das ligas pioneiras no mundo a utilizá-la oficialmente?",
+    "opcoes": [
+      "Vídeo-Árbitro (VAR)",
+      "Tecnologia da Linha de Golo com Chip",
+      "Fora-de-jogo semiautomático 3D",
+      "Microfone aberto do árbitro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Federação Portuguesa de Futebol e a Liga Portugal integraram o protocolo do IFAB de VAR no centro de operações na Cidade do Futebol.",
+    "fonte": "FPF / Conselho de Arbitragem",
+    "factClusterId": "fc_lig_var_01"
+  },
+  {
+    "id": "FUT_LIG_0010",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que lendário ponta-de-lança do FC Porto e da Seleção Nacional é o maior goleador de sempre da história dos dragões com 352 golos e ganhou 2 Botas de Ouro europeias (1983 e 1985)?",
+    "opcoes": [
+      "Domingos Paciência",
+      "Fernando Gomes («Bibota de Ouro»)",
+      "Hernâni",
+      "Custódio Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Fernando Gomes marcou uma era dourada nas Antas com golos memoráveis em todas as competições.",
+    "fonte": "FC Porto / Museu FC Porto",
+    "factClusterId": "fc_lig_fernandogomes_01"
+  },
+  {
+    "id": "FUT_LIG_0011",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador sueco orientou o SL Benfica em duas passagens memoráveis (1982-1984 e 1989-1992), conquistando 3 Campeonatos e atingindo 2 finais europeias?",
+    "opcoes": [
+      "Tomislav Ivic",
+      "Milorad Pavic",
+      "Sven-Göran Eriksson",
+      "Jimmy Hagan"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eriksson modernizou o futebol português introduzindo a defesa em linha, pressão alta e preparação física nórdica.",
+    "fonte": "SL Benfica / Museu Benfica",
+    "factClusterId": "fc_lig_eriksson_01"
+  },
+  {
+    "id": "FUT_LIG_0012",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador conquistou o primeiro pentacampeonato (5 campeonatos consecutivos) da história do futebol português pelo FC Porto em 1998/99?",
+    "opcoes": [
+      "António Oliveira",
+      "Bobby Robson",
+      "Artur Jorge",
+      "Fernando Santos («O Engenheiro do Penta»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O FC Porto sagrou-se pentacampeão (1994/95 a 1998/99) com Robson (2), Oliveira (2) e Fernando Santos (1).",
+    "fonte": "FC Porto / Liga Portugal",
+    "factClusterId": "fc_lig_penta_01"
+  },
+  {
+    "id": "FUT_LIG_0013",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico clube de Belém fundado em 1919 conquistou a 1.ª Divisão em 1945/46 com a lendária equipa das Salésias (Vasco, Capela, Feliciano, Artur Quaresma)?",
+    "opcoes": [
+      "Clube de Futebol «Os Belenenses»",
+      "Atlético Clube de Portugal",
+      "Oriental",
+      "União de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Belenenses de Augusto Silva garantiu o título na última jornada ao vencer em Elvas (2-1) em 1946.",
+    "fonte": "CF «Os Belenenses» / Estádio do Restelo",
+    "factClusterId": "fc_lig_belenenses1946_01"
+  },
+  {
+    "id": "FUT_LIG_0014",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que lendário treinador inglês orientou o Sporting CP e o FC Porto nos anos 90, conquistando dois campeonatos pelos dragões e lançando José Mourinho como seu adjunto?",
+    "opcoes": [
+      "Malcolm Allison",
+      "Sir Bobby Robson",
+      "Keith Burkinshaw",
+      "Ronnie Allen"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bobby Robson é uma das figuras mais queridas e respeitadas da história do futebol português.",
+    "fonte": "FC Porto / Sporting CP / Premier League",
+    "factClusterId": "fc_lig_bobbyrobson_01"
+  },
+  {
+    "id": "FUT_LIG_0015",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado holandês do Sporting CP marcou 34 golos na Liga Portuguesa de 2016/17 e conquistou a Bola de Prata pelos leões?",
+    "opcoes": [
+      "Ricky van Wolfswinkel",
+      "Luc Castaignos",
+      "Bas Dost",
+      "Hasselbaink"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bas Dost notabilizou-se por marcar quase todos os seus golos ao primeiro toque dentro da grande área.",
+    "fonte": "Sporting CP / Liga Portugal",
+    "factClusterId": "fc_lig_basdost_01"
+  },
+  {
+    "id": "FUT_LIG_0016",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador português conduziu o Boavista FC ao título em 2000/01, célebre pela sua garra e pelo lema «futebol de intensidade e compromisso»?",
+    "opcoes": [
+      "Manuel José",
+      "Mário Reis",
+      "Professor Neca",
+      "Jaime Pacheco"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jaime Pacheco montou uma equipa impermeável com Ricardo, Pedro Emanuel, Litos, Frechaut, Petit, Duda, Martelinho e Silva.",
+    "fonte": "Boavista FC / Zerozero",
+    "factClusterId": "fc_lig_jaimepacheco_01"
+  },
+  {
+    "id": "FUT_LIG_0017",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Moreira de Cónegos (Guimarães) conquistou de forma sensacional a Taça da Liga em 2016/17 ao bater o SC Braga por 1-0 na final no Algarve?",
+    "opcoes": [
+      "Moreirense Futebol Clube",
+      "Vitória de Guimarães",
+      "Gil Vicente",
+      "Rio Ave"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Moreirense de Augusto Inácio eliminou Porto e Benfica antes de bater o Braga na final da Allianz Cup.",
+    "fonte": "Liga Portugal / Moreirense FC",
+    "factClusterId": "fc_lig_moreirense2017_01"
+  },
+  {
+    "id": "FUT_LIG_0018",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado brasileiro do Boavista FC («O Pistoleiro») foi o melhor marcador da Liga de 2001/02 com 29 golos após o ano do título axadrezado?",
+    "opcoes": [
+      "Duda",
+      "Silva (Elpídio Silva)",
+      "Whelliton",
+      "Cafú"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Silva foi a referência ofensiva do grande Boavista europeu que atingiu as meias-finais da Taça UEFA em 2003.",
+    "fonte": "Boavista FC / Zerozero",
+    "factClusterId": "fc_lig_silvaboavista_01"
+  },
+  {
+    "id": "FUT_LIG_0019",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que antigo internacional e capitão do SL Benfica, natural de Alcântara, marcou 379 golos oficiais de águia ao peito entre 1950 e 1961?",
+    "opcoes": [
+      "Arsénio Trindade",
+      "Julinho",
+      "José Águas",
+      "Torres"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Águas foi o capitão do Benfica no bicampeonato europeu de 1961 e 1962 e 5 vezes Bola de Prata da Liga.",
+    "fonte": "SL Benfica / Museu Cosme Damião",
+    "factClusterId": "fc_lig_joseaguas_01"
+  },
+  {
+    "id": "FUT_LIG_0020",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado e extremo do SL Benfica marcou 359 golos oficiais pelo clube e é o jogador com mais jogos na história do SL Benfica (575 jogos)?",
+    "opcoes": [
+      "Eusébio",
+      "António Simões",
+      "Chalana",
+      "Tamagnini Nené"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nené conquistou 10 Campeonatos Nacionais e 2 Botas de Prata pelo Benfica, jogando sempre sem sujar os calções.",
+    "fonte": "SL Benfica / Zerozero",
+    "factClusterId": "fc_lig_nene_01"
+  },
+  {
+    "id": "FUT_LIG_0021",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Barcelos foi campeão da 2.ª Liga por duas vezes e disputa os seus jogos no moderno Estádio Cidade de Barcelos?",
+    "opcoes": [
+      "Gil Vicente Futebol Clube",
+      "Varzim SC",
+      "FC Famalicão",
+      "SC Farense"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Gil Vicente tem sido uma das equipas mais estáveis do futebol minhoto na Liga Portugal.",
+    "fonte": "Liga Portugal / Gil Vicente FC",
+    "factClusterId": "fc_lig_gilvicente_01"
+  },
+  {
+    "id": "FUT_LIG_0022",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador português assumiu o SL Benfica a meio da época 2018/19 e operou uma recuperação histórica de 7 pontos ao FC Porto para ser campeão («Reconquista») com 103 golos?",
+    "opcoes": [
+      "Rui Vitória",
+      "Bruno Lage",
+      "Nélson Veríssimo",
+      "Toni"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bruno Lage lançou João Félix na equipa principal e igualou o recorde de 103 golos marcados do Benfica de 1963/64.",
+    "fonte": "SL Benfica / Liga Portugal",
+    "factClusterId": "fc_lig_brunolage2019_01"
+  },
+  {
+    "id": "FUT_LIG_0023",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Vila do Conde fundado em 1939 atingiu finais da Taça de Portugal e Taça da Liga e qualificações europeias na Liga Europa?",
+    "opcoes": [
+      "Leixões SC",
+      "Varzim SC",
+      "Rio Ave Futebol Clube",
+      "CD Aves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Rio Ave no Estádio dos Arcos é uma das instituições com maior tradição no futebol do litoral norte.",
+    "fonte": "Rio Ave FC / Liga Portugal",
+    "factClusterId": "fc_lig_rioave_01"
+  },
+  {
+    "id": "FUT_LIG_0024",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Portimão fundado em 1914 regressou à 1.ª Liga em 2017 e disputa os seus jogos no Estádio Municipal de Portimão?",
+    "opcoes": [
+      "SC Olhanense",
+      "Lusitano de Évora",
+      "Silves FC",
+      "Portimonense Sporting Clube"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Portimonense é um dos grandes embaixadores do futebol profissional no Barlavento Algarvio.",
+    "fonte": "Liga Portugal / Portimonense SC",
+    "factClusterId": "fc_lig_portimonense_01"
+  },
+  {
+    "id": "FUT_LIG_0025",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que extremo genial do Sporting CP e da Seleção Nacional («O Menino de Ouro»), natural do Barreiro, encantou a Europa no Euro 1984 com o seu drible curto?",
+    "opcoes": [
+      "Fernando Chalana («Chalanix»)",
+      "Paulo Futre",
+      "António Oliveira",
+      "Manuel Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Chalana foi um dos maiores talentos puros e virtuosos que alguma vez pisou os relvados da Liga Portuguesa.",
+    "fonte": "SL Benfica / FPF / L'Équipe",
+    "factClusterId": "fc_lig_chalana_01"
+  },
+  {
+    "id": "FUT_LIG_0026",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que extremo veloz formado no Sporting CP brilhou no FC Porto na conquista da Taça dos Campeões Europeus de 1987 em Viena e foi Bola de Prata europeia?",
+    "opcoes": [
+      "Madjer",
+      "Paulo Futre",
+      "Juary",
+      "Jaime Magalhães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Paulo Futre foi a grande estrela da vitória portista sobre o Bayern Munique em 1987 antes de se transferir para o Atlético de Madrid.",
+    "fonte": "FC Porto / UEFA / France Football",
+    "factClusterId": "fc_lig_futre_01"
+  },
+  {
+    "id": "FUT_LIG_0027",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Ponta Delgada (ilha de São Miguel) é o grande representante dos Açores na 1.ª Liga, disputando os jogos no Estádio de São Miguel?",
+    "opcoes": [
+      "Operário da Lagoa",
+      "Angrense",
+      "Clube Desportivo Santa Clara",
+      "Praiense"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Santa Clara representa com orgulho o arquipélago dos Açores no escalão principal do futebol português.",
+    "fonte": "Liga Portugal / CD Santa Clara",
+    "factClusterId": "fc_lig_santaclara_01"
+  },
+  {
+    "id": "FUT_LIG_0028",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Matosinhos fundado em 1907 («Os Bebés do Mar») venceu a Taça de Portugal em 1961 e foi finalista em 2002?",
+    "opcoes": [
+      "Varzim SC",
+      "Padroense FC",
+      "Infesta",
+      "Leixões Sport Club"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Leixões no Estádio do Mar é uma das instituições com maior fervor associativo do norte.",
+    "fonte": "Leixões SC / FPF",
+    "factClusterId": "fc_lig_leixoes_01"
+  },
+  {
+    "id": "FUT_LIG_0029",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado internacional português do Sporting CP e FC Porto foi o melhor marcador da Liga de 1995/96 com 25 golos e orientou o SC Braga à final da Liga Europa em 2011?",
+    "opcoes": [
+      "Domingos Paciência",
+      "Jorge Cadete",
+      "Sá Pinto",
+      "Rui Águas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Domingos foi um ponta-de-lança elegante do FC Porto e técnico de referência do futebol português.",
+    "fonte": "FC Porto / Liga Portugal",
+    "factClusterId": "fc_lig_domingospaciencia_01"
+  },
+  {
+    "id": "FUT_LIG_0030",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado do Sporting CP foi o melhor marcador da Liga de 1992/93 com 18 golos e brilhou na Escócia no Celtic de Glasgow?",
+    "opcoes": [
+      "Manuel Fernandes",
+      "Jorge Cadete",
+      "Jordão",
+      "Cascavel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Jorge Cadete marcou dezenas de golos de leão ao peito e pela Seleção Nacional.",
+    "fonte": "Sporting CP / Celtic FC",
+    "factClusterId": "fc_lig_jorgecadete_01"
+  },
+  {
+    "id": "FUT_LIG_0031",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico clube de Lisboa fundado em 1920 por Pina Manique regressou à 1.ª Liga em 2022 após 83 anos de ausência («Os Gansos»)?",
+    "opcoes": [
+      "Clube Oriental de Lisboa",
+      "Atlético CP",
+      "Casa Pia Atlético Clube",
+      "Belenenses"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Casa Pia AC tem raízes na formação integral dos alunos da Real Casa Pia de Lisboa.",
+    "fonte": "Casa Pia AC / Liga Portugal",
+    "factClusterId": "fc_lig_casapia_01"
+  },
+  {
+    "id": "FUT_LIG_0032",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube da Amadora fundado em 1932 (e refundado em 2020) venceu a Taça de Portugal em 1990 e joga no Estádio José Gomes («A Reboleira»)?",
+    "opcoes": [
+      "Damaiense",
+      "Sintrense",
+      "Real SC",
+      "Club Football Estrela da Amadora"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Estrela da Amadora dos tricolores venceu a Taça de 1990 sob o comando de João Alves.",
+    "fonte": "CF Estrela da Amadora / FPF",
+    "factClusterId": "fc_lig_estreladaamadora_01"
+  },
+  {
+    "id": "FUT_LIG_0033",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico clube de Évora fundado em 1911 disputou 14 épocas na 1.ª Divisão e joga no Campo Estrela («Verde e Brancos de Évora»)?",
+    "opcoes": [
+      "Lusitano Ginásio Clube (Lusitano de Évora)",
+      "Juventude de Évora",
+      "Sporting de Viana",
+      "Desportivo de Beja"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Lusitano de Évora foi um dos maiores clubes alentejanos da história do campeonato nacional nos anos 50 e 60.",
+    "fonte": "Lusitano GC / AF Évora",
+    "factClusterId": "fc_lig_lusitanodeevora_01"
+  },
+  {
+    "id": "FUT_LIG_0034",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado brasileiro («O Raio») marcou 22 golos na Liga pelo Sporting CP em 1987/88 após brilhar no Vitória de Guimarães?",
+    "opcoes": [
+      "Jardel",
+      "Paulinho Cascavel",
+      "Liedson",
+      "Baltazar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Cascavel foi o goleador de serviço do futebol português no final da década de 1980.",
+    "fonte": "Liga Portugal / Zerozero",
+    "factClusterId": "fc_lig_cascavel_01"
+  },
+  {
+    "id": "FUT_LIG_0035",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico defesa-central e capitão do SL Benfica nos anos 70 e 80 disputou 465 jogos pelo clube e venceu 8 Campeonatos Nacionais?",
+    "opcoes": [
+      "António Bastos Lopes",
+      "Carlos Alhinho",
+      "Humberto Coelho",
+      "Artur Correia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Humberto Coelho foi um dos centrais mais elegantes e goleadores de Portugal, selecionador no Euro 2000.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_lig_humbertocoelho_01"
+  },
+  {
+    "id": "FUT_LIG_0036",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico clube de São Miguel das Aves (Santo Tirso) fundado em 1930 venceu a Taça de Portugal em maio de 2018 no Jamor ao derrotar o Sporting CP por 2-1?",
+    "opcoes": [
+      "FC Tirsense",
+      "Moreirense",
+      "Trofense",
+      "Clube Desportivo das Aves (CD Aves)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O CD Aves de José Mota conquistou a Taça de Portugal com dois golos de Alexandre Guedes.",
+    "fonte": "FPF / CD Aves",
+    "factClusterId": "fc_lig_cdaves2018_01"
+  },
+  {
+    "id": "FUT_LIG_0037",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Santa Maria da Feira fundado em 1918 disputa os seus jogos no Estádio Marcolino de Castro («Os Fogaceiros»)?",
+    "opcoes": [
+      "Clube Desportivo Feirense",
+      "UD Oliveirense",
+      "Lusitânia de Lourosa",
+      "SC São João de Ver"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Feirense tem sido um dos clubes mais tradicionais do distrito de Aveiro na 1.ª e 2.ª Liga.",
+    "fonte": "CD Feirense / Liga Portugal",
+    "factClusterId": "fc_lig_feirense_01"
+  },
+  {
+    "id": "FUT_LIG_0038",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado luso-moçambicano do SL Benfica («O Pavilhão») marcou 212 golos oficiais de águia ao peito entre 1959 e 1971, célebre pela sua impulsão no ar?",
+    "opcoes": [
+      "José Águas",
+      "José Augusto Torres (Torres)",
+      "Eusébio",
+      "Santana"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Torres foi o ponta-de-lança da Seleção dos Magriços no Mundial de 1966 e Selecionador Nacional no Mundial de 1986.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_lig_josetorres_01"
+  },
+  {
+    "id": "FUT_LIG_0039",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que defesa central luso-brasileiro capitaneou o Boavista FC no ano do título (2001) e transferiu-se para o FC Porto onde conquistou a Taça UEFA de 2003 e Champions de 2004?",
+    "opcoes": [
+      "Litos",
+      "Jorge Costa",
+      "Pedro Emanuel",
+      "Ricardo Carvalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pedro Emanuel marcou o penálti decisivo na final da Taça Intercontinental de 2004 em Yokohama pelo FC Porto.",
+    "fonte": "FC Porto / Boavista FC",
+    "factClusterId": "fc_lig_pedroemanuel_01"
+  },
+  {
+    "id": "FUT_LIG_0040",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que clube de Tondela (distrito de Viseu) fundado em 1933 manteve-se 7 épocas consecutivas na 1.ª Liga e foi finalista da Taça de Portugal em 2022 no Jamor?",
+    "opcoes": [
+      "Académico de Viseu",
+      "Sporting de Lamego",
+      "Mortágua FC",
+      "Clube Desportivo de Tondela"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O CD Tondela no Estádio João Cardoso foi o primeiro clube da Beira Alta a disputar uma final da Taça de Portugal.",
+    "fonte": "CD Tondela / FPF",
+    "factClusterId": "fc_lig_tondela_01"
+  },
+  {
+    "id": "FUT_LIG_0041",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que médio e capitão do Sporting CP nos anos 90 e 2000, conhecido pela sua classe no passe («O Príncipe»), jogou mais de 300 partidas em Alvalade?",
+    "opcoes": [
+      "Pedro Barbosa",
+      "Oceano",
+      "Carlos Xavier",
+      "Figo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Barbosa foi o capitão leonino na conquista da dobradinha de 2001/02 e na final da Taça UEFA de 2005.",
+    "fonte": "Sporting CP / Zerozero",
+    "factClusterId": "fc_lig_pedrobarbosa_01"
+  },
+  {
+    "id": "FUT_LIG_0042",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que médio defensivo e capitão do Sporting CP e da Seleção Nacional nos anos 80 e 90 era célebre pela sua liderança e garra no meio-campo leonino?",
+    "opcoes": [
+      "Carlos Xavier",
+      "Oceano Cruz",
+      "Paulo Bento",
+      "Costinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Oceano jogou mais de 400 jogos pelo Sporting CP e mais de 50 internacionalizações por Portugal.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_lig_oceano_01"
+  },
+  {
+    "id": "FUT_LIG_0043",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que antigo treinador do Sporting CP e Selecionador Nacional comandou os leões na conquista de duas Taças de Portugal e duas Supertaças («Fórmula Paulo Bento»)?",
+    "opcoes": [
+      "László Bölöni",
+      "Augusto Inácio",
+      "Paulo Bento",
+      "Carlos Carvalhal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paulo Bento garantiu 4 apuramentos consecutivos para a Liga dos Campeões pelo Sporting CP.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_lig_paulobento_01"
+  },
+  {
+    "id": "FUT_LIG_0044",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que treinador romeno conduziu o Sporting CP ao título de campeão nacional e à Taça de Portugal em 2001/02, lançando Cristiano Ronaldo e Ricardo Quaresma na equipa principal?",
+    "opcoes": [
+      "Mircea Lucescu",
+      "Tomislav Ivic",
+      "Sven-Göran Eriksson",
+      "László Bölöni"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bölöni apostou no jovem talento de Cristiano Ronaldo na época de 2002/03 em Alvalade.",
+    "fonte": "Sporting CP / UEFA",
+    "factClusterId": "fc_lig_boloni_01"
+  },
+  {
+    "id": "FUT_LIG_0045",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que histórico clube de Alcochete acolhe desde 2002 a moderna Academia de futebol do Sporting Clube de Portugal, berço de duas Bolas de Ouro (Luís Figo e Cristiano Ronaldo)?",
+    "opcoes": [
+      "Academia Cristiano Ronaldo (Alcochete)",
+      "Centro de Estágios do Seixal",
+      "Olival",
+      "Cidade Desportiva de Braga"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Academia de Alcochete é uma das mais prestigiadas escolas de formação de talentos do futebol mundial.",
+    "fonte": "Sporting Clube de Portugal",
+    "factClusterId": "fc_lig_alcochete_01"
+  },
+  {
+    "id": "FUT_LIG_0046",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que centro de treinos e formação do SL Benfica foi inaugurado em 2006 no concelho do Seixal, premiado como a Melhor Academia do Mundo no Globe Soccer Awards?",
+    "opcoes": [
+      "Academia de Alcochete",
+      "Benfica Campus (Seixal)",
+      "Centro do Olival",
+      "Estádio da Tapadinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Benfica Campus formou craques como Bernardo Silva, Rúben Dias, João Félix, Renato Sanches e Gonçalo Ramos.",
+    "fonte": "Sport Lisboa e Benfica",
+    "factClusterId": "fc_lig_seixal_01"
+  },
+  {
+    "id": "FUT_LIG_0047",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que centro de treinos em Vila Nova de Gaia acolhe diariamente os trabalhos da equipa principal do FC Porto desde 2002?",
+    "opcoes": [
+      "Benfica Campus",
+      "Academia de Alcochete",
+      "Centro de Treinos e Formação Desportiva PortoGaia (Olival)",
+      "Cidade Desportiva de Guimarães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Olival em Gaia é o quartel-general de treinos do FC Porto.",
+    "fonte": "FC Porto / Município de Gaia",
+    "factClusterId": "fc_lig_olival_01"
+  },
+  {
+    "id": "FUT_LIG_0048",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que organismo autónomo é responsável pela organização e gestão comercial dos campeonatos profissionais da 1.ª e 2.ª Liga em Portugal desde 1995?",
+    "opcoes": [
+      "Federação Portuguesa de Futebol (FPF)",
+      "Instituto Português do Desporto e Juventude (IPDJ)",
+      "Comité Olímpico de Portugal (COP)",
+      "Liga Portuguesa de Futebol Profissional (Liga Portugal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Liga Portugal gere a Liga Betclic, Liga Portugal 2 e a Taça da Liga.",
+    "fonte": "Liga Portugal / Estatutos Oficiais",
+    "factClusterId": "fc_lig_ligaportugal_01"
+  },
+  {
+    "id": "FUT_LIG_0049",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que troféu em prata maciça com formato de taça estilizada e fita tricolor é entregue anualmente ao capitão da equipa que se sagra Campeã da Liga Portugal?",
+    "opcoes": [
+      "Troféu de Campeão da Liga Portugal",
+      "Taça de Portugal",
+      "Supertaça Cândido de Oliveira",
+      "Taça Ribeiro dos Reis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O troféu oficial da Liga Portugal é erguido no relvado na última jornada ou no jogo de consagração do campeão.",
+    "fonte": "Liga Portugal",
+    "factClusterId": "fc_lig_trofeu_01"
+  },
+  {
+    "id": "FUT_LIG_0050",
+    "tema": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "pergunta": "Que avançado internacional português do SL Benfica foi Bola de Prata da Liga em 1990/91 com 25 golos e pelo FC Porto em 1985/86?",
+    "opcoes": [
+      "Fernando Gomes",
+      "Nené",
+      "Rui Águas",
+      "Jordão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Rui Águas (filho de José Águas) foi campeão e goleador tanto no Benfica como no FC Porto.",
+    "fonte": "Liga Portugal / Zerozero",
+    "factClusterId": "fc_lig_ruiaguas_01"
+  }
+]

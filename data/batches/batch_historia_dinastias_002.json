@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_DIN_0051",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que quatro dinastias reais governaram a Monarquia Portuguesa desde a fundação da nacionalidade em 1139 até à Implantação da República em 1910?",
+    "opcoes": [
+      "Dinastia Afonsina (Borgonha), Dinastia de Avis, Dinastia Filipina e Dinastia de Bragança",
+      "Dinastia Visigótica, Dinastia Asturiana, Dinastia Joanina e Dinastia Liberal",
+      "Dinastia de Leão, Dinastia de Castela, Dinastia de Habsburgo e Dinastia de Bourbon",
+      "Dinastia Henriquina, Dinastia Manuelina, Dinastia Filipina e Dinastia Pombalina"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As 4 dinastias portuguesas foram a 1.ª Dinastia (Borgonha, 1139-1383), 2.ª Dinastia (Avis, 1385-1580), 3.ª Dinastia (Filipina, 1580-1640) e 4.ª Dinastia (Bragança, 1640-1910).",
+    "fonte": "Academia Portuguesa da História / Dicionário de História de Portugal",
+    "factClusterId": "fc_din_quatro_dinastias_01"
+  },
+  {
+    "id": "HIST_DIN_0052",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que conde da Borgonha recebeu de Afonso VI de Leão a mão da sua filha D. Teresa e o governo hereditário do Condado Portucalense em 1096, sendo o pai de D. Afonso Henriques?",
+    "opcoes": [
+      "Conde D. Raimundo de Borgonha",
+      "Conde D. Henrique de Borgonha",
+      "Conde D. Hermenegildo",
+      "Conde D. Fernão Peres de Trava"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Henrique de Borgonha fixou a capital condal em Guimarães e lançou as bases da independência de Portugal.",
+    "fonte": "Torre do Tombo / Crónicas Breves de Santa Cruz de Coimbra",
+    "factClusterId": "fc_din_condedhenrique_01"
+  },
+  {
+    "id": "HIST_DIN_0053",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Lavrador» ou «O Rei Poeta») governou de 1279 a 1325, fundou o Estudo Geral (Universidade), plantou o Pinhal de Leiria e instituiu a língua portuguesa nos documentos régios oficiais?",
+    "opcoes": [
+      "D. Afonso III",
+      "D. Afonso IV",
+      "D. Dinis",
+      "D. Pedro I"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Dinis foi um dos mais brilhantes monarcas da Idade Média europeia, casado com a Rainha Santa Isabel.",
+    "fonte": "Academia das Ciências de Lisboa / Mosteiro de São Dinis de Odivelas",
+    "factClusterId": "fc_din_dinis_01"
+  },
+  {
+    "id": "HIST_DIN_0054",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Bolenhês») conquistou definitivamente o Algarve aos mouros em 1249 (Faro, Silves, Tavira) e reuniu as primeiras Cortes com representantes do Povo (Concelhos) em Leiria em 1254?",
+    "opcoes": [
+      "D. Sancho II",
+      "D. Sancho I",
+      "D. Afonso II",
+      "D. Afonso III"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Afonso III completou a Reconquista de Portugal, assumindo o título régio de 'Rei de Portugal e do Algarve'.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / História de Portugal (A. H. de Oliveira Marques)",
+    "factClusterId": "fc_din_afonsoiii_01"
+  },
+  {
+    "id": "HIST_DIN_0055",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Justiceiro» ou «O Cruel») viveu o trágico romance com D. Inês de Castro, mandando construir os túmulos góticos monumentais no Mosteiro de Alcobaça?",
+    "opcoes": [
+      "D. Pedro I",
+      "D. Fernando I",
+      "D. Afonso IV",
+      "D. João I"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Pedro I governou com rigorosa justiça popular e mandou colocar os túmulos de ambos 'frente a frente' para que ressuscitassem juntos.",
+    "fonte": "DGPC / Mosteiro de Alcobaça / Fernão Lopes",
+    "factClusterId": "fc_din_pedroi_ines_01"
+  },
+  {
+    "id": "HIST_DIN_0056",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Com a morte de que rei da 1.ª Dinastia («O Formoso» ou «O Inconstante») em outubro de 1383 iniciou-se a grande Crise Dinástica de 1383-1385, por não deixar herdeiro varão?",
+    "opcoes": [
+      "D. Pedro I",
+      "D. Fernando I",
+      "D. Afonso IV",
+      "D. Afonso III"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Fernando casou a sua única filha D. Beatriz com o rei Juan I de Castela no Tratado de Salvaterra de Magos, gerando o receio da anexação a Castela.",
+    "fonte": "Fernão Lopes (Crónica de D. Fernando) / BNP",
+    "factClusterId": "fc_din_fernandoi_crise_01"
+  },
+  {
+    "id": "HIST_DIN_0057",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que nobre e Mestre da Ordem Militar de Avis, filho ilegítimo de D. Pedro I, foi aclamado Rei de Portugal nas Cortes de Coimbra de abril de 1385, fundando a 2.ª Dinastia (Dinastia de Avis)?",
+    "opcoes": [
+      "D. Duarte",
+      "Infante D. Henrique",
+      "D. João I («De Boa Memória»)",
+      "D. Afonso V"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. João I contou com a defesa jurídica do doutor João das Regras nas Cortes de Coimbra e a liderança militar de D. Nuno Álvares Pereira em Aljubarrota.",
+    "fonte": "Fernão Lopes (Crónica de D. João I) / Mosteiro da Batalha",
+    "factClusterId": "fc_din_joaoi_avis_01"
+  },
+  {
+    "id": "HIST_DIN_0058",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que nobre inglesa, filha do Duque de Lencastre (John of Gaunt), casou com D. João I em 1387 na Sé do Porto, tornando-se a mãe da «Ínclita Geração» de príncipes portugueses?",
+    "opcoes": [
+      "D. Catarina de Bragança",
+      "D. Leonor de Aragão",
+      "D. Maria de Aragão",
+      "D. Filipa de Lencastre"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Filipa de Lencastre introduziu os padrões de rigor moral e humanismo que moldaram D. Duarte, D. Pedro, D. Henrique, D. João, D. Isabel e D. Fernando.",
+    "fonte": "Luís Vaz de Camões (Os Lusíadas) / Mosteiro da Batalha",
+    "factClusterId": "fc_din_filipadelencastre_01"
+  },
+  {
+    "id": "HIST_DIN_0059",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 2.ª Dinastia («O Eloquente» ou «O Rei Filosofo»), autor das obras clássicas «Leal Conselheiro» e «Livro da Ensinança de Bem Cavalgar Toda Sela», governou de 1433 a 1438?",
+    "opcoes": [
+      "D. Duarte",
+      "D. Afonso V",
+      "D. João II",
+      "D. Manuel I"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Duarte foi um dos reis mais eruditos da Europa do século XV, irmão do Infante D. Henrique.",
+    "fonte": "Biblioteca Nacional de Portugal / Mosteiro da Batalha",
+    "factClusterId": "fc_din_duarte_01"
+  },
+  {
+    "id": "HIST_DIN_0060",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 2.ª Dinastia («O Príncipe Perfeito») governou de 1481 a 1495, centralizou com mão de ferro o poder régio frente à alta nobreza e assinou o Tratado de Tordesilhas em 1494?",
+    "opcoes": [
+      "D. Afonso V",
+      "D. João II",
+      "D. Manuel I",
+      "D. João I"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. João II executou o Duque de Bragança e apunhalou o Duque de Viseu por conspirarem contra a Coroa, afirmando: 'O meu senhorio não é uma herdade'.",
+    "fonte": "Garcia de Resende (Vida e Feitos d'El-Rei D. João II) / BNP",
+    "factClusterId": "fc_din_joaoii_01"
+  },
+  {
+    "id": "HIST_DIN_0061",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 2.ª Dinastia («O Venturoso») governou no apogeu das Descobertas (1495-1521), durante cujo reinado Vasco da Gama chegou à Índia e Cabral ao Brasil, dando o nome ao estilo Manuelino?",
+    "opcoes": [
+      "D. João III",
+      "D. Sebastião",
+      "D. Manuel I",
+      "D. Afonso V"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Manuel I mandou erguer o Mosteiro dos Jerónimos e a Torre de Belém com as riquezas do comércio das especiarias.",
+    "fonte": "Damião de Góis (Crónica de D. Manuel) / DGPC",
+    "factClusterId": "fc_din_manueli_01"
+  },
+  {
+    "id": "HIST_DIN_0062",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 2.ª Dinastia («O Piedoso») governou de 1521 a 1557, transferiu definitivamente a Universidade para Coimbra (1537), introduziu a Inquisição em Portugal (1536) e chamou os Jesuítas?",
+    "opcoes": [
+      "D. Manuel I",
+      "D. Sebastião",
+      "Cardeal D. Henrique",
+      "D. João III"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. João III colonizou o Brasil com as capitanias hereditárias e fundou o Colégio das Artes em Coimbra.",
+    "fonte": "Universidade de Coimbra / Torre do Tombo",
+    "factClusterId": "fc_din_joaoiii_01"
+  },
+  {
+    "id": "HIST_DIN_0063",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que jovem rei da 2.ª Dinastia («O Desejado» ou «O Encoberto») desapareceu com grande parte da nobreza portuguesa aos 24 anos na Batalha de Alcácer Quibir a 4 de agosto de 1578?",
+    "opcoes": [
+      "D. Sebastião",
+      "D. Duarte",
+      "Cardeal D. Henrique",
+      "D. António Prior do Crato"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O desaparecimento de D. Sebastião sem descendentes gerou a crise de sucessão e o mito messiânico do Sebastianismo.",
+    "fonte": "Academia Portuguesa da História / BNP",
+    "factClusterId": "fc_din_sebastiao_01"
+  },
+  {
+    "id": "HIST_DIN_0064",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que cardeal-arcebispo e tio-avô de D. Sebastião assumiu a Coroa como o último rei oficial da Dinastia de Avis em 1578 («O Cardeal-Rei»), falecendo em 1580 sem conseguir autorização papal para casar e gerar sucessor?",
+    "opcoes": [
+      "Cardeal D. Afonso",
+      "Cardeal D. Henrique («O Casto»)",
+      "D. António Prior do Crato",
+      "D. Teodósio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A morte do Cardeal D. Henrique abriu as portas à reivindicação do trono por Filipe II de Espanha nas Cortes de Tomar de 1581.",
+    "fonte": "Dicionário de História da Igreja em Portugal / BNP",
+    "factClusterId": "fc_din_cardealhenrique_01"
+  },
+  {
+    "id": "HIST_DIN_0065",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que neto de D. Manuel I (filho do Infante D. Luís) foi aclamado rei em Santarém pelo povo em 1580 («O Prior do Crato»), combatendo a ocupação filipina até à sua derrota na Ilha Terceira nos Açores?",
+    "opcoes": [
+      "D. Duarte de Bragança",
+      "D. João de Bragança",
+      "D. António, Prior do Crato",
+      "D. Cristóvão de Moura"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. António resistiu heroicamente com o apoio dos terceirenses na Batalha da Salga em 1581 antes de partir para o exílio em França e Inglaterra.",
+    "fonte": "Governo Regional dos Açores / Academia de Marinha",
+    "factClusterId": "fc_din_priordocrato_01"
+  },
+  {
+    "id": "HIST_DIN_0066",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Em que cidade portuguesa reuniram-se as Cortes de 1581 onde Filipe II de Espanha jurou manter a autonomia institucional, a língua, as leis, o comércio ultramarino e a moeda do Reino de Portugal sob o regime de União Dinástica?",
+    "opcoes": [
+      "Cortes de Coimbra",
+      "Cortes de Lisboa",
+      "Cortes de Évora",
+      "Cortes de Tomar (no Convento de Cristo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Filipe I de Portugal comprometeu-se a respeitar as liberdades portuguesas e a nomear apenas vice-reis e funcionários portugueses.",
+    "fonte": "Convento de Cristo / DGPC / Torre do Tombo",
+    "factClusterId": "fc_din_cortesdetomar1581_01"
+  },
+  {
+    "id": "HIST_DIN_0067",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que três monarcas da Casa de Habsburgo governaram Portugal durante a 3.ª Dinastia (Dinastia Filipina / União Ibérica) entre 1580 e 1640?",
+    "opcoes": [
+      "Filipe I (1580-1598), Filipe II (1598-1621) e Filipe III (1621-1640)",
+      "Carlos I, Filipe I e Fernando I",
+      "Filipe II, Filipe III e Filipe IV",
+      "Filipe I, D. Sebastião e D. João IV"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os reis espanhóis Filipe II, III e IV de Castela governaram em Portugal respetivamente como Filipe I, II e III.",
+    "fonte": "Academia Portuguesa da História",
+    "factClusterId": "fc_din_reisfilipinos_01"
+  },
+  {
+    "id": "HIST_DIN_0068",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que Duque de Bragança foi aclamado Rei de Portugal a 1 de dezembro de 1640 pelos Quarenta Conjurados no Terreiro do Paço, restaurando a independência e fundando a 4.ª Dinastia (Dinastia de Bragança)?",
+    "opcoes": [
+      "D. Afonso VI",
+      "D. João IV («O Restaurador»)",
+      "D. Pedro II",
+      "D. Teodósio II"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. João IV era também um notável músico e compositor renascentista, coroando Nossa Senhora da Conceição como Rainha de Portugal em 1646.",
+    "fonte": "Palácio dos Duques de Bragança / Torre do Tombo",
+    "factClusterId": "fc_din_joaoiv_restauracao_01"
+  },
+  {
+    "id": "HIST_DIN_0069",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que nobre espanhola, esposa de D. João IV e regente do reino após a sua morte, proferiu a lendária frase aos nobres conjurados: «Mais vale ser rainha por um dia do que duquesa toda a vida»?",
+    "opcoes": [
+      "D. Mariana de Áustria",
+      "D. Maria Sofia de Neuburgo",
+      "D. Luísa de Gusmão (Duquesa de Medina Sidónia)",
+      "D. Carlota Joaquina"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Luísa de Gusmão organizou os primeiros exércitos da Restauração e garantiu a vitória de Linhas de Elvas em 1659.",
+    "fonte": "Dicionário Histórico de Portugal / BNP",
+    "factClusterId": "fc_din_luisadegusmao_01"
+  },
+  {
+    "id": "HIST_DIN_0070",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que princesa portuguesa da Casa de Bragança, filha de D. João IV, casou em 1662 com o rei Carlos II de Inglaterra, levando no dote Tangêr e Bombaim e introduzindo o hábito de beber chá na corte britânica?",
+    "opcoes": [
+      "D. Maria Bárbara de Bragança",
+      "D. Isabel de Portugal",
+      "D. Maria Teresa",
+      "D. Catarina de Bragança (Queen Catherine of Braganza)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Catarina de Bragança deu nome ao bairro de Queens em Nova Iorque e celebrizou o 'Five o'clock tea' na corte de Londres.",
+    "fonte": "Royal Collection Trust / Museu Nacional dos Coches",
+    "factClusterId": "fc_din_catarinadebraganca_01"
+  },
+  {
+    "id": "HIST_DIN_0071",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Vitorioso») governou formalmente de 1656 a 1683, durante cujo reinado foram alcançadas as vitórias decisivas da Guerra da Restauração sob a liderança militar do Conde de Castelo Melhor?",
+    "opcoes": [
+      "D. Afonso VI",
+      "D. Pedro II",
+      "D. João IV",
+      "D. João V"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "D. Afonso VI sofria de limitações físicas e foi afastado do poder em 1667 pelo seu irmão D. Pedro II e pela sua esposa rainha D. Maria Francisca de Sabóia.",
+    "fonte": "Academia Portuguesa da História / BNP",
+    "factClusterId": "fc_din_afonsovi_01"
+  },
+  {
+    "id": "HIST_DIN_0072",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Magnânimo» ou «O Rei-Sol Português») governou de 1706 a 1750, construindo com o ouro e diamantes do Brasil o monumental Palácio-Convento de Mafra e o Aqueduto das Águas Livres?",
+    "opcoes": [
+      "D. José I",
+      "D. João V",
+      "D. Pedro II",
+      "D. João VI"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. João V foi o expoente do absolutismo barroco em Portugal, obtendo de Roma o título de 'Sua Majestade Fidelíssima' e o Patriarcado de Lisboa.",
+    "fonte": "Palácio Nacional de Mafra / DGPC",
+    "factClusterId": "fc_din_joaov_01"
+  },
+  {
+    "id": "HIST_DIN_0073",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Reformador») reinava aquando do Terramoto de Lisboa de 1755 e delegou plenos poderes no seu Secretário de Estado Sebastião José de Carvalho e Melo (Marquês de Pombal)?",
+    "opcoes": [
+      "D. João V",
+      "D. Pedro III",
+      "D. José I",
+      "D. João VI"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A estátua equestre de bronze de D. José I esculpida por Machado de Castro domina o centro da reconstruída Praça do Comércio em Lisboa.",
+    "fonte": "Museu de Lisboa / DGPC",
+    "factClusterId": "fc_din_josei_01"
+  },
+  {
+    "id": "HIST_DIN_0074",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rainha da 4.ª Dinastia («A Piedosa» ou «A Louca») foi a primeira mulher a reinar em Portugal por direito próprio (1777-1816), promovendo a «Viradeira» e fundando a Academia Real das Ciências de Lisboa e a Basílica da Estrela?",
+    "opcoes": [
+      "D. Maria II",
+      "D. Carlota Joaquina",
+      "D. Amélia de Orleães",
+      "D. Maria I"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Maria I demitiu e desterrou o Marquês de Pombal no início do seu reinado na chamada época da Viradeira.",
+    "fonte": "Basílica da Estrela / BNP / Academia das Ciências",
+    "factClusterId": "fc_din_mariai_01"
+  },
+  {
+    "id": "HIST_DIN_0075",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Clemente») transferiu a Corte Portuguesa para o Rio de Janeiro em 1807 fugindo às invasões napoleónicas e elevou o Brasil a Reino Unido com Portugal e Algarves em 1815?",
+    "opcoes": [
+      "D. João VI",
+      "D. Pedro IV",
+      "D. Miguel I",
+      "D. José I"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. João VI governou no Rio de Janeiro até 1821, quando regressou a Lisboa forçado pela Revolução Liberal do Porto.",
+    "fonte": "Palácio Nacional da Ajuda / Museu Histórico Nacional (Brasil)",
+    "factClusterId": "fc_din_joaovi_01"
+  },
+  {
+    "id": "HIST_DIN_0076",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que monarca português proclamou a Independência do Brasil em 1822 («Grito do Ipiranga») tornando-se D. Pedro I Imperador do Brasil e D. Pedro IV Rei de Portugal («O Rei Soldado»)?",
+    "opcoes": [
+      "D. Miguel I",
+      "D. Pedro IV (D. Pedro I do Brasil)",
+      "D. João VI",
+      "D. Pedro V"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Pedro IV outorgou a Carta Constitucional de 1826 e liderou as forças liberais no Cerco do Porto. O seu coração repousa na Igreja da Lapa no Porto.",
+    "fonte": "Igreja da Lapa (Porto) / Museu Paulista",
+    "factClusterId": "fc_din_pedroiv_01"
+  },
+  {
+    "id": "HIST_DIN_0077",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que infante da Casa de Bragança liderou a causa absolutista durante as Guerras Liberais (1828-1834) como D. Miguel I («O Absoluto» ou «O Tradicionalista»), derrotado pela Convenção de Évora-Monte?",
+    "opcoes": [
+      "D. Pedro IV",
+      "D. Carlos de Espanha",
+      "D. Miguel I",
+      "D. Augusto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Após a capitulação de Évora-Monte em maio de 1834, D. Miguel partiu para o exílio perpétuo na Áustria e Alemanha.",
+    "fonte": "Academia Portuguesa da História / Casa de Bragança",
+    "factClusterId": "fc_din_migueli_01"
+  },
+  {
+    "id": "HIST_DIN_0078",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rainha da 4.ª Dinastia («A Educadora» ou «A Boa Mãe»), filha de D. Pedro IV nascida no Rio de Janeiro, reinou de 1834 até à sua morte em 1853, casada com D. Fernando II de Saxe-Coburgo-Gota?",
+    "opcoes": [
+      "D. Maria I",
+      "D. Carlota Joaquina",
+      "D. Amélia",
+      "D. Maria II (D. Maria da Glória)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Maria II consolidou o regime liberal e a monarquia constitucional em Portugal, mãe de D. Pedro V e D. Luís I.",
+    "fonte": "Palácio Nacional das Necessidades / Torre do Tombo",
+    "factClusterId": "fc_din_mariaii_01"
+  },
+  {
+    "id": "HIST_DIN_0079",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei-consorte de Portugal («O Rei Artista»), segundo marido de D. Maria II, idealizou e mandou construir o romântico Palácio Nacional da Pena em Sintra e o Parque da Pena?",
+    "opcoes": [
+      "D. Fernando II (Príncipe de Saxe-Coburgo-Gota)",
+      "D. Pedro III",
+      "D. Luís I",
+      "Augusto de Beauharnais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Fernando II foi um extraordinário mecenas das artes, preservando conventos e castelos medievais de Portugal.",
+    "fonte": "Parques de Sintra - Monte da Lua / UNESCO",
+    "factClusterId": "fc_din_fernandoii_pena_01"
+  },
+  {
+    "id": "HIST_DIN_0080",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que jovem rei da 4.ª Dinastia («O Esperançoso»), admirado pela sua imensa cultura e altruísmo ao visitar pessoalmente os doentes nos hospitais nas epidemias de cólera e febre amarela, faleceu aos 24 anos em 1861?",
+    "opcoes": [
+      "D. Luís I",
+      "D. Pedro V",
+      "D. Carlos I",
+      "D. Manuel II"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Pedro V fundou o Curso Superior de Letras em Lisboa e inaugurou a primeira linha de caminhos-de-ferro e telégrafo elétrico em Portugal.",
+    "fonte": "D. Pedro V (Diário e Correspondência) / Academia das Ciências",
+    "factClusterId": "fc_din_pedrov_01"
+  },
+  {
+    "id": "HIST_DIN_0081",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Popular» ou «O Bom»), irmão de D. Pedro V, reinou de 1861 a 1889, traduziu peças de Shakespeare para português e apoiou as pesquisas oceanográficas?",
+    "opcoes": [
+      "D. Carlos I",
+      "D. Pedro V",
+      "D. Luís I",
+      "D. Fernando II"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Luís I promulgou a abolição da pena de morte para crimes civis em 1867, sendo Portugal um dos pioneiros mundiais nos direitos humanos.",
+    "fonte": "Palácio Nacional da Ajuda / Diário do Governo de 1867",
+    "factClusterId": "fc_din_luisi_01"
+  },
+  {
+    "id": "HIST_DIN_0082",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 4.ª Dinastia («O Martirizado» ou «O Oceanógrafo»), talentoso pintor e cientista marinho com campanhas oceanográficas no iate Amélia, foi assassinado com o Príncipe Real D. Luís Filipe no Regicídio de 1908?",
+    "opcoes": [
+      "D. Manuel II",
+      "D. Luís I",
+      "D. Pedro V",
+      "D. Carlos I"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Carlos I fundou o Aquário Vasco da Gama e publicou estudos oceanográficos pioneiros premiados internacionalmente.",
+    "fonte": "Aquário Vasco da Gama / Marinha Portuguesa",
+    "factClusterId": "fc_din_carlosi_01"
+  },
+  {
+    "id": "HIST_DIN_0083",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que último Rei de Portugal («O Patriota» ou «O Desventurado») ascendeu ao trono com apenas 18 anos após o Regicídio e partiu para o exílio em Inglaterra com a Revolução de 5 de Outubro de 1910?",
+    "opcoes": [
+      "D. Manuel II",
+      "D. Carlos I",
+      "D. Luís Filipe",
+      "D. Duarte Nuno"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "No exílio em Twickenham, D. Manuel II reuniu uma das maiores coleções bibliográficas de livros portugueses antigos dos séculos XV e XVI, legada ao Estado português.",
+    "fonte": "Fundação da Casa de Bragança / Paço Ducal de Vila Viçosa",
+    "factClusterId": "fc_din_manuelii_01"
+  },
+  {
+    "id": "HIST_DIN_0084",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rainha de Portugal, esposa de D. Carlos I («A Rainha Senhora Dona Amélia»), fundou o Instituto de Socorros a Náufragos (ISN) e o Museu Nacional dos Coches em Lisboa em 1905?",
+    "opcoes": [
+      "Rainha D. Maria Pia de Sabóia",
+      "Rainha D. Amélia de Orleães",
+      "Rainha D. Estefânia",
+      "Rainha D. Carlota Joaquina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Amélia foi a grande criadora da Assistência Nacional aos Tuberculosos (ANT) e dedicou a sua vida a causas humanitárias em Portugal.",
+    "fonte": "Museu Nacional dos Coches / ISN",
+    "factClusterId": "fc_din_rainhadamelia_01"
+  },
+  {
+    "id": "HIST_DIN_0085",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rainha de Portugal, consorte de D. Luís I («O Anjo da Caridade»), era filha do rei Vítor Emanuel II de Itália e notabilizou-se pela sua imensa generosidade aos mais desfavorecidos?",
+    "opcoes": [
+      "Rainha D. Amélia",
+      "Rainha D. Estefânia",
+      "Rainha D. Maria Pia de Sabóia",
+      "Rainha D. Carlota Joaquina"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Maria Pia de Sabóia deu nome à histórica Ponte Maria Pia no Porto projetada por Gustave Eiffel em 1877.",
+    "fonte": "Palácio Nacional da Ajuda / DGPC",
+    "factClusterId": "fc_din_mariapia_01"
+  },
+  {
+    "id": "HIST_DIN_0086",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rainha consorte de D. Pedro V, princesa alemã de Hohenzollern-Sigmaringen falecida tragicamente com apenas 22 anos («O Anjo da Bondade»), inspirou a fundação do Hospital de Dona Estefânia em Lisboa?",
+    "opcoes": [
+      "Rainha D. Maria Leopoldina",
+      "Rainha D. Maria Pia",
+      "Rainha D. Maria Francisca",
+      "Rainha D. Estefânia de Hohenzollern-Sigmaringen"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Estefânia pediu em testamento a criação de um hospital pediátrico para crianças pobres que ainda hoje é o principal hospital infantil do país.",
+    "fonte": "Centro Hospitalar Universitário de Lisboa Central / Hospital D. Estefânia",
+    "factClusterId": "fc_din_rainhaestefania_01"
+  },
+  {
+    "id": "HIST_DIN_0087",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que célebre infante da 2.ª Dinastia («O Infante Santo») foi deixado como refém em Fez em 1437 após o desastre do cerco de Tânger, recusando que o reino entregasse Ceuta em troca da sua liberdade?",
+    "opcoes": [
+      "Infante D. Fernando («O Infante Santo»)",
+      "Infante D. Henrique",
+      "Infante D. Pedro",
+      "Infante D. João"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Fernando morreu no cativeiro em Fez em 1443 e o seu corpo foi sepultado com honras sagradas nas Capelas Imperfeitas da Batalha.",
+    "fonte": "Mosteiro da Batalha / Frei João Álvares (Crónica do Infante Santo)",
+    "factClusterId": "fc_din_infantesanto_01"
+  },
+  {
+    "id": "HIST_DIN_0088",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que sábio infante da 2.ª Dinastia («O Infante das Sete Partidas»), regente do reino durante a menoridade de D. Afonso V, viajou pelas principais cortes da Europa e faleceu na Batalha de Alfarrobeira em 1449?",
+    "opcoes": [
+      "Infante D. Henrique",
+      "Infante D. Pedro (Duque de Coimbra)",
+      "Infante D. Fernando",
+      "Duque de Bragança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Infante D. Pedro trouxe de Veneza o mapa de Marco Polo e fomentou a administração pública com a Lei das Sesmarias.",
+    "fonte": "Academia Portuguesa da História / Mosteiro da Batalha",
+    "factClusterId": "fc_din_infantedpedro_01"
+  },
+  {
+    "id": "HIST_DIN_0089",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que princesa da 2.ª Dinastia, filha de D. Afonso V («Santa Joana Princesa»), recusou casamentos com reis europeus para ingressar no Convento de Jesus em Aveiro, padroeira da cidade?",
+    "opcoes": [
+      "Santa Isabel de Aragão",
+      "D. Maria de Portugal",
+      "Santa Joana Princesa (Princesa Santa Joana)",
+      "D. Beatriz de Meneses"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O túmulo de mármore em embutidos multicoloridos de Santa Joana no Museu de Aveiro é uma obra-prima do barroco português.",
+    "fonte": "Museu de Aveiro / Santa Joana Princesa / Diocese de Aveiro",
+    "factClusterId": "fc_din_santajoanaprincesa_01"
+  },
+  {
+    "id": "HIST_DIN_0090",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que nobre português, filho ilegítimo de D. João I e de Inês Pires, foi agraciado em 1442 com o título de 1.º Duque de Bragança por D. Afonso V, fundando a poderosíssima Casa de Bragança?",
+    "opcoes": [
+      "D. Fernando I de Bragança",
+      "D. Álvaro de Bragança",
+      "D. Jaime de Bragança",
+      "D. Afonso I, Duque de Bragança (Conde de Barcelos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Casa de Bragança tornou-se a mais rica e poderosa casa senhorial de Portugal, com sede no Paço dos Duques de Guimarães e depois em Vila Viçosa.",
+    "fonte": "Fundação da Casa de Bragança / Torre do Tombo",
+    "factClusterId": "fc_din_fundacaobraganca_01"
+  },
+  {
+    "id": "HIST_DIN_0091",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Povoador»), filho de D. Afonso Henriques, fundou a cidade da Guarda em 1199 e doou vastos territórios às Ordens Militares para repovoar o centro e sul?",
+    "opcoes": [
+      "D. Sancho I",
+      "D. Afonso II",
+      "D. Sancho II",
+      "D. Afonso III"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Sancho I incentivou a agricultura e o povoamento com imigrantes francos e galegos, criando dezenas de concelhos com cartas de foral.",
+    "fonte": "Município da Guarda / Academia Portuguesa da História",
+    "factClusterId": "fc_din_sanchoi_guarda_01"
+  },
+  {
+    "id": "HIST_DIN_0092",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Gordo») reuniu as primeiras Cortes conhecidas da história portuguesa em Coimbra em 1211 e lançou as «Inquirições Gerais» para recuperar terras e direitos régios usurpados pela Igreja e nobres?",
+    "opcoes": [
+      "D. Sancho I",
+      "D. Afonso II",
+      "D. Afonso III",
+      "D. Pedro I"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Afonso II foi o primeiro rei legislador centralizador de Portugal, sepultado em Alcobaça.",
+    "fonte": "Torre do Tombo / História do Direito Português",
+    "factClusterId": "fc_din_afonsoii_leis_01"
+  },
+  {
+    "id": "HIST_DIN_0093",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Capelo») foi deposto pela bula papal «Grandi non immerito» do Papa Inocêncio IV no Concílio de Lião em 1245 por incapacidade governativa, sendo substituído pelo seu irmão D. Afonso III?",
+    "opcoes": [
+      "D. Sancho I",
+      "D. Fernando I",
+      "D. Sancho II",
+      "D. Afonso IV"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "D. Sancho II retirou-se para o exílio em Toledo onde faleceu em 1248.",
+    "fonte": "Academia Portuguesa da História / Dicionário de História Medieval",
+    "factClusterId": "fc_din_sanchoii_deposicao_01"
+  },
+  {
+    "id": "HIST_DIN_0094",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que rei da 1.ª Dinastia («O Bravo») governou de 1325 a 1357, enfrentou a grande Peste Negra de 1348 e ordenou a execução de D. Inês de Castro na Quinta das Lágrimas em Coimbra em 1355?",
+    "opcoes": [
+      "D. Dinis",
+      "D. Pedro I",
+      "D. Afonso III",
+      "D. Afonso IV"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Afonso IV combateu heroicamente na Batalha do Salado em 1340 ao lado do rei de Castela contra os mouros marinidas.",
+    "fonte": "Sé de Lisboa / Academia Portuguesa da História",
+    "factClusterId": "fc_din_afonsoiv_01"
+  },
+  {
+    "id": "HIST_DIN_0095",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que princesa portuguesa, filha de D. Afonso Henriques («D. Mafalda» ou «D. Teresa»), foi Condessa da Flandres e Duquesa da Borgonha no final do século XII?",
+    "opcoes": [
+      "D. Teresa de Portugal (Condessa da Flandres)",
+      "D. Urraca",
+      "D. Sancha",
+      "D. Branca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "D. Teresa de Portugal governou a rica região da Flandres com enorme prestígio e promoveu o comércio têxtil marítimo entre Bruges e Lisboa.",
+    "fonte": "Academia Portuguesa da História / Arquivos Nacionais da Flandres",
+    "factClusterId": "fc_din_teresaflandres_01"
+  },
+  {
+    "id": "HIST_DIN_0096",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que célebre infanta de Portugal, filha de D. João I e D. Filipa de Lencastre, casou em 1430 com o Duque Filipe o Bom da Borgonha, tornando-se Duquesa da Borgonha e grande mecenas dos primitivos flamengos como Jan van Eyck?",
+    "opcoes": [
+      "D. Filipa",
+      "D. Isabel de Portugal (Duquesa da Borgonha)",
+      "D. Catarina",
+      "D. Maria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Isabel de Portugal foi uma das mais poderosas diplomatas e governantes da Europa do século XV.",
+    "fonte": "Museu Real de Belas Artes da Bélgica / BNP",
+    "factClusterId": "fc_din_isabelborgonha_01"
+  },
+  {
+    "id": "HIST_DIN_0097",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que imperatriz do Sacro Império Romano-Germânico e Rainha de Espanha era filha de D. Manuel I de Portugal, casada com o Imperador Carlos V e mãe de Filipe II?",
+    "opcoes": [
+      "D. Maria Manuela",
+      "D. Beatriz",
+      "D. Isabel de Portugal (Imperatriz Isabel)",
+      "D. Leonor"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O célebre retrato da Imperatriz D. Isabel de Portugal pintado por Ticiano é uma das obras-primas do Museu do Prado em Madrid.",
+    "fonte": "Museo del Prado / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_din_isabelimperatriz_01"
+  },
+  {
+    "id": "HIST_DIN_0098",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que documento assinado a 29 de outubro de 1667 formalizou a renúncia e deposição de D. Afonso VI e entregou a Regência do Reino ao seu irmão D. Pedro (futuro D. Pedro II)?",
+    "opcoes": [
+      "Tratado de Madrid",
+      "Pacto de Cintra",
+      "Tratado de Salvaterra",
+      "Decreto de Renúncia de D. Afonso VI (nas Cortes de Lisboa de 1668)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "D. Pedro II governou como Regente até à morte do seu irmão em 1683 no Palácio de Sintra, assumindo então o título de rei.",
+    "fonte": "Torre do Tombo / Palácio Nacional de Sintra",
+    "factClusterId": "fc_din_pedroii_regente_01"
+  },
+  {
+    "id": "HIST_DIN_0099",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que tratado de paz assinado a 13 de fevereiro de 1668 com a mediação de Inglaterra pôs fim oficial a 28 anos de Guerra da Restauração, com a Espanha a reconhecer definitivamente a independência de Portugal e a soberania da Casa de Bragança?",
+    "opcoes": [
+      "Tratado de Lisboa de 1668",
+      "Tratado dos Pirenéus",
+      "Tratado de Madrid",
+      "Tratado de Utrecht"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Lisboa de 1668 consagrou perante toda a Europa o triunfo da independência portuguesa e das armas lusas.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_din_tratadolisboa1668_01"
+  },
+  {
+    "id": "HIST_DIN_0100",
+    "tema": "História",
+    "subtema": "Dinastias Portuguesas",
+    "pergunta": "Que palácio barroco monumental situado em Lisboa, iniciado por D. João V em 1726 e enriquecido por D. José I e D. Maria I, é a residência oficial do Presidente da República Portuguesa desde 1912?",
+    "opcoes": [
+      "Palácio das Necessidades",
+      "Palácio da Ajuda",
+      "Palácio Nacional de Belém",
+      "Palácio de Queluz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Palácio de Belém foi adquirido por D. João V e sobreviveu incólume ao Terramoto de 1755, servindo de morada régia e presidencial.",
+    "fonte": "Presidência da República Portuguesa / Museu da Presidência",
+    "factClusterId": "fc_din_palaciodebelem_01"
+  }
+]

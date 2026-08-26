@@ -6,6 +6,7 @@ import { db } from '@/lib/firebase'
 import { PORTUGAL_DISTRICTS } from '@/data/districts'
 import { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } from '@/data/constants'
 import { REAL_AVATARS } from '@/lib/avatars'
+import { ECONOMY_CONFIG } from '@/src/data/economy'
 
 export interface DistrictOnboardingModalProps {
   user: any
@@ -42,8 +43,8 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           districtLocked: true,
           level: 1,
           xp: 0,
-          coins: 100,
-          euros: 100,
+          coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+          euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
           title: 'Noviço da Nação',
           equippedTitle: 'Noviço da Nação',
           equippedFrame: 'default',

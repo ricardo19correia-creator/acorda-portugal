@@ -1,0 +1,902 @@
+[
+  {
+    "id": "TV_NOV_0001",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Qual foi a primeira telenovela portuguesa da história da televisão, estreada na RTP1 a 10 de maio de 1982 com 100 episódios («Vila Faia»), escrita por Francisco Moita Flores, Nicolau Breyner e Rosa Lobato de Faria, protagonizada por Ruy de Carvalho como o patriarca Gonçalo Silveira?",
+    "opcoes": [
+      "Vila Faia (RTP1, 1982)",
+      "Origens (1983)",
+      "Chuva na Areia (1985)",
+      "Palavras Cruzadas (1987)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vila Faia paralisava o país com a famosa frase 'Eles comem tudo e não deixam nada!' e a canção de genérico cantada por Tonicha.",
+    "fonte": "RTP Arquivos / Museu da Presidência / Dicionário do Audiovisual",
+    "factClusterId": "fc_tv_nov_vilafaia_1982_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0002",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que produção da TVI escrita por António Barreira («Meu Amor»), protagonizada por Alexandra Lencastre, Margarida Marinho e Rita Pereira, fez história na televisão portuguesa em 2010 ao vencer o prestigiado «International Emmy Award» para Melhor Telenovela em Nova Iorque (o primeiro Emmy da história de Portugal)?",
+    "opcoes": [
+      "Laços de Sangue",
+      "Meu Amor (TVI, vencedora do Emmy 2010)",
+      "Ouro Verde",
+      "Olhos de Água"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A vitória de 'Meu Amor' consagrou internacionalmente a capacidade de produção de ficção da Plural Entertainment e da TVI.",
+    "fonte": "International Academy of Television Arts & Sciences (Emmy Awards) / TVI",
+    "factClusterId": "fc_tv_nov_meuamor_emmy2010_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0003",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que marcante telenovela da SIC em coprodução com a TV Globo («Laços de Sangue»), escrita por Pedro Lopes e protagonizada por Diana Chaves, Diogo Morgado e Joana Santos (no papel da maquiavélica vilã Diana Silva), venceu o «International Emmy Award» em 2011?",
+    "opcoes": [
+      "Dancin' Days",
+      "Amor Maior",
+      "Laços de Sangue (SIC / Emmy Internacional 2011)",
+      "Mar Salgado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vilã Diana Silva tornou-se uma das mais temíveis e recordadas personagens da história da ficção televisiva em Portugal.",
+    "fonte": "Emmy Awards / SP Televisão / SIC",
+    "factClusterId": "fc_tv_nov_lacosdesangue_emmy2011_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0004",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI escrita por Maria João Costa («Ouro Verde»), rodada entre Portugal e o Brasil com Diogo Morgado (como Jorge Monforte / Zé Maria Magalhães) e Joana de Verona, conquistou em 2018 o terceiro «International Emmy Award» de Melhor Telenovela para Portugal?",
+    "opcoes": [
+      "A Herdeira",
+      "Valor da Vida",
+      "A Única Mulher",
+      "Ouro Verde (TVI, vencedora do Emmy 2018)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A trama de vingança e justiça de 'Ouro Verde' foi exibida em mais de 60 países em todo o mundo.",
+    "fonte": "International Emmy Awards / Plural Entertainment",
+    "factClusterId": "fc_tv_nov_ouroverde_emmy2018_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0005",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que emblemática telenovela da TVI estreada em 2001 («Olhos de Água»), escrita por Tozé Martinho e protagonizada por Sofia Alves no duplo papel das gémeas separadas à nascença (Leonor e Luísa Serra), marcou a viragem histórica da liderança das audiências televisivas para a ficção nacional?",
+    "opcoes": [
+      "Olhos de Água (2001)",
+      "Anjo Selvagem",
+      "Dei-te Quase Tudo",
+      "Jardins Proibidos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Olhos de Água alcançou quotas de audiência superiores a 60% e celebrizou a música de genérico cantada por Lara Li.",
+    "fonte": "TVI / CAEM / Marktest",
+    "factClusterId": "fc_tv_nov_olhosdeagua_2001_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0006",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que icónica telenovela da TVI estreada em 2001 («Anjo Selvagem»), adaptação da argentina Muñeca Brava com mais de 340 episódios, lançou a atriz Paula Neves no papel da irreverente «Mariana / Trinca-Espinhas» que jogava futebol e andava de boné para trás?",
+    "opcoes": [
+      "Sonhos Traídos",
+      "Anjo Selvagem (Mariana «Trinca-Espinhas»)",
+      "Amanhecer",
+      "Doce Fugitiva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O romance de Mariana e Pedro (José Carlos Pereira) e a música dos Anjos ('Não Te Quero Perder') tornaram-se fenómenos culturais nos anos 2000.",
+    "fonte": "TVI / NBP / Arquivo de Ficção Nacional",
+    "factClusterId": "fc_tv_nov_anjoselvagem_paula_neves_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0007",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que célebre telenovela da TVI escrita por Rui Vilhena em 2005 («Ninguém Como Tu»), celebrizou a maquiavélica e elegante vilã Luísa Albuquerque (interpretada por Alexandra Lencastre) e o mistério nacional de mais de 100 episódios «Quem matou o António?»:",
+    "opcoes": [
+      "Tempo de Viver",
+      "Fascínios",
+      "Ninguém Como Tu (2005 — Luísa Albuquerque)",
+      "Equador"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "No último episódio transmitido em direto com quatro finais alternativos gravados, foi revelado que a assassina de António era a governanta Guida (Sofia Aparício).",
+    "fonte": "TVI / Marktest / Plural",
+    "factClusterId": "fc_tv_nov_ninguemcomotu_luisa_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0008",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI estreada em 2005 escrita por Tozé Martinho («Dei-te Quase Tudo»), protagonizada por Fernanda Serrano, Pedro Granger e Luís Esparteiro, detém o recorde absoluto de audiência de uma telenovela portuguesa atingindo no seu último episódio mais de 74,4% de share?",
+    "opcoes": [
+      "Ilha dos Amores",
+      "Feitiço de Amor",
+      "Filha do Mar",
+      "Dei-te Quase Tudo (74,4% de share)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mais de 2,5 milhões de espetadores assistiram em direto ao desenlace de 'Dei-te Quase Tudo' acompanhado da canção homónima de Paulo Gonzo.",
+    "fonte": "CAEM / Marktest / TVI",
+    "factClusterId": "fc_tv_nov_deitequasetudo_recordeaudiencia_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0009",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que histórica e longeva série/novela juvenil da TVI estreada em 2003 no Colégio da Barra («Morangos com Açúcar»), que se estendeu por 9 temporadas consecutivas, revelou centenas de atores consagrados e criou a banda musical fenómeno «D'ZRT» (com Angélico Vieira, Cifrão, Edmundo e Paulo Vintém)?",
+    "opcoes": [
+      "Morangos com Açúcar (2003-2012 / 2023)",
+      "Rebelde Way",
+      "Lua Vermelha",
+      "Massa Fresca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Morangos com Açúcar marcou a cultura pop juvenil de várias gerações em Portugal e os D'ZRT venderam centenas de milhares de discos.",
+    "fonte": "TVI / Plural Entertainment / Sony Music",
+    "factClusterId": "fc_tv_nov_morangoscomacucar_dzrt_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0010",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que marcante telenovela da TVI escrita por Maria João Mira em 2007 («Ilha dos Amores»), foi integralmente gravada na espetacular paisagem da Ilha de São Miguel nos Açores e em Macau, dividindo a trama em quatro famílias de quatro elementos da natureza?",
+    "opcoes": [
+      "Feitiço de Amor",
+      "Ilha dos Amores (Açores)",
+      "Sentimentos",
+      "Espírito Indomável"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Protagonizada por Bárbara Norton de Matos e Marco D'Almeida, a novela projetou o turismo das Sete Cidades e Furnas internacionalmente.",
+    "fonte": "TVI / Governo dos Açores",
+    "factClusterId": "fc_tv_nov_ilhadosamores_acores_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0011",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que popular comédia e telenovela diária da TVI estreada em 2021 («Festa é Festa»), criada em redor dos preparativos da festa anual da pitoresca «Aldeia Galega da Cerceira», é protagonizada por Pedro Alves (Bino), Pedro Teixeira (Tomé) e Maria do Céu Guerra (Corcovada)?",
+    "opcoes": [
+      "Pôr do Sol",
+      "Bem Me Quer",
+      "Festa é Festa (Aldeia Galega da Cerceira)",
+      "Golpe de Sorte"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Festa é Festa tornou-se a mais longa telenovela cómica de serão da TVI com centenas de episódios e várias temporadas temáticas.",
+    "fonte": "TVI / Plural Entertainment",
+    "factClusterId": "fc_tv_nov_festaefesta_2021_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0012",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que aclamada telenovela da SIC escrita por Inês Gomes em 2014 («Mar Salgado»), gravada nas paisagens de Setúbal, Tróia e Serra da Arrábida com Margarida Vila-Nova, Ricardo Pereira e Joana Santos, liderou as audiências do início ao fim com mais de 1,5 milhões de espetadores?",
+    "opcoes": [
+      "Coração d'Ouro",
+      "Amor Maior",
+      "Paixão",
+      "Mar Salgado (Setúbal / Arrábida)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A história da peixeira Leonor Queiroz e a luta pelos filhos gémeos roubados ao nascer foi um dos maiores sucessos de sempre da SIC.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_marsalgado_2014_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0013",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da SIC estreada em 2019 («Nazaré»), protagonizada por Carolina Loureiro como a corajosa pescadora «Nazaré Gomes» que enfrenta fogos florestais e mafiosos na vila da Nazaré com José Mata e Afonso Pimentel?",
+    "opcoes": [
+      "Nazaré (Carolina Loureiro)",
+      "Terra Brava",
+      "A Serra",
+      "Por Ti"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nazaré foi vendida para dezenas de canais internacionais na Europa, Médio Oriente e América Latina com grande êxito.",
+    "fonte": "SIC / SP Televisão / Município da Nazaré",
+    "factClusterId": "fc_tv_nov_nazare_2019_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0014",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que brilhante minissérie satírica da RTP1 exibida em 2021 («Pôr do Sol»), criada por Henrique Dias e Manuel Pureza, parodiava com génio os maiores clichés das telenovelas com a família Bourbon de Linhaça na Herdade do Pôr do Sol e a banda «Jesus Quisto»?",
+    "opcoes": [
+      "Conta-me Como Foi",
+      "Pôr do Sol (Família Bourbon de Linhaça / Jesus Quisto)",
+      "Capitães do Açúcar",
+      "Causa Própria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pôr do Sol tornou-se um fenómeno de culto com Diogo Amaral, Rui Melo, Gabriela Barros no duplo papel de Matilde e Filipa e o cavalo Testículo.",
+    "fonte": "RTP / Coyote Vadiante",
+    "factClusterId": "fc_tv_nov_pordosol_rtp_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0015",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que histórica e pioneira telenovela juvenil da TVI estreada em 2000 («Jardins Proibidos»), escrita por Manuel Arouca e Tomás Múrias com Daniela Ruah, Pedro Granger, Vera Kolodzig e Lurdes Norberto, celebrizou a música de Paulo Gonzo?",
+    "opcoes": [
+      "Filha do Mar",
+      "Saber Amar",
+      "Jardins Proibidos (2000)",
+      "Tudo por Amor"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jardins Proibidos revelou uma nova geração de atores e teve uma continuação 14 anos depois na TVI em 2014.",
+    "fonte": "TVI / Fealmar / NBP",
+    "factClusterId": "fc_tv_nov_jardinsproibidos_2000_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0016",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI de 2015 («A Única Mulher»), escrita por Maria João Mira e gravada entre Lisboa e Luanda (Angola) com Lourenço Ortigão e Ana Sofia Martins (Luís Miguel e Mara Venâncio), celebrizou a implacável vilã «Pilar Sacramento» interpretada por Alexandra Lencastre?",
+    "opcoes": [
+      "A Impostora",
+      "A Herdeira",
+      "Santa Bárbara",
+      "A Única Mulher (Pilar Sacramento)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Única Mulher teve mais de 500 episódios e foi um enorme sucesso de audiências em Portugal e nos Países Africanos de Língua Oficial Portuguesa.",
+    "fonte": "TVI / Plural Entertainment",
+    "factClusterId": "fc_tv_nov_aunicamulher_2015_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0017",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que prestigiada superprodução de época da TVI de 2009 («Equador»), baseada no célebre romance homónimo de Miguel Sousa Tavares com Filipe Duarte no papel do governador Luís Bernardo Valença em São Tomé e Príncipe?",
+    "opcoes": [
+      "Equador (2009 — Miguel Sousa Tavares)",
+      "A Jóia de África",
+      "A Ferreirinha",
+      "O Segredo de Miguel Zuzarte"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Equador foi a produção televisiva mais cara e sumptuosa da ficção nacional rodada em São Tomé, Índia, Inglaterra e Portugal.",
+    "fonte": "TVI / Plural / Miguel Sousa Tavares",
+    "factClusterId": "fc_tv_nov_equador_tvi2009_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0018",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que marcante série histórica da RTP1 exibida em 2004 («A Ferreirinha»), escrita por Francisco Moita Flores e realizada por Jorge Paixão da Costa com Ana Bustorff no papel da lendária D. Antónia Adelaide Ferreira no Douro Vinhateiro do século XIX?",
+    "opcoes": [
+      "Alves dos Reis",
+      "A Ferreirinha (2004 — D. Antónia Ferreira)",
+      "O Barão de Lavos",
+      "Bocage"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ferreirinha recriou magistralmente a luta contra a filoxera e a consolidação do Vinho do Porto pelas mãos de D. Antónia.",
+    "fonte": "RTP / Francisco Moita Flores",
+    "factClusterId": "fc_tv_nov_aferreirinha_rtp_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0019",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que consagrado dramaturgo, realizador e ator português de Lisboa (1947-2020), Tozé Martinho («António Barreto Martinho»), filho de Tareka, foi o criador e autor de sucessos televisivos fundamentais como «Roseira Brava», «Vidas de Sal», «Olhos de Água» e «Dei-te Quase Tudo»?",
+    "opcoes": [
+      "Francisco Nicholson",
+      "Nicolau Breyner",
+      "Tozé Martinho",
+      "Moita Flores"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tozé Martinho foi um dos maiores pilares e pioneiros da consolidação da ficção seriada e da telenovela em Portugal.",
+    "fonte": "RTP / TVI / Sociedade Portuguesa de Autores",
+    "factClusterId": "fc_tv_nov_tozemartinho_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0020",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que notável escritora, poetisa e atriz lisboeta (1932-2010), Rosa Lobato de Faria («Rosa Lobato de Faria»), escreveu telenovelas e séries célebres para a RTP como «Passerelle», «Na Paz dos Anjos», «Gente Fina É Outra Coisa» e quatro letras vencedoras do Festival RTP da Canção?",
+    "opcoes": [
+      "Ana Zanatti",
+      "Lídia Jorge",
+      "Maria Velho da Costa",
+      "Rosa Lobato de Faria"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rosa Lobato de Faria era carinhosamente tratada como a 'Grande Senhora das Letras e da Ficção' em Portugal.",
+    "fonte": "RTP Arquivos / SPA",
+    "factClusterId": "fc_tv_nov_rosalobatodefaria_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0021",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que importante produtor e encenador português (1937-2009), José Eduardo Moniz («NBP — Nicolau Breyner Produções»), fundou com Nicolau Breyner nos anos 1990 a produtora independente que esteve na génese dos estúdios da Plural em Vialonga e Bucelas?",
+    "opcoes": [
+      "Nicolau Breyner (NBP — Nicolau Breyner Produções)",
+      "Camilo de Oliveira",
+      "Herman José",
+      "Luís Andrade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nicolau Breyner e a NBP criaram a primeira grande indústria privada de teledramaturgia e ficção diária portuguesa.",
+    "fonte": "Plural Entertainment / Dicionário do Cinema Português",
+    "factClusterId": "fc_tv_nov_nicolaubreyner_nbp_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0022",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da SIC de 2012 («Dancin' Days»), remake do clássico brasileiro de Gilberto Braga adaptado por Pedro Lopes com Joana Santos (Júlia Matos) e Soraia Chaves (Raquel Corte-Real), alcançou audiências estrondosas no horário nobre?",
+    "opcoes": [
+      "Gabriela",
+      "Dancin' Days (SIC, 2012)",
+      "Vingança",
+      "Podia Acabar o Mundo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A rivalidade entre as irmãs Júlia e Raquel e as noites de discoteca do 'Dancin' Days' marcaram o ano de 2012 na SIC.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_dancindays_remake2012_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0023",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que aclamada telenovela da SIC de 2015 («Coração d'Ouro»), escrita por Pedro Lopes e gravada entre as vinhas do Douro Vinhateiro, o Porto e as ilhas dos Açores com Rita Blanco, Mariana Pacheco (Catarina) e João Reis?",
+    "opcoes": [
+      "Sol de Inverno",
+      "Amor Amor",
+      "Coração d'Ouro (Douro e Porto)",
+      "Sangue Oculto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A novela explorou a ambição sem escrúpulos da jovem Catarina Ferreira (Mariana Pacheco) disposta a tudo para enriquecer.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_coracaodouro_2015_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0024",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que famosa telenovela musical da SIC estreada em 2021 («Amor Amor»), centrada no universo da música popular e 'pimba' portuguesa com Ricardo Pereira no papel do cantor romântico «Romeu Santiago» e Joana Santos como «Linda Ribeiro»?",
+    "opcoes": [
+      "Lua de Mel",
+      "Por Ti",
+      "Flor sem Tempo",
+      "Amor Amor (Romeu Santiago)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As canções originais de Romeu Santiago tornaram-se sucessos reais nas rádios e plataformas de streaming portuguesas.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_amoramor_romeusantiago_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0025",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que histórico ator português (1927-2023), Ruy de Carvalho («Ruy de Carvalho»), com mais de 80 anos de carreira no teatro, cinema e TV, protagonizou a primeira telenovela portuguesa (*Vila Faia* em 1982) e dezenas de outras como *Todo o Tempo do Mundo*, *Olhos de Água* e *Festa é Festa*?",
+    "opcoes": [
+      "Ruy de Carvalho",
+      "Raul Solnado",
+      "Armando Cortez",
+      "Henrique Mendes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ruy de Carvalho é o ator português com a mais longa e prestigiada carreira profissional da história das artes de palco em Portugal.",
+    "fonte": "Museu Nacional do Teatro / RTP / TVI",
+    "factClusterId": "fc_tv_nov_ruydecarvalho_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0026",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que consagrada e lendária atriz portuguesa (1922-2010), Mariana Rey Monteiro («Mariana Rey Monteiro»), primeira-dama do teatro português, interpretou matriarcas inesquecíveis como D. Efigénia Marques Vila em *Vila Faia* e participou em *Chuva na Areia*, *Cinzas* e *Vidas de Sal*?",
+    "opcoes": [
+      "Eunice Muñoz",
+      "Mariana Rey Monteiro",
+      "Lurdes Norberto",
+      "Curvo Semedo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mariana Rey Monteiro deu o seu nome ao Teatro Municipal Mariana Rey Monteiro em Loures e foi condecorada com a Grã-Cruz da Ordem de Sant'Iago.",
+    "fonte": "Teatro Nacional D. Maria II / RTP Arquivos",
+    "factClusterId": "fc_tv_nov_marianareymonteiro_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0027",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que consagrada e icónica atriz portuguesa de teatro e televisão (1928-2022), Eunice Muñoz («Eunice Muñoz»), celebrizou-se em grandes produções de ficção televisiva como *A Banqueira do Povo* (RTP, 1993, como Dona Branca), *Olhos de Água*, *Sonhos Traídos* e *Dei-te Quase Tudo*?",
+    "opcoes": [
+      "Laura Alves",
+      "Beatriz Costa",
+      "Eunice Muñoz",
+      "Irene Cruz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eunice Muñoz foi homenageada com a Grã-Cruz da Ordem do Infante D. Henrique e é considerada a maior atriz trágica e dramática de Portugal.",
+    "fonte": "Teatro Nacional D. Maria II / RTP / Presidência da República",
+    "factClusterId": "fc_tv_nov_eunicemunoz_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0028",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que emblemática telenovela da TVI estreada em 2008 («Feitiço de Amor»), escrita por Rui Vilhena e gravada entre Lisboa e as herdades do Alentejo com Rita Pereira (Alice Santos) e José Carlos Pereira (Henrique Sacramento), centrada na criação de cavalos Puro-Sangue Lusitano?",
+    "opcoes": [
+      "Espírito Indomável",
+      "Remédio Santo",
+      "Doce Tentação",
+      "Feitiço de Amor (Alice e os Cavalos Lusitanos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Feitiço de Amor foi líder incontestada de audiências e celebrizou o cavalo 'Estoiro' e as tradições equestres alentejanas.",
+    "fonte": "TVI / Plural",
+    "factClusterId": "fc_tv_nov_feiticodeamor_2008_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0029",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI estreada em 2010 («Espírito Indomável»), adaptada por Maria João Mira com Mariana Monteiro no papel da selvagem e destemida «Zé / Maria Inês» que vivia numa manada de cavalos no Ribatejo e Diogo Amaral?",
+    "opcoes": [
+      "Espírito Indomável",
+      "Mar de Paixão",
+      "Doida por Ti",
+      "Mundo ao Contrário"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A personagem de Maria Inês desafiava convenções sociais montando a cavalo em pelo pelas campinas de Coruche.",
+    "fonte": "TVI / Plural Entertainment",
+    "factClusterId": "fc_tv_nov_espiritoindomavel_2010_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0030",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que fascinante telenovela da TVI de 2011 («Remédio Santo»), escrita por António Barreira e rodada em Cabriz e Viseu com Margarida Marinho, Adriano Luz e Sara Barradas, celebrizou o mistério da «Morte da Capucha Vermelha» e as beatas de aldeia?",
+    "opcoes": [
+      "Anjo Meu",
+      "Remédio Santo (2011)",
+      "Doce Tentação",
+      "Destinos Cruzados"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Remédio Santo foi nomeada para o International Emmy Award em 2012 pela sua abordagem de realismo mágico e folclore beirão.",
+    "fonte": "International Emmy Awards / TVI",
+    "factClusterId": "fc_tv_nov_remediosanto_2011_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0031",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI de 2013 («Belmonte»), adaptação da chilena Hijos del Monte escrita por Artur Ribeiro e gravada no Alentejo (Estremoz), foi nomeada para o International Emmy Award de 2014 protagonizada por cinco irmãos adotivos (Marco D'Almeida, Filipe Duarte, João Catarré, Diogo Amaral e Lourenço Ortigão)?",
+    "opcoes": [
+      "O Beijo do Escorpião",
+      "Mulheres",
+      "Belmonte (Os Cinco Irmãos Belmonte)",
+      "Jogo Duplo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Belmonte destacou-se pela qualidade cinematográfica da fotografia e realização nas herdades de Estremoz e Évora.",
+    "fonte": "Emmy Awards / TVI / Plural",
+    "factClusterId": "fc_tv_nov_belmonte_2013_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0032",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que ousada telenovela da TVI de 2014 («O Beijo do Escorpião»), criada por António Barreira e João Matos com Sara Matos (a pérfida vilã Alice) e Dalila Carmo (Rita), abordou pela primeira vez no horário nobre temas como o crime financeiro e a transexualidade com grande impacto social?",
+    "opcoes": [
+      "A Impostora",
+      "Santa Bárbara",
+      "Prisioneira",
+      "O Beijo do Escorpião"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A vilã Alice Macieira fingia ser doce para destruir a irmã Rita e roubar a agência de compras de luxo 'Shopping Place'.",
+    "fonte": "TVI / Plural",
+    "factClusterId": "fc_tv_nov_obeijodoescorpiao_2014_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0033",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que aclamada telenovela da TVI de 2015 («Santa Bárbara»), adaptada por Artur Ribeiro e gravada nas históricas minas de volfrâmio de São Pedro da Cova em Gondomar com Benedita Pereira (a mineira Gabriela Soares), Albano Jerónimo e São José Correia (a tirana Antónia Vidal)?",
+    "opcoes": [
+      "Santa Bárbara (Gabriela Soares e as Minas)",
+      "A Única Mulher",
+      "A Herdeira",
+      "Quer o Destino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A novela recriou o ambiente duro dos túneis subterrâneos das minas e a vingança de Gabriela contra os abusos dos poderosos.",
+    "fonte": "TVI / Plural / Museu Mineiro de São Pedro da Cova",
+    "factClusterId": "fc_tv_nov_santabarbara_2015_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0034",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que superprodução da TVI de 2017 («A Herdeira»), escrita por Maria João Mira e rodada em Viana do Castelo, Galiza e Espanha com Kelly Bailey (Luz Fuentes / Benedita Alvarenga), Lourenço Ortigão e Rita Pereira (Madalena Soeiro), abordando a cultura da comunidade cigana?",
+    "opcoes": [
+      "Valor da Vida",
+      "A Herdeira (Viana do Castelo e Cultura Cigana)",
+      "Na Corda Bamba",
+      "Para Sempre"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Herdeira destacou as danças flamencas, o Santuário de Santa Luzia em Viana do Castelo e o tráfico internacional no rio Minho.",
+    "fonte": "TVI / Plural Entertainment",
+    "factClusterId": "fc_tv_nov_aherdeira_2017_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0035",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que emocionante telenovela da TVI de 2020 («Quer o Destino»), adaptada por Helena Amaral e gravada na vila ribatejana de Salvaterra de Magos com Sara Barradas (Margarida / Vitória Falcão) e Pedro Teixeira, nomeada para o International Emmy Award de 2021?",
+    "opcoes": [
+      "Bem Me Quer",
+      "Rua das Flores",
+      "Quer o Destino (Vitória Falcão e a Herdade de Santa Bárbara)",
+      "Cacau"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A história de superação e justiça de Vitória contra os abusadores da sua juventude foi aclamada pela crítica nacional e internacional.",
+    "fonte": "International Emmy Awards / TVI",
+    "factClusterId": "fc_tv_nov_querodestino_2020_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0036",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da TVI estreada em 2024 («Cacau»), escrita por Maria João Costa e gravada entre as plantações de cacau de Itacaré na Bahia (Brasil) e Portugal com Matilde Reymão (Cacau / Clara) e José Condessa (Tiago)?",
+    "opcoes": [
+      "Festa é Festa",
+      "Queridos Papás",
+      "A Promessa",
+      "Cacau (Matilde Reymão e José Condessa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A telenovela Cacau tornou-se líder de audiências ao relatar a arte de fabrico do melhor chocolate biológico e segredos de família.",
+    "fonte": "TVI / Plural / Maria João Costa",
+    "factClusterId": "fc_tv_nov_cacau_2024_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0037",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que prestigiada telenovela da SIC de 2016 («Amor Maior»), escrita por Inês Gomes e rodada entre a cidade de Braga e o Parque Nacional da Peneda-Gerês e São Tomé e Príncipe com Sara Matos (Clara) e José Fidalgo (Manel)?",
+    "opcoes": [
+      "Amor Maior (Braga e Gerês)",
+      "Rainha das Flores",
+      "Espelho d'Água",
+      "Alma e Coração"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A novela destacou o Bom Jesus do Monte em Braga e a natureza protegida do Gerês com a vilã Francisca interpretada por Inês Castel-Branco.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_amormaior_2016_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0038",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que aclamada telenovela da SIC de 2019 («Terra Brava»), escrita por Inês Gomes e gravada na planície alentejana em Vila Frade e Évora com Mariana Monteiro (Beatriz) e João Catarré (Diogo Moreira / Rodrigo Montenegro)?",
+    "opcoes": [
+      "A Serra",
+      "Terra Brava (Vila Frade / Alentejo)",
+      "Por Ti",
+      "Sangue Oculto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A novela celebrizou a vilã Eduarda Ferreira (Maria João Luís) e o ambiente dos montados e cavalos do Alentejo.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_terrabrava_2019_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0039",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que marcante telenovela da SIC de 2021 («A Serra»), escrita por Inês Gomes e gravada nos cumes nevados da Serra da Estrela e na vila de Loriga com Júlia Palha (Fátima Neto), José Mata e Sofia Alves (como a vilã Carlota Pereira Espinho)?",
+    "opcoes": [
+      "Por Ti",
+      "Flor sem Tempo",
+      "A Serra (Loriga e Serra da Estrela)",
+      "Papel Principal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Serra retratou a produção tradicional do Queijo Serra da Estrela DOP e o pastoreio nas encostas da montanha mais alta de Portugal continental.",
+    "fonte": "SIC / SP Televisão / Município de Seia",
+    "factClusterId": "fc_tv_nov_aserra_2021_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0040",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da SIC estreada em 2022 («Sangue Oculto»), escrita por Sandra Santos com Sara Matos no desafiante triplo papel de três irmãs gémeas separadas à nascença (Carolina, Benedita e Júlia)?",
+    "opcoes": [
+      "Flor sem Tempo",
+      "Senhora do Mar",
+      "A Promessa",
+      "Sangue Oculto (Sara Matos em triplo papel)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A atriz Sara Matos foi aclamada pelo público e crítica pelo virtuosismo técnico de interpretar três personalidades antagónicas em simultâneo.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_sangueoculto_2022_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0041",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que telenovela da SIC estreada em 2024 («Senhora do Mar»), escrita por Raquel Palermo e gravada na deslumbrante Ilha Terceira nos Açores com Sofia Ribeiro (Joana / Natália), Afonso Pimentel e Vera Kolodzig?",
+    "opcoes": [
+      "Senhora do Mar (Ilha Terceira, Açores)",
+      "A Promessa",
+      "Papel Principal",
+      "Flor sem Tempo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A novela levou ao ecrã os costumes das festas do Espírito Santo, as alcatras da Terceira e a fé do povo açoriano.",
+    "fonte": "SIC / SP Televisão / Governo dos Açores",
+    "factClusterId": "fc_tv_nov_senhoradomar_2024_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0042",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que histórico autor e argumentista de televisão português nascido em Luanda («Rui Vilhena»), foi o responsável por revolucionar a narrativa das telenovelas portuguesas com ritmos rápidos e 'ganchos' dramáticos de suspense em *Ninguém Como Tu*, *Tempo de Viver*, *Olhos nos Olhos* e *Sedução*?",
+    "opcoes": [
+      "António Barreira",
+      "Rui Vilhena",
+      "Pedro Lopes",
+      "Manuel Arouca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Vilhena foi também autor na TV Globo no Brasil onde escreveu a novela 'Boogie Oogie' em 2014.",
+    "fonte": "TVI / TV Globo / SPA",
+    "factClusterId": "fc_tv_nov_ruivilhena_autor_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0043",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que aclamado autor e argumentista português da TVI («António Barreira»), nascido em 1974, é o único argumentista de língua portuguesa com duas novelas premiadas ou nomeadas consecutivamente com o International Emmy Award (*Meu Amor* e *Remédio Santo*)?",
+    "opcoes": [
+      "Tozé Martinho",
+      "Artur Ribeiro",
+      "António Barreira",
+      "Francisco Moita Flores"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Barreira escreveu também êxitos como 'Fascínios', 'Feitiço de Amor' e 'O Beijo do Escorpião'.",
+    "fonte": "International Emmy Awards / TVI",
+    "factClusterId": "fc_tv_nov_antoniobarreira_autor_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0044",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que conceituado autor, diretor de conteúdos e argumentista da SP Televisão e da SIC («Pedro Lopes»), doutorado em Estudos de Televisão, assinou sucessos galardoados com o Emmy como *Laços de Sangue*, *Dancin' Days*, *Coração d'Ouro* e a série internacional *Glória* na Netflix?",
+    "opcoes": [
+      "Alexandre Castro",
+      "Tiago Pais",
+      "João Tordo",
+      "Pedro Lopes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pedro Lopes é o diretor de conteúdos da SP Televisão e criador de 'Glória', a primeira série original portuguesa da Netflix.",
+    "fonte": "SP Televisão / SIC / Netflix",
+    "factClusterId": "fc_tv_nov_pedrolopes_autor_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0045",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que talentosa autora da SIC («Inês Gomes»), escreveu uma trilogia de telenovelas campeãs consecutivas de audiências gravadas no litoral e no interior de Portugal: *Mar Salgado* (2014 em Setúbal), *Amor Maior* (2016 no Gerês) e *Terra Brava* (2019 no Alentejo)?",
+    "opcoes": [
+      "Inês Gomes",
+      "Maria João Mira",
+      "Patrícia Müller",
+      "Helena Amaral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Inês Gomes formou-se na Universidade Nova de Lisboa e é uma das mais prestigiadas criadoras de ficção nacional.",
+    "fonte": "SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_inesgomes_autora_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0046",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que emblemática atriz e apresentadora portuguesa de Lisboa (nascida em 1965), Alexandra Lencastre («Alexandra Lencastre»), foi coroada a «Rainha das Telenovelas» pelas suas atuações viscerais como Luísa Albuquerque (*Ninguém Como Tu*), Júlia Vargas (*Fascínios*), Margot (*Meu Amor*) e Pilar Sacramento (*A Única Mulher*)?",
+    "opcoes": [
+      "Margarida Marinho",
+      "Alexandra Lencastre",
+      "Rita Blanco",
+      "Maria João Luís"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alexandra Lencastre venceu múltiplos Globos de Ouro e Troféus de Televisão consagrando-se como uma das maiores atrizes da sua geração.",
+    "fonte": "TVI / SIC / Globos de Ouro",
+    "factClusterId": "fc_tv_nov_alexandralencastre_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0047",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que talentosa e consagrada atriz lisboeta (nascida em 1983), Joana Santos («Joana Santos»), foi aclamada internacionalmente pelas suas interpretações magistrais como a vilã Diana Silva em *Laços de Sangue* e a protagonista Júlia Matos no remake de *Dancin' Days*?",
+    "opcoes": [
+      "Diana Chaves",
+      "Soraia Chaves",
+      "Joana Santos",
+      "Sara Matos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Joana Santos é uma das atrizes mais premiadas e versáteis da ficção televisiva e cinema de autor em Portugal.",
+    "fonte": "SIC / SP Televisão / Academia Portuguesa de Cinema",
+    "factClusterId": "fc_tv_nov_joanasantos_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0048",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que famoso ator e apresentador português (nascido em Lisboa em 1977), Diogo Morgado («Diogo Morgado»), destacou-se em telenovelas portuguesas como *Vingança*, *Laços de Sangue* e *Ouro Verde* (Emmy 2018) antes de alcançar projeção em Hollywood no papel de Jesus Cristo na minissérie *The Bible*?",
+    "opcoes": [
+      "Ricardo Pereira",
+      "Albano Jerónimo",
+      "Paulo Pires",
+      "Diogo Morgado"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Diogo Morgado conciliou uma sólida carreira como protagonista de novelas em Portugal com a realização cinematográfica e trabalhos nos EUA.",
+    "fonte": "TVI / SIC / 20th Century Fox",
+    "factClusterId": "fc_tv_nov_diogomorgado_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0049",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que prestigiado ator português (nascido em Lisboa em 1979), Ricardo Pereira («Ricardo Pereira»), tornou-se o primeiro ator português a protagonizar uma telenovela da TV Globo no Brasil (*Como uma Onda* em 2004) e a liderar produções de topo em Portugal (*Mar Salgado*, *Amor Amor*)?",
+    "opcoes": [
+      "Ricardo Pereira",
+      "Paulo Rocha",
+      "José Fidalgo",
+      "Pedro Carvalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Pereira construiu uma ponte inédita de intercâmbio luso-brasileiro atuando em dezenas de produções em ambos os lados do Atlântico.",
+    "fonte": "TV Globo / SIC / SP Televisão",
+    "factClusterId": "fc_tv_nov_ricardopereira_01",
+    "subcategory": "Televisão Portuguesa"
+  },
+  {
+    "id": "TV_NOV_0050",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "pergunta": "Que histórico complexo de estúdios de gravação de ficção televisiva e cinema situado na Quinta dos Melos em Bucelas e Vialonga («Estúdios da Plural Entertainment» / antiga NBP), com mais de 30.000 m² de estúdios e cidades cenográficas, é o maior polo de produção de teledramaturgia da Península Ibérica?",
+    "opcoes": [
+      "Estúdios da Tobis Portuguesa",
+      "Estúdios do Marquês",
+      "Estúdios da Plural Entertainment (Bucelas / Vialonga)",
+      "Estúdios da Valentim de Carvalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Plural Entertainment produz anualmente centenas de horas de ficção e telenovelas para canais nacionais e internacionais.",
+    "fonte": "Plural Entertainment Portugal / Media Capital",
+    "factClusterId": "fc_tv_nov_pluralentertainment_estudios_01",
+    "subcategory": "Televisão Portuguesa"
+  }
+]

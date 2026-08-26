@@ -64,6 +64,7 @@ export function SiteHeader() {
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Ranking', href: '/rankings', icon: Trophy },
+    { label: 'Os Criadores 🇵🇹', href: '/criadores', icon: Sparkles },
     { label: 'Explorar', href: '/explorar', icon: Sparkles },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Perfil', href: '/perfil', icon: User },
@@ -71,6 +72,7 @@ export function SiteHeader() {
 
   const MOBILE_NAV = [
     { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
+    { label: '🇵🇹 Os Criadores (Comunidade)', href: '/criadores', icon: Sparkles },
     { label: 'Explorar o Desafio', href: '/explorar', icon: Sparkles },
     { label: 'Categorias de Quiz', href: '/categorias', icon: LayoutGrid },
     { label: 'Ranking Nacional', href: '/rankings', icon: Trophy },

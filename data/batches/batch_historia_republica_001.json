@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_REP_0001",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Em que varanda do edifício dos Paços do Concelho em Lisboa foi solenemente proclamada a Implantação da República Portuguesa na manhã de 5 de Outubro de 1910 pelo dirigente republicano José Relvas?",
+    "opcoes": [
+      "Varanda da Câmara Municipal de Lisboa (Praça do Município)",
+      "Varanda do Palácio de São Bento",
+      "Varanda do Palácio de Belém",
+      "Varanda do Terreiro do Paço"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Relvas proclamou a República perante milhares de cidadãos no Largo do Município, pondo fim a quase 800 anos de Monarquia em Portugal.",
+    "fonte": "Câmara Municipal de Lisboa / Museu da Presidência da República",
+    "factClusterId": "fc_rep_proclamacao5outubro1910_01"
+  },
+  {
+    "id": "HIST_REP_0002",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que escritor, filósofo e professor açoriano (1843-1924) presidiu ao Governo Provisório da República Portuguesa (1910-1911) e mais tarde assumiu interinamente a Presidência da República em 1915?",
+    "opcoes": [
+      "Manuel de Arriaga",
+      "Joaquim Teófilo Braga",
+      "Bernardino Machado",
+      "António José de Almeida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Teófilo Braga chefiou o governo que aprovou os novos símbolos nacionais, as leis da laicidade, a lei do divórcio e o sufrágio republicano.",
+    "fonte": "Museu da Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_rep_teofilobraga_01"
+  },
+  {
+    "id": "HIST_REP_0003",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que jurista e escritor natural da Horta (Faial) foi eleito pela Assembleia Nacional Constituinte a 24 de agosto de 1911 como o 1.º Presidente Constitucional da República Portuguesa?",
+    "opcoes": [
+      "Teófilo Braga",
+      "Bernardino Machado",
+      "Manuel José de Arriaga Brum da Silveira",
+      "Sidónio Pais"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Manuel de Arriaga foi eleito ao abrigo da Constituição de 1911, governando até à sua renúncia em maio de 1915.",
+    "fonte": "Presidência da República Portuguesa / Assembleia da República",
+    "factClusterId": "fc_rep_manuelarriaga1911_01"
+  },
+  {
+    "id": "HIST_REP_0004",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que sublevação militar republicana no Porto a 31 de janeiro de 1891, motivada pelo Ultimato Britânico de 1890, foi a primeira tentativa armada de implantação da República em Portugal?",
+    "opcoes": [
+      "A Revolta dos Marinheiros",
+      "A Revolta da Maria da Fonte",
+      "O Golpe de 28 de Maio",
+      "A Revolta de 31 de Janeiro de 1891 (no Porto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os revoltosos subiram a antiga Rua de Santo António (hoje Rua 31 de Janeiro) e foram travados pela Guarda Municipal junto à Igreja de Santo Ildefonso.",
+    "fonte": "Câmara Municipal do Porto / Museu Cívico",
+    "factClusterId": "fc_rep_31janeiro1891_01"
+  },
+  {
+    "id": "HIST_REP_0005",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que trágico atentado político ocorreu a 1 de fevereiro de 1908 no Terreiro do Paço em Lisboa, vitimando a tiro de carabina o Rei D. Carlos I e o herdeiro do trono D. Luís Filipe?",
+    "opcoes": [
+      "O Regicídio de 1908",
+      "O Golpe dos Sargentos",
+      "A Noite Sangrenta",
+      "O Atentado de Camarate"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os atiradores carbonários Manuel Buíça e Alfredo Costa alvejaram a carruagem real aberta quando a família real regressava de Vila Viçosa.",
+    "fonte": "Museu da Cidade de Lisboa / BNP",
+    "factClusterId": "fc_rep_regicidio1908_01"
+  },
+  {
+    "id": "HIST_REP_0006",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que moeda monetária nacional decimal, dividida em 100 centavos, foi criada pelo Governo Provisório da República a 22 de maio de 1911 para substituir o antigo Real («Réis»)?",
+    "opcoes": [
+      "O Dobrão",
+      "O Escudo Português",
+      "O Cruzado",
+      "O Tostão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Escudo circulou como moeda oficial de Portugal de 1911 até à entrada em circulação do Euro a 1 de janeiro de 2002.",
+    "fonte": "Banco de Portugal / Museu do Dinheiro",
+    "factClusterId": "fc_rep_criacaoescudo1911_01"
+  },
+  {
+    "id": "HIST_REP_0007",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que soldado transmontano de Valongo de Milhais (Murça) distinguiu-se heroicamente na Batalha de La Lys (Flandres, 9 de abril de 1918) ao suster sozinho com uma metralhadora Lewis o avanço de várias divisões alemãs («Soldado Milhões»)?",
+    "opcoes": [
+      "Soldado Desconhecido",
+      "Carvalho Araújo",
+      "Aníbal Augusto Milhais («Soldado Milhões»)",
+      "Major Reis Gomes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O comandante Ferreira do Amaral declarou-lhe: 'Tu és Milhais, mas vales Milhões!'. Foi condecorado com a Ordem de Torre e Espada no campo de batalha.",
+    "fonte": "Exército Português / Museu Militar de Lisboa / Município de Murça",
+    "factClusterId": "fc_rep_soldadomilhoes1918_01"
+  },
+  {
+    "id": "HIST_REP_0008",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que oficial e político de Caminha («O Presidente-Rei»), líder da Revolução de Dezembro de 1917 que instituiu a República Nova presidencialista, foi assassinado a tiro na Estação do Rossio em Lisboa a 14 de dezembro de 1918?",
+    "opcoes": [
+      "Norton de Matos",
+      "Machado Santos",
+      "Gomes da Costa",
+      "Sidónio Bernardino Cardoso da Silva Pais (Sidónio Pais)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Sidónio Pais foi uma das figuras mais carismáticas e polarizadoras da 1.ª República, sepultado no Panteão Nacional.",
+    "fonte": "Panteão Nacional / Presidência da República",
+    "factClusterId": "fc_rep_sidoniopais1918_01"
+  },
+  {
+    "id": "HIST_REP_0009",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que trágica noite de 19 de outubro de 1921 em Lisboa («A Noite Sangrenta») culminou no assassinato de figuras cimeiras da República como o Primeiro-Ministro António Granjo e o herói republicano Machado Santos pela «Camioneta Fantasma»?",
+    "opcoes": [
+      "A Noite Sangrenta (19 de Outubro de 1921)",
+      "O Regicídio",
+      "A Revolta de Monsanto",
+      "O Golpe dos Sargentos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Noite Sangrenta evidenciou a profunda instabilidade e violência política que minou as instituições da 1.ª República.",
+    "fonte": "Dicionário de História da I República / Assembleia da República",
+    "factClusterId": "fc_rep_noitesangrenta1921_01"
+  },
+  {
+    "id": "HIST_REP_0010",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que golpe militar com início em Braga a 28 de maio de 1926, liderado pelo General Manuel Gomes da Costa e apoiado por setores conservadores, pôs fim à Primeira República e instaurou a Ditadura Militar?",
+    "opcoes": [
+      "O Golpe de 25 de Novembro",
+      "O Golpe de 28 de Maio de 1926",
+      "A Revolta de Fevereiro",
+      "O Golpe Botelho Moniz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O movimento marchou sobre Lisboa sem resistência apreciável, abrindo caminho à posterior institucionalização do Estado Novo em 1933.",
+    "fonte": "Arquivo Histórico Militar / Assembleia da República",
+    "factClusterId": "fc_rep_28maio1926_01"
+  },
+  {
+    "id": "HIST_REP_0011",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que professor de Finanças da Universidade de Coimbra, natural de Santa Comba Dão (1889-1970), assumiu a pasta das Finanças em 1928 com plenos poderes orçamentais e governou Portugal como Presidente do Conselho de 1932 a 1968?",
+    "opcoes": [
+      "Marcello Caetano",
+      "Américo Thomaz",
+      "António de Oliveira Salazar",
+      "Cardeal Cerejeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Salazar equilibrou as contas públicas com o 'superavit' orçamental e desenhou o regime autoritário e corporativo do Estado Novo consagrado na Constituição de 1933.",
+    "fonte": "Torre do Tombo / História de Portugal Contemporâneo",
+    "factClusterId": "fc_rep_salazar_estadonovo_01"
+  },
+  {
+    "id": "HIST_REP_0012",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que polícia política do regime do Estado Novo, criada em 1945 em substituição da PVDE e célebre pela perseguição, interrogatórios, torturas e criação do campo do Tarrafal em Cabo Verde, foi a:",
+    "opcoes": [
+      "GNR",
+      "Legião Portuguesa",
+      "Guarda Fiscal",
+      "PIDE (Polícia Internacional e de Defesa do Estado / DGS)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A sede da PIDE localizava-se na Rua António Maria Cardoso em Lisboa, assaltada pela população a 25 de Abril de 1974.",
+    "fonte": "Museu do Aljube — Resistência e Liberdade / Torre do Tombo",
+    "factClusterId": "fc_rep_pide_aljube_01"
+  },
+  {
+    "id": "HIST_REP_0013",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande evento de propaganda nacional e internacional do Estado Novo realizou-se em Belém (Lisboa) entre junho e dezembro de 1940 para comemorar os centenários da Fundação da Nacionalidade (1140) e da Restauração (1640)?",
+    "opcoes": [
+      "A Exposição do Mundo Português (1940)",
+      "A Expo 98",
+      "A Grande Feira das Indústrias",
+      "A Exposição Colonial do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Exposição de 1940, planeada por Cottinelli Telmo, remodelou toda a Praça do Império em Belém e ergueu a primeira versão efémera do Padrão dos Descobrimentos.",
+    "fonte": "Museu de Lisboa / EGEAC",
+    "factClusterId": "fc_rep_mundoportugues1940_01"
+  },
+  {
+    "id": "HIST_REP_0014",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que importante minério estratégico indispensável para a blindagem de aço e armamento bélico na Segunda Guerra Mundial enriqueceu temporariamente milhares de mineiros e camponeses no interior centro e norte de Portugal («Febre do Ouro Negro»)?",
+    "opcoes": [
+      "Urânio",
+      "Volfrâmio (Tungsténio)",
+      "Cobre",
+      "Lítio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Portugal vendeu volfrâmio tanto aos Aliados (Reino Unido e EUA) como à Alemanha nazi, abastecendo as minas da Panasqueira e de Rio de Frades.",
+    "fonte": "Minas da Panasqueira / LNEG",
+    "factClusterId": "fc_rep_volframio2guerramundial_01"
+  },
+  {
+    "id": "HIST_REP_0015",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que capitão do exército e resistente antifascista liderou a 22 de janeiro de 1961 o assalto e sequestro do paquete de passageiros português «Santa Maria» no Mar das Caraíbas («Operação Dulcineia») para denunciar as ditaduras ibéricas ao mundo?",
+    "opcoes": [
+      "Humberto Delgado",
+      "Palma Inácio",
+      "Henrique Galvão",
+      "Fernando Salgueiro Maia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O sequestro do 'Santa Maria' foi a primeira tomada política de um navio em alto mar transmitida em direto pelos meios de comunicação mundiais.",
+    "fonte": "Arquivo Histórico Militar / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_rep_paquetesantamaria1961_01"
+  },
+  {
+    "id": "HIST_REP_0016",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Em que data teve início oficial a Guerra Colonial (Guerra do Ultramar) em Angola com os sangrentos ataques no norte do território, estendendo-se depois à Guiné (1963) e a Moçambique (1964) até 1974?",
+    "opcoes": [
+      "Janeiro de 1958",
+      "Outubro de 1965",
+      "Abril de 1968",
+      "Fevereiro / Março de 1961"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Salazar proferiu a célebre frase 'Para Angola, rapidamente e em força' mobilizando mais de 1 milhão de jovens militares portugueses ao longo de 13 anos.",
+    "fonte": "Arquivo Histórico Militar / Liga dos Combatentes",
+    "factClusterId": "fc_rep_guerracolonial1961_01"
+  },
+  {
+    "id": "HIST_REP_0017",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que episódio militar ocorreu a 18 de dezembro de 1961 («Operação Vijay»), quando as Forças Armadas da União Indiana invadiram e anexaram os territórios portugueses de Goa, Damão e Diu no Estado da Índia?",
+    "opcoes": [
+      "A Queda do Estado Português da Índia (1961)",
+      "A Crise de Timor",
+      "O Massacre de Wiriyamu",
+      "A Revolta de Luanda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O governador-geral Vassalo e Silva rendeu-se para evitar o massacre da guarnição militar portuguesa e da população civil goesa.",
+    "fonte": "Ministério da Defesa Nacional / Arquivo Histórico Militar",
+    "factClusterId": "fc_rep_goa1961_01"
+  },
+  {
+    "id": "HIST_REP_0018",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que jurista e professor de Direito Administrativo assumiu a Presidência do Conselho de Ministros em setembro de 1968 após o acidente físico incapacitante de Salazar no Forte de Santo António da Barra no Estoril?",
+    "opcoes": [
+      "Américo Thomaz",
+      "Marcello José das Neves Alves Caetano",
+      "Melo e Castro",
+      "Franco Nogueira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Marcello Caetano lançou o período da 'Primavera Marcelista' com reformas limitadas (Ala Liberal na Assembleia) antes de se entrincheirar na intransigência da guerra.",
+    "fonte": "Torre do Tombo / Presidência do Conselho",
+    "factClusterId": "fc_rep_marcellocaetano1968_01"
+  },
+  {
+    "id": "HIST_REP_0019",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que general português publicou em fevereiro de 1974 o livro bomba «Portugal e o Futuro», defendendo que a solução para a Guerra Colonial não era militar mas puramente política, abalando os alicerces do regime marcelista?",
+    "opcoes": [
+      "General Francisco da Costa Gomes",
+      "General Kaúlza de Arriaga",
+      "General António de Spínola",
+      "General Silvino Silvério Marques"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O livro vendeu mais de 200.000 exemplares em poucas semanas e precipitou a demissão de Spínola e Costa Gomes pelo governo.",
+    "fonte": "Centro de Documentação 25 de Abril / Editora Arcádia (1974)",
+    "factClusterId": "fc_rep_spinolaportugalefuturo_01"
+  },
+  {
+    "id": "HIST_REP_0020",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que duas canções foram transmitidas na rádio nas noites de 24 e 25 de abril de 1974 como senhas operacionais secretas para o avanço dos blindados e tropas do MFA (Movimento das Forças Armadas)?",
+    "opcoes": [
+      "«Pedra Filosofal» e «Tourada»",
+      "«Uma Gaivota» e «Menino do Bairro Negro»",
+      "«Desfolhada Portuguesa» e «Vampiros»",
+      "«E Depois do Adeus» (Paulo de Carvalho) e «Grândola, Vila Morena» (Zeca Afonso)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'E Depois do Adeus' foi transmitida às 22h55 pelos Emissores Associados de Lisboa e 'Grândola, Vila Morena' às 00h20 na Rádio Renascença.",
+    "fonte": "Associação 25 de Abril / Rádio Renascença / RTP",
+    "factClusterId": "fc_rep_senhas25abril_01"
+  },
+  {
+    "id": "HIST_REP_0021",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que mulher e empregada de restaurante em Lisboa distribuiu espontaneamente os cravos vermelhos que levava aos soldados e populares no Rossio a 25 de Abril de 1974, dando o nome simbólico à «Revolução dos Cravos»?",
+    "opcoes": [
+      "Celeste Martins Caeiro («Celeste dos Cravos»)",
+      "Maria de Lurdes Pintasilgo",
+      "Natália Correia",
+      "Sophia de Mello Breyner"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os soldados colocaram os cravos vermelhos nos canos das suas espingardas G3, criando a imagem pacífica mais famosa da história das revoluções contemporâneas.",
+    "fonte": "Museu do Aljube / Associação 25 de Abril",
+    "factClusterId": "fc_rep_celestedoscravos_01"
+  },
+  {
+    "id": "HIST_REP_0022",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que quartel da Guarda Nacional Republicana no Largo do Carmo em Lisboa foi cercado pelos blindados de Salgueiro Maia na tarde de 25 de Abril de 1974, onde Marcello Caetano se refugiou antes de se render ao General António de Spínola?",
+    "opcoes": [
+      "Quartel da Graça",
+      "Quartel do Carmo (Largo do Carmo)",
+      "Quartel da Ajuda",
+      "Quartel de Santa Clara"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Marcello Caetano exigiu transmitir o poder ao General Spínola 'para que o poder não caia na rua'.",
+    "fonte": "GNR / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_rep_quarteldocarmo1974_01"
+  },
+  {
+    "id": "HIST_REP_0023",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que período conturbado e dinâmico da história política portuguesa decorreu entre abril de 1974 e novembro de 1975 («PREC»), marcado pela reforma agrária, nacionalizações bancárias e lutas ideológicas intensas?",
+    "opcoes": [
+      "Estado Novo",
+      "Regeneração",
+      "Processo Revolucionário em Curso (PREC)",
+      "Ditadura Militar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O PREC foi marcado por seis governos provisórios e pela efervescência popular da construção da democracia.",
+    "fonte": "Universidade de Coimbra / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_rep_prec1974_1975_01"
+  },
+  {
+    "id": "HIST_REP_0024",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que operação militar liderada pelos coronéis Ramalho Eanes e Jaime Neves (comandos da Amadora) a 25 de Novembro de 1975 neutralizou os setores militares da extrema-esquerda e restabeleceu a disciplina nas Forças Armadas e o rumo à democracia representativa?",
+    "opcoes": [
+      "O Golpe de 11 de Março de 1975",
+      "O 28 de Setembro",
+      "A Crise de Maio",
+      "O Golpe do 25 de Novembro de 1975"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O 25 de Novembro consagrou o caminho da social-democracia ocidental e permitiu a aprovação estável da Constituição de 1976.",
+    "fonte": "Assembleia da República / Exército Português",
+    "factClusterId": "fc_rep_25novembro1975_01"
+  },
+  {
+    "id": "HIST_REP_0025",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Em que data solene foi aprovada e promulgada pela Assembleia Constituinte a Constituição da República Portuguesa que vigora atualmente na 3.ª República?",
+    "opcoes": [
+      "2 de Abril de 1976 (entrando em vigor a 25 de Abril de 1976)",
+      "5 de Outubro de 1975",
+      "10 de Junho de 1977",
+      "1 de Janeiro de 1980"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Constituição de 1976 é a mais longa constituição democrática da história de Portugal, estabelecendo um regime semipresidencialista.",
+    "fonte": "Assembleia da República / DRE",
+    "factClusterId": "fc_rep_constituicao1976_01"
+  },
+  {
+    "id": "HIST_REP_0026",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que engenheira química e diplomata portuguesa (1930-2004) fez história em 1979 ao ser nomeada a primeira (e até hoje única) mulher Primeira-Ministra de Portugal?",
+    "opcoes": [
+      "Maria José Morgado",
+      "Maria de Lourdes Ruivo da Silva de Matos Pintasilgo",
+      "Manuela Ferreira Leite",
+      "Leonor Beleza"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria de Lourdes Pintasilgo chefiou o V Governo Constitucional e foi pioneira dos direitos das mulheres e da justiça social na Europa.",
+    "fonte": "Fundação Cuidar o Futuro / Presidência da República",
+    "factClusterId": "fc_rep_mariadelourdespintasilgo_01"
+  },
+  {
+    "id": "HIST_REP_0027",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que trágico acidente de aviação na noite de 4 de dezembro de 1980 vitimou o Primeiro-Ministro Dr. Francisco Sá Carneiro, o Ministro da Defesa Adelino Amaro da Costa e a sua comitiva em Camarate?",
+    "opcoes": [
+      "O Desastre de Santa Maria",
+      "O Acidente de Sintra",
+      "A Tragédia / Caso de Camarate (1980)",
+      "A Queda de Pedras Rubras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O avião Cessna despenhou-se poucos minutos após descolar de Lisboa a caminho de um comício da campanha presidencial no Porto.",
+    "fonte": "Assembleia da República (Comissões Parlamentares de Inquérito a Camarate)",
+    "factClusterId": "fc_rep_camarate1980_01"
+  },
+  {
+    "id": "HIST_REP_0028",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que importante economista social-democrata (nascido em Boliqueime em 1939) chefiou o Governo de Portugal durante uma década consecutiva (1985-1995) com duas maiorias absolutas e foi Presidente da República de 2006 a 2016?",
+    "opcoes": [
+      "Francisco Pinto Balsemão",
+      "Mário Soares",
+      "Pedro Santana Lopes",
+      "Aníbal António Cavaco Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O período do 'Cavaquismo' foi marcado pela modernização das autoestradas, infraestruturas e fundos estruturais europeus.",
+    "fonte": "Presidência da República / Assembleia da República",
+    "factClusterId": "fc_rep_cavacosilva_01"
+  },
+  {
+    "id": "HIST_REP_0029",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande exposição mundial realizada em Lisboa entre maio e setembro de 1998 sob o lema «Os Oceanos: Um Património para o Futuro» atraiu mais de 10 milhões de visitantes e regenerou a zona oriental da cidade (Parque das Nações)?",
+    "opcoes": [
+      "Expo 98 (Exposição Mundial de Lisboa de 1998)",
+      "Exposição do Mundo Português",
+      "Expo Milénio",
+      "Feira Internacional de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Expo 98 assinalou os 500 anos da chegada de Vasco da Gama à Índia e legou à cidade o Oceanário, o Pavilhão de Portugal e a Gare do Oriente.",
+    "fonte": "Parque Expo / Município de Lisboa / Bureau International des Expositions",
+    "factClusterId": "fc_rep_expo98_01"
+  },
+  {
+    "id": "HIST_REP_0030",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que presidente da Câmara Municipal de Lisboa (1989-1995) e Presidente da República por dois mandatos (1996-2006), figura cimeira da política lusa repousando no Panteão Nacional, é:",
+    "opcoes": [
+      "Mário Soares",
+      "Jorge Fernando Branco de Sampaio",
+      "Ramalho Eanes",
+      "Marcelo Rebelo de Sousa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jorge Sampaio mobilizou a diplomacia mundial pela causa da libertação de Timor-Leste em 1999 e promulgou a dissolução parlamentar histórica de 2004.",
+    "fonte": "Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_rep_jorgesampaio_01"
+  },
+  {
+    "id": "HIST_REP_0031",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que célebre dirigente comunista português (1913-2005), líder histórico do PCP que protagonizou a espetacular Fuga de Peniche em 1960 e integrou os primeiros governos provisórios após o 25 de Abril, é:",
+    "opcoes": [
+      "Bento Gonçalves",
+      "Octávio Pato",
+      "Álvaro Barreirinhas Cunhal",
+      "Sérgio Vilarigues"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Álvaro Cunhal foi um dos maiores pensadores políticos marxistas do século XX europeu e também romancista sob o pseudónimo Manuel Tiago.",
+    "fonte": "Fundação Dinarte / Museu da Resistência de Peniche",
+    "factClusterId": "fc_rep_alvarocunhal_01"
+  },
+  {
+    "id": "HIST_REP_0032",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que líder histórico socialista português (1924-2017), opositor à ditadura preso 12 vezes e deportado para São Tomé, Primeiro-Ministro de três governos e Presidente da República de 1986 a 1996, repousa no Panteão Nacional?",
+    "opcoes": [
+      "Francisco Salgado Zenha",
+      "Vítor Constâncio",
+      "Jorge Sampaio",
+      "Mário Alberto Nobre Lopes Soares"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mário Soares foi a figura central da consolidação do pluralismo democrático europeu em Portugal.",
+    "fonte": "Fundação Mário Soares / Panteão Nacional",
+    "factClusterId": "fc_rep_mariosoares_01"
+  },
+  {
+    "id": "HIST_REP_0033",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que importante manifestação estudantil contra o Estado Novo em Coimbra em abril de 1969, desencadeada pelo pedido de palavra do presidente da AAC Alberto Martins ao Presidente Américo Thomaz, culminou no luto académico e na greve aos exames?",
+    "opcoes": [
+      "A Crise Académica de 1969 (em Coimbra)",
+      "A Crise de 1962 em Lisboa",
+      "O Luto de Coimbra",
+      "A Revolta das Batatas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A recusa da palavra aos estudantes na inauguração do Edifício das Matemáticas mobilizou todo o país e marcou a quebra irreversível do regime entre a juventude universitária.",
+    "fonte": "Associação Académica de Coimbra / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_rep_criseacademica1969_01"
+  },
+  {
+    "id": "HIST_REP_0034",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que primeiro-ministro e engenheiro socialista (nascido em Lisboa em 1949) chefiou o XIII e XIV Governos Constitucionais (1995-2002) com a política dos «Estados Gerais» e do Rendimento Mínimo Garantido antes de liderar o ACNUR e a ONU?",
+    "opcoes": [
+      "José Sócrates",
+      "António Manuel de Oliveira Guterres",
+      "António Costa",
+      "Jaime Gama"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O governo de António Guterres assegurou o cumprimento dos critérios de convergência de Maastricht e a entrada de Portugal no grupo fundador do Euro.",
+    "fonte": "Assembleia da República / Nações Unidas",
+    "factClusterId": "fc_rep_antonioguterrespm_01"
+  },
+  {
+    "id": "HIST_REP_0035",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande movimento de solidariedade popular e cívica em Portugal em setembro de 1999 viu milhões de portugueses vestirem-se de branco e paralisarem o país durante três minutos ao meio-dia em protesto contra os massacres em Timor-Leste?",
+    "opcoes": [
+      "A Marcha pela Paz",
+      "O Cordão Humano de Lisboa",
+      "O Movimento «Timor Livre» / «Portugal por Timor» (1999)",
+      "A Vigília dos Cravos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A pressão diplomática e cívica de Portugal forçou a ONU a enviar a força multinacional de paz (INTERFET) liderada pela Austrália.",
+    "fonte": "RTP Arquivos / Presidência da República",
+    "factClusterId": "fc_rep_timorlivre1999_01"
+  },
+  {
+    "id": "HIST_REP_0036",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que capitão e herói de Abril (1944-1992), natural de Castelo de Vide e comandante operacional da Escola Prática de Cavalaria de Santarém, recusou cargos políticos ministeriais após o 25 de Abril?",
+    "opcoes": [
+      "Vasco Lourenço",
+      "Melo Antunes",
+      "Vítor Alves",
+      "Fernando José Salgueiro Maia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Salgueiro Maia é sepultado em Castelo de Vide em campa rasa conforme o seu desejo cívico e despojado.",
+    "fonte": "Município de Castelo de Vide / Associação 25 de Abril",
+    "factClusterId": "fc_rep_salgueiromaia_memoria_01"
+  },
+  {
+    "id": "HIST_REP_0037",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que fortaleza no concelho de Peniche foi utilizada pelo regime do Estado Novo entre 1934 e 1974 como uma das principais prisões políticas de alta segurança, hoje transformada em Museu Nacional da Resistência e da Liberdade?",
+    "opcoes": [
+      "Fortaleza de Peniche",
+      "Forte de Caxias",
+      "Cadeia do Aljube",
+      "Forte de São Julião da Barra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de Peniche acolhe o Memorial aos Presos Políticos com o nome de todos os resistentes antifascistas que ali cumpriram pena.",
+    "fonte": "Museu Nacional da Resistência e da Liberdade de Peniche / DGPC",
+    "factClusterId": "fc_rep_peniche_resistencia_01"
+  },
+  {
+    "id": "HIST_REP_0038",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que campo de concentração penal instituído pelo Estado Novo em 1936 no município do Tarrafal (Ilha de Santiago, Cabo Verde) era conhecido como o «Campo da Morte Lenta» pelas condições desumanas e tortura?",
+    "opcoes": [
+      "Campo de São Nicolau",
+      "Campo de Concentração do Tarrafal (Campo de Chão Bom)",
+      "Campo de Moçâmedes",
+      "Colónia Penal de Caxito"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "No Tarrafal morreram 32 presos políticos portugueses (incluindo o líder sindical Bento Gonçalves) e dezenas de nacionalistas angolanos e guineenses.",
+    "fonte": "Instituto do Património Cultural de Cabo Verde / Museu do Aljube",
+    "factClusterId": "fc_rep_tarrafalcaboverde_01"
+  },
+  {
+    "id": "HIST_REP_0039",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que organização juvenil estatal de filiação obrigatória para os jovens dos 7 aos 14 anos foi criada pelo Estado Novo em 1936 («Mocidade Portuguesa») com fardamento verde e saudação romana?",
+    "opcoes": [
+      "Legião Portuguesa",
+      "Guarda da Pátria",
+      "Mocidade Portuguesa (MP)",
+      "União dos Moços"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Mocidade Portuguesa e a Mocidade Portuguesa Feminina visavam o enquadramento ideológico e doutrinação cívico-militar da juventude.",
+    "fonte": "Torre do Tombo / História do Estado Novo",
+    "factClusterId": "fc_rep_mocidadeportuguesa_01"
+  },
+  {
+    "id": "HIST_REP_0040",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que organização paramilitar de voluntários criada em 1936 pelo Estado Novo para combater a «ameaça comunista» e o anarquismo funcionava com fardamento castanho e juramento de fidelidade ao regime?",
+    "opcoes": [
+      "Mocidade Portuguesa",
+      "Milícia Nacional",
+      "Corpo Voluntário",
+      "Legião Portuguesa (LP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Legião Portuguesa foi extinta na madrugada do 25 de Abril de 1974 por decreto da Junta de Salvação Nacional.",
+    "fonte": "Arquivo Histórico Militar / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_rep_legiaoportuguesa_01"
+  },
+  {
+    "id": "HIST_REP_0041",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que bispo do Porto (1906-1982) enviou em 1958 uma carta pró-memória a Salazar criticando a pobreza dos operários, a falta de liberdade e a censura («A Carta do Bispo do Porto»), sendo forçado ao exílio durante dez anos?",
+    "opcoes": [
+      "D. António Ferreira Gomes",
+      "Cardeal Cerejeira",
+      "D. Manuel Martins",
+      "D. António Ribeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. António Ferreira Gomes regressou do exílio em 1969 após a posse de Marcello Caetano e é um símbolo da resistência da Igreja Católica.",
+    "fonte": "Diocese do Porto / Fundação D. António Ferreira Gomes",
+    "factClusterId": "fc_rep_bispodoporto1958_01"
+  },
+  {
+    "id": "HIST_REP_0042",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que primeiro bispo da diocese de Setúbal (1927-2015), conhecido como o «Bispo Vermelho» ou «Bispo dos Pobres», destacou-se na denúncia da fome e desemprego na Península de Setúbal nos anos 1970 e 1980?",
+    "opcoes": [
+      "D. António Ferreira Gomes",
+      "D. Manuel Martins",
+      "D. Albino Cleto",
+      "D. José Policarpo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Manuel Martins alertou o país para as situações de carência alimentar extrema na foz do Sado e na cintura industrial de Lisboa.",
+    "fonte": "Diocese de Setúbal / Município de Setúbal",
+    "factClusterId": "fc_rep_bisposetubal_manuelmartins_01"
+  },
+  {
+    "id": "HIST_REP_0043",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande movimento de contestação operária e grevista no Alentejo e Ribatejo no pós-25 de Abril, com a ocupação de herdades latifundiárias sob o lema «A Terra a Quem a Trabalha», foi a:",
+    "opcoes": [
+      "Revolução Verde",
+      "Campanha do Trigo",
+      "Reforma Agrária (Unidades Coletivas de Produção - UCP)",
+      "Marcha do Pão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Reforma Agrária alterou a estrutura fundiária no Alentejo nos anos de 1974 a 1977 até à Lei Barreto de regularização da propriedade.",
+    "fonte": "Centro de Estudos Sociais / Universidade de Évora",
+    "factClusterId": "fc_rep_reformaagraria1975_01"
+  },
+  {
+    "id": "HIST_REP_0044",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que ministro da Agricultura do I Governo Constitucional (1976-1978), médico e político socialista, promoveu a «Lei Barreto» que regulamentou a Reforma Agrária e devolveu terras indevidamente ocupadas?",
+    "opcoes": [
+      "Henrique de Barros",
+      "Arlindo Cunha",
+      "Capoulas Santos",
+      "António Barreto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Lei Barreto de 1977 estabeleceu os limites das reservas agrícolas e estabilizou as relações de trabalho no campo.",
+    "fonte": "Assembleia da República / DRE",
+    "factClusterId": "fc_rep_leibarreto1977_01"
+  },
+  {
+    "id": "HIST_REP_0045",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande incêndio catastrófico destruiu o coração comercial do Chiado em Lisboa na madrugada de 25 de agosto de 1988, consumindo os Armazéns do Chiado e os Grandes Armazéns Grandella?",
+    "opcoes": [
+      "O Incêndio do Chiado (1988)",
+      "O Incêndio da Baixa",
+      "O Fogo do Rossio",
+      "O Incêndio de Alcântara"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A reconstrução monumental do Chiado foi entregue ao arquiteto Álvaro Siza Vieira, preservando as fachadas históricas e criando novas passagens pedonais.",
+    "fonte": "Câmara Municipal de Lisboa / Regimento de Sapadores Bombeiros",
+    "factClusterId": "fc_rep_incendiochiado1988_01"
+  },
+  {
+    "id": "HIST_REP_0046",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que grande plano de eletrificação e barragens nos anos 1950 («Lei da Electrificação Nacional» e Plano de Fomento) impulsionou a construção das barragens de Castelo do Bode, Cabril e Salamonde?",
+    "opcoes": [
+      "Plano Hidráulico do Tejo",
+      "Lei de Electrificação Nacional (Eng.º Ferreira Dias)",
+      "Plano Marshall Português",
+      "Estratégia do Carvão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Ministro Ferreira Dias foi o grande visionário da rede elétrica e hídrica nacional que industrializou Portugal.",
+    "fonte": "EDP / Ordem dos Engenheiros",
+    "factClusterId": "fc_rep_ferreiradiaseletrificacao_01"
+  },
+  {
+    "id": "HIST_REP_0047",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que importante tratado de desmilitarização e neutralidade das Ilhas Selvagens e da Madeira foi assinado por Portugal para garantir a extensão da sua Zona Económica Exclusiva (ZEE) no Atlântico?",
+    "opcoes": [
+      "Tratado da Antártida",
+      "Pacto Oceânico",
+      "Convenção das Nações Unidas sobre o Direito do Mar (Montego Bay)",
+      "Convenção de OSPAR"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A ZEE portuguesa é a 5.ª maior da União Europeia e a 20.ª maior do mundo com 1,7 milhões de km².",
+    "fonte": "Estrutura de Missão para a Extensão da Plataforma Continental (EMEPC) / Marinha Portuguesa",
+    "factClusterId": "fc_rep_zeedireitodomar_01"
+  },
+  {
+    "id": "HIST_REP_0048",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que importante ponte rodoviária sobre o rio Douro no Porto, inaugurada em 1963 e desenhada pelo engenheiro Edgar Cardoso com o maior arco de betão armado do mundo à época (270 metros de vão), é a:",
+    "opcoes": [
+      "Ponte de São João",
+      "Ponte do Freixo",
+      "Ponte do Infante",
+      "Ponte da Arrábida"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Ponte da Arrábida foi classificada como Monumento Nacional em 2013 pela sua excelência de engenharia mundial.",
+    "fonte": "Infraestruturas de Portugal / DGPC",
+    "factClusterId": "fc_rep_pontearrabida1963_01"
+  },
+  {
+    "id": "HIST_REP_0049",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que prestigiado jornalista e político português (nascido em Lisboa em 1937), cofundador do jornal «Expresso» em 1973 e do canal de televisão SIC em 1992, foi Primeiro-Ministro de 1981 a 1983?",
+    "opcoes": [
+      "Francisco José Pereira Pinto Balsemão",
+      "Vítor Crespo",
+      "Mota Pinto",
+      "Lucas Pires"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pinto Balsemão sucedeu a Sá Carneiro na liderança da AD e fundou o primeiro canal privado de televisão de Portugal (SIC).",
+    "fonte": "Assembleia da República / Grupo Impresa",
+    "factClusterId": "fc_rep_pintobalsemao_01"
+  },
+  {
+    "id": "HIST_REP_0050",
+    "tema": "História",
+    "subtema": "Implantação da República",
+    "pergunta": "Que antigo Presidente da República Portuguesa (eleito em 2016 e reeleito em 2021), professor catedrático de Direito e comentador político televisivo consagrado pela sua proximidade aos cidadãos («O Presidente dos Afectos»), é:",
+    "opcoes": [
+      "Aníbal Cavaco Silva",
+      "Jorge Sampaio",
+      "Marcelo Nuno Duarte Rebelo de Sousa",
+      "Mário Soares"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marcelo Rebelo de Sousa presidiu às comemorações dos 50 anos do 25 de Abril em 2024 e é um dos mais populares chefes de Estado da história democrática.",
+    "fonte": "Presidência da República Portuguesa",
+    "factClusterId": "fc_rep_marcelorebelodesousa_01"
+  }
+]

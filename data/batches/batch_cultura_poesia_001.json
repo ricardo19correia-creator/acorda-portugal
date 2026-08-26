@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_POE_0001",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que rei de Portugal (1261-1325), conhecido como «O Rei Trovador» e «O Lavrador», compôs 137 cantigas medievais preservadas nos cancioneiros galego-portugueses (como as célebres cantigas de amigo «Ai flores, ai flores do verde pino»)?",
+    "opcoes": [
+      "Rei D. Dinis",
+      "Rei D. Afonso Henriques",
+      "Rei D. Afonso III",
+      "Rei D. Duarte"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Dinis fundou o Estudo Geral (Universidade de Coimbra) e oficializou a língua portuguesa nos documentos da Chancelaria Régia.",
+    "fonte": "Cancioneiro da Biblioteca Nacional / BNP",
+    "factClusterId": "fc_cult_poe_d_dinis_trovador_01"
+  },
+  {
+    "id": "CULT_POE_0002",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta de Sá (Coimbra, 1487-1558), ao regressar da sua viagem a Itália em 1526 («Francisco de Sá de Miranda»), introduziu na literatura portuguesa o «Doce Estilo Novo» com o soneto decassílabo, a canção e a écloga clássica?",
+    "opcoes": [
+      "Luís Vaz de Camões",
+      "Francisco de Sá de Miranda",
+      "Bernardim Ribeiro",
+      "António Ferreira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá de Miranda revolucionou a poesia portuguesa abandonando a velha 'redondilha' das cantigas palacianas pelo verso hendecassílabo/decassílabo italiano.",
+    "fonte": "Dicionário de Literatura Portuguesa / DGLAB",
+    "factClusterId": "fc_cult_poe_sademiranda_1526_01"
+  },
+  {
+    "id": "CULT_POE_0003",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Qual é o verso inicial do imortal soneto de Luís de Camões sobre a natureza contraditória do sentimento amoroso («Amor é um fogo que arde sem se ver / é ferida que dói e não se sente / ...»)?",
+    "opcoes": [
+      "«Sete anos de pastor Jacob servia»",
+      "«Mudam-se os tempos, mudam-se as vontades»",
+      "«Amor é um fogo que arde sem se ver»",
+      "«Alma minha gentil, que te partiste»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O soneto lírico de Camões é uma das mais perfeitas e universais definições do amor na poesia renascentista mundial.",
+    "fonte": "Rimas de Camões (1595) / Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_cult_poe_camoes_amorfogo_01"
+  },
+  {
+    "id": "CULT_POE_0004",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta setubalense do século XVIII (1765-1805), figura cimeira da Arcádia Lusitana sob o pseudónimo arcádico «Elmano Sadino», celebrizou-se pelos seus sonetos perfeitos entre o neoclassicismo lírico, a sátira mordaz e o pré-romantismo?",
+    "opcoes": [
+      "Filinto Elísio",
+      "Correia Garção",
+      "Tomás António Gonzaga",
+      "Manuel Maria Barbosa du Bocage"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bocage é considerado o maior sonetista da língua portuguesa a par de Camões e Antero de Quental.",
+    "fonte": "Casa Bocage (Setúbal) / BNP",
+    "factClusterId": "fc_cult_poe_bocage_elmanosadino_01"
+  },
+  {
+    "id": "CULT_POE_0005",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que célebre soneto de Fernando Pessoa ortónimo (1931), publicado na revista Presença, abre com os versos «O poeta é um fingidor. / Finge tão completamente / Que chega a fingir que é dor / A dor que deveras sente.»?",
+    "opcoes": [
+      "«Autopsicografia»",
+      "«Isto»",
+      "«Ela Canta, Pobre Ceifeira»",
+      "«Tabacaria»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Autopsicografia é a súmula teórica da conceção poética de Fernando Pessoa sobre a transfiguração artística da emoção em pensamento.",
+    "fonte": "Casa Fernando Pessoa / Presença (1932)",
+    "factClusterId": "fc_cult_poe_autopsicografia_pessoa_01"
+  },
+  {
+    "id": "CULT_POE_0006",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que heterónimo bucólico e mestre de todos os outros heterónimos de Fernando Pessoa («O Guardador de Rebanhos»), que vivia no campo e afirmava «Eu não tenho filosofia: tenho sentidos... / Se falo na Natureza não é porque saiba o que ela é, / Mas porque a amo», é:",
+    "opcoes": [
+      "Ricardo Reis",
+      "Alberto Caeiro",
+      "Álvaro de Campos",
+      "Bernardo Soares"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alberto Caeiro representava a poesia do olhar direto e sem metafísica, considerado o 'Mestre' por Ricardo Reis e Álvaro de Campos.",
+    "fonte": "Casa Fernando Pessoa / Edições Ática",
+    "factClusterId": "fc_cult_poe_albertocaeiro_01"
+  },
+  {
+    "id": "CULT_POE_0007",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que heterónimo de Fernando Pessoa, médico classicista e pagão educado num colégio de jesuítas («Ricardo Reis»), compôs odes estóicas e epicuristas inspiradas no poeta latino Horácio como «Para ser grande, sê inteiro: nada / Teu exagera ou exclui»?",
+    "opcoes": [
+      "Alberto Caeiro",
+      "Álvaro de Campos",
+      "Ricardo Reis",
+      "Alexander Search"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Reis defendia a serenidade e a aceitação do destino, inspirando mais tarde o romance 'O Ano da Morte de Ricardo Reis' de José Saramago.",
+    "fonte": "Casa Fernando Pessoa / BNP",
+    "factClusterId": "fc_cult_poe_ricardoreis_01"
+  },
+  {
+    "id": "CULT_POE_0008",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que heterónimo futurista e decadentista de Fernando Pessoa, engenheiro naval formado em Glasgow («Álvaro de Campos»), compôs as monumentais «Ode Triunfal», «Ode Marítima» e o célebre poema existencial «Tabacaria» («Não sou nada. / Nunca serei nada. / Não posso querer ser nada...»)?",
+    "opcoes": [
+      "Alberto Caeiro",
+      "Ricardo Reis",
+      "Barão de Teive",
+      "Álvaro de Campos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Álvaro de Campos personificava a euforia mecânica da modernidade e o desespero metafísico mais visceral do universo pessoano.",
+    "fonte": "Casa Fernando Pessoa / Orpheu / Presença",
+    "factClusterId": "fc_cult_poe_alvarodecampos_tabacaria_01"
+  },
+  {
+    "id": "CULT_POE_0009",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Qual foi o único livro de poemas em língua portuguesa publicado em vida por Fernando Pessoa, editado em Lisboa em 1934 com 44 poemas épico-líricos divididos em «Brasão», «Mar Português» e «O Encoberto»?",
+    "opcoes": [
+      "«Mensagem» (1934)",
+      "«Cancioneiro»",
+      "«O Guardador de Rebanhos»",
+      "«Poesias de Fernando Pessoa»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mensagem recria a história mítica e espiritual de Portugal com poemas como 'Ó mar salgado, quanto do teu sal / São lágrimas de Portugal!'.",
+    "fonte": "Imprensa Nacional-Casa da Moeda / Casa Fernando Pessoa",
+    "factClusterId": "fc_cult_poe_mensagem_pessoa_01"
+  },
+  {
+    "id": "CULT_POE_0010",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que genial poeta e contista modernista de Lisboa (1890-1916), cofundador da revista «Orpheu» e melhor amigo de Fernando Pessoa («Mário de Sá-Carneiro»), autor de «Dispersão» e «Indícios de Ouro», suicidou-se tragicamente em Paris aos 26 anos no Hotel Nice?",
+    "opcoes": [
+      "Almada Negreiros",
+      "Mário de Sá-Carneiro",
+      "Amadeo de Souza-Cardoso",
+      "Camilo Pessanha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá-Carneiro escreveu versos imortais sobre a vertigem e a fragmentação do 'Eu' como 'Eu não sou eu nem sou o outro, / Sou qualquer coisa de intermédio'.",
+    "fonte": "Dicionário do Modernismo Português / BNP",
+    "factClusterId": "fc_cult_poe_sacarneiro_orpheu_01"
+  },
+  {
+    "id": "CULT_POE_0011",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que maior poetisa lírica alentejana de Vila Viçosa (1894-1930), pioneira da emancipação feminina e da paixão erótica e existencial («Florbela Espanca»), compôs sonetos arrebatadores reunidos em obras-primas como «Livro de Mágoas» (1919) e «Charneca em Flor» (1931)?",
+    "opcoes": [
+      "Natália Correia",
+      "Sophia de Mello Breyner Andresen",
+      "Florbela Espanca (Flor Bela d'Alma da Conceição)",
+      "Maria Teresa Horta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Florbela Espanca imortalizou versos como 'Eu quero amar, amar perdidamente!' afirmando-se como uma das maiores sonetistas da língua portuguesa.",
+    "fonte": "DGLAB / Museu de Vila Viçosa",
+    "factClusterId": "fc_cult_poe_florbelaespanca_01"
+  },
+  {
+    "id": "CULT_POE_0012",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande poetisa e escritora portuense (1919-2004), a primeira mulher galardoada com o Prémio Camões (1999) e o Prémio Rainha Sofia de Poesia Ibero-Americana, celebrou o mar, a luz clássica da Grécia e a liberdade em obras como «Mar Novo», «Coral» e «Livro Sexto»?",
+    "opcoes": [
+      "Florbela Espanca",
+      "Natália Correia",
+      "Ana Luísa Amaral",
+      "Sophia de Mello Breyner Andresen"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Sophia foi sepultada no Panteão Nacional em 2014 e os seus poemas de liberdade foram entoados na Revolução de Abril ('Esta é a madrugada que eu esperava').",
+    "fonte": "Panteão Nacional / Prémio Camões / DGLAB",
+    "factClusterId": "fc_cult_poe_sophiademellobreyner_01"
+  },
+  {
+    "id": "CULT_POE_0013",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que extraordinário poeta de São Pedro do Sul (1923-2005), radicado no Porto («Eugénio de Andrade»), mestre do verso límpido, do corpo e da terra, foi galardoado com o Prémio Camões em 2001 por obras-primas como «As Mãos e os Frutos» (1948) e «Ostinato Rigore»?",
+    "opcoes": [
+      "Eugénio de Andrade (José Fontinhas)",
+      "Herberto Helder",
+      "Ruy Belo",
+      "Jorge de Sena"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Eugénio de Andrade é o poeta português contemporâneo mais traduzido no mundo com edições em dezenas de línguas.",
+    "fonte": "Fundação Eugénio de Andrade / Prémio Camões",
+    "factClusterId": "fc_cult_poe_eugeniodeandrade_01"
+  },
+  {
+    "id": "CULT_POE_0014",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que monumental poeta madeirense do Funchal (1930-2015), figura mítica e xamânica da poesia de vanguarda e experimental («Herberto Helder»), autor de «A Colher na Boca», «Poesia Toda», «A Faca Não Corta o Fogo» e «Servidões», recusava categoricamente prémios literários e entrevistas?",
+    "opcoes": [
+      "Ruy Belo",
+      "Herberto Helder de Oliveira",
+      "António Ramos Rosa",
+      "Luiza Neto Jorge"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Herberto Helder recusou o Prémio Pessoa em 1994 e é considerado um dos maiores e mais radicais criadores da lírica em língua portuguesa.",
+    "fonte": "Assírio & Alvim / Porto Editora / DGLAB",
+    "factClusterId": "fc_cult_poe_herbertohelder_01"
+  },
+  {
+    "id": "CULT_POE_0015",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande poeta, ensaísta e ficcionista lisboeta (1919-1978), que viveu exilado no Brasil e nos Estados Unidos («Jorge de Sena»), autor de «Metamorfoses», «Pedra Filosofal», «Arte de Música» e do romance «Sinais de Fogo», é uma das mentes mais brilhantes do século XX?",
+    "opcoes": [
+      "David Mourão-Ferreira",
+      "Vasco Graça Moura",
+      "Jorge de Sena",
+      "Rui Knopfli"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jorge de Sena foi professor de literatura na Universidade da Califórnia em Santa Bárbara e tradutor prodigioso.",
+    "fonte": "Universidade de Santa Bárbara (Jorge de Sena Center) / DGLAB",
+    "factClusterId": "fc_cult_poe_jorgedesena_01"
+  },
+  {
+    "id": "CULT_POE_0016",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que médico e escritor transmontano de São Martinho de Anta (Sabrosa, 1907-1995), Adolfo Correia da Rocha («Miguel Torga»), primeiro galardoado com o Prémio Camões em 1989, celebrou a força telúrica do homem e da terra em «Poemas Ibéricos» e «Cântico do Homem»?",
+    "opcoes": [
+      "Aquilino Ribeiro",
+      "José Régio",
+      "Manuel da Fonseca",
+      "Miguel Torga (Adolfo Correia da Rocha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Miguel Torga publicou ao longo de cinco décadas os 16 volumes do seu monumental 'Diário' conjugando prosa poética e versos autobiográficos.",
+    "fonte": "Espaço Miguel Torga (Sabrosa) / Prémio Camões",
+    "factClusterId": "fc_cult_poe_migueltorga_01"
+  },
+  {
+    "id": "CULT_POE_0017",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que vibrante poetisa, jornalista e deputada açoriana de Ponta Delgada (1923-1993), figura carismática da tertúlia do Botequim em Lisboa («Natália Correia»), redigiu a célebre «Antologia de Poesia Portuguesa Erótica e Satírica» e compôs a letra do Hino Oficial dos Açores?",
+    "opcoes": [
+      "Natália Correia",
+      "Sophia de Mello Breyner",
+      "Maria Lamas",
+      "Maria Velho da Costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Natália Correia foi uma combatente intrépida pela liberdade de expressão e pelos direitos das mulheres no Parlamento e na literatura.",
+    "fonte": "Assembleia da República / Governo Regional dos Açores",
+    "factClusterId": "fc_cult_poe_nataliacorreia_01"
+  },
+  {
+    "id": "CULT_POE_0018",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta, ensaísta e professor universitário de Lisboa (1927-1996), autor de «A Secreta Viagem», «Noite de Natal» e do romance «Um Amor Feliz», foi autor de fados antológicos imortalizados por Amália Rodrigues («Gaivota», «Fado Penélope», «Abandono»)?",
+    "opcoes": [
+      "Ary dos Santos",
+      "David Mourão-Ferreira",
+      "Manuel Alegre",
+      "Pedro Homem de Mello"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "David Mourão-Ferreira foi Secretário de Estado da Cultura e uma das personalidades tutelares da poesia e crítica literária portuguesa.",
+    "fonte": "Faculdade de Letras de Lisboa / Museu do Fado",
+    "factClusterId": "fc_cult_poe_davidmouraoferreira_01"
+  },
+  {
+    "id": "CULT_POE_0019",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que genial declamador e poeta lisboeta (1937-1984), o «Poeta do Povo» («José Carlos Ary dos Santos»), compôs poemas revolucionários e fados imortais como «Tourada», «Desfolhada Portuguesa» (cantada por Simone de Oliveira) e «Cavalo à Solta»?",
+    "opcoes": [
+      "Manuel Alegre",
+      "David Mourão-Ferreira",
+      "José Carlos Ary dos Santos",
+      "António Gedeão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ary dos Santos venceu quatro vezes o Festival RTP da Canção e era célebre pela sua presença declamatória arrebatadora em comícios e palcos.",
+    "fonte": "Museu do Fado / Casa Ary dos Santos (Alfama)",
+    "factClusterId": "fc_cult_poe_arydossantos_01"
+  },
+  {
+    "id": "CULT_POE_0020",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que prestigiado poeta, romancista e combatente antifascista de Águeda (nascido em 1936), autor de obras clássicas da poesia da resistência como «Praça da Canção» (1965) e «O Canto e as Armas» (1967) musicadas por Zeca Afonso e Adriano Correia de Oliveira, foi galardoado com o Prémio Camões em 2017?",
+    "opcoes": [
+      "José Afonso",
+      "Manuel Freire",
+      "Sérgio Godinho",
+      "Manuel Alegre de Melo Duarte (Manuel Alegre)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os livros clandestinos de Manuel Alegre circulavam de mão em mão entre estudantes e soldados na Guerra Colonial como hinos à liberdade.",
+    "fonte": "Prémio Camões / Assembleia da República / DGLAB",
+    "factClusterId": "fc_cult_poe_manuelalegre_01"
+  },
+  {
+    "id": "CULT_POE_0021",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande poeta de São João da Madeira (1933-1978), jurista e professor de Direito («Ruy Belo»), autor de «Aquele Grande Rio Eufrates» (1961), «O Problema da Habitação» e «País Possível», é uma das vozes mais inovadoras e desassombradas da lírica portuguesa contemporânea?",
+    "opcoes": [
+      "Ruy de Moura Belo (Ruy Belo)",
+      "Herberto Helder",
+      "António Ramos Rosa",
+      "Nuno Júdice"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ruy Belo construiu uma poesia de ritmo torrencial e reflexão ontológica sobre o espaço, o quotidiano e o destino do país.",
+    "fonte": "Assírio & Alvim / DGLAB",
+    "factClusterId": "fc_cult_poe_ruybelo_01"
+  },
+  {
+    "id": "CULT_POE_0022",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que ilustre poeta algarvio de Faro (1924-2013), ensaísta e primeiro vencedor do Prémio Camões em 1988 («António Ramos Rosa»), autor de «Gritar» (1958), «A Nuvem sobre a Página» e «O Incêndio dos Aspectos», dedicou a sua obra à celebração da palavra e do silêncio essencial?",
+    "opcoes": [
+      "Casimiro de Brito",
+      "António Ramos Rosa",
+      "Gastão Cruz",
+      "Fiama Hasse Pais Brandão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Ramos Rosa publicou mais de 80 livros de poesia sendo um dos mestres da poesia depurada da segunda metade do século XX.",
+    "fonte": "Biblioteca Municipal António Ramos Rosa (Faro) / Prémio Camões",
+    "factClusterId": "fc_cult_poe_antonioramosrosa_01"
+  },
+  {
+    "id": "CULT_POE_0023",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que eminente poeta, romancista, tradutor e presidente da Fundação Centro Cultural de Belém de Foz do Douro (1942-2014), Vasco Graça Moura («Vasco Graça Moura»), galardoado com o Prémio Camões em 1995, assinou as traduções em verso de «A Divina Comédia» de Dante e dos Sonetos de Shakespeare?",
+    "opcoes": [
+      "David Mourão-Ferreira",
+      "Jorge de Sena",
+      "Vasco Navarro da Graça Moura (Vasco Graça Moura)",
+      "Nuno Júdice"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Vasco Graça Moura liderou a Comissão Nacional para as Comemorações dos Descobrimentos Portugueses e foi eurodeputado.",
+    "fonte": "Fundação CCB / Prémio Camões / Imprensa Nacional",
+    "factClusterId": "fc_cult_poe_vascogracamoura_01"
+  },
+  {
+    "id": "CULT_POE_0024",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que importante poeta e professor universitário algarvio de Mexilhoeira Grande (Portimão, 1949-2024), diretor da revista Colóquio/Letras («Nuno Júdice»), galardoado com o Prémio Rainha Sofia de Poesia Ibero-Americana em 2013 por obras como «A Partilha dos Mitos» e «Mecanismos do Sentimento», é:",
+    "opcoes": [
+      "Gastão Cruz",
+      "Fernando Pinto do Amaral",
+      "Pedro Mexia",
+      "Nuno Júdice"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nuno Júdice foi conselheiro cultural de Portugal em Paris e um dos maiores poetas europeus da memória e da metapoética.",
+    "fonte": "Fundação Calouste Gulbenkian / Prémio Rainha Sofia",
+    "factClusterId": "fc_cult_poe_nunojudice_01"
+  },
+  {
+    "id": "CULT_POE_0025",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que notável poetisa, ensaísta e professora da Faculdade de Letras do Porto de Lisboa (1956-2022), galardoada com o Prémio Rainha Sofia de Poesia Ibero-Americana em 2021 por obras como «Minha Senhora de Quê» e «What's in a Name», foi uma das mais celebradas vozes líricas mundiais?",
+    "opcoes": [
+      "Ana Luísa Amaral",
+      "Adília Lopes",
+      "Maria Teresa Horta",
+      "Matilde Campilho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ana Luísa Amaral uniu o doméstico, o erotismo e o questionamento feminista e político numa poesia universal traduzida em mais de 20 países.",
+    "fonte": "Universidade do Porto / Prémio Rainha Sofia (Espanha)",
+    "factClusterId": "fc_cult_poe_analuisaamaral_01"
+  },
+  {
+    "id": "CULT_POE_0026",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que singular poetisa lisboeta (Maria José da Silva Vilar dos Santos, nascida em 1960), que adotou o pseudónimo literário «Adília Lopes», revolucionou a poesia contemporânea com a sua aparente ingenuidade infantil, rimas simples e desassombro autobiográfico em «Um Jogo Bastante Perigoso» e «Manhã»?",
+    "opcoes": [
+      "Ana Luísa Amaral",
+      "Adília Lopes",
+      "Luiza Neto Jorge",
+      "Fiama Hasse Pais Brandão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A poesia de Adília Lopes é considerada um dos mais originais fenómenos da poesia portuguesa pós-moderna.",
+    "fonte": "Assírio & Alvim / DGLAB",
+    "factClusterId": "fc_cult_poe_adilialopes_01"
+  },
+  {
+    "id": "CULT_POE_0027",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande poeta do Realismo e precursor da modernidade urbana lisboeta (1855-1886), que trabalhou como comerciante na Baixa e publicou postumamente «O Livro de Cesário Verde» (1887) com poemas magistrais como «O Sentimento dum Ocidental» e «Num Bairro Moderno»?",
+    "opcoes": [
+      "Antero de Quental",
+      "Gomes Leal",
+      "Cesário Verde (José Joaquim Cesário Verde)",
+      "Guerra Junqueiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cesário Verde introduziu o olhar visual cinematográfico e a linguagem da cidade, dos candeeiros de gás e da calçada portuguesa na poesia.",
+    "fonte": "BNP / Dicionário de Literatura Portuguesa",
+    "factClusterId": "fc_cult_poe_cesarioverde_01"
+  },
+  {
+    "id": "CULT_POE_0028",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta micaelense de Ponta Delgada (1842-1891), líder da Geração de 70 e organizador das Conferências Democráticas do Casino em 1871 («Antero de Quental»), compôs os monumentais «Sonetos Completos» e «Odes Modernas» antes de se suicidar num banco de jardim em São Miguel?",
+    "opcoes": [
+      "Guerra Junqueiro",
+      "Teófilo Braga",
+      "Eça de Queirós",
+      "Antero Tarquínio de Quental (Antero de Quental)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Antero de Quental combinou o ideal revolucionário socialista com a mais profunda angústia metafísica e budista nos seus sonetos de perfeição formal.",
+    "fonte": "Instituto Cultural de Ponta Delgada / BNP",
+    "factClusterId": "fc_cult_poe_anterodequental_01"
+  },
+  {
+    "id": "CULT_POE_0029",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta e panfletário de Freixo de Espada à Cinta (1850-1923), figura maior da Geração de 70 («Guerra Junqueiro»), combateu a monarquia e a hipocrisia eclesiástica com versos sarcásticos em «A Velhice do Padre Eterno» (1885) e «Finis Patriae» e celebrou a terra em «Os Simples»?",
+    "opcoes": [
+      "Abílio Manuel Guerra Junqueiro (Guerra Junqueiro)",
+      "Antero de Quental",
+      "Gomes Leal",
+      "João de Deus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Guerra Junqueiro foi sepultado no Panteão Nacional (Igreja de Santa Engrácia em Lisboa) como o poeta cívico da República.",
+    "fonte": "Panteão Nacional / Casa-Museu Guerra Junqueiro (Porto)",
+    "factClusterId": "fc_cult_poe_guerrajunqueiro_01"
+  },
+  {
+    "id": "CULT_POE_0030",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que ilustre poeta e pedagogo de São Bartolomeu de Messines (Silves, 1830-1896), autor de «Flores do Campo» e «Folhas Soltas» («João de Deus»), revolucionou a alfabetização em Portugal ao criar o método fonético da «Cartilha Maternal» em 1876?",
+    "opcoes": [
+      "Almeida Garrett",
+      "João de Deus Ramos (João de Deus)",
+      "Soares de Passos",
+      "Alexandre Herculano"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "João de Deus repousa no Panteão Nacional e a sua Cartilha Maternal ensinou a ler gerações inteiras de crianças portuguesas nos Jardins-Escola João de Deus.",
+    "fonte": "Associação Jardins-Escolas João de Deus / Panteão Nacional",
+    "factClusterId": "fc_cult_poe_joaodedeus_cartilha_01"
+  },
+  {
+    "id": "CULT_POE_0031",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta portuense (1867-1900), figura maior do decadentismo e do saudosismo («António Nobre»), publicou em Paris em 1892 a sua única e mítica obra-prima «Só», marcada pela dor nostálgica de Portugal, da infância e da foz do Douro?",
+    "opcoes": [
+      "Camilo Pessanha",
+      "Cesário Verde",
+      "António Pereira Nobre (António Nobre)",
+      "Teixeira de Pascoaes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O livro 'Só' de António Nobre influenciou toda a geração de Orpheu com poemas como 'Purinha' e 'Lusitânia no Bairro Latino'.",
+    "fonte": "BNP / Casa-Museu de Serralves",
+    "factClusterId": "fc_cult_poe_antonionobre_so_01"
+  },
+  {
+    "id": "CULT_POE_0032",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que genial poeta simbolista de Coimbra (1867-1926), que viveu a maior parte da sua vida como magistrado e professor em Macau («Camilo Pessanha»), publicou em 1920 a sua única e preciosa coletânea poética «Clepsidra», obra-prima do simbolismo em língua portuguesa?",
+    "opcoes": [
+      "António Nobre",
+      "Mário de Sá-Carneiro",
+      "Eugénio de Castro",
+      "Camilo de Almeida Pessanha (Camilo Pessanha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Camilo Pessanha alcançou a perfeição musical da aliteração e da sugestão estesiológica em sonetos como 'Caminho' e 'Violoncelo'.",
+    "fonte": "Clepsidra (1920) / Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_cult_poe_camilopessanha_clepsidra_01"
+  },
+  {
+    "id": "CULT_POE_0033",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que filósofo e poeta de Amarante (1877-1952), fundador e mentor do movimento cultural do «Saudosismo» e da revista «A Águia» na Serra do Marão («Teixeira de Pascoaes»), escreveu obras monumentais como «Marânus», «Regresso ao Paraíso» e biografias líricas de Camões e São Jerónimo?",
+    "opcoes": [
+      "Joaquim Pereira Teixeira de Vasconcelos (Teixeira de Pascoaes)",
+      "Leonardo Coimbra",
+      "Raul Brandão",
+      "Jaime Cortesão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Teixeira de Pascoaes transformou a 'Saudade' no princípio ontológico supremo da alma e do destino civilizacional lusitano.",
+    "fonte": "Casa de Pascoaes (Amarante) / BNP",
+    "factClusterId": "fc_cult_poe_teixeiradepascoaes_01"
+  },
+  {
+    "id": "CULT_POE_0034",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que escritor e dramaturgo de Vila do Conde (1901-1969), cofundador e líder espiritual da revista modernista «Presença» (1927-1940) em Coimbra («José Régio» / José Maria dos Reis Pereira), compôs o célebre «Cântico Negro» («Vim ao mundo pra desflorar florestas virgens... / Não, não vou por aí!»)?",
+    "opcoes": [
+      "Adolfo Casais Monteiro",
+      "José Régio (José Maria dos Reis Pereira)",
+      "João Gaspar Simões",
+      "Branquinho da Fonseca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 'Cântico Negro' de José Régio é o manifesto supremo do individualismo e da recusa da conformidade na literatura portuguesa.",
+    "fonte": "Casa de José Régio (Portalegre e Vila do Conde) / Presença",
+    "factClusterId": "fc_cult_poe_joseregio_canticonegro_01"
+  },
+  {
+    "id": "CULT_POE_0035",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande poeta e ensaísta do Neorrealismo português de Lisboa (1923-1998), que trabalhou na farmácia familiar em Alhandra e participou na fundação da revista Vértice («Armindo Rodrigues» e «Joaquim Namorado» / «Carlos de Oliveira»), compôs «Turismo», «Mãe Pobre» e «Colheita Perdida»?",
+    "opcoes": [
+      "Manuel da Fonseca",
+      "José Gomes Ferreira",
+      "Carlos de Oliveira",
+      "Joaquim Namorado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos de Oliveira uniu o rigor neorrealista à mais apurada depuração estética em obras como 'Cantata' e 'Micróbio'.",
+    "fonte": "Assírio & Alvim / DGLAB",
+    "factClusterId": "fc_cult_poe_carlosdeoliveira_01"
+  },
+  {
+    "id": "CULT_POE_0036",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que consagrado escritor e poeta alentejano de Santiago do Cacém (1911-1993), uma das vozes mais puras do Neorrealismo («Manuel da Fonseca»), celebrou o mundo dos ceifeiros e montados alentejanos em poemas como «Rosa dos Ventos» e «Poemas Completos» («Mataram o moleiro, ai o moleiro que era pai de três filhos»)?",
+    "opcoes": [
+      "Carlos de Oliveira",
+      "Afonso Duarte",
+      "José Gomes Ferreira",
+      "Manuel da Fonseca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuel da Fonseca retratou com vigor épico o drama dos trabalhadores rurais do Alentejo na poesia e no conto ('O Fogo e as Cinzas').",
+    "fonte": "Câmara Municipal de Santiago do Cacém / DGLAB",
+    "factClusterId": "fc_cult_poe_manueldafonseca_01"
+  },
+  {
+    "id": "CULT_POE_0037",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que jurista, cronista e poeta combativo do Porto/Lisboa (1900-1985), autor das célebres «Memórias de um Chui» e das «Poesias» com o poema «Lágrima de Preta» e «Aroeira» («José Gomes Ferreira»), foi um dos símbolos da dignidade cívica contra a ditadura?",
+    "opcoes": [
+      "José Gomes Ferreira",
+      "António Gedeão",
+      "Rómulo de Carvalho",
+      "José Rodrigues Miguéis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Gomes Ferreira uniu a música, a crónica combativa e uma poesia humana de profunda fraternidade com os oprimidos.",
+    "fonte": "Associação Portuguesa de Escritores / BNP",
+    "factClusterId": "fc_cult_poe_josegomesferreira_01"
+  },
+  {
+    "id": "CULT_POE_0038",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que importante poeta e dramaturga de Lisboa (1938-2007), cofundadora do grupo Poesia 61 («Fiama Hasse Pais Brandão»), galardoada com o Prémio Camilo Pessanha por «Morfismos» (1961) e autora de «Barcas Novas» e «Cena Romântica»?",
+    "opcoes": [
+      "Luiza Neto Jorge",
+      "Fiama Hasse Pais Brandão",
+      "Maria Teresa Horta",
+      "Gastão Cruz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Fiama Hasse Pais Brandão foi uma das figuras centrais da renovação da linguagem poética e dramatúrgica portuguesa nos anos 1960.",
+    "fonte": "Assírio & Alvim / DGLAB",
+    "factClusterId": "fc_cult_poe_fiamahasse_poesia61_01"
+  },
+  {
+    "id": "CULT_POE_0039",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que vanguardista poetisa lisboeta (1939-1989), figura maior da Poesia 61 e pioneira do «corpo poético» e do erotismo sonoro («Luiza Neto Jorge»), assinou as coletâneas seminais «Noite Aberta das Quatro Varas», «Terra Imóvel» e «Pares Ímpares»?",
+    "opcoes": [
+      "Fiama Hasse Pais Brandão",
+      "Adília Lopes",
+      "Luiza Neto Jorge",
+      "Maria Ondina Braga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Luiza Neto Jorge revolucionou a sintaxe e a materialidade sonora do poema com a célebre expressão da 'esculptura verbal'.",
+    "fonte": "Assírio & Alvim / DGLAB",
+    "factClusterId": "fc_cult_poe_luizanetojorge_01"
+  },
+  {
+    "id": "CULT_POE_0040",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que jornalista e escritora de Lisboa (1937-2023), uma das célebres «Três Marias» coautora da obra censurada «Novas Cartas Portuguesas» (1972) com Maria Isabel Barreno e Maria Velho da Costa («Maria Teresa Horta»), publicou obras poéticas feministas como «Amor Mais Que Perfeito» e «Poesia Reunida»?",
+    "opcoes": [
+      "Maria Isabel Barreno",
+      "Maria Velho da Costa",
+      "Natália Correia",
+      "Maria Teresa Horta"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria Teresa Horta foi pioneira no tratamento do desejo, do corpo e dos direitos das mulheres sob o Estado Novo sofrendo perseguição política.",
+    "fonte": "DGLAB / Prémio D. Dinis",
+    "factClusterId": "fc_cult_poe_mariateresahorta_01"
+  },
+  {
+    "id": "CULT_POE_0041",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que célebre poeta romântico e estadista portuense (1799-1854), visconde e criador do Conservatório e do Teatro Nacional D. Maria II («Almeida Garrett»), inaugurou o Romantismo em Portugal em 1825 com o poema «Camões» e publicou em 1853 a obra-prima lírica «Folhas Caídas»?",
+    "opcoes": [
+      "João Baptista da Silva Leitão de Almeida Garrett",
+      "Alexandre Herculano",
+      "António Feliciano de Castilho",
+      "Soares de Passos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Almeida Garrett recuperou o romanceiro tradicional ('Romanceiro') e escreveu obras fundamentais como 'Frei Luís de Sousa' e 'Viagens na Minha Terra'.",
+    "fonte": "Panteão Nacional / DGLAB",
+    "factClusterId": "fc_cult_poe_almeidagarrett_1825_01"
+  },
+  {
+    "id": "CULT_POE_0042",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que grande historiador e escritor romântico de Lisboa (1810-1877), guardião da Torre do Tombo («Alexandre Herculano»), publicou a coletânea de poesia religiosa e liberal «A Harpa do Crente» (1838) antes de se retirar para a quinta de Vale de Lobos?",
+    "opcoes": [
+      "Almeida Garrett",
+      "Alexandre Herculano de Carvalho e Araújo",
+      "Rebelo da Silva",
+      "Oliveira Martins"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Herculano é o pai da moderna historiografia crítica portuguesa e pioneiro do romance histórico ('Eurico, o Presbítero').",
+    "fonte": "Panteão Nacional / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_cult_poe_alexandreherculano_01"
+  },
+  {
+    "id": "CULT_POE_0043",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poeta ultrarromântico do Porto (1826-1860), expoente da poesia gótica e fúnebre em Portugal («António Augusto Soares de Passos»), celebrizou-se em todo o país com o célebre poema sombrio «O Noivado do Sepulcro»?",
+    "opcoes": [
+      "Almeida Garrett",
+      "Castilho",
+      "António Augusto Soares de Passos (Soares de Passos)",
+      "João de Lemos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O poema 'O Noivado do Sepulcro' era recitado de cor nas salas oitocentistas e simboliza o apogeu do ultrarromantismo macabro português.",
+    "fonte": "Dicionário de Literatura Portuguesa / Porto Editora",
+    "factClusterId": "fc_cult_poe_soaresdepassos_01"
+  },
+  {
+    "id": "CULT_POE_0044",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que famoso poeta moçambicano de ascendência luso-suíça (1932-1997), que viveu em Lourenço Marques e Londres («Rui Knopfli»), autor de «O País dos Outros» e «Ilha de Próspero», é uma das pontes poéticas mais luminosas da literatura lusófona?",
+    "opcoes": [
+      "José Craveirinha",
+      "Luís Carlos Patraquim",
+      "Mia Couto",
+      "Rui Knopfli"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Rui Knopfli foi galardoado com o Prémio do P.E.N. Clube Português e a Ordem do Infante D. Henrique pela sua poesia rigorosa e cosmopolita.",
+    "fonte": "Imprensa Nacional / DGLAB",
+    "factClusterId": "fc_cult_poe_ruiknopfli_01"
+  },
+  {
+    "id": "CULT_POE_0045",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que médico e poeta de Viana do Castelo (1904-1977), professor na Faculdade de Letras do Porto («Pedro Homem de Mello»), celebrizou-se pelo lirismo tradicional do Minho e por fados lendários como «Povo Que Lavas no Rio» e «Havemos de Ir a Viana»?",
+    "opcoes": [
+      "Pedro Homem de Mello",
+      "David Mourão-Ferreira",
+      "Alberto de Lacerda",
+      "António Correia de Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O poema 'Povo Que Lavas no Rio' de Pedro Homem de Mello tornou-se o fado mais célebre e comovente do repertório de Amália Rodrigues.",
+    "fonte": "Museu do Fado / Município de Viana do Castelo",
+    "factClusterId": "fc_cult_poe_pedrohomemdemello_01"
+  },
+  {
+    "id": "CULT_POE_0046",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que importante poeta e crítico literário de Faro (1941-2022), figura da Poesia 61 e encenador teatral («Gastão Cruz»), autor de «A Poesia Portuguesa Hoje», «A Morte Percutiva» e «As Aves», foi um dos mais rigorosos pensadores do verso português contemporâneo?",
+    "opcoes": [
+      "Nuno Júdice",
+      "Gastão Cruz",
+      "António Ramos Rosa",
+      "Casimiro de Brito"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Gastão Cruz dirigiu o Grupo Teatral 'Héxagono' e foi galardoado com o Grande Prémio de Poesia da Associação Portuguesa de Escritores (APE).",
+    "fonte": "Assírio & Alvim / APE",
+    "factClusterId": "fc_cult_poe_gastaocruz_01"
+  },
+  {
+    "id": "CULT_POE_0047",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que jovem escritora e poetisa lisboeta (nascida em 1982), que viveu no Rio de Janeiro e assinou o aclamado livro de poesia em prosa e verso «Jóquei» (2014) e o romance «Flecha» («Matilde Campilho»), é uma das vozes mais lidas da nova geração?",
+    "opcoes": [
+      "Filipa Leal",
+      "Raquel Nobre Guerra",
+      "Matilde Campilho",
+      "Andreia C. Faria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O livro 'Jóquei' de Matilde Campilho foi um fenómeno editorial em Portugal e no Brasil cruzando linguagens e geografias atlantistas.",
+    "fonte": "Editora Tinta-da-China / Companhia das Letras",
+    "factClusterId": "fc_cult_poe_matildecampilho_joquei_01"
+  },
+  {
+    "id": "CULT_POE_0048",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que poetisa e jornalista portuense (nascida em 1979), apresentadora do programa literário «Nada Será Como Dante» na RTP2 com Pedro Mexia («Filipa Leal»), publicou obras poéticas aclamadas como «A Cidade Líquida», «Vem à Mãe» e «Fósforos e Metal Sobre Imitação de Ser Humano»?",
+    "opcoes": [
+      "Matilde Campilho",
+      "Marta Chaves",
+      "Ana Luísa Amaral",
+      "Filipa Leal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Filipa Leal é uma das principais dinamizadoras da leitura e divulgação poética na televisão pública portuguesa.",
+    "fonte": "RTP2 / Assírio & Alvim",
+    "factClusterId": "fc_cult_poe_filipaleal_01"
+  },
+  {
+    "id": "CULT_POE_0049",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que crítico literário, poeta e cronista de Lisboa (nascido em 1972), membro do painel do programa «Governo Sombra / Programa Cujo Nome Estamos Impedidos de Dizer» e autor de coletâneas poéticas como «Em Memória Deles» e «Cinemateca» («Pedro Mexia»), foi consultor cultural da Presidência da República?",
+    "opcoes": [
+      "Pedro Mexia",
+      "Fernando Pinto do Amaral",
+      "Vasco Pulido Valente",
+      "Manuel S. Fonseca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Mexia é um dos mais influentes ensaístas e diaristas literários de Portugal com a publicação dos seus diários da Quetzal.",
+    "fonte": "Quetzal Editores / SIC Notícias / Presidência da República",
+    "factClusterId": "fc_cult_poe_pedromexia_01"
+  },
+  {
+    "id": "CULT_POE_0050",
+    "tema": "Cultura",
+    "subtema": "Poesia",
+    "pergunta": "Que importante chancela editorial de poesia portuguesa fundada em Lisboa em 1972 por Manuel Hermínio Monteiro («Assírio & Alvim»), publicou as obras completas de Fernando Pessoa, Cesariny, Herberto Helder, Mário de Sá-Carneiro e Sophia de Mello Breyner, sendo a catedral do livro de poesia em Portugal?",
+    "opcoes": [
+      "Guimarães Editores",
+      "Tinta-da-China",
+      "Assírio & Alvim (Editora de Poesia)",
+      "Publicações Dom Quixote"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Assírio & Alvim com a sua icónica 'Colecção Documentos' e 'Gato Maltês' definiu o padrão gráfico e estético da edição de poesia em Portugal.",
+    "fonte": "Assírio & Alvim / Porto Editora / DGLAB",
+    "factClusterId": "fc_cult_poe_assirioalvim_01"
+  }
+]

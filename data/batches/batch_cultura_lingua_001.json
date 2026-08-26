@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_LIN_0001",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que rei da 1.ª Dinastia decretou em 1290 que a «Língua Vulgar» (Português) passasse a ser a língua oficial de todos os atos régios, tabelionatos e documentos jurídicos do Reino em substituição do latim?",
+    "opcoes": [
+      "D. Dinis («O Rei Lavrador»)",
+      "D. Afonso Henriques",
+      "D. Afonso II",
+      "D. Pedro I"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Dinis consagrou o português como idioma oficial de Estado e fundou o Estudo Geral (Universidade de Coimbra) no mesmo ano de 1290.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / História da Língua Portuguesa (Lindley Cintra)",
+    "factClusterId": "fc_lin_dinis1290_01"
+  },
+  {
+    "id": "CULT_LIN_0002",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que documento régio redigido em junho de 1214, preservado no Arquivo Nacional da Torre do Tombo, é considerado um dos mais antigos textos oficiais datados escritos em língua portuguesa?",
+    "opcoes": [
+      "Carta de Doação de D. Teresa",
+      "Testamento de D. Afonso II (1214)",
+      "Auto de Partilhas de Coimbra",
+      "Notícia de Fiadores"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Testamento de D. Afonso II e a «Notícia de Torto» (c. 1214) marcam o nascimento da escrita documental em português.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / BNP",
+    "factClusterId": "fc_lin_testamentoafonsoii_01"
+  },
+  {
+    "id": "CULT_LIN_0003",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que padre e gramático humanista português publicou em 1536 a primeira gramática impressa da língua portuguesa («Grammatica da Lingoagem Portuguesa»)?",
+    "opcoes": [
+      "João de Barros",
+      "Damião de Góis",
+      "Fernão de Oliveira",
+      "Duarte Nunes de Leão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernão de Oliveira publicou a obra em Lisboa em 1536, defendendo que 'a nossa língua é tão boa como a latina'.",
+    "fonte": "Biblioteca Nacional de Portugal / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_lin_fernaodeoliveira1536_01"
+  },
+  {
+    "id": "CULT_LIN_0004",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que dia do ano foi proclamado oficialmente pela UNESCO em 2019 como o «Dia Mundial da Língua Portuguesa», celebrando a riqueza e dimensão global da lusofonia?",
+    "opcoes": [
+      "10 de Junho",
+      "1 de Dezembro",
+      "25 de Abril",
+      "5 de Maio"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A UNESCO declarou o 5 de Maio como Dia Mundial da Língua Portuguesa em reconhecimento à sua importância geoestratégica global.",
+    "fonte": "UNESCO / CPLP / Instituto Camões",
+    "factClusterId": "fc_lin_diamundiallingua_01"
+  },
+  {
+    "id": "CULT_LIN_0005",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que idioma românico do grupo astur-leonês, falado no nordeste transmontano (concelho de Miranda do Douro e Vimioso), foi reconhecido oficialmente como a segunda língua oficial de Portugal pela Lei n.º 7/99 de 29 de janeiro?",
+    "opcoes": [
+      "Língua Mirandesa (Lhéngua Mirandesa)",
+      "Barranquenho",
+      "Galaico-Português",
+      "Caló Português"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mirandês é ensinado nas escolas do concelho e possui estatuto oficial e convenção ortográfica própria.",
+    "fonte": "Assembleia da República / Instituto da Língua Mirandesa",
+    "factClusterId": "fc_lin_mirandeslei1999_01"
+  },
+  {
+    "id": "CULT_LIN_0006",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que organização internacional intergovernamental fundada a 17 de julho de 1996 em Lisboa reúne os nove países de língua oficial portuguesa (Portugal, Brasil, Angola, Moçambique, Cabo Verde, Guiné-Bissau, São Tomé e Príncipe, Timor-Leste e Guiné Equatorial)?",
+    "opcoes": [
+      "União Latina",
+      "Comunidade dos Países de Língua Portuguesa (CPLP)",
+      "Organização dos Estados Ibero-Americanos (OEI)",
+      "Instituto Internacional da Língua Portuguesa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A sede oficial da CPLP localiza-se no Palácio Conde de Penafiel em Lisboa.",
+    "fonte": "Secretariado Executivo da CPLP",
+    "factClusterId": "fc_lin_cplp1996_01"
+  },
+  {
+    "id": "CULT_LIN_0007",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que instituição pública portuguesa com sede em Lisboa, tutelada pelo Ministério dos Negócios Estrangeiros, é responsável pela promoção e difusão internacional da língua e cultura portuguesas no mundo?",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Academia das Ciências de Lisboa",
+      "Camões — Instituto da Cooperação e da Língua, I.P. (Instituto Camões)",
+      "Direção-Geral do Livro, dos Arquivos e das Bibliotecas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Instituto Camões coordena a rede de leitorados, cátedras e centros de língua portuguesa em dezenas de universidades mundiais.",
+    "fonte": "Camões, I.P. / Portal Diplomático",
+    "factClusterId": "fc_lin_institutocamoes_01"
+  },
+  {
+    "id": "CULT_LIN_0008",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que dialecto e variante mista falada na vila raiana de Barrancos (Alentejo), combinando elementos do português alentejano com o andaluz e estremenho espanhol, foi reconhecido com estatuto de proteção legal em 2021?",
+    "opcoes": [
+      "Mirandês",
+      "Minderico",
+      "Patuá",
+      "Barranquenho (A fala de Barrancos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Barranquenho é uma manifestação viva de contacto linguístico fronteiriço de grande riqueza antropológica.",
+    "fonte": "Município de Barrancos / Assembleia da República (Lei n.º 73/2021)",
+    "factClusterId": "fc_lin_barranquenho_01"
+  },
+  {
+    "id": "CULT_LIN_0009",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que linguajar socioletal secreto («socioleto») foi criado pelos curtidores e comerciantes de peles da vila de Minde (Alcanena) para impedir que os compradores de fora percebessem as suas negociações?",
+    "opcoes": [
+      "Minderico (Piação do Ninhó)",
+      "Barranquenho",
+      "Caló",
+      "Mirandês"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Minderico foi classificado como língua ameaçada pela UNESCO e preserva mais de 2.000 termos próprios.",
+    "fonte": "Centro de Artes e Ofícios de Minde / Município de Alcanena / UNESCO",
+    "factClusterId": "fc_lin_minderico_01"
+  },
+  {
+    "id": "CULT_LIN_0010",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Quantos falantes nativos e oficiais de língua portuguesa existem aproximadamente no mundo, posicionando o português como a língua mais falada do Hemisfério Sul?",
+    "opcoes": [
+      "Cerca de 100 milhões de pessoas",
+      "Mais de 260 milhões de pessoas",
+      "Cerca de 50 milhões de pessoas",
+      "Mais de 500 milhões de pessoas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O português é a 5.ª língua mais falada do mundo e a 3.ª mais falada no mundo ocidental (depois do inglês e espanhol).",
+    "fonte": "CPLP / Observatório da Língua Portuguesa",
+    "factClusterId": "fc_lin_estatisticaslingua_01"
+  },
+  {
+    "id": "CULT_LIN_0011",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Aproximadamente quantas palavras da língua portuguesa têm origem no superstrato linguístico da língua árabe (com destaque para termos que se iniciam pelo artigo «al-» como alface, azeite, algarismo, aldeia, alfaiate)?",
+    "opcoes": [
+      "Menos de 50 palavras",
+      "Mais de 20.000 palavras",
+      "Mais de 1.000 palavras (cerca de 800 a 1.200 vocábulos)",
+      "Apenas 10 vocábulos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A presença muçulmana de mais de 500 anos na Península Ibérica enriqueceu o vocabulário português nas áreas da agricultura, arquitetura, ciência e administração.",
+    "fonte": "Dicionário Houaiss / História da Língua Portuguesa",
+    "factClusterId": "fc_lin_arabismos_01"
+  },
+  {
+    "id": "CULT_LIN_0012",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que tipo de estrutura verbal é uma das características gramaticais mais raras e exclusivas da língua portuguesa e do galego entre todas as línguas românicas do mundo?",
+    "opcoes": [
+      "O Pretérito Perfeito",
+      "O Modo Subjuntivo",
+      "O Futuro do Presente",
+      "O Infinitivo Pessoal (ou Infinitivo Flexionado)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Infinitivo Pessoal permite conjugar o infinitivo com desinências de pessoa (ex: 'para nós fazermos', 'por eles serem').",
+    "fonte": "Gramática da Língua Portuguesa (Mateus et al.) / Academia das Ciências",
+    "factClusterId": "fc_lin_infinitivopessoal_01"
+  },
+  {
+    "id": "CULT_LIN_0013",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que colocação pronominal enclítica no interior da forma verbal (ex: «far-se-á», «dar-te-ei», «dir-se-ia») é uma característica distintiva conservada no Português Europeu culto?",
+    "opcoes": [
+      "Mesóclise",
+      "Próclise",
+      "Ênclise",
+      "Anástrofe"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A mesóclise ocorre exclusivamente nos tempos verbais do Futuro do Indicativo e Condicional com pronomes oblíquos átonos.",
+    "fonte": "Academia das Ciências de Lisboa / Gramática do Português",
+    "factClusterId": "fc_lin_mesoclise_01"
+  },
+  {
+    "id": "CULT_LIN_0014",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que crioulo de base lexical portuguesa («Patuá Macaense» ou «Macaista»), falado em Macau há mais de 400 anos, combina o português com o cantonês e o malaio?",
+    "opcoes": [
+      "Kristang",
+      "Patuá de Macau (Papiá Cristam di Macau)",
+      "Crioulo Caboverdiano",
+      "Forro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Patuá Macaense é preservado pelo grupo de teatro 'Dóci Papiaçám di Macau' e classificado pela UNESCO.",
+    "fonte": "Instituto Cultural de Macau / UNESCO",
+    "factClusterId": "fc_lin_patuamacau_01"
+  },
+  {
+    "id": "CULT_LIN_0015",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que comunidade de ascendência portuguesa em Malaca (Malásia) preserva desde o século XVI o crioulo de base portuguesa conhecido como «Papia Kristang» no Bairro Português (Portuguese Settlement)?",
+    "opcoes": [
+      "Patuá",
+      "Língua Franca",
+      "Kristang (Papiá Kristang)",
+      "Chavacano"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A comunidade Kristang de Malaca celebra a Festa de São Pedro e preserva danças e tradições lusas há mais de 500 anos.",
+    "fonte": "UNESCO / Sociedade Portuguesa de Malaca",
+    "factClusterId": "fc_lin_kristangmalaca_01"
+  },
+  {
+    "id": "CULT_LIN_0016",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que filólogo e linguista português (1925-1991), professor da Universidade de Lisboa, foi o principal autor do «Mapa dos Dialectos Portugueses» e da classificação fundamental dos dialetos de Portugal?",
+    "opcoes": [
+      "José Leite de Vasconcelos",
+      "Carolina Michaëlis de Vasconcelos",
+      "Manuel de Paiva Boléo",
+      "Luís Filipe Lindley Cintra"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Lindley Cintra dividiu os dialetos portugueses continentais em Dialetos Setentrionais, Centro-Meridionais e Insulares.",
+    "fonte": "Universidade de Lisboa / Centro de Linguística da Universidade de Lisboa (CLUL)",
+    "factClusterId": "fc_lin_lindleycintra_01"
+  },
+  {
+    "id": "CULT_LIN_0017",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que etnógrafo, arqueólogo e filólogo português (1858-1941) fundou o Museu Etnográfico Português (atual Museu Nacional de Arqueologia em Belém) e publicou a obra clássica «Opúsculos» e o «Esboço de uma Dialectologia Portuguesa»?",
+    "opcoes": [
+      "José Leite de Vasconcelos",
+      "Adolfo Coelho",
+      "Teófilo Braga",
+      "Rocha Peixoto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Leite de Vasconcelos foi o pioneiro dos estudos etnográficos e dialectológicos da língua portuguesa e descobridor oficial do Mirandês em 1882.",
+    "fonte": "Museu Nacional de Arqueologia / BNP",
+    "factClusterId": "fc_lin_leitedevasconcelos_01"
+  },
+  {
+    "id": "CULT_LIN_0018",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que notável filóloga germano-portuguesa (1851-1925), a primeira mulher a lecionar numa universidade portuguesa (Universidade de Coimbra em 1911), publicou o monumental estudo crítico do «Cancioneiro da Ajuda»?",
+    "opcoes": [
+      "Maria Helena da Rocha Pereira",
+      "Carolina Michaëlis de Vasconcelos",
+      "Maria de Lurdes Belchior",
+      "Maria Alzira Seixo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carolina Michaëlis foi membro honorário da Academia das Ciências de Lisboa e figura de proa da filologia românica europeia.",
+    "fonte": "Universidade de Coimbra / Academia das Ciências",
+    "factClusterId": "fc_lin_carolinamichaelis_01"
+  },
+  {
+    "id": "CULT_LIN_0019",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Em que cidade de Cabo Verde (na ilha de Santiago) encontra-se sediado o IILP (Instituto Internacional da Língua Portuguesa), órgão da CPLP dedicado à gestão e promoção conjunta do idioma?",
+    "opcoes": [
+      "Mindelo",
+      "Santa Maria",
+      "Praia (Cabo Verde)",
+      "São Filipe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O IILP foi criado por proposta de José Saramago no encontro de chefes de Estado e de governo em São Luís do Maranhão em 1989.",
+    "fonte": "IILP / CPLP",
+    "factClusterId": "fc_lin_iilpcaboverde_01"
+  },
+  {
+    "id": "CULT_LIN_0020",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante documento poético do século XIII, preservado no Arquivo Nacional da Torre do Tombo, contém a célebre «Cantiga da Ribeiriinha» (ou Cantiga da Garvaia) atribuída a Paio Soares de Taveirós?",
+    "opcoes": [
+      "Auto dos Físicos",
+      "Crónica dos Frades Menores",
+      "Livro de Linhagens",
+      "Cantiga da Ribeiriinha (c. 1198 ou 1206)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Cantiga da Ribeiriinha é tradicionalmente apontada como o mais antigo texto poético lírico galaico-português conhecido.",
+    "fonte": "Torre do Tombo / Dicionário da Literatura Galego-Portuguesa",
+    "factClusterId": "fc_lin_cantigaribeirinha_01"
+  },
+  {
+    "id": "CULT_LIN_0021",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Quantas cantigas medievais galego-portuguesas (de amor, de amigo e de escárnio e maldizer) sobrevivem preservadas nos três grandes cancioneiros profanos (Cancioneiro da Ajuda, Cancioneiro da Vaticana e Cancioneiro da Biblioteca Nacional)?",
+    "opcoes": [
+      "Cerca de 1.680 cantigas",
+      "Apenas 50 cantigas",
+      "Mais de 10.000 cantigas",
+      "Exatamente 300 cantigas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O corpus lírico medieval galego-português é um dos mais ricos patrimónios poéticos da Idade Média ocidental.",
+    "fonte": "Biblioteca Nacional de Portugal / Biblioteca Apostólica Vaticana",
+    "factClusterId": "fc_lin_cancioneirosmedievais_01"
+  },
+  {
+    "id": "CULT_LIN_0022",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que pergaminho do século XIII encontrado em 1990 pelo livreiro Harvey Sharrer em Madrid contém a notação musical e o texto de sete cantigas de amor de D. Dinis?",
+    "opcoes": [
+      "Pergaminho Vindel",
+      "Pergaminho Sharrer (Fragmento Sharrer)",
+      "Códice Calixtino",
+      "Cancioneiro de Elvas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Pergaminho Sharrer preserva a única música profana medieval com letra em galaico-português régio de D. Dinis.",
+    "fonte": "Torre do Tombo / Professor Harvey L. Sharrer",
+    "factClusterId": "fc_lin_pergaminhosharrer_01"
+  },
+  {
+    "id": "CULT_LIN_0023",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que manuscrito poético medieval encontrado em 1914 pelo alfarrabista Pedro Vindel contém as sete cantigas de amigo do jogral galego Martim Codax com a notação musical original («Ondas do mar de Vigo»)?",
+    "opcoes": [
+      "Pergaminho Sharrer",
+      "Cancioneiro de Paris",
+      "Pergaminho Vindel",
+      "Cancioneiro de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Pergaminho Vindel encontra-se na Morgan Library & Museum em Nova Iorque.",
+    "fonte": "The Morgan Library & Museum / BNP",
+    "factClusterId": "fc_lin_pergaminhovindel_01"
+  },
+  {
+    "id": "CULT_LIN_0024",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que tratado internacional de unificação ortográfica foi assinado em Lisboa a 16 de dezembro de 1990 com o objetivo de criar uma ortografia oficial unificada para todos os países da CPLP?",
+    "opcoes": [
+      "Acordo Ortográfico de 1945",
+      "Tratado de Lisboa de 1911",
+      "Convenção de Brasília",
+      "Acordo Ortográfico da Língua Portuguesa de 1990 (AO90)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Acordo Ortográfico de 1990 entrou em vigor obrigatório em Portugal em 2015 após período de transição.",
+    "fonte": "DRE / Ministério dos Negócios Estrangeiros / CPLP",
+    "factClusterId": "fc_lin_acordoortografico1990_01"
+  },
+  {
+    "id": "CULT_LIN_0025",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante reforma ortográfica oficial em Portugal, decretada pelo Governo Provisório da República em 1911 pelo filólogo Gonçalves Viana, aboliu as grafias pseudo-etimológicas greco-latinas (ex: «ph» para «f», «th» para «t», «y» para «i»)?",
+    "opcoes": [
+      "Reforma Ortográfica de 1911 (de Gonçalves Viana)",
+      "Reforma de 1888",
+      "Acordo de 1945",
+      "Regimento de 1755"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Reforma de 1911 simplificou radicalmente a escrita do português (palavras como 'pharmacia' passaram a 'farmácia' e 'theatro' a 'teatro').",
+    "fonte": "Diário do Governo de 1911 / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_lin_reforma1911_01"
+  },
+  {
+    "id": "CULT_LIN_0026",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que fenómeno fonético característico do Português Europeu consiste no enfraquecimento ou quase desaparecimento das vogais átonas na fala corrente (ex: pronúncia de «excelente» como [ʃslẽt])?",
+    "opcoes": [
+      "Nasalização",
+      "Redução vocálica (ou centralização das vogais átonas)",
+      "Ditongação",
+      "Rotacismo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A redução vocálica extrema confere ao português de Portugal o seu ritmo compassado por consoantes ('stress-timed language').",
+    "fonte": "Centro de Linguística da Universidade de Lisboa (CLUL)",
+    "factClusterId": "fc_lin_reducaovocalica_01"
+  },
+  {
+    "id": "CULT_LIN_0027",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que fenómeno fonético típico do dialeto dos Açores (com especial incidência na ilha de São Miguel) transforma o som de «u» fechado na vogal francesa arredondada [y] («som de u francês»)?",
+    "opcoes": [
+      "Betacismo",
+      "Yeísmo",
+      "Palatalização do 'u' (vocalismo micaelense)",
+      "Seseo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O dialeto de São Miguel preserva traços fonéticos arcaicos e influências dos colonos de origem francesa e flamenga do século XV.",
+    "fonte": "Universidade dos Açores / Centro de Estudos Humanísticos",
+    "factClusterId": "fc_lin_dialetoacores_01"
+  },
+  {
+    "id": "CULT_LIN_0028",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que traço dialetal do Norte de Portugal (Minho, Douro e Trás-os-Montes) consiste na não distinção entre o som de /b/ e /v/ (pronunciando 'vaca' como 'baca' e 'vinho' como 'binho')?",
+    "opcoes": [
+      "Rotacismo",
+      "Lamdacismo",
+      "Ceceio",
+      "Betacismo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O betacismo é um traço fonético herdado diretamente do latim hispânico do noroeste peninsular.",
+    "fonte": "Dialectologia Portuguesa / CLUL",
+    "factClusterId": "fc_lin_betacismo_01"
+  },
+  {
+    "id": "CULT_LIN_0029",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que dicionário geral da língua portuguesa com mais de 228.000 entradas, desenvolvido pela Porto Editora e disponibilizado na plataforma digital «Infopédia», é a grande referência lexicográfica contemporânea em Portugal?",
+    "opcoes": [
+      "Dicionário da Língua Portuguesa da Porto Editora (Infopédia)",
+      "Dicionário Priberam",
+      "Dicionário Morais Silva",
+      "Dicionário Cândido de Figueiredo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Infopédia e o Dicionário da Porto Editora são a ferramenta de consulta lexicográfica digital mais utilizada em meio escolar e profissional.",
+    "fonte": "Porto Editora / Infopédia",
+    "factClusterId": "fc_lin_infopedia_01"
+  },
+  {
+    "id": "CULT_LIN_0030",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que lexicógrafo luso-brasileiro nascido no Rio de Janeiro em 1755 publicou em Lisboa em 1789 o célebre «Diccionario da Lingua Portugueza», o primeiro dicionário moderno e normativo da língua portuguesa?",
+    "opcoes": [
+      "Rafael Bluteau",
+      "António de Morais Silva",
+      "Cândido de Figueiredo",
+      "Domingos Vieira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O 'Morais' foi durante mais de um século o dicionário canónico supremo da língua portuguesa.",
+    "fonte": "Academia das Ciências de Lisboa / BNP",
+    "factClusterId": "fc_lin_moraissilva_01"
+  },
+  {
+    "id": "CULT_LIN_0031",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que padre teatino francês radicado em Portugal (1638-1734) publicou em 8 volumes o monumental «Vocabulario Portuguez e Latino» (1712-1721), a primeira grande obra enciclopédica da lexicografia lusa?",
+    "opcoes": [
+      "Padre António Vieira",
+      "Luís António Verney",
+      "Padre Rafael Bluteau",
+      "Frei Manuel do Cenáculo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Vocabulário de Bluteau foi dedicado a D. João V e serviu de alicerce a todos os dicionários portugueses posteriores.",
+    "fonte": "Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_lin_bluteau_01"
+  },
+  {
+    "id": "CULT_LIN_0032",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que organismo científico oficial de Portugal, fundado em 1779 no reinado de D. Maria I pelo Duque de Lafões e pelo Abade Correia da Serra, é a entidade consultiva oficial do Estado para a língua portuguesa?",
+    "opcoes": [
+      "Sociedade de Geografia de Lisboa",
+      "Instituto Camões",
+      "Conselho Nacional de Educação",
+      "Academia das Ciências de Lisboa (Classe de Letras)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Academia das Ciências de Lisboa elabora o Vocabulário Ortográfico da Língua Portuguesa (VOLP) e pareceres linguísticos oficiais.",
+    "fonte": "Academia das Ciências de Lisboa",
+    "factClusterId": "fc_lin_academiadasciencias_01"
+  },
+  {
+    "id": "CULT_LIN_0033",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que termo náutico introduzido pelos navegadores portugueses deu origem à palavra inglesa «typhoon» (tufão) e ao vocábulo «junk» (junco) no comércio do Extremo Oriente?",
+    "opcoes": [
+      "Tufão (do cantonês 'tai fung' e português tufão) e Junco",
+      "Caravela",
+      "Feitoria",
+      "Monção"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O português funcionou como a 'língua franca' do comércio marítimo global nos séculos XVI e XVII em toda a Ásia.",
+    "fonte": "Oxford English Dictionary / Dicionário Etimológico da Língua Portuguesa",
+    "factClusterId": "fc_lin_influencianautica_01"
+  },
+  {
+    "id": "CULT_LIN_0034",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que palavra de origem japonesa («tempura») foi introduzida no vocabulário culinário nipónico pelos missionários e marinheiros jesuítas portugueses no século XVI a partir da tradição cristã dos «peixinhos da horta» consumidos nos dias de «Têmporas» (jejum de carne)?",
+    "opcoes": [
+      "Sashimi",
+      "Tempura (das Têmporas da Quaresma)",
+      "Teriyaki",
+      "Wasabi"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Palavras japonesas como 'arigatô' (obrigado / arigato), 'pan' (pão), 'botan' (botão) e 'karuta' (cartas de jogar) derivam da presença portuguesa no Japão.",
+    "fonte": "Embaixada de Portugal em Tóquio / Museu do Oriente",
+    "factClusterId": "fc_lin_tempurajapao_01"
+  },
+  {
+    "id": "CULT_LIN_0035",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que filólogo e professor de Coimbra (1904-1987) fundou o «Inquérito Linguístico Boléo» em 1942, criando o maior arquivo sonoro e etnográfico de registos orais dos falares regionais de Portugal?",
+    "opcoes": [
+      "Lindley Cintra",
+      "Herculano de Carvalho",
+      "Manuel de Paiva Boléo",
+      "Aníbal Pinto de Castro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O arquivo Paiva Boléo na Faculdade de Letras de Coimbra preserva milhares de gravações sonoras de dialetos regionais extintos.",
+    "fonte": "Universidade de Coimbra / Faculdade de Letras",
+    "factClusterId": "fc_lin_paivaboleo_01"
+  },
+  {
+    "id": "CULT_LIN_0036",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que palavra de origem exclusivamente portuguesa que exprime a melancolia doce e a dor da ausência de algo ou alguém amado é considerada um dos mais emblemáticos símbolos da alma nacional?",
+    "opcoes": [
+      "Fado",
+      "Desenrascanço",
+      "Marafado",
+      "Saudade"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A palavra 'Saudade' (do latim 'solitas, solitudinis') ganhou densidade filosófica e poética no Sebastianismo, no Fado e no Movimento da Renascença Portuguesa (Teixeira de Pascoaes).",
+    "fonte": "Dicionário da Academia das Ciências / Eduardo Lourenço",
+    "factClusterId": "fc_lin_saudade_01"
+  },
+  {
+    "id": "CULT_LIN_0037",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que expressão idiomática e coloquial portuguesa, celebrada internacionalmente pela BBC como intraduzível, define a capacidade espontânea e engenhosa dos portugueses de resolver problemas difíceis com poucos meios e criatividade?",
+    "opcoes": [
+      "Desenrascanço (o ato de desenrascar)",
+      "Chapa ganha chapa gasta",
+      "Barafunda",
+      "Geringonça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O termo 'desenrascanço' reflete o espírito prático de adaptação e improvisação dos portugueses.",
+    "fonte": "BBC News / Dicionário Priberam",
+    "factClusterId": "fc_lin_desenrascanco_01"
+  },
+  {
+    "id": "CULT_LIN_0038",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que famosa obra épica publicada em 1572 em Lisboa por Luís Vaz de Camões é o monumento fundacional e a certidão poética de nascimento do português moderno?",
+    "opcoes": [
+      "Mensagem",
+      "Os Lusíadas",
+      "Peregrinação",
+      "Auto da Barca do Inferno"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Camões fixou a língua portuguesa na sua plenitude métrica (oitava rima) e léxica ao cantar 'o peito ilustre lusitano'.",
+    "fonte": "Biblioteca Nacional de Portugal / Os Lusíadas (1572)",
+    "factClusterId": "fc_lin_oslusiadas_01"
+  },
+  {
+    "id": "CULT_LIN_0039",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante escritor e historiador português do século XVI (1496-1570) publicou em 1540 a «Gramática da Língua Portuguesa» e a «Cartinha com os Preceitos e Mandamentos da Santa Madre Igreja», o primeiro livro de leitura ilustrado infantil em português?",
+    "opcoes": [
+      "Fernão de Oliveira",
+      "Fernão Lopes",
+      "João de Barros",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cartinha de João de Barros ensinava as crianças a ler em português com gravuras em xilogravura.",
+    "fonte": "BNP / História da Pedagogia em Portugal",
+    "factClusterId": "fc_lin_joaodebarroscartinha_01"
+  },
+  {
+    "id": "CULT_LIN_0040",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que romance experimental do escritor açoriano Vitorino Nemésio (publicado em 1944), ambientado na Ilha Terceira, é uma das mais ricas obras da língua portuguesa pelo vocabulário telúrico e marítimo?",
+    "opcoes": [
+      "Corsário das Ilhas",
+      "Festa Redonda",
+      "O Pão Incerto",
+      "Mau Tempo no Canal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vitorino Nemésio cunhou também o célebre conceito de «Açorianidade» para definir a identidade insular atlantista.",
+    "fonte": "DGLAB / Governo Regional dos Açores",
+    "factClusterId": "fc_lin_mautemponocanal_01"
+  },
+  {
+    "id": "CULT_LIN_0041",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que escritor e diplomata português do século XIX (1838-1906), 2.º Conde de Ficalho, publicou em 1884 a monumental obra científica «Memória sobre a Malagueta e as Especiarias da Índia» enriquecendo a terminologia botânica lusófona?",
+    "opcoes": [
+      "Conde de Ficalho (Francisco Manuel de Melo Breyner)",
+      "Bernardino Machado",
+      "Latino Coelho",
+      "Marquês de Funchal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "O Conde de Ficalho foi também o fundador do Jardim Botânico de Lisboa na Escola Politécnica.",
+    "fonte": "Museu Nacional de História Natural e da Ciência / Academia das Ciências",
+    "factClusterId": "fc_lin_condeficalho_01"
+  },
+  {
+    "id": "CULT_LIN_0042",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante dicionário digital online, desenvolvido pela empresa de tecnologia Priberam em Lisboa desde o final dos anos 1990, é uma das maiores referências de consulta gratuita da língua portuguesa?",
+    "opcoes": [
+      "Dicionário Michaelis",
+      "Dicionário Priberam da Língua Portuguesa",
+      "Dicionário Aulete",
+      "Dicionário Houaiss"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Dicionário Priberam recebe milhões de acessos mensais de todos os países da lusofonia e atualiza neologismos em tempo real.",
+    "fonte": "Priberam Informática",
+    "factClusterId": "fc_lin_priberam_01"
+  },
+  {
+    "id": "CULT_LIN_0043",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante arquivo público de corpus textual em linha, desenvolvido pelo Centro de Linguística da Universidade de Lisboa (CLUL), reúne milhões de palavras de textos e falares de todas as regiões de Portugal?",
+    "opcoes": [
+      "Arquivo Digital de Sintra",
+      "Portal da Língua de Coimbra",
+      "Corpus do Português Europeu Contemporâneo (CRPC / CLUL)",
+      "Banco Lexical de Braga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Corpus de Referência do Português Contemporâneo (CRPC) é a base de dados fundamental para a investigação linguística moderna.",
+    "fonte": "Centro de Linguística da Universidade de Lisboa (CLUL)",
+    "factClusterId": "fc_lin_crpc_01"
+  },
+  {
+    "id": "CULT_LIN_0044",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que figura da retórica e do estilo literário consiste na inversão intencional da ordem habitual das palavras numa frase (muito frequente na poesia clássica de Camões e Bocage)?",
+    "opcoes": [
+      "Metonímia",
+      "Sinestesia",
+      "Polissíndeto",
+      "Hipérbato (ou Anástrofe)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O hipérbato aproxima a estrutura da frase poética portuguesa da sonoridade majestosa do latim.",
+    "fonte": "Dicionário de Termos Literários (Massaud Moisés / E. Prado Coelho)",
+    "factClusterId": "fc_lin_hiperbato_01"
+  },
+  {
+    "id": "CULT_LIN_0045",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que grande poeta satírico português do século XVIII (1765-1805), nascido em Setúbal e mestre do Arcadismo (Elmano Sadino) e do pré-romantismo dos sonetos perfeitos, é:",
+    "opcoes": [
+      "Manuel Maria Barbosa du Bocage",
+      "Filinto Elísio",
+      "Correia Garção",
+      "Nicolau Tolentino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bocage é o maior sonetista da literatura portuguesa a par de Camões e Antero de Quental.",
+    "fonte": "Casa de Bocage / Município de Setúbal / BNP",
+    "factClusterId": "fc_lin_bocage_01"
+  },
+  {
+    "id": "CULT_LIN_0046",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que importante documento histórico de 1383 redigido pelo tabelião Afonso Martins de Évora estabeleceu as condições de casamento entre D. Beatriz de Portugal e D. Juan I de Castela em língua portuguesa?",
+    "opcoes": [
+      "Tratado de Alcanizes",
+      "Tratado de Salvaterra de Magos (1383)",
+      "Tratado de Zamora",
+      "Pacto de Cintra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Tratado de Salvaterra foi redigido em galaico-português e castelhano com minucioso detalhe jurídico.",
+    "fonte": "Arquivo Nacional da Torre do Tombo",
+    "factClusterId": "fc_lin_salvaterramagos1383_01"
+  },
+  {
+    "id": "CULT_LIN_0047",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que crioulos atlânticos de base lexical portuguesa («Crioulo de Cabo Verde» e «Kriol da Guiné-Bissau») são as línguas maternas e de identidade nacional dos povos dos dois países africanos?",
+    "opcoes": [
+      "Papiamento",
+      "Chavacano",
+      "Crioulo Caboverdiano (Kriolu) e Crioulo da Guiné-Bissau (Kriol)",
+      "Palenquero"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O crioulo de Cabo Verde é a língua de Cesária Évora e das mornas, candidato a Património Mundial da UNESCO.",
+    "fonte": "Instituto do Património Cultural de Cabo Verde / CPLP",
+    "factClusterId": "fc_lin_crioulocaboverde_01"
+  },
+  {
+    "id": "CULT_LIN_0048",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que língua crioula de base portuguesa falada na ilha de São Tomé (São Tomé e Príncipe) é conhecida localmente como «Forro» ou «Santomense»?",
+    "opcoes": [
+      "Angolar",
+      "Principense",
+      "Fa d'Ambu",
+      "Língua Forro (ou Crioulo Santomense)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Forro e o Angolar mantêm substratos bantu e arcaísmos do português quinhentista.",
+    "fonte": "Governo de São Tomé e Príncipe / CPLP",
+    "factClusterId": "fc_lin_forrosaotome_01"
+  },
+  {
+    "id": "CULT_LIN_0049",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que país asiático restaurou a sua independência em 2002 e consagrou na sua Constituição o Português e o Tétum como as duas línguas oficiais da nação?",
+    "opcoes": [
+      "Timor-Leste (República Democrática de Timor-Leste)",
+      "Macau",
+      "Goa",
+      "Singapura"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Timor-Leste integrou a CPLP em 2002 e desenvolve programas bilaterais de formação de professores de língua portuguesa com Portugal e o Brasil.",
+    "fonte": "Governo da RDTL / CPLP",
+    "factClusterId": "fc_lin_timorleste2002_01"
+  },
+  {
+    "id": "CULT_LIN_0050",
+    "tema": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "pergunta": "Que museu pioneiro dedicado à celebração e dinamismo da língua comum lusófona («Museu da Língua Portuguesa») foi fundado na Estação da Luz em São Paulo e mantém cooperação permanente com instituições culturais de Portugal?",
+    "opcoes": [
+      "Museu do Livro de Lisboa",
+      "Museu Camoniano",
+      "Museu da Língua Portuguesa (São Paulo)",
+      "Casa da Lusofonia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu da Língua Portuguesa é uma das maiores referências museológicas interativas da língua portuguesa no mundo.",
+    "fonte": "Governo do Estado de São Paulo / Fundação Roberto Marinho / CPLP",
+    "factClusterId": "fc_lin_museudalinguaportuguesa_01"
+  }
+]

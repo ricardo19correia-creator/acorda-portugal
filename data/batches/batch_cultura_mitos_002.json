@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_MIT_0051",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila de Sintra explica a fundação do Convento dos Capuchos (Convento da Cortiça) pelo voto de D. João de Castro perdido na serra durante uma caçada?",
+    "opcoes": [
+      "A Lenda do Convento dos Capuchos de Sintra",
+      "A Lenda da Peninha",
+      "A Lenda dos Eremitas da Serra",
+      "A Lenda do Bispo de Sintra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "D. João de Castro adormeceu sob uma rocha e sonhou com a necessidade de erguer um eremitério de extrema pobreza forrado a cortiça.",
+    "fonte": "Parques de Sintra / Convento dos Capuchos",
+    "factClusterId": "fc_mit_capuchos_01"
+  },
+  {
+    "id": "CULT_MIT_0052",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Miranda do Douro associa uma gruta sagrada no canhão do rio Douro ao refúgio de uma donzela moura que fiava ouro com uma roca de prata?",
+    "opcoes": [
+      "A Sereia do Douro",
+      "A Moura Fiandeira do Douro Internacional",
+      "A Rainha de Miranda",
+      "A Bruxa do Penedo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A figura mítica da moura fiandeira é comum ao imaginário castrejo e transmontano das arribas do Douro.",
+    "fonte": "Museu da Terra de Miranda",
+    "factClusterId": "fc_mit_mourafiandeira_01"
+  },
+  {
+    "id": "CULT_MIT_0053",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Ponte de Lima conta que os soldados do general romano Décimo Júnio Bruto se recusavam a passar o rio Lima por julgarem que era o rio Lethes, que provocava:",
+    "opcoes": [
+      "A cegueira instantânea",
+      "A transformação em pedra",
+      "A perda total e irremediável da memória da pátria e da família",
+      "A loucura furiosa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Para quebrar o mito do Rio do Esquecimento em 137 a.C., o comandante atravessou o rio primeiro e chamou os legionários um a um pelos seus nomes.",
+    "fonte": "Município de Ponte de Lima / História Antiga de Portugal",
+    "factClusterId": "fc_mit_lethes_02"
+  },
+  {
+    "id": "CULT_MIT_0054",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da ilha de Santa Maria (Açores) recorda a coragem dos ilhéus na Ermida de Nossa Senhora dos Anjos perante o desembarque da tripulação de Cristóvão Colombo em 1493?",
+    "opcoes": [
+      "A Lenda do Forte de São Brás",
+      "A Lenda da Baía da Maia",
+      "A Lenda do Pico Alto",
+      "A Lenda dos Anjos e de Cristóvão Colombo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A tripulação de Colombo parou na ermida dos Anjos para cumprir uma promessa no regresso da América, tendo sido temporariamente detida pelas autoridades portuguesas.",
+    "fonte": "Governo Regional dos Açores / Museu de Santa Maria",
+    "factClusterId": "fc_mit_colomboacores_01"
+  },
+  {
+    "id": "CULT_MIT_0055",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Segundo a lenda de Marvão, como nasceu o nome da imponente vila fortificada no topo da escarpa rochosa no Alto Alentejo?",
+    "opcoes": [
+      "Do guerreiro e líder sufista islâmico Ibn Marwan (o «Homem de Marvão»)",
+      "De uma deusa romana chamada Marvânia",
+      "De um conde visigodo do século VI",
+      "De uma árvore lendária do castelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ibn Marwan fundou a fortaleza inexpugnável no século IX (Ammaia islâmica) sobre o penhasco a 860 metros de altitude.",
+    "fonte": "Município de Marvão / História Medieval do Alentejo",
+    "factClusterId": "fc_mit_marvao_01"
+  },
+  {
+    "id": "CULT_MIT_0056",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda do Gerês (aldeia de Vilarinho da Furna) fala dos sinos da igreja submersa pela albufeira que repicam sozinhos nas noites de trovoada?",
+    "opcoes": [
+      "A Lenda da Ninfa do Homem",
+      "A Lenda dos Sinos de Vilarinho da Furna",
+      "A Lenda da Geira Romana",
+      "A Lenda do Lobo da Portela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A antiga aldeia comunitária de Vilarinho da Furna foi submersa em 1972, permanecendo viva na memória oral geresiana.",
+    "fonte": "Ecomuseu de Vilarinho da Furna / PNPG",
+    "factClusterId": "fc_mit_vilarinho_01"
+  },
+  {
+    "id": "CULT_MIT_0057",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda popular de Braga conta a história de uma enorme cobra que habitava a gruta sob a colina de Maximinos e aterrorizava os habitantes?",
+    "opcoes": [
+      "A Lenda do Dragão do Sameiro",
+      "A Lenda da Moura da Falperra",
+      "A Lenda da Cobra de Maximinos",
+      "A Lenda do Bicho de Tibães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O mito das serpentes subterrâneas nas colinas bracarenses reflecte a transição dos cultos pagãos para a protecção cristã medieval.",
+    "fonte": "Lendas do Distrito de Braga / BNP",
+    "factClusterId": "fc_mit_cobramaximinos_01"
+  },
+  {
+    "id": "CULT_MIT_0058",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da cidade de Coimbra associa o surgimento das fontes de água do Choupalinho e da Lapa ao choro de uma noviça enclausurada?",
+    "opcoes": [
+      "A Lenda das Rosas",
+      "A Lenda de D. Sesnando",
+      "A Lenda do Mondeguinho",
+      "A Lenda da Freira do Choupal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "As margens do rio Mondego em Coimbra são ricas em mitos literários e orais de amores conventuais e lágrimas.",
+    "fonte": "Tradições de Coimbra",
+    "factClusterId": "fc_mit_choupal_01"
+  },
+  {
+    "id": "CULT_MIT_0059",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que ser mítico do folclore do arquipélago da Madeira é descrito como uma criatura do nevoeiro das levadas e laurissilva que desorienta os caminhantes?",
+    "opcoes": [
+      "O Homem do Nevoeiro (ou Alma das Levadas)",
+      "A Moura do Rabaçal",
+      "O Monstro do Caldeirão",
+      "O Duende do Ribeiro Frio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "As lendas das serras madeirenses alertavam os levadeiros e pastores para os perigos das ravinas abruptas sob nevoeiro cerrado.",
+    "fonte": "Tradições Orais da Madeira",
+    "factClusterId": "fc_mit_levadasmadeira_01"
+  },
+  {
+    "id": "CULT_MIT_0060",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila de Óbidos recorda a oferta da vila como presente de casamento régio por D. Dinis a D. Isabel de Aragão (Rainha Santa) em 1282, criando a «Casa das Rainhas»?",
+    "opcoes": [
+      "A Lenda da Moura do Castelo de Óbidos",
+      "A Lenda da Vila das Rainhas de Óbidos",
+      "A Lenda das Amendoeiras de Óbidos",
+      "A Lenda da Fonte da Senhora da Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A tradição de oferecer a vila de Óbidos como dote às rainhas de Portugal manteve-se até ao século XIX.",
+    "fonte": "Município de Óbidos / História das Rainhas de Portugal",
+    "factClusterId": "fc_mit_obidosrainhas_01"
+  },
+  {
+    "id": "CULT_MIT_0061",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da fundação do Mosteiro de Guimarães atribui à condessa viúva Mumadona Dias a ordem de construir um castelo para proteger os monges dos ataques de:",
+    "opcoes": [
+      "Castelhanos e leoneses",
+      "Franceses e ingleses",
+      "Normandos (vikings) e mouros",
+      "Piratas berberes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mumadona Dias mandou erigir o primitivo Castelo de São Mamede no século X para defender o mosteiro de Santa Maria de Guimarães.",
+    "fonte": "Sociedade Martins Sarmento / Paço dos Duques",
+    "factClusterId": "fc_mit_mumadona_01"
+  },
+  {
+    "id": "CULT_MIT_0062",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da cidade do Porto explica a alcunha histórica dos portuenses como «Tripeiros» pela doação de toda a carne boa aos marinheiros da armada do Infante D. Henrique em 1415?",
+    "opcoes": [
+      "A Lenda do Cerco do Porto de 1832",
+      "A Lenda de São Pantaleão",
+      "A Lenda do Rio Douro de Ouro",
+      "A Lenda dos Tripeiros e da Conquista de Ceuta"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A população do Porto ficou apenas com as vísceras (tripas) do gado, criando o prato das Tripas à Moda do Porto com feijão branco.",
+    "fonte": "Câmara Municipal do Porto / Museu da Cidade",
+    "factClusterId": "fc_mit_tripeiros_01"
+  },
+  {
+    "id": "CULT_MIT_0063",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Setúbal fala de uma jovem donzela moura chamada Arrábida que se apaixonou por um cavaleiro cristão durante a Reconquista da serra?",
+    "opcoes": [
+      "A Lenda da Moura da Arrábida",
+      "A Lenda da Sereia do Sado",
+      "A Lenda do Golfinho Guardião",
+      "A Lenda da Freira de Jesus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A toponímia de várias grutas da Arrábida (Gruta da Lapa de Santa Margarida) está ligada a lendas de encantamento mourisco.",
+    "fonte": "Município de Setúbal / ICNF",
+    "factClusterId": "fc_mit_arrabidamoura_01"
+  },
+  {
+    "id": "CULT_MIT_0064",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Mafra conta que o rei D. João V prometeu a Deus erguer o Real Edifício de Mafra se os frades franciscanos rezassem para que a rainha D. Maria Ana de Áustria:",
+    "opcoes": [
+      "Ficasse curada de uma grave peste",
+      "Lhe desse um herdeiro legítimo para a Coroa de Portugal",
+      "Sobrevivesse a um naufrágio",
+      "Trouxesse a paz com a Espanha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Com o nascimento da princesa Maria Bárbara de Bragança em 1711, D. João V iniciou a construção do monumental Palácio-Convento de Mafra.",
+    "fonte": "Palácio Nacional de Mafra / Memorial do Convento (Saramago)",
+    "factClusterId": "fc_mit_mafravoto_01"
+  },
+  {
+    "id": "CULT_MIT_0065",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda popular de Monsanto (Idanha-a-Nova), a «Aldeia Mais Portuguesa de Portugal», comemora a resistência heroica da população sitiada que atirou uma bezerra gorda do alto das muralhas?",
+    "opcoes": [
+      "A Lenda do Galo de Prata",
+      "A Lenda do Penedo Baloiçante",
+      "A Lenda da Bezerra do Castelo de Monsanto (Festa das Cruzes)",
+      "A Lenda do Cavaleiro de Monsanto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ato de deitar a bezerra alimentada com o último trigo fez os romanos levantarem o cerco, dando origem ao lançamento de potes com flores do castelo na Festa do Castelo.",
+    "fonte": "Município de Idanha-a-Nova / Aldeias Históricas de Portugal",
+    "factClusterId": "fc_mit_monsantobezerra_01"
+  },
+  {
+    "id": "CULT_MIT_0066",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila da Chamusca no Ribatejo fala de um toiro mítico negro com cornos de ouro que surgia nas noites de nevoeiro na lezíria do Tejo?",
+    "opcoes": [
+      "A Lenda do Campino Encantado",
+      "A Lenda da Cavalgada Mágica",
+      "A Lenda do Cavalo Lusitano Branco",
+      "A Lenda do Toiro das Aspas de Oiro da Chamusca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O toiro bravo é a figura totémica da cultura ribatejana e lezírica.",
+    "fonte": "Município da Chamusca / Tradições Ribatejanas",
+    "factClusterId": "fc_mit_toiroaspas_01"
+  },
+  {
+    "id": "CULT_MIT_0067",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Palmela conta que o cavaleiro D. Hermígio Mendes escapou milagrosamente ao saltar com o seu cavalo do topo da torre de menagem do castelo?",
+    "opcoes": [
+      "A Lenda do Salto do Cavalo de Palmela",
+      "A Lenda da Ordem de Santiago",
+      "A Lenda do Eremita dos Loureiros",
+      "A Lenda da Torre do Esporão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "O Castelo de Palmela, sede da Ordem de Santiago a partir de 1443, possui inúmeras lendas heróicas de defesa do território.",
+    "fonte": "Município de Palmela",
+    "factClusterId": "fc_mit_salto_palmela_01"
+  },
+  {
+    "id": "CULT_MIT_0068",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de São Miguel (Açores) narra o encontro de uma jovem camponesa com um nobre fidalgo encantado transformado em serpente na Gruta do Carvão?",
+    "opcoes": [
+      "A Lenda do Vulcão dos Sete Picos",
+      "A Lenda do Encantado da Gruta do Carvão",
+      "A Lenda do Ilhéu de Vila Franca",
+      "A Lenda da Rocha Queimada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "A Gruta do Carvão em Ponta Delgada é o maior túnel lávico da ilha de São Miguel, alimentando lendas de seres subterrâneos.",
+    "fonte": "Amigos dos Açores / Gruta do Carvão",
+    "factClusterId": "fc_mit_grutacarvao_01"
+  },
+  {
+    "id": "CULT_MIT_0069",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da Serra do Caramulo narra a existência de uma arca de pedras preciosas enterrada no topo do Cabeço da Neve guardada por um cão negro de olhos de fogo?",
+    "opcoes": [
+      "A Lenda das Águas do Caramulo",
+      "A Lenda da Moura de Guardão",
+      "A Lenda do Tesouro do Cabeço da Neve",
+      "A Lenda dos Pastores de Tondela"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O cão espectral guardião de tesouros é um motivo clássico do folclore mágico das serras da Beira Alta.",
+    "fonte": "Tradições do Caramulo / Município de Tondela",
+    "factClusterId": "fc_mit_caramulo_01"
+  },
+  {
+    "id": "CULT_MIT_0070",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Amarante conta que São Gonçalo de Amarante construiu com as suas próprias mãos a ponte sobre o rio Tâmega, atraindo peixes miraculosamente para alimentar os pedreiros?",
+    "opcoes": [
+      "A Lenda do Diabo do Tâmega",
+      "A Lenda dos Doceiros de Amarante",
+      "A Lenda da Senhora da Lapa",
+      "O Milagre da Ponte de São Gonçalo de Amarante"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "São Gonçalo é o padroeiro dos casamentos e dos encalhados em Amarante, celebrado na célebre romaria de junho.",
+    "fonte": "Município de Amarante / Igreja de São Gonçalo",
+    "factClusterId": "fc_mit_saogoncalo_01"
+  },
+  {
+    "id": "CULT_MIT_0071",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Santarém conta o pacto com o Diabo do jovem estudante Gil que estudava artes mágicas em Toledo, mais tarde arrependido e tornado o virtuoso Frei Gil de Santarém?",
+    "opcoes": [
+      "A Lenda de Frei Gil de Santarém",
+      "A Lenda do Poço de São Francisco",
+      "A Lenda das Portas do Sol",
+      "A Lenda do Padre Santo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A história de Frei Gil é a versão portuguesa do mito de Fausto, terminando com a redenção do frei no Convento dominicano de Santarém.",
+    "fonte": "Município de Santarém / Dicionário de História Eclesiástica",
+    "factClusterId": "fc_mit_freigil_01"
+  },
+  {
+    "id": "CULT_MIT_0072",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda do rio Mondego narra o surgimento das «Ninfas do Mondego» que choraram a morte trágica de Inês de Castro, inspirando Camões no Canto III de Os Lusíadas?",
+    "opcoes": [
+      "As Ondinas da Figueira",
+      "As Ninfas do Mondego e a Fonte das Lágrimas",
+      "A Ninfa do Ceira",
+      "A Dama do Alva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "«As filhas do Mondego a morte escura / Longo tempo chorando memoraram» escreveu Luís de Camões em estrofes imortais.",
+    "fonte": "Os Lusíadas (Canto III) / BNP",
+    "factClusterId": "fc_mit_ninfasmondego_01"
+  },
+  {
+    "id": "CULT_MIT_0073",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Castelo Rodrigo (Aldeia Histórica) recorda a coragem dos habitantes que derrotaram os castelhanos na Batalha da Salgadela (1664) liderados por:",
+    "opcoes": [
+      "Marquês de Marialva",
+      "D. Sancho II",
+      "Pedro Jacques de Magalhães",
+      "Mousinho da Silveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Batalha da Salgadela em Figueira de Castelo Rodrigo consolidou a Restauração da Independência no nordeste da Beira.",
+    "fonte": "Aldeias Históricas de Portugal / Município de Figueira de Castelo Rodrigo",
+    "factClusterId": "fc_mit_castelorodrigo_01"
+  },
+  {
+    "id": "CULT_MIT_0074",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Silves fala de um tesouro deixado pelo rei Al-Mutamid no fundo do Rio Arade quando foi forçado a render o castelo?",
+    "opcoes": [
+      "A Espada de Silves",
+      "O Coração de Xelb",
+      "A Pérola do Algarve",
+      "O Tesouro Submerso de Al-Mutamid"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Al-Mutamid, o rei-poeta de Silves e Sevilha, deixou uma lenda de amor e saudade associada às margens do Arade.",
+    "fonte": "Município de Silves / Rota dos Poetas Árabes",
+    "factClusterId": "fc_mit_almutamid_01"
+  },
+  {
+    "id": "CULT_MIT_0075",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Aljezur conta que os cavaleiros de Santiago conquistaram o castelo graças a uma moura chamada Maria Jácome que se converteu por amor ao cavaleiro cristão?",
+    "opcoes": [
+      "A Lenda da Tomada do Castelo de Aljezur (Maria Jácome)",
+      "A Lenda da Praia do Amado",
+      "A Lenda da Ribeira de Seixe",
+      "A Lenda do Farol da Ponta da Piedade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A conquista de Aljezur por D. Paio Peres Correia em 1249 completou a expulsão das forças muçulmanas do Algarve ocidental.",
+    "fonte": "Município de Aljezur / História de Portugal",
+    "factClusterId": "fc_mit_aljezur_01"
+  },
+  {
+    "id": "CULT_MIT_0076",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Chaves narra o nascimento de dois gémeos heróicos (São Rosendo e o irmão) abençoados pelo arcebispo de Braga no Alto Tâmega?",
+    "opcoes": [
+      "A Lenda da Ponte Romana de Trajano",
+      "A Lenda de São Rosendo de Chaves",
+      "A Lenda dos Cavaleiros do Tâmega",
+      "A Lenda do Forte de São Neutel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "São Rosendo foi uma grande figura eclesiástica do século X venerada na Galiza e no norte de Portugal.",
+    "fonte": "Diocese de Vila Real / Município de Chaves",
+    "factClusterId": "fc_mit_saorosendo_01"
+  },
+  {
+    "id": "CULT_MIT_0077",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila da Feira conta que a feira franca de Santa Maria foi protegida por uma névoa divina durante um ataque de corsários normandos que subiram o rio Vouga?",
+    "opcoes": [
+      "A Lenda do Castelo das Quatro Torres",
+      "A Lenda da Princesa da Feira",
+      "A Lenda da Névoa Protetora da Feira",
+      "A Lenda da Fogaça Milagrosa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Castelo da Feira controlava o antigo cruzamento das estradas romanas entre Lisboa e o Porto.",
+    "fonte": "Município de Santa Maria da Feira",
+    "factClusterId": "fc_mit_castelodafeira_01"
+  },
+  {
+    "id": "CULT_MIT_0078",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Faro explica que a imagem de Nossa Senhora do Repouso no arco da muralha da cidade foi beijada por D. Afonso III ao entrar vitorioso na cidade em 1249?",
+    "opcoes": [
+      "A Lenda do Arco da Vila",
+      "A Lenda de São Luís de Faro",
+      "A Lenda da Sé Algarvia",
+      "A Lenda de Nossa Senhora do Repouso de Faro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Arco do Repouso era a entrada principal na muralha árabe de Ossonoba/Santa Maria de Faaron.",
+    "fonte": "Município de Faro / DGPC",
+    "factClusterId": "fc_mit_arcorepouso_01"
+  },
+  {
+    "id": "CULT_MIT_0079",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da Serra de Montesinho (Bragança) fala de uma ciumenta fada da neve que congela as fontes das aldeias se os pastores não lhe deixarem um pedaço de pão e queijo na pedra?",
+    "opcoes": [
+      "A Lenda da Fada da Neve de Montesinho",
+      "A Lenda da Moura do Baceiro",
+      "A Lenda do Pastor de Varge",
+      "A Lenda da Água Fria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "Os rituais de oferenda de alimento aos espíritos da natureza remontam à cultura comunitária ancestral transmontana.",
+    "fonte": "Parque Natural de Montesinho / Contos Transmontanos",
+    "factClusterId": "fc_mit_montesinho_01"
+  },
+  {
+    "id": "CULT_MIT_0080",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila da Sertã atribui o nome da localidade e a frigideira do brasão à mulher do alcaide Celinda que atacou os invasores romanos despejando-lhes azeite a ferver com uma sertã?",
+    "opcoes": [
+      "A Lenda do Castelo da Sertã",
+      "A Lenda de Celinda e da Sertã de Azeite a Ferver",
+      "A Lenda da Ponte da Carvalha",
+      "A Lenda do Cavaleiro de Cernache"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A estátua de Celinda com a sua sertã ergue-se junto ao Castelo da Sertã, recordando a lenda que deu nome à vila beirã.",
+    "fonte": "Município da Sertã / Lendas da Beira",
+    "factClusterId": "fc_mit_serta_celinda_01"
+  },
+  {
+    "id": "CULT_MIT_0081",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Lagos (Algarve) conta que o Infante D. Henrique passava as noites na ponta rochosa de Sagres a contemplar o mar oceano e a calcular as rotas com a sua Rosa dos Ventos?",
+    "opcoes": [
+      "A Lenda do Gigante de São Vicente",
+      "A Lenda do Farol das Caravelas",
+      "O Mito da Escola Náutica de Sagres e do Infante D. Henrique",
+      "A Lenda da Enseada de Belixe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de Sagres e o Promontorium Sacrum foram o epicentro místico e estratégico do planeamento da expansão marítima quatrocentista.",
+    "fonte": "Promotora de Sagres / Comissão Nacional dos Descobrimentos",
+    "factClusterId": "fc_mit_escoladesagres_01"
+  },
+  {
+    "id": "CULT_MIT_0082",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Elvas fala de um soldado cristão e de uma donzela árabe que se comunicavam em segredo através das arcadas em construção do monumental Aqueduto da Amoreira?",
+    "opcoes": [
+      "A Lenda da Fonte da Biquinha",
+      "A Lenda do Forte de Santa Luzia",
+      "A Lenda do Penedo de Elvas",
+      "A Lenda dos Amantes do Aqueduto da Amoreira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As lendas fronteiriças de Elvas unem os amores proibidos com a monumentalidade das fortificações.",
+    "fonte": "Município de Elvas",
+    "factClusterId": "fc_mit_amoreiraelvas_01"
+  },
+  {
+    "id": "CULT_MIT_0083",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Sesimbra conta que um pescador pobre encontrou uma imagem de Nossa Senhora do Cabo presa nas suas redes de pesca após uma terrível tempestade no mar da enseada?",
+    "opcoes": [
+      "A Lenda do Senhor Jesus das Chagas de Sesimbra",
+      "A Lenda da Senhora da Luz",
+      "A Lenda do Peixe de Ouro",
+      "A Lenda do Farol da Azoia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A imagem do Senhor Jesus das Chagas apareceu na praia de Sesimbra em 1534, tornando-se o padroeiro dos marítimos sesimbrenses.",
+    "fonte": "Município de Sesimbra / Paróquia de Santiago",
+    "factClusterId": "fc_mit_chagassesimbra_01"
+  },
+  {
+    "id": "CULT_MIT_0084",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila de Penacova conta a origem do mosteiro de Lorvão fundado no século VI por monges beneditinos inspirados pelo canto suave de duas rolas brancas?",
+    "opcoes": [
+      "A Lenda da Princesa Teresa",
+      "A Lenda da Fundação do Mosteiro de Lorvão (Laurus Valles)",
+      "A Lenda do Penedo de Penacova",
+      "A Lenda do Moinho do Alva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Mosteiro de Lorvão no vale do Mondego é um dos mais antigos mosteiros de Portugal, célebre pela sua doçaria conventual (pastéis de Lorvão).",
+    "fonte": "Mosteiro de Lorvão / Município de Penacova",
+    "factClusterId": "fc_mit_lorvao_01"
+  },
+  {
+    "id": "CULT_MIT_0085",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda do arquipélago das Berlengas narra os combates heróicos de 28 soldados comandados pelo cabo António Avelar no Forte de São João Baptista contra 14 naus de guerra espanholas em 1666?",
+    "opcoes": [
+      "A Lenda do Monge das Berlengas",
+      "A Lenda da Gruta Azul",
+      "O Herói das Berlengas (Cabo António Avelar)",
+      "A Lenda do Naufrágio do Marão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A guarnição do minúsculo forte das Berlengas resistiu a mais de mil tiros de canhão das tropas de Castela.",
+    "fonte": "ICNF / Município de Peniche / Marinha Portuguesa",
+    "factClusterId": "fc_mit_berlengas_01"
+  },
+  {
+    "id": "CULT_MIT_0086",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da ilha do Pico (Açores) conta que a montanha vulcânica do Pico conversa em segredo com a montanha de São Jorge através de fendas de lava sob o canal?",
+    "opcoes": [
+      "A Lenda do Mistério da Prainha",
+      "A Lenda do Baleeiro Encantado",
+      "A Lenda do Fogo do Pico",
+      "A Lenda dos Dois Gigantes das Ilhas do Triângulo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A proximidade geográfica das ilhas do Faial, Pico e São Jorge criou um rico cancioneiro de lendas míticas partilhadas.",
+    "fonte": "Parque Natural do Pico / Governo Regional dos Açores",
+    "factClusterId": "fc_mit_trianguloacores_01"
+  },
+  {
+    "id": "CULT_MIT_0087",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Cascais atribui a formação da monumental fenda marítima da «Boca do Inferno» à fúria de um feiticeiro ciumento que abriu o abismo na falésia rochosa?",
+    "opcoes": [
+      "A Lenda da Boca do Inferno de Cascais",
+      "A Lenda do Farol da Guia",
+      "A Lenda do Forte do Guincho",
+      "A Lenda do Mar das Bruxas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Boca do Inferno é uma impressionante cavidade cársica esculpida pela força das vagas atlânticas na costa de Cascais.",
+    "fonte": "Turismo de Cascais / Município de Cascais",
+    "factClusterId": "fc_mit_bocadoinferno_01"
+  },
+  {
+    "id": "CULT_MIT_0088",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Mértola conta que a antiga mesquita convertida na Igreja Matriz de Nossa Senhora da Assunção conservou o seu Mirhab árabe por respeito à harmonia entre as religiões?",
+    "opcoes": [
+      "A Lenda do Rio Guadiana",
+      "A Lenda da Mesquita Sagrada de Mértola",
+      "A Lenda do Alcaide Muçulmano",
+      "A Lenda da Torre do Rio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Igreja Matriz de Mértola é o único edifício religioso do período islâmico em Portugal que preserva intacto o mirhab e arcos em ferradura.",
+    "fonte": "Campo Arqueológico de Mértola / DGPC",
+    "factClusterId": "fc_mit_mesquitamertola_01"
+  },
+  {
+    "id": "CULT_MIT_0089",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da Guarda, a cidade «Mais Alta de Portugal», explica o significado dos seus 5 F's (Farta, Forte, Fria, Fiel e Formosa)?",
+    "opcoes": [
+      "A Lenda da Torre dos Ferreiros",
+      "A Lenda do Bispo da Guarda",
+      "A Lenda dos Cinco F's da Cidade da Guarda",
+      "A Lenda das Portas d'El Rei"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Guarda situa-se a 1056 metros de altitude e foi fundada por D. Sancho I em 1199 para guardar as fronteiras do reino.",
+    "fonte": "Município da Guarda / Turismo Centro de Portugal",
+    "factClusterId": "fc_mit_cincoffs_01"
+  },
+  {
+    "id": "CULT_MIT_0090",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Tomar explica a construção da «Charola» românica dos Templários com 16 faces exteriores e 8 colunas interiores em imitação da Basílica do Santo Sepulcro de Jerusalém?",
+    "opcoes": [
+      "A Lenda dos Cavaleiros da Távola",
+      "A Lenda do Segredo do Nabão",
+      "A Lenda da Janela Secreta",
+      "O Mito da Charola Templária de Tomar"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Charola do Convento de Cristo permitia aos cavaleiros templários assistir à missa a cavalo no interior do templo octogonal.",
+    "fonte": "Convento de Cristo / DGPC",
+    "factClusterId": "fc_mit_charolatomar_01"
+  },
+  {
+    "id": "CULT_MIT_0091",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da vila de Moura (Alentejo) conta a história da princesa moura Salúquia que se atirou da torre mais alta do castelo ao descobrir que o seu noivo Brafama fora morto pelos cavaleiros cristãos disfarçados?",
+    "opcoes": [
+      "A Lenda da Moura Salúquia (origem do nome da vila de Moura)",
+      "A Lenda de Brancaflor",
+      "A Lenda da Princesa Zaida",
+      "A Lenda do Castelo de Alvito"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Salúquia preferiu a morte à rendição, figurando no brasão de armas de Moura como uma mulher tombada aos pés da torre.",
+    "fonte": "Município de Moura / Lendas do Alentejo",
+    "factClusterId": "fc_mit_saluquia_01"
+  },
+  {
+    "id": "CULT_MIT_0092",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Caminha narra a aparição de um cervo (veado) sagrado com uma cruz luminosa entre as hastes na foz do rio Minho, dando nome à Ilha da Ínsua?",
+    "opcoes": [
+      "A Lenda da Barquinha de Caminha",
+      "A Lenda do Cervo da Foz do Minho (e da Ínsua)",
+      "A Lenda do Pescador de Coura",
+      "A Lenda da Senhora da Bonança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O monumento ao Cervo, do escultor José Rodrigues, vigia a foz do rio Minho no cume da montanha em Vila Nova de Cerveira.",
+    "fonte": "Município de Vila Nova de Cerveira / Município de Caminha",
+    "factClusterId": "fc_mit_cervo_01"
+  },
+  {
+    "id": "CULT_MIT_0093",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Évora conta a história da «Janela dos Namorados» no Palácio de D. Manuel, onde o rei D. Sebastião se despedia das damas da corte antes de partir para a expedição de África?",
+    "opcoes": [
+      "A Lenda da Dama de Évora",
+      "A Lenda do Jardim das Damas",
+      "A Lenda da Janela Manuelina de Évora",
+      "A Lenda do Pranto Real"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Palácio de D. Manuel em Évora acolheu a corte renascentista de D. Manuel I, D. João III e D. Sebastião.",
+    "fonte": "Município de Évora / Palácio de D. Manuel",
+    "factClusterId": "fc_mit_janeladamanuel_01"
+  },
+  {
+    "id": "CULT_MIT_0094",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Penafiel conta que o rio Sousa se encheu de ouro depois de uma feiticeira boa ter protegido os moleiros locais dos soldados de Almançor?",
+    "opcoes": [
+      "A Lenda da Senhora da Piedade",
+      "A Lenda do Castelo de Aguiar de Sousa",
+      "A Lenda da Mó de Pedra",
+      "A Lenda do Rio de Ouro de Penafiel"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "O vale do rio Sousa preserva um riquíssimo património românico da Rota do Românico.",
+    "fonte": "Rota do Românico / Município de Penafiel",
+    "factClusterId": "fc_mit_sousa_01"
+  },
+  {
+    "id": "CULT_MIT_0095",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda do Cabo de São Vicente (Sagres) conta que corvos sagrados vigiaram o túmulo do mártir São Vicente durante séculos, acompanhando a sua trasladação de barco até à Sé de Lisboa em 1173?",
+    "opcoes": [
+      "A Lenda dos Corvos de São Vicente e da Barca de Lisboa",
+      "A Lenda do Faroleiro Sagrado",
+      "A Lenda dos Monges de Sagres",
+      "A Lenda do Cabo do Fim do Mundo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os dois corvos pousados na proa e na popa da barca constituem o brasão oficial da cidade de Lisboa desde o reinado de D. Afonso Henriques.",
+    "fonte": "Museu de Lisboa / Patriarcado de Lisboa",
+    "factClusterId": "fc_mit_corvossaovicente_01"
+  },
+  {
+    "id": "CULT_MIT_0096",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Alcobaça conta que o coração de D. Pedro I foi enterrado em vaso de prata no mosteiro com a promessa mística de voltar a bater no Dia do Juízo Final?",
+    "opcoes": [
+      "A Lenda do Cálice de Prata",
+      "O Mito dos Amantes Eternos de Alcobaça",
+      "A Lenda da Espada de D. Inês",
+      "A Lenda da Torre do Amor"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os túmulos de D. Pedro e D. Inês de Castro foram colocados frente a frente para que, ao ressuscitarem, a primeira visão seja a do seu amor eterno.",
+    "fonte": "Mosteiro de Alcobaça / DGPC",
+    "factClusterId": "fc_mit_pedroineseterno_01"
+  },
+  {
+    "id": "CULT_MIT_0097",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da cidade de Lamego narra o surgimento das lendárias «Cortes de Lamego» de 1143, onde a nobreza e o clero teriam aclamado D. Afonso Henriques como primeiro Rei de Portugal?",
+    "opcoes": [
+      "A Lenda do Castelo de Lamego",
+      "A Lenda da Sé Quinhentista",
+      "O Mito Historiográfico das Cortes de Lamego",
+      "A Lenda dos Cavaleiros da Beira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Cortes de Lamego foram um texto mítico e fundamental na justificação jurídica da Restauração da Independência em 1640.",
+    "fonte": "Historiografia de Portugal / BNP",
+    "factClusterId": "fc_mit_corteslamego_01"
+  },
+  {
+    "id": "CULT_MIT_0098",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda de Miranda do Corvo fala de um pastor que encontrou a imagem de Nossa Senhora da Piedade no alto da Serra da Lousã num penedo rodeado de neve perpétua?",
+    "opcoes": [
+      "A Lenda das Aldeias do Xisto",
+      "A Lenda do Trevim Mágico",
+      "A Lenda do Penedo Escuro",
+      "A Lenda da Senhora da Piedade da Serra da Lousã"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Santuário da Senhora da Piedade na Lousã atrai anualmente milhares de romeiros às piscinas naturais do xisto.",
+    "fonte": "Município da Lousã / Aldeias do Xisto",
+    "factClusterId": "fc_mit_piedadelousa_01"
+  },
+  {
+    "id": "CULT_MIT_0099",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que lenda da cidade do Funchal recorda o explorador João Gonçalves Zarco a desembarcar na enseada da ilha e a batizá-la de «Funchal» pela abundância silvestre de:",
+    "opcoes": [
+      "Funcho (erva aromática de anis)",
+      "Flores de maracujá",
+      "Cana-de-açúcar",
+      "Loureiros selvagens"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A baía do Funchal estava coberta por denso arvoredo e funcho doce natural, que impressionou os primeiros povoadores em 1419.",
+    "fonte": "Câmara Municipal do Funchal / Turismo da Madeira",
+    "factClusterId": "fc_mit_funcho_funchal_01"
+  },
+  {
+    "id": "CULT_MIT_0100",
+    "tema": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "pergunta": "Que romance épico e mito messiânico do Padre António Vieira («História do Futuro» e «Clavis Prophetarum») profetizava que Portugal lideraria a união espiritual e temporal do mundo no chamado:",
+    "opcoes": [
+      "Reino da Cristandade",
+      "Império do Sol",
+      "Quinto Império Universal",
+      "Século do Ouro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Quinto Império é a utopia messiânica e profética que atravessou Vieira, Fernando Pessoa e a cultura literária de Portugal.",
+    "fonte": "Padre António Vieira / BNP",
+    "factClusterId": "fc_mit_quintoimperio_01"
+  }
+]

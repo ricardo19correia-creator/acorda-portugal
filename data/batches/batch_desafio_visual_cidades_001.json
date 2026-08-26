@@ -1,0 +1,852 @@
+[
+  {
+    "id": "VIS_CID_0001",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que emblemático monumento vertical em estrutura de ferro forjado neogótico (com 45 metros de altura), desenhado pelo engenheiro Raoul Mesnier du Ponsard em 1902 («Elevador de Santa Justa» / Elevador do Carmo), é um dos cartões-postais visuais mais fotografados da cidade de:",
+    "opcoes": [
+      "Lisboa (ligando a Baixa Pombalina ao Largo do Carmo)",
+      "Porto",
+      "Coimbra",
+      "Braga"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Elevador de Santa Justa funcionou originalmente a vapor e foi eletrificado em 1907 sendo Monumento Nacional.",
+    "fonte": "Carris / DGPC / Turismo de Lisboa",
+    "factClusterId": "fc_vis_cid_elevadorsantajusta_lisboa_01"
+  },
+  {
+    "id": "VIS_CID_0002",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que imponente e famosa torre sineira barroca em granito com 75 metros de altura e 225 degraus em caracol («Torre dos Clérigos»), projetada pelo arquiteto italiano Nicolau Nasoni no século XVIII, domina o horizonte urbano visual da cidade do:",
+    "opcoes": [
+      "Braga",
+      "Porto",
+      "Viseu",
+      "Guimarães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Torre dos Clérigos foi durante séculos o ponto mais alto de Portugal servindo de farol e guia para as embarcações no rio Douro.",
+    "fonte": "Irmandade dos Clérigos / DGPC / Turismo do Porto",
+    "factClusterId": "fc_vis_cid_torredosclerigos_porto_01"
+  },
+  {
+    "id": "VIS_CID_0003",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que extraordinário santuário no cume de uma colina com um monumental escadório barroco em ziguezague de 573 degraus («Santuário do Bom Jesus do Monte»), com fontes alegóricas dos Cinco Sentidos e o mais antigo funicular a contrapeso de água do mundo, localiza-se na cidade de:",
+    "opcoes": [
+      "Viana do Castelo",
+      "Lamego",
+      "Braga (Património Mundial da UNESCO)",
+      "Guimarães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bom Jesus do Monte foi classificado como Património Mundial da UNESCO em 2019.",
+    "fonte": "UNESCO / Confraria do Bom Jesus do Monte / Município de Braga",
+    "factClusterId": "fc_vis_cid_bomjesus_braga_01"
+  },
+  {
+    "id": "VIS_CID_0004",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que célebre e histórica praça amuralhada e castelo altaneiro com a muralha onde se lê a icónica inscrição em letras brancas «Aqui Nasceu Portugal», situa-se no berço da nacionalidade na cidade de:",
+    "opcoes": [
+      "Braga",
+      "Coimbra",
+      "Viseu",
+      "Guimarães (Campo de São Mamede e Monte Latito)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Guimarães e o Paço dos Duques de Bragança compõem o núcleo fundacional da história de Portugal.",
+    "fonte": "Município de Guimarães / UNESCO / DGPC",
+    "factClusterId": "fc_vis_cid_guimaraes_aquinasceuportugal_01"
+  },
+  {
+    "id": "VIS_CID_0005",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que monumental templo romano do século I d.C. com 14 colunas coríntias em mármore de Estremoz e granito («Templo Romano de Évora» / popularmente Templo de Diana), ergue-se na acrópole histórica da cidade de:",
+    "opcoes": [
+      "Évora (Património Mundial da UNESCO)",
+      "Beja",
+      "Elvas",
+      "Mértola"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Templo Romano de Évora é o vestígio da arquitetura imperial romana mais bem preservado de toda a Península Ibérica.",
+    "fonte": "UNESCO / Direção Regional de Cultura do Alentejo / DGPC",
+    "factClusterId": "fc_vis_cid_temploromano_evora_01"
+  },
+  {
+    "id": "VIS_CID_0006",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que pitoresca paisagem urbana costeira com canais navegáveis cruzados por coloridos e esguios «Barcos Moliceiros» (com pinturas satíricas e pícaras na proa) e fachadas de Arte Nova, caracteriza visualmente a «Veneza Portuguesa»:",
+    "opcoes": [
+      "Figueira da Foz",
+      "Aveiro",
+      "Viana do Castelo",
+      "Setúbal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os moliceiros eram usados originalmente para apanhar o moliço (algas marinhas) na Ria de Aveiro para adubar os campos agrícolas.",
+    "fonte": "Turismo Centro de Portugal / Município de Aveiro",
+    "factClusterId": "fc_vis_cid_aveiro_moliceiros_01"
+  },
+  {
+    "id": "VIS_CID_0007",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que sumptuosa e barroca biblioteca do século XVIII no Pátio das Escolas da mais antiga universidade portuguesa («Biblioteca Joanina»), com tetos em trompe-l'œil e colónia de morcegos que preservam os manuscritos antigos, localiza-se na cidade de:",
+    "opcoes": [
+      "Évora",
+      "Braga",
+      "Coimbra (Universidade de Coimbra)",
+      "Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Biblioteca Joanina foi mandada erigir por D. João V e abriga mais de 60.000 volumes raros e encadernações de luxo.",
+    "fonte": "Universidade de Coimbra / UNESCO",
+    "factClusterId": "fc_vis_cid_bibliotecajoanina_coimbra_01"
+  },
+  {
+    "id": "VIS_CID_0008",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que majestoso templo neobizantino no alto do monte com uma vista panorâmica de 360 graus sobre a foz do rio Lima e o oceano Atlântico («Santuário de Santa Luzia»), constitui a imagem de marca visual da cidade minhota de:",
+    "opcoes": [
+      "Caminha",
+      "Esposende",
+      "Ponte de Lima",
+      "Viana do Castelo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Templo-Monumento de Santa Luzia foi projetado pelo arquiteto Miguel Ventura Terra e a vista foi considerada pela National Geographic uma das mais belas do mundo.",
+    "fonte": "Confraria de Santa Luzia / Município de Viana do Castelo",
+    "factClusterId": "fc_vis_cid_santaluzia_vianadocastelo_01"
+  },
+  {
+    "id": "VIS_CID_0009",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que extraordinário e exuberante monumento da arquitetura templária e manuelina, com a célebre «Janela do Capítulo» esculpida por Diogo de Arruda com cordas, corais e cruzes de Cristo («Convento de Cristo»), domina a cidade de:",
+    "opcoes": [
+      "Tomar (Sede da Ordem dos Templários)",
+      "Abrantes",
+      "Santarém",
+      "Torres Novas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Convento de Cristo foi fundado por Gualdim Pais em 1160 e é Património Mundial da UNESCO desde 1983.",
+    "fonte": "UNESCO / DGPC / Município de Tomar",
+    "factClusterId": "fc_vis_cid_conventodecristo_tomar_01"
+  },
+  {
+    "id": "VIS_CID_0010",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que palácio de conto de fadas romântico do século XIX com cúpulas e torreões amarelos, vermelhos e azuis coroando o topo da Serra («Palácio Nacional da Pena»), encomendado por D. Fernando II (o Rei-Artísta), situa-se na mística vila e município de:",
+    "opcoes": [
+      "Cascais",
+      "Sintra (Património Mundial da Humanidade)",
+      "Mafra",
+      "Oeiras"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Palácio da Pena é o expoente máximo do Romantismo arquitetónico europeu e integra o Parque e Palácio Nacional da Pena.",
+    "fonte": "Parques de Sintra — Monte da Lua / UNESCO",
+    "factClusterId": "fc_vis_cid_palaciodapena_sintra_01"
+  },
+  {
+    "id": "VIS_CID_0011",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórico monumento barroco de 1783 composto por três arcos em basalto negro e alvenaria branca na Praça Gonçalo Velho Cabral («Portas da Cidade»), dá as boas-vindas visuais aos visitantes marítimos na cidade açoriana de:",
+    "opcoes": [
+      "Angra do Heroísmo",
+      "Horta",
+      "Ponta Delgada (Ilha de São Miguel)",
+      "Ribeira Grande"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Portas da Cidade foram originalmente erguidas no cais antigo e transferidas para o largo principal em 1952.",
+    "fonte": "Câmara Municipal de Ponta Delgada / Governo dos Açores",
+    "factClusterId": "fc_vis_cid_portasdacidade_pontadelgada_01"
+  },
+  {
+    "id": "VIS_CID_0012",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórico edifício civil românico do século XII com planta pentagonal irregular e janelas bíforas em arco pleno («Domus Municipalis»), exemplar único de arquitetura civil medieval na Península Ibérica, ergue-se na cidadela de:",
+    "opcoes": [
+      "Chaves",
+      "Miranda do Douro",
+      "Lamego",
+      "Bragança"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Domus Municipalis de Bragança servia de cisterna inferior de água e sala superior de reuniões dos 'homens-bons' do concelho.",
+    "fonte": "DGPC / Município de Bragança / Monumentos de Portugal",
+    "factClusterId": "fc_vis_cid_domusmunicipalis_braganca_01"
+  },
+  {
+    "id": "VIS_CID_0013",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que famoso e movimentado mercado modernista inaugurado em 1940 no centro histórico («Mercado dos Lavradores»), famoso pelas vendedeiras de trajes tradicionais com flores estrelícia e bancas coloridas de maracujás e peixe-espada preto, situa-se na cidade do:",
+    "opcoes": [
+      "Funchal (Ilha da Madeira)",
+      "Ponta Delgada",
+      "Porto Santo",
+      "Machico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mercado dos Lavradores foi desenhado pelo arquiteto Edmundo Tavares e acolhe painéis de azulejos da Fábrica Faiança Battistini.",
+    "fonte": "Câmara Municipal do Funchal / Turismo da Madeira",
+    "factClusterId": "fc_vis_cid_mercadodoslavradores_funchal_01"
+  },
+  {
+    "id": "VIS_CID_0014",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que monumental e histórico arco em cantaria calcária neoclássica inaugurado em 1875 na Praça do Comércio («Arco da Rua Augusta»), coroado pelas esculturas da Glória coroando o Génio e o Valor de Célestin Anatole Calmels, é a entrada triunfal da cidade de:",
+    "opcoes": [
+      "Porto",
+      "Lisboa",
+      "Setúbal",
+      "Faro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Arco da Rua Augusta homenageia vultos da história pátria como Viriato, Vasco da Gama, Marquês de Pombal e Nuno Álvares Pereira.",
+    "fonte": "Turismo de Lisboa / Associação de Turismo de Lisboa",
+    "factClusterId": "fc_vis_cid_arcoruaaugusta_lisboa_01"
+  },
+  {
+    "id": "VIS_CID_0015",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que imponente e histórica ponte metálica de dois tabuleiros inaugurada em 1886 sobre o rio Douro («Ponte Luís I»), projetada pelo engenheiro belga Teófilo Seyrig (discípulo de Gustave Eiffel), liga as cidades do:",
+    "opcoes": [
+      "Lisboa e Almada",
+      "Viana do Castelo e Darque",
+      "Porto e Vila Nova de Gaia",
+      "Peso da Régua e Lamego"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O tabuleiro superior da Ponte Luís I é hoje atravessado pela Linha Amarela do Metro do Porto e o inferior por trânsito automóvel e pedonal.",
+    "fonte": "Metro do Porto / DGPC / Infraestruturas de Portugal",
+    "factClusterId": "fc_vis_cid_ponteluisi_porto_01"
+  },
+  {
+    "id": "VIS_CID_0016",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que célebre e singular capela do século XVII na Igreja de São Francisco («Capela dos Ossos»), cujas paredes e pilares estão totalmente revestidos por ossos e crânios humanos sob o aviso «Nós ossos que aqui estamos pelos vossos esperamos», localiza-se na cidade de:",
+    "opcoes": [
+      "Faro",
+      "Campo Maior",
+      "Alcantarilha",
+      "Évora"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Capela dos Ossos de Évora foi edificada por frades franciscanos para incitar à reflexão sobre a transitoriedade da vida humana.",
+    "fonte": "Igreja de São Francisco de Évora / Turismo do Alentejo",
+    "factClusterId": "fc_vis_cid_capeladosossos_evora_01"
+  },
+  {
+    "id": "VIS_CID_0017",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que monumental e histórico aqueduto quinhentista com 8,5 km de extensão e quatro ordens de arcadas sobrepostas de 843 arcos («Aqueduto da Amoreira»), ergue-se majestoso à entrada da cidade fortificada de:",
+    "opcoes": [
+      "Elvas (Património Mundial da UNESCO)",
+      "Évora",
+      "Tomar",
+      "Vila Viçosa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Aqueduto da Amoreira demorou mais de um século a ser construído segundo projeto de Francisco de Arruda para abastecer a praça-forte.",
+    "fonte": "UNESCO / Município de Elvas / DGPC",
+    "factClusterId": "fc_vis_cid_aquedutodaamoreira_elvas_01"
+  },
+  {
+    "id": "VIS_CID_0018",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que famosa e histórica ponte de cantaria de 7 arcos com tabuleiro pedonal sobre o rio Gilão («Ponte Romana de Tavira» / Ponte Antiga), com vista para as casas de telhados de tesoura (quatro águas), situa-se no coração da cidade algarvia de:",
+    "opcoes": [
+      "Faro",
+      "Tavira",
+      "Silves",
+      "Portimão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Apesar de chamada popularmente 'romana', a ponte atual tem estrutura de reconstrução medieval e moderna do século XVII.",
+    "fonte": "Município de Tavira / DGPC",
+    "factClusterId": "fc_vis_cid_ponteromana_tavira_01"
+  },
+  {
+    "id": "VIS_CID_0019",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e imponente fortaleza em estrela abaluartada do século XVIII situada no cume do Monte da Graça («Forte de Nossa Senhora da Graça» / Forte Conde de Lippe), uma das mais perfeitas fortalezas militares abaluartadas do mundo, localiza-se na cidade de:",
+    "opcoes": [
+      "Almeida",
+      "Valença do Minho",
+      "Elvas",
+      "Marvão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Forte da Graça foi construído pelo Marquês de Pombal e pelo Conde de Lippe resistindo a cercos históricos na Guerra das Laranjas.",
+    "fonte": "UNESCO / Município de Elvas / Exército Português",
+    "factClusterId": "fc_vis_cid_fortedagraca_elvas_01"
+  },
+  {
+    "id": "VIS_CID_0020",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que famosa e deslumbrante livraria neogótica inaugurada em 1906 na Rua das Carmelitas («Livraria Lello»), famosa pela sua monumental escadaria central vermelha em curva e vitral no teto com o lema «Decus in Labore», é o ícone cultural da cidade do:",
+    "opcoes": [
+      "Coimbra",
+      "Lisboa",
+      "Braga",
+      "Porto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Livraria Lello foi classificada como uma das mais belas livrarias do mundo por publicações como a Time e a Lonely Planet.",
+    "fonte": "Livraria Lello / Fundação Lello / Turismo do Porto",
+    "factClusterId": "fc_vis_cid_livrarialello_porto_01"
+  },
+  {
+    "id": "VIS_CID_0021",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e colossal praça pombalina virada ao rio Tejo («Terreiro do Paço» / Praça do Comércio), com a monumental estátua equestre em bronze do Rei D. José I esculpida por Machado de Castro, é o coração monumental de:",
+    "opcoes": [
+      "Lisboa",
+      "Setúbal",
+      "Porto",
+      "Coimbra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praça do Comércio substituiu o antigo Paço da Ribeira destruído pelo grande Terramoto de 1 de novembro de 1755.",
+    "fonte": "Museu de Lisboa / Turismo de Lisboa",
+    "factClusterId": "fc_vis_cid_terreirodopaco_lisboa_01"
+  },
+  {
+    "id": "VIS_CID_0022",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que impressionante átrio de estação ferroviária inaugurado em 1916 revestido por mais de 20.000 azulejos históricos pintados por Jorge Colaço retratando episódios como o Torneio de Arcos de Valdevez e a Conquista de Ceuta («Estação de São Bento»), localiza-se na cidade do:",
+    "opcoes": [
+      "Lisboa",
+      "Porto",
+      "Aveiro",
+      "Braga"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Estação de São Bento foi construída no local do antigo Convento de São Bento da Avé-Maria e é considerada uma das estações mais bonitas do mundo.",
+    "fonte": "Infraestruturas de Portugal / CP / Turismo do Porto",
+    "factClusterId": "fc_vis_cid_estacaosaobento_porto_01"
+  },
+  {
+    "id": "VIS_CID_0023",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que grandioso e sumptuoso palácio oitocentista neoclássico («Palácio da Bolsa»), com o deslumbrante «Salão Árabe» em estuque dourado e caligrafia árabe inspirado na Alhambra de Granada, pertence à Associação Comercial da cidade do:",
+    "opcoes": [
+      "Lisboa",
+      "Coimbra",
+      "Porto",
+      "Faro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Palácio da Bolsa acolhe as receções de estado a chefes de governo estrangeiros que visitam o Norte de Portugal.",
+    "fonte": "Associação Comercial do Porto / Palácio da Bolsa",
+    "factClusterId": "fc_vis_cid_palaciodabolsa_porto_01"
+  },
+  {
+    "id": "VIS_CID_0024",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que imponente e histórico castelo mouro em grés vermelho («Castelo de Silves»), a mais importante fortificação militar islâmica do período do Al-Gharb com a sua gigantesca Cisterna da Moura, ergue-se na cidade algarvia de:",
+    "opcoes": [
+      "Loulé",
+      "Tavira",
+      "Castro Marim",
+      "Silves"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Silves foi a antiga capital islâmica do Algarve (Xelb) conquistada definitivamente em 1242 por D. Paio Peres Correia.",
+    "fonte": "Município de Silves / DGPC",
+    "factClusterId": "fc_vis_cid_castelodesilves_01"
+  },
+  {
+    "id": "VIS_CID_0025",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que espetacular e mística propriedade romântica do início do século XX («Quinta da Regaleira»), com o seu famoso «Poço Iniciático» em espiral de 27 metros com nove patamares subterrâneos associados à Maçonaria e aos Templários, situa-se em:",
+    "opcoes": [
+      "Sintra (Carvalho Monteiro / Luigi Manini)",
+      "Cascais",
+      "Mafra",
+      "Óbidos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Quinta da Regaleira foi idealizada pelo milionário António Augusto Carvalho Monteiro e desenhada pelo arquiteto cenógrafo italiano Luigi Manini.",
+    "fonte": "Fundação Cultursintra / Parques de Sintra",
+    "factClusterId": "fc_vis_cid_quintadaregaleira_sintra_01"
+  },
+  {
+    "id": "VIS_CID_0026",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que notável e histórica praça central oval renascentista com arcadas mouriscas e uma fonte de mármore branco com 8 bicas representando as 8 ruas que nela confluem («Praça do Giraldo»), é a sala de visitas da cidade de:",
+    "opcoes": [
+      "Beja",
+      "Évora (em honra de Geraldo Sem Pavor)",
+      "Portalegre",
+      "Estremoz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Praça do Giraldo é o centro nevrálgico de Évora com a Igreja de Santo Antão e as suas esplanadas históricas.",
+    "fonte": "Município de Évora / Turismo do Alentejo",
+    "factClusterId": "fc_vis_cid_pracadogiraldo_evora_01"
+  },
+  {
+    "id": "VIS_CID_0027",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórico conjunto arquitetónico de granito constituído pelo «Adro da Sé», com a Sé Catedral de Viseu e a elegante Igreja da Misericórdia erguidas frente a frente no ponto mais alto da colina, localiza-se na «Cidade de Viriato»:",
+    "opcoes": [
+      "Guarda",
+      "Lamego",
+      "Viseu",
+      "Covilhã"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Adro da Sé de Viseu acolhe também o Museu Nacional Grão Vasco no antigo Paço dos Três Escalões.",
+    "fonte": "Município de Viseu / Museu Nacional Grão Vasco",
+    "factClusterId": "fc_vis_cid_adrodase_viseu_01"
+  },
+  {
+    "id": "VIS_CID_0028",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que imponente e mais alta catedral gótico-manuelina em granito de Portugal («Sé da Guarda»), coroada por gárgulas medievais e ameias defensivas a mais de 1.050 metros de altitude na «Cidade dos 5 Fs», situa-se na cidade da:",
+    "opcoes": [
+      "Covilhã",
+      "Castelo Branco",
+      "Bragança",
+      "Guarda (Forte, Farta, Fria, Fiel e Formosa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sé da Guarda demorou mais de 150 anos a ser edificada assemelhando-se exteriormente a uma fortaleza inexpugnável.",
+    "fonte": "Diocese da Guarda / Município da Guarda / DGPC",
+    "factClusterId": "fc_vis_cid_sedaguarda_01"
+  },
+  {
+    "id": "VIS_CID_0029",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórico arco triunfal quinhentista encimado por um nicho com a estátua em mármore do padroeiro São Tomás de Aquino («Arco da Vila»), desenhado pelo arquiteto italiano Francisco Xavier Fabri em 1812, dá acesso à cidade velha (Vila Adentro) de:",
+    "opcoes": [
+      "Faro",
+      "Olhão",
+      "Lagos",
+      "Tavira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Arco da Vila abriga no seu interior uma antiga porta de ferradura mourisca do século XI que é exemplar único no Algarve.",
+    "fonte": "Município de Faro / DGPC / Turismo do Algarve",
+    "factClusterId": "fc_vis_cid_arcodavila_faro_01"
+  },
+  {
+    "id": "VIS_CID_0030",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que monumental e histórico palácio ducal com fachadas em mármore branco de 110 metros de comprimento e 450 divisões («Palácio Ducal de Vila Viçosa»), antiga residência oficial da Casa de Bragança antes da Restauração de 1640, ergue-se na vila alentejana de:",
+    "opcoes": [
+      "Estremoz",
+      "Vila Viçosa",
+      "Borba",
+      "Arraiolos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Palácio Ducal de Vila Viçosa abriga fabulosas coleções de tapeçarias, armaria, carruagens e azulejos sob tutela da Fundação da Casa de Bragança.",
+    "fonte": "Fundação da Casa de Bragança / DGPC",
+    "factClusterId": "fc_vis_cid_palacioducal_vilavicosa_01"
+  },
+  {
+    "id": "VIS_CID_0031",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que pitoresca vila histórica alentejana situada no topo de uma escarpa granítica a mais de 860 metros de altitude («Marvão»), amuralhada por muralhas medievais com uma vista panorâmica vertiginosa sobre a serra de São Mamede e a planície espanhola, situa-se no distrito de:",
+    "opcoes": [
+      "Évora",
+      "Castelo Branco",
+      "Portalegre",
+      "Santarém"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Saramago escreveu em 'Viagem a Portugal' que 'De Marvão vê-se a terra toda'.",
+    "fonte": "Município de Marvão / Turismo do Alentejo",
+    "factClusterId": "fc_vis_cid_marvao_portalegre_01"
+  },
+  {
+    "id": "VIS_CID_0032",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e famosa vila medieval amuralhada («Vila de Óbidos»), com as suas ruelas caiadas de branco com faixas azuis e amarelas, floreiras de buganvílias e o Castelo transformado em pousada histórica, foi tradicionalmente oferecida como dote de casamento às:",
+    "opcoes": [
+      "Infantas de Espanha",
+      "Duquesas de Bragança",
+      "Abadessas de Lorvão",
+      "Rainhas de Portugal (Casa das Rainhas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Dinis ofereceu a vila de Óbidos a D. Isabel de Aragão (Rainha Santa) em 1282 iniciando a tradição da Casa das Rainhas.",
+    "fonte": "Município de Óbidos / DGPC",
+    "factClusterId": "fc_vis_cid_obidos_rainhas_01"
+  },
+  {
+    "id": "VIS_CID_0033",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que singular e espetacular aldeia histórica granítica na Beira Baixa («Aldeia de Monsanto»), eleita em 1938 como «A Aldeia Mais Portuguesa de Portugal», cujas casas típicas foram construídas encaixadas debaixo e entre gigantescos penedos graníticos arredondados?",
+    "opcoes": [
+      "Monsanto (Idanha-a-Nova)",
+      "Piódão",
+      "Sortelha",
+      "Castelo Rodrigo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Monsanto exibe no topo da torre sineira a réplica do 'Galo de Prata' conquistado no concurso de 1938 e serviu de cenário à série 'House of the Dragon'.",
+    "fonte": "Aldeias Históricas de Portugal / Município de Idanha-a-Nova",
+    "factClusterId": "fc_vis_cid_monsanto_idanha_01"
+  },
+  {
+    "id": "VIS_CID_0034",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que pitoresca e mágica aldeia de xisto em socalcos na encosta da Serra do Açor («Piódão»), cujas casas de pedra escura de xisto com telhados de lousa exibem portas e janelas pintadas num inconfundível tom de azul vivo, situa-se no município de:",
+    "opcoes": [
+      "Pampilhosa da Serra",
+      "Arganil (Distrito de Coimbra)",
+      "Lousã",
+      "Góis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Igreja Matriz de Nossa Senhora da Conceição de Piódão destaca-se em branco puro no meio do anfiteatro negro de xisto.",
+    "fonte": "Rede das Aldeias do Xisto / Município de Arganil",
+    "factClusterId": "fc_vis_cid_piodao_arganil_01"
+  },
+  {
+    "id": "VIS_CID_0035",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que imponente e histórica fortificação abaluartada em forma de estrela de doze pontas com fossos e portas duplas («Praça-Forte de Almeida»), uma das mais perfeitas fortalezas abaluartadas da Europa, localiza-se na fronteira da Beira Alta na cidade de:",
+    "opcoes": [
+      "Valença",
+      "Elvas",
+      "Almeida",
+      "Chaves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Almeida foi palco do trágico Cerco de 1810 durante as Invasões Francesas quando o paiol de pólvora explodiu destruindo o castelo medieval.",
+    "fonte": "Município de Almeida / Exército Português",
+    "factClusterId": "fc_vis_cid_almeida_estrela_01"
+  },
+  {
+    "id": "VIS_CID_0036",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica cidade fortaleza no Alto Minho separada de Tui (Galiza) pelo rio Minho («Valença do Minho»), com a sua monumental fortaleza de dois polígonos abaluartados interligados («Coroada» e «Magistral»), é famosa pelo comércio tradicional de:",
+    "opcoes": [
+      "Filigrana de ouro",
+      "Calçado de couro",
+      "Barro preto",
+      "Têxteis-lar, atoalhados e lençóis"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de Valença atrai milhares de visitantes espanhóis e internacionais ao longo de todo o ano.",
+    "fonte": "Município de Valença / Turismo do Porto e Norte",
+    "factClusterId": "fc_vis_cid_valencadominho_fortaleza_01"
+  },
+  {
+    "id": "VIS_CID_0037",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e famosa ponte romana de granito de 16 arcos sobre o rio Tâmega («Ponte de Trajano»), construída no século I d.C. pelo imperador romano Trajano com dois padrões comemorativos com inscrições epigráficas em latim, ergue-se na cidade de:",
+    "opcoes": [
+      "Chaves (antiga Aquae Flaviae)",
+      "Bragança",
+      "Mirandela",
+      "Ponte de Lima"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ponte de Trajano de Chaves tem cerca de 140 metros de extensão e resistiu intocada às grandes cheias do Tâmega ao longo de dois milénios.",
+    "fonte": "Município de Chaves / DGPC",
+    "factClusterId": "fc_vis_cid_pontedetrajano_chaves_01"
+  },
+  {
+    "id": "VIS_CID_0038",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e famosa ponte medieval em cantaria sobre o rio Lima («Ponte de Ponte de Lima»), com o seu troço romano sobrevivente de 5 arcos e o troço gótico de 17 arcos, dá nome à vila mais antiga de Portugal:",
+    "opcoes": [
+      "Ponte da Barca",
+      "Ponte de Lima (fundada pela Carta de Foral de D. Teresa em 1125)",
+      "Arcos de Valdevez",
+      "Monção"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Em Ponte de Lima realizou-se a lenda do rio Lethes (Rio do Esquecimento) cruzado pelo general romano Décio Juno Bruto em 135 a.C.",
+    "fonte": "Município de Ponte de Lima / DGPC",
+    "factClusterId": "fc_vis_cid_pontedelima_1125_01"
+  },
+  {
+    "id": "VIS_CID_0039",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórico centro urbano dos Açores na Ilha Terceira («Angra do Heroísmo»), primeiro centro histórico urbano português classificado como Património Mundial da UNESCO em 1983, destacou-se pelo seu planeamento geométrico renascentista e pelo porto de abrigo do Monte Brasil?",
+    "opcoes": [
+      "Ponta Delgada",
+      "Horta",
+      "Angra do Heroísmo (Ilha Terceira)",
+      "Velas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Angra foi capital de Portugal por duas vezes (com D. António Prior do Crato e com D. Pedro IV durante as Guerras Liberais).",
+    "fonte": "UNESCO / Município de Angra do Heroísmo",
+    "factClusterId": "fc_vis_cid_angradoheroismo_unesco_01"
+  },
+  {
+    "id": "VIS_CID_0040",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica marina e porto internacional de iates na Ilha do Faial («Marina da Horta»), é mundialmente célebre pelas centenas de pinturas coloridas e desenhos deixados nas paredes e no chão pelos velejadores que cruzam o Atlântico e pelo mítico «Peter Café Sport»?",
+    "opcoes": [
+      "Ponta Delgada",
+      "Angra do Heroísmo",
+      "Vila do Porto",
+      "Horta (Ilha do Faial)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A tradição dita que pintar uma gravura no cais da Horta dá sorte e garante uma viagem marítima segura através do oceano.",
+    "fonte": "Peter Café Sport / Portos dos Açores / Turismo dos Açores",
+    "factClusterId": "fc_vis_cid_marinadahorta_faial_01"
+  },
+  {
+    "id": "VIS_CID_0041",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que impressionante e famoso convento e palácio barroco joanino do século XVIII («Palácio Nacional de Mafra»), construído pelo Rei D. João V em cumprimento de um voto pelo nascimento de um herdeiro com dois carrilhões de 98 sinos e a biblioteca monumental, situa-se no concelho de:",
+    "opcoes": [
+      "Mafra (Património Mundial da UNESCO)",
+      "Sintra",
+      "Torres Vedras",
+      "Loures"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Palácio-Convento e a Real Tapada de Mafra foram imortalizados no romance 'Memorial do Convento' de José Saramago.",
+    "fonte": "UNESCO / Palácio Nacional de Mafra / DGPC",
+    "factClusterId": "fc_vis_cid_palaciomafra_01"
+  },
+  {
+    "id": "VIS_CID_0042",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que grandioso mosteiro gótico e manuelino («Mosteiro de Santa Maria da Vitória» / Mosteiro da Batalha), erguido por D. João I em cumprimento de uma promessa a Nossa Senhora pela vitória na Batalha de Aljubarrota em 1385, com a Capela do Fundador e as Capelas Imperfeitas, localiza-se na vila de:",
+    "opcoes": [
+      "Alcobaça",
+      "Batalha",
+      "Leiria",
+      "Porto de Mós"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro da Batalha é uma das mais deslumbrantes obras do gótico flamejante na Europa albergando o túmulo de D. João I, D. Filipa de Lencastre e do Infante D. Henrique.",
+    "fonte": "UNESCO / Mosteiro da Batalha / DGPC",
+    "factClusterId": "fc_vis_cid_mosteirodabatalha_01"
+  },
+  {
+    "id": "VIS_CID_0043",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que monumental mosteiro cisterciense do século XII («Mosteiro de Santa Maria de Alcobaça»), primeira obra puramente gótica de Portugal com a monumental Sala dos Reis e os túmulos rendilhados frente a frente de D. Pedro I e Inês de Castro («Até ao Fim do Mundo»), situa-se na cidade de:",
+    "opcoes": [
+      "Batalha",
+      "Caldas da Rainha",
+      "Alcobaça",
+      "Nazaré"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de Alcobaça foi fundado por D. Afonso Henriques em 1153 e doado a São Bernardo de Claraval.",
+    "fonte": "UNESCO / Mosteiro de Alcobaça / DGPC",
+    "factClusterId": "fc_vis_cid_mosteirodealcobaca_01"
+  },
+  {
+    "id": "VIS_CID_0044",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que famosa vila piscatória e santuário mariano no topo de uma imponente falésia de 318 metros sobre o mar («Sítio da Nazaré»), associada ao milagre de D. Fuas Roupinho e célebre mundialmente pelas ondas gigantes do Canhão da Nazaré na Praia do Norte, é a vila da:",
+    "opcoes": [
+      "Peniche",
+      "Ericeira",
+      "Sesimbra",
+      "Nazaré"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Forte de São Miguel Arcanjo no promontório da Nazaré acolhe o Farol e o museu dedicado aos surfistas de ondas gigantes como Rodrigo Koxa e Garrett McNamara.",
+    "fonte": "Município da Nazaré / Confraria da Nazaré",
+    "factClusterId": "fc_vis_cid_sitiodanazare_01"
+  },
+  {
+    "id": "VIS_CID_0045",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica cidade costeira numa península rochosa com o Forte de São João Baptista nas Ilhas Berlengas e a imponente «Fortaleza de Peniche» (antiga prisão política do Estado Novo de onde Álvaro Cunhal protagonizou uma fuga espetacular em 1960), é a cidade de:",
+    "opcoes": [
+      "Peniche",
+      "Cascais",
+      "Nazaré",
+      "Sines"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de Peniche foi reabilitada e acolhe hoje o Museu Nacional Resistência e Liberdade.",
+    "fonte": "Museu Nacional Resistência e Liberdade / Município de Peniche",
+    "factClusterId": "fc_vis_cid_fortalezadepeniche_01"
+  },
+  {
+    "id": "VIS_CID_0046",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e famosa vila piscatória do município de Mafra («Ericeira»), com as suas casas caiadas de azul e branco sobre as arribas e o porto da Praia dos Pescadores (de onde a Família Real embarcou para o exílio em 1910), foi consagrada como a primeira:",
+    "opcoes": [
+      "Reserva Marinha de Cetáceos",
+      "Reserva Mundial de Surf da Europa (World Surfing Reserve)",
+      "Vila Europeia do Desporto",
+      "Capital do Marisco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ericeira possui 7 praias de ondas perfeitas de classe mundial ao longo de 4 km de costa (como Ribeira d'Ilhas e Coxos).",
+    "fonte": "Save The Waves Coalition / Município de Mafra",
+    "factClusterId": "fc_vis_cid_ericeira_reservasurf_01"
+  },
+  {
+    "id": "VIS_CID_0047",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica e monumental praça-forte medieval e moderna debruçada sobre o rio Minho («Fortaleza de Monção»), célebre pela lenda heroica de Deu-la-Deu Martins que atirou pães aos sitiantes castelhanos para provar abundância, é a capital do vinho:",
+    "opcoes": [
+      "Loureiro",
+      "Vinhão",
+      "Alvarinho (Monção e Melgaço)",
+      "Avesso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A estátua de Deu-la-Deu Martins e o brasão de Monção ostentam a heroína no topo da torre com os pães na mão.",
+    "fonte": "Município de Monção / Rota do Alvarinho",
+    "factClusterId": "fc_vis_cid_moncao_deuladeu_01"
+  },
+  {
+    "id": "VIS_CID_0048",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica vila termal fundada no século XV pela Rainha D. Leonor («Caldas da Rainha»), após ter testemunhado os efeitos curativos das águas sulfurosas nos doentes pobres, acolhe o hospital termal mais antigo do mundo em funcionamento contínuo?",
+    "opcoes": [
+      "Caldas das Taipas",
+      "Caldas de Vizela",
+      "Termas de Monfortinho",
+      "Caldas da Rainha (Hospital Termal Rainha D. Leonor)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Caldas da Rainha é também a capital portuguesa da cerâmica e da caricatura com a Fábrica Bordalo Pinheiro e a Praça da Fruta diária.",
+    "fonte": "Município das Caldas da Rainha / Centro Hospitalar do Oeste",
+    "factClusterId": "fc_vis_cid_caldasdarainha_leonor_01"
+  },
+  {
+    "id": "VIS_CID_0049",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica cidade portuense e duriense na confluência do rio Corgo com o rio Cabril («Vila Real»), famosa pelo seu centro histórico, pelo Solar de Mateus do século XVIII (obra-prima de Nicolau Nasoni) e pela secular Feira de Santo António, situa-se em Trás-os-Montes?",
+    "opcoes": [
+      "Vila Real (Casa de Mateus)",
+      "Chaves",
+      "Bragança",
+      "Mirandela"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Casa de Mateus em Vila Real é famosa pela sua fachada barroca refletida no espelho de água e ilustra o rótulo do internacional Mateus Rosé.",
+    "fonte": "Fundação da Casa de Mateus / Município de Vila Real",
+    "factClusterId": "fc_vis_cid_casademateus_vilareal_01"
+  },
+  {
+    "id": "VIS_CID_0050",
+    "tema": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "pergunta": "Que histórica cidade beirã situada no sopé da Serra da Estrela («Covilhã»), com a sua rica tradição industrial têxtil de lanifícios e a moderna Universidade da Beira Interior (UBI) instalada nas antigas fábricas reais de panos do Marquês de Pombal, é conhecida como a «Cidade Neve»?",
+    "opcoes": [
+      "Guarda",
+      "Fundão",
+      "Covilhã",
+      "Seia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Covilhã acolhe o Museu de Lanifícios (Museu Real Fábrica de Panos) e é a principal porta de entrada para a Torre e estâncias de esqui da Serra da Estrela.",
+    "fonte": "Universidade da Beira Interior / Museu de Lanifícios / Município da Covilhã",
+    "factClusterId": "fc_vis_cid_covilha_lanificios_01"
+  }
+]

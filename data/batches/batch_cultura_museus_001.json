@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_MUS_0001",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu nacional em Lisboa guarda a célebre Custódia de Belém, encomendada por D. Manuel I e cinzelada por Gil Vicente com o primeiro ouro vindo de Quíloa?",
+    "opcoes": [
+      "Museu Nacional de Arte Antiga (MNAA)",
+      "Museu Nacional dos Coches",
+      "Museu Nacional de Arqueologia",
+      "Museu do Tesouro Real"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Custódia de Belém (1506), expoente da ourivesaria manuelina, é uma das peças capitais do Museu Nacional de Arte Antiga nas Janelas Verdes.",
+    "fonte": "Museu Nacional de Arte Antiga / DGPC",
+    "factClusterId": "fc_mus_mnaa_01"
+  },
+  {
+    "id": "CULT_MUS_0002",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que obra-prima da pintura portuguesa do século XV, atribuída ao pintor régio Nuno Gonçalves, está em exibição permanente no Museu Nacional de Arte Antiga?",
+    "opcoes": [
+      "A Tentação de Santo Antão",
+      "Os Painéis de São Vicente de Fora",
+      "O Tríptico da Infanta",
+      "A Adoração dos Magos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os seis painéis de carvalho constituem o mais notável retrato coletivo da sociedade da corte portuguesa da época dos Descobrimentos.",
+    "fonte": "MNAA / Direção-Geral do Património Cultural",
+    "factClusterId": "fc_mus_paineis_01"
+  },
+  {
+    "id": "CULT_MUS_0003",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que antigo picadeiro real e novo edifício em Belém se situa o museu mais visitado de Portugal, criado pela rainha D. Amélia em 1905 com carruagens dos séculos XVI a XIX?",
+    "opcoes": [
+      "Museu da Presidência da República",
+      "Museu de Marinha",
+      "Museu Nacional dos Coches",
+      "Museu Militar de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional dos Coches alberga uma coleção única no mundo de viaturas de gala da Casa Real Portuguesa e da Igreja.",
+    "fonte": "Museu Nacional dos Coches / DGPC",
+    "factClusterId": "fc_mus_coches_01"
+  },
+  {
+    "id": "CULT_MUS_0004",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu fundado em Lisboa em 1969 expõe a coleção privada de arte egípcia, greco-romana, islâmica, oriental e de mestres europeus como Rembrandt e Monet, legada pelo magnata do petróleo?",
+    "opcoes": [
+      "Museu do Oriente",
+      "Coleção Berardo",
+      "Museu Medeiros e Almeida",
+      "Museu Calouste Gulbenkian"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação e Museu Calouste Gulbenkian preservam a fabulosa coleção de mais de 6.000 peças reunidas por Calouste Sarkis Gulbenkian.",
+    "fonte": "Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_mus_gulbenkian_01"
+  },
+  {
+    "id": "CULT_MUS_0005",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que antigo convento lisboeta do século XVI (Convento da Madre de Deus) está instalado o Museu Nacional do Azulejo?",
+    "opcoes": [
+      "Convento da Madre de Deus (Xabregas)",
+      "Convento do Carmo",
+      "Convento de São Bento",
+      "Convento das Francesinhas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional do Azulejo mostra a evolução da azulejaria em Portugal do século XV à contemporaneidade, incluindo o «Grande Panorama de Lisboa» antes do terramoto.",
+    "fonte": "Museu Nacional do Azulejo / DGPC",
+    "factClusterId": "fc_mus_azulejo_01"
+  },
+  {
+    "id": "CULT_MUS_0006",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu de arte contemporânea no Porto, projetado pelo arquiteto Álvaro Siza Vieira e integrado num parque de 18 hectares, é uma das maiores referências culturais da Europa?",
+    "opcoes": [
+      "Museu Nacional de Soares dos Reis",
+      "Museu de Serralves (Fundação de Serralves)",
+      "Centro Português de Fotografia",
+      "Casa da Música"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Arte Contemporânea de Serralves, inaugurado em 1999 no Porto, acolhe grandes exposições de vanguarda e o parque de esculturas.",
+    "fonte": "Fundação de Serralves",
+    "factClusterId": "fc_mus_serralves_01"
+  },
+  {
+    "id": "CULT_MUS_0007",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Qual foi o primeiro museu público de arte criado em Portugal (em 1833), situado no Palácio dos Carrancas no Porto?",
+    "opcoes": [
+      "Museu Grão Vasco",
+      "Museu do Abade de Baçal",
+      "Museu Nacional de Soares dos Reis",
+      "Museu de Aveiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu Nacional de Soares dos Reis foi fundado por D. Pedro IV no Palácio dos Carrancas, batizado em honra do escultor António Soares dos Reis (autor de «O Desterrado»).",
+    "fonte": "Museu Nacional de Soares dos Reis / DGPC",
+    "factClusterId": "fc_mus_soaresdosreis_01"
+  },
+  {
+    "id": "CULT_MUS_0008",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu instalado na ala ocidental do Mosteiro dos Jerónimos documenta a história da marinha portuguesa e exibe hidroaviões históricos como o «Santa Cruz»?",
+    "opcoes": [
+      "Museu Militar",
+      "Museu do Ar",
+      "Museu do Combatente",
+      "Museu de Marinha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Marinha preserva galeotas reais, cartas náuticas, instrumentos astronómicos e o avião da primeira travessia aérea do Atlântico Sul de 1922.",
+    "fonte": "Museu de Marinha / Comissão Cultural de Marinha",
+    "factClusterId": "fc_mus_marinha_01"
+  },
+  {
+    "id": "CULT_MUS_0009",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade beirã se situa o Museu Nacional Grão Vasco, instalado no histórico Paço dos Três Escalões junto à Sé Catedral?",
+    "opcoes": [
+      "Viseu",
+      "Guarda",
+      "Lamego",
+      "Covilhã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional Grão Vasco em Viseu conserva o retábulo renascentista da Sé pintado pelo mestre quinhentista Vasco Fernandes (Grão Vasco).",
+    "fonte": "Museu Nacional Grão Vasco / DGPC",
+    "factClusterId": "fc_mus_graovasco_01"
+  },
+  {
+    "id": "CULT_MUS_0010",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu nacional em Coimbra foi construído sobre as impressionantes galerias romanas do Criptopórtico de Aeminium (século I d.C.)?",
+    "opcoes": [
+      "Museu da Ciência da Universidade de Coimbra",
+      "Museu Nacional de Machado de Castro",
+      "Museu da Água de Coimbra",
+      "Casa-Museu Bissaya Barreto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Museu Nacional de Machado de Castro, antigo Paço Episcopal de Coimbra, guarda notável coleção de escultura e o Criptopórtico romano.",
+    "fonte": "Museu Nacional de Machado de Castro / DGPC",
+    "factClusterId": "fc_mus_machadocastro_01"
+  },
+  {
+    "id": "CULT_MUS_0011",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que palácio real em Lisboa foi inaugurado em 2022 o Museu do Tesouro Real, com uma das maiores caixas-fortes do mundo para guardar as joias da Coroa Portuguesa?",
+    "opcoes": [
+      "Palácio Nacional de Queluz",
+      "Palácio das Necessidades",
+      "Palácio Nacional da Ajuda",
+      "Palácio de São Bento"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Tesouro Real na ala poente do Palácio Nacional da Ajuda expõe a baixela Germain, joias e insígnias régias de valor incalculável.",
+    "fonte": "Museu do Tesouro Real / Associação Turismo de Lisboa",
+    "factClusterId": "fc_mus_tesouroreal_01"
+  },
+  {
+    "id": "CULT_MUS_0012",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu de arte contemporânea e arquitetura vanguardista, com fachada ondulada coberta por 15.000 azulejos tridimensionais à beira do Tejo em Belém, abriu ao público em 2016?",
+    "opcoes": [
+      "CCB (Centro Cultural de Belém)",
+      "Museu do Oriente",
+      "Culturgest",
+      "MAAT (Museu de Arte, Arquitetura e Tecnologia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O MAAT, da Fundação EDP, projetado pela arquiteta Amanda Levete, integra a antiga Central Tejo e o edifício contemporâneo.",
+    "fonte": "Fundação EDP / MAAT",
+    "factClusterId": "fc_mus_maat_01"
+  },
+  {
+    "id": "CULT_MUS_0013",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "O Museu de Alberto Sampaio, que guarda o loudel (gibão de armas) usado por D. João I na Batalha de Aljubarrota, situa-se no centro histórico de:",
+    "opcoes": [
+      "Guimarães",
+      "Braga",
+      "Viana do Castelo",
+      "Amarante"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Museu de Alberto Sampaio ocupa as instalações da Colegiada de Nossa Senhora da Oliveira em Guimarães.",
+    "fonte": "Museu de Alberto Sampaio / DGPC",
+    "factClusterId": "fc_mus_albertosampaio_01"
+  },
+  {
+    "id": "CULT_MUS_0014",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu instalado na antiga Igreja de São Julião em Lisboa, na Baixa Pombalina, convida os visitantes a segurar numa barra de ouro de 12 kg?",
+    "opcoes": [
+      "Museu da Moeda",
+      "Museu do Dinheiro (Banco de Portugal)",
+      "Museu do Banco Santander",
+      "Museu da Alfândega"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Dinheiro, do Banco de Portugal, exibe a história da moeda e do comércio na antiga Igreja de São Julião e na Muralha de D. Dinis.",
+    "fonte": "Banco de Portugal / Museu do Dinheiro",
+    "factClusterId": "fc_mus_dinheiro_01"
+  },
+  {
+    "id": "CULT_MUS_0015",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que antigo armazém portuário de Alcântara em Lisboa está instalado o Museu do Oriente, com a vasta Coleção Kwok de artes performativas asiáticas?",
+    "opcoes": [
+      "Edifício da Alfândega do Porto",
+      "Armazém dos Chás",
+      "Edifício Pedro Álvares Cabral (Docas)",
+      "Gare Marítima de Alcântara"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu do Oriente, inaugurado em 2008 pela Fundação Oriente, documenta a presença e intercâmbio de Portugal na Ásia (Goa, Macau, Timor, Japão).",
+    "fonte": "Fundação Oriente / Museu do Oriente",
+    "factClusterId": "fc_mus_oriente_01"
+  },
+  {
+    "id": "CULT_MUS_0016",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu nacional em Lisboa, instalado na antiga estação de metro Alto dos Moinhos (e em processo de transferência para Mafra), guarda o lendário Violoncelo Stradivarius «Chevillard-Rei de Portugal» de 1725?",
+    "opcoes": [
+      "Museu do Teatro",
+      "Museu do Fado",
+      "Museu Nacional do Som",
+      "Museu Nacional da Música"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Museu Nacional da Música possui um dos mais ricos acervos europeus de instrumentos históricos dos séculos XVI a XX.",
+    "fonte": "Museu Nacional da Música / DGPC",
+    "factClusterId": "fc_mus_musica_01"
+  },
+  {
+    "id": "CULT_MUS_0017",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no concelho de Ílhavo é famoso nacionalmente pelo seu Aquário dos Bacalhaus e pela preservação da memória da pesca do bacalhau na Terra Nova e Gronelândia?",
+    "opcoes": [
+      "Museu Marítimo de Ílhavo",
+      "Museu de Aveiro",
+      "Museu do Mar Rei D. Carlos",
+      "Museu da Pesca de Peniche"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Marítimo de Ílhavo exibe a saga dos marinheiros da frota bacalhoeira portuguesa (dóris e navios lugres).",
+    "fonte": "Museu Marítimo de Ílhavo / Município de Ílhavo",
+    "factClusterId": "fc_mus_ilhavo_01"
+  },
+  {
+    "id": "CULT_MUS_0018",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que museu de Aveiro, instalado no antigo Convento de Jesus onde viveu a Princesa Santa Joana, se encontra o seu extraordinário túmulo em mármores policromados?",
+    "opcoes": [
+      "Museu da Cidade de Aveiro",
+      "Museu de Aveiro / Santa Joana",
+      "Museu da Vista Alegre",
+      "Museu do Azulejo de Ovar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Aveiro / Santa Joana guarda a arte sacra conventual e o túmulo seiscentista da filha de D. Afonso V.",
+    "fonte": "Museu de Aveiro / DGPC",
+    "factClusterId": "fc_mus_santajoana_01"
+  },
+  {
+    "id": "CULT_MUS_0019",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "O Museu da Chapelaria, único na Península Ibérica dedicado à indústria do fabrico de chapéus de feltro e pelo, localiza-se na cidade de:",
+    "opcoes": [
+      "Santa Maria da Feira",
+      "Oliveira de Azeméis",
+      "São João da Madeira",
+      "Ovar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu da Chapelaria em São João da Madeira recuperou a fábrica da Empresa Industrial de Chapelaria fundada em 1914.",
+    "fonte": "Município de São João da Madeira / Turismo do Porto e Norte",
+    "factClusterId": "fc_mus_chapelaria_01"
+  },
+  {
+    "id": "CULT_MUS_0020",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu monográfico em Peso da Régua, instalado na antiga Casa da Companhia Pombalina, é dedicado à identidade, cultura e vinhos do Douro Vinhateiro?",
+    "opcoes": [
+      "Museu do Vinho do Porto",
+      "Museu de Lamego",
+      "Museu de Vila Real",
+      "Museu do Douro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Museu do Douro dinamiza a preservação da paisagem cultural e do património vinhateiro duriense.",
+    "fonte": "Fundação Museu do Douro",
+    "factClusterId": "fc_mus_douro_01"
+  },
+  {
+    "id": "CULT_MUS_0021",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade alentejana se situa o Museu da Tapeçaria Guy Fino, que exibe a célebre arte das tapeçarias manufaturadas com o «Ponto de Portalegre»?",
+    "opcoes": [
+      "Portalegre",
+      "Castelo de Vide",
+      "Elvas",
+      "Estremoz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "As Tapeçarias de Portalegre reproduzem obras de grandes artistas como Almada Negreiros, Vieira da Silva e Picasso com rigor cromático incomparável.",
+    "fonte": "Museu da Tapeçaria de Portalegre / Município de Portalegre",
+    "factClusterId": "fc_mus_portalegre_01"
+  },
+  {
+    "id": "CULT_MUS_0022",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que casa-museu em Lisboa, na Avenida 5 de Outubro, conserva o espólio do médico oftalmologista e colecionador que reuniu obras de pintura naturalista portuguesa (Silva Porto, Columbano)?",
+    "opcoes": [
+      "Casa-Museu Medeiros e Almeida",
+      "Casa-Museu Dr. Anastácio Gonçalves (A Malhoa)",
+      "Casa Fernando Pessoa",
+      "Fundação Arpad Szenes-Vieira da Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Casa-Museu Dr. Anastácio Gonçalves ocupa uma bela moradia de Arte Nova construída em 1904 pelo pintor José Malhoa.",
+    "fonte": "DGPC / Casa-Museu Dr. Anastácio Gonçalves",
+    "factClusterId": "fc_mus_anastacio_01"
+  },
+  {
+    "id": "CULT_MUS_0023",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu situado no Parque do Monteiro-Mor no Lumiar em Lisboa exibe mais de 33.000 trajes civis históricos e acessórios dos séculos XVIII ao XXI?",
+    "opcoes": [
+      "Museu do Design e da Moda (MUDE)",
+      "Museu Nacional do Teatro e da Dança",
+      "Museu Nacional do Traje",
+      "Museu da Cidade"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu Nacional do Traje está sediado no Palácio Angeja-Palmela, cercado por um exuberante parque botânico.",
+    "fonte": "Museu Nacional do Traje / DGPC",
+    "factClusterId": "fc_mus_traje_01"
+  },
+  {
+    "id": "CULT_MUS_0024",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade transmontana se localiza o Museu do Abade de Baçal, instalado no antigo Paço Episcopal e dedicado à arqueologia e etnografia do nordeste?",
+    "opcoes": [
+      "Mirandela",
+      "Chaves",
+      "Miranda do Douro",
+      "Bragança"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O museu homenageia o Padre Francisco Manuel Alves (Abade de Baçal), grande historiador e arqueólogo transmontano.",
+    "fonte": "Museu do Abade de Baçal / DGPC",
+    "factClusterId": "fc_mus_abadebacal_01"
+  },
+  {
+    "id": "CULT_MUS_0025",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu monográfico em Amarante celebra a vida e a obra do pioneiro modernista português autor dos quadros «Entrada» e «Canção Popular»?",
+    "opcoes": [
+      "Museu Municipal Amadeo de Souza-Cardoso",
+      "Museu Júlio Pomar",
+      "Museu Nadir Afonso",
+      "Museu Paula Rego"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Amadeo de Souza-Cardoso está instalado no Convento de São Gonçalo em Amarante, terra natal do célebre pintor.",
+    "fonte": "Município de Amarante / MMASC",
+    "factClusterId": "fc_mus_amadeo_01"
+  },
+  {
+    "id": "CULT_MUS_0026",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade de Trás-os-Montes foi construído o Museu de Arte Contemporânea Nadir Afonso, projetado pelo arquiteto Álvaro Siza Vieira junto ao rio Tâmega?",
+    "opcoes": [
+      "Vila Real",
+      "Chaves",
+      "Valpaços",
+      "Macedo de Cavaleiros"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O museu em Chaves preserva o espólio geométrico e abstracionista do pintor e arquiteto flaviense Nadir Afonso.",
+    "fonte": "Fundação Nadir Afonso / Município de Chaves",
+    "factClusterId": "fc_mus_nadirafonso_01"
+  },
+  {
+    "id": "CULT_MUS_0027",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que edifício projetado por Eduardo Souto de Moura em Cascais, marcado por duas pirâmides de betão vermelho («Casa das Histórias»), é dedicado à pintora:",
+    "opcoes": [
+      "Vieira da Silva",
+      "Graça Morais",
+      "Paula Rego",
+      "Maluda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa das Histórias Paula Rego acolhe um vasto acervo de pinturas, gravuras e desenhos da artista plástica portuguesa.",
+    "fonte": "Fundação D. Luís I / Fundação Paula Rego",
+    "factClusterId": "fc_mus_paularego_01"
+  },
+  {
+    "id": "CULT_MUS_0028",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no Forte de Peniche recorda a resistência antifascista e a fuga histórica de Álvaro Cunhal e de outros presos políticos em 1960?",
+    "opcoes": [
+      "Museu do Aljube",
+      "Museu da PIDE",
+      "Museu da Cidadania",
+      "Museu Nacional Resistência e Liberdade (Fortaleza de Peniche)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu Nacional Resistência e Liberdade preserva a memória da luta pela democracia durante a ditadura do Estado Novo.",
+    "fonte": "Museu Nacional Resistência e Liberdade / DGPC",
+    "factClusterId": "fc_mus_peniche_01"
+  },
+  {
+    "id": "CULT_MUS_0029",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que antiga cadeia política e de trânsito da PIDE em Lisboa, situada perto da Sé, funciona o «Museu do Aljube — Resistência e Liberdade»?",
+    "opcoes": [
+      "Cadeia do Aljube",
+      "Cadeia do Limoeiro",
+      "Cadeia de Caxias",
+      "Forte de Monsanto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Museu do Aljube homenageia as vítimas da repressão política e a defesa dos Direitos Humanos em Portugal.",
+    "fonte": "EGEAC / Museu do Aljube",
+    "factClusterId": "fc_mus_aljube_01"
+  },
+  {
+    "id": "CULT_MUS_0030",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu de Évora guarda a notável série de 13 pinturas quinhentistas de retábulo sobre a Vida da Virgem Maria atribuídas à escola de Bruges e a Frei Carlos?",
+    "opcoes": [
+      "Museu da Sé de Évora",
+      "Museu Nacional Frei Manuel do Cenáculo (Museu de Évora)",
+      "Museu de Arte Sacra de Évora",
+      "Palácio de D. Manuel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Museu Nacional Frei Manuel do Cenáculo, no antigo Paço Arquiepiscopal de Évora, foi fundado pelo bispo iluminista Cenáculo.",
+    "fonte": "Museu Nacional Frei Manuel do Cenáculo / DGPC",
+    "factClusterId": "fc_mus_evora_01"
+  },
+  {
+    "id": "CULT_MUS_0031",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu na vila de Ílhavo preserva a história, a manufatura e as coleções históricas da primeira fábrica de porcelana de Portugal fundada em 1824 por Ferreira Pinto Basto?",
+    "opcoes": [
+      "Museu Bordalo Pinheiro",
+      "Museu da Faiança",
+      "Museu Vista Alegre",
+      "Museu da Cerâmica de Sacavém"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu Vista Alegre em Ílhavo integra a fábrica, a capela de Nossa Senhora da Penha de França e o bairro operário da Vista Alegre.",
+    "fonte": "Grupo Vista Alegre / Município de Ílhavo",
+    "factClusterId": "fc_mus_vistaalegre_01"
+  },
+  {
+    "id": "CULT_MUS_0032",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no Campo Grande em Lisboa é consagrado ao genial caricaturista e ceramista criador da figura popular do «Zé Povinho»?",
+    "opcoes": [
+      "Museu da Cidade",
+      "Museu Rafael Bordalo",
+      "Museu do Humor",
+      "Museu Bordalo Pinheiro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu Bordalo Pinheiro reúne azulejos, cerâmicas zoomórficas, desenhos e publicações satíricas de Rafael Bordalo Pinheiro.",
+    "fonte": "EGEAC / Museu Bordalo Pinheiro",
+    "factClusterId": "fc_mus_bordalo_01"
+  },
+  {
+    "id": "CULT_MUS_0033",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu instalado em Sintra (Base Aérea de Sintra / Granja do Marquês) e em Alverca exibe a história da aviação com dezenas de aeronaves militares e civis?",
+    "opcoes": [
+      "Museu do Ar",
+      "Museu Espacial de Portugal",
+      "Museu Militar de Lisboa",
+      "Museu dos Transportes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Museu do Ar da Força Aérea Portuguesa expõe réplicas e originais desde a Passarola de Gusmão até caças a jato modernos.",
+    "fonte": "Força Aérea Portuguesa / Museu do Ar",
+    "factClusterId": "fc_mus_ar_01"
+  },
+  {
+    "id": "CULT_MUS_0034",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no bairro de Alfama em Lisboa homenageia a história do fado, os fadistas, os poetas e os construtores de guitarra portuguesa?",
+    "opcoes": [
+      "Casa de Amália Rodrigues",
+      "Museu do Fado",
+      "Museu da Música Popular",
+      "Museu de São Miguel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Fado, instalado no antigo edifício da Praia do Tejo em Alfama, é o centro de documentação e divulgação do fado.",
+    "fonte": "EGEAC / Museu do Fado",
+    "factClusterId": "fc_mus_fado_01"
+  },
+  {
+    "id": "CULT_MUS_0035",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu em Lamego, instalado no antigo Paço Episcopal, guarda magníficos painéis renascentistas de Vasco Fernandes e raras tapeçarias de Flandres do século XVI?",
+    "opcoes": [
+      "Museu do Douro",
+      "Museu da Sé de Lamego",
+      "Museu de Lamego",
+      "Museu de Viseu"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu de Lamego foi criado em 1917 e conserva painéis da Criação do Mundo e da Vida da Virgem encomendados pelo bispo D. Fernando de Meneses Coutinho.",
+    "fonte": "Museu de Lamego / DGPC",
+    "factClusterId": "fc_mus_lamego_01"
+  },
+  {
+    "id": "CULT_MUS_0036",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade termal se localiza o Museu de Cerâmica, instalado num palacete romântico com parque que reúne peças de faiança das Caldas (faiança artística)?",
+    "opcoes": [
+      "Alcobaça",
+      "Leiria",
+      "Óbidos",
+      "Caldas da Rainha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Cerâmica das Caldas da Rainha exibe a produção de Maria dos Cacos, Manuel Mafra e Bordalo Pinheiro.",
+    "fonte": "Museu de Cerâmica / DGPC",
+    "factClusterId": "fc_mus_ceramica_01"
+  },
+  {
+    "id": "CULT_MUS_0037",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que fundação e museu em Lisboa (no Alto de São Francisco) preserva a obra do casal de artistas Maria Helena Vieira da Silva e Arpad Szenes?",
+    "opcoes": [
+      "Fundação Arpad Szenes-Vieira da Silva",
+      "Fundação Champalimaud",
+      "Fundação Carmona e Costa",
+      "Casa das Mudas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Arpad Szenes-Vieira da Silva está sediada na antiga Real Fábrica das Sedas junto ao Jardim das Amoreiras em Lisboa.",
+    "fonte": "Fundação Arpad Szenes-Vieira da Silva",
+    "factClusterId": "fc_mus_vieiradasilva_01"
+  },
+  {
+    "id": "CULT_MUS_0038",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu na cidade de Bragança, instalado no Centro Cultural Municipal, é dedicado à obra expressionista da pintora Graça Morais?",
+    "opcoes": [
+      "Museu de Serralves Transmontano",
+      "Centro de Arte Contemporânea Graça Morais",
+      "Museu do Nordeste",
+      "Museu da Terra Fria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Centro de Arte Contemporânea Graça Morais em Bragança foi projetado pelo arquiteto Souto de Moura.",
+    "fonte": "Município de Bragança / CACGM",
+    "factClusterId": "fc_mus_gracamorais_01"
+  },
+  {
+    "id": "CULT_MUS_0039",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no concelho de Santa Maria da Feira preserva a maior fábrica de papel manual e contínuo de Portugal («Museu do Papel Terras de Santa Maria»)?",
+    "opcoes": [
+      "Museu do Calçado",
+      "Museu da Cortiça",
+      "Museu do Papel de Paços de Brandão",
+      "Museu do Têxtil"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O Museu do Papel em Paços de Brandão foi o primeiro museu industrial dedicado à história do fabrico do papel em Portugal.",
+    "fonte": "Município de Santa Maria da Feira / Museu do Papel",
+    "factClusterId": "fc_mus_papel_01"
+  },
+  {
+    "id": "CULT_MUS_0040",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu em Lisboa preserva o espólio cinematográfico nacional, lanternas mágicas e aparelhos pioneiros dos irmãos Lumière («Cinemateca Portuguesa — Museu do Cinema»)?",
+    "opcoes": [
+      "Museu da Imagem em Movimento",
+      "Museu do Teatro",
+      "Museu da Rádio e Televisão",
+      "Cinemateca Portuguesa (Rua Barata Salgueiro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Cinemateca Portuguesa salvaguarda o património fílmico nacional e internacional e a memória do cinema em Portugal.",
+    "fonte": "Cinemateca Portuguesa / Ministério da Cultura",
+    "factClusterId": "fc_mus_cinemateca_01"
+  },
+  {
+    "id": "CULT_MUS_0041",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu na cidade de Leiria (m|i|mo) é dedicado à arqueologia do cinema, pré-cinema, ilusões de ótica e fotografia?",
+    "opcoes": [
+      "m|i|mo — Museu da Imagem em Movimento",
+      "Centro Português de Fotografia",
+      "Museu de Leiria",
+      "Museu do Moinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "O m|i|mo fica situado junto ao Castelo de Leiria na cerca da Igreja de São Pedro.",
+    "fonte": "Município de Leiria / mimo",
+    "factClusterId": "fc_mus_mimo_01"
+  },
+  {
+    "id": "CULT_MUS_0042",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu instalado no edifício da antiga Cadeia da Relação do Porto, onde Camilo Castelo Branco esteve preso e escreveu «Amor de Perdição», acolhe o acervo fotográfico nacional?",
+    "opcoes": [
+      "Museu Nacional da Imprensa",
+      "Centro Português de Fotografia (CPF)",
+      "Museu Soares dos Reis",
+      "Museu da Cidade do Porto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Centro Português de Fotografia ocupa a imponente Cadeia da Relação do Porto fundada no século XVIII.",
+    "fonte": "Centro Português de Fotografia / DGLAB",
+    "factClusterId": "fc_mus_cpf_01"
+  },
+  {
+    "id": "CULT_MUS_0043",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu etnográfico na cidade de Faro exibe artefactos tradicionais da pesca, da olaria algarvia e a recriação de casas típicas do Algarve rural?",
+    "opcoes": [
+      "Museu Municipal de Faro",
+      "Museu Marítimo Almirante Ramalho Ortigão",
+      "Museu Regional do Algarve",
+      "Museu de Portimão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu Regional do Algarve em Faro documenta os modos de vida tradicionais das gentes do litoral e do barrocal algarvio.",
+    "fonte": "Município de Faro / Região de Turismo do Algarve",
+    "factClusterId": "fc_mus_regionalalgarve_01"
+  },
+  {
+    "id": "CULT_MUS_0044",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu de Portimão, instalado na antiga Fábrica de Conservas Feu Hermanos junto ao rio Arade, ganhou o Prémio Museu do Conselho da Europa em 2010?",
+    "opcoes": [
+      "Museu da Sardinha",
+      "Museu do Mar de Cascais",
+      "Museu da Pesca de Olhão",
+      "Museu de Portimão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Museu de Portimão recria a linha de produção industrial conserveira de sardinha e a arqueologia subaquática do Arade.",
+    "fonte": "Museu de Portimão / European Museum Forum",
+    "factClusterId": "fc_mus_portimao_01"
+  },
+  {
+    "id": "CULT_MUS_0045",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu na vila de Sesimbra, sediado na Fortaleza de Santiago, conta a história milenar da comunidade marítima e da pesca da espada-preta?",
+    "opcoes": [
+      "Museu Marítimo de Sesimbra",
+      "Museu de Setúbal",
+      "Museu do Trabalho Michel Giacometti",
+      "Museu Naval de Cacilhas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Museu Marítimo de Sesimbra abriu em 2016 e preserva artefactos da pesca artesanal de anzol e do mar.",
+    "fonte": "Município de Sesimbra",
+    "factClusterId": "fc_mus_sesimbra_01"
+  },
+  {
+    "id": "CULT_MUS_0046",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que cidade do distrito de Setúbal funciona o «Museu do Trabalho Michel Giacometti», dedicado ao património etnográfico e operário da indústria conserveira?",
+    "opcoes": [
+      "Barreiro",
+      "Setúbal",
+      "Sines",
+      "Almada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O museu em Setúbal recebeu a doação da coleção do eminente etnomusicólogo francês Michel Giacometti.",
+    "fonte": "Município de Setúbal",
+    "factClusterId": "fc_mus_giacometti_01"
+  },
+  {
+    "id": "CULT_MUS_0047",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu na ilha de São Miguel (Açores), instalado no antigo Convento de Santo André em Ponta Delgada, reúne coleções de história natural açoriana e arte sacra?",
+    "opcoes": [
+      "Museu dos Baleeiros",
+      "Museu de Angra",
+      "Museu Carlos Machado",
+      "Museu da Horta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Museu Carlos Machado é o mais antigo museu do arquipélago dos Açores, fundado em 1876.",
+    "fonte": "Governo Regional dos Açores / Museu Carlos Machado",
+    "factClusterId": "fc_mus_carlosmachado_01"
+  },
+  {
+    "id": "CULT_MUS_0048",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Em que vila da ilha do Pico se situa o Museu dos Baleeiros, único em Portugal dedicado à caça artesanal do cachalote com arpão e botes baleeiros de madeira?",
+    "opcoes": [
+      "Madalena",
+      "São Roque do Pico",
+      "Velas",
+      "Lajes do Pico"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu dos Baleeiros nas Lajes do Pico guarda as antigas casas de botes dos vigias e arpoadores açorianos.",
+    "fonte": "Museu do Pico / Governo Regional dos Açores",
+    "factClusterId": "fc_mus_baleeiros_01"
+  },
+  {
+    "id": "CULT_MUS_0049",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no Funchal, instalado no Forte de São Tiago, exibe o rico património de arte contemporânea da Região Autónoma da Madeira?",
+    "opcoes": [
+      "MUDAS — Museu de Arte Contemporânea da Madeira (na Calheta)",
+      "Museu Quinta das Cruzes",
+      "Museu de História Natural do Funchal",
+      "Museu da Eletricidade Casa da Luz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O MUDAS fica instalado no premiado edifício desenhado pelo arquiteto Paulo David na falésia da Calheta na Madeira.",
+    "fonte": "Governo Regional da Madeira / MUDAS",
+    "factClusterId": "fc_mus_mudas_01"
+  },
+  {
+    "id": "CULT_MUS_0050",
+    "tema": "Cultura",
+    "subtema": "Museus de Portugal",
+    "pergunta": "Que museu no Funchal reúne a maior coleção particular do mundo de troféus, Bolas de Ouro e camisolas dedicadas à carreira de Cristiano Ronaldo?",
+    "opcoes": [
+      "Museu do Marítimo",
+      "Museu do Desporto da Madeira",
+      "Museu CR7",
+      "Museu do Futebol Nacional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu CR7 situa-se na Praça do Mar no Funchal, celebrando a carreira do capitão da Seleção Nacional.",
+    "fonte": "Museu CR7 / Turismo da Madeira",
+    "factClusterId": "fc_mus_cr7_01"
+  }
+]

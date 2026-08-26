@@ -1,0 +1,852 @@
+[
+  {
+    "id": "PERS_CIE_0001",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial matemático, astrónomo e cosmógrafo-mor de Alcácer do Sal (1502-1578), professor da Universidade de Coimbra («Pedro Nunes»), revolucionou a náutica universal com a invenção do «Nónio» (dispositivo de medição de frações de grau) e o estudo pioneiro das curvas loxodrómicas?",
+    "opcoes": [
+      "Pedro Nunes (Petrus Nonius)",
+      "Garcia de Orta",
+      "D. João de Castro",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nunes deu o nome ao 'nónio' (vernier) e resolveu os maiores enigmas matemáticos da navegação astronómica do século XVI.",
+    "fonte": "Sociedade Portuguesa de Matemática / Universidade de Coimbra",
+    "factClusterId": "fc_pers_pedronunes_01"
+  },
+  {
+    "id": "PERS_CIE_0002",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que médico e botânico judeu português de Castelo de Vide (1501-1568), que viveu em Goa e publicou em 1563 a pioneira obra científica «Colóquios dos Simples e Drogas e Cousas Medicinais da Índia» (com versos de abertura de Luís de Camões), é o pai da medicina e botânica tropical moderna?",
+    "opcoes": [
+      "Ribeiro Sanches",
+      "Garcia de Orta",
+      "Amato Lusitano",
+      "Cristóvão da Costa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Garcia de Orta foi o primeiro cientista ocidental a descrever cientificamente o cólera, a manga, a noz-moscada e as plantas medicinais asiáticas.",
+    "fonte": "Biblioteca Nacional de Portugal / Instituto de Higiene e Medicina Tropical",
+    "factClusterId": "fc_pers_garciadeorta_01"
+  },
+  {
+    "id": "PERS_CIE_0003",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre médico e neurocirurgião de Avanca (Estarreja, 1874-1955), inventor da «Angiografia Cerebral» em 1927 e pioneiro da «Leucotomia Pré-Frontal», foi galardoado em 1949 com o Prémio Nobel da Fisiologia ou Medicina, o primeiro português laureado com o Nobel?",
+    "opcoes": [
+      "Abel Salazar",
+      "Pulido Valente",
+      "António Caetano de Abreu Freire Egas Moniz (Egas Moniz)",
+      "Reynaldo dos Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz foi também diplomata, chefiando a delegação portuguesa no Tratado de Versalhes em 1919.",
+    "fonte": "Fundação Nobel / Museu Casa Egas Moniz (Avanca)",
+    "factClusterId": "fc_pers_egasmoniz_nobel_01"
+  },
+  {
+    "id": "PERS_CIE_0004",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente neurocientista português (nascido em Lisboa em 1944), professor na Universidade do Sul da Califórnia e autor dos best-sellers científicos mundiais «O Erro de Descartes» e «O Sentimento de Si», revolucionou o estudo internacional das emoções, sentimentos e consciência humana?",
+    "opcoes": [
+      "Sobrinho Simões",
+      "Alexandre Quintanilha",
+      "Manuel Valente",
+      "António Rosa Damásio (António Damásio)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Damásio demonstrou que a razão e as emoções são indissociáveis na tomada de decisões biológicas do cérebro.",
+    "fonte": "Prémio Príncipe das Astúrias / Brain and Creativity Institute (USC)",
+    "factClusterId": "fc_pers_antoniodamasio_01"
+  },
+  {
+    "id": "PERS_CIE_0005",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado médico patologista portuense (nascido em 1947), diretor do IPATIMUP e professor emérito da Universidade do Porto, foi eleito pela revista internacional «The Pathologist» em 2015 como o patologista mais influente do mundo pela sua investigação de topo no cancro da tiroide?",
+    "opcoes": [
+      "Manuel Sobrinho Simões (Sobrinho Simões)",
+      "António Damásio",
+      "João Lobo Antunes",
+      "Henrique Veiga-Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sobrinho Simões foi galardoado com o Prémio Pessoa em 2002 e a Grã-Cruz da Ordem Militar de Sant'Iago da Espada.",
+    "fonte": "Universidade do Porto / IPATIMUP / The Pathologist",
+    "factClusterId": "fc_pers_sobrinhosimoes_01"
+  },
+  {
+    "id": "PERS_CIE_0006",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável imunologista e investigadora de Lisboa (1939-2020), pioneira mundial na descoberta da «Ecotaxia» (migração dirigida e posicionamento espacial dos linfócitos T no sistema imunitário), fundou o prestigiado Programa Gulbenkian de Doutoramento em Biologia e Medicina (PGDBM)?",
+    "opcoes": [
+      "Elvira Fortunato",
+      "Maria de Sousa",
+      "Zita Martins",
+      "Mónica Bettencourt-Dias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria de Sousa foi professora catedrática no Instituto Abel Salazar (ICBAS) da Universidade do Porto e no Cornell Medical College em Nova Iorque.",
+    "fonte": "Fundação Calouste Gulbenkian / ICBAS / Ordem dos Médicos",
+    "factClusterId": "fc_pers_mariadesousa_01"
+  },
+  {
+    "id": "PERS_CIE_0007",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que cientista e engenheira de materiais portuguesa (nascida em Almada em 1964), professora catedrática na FCT-NOVA e pioneira mundial da eletrónica transparente de papel com a invenção do «Transístor de Papel» em 2008, foi galardoada com o Prémio Horizon Impact da Comissão Europeia?",
+    "opcoes": [
+      "Maria de Sousa",
+      "Helena Pereira",
+      "Elvira Maria Correia Fortunato (Elvira Fortunato)",
+      "Teresa Lago"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Elvira Fortunato liderou o centro CENIMAT/i3N e desempenhou as funções de Ministra da Ciência, Tecnologia e Ensino Superior.",
+    "fonte": "CENIMAT / FCT-NOVA / Comissão Europeia",
+    "factClusterId": "fc_pers_elvirafortunato_01"
+  },
+  {
+    "id": "PERS_CIE_0008",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre neurocirurgião de Lisboa (1944-2016), professor catedrático da Faculdade de Medicina de Lisboa, pioneiro da neurocirurgia vascular e autor de reflexões humanistas como «Um Sentimento de Si» e «Ouvir com Outros Olhos», presidiu ao Conselho Nacional de Ética para as Ciências da Vida?",
+    "opcoes": [
+      "Egas Moniz",
+      "António Damásio",
+      "Gentil Martins",
+      "João Lobo Antunes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João Lobo Antunes foi galardoado com o Prémio Pessoa em 1996 e foi médico consultor de vários Presidentes da República Portuguesa.",
+    "fonte": "Faculdade de Medicina de Lisboa / Prémio Pessoa",
+    "factClusterId": "fc_pers_joaoloboantunes_01"
+  },
+  {
+    "id": "PERS_CIE_0009",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande matemático, pedagogo e ativista antifascista de Vila Viçosa (1901-1948), autor da obra clássica «Conceitos Fundamentais da Matemática» e fundador da Gazeta de Matemática e da prestigiada coleção de divulgação científica «Biblioteca Cosmos», é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "José Sebastião e Silva",
+      "Aureliano Mira Fernandes",
+      "Gago Coutinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bento de Jesus Caraça dedicou a vida à democratização do conhecimento e da ciência perante a censura do regime do Estado Novo.",
+    "fonte": "Sociedade Portuguesa de Matemática / ISEG",
+    "factClusterId": "fc_pers_bentodejesuscaraca_01"
+  },
+  {
+    "id": "PERS_CIE_0010",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre professor de Física e Química e historiador da ciência (1906-1997), que publicou com o seu nome próprio tratados fundamentais sobre a História da Ciência em Portugal e com o pseudónimo poético «António Gedeão» escreveu hinos eternos como «Pedra Filosofal» e «Lágrima de Preta», é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "Rómulo de Carvalho (António Gedeão)",
+      "Carlos Fiolhais",
+      "Abel Salazar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rómulo de Carvalho uniu com génio ímpar a ciência experimental à mais sublime poesia humanista portuguesa ('Eles não sabem, nem sonham, que o sonho comanda a vida').",
+    "fonte": "Fundação Calouste Gulbenkian / Museu Nacional de História Natural",
+    "factClusterId": "fc_pers_romulodecarvalho_01"
+  },
+  {
+    "id": "PERS_CIE_0011",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que filósofo, pedagogo e ensaísta do Porto (1906-1994), pensador humanista do Quinto Império que viveu 30 anos no Brasil onde ajudou a fundar universidades e ministérios, celebrizou-se em Portugal na RTP com o programa de entrevistas «Conversas Vadias»?",
+    "opcoes": [
+      "Eduardo Lourenço",
+      "Antero de Quental",
+      "Agostinho da Silva (George Agostinho Baptista da Silva)",
+      "Leonardo Coimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Agostinho da Silva defendia uma pedagogia centrada na liberdade criativa e no papel espiritual de Portugal no mundo lusófono.",
+    "fonte": "Associação Agostinho da Silva / RTP Arquivos",
+    "factClusterId": "fc_pers_agostinhodasilva_01"
+  },
+  {
+    "id": "PERS_CIE_0012",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ensaísta e filósofo da Guarda (1923-2020), um dos mais profundos pensadores da identidade e cultura portuguesa contemporânea, professor na Universidade de Nice e autor de obras seminais como «O Labirinto da Saudade» (1978) e «Portugal como Destino», foi galardoado com o Prémio Camões em 1996?",
+    "opcoes": [
+      "Agostinho da Silva",
+      "José Gil",
+      "Vergílio Ferreira",
+      "Eduardo Lourenço de Faria (Eduardo Lourenço)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Lourenço dissecou a 'mitologia do destino português' e a transição do Império para a modernidade europeia.",
+    "fonte": "Centro de Estudos Ibéricos (Guarda) / Prémio Camões",
+    "factClusterId": "fc_pers_eduardolourenco_01"
+  },
+  {
+    "id": "PERS_CIE_0013",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que filósofo e ensaísta português nascido em Moçambique em 1939, professor emérito da Universidade de Paris VIII e da Universidade Nova de Lisboa, autor do aclamado ensaio «Portugal, Hoje: O Medo de Existir» (2004), foi eleito pela revista francesa Le Nouvel Observateur como um dos 25 grandes pensadores do mundo?",
+    "opcoes": [
+      "José Gil",
+      "Eduardo Lourenço",
+      "Vitorino Magalhães Godinho",
+      "Manuel Maria Carrilho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Gil analisou a fenomenologia do corpo, do poder e o trauma da 'não-inscrição' na sociedade portuguesa.",
+    "fonte": "Relógio D'Água / Le Nouvel Observateur",
+    "factClusterId": "fc_pers_josegil_filosofo_01"
+  },
+  {
+    "id": "PERS_CIE_0014",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que pioneiro médico e filósofo iluminista de Castelo Branco (1699-1783), que fugiu da Inquisição e se tornou médico da corte dos czares da Rússia (Catarina, a Grande) e da Academia de Ciências de Paris («António Ribeiro Sanches»), escreveu o influente «Tratado da Conservação da Saúde dos Povos» e as «Cartas sobre a Educação da Mocidade»?",
+    "opcoes": [
+      "Luís António Verney",
+      "António Nunes Ribeiro Sanches",
+      "Garcia de Orta",
+      "Jacob de Castro Sarmento"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ribeiro Sanches foi um dos maiores reformadores do pensamento médico e da saúde pública da Europa setecentista.",
+    "fonte": "Biblioteca Nacional de Portugal / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_ribeirosanches_01"
+  },
+  {
+    "id": "PERS_CIE_0015",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que padre e erudito iluminista lisboeta (1713-1792), que viveu em Roma («Luís António Verney»), publicou em 1746 a monumental obra crítica «O Verdadeiro Método de Estudar», inspirando a reforma pombalina do ensino em Portugal?",
+    "opcoes": [
+      "Ribeiro Sanches",
+      "Manuel da Maia",
+      "Luís António Verney («O Barbadinho»)",
+      "Padre Teodoro de Almeida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Verney atacou o método escolástico medieval e defendeu o método experimental, a gramática vernácula e as ciências da natureza.",
+    "fonte": "BNP / História do Pensamento Português",
+    "factClusterId": "fc_pers_luisantonioverney_01"
+  },
+  {
+    "id": "PERS_CIE_0016",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande botânico português de Santo Antão do Tojal (Loures, 1744-1828), diretor do Jardim Botânico da Universidade de Coimbra («Félix de Avelar Brotero»), publicou as obras fundamentais «Compêndio de Botânica» (1788) e «Flora Lusitanica» (1804), sendo o patrono da botânica nacional?",
+    "opcoes": [
+      "Garcia de Orta",
+      "Amato Lusitano",
+      "Bernardino António Gomes",
+      "Félix de Avelar Brotero"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sociedade Broteriana e a revista científica 'Boletim da Sociedade Broteriana' perpetuam a sua herança botânica.",
+    "fonte": "Universidade de Coimbra / Jardim Botânico / Sociedade Broteriana",
+    "factClusterId": "fc_pers_felixdeavelarbrotero_01"
+  },
+  {
+    "id": "PERS_CIE_0017",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável médico cristão-novo de Castelo Branco (1511-1568), que ensinou medicina em Ferrara e Roma e comentou os tratados botânicos de Dioscórides («Amato Lusitano» / João Rodrigues de Castelo Branco), descobriu a função das válvulas venosas e redigiu o célebre «Juramento Médico» de tolerância ética universal?",
+    "opcoes": [
+      "Amato Lusitano (João Rodrigues de Castelo Branco)",
+      "Garcia de Orta",
+      "Ribeiro Sanches",
+      "Zacuto Lusitano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Amato Lusitano publicou as famosas 'Centúrias de Curas Medicinais' relatando centenas de casos clínicos reais com rigor científico inédito.",
+    "fonte": "Câmara Municipal de Castelo Branco / Faculdade de Medicina",
+    "factClusterId": "fc_pers_amatolusitano_01"
+  },
+  {
+    "id": "PERS_CIE_0018",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que astrobióloga portuguesa e professora no Instituto Superior Técnico («Doutora Zita Martins»), especialista mundial na deteção de aminoácidos e moléculas orgânicas precursoras da vida em meteoritos e cometas com passagens pela NASA e Agência Espacial Europeia (ESA), é:",
+    "opcoes": [
+      "Teresa Lago",
+      "Zita Martins",
+      "Joana Gonçalves de Sá",
+      "Elvira Fortunato"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Zita Martins trabalhou na análise de amostras da missão espacial Hayabusa2 e na missão ExoMars da ESA.",
+    "fonte": "Instituto Superior Técnico / ESA / NASA",
+    "factClusterId": "fc_pers_zitamartins_astrobiologia_01"
+  },
+  {
+    "id": "PERS_CIE_0019",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que astrónoma e astrofísica portuguesa (nascida em Lisboa em 1947), fundadora do Centro de Astrofísica da Universidade do Porto (CAUP) e do Planetário do Porto, que desempenhou o cargo de Secretária-Geral da União Astronómica Internacional (IAU), é:",
+    "opcoes": [
+      "Zita Martins",
+      "Sónia Anton",
+      "Maria Teresa Vaz Torrão Lago (Teresa Lago)",
+      "Marta Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Teresa Lago foi a principal impulsionadora da entrada de Portugal no Observatório Europeu do Sul (ESO) e na ESA.",
+    "fonte": "CAUP / Universidade do Porto / IAU",
+    "factClusterId": "fc_pers_teresalago_astrofisica_01"
+  },
+  {
+    "id": "PERS_CIE_0020",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre historiador económico e social de Lisboa (1921-2012), professor catedrático da Sorbonne e da Universidade Nova de Lisboa e autor de «A Estrutura da Antiga Sociedade Portuguesa» e «Os Descobrimentos e a Economia Mundial» («Vitorino Magalhães Godinho»), é o expoente da historiografia estrutural portuguesa?",
+    "opcoes": [
+      "José Hermano Saraiva",
+      "António José Saraiva",
+      "Joaquim Veríssimo Serrão",
+      "Vitorino Magalhães Godinho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Magalhães Godinho revolucionou o estudo da expansão marítima portuguesa integrando a história monetária, rotas comerciais e sociologia.",
+    "fonte": "Faculdade de Ciências Sociais e Humanas (UNL) / BNP",
+    "factClusterId": "fc_pers_vitorinomagalhaesgodinho_01"
+  },
+  {
+    "id": "PERS_CIE_0021",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado historiador de literatura e ensaísta de Leiria (1917-1993), coautor com Óscar Lopes da incontornável e mais reeditada «História da Literatura Portuguesa» e autor de «A Inquisição Portuguesa» e estudos sobre Camões e Gil Vicente, é:",
+    "opcoes": [
+      "António José Saraiva",
+      "José Hermano Saraiva",
+      "Óscar Lopes",
+      "Agostinho da Silva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António José Saraiva foi professor na Faculdade de Letras de Lisboa e na Sorbonne e uma das maiores mentes críticas do século XX português.",
+    "fonte": "Porto Editora / Gradiva / DGLAB",
+    "factClusterId": "fc_pers_antoniojosesaraiva_01"
+  },
+  {
+    "id": "PERS_CIE_0022",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que carismático historiador, jurista e apresentador de televisão (1919-2012), autor de séries históricas icónicas na RTP como «Gente de Paz», «Horizontes da Memória» e «A Alma e a Gente» («José Hermano Saraiva»), popularizou a história de Portugal junto de milhões de lares com a frase «E assim se fez história»?",
+    "opcoes": [
+      "António José Saraiva",
+      "José Hermano Saraiva",
+      "Joaquim Veríssimo Serrão",
+      "Fernando Rosas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Hermano Saraiva foi Ministro da Educação Nacional e autor da História Concisa de Portugal, traduzida em várias línguas.",
+    "fonte": "RTP Arquivos / Gradiva / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_pers_josehermanosaraiva_01"
+  },
+  {
+    "id": "PERS_CIE_0023",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que físico teórico, professor catedrático da Universidade de Coimbra e prolífico divulgador científico («Professor Carlos Fiolhais»), autor de obras de grande sucesso como «Física Divertida», «Darwin aos Tiros» e diretor da Biblioteca Geral de Coimbra, é uma das maiores vozes da cultura científica em Portugal?",
+    "opcoes": [
+      "Rómulo de Carvalho",
+      "Alexandre Quintanilha",
+      "Carlos Fiolhais",
+      "Manuel Paiva"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos Fiolhais é o fundador do projeto Rómulo — Centro Ciência Viva da Universidade de Coimbra e colunista de referência da imprensa nacional.",
+    "fonte": "Universidade de Coimbra / Gradiva / Ciência Viva",
+    "factClusterId": "fc_pers_carlosfiolhais_01"
+  },
+  {
+    "id": "PERS_CIE_0024",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que químico orgânico português (nascido em Lisboa em 1980), professor catedrático na Universidade de Viena e pianista de concerto («Nuno Maulide»), foi eleito «Cientista do Ano» na Áustria em 2018 pelas suas descobertas pioneiras em síntese assimétrica e química sustentável sem desperdício?",
+    "opcoes": [
+      "Carlos Fiolhais",
+      "Rodrigo Martins",
+      "Luís Paulo Rebelo",
+      "Nuno Maulide"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nuno Maulide é membro da Academia Austríaca de Ciências e autor do livro de divulgação 'Como se Transforma Ar em Pão'.",
+    "fonte": "Universidade de Viena / European Research Council (ERC)",
+    "factClusterId": "fc_pers_nunomaulide_quimica_01"
+  },
+  {
+    "id": "PERS_CIE_0025",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que biofísico de renome internacional nascido em Moçambique em 1945, professor na Universidade da Califórnia em Berkeley e na Universidade do Porto («Alexandre Quintanilha»), fundou o Instituto de Biologia Molecular e Celular (IBMC) no Porto e presidiu à Comissão Parlamentar de Educação e Ciência?",
+    "opcoes": [
+      "Alexandre Tieppo Quintanilha (Alexandre Quintanilha)",
+      "Manuel Sobrinho Simões",
+      "António Coutinho",
+      "Claudio Sunkel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Quintanilha é uma das vozes mais respeitadas no debate público sobre ética, ciência e transição energética.",
+    "fonte": "IBMC / i3S / Universidade do Porto / Assembleia da República",
+    "factClusterId": "fc_pers_alexandrequintanilha_01"
+  },
+  {
+    "id": "PERS_CIE_0026",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado imunologista português (nascido no Porto em 1946), diretor do Instituto Gulbenkian de Ciência (IGC) entre 1998 e 2012 e professor no Instituto Pasteur de Paris («António Coutinho»), é um dos pais da teoria das redes imunológicas e da autoimunidade?",
+    "opcoes": [
+      "Maria de Sousa",
+      "António Coutinho (António Manuel Coutinho)",
+      "Henrique Veiga-Fernandes",
+      "Luís Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Coutinho transformou o Instituto Gulbenkian de Ciência num polo de atração mundial de jovens investigadores de topo.",
+    "fonte": "Instituto Gulbenkian de Ciência (IGC) / Prémio Pessoa",
+    "factClusterId": "fc_pers_antoniocoutinho_imunologia_01"
+  },
+  {
+    "id": "PERS_CIE_0027",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que imunologista português de elite (nascido em Lisboa em 1973), codiretor do Centro Champalimaud («Henrique Veiga-Fernandes»), descobriu que o sistema nervoso e o sistema imunitário comunicam diretamente nas células da mucosa intestinal, revolucionando a neuroimunologia mundial?",
+    "opcoes": [
+      "Miguel Godinho Ferreira",
+      "Bruno Silva-Santos",
+      "Henrique Veiga-Fernandes",
+      "Leonor Saúde"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Henrique Veiga-Fernandes recebeu quatro bolsas avançadas do Conselho Europeu de Investigação (ERC) e o Prémio Pfizer de Investigação Biomédica.",
+    "fonte": "Fundação Champalimaud / ERC / Nature",
+    "factClusterId": "fc_pers_henriqueveigafernandes_01"
+  },
+  {
+    "id": "PERS_CIE_0028",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que bióloga molecular e investigadora de Lisboa (nascida em 1974), diretora do Instituto Gulbenkian de Ciência e líder do Laboratório de Regulação Celular («Mónica Bettencourt-Dias»), é especialista mundial no estudo dos centríolos celulares e cancro e foi eleita diretora do consórcio europeu EMBL?",
+    "opcoes": [
+      "Maria Manuel Mota",
+      "Ana Paula Pêgo",
+      "Elvira Fortunato",
+      "Mónica Bettencourt-Dias"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mónica Bettencourt-Dias foi galardoada com o Prémio EMBO Gold Medal e o Prémio Dona Antónia Adelaide Ferreira.",
+    "fonte": "IGC / EMBO / European Molecular Biology Laboratory",
+    "factClusterId": "fc_pers_monicabettencourtdias_01"
+  },
+  {
+    "id": "PERS_CIE_0029",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que bióloga e cientista de renome de Vila Nova de Gaia (nascida em 1971), investigadora no Instituto de Medicina Molecular (iMM) da Faculdade de Medicina de Lisboa («Maria Manuel Mota»), foi galardoada com o Prémio Pessoa em 2013 pelas suas descobertas capitais sobre o parasita da Malária no fígado humano?",
+    "opcoes": [
+      "Maria Manuel Mota",
+      "Mónica Bettencourt-Dias",
+      "Maria de Sousa",
+      "Carla Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Maria Manuel Mota descobriu o mecanismo através do qual o Plasmodium interage com as células hepáticas abrindo portas a novas vacinas.",
+    "fonte": "Instituto de Medicina Molecular (iMM) / Prémio Pessoa",
+    "factClusterId": "fc_pers_mariamanuelmota_malaria_01"
+  },
+  {
+    "id": "PERS_CIE_0030",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado neurocientista português (nascido em Lisboa em 1973), professor no MIT (Massachusetts Institute of Technology) e diretor do Centro McGovern para a Investigação do Cérebro («Guoping Feng e Rui Costa / Doutor Rui Costa»), especialista em circuitos neurais e gânglios basais nos movimentos e na doença de Parkinson, é o Presidente e CEO do prestigiado Allen Institute em Seattle?",
+    "opcoes": [
+      "António Damásio",
+      "Rui Manuel Marques da Costa (Rui Costa)",
+      "Henrique Veiga-Fernandes",
+      "Luís Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Rui Costa liderou o Centro Champalimaud e o Zuckerman Institute da Columbia University antes de assumir a liderança mundial do Allen Institute.",
+    "fonte": "Allen Institute / Columbia University / Fundação Champalimaud",
+    "factClusterId": "fc_pers_ruicosta_neurocientista_01"
+  },
+  {
+    "id": "PERS_CIE_0031",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre médico e professor de Medicina de Guimarães (1889-1962), figura maior da oposição democrática ao Estado Novo e pioneiro da histologia e da pintura expressionista com a célebre frase gravada na sua estátua «Um médico que só sabe medicina, nem medicina sabe», é:",
+    "opcoes": [
+      "Egas Moniz",
+      "Pulido Valente",
+      "Abel de Lima Salazar (Professor Abel Salazar)",
+      "Fernando da Silva Correia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Instituto de Ciências Biomédicas Abel Salazar (ICBAS) da Universidade do Porto e a Casa-Museu Abel Salazar em Matosinhos homenageiam o seu legado universal.",
+    "fonte": "Universidade do Porto / Casa-Museu Abel Salazar / ICBAS",
+    "factClusterId": "fc_pers_abelsalazar_01"
+  },
+  {
+    "id": "PERS_CIE_0032",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente médico e professor catedrático da Faculdade de Medicina de Lisboa (1884-1963), considerado o mestre supremo da semiologia clínica e do raciocínio diagnóstico em Portugal («Professor Francisco Pulido Valente»), dá o nome ao grande hospital universitário no Lumiar em Lisboa?",
+    "opcoes": [
+      "Egas Moniz",
+      "Reynaldo dos Santos",
+      "Curry Cabral",
+      "Francisco Pulido Valente (Hospital Pulido Valente)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pulido Valente formou gerações de médicos clínicos e foi uma figura cimeira da resistência intelectual republicana.",
+    "fonte": "CHULN / Faculdade de Medicina de Lisboa",
+    "factClusterId": "fc_pers_pulidovalente_01"
+  },
+  {
+    "id": "PERS_CIE_0033",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente cirurgião, urologista e historiador de arte de Vila Franca de Xira (1880-1970), que introduziu a aortografia translombar na medicina mundial e identificou a autoria dos Painéis de São Vicente de Fora atribuindo-os a Nuno Gonçalves («Professor Reynaldo dos Santos»), foi Presidente da Academia Nacional de Belas-Artes?",
+    "opcoes": [
+      "Reynaldo dos Santos",
+      "Egas Moniz",
+      "Bocage",
+      "Sousa Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Reynaldo dos Santos cunhou o conceito estético do 'Manuelino' como expressão maior da arte náutica dos Descobrimentos portugueses.",
+    "fonte": "Academia Nacional de Belas-Artes / Sociedade das Ciências Médicas de Lisboa",
+    "factClusterId": "fc_pers_reynaldodossantos_01"
+  },
+  {
+    "id": "PERS_CIE_0034",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que lendário médico e professor da Escola Médico-Cirúrgica de Lisboa de Alhandra (1843-1897), conhecido pela dedicação incansável aos doentes pobres e tuberculosos no Hospital de São José («Dr. José Tomás de Sousa Martins»), é objeto de culto popular secular com milhares de ex-votos em torno da sua estátua no Campo de Santana?",
+    "opcoes": [
+      "Curry Cabral",
+      "Dr. Sousa Martins (José Tomás de Sousa Martins)",
+      "Miguel Bombarda",
+      "Passos Manuel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sousa Martins foi o pioneiro do sanatório da Serra da Estrela (Guarda) para o tratamento da tuberculose pulmonar.",
+    "fonte": "Hospital de São José / Sociedade das Ciências Médicas de Lisboa",
+    "factClusterId": "fc_pers_sousamartins_01"
+  },
+  {
+    "id": "PERS_CIE_0035",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que médico e psiquiatra republicano de origem italiana (1851-1910), pioneiro da moderna psiquiatria forense e reforma hospitalar em Portugal («Professor Miguel Bombarda»), foi o dirigente civil do Comité Revolucionário do 5 de Outubro de 1910 assassinado no seu consultório nas vésperas da proclamação da República?",
+    "opcoes": [
+      "Júlio de Matos",
+      "Sobral Cid",
+      "Miguel Augusto Bombarda (Miguel Bombarda)",
+      "Egas Moniz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O antigo Hospital Miguel Bombarda em Lisboa acolheu a célebre coleção de arte bruta criada por doentes psiquiátricos.",
+    "fonte": "Museu Miguel Bombarda / Assembleia da República",
+    "factClusterId": "fc_pers_miguelbombarda_01"
+  },
+  {
+    "id": "PERS_CIE_0036",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente psiquiatra portuense (1856-1922), professor de Psiquiatria e autor de obras clássicas de neurologia («Júlio de Matos»), dá o nome ao maior hospital psiquiátrico de Lisboa fundado em 1942 em Alvalade?",
+    "opcoes": [
+      "Miguel Bombarda",
+      "Sobral Cid",
+      "Barahona Fernandes",
+      "Júlio Xavier de Matos (Hospital Júlio de Matos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Júlio de Matos foi o grande modernizador da assistência psiquiátrica em Portugal, abolindo contenções violentas.",
+    "fonte": "CHPL / Hospital Júlio de Matos",
+    "factClusterId": "fc_pers_juliodematos_01"
+  },
+  {
+    "id": "PERS_CIE_0037",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente médico higienista e cirurgião de Lisboa (1844-1920), pioneiro do combate às epidemias de cólera, peste bubónica e febre amarela («José Joaquim da Silva Freire Temudo Curry Cabral»), dá o nome ao hospital de referência de doenças infecciosas e transplantes de Lisboa?",
+    "opcoes": [
+      "Professor Curry Cabral (Hospital Curry Cabral)",
+      "Sousa Martins",
+      "Santa Maria",
+      "São Francisco Xavier"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Curry Cabral fundou em 1906 o Hospital do Rego (hoje Hospital Curry Cabral), que se tornou o centro de excelência nacional em transplantação hepática.",
+    "fonte": "CHULC / Hospital Curry Cabral",
+    "factClusterId": "fc_pers_currycabral_01"
+  },
+  {
+    "id": "PERS_CIE_0038",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande médico cirurgião pediátrico de Lisboa (nascido em 1927), pioneiro mundial da separação cirúrgica de gémeos siameses («Dr. António Gentil Martins»), foi Bastonário da Ordem dos Médicos e Presidente da Associação Médica Mundial?",
+    "opcoes": [
+      "João Lobo Antunes",
+      "António Gentil Martins",
+      "Manuel Sobrinho Simões",
+      "Reynaldo dos Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Dr. Gentil Martins realizou com sucesso pioneiro a separação de vários pares de gémeos siameses no Hospital de Dona Estefânia.",
+    "fonte": "Ordem dos Médicos / Hospital Dona Estefânia",
+    "factClusterId": "fc_pers_gentilmartins_01"
+  },
+  {
+    "id": "PERS_CIE_0039",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande matemático português de Mértola (1914-1972), professor da Universidade de Lisboa («José Sebastião e Silva»), pioneiro mundial na teoria das distribuições e espaços vectoriais topológicos e autor da reforma pedagógica moderna do ensino da matemática nos anos 1960 («A Reforma Sebastião e Silva»), é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "Pedro Nunes",
+      "José Sebastião e Silva",
+      "Guedes de Oliveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sebastião e Silva é considerado o maior matemático português do século XX com conceitos estudados internacionalmente em análise funcional.",
+    "fonte": "Sociedade Portuguesa de Matemática / Centro de Matemática da FCUL",
+    "factClusterId": "fc_pers_sebastiaoesilva_01"
+  },
+  {
+    "id": "PERS_CIE_0040",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que matemático e engenheiro militar de Lisboa (1871-1955), primeiro presidente da Sociedade Portuguesa de Matemática em 1940 («Aureliano de Mira Fernandes»), foi professor catedrático e diretor do Instituto Superior Técnico (IST) e pioneiro do cálculo tensorial e relatividade em Portugal?",
+    "opcoes": [
+      "Vicente Gonçalves",
+      "Almeida e Castro",
+      "Duarte Pacheco",
+      "Aureliano de Mira Fernandes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Mira Fernandes manteve correspondência com grandes matemáticos europeus como Tullio Levi-Civita e Albert Einstein.",
+    "fonte": "Instituto Superior Técnico / SPM",
+    "factClusterId": "fc_pers_mirafernandes_ist_01"
+  },
+  {
+    "id": "PERS_CIE_0041",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que oficial engenheiro militar e estadista do século XX de Loulé (1900-1943), professor e diretor do Instituto Superior Técnico («Engenheiro Duarte Pacheco»), enquanto Ministro das Obras Públicas e Comunicações de Salazar planeou e construiu a Ponte Salazar (Ponte 25 de Abril planeada), o Parque Florestal de Monsanto, o Estádio Nacional do Jamor, o Aeroporto de Lisboa e a rede viária moderna de Portugal?",
+    "opcoes": [
+      "Duarte José Pacheco (Duarte Pacheco)",
+      "Manuel da Maia",
+      "Fontes Pereira de Melo",
+      "Cancio Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Duarte Pacheco faleceu tragicamente num acidente de viação em Vendas Novas em 1943 no auge da sua ação modernizadora das infraestruturas portuguesas.",
+    "fonte": "LNEC / Município de Loulé / Assembleia da República",
+    "factClusterId": "fc_pers_duartepacheco_01"
+  },
+  {
+    "id": "PERS_CIE_0042",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial engenheiro civil e general de engenharia do século XVIII (1677-1768), Manuel da Maia («Manuel da Maia»), enquanto Engenheiro-Mor do Reino liderou a construção do monumental Aqueduto das Águas Livres e o plano diretor revolucionário de reconstrução da Baixa Pombalina de Lisboa após o terramoto de 1755 («Dissertação sobre a Reedificação de Lisboa»)?",
+    "opcoes": [
+      "Eugénio dos Santos",
+      "Manuel da Maia",
+      "Carlos Mardel",
+      "Reinaldo Manuel dos Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Manuel da Maia propôs as opções urbanísticas de reconstrução da Baixa e coordenou a equipa com Eugénio dos Santos e Carlos Mardel.",
+    "fonte": "Torre do Tombo / Ordem dos Engenheiros / Museu da Cidade",
+    "factClusterId": "fc_pers_manueldamaia_1755_01"
+  },
+  {
+    "id": "PERS_CIE_0043",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente engenheiro civil português (1918-2005), fundador e primeiro diretor do Laboratório Nacional de Engenharia Civil (LNEC) e professor do IST («Manuel Rocha»), foi uma autoridade mundial pioneira na mecânica das rochas e no dimensionamento e segurança de grandes barragens de betão?",
+    "opcoes": [
+      "Edgar Cardoso",
+      "António Segadães Tavares",
+      "Manuel Coelho Mendes da Rocha (Manuel Rocha)",
+      "Ferry Borges"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Manuel Rocha projetou e monitorizou barragens por todo o mundo e a Sociedade Internacional de Mecânica das Rochas instituiu o prestigiado Prémio Manuel Rocha em sua homenagem.",
+    "fonte": "LNEC / Ordem dos Engenheiros / ISRM",
+    "factClusterId": "fc_pers_manuelrocha_lnec_01"
+  },
+  {
+    "id": "PERS_CIE_0044",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial engenheiro de pontes de Resende (1913-2000), professor catedrático do IST («Professor Edgar Cardoso»), projetou obras-primas da engenharia mundial como a Ponte da Arrábida sobre o Douro (que bateu o recorde mundial de maior arco em betão armado com 270 metros em 1963) e a Ponte de São João no Porto?",
+    "opcoes": [
+      "Manuel Rocha",
+      "Adão da Fonseca",
+      "Armando Rito",
+      "Edgar António de Mesquita Cardoso (Edgar Cardoso)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Edgar Cardoso desenhou pontes inovadoras em quatro continentes (Macau, Angola, Moçambique, Índia e Portugal).",
+    "fonte": "Ordem dos Engenheiros / Faculdade de Engenharia da Universidade do Porto",
+    "factClusterId": "fc_pers_edgarcardoso_pontes_01"
+  },
+  {
+    "id": "PERS_CIE_0045",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que engenheiro civil português contemporâneo («António Segadães Tavares»), autor do projeto estrutural arrojado da ampliação da pista do Aeroporto da Madeira sobre 180 pilares de betão armado de 70 metros de altura sobre o mar, venceu em 2004 o «Outstanding Structure Award» da IABSE (o 'Nobel da Engenharia de Estruturas')?",
+    "opcoes": [
+      "António Segadães Tavares",
+      "Edgar Cardoso",
+      "Adão da Fonseca",
+      "José Cancio Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A ampliação da pista do Funchal sobre o mar em Santa Cruz foi considerada uma das obras de arte de engenharia civil mais audaciosas do mundo.",
+    "fonte": "IABSE / Ordem dos Engenheiros / ANA Aeroportos",
+    "factClusterId": "fc_pers_segadaestavares_madeira_01"
+  },
+  {
+    "id": "PERS_CIE_0046",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre diplomata e humanista de Coimbra (1502-1574), cronista-mor do Reino («Damião de Góis»), amigo pessoal de Erasmo de Roterdão e Martinho Lutero, escreveu a «Crónica do Felicíssimo Rei D. Manuel» e a descrição histórica «Urbis Olisiponis Descriptio»?",
+    "opcoes": [
+      "João de Barros",
+      "Damião de Góis",
+      "Fernão Lopes",
+      "Gaspar Correia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Damião de Góis foi o maior embaixador do humanismo renascentista português nas cortes e universidades da Europa.",
+    "fonte": "Torre do Tombo / BNP / Cinemateca",
+    "factClusterId": "fc_pers_damiaodegois_01"
+  },
+  {
+    "id": "PERS_CIE_0047",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que primeiro grande cronista-mor da Torre do Tombo e da história portuguesa (c. 1380-1459), Fernão Lopes («Fernão Lopes»), autor das crónicas de D. Pedro I, D. Fernando e D. João I com um estilo vivo e visual pioneiro que colocava «a arraia-miúda» e o povo como protagonista histórico, é o pai da história narrativa em língua portuguesa?",
+    "opcoes": [
+      "Gomes Eanes de Zurara",
+      "Rui de Pina",
+      "Fernão Lopes (Pai da Historiografia Portuguesa)",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernão Lopes é aclamado universalmente como um dos maiores prosadores medievais da Europa pelo rigor factual e emoção dramática das suas crónicas da Revolução de 1383-1385.",
+    "fonte": "Torre do Tombo / DGLAB",
+    "factClusterId": "fc_pers_fernaolopes_cronista_01"
+  },
+  {
+    "id": "PERS_CIE_0048",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre cronista e feitor da Casa da Índia de Viseu (1496-1570), autor da monumental obra em quatro volumes «Décadas da Ásia» («João de Barros»), é considerado «O Lívio Português» pela grandiosidade clássica com que narrou a expansão dos portugueses no Oriente?",
+    "opcoes": [
+      "Fernão Lopes de Castanheda",
+      "Diogo do Couto",
+      "Gaspar Correia",
+      "João de Barros («O Lívio Português»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João de Barros escreveu também a primeira Gramática da Língua Portuguesa impressa em 1540 (Grammatica da Lingua Portuguesa).",
+    "fonte": "Biblioteca Nacional de Portugal / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_pers_joaodebarros_decadas_01"
+  },
+  {
+    "id": "PERS_CIE_0049",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável filósofo e professor da Universidade do Porto (1883-1936), fundador da corrente filosófica do «Criacionismo» e da revista de cultura «A Águia» e ministro da Instrução Pública da 1.ª República («Leonardo Coimbra»), fundou a Faculdade de Letras da Universidade do Porto em 1919?",
+    "opcoes": [
+      "Leonardo Coimbra",
+      "Sampaio Bruno",
+      "Raul Proença",
+      "António Sérgio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Leonardo Coimbra foi uma das mentes mais brilhantes e carismáticas do Renascimento Português e do pensamento filosófico espiritualista.",
+    "fonte": "Faculdade de Letras da Universidade do Porto (FLUP) / BNP",
+    "factClusterId": "fc_pers_leonardocoimbra_01"
+  },
+  {
+    "id": "PERS_CIE_0050",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente pedagogo, ensaísta e pensador cívico nascido na Índia Portuguesa (1883-1969), figura central da revista «Seara Nova» («António Sérgio»), defendeu o cooperativismo, o racionalismo crítico e o pragmatismo educacional na transformação cívica de Portugal?",
+    "opcoes": [
+      "Raul Proença",
+      "Jaime Cortesão",
+      "António Sérgio de Sousa (António Sérgio)",
+      "Bento de Jesus Caraça"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Sérgio influenciou decisivamente a historiografia com a sua tese sobre a oposição histórica entre a 'política de transporte' (mercantilismo) e a 'política de fixação' (agricultura/indústria).",
+    "fonte": "Fundação Mário Soares / DGLAB",
+    "factClusterId": "fc_pers_antoniosergio_01"
+  }
+]

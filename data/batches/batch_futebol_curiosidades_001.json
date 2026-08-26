@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_CUR_0001",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Onde e em que ano realizou-se a primeira partida de futebol documentada em território português, organizada pelo jovem Harry Hinton que trouxe uma bola de couro de Inglaterra?",
+    "opcoes": [
+      "No Largo da Achada, na Camacha (Ilha da Madeira), em 1888",
+      "No Campo Grande, em Lisboa, em 1895",
+      "No Campo da Rainha, no Porto, em 1893",
+      "No Campo de São Jerónimo, em Coimbra, em 1900"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Largo da Achada na Camacha acolhe um monumento que assinala a introdução pioneira do futebol em Portugal no outono de 1888.",
+    "fonte": "Município de Santa Cruz / Associação de Futebol da Madeira",
+    "factClusterId": "fc_cur_camacha1888_01"
+  },
+  {
+    "id": "FUT_CUR_0002",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Em que estabelecimento histórico de Belém (Lisboa) foi fundado o «Sport Lisboa» (embrião do SL Benfica) a 28 de fevereiro de 1904 por um grupo de 24 rapazes liderados por Cosme Damião?",
+    "opcoes": [
+      "Café Martinho da Arcada",
+      "Farmácia Franco (na Rua de Belém)",
+      "Pastelaria de Belém",
+      "Tabacaria Mónaco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A histórica reunião na Farmácia Franco definiu as cores vermelha e branca, a águia como símbolo e o lema 'E Pluribus Unum'.",
+    "fonte": "Museu Benfica Cosme Damião / SL Benfica",
+    "factClusterId": "fc_cur_farmaciafranco_01"
+  },
+  {
+    "id": "FUT_CUR_0003",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que aristocrata português e neto do 1.º Visconde de Alvalade fundou o Sporting Clube de Portugal em 1906 proferindo a célebre frase: «Queremos que o Sporting seja um grande clube, tão grande como os maiores da Europa»?",
+    "opcoes": [
+      "Alfredo Augusto das Neves Holtreman",
+      "Stromp (Francisco Stromp)",
+      "José Alfredo Holtreman Roquette (José Alvalade)",
+      "Gavazzo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Alvalade foi o primeiro sócio e principal impulsionador da fundação do clube leonino no Campo Grande.",
+    "fonte": "Sporting Clube de Portugal / Museu Sporting",
+    "factClusterId": "fc_cur_josealvalade_01"
+  },
+  {
+    "id": "FUT_CUR_0004",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que ave de rapina amestrada voa em círculos no Estádio da Luz antes do início de todos os jogos oficiais em casa do SL Benfica, pousando sobre o símbolo no centro do relvado?",
+    "opcoes": [
+      "Falcão Peregrino",
+      "Águia Imperial",
+      "Gavião Real",
+      "Águia Vitória (e Águia Glória)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O voo da Águia Vitória no Estádio da Luz é uma das tradições mais célebres e icónicas do futebol mundial.",
+    "fonte": "Sport Lisboa e Benfica",
+    "factClusterId": "fc_cur_aguiavitoria_01"
+  },
+  {
+    "id": "FUT_CUR_0005",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Qual foi a origem da icónica camisola axadrezada em preto e branco do Boavista Futebol Clube adotada pelo presidente Artur Oliveira Valença na década de 1930?",
+    "opcoes": [
+      "Inspirada numa equipa francesa e no vestuário térmico xadrez usado pelos jogadores nas viagens",
+      "Inspirada no tabuleiro de xadrez da sede do clube",
+      "Doada por marinheiros escoceses no porto de Leixões",
+      "Copiada da bandeira da cidade do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O padrão axadrezado transformou as «Panteras Negras» do Bessa numa das camisolas mais inconfundíveis e originais do desporto internacional.",
+    "fonte": "Boavista FC / História do Boavista",
+    "factClusterId": "fc_cur_camisolaboavista_01"
+  },
+  {
+    "id": "FUT_CUR_0006",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que canção popularizada pela cantora Maria José Valério, com o seu cabelo verde e cachecol, tornou-se o hino afetivo e mais entoado pelos adeptos do Sporting CP?",
+    "opcoes": [
+      "O Mundo Sabe Que",
+      "Marcha do Sporting («Sporting, Sporting, Sporting!»)",
+      "Hino do Centenário",
+      "A Portuguesa de Alvalade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Marcha do Sporting de Maria José Valério é entoada a plenos pulmões em todos os jogos de Alvalade e pavilhões.",
+    "fonte": "Sporting Clube de Portugal",
+    "factClusterId": "fc_cur_mar Sporting_01"
+  },
+  {
+    "id": "FUT_CUR_0007",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que tenor e cantor lírico português gravou em 1953 a canção «Ser Benfiquista» (composta por Manuel Paulino Gomes Júnior), que se tornou o hino solene entoado antes dos jogos na Luz?",
+    "opcoes": [
+      "Francisco José",
+      "António Calvário",
+      "Luís Piçarra",
+      "Max"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "«Sou do Benfica e isso me envaidece...» entoada por Luís Piçarra é um dos hinos clubísticos mais emblemáticos de Portugal.",
+    "fonte": "Museu Benfica Cosme Damião",
+    "factClusterId": "fc_cur_serbenfiquista_01"
+  },
+  {
+    "id": "FUT_CUR_0008",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Como são popularmente conhecidos os adeptos e a equipa do Sporting Clube de Braga devido à cor do seu equipamento e à tradição guerreira da cidade dos arcebispos?",
+    "opcoes": [
+      "Os Conquistadores",
+      "Os Serranos",
+      "Os Bebés do Mar",
+      "Os Guerreiros do Minho (ou Bracarenses)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O SC Braga é apelidado de «Guerreiros do Minho» e de «Arsenalistas» por ter adotado o equipamento vermelho e branco do Arsenal de Londres nos anos 1930.",
+    "fonte": "Sporting Clube de Braga",
+    "factClusterId": "fc_cur_guerreirosdominho_01"
+  },
+  {
+    "id": "FUT_CUR_0009",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Por que razão os adeptos do Vitória Sport Clube de Guimarães são carinhosamente chamados de «Os Conquistadores»?",
+    "opcoes": [
+      "Em homenagem a D. Afonso Henriques, o primeiro Rei e Conquistador de Portugal, nascido em Guimarães",
+      "Por terem conquistado a primeira Taça de Portugal",
+      "Por terem conquistado o Minho aos romanos",
+      "Por causa dos navegadores dos Descobrimentos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A ligação profunda à figura de D. Afonso Henriques reflete-se na estátua do rei que figura no emblema e na mascote 'Super Afonso'.",
+    "fonte": "Vitória Sport Clube / Município de Guimarães",
+    "factClusterId": "fc_cur_conquistadores_01"
+  },
+  {
+    "id": "FUT_CUR_0010",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que alcunha histórica têm os habitantes e adeptos do Sporting Clube Olhanense no Algarve, associada ao espírito combativo das gentes marítimas de Olhão?",
+    "opcoes": [
+      "Os Algarvios",
+      "Os Marafados (ou Rubro-negros de Olhão)",
+      "Os Conquistadores",
+      "Os Castiços"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O termo «marafado» no dialeto algarvio significa destemido, valente e determinado perante as adversidades do mar.",
+    "fonte": "SC Olhanense / Etnografia Algarvia",
+    "factClusterId": "fc_cur_marafados_01"
+  },
+  {
+    "id": "FUT_CUR_0011",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Como são historicamente apelidados os adeptos e a equipa do Sporting Clube da Covilhã devido à sua localização geográfica na montanha mais alta de Portugal Continental?",
+    "opcoes": [
+      "Os Estudantes",
+      "Os Gansos",
+      "Os Serranos (ou Leões da Serra)",
+      "Os Castiços"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O SC Covilhã é o grande clube da Serra da Estrela, fundado em 1923 no coração da indústria dos lanifícios.",
+    "fonte": "SC Covilhã / Município da Covilhã",
+    "factClusterId": "fc_cur_serranos_01"
+  },
+  {
+    "id": "FUT_CUR_0012",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que alcunha têm os jogadores e adeptos da Associação Académica de Coimbra devido à ligação centenária à Universidade e aos estudantes de capa e batina?",
+    "opcoes": [
+      "Os Conquistadores",
+      "Os Serranos",
+      "Os Gansos",
+      "Os Estudantes (ou A Briosa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A «Briosa» foi fundada em 1887 pela Associação Académica de Coimbra e é o clube de futebol em atividade mais antigo da Península Ibérica.",
+    "fonte": "Académica de Coimbra / Universidade de Coimbra",
+    "factClusterId": "fc_cur_briosa_01"
+  },
+  {
+    "id": "FUT_CUR_0013",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que clube da Linha de Cascais é conhecido como «Os Canarinhos» devido à cor amarela do seu equipamento principal?",
+    "opcoes": [
+      "Grupo Desportivo Estoril Praia",
+      "Clube de Futebol Os Belenenses",
+      "Casa Pia AC",
+      "Real SC"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Estoril Praia joga no Estádio António Coimbra da Mota e veste tradicionalmente camisola amarela com calção azul.",
+    "fonte": "GD Estoril Praia / Liga Portugal",
+    "factClusterId": "fc_cur_canarinhosestoril_01"
+  },
+  {
+    "id": "FUT_CUR_0014",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que comerciante portuense de vinho do Porto fundou o «Foot-Ball Club do Porto» em setembro de 1893 após descobrir o jogo numa viagem a Inglaterra?",
+    "opcoes": [
+      "José Monteiro da Costa",
+      "António Nicolau d'Almeida",
+      "Cosme Damião",
+      "José Alvalade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Nicolau d'Almeida fundou o clube no dia 28 de setembro de 1893, reativado em 1906 por José Monteiro da Costa.",
+    "fonte": "Museu FC Porto / FC Porto",
+    "factClusterId": "fc_cur_nicolaualmeida_01"
+  },
+  {
+    "id": "FUT_CUR_0015",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que famoso equipamento bipartido (metade verde e metade branca com calção preto) homenageia o fundador e capitão honorário do Sporting CP?",
+    "opcoes": [
+      "Equipamento Alvalade",
+      "Equipamento Peyroteo",
+      "Equipamento Stromp (em honra de Francisco Stromp)",
+      "Equipamento Violinos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O equipamento Stromp é utilizado pelo Sporting CP em jogos de homenagem e finais de taça.",
+    "fonte": "Sporting Clube de Portugal / Museu Sporting",
+    "factClusterId": "fc_cur_stromp_01"
+  },
+  {
+    "id": "FUT_CUR_0016",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que dragão mitológico verde que cospe fogo foi adicionado ao brasão do FC Porto em 1922 pelo artista gráfico e antigo jogador Augusto Baptista Ferreira («Pinglim»)?",
+    "opcoes": [
+      "O Grifo de Gaia",
+      "A Serpente de São João",
+      "A Águia do Douro",
+      "O Dragão da Invicta (símbolo de invencibilidade e lealdade)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O dragão coroava o antigo brasão da cidade do Porto outorgado por D. Maria II em homenagem à defesa liberal durante o Cerco do Porto.",
+    "fonte": "Museu FC Porto / CMP",
+    "factClusterId": "fc_cur_dragaoporto_01"
+  },
+  {
+    "id": "FUT_CUR_0017",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Qual é a mascote oficial do Sporting Clube de Portugal, representada por um leão verde alegre e combativo criado para animar as bancadas de Alvalade?",
+    "opcoes": [
+      "Jubas",
+      "Draco",
+      "Super Afonso",
+      "Samas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Jubas é a mascote oficial mais popular das crianças e adeptos leoninos nos dias de jogo.",
+    "fonte": "Sporting Clube de Portugal",
+    "factClusterId": "fc_cur_jubas_01"
+  },
+  {
+    "id": "FUT_CUR_0018",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Qual é a mascote oficial do Futebol Clube do Porto, representada por um dragão azul musculado e simpático que anima o Estádio do Dragão?",
+    "opcoes": [
+      "Jubas",
+      "Draco (e Viena)",
+      "Farrusco",
+      "Bitorica"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Draco e a sua companheira Viena são as mascotes oficiais do FC Porto.",
+    "fonte": "Futebol Clube do Porto",
+    "factClusterId": "fc_cur_draco_01"
+  },
+  {
+    "id": "FUT_CUR_0019",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que mítico ponta-de-lança da Seleção Nacional nos anos 60 e 70 («O Pantera Negra») era conhecido por calçar chuteiras pretas impecáveis e cumprimentar todos os adversários após os golos?",
+    "opcoes": [
+      "Coluna",
+      "Peyroteo",
+      "Eusébio da Silva Ferreira",
+      "Matateu"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eusébio foi considerado o expoente máximo do 'fair-play' desportivo e cavalheirismo no futebol internacional.",
+    "fonte": "Museu Benfica / FIFA",
+    "factClusterId": "fc_cur_eusebiofairplay_01"
+  },
+  {
+    "id": "FUT_CUR_0020",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que avançado moçambicano do Belenenses nos anos 50 e 60 era famoso pelo seu portentoso pontapé de meia-distância que furava as redes das balizas adversárias?",
+    "opcoes": [
+      "Vicente Lucas",
+      "Yaúca",
+      "Peres",
+      "Matateu (Sebastião Lucas da Fonseca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Matateu é uma das maiores lendas da história do Restelo e da Seleção Nacional de Portugal.",
+    "fonte": "CF «Os Belenenses» / FPF",
+    "factClusterId": "fc_cur_matateu_01"
+  },
+  {
+    "id": "FUT_CUR_0021",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que clube de Vila das Aves (Santo Tirso) tem como símbolo tradicional um grou heráldico nas suas armas e o cognome de «Avenses»?",
+    "opcoes": [
+      "Clube Desportivo das Aves (ou AVS Futebol SAD)",
+      "FC Tirsense",
+      "FC Famalicão",
+      "Varzim SC"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O CD Aves representa o orgulho da vila têxtil no vale do rio Ave.",
+    "fonte": "Liga Portugal / CD Aves",
+    "factClusterId": "fc_cur_cdaves_01"
+  },
+  {
+    "id": "FUT_CUR_0022",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que avançado brasileiro («O Fenómeno do Jamor») marcou o golo da vitória do Vitória de Setúbal na final da Taça de Portugal de 2005 frente ao Benfica de Trapattoni?",
+    "opcoes": [
+      "Jacinto João",
+      "Meyong (Albert Meyong Zé)",
+      "Sandro",
+      "Jorginho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Meyong marcou aos 88 minutos num chapéu magistral a Quim para dar a terceira Taça ao Vitória de Setúbal.",
+    "fonte": "Vitória FC / FPF",
+    "factClusterId": "fc_cur_meyong2005_01"
+  },
+  {
+    "id": "FUT_CUR_0023",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que clube de Santa Maria da Feira tem como mascote oficial a «Fogaça», o doce tradicional e centenário da vila?",
+    "opcoes": [
+      "UD Oliveirense",
+      "Lusitânia de Lourosa",
+      "Clube Desportivo Feirense",
+      "SC São João de Ver"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A mascote do Feirense representa a famosa Fogaça da Feira com os quatro castelos de massa doce.",
+    "fonte": "CD Feirense / Município de Santa Maria da Feira",
+    "factClusterId": "fc_cur_fogacafeirense_01"
+  },
+  {
+    "id": "FUT_CUR_0024",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que histórico extremo do Vitória de Setúbal nos anos 60 e 70 («JJ») marcou mais de 150 golos pelo clube e recusou todas as propostas para sair da cidade do Sado?",
+    "opcoes": [
+      "Félix Mourinho",
+      "José Maria",
+      "Carlos Cardoso",
+      "Jacinto João (JJ)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jacinto João tem uma estátua de bronze erguida em frente ao Estádio do Bonfim em Setúbal.",
+    "fonte": "Vitória Futebol Clube / Município de Setúbal",
+    "factClusterId": "fc_cur_jacintojoao_01"
+  },
+  {
+    "id": "FUT_CUR_0025",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo guarda-redes do Vitória de Setúbal e do Belenenses foi o pai do célebre treinador José Mourinho?",
+    "opcoes": [
+      "Félix Mourinho (José Manuel Mourinho Félix)",
+      "Manuel Bento",
+      "Costa Pereira",
+      "Américo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Félix Mourinho foi internacional por Portugal e conquistou a Taça de Portugal pelo Vitória de Setúbal em 1965.",
+    "fonte": "FPF / Vitória FC",
+    "factClusterId": "fc_cur_felixmourinho_01"
+  },
+  {
+    "id": "FUT_CUR_0026",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que treinador do FC Porto («O Homem da Luva Branca») nos anos 70 e 80 foi o grande mentor tático e ideológico de Pinto da Costa e da modernização do clube?",
+    "opcoes": [
+      "Artur Jorge",
+      "José Maria Pedroto («O Mestre»)",
+      "Béla Guttmann",
+      "Yustrich"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Maria Pedroto criou a mística inquebrantável do FC Porto e revolucionou a preparação tática no país.",
+    "fonte": "Museu FC Porto / FC Porto",
+    "factClusterId": "fc_cur_pedroto_01"
+  },
+  {
+    "id": "FUT_CUR_0027",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que tradicional «Canção de Coimbra» é entoada pelas bancadas do Estádio Cidade de Coimbra pelos adeptos da Briosa nos jogos da Académica?",
+    "opcoes": [
+      "A Marcha do Sporting",
+      "Ser Benfiquista",
+      "Fado de Coimbra («Coimbra tem mais encanto na hora da despedida»)",
+      "Hino dos Mineiros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A tradição académica e as baladas da guitarra de Coimbra marcam a identidade única dos jogos da Académica.",
+    "fonte": "Académica de Coimbra / Associação Académica",
+    "factClusterId": "fc_cur_fadocoimbra_01"
+  },
+  {
+    "id": "FUT_CUR_0028",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que avançado internacional do Sporting CP e do Benfica nos anos 80 e 90 era carinhosamente chamado de «O Barata» pela sua baixa estatura e agilidade supersónica?",
+    "opcoes": [
+      "Chalana",
+      "Cadete",
+      "Rui Barros",
+      "Pacheco (António Pacheco)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Rui Barros (com apenas 1,59m) brilhou no FC Porto, Juventus e Mónaco com golos de velocidade e talento puro.",
+    "fonte": "FC Porto / Juventus FC",
+    "factClusterId": "fc_cur_ruibarros_01"
+  },
+  {
+    "id": "FUT_CUR_0029",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que médio e capitão do SL Benfica nos anos 70 e 80, natural de Moçambique, jogou 487 jogos de águia ao peito sem nunca ter sido expulso na carreira?",
+    "opcoes": [
+      "Shéu Han",
+      "Toni",
+      "Manuel Bento",
+      "Nené"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Shéu Han foi o eterno capitão e secretário técnico do SL Benfica, exemplo máximo de ética e lealdade ao clube.",
+    "fonte": "SL Benfica / Museu Cosme Damião",
+    "factClusterId": "fc_cur_sheuhan_01"
+  },
+  {
+    "id": "FUT_CUR_0030",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo guarda-redes português do Sporting CP e da Seleção («O Manholas») defendia habitualmente de boina na cabeça e calças de fato de treino nos anos 50?",
+    "opcoes": [
+      "Costa Pereira",
+      "Carlos Gomes",
+      "Azevedo",
+      "Damásio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Carlos Gomes foi um dos guarda-redes mais carismáticos e excêntricos do futebol português.",
+    "fonte": "Sporting CP / Jornal Sporting",
+    "factClusterId": "fc_cur_carlosgomes_01"
+  },
+  {
+    "id": "FUT_CUR_0031",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que famoso equipamento alternativo em tons de rosa foi utilizado pelo SL Benfica em 2007/08, gerando enorme sucesso comercial nas vendas oficiais da camisola?",
+    "opcoes": [
+      "A Camisola Dourada",
+      "A Camisola Cinzenta",
+      "A Camisola Cor-de-Rosa do Benfica",
+      "A Camisola Amarela"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A camisola rosa do Benfica foi um marco de marketing desportivo inovador no futebol nacional.",
+    "fonte": "SL Benfica / Adidas",
+    "factClusterId": "fc_cur_camisolarosa_01"
+  },
+  {
+    "id": "FUT_CUR_0032",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo ponta-de-lança da Seleção Nacional no Mundial de 1986 era conhecido pela alcunha de «O Menino de Ouro das Antas» pelo seu faro de golo instintivo?",
+    "opcoes": [
+      "Paulo Futre",
+      "Frederico",
+      "Vermelhinho",
+      "Fernando Gomes («Bibota»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Fernando Gomes dedicou as suas duas Botas de Ouro ao povo do Porto e aos seus companheiros de equipa.",
+    "fonte": "Museu FC Porto",
+    "factClusterId": "fc_cur_fernandogomesbibota_01"
+  },
+  {
+    "id": "FUT_CUR_0033",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que clube da Madeira (do Funchal) fundado em 1910 tem como equipamento tradicional as riscas verticais alvinegras em homenagem ao Nacional de Montevideu?",
+    "opcoes": [
+      "Clube Desportivo Nacional (Nacional da Madeira)",
+      "Club Sport Marítimo",
+      "União da Madeira",
+      "Porto Santo Golfe"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O CD Nacional da Choupana formou Cristiano Ronaldo nos seus primeiros anos antes de rumar a Alvalade.",
+    "fonte": "CD Nacional / Museu Cristiano Ronaldo",
+    "factClusterId": "fc_cur_cdnacional_01"
+  },
+  {
+    "id": "FUT_CUR_0034",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que clube da cidade do Funchal fundado em 1910 pelos pescadores do porto de abrigo veste verde e rubro em homenagem à República recém-implantada em 1910?",
+    "opcoes": [
+      "CD Nacional",
+      "Club Sport Marítimo",
+      "União da Madeira",
+      "Andorinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CS Marítimo é apelidado de «O Maior das Ilhas» pelo seu fervor popular inigualável na Madeira.",
+    "fonte": "CS Marítimo / Museu Marítimo",
+    "factClusterId": "fc_cur_csmaritimo_01"
+  },
+  {
+    "id": "FUT_CUR_0035",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que famoso festejo com os braços abertos, salto no ar e o grito sonoro «SIUUU!» foi imortalizado por Cristiano Ronaldo e repetido em estádios de todo o planeta?",
+    "opcoes": [
+      "O festejo do coração",
+      "O festejo da estátua",
+      "A celebração do «Siuuu!» de Cristiano Ronaldo",
+      "A cambalhota de Nani"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A celebração de Ronaldo nasceu num amigável nos Estados Unidos pelo Real Madrid e tornou-se um fenómeno global da cultura pop.",
+    "fonte": "FIFA / Guinness World Records",
+    "factClusterId": "fc_cur_siuuu_01"
+  },
+  {
+    "id": "FUT_CUR_0036",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que extremo internacional português era famoso pelas suas cambalhotas e mortais acrobáticos no ar na comemoração dos seus golos pela Seleção e Manchester United?",
+    "opcoes": [
+      "Ricardo Quaresma",
+      "Simão Sabrosa",
+      "Bruma",
+      "Nani (Luís Carlos Almeida da Cunha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nani aprendeu os mortais na prática de capoeira na infância na Amadora antes de brilhar em Alvalade e Old Trafford.",
+    "fonte": "Sporting CP / Manchester United",
+    "factClusterId": "fc_cur_nanicambalhotas_01"
+  },
+  {
+    "id": "FUT_CUR_0037",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que capitão histórico do FC Porto nos anos 60 e 70 era conhecido como «O Pavão» pela sua elegância a transportar a bola de cabeça levantada?",
+    "opcoes": [
+      "Fernando Pascoal Neves («Pavão»)",
+      "Rolando",
+      "Custódio Pinto",
+      "Américo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Pavão faleceu tragicamente no relvado do Estádio das Antas a 16 de dezembro de 1973 aos 26 anos de idade.",
+    "fonte": "FC Porto / Museu FC Porto",
+    "factClusterId": "fc_cur_pavao_01"
+  },
+  {
+    "id": "FUT_CUR_0038",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que jovem internacional húngaro do SL Benfica faleceu tragicamente no relvado do Estádio D. Afonso Henriques em Guimarães a 25 de janeiro de 2004, com a camisola n.º 29 a ser retirada pelo clube?",
+    "opcoes": [
+      "Robert Enke",
+      "Miklós Fehér",
+      "Tiago",
+      "Geovanni"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A memória do sorriso e nobreza de Miklós Fehér permanece viva no busto erguido à entrada do Estádio da Luz.",
+    "fonte": "Sport Lisboa e Benfica / Federação Húngara de Futebol",
+    "factClusterId": "fc_cur_feher2004_01"
+  },
+  {
+    "id": "FUT_CUR_0039",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo roupeiro lendário do Sporting Clube de Portugal durante mais de 40 anos tornou-se um dos maiores símbolos de dedicação e carinho do clube («O Paulinho»)?",
+    "opcoes": [
+      "Sr. Silva",
+      "Mário Lino",
+      "Paulo Gama (Paulinho)",
+      "Manolo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paulinho é uma das figuras mais queridas de todo o desporto português, homenageado pelos jogadores em todas as conquistas de títulos.",
+    "fonte": "Sporting Clube de Portugal",
+    "factClusterId": "fc_cur_paulinhoroupeiro_01"
+  },
+  {
+    "id": "FUT_CUR_0040",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que histórico roupeiro do FC Porto acompanhou a equipa principal durante quase 40 anos desde Viena em 1987 até Sevilha e Gelsenkirchen («Seu Américo»)?",
+    "opcoes": [
+      "Paulinho",
+      "Adelino",
+      "Chico Silva",
+      "Américo Magalhães"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O 'Seu Américo' foi o fiel guardião dos equipamentos e segredos do balneário do FC Porto.",
+    "fonte": "Museu FC Porto",
+    "factClusterId": "fc_cur_americoroupeiro_01"
+  },
+  {
+    "id": "FUT_CUR_0041",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Qual foi a primeira equipa portuguesa a utilizar números nas camisolas dos jogadores num jogo oficial?",
+    "opcoes": [
+      "Sporting Clube de Portugal (na digressão ao Brasil em 1928)",
+      "SL Benfica",
+      "FC Porto",
+      "Belenenses"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Sporting CP foi pioneiro ao envergar números nas costas das camisolas durante os jogos no Brasil em 1928.",
+    "fonte": "Sporting CP / Museu Sporting",
+    "factClusterId": "fc_cur_numeroscamisolas_01"
+  },
+  {
+    "id": "FUT_CUR_0042",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que histórico estádio de Lisboa inaugurado em 1928 foi o primeiro recinto em Portugal a dispor de bancadas de cimento e iluminação artificial para jogos noturnos?",
+    "opcoes": [
+      "Estádio do Lumiar",
+      "Campo das Salésias (Estádio José Manuel Soares)",
+      "Campo Grande",
+      "Estádio da Tapadinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Campo das Salésias do Belenenses foi o grande palco do futebol português antes da construção do Estádio Nacional do Jamor.",
+    "fonte": "CF «Os Belenenses» / Dicionário de História de Lisboa",
+    "factClusterId": "fc_cur_salesias_01"
+  },
+  {
+    "id": "FUT_CUR_0043",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que estádio inaugurado a 10 de junho de 1944 pelo Presidente do Conselho António de Oliveira Salazar é o palco sagrado das finais da Taça de Portugal?",
+    "opcoes": [
+      "Estádio da Luz",
+      "Estádio José Alvalade",
+      "Estádio Nacional do Jamor (Oeiras)",
+      "Estádio do Restelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Jamor e a sua tribuna de honra em pedra acolhem a grande romaria dos piqueniques e da festa da Taça de Portugal.",
+    "fonte": "IPDJ / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_cur_jamor1944_01"
+  },
+  {
+    "id": "FUT_CUR_0044",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que grande final europeia foi disputada no Estádio Nacional do Jamor a 25 de maio de 1967, na qual os «Lisbon Lions» do Celtic de Glasgow venceram o Inter de Milão por 2-1?",
+    "opcoes": [
+      "Final da Taça das Taças",
+      "Final da Taça UEFA",
+      "Final da Supertaça Europeia",
+      "Final da Taça dos Campeões Europeus de 1967"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A vitória do Celtic no Jamor com 11 jogadores nascidos num raio de 50 km de Glasgow entrou para a lenda do futebol.",
+    "fonte": "UEFA / Celtic FC / IPDJ",
+    "factClusterId": "fc_cur_lisbonlions1967_01"
+  },
+  {
+    "id": "FUT_CUR_0045",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo médio e treinador do SL Benfica nos anos 70 e 80 («O Toni») era famoso pela sua barba farta e paixão incondicional à mística encarnada?",
+    "opcoes": [
+      "Toni (António José Conceição Oliveira)",
+      "Humberto Coelho",
+      "Chalana",
+      "Shéu"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Toni conquistou 8 Campeonatos Nacionais como jogador e 3 como treinador principal do SL Benfica.",
+    "fonte": "SL Benfica / Zerozero",
+    "factClusterId": "fc_cur_toni_01"
+  },
+  {
+    "id": "FUT_CUR_0046",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que antigo ponta-de-lança da Seleção Nacional no Mundial de 1986 marcou o golo da vitória de Portugal por 1-0 sobre a Inglaterra em Monterrey?",
+    "opcoes": [
+      "Fernando Gomes",
+      "Carlos Manuel",
+      "Futre",
+      "Jaime Pacheco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carlos Manuel marcou aos 76 minutos num remate acrobático frente aos ingleses de Gary Lineker em Monterrey.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_cur_monterrey1986_01"
+  },
+  {
+    "id": "FUT_CUR_0047",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que defesa do Sporting CP nos anos 40 («Os Cinco Violinos») continuou a jogar com uma perna partida numa final da Taça para não deixar a equipa com dez?",
+    "opcoes": [
+      "Azevedo",
+      "Barrosa",
+      "Manuel Marques (ou Álvaro Cardoso)",
+      "Hilário"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O guarda-redes Azevedo e os defesas leoninos jogavam com ligaduras de gesso num exemplo de estoicismo lendário.",
+    "fonte": "Museu Sporting / Jornal Sporting",
+    "factClusterId": "fc_cur_azevedoheroismo_01"
+  },
+  {
+    "id": "FUT_CUR_0048",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que famoso jornal desportivo diário português, fundado em 1945 por Cândido de Oliveira, Ribeiro dos Reis e Vicente de Melo, tem a icónica primeira página em tons de verde e preto?",
+    "opcoes": [
+      "Record",
+      "O Jogo",
+      "Gazeta dos Desportos",
+      "A Bola"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O jornal A Bola é uma das publicações desportivas mais antigas e prestigiadas do espaço lusófono.",
+    "fonte": "Jornal A Bola / História da Imprensa Desportiva",
+    "factClusterId": "fc_cur_jornalabola_01"
+  },
+  {
+    "id": "FUT_CUR_0049",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que jornal desportivo fundado em 1948 por Manuel Dias no Porto destacou-se pela cobertura aprofundada dos clubes do norte de Portugal?",
+    "opcoes": [
+      "O Jogo (e jornal Record em Lisboa)",
+      "A Bola",
+      "Mundo Desportivo",
+      "Os Sports"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os três jornais desportivos diários nacionais (A Bola, Record e O Jogo) formam a imprensa de referência do futebol português.",
+    "fonte": "Imprensa Nacional / Associação de Jornalistas de Desporto",
+    "factClusterId": "fc_cur_imprensadesportiva_01"
+  },
+  {
+    "id": "FUT_CUR_0050",
+    "tema": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "pergunta": "Que troféu de caridade disputado na pré-época homenageia o fundador e capitão histórico do Sporting CP Francisco Stromp?",
+    "opcoes": [
+      "Troféu Cinco Violinos",
+      "Taça Eusébio",
+      "Troféu Stromp",
+      "Taça Cidade do Porto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Troféu Stromp e o Troféu Cinco Violinos abrem tradicionalmente a época dos leões no Estádio José Alvalade.",
+    "fonte": "Sporting Clube de Portugal",
+    "factClusterId": "fc_cur_trofeustromp_01"
+  }
+]

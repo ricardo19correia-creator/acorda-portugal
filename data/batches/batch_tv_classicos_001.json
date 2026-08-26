@@ -1,0 +1,852 @@
+[
+  {
+    "id": "TV_CLA_0001",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que revolucionário programa de humor da RTP de 1983 criado e interpretado por Herman José («O Tal Canal»), parodying uma estação de televisão inteira com personagens míticas como Filipa Vasconcelos, o futebolista Nelito e Marilú, é considerado um marco na história da televisão portuguesa?",
+    "opcoes": [
+      "O Tal Canal (1983)",
+      "Hermanias",
+      "Humor de Perdição",
+      "Casino Royal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tal Canal tinha guiões de Herman José com colaboração de António Pires e foi eleito por unanimidade o melhor programa de sempre da televisão portuguesa.",
+    "fonte": "RTP Arquivos / Museu da RTP",
+    "factClusterId": "fc_tv_otalcanal1983_01"
+  },
+  {
+    "id": "TV_CLA_0002",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que mítico programa de variedades dos domingos à noite na RTP (1969), gravado ao vivo no Teatro Villaret e apresentado pelo trio Carlos Cruz, Raúl Solnado e Fialho Gouveia («Zip-Zip»), revolucionou a televisão no final do Estado Novo?",
+    "opcoes": [
+      "A Visita da Cornélia",
+      "Zip-Zip (1969)",
+      "1, 2, 3",
+      "Nicolau no País das Maravilhas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Zip-Zip foi pioneiro na transmissão de cantores de intervenção (como José Afonso e Manuel Freire com a 'Pedra Filosofal') sob a censura prévia da época.",
+    "fonte": "RTP Arquivos / Fundação Raul Solnado",
+    "factClusterId": "fc_tv_zipzip1969_01"
+  },
+  {
+    "id": "TV_CLA_0003",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que popular concurso da RTP de 1977 apresentado por Raúl Solnado («A Visita da Cornélia»), com a famosa vaca de peluche «Cornélia» que piscava o olho e música de Thilo Krasmann, testava pares de concorrentes em provas de representação, música e improviso?",
+    "opcoes": [
+      "O Passeio dos Alegres",
+      "1, 2, 3",
+      "A Visita da Cornélia (1977)",
+      "Prata da Casa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Visita da Cornélia parava o país às segundas-feiras e revelou talentos como Vítor Espadinha e José Fanha.",
+    "fonte": "RTP Arquivos / Museu Virtual da RTP",
+    "factClusterId": "fc_tv_visitadacornelia1977_01"
+  },
+  {
+    "id": "TV_CLA_0004",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que histórico concurso de grande audiência das noites de quinta-feira na RTP1 nos anos 1980 («Um, Dois, Três»), apresentado por Carlos Cruz (e mais tarde por António Sala), contava com as perguntas do Zequinha e da Lelé e a mascote «Bota Botilde»?",
+    "opcoes": [
+      "A Roda da Sorte",
+      "O Preço Certo",
+      "Parada da Paródia",
+      "1, 2, 3 (Um, Dois, Três)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O '1, 2, 3' adaptou o formato original espanhol da TVE tornando-se o concurso de maior audiência da história da televisão pública portuguesa.",
+    "fonte": "RTP Arquivos / Produções Fialho Gouveia",
+    "factClusterId": "fc_tv_umdoistres_carloscruz_01"
+  },
+  {
+    "id": "TV_CLA_0005",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que lendária competição europeia entre cidades transmitida pela RTP nos anos 1980 e 1990 («Jogos Sem Fronteiras» / Jeux Sans Frontières), com comentários inesquecíveis de Eládio Clímaco e arbitragem internacional de Denis Vandersmissen, mobilizou vilas portuguesas em piscinas e fatos insufláveis gigantes?",
+    "opcoes": [
+      "Jogos Sem Fronteiras (RTP)",
+      "Campeões Nacionais",
+      "Desafio Total",
+      "Aventura na Cidade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal venceu a final internacional de Jogos Sem Fronteiras em 1989 com a equipa da vila das Açoteias e em 1997 com Amadora.",
+    "fonte": "RTP / UER (União Europeia de Radiodifusão)",
+    "factClusterId": "fc_tv_jogossemfronteiras_01"
+  },
+  {
+    "id": "TV_CLA_0006",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que famosa série cómica de ação e espionagem da RTP dos anos 1980 («Duarte & C.a»), criada por Rogério Ceitil e protagonizada por Rui Mendes (Duarte) e António Assunção (Tó), com o vilão Lúcio (Rogério Paulo), o «Chinês» e o «Rocha», marcou gerações?",
+    "opcoes": [
+      "Zé Gato",
+      "Duarte & C.a (1985-1989)",
+      "Claque",
+      "Bora Lá"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Duarte & C.a misturava comédia pastelão, perseguições num Citroën 2CV vermelho e artes marciais toscas com grande sucesso popular.",
+    "fonte": "RTP Arquivos / Cinemateca Portuguesa",
+    "factClusterId": "fc_tv_duarteecia_1985_01"
+  },
+  {
+    "id": "TV_CLA_0007",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que série histórica de ficção de grande sucesso da RTP1 (estreada em 2007 ao longo de várias temporadas), inspirada no formato espanhol «Cuéntame cómo pasó», retrata a vida quotidiana da família Lopes (António, Margarida, Toni, Isabel e Carlos) em Lisboa durante o Estado Novo, o 25 de Abril e os anos 1980?",
+    "opcoes": [
+      "Os Maias",
+      "Vila Faia",
+      "Conta-me Como Foi (Família Lopes)",
+      "Capitães de Abril"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A série foi aclamada pelo rigor da reconstituição de época e pelas interpretações de Miguel Guilherme e Rita Blanco.",
+    "fonte": "RTP / SP Televisão",
+    "factClusterId": "fc_tv_contamecomofoi_01"
+  },
+  {
+    "id": "TV_CLA_0008",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que primeira telenovela produzida integralmente em Portugal («Vila Faia»), exibida na RTP1 em 1982 em 100 episódios com argumento de Nicolau Breyner e Francisco Nicholson e a canção-tema «Adeus Que Me Vou Embora» cantada por Tonicha, é o marco zero da ficção seriada nacional?",
+    "opcoes": [
+      "Origens",
+      "Chuva na Areia",
+      "Palavras Cruzadas",
+      "Vila Faia (1982)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vila Faia retratava a aristocracia decadente da produção vinícola com Margarida Carpinteiro, Mariana Rey Monteiro e Nicolau Breyner.",
+    "fonte": "RTP Arquivos / Museu da RTP",
+    "factClusterId": "fc_tv_vilafaia1982_01"
+  },
+  {
+    "id": "TV_CLA_0009",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa de sketches de humor da RTP1 em 1997 («Herman Enciclopédia»), com elenco de luxo composto por Herman José, José Pedro Gomes, António Feio, Maria Vieira e Miguel Guilherme, imortalizou personagens como o «Diácono Remédios» («Não havia nexexidade!») e a «SuperTia»?",
+    "opcoes": [
+      "Herman Enciclopédia (1997)",
+      "Parabéns",
+      "Herman SIC",
+      "Herman 98"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Herman Enciclopédia contava com guiões afiados das Produções Fictícias lideradas por Nuno Artur Silva e Rui Cardoso Martins.",
+    "fonte": "RTP Arquivos / Produções Fictícias",
+    "factClusterId": "fc_tv_hermanenciclopedia1997_01"
+  },
+  {
+    "id": "TV_CLA_0010",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que quarteto de comédia revolucionário formado por Ricardo Araújo Pereira, José Diogo Quintela, Miguel Góis e Tiago Dores («Gato Fedorento»), estreou na SIC Radical em 2003 (Série Fonseca) e atingiu recordes absolutos de audiência com «Diz Que É Uma Espécie de Magazine» na RTP1?",
+    "opcoes": [
+      "Os Contemporâneos",
+      "Gato Fedorento",
+      "Contra Informação",
+      "Estado de Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Gato Fedorento criaram bordões que entraram definitivamente no vocabulário português como 'Chato!', 'É o que é!', 'Falou e disse!'.",
+    "fonte": "SIC / RTP / Produções Fictícias",
+    "factClusterId": "fc_tv_gatofedorento_01"
+  },
+  {
+    "id": "TV_CLA_0011",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa satírico de marionetas de borracha da RTP1 (1996-2010), produzido pela Mandala e com vozes de Bruno Ferreira, Jorge Mourato e Mila Belo («Contra Informação»), parodiava diariamente as figuras da política e futebol nacional como «Manel dos Anzóis», «Toneca» e «Martelo»?",
+    "opcoes": [
+      "Os Bonecos da Bola",
+      "Spitting Image",
+      "Contra Informação (RTP1)",
+      "Canal Aberto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Contra Informação esteve no ar mais de 14 anos com mais de 3.000 episódios transmitidos antes do Telejornal.",
+    "fonte": "RTP Arquivos / Mandala Produções",
+    "factClusterId": "fc_tv_contrainformacao1996_01"
+  },
+  {
+    "id": "TV_CLA_0012",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que primeiro «reality show» da televisão portuguesa, estreado em setembro de 2000 na TVI com apresentação de Teresa Guilherme («Big Brother Portugal»), bateu todos os recordes históricos de audiência televisiva com a consagração do concorrente Zé Maria de Barrancos na noite de passagem de ano?",
+    "opcoes": [
+      "A Quinta das Celebridades",
+      "A Ilha da Tentação",
+      "Casa dos Segredos",
+      "Big Brother 1 (TVI, 2000)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A final do primeiro Big Brother atingiu um pico de 73,7% de share e transformou a TVI na líder de audiências da televisão privada.",
+    "fonte": "TVI / Endemol Portugal / Marktest",
+    "factClusterId": "fc_tv_bigbrother2000_01"
+  },
+  {
+    "id": "TV_CLA_0013",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa de caça-talentos musicais da SIC nos anos 1990 (estreado em 1993 com a cabine de fumo mágica), apresentado por Catarina Furtado e depois Bárbara Guimarães («Chuva de Estrelas»), revelou cantores consagrados como Sara Tavares (vencedora como Whitney Houston) e João Pedro Pais?",
+    "opcoes": [
+      "Chuva de Estrelas (SIC)",
+      "Ídolos",
+      "The Voice Portugal",
+      "Operação Triunfo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Chuva de Estrelas foi o formato âncora da liderança inicial da SIC nos anos 1990 sob direção de Emídio Rangel.",
+    "fonte": "SIC / Endemol Portugal",
+    "factClusterId": "fc_tv_chuvadeestrelas1993_01"
+  },
+  {
+    "id": "TV_CLA_0014",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que concurso de cultura geral e perguntas das noites da RTP1, estreado em 2000 com apresentação de Carlos Cruz e mais tarde Jorge Gabriel, José Carlos Malato e Diogo Infante («Quem Quer Ser Milionário?»), oferecia o prémio máximo de 50 milhões de escudos (e depois 250.000 euros)?",
+    "opcoes": [
+      "O Jogo da Glória",
+      "Quem Quer Ser Milionário? (RTP1)",
+      "Sabe Mais Que Um Miúdo de 10 Anos?",
+      "Joker"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O programa popularizou os três ajudas: 50:50, Ajuda do Público e Chamada Telefónica.",
+    "fonte": "RTP / Sony Pictures Television",
+    "factClusterId": "fc_tv_quemquersermilionario_01"
+  },
+  {
+    "id": "TV_CLA_0015",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que concurso diário de final de tarde da RTP1 («O Preço Certo»), apresentado de forma carismática por Fernando Mendes desde setembro de 2003 (após as versões anteriores com Carlos Cruz e Nicolau Breyner), é o concurso diário de maior longevidade contínua da televisão portuguesa com a célebre «Montra Final» e o «Espetáculo!»?",
+    "opcoes": [
+      "A Roda da Sorte",
+      "Agora É Que São Elas",
+      "O Preço Certo (com Fernando Mendes)",
+      "Super Buéréré"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Mendes ultrapassou mais de 4.000 programas de O Preço Certo com liderança diária incontestada de audiências no horário das 19h.",
+    "fonte": "RTP1 / FremantleMedia Portugal",
+    "factClusterId": "fc_tv_oprecocerto_fernandomendes_01"
+  },
+  {
+    "id": "TV_CLA_0016",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa pioneiro de «Stand-up Comedy» ao vivo em teatros transmitido pela SIC a partir de 2003 («Levanta-te e Ri»), apresentado por Marco Horácio (com o personagem «Rouxinol Faduncho») e com Fernando Rocha, Aldo Lima, Nilton e Bruno Nogueira, popularizou a comédia de pé em Portugal?",
+    "opcoes": [
+      "Curto Circuito",
+      "Cómicos de Garagem",
+      "Sempre em Pé",
+      "Levanta-te e Ri (SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Levanta-te e Ri era gravado ao vivo de norte a sul do país com o mítico microfone no centro do palco.",
+    "fonte": "SIC / Arquivo SIC",
+    "factClusterId": "fc_tv_levantateri2003_01"
+  },
+  {
+    "id": "TV_CLA_0017",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que série infantojuvenil de fenómeno nacional da TVI estreada em 2003 («Morangos com Açúcar»), centrada no Colégio da Barra e nos verões da praia dos Rebeldes, lançou dezenas de atores e a banda musical D'ZRT (com Angélico Vieira, Paulo Vintém, Cifrão e Edmundo Vieira)?",
+    "opcoes": [
+      "Morangos com Açúcar (TVI)",
+      "Floribella",
+      "Uma Aventura",
+      "Riscos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Morangos com Açúcar prolongou-se por nove temporadas consecutivas no formato original, vendendo centenas de milhares de CD dos D'ZRT e 4Taste.",
+    "fonte": "TVI / Plural Entertainment",
+    "factClusterId": "fc_tv_morangoscomacucar2003_01"
+  },
+  {
+    "id": "TV_CLA_0018",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que telenovela e série musical infantojuvenil da SIC (2006-2007) protagonizada por Luciana Abreu («Floribella»), com canções contagiantes como «Pobres dos Ricos» e sapatilhas de atacadores coloridos, tornou-se um dos maiores fenómenos comerciais da televisão portuguesa?",
+    "opcoes": [
+      "Rebelde Way",
+      "Floribella (SIC)",
+      "Chiquititas",
+      "Jura"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O álbum da banda sonora de Floribella atingiu a marca de décupla platina vendendo mais de 200.000 cópias em Portugal.",
+    "fonte": "SIC / Teresa Donato / Cris Morena Group",
+    "factClusterId": "fc_tv_floribella2006_01"
+  },
+  {
+    "id": "TV_CLA_0019",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que série cómica de enorme sucesso da SIC nos anos 1990 («Médico de Família»), protagonizada por Fernando Luís (no papel do Dr. Diogo Melo), com Maria João Abreu (a empregada Lucinda), Rita Blanco e Henrique Mendes, adaptava um formato espanhol com grande afeto familiar?",
+    "opcoes": [
+      "Camilo & Filho Lda.",
+      "Nico d'Obra",
+      "Médico de Família (SIC)",
+      "Não Há Pai"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Médico de Família bateu recordes de audiência nas noites de terça-feira da SIC entre 1998 e 2000.",
+    "fonte": "SIC / Mirabolante / Globomedia",
+    "factClusterId": "fc_tv_medicodefamilia_sic_01"
+  },
+  {
+    "id": "TV_CLA_0020",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que histórico ator e comediante português (1939-2016), mestre do riso e das câmaras («Camilo de Oliveira»), protagonizou na SIC séries cómicas clássicas como «Camilo & Filho Lda.», «As Aventuras do Camilo», «A Loja do Camilo» e «Camilo em Sarilhos» com o eterno bordão «Ai meu Deus!»?",
+    "opcoes": [
+      "Nicolau Breyner",
+      "Raúl Solnado",
+      "Armando Cortez",
+      "Camilo de Oliveira (Séries do Camilo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Camilo de Oliveira fez dupla inesquecível com Nuno Melo (o filho Bubu em Camilo & Filho Lda.) nos anos 1990.",
+    "fonte": "SIC / Cinemateca Portuguesa",
+    "factClusterId": "fc_tv_camilodeoliveira_sic_01"
+  },
+  {
+    "id": "TV_CLA_0021",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa diário de reconciliações e reencontros familiares da SIC dos anos 1990 («Ponto de Encontro»), apresentado pelo carismático Henrique Mendes com a célebre frase «Onde quer que esteja, lembre-se que alguém procura por si!», uniu milhares de famílias separadas pela emigração e guerra colonial?",
+    "opcoes": [
+      "Ponto de Encontro (Henrique Mendes)",
+      "Perdoa-me",
+      "All You Need Is Love",
+      "Casos de Polícia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Ponto de Encontro liderou as noites de quarta-feira com emoção genuína e reencontros históricos em direto.",
+    "fonte": "SIC / Arquivo SIC",
+    "factClusterId": "fc_tv_pontodeencontro_sic_01"
+  },
+  {
+    "id": "TV_CLA_0022",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa da SIC apresentado por Alexandra Lencastre e Fátima Lopes («Perdoa-me»), onde os participantes pediam desculpa pública em estúdio oferecendo rosas brancas (se perdoados) ou pretas, parou o país nos primeiros anos da televisão privada em 1994?",
+    "opcoes": [
+      "Ponto de Encontro",
+      "Perdoa-me (1994)",
+      "All You Need Is Love",
+      "Confissões"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 'Perdoa-me' foi um dos maiores fenómenos do chamado 'reality show emotivo' dos anos 1990 em Portugal.",
+    "fonte": "SIC / Endemol Portugal",
+    "factClusterId": "fc_tv_perdoame1994_01"
+  },
+  {
+    "id": "TV_CLA_0023",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que talk-show e magazine cultural de referência da RTP2 («Visita Guiada»), da autoria e apresentação de Paula Moura Pinheiro desde 2011, percorre semanalmente o património cultural, arquitetura, museus e monumentos históricos de Portugal?",
+    "opcoes": [
+      "Câmara Clara",
+      "Sociedade Civil",
+      "Visita Guiada (Paula Moura Pinheiro)",
+      "Bastidores"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Visita Guiada já realizou mais de 300 episódios sobre os grandes tesouros do património histórico de Portugal.",
+    "fonte": "RTP2 / Direção-Geral do Património Cultural",
+    "factClusterId": "fc_tv_visitaguiada_rtp2_01"
+  },
+  {
+    "id": "TV_CLA_0024",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que noticiário diário da RTP1 («Telejornal»), estreado formalmente a 19 de outubro de 1959, é o programa de televisão mais antigo e de maior longevidade ininterrupta de toda a história da televisão em Portugal?",
+    "opcoes": [
+      "Jornal da Noite (SIC)",
+      "Jornal Nacional (TVI)",
+      "Jornal 2 (RTP2)",
+      "Telejornal (RTP1, desde 1959)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Telejornal da RTP tem sido a principal janela de informação de todos os grandes acontecimentos históricos de Portugal e do mundo.",
+    "fonte": "RTP / Museu da RTP",
+    "factClusterId": "fc_tv_telejornal1959_01"
+  },
+  {
+    "id": "TV_CLA_0025",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa diário das manhãs da RTP transmitido a partir dos estúdios do Monte da Virgem em Vila Nova de Gaia («Praça da Alegria»), estreado em 1995 com Manuel Luís Goucha e Anabela Mota Ribeiro (e mais tarde Jorge Gabriel e Sónia Araújo), é a referência das manhãs do Porto?",
+    "opcoes": [
+      "Praça da Alegria (RTP Gaia)",
+      "Você na TV!",
+      "Querida Júlia",
+      "Olhá Serra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praça da Alegria celebra as tradições, gastronomia e coletividades de todo o Norte e Centro de Portugal há quase três décadas.",
+    "fonte": "RTP Porto / Monte da Virgem",
+    "factClusterId": "fc_tv_pracadaalegria1995_01"
+  },
+  {
+    "id": "TV_CLA_0026",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que famoso talk-show matutino da TVI («Você na TV!»), que esteve no ar entre 2004 e 2020 apresentado pela emblemática dupla Manuel Luís Goucha e Cristina Ferreira, liderou as audiências das manhãs durante mais de uma década consecutiva?",
+    "opcoes": [
+      "Praça da Alegria",
+      "Você na TV! (Goucha e Cristina Ferreira)",
+      "Dois às 10",
+      "Dia Super"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O programa projetou Cristina Ferreira para o estatuto de uma das figuras mais influentes da comunicação social em Portugal.",
+    "fonte": "TVI / Marktest",
+    "factClusterId": "fc_tv_vocenatv_tvi_01"
+  },
+  {
+    "id": "TV_CLA_0027",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que talk-show de grande formato e entrevistas de Herman José nas noites de terça-feira da RTP1 nos anos 1990 («Parabéns»), recebia estrelas planetárias da música e do cinema (como Cher, Kylie Minogue e Omar Sharif) terminando sempre com a canção de aniversário ao piano?",
+    "opcoes": [
+      "Com a Verdade Me Enganas",
+      "Herman 98",
+      "Parabéns (Herman José)",
+      "Roda dos Milhões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Parabéns esteve no ar entre 1993 e 1996 e transformou Herman José no 'rei do talk-show' europeu.",
+    "fonte": "RTP Arquivos / Herman José Produções",
+    "factClusterId": "fc_tv_parabens_herman_01"
+  },
+  {
+    "id": "TV_CLA_0028",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que lendário programa infantojuvenil da RTP nos anos 1980 («Rua Sésamo»), versão portuguesa do formato infantil norte-americano Sesame Street com personagens icónicas como o «Poupas» (pássaro gigante amarelo interpretado por Luís Velez) e o «Ferrão» (morador do caixote do lixo), educou uma geração de crianças?",
+    "opcoes": [
+      "Jardim da Celeste",
+      "Buéréré",
+      "Fungagá da Bicharada",
+      "Rua Sésamo (RTP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A versão portuguesa da Rua Sésamo contava com atores como António Feio, Alexandra Lencastre e Fernando Luís ensinando letras e números com canções memoráveis.",
+    "fonte": "RTP Arquivos / Sesame Workshop",
+    "factClusterId": "fc_tv_ruasesamo_rtp_01"
+  },
+  {
+    "id": "TV_CLA_0029",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa infantil da RTP nos anos 1970 («Fungagá da Bicharada»), apresentado pelo compositor e cantor José Barata-Feyo e Júlio Isidro com canções infantis de animais e o boneco «Urso Tobias», foi um estrondoso sucesso discográfico e televisivo?",
+    "opcoes": [
+      "Fungagá da Bicharada (1976)",
+      "O Passeio dos Alegres",
+      "Arca de Noé",
+      "Brinca Brincando"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Fungagá da Bicharada deu origem a um dos discos infantis mais vendidos de sempre da música portuguesa.",
+    "fonte": "RTP Arquivos / Júlio Isidro",
+    "factClusterId": "fc_tv_fungagadabicharada_01"
+  },
+  {
+    "id": "TV_CLA_0030",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que histórico apresentador de rádio e televisão («Júlio Isidro»), carinhosamente chamado de «O Tio Júlio», criou programas de culto de domingo à tarde na RTP como «O Passeio dos Alegres» (com a Macaca Chita e o primeiro contacto do público com Herman José) e «Febre de Sábado de Manhã»?",
+    "opcoes": [
+      "Carlos Cruz",
+      "Júlio Isidro (Júlio Eduardo das Neves Isidro do Carmo)",
+      "Eládio Clímaco",
+      "Joaquim Furtado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Júlio Isidro tem mais de 60 anos ininterruptos de carreira na rádio e na televisão pública recebendo a Grã-Cruz da Ordem do Mérito.",
+    "fonte": "RTP / Presidência da República",
+    "factClusterId": "fc_tv_julioisidro_passeiodosalegres_01"
+  },
+  {
+    "id": "TV_CLA_0031",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa inovador da RTP2 nos anos 1980 e 1990 apresentado por Margarida Mercês de Mello («Agora Escolha»), permitia aos telespectadores ligarem em direto por telefone para votar entre duas séries ou desenhos animados para serem exibidos de imediato?",
+    "opcoes": [
+      "Juventude e Família",
+      "TV Rural",
+      "Agora Escolha (RTP2)",
+      "Cinemateca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Agora Escolha foi o primeiro programa verdadeiramente interativo da televisão portuguesa com recurso à votação telefónica em tempo real.",
+    "fonte": "RTP Arquivos / RTP2",
+    "factClusterId": "fc_tv_agoraescolha_rtp2_01"
+  },
+  {
+    "id": "TV_CLA_0032",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que lendário programa de informação agrícola e florestal da RTP («TV Rural»), apresentado pelo engenheiro Sousa Veloso de 1960 a 1990 (30 anos consecutivos no ar) com o inesquecível fecho «despeço-me com amizade até ao próximo programa», é o programa de autor mais longo da televisão portuguesa?",
+    "opcoes": [
+      "Terra Viva",
+      "Agro Terra",
+      "Portugal Rural",
+      "TV Rural (Engenheiro Sousa Veloso)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O engenheiro Sousa Veloso tornou-se uma das figuras mais queridas do país explicando a poda, as regas e as novidades agrárias aos agricultores.",
+    "fonte": "RTP Arquivos / Ministério da Agricultura",
+    "factClusterId": "fc_tv_tvrural_sousaveloso_01"
+  },
+  {
+    "id": "TV_CLA_0033",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa de tribunal simulado da SIC nos anos 1990 («O Juiz Decide»), apresentado pelo ator e jurista Ricardo Alberty (e depois pelo Dr. Ivo Rosa e António Monte Pereira), recriava casos reais de disputas de vizinhos e heranças com sentenças em estúdio?",
+    "opcoes": [
+      "O Juiz Decide (SIC)",
+      "Tribunal Popular",
+      "A Sentença",
+      "Casos Reais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Juiz Decide era um enorme sucesso nas tardes da SIC cativando o público pelas discussões emotivas e resolução jurídica dos conflitos.",
+    "fonte": "SIC / Arquivo SIC",
+    "factClusterId": "fc_tv_ojuizdecide_sic_01"
+  },
+  {
+    "id": "TV_CLA_0034",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que grande série documental da RTP sobre a Guerra do Ultramar («A Guerra»), realizada pelo jornalista Joaquim Furtado em 42 episódios com recurso a centenas de horas de imagens inéditas de combate e testemunhos de veteranos e guerrilheiros, é uma das maiores obras audiovisuais portuguesas?",
+    "opcoes": [
+      "Os Anos do Século",
+      "A Guerra (de Joaquim Furtado)",
+      "A Noite Mais Longa",
+      "Sons da Lusofonia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Joaquim Furtado trabalhou durante mais de nove anos na investigação exaustiva dos arquivos militares portugueses e africanos.",
+    "fonte": "RTP / Cinemateca Portuguesa",
+    "factClusterId": "fc_tv_aguerra_joaquimfurtado_01"
+  },
+  {
+    "id": "TV_CLA_0035",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa de jornalismo de investigação e denúncia social da SIC apresentado por Conceição Lino («E Se Fosse Consigo?»), que colocava atores a encenar situações de discriminação, racismo e assédio na via pública para testar as reações dos cidadãos anónimos, gerou amplo debate social?",
+    "opcoes": [
+      "Grande Reportagem",
+      "Casos de Polícia",
+      "E Se Fosse Consigo? (SIC)",
+      "Vidas Proibidas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O programa foi premiado pela Associação Portuguesa de Sociologia e pela Comissão para a Igualdade e Contra a Discriminação Racial.",
+    "fonte": "SIC / Grupo Impresa",
+    "factClusterId": "fc_tv_esefosseconsigo_sic_01"
+  },
+  {
+    "id": "TV_CLA_0036",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa de jornalismo de investigação dos sábados à noite na TVI apresentado por Alexandra Borges («Alexandra Borges / SOS 24»), abordava fraudes, tráfico humano e escândalos institucionais com reportagens exclusivas de impacto?",
+    "opcoes": [
+      "Repórter TVI",
+      "Sexta às 9",
+      "Linha da Frente",
+      "Alexandra Borges (TVI)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alexandra Borges recebeu múltiplos prémios de jornalismo de investigação dos Direitos Humanos pelas suas denúncias sociais.",
+    "fonte": "TVI / Arquivo TVI",
+    "factClusterId": "fc_tv_alexandraborges_tvi_01"
+  },
+  {
+    "id": "TV_CLA_0037",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa semanal de investigação jornalística da RTP1 («Sexta às 9»), coordenado e apresentado pela jornalista Sandra Felgueiras entre 2012 e 2021, revelou casos de corrupção, fraudes financeiras e escândalos de fundos europeus?",
+    "opcoes": [
+      "Sexta às 9 (Sandra Felgueiras)",
+      "Linha da Frente",
+      "Grande Reportagem",
+      "Olhar a Cidade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Sexta às 9 afirmava-se como um dos principais espaços de escrutínio do poder político e financeiro da televisão pública.",
+    "fonte": "RTP1 / Arquivo RTP",
+    "factClusterId": "fc_tv_sextaas9_sandra_01"
+  },
+  {
+    "id": "TV_CLA_0038",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que mítico programa infantil das manhãs de sábado e domingo da SIC nos anos 1990 («Buéréré»), apresentado pela cantora e apresentadora Ana Malhoa com o boneco «Boi Ré-Ré» e canções como «Come a Papa, Joana Maria», foi o programa favorito da pequenada?",
+    "opcoes": [
+      "Batatoon",
+      "Super Buéréré (Ana Malhoa)",
+      "Clube Disney",
+      "Espaço 4"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Buéréré e Super Buéréré encheram pavilhões e coliseus de norte a sul do país com espetáculos musicais ao vivo.",
+    "fonte": "SIC / Edições Valentim de Carvalho",
+    "factClusterId": "fc_tv_buerere_anamalhoa_01"
+  },
+  {
+    "id": "TV_CLA_0039",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que lendário programa de palhaços das tardes da TVI nos anos 1990 e 2000 («Batatoon»), protagonizado pelos palhaços «Batatinha» (António Branco) e «Companhia» (Paulo Guilherme) com o comando «Comando na mão, carrega no botão!», marcou a infância de milhões de portugueses?",
+    "opcoes": [
+      "Circo Alegria",
+      "Palhaço Croquete",
+      "Batatoon (Batatinha e Companhia)",
+      "A Cidade dos Desenhos Animados"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Batatoon transmitia desenhos animados clássicos (como Sailor Moon, Dragon Ball e Pokémon) com gincanas e jogos com crianças em estúdio.",
+    "fonte": "TVI / Arquivo TVI",
+    "factClusterId": "fc_tv_batatoon_tvi_01"
+  },
+  {
+    "id": "TV_CLA_0040",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa juvenil diário de culto da SIC Radical (no ar desde a inauguração do canal em abril de 2001, gravado em direto no Centro Comercial Colombo), onde se estrearam apresentadores como Rui Unas, Rita Andrade, Fernando Alvim, Teresa Tavares e João Manzarra, é o:",
+    "opcoes": [
+      "Cabaret da Coxa",
+      "Gato Fedorento",
+      "Alta Pressão",
+      "Curto Circuito (CC da SIC Radical)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Curto Circuito tornou-se a maior escola de novos apresentadores e talentos da televisão portuguesa moderna.",
+    "fonte": "SIC Radical / Grupo Impresa",
+    "factClusterId": "fc_tv_curtocircuito_sicradical_01"
+  },
+  {
+    "id": "TV_CLA_0041",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que talk-show irreverente e provocatório da SIC Radical nos anos 2000 («Cabaret da Coxa»), apresentado por Rui Unas com a colaboração do comentador de cinema Baixinho e atuações de comédia e música ao vivo, tornou-se programa de culto?",
+    "opcoes": [
+      "Cabaret da Coxa (Rui Unas)",
+      "Curto Circuito",
+      "5 Para a Meia-Noite",
+      "Templo dos Jogos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cabaret da Coxa rompeu tabus na televisão por cabo portuguesa com entrevistas descontraídas e humor desassombrado.",
+    "fonte": "SIC Radical / Arquivo Impresa",
+    "factClusterId": "fc_tv_cabaretdacoxa_01"
+  },
+  {
+    "id": "TV_CLA_0042",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que inovador «late-night talk show» da RTP2 (e mais tarde RTP1) estreado em 2009 com cinco apresentadores diferentes de segunda a sexta-feira («5 Para a Meia-Noite»), criado com Filomena Cautela, Fernando Alvim, Nilton, Pedro Fernandes e Luís Filipe Borges, é:",
+    "opcoes": [
+      "Herman 2010",
+      "5 Para a Meia-Noite (5PMN)",
+      "É a Vida Alvim",
+      "No Ar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A rubrica 'Pressão no Ar' com Filomena Cautela e Inês Lopes Gonçalves tornou-se o segmento mais viral do programa na internet.",
+    "fonte": "RTP / Arquivo RTP",
+    "factClusterId": "fc_tv_5paramianoite_01"
+  },
+  {
+    "id": "TV_CLA_0043",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que clássico programa da RTP transmitido desde 1964 com o objetivo de selecionar a canção representativa de Portugal no Festival Eurovisão da Canção («Festival RTP da Canção»), consagrou temas lendários como «Desfolhada Portuguesa» (Simone de Oliveira), «E Depois do Adeus» (Paulo de Carvalho) e «Amar pelos Dois» (Salvador Sobral)?",
+    "opcoes": [
+      "Festival da Canção da Figueira da Foz",
+      "Grande Prémio TV da Canção",
+      "Festival RTP da Canção",
+      "Chuva de Estrelas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Festival RTP da Canção é o mais prestigiado e duradouro evento musical televisivo de Portugal, celebrado anualmente há mais de seis décadas.",
+    "fonte": "RTP / UER (Eurovision)",
+    "factClusterId": "fc_tv_festivalrtpdacancao_01"
+  },
+  {
+    "id": "TV_CLA_0044",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que concurso de talentos culinários da RTP1 adaptado do formato britânico internacional («MasterChef Portugal»), com chefs conceituados como Kiko Martins, Miguel Rocha Vieira e Rui Paula como jurados avaliando cozinheiros amadores, popularizou a alta gastronomia?",
+    "opcoes": [
+      "Hell's Kitchen Portugal",
+      "Chefs de Elite",
+      "A Grande Cozinhada",
+      "MasterChef Portugal (RTP1 / TVI)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O MasterChef impulsionou a valorização dos produtos tradicionais portugueses com provas gravadas em aldeias históricas e quintas vinícolas.",
+    "fonte": "RTP / Shine Iberia / Banijay",
+    "factClusterId": "fc_tv_masterchefportugal_01"
+  },
+  {
+    "id": "TV_CLA_0045",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que programa gastronómico e de viagens da RTP apresentado pelo chef José Avillez («Combinações Improváveis» e «O Chefe Sou Eu»), e mais tarde pelos chefs Ljubomir Stanisic («Pesadelo na Cozinha» na TVI) e Henrique Sá Pessoa («Comtradição» no 24Kitchen), revolucionaram os programas de culinária?",
+    "opcoes": [
+      "Programas Gastronómicos de Autor (Avillez / Ljubomir / Sá Pessoa)",
+      "Prato do Dia",
+      "Cozinha Prática",
+      "Segredos de Família"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A televisão portuguesa dedicou canais temáticos e formatos em 'prime-time' à renovação da gastronomia tradicional.",
+    "fonte": "RTP / TVI / 24Kitchen",
+    "factClusterId": "fc_tv_programasculinaria_chefes_01"
+  },
+  {
+    "id": "TV_CLA_0046",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que clássico concurso de talentos vocais da RTP1 (versão portuguesa do formato internacional The Voice), apresentado por Catarina Furtado e Vasco Palmeirim («The Voice Portugal»), revelou grandes vozes da música portuguesa contemporânea?",
+    "opcoes": [
+      "Operação Triunfo",
+      "The Voice Portugal (RTP1)",
+      "Chuva de Estrelas",
+      "Ídolos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O The Voice Portugal conta com mentores como Mariza Liz, Anselmo Ralph, Mickael Carreira e António Zambujo com grande sucesso contínuo.",
+    "fonte": "RTP1 / Talpa Media / Shine Iberia",
+    "factClusterId": "fc_tv_thevoiceportugal_01"
+  },
+  {
+    "id": "TV_CLA_0047",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que concurso de talentos musicais com internato em academia transmitido pela RTP1 nos anos 2000 («Operação Triunfo»), apresentado por Catarina Furtado (e mais tarde Sílvia Alberto), consagrou cantoras como Sofia Escobar (estrela de musicais em Londres) e David Antunes?",
+    "opcoes": [
+      "Popstars",
+      "Academia de Estrelas",
+      "Operação Triunfo (OT Portugal)",
+      "Fama Show"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sofia Escobar foi finalista da 1.ª edição da OT e tornou-se a protagonista de O Fantasma da Ópera e West Side Story no West End londrino.",
+    "fonte": "RTP / Endemol Portugal",
+    "factClusterId": "fc_tv_operacaotriunfo2003_01"
+  },
+  {
+    "id": "TV_CLA_0048",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que magazine de sociedade e famosos dos domingos à tarde na SIC («Fama Show»), transmitido ininterruptamente desde março de 2008 com cinco apresentadoras conhecidas como as «Mulheres Fama» (Cláudia Vieira, Carolina Patrocínio, Iva Lamarão, etc.), é líder de horário?",
+    "opcoes": [
+      "Flash!",
+      "Jet 7",
+      "VIP TV",
+      "Fama Show (SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Fama Show é o magazine de lifestyle e passadeiras vermelhas de maior longevidade contínua da televisão privada portuguesa.",
+    "fonte": "SIC / Grupo Impresa",
+    "factClusterId": "fc_tv_famashow_sic_01"
+  },
+  {
+    "id": "TV_CLA_0049",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que clássica série infantil de fantoches da RTP dos anos 1970 («A Árvore dos Patafúrdios»), criada por Sérgio Godinho e com música e histórias poéticas para crianças, é considerada uma joia da televisão portuguesa?",
+    "opcoes": [
+      "A Árvore dos Patafúrdios (Sérgio Godinho)",
+      "O Amigo Mayor",
+      "Histórias com Pés e Cabeça",
+      "Planeta Limpo do Filipe Pinto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Sérgio Godinho compôs e cantou canções memoráveis que marcaram as emissões infantis do pós-25 de Abril.",
+    "fonte": "RTP Arquivos / Sérgio Godinho",
+    "factClusterId": "fc_tv_arvoredospatafurdios_01"
+  },
+  {
+    "id": "TV_CLA_0050",
+    "tema": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "pergunta": "Que série de grande impacto cómico da RTP1 nos anos 1990 («Nico d'Obra»), com Nicolau Breyner no papel do empreiteiro «Nico», Fernando Mendes e Rosa do Canto, satirizava com enorme brio os negócios da construção civil e as trapalhadas do quotidiano português?",
+    "opcoes": [
+      "Reformado e Mal Pago",
+      "Santos da Casa",
+      "Nico d'Obra (Nicolau Breyner e Fernando Mendes)",
+      "Bora Lá"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nico d'Obra esteve no ar entre 1993 e 1996 e originou a sequela 'Reformado e Mal Pago' com grande audiência na RTP1.",
+    "fonte": "RTP / Nicolau Breyner Produções",
+    "factClusterId": "fc_tv_nicodobra1993_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_ARQ_0001",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumento manuelino em Belém (Lisboa), encomendado por D. Manuel I em 1501 aos arquitetos Diogo de Boitaca e João de Castilho e financiado pelo «vintém da pimenta», acolhe os túmulos de Vasco da Gama e Luís de Camões e é Património Mundial da UNESCO?",
+    "opcoes": [
+      "Mosteiro dos Jerónimos (Mosteiro de Santa Maria de Belém)",
+      "Convento de Cristo",
+      "Mosteiro da Batalha",
+      "Mosteiro de Alcobaça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro dos Jerónimos é a obra-prima da arquitetura manuelina mundial, célebre pela sua abóbada em leque sem colunas de suporte central no transepto.",
+    "fonte": "DGPC / Mosteiro dos Jerónimos / UNESCO World Heritage",
+    "factClusterId": "fc_arq_jeronimos_01"
+  },
+  {
+    "id": "CULT_ARQ_0002",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que torre fortificada sobre o rio Tejo em Lisboa, projetada pelo arquiteto Francisco de Arruda entre 1514 e 1519 com influências mouriscas nas guaritas de vigia, é um dos maiores símbolos de Portugal na UNESCO?",
+    "opcoes": [
+      "Torre de São Sebastião",
+      "Torre de Belém (Torre de São Vicente de Belém)",
+      "Torre dos Clérigos",
+      "Torre de Palma"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Torre de Belém ostenta na sua fachada exterior a primeira representação esculpida em pedra de um rinoceronte na arte ocidental.",
+    "fonte": "DGPC / Torre de Belém / UNESCO",
+    "factClusterId": "fc_arq_torredebelem_01"
+  },
+  {
+    "id": "CULT_ARQ_0003",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumental mosteiro gótico e manuelino, mandado erguer por D. João I em cumprimento do voto a Santa Maria da Vitória pela vitória na Batalha de Aljubarrota em 1385, é o:",
+    "opcoes": [
+      "Mosteiro de Alcobaça",
+      "Mosteiro de Mafra",
+      "Mosteiro da Batalha (Mosteiro de Santa Maria da Vitória)",
+      "Mosteiro de Tibães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro da Batalha reúne a Capela do Fundador e as impressionantes Capelas Imperfeitas (Panteão de D. Duarte).",
+    "fonte": "DGPC / Mosteiro da Batalha / UNESCO",
+    "factClusterId": "fc_arq_batalha_01"
+  },
+  {
+    "id": "CULT_ARQ_0004",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que célebre elemento escultórico manuelino do Convento de Cristo em Tomar, esculpido entre 1510 e 1513 pelo mestre Diogo de Arruda, exibe cordas náuticas, nós, algas, boias e a Cruz de Cristo com a esfera armilar?",
+    "opcoes": [
+      "O Claustro dos Filipes",
+      "A Charola Templária",
+      "A Porta das Freiras",
+      "A Janela do Capítulo (Janela Manuelina de Tomar)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Janela do Capítulo de Tomar é o ícone supremo da iconografia decorativa dos Descobrimentos marítimos.",
+    "fonte": "Convento de Cristo / DGPC / UNESCO",
+    "factClusterId": "fc_arq_janeladocapitulotomar_01"
+  },
+  {
+    "id": "CULT_ARQ_0005",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que oratório medieval templário de planta octogonal fortificada no interior do Convento de Cristo em Tomar (século XII) foi inspirado na Rotunda do Santo Sepulcro de Jerusalém?",
+    "opcoes": [
+      "A Charola dos Templários (Charola de Tomar)",
+      "A Capela dos Ossos",
+      "A Capela do Fundador",
+      "A Ermida de Nossa Senhora da Conceição"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Charola permitia aos cavaleiros templários assistir à missa a cavalo no interior do recinto sagrado.",
+    "fonte": "Convento de Cristo / DGPC",
+    "factClusterId": "fc_arq_charolatomar_01"
+  },
+  {
+    "id": "CULT_ARQ_0006",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que mosteiro da Ordem de Cister, fundado em 1153 por D. Afonso Henriques no cumprimento de um voto na conquista de Santarém, possui a maior igreja de estilo gótico cisterciense de Portugal?",
+    "opcoes": [
+      "Mosteiro da Batalha",
+      "Mosteiro de Santa Maria de Alcobaça",
+      "Mosteiro de Lorvão",
+      "Mosteiro de Santa Cruz de Coimbra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de Alcobaça impressiona pelas suas naves austeras de pedra branca e pelos túmulos de D. Pedro I e Inês de Castro.",
+    "fonte": "DGPC / Mosteiro de Alcobaça / UNESCO",
+    "factClusterId": "fc_arq_alcobaca_01"
+  },
+  {
+    "id": "CULT_ARQ_0007",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que gigantesco complexo barroco mandado construir por D. João V pelo arquiteto Johann Friedrich Ludwig (Ludovice), possui 1.200 divisões, 2 carrilhões históricos com 98 sinos e uma biblioteca rococó de 36.000 livros guardados por morcegos?",
+    "opcoes": [
+      "Palácio Nacional de Queluz",
+      "Palácio Nacional da Ajuda",
+      "Palácio Nacional e Convento de Mafra",
+      "Palácio das Necessidades"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Palácio-Convento de Mafra inspirou a célebre obra «Memorial do Convento» de José Saramago e foi classificado Património Mundial da UNESCO em 2019.",
+    "fonte": "Palácio Nacional de Mafra / DGPC / UNESCO",
+    "factClusterId": "fc_arq_mafra_01"
+  },
+  {
+    "id": "CULT_ARQ_0008",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que palácio de conto de fadas no cimo da Serra de Sintra, criado pelo Rei-Consorte D. Fernando II e pelo engenheiro mineralogista Barão de Eschwege no século XIX, é o expoente máximo do Romantismo arquitetónico em Portugal?",
+    "opcoes": [
+      "Quinta da Regaleira",
+      "Palácio de Monserrate",
+      "Palácio Nacional de Sintra",
+      "Palácio Nacional da Pena"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Palácio da Pena combina elementos neo-manuelinos, neo-góticos, neo-mouriscos e germânicos em tons vibrantes de amarelo e vermelho.",
+    "fonte": "Parques de Sintra - Monte da Lua / UNESCO",
+    "factClusterId": "fc_arq_palaciodapena_01"
+  },
+  {
+    "id": "CULT_ARQ_0009",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que palácio real situado entre Lisboa e Sintra, construído no século XVIII como residência de verão de D. Pedro III e D. Maria I pelos arquitetos Mateus Vicente de Oliveira e Jean-Baptiste Robillion, é conhecido como o «Versalhes Português»?",
+    "opcoes": [
+      "Palácio Nacional de Queluz",
+      "Palácio de Mafra",
+      "Palácio de Belém",
+      "Palácio das Galveias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Palácio de Queluz destaca-se pela sua Sala dos Tronos, Pavilhão Robillion e o Canal dos Azulejos nos jardins geométricos.",
+    "fonte": "Parques de Sintra / Palácio Nacional de Queluz",
+    "factClusterId": "fc_arq_queluz_01"
+  },
+  {
+    "id": "CULT_ARQ_0010",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que torre sineira barroca de granito com 75 metros de altura e 225 degraus em espiral, projetada pelo arquiteto italiano Nicolau Nasoni no século XVIII, é o ex-líbris panorâmico do Porto?",
+    "opcoes": [
+      "Torre da Sé do Porto",
+      "Torre dos Clérigos (Igreja e Torre dos Clérigos)",
+      "Torre do Barjona",
+      "Torre de Pedro-Sem"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Torre dos Clérigos servia de guia aos marinheiros que navegavam no rio Douro e é Monumento Nacional desde 1910.",
+    "fonte": "Irmandade dos Clérigos / CMP / DGPC",
+    "factClusterId": "fc_arq_torredosclerigos_01"
+  },
+  {
+    "id": "CULT_ARQ_0011",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumental santuário barroco no alto do monte Espinho em Braga possui uma escadaria monumental em socalcos com fontes dos Cinco Sentidos e das Três Virtudes Teologais e o mais antigo funicular a contrapeso de água do mundo?",
+    "opcoes": [
+      "Santuário de Nossa Senhora do Sameiro",
+      "Santuário de Nossa Senhora da Peneda",
+      "Santuário do Bom Jesus do Monte (Património Mundial UNESCO)",
+      "Santuário de Santo António da Mixões da Serra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bom Jesus do Monte foi concebido por Carlos Amarante e inscrito na lista do Património Mundial da UNESCO em 2019.",
+    "fonte": "Confraria do Bom Jesus do Monte / UNESCO",
+    "factClusterId": "fc_arq_bomjesusdomonte_01"
+  },
+  {
+    "id": "CULT_ARQ_0012",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que templo romano do século I d.C. construído em mármore de Estremoz e granito no ponto mais alto da cidade de Évora («Templo Romano de Évora») foi durante séculos erradamente atribuído à deusa:",
+    "opcoes": [
+      "Deusa Vénus",
+      "Deusa Minerva",
+      "Deusa Ceres",
+      "Deusa Diana (Templo de Diana)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Templo Romano de Évora era dedicado ao culto imperial do Imperador Augusto e sobreviveu por ter sido incorporado no castelo medieval e matadouro municipal.",
+    "fonte": "Câmara Municipal de Évora / DGPC / UNESCO",
+    "factClusterId": "fc_arq_temploromanoevora_01"
+  },
+  {
+    "id": "CULT_ARQ_0013",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumento funerário em Lisboa (Igreja de Santa Engrácia), cuja construção demorou quase 300 anos dando origem à expressão popular «obras de Santa Engrácia», acolhe os restos mortais de heróis e presidentes de Portugal?",
+    "opcoes": [
+      "Panteão Nacional (Igreja de Santa Engrácia)",
+      "Basílica da Estrela",
+      "Igreja de São Vicente de Fora",
+      "Sé Patriarcal de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A imponente cúpula branca de Santa Engrácia foi concluída em 1966, albergando os túmulos de Almeida Garrett, Amália Rodrigues, Eusébio e Humberto Delgado.",
+    "fonte": "Panteão Nacional / DGPC",
+    "factClusterId": "fc_arq_panteaonacional_01"
+  },
+  {
+    "id": "CULT_ARQ_0014",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que ponte metálica em arco biarticulado sobre o rio Douro, inaugurada em 1886 e projetada pelo engenheiro belga Théophile Seyrig (sócio de Gustave Eiffel), liga a Ribeira do Porto a Vila Nova de Gaia?",
+    "opcoes": [
+      "Ponte Maria Pia",
+      "Ponte Luís I (Ponte D. Luís)",
+      "Ponte da Arrábida",
+      "Ponte do Infante"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ponte Luís I possui dois tabuleiros metálicos e é um dos monumentos de engenharia mais fotografados do mundo na UNESCO.",
+    "fonte": "Infraestruturas de Portugal / Porto e Norte / UNESCO",
+    "factClusterId": "fc_arq_pontedluis_01"
+  },
+  {
+    "id": "CULT_ARQ_0015",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que ponte ferroviária em arco de ferro forjado sobre o rio Douro, inaugurada em 1877 e projetada diretamente pelo próprio Gustave Eiffel e Théophile Seyrig, foi pioneira na engenharia europeia?",
+    "opcoes": [
+      "Ponte Luís I",
+      "Ponte de São João",
+      "Ponte Maria Pia",
+      "Ponte do Freixo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ponte Maria Pia permitiu a ligação ferroviária contínua entre Lisboa e o Porto até à sua desativação em 1991.",
+    "fonte": "Ordem dos Engenheiros / Monumento Nacional",
+    "factClusterId": "fc_arq_pontemariapia_01"
+  },
+  {
+    "id": "CULT_ARQ_0016",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que impressionante obra de engenharia hidráulica do século XVIII em Lisboa, com 35 arcos de pedra sobre o vale de Alcântara (o maior arco com 65 metros de altura), resistiu intacta ao Terramoto de 1755?",
+    "opcoes": [
+      "Aqueduto dos Pegões Altos (Tomar)",
+      "Aqueduto da Amoreira (Elvas)",
+      "Aqueduto de São Sebastião (Coimbra)",
+      "Aqueduto das Águas Livres"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Aqueduto das Águas Livres foi mandado construir por D. João V através do imposto do 'real de água' para abastecer a população de Lisboa.",
+    "fonte": "Museu da Água / EPAL / DGPC",
+    "factClusterId": "fc_arq_aguaslivres_01"
+  },
+  {
+    "id": "CULT_ARQ_0017",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que aqueduto monumental com mais de 8 km de extensão e até quatro ordens de arcos sobrepostos, mandado construir por D. Manuel I e D. João III para abastecer a praça-forte de Elvas, é o:",
+    "opcoes": [
+      "Aqueduto da Amoreira (Elvas)",
+      "Aqueduto das Águas Livres",
+      "Aqueduto dos Pegões",
+      "Aqueduto de Vila do Conde"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Aqueduto da Amoreira integra o conjunto de fortificações de Elvas classificado como Património Mundial da UNESCO.",
+    "fonte": "Município de Elvas / UNESCO",
+    "factClusterId": "fc_arq_aquedutodaamoreira_01"
+  },
+  {
+    "id": "CULT_ARQ_0018",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que fortaleza abaluartada barroca em forma de estrela no concelho de Elvas (século XVIII), considerada uma das mais perfeitas obras de arquitetura militar defensiva do mundo, é o:",
+    "opcoes": [
+      "Forte de Santa Luzia",
+      "Forte de Nossa Senhora da Graça (Forte Conde de Lippe)",
+      "Forte de São Neutel",
+      "Forte de Almada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Forte da Graça foi mandado construir pelo Marquês de Pombal com projeto do Conde de Schaumburg-Lippe e é Monumento Nacional na UNESCO.",
+    "fonte": "Município de Elvas / DGPC / UNESCO",
+    "factClusterId": "fc_arq_fortedagraca_01"
+  },
+  {
+    "id": "CULT_ARQ_0019",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que palácio e quinta enigmática em Sintra, construída no início do século XX pelo milionário António Augusto Carvalho Monteiro («Monteiro dos Milhões») com o cenógrafo Luigi Manini, acolhe o célebre «Poço Iniciático» subterrâneo?",
+    "opcoes": [
+      "Palácio de Monserrate",
+      "Palácio de Seteais",
+      "Quinta da Regaleira",
+      "Quinta da Penha Longa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Poço Iniciático da Regaleira possui uma escadaria espiral de nove patamares que alude aos nove círculos do Inferno da Divina Comédia de Dante.",
+    "fonte": "Fundação Cultursintra / UNESCO",
+    "factClusterId": "fc_arq_regaleira_01"
+  },
+  {
+    "id": "CULT_ARQ_0020",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que palácio romântico exótico em Sintra, decorado com influências mouriscas e indianas pelo milionário britânico Sir Francis Cook no século XIX com jardins botânicos de espécies raras, é o:",
+    "opcoes": [
+      "Palácio de Seteais",
+      "Quinta da Regaleira",
+      "Palácio da Pena",
+      "Palácio de Monserrate"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Palácio de Monserrate foi visitado por Lord Byron em 1809 e celebrado no seu poema 'Childe Harold's Pilgrimage'.",
+    "fonte": "Parques de Sintra - Monte da Lua / UNESCO",
+    "factClusterId": "fc_arq_monserrate_01"
+  },
+  {
+    "id": "CULT_ARQ_0021",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que edifício contemporâneo na Rotunda da Boavista no Porto, com formato poliédrico de cristal de betão branco projetado pelo arquiteto holandês Rem Koolhaas (OMA) para a Porto 2001 - Capital Europeia da Cultura, é a:",
+    "opcoes": [
+      "Casa da Música",
+      "Fundação de Serralves",
+      "Teatro Municipal do Porto",
+      "Pavilhão Rosa Mota"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Casa da Música é aclamada internacionalmente pela sua acústica perfeita na Sala Suggia e design arrojado.",
+    "fonte": "Fundação Casa da Música / Ordem dos Arquitectos",
+    "factClusterId": "fc_arq_casadamusica_01"
+  },
+  {
+    "id": "CULT_ARQ_0022",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que museu de arte contemporânea no Porto, situado num parque de 18 hectares com moradia Art Déco e o edifício do museu projetado por Álvaro Siza Vieira, é a:",
+    "opcoes": [
+      "Casa do Cinema Manoel de Oliveira",
+      "Fundação de Serralves (Museu de Arte Contemporânea de Serralves)",
+      "Museu Nacional Soares dos Reis",
+      "Casa Museu Fernando de Castro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Serralves é o museu de arte contemporânea mais visitado de Portugal, famoso também pelo seu 'Treetop Walk'.",
+    "fonte": "Fundação de Serralves / DGPC",
+    "factClusterId": "fc_arq_serralves_01"
+  },
+  {
+    "id": "CULT_ARQ_0023",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que emblemático pavilhão em Lisboa, projetado por Álvaro Siza Vieira para a Expo 98 com uma monumental pala de betão armado suspensa («folha de papel») sobre o rio Tejo, é o:",
+    "opcoes": [
+      "Pavilhão Atlântico (Altice Arena)",
+      "Oceanário de Lisboa",
+      "Pavilhão de Portugal",
+      "Pavilhão do Conhecimento"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A pala de betão suspensa com apenas 20 cm de espessura vence um vão livre de 67 metros suportada por cabos de aço.",
+    "fonte": "Universidade de Lisboa / Parque das Nações",
+    "factClusterId": "fc_arq_pavilhao_portugal_01"
+  },
+  {
+    "id": "CULT_ARQ_0024",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que aquário público de referência mundial no Parque das Nações em Lisboa, projetado pelo arquiteto americano Peter Chermayeff para a Expo 98, abriga um tanque central de 5 milhões de litros com tubarões, raias e peixes-lua?",
+    "opcoes": [
+      "Aquário Vasco da Gama",
+      "Estação de Biologia Marinha",
+      "Sea Life Porto",
+      "Oceanário de Lisboa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Oceanário de Lisboa foi eleito repetidas vezes o melhor aquário do mundo pelos utilizadores do TripAdvisor.",
+    "fonte": "Oceanário de Lisboa / Fundação Oceano Azul",
+    "factClusterId": "fc_arq_oceanario_01"
+  },
+  {
+    "id": "CULT_ARQ_0025",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que biblioteca barroca e joanina da Universidade de Coimbra (inaugurada em 1728 por D. João V), com tetos pintados em trompe-l'œil, estantes douradas em talha chinesa e uma colónia de morcegos protetores, é a:",
+    "opcoes": [
+      "Biblioteca Joanina da Universidade de Coimbra",
+      "Biblioteca Geral de Coimbra",
+      "Biblioteca de Mafra",
+      "Biblioteca da Academia das Ciências"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Biblioteca Joanina é considerada uma das mais deslumbrantes bibliotecas barrocas do mundo na UNESCO.",
+    "fonte": "Universidade de Coimbra / UNESCO World Heritage",
+    "factClusterId": "fc_arq_bibliotecajoanina_01"
+  },
+  {
+    "id": "CULT_ARQ_0026",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que ponte suspensa sobre o rio Tejo em Lisboa, inaugurada em 1966 como Ponte Salazar e rebaptizada após a Revolução dos Cravos com tabuleiro rodoferroviário, é a:",
+    "opcoes": [
+      "Ponte Vasco da Gama",
+      "Ponte 25 de Abril",
+      "Ponte Marechal Carmona",
+      "Ponte da Lezíria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ponte 25 de Abril é a mais longa ponte suspensa da Europa com pilares que descem mais de 80 metros abaixo do leito do rio.",
+    "fonte": "Infraestruturas de Portugal / Lusoponte",
+    "factClusterId": "fc_arq_ponte25deabril_01"
+  },
+  {
+    "id": "CULT_ARQ_0027",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que ponte sobre o estuário do rio Tejo inaugurada em março de 1998 para a Expo 98, com 12,3 km de extensão total, é uma das mais longas pontes da Europa?",
+    "opcoes": [
+      "Ponte 25 de Abril",
+      "Ponte Salgueiro Maia",
+      "Ponte Vasco da Gama",
+      "Ponte da Lezíria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ponte Vasco da Gama foi construída para desviar o trânsito da Grande Lisboa entre Sacavém e Montijo/Alcochete.",
+    "fonte": "Lusoponte / Infraestruturas de Portugal",
+    "factClusterId": "fc_arq_pontevascodagama_01"
+  },
+  {
+    "id": "CULT_ARQ_0028",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que catedral fortificada românica do século XII situada no coração de Coimbra é a única sé medieval portuguesa da época da Reconquista a manter quase intacta a sua estrutura original de fortaleza?",
+    "opcoes": [
+      "Sé Nova de Coimbra",
+      "Sé de Braga",
+      "Sé de Lamego",
+      "Sé Velha de Coimbra"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sé Velha de Coimbra possui um retábulo-mor gótico flamengo dourado esculpido em 1498 por Olivier de Gand.",
+    "fonte": "Diocese de Coimbra / DGPC",
+    "factClusterId": "fc_arq_sevelhacoimbra_01"
+  },
+  {
+    "id": "CULT_ARQ_0029",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que catedral gótica fortificada no Alentejo (a maior catedral medieval de Portugal), onde foram abençoadas as bandeiras da armada de Vasco da Gama em 1497, é a:",
+    "opcoes": [
+      "Sé Catedral de Évora (Basílica Sé de Nossa Senhora da Assunção)",
+      "Sé de Beja",
+      "Sé de Portalegre",
+      "Sé de Elvas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sé de Évora destaca-se pela sua cúpula-lanterna gótica cónica com escamas de pedra e pelo museu de arte sacra.",
+    "fonte": "Cabido da Sé de Évora / DGPC / UNESCO",
+    "factClusterId": "fc_arq_seedeevora_01"
+  },
+  {
+    "id": "CULT_ARQ_0030",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que capela quinhentista no interior da Igreja de São Francisco em Évora, construída por frades franciscanos com ossos e crânios humanos incrustados nas paredes e pilares, ostenta o aviso «Nós ossos que aqui estamos pelos vossos esperamos»?",
+    "opcoes": [
+      "Capela dos Ossos de Faro",
+      "Capela dos Ossos de Évora",
+      "Capela dos Ossos de Campo Maior",
+      "Capela dos Ossos de Monforte"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Capela dos Ossos de Évora foi concebida para transmitir uma mensagem filosófica franciscana sobre a transitoriedade da vida humana.",
+    "fonte": "Igreja de São Francisco de Évora / Turismo do Alentejo",
+    "factClusterId": "fc_arq_capeladosossosevora_01"
+  },
+  {
+    "id": "CULT_ARQ_0031",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumental estátua do Sagrado Coração de Jesus inaugurada em 1959 em Almada sobre uma falésia de 113 metros com vista panorâmica para Lisboa, inspirada no Cristo Redentor do Rio de Janeiro, é o:",
+    "opcoes": [
+      "Cristo Rei da Madeira",
+      "Cristo de Garajau",
+      "Santuário Nacional de Cristo Rei (Almada)",
+      "Monumento aos Combatentes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Cristo Rei de Almada foi erguido pelo episcopado português como agradecimento pela paz e neutralidade de Portugal durante a Segunda Guerra Mundial.",
+    "fonte": "Santuário Nacional de Cristo Rei / Patriarcado de Lisboa",
+    "factClusterId": "fc_arq_cristorei_01"
+  },
+  {
+    "id": "CULT_ARQ_0032",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que imponente monumento modernista em Belém (Lisboa), construído em betão e cantaria de calcário em 1960 por Cottinelli Telmo e Leopoldo de Almeida no V Centenário da Morte do Infante D. Henrique em forma de caravela estilizada, é o:",
+    "opcoes": [
+      "Torre de Belém",
+      "Monumento aos Mortos da Grande Guerra",
+      "Panteão Nacional",
+      "Padrão dos Descobrimentos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Padrão dos Descobrimentos reúne 33 figuras esculpidas lideradas pelo Infante D. Henrique na proa e tem aos seus pés a Rosa dos Ventos com o mapa-múndi das rotas.",
+    "fonte": "EGEAC / Padrão dos Descobrimentos / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_arq_padraodosdescobrimentos_01"
+  },
+  {
+    "id": "CULT_ARQ_0033",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que arco triunfal neoclássico monumental que une a Rua Augusta ao Terreiro do Paço em Lisboa, inaugurado em 1873 com esculturas de Célestin Bouglé e Victor Bastos celebrando Viriato, Vasco da Gama e Pombal, é o:",
+    "opcoes": [
+      "Arco da Rua Augusta (Arco Triunfal da Praça do Comércio)",
+      "Arco de São Bento",
+      "Arco das Portas da Cidade de Ponta Delgada",
+      "Arco do Castelo de São Jorge"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O miradouro do Arco da Rua Augusta oferece uma vista panorâmica de 360 graus sobre a Baixa Pombalina e o estuário do Tejo.",
+    "fonte": "Associação de Turismo de Lisboa (ATL) / Monumentos de Lisboa",
+    "factClusterId": "fc_arq_arcoruaaugusta_01"
+  },
+  {
+    "id": "CULT_ARQ_0034",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que elevador público de ferro forjado em estilo neogótico no centro de Lisboa, projetado pelo engenheiro Raul Mesnier de Ponsard (discípulo de Eiffel) e inaugurado em 1902 para ligar a Baixa ao Largo do Carmo, é o:",
+    "opcoes": [
+      "Ascensor da Glória",
+      "Elevador de Santa Justa (Elevador do Carmo)",
+      "Ascensor da Bica",
+      "Ascensor do Lavra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Elevador de Santa Justa funcionava originalmente a vapor e foi electrificado em 1907, sendo Monumento Nacional.",
+    "fonte": "Carris / DGPC / Monumentos de Lisboa",
+    "factClusterId": "fc_arq_santajusta_01"
+  },
+  {
+    "id": "CULT_ARQ_0035",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que histórica livraria no centro do Porto (Rua das Carmelitas), inaugurada em 1906 pelos irmãos Lello com uma deslumbrante escadaria vermelha em caracol, vitrais neo-góticos e fachada de Xavier Esteves, é a:",
+    "opcoes": [
+      "Livraria Bertrand",
+      "Livraria Ferin",
+      "Livraria Lello (Livraria Chardron)",
+      "Livraria Académica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Livraria Lello é considerada por publicações internacionais (como a Time e Lonely Planet) uma das mais belas livrarias do mundo.",
+    "fonte": "Livraria Lello / Município do Porto / DGPC",
+    "factClusterId": "fc_arq_livrarialello_01"
+  },
+  {
+    "id": "CULT_ARQ_0036",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que palácio neoclássico monumental do século XIX no centro histórico do Porto, construído pela Associação Comercial do Porto sobre as ruínas do Convento de São Francisco com o célebre «Salão Árabe» estucado a ouro, é o:",
+    "opcoes": [
+      "Palácio dos Carrancas",
+      "Palácio de Cristal",
+      "Palácio do Freixo",
+      "Palácio da Bolsa (Palácio da Associação Comercial do Porto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Salão Árabe do Palácio da Bolsa foi inspirado no Palácio de Alhambra em Granada e acolhe recepções de chefes de Estado na UNESCO.",
+    "fonte": "Associação Comercial do Porto / Palácio da Bolsa / UNESCO",
+    "factClusterId": "fc_arq_palaciodabolsa_01"
+  },
+  {
+    "id": "CULT_ARQ_0037",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que igreja do Porto classificada pela UNESCO possui o mais exuberante interior forrado a talha dourada barroca rococó de Portugal, com mais de 300 quilos de ouro aplicados nas suas esculturas e a icónica «Árvore de Jessé»?",
+    "opcoes": [
+      "Igreja de São Francisco do Porto",
+      "Igreja de Santa Clara",
+      "Igreja do Carmo",
+      "Sé Catedral do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Igreja de São Francisco do Porto é um dos mais valiosos templos gótico-barrocos da Europa.",
+    "fonte": "Ordem Terceira de São Francisco / DGPC / UNESCO",
+    "factClusterId": "fc_arq_saofranciscoporto_01"
+  },
+  {
+    "id": "CULT_ARQ_0038",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que solar barroco do século XVIII em Mateus (Vila Real), projetado por Nicolau Nasoni com um lago espelhado na fachada e jardins de buxo geométrico recortado, dá o nome ao famoso vinho Mateus Rosé?",
+    "opcoes": [
+      "Solar de Sezim",
+      "Palácio / Solar de Mateus (Casa de Mateus)",
+      "Paço de Calheiros",
+      "Solar dos Magalhães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Casa de Mateus é uma das residências nobres barrocas mais requintadas de Portugal, gerida pela Fundação da Casa de Mateus.",
+    "fonte": "Fundação da Casa de Mateus / DGPC",
+    "factClusterId": "fc_arq_casademateus_01"
+  },
+  {
+    "id": "CULT_ARQ_0039",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que antiga estação ferroviária no centro do Porto (inaugurada em 1916), com o seu imenso átrio decorado com mais de 20.000 azulejos azuis e brancos pintados por Jorge Colaço retratando episódios da história de Portugal, é a:",
+    "opcoes": [
+      "Estação de Campanhã",
+      "Estação do Rossio",
+      "Estação de São Bento (Porto)",
+      "Estação de Santa Apolónia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Estação de São Bento é considerada uma das mais belas estações ferroviárias do mundo pela imprensa internacional.",
+    "fonte": "Infraestruturas de Portugal / CMP / UNESCO",
+    "factClusterId": "fc_arq_estacaosaobento_01"
+  },
+  {
+    "id": "CULT_ARQ_0040",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que estação ferroviária no centro de Lisboa (na Praça dos Restauradores), com fachada de estilo neomanuelino e arcos em ferradura entrelaçados projetada por José Luís Monteiro em 1890, é a:",
+    "opcoes": [
+      "Estação de Santa Apolónia",
+      "Estação do Cais do Sodré",
+      "Estação do Oriente",
+      "Estação do Rossio (Estação Central de Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Estação do Rossio dá acesso ao túnel ferroviário de 2,6 km que liga o coração de Lisboa à Linha de Sintra.",
+    "fonte": "Infraestruturas de Portugal / DGPC",
+    "factClusterId": "fc_arq_estacaodorossio_01"
+  },
+  {
+    "id": "CULT_ARQ_0041",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que moderna gare intermodal no Parque das Nações em Lisboa, projetada pelo arquiteto e engenheiro espanhol Santiago Calatrava para a Expo 98 com uma cobertura metálica que evoca uma floresta de palmeiras de vidro e aço, é a:",
+    "opcoes": [
+      "Gare do Oriente (Estação do Oriente)",
+      "Estação de Sete Rios",
+      "Estação de Entrecampos",
+      "Terminal Fluvial de Belém"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Gare do Oriente foi galardoada com o Prémio Brunel de Arquitetura Ferroviária.",
+    "fonte": "Infraestruturas de Portugal / Calatrava Valls",
+    "factClusterId": "fc_arq_garedooriente_01"
+  },
+  {
+    "id": "CULT_ARQ_0042",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que teatro de ópera neoclássico no Chiado em Lisboa, inaugurado em 1793 pelo arquiteto José da Costa e Silva em honra de D. Carlota Joaquina e inspirado no Teatro alla Scala de Milão, é o:",
+    "opcoes": [
+      "Teatro Nacional D. Maria II",
+      "Teatro Nacional de São Carlos",
+      "Teatro da Trindade",
+      "Teatro Tivoli"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O São Carlos é a casa oficial da Orquestra Sinfónica Portuguesa e do Coro do Teatro Nacional de São Carlos.",
+    "fonte": "OPART / Teatro Nacional de São Carlos / DGPC",
+    "factClusterId": "fc_arq_saocarlos_01"
+  },
+  {
+    "id": "CULT_ARQ_0043",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que edifício neoclássico na Praça do Rossio em Lisboa, construído sobre as ruínas do antigo Palácio dos Estaus (sede da Inquisição) pelo arquiteto italiano Fortunato Lodi e inaugurado em 1846, é o:",
+    "opcoes": [
+      "Teatro São Carlos",
+      "Teatro Politeama",
+      "Teatro Nacional D. Maria II",
+      "Coliseu dos Recreios"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O frontão triangular do Teatro D. Maria II ostenta a estátua de Gil Vicente, pai do teatro português.",
+    "fonte": "Teatro Nacional D. Maria II / DGPC",
+    "factClusterId": "fc_arq_teatrodmariaii_01"
+  },
+  {
+    "id": "CULT_ARQ_0044",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que castelo templário edificado numa ilha rochosa no meio do rio Tejo no concelho de Vila Nova da Barquinha por Gualdim Pais em 1171 é um dos mais belos castelos medievais de Portugal:",
+    "opcoes": [
+      "Castelo de Belver",
+      "Castelo de Abrantes",
+      "Castelo de Montemor-o-Velho",
+      "Castelo de Almourol"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Almourol defendia a linha do Tejo e é acedido apenas de barco, imortalizado na literatura de cavalaria medieval.",
+    "fonte": "Município de Vila Nova da Barquinha / DGPC",
+    "factClusterId": "fc_arq_castelodealmourol_01"
+  },
+  {
+    "id": "CULT_ARQ_0045",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que castelo de fundação nobre no concelho de Santa Maria da Feira, com as suas quatro torres cônicas encimadas por coruchéus que evocam a arquitetura militar de transição entre a Idade Média e o Renascimento, é o:",
+    "opcoes": [
+      "Castelo de Santa Maria da Feira",
+      "Castelo de Ourem",
+      "Castelo de Lanhoso",
+      "Castelo de Montalegre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo da Feira acolhe anualmente a «Viagem Medieval em Terra de Santa Maria», a maior recriação histórica medieval da Península Ibérica.",
+    "fonte": "Município de Santa Maria da Feira / DGPC",
+    "factClusterId": "fc_arq_castelodafeira_01"
+  },
+  {
+    "id": "CULT_ARQ_0046",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que mosteiro beneditino em Coimbra, com um monumental claustro renascentista e onde se encontra o célebre Botafumeiro e os restos mortais de D. Teresa e D. Sancha, é o:",
+    "opcoes": [
+      "Mosteiro de Celas",
+      "Mosteiro do Lorvão (Penacova)",
+      "Mosteiro de Santa Clara-a-Velha",
+      "Mosteiro de Santo Tirso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Mosteiro do Lorvão possui o mais rico órgão barroco de tubos duplos de Portugal e acolhe tradições de doçaria conventual (Pastéis do Lorvão).",
+    "fonte": "Município de Penacova / DGPC",
+    "factClusterId": "fc_arq_mosteirodolorvao_01"
+  },
+  {
+    "id": "CULT_ARQ_0047",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que ruínas góticas monumentais de um mosteiro de clarissas na margem esquerda do rio Mondego em Coimbra, submerso durante séculos pelas cheias do rio e resgatado por uma premiada intervenção arqueológica contemporânea, é o:",
+    "opcoes": [
+      "Mosteiro de Santa Clara-a-Nova",
+      "Mosteiro de São Jerónimo",
+      "Mosteiro de Santa Clara-a-Velha (Coimbra)",
+      "Mosteiro de São Bento da Vitória"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de Santa Clara-a-Velha foi o local de sepultamento original da Rainha Santa Isabel antes da mudança para Santa Clara-a-Nova.",
+    "fonte": "DGPC / Mosteiro de Santa Clara-a-Velha",
+    "factClusterId": "fc_arq_santaclaraavelha_01"
+  },
+  {
+    "id": "CULT_ARQ_0048",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que igreja românica no concelho de Tarouca (fundada em 1144 por D. Afonso Henriques e pelo abade João Cirita) foi o primeiro templo da Ordem de Cister edificado na Península Ibérica:",
+    "opcoes": [
+      "Mosteiro de Salzedas",
+      "Mosteiro de Pombeiro",
+      "Mosteiro de Travanca",
+      "Mosteiro de São João de Tarouca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de São João de Tarouca abriga o túmulo de granito de D. Pedro Afonso, Conde de Barcelos, com baixos-relevos de caça ao javali.",
+    "fonte": "Museu de Lamego / Vale do Varosa / DGPC",
+    "factClusterId": "fc_arq_saojoaotarouca_01"
+  },
+  {
+    "id": "CULT_ARQ_0049",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que mosteiro beneditino em Roriz (Santo Tirso) do século XI e XII, classificado como Monumento Nacional, é um dos mais puros exemplares da arquitetura românica no norte de Portugal?",
+    "opcoes": [
+      "Igreja e Mosteiro de Roriz (Santo Tirso)",
+      "Mosteiro de São Salvador de Paço de Sousa",
+      "Mosteiro de Ferreira",
+      "Mosteiro de Cete"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A igreja de Santa Maria de Roriz integra a Rota do Românico dos vales do Sousa, Douro e Tâmega.",
+    "fonte": "Rota do Românico / Município de Santo Tirso",
+    "factClusterId": "fc_arq_mosteirororiz_01"
+  },
+  {
+    "id": "CULT_ARQ_0050",
+    "tema": "Cultura",
+    "subtema": "Arquitetura",
+    "pergunta": "Que monumental mosteiro em Santo Tirso fundado em 978 por D. Unisco Godiniz e São Rosendo, reconstruído no barroco com projeto de Frei João Turriano, é a casa-mãe dos monges beneditinos em Portugal?",
+    "opcoes": [
+      "Mosteiro de Tibães",
+      "Mosteiro da Serra do Pilar",
+      "Mosteiro de São Bento de Santo Tirso",
+      "Mosteiro de Singeverga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de São Bento de Santo Tirso alberga hoje a Câmara Municipal e o Museu Internacional de Escultura Contemporânea (MIEC) projetado por Siza Vieira e Souto de Moura.",
+    "fonte": "Município de Santo Tirso / DGPC",
+    "factClusterId": "fc_arq_saobentostotirso_01"
+  }
+]

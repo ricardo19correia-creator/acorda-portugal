@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_MED_0001",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre guerreiro medieval («Vímara Peres») liderou a presúria cristã da cidade de Portucale (Porto) em 868, fundando o primeiro Condado Portucalense sob vassalagem do rei Afonso III das Astúrias?",
+    "opcoes": [
+      "Vímara Peres",
+      "Hermenegildo Guterres",
+      "Gonçalo Mendes",
+      "Mumadona Dias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vímara Peres fundou também o burgo fortificado de Vimaranis (atual cidade de Guimarães) no século IX.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / Crónicas Medievais",
+    "factClusterId": "fc_med_vimaraperes868_01"
+  },
+  {
+    "id": "HIST_MED_0002",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que poderosa condessa medieval do século X («Condessa Mumadona Dias»), viúva do conde Hermenegildo Gonçalves, fundou o Mosteiro de São Mamede e mandou construir o Castelo de Guimarães em 958 para proteger os monges dos ataques normandos e mouros?",
+    "opcoes": [
+      "Condessa D. Teresa",
+      "Condessa Mumadona Dias",
+      "Condessa D. Urraca",
+      "D. Flâmula"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O testamento de Mumadona Dias de 959 é um dos mais preciosos documentos medievais preservados na Torre do Tombo.",
+    "fonte": "Torre do Tombo / Paço dos Duques de Guimarães",
+    "factClusterId": "fc_med_mumadonadias958_01"
+  },
+  {
+    "id": "HIST_MED_0003",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que batalha medieval decisiva travada no Campo de São Mamede junto a Guimarães a 24 de junho de 1128 («A Primeira Tarde Portuguesa») viu o jovem D. Afonso Henriques derrotar as forças da sua mãe D. Teresa e dos nobres galegos de Fernão Peres de Trava?",
+    "opcoes": [
+      "Batalha de Ourique",
+      "Batalha de Cerneja",
+      "Batalha de São Mamede (1128)",
+      "Batalha de Valdevez"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Após a Batalha de São Mamede, D. Afonso Henriques assumiu plenamente o governo do Condado Portucalense e fixou a capital em Coimbra.",
+    "fonte": "Academia Portuguesa da História / Município de Guimarães",
+    "factClusterId": "fc_med_saomamede1128_01"
+  },
+  {
+    "id": "HIST_MED_0004",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que lendária batalha medieval travada a 25 de julho de 1139 («Batalha de Ourique») viu D. Afonso Henriques derrotar cinco reis mouros aliados, após a qual foi aclamado Rei pelos seus guerreiros e incorporou as cinco quinas no brasão de armas de Portugal?",
+    "opcoes": [
+      "Batalha de São Mamede",
+      "Batalha de Santarém",
+      "Batalha de Trancoso",
+      "Batalha de Ourique (1139)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A vitória de Ourique consolidou a passagem de Condado a Reino e deu origem ao 'Mito de Ourique' da consagração divina da nação.",
+    "fonte": "Torre do Tombo / Crónica dos Godos / Duarte Galvão",
+    "factClusterId": "fc_med_ourique1139_01"
+  },
+  {
+    "id": "HIST_MED_0005",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que torneio medieval de cavalaria travado no vale do rio Vez em 1140 («Recontro de Valdevez» ou «Torneio de Arcos»), onde os cavaleiros de D. Afonso Henriques venceram os cavaleiros de Afonso VII de Leão sem derramamento de sangue, evitou uma guerra total?",
+    "opcoes": [
+      "Recontro de Valdevez (1140)",
+      "Torneio de Zamora",
+      "Batalha de Cerneja",
+      "Batalha da Salga"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Recontro de Valdevez abriu as negociações diplomáticas que culminaram no Tratado de Zamora em 1143.",
+    "fonte": "Município de Arcos de Valdevez / Crónica de D. Afonso Henriques",
+    "factClusterId": "fc_med_valdevez1140_01"
+  },
+  {
+    "id": "HIST_MED_0006",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Em que ano de 1147 D. Afonso Henriques liderou o audacioso assalto noturno às muralhas de Santarém com 250 cavaleiros fiéis e a ajuda de Mem Ramires, conquistando a principal praça-forte moura do Ribatejo?",
+    "opcoes": [
+      "1140",
+      "15 de Março de 1147 (Conquista de Santarém)",
+      "1154",
+      "1168"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Conquista de Santarém foi narrada na célebre obra 'De Expugnatione Scalabis' e abriu caminho ao cerco de Lisboa no mesmo ano.",
+    "fonte": "BNP / De Expugnatione Scalabis / Município de Santarém",
+    "factClusterId": "fc_med_santarem1147_01"
+  },
+  {
+    "id": "HIST_MED_0007",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que cerco medieval decisivo de mais de três meses (de julho a outubro de 1147) permitiu a D. Afonso Henriques conquistar Lisboa aos mouros com o apoio naval e militar de cruzados ingleses, alemães e flamengos da Segunda Cruzada?",
+    "opcoes": [
+      "O Cerco de Évora",
+      "O Cerco de Silves",
+      "O Cerco de Lisboa de 1147",
+      "O Cerco de Coimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O cruzado inglês Raúl escreveu o relato em testemunho direto 'De Expugnatione Lyxbonensi'.",
+    "fonte": "Corpus Christi College (Cambridge) / Torre do Tombo",
+    "factClusterId": "fc_med_cercodelisboa1147_01"
+  },
+  {
+    "id": "HIST_MED_0008",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que cruzado e sacerdote inglês participante no Cerco de Lisboa em 1147 foi sagrado como o primeiro Bispo de Lisboa após a Reconquista cristã da cidade pelo arcebispo de Braga D. João Peculiar?",
+    "opcoes": [
+      "D. Soeiro Viegas",
+      "D. Estêvão de Lisboa",
+      "D. Bernardo de Coimbra",
+      "D. Gilberto de Hastings"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "D. Gilberto de Hastings organizou a diocese de Lisboa e introduziu o rito litúrgico de Salisbúria na Sé de Lisboa.",
+    "fonte": "Patriarcado de Lisboa / Sé de Lisboa",
+    "factClusterId": "fc_med_gilbertohastings_01"
+  },
+  {
+    "id": "HIST_MED_0009",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que lendário Mestre dos Cavaleiros Templários em Portugal fundou o Castelo de Tomar em 1160 e o Castelo de Almourol em 1171, resistindo com sucesso ao cerco de seis dias do califa almóada Abu Yaqub Yusuf em 1190?",
+    "opcoes": [
+      "D. Gualdim Pais",
+      "D. Paio Peres Correia",
+      "D. Estêvão Martins",
+      "D. Lourenço Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gualdim Pais desenhou o sistema de muralhas e torre de menagem dos castelos templários portugueses com técnicas militares aprendidas na Terra Santa.",
+    "fonte": "Convento de Cristo / Município de Tomar",
+    "factClusterId": "fc_med_gualdimpais_01"
+  },
+  {
+    "id": "HIST_MED_0010",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que documento régio medieval medieval («Carta de Foral») outorgava aos moradores de uma povoação («vizinhos» e «homens-bons») a sua autonomia jurídica, limites territoriais, direitos económicos e garantias concelhias?",
+    "opcoes": [
+      "Carta de Doação",
+      "Carta de Foral (ou Foral Medieval)",
+      "Bula Papal",
+      "Livro de Posturas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Foral era o diploma fundamental que criava os Concelhos medievais portugueses, libertando o povo do jugo senhorial direto.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / História do Direito Português",
+    "factClusterId": "fc_med_foraisconcelhos_01"
+  },
+  {
+    "id": "HIST_MED_0011",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Em que cidade portuguesa e em que ano reuniu D. Afonso III as históricas Cortes onde, pela primeira vez na história de Portugal, tiveram assento os procuradores eleitos pelos Concelhos e pelo Povo ao lado do Clero e da Nobreza?",
+    "opcoes": [
+      "Cortes de Coimbra de 1211",
+      "Cortes de Lisboa de 1285",
+      "Cortes de Leiria de 1254",
+      "Cortes de Santarém de 1300"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Cortes de Leiria de 1254 consagraram a representação parlamentar do Terceiro Estado (o Povo) nos destinos políticos do Reino.",
+    "fonte": "Assembleia da República / Município de Leiria",
+    "factClusterId": "fc_med_cortesleiria1254_01"
+  },
+  {
+    "id": "HIST_MED_0012",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que grande assembleia das Cortes realizada no Mosteiro de Santa Cruz de Coimbra em abril de 1385 aclamou solenemente o Mestre de Avis como D. João I Rei de Portugal após a demonstração jurídica do Doutor João das Regras?",
+    "opcoes": [
+      "Cortes de Lisboa de 1383",
+      "Cortes de Tomar de 1384",
+      "Cortes de Leiria de 1386",
+      "Cortes de Coimbra de 1385"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Cortes de Coimbra de 1385 estabeleceram o princípio da soberania nacional fundamentada na vontade expressa do povo e das cidades.",
+    "fonte": "Fernão Lopes / Crónica de D. João I / Torre do Tombo",
+    "factClusterId": "fc_med_cortescoimbra1385_01"
+  },
+  {
+    "id": "HIST_MED_0013",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que cronista medieval régio (c. 1385-1460), nomeado Guarda-Mor da Torre do Tombo por D. Duarte em 1418 e autor das Crónicas de D. Pedro, D. Fernando e D. João I, é considerado o «Pai da História Portuguesa»?",
+    "opcoes": [
+      "Fernão Lopes",
+      "Gomes Eanes de Zurara",
+      "Rui de Pina",
+      "Garcia de Resende"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fernão Lopes revolucionou a historiografia europeia ao colocar o povo comum ('a arraia-miúda') como protagonista motor dos acontecimentos históricos.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / BNP",
+    "factClusterId": "fc_med_fernaolopes_01"
+  },
+  {
+    "id": "HIST_MED_0014",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que batalha travada no Alentejo a 6 de abril de 1384 viu D. Nuno Álvares Pereira aplicar pela primeira vez a tática militar do quadrado apeado com besteiros, derrotando uma força castelhana muito superior sem sofrer uma única baixa?",
+    "opcoes": [
+      "Batalha de Aljubarrota",
+      "Batalha dos Atoleiros (Fronteira, 1384)",
+      "Batalha de Trancoso",
+      "Batalha de Valverde"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A vitória dos Atoleiros no concelho de Fronteira provou a eficácia da tática defensiva de infantaria e consagrou a liderança militar de Nuno Álvares Pereira.",
+    "fonte": "Município de Fronteira / Centro Interpretativo da Batalha dos Atoleiros",
+    "factClusterId": "fc_med_atoleiros1384_01"
+  },
+  {
+    "id": "HIST_MED_0015",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que heroica figura popular feminina da tradição de Aljubarrota (1385) teria morto sete soldados castelhanos fugitivos que se esconderam no interior do seu forno de pão com uma pá de forno de madeira?",
+    "opcoes": [
+      "Maria da Fonte",
+      "D. Mécia Lopes",
+      "Brites de Almeida («A Padeira de Aljubarrota»)",
+      "Guiomar de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Brites de Almeida tornou-se o símbolo folclórico da bravura e da determinação popular dos portugueses na defesa da sua terra.",
+    "fonte": "Município de Alcobaça / Tradições Populares Portuguesas",
+    "factClusterId": "fc_med_padeiradealjubarrota_01"
+  },
+  {
+    "id": "HIST_MED_0016",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que documento régio do século XIII instituído por D. Afonso II e D. Afonso III («Inquirições Gerais») consistia em inquéritos rigorosos em todo o Reino para identificar e recuperar propriedades e direitos régios usurpados pela Igreja e fidalgos?",
+    "opcoes": [
+      "Confirmações Régias",
+      "Livro das Posturas",
+      "Tombos das Comendas",
+      "Inquirições Gerais (1220, 1258 e 1288)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As Inquirições Gerais de D. Afonso II (1220) e D. Afonso III (1258) são a mais valiosa fonte estatística e toponímica sobre o Portugal medieval.",
+    "fonte": "Arquivo Nacional da Torre do Tombo",
+    "factClusterId": "fc_med_inquiricoesgerais_01"
+  },
+  {
+    "id": "HIST_MED_0017",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que importante lei agrária promulgada por D. Fernando I nas Cortes de Évora em 1375 («Lei das Sesmarias») obrigava os proprietários a cultivar as terras abandonadas sob pena de confisco para combater a crise de fome após a Peste Negra?",
+    "opcoes": [
+      "Lei das Sesmarias (1375)",
+      "Lei do Trabalho",
+      "Regimento das Terras",
+      "Foral dos Almocreves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O sistema das Sesmarias foi mais tarde adaptado com enorme impacto na colonização agrícola das ilhas atlânticas e do Brasil.",
+    "fonte": "Torre do Tombo / História Económica de Portugal",
+    "factClusterId": "fc_med_sesmarias1375_01"
+  },
+  {
+    "id": "HIST_MED_0018",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que imponente cintura de muralhas medievais com 77 torres e 38 portas e postigos foi mandada construir em Lisboa por D. Fernando I entre 1373 e 1375 para proteger a capital dos ataques castelhanos?",
+    "opcoes": [
+      "Muralha Moura (Cerca Velha)",
+      "Muralha Fernandina de Lisboa (Cerca Fernandina)",
+      "Muralha Pombalina",
+      "Muralha Joanina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Muralha Fernandina foi erguida em tempo recorde de dois anos e resistiu ao cerco castelhano de cinco meses em 1384.",
+    "fonte": "Museu de Lisboa / DGPC",
+    "factClusterId": "fc_med_muralhafernandina_01"
+  },
+  {
+    "id": "HIST_MED_0019",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que troço monumental de muralha medieval no Porto com o seu caminho de ronda e ameias sobre o rio Douro (junto aos Guindais), mandado edificar por D. Afonso IV e concluído por D. Fernando I, é a:",
+    "opcoes": [
+      "Muralha Primitiva dos Suevos",
+      "Cerca Romana",
+      "Muralha Fernandina do Porto (Muralha Gótica)",
+      "Muralha do Barredo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Muralha Fernandina do Porto integra o Centro Histórico classificado pela UNESCO e oferece um dos miradouros mais deslumbrantes da cidade.",
+    "fonte": "Câmara Municipal do Porto / UNESCO",
+    "factClusterId": "fc_med_muralhaporto_01"
+  },
+  {
+    "id": "HIST_MED_0020",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que ordem religiosa militar fundada em Castela mas autónoma em Portugal a partir do século XII teve a sua sede no Castelo de Avis no Alentejo, dando o nome à 2.ª Dinastia régia de Portugal?",
+    "opcoes": [
+      "Ordem de Cristo",
+      "Ordem de Santiago",
+      "Ordem de Malta",
+      "Ordem Militar de São Bento de Avis (Ordem de Avis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. João I era o Grão-Mestre da Ordem de Avis quando foi aclamado rei de Portugal nas Cortes de Coimbra de 1385.",
+    "fonte": "Município de Avis / Ordem de Avis",
+    "factClusterId": "fc_med_ordemdeavis_01"
+  },
+  {
+    "id": "HIST_MED_0021",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que mosteiro fortificado gótico no concelho de Matosinhos («Mosteiro de Leça do Balio») foi a sede principal dos Cavaleiros da Ordem Militar dos Hospitalários (Ordem de São João de Jerusalém / Ordem de Malta) em Portugal?",
+    "opcoes": [
+      "Mosteiro de Santa Maria de Leça do Balio",
+      "Mosteiro de Roriz",
+      "Mosteiro de Pombeiro",
+      "Mosteiro de Cete"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Em Leça do Balio celebrou-se o polémico casamento do Rei D. Fernando com D. Leonor Teles em 1372.",
+    "fonte": "Fundação Livraria Lello / Município de Matosinhos / DGPC",
+    "factClusterId": "fc_med_lecadobalio_01"
+  },
+  {
+    "id": "HIST_MED_0022",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre e militar templário português do século XII, companheiro de armas de D. Afonso Henriques («D. Fuás Roupinho»), foi o primeiro Almirante das armadas portuguesas e protagonista do Milagre da Nazaré em 1182?",
+    "opcoes": [
+      "Manuel Pessanha",
+      "D. Fuás Roupinho",
+      "Gualdim Pais",
+      "Martim Moniz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Fuás Roupinho comandou a primeira frota naval cristã contra os corsários mouros no Cabo Espichel e na costa de Faro.",
+    "fonte": "Marinha Portuguesa / Confraria da Nazaré",
+    "factClusterId": "fc_med_fuasroupinho_01"
+  },
+  {
+    "id": "HIST_MED_0023",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que experiente navegador genovês foi contratado em 1317 por D. Dinis para organizar profissionalmente a Marinha Portuguesa com o título hereditário de 1.º Almirante de Portugal, trazendo consigo 20 pilotos e mestres de navio lígures?",
+    "opcoes": [
+      "António da Noli",
+      "Lanzarotto Malocello",
+      "Manuel Pessanha (Emanuele Pessagno)",
+      "Bartolomeu Perestrelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A contratação de Manuel Pessanha lançou as bases científicas e navais que tornaram Portugal pioneiro nas navegações de alto mar.",
+    "fonte": "Academia de Marinha / Museu de Marinha",
+    "factClusterId": "fc_med_manuelpessanha1317_01"
+  },
+  {
+    "id": "HIST_MED_0024",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que terrível epidemia pandémica atingiu Portugal no outono de 1348 durante o reinado de D. Afonso IV, vitimando entre um terço e metade de toda a população do país e desorganizando a agricultura medieval?",
+    "opcoes": [
+      "A Cólera Morbus",
+      "A Gripe Espanhola",
+      "A Varíola",
+      "A Peste Negra (Peste Bubónica de 1348)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A mortandade causada pela Peste Negra provocou escassez brutal de mão-de-obra rural e inflação de preços em todo o reino.",
+    "fonte": "Torre do Tombo / História da Saúde em Portugal",
+    "factClusterId": "fc_med_pestenegra1348_01"
+  },
+  {
+    "id": "HIST_MED_0025",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre rainha consorte («D. Leonor Teles» ou «A Flor de Altamira»), casada com D. Fernando I e amante do conde galego João Fernandes Andeiro, assumiu a regência do Reino em outubro de 1383 desencadeando a fúria popular em Lisboa?",
+    "opcoes": [
+      "D. Leonor Teles de Meneses",
+      "D. Inês de Castro",
+      "D. Beatriz de Gusmão",
+      "D. Filipa de Lencastre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O assassinato do Conde Andeiro no Paço Régio pelo Mestre de Avis e Álvaro Pais a 6 de dezembro de 1383 iniciou o levantamento revolucionário popular.",
+    "fonte": "Fernão Lopes (Crónica de D. Fernando) / BNP",
+    "factClusterId": "fc_med_leonorteles1383_01"
+  },
+  {
+    "id": "HIST_MED_0026",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que burguês lisboeta e antigo chanceler («Álvaro Pais»), figura de grande prestígio popular, montou a cavalo pelas ruas de Lisboa a 6 de dezembro de 1383 gritando «Acudam ao Mestre que o matam no Paço!», mobilizando o povo para a revolução?",
+    "opcoes": [
+      "João das Regras",
+      "Álvaro Pais",
+      "Giraldo Geraldes",
+      "Egas Moniz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A multidão lisboeta acorreu em massa armada ao Paço do Castelo, cercando o bispo e expulsando os apoiantes castelhanos.",
+    "fonte": "Fernão Lopes / Crónica de D. João I",
+    "factClusterId": "fc_med_alvaropais1383_01"
+  },
+  {
+    "id": "HIST_MED_0027",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que infante medieval português, filho de D. Pedro I e D. Inês de Castro («Infante D. João»), era um dos principais pretendentes legítimos ao trono na crise de 1383 antes de ser desqualificado juridicamente por João das Regras?",
+    "opcoes": [
+      "Infante D. Dinis de Cinfães",
+      "Infante D. Fernando",
+      "Infante D. João (filho de Inês de Castro)",
+      "Infante D. Afonso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "João das Regras argumentou que Inês de Castro fora executada sem casamento público válido com D. Pedro e que o Infante D. João lutava pelas tropas de Castela.",
+    "fonte": "Fernão Lopes / Torre do Tombo",
+    "factClusterId": "fc_med_infantedjoaocastro_01"
+  },
+  {
+    "id": "HIST_MED_0028",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre guerreiro medieval («Egas Moniz, o Aio»), aio e conselheiro de D. Afonso Henriques, deslocou-se com a sua família de corda ao pescoço a Toledo em 1130 para oferecer a sua vida ao rei Afonso VII pela quebra de um juramento?",
+    "opcoes": [
+      "Martim Moniz",
+      "Soeiro Mendes da Maia",
+      "Gonçalo Mendes",
+      "Egas Moniz («O Aio»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O gesto sublime de lealdade e honra de Egas Moniz comoveu o imperador Afonso VII que lhe perdoou a vida e o enviou de volta com honras.",
+    "fonte": "Mosteiro de Paço de Sousa / Crónica dos Reis",
+    "factClusterId": "fc_med_egasmonizoaio_01"
+  },
+  {
+    "id": "HIST_MED_0029",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que cenóbio beneditino no concelho de Penafiel («Mosteiro de São Salvador de Paço de Sousa») abriga o monumental túmulo românico esculpido com os baixos-relevos de Egas Moniz e da sua viagem de penitência a Toledo?",
+    "opcoes": [
+      "Mosteiro de Paço de Sousa (Penafiel)",
+      "Mosteiro de Roriz",
+      "Mosteiro de Ferreira",
+      "Mosteiro de Cete"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O túmulo de Egas Moniz em Paço de Sousa é uma das obras-primas da escultura funerária românica medieval portuguesa.",
+    "fonte": "Rota do Românico / DGPC",
+    "factClusterId": "fc_med_tumuloegasmoniz_01"
+  },
+  {
+    "id": "HIST_MED_0030",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que concelho medieval do centro de Portugal (Vila Nova de Ourém) acolhe o túmulo gótico monumental em mármore de D. Afonso, 4.º Conde de Ourém e neto de D. Nuno Álvares Pereira, esculpido no século XV?",
+    "opcoes": [
+      "Castelo de Tomar",
+      "Castelo e Vila Medieval de Ourém",
+      "Castelo de Pombal",
+      "Castelo de Leiria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Paço dos Condes de Ourém e a Cripta da Colegiada constituem um dos mais belos conjuntos medievais fortificados do país.",
+    "fonte": "Município de Ourém / Fundação da Casa de Bragança",
+    "factClusterId": "fc_med_ouremmedieval_01"
+  },
+  {
+    "id": "HIST_MED_0031",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que importante compilação jurídica genealógica redigida no século XIV pelo Conde D. Pedro de Barcelos (filho natural de D. Dinis) é o mais rico repositório de lendas medievais, linhagens e história de Portugal?",
+    "opcoes": [
+      "Livro Velho de Linhagens",
+      "Livro do Deão",
+      "Livro de Linhagens do Conde D. Pedro (Terceiro Livro de Linhagens)",
+      "Nobiliário da Ajuda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Livro de Linhagens do Conde D. Pedro é o monumento cimeiro da prosa medieval e nobiliárquica galaico-portuguesa.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / BNP",
+    "factClusterId": "fc_med_livrodelinhagens_01"
+  },
+  {
+    "id": "HIST_MED_0032",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que comunidade religiosa e étnica medieval em Portugal vivia em bairros próprios («Judiarias») sob proteção da Coroa com juízes e rabinos próprios, contribuindo decisivamente para a medicina, cartografia, astronomia e finanças régias?",
+    "opcoes": [
+      "Comunidade Moçárabe",
+      "Comunidade Franca",
+      "Comunidade Flamengo-Genovesa",
+      "Comunidade Judaica Medieval (Judeus Portugueses / Sefarditas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Judiaria de Lisboa (em Alfama e na Pedreira), de Castelo de Vide, Tomar, Belmonte e Trancoso eram centros de enorme dinamismo intelectual.",
+    "fonte": "Rede de Judiarias de Portugal / Museu Judaico de Belmonte",
+    "factClusterId": "fc_med_judiariasmedievais_01"
+  },
+  {
+    "id": "HIST_MED_0033",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que sinagoga medieval do século XV no centro histórico de Tomar (Rua Dr. Joaquim Jacinto), construída em planta quadrangular com quatro colunas góticas e 12 arcos, é o mais bem preservado templo judaico pré-expulsão em Portugal?",
+    "opcoes": [
+      "Sinagoga Medieval de Tomar (Museu Luso-Hebraico Abraão Zacuto)",
+      "Sinagoga de Castelo de Vide",
+      "Sinagoga Sahar Hassamaim de Ponta Delgada",
+      "Sinagoga Kadoorie do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sinagoga de Tomar foi classificada como Monumento Nacional em 1921 e preserva vasos de barro nas paredes para melhorar a acústica.",
+    "fonte": "DGPC / Museu Luso-Hebraico / Município de Tomar",
+    "factClusterId": "fc_med_sinagogatomar_01"
+  },
+  {
+    "id": "HIST_MED_0034",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que bairros segregados extramuros nas cidades portuguesas medievais após a Reconquista («Mourarias») acolhiam a população muçulmana livre («mudéjares») que mantinha o culto islâmico e a sua atividade artesanal e agrícola?",
+    "opcoes": [
+      "Judiarias",
+      "Mourarias Medievais",
+      "Albergarias",
+      "Gafarias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Mouraria de Lisboa e a Mouraria de Évora preservaram oleiros, pedreiros e hortelões que influenciaram a arquitetura mudéjar portuguesa.",
+    "fonte": "Museu de Lisboa / Centro de Estudos Árabes",
+    "factClusterId": "fc_med_mourariasmedievais_01"
+  },
+  {
+    "id": "HIST_MED_0035",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que instituição hospitalar medieval de isolamento e assistência caritativa, construída obrigatoriamente fora das muralhas das cidades portuguesas, cuidava dos doentes com lepra («lázaros» ou «gafos»)?",
+    "opcoes": [
+      "Misericórdias",
+      "Termas Régias",
+      "Gafarias (ou Leprosarias Medievais)",
+      "Hospitais Militares"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As gafarias de Santarém, Lisboa e Coimbra eram sustentadas por legados pios e administradas pelas ordens religiosas.",
+    "fonte": "História da Medicina Portuguesa / Dicionário de História Medieval",
+    "factClusterId": "fc_med_gafariasmedievais_01"
+  },
+  {
+    "id": "HIST_MED_0036",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que corporações medievais de mesteirais e artesãos urbanos (sapateiros, alfaiates, ferreiros, carpinteiros) organizavam os seus ofícios com graus de aprendiz, oficial e mestre sob a invocação de um santo padroeiro?",
+    "opcoes": [
+      "Ordens Militares",
+      "Confrarias de Nobres",
+      "Comendas",
+      "Guildas e Corporações de Ofício (Mesteres e Casa dos Vinte e Quatro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Casa dos Vinte e Quatro de Lisboa congregava os 24 juízes do povo eleitos pelos 12 mesteres mecânicos da cidade.",
+    "fonte": "Arquivo Municipal de Lisboa / História do Trabalho",
+    "factClusterId": "fc_med_mesterescasavinteequatro_01"
+  },
+  {
+    "id": "HIST_MED_0037",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que importante rota medieval de transporte e comércio itinerante no interior de Portugal era percorrida por mercadores e tropeiros («almocreves») que conduziam recuas de mulas e machos carregados de sal, azeite, panos e peixe seco?",
+    "opcoes": [
+      "Rotas dos Almocreves",
+      "Rotas Fluviais",
+      "Rotas das Caravelas",
+      "Estrada Romana de Antonino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os almocreves ligavam o litoral piscatório às serras do interior através de calçadas medievais e pontes de pedra.",
+    "fonte": "Etnografia Portuguesa / Dicionário Histórico",
+    "factClusterId": "fc_med_almocreves_01"
+  },
+  {
+    "id": "HIST_MED_0038",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que lendário fidalgo medieval e alcaide-mor de Bragança e Campo Maior no século XIV («Martim Freitas») recusou entregar o Castelo de Celorico da Beira ao usurpador D. Afonso III enquanto não viu pessoalmente o cadáver de D. Sancho II no túmulo de Toledo?",
+    "opcoes": [
+      "Gonçalo Mendes da Maia",
+      "Martim Freitas (Alcaide de Celorico da Beira)",
+      "Mem Ramires",
+      "Soeiro Mendes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Martim Freitas colocou as chaves do castelo na mão fria do rei defunto D. Sancho II antes de prestar vassalagem ao novo monarca.",
+    "fonte": "Crónica de Portugal de 1419 / Município de Celorico da Beira",
+    "factClusterId": "fc_med_martimfreitas_01"
+  },
+  {
+    "id": "HIST_MED_0039",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre rainha medieval de Aragão (1271-1336), casada com D. Dinis e sepultada no Mosteiro de Santa Clara-a-Nova em Coimbra («A Rainha Santa Isabel»), é a protagonista do célebre «Milagre das Rosas»?",
+    "opcoes": [
+      "Santa Joana Princesa",
+      "Santa Beatriz da Silva",
+      "Santa Isabel de Aragão (A Rainha Santa)",
+      "Rainha D. Mafalda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ao ser interpelada pelo rei sobre o que levava escondido no regaço para dar aos pobres, a rainha respondeu 'São rosas, senhor!', transformando-se os pães em rosas frescas em pleno inverno.",
+    "fonte": "Mosteiro de Santa Clara-a-Nova / Confraria da Rainha Santa / Vaticano",
+    "factClusterId": "fc_med_rainhasantaisabel_01"
+  },
+  {
+    "id": "HIST_MED_0040",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que importante batalha travada em Espanha a 30 de outubro de 1340 («Batalha do Salado») viu as forças conjuntas de D. Afonso IV de Portugal e Afonso XI de Castela esmagarem o exército marinida de Benamerim, pondo fim à ameaça muçulmana no estreito de Gibraltar?",
+    "opcoes": [
+      "Batalha de Navas de Tolosa",
+      "Batalha de Ourique",
+      "Batalha de Toro",
+      "Batalha do Salado (1340)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Afonso IV ganhou a alcunha de 'O Bravo' pelo heroísmo demonstrado no campo de batalha do Salado ao comando da ala portuguesa.",
+    "fonte": "Torre do Tombo / Crónica de D. Afonso IV",
+    "factClusterId": "fc_med_salado1340_01"
+  },
+  {
+    "id": "HIST_MED_0041",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que quinta histórica e romântica na margem esquerda do rio Mondego em Coimbra, com a sua Fonte dos Amores e Fonte das Lágrimas, foi o cenário do trágico assassinato de D. Inês de Castro a 7 de janeiro de 1355?",
+    "opcoes": [
+      "Quinta das Lágrimas (Coimbra)",
+      "Quinta do Pinheiro",
+      "Quinta da Regaleira",
+      "Quinta da Cardiga"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As algas avermelhadas da Fonte das Lágrimas na Quinta das Lágrimas inspiraram a lenda poética de que o sangue de Inês ainda tinge as pedras.",
+    "fonte": "Fundação Inês de Castro / Quinta das Lágrimas / Luís de Camões",
+    "factClusterId": "fc_med_quintadaslagrimas_01"
+  },
+  {
+    "id": "HIST_MED_0042",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que três conselheiros régios de D. Afonso IV (Pero Coelho, Álvaro Gonçalves e Diogo Lopes Pacheco) executaram a sentença de morte de D. Inês de Castro no Paço de Santa Clara em Coimbra em 1355?",
+    "opcoes": [
+      "Fernão Teles, Nuno Álvares e Martim Moniz",
+      "Pero Coelho, Álvaro Gonçalves e Diogo Lopes Pacheco",
+      "João Fernandes, Álvaro Pais e Gomes Freire",
+      "Gaston Cruz, Lopo Vaz e Afonso Sanches"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Mais tarde, tornado rei, D. Pedro I mandou arrancar o coração pelo peito a Pero Coelho e pelas costas a Álvaro Gonçalves em Santarém.",
+    "fonte": "Fernão Lopes (Crónica de D. Pedro) / BNP",
+    "factClusterId": "fc_med_assassinosdeines_01"
+  },
+  {
+    "id": "HIST_MED_0043",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que castelo medieval alentejano sobre uma escarpa granítica (no concelho de Marvão), fundado no século IX pelo rebelde muladi Ibn Marwan («Ibn Marwan Al-Yilliquí»), é uma das mais espetaculares fortalezas de montanha da Península Ibérica?",
+    "opcoes": [
+      "Castelo de Castelo de Vide",
+      "Castelo de Montalvão",
+      "Castelo de Marvão",
+      "Castelo de Alter do Chão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marvão conserva a sua cisterna medieval colossal e muralhas vertiginosas sobre a planície da raia alentejana.",
+    "fonte": "Município de Marvão / DGPC",
+    "factClusterId": "fc_med_castelodemarvao_01"
+  },
+  {
+    "id": "HIST_MED_0044",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que castelo gótico fortificado nas margens do rio Mondego (concelho de Montemor-o-Velho) foi o maior recinto fortificado do Baixo Mondego e residência das infantas D. Teresa e D. Mafalda no século XIII?",
+    "opcoes": [
+      "Castelo de Soure",
+      "Castelo da Lousã",
+      "Castelo de Penela",
+      "Castelo de Montemor-o-Velho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Montemor-o-Velho foi o local onde D. Afonso IV e os seus conselheiros se reuniram em janeiro de 1355 para decidir o destino de Inês de Castro.",
+    "fonte": "Município de Montemor-o-Velho / DGPC",
+    "factClusterId": "fc_med_montemorovelho_01"
+  },
+  {
+    "id": "HIST_MED_0045",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que importante castelo templário edificado em 1111 na confluência do rio Anços com o rio Arunca (concelho de Soure) foi o primeiro castelo doado por D. Teresa aos Cavaleiros Templários na Península Ibérica?",
+    "opcoes": [
+      "Castelo de Soure",
+      "Castelo de Tomar",
+      "Castelo de Almourol",
+      "Castelo de Pombal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Soure serviu de baluarte avançado na linha defensiva do Mondego e acolheu a primeira comenda templária portuguesa.",
+    "fonte": "Município de Soure / Rota dos Castelos",
+    "factClusterId": "fc_med_castelodesoure_01"
+  },
+  {
+    "id": "HIST_MED_0046",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que castelo medieval no Minho (concelho de Guimarães), fundado pela Condessa Mumadona Dias no século X e onde viveu o Conde D. Henrique com D. Teresa, é o símbolo primordial da fundação de Portugal («O Berço da Nação»)?",
+    "opcoes": [
+      "Castelo de Lanhoso",
+      "Castelo de Guimarães",
+      "Castelo de Santa Maria da Feira",
+      "Castelo de Lindoso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Torre de Menagem do Castelo de Guimarães e a Capela românica de São Miguel acolheram os primeiros anos de vida de D. Afonso Henriques.",
+    "fonte": "DGPC / Paço dos Duques e Castelo de Guimarães",
+    "factClusterId": "fc_med_casteloguimaraes_01"
+  },
+  {
+    "id": "HIST_MED_0047",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que infante sábio de Avis («O Infante D. Pedro»), 1.º Duque de Coimbra e Regente do Reino durante a menoridade de D. Afonso V, promulgou a «Ordenação de D. Duarte» e viajou pelas principais cortes da Europa?",
+    "opcoes": [
+      "Infante D. Henrique",
+      "Infante D. João",
+      "Infante D. Pedro (Duque de Coimbra / O Infante das Sete Partidas)",
+      "Infante D. Fernando"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Infante D. Pedro foi um estadista de grande estatura intelectual humanista, falecido no trágico confronto de Alfarrobeira em 1449.",
+    "fonte": "Mosteiro da Batalha / Academia Portuguesa da História",
+    "factClusterId": "fc_med_infantedpedro_coimbra_01"
+  },
+  {
+    "id": "HIST_MED_0048",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que trágico confronto militar travado a 20 de maio de 1449 junto ao ribeiro de Alfarrobeira (Vialonga, Vila Franca de Xira) opôs as forças régias de D. Afonso V e do Duque de Bragança ao ex-Regente Infante D. Pedro, que aí perdeu a vida?",
+    "opcoes": [
+      "A Batalha de Toro",
+      "A Batalha de Aljubarrota",
+      "A Batalha de Valverde",
+      "A Batalha de Alfarrobeira (1449)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A morte do Infante D. Pedro em Alfarrobeira consolidou a ascensão da Casa de Bragança na corte de D. Afonso V.",
+    "fonte": "Município de Vila Franca de Xira / BNP",
+    "factClusterId": "fc_med_alfarrobeira1449_01"
+  },
+  {
+    "id": "HIST_MED_0049",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que nobre castelo medieval na Beira Baixa (concelho de Belmonte), solar da família de nobres navegadores de Pedro Álvares Cabral construído no século XIII com a sua imponente torre de menagem, é o:",
+    "opcoes": [
+      "Castelo de Belmonte",
+      "Castelo de Sabugal",
+      "Castelo de Sortelha",
+      "Castelo de Linhares"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Belmonte e a Igreja de Santiago guardam o Panteão dos Cabrais com as cinzas de Pedro Álvares Cabral.",
+    "fonte": "Município de Belmonte / DGPC",
+    "factClusterId": "fc_med_castelobelmonte_01"
+  },
+  {
+    "id": "HIST_MED_0050",
+    "tema": "História",
+    "subtema": "Idade Média",
+    "pergunta": "Que castelo medieval raiano no concelho do Sabugal (Beira Interior) possui a única e colossal torre de menagem de planta pentagonal de cinco lados de toda a arquitetura militar de Portugal?",
+    "opcoes": [
+      "Castelo de Almeida",
+      "Castelo de Castelo Rodrigo",
+      "Castelo do Sabugal (Castelo das Cinco Quinas)",
+      "Castelo de Pinhel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Torre pentagonal de 28 metros do Sabugal foi mandada erguer por D. Dinis após a integração do Riba-Côa no Tratado de Alcanizes.",
+    "fonte": "Município do Sabugal / DGPC",
+    "factClusterId": "fc_med_castelosabugal_01"
+  }
+]

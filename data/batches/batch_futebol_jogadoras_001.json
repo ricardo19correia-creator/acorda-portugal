@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_JOG_0001",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que jovem internacional portuguesa e avançada formada no SL Benfica protagonizou no verão de 2024 a transferência mais cara da história do futebol feminino português ao assinar pelo FC Barcelona?",
+    "opcoes": [
+      "Kika Nazareth (Francisca Nazareth)",
+      "Jéssica Silva",
+      "Telma Encarnação",
+      "Andreia Jacinto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Kika Nazareth transferiu-se para o FC Barcelona por um valor recorde após conquistar múltiplos títulos de águia ao peito.",
+    "fonte": "FPF / FC Barcelona / UEFA",
+    "factClusterId": "fc_jog_kikanazareth_01"
+  },
+  {
+    "id": "FUT_JOG_0002",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada madeirense marcou a 27 de julho de 2023, frente ao Vietname em Hamilton (Nova Zelândia), o primeiro golo de sempre de Portugal numa fase final de um Campeonato do Mundo Feminino de Futebol?",
+    "opcoes": [
+      "Kika Nazareth",
+      "Telma Encarnação",
+      "Jéssica Silva",
+      "Diana Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Telma Encarnação marcou logo aos 7 minutos na vitória histórica de Portugal por 2-0 sobre o Vietname no Mundial de 2023.",
+    "fonte": "FIFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_jog_telmaencarnacao_01"
+  },
+  {
+    "id": "FUT_JOG_0003",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa-central internacional converteu o penálti histórico aos 90+4 minutos frente aos Camarões em Hamilton no play-off intercontinental, garantindo o inédito apuramento de Portugal para o Mundial 2023?",
+    "opcoes": [
+      "Diana Gomes",
+      "Sílvia Rebelo",
+      "Carole Costa",
+      "Catarina Amado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O golo de penálti com frieza absoluta de Carole Costa selou o triunfo por 2-1 e o apuramento histórico das Navegadoras.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_jog_carolecosta_01"
+  },
+  {
+    "id": "FUT_JOG_0004",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que capitã do Sporting CP e internacional portuguesa é a recordista absoluta de internacionalizações por qualquer seleção portuguesa sénior feminina (mais de 170 jogos)?",
+    "opcoes": [
+      "Dolores Silva",
+      "Carla Couto",
+      "Edite Fernandes",
+      "Ana Borges"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ana Borges venceu a Women's Super League inglesa pelo Chelsea antes de regressar a Portugal para capitanear o Sporting CP.",
+    "fonte": "FPF / Sporting CP / Chelsea FC",
+    "factClusterId": "fc_jog_anaborges_01"
+  },
+  {
+    "id": "FUT_JOG_0005",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que virtuosa extremo portuguesa, com passagens pelo Lyon (onde venceu a Champions League feminina), Kansas City e SL Benfica, é célebre pelos seus dribles desconcertantes?",
+    "opcoes": [
+      "Jéssica Silva",
+      "Kika Nazareth",
+      "Vanessa Marques",
+      "Suzane Pires"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Jéssica Silva foi a primeira futebolista portuguesa a vencer a UEFA Women's Champions League, ao serviço do Olympique Lyonnais em 2020.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_jog_jessicasilva_01"
+  },
+  {
+    "id": "FUT_JOG_0006",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que experiente média e capitã da Seleção Nacional, com passagens pela Bundesliga alemã (Duisburg e Jena) e SC Braga, é o pêndulo tático das Navegadoras com mais de 150 internacionalizações?",
+    "opcoes": [
+      "Tatiana Pinto",
+      "Dolores Silva",
+      "Andreia Faria",
+      "Fátima Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Dolores Silva é uma das líderes mais respeitadas do balneário português, capitaneando a equipa no Euro 2017, Euro 2022 e Mundial 2023.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_jog_doloressilva_01"
+  },
+  {
+    "id": "FUT_JOG_0007",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que selecionador nacional comanda a Seleção Portuguesa de Futebol Feminino desde 2014, tendo liderado a equipa às históricas presenças no Euro 2017, Euro 2022 e Mundial 2023?",
+    "opcoes": [
+      "Jorge Braz",
+      "José Paisana",
+      "Francisco Neto",
+      "Mário Narciso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Francisco Neto é o arquiteto do crescimento desportivo e afirmação internacional do futebol feminino português.",
+    "fonte": "Federação Portuguesa de Futebol / UEFA",
+    "factClusterId": "fc_jog_francisconeto_01"
+  },
+  {
+    "id": "FUT_JOG_0008",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada portuguesa marcou a 23 de julho de 2017 em Roterdão o primeiro golo de sempre de Portugal num Campeonato da Europa Feminino, na vitória por 2-1 sobre a Escócia?",
+    "opcoes": [
+      "Ana Leite",
+      "Edite Fernandes",
+      "Carla Couto",
+      "Carolina Mendes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Carolina Mendes abriu o marcador aos 27 minutos no histórico primeiro triunfo luso num Europeu Feminino na Holanda.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_jog_carolinamendes_01"
+  },
+  {
+    "id": "FUT_JOG_0009",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que pioneira lendária do futebol feminino em Portugal e antiga capitã da Seleção marcou 29 golos em 145 internacionalizações entre 1993 e 2012?",
+    "opcoes": [
+      "Carla Couto",
+      "Edite Fernandes",
+      "Paula Cristina",
+      "Bárbara Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Carla Couto foi a grande referência pioneira dos primórdios do futebol feminino em Portugal com a camisola do 1.º de Dezembro.",
+    "fonte": "FPF / Sindicato dos Jogadores",
+    "factClusterId": "fc_jog_carlacouto_01"
+  },
+  {
+    "id": "FUT_JOG_0010",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube de Sintra (S. Pedro de Sintra) dominou de forma absoluta o futebol feminino português ao vencer 12 Campeonatos Nacionais consecutivos entre 2000 e 2012?",
+    "opcoes": [
+      "CF Benfica (Fofó)",
+      "Sociedade União 1.º de Dezembro",
+      "Boavista FC",
+      "Clube de Albergaria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 1.º de Dezembro foi a primeira grande potência do futebol feminino nacional, representando Portugal na Liga dos Campeões da UEFA.",
+    "fonte": "FPF / SU 1.º de Dezembro",
+    "factClusterId": "fc_jog_primeirodedezembro_01"
+  },
+  {
+    "id": "FUT_JOG_0011",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que média internacional portuguesa transferiu-se do Sporting CP para o Levante e posteriormente para o Atlético de Madrid e Brighton na Women's Super League?",
+    "opcoes": [
+      "Fátima Pinto",
+      "Andreia Jacinto",
+      "Tatiana Pinto",
+      "Joana Marchão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tatiana Pinto é uma das futebolistas portuguesas mais cotadas nas principais ligas europeias.",
+    "fonte": "FPF / Liga F / FA WSL",
+    "factClusterId": "fc_jog_tatianapinto_01"
+  },
+  {
+    "id": "FUT_JOG_0012",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que guarda-redes internacional portuguesa defendeu a baliza das Navegadoras no Mundial 2023, com passagens pelo Servette (Suíça) e Guingamp (França)?",
+    "opcoes": [
+      "Patrícia Morais",
+      "Rute Costa",
+      "Sierra Cota-Yarde",
+      "Inês Pereira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Inês Pereira brilhou com exibições magistrais frente aos Países Baixos e Estados Unidos no Mundial da Nova Zelândia.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_jog_inespereira_01"
+  },
+  {
+    "id": "FUT_JOG_0013",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que jovem média portuguesa formada no Sporting CP transferiu-se para a Real Sociedad na Liga espanhola (Liga F) afirmando-se como titular da Seleção Nacional?",
+    "opcoes": [
+      "Andreia Jacinto",
+      "Kika Nazareth",
+      "Andreia Faria",
+      "Beatriz Cameirão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Andreia Jacinto destaca-se pela sua visão periférica e qualidade de passe no meio-campo luso.",
+    "fonte": "FPF / Real Sociedad",
+    "factClusterId": "fc_jog_andreiajacinto_01"
+  },
+  {
+    "id": "FUT_JOG_0014",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa lateral-esquerda internacional portuguesa trocou o Sporting CP pelo Parma (Itália) e Servette (Suíça), integrando a comitiva do Mundial 2023?",
+    "opcoes": [
+      "Catarina Amado",
+      "Joana Marchão",
+      "Lúcia Alves",
+      "Ana Seiça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Joana Marchão é uma das referências do corredor esquerdo da seleção nacional.",
+    "fonte": "FPF / FIGC",
+    "factClusterId": "fc_jog_joanamarchao_01"
+  },
+  {
+    "id": "FUT_JOG_0015",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube lisboeta conquistou o tetracampeonato consecutivo da Liga BPI (2020/21, 2021/22, 2022/23 e 2023/24) sob o comando de Filipa Patão?",
+    "opcoes": [
+      "Sport Lisboa e Benfica",
+      "Sporting Clube de Braga",
+      "Sporting Clube de Portugal",
+      "Racing Power FC"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Benfica de Filipa Patão sagrou-se tetracampeão e alcançou os quartos de final da UEFA Women's Champions League em 2023/24.",
+    "fonte": "Federação Portuguesa de Futebol / SL Benfica",
+    "factClusterId": "fc_jog_benficafem_01"
+  },
+  {
+    "id": "FUT_JOG_0016",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que antiga internacional e treinadora portuguesa comanda o SL Benfica Feminino desde 2020, eleita Treinadora do Ano pela FPF?",
+    "opcoes": [
+      "Mariana Cabral",
+      "Marisa Gomes",
+      "Helena Costa",
+      "Filipa Patão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Filipa Patão construiu uma equipa hegemónica no panorama do futebol feminino em Portugal.",
+    "fonte": "FPF / SL Benfica",
+    "factClusterId": "fc_jog_filipapatao_01"
+  },
+  {
+    "id": "FUT_JOG_0017",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que treinadora portuguesa comanda a equipa principal feminina do Sporting CP desde 2021, apostando forte na formação de jovens talentos de Alcochete?",
+    "opcoes": [
+      "Mariana Cabral",
+      "Filipa Patão",
+      "Susana Cova",
+      "Helena Costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mariana Cabral conquistou a Taça de Portugal e a Supertaça de leoa ao peito.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_jog_marianacabral_01"
+  },
+  {
+    "id": "FUT_JOG_0018",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada rápida do Sporting CP e da Seleção Nacional teve passagens pelo futebol inglês (Bristol City e Aston Villa) antes de regressar a Alvalade?",
+    "opcoes": [
+      "Ana Capeta",
+      "Diana Silva",
+      "Telma Encarnação",
+      "Marta Carro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Diana Silva é uma das atacantes mais velozes e experientes do futebol português.",
+    "fonte": "FPF / Sporting CP",
+    "factClusterId": "fc_jog_dianasilva_01"
+  },
+  {
+    "id": "FUT_JOG_0019",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada do Sporting CP e da Seleção marcou o golo da vitória no último minuto da final da Taça de Portugal de 2018 e atirou ao poste aos 90+1 contra os EUA no Mundial 2023?",
+    "opcoes": [
+      "Telma Encarnação",
+      "Carolina Mendes",
+      "Ana Capeta",
+      "Kika Nazareth"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O remate ao poste de Ana Capeta frente aos EUA em Auckland quase eliminou as bicampeãs do mundo do torneio.",
+    "fonte": "FIFA / FPF / RTP",
+    "factClusterId": "fc_jog_anacapeta_01"
+  },
+  {
+    "id": "FUT_JOG_0020",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube de Santa Maria da Feira / São João da Madeira e do concelho de Seixal surpreendeu ao atingir a final da Taça de Portugal Feminina e o top-3 da Liga BPI em 2023/24?",
+    "opcoes": [
+      "Clube de Albergaria",
+      "Valadares Gaia FC",
+      "Torreense",
+      "Racing Power FC"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Racing Power FC teve uma ascensão meteórica nas divisões nacionais do futebol feminino.",
+    "fonte": "FPF / Liga BPI",
+    "factClusterId": "fc_jog_racingpower_01"
+  },
+  {
+    "id": "FUT_JOG_0021",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa lateral polivalente do SL Benfica, natural de Valongo, ganhou a titularidade na Seleção Nacional pelas suas exibições no Mundial 2023?",
+    "opcoes": [
+      "Lúcia Alves",
+      "Catarina Amado",
+      "Ana Seiça",
+      "Sílvia Rebelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Lúcia Alves destaca-se pela intensidade defensiva e capacidade de cruzamento nos dois corredores.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_jog_luciaalves_01"
+  },
+  {
+    "id": "FUT_JOG_0022",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa central do SL Benfica transferiu-se para o Tigres UANL do México no verão de 2024 após sagrar-se tetracampeã por Portugal?",
+    "opcoes": [
+      "Carole Costa",
+      "Ana Seiça",
+      "Diana Gomes",
+      "Alidou"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Ana Seiça foi um dos pilares defensivos das conquistas nacionais e internacionais do Benfica.",
+    "fonte": "FPF / Liga MX Femenil",
+    "factClusterId": "fc_jog_anaseica_01"
+  },
+  {
+    "id": "FUT_JOG_0023",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa-central portuguesa do Sevilha FC (Espanha) marcou o golo de Portugal frente à Suíça no empate 2-2 no Euro 2022 em Leigh?",
+    "opcoes": [
+      "Carole Costa",
+      "Sílvia Rebelo",
+      "Diana Gomes",
+      "Kika Nazareth"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Diana Gomes é uma das centrais mais regulares da Seleção Nacional na Liga F espanhola.",
+    "fonte": "UEFA / Sevilla FC",
+    "factClusterId": "fc_jog_dianagomes_01"
+  },
+  {
+    "id": "FUT_JOG_0024",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Qual foi o recorde de assistência num jogo de futebol feminino em Portugal, estabelecido no Estádio da Luz em março de 2023 no dérbi SL Benfica vs Sporting CP?",
+    "opcoes": [
+      "15.000 espetadores",
+      "35.000 espetadores",
+      "42.000 espetadores",
+      "27.221 espetadores"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os mais de 27 mil adeptos na Luz estabeleceram um marco histórico de apoio popular ao desporto feminino no país.",
+    "fonte": "FPF / Sport Lisboa e Benfica",
+    "factClusterId": "fc_jog_recordeespetadores_01"
+  },
+  {
+    "id": "FUT_JOG_0025",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que histórico clube de Vila Nova de Gaia disputa a Liga BPI e tem tradição formativa no futebol feminino do norte do país?",
+    "opcoes": [
+      "Valadares Gaia FC",
+      "Leixões SC",
+      "Varzim SC",
+      "Rio Ave"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Valadares Gaia foi finalista da Taça de Portugal e da Supertaça de futebol feminino.",
+    "fonte": "FPF / AF Porto",
+    "factClusterId": "fc_jog_valadaresgaia_01"
+  },
+  {
+    "id": "FUT_JOG_0026",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que experiente avançada marcou 39 golos pela Seleção Nacional e jogou em Espanha, Noruega e EUA, sendo uma das maiores goleadoras da história lusa?",
+    "opcoes": [
+      "Carla Couto",
+      "Edite Fernandes",
+      "Carolina Mendes",
+      "Telma Encarnação"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Edite Fernandes, natural de Vila do Conde, capitaneou a Seleção e é a melhor marcadora de sempre de Portugal com 39 golos.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_jog_editefernandes_01"
+  },
+  {
+    "id": "FUT_JOG_0027",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que competição da UEFA qualificou pela primeira vez a Seleção Portuguesa Feminina para um Campeonato da Europa sénior, disputado nos Países Baixos em 2017?",
+    "opcoes": [
+      "Play-off contra a Irlanda",
+      "Fase de Grupos Direta",
+      "Play-off de Apuramento contra a Roménia (golo fora de Andreia Norton em Cluj)",
+      "Torneio do Algarve"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O golo de Andreia Norton no prolongamento em Cluj-Napoca (1-1) deu a inédita qualificação de Portugal para o Euro 2017.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_jog_apuramentoeuro2017_01"
+  },
+  {
+    "id": "FUT_JOG_0028",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que prestigiado torneio internacional feminino de seleções é organizado anualmente pela FPF na região do Algarve desde 1994 («Algarve Cup»)?",
+    "opcoes": [
+      "Torneio de Lisboa",
+      "Taça Atlântica",
+      "Copa das Nações",
+      "Algarve Cup (Taça do Algarve de Futebol Feminino)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Algarve Cup é um dos mais antigos e conceituados torneios de futebol feminino do mundo, reunindo campeãs olímpicas e mundiais.",
+    "fonte": "Federação Portuguesa de Futebol / FIFA",
+    "factClusterId": "fc_jog_algarvecup_01"
+  },
+  {
+    "id": "FUT_JOG_0029",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que média portuguesa de grande técnica marcou o golo histórico do apuramento para o Euro 2017 e alinhou pelo SC Braga e SL Benfica?",
+    "opcoes": [
+      "Andreia Norton",
+      "Tatiana Pinto",
+      "Andreia Faria",
+      "Beatriz Cameirão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Andreia Norton superou graves lesões para se tornar uma das mais brilhantes jogadoras do futebol luso.",
+    "fonte": "FPF / SL Benfica",
+    "factClusterId": "fc_jog_andreianorton_01"
+  },
+  {
+    "id": "FUT_JOG_0030",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube minhoto conquistou a Liga BPI de futebol feminino em 2018/19 e a Taça de Portugal em 2019/20 com jogadoras como Dolores Silva e Vanessa Marques?",
+    "opcoes": [
+      "Vitória de Guimarães",
+      "Sporting Clube de Braga",
+      "Famalicão",
+      "Gil Vicente"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O SC Braga foi um dos pioneiros na aposta profissionalizada na sua estrutura feminina no norte de Portugal.",
+    "fonte": "SC Braga / FPF",
+    "factClusterId": "fc_jog_scbragafem_01"
+  },
+  {
+    "id": "FUT_JOG_0031",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que lateral-direita internacional do SL Benfica, natural de Lisboa, foi titular indiscutível na campanha do Mundial Feminino de 2023?",
+    "opcoes": [
+      "Lúcia Alves",
+      "Ana Borges",
+      "Catarina Amado",
+      "Sílvia Rebelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Catarina Amado é uma das alas defensivas mais regulares e consistentes da Liga BPI.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_jog_catarinaamado_01"
+  },
+  {
+    "id": "FUT_JOG_0032",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que guarda-redes veterana portuguesa do SC Braga e da Seleção Nacional foi campeã nacional pelo Sporting CP e soma mais de 80 internacionalizações?",
+    "opcoes": [
+      "Inês Pereira",
+      "Rute Costa",
+      "Bárbara Santos",
+      "Patrícia Morais"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Patrícia Morais foi a guarda-redes titular de Portugal no Campeonato da Europa de 2017 nos Países Baixos.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_jog_patriciamorais_01"
+  },
+  {
+    "id": "FUT_JOG_0033",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube da vila de Famalicão venceu a Taça de Portugal Feminina em maio de 2023 no Estádio Nacional do Jamor perante o SC Braga (2-0)?",
+    "opcoes": [
+      "FC Famalicão Feminino",
+      "Racing Power",
+      "Torreense",
+      "Valadares Gaia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Famalicão conquistou a primeira Taça de Portugal da história do seu futebol feminino no Jamor.",
+    "fonte": "FPF / FC Famalicão",
+    "factClusterId": "fc_jog_famalicaofem_01"
+  },
+  {
+    "id": "FUT_JOG_0034",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que média internacional portuguesa do SL Benfica foi titular no jogo de consagração frente aos EUA no Mundial 2023 em Auckland?",
+    "opcoes": [
+      "Kika Nazareth",
+      "Andreia Faria",
+      "Dolores Silva",
+      "Tatiana Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Andreia Faria é uma das jovens médias mais influentes da formação e equipa principal benfiquista.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_jog_andreiafaria_01"
+  },
+  {
+    "id": "FUT_JOG_0035",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada e capitã histórica do Clube Futebol Benfica («Fofó») e da Seleção Nacional foi campeã nacional consecutiva em 2015 e 2016?",
+    "opcoes": [
+      "Carla Couto",
+      "Edite Fernandes",
+      "Matilde Fidalgo (ou Filipa Patão)",
+      "Sílvia Rebelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O CF Benfica de Santa Cruz de Benfica foi bicampeão nacional antes da entrada dos clubes grandes.",
+    "fonte": "FPF / CF Benfica",
+    "factClusterId": "fc_jog_cfbenfica_01"
+  },
+  {
+    "id": "FUT_JOG_0036",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que internacional portuguesa nascida no Canadá (Toronto) e jogadora do SL Benfica marcou golos decisivos na UEFA Women's Champions League de 2023/24?",
+    "opcoes": [
+      "Nycole Raysla",
+      "Chandra Davidson",
+      "Pauleta",
+      "Marie-Yasmine Alidou"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Marie Alidou brilhou com golos extraordinários na campanha europeia do Benfica frente ao Frankfurt e Barcelona.",
+    "fonte": "UEFA / SL Benfica",
+    "factClusterId": "fc_jog_alidou_01"
+  },
+  {
+    "id": "FUT_JOG_0037",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que troféu nacional feminino foi criado pela Federação Portuguesa de Futebol em 2019/20 para ser disputado entre as equipas da 1.ª Divisão?",
+    "opcoes": [
+      "Taça da Liga Feminina (Taça da Liga Allianz)",
+      "Supertaça de Portugal",
+      "Taça de Honra",
+      "Copa Ibérica"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Taça da Liga Feminina veio enriquecer o calendário competitivo de topo do futebol feminino nacional.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_jog_tacadaliga_01"
+  },
+  {
+    "id": "FUT_JOG_0038",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que avançada brasileira do SL Benfica marcou dezenas de golos decisivos desde a fundação da equipa em 2018 na 2.ª Divisão até aos títulos da Liga BPI?",
+    "opcoes": [
+      "Marta",
+      "Nycole Raysla (e Darlene de Souza)",
+      "Debinha",
+      "Ludmila"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Nycole Raysla e Darlene foram figuras capitais na afirmação do projeto feminino do Benfica.",
+    "fonte": "SL Benfica / FPF",
+    "factClusterId": "fc_jog_nycole_01"
+  },
+  {
+    "id": "FUT_JOG_0039",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa central histórica do SL Benfica e SC Braga, natural da Gouveia, capitaneou a equipa encarnada e ultrapassou as 70 internacionalizações por Portugal?",
+    "opcoes": [
+      "Carole Costa",
+      "Diana Gomes",
+      "Sílvia Rebelo",
+      "Raquel Infante"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Sílvia Rebelo é uma das atletas mais respeitadas pela sua entrega e espírito de equipa exemplar.",
+    "fonte": "FPF / SL Benfica",
+    "factClusterId": "fc_jog_silviarebelo_01"
+  },
+  {
+    "id": "FUT_JOG_0040",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que treinadora portuguesa orientou a Seleção Nacional Feminina de Sub-19 e foi a primeira mulher portuguesa a obter a licença UEFA Pro de treinadora?",
+    "opcoes": [
+      "Filipa Patão",
+      "Mariana Cabral",
+      "Susana Cova",
+      "Marisa Gomes (ou Helena Costa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Helena Costa foi pioneira como treinadora de futebol profissional masculino e feminino.",
+    "fonte": "FPF / UEFA",
+    "factClusterId": "fc_jog_helenacosta_01"
+  },
+  {
+    "id": "FUT_JOG_0041",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube de Torres Vedras disputa a Liga BPI com forte investimento no futebol feminino no Parque Desportivo de Arenes?",
+    "opcoes": [
+      "Sport União Sintrense / SC União Torreense",
+      "Caldas SC",
+      "Alverca",
+      "Mafra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O SC União Torreense estabeleceu-se como uma das forças mais competitivas da Liga BPI.",
+    "fonte": "FPF / SC União Torreense",
+    "factClusterId": "fc_jog_torreensefem_01"
+  },
+  {
+    "id": "FUT_JOG_0042",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que média portuguesa formada no Sporting CP e jogadora do Damaiense e Valadares Gaia é internacional pela Seleção Nacional A?",
+    "opcoes": [
+      "Fátima Pinto",
+      "Beatriz Cameirão",
+      "Andreia Faria",
+      "Inês Maia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "Beatriz Cameirão é uma das jovens opções de meio-campo de Francisco Neto.",
+    "fonte": "FPF / Liga BPI",
+    "factClusterId": "fc_jog_cameirao_01"
+  },
+  {
+    "id": "FUT_JOG_0043",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube da Amadora (freguesia da Damaia) ascendeu à Liga BPI e disputa os seus jogos no Complexo Desportivo da Damaiense?",
+    "opcoes": [
+      "CF Estrela da Amadora",
+      "Casa Pia AC",
+      "SF Damaiense (Sociedade Filarmónica Recreio Artístico da Amadora)",
+      "Oriental de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O SF Damaiense tem feito campanhas notáveis na primeira metade da tabela da Liga BPI.",
+    "fonte": "FPF / Município da Amadora",
+    "factClusterId": "fc_jog_damaiense_01"
+  },
+  {
+    "id": "FUT_JOG_0044",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que clube de Albergaria-a-Velha (distrito de Aveiro) mantém presença contínua na 1.ª Divisão feminina com um modelo exemplar de formação desportiva?",
+    "opcoes": [
+      "UD Oliveirense",
+      "Beira-Mar",
+      "CD Feirense",
+      "Clube de Albergaria"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Clube de Albergaria é um dos históricos mais antigos em atividade ininterrupta no futebol feminino nacional.",
+    "fonte": "FPF / AF Aveiro",
+    "factClusterId": "fc_jog_albergaria_01"
+  },
+  {
+    "id": "FUT_JOG_0045",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Em que estádio de Auckland (Nova Zelândia) a Seleção Portuguesa empatou 0-0 com os Estados Unidos (tetracampeãs do mundo) no Mundial Feminino de 2023?",
+    "opcoes": [
+      "Eden Park (Auckland)",
+      "Waikato Stadium (Hamilton)",
+      "Sky Stadium (Wellington)",
+      "Forsyth Barr Stadium (Dunedin)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A exibição magistral das Navegadoras no Eden Park perante mais de 40 mil espetadores correu o mundo como um exemplo de coragem tática.",
+    "fonte": "FIFA / FPF / RTP",
+    "factClusterId": "fc_jog_edenpark2023_01"
+  },
+  {
+    "id": "FUT_JOG_0046",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que defesa central espanhola veterana jogou no Sporting CP e no Damaiense trazendo experiência internacional ao campeonato português?",
+    "opcoes": [
+      "Irene Paredes",
+      "Marta Carro (e Nevena Damjanovic)",
+      "Alexia Putellas",
+      "Jennifer Hermoso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Nevena Damjanovic e Marta Carro lideraram a defesa leonina durante várias épocas vitoriosas.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_jog_damjanovic_01"
+  },
+  {
+    "id": "FUT_JOG_0047",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que guarda-redes canadiana de origem portuguesa é internacional pelas seleções jovens e atuou no Torreense e na seleção nacional?",
+    "opcoes": [
+      "Inês Pereira",
+      "Patrícia Morais",
+      "Sierra Cota-Yarde",
+      "Rute Costa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "Sierra Cota-Yarde é uma das guarda-redes com dupla nacionalidade convocadas por Francisco Neto.",
+    "fonte": "FPF / Canada Soccer",
+    "factClusterId": "fc_jog_sierracota_01"
+  },
+  {
+    "id": "FUT_JOG_0048",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que extremo portuguesa com passagens pelo Sporting CP e Servette (Suíça) marcou o golo da vitória no dérbi contra o Benfica na final da Taça de Portugal de 2022 no Jamor?",
+    "opcoes": [
+      "Kika Nazareth",
+      "Diana Silva",
+      "Ana Capeta",
+      "Joana Marchão (e Brenda Pérez)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Sporting CP conquistou a Taça de Portugal de 2022 frente ao Benfica por 2-1 no Jamor.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_jog_tacadomundojamor_01"
+  },
+  {
+    "id": "FUT_JOG_0049",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que competição da UEFA de seleções femininas foi disputada por Portugal na Liga A em 2023/24 frente a potências como França, Noruega e Áustria?",
+    "opcoes": [
+      "UEFA Women's Nations League (Liga das Nações Feminina)",
+      "Mundialito",
+      "Taça das Nações",
+      "Algarve Cup"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A presença de Portugal na elite (Liga A) da Nations League feminina confirmou a ascensão da equipa das Quinas.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_jog_nationsleaguefem_01"
+  },
+  {
+    "id": "FUT_JOG_0050",
+    "tema": "Futebol Português",
+    "subtema": "Jogadoras",
+    "pergunta": "Que alcunha oficial carinhosa e patriótica foi adotada pela FPF e pelo público português para designar a Seleção Nacional Feminina de Futebol?",
+    "opcoes": [
+      "As Leoas",
+      "As Quinas",
+      "As Navegadoras",
+      "As Guerreiras do Minho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O nome 'As Navegadoras' evoca a coragem pioneira da Expansão Marítima Portuguesa aplicada à conquista dos palcos mundiais do futebol.",
+    "fonte": "Federação Portuguesa de Futebol (FPF)",
+    "factClusterId": "fc_jog_asnavegadoras_01"
+  }
+]

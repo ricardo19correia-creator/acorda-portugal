@@ -16,7 +16,7 @@ import {
   Coins,
   Lock,
 } from 'lucide-react'
-import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc } from 'firebase/firestore'
+import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc, arrayUnion } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { auth, db } from '@/lib/firebase'
@@ -25,6 +25,16 @@ import { useEconomy } from '@/context/economy-context'
 import { usePresence } from '@/components/presence-provider'
 import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
+import {
+  getUniqueMatchQuestions,
+  saveAnsweredQuestions,
+  loadQuestionsPool,
+  selectBalancedMatchQuestions,
+  getRecentQuestionIds,
+  cleanQuestionPrompt,
+} from '@/src/lib/questionEngine'
+import type { Question } from '@/src/types/quiz'
+import { calculateMatchCoinReward, calculateLevelUpCoinReward, getDifficultyMultiplier } from '@/src/data/economy'
 import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { GameExitControl } from '@/components/game-exit-modal'
@@ -192,6 +202,38 @@ function resolveCategoryInfo(
   return { name: formatted, emoji: '🇵🇹', special: false }
 }
 
+function formatEngineQuestion(q: Question, index: number, total: number): GameQuestion {
+  const rawOptions = q.options || []
+  const correctText = rawOptions[q.correctAnswer] || rawOptions[0] || ''
+  const shuffled = shuffle(
+    rawOptions.map((opt, i) => ({
+      key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
+      text: opt,
+    }))
+  )
+  const reindexed = shuffled.map((opt, i) => ({
+    key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
+    text: opt.text,
+  }))
+  const newCorrectKey = reindexed.find((opt) => opt.text === correctText)?.key ?? 'A'
+  return {
+    id: q.id,
+    index: index + 1,
+    total,
+    question: cleanQuestionPrompt(q.question),
+    category: q.category,
+    subcategory: q.subcategory,
+    district: q.district,
+    city: q.city,
+    difficulty: q.difficulty,
+    options: reindexed,
+    correct: newCorrectKey,
+    explanation: q.explanation || `Resposta correta: ${correctText}`,
+    points: q.difficulty >= 4 ? 300 : q.difficulty === 3 ? 200 : 100,
+    image: q.image,
+  }
+}
+
 function createGameQuestions(
   categorySlug: string,
   subcategorySlug?: string | null,
@@ -199,103 +241,27 @@ function createGameQuestions(
   districtParam?: string | null,
   cityParam?: string | null,
 ): GameQuestion[] {
-  let questionPool: QuizQuestion[] = []
+  const diff = difficultyParam ? Number(difficultyParam) || 2 : 2
+  const rawPool = loadQuestionsPool(
+    categorySlug,
+    diff,
+    subcategorySlug || undefined,
+    districtParam || undefined,
+    cityParam || undefined
+  )
+  const catLower = (categorySlug || '').toLowerCase().trim()
+  const isNational =
+    !catLower ||
+    catLower === 'desafio-nacional' ||
+    catLower === 'desafio nacional' ||
+    catLower === 'nacional' ||
+    catLower === 'quick' ||
+    catLower === 'todos' ||
+    catLower === 'jogar-tudo'
 
-  if (
-    categorySlug === 'desafio-cidade' &&
-    (!cityParam || cityParam.toLowerCase().includes('vila real'))
-  ) {
-    questionPool = VILA_REAL_QUESTIONS
-  } else if (categorySlug === 'modo-maluco' || categorySlug === 'perguntas-idiotas') {
-    if (subcategorySlug && subcategorySlug !== 'all' && subcategorySlug !== 'todas' && subcategorySlug !== 'todos') {
-      const subNorm = subcategorySlug.toLowerCase().trim()
-      const filteredSub = MODO_MALUCO_5000_QUESTIONS.filter((q) => {
-        const qSub = (q.subcategory || '').toLowerCase().trim()
-        return qSub === subNorm || qSub.includes(subNorm) || subNorm.includes(qSub)
-      })
-      questionPool = filteredSub.length > 0 ? filteredSub : MODO_MALUCO_5000_QUESTIONS
-    } else {
-      questionPool = MODO_MALUCO_5000_QUESTIONS
-    }
-  } else {
-    const filtered = filterQuizQuestions(ALL_QUIZ_QUESTIONS as any, {
-      categorySlug: categorySlug !== 'desafio-nacional' && categorySlug !== 'nacional' && categorySlug !== 'quick' ? categorySlug : undefined,
-      subcategorySlug: subcategorySlug || undefined,
-      district: districtParam || undefined,
-      city: cityParam || undefined,
-      difficulty: difficultyParam || undefined,
-    })
-
-    if (filtered.length >= 1) {
-      questionPool = filtered as unknown as QuizQuestion[]
-    } else {
-      const normalizedCat = normalizeCategorySlug(categorySlug || '')
-      const catMatches = ALL_QUIZ_QUESTIONS.filter((q) => {
-        const qCatNorm = normalizeCategorySlug(q.category || '')
-        const matchCat = qCatNorm === normalizedCat || (q.category && categorySlug && q.category.toLowerCase().includes(categorySlug.toLowerCase()))
-        if (!matchCat) return false
-        if (subcategorySlug && subcategorySlug !== 'all' && subcategorySlug !== 'todas' && subcategorySlug !== 'todos') {
-          if (!q.subcategory) return false
-          const subNorm = subcategorySlug.toLowerCase().trim()
-          const qSubNorm = q.subcategory.toLowerCase().trim()
-          return qSubNorm === subNorm || qSubNorm.includes(subNorm) || subNorm.includes(qSubNorm)
-        }
-        return true
-      })
-      questionPool = catMatches.length > 0 ? catMatches : ALL_QUIZ_QUESTIONS
-    }
-  }
-
-  if (!questionPool || questionPool.length === 0) {
-    questionPool = ALL_QUIZ_QUESTIONS
-  }
-
-  let selected = shuffle(questionPool)
-  if (selected.length < QUESTIONS_PER_GAME) {
-    const needed = QUESTIONS_PER_GAME - selected.length
-    const existingIds = new Set(selected.map((q) => String(q.id)))
-    const remaining = shuffle(ALL_QUIZ_QUESTIONS).filter((q) => !existingIds.has(String(q.id)))
-    selected = [...selected, ...remaining.slice(0, needed)]
-  }
-
-  selected = selected.slice(0, QUESTIONS_PER_GAME)
-
-  return selected.map((question, index) => {
-    const rawOptions = Array.isArray(question.options) ? question.options : []
-    const normalizedOptions = rawOptions.map((opt: any, optIdx: number) => {
-      if (typeof opt === 'string') {
-        return { key: (['A', 'B', 'C', 'D'][optIdx] || 'A') as OptionKey, text: opt }
-      }
-      return {
-        key: (opt.key || ['A', 'B', 'C', 'D'][optIdx] || 'A') as OptionKey,
-        text: opt.text || '',
-      }
-    })
-
-    const correctOption = normalizedOptions.find(
-      (option) => option.key === question.correct || option.text === question.correct,
-    ) || normalizedOptions[0]
-
-    const shuffledOptions = shuffle(normalizedOptions)
-
-    const options = shuffledOptions.map((option, optionIndex) => ({
-      key: ['A', 'B', 'C', 'D'][optionIndex] as OptionKey,
-      text: option.text,
-    }))
-
-    const newCorrectKey =
-      options.find(
-        (option) => option.text === correctOption?.text,
-      )?.key ?? 'A'
-
-    return {
-      ...question,
-      index: index + 1,
-      total: selected.length,
-      options,
-      correct: newCorrectKey,
-    }
-  })
+  const recentSet = new Set(getRecentQuestionIds())
+  const selected = selectBalancedMatchQuestions(rawPool, QUESTIONS_PER_GAME, recentSet, isNational)
+  return selected.map((q, i) => formatEngineQuestion(q, i, selected.length))
 }
 
 export function QuizScreen({
@@ -318,6 +284,17 @@ export function QuizScreen({
     () => resolveCategoryInfo(categorySlug, subcategorySlug, districtParam, cityParam),
     [categorySlug, subcategorySlug, districtParam, cityParam]
   )
+
+  const diffLevel = useMemo(() => {
+    const d = Number(difficultyParam)
+    if (!isNaN(d) && d >= 1 && d <= 5) return d
+    const str = String(difficultyParam || '').toLowerCase()
+    if (str.includes('facil') || str.includes('fácil') || str === '1') return 1
+    if (str.includes('medio') || str.includes('médio') || str === '3') return 3
+    if (str.includes('dificil') || str.includes('difícil') || str === '4') return 4
+    if (str.includes('mestre') || str === '5') return 5
+    return 2
+  }, [difficultyParam])
 
   const { user, profile, authResolved } = useAuth()
   const { addCoins } = useEconomy()
@@ -361,23 +338,60 @@ export function QuizScreen({
   const [reactionCooldown, setReactionCooldown] = useState(0)
   const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
 
-  // Sincronizar estado completo quando inicia uma nova partida ou muda de categoria
+  // Sincronizar estado e carregar perguntas estritamente anti-repetição
   useEffect(() => {
-    const questions = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
-    setQuizQuestions(questions)
-    setStep(0)
-    setSelected(null)
-    setEliminatedOptions([])
-    setPublicVoteResults(null)
-    setIsFrozen(false)
-    setFreezeTimeLeft(0)
-    setSeconds(60)
-    setScore(0)
-    setCorrectCount(0)
-    setStreak(0)
-    setBestStreak(0)
-    setPhase('answering')
-  }, [gameId, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
+    let isCancelled = false
+
+    getUniqueMatchQuestions(
+      user?.uid || '',
+      categorySlug,
+      diffLevel,
+      QUESTIONS_PER_GAME,
+      subcategorySlug || undefined,
+      districtParam || undefined,
+      cityParam || undefined
+    )
+      .then((uniqueQuestions) => {
+        if (isCancelled) return
+        const formatted = uniqueQuestions.map((q, i) => formatEngineQuestion(q, i, uniqueQuestions.length))
+        setQuizQuestions(formatted)
+        setStep(0)
+        setSelected(null)
+        setEliminatedOptions([])
+        setPublicVoteResults(null)
+        setIsFrozen(false)
+        setFreezeTimeLeft(0)
+        setSeconds(60)
+        setScore(0)
+        setCorrectCount(0)
+        setStreak(0)
+        setBestStreak(0)
+        setPhase('answering')
+      })
+      .catch((err) => {
+        console.error('[QuizScreen] Erro ao carregar perguntas anti-repetição:', err)
+        if (!isCancelled) {
+          const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+          setQuizQuestions(fallback)
+          setStep(0)
+          setSelected(null)
+          setEliminatedOptions([])
+          setPublicVoteResults(null)
+          setIsFrozen(false)
+          setFreezeTimeLeft(0)
+          setSeconds(60)
+          setScore(0)
+          setCorrectCount(0)
+          setStreak(0)
+          setBestStreak(0)
+          setPhase('answering')
+        }
+      })
+
+    return () => {
+      isCancelled = true
+    }
+  }, [gameId, categorySlug, subcategorySlug, diffLevel, difficultyParam, districtParam, cityParam, user?.uid])
 
   // Prevenção de fecho acidental no meio de uma partida
   useEffect(() => {
@@ -753,7 +767,15 @@ export function QuizScreen({
 
         const currentProfile = userSnap.data() as UserProfile
         const nextTotalXp = (currentProfile.xp || 0) + finalResult.xp
-        const nextEuros = (currentProfile.euros || 0) + finalResult.euros
+        const levelInfo = calculateLevelProgress(nextTotalXp)
+        const newLevel = levelInfo.currentLevel.level
+
+        // Recompensa por subida de nível (€25 por nível)
+        const currentLevelVal = currentProfile.level || 1
+        const levelUpCoins = newLevel > currentLevelVal ? calculateLevelUpCoinReward(currentLevelVal, newLevel) : 0
+        const totalEarnedCoins = finalResult.euros + levelUpCoins
+        const nextEuros = (currentProfile.euros || 0) + totalEarnedCoins
+
         const nextQuestionsAnswered = (currentProfile.questionsAnswered || 0) + finalResult.total
         const nextCorrectAnswers = (currentProfile.correctAnswers || 0) + finalResult.correct
         const nextIncorrectAnswers = (currentProfile.incorrectAnswers || 0) + (finalResult.total - finalResult.correct)
@@ -773,12 +795,15 @@ export function QuizScreen({
           }
         }
 
-        const levelInfo = calculateLevelProgress(nextTotalXp)
-        const newLevel = levelInfo.currentLevel.level
+        const answeredIds = quizQuestions.map((q) => String(q.id)).filter(Boolean)
+        if (answeredIds.length > 0) {
+          void saveAnsweredQuestions(user.uid, answeredIds)
+        }
 
-        transaction.update(userRef, {
+        const updatePayload: Record<string, any> = {
           xp: nextTotalXp,
           euros: nextEuros,
+          coins: nextEuros,
           level: newLevel,
           gamesPlayed: nextGamesPlayed,
           questionsAnswered: nextQuestionsAnswered,
@@ -788,7 +813,13 @@ export function QuizScreen({
           bestStreak: nextBestStreak,
           categoryStats: nextCategoryStats,
           lastPlayedAt: serverTimestamp(),
-        })
+        }
+
+        if (answeredIds.length > 0) {
+          updatePayload.answeredQuestionIds = arrayUnion(...answeredIds)
+        }
+
+        transaction.update(userRef, updatePayload)
 
         transaction.set(
           publicProfileRef,
@@ -822,6 +853,7 @@ export function QuizScreen({
                 level: outcome.newLevel,
                 xp: outcome.newTotalXp,
                 euros: outcome.newEuros,
+                coins: outcome.newEuros,
               }
             : currentProfile
         )
@@ -829,19 +861,29 @@ export function QuizScreen({
     } catch (error) {
       console.error("Error updating user profile:", error)
     }
-  }, [user, category, profile, addCoins])
+  }, [user, category, profile, addCoins, quizQuestions])
 
-  const result: QuizResult = useMemo(
-    () => ({
+  const result: QuizResult = useMemo(() => {
+    const earnedCoins = calculateMatchCoinReward({
+      correctCount,
+      totalQuestions: total,
+      bestStreak,
+      difficulty: diffLevel,
+    })
+
+    const multiplier = getDifficultyMultiplier(diffLevel)
+    const baseMatchXp = correctCount * 50 + Math.round(score / 10)
+    const totalXp = Math.round(baseMatchXp * multiplier)
+
+    return {
       score,
       correct: correctCount,
       total,
-      xp: correctCount * 50 + Math.round(score / 10),
-      euros: Math.max(50, correctCount * 15 + (correctCount === total && total > 0 ? 50 : 0)),
+      xp: totalXp,
+      euros: earnedCoins,
       bestStreak,
-    }),
-    [score, correctCount, total, bestStreak],
-  )
+    }
+  }, [score, correctCount, total, bestStreak, diffLevel])
 
   const levelUpInfo =
     previousLevel !== null && userProfile && userProfile.level > previousLevel
@@ -915,7 +957,7 @@ export function QuizScreen({
   }
 
   return (
-    <div className="h-[100dvh] w-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto overflow-hidden select-none animate-rise">
+    <div className="min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
       {/* ========================================================= */}
       {/* 1. CABEÇALHO SOLO (TOPO COMPACTO SHRINK-0)                 */}
       {/* ========================================================= */}
@@ -984,14 +1026,14 @@ export function QuizScreen({
       </div>
 
       {/* ========================================================= */}
-      {/* 2. ZONA CENTRAL: CARD DA PERGUNTA (MY-AUTO)                */}
+      {/* 2. ZONA CENTRAL: CARD DA PERGUNTA (MY-AUTO, H-AUTO)        */}
       {/* ========================================================= */}
-      <div className="my-auto w-full flex flex-col items-center justify-center relative">
+      <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
         {/* Feedback visual instantâneo overlay */}
         {phase === 'revealed' && (
           <div
             className={cn(
-              'mb-2 px-3 py-1 rounded-xl font-display text-xs font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0',
+              'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
               selected === q.correct
                 ? 'bg-primary/30 border border-primary text-primary text-glow-primary'
                 : selected === null
@@ -1001,35 +1043,32 @@ export function QuizScreen({
           >
             {selected === q.correct ? (
               <>
-                <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
-                <span>Resposta Correta! (+{q.points} pts)</span>
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                <span className="break-words">Resposta Correta! (+{q.points} pts)</span>
               </>
             ) : selected === null ? (
               <>
-                <Clock className="h-3.5 w-3.5 shrink-0" />
-                <span>Tempo Esgotado!</span>
+                <Clock className="h-4 w-4 shrink-0" />
+                <span className="break-words">Tempo Esgotado!</span>
               </>
             ) : (
               <>
-                <XCircle className="h-3.5 w-3.5 shrink-0" />
-                <span>Resposta Incorreta</span>
+                <XCircle className="h-4 w-4 shrink-0" />
+                <span className="break-words">Resposta Incorreta</span>
               </>
             )}
           </div>
         )}
 
-        {/* Card da Pergunta com corpo elegante */}
-        <div className="w-full min-h-[140px] max-h-[220px] p-4 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-cyan-500/30 rounded-2xl shadow-xl shadow-black/40 backdrop-blur-md overflow-y-auto relative">
-          <span className="text-[10px] sm:text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1 shrink-0">
-            {category.emoji} {category.name} · Pergunta {step + 1} de {total}
-          </span>
-          <h1 className="text-sm sm:text-base font-bold text-center leading-snug text-white text-balance line-clamp-4">
+        {/* Card da Pergunta: focado exclusivamente no texto da pergunta */}
+        <div className="w-full min-h-[100px] h-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
+          <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
             {q.question}
           </h1>
 
           {/* Explicação resumida quando revelada */}
           {phase === 'revealed' && q.explanation && (
-            <p className="mt-2 text-xs text-slate-300 border-t border-white/10 pt-1.5 line-clamp-2">
+            <p className="mt-3 text-xs sm:text-sm text-slate-300 border-t border-white/10 pt-2.5 break-words leading-relaxed w-full">
               {q.explanation}
             </p>
           )}
@@ -1037,7 +1076,7 @@ export function QuizScreen({
 
         {/* Freeze Banner no Solo */}
         {isFrozen && (
-          <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+          <div className="mt-2 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
             <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
             <span className="font-bold">Tempo Congelado ({freezeTimeLeft}s)</span>
           </div>
@@ -1045,7 +1084,7 @@ export function QuizScreen({
       </div>
 
       {/* ========================================================= */}
-      {/* 3. FUNDO: PODERES + GRELHA DE RESPOSTAS 2x2 (SHRINK-0)     */}
+      {/* 3. FUNDO: PODERES + GRELHA DE RESPOSTAS RESPONSIVA        */}
       {/* ========================================================= */}
       <div className="w-full flex flex-col gap-2 shrink-0">
         {/* Barra de Ajudas OU Botão Próxima Pergunta */}
@@ -1054,7 +1093,7 @@ export function QuizScreen({
             <button
               type="button"
               onClick={next}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
             >
               <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
               <ChevronRight className="h-4 w-4" />
@@ -1077,8 +1116,8 @@ export function QuizScreen({
           </div>
         )}
 
-        {/* Grelha de Respostas 2x2 com botões h-16 */}
-        <div className="grid grid-cols-2 gap-2 w-full">
+        {/* Grelha de Respostas 100% Adaptativa (1 coluna em mobile, 2 colunas em tablets/desktops) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full">
           {q.options.map((option, idx) => {
             const isEliminated = eliminatedOptions.includes(option.key)
             const state = stateFor(option.key)
@@ -1088,12 +1127,12 @@ export function QuizScreen({
               return (
                 <div
                   key={option.key}
-                  className="h-16 w-full p-2.5 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                  className="min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
                 >
-                  <span className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs flex items-center justify-center shrink-0 line-through">
+                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 line-through">
                     {optionKey}
                   </span>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
+                  <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
                     {option.text}
                   </span>
                 </div>
@@ -1118,13 +1157,13 @@ export function QuizScreen({
                 disabled={phase !== 'answering'}
                 onClick={() => reveal(option.key)}
                 className={cn(
-                  'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98 relative',
+                  'min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
                   buttonStyles
                 )}
               >
                 <span
                   className={cn(
-                    'w-7 h-7 rounded-lg font-extrabold text-xs flex items-center justify-center shrink-0 border transition-colors',
+                    'w-7 h-7 sm:w-8 sm:h-8 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border transition-colors',
                     phase === 'revealed' && state === 'correct'
                       ? 'bg-emerald-500 border-emerald-300 text-slate-950'
                       : phase === 'revealed' && state === 'wrong'
@@ -1134,7 +1173,7 @@ export function QuizScreen({
                 >
                   {optionKey}
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
+                <span className="text-xs sm:text-sm font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
                   {option.text}
                 </span>
 

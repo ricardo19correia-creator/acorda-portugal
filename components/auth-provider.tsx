@@ -23,6 +23,7 @@ import {
 } from '@/lib/session-manager'
 import { SessionConflictModal } from '@/components/session-conflict-modal'
 import { VALID_DISTRICTS } from '@/data/districts'
+import { ECONOMY_CONFIG } from '@/src/data/economy'
 
 export type AuthState = {
   user: User | null
@@ -240,8 +241,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 districtLocked: false,
                 level: 1,
                 xp: 0,
-                coins: 100,
-                euros: 100,
+                coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+                euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
                 title: 'Noviço da Nação',
                 equippedTitle: 'Noviço da Nação',
                 equippedFrame: 'default',
@@ -285,8 +286,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               }
 
               if (typeof window !== 'undefined') {
-                localStorage.setItem('user_coins', '100')
-                localStorage.setItem('user_euros', '100')
+                localStorage.setItem('user_coins', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
+                localStorage.setItem('user_euros', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
                 localStorage.setItem('user_display_name', fallbackName)
                 localStorage.removeItem('user_district')
                 localStorage.setItem('user_equipped_avatar', fallbackAvatar)
@@ -304,8 +305,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 districtLocked: false,
                 level: 1,
                 xp: 0,
-                coins: 100,
-                euros: 100,
+                coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+                euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
                 streak: 0,
                 gamesPlayed: 0,
                 wins: 0,

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_PRAIA_0001",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jogador português é universalmente considerado a maior lenda da história do futebol de praia, sendo o melhor marcador de sempre dos Campeonatos do Mundo da FIFA (com mais de 100 golos no torneio)?",
+    "opcoes": [
+      "Madjer (João Saraiva)",
+      "Belchior",
+      "Alan Cavalcanti",
+      "Jordan Santos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Madjer conquistou múltiplos títulos mundiais e europeus por Portugal, célebre pelos seus acrobáticos pontapés de bicicleta e remates indefensáveis.",
+    "fonte": "Beach Soccer Worldwide (BSWW) / FIFA / FPF",
+    "factClusterId": "fc_praia_madjer_01"
+  },
+  {
+    "id": "FUT_PRAIA_0002",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Em que cidade balnear portuguesa conquistou a Seleção Nacional de Futebol de Praia o Campeonato do Mundo da FIFA em 2015, derrotando o Taiti por 5-3 na final?",
+    "opcoes": [
+      "Nazaré",
+      "Espinho (Praia da Baía)",
+      "Figueira da Foz",
+      "Portimão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio da Praia da Baía em Espinho foi o palco da histórica conquista do título mundial da FIFA por Portugal em julho de 2015.",
+    "fonte": "FIFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_praia_espinho2015_01"
+  },
+  {
+    "id": "FUT_PRAIA_0003",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Quantos períodos e de quantos minutos de tempo cronometrado efetivo é composta uma partida oficial de futebol de praia da FIFA?",
+    "opcoes": [
+      "2 partes de 20 minutos",
+      "4 períodos de 10 minutos",
+      "3 períodos de 12 minutos (total de 36 minutos)",
+      "2 partes de 25 minutos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O futebol de praia joga-se em 3 períodos de 12 minutos de jogo cronometrado, com 3 minutos de intervalo entre cada período.",
+    "fonte": "FIFA Beach Soccer Laws of the Game",
+    "factClusterId": "fc_praia_regras_01"
+  },
+  {
+    "id": "FUT_PRAIA_0004",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que internacional português do SC Braga foi eleito o Melhor Jogador do Mundo de Futebol de Praia em 2019 na gala da Beach Soccer Worldwide no Dubai?",
+    "opcoes": [
+      "Bê Martins",
+      "Léo Martins",
+      "Rui Coimbra",
+      "Jordan Santos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jordan Santos, natural da Nazaré, marcou um hat-trick na final do Mundial de 2019 no Paraguai contra a Itália (6-4).",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_jordansantos_01"
+  },
+  {
+    "id": "FUT_PRAIA_0005",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Em que cidade sul-americana (Paraguai) sagrou-se Portugal tricampeão mundial da FIFA de futebol de praia em dezembro de 2019?",
+    "opcoes": [
+      "Luque (Assunção)",
+      "Rio de Janeiro",
+      "Montevideu",
+      "Buenos Aires"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal venceu a Itália por 6-4 na final do Estádio Los Pynandi em Luque, conquistando o seu terceiro troféu mundial.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_praia_mundial2019_01"
+  },
+  {
+    "id": "FUT_PRAIA_0006",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que selecionador nacional comanda a Seleção Portuguesa de Futebol de Praia desde 2013, tendo guiado o país aos títulos mundiais de 2015 e 2019?",
+    "opcoes": [
+      "Zé Miguel",
+      "Mário Narciso",
+      "Luís Bilro",
+      "João Barnabé"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Narciso é o treinador mais titulado da história da Seleção Portuguesa de Futebol de Praia.",
+    "fonte": "Federação Portuguesa de Futebol / BSWW",
+    "factClusterId": "fc_praia_marionarciso_01"
+  },
+  {
+    "id": "FUT_PRAIA_0007",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que luso-brasileiro internacional por Portugal foi eleito o Melhor Jogador do Mundo de Futebol de Praia em 2022 pela Beach Soccer Worldwide?",
+    "opcoes": [
+      "Léo Martins",
+      "Elinton Andrade",
+      "Bê Martins (Bernardo Martins)",
+      "Coimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bê Martins é um dos jogadores mais virtuosos e dominadores da modalidade à escala mundial.",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_bemartins_01"
+  },
+  {
+    "id": "FUT_PRAIA_0008",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que guarda-redes veterano luso-brasileiro da Seleção Nacional foi galardoado como o Melhor Guarda-Redes do Mundo pela FIFA nos Mundiais de 2015 e 2019?",
+    "opcoes": [
+      "Tiago Petrony",
+      "Rúben Regufe",
+      "Pedro Mano",
+      "Elinton Andrade"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elinton Andrade foi uma das figuras maiores das conquistas mundiais de Portugal em Espinho e no Paraguai.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_praia_elintonandrade_01"
+  },
+  {
+    "id": "FUT_PRAIA_0009",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que clube português sediado no Minho tornou-se a maior potência mundial de clubes de futebol de praia, conquistando a Euro Winners Cup e o Mundialito de Clubes por várias vezes?",
+    "opcoes": [
+      "SC Braga",
+      "Sporting CP",
+      "SL Benfica",
+      "FC Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O SC Braga é tricampeão mundial e tricampeão europeu de clubes de futebol de praia.",
+    "fonte": "Sporting Clube de Braga / BSWW",
+    "factClusterId": "fc_praia_scbraga_01"
+  },
+  {
+    "id": "FUT_PRAIA_0010",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Em que famosa praia portuguesa se situa o icónico «Estádio do Viveiro — Jordan Santos», palco habitual das grandes competições europeias de futebol de praia (Euro Winners Cup e Liga Europeia)?",
+    "opcoes": [
+      "Praia de Buarcos (Figueira da Foz)",
+      "Praia da Nazaré",
+      "Praia de Carcavelos",
+      "Praia da Rocha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Viveiro na Nazaré é considerado a meca do futebol de praia europeu contemporâneo.",
+    "fonte": "Município da Nazaré / BSWW",
+    "factClusterId": "fc_praia_nazare_estadio_01"
+  },
+  {
+    "id": "FUT_PRAIA_0011",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jogador e capitão de longa data da Seleção Nacional (n.º 7) marcou mais de 400 golos por Portugal e foi campeão mundial em 2015 e 2019?",
+    "opcoes": [
+      "Alan",
+      "Hernâni",
+      "Belchior (Nuno Belchior)",
+      "Torres"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nuno Belchior é um dos marcadores mais letais da história do futebol de praia português com pontapés potentes de meia-distância.",
+    "fonte": "FPF / BSWW",
+    "factClusterId": "fc_praia_belchior_01"
+  },
+  {
+    "id": "FUT_PRAIA_0012",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que antigo internacional e capitão português nascido no Brasil foi um dos pioneiros da modalidade e integrou a equipa campeã mundial em 2001 e 2015?",
+    "opcoes": [
+      "Madjer",
+      "Hernâni Madruga",
+      "Barraca",
+      "Alan Cavalcanti"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alan jogou mais de duas décadas pela Seleção Nacional, famoso pelas suas assistências de chapéu e leitura de jogo refinada.",
+    "fonte": "FPF / Beach Soccer Worldwide",
+    "factClusterId": "fc_praia_alancavalcanti_01"
+  },
+  {
+    "id": "FUT_PRAIA_0013",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "O que acontece se uma partida oficial de futebol de praia terminar empatada no final dos 36 minutos regulamentares?",
+    "opcoes": [
+      "Joga-se um prolongamento de 3 minutos e, se persistir, decide-se no desempate por grandes penalidades (morte súbita)",
+      "O jogo termina empatado com 1 ponto para cada equipa",
+      "Joga-se um prolongamento de 10 minutos",
+      "Ganha a equipa com menos faltas cometidas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "No futebol de praia não existem empates: tem de haver obrigatoriamente um vencedor após prolongamento ou penáltis.",
+    "fonte": "FIFA Beach Soccer Laws of the Game",
+    "factClusterId": "fc_praia_desempate_01"
+  },
+  {
+    "id": "FUT_PRAIA_0014",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Quantos pontos são atribuídos a uma equipa que vence um jogo de futebol de praia durante o tempo regulamentar de 36 minutos?",
+    "opcoes": [
+      "3 pontos em qualquer circunstância",
+      "3 pontos (2 pontos se vencer no prolongamento, 1 ponto se vencer nos penáltis)",
+      "2 pontos",
+      "4 pontos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A vitória nos 36 minutos vale 3 pontos; vitória no prolongamento vale 2 pontos; vitória nos penáltis vale 1 ponto.",
+    "fonte": "Regulamento da FIFA / BSWW",
+    "factClusterId": "fc_praia_pontuacao_01"
+  },
+  {
+    "id": "FUT_PRAIA_0015",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Quantos jogadores de cada equipa estão em campo simultaneamente numa partida de futebol de praia?",
+    "opcoes": [
+      "6 jogadores",
+      "7 jogadores",
+      "5 jogadores (1 guarda-redes e 4 jogadores de campo)",
+      "4 jogadores"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cada equipa alinha com 5 jogadores na areia e pode fazer substituições volantes ilimitadas.",
+    "fonte": "FIFA Laws of the Game",
+    "factClusterId": "fc_praia_jogadores_01"
+  },
+  {
+    "id": "FUT_PRAIA_0016",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Na marcação de um livre direto no futebol de praia, que regra especial e exclusiva da modalidade se aplica à execução do remate?",
+    "opcoes": [
+      "Qualquer jogador pode marcar e tem barreira a 5 metros",
+      "O guarda-redes não pode defender com as mãos",
+      "O livre tem de ser passado para trás",
+      "O livre tem de ser marcado obrigatoriamente pelo jogador que sofreu a falta e não é permitida barreira de defesas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Salvo lesão grave, o próprio jogador que sofreu a falta deve executar o livre direto sem qualquer barreira entre ele e a baliza adversária.",
+    "fonte": "Leis do Futebol de Praia da FIFA",
+    "factClusterId": "fc_praia_livresembarreira_01"
+  },
+  {
+    "id": "FUT_PRAIA_0017",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que pontapé acrobático espetacular, executado de costas para a baliza no ar levantando a bola da areia, é a imagem de marca do futebol de praia em Portugal?",
+    "opcoes": [
+      "Pontapé de bicicleta (ou Tesoura voadora)",
+      "Remate de calcanhar",
+      "Cabeceamento em mergulho",
+      "Passe de trivela"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As regras protegem o jogador que executa o pontapé de bicicleta: os defesas não podem tentar cortar a bola nem tocar no atacante enquanto este estiver no ar.",
+    "fonte": "FIFA Beach Soccer Manual",
+    "factClusterId": "fc_praia_bicicleta_01"
+  },
+  {
+    "id": "FUT_PRAIA_0018",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que fixo/ala e capitão da Seleção Nacional de Futebol de Praia do SC Braga venceu a medalha de ouro nos Jogos Europeus de Minsk em 2019 e o Mundial no Paraguai?",
+    "opcoes": [
+      "Bruno Novo",
+      "Rui Coimbra",
+      "André Lourenço",
+      "Tiago Batalha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Rui Coimbra é um dos defesas mais consistentes e experientes do futebol de praia português.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_praia_ruicoimbra_01"
+  },
+  {
+    "id": "FUT_PRAIA_0019",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que pivô da Seleção Nacional, irmão gémeo de Bê Martins, é um dos mais temíveis goleadores de área do futebol de praia mundial?",
+    "opcoes": [
+      "Jordan Santos",
+      "Duarte Algarvio",
+      "Léo Martins (Leonardo Martins)",
+      "Ruben Brilhante"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Léo Martins marcou dezenas de golos decisivos com a camisola das quinas nos Mundiais e na Liga Europeia.",
+    "fonte": "FPF / BSWW",
+    "factClusterId": "fc_praia_leomartins_01"
+  },
+  {
+    "id": "FUT_PRAIA_0020",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que prestigiado torneio internacional de seleções por convite foi disputado durante anos nas praias de Portugal (Figueira da Foz, Portimão e Cascais) antes da criação do Mundial FIFA?",
+    "opcoes": [
+      "Copa das Nações",
+      "Torneio de Toulon",
+      "Taça Ibérica",
+      "Mundialito de Futebol de Praia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Mundialito reuniu as melhores seleções do planeta nas areias douradas de Portugal ao longo dos anos 90 e 2000.",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_mundialito_01"
+  },
+  {
+    "id": "FUT_PRAIA_0021",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jovem guarda-redes do SC Braga e da Seleção Nacional assumiu a titularidade da baliza portuguesa após a retirada internacional de Elinton Andrade?",
+    "opcoes": [
+      "Pedro Mano",
+      "Bernardo Lopes",
+      "Diogo Dias",
+      "Bruno Mateus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Pedro Mano foi eleito o Melhor Guarda-Redes da Euro Winners Cup e é a nova referência da baliza lusa.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_praia_pedromano_01"
+  },
+  {
+    "id": "FUT_PRAIA_0022",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Qual é a superfície obrigatória onde se joga o futebol de praia oficial segundo as regras da FIFA?",
+    "opcoes": [
+      "Grama sintética",
+      "Areia fina descompactada e nivelada com pelo menos 40 cm de profundidade, sem pedras ou conchas",
+      "Piso de madeira flutuante",
+      "Asfalto polido"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A areia deve ser fofa e profunda para amortecer as quedas nos remates acrobáticos e testar a resistência física dos atletas.",
+    "fonte": "FIFA Stadium & Sand Regulations",
+    "factClusterId": "fc_praia_areia_01"
+  },
+  {
+    "id": "FUT_PRAIA_0023",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "É permitido aos jogadores de futebol de praia utilizar sapatilhas ou chuteiras com pitões durante as partidas oficiais?",
+    "opcoes": [
+      "Sim, chuteiras de borracha são obrigatórias",
+      "Apenas o guarda-redes pode usar sapatilhas",
+      "Não, os jogadores jogam obrigatoriamente descalços (sendo apenas permitidas meias ou proteções elásticas de tornozelo)",
+      "Sim, desde que não tenham pitões de ferro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O futebol de praia é praticado descalço na areia, o que confere sensibilidade única no controlo de bola.",
+    "fonte": "Leis do Jogo de Futebol de Praia da FIFA",
+    "factClusterId": "fc_praia_descalcos_01"
+  },
+  {
+    "id": "FUT_PRAIA_0024",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que clube de Lisboa venceu o Campeonato Nacional de Futebol de Praia e o prestigiado Mundialito de Clubes em 2011 em São Paulo com Madjer no plantel?",
+    "opcoes": [
+      "SL Benfica",
+      "Belenenses",
+      "Vitória de Setúbal",
+      "Sporting Clube de Portugal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Sporting CP foi o primeiro campeão mundial de clubes de futebol de praia da história da modalidade em 2011.",
+    "fonte": "Sporting CP / BSWW",
+    "factClusterId": "fc_praia_sportingpraia_01"
+  },
+  {
+    "id": "FUT_PRAIA_0025",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que internacional português foi considerado um dos melhores defesas do mundo nos anos 2000, célebre pela sua força atlética e remates fortes de bola parada?",
+    "opcoes": [
+      "Hernâni Madruga (Hernâni)",
+      "Zé Maria",
+      "Barraca",
+      "Marinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Hernâni fez parte da geração de ouro fundadora do futebol de praia nacional ao lado de Madjer e Alan.",
+    "fonte": "FPF / Zerozero",
+    "factClusterId": "fc_praia_hernani_01"
+  },
+  {
+    "id": "FUT_PRAIA_0026",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que competição da UEFA reúne anualmente os clubes campeões nacionais de futebol de praia de toda a Europa, habitualmente disputada na Nazaré?",
+    "opcoes": [
+      "UEFA Champions League",
+      "Euro Winners Cup",
+      "Copa Ibérica",
+      "Supertaça Europeia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Euro Winners Cup é o equivalente à Liga dos Campeões no futebol de praia de clubes.",
+    "fonte": "Beach Soccer Worldwide / UEFA",
+    "factClusterId": "fc_praia_eurowinnerscup_01"
+  },
+  {
+    "id": "FUT_PRAIA_0027",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jovem jogador da Nazaré, formado na Associação Sótão e internacional por Portugal, foi campeão da Euro Winners Cup pelo SC Braga?",
+    "opcoes": [
+      "Ruben Brilhante",
+      "André Lourenço",
+      "Duarte Algarvio",
+      "Tiago Batalha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Duarte Algarvio é um dos grandes talentos da nova vaga do futebol de praia da Nazaré e de Portugal.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_praia_duartealgarvio_01"
+  },
+  {
+    "id": "FUT_PRAIA_0028",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que clube histórico da Nazaré fundado em 1974 tem equipa na Divisão de Elite de futebol de praia e organiza torneios de formação de referência?",
+    "opcoes": [
+      "Nazaré United",
+      "Marítimo da Nazaré",
+      "Clube Naval da Nazaré",
+      "Associação Desportiva Cultural e Recreativa Bairro de Sótão (ACDR Sótão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Sótão da Nazaré é um dos berços mais prolíficos de talentos do futebol de praia em Portugal.",
+    "fonte": "FPF / ACDR Sótão",
+    "factClusterId": "fc_praia_sotao_01"
+  },
+  {
+    "id": "FUT_PRAIA_0029",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que troféu continental da Beach Soccer Worldwide reúne anualmente as melhores seleções da Europa ao longo de várias etapas («Euro Beach Soccer League»)?",
+    "opcoes": [
+      "Liga Europeia de Futebol de Praia (EBSL)",
+      "Taça das Nações",
+      "Mundialito",
+      "Eurocopa de Areia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal é o país com maior número de títulos conquistados na história da Liga Europeia de Futebol de Praia.",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_ebsl_01"
+  },
+  {
+    "id": "FUT_PRAIA_0030",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Quantos segundos tem o guarda-redes de futebol de praia para repor a bola em jogo ou passar a um colega quando tem a posse da bola na sua grande área?",
+    "opcoes": [
+      "6 segundos",
+      "4 segundos",
+      "5 segundos",
+      "10 segundos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A regra dos 4 segundos visa imprimir grande rapidez e dinamismo ao jogo de futebol de praia.",
+    "fonte": "FIFA Beach Soccer Rules",
+    "factClusterId": "fc_praia_4segundos_01"
+  },
+  {
+    "id": "FUT_PRAIA_0031",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jogador português de futebol de praia do SC Braga é célebre pela sua combatividade e golo acrobático nos Jogos Europeus de Minsk em 2019?",
+    "opcoes": [
+      "Rui Coimbra",
+      "Jordan Santos",
+      "André Lourenço",
+      "Tiago Petrony"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "André Lourenço é um dos pilares da seleção nacional orientada por Mário Narciso.",
+    "fonte": "FPF / Comité Olímpico de Portugal",
+    "factClusterId": "fc_praia_andrelourenco_01"
+  },
+  {
+    "id": "FUT_PRAIA_0032",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Qual é a dimensão oficial recomendada pela FIFA para o campo de futebol de praia?",
+    "opcoes": [
+      "50 metros por 40 metros",
+      "30 metros por 20 metros",
+      "45 metros por 35 metros",
+      "37 metros de comprimento por 28 metros de largura (aproximadamente)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As dimensões padrão são de 35 a 37 m de comprimento e 26 a 28 m de largura delimitadas por fitas coloridas presas na areia.",
+    "fonte": "FIFA Beach Soccer Pitch Regulations",
+    "factClusterId": "fc_praia_dimensoescampo_01"
+  },
+  {
+    "id": "FUT_PRAIA_0033",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que seleção nacional foi a grande rival histórica de Portugal nas finais mundiais de futebol de praia nos anos 90 e 2000 na Praia de Copacabana?",
+    "opcoes": [
+      "Brasil (Seleção Brasileira de Beach Soccer)",
+      "Itália",
+      "Espanha",
+      "Rússia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os duelos entre o Portugal de Madjer e o Brasil de Jorginho e Júnior Negão são lendários na história da modalidade.",
+    "fonte": "BSWW / FIFA",
+    "factClusterId": "fc_praia_brasilportugal_01"
+  },
+  {
+    "id": "FUT_PRAIA_0034",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que clube da ilha da Madeira disputa o Campeonato Nacional de Futebol de Praia com tradição nas etapas da Nazaré e Porto Santo?",
+    "opcoes": [
+      "CD Nacional",
+      "CS Marítimo (ou Porto Santo Golfe)",
+      "União da Madeira",
+      "AD Camacha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O CS Marítimo mantém equipa sénior na Divisão de Elite de futebol de praia da FPF.",
+    "fonte": "FPF / Associação de Futebol da Madeira",
+    "factClusterId": "fc_praia_maritimo_01"
+  },
+  {
+    "id": "FUT_PRAIA_0035",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que cor têm os cartões disciplinares mostrados pelos árbitros no futebol de praia além do amarelo e do vermelho?",
+    "opcoes": [
+      "Cartão verde",
+      "Cartão branco",
+      "Cartão azul (expulsão temporária de 2 minutos)",
+      "Cartão laranja"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O cartão azul sanciona condutas antidesportivas com suspensão temporária de 2 minutos ou até a equipa sofrer um golo.",
+    "fonte": "Leis do Jogo da FIFA / BSWW",
+    "factClusterId": "fc_praia_cartaoazul_01"
+  },
+  {
+    "id": "FUT_PRAIA_0036",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jovem jogador da Nazaré foi eleito a «Revelação do Ano» no futebol de praia nacional pelo SC Braga?",
+    "opcoes": [
+      "Miguel Pintado",
+      "Diogo Dias",
+      "Filipe Silva",
+      "Ruben Brilhante"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Ruben Brilhante é uma das certezas da renovação da Seleção Nacional de Futebol de Praia.",
+    "fonte": "FPF / SC Braga",
+    "factClusterId": "fc_praia_rubenbrilhante_01"
+  },
+  {
+    "id": "FUT_PRAIA_0037",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Em que cidade bielorrussa conquistou Portugal a medalha de ouro no torneio de Futebol de Praia dos Jogos Europeus de 2019, batendo a Espanha por 8-3 na final?",
+    "opcoes": [
+      "Minsk",
+      "Baku",
+      "Cracóvia",
+      "Varsóvia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Seleção Portuguesa dominou os Jogos Europeus de Minsk em junho de 2019 com exibições memoráveis.",
+    "fonte": "Comité Olímpico de Portugal / BSWW",
+    "factClusterId": "fc_praia_minsk2019_01"
+  },
+  {
+    "id": "FUT_PRAIA_0038",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que antigo internacional português de futebol de praia (e treinador adjunto de Mário Narciso) foi um dos defesas mais duros e respeitados da modalidade?",
+    "opcoes": [
+      "Tiago Petrony",
+      "Luís Bilro",
+      "João Barnabé",
+      "Pedro Brito"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Luís Bilro integrou a equipa técnica nacional nos dois títulos mundiais conquistados em 2015 e 2019.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_praia_luisbilro_01"
+  },
+  {
+    "id": "FUT_PRAIA_0039",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Como é efetuado o lançamento lateral no futebol de praia?",
+    "opcoes": [
+      "Apenas com as mãos",
+      "Apenas com os pés",
+      "Pode ser executado com as mãos ou com os pés (à escolha do jogador)",
+      "Pelo guarda-redes com pontapé de baliza"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "No futebol de praia, o jogador pode optar livremente por lançar a bola de linha lateral com as mãos ou pontapeá-la com o pé.",
+    "fonte": "Leis do Jogo da FIFA",
+    "factClusterId": "fc_praia_lancamentolateral_01"
+  },
+  {
+    "id": "FUT_PRAIA_0040",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que clube de Buarcos (Figueira da Foz) fundado em 1904 tem tradição secular nas modalidades de praia e na Divisão de Elite da FPF?",
+    "opcoes": [
+      "Ginásio Figueirense",
+      "Académica",
+      "Tourizense",
+      "Associação Desportiva Naval 1893 (ou Buarcos 2017)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Figueira da Foz é um dos polos históricos pioneiros do futebol de praia em Portugal.",
+    "fonte": "FPF / Associação de Futebol de Coimbra",
+    "factClusterId": "fc_praia_figueiradafoz_01"
+  },
+  {
+    "id": "FUT_PRAIA_0041",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que jogador português de futebol de praia foi campeão do mundo em 2019 e atua como ala velocista no SC Braga?",
+    "opcoes": [
+      "Fabinho (Fábio Costa)",
+      "Jordan Santos",
+      "Madjer",
+      "Bê Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Fabinho fez parte da convocatória que se sagrou campeã do mundo no Paraguai em 2019.",
+    "fonte": "FPF / Zerozero",
+    "factClusterId": "fc_praia_fabinho_01"
+  },
+  {
+    "id": "FUT_PRAIA_0042",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que prémio individual da FIFA homenageia anualmente o melhor golo do ano e foi atribuído a Madjer pelos seus golos acrobáticos em Campeonatos do Mundo?",
+    "opcoes": [
+      "Prémio Puskás",
+      "Melhor Golo do Mundial FIFA Beach Soccer (Golo do Ano)",
+      "Bola de Cristal",
+      "Troféu Samba"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Madjer colecionou mais de 10 prémios de melhor golo e melhor marcador em competições da FIFA e BSWW.",
+    "fonte": "FIFA / Beach Soccer Worldwide",
+    "factClusterId": "fc_praia_madjergolos_01"
+  },
+  {
+    "id": "FUT_PRAIA_0043",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Qual é a altura e largura regulamentar da baliza de futebol de praia nas competições oficiais da FIFA?",
+    "opcoes": [
+      "7,32 m por 2,44 m (como no futebol de 11)",
+      "3 m por 2 m (como no futsal)",
+      "5,5 metros de largura por 2,2 metros de altura",
+      "4 m por 2 m"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A baliza de futebol de praia mede 5,50 m x 2,20 m, permitindo uma média elevada de mais de 8 a 10 golos por partida.",
+    "fonte": "FIFA Beach Soccer Regulations",
+    "factClusterId": "fc_praia_balizaregulamentar_01"
+  },
+  {
+    "id": "FUT_PRAIA_0044",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que internacional português foi eleito o Melhor Guarda-Redes do Euro Beach Soccer League em várias edições consecutivas pelo SC Braga e Portugal?",
+    "opcoes": [
+      "Pedro Mano",
+      "Tiago Petrony",
+      "João Carlos",
+      "Elinton Andrade"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elinton Andrade foi um dos maiores esteios defensivos da seleção nacional na Europa.",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_elintonpremios_01"
+  },
+  {
+    "id": "FUT_PRAIA_0045",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que competição feminina de futebol de praia foi lançada pela FPF em 2021, coroando os primeiros clubes campeões nacionais femininos?",
+    "opcoes": [
+      "Campeonato Nacional Feminino de Futebol de Praia",
+      "Taça Ibérica Feminina",
+      "Torneio das Campeãs",
+      "Liga das Praias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A FPF estruturou o quadro competitivo feminino de futebol de praia, fortalecendo a Seleção Nacional Feminina.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_praia_femfutebolpraia_01"
+  },
+  {
+    "id": "FUT_PRAIA_0046",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que internacional português natural da Nazaré marcou o primeiro golo de Portugal na final do Mundial de 2015 em Espinho frente ao Taiti logo aos 3 segundos de jogo?",
+    "opcoes": [
+      "Belchior",
+      "Madjer",
+      "Coimbra",
+      "Alan"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Madjer marcou de pontapé de saída aos 3 segundos, um dos golos mais rápidos da história das finais mundiais da FIFA.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_praia_golomaisrapido_01"
+  },
+  {
+    "id": "FUT_PRAIA_0047",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que treinador brasileiro orientou o SC Braga de Futebol de Praia na conquista da sua primeira tríplice coroa europeia e mundial?",
+    "opcoes": [
+      "Bruno Torres",
+      "Gilberto Costa",
+      "António Torres",
+      "Alexandre Soares"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Bruno Torres e a estrutura bracarense montaram a equipa mais vitoriosa do circuito mundial de clubes.",
+    "fonte": "SC Braga / BSWW",
+    "factClusterId": "fc_praia_brunotorres_01"
+  },
+  {
+    "id": "FUT_PRAIA_0048",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que praia do concelho de Cascais acolheu etapas históricas do Campeonato Nacional e do Mundialito de Futebol de Praia nos anos 2000?",
+    "opcoes": [
+      "Praia do Guincho",
+      "Praia da Duquesa",
+      "Praia do Tamariz",
+      "Praia de Carcavelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Praia de Carcavelos foi um dos palcos míticos do futebol de praia na Linha de Cascais.",
+    "fonte": "Município de Cascais / Turismo de Lisboa",
+    "factClusterId": "fc_praia_carcavelos_01"
+  },
+  {
+    "id": "FUT_PRAIA_0049",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Qual é a cor da bola oficial de futebol de praia regulamentada pela FIFA para garantir máxima visibilidade sobre o areal?",
+    "opcoes": [
+      "Laranja brilhante ou amarelo fluorescente",
+      "Branca clássica",
+      "Preta fosca",
+      "Verde-esmeralda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A cor laranja/amarela viva permite aos jogadores, árbitros e público acompanhar a trajetória da bola no ar sob o sol e a areia.",
+    "fonte": "FIFA Beach Soccer Regulations",
+    "factClusterId": "fc_praia_bolalaranja_01"
+  },
+  {
+    "id": "FUT_PRAIA_0050",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Em que cidade costeira da Costa do Marfim e no Dubai foram disputadas as finais intercontinentais em que Portugal se sagrou campeão com Madjer a capitanear?",
+    "opcoes": [
+      "Doha",
+      "Abu Dhabi",
+      "Dubai (Intercontinental Beach Soccer Cup)",
+      "Riade"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Taça Intercontinental no Dubai reuniu anualmente os melhores do planeta com cobertura global.",
+    "fonte": "Beach Soccer Worldwide / FPF",
+    "factClusterId": "fc_praia_dubai_01"
+  }
+]

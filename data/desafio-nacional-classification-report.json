@@ -1,0 +1,117 @@
+{
+  "timestamp": "2026-08-26T04:57:48.507Z",
+  "phase": "FASE_2_2_CLASSIFICATION",
+  "totalClassifiedHighConfidence": 2020,
+  "totalNeedsReview": 4008,
+  "totalUnclassified": 5972,
+  "totalSubthemesInProduction": 42,
+  "totalSubthemesNotStarted": 191,
+  "totalSubthemesComplete": 0,
+  "topPrioritySubthemes": [
+    {
+      "tema": "Portugal",
+      "subtema": "Regiões",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Gastronomia Portuguesa",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Personalidades Portuguesas",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Portugal",
+      "subtema": "Curiosidades de Portugal",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Jogadoras",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Estádios",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Competições",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Liga Portuguesa",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Momentos Marcantes",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Dérbis & Clássicos",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Curiosidades do Futebol",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Futsal",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Futebol Português",
+      "subtema": "Futebol de Praia",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Notícias Recentes",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    },
+    {
+      "tema": "Atualidade — Portugal Agora",
+      "subtema": "Política Atual",
+      "approvedCount": 0,
+      "remaining": 2000,
+      "status": "NOT_STARTED"
+    }
+  ]
+}

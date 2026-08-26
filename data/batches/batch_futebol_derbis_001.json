@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_DERBI_0001",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que capitão leonino marcou 4 golos na histórica vitória do Sporting CP por 7-1 sobre o SL Benfica a 14 de dezembro de 1986 no antigo Estádio José Alvalade?",
+    "opcoes": [
+      "Manuel Fernandes",
+      "Fernando Peyroteo",
+      "Jordão",
+      "Litos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuel Fernandes assinou um póquer lendário no dérbi de 1986, a maior goleada de sempre entre os dois rivais lisboetas no campeonato.",
+    "fonte": "Jornal Sporting / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_derbi_7a1_01"
+  },
+  {
+    "id": "FUT_DERBI_0002",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que extremo brasileiro do FC Porto marcou aos 91 minutos e 25 segundos o golo dramático da vitória por 2-1 sobre o SL Benfica a 11 de maio de 2013 no Estádio do Dragão («Minuto 92»), decidindo o campeonato?",
+    "opcoes": [
+      "James Rodríguez",
+      "Kelvin",
+      "Hulk",
+      "Silvestre Varela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O remate cruzado de pé esquerdo de Kelvin ao ângulo da baliza de Artur Moraes garantiu o título de campeão nacional invicto ao FC Porto de Vítor Pereira.",
+    "fonte": "FC Porto / Liga Portugal / Diário de Notícias",
+    "factClusterId": "fc_derbi_kelvin92_01"
+  },
+  {
+    "id": "FUT_DERBI_0003",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Como é tradicionalmente denominado o confronto futebolístico centenário entre os dois maiores clubes da cidade de Lisboa, o Sport Lisboa e Benfica e o Sporting Clube de Portugal?",
+    "opcoes": [
+      "O Clássico",
+      "Dérbi da Invicta",
+      "Dérbi Eterno (ou Dérbi da 2.ª Circular / Dérbi de Lisboa)",
+      "Dérbi dos Campeões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Disputado desde 1 de dezembro de 1907, o Dérbi Eterno é a maior rivalidade citadina do desporto português.",
+    "fonte": "Liga Portugal / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_derbi_derbieterno_01"
+  },
+  {
+    "id": "FUT_DERBI_0004",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Como se designa a mais acesa rivalidade regional do norte de Portugal, disputada entre o Vitória Sport Clube de Guimarães e o Sporting Clube de Braga?",
+    "opcoes": [
+      "Dérbi do Norte",
+      "Dérbi do Ave",
+      "Dérbi da Ria",
+      "Dérbi do Minho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Dérbi do Minho opõe vimaranenses e bracarenses com paixão e lotações esgotadas no D. Afonso Henriques e no Municipal de Braga.",
+    "fonte": "Liga Portugal / Associação de Futebol de Braga",
+    "factClusterId": "fc_derbi_derbidominho_01"
+  },
+  {
+    "id": "FUT_DERBI_0005",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que capitão e defesa-central brasileiro do SL Benfica marcou de cabeça aos 83 minutos na vitória por 1-0 sobre o Sporting CP em maio de 2005 no Estádio da Luz, abrindo caminho ao título de Trapattoni?",
+    "opcoes": [
+      "Luisão",
+      "David Luiz",
+      "Garay",
+      "Jardel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O golo de Luisão após saída em falso de Ricardo selou a vitória encarnada na penúltima jornada do campeonato de 2004/05.",
+    "fonte": "Sport Lisboa e Benfica / Jornal Record",
+    "factClusterId": "fc_derbi_luisao2005_01"
+  },
+  {
+    "id": "FUT_DERBI_0006",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Como é conhecido o dérbi citadino do Porto disputado entre o FC Porto (azuis e brancos das Antas/Dragão) e o Boavista FC (axadrezados do Bessa)?",
+    "opcoes": [
+      "Dérbi do Douro",
+      "Dérbi da Invicta",
+      "Dérbi Portuense",
+      "Dérbi de São João"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Dérbi da Invicta remonta a 1914 e é o clássico mais emblemático da cidade do Porto.",
+    "fonte": "Associação de Futebol do Porto / Zerozero",
+    "factClusterId": "fc_derbi_invicta_01"
+  },
+  {
+    "id": "FUT_DERBI_0007",
+    "tema": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "pergunta": "Que dérbi insular do Funchal coloca frente a frente os verde-rubros do Club Sport Marítimo (dos Barreiros) e os alvinegros do Clube Desportivo Nacional (da Choupana)?",
+    "opcoes": [
+      "Dérbi do Funchal",
+      "Dérbi das Ilhas",
+      "Dérbi da Madeira",
+      "Dérbi do Atlântico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Dérbi da Madeira mobiliza a paixão dos adeptos madeirenses no Estádio dos Barreiros e no Estádio da Madeira.",
+    "fonte": "Associação de Futebol da Madeira",
+    "factClusterId": "fc_derbi_madeira_01"
+  },
+  {
+    "id": "FUT_DERBI_0008",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Em novembro de 2010, que resultado histórico alcançou o FC Porto de André Villas-Boas sobre o SL Benfica no Estádio do Dragão, com bis de Hulk e Falcao?",
+    "opcoes": [
+      "4-0",
+      "6-1",
+      "3-0",
+      "5-0 a favor do FC Porto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O FC Porto goleou o Benfica por 5-0 (golos de Varela, Falcao [2] e Hulk [2]) na 10.ª jornada da Liga 2010/11.",
+    "fonte": "FC Porto / Liga Portugal",
+    "factClusterId": "fc_derbi_5a0_porto_01"
+  },
+  {
+    "id": "FUT_DERBI_0009",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado dos «Cinco Violinos» do Sporting CP detém o recorde de mais golos marcados na história dos dérbis oficiais contra o SL Benfica (com 48 golos marcados)?",
+    "opcoes": [
+      "Fernando Peyroteo",
+      "Jesus Correia",
+      "Manuel Vasques",
+      "José Travassos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Peyroteo possui uma média estratosférica de mais de um golo por jogo no dérbi lisboeta, incluindo jogos com 8 e 9 golos na sua carreira.",
+    "fonte": "Sporting CP / Zerozero",
+    "factClusterId": "fc_derbi_peyroteo_01"
+  },
+  {
+    "id": "FUT_DERBI_0010",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que lendário camisola 10 e Bola de Ouro do SL Benfica é o maior goleador encarnado da história dos confrontos com o Sporting CP (com 27 golos marcados)?",
+    "opcoes": [
+      "José Águas",
+      "Eusébio da Silva Ferreira",
+      "Nené",
+      "Coluna"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Eusébio assinou exibições memoráveis no Estádio da Luz e em Alvalade ao longo de década e meia.",
+    "fonte": "SL Benfica / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_derbi_eusebio_01"
+  },
+  {
+    "id": "FUT_DERBI_0011",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Como é designado o dérbi algarvio disputado entre os alvinegros do Sporting Clube Farense (de Faro) e os rubro-negros do Sporting Clube Olhanense (de Olhão)?",
+    "opcoes": [
+      "Dérbi da Ria Formosa",
+      "Dérbi do Barlavento",
+      "Dérbi do Sotavento Algarvio (Farense vs Olhanense)",
+      "Dérbi do Infante"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Separadas por apenas 8 km, Faro e Olhão protagonizam a rivalidade mais antiga e fervorosa do futebol algarvio.",
+    "fonte": "Associação de Futebol do Algarve / Zerozero",
+    "factClusterId": "fc_derbi_farense_olhanense_01"
+  },
+  {
+    "id": "FUT_DERBI_0012",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que nome se dá ao clássico da região de Aveiro disputado ao longo da Estrada Nacional 1 entre o CD Feirense (de Santa Maria da Feira) e a UD Oliveirense (de Oliveira de Azeméis)?",
+    "opcoes": [
+      "Dérbi do Vouga",
+      "Dérbi da Ria",
+      "Dérbi da Bairrada",
+      "Dérbi da EN1 (ou Dérbi da Região Norte de Aveiro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O dérbi entre Feirense e Oliveirense reúne milhares de adeptos dos concelhos vizinhos do distrito de Aveiro.",
+    "fonte": "AF Aveiro / Zerozero",
+    "factClusterId": "fc_derbi_en1_01"
+  },
+  {
+    "id": "FUT_DERBI_0013",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que rivalidade histórica do Alto Trás-os-Montes e Douro opõe os flavienses do Grupo Desportivo de Chaves aos alvinegros do Sport Clube de Vila Real?",
+    "opcoes": [
+      "Dérbi Transmontano (Chaves vs Vila Real)",
+      "Dérbi do Marão",
+      "Dérbi do Corgo",
+      "Dérbi do Tâmega"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Dérbi Transmontano representa a rivalidade histórica entre as duas maiores cidades do distrito de Vila Real.",
+    "fonte": "Associação de Futebol de Vila Real",
+    "factClusterId": "fc_derbi_transmontano_01"
+  },
+  {
+    "id": "FUT_DERBI_0014",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado brasileiro do FC Porto apontou um hat-trick no Estádio da Luz em abril de 1997 na vitória portista por 5-0 na 1.ª mão da Supertaça Cândido de Oliveira?",
+    "opcoes": [
+      "Domingos Paciência",
+      "Mário Jardel",
+      "Artur",
+      "Edmilson"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Jardel protagonizou uma noite de gala na Luz na goleada de 5-0 dos dragões sob comando de António Oliveira.",
+    "fonte": "FC Porto / FPF",
+    "factClusterId": "fc_derbi_jardel1997_01"
+  },
+  {
+    "id": "FUT_DERBI_0015",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que extremo e capitão do SL Benfica marcou 3 golos no famoso dérbi de Alvalade de 14 de maio de 1994, quando o Benfica venceu o Sporting por 6-3 no jogo do título?",
+    "opcoes": [
+      "Rui Costa",
+      "Isaías",
+      "João Vieira Pinto",
+      "Kulkov"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A exibição magistral de João Pinto no 3-6 de 1994 em Alvalade é considerada uma das mais perfeitas exibições individuais da história do futebol português.",
+    "fonte": "SL Benfica / Jornal A Bola",
+    "factClusterId": "fc_derbi_joaopinto1994_01"
+  },
+  {
+    "id": "FUT_DERBI_0016",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Como é designado no futebol português o clássico que opõe os dois clubes com mais títulos de campeão nacional: SL Benfica e FC Porto?",
+    "opcoes": [
+      "O Dérbi",
+      "O Duelo dos Campeões",
+      "A Batalha de Portugal",
+      "O Clássico"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O confronto Benfica vs FC Porto é o clássico nacional por excelência que divide o país futebolístico de norte a sul.",
+    "fonte": "Liga Portugal / FPF",
+    "factClusterId": "fc_derbi_oclassico_01"
+  },
+  {
+    "id": "FUT_DERBI_0017",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que treinador conquistou o campeonato nacional pelo SL Benfica (2010, 2014, 2015) e se transferiu diretamente para o rival Sporting CP no verão de 2015?",
+    "opcoes": [
+      "Jorge Jesus",
+      "Rúben Amorim",
+      "Fernando Santos",
+      "José Mourinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A mudança de Jorge Jesus da Luz para Alvalade em 2015 aumentou a intensidade da rivalidade entre os dois clubes lisboetas.",
+    "fonte": "Liga Portugal / Diário de Notícias",
+    "factClusterId": "fc_derbi_jorgejesus_01"
+  },
+  {
+    "id": "FUT_DERBI_0018",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que jovem treinador conduziu o Sporting CP ao seu primeiro título de campeão nacional em 19 anos em 2020/21 e ao bicampeonato em 2023/24?",
+    "opcoes": [
+      "Sérgio Conceição",
+      "Rúben Amorim",
+      "Bruno Lage",
+      "Leonardo Jardim"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rúben Amorim revolucionou o Sporting CP com uma equipa jovem e tática de três centrais.",
+    "fonte": "Sporting CP / Liga Portugal",
+    "factClusterId": "fc_derbi_rubenamorim_01"
+  },
+  {
+    "id": "FUT_DERBI_0019",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que histórico treinador e antigo jogador é o técnico com mais jogos oficiais disputados e mais títulos conquistados no comando do FC Porto (3 Campeonatos, 4 Taças de Portugal)?",
+    "opcoes": [
+      "José Maria Pedroto",
+      "Artur Jorge",
+      "Sérgio Conceição",
+      "Jesualdo Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sérgio Conceição comandou o FC Porto entre 2017 e 2024, batendo o recorde de jogos de Pedroto.",
+    "fonte": "FC Porto / Zerozero",
+    "factClusterId": "fc_derbi_sergioconceicao_01"
+  },
+  {
+    "id": "FUT_DERBI_0020",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que dérbi beirão coloca frente a frente os estudantes da Académica de Coimbra e os alvinegros do Sporting Clube da Covilhã ou Beira-Mar de Aveiro?",
+    "opcoes": [
+      "Dérbi do Centro",
+      "Dérbi da Serra",
+      "Dérbi do Mondego",
+      "Dérbi das Beiras"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O confronto das Beiras é um dos mais tradicionais do futebol do interior e centro litoral.",
+    "fonte": "AF Coimbra / AF Castelo Branco",
+    "factClusterId": "fc_derbi_beiras_01"
+  },
+  {
+    "id": "FUT_DERBI_0021",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado sueco do Sporting CP foi o melhor marcador da Liga Portugal em 2023/24 com 29 golos na sua época de estreia no futebol português?",
+    "opcoes": [
+      "Viktor Gyökeres",
+      "Bas Dost",
+      "Ricky van Wolfswinkel",
+      "Jonas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Viktor Gyökeres teve um impacto avassalador no ataque leonino, decidindo dérbis e clássicos.",
+    "fonte": "Liga Portugal / Sporting CP",
+    "factClusterId": "fc_derbi_gyokeres_01"
+  },
+  {
+    "id": "FUT_DERBI_0022",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que guarda-redes português e capitão do SL Benfica defendeu um penálti decisivo de Bryan Ruiz em Alvalade em março de 2016 na vitória encarnada por 1-0 que garantiu o tri-campeonato?",
+    "opcoes": [
+      "Júlio César",
+      "Ederson Moraes",
+      "Jan Oblak",
+      "Vlachodimos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Ederson substituiu o lesionado Júlio César no dérbi de Alvalade com golo de Mitroglou, assumindo a titularidade até à transferência para o Manchester City.",
+    "fonte": "SL Benfica / Liga Portugal",
+    "factClusterId": "fc_derbi_ederson2016_01"
+  },
+  {
+    "id": "FUT_DERBI_0023",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que histórico extremo e capitão do FC Porto marcou nas vitórias épicas contra o Benfica no título da época de 1977/78, quebrando o jejum de 19 anos sem campeonatos sob o comando de Pedroto?",
+    "opcoes": [
+      "António Oliveira",
+      "Rodolfo Reis",
+      "Fernando Gomes (e Ademir)",
+      "Octávio Machado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A vitória do FC Porto de Pedroto e Pinto da Costa em 1978 abriu a era contemporânea de hegemonia azul e branca.",
+    "fonte": "FC Porto / Museu FC Porto",
+    "factClusterId": "fc_derbi_porto1978_01"
+  },
+  {
+    "id": "FUT_DERBI_0024",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que presidente do FC Porto liderou o clube entre 1982 e 2024, tornando-se o dirigente desportivo com mais títulos da história do futebol mundial (mais de 60 troféus no futebol)?",
+    "opcoes": [
+      "André Villas-Boas",
+      "Américo de Amorim",
+      "Afonso Pinto de Magalhães",
+      "Jorge Nuno Pinto da Costa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pinto da Costa presidiu ao FC Porto durante 42 anos ininterruptos, conquistando duas Taças dos Campeões/Champions e duas Taças UEFA/Liga Europa.",
+    "fonte": "FC Porto / Museu FC Porto",
+    "factClusterId": "fc_derbi_pintodacosta_01"
+  },
+  {
+    "id": "FUT_DERBI_0025",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que clássico do Vale do Ave opõe os alvinegros do Moreirense FC (de Moreira de Cónegos) aos vizinhos do Vitória SC de Guimarães?",
+    "opcoes": [
+      "Dérbi do Concelho de Guimarães",
+      "Dérbi do Cávado",
+      "Dérbi do Lima",
+      "Dérbi da Peneda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O confronto no Parque Comendador Joaquim de Almeida Freitas e no D. Afonso Henriques é uma rivalidade municipal intensa.",
+    "fonte": "AF Braga / Zerozero",
+    "factClusterId": "fc_derbi_guimaraes_moreira_01"
+  },
+  {
+    "id": "FUT_DERBI_0026",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado brasileiro e capitão do SL Benfica marcou 137 golos em 183 jogos de águia ao peito entre 2014 e 2019, conquistando quatro campeonatos consecutivos (Tetra)?",
+    "opcoes": [
+      "Lima",
+      "Jonas («O Pistolas»)",
+      "Rodrigo",
+      "Mitroglou"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jonas foi o grande maestro e goleador do tetra-campeonato do SL Benfica com Rui Vitória.",
+    "fonte": "SL Benfica / Liga Portugal",
+    "factClusterId": "fc_derbi_jonas_01"
+  },
+  {
+    "id": "FUT_DERBI_0027",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado paraguaio foi o melhor marcador da Liga Portuguesa e herói dos clássicos pelo SL Benfica com 172 golos marcados entre 2007 e 2014?",
+    "opcoes": [
+      "Saviola",
+      "Nuno Gomes",
+      "Óscar Cardozo («Tacuara»)",
+      "Miccoli"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cardozo é o melhor marcador estrangeiro da história do SL Benfica, célebre pelo seu portentoso pé esquerdo.",
+    "fonte": "SL Benfica / Zerozero",
+    "factClusterId": "fc_derbi_cardozo_01"
+  },
+  {
+    "id": "FUT_DERBI_0028",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que defesa-central internacional português e capitão do FC Porto conquistou o Euro 2016 pela Seleção Nacional e disputou mais de 280 jogos pelos dragões até aos 41 anos?",
+    "opcoes": [
+      "Bruno Alves",
+      "Ricardo Carvalho",
+      "Jorge Costa",
+      "Pepe (Képler Laveran Lima Ferreira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pepe é uma das maiores lendas defensivas do futebol mundial de clubes e de seleções.",
+    "fonte": "FPF / FC Porto",
+    "factClusterId": "fc_derbi_pepe_01"
+  },
+  {
+    "id": "FUT_DERBI_0029",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que clássico do futebol português coloca frente a frente os leões de Alvalade (Sporting CP) e os dragões da Invicta (FC Porto)?",
+    "opcoes": [
+      "O Clássico Sporting vs Porto (Duelo de Leões e Dragões)",
+      "O Dérbi Eterno",
+      "O Clássico da Segunda Circular",
+      "A Batalha do Norte"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O confronto Sporting CP vs FC Porto disputa-se desde a final do Campeonato de Portugal de 1922.",
+    "fonte": "Liga Portugal / FPF",
+    "factClusterId": "fc_derbi_sportingporto_01"
+  },
+  {
+    "id": "FUT_DERBI_0030",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que antigo guarda-redes e capitão do Sporting CP jogou 442 partidas de leão ao peito antes de rumar à Premier League e vencer o Euro 2016 por Portugal?",
+    "opcoes": [
+      "Ricardo",
+      "Rui Patrício",
+      "Peter Schmeichel",
+      "Damásio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Patrício é o guarda-redes com mais internacionalizações da história da Seleção Portuguesa e figura maior dos dérbis.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_derbi_ruipatricio_01"
+  },
+  {
+    "id": "FUT_DERBI_0031",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado brasileiro («O Incrível») foi a grande figura dos clássicos do FC Porto entre 2008 e 2012, célebre pelos seus remates a mais de 100 km/h?",
+    "opcoes": [
+      "Lisandro López",
+      "Jackson Martínez",
+      "Hulk (Givanildo Vieira de Sousa)",
+      "Tiquinho Soares"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Hulk conquistou a Liga Europa de 2011 e três campeonatos nacionais pelos dragões.",
+    "fonte": "FC Porto / Zerozero",
+    "factClusterId": "fc_derbi_hulk_01"
+  },
+  {
+    "id": "FUT_DERBI_0032",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que médio e capitão argentino do SL Benfica foi o pêndulo tático e campeão da Copa do Mundo de 2022 que esteve presente em inúmeros clássicos no meio-campo encarnado?",
+    "opcoes": [
+      "Lucho González",
+      "Battaglia",
+      "Gaitán",
+      "Enzo Pérez (ou Enzo Fernández / Aimar)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Pablo Aimar e Enzo Pérez marcaram épocas brilhantes no meio-campo benfiquista de Jorge Jesus.",
+    "fonte": "SL Benfica / Zerozero",
+    "factClusterId": "fc_derbi_mediosargentinos_01"
+  },
+  {
+    "id": "FUT_DERBI_0033",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que médio ofensivo do Sporting CP, formado na Academia de Alcochete e atual capitão do Manchester United, marcou 32 golos pelo Sporting na época 2018/19?",
+    "opcoes": [
+      "Bruno Fernandes",
+      "João Mário",
+      "Adrien Silva",
+      "William Carvalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bruno Fernandes estabeleceu o recorde europeu de golos de um médio numa só época desportiva com a camisola do Sporting CP.",
+    "fonte": "Sporting CP / Premier League",
+    "factClusterId": "fc_derbi_brunofernandes_01"
+  },
+  {
+    "id": "FUT_DERBI_0034",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que antigo internacional e capitão portista, apelidado de «O Bicho» pela sua liderança e garra defensiva, ergueu a Liga dos Campeões de 2004 em Gelsenkirchen?",
+    "opcoes": [
+      "Fernando Couto",
+      "Jorge Costa",
+      "Aloísio",
+      "João Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jorge Costa foi o capitão do FC Porto de José Mourinho na conquista da Taça UEFA 2003 e Champions League 2004.",
+    "fonte": "FC Porto / UEFA",
+    "factClusterId": "fc_derbi_jorgecosta_01"
+  },
+  {
+    "id": "FUT_DERBI_0035",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que antigo lateral-direito e capitão histórico do FC Porto é o recordista absoluto de jogos oficiais disputados com a camisola do FC Porto (587 jogos)?",
+    "opcoes": [
+      "Vítor Baía",
+      "Aloísio",
+      "João Domingos Pinto",
+      "Sérgio Conceição"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "João Pinto jogou toda a sua carreira sénior no FC Porto entre 1981 e 1997, vencendo a Taça dos Campeões Europeus em Viena em 1987.",
+    "fonte": "FC Porto / Museu FC Porto",
+    "factClusterId": "fc_derbi_joaodomingospinto_01"
+  },
+  {
+    "id": "FUT_DERBI_0036",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que guarda-redes português é o jogador com mais títulos conquistados na história do futebol europeu de clubes (35 títulos oficiais pelo FC Porto e Barcelona)?",
+    "opcoes": [
+      "Manuel Bento",
+      "Quim",
+      "Hilário",
+      "Vítor Baía"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vítor Baía é uma lenda da baliza do FC Porto e da Seleção Nacional, eleito o Melhor Guarda-Redes da UEFA em 2004.",
+    "fonte": "UEFA / FC Porto / FPF",
+    "factClusterId": "fc_derbi_vitorbaia_01"
+  },
+  {
+    "id": "FUT_DERBI_0037",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que antigo guarda-redes lendário do SL Benfica e da Seleção Nacional nos anos 70 e 80 era conhecido pelos seus reflexos felinos e pelo seu inconfundível bigode?",
+    "opcoes": [
+      "Manuel Bento",
+      "Costa Pereira",
+      "Silvino Louro",
+      "Preud'homme"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuel Bento defendeu a baliza do SL Benfica durante duas décadas com mais de 600 jogos oficiais.",
+    "fonte": "SL Benfica / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_derbi_manuelbento_01"
+  },
+  {
+    "id": "FUT_DERBI_0038",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que guarda-redes belga de craveira mundial jogou no SL Benfica entre 1994 e 1999, tornando-se um dos maiores ídolos dos adeptos na Luz?",
+    "opcoes": [
+      "Robert Enke",
+      "Michel Preud'homme",
+      "Hans-Jörg Butt",
+      "Jan Oblak"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Preud'homme, eleito o Melhor Guarda-Redes do Mundial de 1994, encerrou a sua brilhante carreira no Benfica.",
+    "fonte": "SL Benfica / FIFA",
+    "factClusterId": "fc_derbi_preudhomme_01"
+  },
+  {
+    "id": "FUT_DERBI_0039",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que internacional esloveno foi o guarda-redes do SL Benfica na época do triplete de 2013/14 sob o comando de Jorge Jesus antes de se transferir para o Atlético de Madrid?",
+    "opcoes": [
+      "Artur Moraes",
+      "Ederson",
+      "Jan Oblak",
+      "Trubin"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Oblak sofreu apenas 3 golos em 16 jogos da Liga na época em que assumiu a titularidade no Benfica.",
+    "fonte": "SL Benfica / Liga Portugal",
+    "factClusterId": "fc_derbi_oblak_01"
+  },
+  {
+    "id": "FUT_DERBI_0040",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que dérbi ribatejano coloca frente a frente a União Desportiva de Santarém e o Clube Desportivo de Fátima ou Sport União Sintrense?",
+    "opcoes": [
+      "Dérbi da Lezíria",
+      "Dérbi do Tejo",
+      "Dérbi de Tomar",
+      "Dérbi Ribatejano (UD Santarém vs Fátima / Torres Novas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A UD Santarém no Campo Chã das Padeiras é um dos clubes mais antigos do distrito de Santarém.",
+    "fonte": "AF Santarém",
+    "factClusterId": "fc_derbi_ribatejano_01"
+  },
+  {
+    "id": "FUT_DERBI_0041",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que extremo internacional argentino («El Fideo») foi campeão pelo SL Benfica em 2009/10 e regressou à Luz em 2023 após sagrar-se campeão mundial pela Argentina?",
+    "opcoes": [
+      "Ángel Di María",
+      "Nico Gaitán",
+      "Eduardo Salvio",
+      "Franco Cervi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Di María brilhou na Luz no início e no culminar da sua extraordinária carreira internacional.",
+    "fonte": "SL Benfica / FIFA",
+    "factClusterId": "fc_derbi_dimaria_01"
+  },
+  {
+    "id": "FUT_DERBI_0042",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que antigo defesa e capitão do Sporting CP nos anos 90 e 2000, conhecido como «O Xerife», foi o capitão na histórica conquista do campeonato de 1999/2000 que quebrou o jejum de 18 anos?",
+    "opcoes": [
+      "André Cruz",
+      "Beto Severo (Roberto Severo)",
+      "Rui Jorge",
+      "Marco Caneira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Beto foi o líder da equipa comandada por Augusto Inácio que celebrou o título de campeão na Alameda em Lisboa.",
+    "fonte": "Sporting CP / Jornal Sporting",
+    "factClusterId": "fc_derbi_beto2000_01"
+  },
+  {
+    "id": "FUT_DERBI_0043",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que ponta-de-lança brasileiro foi o melhor marcador europeu (Bota de Ouro) pelo FC Porto em 1999 e pelo Sporting CP em 2002 com 42 golos na Liga?",
+    "opcoes": [
+      "Liedson",
+      "Derlei",
+      "Mário Jardel («Super Mário»)",
+      "Pena"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mário Jardel foi um dos maiores cabeceadores da história do futebol mundial com médias de quase um golo por jogo.",
+    "fonte": "Liga Portugal / UEFA",
+    "factClusterId": "fc_derbi_jardelbotadeouro_01"
+  },
+  {
+    "id": "FUT_DERBI_0044",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado luso-brasileiro apelidado de «Levezinho» marcou 173 golos pelo Sporting CP entre 2003 e 2011, tornando-se o melhor marcador estrangeiro de sempre dos leões?",
+    "opcoes": [
+      "Deivid",
+      "Montero",
+      "Slimani",
+      "Liedson"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Liedson foi a grande figura dos dérbis lisboetas nos anos 2000 e representou a Seleção Nacional no Mundial de 2010.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_derbi_liedson_01"
+  },
+  {
+    "id": "FUT_DERBI_0045",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que avançado colombiano («El Tigre») marcou 72 golos em 87 jogos pelo FC Porto entre 2009 e 2011, incluindo o golo do título da Liga Europa em Dublin?",
+    "opcoes": [
+      "Radamel Falcao García",
+      "Jackson Martínez",
+      "James Rodríguez",
+      "Teófilo Gutiérrez"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Falcao foi o melhor marcador de sempre de uma única edição da Liga Europa (17 golos em 2010/11 com André Villas-Boas).",
+    "fonte": "UEFA / FC Porto",
+    "factClusterId": "fc_derbi_falcao_01"
+  },
+  {
+    "id": "FUT_DERBI_0046",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que extremo argelino brilhou no ataque do Sporting CP entre 2013 e 2016 e em 2022, conhecido como o «Homem dos Dérbis» pelos golos que marcava ao Benfica e FC Porto?",
+    "opcoes": [
+      "Brahimi",
+      "Islam Slimani",
+      "Carrillo",
+      "Raphinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Slimani foi decisivo nos grandes jogos de Alvalade com cabeceamentos certeiros e raça indomável.",
+    "fonte": "Sporting CP / Zerozero",
+    "factClusterId": "fc_derbi_slimani_01"
+  },
+  {
+    "id": "FUT_DERBI_0047",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que internacional português e capitão do SL Benfica nos anos 90 e 2000, célebre pela sua visão de jogo e elegância como camisola 10 («O Maestro»), é o atual Presidente do clube?",
+    "opcoes": [
+      "António Simões",
+      "Toni",
+      "Rui Costa",
+      "Shéu Han"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Rui Costa foi eleito Presidente do SL Benfica em 2021 após uma lendária carreira como futebolista em Portugal e Itália.",
+    "fonte": "Sport Lisboa e Benfica",
+    "factClusterId": "fc_derbi_ruicosta_01"
+  },
+  {
+    "id": "FUT_DERBI_0048",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que histórico clube do distrito de Setúbal, vencedor de 3 Taças de Portugal e com tradição nos grandes jogos do Bonfim, é o:",
+    "opcoes": [
+      "Amora FC",
+      "Barreirense",
+      "Oriental",
+      "Vitória Futebol Clube (Vitória de Setúbal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Vitória de Setúbal de Jacinto João e Félix Mourinho foi uma das maiores forças do futebol português nos anos 60 e 70.",
+    "fonte": "Vitória FC / FPF",
+    "factClusterId": "fc_derbi_vitoriasetubal_01"
+  },
+  {
+    "id": "FUT_DERBI_0049",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que histórico clube do Barreiro fundado em 1911 foi vice-campeão nacional e forneceu dezenas de internacionais para a Seleção Nacional de Futebol («Alvi-rubros do Barreiro»)?",
+    "opcoes": [
+      "Futebol Clube Barreirense",
+      "Amora FC",
+      "Comércio e Indústria",
+      "Cova da Piedade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Barreirense formou lendas como Manuel Bento, Chalana, José Augusto e Carlos Manuel.",
+    "fonte": "FC Barreirense / AF Setúbal",
+    "factClusterId": "fc_derbi_barreirense_01"
+  },
+  {
+    "id": "FUT_DERBI_0050",
+    "tema": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "pergunta": "Que estádio de Lisboa acolheu a 1 de dezembro de 1907 o primeiro dérbi oficial da história entre o Sporting e o Benfica (então Sport Lisboa), com vitória dos leões por 2-1?",
+    "opcoes": [
+      "Estádio do Lumiar",
+      "Campo das Salésias",
+      "Campo da Quinta Nova (Carcavelos)",
+      "Campo Grande"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O primeiro dérbi lisboeta foi disputado no Campo da Quinta Nova em Carcavelos sob chuva intensa com golos de Cândido Rodrigues e Cosme Damião.",
+    "fonte": "História do Futebol em Portugal / Zerozero",
+    "factClusterId": "fc_derbi_primeiroderbi_01"
+  }
+]

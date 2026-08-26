@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_MOM_0001",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado internacional português marcou aos 109 minutos no Stade de France a 10 de julho de 2016 o golo que deu a Portugal o inédito título de Campeão Europeu de Futebol (Euro 2016)?",
+    "opcoes": [
+      "Éder (Éderzito António Macedo Lopes)",
+      "Cristiano Ronaldo",
+      "Nani",
+      "Ricardo Quaresma"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O potente remate rasteiro de fora da área de Éder bateu Hugo Lloris no prolongamento, consagrando Portugal campeão da Europa em Paris.",
+    "fonte": "UEFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_mom_eder2016_01"
+  },
+  {
+    "id": "FUT_MOM_0002",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que guarda-redes português tirou as luvas para defender o penálti de Darius Vassell e a seguir marcou ele próprio o penálti da vitória frente à Inglaterra no desempate do Euro 2004 no Estádio da Luz?",
+    "opcoes": [
+      "Vítor Baía",
+      "Ricardo (Ricardo Pereira)",
+      "Quim",
+      "Moreira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O momento épico de Ricardo sem luvas a 24 de junho de 2004 qualificou Portugal para as meias-finais do Euro 2004.",
+    "fonte": "UEFA / FPF / RTP",
+    "factClusterId": "fc_mom_ricardo2004_01"
+  },
+  {
+    "id": "FUT_MOM_0003",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado argelino do FC Porto marcou um dos golos mais geniais da história do futebol europeu ao desviar de calcanhar a bola para as redes do Bayern de Munique na final da Taça dos Campeões de 1987 em Viena?",
+    "opcoes": [
+      "Juary",
+      "Paulo Futre",
+      "Rabah Madjer",
+      "Fernando Gomes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O golo de calcanhar de Madjer aos 77 minutos no Praterstadion em Viena empatou o jogo, antes de assistir Juary para o 2-1 final.",
+    "fonte": "UEFA / FC Porto / Museu FC Porto",
+    "factClusterId": "fc_mom_madjer1987_01"
+  },
+  {
+    "id": "FUT_MOM_0004",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que defesa do Sporting CP marcou diretamente de pontapé de canto («O Cantinho do Morais») na finalíssima da Taça das Taças de 1964 em Antuérpia frente ao MTK Budapeste (1-0)?",
+    "opcoes": [
+      "Hilário",
+      "Alexandre Baptista",
+      "José Carlos",
+      "João Morais"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O golo olímpico de João Morais a 15 de maio de 1964 deu ao Sporting CP o seu primeiro e único troféu europeu de futebol.",
+    "fonte": "Sporting CP / UEFA",
+    "factClusterId": "fc_mom_cantinhodomorais_01"
+  },
+  {
+    "id": "FUT_MOM_0005",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que cidade holandesa conquistou o SL Benfica o seu segundo título consecutivo de Campeão Europeu em maio de 1962 ao vencer o poderoso Real Madrid de Puskás e Di Stéfano por 5-3 com bis de Eusébio?",
+    "opcoes": [
+      "Amesterdão (Estádio Olímpico)",
+      "Berna",
+      "Roterdão",
+      "Eindhoven"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Benfica de Béla Guttmann superou o hat-trick de Puskás com golos de Águas, Cavém, Coluna e dois golos fulgurantes do jovem Eusébio.",
+    "fonte": "UEFA / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_mom_benfica1962_01"
+  },
+  {
+    "id": "FUT_MOM_0006",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que reviravolta lendária protagonizou a Seleção dos Magriços no Mundial de 1966 em Goodison Park (Liverpool), quando recuperou de uma desvantagem de 0-3 para vencer a Coreia do Norte por 5-3 com quatro golos de quem?",
+    "opcoes": [
+      "José Augusto",
+      "Eusébio da Silva Ferreira",
+      "José Torres",
+      "António Simões"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A exibição magistral de Eusébio com 4 golos nos quartos de final é considerada uma das maiores exibições individuais da história dos Campeonatos do Mundo da FIFA.",
+    "fonte": "FIFA / FPF / Museu Nacional do Desporto",
+    "factClusterId": "fc_mom_magricos1966_01"
+  },
+  {
+    "id": "FUT_MOM_0007",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que estádio de Gelsenkirchen o FC Porto de José Mourinho sagrou-se Campeão Europeu em maio de 2004 ao vencer o Mónaco por 3-0 com golos de Carlos Alberto, Deco e Alenichev?",
+    "opcoes": [
+      "Estádio Olímpico de Berlim",
+      "Allianz Arena de Munique",
+      "Arena AufSchalke (Gelsenkirchen)",
+      "Westfalenstadion de Dortmund"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vitória categórica em 2004 consagrou o FC Porto como bicampeão europeu e lançou José Mourinho para o topo mundial.",
+    "fonte": "UEFA / FC Porto",
+    "factClusterId": "fc_mom_porto2004_01"
+  },
+  {
+    "id": "FUT_MOM_0008",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado internacional português marcou aos 60 minutos o golo da vitória por 1-0 sobre a Holanda na final da primeira edição da UEFA Nations League a 9 de junho de 2019 no Estádio do Dragão?",
+    "opcoes": [
+      "Bernardo Silva",
+      "Cristiano Ronaldo",
+      "João Félix",
+      "Gonçalo Guedes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O remate potente de Gonçalo Guedes após assistência de Bernardo Silva garantiu a Portugal o segundo troféu oficial da sua história sénior.",
+    "fonte": "UEFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_mom_nationsleague2019_01"
+  },
+  {
+    "id": "FUT_MOM_0009",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que hat-trick monumental de Cristiano Ronaldo em Solna a 19 de novembro de 2013 qualificou Portugal para o Mundial de 2014 no duelo direto de titãs contra a Suécia de quem?",
+    "opcoes": [
+      "Zlatan Ibrahimovic",
+      "Henrik Larsson",
+      "Freddie Ljungberg",
+      "Emil Forsberg"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Cristiano Ronaldo marcou todos os 4 golos de Portugal na eliminatória (1-0 em Lisboa e 3-2 em Solna) numa das maiores noites da sua carreira.",
+    "fonte": "FIFA / FPF / RTP",
+    "factClusterId": "fc_mom_ronaldosolna2013_01"
+  },
+  {
+    "id": "FUT_MOM_0010",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que golo de livre direto magistral aos 88 minutos permitiu a Cristiano Ronaldo selar o seu hat-trick e empatar 3-3 contra a Espanha na fase de grupos do Mundial de 2018 em Sochi?",
+    "opcoes": [
+      "Remate de cabeça",
+      "Livre direto ao ângulo superior direito de David de Gea",
+      "Pontapé de penálti de «panenka»",
+      "Remate de calcanhar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O hat-trick de Ronaldo frente à Espanha em Sochi é considerado um dos jogos mais emocionantes da história dos Mundiais.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_mom_ronaldosochi2018_01"
+  },
+  {
+    "id": "FUT_MOM_0011",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que estádio de Sevilha (Estádio Olímpico de La Cartuja) o FC Porto conquistou a Taça UEFA a 21 de maio de 2003 ao bater o Celtic de Glasgow por 3-2 com golo de prata de Derlei aos 115 minutos?",
+    "opcoes": [
+      "Estádio Ramón Sánchez-Pizjuán",
+      "Estádio Benito Villamarín",
+      "Estádio Olímpico de La Cartuja (Sevilha)",
+      "Estádio Mestalla"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A final de Sevilha contra o Celtic de Martin O'Neill e Henrik Larsson foi uma das mais intensas finais europeias de sempre.",
+    "fonte": "UEFA / FC Porto",
+    "factClusterId": "fc_mom_portosevilha2003_01"
+  },
+  {
+    "id": "FUT_MOM_0012",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado brasileiro marcou aos 115 minutos no prolongamento o histórico «Golo de Prata» na final da Taça UEFA de 2003 em Sevilha?",
+    "opcoes": [
+      "Deco",
+      "Dmitri Alenichev",
+      "Capucho",
+      "Derlei («O Ninja»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Derlei foi o melhor marcador da Taça UEFA de 2002/03 e herói da conquista portista.",
+    "fonte": "UEFA / FC Porto",
+    "factClusterId": "fc_mom_derlei2003_01"
+  },
+  {
+    "id": "FUT_MOM_0013",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que final 100% portuguesa foi disputada a 18 de maio de 2011 no Dublin Arena, coroando o FC Porto campeão da UEFA Europa League frente ao SC Braga?",
+    "opcoes": [
+      "FC Porto 1-0 SC Braga (golo de Falcao)",
+      "Benfica 2-1 FC Porto",
+      "Sporting 1-0 SC Braga",
+      "FC Porto 3-1 Benfica"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O cabeceamento certeiro de Radamel Falcao aos 44 minutos deu o troféu aos dragões de André Villas-Boas.",
+    "fonte": "UEFA / Liga Portugal",
+    "factClusterId": "fc_mom_dublin2011_01"
+  },
+  {
+    "id": "FUT_MOM_0014",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que duas edições consecutivas a Seleção Portuguesa de Futebol Sub-20 conquistou o título de Bicampeã Mundial de Juniores da FIFA sob o comando do professor Carlos Queiroz?",
+    "opcoes": [
+      "Tóquio 1979 e México 1983",
+      "Riade 1989 (Arábia Saudita) e Lisboa 1991 (Estádio da Luz)",
+      "Doha 1995 e Malásia 1997",
+      "Nigéria 1999 e Argentina 2001"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A consagração perante 127.000 espetadores no antigo Estádio da Luz em 1991 revelou ao mundo a lendária «Geração de Ouro».",
+    "fonte": "FIFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_mom_geracaodeouro_01"
+  },
+  {
+    "id": "FUT_MOM_0015",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que médio português marcou o penálti decisivo no desempate da final do Mundial de Sub-20 de 1991 em Lisboa frente ao Brasil perante mais de 120 mil pessoas?",
+    "opcoes": [
+      "Luís Figo",
+      "João Vieira Pinto",
+      "Rui Costa",
+      "Peixe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O remate certeiro de Rui Costa ao ângulo consagrou Portugal bicampeão do mundo de juniores.",
+    "fonte": "FIFA / FPF / RTP",
+    "factClusterId": "fc_mom_ruicosta1991_01"
+  },
+  {
+    "id": "FUT_MOM_0016",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que médio e capitão do Sporting CP foi eleito o Melhor Jogador do Mundial de Sub-20 de 1991 em Lisboa (Bola de Ouro da FIFA)?",
+    "opcoes": [
+      "Luís Figo",
+      "Rui Costa",
+      "Toni",
+      "Emílio Peixe"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Emílio Peixe dominou o meio-campo durante todo o torneio com uma maturidade tática impressionante.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_mom_emiliopeixe1991_01"
+  },
+  {
+    "id": "FUT_MOM_0017",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que golo de calcanhar memorável marcou Cristiano Ronaldo frente à Hungria no empate 3-3 em Lyon no Euro 2016, salvando Portugal da eliminação na fase de grupos?",
+    "opcoes": [
+      "Desvio acrobático de calcanhar de costas para a baliza após cruzamento de João Mário",
+      "Remate de fora da área",
+      "Cabeceamento em mergulho",
+      "Livre direto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O golo de calcanhar de Ronaldo foi eleito um dos melhores golos de todo o Campeonato da Europa de 2016.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_mom_ronaldolyon2016_01"
+  },
+  {
+    "id": "FUT_MOM_0018",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que extremo português marcou de cabeça aos 117 minutos no prolongamento em Lens frente à Croácia nos oitavos de final do Euro 2016 após remate de Ronaldo defendido por Subasic?",
+    "opcoes": [
+      "Nani",
+      "Ricardo Quaresma",
+      "Éder",
+      "Renato Sanches"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O golo de Quaresma desbloqueou um dos jogos mais tensos e táticos do torneio a caminho do título europeu.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_mom_quaresmalens2016_01"
+  },
+  {
+    "id": "FUT_MOM_0019",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que jovem médio de 18 anos foi eleito o «Melhor Jogador Jovem do Euro 2016» após marcar o golo do empate contra a Polónia nos quartos de final em Marselha?",
+    "opcoes": [
+      "André Gomes",
+      "João Mário",
+      "Renato Sanches",
+      "William Carvalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Renato Sanches conquistou o prémio Golden Boy de 2016 após as suas exibições explosivas pela Seleção Nacional.",
+    "fonte": "UEFA / France Football / Tuttosport",
+    "factClusterId": "fc_mom_renatosanches2016_01"
+  },
+  {
+    "id": "FUT_MOM_0020",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que cidade suíça (Wankdorfstadion em Berna) o SL Benfica conquistou a sua primeira Taça dos Campeões Europeus a 31 de maio de 1961 ao vencer o Barcelona por 3-2?",
+    "opcoes": [
+      "Genebra",
+      "Zurique",
+      "Basileia",
+      "Berna"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Benfica quebrou a hegemonia do Real Madrid com golos de José Águas, autogolo de Ramallets e bomba de Coluna.",
+    "fonte": "UEFA / Museu Benfica Cosme Damião",
+    "factClusterId": "fc_mom_benficaberna1961_01"
+  },
+  {
+    "id": "FUT_MOM_0021",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que lendário treinador húngaro proclamou a famosa profecia («O Benfica sem mim nunca mais ganhará uma taça europeia») ao deixar a Luz em 1962?",
+    "opcoes": [
+      "Béla Guttmann",
+      "Lippo Hertzka",
+      "Lajos Baróti",
+      "Jeno Kalmar"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A mítica 'Maldição de Béla Guttmann' perdura no imaginário benfiquista após várias finais europeias perdidas.",
+    "fonte": "SL Benfica / História do Futebol Europeu",
+    "factClusterId": "fc_mom_belaguttmann_01"
+  },
+  {
+    "id": "FUT_MOM_0022",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que estádio de Yokohama (Japão) o FC Porto conquistou a Taça Intercontinental em dezembro de 2004 ao vencer o Once Caldas nos penáltis sob nevoeiro e chuva?",
+    "opcoes": [
+      "Estádio Nacional de Tóquio",
+      "Estádio Internacional de Yokohama",
+      "Saitama Stadium",
+      "Nagoya Dome"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O FC Porto de Víctor Fernández conquistou a última edição da história da Taça Intercontinental com o penálti de Pedro Emanuel.",
+    "fonte": "FIFA / FC Porto",
+    "factClusterId": "fc_mom_intercontinental2004_01"
+  },
+  {
+    "id": "FUT_MOM_0023",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que cidade japonesa o FC Porto conquistou a sua primeira Taça Intercontinental a 13 de dezembro de 1987 sob um nevão histórico ao bater o Peñarol por 2-1 no prolongamento?",
+    "opcoes": [
+      "Yokohama",
+      "Osaka",
+      "Tóquio (Estádio Nacional)",
+      "Quioto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Madjer marcou aos 110 minutos com um chapéu monumental na neve espessa de Tóquio.",
+    "fonte": "FIFA / FC Porto / Museu FC Porto",
+    "factClusterId": "fc_mom_intercontinental1987_01"
+  },
+  {
+    "id": "FUT_MOM_0024",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que reviravolta monumental alcançou a Seleção Nacional no Euro 2000 em Eindhoven frente à Inglaterra, recuperando de 0-2 para vencer por 3-2 com golos de Figo, João Pinto e Nuno Gomes?",
+    "opcoes": [
+      "Portugal 2-1 Alemanha",
+      "Portugal 3-0 Croácia",
+      "Portugal 2-0 Roménia",
+      "Portugal 3-2 Inglaterra (Euro 2000 em Eindhoven)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O míssil teleguiado de Luís Figo de fora da área abriu a memorável reviravolta da equipa de Humberto Coelho.",
+    "fonte": "UEFA / FPF / RTP",
+    "factClusterId": "fc_mom_eindhoven2000_01"
+  },
+  {
+    "id": "FUT_MOM_0025",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que jogador português venceu a Bola de Ouro da France Football em 2000 após uma época sensacional no Barcelona e Real Madrid?",
+    "opcoes": [
+      "Luís Figo",
+      "Rui Costa",
+      "Vítor Baía",
+      "Cristiano Ronaldo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Figo tornou-se o segundo português da história a vencer a Bola de Ouro depois de Eusébio em 1965.",
+    "fonte": "France Football / FIFA",
+    "factClusterId": "fc_mom_figoboladeouro_01"
+  },
+  {
+    "id": "FUT_MOM_0026",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Quantas Bolas de Ouro da FIFA / France Football conquistou Cristiano Ronaldo ao longo da sua carreira (2008, 2013, 2014, 2016 e 2017)?",
+    "opcoes": [
+      "4 Bolas de Ouro",
+      "5 Bolas de Ouro",
+      "6 Bolas de Ouro",
+      "3 Bolas de Ouro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Cristiano Ronaldo é o jogador europeu mais titulado de sempre nos prémios de Melhor do Mundo.",
+    "fonte": "France Football / FIFA",
+    "factClusterId": "fc_mom_ronaldobolasdeouro_01"
+  },
+  {
+    "id": "FUT_MOM_0027",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que lendário treinador português («The Special One») conquistou a Liga dos Campeões por dois clubes diferentes (FC Porto em 2004 e Inter de Milão em 2010)?",
+    "opcoes": [
+      "Artur Jorge",
+      "Manuel José",
+      "José Mourinho",
+      "Fernando Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Mourinho é considerado um dos maiores e mais influentes treinadores da história do futebol mundial.",
+    "fonte": "UEFA / Premier League / Serie A",
+    "factClusterId": "fc_mom_mourinho_01"
+  },
+  {
+    "id": "FUT_MOM_0028",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que antigo treinador do FC Porto foi o primeiro técnico português a sagrar-se Campeão Europeu de Clubes na vitória de Viena em 1987?",
+    "opcoes": [
+      "José Maria Pedroto",
+      "José Mourinho",
+      "António Oliveira",
+      "Artur Jorge («Rei Artur»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Artur Jorge foi o pioneiro dos treinadores portugueses na elite europeia de clubes.",
+    "fonte": "FC Porto / UEFA",
+    "factClusterId": "fc_mom_arturjorge1987_01"
+  },
+  {
+    "id": "FUT_MOM_0029",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que treinador português tornou-se o mais jovem de sempre a vencer uma competição europeia da UEFA ao conquistar a Liga Europa de 2011 pelo FC Porto aos 33 anos e 213 dias?",
+    "opcoes": [
+      "André Villas-Boas",
+      "José Mourinho",
+      "Rúben Amorim",
+      "Leonardo Jardim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Villas-Boas venceu a Liga Europa, o Campeonato Nacional invicto, a Taça de Portugal e a Supertaça na mesma época.",
+    "fonte": "UEFA / Guinness World Records",
+    "factClusterId": "fc_mom_villasboas2011_01"
+  },
+  {
+    "id": "FUT_MOM_0030",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que golo de livre de bandeirinha e pontapé de ressaca de Oceano e golo acrobático de Sá Pinto qualificaram o Sporting CP para a final da Taça UEFA de 2005 em Alvalade frente ao AZ Alkmaar?",
+    "opcoes": [
+      "Golo de Liedson aos 90 minutos",
+      "Golo de cabeça de Miguel Garcia aos 122 minutos no prolongamento em Alkmaar",
+      "Golo de Rogério",
+      "Golo de Pedro Barbosa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O cabeceamento de Miguel Garcia no último segundo do prolongamento na Holanda levou o Sporting à final europeia de 2005.",
+    "fonte": "Sporting CP / UEFA",
+    "factClusterId": "fc_mom_miguelgarcia2005_01"
+  },
+  {
+    "id": "FUT_MOM_0031",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que defesa central do SL Benfica marcou um célebre golo no Estádio das Antas em 1991 ao bisar e dar a vitória por 2-0 aos encarnados de Sven-Göran Eriksson?",
+    "opcoes": [
+      "Mozer",
+      "Ricardo Gomes",
+      "César Brito",
+      "Paulo Madeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "César Brito saltou do banco aos 85 minutos e marcou aos 87 e 89 minutos, decidindo o campeonato de 1990/91 para o Benfica.",
+    "fonte": "SL Benfica / Jornal A Bola",
+    "factClusterId": "fc_mom_cesarbrito1991_01"
+  },
+  {
+    "id": "FUT_MOM_0032",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que lendário jogo dos oitavos de final do Mundial de 2006 em Nuremberga entre Portugal e a Holanda entrou para a história como «A Batalha de Nuremberga» devido aos 16 cartões amarelos e 4 vermelhos mostrados pelo árbitro Valentin Ivanov?",
+    "opcoes": [
+      "Portugal 2-0 México",
+      "Portugal 1-0 França",
+      "Portugal 3-1 Inglaterra",
+      "Portugal 1-0 Holanda (golo de Maniche aos 23 minutos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maniche marcou o golo da vitória e Portugal resistiu com 9 jogadores até ao apito final na caminhada até às meias-finais do Mundial de 2006.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_mom_nuremberga2006_01"
+  },
+  {
+    "id": "FUT_MOM_0033",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que médio internacional português marcou um dos golos mais belos da história dos Campeonatos da Europa com um remate de trivela em arco frente à Holanda no Euro 2004 em Alvalade?",
+    "opcoes": [
+      "Maniche",
+      "Cristiano Ronaldo",
+      "Luís Figo",
+      "Deco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O míssil de Maniche no canto esquerdo de Van der Sar colocou Portugal na final do Euro 2004.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_mom_maniche2004_01"
+  },
+  {
+    "id": "FUT_MOM_0034",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que histórico avançado português marcou 4 golos na vitória por 3-0 e 4-1 frente à Alemanha e Inglaterra no Euro 2000, terminando como segundo melhor marcador do torneio?",
+    "opcoes": [
+      "Pauleta",
+      "Nuno Gomes (e Sérgio Conceição)",
+      "João Pinto",
+      "Sá Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sérgio Conceição fez um hat-trick à Alemanha (3-0) e Nuno Gomes marcou golos memoráveis em todo o Euro 2000.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_mom_sergioconceicao2000_01"
+  },
+  {
+    "id": "FUT_MOM_0035",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado açoriano (natural de Ponta Delgada) foi durante anos o maior goleador da história da Seleção Nacional com 47 golos marcados antes de ser ultrapassado por Cristiano Ronaldo?",
+    "opcoes": [
+      "Nuno Gomes",
+      "Eusébio",
+      "Pedro Pauleta («O Ciclone dos Açores»)",
+      "Postiga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pauleta brilhou na Liga Francesa (Bordeaux e PSG) e marcou um hat-trick à Polónia no Mundial de 2002.",
+    "fonte": "FPF / FIFA / Ligue 1",
+    "factClusterId": "fc_mom_pauleta_01"
+  },
+  {
+    "id": "FUT_MOM_0036",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Em que minuto da final da Taça de Portugal de 2002 Mário Jardel marcou o golo da dobradinha do Sporting CP frente ao Leixões no Jamor?",
+    "opcoes": [
+      "Aos 90 minutos",
+      "No prolongamento",
+      "Aos 10 minutos",
+      "Aos 40 minutos da 1.ª parte (1-0)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O golo de Jardel garantiu a dobradinha (Campeonato e Taça) ao Sporting CP de Bölöni em 2002.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_mom_jardeljamor2002_01"
+  },
+  {
+    "id": "FUT_MOM_0037",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que jovem avançado do Sporting CP e do Benfica bisou no seu jogo de estreia na 1.ª Liga frente ao Moreirense em outubro de 2002 com apenas 17 anos?",
+    "opcoes": [
+      "Cristiano Ronaldo",
+      "Ricardo Quaresma",
+      "Hugo Viana",
+      "Simão Sabrosa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Cristiano Ronaldo marcou dois golos antológicos (um arrancando do meio-campo) no antigo Estádio José Alvalade.",
+    "fonte": "Sporting CP / Zerozero",
+    "factClusterId": "fc_mom_estreiacristiano2002_01"
+  },
+  {
+    "id": "FUT_MOM_0038",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que defesa central português marcou de cabeça o golo que empatou a final da Taça da Liga de 2024 entre o SC Braga e o Estoril Praia?",
+    "opcoes": [
+      "José Fonte",
+      "Ricardo Horta (e Paulo Oliveira)",
+      "Serdar Saatci",
+      "Vítor Tormena"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O SC Braga conquistou a Taça da Liga de 2023/24 no desempate por grandes penalidades em Leiria.",
+    "fonte": "Liga Portugal / SC Braga",
+    "factClusterId": "fc_mom_bragatacadaliga2024_01"
+  },
+  {
+    "id": "FUT_MOM_0039",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que defesa-central e capitão da Seleção Nacional no Euro 2016 foi eleito o «Homem do Jogo» na final de Paris frente à França pelas suas interceções heróicas?",
+    "opcoes": [
+      "José Fonte",
+      "Bruno Alves",
+      "Pepe",
+      "Ricardo Carvalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pepe realizou uma exibição perfeita e intransponível no Stade de France na final do Euro 2016.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_mom_pepefinal2016_01"
+  },
+  {
+    "id": "FUT_MOM_0040",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que histórico médio do FC Porto e da Seleção Nacional marcou um célebre golo de trivela no empate 1-1 contra o Irão no Mundial de 2018 em Saransk?",
+    "opcoes": [
+      "João Mário",
+      "Adrien Silva",
+      "William Carvalho",
+      "Ricardo Quaresma"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A assinatura da trivela de Quaresma ao ângulo de fora da área foi um dos momentos mais artísticos do Mundial da Rússia.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_mom_trivelaquaresma2018_01"
+  },
+  {
+    "id": "FUT_MOM_0041",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado brasileiro marcou 42 golos pelo Sporting CP no campeonato de 2001/02 e celebrou com a icónica camisola «Por que é que sou tão bom?»?",
+    "opcoes": [
+      "Mário Jardel",
+      "Liedson",
+      "Acosta",
+      "Deivid"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Jardel conduziu os leões ao título com uma das maiores épocas goleadoras da história do futebol europeu.",
+    "fonte": "Sporting CP / Jornal Record",
+    "factClusterId": "fc_mom_jardel2002_01"
+  },
+  {
+    "id": "FUT_MOM_0042",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado do SL Benfica marcou 3 golos (hat-trick) nos oitavos de final do Mundial de 2022 no Catar na goleada de Portugal por 6-1 sobre a Suíça?",
+    "opcoes": [
+      "Cristiano Ronaldo",
+      "Gonçalo Ramos",
+      "Rafael Leão",
+      "João Félix"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Gonçalo Ramos foi o primeiro jogador a marcar um hat-trick no seu primeiro jogo como titular num Campeonato do Mundo desde 1990.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_mom_goncaloramos2022_01"
+  },
+  {
+    "id": "FUT_MOM_0043",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que defesa central português e capitão do Chelsea e Real Madrid ergueu a Liga dos Campeões em 2004 pelo FC Porto e foi eleito o Melhor Defesa da Europa?",
+    "opcoes": [
+      "Jorge Costa",
+      "Pedro Emanuel",
+      "Ricardo Carvalho",
+      "Paulo Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Carvalho foi aclamado pela sua leitura posicional e antecipação impecável.",
+    "fonte": "UEFA / FC Porto / Chelsea FC",
+    "factClusterId": "fc_mom_ricardocarvalho_01"
+  },
+  {
+    "id": "FUT_MOM_0044",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que golo de cabeça aos 90+5 minutos de Costinha em Old Trafford eliminou o Manchester United de Alex Ferguson nos oitavos da Champions League de 2004 pelo FC Porto?",
+    "opcoes": [
+      "Golo de Deco",
+      "Golo de Carlos Alberto",
+      "Golo de Alenichev",
+      "Recarga de Costinha após livre de Benni McCarthy defendido por Tim Howard"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O golo de Costinha originou a famosa corrida exuberante de José Mourinho pela linha lateral de Old Trafford.",
+    "fonte": "UEFA / FC Porto",
+    "factClusterId": "fc_mom_costinhaoldtrafford2004_01"
+  },
+  {
+    "id": "FUT_MOM_0045",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado sul-africano do FC Porto marcou 2 golos na vitória por 2-1 sobre o Manchester United no jogo da 1.ª mão no Estádio do Dragão em 2004 e foi o melhor marcador da Liga?",
+    "opcoes": [
+      "Benni McCarthy",
+      "Derlei",
+      "Hugo Almeida",
+      "Jankauskas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Benni McCarthy marcou um cabeceamento fulgurante e foi a grande referência ofensiva do título europeu portista.",
+    "fonte": "FC Porto / UEFA",
+    "factClusterId": "fc_mom_bennymccarthy2004_01"
+  },
+  {
+    "id": "FUT_MOM_0046",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que antigo extremo do SL Benfica marcou de livre direto na vitória épica por 1-0 sobre o Liverpool em Anfield Road nos oitavos de final da Liga dos Campeões de 2005/06?",
+    "opcoes": [
+      "Geovanni",
+      "Simão Sabrosa (e golo acrobático de Miccoli)",
+      "Nuno Gomes",
+      "Petit"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Benfica de Ronald Koeman eliminou o campeão europeu em título Liverpool com uma vitória memorável por 2-0 em Anfield.",
+    "fonte": "UEFA / SL Benfica",
+    "factClusterId": "fc_mom_benficanfield2006_01"
+  },
+  {
+    "id": "FUT_MOM_0047",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado italiano pequeno e veloz («Il Rombo di Tuono do Benfica») tornou-se o herói dos adeptos encarnados com golos acrobáticos entre 2005 e 2007?",
+    "opcoes": [
+      "Laurent Robert",
+      "Karyaka",
+      "Fabrizio Miccoli",
+      "Mantorras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Miccoli marcou um dos golos de bicicleta mais belos da história da Champions frente ao Liverpool em Anfield.",
+    "fonte": "SL Benfica / UEFA",
+    "factClusterId": "fc_mom_miccoli_01"
+  },
+  {
+    "id": "FUT_MOM_0048",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado angolano do SL Benfica («Deixa Jogar o Mantorras») galvanizou os adeptos da Luz com a sua velocidade e golos nos minutos finais na conquista do título de 2004/05?",
+    "opcoes": [
+      "Akwá",
+      "Gelson Dala",
+      "Mateus",
+      "Pedro Mantorras"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mantorras superou graves cirurgias ao joelho para se tornar um dos maiores símbolos de carinho popular na Luz.",
+    "fonte": "SL Benfica / Jornal A Bola",
+    "factClusterId": "fc_mom_mantorras_01"
+  },
+  {
+    "id": "FUT_MOM_0049",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que golo de livre direto de António Oliveira frente à Escócia em 1981 e golo de Carlos Manuel em Estugarda frente à Alemanha Ocidental em 1985 qualificaram Portugal para o Mundial de 1986 no México?",
+    "opcoes": [
+      "Bomba de fora da área de Carlos Manuel no Neckarstadion em Estugarda",
+      "Golo de Jordão",
+      "Golo de Fernando Gomes",
+      "Golo de Chalana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O golo épico de Carlos Manuel a 16 de outubro de 1985 deu a vitória por 1-0 à equipa de José Torres e o apuramento histórico para o Mundial do México.",
+    "fonte": "FPF / DFB / RTP",
+    "factClusterId": "fc_mom_estugarda1985_01"
+  },
+  {
+    "id": "FUT_MOM_0050",
+    "tema": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "pergunta": "Que avançado angolano naturalizado português e bota de prata do Sporting e Benfica marcou os 2 golos de Portugal na meia-final épica do Euro 1984 em Marselha frente à França de Platini (2-3 no prolongamento)?",
+    "opcoes": [
+      "Fernando Gomes",
+      "Nené",
+      "Rui Jordão",
+      "Jaime Pacheco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A meia-final de Marselha entre a França de Platini e o Portugal de Jordão e Chalana é considerada um dos maiores jogos de futebol de todos os tempos.",
+    "fonte": "UEFA / FPF / L'Équipe",
+    "factClusterId": "fc_mom_jordao1984_01"
+  }
+]

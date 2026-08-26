@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-08-26T03:31:09.873Z",
+  "totalUnmappedAudited": 12614,
+  "distribuicaoTaxonomica": {
+    "POOL_GERAL": 1983,
+    "MODO_MALUCO": 659,
+    "TERRITORIAL": 0,
+    "LEGACY_UNMAPPED": 0,
+    "NEEDS_CLASSIFICATION": 9972,
+    "OUT_OF_SCOPE": 0
+  },
+  "reconciliacaoProva": "12614 === 12614"
+}

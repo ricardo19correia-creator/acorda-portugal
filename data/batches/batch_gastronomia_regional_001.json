@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_REG_0001",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que emblemático prato da gastronomia de São Miguel (Açores) é confecionado lentamente no interior das caldeiras geotérmicas da Lagoa das Furnas, enterrado em panelas no solo vulcânico quente durante cerca de 6 horas?",
+    "opcoes": [
+      "Cozido das Furnas (São Miguel)",
+      "Alcatra da Terceira",
+      "Caldeirada de Congro",
+      "Feijoada do Pico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cozido das Furnas é confecionado apenas com o calor do vapor geotérmico e os próprios sucos das carnes e vegetais.",
+    "fonte": "Turismo dos Açores / Confraria Gastronómica dos Açores",
+    "factClusterId": "fc_gast_reg_cozidodasfurnas_01"
+  },
+  {
+    "id": "GAST_REG_0002",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato tradicional do Funchal e de toda a Ilha da Madeira é confecionado com cubos de carne de vaca temperados com alho e sal grosso, espetados numa haste vegetal natural de loureiro e grelhados sobre brasas?",
+    "opcoes": [
+      "Carne de Vinho e Alhos",
+      "Espetada Madeirense em pau de loureiro",
+      "Picado Madeirense",
+      "Cozido Madeirense"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O pau de loureiro liberta óleos essenciais aromáticos na carne durante a grelhagem, servida tradicionalmente com bolo do caco e milho frito.",
+    "fonte": "Direção Regional de Turismo da Madeira / Gastronomia da Madeira",
+    "factClusterId": "fc_gast_reg_espetadamadeira_loureiro_01"
+  },
+  {
+    "id": "GAST_REG_0003",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato icónico da Bairrada (Mealhada, Cantanhede, Anadia), confecionado com leitão assado no espeto em forno a lenha até ficar com a pele dourada estaladiça e servido com molho picante de pimenta e batatas fritas às rodelas?",
+    "opcoes": [
+      "Chanfana da Bairrada",
+      "Carneiro de Casamento",
+      "Leitão Assado à Bairrada",
+      "Cachaço no Forno"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Leitão da Bairrada é uma das 7 Maravilhas da Gastronomia de Portugal harmonizado tradicionalmente com espumante da Bairrada DOC.",
+    "fonte": "Associação Rota da Bairrada / 7 Maravilhas da Gastronomia",
+    "factClusterId": "fc_gast_reg_leitaobairrada_01"
+  },
+  {
+    "id": "GAST_REG_0004",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que célebre prato tradicional da Beira Litoral (Miranda do Corvo, Vila Nova de Poiares e Lousã), confecionado com carne de cabra velha assada longamente em vinho tinto, alho, louro e banha dentro de caçoilas de barro preto?",
+    "opcoes": [
+      "Bucho Recheado",
+      "Sarrabulho",
+      "Negalhos",
+      "Chanfana (Chanfana de Cabra Velha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Chanfana era tradicionalmente confecionada após as invasões francesas e os fornos a lenha eram vedados com barro durante a noite.",
+    "fonte": "Confraria da Chanfana / Município de Miranda do Corvo",
+    "factClusterId": "fc_gast_reg_chanfana_coimbra_01"
+  },
+  {
+    "id": "GAST_REG_0005",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que lendária sopa ribatejana de Almeirim, criada segundo a tradição popular por um frade mendigo que colocou um seixo num caldeirão com água a ferver e foi pedindo ingredientes aos aldeãos («Sopa da Pedra»), leva carnes de porco, feijão-vermelho, enchidos e batatas?",
+    "opcoes": [
+      "Sopa da Pedra de Almeirim",
+      "Sopa de Entulho",
+      "Caldo da Beira",
+      "Sopa de Peixe do Tejo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sopa da Pedra de Almeirim possui certificação de Especialidade Tradicional Garantida (ETG) pela União Europeia.",
+    "fonte": "Câmara Municipal de Almeirim / Confraria da Sopa da Pedra",
+    "factClusterId": "fc_gast_reg_sopadapedra_almeirim_01"
+  },
+  {
+    "id": "GAST_REG_0006",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que histórico prato portuense do século XV, confecionado com dobrada de vitela, mão de vitela, feijão-branco, cenouras, chouriço e toucinho, deu aos naturais do Porto o honroso cognome de «Tripeiros»?",
+    "opcoes": [
+      "Rojões do Douro",
+      "Tripas à Moda do Porto",
+      "Feijoada à Transmontana",
+      "Dobrada Alentejana"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A lenda narra que os habitantes do Porto doaram todas as carnes limpas da cidade à armada do Infante D. Henrique para a conquista de Ceuta em 1415 ficando apenas com as tripas.",
+    "fonte": "Câmara Municipal do Porto / Confraria dos Tripeiros",
+    "factClusterId": "fc_gast_reg_tripasportuenses_01"
+  },
+  {
+    "id": "GAST_REG_0007",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famosa sanduíche de culto criada no Porto nos anos 1950 no restaurante Regaleira por Daniel David Silva («Francesinha»), inspirada no croque-monsieur francês, é composta por camadas de bife, fiambre, linguiça e salsicha fresca cobertas por queijo derretido e molho picante à base de tomate e cerveja?",
+    "opcoes": [
+      "Prego no Pão",
+      "Bifana de Vendas Novas",
+      "Francesinha à Moda do Porto",
+      "Sandes de Leitão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Francesinha do Porto é considerada uma das melhores sanduíches do mundo por prestigiadas revistas internacionais de gastronomia.",
+    "fonte": "Porto Convention & Visitors Bureau / Confraria da Francesinha",
+    "factClusterId": "fc_gast_reg_francesinha_porto_01"
+  },
+  {
+    "id": "GAST_REG_0008",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato regional da Beira Baixa (Sertã e Proença-a-Nova), feito de bucho ou tripa de cabra/ovelha recheado com arroz, pedaços de carne miúda de cabra, hortelã fresca e vinho branco («Maranhos da Sertã»), é uma das joias do pinhal interior?",
+    "opcoes": [
+      "Bucho Recheado",
+      "Plangaio",
+      "Alheira de Caça",
+      "Maranhos da Sertã / Maranhos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Maranhos da Sertã possuem Indicação Geográfica Protegida (IGP) com aroma inconfundível conferido pela hortelã fresca.",
+    "fonte": "Município da Sertã / Qualifica / IGP",
+    "factClusterId": "fc_gast_reg_maranhos_serta_01"
+  },
+  {
+    "id": "GAST_REG_0009",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que enchido transmontano histórico de Trás-os-Montes e Alto Douro (Mirandela), inventado no século XV pelos judeus e cristãos-novos para fingirem consumir carne de porco perante a Inquisição com carnes de aves, coelho, pão de trigo e azeite?",
+    "opcoes": [
+      "Alheira de Mirandela (Alheira)",
+      "Farinheira da Beira",
+      "Chouriço Mouro",
+      "Morcela de Sangue"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Alheira de Mirandela é IGP e foi eleita uma das 7 Maravilhas da Gastronomia de Portugal.",
+    "fonte": "Câmara Municipal de Mirandela / 7 Maravilhas da Gastronomia",
+    "factClusterId": "fc_gast_reg_alheirademirandela_01"
+  },
+  {
+    "id": "GAST_REG_0010",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato de fumeiro típico de Trás-os-Montes (Bragança e Vinhais), confecionado com o espinhaço e ossos da suã do porco com carne temperada envoltos na bexiga do animal («Butelo / Botelo»), é servido tradicionalmente no Entrudo com:",
+    "opcoes": [
+      "Grelos de nabo",
+      "Casulas secas (cascas de feijão secas cozidas)",
+      "Grão-de-bico",
+      "Couve-lombarda"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Butelo com Casulas é o prato rei do Festival do Butelo e das Casulas de Bragança realizado anualmente no Carnaval.",
+    "fonte": "Câmara Municipal de Bragança / Confraria do Butelo",
+    "factClusterId": "fc_gast_reg_butelocomcasulas_01"
+  },
+  {
+    "id": "GAST_REG_0011",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso utensílio bivalve de cobre hermético em forma de concha, de provável herança árabe, dá o nome ao mais icónico prato de marisco e peixes da cozinha do Algarve («Cataplana Algarvia»)?",
+    "opcoes": [
+      "Caçoila de barro",
+      "Púcaro de barro preto",
+      "Cataplana de cobre",
+      "Tacho de ferro fundido"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cataplana funciona como uma panela de pressão primitiva preservando todo o aroma do mar, coentros e azeite algarvios.",
+    "fonte": "Região de Turismo do Algarve / Tertúlia Algarvia",
+    "factClusterId": "fc_gast_reg_cataplana_algarve_01"
+  },
+  {
+    "id": "GAST_REG_0012",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato tradicional alentejano de verão é confecionado num almofariz com coentros pisados com sal e alhos frescos, azeite virgem extra, água a ferver e fatias de pão alentejano duro de véspera, encimado por ovos escalfados e posta de pescada ou bacalhau?",
+    "opcoes": [
+      "Gaspacho Alentejano",
+      "Sopa de Tomate com Ovos",
+      "Migas Gatas",
+      "Açorda Alentejana"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Açorda Alentejana é uma das mais sublimes expressões da cozinha camponesa alentejana, eleita uma das 7 Maravilhas da Gastronomia.",
+    "fonte": "Turismo do Alentejo / 7 Maravilhas",
+    "factClusterId": "fc_gast_reg_acordaalentejana_01"
+  },
+  {
+    "id": "GAST_REG_0013",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato alentejano aromático de peixe de rio ou mar (típico de Portel, Moura e Mértola), confecionado com postas de peixe cozinhadas num caldo perfumado com abundância de poejos frescos, alho, vinagre, azeite e pão alentejano?",
+    "opcoes": [
+      "Sopa de Cação com poejos",
+      "Caldeirada Alentejana",
+      "Ensopado de Enguias",
+      "Açorda de Marisco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sopa de Cação utiliza o cação (tubarão costeiro) e a erva aromática poejo típica das ribeiras alentejanas.",
+    "fonte": "Confraria Gastronómica do Alentejo / Município de Portel",
+    "factClusterId": "fc_gast_reg_sopadecacao_01"
+  },
+  {
+    "id": "GAST_REG_0014",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual histórico de Elvas e Évora, cozido em prato de barro com massa fofa à base de muitas gemas de ovo, açúcar e canela aberta em fendas, servido obrigatoriamente com Ameixas d'Elvas em calda (DOP)?",
+    "opcoes": [
+      "Pão de Rala",
+      "Sericaia (ou Sericá)",
+      "Encharcada de Ovos",
+      "Toucinho do Céu"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sericaia deve apresentar fendas características na superfície polvilhada com canela em pó.",
+    "fonte": "Câmara Municipal de Elvas / Convento das Chagas de Vila Viçosa",
+    "factClusterId": "fc_gast_reg_sericaia_elvas_01"
+  },
+  {
+    "id": "GAST_REG_0015",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual de Aveiro classificado com Indicação Geográfica Protegida (IGP), feito de gemas de ovos moles e açúcar envoltos em hóstia fina moldada com formas marítimas (peixes, búzios, conchas, barricas)?",
+    "opcoes": [
+      "Pastéis de Tentúgal",
+      "Trouxas das Caldas",
+      "Ovos Moles de Aveiro (IGP)",
+      "Castanhas de Ovos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Ovos Moles de Aveiro foram criados pelas freiras do Convento de Jesus de Aveiro e foram o primeiro produto de doçaria português a receber o selo IGP da UE.",
+    "fonte": "APOMA / União Europeia / Município de Aveiro",
+    "factClusterId": "fc_gast_reg_ovosmoles_aveiro_01"
+  },
+  {
+    "id": "GAST_REG_0016",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que requintado doce conventual de Tentúgal (Montemor-o-Velho, Coimbra), criado pelas freiras carmelitas do Convento de Nossa Senhora do Carmo, composto por uma massa folhada estaladiça estendida à mão até ficar transparente e recheada com doce de ovos?",
+    "opcoes": [
+      "Clarilhas de Fão",
+      "Jesuítas de Santo Tirso",
+      "Cornucópias de Alcobaça",
+      "Pastéis de Tentúgal (IGP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A massa dos Pastéis de Tentúgal é aberta e esticada em lençóis brancos com perícia artesanal única.",
+    "fonte": "Associação de Pasteleiros de Tentúgal / Qualifica",
+    "factClusterId": "fc_gast_reg_pasteisdetentugal_01"
+  },
+  {
+    "id": "GAST_REG_0017",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual único de Braga, criado no século XIX pelo Abade Manuel Joaquim Rebelo na freguesia de Priscos («Pudim Abade de Priscos»), tem como ingrediente invulgar e secreto que lhe confere textura aveludada:",
+    "opcoes": [
+      "Toucinho de porco fresco ou presunto sem sal picado",
+      "Manteiga de ovelha",
+      "Banha de pato",
+      "Azeite virgem"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O toucinho gordo de porco derrete no xarope de açúcar aromatizado com limão, canela e vinho do Porto conferindo untuosidade incomparável.",
+    "fonte": "Município de Braga / Confraria do Pudim Abade de Priscos",
+    "factClusterId": "fc_gast_reg_pudimabadedepriscos_01"
+  },
+  {
+    "id": "GAST_REG_0018",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que bolo tradicional da Ilha Terceira (Açores), confecionado com melaço de cana, canela, noz-moscada e passas, batizado em 1901 em homenagem à visita da Rainha D. Amélia e do Rei D. Carlos I ao arquipélago?",
+    "opcoes": [
+      "Queijadas da Graciosa",
+      "Queijadas de Dona Amélia (Ilha Terceira)",
+      "Queijadas de Vila Franca",
+      "Bolo de Sertã"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Queijadas de D. Amélia eram as antigas 'queijadas das Índias' aromatizadas com as ricas especiarias da Rota das Índias.",
+    "fonte": "Câmara Municipal de Angra do Heroísmo / Turismo dos Açores",
+    "factClusterId": "fc_gast_reg_queijadasdonaamelia_01"
+  },
+  {
+    "id": "GAST_REG_0019",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato típico de carne da Ilha Terceira (Açores), Alcatra («Alcatra à Moda da Terceira»), é cozinhado lentamente no forno a lenha dentro de:",
+    "opcoes": [
+      "Uma panela de ferro",
+      "Uma folha de bananeira",
+      "Um alguidar de barro vermelho não vidrado com vinho de cheiro, toucinho e louro",
+      "Um tacho de cobre"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Alcatra da Terceira é servida com massa sovada e bolo de sertã nas tradicionais Festas do Espírito Santo.",
+    "fonte": "Confraria da Alcatra da Terceira / Turismo dos Açores",
+    "factClusterId": "fc_gast_reg_alcatradaterceira_01"
+  },
+  {
+    "id": "GAST_REG_0020",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que afamado pão regional da Madeira, confecionado com farinha de trigo, batata-doce e fermento cozido sobre uma chapa de pedra basáltica vulcânica («caco») e barrado quente com manteiga de alho e salsa?",
+    "opcoes": [
+      "Pão com Chouriço",
+      "Broa de Milho",
+      "Fogaça de Santa Maria da Feira",
+      "Bolo do Caco (Madeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Bolo do Caco é consumido como entrada ou como sanduíche com prego de vaca, espada preto ou polvo.",
+    "fonte": "Direção Regional de Turismo da Madeira",
+    "factClusterId": "fc_gast_reg_bolodocaco_madeira_01"
+  },
+  {
+    "id": "GAST_REG_0021",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que bolo tradicional de Natal e celebrações da Madeira, confecionado com mel de cana-de-açúcar, nozes, amêndoas, vinho Madeira e especiarias finas, que segundo a tradição nunca deve ser cortado com faca mas sim partido com as mãos?",
+    "opcoes": [
+      "Bolo de Mel da Madeira",
+      "Bolo Rei",
+      "Broas de Espécie",
+      "Pão de Ló de Ovar"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bolo de Mel é tradicionalmente amassado a 8 de dezembro (Dia de Nossa Senhora da Conceição) e dura perfeitamente até ao ano seguinte.",
+    "fonte": "Secretaria Regional de Agricultura da Madeira / Confraria do Bolo de Mel",
+    "factClusterId": "fc_gast_reg_bolodemelmadeira_01"
+  },
+  {
+    "id": "GAST_REG_0022",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que bebida alcoólica tradicional e identitária da Ilha da Madeira, confecionada com aguardente de cana-de-açúcar da Madeira, mel de abelhas ou açúcar e sumo de limão fresco misturados com um mexelote de madeira («caralhinho»)?",
+    "opcoes": [
+      "Ginjinha de Óbidos",
+      "Poncha da Madeira (Poncha Regional)",
+      "Licor de Singeverga",
+      "Abafadinho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Poncha tem Indicação Geográfica Protegida (IGP) e era bebida originalmente pelos pescadores de Câmara de Lobos contra constipações.",
+    "fonte": "Instituto do Vinho, do Bordado e do Artesanato da Madeira (IVBAM)",
+    "factClusterId": "fc_gast_reg_ponchamadeira_01"
+  },
+  {
+    "id": "GAST_REG_0023",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que petisco típico e frito português feito de feijão-verde cozido envolvido em polme de farinha e ovos («Peixinhos da Horta»), levado pelos marinheiros e missionários jesuítas portugueses para o Japão no século XVI onde deu origem à mundialmente famosa «Tempura»?",
+    "opcoes": [
+      "Pastéis de Bacalhau",
+      "Rissóis de Camarão",
+      "Peixinhos da Horta (origem da Tempura japonesa)",
+      "Pataniscas de Bacalhau"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A palavra japonesa 'tempura' deriva das 'têmporas' católicas (dias de abstinência de carne em que os portugueses comiam vegetais fritos no Japão).",
+    "fonte": "Dicionário de História de Portugal / Embaixada do Japão em Portugal",
+    "factClusterId": "fc_gast_reg_peixinhosdahorta_tempura_01"
+  },
+  {
+    "id": "GAST_REG_0024",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso prato de amêijoas salteadas em azeite quente com alho picado, coentros frescos picados e sumo de limão («Amêijoas à Bulhão Pato»), foi batizado pelo cozinheiro do Hotel Central de Lisboa em homenagem ao poeta e gastrónomo Raimundo António de Bulhão Pato?",
+    "opcoes": [
+      "Amêijoas na Cataplana",
+      "Amêijoas à Espanhola",
+      "Conquilhas à Algarvia",
+      "Amêijoas à Bulhão Pato"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bulhão Pato agradeceu a homenagem poética ao prato que se tornou o petisco de marisco mais consensual de Portugal.",
+    "fonte": "7 Maravilhas da Gastronomia / Arquivo Histórico de Lisboa",
+    "factClusterId": "fc_gast_reg_ameijoasbulhaopato_01"
+  },
+  {
+    "id": "GAST_REG_0025",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual de Sintra, confecionado com massa folhada crocante em forma retangular recheada com um aveludado creme de ovos e amêndoa polvilhado com açúcar em pó («Travesseiros de Sintra»), é a imagem de marca da centenária pastelaria Piriquita fundada em 1862?",
+    "opcoes": [
+      "Travesseiros de Sintra (Casa Piriquita)",
+      "Queijadas de Sintra",
+      "Fofos de Belas",
+      "Nozes de Cascais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A receita dos Travesseiros da Piriquita em Sintra é um segredo de família transmitido há cinco gerações.",
+    "fonte": "Antiga Pastelaria Piriquita / Turismo de Sintra",
+    "factClusterId": "fc_gast_reg_travesseirossintra_piriquita_01"
+  },
+  {
+    "id": "GAST_REG_0026",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce tradicional de Sintra, feito com queijo fresco de vaca, açúcar, gemas de ovo, farinha e canela dentro de uma capa de massa crocante finíssima («Queijadas de Sintra»), era já mencionado em documentos medievais no século XIII?",
+    "opcoes": [
+      "Queijadas de Évora",
+      "Queijadas de Sintra (ex: Sapa, Piriquita, Gregório)",
+      "Queijadas de Pereira",
+      "Pastéis de Feijão de Torres Vedras"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Queijadas de Sintra serviam de pagamento de foros régios na Idade Média pela abundância de pastagens e leite na Serra de Sintra.",
+    "fonte": "Câmara Municipal de Sintra / Confraria do Queijo e das Queijadas de Sintra",
+    "factClusterId": "fc_gast_reg_queijadasdesintra_01"
+  },
+  {
+    "id": "GAST_REG_0027",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que afamado prato da culinária de Setúbal, composto por tiras grossas de choco fresco tenro envolvidas em polme estaladiço de farinha e milho e fritas em azeite fervente, servidas com limão e batatas fritas («Choco Frito de Setúbal»)?",
+    "opcoes": [
+      "Caldeirada de Choco",
+      "Lulas Grelhadas",
+      "Choco Frito à Setubalense",
+      "Polvo à Lagareiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Choco Frito de Setúbal é a estrela gastronómica dos restaurantes da Avenida Luísa Todi e do porto de Setúbal.",
+    "fonte": "Câmara Municipal de Setúbal / Rota do Choco",
+    "factClusterId": "fc_gast_reg_chocofrito_setubal_01"
+  },
+  {
+    "id": "GAST_REG_0028",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual cilíndrico de Azeitão (Setúbal), feito de pão de ló leve e húmido coberto com doce de ovos e canela e enrolado manualmente («Torta de Azeitão»), é uma das maiores delícias da Península de Setúbal?",
+    "opcoes": [
+      "Torta de Viana",
+      "Torta de Guimarães",
+      "Bolo de Ançã",
+      "Torta de Azeitão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Torta de Azeitão foi criada pela família Cego no início do século XX e mantém a receita original em Azeitão.",
+    "fonte": "Município de Setúbal / Pastelaria O Cego",
+    "factClusterId": "fc_gast_reg_tortadeazeitao_01"
+  },
+  {
+    "id": "GAST_REG_0029",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato tradicional da foz do rio Ave em Vila do Conde e Póvoa de Varzim, Pescaria à Poveira («Pescada à Poveira»), é cozinhado com postas de pescada fresca, batatas e ovos cozidos regados com um molho fervente de:",
+    "opcoes": [
+      "«Molho Fervido» de azeite, cebola, alho e colorau (pimentão-doce)",
+      "Molho de natas",
+      "Molho de escabeche com vinagre",
+      "Molho de manteiga e limão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Pescada à Poveira é servida tradicionalmente com pão de centeio esfarelado no prato pelos pescadores poveiros.",
+    "fonte": "Câmara Municipal da Póvoa de Varzim / Confraria da Pescada à Poveira",
+    "factClusterId": "fc_gast_reg_pescadaapoveira_01"
+  },
+  {
+    "id": "GAST_REG_0030",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso pastel de feijão criado em Torres Vedras no final do século XIX por D. Maria Rodrigues Silva («Pastéis de Feijão de Torres Vedras»), é confecionado com feijão-branco cozido, açúcar, amêndoa pelada e gemas de ovo em forminhas de massa fina?",
+    "opcoes": [
+      "Pastéis de Vouzela",
+      "Pastéis de Feijão de Torres Vedras",
+      "Pastéis de Águeda",
+      "Queijadas de Colares"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Pastéis de Feijão de Torres Vedras (como os da Fábrica Coroa e Brasão) são o doce ex-líbris do concelho do Oeste.",
+    "fonte": "Câmara Municipal de Torres Vedras / Confraria do Pastel de Feijão",
+    "factClusterId": "fc_gast_reg_pasteisdefeijao_torresvedras_01"
+  },
+  {
+    "id": "GAST_REG_0031",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que tradicional doce conventual de Lagos (Algarve), Dom Rodrigo («Dom Rodrigo de Lagos»), é composto por fios de ovos e doce de ovos com amêndoa ralada e canela embrulhado em:",
+    "opcoes": [
+      "Folhas de laranjeira",
+      "Palha de milho",
+      "Papel de prata metálico colorido e recortado em forma de pirâmide",
+      "Hóstia branca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Dom Rodrigo foi criado pelas freiras do Convento de Nossa Senhora do Carmo de Lagos em homenagem ao governador Dom Rodrigo de Menezes.",
+    "fonte": "Câmara Municipal de Lagos / Turismo do Algarve",
+    "factClusterId": "fc_gast_reg_domrodrigo_lagos_01"
+  },
+  {
+    "id": "GAST_REG_0032",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato de conforto algarvio e do Sotavento («Xerém» / «Xarém»), com fortes raízes na cozinha mourisca, é confecionado com papas de farinha de milho amarelo cozinhada com:",
+    "opcoes": [
+      "Polvo guisado",
+      "Favas guisadas",
+      "Leite condensado",
+      "Conquilhas da Ria Formosa ou amêijoas e pedacinhos de toucinho frito"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Xerém com Conquilhas de Olhão e Faro é um dos pratos mais representativos da identidade marítima e campestre algarvia.",
+    "fonte": "Região de Turismo do Algarve / Município de Olhão",
+    "factClusterId": "fc_gast_reg_xeremcomconquilhas_01"
+  },
+  {
+    "id": "GAST_REG_0033",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato tradicional de Trás-os-Montes (Montalegre e Barroso), Cozido de Barroso («Cozido Barrosão»), distingue-se de todos os outros cozidos portugueses pelo fumeiro nobre e pela presença de carne de:",
+    "opcoes": [
+      "Vaca de raça Barrosã (DOP) e salpicão barrosão",
+      "Búfalo",
+      "Veado",
+      "Pato bravo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Barroso é Património Agrícola Mundial da FAO pela preservação secular da raça bovina Barrosã e fumeiro tradicional.",
+    "fonte": "Câmara Municipal de Montalegre / FAO GIAHS",
+    "factClusterId": "fc_gast_reg_cozidobarrosao_01"
+  },
+  {
+    "id": "GAST_REG_0034",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso bolo de festa da Páscoa transmontano de Chaves e Valpaços («Folar de Chaves» / Folar de Valpaços com IGP), tem a massa fofa de pão lêveda recheada abundantemente com:",
+    "opcoes": [
+      "Doce de gila e ovos moles",
+      "Presunto bísaro, salpicão, linguiça e carnes fumadas de porco",
+      "Bacalhau e azeitonas",
+      "Frutos secos e canela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Folar de Chaves é uma das maiores iguarias do fumeiro transmontano com certificação de Indicação Geográfica Protegida.",
+    "fonte": "Câmara Municipal de Chaves / Qualifica (IGP)",
+    "factClusterId": "fc_gast_reg_folardechaves_01"
+  },
+  {
+    "id": "GAST_REG_0035",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual tradicional de Amarante com forma fálica, confecionado com massa de farinha, ovos e açúcar com cobertura de glacé branco de açúcar («Doces Fálicos de São Gonçalo»), é distribuído nas festas de São Gonçalo como amuleto para casamentos?",
+    "opcoes": [
+      "Lérias de Amarante",
+      "Papos de Anjo",
+      "Doces de São Gonçalo de Amarante («São Gonçalinhos»)",
+      "Brisas do Tâmega"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A tradição remonta a rituais pagãos de fertilidade cristianizados em torno de São Gonçalo de Amarante ('casamenteiro das velhas').",
+    "fonte": "Câmara Municipal de Amarante / Museu Amadeo de Souza-Cardoso",
+    "factClusterId": "fc_gast_reg_docessaogoncalo_amarante_01"
+  },
+  {
+    "id": "GAST_REG_0036",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso pão de ló húmido de Ovar (Aveiro), confecionado em forma forrada com papel de almaço branco e gemas de ovo batidas que deixam o centro cremoso e escorrendo («Pão de Ló de Ovar» com IGP)?",
+    "opcoes": [
+      "Pão de Ló de Margaride (Felgueiras)",
+      "Pão de Ló de Alfeizerão",
+      "Pão de Ló de Mirandela",
+      "Pão de Ló de Ovar (IGP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Ló de Ovar é famoso pela 'lódea' (o recheio cremoso e dourado no interior).",
+    "fonte": "Município de Ovar / Qualifica / União Europeia",
+    "factClusterId": "fc_gast_reg_paodelodeovar_01"
+  },
+  {
+    "id": "GAST_REG_0037",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que histórico pão de ló de Felgueiras («Pão de Ló de Margaride»), cozido em fornos a lenha em formas de barro cozido untadas com manteiga e batido à mão durante horas, foi fornecedor oficial da Casa Real Portuguesa no século XIX?",
+    "opcoes": [
+      "Pão de Ló de Margaride (Felgueiras)",
+      "Pão de Ló de Ovar",
+      "Pão de Ló de Arouca",
+      "Bolo de Ançã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A fábrica de Pão de Ló de Margaride conserva os fornos e os alvarás régios originais concedidos por D. Luís I e D. Carlos I.",
+    "fonte": "Câmara Municipal de Felgueiras / Casa de Margaride",
+    "factClusterId": "fc_gast_reg_paodelomargaride_01"
+  },
+  {
+    "id": "GAST_REG_0038",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato clássico da cidade de Viseu («Rancho à Moda de Viseu»), criado na cantina do Regimento de Infantaria n.º 14 de Viseu, é cozinhado com grão-de-bico, massa de macarrão, vitela de Lafões, chouriço e couve portuguesa?",
+    "opcoes": [
+      "Cozido de Viseu",
+      "Rancho à Moda de Viseu (Rancho de Viseu)",
+      "Feijoada da Beira",
+      "Arroz de Carqueja"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Rancho de Viseu nasceu da alimentação dos soldados e tornou-se o prato festivo mais emblemático da cidade de Viriato.",
+    "fonte": "Câmara Municipal de Viseu / Confraria do Rancho de Viseu",
+    "factClusterId": "fc_gast_reg_ranchodeviseu_01"
+  },
+  {
+    "id": "GAST_REG_0039",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato histórico de bacalhau do Minho e Braga («Bacalhau à Narcisa» / Bacalhau à Braga), criado no restaurante Narcisa em Braga nos anos 1930, é composto por postas de bacalhau fritas em azeite abundante servidas com batatas às rodelas fritas e:",
+    "opcoes": [
+      "Molho béchamel e queijo gratinado",
+      "Puré de batata e maionese",
+      "Uma farta cebolada frita com colorau e louro sobre o bacalhau",
+      "Broa de milho triturada"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau à Narcisa é um dos pratos de bacalhau mais famosos do Minho, com o azeite perfumado a estalar nas batatas.",
+    "fonte": "Município de Braga / Confraria Gastronómica de Braga",
+    "factClusterId": "fc_gast_reg_bacalhaunarcisa_braga_01"
+  },
+  {
+    "id": "GAST_REG_0040",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que célebre prato de bacalhau criado no Porto pelo gastrónomo e comerciante de bacalhau José Luís Gomes de Sá Júnior no final do século XIX («Bacalhau à Gomes de Sá»), é preparado com bacalhau lascado amaciado em leite quente, batatas cozidas às rodelas, cebolas e azeite, decorado com:",
+    "opcoes": [
+      "Pimentos vermelhos assados",
+      "Queijo da Serra gratinado",
+      "Camarões cozidos",
+      "Ovos cozidos às rodelas, azeitonas pretas e salsa fresca picada"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Gomes de Sá vendeu a receita original ao seu amigo João, cozinheiro do mítico Restaurante Lisbonense no Porto.",
+    "fonte": "Arquivo Histórico do Porto / 7 Maravilhas da Gastronomia",
+    "factClusterId": "fc_gast_reg_bacalhaugomesdesa_01"
+  },
+  {
+    "id": "GAST_REG_0041",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato de bacalhau criado no Porto nos anos 1960 pelo chef Evaristo Cardoso no restaurante «O Zé do Pipo» («Bacalhau à Zé do Pipo»), levou a medalha de ouro no concurso de gastronomia da cidade do Porto por ser envolvido em maionese e gratinado no forno rodeado por:",
+    "opcoes": [
+      "Puré de batata moldado com saco de pasteleiro",
+      "Batata palha estaladiça",
+      "Broa de Avintes frita",
+      "Massa folhada"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau à Zé do Pipo tornou-se um clássico de domingo em famílias de todo o Portugal.",
+    "fonte": "Confraria dos Gastrónomos do Porto",
+    "factClusterId": "fc_gast_reg_bacalhauzedopipo_01"
+  },
+  {
+    "id": "GAST_REG_0042",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que tradicional sopa minhota verde (eleita uma das 7 Maravilhas da Gastronomia de Portugal), feita com couve-galega cortada em tiras finíssimas num caldo aveludado de batata com azeite e uma rodela de chouriço de carne («Caldo Verde»), é servida com:",
+    "opcoes": [
+      "Pão de trigo",
+      "Broa de milho tradicional",
+      "Tostas de alho",
+      "Biscoitos de água e sal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Caldo Verde é a sopa nacional portuguesa por excelência, indispensável em todas as festas dos Santos Populares.",
+    "fonte": "7 Maravilhas da Gastronomia / Minho Gastronómico",
+    "factClusterId": "fc_gast_reg_caldoverde_minho_01"
+  },
+  {
+    "id": "GAST_REG_0043",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato ancestral do Minho (Ponte de Lima) e do Douro, confecionado com sangue fresco de porco batido com vinagre, carnes desfiadas de galinha e porco e pão esfarelado ou arroz («Papas de Sarrabulho / Arroz de Sarrabulho»), é servido com rojões à minhota e farinhato?",
+    "opcoes": [
+      "Cabidela de Galo",
+      "Sopa de Entulho",
+      "Papas de Sarrabulho à Moda de Ponte de Lima",
+      "Açorda de Sangue"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Sarrabulho de Ponte de Lima é um dos pratos de inverno mais ricos e procurados da gastronomia minhota.",
+    "fonte": "Município de Ponte de Lima / Confraria do Arroz de Sarrabulho",
+    "factClusterId": "fc_gast_reg_sarrabulho_pontedelima_01"
+  },
+  {
+    "id": "GAST_REG_0044",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que requintado prato de peixe ciclóstomo dos rios Minho, Lima e Mondego («Arroz de Lampreia»), confecionado na primavera entre janeiro e abril com lampreia fresca estufada no seu próprio sangue temperado com vinho tinto verde e arroz carolino?",
+    "opcoes": [
+      "Caldeirada de Enguias",
+      "Arroz de Sável",
+      "Truta com Presunto",
+      "Arroz de Lampreia do Rio Minho / Mondego"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A lampreia é uma iguaria ancestral de época capturada nas 'pesqueiras' de pedra dos rios do norte e centro.",
+    "fonte": "Município de Melgaço / Confraria da Lampreia de Penacova",
+    "factClusterId": "fc_gast_reg_arrozdelampreia_01"
+  },
+  {
+    "id": "GAST_REG_0045",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que bolo de festa com formato quadrangular encimado por quatro bicos estilizados que evocam as torres do Castelo da Feira («Fogaça da Feira» com IGP), é oferecido todos os anos a 20 de janeiro no cumprimento de um voto secular a São Sebastião?",
+    "opcoes": [
+      "Fogaça de Santa Maria da Feira (IGP)",
+      "Regueifa de Valongo",
+      "Folar de Valpaços",
+      "Pão de Gimonde"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Festa das Fogaceiras de Santa Maria da Feira realiza-se ininterruptamente desde 1505 em agradecimento pela salvação da peste.",
+    "fonte": "Município de Santa Maria da Feira / Confraria da Fogaça",
+    "factClusterId": "fc_gast_reg_fogacadfeira_01"
+  },
+  {
+    "id": "GAST_REG_0046",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que doce conventual de Coimbra («Pastéis de Santa Clara»), criados pelas freiras clarissas do Convento de Santa Clara-a-Velha de Coimbra no século XVI, são confecionados em massa tenra estaladiça recheada com ovos moles e:",
+    "opcoes": [
+      "Gila ralada",
+      "Amêndoa pelada moída",
+      "Noz picada",
+      "Castanha pilada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Pastéis de Santa Clara de Coimbra têm a forma de meia-lua polvilhada com açúcar em pó.",
+    "fonte": "Câmara Municipal de Coimbra / Confraria da Doçaria Conventual de Coimbra",
+    "factClusterId": "fc_gast_reg_pasteissantaclara_coimbra_01"
+  },
+  {
+    "id": "GAST_REG_0047",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que bolo conventual de forma retangular coberto com crocante de glacé branco e canela («Jesuítas de Santo Tirso»), foi criado na histórica Confeitaria Moura em Santo Tirso em 1892 por um mestre pasteleiro espanhol que trabalhou com freiras jesuítas?",
+    "opcoes": [
+      "Pastéis de Vouzela",
+      "Claranas",
+      "Jesuítas de Santo Tirso (Confeitaria Moura)",
+      "Limonetes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Jesuíta de Santo Tirso é um dos pastéis folhados mais famosos de Portugal com segredo guardado na Confeitaria Moura.",
+    "fonte": "Confeitaria Moura (Santo Tirso) / Turismo do Porto e Norte",
+    "factClusterId": "fc_gast_reg_jesuitassantotirso_01"
+  },
+  {
+    "id": "GAST_REG_0048",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que prato típico de caça da Beira Alta e Trás-os-Montes, confecionado com lebre estufada com vinho tinto, toucinho e feijão-branco ou vermelho em panela de ferro («Feijoada de Lebre»), é uma das maiores especialidades cinegéticas do interior?",
+    "opcoes": [
+      "Lebre com Arroz de Cabidela",
+      "Perdiz de Escabeche",
+      "Javali no Pote",
+      "Feijoada de Lebre"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Feijoada de Lebre conjuga as carnes bravas da caça com o feijão das serras beirãs.",
+    "fonte": "Confraria dos Gastrónomos da Beira",
+    "factClusterId": "fc_gast_reg_feijoadadelebre_01"
+  },
+  {
+    "id": "GAST_REG_0049",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que famoso doce conventual de Caldas da Rainha (Leiria), em forma de pequenas trouxas de doce de ovos e fios de ovos embebidas em calda açucarada aromática («Trouxas das Caldas» e «Cavacas das Caldas»), é vendido tradicionalmente na Praça da Fruta?",
+    "opcoes": [
+      "Trouxas das Caldas e Cavacas das Caldas",
+      "Pastéis de Feijão",
+      "Padas de Vale de Ílhavo",
+      "Bolo de D. Filipa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Trouxas e Cavacas das Caldas são doces seculares da tradição termal das Caldas da Rainha.",
+    "fonte": "Município das Caldas da Rainha / Praça da Fruta",
+    "factClusterId": "fc_gast_reg_trouxasdascaldas_01"
+  },
+  {
+    "id": "GAST_REG_0050",
+    "tema": "Gastronomia",
+    "subtema": "Gastronomia Regional",
+    "pergunta": "Que célebre queijo curado de ovelha de pasta semidura ou dura e cor amarelada com aroma picante (DOP), produzido exclusivamente na Ilha de São Jorge (Açores) com leite cru de vaca desde o povoamento quinhentista pelos colonos flamengos?",
+    "opcoes": [
+      "Queijo do Pico",
+      "Queijo da Ilha Graciosa",
+      "Queijo de São Jorge (DOP)",
+      "Queijo de Castelo Branco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Queijo de São Jorge DOP é curado durante um mínimo de 3 a 7 meses na ilha, com um travo ligeiramente apimentado inconfundível.",
+    "fonte": "Confraria do Queijo de São Jorge / Qualifica / Açores",
+    "factClusterId": "fc_gast_reg_queijodesaojorge_01"
+  }
+]

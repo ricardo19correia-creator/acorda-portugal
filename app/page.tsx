@@ -4,6 +4,7 @@ import React from 'react'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
 import { GuzmaniaSection } from '@/components/guzmania-section'
+import { MobileLaunchCountdown } from '@/components/mobile-launch-countdown'
 import { SiteFooter } from '@/components/site-footer'
 import { AppBackground } from '@/components/AppBackground'
 
@@ -18,6 +19,7 @@ export default function Page() {
         <SiteHeader />
         <main className="flex-1 flex flex-col justify-center gap-8 py-4 bg-transparent">
           <Hero />
+          <MobileLaunchCountdown />
           <div id="simbolo">
             <GuzmaniaSection />
           </div>

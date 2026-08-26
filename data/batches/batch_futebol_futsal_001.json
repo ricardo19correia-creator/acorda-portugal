@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_FUTSAL_0001",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que lendário jogador português de futsal foi eleito 6 vezes o Melhor Jogador do Mundo pelo prestigiado Futsalplanet Awards (2010, 2014, 2015, 2016, 2017 e 2018)?",
+    "opcoes": [
+      "Ricardinho («O Mágico»)",
+      "Arnaldo Pereira",
+      "Pany Varela",
+      "Zicky Té"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ricardinho é amplamente considerado um dos maiores génios da história do futsal mundial, liderando Portugal ao título europeu em 2018 e mundial em 2021.",
+    "fonte": "FPF / Futsalplanet Awards / UEFA",
+    "factClusterId": "fc_fut_ricardinho_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0002",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Em que país conquistou a Seleção Portuguesa de Futsal o seu primeiro título de Campeã do Mundo da FIFA em outubro de 2021, ao bater a Argentina por 2-1 na final?",
+    "opcoes": [
+      "Colômbia",
+      "Lituânia (em Kaunas)",
+      "Tailândia",
+      "Uzbequistão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Portugal sagrou-se campeão mundial na Arena de Kaunas com dois golos decisivos de Pany Varela.",
+    "fonte": "FIFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_fut_mundial2021_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0003",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que selecionador nacional conduziu Portugal às conquistas do Euro 2018, Mundial 2021, Euro 2022 e Finalíssima Intercontinental 2022, eleito sucessivamente Melhor Selecionador do Mundo?",
+    "opcoes": [
+      "Orlando Duarte",
+      "Nuno Dias",
+      "Jorge Braz",
+      "Joel Rocha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jorge Braz transformou a Seleção Nacional de Futsal na potência dominadora do futsal planetário.",
+    "fonte": "FPF / Futsalplanet",
+    "factClusterId": "fc_fut_jorgebraz_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0004",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube português conquistou a UEFA Futsal Champions League por duas vezes (2018/19 em Almaty e 2020/21 em Zadar), sob o comando técnico de Nuno Dias?",
+    "opcoes": [
+      "SL Benfica",
+      "SC Braga",
+      "Fundão",
+      "Sporting CP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Sporting CP venceu o Kairat Almaty (2-1) em 2019 e o FC Barcelona (4-3) em 2021, tornando-se bicampeão europeu.",
+    "fonte": "UEFA / Sporting Clube de Portugal",
+    "factClusterId": "fc_fut_sporting_futsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0005",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Em que ano conquistou o SL Benfica a UEFA Futsal Cup no Pavilhão Atlântico em Lisboa perante mais de 9.000 espetadores, ao bater o Interviú Madrid por 3-2 após prolongamento?",
+    "opcoes": [
+      "2010",
+      "2005",
+      "2014",
+      "2018"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Benfica de André Lima, Ricardinho e Arnaldo Pereira sagrou-se campeão europeu em 25 de abril de 2010 em Lisboa.",
+    "fonte": "UEFA / Sport Lisboa e Benfica",
+    "factClusterId": "fc_fut_benfica_futsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0006",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que jovem pivô luso-santomense do Sporting CP foi eleito o Melhor Jogador do Euro 2022 aos 20 anos e Melhor Jogador Jovem do Mundo?",
+    "opcoes": [
+      "Neves",
+      "Zicky Té",
+      "Kutchy",
+      "Tiago Brito"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Zicky Té brilhou com golos icónicos de calcanhar e força física inigualável no Euro 2022 nos Países Baixos.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_zickyte_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0007",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que ala internacional português marcou os dois golos de Portugal na final do Mundial de 2021 contra a Argentina e foi eleito o segundo melhor jogador do torneio (Bola de Prata)?",
+    "opcoes": [
+      "Bebé",
+      "Bruno Coelho",
+      "Pany Varela",
+      "André Coelho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pany Varela foi a grande estrela da final do Campeonato do Mundo de 2021 na Lituânia.",
+    "fonte": "FIFA / FPF",
+    "factClusterId": "fc_fut_panyvarela_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0008",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Em que cidade europeia conquistou Portugal o seu primeiro Campeonato da Europa de Futsal em fevereiro de 2018, ao vencer a Espanha por 3-2 após prolongamento com golo de Bruno Coelho?",
+    "opcoes": [
+      "Amesterdão (Países Baixos)",
+      "Belgrado (Sérvia)",
+      "Antuérpia (Bélgica)",
+      "Liubliana (Eslovénia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bruno Coelho marcou de livre de 10 metros no prolongamento na Arena Stozice em Liubliana para selar o inédito título europeu português.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_euro2018_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0009",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que guarda-redes luso-brasileiro do Sporting CP foi galardoado como o Melhor Guarda-Redes do Mundo pela Futsalplanet em 2021 e notabilizou-se pelos seus remates de meia-distância?",
+    "opcoes": [
+      "Guitta (Thiago Mendes Rocha)",
+      "Bebé",
+      "Edu Sousa",
+      "Vítor Hugo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Guitta revolucionou a posição de guarda-redes avançado com a camisola dos leões e da seleção brasileira.",
+    "fonte": "Futsalplanet / Sporting CP",
+    "factClusterId": "fc_fut_guitta_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0010",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que prestigiado treinador português de futsal comanda o Sporting CP desde 2012, tendo conquistado mais de 30 títulos oficiais e 2 Ligas dos Campeões pelo clube?",
+    "opcoes": [
+      "Paulo Jorge",
+      "Nuno Dias",
+      "João Freitas Pinto",
+      "Mário Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nuno Dias é o técnico mais titulado da história do futsal de clubes em Portugal.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_fut_nunodias_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0011",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Quantos minutos de tempo útil (com o cronómetro parado sempre que a bola sai do campo) tem uma partida oficial de futsal sénior regulamentada pela FIFA?",
+    "opcoes": [
+      "50 minutos (duas partes de 25 minutos)",
+      "60 minutos (duas partes de 30 minutos)",
+      "40 minutos (duas partes de 20 minutos)",
+      "30 minutos (duas partes de 15 minutos)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "No futsal, cada parte tem 20 minutos de jogo cronometrado efetivo.",
+    "fonte": "Leis do Jogo de Futsal da FIFA / FPF",
+    "factClusterId": "fc_fut_regrasfutsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0012",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "A partir de quantas faltas acumuladas por equipa em cada parte de um jogo de futsal é concedido um livre direto sem barreira na marca dos 10 metros?",
+    "opcoes": [
+      "A partir da 5.ª falta",
+      "A partir da 4.ª falta",
+      "A partir da 7.ª falta",
+      "A partir da 6.ª falta acumulada"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As primeiras 5 faltas permitem barreira defensiva; a partir da 6.ª falta acumulada na mesma parte, todos os livres são diretos e sem barreira.",
+    "fonte": "FIFA Futsal Laws of the Game",
+    "factClusterId": "fc_fut_faltasacumuladas_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0013",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que guarda-redes histórico da Seleção Nacional de Futsal (com mais de 130 internacionalizações) defendeu a baliza de Portugal nos títulos do Euro 2018 e Mundial 2021?",
+    "opcoes": [
+      "Bebé (Euclides Gomes)",
+      "André Sousa",
+      "Benedito",
+      "Cristiano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bebé foi um dos capitães e esteios defensivos da época de ouro da Seleção Nacional de Futsal.",
+    "fonte": "FPF / UEFA",
+    "factClusterId": "fc_fut_bebe_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0014",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que troféu intercontinental inédito foi conquistado por Portugal em setembro de 2022 em Buenos Aires, ao vencer a Espanha nos penáltis na final da Finalíssima de Futsal?",
+    "opcoes": [
+      "Taça das Confederações",
+      "Futsal Finalissima 2022 (UEFA-CONMEBOL)",
+      "Mundialito de Futsal",
+      "Grand Prix de Futsal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Finalíssima reuniu os campeões e vice-campeões da Europa (Portugal e Espanha) e da América do Sul (Argentina e Paraguai).",
+    "fonte": "UEFA / CONMEBOL / FPF",
+    "factClusterId": "fc_fut_finalissima2022_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0015",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que lendário capitão da Seleção Nacional e do SL Benfica foi o primeiro jogador a erguer um troféu europeu de clubes por uma equipa portuguesa em 2010?",
+    "opcoes": [
+      "Pedro Costa",
+      "César Paulo",
+      "Arnaldo Pereira",
+      "Gonçalo Alves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Arnaldo Pereira, natural de Bragança, foi um dos maiores símbolos de liderança e raça do futsal nacional com mais de 200 internacionalizações.",
+    "fonte": "FPF / SL Benfica",
+    "factClusterId": "fc_fut_arnaldopereira_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0016",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que virtuoso ala ítalo-brasileiro naturalizado do Sporting CP é célebre pelos seus dribles desconcertantes de pé esquerdo e assistências na Liga dos Campeões?",
+    "opcoes": [
+      "Diego Cavinato",
+      "Taynan",
+      "Rocha",
+      "Alex Merlim («Il Mago»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alex Merlim é um dos jogadores mais talentosos e influentes da história da Liga Placard e do futsal europeu.",
+    "fonte": "Sporting CP / UEFA",
+    "factClusterId": "fc_fut_alexmerlim_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0017",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube do Minho se consolidou como a terceira força do futsal português e chegou à final da UEFA Futsal Champions League em 2024?",
+    "opcoes": [
+      "SC Braga (SC Braga / AAUM)",
+      "Rio Ave FC",
+      "AD Fundão",
+      "Leões de Porto Salvo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O SC Braga orientado por Joel Rocha alcançou a final europeia de futsal em Yerevan em maio de 2024.",
+    "fonte": "UEFA / Sporting Clube de Braga",
+    "factClusterId": "fc_fut_scbraga_futsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0018",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube do concelho de Oeiras fundado em 1970 é uma das instituições com maior tradição de formação no futsal da primeira divisão nacional?",
+    "opcoes": [
+      "Quinta dos Lombos",
+      "Leões de Porto Salvo",
+      "Belenenses",
+      "Burinhosa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Clube Recreativo Leões de Porto Salvo é um dos históricos do campeonato nacional de futsal.",
+    "fonte": "FPF / CR Leões de Porto Salvo",
+    "factClusterId": "fc_fut_leoesportosalvo_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0019",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube da Cova da Beira fundado em 1955 conquistou a Taça de Portugal de Futsal em 2014 no Pavilhão Multiusos de Gondomar?",
+    "opcoes": [
+      "SC Covilhã",
+      "Eléctrico FC",
+      "AD Fundão (Associação Desportiva do Fundão)",
+      "Fundação Jorge Antunes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A AD Fundão fez história ao vencer o Benfica por 7-6 na final da Taça de Portugal de 2014.",
+    "fonte": "FPF / AD Fundão",
+    "factClusterId": "fc_fut_adfundao_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0020",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que capitão histórico do Sporting CP e atual diretor do futsal leonino foi um dos melhores guarda-redes portugueses de sempre nos anos 2000 e 2010?",
+    "opcoes": [
+      "Cristiano",
+      "Gonçalo Portugal",
+      "Sandro",
+      "João Benedito"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João Benedito defendeu a baliza do Sporting e da Seleção durante mais de 15 épocas com enorme carisma.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_fut_joaobenedito_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0021",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que ala internacional português do Sporting CP e da Seleção Nacional é célebre pela sua polivalência defensiva e pelo golo decisivo no prolongamento da final da Champions League de 2021?",
+    "opcoes": [
+      "Erick Mendonça",
+      "Fábio Cecílio",
+      "Tiago Brito",
+      "Afonso Jesus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Erick Mendonça destacou-se como um dos melhores fixos/alas do mundo nos títulos do Sporting e de Portugal.",
+    "fonte": "FPF / Sporting CP",
+    "factClusterId": "fc_fut_erickmendonca_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0022",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que jogadora internacional portuguesa do SL Benfica é considerada uma das maiores craques mundiais do futsal feminino, várias vezes nomeada Melhor do Mundo pela Futsalplanet?",
+    "opcoes": [
+      "Janice Silva",
+      "Fifó (Sofia Joel)",
+      "Inês Fernandes",
+      "Ana Catarina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Fifó foi a estrela da conquista da medalha de ouro nos Jogos Olímpicos da Juventude de 2018 em Buenos Aires.",
+    "fonte": "FPF / SL Benfica / Futsalplanet",
+    "factClusterId": "fc_fut_fifo_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0023",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que guarda-redes portuguesa do SL Benfica foi eleita repetidamente a «Melhor Guarda-Redes do Mundo de Futsal Feminino» pela Futsalplanet Awards?",
+    "opcoes": [
+      "Maria Odete",
+      "Natália Silva",
+      "Ana Catarina Pereira",
+      "Sara Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ana Catarina é a referência máxima da baliza da Seleção Nacional feminina e do Benfica.",
+    "fonte": "Futsalplanet / FPF",
+    "factClusterId": "fc_fut_anacatarina_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0024",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube de Ponte de Sor (distrito de Portalegre) disputa a Liga Placard de Futsal e tem sido presença habitual na fase final da Taça de Portugal?",
+    "opcoes": [
+      "AD Fundão",
+      "Ferreira do Zêzere",
+      "Portimonense",
+      "Eléctrico FC (Ponte de Sor)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Eléctrico Futebol Clube é o grande embaixador do futsal do Alto Alentejo na elite nacional.",
+    "fonte": "FPF / Município de Ponte de Sor",
+    "factClusterId": "fc_fut_electricofutsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0025",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Em que cidade dos Países Baixos (no Ziggo Dome) conquistou Portugal o bicampeonato europeu de futsal (Euro 2022) ao derrotar a Rússia por 4-2 na final após recuperar de 0-2?",
+    "opcoes": [
+      "Amesterdão",
+      "Roterdão",
+      "Groninga",
+      "Utreque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal protagonizou uma reviravolta épica na final com golos de Tomás Paçó, André Coelho (2) e Pany Varela.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_euro2022_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0026",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Qual é a distância oficial da marca de grande penalidade (penálti) até à linha de golo numa quadra de futsal?",
+    "opcoes": [
+      "7 metros",
+      "6 metros",
+      "9 metros",
+      "10 metros"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O penálti de falta dentro da área é marcado aos 6 metros; o tiro livre direto sem barreira por limite de faltas é aos 10 metros.",
+    "fonte": "Leis do Jogo da FIFA / FPF",
+    "factClusterId": "fc_fut_marcapenalti_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0027",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que histórico clube de Coimbra (Secção de Futsal da AAC) e clube de Vizela (Fundação Jorge Antunes) foram pioneiros nos anos 90 e 2000 na afirmação do futsal português?",
+    "opcoes": [
+      "Miramar e Instituto D. João V",
+      "Sporting e Benfica",
+      "Académica de Coimbra e Fundação Jorge Antunes",
+      "Belenenses e Boavista"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Fundação Jorge Antunes e o Miramar FC de Gaia venceram títulos nacionais nos primórdios do campeonato.",
+    "fonte": "FPF / História do Futsal em Portugal",
+    "factClusterId": "fc_fut_pioneirosfutsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0028",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que jovem fixo/ala da formação do Sporting CP marcou o golo do empate 2-2 na final do Euro 2022 contra a Rússia?",
+    "opcoes": [
+      "Bernardo Paçó",
+      "Neves",
+      "Lúcio Rocha",
+      "Tomás Paçó"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Tomás Paçó e o seu irmão gémeo Bernardo Paçó formam uma das duplas de jovens internacionais mais promissoras do futsal português.",
+    "fonte": "FPF / Sporting CP",
+    "factClusterId": "fc_fut_tomaspaco_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0029",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Como se chama a jogada tática em que o treinador substitui o guarda-redes por um jogador de campo com camisola especial para criar superioridade numérica 5 para 4 no ataque?",
+    "opcoes": [
+      "Guarda-redes avançado (5x4)",
+      "Pressão alta",
+      "Marcação individual",
+      "Saída de três"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O guarda-redes avançado é uma das decisões táticas mais emocionantes e arriscadas dos minutos finais no futsal.",
+    "fonte": "Manual de Treinadores de Futsal da FPF",
+    "factClusterId": "fc_fut_5x4_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0030",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que pivot internacional luso-brasileiro foi o melhor marcador do campeonato nacional pelo Sporting CP durante várias épocas antes de rumar a Espanha?",
+    "opcoes": [
+      "Fernandão",
+      "Diego Cavinato",
+      "Deo",
+      "Caio Japa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Cavinato marcou mais de 300 golos oficiais de leão ao peito, vencendo duas Ligas dos Campeões.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_fut_cavinato_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0031",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Em que pavilhão multiusos da Cidade do Futebol em Oeiras treina e estagia permanentemente a Seleção Nacional de Futsal de Portugal?",
+    "opcoes": [
+      "Pavilhão Paz e Amizade",
+      "Pavilhão Casal Vistoso",
+      "Pavilhão Cidade do Futebol (Oeiras)",
+      "Pavilhão dos Desportos de Odivelas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cidade do Futebol da FPF inaugurou o seu pavilhão de futsal de alta tecnologia para preparar todas as seleções nacionais.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_fut_cidadedofutebol_futsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0032",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Qual é a dimensão padrão oficial de uma quadra de futsal para jogos internacionais da FIFA e da UEFA?",
+    "opcoes": [
+      "50 metros por 25 metros",
+      "30 metros por 15 metros",
+      "45 metros por 30 metros",
+      "40 metros de comprimento por 20 metros de largura"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O piso 40x20 m em madeira flutuante ou taraflex é a norma internacional de futsal.",
+    "fonte": "FIFA Futsal Manual",
+    "factClusterId": "fc_fut_dimensoesquadra_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0033",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que internacional português do SL Benfica foi o herói da final do Euro 2018 ao marcar 2 golos decisivos à Espanha na Eslovénia?",
+    "opcoes": [
+      "Bruno Coelho",
+      "Fábio Cecílio",
+      "Tiago Brito",
+      "Nilson Miguel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bruno Coelho marcou o golo do 2-2 nos minutos finais e o 3-2 de livre de 10 metros no prolongamento.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_brunocoelho_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0034",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que jovem jogador português formado no SL Benfica foi eleito o Melhor Jogador do Campeonato da Europa de Futsal Sub-19 em 2023 em Porec (Croácia)?",
+    "opcoes": [
+      "Diogo Furtado",
+      "Lúcio Rocha",
+      "Rúben Carrilho",
+      "Afonso Serra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Lúcio Rocha conduziu Portugal ao título de Campeão da Europa de Sub-19 em 2023.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_luciorocha_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0035",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Quantos segundos tem um jogador de futsal para repor a bola em jogo na marcação de um pontapé de linha lateral, de canto ou reposição de baliza?",
+    "opcoes": [
+      "5 segundos",
+      "6 segundos",
+      "4 segundos",
+      "10 segundos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O árbitro conta os 4 segundos com a mão aberta levantada; se o tempo expirar, a posse reverte para a equipa adversária.",
+    "fonte": "Leis do Jogo da FIFA",
+    "factClusterId": "fc_fut_regra4segundos_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0036",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que histórico clube de Loures (Santo Antão do Tojal) foi campeão nacional da 1.ª Divisão de Futsal na época 1999/2000 («Miramar» e «Correio da Manhã»)?",
+    "opcoes": [
+      "Sporting",
+      "Benfica",
+      "Boavista",
+      "Correio da Manhã Futsal (GDC Correio da Manhã)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "O GD Correio da Manhã foi uma das equipas dominadoras do futsal português no final dos anos 90.",
+    "fonte": "FPF / História do Futsal",
+    "factClusterId": "fc_fut_correiodamanha_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0037",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que experiente fixo internacional do SL Benfica, natural de Coimbra, foi campeão da Europa e do Mundo por Portugal e capitão dos encarnados?",
+    "opcoes": [
+      "Afonso Jesus",
+      "André Coelho",
+      "Gonçalo Sobral",
+      "Silvestre Ferreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Afonso Jesus é uma das referências defensivas e de transição rápida do SL Benfica e de Portugal.",
+    "fonte": "FPF / SL Benfica",
+    "factClusterId": "fc_fut_afonsojesus_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0038",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube do concelho da Marinha Grande (freguesia de Pataias) foi finalista da Taça de Portugal de futsal e disputou a Liga Placard durante anos com fervoroso apoio popular?",
+    "opcoes": [
+      "AD Fundão",
+      "CCRD Burinhosa",
+      "Dínamo Sanjoanense",
+      "Futsal Azeméis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Burinhosa tornou-se famosa pelo ambiente frenético da sua «Aldeia do Futsal».",
+    "fonte": "FPF / Município de Alcobaça",
+    "factClusterId": "fc_fut_burinhosa_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0039",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que internacional português de futsal, campeão mundial em 2021, jogou várias épocas no Barcelona e no Benfica como fixo de grande poder físico?",
+    "opcoes": [
+      "Pany Varela",
+      "Bruno Coelho",
+      "André Coelho",
+      "Tiago Brito"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "André Coelho conquistou a Liga dos Campeões pelo Barcelona e o Mundial e Europeu pela Seleção Nacional.",
+    "fonte": "FPF / FC Barcelona",
+    "factClusterId": "fc_fut_andrecoelho_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0040",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Qual é o peso aproximado e a característica principal da bola oficial de futsal (Tamanho 4) em comparação com o futebol de 11?",
+    "opcoes": [
+      "Mais leve e com ressalto livre",
+      "De borracha maciça",
+      "Com peso superior a 600 gramas",
+      "Entre 400 e 440 gramas, com ressalto reduzido (baixo ressalto para controlar no solo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A bola de futsal tem enchimento com espuma ou feltro para garantir um primeiro ressalto controlado entre 50 e 65 cm quando largada de 2 metros de altura.",
+    "fonte": "FIFA Futsal Technical Guidelines",
+    "factClusterId": "fc_fut_bolafutsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0041",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que competição feminina oficial foi criada pela UEFA em 2019, na qual a Seleção Portuguesa Feminina de Futsal foi vice-campeã europeia em 2019, 2022 e 2023?",
+    "opcoes": [
+      "UEFA Women's Futsal EURO",
+      "Mundialito Feminino",
+      "Copa América Feminina",
+      "Taça Ibérica Feminina"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal disputou três finais consecutivas do Europeu Feminino de Futsal contra a Espanha no Pavilhão Multiusos de Gondomar e em Debrecen.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_fut_eurofem_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0042",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que histórico pivot do Sporting CP e do Benfica, internacional pela seleção brasileira e portuguesa, era célebre pelo jogo de costas para a baliza e pontapés de bicicleta?",
+    "opcoes": [
+      "Ricardinho",
+      "César Paulo (ou Fernandão)",
+      "Pedro Cary",
+      "Leitão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "César Paulo foi um dos pivots mais dominadores dos dérbis lisboetas nos anos 2000 e 2010.",
+    "fonte": "FPF / Zerozero",
+    "factClusterId": "fc_fut_cesarpaulo_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0043",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube de São João da Madeira disputa a Liga Placard no Pavilhão das Travessas?",
+    "opcoes": [
+      "Futsal Azeméis",
+      "Rio Ave",
+      "AD Sanjoanense (ou Dínamo Sanjoanense)",
+      "Modicus"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Dínamo Sanjoanense representa São João da Madeira na elite do futsal português.",
+    "fonte": "FPF / Município de São João da Madeira",
+    "factClusterId": "fc_fut_saojoanense_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0044",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que internacional português natural do Algarve (Loulé) foi capitão da Seleção Nacional e esteve presente na conquista histórica do Euro 2018?",
+    "opcoes": [
+      "Márcio Moreira",
+      "Tiago Brito",
+      "João Matos",
+      "Pedro Cary"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Pedro Cary venceu títulos nacionais e europeus de leão ao peito e com as quinas da Seleção.",
+    "fonte": "FPF / Sporting CP",
+    "factClusterId": "fc_fut_pedrocary_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0045",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que capitão do Sporting CP e internacional português é o jogador com mais jogos e mais títulos oficiais na história do futsal verde e branco (mais de 600 jogos)?",
+    "opcoes": [
+      "João Matos",
+      "Deo",
+      "Pedro Cary",
+      "Paulinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "João Matos é o eterno capitão do Sporting CP, vencendo tudo a nível nacional, europeu e mundial de seleções.",
+    "fonte": "Sporting CP / FPF",
+    "factClusterId": "fc_fut_joaomatos_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0046",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Como é executada a reposição da bola quando esta sai completamente pelas linhas laterais no futsal?",
+    "opcoes": [
+      "Com as mãos como no futebol de 11",
+      "Com os pés, com a bola imóvel em cima da linha lateral ou até 25 cm fora dela",
+      "Pelo guarda-redes",
+      "Com a mão pelo capitão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O pontapé de linha lateral no futsal é executado exclusivamente com os pés no prazo de 4 segundos.",
+    "fonte": "Leis do Jogo da FIFA",
+    "factClusterId": "fc_fut_linhalateral_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0047",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que treinador português levou o SL Benfica ao título de campeão nacional e à final da UEFA Futsal Cup em 2016 e treinou posteriormente o SC Braga?",
+    "opcoes": [
+      "Paulo Fernandes",
+      "Alípio Matos",
+      "Joel Rocha",
+      "Nuno Dias"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Joel Rocha é um dos mais conceituados estrategas do futsal em Portugal, natural da Covilhã.",
+    "fonte": "FPF / Zerozero",
+    "factClusterId": "fc_fut_joelrocha_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0048",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que clube de Sandim (Vila Nova de Gaia) disputou a 1.ª Divisão nacional de futsal durante mais de uma década consecutiva («Modicus Sandim»)?",
+    "opcoes": [
+      "Miramar FC",
+      "Boavista FC",
+      "Gondomar SC",
+      "AD Modicus Sandim"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Modicus Sandim de Gaia foi uma das equipas mais carismáticas e competitivas do norte do país.",
+    "fonte": "FPF / Associação de Futebol do Porto",
+    "factClusterId": "fc_fut_modicus_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0049",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que troféu nacional abre anualmente a época oficial de futsal em Portugal, disputado entre o Campeão Nacional e o Vencedor da Taça de Portugal?",
+    "opcoes": [
+      "Supertaça de Futsal de Portugal",
+      "Taça da Liga de Futsal",
+      "Taça de Honra",
+      "Troféu Stromp"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Supertaça de Futsal reúne os dois maiores vencedores da época anterior num único jogo decisivo.",
+    "fonte": "Federação Portuguesa de Futebol",
+    "factClusterId": "fc_fut_supertacafutsal_01"
+  },
+  {
+    "id": "FUT_FUTSAL_0050",
+    "tema": "Futebol Português",
+    "subtema": "Futsal",
+    "pergunta": "Que pivô brasileiro naturalizado português foi o melhor marcador de Portugal no Mundial de 2000 na Guatemala, onde a Seleção conquistou a medalha de bronze?",
+    "opcoes": [
+      "Ricardinho",
+      "Arnaldo",
+      "André Lima (e Majó)",
+      "Israel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Portugal conquistou o 3.º lugar no Mundial de Futsal da Guatemala em 2000 sob o comando de Orlando Duarte.",
+    "fonte": "FIFA / FPF / História do Futsal",
+    "factClusterId": "fc_fut_guatemala2000_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_PIN_0001",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que obra-prima fundamental da pintura portuguesa do século XV (atribuída a Nuno Gonçalves c. 1470), composta por seis tábuas a óleo sobre madeira com 58 figuras históricas retratando a corte de D. Afonso V em veneração a São Vicente, é a jóia máxima do Museu Nacional de Arte Antiga em Lisboa?",
+    "opcoes": [
+      "Os Painéis de São Vicente de Fora (Painéis de Nuno Gonçalves)",
+      "O Políptico de Viseu",
+      "O Tríptico dos Infantes",
+      "A Adoração dos Magos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Painéis de São Vicente de Fora são considerados o maior monumento pictórico dos 'Primitivos Portugueses', retratando o Infante D. Henrique, o rei D. Afonso V, nobres, monges e pescadores.",
+    "fonte": "Museu Nacional de Arte Antiga (MNAA) / DGPC",
+    "factClusterId": "fc_pin_paineissaovicente_01"
+  },
+  {
+    "id": "CULT_PIN_0002",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que célebre pintor renascentista português de Viseu (c. 1475-1542), autor do monumental retábulo da Sé de Viseu e da icónica pintura a óleo «São Pedro no Trono» (1535-1540), dá o nome ao Museu Nacional de Viseu instalado no Paço dos Três Escalões?",
+    "opcoes": [
+      "Gaspar Vaz",
+      "Grão Vasco (Vasco Fernandes)",
+      "Francisco Henriques",
+      "Frei Carlos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Grão Vasco combinou o rigor descritivo da escola flamenga com a monumentalidade e o tratamento da luz do Renascimento italiano.",
+    "fonte": "Museu Nacional Grão Vasco / DGPC",
+    "factClusterId": "fc_pin_graovasco_01"
+  },
+  {
+    "id": "CULT_PIN_0003",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora barroca do século XVII (1630-1684), nascida em Sevilha e radicada em Óbidos («Josefa de Óbidos»), notabilizou-se pelas suas sumptuosas naturezas-mortas de flores, queijos, doces conventuais e pela pintura mística devocional?",
+    "opcoes": [
+      "Aurélia de Sousa",
+      "Vieira da Silva",
+      "Josefa de Óbidos (Josefa de Ayala Figueira)",
+      "Mily Possoz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Josefa de Óbidos foi uma mulher independente e uma das poucas artistas femininas profissionais do barroco europeu com clientela aristocrática e conventual.",
+    "fonte": "Museu Municipal de Óbidos / MNAA",
+    "factClusterId": "fc_pin_josefadeobidos_01"
+  },
+  {
+    "id": "CULT_PIN_0004",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor neoclássico e pré-romântico lisboeta (1768-1837), autor das monumentais pinturas «Adoração dos Magos» e «Passagem do Rio Jordão» e da série dos «Retratos da Família Real», faleceu no exílio em Roma?",
+    "opcoes": [
+      "Vieira Portuense",
+      "Torno",
+      "Henrique Pousão",
+      "Domingos António de Sequeira (Domingos Sequeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A pintura «A Adoração dos Magos» de Domingos Sequeira foi adquirida pelo Museu Nacional de Arte Antiga em 2016 através de uma histórica campanha nacional de subscrição pública.",
+    "fonte": "Museu Nacional de Arte Antiga / BNP",
+    "factClusterId": "fc_pin_domingossequeira_01"
+  },
+  {
+    "id": "CULT_PIN_0005",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que famoso quadro a óleo sobre tela de José Malhoa pintado em 1910 («O Fado»), retratando o fadista Amâncio a tocar guitarra portuguesa e a descarada Adelaide da Facada no bairro da Mouraria em Lisboa, é a imagem de marca do Museu de Lisboa e do Museu do Fado?",
+    "opcoes": [
+      "«O Fado» (1910) de José Malhoa",
+      "«Os Bêbados»",
+      "«Conversa de Comadres»",
+      "«Praia das Maçãs»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Malhoa visitou dezenas de vezes as tabernas da Mouraria para captar os modelos reais com realismo sociológico e luz sensual.",
+    "fonte": "Museu de Lisboa / Museu do Fado / Museu José Malhoa (Caldas da Rainha)",
+    "factClusterId": "fc_pin_josemalhoa_ofado_01"
+  },
+  {
+    "id": "CULT_PIN_0006",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que mestre supremo do naturalismo e do retrato realista português (1857-1929), irmão do ceramista Rafael Bordalo Pinheiro e autor do célebre quadro «O Grupo do Leão» (1885) na Cervejaria Leão de Ouro, é:",
+    "opcoes": [
+      "Silva Porto",
+      "Columbano Bordalo Pinheiro",
+      "José Malhoa",
+      "Henrique Pousão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Columbano pintou os mais profundos retratos psicológicos das elites portuguesas, incluindo Eça de Queirós, Teófilo Braga, Antero de Quental e Raul Brandão.",
+    "fonte": "Museu Nacional de Arte Contemporânea do Chiado (MNAC) / DGPC",
+    "factClusterId": "fc_pin_columbanobordalopinheiro_01"
+  },
+  {
+    "id": "CULT_PIN_0007",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor naturalista portuense (1850-1893), pioneiro da pintura ao ar livre («plenairismo») em Portugal e líder do Grupo do Leão com obras como «Charneca de Belas» e «Ceifeiras», dá o nome a uma das principais correntes da arte oitocentista?",
+    "opcoes": [
+      "Marques de Oliveira",
+      "Sousa Pinto",
+      "António Carvalho da Silva Porto (Silva Porto)",
+      "Artur Loureiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Silva Porto introduziu a luminosidade atmosférica da Escola de Barbizon e da pintura de paisagem em Portugal.",
+    "fonte": "Museu Nacional de Soares dos Reis / MNAC",
+    "factClusterId": "fc_pin_silvaporto_01"
+  },
+  {
+    "id": "CULT_PIN_0008",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que jovem pintor prodígio natural de Vila Viçosa (1859-1884), falecido aos 25 anos com tuberculose após estadias luminosas em Roma e Capri («Casas Brancas de Capri», «Esperando os Barcos»), é um dos maiores génios da pintura portuguesa?",
+    "opcoes": [
+      "Silva Porto",
+      "Cristino da Silva",
+      "Manuel Jardim",
+      "Henrique Pousão (Henrique César de Araújo Pousão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As pequenas pinturas em tábua de Henrique Pousão anteciparam o impressionismo e a abstração com uma pureza de luz e planos geométricos sem par.",
+    "fonte": "Museu Nacional de Soares dos Reis (Porto) / Museu de Vila Viçosa",
+    "factClusterId": "fc_pin_henriquepousao_01"
+  },
+  {
+    "id": "CULT_PIN_0009",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora naturalista portuense (1866-1922), nascida em Valparaíso no Chile e radicada na Quinta da China no Porto com a sua irmã Sofia de Souza, criou o consagrado «Auto-Retrato com Casaco Vermelho» (1900)?",
+    "opcoes": [
+      "Aurélia de Sousa (Aurélia de Souza)",
+      "Sofia de Souza",
+      "Mily Possoz",
+      "Sarah Affonso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Auto-Retrato de Aurélia de Sousa no Museu Soares dos Reis é uma das mais intensas e desafiadoras afirmações de identidade artística feminina da pintura europeia.",
+    "fonte": "Museu Nacional de Soares dos Reis / DGPC",
+    "factClusterId": "fc_pin_aureliadesousa_01"
+  },
+  {
+    "id": "CULT_PIN_0010",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que génio do modernismo e futurismo português (1887-1918), natural de Manhufe (Amarante), participou com Modigliani, Brancusi e Picasso nas vanguardas parisienses e no Armory Show de Nova Iorque de 1913 com obras como «Canção Popular» e «Cavalheiros»?",
+    "opcoes": [
+      "Almada Negreiros",
+      "Amadeo de Souza-Cardoso",
+      "Eduardo Viana",
+      "Santa-Rita Pintor"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Amadeo de Souza-Cardoso combinou o cubismo, orfismo e expressionismo com o cromatismo da arte popular portuguesa antes de falecer precocemente na pneumónica de 1918.",
+    "fonte": "Museu Municipal Amadeo de Souza-Cardoso / Centro de Arte Moderna da Gulbenkian",
+    "factClusterId": "fc_pin_amadeosouzacardoso_01"
+  },
+  {
+    "id": "CULT_PIN_0011",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista multidisciplinar modernista (1893-1970) pintou o icónico «Retrato de Fernando Pessoa» (1954) para o café «Irmãos Unidos» e os monumentais frescos nas Gares Marítimas de Alcântara e da Rocha do Conde de Óbidos?",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "Guilherme de Santa-Rita",
+      "José de Almada Negreiros",
+      "Mário Eloy"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Almada Negreiros retratou a vida dura das varinas, pescadores e emigrantes portugueses no cais de Lisboa com uma mestria compositiva ímpar.",
+    "fonte": "Fundação Calouste Gulbenkian / Porto de Lisboa",
+    "factClusterId": "fc_pin_almadanegreiros_frescos_01"
+  },
+  {
+    "id": "CULT_PIN_0012",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora abstrata luso-francesa (1908-1992), membro da prestigiada Escola de Paris no pós-guerra e casada com Arpad Szenes, criou labirínticas composições geométricas em perspetiva («Tráfego», «Biblioteca», «Passagens»)?",
+    "opcoes": [
+      "Paula Rego",
+      "Graça Morais",
+      "Helena Almeida",
+      "Maria Helena Vieira da Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vieira da Silva foi a primeira mulher a receber o Grande Prémio Nacional das Artes de França em 1966 e tem a sua Fundação e Museu no Jardim das Amoreiras em Lisboa.",
+    "fonte": "Fundação Arpad Szenes - Vieira da Silva / Centre Pompidou",
+    "factClusterId": "fc_pin_vieiradasilva_01"
+  },
+  {
+    "id": "CULT_PIN_0013",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que grande pintor neo-realista e expressionista português (1926-2018), autor de quadros fundamentais como «Gadanheiro» e «Almoço do Trolha» e dos painéis de azulejos na estação de metro do Alto dos Moinhos e no Palácio de Belém, é:",
+    "opcoes": [
+      "Júlio Pomar",
+      "Mário Dionísio",
+      "Lima de Freitas",
+      "Cargaleiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Atelier-Museu Júlio Pomar em Lisboa preserva o espólio das suas pinturas, gravuras, cerâmicas e esculturas.",
+    "fonte": "Atelier-Museu Júlio Pomar / EGEAC / Metro de Lisboa",
+    "factClusterId": "fc_pin_juliopomar_01"
+  },
+  {
+    "id": "CULT_PIN_0014",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista contemporânea portuguesa (1934-2018), filha do arquiteto Raul Lino e pioneira internacional da arte conceptual e da fotografia performativa com a célebre série «Ouve-me» e «Pintura Habitada», é:",
+    "opcoes": [
+      "Paula Rego",
+      "Helena Almeida",
+      "Lourdes Castro",
+      "Graça Morais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Helena Almeida utilizava o seu próprio corpo vestido de negro traçando linhas de tinta azul ou cobrindo o rosto em diálogos radicais com o espaço da tela.",
+    "fonte": "Museu de Serralves / Tate Modern / Bienal de Veneza",
+    "factClusterId": "fc_pin_helenaalmeida_01"
+  },
+  {
+    "id": "CULT_PIN_0015",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista madeirense natural do Funchal (1930-2022), fundadora da revista de vanguarda «KWY» em Paris nos anos 1960 com René Bertholo e criadora do «Teatro de Sombras» e do «Grande Herbário de Sombras», é:",
+    "opcoes": [
+      "Helena Almeida",
+      "Graça Morais",
+      "Lourdes Castro",
+      "Ana Hatherly"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Lourdes Castro foi distinguida com o Prémio Pessoa em 2000 e a Medalha de Mérito Cultural pelo seu trabalho poético sobre a luz, as sombras e a botânica.",
+    "fonte": "Fundação Calouste Gulbenkian / Museu de Arte Contemporânea da Madeira (MUDAS)",
+    "factClusterId": "fc_pin_lourdescastro_01"
+  },
+  {
+    "id": "CULT_PIN_0016",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que arquiteto e pintor transmontano natural de Boticas (1925-2013), pioneiro do abstracionismo geométrico («espacianismo») que trabalhou com Le Corbusier em Paris e Oscar Niemeyer em Brasília, dá o nome ao museu de arte contemporânea de Chaves?",
+    "opcoes": [
+      "Manuel Cargaleiro",
+      "Querubim Lapa",
+      "Charrua",
+      "Nadir Afonso (Nadir Afonso Rodrigues)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Arte Contemporânea Nadir Afonso em Chaves foi projetado por Álvaro Siza Vieira e exibe as suas telas de cidades geométricas.",
+    "fonte": "Fundação Nadir Afonso / Município de Chaves / MACNA",
+    "factClusterId": "fc_pin_nadirafonso_01"
+  },
+  {
+    "id": "CULT_PIN_0017",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que mestre pintor e ceramista beirão (1927-2024), natural de Chão das Donas (Castelo Branco), com ateliês em Paris e Lisboa e famoso pelos seus azulejos e pinturas de tapeçaria luminosa geométrica, fundou o Museu Cargaleiro em Castelo Branco?",
+    "opcoes": [
+      "Manuel Cargaleiro",
+      "Querubim Lapa",
+      "Eduardo Nery",
+      "Bordalo Pinheiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuel Cargaleiro revestiu com azulejos a estação de metro Champs-Élysées - Clemenceau em Paris e a estação Colégio Militar/Luz em Lisboa.",
+    "fonte": "Fundação Manuel Cargaleiro / Município de Castelo Branco",
+    "factClusterId": "fc_pin_manuelcargaleiro_01"
+  },
+  {
+    "id": "CULT_PIN_0018",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora transmontana natural do Vieiro (Vila Flor, nascida em 1948), membro da Academia de Belas-Artes e autora das intensas séries de pinturas «As Escolhedoras de Azeitona», «Terra Quente» e «Metamorfoses da Humanidade», tem o seu Centro de Arte em Bragança?",
+    "opcoes": [
+      "Paula Rego",
+      "Graça Morais",
+      "Joana Vasconcelos",
+      "Ilda Reis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Centro de Arte Contemporânea Graça Morais em Bragança, desenhado por Souto de Moura, acolhe a doação da obra telúrica da pintora.",
+    "fonte": "Centro de Arte Contemporânea Graça Morais / Município de Bragança",
+    "factClusterId": "fc_pin_gracamorais_01"
+  },
+  {
+    "id": "CULT_PIN_0019",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista contemporâneo lisboeta (1948-2021), representante de Portugal em várias edições da Bienal de Veneza e Documenta de Kassel com obras enigmáticas sobre o desejo, a literatura e a figuração («Pinturas Brancas»), é:",
+    "opcoes": [
+      "Jorge Molder",
+      "Pedro Cabrita Reis",
+      "Julião Sarmento",
+      "José de Guimarães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Julião Sarmento foi um dos mais internacionais artistas portugueses, com retrospetivas na Tate Modern e no Museu Reina Sofia de Madrid.",
+    "fonte": "Fundação Calouste Gulbenkian / Tate Modern / Serralves",
+    "factClusterId": "fc_pin_juliaosarmento_01"
+  },
+  {
+    "id": "CULT_PIN_0020",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista plástico nascido em Guimarães em 1939 («José de Guimarães»), que viveu em Angola no início da carreira onde recolheu os alfabetos e símbolos tribais africanos incorporados em telas e esculturas multicoloridas em néon, fundou o CIAJG em Guimarães?",
+    "opcoes": [
+      "Nadir Afonso",
+      "Noronha da Costa",
+      "Artur Bual",
+      "José de Guimarães (José Maria Fernandes Marques)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Centro Internacional das Artes José de Guimarães (CIAJG) cruza arte tribal africana, pré-colombiana e chinesa com a arte contemporânea.",
+    "fonte": "Centro Internacional das Artes José de Guimarães / Município de Guimarães",
+    "factClusterId": "fc_pin_josedeguimaraes_01"
+  },
+  {
+    "id": "CULT_PIN_0021",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que grande pintor e ceramista lisboeta (1925-2016), mestre da cerâmica escultórica e azulejaria de autor que revestiu a fachada do Cinema Eden no Rossio e a estátua de São João de Deus em Lisboa, é:",
+    "opcoes": [
+      "Querubim Lapa",
+      "Manuel Cargaleiro",
+      "Eduardo Nery",
+      "Jorge Barradas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Querubim Lapa foi professor em Belas-Artes e diretor artístico da histórica Fábrica de Cerâmica da Viúva Lamego.",
+    "fonte": "Museu Nacional do Azulejo / Viúva Lamego",
+    "factClusterId": "fc_pin_querubimlapa_01"
+  },
+  {
+    "id": "CULT_PIN_0022",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor renascentista de origem flamenga (falecido em Évora c. 1540), que ingressou como frade no Convento de Nossa Senhora do Espinheiro em Évora e pintou o «Bom Pastor» e a «Virgem com o Menino e Anjos», é conhecido como:",
+    "opcoes": [
+      "Francisco Henriques",
+      "Frei Carlos (Mestre do Espinheiro)",
+      "Gaspar Vaz",
+      "Jorge Afonso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Frei Carlos é o expoente da fusão entre a delicadeza espiritual flamenga e a luminosidade mística do Alentejo renascentista.",
+    "fonte": "Museu Nacional de Arte Antiga / Museu de Évora",
+    "factClusterId": "fc_pin_freicarlos_01"
+  },
+  {
+    "id": "CULT_PIN_0023",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor renascentista flamengo radicado em Lisboa e Évora (falecido em 1518), cunhado de Jorge Afonso, pintou o retábulo-mor da Igreja de São Francisco de Évora e da Sé de Viseu por ordem de D. Manuel I?",
+    "opcoes": [
+      "Frei Carlos",
+      "Gaspar Vaz",
+      "Francisco Henriques",
+      "Gregório Lopes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Francisco Henriques chefiou a grande oficina lisboeta de pintura manuelina ao serviço da Coroa.",
+    "fonte": "Museu Nacional de Arte Antiga / DGPC",
+    "factClusterId": "fc_pin_franciscohenriques_01"
+  },
+  {
+    "id": "CULT_PIN_0024",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor régio quinhentista (c. 1490-1550), cavaleiro da Ordem de Santiago e genro de Jorge Afonso, pintou os célebres retábulos maneiristas do Convento de Cristo em Tomar e do Convento de Santos-o-Novo?",
+    "opcoes": [
+      "Cristóvão de Figueiredo",
+      "Garcia Fernandes",
+      "Diogo de Contreiras",
+      "Gregório Lopes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Gregório Lopes integrou com Cristóvão de Figueiredo e Garcia Fernandes os chamados 'Mestres de Ferreirim'.",
+    "fonte": "Museu Nacional de Arte Antiga / Convento de Cristo",
+    "factClusterId": "fc_pin_gregoriolopes_01"
+  },
+  {
+    "id": "CULT_PIN_0025",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que mestre pintor maneirista português do século XVI («Cristóvão Lopes»), filho do pintor régio Gregório Lopes, foi o pintor oficial da corte de D. João III e da Rainha D. Catarina de Áustria, autor dos seus solenes retratos de aparato?",
+    "opcoes": [
+      "Cristóvão Lopes",
+      "Cristóvão de Morais",
+      "Diogo de Contreiras",
+      "Simão Rodrigues"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os retratos régios de D. João III e D. Catarina no Museu Nacional de Arte Antiga definiram a iconografia oficial da monarquia de Quinhentos.",
+    "fonte": "Museu Nacional de Arte Antiga",
+    "factClusterId": "fc_pin_cristovaolopes_01"
+  },
+  {
+    "id": "CULT_PIN_0026",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor barroco lisboeta do século XVII (1620-1708), pintor régio de D. Pedro II e autor de centenas de telas para igrejas de Lisboa («Igreja de São Roque» e Convento da Madre de Deus), é:",
+    "opcoes": [
+      "Vieira Lusitano",
+      "Bento Coelho da Silveira",
+      "André Gonçalves",
+      "Pedro Alexandrino de Carvalho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Bento Coelho da Silveira foi o mais produtivo mestre da pintura barroca do século XVII português, influenciado pelo tenebrismo espanhol e italiano.",
+    "fonte": "Santa Casa da Misericórdia de Lisboa / Museu de São Roque",
+    "factClusterId": "fc_pin_bentocoelho_01"
+  },
+  {
+    "id": "CULT_PIN_0027",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor barroco e rococó lisboeta do século XVIII (1729-1802), pintor de D. José I e D. Maria I, realizou mais de 100 retábulos e tetos para as novas igrejas reconstruídas da Baixa de Lisboa e da Sé após o Terramoto de 1755?",
+    "opcoes": [
+      "Vieira Lusitano",
+      "André Gonçalves",
+      "Pedro Alexandrino de Carvalho",
+      "Machado de Castro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Pedro Alexandrino dominou a pintura religiosa em Lisboa na segunda metade do século XVIII no estilo pós-terramoto.",
+    "fonte": "Patriarcado de Lisboa / Museu Nacional de Arte Antiga",
+    "factClusterId": "fc_pin_pedroalexandrino_01"
+  },
+  {
+    "id": "CULT_PIN_0028",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que importante pintor, desenhador e cavaleiro da Ordem de Santiago (1699-1783), autor do romance autobiográfico em verso «O Insigne Pintor e Leal Esposo», notabilizou-se pela sua estadia e formação em Roma?",
+    "opcoes": [
+      "Vieira Portuense",
+      "Domingos Sequeira",
+      "Pillement",
+      "Francisco Vieira de Matos (Vieira Lusitano)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Vieira Lusitano foi o grande introdutor do desenho académico romano e pintor régio de D. João V e D. José I.",
+    "fonte": "Academia Nacional de Belas-Artes / BNP",
+    "factClusterId": "fc_pin_vieiralusitano_01"
+  },
+  {
+    "id": "CULT_PIN_0029",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor neoclássico portuense (1765-1805), rival artístico de Domingos Sequeira, que estudou em Roma e Londres («Júpiter e Leda», «D. Filipa de Vilhena armando os filhos cavaleiros»), é:",
+    "opcoes": [
+      "Francisco Vieira (Vieira Portuense)",
+      "Vieira Lusitano",
+      "Domingos Sequeira",
+      "Marques de Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Vieira Portuense introduziu o gosto romântico e a pintura de história nacional antes de falecer no Funchal.",
+    "fonte": "Museu Nacional de Soares dos Reis / MNAA",
+    "factClusterId": "fc_pin_vieiraportuense_01"
+  },
+  {
+    "id": "CULT_PIN_0030",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor e aguarelista francês radicado em Lisboa e Sintra no final do século XVIII (1728-1808), cujas pinturas decorativas de paisagens bucólicas e flores enfeitam o Palácio Nacional de Queluz e a Quinta de Seteais, é:",
+    "opcoes": [
+      "Robillion",
+      "Jean-Baptiste Pillement (Jean Pillement)",
+      "Guillaume de Seixas",
+      "Cinatti"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Pillement imortalizou as paisagens românticas do vale do Tejo e de Sintra com grande delicadeza rococó.",
+    "fonte": "Parques de Sintra / Palácio Nacional de Queluz",
+    "factClusterId": "fc_pin_jeanpillement_01"
+  },
+  {
+    "id": "CULT_PIN_0031",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor naturalista de Torres Vedras (1863-1934), professor de Belas-Artes e autor de quadros campestres luminosos como «Depois do Trabalho» e «Feira em Viana do Alentejo», fundou a Sociedade Nacional de Belas Artes em 1901?",
+    "opcoes": [
+      "José Malhoa",
+      "Silva Porto",
+      "Carlos Reis",
+      "João Vaz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu Municipal Carlos Reis em Torres Novas acolhe uma vasta coleção da sua pintura de paisagem rural portuguesa.",
+    "fonte": "Sociedade Nacional de Belas Artes / Museu Municipal Carlos Reis",
+    "factClusterId": "fc_pin_carlosreis_01"
+  },
+  {
+    "id": "CULT_PIN_0032",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que famoso pintor naturalista portuense (1853-1932), com longa carreira em Paris onde foi membro da Academia Francesa, retratou com enorme mestria as cenas marítimas de pescadores e praias do Norte («Praia da Granja»)?",
+    "opcoes": [
+      "Silva Porto",
+      "Marques de Oliveira",
+      "Artur Loureiro",
+      "José Júlio de Souza Pinto (Sousa Pinto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Sousa Pinto obteve a Legião de Honra de França e tem quadros expostos no Museu d'Orsay em Paris e no Museu Soares dos Reis.",
+    "fonte": "Musée d'Orsay / Museu Nacional de Soares dos Reis",
+    "factClusterId": "fc_pin_sousapinto_01"
+  },
+  {
+    "id": "CULT_PIN_0033",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que marinista e pintor naturalista de Setúbal (1859-1931), professor de pintura de paisagem e autor dos painéis históricos do Palácio da Bolsa do Porto e da Assembleia da República, é:",
+    "opcoes": [
+      "João Vaz",
+      "Silva Porto",
+      "Artur Loureiro",
+      "Falcone"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "João Vaz foi o maior pintor marinista do realismo português, retratando o estuário do Sado e as frotas de pesca tradicional.",
+    "fonte": "Museu de Setúbal / Palácio da Bolsa",
+    "factClusterId": "fc_pin_joaovaz_01"
+  },
+  {
+    "id": "CULT_PIN_0034",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor expressionista e modernista lisboeta (1900-1951), amigo de Manuel Bandeira e autor das perturbadoras pinturas «O Poeta e a Família» e «As Três Graças», doou obras fundamentais ao Centro de Arte Moderna da Gulbenkian?",
+    "opcoes": [
+      "Eduardo Viana",
+      "Mário Eloy",
+      "Amadeo de Souza-Cardoso",
+      "Dórdio Gomes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Mário Eloy introduziu a angústia existencial e a estética expressionista berlinense na pintura portuguesa dos anos 1930.",
+    "fonte": "Centro de Arte Moderna da Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_pin_marioeloy_01"
+  },
+  {
+    "id": "CULT_PIN_0035",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor modernista lisboeta (1881-1967), pioneiro da geração de Orpheu e companheiro de Robert e Sonia Delaunay em Vila do Conde durante a 1.ª Guerra Mundial com a famosa tela «A Revolta das Bonecas» (1916), é:",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "Almada Negreiros",
+      "Eduardo Afonso Viana (Eduardo Viana)",
+      "Carlos Botelho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Viana recebeu o Grande Prémio de Pintura da Fundação Gulbenkian em 1957.",
+    "fonte": "CAM Gulbenkian / MNAC",
+    "factClusterId": "fc_pin_eduardoviana_01"
+  },
+  {
+    "id": "CULT_PIN_0036",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor, ilustrador e caricaturista lisboeta (1899-1982) dedicou a sua vida inteira a retratar com amor e poesia cromática os telhados, as colinas, as ruelas e as varinas dos bairros tradicionais de Lisboa («O Pintor de Lisboa»)?",
+    "opcoes": [
+      "Stuart Carvalhais",
+      "Jorge Barradas",
+      "Bernardo Marques",
+      "Carlos Botelho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Carlos Botelho pintou Alfama, a Graça e a Mouraria com uma luminosidade suave que definiu a identidade visual poética de Lisboa no século XX.",
+    "fonte": "Museu de Lisboa / CAM Gulbenkian",
+    "factClusterId": "fc_pin_carlosbotelho_01"
+  },
+  {
+    "id": "CULT_PIN_0037",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista multidisciplinar e pioneiro do grafismo e banda desenhada portuguesa (1887-1961), criador do boneco «Zé Pacóvio» e do personagem cómico «Quim e Manecas» (1915) no jornal «O Século», é:",
+    "opcoes": [
+      "Stuart Carvalhais (José Herculano Stuart Torrie de Carvalhais)",
+      "Bordalo Pinheiro",
+      "Cottinelli Telmo",
+      "Emmérico Nunes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Stuart Carvalhais foi um dos fundadores da banda desenhada e do grafismo moderno em Portugal, colaborando com os jornais da 1.ª República.",
+    "fonte": "Biblioteca Nacional de Portugal / Museu de Lisboa",
+    "factClusterId": "fc_pin_stuartcarvalhais_01"
+  },
+  {
+    "id": "CULT_PIN_0038",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora e ilustradora modernista (1899-1983), nascida em Viana do Castelo e casada com Almada Negreiros, destacou-se pelas pinturas dos costumes populares minhotos e retratos íntimos («Menina com Laço»)?",
+    "opcoes": [
+      "Mily Possoz",
+      "Sarah Affonso",
+      "Ofélia Marques",
+      "Maria Helena Vieira da Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sarah Affonso expôs nos Salões dos Independentes e é uma das vozes mais puras e originais do modernismo feminino português.",
+    "fonte": "Museu de Serralves / CAM Gulbenkian / Município de Viana do Castelo",
+    "factClusterId": "fc_pin_sarahaffonso_01"
+  },
+  {
+    "id": "CULT_PIN_0039",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintora, gravadora e ilustradora modernista nascida nas Caldas da Rainha (1888-1968), de ascendência belga, integrou o Grupo dos Cinco e a primeira geração de modernistas portugueses com gravuras e xilogravuras premiadas na Exposição de Paris em 1937?",
+    "opcoes": [
+      "Sarah Affonso",
+      "Ofélia Marques",
+      "Mily Possoz (Emília Possoz)",
+      "Maria Keil"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Mily Possoz revolucionou a gravura moderna e a ilustração infanto-juvenil em Portugal.",
+    "fonte": "Fundação Calouste Gulbenkian / MNAC",
+    "factClusterId": "fc_pin_milypossoz_01"
+  },
+  {
+    "id": "CULT_PIN_0040",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que notável pintora, ilustradora e designer de azulejos (1914-2012), natural de Silves e casada com o arquiteto Francisco Keil do Amaral, criou os emblemáticos painéis de azulejos de quase todas as estações iniciais do Metropolitano de Lisboa inauguradas em 1959?",
+    "opcoes": [
+      "Querubim Lapa",
+      "Manuel Cargaleiro",
+      "Eduardo Nery",
+      "Maria Keil"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria Keil renovou a tradição do azulejo português no século XX com padrões geométricos modernos para as estações de metro da linha original.",
+    "fonte": "Metropolitano de Lisboa / Museu Nacional do Azulejo",
+    "factClusterId": "fc_pin_mariakeil_metrolisboa_01"
+  },
+  {
+    "id": "CULT_PIN_0041",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que importante pintor do surrealismo português (1923-1994), cofundador do Grupo Surrealista de Lisboa em 1947 com Mário Cesariny, António Pedro e Alexandre O'Neill, utilizou a técnica da «abjeção» e colagem?",
+    "opcoes": [
+      "Marcelino Vespeira",
+      "Mário Cesariny",
+      "Cruzeiro Seixas",
+      "Fernando Lemos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vespeira chocou a sociedade conservadora do Estado Novo com pinturas de erotismo livre e formas biomórficas nos anos 1940 e 1950.",
+    "fonte": "Fundação Cupertino de Miranda (Vila Nova de Famalicão) / CAM Gulbenkian",
+    "factClusterId": "fc_pin_marcelinovespeira_01"
+  },
+  {
+    "id": "CULT_PIN_0042",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que poeta e pintor surrealista português (1923-2006), líder do movimento surrealista e autor de pinturas de cadavre-exquis, colagens e soprogramas («O Castelo Surrealista»), é uma das figuras mais carismáticas da arte do século XX?",
+    "opcoes": [
+      "Cruzeiro Seixas",
+      "Mário Cesariny de Vasconcelos",
+      "António Maria Lisboa",
+      "Pedro Oom"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Cesariny foi distinguido com o Grande Prémio EDP de Artes Plásticas em 2002 e legou o seu espólio à Fundação Cupertino de Miranda em Famalicão.",
+    "fonte": "Fundação Cupertino de Miranda (Centro de Estudos do Surrealismo)",
+    "factClusterId": "fc_pin_mariocesariny_01"
+  },
+  {
+    "id": "CULT_PIN_0043",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que desenhador e pintor surrealista português (1920-2020), que viveu até aos 99 anos e desenvolveu uma obra imensa de paisagens oníricas povoadas por figuras antropomórficas e monstros poéticos em tinta-da-china («Cruzeiro Seixas»), é:",
+    "opcoes": [
+      "Mário Cesariny",
+      "Fernando Lemos",
+      "Artur do Cruzeiro Seixas",
+      "Carlos Eurico da Costa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cruzeiro Seixas foi o último grande mestre vivo do surrealismo histórico português e doou toda a sua coleção à Fundação Cupertino de Miranda.",
+    "fonte": "Fundação Cupertino de Miranda / Famalicão",
+    "factClusterId": "fc_pin_cruzeiroseixas_01"
+  },
+  {
+    "id": "CULT_PIN_0044",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor abstracto português natural de Arraiolos (1928-2010), mestre da pintura gestual informalista e do tachismo, com obras monumentais no Palácio da Justiça de Lisboa e no Centro Cultural de Belém, é:",
+    "opcoes": [
+      "Dórdio Gomes",
+      "Charrua",
+      "João Hogan",
+      "Artur Bual"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Artur Bual foi o grande pioneiro do expressionismo abstrato e da caligrafia gestual em Portugal a partir dos anos 1950.",
+    "fonte": "Galeria Municipal Artur Bual (Amadora) / CCB",
+    "factClusterId": "fc_pin_arturbual_01"
+  },
+  {
+    "id": "CULT_PIN_0045",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor lisboeta (1914-1988), gravador e paisagista autodidata conhecido pelas suas densas paisagens pétreas e sombrias da pedreira de Monsanto e do Aqueduto das Águas Livres com espessas camadas de tinta («João Hogan»), é:",
+    "opcoes": [
+      "João Hogan",
+      "Carlos Botelho",
+      "Júlio Resende",
+      "António Charrua"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "João Hogan é considerado um dos maiores gravadores de água-forte e pintores de paisagens telúricas da arte portuguesa contemporânea.",
+    "fonte": "Centro de Arte Moderna da Fundação Gulbenkian / MNAC",
+    "factClusterId": "fc_pin_joaohogan_01"
+  },
+  {
+    "id": "CULT_PIN_0046",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que grande mestre pintor portuense (1917-2011), professor em Belas-Artes e autor do monumental fresco «Ribeira Negra» (1984) instalado junto à Ponte Luiz I no Porto e fundador do Lugar do Desenho em Gondomar, é:",
+    "opcoes": [
+      "Armando Alves",
+      "Júlio Resende",
+      "Ângelo de Sousa",
+      "Dórdio Gomes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O painel 'Ribeira Negra' de Júlio Resende mede 40 metros de comprimento e é o mais famoso retrato expressionista da vida dura das gentes da Ribeira do Porto.",
+    "fonte": "Lugar do Desenho — Fundação Júlio Resende (Gondomar) / CMP",
+    "factClusterId": "fc_pin_julioresende_ribeiranegra_01"
+  },
+  {
+    "id": "CULT_PIN_0047",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que artista plástico de Lourenço Marques (Moçambique) radicado no Porto (1938-2010), membro d'Os Quatro Vintes e vencedor do Grande Prémio Amadeo de Souza-Cardoso em 2007 pelas suas pinturas monocromáticas puras e esculturas geométricas, é:",
+    "opcoes": [
+      "Armando Alves",
+      "Jorge Pinheiro",
+      "Ângelo de Sousa",
+      "José Rodrigues"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ângelo de Sousa é uma das figuras centrais da arte minimalista e conceptual portuguesa do pós-guerra.",
+    "fonte": "Museu de Serralves / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_pin_angelodesousa_01"
+  },
+  {
+    "id": "CULT_PIN_0048",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que pintor e arquiteto de Funchal e Lisboa (1942-2014), que revolucionou a pintura portuguesa nos anos 1970 com a técnica do aerógrafo sobre tela criando imagens nebulosas e cinematográficas («Ecrãs»), é:",
+    "opcoes": [
+      "António Palolo",
+      "Joaquim Rodrigo",
+      "René Bertholo",
+      "Luís Noronha da Costa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Noronha da Costa representou Portugal na Bienal de Veneza de 1970 e no Festival de Cinema de Berlim com filmes de vanguarda.",
+    "fonte": "Museu de Arte Contemporânea de Serralves / CCB",
+    "factClusterId": "fc_pin_noronhadacosta_01"
+  },
+  {
+    "id": "CULT_PIN_0049",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que museu nacional instalado no antigo Convento de São Francisco da Cidade no Chiado em Lisboa, fundado em 1911 após a implantação da República, é o principal guardião público da arte moderna e contemporânea portuguesa de 1850 à atualidade?",
+    "opcoes": [
+      "Museu Nacional de Arte Contemporânea do Chiado (MNAC)",
+      "Museu Nacional de Arte Antiga (MNAA)",
+      "Museu Coleção Berardo",
+      "Museu do Oriente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O MNAC reúne as obras fundacionais do Romantismo, Naturalismo, Modernismo e da vanguarda dos anos 1960 em Portugal.",
+    "fonte": "Museu Nacional de Arte Contemporânea do Chiado / DGPC",
+    "factClusterId": "fc_pin_mnac_chiado_01"
+  },
+  {
+    "id": "CULT_PIN_0050",
+    "tema": "Cultura",
+    "subtema": "Arte & Pintura",
+    "pergunta": "Que museu nacional instalado no Palácio dos Carrancas no Porto, criado em 1833 por D. Pedro IV no final das Guerras Liberais («Museu Portuense»), foi o primeiro museu público de arte fundado em Portugal?",
+    "opcoes": [
+      "Museu Nacional de Arte Antiga",
+      "Museu Grão Vasco",
+      "Museu Nacional de Soares dos Reis (Palácio dos Carrancas)",
+      "Museu Machado de Castro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu Soares dos Reis celebrou o seu 190.º aniversário com coleções ímpares de pintura, escultura, cerâmica, vidros e joalharia do Norte de Portugal.",
+    "fonte": "Museu Nacional de Soares dos Reis / DGPC",
+    "factClusterId": "fc_pin_museusoaresdosreis_historia_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_VIN_0001",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta autóctone portuguesa é amplamente considerada a «rainha das castas nacionais», sendo a mais nobre do Dão e do Douro?",
+    "opcoes": [
+      "Touriga Nacional",
+      "Baga",
+      "Trincadeira",
+      "Castelão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Touriga Nacional é a casta emblemática de Portugal, célebre pela sua complexidade aromática com notas florais de bergamota e violeta e grande potencial de envelhecimento.",
+    "fonte": "Instituto da Vinha e do Vinho (IVV) / IVDP",
+    "factClusterId": "fc_vin_touriganacional_01"
+  },
+  {
+    "id": "GAST_VIN_0002",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Em que ano foi criada a Região Demarcada do Douro pelo Marquês de Pombal, a primeira região vitivinícola demarcada e regulamentada do mundo?",
+    "opcoes": [
+      "1703",
+      "1756",
+      "1789",
+      "1834"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Marquês de Pombal instituiu a Real Companhia Geral da Agricultura das Vinhas do Alto Douro a 10 de setembro de 1756, demarcando a região com marcos de granito pombalinos.",
+    "fonte": "Instituto dos Vinhos do Douro e do Porto (IVDP)",
+    "factClusterId": "fc_vin_demarcacaodouro_01"
+  },
+  {
+    "id": "GAST_VIN_0003",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta nobre de uva branca do noroeste peninsular atinge o seu apogeu nos solos graníticos de Monção e Melgaço na Região dos Vinhos Verdes?",
+    "opcoes": [
+      "Loureiro",
+      "Trajadura",
+      "Alvarinho",
+      "Avesso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Alvarinho da sub-região de Monção e Melgaço produz vinhos brancos de extraordinária mineralidade, estrutura e longevidade.",
+    "fonte": "Comissão de Viticultura da Região dos Vinhos Verdes (CVRVV)",
+    "factClusterId": "fc_vin_alvarinho_01"
+  },
+  {
+    "id": "GAST_VIN_0004",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Como se denomina o tradicional barco à vela que transportava as pipas de Vinho do Porto pelas correntes perigosas do rio Douro até às caves de Vila Nova de Gaia?",
+    "opcoes": [
+      "Moliceiro",
+      "Cacilheiro",
+      "Saveiro",
+      "Barco Rabelo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O barco rabelo é uma embarcação rústica de fundo chato e grande remo à popa (espadela), adaptada aos rápidos do rio Douro.",
+    "fonte": "Museu do Douro / IVDP",
+    "factClusterId": "fc_vin_barcorabelo_01"
+  },
+  {
+    "id": "GAST_VIN_0005",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que tipo de Vinho do Porto é obtido exclusivamente a partir de uvas tintas de um único ano excecionalmente bom, engarrafado entre o 2.º e 3.º ano e envelhecido em garrafa por décadas?",
+    "opcoes": [
+      "Porto Vintage",
+      "Porto Tawny 20 Anos",
+      "Porto Colheita",
+      "Porto Ruby Reserva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Vintage é o topo de gama do Vinho do Porto, reconhecido e declarado pelas empresas apenas nos anos de colheita sublime.",
+    "fonte": "IVDP / Confraria do Vinho do Porto",
+    "factClusterId": "fc_vin_vintage_01"
+  },
+  {
+    "id": "GAST_VIN_0006",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta muito tânica e ácida é a rainha indiscutível da região da Bairrada, produzindo tintos longevos e grandes espumantes?",
+    "opcoes": [
+      "Aragonez",
+      "Baga",
+      "Alfrocheiro",
+      "Touriga Franca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Baga é a casta de referência dos solos argilo-calcários da Bairrada, exigindo mestria na vinificação para revelar a sua nobreza.",
+    "fonte": "Comissão Vitivinícola da Bairrada",
+    "factClusterId": "fc_vin_baga_01"
+  },
+  {
+    "id": "GAST_VIN_0007",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O Moscatel de Setúbal, um dos vinhos generosos e licorosos mais prestigiados de Portugal, é elaborado a partir da casta:",
+    "opcoes": [
+      "Moscatel Galego Branco",
+      "Malvasia Fina",
+      "Moscatel de Alexandria (Moscatel de Setúbal)",
+      "Sercial"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Moscatel de Setúbal (ou Moscatel Roxo) é produzido na Península de Setúbal, estagiando com as películas das uvas em aguardente vínica.",
+    "fonte": "Comissão Vitivinícola Regional da Península de Setúbal",
+    "factClusterId": "fc_vin_moscatelsetubal_01"
+  },
+  {
+    "id": "GAST_VIN_0008",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Quais são as quatro principais castas nobres tradicionais que definem os quatro estilos do clássico Vinho da Madeira (do mais seco ao mais doce)?",
+    "opcoes": [
+      "Arinto, Loureiro, Trajadura e Alvarinho",
+      "Touriga Nacional, Tinta Roriz, Tinto Cão e Sousão",
+      "Fernão Pires, Encruzado, Bical e Cercial",
+      "Sercial, Verdelho, Boal e Malvasia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Vinho da Madeira varia do Seco (Sercial), Meio Seco (Verdelho), Meio Doce (Boal) ao Doce (Malvasia).",
+    "fonte": "Instituto do Vinho, do Bordado e do Artesanato da Madeira (IVBAM)",
+    "factClusterId": "fc_vin_madeira_estilos_01"
+  },
+  {
+    "id": "GAST_VIN_0009",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que processo térmico histórico de envelhecimento confere ao Vinho da Madeira a sua extraordinária longevidade centenária e resistência à oxidação?",
+    "opcoes": [
+      "Estufagem (ou Canteiro)",
+      "Criomaceração",
+      "Micro-oxigenação",
+      "Maceração carbónica"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A estufagem e o estágio em canteiro (aquecimento natural sob o teto dos armazéns) reproduzem as condições dos navios que cruzavam os trópicos.",
+    "fonte": "IVBAM / Turismo da Madeira",
+    "factClusterId": "fc_vin_estufagem_01"
+  },
+  {
+    "id": "GAST_VIN_0010",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "A casta branca Encruzado, famosa pelo seu equilíbrio de frescura, corpo e aptidão para fermentar e estagiar em barricas de carvalho, é típica da região do:",
+    "opcoes": [
+      "Alentejo",
+      "Dão",
+      "Algarve",
+      "Vinho Verde"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Encruzado é a grande casta branca nobre da Região Demarcada do Dão, protegida pelas serras graníticas do planalto beirão.",
+    "fonte": "Comissão Vitivinícola Regional do Dão",
+    "factClusterId": "fc_vin_encruzado_01"
+  },
+  {
+    "id": "GAST_VIN_0011",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que vinha histórica da região de Sintra sobreviveu à praga devastadora da filoxera no século XIX porque as suas raízes foram plantadas em «chão de areia»?",
+    "opcoes": [
+      "Bucelas",
+      "Carcavelos",
+      "Colares (DOC Colares)",
+      "Cheleiros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A região de Colares preservou vinhas em pé franco da casta Ramisco porque o inseto da filoxera não consegue penetrar nos solos arenosos.",
+    "fonte": "Adega Regional de Colares / IVV",
+    "factClusterId": "fc_vin_colares_01"
+  },
+  {
+    "id": "GAST_VIN_0012",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que região vinícola demarcada nos arredores de Loures é apelidada de «Capital do Arinto», produzindo brancos secos elogiados por Lord Wellington e Shakespeare?",
+    "opcoes": [
+      "Carcavelos",
+      "Arruda",
+      "Alenquer",
+      "Bucelas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A DOC Bucelas produz brancos dominados pela casta Arinto, conhecidos pela sua acidez viva, notas minerais e capacidade de envelhecer.",
+    "fonte": "Rota dos Vinhos de Bucelas / Município de Loures",
+    "factClusterId": "fc_vin_bucelas_01"
+  },
+  {
+    "id": "GAST_VIN_0013",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Na produção do Vinho do Porto, o que é adicionado ao mosto em fermentação para interromper a fermentação e manter o açúcar natural da uva?",
+    "opcoes": [
+      "Aguardente vínica neutra a 77% vol. (benefício)",
+      "Açúcar de cana",
+      "Álcool etílico industrial",
+      "Caramelo líquido"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A aguardente vínica interrompe a fermentação das leveduras, elevando o teor alcoólico para cerca de 19-20% e preservando a doçura natural.",
+    "fonte": "IVDP",
+    "factClusterId": "fc_vin_beneficio_01"
+  },
+  {
+    "id": "GAST_VIN_0014",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que famosa marca de vinho de mesa tinto do Douro, criada em 1952 por Fernando Nicolau de Almeida na Casa Ferreirinha, é o ícone supremo dos vinhos de guarda portugueses?",
+    "opcoes": [
+      "Pêra-Manca",
+      "Barca Velha",
+      "Chryseia",
+      "Quinta do Crasto Vinha Maria Teresa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Barca Velha é lançado apenas em anos excecionais pela Casa Ferreirinha / Sogrape, sendo o vinho tinto de maior culto em Portugal.",
+    "fonte": "Sogrape / Casa Ferreirinha",
+    "factClusterId": "fc_vin_barcavelha_01"
+  },
+  {
+    "id": "GAST_VIN_0015",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "A casta tinta Tinta Roriz (do Douro e Dão) é conhecida na região do Alentejo pelo nome de:",
+    "opcoes": [
+      "Trincadeira",
+      "Alicante Bouschet",
+      "Aragonez",
+      "Castelão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A casta Tempranillo espanhola é chamada de Tinta Roriz no Norte (Douro/Dão) e de Aragonez no Sul (Alentejo e Ribatejo).",
+    "fonte": "Comissão Vitivinícola Regional Alentejana (CVRA)",
+    "factClusterId": "fc_vin_aragonez_01"
+  },
+  {
+    "id": "GAST_VIN_0016",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tintureira de polpa e casca escura, de origem francesa mas perfeitamente adaptada ao Alentejo (especialmente em Évora e Borba), produz vinhos encorpados de cor rubi profunda?",
+    "opcoes": [
+      "Syrah",
+      "Cabernet Sauvignon",
+      "Merlot",
+      "Alicante Bouschet"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Alicante Bouschet encontrou no clima quente e ensolarado do Alentejo o seu habitat de eleição mundial.",
+    "fonte": "CVRA / Fundação Eugénio de Almeida",
+    "factClusterId": "fc_vin_alicantebouschet_01"
+  },
+  {
+    "id": "GAST_VIN_0017",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O que distingue a categoria de Vinho do Porto «Tawny» em comparação com o «Ruby»?",
+    "opcoes": [
+      "O Tawny estagia longos anos em cascos de madeira oxidando a cor para âmbar/aloirado",
+      "O Tawny é feito com uvas brancas e o Ruby com uvas tintas",
+      "O Tawny não recebe adição de aguardente",
+      "O Tawny tem obrigatoriamente gás carbónico natural"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Ruby envelhece em grandes balseiros preservando a fruta e a cor avermelhada, enquanto o Tawny envelhece em pipas pequenas, ganhando tons âmbar e aromas a frutos secos.",
+    "fonte": "IVDP",
+    "factClusterId": "fc_vin_tawny_ruby_01"
+  },
+  {
+    "id": "GAST_VIN_0018",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que método tradicional e milenar de vinificação em recipientes de barro porosos é uma marca registada do Alentejo (Vinho de Talha), com origem romana?",
+    "opcoes": [
+      "Pisa a pé em lagar de pedra",
+      "Vinificação em Talhas de barro",
+      "Fermentação em barricas de carvalho francês",
+      "Estágio subaquático"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Vinho de Talha de municípios como Cuba, Vidigueira e Alvito preserva técnicas de vinificação em ânforas de barro com mais de 2000 anos.",
+    "fonte": "Município de Vidigueira / CVRA",
+    "factClusterId": "fc_vin_talha_01"
+  },
+  {
+    "id": "GAST_VIN_0019",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "A Paisagem da Cultura da Vinha da Ilha do Pico, classificada pela UNESCO em 2004, caracteriza-se pelos «currais» ou «curraletas», que são:",
+    "opcoes": [
+      "Caves escavadas em túneis de lava",
+      "Canais de rega de água de nascente",
+      "Muros de pedra vulcânica negra que protegem as videiras do vento marítimo",
+      "Torres de vigia contra piratas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os currais de pedra solta de basalto negro acumulam o calor do sol durante o dia e protegem a vinha do salitre e dos ventos atlânticos.",
+    "fonte": "UNESCO / Parque Natural do Pico",
+    "factClusterId": "fc_vin_pico_unesco_01"
+  },
+  {
+    "id": "GAST_VIN_0020",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que ilustre empresária duriense do século XIX, conhecida como a «Ferreirinha», revolucionou a viticultura do Douro e mandou construir a Quinta do Vesúvio?",
+    "opcoes": [
+      "D. Leonor Teles",
+      "D. Maria II",
+      "D. Catarina de Bragança",
+      "D. Antónia Adelaide Ferreira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "D. Antónia Ferreira enfrentou a crise da filoxera com inovação, solidariedade social e aquisição de grandes quintas no Alto Douro.",
+    "fonte": "Museu do Douro / Sogrape",
+    "factClusterId": "fc_vin_ferreirinha_01"
+  },
+  {
+    "id": "GAST_VIN_0021",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta branca aromática, dominante na sub-região do vale do Lima (Vinho Verde), destaca-se por notas florais de loureiro e flor de laranjeira?",
+    "opcoes": [
+      "Loureiro",
+      "Avesso",
+      "Trajadura",
+      "Azal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Loureiro é a casta rainha do vale do rio Lima, em concelhos como Ponte de Lima e Viana do Castelo.",
+    "fonte": "CVRVV",
+    "factClusterId": "fc_vin_loureiro_01"
+  },
+  {
+    "id": "GAST_VIN_0022",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Quantas sub-regiões vitivinícolas compõem a vasta Denominação de Origem Controlada (DOC) do Alentejo?",
+    "opcoes": [
+      "Quatro",
+      "Oito (Portalegre, Borba, Évora, Redondo, Reguengos, Vidigueira, Granja-Amareleja, Moura)",
+      "Seis",
+      "Dez"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A DOC Alentejo divide-se em 8 sub-regiões distintas pelos seus solos (graníticos, xistosos, calcários) e microclimas.",
+    "fonte": "CVRA",
+    "factClusterId": "fc_vin_alentejo_subregioes_01"
+  },
+  {
+    "id": "GAST_VIN_0023",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que vinho rosé ligeiramente frisante e adocicado, lançado pela Sogrape em 1942 por Fernando van Zeller Guedes na sua icónica garrafa em forma de cantil, tornou-se o maior sucesso de exportação global do vinho português?",
+    "opcoes": [
+      "Lancers",
+      "Gazela",
+      "Mateus Rosé",
+      "Casal Garcia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mateus Rosé chegou a mais de 120 países, consumido por figuras históricas desde a Rainha Isabel II a Jimi Hendrix.",
+    "fonte": "Sogrape / História do Vinho Português",
+    "factClusterId": "fc_vin_mateusrose_01"
+  },
+  {
+    "id": "GAST_VIN_0024",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta é a mais plantada e tradicional na Península de Setúbal, historicamente conhecida como «Periquita»?",
+    "opcoes": [
+      "Trincadeira",
+      "Touriga Franca",
+      "Tinta Barroca",
+      "Castelão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Castelão (ou Periquita) produz vinhos com grande carácter na Cova da Beira, Península de Setúbal e Ribatejo.",
+    "fonte": "José Maria da Fonseca / CVRPS",
+    "factClusterId": "fc_vin_castelao_01"
+  },
+  {
+    "id": "GAST_VIN_0025",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "A sigla «DOC» num rótulo de vinho português significa oficialmente:",
+    "opcoes": [
+      "Denominação de Origem Controlada",
+      "Denominação Oficial de Casta",
+      "Documento de Origem de Colheita",
+      "Declaração Oficial de Confraria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A DOC atesta que o vinho cumpre os mais rigorosos padrões geográficos, de rendimento por hectare e de castas autorizadas.",
+    "fonte": "Instituto da Vinha e do Vinho (IVV)",
+    "factClusterId": "fc_vin_doc_01"
+  },
+  {
+    "id": "GAST_VIN_0026",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta branca alentejana é muito apreciada pela sua capacidade de conferir corpo, notas de fruta madura e excelente estrutura aos lotes do sul?",
+    "opcoes": [
+      "Roupeiro (Síria)",
+      "Antão Vaz",
+      "Perrum",
+      "Manteúdo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Antão Vaz, especialmente na sub-região da Vidigueira, é a casta branca de maior prestígio do Alentejo.",
+    "fonte": "CVRA",
+    "factClusterId": "fc_vin_antaovaz_01"
+  },
+  {
+    "id": "GAST_VIN_0027",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O que significa a menção «LBV» (Late Bottled Vintage) num rótulo de Vinho do Porto?",
+    "opcoes": [
+      "Porto de lote de vindimas tardias não fortificado",
+      "Porto de baixo teor alcoólico para sobremesa",
+      "Porto de um único ano engarrafado mais tarde (entre o 4.º e o 6.º ano de estágio em madeira)",
+      "Porto envelhecido exclusivamente em garrafão de vidro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O LBV é proveniente de uma só colheita de grande qualidade, pronto a ser consumido após o engarrafamento sem necessidade de decantação prolongada.",
+    "fonte": "IVDP",
+    "factClusterId": "fc_vin_lbv_01"
+  },
+  {
+    "id": "GAST_VIN_0028",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que denominação vinícola histórica da região de Lisboa, no concelho de Oeiras, produz um vinho generoso fortificado quase extinto muito apreciado por D. João V e pelo Marquês de Pombal?",
+    "opcoes": [
+      "DOC Colares",
+      "DOC Bucelas",
+      "DOC Palmela",
+      "DOC Carcavelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Vinho de Carcavelos é produzido na Quinta do Marquês em Oeiras, um dos mais raros e aristocráticos licorosos do mundo.",
+    "fonte": "Município de Oeiras / Confraria do Vinho de Carcavelos",
+    "factClusterId": "fc_vin_carcavelos_01"
+  },
+  {
+    "id": "GAST_VIN_0029",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Em que cidade da margem esquerda do rio Douro, em frente ao Porto, estão historicamente concentradas as caves de envelhecimento do Vinho do Porto?",
+    "opcoes": [
+      "Vila Nova de Gaia",
+      "Matosinhos",
+      "Gondomar",
+      "Santa Maria da Feira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vila Nova de Gaia oferece condições de humidade e temperatura perfeitas vindas do Atlântico para o estágio do Vinho do Porto nas caves centenárias.",
+    "fonte": "Associação das Empresas de Vinho do Porto (AEVP)",
+    "factClusterId": "fc_vin_gaia_caves_01"
+  },
+  {
+    "id": "GAST_VIN_0030",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta branca de uva é a mais plantada em Portugal, conhecida como Fernão Pires no Ribatejo e Península de Setúbal e como Maria Gomes na Bairrada?",
+    "opcoes": [
+      "Arinto",
+      "Fernão Pires (Maria Gomes)",
+      "Alvarinho",
+      "Moscatel Graúdo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A casta Fernão Pires é precoce, muito aromática e versátil, usada tanto em vinhos de mesa frescos como em espumantes.",
+    "fonte": "Instituto da Vinha e do Vinho",
+    "factClusterId": "fc_vin_fernaopires_01"
+  },
+  {
+    "id": "GAST_VIN_0031",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O solo típico e predominante das encostas abruptas do Alto Douro Vinhateiro, que permite às raízes penetrar dezenas de metros à procura de água, é o:",
+    "opcoes": [
+      "Calcário",
+      "Granito",
+      "Xisto",
+      "Argila"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O xisto retém o calor do sol e parte-se verticalmente em lâminas, permitindo que as vinhas sobrevivam ao verão tórrido duriense.",
+    "fonte": "IVDP / Museu do Douro",
+    "factClusterId": "fc_vin_soloxisto_01"
+  },
+  {
+    "id": "GAST_VIN_0032",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que lendário vinho tinto alentejano, produzido pela Fundação Eugénio de Almeida a partir do convento da Cartuxa em Évora, é um dos mais valiosos e cobiçados de Portugal?",
+    "opcoes": [
+      "Cartuxa Reserva",
+      "Tapada do Chaves",
+      "Mouchão",
+      "Pêra-Manca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pêra-Manca tinto só é lançado em anos de exceção a partir das castas Aragonez e Trincadeira.",
+    "fonte": "Fundação Eugénio de Almeida / Adega Cartuxa",
+    "factClusterId": "fc_vin_peramanca_01"
+  },
+  {
+    "id": "GAST_VIN_0033",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta duriense, também chamada de Tinta Amarela no Douro, confere notas herbáceas, especiadas e taninos finos aos grandes tintos?",
+    "opcoes": [
+      "Trincadeira (Tinta Amarela)",
+      "Touriga Franca",
+      "Sousão",
+      "Tinto Cão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Trincadeira precisa de muito sol para amadurecer e é suscetível ao apodrecimento, mas dá vinhos de grande requinte quando bem vindimada.",
+    "fonte": "IVDP / CVRA",
+    "factClusterId": "fc_vin_trincadeira_01"
+  },
+  {
+    "id": "GAST_VIN_0034",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que quinta alentejana de Casa Branca (Sousel) preserva a vinificação tradicional da casta Alicante Bouschet em lagares de pedra com pisa a pé desde 1901?",
+    "opcoes": [
+      "Herdade do Esporão",
+      "Herdade do Mouchão",
+      "Quinta do Carmo",
+      "Herdade dos Grous"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Mouchão é o ícone histórico dos vinhos de guarda em Portugal, estagiando anos em toneis antigos de mogno e carvalho.",
+    "fonte": "Herdade do Mouchão / CVRA",
+    "factClusterId": "fc_vin_mouchao_01"
+  },
+  {
+    "id": "GAST_VIN_0035",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta de forte acidez e cor intensa, originária do Minho/Douro (Vinhão), é a casta tinta mais identitária dos Vinhos Verdes Tintos?",
+    "opcoes": [
+      "Borraçal",
+      "Espadeiro",
+      "Vinhão (Sousão)",
+      "Padeiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Vinhão é famoso por produzir um vinho verde tinto opaco, encorpado e adstringente, servido tradicionalmente em malgas de louça branca.",
+    "fonte": "CVRVV",
+    "factClusterId": "fc_vin_vinhao_01"
+  },
+  {
+    "id": "GAST_VIN_0036",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Em que região montanhosa do interior centro se situa a DOC Beira Interior, influenciada pelos solos graníticos e pelas serras da Estrela, Marofa e Gardunha?",
+    "opcoes": [
+      "Trás-os-Montes",
+      "Dão",
+      "Ribatejo",
+      "Beira Interior (Castelo Branco e Guarda)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A DOC Beira Interior produz vinhos com frescura alpina única em Portugal a altitudes superiores a 700 metros.",
+    "fonte": "Comissão Vitivinícola Regional da Beira Interior",
+    "factClusterId": "fc_vin_beirainterior_01"
+  },
+  {
+    "id": "GAST_VIN_0037",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que prestigiada quinta da região do Dão, em Santar (Nelas), remonta ao século XVII e é uma das mais aristocráticas casas vinícolas de Portugal?",
+    "opcoes": [
+      "Paço dos Cunhas de Santar / Casa de Santar",
+      "Quinta dos Roques",
+      "Quinta de Cabriz",
+      "Quinta da Leda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Santar é uma vila nobre no coração do Dão cercada por solares, palacetes e vinhas históricas.",
+    "fonte": "Rota dos Vinhos do Dão / Município de Nelas",
+    "factClusterId": "fc_vin_santar_01"
+  },
+  {
+    "id": "GAST_VIN_0038",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Como se chama a tradicional estrutura de condução das vinhas em altura, muito utilizada historicamente no Minho para libertar o solo para outras culturas agrícolas?",
+    "opcoes": [
+      "Cordão simples",
+      "Ramada (ou Enforcado)",
+      "Guyot duplo",
+      "Taça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "As ramadas e vinhas de enforcado subiam pelas árvores e esteios de granito a metros do chão, imagem típica do Minho antigo.",
+    "fonte": "CVRVV / Museu Rural do Minho",
+    "factClusterId": "fc_vin_ramadas_01"
+  },
+  {
+    "id": "GAST_VIN_0039",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O que indica a designação «Colheita Tardia» (Late Harvest) num vinho português?",
+    "opcoes": [
+      "Vinho colhido após a meia-noite",
+      "Vinho de segunda prensa de lagar",
+      "Vinho doce elaborado com uvas sobrematuradas ou afetadas por podridão nobre (Botrytis cinerea)",
+      "Vinho produzido com uvas congeladas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A colheita tardia permite concentrar açúcares e acidez natural, gerando vinhos de sobremesa ricos em aromas de mel e damasco.",
+    "fonte": "IVV",
+    "factClusterId": "fc_vin_colheitatardia_01"
+  },
+  {
+    "id": "GAST_VIN_0040",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que tratado comercial assinado entre Portugal e a Inglaterra em 1703 concedeu tarifas alfandegárias preferenciais ao Vinho do Porto em troca de têxteis britânicos?",
+    "opcoes": [
+      "Tratado de Windsor",
+      "Tratado de Madrid",
+      "Tratado de Utrecht",
+      "Tratado de Methuen (Tratado dos Panos e Vinhos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Methuen impulsionou de forma exponencial a exportação do Vinho do Porto para o mercado britânico ao longo do século XVIII.",
+    "fonte": "Torre do Tombo / História Económica de Portugal",
+    "factClusterId": "fc_vin_methuen_01"
+  },
+  {
+    "id": "GAST_VIN_0041",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta tinta, amplamente plantada no Douro pela sua regularidade e aromas florais, é a parceira mais frequente da Touriga Nacional?",
+    "opcoes": [
+      "Touriga Franca",
+      "Tinto Cão",
+      "Rufete",
+      "Alfrocheiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Touriga Franca representa grande percentagem do encepamento do Douro, dando estrutura, taninos sedosos e equilíbrio aos lotes.",
+    "fonte": "IVDP",
+    "factClusterId": "fc_vin_tourigafranca_01"
+  },
+  {
+    "id": "GAST_VIN_0042",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que região vinícola dos Açores, situada na ilha Terceira, é famosa pelo vinho branco generoso da freguesia dos Biscoitos?",
+    "opcoes": [
+      "DOC Graciosa",
+      "DOC Biscoitos",
+      "DOC Pico",
+      "DOC Calheta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A freguesia dos Biscoitos na Terceira cultiva vinhas da casta Verdelho em curraletas de rocha vulcânica escura.",
+    "fonte": "Governo Regional dos Açores / Museu do Vinho dos Biscoitos",
+    "factClusterId": "fc_vin_biscoitos_01"
+  },
+  {
+    "id": "GAST_VIN_0043",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Qual é a temperatura de serviço recomendada para um Vinho do Porto Tawny 20 Anos para melhor apreciar a complexidade dos seus frutos secos?",
+    "opcoes": [
+      "Entre 18 ºC e 22 ºC (temperatura ambiente de verão)",
+      "A 4 ºC (muito gelado)",
+      "Entre 12 ºC e 14 ºC (ligeiramente fresco)",
+      "A 0 ºC"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Servir o Tawny com idade ligeiramente fresco (12-14 ºC) realça a elegância dos aromas e atenua a sensação alcoólica no palato.",
+    "fonte": "IVDP",
+    "factClusterId": "fc_vin_temperatura_01"
+  },
+  {
+    "id": "GAST_VIN_0044",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que instituição estatal regula, certifica e promove o setor vitivinícola a nível nacional em Portugal?",
+    "opcoes": [
+      "Direção-Geral de Alimentação e Veterinária",
+      "Turismo de Portugal",
+      "Autoridade de Segurança Alimentar e Económica",
+      "Instituto da Vinha e do Vinho (IVV, I.P.)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O IVV tutela a política vitivinícola, o cadastro das vinhas e as regras de rotulagem e certificação em Portugal.",
+    "fonte": "Instituto da Vinha e do Vinho (IVV)",
+    "factClusterId": "fc_vin_ivv_01"
+  },
+  {
+    "id": "GAST_VIN_0045",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "O que significa o termo «Reserva» num vinho tinto com Denominação de Origem Controlada (DOC) em Portugal?",
+    "opcoes": [
+      "Vinho com teor alcoólico superior em pelo menos 0,5% vol. ao limite mínimo e com qualidades organoléticas destacadas após estágio",
+      "Vinho que esteve guardado mais de 10 anos na garrafa",
+      "Vinho feito exclusivamente com uvas importadas",
+      "Vinho com adição de açúcar refinado"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A menção Reserva exige certificação pela comissão vitivinícola e estágio que comprove qualidade superior em câmara de provadores.",
+    "fonte": "IVV",
+    "factClusterId": "fc_vin_reserva_01"
+  },
+  {
+    "id": "GAST_VIN_0046",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que casta branca de altitude da Beira Interior e Trás-os-Montes, também conhecida no Alentejo como Roupeiro, destaca-se pela sua fragrância cítrica e floral?",
+    "opcoes": [
+      "Avesso",
+      "Síria (Roupeiro / Códega)",
+      "Rabigato",
+      "Malvasia Fina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Síria é uma das castas brancas mais expressivas das regiões montanhosas do interior norte e centro de Portugal.",
+    "fonte": "Comissão Vitivinícola Regional da Beira Interior",
+    "factClusterId": "fc_vin_siria_01"
+  },
+  {
+    "id": "GAST_VIN_0047",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que instrumento tradicional de vidro com fole ou bico é utilizado nas tabernas e adegas do Alentejo e Ribatejo para retirar pequenas amostras de vinho de dentro dos toneis e talhas?",
+    "opcoes": [
+      "Pipeta graduada",
+      "Termómetro de mosto",
+      "Ladrão (ou Biba)",
+      "Decantador"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O «ladrão» é uma pipeta tradicional de vidro ou folha-de-flandres usada pelos mestres de adega para tirar a prova do vinho.",
+    "fonte": "Museu do Vinho de Alcobaça",
+    "factClusterId": "fc_vin_ladrao_01"
+  },
+  {
+    "id": "GAST_VIN_0048",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que prestigiada herdade de Reguengos de Monsaraz, com mais de 700 anos de história e uma torre medieval, é uma das maiores referências do enoturismo do Alentejo?",
+    "opcoes": [
+      "Herdade do Freixo",
+      "Adega de Borba",
+      "Quinta do Carmo",
+      "Herdade do Esporão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Herdade do Esporão é pioneira na sustentabilidade ambiental e líder em vinhos premiados e azeites virgem extra.",
+    "fonte": "Herdade do Esporão / Turismo do Alentejo",
+    "factClusterId": "fc_vin_esporao_01"
+  },
+  {
+    "id": "GAST_VIN_0049",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que tipo de rolha produzida em Portugal com casca de sobreiro é a escolha de excelência mundial para o fecho e micro-oxigenação dos melhores vinhos de guarda?",
+    "opcoes": [
+      "Rolha de cortiça natural",
+      "Rolha de plástico sintético",
+      "Cápsula de rosca (screwcap)",
+      "Vedante de vidro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A rolha de cortiça natural portuguesa é insubstituível na vedação de grandes vinhos pelo equilíbrio perfeito entre elasticidade e permeabilidade controlada ao oxigénio.",
+    "fonte": "APCOR (Associação Portuguesa da Cortiça)",
+    "factClusterId": "fc_vin_rolhacortica_01"
+  },
+  {
+    "id": "GAST_VIN_0050",
+    "tema": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "pergunta": "Que denominação vitivinícola do arquipélago da Madeira produz vinhos tranquilos (não fortificados) brancos, tintos e rosés de excelente frescura atlântica?",
+    "opcoes": [
+      "DOP Biscoitos",
+      "DOP Graciosa",
+      "DOP Madeirense / Terras Madeirenses",
+      "DOP Dão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Os vinhos tranquilos da DOP Madeirense têm crescido em notoriedade pela sua vibrante acidez oceânica.",
+    "fonte": "IVBAM / Governo da Madeira",
+    "factClusterId": "fc_vin_madeirense_01"
+  }
+]

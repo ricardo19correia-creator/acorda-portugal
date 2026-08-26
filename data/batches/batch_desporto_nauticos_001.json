@@ -1,0 +1,852 @@
+[
+  {
+    "id": "DESP_NAU_0001",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que consagrado canoísta português de Ponte de Lima (nascido em 1989), Fernando Pimenta («Fernando Pimenta»), é o desportista mais medalhado da história do desporto português com três medalhas olímpicas (Londres 2012, Tóquio 2020 e Paris 2024) e múltiplos títulos de Campeão do Mundo em K1 1000m e K1 5000m?",
+    "opcoes": [
+      "Fernando Pimenta",
+      "Emanuel Silva",
+      "João Ribeiro",
+      "Messias Baptista"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pimenta ultrapassou a impressionante marca de 140 medalhas internacionais na canoagem de velocidade.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Canoagem",
+    "factClusterId": "fc_desp_nau_fernandopimenta_canoagem_01"
+  },
+  {
+    "id": "DESP_NAU_0002",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que jovem fenómeno da natação portuguesa de Coimbra e Benfica (nascido em 2004), Diogo Ribeiro («Diogo Ribeiro»), fez história mundial em fevereiro de 2024 em Doha ao sagrar-se Bicampeão do Mundo sénior nas provas de:",
+    "opcoes": [
+      "50m e 100m Livres",
+      "50 metros e 100 metros Mariposa",
+      "100m e 200m Costas",
+      "200m e 400m Estilos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Diogo Ribeiro foi o primeiro nadador português de sempre a conquistar medalhas de ouro num Campeonato do Mundo de Natação de piscina longa.",
+    "fonte": "Federação Portuguesa de Natação / World Aquatics (Doha 2024)",
+    "factClusterId": "fc_desp_nau_diogoribeiro_doha2024_01"
+  },
+  {
+    "id": "DESP_NAU_0003",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que surfista norte-americano de ondas gigantes (Garrett McNamara), colocou a Nazaré e a Praia do Norte no mapa mundial do surf extremo em novembro de 2011 ao surfar uma onda colossal de 23,8 metros gerada pelo:",
+    "opcoes": [
+      "Vórtice da Foz do Tejo",
+      "Canal da Berlenga",
+      "Canhão da Nazaré (desfiladeiro submarino de 5.000 metros de profundidade)",
+      "Arrecife de Peniche"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Canhão da Nazaré funciona como um funil natural que canaliza a energia das tempestades atlânticas criando as maiores ondas do planeta.",
+    "fonte": "Instituto Hidrográfico / World Surf League / Município da Nazaré",
+    "factClusterId": "fc_desp_nau_mcnamara_canhaodanazare_2011_01"
+  },
+  {
+    "id": "DESP_NAU_0004",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórico surfista da Ericeira (nascido em 1980), Tiago Pires («Saca»), fez história em 2008 ao tornar-se o primeiro surfista português a qualificar-se para a divisão de elite mundial do surf masculino (o World Championship Tour — WCT)?",
+    "opcoes": [
+      "Frederico Morais («Kikas»)",
+      "Vasco Ribeiro",
+      "Nic von Rupp",
+      "Tiago Pires («Saca»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Tiago Pires venceu lendas do surf mundial como Kelly Slater e abriu as portas do profissionalismo internacional às novas gerações portuguesas.",
+    "fonte": "Federação Portuguesa de Surf / WSL",
+    "factClusterId": "fc_desp_nau_tiagopires_saca_2008_01"
+  },
+  {
+    "id": "DESP_NAU_0005",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que emblemática vila costeira portuguesa do concelho de Mafra («Ericeira»), consagrada em 2011 pela organização internacional Save the Waves Coalition, é a primeira e única «Reserva Mundial de Surf» da Europa (e a segunda do mundo)?",
+    "opcoes": [
+      "Ericeira (Reserva Mundial de Surf, 2011)",
+      "Peniche",
+      "Nazaré",
+      "Sagres"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Reserva da Ericeira cobre 4 quilómetros de costa e inclui 7 ondas de classe mundial: Pedra Branca, Reef, Ribeira d'Ilhas, Cave, Crazy Left, Coxos e São Lourenço.",
+    "fonte": "Save the Waves Coalition / Município de Mafra / Turismo de Portugal",
+    "factClusterId": "fc_desp_nau_ericeira_reservamundialsurf_01"
+  },
+  {
+    "id": "DESP_NAU_0006",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que famoso surfista de Cascais (nascido em 1992), Frederico Morais («Kikas»), consolidou-se como a principal figura do surf português no Championship Tour (CT) da WSL, alcançando finais épicas em Jeffreys Bay e representando Portugal nos Jogos Olímpicos?",
+    "opcoes": [
+      "Tiago Pires",
+      "Frederico Morais («Kikas»)",
+      "Afonso Antunes",
+      "Guilherme Ribeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Frederico Morais é famoso pelo seu estilo de 'power surfing' com curvas potentes nas ondas grandes.",
+    "fonte": "World Surf League / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_nau_fredericomorais_kikas_01"
+  },
+  {
+    "id": "DESP_NAU_0007",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que famosa praia de Peniche («Praia de Supertubos» / Praia do Medão), com ondas tubulares rápidas e pesadas que quebram perto da areia semelhantes às do Havai («o Pipeline Europeu»), é palco anual de uma etapa oficial da Liga Mundial de Surf (WSL)?",
+    "opcoes": [
+      "Praia do Guincho",
+      "Praia da Rocha",
+      "Praia dos Supertubos (Peniche)",
+      "Praia de Carcavelos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O MEO Rip Curl Pro Portugal atrai anualmente a Peniche os melhores surfistas masculinos e femininos do planeta.",
+    "fonte": "World Surf League / Município de Peniche",
+    "factClusterId": "fc_desp_nau_supertubos_peniche_wsl_01"
+  },
+  {
+    "id": "DESP_NAU_0008",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que dois canoístas portugueses de topo mundial (Messias Baptista e João Ribeiro), sagraram-se Campeões do Mundo em agosto de 2023 em Duisburgo (Alemanha) ao conquistarem a medalha de ouro na prova de:",
+    "opcoes": [
+      "K2 1000 metros",
+      "K4 500 metros",
+      "K1 200 metros",
+      "K2 500 metros"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A dupla portuguesa bateu as maiores potências mundiais garantindo a qualificação olímpica direta com um tempo brilhante.",
+    "fonte": "Federação Portuguesa de Canoagem / ICF",
+    "factClusterId": "fc_desp_nau_messias_joaoribeiro_k2_500_01"
+  },
+  {
+    "id": "DESP_NAU_0009",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que consagrado canoísta de Braga (nascido em 1985), Emanuel Silva («Emanuel Silva»), medalha de prata olímpica em Londres 2012 em K2 1000m ao lado de Fernando Pimenta, detém o recorde de participações olímpicas na canoagem portuguesa com presença em quantos Jogos Olímpicos?",
+    "opcoes": [
+      "5 Jogos Olímpicos (Atenas 2004 a Tóquio 2020)",
+      "3 Jogos Olímpicos",
+      "2 Jogos Olímpicos",
+      "6 Jogos Olímpicos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Emanuel Silva foi campeão mundial e europeu júnior e sénior sendo um dos pioneiros do sucesso internacional da canoagem nacional.",
+    "fonte": "Comité Olímpico de Portugal / FPC",
+    "factClusterId": "fc_desp_nau_emanuelsilva_canoagem_01"
+  },
+  {
+    "id": "DESP_NAU_0010",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórica e notável canoísta de Esposende (nascida em 1987), Teresa Portela («Teresa Portela»), atingiu a marca histórica de representar Portugal em cinco edições consecutivas dos Jogos Olímpicos (de Pequim 2008 a Paris 2024)?",
+    "opcoes": [
+      "Francisca Laia",
+      "Teresa Portela (5 presenças olímpicas)",
+      "Joana Vasconcelos",
+      "Beatriz Fernandes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Teresa Portela conquistou dezenas de medalhas em Taças do Mundo e Campeonatos da Europa em K1 e K4.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Canoagem",
+    "factClusterId": "fc_desp_nau_teresaportela_canoagem_01"
+  },
+  {
+    "id": "DESP_NAU_0011",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que dois velejadores portugueses (Hugo Rocha e Nuno Barreto), conquistaram para Portugal a Medalha de Bronze nos Jogos Olímpicos de Atlanta 1996 na classe:",
+    "opcoes": [
+      "Classe Star",
+      "Classe Laser",
+      "Classe 470 (Vela)",
+      "Classe Finn"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vela é uma das modalidades mais medalhadas da história olímpica portuguesa com 4 medalhas conquistadas (1948, 1952, 1960 e 1996).",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Vela",
+    "factClusterId": "fc_desp_nau_hugorocha_nunobarreto_atlanta1996_01"
+  },
+  {
+    "id": "DESP_NAU_0012",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que dois irmãos e velejadores portugueses (Duarte Bello e Fernando Bello), conquistaram a primeira medalha olímpica de prata da vela portuguesa nos Jogos Olímpicos de Londres 1948 na classe:",
+    "opcoes": [
+      "Classe Star",
+      "Classe Dragon",
+      "Classe 470",
+      "Classe Swallow"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Duarte Bello inventou equipamentos de vela adotados internacionalmente como o esticador de cabos e a régua de regata.",
+    "fonte": "Comité Olímpico de Portugal / Federação Portuguesa de Vela",
+    "factClusterId": "fc_desp_nau_irmaosbello_londres1948_01"
+  },
+  {
+    "id": "DESP_NAU_0013",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que dois velejadores portugueses (Mário Quina e José Manuel Quina), conquistaram a Medalha de Prata para Portugal nos Jogos Olímpicos de Roma 1960 em Nápoles na classe:",
+    "opcoes": [
+      "Classe Star (com o barco «Tornado»)",
+      "Classe 470",
+      "Classe Finn",
+      "Classe Flying Dutchman"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os irmãos Quina realizaram uma série brilhante de regatas no Golfo de Nápoles assegurando o segundo lugar do pódio.",
+    "fonte": "Comité Olímpico de Portugal / FPV",
+    "factClusterId": "fc_desp_nau_irmaosquina_roma1960_01"
+  },
+  {
+    "id": "DESP_NAU_0014",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que nadadora portuguesa do FC Porto (nascida em 1989), Angélica André («Angélica André»), fez história em fevereiro de 2024 em Doha ao conquistar a Medalha de Bronze no Campeonato do Mundo na prova de:",
+    "opcoes": [
+      "1500m Livres em piscina",
+      "10 km em Águas Abertas (Maratona Aquática)",
+      "800m Livres",
+      "5 km contra-relógio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Angélica André qualificou-se diretamente para os Jogos Olímpicos de Paris 2024 após uma prova heróica de mais de 1 hora e 57 minutos no mar de Doha.",
+    "fonte": "World Aquatics / Federação Portuguesa de Natação",
+    "factClusterId": "fc_desp_nau_angelicaandre_aguasabertas_2024_01"
+  },
+  {
+    "id": "DESP_NAU_0015",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que talentosa nadadora portuguesa de Coimbra (nascida em 2003), Camila Rebelo («Camila Rebelo»), sagrou-se Campeã da Europa em junho de 2024 em Belgrado ao bater o recorde nacional absoluto e conquistar a medalha de ouro nos:",
+    "opcoes": [
+      "100 metros Mariposa",
+      "50 metros Livres",
+      "200 metros Costas",
+      "400 metros Estilos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Camila Rebelo conquistou a medalha de ouro com a marca de 2:08.95 qualificando-se para os Jogos Olímpicos de Paris 2024.",
+    "fonte": "European Aquatics / Federação Portuguesa de Natação",
+    "factClusterId": "fc_desp_nau_camilarebelo_200costas_2024_01"
+  },
+  {
+    "id": "DESP_NAU_0016",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que lendário nadador português do Benfica de Lourenço Marques e Lisboa (nascido em 1965), Alexandre Yokochi («Alexandre Yokochi»), foi finalista olímpico nos 200m Bruços nos Jogos de Los Angeles 1984 e Seul 1988 e medalha de prata nos Campeonatos da Europa de 1987 em Estrasburgo?",
+    "opcoes": [
+      "Alexis Santos",
+      "Diogo Ribeiro",
+      "Miguel Arrobas",
+      "Alexandre Yokochi (200m Bruços)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Yokochi foi o primeiro nadador português a disputar finais A em Jogos Olímpicos e a subir ao pódio europeu sénior.",
+    "fonte": "Federação Portuguesa de Natação / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_nau_alexandreyokochi_brucos_01"
+  },
+  {
+    "id": "DESP_NAU_0017",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que experiente nadador lisboeta do Sporting CP (nascido em 1992), Alexis Santos («Alexis Santos»), conquistou a medalha de bronze nos 200m Estilos nos Campeonatos da Europa de Londres 2016 e foi semifinalista nos Jogos Olímpicos do Rio 2016?",
+    "opcoes": [
+      "Alexis Santos (200m Estilos)",
+      "Gabriel Lopes",
+      "Miguel Nascimento",
+      "Diogo Carvalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alexis Santos quebrou um jejum de 30 anos sem medalhas masculinas em piscina longa para Portugal em Europeus.",
+    "fonte": "Federação Portuguesa de Natação / Sporting CP",
+    "factClusterId": "fc_desp_nau_alexissantos_estilos_2016_01"
+  },
+  {
+    "id": "DESP_NAU_0018",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que destacadas surfistas portuguesas (Teresa Bonvalot e Yolanda Hopkins), fizeram história ao alcançar o 5.º lugar com diplomas olímpicos nos Jogos Olímpicos de Tóquio 2020 na estreia olímpica do surf?",
+    "opcoes": [
+      "Carina Duarte e Joana Rocha",
+      "Teresa Bonvalot e Yolanda Hopkins (Tóquio 2020)",
+      "Francisca Veselko e Carolina Mendes",
+      "Camilla Kemp e Kika Veselko"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Yolanda Hopkins e Teresa Bonvalot são referências europeias do surf feminino competindo no circuito mundial da WSL.",
+    "fonte": "Comité Olímpico de Portugal / WSL",
+    "factClusterId": "fc_desp_nau_teresabonvalot_yolandahopkins_toquio_01"
+  },
+  {
+    "id": "DESP_NAU_0019",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que jovem prodígio portuguesa do surf de Carcavelos (nascida em 2003), Francisca Veselko («Kika Veselko»), sagrou-se Campeã Mundial Júnior da World Surf League (WSL World Junior Championship) em janeiro de 2023 em Seaside Cove na Califórnia?",
+    "opcoes": [
+      "Teresa Bonvalot",
+      "Yolanda Hopkins",
+      "Francisca Veselko («Kika Veselko»)",
+      "Mafalda Lopes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Kika Veselko conquistou o título mundial de juniores sub-20 com notas excelentes em manobras de rail e batidas verticais.",
+    "fonte": "World Surf League / Federação Portuguesa de Surf",
+    "factClusterId": "fc_desp_nau_kikaveselko_campeamundialjunior_2023_01"
+  },
+  {
+    "id": "DESP_NAU_0020",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que bodyboarder algarvia de Sagres (nascida em 1987), Joana Schenker («Joana Schenker»), sagrou-se Campeã Mundial de Bodyboard (APB World Tour) em 2017 após vencer a etapa rainha nas Canárias?",
+    "opcoes": [
+      "Rita Pires",
+      "Catarina Sousa",
+      "Teresa Almeida",
+      "Joana Schenker (Campeã Mundial de Bodyboard 2017)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Joana Schenker foi heptacampeã europeia consecutiva de bodyboard sendo uma das maiores desportistas do Algarve.",
+    "fonte": "APB World Tour / Federação Portuguesa de Surf",
+    "factClusterId": "fc_desp_nau_joanaschenker_campeamundial_2017_01"
+  },
+  {
+    "id": "DESP_NAU_0021",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que lendário atleta de windsurf do Funchal / Madeira (nascido em 1971), João Rodrigues («João Rodrigues»), representou Portugal em 7 edições consecutivas dos Jogos Olímpicos (1992 a 2016) e sagrou-se Campeão Mundial e Tricampeão Europeu na classe Mistral e RS:X?",
+    "opcoes": [
+      "João Rodrigues (7 presenças olímpicas)",
+      "Gustavo Lima",
+      "Álvaro Marinho",
+      "Afonso Domingos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "João Rodrigues é o recordista absoluto de participações olímpicas de todo o desporto português a par do cavaleiro Rodrigo Torres.",
+    "fonte": "Comité Olímpico de Portugal / Clube Naval do Funchal",
+    "factClusterId": "fc_desp_nau_joaorodrigues_windsurf_01"
+  },
+  {
+    "id": "DESP_NAU_0022",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que kitesurfista portuguesa de Viana do Castelo («Inês Correia»), conquistou o título de Campeã Mundial de Kitesurf em ondas (KSP World Wave Champion) em 2011 em Peniche e na Ilha do Sal?",
+    "opcoes": [
+      "Joana Schenker",
+      "Inês Correia",
+      "Teresa Bonvalot",
+      "Mafalda Freire"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Inês Correia é pioneira nos desportos náuticos de vento surfando ondas de grande porte com kite.",
+    "fonte": "Federação Portuguesa de Vela / KSP",
+    "factClusterId": "fc_desp_nau_inescorreia_kitesurf_01"
+  },
+  {
+    "id": "DESP_NAU_0023",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que importante e histórico velejador português de Cascais (nascido em 1976), Gustavo Lima («Gustavo Lima»), sagrou-se Campeão do Mundo em 2003 na classe Laser em Cádis e 4.º classificado nos Jogos Olímpicos de Pequim 2008?",
+    "opcoes": [
+      "Eduardo Marques",
+      "Diogo Cayolla",
+      "Gustavo Lima (Campeão Mundial de Laser 2003)",
+      "Vasco Serpa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Gustavo Lima disputou 5 edições dos Jogos Olímpicos conquistando múltiplos pódios em taças do mundo na classe olímpica Laser Standard.",
+    "fonte": "Federação Portuguesa de Vela / World Sailing",
+    "factClusterId": "fc_desp_nau_gustavolima_laser_01"
+  },
+  {
+    "id": "DESP_NAU_0024",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que dupla mista de velejadores portugueses (Carolina João e Diogo Costa), qualificou-se para os Jogos Olímpicos de Paris 2024 na classe olímpica mista de:",
+    "opcoes": [
+      "Nacra 17",
+      "49er FX",
+      "IQFoil",
+      "Classe 470 Misto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A dupla portuguesa conquistou resultados de topo em mundiais e taças do mundo na classe 470.",
+    "fonte": "Comité Olímpico de Portugal / FPV",
+    "factClusterId": "fc_desp_nau_carolinajoao_diogocosta_470_01"
+  },
+  {
+    "id": "DESP_NAU_0025",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que bodyboarder da Costa da Caparica (nascido em 1981), Hugo Pinheiro («Hugo Pinheiro»), é tetracampeão europeu de bodyboard e uma das figuras de maior longevidade no circuito mundial APB?",
+    "opcoes": [
+      "Hugo Pinheiro",
+      "Manuel Centeno",
+      "Dino Carmo",
+      "António Cardoso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Hugo Pinheiro conquistou inúmeros títulos nacionais e europeus e é especialista em ondas tubulares pesadas.",
+    "fonte": "Federação Portuguesa de Surf / Eurosurf",
+    "factClusterId": "fc_desp_nau_hugopinheiro_bodyboard_01"
+  },
+  {
+    "id": "DESP_NAU_0026",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que experiente bodyboarder portuense (nascido em 1980), Manuel Centeno («Manuel Centeno»), sagrou-se Campeão Mundial do ISA World Bodyboard Games em 2006 e decacampeão nacional de bodyboard?",
+    "opcoes": [
+      "Hugo Pinheiro",
+      "Manuel Centeno (Campeão Mundial ISA 2006)",
+      "Silvano Lourenço",
+      "João Barciela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Manuel Centeno é arquiteto de profissão e um dos bodyboarders mais titulados de sempre em Portugal.",
+    "fonte": "ISA / Federação Portuguesa de Surf",
+    "factClusterId": "fc_desp_nau_manuelcenteno_bodyboard_01"
+  },
+  {
+    "id": "DESP_NAU_0027",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que surfista luso-alemão radicado em Cascais (nascido em 1987), Nic von Rupp («Nic von Rupp»), é um dos surfistas de ondas gigantes mais respeitados do mundo finalista no prestigiado evento Nazaré Big Wave Challenge?",
+    "opcoes": [
+      "Frederico Morais",
+      "Tiago Pires",
+      "Nic von Rupp",
+      "Alex Botelho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nic von Rupp é protagonista de documentários internacionais de surf extremo caçando ondulações pesadas na Nazaré, Havai e Taiti.",
+    "fonte": "WSL Big Wave / Red Bull",
+    "factClusterId": "fc_desp_nau_nicvonrupp_ondasgigantes_01"
+  },
+  {
+    "id": "DESP_NAU_0028",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que conceituada nadadora portuguesa de Vila do Conde (nascida em 1993), Ana Catarina Monteiro («Catarina Monteiro»), bateu o recorde nacional e alcançou a final dos 200m Mariposa nos Campeonatos da Europa de Glasgow 2018?",
+    "opcoes": [
+      "Camila Rebelo",
+      "Diana Durães",
+      "Tamila Holub",
+      "Ana Catarina Monteiro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ana Catarina Monteiro foi semifinalista nos Jogos Olímpicos de Tóquio 2020 na prova de 200 metros mariposa.",
+    "fonte": "Federação Portuguesa de Natação / FPN",
+    "factClusterId": "fc_desp_nau_anacatarinamonteiro_01"
+  },
+  {
+    "id": "DESP_NAU_0029",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que nadadora bracarense de ascendência ucraniana (nascida em 1999), Tamila Holub («Tamila Holub»), representou Portugal nos Jogos Olímpicos do Rio 2016 e Tóquio 2020 nas provas de fundo de 800m e 1500m Livres?",
+    "opcoes": [
+      "Tamila Holub",
+      "Diana Durães",
+      "Francisca Martins",
+      "Victoria Kaminskaya"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Tamila Holub foi campeã europeia de juniores nos 1500 metros livres em Hodmezovasarhely 2016.",
+    "fonte": "Federação Portuguesa de Natação / Sporting de Braga",
+    "factClusterId": "fc_desp_nau_tamilaholub_fundo_01"
+  },
+  {
+    "id": "DESP_NAU_0030",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que experiente nadador do Benfica (nascido em 1995), Miguel Nascimento («Miguel Nascimento»), bateu recordes nacionais de velocidade e alcançou o tempo de qualificação olímpica para Paris 2024 nos:",
+    "opcoes": [
+      "200m Bruços",
+      "50 metros Livres (abaixo dos 22 segundos)",
+      "400m Livres",
+      "200m Costas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Miguel Nascimento treina com Diogo Ribeiro sob a orientação do treinador nacional Alberto Silva.",
+    "fonte": "Federação Portuguesa de Natação / SL Benfica",
+    "factClusterId": "fc_desp_nau_miguelnascimento_50livres_01"
+  },
+  {
+    "id": "DESP_NAU_0031",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que célebre nadador de Coimbra e Louzan Natação (nascido em 1997), Gabriel Lopes («Gabriel Lopes»), conquistou a Medalha de Bronze nos 200m Estilos nos Campeonatos da Europa de Roma 2022?",
+    "opcoes": [
+      "Alexis Santos",
+      "Diogo Carvalho",
+      "Gabriel Lopes (Bronze Roma 2022)",
+      "Simão Morgado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Gabriel Lopes fez uma prova excecional com recorde pessoal de 1:58.34 garantindo o pódio europeu.",
+    "fonte": "Federação Portuguesa de Natação / LEN",
+    "factClusterId": "fc_desp_nau_gabriellopes_roma2022_01"
+  },
+  {
+    "id": "DESP_NAU_0032",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que importante e histórico nadador e triatleta português (Miguel Arrobas), foi o primeiro português a atravessar a nado com sucesso o Canal da Mancha (33 km entre a Inglaterra e França) em 2008 sem fato isotérmico em 9 horas e 5 minutos?",
+    "opcoes": [
+      "Igor de Souza",
+      "Mayra Santos",
+      "Vítor Coutinho",
+      "Miguel Arrobas (Canal da Mancha, 2008)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A travessia do Canal da Mancha é considerada o 'Everest das águas abertas' devido às correntes fortes e à temperatura gélida da água.",
+    "fonte": "Channel Swimming Association / FPN",
+    "factClusterId": "fc_desp_nau_miguelarrobas_canaldamancha_2008_01"
+  },
+  {
+    "id": "DESP_NAU_0033",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que corajosa nadadora de águas abertas radicada na Madeira (Mayra Santos), bateu o recorde mundial do Guinness em 2020 ao nadar continuamente durante 31 horas e 7 minutos numa piscina estática contra-corrente?",
+    "opcoes": [
+      "Mayra Santos (Recorde Guinness 2020)",
+      "Angélica André",
+      "Tamila Holub",
+      "Catarina Monteiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mayra Santos realizou também a travessia a nado entre o Porto Santo e a Madeira (42 km em mar aberto).",
+    "fonte": "Guinness World Records / Associação de Natação da Madeira",
+    "factClusterId": "fc_desp_nau_mayrasantos_recorde_01"
+  },
+  {
+    "id": "DESP_NAU_0034",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que remadores portugueses do Sporting CP e Fluvial Portuense (Pedro Fraga e Nuno Mendes), alcançaram o 5.º lugar com diploma olímpico nos Jogos Olímpicos de Londres 2012 na prova de:",
+    "opcoes": [
+      "Quatro Sem Timoneiro",
+      "Double Scull Ligeiro (LM2x, Remo)",
+      "Skiff Individual",
+      "Oito com Timoneiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pedro Fraga e Nuno Mendes foram vice-campeões europeus de remo em 2010 e 2012 colocando o remo português na elite mundial.",
+    "fonte": "Federação Portuguesa de Remo / Comité Olímpico de Portugal",
+    "factClusterId": "fc_desp_nau_pedrofraga_nunomendes_remo_2012_01"
+  },
+  {
+    "id": "DESP_NAU_0035",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórico clube náutico portuense fundado em 1876 («Clube Fluvial Portuense»), com sede no Passeio do Ouro na Foz do Douro, é o clube desportivo e de remo mais antigo em atividade de Portugal?",
+    "opcoes": [
+      "Clube Naval de Lisboa",
+      "Associação Naval de Lisboa",
+      "Clube Fluvial Portuense (1876)",
+      "Clube Naval Setubalense"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Fluvial Portuense formou gerações de campeões de remo, vela e polo aquático nas águas do rio Douro.",
+    "fonte": "Clube Fluvial Portuense / Federação Portuguesa de Remo",
+    "factClusterId": "fc_desp_nau_clubefluvialportuense_1876_01"
+  },
+  {
+    "id": "DESP_NAU_0036",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórico clube de vela de Lisboa fundado em 1856 («Associação Naval de Lisboa» / ANL), situado na Doca de Belém junto ao Padrão dos Descobrimentos, é a mais antiga associação náutica da Península Ibérica?",
+    "opcoes": [
+      "Clube Naval de Cascais",
+      "Iate Clube de Lisboa",
+      "Ginásio Clube Figueirense",
+      "Associação Naval de Lisboa (ANL, 1856)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A ANL foi fundada com o patrocínio do Rei D. Pedro V promovendo as primeiras regatas oficiais no rio Tejo.",
+    "fonte": "Associação Naval de Lisboa / Federação Portuguesa de Vela",
+    "factClusterId": "fc_desp_nau_anl_1856_01"
+  },
+  {
+    "id": "DESP_NAU_0037",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que prestigiado clube náutico fundado em 1938 na Baía de Cascais («Clube Naval de Cascais» / CNC), é internacionalmente reconhecido como um dos melhores palcos de regatas de alta competição do mundo acolhendo mundiais de TP52, RC44 e Dragon?",
+    "opcoes": [
+      "Clube Naval de Cascais (CNC)",
+      "Clube de Vela de Viana",
+      "Clube de Iates de Oeiras",
+      "Clube Naval de Sesimbra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Cascais é famosa internacionalmente entre os velejadores pelo seu campo de regatas com vento constante e excelente ondulação oceânica.",
+    "fonte": "Clube Naval de Cascais / World Sailing",
+    "factClusterId": "fc_desp_nau_clubenavalcascais_01"
+  },
+  {
+    "id": "DESP_NAU_0038",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que surfista luso-brasileiro de ondas gigantes (Lucas Chumbo), venceu múltiplas edições consecutivas do Nazaré Tow Surfing Challenge na Praia do Norte com manobras aéreas radicais em ondas de mais de 20 metros?",
+    "opcoes": [
+      "Pedro Scooby",
+      "Lucas Chumbo (Lucas Chianca)",
+      "Kai Lenny",
+      "Nic von Rupp"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Lucas Chumbo e Nic von Rupp formam uma das duplas de tow-in mais bem-sucedidas no circuito mundial de ondas gigantes da WSL.",
+    "fonte": "World Surf League / Red Bull Big Wave",
+    "factClusterId": "fc_desp_nau_lucaschumbo_nazare_01"
+  },
+  {
+    "id": "DESP_NAU_0039",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que surfista brasileira de ondas gigantes radicada em Portugal (Maya Gabeira), bateu o Recorde Mundial do Guinness da maior onda alguma vez surfada por uma mulher ao descer uma vaga de 22,4 metros (73,5 pés) na Praia do Norte na Nazaré em fevereiro de 2020?",
+    "opcoes": [
+      "Justine Dupont",
+      "Keala Kennelly",
+      "Maya Gabeira (Recorde Mundial Guinness)",
+      "Laura Enever"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Maya Gabeira superou um grave acidente na Nazaré em 2013 antes de se fixar em Portugal e conquistar dois recordes mundiais do Guinness.",
+    "fonte": "Guinness World Records / WSL",
+    "factClusterId": "fc_desp_nau_mayagabeira_recordeguinness_2020_01"
+  },
+  {
+    "id": "DESP_NAU_0040",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que surfista alemão de ondas gigantes radicado na Nazaré (Sebastian Steudtner), estabeleceu o Recorde Mundial Oficial do Guinness para a maior onda alguma vez surfada no planeta ao descer uma muralha de água de 26,21 metros (86 pés) na Praia do Norte em outubro de 2020?",
+    "opcoes": [
+      "Garrett McNamara",
+      "Rodrigo Koxa",
+      "Andrew Cotton",
+      "Sebastian Steudtner (26,21 metros, 2020)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A onda foi confirmada e homologada pelo Guinness World Records e pela WSL após análise científica rigorosa de telemetria.",
+    "fonte": "Guinness World Records / World Surf League / Município da Nazaré",
+    "factClusterId": "fc_desp_nau_steudtner_recordemundial_nazare_01"
+  },
+  {
+    "id": "DESP_NAU_0041",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que importante e histórico evento náutico bianual de circum-navegação à vela («The Ocean Race» / antiga Volvo Ocean Race), escolheu várias vezes a cidade de Lisboa e os Açores como porto oficial de escala e partida das suas etapas oceânicas?",
+    "opcoes": [
+      "The Ocean Race (antiga Volvo Ocean Race)",
+      "America's Cup",
+      "Vendée Globe",
+      "Clipper Round the World"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Lisboa acolheu a vila de regata da Ocean Race na Doca de Pedrouços celebrando a ligação secular de Portugal aos oceanos.",
+    "fonte": "The Ocean Race / Porto de Lisboa",
+    "factClusterId": "fc_desp_nau_theoceanrace_lisboa_01"
+  },
+  {
+    "id": "DESP_NAU_0042",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórica e prestigiada modalidade aquática de equipa com bola em piscina («Polo Aquático»), tem como campeões nacionais históricos clubes como o Salgueiros, o Fluvial Portuense, o Sporting CP e o Vitória de Guimarães?",
+    "opcoes": [
+      "Natação Sincronizada",
+      "Polo Aquático",
+      "Hóquei Subaquático",
+      "Saltos para a Água"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Polo Aquático disputa-se em Portugal desde o início do século XX sendo uma modalidade de enorme exigência física e resistência natatória.",
+    "fonte": "Federação Portuguesa de Natação / FPN",
+    "factClusterId": "fc_desp_nau_poloaquatico_portugal_01"
+  },
+  {
+    "id": "DESP_NAU_0043",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que famoso evento e festival de surf e música realizado anualmente na Praia do Cabedelo em Viana do Castelo e na Costa Nova («Viana World Cup» / Festivais de Desportos Náuticos), reúne atletas mundiais de Kitesurf, Wingfoil e Windsurf?",
+    "opcoes": [
+      "Guincho Wave Pro",
+      "Algarve Surf Festival",
+      "Viana World Cup (e GKA Kite World Tour)",
+      "Cascais Classic"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Praia do Cabedelo em Viana do Castelo tem ventos térmicos de 'Nortada' constantes que a tornam uma das mecas mundiais do kite e wingfoil.",
+    "fonte": "Global Kitesports Association (GKA) / Município de Viana do Castelo",
+    "factClusterId": "fc_desp_nau_cabedelo_viana_kitesurf_01"
+  },
+  {
+    "id": "DESP_NAU_0044",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que grande e histórica prova de canoagem de mar e rio realizada no rio Douro («Descida Internacional do Rio Douro»), junta anualmente centenas de embarcações entre a Régua, Crestuma e o Porto?",
+    "opcoes": [
+      "Regata dos Barcos Rabelos",
+      "Travessia do Tejo",
+      "Circuito do Mondego",
+      "Descida Internacional do Douro em Canoagem"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A prova é uma das mais tradicionais do calendário náutico português organizada pelo Clube Fluvial Vilacondense e Náutico de Crestuma.",
+    "fonte": "Federação Portuguesa de Canoagem",
+    "factClusterId": "fc_desp_nau_descidadodouro_canoagem_01"
+  },
+  {
+    "id": "DESP_NAU_0045",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que tradicional e espetacular regata de embarcações históricas à vela realizada todos os anos no dia 24 de junho (dia de São João) entre a Afurada e a Ponte Luís I no rio Douro («Regata dos Barcos Rabelos»), é organizada pela Confraria do Vinho do Porto?",
+    "opcoes": [
+      "Regata dos Barcos Rabelos (São João)",
+      "Regata das Caravelas",
+      "Regata dos Moliceiros de Aveiro",
+      "Regata da Ria Formosa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os barcos rabelos de cada uma das casas e quintas de Vinho do Porto competem com as suas grandes velas quadradas erguidas.",
+    "fonte": "Confraria do Vinho do Porto / Turismo do Porto e Norte",
+    "factClusterId": "fc_desp_nau_regatabarcosrabelos_saojoao_01"
+  },
+  {
+    "id": "DESP_NAU_0046",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que tradicional competição náutica de barcos típicos de madeira com pinturas policromadas e proa erguida («Grande Regata de Barcos Moliceiros da Ria de Aveiro»), disputa-se todos os anos ao longo dos canais da ria entre a Torreira (Murtosa) e a cidade de Aveiro?",
+    "opcoes": [
+      "Regata dos Galeões do Sado",
+      "Grande Regata dos Barcos Moliceiros",
+      "Regata dos Saveiros da Nazaré",
+      "Regata dos Botes Baleeiros do Pico"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os barcos moliceiros usavam antigamente a força do vento e da vara para colher o moliço (algas fertilizantes) no fundo da Ria de Aveiro.",
+    "fonte": "Município da Murtosa / Município de Aveiro / Turismo Centro de Portugal",
+    "factClusterId": "fc_desp_nau_regatamoliceiros_aveiro_01"
+  },
+  {
+    "id": "DESP_NAU_0047",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que tradicional regata açoriana de botes de madeira de 7 homens à vela e remos («Regata de Botes Baleeiros dos Açores»), mantém viva a perícia dos antigos baleeiros nas ilhas do Pico, Faial e São Jorge durante a Semana do Mar da Horta?",
+    "opcoes": [
+      "Regata dos Barcos Rabelos",
+      "Regata das Canas da Madeira",
+      "Regata dos Botes Baleeiros (Semana do Mar da Horta)",
+      "Regata de Traineiras de Sesimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os botes baleeiros açorianos de 12 metros são extremamente rápidos e manobráveis sendo património náutico vivo dos Açores.",
+    "fonte": "Clube Naval da Horta / Museu dos Baleeiros do Pico",
+    "factClusterId": "fc_desp_nau_regatabotesbaleeiros_acores_01"
+  },
+  {
+    "id": "DESP_NAU_0048",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que consagrado nadador paralímpico português de Viseu e Coimbra (nascido em 1999), Diogo Cancela («Diogo Cancela»), conquistou a Medalha de Bronze nos Jogos Paralímpicos de Paris 2024 na prova de 200 metros estilos (classe SM8)?",
+    "opcoes": [
+      "David Carreira",
+      "Ivo Rocha",
+      "Marco Meneses",
+      "Diogo Cancela (Paris 2024)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Diogo Cancela é recordista nacional e medalhado em campeonatos do mundo e da Europa de natação adaptada.",
+    "fonte": "Comité Paralímpico de Portugal / FPN",
+    "factClusterId": "fc_desp_nau_diogocancela_paris2024_01"
+  },
+  {
+    "id": "DESP_NAU_0049",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que histórico nadador paralímpico português (David Grachat), conquistou a Medalha de Bronze nos Jogos Paralímpicos de Londres 2012 nos 400m Livres (classe S9) e representou Portugal em quatro edições paralímpicas?",
+    "opcoes": [
+      "David Grachat (Londres 2012)",
+      "Diogo Cancela",
+      "Nuno Alves",
+      "Rui Ramos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "David Grachat foi um dos pioneiros da natação adaptada de alto rendimento no Sporting CP e na seleção nacional.",
+    "fonte": "Comité Paralímpico de Portugal / FPN",
+    "factClusterId": "fc_desp_nau_davidgrachat_londres2012_01"
+  },
+  {
+    "id": "DESP_NAU_0050",
+    "tema": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "pergunta": "Que importante e histórico evento internacional de mergulho em falésia («Red Bull Cliff Diving World Series»), realiza anualmente uma das suas etapas mais icónicas no rochedo circular vulcânico do:",
+    "opcoes": [
+      "Farilhão das Berlengas",
+      "Cabo Espichel",
+      "Ilhéu de Vila Franca do Campo (na Ilha de São Miguel, Açores)",
+      "Ponta de São Lourenço"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os atletas saltam de plataformas a 27 metros de altura diretamente para o oceano Atlântico com a cratera vulcânica como cenário natural único.",
+    "fonte": "Red Bull Cliff Diving / Turismo dos Açores",
+    "factClusterId": "fc_desp_nau_cliffdiving_vilafrancadocampo_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "POL_PAR_0001",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Em que cidade alemã foi fundado a 19 de abril de 1973 o Partido Socialista (PS) por militantes da Ação Socialista Portuguesa (ASP) liderados por Mário Soares, Manuel Tito de Morais e Ramos da Costa?",
+    "opcoes": [
+      "Bad Münstereifel (na Alemanha Ocidental)",
+      "Bona",
+      "Frankfurt",
+      "Colónia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A fundação do PS ocorreu na estalagem Haus Sonnenberg com o apoio da fundação alemã Friedrich Ebert.",
+    "fonte": "Fundação Mário Soares e Maria Barroso / Partido Socialista",
+    "factClusterId": "fc_pol_par_fundacao_ps_1973_01"
+  },
+  {
+    "id": "POL_PAR_0002",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que três proeminentes advogados e deputados da Ala Liberal da Primavera Marcelista (Francisco Sá Carneiro, Francisco Pinto Balsemão e Joaquim Magalhães Mota), fundaram a 6 de maio de 1974 em Lisboa o:",
+    "opcoes": [
+      "Centro Democrático Social (CDS)",
+      "Partido Popular Democrático (PPD, atual PSD)",
+      "Partido Socialista (PS)",
+      "Partido Renovador Democrático (PRD)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O PPD adotou formalmente a designação de Partido Social Democrata (PSD) em 1976 no seu congresso nacional.",
+    "fonte": "Instituto Francisco Sá Carneiro / PSD",
+    "factClusterId": "fc_pol_par_fundacao_ppd_psd_1974_01"
+  },
+  {
+    "id": "POL_PAR_0003",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Qual é o partido político mais antigo em atividade contínua em Portugal, fundado a 6 de março de 1921 em Lisboa por sindicalistas e operários da Federação das Juventudes Comunistas («Partido Comunista Português» / PCP)?",
+    "opcoes": [
+      "Partido Socialista",
+      "Partido Popular Monárquico",
+      "Partido Comunista Português (PCP, 1921)",
+      "Partido Republicano Português"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O PCP resistiu a 48 anos de clandestinidade durante a ditadura militar e o Estado Novo sob a liderança de Bento Gonçalves e Álvaro Cunhal.",
+    "fonte": "Partido Comunista Português / Arquivo Histórico do PCP",
+    "factClusterId": "fc_pol_par_fundacao_pcp_1921_01"
+  },
+  {
+    "id": "POL_PAR_0004",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que partido político democrata-cristão e centrista fundado a 19 de julho de 1974 por Diogo Freitas do Amaral, Adelino Amaro da Costa e Basílio Horta («Centro Democrático Social» / CDS-PP), foi o único a votar contra a Constituição de 1976?",
+    "opcoes": [
+      "Partido Popular Democrático (PPD)",
+      "Partido da Democracia Cristã (PDC)",
+      "Partido Popular Monárquico (PPM)",
+      "Centro Democrático Social — Partido Popular (CDS-PP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O CDS integrou governos constitucionais em coligação com o PS (II Governo) e com o PSD (Aliança Democrática e governos de Durão Barroso, Santana Lopes e Passos Coelho).",
+    "fonte": "CDS-PP / Assembleia da República",
+    "factClusterId": "fc_pol_par_fundacao_cds_1974_01"
+  },
+  {
+    "id": "POL_PAR_0005",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que força política da esquerda parlamentar portuguesa («Bloco de Esquerda» / BE), foi fundada em março de 1999 através da fusão de três organizações políticas (a UDP de Luís Fazenda, o PSR de Francisco Louçã e a Política XXI de Miguel Portas)?",
+    "opcoes": [
+      "Bloco de Esquerda (BE, 1999)",
+      "Coligação Democrática Unitária (CDU)",
+      "LIVRE",
+      "Movimento Democrático Português (MDP/CDE)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bloco de Esquerda elegeu os seus primeiros deputados em 1999 (Francisco Louçã e Fernando Rosas) tornando-se uma força relevante na AR.",
+    "fonte": "Bloco de Esquerda / Assembleia da República",
+    "factClusterId": "fc_pol_par_fundacao_blocoesquerda_1999_01"
+  },
+  {
+    "id": "POL_PAR_0006",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que coligação eleitoral permanente de esquerda formada em 1987 («CDU» — Coligação Democrática Unitária), concorre a todas as eleições legislativas, autárquicas e europeias unindo o Partido Comunista Português (PCP) e o:",
+    "opcoes": [
+      "Bloco de Esquerda (BE)",
+      "Partido Ecologista «Os Verdes» (PEV)",
+      "LIVRE",
+      "PAN"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A CDU integra também a associação cívica Intervenção Democrática (ID) e adotou o símbolo da foice, martelo e girassol.",
+    "fonte": "CDU / Partido Comunista Português / Os Verdes",
+    "factClusterId": "fc_pol_par_coligacao_cdu_1987_01"
+  },
+  {
+    "id": "POL_PAR_0007",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico partido ecologista português fundado em 1982 por Maria Santos e Zita Seabra («Partido Ecologista Os Verdes» / PEV), foi o pioneiro do movimento político verde e ambientalista no parlamento português?",
+    "opcoes": [
+      "PAN",
+      "LIVRE",
+      "Partido Ecologista «Os Verdes» (PEV)",
+      "Partido da Terra (MPT)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O PEV foi fundado originalmente como Movimento Ecologista Português — Partido Os Verdes elegendo deputados em listas conjuntas com o PCP.",
+    "fonte": "Os Verdes (PEV) / Assembleia da República",
+    "factClusterId": "fc_pol_par_osverdes_pev_1982_01"
+  },
+  {
+    "id": "POL_PAR_0008",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que partido político português fundado em 2009 com foco nos direitos dos animais, sustentabilidade e natureza («PAN» — Pessoas-Animais-Natureza), elegeu André Silva em 2015 como o primeiro deputado animalista à Assembleia da República?",
+    "opcoes": [
+      "Os Verdes",
+      "LIVRE",
+      "Volt Portugal",
+      "PAN (Pessoas-Animais-Natureza)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nas eleições legislativas de 2019 o PAN alcançou um grupo parlamentar com 4 deputados e é liderado por Inês de Sousa Real.",
+    "fonte": "PAN / Assembleia da República",
+    "factClusterId": "fc_pol_par_pan_2009_01"
+  },
+  {
+    "id": "POL_PAR_0009",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que partido político português fundado em 2017 de matriz liberal clássica e económica («Iniciativa Liberal» / IL), elegeu João Cotrim de Figueiredo em 2019 como deputado único antes de formar grupo parlamentar com Rui Rocha?",
+    "opcoes": [
+      "Iniciativa Liberal (IL)",
+      "Chega",
+      "Volt Portugal",
+      "Aliança"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Iniciativa Liberal defende a redução da carga fiscal, taxa única de IRS, liberdade de escolha na saúde e educação e desregulamentação económica.",
+    "fonte": "Iniciativa Liberal / Assembleia da República",
+    "factClusterId": "fc_pol_par_iniciativaliberal_2017_01"
+  },
+  {
+    "id": "POL_PAR_0010",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que partido político de direita conservadora e populista fundado em 2019 pelo jurista e comentador André Ventura («Chega» / CH), elegeu o seu primeiro deputado em 2019 e cresceu para se tornar a terceira força política mais votada na AR?",
+    "opcoes": [
+      "Iniciativa Liberal",
+      "Chega (André Ventura)",
+      "Ergue-te / PNR",
+      "Aliança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nas eleições de 2024, o Chega elegeu 50 deputados à Assembleia da República consolidando-se no parlamento.",
+    "fonte": "Tribunal Constitucional / Assembleia da República",
+    "factClusterId": "fc_pol_par_chega_2019_01"
+  },
+  {
+    "id": "POL_PAR_0011",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que partido político de esquerda progressista, europeísta e ecologista fundado em 2014 pelo historiador Rui Tavares («LIVRE» / L), elegeu deputados em 2019, 2022 e 2024 com foco no combate às alterações climáticas e justiça social?",
+    "opcoes": [
+      "Bloco de Esquerda",
+      "PAN",
+      "LIVRE (Rui Tavares)",
+      "Volt Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O LIVRE adota o método de 'Primárias Abertas' a todos os cidadãos para a escolha dos seus candidatos a cargos eletivos.",
+    "fonte": "LIVRE / Assembleia da República",
+    "factClusterId": "fc_pol_par_livre_2014_01"
+  },
+  {
+    "id": "POL_PAR_0012",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórica e vitoriosa coligação de centro-direita («Aliança Democrática» / AD), fundada em 1979 por Francisco Sá Carneiro (PSD), Diogo Freitas do Amaral (CDS) e Gonçalo Ribeiro Telles (PPM), conquistou a primeira maioria absoluta pós-25 de Abril?",
+    "opcoes": [
+      "Frente Republicana e Socialista (FRS)",
+      "Portugal à Frente (PàF)",
+      "União do Centro",
+      "Aliança Democrática (AD, 1979-1983)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Aliança Democrática governou o país no VI e VII Governos Constitucionais até ao trágico acidente de Camarate em 1980.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_pol_par_aliancademocratica_1979_01"
+  },
+  {
+    "id": "POL_PAR_0013",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico partido monárquico e ecologista português fundado a 23 de maio de 1974 pelo arquiteto paisagista Gonçalo Ribeiro Telles e Henrique Barrilaro Ruas («Partido Popular Monárquico» / PPM), integrou a Aliança Democrática de Sá Carneiro?",
+    "opcoes": [
+      "Partido Popular Monárquico (PPM)",
+      "Partido da Terra (MPT)",
+      "Causa Real",
+      "Movimento Monárquico Popular"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gonçalo Ribeiro Telles foi Ministro da Qualidade de Vida criando a Reserva Agrícola Nacional (RAN) e a Reserva Ecológica Nacional (REN).",
+    "fonte": "Assembleia da República / PPM",
+    "factClusterId": "fc_pol_par_ppm_ribeirotelles_1974_01"
+  },
+  {
+    "id": "POL_PAR_0014",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Qual é a emblemática sede nacional histórica do Partido Socialista, situada num palacete histórico de Lisboa junto à estação de metro com o mesmo nome?",
+    "opcoes": [
+      "Rua de São Caetano à Lapa",
+      "Largo do Rato (Sede Nacional do PS)",
+      "Rua Soeiro Pereira Gomes",
+      "Largo do Caldas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A expressão política 'o Rato' é habitualmente utilizada nos meios de comunicação social como metonímia da liderança do PS.",
+    "fonte": "Partido Socialista / História do Partido Socialista",
+    "factClusterId": "fc_pol_par_sede_ps_largodorato_01"
+  },
+  {
+    "id": "POL_PAR_0015",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Qual é a sede nacional histórica do Partido Social Democrata (PSD), situada numa mansão na colina da Lapa em Lisboa?",
+    "opcoes": [
+      "Largo do Rato",
+      "Largo do Caldas",
+      "Rua de São Caetano à Lapa (Sede Nacional do PSD)",
+      "Rua Soeiro Pereira Gomes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A expressão 'a Lapa' ou 'São Caetano' é usada na gíria política nacional para designar a sede do PSD.",
+    "fonte": "PSD / Arquivo do Partido Social Democrata",
+    "factClusterId": "fc_pol_par_sede_psd_lapa_01"
+  },
+  {
+    "id": "POL_PAR_0016",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Qual é a sede nacional do Partido Comunista Português (PCP), situada numa rua batizada em honra do escritor neorrealista em Lisboa?",
+    "opcoes": [
+      "Largo do Caldas",
+      "Largo do Rato",
+      "Rua da Palma",
+      "Rua Soeiro Pereira Gomes (Sede Nacional do PCP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O edifício da 'Soeiro Pereira Gomes' foi construído com as contribuições e trabalho voluntário de milhares de militantes comunistas.",
+    "fonte": "Partido Comunista Português / Arquivo Histórico",
+    "factClusterId": "fc_pol_par_sede_pcp_soeiropereiragomes_01"
+  },
+  {
+    "id": "POL_PAR_0017",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Qual é a histórica sede nacional do CDS — Partido Popular, situada no centro histórico de Lisboa?",
+    "opcoes": [
+      "Largo do Caldas (Sede Nacional do CDS-PP)",
+      "Largo do Rato",
+      "Rua de São Caetano",
+      "Avenida da Liberdade"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O 'Largo do Caldas' foi palco de momentos históricos da transição democrática e celebrações eleitorais do CDS.",
+    "fonte": "CDS-PP / História do CDS",
+    "factClusterId": "fc_pol_par_sede_cds_largodocaldas_01"
+  },
+  {
+    "id": "POL_PAR_0018",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que número mínimo de assinaturas de cidadãos eleitores é exigido por lei em Portugal para que um projeto de novo partido político possa ser inscrito e legalizado no Tribunal Constitucional?",
+    "opcoes": [
+      "5.000 assinaturas",
+      "7.500 assinaturas de cidadãos eleitores",
+      "10.000 assinaturas",
+      "2.500 assinaturas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 15.º da Lei dos Partidos Políticos exige a subscrição de pelo menos 7.500 eleitores para verificação de legalidade pelo TC.",
+    "fonte": "Lei Orgânica n.º 2/2003 (Lei dos Partidos Políticos) / Tribunal Constitucional",
+    "factClusterId": "fc_pol_par_requisitos_7500_assinaturas_01"
+  },
+  {
+    "id": "POL_PAR_0019",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante e histórico partido comunista maoista de matriz revolucionária fundado em 1970 («PCTP/MRPP» — Partido Comunista dos Trabalhadores Portugueses), liderado pelo jurista Arnaldo Matos («O Grande Educador da Classe Operária»), celebrizou cartazes murais pintados à mão?",
+    "opcoes": [
+      "UDP",
+      "PSR",
+      "PCTP/MRPP (Arnaldo Matos)",
+      "POUS"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "No MRPP militaram na sua juventude figuras que mais tarde se destacaram na democracia como Durão Barroso e Eduardo Ferro Rodrigues.",
+    "fonte": "Tribunal Constitucional / Ephemera (José Pacheco Pereira)",
+    "factClusterId": "fc_pol_par_pctpmrpp_arnaldomatos_01"
+  },
+  {
+    "id": "POL_PAR_0020",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico partido político fundado em 1985 em torno da figura e prestígio do Presidente General Ramalho Eanes («PRD» — Partido Renovador Democrático), obteve um estrondoso resultado de 17,9% dos votos e 45 deputados nas legislativas de 1985?",
+    "opcoes": [
+      "União da Esquerda Democrática (UEDS)",
+      "Ação Social Democrata Independente (ASDI)",
+      "Movimento Esperança Portugal (MEP)",
+      "Partido Renovador Democrático (PRD)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O PRD teve uma ascensão meteórica e uma queda rápida desaparecendo do parlamento após a maioria absoluta do PSD em 1987.",
+    "fonte": "CNE / Assembleia da República / DHP",
+    "factClusterId": "fc_pol_par_prd_ramalhoeanes_1985_01"
+  },
+  {
+    "id": "POL_PAR_0021",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico partido e movimento cívico da oposição democrática ao Estado Novo («MDP/CDE» — Movimento Democrático Português / Comissão Democrática Eleitoral), fundado em 1969 por figuras como Francisco Pereira de Moura e José Manuel Tengarrinha, participou nos Governos Provisórios de 1974-1975?",
+    "opcoes": [
+      "MDP/CDE (Movimento Democrático Português)",
+      "Frente Eleitoral dos Trabalhadores",
+      "Liga de Ação Revolucionária (LUAR)",
+      "Frente Patriótica de Libertação Nacional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O MDP/CDE concorreu em coligação com o PCP na Aliança Povo Unido (APU) até à sua extinção nos anos 1990.",
+    "fonte": "Assembleia Constituinte / Arquivo Ephemera",
+    "factClusterId": "fc_pol_par_mdpcde_1969_01"
+  },
+  {
+    "id": "POL_PAR_0022",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que organismo independente com sede junto ao Tribunal Constitucional («Entidade das Contas e Financiamentos Políticos» / ECFP), tem como competência exclusiva fiscalizar as contas anuais dos partidos políticos e as campanhas eleitorais em Portugal?",
+    "opcoes": [
+      "Comissão Nacional de Eleições (CNE)",
+      "Entidade das Contas e Financiamentos Políticos (ECFP)",
+      "Tribunal de Contas",
+      "Inspeção-Geral de Finanças"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A ECFP foi criada pela Lei de Financiamento dos Partidos Políticos para garantir a transparência financeira da atividade partidária.",
+    "fonte": "Tribunal Constitucional / Lei Orgânica n.º 2/2005",
+    "factClusterId": "fc_pol_par_ecfp_financiamento_01"
+  },
+  {
+    "id": "POL_PAR_0023",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante e histórico líder comunista português de Coimbra e Lisboa (1913-2005), Álvaro Cunhal («Álvaro Cunhal»), Secretário-Geral do PCP de 1961 a 1992, foi a figura máxima da resistência comunista antifascista e autor de romances sob o pseudónimo literário:",
+    "opcoes": [
+      "Bernardo Soares",
+      "Carlos Fradique Mendes",
+      "Manuel Tiago (como «Até Amanhã, Camaradas» e «Os Cinco Dias, Os Cinco Noites»)",
+      "Vitorino Nemésio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Álvaro Cunhal protagonizou a célebre Fuga de Peniche em 1960 e foi Ministro Sem Pasta nos primeiros Governos Provisórios.",
+    "fonte": "Editorial Avante! / Fundação Mário Soares / DHP",
+    "factClusterId": "fc_pol_par_alvarocunhal_manueltiago_01"
+  },
+  {
+    "id": "POL_PAR_0024",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que carismático operário metalúrgico de Pias (Serpa, nascido em 1947), Jerónimo de Sousa («Jerónimo de Sousa»), deputado constituinte em 1975, liderou o Partido Comunista Português (PCP) como Secretário-Geral durante 18 anos entre:",
+    "opcoes": [
+      "1992 e 2004",
+      "1985 e 1995",
+      "1974 e 1985",
+      "2004 e 2022 (sucedido por Paulo Raimundo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jerónimo de Sousa foi o obreiro comunista da solução governativa da 'Geringonça' em 2015 com o Partido Socialista.",
+    "fonte": "Partido Comunista Português / Assembleia da República",
+    "factClusterId": "fc_pol_par_jeronimodesousa_pcp_01"
+  },
+  {
+    "id": "POL_PAR_0025",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que dirigente comunista de Cascais e Setúbal (nascido em 1976), Paulo Raimundo («Paulo Raimundo»), animador cultural e operário de carpintaria e panificação, foi eleito no Comité Central do PCP em novembro de 2022 como o novo:",
+    "opcoes": [
+      "Secretário-Geral do Partido Comunista Português",
+      "Líder Parlamentar do PCP",
+      "Diretor do jornal Avante!",
+      "Presidente do Conselho Nacional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Paulo Raimundo é o quarto líder na história do PCP após Bento Gonçalves, Álvaro Cunhal, Carlos Carvalhas e Jerónimo de Sousa.",
+    "fonte": "Partido Comunista Português / Diário de Notícias",
+    "factClusterId": "fc_pol_par_pauloraimundo_pcp_2022_01"
+  },
+  {
+    "id": "POL_PAR_0026",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que brilhante economista e professor catedrático do ISEG de Lisboa (nascido em 1956), Francisco Louçã («Francisco Louçã»), foi o primeiro Coordenador da Comissão Política do Bloco de Esquerda entre 1999 e 2012, liderando o partido na Assembleia da República?",
+    "opcoes": [
+      "Fernando Rosas",
+      "Francisco Louçã (Bloco de Esquerda)",
+      "Miguel Portas",
+      "Luís Fazenda"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Francisco Louçã destacou-se pelos acesos debates orçamentais no parlamento e foi membro do Conselho de Estado.",
+    "fonte": "Assembleia da República / Bloco de Esquerda",
+    "factClusterId": "fc_pol_par_franciscolouca_be_01"
+  },
+  {
+    "id": "POL_PAR_0027",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que destacada líder política e atriz de Santa Maria da Feira (nascida em 1977), Catarina Martins («Catarina Martins»), foi a Coordenadora Nacional do Bloco de Esquerda entre 2012 e 2023, alcançando o recorde histórico do partido de 19 deputados nas legislativas de 2015?",
+    "opcoes": [
+      "Mariana Mortágua",
+      "Marisa Matias",
+      "Catarina Martins (Bloco de Esquerda)",
+      "Joana Mortágua"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Catarina Martins foi uma das artífices da aliança parlamentar da 'Geringonça' em 2015 e foi eleita deputada ao Parlamento Europeu em 2024.",
+    "fonte": "Bloco de Esquerda / Parlamento Europeu",
+    "factClusterId": "fc_pol_par_catarinamartins_be_01"
+  },
+  {
+    "id": "POL_PAR_0028",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que talentosa economista de Alvito (nascida em 1986), Mariana Mortágua («Mariana Mortágua»), celebrizou-se pela sua atuação incisiva nas comissões parlamentares de inquérito ao Banco Espírito Santo (BES) e à Caixa Geral de Depósitos sendo eleita Coordenadora do BE em 2023?",
+    "opcoes": [
+      "Catarina Martins",
+      "Marisa Matias",
+      "Fabíola Cardoso",
+      "Mariana Mortágua"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mariana Mortágua é doutorada em Economia pela Universidade de Londres (SOAS) e deputada à Assembleia da República desde 2013.",
+    "fonte": "Assembleia da República / Bloco de Esquerda",
+    "factClusterId": "fc_pol_par_marianamortagua_be_01"
+  },
+  {
+    "id": "POL_PAR_0029",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que líder político de Braga (nascido em 1978), Rui Rocha («Rui Rocha»), gestor e jurista de recursos humanos, foi eleito Presidente da Comissão Executiva da Iniciativa Liberal na Convenção Nacional de janeiro de 2023?",
+    "opcoes": [
+      "Rui Rocha (Iniciativa Liberal)",
+      "João Cotrim de Figueiredo",
+      "Carlos Guimarães Pinto",
+      "Bernardo Blanco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Rui Rocha sucedeu a João Cotrim de Figueiredo consolidando a representação liberal no parlamento.",
+    "fonte": "Iniciativa Liberal / Assembleia da República",
+    "factClusterId": "fc_pol_par_ruirocha_il_2023_01"
+  },
+  {
+    "id": "POL_PAR_0030",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que célebre e jovem economista de Amarante (nascido em 1978), Carlos Guimarães Pinto («Carlos Guimarães Pinto»), foi o Presidente da Iniciativa Liberal (2018-2019) responsável pelo manifesto fundador do partido e eleito deputado pelo círculo do Porto?",
+    "opcoes": [
+      "Rui Rocha",
+      "Carlos Guimarães Pinto",
+      "Rodrigo Saraiva",
+      "Mário Amorim Lopes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carlos Guimarães Pinto é doutorado em Economia e coautor de vários livros de análise sobre políticas públicas e fiscalidade.",
+    "fonte": "Iniciativa Liberal / Assembleia da República",
+    "factClusterId": "fc_pol_par_carlosguimaraespinto_il_01"
+  },
+  {
+    "id": "POL_PAR_0031",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que dirigente político de Joane (Vila Nova de Famalicão, nascido em 1966), Nuno Melo («Nuno Melo»), advogado e eurodeputado durante 15 anos, foi eleito Presidente do CDS — Partido Popular no Congresso de Guimarães em 2022 e nomeado Ministro da Defesa Nacional em 2024?",
+    "opcoes": [
+      "Francisco Rodrigues dos Santos",
+      "Paulo Portas",
+      "Nuno Melo (Presidente do CDS-PP)",
+      "Assunção Cristas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nuno Melo liderou o regresso do CDS-PP ao parlamento e ao governo através da reedição da Aliança Democrática (AD).",
+    "fonte": "CDS-PP / Ministério da Defesa Nacional",
+    "factClusterId": "fc_pol_par_nunomelo_cds_01"
+  },
+  {
+    "id": "POL_PAR_0032",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que carismático líder político e jornalista de Lisboa (nascido em 1962), Paulo Portas («Paulo Portas»), liderou o CDS-PP durante 16 anos em dois períodos (1998-2005 e 2007-2016), sendo Ministro de Estado e da Defesa e Vice-Primeiro-Ministro de Portugal?",
+    "opcoes": [
+      "Manuel Monteiro",
+      "Freitas do Amaral",
+      "Adriano Moreira",
+      "Paulo Portas (Líder do CDS-PP)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Paulo Portas celebrizou o termo 'Partido do Táxi' para ridicularizar a redução parlamentar do CDS antes de o transformar num partido de governo.",
+    "fonte": "CDS-PP / Assembleia da República",
+    "factClusterId": "fc_pol_par_pauloportas_cds_01"
+  },
+  {
+    "id": "POL_PAR_0033",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que destacada jurista e política de Luanda e Lisboa (nascida em 1974), Assunção Cristas («Assunção Cristas»), foi Ministra da Agricultura, do Mar, do Ambiente e do Ordenamento do Território (2011-2015) e a primeira mulher a liderar o CDS-PP (2016-2020)?",
+    "opcoes": [
+      "Assunção Cristas",
+      "Cecília Meireles",
+      "Teresa Caeiro",
+      "Maria de Belém Roseira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Assunção Cristas foi também candidata à Câmara Municipal de Lisboa em 2017 alcançando o segundo lugar com mais de 20% dos votos.",
+    "fonte": "CDS-PP / Assembleia da República",
+    "factClusterId": "fc_pol_par_assuncaocristas_cds_01"
+  },
+  {
+    "id": "POL_PAR_0034",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico militante e jurista do Porto (1943-1980), Adelino Amaro da Costa («Amaro da Costa»), cofundador do CDS e brilhante Ministro da Defesa Nacional no governo de Sá Carneiro, faleceu tragicamente no Desastre de Camarate a 4 de dezembro de 1980?",
+    "opcoes": [
+      "Basílio Horta",
+      "Adelino Amaro da Costa",
+      "Rui Pena",
+      "Lucas Pires"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Amaro da Costa foi o primeiro civil a assumir o Ministério da Defesa Nacional após o 25 de Abril de 1974.",
+    "fonte": "Instituto Adelino Amaro da Costa / Assembleia da República",
+    "factClusterId": "fc_pol_par_amarodacosta_1980_01"
+  },
+  {
+    "id": "POL_PAR_0035",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante e histórico órgão de topo deliberativo entre congressos no Partido Socialista («Comissão Nacional do PS»), é o responsável pela aprovação das listas de deputados e pelas decisões estratégicas de coligação governativa?",
+    "opcoes": [
+      "Conselho Nacional",
+      "Comité Central",
+      "Comissão Nacional do PS",
+      "Mesa Nacional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Comissão Nacional do PS é composta por centenas de delegados eleitos em congresso e pelos líderes das federações distritais.",
+    "fonte": "Estatutos do Partido Socialista",
+    "factClusterId": "fc_pol_par_comissaonacional_ps_01"
+  },
+  {
+    "id": "POL_PAR_0036",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante órgão máximo deliberativo entre congressos no Partido Social Democrata («Conselho Nacional do PSD»), aprova o programa eleitoral e as listas de candidatos a deputados sob proposta da Comissão Política Nacional?",
+    "opcoes": [
+      "Comissão Nacional",
+      "Mesa Nacional",
+      "Diretório Nacional",
+      "Conselho Nacional do PSD"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Conselho Nacional do PSD reúne regularmente os conselheiros nacionais, presidentes de câmara e deputados do partido.",
+    "fonte": "Estatutos do Partido Social Democrata",
+    "factClusterId": "fc_pol_par_conselhonacional_psd_01"
+  },
+  {
+    "id": "POL_PAR_0037",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que órgão supremo de direção política do Partido Comunista Português («Comité Central do PCP»), eleito em Congresso com mais de 100 membros, é o responsável pela eleição do Secretário-Geral e da Comissão Política?",
+    "opcoes": [
+      "Comité Central do PCP",
+      "Conselho Nacional",
+      "Comissão Diretiva",
+      "Secretariado Geral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Comité Central do PCP funciona segundo o princípio do centralismo democrático leninista.",
+    "fonte": "Estatutos do Partido Comunista Português",
+    "factClusterId": "fc_pol_par_comitecentral_pcp_01"
+  },
+  {
+    "id": "POL_PAR_0038",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que estrutura máxima de coordenação política entre convenções no Bloco de Esquerda («Mesa Nacional do Bloco de Esquerda»), integra 80 membros e é a responsável pela escolha do Secretariado e aprovação de moções políticas?",
+    "opcoes": [
+      "Comité Central",
+      "Mesa Nacional do Bloco de Esquerda",
+      "Conselho Nacional",
+      "Comissão Executiva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Mesa Nacional do BE reúne representações proporcionais das várias moções aprovadas nas Convenções Nacionais.",
+    "fonte": "Estatutos do Bloco de Esquerda",
+    "factClusterId": "fc_pol_par_mesanacional_be_01"
+  },
+  {
+    "id": "POL_PAR_0039",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórica e emblemática ala da juventude partidária social-democrata («JSD» — Juventude Social Democrata), fundada em 1974, foi o berço político de futuros Primeiros-Ministros como Pedro Passos Coelho e Luís Montenegro?",
+    "opcoes": [
+      "JS (Juventude Socialista)",
+      "JP (Juventude Popular)",
+      "JSD (Juventude Social Democrata)",
+      "JCP (Juventude Comunista Portuguesa)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A JSD teve como primeiro Secretário-Geral Arlindo de Carvalho e realiza congressos bienais de grande impacto político.",
+    "fonte": "JSD / PSD",
+    "factClusterId": "fc_pol_par_jsd_passos_montenegro_01"
+  },
+  {
+    "id": "POL_PAR_0040",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórica juventude partidária socialista fundada em 1974 («JS» — Juventude Socialista), foi a escola de formação de líderes partidários e governantes como António José Seguro, Pedro Nuno Santos e João Torres?",
+    "opcoes": [
+      "JSD",
+      "JP",
+      "JCP",
+      "JS (Juventude Socialista)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A JS foi pioneira no debate da igualdade de género, legalização da IVG, despenalização das drogas e casamento entre pessoas do mesmo sexo.",
+    "fonte": "Juventude Socialista / PS",
+    "factClusterId": "fc_pol_par_juventudesocialista_01"
+  },
+  {
+    "id": "POL_PAR_0041",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórica juventude partidária comunista («JCP» — Juventude Comunista Portuguesa), fundada a 10 de novembro de 1979 da fusão da UEC e da UJC, organiza a emblemática Cidade da Juventude na Festa do Avante!?",
+    "opcoes": [
+      "JCP (Juventude Comunista Portuguesa)",
+      "JS",
+      "JSD",
+      "JP"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A JCP é membro da Federação Mundial da Juventude Democrática (FMJD) e atua no movimento associativo estudantil e operário.",
+    "fonte": "JCP / PCP",
+    "factClusterId": "fc_pol_par_jcp_1979_01"
+  },
+  {
+    "id": "POL_PAR_0042",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que famoso jornal semanário oficial do Partido Comunista Português («Avante!»), fundado a 15 de fevereiro de 1931 por Bento Gonçalves e publicado ininterruptamente na clandestinidade e na liberdade, é o órgão central de imprensa do partido?",
+    "opcoes": [
+      "Povo Livre",
+      "Avante! (Jornal Oficial do PCP)",
+      "Ação Socialista",
+      "Folha Nacional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 'Avante!' foi impresso durante a ditadura em tipografias secretas subterrâneas distribuído por estafetas da clandestinidade.",
+    "fonte": "Editorial Avante! / Arquivo Histórico do PCP",
+    "factClusterId": "fc_pol_par_jornalavante_1931_01"
+  },
+  {
+    "id": "POL_PAR_0043",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórico jornal semanal fundado em 1974 por Francisco Sá Carneiro e Francisco Pinto Balsemão («Povo Livre»), é o órgão oficial de imprensa doutrinária do Partido Social Democrata (PSD)?",
+    "opcoes": [
+      "Avante!",
+      "Ação Socialista",
+      "Povo Livre (Jornal Oficial do PSD)",
+      "Democracia do Centro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O 'Povo Livre' serviu de plataforma política para os grandes combates ideológicos do Verão Quente de 1975.",
+    "fonte": "PSD / Arquivo Povo Livre",
+    "factClusterId": "fc_pol_par_jornalpovolivre_1974_01"
+  },
+  {
+    "id": "POL_PAR_0044",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que histórica publicação periódica e jornal oficial do Partido Socialista («Ação Socialista»), fundado em 1974, difunde os artigos de opinião e moções de orientação dos socialistas portugueses?",
+    "opcoes": [
+      "Povo Livre",
+      "Avante!",
+      "Portugal Socialista",
+      "Ação Socialista (Jornal Oficial do PS)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O jornal sucedeu ao boletim 'Portugal Socialista' editado na clandestinidade em Paris e Roma nos anos 1960/70.",
+    "fonte": "Partido Socialista / Ação Socialista",
+    "factClusterId": "fc_pol_par_acaosocialista_01"
+  },
+  {
+    "id": "POL_PAR_0045",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que grande festival político, cultural e musical realizado anualmente no primeiro fim de semana de setembro na Quinta da Atalaia em Amora (Seixal) («Festa do Avante!»), é organizado desde 1976 pelo:",
+    "opcoes": [
+      "Partido Comunista Português (PCP)",
+      "Bloco de Esquerda",
+      "Partido Socialista",
+      "Os Verdes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Festa do Avante! atrai centenas de milhares de visitantes com palcos de música, gastronomia regional de todos os distritos e exposições culturais.",
+    "fonte": "PCP / Festa do Avante!",
+    "factClusterId": "fc_pol_par_festadoavante_01"
+  },
+  {
+    "id": "POL_PAR_0046",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante e histórico partido político europeu no Parlamento Europeu («Partido Socialista Europeu» / S&D — Socialistas & Democratas), integra como membro pleno e fundador o:",
+    "opcoes": [
+      "Partido Social Democrata (PSD)",
+      "Partido Socialista (PS)",
+      "Bloco de Esquerda",
+      "PCP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Soares, António Guterres e Sergei Stanishev foram figuras cimeiras do Partido Socialista Europeu.",
+    "fonte": "Party of European Socialists (PES) / S&D",
+    "factClusterId": "fc_pol_par_ps_pseuropeu_01"
+  },
+  {
+    "id": "POL_PAR_0047",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que grande família política europeia de centro-direita no Parlamento Europeu («Partido Popular Europeu» / PPE — EPP), integra as delegações do Partido Social Democrata (PSD) e do:",
+    "opcoes": [
+      "Iniciativa Liberal",
+      "Chega",
+      "CDS — Partido Popular (CDS-PP)",
+      "PAN"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O PPE é o maior grupo parlamentar no Parlamento Europeu e o PSD e o CDS-PP são membros históricos da bancada.",
+    "fonte": "European People's Party (EPP) / PSD / CDS-PP",
+    "factClusterId": "fc_pol_par_psd_cds_ppe_01"
+  },
+  {
+    "id": "POL_PAR_0048",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que família política europeia liberal e centrista no Parlamento Europeu («Renew Europe» / ALDE Party), integra como membro oficial a delegação da:",
+    "opcoes": [
+      "CDS-PP",
+      "LIVRE",
+      "PAN",
+      "Iniciativa Liberal (IL)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nas eleições europeias de 2024, a Iniciativa Liberal elegeu João Cotrim de Figueiredo e Ana Martins para o grupo Renew Europe.",
+    "fonte": "Renew Europe / ALDE Party / Iniciativa Liberal",
+    "factClusterId": "fc_pol_par_il_reneweurope_01"
+  },
+  {
+    "id": "POL_PAR_0049",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que importante e histórico líder político de Viseu e Coimbra (nascido em 1952), António José Seguro («António José Seguro»), foi o Secretário-Geral do Partido Socialista entre 2011 e 2014, tendo promovido as primeiras primárias abertas do partido?",
+    "opcoes": [
+      "António José Seguro",
+      "José Sócrates",
+      "Ferro Rodrigues",
+      "António Costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António José Seguro venceu as eleições autárquicas de 2013 e europeias de 2014 pelo PS antes das primárias de setembro de 2014.",
+    "fonte": "Partido Socialista / Assembleia da República",
+    "factClusterId": "fc_pol_par_antoniojoseseguro_ps_01"
+  },
+  {
+    "id": "POL_PAR_0050",
+    "tema": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "pergunta": "Que influente líder político e advogado de São João da Madeira e Espinho (nascido em 1977), Pedro Nuno Santos («Pedro Nuno Santos»), antigo Ministro das Infraestruturas e da Habitação e líder parlamentar da JS, foi eleito Secretário-Geral do PS nas eleições diretas de:",
+    "opcoes": [
+      "Outubro de 2019",
+      "Janeiro de 2022",
+      "Dezembro de 2023 (sucedendo a António Costa)",
+      "Maio de 2024"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nuno Santos venceu José Luís Carneiro nas eleições diretas do PS de dezembro de 2023 liderando os socialistas nas legislativas de 2024.",
+    "fonte": "Partido Socialista / Diário da República / CNE",
+    "factClusterId": "fc_pol_par_pedronunosantos_ps_2023_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GEO_DIS_0001",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o maior distrito de Portugal em extensão territorial/superfície, cobrindo uma área de 10.225 km² (correspondendo a mais de 11% de todo o território continental português)?",
+    "opcoes": [
+      "Distrito de Beja (10.225 km²)",
+      "Distrito de Évora (7.393 km²)",
+      "Distrito de Santarém (6.747 km²)",
+      "Distrito de Bragança (6.608 km²)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Beja abrange todo o Baixo Alentejo e a orla costeira entre Sines e Odemira sendo o maior distrito nacional.",
+    "fonte": "Instituto Nacional de Estatística (INE) / DGT",
+    "factClusterId": "fc_geo_dis_maiordistrito_beja_01"
+  },
+  {
+    "id": "GEO_DIS_0002",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o menor distrito de Portugal continental em área territorial, cobrindo apenas 2.255 km² no extremo noroeste do país (Alto Minho)?",
+    "opcoes": [
+      "Distrito do Porto (2.395 km²)",
+      "Distrito de Viana do Castelo (2.255 km²)",
+      "Distrito de Braga (2.673 km²)",
+      "Distrito de Lisboa (2.761 km²)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Viana do Castelo tem a menor área territorial entre os 18 distritos de Portugal continental, integrando 10 concelhos.",
+    "fonte": "INE / Carta Administrativa Oficial de Portugal (CAOP)",
+    "factClusterId": "fc_geo_dis_menordistrito_viana_01"
+  },
+  {
+    "id": "GEO_DIS_0003",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o distrito de Portugal que possui o maior número de municípios/concelhos de todo o país, totalizando exatamente 24 municípios distribuídos entre o Dão-Lafões e o Douro Sul?",
+    "opcoes": [
+      "Distrito de Santarém (21 concelhos)",
+      "Distrito de Aveiro (19 concelhos)",
+      "Distrito de Viseu (24 concelhos)",
+      "Distrito do Porto (18 concelhos)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Viseu lidera a tabela nacional com 24 concelhos (desde Lamego e Armamar a norte até Santa Comba Dão e Mortágua a sul).",
+    "fonte": "INE / Associação Nacional de Municípios Portugueses (ANMP)",
+    "factClusterId": "fc_geo_dis_viseu_24concelhos_01"
+  },
+  {
+    "id": "GEO_DIS_0004",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o distrito de Portugal continental que possui o menor número de concelhos/municípios, contando com apenas 10 municípios (como Arcos de Valdevez, Ponte de Lima, Melgaço e Monção)?",
+    "opcoes": [
+      "Distrito de Castelo Branco (11 concelhos)",
+      "Distrito de Bragança (12 concelhos)",
+      "Distrito de Setúbal (13 concelhos)",
+      "Distrito de Viana do Castelo (10 concelhos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Viana do Castelo é o distrito continental com menor número de municípios (10 concelhos no Alto Minho).",
+    "fonte": "DGT / ANMP",
+    "factClusterId": "fc_geo_dis_viana_10concelhos_01"
+  },
+  {
+    "id": "GEO_DIS_0005",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o distrito de Portugal continental menos populoso e com menor densidade populacional, contando com cerca de 105.000 habitantes no Alto Alentejo?",
+    "opcoes": [
+      "Distrito de Portalegre",
+      "Distrito de Beja",
+      "Distrito de Bragança",
+      "Distrito da Guarda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portalegre é o distrito menos habitado de Portugal continental, abrangendo 15 concelhos como Elvas, Ponte de Sor e Castelo de Vide.",
+    "fonte": "INE (Censos 2021) / Pordata",
+    "factClusterId": "fc_geo_dis_portalegre_populacao_01"
+  },
+  {
+    "id": "GEO_DIS_0006",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o distrito mais populoso de Portugal, concentrando mais de 2,2 milhões de habitantes em 16 municípios na Área Metropolitana e Região Oeste?",
+    "opcoes": [
+      "Distrito do Porto (1,8 milhões de habitantes)",
+      "Distrito de Lisboa (mais de 2,2 milhões de habitantes)",
+      "Distrito de Braga",
+      "Distrito de Setúbal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Lisboa é o mais povoado do país englobando concelhos densamente habitados como Sintra, Cascais, Loures, Amadora e Lisboa.",
+    "fonte": "INE (Censos 2021)",
+    "factClusterId": "fc_geo_dis_lisboa_populoso_01"
+  },
+  {
+    "id": "GEO_DIS_0007",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Em que ano foram criados oficialmente os 18 distritos administrativos de Portugal através do Decreto de 25 de abril de 1835 no âmbito da Reforma Administrativa Liberal do ministro Mouzinho da Silveira e Passos Manuel?",
+    "opcoes": [
+      "Ano de 1910",
+      "Ano de 1974",
+      "Ano de 1835 (Reforma Administrativa Liberal)",
+      "Ano de 1820"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A divisão distrital de 1835 substituiu as antigas províncias medievais e comarcas criando o cargo de Governador Civil.",
+    "fonte": "Dicionário de História de Portugal / Colecção Oficial de Legislação Portuguesa",
+    "factClusterId": "fc_geo_dis_criacao_1835_01"
+  },
+  {
+    "id": "GEO_DIS_0008",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito da Beira Alta acolhe o ponto de maior altitude de Portugal continental no planalto da Torre (1.993 metros de altitude na Serra da Estrela) e as nascentes dos rios Mondego e Zêzere?",
+    "opcoes": [
+      "Distrito de Castelo Branco",
+      "Distrito de Viseu",
+      "Distrito de Coimbra",
+      "Distrito da Guarda"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cidade da Guarda é também a cidade mais alta de Portugal situada a 1.056 metros de altitude.",
+    "fonte": "Instituto Geográfico do Exército / ICNF",
+    "factClusterId": "fc_geo_dis_guarda_torre_01"
+  },
+  {
+    "id": "GEO_DIS_0009",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito costeiro da Beira Litoral é mundialmente famoso pela sua laguna interior salgada («Ria de Aveiro»), com canais urbanos navegados pelos tradicionais moliceiros e salinas centenárias?",
+    "opcoes": [
+      "Distrito de Aveiro",
+      "Distrito de Coimbra",
+      "Distrito de Leiria",
+      "Distrito do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Aveiro estende-se desde Espinho e Santa Maria da Feira a norte até Anadia e Mealhada a sul.",
+    "fonte": "Turismo do Centro / Município de Aveiro",
+    "factClusterId": "fc_geo_dis_aveiro_ria_01"
+  },
+  {
+    "id": "GEO_DIS_0010",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito transmontano oriental, rodeado por Espanha a norte e a leste ao longo do rio Douro e rio Maçãs, acolhe o Parque Natural de Montesinho e a comunidade linguística de língua mirandesa?",
+    "opcoes": [
+      "Distrito de Vila Real",
+      "Distrito de Bragança",
+      "Distrito da Guarda",
+      "Distrito de Viseu"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bragança integra 12 municípios incluindo Miranda do Douro, Mogadouro, Vimioso, Torre de Moncorvo e Vinhais.",
+    "fonte": "DGT / Município de Bragança",
+    "factClusterId": "fc_geo_dis_braganca_01"
+  },
+  {
+    "id": "GEO_DIS_0011",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito do noroeste de Portugal («Coração do Minho»), banhado pelos rios Cávado e Ave, acolhe cidades históricas de enorme importância patrimonial como Guimarães («O Berço da Nação») e Braga («A Cidade dos Arcebispos»)?",
+    "opcoes": [
+      "Distrito de Viana do Castelo",
+      "Distrito do Porto",
+      "Distrito de Braga",
+      "Distrito de Vila Real"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Braga integra 14 concelhos e é um dos principais polos industriais, tecnológicos e universitários do país.",
+    "fonte": "Governo Civil de Braga / ANMP",
+    "factClusterId": "fc_geo_dis_braga_minho_01"
+  },
+  {
+    "id": "GEO_DIS_0012",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito transmontano e duriense é atravessado pelo rio Corgo e acolhe o coração da região demarcada do Douro Vinhateiro (Peso da Régua), além das serras do Marão, Alvão e Barroso?",
+    "opcoes": [
+      "Distrito de Bragança",
+      "Distrito de Viseu",
+      "Distrito da Guarda",
+      "Distrito de Vila Real"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Vila Real integra 14 concelhos como Chaves, Valpaços, Montalegre, Peso da Régua e Alijó.",
+    "fonte": "Turismo do Porto e Norte / Município de Vila Real",
+    "factClusterId": "fc_geo_dis_vilareal_douro_01"
+  },
+  {
+    "id": "GEO_DIS_0013",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito ribatejano é atravessado longitudinalmente pelo rio Tejo, englobando as férteis planícies agrícolas da Lezíria do Tejo e monumentos como o Convento de Cristo em Tomar e o Castelo de Almourol?",
+    "opcoes": [
+      "Distrito de Santarém",
+      "Distrito de Portalegre",
+      "Distrito de Leiria",
+      "Distrito de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Santarém possui 21 concelhos divididos entre a Lezíria do Tejo (Ribatejo) e o Médio Tejo.",
+    "fonte": "Comunidade Intermunicipal da Lezíria do Tejo / CIM Médio Tejo",
+    "factClusterId": "fc_geo_dis_santarem_ribatejo_01"
+  },
+  {
+    "id": "GEO_DIS_0014",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito do litoral centro acolhe três dos mais monumentais monumentos classificados como Património Mundial da UNESCO em Portugal: o Mosteiro de Alcobaça, o Mosteiro da Batalha e o Santuário de Fátima (em Ourém)?",
+    "opcoes": [
+      "Distrito de Coimbra",
+      "Distrito de Leiria",
+      "Distrito de Santarém",
+      "Distrito de Aveiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Leiria estende-se pelo Pinhal Litoral e Oeste, integrando concelhos como Nazaré, Peniche, Caldas da Rainha e Pombal.",
+    "fonte": "Turismo do Centro / CIM Região de Leiria",
+    "factClusterId": "fc_geo_dis_leiria_unesco_01"
+  },
+  {
+    "id": "GEO_DIS_0015",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito da Beira Baixa, banhado pelo rio Tejo, Zêzere e Ponsul, faz fronteira com Espanha a leste e acolhe a histórica região de Idanha-a-Velha e a Aldeia Mais Portuguesa de Portugal (Monsanto)?",
+    "opcoes": [
+      "Distrito de Portalegre",
+      "Distrito da Guarda",
+      "Distrito de Castelo Branco",
+      "Distrito de Santarém"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Castelo Branco integra 11 municípios incluindo Covilhã, Fundão, Belmonte, Sertã e Penamacor.",
+    "fonte": "CIM Beira Baixa / Município de Castelo Branco",
+    "factClusterId": "fc_geo_dis_castelobranco_01"
+  },
+  {
+    "id": "GEO_DIS_0016",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito do Alentejo Central acolhe o maior lago artificial da Europa Ocidental (o Grande Lago do Alqueva) no rio Guadiana e a cidade-museu de Évora (Património Mundial da UNESCO)?",
+    "opcoes": [
+      "Distrito de Beja",
+      "Distrito de Portalegre",
+      "Distrito de Setúbal",
+      "Distrito de Évora"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Évora abrange 14 concelhos como Estremoz, Reguengos de Monsaraz, Montemor-o-Novo, Vila Viçosa e Arraiolos.",
+    "fonte": "Turismo do Alentejo / CIMAC Évora",
+    "factClusterId": "fc_geo_dis_evora_alqueva_01"
+  },
+  {
+    "id": "GEO_DIS_0017",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito costeiro do sul estende-se pela Península de Setúbal e pelo Alentejo Litoral, banhado pelo estuário do Tejo e pelo estuário do Sado e abraçado pelo Parque Natural da Arrábida?",
+    "opcoes": [
+      "Distrito de Setúbal",
+      "Distrito de Lisboa",
+      "Distrito de Beja",
+      "Distrito de Évora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Setúbal integra 13 concelhos divididos entre a Península de Setúbal (Almada, Seixal, Barreiro, Palmela) e o Alentejo Litoral (Sines, Alcácer do Sal, Grândola, Santiago do Cacém).",
+    "fonte": "Governo Civil de Setúbal / ANMP",
+    "factClusterId": "fc_geo_dis_setubal_sado_01"
+  },
+  {
+    "id": "GEO_DIS_0018",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito ocupa a totalidade da província histórica do Algarve no extremo sul de Portugal continental, integrando 16 concelhos limitados a norte pelo Alentejo pelas serras de Monchique e Caldeirão e a este pelo rio Guadiana?",
+    "opcoes": [
+      "Distrito de Beja",
+      "Distrito de Faro (Algarve)",
+      "Distrito de Portimão",
+      "Distrito de Lagos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Faro é o único distrito que coincide integralmente com uma província tradicional e com uma Comunidade Intermunicipal (AMAL).",
+    "fonte": "Região de Turismo do Algarve / AMAL",
+    "factClusterId": "fc_geo_dis_faro_algarve_01"
+  },
+  {
+    "id": "GEO_DIS_0019",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que distrito do litoral norte e Área Metropolitana do Porto, banhado pela foz do rio Douro no Oceano Atlântico, acolhe o segundo maior polo económico e universitário de Portugal e 18 concelhos de grande dinamismo?",
+    "opcoes": [
+      "Distrito de Braga",
+      "Distrito de Aveiro",
+      "Distrito do Porto",
+      "Distrito de Viana do Castelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Distrito do Porto inclui Vila Nova de Gaia (o concelho mais populoso do Norte), Matosinhos, Maia, Gondomar, Póvoa de Varzim, Vila do Conde, Amarante e Felgueiras.",
+    "fonte": "Área Metropolitana do Porto / INE",
+    "factClusterId": "fc_geo_dis_porto_distrito_01"
+  },
+  {
+    "id": "GEO_DIS_0020",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que importante distrito do Centro de Portugal, banhado pelo rio Mondego e o rio Ceira, acolhe a cidade universitária de Coimbra (com a universidade mais antiga do país classificada pela UNESCO) e a estância balnear da Figueira da Foz?",
+    "opcoes": [
+      "Distrito de Leiria",
+      "Distrito de Aveiro",
+      "Distrito de Viseu",
+      "Distrito de Coimbra"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Distrito de Coimbra integra 17 concelhos como Cantanhede, Montemor-o-Velho, Lousã, Arganil, Oliveira do Hospital e Penacova.",
+    "fonte": "CIM Região de Coimbra / Universidade de Coimbra",
+    "factClusterId": "fc_geo_dis_coimbra_mondego_01"
+  },
+  {
+    "id": "GEO_DIS_0021",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o único distrito de Portugal continental que faz fronteira simultaneamente com o Oceano Atlântico a oeste e com a fronteira de Espanha a leste?",
+    "opcoes": [
+      "Distrito de Faro",
+      "Distrito de Beja",
+      "Distrito de Viana do Castelo",
+      "Distrito de Setúbal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Faro tem costa atlântica a sul e a oeste (Cabo de São Vicente) e faz fronteira terrestre e fluvial com Espanha pelo rio Guadiana a leste (Vila Real de Santo António).",
+    "fonte": "Instituto Geográfico do Exército / DGT",
+    "factClusterId": "fc_geo_dis_faro_mar_espanha_01"
+  },
+  {
+    "id": "GEO_DIS_0022",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o único município de Portugal continental que pertence territorialmente ao Distrito de Coimbra mas está isolado como um enclave costeiro rodeado a norte por Aveiro e a sul por Leiria?",
+    "opcoes": [
+      "Cantanhede",
+      "Município da Figueira da Foz / Mira",
+      "Montemor-o-Velho",
+      "Condeixa-a-Nova"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O concelho de Mira no distrito de Coimbra tem uma faixa costeira que separa a Ria de Aveiro do litoral norte de Cantanhede e Figueira.",
+    "fonte": "CAOP / DGT",
+    "factClusterId": "fc_geo_dis_mira_coimbra_01"
+  },
+  {
+    "id": "GEO_DIS_0023",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que histórico arquipélago português no Atlântico Norte é dividido geograficamente em três grupos de ilhas (Oriental, Central e Ocidental) com um total de 9 ilhas vulcânicas habitadas e 19 concelhos?",
+    "opcoes": [
+      "Região Autónoma da Madeira",
+      "Arquipélago das Berlengas",
+      "Região Autónoma dos Açores",
+      "Ilhas Selvagens"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Açores foram outrora divididos em 3 distritos autónomos (Ponta Delgada, Angra do Heroísmo e Horta) antes do Estatuto Político-Administrativo de 1976.",
+    "fonte": "Governo Regional dos Açores / Estatuto de Autonomia",
+    "factClusterId": "fc_geo_dis_acores_9ilhas_01"
+  },
+  {
+    "id": "GEO_DIS_0024",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Antes da criação das Regiões Autónomas pela Constituição de 1976, quantos Distritos Autónomos Insulares existiam no Arquipélago da Madeira?",
+    "opcoes": [
+      "2 Distritos",
+      "3 Distritos",
+      "4 Distritos",
+      "Exatamente 1 Distrito Autónomo (Distrito Autónomo do Funchal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Distrito Autónomo do Funchal abrangia a Ilha da Madeira e a Ilha de Porto Santo.",
+    "fonte": "Dicionário de História de Portugal / Governo Regional da Madeira",
+    "factClusterId": "fc_geo_dis_funchal_distritoautonomo_01"
+  },
+  {
+    "id": "GEO_DIS_0025",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Antes da autonomia constitucional de 1976, quantos Distritos Autónomos existiam no Arquipélago dos Açores (com sedes em Ponta Delgada, Angra do Heroísmo e Horta)?",
+    "opcoes": [
+      "Exatamente 3 Distritos Autónomos",
+      "1 Distrito",
+      "9 Distritos",
+      "4 Distritos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Eram o Distrito de Ponta Delgada (São Miguel e Santa Maria), Distrito de Angra do Heroísmo (Terceira, São Jorge e Graciosa) e Distrito da Horta (Faial, Pico, Flores e Corvo).",
+    "fonte": "Enciclopédia Açoriana / Governo dos Açores",
+    "factClusterId": "fc_geo_dis_acores_3distritos_01"
+  },
+  {
+    "id": "GEO_DIS_0026",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que concelho do Distrito de Beja é o MAIOR concelho de Portugal em extensão territorial com 1.720 km² de área (maior do que várias ilhas e distritos inteiros)?",
+    "opcoes": [
+      "Mértola",
+      "Odemira (1.720 km²)",
+      "Serpa",
+      "Castro Verde"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Odemira ocupa todo o litoral sudoeste alentejano sendo o município mais extenso de todo o território português.",
+    "fonte": "INE / Município de Odemira / CAOP",
+    "factClusterId": "fc_geo_dis_odemira_maiorconcelho_01"
+  },
+  {
+    "id": "GEO_DIS_0027",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o MENOR concelho/município de Portugal em área territorial, situado no Distrito do Porto com apenas cerca de 8 km² de extensão?",
+    "opcoes": [
+      "Porto",
+      "Matosinhos",
+      "São João da Madeira (no distrito de Aveiro) ou Entroncamento / Corvo",
+      "Amadora"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "São João da Madeira (no distrito de Aveiro) é o menor município de Portugal continental com cerca de 7,94 km².",
+    "fonte": "INE / CAOP",
+    "factClusterId": "fc_geo_dis_menorconcelho_saojoaodamadeira_01"
+  },
+  {
+    "id": "GEO_DIS_0028",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que histórico cabo rochoso no concelho de Sintra (Distrito de Lisboa), descrito por Luís de Camões n'Os Lusíadas como o local «Onde a terra acaba e o mar começa», é o ponto mais ocidental de todo o continente europeu?",
+    "opcoes": [
+      "Cabo Espichel",
+      "Cabo de São Vicente",
+      "Cabo Carvoeiro",
+      "Cabo da Roca (38º 47' N, 9º 30' W)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Cabo da Roca eleva-se a 140 metros sobre o Atlântico na falésia mais ocidental da Eurásia continental.",
+    "fonte": "Câmara Municipal de Sintra / ICNF",
+    "factClusterId": "fc_geo_dis_cabodaroca_01"
+  },
+  {
+    "id": "GEO_DIS_0029",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que emblemático cabo rochoso no concelho de Vila do Bispo (Distrito de Faro), no sudoeste algarvio, com o seu farol de grande alcance, é o ponto mais a sudoeste de todo o continente europeu?",
+    "opcoes": [
+      "Cabo de São Vicente (Sagres)",
+      "Cabo de Santa Maria",
+      "Cabo da Roca",
+      "Cabo Raso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cabo de São Vicente era considerado o fim do mundo pelos romanos (Promontorium Sacrum) associado ao culto de São Vicente.",
+    "fonte": "Autoridade Marítima Nacional / Faróis de Portugal",
+    "factClusterId": "fc_geo_dis_cabodesaovicente_01"
+  },
+  {
+    "id": "GEO_DIS_0030",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o ponto mais a sul de todo o território continental português, situado numa ilha barreira da Ria Formosa no concelho de Faro (Distrito de Faro)?",
+    "opcoes": [
+      "Ponta de Sagres",
+      "Cabo de Santa Maria (Ilha da Barreta / Ilha Deserta)",
+      "Ponta da Piedade",
+      "Cabo Carvoeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cabo de Santa Maria situa-se a 36° 57' N na Ilha Deserta da Ria Formosa em Faro.",
+    "fonte": "Instituto Hidrográfico / ICNF",
+    "factClusterId": "fc_geo_dis_cabodesantamaria_01"
+  },
+  {
+    "id": "GEO_DIS_0031",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o ponto mais a norte de todo o território de Portugal continental, situado na freguesia de Cevide no concelho de Melgaço (Distrito de Viana do Castelo), na confluência do rio Trancoso com o rio Minho?",
+    "opcoes": [
+      "Monção",
+      "Valença",
+      "Cevide (Melgaço, Distrito de Viana do Castelo)",
+      "Montalegre"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cevide é o marco n.º 1 da fronteira de Portugal, célebre pela frase: 'Portugal começa em Cevide!'.",
+    "fonte": "Município de Melgaço / Instituto Geográfico do Exército",
+    "factClusterId": "fc_geo_dis_cevide_pontomaisanorte_01"
+  },
+  {
+    "id": "GEO_DIS_0032",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o ponto mais a leste / oriental de todo o território português, situado na curva do rio Douro na aldeia de Paradela no concelho de Miranda do Douro (Distrito de Bragança)?",
+    "opcoes": [
+      "Rio de Onor",
+      "Almeida",
+      "Barca d'Alva",
+      "Paradela (Miranda do Douro, Distrito de Bragança)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Paradela é o ponto mais oriental de Portugal situado a 6° 11' W de longitude.",
+    "fonte": "Município de Miranda do Douro / IGEo",
+    "factClusterId": "fc_geo_dis_paradela_pontomaisaleste_01"
+  },
+  {
+    "id": "GEO_DIS_0033",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que importante e histórico rio internacional nasce na serra de Albarracín em Espanha e desagua num grandioso estuário no Oceano Atlântico em Lisboa («Rio Tejo»), sendo o rio mais extenso de toda a Península Ibérica com 1.007 km?",
+    "opcoes": [
+      "Rio Tejo (1.007 km)",
+      "Rio Douro (897 km)",
+      "Rio Guadiana (810 km)",
+      "Rio Minho (340 km)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O rio Tejo percorre cerca de 275 km em território português fertilizando as lezírias do Ribatejo até desaguar no Mar da Palha.",
+    "fonte": "Agência Portuguesa do Ambiente (APA) / Atlas da Água",
+    "factClusterId": "fc_geo_dis_riotejo_maioribérico_01"
+  },
+  {
+    "id": "GEO_DIS_0034",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o maior rio inteiramente português (que nasce e desagua integralmente dentro do território de Portugal continental sem cruzar Espanha)?",
+    "opcoes": [
+      "Rio Sado (180 km)",
+      "Rio Mondego (258 km de extensão)",
+      "Rio Vouga (148 km)",
+      "Rio Zêzere (242 km)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O rio Mondego nasce na Serra da Estrela a 1.425m de altitude e desagua na Figueira da Foz após percorrer 258 km.",
+    "fonte": "APA / Atlas da Água / Universidade de Coimbra",
+    "factClusterId": "fc_geo_dis_riomondego_maiorportugues_01"
+  },
+  {
+    "id": "GEO_DIS_0035",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o segundo maior rio inteiramente português, que nasce no circo glaciar do Cântaro Magro na Serra da Estrela e desagua no rio Tejo em Constância após alimentar a gigantesca albufeira de Castelo do Bode?",
+    "opcoes": [
+      "Rio Sado",
+      "Rio Cávado",
+      "Rio Zêzere (242 km)",
+      "Rio Tâmega"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O rio Zêzere é o principal afluente do Tejo em Portugal e a albufeira de Castelo do Bode abastece de água potável a Grande Lisboa.",
+    "fonte": "APA / EPAL",
+    "factClusterId": "fc_geo_dis_riozezere_01"
+  },
+  {
+    "id": "GEO_DIS_0036",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o único dos grandes rios de Portugal continental que corre no sentido de Sul para Norte (nascendo na serra da Vigia em Ourique e desaguando no estuário de Setúbal)?",
+    "opcoes": [
+      "Rio Mira",
+      "Rio Arade",
+      "Rio Sorraia",
+      "Rio Sado (180 km)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O rio Sado nasce a sul no Baixo Alentejo e corre para norte até desembocar entre Setúbal e a península de Troia.",
+    "fonte": "APA / ICNF",
+    "factClusterId": "fc_geo_dis_riosado_sulparanorte_01"
+  },
+  {
+    "id": "GEO_DIS_0037",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que importante serra calcária do centro litoral (partilhada pelos distritos de Leiria e Santarém), acolhe as maiores grutas subterrâneas visitáveis de Portugal (como as Grutas de Mira de Aire, Grutas da Moeda e Grutas de Santo António)?",
+    "opcoes": [
+      "Serra de Aire e Candeeiros (Parque Natural)",
+      "Serra de Montejunto",
+      "Serra de Sintra",
+      "Serra da Lousã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Maciço Calcário Estremenho possui uma impressionante rede cársica com as Grutas de Mira de Aire eleitas uma das 7 Maravilhas Naturais de Portugal.",
+    "fonte": "ICNF / Grutas de Mira de Aire",
+    "factClusterId": "fc_geo_dis_serradeaire_grutas_01"
+  },
+  {
+    "id": "GEO_DIS_0038",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que serra do Alto Alentejo no Distrito de Portalegre, fronteiriça com Espanha, atinge 1.025 metros de altitude no Pico de São Mamede e possui um microclima atlântico único no Alentejo seco?",
+    "opcoes": [
+      "Serra d'Ossa",
+      "Serra de São Mamede (Parque Natural)",
+      "Serra de Portel",
+      "Serra de Grândola"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Parque Natural da Serra de São Mamede abriga as vilas fortificadas de Marvão e Castelo de Vide e a maior colónia de morcegos cavernícolas da Europa.",
+    "fonte": "ICNF / Parque Natural da Serra de São Mamede",
+    "factClusterId": "fc_geo_dis_saomamede_portalegre_01"
+  },
+  {
+    "id": "GEO_DIS_0039",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o pico montanhoso mais alto de todo o território de Portugal (com 2.351 metros de altitude), situado na Ilha do Pico (Região Autónoma dos Açores)?",
+    "opcoes": [
+      "Torre da Serra da Estrela (1.993 metros)",
+      "Pico Ruivo da Madeira (1.862 metros)",
+      "Montanha do Pico / Piquinho (2.351 metros)",
+      "Pico do Areeiro (1.818 metros)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Montanha do Pico é um estratovulcão majestoso e o ponto culminante de todo o território nacional português.",
+    "fonte": "Parque Natural do Pico / Governo dos Açores",
+    "factClusterId": "fc_geo_dis_montanhadopico_2351m_01"
+  },
+  {
+    "id": "GEO_DIS_0040",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Qual é o ponto mais alto do arquipélago da Madeira, com 1.862 metros de altitude, situado no concelho de Santana no coração do Maciço Montanhoso Central?",
+    "opcoes": [
+      "Pico do Areeiro (1.818 metros)",
+      "Pico das Torres (1.851 metros)",
+      "Paul da Serra",
+      "Pico Ruivo (1.862 metros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pico Ruivo oferece vistas panorâmicas sobre toda a ilha da Madeira e é acessível pelo trilho espetacular que o liga ao Pico do Areeiro.",
+    "fonte": "IFCN Madeira / Parque Natural da Madeira",
+    "factClusterId": "fc_geo_dis_picoruivo_1862m_01"
+  },
+  {
+    "id": "GEO_DIS_0041",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que importante serra algarvia de origem ígnea/magmática no concelho de Monchique (Distrito de Faro), atinge 902 metros de altitude no cume da Fóia sendo o ponto mais alto do Algarve?",
+    "opcoes": [
+      "Serra de Monchique (Fóia — 902 metros)",
+      "Serra do Caldeirão (Pelados — 589 metros)",
+      "Serra de Monte Figo",
+      "Serra de Espinhaço de Cão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fóia em Monchique é formada pelo raro maciço nefelínico de sienito e oferece vista deslumbrante desde o Cabo de São Vicente até Portimão.",
+    "fonte": "ICNF / Município de Monchique",
+    "factClusterId": "fc_geo_dis_foia_monchique_01"
+  },
+  {
+    "id": "GEO_DIS_0042",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que impressionante falésia marítima fóssil protegida na margem sul do Tejo no concelho de Almada (Distrito de Setúbal), «Paisagem Protegida da Arriba Fóssil da Costa da Caparica», conserva estratos geológicos do Miocénico com dentes de tubarões fósseis?",
+    "opcoes": [
+      "Cabo Espichel",
+      "Arriba Fóssil da Costa da Caparica (Mata dos Medos)",
+      "Portinho da Arrábida",
+      "Foz do Arelho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arriba Fóssil e a Mata Nacional dos Medos foram mandadas plantar por D. João V para fixar as areias litorais.",
+    "fonte": "ICNF / Município de Almada",
+    "factClusterId": "fc_geo_dis_arribafossil_caparica_01"
+  },
+  {
+    "id": "GEO_DIS_0043",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que arquipélago costeiro de ilhas barreira arenosas no sotavento do Distrito de Faro (englobando as ilhas de Faro, Barreta/Deserta, Culatra, Armona, Tavira e Cabanas), protege a Ria Formosa do mar aberto?",
+    "opcoes": [
+      "Ilhas Berlengas",
+      "Ilhas do Estuário do Sado",
+      "Ilhas Barreira do Parque Natural da Ria Formosa",
+      "Ilhéus da Madalena"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ria Formosa tem mais de 60 km de extensão e foi eleita uma das 7 Maravilhas Naturais de Portugal.",
+    "fonte": "ICNF / Parque Natural da Ria Formosa",
+    "factClusterId": "fc_geo_dis_ilhas_riaformosa_01"
+  },
+  {
+    "id": "GEO_DIS_0044",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que histórica e mais extensa praia de areia contínua de Portugal continental e da Europa, com mais de 45 km ininterruptos desde a Península de Troia até Sines no Distrito de Setúbal?",
+    "opcoes": [
+      "Praia de Matosinhos",
+      "Praia da Rocha",
+      "Praia da Nazaré",
+      "Praia da Costa da Galé / Litoral de Grândola e Troia (45 km de areal contínuo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O areal contínuo de Troia a Melides e Sines é a terceira praia contínua mais extensa do mundo.",
+    "fonte": "Turismo do Alentejo / Município de Grândola",
+    "factClusterId": "fc_geo_dis_arealtroia_45km_01"
+  },
+  {
+    "id": "GEO_DIS_0045",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que célebre desfiladeiro submarino e canhão abissal no Distrito de Leiria («Canhão da Nazaré»), que atinge mais de 5.000 metros de profundidade junto à Praia do Norte, é o responsável pela formação das maiores ondas surfadas do planeta?",
+    "opcoes": [
+      "Canhão Submarino da Nazaré (Canhão da Nazaré)",
+      "Canhão de Lisboa",
+      "Canhão de Setúbal",
+      "Canhão de Cascais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Canhão da Nazaré funciona como um funil natural que amplifica a ondulação do Atlântico Norte criando ondas gigantes com mais de 30 metros de altura no Forte de São Miguel Arcanjo.",
+    "fonte": "Instituto Hidrográfico / Marinha Portuguesa / Município da Nazaré",
+    "factClusterId": "fc_geo_dis_canhaodanazare_01"
+  },
+  {
+    "id": "GEO_DIS_0046",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que serra do Distrito de Viseu e Coimbra (Serra do Caramulo), famosa pelo ar puro das suas antigas estâncias sanatoriais e águas termais, atinge 1.075 metros de altitude no vértice geodésico do:",
+    "opcoes": [
+      "Penedo de São Simão",
+      "Caramulinho (1.075 metros)",
+      "Cabeço de Neve",
+      "Trevim"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Caramulo acolhe o Museu do Caramulo com a sua prestigiada coleção internacional de automóveis clássicos e arte contemporânea.",
+    "fonte": "Museu do Caramulo / Município de Tondela",
+    "factClusterId": "fc_geo_dis_caramulo_caramulinho_01"
+  },
+  {
+    "id": "GEO_DIS_0047",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que deslumbrante serra xistosa no Distrito de Coimbra e Leiria («Serra da Lousã»), que atinge 1.205 metros de altitude no cume do Trevim, é célebre pela sua rede de mais de 20 «Aldeias do Xisto» (como Talasnal, Cerdeira e Candal)?",
+    "opcoes": [
+      "Serra do Açor",
+      "Serra da Gardunha",
+      "Serra da Lousã (Aldeias do Xisto)",
+      "Serra da Freita"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Aldeias do Xisto da Serra da Lousã foram recuperadas para turismo de natureza e preservação do património rural beirão.",
+    "fonte": "Rede das Aldeias do Xisto / Município da Lousã",
+    "factClusterId": "fc_geo_dis_serradalousa_xisto_01"
+  },
+  {
+    "id": "GEO_DIS_0048",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que imponente monumento geológico e cascata natural com mais de 70 metros de queda vertical na Serra do Alvão no concelho de Mondim de Basto (Distrito de Vila Real), «Fisgas de Ermelo», foi esculpida pelas águas do rio Olo sobre quartzitos com mais de 450 milhões de anos?",
+    "opcoes": [
+      "Cascata da Frecha da Mizarela",
+      "Cascata do Arado",
+      "Cascata da Portela do Homem",
+      "Fisgas de Ermelo (Parque Natural do Alvão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Fisgas de Ermelo constituem uma das maiores e mais espetaculares quedas de água da Península Ibérica.",
+    "fonte": "ICNF / Parque Natural do Alvão / Município de Mondim de Basto",
+    "factClusterId": "fc_geo_dis_fisgasdeermelo_01"
+  },
+  {
+    "id": "GEO_DIS_0049",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que impressionante cascata com mais de 60 metros no rio Caima na Serra da Freita no concelho de Arouca (Distrito de Aveiro), «Frecha da Mizarela», é a mais alta queda de água de Portugal continental?",
+    "opcoes": [
+      "Frecha da Mizarela (Arouca Geopark)",
+      "Fisgas de Ermelo",
+      "Cascata de Tahití",
+      "Pego do Inferno"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Frecha da Mizarela integra o Arouca Geopark da UNESCO conhecido também pelo fenómeno das Pedras Parideiras da Castanheira.",
+    "fonte": "Arouca Geopark / UNESCO / Município de Arouca",
+    "factClusterId": "fc_geo_dis_frechadamizarela_arouca_01"
+  },
+  {
+    "id": "GEO_DIS_0050",
+    "tema": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "pergunta": "Que fenómeno geológico único no mundo situado na aldeia da Castanheira na Serra da Freita em Arouca (Distrito de Aveiro), «As Pedras Parideiras» (Pedras que pariram outras pedras), consiste em rochas de granito que libertam naturalmente do seu interior nódulos de:",
+    "opcoes": [
+      "Ouro nativo",
+      "Diamantes vulcânicos",
+      "Biotite escura em forma de disco biconvexo (Pedras Parideiras da Castanheira)",
+      "Fósseis marinhos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Castanheira em Arouca é o único local documentado no planeta com este fenómeno geológico de desincrustação térmica de biotite em granito.",
+    "fonte": "Arouca Geopark / Casa das Pedras Parideiras / UNESCO",
+    "factClusterId": "fc_geo_dis_pedrasparideiras_arouca_01"
+  }
+]

@@ -9748,5 +9748,2855 @@
     ],
     "correctAnswer": "General António Ramalho Eanes",
     "explanation": "O General Ramalho Eanes venceu as primeiras eleições presidenciais democráticas diretas a 27 de junho de 1976 com 61,6% dos votos."
+  },
+  {
+    "id": "PERS_CIE_0001",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial matemático, astrónomo e cosmógrafo-mor de Alcácer do Sal (1502-1578), professor da Universidade de Coimbra («Pedro Nunes»), revolucionou a náutica universal com a invenção do «Nónio» (dispositivo de medição de frações de grau) e o estudo pioneiro das curvas loxodrómicas?",
+    "opcoes": [
+      "Pedro Nunes (Petrus Nonius)",
+      "Garcia de Orta",
+      "D. João de Castro",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nunes deu o nome ao 'nónio' (vernier) e resolveu os maiores enigmas matemáticos da navegação astronómica do século XVI.",
+    "fonte": "Sociedade Portuguesa de Matemática / Universidade de Coimbra",
+    "factClusterId": "fc_pers_pedronunes_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0002",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que médico e botânico judeu português de Castelo de Vide (1501-1568), que viveu em Goa e publicou em 1563 a pioneira obra científica «Colóquios dos Simples e Drogas e Cousas Medicinais da Índia» (com versos de abertura de Luís de Camões), é o pai da medicina e botânica tropical moderna?",
+    "opcoes": [
+      "Ribeiro Sanches",
+      "Garcia de Orta",
+      "Amato Lusitano",
+      "Cristóvão da Costa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Garcia de Orta foi o primeiro cientista ocidental a descrever cientificamente o cólera, a manga, a noz-moscada e as plantas medicinais asiáticas.",
+    "fonte": "Biblioteca Nacional de Portugal / Instituto de Higiene e Medicina Tropical",
+    "factClusterId": "fc_pers_garciadeorta_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0003",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre médico e neurocirurgião de Avanca (Estarreja, 1874-1955), inventor da «Angiografia Cerebral» em 1927 e pioneiro da «Leucotomia Pré-Frontal», foi galardoado em 1949 com o Prémio Nobel da Fisiologia ou Medicina, o primeiro português laureado com o Nobel?",
+    "opcoes": [
+      "Abel Salazar",
+      "Pulido Valente",
+      "António Caetano de Abreu Freire Egas Moniz (Egas Moniz)",
+      "Reynaldo dos Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz foi também diplomata, chefiando a delegação portuguesa no Tratado de Versalhes em 1919.",
+    "fonte": "Fundação Nobel / Museu Casa Egas Moniz (Avanca)",
+    "factClusterId": "fc_pers_egasmoniz_nobel_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0004",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente neurocientista português (nascido em Lisboa em 1944), professor na Universidade do Sul da Califórnia e autor dos best-sellers científicos mundiais «O Erro de Descartes» e «O Sentimento de Si», revolucionou o estudo internacional das emoções, sentimentos e consciência humana?",
+    "opcoes": [
+      "Sobrinho Simões",
+      "Alexandre Quintanilha",
+      "Manuel Valente",
+      "António Rosa Damásio (António Damásio)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Damásio demonstrou que a razão e as emoções são indissociáveis na tomada de decisões biológicas do cérebro.",
+    "fonte": "Prémio Príncipe das Astúrias / Brain and Creativity Institute (USC)",
+    "factClusterId": "fc_pers_antoniodamasio_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0005",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado médico patologista portuense (nascido em 1947), diretor do IPATIMUP e professor emérito da Universidade do Porto, foi eleito pela revista internacional «The Pathologist» em 2015 como o patologista mais influente do mundo pela sua investigação de topo no cancro da tiroide?",
+    "opcoes": [
+      "Manuel Sobrinho Simões (Sobrinho Simões)",
+      "António Damásio",
+      "João Lobo Antunes",
+      "Henrique Veiga-Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sobrinho Simões foi galardoado com o Prémio Pessoa em 2002 e a Grã-Cruz da Ordem Militar de Sant'Iago da Espada.",
+    "fonte": "Universidade do Porto / IPATIMUP / The Pathologist",
+    "factClusterId": "fc_pers_sobrinhosimoes_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0006",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável imunologista e investigadora de Lisboa (1939-2020), pioneira mundial na descoberta da «Ecotaxia» (migração dirigida e posicionamento espacial dos linfócitos T no sistema imunitário), fundou o prestigiado Programa Gulbenkian de Doutoramento em Biologia e Medicina (PGDBM)?",
+    "opcoes": [
+      "Elvira Fortunato",
+      "Maria de Sousa",
+      "Zita Martins",
+      "Mónica Bettencourt-Dias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria de Sousa foi professora catedrática no Instituto Abel Salazar (ICBAS) da Universidade do Porto e no Cornell Medical College em Nova Iorque.",
+    "fonte": "Fundação Calouste Gulbenkian / ICBAS / Ordem dos Médicos",
+    "factClusterId": "fc_pers_mariadesousa_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0007",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que cientista e engenheira de materiais portuguesa (nascida em Almada em 1964), professora catedrática na FCT-NOVA e pioneira mundial da eletrónica transparente de papel com a invenção do «Transístor de Papel» em 2008, foi galardoada com o Prémio Horizon Impact da Comissão Europeia?",
+    "opcoes": [
+      "Maria de Sousa",
+      "Helena Pereira",
+      "Elvira Maria Correia Fortunato (Elvira Fortunato)",
+      "Teresa Lago"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Elvira Fortunato liderou o centro CENIMAT/i3N e desempenhou as funções de Ministra da Ciência, Tecnologia e Ensino Superior.",
+    "fonte": "CENIMAT / FCT-NOVA / Comissão Europeia",
+    "factClusterId": "fc_pers_elvirafortunato_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0008",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre neurocirurgião de Lisboa (1944-2016), professor catedrático da Faculdade de Medicina de Lisboa, pioneiro da neurocirurgia vascular e autor de reflexões humanistas como «Um Sentimento de Si» e «Ouvir com Outros Olhos», presidiu ao Conselho Nacional de Ética para as Ciências da Vida?",
+    "opcoes": [
+      "Egas Moniz",
+      "António Damásio",
+      "Gentil Martins",
+      "João Lobo Antunes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João Lobo Antunes foi galardoado com o Prémio Pessoa em 1996 e foi médico consultor de vários Presidentes da República Portuguesa.",
+    "fonte": "Faculdade de Medicina de Lisboa / Prémio Pessoa",
+    "factClusterId": "fc_pers_joaoloboantunes_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0009",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande matemático, pedagogo e ativista antifascista de Vila Viçosa (1901-1948), autor da obra clássica «Conceitos Fundamentais da Matemática» e fundador da Gazeta de Matemática e da prestigiada coleção de divulgação científica «Biblioteca Cosmos», é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "José Sebastião e Silva",
+      "Aureliano Mira Fernandes",
+      "Gago Coutinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bento de Jesus Caraça dedicou a vida à democratização do conhecimento e da ciência perante a censura do regime do Estado Novo.",
+    "fonte": "Sociedade Portuguesa de Matemática / ISEG",
+    "factClusterId": "fc_pers_bentodejesuscaraca_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0010",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre professor de Física e Química e historiador da ciência (1906-1997), que publicou com o seu nome próprio tratados fundamentais sobre a História da Ciência em Portugal e com o pseudónimo poético «António Gedeão» escreveu hinos eternos como «Pedra Filosofal» e «Lágrima de Preta», é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "Rómulo de Carvalho (António Gedeão)",
+      "Carlos Fiolhais",
+      "Abel Salazar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rómulo de Carvalho uniu com génio ímpar a ciência experimental à mais sublime poesia humanista portuguesa ('Eles não sabem, nem sonham, que o sonho comanda a vida').",
+    "fonte": "Fundação Calouste Gulbenkian / Museu Nacional de História Natural",
+    "factClusterId": "fc_pers_romulodecarvalho_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0011",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que filósofo, pedagogo e ensaísta do Porto (1906-1994), pensador humanista do Quinto Império que viveu 30 anos no Brasil onde ajudou a fundar universidades e ministérios, celebrizou-se em Portugal na RTP com o programa de entrevistas «Conversas Vadias»?",
+    "opcoes": [
+      "Eduardo Lourenço",
+      "Antero de Quental",
+      "Agostinho da Silva (George Agostinho Baptista da Silva)",
+      "Leonardo Coimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Agostinho da Silva defendia uma pedagogia centrada na liberdade criativa e no papel espiritual de Portugal no mundo lusófono.",
+    "fonte": "Associação Agostinho da Silva / RTP Arquivos",
+    "factClusterId": "fc_pers_agostinhodasilva_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0012",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ensaísta e filósofo da Guarda (1923-2020), um dos mais profundos pensadores da identidade e cultura portuguesa contemporânea, professor na Universidade de Nice e autor de obras seminais como «O Labirinto da Saudade» (1978) e «Portugal como Destino», foi galardoado com o Prémio Camões em 1996?",
+    "opcoes": [
+      "Agostinho da Silva",
+      "José Gil",
+      "Vergílio Ferreira",
+      "Eduardo Lourenço de Faria (Eduardo Lourenço)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Lourenço dissecou a 'mitologia do destino português' e a transição do Império para a modernidade europeia.",
+    "fonte": "Centro de Estudos Ibéricos (Guarda) / Prémio Camões",
+    "factClusterId": "fc_pers_eduardolourenco_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0013",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que filósofo e ensaísta português nascido em Moçambique em 1939, professor emérito da Universidade de Paris VIII e da Universidade Nova de Lisboa, autor do aclamado ensaio «Portugal, Hoje: O Medo de Existir» (2004), foi eleito pela revista francesa Le Nouvel Observateur como um dos 25 grandes pensadores do mundo?",
+    "opcoes": [
+      "José Gil",
+      "Eduardo Lourenço",
+      "Vitorino Magalhães Godinho",
+      "Manuel Maria Carrilho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Gil analisou a fenomenologia do corpo, do poder e o trauma da 'não-inscrição' na sociedade portuguesa.",
+    "fonte": "Relógio D'Água / Le Nouvel Observateur",
+    "factClusterId": "fc_pers_josegil_filosofo_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0014",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que pioneiro médico e filósofo iluminista de Castelo Branco (1699-1783), que fugiu da Inquisição e se tornou médico da corte dos czares da Rússia (Catarina, a Grande) e da Academia de Ciências de Paris («António Ribeiro Sanches»), escreveu o influente «Tratado da Conservação da Saúde dos Povos» e as «Cartas sobre a Educação da Mocidade»?",
+    "opcoes": [
+      "Luís António Verney",
+      "António Nunes Ribeiro Sanches",
+      "Garcia de Orta",
+      "Jacob de Castro Sarmento"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ribeiro Sanches foi um dos maiores reformadores do pensamento médico e da saúde pública da Europa setecentista.",
+    "fonte": "Biblioteca Nacional de Portugal / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_ribeirosanches_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0015",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que padre e erudito iluminista lisboeta (1713-1792), que viveu em Roma («Luís António Verney»), publicou em 1746 a monumental obra crítica «O Verdadeiro Método de Estudar», inspirando a reforma pombalina do ensino em Portugal?",
+    "opcoes": [
+      "Ribeiro Sanches",
+      "Manuel da Maia",
+      "Luís António Verney («O Barbadinho»)",
+      "Padre Teodoro de Almeida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Verney atacou o método escolástico medieval e defendeu o método experimental, a gramática vernácula e as ciências da natureza.",
+    "fonte": "BNP / História do Pensamento Português",
+    "factClusterId": "fc_pers_luisantonioverney_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0016",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande botânico português de Santo Antão do Tojal (Loures, 1744-1828), diretor do Jardim Botânico da Universidade de Coimbra («Félix de Avelar Brotero»), publicou as obras fundamentais «Compêndio de Botânica» (1788) e «Flora Lusitanica» (1804), sendo o patrono da botânica nacional?",
+    "opcoes": [
+      "Garcia de Orta",
+      "Amato Lusitano",
+      "Bernardino António Gomes",
+      "Félix de Avelar Brotero"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sociedade Broteriana e a revista científica 'Boletim da Sociedade Broteriana' perpetuam a sua herança botânica.",
+    "fonte": "Universidade de Coimbra / Jardim Botânico / Sociedade Broteriana",
+    "factClusterId": "fc_pers_felixdeavelarbrotero_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0017",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável médico cristão-novo de Castelo Branco (1511-1568), que ensinou medicina em Ferrara e Roma e comentou os tratados botânicos de Dioscórides («Amato Lusitano» / João Rodrigues de Castelo Branco), descobriu a função das válvulas venosas e redigiu o célebre «Juramento Médico» de tolerância ética universal?",
+    "opcoes": [
+      "Amato Lusitano (João Rodrigues de Castelo Branco)",
+      "Garcia de Orta",
+      "Ribeiro Sanches",
+      "Zacuto Lusitano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Amato Lusitano publicou as famosas 'Centúrias de Curas Medicinais' relatando centenas de casos clínicos reais com rigor científico inédito.",
+    "fonte": "Câmara Municipal de Castelo Branco / Faculdade de Medicina",
+    "factClusterId": "fc_pers_amatolusitano_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0018",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que astrobióloga portuguesa e professora no Instituto Superior Técnico («Doutora Zita Martins»), especialista mundial na deteção de aminoácidos e moléculas orgânicas precursoras da vida em meteoritos e cometas com passagens pela NASA e Agência Espacial Europeia (ESA), é:",
+    "opcoes": [
+      "Teresa Lago",
+      "Zita Martins",
+      "Joana Gonçalves de Sá",
+      "Elvira Fortunato"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Zita Martins trabalhou na análise de amostras da missão espacial Hayabusa2 e na missão ExoMars da ESA.",
+    "fonte": "Instituto Superior Técnico / ESA / NASA",
+    "factClusterId": "fc_pers_zitamartins_astrobiologia_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0019",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que astrónoma e astrofísica portuguesa (nascida em Lisboa em 1947), fundadora do Centro de Astrofísica da Universidade do Porto (CAUP) e do Planetário do Porto, que desempenhou o cargo de Secretária-Geral da União Astronómica Internacional (IAU), é:",
+    "opcoes": [
+      "Zita Martins",
+      "Sónia Anton",
+      "Maria Teresa Vaz Torrão Lago (Teresa Lago)",
+      "Marta Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Teresa Lago foi a principal impulsionadora da entrada de Portugal no Observatório Europeu do Sul (ESO) e na ESA.",
+    "fonte": "CAUP / Universidade do Porto / IAU",
+    "factClusterId": "fc_pers_teresalago_astrofisica_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0020",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre historiador económico e social de Lisboa (1921-2012), professor catedrático da Sorbonne e da Universidade Nova de Lisboa e autor de «A Estrutura da Antiga Sociedade Portuguesa» e «Os Descobrimentos e a Economia Mundial» («Vitorino Magalhães Godinho»), é o expoente da historiografia estrutural portuguesa?",
+    "opcoes": [
+      "José Hermano Saraiva",
+      "António José Saraiva",
+      "Joaquim Veríssimo Serrão",
+      "Vitorino Magalhães Godinho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Magalhães Godinho revolucionou o estudo da expansão marítima portuguesa integrando a história monetária, rotas comerciais e sociologia.",
+    "fonte": "Faculdade de Ciências Sociais e Humanas (UNL) / BNP",
+    "factClusterId": "fc_pers_vitorinomagalhaesgodinho_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0021",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado historiador de literatura e ensaísta de Leiria (1917-1993), coautor com Óscar Lopes da incontornável e mais reeditada «História da Literatura Portuguesa» e autor de «A Inquisição Portuguesa» e estudos sobre Camões e Gil Vicente, é:",
+    "opcoes": [
+      "António José Saraiva",
+      "José Hermano Saraiva",
+      "Óscar Lopes",
+      "Agostinho da Silva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António José Saraiva foi professor na Faculdade de Letras de Lisboa e na Sorbonne e uma das maiores mentes críticas do século XX português.",
+    "fonte": "Porto Editora / Gradiva / DGLAB",
+    "factClusterId": "fc_pers_antoniojosesaraiva_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0022",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que carismático historiador, jurista e apresentador de televisão (1919-2012), autor de séries históricas icónicas na RTP como «Gente de Paz», «Horizontes da Memória» e «A Alma e a Gente» («José Hermano Saraiva»), popularizou a história de Portugal junto de milhões de lares com a frase «E assim se fez história»?",
+    "opcoes": [
+      "António José Saraiva",
+      "José Hermano Saraiva",
+      "Joaquim Veríssimo Serrão",
+      "Fernando Rosas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Hermano Saraiva foi Ministro da Educação Nacional e autor da História Concisa de Portugal, traduzida em várias línguas.",
+    "fonte": "RTP Arquivos / Gradiva / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_pers_josehermanosaraiva_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0023",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que físico teórico, professor catedrático da Universidade de Coimbra e prolífico divulgador científico («Professor Carlos Fiolhais»), autor de obras de grande sucesso como «Física Divertida», «Darwin aos Tiros» e diretor da Biblioteca Geral de Coimbra, é uma das maiores vozes da cultura científica em Portugal?",
+    "opcoes": [
+      "Rómulo de Carvalho",
+      "Alexandre Quintanilha",
+      "Carlos Fiolhais",
+      "Manuel Paiva"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos Fiolhais é o fundador do projeto Rómulo — Centro Ciência Viva da Universidade de Coimbra e colunista de referência da imprensa nacional.",
+    "fonte": "Universidade de Coimbra / Gradiva / Ciência Viva",
+    "factClusterId": "fc_pers_carlosfiolhais_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0024",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que químico orgânico português (nascido em Lisboa em 1980), professor catedrático na Universidade de Viena e pianista de concerto («Nuno Maulide»), foi eleito «Cientista do Ano» na Áustria em 2018 pelas suas descobertas pioneiras em síntese assimétrica e química sustentável sem desperdício?",
+    "opcoes": [
+      "Carlos Fiolhais",
+      "Rodrigo Martins",
+      "Luís Paulo Rebelo",
+      "Nuno Maulide"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nuno Maulide é membro da Academia Austríaca de Ciências e autor do livro de divulgação 'Como se Transforma Ar em Pão'.",
+    "fonte": "Universidade de Viena / European Research Council (ERC)",
+    "factClusterId": "fc_pers_nunomaulide_quimica_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0025",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que biofísico de renome internacional nascido em Moçambique em 1945, professor na Universidade da Califórnia em Berkeley e na Universidade do Porto («Alexandre Quintanilha»), fundou o Instituto de Biologia Molecular e Celular (IBMC) no Porto e presidiu à Comissão Parlamentar de Educação e Ciência?",
+    "opcoes": [
+      "Alexandre Tieppo Quintanilha (Alexandre Quintanilha)",
+      "Manuel Sobrinho Simões",
+      "António Coutinho",
+      "Claudio Sunkel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Quintanilha é uma das vozes mais respeitadas no debate público sobre ética, ciência e transição energética.",
+    "fonte": "IBMC / i3S / Universidade do Porto / Assembleia da República",
+    "factClusterId": "fc_pers_alexandrequintanilha_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0026",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado imunologista português (nascido no Porto em 1946), diretor do Instituto Gulbenkian de Ciência (IGC) entre 1998 e 2012 e professor no Instituto Pasteur de Paris («António Coutinho»), é um dos pais da teoria das redes imunológicas e da autoimunidade?",
+    "opcoes": [
+      "Maria de Sousa",
+      "António Coutinho (António Manuel Coutinho)",
+      "Henrique Veiga-Fernandes",
+      "Luís Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Coutinho transformou o Instituto Gulbenkian de Ciência num polo de atração mundial de jovens investigadores de topo.",
+    "fonte": "Instituto Gulbenkian de Ciência (IGC) / Prémio Pessoa",
+    "factClusterId": "fc_pers_antoniocoutinho_imunologia_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0027",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que imunologista português de elite (nascido em Lisboa em 1973), codiretor do Centro Champalimaud («Henrique Veiga-Fernandes»), descobriu que o sistema nervoso e o sistema imunitário comunicam diretamente nas células da mucosa intestinal, revolucionando a neuroimunologia mundial?",
+    "opcoes": [
+      "Miguel Godinho Ferreira",
+      "Bruno Silva-Santos",
+      "Henrique Veiga-Fernandes",
+      "Leonor Saúde"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Henrique Veiga-Fernandes recebeu quatro bolsas avançadas do Conselho Europeu de Investigação (ERC) e o Prémio Pfizer de Investigação Biomédica.",
+    "fonte": "Fundação Champalimaud / ERC / Nature",
+    "factClusterId": "fc_pers_henriqueveigafernandes_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0028",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que bióloga molecular e investigadora de Lisboa (nascida em 1974), diretora do Instituto Gulbenkian de Ciência e líder do Laboratório de Regulação Celular («Mónica Bettencourt-Dias»), é especialista mundial no estudo dos centríolos celulares e cancro e foi eleita diretora do consórcio europeu EMBL?",
+    "opcoes": [
+      "Maria Manuel Mota",
+      "Ana Paula Pêgo",
+      "Elvira Fortunato",
+      "Mónica Bettencourt-Dias"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mónica Bettencourt-Dias foi galardoada com o Prémio EMBO Gold Medal e o Prémio Dona Antónia Adelaide Ferreira.",
+    "fonte": "IGC / EMBO / European Molecular Biology Laboratory",
+    "factClusterId": "fc_pers_monicabettencourtdias_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0029",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que bióloga e cientista de renome de Vila Nova de Gaia (nascida em 1971), investigadora no Instituto de Medicina Molecular (iMM) da Faculdade de Medicina de Lisboa («Maria Manuel Mota»), foi galardoada com o Prémio Pessoa em 2013 pelas suas descobertas capitais sobre o parasita da Malária no fígado humano?",
+    "opcoes": [
+      "Maria Manuel Mota",
+      "Mónica Bettencourt-Dias",
+      "Maria de Sousa",
+      "Carla Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Maria Manuel Mota descobriu o mecanismo através do qual o Plasmodium interage com as células hepáticas abrindo portas a novas vacinas.",
+    "fonte": "Instituto de Medicina Molecular (iMM) / Prémio Pessoa",
+    "factClusterId": "fc_pers_mariamanuelmota_malaria_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0030",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que prestigiado neurocientista português (nascido em Lisboa em 1973), professor no MIT (Massachusetts Institute of Technology) e diretor do Centro McGovern para a Investigação do Cérebro («Guoping Feng e Rui Costa / Doutor Rui Costa»), especialista em circuitos neurais e gânglios basais nos movimentos e na doença de Parkinson, é o Presidente e CEO do prestigiado Allen Institute em Seattle?",
+    "opcoes": [
+      "António Damásio",
+      "Rui Manuel Marques da Costa (Rui Costa)",
+      "Henrique Veiga-Fernandes",
+      "Luís Graça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Rui Costa liderou o Centro Champalimaud e o Zuckerman Institute da Columbia University antes de assumir a liderança mundial do Allen Institute.",
+    "fonte": "Allen Institute / Columbia University / Fundação Champalimaud",
+    "factClusterId": "fc_pers_ruicosta_neurocientista_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0031",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que ilustre médico e professor de Medicina de Guimarães (1889-1962), figura maior da oposição democrática ao Estado Novo e pioneiro da histologia e da pintura expressionista com a célebre frase gravada na sua estátua «Um médico que só sabe medicina, nem medicina sabe», é:",
+    "opcoes": [
+      "Egas Moniz",
+      "Pulido Valente",
+      "Abel de Lima Salazar (Professor Abel Salazar)",
+      "Fernando da Silva Correia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Instituto de Ciências Biomédicas Abel Salazar (ICBAS) da Universidade do Porto e a Casa-Museu Abel Salazar em Matosinhos homenageiam o seu legado universal.",
+    "fonte": "Universidade do Porto / Casa-Museu Abel Salazar / ICBAS",
+    "factClusterId": "fc_pers_abelsalazar_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0032",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente médico e professor catedrático da Faculdade de Medicina de Lisboa (1884-1963), considerado o mestre supremo da semiologia clínica e do raciocínio diagnóstico em Portugal («Professor Francisco Pulido Valente»), dá o nome ao grande hospital universitário no Lumiar em Lisboa?",
+    "opcoes": [
+      "Egas Moniz",
+      "Reynaldo dos Santos",
+      "Curry Cabral",
+      "Francisco Pulido Valente (Hospital Pulido Valente)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pulido Valente formou gerações de médicos clínicos e foi uma figura cimeira da resistência intelectual republicana.",
+    "fonte": "CHULN / Faculdade de Medicina de Lisboa",
+    "factClusterId": "fc_pers_pulidovalente_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0033",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente cirurgião, urologista e historiador de arte de Vila Franca de Xira (1880-1970), que introduziu a aortografia translombar na medicina mundial e identificou a autoria dos Painéis de São Vicente de Fora atribuindo-os a Nuno Gonçalves («Professor Reynaldo dos Santos»), foi Presidente da Academia Nacional de Belas-Artes?",
+    "opcoes": [
+      "Reynaldo dos Santos",
+      "Egas Moniz",
+      "Bocage",
+      "Sousa Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Reynaldo dos Santos cunhou o conceito estético do 'Manuelino' como expressão maior da arte náutica dos Descobrimentos portugueses.",
+    "fonte": "Academia Nacional de Belas-Artes / Sociedade das Ciências Médicas de Lisboa",
+    "factClusterId": "fc_pers_reynaldodossantos_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0034",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que lendário médico e professor da Escola Médico-Cirúrgica de Lisboa de Alhandra (1843-1897), conhecido pela dedicação incansável aos doentes pobres e tuberculosos no Hospital de São José («Dr. José Tomás de Sousa Martins»), é objeto de culto popular secular com milhares de ex-votos em torno da sua estátua no Campo de Santana?",
+    "opcoes": [
+      "Curry Cabral",
+      "Dr. Sousa Martins (José Tomás de Sousa Martins)",
+      "Miguel Bombarda",
+      "Passos Manuel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sousa Martins foi o pioneiro do sanatório da Serra da Estrela (Guarda) para o tratamento da tuberculose pulmonar.",
+    "fonte": "Hospital de São José / Sociedade das Ciências Médicas de Lisboa",
+    "factClusterId": "fc_pers_sousamartins_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0035",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que médico e psiquiatra republicano de origem italiana (1851-1910), pioneiro da moderna psiquiatria forense e reforma hospitalar em Portugal («Professor Miguel Bombarda»), foi o dirigente civil do Comité Revolucionário do 5 de Outubro de 1910 assassinado no seu consultório nas vésperas da proclamação da República?",
+    "opcoes": [
+      "Júlio de Matos",
+      "Sobral Cid",
+      "Miguel Augusto Bombarda (Miguel Bombarda)",
+      "Egas Moniz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O antigo Hospital Miguel Bombarda em Lisboa acolheu a célebre coleção de arte bruta criada por doentes psiquiátricos.",
+    "fonte": "Museu Miguel Bombarda / Assembleia da República",
+    "factClusterId": "fc_pers_miguelbombarda_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0036",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente psiquiatra portuense (1856-1922), professor de Psiquiatria e autor de obras clássicas de neurologia («Júlio de Matos»), dá o nome ao maior hospital psiquiátrico de Lisboa fundado em 1942 em Alvalade?",
+    "opcoes": [
+      "Miguel Bombarda",
+      "Sobral Cid",
+      "Barahona Fernandes",
+      "Júlio Xavier de Matos (Hospital Júlio de Matos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Júlio de Matos foi o grande modernizador da assistência psiquiátrica em Portugal, abolindo contenções violentas.",
+    "fonte": "CHPL / Hospital Júlio de Matos",
+    "factClusterId": "fc_pers_juliodematos_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0037",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que eminente médico higienista e cirurgião de Lisboa (1844-1920), pioneiro do combate às epidemias de cólera, peste bubónica e febre amarela («José Joaquim da Silva Freire Temudo Curry Cabral»), dá o nome ao hospital de referência de doenças infecciosas e transplantes de Lisboa?",
+    "opcoes": [
+      "Professor Curry Cabral (Hospital Curry Cabral)",
+      "Sousa Martins",
+      "Santa Maria",
+      "São Francisco Xavier"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Curry Cabral fundou em 1906 o Hospital do Rego (hoje Hospital Curry Cabral), que se tornou o centro de excelência nacional em transplantação hepática.",
+    "fonte": "CHULC / Hospital Curry Cabral",
+    "factClusterId": "fc_pers_currycabral_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0038",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande médico cirurgião pediátrico de Lisboa (nascido em 1927), pioneiro mundial da separação cirúrgica de gémeos siameses («Dr. António Gentil Martins»), foi Bastonário da Ordem dos Médicos e Presidente da Associação Médica Mundial?",
+    "opcoes": [
+      "João Lobo Antunes",
+      "António Gentil Martins",
+      "Manuel Sobrinho Simões",
+      "Reynaldo dos Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Dr. Gentil Martins realizou com sucesso pioneiro a separação de vários pares de gémeos siameses no Hospital de Dona Estefânia.",
+    "fonte": "Ordem dos Médicos / Hospital Dona Estefânia",
+    "factClusterId": "fc_pers_gentilmartins_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0039",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que grande matemático português de Mértola (1914-1972), professor da Universidade de Lisboa («José Sebastião e Silva»), pioneiro mundial na teoria das distribuições e espaços vectoriais topológicos e autor da reforma pedagógica moderna do ensino da matemática nos anos 1960 («A Reforma Sebastião e Silva»), é:",
+    "opcoes": [
+      "Bento de Jesus Caraça",
+      "Pedro Nunes",
+      "José Sebastião e Silva",
+      "Guedes de Oliveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sebastião e Silva é considerado o maior matemático português do século XX com conceitos estudados internacionalmente em análise funcional.",
+    "fonte": "Sociedade Portuguesa de Matemática / Centro de Matemática da FCUL",
+    "factClusterId": "fc_pers_sebastiaoesilva_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0040",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que matemático e engenheiro militar de Lisboa (1871-1955), primeiro presidente da Sociedade Portuguesa de Matemática em 1940 («Aureliano de Mira Fernandes»), foi professor catedrático e diretor do Instituto Superior Técnico (IST) e pioneiro do cálculo tensorial e relatividade em Portugal?",
+    "opcoes": [
+      "Vicente Gonçalves",
+      "Almeida e Castro",
+      "Duarte Pacheco",
+      "Aureliano de Mira Fernandes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Mira Fernandes manteve correspondência com grandes matemáticos europeus como Tullio Levi-Civita e Albert Einstein.",
+    "fonte": "Instituto Superior Técnico / SPM",
+    "factClusterId": "fc_pers_mirafernandes_ist_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0041",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que oficial engenheiro militar e estadista do século XX de Loulé (1900-1943), professor e diretor do Instituto Superior Técnico («Engenheiro Duarte Pacheco»), enquanto Ministro das Obras Públicas e Comunicações de Salazar planeou e construiu a Ponte Salazar (Ponte 25 de Abril planeada), o Parque Florestal de Monsanto, o Estádio Nacional do Jamor, o Aeroporto de Lisboa e a rede viária moderna de Portugal?",
+    "opcoes": [
+      "Duarte José Pacheco (Duarte Pacheco)",
+      "Manuel da Maia",
+      "Fontes Pereira de Melo",
+      "Cancio Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Duarte Pacheco faleceu tragicamente num acidente de viação em Vendas Novas em 1943 no auge da sua ação modernizadora das infraestruturas portuguesas.",
+    "fonte": "LNEC / Município de Loulé / Assembleia da República",
+    "factClusterId": "fc_pers_duartepacheco_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0042",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial engenheiro civil e general de engenharia do século XVIII (1677-1768), Manuel da Maia («Manuel da Maia»), enquanto Engenheiro-Mor do Reino liderou a construção do monumental Aqueduto das Águas Livres e o plano diretor revolucionário de reconstrução da Baixa Pombalina de Lisboa após o terramoto de 1755 («Dissertação sobre a Reedificação de Lisboa»)?",
+    "opcoes": [
+      "Eugénio dos Santos",
+      "Manuel da Maia",
+      "Carlos Mardel",
+      "Reinaldo Manuel dos Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Manuel da Maia propôs as opções urbanísticas de reconstrução da Baixa e coordenou a equipa com Eugénio dos Santos e Carlos Mardel.",
+    "fonte": "Torre do Tombo / Ordem dos Engenheiros / Museu da Cidade",
+    "factClusterId": "fc_pers_manueldamaia_1755_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0043",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente engenheiro civil português (1918-2005), fundador e primeiro diretor do Laboratório Nacional de Engenharia Civil (LNEC) e professor do IST («Manuel Rocha»), foi uma autoridade mundial pioneira na mecânica das rochas e no dimensionamento e segurança de grandes barragens de betão?",
+    "opcoes": [
+      "Edgar Cardoso",
+      "António Segadães Tavares",
+      "Manuel Coelho Mendes da Rocha (Manuel Rocha)",
+      "Ferry Borges"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Manuel Rocha projetou e monitorizou barragens por todo o mundo e a Sociedade Internacional de Mecânica das Rochas instituiu o prestigiado Prémio Manuel Rocha em sua homenagem.",
+    "fonte": "LNEC / Ordem dos Engenheiros / ISRM",
+    "factClusterId": "fc_pers_manuelrocha_lnec_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0044",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que genial engenheiro de pontes de Resende (1913-2000), professor catedrático do IST («Professor Edgar Cardoso»), projetou obras-primas da engenharia mundial como a Ponte da Arrábida sobre o Douro (que bateu o recorde mundial de maior arco em betão armado com 270 metros em 1963) e a Ponte de São João no Porto?",
+    "opcoes": [
+      "Manuel Rocha",
+      "Adão da Fonseca",
+      "Armando Rito",
+      "Edgar António de Mesquita Cardoso (Edgar Cardoso)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Edgar Cardoso desenhou pontes inovadoras em quatro continentes (Macau, Angola, Moçambique, Índia e Portugal).",
+    "fonte": "Ordem dos Engenheiros / Faculdade de Engenharia da Universidade do Porto",
+    "factClusterId": "fc_pers_edgarcardoso_pontes_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0045",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que engenheiro civil português contemporâneo («António Segadães Tavares»), autor do projeto estrutural arrojado da ampliação da pista do Aeroporto da Madeira sobre 180 pilares de betão armado de 70 metros de altura sobre o mar, venceu em 2004 o «Outstanding Structure Award» da IABSE (o 'Nobel da Engenharia de Estruturas')?",
+    "opcoes": [
+      "António Segadães Tavares",
+      "Edgar Cardoso",
+      "Adão da Fonseca",
+      "José Cancio Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A ampliação da pista do Funchal sobre o mar em Santa Cruz foi considerada uma das obras de arte de engenharia civil mais audaciosas do mundo.",
+    "fonte": "IABSE / Ordem dos Engenheiros / ANA Aeroportos",
+    "factClusterId": "fc_pers_segadaestavares_madeira_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0046",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre diplomata e humanista de Coimbra (1502-1574), cronista-mor do Reino («Damião de Góis»), amigo pessoal de Erasmo de Roterdão e Martinho Lutero, escreveu a «Crónica do Felicíssimo Rei D. Manuel» e a descrição histórica «Urbis Olisiponis Descriptio»?",
+    "opcoes": [
+      "João de Barros",
+      "Damião de Góis",
+      "Fernão Lopes",
+      "Gaspar Correia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Damião de Góis foi o maior embaixador do humanismo renascentista português nas cortes e universidades da Europa.",
+    "fonte": "Torre do Tombo / BNP / Cinemateca",
+    "factClusterId": "fc_pers_damiaodegois_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0047",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que primeiro grande cronista-mor da Torre do Tombo e da história portuguesa (c. 1380-1459), Fernão Lopes («Fernão Lopes»), autor das crónicas de D. Pedro I, D. Fernando e D. João I com um estilo vivo e visual pioneiro que colocava «a arraia-miúda» e o povo como protagonista histórico, é o pai da história narrativa em língua portuguesa?",
+    "opcoes": [
+      "Gomes Eanes de Zurara",
+      "Rui de Pina",
+      "Fernão Lopes (Pai da Historiografia Portuguesa)",
+      "Damião de Góis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernão Lopes é aclamado universalmente como um dos maiores prosadores medievais da Europa pelo rigor factual e emoção dramática das suas crónicas da Revolução de 1383-1385.",
+    "fonte": "Torre do Tombo / DGLAB",
+    "factClusterId": "fc_pers_fernaolopes_cronista_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0048",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que célebre cronista e feitor da Casa da Índia de Viseu (1496-1570), autor da monumental obra em quatro volumes «Décadas da Ásia» («João de Barros»), é considerado «O Lívio Português» pela grandiosidade clássica com que narrou a expansão dos portugueses no Oriente?",
+    "opcoes": [
+      "Fernão Lopes de Castanheda",
+      "Diogo do Couto",
+      "Gaspar Correia",
+      "João de Barros («O Lívio Português»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João de Barros escreveu também a primeira Gramática da Língua Portuguesa impressa em 1540 (Grammatica da Lingua Portuguesa).",
+    "fonte": "Biblioteca Nacional de Portugal / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_pers_joaodebarros_decadas_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0049",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que notável filósofo e professor da Universidade do Porto (1883-1936), fundador da corrente filosófica do «Criacionismo» e da revista de cultura «A Águia» e ministro da Instrução Pública da 1.ª República («Leonardo Coimbra»), fundou a Faculdade de Letras da Universidade do Porto em 1919?",
+    "opcoes": [
+      "Leonardo Coimbra",
+      "Sampaio Bruno",
+      "Raul Proença",
+      "António Sérgio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Leonardo Coimbra foi uma das mentes mais brilhantes e carismáticas do Renascimento Português e do pensamento filosófico espiritualista.",
+    "fonte": "Faculdade de Letras da Universidade do Porto (FLUP) / BNP",
+    "factClusterId": "fc_pers_leonardocoimbra_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_CIE_0050",
+    "tema": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "pergunta": "Que influente pedagogo, ensaísta e pensador cívico nascido na Índia Portuguesa (1883-1969), figura central da revista «Seara Nova» («António Sérgio»), defendeu o cooperativismo, o racionalismo crítico e o pragmatismo educacional na transformação cívica de Portugal?",
+    "opcoes": [
+      "Raul Proença",
+      "Jaime Cortesão",
+      "António Sérgio de Sousa (António Sérgio)",
+      "Bento de Jesus Caraça"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Sérgio influenciou decisivamente a historiografia com a sua tese sobre a oposição histórica entre a 'política de transporte' (mercantilismo) e a 'política de fixação' (agricultura/indústria).",
+    "fonte": "Fundação Mário Soares / DGLAB",
+    "factClusterId": "fc_pers_antoniosergio_01",
+    "category": "Personalidades",
+    "subcategory": "Cientistas & Pensadores"
+  },
+  {
+    "id": "PERS_PIN_0001",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que monumental pintor quinhentista de Viseu (c. 1475-1542), Vasco Fernandes («Grão Vasco»), expoente máximo do Renascimento no norte de Portugal, assinou obras-primas absolutas da pintura régia e sacra como o célebre painel de «São Pedro» no Museu Nacional Grão Vasco?",
+    "opcoes": [
+      "Vasco Fernandes (Grão Vasco)",
+      "Nuno Gonçalves",
+      "Gaspar Vaz",
+      "Frei Carlos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Grão Vasco retratou São Pedro no trono papal com vestes pontifícias de veludo brocado num dos cumes da arte portuguesa.",
+    "fonte": "Museu Nacional Grão Vasco (Viseu) / DGPC",
+    "factClusterId": "fc_pers_pin_graovasco_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0002",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que genial e pioneiro pintor modernista de Manhufe (Amarante, 1887-1918), Amadeo de Souza-Cardoso («Amadeo de Souza-Cardoso»), amigo de Modigliani e Brancusi em Paris, integrou o famoso Armory Show de Nova Iorque em 1913 e assinou obras como «Canção Popular a Rusga» e «Coty»?",
+    "opcoes": [
+      "Almada Negreiros",
+      "Amadeo de Souza-Cardoso",
+      "Eduardo Viana",
+      "Santa-Rita Pintor"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Amadeo faleceu prematuramente aos 30 anos vítima da Gripe Espanhola e o Museu Municipal Amadeo de Souza-Cardoso em Amarante preserva o seu acervo.",
+    "fonte": "Fundação Calouste Gulbenkian / Museu Municipal de Amarante",
+    "factClusterId": "fc_pers_pin_amadeodesouzacardoso_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0003",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que internacionalmente consagrada pintora lisboeta (1908-1992), Maria Helena Vieira da Silva («Vieira da Silva»), radicada em Paris com o marido Arpad Szenes, foi uma das maiores figuras da Abstração Lírica mundial do século XX com labirintos espaciais como «A Cidade» e «O Xadrez»?",
+    "opcoes": [
+      "Paula Rego",
+      "Graça Morais",
+      "Maria Helena Vieira da Silva",
+      "Mily Possoz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Arpad Szenes-Vieira da Silva no Jardim das Amoreiras em Lisboa homenageia a genial pintora que foi a primeira mulher a receber o Grande Prémio Nacional de Artes em França.",
+    "fonte": "Fundação Arpad Szenes-Vieira da Silva / Centro de Arte Moderna Gulbenkian",
+    "factClusterId": "fc_pers_pin_vieiradasilva_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0004",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que genial pintora e artista visual lisboeta radicada em Londres (1935-2022), Paula Rego («Dama Paula Rego»), famosa pela sua pintura figurativa e visceral de denúncia social, contos de fadas e direitos das mulheres («A Dança», «As Criadas», «A Menina e o Cão»), homenageada na «Casa das Histórias» em Cascais?",
+    "opcoes": [
+      "Vieira da Silva",
+      "Helena Almeida",
+      "Joana Vasconcelos",
+      "Paula Rego (Dama Paula Rego)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Paula Rego foi agraciada com o título de Dama Comandante da Ordem do Império Britânico pela Rainha Isabel II e com a Grã-Cruz da Ordem Militar de Sant'Iago da Espada.",
+    "fonte": "Casa das Histórias Paula Rego (Cascais) / Tate Modern (Londres)",
+    "factClusterId": "fc_pers_pin_paularego_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0005",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que polifacetado artista vanguardista, pintor, escritor e desenhador de São Tomé e Lisboa (1893-1970), Almada Negreiros («José de Almada Negreiros»), figura cimeira da Geração d'Orpheu e do Modernismo, assinou os monumentais frescos das Gares Marítimas de Alcântara e da Rocha do Conde de Óbidos?",
+    "opcoes": [
+      "José de Almada Negreiros",
+      "Amadeo de Souza-Cardoso",
+      "Mário de Sá-Carneiro",
+      "Fernando Pessoa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Almada Negreiros escreveu o famoso 'Manifesto Anti-Dantas' (1915) e desenhou o 'Retrato de Fernando Pessoa' no Café Irmãos Unidos.",
+    "fonte": "Fundação Calouste Gulbenkian / Porto de Lisboa / CAM",
+    "factClusterId": "fc_pers_pin_almadanegreiros_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0006",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que mestre pintor do século XV e pintor régio de D. Afonso V («Nuno Gonçalves»), é o autor dos seis célebres painéis a óleo e têmpera sobre madeira («Painéis de São Vicente de Fora»), preservados no Museu Nacional de Arte Antiga em Lisboa?",
+    "opcoes": [
+      "Grão Vasco",
+      "Nuno Gonçalves (Painéis de São Vicente)",
+      "Frei Carlos",
+      "Cristóvão de Figueiredo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Painéis de São Vicente retratam 60 personalidades da sociedade de Quatrocentos incluindo o Infante D. Henrique, o Rei e o Santo Padroeiro.",
+    "fonte": "Museu Nacional de Arte Antiga (MNAA) / DGPC",
+    "factClusterId": "fc_pers_pin_nunogoncalves_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0007",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pintor realista e naturalista das Caldas da Rainha (1855-1933), José Malhoa («José Vital Branco Malhoa»), retratou como ninguém a alma do povo português na célebre pintura «O Fado» (1910) com o fadista Amâncio e a rameira Adelaide da Facada?",
+    "opcoes": [
+      "Columbano Bordalo Pinheiro",
+      "Silva Porto",
+      "José Malhoa («O Fado»)",
+      "Henrique Pousão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Malhoa pintou também 'Os Bêbados / Festejando o São Martinho' e o Museu de José Malhoa nas Caldas da Rainha alberga o seu acervo.",
+    "fonte": "Museu de José Malhoa / Museu de Lisboa",
+    "factClusterId": "fc_pers_pin_josemalhoa_ofado_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0008",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que genial retratista lisboeta e mestre do chiaroscuro (1857-1929), Columbano Bordalo Pinheiro («Columbano»), irmão de Rafael Bordalo Pinheiro, pintou a famosa galeria de retratos dos intelectuais da Geração de 70 (como Antero de Quental e Teófilo Braga) e a famosa tela «O Grupo do Leão»?",
+    "opcoes": [
+      "José Malhoa",
+      "Silva Porto",
+      "Carlos Reis",
+      "Columbano Bordalo Pinheiro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Columbano foi o primeiro diretor do Museu Nacional de Arte Contemporânea (Museu do Chiado) e decorou o teto do Salão Nobre do Teatro D. Maria II.",
+    "fonte": "Museu Nacional de Arte Contemporânea (MNAC) / MNAR",
+    "factClusterId": "fc_pers_pin_columbano_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0009",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que prodígio da pintura portuguesa do século XIX nascido em Vila Viçosa (1859-1884), Henrique Pousão («Henrique César de Araújo Pousão»), que pintou a luz mediterrânica de Capri e Roma («Cecília», «Esperando o Sucesso», «Casas Brancas de Caprile») antes de falecer aos 24 anos?",
+    "opcoes": [
+      "Henrique Pousão",
+      "Silva Porto",
+      "Marques de Oliveira",
+      "Sousa Pinto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Henrique Pousão é considerado um dos pintores mais inovadores e sensíveis do naturalismo europeu com acervo no Museu Nacional Soares dos Reis no Porto.",
+    "fonte": "Museu Nacional Soares dos Reis (Porto) / DGPC",
+    "factClusterId": "fc_pers_pin_henriquepousao_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0010",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que extraordinária pintora barroca do século XVII nascida em Sevilha e radicada em Óbidos (1630-1684), Josefa de Óbidos («Josefa de Ayala Figueira»), destacou-se pela doçura mística da pintura religiosa e pela riqueza cromática das suas famosas «Naturezas-Mortas com Doces e Flores»?",
+    "opcoes": [
+      "Vieira da Silva",
+      "Josefa de Óbidos (Josefa de Ayala)",
+      "Aurélia de Sousa",
+      "Sofonisba Anguissola"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Josefa de Óbidos foi uma mulher emancipada e independente que dirigiu a sua própria oficina de arte no século XVII.",
+    "fonte": "Museu Nacional de Arte Antiga / Museu Municipal de Óbidos",
+    "factClusterId": "fc_pers_pin_josefadeobidos_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0011",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que mestre neoclássico e pré-romântico lisboeta do século XVIII/XIX (1768-1837), Domingos Sequeira («Domingos António de Sequeira»), pintor da corte de D. João VI, assinou obras monumentais como «Adoração dos Magos», «Coroação de D. João VI» e «Passagem do Mar Vermelho»?",
+    "opcoes": [
+      "Vieira Portuense",
+      "Pedro Alexandrino",
+      "Domingos Sequeira",
+      "Morgado de Setúbal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A pintura 'A Adoração dos Magos' foi adquirida pelo Museu Nacional de Arte Antiga em 2016 através de uma histórica campanha pública nacional de mecenato.",
+    "fonte": "Museu Nacional de Arte Antiga / DGPC",
+    "factClusterId": "fc_pers_pin_domingossequeira_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0012",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que monumental pintor, gravador e desenhador lisboeta (1926-2018), Júlio Pomar («Júlio Pomar»), figura tutelar do Neorrealismo («Gadanheiro», «Almoço do Trolha») e autor dos painéis de azulejos com figuras literárias da estação do Metropolitano de Lisboa Alto dos Moinhos?",
+    "opcoes": [
+      "Manuel Cargaleiro",
+      "Nadir Afonso",
+      "Cruzeiro Seixas",
+      "Júlio Pomar"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Atelier-Museu Júlio Pomar na Rua do Vale em Lisboa preserva e divulga o extraordinário património artístico do mestre.",
+    "fonte": "Atelier-Museu Júlio Pomar / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_pers_pin_juliopomar_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0013",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que notável arquiteto e pintor de Chaves (1920-2013), Nadir Afonso («Nadir Afonso Rodrigues»), que trabalhou com Le Corbusier e Oscar Niemeyer, foi o pioneiro do Abstracionismo Geométrico e do Espacillismo na pintura internacional com a sua teoria estética da geometria cósmica?",
+    "opcoes": [
+      "Nadir Afonso",
+      "Júlio Resende",
+      "António Dacosta",
+      "Querubim Lapa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Arte Contemporânea Nadir Afonso em Chaves foi projetado pelo arquiteto Álvaro Siza Vieira.",
+    "fonte": "Fundação Nadir Afonso (Chaves) / Município de Chaves",
+    "factClusterId": "fc_pers_pin_nadirafonso_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0014",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que aclamada pintora transmontana de Vieiro (Vila Flor, nascida em 1948), Graça Morais («Maria da Graça Pinto de Morais»), membro da Academia de Belas-Artes de Paris, celebrizou-se pela força dramática dos seus quadros sobre o mundo rural, as mulheres transmontanas e as tragédias da humanidade?",
+    "opcoes": [
+      "Paula Rego",
+      "Graça Morais",
+      "Joana Vasconcelos",
+      "Helena Almeida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Centro de Arte Contemporânea Graça Morais em Bragança, desenhado por Souto de Moura, acolhe a sua obra em permanência.",
+    "fonte": "Centro de Arte Contemporânea Graça Morais (Bragança) / Município de Bragança",
+    "factClusterId": "fc_pers_pin_gracamorais_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0015",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que mestre ceramista e pintor de Chão da Vairada (Vila Velha de Ródão, 1927-2024), Manuel Cargaleiro («Manuel Cargaleiro»), fundador da Fundação Manuel Cargaleiro em Castelo Branco, célebre pelas suas composições luminosas e azulejos artísticos em estações de metro como Champs-Élysées - Clemenceau em Paris e Colégio Militar em Lisboa?",
+    "opcoes": [
+      "Querubim Lapa",
+      "Eduardo Nery",
+      "Manuel Cargaleiro",
+      "Bordalo Pinheiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cargaleiro recebeu a Grã-Cruz da Ordem do Infante D. Henrique e a Medalha de Mérito Cultural pelo conjunto da sua obra em cerâmica e pintura.",
+    "fonte": "Fundação Manuel Cargaleiro (Castelo Branco) / Museu Cargaleiro",
+    "factClusterId": "fc_pers_pin_manuelcargaleiro_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0016",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que aclamada artista plástica e escultora lisboeta (nascida em 1971), Joana Vasconcelos («Joana Vasconcelos»), famosa por obras monumentais com objetos do quotidiano, crochê e azulejos como «A Noiva» (lustre de tampões), «Coração Independente» e «Marilyn» (sapatos de panelas), primeira mulher e mais jovem artista a expor no Palácio de Versalhes?",
+    "opcoes": [
+      "Helena Almeida",
+      "Fernanda Fragateiro",
+      "Lourdes Castro",
+      "Joana Vasconcelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Joana Vasconcelos representou oficialmente Portugal na Bienal de Arte de Veneza em 2013 com o 'Trafaria Praia' (cacilheiro flutuante revestido de azulejos).",
+    "fonte": "Fundação Joana Vasconcelos / Palácio de Versalhes / Bienal de Veneza",
+    "factClusterId": "fc_pers_pin_joanavasconcelos_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0017",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pioneiro artista visual e de arte urbana de Lisboa (nascido em 1987), Alexandre Farto («Vhils»), celebrizou-se mundialmente pela sua técnica inovadora de «Scratching the Surface», esculpindo retratos humanos monumentais em paredes e edifícios em ruínas utilizando martelos pneumáticos e explosivos controlados?",
+    "opcoes": [
+      "Vhils (Alexandre Farto)",
+      "Bordalo II",
+      "Odeith",
+      "MaisMenos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vhils tem murais esculpidos em mais de 40 cidades mundiais desde Xangai a Nova Iorque e realizou videoclipes para os U2.",
+    "fonte": "Underdogs Gallery / Vhils Official / DGPC",
+    "factClusterId": "fc_pers_pin_vhils_alexandrefarto_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0018",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que aclamado artista plástico lisboeta (nascido em 1987), Artur Bordalo («Bordalo II»), neto do pintor Real Bordalo, criou a célebre série mundial de esculturas urbanas tridimensionais «Big Trash Animals» utilizando lixo, plástico recolhido e para-choques velhos para alertar para a poluição e sustentabilidade?",
+    "opcoes": [
+      "Vhils",
+      "Bordalo II (Artur Bordalo)",
+      "Pantónio",
+      "Akrilon"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bordalo II já reutilizou mais de 100 toneladas de resíduos plásticos nas suas impressionantes esculturas de animais espalhadas por vários continentes.",
+    "fonte": "Bordalo II Studio / Museu de Lisboa",
+    "factClusterId": "fc_pers_pin_bordaloii_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0019",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que influente e inovadora artista plástica lisboeta (1934-2018), Helena Almeida («Helena Almeida»), pioneira da body art e fotografia conceptual em Portugal («Ouve-me», «Sente-me», «Seduzir-me»), cujo próprio corpo era a tela e o suporte da sua pintura e traço?",
+    "opcoes": [
+      "Lourdes Castro",
+      "Paula Rego",
+      "Helena Almeida",
+      "Rosa Ramalho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Helena Almeida representou Portugal nas Bienais de Veneza de 1982 e 2005 e na Bienal de São Paulo com exposições consagradas na Tate Modern e Jeu de Paume.",
+    "fonte": "Fundação de Serralves / Tate Modern / CAM Gulbenkian",
+    "factClusterId": "fc_pers_pin_helenaalmeida_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0020",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que histórica artista madeirense do Funchal (1930-2022), Lourdes Castro («Lourdes Castro»), fundadora da revista de vanguarda «KWY» em Paris em 1958 ao lado de René Bertholo, famosa pelo seu trabalho com contornos e «Sombras Deitadas» em acrílico e bordado?",
+    "opcoes": [
+      "Vieira da Silva",
+      "Helena Almeida",
+      "Graça Morais",
+      "Lourdes Castro (Revista KWY / Sombras)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Lourdes Castro foi galardoada com a Medalha de Mérito Cultural e o Grande Prémio da Fundação Calouste Gulbenkian.",
+    "fonte": "Fundação Calouste Gulbenkian / Museu de Arte Contemporânea da Madeira",
+    "factClusterId": "fc_pers_pin_lourdescastro_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0021",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pintor portuense do século XIX (1850-1893), António Carvalho da Silva Porto («Silva Porto»), pioneiro do Naturalismo e da pintura de ar livre em Portugal, líder do Grupo do Leão e autor da célebre tela «A Charneca de Belas»?",
+    "opcoes": [
+      "Silva Porto (António da Silva Porto)",
+      "Marques de Oliveira",
+      "Columbano",
+      "Carlos Reis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Silva Porto introduziu as técnicas da Escola de Barbizon francesa em Portugal influenciando decisivamente toda a pintura oitocentista.",
+    "fonte": "Museu do Chiado / Museu Soares dos Reis",
+    "factClusterId": "fc_pers_pin_silvaporto_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0022",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que importante e icónica ceramista popular de Galegos São Martinho (Barcelos, 1888-1977), Rosa Ramalho («Rosa da Rocha»), que revolucionou o figurado de barro de Barcelos com figuras míticas de monstros fantásticos, procissões e animais com cabeças humanas?",
+    "opcoes": [
+      "Júlia Côta",
+      "Rosa Ramalho (Rosa da Rocha)",
+      "Mistério de Barcelos",
+      "Maria Sineta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rosa Ramalho foi descoberta pelo pintor António Quadros nos anos 1950 tornando-se uma lenda viva da arte popular e do barro português.",
+    "fonte": "Museu de Olaria de Barcelos / Município de Barcelos",
+    "factClusterId": "fc_pers_pin_rosaramalho_barcelos_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0023",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que prestigiado pintor, desenhador e poeta surrealista lisboeta (1923-2006), Mário Cesariny («Mário Cesariny de Vasconcelos»), líder do Grupo Surrealista de Lisboa que praticava a pintura automática, o 'cadavre exquis' e a poesia libertária?",
+    "opcoes": [
+      "Cruzeiro Seixas",
+      "Alexandre O'Neill",
+      "Mário Cesariny",
+      "António Maria Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mário Cesariny doou o seu espólio à Fundação Cupertino de Miranda em Vila Nova de Famalicão que alberga o Centro de Estudos do Surrealismo.",
+    "fonte": "Fundação Cupertino de Miranda / Centro de Estudos do Surrealismo",
+    "factClusterId": "fc_pers_pin_mariocesariny_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0024",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que histórico pintor, desenhador e poeta surrealista da Amadora (1920-2020), Artur do Cruzeiro Seixas («Cruzeiro Seixas»), companheiro de Cesariny e mestre do desenho onírico e colagens enigmáticas que viveu até aos 99 anos?",
+    "opcoes": [
+      "Mário Cesariny",
+      "Carlos Calvet",
+      "Fernando Lemos",
+      "Cruzeiro Seixas (Artur do Cruzeiro Seixas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Cruzeiro Seixas foi o último grande sobrevivente da geração histórica do surrealismo português.",
+    "fonte": "Fundação Cupertino de Miranda / Biblioteca Nacional",
+    "factClusterId": "fc_pers_pin_cruzeiroseixas_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0025",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que célebre mestre ceramista e pintor português (1914-2016), Querubim Lapa («Querubim Lapa de Almeida»), professor da Escola António Arroio, autor do monumental painel cerâmico da Reitoria da Universidade de Lisboa e do painel da Avenida 24 de Julho?",
+    "opcoes": [
+      "Querubim Lapa",
+      "Manuel Cargaleiro",
+      "Bordalo Pinheiro",
+      "Eduardo Nery"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Querubim Lapa foi um dos maiores renovadores da cerâmica e do azulejo monumental em Portugal no século XX.",
+    "fonte": "Museu Nacional do Azulejo / Universidade de Lisboa",
+    "factClusterId": "fc_pers_pin_querubimlapa_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0026",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que notável pintor portuense (1917-2011), Júlio Resende («Júlio Martins Resende»), discípulo de Dórdio Gomes, autor do monumental painel cerâmico «Ribeira Negra» (1987) à saída do tabuleiro inferior da Ponte Luís I no Porto?",
+    "opcoes": [
+      "Nadir Afonso",
+      "Júlio Resende (Painel da Ribeira Negra)",
+      "Amadeo de Souza-Cardoso",
+      "Armando Alves"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O painel 'Ribeira Negra' tem 40 metros de extensão e retrata a alma e a labuta das gentes da beira-rio do Porto.",
+    "fonte": "Lugar do Desenho — Fundação Júlio Resende (Gondomar) / CMP",
+    "factClusterId": "fc_pers_pin_julioresende_ribeiranegra_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0027",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que genial mestre desenhador, humanista e arquiteto renascentista português do século XVI (c. 1517-1584), Francisco de Holanda («Francisco de Holanda»), autor dos célebres tratados «Da Pintura Antiga» e «Diálogos em Roma» (onde registou as conversas com Miguel Ângelo Buonarroti)?",
+    "opcoes": [
+      "Damião de Góis",
+      "Garcia de Orta",
+      "Francisco de Holanda",
+      "André de Resende"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Francisco de Holanda foi um dos maiores teóricos da arte e do desenho do Renascimento europeu.",
+    "fonte": "Biblioteca Nacional de Portugal / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_pers_pin_franciscodeholanda_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0028",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que inovador artista contemporâneo lisboeta (1948-2021), Julião Sarmento («Julião Sarmento»), um dos artistas visuais portugueses mais internacionais da sua geração, com presenças na Documenta de Kassel e Bienal de Veneza e obras no MoMA de Nova Iorque e Centro Pompidou em Paris?",
+    "opcoes": [
+      "Pedro Cabrita Reis",
+      "Rui Chafes",
+      "Francisco Tropa",
+      "Julião Sarmento"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Julião Sarmento explorou a sedução, o desejo e a memória em pintura, escultura, vídeo e instalações.",
+    "fonte": "Fundação de Serralves / Tate Modern / MoMA",
+    "factClusterId": "fc_pers_pin_juliaosarmento_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0029",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que monumental escultor e artista plástico de Lisboa (nascido em 1956), Pedro Cabrita Reis («Pedro Cabrita Reis»), conhecido pelas suas esculturas e instalações de grandes dimensões utilizando materiais industriais de construção (tijolos, vidro, vigas de ferro e luzes fluorescentes), autor da escultura monumental «Les Trois Grâces» no Jardim das Tulherias em Paris?",
+    "opcoes": [
+      "Pedro Cabrita Reis",
+      "Rui Chafes",
+      "José Pedro Croft",
+      "Alberto Carneiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Cabrita Reis representou Portugal na Bienal de Veneza de 2003 e as suas obras integram as mais prestigiadas coleções mundiais.",
+    "fonte": "Museu do Louvre / Bienal de Veneza / Serralves",
+    "factClusterId": "fc_pers_pin_pedrocabritareis_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0030",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que virtuoso escultor lisboeta (nascido em 1966), Rui Chafes («Rui Chafes»), vencedor do Prémio Pessoa em 2004, célebre pelas suas esculturas em ferro e aço pintadas a preto fosco que exploram o peso, o silêncio, a gravidade e o vazio?",
+    "opcoes": [
+      "Pedro Cabrita Reis",
+      "Rui Chafes (Prémio Pessoa 2004)",
+      "José Pedro Croft",
+      "João Cutileiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Chafes expôs na Bienal de Veneza e representou Portugal na Bienal de São Paulo.",
+    "fonte": "Prémio Pessoa / Museu de Serralves / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_pers_pin_ruichafes_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0031",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que revolucionário escultor português de Lisboa e Évora (1937-2021), João Cutileiro («João Cutileiro»), que quebrou com o classicismo estatuário tradicional criando em 1973 a polémica estátua de «D. Sebastião» em Lagos talhada em blocos de mármore de Estremoz com máquina de corte industrial?",
+    "opcoes": [
+      "Soares dos Reis",
+      "Canto da Maya",
+      "João Cutileiro",
+      "Leopoldo de Almeida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "João Cutileiro esculpiu também o Monumento ao 25 de Abril no cimo do Parque Eduardo VII em Lisboa.",
+    "fonte": "Centro de Arte João Cutileiro (Évora) / Município de Lagos",
+    "factClusterId": "fc_pers_pin_joaocutileiro_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0032",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que mestre escultor de Vila Nova de Gaia (1847-1889), António Soares dos Reis («Soares dos Reis»), autor da mais perfeita obra-prima da escultura romântica portuguesa em mármore de Carrara («O Desterrado», 1872), que dá nome ao museu nacional mais antigo da cidade do Porto?",
+    "opcoes": [
+      "António Teixeira Lopes",
+      "Simões de Almeida",
+      "Francisco de Lacerda",
+      "António Soares dos Reis («O Desterrado»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'O Desterrado' personifica a saudade e o isolamento e valeu a Soares dos Reis a medalha de ouro na Exposição de Madrid.",
+    "fonte": "Museu Nacional Soares dos Reis (Porto) / DGPC",
+    "factClusterId": "fc_pers_pin_soaresdosreis_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0033",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que eminente escultor de Vila Nova de Gaia (1866-1942), António Teixeira Lopes («Teixeira Lopes»), discípulo de Soares dos Reis, autor de estátuas monumentais como a «A Viúva», «A Infância de Caim» e a estátua de Eça de Queiroz no Chiado?",
+    "opcoes": [
+      "António Teixeira Lopes",
+      "Soares dos Reis",
+      "Costa Motta",
+      "Leopoldo de Almeida"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Casa-Museu Teixeira Lopes em Vila Nova de Gaia preserva o ateliê original e centenas de esculturas do artista.",
+    "fonte": "Casa-Museu Teixeira Lopes / Município de Gaia",
+    "factClusterId": "fc_pers_pin_teixeiralopes_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0034",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que prolífico escultor lisboeta do Estado Novo (1898-1975), Leopoldo de Almeida («Leopoldo de Almeida»), foi o autor do colossal conjunto escultórico em pedra calcária do «Padrão dos Descobrimentos» em Belém (1940/1960) e da estátua equestre de D. João I na Praça da Figueira?",
+    "opcoes": [
+      "Canto da Maya",
+      "Leopoldo de Almeida (Padrão dos Descobrimentos)",
+      "Barata Feyo",
+      "Martins Correia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Leopoldo de Almeida esculpiu mais de 30 figuras históricas no Padrão dos Descobrimentos ao lado do arquiteto Cottinelli Telmo.",
+    "fonte": "Padrão dos Descobrimentos / EGEAC / CML",
+    "factClusterId": "fc_pers_pin_leopoldodealmeida_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0035",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que importante pintor lisboeta (1881-1967), Eduardo Viana («Eduardo Afonso Viana»), companheiro de Amadeo e Robert Delaunay em Manhufe e Vila do Conde, assinou obras maiores do Modernismo português como «K4 O Quadrado Azul» e «Composição com Frutas»?",
+    "opcoes": [
+      "Amadeo de Souza-Cardoso",
+      "Dórdio Gomes",
+      "Eduardo Viana",
+      "Carlos Botelho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Viana foi um mestre do cromatismo e do geometrismo lírico recebendo o Grande Prémio Nacional de Pintura.",
+    "fonte": "Centro de Arte Moderna Gulbenkian / MNAC",
+    "factClusterId": "fc_pers_pin_eduardoviana_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0036",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pintor e ilustrador lisboeta do século XX (1899-1982), Carlos Botelho («Carlos Botelho»), é universalmente recordado como «O Pintor de Lisboa» pelas centenas de quadros de casario, telhados, ruelas de Alfama e do Bairro Alto e vistas panorâmicas do rio Tejo?",
+    "opcoes": [
+      "Bernardo Marques",
+      "Jorge Barradas",
+      "Manuel Lapa",
+      "Carlos Botelho (O Pintor de Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Carlos Botelho captou a luz dourada e a alma arquitetónica de Lisboa como nenhum outro pintor do século XX.",
+    "fonte": "Museu de Lisboa / CAM Gulbenkian",
+    "factClusterId": "fc_pers_pin_carlosbotelho_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0037",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que notável pintora portuense (1866-1922), Aurélia de Sousa («Aurélia de Sousa»), que estudou na Academia Julian em Paris, pintou em 1900 o célebre e magnético «Auto-Retrato com Casaco Vermelho» (considerado um dos mais impressionantes autorretratos da pintura europeia)?",
+    "opcoes": [
+      "Aurélia de Sousa (Auto-Retrato com Casaco Vermelho)",
+      "Sofia Martins de Souza",
+      "Sarah Affonso",
+      "Maria de Lourdes de Mello e Castro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O olhar frontal e desafiador de Aurélia de Sousa no seu autorretrato na Quinta da China é um marco do naturalismo intimista no Museu Soares dos Reis.",
+    "fonte": "Museu Nacional Soares dos Reis / CMP",
+    "factClusterId": "fc_pers_pin_aureliadesousa_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0038",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que ilustre pintora modernista e ilustradora de Viana do Castelo (1899-1983), Sarah Affonso («Sarah Affonso»), casada com Almada Negreiros, retratou o folclore, as festas da Senhora d'Agonia e o imaginário popular minhoto com grande sensibilidade cromática («As Meninas», «O Casamento») ?",
+    "opcoes": [
+      "Mily Possoz",
+      "Sarah Affonso (Almada Negreiros)",
+      "Ofélia Marques",
+      "Maria Keil"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu Municipal de Viana do Castelo e o Museu Calouste Gulbenkian preservam o seu notável espólio artístico.",
+    "fonte": "Fundação Calouste Gulbenkian / Município de Viana do Castelo",
+    "factClusterId": "fc_pers_pin_sarahaffonso_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0039",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que talentosa pintora, designer e ilustradora de Silves (1914-2012), Maria Keil («Maria Keil do Amaral»), casada com o arquiteto Francisco Keil do Amaral, foi a responsável pela renovação histórica do azulejo contemporâneo desenhando os painéis artísticos das primeiras estações do Metropolitano de Lisboa nos anos 1950/60?",
+    "opcoes": [
+      "Maria Helena Vieira da Silva",
+      "Manuela George",
+      "Maria Keil (Metropolitano de Lisboa)",
+      "Helena Almeida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Maria Keil desenhou os azulejos das estações do Intendente, Marquês de Pombal, Restauradores, Saldanha e Rossio na Fábrica Viúva Lamego.",
+    "fonte": "Metropolitano de Lisboa / Museu Nacional do Azulejo",
+    "factClusterId": "fc_pers_pin_mariakeil_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0040",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que genial ilustrador, caricaturista e ceramista lisboeta (1846-1905), Rafael Bordalo Pinheiro («Rafael Bordalo Pinheiro»), fundou os jornais satíricos «O António Maria» e «A Paródia» e criou em 1875 o mítico personagem representativo do povo português:",
+    "opcoes": [
+      "Manuel dos Passos",
+      "João Ninguém",
+      "Ti Manel",
+      "Zé Povinho (com o seu célebre «manguito»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bordalo Pinheiro criou o Zé Povinho como sátira à resignação do povo perante as imposições e impostos da classe política.",
+    "fonte": "Museu Bordalo Pinheiro (Lisboa) / CML",
+    "factClusterId": "fc_pers_pin_rafaelbordalopinheiro_zepovinho_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0041",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que histórico escultor açoriano de Ponta Delgada (1890-1959), Ernesto Canto da Maya («Canto da Maya»), que trabalhou em Paris e Genebra, destacou-se pela escultura decorativa Arte Déco em terracota, bronze e mármore («D. Manuel I», «Monumento aos Descobrimentos»)?",
+    "opcoes": [
+      "Canto da Maya (Ernesto Canto da Maya)",
+      "João Cutileiro",
+      "Soares dos Reis",
+      "Francisco Franco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Carlos Machado em Ponta Delgada abriga a mais importante coleção de escultura de Canto da Maya.",
+    "fonte": "Museu Carlos Machado (Ponta Delgada) / Governo dos Açores",
+    "factClusterId": "fc_pers_pin_cantodamaya_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0042",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que importante e polémico escultor madeirense do Funchal (1885-1955), Francisco Franco («Francisco Franco de Sousa»), foi o autor da imponente estátua de «Gonçalo Velho Cabral» em Ponta Delgada e da célebre estátua do «Cristo Rei» em Almada?",
+    "opcoes": [
+      "Leopoldo de Almeida",
+      "Francisco Franco",
+      "Teixeira Lopes",
+      "Barata Feyo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu Henrique e Francisco Franco no Funchal preserva a obra de Francisco Franco e do seu irmão pintor Henrique Franco.",
+    "fonte": "Museu Henrique e Francisco Franco (Funchal) / Câmara Municipal do Funchal",
+    "factClusterId": "fc_pers_pin_franciscofranco_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0043",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pioneiro artista contemporâneo de Vila Nova de Famalicão (1937-2017), Alberto Carneiro («Alberto Carneiro»), é considerado o pai da «Land Art» e da arte ecológica em Portugal integrando materiais da natureza (madeira, pedra, folhas secas) nas suas árvores e florestas escultóricas?",
+    "opcoes": [
+      "Rui Chafes",
+      "Pedro Cabrita Reis",
+      "Alberto Carneiro (Land Art)",
+      "Ângelo de Sousa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Alberto Carneiro defendia que 'A arte é o corpo e a natureza' com obras no Museu Internacional de Escultura Contemporânea de Santo Tirso.",
+    "fonte": "Fundação de Serralves / MIEC Santo Tirso",
+    "factClusterId": "fc_pers_pin_albertocarneiro_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0044",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que emblemático artista plástico moçambicano e português (1938-2011), Ângelo de Sousa («Ângelo de Sousa»), professor da Escola de Belas-Artes do Porto e membro do grupo 'Os Quatro Vintes', celebrizou-se pela minimalista e rigorosa pesquisa das cores puras e da luz?",
+    "opcoes": [
+      "Armando Alves",
+      "Jorge Pinheiro",
+      "José Rodrigues",
+      "Ângelo de Sousa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ângelo de Sousa foi galardoado com o Prémio Pessoa em 2007 e representou Portugal na Bienal de Veneza.",
+    "fonte": "Prémio Pessoa / Museu de Serralves",
+    "factClusterId": "fc_pers_pin_angelodesousa_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0045",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que famoso escultor de Luanda e do Porto (1936-2016), José Rodrigues («Mestre José Rodrigues»), fundador da Cooperativa Árvore e autor do icónico monumento em bronze e granito «O Cubo da Praça da Ribeira» no Porto?",
+    "opcoes": [
+      "José Rodrigues (O Cubo da Ribeira)",
+      "Barata Feyo",
+      "João Cutileiro",
+      "Soares dos Reis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cubo da Ribeira na Praça da Ribeira sobre uma fonte é um dos maiores pontos de encontro e postais fotográficos do centro histórico portuense.",
+    "fonte": "Fundação José Rodrigues (Porto) / CMP",
+    "factClusterId": "fc_pers_pin_joserodrigues_cuboribeira_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0046",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que pintor e aguarelista portuense de ascendência alemã (1928-2014), Fernando Lanhas («Fernando Lanhas»), foi o pioneiro do Abstracionismo Geométrico no norte de Portugal e fundou a coleção arqueológica do Museu da Faculdade de Letras do Porto?",
+    "opcoes": [
+      "Nadir Afonso",
+      "Fernando Lanhas",
+      "Júlio Resende",
+      "António Dacosta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Fernando Lanhas intitulava os seus quadros abstratos como '03-52' relacionando a pintura com a astronomia e a geologia.",
+    "fonte": "Museu de Serralves / Universidade do Porto",
+    "factClusterId": "fc_pers_pin_fernandolanhas_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0047",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que mestre pintor açoriano de Angra do Heroísmo (1914-1990), António Dacosta («António Dacosta»), pioneiro do Surrealismo em Portugal e crítico de arte em Paris, celebrizou-se pelos quadros oníricos como «Antítese da Calma» e «Festa da Epifania»?",
+    "opcoes": [
+      "Canto da Maya",
+      "Domingos Rebelo",
+      "António Dacosta",
+      "Tomás de Borba"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "António Dacosta foi um dos fundadores do surrealismo português recebendo o Prémio Amadeo de Souza-Cardoso.",
+    "fonte": "CAM Gulbenkian / Museu de Angra do Heroísmo",
+    "factClusterId": "fc_pers_pin_antoniodacosta_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0048",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que consagrado pintor açoriano de Ponta Delgada (1891-1975), Domingos Rebelo («Domingos Maria Xavier Rebelo»), pintou em 1926 a icónica tela etnográfica «Os Emigrantes» (retratando com emoção uma família açoriana prestes a embarcar com a viola da terra)?",
+    "opcoes": [
+      "António Dacosta",
+      "Canto da Maya",
+      "Álvaro França",
+      "Domingos Rebelo («Os Emigrantes»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'Os Emigrantes' de Domingos Rebelo no Museu Carlos Machado é a imagem símbolo da história e da saudade da diáspora açoriana.",
+    "fonte": "Museu Carlos Machado (Ponta Delgada) / Governo dos Açores",
+    "factClusterId": "fc_pers_pin_domingosrebelo_emigrantes_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0049",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que notável escultor e artista plástico lisboeta (nascido em 1957), José Pedro Croft («José Pedro Croft»), representou Portugal na 57.ª Bienal de Arte de Veneza em 2017 no Pavilhão da Villa Hériot com esculturas de espelhos, luz e armações de aço?",
+    "opcoes": [
+      "José Pedro Croft (Bienal de Veneza 2017)",
+      "Rui Chafes",
+      "Pedro Cabrita Reis",
+      "Francisco Tropa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Pedro Croft desconstrói a perceção do espaço e dos reflexos nas suas esculturas públicas.",
+    "fonte": "DGArtes / Bienal de Veneza / Museu de Serralves",
+    "factClusterId": "fc_pers_pin_josepedrocroft_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_PIN_0050",
+    "tema": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "pergunta": "Que consagrada artista plástica e escultora portuguesa (nascida em Évora em 1962), Fernanda Fragateiro («Fernanda Fragateiro»), célebre pelas suas esculturas e instalações subtis em diálogo direto com a arquitetura moderna, o modernismo e a literatura?",
+    "opcoes": [
+      "Joana Vasconcelos",
+      "Graça Morais",
+      "Fernanda Fragateiro",
+      "Lourdes Castro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As obras de Fernanda Fragateiro integram o MAAT em Lisboa, a Fundação Serralves e a Harvard Art Museums nos EUA.",
+    "fonte": "MAAT / Fundação EDP / Harvard Art Museums",
+    "factClusterId": "fc_pers_pin_fernandafragateiro_01",
+    "category": "Personalidades",
+    "subcategory": "Artistas & Pintores"
+  },
+  {
+    "id": "PERS_POL_0001",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que insigne estadista e advogado lisboeta (1924-2017), Mário Soares («Mário Soares»), cofundador do Partido Socialista e histórico opositor ao Estado Novo deportado para São Tomé, exerceu os cargos de Primeiro-Ministro em três governos e Presidente da República durante dois mandatos (1986-1996), sendo amplamente aclamado como o «Pai da Democracia»?",
+    "opcoes": [
+      "Mário Soares (1924-2017)",
+      "Francisco Sá Carneiro",
+      "Jorge Sampaio",
+      "Ramalho Eanes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mário Soares liderou as negociações para a adesão de Portugal à Comunidade Económica Europeia (CEE) assinada em 1985 nos Jerónimos.",
+    "fonte": "Fundação Mário Soares e Maria Barroso / Assembleia da República / Presidência da República",
+    "factClusterId": "fc_pers_pol_mariosoares_paidademocracia_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0002",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que carismático advogado portuense e estadista (1934-1980), Francisco Sá Carneiro («Francisco Sá Carneiro»), fundador do PPD/PSD e líder da Aliança Democrática (AD), Primeiro-Ministro do VI Governo Constitucional, faleceu tragicamente a 4 de dezembro de 1980 na queda do avião em Camarate?",
+    "opcoes": [
+      "Adelino Amaro da Costa",
+      "Francisco Sá Carneiro (1934-1980)",
+      "Pinto Balsemão",
+      "Mota Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá Carneiro é o patrono do PSD e o aeroporto internacional do Porto foi batizado Aeroporto Francisco Sá Carneiro em sua homenagem.",
+    "fonte": "Instituto Francisco Sá Carneiro / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_sacarneiro_camarate_1980_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0003",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre general e militar transmontano de Alcains / Castelo Branco (nascido em 1935), General António Ramalho Eanes («Ramalho Eanes»), figura central na contenção militar da crise do 25 de Novembro de 1975, foi o primeiro Presidente da República democraticamente eleito por sufrágio universal direto em 1976?",
+    "opcoes": [
+      "General António de Spínola",
+      "General Costa Gomes",
+      "General Ramalho Eanes",
+      "General Vasco Gonçalves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ramalho Eanes cumpriu dois mandatos presidenciais completos (1976-1986) consolidando a transição civil e democrática.",
+    "fonte": "Museu da Presidência da República / CNE",
+    "factClusterId": "fc_pers_pol_ramalhoeanes_1976_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0004",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável engenheira química e líder cívica de São Pedro do Sul e Abrantes (1930-2004), Maria de Lourdes Pintasilgo («Maria de Lourdes Pintasilgo»), fez história em 1979 ao ser nomeada pelo Presidente Ramalho Eanes como a primeira e única mulher a chefiar um governo em Portugal como:",
+    "opcoes": [
+      "Presidente da Assembleia da República",
+      "Presidente do Tribunal Constitucional",
+      "Provedora de Justiça",
+      "Primeira-Ministra de Portugal (V Governo Constitucional)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria de Lourdes Pintasilgo foi também embaixadora de Portugal na UNESCO e candidata independente à Presidência da República em 1986.",
+    "fonte": "Fundação Cuidar o Futuro / DHP / Assembleia da República",
+    "factClusterId": "fc_pers_pol_mariadelourdespintasilgo_1979_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0005",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que prestigiado advogado e estadista lisboeta (1939-2021), Jorge Sampaio («Jorge Sampaio»), líder do Partido Socialista, Presidente da Câmara Municipal de Lisboa (1989-1995) e Presidente da República durante dois mandatos (1996-2006), foi nomeado Alto Representante da ONU para a Aliança das Civilizações?",
+    "opcoes": [
+      "Jorge Sampaio (1939-2021)",
+      "Mário Soares",
+      "António Guterres",
+      "Ferro Rodrigues"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Jorge Sampaio desempenhou um papel internacional decisivo na independência de Timor-Leste e criou a Plataforma Global para Estudantes Sírios.",
+    "fonte": "Museu da Presidência da República / ONU",
+    "factClusterId": "fc_pers_pol_jorgesampaio_1996_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0006",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente economista e professor catedrático algarvio de Boliqueime (nascido em 1939), Aníbal Cavaco Silva («Cavaco Silva»), exerceu o cargo de Primeiro-Ministro durante uma década (1985-1995) conquistando duas maiorias absolutas pelo PSD, e foi Presidente da República durante dois mandatos (2006-2016)?",
+    "opcoes": [
+      "Durão Barroso",
+      "Aníbal Cavaco Silva",
+      "Passos Coelho",
+      "Pinto Balsemão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Cavaco Silva é o político com mais anos acumulados na chefia do Governo e da Chefia de Estado (20 anos) na história democrática portuguesa.",
+    "fonte": "Assembleia da República / Presidência da República",
+    "factClusterId": "fc_pers_pol_cavacosilva_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0007",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável engenheiro e estadista de Lisboa e Fundão (nascido em 1949), António Guterres («António Guterres»), Primeiro-Ministro de Portugal de 1995 a 2002 e Alto-Comissário da ONU para os Refugiados (2005-2015), foi eleito em 2016 para o cargo de topo da diplomacia mundial como:",
+    "opcoes": [
+      "Presidente da Comissão Europeia",
+      "Presidente do Conselho Europeu",
+      "Secretário-Geral das Nações Unidas (ONU)",
+      "Diretor-Geral da UNESCO"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Guterres foi reeleito por unanimidade em 2021 para um segundo mandato à frente da Organização das Nações Unidas.",
+    "fonte": "Organização das Nações Unidas (ONU) / Governo de Portugal",
+    "factClusterId": "fc_pers_pol_antonioguterres_onu_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0008",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente político e jurista de Lisboa (nascido em 1956), José Manuel Durão Barroso («Durão Barroso»), Primeiro-Ministro de Portugal pelo PSD (2002-2004), liderou o executivo comunitário europeu durante 10 anos (2004-2014) como:",
+    "opcoes": [
+      "Presidente do Parlamento Europeu",
+      "Secretário-Geral da NATO",
+      "Presidente do Eurogrupo",
+      "Presidente da Comissão Europeia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Durão Barroso liderou a Comissão Europeia durante a maior expansão da União Europeia a Leste e a assinatura do Tratado de Lisboa em 2007.",
+    "fonte": "Comissão Europeia / DHP",
+    "factClusterId": "fc_pers_pol_duraobarroso_comissaoeuropeia_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0009",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que prestigiado professor catedrático de Direito, comentador e político de Lisboa (nascido em 1948), Marcelo Rebelo de Sousa («Marcelo Rebelo de Sousa»), antigo líder do PSD e deputado constituinte, foi eleito Presidente da República em 2016 e reeleito à primeira volta em 2021?",
+    "opcoes": [
+      "Marcelo Rebelo de Sousa",
+      "António Costa",
+      "Jorge Miranda",
+      "Rui Rio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Marcelo Rebelo de Sousa notabilizou-se pela sua enorme proximidade afetiva aos cidadãos, viagens constantes e promulgações célebres.",
+    "fonte": "Presidência da República / CNE",
+    "factClusterId": "fc_pers_pol_marcelorebelodesousa_2016_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0010",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente advogado e político lisboeta (nascido em 1961), António Costa («António Costa»), antigo Presidente da CML (2007-2015) e Primeiro-Ministro de Portugal durante 8 anos (2015-2024 através da «Geringonça» e maioria absoluta), foi eleito em 2024 como:",
+    "opcoes": [
+      "Secretário-Geral da NATO",
+      "Presidente do Conselho Europeu",
+      "Presidente do Banco Central Europeu",
+      "Comissário Europeu para a Economia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Costa é o primeiro português a ser eleito para presidir às cimeiras de Chefes de Estado e de Governo dos 27 países da União Europeia.",
+    "fonte": "Conselho Europeu / Assembleia da República",
+    "factClusterId": "fc_pers_pol_antoniocosta_conselhoeuropeu_2024_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0011",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que corajoso oficial da Força Aérea portuguesa de Torres Novas (1906-1965), General Humberto Delgado («O General Sem Medo»), protagonizou a histórica candidatura presidencial de oposição à ditadura em 1958 proclamando que demitiria Salazar («Obviamente, demito-o!»)?",
+    "opcoes": [
+      "General Norton de Matos",
+      "General Henrique Galvão",
+      "General Humberto Delgado («O General Sem Medo»)",
+      "Almirante Américo Thomaz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Humberto Delgado foi assassinado pela polícia política PIDE numa emboscada em Los Hurones (Olivença) em 1965 e repousa no Panteão Nacional.",
+    "fonte": "Panteão Nacional / Fundação Humberto Delgado / DHP",
+    "factClusterId": "fc_pers_pol_humbertodelgado_1958_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0012",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente e poderoso estadista do século XVIII (1699-1782), Sebastião José de Carvalho e Melo («Marquês de Pombal»), Primeiro-Ministro do Rei D. José I, liderou a reconstrução iluminista da Baixa de Lisboa após o Terramoto de 1755 e aboliu a escravatura no reino em 1761?",
+    "opcoes": [
+      "Duque de Palmela",
+      "Duque de Saldanha",
+      "Conde de Castelo Melhor",
+      "Marquês de Pombal (1699-1782)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pombal expulsou os jesuítas em 1759, reformou a Universidade de Coimbra em 1772 e instituiu a Real Companhia das Vinhas do Alto Douro.",
+    "fonte": "Dicionário de História de Portugal / Torre do Tombo",
+    "factClusterId": "fc_pers_pol_marquesdepombal_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0013",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que proeminente jurista e professor catedrático da Faculdade de Direito de Lisboa de Viseu (1941-2019), Diogo Freitas do Amaral («Freitas do Amaral»), fundou o CDS em 1974, foi Primeiro-Ministro interino e presidiu em 1995-1996 à 50.ª Sessão da Assembleia Geral da ONU?",
+    "opcoes": [
+      "Diogo Freitas do Amaral (1941-2019)",
+      "Adelino Amaro da Costa",
+      "Basílio Horta",
+      "Adriano Moreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Freitas do Amaral foi também Ministro dos Negócios Estrangeiros em governos de diferentes matrizes políticas (AD e PS).",
+    "fonte": "Instituto Diogo Freitas do Amaral / Assembleia da República",
+    "factClusterId": "fc_pers_pol_freitasdoamaral_onu_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0014",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado professor e jurista de Grijó (Macedo de Cavaleiros, 1922-2022), Adriano Moreira («Adriano Moreira»), Ministro do Ultramar (1961-1962), aboliu o discriminatório Estatuto do Indigenato e fundou as Universidades de Angola e Moçambique presidindo ao CDS-PP?",
+    "opcoes": [
+      "Franco Nogueira",
+      "Adriano Moreira (1922-2022)",
+      "Marcello Caetano",
+      "Veiga Simão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Adriano Moreira foi uma das vozes mais respeitadas da academia e do parlamento português até aos 100 anos de idade.",
+    "fonte": "Academia das Ciências de Lisboa / Assembleia da República",
+    "factClusterId": "fc_pers_pol_adrianomoreira_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0015",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável e histórico líder republicano de Lagos e Lisboa (1871-1937), Afonso Augusto da Costa («Afonso Costa»), três vezes Chefe do Governo e autor da célebre Lei da Separação do Estado das Igrejas de 1911, foi a figura dominante da Primeira República?",
+    "opcoes": [
+      "Bernardino Machado",
+      "António José de Almeida",
+      "Afonso Costa («O Rachador», 1871-1937)",
+      "Manuel de Arriaga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Afonso Costa conseguiu os únicos orçamentos de Estado com superavit da 1.ª República e chefiou a delegação portuguesa na Conferência de Paz de Paris em 1919.",
+    "fonte": "Panteão Nacional / DHP",
+    "factClusterId": "fc_pers_pol_afonsocosta_primeirarepublica_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0016",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente e culto jurista e orador açoriano da Horta / Faial (1840-1917), Manuel José de Arriaga («Manuel de Arriaga»), foi eleito em 24 de agosto de 1911 como o:",
+    "opcoes": [
+      "Primeiro-Ministro de Portugal",
+      "Presidente da Assembleia Constituinte",
+      "Governador Civil de Lisboa",
+      "Primeiro Presidente da República Portuguesa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuel de Arriaga venceu o candidato Bernardino Machado na eleição parlamentar de 1911 e repousa no Panteão Nacional.",
+    "fonte": "Museu da Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_pers_pol_manueldearriaga_primeiropresidente_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0017",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que oficial militar e político de Caminha (1872-1918), Sidónio Pais («Sidónio Pais»), liderou o golpe de dezembro de 1917 instaurando o regime presidencialista da «República Nova» («O Presidente-Rei»), até ser assassinado a tiro na Estação do Rossio em Lisboa?",
+    "opcoes": [
+      "Sidónio Pais (1872-1918)",
+      "Pimenta de Castro",
+      "Gomes da Costa",
+      "Sinel de Cordes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sidónio Pais foi o primeiro Presidente a ser eleito por sufrágio universal direto e o seu funeral foi um dos maiores cortejos fúnebres da história de Lisboa.",
+    "fonte": "Panteão Nacional (Igreja de Santa Engrácia) / DHP",
+    "factClusterId": "fc_pers_pol_sidoniopais_presidenterei_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0018",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre e carismático médico republicano de Penacova e Lisboa (1866-1929), António José de Almeida («António José de Almeida»), orador brilhante e fundador do Partido Republicano Evolucionista, foi o único Presidente da 1.ª República a cumprir integralmente o seu mandato presidencial de:",
+    "opcoes": [
+      "Cinco anos",
+      "Quatro anos completos (1919 a 1923)",
+      "Seis anos",
+      "Sete anos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António José de Almeida visitou o Brasil no Centenário da Independência em 1922 sendo aclamado em apoteose no Rio de Janeiro.",
+    "fonte": "Museu da Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_pers_pol_antoniojosedealmeida_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0019",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que general de cavalaria de Estremoz (1910-1996), António de Spínola («General Spínola»), autor do livro-bomba «Portugal e o Futuro» que acelerou a Revolução de Abril, assumiu a presidência da Junta de Salvação Nacional sendo o primeiro Presidente da República pós-25 de Abril?",
+    "opcoes": [
+      "General Costa Gomes",
+      "Major Otelo Saraiva de Carvalho",
+      "General António de Spínola (1910-1996)",
+      "General Vasco Gonçalves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Spínola demitiu-se em setembro de 1974 na sequência do apelo à 'maioria silenciosa' e liderou o MDLP no exílio antes de ser reabilitado como Marechal.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Histórico Militar",
+    "factClusterId": "fc_pers_pol_antoniodespinola_1974_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0020",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre general e matemático militar de Nisa (1914-2001), General Francisco da Costa Gomes («Costa Gomes»), Chefe do Estado-Maior General das Forças Armadas demitido antes de Abril e Presidente da República de 1974 a 1976 («O Rolha»), evitou uma guerra civil durante o Processo Revolucionário Em Curso (PREC)?",
+    "opcoes": [
+      "General Ramalho Eanes",
+      "General Spínola",
+      "General Galvão de Melo",
+      "General Francisco da Costa Gomes (1914-2001)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Costa Gomes conduziu a descolonização e a assinatura do pacto MFA-Partidos até à aprovação da Constituição de 1976.",
+    "fonte": "Museu da Presidência da República / DHP",
+    "factClusterId": "fc_pers_pol_costagomes_1974_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0021",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que economista e político lisboeta (nascido em 1964), Pedro Passos Coelho («Passos Coelho»), Presidente do PSD e Primeiro-Ministro de Portugal (2011-2015), governou o país durante a execução do programa de assistência financeira da Troika (FMI, BCE e CE)?",
+    "opcoes": [
+      "Pedro Passos Coelho (2011-2015)",
+      "José Sócrates",
+      "Durão Barroso",
+      "Santana Lopes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O governo de coligação PSD/CDS de Passos Coelho concluiu a saída limpa do programa da Troika em maio de 2014.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_passoscoelho_troika_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0022",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que economista e professor do ISEG de Coimbra e Lisboa (nascido em 1965), Mário Centeno («Mário Centeno»), Ministro das Finanças (2015-2020) celebrizado por Wolfgang Schäuble como «O Ronaldo do Eurogrupo», foi eleito Presidente do Eurogrupo em 2017 e Governador do Banco de Portugal em 2020?",
+    "opcoes": [
+      "Vítor Gaspar",
+      "Mário Centeno (Presidente do Eurogrupo, 2018-2020)",
+      "Teixeira dos Santos",
+      "Fernando Medina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Centeno alcançou o primeiro excedente orçamental da democracia portuguesa em 2019.",
+    "fonte": "Banco de Portugal / Eurogrupo / Ministério das Finanças",
+    "factClusterId": "fc_pers_pol_mariocenteno_eurogrupo_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0023",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente jurista e político de Lisboa (nascido em 1956), Pedro Santana Lopes («Santana Lopes»), antigo Presidente da CML e líder do PSD, exerceu o cargo de Primeiro-Ministro do XVI Governo Constitucional em 2004 antes da dissolução do parlamento por Jorge Sampaio?",
+    "opcoes": [
+      "Durão Barroso",
+      "Marques Mendes",
+      "Pedro Santana Lopes (2004-2005)",
+      "Manuela Ferreira Leite"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Santana Lopes presidiu também à Santa Casa da Misericórdia de Lisboa e foi eleito Presidente da Câmara da Figueira da Foz.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_santanalopes_2004_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0024",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente economista e política lisboeta (nascida em 1940), Manuela Ferreira Leite («Manuela Ferreira Leite»), foi a primeira mulher a liderar o Partido Social Democrata (PSD, 2008-2010) e a exercer os cargos de Ministra da Educação e Ministra das Finanças com o objetivo do défice zero?",
+    "opcoes": [
+      "Maria Luís Albuquerque",
+      "Assunção Cristas",
+      "Teresa Patrício Gouveia",
+      "Manuela Ferreira Leite"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuela Ferreira Leite foi uma das economistas com maior influência nas finanças públicas portuguesas sendo membro do Conselho de Estado.",
+    "fonte": "PSD / Assembleia da República",
+    "factClusterId": "fc_pers_pol_manuelaferreiraleite_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0025",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente advogado e político de Espinho (nascido em 1973), Luís Montenegro («Luís Montenegro»), líder parlamentar do PSD durante o governo de Passos Coelho e eleito Presidente do PSD em 2022, tornou-se Primeiro-Ministro de Portugal no XXIV Governo Constitucional em abril de 2024?",
+    "opcoes": [
+      "Luís Montenegro (XXIV Governo Constitucional)",
+      "Pedro Nuno Santos",
+      "Rui Rio",
+      "Paulo Rangel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Luís Montenegro liderou a coligação Aliança Democrática (AD) à vitória nas eleições legislativas de março de 2024.",
+    "fonte": "Governo de Portugal / Assembleia da República",
+    "factClusterId": "fc_pers_pol_luismontenegro_2024_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0026",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que brilhante economista e professor universitário de Vila Nova de Gaia (nascido em 1955), Paulo Rangel («Paulo Rangel»), líder da delegação do PSD no Parlamento Europeu durante 15 anos e Vice-Presidente do PPE, foi nomeado em 2024 como Ministro de Estado e dos Negócios Estrangeiros de Portugal?",
+    "opcoes": [
+      "Nuno Melo",
+      "Paulo Rangel",
+      "José Pedro Aguiar-Branco",
+      "Joaquim Miranda Sarmento"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Paulo Rangel é uma das figuras portuguesas de maior prestígio nas instituições da União Europeia em Bruxelas e Estrasburgo.",
+    "fonte": "Ministério dos Negócios Estrangeiros / Parlamento Europeu",
+    "factClusterId": "fc_pers_pol_paulorangel_mne_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0027",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que experiente jurista e político do Porto (nascido em 1957), José Pedro Aguiar-Branco («Aguiar-Branco»), antigo Ministro da Justiça e Ministro da Defesa Nacional, foi eleito em março de 2024 como o Presidente da Assembleia da República da XVI Legislatura?",
+    "opcoes": [
+      "Augusto Santos Silva",
+      "Eduardo Ferro Rodrigues",
+      "José Pedro Aguiar-Branco",
+      "Jaime Gama"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Presidente da Assembleia da República é a segunda figura na hierarquia do Estado Português substituindo o Presidente da República nas suas ausências.",
+    "fonte": "Assembleia da República / Diário da Assembleia",
+    "factClusterId": "fc_pers_pol_aguiarbranco_parlamento_2024_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0028",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente sociólogo, professor catedrático da Universidade do Porto e estadista (nascido em 1956), Augusto Santos Silva («Santos Silva»), exerceu as funções de Ministro da Educação, Ministro da Defesa, Ministro dos Negócios Estrangeiros e Presidente da Assembleia da República (2022-2024)?",
+    "opcoes": [
+      "Ferro Rodrigues",
+      "Jaime Gama",
+      "António Vitorino",
+      "Augusto Santos Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Santos Silva desempenhou um papel central na diplomacia europeia e na defesa dos valores democráticos parlamentares.",
+    "fonte": "Assembleia da República / Universidade do Porto",
+    "factClusterId": "fc_pers_pol_augustosantossilva_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0029",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico economista e político lisboeta (nascido em 1949), Eduardo Ferro Rodrigues («Ferro Rodrigues»), Secretário-Geral do Partido Socialista (2002-2004) e Ministro do Trabalho e Solidariedade criador do Rendimento Mínimo Garantido (RMG), presidiu à Assembleia da República de 2015 a 2022?",
+    "opcoes": [
+      "Eduardo Ferro Rodrigues (2015-2022)",
+      "António de Almeida Santos",
+      "Jaime Gama",
+      "Assunção Esteves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ferro Rodrigues presidiu ao parlamento durante os dois governos da 'Geringonça' e da pandemia.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_ferrorodrigues_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0030",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórica e notável jurista de Valpaços (nascida em 1949), Maria da Assunção Esteves («Assunção Esteves»), juíza do Tribunal Constitucional e eurodeputada pelo PSD, foi a primeira mulher na história de Portugal a ser eleita Presidente da Assembleia da República (2011-2015)?",
+    "opcoes": [
+      "Manuela Ferreira Leite",
+      "Assunção Esteves (Primeira Mulher Presidente da AR)",
+      "Teresa Patrício Gouveia",
+      "Elisa Ferreira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Assunção Esteves presidiu à Assembleia da República durante a XII Legislatura desempenhando a segunda magistratura da Nação.",
+    "fonte": "Assembleia da República / Tribunal Constitucional",
+    "factClusterId": "fc_pers_pol_assuncaoesteves_primeiramulher_ar_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0031",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre advogado e estadista da Beira Baixa / Cabeça Gorda (1926-2016), António de Almeida Santos («Almeida Santos»), Ministro da Coordenação Interterritorial e Ministro dos Assuntos Parlamentares, foi Presidente da Assembleia da República durante três mandatos (1995-2002) e Presidente Honorário do PS?",
+    "opcoes": [
+      "Manuel Tito de Morais",
+      "Barbosa de Melo",
+      "António de Almeida Santos (1926-2016)",
+      "Mota Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Almeida Santos foi um dos parlamentares e legisladores mais brilhantes da democracia portuguesa e conselheiro de Estado.",
+    "fonte": "Assembleia da República / Fundação Mário Soares",
+    "factClusterId": "fc_pers_pol_almeidasantos_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0032",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado jornalista e político lisboeta (nascido em 1937), Francisco Pinto Balsemão («Pinto Balsemão»), cofundador do PPD com Sá Carneiro, fundou o semanário Expresso em 1973 e foi Primeiro-Ministro de Portugal nos VII e VIII Governos Constitucionais (1981-1983) e criador da SIC em 1992?",
+    "opcoes": [
+      "Vítor Cunha Rego",
+      "Marcelo Rebelo de Sousa",
+      "Nuno Brederode dos Santos",
+      "Francisco Pinto Balsemão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pinto Balsemão presidiu ao grupo Impresa e conduziu a 1.ª Revisão Constitucional de 1982 que extinguiu o Conselho da Revolução militar.",
+    "fonte": "Grupo Impresa / Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_pintobalsemao_expresso_sic_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0033",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político açoriano de Ponta Delgada (nascido em 1943), João Bosco Mota Amaral («Mota Amaral»), foi o primeiro Presidente do Governo Regional dos Açores durante quase duas décadas (1976-1995) e Presidente da Assembleia da República (2002-2005)?",
+    "opcoes": [
+      "João Bosco Mota Amaral",
+      "Alberto João Jardim",
+      "Carlos César",
+      "Vasco Cordeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mota Amaral foi o principal artífice do regime de autonomia político-administrativa da Região Autónoma dos Açores na Constituinte de 1975/76.",
+    "fonte": "Governo dos Açores / Assembleia da República",
+    "factClusterId": "fc_pers_pol_motaamaral_acores_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0034",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que carismático e controverso líder político do Funchal (nascido em 1943), Alberto João Jardim («Alberto João Jardim»), liderou o Governo Regional da Madeira de forma ininterrupta durante 37 anos (1978-2015) conquistando dez maiorias absolutas pelo PSD-Madeira?",
+    "opcoes": [
+      "Miguel Albuquerque",
+      "Alberto João Jardim (37 anos de governação)",
+      "Jaime Ramos",
+      "Ornelas Camacho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alberto João Jardim transformou as infraestruturas da Madeira com recurso a fundos comunitários construindo túneis, vias rápidas e o alargamento do aeroporto.",
+    "fonte": "Governo Regional da Madeira / DHP",
+    "factClusterId": "fc_pers_pol_albertojoaojardim_madeira_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0035",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado líder político açoriano de Ponta Delgada (nascido em 1956), Carlos César («Carlos César»), Presidente do Governo Regional dos Açores durante 16 anos (1996-2012) e Presidente do Partido Socialista, consolidou a modernização social e económica do arquipélago?",
+    "opcoes": [
+      "Vasco Cordeiro",
+      "José Manuel Bolieiro",
+      "Carlos César",
+      "Mota Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos César liderou o PS Açores e foi líder parlamentar e Presidente da Comissão Nacional do Partido Socialista.",
+    "fonte": "Governo dos Açores / Partido Socialista",
+    "factClusterId": "fc_pers_pol_carloscesar_acores_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0036",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente economista e política portuense (nascida em 1952), Elisa Ferreira («Elisa Ferreira»), antiga Ministra do Ambiente e do Planeamento e Vice-Governadora do Banco de Portugal, foi nomeada em 2019 como a primeira mulher portuguesa Comissária Europeia na Comissão de Ursula von der Leyen com a pasta da:",
+    "opcoes": [
+      "Concorrência",
+      "Agricultura e Pescas",
+      "Comércio Internacional",
+      "Coesão e Reformas (Comissão Europeia, 2019-2024)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elisa Ferreira geriu os fundos estruturais europeus e o Fundo de Transição Justa para apoiar as regiões europeias.",
+    "fonte": "Comissão Europeia / Banco de Portugal",
+    "factClusterId": "fc_pers_pol_elisaferreira_comissaria_2019_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0037",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que conceituada economista portuguesa de Alenquer (nascida em 1967), Maria Luís Albuquerque («Maria Luís Albuquerque»), Ministra de Estado e das Finanças (2013-2015), foi indicada pelo governo português em 2024 para o cargo de Comissária Europeia para os Serviços Financeiros e União das Poupanças e Investimentos?",
+    "opcoes": [
+      "Maria Luís Albuquerque",
+      "Elisa Ferreira",
+      "Manuela Ferreira Leite",
+      "Assunção Cristas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Maria Luís Albuquerque geriu a saída de Portugal do programa de ajustamento financeiro internacional.",
+    "fonte": "Comissão Europeia / Governo de Portugal",
+    "factClusterId": "fc_pers_pol_marialuisalbuquerque_comissaria_2024_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0038",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que experiente jurista e diplomata de Lisboa (nascido em 1957), António Vitorino («António Vitorino»), Ministro da Presidência e da Defesa Nacional e Comissário Europeu da Justiça e Assuntos Internos (1999-2004), exerceu o cargo de Diretor-Geral da Organização Internacional para as Migrações (OIM da ONU) entre 2018 e 2023?",
+    "opcoes": [
+      "António Guterres",
+      "António Vitorino (Diretor-Geral da OIM)",
+      "José Manuel Durão Barroso",
+      "Vítor Constâncio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Vitorino foi uma das figuras cimeiras do direito constitucional e da política europeia de migrações e asilo.",
+    "fonte": "IOM / ONU / Assembleia da República",
+    "factClusterId": "fc_pers_pol_antoniovitorino_oim_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0039",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente economista de Lisboa (nascido em 1943), Vítor Constâncio («Vítor Constâncio»), Secretário-Geral do PS (1986-1989) e Governador do Banco de Portugal durante uma década (2000-2010), exerceu o prestigiado cargo de Vice-Presidente do Banco Central Europeu (BCE) de 2010 a 2018 ao lado de Mario Draghi?",
+    "opcoes": [
+      "Mário Centeno",
+      "Vítor Bento",
+      "Vítor Constâncio (Vice-Presidente do BCE)",
+      "Silva Lopes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Constâncio desempenhou um papel decisivo na estabilização do Euro e na criação da União Bancária Europeia após a crise financeira de 2008.",
+    "fonte": "Banco Central Europeu (BCE) / Banco de Portugal",
+    "factClusterId": "fc_pers_pol_vitorconstancio_bce_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0040",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político e jurista micaelense das Flores e Açores (nascido em 1947), Jaime Gama («Jaime Gama»), fundador do PS e Ministro dos Negócios Estrangeiros em múltiplos governos constitucionais, presidiu à Assembleia da República durante duas legislaturas (2005-2011)?",
+    "opcoes": [
+      "Almeida Santos",
+      "Ferro Rodrigues",
+      "Mota Amaral",
+      "Jaime Gama (2005-2011)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jaime Gama foi um dos diplomatas de maior influência na política externa portuguesa e no processo de paz de Timor-Leste.",
+    "fonte": "Assembleia da República / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_pers_pol_jaimegama_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0041",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que importante e histórico professor catedrático de Direito de Coimbra (1927-2007), António Barbosa de Melo («Barbosa de Melo»), cofundador do PPD/PSD e deputado constituinte em 1975, presidiu à Assembleia da República entre 1991 e 1995 durante a maioria absoluta de Cavaco Silva?",
+    "opcoes": [
+      "António Barbosa de Melo (1991-1995)",
+      "Mota Pinto",
+      "Vítor Crespo",
+      "Amaral da Costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Barbosa de Melo foi um dos mais distintos especialistas em Direito Administrativo e Constitucional da Universidade de Coimbra.",
+    "fonte": "Universidade de Coimbra / Assembleia da República",
+    "factClusterId": "fc_pers_pol_barbosademelo_1991_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0042",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente e carismático professor de Direito de Pombal e Coimbra (1936-1985), Carlos Alberto da Mota Pinto («Mota Pinto»), líder do PSD e Primeiro-Ministro do IV Governo Constitucional de iniciativa presidencial em 1978-1979, foi Vice-Primeiro-Ministro no governo do Bloco Central (PS/PSD)?",
+    "opcoes": [
+      "Sá Carneiro",
+      "Carlos Alberto da Mota Pinto (1936-1985)",
+      "Pinto Balsemão",
+      "Lucas Pires"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mota Pinto foi um jurista de topo e faleceu subitamente aos 48 anos nas vésperas do Congresso do PSD da Figueira da Foz em 1985.",
+    "fonte": "Faculdade de Direito da Universidade de Coimbra / DHP",
+    "factClusterId": "fc_pers_pol_motapinto_1978_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0043",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que brilhante jurista, escritor e político de Coimbra (1944-1998), Francisco Lucas Pires («Lucas Pires»), Ministro da Cultura e líder do CDS (1983-1985), destacou-se pela sua visão europeísta inovadora e foi Vice-Presidente do Parlamento Europeu?",
+    "opcoes": [
+      "Freitas do Amaral",
+      "Manuel Monteiro",
+      "Francisco Lucas Pires (1944-1998)",
+      "Paulo Portas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Lucas Pires foi autor de obras de referência sobre o futuro da União Europeia e a teoria do Estado.",
+    "fonte": "Parlamento Europeu / CDS / DHP",
+    "factClusterId": "fc_pers_pol_lucaspires_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0044",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que célebre e histórico estadista monárquico de Coimbra e Lisboa (1812-1875), Nuno José Severo de Mendoça Rolim de Moura Barreto («1.º Duque de Loulé»), líder do Partido Histórico e cunhado do Rei D. Miguel por casamento com a Infanta D. Ana de Jesus Maria, chefiou três governos na Monarquia Constitucional?",
+    "opcoes": [
+      "Duque de Saldanha",
+      "Duque da Terceira",
+      "Marquês de Tomar",
+      "Duque de Loulé (1812-1875)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Duque de Loulé liderou o governo que inaugurou o primeiro caminho de ferro em Portugal em 1856 com Fontes Pereira de Melo.",
+    "fonte": "Dicionário de História de Portugal / Assembleia da República",
+    "factClusterId": "fc_pers_pol_duquedeloule_1856_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0045",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político e jurista de Ponta Delgada (1849-1907), Ernesto Rodolfo Hintze Ribeiro («Hintze Ribeiro»), líder do Partido Regenerador e três vezes Presidente do Conselho de Ministros de D. Carlos I, concedeu em 1895 o primeiro Decreto de Autonomia Administrativa aos Açores e Madeira?",
+    "opcoes": [
+      "Ernesto Rodolfo Hintze Ribeiro (1849-1907)",
+      "José Luciano de Castro",
+      "Fontes Pereira de Melo",
+      "João Franco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Decreto de 2 de março de 1895 de Hintze Ribeiro foi a génese do regime de autonomia dos distritos insulares atlânticos.",
+    "fonte": "Governo dos Açores / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_hintzeribeiro_autonomia_1895_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0046",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente político e jornalista de Oliveirinha / Aveiro (1834-1914), José Luciano de Castro («José Luciano de Castro»), líder incontestado do Partido Progressista durante mais de vinte anos, alternou no poder com os Regeneradores no célebre sistema do «Rotativismo» monárquico?",
+    "opcoes": [
+      "Hintze Ribeiro",
+      "José Luciano de Castro (1834-1914)",
+      "Fontes Pereira de Melo",
+      "Anselmo Braamcamp"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Luciano de Castro era aclamado pelos seus correligionários como o 'Velho de Anadia' controlando as eleições através da máquina partidária.",
+    "fonte": "Dicionário de História de Portugal / Torre do Tombo",
+    "factClusterId": "fc_pers_pol_joselucianodecastro_rotativismo_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0047",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que controverso político de Alcaide / Fundão (1855-1929), João Franco («João Franco»), fundou o Partido Regenerador-Liberal e governou em ditadura administrativa com o apoio do Rei D. Carlos I (1906-1908) até ao Regicídio de 1 de fevereiro de 1908?",
+    "opcoes": [
+      "Hintze Ribeiro",
+      "Teixeira de Sousa",
+      "João Franco (1855-1929)",
+      "Ferreira do Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A repressão de João Franco contra os republicanos e o decreto de deportação de opositores precipitaram o atentado do Terreiro do Paço.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Nacional",
+    "factClusterId": "fc_pers_pol_joaofranco_1908_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0048",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente e histórico professor e botânico de Coimbra (1876-1951), António Garcia Ribeiro de Vasconcelos e Manuel de Oliveira Chaves e Castro, e o político Afonso de Melo Pinto Veloso, foram figuras de proa na transição do Direito em Portugal?",
+    "opcoes": [
+      "Bernardino Machado",
+      "Magalhães Lima",
+      "Manuel de Arriaga",
+      "Afonso de Melo Pinto Veloso"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Pinto Veloso foi jurista, deputado e Ministro da Justiça nos governos republicanos da década de 1920.",
+    "fonte": "Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_pintoveloso_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0049",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre e histórico professor da Faculdade de Direito de Coimbra (1844-1928), Manuel de Arriaga e Magalhães Lima («Sebastião de Magalhães Lima»), jornalista e fundador do jornal «O Século» em 1880, foi Grão-Mestre do Grande Oriente Lusitano e líder republicano?",
+    "opcoes": [
+      "Sebastião de Magalhães Lima (1850-1928)",
+      "Manuel de Arriaga",
+      "Teófilo Braga",
+      "França Borges"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Magalhães Lima foi a voz da propaganda republicana em Paris e embaixador da causa democrática junto da opinião pública europeia.",
+    "fonte": "Grande Oriente Lusitano / DHP",
+    "factClusterId": "fc_pers_pol_magalhaeslima_oseculo_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
+  },
+  {
+    "id": "PERS_POL_0050",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico jurista e jornalista republicano de Lisboa (1862-1915), José França Borges («França Borges»), fundou em 1900 o combativo jornal diário republicano «O Mundo» que galvanizou as massas populares e operárias de Lisboa para a Revolução de 5 de Outubro de 1910?",
+    "opcoes": [
+      "Magalhães Lima",
+      "António José de Almeida",
+      "França Borges (1862-1915, jornal «O Mundo»)",
+      "Brito Camacho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O jornal 'O Mundo' foi a mais influente publicação antimonárquica do início do século XX e França Borges é homenageado com um monumento no Jardim do Príncipe Real em Lisboa.",
+    "fonte": "Hemeroteca Municipal de Lisboa / DHP",
+    "factClusterId": "fc_pers_pol_francaborges_omundo_1900_01",
+    "category": "Personalidades",
+    "subcategory": "Políticos & Estadistas"
   }
 ]

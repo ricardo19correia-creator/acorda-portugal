@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HUM_PT_0001",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que emblemática figura caricatural do povo português criada pelo genial artista Rafael Bordalo Pinheiro em 1875 no jornal satírico «A Lanterna Mágica», imortalizada a fazer o gesto do «manguito» contra a ganância dos impostos e da classe política, é:",
+    "opcoes": [
+      "Zé Povinho",
+      "Serafim Saudade",
+      "Tonecas",
+      "Compadre Juvêncio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Zé Povinho tornou-se o símbolo universal da paciência, ironia e revolta silenciosa do povo português perante o poder.",
+    "fonte": "Museu Bordalo Pinheiro (Lisboa) / DGLAB",
+    "factClusterId": "fc_hum_zepovinho_bordalo_01"
+  },
+  {
+    "id": "HUM_PT_0002",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que lendário mestre do humor português (1938-2009), fundador do Teatro Villaret e patrono da Casa do Artista («Raúl Solnado»), marcou para sempre a cultura lusófona com o histórico monólogo cómico «A Guerra de 1907» («É do inimigo? Dá para adiar a guerra?»)?",
+    "opcoes": [
+      "Nicolau Breyner",
+      "Raúl Solnado (Raúl Augusto Almeida Solnado)",
+      "Vasco Santana",
+      "António Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Raúl Solnado levou o monólogo 'A Guerra de 1907' à televisão no Brasil e em Portugal, quebrando recordes de gargalhadas com o seu humor absurdo pacifista.",
+    "fonte": "Fundação Raul Solnado / RTP Arquivos",
+    "factClusterId": "fc_hum_raulsolnado_guerra1907_01"
+  },
+  {
+    "id": "HUM_PT_0003",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que personagem cómica de culto criada e interpretada por Herman José nos anos 1980 («Tony Silva, o Criador de Toda a Pop Lusa»), vindo de emigrante em Newark com smoking branco, laço encarnado e purpurinas no cabelo, lançou canções satíricas e a expressão «Bamos nessa, garina!»?",
+    "opcoes": [
+      "Serafim Saudade",
+      "José Estevão de Miranda",
+      "Tony Silva",
+      "Lauro Dérmio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tony Silva estreou-se no programa 'O Passeio dos Alegres' de Júlio Isidro em 1980 tornando-se um fenómeno sociológico nacional.",
+    "fonte": "RTP Arquivos / Herman José Produções",
+    "factClusterId": "fc_hum_tonysilva_herman_01"
+  },
+  {
+    "id": "HUM_PT_0004",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que personagem cómica beata e moralista criada por Herman José no «Herman Enciclopédia» em 1997 («Diácono Remédios»), de batina preta e dedo em riste contra os pecados da sociedade, imortalizou o bordão «Não havia nexexidade!»?",
+    "opcoes": [
+      "Padre Frederico",
+      "Serafim Saudade",
+      "Artur Albarrã",
+      "Diácono Remédios"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Diácono Remédios satirizava a hipocrisia e o falso puritanismo da sociedade portuguesa com um sotaque inconfundível.",
+    "fonte": "RTP Arquivos / Produções Fictícias",
+    "factClusterId": "fc_hum_diaconoremedios_01"
+  },
+  {
+    "id": "HUM_PT_0005",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que genial comediante e argumentista de Lisboa (nascido em 1974), cofundador dos Gato Fedorento e apresentador do programa semanal de sátira política «Isto É Gozar com Quem Trabalha» na SIC, é a maior referência do humor contemporâneo português?",
+    "opcoes": [
+      "Ricardo Araújo Pereira (RAP)",
+      "Bruno Nogueira",
+      "César Mourão",
+      "Nuno Markl"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Araújo Pereira é licenciado em Comunicação Social, foi cronista da Visão e Folha de S. Paulo e líder de audiências televisivas há mais de duas décadas.",
+    "fonte": "SIC / Grupo Impresa / Tinta-da-China",
+    "factClusterId": "fc_hum_ricardoaraujopereira_01"
+  },
+  {
+    "id": "HUM_PT_0006",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e apresentador de Lisboa (nascido em 1982) uniu o país durante o confinamento da pandemia da COVID-19 em 2020 com o fenómeno «Como É Que o Bicho Mexe?» no Instagram (reunindo mais de 170.000 pessoas em direto nas noites e culminando numa arruada de Natal iluminada em Lisboa), e criou a série inovadora «Último a Sair»?",
+    "opcoes": [
+      "Nuno Markl",
+      "Bruno Nogueira",
+      "César Mourão",
+      "Salvador Martinha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bruno Nogueira revolucionou o humor televisivo e radiofónico com programas como 'Tubo de Ensaio' (TSF), 'Lado B' e 'Princípio, Meio e Fim'.",
+    "fonte": "SIC / TSF / Força de Produção",
+    "factClusterId": "fc_hum_brunonogueira_bichomexe_01"
+  },
+  {
+    "id": "HUM_PT_0007",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que mestre do improviso e comediante de Lisboa (nascido em 1978), apresentador do programa de sucesso itinerante «Terra Nossa» na SIC que homenageia com humor as gentes e vilas de Portugal, é:",
+    "opcoes": [
+      "Marco Horácio",
+      "Fernando Rocha",
+      "César Mourão",
+      "Rui Unas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "César Mourão destacou-se nos grupos de teatro de improviso Commedia a la Carte e encheu salas com espetáculos ao vivo.",
+    "fonte": "SIC / Warner Bros. ITVP Portugal",
+    "factClusterId": "fc_hum_cesarmourao_terranossa_01"
+  },
+  {
+    "id": "HUM_PT_0008",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista, argumentista e radialista de Lisboa (nascido em 1971), autor da rubrica de rádio de maior longevidade da rádio portuguesa «O Homem Que Mordeu o Cão» na Rádio Comercial (desde 1997) e apresentador do concurso «Taskmaster Portugal» na RTP1 com Vasco Palmeirim, é:",
+    "opcoes": [
+      "Vasco Palmeirim",
+      "Pedro Ribeiro",
+      "Fernando Alvim",
+      "Nuno Markl"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nuno Markl adaptou 'O Homem Que Mordeu o Cão' a livros campeões de vendas, espetáculos ao vivo e programas de TV.",
+    "fonte": "Rádio Comercial / Media Capital / RTP",
+    "factClusterId": "fc_hum_nunomarkl_homemmordeucao_01"
+  },
+  {
+    "id": "HUM_PT_0009",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e radialista de Lisboa (nascida em 1986), autora da rubrica diária satírica «Extremamente Desagradável» no programa «As Três da Manhã» da Rádio Renascença (o podcast mais ouvido de Portugal), encheu os coliseus com o espetáculo «Desconfia»?",
+    "opcoes": [
+      "Joana Marques",
+      "Inês Lopes Gonçalves",
+      "Ana Galvão",
+      "Bumba na Fofinha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Joana Marques disseca com ironia fina gafes de figuras públicas, influencers e programas de televisão tornando o podcast um fenómeno cultural.",
+    "fonte": "Rádio Renascença / Grupo Renascença Multimédia",
+    "factClusterId": "fc_hum_joanamarques_extremamente_01"
+  },
+  {
+    "id": "HUM_PT_0010",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e criadora de conteúdos digitais portuense (Mariana Cabral, nascida em 1986), conhecida pelo alter ego «Bumba na Fofinha», esgotou a MEO Arena em nome próprio com o espetáculo de stand-up «Suar do Bigode»?",
+    "opcoes": [
+      "Joana Marques",
+      "Bumba na Fofinha (Mariana Cabral)",
+      "Beatriz Gosta",
+      "Luana do Bem"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bumba na Fofinha tornou-se a primeira mulher portuguesa a esgotar a maior arena de espetáculos do país a solo com comédia de observação.",
+    "fonte": "Força de Produção / MEO Arena",
+    "factClusterId": "fc_hum_bumbanafofinha_01"
+  },
+  {
+    "id": "HUM_PT_0011",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que extraordinária atriz cómica de Lisboa (nascida em 1972), que imortalizou personagens lendárias na televisão portuguesa como o hilariante «Zé Manel Taxista» (adepto ferrenho do Benfica de carripana e palito na boca) e «Rosinha dos Bonecos», é:",
+    "opcoes": [
+      "Ana Bola",
+      "Maria Vieira",
+      "Maria de Medeiros Rueff de Saro Negrão (Maria Rueff)",
+      "Marina Mota"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Maria Rueff fez dupla histórica com Herman José em programas como Herman Enciclopédia, Herman SIC e Nelo & Idália.",
+    "fonte": "RTP Arquivos / Teatro Aberto",
+    "factClusterId": "fc_hum_mariarueff_zemanel_01"
+  },
+  {
+    "id": "HUM_PT_0012",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que talentosa atriz, argumentista e comediante lisboeta (nascida em 1952), que formou com Maria Rueff e Herman José uma das parcerias mais brilhantes da comédia e protagonizou a sitcom de culto «A Mulher do Senhor Ministro» (como a perua Maria Odete), é:",
+    "opcoes": [
+      "Maria Rueff",
+      "Rita Blanco",
+      "Margarida Carpinteiro",
+      "Ana Bola"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ana Bola foi pioneira na escrita de humor no feminino em Portugal com dezenas de peças teatrais e guiões de televisão.",
+    "fonte": "RTP Arquivos / DGLAB",
+    "factClusterId": "fc_hum_anabola_senhorministro_01"
+  },
+  {
+    "id": "HUM_PT_0013",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e contador de anedotas de Rio Tinto (Gondomar, nascido em 1975), célebre pelo sotaque tripeiro genuíno, gargalhada estridente e anedotas sem filtro («Fernando Rocha»), bateu recordes de vendas de cassetes e CDs de anedotas e apresentou «Levanta-te e Ri» e «Não Há Crise!»?",
+    "opcoes": [
+      "Fernando Rocha",
+      "Marco Horácio",
+      "Serafim",
+      "Hugo Sousa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fernando Rocha começou como eletricista antes de vencer o concurso Ri-te, Ri-te na TVI em 1999 e tornar-se o rei do anedotário popular.",
+    "fonte": "SIC / Vidisco",
+    "factClusterId": "fc_hum_fernandorocha_01"
+  },
+  {
+    "id": "HUM_PT_0014",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante de stand-up e ator portuense (nascido em 1965), mestre da ironia seca e do «deadpan» com o seu clássico casaco e gravata («Aldo Lima»), celebrizou-se nos palcos com crónicas cómicas sobre viagens de avião e as neuroses do quotidiano?",
+    "opcoes": [
+      "Nilton",
+      "Aldo Lima",
+      "Luís Filipe Borges",
+      "Óscar Branco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Aldo Lima foi um dos fundadores do movimento de stand-up comedy de clube em Portugal nos anos 1990.",
+    "fonte": "Força de Produção / Teatro Tivoli",
+    "factClusterId": "fc_hum_aldolima_01"
+  },
+  {
+    "id": "HUM_PT_0015",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante, ator e argumentista de Lisboa (nascido em 1972), companheiro histórico de Manuel Marques e Herman José, que interpretou o personagem «Camilo» em Os Contemporâneos e lançou o livro e filme «A Mãe É Que Sabe» («Eduardo Madeira»), é:",
+    "opcoes": [
+      "Manuel Marques",
+      "Rui Sinel de Cordes",
+      "Eduardo Madeira",
+      "Joaquim Nicolau"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Madeira foi um dos principais argumentistas das Produções Fictícias e presença assídua no daytime televisivo com imitações hilariantes.",
+    "fonte": "RTP / TVI / Produções Fictícias",
+    "factClusterId": "fc_hum_eduardomadeira_01"
+  },
+  {
+    "id": "HUM_PT_0016",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que versátil ator e imitador de Setúbal (nascido em 1975), famoso pelas suas imitações perfeitas de figuras públicas na televisão (como Marcelo Rebelo de Sousa e Cristiano Ronaldo) e protagonista de «Donos Disto Tudo» e «Cá Por Casa» («Manuel Marques»), é:",
+    "opcoes": [
+      "Eduardo Madeira",
+      "Jorge Mourato",
+      "Pedro Granger",
+      "Manuel Marques"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuel Marques e Eduardo Madeira formaram duplas cómicas memoráveis no programa 'Os Contemporâneos' na RTP1.",
+    "fonte": "RTP1 / Coral Europa",
+    "factClusterId": "fc_hum_manuelmarques_01"
+  },
+  {
+    "id": "HUM_PT_0017",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que popular comediante e apresentador alentejano nascido em Angola e radicado em Castro Verde (nascido em 1972), mestre das partidas telefónicas e autor de dezenas de livros de humor («Nilton»), apresentou o programa «5 Para a Meia-Noite» e conduziu as manhãs da RFM?",
+    "opcoes": [
+      "Nilton (António Nilton)",
+      "Serafim",
+      "António Raminhos",
+      "Luís Franco-Bastos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nilton popularizou as 'chamadas com apanhados' na rádio e na televisão nos anos 2000.",
+    "fonte": "RFM / RTP / Editorial Presença",
+    "factClusterId": "fc_hum_nilton_rfm_01"
+  },
+  {
+    "id": "HUM_PT_0018",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante lisboeta (nascido em 1980), conhecido pelo humor confessional e desbocado sobre a vida em família com a mulher e as três filhas («As Marias»), que conquistou milhões de seguidores nas redes sociais e esgotou teatros com o espetáculo «O Banquete» («António Raminhos»), é:",
+    "opcoes": [
+      "Salvador Martinha",
+      "António Raminhos",
+      "Guilherme Geirinhas",
+      "Diogo Batáguas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Raminhos aborda abertamente nos seus espetáculos e livros a sua convivência com o Transtorno Obsessivo-Compulsivo (TOC) desmistificando a saúde mental com humor.",
+    "fonte": "RTP / Penguin Random House",
+    "factClusterId": "fc_hum_antonioraminhos_01"
+  },
+  {
+    "id": "HUM_PT_0019",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e imitador de vozes de elite de Lisboa (nascido em 1988), especialista em recriar à perfeição os timbres e trejeitos de Fernando Santos, Bruno de Carvalho, Jorge Jesus e José Sócrates («Luís Franco-Bastos»), apresentou os espetáculos «Papel Principal» e «Voz da Razão»?",
+    "opcoes": [
+      "Manuel Marques",
+      "Pedro Teixeira da Mota",
+      "Luís Franco-Bastos",
+      "Alexandre Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Luís Franco-Bastos é amplamente considerado o melhor imitador vocal e político de Portugal contemporâneo.",
+    "fonte": "Antena 3 / Kilt Produções / Coliseu dos Recreios",
+    "factClusterId": "fc_hum_luisfrancobastos_01"
+  },
+  {
+    "id": "HUM_PT_0020",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que pioneiro do stand-up comedy de Lisboa (nascido em 1983), o primeiro comediante português a ter um especial de comédia original na Netflix («Salvador Martinha — Tip of the Tongue» em 2016), criador da produtora Stand-up Setúbal e dos espetáculos «Cabeça de Casal» e «Plâncton», é:",
+    "opcoes": [
+      "Guilherme Geirinhas",
+      "Carlos Coutinho Vilhena",
+      "Pedro Teixeira da Mota",
+      "Salvador Martinha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Salvador Martinha criou a popular série 'Sou Menino Para Ir' e o podcast 'Ar Livre'.",
+    "fonte": "Netflix / Kilt / Teatro Tivoli",
+    "factClusterId": "fc_hum_salvadormartinha_01"
+  },
+  {
+    "id": "HUM_PT_0021",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que jovem humorista e criador de conteúdos de Lisboa (nascido em 1990), formado em Economia, autor de séries virais no YouTube como «Bom Partido», o documentário cómico «Vai Correr Tudo Bem» e o podcast «Conversas de Balneário» («Guilherme Geirinhas»), é:",
+    "opcoes": [
+      "Guilherme Geirinhas",
+      "Carlos Coutinho Vilhena",
+      "Diogo Faro",
+      "Pedro Durão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Guilherme Geirinhas destacou-se no coletivo Bumerangue e esgotou teatros em todo o país com comédia inteligente sobre a sua geração.",
+    "fonte": "YouTube / Força de Produção / Coliseu do Porto",
+    "factClusterId": "fc_hum_guilhermegeirinhas_01"
+  },
+  {
+    "id": "HUM_PT_0022",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante de Lisboa (nascido em 1993), cofundador do coletivo Bumerangue e autor da inovadora websérie documental de comédia «O Resto da Tua Vida» (com o antigo ator João Paulo Sousa) e dos podcasts «Conversas de Café» e «Clube Privado» («Carlos Coutinho Vilhena»), é:",
+    "opcoes": [
+      "Guilherme Geirinhas",
+      "Carlos Coutinho Vilhena",
+      "Manuel Cardoso",
+      "Dário Guerreiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A série 'O Resto da Tua Vida' atingiu milhões de visualizações e revolucionou o formato de docu-comédia na internet portuguesa.",
+    "fonte": "YouTube / Kilt Produções",
+    "factClusterId": "fc_hum_carloscoutinhovilhena_01"
+  },
+  {
+    "id": "HUM_PT_0023",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista de Lisboa (nascido em 1994), apresentador do podcast «watch.tm» e coapresentador de «Erro Crasso» com Luís Franco-Bastos, que esgotou duas noites na MEO Arena com o espetáculo a solo «Pata de Ganso» («Pedro Teixeira da Mota»), é:",
+    "opcoes": [
+      "Rui Sinel de Cordes",
+      "Diogo Batáguas",
+      "Pedro Teixeira da Mota",
+      "Vasco Elvas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pedro Teixeira da Mota iniciou a carreira com o canal de sketches 'Bumerangue' afirmando-se como um dos maiores fenómenos do stand-up jovem luso.",
+    "fonte": "MEO Arena / Bridgetown / YouTube",
+    "factClusterId": "fc_hum_pedroteixeiradamota_01"
+  },
+  {
+    "id": "HUM_PT_0024",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e comentador satírico de Lisboa («Diogo Batáguas»), autor do popular formato mensal de sátira e escrutínio político «Relatório DB» no YouTube que analisa notícias polémicas com ironia mordaz, esgotou os coliseus com o espetáculo «Processo»?",
+    "opcoes": [
+      "Guilherme Duarte",
+      "Diogo Faro",
+      "Rui Sinel de Cordes",
+      "Diogo Batáguas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Relatório DB de Diogo Batáguas tornou-se um dos programas de comentário de atualidade mais seguidos da internet portuguesa.",
+    "fonte": "YouTube / Coliseu dos Recreios",
+    "factClusterId": "fc_hum_diogobataguas_01"
+  },
+  {
+    "id": "HUM_PT_0025",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e blogger da Buraca (Amadora, nascido em 1980), engenheiro informático de formação e autor do blogue satírico de enorme sucesso «Por Falar Noutra Coisa» («Guilherme Duarte»), assinou livros de sátira social e espetáculos a solo como «Por Falar Nisso» e «Limbo»?",
+    "opcoes": [
+      "Guilherme Duarte",
+      "Diogo Batáguas",
+      "Manuel Cardoso",
+      "Hugo van der Ding"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Guilherme Duarte utiliza a comédia ácida para abordar religião, tabus socioculturais e paradoxos do quotidiano.",
+    "fonte": "Por Falar Noutra Coisa / Bertrand Editora",
+    "factClusterId": "fc_hum_guilhermeduarte_01"
+  },
+  {
+    "id": "HUM_PT_0026",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista português pioneiro do «Dark Comedy» / Humor Negro em Portugal (nascido em 1980), apresentador de programas como «Gente da Minha Terra» na SIC Radical e autor de espetáculos de stand-up provocatórios como «Black Label» e «É o Fim do Mundo» («Rui Sinel de Cordes»), é:",
+    "opcoes": [
+      "Diogo Batáguas",
+      "Rui Sinel de Cordes",
+      "Paulo Almeida",
+      "Hugo Sousa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Sinel de Cordes fundou a produtora Cordes Entertainment e tem um público fiel nos teatros portugueses e no Reino Unido.",
+    "fonte": "SIC Radical / Cordes Entertainment",
+    "factClusterId": "fc_hum_ruisineldecordes_01"
+  },
+  {
+    "id": "HUM_PT_0027",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que ilustrador, historiador e humorista português de ascendência holandesa («Hugo van der Ding»), autor das famosas tiras de banda desenhada «A Criada Malcriada» e da rubrica diária «Vamos Todos Morrer» na Antena 3 com Tiago Ribeiro e Ana Markl, é:",
+    "opcoes": [
+      "Manuel João Vieira",
+      "Nuno Artur Silva",
+      "Hugo van der Ding",
+      "João Quadros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A rubrica 'Vamos Todos Morrer' conta com humor negro e rigor histórico as biografias das mais insólitas figuras falecidas da história.",
+    "fonte": "Antena 3 / RTP / Edições Tinta-da-China",
+    "factClusterId": "fc_hum_hugovanderding_01"
+  },
+  {
+    "id": "HUM_PT_0028",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e contador de histórias alentejano de Beja («Jorge Serafim» / Serafim), presença assídua no programa Levanta-te e Ri e festivais com o seu colete tradicional e expressões alentejanas como «Ai Jesus!», popularizou o conto tradicional de humor em Portugal?",
+    "opcoes": [
+      "Fernando Rocha",
+      "Compadre Juvêncio",
+      "Moxila",
+      "Jorge Serafim (Serafim)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jorge Serafim é narrador oral de literatura tradicional e escritor de contos infantis promovendo a leitura pelo país.",
+    "fonte": "SIC / Município de Beja",
+    "factClusterId": "fc_hum_jorgeserafim_alentejo_01"
+  },
+  {
+    "id": "HUM_PT_0029",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante de stand-up portuense (nascido em 1980), veterano do Levanta-te e Ri e autor de especiais de comédia a solo nos coliseus como «Fora de Contexto» e «Praticamente Estável» («Hugo Sousa»), é uma das principais vozes da comédia do Norte?",
+    "opcoes": [
+      "Hugo Sousa",
+      "Fernando Rocha",
+      "Aldo Lima",
+      "João Seabra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Hugo Sousa é também argumentista de programas cómicos e apresentador de podcasts descontraídos.",
+    "fonte": "SIC / Coliseu do Porto",
+    "factClusterId": "fc_hum_hugosousa_standup_01"
+  },
+  {
+    "id": "HUM_PT_0030",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e ventríloquo de Braga («João Seabra»), célebre pelos seus bonecos hilariantes como o «Macaco Sidónio» e o «Burro», participou em dezenas de emissões do Levanta-te e Ri misturando anedotas minhotas e ventriloquia ao vivo?",
+    "opcoes": [
+      "Fernando Rocha",
+      "João Seabra",
+      "Hugo Sousa",
+      "Joca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "João Seabra é o mais conhecido ventríloquo de comédia de palco de Portugal.",
+    "fonte": "SIC / Levanta-te e Ri",
+    "factClusterId": "fc_hum_joaoseabra_ventriloquo_01"
+  },
+  {
+    "id": "HUM_PT_0031",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que conceituada agência e produtora de escrita de humor fundada em Lisboa em 1993 por Nuno Artur Silva, Rui Cardoso Martins, José de Pina e Tiago Santos («Produções Fictícias»), escreveu os maiores sucessos da televisão portuguesa como «Contra Informação», «Herman Enciclopédia» e fundou o canal «O Canal Q»?",
+    "opcoes": [
+      "Mandala",
+      "Força de Produção",
+      "Produções Fictícias",
+      "Plural"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Produções Fictícias foram a grande 'fábrica' e escola de talentos da comédia e sátira portuguesa da viragem do milénio.",
+    "fonte": "Produções Fictícias / O Canal Q / DGLAB",
+    "factClusterId": "fc_hum_producoesficticias1993_01"
+  },
+  {
+    "id": "HUM_PT_0032",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que influente autor, argumentista e produtor cultural lisboeta (nascido em 1962), fundador das Produções Fictícias, criador do jornal satírico «Inimigo Público» e antigo Secretário de Estado do Cinema, Audiovisual e Media («Nuno Artur Silva»), é:",
+    "opcoes": [
+      "Rui Cardoso Martins",
+      "João Quadros",
+      "José de Pina",
+      "Nuno Artur Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nuno Artur Silva foi o grande arquiteto da profissionalização da escrita de comédia e televisão em Portugal.",
+    "fonte": "Produções Fictícias / Ministério da Cultura",
+    "factClusterId": "fc_hum_nunoartursilva_01"
+  },
+  {
+    "id": "HUM_PT_0033",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que temido e brilhante argumentista satírico português («João Quadros»), coautor com Bruno Nogueira do mítico programa de rádio «Tubo de Ensaio» na TSF e de programas televisivos de Herman José e Gato Fedorento, é célebre pela sua acidez no Twitter/X?",
+    "opcoes": [
+      "João Quadros",
+      "Nuno Artur Silva",
+      "José de Pina",
+      "Tiago Dores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "João Quadros é considerado um dos escritores de punchlines e piadas políticas mais certeiros e implacáveis do país.",
+    "fonte": "TSF / Produções Fictícias",
+    "factClusterId": "fc_hum_joaoquadros_tubodeensaio_01"
+  },
+  {
+    "id": "HUM_PT_0034",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que histórico jornal satírico suplemento do semanário Expresso e depois do jornal Público (fundado em 2003 pelas Produções Fictícias), famoso por manchetes cómicas e notícias fictícias que ridicularizam a política nacional («Inimigo Público»), é o expoente da imprensa satírica moderna?",
+    "opcoes": [
+      "A Paródia",
+      "Inimigo Público",
+      "O Bisbilhoteiro",
+      "A Mosca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Inimigo Público inspirou o modelo de sátira de atualidade que depois migrou para a rádio e televisão.",
+    "fonte": "Jornal Público / Produções Fictícias",
+    "factClusterId": "fc_hum_inimigopublico2003_01"
+  },
+  {
+    "id": "HUM_PT_0035",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que veterano ator, comediante e encenador da Amadora (nascido em 1952), que formou com José Pedro Gomes a dupla de teatro cómico mais famosa de Portugal nos anos 1990 e 2000 («António Feio»), protagonizou a lendária trilogia de peças «Conversa da Treta», «A Verdade da Treta» e «A Vingança da Treta»?",
+    "opcoes": [
+      "José Pedro Gomes",
+      "Nicolau Breyner",
+      "António Feio",
+      "Guilherme Filipe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Feio e José Pedro Gomes criaram os personagens Zezé e Tóni ('A treta é tudo, meu menino!') que encheram teatros durante mais de uma década.",
+    "fonte": "Teatro Villaret / Produções Fictícias",
+    "factClusterId": "fc_hum_antoniofeio_conversadatreta_01"
+  },
+  {
+    "id": "HUM_PT_0036",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que grande ator cómico de Lisboa (nascido em 1951), parceiro de António Feio na «Conversa da Treta» e comediante de proa em «Herman Enciclopédia» e «Os Malucos do Riso» («José Pedro Gomes»), interpretou o eterno filósofo de café «Tóni da Treta»?",
+    "opcoes": [
+      "António Feio",
+      "Aldo Lima",
+      "Jorge Mourato",
+      "José Pedro Gomes (Tóni da Treta)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "José Pedro Gomes manteve a chama da comédia nos palcos com sucessos como 'Os Filhos da Treta' e 'Casal da Treta' com Ana Bola.",
+    "fonte": "Teatro Villaret / Força de Produção",
+    "factClusterId": "fc_hum_josepedrogomes_treta_01"
+  },
+  {
+    "id": "HUM_PT_0037",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que programa diário de anedotas e sketches rápidos da SIC nos anos 1990 e 2000 («Os Malucos do Riso»), produzido pela Spun / Mirabolante com personagens como os «Alentejanos no Banco de Jardim», os «Gagos» e os «Bêbedos», foi um dos maiores sucessos de audiência popular da TV privada?",
+    "opcoes": [
+      "Os Malucos do Riso (SIC)",
+      "Camilo em Sarilhos",
+      "Treze a Rir",
+      "Trapalhões em Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Malucos do Riso contava com um elenco recheado com nomes como Camacho Costa, Carla Andrino, Vítor de Sousa e Raquel Maria.",
+    "fonte": "SIC / Arquivo SIC",
+    "factClusterId": "fc_hum_malucosdoriso_sic_01"
+  },
+  {
+    "id": "HUM_PT_0038",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que saudoso ator cómico e fadista de Lisboa (1946-2003), figura central de «Os Malucos do Riso» e das séries de Camilo de Oliveira («Camacho Costa»), celebrizou-se pelos seus trejeitos corporais e riso contagiante?",
+    "opcoes": [
+      "Camilo de Oliveira",
+      "Camacho Costa (António Camacho Costa)",
+      "Carlos Areia",
+      "Fernando Mendes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Camacho Costa foi um dos atores mais carismáticos da comédia popular televisiva dos anos 1990.",
+    "fonte": "SIC / Cinemateca Portuguesa",
+    "factClusterId": "fc_hum_camachocosta_01"
+  },
+  {
+    "id": "HUM_PT_0039",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que consagrada atriz e produtora de teatro de revista e comédia de Alcântara (nascida em Lisboa em 1962), a eterna «Rainha do Parque Mayer» com grandes sucessos na RTP e SIC como «Ora Bolas Marina» e «Marina Dona Revista» («Marina Mota»), é:",
+    "opcoes": [
+      "Maria João Abreu",
+      "Noémia Costa",
+      "Marina Mota",
+      "Florbela Queiroz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marina Mota fundou a sua própria companhia teatral levando o teatro de revista e a comédia popular a todas as cidades de Portugal e comunidades no estrangeiro.",
+    "fonte": "Teatro Maria Vitória / Parque Mayer / RTP",
+    "factClusterId": "fc_hum_marinamota_parquemayer_01"
+  },
+  {
+    "id": "HUM_PT_0040",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que saudosa e querida atriz lisboeta (1964-2021), mestre da comédia e da farsa no teatro de revista e na televisão em séries como «Médico de Família», «Aqui Não Há Quem Viva» e «Golpe de Sorte» («Maria João Abreu»), foi homenageada nacionalmente pelo seu talento?",
+    "opcoes": [
+      "Rita Blanco",
+      "Custódia Gallego",
+      "Carla Andrino",
+      "Maria João Abreu"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria João Abreu era uma das atrizes mais queridas do público português, casada com o ator José Raposo com quem partilhou palcos durante décadas.",
+    "fonte": "SIC / Teatro Maria Vitória / Academia Portuguesa de Cinema",
+    "factClusterId": "fc_hum_mariajoaoabreu_01"
+  },
+  {
+    "id": "HUM_PT_0041",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que grande ator português (nascido em Dume, Braga em 1963), consagrado no teatro de revista e comédias de prime-time («José Raposo»), que interpretou papéis memoráveis em «Corações de Ouro» e «O Pátio das Cantigas» e preside à Casa do Artista, é:",
+    "opcoes": [
+      "José Raposo",
+      "Miguel Guilherme",
+      "Rui Mendes",
+      "João Baião"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "José Raposo é um dos atores mais premiados e versáteis de Portugal entre a comédia popular e os grandes clássicos do teatro.",
+    "fonte": "Casa do Artista / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_hum_joseraposo_01"
+  },
+  {
+    "id": "HUM_PT_0042",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que exuberante e carismático apresentador e ator da Buraca (nascido em 1963), mestre da energia contagiante nas tardes da SIC em «Casa Feliz» e «Big Show SIC» e estrela de peças cómicas de revista («João Baião»), é famoso pela frase «Ai a minha vida!» e pela dança do macaco?",
+    "opcoes": [
+      "Fernando Mendes",
+      "João Baião",
+      "Jorge Gabriel",
+      "Marco Paulo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "João Baião revolucionou a televisão nos anos 1990 no Big Show SIC com o macaco Adriano e lidera as manhãs e tardes da televisão nacional.",
+    "fonte": "SIC / Coral Europa",
+    "factClusterId": "fc_hum_joaobaiao_bigshow_01"
+  },
+  {
+    "id": "HUM_PT_0043",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que célebre personagem de humor criada pelo ator cómico Luís Aleluia nos anos 1990 no programa da RTP1 «As Lições do Tonecas» («Menino Tonecas»), com a bata aos quadradinhos e respostas disparatadas ao professor Oliveira (Morais e Castro), foi um dos maiores sucessos escolares da TV?",
+    "opcoes": [
+      "Nelito",
+      "Serafim",
+      "Menino Tonecas (Luís Aleluia)",
+      "Zequinha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Lições do Tonecas adaptaram o clássico de José de Oliveira Cosme com mais de 300 episódios na RTP.",
+    "fonte": "RTP Arquivos / Luís Aleluia",
+    "factClusterId": "fc_hum_meninotonecas_aleluia_01"
+  },
+  {
+    "id": "HUM_PT_0044",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e criador de conteúdos do Algarve (nascido em Faro em 1989), criador do alter-ego «Môce dum Cabréste» no YouTube com canções paródia e do podcast «Conta-me Tudo» («Dário Guerreiro»), popularizou o dialeto e as expressões típicas algarvias?",
+    "opcoes": [
+      "Alexandre Santos",
+      "Guilherme Fonseca",
+      "Moisés",
+      "Dário Guerreiro («Môce dum Cabréste»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Dário Guerreiro foi um dos pioneiros da comédia regional algarvia no YouTube alcançando dezenas de milhões de visualizações.",
+    "fonte": "YouTube / Teatro das Figuras (Faro)",
+    "factClusterId": "fc_hum_darioguerreiro_mocidecabreste_01"
+  },
+  {
+    "id": "HUM_PT_0045",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que humorista e criador de vídeos do Norte (Valbom, Gondomar, nascido em 1990), famoso pelos seus vídeos virais de comédia no YouTube e pela comédia de ação cinematográfica independente «Curral de Moinas / Balas & Bolinhos» («Alexandre Santos»), encheu os teatros com os seus espetáculos?",
+    "opcoes": [
+      "Alexandre Santos",
+      "Luís Vieira",
+      "Jorge Corrula",
+      "Rui Xará"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Santos construiu uma das maiores comunidades de seguidores de comédia no Norte de Portugal.",
+    "fonte": "YouTube / Força de Produção",
+    "factClusterId": "fc_hum_alexandresantos_01"
+  },
+  {
+    "id": "HUM_PT_0046",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que realizador e comediante portuense de Santo Tirso («Luís Ismael»), criou a saga de comédia de culto mais rentável e assistida do cinema independente português «Balas & Bolinhos» (com os ladrões Tone, Rato, Culatra e Bino em quatro filmes hilariantes)?",
+    "opcoes": [
+      "Fernando Rocha",
+      "Luís Ismael (Saga Balas & Bolinhos)",
+      "Nicolau Breyner",
+      "António-Pedro Vasconcelos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A saga Balas & Bolinhos alcançou o estatuto de clássico de culto do cinema cómico popular no Norte de Portugal.",
+    "fonte": "Lightbox Filmes / ICA",
+    "factClusterId": "fc_hum_luisismael_balasebolinhos_01"
+  },
+  {
+    "id": "HUM_PT_0047",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que dupla cómica de irmãos alentejanos de Curral de Moinas interpretada por João Paulo Rodrigues (Quim Roscas) e Pedro Alves (Zeca Estacionâncio), protagonistas dos filmes campeões de bilheteira «7 Pecados Rurais» e «Curral de Moinas — Os Banqueiros do Povo», é:",
+    "opcoes": [
+      "Tone e Rato",
+      "Zezé e Tóni",
+      "Quim Roscas & Zeca Estacionâncio (João Paulo Rodrigues e Pedro Alves)",
+      "Batanetes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Quim Roscas e Zeca Estacionâncio percorrem há mais de 20 anos as festas de verão e praças de Portugal com o seu humor rural.",
+    "fonte": "Cinemas NOS / TVI",
+    "factClusterId": "fc_hum_quimroscasezeca_01"
+  },
+  {
+    "id": "HUM_PT_0048",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que comediante e apresentador de Lisboa («Diogo Faro» / «Senhor Fernando»), autor do livro e espetáculo de comédia «Somos Todos Primos» e do podcast «Traz Cerveja», utiliza o humor de intervenção política e desconstrução de preconceitos?",
+    "opcoes": [
+      "Guilherme Geirinhas",
+      "Manuel Cardoso",
+      "Hugo van der Ding",
+      "Diogo Faro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Diogo Faro aborda temas como o feminismo, racismo e desigualdades sociais através de crónicas e espetáculos a solo.",
+    "fonte": "Antena 3 / Editora Oficina do Livro",
+    "factClusterId": "fc_hum_diogofaro_01"
+  },
+  {
+    "id": "HUM_PT_0049",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que jovem humorista e argumentista de Lisboa (nascido em 1993), ex-redator do jornal Inimigo Público e guionista de Ricardo Araújo Pereira em «Gente Que Não Sabe Estar» e «Isto É Gozar com Quem Trabalha» («Manuel Cardoso»), esgotou teatros com o espetáculo «Red Flags»?",
+    "opcoes": [
+      "Manuel Cardoso",
+      "Pedro Durão",
+      "Guilherme Fonseca",
+      "Duarte Correia da Silva"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuel Cardoso é um dos mais prolíficos argumentistas de sátira política da nova geração de comediantes de Portugal.",
+    "fonte": "SIC / Kilt / Antena 3",
+    "factClusterId": "fc_hum_manuelcardoso_01"
+  },
+  {
+    "id": "HUM_PT_0050",
+    "tema": "Humor",
+    "subtema": "Humor Português",
+    "pergunta": "Que histórico concurso cómico de anedotas das noites de domingo da TVI nos anos 1990 («Ri-te, Ri-te»), apresentado por João Mota e Ana Rocha, revelou novos talentos do humor popular de todo o país e consagrou o contador de anedotas Fernando Rocha?",
+    "opcoes": [
+      "Levanta-te e Ri",
+      "1, 2, 3",
+      "Ri-te, Ri-te (TVI, 1999)",
+      "Riso e Ritmo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O programa 'Ri-te, Ri-te' foi o pioneiro na caça a contadores de anedotas populares na televisão portuguesa moderna.",
+    "fonte": "TVI / Arquivo TVI",
+    "factClusterId": "fc_hum_riterite1999_01"
+  }
+]

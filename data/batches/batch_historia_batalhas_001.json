@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_BAT_0001",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que célebre batalha travada a 14 de agosto de 1385, no planalto de São Jorge, o exército português liderado por D. João I e D. Nuno Álvares Pereira derrotou decisivamente as forças castelhanas de Juan I?",
+    "opcoes": [
+      "Batalha de Aljubarrota",
+      "Batalha dos Atoleiros",
+      "Batalha de Valverde",
+      "Batalha de Toro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A vitória na Batalha de Aljubarrota consolidou a independência de Portugal face a Castela e deu origem à edificação do monumental Mosteiro de Santa Maria da Vitória (Mosteiro da Batalha).",
+    "fonte": "Academia Portuguesa da História / Fundação Batalha de Aljubarrota",
+    "factClusterId": "fc_bat_aljubarrota_01"
+  },
+  {
+    "id": "HIST_BAT_0002",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 24 de junho de 1128 no Campo de São Mamede (Guimarães) é considerada o momento fundacional da nacionalidade portuguesa, na qual Afonso Henriques derrotou os nobres galegos partidários de sua mãe D. Teresa?",
+    "opcoes": [
+      "Batalha de Ourique",
+      "Batalha de São Mamede",
+      "Batalha de Cerneja",
+      "Batalha de Arcos de Valdevez"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A vitória de D. Afonso Henriques em São Mamede afastou a influência do conde galego Fernão Peres de Trava e colocou o jovem infante no governo exclusivo do Condado Portucalense.",
+    "fonte": "Sociedade Martins Sarmento / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_saomamede_01"
+  },
+  {
+    "id": "HIST_BAT_0003",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que mítica batalha travada a 25 de julho de 1139 D. Afonso Henriques derrotou cinco reis mouros e foi aclamado Rei de Portugal pelas suas tropas, associando-se o acontecimento à origem das cinco quinas do brasão nacional?",
+    "opcoes": [
+      "Batalha de Aljubarrota",
+      "Batalha de Santarém",
+      "Batalha de Ourique",
+      "Batalha de Silves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Batalha de Ourique consolidou a liderança militar de D. Afonso Henriques e a sua proclamação como 'Rex Portugalensium'.",
+    "fonte": "Academia Portuguesa da História / Dicionário de História de Portugal",
+    "factClusterId": "fc_bat_ourique_01"
+  },
+  {
+    "id": "HIST_BAT_0004",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que trágica batalha travada a 4 de agosto de 1578 em Marrocos (Batalha dos Três Reis) pereceu o rei D. Sebastião e grande parte da nobreza portuguesa, abrindo a crise dinástica de 1580?",
+    "opcoes": [
+      "Batalha de Ceuta",
+      "Batalha de Tânger",
+      "Batalha de Mazagão",
+      "Batalha de Alcácer Quibir (Alcácer-Quibir)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A derrota em Alcácer Quibir perante o sultão Abd al-Malik levou à perda temporária da independência de Portugal e ao nascimento do mito do Sebastianismo.",
+    "fonte": "BNP / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_alcacerquibir_01"
+  },
+  {
+    "id": "HIST_BAT_0005",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 6 de abril de 1384 no Alentejo (Fronteira) foi a primeira vitória militar do Santo Condestável D. Nuno Álvares Pereira, recorrendo pela primeira vez à tática apeada do quadrado contra a cavalaria pesada de Castela?",
+    "opcoes": [
+      "Batalha dos Atoleiros",
+      "Batalha de Aljubarrota",
+      "Batalha de Valverde",
+      "Batalha de Trancoso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Na Batalha dos Atoleiros, o exército português não sofreu uma única baixa mortal, derrotando um contingente castelhano muito superior.",
+    "fonte": "Fundação Batalha de Aljubarrota / Município de Fronteira",
+    "factClusterId": "fc_bat_atoleiros_01"
+  },
+  {
+    "id": "HIST_BAT_0006",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto militar travado em 1140 no vale do rio Vez evitou um combate sangrento entre Afonso Henriques e Afonso VII de Leão e Castela, resolvendo-se a contenda num torneio de cavalaria conhecido como o «Bafordo»?",
+    "opcoes": [
+      "Batalha de São Mamede",
+      "Recontro de Valdevez (ou Torneio de Arcos de Valdevez)",
+      "Batalha de Cerneja",
+      "Batalha de Ourique"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Recontro de Valdevez abriu caminho às negociações de paz do Tratado de Zamora em 1143 com a presença do cardeal legado papal.",
+    "fonte": "Município de Arcos de Valdevez / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_valdevez_01"
+  },
+  {
+    "id": "HIST_BAT_0007",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 17 de junho de 1665 perto de Vila Viçosa e Estremoz foi a vitória decisiva e final do exército anglo-português comandado pelo Marquês de Marialva e pelo Conde de Schomberg na Guerra da Restauração?",
+    "opcoes": [
+      "Batalha das Linhas de Elvas",
+      "Batalha do Ameixial",
+      "Batalha de Montes Claros",
+      "Batalha de Castelo Rodrigo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vitória em Montes Claros selou o fim definitivo das pretensões espanholas, conduzindo à assinatura do Tratado de Paz de Lisboa de 1668.",
+    "fonte": "Exército Português / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_montesclaros_01"
+  },
+  {
+    "id": "HIST_BAT_0008",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que batalha travada a 14 de janeiro de 1659 as forças portuguesas comandadas por D. António Luís de Meneses (Conde de Cantanhede) quebraram o cerco espanhol de D. Luís de Haro no Alto Alentejo?",
+    "opcoes": [
+      "Batalha do Ameixial",
+      "Batalha de Montes Claros",
+      "Batalha de Montijo",
+      "Batalha das Linhas de Elvas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Batalha das Linhas de Elvas foi um dos momentos mais brilhantes da Restauração da Independência, quebrando o maior exército espanhol da época.",
+    "fonte": "Município de Elvas / Exército Português",
+    "factClusterId": "fc_bat_linhasdeelvas_01"
+  },
+  {
+    "id": "HIST_BAT_0009",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha das Invasões Francesas travada a 27 de setembro de 1810 na Serra do Buçaco viu as forças anglo-lusas do Duque de Wellington e do Marechal Beresford repelirem os ataques do Marechal Massena?",
+    "opcoes": [
+      "Batalha do Buçaco",
+      "Batalha da Roliça",
+      "Batalha do Vimeiro",
+      "Batalha de Fuentes de Oñoro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A vitória no Buçaco demonstrou a bravura do exército anglo-luso antes da retirada estratégica planeada para as Linhas de Torres Vedras.",
+    "fonte": "Mata Nacional do Buçaco / Museu Militar do Buçaco",
+    "factClusterId": "fc_bat_bucaco_01"
+  },
+  {
+    "id": "HIST_BAT_0010",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que sistema formidável de 152 redutos fortificados e 600 peças de artilharia, mandado construir em segredo por Wellington a norte de Lisboa em 1809-1810, travou em definitivo a Terceira Invasão Francesa?",
+    "opcoes": [
+      "Muralhas Fernandinas",
+      "Linhas de Torres Vedras",
+      "Linha de Elvas",
+      "Cintura de Marvão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Linhas de Torres Vedras constituíram uma das maiores e mais eficazes obras de engenharia militar defensiva da história mundial.",
+    "fonte": "Rota Histórica das Linhas de Torres / Exército Português",
+    "factClusterId": "fc_bat_linhasdetorres_01"
+  },
+  {
+    "id": "HIST_BAT_0011",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que sangrenta batalha da Primeira Guerra Mundial, travada a 9 de abril de 1918 na Flandres (Bélgica), o Corpo Expedicionário Português (CEP) resistiu heroicamente a uma massiva ofensiva alemã (Operação Georgette)?",
+    "opcoes": [
+      "Batalha de Verdun",
+      "Batalha do Somme",
+      "Batalha de La Lys",
+      "Batalha de Ypres"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Na Batalha de La Lys destacou-se a coragem de milhares de praças e do célebre Soldado Milhões (Aníbal Augusto Milhais).",
+    "fonte": "Liga dos Combatentes / Exército Português / Museu Militar",
+    "factClusterId": "fc_bat_lalys_01"
+  },
+  {
+    "id": "HIST_BAT_0012",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que soldado transmontano natural de Valongo de Milhais (Murça) enfrentou sozinho sucessivas colunas alemãs armando a sua metralhadora Lewis na Batalha de La Lys em 1918, sendo condecorado com a Torre e Espada?",
+    "opcoes": [
+      "Capitão Salgueiro Maia",
+      "Mousinho de Albuquerque",
+      "Major Neutel de Abreu",
+      "Soldado Milhões (Aníbal Augusto Milhais)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O comandante disse-lhe: «Tu és Milhais, mas vales Milhões!», tornando-se o maior herói popular português da Grande Guerra.",
+    "fonte": "Exército Português / Presidência da República",
+    "factClusterId": "fc_bat_soldadomilhoes_01"
+  },
+  {
+    "id": "HIST_BAT_0013",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 21 de agosto de 1808 perto da Lourinhã viu as forças britânicas e portuguesas comandadas por Arthur Wellesley derrotarem o general francês Junot, forçando a capitulação da Primeira Invasão Francesa?",
+    "opcoes": [
+      "Batalha do Vimeiro",
+      "Batalha da Roliça",
+      "Batalha de Évora",
+      "Batalha de Chaves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A vitória no Vimeiro levou à assinatura da Convenção de Sintra e à evacuação total das tropas de Junot de Lisboa.",
+    "fonte": "Museu do Vimeiro / Município da Lourinhã",
+    "factClusterId": "fc_bat_vimeiro_01"
+  },
+  {
+    "id": "HIST_BAT_0014",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que primeiro recontro armado das Invasões Francesas em Portugal travou-se a 17 de agosto de 1808 perto de Óbidos e Bombarral, opondo as tropas de Wellesley ao general Delaborde?",
+    "opcoes": [
+      "Batalha do Vimeiro",
+      "Batalha da Roliça",
+      "Batalha de Braga",
+      "Batalha de Alhandra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Batalha da Roliça foi o primeiro combate travado pelo exército britânico na Guerra Peninsular.",
+    "fonte": "Academia Portuguesa da História / Exército Português",
+    "factClusterId": "fc_bat_rolica_01"
+  },
+  {
+    "id": "HIST_BAT_0015",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 25 de agosto de 1580 na ponte sobre a ribeira de Alcântara (Lisboa) colocou frente a frente o Duque de Alba (por Filipe II) e as forças fiéis a D. António Prior do Crato?",
+    "opcoes": [
+      "Batalha da Salga",
+      "Batalha do Salado",
+      "Batalha de Alcântara",
+      "Batalha de Ponta Delgada"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vitória espanhola em Alcântara permitiu a entrada de Filipe II em Lisboa e o início da Dinastia Filipina.",
+    "fonte": "Dicionário de História de Portugal / BNP",
+    "factClusterId": "fc_bat_alcantara1580_01"
+  },
+  {
+    "id": "HIST_BAT_0016",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que ilha dos Açores ocorreu a 25 de julho de 1581 a célebre «Batalha da Salga», onde a população local derrotou as tropas espanholas desembarcadas lançando manadas de gado bravo sobre os invasores?",
+    "opcoes": [
+      "Ilha de São Miguel",
+      "Ilha do Faial",
+      "Ilha de Santa Maria",
+      "Ilha Terceira (Baía das Mós / Salga)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A heroína Brianda Pereira e os ilhéus da Terceira usaram o gado bravo e toiros soltos para empurrar os soldados castelhanos para o mar.",
+    "fonte": "Governo Regional dos Açores / Museu de Angra do Heroísmo",
+    "factClusterId": "fc_bat_salga1581_01"
+  },
+  {
+    "id": "HIST_BAT_0017",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha naval travada a 26 de julho de 1582 ao largo da ilha de São Miguel viu a armada espanhola de Álvaro de Bazán derrotar a frota franco-portuguesa leal ao Prior do Crato?",
+    "opcoes": [
+      "Batalha Naval de Vila Franca (ou de Ponta Delgada)",
+      "Batalha da Salga",
+      "Batalha do Cabo de São Vicente",
+      "Batalha das Berlengas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Batalha de Vila Franca do Campo foi a maior batalha naval travada no Atlântico nos tempos da Restauração / crise de 1580.",
+    "fonte": "Marinha Portuguesa / Academia de Marinha",
+    "factClusterId": "fc_bat_vilafranca1582_01"
+  },
+  {
+    "id": "HIST_BAT_0018",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 30 de outubro de 1340 no sul da Península Ibérica uniu os exércitos de D. Afonso IV de Portugal e Afonso XI de Castela na vitória esmagadora contra as forças do Sultanato Benimerim e de Granada?",
+    "opcoes": [
+      "Batalha de Ourique",
+      "Batalha do Salado",
+      "Batalha de Las Navas de Tolosa",
+      "Batalha de Toro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pelo seu papel heroico no comando do exército português na Batalha do Salado, D. Afonso IV recebeu o cognome de «O Bravo».",
+    "fonte": "Academia Portuguesa da História / D. Afonso IV",
+    "factClusterId": "fc_bat_salado1340_01"
+  },
+  {
+    "id": "HIST_BAT_0019",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 1 de março de 1476 nas margens do rio Douro opôs o exército de D. Afonso V e do Príncipe Perfeito D. João às tropas dos Reis Católicos (Fernando e Isabel) na Guerra da Sucessão de Castela?",
+    "opcoes": [
+      "Batalha de Aljubarrota",
+      "Batalha de Montes Claros",
+      "Batalha de Toro",
+      "Batalha de Alcântara"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Apesar do desfecho inconclusivo, a liderança brilhante do Príncipe D. João em Toro salvou a ala direita do exército e conduziu ao Tratado de Alcáçovas-Toledo de 1479.",
+    "fonte": "Dicionário de História de Portugal / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_toro1476_01"
+  },
+  {
+    "id": "HIST_BAT_0020",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que confronto civil travado a 20 de maio de 1449 junto a Alverca do Ribatejo, o Infante D. Pedro (Duque de Coimbra e antigo Regente) foi derrotado e morto pelas tropas de D. Afonso V instigadas pelo Duque de Bragança?",
+    "opcoes": [
+      "Batalha de Ponte do Prado",
+      "Batalha de Santarém",
+      "Batalha de Rio Maior",
+      "Batalha de Alfarrobeira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Batalha de Alfarrobeira pôs termo trágico à vida de uma das mentes mais brilhantes do Renascimento europeu, o Infante D. Pedro.",
+    "fonte": "Academia Portuguesa da História / BNP",
+    "factClusterId": "fc_bat_alfarrobeira1449_01"
+  },
+  {
+    "id": "HIST_BAT_0021",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto da Guerra da Restauração travado a 8 de junho de 1663 junto a Estremoz viu o exército português do Conde de Vila Flor e do Conde de Schomberg derrotar o exército espanhol de D. João de Áustria?",
+    "opcoes": [
+      "Batalha do Ameixial",
+      "Batalha de Montes Claros",
+      "Batalha das Linhas de Elvas",
+      "Batalha de Montijo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "No Ameixial, as tropas portuguesas recuperaram a cidade de Évora que havia sido temporariamente ocupada pelo exército espanhol.",
+    "fonte": "Exército Português / Município de Estremoz",
+    "factClusterId": "fc_bat_ameixial1663_01"
+  },
+  {
+    "id": "HIST_BAT_0022",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que primeira grande batalha campal da Guerra da Restauração foi travada a 26 de maio de 1644 em território estremenho espanhol, comandada por D. Matias de Albuquerque?",
+    "opcoes": [
+      "Batalha das Linhas de Elvas",
+      "Batalha de Montijo",
+      "Batalha de Montes Claros",
+      "Batalha do Ameixial"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A vitória de Montijo valeu a D. Matias de Albuquerque o título de Conde de Alegrete pelo rei D. João IV.",
+    "fonte": "Exército Português / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_montijo1644_01"
+  },
+  {
+    "id": "HIST_BAT_0023",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cerco e batalha naval travada a 5 de julho de 1833 ao largo do Cabo de São Vicente no Algarve viu o almirante britânico Charles Napier ao serviço de D. Pedro IV destruir a armada miguelista?",
+    "opcoes": [
+      "Batalha de Vila Nova da Rainha",
+      "Batalha da Asseiceira",
+      "Batalha Naval do Cabo de São Vicente (Guerras Liberais)",
+      "Batalha de Ponte Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vitória naval de Charles Napier permitiu o desembarque do Duque da Terceira no Algarve e a marcha triunfal sobre Lisboa para restaurar a monarquia constitucional.",
+    "fonte": "Marinha Portuguesa / Dicionário das Guerras Liberais",
+    "factClusterId": "fc_bat_saovicente1833_01"
+  },
+  {
+    "id": "HIST_BAT_0024",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha final e decisiva das Guerras Liberais foi travada a 16 de maio de 1834 perto de Tomar, onde o exército constitucional do Duque da Terceira derrotou as forças miguelistas de Guedes de Oliveira?",
+    "opcoes": [
+      "Batalha Quase-Guerra",
+      "Batalha de Almoster",
+      "Batalha de Ponte Ferreira",
+      "Batalha da Asseiceira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A derrota na Batalha da Asseiceira forçou D. Miguel a assinar a Convenção de Évora Monte a 26 de maio de 1834 e a partir para o exílio perpétuo.",
+    "fonte": "Academia Portuguesa da História / Município de Tomar",
+    "factClusterId": "fc_bat_asseiceira1834_01"
+  },
+  {
+    "id": "HIST_BAT_0025",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha encarniçada das Guerras Liberais foi travada a 18 de fevereiro de 1834 perto de Santarém, onde o Marechal Saldanha venceu o exército miguelista comandado pelo general Lemos?",
+    "opcoes": [
+      "Batalha de Almoster",
+      "Batalha da Asseiceira",
+      "Batalha do Cerco do Porto",
+      "Batalha de Valongo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Batalha de Almoster foi um dos combates mais violentos e sangrentos da Guerra Civil entre liberais e absolutistas.",
+    "fonte": "Dicionário de História de Portugal / Exército Português",
+    "factClusterId": "fc_bat_almoster1834_01"
+  },
+  {
+    "id": "HIST_BAT_0026",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cerco militar heroico durou de julho de 1832 a agosto de 1833, durante o qual as tropas liberais de D. Pedro IV e a população da Invicta resistiram ao bombardeamento ininterrupto do exército absolutista de D. Miguel?",
+    "opcoes": [
+      "Cerco de Lisboa",
+      "Cerco do Porto (1832-1833)",
+      "Cerco de Almeida",
+      "Cerco de Elvas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pela sua resistência inquebrantável durante o Cerco, a cidade do Porto recebeu de D. Maria II o título de «Antiga, Mui Nobre, Sempre Leal e Invicta Cidade do Porto» e o coração de D. Pedro IV.",
+    "fonte": "Câmara Municipal do Porto / Museu da Cidade",
+    "factClusterId": "fc_bat_cercodoporto_01"
+  },
+  {
+    "id": "HIST_BAT_0027",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto das Campanhas de Pacificação de Moçambique travado a 2 de fevereiro de 1895 na província de Gaza viu as forças do major Eduardo Galhardo repelirem os ataques dos guerreiros vátuas de Gungunhana?",
+    "opcoes": [
+      "Batalha de Chaimite",
+      "Batalha de Coolela",
+      "Batalha de Marracuene (Combate de Marracuene / Gwaza Muthini)",
+      "Batalha de Magul"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O combate de Marracuene marcou o início da derrota do Império de Gaza e da afirmação da soberania portuguesa face às ambições britânicas após o Ultimato de 1890.",
+    "fonte": "Arquivo Histórico Militar / História Colonial Portuguesa",
+    "factClusterId": "fc_bat_marracuene1895_01"
+  },
+  {
+    "id": "HIST_BAT_0028",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que aldeia fortificada no interior de Moçambique o major Joaquim Augusto Mousinho de Albuquerque entrou audaciosamente a 28 de dezembro de 1895 com apenas 50 soldados e capturou o imperador de Gaza, Gungunhana?",
+    "opcoes": [
+      "Manjacaze",
+      "Inhambane",
+      "Lourenço Marques",
+      "Chaimite"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A captura de Gungunhana em Chaimite tornou Mousinho de Albuquerque um dos maiores mitos militares da Regeneração.",
+    "fonte": "Mousinho de Albuquerque / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_bat_chaimite1895_01"
+  },
+  {
+    "id": "HIST_BAT_0029",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto armado travado no sul de Angola a 18 de dezembro de 1914 viu as tropas coloniais portuguesas comandadas por Alves Roçadas serem derrotadas pelas tropas imperiais alemãs no início da Primeira Guerra Mundial?",
+    "opcoes": [
+      "Batalha de Naulila (Combate de Naulila)",
+      "Batalha do Cuangar",
+      "Batalha do Vau do Pembe",
+      "Batalha de Môngua"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Combate de Naulila obrigou Portugal a enviar reforços massivos para proteger a fronteira sul de Angola antes de declarar oficialmente guerra à Alemanha em 1916.",
+    "fonte": "Arquivo Histórico Militar / Exército Português",
+    "factClusterId": "fc_bat_naulila1914_01"
+  },
+  {
+    "id": "HIST_BAT_0030",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que batalha da Primeira Guerra Mundial no norte de Moçambique travada em novembro de 1917, as forças portuguesas comandadas pelo major Neutel de Abreu sofreram um cerco violento das forças alemãs do general Paul von Lettow-Vorbeck?",
+    "opcoes": [
+      "Batalha de Quivambo",
+      "Batalha de Negomano",
+      "Batalha de Neves Ferreira",
+      "Batalha de Palma"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "O combate de Negomano junto ao rio Rovuma foi uma das ações militares mais difíceis da frente africana na Grande Guerra.",
+    "fonte": "Exército Português / Revista Militar",
+    "factClusterId": "fc_bat_negomano1917_01"
+  },
+  {
+    "id": "HIST_BAT_0031",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cerco histórico em 1147 durou quase quatro meses, durante o qual D. Afonso Henriques e uma armada de cruzados do norte da Europa conquistaram a cidade aos mouros governados pelo alcaide Ibn Qasi?",
+    "opcoes": [
+      "Cerco de Santarém",
+      "Cerco de Silves",
+      "Conquista / Cerco de Lisboa de 1147",
+      "Cerco de Évora"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A tomada do Castelo de São Jorge em outubro de 1147 foi um dos maiores sucessos militares da Reconquista portuguesa.",
+    "fonte": "De expugnatione Lyxbonensi / Castelo de São Jorge / BNP",
+    "factClusterId": "fc_bat_conquistalisboa_01"
+  },
+  {
+    "id": "HIST_BAT_0032",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cavaleiro e nobre português se imolou heroicamente na porta do Castelo de São Jorge em 1147, entalando o seu corpo na fenda da porta para permitir a entrada dos companheiros cristãos?",
+    "opcoes": [
+      "Gonçalo Mendes da Maia",
+      "Giraldo Sem Pavor",
+      "Egas Moniz",
+      "Martim Moniz"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Porta de Martim Moniz no Castelo de São Jorge e a praça com o seu nome em Lisboa homenageiam o herói lendário da tomada de Lisboa.",
+    "fonte": "Castelo de São Jorge / Crónicas Antigas de Portugal",
+    "factClusterId": "fc_bat_martimmoniz_01"
+  },
+  {
+    "id": "HIST_BAT_0033",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que guerreiro destemido conquistou a cidade de Évora em 1165 e várias praças do Alentejo (Beja, Serpa, Juromenha) através de assaltos noturnos de surpresa com escadas de assalto?",
+    "opcoes": [
+      "Giraldo Sem Pavor (Geraldo Geraldes)",
+      "Gonçalo Mendes da Maia",
+      "Mem Ramires",
+      "Fernão Lopes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A figura de Giraldo Sem Pavor a cavalo de espada em riste com duas cabeças decapitadas figura no brasão de armas da cidade de Évora.",
+    "fonte": "Câmara Municipal de Évora / Dicionário de História Medieval",
+    "factClusterId": "fc_bat_giraldosempavor_01"
+  },
+  {
+    "id": "HIST_BAT_0034",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que nobre idoso apelidado de «O Lidador» morreu em combate aos 95 anos de idade na Batalha de Beja em 1170 ao investir sozinho contra os mouros para levantar o ânimo dos soldados portugueses?",
+    "opcoes": [
+      "Egas Moniz",
+      "Gonçalo Mendes da Maia (O Lidador)",
+      "Soeiro Mendes da Maia",
+      "Paio Peres Correia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A cidade da Maia e a vila de Beja homenageiam a estátua do Lidador como exemplo supremo de bravura até à velhice extrema.",
+    "fonte": "Município da Maia / Município de Beja",
+    "factClusterId": "fc_bat_lidador_01"
+  },
+  {
+    "id": "HIST_BAT_0035",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que mestre da Ordem de Santiago liderou a reconquista definitiva do Algarve nos reinados de D. Sancho II e D. Afonso III, tomando Mértola, Tavira, Faro e Silves entre 1238 e 1249?",
+    "opcoes": [
+      "Gualdim Pais",
+      "Álvaro Martins",
+      "D. Paio Peres Correia",
+      "Nuno Álvares Pereira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Paio Peres Correia completou as fronteiras de Portugal no Tratado de Alcanizes com a posse definitiva do Reino do Algarve.",
+    "fonte": "Ordem de Santiago / História do Algarve",
+    "factClusterId": "fc_bat_paioperescorreia_01"
+  },
+  {
+    "id": "HIST_BAT_0036",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que ano a armada portuguesa liderada pelo rei D. João I, pelo Infante D. Henrique e por D. Duarte conquistou a cidade mourisca de Ceuta no norte de África, dando início à Expansão Marítima Portuguesa?",
+    "opcoes": [
+      "1498",
+      "1488",
+      "1385",
+      "1415 (21 de agosto de 1415)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Conquista de Ceuta em 1415 marca tradicionalmente o início da era dos Descobrimentos e do Império Ultramarino Português.",
+    "fonte": "Gomes Eanes de Zurara / BNP / Comissão dos Descobrimentos",
+    "factClusterId": "fc_bat_ceuta1415_01"
+  },
+  {
+    "id": "HIST_BAT_0037",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que desastre militar no norte de África em 1437 viu o exército português comandado pelo Infante D. Henrique e pelo Infante D. Fernando ser cercado pelos mouros, resultando no cativeiro e martírio do «Infante Santo» em Fez?",
+    "opcoes": [
+      "Desastre de Tânger de 1437",
+      "Conquista de Ceuta",
+      "Tomada de Alcácer Ceguer",
+      "Cerco de Arzila"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Fernando recusou que Ceuta fosse entregue para pagar o seu resgate, morrendo em cativeiro santificado pela Igreja e pelo povo.",
+    "fonte": "Rui de Pina (Crónica de D. Duarte) / BNP",
+    "factClusterId": "fc_bat_tanger1437_01"
+  },
+  {
+    "id": "HIST_BAT_0038",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que capitão e governador do Estado da Índia conquistou Goa em 1510, Malaca em 1511 e Ormuz em 1515, estabelecendo o domínio português sobre as rotas de especiarias do Índico?",
+    "opcoes": [
+      "Francisco de Almeida",
+      "Afonso de Albuquerque («O Leão dos Mares»)",
+      "Vasco da Gama",
+      "D. Lourenço de Almeida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Afonso de Albuquerque foi o grande arquiteto estratégico do império marítimo e comercial português no Oriente.",
+    "fonte": "Comentários de Afonso de Albuquerque / BNP",
+    "factClusterId": "fc_bat_afonsoalbuquerque_01"
+  },
+  {
+    "id": "HIST_BAT_0039",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que monumental batalha naval travada a 3 de fevereiro de 1509 no mar da Arábia, o 1.º Vice-Rei da Índia D. Francisco de Almeida destruiu a armada conjunta mameluca-otomana-gujarati para vingar a morte do seu filho Lourenço de Almeida?",
+    "opcoes": [
+      "Batalha de Chaul",
+      "Batalha de Calecute",
+      "Batalha Naval de Diu (1509)",
+      "Batalha de Cochim"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vitória na Batalha de Diu assegurou a hegemonia naval absoluta da Coroa Portuguesa no Oceano Índico durante mais de um século.",
+    "fonte": "Marinha Portuguesa / João de Barros (Décadas da Ásia)",
+    "factClusterId": "fc_bat_navaldiu1509_01"
+  },
+  {
+    "id": "HIST_BAT_0040",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que fortaleza portuguesa na Índia resistiu a dois heróicos cercos em 1538 e 1546 comandada por António da Silveira e D. João de Castro contra milhares de tropas e naus otomanas?",
+    "opcoes": [
+      "Fortaleza de Baçaim",
+      "Fortaleza de Chaul",
+      "Fortaleza de Damão",
+      "Fortaleza de Diu (Os Cercos de Diu)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A defesa de Diu por D. João de Castro e os seus soldados é um dos maiores episódios de coragem militar da história de Portugal.",
+    "fonte": "DGPC / Marinha Portuguesa / BNP",
+    "factClusterId": "fc_bat_cercosdediu_01"
+  },
+  {
+    "id": "HIST_BAT_0041",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que capitão e fidalgo português defendeu com apenas 150 soldados a Fortaleza de Mazagão (Marrocos) durante o grande cerco de 1562 contra mais de 100.000 soldados do sultão de Marrocos?",
+    "opcoes": [
+      "Rui de Sousa Carvalho",
+      "D. Francisco de Almeida",
+      "D. Duarte de Meneses",
+      "Pedro Álvares Cabral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A praça-forte manuelina de Mazagão (El Jadida) permaneceu na posse de Portugal até 1769 quando a população foi transferida para o Brasil (Nova Mazagão).",
+    "fonte": "Património Mundial da UNESCO / BNP",
+    "factClusterId": "fc_bat_mazagao1562_01"
+  },
+  {
+    "id": "HIST_BAT_0042",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que célebre capitão templário fundou o Castelo de Tomar em 1160 e defendeu a fortaleza com os seus freires cavaleiros durante o cerco de seis dias do califa almóada Abu Yaqub Yusuf em 1190?",
+    "opcoes": [
+      "D. Paio Peres Correia",
+      "Gualdim Pais",
+      "Álvaro Fernandes",
+      "Estêvão de Tomar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Mestre Gualdim Pais construiu uma das mais inovadoras praças templárias com torre albarrã e mata-cães em Tomar.",
+    "fonte": "Convento de Cristo / Ordem do Templo",
+    "factClusterId": "fc_bat_gualdimpais_01"
+  },
+  {
+    "id": "HIST_BAT_0043",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 29 de maio de 1385 em Trancoso (Beira Alta) viu os alcaides portugueses Gonçalo Vasques Coutinho e Martim Vasques da Cunha aniquilarem uma divisão castelhana antes de Aljubarrota?",
+    "opcoes": [
+      "Batalha de Valverde",
+      "Batalha dos Atoleiros",
+      "Batalha de Trancoso (ou Batalha de São Marcos)",
+      "Batalha de Linhares"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A vitória de Trancoso elevou o moral dos portugueses e abriu caminho ao triunfo de Aljubarrota dois meses depois.",
+    "fonte": "Município de Trancoso / Fernão Lopes",
+    "factClusterId": "fc_bat_trancoso1385_01"
+  },
+  {
+    "id": "HIST_BAT_0044",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 15 de outubro de 1385 em território espanhol (Mérida) viu D. Nuno Álvares Pereira atravessar o rio Guadiana e derrotar o exército do Grão-Mestre de Santiago, D. Pedro Muniz?",
+    "opcoes": [
+      "Batalha dos Atoleiros",
+      "Batalha de Toro",
+      "Batalha de Aljubarrota",
+      "Batalha de Valverde"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Na Batalha de Valverde, D. Nuno Álvares Pereira demonstrou a sua mestria orando enquanto os seus homens aguentavam a carga inimiga antes do contra-ataque vitorioso.",
+    "fonte": "Crónica do Condestável / BNP",
+    "factClusterId": "fc_bat_valverde1385_01"
+  },
+  {
+    "id": "HIST_BAT_0045",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que operação militar liderada pelo Movimento das Forças Armadas (MFA) a 25 de Abril de 1974, com a coluna de blindados da Escola Prática de Cavalaria de Santarém comandada pelo capitão Salgueiro Maia, derrubou a ditadura do Estado Novo quase sem derramamento de sangue?",
+    "opcoes": [
+      "Revolução dos Cravos (25 de Abril de 1974)",
+      "Revolta de 18 de Janeiro",
+      "Golpe de 28 de Maio",
+      "Revolta de Beja"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A rendição de Marcello Caetano a Salgueiro Maia e a Spínola no Quartel do Carmo em Lisboa devolveu a liberdade e a democracia a Portugal.",
+    "fonte": "Associação 25 de Abril / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_bat_25deabril_01"
+  },
+  {
+    "id": "HIST_BAT_0046",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que golpe militar republicano eclodiu a 31 de janeiro de 1891 na cidade do Porto (Campo de Santo Ovídio e Praça Nova), sendo a primeira tentativa armada de implantar a República em Portugal?",
+    "opcoes": [
+      "Revolução de 5 de Outubro de 1910",
+      "Revolta Republicana de 31 de Janeiro de 1891",
+      "Golpe de 28 de Maio de 1926",
+      "Revolta dos Marinheiros"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 31 de Janeiro foi desencadeado pelo descontentamento com o Ultimato Inglês de 1890 e imortalizou a Rua 31 de Janeiro no Porto.",
+    "fonte": "Câmara Municipal do Porto / Museu da Cidade",
+    "factClusterId": "fc_bat_31dejaneiro_01"
+  },
+  {
+    "id": "HIST_BAT_0047",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que revolução militar e popular em Lisboa nos dias 4 e 5 de outubro de 1910 derrubou a Monarquia Constitucional e proclamou a Primeira República Portuguesa na varanda dos Paços do Concelho?",
+    "opcoes": [
+      "Revolução de 1820",
+      "Revolução Liberal",
+      "Revolução de 5 de Outubro de 1910",
+      "Novembro de 1918"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os combates na Rotunda (liderados por Machado Santos) e o bombardeamento do Palácio das Necessidades pela marinha precipitaram a fuga de D. Manuel II para a Ericeira e Inglaterra.",
+    "fonte": "Museu da Presidência da República / BNP",
+    "factClusterId": "fc_bat_5deoutubro_01"
+  },
+  {
+    "id": "HIST_BAT_0048",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que revolução militar iniciada a 24 de agosto de 1820 no Porto pela associação secreta «Sinédrio» exigiu o regresso da Corte do Brasil e a elaboração da primeira Constituição Portuguesa de 1822?",
+    "opcoes": [
+      "Revolução de 1640",
+      "Revolta da Maria da Fonte",
+      "Patuleia",
+      "Revolução Liberal do Porto de 1820"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuel Fernandes Tomás e os revolucionários liberais do Porto instauraram o regime constitucional e parlamentar em Portugal.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_bat_revolucaoliberal1820_01"
+  },
+  {
+    "id": "HIST_BAT_0049",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que revolta popular minhota iniciada em 1846 na freguesia de Fonte Arcada (Póvoa de Lanhoso), liderada por mulheres contra a lei das sepulturas e novos impostos de Costa Cabral, foi a:",
+    "opcoes": [
+      "Revolta da Maria da Fonte",
+      "Patuleia",
+      "Revolta dos Taberneiros",
+      "Revolta dos Marechais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A revolta da Maria da Fonte espalhou-se por todo o país e desencadeou a guerra civil da Patuleia resolvida na Convenção de Gramido.",
+    "fonte": "Município da Póvoa de Lanhoso / BNP",
+    "factClusterId": "fc_bat_mariadafonte1846_01"
+  },
+  {
+    "id": "HIST_BAT_0050",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que lendária padeira de Aljubarrota teria matado com a sua pá de forno sete soldados castelhanos escondidos dentro do seu forno após a Batalha de Aljubarrota em 1385?",
+    "opcoes": [
+      "Brianda Pereira",
+      "Maria da Fonte",
+      "Brites de Almeida (A Padeira de Aljubarrota)",
+      "Guiomar de Oliveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Brites de Almeida tornou-se um símbolo lendário do patriotismo e da resistência popular portuguesa face à invasão estrangeira.",
+    "fonte": "Município de Alcobaça / Fundação Batalha de Aljubarrota",
+    "factClusterId": "fc_bat_padeiradealjubarrota_01"
+  }
+]

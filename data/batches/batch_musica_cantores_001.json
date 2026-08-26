@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUS_CAN_0001",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que lendário cantautor e compositor português de Aveiro e Coimbra (1929-1987), José Afonso («Zeca Afonso»), compôs a histórica canção «Grândola, Vila Morena» (transmitida na Rádio Renascença à meia-noite e vinte do dia 25 de Abril de 1974 como a segunda senha da Revolução dos Cravos)?",
+    "opcoes": [
+      "José Afonso (Zeca Afonso)",
+      "Sérgio Godinho",
+      "José Mário Branco",
+      "Adriano Correia de Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Zeca Afonso compôs também 'Os Vampiros', 'Cantigas do Maio', 'Índios da Meia-Praia' e 'Canção de Embalar', sendo a voz máxima da liberdade.",
+    "fonte": "Associação José Afonso / RTP Arquivos",
+    "factClusterId": "fc_mus_can_zecaafonso_01"
+  },
+  {
+    "id": "MUS_CAN_0002",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que emblemático cantor e guitarrista portuense (nascido em 1957), Rui Veloso («Rui Veloso»), amplamente aclamado como «O Pai do Rock Português», revolucionou a música nacional em 1980 com o álbum «Ar de Rock» e os clássicos «Chico Fininho», «Porto Sentido» e «Não Há Estrelas no Céu»?",
+    "opcoes": [
+      "Jorge Palma",
+      "Rui Veloso (O Pai do Rock Português)",
+      "Pedro Abrunhosa",
+      "Tim"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Veloso e o letrista Carlos Tê criaram algumas das canções mais célebres de sempre da música portuguesa, como 'A Paixão' e 'Anel de Rubi'.",
+    "fonte": "Museu da Música / EMI-Valentim de Carvalho",
+    "factClusterId": "fc_mus_can_ruiveloso_01"
+  },
+  {
+    "id": "MUS_CAN_0003",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que génio visionário e cantor de Fiscal (Amares, 1944-1984), António Variações («António Joaquim Rodrigues Ribeiro»), barbeiro e músico vanguardista que fundiu o fado e o folclore minhoto com o pop-rock e a new wave («Canção de Engate», «O Corpo É Que Paga», «Estou Além» e «É p'ra Amanhã»)?",
+    "opcoes": [
+      "Carlos Paião",
+      "Dino Meira",
+      "António Variações",
+      "Cândido Mota"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Variações foi uma das personalidades mais fascinantes e influentes da história da música portuguesa contemporânea.",
+    "fonte": "Valentim de Carvalho / RTP Arquivos / Filme 'Variações'",
+    "factClusterId": "fc_mus_can_antoniovariacoes_01"
+  },
+  {
+    "id": "MUS_CAN_0004",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que consagrado pianista, cantautor e compositor lisboeta (nascido em 1950), Jorge Palma («Jorge Palma»), autor de hinos intemporais como «Encosta-te a Mim», «Frágil», «Deixa-me Rir», «Portugal, Portugal» e o álbum antológico «Bairro do Amor» (1989)?",
+    "opcoes": [
+      "Sérgio Godinho",
+      "João Pedro Pais",
+      "Miguel Araújo",
+      "Jorge Palma"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jorge Palma foi condecorado como Comendador da Ordem do Infante D. Henrique e é uma das maiores referências do cancioneiro nacional.",
+    "fonte": "Sociedade Portuguesa de Autores / EMI",
+    "factClusterId": "fc_mus_can_jorgepalma_01"
+  },
+  {
+    "id": "MUS_CAN_0005",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que brilhante cantautor e 'escritor de canções' de Lisboa (nascido em 1945), Sérgio Godinho («Sérgio Godinho»), autor de clássicos de intervenção e poesia urbana como «O Primeiro Dia», «Com um Brilhozinho nos Olhos», «É Terça-Feira», «A Noite Passada» e «Dancemos no Mundo»?",
+    "opcoes": [
+      "Sérgio Godinho",
+      "Fausto Bordalo Dias",
+      "José Mário Branco",
+      "Vitorino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sérgio Godinho compôs a famosa frase 'Só há liberdade a sério quando houver a paz, o pão, habitação, saúde, educação'.",
+    "fonte": "Universal Music / SPA",
+    "factClusterId": "fc_mus_can_sergiogodinho_01"
+  },
+  {
+    "id": "MUS_CAN_0006",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que extraordinário cantor lisboeta (nascido em 1989), Salvador Sobral («Salvador Sobral»), fez história na música internacional ao vencer o Festival Eurovisão da Canção de 2017 em Kiev com a canção «Amar Pelos Dois» (composta por sua irmã Luísa Sobral), alcançando a pontuação mais alta de sempre da Eurovisão (758 pontos)?",
+    "opcoes": [
+      "Diogo Piçarra",
+      "Salvador Sobral (Vencedor da Eurovisão 2017 com 758 pontos)",
+      "Fernando Daniel",
+      "Tatanka"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Foi a primeira vitória de Portugal em 53 anos de participação no Festival Eurovisão da Canção.",
+    "fonte": "EBU / RTP / Festival Eurovisão da Canção",
+    "factClusterId": "fc_mus_can_salvadorsobral_eurovisao2017_01"
+  },
+  {
+    "id": "MUS_CAN_0007",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que aclamada fadista portuguesa de Santarém (nascida em 1979), Ana Moura («Ana Moura»), famosa por renovar o fado tradicional com sonoridades contemporâneas («Desfado», «Dia de Folga», «Andorinhas») e que atuou em palco a convite direto de lendas como Prince e The Rolling Stones?",
+    "opcoes": [
+      "Mariza",
+      "Carminho",
+      "Ana Moura",
+      "Cuca Roseta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O álbum 'Desfado' de Ana Moura foi o disco com maior permanência de sempre no Top Nacional de Vendas (mais de 200 semanas).",
+    "fonte": "Universal Music Portugal / AFP",
+    "factClusterId": "fc_mus_can_anamoura_01"
+  },
+  {
+    "id": "MUS_CAN_0008",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que prestigiada fadista moçambicana e portuguesa (nascida em Maputo em 1973), Mariza («Mariza Reis Nunes»), embaixadora mundial do fado e da cultura portuguesa, célebre por temas inesquecíveis como «Ó Gente da Minha Terra», «Chuva», «Melhor de Mim» e «Gente da Minha Terra»?",
+    "opcoes": [
+      "Ana Moura",
+      "Kátia Guerreiro",
+      "Gisela João",
+      "Mariza"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mariza atuou nas salas mais míticas do mundo como o Carnegie Hall em Nova Iorque, Sydney Opera House e Royal Albert Hall em Londres.",
+    "fonte": "Warner Music / Museu do Fado",
+    "factClusterId": "fc_mus_can_mariza_01"
+  },
+  {
+    "id": "MUS_CAN_0009",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que carismático músico, compositor e letrista portuense de óculos escuros (nascido em 1960), Pedro Abrunhosa («Pedro Abrunhosa»), revolucionou a música portuguesa em 1994 com o álbum de estreia «Viagens» (com os Bandemónio e Maceo Parker) e êxitos como «Não Posso Mais», «Socorro» e «Tudo o que Eu Te Dou»?",
+    "opcoes": [
+      "Pedro Abrunhosa (e os Bandemónio / Comité Caviar)",
+      "Rui Veloso",
+      "Jorge Palma",
+      "Paulo Gonzo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O álbum 'Viagens' vendeu mais de 140.000 cópias (Tripla Platina) sendo um dos maiores fenómenos comerciais da história da música portuguesa.",
+    "fonte": "PolyGram / Universal Music / SPA",
+    "factClusterId": "fc_mus_can_pedroabrunhosa_viagens_01"
+  },
+  {
+    "id": "MUS_CAN_0010",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantor e compositor lisboeta de voz rouca e inconfundível (nascido em 1956), Paulo Gonzo («Alberto Paulo Gomes Ferreira da Silva»), celebrizou baladas icónicas do pop-rock romântico nacional como «Jardins Proibidos» (1986), «Dei-te Quase Tudo», «Sei-te de Cor» e «So Do I»?",
+    "opcoes": [
+      "João Pedro Pais",
+      "Paulo Gonzo",
+      "Luís Represas",
+      "Delfins"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Paulo Gonzo foi o vocalista da histórica banda de blues-rock 'RTP — Go Graal Blues Band' nos anos 1970 antes de iniciar a sua bem-sucedida carreira a solo.",
+    "fonte": "Sony Music Portugal / SPA",
+    "factClusterId": "fc_mus_can_paulogonzo_01"
+  },
+  {
+    "id": "MUS_CAN_0011",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que monumental compositor, produtor musical e cantautor portuense (1942-2019), José Mário Branco («José Mário Branco»), fundou a GAC e assinou álbuns históricos da música de intervenção como «Mudam-se os Tempos, Mudam-se as Vontades» (1971), «Margem de Certa Maneira» e a monumental obra «FMI» (1982)?",
+    "opcoes": [
+      "Zeca Afonso",
+      "Fausto",
+      "José Mário Branco",
+      "Luís Cília"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Mário Branco produziu os álbuns mais importantes de Zeca Afonso, Sérgio Godinho, Camané e Carlos do Carmo.",
+    "fonte": "Arquivo José Mário Branco / CESEM / FCSH",
+    "factClusterId": "fc_mus_can_josemariobranco_01"
+  },
+  {
+    "id": "MUS_CAN_0012",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que genial compositor e cantautor de Vila Franca das Naves (1948-2024), Fausto Bordalo Dias («Fausto»), criou a magistral trilogia da diáspora e navegações portuguesas iniciada em 1982 com a obra-prima «Por Este Rio Acima» (com «Navegar, Navegar», «O Barco Vai de Saída» e «A Romaria dos Desvalidos»)?",
+    "opcoes": [
+      "José Mário Branco",
+      "Vitorino",
+      "Manuel Freire",
+      "Fausto Bordalo Dias (Fausto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'Por Este Rio Acima' é considerado pela crítica musical um dos discos conceptuais mais brilhantes de toda a música popular europeia.",
+    "fonte": "RTP / SPA / Trius",
+    "factClusterId": "fc_mus_can_faustobordalodias_01"
+  },
+  {
+    "id": "MUS_CAN_0013",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que carismático cantautor alentejano de Redondo (nascido em 1942), Vitorino Salomé («Vitorino»), celebrizou modas alentejanas e canções de amor universais como «Menina Estás à Janela» e o poema épico «Queda do Império»?",
+    "opcoes": [
+      "Vitorino (Vitorino Salomé Vieira)",
+      "Janita Salomé",
+      "Paco Bandeira",
+      "Buba Espinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vitorino participou também nos projetos 'Rio Grande' e 'Lua Extrema' divulgando a tradição coral do cante alentejano.",
+    "fonte": "Valentim de Carvalho / SPA",
+    "factClusterId": "fc_mus_can_vitorino_meninaestasajanela_01"
+  },
+  {
+    "id": "MUS_CAN_0014",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que emblemático cantor e compositor lisboeta (nascido em 1947), Paulo de Carvalho («Paulo de Carvalho»), interpretou a célebre canção «E Depois do Adeus» (vencedora do Festival RTP da Canção 1974), transmitida pelos Emissores Associados de Lisboa às 22h55 do dia 24 de Abril como a primeira senha dos Capitães de Abril?",
+    "opcoes": [
+      "Fernando Tordo",
+      "Paulo de Carvalho («E Depois do Adeus»)",
+      "Duarte Mendes",
+      "Tonicha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Paulo de Carvalho é o pai de Bernardo Sassetti e Mafalda Sachchetti e uma das maiores vozes do jazz e da canção portuguesa.",
+    "fonte": "RTP Arquivos / Associação 25 de Abril",
+    "factClusterId": "fc_mus_can_paulodecarvalho_edepoisdoadeus_01"
+  },
+  {
+    "id": "MUS_CAN_0015",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que genial compositor, letrista e cantor de Ílhavo (1954-1988), Carlos Paião («Carlos Manuel de Marques Paião»), médico de formação que compôs clássicos intemporais do pop português como «Playback» (Eurovisão 1981), «Pó de Arroz», «Cinderela» e «Vinho do Porto»?",
+    "opcoes": [
+      "António Variações",
+      "Dino Meira",
+      "Carlos Paião",
+      "Luís Filipe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos Paião escreveu mais de 300 canções para si e para outros artistas (como Amália Rodrigues e Herman José) antes de falecer tragicamente aos 35 anos.",
+    "fonte": "EMI-Valentim de Carvalho / Museu Carlos Paião (Ílhavo)",
+    "factClusterId": "fc_mus_can_carlospaiao_01"
+  },
+  {
+    "id": "MUS_CAN_0016",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantora e compositora lisboeta (nascida em 1991), Carolina Deslandes («Carolina Deslandes»), alcançou milhões de reproduções com o tema «A Vida Toda» (2017), tornando-se uma das artistas mais ouvidas de Portugal com canções confessionais como «Avião de Papel» e «Por Um Triz»?",
+    "opcoes": [
+      "Bárbara Bandeira",
+      "Luísa Sobral",
+      "Aurea",
+      "Carolina Deslandes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Carolina Deslandes foi jurada do The Voice Portugal e venceu o Globo de Ouro de Melhor Canção do Ano com 'Por Um Triz'.",
+    "fonte": "Universal Music Portugal / Globos de Ouro",
+    "factClusterId": "fc_mus_can_carolinadeslandes_01"
+  },
+  {
+    "id": "MUS_CAN_0017",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantor e compositor algarvio de Faro (nascido em 1986), Diogo Piçarra («Diogo Piçarra»), vencedor do programa Ídolos em 2012, tornou-se um fenómeno da pop nacional com sucessos multiplatina como «Tu e Eu», «Dialeto», «História» e colaborações internacionais?",
+    "opcoes": [
+      "Diogo Piçarra",
+      "Fernando Daniel",
+      "David Carreira",
+      "Mickael Carreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Diogo Piçarra esgotou salas emblemáticas como a Altice Arena e o Coliseu dos Recreios com o seu estilo pop-eletrónico.",
+    "fonte": "Universal Music Portugal / Altice Arena",
+    "factClusterId": "fc_mus_can_diogopicarra_01"
+  },
+  {
+    "id": "MUS_CAN_0018",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que jovem cantora e compositora de Azeitão (nascida em 2001), Bárbara Bandeira («Bárbara Bandeira»), filha de Rui Bandeira, venceu o prémio Best Portuguese Act nos MTV Europe Music Awards em 2022 com êxitos como «Onde Vais» (com Carminho) e «Como Tu» (com Ivandro)?",
+    "opcoes": [
+      "Bárbara Tinoco",
+      "Bárbara Bandeira",
+      "Beatriz Rosário",
+      "Nena"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bárbara Bandeira foi a artista portuguesa convidada para fazer a primeira parte dos concertos dos Coldplay no Estádio Cidade de Coimbra em 2023.",
+    "fonte": "MTV Europe Music Awards / Warner Music",
+    "factClusterId": "fc_mus_can_barbarabandeira_01"
+  },
+  {
+    "id": "MUS_CAN_0019",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que talentosa cantora e compositora lisboeta (nascida em 1998), Bárbara Tinoco («Bárbara Tinoco»), revelada no concurso The Voice Portugal com a apresentação do tema original «Antes Dela Dizer Que Sim», tornou-se uma das autoras mais aclamadas da nova música portuguesa?",
+    "opcoes": [
+      "Carolina Deslandes",
+      "Mimi Froes",
+      "Bárbara Tinoco",
+      "Maro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bárbara Tinoco esgotou a Altice Arena e compôs o musical 'A Madrugada Que Eu Esperava' ao lado de Carolina Deslandes para celebrar os 50 anos do 25 de Abril.",
+    "fonte": "Universal Music / SPA",
+    "factClusterId": "fc_mus_can_barbaratinoco_01"
+  },
+  {
+    "id": "MUS_CAN_0020",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que inovador músico e cantor de ascendência cabo-verdiana nascido em Quarteira (Algarve em 1982), Dino D'Santiago («Claudino de Jesus Borges Pereira»), revolucionou a música afro-lusófona contemporânea ao fundir o funaná, morna e batuco com música eletrónica global nos álbuns «Mundu Nôbu» e «Kriolu»?",
+    "opcoes": [
+      "Mayra Andrade",
+      "Branko",
+      "Plutónio",
+      "Dino D'Santiago"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Dino D'Santiago colaborou com Madonna no álbum Madame X e é um dos maiores impulsionadores do movimento 'Nova Lisboa'.",
+    "fonte": "Sony Music Portugal / Prémios Play da Música Portuguesa",
+    "factClusterId": "fc_mus_can_dinodsantiago_01"
+  },
+  {
+    "id": "MUS_CAN_0021",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórica e talentosa cantora cabo-verdiana e portuguesa de Lisboa (1978-2023), Sara Tavares («Sara Alexandra Lima Tavares»), venceu a Chuva de Estrelas em 1993 com Whitney Houston, o Festival da Canção com «Chamar a Música» e foi aclamada internacionalmente pelos álbuns «Balance» e «Fitxadu»?",
+    "opcoes": [
+      "Sara Tavares",
+      "Lura",
+      "Carmen Souza",
+      "Selma Uamusse"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sara Tavares foi nomeada para o Grammy Latino de Melhor Álbum de Raízes em Língua Portuguesa e deixou um legado luminoso de afropop acústico.",
+    "fonte": "Sony Music / World Connection / SPA",
+    "factClusterId": "fc_mus_can_saratavares_01"
+  },
+  {
+    "id": "MUS_CAN_0022",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que emblemático cantor de pop-rock romântico de Lisboa (nascido em 1971), João Pedro Pais («João Pedro Pais»), alcançou a fama em 1997 com o álbum de estreia «Segredos» e os sucessos estrondosos «Louco por Ti», «Mentira» e «Nada de Nada»?",
+    "opcoes": [
+      "Rui Bandeira",
+      "João Pedro Pais",
+      "Mário Laginha",
+      "Luís Represas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "João Pedro Pais foi o artista português convidado por Bryan Adams para fazer a primeira parte de toda a sua digressão ibérica.",
+    "fonte": "Valentim de Carvalho / Universal Music",
+    "factClusterId": "fc_mus_can_joaopedropais_01"
+  },
+  {
+    "id": "MUS_CAN_0023",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que virtuoso cantor e letrista de Vila do Conde (nascido em 1978), Miguel Araújo («Miguel Araújo Jorge»), ex-membro fundador d'Os Azeitonas, assinou sucessos a solo e para outros artistas como «Os Maridos das Outras», «Anda Comigo Ver os Aviões» e «Dona Laura»?",
+    "opcoes": [
+      "António Zambujo",
+      "Tiago Nacarato",
+      "Miguel Araújo",
+      "Marlon"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Miguel Araújo e António Zambujo estabeleceram o recorde nacional histórico de esgotar 28 concertos consecutivos nos Coliseus de Lisboa e Porto.",
+    "fonte": "Warner Music / Coliseu dos Recreios",
+    "factClusterId": "fc_mus_can_miguelaraujo_01"
+  },
+  {
+    "id": "MUS_CAN_0024",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que prestigiado cantor e músico alentejano de Beja (nascido em 1975), António Zambujo («António José Rodeia Zambujo»), fundiu de forma genial o cante alentejano, o fado e a bossa nova brasileira em álbuns de sucesso mundial como «Guia», «Rua da Emenda» e «Até Pensei Que Fosse Minha» (tributo a Chico Buarque nomeado para o Grammy Latino)?",
+    "opcoes": [
+      "Buba Espinho",
+      "Camané",
+      "Ricardo Ribeiro",
+      "António Zambujo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Zambujo é um dos maiores embaixadores musicais da língua portuguesa admirado por Caetano Veloso e Gilberto Gil.",
+    "fonte": "Universal Music Portugal / Latin Grammy",
+    "factClusterId": "fc_mus_can_antoniozambujo_01"
+  },
+  {
+    "id": "MUS_CAN_0025",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que aclamado fadista de Oeiras (nascido em 1966), Camané («Carlos Manuel Moutinho Paiva dos Santos Duarte»), apontado por muitos como a maior voz masculina do fado contemporâneo («Com Que Voz», «Sei de um Rio», «Ela Tinha uma Amiga» e parcerias com Mário Laginha)?",
+    "opcoes": [
+      "Camané",
+      "Ricardo Ribeiro",
+      "Hélder Moutinho",
+      "Pedro Moutinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Camané venceu a Grande Noite do Fado aos 11 anos e gravou álbuns antológicos produzidos por José Mário Branco.",
+    "fonte": "Warner Music Portugal / Museu do Fado",
+    "factClusterId": "fc_mus_can_camane_01"
+  },
+  {
+    "id": "MUS_CAN_0026",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que talentosa fadista lisboeta (nascida em 1984), Carminho («Maria do Carmo de Carvalho Rebelo de Andrade»), filha da fadista Teresa Siqueira, aclamada internacionalmente pelos discos «Fado», «Alma», «Canto» e pela atuação no filme 'Poor Things' de Yorgos Lanthimos cantando «O Quarto»?",
+    "opcoes": [
+      "Ana Moura",
+      "Carminho",
+      "Mariza",
+      "Kátia Guerreiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carminho gravou duetos memoráveis com Milton Nascimento, Chico Buarque e Caetano Veloso levando o fado às plateias globais.",
+    "fonte": "Warner Music / Searchlight Pictures",
+    "factClusterId": "fc_mus_can_carminho_01"
+  },
+  {
+    "id": "MUS_CAN_0027",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que expressiva e visceral fadista minhota de Barcelos (nascida em 1983), Gisela João («Gisela João»), conquistou a crítica nacional com o seu álbum de estreia homónimo de 2013 gravado no Palácio de Santa Catarina em Lisboa e temas como «Meu Amigo Está Longe» e «Madalena»?",
+    "opcoes": [
+      "Cuca Roseta",
+      "Teresinha Landeiro",
+      "Gisela João",
+      "Sara Correia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Gisela João venceu o Prémio Revelação nos Globos de Ouro e o Prémio Amália Rodrigues com o seu fado cru e descalço.",
+    "fonte": "Universal Music Portugal / Fundação Amália Rodrigues",
+    "factClusterId": "fc_mus_can_giselajoao_01"
+  },
+  {
+    "id": "MUS_CAN_0028",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que jovem fadista de Marvila (Lisboa, nascida em 1993), Sara Correia («Sara Correia»), conhecida no meio musical como «O Furacão do Fado», foi nomeada para o Grammy Latino com os álbuns «Do Coração» e «Liberdade» e temas como «Chelas» e «Quero É Viver»?",
+    "opcoes": [
+      "Cuca Roseta",
+      "Marta Pereira da Costa",
+      "Fábia Rebordão",
+      "Sara Correia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Sara Correia cresceu numa família fadista em Chelas e venceu a Grande Noite do Fado no Coliseu aos 13 anos.",
+    "fonte": "Universal Music Portugal / Latin Grammy Awards",
+    "factClusterId": "fc_mus_can_saracorreia_01"
+  },
+  {
+    "id": "MUS_CAN_0029",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que pioneiro produtor musical, beatmaker e rapper de Chelas (Lisboa, nascido em 1979), Sam The Kid («Samuel Mira»), considerado o patriarca do hip-hop português com o álbum conceptual «Pratica(mente)» (2006) e membro fundador do grupo instrumental Orelha Negra?",
+    "opcoes": [
+      "Sam The Kid (Samuel Mira)",
+      "Carlão (Pacman)",
+      "Boss AC",
+      "Regula"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sam The Kid criou a editora TV Chelas e o podcast 'Três Pancadas' sendo a maior referência do rap lusófono.",
+    "fonte": "TV Chelas / Antena 3 / SPA",
+    "factClusterId": "fc_mus_can_samthekid_01"
+  },
+  {
+    "id": "MUS_CAN_0030",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que lendário vocalista de Almada (nascido em 1975), Carlão («Carlos Nobre» / Pacman), liderou o histórico grupo de rap-rock Da Weasel nos anos 1990/2000 antes de consolidar uma carreira a solo de enorme sucesso com «Os Tais» e «Assobiar Para o Lado»?",
+    "opcoes": [
+      "Sam The Kid",
+      "Carlão (Pacman / Da Weasel)",
+      "Mundo Segundo",
+      "Dillaz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Com Da Weasel e a solo, Carlão marcou gerações com hinos como 'Re-Tratamento', 'Dialectos de Ternura' e 'Dialeto'.",
+    "fonte": "Sony Music Portugal / Universal Music",
+    "factClusterId": "fc_mus_can_carlao_pacman_01"
+  },
+  {
+    "id": "MUS_CAN_0031",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que talentosa rapper e socióloga portuense (nascida em 1982), Capicua («Ana Matos Fernandes»), destacou-se pela sua poesia social feminista, rimas ricas e álbuns aclamados como «Sereia Louca», «Madrepérola» e o infantil «Mão Verde»?",
+    "opcoes": [
+      "Nenny",
+      "Pikika",
+      "Capicua (Ana Matos Fernandes)",
+      "Blaya"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Capicua escreve também letras para fadistas como Camané, Carminho e Ana Moura e é colunista de imprensa.",
+    "fonte": "Optimus Discos / Universal Music / SPA",
+    "factClusterId": "fc_mus_can_capicua_01"
+  },
+  {
+    "id": "MUS_CAN_0032",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor, trompetista e compositor de Setúbal (nascido em 1963), Toy («António Manuel Neves Ferrão»), tornou-se uma das figuras mais queridas da música popular portuguesa com os êxitos virais «Coração Não Tem Idade (Vou Beijar na Boca)» e «És Tão Sensual»?",
+    "opcoes": [
+      "Quim Barreiros",
+      "Ágata",
+      "Emanuel",
+      "Toy (António Ferrão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Toy começou a cantar aos 5 anos e compôs também genéricos de telenovelas e baladas românticas para vários artistas.",
+    "fonte": "Espacial / SPA / RTP",
+    "factClusterId": "fc_mus_can_toy_01"
+  },
+  {
+    "id": "MUS_CAN_0033",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que lendário acordeonista e cantor popular de Vila Praia de Âncora (nascido em 1947), Quim Barreiros («Joaquim de Magalhães Fernandes Barreiros»), célebre pelo seu chapéu de aba preta, bigode farto e canções de duplo sentido e trocadilhos cómicos («A Garagem da Vizinha», «O Bacalhau Quer Alho», «A Cabritinha»)?",
+    "opcoes": [
+      "Quim Barreiros",
+      "Augusto Canário",
+      "Emanuel",
+      "Nel Monteiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Quim Barreiros é a presença incontornável nas Semanas Académicas e Queimas das Fitas de todo o país há mais de 40 anos.",
+    "fonte": "Espacial / Município de Caminha",
+    "factClusterId": "fc_mus_can_quimbarreiros_01"
+  },
+  {
+    "id": "MUS_CAN_0034",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor e produtor musical de Covas do Douro (nascido em 1957), Emanuel («Américo Pinto da Silva Monteiro»), considerado o pioneiro e criador do termo «Música Pimba» em 1995 com o estrondoso sucesso «Pimba Pimba» e autor de «Nós Pimba»?",
+    "opcoes": [
+      "Toy",
+      "Emanuel",
+      "Jorge Ferreira",
+      "José Malhoa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Emanuel compôs mais de 600 canções e representou Portugal no Festival da Eurovisão como autor e produtor.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_can_emanuel_pimba_01"
+  },
+  {
+    "id": "MUS_CAN_0035",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantora de Montijo (nascida em 1969), Dulce Pontes («Dulce José Silva Pontes»), famosa por vencer o Festival da Canção com «Lusitana Paixão» (1991) e pela interpretação magistral de «Canção do Mar» no álbum «Lágrimas» (1993) que a levou a colaborar em digressões mundiais com Ennio Morricone?",
+    "opcoes": [
+      "Teresa Salgueiro",
+      "Anabela",
+      "Dulce Pontes",
+      "Lúcia Moniz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A versão de 'Canção do Mar' de Dulce Pontes foi incluída na banda sonora do filme de Hollywood 'Primal Fear' com Richard Gere.",
+    "fonte": "Movieplay / Universal Music / Ennio Morricone Official",
+    "factClusterId": "fc_mus_can_dulcepontes_01"
+  },
+  {
+    "id": "MUS_CAN_0036",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantora lisboeta (nascida em 1969), Teresa Salgueiro («Teresa Salgueiro»), deu voz cristalina e presença etérea ao grupo Madredeus durante duas décadas (1987-2007) em álbuns aclamados mundialmente como «Os Dias da MadreDeus», «O Espírito da Paz» e «Ainda» (banda sonora de Wim Wenders)?",
+    "opcoes": [
+      "Dulce Pontes",
+      "Manuela Azevedo",
+      "Lula Pena",
+      "Teresa Salgueiro (Madredeus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Teresa Salgueiro e os Madredeus levaram a poesia e o idioma português aos quatro cantos do mundo com mais de 3 milhões de discos vendidos.",
+    "fonte": "EMI Classics / Madredeus / SPA",
+    "factClusterId": "fc_mus_can_teresasalgueiro_madredeus_01"
+  },
+  {
+    "id": "MUS_CAN_0037",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que enérgica e carismática cantora de Vila Nova de Famalicão (nascida em 1970), Manuela Azevedo («Manuela Azevedo»), é a inconfundível vocalista e líder de palco da banda pop-rock portuense Clã («Problema de Expressão», «Sopro de Coração», «Asas Delta»)?",
+    "opcoes": [
+      "Manuela Azevedo (Clã)",
+      "Marta Ren",
+      "Sónia Tavares",
+      "Viviane"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Manuela Azevedo é licenciada em Direito e integrou também projetos como 'Humanos' (tributo a Variações) ao lado de Camané e David Fonseca.",
+    "fonte": "EMI / Warner Music / Clã",
+    "factClusterId": "fc_mus_can_manuelaazevedo_cla_01"
+  },
+  {
+    "id": "MUS_CAN_0038",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que carismática cantora de Alcobaça (nascida em 1977), Sónia Tavares («Sónia Tavares»), é a vocalista e ícone gótico/glam da banda The Gift («Fácil de Entender», «Music», «Driving You Slow», «Primavera»)?",
+    "opcoes": [
+      "Manuela Azevedo",
+      "Sónia Tavares (The Gift)",
+      "Rita Redshoes",
+      "Mimicat"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sónia Tavares participou no projeto 'Hoje' com Nuno Gonçalves recriando fados de Amália Rodrigues em formato pop.",
+    "fonte": "La Folie / The Gift / Sony Music",
+    "factClusterId": "fc_mus_can_soniatavares_thegift_01"
+  },
+  {
+    "id": "MUS_CAN_0039",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantor, compositor e multi-instrumentista de Leiria (nascido em 1973), David Fonseca («David Fonseca»), liderou a banda Silence 4 («Borrow», 1998) antes de iniciar uma aclamada carreira a solo com os álbuns «Sing Me Something New» e «Our Hearts Will Beat As One»?",
+    "opcoes": [
+      "Tiago Bettencourt",
+      "Luís Represas",
+      "David Fonseca",
+      "Pedro Silva Martins"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O álbum de estreia dos Silence 4, 'Silence Becomes It', vendeu mais de 240.000 cópias sendo um dos maiores êxitos de sempre em Portugal.",
+    "fonte": "Universal Music Portugal / Silence 4",
+    "factClusterId": "fc_mus_can_davidfonseca_01"
+  },
+  {
+    "id": "MUS_CAN_0040",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que talentoso cantautor lisboeta (nascido em 1979), Tiago Bettencourt («Tiago Bettencourt»), despontou como vocalista da banda Toranja («Carta», 2003) antes de construir uma sólida carreira a solo com canções poéticas como «Canção Simples», «O Jogo» e «Se Me Deixasses Ser»?",
+    "opcoes": [
+      "David Fonseca",
+      "João Só",
+      "Diogo Piçarra",
+      "Tiago Bettencourt"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Tiago Bettencourt gravou no Canadá com o produtor Howard Bilerman e mantém uma carreira consagrada em palcos nacionais.",
+    "fonte": "Universal Music / Sony Music",
+    "factClusterId": "fc_mus_can_tiagobettencourt_01"
+  },
+  {
+    "id": "MUS_CAN_0041",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor e compositor lisboeta de voz doce (nascido em 1955), Luís Represas («Luís Represas»), foi membro fundador da emblemática banda Trovante («125 Azul», «Perdidamente») antes de assinar sucessos a solo como «Feiticeira» e «Da Próxima Vez»?",
+    "opcoes": [
+      "Luís Represas (Trovante)",
+      "João Gil",
+      "Manuel Faria",
+      "Artur Ribeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Luís Represas teve um papel de destaque na mobilização de solidariedade pela independência de Timor-Leste com o tema 'Timor' em 1999.",
+    "fonte": "BMG / Sony Music / Trovante",
+    "factClusterId": "fc_mus_can_luisrepresas_01"
+  },
+  {
+    "id": "MUS_CAN_0042",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que icónica cantora pop-rock de Lisboa (nascida em 1954), Lena d'Água («Helena Maria de Jesus Água»), filha do futebolista José Água, foi a primeira estrela feminina do rock português nos anos 1980 com a banda Atlântida e clássicos como «Sempre Que o Amor Me Quiser», «Robô» e «Demagogia»?",
+    "opcoes": [
+      "Manuela Moura Guedes",
+      "Lena d'Água",
+      "Adelaide Ferreira",
+      "Lara Li"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Lena d'Água regressou aos grandes palcos em 2019 com o premiado álbum 'Desalmadamente' composto por Pedro da Silva Martins.",
+    "fonte": "Valentim de Carvalho / Universal Music",
+    "factClusterId": "fc_mus_can_lenadagua_01"
+  },
+  {
+    "id": "MUS_CAN_0043",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que poderosa cantora de rock e baladas de Canas de Senhorim (nascida em 1959), Adelaide Ferreira («Adelaide Ferreira»), venceu o Festival RTP da Canção de 1985 com «Penso em Ti (Eu Sei)» e alcançou sucesso ibérico com «Papel Principal» e «Baby Suicida»?",
+    "opcoes": [
+      "Lena d'Água",
+      "Alexandra",
+      "Adelaide Ferreira",
+      "Dora"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Adelaide Ferreira foi premiada no Festival OTI e no Festival de Viña del Mar no Chile com a sua potente extensão vocal.",
+    "fonte": "RTP Arquivos / Discos Nova",
+    "factClusterId": "fc_mus_can_adelaideferreira_01"
+  },
+  {
+    "id": "MUS_CAN_0044",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor de Santarém (1935-1996), Dino Meira («Claudino Pereira Meira»), emigrante nos Estados Unidos, tornou-se o «Rei da Canção Ligeira e das Comunidades Portuguesas» com sucessos eternos como «Meu Querido Mês de Agosto», «Viva a Chaminé» e «Negro Destino»?",
+    "opcoes": [
+      "Roberto Leal",
+      "José Malhoa",
+      "Jorge Ferreira",
+      "Dino Meira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Meu Querido Mês de Agosto' de Dino Meira inspirou o aclamado filme homónimo do realizador Miguel Gomes.",
+    "fonte": "Vidisco / RTP Arquivos",
+    "factClusterId": "fc_mus_can_dinomeira_01"
+  },
+  {
+    "id": "MUS_CAN_0045",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que famoso cantor luso-brasileiro de Macedo de Cavaleiros (1951-2019), Roberto Leal («António Joaquim Fernandes»), vendeu mais de 17 milhões de discos divulgando a música popular e o vira transmontano no Brasil com «Arrebita», «Bate o Pé» e «Uma Casa Portuguesa»?",
+    "opcoes": [
+      "Roberto Leal",
+      "Dino Meira",
+      "Agnaldo Timóteo",
+      "Paco Bandeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Roberto Leal foi o maior embaixador da música ligeira tradicional portuguesa na televisão e rádios brasileiras durante quatro décadas.",
+    "fonte": "RDM / Som Livre / RTP",
+    "factClusterId": "fc_mus_can_robertoleal_01"
+  },
+  {
+    "id": "MUS_CAN_0046",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantor açoriano radicado nos EUA (nascido na Terceira em 1955), Jorge Ferreira («Jorge Ferreira»), gravou mais de 50 discos de ouro e platina tornando-se o ídolo das comunidades emigrantes nos EUA e Canadá com «Carro Preto», «Era Pouco e Acabou-se» e «Mãe, Já Não Chores Mais»?",
+    "opcoes": [
+      "Dino Meira",
+      "Jorge Ferreira",
+      "Marc Amaro",
+      "José Ribeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jorge Ferreira é proprietário da editora City Records em New Bedford e um símbolo da diáspora açoriana na América do Norte.",
+    "fonte": "City Records / Governo Regional dos Açores",
+    "factClusterId": "fc_mus_can_jorgeferreira_01"
+  },
+  {
+    "id": "MUS_CAN_0047",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor alentejano de Elvas (nascido em 1945), Paco Bandeira («Francisco Velez Bandeira»), celebrizou a canção ligeira portuguesa com hinos populares como «A Minha Cidade» (Ó Elvas, Ó Elvas), «Chula da Livração» e «É Terça-Feira»?",
+    "opcoes": [
+      "Vitorino",
+      "Fernando Tordo",
+      "Paco Bandeira",
+      "Carlos Paião"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paco Bandeira compôs e gravou dezenas de canções de grande sucesso popular nos anos 1970 e 1980.",
+    "fonte": "Movieplay / SPA",
+    "factClusterId": "fc_mus_can_pacobandeira_01"
+  },
+  {
+    "id": "MUS_CAN_0048",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que brilhante cantautora e produtora lisboeta (nascida em 1994), MARO («Mariana Secca»), licenciada pelo prestigiado Berklee College of Music, venceu o Festival RTP da Canção e representou Portugal na Eurovisão 2022 em Turim com a intimista e aclamada canção «Saudade, Saudade»?",
+    "opcoes": [
+      "Mimicat",
+      "Iolanda",
+      "Cláudia Pascoal",
+      "MARO (Mariana Secca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "MARO integrou a banda do multi-instrumentista britânico Jacob Collier e colaborou com artistas internacionais de jazz e pop acústico.",
+    "fonte": "RTP / EBU / Universal Music",
+    "factClusterId": "fc_mus_can_maro_saudadesaudade_01"
+  },
+  {
+    "id": "MUS_CAN_0049",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que cantora e compositora da Figueira da Foz (nascida em 1997), Iolanda («Iolanda Costa»), venceu o Festival RTP da Canção 2024 e representou Portugal na final da Eurovisão em Malmö (Suécia) com a arrebatadora canção «Grito»?",
+    "opcoes": [
+      "Iolanda (Iolanda Costa — «Grito»)",
+      "Mimicat",
+      "Maro",
+      "Elisa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Iolanda estudou música em Sussex (Reino Unido) e destacou-se pela potência vocal e estética contemporânea inspirada no fado.",
+    "fonte": "RTP / Festival da Canção 2024 / EBU",
+    "factClusterId": "fc_mus_can_iolanda_grito2024_01"
+  },
+  {
+    "id": "MUS_CAN_0050",
+    "tema": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "pergunta": "Que histórico cantor, letrista e compositor de Lisboa (nascido em 1948), Fernando Tordo («Fernando Travassos Tordo»), fez história na música portuguesa ao vencer o Festival da Canção em 1973 com a célebre e satírica canção «Tourada» (com letra de Ary dos Santos fintando a censura da PIDE)?",
+    "opcoes": [
+      "Paulo de Carvalho",
+      "Carlos Mendes",
+      "Fernando Tordo (com a canção «Tourada»)",
+      "Tonicha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Tordo compôs também a monumental 'Cavalo à Solta' e 'Estrela da Tarde' sendo uma das maiores vozes da democracia portuguesa.",
+    "fonte": "RTP Arquivos / SPA / Dicionário de Música Portuguesa",
+    "factClusterId": "fc_mus_can_fernandotordo_tourada_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_NAV_0001",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador de Lagos ao serviço do Infante D. Henrique dobrou o temido Cabo Bojador em 1434 («Cabo do Medo»), rompendo os mitos medievais do «Mar Tenebroso»?",
+    "opcoes": [
+      "Gil Eanes",
+      "Bartolomeu Dias",
+      "Diogo Cão",
+      "Nuno Tristão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A passagem do Cabo Bojador por Gil Eanes abriu a navegação portuguesa para sul no Atlântico africano.",
+    "fonte": "Gomes Eanes de Zurara (Crónica do Descobrimento e Conquista da Guiné) / BNP",
+    "factClusterId": "fc_nav_gileanes1434_01"
+  },
+  {
+    "id": "HIST_NAV_0002",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador português dobrou em 1488 o extremo sul do continente africano (inicialmente chamado Cabo das Tormentas), rebaptizado pelo rei D. João II como Cabo da Boa Esperança?",
+    "opcoes": [
+      "Vasco da Gama",
+      "Bartolomeu Dias",
+      "Diogo Cão",
+      "Fernão de Magalhães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A dobragem do Cabo da Boa Esperança provou a ligação marítima direta entre o oceano Atlântico e o oceano Índico.",
+    "fonte": "Academia de Marinha / Damião de Góis",
+    "factClusterId": "fc_nav_bartolomeudias1488_01"
+  },
+  {
+    "id": "HIST_NAV_0003",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Em que ano e em que cidade da costa de Malabar (Índia) desembarcou a armada de Vasco da Gama a bordo da nau São Gabriel, descobrindo o caminho marítimo para a Índia?",
+    "opcoes": [
+      "Em Goa, em 1510",
+      "Em Cochim, em 1500",
+      "Em Calecute (Calicut), a 20 de maio de 1498",
+      "Em Bombaim, em 1534"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A chegada a Calecute inaugurou a Rota do Cabo e a era do comércio global de especiarias com o Oriente.",
+    "fonte": "Roteiro da Primeira Viagem de Vasco da Gama / Álvaro Velho / BNP",
+    "factClusterId": "fc_nav_vascodagama1498_01"
+  },
+  {
+    "id": "HIST_NAV_0004",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Em que data de abril de 1500 a armada de Pedro Álvares Cabral avistou pela primeira vez a terra que chamou de Ilha de Vera Cruz (Brasil), avistando o Monte Pascoal?",
+    "opcoes": [
+      "15 de março de 1500",
+      "1 de maio de 1500",
+      "10 de junho de 1500",
+      "22 de abril de 1500"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A chegada ao Brasil foi detalhadamente descrita na célebre «Carta de Pero Vaz de Caminha» enviada ao rei D. Manuel I.",
+    "fonte": "Torre do Tombo / Carta de Pero Vaz de Caminha",
+    "factClusterId": "fc_nav_cabralbrasil1500_01"
+  },
+  {
+    "id": "HIST_NAV_0005",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que tratado diplomático internacional assinado a 7 de junho de 1494 dividiu as terras descobertas e por descobrir entre Portugal e Castela por um meridiano situado a 370 léguas a oeste de Cabo Verde?",
+    "opcoes": [
+      "Tratado de Tordesilhas",
+      "Tratado de Alcáçovas",
+      "Tratado de Saragoça",
+      "Tratado de Zamora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Tordesilhas garantiu a Portugal a posse das terras do Brasil e o controlo exclusivo da Rota do Cabo no Atlântico Sul.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / UNESCO Memory of the World",
+    "factClusterId": "fc_nav_tordesilhas1494_01"
+  },
+  {
+    "id": "HIST_NAV_0006",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador português natural de Sabrosa planeou e comandou a armada espanhola na primeira viagem de circum-navegação ao globo terrestre entre 1519 e 1522?",
+    "opcoes": [
+      "Duarte Pacheco Pereira",
+      "Fernão de Magalhães",
+      "Estêvão Gomes",
+      "Fernão Pires de Andrade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Magalhães descobriu a passagem entre o Atlântico e o Pacífico (Estreito de Magalhães), completada pelo basco Juan Sebastián Elcano na nau Victoria.",
+    "fonte": "Academia de Marinha / Relato de Antonio Pigafetta",
+    "factClusterId": "fc_nav_fernaomagalhaes_01"
+  },
+  {
+    "id": "HIST_NAV_0007",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador foi o primeiro a utilizar padrões de pedra com a cruz de Cristo e as armas reais portuguesas na costa africana, descobrindo a foz do rio Zaire em 1482 e o Cabo Negro em 1485?",
+    "opcoes": [
+      "Bartolomeu Dias",
+      "Alvise Cadamosto",
+      "Diogo Cão",
+      "António da Noli"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os padrões de pedra de Diogo Cão marcavam juridicamente a prioridade e posse marítima da coroa portuguesa.",
+    "fonte": "Sociedade de Geografia de Lisboa / Museu de Marinha",
+    "factClusterId": "fc_nav_diogocao1482_01"
+  },
+  {
+    "id": "HIST_NAV_0008",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que príncipe português, conhecido como «O Navegador», estabeleceu a sua base no promontório de Sagres reunindo cartógrafos, astrónomos e mareantes para impulsionar a expansão marítima?",
+    "opcoes": [
+      "Infante D. Pedro (Duque de Coimbra)",
+      "D. Duarte",
+      "D. Fernando («O Infante Santo»)",
+      "Infante D. Henrique (Duque de Viseu)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Infante D. Henrique foi o grande patrono e administrador da Ordem de Cristo no arranque dos Descobrimentos.",
+    "fonte": "Academia Portuguesa da História / Fortaleza de Sagres",
+    "factClusterId": "fc_nav_infantedhenrique_01"
+  },
+  {
+    "id": "HIST_NAV_0009",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que tipo de embarcação rápida e manobrável com velas triangulares (latinas), aperfeiçoada pelos carpinteiros navais portugueses no século XV, permitia «bolinar» (navegar contra o vento)?",
+    "opcoes": [
+      "Caravela (Caravela Latina)",
+      "Nau",
+      "Galeão",
+      "Barinel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A caravela foi o instrumento técnico decisivo para a exploração costeira e o regresso por alto-mar («volta da mina»).",
+    "fonte": "Museu de Marinha / Academia de Marinha",
+    "factClusterId": "fc_nav_caravela_01"
+  },
+  {
+    "id": "HIST_NAV_0010",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que matemático, astrónomo e médico judeu de Salamanca publicou em Leiria em 1496 o «Almanach Perpetuum», com tábuas astronómicas de declinação solar que guiaram Vasco da Gama e Cabral?",
+    "opcoes": [
+      "Pedro Nunes",
+      "Abraão Zacuto (Abraham Zacuto)",
+      "José Vizinho",
+      "Mestre João Faras"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Almanach Perpetuum permitiu aos navegadores portugueses calcular com exatidão a latitude através da altura do sol ao meio-dia.",
+    "fonte": "Museu de Leiria / BNP / Universidade de Coimbra",
+    "factClusterId": "fc_nav_abraaozacuto_01"
+  },
+  {
+    "id": "HIST_NAV_0011",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que cosmógrafo-mor e matemático português do século XVI inventou o «nónio» (dispositivo de medição de ângulos infinitesimais) e demonstrou que as linhas de rumo na esfera terrestre são loxodrómicas e não ortodrómicas?",
+    "opcoes": [
+      "D. João de Castro",
+      "Luís Serrão Pimentel",
+      "Pedro Nunes",
+      "Manuel Pires"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nunes foi uma das mentes científicas mais brilhantes da Renascença europeia, professor régio da Universidade de Coimbra.",
+    "fonte": "Universidade de Coimbra / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_nav_pedronunes_01"
+  },
+  {
+    "id": "HIST_NAV_0012",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que dois exploradores e espiões foram enviados secretamente por terra pelo rei D. João II em 1487 para recolher informações sobre as rotas das especiarias no Médio Oriente e localizar o mítico reino cristão do «Preste João» na Etiópia?",
+    "opcoes": [
+      "Duarte Pacheco e Lourenço de Almeida",
+      "Tristão da Cunha e Afonso de Albuquerque",
+      "João Gonçalves Zarco e Tristão Vaz",
+      "Pêro da Covilhã e Afonso de Paiva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pêro da Covilhã alcançou a costa ocidental da Índia e Moçambique, enviando relatos cruciais para a preparação da viagem de Vasco da Gama.",
+    "fonte": "Damião de Góis / BNP",
+    "factClusterId": "fc_nav_perodacovilha1487_01"
+  },
+  {
+    "id": "HIST_NAV_0013",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que governador e vice-rei da Índia conquistou Goa em 1510, Malaca em 1511 e Ormuz em 1515, estabelecendo a rede de fortalezas que controlava todo o oceano Índico («O Leão dos Mares»)?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "D. Francisco de Almeida",
+      "D. João de Castro",
+      "Estêvão da Gama"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Afonso de Albuquerque é considerado o grande génio estratégico da construção do Império Português do Oriente.",
+    "fonte": "Comentários de Afonso de Albuquerque / BNP",
+    "factClusterId": "fc_nav_afonsoalbuquerque_01"
+  },
+  {
+    "id": "HIST_NAV_0014",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que nobre português foi nomeado por D. Manuel I em 1505 como o primeiro Vice-Rei do Estado da Índia, defendendo uma presença estritamente naval e comercial («política dos mares»)?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "D. Francisco de Almeida",
+      "D. Lourenço de Almeida",
+      "Vasco da Gama"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Francisco de Almeida destruiu a frota combinada mameluco-otomana na histórica Batalha Naval de Diu em 1509.",
+    "fonte": "Damião de Góis / Academia de Marinha",
+    "factClusterId": "fc_nav_franciscodealmeida_01"
+  },
+  {
+    "id": "HIST_NAV_0015",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Em que ano três mercadores portugueses (António da Mota, Francisco Zeimoto e António Peixoto) chegaram à ilha de Tanegashima a bordo de um junco chinês, sendo os primeiros europeus a pisar o Japão e introduzindo as primeiras armas de fogo («arcabuzes»)?",
+    "opcoes": [
+      "1498",
+      "1513",
+      "1543",
+      "1580"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A chegada a Tanegashima deu início ao secular período de comércio 'Nanban' (Bárbaros do Sul) e à presença dos Jesuítas em Nagasaki.",
+    "fonte": "Museu do Oriente / Fernão Mendes Pinto (Peregrinação)",
+    "factClusterId": "fc_nav_japao1543_01"
+  },
+  {
+    "id": "HIST_NAV_0016",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e explorador português foi o primeiro europeu a desembarcar na China pelo mar em 1513, aportando na ilha de Lintin e no estuário do Rio das Pérolas?",
+    "opcoes": [
+      "Fernão Pires de Andrade",
+      "Tomé Pires",
+      "Duarte Coelho",
+      "Jorge Álvares"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jorge Álvares ergueu um padrão com as armas de Portugal na ilha de Lintin, abrindo as relações com o Império Ming.",
+    "fonte": "Museu de Macau / BNP",
+    "factClusterId": "fc_nav_jorgealvares1513_01"
+  },
+  {
+    "id": "HIST_NAV_0017",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que farmacêutico e diplomata português escreveu a magistral «Suma Oriental» (1515) e liderou a primeira embaixada oficial europeia à corte do Imperador Ming em Pequim?",
+    "opcoes": [
+      "Tomé Pires",
+      "Fernão Mendes Pinto",
+      "Duarte Barbosa",
+      "Garcia de Orta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Suma Oriental de Tomé Pires é o primeiro tratado geográfico e económico ocidental detalhado sobre as terras do Índico ao Extremo Oriente.",
+    "fonte": "Biblioteca Nacional de Portugal / Armando Cortesão",
+    "factClusterId": "fc_nav_tomepires1515_01"
+  },
+  {
+    "id": "HIST_NAV_0018",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que médico e botânico judeu português radicado em Goa publicou em 1563 os célebres «Colóquios dos Simples e Drogas da Índia», a primeira obra científica moderna de farmacologia tropical do mundo?",
+    "opcoes": [
+      "Amato Lusitano",
+      "Garcia de Orta",
+      "Zacuto Lusitano",
+      "Ribeiro Sanches"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Garcia de Orta descreveu pela primeira vez com precisão botânica plantas medicinais e especiarias como a canela, o cardamomo, a noz-moscada e o ópio.",
+    "fonte": "BNP / Sociedade das Ciências Médicas de Lisboa",
+    "factClusterId": "fc_nav_garciadeorta1563_01"
+  },
+  {
+    "id": "HIST_NAV_0019",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e guerreiro português escreveu o tratado «Esmeraldo de Situ Orbis» (1506-1508), contendo dados náuticos e descrições costeiras do Atlântico e a defesa heroica de Cochim em 1504?",
+    "opcoes": [
+      "João de Castro",
+      "Pêro Vaz de Caminha",
+      "Duarte Pacheco Pereira («O Aquiles Lusitano»)",
+      "António Galvão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Duarte Pacheco Pereira demonstrou com poucos homens e canhões a superioridade tática e náutica portuguesa no cerco de Cochim.",
+    "fonte": "BNP / Academia de Marinha",
+    "factClusterId": "fc_nav_duartepacheco_01"
+  },
+  {
+    "id": "HIST_NAV_0020",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que instrumento de navegação astronómica de madeira ou latão com forma de semicírculo graduado e fio-de-prumo era utilizado a bordo para medir a altura da Estrela Polar acima do horizonte?",
+    "opcoes": [
+      "Astrolábio",
+      "Balestilha",
+      "Ampulheta",
+      "Quadrante náutico"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O quadrante permitia determinar diretamente a latitude do navio no hemisfério norte.",
+    "fonte": "Museu de Marinha / História da Ciência Náutica",
+    "factClusterId": "fc_nav_quadrantenautico_01"
+  },
+  {
+    "id": "HIST_NAV_0021",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que instrumento de madeira em forma de cruz («vara» e «soalha» ou «travessão») foi introduzido pelos navegadores portugueses no século XVI para medir a altura do sol e das estrelas pelo método de visada direta?",
+    "opcoes": [
+      "Balestilha (ou Cana de Jacob)",
+      "Astrolábio náutico",
+      "Nocturlábio",
+      "Bússola de declinação"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A balestilha era simples, resistente e de fácil manuseamento mesmo com o balanço do navio em alto-mar.",
+    "fonte": "Museu de Marinha / Academia das Ciências",
+    "factClusterId": "fc_nav_balestilha_01"
+  },
+  {
+    "id": "HIST_NAV_0022",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que tipo de astrolábio pesado e perfurado de latão foi desenvolvido pelos marinheiros portugueses para reduzir o efeito do vento durante as medições astronómicas na amurada dos navios?",
+    "opcoes": [
+      "Astrolábio planisférico",
+      "Astrolábio náutico (astrolábio de marfim ou latão fundido)",
+      "Sextante",
+      "Grafómetro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Portugal possui a maior coleção de astrolábios náuticos resgatados de naufrágios históricos existente no mundo.",
+    "fonte": "Museu de Marinha de Lisboa / International Maritime Heritage",
+    "factClusterId": "fc_nav_astrolabionautico_01"
+  },
+  {
+    "id": "HIST_NAV_0023",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que dois irmãos açorianos (naturais de Angra, ilha Terceira) exploraram a Gronelândia, a Terra Nova e a costa do Canadá (Labrador) no início do século XVI a mando de D. Manuel I?",
+    "opcoes": [
+      "João Vaz Corte-Real e Álvaro Martins",
+      "Irmãos Pinzón",
+      "Gaspar Corte-Real e Miguel Corte-Real",
+      "Fernão de Noronha e Diogo de Teive"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A «Terra dos Corte-Reais» figurava nos mais antigos planisférios renascentistas (como o Planisfério de Cantino de 1502).",
+    "fonte": "Academia de Marinha / Sociedade de Geografia de Lisboa",
+    "factClusterId": "fc_nav_cortereais_01"
+  },
+  {
+    "id": "HIST_NAV_0024",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que famoso mapa-múndi iluminado em pergaminho foi contrabandeado de Lisboa para Ferrara em 1502 pelo espião italiano Alberto Cantino, sendo a primeira representação cartográfica com o meridiano de Tordesilhas e a costa do Brasil?",
+    "opcoes": [
+      "Carta de Fra Mauro",
+      "Mapa de Waldseemüller",
+      "Atlas Miller",
+      "Planisfério de Cantino (1502)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Planisfério de Cantino preservado na Biblioteca Estense de Módena é uma das mais valiosas relíquias da cartografia mundial.",
+    "fonte": "Biblioteca Estense Universitaria / BNP",
+    "factClusterId": "fc_nav_planisferiocantino_01"
+  },
+  {
+    "id": "HIST_NAV_0025",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que atlas náutico de luxo encomendado em 1519 por D. Manuel I aos cartógrafos Lopo Homem, Pedro Reinel e Jorge Reinel continha a geografia completa do império iluminada a ouro por António de Holanda?",
+    "opcoes": [
+      "Atlas Miller (1519)",
+      "Atlas de Fernão Vaz Dourado",
+      "Livro de Marinharia",
+      "Isolario de Benedetto Bordone"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Atlas Miller encontra-se na Biblioteca Nacional de França e exibe o oceano Índico fechado por terras austrais desconhecidas.",
+    "fonte": "Bibliothèque nationale de France / BNP",
+    "factClusterId": "fc_nav_atlasmiller1519_01"
+  },
+  {
+    "id": "HIST_NAV_0026",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e fidalgo português descobriu em 1500 a grande ilha de São Lourenço na costa oriental africana, hoje conhecida como Madagáscar?",
+    "opcoes": [
+      "Bartolomeu Dias",
+      "Diogo Dias",
+      "Nicolau Coelho",
+      "Sancho de Tovar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Diogo Dias comandava uma das naus da armada de Cabral que se separou no Atlântico Sul após uma tempestade.",
+    "fonte": "Damião de Góis / João de Barros",
+    "factClusterId": "fc_nav_diogodiasmadagascar_01"
+  },
+  {
+    "id": "HIST_NAV_0027",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que arquipélago vulcânico isolado no Atlântico Sul foi descoberto pelo navegador Tristão da Cunha em 1506 quando liderava a armada para o oceano Índico?",
+    "opcoes": [
+      "Ilha de Santa Helena",
+      "Ilha da Ascensão",
+      "Arquipélago de Tristão da Cunha",
+      "Ilhas Geórgia do Sul"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tristão da Cunha é o arquipélago habitado mais remoto de todo o planeta Terra.",
+    "fonte": "Royal Geographical Society / Academia de Marinha",
+    "factClusterId": "fc_nav_tristaodacunha1506_01"
+  },
+  {
+    "id": "HIST_NAV_0028",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador galego ao serviço da coroa portuguesa descobriu a Ilha da Ascensão em 1501 e a Ilha de Santa Helena a 21 de maio de 1502 no Atlântico Sul?",
+    "opcoes": [
+      "Gonçalo Coelho",
+      "Fernão de Noronha",
+      "Estêvão da Gama",
+      "João da Nova"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Santa Helena tornou-se a paragem de água doce e víveres mais estratégica para as naus da Carreira da Índia no regresso a Lisboa.",
+    "fonte": "Academia de Marinha / Damião de Góis",
+    "factClusterId": "fc_nav_joaodanova_01"
+  },
+  {
+    "id": "HIST_NAV_0029",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que nobre e navegador português descobriu as ilhas Molucas («Ilhas das Especiarias» na atual Indonésia) em 1512, fixando a presença portuguesa em Ternate e Tidore?",
+    "opcoes": [
+      "Francisco Serrão e António de Abreu",
+      "Afonso de Albuquerque",
+      "Jorge de Meneses",
+      "Duarte Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Molucas eram a única fonte mundial de noz-moscada e cravinho, valendo mais do que o seu peso em ouro na Europa.",
+    "fonte": "João de Barros (Décadas da Ásia) / BNP",
+    "factClusterId": "fc_nav_molucas1512_01"
+  },
+  {
+    "id": "HIST_NAV_0030",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que diplomata português foi enviado por Afonso de Albuquerque em 1511 ao Reino de Sião (Tailândia), sendo o primeiro embaixador ocidental a estabelecer um tratado de aliança com o Rei de Ayutthaya?",
+    "opcoes": [
+      "Diogo Lopes de Sequeira",
+      "Duarte Fernandes",
+      "Fernão Pires de Andrade",
+      "Pêro de Faria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A colónia portuguesa em Ayutthaya manteve privilégios reais e um bairro próprio durante séculos.",
+    "fonte": "Comentários de Afonso de Albuquerque / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_nav_duartefernandessiao_01"
+  },
+  {
+    "id": "HIST_NAV_0031",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e vice-rei da Índia (1545-1548) destacou-se pela defesa heroica do segundo Cerco de Diu em 1546 e pela elaboração dos precisos «Roteiros do Mar Roxo e de Goa»?",
+    "opcoes": [
+      "D. Garcia de Noronha",
+      "D. Estêvão da Gama",
+      "D. João de Castro",
+      "D. Luís de Ataíde"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. João de Castro empenhou as suas próprias barbas e o colar de ouro como penhor financeiro para reconstruir as muralhas de Diu.",
+    "fonte": "BNP / Academia Portuguesa da História",
+    "factClusterId": "fc_nav_joaodecastro_01"
+  },
+  {
+    "id": "HIST_NAV_0032",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que tratado assinado a 22 de abril de 1529 entre D. João III de Portugal e o Imperador Carlos V fixou a demarcação das zonas de influência no oceano Pacífico a leste das ilhas Molucas?",
+    "opcoes": [
+      "Tratado de Tordesilhas",
+      "Tratado de Cintra",
+      "Tratado de Badajoz",
+      "Tratado de Saragoça"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Portugal pagou a Espanha 350.000 ducados de ouro pela renúncia aos direitos espanhóis sobre as Molucas.",
+    "fonte": "Torre do Tombo / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_nav_saragoca1529_01"
+  },
+  {
+    "id": "HIST_NAV_0033",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que feitoria e fortaleza portuguesa fundada em 1482 na Costa do Ouro (atual Gana) pelo capitão Diogo de Azambuja foi o primeiro grande entreposto de ouro e marfim fortificado da África Ocidental?",
+    "opcoes": [
+      "Castelo de São Jorge da Mina (Elmina)",
+      "Forte de Axim",
+      "Feitoria de Arguim",
+      "Fortaleza de Sofala"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "São Jorge da Mina garantiu à coroa portuguesa toneladas de ouro em pó cunhadas nos prestigiados cruzados de ouro de D. João II e D. Manuel I.",
+    "fonte": "Rui de Pina / UNESCO World Heritage",
+    "factClusterId": "fc_nav_saojorgedamina1482_01"
+  },
+  {
+    "id": "HIST_NAV_0034",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que primeira feitoria e fortaleza de madeira fundada em 1445 pelo Infante D. Henrique na ilha de Arguim (na costa da atual Mauritânia) foi o pioneiro entreposto comercial ultramarino de Portugal?",
+    "opcoes": [
+      "São Jorge da Mina",
+      "Feitoria de Arguim",
+      "Feitoria de Cacheu",
+      "Forte de Ouidah"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Feitoria de Arguim canalizava as caravanas de goma-arábica e ouro do Saara ocidental.",
+    "fonte": "Zurara / Academia de Marinha",
+    "factClusterId": "fc_nav_arguim1445_01"
+  },
+  {
+    "id": "HIST_NAV_0035",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que manobra náutica genial consistia em navegar largo mar adentro em curva pelo oceano Atlântico para escapar às calmarias da costa africana e apanhar os ventos favoráveis de oeste no regresso a Lisboa («Volta do Mar»)?",
+    "opcoes": [
+      "A Rota das Índias",
+      "A Travessia dos Alísios",
+      "A Volta da Mina (ou Volta do Mar Largo)",
+      "O Giro do Cabo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O domínio da Volta do Mar permitiu aos navegadores portugueses navegar com segurança em todo o Atlântico Norte e Sul.",
+    "fonte": "Academia de Marinha / História da Náutica Portuguesa",
+    "factClusterId": "fc_nav_voltadamina_01"
+  },
+  {
+    "id": "HIST_NAV_0036",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que náufrago e aventureiro português (nascido em Montemor-o-Velho) viajou 21 anos pela Ásia e escreveu a célebre obra autobiográfica «Peregrinação» (publicada em 1614)?",
+    "opcoes": [
+      "Tomé Pires",
+      "Duarte Barbosa",
+      "Gaspar da Cruz",
+      "Fernão Mendes Pinto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A 'Peregrinação' é um dos mais fascinantes livros de viagens da literatura universal com descrições do Japão, China e Tailândia.",
+    "fonte": "Biblioteca Nacional de Portugal / Imprensa Nacional",
+    "factClusterId": "fc_nav_fernaomendespinto_01"
+  },
+  {
+    "id": "HIST_NAV_0037",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que missionário jesuíta navarro, cofundador da Companhia de Jesus e «Apóstolo do Oriente», viajou nas naus portuguesas para Goa, Cochim, Malaca e Japão sob o Padroado Régio Português?",
+    "opcoes": [
+      "São Francisco Xavier",
+      "São João de Brito",
+      "Padre António Vieira",
+      "Matteo Ricci"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O corpo de São Francisco Xavier repousa na Basílica do Bom Jesus em Velha Goa, Património Mundial da UNESCO.",
+    "fonte": "Patriarcado das Índias Orientais / UNESCO",
+    "factClusterId": "fc_nav_franciscoxavier_01"
+  },
+  {
+    "id": "HIST_NAV_0038",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que sistema de licença e salvo-conduto naval emitido pelas autoridades portuguesas no oceano Índico obrigava todos os navios mercantes locais a pagar direitos alfandegários nas feitorias da Coroa?",
+    "opcoes": [
+      "Foro de Feitoria",
+      "Cartaz (ou Sistema de Cartazes)",
+      "Regimento da Mina",
+      "Licença das Especiarias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O sistema do Cartaz garantia a hegemonia naval do Estado da Índia e combatia a pirataria no Índico.",
+    "fonte": "João de Barros / Academia Portuguesa da História",
+    "factClusterId": "fc_nav_cartazes_01"
+  },
+  {
+    "id": "HIST_NAV_0039",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que rota comercial marítima regular anual ligava Lisboa a Goa entre os séculos XVI e XIX, sendo a mais longa e exigente viagem de navegação à vela da história humana?",
+    "opcoes": [
+      "Rota do Cabo",
+      "Carreira do Brasil",
+      "Carreira da Índia",
+      "Rota das Molucas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As naus da Carreira da Índia partiam de Lisboa em março ou abril com os ventos alísios e demoravam cerca de seis meses a chegar a Goa.",
+    "fonte": "Arquivo Histórico Ultramarino / Museu de Marinha",
+    "factClusterId": "fc_nav_carreiradaindia_01"
+  },
+  {
+    "id": "HIST_NAV_0040",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que cronista régio do século XVI escreveu as célebres «Décadas da Ásia», documentando pormenorizadamente a epopeia dos descobrimentos e conquistas portuguesas no Oriente?",
+    "opcoes": [
+      "Fernão Lopes",
+      "Gomes Eanes de Zurara",
+      "Damião de Góis",
+      "João de Barros (e Diogo do Couto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "João de Barros foi feitor da Casa da Índia e um dos maiores historiadores e humanistas da Renascença.",
+    "fonte": "Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_nav_joaodebarros_01"
+  },
+  {
+    "id": "HIST_NAV_0041",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que instituição régia sediada no Terreiro do Paço em Lisboa geria o monopólio estatal de todas as mercadorias, especiarias, ouro e mapas náuticos vindos do ultramar entre os séculos XV e XVIII?",
+    "opcoes": [
+      "Casa da Índia (e Casa da Guiné e Mina)",
+      "Alfândega Régia",
+      "Mesa de Despacho",
+      "Conselho Ultramarino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Casa da Índia no antigo Paço da Ribeira centralizava as vendas de pimenta, cravo, canela, sedas e porcelanas.",
+    "fonte": "Torre do Tombo / História do Comércio Ultramarino",
+    "factClusterId": "fc_nav_casadaindia_01"
+  },
+  {
+    "id": "HIST_NAV_0042",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que galeão de guerra monumental construído nos estaleiros da Ribeira das Naus em Lisboa em 1534 («O Botafogo»), com 366 bocas de fogo de bronze, foi o maior navio de guerra do mundo do seu tempo?",
+    "opcoes": [
+      "Galeão Padre Eterno",
+      "Galeão São João Baptista (Botafogo)",
+      "Nau Madre de Deus",
+      "Nau Santa Catarina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O galeão Botafogo rompeu a corrente do porto de Túnis na conquista de 1535 pelo Imperador Carlos V e pelo Infante D. Luís.",
+    "fonte": "Marinha Portuguesa / Museu de Marinha",
+    "factClusterId": "fc_nav_botafogo1534_01"
+  },
+  {
+    "id": "HIST_NAV_0043",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que nau gigante de 1.600 toneladas da Carreira da Índia («Madre de Deus»), carregada de joias, pérolas, sedas e toneladas de especiarias, foi apresada por corsários ingleses nos Açores em 1592?",
+    "opcoes": [
+      "Nau Flor do Mar",
+      "Nau São Gabriel",
+      "Nau Madre de Deus",
+      "Nau Chagas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A captura da Madre de Deus em Flores revelou aos ingleses os segredos comerciais do Índico e inspirou a criação da Companhia Britânica das Índias Orientais.",
+    "fonte": "British Library / Academia de Marinha",
+    "factClusterId": "fc_nav_naumadrededeus1592_01"
+  },
+  {
+    "id": "HIST_NAV_0044",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que nau de 400 toneladas («Flor do Mar»), capitaneada por Afonso de Albuquerque com o lendário tesouro da conquista do Palácio Real do Sultão de Malaca, naufragou nos recifes de Samatra em 1511?",
+    "opcoes": [
+      "São Rafael",
+      "Nossa Senhora da Ajuda",
+      "Santíssimo Sacramento",
+      "Flor do Mar (ou Flor de la Mar)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O tesouro da Flor do Mar no fundo do estreito de Malaca é procurado há séculos como o maior tesouro subaquático perdido da história.",
+    "fonte": "Comentários de Afonso de Albuquerque / UNESCO Underwater Heritage",
+    "factClusterId": "fc_nav_flordomar1511_01"
+  },
+  {
+    "id": "HIST_NAV_0045",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e cavaleiro fidalgo descobriu em 1500 a foz do rio da Prata e o arquipélago de Fernando de Noronha ao comando de uma armada exploratória da costa do Brasil?",
+    "opcoes": [
+      "Gonçalo Coelho (e Américo Vespúcio)",
+      "Martim Afonso de Sousa",
+      "Gaspar de Lemos",
+      "Pero Lopes de Sousa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A expedição de 1501-1502 deu nome à maioria dos acidentes geográficos da costa brasileira (Baía de Todos os Santos, Cabo de São Roque, Rio de Janeiro).",
+    "fonte": "História da Colonização do Brasil / Academia de Marinha",
+    "factClusterId": "fc_nav_goncalocoelho1501_01"
+  },
+  {
+    "id": "HIST_NAV_0046",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador fundou a primeira vila e povoamento oficial permanente no Brasil em janeiro de 1532 (a Vila de São Vicente no atual estado de São Paulo)?",
+    "opcoes": [
+      "Tomé de Sousa",
+      "Martim Afonso de Sousa",
+      "Duarte Coelho",
+      "Mem de Sá"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Martim Afonso de Sousa introduziu as primeiras mudas de cana-de-açúcar e o gado bovino no Brasil.",
+    "fonte": "Torre do Tombo / História do Brasil Colonial",
+    "factClusterId": "fc_nav_martimafonsosousa1532_01"
+  },
+  {
+    "id": "HIST_NAV_0047",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que primeiro Governador-Geral do Brasil chegou à Baía de Todos os Santos em 1549 com jesuítas e colonos, fundando a cidade de Salvador da Baía como a primeira capital do Brasil colonial?",
+    "opcoes": [
+      "Duarte da Costa",
+      "Mem de Sá",
+      "Tomé de Sousa",
+      "Manuel da Nóbrega"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tomé de Sousa estruturou a administração centralizada da coroa portuguesa no Brasil colonial.",
+    "fonte": "Arquivo Histórico Ultramarino / BNP",
+    "factClusterId": "fc_nav_tomedesousa1549_01"
+  },
+  {
+    "id": "HIST_NAV_0048",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador e explorador português avistou pela primeira vez o arquipélago das ilhas Seychelles no oceano Índico ocidental em 1502 durante a sua segunda viagem à Índia («Ilhas Almirante»)?",
+    "opcoes": [
+      "Pedro Álvares Cabral",
+      "Afonso de Albuquerque",
+      "Diogo Fernandes Pereira",
+      "Vasco da Gama"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Vasco da Gama baptizou as ilhas de 'Ilhas do Almirante' em sua honra após ter sido nomeado Almirante dos Mares da Arábia, Pérsia e Índia.",
+    "fonte": "Academia de Marinha / Governo das Seychelles",
+    "factClusterId": "fc_nav_seychelles1502_01"
+  },
+  {
+    "id": "HIST_NAV_0049",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que navegador português descobriu em 1507 a ilha Maurícia e a ilha de Reunião no sudoeste do oceano Índico (arquipélago das Mascarenhas)?",
+    "opcoes": [
+      "Pedro de Mascarenhas (e Diogo Rodrigues)",
+      "Francisco de Almeida",
+      "Tristão da Cunha",
+      "João da Nova"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Arquipélago das Mascarenhas (Maurícia, Reunião e Rodrigues) homenageia o navegador português D. Pedro de Mascarenhas.",
+    "fonte": "Dicionário de História dos Descobrimentos Portugueses",
+    "factClusterId": "fc_nav_pedromascarenhas1507_01"
+  },
+  {
+    "id": "HIST_NAV_0050",
+    "tema": "História",
+    "subtema": "Descobrimentos",
+    "pergunta": "Que nobre português descobriu a ilha de Ceilão (atual Sri Lanka) em 1505 ao ser empurrado por ventos adversos para o porto de Galle, fundando a feitoria e fortaleza de Colombo?",
+    "opcoes": [
+      "D. Francisco de Almeida",
+      "Afonso de Albuquerque",
+      "D. Lourenço de Almeida",
+      "Lopo Soares de Albergaria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "D. Lourenço de Almeida negociou o fornecimento exclusivo da afamada canela de Ceilão com o Rei de Kotte.",
+    "fonte": "Academia de Marinha / Damião de Góis",
+    "factClusterId": "fc_nav_lourencoalmeida1505_01"
+  }
+]

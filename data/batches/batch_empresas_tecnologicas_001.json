@@ -1,0 +1,852 @@
+[
+  {
+    "id": "EMP_TEC_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que plataforma de comércio eletrónico de moda de luxo fundada em 2008 pelo empresário vimaranense José Neves («Farfetch»), tornou-se em 2015 o primeiro «unicórnio» com ADN português (avaliado em mais de 1.000 milhões de dólares) e cotada na Bolsa de Nova Iorque (NYSE) em 2018?",
+    "opcoes": [
+      "Farfetch (José Neves)",
+      "OutSystems",
+      "Talkdesk",
+      "Feedzai"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Farfetch ligou compradores de mais de 190 países às principais marcas de moda e boutiques de luxo do mundo a partir de Guimarães e Londres.",
+    "fonte": "NYSE / Banco de Portugal / AICEP",
+    "factClusterId": "fc_emp_tec_farfetch_joseneves_unicórnio_01"
+  },
+  {
+    "id": "EMP_TEC_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa pioneira fundada em Coimbra em 1997 por Gonçalo Quadros e outros engenheiros («Critical Software»), desenvolve software crítico de elevada tolerância a falhas para a NASA, a Agência Espacial Europeia (ESA) e o setor automóvel mundial?",
+    "opcoes": [
+      "Novabase",
+      "Critical Software (Coimbra)",
+      "Glintt",
+      "Feedzai"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Critical Software forneceu o software de monitorização de integridade para missões da NASA no espaço e satélites europeus.",
+    "fonte": "Critical Software / ESA / NASA / IPN",
+    "factClusterId": "fc_emp_tec_criticalsoftware_coimbra_01"
+  },
+  {
+    "id": "EMP_TEC_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica pioneira fundada em 2001 por Paulo Rosado em Linda-a-Velha («OutSystems»), tornou-se um unicórnio e líder planetária no desenvolvimento de plataformas de software «low-code» e inteligência artificial para grandes empresas?",
+    "opcoes": [
+      "Sword Health",
+      "Remote",
+      "OutSystems (Paulo Rosado)",
+      "Defined.ai"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A OutSystems permite a programadores e empresas criar aplicações empresariais complexas de forma visual com rapidez sem precedentes.",
+    "fonte": "Gartner Magic Quadrant / OutSystems / Forbes",
+    "factClusterId": "fc_emp_tec_outsystems_lowcode_01"
+  },
+  {
+    "id": "EMP_TEC_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica unicórnio fundada em 2011 por Tiago Paiva e Cristina Fonseca («Talkdesk»), desenvolveu uma plataforma inovadora de contact centers na nuvem baseada em inteligência artificial adotada por multinacionais em todo o mundo?",
+    "opcoes": [
+      "Unbabel",
+      "Sensei",
+      "Barkyn",
+      "Talkdesk (Tiago Paiva e Cristina Fonseca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Talkdesk atingiu o estatuto de unicórnio em 2018 após ser acelerada no programa 500 Startups em Silicon Valley.",
+    "fonte": "Talkdesk / Forbes / TechCrunch",
+    "factClusterId": "fc_emp_tec_talkdesk_contactcenter_01"
+  },
+  {
+    "id": "EMP_TEC_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio tecnológico português fundado em Coimbra em 2011 por Nuno Sebastião, Paulo Marques e Pedro Bizarro («Feedzai»), utiliza inteligência artificial e aprendizagem automática avançada para prevenir e bloquear fraudes financeiras em tempo real nos maiores bancos mundiais?",
+    "opcoes": [
+      "Feedzai",
+      "Anchorage Digital",
+      "Sword Health",
+      "Coverflex"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Feedzai protege transações comerciais de milhares de milhões de euros por ano prevenindo fraudes em cartões e pagamentos eletrónicos.",
+    "fonte": "Feedzai / Universidade de Coimbra / CNBC Disruptor 50",
+    "factClusterId": "fc_emp_tec_feedzai_fraude_01"
+  },
+  {
+    "id": "EMP_TEC_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio de saúde digital fundado no Porto em 2015 pelo engenheiro e neurocientista Virgílio Bento e Márcio Colunas («Sword Health»), desenvolveu uma solução pioneira de fisioterapia digital e reabilitação músculo-esquelética com sensores de movimento e IA?",
+    "opcoes": [
+      "HeartGenetics",
+      "Sword Health (Virgílio Bento)",
+      "Crioestaminal",
+      "CellmAbs"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sword Health foi avaliada em mais de 3.000 milhões de dólares sendo líder nos planos de saúde dos maiores empregadores norte-americanos.",
+    "fonte": "Sword Health / Forbes / Wall Street Journal",
+    "factClusterId": "fc_emp_tec_swordhealth_fisioterapiadigital_01"
+  },
+  {
+    "id": "EMP_TEC_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio tecnológico fundado em 2019 pelo engenheiro português Marcelo Lebre e o holandês Job van der Voort («Remote»), desenvolveu uma plataforma global líder de contratação, gestão de recursos humanos e processamento de salários para equipas remotas em mais de 170 países?",
+    "opcoes": [
+      "Coverflex",
+      "Talkdesk",
+      "Remote (Marcelo Lebre)",
+      "Casafari"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Remote atingiu o estatuto de unicórnio em menos de dois anos graças à explosão mundial do trabalho remoto.",
+    "fonte": "Remote / TechCrunch / Financial Times",
+    "factClusterId": "fc_emp_tec_remote_marcelolebre_01"
+  },
+  {
+    "id": "EMP_TEC_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de criptoativos e custódia digital cofundada pelo engenheiro de segurança português Diogo Mónica («Anchorage Digital»), fez história em 2021 ao obter a primeira licença bancária federal para criptomoedas aprovada pelo OCC dos EUA?",
+    "opcoes": [
+      "Utrust",
+      "Feedzai",
+      "Veniam",
+      "Anchorage Digital (Diogo Mónica)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Anchorage Digital converteu-se no primeiro banco digital regulado federalmente para ativos criptográficos institucionais.",
+    "fonte": "OCC (Office of the Comptroller of the Currency) / Anchorage Digital / Forbes",
+    "factClusterId": "fc_emp_tec_anchoragedigital_diogomonica_01"
+  },
+  {
+    "id": "EMP_TEC_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que centro tecnológico de excelência sediado em Aveiro («Altice Labs» / antiga PT Inovação), foi o polo pioneiro no desenvolvimento das tecnologias GPON de fibra ótica (FTTH) que colocaram Portugal como um dos países mais fibrados e rápidos do mundo?",
+    "opcoes": [
+      "Altice Labs (Aveiro)",
+      "CEiiA",
+      "INESC TEC",
+      "Taguspark"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os equipamentos e patentes de telecomunicações desenvolvidos em Aveiro são exportados para mais de 60 países em 4 continentes.",
+    "fonte": "Altice Labs / Universidade de Aveiro / ANACOM",
+    "factClusterId": "fc_emp_tec_alticelabs_aveiro_gpon_01"
+  },
+  {
+    "id": "EMP_TEC_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que Centro de Engenharia e Desenvolvimento sediado em Matosinhos («CEiiA»), é uma referência internacional no desenvolvimento de soluções de mobilidade sustentável, aeroespacial (participação no avião militar Embraer KC-390) e no desenvolvimento do primeiro satélite português?",
+    "opcoes": [
+      "PIEP",
+      "CEiiA (Matosinhos)",
+      "INEGI",
+      "IPN"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CEiiA desenvolve sistemas avançados de estruturas em compósitos e plataformas de descarbonização como a AYR.",
+    "fonte": "CEiiA / Ministério da Economia / Embraer",
+    "factClusterId": "fc_emp_tec_ceiia_matosinhos_01"
+  },
+  {
+    "id": "EMP_TEC_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa fundada em Lisboa em 2013 por Vasco Pedro e Sofia Pessanha («Unbabel»), combina inteligência artificial avançada de tradução automática neural com revisão em tempo real por humanos para apoio ao cliente multinacional?",
+    "opcoes": [
+      "Defined.ai",
+      "Talkdesk",
+      "Unbabel (Vasco Pedro)",
+      "Sensei"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Unbabel foi acelerada na prestigiada Y Combinator e processa comunicações multilíngues para gigantes como a Microsoft e Booking.",
+    "fonte": "Unbabel / Y Combinator / Forbes",
+    "factClusterId": "fc_emp_tec_unbabel_vascopedro_01"
+  },
+  {
+    "id": "EMP_TEC_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de dados e inteligência artificial fundada em 2015 pela cientista da computação portuguesa Daniela Braga («Defined.ai» / antiga DefinedCrowd), fornece conjuntos de dados de treino de voz e linguagem natural para treinar os maiores modelos de IA do mundo?",
+    "opcoes": [
+      "Unbabel",
+      "Feedzai",
+      "Sword Health",
+      "Defined.ai (Daniela Braga)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Daniela Braga foi nomeada para a comissão de inteligência artificial da Casa Branca e do governo dos EUA.",
+    "fonte": "Defined.ai / Casa Branca / Forbes",
+    "factClusterId": "fc_emp_tec_definedai_danielabraga_01"
+  },
+  {
+    "id": "EMP_TEC_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de visão computacional e IA fundada em Lisboa por Vasco Portugal e Joana Rafael («Sensei»), desenvolveu a tecnologia pioneira de lojas autónomas de retalho sem caixas nem filas de pagamento (lojas autónomas Continente Labs)?",
+    "opcoes": [
+      "Sensei (Lojas Autónomas)",
+      "Veniam",
+      "Coverflex",
+      "Barkyn"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sensei utiliza câmaras no teto e sensores de prateleira para identificar os produtos recolhidos pelos clientes cobrando automaticamente na app.",
+    "fonte": "Sensei / Sonae / TechCrunch",
+    "factClusterId": "fc_emp_tec_sensei_lojasautonomas_01"
+  },
+  {
+    "id": "EMP_TEC_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de telecomunicações móveis e redes «mesh» fundada no Porto pelo professor universitário João Barros («Veniam»), conectou frotas de autocarros e táxis transformando veículos em 'hotspots' Wi-Fi em movimento antes de ser adquirida pela Nexar?",
+    "opcoes": [
+      "WeDo Technologies",
+      "Veniam (João Barros)",
+      "Mobbit",
+      "Card4B"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Veniam criou no Porto a maior rede de veículos conectados do mundo sendo premiada no Fórum Económico Mundial de Davos.",
+    "fonte": "Veniam / MIT Technology Review / World Economic Forum",
+    "factClusterId": "fc_emp_tec_veniam_joaobarros_01"
+  },
+  {
+    "id": "EMP_TEC_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e pioneira empresa de inteligência artificial portuguesa fundada em Lisboa em 1988 pelos professores do IST Ernesto Morgado e João Pavão Martins («SISCOG»), desenvolve o software de planeamento e gestão de escalas de comboios e tripulações para operadores como a CP, o Metro de Londres e os caminhos de ferro holandeses?",
+    "opcoes": [
+      "Novabase",
+      "Critical Software",
+      "SISCOG (Sistemas Cognitivos)",
+      "Glintt"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A SISCOG foi pioneira mundial na aplicação prática de sistemas periciais e IA heurística à gestão operacional de caminhos de ferro.",
+    "fonte": "SISCOG / Instituto Superior Técnico / Transport for London",
+    "factClusterId": "fc_emp_tec_siscog_1988_01"
+  },
+  {
+    "id": "EMP_TEC_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa portuguesa de tecnologia para a saúde e farmácias («Glintt» — Global Intelligent Technologies), cotada na Euronext Lisboa, é líder na Península Ibérica na automação robótica de farmácias e sistemas de informação hospitalar?",
+    "opcoes": [
+      "Novabase",
+      "Asseco PST",
+      "PrimeIT",
+      "Glintt"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Glintt resulta da fusão histórica da ParaRede com a Consiste e opera em milhares de farmácias e hospitais em Portugal e Espanha.",
+    "fonte": "Glintt / Euronext Lisboa",
+    "factClusterId": "fc_emp_tec_glintt_01"
+  },
+  {
+    "id": "EMP_TEC_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica empresa portuguesa de tecnologias de informação e consultoria de engenharia fundada em 1989 em Lisboa («Novabase»), cotada em bolsa e criadora da Next-Gen Financial Services (Celfocus), é um dos maiores pilares das TI em Portugal?",
+    "opcoes": [
+      "Novabase (1989)",
+      "Glintt",
+      "Inovinter",
+      "Compta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Novabase desenvolveu projetos estruturantes de digitalização para as telecomunicações, banca e setor público português.",
+    "fonte": "Novabase / Euronext Lisboa",
+    "factClusterId": "fc_emp_tec_novabase_1989_01"
+  },
+  {
+    "id": "EMP_TEC_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que fintech portuguesa fundada em Braga e Lisboa em 2021 («Coverflex»), desenvolveu uma plataforma inovadora de gestão flexível de benefícios, vales de refeição, seguros de saúde e despesas para trabalhadores de empresas na Europa?",
+    "opcoes": [
+      "Rauva",
+      "Coverflex",
+      "Doutor Finanças",
+      "Casafari"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Coverflex conquistou rondas recorde de financiamento expandindo-se rapidamente para os mercados de Itália e Espanha.",
+    "fonte": "Coverflex / Sifted / TechCrunch",
+    "factClusterId": "fc_emp_tec_coverflex_2021_01"
+  },
+  {
+    "id": "EMP_TEC_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de dados imobiliários e inteligência artificial sediada em Lisboa («Casafari»), fundada por Nils Henning e Mila Suharev, agregou a maior base de dados de propriedades imobiliárias da Europa com ferramentas preditivas para profissionais?",
+    "opcoes": [
+      "Imovirtual",
+      "Idealista",
+      "Casafari",
+      "Alfredo Real Estate"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casafari monitoriza milhões de imóveis e transações eliminando duplicações e fornecendo transparência ao mercado.",
+    "fonte": "Casafari / Forbes / Financial Times",
+    "factClusterId": "fc_emp_tec_casafari_01"
+  },
+  {
+    "id": "EMP_TEC_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que inovadora marca portuguesa de nutrição personalizada e saúde preventiva para cães e gatos fundada no Porto por André Jordão e Madalena Rugeroni («Barkyn»), combina comida natural por subscrição com assistência veterinária digital 24/7?",
+    "opcoes": [
+      "Petable",
+      "Daufood",
+      "Nutripet",
+      "Barkyn"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Barkyn foi selecionada pela Google for Startups e opera em múltiplos mercados europeus.",
+    "fonte": "Barkyn / Google for Startups / El País",
+    "factClusterId": "fc_emp_tec_barkyn_01"
+  },
+  {
+    "id": "EMP_TEC_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórico parque de ciência e tecnologia de Oeiras fundado em 1992 («Taguspark»), foi o primeiro parque tecnológico criado em Portugal, acolhendo centenas de empresas e o campus do Instituto Superior Técnico?",
+    "opcoes": [
+      "Taguspark (Oeiras, 1992)",
+      "UPTEC (Porto)",
+      "Biocant (Cantanhede)",
+      "Madan Parque (Caparica)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Taguspark foi concebido para aproximar o conhecimento académico das grandes empresas tecnológicas e multinacionais.",
+    "fonte": "Taguspark / Município de Oeiras",
+    "factClusterId": "fc_emp_tec_taguspark_oeiras_1992_01"
+  },
+  {
+    "id": "EMP_TEC_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que prestigiado Parque de Ciência e Tecnologia da Universidade do Porto fundado em 2007 («UPTEC»), com polos de Tecnologias, Biotecnologia e Indústrias Criativas, já apoiou mais de 700 projetos empresariais e startups inovadoras?",
+    "opcoes": [
+      "Taguspark",
+      "UPTEC (Universidade do Porto)",
+      "IPN",
+      "Sanjotec"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A UPTEC recebeu o prémio RegioStars da Comissão Europeia como projeto modelo de transferência de tecnologia na Europa.",
+    "fonte": "UPTEC / Universidade do Porto / Comissão Europeia",
+    "factClusterId": "fc_emp_tec_uptec_porto_2007_01"
+  },
+  {
+    "id": "EMP_TEC_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que incubadora de empresas e instituição de inovação da Universidade de Coimbra («Instituto Pedro Nunes» / IPN), fundada em 1991, foi eleita em 2010 como a Melhor Incubadora de Empresas de Base Tecnológica do Mundo pela associação internacional Technopolicy Network?",
+    "opcoes": [
+      "Startup Lisboa",
+      "UPTEC",
+      "Instituto Pedro Nunes (IPN, Coimbra)",
+      "Fábrica de Startups"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O IPN foi o berço da Critical Software, Feedzai, Wit Software e dezenas de empresas de tecnologia de ponta.",
+    "fonte": "Instituto Pedro Nunes / Universidade de Coimbra",
+    "factClusterId": "fc_emp_tec_ipn_coimbra_1991_01"
+  },
+  {
+    "id": "EMP_TEC_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico polo de inovação e empreendedorismo instalado na antiga Fábrica de Manutenção Militar no Beato em Lisboa («Unicorn Factory Lisboa» / Hub Criativo do Beato), dinamiza a atração de unicórnios e centros de investigação para a capital?",
+    "opcoes": [
+      "Startup Sintra",
+      "Parque das Nações Tech",
+      "LACS Lisboa",
+      "Unicorn Factory Lisboa (Hub Criativo do Beato)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Hub do Beato ocupa mais de 35.000 m2 sendo um dos maiores centros de inovação e startups da Europa.",
+    "fonte": "Câmara Municipal de Lisboa / Unicorn Factory Lisboa",
+    "factClusterId": "fc_emp_tec_unicornfactory_beato_01"
+  },
+  {
+    "id": "EMP_TEC_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que grande e prestigiada conferência global de tecnologia e empreendedorismo fundada por Paddy Cosgrave («Web Summit»), transferiu a sua sede oficial em 2016 para a Altice Arena e FIL no Parque das Nações em Lisboa reunindo mais de 70.000 participantes de todo o mundo?",
+    "opcoes": [
+      "Web Summit (Lisboa, desde 2016)",
+      "Mobile World Congress",
+      "Slush",
+      "VivaTech"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A realização da Web Summit consolidou Lisboa e Portugal no mapa internacional do investimento de capital de risco e do ecossistema de startups.",
+    "fonte": "Web Summit / Governo de Portugal / AICEP",
+    "factClusterId": "fc_emp_tec_websummit_lisboa_2016_01"
+  },
+  {
+    "id": "EMP_TEC_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de software para operadoras móveis fundada em Coimbra em 2001 («WIT Software»), desenvolveu soluções inovadoras de RCS (Rich Communication Services), IPTV e mensagens ricas para as maiores operadoras de telecomunicações do planeta?",
+    "opcoes": [
+      "Talkdesk",
+      "WIT Software (Coimbra)",
+      "Inovinter",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A WIT Software tem mais de 20 anos de liderança em software de telecomunicações móveis com clientes em dezenas de países.",
+    "fonte": "WIT Software / IPN",
+    "factClusterId": "fc_emp_tec_witsoftware_coimbra_01"
+  },
+  {
+    "id": "EMP_TEC_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa pioneira na realidade virtual, realidade aumentada e exposições interativas mundiais fundada por António Câmara e Edmundo Nobre («YDreams»), realizou projetos para o Museu do Louvre, Santander e grandes marcas globais?",
+    "opcoes": [
+      "Sensei",
+      "Critical TechWorks",
+      "YDreams (António Câmara)",
+      "Blip"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A YDreams foi pioneira no início dos anos 2000 no desenvolvimento de experiências imersivas de realidade virtual e computação ubiqua.",
+    "fonte": "YDreams / Prémio Pessoa / Universidade Nova de Lisboa",
+    "factClusterId": "fc_emp_tec_ydreams_antoniocamara_01"
+  },
+  {
+    "id": "EMP_TEC_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que joint venture tecnológica criada em 2018 entre o grupo automóvel BMW Group e a portuguesa Critical Software («Critical TechWorks»), com polos no Porto e Lisboa, desenvolve o software de bordo, sistemas de navegação e condução autónoma dos veículos BMW?",
+    "opcoes": [
+      "CEiiA",
+      "Bosch Car Multimedia",
+      "Continental Mabor",
+      "Critical TechWorks (BMW Group & Critical Software)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Critical TechWorks emprega mais de 2.000 engenheiros de software em Portugal criando o ecossistema digital da BMW.",
+    "fonte": "BMW Group / Critical Software / AICEP",
+    "factClusterId": "fc_emp_tec_criticaltechworks_bmw_01"
+  },
+  {
+    "id": "EMP_TEC_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que polo de engenharia e tecnologia multimédia automóvel sediado em Braga («Bosch Car Multimedia Portugal»), é uma das maiores unidades de investigação e desenvolvimento (I&D) de ponta do grupo Bosch no mundo para sensores e cockpits digitais de automóveis?",
+    "opcoes": [
+      "Bosch Car Multimedia (Braga)",
+      "Continental Teves",
+      "Aptiv",
+      "Visteon"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Bosch em Braga tem uma parceria estratégica de investigação com a Universidade do Minho com centenas de patentes registadas.",
+    "fonte": "Bosch Portugal / Universidade do Minho / AICEP",
+    "factClusterId": "fc_emp_tec_bosch_braga_id_01"
+  },
+  {
+    "id": "EMP_TEC_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que polo de engenharia de software sediado no Porto («Blip»), integrado no grupo global Flutter Entertainment, desenvolve a infraestrutura tecnológica de plataformas digitais desportivas de alta escala para mais de 14 milhões de utilizadores ativos globais?",
+    "opcoes": [
+      "Farfetch",
+      "Blip (Porto / Flutter Entertainment)",
+      "Feedzai",
+      "Talkdesk"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Blip é uma das empresas de tecnologia mais premiadas como melhor local para trabalhar no setor de TI no Norte de Portugal.",
+    "fonte": "Blip / Flutter Entertainment / Great Place to Work",
+    "factClusterId": "fc_emp_tec_blip_porto_01"
+  },
+  {
+    "id": "EMP_TEC_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que instituição pioneira de inovação e incubação de empresas da capital fundada em 2011 pela CML, Montepio e IAPMEI («Startup Lisboa»), na Rua da Prata na Baixa pombalina, apoiou o nascimento de centenas de startups na capital?",
+    "opcoes": [
+      "Startup Braga",
+      "Casa do Impacto",
+      "Startup Lisboa (2011)",
+      "Beta-i"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Lisboa foi fundamental para transformar Lisboa num ecossistema de acolhimento de empreendedores e nómadas digitais.",
+    "fonte": "Startup Lisboa / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_tec_startuplisboa_2011_01"
+  },
+  {
+    "id": "EMP_TEC_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que associação portuguesa de promoção da inovação e do empreendedorismo fundada em 2010 («Beta-i»), é uma das maiores aceleradoras de inovação colaborativa da Europa ligando grandes corporações globais a startups inovadoras?",
+    "opcoes": [
+      "Startup Portugal",
+      "BGI",
+      "Fábrica de Startups",
+      "Beta-i"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Beta-i organiza programas de aceleração em setores como a economia azul, sustentabilidade, energia e saúde em vários continentes.",
+    "fonte": "Beta-i / AICEP",
+    "factClusterId": "fc_emp_tec_betai_aceleradora_01"
+  },
+  {
+    "id": "EMP_TEC_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que agência pública e entidade dinamizadora do ecossistema nacional («Startup Portugal»), criada pelo Governo português, é responsável pela gestão da Rede Nacional de Incubadoras (RNI) e pela promoção da estratégia nacional para o empreendedorismo?",
+    "opcoes": [
+      "Startup Portugal",
+      "IAPMEI",
+      "AICEP",
+      "ANI (Agência Nacional de Inovação)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Startup Portugal apoia a internacionalização e a atribuição do estatuto de startup e tech visa em Portugal.",
+    "fonte": "Startup Portugal / Ministério da Economia",
+    "factClusterId": "fc_emp_tec_startupportugal_rni_01"
+  },
+  {
+    "id": "EMP_TEC_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico instituto de investigação e tecnologia do Porto e Minho («INESC TEC» — Instituto de Engenharia de Sistemas e Computadores, Tecnologia e Ciência), é líder nacional em inteligência artificial, robótica submarina e sistemas de energia?",
+    "opcoes": [
+      "IBMC",
+      "INESC TEC (Porto)",
+      "CISTER",
+      "ISR Lisboa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O INESC TEC atua como ponte entre a Universidade do Porto e o tecido industrial participando em projetos pioneiros da UE.",
+    "fonte": "INESC TEC / Faculdade de Engenharia da Universidade do Porto (FEUP)",
+    "factClusterId": "fc_emp_tec_inesctec_porto_01"
+  },
+  {
+    "id": "EMP_TEC_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que primeiro banco 100% digital e móvel em Portugal criado pelo Grupo BCP em 1995 («ActivoBank» / antigo Banco 7), revolucionou a banca de retalho ao eliminar papel e balcões tradicionais promovendo o 'mobile banking' simplificado?",
+    "opcoes": [
+      "Moey!",
+      "Banco Best",
+      "ActivoBank",
+      "Bison Bank"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ActivoBank antecipou as fintechs com pontos de atendimento em centros comerciais e onboarding de clientes puramente digital.",
+    "fonte": "ActivoBank / Millennium bcp / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_activobank_1995_01"
+  },
+  {
+    "id": "EMP_TEC_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que conta digital e solução financeira móvel inovadora lançada em 2019 pelo Crédito Agrícola («Moey!»), permite pagamentos imediatos entre contactos, divisão de contas de grupo e gestão orçamental através de uma aplicação intuitiva?",
+    "opcoes": [
+      "ActivoBank",
+      "Revolut",
+      "Coverflex",
+      "Moey!"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Moey! foi a primeira solução bancária portuguesa concebida de raiz a integrar a tecnologia de pagamentos da SIBS e Apple Pay / Google Pay.",
+    "fonte": "Crédito Agrícola / Moey! / SIBS",
+    "factClusterId": "fc_emp_tec_moey_creditoagricola_2019_01"
+  },
+  {
+    "id": "EMP_TEC_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e avançada empresa portuguesa de pagamentos e segurança interbancária fundada em 1983 («SIBS» — Sociedade Interbancária de Serviços), desenvolveu a Rede Multibanco e em 2015 o revolucionário serviço de pagamentos instantâneos por telemóvel:",
+    "opcoes": [
+      "MB WAY",
+      "Bizum",
+      "Venmo",
+      "PayPal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O MB WAY é utilizado por mais de 5 milhões de portugueses para transferências instantâneas, compras online e levantamento de dinheiro sem cartão.",
+    "fonte": "SIBS / Banco de Portugal / MB WAY",
+    "factClusterId": "fc_emp_tec_sibs_mbway_2015_01"
+  },
+  {
+    "id": "EMP_TEC_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico sistema português de bilhética e pagamentos de portagens sem paragem nas autoestradas («Via Verde»), criado pela Brisa em 1991 em parceria com a Universidade de Aveiro, foi o primeiro sistema de portagem eletrónica interoperável em rede aberta do mundo?",
+    "opcoes": [
+      "Telepass",
+      "Via Verde (1991)",
+      "E-ZPass",
+      "AutoPass"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Via Verde expandiu-se mais tarde para o pagamento em parques de estacionamento, postos de combustível Galp, ferries e pontes.",
+    "fonte": "Via Verde Portugal / Brisa / DHP",
+    "factClusterId": "fc_emp_tec_viaverde_1991_01"
+  },
+  {
+    "id": "EMP_TEC_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de segurança e biometria facial fundada em Coimbra por investigadores da universidade («Vision-Box»), é líder mundial no fornecimento de portas biométricas automáticas de controlo de fronteiras (e-Gates) nos maiores aeroportos do mundo?",
+    "opcoes": [
+      "Feedzai",
+      "Critical Software",
+      "Vision-Box (e-Gates)",
+      "Card4B"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As portas biométricas da Vision-Box operam em aeroportos como Londres Heathrow, Amesterdão Schiphol, Dubai e JFK em Nova Iorque.",
+    "fonte": "Vision-Box / ICAO / Amadeus",
+    "factClusterId": "fc_emp_tec_visionbox_egates_01"
+  },
+  {
+    "id": "EMP_TEC_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de bioinformática e genética fundada em Cantanhede («Crioestaminal»), sediada no Biocant Park, é o maior banco de células estaminais do cordão umbilical da Península Ibérica com acreditação internacional da AABB?",
+    "opcoes": [
+      "Bebé Vida",
+      "HeartGenetics",
+      "Stemlab",
+      "Crioestaminal (Biocant Park, Cantanhede)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Crioestaminal preserva amostras de células estaminais de mais de 100.000 famílias para tratamentos de medicina regenerativa.",
+    "fonte": "Crioestaminal / Biocant / AABB",
+    "factClusterId": "fc_emp_tec_crioestaminal_biocant_01"
+  },
+  {
+    "id": "EMP_TEC_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que fintech portuguesa fundada em Lisboa («Rauva»), desenvolveu a primeira superapp financeira e de gestão tudo-em-um para pequenas empresas e trabalhadores independentes em Portugal?",
+    "opcoes": [
+      "Rauva",
+      "Coverflex",
+      "Doutor Finanças",
+      "Tonic App"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Rauva integra contas bancárias empresariais, faturação certificada pela AT e contabilidade numa única aplicação móvel.",
+    "fonte": "Rauva / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_rauva_superapp_01"
+  },
+  {
+    "id": "EMP_TEC_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de saúde digital sediada no Porto fundada pela médica Daniela Seixas («Tonic App»), desenvolveu uma plataforma móvel de agregação de ferramentas clínicas e recursos de diagnóstico utilizada por milhares de médicos na Europa?",
+    "opcoes": [
+      "Sword Health",
+      "Tonic App (Daniela Seixas)",
+      "Barkyn",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Tonic App ajuda a comunidade médica a partilhar conhecimento, consultar calculadoras clínicas e acelerar o encaminhamento de doentes.",
+    "fonte": "Tonic App / Ordem dos Médicos / TechCrunch",
+    "factClusterId": "fc_emp_tec_tonicapp_01"
+  },
+  {
+    "id": "EMP_TEC_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de tecnologia móvel e jogos fundada em Guimarães em 2012 («Bica Studios»), destacou-se no desenvolvimento de videojogos em realidade aumentada e jogos casuais para smartphones?",
+    "opcoes": [
+      "Nerd Monkeys",
+      "Biodroid",
+      "Bica Studios",
+      "Miniclip"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Bica Studios é um dos pioneiros no ecossistema emergente de desenvolvimento de videojogos em Portugal.",
+    "fonte": "Bica Studios / APVP (Associação de Produtores de Videojogos Portugueses)",
+    "factClusterId": "fc_emp_tec_bicastudios_jogos_01"
+  },
+  {
+    "id": "EMP_TEC_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que estúdio independente de desenvolvimento de videojogos sediado em Lisboa («Nerd Monkeys»), fundado por Diogo Vasconcelos e Filipe Duarte Pina, celebrizou-se com os aclamados títulos «Murdering Murphy» e «Out of Line»?",
+    "opcoes": [
+      "Saber Interactive",
+      "PlayStation Talents",
+      "Bica Studios",
+      "Nerd Monkeys"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Nerd Monkeys publica jogos independentes para PC, Nintendo Switch e PlayStation premiados internacionalmente.",
+    "fonte": "Nerd Monkeys / APVP",
+    "factClusterId": "fc_emp_tec_nerdmonkeys_videojogos_01"
+  },
+  {
+    "id": "EMP_TEC_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que grande multinacional suíça de videojogos online e móveis («Miniclip»), criadora do fenómeno global «8 Ball Pool» e «Agar.io», instalou em 2022 o seu maior centro de engenharia e estúdio de desenvolvimento no Taguspark em Oeiras com mais de 350 profissionais?",
+    "opcoes": [
+      "Miniclip (Oeiras / Taguspark)",
+      "Electronic Arts",
+      "Ubisoft",
+      "Rovio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O campus da Miniclip em Oeiras é o polo central de engenharia dos jogos da empresa que soma mais de 4 mil milhões de downloads.",
+    "fonte": "Miniclip / Município de Oeiras / AICEP",
+    "factClusterId": "fc_emp_tec_miniclip_oeiras_01"
+  },
+  {
+    "id": "EMP_TEC_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de software de bilhética intermodal e transportes inteligentes sediada no Porto («Card4B»), desenvolveu as soluções de validação sem contacto e pagamento por smartphone do sistema Andante no Metro do Porto e STCP?",
+    "opcoes": [
+      "Sensei",
+      "Card4B (Sistema Andante)",
+      "Vision-Box",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A tecnologia do Andante foi pioneira mundial ao calcular automaticamente a tarifa mais vantajosa para o passageiro por aproximação no telemóvel.",
+    "fonte": "Card4B / Metro do Porto / TIP",
+    "factClusterId": "fc_emp_tec_card4b_andante_01"
+  },
+  {
+    "id": "EMP_TEC_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de inovação no setor de restauração («Kitch»), fundada em Lisboa por ex-executivos da Uber Eats (Rui Bento e Nuno Rodrigues), desenvolveu uma plataforma tecnológica para otimizar as operações digitais e entregas de restaurantes?",
+    "opcoes": [
+      "Barkyn",
+      "Sensei",
+      "Kitch (adquirida pela Glovo)",
+      "EatTasty"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Kitch foi adquirida pela multinacional Glovo em 2022 para expandir a sua tecnologia de cozinhas partilhadas e pedidos diretos.",
+    "fonte": "Kitch / Glovo / TechCrunch",
+    "factClusterId": "fc_emp_tec_kitch_ruibento_01"
+  },
+  {
+    "id": "EMP_TEC_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que plataforma portuguesa de literacia e intermediação financeira fundada em 2014 em Lisboa («Doutor Finanças»), ajudou dezenas de milhares de famílias portuguesas a poupar no crédito à habitação e consolidar créditos através de ferramentas digitais gratuitas?",
+    "opcoes": [
+      "ComparaJá",
+      "Coverflex",
+      "Rauva",
+      "Doutor Finanças"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Doutor Finanças é um dos maiores portais de literacia e bem-estar financeiro de Portugal.",
+    "fonte": "Doutor Finanças / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_doutorfinancas_01"
+  },
+  {
+    "id": "EMP_TEC_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que inovadora empresa de tecnologia aeroespacial sediada em Matosinhos e Santa Maria da Feira («Neuraspace»), fundada por Chiara Manfletti, desenvolveu uma plataforma de IA para prevenir colisões espaciais entre satélites e lixo espacial em órbita da Terra?",
+    "opcoes": [
+      "Neuraspace",
+      "CEiiA",
+      "Critical Software",
+      "Deimos Engenharia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Neuraspace recebeu financiamento do Conselho Europeu de Inovação (EIC) e da ESA para proteger a segurança das constelações de satélites.",
+    "fonte": "Neuraspace / ESA / European Innovation Council",
+    "factClusterId": "fc_emp_tec_neuraspace_satelites_01"
+  },
+  {
+    "id": "EMP_TEC_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e prestigiada empresa de engenharia aeroespacial portuguesa fundada em 2002 («Deimos Engenharia»), com sede em Lisboa, lidera missões da ESA para observação da Terra, defesa planetária (missão Hera da ESA) e navegação por satélite (Galileo)?",
+    "opcoes": [
+      "CEiiA",
+      "Neuraspace",
+      "Deimos Engenharia (Lisboa)",
+      "Edisoft"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Deimos Engenharia concebe sistemas de controlo de atitude e órbitas de satélites espaciais para as maiores missões científicas da Europa.",
+    "fonte": "Deimos Engenharia / Agência Espacial Portuguesa (Portugal Space) / ESA",
+    "factClusterId": "fc_emp_tec_deimosengenharia_espaco_01"
+  }
+]

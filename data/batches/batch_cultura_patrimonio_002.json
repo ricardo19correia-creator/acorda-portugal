@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_PAT_0051",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que centro histórico açoriano na Ilha Terceira foi classificado em 1983 como o primeiro bem português inscrito na prestigiada Lista do Património Mundial da UNESCO, após a reconstrução exemplar do terramoto de 1980?",
+    "opcoes": [
+      "Centro Histórico de Angra do Heroísmo (Ilha Terceira)",
+      "Centro Histórico de Ponta Delgada",
+      "Centro Histórico da Horta",
+      "Vila do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Angra do Heroísmo funcionou como escala obrigatória na Carreira das Índias e das Américas durante os séculos XV a XIX.",
+    "fonte": "UNESCO World Heritage Centre / Governo Regional dos Açores",
+    "factClusterId": "fc_pat_angraheroismo1983_01"
+  },
+  {
+    "id": "CULT_PAT_0052",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que floresta relíquia da Era Terciária na ilha da Madeira, cobrindo cerca de 15.000 hectares com espécies endémicas como o til, o vinhático e o loureiro, foi classificada em 1999 como o primeiro (e único) Património Mundial Natural da UNESCO em Portugal?",
+    "opcoes": [
+      "Mata Nacional do Buçaco",
+      "Floresta Laurissilva da Madeira",
+      "Parque Nacional da Peneda-Gerês",
+      "Mata dos Medos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Laurissilva da Madeira alberga a maior área contínua sobrevivente de floresta laurissilva do mundo e espécies protegidas como o Pombo-trocaz.",
+    "fonte": "UNESCO / Instituto das Florestas e Conservação da Natureza da Madeira",
+    "factClusterId": "fc_pat_laurissilva1999_01"
+  },
+  {
+    "id": "CULT_PAT_0053",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que região vinícola demarcada ao longo do rio Douro, delimitada pelo Marquês de Pombal em 1756, foi classificada pela UNESCO em 2001 na categoria de «Paisagem Cultural Evolutiva e Viva»?",
+    "opcoes": [
+      "Região dos Vinhos Verdes",
+      "Península de Setúbal",
+      "Alto Douro Vinhateiro (Património Mundial da UNESCO)",
+      "Região Dão-Lafões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Alto Douro Vinhateiro foi moldado por mais de dois milénios de trabalho humano em socalcos de xisto vertiginosos.",
+    "fonte": "UNESCO / Instituto dos Vinhos do Douro e do Porto (IVDP)",
+    "factClusterId": "fc_pat_altodouro2001_01"
+  },
+  {
+    "id": "CULT_PAT_0054",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que sítio arqueológico no norte de Portugal (Vila Nova de Foz Côa), inscrito na UNESCO em 1998, constitui o maior museu ao ar livre de arte rupestre paleolítica gravada em xisto de todo o mundo?",
+    "opcoes": [
+      "Gruta do Escoural",
+      "Anta Grande do Zambujeiro",
+      "Cromeleque dos Almendres",
+      "Sítios de Arte Rupestre do Vale do Côa (e Siega Verde)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Parque Arqueológico do Vale do Côa reúne milhares de figuras gravadas de cavalos, auroques e cabras há mais de 25.000 anos.",
+    "fonte": "Fundação Côa Parque / Museu do Côa / UNESCO",
+    "factClusterId": "fc_pat_valedocoa1998_01"
+  },
+  {
+    "id": "CULT_PAT_0055",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que paisagem vulcânica singular na ilha do Pico (Açores), com os seus milhares de «currais» de muros de pedra basáltica negra erguidos para proteger as cepas de Verdelho do vento marítimo, foi classificada pela UNESCO em 2004?",
+    "opcoes": [
+      "Paisagem da Cultura da Vinha da Ilha do Pico",
+      "Caldeira das Sete Cidades",
+      "Vinha da Ilha Terceira",
+      "Fajãs de São Jorge"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os currais de pedra basáltica do Pico e as rola-pipas gravadas na lava contam a extraordinária epopeia humana do vinho licoroso.",
+    "fonte": "UNESCO / Parque Natural da Ilha do Pico",
+    "factClusterId": "fc_pat_vinhadopico2004_01"
+  },
+  {
+    "id": "CULT_PAT_0056",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto monumental e paisagístico em Sintra foi classificado em 1995 como a primeira «Paisagem Cultural» inscrita pela UNESCO na Europa, integrando o Palácio da Pena, Palácio Nacional, Castelo dos Mouros e Monserrate?",
+    "opcoes": [
+      "Paisagem de Mafra",
+      "Paisagem Cultural de Sintra (Monte da Lua)",
+      "Paisagem de Arrábida",
+      "Paisagem de Óbidos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sintra é a pioneira mundial na valorização do Romantismo onde a arquitetura exótica e os parques botânicos formam uma simbiose única.",
+    "fonte": "UNESCO / Parques de Sintra - Monte da Lua",
+    "factClusterId": "fc_pat_sintra1995_01"
+  },
+  {
+    "id": "CULT_PAT_0057",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que género musical urbano português, nascido nos bairros populares de Lisboa no século XIX ao som da guitarra portuguesa e da viola e celebrizado mundialmente por Amália Rodrigues, foi proclamado Património Cultural Imaterial da Humanidade pela UNESCO em 2011?",
+    "opcoes": [
+      "O Cante Alentejano",
+      "O Vira Minhoto",
+      "O Fado (Fado de Lisboa)",
+      "O Chula do Douro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Fado foi a primeira manifestação artística e musical portuguesa inscrita na lista representativa da UNESCO.",
+    "fonte": "Museu do Fado / EGEAC / UNESCO Intangible Cultural Heritage",
+    "factClusterId": "fc_pat_fadounesco2011_01"
+  },
+  {
+    "id": "CULT_PAT_0058",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que canto coral tradicional polifónico a capella de homens e mulheres do Baixo Alentejo, interpretado por grupos corais em desfiles e tabernas sem recurso a instrumentos musicais, foi classificado pela UNESCO como Património Imaterial em 2014?",
+    "opcoes": [
+      "Fado de Coimbra",
+      "Cantar ao Desafio",
+      "Martírios de Páscoa",
+      "Cante Alentejano"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Cante Alentejano é composto pelo 'Ponto' (voz solista), pelo 'Alto' e pelo coro (os 'Vogais') que entoam versos de trabalho e saudade.",
+    "fonte": "Casa do Cante em Serpa / Turismo do Alentejo / UNESCO",
+    "factClusterId": "fc_pat_cantealentejano2014_01"
+  },
+  {
+    "id": "CULT_PAT_0059",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que cidade histórica do Algarve foi escolhida como a «Comunidade Representativa» de Portugal na candidatura multinacional da «Dieta Mediterrânica», classificada pela UNESCO como Património Imaterial da Humanidade em 2013?",
+    "opcoes": [
+      "Tavira",
+      "Faro",
+      "Lagos",
+      "Silves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Tavira representou Portugal na candidatura conjunta com Espanha, Itália, Grécia, Marrocos, Chipre e Croácia.",
+    "fonte": "Município de Tavira / UNESCO / Direção-Geral de Agricultura",
+    "factClusterId": "fc_pat_dietamediterranica_tavira_01"
+  },
+  {
+    "id": "CULT_PAT_0060",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que saber-fazer artesanal tradicional da vila de Alcáçovas (Viana do Alentejo), com mais de dois milénios de história na fundição e afinação de campainhas sonoras de bronze e ferro para o gado, foi inscrito na lista de salvaguarda urgente da UNESCO em 2015?",
+    "opcoes": [
+      "Barro Preto de Bisalhães",
+      "Arte Chocalheira (Fabrico Tradicional de Chocalhos)",
+      "Bonecos de Estremoz",
+      "Filigrana de Gondomar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A afinação musical dos chocalhos de Alcáçovas é um segredo passado de geração em geração pelos mestres chocalheiros.",
+    "fonte": "Município de Viana do Alentejo / Museu do Chocalho / UNESCO",
+    "factClusterId": "fc_pat_chocalhosalcacovas2015_01"
+  },
+  {
+    "id": "CULT_PAT_0061",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que processo de olaria ancestral da aldeia de Bisalhães (Vila Real), onde as peças de barro são cozidas em fornos abertos na terra («soenga») e abafadas com caruma e terra ganhando uma cor negra brilhante, foi classificado pela UNESCO em 2016?",
+    "opcoes": [
+      "Olaria de Nisa",
+      "Olaria de São Pedro do Corval",
+      "Processo de Fabrico da Louça Preta de Bisalhães (Barro Preto)",
+      "Barro Vermelho de Barcelos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A queima redutora na soenga em Bisalhães produz uma louça impermeável e negra única no mundo.",
+    "fonte": "Município de Vila Real / UNESCO Intangible Cultural Heritage",
+    "factClusterId": "fc_pat_bisalhaes2016_01"
+  },
+  {
+    "id": "CULT_PAT_0062",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que arte figurativa popular alentejana de moldagem e pintura manual de figuras em barro cozido (pastores, santos, feirantes, damas com manto), com mais de 300 anos de tradição em Estremoz, foi classificada pela UNESCO em 2017?",
+    "opcoes": [
+      "Galo de Barcelos",
+      "Figurado de Nisa",
+      "Presépios de Machado de Castro",
+      "Produção de Figurado em Barro de Estremoz (Bonecos de Estremoz)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Bonecos de Estremoz vestem os trajes tradicionais do Alentejo e são pintados com cores vivas e vidrados artesanais.",
+    "fonte": "Centro UNESCO de Estremoz / Município de Estremoz",
+    "factClusterId": "fc_pat_bonecosestremoz2017_01"
+  },
+  {
+    "id": "CULT_PAT_0063",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que arte ancestral de treino e caça tradicional com aves de rapina (falcões e açores), preservada na Falcoaria Real de Salvaterra de Magos e no Centro de Falcoaria, foi inscrita na lista representativa da UNESCO em 2016?",
+    "opcoes": [
+      "Falcoaria Portuguesa (Prática Viva do Património Humano)",
+      "Equitação à Portuguesa",
+      "Caça Submarina",
+      "Tiro aos Pratos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Falcoaria Real de Salvaterra de Magos foi edificada no século XVIII por D. José I e é um polo de excelência mundial.",
+    "fonte": "Município de Salvaterra de Magos / Falcoaria Real / UNESCO",
+    "factClusterId": "fc_pat_falcoaria2016_01"
+  },
+  {
+    "id": "CULT_PAT_0064",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que universidade histórica portuguesa fundada em 1290 por D. Dinis e fixada no Paço das Escolas com a Biblioteca Joanina, o Colégio de Jesus e o Jardim Botânico na Rua da Sofia, foi inscrita no Património Mundial da UNESCO em 2013?",
+    "opcoes": [
+      "Universidade de Évora",
+      "Universidade de Coimbra — Alta e Sofia",
+      "Universidade de Lisboa",
+      "Universidade do Porto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Universidade de Coimbra foi classificada pela sua influência determinante na criação das universidades do mundo lusófono.",
+    "fonte": "Universidade de Coimbra / UNESCO World Heritage",
+    "factClusterId": "fc_pat_coimbraunesco2013_01"
+  },
+  {
+    "id": "CULT_PAT_0065",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto monumental joanino do século XVIII compreendendo o Palácio Real, a Basílica com 6 órgãos históricos, o Convento Franciscano, o Jardim do Cerco e a Tapada Nacional de 1.200 hectares, foi classificado pela UNESCO em 2019?",
+    "opcoes": [
+      "Palácio Nacional de Queluz",
+      "Palácio Nacional da Ajuda",
+      "Real Edifício de Mafra (Palácio, Basílica, Convento, Jardim do Cerco e Tapada)",
+      "Palácio das Necessidades"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Real Edifício de Mafra representa a síntese barroca do absolutismo e foi erguido com o ouro e os diamantes de Minas Gerais.",
+    "fonte": "Palácio Nacional de Mafra / Tapada Nacional de Mafra / UNESCO",
+    "factClusterId": "fc_pat_mafraunesco2019_01"
+  },
+  {
+    "id": "CULT_PAT_0066",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que santuário católico em Braga com uma monumental escadaria barroca de 573 degraus, capelas da Paixão e o mais antigo funicular do mundo a mover-se por contrapeso de água (1882), foi classificado pela UNESCO em 2019?",
+    "opcoes": [
+      "Santuário do Sameiro",
+      "Santuário da Peneda",
+      "Santuário da Penha em Guimarães",
+      "Santuário do Bom Jesus do Monte em Braga"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Bom Jesus do Monte é o expoente dos Sacri Monti (Montes Sagrados) europeus inspirados em Jerusalém.",
+    "fonte": "Confraria do Bom Jesus / Município de Braga / UNESCO",
+    "factClusterId": "fc_pat_bomjesusunesco2019_01"
+  },
+  {
+    "id": "CULT_PAT_0067",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que centro histórico do Minho classificado pela UNESCO em 2001 («Berço da Nacionalidade Portuguesa») viu a sua classificação ser alargada em setembro de 2023 para incluir a histórica Zona de Couros?",
+    "opcoes": [
+      "Centro Histórico de Guimarães e Zona de Couros",
+      "Centro Histórico de Braga",
+      "Centro Histórico de Barcelos",
+      "Centro Histórico de Viana do Castelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Zona de Couros de Guimarães preserva os tanques medievais de granito onde os mestres curtidores tratavam as peles junto ao rio de Couros.",
+    "fonte": "Município de Guimarães / UNESCO World Heritage Centre (Riade 2023)",
+    "factClusterId": "fc_pat_guimaraescouros2023_01"
+  },
+  {
+    "id": "CULT_PAT_0068",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que praça-forte alentejana fortificada do século XVII, com o maior conjunto de fortificações abaluartadas do mundo em forma de estrela (Forte da Graça, Forte de Santa Luzia e Aqueduto da Amoreira), foi inscrita na UNESCO em 2012?",
+    "opcoes": [
+      "Praça-Forte de Almeida",
+      "Cidade-Quartel Fronteiriça de Elvas e suas Fortificações",
+      "Fortaleza de Valença",
+      "Castelo de Marvão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Elvas foi a chave de defesa da soberania portuguesa durante a Guerra da Restauração face à vizinha praça espanhola de Badajoz.",
+    "fonte": "Câmara Municipal de Elvas / UNESCO",
+    "factClusterId": "fc_pat_elvasfortificacoes2012_01"
+  },
+  {
+    "id": "CULT_PAT_0069",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Quantos sítios e bens materiais portugueses estão classificados no total pela UNESCO como Património Mundial da Humanidade (incluindo bens culturais e o bem natural da Laurissilva)?",
+    "opcoes": [
+      "10 Bens",
+      "25 Bens",
+      "17 Bens de Património Mundial",
+      "5 Bens"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal possui 16 bens culturais e 1 bem natural na Lista do Património Mundial da UNESCO.",
+    "fonte": "Comissão Nacional da UNESCO (MNE) / DGPC",
+    "factClusterId": "fc_pat_totalbensunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0070",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que complexo religioso medieval templário fundado em 1160 pelo Mestre Gualdim Pais no cimo de uma colina sobre a cidade de Tomar foi inscrito na UNESCO em 1983?",
+    "opcoes": [
+      "Mosteiro de Alcobaça",
+      "Mosteiro da Batalha",
+      "Castelo de Almourol",
+      "Convento de Cristo em Tomar"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Convento de Cristo foi a sede dos Cavaleiros Templários e posteriormente da Ordem de Cristo liderada pelo Infante D. Henrique.",
+    "fonte": "DGPC / Convento de Cristo / UNESCO",
+    "factClusterId": "fc_pat_conventodecristo1983_01"
+  },
+  {
+    "id": "CULT_PAT_0071",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que centro histórico medieval muralhado do Alentejo, com vestígios da época romana, palácios quinhentistas e a imponente Sé Catedral gótica, foi classificado na UNESCO em 1986 como «cidade-museu»?",
+    "opcoes": [
+      "Centro Histórico de Évora",
+      "Centro Histórico de Beja",
+      "Centro Histórico de Portalegre",
+      "Centro Histórico de Monsaraz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Évora foi residência preferida dos reis da 2.ª Dinastia nos séculos XV e XVI e preserva a harmonia do casario branco com faixas ocres e azuis.",
+    "fonte": "Câmara Municipal de Évora / UNESCO",
+    "factClusterId": "fc_pat_evoraunesco1986_01"
+  },
+  {
+    "id": "CULT_PAT_0072",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que mosteiro da Ordem de Cister no distrito de Leiria, onde se encontram os magníficos túmulos góticos esculpidos de D. Pedro I e Inês de Castro, foi inscrito no Património Mundial da UNESCO em 1989?",
+    "opcoes": [
+      "Mosteiro da Batalha",
+      "Mosteiro de Santa Maria de Alcobaça",
+      "Mosteiro dos Jerónimos",
+      "Mosteiro de Tibães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro de Alcobaça possui a maior abóbada gótica de Portugal e uma monumental Sala dos Reis forrada a azulejos históricos.",
+    "fonte": "DGPC / Mosteiro de Alcobaça / UNESCO",
+    "factClusterId": "fc_pat_alcobacaunesco1989_01"
+  },
+  {
+    "id": "CULT_PAT_0073",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que centro histórico urbano no norte de Portugal (classificado na UNESCO em 1996), estendendo-se pela encosta granítica da Sé até à Ribeira do Douro com a Ponte Luiz I e o Mosteiro da Serra do Pilar em Gaia, é o:",
+    "opcoes": [
+      "Centro Histórico de Guimarães",
+      "Centro Histórico de Viana do Castelo",
+      "Centro Histórico do Porto, Ponte Luiz I e Mosteiro da Serra do Pilar",
+      "Centro Histórico de Lamego"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Porto foi classificado pela sua paisagem urbana contínua com mais de mil anos de história mercantil e marítima.",
+    "fonte": "Câmara Municipal do Porto / UNESCO World Heritage",
+    "factClusterId": "fc_pat_portounesco1996_01"
+  },
+  {
+    "id": "CULT_PAT_0074",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que mosteiro dominicano no distrito de Leiria, fundado em cumprimento de uma promessa de D. João I pela vitória de 1385 e obra-prima do gótico flamejante e manuelino, foi inscrito na UNESCO em 1983?",
+    "opcoes": [
+      "Mosteiro de Alcobaça",
+      "Mosteiro de Mafra",
+      "Mosteiro de Jesus de Setúbal",
+      "Mosteiro de Santa Maria da Vitória (Mosteiro da Batalha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro da Batalha acolhe a Capela do Fundador com o túmulo de D. João I e D. Filipa de Lencastre e as Capelas Imperfeitas.",
+    "fonte": "DGPC / Mosteiro da Batalha / UNESCO",
+    "factClusterId": "fc_pat_batalhaunesco1983_01"
+  },
+  {
+    "id": "CULT_PAT_0075",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que dois monumentos emblemáticos de Lisboa situados na foz do rio Tejo em Belém foram conjuntamente classificados como Património Mundial da UNESCO logo na primeira lista portuguesa de 1983?",
+    "opcoes": [
+      "Mosteiro dos Jerónimos e Torre de Belém",
+      "Castelo de São Jorge e Sé de Lisboa",
+      "Aqueduto das Águas Livres e Mãe d'Água",
+      "Basílica da Estrela e Panteão Nacional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Jerónimos e a Torre de Belém são os símbolos universais da Era dos Descobrimentos e da arquitetura manuelina.",
+    "fonte": "DGPC / UNESCO World Heritage Centre",
+    "factClusterId": "fc_pat_jeronimosbelem1983_01"
+  },
+  {
+    "id": "CULT_PAT_0076",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que comissão nacional permanente, sediada no Palácio das Necessidades em Lisboa sob a égide do Ministério dos Negócios Estrangeiros, é responsável pela coordenação das candidaturas de Portugal à UNESCO?",
+    "opcoes": [
+      "Instituto Camões",
+      "Comissão Nacional da UNESCO (CNU)",
+      "Direção-Geral do Património Cultural",
+      "Conselho Nacional de Cultura"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A CNU promove os valores da educação, ciência, cultura e informação e acompanha a Lista Indicativa de Portugal.",
+    "fonte": "Comissão Nacional da UNESCO / Portal Diplomático",
+    "factClusterId": "fc_pat_comissaonacionalunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0077",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que ilhas oceânicas desabitadas ao largo de Peniche (Arquipélago das Berlengas) foram classificadas pela UNESCO em 2011 como Reserva Mundial da Biosfera?",
+    "opcoes": [
+      "Ilhas Selvagens",
+      "Ilhas Desertas",
+      "Reserva da Biosfera das Berlengas (Peniche)",
+      "Ilhéus das Formigas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Berlenga Grande abriga espécies marinhas e aves protegidas como a Airo e o Forte de São João Baptista.",
+    "fonte": "ICNF / Município de Peniche / UNESCO Man and the Biosphere (MAB)",
+    "factClusterId": "fc_pat_berlengasbiosfera_01"
+  },
+  {
+    "id": "CULT_PAT_0078",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Quantas Reservas Mundiais da Biosfera da UNESCO existem atualmente em Portugal (incluindo Gerês-Xurés, Berlengas, Paul do Boquilobo, Santana na Madeira e seis ilhas nos Açores)?",
+    "opcoes": [
+      "5 Reservas",
+      "20 Reservas",
+      "2 Reservas",
+      "12 Reservas da Biosfera da UNESCO"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Portugal possui 12 Reservas da Biosfera aprovadas pelo Programa MAB da UNESCO, sendo 4 no Continente, 1 na Madeira, 6 nos Açores e 1 transfronteiriça (Gerês-Xurés e Tejo/Tajo Internacional).",
+    "fonte": "Comissão Nacional da UNESCO / ICNF",
+    "factClusterId": "fc_pat_reservasdabiosferatotal_01"
+  },
+  {
+    "id": "CULT_PAT_0079",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que geoparque português no distrito de Aveiro (concelho de Arouca), classificado pela UNESCO na Rede Europeia e Global de Geoparques, é internacionalmente célebre pelas «Pedras Parideiras» da Castanheira e pelas trilobites gigantes de Canelas?",
+    "opcoes": [
+      "Arouca Geopark (Geoparque de Arouca)",
+      "Geopark Naturtejo",
+      "Geopark Terras de Cavaleiros",
+      "Geoparque Açores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O fenómeno geológico único das pedras que paralisam pedra (pedras parideiras) ocorre apenas na aldeia da Castanheira na Serra da Freita.",
+    "fonte": "Arouca Geopark / UNESCO Global Geoparks",
+    "factClusterId": "fc_pat_aroucageopark_01"
+  },
+  {
+    "id": "CULT_PAT_0080",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que geoparque no centro e interior de Portugal (Beira Baixa), o primeiro Geoparque Mundial da UNESCO criado em Portugal em 2006, integra os fósseis de Penha Garcia, as Portas de Ródão e os Ichnofósseis do rio Ponsul?",
+    "opcoes": [
+      "Arouca Geopark",
+      "Geopark Naturtejo da Meseta Meridional",
+      "Geopark Estrela",
+      "Geoparque Oeste"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Naturtejo abrange os concelhos de Castelo Branco, Idanha-a-Nova, Nisa, Oleiros, Penamacor, Proença-a-Nova e Vila Velha de Ródão.",
+    "fonte": "Geopark Naturtejo / UNESCO",
+    "factClusterId": "fc_pat_naturtejo2006_01"
+  },
+  {
+    "id": "CULT_PAT_0081",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que geoparque na Serra da Estrela, classificado como Geoparque Mundial da UNESCO em 2020, preserva a maior concentração de vestígios do modelado glaciário da Península Ibérica (como o Vale Glaciário do Zêzere)?",
+    "opcoes": [
+      "Arouca Geopark",
+      "Naturtejo",
+      "Estrela Geopark (Geoparque Mundial da UNESCO Estrela)",
+      "Terras de Cavaleiros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estrela Geopark reúne 9 municípios e apresenta moreias, circos glaciários e lagoas de altitude formadas há 20.000 anos.",
+    "fonte": "Estrela Geopark / Instituto Politécnico da Guarda / UNESCO",
+    "factClusterId": "fc_pat_estrelageopark2020_01"
+  },
+  {
+    "id": "CULT_PAT_0082",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que reserva natural no concelho da Golegã, classificada em 1981 como a primeira Reserva da Biosfera da UNESCO em Portugal continental, é uma zona húmida vital para a nidificação de milhares de garças?",
+    "opcoes": [
+      "Reserva Natural das Dunas de São Jacinto",
+      "Reserva Natural do Estuário do Sado",
+      "Reserva da Ria Formosa",
+      "Reserva Natural do Paul do Boquilobo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Paul do Boquilobo na confluência do rio Almonda com o Tejo é o mais antigo santuário de garças de Portugal.",
+    "fonte": "ICNF / Município da Golegã / UNESCO MAB",
+    "factClusterId": "fc_pat_pauldoboquilobo_01"
+  },
+  {
+    "id": "CULT_PAT_0083",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que reserva transfronteiriça da biosfera, partilhada entre o Alto Minho e Trás-os-Montes em Portugal e a Galiza em Espanha, protege os ecossistemas montanhosos do único parque nacional português?",
+    "opcoes": [
+      "Reserva da Biosfera Transfronteiriça Gerês-Xurés",
+      "Reserva da Biosfera da Meseta Ibérica",
+      "Reserva do Tejo Internacional",
+      "Reserva do Guadiana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Reserva Gerês-Xurés foi aprovada em 2009 e abriga espécies endémicas como o garrano selvagem e o lírio-do-gerês.",
+    "fonte": "ICNF / Xunta de Galicia / UNESCO MAB",
+    "factClusterId": "fc_pat_geresxures2009_01"
+  },
+  {
+    "id": "CULT_PAT_0084",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que reserva da biosfera transfronteiriça partilhada entre o nordeste transmontano (Bragança, Miranda, Vinhais, Mogadouro, Vimioso) e as províncias espanholas de Zamora e Salamanca é a maior da Europa?",
+    "opcoes": [
+      "Reserva Gerês-Xurés",
+      "Reserva da Biosfera Transfronteiriça Meseta Ibérica",
+      "Reserva do Douro Internacional",
+      "Reserva da Serra da Malcata"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Meseta Ibérica foi inscrita pela UNESCO em 2015 e cobre mais de 1,1 milhões de hectares com uma enorme densidade de lobo-ibérico e cegonha-negra.",
+    "fonte": "ZASNET / UNESCO MAB",
+    "factClusterId": "fc_pat_mesetaiberica2015_01"
+  },
+  {
+    "id": "CULT_PAT_0085",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que importante documento e arquivo histórico português foi o primeiro a ser inscrito no Registo da Memória do Mundo da UNESCO («Memory of the World») em 2005?",
+    "opcoes": [
+      "Tratado de Tordesilhas",
+      "Crónica de D. João I",
+      "Carta de Pêro Vaz de Caminha (1500)",
+      "Os Lusíadas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Carta de Pêro Vaz de Caminha anunciando o achamento do Brasil é considerada a certidão de nascimento do Brasil moderno.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / UNESCO Memory of the World",
+    "factClusterId": "fc_pat_cartacaminha2005_01"
+  },
+  {
+    "id": "CULT_PAT_0086",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que manuscrito diplomático bilateral preservado no Arquivo Nacional da Torre do Tombo em Lisboa e no Arquivo Geral de Simancas em Espanha foi inscrito no Registo da Memória do Mundo da UNESCO em 2007?",
+    "opcoes": [
+      "O Tratado de Alcanizes",
+      "O Tratado de Windsor",
+      "O Tratado de Zamora",
+      "O Tratado de Tordesilhas (1494)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Tordesilhas foi classificado pela UNESCO como documento fundador da globalização e do direito marítimo internacional.",
+    "fonte": "Torre do Tombo / Arquivo de Simancas / UNESCO",
+    "factClusterId": "fc_pat_tordesilhasunescomemory_01"
+  },
+  {
+    "id": "CULT_PAT_0087",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que diário de bordo quinhentista preservado na Biblioteca Pública Municipal do Porto, relato anónimo da primeira viagem de Vasco da Gama à Índia (1497-1499), foi inscrito na Memória do Mundo da UNESCO em 2013?",
+    "opcoes": [
+      "Relação da Primeira Viagem de Vasco da Gama à Índia (atribuído a Álvaro Velho)",
+      "Diário de Pedro Álvares Cabral",
+      "Livro de Duarte Barbosa",
+      "Roteiro de D. João de Castro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O manuscrito original descreve o contacto pioneiro com Calecute e a rota do Cabo da Boa Esperança.",
+    "fonte": "Biblioteca Pública Municipal do Porto / UNESCO",
+    "factClusterId": "fc_pat_roteirovascodagama_01"
+  },
+  {
+    "id": "CULT_PAT_0088",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto histórico documental do Ministério dos Negócios Estrangeiros de Portugal que regista a emissão de vistos diplomáticos pelo cônsul em Bordéus em 1940 foi inscrito no Registo da Memória do Mundo da UNESCO em 2017?",
+    "opcoes": [
+      "Arquivo Salazar",
+      "Vistos de Aristides de Sousa Mendes (Arquivo de Bordéus)",
+      "Correspondência de Pombal",
+      "Registo de Passaportes de Lisboa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O arquivo documental de Aristides de Sousa Mendes atesta o resgate heroico de mais de 30.000 pessoas das garras do nazismo.",
+    "fonte": "Instituto Diplomático / Torre do Tombo / UNESCO",
+    "factClusterId": "fc_pat_sousamendesmemoryoftheworld_01"
+  },
+  {
+    "id": "CULT_PAT_0089",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que vila fortificada do Alentejo (no concelho de Reguengos de Monsaraz), situada no cimo de uma escarpa com vista para o grande lago de Alqueva, integra a Lista Indicativa de Portugal ao Património Mundial?",
+    "opcoes": [
+      "Marvão",
+      "Castelo de Vide",
+      "Monsaraz (Vila Medieval de Monsaraz)",
+      "Mértola"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Monsaraz é um dos mais espetaculares povoados medievais fortificados de Portugal, com ruas de xisto e cal branca.",
+    "fonte": "Município de Reguengos de Monsaraz / Comissão Nacional da UNESCO",
+    "factClusterId": "fc_pat_monsarazunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0090",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que vila raiana alentejana (concelho de Marvão), alcandorada a 860 metros de altitude no cimo de um penhasco escarpado da Serra de São Mamede, integra a Lista Indicativa de Portugal à UNESCO?",
+    "opcoes": [
+      "Castelo Rodrigo",
+      "Almeida",
+      "Linhares da Beira",
+      "Vila e Castelo de Marvão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Marvão foi descrita por José Saramago como o lugar onde 'se avista toda a terra'.",
+    "fonte": "Município de Marvão / CNU",
+    "factClusterId": "fc_pat_marvaounesco_01"
+  },
+  {
+    "id": "CULT_PAT_0091",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que vila-museu islâmica e medieval nas margens do rio Guadiana (Alentejo), célebre pelo seu campo arqueológico com mesquita convertida em igreja matriz, integra a Lista Indicativa da UNESCO?",
+    "opcoes": [
+      "Mértola (Vila Museu de Mértola)",
+      "Serpa",
+      "Moura",
+      "Alcoutim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Campo Arqueológico de Mértola fundado pelo professor Cláudio Torres revelou as mais importantes oficinas islâmicas de Portugal.",
+    "fonte": "Campo Arqueológico de Mértola / Município de Mértola / UNESCO",
+    "factClusterId": "fc_pat_mertolaunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0092",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que aldeia histórica do concelho de Almeida (Guarda), construída como uma cidadela fortificada em forma de estrela de 12 pontas com fossos e portas monumentais, integra o conjunto das Fortalezas Abaluartadas da Raia na Lista Indicativa da UNESCO?",
+    "opcoes": [
+      "Castelo Mendo",
+      "Praça-Forte de Almeida",
+      "Sortelha",
+      "Vilar Maior"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Praça-Forte de Almeida e Valença do Minho constituem obras-primas da arquitetura militar moderna na fronteira com Espanha.",
+    "fonte": "Município de Almeida / DGPC",
+    "factClusterId": "fc_pat_almeidaunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0093",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto florestal e conventual do século XVII na Serra do Buçaco (Mealhada), plantado pelos Carmelitas Descalços com o Convento de Santa Cruz e espécies arbóreas gigantes de todo o mundo, integra a Lista Indicativa da UNESCO?",
+    "opcoes": [
+      "Mata de Leiria",
+      "Mata dos Medos",
+      "Mata Nacional e Deserto dos Carmelitas do Buçaco",
+      "Parque da Pena"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Mata do Buçaco foi protegida por bulas papais no século XVII com pena de excomunhão para quem cortasse árvores.",
+    "fonte": "Fundação Mata do Bussaco / Município da Mealhada",
+    "factClusterId": "fc_pat_bussacounesco_01"
+  },
+  {
+    "id": "CULT_PAT_0094",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que bairro e traçado urbano pombalino do século XVIII em Lisboa, desenhado após o terramoto de 1755 em grelha geométrica pioneira com estruturas de gaiola antissísmica de madeira, integra a Lista Indicativa da UNESCO?",
+    "opcoes": [
+      "Bairro Alto",
+      "Alfama",
+      "Alcântara",
+      "Baixa Pombalina de Lisboa (Lisboa Pombalina)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Baixa Pombalina é o primeiro exemplo europeu de planeamento urbano iluminista e engenharia antissísmica pré-fabricada em larga escala.",
+    "fonte": "Câmara Municipal de Lisboa / DGPC / UNESCO",
+    "factClusterId": "fc_pat_baixapombalinaunesco_01"
+  },
+  {
+    "id": "CULT_PAT_0095",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que histórico sistema de caminhos e rotas de peregrinação que atravessa Portugal de sul a norte rumo ao túmulo do Apóstolo em Santiago de Compostela foi classificado na Lista Indicativa nacional da UNESCO?",
+    "opcoes": [
+      "Caminhos de Santiago em Portugal (Caminho Português e Caminho da Costa)",
+      "Rota Vicentina",
+      "Rota do Românico",
+      "Estrada Nacional 2"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Caminho Português de Santiago é a segunda rota mais percorrida do mundo a seguir ao Caminho Francês.",
+    "fonte": "Turismo de Portugal / Federação Portuguesa do Caminho de Santiago",
+    "factClusterId": "fc_pat_caminhosdesantiago_01"
+  },
+  {
+    "id": "CULT_PAT_0096",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que antiga fundação hospitalar do século XV nas Caldas da Rainha, criada pela Rainha D. Leonor em 1485 em redor das águas sulfurosas medicinais, é o mais antigo hospital termal do mundo em funcionamento contínuo?",
+    "opcoes": [
+      "Termas de São Pedro do Sul",
+      "Hospital Termal Rainha D. Leonor (Caldas da Rainha)",
+      "Termas de Monfortinho",
+      "Termas do Vidago"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Leonor vendeu as suas próprias joias de ouro para financiar as obras do hospital termal das Caldas da Rainha.",
+    "fonte": "Centro Hospitalar do Oeste / Município das Caldas da Rainha",
+    "factClusterId": "fc_pat_hospitaltermalcaldas_01"
+  },
+  {
+    "id": "CULT_PAT_0097",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto monumental de 12 aldeias medievais fortificadas no interior da Beira Interior (Almeida, Belmonte, Castelo Mendo, Castelo Novo, Castelo Rodrigo, Idanha-a-Velha, Linhares da Beira, Marialva, Monsanto, Piódão, Sortelha e Trancoso) é conhecido como:",
+    "opcoes": [
+      "Aldeias do Xisto",
+      "Aldeias de Montanha",
+      "Rede das Aldeias Históricas de Portugal (AHP)",
+      "Aldeias Vinhateiras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Rede de Aldeias Históricas de Portugal preserva o legado de castelos e lendas da fundação da fronteira nacional.",
+    "fonte": "Associação de Desenvolvimento Turístico Aldeias Históricas de Portugal / Turismo do Centro",
+    "factClusterId": "fc_pat_aldeiashistoricas_01"
+  },
+  {
+    "id": "CULT_PAT_0098",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que rede turística de 27 aldeias rurais de montanha nas serras da Lousã, Açor, Alvão e Estrela (como Piódão, Talasnal, Cerdeira e Gondramaz), construídas em xisto escuro integrado na paisagem florestal, é a:",
+    "opcoes": [
+      "Rede das Aldeias Históricas",
+      "Rede das Aldeias Ribeirinhas",
+      "Rede das Aldeias de Portugal",
+      "Rede das Aldeias do Xisto (ADXTUR)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Aldeias do Xisto são um exemplo internacional de regeneração do património rural e turismo de natureza sustentável.",
+    "fonte": "ADXTUR - Agência para o Desenvolvimento Turístico das Aldeias do Xisto",
+    "factClusterId": "fc_pat_aldeiasdoxisto_01"
+  },
+  {
+    "id": "CULT_PAT_0099",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que estrada cénica de 738,5 quilómetros que atravessa Portugal de norte a sul pelo interior (de Chaves a Faro através de 35 municípios e 11 distritos) é a mais longa estrada de Portugal e a terceira do mundo a ligar um país inteiro?",
+    "opcoes": [
+      "Estrada Nacional 2 (EN2)",
+      "Estrada Nacional 1",
+      "Estrada Nacional 125",
+      "Estrada Nacional 10"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A EN2 (conhecida como a 'Route 66 Portuguesa') cruza quatro serras, 11 rios e todas as paisagens do interior de Portugal.",
+    "fonte": "Associação de Municípios da Rota da Estrada Nacional 2 / Turismo de Portugal",
+    "factClusterId": "fc_pat_estradanacional2_01"
+  },
+  {
+    "id": "CULT_PAT_0100",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que povoação no concelho de Idanha-a-Nova, com as suas casas de pedra encaixadas entre penedos gigantes de granito no cabeço de Monsanto, foi eleita em 1938 «A Aldeia Mais Portuguesa de Portugal» com a atribuição do Galo de Prata?",
+    "opcoes": [
+      "Piódão",
+      "Sortelha",
+      "Monsanto (Idanha-a-Nova)",
+      "Linhares da Beira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Galo de Prata encima a Torre de Lucano no centro histórico de Monsanto.",
+    "fonte": "Município de Idanha-a-Nova / Aldeias Históricas de Portugal",
+    "factClusterId": "fc_pat_monsantogalodeprata_01"
+  }
+]

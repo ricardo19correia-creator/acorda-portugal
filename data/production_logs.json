@@ -1,0 +1,1142 @@
+[
+  {
+    "batchId": "BATCH_PT_HIST_001",
+    "tema": "Portugal",
+    "subtema": "História de Portugal",
+    "data": "2026-08-26T00:19:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 94.5,
+    "difficultyDistribution": {
+      "facil": 12,
+      "media": 20,
+      "dificil": 12,
+      "especialista": 6
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 13,
+      "C": 12,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_PT_GEO_001",
+    "tema": "Portugal",
+    "subtema": "Geografia de Portugal",
+    "data": "2026-08-26T00:20:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 95,
+    "difficultyDistribution": {
+      "facil": 12,
+      "media": 20,
+      "dificil": 12,
+      "especialista": 6
+    },
+    "answerDistribution": {
+      "A": 12,
+      "B": 13,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_PT_CULT_001",
+    "tema": "Portugal",
+    "subtema": "Cultura Portuguesa",
+    "data": "2026-08-26T00:30:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 96.2,
+    "difficultyDistribution": {
+      "facil": 18,
+      "media": 20,
+      "dificil": 8,
+      "especialista": 4
+    },
+    "answerDistribution": {
+      "A": 14,
+      "B": 12,
+      "C": 13,
+      "D": 11
+    }
+  },
+  {
+    "batchId": "BATCH_PT_MONUM_001",
+    "tema": "Portugal",
+    "subtema": "Monumentos",
+    "data": "2026-08-26T00:31:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 96.8,
+    "difficultyDistribution": {
+      "facil": 28,
+      "media": 14,
+      "dificil": 8,
+      "especialista": 0
+    },
+    "answerDistribution": {
+      "A": 18,
+      "B": 16,
+      "C": 10,
+      "D": 6
+    }
+  },
+  {
+    "batchId": "BATCH_CINE_PT_001",
+    "tema": "Cinema e Televisão",
+    "subtema": "Cinema Português",
+    "data": "2026-08-26T00:46:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 97.4,
+    "difficultyDistribution": {
+      "facil": 16,
+      "media": 20,
+      "dificil": 10,
+      "especialista": 4
+    },
+    "answerDistribution": {
+      "A": 14,
+      "B": 12,
+      "C": 12,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_PT_CID_001",
+    "tema": "Portugal",
+    "subtema": "Cidades",
+    "data": "2026-08-26T00:48:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 96.5,
+    "difficultyDistribution": {
+      "facil": 38,
+      "media": 12,
+      "dificil": 0,
+      "especialista": 0
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 13,
+      "C": 12,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_CIEN_CIENT_001",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Cientistas Portugueses",
+    "data": "2026-08-26T01:34:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 97.8,
+    "difficultyDistribution": {
+      "facil": 12,
+      "media": 20,
+      "dificil": 13,
+      "especialista": 5
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_POL_PRES_001",
+    "tema": "Portugal Político",
+    "subtema": "Presidentes da República",
+    "data": "2026-08-26T01:39:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 97.5,
+    "difficultyDistribution": {
+      "facil": 13,
+      "media": 20,
+      "dificil": 12,
+      "especialista": 5
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_GAST_PRAT_001",
+    "tema": "Gastronomia",
+    "subtema": "Pratos Tradicionais",
+    "data": "2026-08-26T01:47:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 98,
+    "difficultyDistribution": {
+      "facil": 24,
+      "media": 20,
+      "dificil": 3,
+      "especialista": 3
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_CINE_TV_001",
+    "tema": "Cinema e Televisão",
+    "subtema": "Televisão Portuguesa",
+    "data": "2026-08-26T01:48:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 97.6,
+    "difficultyDistribution": {
+      "facil": 23,
+      "media": 21,
+      "dificil": 6,
+      "especialista": 0
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_FUT_FEM_001",
+    "tema": "Futebol Português",
+    "subtema": "Futebol Feminino",
+    "data": "2026-08-26T01:49:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 97.4,
+    "difficultyDistribution": {
+      "facil": 18,
+      "media": 26,
+      "dificil": 5,
+      "especialista": 1
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_PT_PRAIA_001",
+    "tema": "Portugal",
+    "subtema": "Praias",
+    "data": "2026-08-26T01:50:00.000Z",
+    "quantidadeGerada": 50,
+    "quantidadeValidada": 50,
+    "quantidadeAprovada": 50,
+    "quantidadeRejeitada": 0,
+    "quantidadeDuplicada": 0,
+    "quantidadeNeedsReview": 0,
+    "qualityAverage": 98.2,
+    "difficultyDistribution": {
+      "facil": 24,
+      "media": 21,
+      "dificil": 5,
+      "especialista": 0
+    },
+    "answerDistribution": {
+      "A": 13,
+      "B": 12,
+      "C": 13,
+      "D": 12
+    }
+  },
+  {
+    "batchId": "BATCH_PT_VILAS_001",
+    "timestamp": "2026-08-26T04:59:50.586Z",
+    "category": "portugal",
+    "theme": "Portugal",
+    "subtheme": "Vilas e Aldeias",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PT_REGIOES_001",
+    "timestamp": "2026-08-26T05:03:45.680Z",
+    "category": "portugal",
+    "theme": "Portugal",
+    "subtema": "Regiões",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_ESTADIOS_001",
+    "timestamp": "2026-08-26T05:04:38.936Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Estádios",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_DINASTIAS_001",
+    "timestamp": "2026-08-26T05:05:45.914Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Dinastias Portuguesas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CIEN_INVENCOES_001",
+    "timestamp": "2026-08-26T05:06:56.879Z",
+    "category": "ciencia-tecnologia",
+    "theme": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_VINHOS_001",
+    "timestamp": "2026-08-26T05:08:20.109Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Vinhos de Portugal",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_PATRIMONIO_001",
+    "timestamp": "2026-08-26T05:10:28.094Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Património da Humanidade",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_MUSEUS_001",
+    "timestamp": "2026-08-26T11:55:48.101Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Museus de Portugal",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_MITOS_001",
+    "timestamp": "2026-08-26T11:57:03.551Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_PAO_AZEITE_001",
+    "timestamp": "2026-08-26T11:58:35.635Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_MARISCO_001",
+    "timestamp": "2026-08-26T12:00:00.269Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_MUSEUS_002",
+    "timestamp": "2026-08-26T12:40:42.586Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Museus de Portugal",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_MITOS_002",
+    "timestamp": "2026-08-26T12:42:01.374Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Mitos & Lendas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_PAO_AZEITE_002",
+    "timestamp": "2026-08-26T12:43:08.903Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_MARISCO_002",
+    "timestamp": "2026-08-26T12:44:08.466Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_FUTSAL_001",
+    "timestamp": "2026-08-26T12:47:23.838Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Futsal",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_PRAIA_001",
+    "timestamp": "2026-08-26T12:48:27.867Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Futebol de Praia",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_DERBIS_001",
+    "timestamp": "2026-08-26T12:49:33.722Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Dérbis & Clássicos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_BATALHAS_001",
+    "timestamp": "2026-08-26T12:50:40.629Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Batalhas Históricas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_JOGADORAS_001",
+    "timestamp": "2026-08-26T12:53:32.326Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Jogadoras",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_LIGA_001",
+    "timestamp": "2026-08-26T12:54:34.456Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Liga Portuguesa",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_BATALHAS_002",
+    "timestamp": "2026-08-26T12:55:51.343Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Batalhas Históricas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PT_VILAS_002",
+    "timestamp": "2026-08-26T12:56:54.307Z",
+    "category": "portugal",
+    "theme": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_MOMENTOS_001",
+    "timestamp": "2026-08-26T13:00:47.769Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Momentos Marcantes",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_FUT_CURIOS_001",
+    "timestamp": "2026-08-26T13:02:03.544Z",
+    "category": "futebol-portugues",
+    "theme": "Futebol Português",
+    "subtema": "Curiosidades do Futebol",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PT_GASTRONOMIA_001",
+    "timestamp": "2026-08-26T13:03:15.074Z",
+    "category": "portugal",
+    "theme": "Portugal",
+    "subtema": "Gastronomia Portuguesa",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_NAVEGACOES_001",
+    "timestamp": "2026-08-26T13:04:25.181Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Grandes Navegações",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_DINASTIAS_001",
+    "timestamp": "2026-08-26T13:10:27.300Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Dinastias Portuguesas",
+    "count": 0,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_DINASTIAS_002",
+    "timestamp": "2026-08-26T13:11:05.748Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Dinastias Portuguesas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_FIGURAS_001",
+    "timestamp": "2026-08-26T13:12:20.629Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Figuras Históricas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_ARQUITETURA_001",
+    "timestamp": "2026-08-26T13:14:03.678Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Arquitetura & Monumentos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_FESTAS_001",
+    "timestamp": "2026-08-26T13:15:28.330Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Festas & Romarias",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_LINGUA_001",
+    "timestamp": "2026-08-26T13:30:28.979Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Língua Portuguesa",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_TRATADOS_001",
+    "timestamp": "2026-08-26T13:31:42.482Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Tratados & Diplomacia",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_PATRIMONIO_002",
+    "timestamp": "2026-08-26T13:33:06.937Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Património da Humanidade",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_TEATRO_001",
+    "timestamp": "2026-08-26T13:34:18.603Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Teatro",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_REPUBLICA_001",
+    "timestamp": "2026-08-26T13:37:03.393Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "República & Século XX",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_MEDIEVAL_001",
+    "timestamp": "2026-08-26T13:38:42.168Z",
+    "category": "historia",
+    "theme": "História",
+    "subtema": "Idade Média",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_ESCULTURA_001",
+    "timestamp": "2026-08-26T13:39:50.153Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Escultura",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_PINTURA_001",
+    "timestamp": "2026-08-26T13:40:57.262Z",
+    "category": "cultura",
+    "theme": "Cultura",
+    "subtema": "Arte & Pintura",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_ATU_STARTUPS_001",
+    "timestamp": "2026-08-26T13:43:35.333Z",
+    "category": "atualidade",
+    "theme": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_EMP_MARCAS_001",
+    "timestamp": "2026-08-26T13:44:56.671Z",
+    "category": "empresas-portuguesas",
+    "theme": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CIE_MARES_001",
+    "timestamp": "2026-08-26T13:46:10.186Z",
+    "category": "ciencia-tecnologia",
+    "theme": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GEO_SERRAS_001",
+    "timestamp": "2026-08-26T13:47:21.173Z",
+    "category": "geografia",
+    "theme": "Geografia",
+    "subtema": "Serras e Relevo",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_POL_PM_001",
+    "timestamp": "2026-08-26T13:49:47.208Z",
+    "category": "portugal-politico",
+    "theme": "Portugal Político",
+    "subtema": "Primeiros-Ministros",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_DESP_LENDAS_001",
+    "timestamp": "2026-08-26T13:50:53.214Z",
+    "category": "desporto",
+    "theme": "Desporto",
+    "subtema": "Lendas do Desporto",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_TV_CLASSICOS_001",
+    "timestamp": "2026-08-26T13:52:11.472Z",
+    "category": "cinema-tv",
+    "theme": "Cinema e Televisão",
+    "subtema": "Programas de Televisão Clássicos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUS_BANDAS_001",
+    "timestamp": "2026-08-26T13:53:34.742Z",
+    "category": "musica",
+    "theme": "Música",
+    "subtema": "Bandas Portuguesas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PERS_CIENTISTAS_001",
+    "timestamp": "2026-08-26T13:57:06.250Z",
+    "category": "personalidades",
+    "theme": "Personalidades",
+    "subtema": "Cientistas & Pensadores",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUND_CAPITAIS_001",
+    "timestamp": "2026-08-26T13:58:08.638Z",
+    "category": "mundo",
+    "theme": "Mundo",
+    "subtema": "Países & Capitais",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HUM_PT_001",
+    "timestamp": "2026-08-26T13:59:24.827Z",
+    "category": "humor",
+    "theme": "Humor",
+    "subtema": "Humor Português",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_VIS_BRASOES_001",
+    "timestamp": "2026-08-26T14:00:38.650Z",
+    "category": "desafio-visual",
+    "theme": "Desafio Visual & Simbologia",
+    "subtema": "Brasões",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CULT_POESIA_001",
+    "timestamp": "2026-08-26T14:03:48.563Z",
+    "category": "cultura",
+    "theme": "Cultura, Arte e Tradições",
+    "subtema": "Poesia",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_PREHIST_001",
+    "timestamp": "2026-08-26T14:05:11.482Z",
+    "category": "historia",
+    "theme": "História de Portugal",
+    "subtema": "Pré-História & Antiguidade",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_REGIONAL_001",
+    "timestamp": "2026-08-26T14:06:52.368Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia Portuguesa",
+    "subtema": "Gastronomia Regional",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CIE_NATUREZA_001",
+    "timestamp": "2026-08-26T14:08:12.755Z",
+    "category": "ciencia-tecnologia",
+    "theme": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_POL_AR_001",
+    "timestamp": "2026-08-26T14:10:42.128Z",
+    "category": "portugal-politico",
+    "theme": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_EMP_HIST_001",
+    "timestamp": "2026-08-26T14:12:00.429Z",
+    "category": "empresas-portuguesas",
+    "theme": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GEO_DISTRITOS_001",
+    "timestamp": "2026-08-26T14:13:04.652Z",
+    "category": "geografia",
+    "theme": "Geografia",
+    "subtema": "Distritos de Portugal",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_DESP_MOTORES_001",
+    "timestamp": "2026-08-26T14:14:20.274Z",
+    "category": "desporto",
+    "theme": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_TV_NOVELAS_001",
+    "timestamp": "2026-08-26T14:16:58.956Z",
+    "category": "cinema-tv",
+    "theme": "Cinema e Televisão",
+    "subtema": "Telenovelas Portuguesas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUS_CANTORES_001",
+    "timestamp": "2026-08-26T14:19:51.439Z",
+    "category": "musica",
+    "theme": "Música",
+    "subtema": "Artistas & Cantores Portugueses",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PERS_PINTORES_001",
+    "timestamp": "2026-08-26T14:21:20.813Z",
+    "category": "personalidades",
+    "theme": "Personalidades",
+    "subtema": "Artistas & Pintores",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUND_GEOMUNDIAL_001",
+    "timestamp": "2026-08-26T14:22:50.979Z",
+    "category": "mundo",
+    "theme": "Mundo",
+    "subtema": "Geografia Mundial",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_IMPERIO_001",
+    "timestamp": "2026-08-26T14:25:56.247Z",
+    "category": "historia",
+    "theme": "História de Portugal",
+    "subtema": "Império Português",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HUM_COMEDIA_001",
+    "timestamp": "2026-08-26T14:27:24.122Z",
+    "category": "humor",
+    "theme": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_VIS_CIDADES_001",
+    "timestamp": "2026-08-26T14:28:41.569Z",
+    "category": "desafio-visual",
+    "theme": "Desafio Visual & Simbologia",
+    "subtema": "Cidades",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_ATU_PTMUNDO_001",
+    "timestamp": "2026-08-26T14:30:13.474Z",
+    "category": "atualidade",
+    "theme": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_POL_CONST_001",
+    "timestamp": "2026-08-26T14:33:10.512Z",
+    "category": "portugal-politico",
+    "theme": "Portugal Político",
+    "subtema": "Constituição da República",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_POL_PARTIDOS_001",
+    "timestamp": "2026-08-26T14:34:32.981Z",
+    "category": "portugal-politico",
+    "theme": "Portugal Político",
+    "subtema": "Partidos Políticos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_EMP_EMPHIS_001",
+    "timestamp": "2026-08-26T14:36:02.829Z",
+    "category": "empresas-portuguesas",
+    "theme": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GEO_CONCELHOS_001",
+    "timestamp": "2026-08-26T14:37:28.173Z",
+    "category": "geografia",
+    "theme": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HIST_SECXIX_001",
+    "timestamp": "2026-08-26T14:41:03.840Z",
+    "category": "historia",
+    "theme": "História de Portugal",
+    "subtema": "Século XIX",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GAST_DOP_001",
+    "timestamp": "2026-08-26T14:42:46.616Z",
+    "category": "gastronomia",
+    "theme": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUS_PIMBA_001",
+    "timestamp": "2026-08-26T14:44:18.858Z",
+    "category": "musica",
+    "theme": "Música",
+    "subtema": "Música Popular & Pimba",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_CIE_MEDICINA_001",
+    "timestamp": "2026-08-26T14:45:35.014Z",
+    "category": "ciencia-tecnologia",
+    "theme": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_DESP_NAUTICOS_001",
+    "timestamp": "2026-08-26T14:48:30.319Z",
+    "category": "desporto",
+    "theme": "Desporto",
+    "subtema": "Desportos Náuticos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_PERS_POLITICOS_001",
+    "timestamp": "2026-08-26T14:49:53.765Z",
+    "category": "personalidades",
+    "theme": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_MUND_BANDEIRAS_001",
+    "timestamp": "2026-08-26T14:51:02.033Z",
+    "category": "mundo",
+    "theme": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_TV_FILMESCLASSICOS_001",
+    "timestamp": "2026-08-26T14:52:20.118Z",
+    "category": "cinema-tv",
+    "theme": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_POL_GOVCONST_001",
+    "timestamp": "2026-08-26T14:55:33.315Z",
+    "category": "portugal-politico",
+    "theme": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_EMP_TEC_001",
+    "timestamp": "2026-08-26T14:56:57.309Z",
+    "category": "empresas-portuguesas",
+    "theme": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_GEO_PRAIAS_001",
+    "timestamp": "2026-08-26T14:58:10.084Z",
+    "category": "geografia",
+    "theme": "Geografia",
+    "subtema": "Litoral & Praias",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  },
+  {
+    "batchId": "BATCH_HUM_MEMES_001",
+    "timestamp": "2026-08-26T14:59:39.843Z",
+    "category": "humor",
+    "theme": "Humor",
+    "subtema": "Memes & Internet",
+    "count": 50,
+    "qualityGate": "PASSED",
+    "sourceVerified": true
+  }
+]

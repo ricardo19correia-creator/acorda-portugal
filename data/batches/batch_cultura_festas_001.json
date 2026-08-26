@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_FES_0001",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande romaria do Minho em Viana do Castelo (em agosto) é considerada a «Rainha das Romarias de Portugal», famosa pelo Desfile da Mordomia com centenas de mulheres vestidas à lavradeira carregando quilos de ouro tradicional de filigrana ao peito e pelos tapetes de sal na Ribeira?",
+    "opcoes": [
+      "Romaria de Nossa Senhora da Agonia",
+      "Festa das Cruzes",
+      "Romaria da Senhora da Peneda",
+      "Festa de São Bartolomeu"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Romaria da Senhora da Agonia culmina na solene Procissão ao Mar com os barcos de pesca engalanados a transportar a imagem sagrada.",
+    "fonte": "VianaFestas / Câmara Municipal de Viana do Castelo",
+    "factClusterId": "fc_fes_senhoradaagonia_01"
+  },
+  {
+    "id": "CULT_FES_0002",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festividade secular em Tomar (realizada de 4 em 4 anos em julho), de origem no culto do Espírito Santo da Rainha Santa Isabel, vê centenas de raparigas desfilar com imponentes estruturas de pães e flores de papel da altura do seu próprio corpo encimadas por uma pomba ou coroa?",
+    "opcoes": [
+      "Festa das Cruzes",
+      "Festa dos Tabuleiros (Festa do Divino Espírito Santo de Tomar)",
+      "Festa dos Moços",
+      "Festa do Colete Encarnado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os tabuleiros de Tomar devem ter a altura exata da mulher que o carrega à cabeça e são compostos por 30 pães enfiados em canas com flores de papel e espigas de trigo.",
+    "fonte": "Câmara Municipal de Tomar / Comissão da Festa dos Tabuleiros",
+    "factClusterId": "fc_fes_tabuleirosdetomar_01"
+  },
+  {
+    "id": "CULT_FES_0003",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição carnavalesca de Podence (Macedo de Cavaleiros), onde rapazes mascarados com fatos de franjas de lã multicoloridas, máscaras de lata ou couro e chocalhos à cintura correm as ruas para «chocalhar» as raparigas no Entrudo, foi classificada pela UNESCO como Património Cultural Imaterial da Humanidade?",
+    "opcoes": [
+      "Caretos de Lazarim",
+      "Matrafonas de Torres Vedras",
+      "Caretos de Podence (Entrudo Chocalheiro de Podence)",
+      "Cardadores de Vale de Ílhavo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Caretos de Podence personificam rituais pagãos ancestrais de fertilidade e renovação da Primavera, inscritos na UNESCO em 2019.",
+    "fonte": "Associação dos Caretos de Podence / UNESCO Intangible Cultural Heritage",
+    "factClusterId": "fc_fes_caretosdepodence_01"
+  },
+  {
+    "id": "CULT_FES_0004",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Na noite de 12 para 13 de junho em Lisboa, que grande desfile popular de bairros tradicionais (Alfama, Madragoa, Mouraria, Bica, Marvila, etc.) com arcos iluminados e coreografias originais desce a Avenida da Liberdade?",
+    "opcoes": [
+      "Cortejo dos Tabuleiros",
+      "Cortejo da Queima das Fitas",
+      "Desfile da Mordomia",
+      "Marchas Populares de Lisboa (Festas de Santo António)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Marchas Populares de Lisboa são uma tradição fundada em 1932 que reúne milhares de marchantes e milhões de espetadores na noite de Santo António.",
+    "fonte": "EGEAC / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_fes_marchasdelisboa_01"
+  },
+  {
+    "id": "CULT_FES_0005",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que planta aromática tradicional em pequeno vaso de barro com uma bandeirinha de papel com uma quadra popular em rima e um cravo de papel é oferecida aos namorados nas Festas dos Santos Populares em junho?",
+    "opcoes": [
+      "Manjerico (Ocimum basilicum minimum)",
+      "Alecrim",
+      "Alfazema",
+      "Hortelã-pimenta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A tradição popular dita que não se deve cheirar o manjerico diretamente com o nariz mas passar a mão suavemente nas folhas e cheirar a palma da mão para não secar a planta.",
+    "fonte": "Etnografia Portuguesa / Museu de Lisboa",
+    "factClusterId": "fc_fes_manjerico_01"
+  },
+  {
+    "id": "CULT_FES_0006",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Na noite de 23 para 24 de junho no Porto e em Braga (Noite de São João), que dois objetos tradicionais são utilizados pelas pessoas nas ruas para tocar na cabeça dos transeuntes em sinal de saudação e alegria festiva?",
+    "opcoes": [
+      "Espadas de madeira e matracas",
+      "Martelinhos de plástico e ramos de alho-porro",
+      "Pandeiretas e castanholas",
+      "Carestas e varas de vime"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os martelinhos com fole de apito foram inventados nos anos 1960 por uma fábrica de brinquedos do Porto e tornaram-se o símbolo absoluto do São João.",
+    "fonte": "Câmara Municipal do Porto / Turismo do Porto e Norte",
+    "factClusterId": "fc_fes_saojoaoporto_01"
+  },
+  {
+    "id": "CULT_FES_0007",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que carnaval urbano do Oeste português («O Carnaval Mais Português de Portugal») destaca-se pela ausência de samba, preservando a sátira política, as matrafonas (homens vestidos de mulheres), os cabeçudos e os gigantones?",
+    "opcoes": [
+      "Carnaval de Ovar",
+      "Carnaval de Loulé",
+      "Carnaval de Torres Vedras",
+      "Carnaval de Sesimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Carnaval de Torres Vedras é Património Cultural Imaterial Nacional e atrai centenas de milhares de foliões mascarados anualmente.",
+    "fonte": "Promotorres / Município de Torres Vedras",
+    "factClusterId": "fc_fes_carnavaltorresvedras_01"
+  },
+  {
+    "id": "CULT_FES_0008",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que aldeia de Lamego (Lazarim) celebra um dos Entrudos mais genuínos de Portugal com máscaras («caretos» e «senhorinhas») esculpidas artesanalmente em madeira de amieiro e a leitura pública dos «Testamentos da Comadre e do Compadre»?",
+    "opcoes": [
+      "Entrudo de Podence",
+      "Entrudo de Salzedas",
+      "Entrudo de Cabanas de Viriato",
+      "Carnaval / Entrudo de Lazarim"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Centro de Artesanato de Lazarim reúne uma coleção notável de máscaras de madeira esculpidas pelos artesãos locais.",
+    "fonte": "Município de Lamego / Centro Interpretativo da Máscara Ibérica",
+    "factClusterId": "fc_fes_carnavallazarim_01"
+  },
+  {
+    "id": "CULT_FES_0009",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande celebração primaveril na cidade do Funchal (Madeira) inclui a construção do «Muro da Esperança» no Largo do Colégio pelas crianças, tapetes florais naturais e o monumental Cortejo Alegórico da Flor?",
+    "opcoes": [
+      "Festa da Flor da Madeira",
+      "Festa do Vinho da Madeira",
+      "Festa da Cereja",
+      "Festa da Maçã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Festa da Flor homenageia as espécies florais subtropicais que transformam a ilha da Madeira no Jardim do Atlântico.",
+    "fonte": "Turismo da Madeira / Secretaria Regional de Turismo",
+    "factClusterId": "fc_fes_festadaflor_01"
+  },
+  {
+    "id": "CULT_FES_0010",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande festividade religiosa nos Açores (a maior do arquipélago), realizada no quinto domingo a seguir à Páscoa em Ponta Delgada (ilha de São Miguel), venera a imagem do Ecce Homo com uma capa bordada a ouro e pedras preciosas?",
+    "opcoes": [
+      "Festas do Espírito Santo",
+      "Festas do Senhor Santo Cristo dos Milagres",
+      "Festas da Madalena",
+      "Festas da Praia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A procissão do Santo Cristo dos Milagres percorre quilómetros de tapetes de flores naturais e atrai dezenas de milhares de emigrantes de todo o mundo ao Santuário da Esperança.",
+    "fonte": "Santuário do Senhor Santo Cristo dos Milagres / Diocese de Angra",
+    "factClusterId": "fc_fes_santocristo_01"
+  },
+  {
+    "id": "CULT_FES_0011",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição comunitária das nove ilhas dos Açores, instituída no século XIV pela Rainha Santa Isabel, reúne as populações em torno dos «Impérios» para a bênção das coroas de prata e a partilha do «Bodo de carne, pão e vinho»?",
+    "opcoes": [
+      "Festas Sanjoaninas",
+      "Festas do Pico",
+      "Festas do Divino Espírito Santo (Impérios do Espírito Santo)",
+      "Cavalhadas de São Pedro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Impérios do Espírito Santo nos Açores são pequenas capelas coloridas que servem de centro cerimonial para a partilha caritativa das Sopas do Espírito Santo.",
+    "fonte": "Governo Regional dos Açores / Direção Regional da Cultura",
+    "factClusterId": "fc_fes_espiritosantoacores_01"
+  },
+  {
+    "id": "CULT_FES_0012",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional em Barcelos (Minho), que se realiza no início de maio e remonta ao milagre da aparição da cruz na terra em 1504, enche a cidade com monumentais tapetes de pétalas de flores naturais?",
+    "opcoes": [
+      "Festa das Rosas",
+      "Festa do Galo",
+      "Romaria da Franqueira",
+      "Festa das Cruzes de Barcelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Festa das Cruzes é a primeira grande romaria do ano no Minho e reúne a Batalha das Flores e a grandiosa Procissão das Cruzes das 89 paróquias.",
+    "fonte": "Município de Barcelos / Turismo do Porto e Norte",
+    "factClusterId": "fc_fes_festadascruzes_01"
+  },
+  {
+    "id": "CULT_FES_0013",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festividade em Campo Maior (Alentejo), que só se realiza quando o povo quer através de voluntariado secreto durante meses, transforma dezenas de ruas do centro histórico em túneis cobertos de milhões de flores de papel multicoloridas?",
+    "opcoes": [
+      "Festas do Povo de Campo Maior (Festas das Flores, UNESCO)",
+      "Festa da Senhora da Graça",
+      "Festa dos Ramos",
+      "Festa de São João Baptista"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Festas do Povo de Campo Maior foram classificadas pela UNESCO como Património Cultural Imaterial da Humanidade em 2021 pela sua solidariedade comunitária.",
+    "fonte": "Associação das Festas do Povo / Município de Campo Maior / UNESCO",
+    "factClusterId": "fc_fes_festasdopovocampomaior_01"
+  },
+  {
+    "id": "CULT_FES_0014",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição académica centenária na Universidade de Coimbra em maio celebra o fim dos estudos com a Serenata Monumental na Sé Velha, o Cortejo da Queima das Fitas com carros alegóricos e o «Rascanso»?",
+    "opcoes": [
+      "Festa das Latas (Latada)",
+      "Queima das Fitas de Coimbra",
+      "Semana do Caloiro",
+      "Enterro da Gata"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Queima das Fitas de Coimbra é a maior e mais antiga celebração estudantil universitária de Portugal, originada no século XIX.",
+    "fonte": "Associação Académica de Coimbra / Universidade de Coimbra",
+    "factClusterId": "fc_fes_queimadasfitascoimbra_01"
+  },
+  {
+    "id": "CULT_FES_0015",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa académica dos estudantes da Universidade do Minho em Braga e Guimarães é conhecida pela cerimónia satírica do «Enterro da Gata» e cortejo pelas ruas da cidade dos arcebispos?",
+    "opcoes": [
+      "Enterro do Caloiro",
+      "Queima das Fitas",
+      "Enterro da Gata (Universidade do Minho)",
+      "Recepção ao Caloiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A 'Gata' simboliza o insucesso escolar e as notas baixas que são 'enterradas' com muita música e folia no final do ano letivo.",
+    "fonte": "Associação Académica da Universidade do Minho (AAUM)",
+    "factClusterId": "fc_fes_enterrodagata_01"
+  },
+  {
+    "id": "CULT_FES_0016",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradicional procissão do Domingo de Ramos em Braga («Procissão dos Passos») é precedida pelos misteriosos «Farricocos», penitentes descalços vestidos de túnicas negras com capuz e matracas sonoras?",
+    "opcoes": [
+      "Semana Santa de Óbidos",
+      "Semana Santa de Castelo de Vide",
+      "Procissão do Senhor dos Passos da Graça",
+      "Semana Santa de Braga (Procissão dos Farricocos / Fogaréus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Semana Santa de Braga é a mais solene e antiga celebração pascal de Portugal com rituais que remontam à Idade Média.",
+    "fonte": "Comissão da Semana Santa de Braga / Cabido da Sé",
+    "factClusterId": "fc_fes_semanasantabraga_01"
+  },
+  {
+    "id": "CULT_FES_0017",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festividade em Honra da Rainha Santa Isabel em Coimbra (realizada em anos pares em julho) leva a imagem de prata da padroeira em procissão solene do Convento de Santa Clara-a-Nova à Igreja da Graça?",
+    "opcoes": [
+      "Festas da Cidade de Coimbra e da Rainha Santa Isabel",
+      "Festas do Senhor dos Passos",
+      "Festas de São Sebastião",
+      "Festas de Santo António dos Olivais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Procissão da Rainha Santa em Coimbra inclui a descida e subida da ponte sobre o rio Mondego iluminada por fogo de artifício.",
+    "fonte": "Confraria da Rainha Santa Isabel / Câmara Municipal de Coimbra",
+    "factClusterId": "fc_fes_rainhasantacoimbra_01"
+  },
+  {
+    "id": "CULT_FES_0018",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional em Vila Franca de Xira (no primeiro fim de semana de julho) celebra a cultura do Ribatejo, com largadas de toiros nas ruas, campinos a cavalo com vara comprida e o seu traje típico de colete encarnado?",
+    "opcoes": [
+      "Feira de Outubro",
+      "Festa do Colete Encarnado",
+      "Festa do Barrete Verde (Alcochete)",
+      "Festa da Carregueira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Colete Encarnado foi criado em 1932 para homenagear os campinos da lezíria e a cultura tauromáquica ribatejana.",
+    "fonte": "Câmara Municipal de Vila Franca de Xira",
+    "factClusterId": "fc_fes_coleteencarnado_01"
+  },
+  {
+    "id": "CULT_FES_0019",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional na vila de Alcochete em agosto combina a bênção dos barcos no rio Tejo, a homenagem ao campino e ao salineiro com o traje tradicional de barrete verde e colete?",
+    "opcoes": [
+      "Festa do Colete Encarnado",
+      "Festa do Marisco",
+      "Festas do Barrete Verde e das Salinas",
+      "Festa do Samouco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Aposento do Barrete Verde de Alcochete preserva a ligação entre os salineiros do estuário do Tejo e os homens da lezíria.",
+    "fonte": "Município de Alcochete / Aposento do Barrete Verde",
+    "factClusterId": "fc_fes_barreteverde_01"
+  },
+  {
+    "id": "CULT_FES_0020",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande feira nacional franca no concelho de Golegã em novembro («Capital do Cavalo») é o ponto de encontro mundial de criadores, cavaleiros e admiradores do Cavalo Puro Sangue Lusitano?",
+    "opcoes": [
+      "Feira de São Mateus de Viseu",
+      "Feira de São Pedro de Sintra",
+      "Feira de Maio do Moita",
+      "Feira Nacional do Cavalo (Feira de São Martinho da Golegã)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Largo do Arneiro na Golegã enche-se de ginetes vestidos com o traje de equitação à portuguesa, castanhas assadas e água-pé no São Martinho.",
+    "fonte": "Município da Golegã / Associação de Criadores do Cavalo Puro Sangue Lusitano",
+    "factClusterId": "fc_fes_feiradagolega_01"
+  },
+  {
+    "id": "CULT_FES_0021",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que feira secular em Viseu, com foral concedido por D. João I em 1392 (a mais antiga feira franca em funcionamento contínuo na Península Ibérica), realiza-se anualmente entre agosto e setembro?",
+    "opcoes": [
+      "Feira de São Mateus de Viseu",
+      "Feira de Santa Iria",
+      "Feira de Março de Aveiro",
+      "Feira Franca de Trancoso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Feira de São Mateus decorre durante mais de um mês no recinto da Cava de Viriato com gastronomia, artesanato e concertos.",
+    "fonte": "VISEU MARCA / Município de Viseu",
+    "factClusterId": "fc_fes_feirasaomateusviseu_01"
+  },
+  {
+    "id": "CULT_FES_0022",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que feira centenária em Aveiro realizada desde 1434 por privilégio outorgado pelo Infante D. Pedro é a maior mostra comercial e de diversão da primavera na Ria de Aveiro?",
+    "opcoes": [
+      "Feira de São Mateus",
+      "Feira de Março de Aveiro",
+      "Feira de Santa Joana",
+      "Feira dos Ovos Moles"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Feira de Março abre tradicionalmente a temporada dos parques de diversão e mostras empresariais do centro do país.",
+    "fonte": "Aveiro Expo / Câmara Municipal de Aveiro",
+    "factClusterId": "fc_fes_feirademarcoaveiro_01"
+  },
+  {
+    "id": "CULT_FES_0023",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande romaria marítima em Ílhavo (freguesia da Gafanha da Nazaré) no mês de setembro venera a padroeira dos pescadores da faina maior do bacalhau nos mares da Terra Nova e Gronelândia?",
+    "opcoes": [
+      "Romaria da Senhora da Agonia",
+      "Festa do Bacalhau",
+      "Romaria de Nossa Senhora dos Navegantes (e Senhora da Saúde)",
+      "Procissão da Barra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A festa celebra a ligação dos pescadores da frota bacalhoeira aos mares gelados do Atlântico Norte.",
+    "fonte": "Museu Marítimo de Ílhavo / Município de Ílhavo",
+    "factClusterId": "fc_fes_senhoradosnavegantes_01"
+  },
+  {
+    "id": "CULT_FES_0024",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que romaria montanhesa no Parque Nacional da Peneda-Gerês (Gavieira, Arcos de Valdevez) acolhe milhares de peregrinos portugueses e galegos no início de setembro diante do seu imponente escadório barroco?",
+    "opcoes": [
+      "Romaria da Senhora da Abadia",
+      "Romaria da Senhora da Guia",
+      "Romaria da Senhora do Alívio",
+      "Romaria de Nossa Senhora da Peneda"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Santuário da Senhora da Peneda ergue-se no sopé de uma colossal escarpa granítica (o penedo das Meadinhas) e preserva as danças das concertinas e viras minhotos.",
+    "fonte": "Município de Arcos de Valdevez / PNPG",
+    "factClusterId": "fc_fes_senhoradapeneda_01"
+  },
+  {
+    "id": "CULT_FES_0025",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que santuário mariano no concelho de Amares (o mais antigo santuário mariano de Portugal do século XII) acolhe no final de maio a sua tradicional romaria com o escadório das capelas da Via Sacra?",
+    "opcoes": [
+      "Santuário de Nossa Senhora da Abadia (Santa Maria de Bouro)",
+      "Santuário da Peneda",
+      "Santuário do Sameiro",
+      "Santuário da Franqueira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Senhora da Abadia preserva os antigos albergues dos romeiros que viajavam a pé por trilhos serranos até ao santuário cisterciense.",
+    "fonte": "Município de Amares / Confraria da Senhora da Abadia",
+    "factClusterId": "fc_fes_senhoradaabadia_01"
+  },
+  {
+    "id": "CULT_FES_0026",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que romaria no concelho de Vila Verde (freguesia de Valdreu) no primeiro domingo de julho é famosa pela bênção dos animais domésticos e rebanhos com missa campal ao ar livre?",
+    "opcoes": [
+      "Romaria da Senhora do Alívio",
+      "Romaria de Santo António de Mixões da Serra",
+      "Festa das Colheitas",
+      "Feira dos Vinte"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Em Mixões da Serra centenas de cavalos, bois, ovelhas e cães desfilam em redor da igreja com laços coloridos para receber a bênção do pároco.",
+    "fonte": "Município de Vila Verde / Tradições do Minho",
+    "factClusterId": "fc_fes_mixoesdaserra_01"
+  },
+  {
+    "id": "CULT_FES_0027",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festas em Ponte de Lima (em setembro), com foral outorgado por D. Pedro I em 1359, são famosas pelo desfile dos gigantones e cabeçudos, pelo cortejo etnográfico e pelas serenatas de concertina na beira do rio Lima?",
+    "opcoes": [
+      "Feiras de São João",
+      "Festa da Lampreia",
+      "Feiras Novas de Ponte de Lima",
+      "Romaria da Senhora da Guia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Feiras Novas são consideradas a 'Capital dos Cantares ao Desafio e das Concertinas' com tocatas espontâneas pelas ruas dia e noite.",
+    "fonte": "Município de Ponte de Lima / Associação Concelhia das Feiras Novas",
+    "factClusterId": "fc_fes_feirasnovas_01"
+  },
+  {
+    "id": "CULT_FES_0028",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição no concelho de Ponte de Lima (na véspera do Corpo de Deus) leva a multidão a puxar um touro bravo amarrado por cordas pelas ruas e areal do rio Lima («Touro no Rio»)?",
+    "opcoes": [
+      "A Tourada à Corda",
+      "O Colete Encarnado",
+      "A Capeia Arraiana",
+      "A Festa da Vaca das Cordas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Vaca das Cordas de Ponte de Lima é uma tradição de origem pagã que dá três voltas à Igreja Matriz antes de descer ao areal do rio Lima.",
+    "fonte": "Município de Ponte de Lima / Confraria da Vaca das Cordas",
+    "factClusterId": "fc_fes_vacadascordas_01"
+  },
+  {
+    "id": "CULT_FES_0029",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição tauromáquica popular nas ilhas dos Açores (com destaque para a ilha Terceira) consiste em soltar um touro bravo preso por uma corda comprida segurada pelos «pastores» nas ruas e praias?",
+    "opcoes": [
+      "Tourada à Corda da Ilha Terceira",
+      "Vaca das Cordas",
+      "Capeia Arraiana",
+      "Largada de Toiros da Chamusca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Tourada à Corda realiza-se de maio a outubro na Terceira e é uma das maiores marcas da cultura popular açoriana.",
+    "fonte": "Governo Regional dos Açores / Associação de Tertúlias Terceirenses",
+    "factClusterId": "fc_fes_touradacorda_01"
+  },
+  {
+    "id": "CULT_FES_0030",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que manifestação taurina popular da Raia da Beira Baixa (Sabugal e Aldeia da Ponte), classificada como Património Cultural Imaterial, utiliza o «forcão» (pesada estrutura triangular de carvalho manobrada por 30 homens) para enfrentar o touro?",
+    "opcoes": [
+      "Tourada à Corda",
+      "Capeia Arraiana do Sabugal (Património Imaterial Nacional)",
+      "Vaca das Cordas",
+      "Garraiada da Queima"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Capeia Arraiana é única no mundo e exige coordenação perfeita dos homens no 'forcão' para aguentar as investidas do touro bravo.",
+    "fonte": "Município do Sabugal / Direção-Geral do Património Cultural",
+    "factClusterId": "fc_fes_capeiaarraiana_01"
+  },
+  {
+    "id": "CULT_FES_0031",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande festa em Guimarães (em agosto) comemora as façanhas históricas de D. Afonso Henriques e a lenda de São Gualter (discípulo de São Francisco de Assis que se fixou na cidade em 1217)?",
+    "opcoes": [
+      "Festas Nicolinas",
+      "Feira Afonsina",
+      "Festas Gualterianas de Guimarães",
+      "Festa das Cruzes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Festas Gualterianas realizam-se desde 1906 com o seu majestoso Cortejo do Linho e a Batalha das Flores.",
+    "fonte": "A Oficina / Município de Guimarães",
+    "factClusterId": "fc_fes_gualterianas_01"
+  },
+  {
+    "id": "CULT_FES_0032",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festividades dos estudantes de Guimarães (iniciadas no final de novembro em honra de São Nicolau), célebres pelo cortejo do «Pinheiro» ao som de milhares de bombos e caixas a tocar o toque nicolino, são as:",
+    "opcoes": [
+      "Festas Gualterianas",
+      "Queima das Fitas",
+      "Latada de São Nicolau",
+      "Festas Nicolinas de Guimarães (O Pinheiro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A noite do Pinheiro a 29 de novembro reúne mais de 50.000 pessoas nas ruas de Guimarães a tocar tambor até ao amanhecer.",
+    "fonte": "Associação dos Antigos Estudantes de Guimarães / Município de Guimarães",
+    "factClusterId": "fc_fes_nicolinas_01"
+  },
+  {
+    "id": "CULT_FES_0033",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que feira e romaria na cidade da Amadora e Sintra celebra a Senhora da Nazaré com a tradição dos círios e do famoso «Fado do Círio da Nazaré»?",
+    "opcoes": [
+      "Círio da Prata Grande (Círio da Senhora da Nazaré)",
+      "Círio dos Olhos d'Água",
+      "Círio de Olhalvo",
+      "Círio da Atalaia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Círio da Prata Grande remonta ao século XVII e percorre anualmente em rotação 17 paróquias da região saloia.",
+    "fonte": "Confraria de Nossa Senhora da Nazaré / Etnografia Saloia",
+    "factClusterId": "fc_fes_ciriodanazare_01"
+  },
+  {
+    "id": "CULT_FES_0034",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que romaria marítima e fluvial na Moita (em setembro) leva a imagem de Nossa Senhora da Boa Viagem em procissão de barcos tradicionais do Tejo (varinos e faluas) pelas águas do estuário?",
+    "opcoes": [
+      "Festas do Barreiro",
+      "Festas de Nossa Senhora da Boa Viagem da Moita",
+      "Festas de Alcochete",
+      "Festas de Seixal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Moita homenageia a comunidade dos marítimos e fragateiros que ligavam o Tejo à capital.",
+    "fonte": "Município da Moita / Associação de Marítimos",
+    "factClusterId": "fc_fes_senhoradaboaviagemmoita_01"
+  },
+  {
+    "id": "CULT_FES_0035",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que celebração de São Martinho em Penafiel (em novembro) é uma das maiores romarias gastronómicas do norte de Portugal com provas de vinho verde novo, feira do gado e magustos de castanhas?",
+    "opcoes": [
+      "Feira da Golegã",
+      "Magusto de Trancoso",
+      "Festa de São Martinho de Penafiel",
+      "Festa da Castanha de Marvão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Penafiel acolhe milhares de pessoas nas tradicionais 'tasquinhas' para comer rojões e provar o vinho novo em malgas de louça branca.",
+    "fonte": "Câmara Municipal de Penafiel / Turismo do Porto e Norte",
+    "factClusterId": "fc_fes_saomartinhopenafiel_01"
+  },
+  {
+    "id": "CULT_FES_0036",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa no concelho de Marvão (no início de novembro) celebra a castanha da Serra de São Mamede com toneladas de castanhas assadas em fornos gigantes nas ruas da vila fortificada?",
+    "opcoes": [
+      "Feira do Mel de Castelo Branco",
+      "Festa da Maçã Bravo de Esmolfe",
+      "Festa da Noz",
+      "Festa da Castanha de Marvão (Feira da Castanha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Castanha de Marvão possui Denominação de Origem Protegida e a festa atrai dezenas de milhares de visitantes ibéricos.",
+    "fonte": "Município de Marvão / Parque Natural da Serra de São Mamede",
+    "factClusterId": "fc_fes_castanhamarvao_01"
+  },
+  {
+    "id": "CULT_FES_0037",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional em Arcos de Valdevez (no Carnaval) celebra o «Entrudo de Soajo» com a queima do boneco do Entrudo e a corrida dos compadres e comadres?",
+    "opcoes": [
+      "Entrudo Tradicional do Soajo",
+      "Entrudo de Podence",
+      "Entrudo de Lazarim",
+      "Entrudo de Lindoso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Soajo preserva os rituais comunitários com cantares ao desafio e partilha do pão e fumeiro.",
+    "fonte": "Município de Arcos de Valdevez",
+    "factClusterId": "fc_fes_entrudosoajo_01"
+  },
+  {
+    "id": "CULT_FES_0038",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional na vila de Loulé no domingo de Páscoa («Festa da Mãe Soberana») vê oito homens transportar a pesada charola de Nossa Senhora da Piedade a correr encosta acima até ao santuário?",
+    "opcoes": [
+      "Festa de São Brás de Alportel",
+      "Festa da Mãe Soberana de Loulé (Festa Pequena e Festa Grande)",
+      "Festa da Senhora da Rocha",
+      "Festa das Tochas Floridas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Mãe Soberana de Loulé é a maior manifestação de fé mariana a sul de Fátima, com mais de 400 anos de tradição.",
+    "fonte": "Município de Loulé / Paróquia de São Clemente",
+    "factClusterId": "fc_fes_maesoberanaloule_01"
+  },
+  {
+    "id": "CULT_FES_0039",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que celebração pascal no domingo de Páscoa em São Brás de Alportel (Algarve) enche as ruas de flores e os homens desfilam com tochas ornamentadas com flores campestres gritando «Ressuscitou como disse! Aleluia, Aleluia!»?",
+    "opcoes": [
+      "Festa da Mãe Soberana",
+      "Festa das Cruzes",
+      "Festa das Tochas Floridas de São Brás de Alportel",
+      "Festa do Judas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Festa das Tochas Floridas forra as ruas com mais de 1 km de tapetes florais recolhidos pelas famílias da serra do Caldeirão.",
+    "fonte": "Município de São Brás de Alportel / Associação Cultural",
+    "factClusterId": "fc_fes_tochasfloridas_01"
+  },
+  {
+    "id": "CULT_FES_0040",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que romaria fluvial no rio Guadiana em Pomarão (Mértola) reúne barcos enfeitados que navegam de Mértola e Vila Real de Santo António para homenagear a Senhora do Carmo?",
+    "opcoes": [
+      "Romaria da Senhora dos Navegantes",
+      "Cortejo do Peixe do Rio",
+      "Festa de Alcoutim",
+      "Romaria dos Barcos do Guadiana (Pomarão e Mértola)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A procissão fluvial no Guadiana celebra a história mineira e piscatória do grande rio do Sul.",
+    "fonte": "Município de Mértola / Parque Natural do Vale do Guadiana",
+    "factClusterId": "fc_fes_romariaguadiana_01"
+  },
+  {
+    "id": "CULT_FES_0041",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festividade em Angra do Heroísmo (ilha Terceira, Açores) em junho dura dez dias com marchas populares, touradas à corda, cortejo infantil e o desfile filarmónico da maior festa sanjoanina das ilhas?",
+    "opcoes": [
+      "Sanjoaninas de Angra do Heroísmo",
+      "Festas da Praia",
+      "Semana do Mar",
+      "Festas de Santa Maria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Sanjoaninas de Angra são a maior festa popular urbana dos Açores no centro histórico classificado pela UNESCO.",
+    "fonte": "Câmara Municipal de Angra do Heroísmo / UNESCO",
+    "factClusterId": "fc_fes_sanjoaninasangra_01"
+  },
+  {
+    "id": "CULT_FES_0042",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que grande evento náutico e cultural na cidade da Horta (ilha do Faial) em agosto celebra a tradição da navegação à vela transatlântica com regatas, concertos e gastronomia no porto da Horta?",
+    "opcoes": [
+      "Semana dos Baleeiros",
+      "Semana do Mar da Horta (Faial)",
+      "Festas Sanjoaninas",
+      "Regata dos Açores"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Semana do Mar reúne velejadores de todo o mundo na marina da Horta onde os marinheiros pintam os murais no cais.",
+    "fonte": "Câmara Municipal da Horta / Clube Naval da Horta",
+    "factClusterId": "fc_fes_semanadomarhorta_01"
+  },
+  {
+    "id": "CULT_FES_0043",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional em Lajes do Pico (Açores) em agosto homenageia a história heroica dos homens do mar que caçavam baleias em botes de madeira com arpão à mão?",
+    "opcoes": [
+      "Semana do Mar",
+      "Festa do Cachalote",
+      "Semana dos Baleeiros de Lajes do Pico",
+      "Festa de Santa Maria Madalena"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Semana dos Baleeiros inclui regatas em botes baleeiros tradicionais recuperados e celebrações a Nossa Senhora de Lourdes.",
+    "fonte": "Museu dos Baleeiros / Município de Lajes do Pico",
+    "factClusterId": "fc_fes_semanadosbaleeiros_01"
+  },
+  {
+    "id": "CULT_FES_0044",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que tradição no concelho de Santa Maria da Feira (na Festa das Fogaceiras a 20 de janeiro) cumpre um voto secular a São Sebastião pelo fim da peste em 1505 com um cortejo de meninas vestidas de branco com a fogaça doce na cabeça?",
+    "opcoes": [
+      "Festa das Cruzes",
+      "Festa dos Tabuleiros",
+      "Festa de São Sebastião de Setúbal",
+      "Festa das Fogaceiras (Festa da Fogaça)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As meninas fogaceiras desfilam com vestidos brancos e faixas coloridas transportando à cabeça a tradicional fogaça da Feira encimada por papel de seda.",
+    "fonte": "Câmara Municipal de Santa Maria da Feira",
+    "factClusterId": "fc_fes_festadasfogaceiras_01"
+  },
+  {
+    "id": "CULT_FES_0045",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que romaria montanhesa no concelho de Castro Daire (Serra de Montemuro) em agosto reúne pastores e peregrinos na capela de Nossa Senhora da Ouvida com feira de gado e cantares ao desafio?",
+    "opcoes": [
+      "Romaria da Senhora da Ouvida (Montemuro)",
+      "Romaria da Senhora da Lapa",
+      "Romaria da Senhora do Viso",
+      "Romaria de São Tiago de Montemuro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Senhora da Ouvida é o ponto alto do encontro das gentes serranas entre o Douro e o Vouga.",
+    "fonte": "Município de Castro Daire / Turismo Centro de Portugal",
+    "factClusterId": "fc_fes_senhoradaouvida_01"
+  },
+  {
+    "id": "CULT_FES_0046",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que santuário mariano no concelho de Sernancelhe (a 950 metros de altitude), construído em redor de uma gigantesca lapa de granito onde uma pastorinha muda encontrou a imagem da Virgem em 1498, é o:",
+    "opcoes": [
+      "Santuário da Peneda",
+      "Santuário de Nossa Senhora da Lapa (Sernancelhe)",
+      "Santuário da Lapa dos Dinheiros",
+      "Santuário de Fátima"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nossa Senhora da Lapa é um dos mais antigos centros de peregrinação de Portugal, onde os devotos passam por uma fresta estreita na rocha.",
+    "fonte": "Município de Sernancelhe / Diocese de Lamego",
+    "factClusterId": "fc_fes_senhoradalapa_01"
+  },
+  {
+    "id": "CULT_FES_0047",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que celebração secular na noite de 31 de outubro / 1 de novembro em Trás-os-Montes e Beiras vê as crianças correr as casas pedindo castanhas, nozes e bolos cantando «Bolinhos e Bolinhós» ou «Pão por Deus»?",
+    "opcoes": [
+      "Noite das Bruxas",
+      "Festa das Fogaceiras",
+      "Dia do Pão por Deus (e Magusto dos Santos)",
+      "Festa dos Moços"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A tradição do Pão por Deus intensificou-se em Lisboa após o Terramoto de 1755 quando os sobreviventes pediam alimento nas ruas.",
+    "fonte": "Etnografia Portuguesa / Tradições Populares",
+    "factClusterId": "fc_fes_paopordeus_01"
+  },
+  {
+    "id": "CULT_FES_0048",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festas populares em agosto na vila de Constância celebram a bênção dos barcos no rio Tejo e no rio Zêzere e homenageiam os marítimos e o poeta Luís de Camões?",
+    "opcoes": [
+      "Festa do Almourol",
+      "Festa das Flores de Constância",
+      "Festa do Rio",
+      "Festa de Nossa Senhora da Boa Viagem de Constância"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Na Páscoa Constância realiza a célebre Procissão dos Barcos Fluviais engalanados com milhares de flores de papel.",
+    "fonte": "Município de Constância / Paróquia de Constância",
+    "factClusterId": "fc_fes_constanciaboaviagem_01"
+  },
+  {
+    "id": "CULT_FES_0049",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que festa tradicional em Cabanas de Viriato (Carregal do Sal) no Carnaval é célebre pela «Dança dos Cus», onde os foliões mascarados dançam em duas filas ao som da valsa e batem com as costas no compasso da música?",
+    "opcoes": [
+      "Dança dos Cus de Cabanas de Viriato (Carnaval de Cabanas)",
+      "Caretos de Lazarim",
+      "Entrudo de Podence",
+      "Carnaval de Torres Vedras"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Dança dos Cus de Cabanas de Viriato foi criada pela Sociedade Filarmónica local no século XIX e é uma das mais singulares do país.",
+    "fonte": "Município de Carregal do Sal / Sociedade Filarmónica de Cabanas de Viriato",
+    "factClusterId": "fc_fes_cabanasdeviriato_01"
+  },
+  {
+    "id": "CULT_FES_0050",
+    "tema": "Cultura",
+    "subtema": "Folclore & Etnografia",
+    "pergunta": "Que peregrinação internacional no Santuário de Fátima (Cova da Iria) nos dias 12 e 13 de maio e 12 e 13 de outubro reúne centenas de milhares de peregrinos com velas acesas na imensa Procissão das Velas?",
+    "opcoes": [
+      "Peregrinação de São Bento da Porta Aberta",
+      "Peregrinação do Sameiro",
+      "Peregrinações Internacionais Aniversárias de Fátima (Procissão das Velas e do Adeus)",
+      "Peregrinação de Nossa Senhora da Lapa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As aparições de Fátima aos pastorinhos Lúcia, Francisco e Jacinta Marto em 1917 tornaram o santuário um dos maiores polos mundiais de turismo religioso e oração pela paz.",
+    "fonte": "Santuário de Fátima / Diocese de Leiria-Fátima",
+    "factClusterId": "fc_fes_fatimavelas_01"
+  }
+]

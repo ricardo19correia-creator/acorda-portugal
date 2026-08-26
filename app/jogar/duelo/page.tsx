@@ -147,7 +147,7 @@ function DuelPageContent() {
   }
 
   return (
-    <div className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-transparent">
+    <div className="relative w-full min-h-[100dvh] overflow-x-hidden bg-transparent">
       {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS (100% NÍTIDO E SEM OVERLAYS) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -160,7 +160,7 @@ function DuelPageContent() {
       />
 
       {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto bg-transparent">
+      <div className="relative z-10 w-full min-h-[100dvh] flex flex-col justify-between p-2 sm:p-3 pb-8 max-w-lg mx-auto bg-transparent">
         <DuelArena
           key={effectiveDuelId}
           duelId={effectiveDuelId}

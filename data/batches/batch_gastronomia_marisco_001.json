@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_MAR_0001",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que famoso prato de marisco português, criado em homenagem a um poeta e gastrónomo do século XIX, combina amêijoas abertas em azeite, alho, coentros frescos picados e sumo de limão?",
+    "opcoes": [
+      "Amêijoas à Bulhão Pato",
+      "Amêijoas à Espanhola",
+      "Amêijoas à Pescador",
+      "Amêijoas ao Natural"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Amêijoas à Bulhão Pato foram batizadas em honra de Raimundo António de Bulhão Pato, que mencionou a receita nos seus escritos.",
+    "fonte": "Tradições Gastronómicas Portuguesas / AHRESP",
+    "factClusterId": "fc_mar_bulhaopato_01"
+  },
+  {
+    "id": "GAST_MAR_0002",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que crustáceo hermafrodita em forma de unha, colhido com extremo risco pelos mariscadores nas escarpas batidas pelas ondas da Costa Vicentina e das Berlengas, é uma das maiores iguarias marinhas de Portugal?",
+    "opcoes": [
+      "Caranguejo-real",
+      "Percebe (Pollicipes pollicipes)",
+      "Craca açoriana",
+      "Camarão-tigre"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os percebes de Sagres e das Berlengas são cozidos brevemente em água do mar com sal grosso, consumidos retirando a «bainha» de couro.",
+    "fonte": "IPMA / Município de Vila do Bispo",
+    "factClusterId": "fc_mar_percebes_01"
+  },
+  {
+    "id": "GAST_MAR_0003",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que petisco emblemático da cidade de Setúbal consiste em tiras de choco passadas por polme de farinha e fritas em azeite/óleo bem quente, servidas com limão e batata frita?",
+    "opcoes": [
+      "Lulas à Sevilhana",
+      "Polvo Frito",
+      "Choco Frito à Setubalense",
+      "Peixinhos da Horta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Choco Frito de Setúbal é a especialidade gastronómica mais famosa da península e da Baía de Setúbal.",
+    "fonte": "Município de Setúbal / Turismo da Região de Lisboa",
+    "factClusterId": "fc_mar_chocofrito_01"
+  },
+  {
+    "id": "GAST_MAR_0004",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Em que recipiente esférico de cobre estanhado com fecho hermético de dobradiça é confecionada a tradicional cataplana de peixes e mariscos do Algarve?",
+    "opcoes": [
+      "Tacho de barro de Barcelos",
+      "Púcara de barro negro",
+      "Panela de pressão",
+      "Cataplana Algarvia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cataplana foi introduzida no Algarve durante a presença árabe, funcionando como um forno a vapor hermético que preserva os sucos e aromas marinhos.",
+    "fonte": "Região de Turismo do Algarve / Confraria dos Gastrónomos do Algarve",
+    "factClusterId": "fc_mar_cataplana_01"
+  },
+  {
+    "id": "GAST_MAR_0005",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que receita clássica de bacalhau criada pelo taberneiro lisboeta Brás no Bairro Alto combina bacalhau desfiado, batata-palha fina, cebola frita em azeite, ovos mexidos cremosos, salsa e azeitonas pretas?",
+    "opcoes": [
+      "Bacalhau à Brás",
+      "Bacalhau à Gomes de Sá",
+      "Bacalhau com Natas",
+      "Bacalhau à Zé do Pipo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau à Brás é um dos pratos de bacalhau mais populares de Portugal e do mundo.",
+    "fonte": "Turismo de Lisboa / História da Gastronomia Portuguesa",
+    "factClusterId": "fc_mar_bacalhaubras_01"
+  },
+  {
+    "id": "GAST_MAR_0006",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que comerciante de bacalhau do Porto do século XIX criou a receita de bacalhau em lascas amaciadas em leite quente, assadas no forno com batatas cozidas às rodelas, cebola, azeite, ovos cozidos e azeitonas?",
+    "opcoes": [
+      "José Valentim (Zé do Pipo)",
+      "José Luís Gomes de Sá Júnior (Bacalhau à Gomes de Sá)",
+      "Mestre João do Porto",
+      "Manuel da Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Gomes de Sá vendeu a receita ao seu amigo João, cozinheiro do mítico Restaurante Lisbonense no Porto.",
+    "fonte": "Confraria dos Gastrónomos do Porto / Porto Turismo",
+    "factClusterId": "fc_mar_gomesdesa_01"
+  },
+  {
+    "id": "GAST_MAR_0007",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que povoação piscatória do concelho de Tavira é conhecida como a «Capital do Polvo», célebre pelas suas receitas de polvo à lagareiro, arroz de polvo e polvo estufado?",
+    "opcoes": [
+      "Cabanas de Tavira",
+      "Fuseta",
+      "Santa Luzia",
+      "Quarteira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Santa Luzia, na Ria Formosa, mantém a tradição da pesca do polvo com alcatruzes e covos de barro.",
+    "fonte": "Município de Tavira / Turismo do Algarve",
+    "factClusterId": "fc_mar_santaluzia_polvo_01"
+  },
+  {
+    "id": "GAST_MAR_0008",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de bacalhau assado no forno com puré de batata gratinado com maionese caseira foi criado na década de 1960 pelo proprietário da «Cova Funda» no Porto?",
+    "opcoes": [
+      "Bacalhau à Lagareiro",
+      "Bacalhau Espiritual",
+      "Bacalhau à Assis",
+      "Bacalhau à Zé do Pipo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O prato venceu o concurso gastronómico «A Melhor Refeição ao Melhor Preço» no Porto, batizado com a alcunha do seu criador Zé do Pipo.",
+    "fonte": "Porto Turismo / Gastronomia Tradicional",
+    "factClusterId": "fc_mar_zedopipo_01"
+  },
+  {
+    "id": "GAST_MAR_0009",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe abissal de águas profundas sem escamas, de cor negra e carne branca muito delicada, é o prato de peixe mais identitário da Região Autónoma da Madeira (servido com banana frita)?",
+    "opcoes": [
+      "Peixe-espada preto (Aphanopus carbo)",
+      "Atum rabilho",
+      "Chicharro",
+      "Bodião"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Peixe-Espada Preto é pescado pelos pescadores de Câmara de Lobos com espinheis a mais de 1000 metros de profundidade.",
+    "fonte": "Turismo da Madeira / Município de Câmara de Lobos",
+    "factClusterId": "fc_mar_peixeespada_01"
+  },
+  {
+    "id": "GAST_MAR_0010",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Em que praia do concelho da Marinha Grande foi criado o célebre «Arroz de Marisco», uma das 7 Maravilhas da Gastronomia de Portugal?",
+    "opcoes": [
+      "Praia do Pedrógão",
+      "Praia de Vieira",
+      "São Pedro de Moel",
+      "Nazaré"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Marisco da Praia de Vieira é servido caldoso em tacho de barro, repleto de camarão, amêijoas, sapateira e lagosta.",
+    "fonte": "Município da Marinha Grande / 7 Maravilhas da Gastronomia",
+    "factClusterId": "fc_mar_arrozmarisco_01"
+  },
+  {
+    "id": "GAST_MAR_0011",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe anádromo primitivo sem mandíbulas, que sobe os rios Minho, Lima, Cávado e Mondego no inverno/primavera, é confecionado com o seu próprio sangue e vinho tinto?",
+    "opcoes": [
+      "Sável",
+      "Truta-fário",
+      "Lampreia-marinha (Lampreia à Bordalesa / Arroz de Lampreia)",
+      "Enguia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A época da lampreia (janeiro a abril) mobiliza gastrónomos de todo o país para Monção, Melgaço e Penacova.",
+    "fonte": "Município de Monção / Município de Penacova",
+    "factClusterId": "fc_mar_lampreia_01"
+  },
+  {
+    "id": "GAST_MAR_0012",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que especialidade da Ria de Aveiro consiste em pequenas enguias cozinhadas em caldeirada com batatas, azeite, cebola e pó de açafrão ou fritas em molho de escabeche?",
+    "opcoes": [
+      "Sardinhas de Murtosa",
+      "Robalo da Barra",
+      "Lampreia de Ovar",
+      "Enguias da Ria de Aveiro (Caldeirada e Escabeche de Enguias)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A enguia da ria é um dos produtos com maior tradição gastronómica em Aveiro, Murtosa e Ílhavo.",
+    "fonte": "Turismo Centro de Portugal / Município de Aveiro",
+    "factClusterId": "fc_mar_enguias_01"
+  },
+  {
+    "id": "GAST_MAR_0013",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que moluscos bivalves ou gastrópodes açorianos fixados às rochas vulcânicas da rebentação são servidos grelhados na própria concha com manteiga de alho e pimenta-da-terra?",
+    "opcoes": [
+      "Lapas Grelhadas dos Açores (e Cracas)",
+      "Ostras de Setúbal",
+      "Mexilhões do Tejo",
+      "Búzios de Cascais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As lapas e as cracas dos Açores e da Madeira são os mariscos mais característicos da gastronomia insular atlantica.",
+    "fonte": "Governo Regional dos Açores / Turismo dos Açores",
+    "factClusterId": "fc_mar_lapas_01"
+  },
+  {
+    "id": "GAST_MAR_0014",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Como se denomina a forma tradicional de cozinhar bacalhau ou polvo regado abundantemente com azeite fervente e alho, acompanhado de «batatas a murro» assadas com casca?",
+    "opcoes": [
+      "À Brás",
+      "À Lagareiro",
+      "De Caldeirada",
+      "Em Escabeche"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O estilo «À Lagareiro» remonta aos lagares de azeite onde o bacalhau ou o polvo eram mergulhados no azeite acabado de produzir.",
+    "fonte": "Gastronomia de Portugal / Casa do Azeite",
+    "factClusterId": "fc_mar_lagareiro_01"
+  },
+  {
+    "id": "GAST_MAR_0015",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de pescadores portugueses consiste em camadas alternadas de peixes variados frescos (robalo, tamboril, cação, raia, safio), batatas, cebola, tomate, pimento e azeite?",
+    "opcoes": [
+      "Açorda de Peixe",
+      "Ensopado de Peixe",
+      "Caldeirada de Peixe à Pescador",
+      "Massada de Peixe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A caldeirada é o prato comum a todas as comunidades costeiras portuguesas (Peniche, Setúbal, Algarve, Costa Nova).",
+    "fonte": "Museu de Peniche / Turismo Centro de Portugal",
+    "factClusterId": "fc_mar_caldeirada_01"
+  },
+  {
+    "id": "GAST_MAR_0016",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe pelágico pequeno, consumido tradicionalmente assado na brasa no carvão durante os Santos Populares (Santo António, São João e São Pedro) com pimentos e broa de milho, é o símbolo das festas de Lisboa e do Porto?",
+    "opcoes": [
+      "Carapau",
+      "Cavala",
+      "Arenque",
+      "Sardinha (Sardina pilchardus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A sardinha assada pingada sobre a fatia de pão é a rainha do verão em toda a costa de Portugal.",
+    "fonte": "IPMA / Turismo de Lisboa / Turismo do Porto",
+    "factClusterId": "fc_mar_sardinha_01"
+  },
+  {
+    "id": "GAST_MAR_0017",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que sopa típica alentejana de peixe é feita com cação (tubarão pequeno da costa), azeite virgem, alho pisado, louro, poejo ou coentros, farinha e fatias de pão alentejano?",
+    "opcoes": [
+      "Sopa de Cação",
+      "Sopa de Peixe de Peniche",
+      "Caldeirada Alentejana",
+      "Açorda de Marisco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sopa de Cação é um clássico do receituário do Alentejo, aromatizada com o toque inconfundível do poejo e do vinagre.",
+    "fonte": "Turismo do Alentejo / ERT",
+    "factClusterId": "fc_mar_sopacacao_01"
+  },
+  {
+    "id": "GAST_MAR_0018",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que método tradicional algarvio de conservação e consumo de carapaus consiste em salgar o peixe, escaldá-lo brevemente e retirar a pele («alimar»), servindo com azeite, alho e orégãos?",
+    "opcoes": [
+      "Carapaus Fritos",
+      "Carapaus Alimados",
+      "Muxama de Atum",
+      "Estupeta de Atum"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Os Carapaus Alimados são uma iguaria refrescante típica dos verões do barlavento e sotavento algarvio.",
+    "fonte": "Região de Turismo do Algarve",
+    "factClusterId": "fc_mar_carapausalimados_01"
+  },
+  {
+    "id": "GAST_MAR_0019",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Como se chama o presunto de atum salgado e seco ao ar, herança da salga de peixe fenícia e romana muito apreciada em Vila Real de Santo António e Olhão?",
+    "opcoes": [
+      "Estupeta",
+      "Bacalhau Seco",
+      "Muxama de Atum (ou Muxama Algarvia)",
+      "Polvo Seco da Nazaré"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Muxama é o lombo de atum curado em sal, cortado em fatias finas transparentes como presunto do mar.",
+    "fonte": "Município de Vila Real de Santo António / Qualifica",
+    "factClusterId": "fc_mar_muxama_01"
+  },
+  {
+    "id": "GAST_MAR_0020",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe migrador de rio do Ribatejo e Minho é tradicionalmente servido frito em postas estaladiças acompanhado por uma cremosa «Açorda de Ovas»?",
+    "opcoes": [
+      "Boga",
+      "Barbo",
+      "Achigã",
+      "Sável (Sável frito com açorda de ovas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Sável com Açorda de Ovas é uma das maiores glórias gastronómicas de Vila Franca de Xira, Santarém e Valença.",
+    "fonte": "Município de Vila Franca de Xira / Rota do Sável",
+    "factClusterId": "fc_mar_savel_01"
+  },
+  {
+    "id": "GAST_MAR_0021",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de bacalhau inventado no Mosteiro de Alcobaça leva bacalhau desfiado cozinhado com cenoura ralada, bechamel e natas, gratinado com queijo?",
+    "opcoes": [
+      "Bacalhau Espiritual",
+      "Bacalhau à Brás",
+      "Bacalhau com Broa",
+      "Bacalhau de Cebolada"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Bacalhau Espiritual foi criado pela condessa de Santar e celebrizado no restaurante do Palácio de Queluz.",
+    "fonte": "História da Gastronomia Portuguesa",
+    "factClusterId": "fc_mar_bacalhauespiritual_01"
+  },
+  {
+    "id": "GAST_MAR_0022",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que grande crustáceo decápode com pinças robustas é servido habitualmente nas marisqueiras portuguesas com o seu recheio cremoso da carapaça temperado com cerveja, maionese, ovo e mostarda?",
+    "opcoes": [
+      "Lagosta",
+      "Sapateira (Cancer pagurus)",
+      "Lavagante",
+      "Camarão-tigre"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A sapateira recheada acompanhada de tostas quentes barradas com manteiga é o petisco de marisqueira de eleição.",
+    "fonte": "AHRESP / Marisqueiras de Portugal",
+    "factClusterId": "fc_mar_sapateira_01"
+  },
+  {
+    "id": "GAST_MAR_0023",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Em que vila piscatória da costa oeste as mulheres das famílias de pescadores (as varinas com sete saias) secam carapaus e polvos em paneiros estendidos ao sol e à brisa marítima na praia?",
+    "opcoes": [
+      "Peniche",
+      "Sesimbra",
+      "Nazaré (Peixe Seco da Nazaré)",
+      "Ericeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Seca do Peixe na praia da Nazaré é um património vivo e museu a céu aberto da cultura costeira portuguesa.",
+    "fonte": "Município da Nazaré / Museu Etnográfico da Nazaré",
+    "factClusterId": "fc_mar_nazare_peixeseco_01"
+  },
+  {
+    "id": "GAST_MAR_0024",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que porto e estuário do distrito de Setúbal, banhado pelo rio Sado, é famoso pela produção e degustação de ostras de qualidade internacional superior (Crassostrea angulata)?",
+    "opcoes": [
+      "Estuário do Tejo",
+      "Ria de Alvor",
+      "Ria de Aveiro",
+      "Estuário do Sado (Setúbal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A ostra-portuguesa do Sado foi exportada para as mesas nobres de Paris no século XIX e recuperou notoriedade global.",
+    "fonte": "Docapesca / Município de Setúbal",
+    "factClusterId": "fc_mar_ostrasado_01"
+  },
+  {
+    "id": "GAST_MAR_0025",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato do Minho e Douro Litoral combina bacalhau alto frito ou assado na brasa coberto com uma crosta crocante de broa de milho esfarelada, alho picado e azeite?",
+    "opcoes": [
+      "Bacalhau com Broa",
+      "Bacalhau à Minhota",
+      "Bacalhau à Gomes de Sá",
+      "Bacalhau à Zé do Pipo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau com Broa junta a doçura e rusticidade da broa de milho ao sabor intenso do azeite novo e do bacalhau curado.",
+    "fonte": "Turismo Porto e Norte / Gastronomia Tradicional",
+    "factClusterId": "fc_mar_bacalhaucombroa_01"
+  },
+  {
+    "id": "GAST_MAR_0026",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Como se chamam os pastéis fritos de formato oval moldados entre duas colheres de sopa, feitos com massa de batata cozida, bacalhau desfiado, ovos, cebola e salsa picada?",
+    "opcoes": [
+      "Croquetes de Carne",
+      "Pastéis de Bacalhau (ou Bolinhos de Bacalhau no Norte)",
+      "Rissóis de Camarão",
+      "Pataniscas de Bacalhau"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Chamados «pastéis de bacalhau» no centro e sul e «bolinhos de bacalhau» no norte, são o petisco mais universal das tascas portuguesas.",
+    "fonte": "Dicionário da Gastronomia Portuguesa",
+    "factClusterId": "fc_mar_pasteisbacalhau_01"
+  },
+  {
+    "id": "GAST_MAR_0027",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que molusco gastrópode marinho com casca cónica em espiral é consumido cozido com sal nas cervejarias de Lisboa e marisqueiras do litoral, retirado com um alfinete ou palito?",
+    "opcoes": [
+      "Amêijoa-boa",
+      "Conquilha",
+      "Búzio (ou Burrié)",
+      "Cadela"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Os búzios e os burriés são cozidos em água do mar com malagueta e servidos frios como petisco de marisco.",
+    "fonte": "IPMA / Guia de Mariscos de Portugal",
+    "factClusterId": "fc_mar_buzios_01"
+  },
+  {
+    "id": "GAST_MAR_0028",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de arroz caldoso aromático com coentros e tomate utiliza as ovas, cabeça e postas nobres de peixes como robalo, garoupa ou tamboril?",
+    "opcoes": [
+      "Arroz de Pato",
+      "Arroz de Cabidela",
+      "Arroz de Carqueja",
+      "Arroz de Peixe (ou Arroz de Tamboril)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Tamboril com camarão é um dos pratos de peixe mais requisitados nos restaurantes costeiros de Portugal.",
+    "fonte": "Receitas Tradicionais Portuguesas",
+    "factClusterId": "fc_mar_arroztamboril_01"
+  },
+  {
+    "id": "GAST_MAR_0029",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que pequenos bivalves de concha triangular e lisa, apanhados na areia molhada da maré baixa nas praias algarvias, são servidos abertos na frigideira com alho, azeite e coentros?",
+    "opcoes": [
+      "Conquilhas à Algarvia (ou Cadelinhas)",
+      "Mexilhões da rocha",
+      "Ostras planas",
+      "Berbigão da ria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As conquilhas abertas ao lume são uma entrada clássica e refrescante das noites de verão no Algarve.",
+    "fonte": "Região de Turismo do Algarve",
+    "factClusterId": "fc_mar_conquilhas_01"
+  },
+  {
+    "id": "GAST_MAR_0030",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe nobre da costa portuguesa, conhecido pelos apreciadores pela sua cabeça imponente e carne branca muito firme de rocha, é servido assado no forno ou cozido com todos?",
+    "opcoes": [
+      "Pescada de carapinha",
+      "Garoupa (ou Cherne / Pargo)",
+      "Cavala",
+      "Faneca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A garoupa e o cherne atingem grande cotação nas lotas portuguesas pela excelência da sua textura e sabor delicado.",
+    "fonte": "Docapesca / IPMA",
+    "factClusterId": "fc_mar_garoupa_01"
+  },
+  {
+    "id": "GAST_MAR_0031",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que petisco feito com polme líquido de farinha, ovos, cebola, salsa picada e lascas de bacalhau, frito às colheradas em azeite, é rei no receituário popular português?",
+    "opcoes": [
+      "Peixinhos da Horta",
+      "Bolinhol",
+      "Pataniscas de Bacalhau (ou Iscas de Bacalhau)",
+      "Fritada de Sardinha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As pataniscas de bacalhau são tipicamente servidas acompanhadas por arroz de feijão vermelho ou arroz de tomate malandrinho.",
+    "fonte": "Dicionário de Gastronomia Tradicional",
+    "factClusterId": "fc_mar_pataniscas_01"
+  },
+  {
+    "id": "GAST_MAR_0032",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Em que arquipélago português são afamadas as «cracas», crustáceos sésseis que crescem em colónias calcárias e são servidos cozidos em água do mar com o sabor mais puro a maresia?",
+    "opcoes": [
+      "Berlengas",
+      "Ilhas Selvagens",
+      "Barreta de Olhão",
+      "Açores (e Madeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As cracas dos Açores são extraídas com cinzel e martelo das rochas marinhas e comidas com uma pequena faca de bico curvo.",
+    "fonte": "Governo Regional dos Açores / Turismo dos Açores",
+    "factClusterId": "fc_mar_cracas_01"
+  },
+  {
+    "id": "GAST_MAR_0033",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato da ceia da Consoada de Natal em Portugal junta bacalhau cozido, batatas, couve portuguesa (tronchuda), cenoura, ovos cozidos e rega abundante de azeite virgem extra cru?",
+    "opcoes": [
+      "Bacalhau com Todos (Bacalhau da Consoada)",
+      "Bacalhau Assado no Forno",
+      "Roupa Velha de Bacalhau",
+      "Bacalhau à Narcisa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau com Todos é o prato ritual incontornável partilhado pelas famílias de norte a sul na noite de 24 de dezembro.",
+    "fonte": "Tradições de Natal de Portugal",
+    "factClusterId": "fc_mar_bacalhaucomtodos_01"
+  },
+  {
+    "id": "GAST_MAR_0034",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de aproveitamento das sobras do Bacalhau da Consoada, salteadas no dia 25 de dezembro com azeite, alho e pão, é uma tradição nortenha?",
+    "opcoes": [
+      "Migas de Peixe",
+      "Roupa Velha de Bacalhau (ou Farrapada)",
+      "Açorda de Bacalhau",
+      "Torta de Peixe"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Roupa Velha une as couves, batatas e bacalhau num tacho bem quente com azeite e alho laminado.",
+    "fonte": "Receitas Tradicionais Portuguesas",
+    "factClusterId": "fc_mar_roupavelha_01"
+  },
+  {
+    "id": "GAST_MAR_0035",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que salada fria de verão algarvia é confecionada com aparas de atum curadas em salmoura, demolhadas e desfiadas, misturadas com tomate maduro, pimento verde e cebola picada?",
+    "opcoes": [
+      "Muxama",
+      "Salada de Polvo",
+      "Estupeta de Atum",
+      "Salada de Búzios"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Estupeta de Atum é um prato fresco emblemático dos pescadores de atum de Olhão e Vila Real de Santo António.",
+    "fonte": "Município de Olhão / Confraria do Atum",
+    "factClusterId": "fc_mar_estupeta_01"
+  },
+  {
+    "id": "GAST_MAR_0036",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de pele áspera e sem espinhas no interior da carne (cartilagíneo) é servido em caldeiradas ou frito com molho de pitau (à base de fígados do peixe) na Figueira da Foz?",
+    "opcoes": [
+      "Cação",
+      "Tamboril",
+      "Espadarte",
+      "Raia (Raia de Pitau)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Raia de Pitau na Figueira da Foz e Buarcos é cozinhada com o fígado da raia esmagado com azeite, alho e colorau.",
+    "fonte": "Município da Figueira da Foz / Turismo Centro de Portugal",
+    "factClusterId": "fc_mar_raia_01"
+  },
+  {
+    "id": "GAST_MAR_0037",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que marisco de rio da bacia do Tejo e Guadiana, outrora consumido apenas localmente, é hoje cozido com ervas aromáticas e servido em festivais em Ferreira do Zêzere?",
+    "opcoes": [
+      "Lagostim-vermelho do rio",
+      "Caranguejo da ria",
+      "Camarão do rio",
+      "Ameijoa-asiática"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Ferreira do Zêzere realiza anualmente o Festival do Lagostim do Rio no lago de Castelo do Bode.",
+    "fonte": "Município de Ferreira do Zêzere",
+    "factClusterId": "fc_mar_lagostimrio_01"
+  },
+  {
+    "id": "GAST_MAR_0038",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que receita bracarense de bacalhau, servida no antigo restaurante «Narcisa», apresenta postas grossas fritas envolvidas em cebolada e fatias de batata às rodelas fritas na mesma gordura?",
+    "opcoes": [
+      "Bacalhau à Gomes de Sá",
+      "Bacalhau à Narcisa (ou Bacalhau à Braga)",
+      "Bacalhau com Natas",
+      "Bacalhau à Margarida da Praça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau à Narcisa é um dos maiores símbolos gastronómicos da cidade dos arcebispos.",
+    "fonte": "Município de Braga / Turismo do Porto e Norte",
+    "factClusterId": "fc_mar_narcisa_01"
+  },
+  {
+    "id": "GAST_MAR_0039",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que técnica secular de cura do bacalhau através de salgadura e seca ao vento, levada a cabo pelos pescadores da frota bacalhoeira nos mares do Norte, confere o selo europeu de «Especialidade Tradicional Garantida» ao:",
+    "opcoes": [
+      "Bacalhau Congelado do Báltico",
+      "Bacalhau Fresco da Noruega",
+      "Bacalhau de Cura Tradicional Portuguesa (ETG)",
+      "Bacalhau Seco da Islândia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Bacalhau de Cura Tradicional Portuguesa possui estatuto ETG na União Europeia pelo processo de cura de longa maturação em sal.",
+    "fonte": "DGADR / Comissão Europeia / Associação dos Industriais do Bacalhau (AIB)",
+    "factClusterId": "fc_mar_curatradicional_01"
+  },
+  {
+    "id": "GAST_MAR_0040",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie de amêijoa nativa da Ria Formosa e da Ria de Aveiro, com linhas concêntricas bem marcadas e cor acinzentada, é considerada a mais saborosa e cotada nos mercados?",
+    "opcoes": [
+      "Amêijoa-japonesa",
+      "Amêijoa-macha",
+      "Amêijoa-branca",
+      "Amêijoa-boa (Ruditapes decussatus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Amêijoa-boa é a rainha dos bivalves das r Гермаrias portuguesas, colhida com ganchorra ou à faca de mariscar pelos viveiristas locais.",
+    "fonte": "IPMA / Parque Natural da Ria Formosa",
+    "factClusterId": "fc_mar_ameijoaboa_01"
+  },
+  {
+    "id": "GAST_MAR_0041",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe azul muito económico e abundante, rico em ácidos gordos Ómega-3, é servido no Algarve escalado e grelhado na brasa com molho de azeite e vinagre («Cavala Alhada»)?",
+    "opcoes": [
+      "Cavala (Scomber colias)",
+      "Biqueirão",
+      "Carapau",
+      "Peixe-agulha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A cavala tem sido promovida pela alta gastronomia portuguesa como peixe sustentável e extremamente saudável.",
+    "fonte": "Docapesca / Projeto Cavala com Todos",
+    "factClusterId": "fc_mar_cavala_01"
+  },
+  {
+    "id": "GAST_MAR_0042",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que mariscada típica das praias da Ericeira e Peniche junta lagosta, lavagante, santola, sapateira, percebes, navalheiras e camarão da costa numa travessa de prata?",
+    "opcoes": [
+      "Caldeirada Mista",
+      "Mariscada à Portuguesa (ou Travessa de Marisco)",
+      "Cataplana de Polvo",
+      "Moqueca Portuguesa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ericeira e Peniche são os principais santuários de marisco vivo em viveiros abastecidos pelo oceano Atlântico.",
+    "fonte": "Município de Mafra / Município de Peniche",
+    "factClusterId": "fc_mar_mariscada_01"
+  },
+  {
+    "id": "GAST_MAR_0043",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que sopa de peixe requintada servida nos restaurantes de Cascais e Lisboa é aromatizada com açafrão, anis e raspas de laranja, levando croutons de pão frito?",
+    "opcoes": [
+      "Caldo de Peixe dos Açores",
+      "Canja de Garoupa",
+      "Sopa de Peixe do Guincho",
+      "Sopa de Marisco de Sesimbra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Sopa de Peixe da costa do Guincho combina a tradição dos pescadores com a influência cosmopolita da Riviera portuguesa.",
+    "fonte": "Turismo de Cascais",
+    "factClusterId": "fc_mar_sopapeixe_01"
+  },
+  {
+    "id": "GAST_MAR_0044",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de rio das águas límpidas dos rios Minho, Coura e Zêzere é habitualmente frito com uma fatia fina de presunto no seu interior («Truta com Presunto»)?",
+    "opcoes": [
+      "Salmão",
+      "Boga de rio",
+      "Barbo",
+      "Truta-fário (ou Truta arco-íris)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Truta com Presunto recheada é uma especialidade das regiões montanhosas do Alto Minho e da Serra da Estrela.",
+    "fonte": "Turismo Centro de Portugal / Município de Manteigas",
+    "factClusterId": "fc_mar_trutapresunto_01"
+  },
+  {
+    "id": "GAST_MAR_0045",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que bivalve com casca castanha rugosa apanhado nos lodaçais da Ria Formosa e Ria de Aveiro é utilizado na confecção de arroz malandrinho e papas de milho com berbigão?",
+    "opcoes": [
+      "Berbigão (Cerastoderma edule)",
+      "Amêijoa-branca",
+      "Longueirão",
+      "Mexilhão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Papas de Milho com Berbigão (Xarém com Berbigão) são uma das receitas mais ancestrais do sotavento algarvio.",
+    "fonte": "Município de Olhão / Confraria do Xarém",
+    "factClusterId": "fc_mar_berbigao_01"
+  },
+  {
+    "id": "GAST_MAR_0046",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que molusco bivalve comprido e cilíndrico em forma de canivete, capturado na areia da maré vazia com sal fino, é confecionado em arroz caldoso em Olhão e Tavira?",
+    "opcoes": [
+      "Lapa brava",
+      "Longueirão (ou Navallha)",
+      "Búzio bicudo",
+      "Percebe da rocha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Longueirão é uma das grandes estrelas gastronómicas da Ria Formosa.",
+    "fonte": "Região de Turismo do Algarve / Município de Olhão",
+    "factClusterId": "fc_mar_longueirao_01"
+  },
+  {
+    "id": "GAST_MAR_0047",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe costeiro de escamas prateadas e dorso cinzento, predador das águas batidas pelo mar nos rochedos da Costa Vicentina, é o rei do peixe grelhado em Portugal?",
+    "opcoes": [
+      "Dourada",
+      "Sargo",
+      "Robalo-legítimo (Dicentrarchus labrax)",
+      "Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O robalo selvagem grelhado na brasa com flor de sal e azeite é tido pelos chefes de cozinha como o pináculo da frescura atlântica.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_robalo_01"
+  },
+  {
+    "id": "GAST_MAR_0048",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Como se chama a massa com molho rico de peixes nobres e camarão, cozinhada com cotovelos ou macarrão e coentros picados, típica das praias da Nazaré e Matosinhos?",
+    "opcoes": [
+      "Caldeirada",
+      "Açorda de Marisco",
+      "Arroz de Corvina",
+      "Massada de Peixe"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Massada de Peixe com garoupa ou robalo é uma das refeições mais reconfortantes dos portos de pesca portugueses.",
+    "fonte": "Docapesca / Gastronomia Marítima",
+    "factClusterId": "fc_mar_massadapeixe_01"
+  },
+  {
+    "id": "GAST_MAR_0049",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que tipo de salga e fumo tradicional em fumeiro de madeira é aplicado à truta no concelho de Manteigas (Serra da Estrela)?",
+    "opcoes": [
+      "Truta Fumada de Manteigas",
+      "Bacalhau Seco",
+      "Sardinha em Salmoura",
+      "Arenque Salgado"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O viveiro de trutas do Vale do Zêzere em Manteigas produz trutas fumadas de elevada qualidade artesanal.",
+    "fonte": "Município de Manteigas / Parque Natural da Serra da Estrela",
+    "factClusterId": "fc_mar_trutafumada_01"
+  },
+  {
+    "id": "GAST_MAR_0050",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que cidade piscatória do distrito do Porto, com o maior número de restaurantes de peixe por metro quadrado e porto de pesca artificial de Leixões, é a «Capital do Peixe Fresco»?",
+    "opcoes": [
+      "Póvoa de Varzim",
+      "Vila do Conde",
+      "Matosinhos",
+      "Espinho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Rua Heróis de França em Matosinhos concentra dezenas de grelhadores na rua com o melhor peixe fresco da costa norte.",
+    "fonte": "Município de Matosinhos / Turismo do Porto e Norte",
+    "factClusterId": "fc_mar_matosinhos_01"
+  }
+]

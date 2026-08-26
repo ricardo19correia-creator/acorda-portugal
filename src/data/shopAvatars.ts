@@ -41,7 +41,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/alma-alfama-2050.png',
     category: 'Cultura',
     rarity: 'COMUM',
-    price: 25000,
+    price: 1000,
   },
   {
     id: 'vulcao-acores',
@@ -50,7 +50,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/vulcao-acores.png',
     category: 'Cultura',
     rarity: 'COMUM',
-    price: 35000,
+    price: 1000,
   },
   {
     id: 'representante-distrital',
@@ -59,7 +59,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/REPRESENTANTE DISTRITAL.png',
     category: 'Cidadania',
     rarity: 'RARO',
-    price: 75000,
+    price: 2500,
   },
   {
     id: 'camoes-2050',
@@ -68,7 +68,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/camoes-2050.png',
     category: 'História',
     rarity: 'RARO',
-    price: 120000,
+    price: 2500,
   },
   {
     id: 'lenda-futebol-2050',
@@ -77,7 +77,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/lenda-futebol-2050.png',
     category: 'Desporto',
     rarity: 'EPICO',
-    price: 250000,
+    price: 5000,
   },
   {
     id: 'sebastiao-2050',
@@ -86,7 +86,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/sebastiao-2050.png',
     category: 'História',
     rarity: 'EPICO',
-    price: 400000,
+    price: 5000,
   },
   {
     id: 'campeao-nacional',
@@ -95,7 +95,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/Campeão Nacional.png',
     category: 'Desporto',
     rarity: 'LENDARIO',
-    price: 750000,
+    price: 10000,
   },
   {
     id: 'tita-top-10',

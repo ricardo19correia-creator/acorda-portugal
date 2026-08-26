@@ -15,6 +15,19 @@ import {
   setDoc,
   Timestamp,
 } from 'firebase/firestore'
+import {
+  ECONOMY_CONFIG,
+  getDifficultyMultiplier,
+  calculateMatchCoinReward,
+  calculateLevelUpCoinReward,
+} from '@/src/data/economy'
+
+export {
+  ECONOMY_CONFIG,
+  getDifficultyMultiplier,
+  calculateMatchCoinReward,
+  calculateLevelUpCoinReward,
+}
 
 export type ItemCategory = 'arenas' | 'soundpacks' | 'streaks' | 'personalizacao' | 'utilidade' | 'prestigio' | 'packs'
 export type ItemRarity = 'comum' | 'raro' | 'epico' | 'lendario'
@@ -551,13 +564,14 @@ export const SHOP_CATALOG: ShopItem[] = [
 
 // Fontes de Recompensa Centralizadas
 export const REWARD_CONFIG = {
-  MATCH_BASE_PER_CORRECT: 15, // € por resposta certa (~150€ por 10 perguntas)
-  MATCH_PERFECT_BONUS: 50, // Bónus por 100% de acerto
-  STREAK_3_DAYS: 150,
-  STREAK_7_DAYS: 500,
-  LEVEL_UP_REWARD: 200,
-  DAILY_CHALLENGE: 150,
-  WEEKLY_MISSION: 1000,
+  MATCH_BASE_WIN_COINS: ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS, // 15
+  MATCH_PERFECT_BONUS: ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS, // 10
+  STREAK_BONUS_MAX: ECONOMY_CONFIG.MATCH_REWARDS.STREAK_BONUS_MAX, // 10
+  LEVEL_UP_REWARD: ECONOMY_CONFIG.LEVEL_UP_REWARDS.COINS_PER_LEVEL, // 25
+  STREAK_3_DAYS: 50,
+  STREAK_7_DAYS: 150,
+  DAILY_CHALLENGE: 50,
+  WEEKLY_MISSION: 250,
 }
 
 export type PurchaseResult = {
@@ -727,17 +741,23 @@ export async function processMatchEurosReward({
   correctCount,
   totalQuestions,
   score,
+  bestStreak = 0,
+  difficulty = 1,
 }: {
   userId: string
   matchId: string
   correctCount: number
   totalQuestions: number
   score: number
+  bestStreak?: number
+  difficulty?: string | number | null
 }): Promise<{ eurosAwarded: number; newBalance: number }> {
-  const isPerfect = correctCount === totalQuestions && totalQuestions > 0
-  const baseReward = correctCount * REWARD_CONFIG.MATCH_BASE_PER_CORRECT
-  const bonusReward = isPerfect ? REWARD_CONFIG.MATCH_PERFECT_BONUS : Math.round(score / 50)
-  const totalEuros = Math.max(20, baseReward + bonusReward)
+  const totalEuros = calculateMatchCoinReward({
+    correctCount,
+    totalQuestions,
+    bestStreak,
+    difficulty,
+  })
 
   const userRef = doc(db, 'users', userId)
   const matchHistoryRef = doc(db, 'users', userId, 'match_rewards', matchId)
@@ -764,6 +784,7 @@ export async function processMatchEurosReward({
     // Atualizar saldo
     transaction.update(userRef, {
       euros: newBalance,
+      coins: newBalance,
       updatedAt: serverTimestamp(),
     })
 

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "FUT_EST_0001",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Qual é o estádio com a maior capacidade de lotação de espectadores em Portugal, inaugurado em outubro de 2003?",
+    "opcoes": [
+      "Estádio da Luz (Estádio do Sport Lisboa e Benfica)",
+      "Estádio do Dragão",
+      "Estádio José Alvalade",
+      "Estádio Nacional do Jamor"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Estádio da Luz, em Lisboa, tem capacidade oficial para cerca de 65.000 espectadores, sendo o maior recinto desportivo do país.",
+    "fonte": "Federação Portuguesa de Futebol (FPF) / SL Benfica",
+    "factClusterId": "fc_est_luz_01"
+  },
+  {
+    "id": "FUT_EST_0002",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que arquiteto português de renome internacional projetou o Estádio Municipal de Braga («A Pedreira»), esculpido nas encostas do monte Castro?",
+    "opcoes": [
+      "Álvaro Siza Vieira",
+      "Eduardo Souto de Moura",
+      "Tomás Taveira",
+      "Gonçalo Byrne"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Eduardo Souto de Moura desenhou o Estádio Municipal de Braga, obra que lhe valeu o Prémio Pritzker de Arquitetura em 2011.",
+    "fonte": "Ordem dos Arquitectos / SC Braga",
+    "factClusterId": "fc_est_braga_01"
+  },
+  {
+    "id": "FUT_EST_0003",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que complexo desportivo histórico se disputa tradicionalmente a final da Taça de Portugal desde 1946?",
+    "opcoes": [
+      "Estádio do Restelo",
+      "Estádio Universitário de Lisboa",
+      "Estádio Nacional do Jamor (Oeiras)",
+      "Estádio 1.º de Maio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio Nacional do Jamor, em Oeiras, inaugurado a 10 de junho de 1944, é o palco mítico da final da Taça de Portugal.",
+    "fonte": "Federação Portuguesa de Futebol (FPF)",
+    "factClusterId": "fc_est_jamor_01"
+  },
+  {
+    "id": "FUT_EST_0004",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que arquiteto português foi o responsável pelo projeto dos novos estádios José Alvalade (Lisboa), Municipal de Aveiro e Dr. Magalhães Pessoa (Leiria) para o Euro 2004?",
+    "opcoes": [
+      "Manuel Salgado",
+      "Eduardo Souto de Moura",
+      "Carrilho da Graça",
+      "Tomás Taveira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Tomás Taveira concebeu os estádios de Alvalade, Aveiro e Leiria, reconhecidos pelo seu estilo pós-modernista e colorido.",
+    "fonte": "UEFA / Euro 2004",
+    "factClusterId": "fc_est_taveira_01"
+  },
+  {
+    "id": "FUT_EST_0005",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Qual foi o jogo inaugural do Estádio do Dragão, no Porto, realizado a 16 de novembro de 2003, no qual Lionel Messi se estreou pela equipa principal do Barcelona?",
+    "opcoes": [
+      "FC Porto 2-0 FC Barcelona",
+      "FC Porto 3-1 Real Madrid",
+      "FC Porto 1-0 Manchester United",
+      "FC Porto 2-1 Juventus"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O FC Porto venceu o Barcelona por 2-0 na inauguração do Estádio do Dragão, com golos de Derlei e Hugo Almeida, jogo marcado pela estreia de Messi com 16 anos.",
+    "fonte": "FC Porto / UEFA",
+    "factClusterId": "fc_est_dragao_01"
+  },
+  {
+    "id": "FUT_EST_0006",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio de Lisboa se disputou a final do Campeonato da Europa de 2004 (Euro 2004), entre Portugal e a Grécia?",
+    "opcoes": [
+      "Estádio José Alvalade",
+      "Estádio da Luz",
+      "Estádio Nacional do Jamor",
+      "Estádio do Restelo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A final do Euro 2004 disputou-se a 4 de julho de 2004 no Estádio da Luz, em Lisboa.",
+    "fonte": "UEFA Euro 2004 Official Report",
+    "factClusterId": "fc_est_euro2004_01"
+  },
+  {
+    "id": "FUT_EST_0007",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio centenário, com vista privilegiada para o rio Tejo e o Mosteiro dos Jerónimos, é a casa histórica do Clube de Futebol «Os Belenenses»?",
+    "opcoes": [
+      "Estádio da Tapadinha",
+      "Estádio Pina Manique",
+      "Estádio do Restelo",
+      "Campo Grande"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Restelo, inaugurado em 1956 em Belém, é a casa mítica do Belenenses.",
+    "fonte": "CF Os Belenenses",
+    "factClusterId": "fc_est_restelo_01"
+  },
+  {
+    "id": "FUT_EST_0008",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio do Bessa Século XXI, reconstruído para o Euro 2004 no centro do Porto, é a casa do:",
+    "opcoes": [
+      "Leixões SC",
+      "SC Salgueiros",
+      "Varzim SC",
+      "Boavista FC"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Bessa Século XXI, no bairro da Boavista, é o recinto oficial do Boavista Futebol Clube.",
+    "fonte": "Boavista FC / Liga Portugal",
+    "factClusterId": "fc_est_bessa_01"
+  },
+  {
+    "id": "FUT_EST_0009",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade portuguesa se situa o Estádio D. Afonso Henriques, casa do Vitória Sport Clube?",
+    "opcoes": [
+      "Guimarães",
+      "Braga",
+      "Vila Real",
+      "Famalicão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Estádio D. Afonso Henriques situa-se na cidade-berço de Guimarães, homenageando o primeiro Rei de Portugal.",
+    "fonte": "Vitória Sport Clube / Liga Portugal",
+    "factClusterId": "fc_est_guimaraes_01"
+  },
+  {
+    "id": "FUT_EST_0010",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio de Lisboa se disputou a final da Taça dos Clubes Campeões Europeus de 1967, na qual os «Leões de Lisboa» (Celtic FC) venceram o Inter de Milão?",
+    "opcoes": [
+      "Estádio da Luz",
+      "Estádio Nacional do Jamor",
+      "Estádio do Restelo",
+      "Estádio José Alvalade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A histórica final europeia de 25 de maio de 1967 decorreu no Estádio Nacional do Jamor, consagrando o Celtic como primeiro campeão britânico da Taça dos Campeões.",
+    "fonte": "UEFA / FPF",
+    "factClusterId": "fc_est_jamor_celtic_01"
+  },
+  {
+    "id": "FUT_EST_0011",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio situado na ilha da Madeira, no Funchal, foi outrora conhecido como Estádio dos Barreiros e é a casa do Club Sport Marítimo?",
+    "opcoes": [
+      "Estádio da Madeira (Choupana)",
+      "Complexo Desportivo da Ribeira Brava",
+      "Estádio do Marítimo",
+      "Estádio do Centro Cívico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Estádio dos Barreiros, totalmente remodelado como Estádio do Marítimo, foi inaugurado originalmente em 1957 e reinaugurado em 2016.",
+    "fonte": "CS Marítimo",
+    "factClusterId": "fc_est_barreiros_01"
+  },
+  {
+    "id": "FUT_EST_0012",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Algarve, construído no Parque das Cidades para o Euro 2004, localiza-se na fronteira entre que dois concelhos algarvios?",
+    "opcoes": [
+      "Portimão e Lagos",
+      "Albufeira e Silves",
+      "Tavira e Olhão",
+      "Faro e Loulé"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Algarve situa-se no Parque das Cidades, área partilhada e coadministrada pelos municípios de Faro e Loulé.",
+    "fonte": "Associação de Municípios Loulé/Faro",
+    "factClusterId": "fc_est_algarve_01"
+  },
+  {
+    "id": "FUT_EST_0013",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio da cidade de Coimbra a Académica (AAC) disputa os seus jogos, recinto que foi palco de jogos do Euro 2004?",
+    "opcoes": [
+      "Estádio Cidade de Coimbra",
+      "Estádio Universitário",
+      "Estádio Sérgio Conceição",
+      "Campo de Santa Cruz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O antigo Estádio Municipal do Calhabé foi remodelado e renomeado Estádio Cidade de Coimbra para o Euro 2004.",
+    "fonte": "Académica de Coimbra / Município de Coimbra",
+    "factClusterId": "fc_est_coimbra_01"
+  },
+  {
+    "id": "FUT_EST_0014",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Setúbal, inaugurado em 1962, é o reduto histórico do Vitória Futebol Clube (Vitória de Setúbal)?",
+    "opcoes": [
+      "Estádio Alfredo da Silva",
+      "Estádio do Bonfim",
+      "Estádio Municipal José Martins Vieira",
+      "Estádio da Medideira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Bonfim situa-se no coração de Setúbal, sendo a mítica casa do Vitória de Setúbal.",
+    "fonte": "Vitória Futebol Clube",
+    "factClusterId": "fc_est_bonfim_01"
+  },
+  {
+    "id": "FUT_EST_0015",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Qual é o maior estádio da Região Autónoma dos Açores, situado em Ponta Delgada, onde o Santa Clara joga habitualmente?",
+    "opcoes": [
+      "Estádio Municipal da Ribeira Grande",
+      "Estádio João Paulo II",
+      "Estádio de São Miguel",
+      "Campo de Jogos de Angra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Estádio de São Miguel, localizado na ilha de São Miguel, é a casa oficial do CD Santa Clara nas competições nacionais.",
+    "fonte": "Governo dos Açores / CD Santa Clara",
+    "factClusterId": "fc_est_saomiguel_01"
+  },
+  {
+    "id": "FUT_EST_0016",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio histórico de Lisboa, situado sob o tabuleiro da Ponte 25 de Abril em Alcântara, é a casa do Atlético Clube de Portugal?",
+    "opcoes": [
+      "Estádio de Pina Manique",
+      "Campo das Salésias",
+      "Estádio Conde Dias Garcia",
+      "Estádio da Tapadinha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Campo da Tapadinha, inaugurado em 1926 em Alcântara, é um dos campos mais pitorescos e históricos de Lisboa.",
+    "fonte": "Atlético Clube de Portugal",
+    "factClusterId": "fc_est_tapadinha_01"
+  },
+  {
+    "id": "FUT_EST_0017",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio de Portugal se disputou a final da UEFA Champions League de 2014, onde o Real Madrid conquistou «La Décima» frente ao Atlético de Madrid?",
+    "opcoes": [
+      "Estádio da Luz",
+      "Estádio do Dragão",
+      "Estádio José Alvalade",
+      "Estádio Nacional do Jamor"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A final da Champions League de 24 de maio de 2014 teve lugar no Estádio da Luz, em Lisboa.",
+    "fonte": "UEFA Champions League 2014",
+    "factClusterId": "fc_est_champions2014_01"
+  },
+  {
+    "id": "FUT_EST_0018",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio português se realizou a final da UEFA Champions League de 2021, na qual o Chelsea venceu o Manchester City por 1-0?",
+    "opcoes": [
+      "Estádio da Luz",
+      "Estádio do Dragão (Porto)",
+      "Estádio José Alvalade",
+      "Estádio do Algarve"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A final da Champions de 2021 foi disputada no Estádio do Dragão, no Porto, a 29 de maio de 2021.",
+    "fonte": "UEFA Champions League 2021",
+    "factClusterId": "fc_est_champions2021_01"
+  },
+  {
+    "id": "FUT_EST_0019",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que campo histórico de Lisboa acolheu o primeiro jogo de futebol oficial em Portugal e o primeiro campo relvado do país no início do século XX?",
+    "opcoes": [
+      "Campo da Feiteira",
+      "Campo de Palhavã",
+      "Campo das Salésias",
+      "Campo de Santa Cruz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O Campo das Salésias, pertença histórica do Belenenses, foi inaugurado em 1928 e foi o primeiro campo relvado e com bancadas de cimento em Portugal.",
+    "fonte": "FPF / CF Os Belenenses",
+    "factClusterId": "fc_est_salesias_01"
+  },
+  {
+    "id": "FUT_EST_0020",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio da Madeira (conhecido popularmente como Estádio da Choupana), situado no cimo dos montes do Funchal, pertence ao:",
+    "opcoes": [
+      "União da Madeira",
+      "CS Marítimo",
+      "AD Camacha",
+      "CD Nacional (Nacional da Madeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Estádio da Madeira, localizado na Choupana, é a casa oficial do Clube Desportivo Nacional da Madeira.",
+    "fonte": "CD Nacional",
+    "factClusterId": "fc_est_choupana_01"
+  },
+  {
+    "id": "FUT_EST_0021",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade do Minho se localiza o Estádio Municipal de Barcelos, casa do Gil Vicente Futebol Clube?",
+    "opcoes": [
+      "Barcelos",
+      "Braga",
+      "Famalicão",
+      "Esposende"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Estádio Cidade de Barcelos, inaugurado em 2004, pertence ao Município de Barcelos e acolhe os jogos do Gil Vicente.",
+    "fonte": "Gil Vicente FC / Município de Barcelos",
+    "factClusterId": "fc_est_barcelos_01"
+  },
+  {
+    "id": "FUT_EST_0022",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio foi o primeiro recinto em Portugal a acolher uma final da Taça UEFA / Liga Europa, na edição de 2004/2005 (Sporting CP vs CSKA Moscovo)?",
+    "opcoes": [
+      "Estádio da Luz",
+      "Estádio José Alvalade",
+      "Estádio do Dragão",
+      "Estádio do Bessa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O novo Estádio José Alvalade acolheu a final da Taça UEFA a 18 de maio de 2005.",
+    "fonte": "UEFA / Sporting CP",
+    "factClusterId": "fc_est_alvalade_uefa_01"
+  },
+  {
+    "id": "FUT_EST_0023",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Capital do Móvel é o recinto desportivo onde disputa os seus jogos o clube:",
+    "opcoes": [
+      "FC Penafiel",
+      "SC Freamunde",
+      "FC Paços de Ferreira",
+      "Leixões SC"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio Capital do Móvel (antigo Estádio da Mata Real) situa-se em Paços de Ferreira.",
+    "fonte": "FC Paços de Ferreira",
+    "factClusterId": "fc_est_mata_real_01"
+  },
+  {
+    "id": "FUT_EST_0024",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Matosinhos, inaugurado em 1964, é a casa histórica do Leixões Sport Club?",
+    "opcoes": [
+      "Estádio do Bessa",
+      "Estádio Municipal da Maia",
+      "Estádio do Padroense",
+      "Estádio do Mar"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Estádio do Mar situa-se na freguesia de Senhora da Hora, em Matosinhos, sendo o emblemático campo do Leixões.",
+    "fonte": "Leixões Sport Club",
+    "factClusterId": "fc_est_mar_01"
+  },
+  {
+    "id": "FUT_EST_0025",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade do Alentejo se situa o Complexo Desportivo Manuel Marques Gomes e o Estádio Municipal de Évora (Sanches de Miranda), palco do Lusitano de Évora e Juventude de Évora?",
+    "opcoes": [
+      "Évora",
+      "Beja",
+      "Elvas",
+      "Portalegre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Évora possui tradição futebolística centenária, com os dérbis históricos entre o Lusitano Ginásio Clube e a Juventude de Évora.",
+    "fonte": "Município de Évora / AF Évora",
+    "factClusterId": "fc_est_evora_01"
+  },
+  {
+    "id": "FUT_EST_0026",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio de São Luís, situado em pleno centro urbano de Faro desde 1923, é a casa histórica do:",
+    "opcoes": [
+      "SC Olhanense",
+      "Sporting Clube Farense",
+      "Portimonense SC",
+      "Louletano DC"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio de São Luís é a histórica e apaixonada casa do SC Farense na capital algarvia.",
+    "fonte": "SC Farense",
+    "factClusterId": "fc_est_saoluis_01"
+  },
+  {
+    "id": "FUT_EST_0027",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio ribatejano da cidade de Santarém, outrora palco do União de Santarém, foi inaugurado em 1978?",
+    "opcoes": [
+      "Estádio Municipal de Rio Maior",
+      "Estádio do Bonfim",
+      "Campo Chã das Padeiras",
+      "Estádio Dr. Alves Vieira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O Campo Chã das Padeiras é o estádio municipal histórico de Santarém, casa da União Desportiva de Santarém.",
+    "fonte": "Município de Santarém",
+    "factClusterId": "fc_est_santarem_01"
+  },
+  {
+    "id": "FUT_EST_0028",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade se situa o Estádio Municipal de Portimão, palco dos jogos do Portimonense Sporting Clube?",
+    "opcoes": [
+      "Faro",
+      "Lagos",
+      "Albufeira",
+      "Portimão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Portimonense disputa os seus jogos no Estádio Municipal de Portimão, no Barlavento algarvio.",
+    "fonte": "Portimonense SC",
+    "factClusterId": "fc_est_portimao_01"
+  },
+  {
+    "id": "FUT_EST_0029",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Trás-os-Montes, remodelado em 2004, acolhe o Grupo Desportivo de Chaves?",
+    "opcoes": [
+      "Estádio Municipal Eng.º Manuel Branco Teixeira",
+      "Estádio do Monte da Forca",
+      "Estádio Dr. José de Matos",
+      "Estádio do Fontelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal Eng.º Manuel Branco Teixeira situa-se em Chaves, tendo acolhido a estreia de Cristiano Ronaldo na Seleção Nacional A em 2003.",
+    "fonte": "GD Chaves / FPF",
+    "factClusterId": "fc_est_chaves_01"
+  },
+  {
+    "id": "FUT_EST_0030",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade e parque beirão se situa o Estádio Municipal do Fontelo, casa do Académico de Viseu FC?",
+    "opcoes": [
+      "Guarda",
+      "Viseu",
+      "Lamego",
+      "Tondela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Fontelo fica situado na monumental Mata do Fontelo, na cidade de Viseu.",
+    "fonte": "Académico de Viseu / Município de Viseu",
+    "factClusterId": "fc_est_fontelo_01"
+  },
+  {
+    "id": "FUT_EST_0031",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio João Cardoso é a casa do CD Tondela, clube da região da:",
+    "opcoes": [
+      "Beira Baixa",
+      "Douro Litoral",
+      "Beira Alta (Dão-Lafões)",
+      "Ribatejo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Estádio João Cardoso situa-se em Tondela, no distrito de Viseu, região do Dão.",
+    "fonte": "CD Tondela",
+    "factClusterId": "fc_est_tondela_01"
+  },
+  {
+    "id": "FUT_EST_0032",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Vila Real, situado no monte da Forca, é a casa do Sport Clube de Vila Real?",
+    "opcoes": [
+      "Estádio do Marão",
+      "Campo de Alvão",
+      "Estádio do Fontelo",
+      "Complexo Desportivo do Monte da Forca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "O Complexo Desportivo do Monte da Forca acolhe os jogos e formação do SC Vila Real em Trás-os-Montes.",
+    "fonte": "SC Vila Real / Município de Vila Real",
+    "factClusterId": "fc_est_vilareal_01"
+  },
+  {
+    "id": "FUT_EST_0033",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio de Rio Maior a equipa do Casa Pia AC disputou jogos da I Liga na época 2023/24?",
+    "opcoes": [
+      "Estádio Municipal de Rio Maior",
+      "Estádio do Jamor",
+      "Estádio Pina Manique",
+      "Campo da Tapadinha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal de Rio Maior é um centro de estágios desportivos de referência em Portugal e serviu de casa temporária ao Casa Pia.",
+    "fonte": "Liga Portugal / Desmor Rio Maior",
+    "factClusterId": "fc_est_riomaior_01"
+  },
+  {
+    "id": "FUT_EST_0034",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Municipal 22 de Junho, inaugurado em 1952, é o reduto do:",
+    "opcoes": [
+      "Moreirense FC",
+      "FC Famalicão",
+      "Gil Vicente FC",
+      "Rio Ave FC"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estádio Municipal 22 de Junho situa-se em Vila Nova de Famalicão, terra do FC Famalicão.",
+    "fonte": "FC Famalicão / Liga Portugal",
+    "factClusterId": "fc_est_famalicao_01"
+  },
+  {
+    "id": "FUT_EST_0035",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Vila do Conde, situado junto à foz do rio Ave e ao oceano Atlântico, é a casa do Rio Ave Futebol Clube?",
+    "opcoes": [
+      "Estádio do Varzim",
+      "Estádio de Leça",
+      "Estádio dos Arcos (Estádio do Rio Ave FC)",
+      "Estádio da Lixa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio dos Arcos (oficialmente Estádio do Rio Ave FC) é o recinto ribeirinho e atlântico do Rio Ave em Vila do Conde.",
+    "fonte": "Rio Ave FC",
+    "factClusterId": "fc_est_rioave_01"
+  },
+  {
+    "id": "FUT_EST_0036",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Comendador Joaquim de Almeida Freitas, casa do Moreirense FC, situa-se na vila de:",
+    "opcoes": [
+      "Vizela",
+      "Fafe",
+      "Riba de Ave",
+      "Moreira de Cónegos (Guimarães)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O estádio do Moreirense fica na vila operária e têxtil de Moreira de Cónegos, no concelho de Guimarães.",
+    "fonte": "Moreirense FC",
+    "factClusterId": "fc_est_moreirense_01"
+  },
+  {
+    "id": "FUT_EST_0037",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade balnear da Póvoa de Varzim se situa o Estádio do Varzim Sport Club?",
+    "opcoes": [
+      "Póvoa de Varzim",
+      "Vila do Conde",
+      "Esposende",
+      "Viana do Castelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do Varzim Sport Club situa-se no centro da Póvoa de Varzim, conhecido pelo fervor dos seus adeptos poveiros.",
+    "fonte": "Varzim Sport Club",
+    "factClusterId": "fc_est_varzim_01"
+  },
+  {
+    "id": "FUT_EST_0038",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Torres Vedras é a casa histórica do SC União Torreense, fundado em 1917?",
+    "opcoes": [
+      "Estádio Municipal de Mafra",
+      "Estádio Manuel Marques",
+      "Estádio Conde de Sucena",
+      "Estádio do Calvário"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Manuel Marques acolhe os jogos do Torreense na cidade de Torres Vedras.",
+    "fonte": "SC União Torreense",
+    "factClusterId": "fc_est_torreense_01"
+  },
+  {
+    "id": "FUT_EST_0039",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio do FC Vizela acolhe os adeptos vizelenses na bacia hidrográfica do rio:",
+    "opcoes": [
+      "Rio Ave",
+      "Rio Cávado",
+      "Rio Vizela",
+      "Rio Sousa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio do FC Vizela localiza-se na cidade termal de Vizela, nas margens do rio com o mesmo nome.",
+    "fonte": "FC Vizela",
+    "factClusterId": "fc_est_vizela_01"
+  },
+  {
+    "id": "FUT_EST_0040",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade da Beira Baixa se localiza o Estádio Municipal Vale do Romeiro, onde joga o Sport Benfica e Castelo Branco?",
+    "opcoes": [
+      "Covilhã",
+      "Fundão",
+      "Proença-a-Nova",
+      "Castelo Branco"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal Vale do Romeiro situa-se em Castelo Branco, capital distrital da Beira Baixa.",
+    "fonte": "Município de Castelo Branco / BC Branco",
+    "factClusterId": "fc_est_cbranco_01"
+  },
+  {
+    "id": "FUT_EST_0041",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio José Santos Pinto, construído no topo da encosta da serra da Estrela com vistas sobre a Cova da Beira, é a casa histórica do:",
+    "opcoes": [
+      "SC Covilhã",
+      "GD Bragança",
+      "SC Freamunde",
+      "Naval 1.º de Maio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Estádio José Santos Pinto, inaugurado em 1935 na Covilhã, é um dos mais altos e emblemáticos estádios de montanha de Portugal.",
+    "fonte": "SC Covilhã",
+    "factClusterId": "fc_est_covilha_01"
+  },
+  {
+    "id": "FUT_EST_0042",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Olhão, com bancadas pintadas de rubro-negro, acolhe o Sporting Clube Olhanense?",
+    "opcoes": [
+      "Estádio de São Luís",
+      "Estádio José Arcanjo",
+      "Estádio da Nora",
+      "Estádio Municipal de Tavira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Estádio José Arcanjo situa-se na cidade piscatória de Olhão, no Sotavento algarvio.",
+    "fonte": "SC Olhanense",
+    "factClusterId": "fc_est_olhao_01"
+  },
+  {
+    "id": "FUT_EST_0043",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que estádio de Coimbra, no concelho da Figueira da Foz, jogou a Naval 1.º de Maio durante as suas épocas na I Liga?",
+    "opcoes": [
+      "Estádio do Calhabé",
+      "Estádio da Mata",
+      "Estádio José Bento Pessoa",
+      "Estádio Municipal de Tábua"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O Estádio Municipal José Bento Pessoa situa-se na Figueira da Foz, terra da Associação Naval 1.º de Maio.",
+    "fonte": "Município da Figueira da Foz",
+    "factClusterId": "fc_est_naval_01"
+  },
+  {
+    "id": "FUT_EST_0044",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio dos Açores, em Angra do Heroísmo (ilha Terceira), acolhe o histórico Sport Clube Lusitânia?",
+    "opcoes": [
+      "Estádio de São Miguel",
+      "Campo de São Mateus",
+      "Estádio da Graciosa",
+      "Estádio João Paulo II"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "O Estádio Municipal João Paulo II situa-se em Angra do Heroísmo, na ilha Terceira.",
+    "fonte": "SC Lusitânia / Município de Angra do Heroísmo",
+    "factClusterId": "fc_est_angra_01"
+  },
+  {
+    "id": "FUT_EST_0045",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Municipal de Arouca, palco dos jogos europeus e da I Liga do FC Arouca, situa-se na serra:",
+    "opcoes": [
+      "Da Freita (Maciço da Gralheira)",
+      "Do Gerês",
+      "Da Estrela",
+      "Do Marão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal de Arouca fica situado no vale de Arouca, envolto pelas montanhas mágicas do Arouca Geopark.",
+    "fonte": "FC Arouca / Arouca Geopark",
+    "factClusterId": "fc_est_arouca_01"
+  },
+  {
+    "id": "FUT_EST_0046",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Que estádio de Viana do Castelo, sobranceiro ao rio Lima, acolhe o Sport Clube Vianense, fundado em 1898?",
+    "opcoes": [
+      "Estádio do Manjadouro",
+      "Estádio Dr. José de Matos",
+      "Estádio Municipal da Póvoa",
+      "Campo dos Arcos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "O Estádio Dr. José de Matos é a casa centenária do SC Vianense, um dos clubes mais antigos de Portugal.",
+    "fonte": "SC Vianense / Município de Viana do Castelo",
+    "factClusterId": "fc_est_vianense_01"
+  },
+  {
+    "id": "FUT_EST_0047",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Aurélio Pereira, integrado na Academia Cristiano Ronaldo em Alcochete, é o principal campo de formação do:",
+    "opcoes": [
+      "SL Benfica",
+      "Belenenses",
+      "Sporting Clube de Portugal",
+      "Vitória de Setúbal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estádio Aurélio Pereira situa-se na Academia do Sporting em Alcochete, homenageando o lendário olheiro que descobriu Figo e Cristiano Ronaldo.",
+    "fonte": "Sporting CP / Academia Cristiano Ronaldo",
+    "factClusterId": "fc_est_alcochete_01"
+  },
+  {
+    "id": "FUT_EST_0048",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Benfica Campus, centro de treinos e estádio da equipa B e feminina do SL Benfica, situa-se no concelho de:",
+    "opcoes": [
+      "Almada",
+      "Barreiro",
+      "Loures",
+      "Seixal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Benfica Campus localiza-se na Quinta da Trindade, no concelho do Seixal (margem sul do Tejo).",
+    "fonte": "SL Benfica / Benfica Campus",
+    "factClusterId": "fc_est_seixal_01"
+  },
+  {
+    "id": "FUT_EST_0049",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "O Estádio Dr. Jorge Sampaio, onde joga habitualmente o FC Porto B, localiza-se na freguesia de Pedroso, concelho de:",
+    "opcoes": [
+      "Vila Nova de Gaia",
+      "Gondomar",
+      "Maia",
+      "Santa Maria da Feira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal Jorge Sampaio fica em Pedroso, no concelho de Vila Nova de Gaia.",
+    "fonte": "Município de Vila Nova de Gaia / FC Porto",
+    "factClusterId": "fc_est_pedroso_01"
+  },
+  {
+    "id": "FUT_EST_0050",
+    "tema": "Futebol Português",
+    "subtema": "Estádios",
+    "pergunta": "Em que cidade alentejana se situa o Estádio Municipal de Portalegre, casa do Clube Desportivo Portalegrense?",
+    "opcoes": [
+      "Elvas",
+      "Ponte de Sor",
+      "Portalegre",
+      "Campo Maior"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Estádio Municipal de Portalegre acolhe as competições distritais e regionais no Alto Alentejo.",
+    "fonte": "Município de Portalegre",
+    "factClusterId": "fc_est_portalegre_01"
+  }
+]

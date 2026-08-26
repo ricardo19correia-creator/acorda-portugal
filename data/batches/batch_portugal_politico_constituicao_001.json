@@ -1,0 +1,852 @@
+[
+  {
+    "id": "POL_CON_0001",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Em que data solene a Assembleia Constituinte aprovou a Constituição da República Portuguesa de 1976 (entrando formalmente em vigor a 25 de abril de 1976, no segundo aniversário da Revolução dos Cravos)?",
+    "opcoes": [
+      "2 de abril de 1976",
+      "25 de abril de 1975",
+      "25 de novembro de 1975",
+      "1 de janeiro de 1976"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Constituição de 1976 foi aprovada com os votos favoráveis do PS, PPD/PSD, PCP, MDP/CDE e UDP e o voto contra solitário do CDS.",
+    "fonte": "Diário da Assembleia Constituinte / Assembleia da República",
+    "factClusterId": "fc_pol_con_aprovacao_1976_01"
+  },
+  {
+    "id": "POL_CON_0002",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Qual foi a primeira constituição escrita da história de Portugal, aprovada a 23 de setembro de 1822 pelas Cortes Constituintes e jurada pelo Rei D. João VI após a Revolução Liberal do Porto de 1820?",
+    "opcoes": [
+      "Carta Constitucional de 1826",
+      "Constituição Política da Monarquia Portuguesa de 1822",
+      "Constituição de 1838",
+      "Constituição Republicana de 1911"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Constituição de 1822 consagrou pela primeira vez em Portugal a soberania da Nação, a divisão de poderes e a liberdade de imprensa.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_pol_con_constituicao1822_01"
+  },
+  {
+    "id": "POL_CON_0003",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante documento constitucional outorgado em 1826 no Rio de Janeiro pelo Rei D. Pedro IV («Carta Constitucional de 1826»), instituiu um quarto poder privativo do monarca para mediar os conflitos políticos entre órgãos do Estado («Poder Moderador»)?",
+    "opcoes": [
+      "Constituição de 1822",
+      "Constituição Setembrista de 1838",
+      "Carta Constitucional da Monarquia Portuguesa de 1826",
+      "Estatuto Régio de 1842"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Carta Constitucional de 1826 foi o texto constitucional com maior tempo de vigência em Portugal (1826-1828, 1834-1836 e 1842-1910).",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_con_cartaconstitucional1826_01"
+  },
+  {
+    "id": "POL_CON_0004",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Qual foi a primeira constituição republicana da história portuguesa, aprovada a 21 de agosto de 1911 pela Assembleia Nacional Constituinte após a Proclamação da República de 5 de Outubro de 1910?",
+    "opcoes": [
+      "Constituição de 1933",
+      "Constituição de 1838",
+      "Constituição de 1976",
+      "Constituição Política da República Portuguesa de 1911"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Constituição de 1911 consagrou a laicidade do Estado, o direito à greve e o voto para cidadãos alfabetizados chefes de família.",
+    "fonte": "Assembleia da República / Fundação Mário Soares",
+    "factClusterId": "fc_pol_con_constituicao1911_01"
+  },
+  {
+    "id": "POL_CON_0005",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que constituição autoritária e corporativa elaborada sob a égide de António de Oliveira Salazar («Constituição de 1933»), deu cobertura jurídica ao regime do Estado Novo sendo aprovada num plebiscito nacional onde as abstenções foram contabilizadas como votos a favor?",
+    "opcoes": [
+      "Constituição Política da República Portuguesa de 1933",
+      "Constituição de 1911",
+      "Estatuto Nacional do Trabalho",
+      "Carta do Estado Novo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Constituição de 1933 subordinava os direitos individuais ao interesse superior da Nação e criou a Assembleia Nacional e a Câmara Corporativa.",
+    "fonte": "Assembleia da República / Torre do Tombo",
+    "factClusterId": "fc_pol_con_constituicao1933_01"
+  },
+  {
+    "id": "POL_CON_0006",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 110.º da Constituição da República Portuguesa, quais são os quatro órgãos constitucionais de soberania de Portugal?",
+    "opcoes": [
+      "Presidente da República, Primeiro-Ministro, Parlamento e Tribunal Constitucional",
+      "Presidente da República, Assembleia da República, Governo e Tribunais",
+      "Governo, Forças Armadas, Assembleia da República e Tribunais",
+      "Presidente da República, Conselho de Estado, Parlamento e Provedor de Justiça"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os órgãos de soberania regem-se pelo princípio constitucional da separação e interdependência de poderes.",
+    "fonte": "Constituição da República Portuguesa (Artigo 110.º)",
+    "factClusterId": "fc_pol_con_orgaosdesoberania_01"
+  },
+  {
+    "id": "POL_CON_0007",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante e supremo tribunal jurisdicional com sede no Palácio Ratton em Lisboa («Tribunal Constitucional»), criado pela 1.ª Revisão Constitucional de 1982, tem a competência exclusiva de fiscalizar a constitucionalidade das leis e normas jurídicas em Portugal?",
+    "opcoes": [
+      "Supremo Tribunal de Justiça",
+      "Supremo Tribunal Administrativo",
+      "Tribunal Constitucional (13 Juízes Conselheiros)",
+      "Tribunal de Contas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tribunal Constitucional é composto por 13 juízes (10 eleitos pela Assembleia da República por maioria de dois terços e 3 cooptados pelos seus pares).",
+    "fonte": "Tribunal Constitucional / Lei Orgânica do Tribunal Constitucional",
+    "factClusterId": "fc_pol_con_tribunalconstitucional_01"
+  },
+  {
+    "id": "POL_CON_0008",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que histórica e profunda revisão da Constituição da República Portuguesa realizada em 1982 («1.ª Revisão Constitucional»), extinguiu o Conselho da Revolução tutelado pelos militares, criou o Tribunal Constitucional e o Conselho de Estado e reduziu os poderes presidenciais?",
+    "opcoes": [
+      "2.ª Revisão Constitucional (1989)",
+      "3.ª Revisão Constitucional (1992)",
+      "4.ª Revisão Constitucional (1997)",
+      "1.ª Revisão Constitucional (Lei Constitucional n.º 1/82)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A revisão de 1982 consolidou a plena normalização civil e democrática das instituições retirando aos militares a tutela política do regime.",
+    "fonte": "Assembleia da República / Diário da República",
+    "factClusterId": "fc_pol_con_revisao1982_01"
+  },
+  {
+    "id": "POL_CON_0009",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante e decisiva revisão constitucional aprovada em 1989 («2.ª Revisão Constitucional»), eliminou o princípio da «irreversibilidade das nacionalizações» de 1975 abrindo caminho à reprivatização de empresas públicas e bancos e instituiu a figura do referendo nacional?",
+    "opcoes": [
+      "2.ª Revisão Constitucional (Lei Constitucional n.º 1/89)",
+      "1.ª Revisão Constitucional (1982)",
+      "4.ª Revisão Constitucional (1997)",
+      "6.ª Revisão Constitucional (2004)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A revisão de 1989 permitiu ao governo de Cavaco Silva liberalizar setores estratégicos e reprivatizar a banca, seguros e indústrias.",
+    "fonte": "Assembleia da República / Diário da República",
+    "factClusterId": "fc_pol_con_revisao1989_01"
+  },
+  {
+    "id": "POL_CON_0010",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 24.º da Constituição da República Portuguesa sobre o direito à vida («A vida humana é inviolável»), que penalidade máxima está terminantemente e absolutamente proibida no ordenamento jurídico português em qualquer circunstância?",
+    "opcoes": [
+      "A prisão preventiva",
+      "A pena de morte (e penas de prisão perpétua)",
+      "A coima pecuniária",
+      "O trabalho comunitário"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Portugal foi pioneiro mundial na abolição da pena de morte para crimes civis (1867) e aboliu-a totalmente mesmo em tempo de guerra na revisão de 1997.",
+    "fonte": "Constituição da República Portuguesa (Artigo 24.º e Artigo 30.º)",
+    "factClusterId": "fc_pol_con_abolicaopenademorte_01"
+  },
+  {
+    "id": "POL_CON_0011",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante providência e garantia jurídica consagrada no Artigo 31.º da Constituição («Habeas Corpus»), pode ser requerida com urgência perante o tribunal competente contra qualquer situação de:",
+    "opcoes": [
+      "Violação de direitos de propriedade",
+      "Cobrança indevida de impostos",
+      "Abuso de poder em virtude de prisão ou detenção ilegal",
+      "Difamação na imprensa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Habeas Corpus pode ser interposto pelo próprio detido ou por qualquer outro cidadão no gozo dos seus direitos políticos.",
+    "fonte": "Constituição da República Portuguesa (Artigo 31.º) / Código de Processo Penal",
+    "factClusterId": "fc_pol_con_habeascorpus_01"
+  },
+  {
+    "id": "POL_CON_0012",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que direito fundamental dos trabalhadores garantido pelo Artigo 57.º da Constituição («Direito à greve»), proíbe expressamente a medida patronal de paralisação da empresa ou encerramento das instalações para coagir os trabalhadores («Lock-out»)?",
+    "opcoes": [
+      "É obrigatório o lock-out",
+      "O lock-out é permitido com autorização governamental",
+      "O lock-out só se aplica a empresas públicas",
+      "É expressamente proibido o lock-out patronal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 57.º estipula que compete exclusivamente aos trabalhadores definir o âmbito de interesses a defender através da greve.",
+    "fonte": "Constituição da República Portuguesa (Artigo 57.º)",
+    "factClusterId": "fc_pol_con_direitoagreve_lockout_01"
+  },
+  {
+    "id": "POL_CON_0013",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 64.º da Constituição («Direito à proteção da saúde»), o Estado garante o direito à saúde através da criação de um serviço público com que características fundamentais?",
+    "opcoes": [
+      "Serviço Nacional de Saúde (SNS) universal, geral e tendencialmente gratuito",
+      "Sistema exclusivamente privado de seguros médicos",
+      "Rede assistencial paga integralmente pelo utente",
+      "Serviço municipal de pronto-socorro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O SNS foi formalmente criado pela Lei n.º 56/79 por iniciativa do Ministro dos Assuntos Sociais António Arnaut (o 'Pai do SNS').",
+    "fonte": "Constituição da República Portuguesa (Artigo 64.º) / Diário da República",
+    "factClusterId": "fc_pol_con_sns_artigo64_01"
+  },
+  {
+    "id": "POL_CON_0014",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 11.º da Constituição, quais são os Símbolos Nacionais oficiais da República Portuguesa e a capital do país?",
+    "opcoes": [
+      "O Escudo Nacional, o Fado de Coimbra e a capital em Coimbra",
+      "A Bandeira Nacional verde e rubra, o Hino Nacional «A Portuguesa» e a capital em Lisboa",
+      "A Cruz de Cristo, o Hino da Maria da Fonte e a capital em Guimarães",
+      "A Esfera Armilar, o Hino da Carta e a capital no Porto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 11.º define a composição da Bandeira adotada pela República de 1910 e declara solenemente Lisboa como capital do Estado.",
+    "fonte": "Constituição da República Portuguesa (Artigo 11.º)",
+    "factClusterId": "fc_pol_con_simbolosnacionais_art11_01"
+  },
+  {
+    "id": "POL_CON_0015",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante órgão político de consulta do Presidente da República previsto no Artigo 141.º da Constituição («Conselho de Estado»), é presidido pelo Chefe de Estado e integra antigos Presidentes, o PM, o Presidente da AR e cidadãos designados?",
+    "opcoes": [
+      "Conselho Superior da Magistratura",
+      "Conselho Económico e Social",
+      "Conselho de Estado",
+      "Conselho Superior de Defesa Nacional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Presidente da República é constitucionalmente obrigado a ouvir o Conselho de Estado antes de dissolver a Assembleia da República ou declarar a guerra.",
+    "fonte": "Constituição da República Portuguesa (Artigos 141.º a 146.º)",
+    "factClusterId": "fc_pol_con_conselhodeestado_01"
+  },
+  {
+    "id": "POL_CON_0016",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Qual é a maioria qualificada de deputados em efetividade de funções exigida pelo Artigo 286.º da Constituição da República para a aprovação de qualquer alteração ou Lei de Revisão Constitucional?",
+    "opcoes": [
+      "Maioria simples dos votos",
+      "Maioria absoluta (mais de metade)",
+      "Unanimidade dos Deputados",
+      "Maioria de dois terços dos Deputados em efetividade de funções"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A exigência de maioria de dois terços (pelo menos 154 em 230 deputados) obriga a consensos alargados entre os maiores partidos parlamentares.",
+    "fonte": "Constituição da República Portuguesa (Artigo 286.º)",
+    "factClusterId": "fc_pol_con_maioria_dois_tercos_01"
+  },
+  {
+    "id": "POL_CON_0017",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante artigo da Constituição da República Portuguesa (Artigo 288.º) estabelece os «Limites Materiais de Revisão» que nenhuma lei de revisão constitucional pode desrespeitar ou abolir (como a forma republicana de governo e a independência dos tribunais)?",
+    "opcoes": [
+      "Artigo 288.º (Limites materiais de revisão constitucional)",
+      "Artigo 1.º",
+      "Artigo 100.º",
+      "Artigo 300.º"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Entre os limites materiais constam também os direitos, liberdades e garantias, o sufrágio universal, o pluralismo partidário e a autonomia das autarquias e regiões.",
+    "fonte": "Constituição da República Portuguesa (Artigo 288.º)",
+    "factClusterId": "fc_pol_con_limitesmateriais_art288_01"
+  },
+  {
+    "id": "POL_CON_0018",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Qual é o único caso constitucional em que o Presidente da República Portuguesa tem a faculdade de exercer o «Veto Absoluto» insuperável pela Assembleia da República?",
+    "opcoes": [
+      "Perante o Orçamento do Estado",
+      "Perante diplomas declarados inconstitucionais pelo Tribunal Constitucional em fiscalização preventiva",
+      "Perante leis de bases da saúde",
+      "Perante tratados internacionais da NATO"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Se o Tribunal Constitucional declarar uma norma inconstitucional, o Presidente tem de vetar o diploma e devolvê-lo sem promulgação à AR.",
+    "fonte": "Constituição da República Portuguesa (Artigo 279.º)",
+    "factClusterId": "fc_pol_con_vetoabsoluto_tc_01"
+  },
+  {
+    "id": "POL_CON_0019",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que órgão constitucional independente previsto no Artigo 23.º da Constituição («Provedor de Justiça»), eleito pela Assembleia da República por maioria de dois terços, tem a missão de apreciar as queixas dos cidadãos contra a administração pública sem poder decisório mas emitindo recomendações?",
+    "opcoes": [
+      "Procurador-Geral da República",
+      "Presidente do Tribunal de Contas",
+      "Provedor de Justiça (Ombudsman)",
+      "Inspetor-Geral de Finanças"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Provedor de Justiça tem legitimidade constitucional para requerer ao Tribunal Constitucional a declaração de inconstitucionalidade de qualquer norma jurídica.",
+    "fonte": "Provedoria de Justiça / Artigo 23.º da CRP",
+    "factClusterId": "fc_pol_con_provedordejustica_01"
+  },
+  {
+    "id": "POL_CON_0020",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 136.º da Constituição sobre o «Veto Político» do Presidente da República a decretos da Assembleia da República, por que maioria qualificada de deputados pode o Parlamento reconfirmar o diploma obrigando o Presidente a promulgá-lo no prazo de 8 dias?",
+    "opcoes": [
+      "Maioria simples dos deputados presentes",
+      "Maioria de quatro quintos",
+      "Unanimidade",
+      "Maioria absoluta dos Deputados em efetividade de funções (ou maioria de 2/3 em certas matérias)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Caso a Assembleia da República confirme o voto por maioria absoluta (116 deputados), o Presidente da República é obrigado a promulgar o decreto no prazo de 8 dias.",
+    "fonte": "Constituição da República Portuguesa (Artigo 136.º)",
+    "factClusterId": "fc_pol_con_vetopolitico_reconfirmacao_01"
+  },
+  {
+    "id": "POL_CON_0021",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 121.º da Constituição da República, qual é a idade mínima de elegibilidade para que um cidadão português eleitor possa candidatar-se ao cargo de Presidente da República?",
+    "opcoes": [
+      "35 anos de idade",
+      "18 anos",
+      "21 anos",
+      "40 anos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O candidato a Presidente da República tem de ser cidadão português de origem e apresentar no mínimo 7.500 e no máximo 15.000 proponentes eleitores no Tribunal Constitucional.",
+    "fonte": "Constituição da República Portuguesa (Artigo 121.º e 124.º)",
+    "factClusterId": "fc_pol_con_elegibilidade_presidente_01"
+  },
+  {
+    "id": "POL_CON_0022",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Quantos mandatos presidenciais consecutivos pode desempenhar o Presidente da República Portuguesa segundo o Artigo 123.º da Constituição da República?",
+    "opcoes": [
+      "Três mandatos consecutivos",
+      "Dois mandatos consecutivos de cinco anos (máximo de 10 anos seguidos)",
+      "Um único mandato vitalício",
+      "Mandatos ilimitados"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Após dois mandatos consecutivos de cinco anos, o Presidente só pode recandidatar-se decorridos cinco anos após o termo do segundo mandato.",
+    "fonte": "Constituição da República Portuguesa (Artigo 123.º)",
+    "factClusterId": "fc_pol_con_mandatos_presidenciais_01"
+  },
+  {
+    "id": "POL_CON_0023",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 148.º da Constituição, qual é o número constitucionalmente fixado de deputados que compõem a Assembleia da República?",
+    "opcoes": [
+      "250 Deputados",
+      "150 Deputados",
+      "230 Deputados (com o limite de 180 a 230 deputados)",
+      "300 Deputados"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A lei eleitoral fixa em exatamente 230 o número de deputados eleitos através do método D'Hondt nos 22 círculos eleitorais.",
+    "fonte": "Constituição da República Portuguesa (Artigo 148.º) / Lei Eleitoral da AR",
+    "factClusterId": "fc_pol_con_numerodeputados_230_01"
+  },
+  {
+    "id": "POL_CON_0024",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante e histórico princípio constitucional consagrado no Artigo 13.º da Constituição («Princípio da Igualdade»), estabelece que todos os cidadãos têm a mesma dignidade social e são iguais perante a lei, sem discriminação de sexo, raça, língua, território de origem, religião ou convicções políticas?",
+    "opcoes": [
+      "Princípio da Legalidade",
+      "Princípio da Proporcionalidade",
+      "Princípio da Subsidiariedade",
+      "Princípio da Igualdade (Artigo 13.º)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 13.º é a trave-mestra dos direitos fundamentais e proíbe qualquer privilégio de nascimento ou título nobiliárquico.",
+    "fonte": "Constituição da República Portuguesa (Artigo 13.º)",
+    "factClusterId": "fc_pol_con_principioldaigualdade_art13_01"
+  },
+  {
+    "id": "POL_CON_0025",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 19.º da Constituição da República Portuguesa, quais são as duas únicas situações de exceção em que os órgãos de soberania podem suspender o exercício de direitos, liberdades e garantias fundamentais?",
+    "opcoes": [
+      "Estado de Sítio e Estado de Emergência",
+      "Estado de Guerra e Lei Marcial",
+      "Alerta Vermelho e Calamidade Pública",
+      "Crise Governamental e Intervenção Financeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A declaração do estado de emergência é da competência do Presidente da República mas carece de autorização prévia da Assembleia da República e de parecer do Governo.",
+    "fonte": "Constituição da República Portuguesa (Artigo 19.º)",
+    "factClusterId": "fc_pol_con_estadodeemergencia_01"
+  },
+  {
+    "id": "POL_CON_0026",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 195.º da Constituição, que circunstância política determinante provoca a demissão obrigatória do Governo pelo Presidente da República?",
+    "opcoes": [
+      "O chumbo de um decreto regulamentar",
+      "A rejeição do Programa do Governo ou a aprovação de uma Moção de Censura pela AR",
+      "A remodelação de um secretário de Estado",
+      "A ausência do Primeiro-Ministro no estrangeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Provocam também a demissão a não aprovação de uma moção de confiança, a morte ou incapacidade física duradoura do Primeiro-Ministro.",
+    "fonte": "Constituição da República Portuguesa (Artigo 195.º)",
+    "factClusterId": "fc_pol_con_demissaodogoverno_01"
+  },
+  {
+    "id": "POL_CON_0027",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante revisão constitucional realizada em 1992 («3.ª Revisão Constitucional»), adaptou a Constituição Portuguesa para permitir a ratificação do:",
+    "opcoes": [
+      "Tratado de Roma",
+      "Tratado de Lisboa",
+      "Tratado de Maastricht (União Europeia e Moeda Única / Euro)",
+      "Tratado de Amesterdão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A revisão de 1992 permitiu o direito de voto aos cidadãos comunitários residentes e a transferência de competências de política monetária para o BCE.",
+    "fonte": "Assembleia da República / Diário da República",
+    "factClusterId": "fc_pol_con_revisao1992_maastricht_01"
+  },
+  {
+    "id": "POL_CON_0028",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que revisão constitucional aprovada em 2001 («5.ª Revisão Constitucional»), alterou o Artigo 33.º para permitir a extradição de cidadãos e a sujeição de Portugal à jurisdição do:",
+    "opcoes": [
+      "Tribunal Internacional de Haia",
+      "Tribunal Europeu dos Direitos Humanos",
+      "Tribunal Militar Internacional",
+      "Tribunal Penal Internacional (Estatuto de Roma)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A adesão ao Tribunal Penal Internacional permitiu o julgamento de crimes contra a humanidade, genocídio e crimes de guerra.",
+    "fonte": "Assembleia da República / Estatuto de Roma",
+    "factClusterId": "fc_pol_con_revisao2001_tpi_01"
+  },
+  {
+    "id": "POL_CON_0029",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 187.º da Constituição, por quem é nomeado o Primeiro-Ministro de Portugal?",
+    "opcoes": [
+      "Pelo Presidente da República, ouvidos os partidos representados na AR e tendo em conta os resultados eleitorais",
+      "Diretamente por sufrágio universal popular",
+      "Pela maioria dos deputados em sessão solene",
+      "Pelo Presidente do Tribunal Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os restantes ministros e secretários de Estado são nomeados pelo Presidente da República sob proposta do Primeiro-Ministro.",
+    "fonte": "Constituição da República Portuguesa (Artigo 187.º)",
+    "factClusterId": "fc_pol_con_nomeacaopm_art187_01"
+  },
+  {
+    "id": "POL_CON_0030",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 225.º da Constituição («Regime político-administrativo dos Açores e da Madeira»), a autonomia regional dos arquipélagos fundamenta-se nas suas características geográficas, económicas e sociais e nas históricas:",
+    "opcoes": [
+      "Tradições militares",
+      "Aspiracões autonomistas seculares das populações insulares",
+      "Isenções fiscais permanentes",
+      "Leis ultramarinas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Regiões Autónomas possuem Assembleias Legislativas Regionais e Governos Regionais próprios com poder legislativo tributário e administrativo.",
+    "fonte": "Constituição da República Portuguesa (Artigo 225.º)",
+    "factClusterId": "fc_pol_con_autonomiaregional_art225_01"
+  },
+  {
+    "id": "POL_CON_0031",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 236.º da Constituição, quais são as três categorias de autarquias locais existentes em Portugal continental?",
+    "opcoes": [
+      "Distritos, Concelhos e Bairros",
+      "Comarcas, Julgados de Paz e Câmaras",
+      "Freguesias, Municípios e Regiões Administrativas",
+      "Áreas Metropolitanas, Províncias e Cidades"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A criação em concreto das Regiões Administrativas no continente carece de aprovação prévia em referendo nacional (previsto no Artigo 256.º).",
+    "fonte": "Constituição da República Portuguesa (Artigo 236.º)",
+    "factClusterId": "fc_pol_con_autarquiaslocais_art236_01"
+  },
+  {
+    "id": "POL_CON_0032",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 219.º da Constituição, que magistratura pública com autonomia e estatuto próprio representa o Estado, exerce a ação penal e defende a legalidade democrática?",
+    "opcoes": [
+      "Ordem dos Advogados",
+      "Magistratura Judicial",
+      "Defensoria Pública",
+      "Ministério Público (dirigido pelo Procurador-Geral da República)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Procurador-Geral da República é nomeado pelo Presidente da República sob proposta do Governo para um mandato de seis anos.",
+    "fonte": "Constituição da República Portuguesa (Artigo 219.º e 220.º)",
+    "factClusterId": "fc_pol_con_ministeriopublico_01"
+  },
+  {
+    "id": "POL_CON_0033",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 214.º da Constituição, que órgão superior de gestão e disciplina da magistratura judicial garante a independência dos juízes em Portugal?",
+    "opcoes": [
+      "Conselho Superior da Magistratura (CSM)",
+      "Conselho Superior do Ministério Público",
+      "Tribunal Constitucional",
+      "Ministério da Justiça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Conselho Superior da Magistratura é presidido por inerência pelo Presidente do Supremo Tribunal de Justiça.",
+    "fonte": "Constituição da República Portuguesa (Artigo 217.º e 218.º)",
+    "factClusterId": "fc_pol_con_conselhosuperiormagistratura_01"
+  },
+  {
+    "id": "POL_CON_0034",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 277.º da Constituição da República Portuguesa, que vício jurídico afeta qualquer norma jurídica que viole as disposições da Constituição ou os princípios nela consignados?",
+    "opcoes": [
+      "Caducidade",
+      "Inconstitucionalidade (as normas inconstitucionais não podem ser aplicadas)",
+      "Revogação tácita",
+      "Suspensão administrativa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A fiscalização pode ser preventiva (a pedido do PR), abstrata sucessiva ou concreta por via de recurso judicial para o Tribunal Constitucional.",
+    "fonte": "Constituição da República Portuguesa (Artigo 277.º e 281.º)",
+    "factClusterId": "fc_pol_con_inconstitucionalidade_01"
+  },
+  {
+    "id": "POL_CON_0035",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 115.º da Constituição («Referendo»), quem pode convocar um referendo nacional sobre matérias de relevante interesse nacional a proposta da Assembleia da República ou do Governo?",
+    "opcoes": [
+      "O Primeiro-Ministro",
+      "O Tribunal Constitucional",
+      "O Presidente da República",
+      "A Comissão Nacional de Eleições"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Presidente decide livremente sobre a convocação do referendo após fiscalização preventiva obrigatória da constitucionalidade pelo Tribunal Constitucional.",
+    "fonte": "Constituição da República Portuguesa (Artigo 115.º)",
+    "factClusterId": "fc_pol_con_referendonacional_art115_01"
+  },
+  {
+    "id": "POL_CON_0036",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 25.º da Constituição («Direito à integridade pessoal»), que garantia é expressamente assegurada a todos os cidadãos contra abusos estatais ou de terceiros?",
+    "opcoes": [
+      "O sigilo de correspondência pode ser quebrado sem juiz",
+      "A propriedade privada sobrepõe-se à integridade pessoal",
+      "Os detidos perdem a integridade moral",
+      "A integridade moral e física é inviolável e ninguém pode ser submetido a tortura ou tratos cruéis"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 25.º proíbe de forma absoluta a tortura, maus-tratos ou tratos degradantes mesmo em estado de exceção.",
+    "fonte": "Constituição da República Portuguesa (Artigo 25.º)",
+    "factClusterId": "fc_pol_con_integridadepessoal_art25_01"
+  },
+  {
+    "id": "POL_CON_0037",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 45.º da Constituição («Direito de reunião e de manifestação»), os cidadãos têm o direito de se reunir pacificamente e sem armas em locais públicos sem que necessitem de:",
+    "opcoes": [
+      "Qualquer autorização prévia das autoridades",
+      "Pagamento de taxas municipais",
+      "Presença de advogado",
+      "Autorização do Ministério da Administração Interna"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A lei exige apenas um aviso prévio às autoridades policiais por razões de segurança de trânsito mas não requer autorização discricionária.",
+    "fonte": "Constituição da República Portuguesa (Artigo 45.º) / Decreto-Lei n.º 406/74",
+    "factClusterId": "fc_pol_con_direitodereuniao_art45_01"
+  },
+  {
+    "id": "POL_CON_0038",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 38.º da Constituição («Liberdade de imprensa e meios de comunicação social»), que garantia proíbe expressamente qualquer forma de censura prévia aos jornalistas?",
+    "opcoes": [
+      "A censura prévia é permitida em caso de greve",
+      "A liberdade de imprensa é garantida e não pode haver qualquer censura prévia",
+      "O Governo tem direito de veto sobre editoriais",
+      "A censura militar aplica-se à rádio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 38.º garante também o sigilo das fontes profissionais dos jornalistas e a criação do Conselho de Imprensa (atual ERC).",
+    "fonte": "Constituição da República Portuguesa (Artigo 38.º)",
+    "factClusterId": "fc_pol_con_liberdadedeimprensa_art38_01"
+  },
+  {
+    "id": "POL_CON_0039",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 51.º da Constituição («Associações e partidos políticos»), que tipo de partidos políticos está terminantemente proibido de existir em Portugal?",
+    "opcoes": [
+      "Partidos de matriz ecologista",
+      "Partidos com representação parlamentar única",
+      "Partidos que perfilhem a ideologia fascista ou de carácter regional",
+      "Partidos de matriz liberal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Lei n.º 64/78 regulamenta a proibição constitucional de organizações e partidos que perfilhem a ideologia fascista.",
+    "fonte": "Constituição da República Portuguesa (Artigo 46.º e 51.º)",
+    "factClusterId": "fc_pol_con_proibicao_partidosfascistas_01"
+  },
+  {
+    "id": "POL_CON_0040",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 41.º da Constituição («Liberdade de consciência, de religião e de culto»), que princípio fundamental rege as relações entre o Estado Português e as confissões religiosas?",
+    "opcoes": [
+      "O catolicismo como religião oficial de Estado",
+      "A proibição de culto público",
+      "O controlo governamental dos bispos",
+      "O princípio da separação entre a Igreja e o Estado (Estado Laico)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 41.º garante a igualdade de tratamento de todas as igrejas e a Lei da Liberdade Religiosa (Lei n.º 16/2001) aprofundou este direito.",
+    "fonte": "Constituição da República Portuguesa (Artigo 41.º) / Lei da Liberdade Religiosa",
+    "factClusterId": "fc_pol_con_estadolaico_art41_01"
+  },
+  {
+    "id": "POL_CON_0041",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 284.º da Constituição, quando pode a Assembleia da República assumir poderes de revisão constitucional ordinária?",
+    "opcoes": [
+      "Decorridos cinco anos sobre a data da publicação da última lei de revisão constitucional ordinária",
+      "Em qualquer ano por iniciativa de 10 deputados",
+      "Apenas a cada dez anos",
+      "Sempre que o Presidente da República o exigir"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A AR pode assumir poderes de revisão extraordinária em qualquer momento desde que aprovada por maioria de quatro quintos dos deputados.",
+    "fonte": "Constituição da República Portuguesa (Artigo 284.º)",
+    "factClusterId": "fc_pol_con_poderesderevisao_art284_01"
+  },
+  {
+    "id": "POL_CON_0042",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 151.º da Constituição sobre o Estatuto dos Deputados («Imunidades parlamentares»), os deputados à Assembleia da República não respondem civil, criminal ou disciplinarmente pelos:",
+    "opcoes": [
+      "Crimes de sangue cometidos fora do parlamento",
+      "Votos e opiniões que emitirem no exercício das suas funções parlamentares (Inviolabilidade)",
+      "Contratos comerciais privados",
+      "Impostos sobre rendimento"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A imunidade parlamentar protege a independência e liberdade de expressão dos representantes eleitos do povo no hemiciclo.",
+    "fonte": "Constituição da República Portuguesa (Artigo 157.º) / Estatuto dos Deputados",
+    "factClusterId": "fc_pol_con_imunidadesparlamentares_01"
+  },
+  {
+    "id": "POL_CON_0043",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante e histórico órgão de apoio e controlo orçamental e financeiro do Estado previsto no Artigo 214.º da Constituição («Tribunal de Contas»), é responsável por fiscalizar a legalidade das despesas públicas e julgar as contas das entidades públicas?",
+    "opcoes": [
+      "Tribunal da Relação",
+      "Tribunal Tributário",
+      "Tribunal de Contas",
+      "Banco de Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tribunal de Contas emite o Parecer sobre a Conta Geral do Estado e exerce o 'visto prévio' em contratos públicos de valor relevante.",
+    "fonte": "Tribunal de Contas / Lei Orgânica do Tribunal de Contas",
+    "factClusterId": "fc_pol_con_tribunaldecontas_01"
+  },
+  {
+    "id": "POL_CON_0044",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 127.º da Constituição da República, perante que órgão de soberania presta juramento solene e toma posse o Presidente da República eleito?",
+    "opcoes": [
+      "Perante o Governo",
+      "Perante o Supremo Tribunal de Justiça",
+      "Perante o Conselho de Estado",
+      "Perante a Assembleia da República"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A tomada de posse ocorre a 9 de março na Sala das Sessões da Assembleia da República no Palácio de São Bento.",
+    "fonte": "Constituição da República Portuguesa (Artigo 127.º)",
+    "factClusterId": "fc_pol_con_tomadeposse_presidente_01"
+  },
+  {
+    "id": "POL_CON_0045",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 133.º da Constituição sobre as competências do Presidente da República, que faculdade extraordinária permite ao Chefe de Estado dissolver o Parlamento?",
+    "opcoes": [
+      "Dissolver a Assembleia da República (ouvidos os partidos e o Conselho de Estado)",
+      "Demitir deputados individualmente",
+      "Suspender a Constituição por decreto",
+      "Nomear juízes sem concurso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A dissolução da AR não pode ocorrer nos seis meses posteriores à sua eleição nem no último semestre do mandato do Presidente da República.",
+    "fonte": "Constituição da República Portuguesa (Artigo 133.º e 172.º)",
+    "factClusterId": "fc_pol_con_dissolucaoparlamento_01"
+  },
+  {
+    "id": "POL_CON_0046",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante direito político previsto no Artigo 167.º da Constituição («Iniciativa de Cidadãos»), permite a grupos de cidadãos eleitores apresentar diretamente à Assembleia da República projetos de lei?",
+    "opcoes": [
+      "Veto Popular",
+      "Iniciativa Legislativa de Cidadãos (ILC)",
+      "Petição de Graça",
+      "Ação Popular Direta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Lei n.º 17/2003 estabelece que um grupo mínimo de 20.000 cidadãos eleitores pode subscrever uma Iniciativa Legislativa de Cidadãos.",
+    "fonte": "Constituição da República Portuguesa (Artigo 167.º) / Assembleia da República",
+    "factClusterId": "fc_pol_con_iniciativalegislativacidadaos_01"
+  },
+  {
+    "id": "POL_CON_0047",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 202.º da Constituição da República, qual é a missão exclusiva dos Tribunais no ordenamento constitucional português?",
+    "opcoes": [
+      "Aprovar as leis da República",
+      "Dirigir a administração pública",
+      "Administrar a justiça em nome do povo e assegurar a defesa dos direitos protegidos por lei",
+      "Comandar as forças de segurança"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As decisões dos tribunais são obrigatórias para todas as entidades públicas e privadas e prevalecem sobre as de quaisquer outras autoridades.",
+    "fonte": "Constituição da República Portuguesa (Artigo 202.º e 205.º)",
+    "factClusterId": "fc_pol_con_funcaodos_tribunais_01"
+  },
+  {
+    "id": "POL_CON_0048",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "De acordo com o Artigo 273.º da Constituição da República Portuguesa, a quem incumbe constitucionalmente a defesa militar da República e a salvaguarda da soberania e integridade do território nacional?",
+    "opcoes": [
+      "À Guarda Nacional Republicana",
+      "À Polícia de Segurança Pública",
+      "Ao Serviço de Informações e Segurança",
+      "Às Forças Armadas (Exército, Força Aérea e Marinha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Forças Armadas obedecem aos órgãos de soberania competentes e são rigorosamente apartidárias.",
+    "fonte": "Constituição da República Portuguesa (Artigo 273.º a 275.º)",
+    "factClusterId": "fc_pol_con_forcasarmadas_art273_01"
+  },
+  {
+    "id": "POL_CON_0049",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que importante e histórico princípio constitucional consagrado no Artigo 2.º da Constituição define Portugal como um «Estado de direito democrático», baseado na soberania popular e no:",
+    "opcoes": [
+      "Pluralismo de expressão e organização política democrática e respeito pelos direitos fundamentais",
+      "Monopólio estatal dos meios de produção",
+      "Centralismo absoluto de poder",
+      "Poder militar permanente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 2.º consagra a garantia de transição pacífica de poder através de eleições periódicas e livres.",
+    "fonte": "Constituição da República Portuguesa (Artigo 2.º)",
+    "factClusterId": "fc_pol_con_estadodedireito_art2_01"
+  },
+  {
+    "id": "POL_CON_0050",
+    "tema": "Portugal Político",
+    "subtema": "Constituição da República",
+    "pergunta": "Que ilustre jurista, professor catedrático e político lisboeta (1938-2023), Jorge Miranda («Jorge Miranda»), é amplamente considerado o «Pai da Constituição de 1976» pelo seu papel decisivo como deputado constituinte e redator principal de partes fundamentais do texto constitucional?",
+    "opcoes": [
+      "Marcelo Rebelo de Sousa",
+      "Vital Moreira",
+      "Jorge Miranda (O Pai da Constituição de 1976)",
+      "Gomes Canotilho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jorge Miranda e J. J. Gomes Canotilho são as duas maiores sumidades doutrinárias do Direito Constitucional em Portugal e no espaço lusófono.",
+    "fonte": "Faculdade de Direito de Lisboa / Assembleia Constituinte / Diário da República",
+    "factClusterId": "fc_pol_con_jorgemiranda_paiconstituicao_01"
+  }
+]

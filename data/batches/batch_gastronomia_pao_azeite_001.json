@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_PAO_0001",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional alentejano, feito com farinha de trigo, água, sal e massa-mãe («isco»), destaca-se pela sua côdea espessa estaladiça, miolo denso e pelo caraterístico «cabeço» ou dobra?",
+    "opcoes": [
+      "Pão Alentejano Tradicional",
+      "Pão de Mafra",
+      "Broa de Avintes",
+      "Pão de Rio Maior"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Pão Alentejano é cozido em fornos a lenha, mantendo-se fresco e saboroso durante vários dias, sendo a base das açordas e migas.",
+    "fonte": "Turismo do Alentejo / Qualifica (Produtos Tradicionais Portugueses)",
+    "factClusterId": "fc_pao_alentejano_01"
+  },
+  {
+    "id": "GAST_PAO_0002",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão escuro, denso e ligeiramente adocicado, elaborado com farinhas de milho e centeio e cozido lentamente até 6 horas em Vila Nova de Gaia, é um ícone da gastronomia nortenha?",
+    "opcoes": [
+      "Broa de Milho do Minho",
+      "Broa de Avintes",
+      "Pão de Centeio de Chaves",
+      "Bolo do Caco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Broa de Avintes é produzida na freguesia de Avintes (Gaia), com tradição secular celebrada na anual Festa da Broa.",
+    "fonte": "Confraria da Broa de Avintes / Município de Vila Nova de Gaia",
+    "factClusterId": "fc_pao_avintes_01"
+  },
+  {
+    "id": "GAST_PAO_0003",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão típico da ilha da Madeira, feito com farinha de trigo, batata-doce e fermento, é tradicionalmente cozido sobre uma pedra de basalto aquecida («caco»)?",
+    "opcoes": [
+      "Pão de Deus",
+      "Regueifa Doce",
+      "Bolo do Caco",
+      "Pão de Alho Madeirense"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bolo do Caco é servido tradicionalmente quente e barrado com manteiga de alho e salsa.",
+    "fonte": "Turismo da Madeira / Produtos Tradicionais Madeirenses",
+    "factClusterId": "fc_pao_bolodocaco_01"
+  },
+  {
+    "id": "GAST_PAO_0004",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que variedade de azeitona autóctone é a mais emblemática e disseminada de Portugal, presente desde Trás-os-Montes até ao Algarve e que dá origem a azeites suaves e frutados?",
+    "opcoes": [
+      "Cobrançosa",
+      "Cordovil",
+      "Verdeal",
+      "Galega Vulgar (Azeitona Galega)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Galega Vulgar é a casta de oliveira mais antiga e identitária de Portugal, famosa tanto para produção de azeite como para conserva.",
+    "fonte": "Casa do Azeite / Instituto Nacional de Investigação Agrária e Veterinária (INIAV)",
+    "factClusterId": "fc_azeite_galega_01"
+  },
+  {
+    "id": "GAST_PAO_0005",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Como se chama o costume gastronómico português de regar fatias de pão quente acabado de sair do forno com o azeite novo acabado de extrair no lagar, esfregado com alho e sal?",
+    "opcoes": [
+      "Tiborna (ou Tibornada)",
+      "Torricado",
+      "Açorda",
+      "Migas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A tiborna é a celebração tradicional da apanha da azeitona e da chegada do primeiro azeite novo aos lagares de Portugal.",
+    "fonte": "Tradições Rurais de Portugal / Casa do Azeite",
+    "factClusterId": "fc_azeite_tiborna_01"
+  },
+  {
+    "id": "GAST_PAO_0006",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão rústico de crosta fina e estaladiça, miolo muito fofo e alveolado e teor elevado de hidratação é um produto de grande tradição no concelho de Mafra?",
+    "opcoes": [
+      "Broa de Milho",
+      "Pão de Mafra",
+      "Pão Alentejano",
+      "Pão d'Ul"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Mafra é produzido com farinhas de trigo e pequena percentagem de centeio em forno de lenha na região saloia.",
+    "fonte": "Município de Mafra / Associação dos Padeiros de Mafra",
+    "factClusterId": "fc_pao_mafra_01"
+  },
+  {
+    "id": "GAST_PAO_0007",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Quantas Denominações de Origem Protegida (DOP) de Azeite existem oficialmente reconhecidas em Portugal pela União Europeia?",
+    "opcoes": [
+      "Três",
+      "Dez",
+      "Seis (Trás-os-Montes, Beira Interior, Ribatejo, Norte Alentejano, Alentejo Interior e Moura)",
+      "Doze"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Portugal possui 6 azeites com DOP: Azeite de Trás-os-Montes, da Beira Interior, do Ribatejo, do Norte Alentejano, do Alentejo Interior e de Moura.",
+    "fonte": "DGADR / Comissão Europeia (eAmbrosia)",
+    "factClusterId": "fc_azeite_dop_01"
+  },
+  {
+    "id": "GAST_PAO_0008",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que casta de azeitona do nordeste transmontano e de Trás-os-Montes produz azeites com notas verdes intensas de folha de oliveira, maçã verde e amargo picante harmonioso?",
+    "opcoes": [
+      "Cordovil de Castelo Branco",
+      "Maçanilha Algarvia",
+      "Redondil",
+      "Cobrançosa (e Verdeal Transmontana)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Cobrançosa e a Verdeal Transmontana são castas de montanha muito resistentes ao frio que conferem complexidade aromática ao Azeite de Trás-os-Montes DOP.",
+    "fonte": "Associação de Olivicultores de Trás-os-Montes (AOTAD)",
+    "factClusterId": "fc_azeite_cobrancosa_01"
+  },
+  {
+    "id": "GAST_PAO_0009",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Em que cidade alentejana do distrito de Beja se situa a Cooperativa Agrícola de Moura e Barrancos, produtora de um dos azeites DOP mais galardoados do país?",
+    "opcoes": [
+      "Moura",
+      "Serpa",
+      "Vidigueira",
+      "Beja"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Azeite de Moura DOP é produzido na margem esquerda do Guadiana a partir das variedades Galega, Cordovil de Serpa e Verdeal.",
+    "fonte": "Cooperativa Agrícola de Moura e Barrancos / Casa do Azeite",
+    "factClusterId": "fc_azeite_moura_01"
+  },
+  {
+    "id": "GAST_PAO_0010",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional de Trás-os-Montes (Chaves e Valpaços), recheado com carnes fumadas de porco (presunto, salpicão, linguiça) em massa levedada, é rei na mesa da Páscoa?",
+    "opcoes": [
+      "Bôla de Lamego",
+      "Folar Transmontano de Carnes",
+      "Pão com Chouriço",
+      "Regueifa Salgada"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Folar de Valpaços IGP e o Folar de Chaves IGP são especialidades pascais com massa enriquecida com ovos, banha e enchidos nobres.",
+    "fonte": "Município de Chaves / Município de Valpaços / Qualifica",
+    "factClusterId": "fc_pao_folarcarnes_01"
+  },
+  {
+    "id": "GAST_PAO_0011",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que prato icónico da gastronomia alentejana resulta do aproveitamento do pão alentejano endurecido esfarelado e frito com alho, azeite e gordura de porco?",
+    "opcoes": [
+      "Açorda de Marisco",
+      "Ensopado de Borrego",
+      "Migas à Alentejana",
+      "Sopa de Cação"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Migas Alentejanas combinam a textura suave do pão ensopado com o sabor dourado da carne de alguidar.",
+    "fonte": "Turismo do Alentejo / Gastronomia Tradicional",
+    "factClusterId": "fc_pao_migas_01"
+  },
+  {
+    "id": "GAST_PAO_0012",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Qual é a acidez máxima permitida por lei para que um azeite virgem possa ser classificado comercialmente como «Azeite Virgem Extra»?",
+    "opcoes": [
+      "1,5%",
+      "2,0%",
+      "3,3%",
+      "0,8% (ou 0,8 g por 100 g)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Azeite Virgem Extra exige acidez livre igual ou inferior a 0,8% e ausência absoluta de defeitos organoléticos no painel de prova.",
+    "fonte": "Conselho Oleícola Internacional (COI) / Regulamento UE",
+    "factClusterId": "fc_azeite_virgemextra_01"
+  },
+  {
+    "id": "GAST_PAO_0013",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do concelho de Oliveira de Azeméis, feito de trigo e centeio por moleiras e padeiras locais, é conhecido pela sua forma de quatro cantos dobrados?",
+    "opcoes": [
+      "Pão d'Ul",
+      "Pão de Rio Maior",
+      "Pão de Gimonde",
+      "Broa de Ançã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Pão de Ul é uma tradição artesanal secular da freguesia de Ul, no concelho de Oliveira de Azeméis.",
+    "fonte": "Parque Molinológico de Oliveira de Azeméis",
+    "factClusterId": "fc_pao_ul_01"
+  },
+  {
+    "id": "GAST_PAO_0014",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão doce redondo de pastelaria portuguesa, com cobertura fofa de coco ralado, ovos e açúcar, tem o sugestivo nome de:",
+    "opcoes": [
+      "Jesuíta",
+      "Pão de Deus",
+      "Bolo de Arroz",
+      "Merenda de Sintra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Deus está tradicionalmente associado ao Dia de Todos os Santos e ao costume de pedir o «Pão por Deus» de porta em porta.",
+    "fonte": "Associação dos Industriais de Panificação e Pastelaria",
+    "factClusterId": "fc_pao_paodedeus_01"
+  },
+  {
+    "id": "GAST_PAO_0015",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão rústico de farinha de milho amarelo ou branco, com côdea grossa e rachada e miolo húmido, é o acompanhamento obrigatório do caldo verde no Minho e Douro Litoral?",
+    "opcoes": [
+      "Pão de Centeio",
+      "Fogaça de Santa Maria da Feira",
+      "Broa de Milho Tradicional",
+      "Bolo Lêvedo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Broa de Milho minhota é levedada com água morna e massa velha, cozendo em forno de pedra selado com bosta ou barro.",
+    "fonte": "Qualifica / Produtos Tradicionais Portugueses",
+    "factClusterId": "fc_pao_broademilho_01"
+  },
+  {
+    "id": "GAST_PAO_0016",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Em que vila da ilha de São Miguel (Açores) se produzem os famosos «Bolos Lêvedos», discos fofos e adocicados cozidos na chapa?",
+    "opcoes": [
+      "Ponta Delgada",
+      "Ribeira Grande",
+      "Vila Franca do Campo",
+      "Vila das Furnas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Bolos Lêvedos das Furnas são uma das maiores especialidades gastronómicas açorianas, consumidos simples ou com queijo e hambúrguer.",
+    "fonte": "Governo Regional dos Açores / Turismo dos Açores",
+    "factClusterId": "fc_pao_bololevedo_01"
+  },
+  {
+    "id": "GAST_PAO_0017",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que iguaria ribatejana consiste em pão de trigo caseiro torrado nas brasas, esfregado com alho, abundantemente regado com azeite e servido com bacalhau assado?",
+    "opcoes": [
+      "Torricado com Bacalhau",
+      "Açorda Ribatejana",
+      "Tiborna de Tomar",
+      "Sopa de Pedra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Torricado é o prato tradicional dos camponeses da lezíria ribatejana, especialmente afamado em Azambuja e Samora Correia.",
+    "fonte": "Município de Azambuja / Turismo do Ribatejo",
+    "factClusterId": "fc_pao_torricado_01"
+  },
+  {
+    "id": "GAST_PAO_0018",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que variedade de oliveira típica de Trás-os-Montes e do Douro Superior dá azeitonas que amadurecem tardiamente e produzem azeites muito estáveis e duradouros?",
+    "opcoes": [
+      "Cordovil",
+      "Madural",
+      "Galega",
+      "Negrinha de Freixo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Madural é uma casta de azeitona autóctone do nordeste português com elevado rendimento em azeite de qualidade.",
+    "fonte": "INIAV / AOTAD",
+    "factClusterId": "fc_azeite_madural_01"
+  },
+  {
+    "id": "GAST_PAO_0019",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que azeitona de mesa transmontana do concelho de Freixo de Espada à Cinta possui Denominação de Origem Protegida (DOP)?",
+    "opcoes": [
+      "Azeitona Galega de Elvas",
+      "Azeitona de Serpa",
+      "Azeitona Negrinha de Freixo DOP",
+      "Azeitona Maçanilha de Portimão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Negrinha de Freixo DOP é colhida à mão e curada em salmoura, sendo muito apreciada na gastronomia duriense.",
+    "fonte": "DGADR / Município de Freixo de Espada à Cinta",
+    "factClusterId": "fc_azeite_negrinha_01"
+  },
+  {
+    "id": "GAST_PAO_0020",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão típico da Beira Alta (Celorico da Beira e Trancoso) é feito com farinha de centeio dos planaltos e servido com Queijo da Serra da Estrela?",
+    "opcoes": [
+      "Broa de Milho Amarela",
+      "Bolo de Ançã",
+      "Pão de Deus",
+      "Pão de Centeio Beirão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Centeio da Serra da Estrela tem côdea acastanhada, miolo escuro e aroma rústico perfeito para queijos curados.",
+    "fonte": "Turismo Centro de Portugal",
+    "factClusterId": "fc_pao_centeio_01"
+  },
+  {
+    "id": "GAST_PAO_0021",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que sopa fria tradicional do Alentejo, perfeita para os dias quentes de verão, é feita com água gelada, azeite virgem extra, alho pisado, vinagre, sal, orégãos e pedaços de pão alentejano?",
+    "opcoes": [
+      "Gaspacho Alentejano",
+      "Açorda de Poejo",
+      "Sopa de Tomate",
+      "Sopa de Beldroegas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Gaspacho Alentejano leva os legumes (pepino, tomate e pimento) picados à mão em cubos, ao contrário da versão triturada espanhola.",
+    "fonte": "Turismo do Alentejo / Gastronomia Tradicional",
+    "factClusterId": "fc_pao_gaspacho_01"
+  },
+  {
+    "id": "GAST_PAO_0022",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Em que concelho se localiza a histórica vila de Santa Maria da Feira, famosa pela Fogaça, pão doce em forma de castelo de quatro torres?",
+    "opcoes": [
+      "São João da Madeira",
+      "Santa Maria da Feira",
+      "Espinho",
+      "Ovar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Fogaça da Feira IGP é um pão doce votivo com aroma a canela e limão, associado à Festa das Fogaceiras em honra de São Sebastião desde 1505.",
+    "fonte": "Município de Santa Maria da Feira / Confraria da Fogaça",
+    "factClusterId": "fc_pao_fogaca_01"
+  },
+  {
+    "id": "GAST_PAO_0023",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do concelho de Cantanhede, confecionado com farinha de trigo, ovos, açúcar e manteiga, é vendido nas feiras embrulhado em toalhas brancas?",
+    "opcoes": [
+      "Broa de Avintes",
+      "Fogaça de Palmela",
+      "Bolo de Ançã",
+      "Pão de Ló de Ovar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Bolo de Ançã é um pão doce cozido em fornos a lenha com receita guardada pelas barrileiras e padeiras de Ançã.",
+    "fonte": "Município de Cantanhede / Junta de Freguesia de Ançã",
+    "factClusterId": "fc_pao_anca_01"
+  },
+  {
+    "id": "GAST_PAO_0024",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Como se chama a prensa tradicional de madeira maciça utilizada durante séculos nos lagares portugueses para espremer as azeitonas contidas nos capachos?",
+    "opcoes": [
+      "Centrifugadora contínua",
+      "Mó de granito",
+      "Decantador estático",
+      "Vara de lagar (Prensa de vara)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A prensa de vara consistia num enorme tronco de carvalho ou castanheiro que exercia pressão sobre os capachos de azeitona.",
+    "fonte": "Museu do Azeite de Belmonte / Museu Etnográfico de Moura",
+    "factClusterId": "fc_azeite_lagarvara_01"
+  },
+  {
+    "id": "GAST_PAO_0025",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que azeite da Beira Interior possui Denominação de Origem Protegida (DOP), destacando-se pela frescura e aromas a maçã e tomate verde?",
+    "opcoes": [
+      "Azeite da Beira Interior DOP (Beira Alta e Beira Baixa)",
+      "Azeite de Trás-os-Montes",
+      "Azeite do Ribatejo",
+      "Azeite do Minho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Azeite da Beira Interior DOP provém das variedades Galega, Bical e Cordovil dos olivais de encosta da serra.",
+    "fonte": "Associação de Produtores de Azeite da Beira Interior",
+    "factClusterId": "fc_azeite_beirainterior_01"
+  },
+  {
+    "id": "GAST_PAO_0026",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do concelho de Rio Maior, levedado lentamente com massa-mãe e sal das salinas de Rio Maior, é cozido em fornos comunitários de lenha?",
+    "opcoes": [
+      "Pão Alentejano",
+      "Pão de Rio Maior",
+      "Pão de Mafra",
+      "Broa de Avintes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Rio Maior é apreciado pela sua côdea dourada estaladiça e sabor enriquecido pelas flor de sal e sal-gema das marinhas locais.",
+    "fonte": "Município de Rio Maior / Turismo do Centro",
+    "factClusterId": "fc_pao_riomaior_01"
+  },
+  {
+    "id": "GAST_PAO_0027",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que famoso ensopado alentejano de carne de borrego é servido obrigatoriamente sobre fatias de pão alentejano fatiado no fundo da terrina?",
+    "opcoes": [
+      "Carne de Porco à Alentejana",
+      "Cozido de Grão",
+      "Ensopado de Borrego à Alentejana",
+      "Chanfana de Cabra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O caldo aromático com hortelã e cravinho ensopa o pão duro, transformando-o num dos pratos mais emblemáticos do Alentejo.",
+    "fonte": "Turismo do Alentejo / Receitas Tradicionais",
+    "factClusterId": "fc_pao_ensopadoborrego_01"
+  },
+  {
+    "id": "GAST_PAO_0028",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que termo se utiliza na prova profissional de azeite virgem extra para designar a sensação gustativa picante sentida na garganta, originada pelos polifenóis antioxidantes?",
+    "opcoes": [
+      "Acidez volátil",
+      "Oxidação",
+      "Turvação",
+      "Picante (ou Ardência positiva)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O picante e o amargo são atributos positivos no azeite virgem extra, indicando riqueza em compostos fenólicos benéficos para a saúde.",
+    "fonte": "Conselho Oleícola Internacional / Casa do Azeite",
+    "factClusterId": "fc_azeite_prova_01"
+  },
+  {
+    "id": "GAST_PAO_0029",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que tipo de moagem tradicional em moinhos de água ou vento utiliza duas pedras circulares de granito (a pousada e a corredoura) para transformar o cereal em farinha?",
+    "opcoes": [
+      "Moagem por mós de pedra",
+      "Moagem de cilindros metálicos",
+      "Moagem por martelos",
+      "Moagem criogénica"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A moagem em mós de pedra preserva o gérmen e as fibras do grão de trigo ou centeio, garantindo a qualidade dos pães tradicionais portugueses.",
+    "fonte": "Rede Portuguesa de Moinhos / Museu do Pão",
+    "factClusterId": "fc_pao_moinhos_01"
+  },
+  {
+    "id": "GAST_PAO_0030",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Em que vila serrana da Beira Alta (Seia), no sopé da Serra da Estrela, se situa o monumental «Museu do Pão», um dos maiores museus do mundo dedicados à cultura panificadora?",
+    "opcoes": [
+      "Gouveia",
+      "Seia",
+      "Manteigas",
+      "Covilhã"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Pão em Seia preserva a história, etnografia, arte e ciência do pão em Portugal com oficinas pedagógicas.",
+    "fonte": "Museu do Pão / Município de Seia",
+    "factClusterId": "fc_pao_museudopao_01"
+  },
+  {
+    "id": "GAST_PAO_0031",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que variedade de azeitona alentejana de Serpa e Moura dá origem a azeites aromáticos com notas florais e baixa acidez natural?",
+    "opcoes": [
+      "Arbequina",
+      "Frantoio",
+      "Cordovil de Serpa",
+      "Gordal de Sevilha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Cordovil de Serpa é uma casta tradicional do Baixo Alentejo reconhecida pela sua excelente adaptabilidade aos solos calcários e xistosos.",
+    "fonte": "INIAV / Casa do Azeite",
+    "factClusterId": "fc_azeite_cordovil_01"
+  },
+  {
+    "id": "GAST_PAO_0032",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional da vila de Amarante, feito com massa levedada de trigo em forno de lenha e formato de pequena bôla redonda, acompanha as feijoadas minhotas?",
+    "opcoes": [
+      "Broa de Avintes",
+      "Bolo da Lousã",
+      "Pão de Viana",
+      "Pão de Padronelo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Pão de Padronelo é uma das maiores glórias gastronómicas de Amarante, levedado em tigelas de barro e cozido com lenha de pinho e carvalho.",
+    "fonte": "Município de Amarante / Confraria dos Enófilos do Douro",
+    "factClusterId": "fc_pao_padronelo_01"
+  },
+  {
+    "id": "GAST_PAO_0033",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Como se chama a porção de massa de pão guardada da amassadura anterior para fermentar naturalmente a próxima fornada sem fermentos químicos?",
+    "opcoes": [
+      "Massa-mãe (ou Isco / Crescente)",
+      "Baking powder",
+      "Amido de milho",
+      "Glúten puro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O isco ou massa-mãe desenvolve leveduras selvagens e bactérias lácticas que conferem aroma, digestibilidade e longevidade ao pão artesanal.",
+    "fonte": "Museu do Pão / Escola de Hotelaria e Turismo de Portugal",
+    "factClusterId": "fc_pao_massamae_01"
+  },
+  {
+    "id": "GAST_PAO_0034",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que azeite do Ribatejo possui Denominação de Origem Protegida (DOP), produzido ao longo das margens férteis do Tejo nos concelhos de Santarém, Abrantes e Torres Novas?",
+    "opcoes": [
+      "Azeite de Tomar",
+      "Azeite do Ribatejo DOP",
+      "Azeite de Castelo Branco",
+      "Azeite da Estremadura"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Azeite do Ribatejo DOP provém essencialmente das castas Galega e Lentrisca, com frutado maduro e notas de frutos secos.",
+    "fonte": "DGADR / Associação de Olivicultores do Ribatejo",
+    "factClusterId": "fc_azeite_ribatejodop_01"
+  },
+  {
+    "id": "GAST_PAO_0035",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão recheado com uma rodela de chouriço de carne curado e assado no forno a lenha é a merenda clássica das feiras, romarias e noites de festa em Portugal?",
+    "opcoes": [
+      "Folhado de Carne",
+      "Empada de Galinha",
+      "Pão com Chouriço",
+      "Croquete Tradicional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O pão com chouriço quente, com a gordura do enchido derretida no miolo fofo, é uma das maiores tradições de rua do país.",
+    "fonte": "Tradições Populares Portuguesas",
+    "factClusterId": "fc_pao_chourico_01"
+  },
+  {
+    "id": "GAST_PAO_0036",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "O que são os «capachos» (ou seiras) na tecnologia tradicional dos lagares de azeite em Portugal?",
+    "opcoes": [
+      "Vasilhas de barro para guardar o azeite",
+      "Pás de madeira para mexer a azeitona",
+      "Peneiras de farinha",
+      "Discos circulares entretecidos de esparto ou cânhamo onde a pasta de azeitona moída é espalhada para a prensagem"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Os capachos empilhados na prensa retinham a polpa e caroços da azeitona, deixando escorrer o azeite e as águas-ruças.",
+    "fonte": "Museu do Azeite / Casa do Azeite",
+    "factClusterId": "fc_azeite_capachos_01"
+  },
+  {
+    "id": "GAST_PAO_0037",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que sobremesa tradicional da ceia de Natal portuguesa é feita com fatias de pão de véspera embebidas em leite ou vinho, passadas por ovo, fritas e polvilhadas com açúcar e canela?",
+    "opcoes": [
+      "Rabanadas (ou Fatias Douradas)",
+      "Sonhos de Natal",
+      "Filhós Alentejanas",
+      "Azevias de Grão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Rabanadas são uma das mais antigas sobremesas de aproveitamento do pão duro da doçaria tradicional portuguesa.",
+    "fonte": "Tradições Gastronómicas de Natal em Portugal",
+    "factClusterId": "fc_pao_rabanadas_01"
+  },
+  {
+    "id": "GAST_PAO_0038",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que azeite virgem extra alentejano abrange os municípios de Portalegre, Castelo de Vide, Marvão e Nisa, no Parque Natural da Serra de São Mamede?",
+    "opcoes": [
+      "Azeite de Moura",
+      "Azeite do Norte Alentejano DOP",
+      "Azeite do Alentejo Interior",
+      "Azeite de Évora"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Azeite do Norte Alentejano DOP é obtido em olivais centenários de montanha e solos de xisto e granito.",
+    "fonte": "DGADR / Agrupamento de Produtores do Norte Alentejano",
+    "factClusterId": "fc_azeite_nortealentejano_01"
+  },
+  {
+    "id": "GAST_PAO_0039",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão doce pascal em forma de rosca com ovos cozidos com casca presos por tiras de massa cruzada é oferecido tradicionalmente pelos padrinhos aos afilhados no Domingo de Ramos e Páscoa?",
+    "opcoes": [
+      "Bolo Rei",
+      "Pão de Ló de Margaride",
+      "Folar Doce da Páscoa",
+      "Regueifa Doce de Valongo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Folar da Páscoa simboliza a partilha, a renovação e a ressurreição, temperado com erva-doce e canela.",
+    "fonte": "Tradições Pascais Portuguesas / Qualifica",
+    "factClusterId": "fc_pao_folardoce_01"
+  },
+  {
+    "id": "GAST_PAO_0040",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Como se chama a operação no lagar moderno que separa o azeite puro da água de vegetação da azeitona e do bagaço através da rotação a alta velocidade?",
+    "opcoes": [
+      "Pisa a pé",
+      "Filtragem por algodão",
+      "Fervura do mosto",
+      "Centrifugação (Decanter centrífugo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A centrifugação a frio (temperatura inferior a 27 ºC) permite extrair azeite de máxima pureza sem degradação térmica.",
+    "fonte": "Casa do Azeite / INIAV",
+    "factClusterId": "fc_azeite_centrifugacao_01"
+  },
+  {
+    "id": "GAST_PAO_0041",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que cidade do distrito do Porto é famosa pela sua tradição panificadora de pães e regueifas de trigo, acolhendo o «Museu Municipal da Regueifa e do Biscoito»?",
+    "opcoes": [
+      "Valongo",
+      "Paredes",
+      "Penafiel",
+      "Maia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Valongo foi durante séculos a capital do pão do Porto, fornecendo pão e biscoitos para as naus dos Descobrimentos e para a cidade invicta.",
+    "fonte": "Município de Valongo / Museu da Regueifa",
+    "factClusterId": "fc_pao_valongo_01"
+  },
+  {
+    "id": "GAST_PAO_0042",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que variedade de oliveira de origem espanhola, muito cultivada nos novos olivais em sebe intensivos e superintensivos de regadio do Alqueva, destaca-se pela entrada rápida em produção?",
+    "opcoes": [
+      "Galega Vulgar",
+      "Arbequina (e Arbosana)",
+      "Bical de Castelo Branco",
+      "Gordal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Arbequina adaptou-se com grande produtividade aos olivais contínuos do Alentejo moderno irrigados pelo Alqueva.",
+    "fonte": "EDIA / Olivum (Associação de Olivicultores do Sul)",
+    "factClusterId": "fc_azeite_arbequina_01"
+  },
+  {
+    "id": "GAST_PAO_0043",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do concelho de Montalegre (Barroso), feito com farinha pura de centeio cultivado a mais de 1000 metros de altitude, é famoso por durar semanas fresco?",
+    "opcoes": [
+      "Pão Alentejano",
+      "Broa de Avintes",
+      "Pão de Centeio do Barroso",
+      "Bolo de Ançã"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Pão de Centeio de Barroso é Património Agrícola Mundial (GIAHS/FAO), cozido nos fornos do povo das aldeias de montanha.",
+    "fonte": "Ecomuseu de Barroso / Município de Montalegre",
+    "factClusterId": "fc_pao_barroso_01"
+  },
+  {
+    "id": "GAST_PAO_0044",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que iguaria de conforto alentejana, confecionada com pão fatiado, água a ferver, azeite virgem extra, dentes de alho esmagados no almofariz, sal, coentros frescos e ovos escalfados, tem o nome de:",
+    "opcoes": [
+      "Sopa Alentejana de Peixe",
+      "Caldo Verde",
+      "Sopa da Pedra",
+      "Açorda Alentejana de Alho e Coentros"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Açorda Alentejana é um dos pratos mais representativos da dieta mediterrânica em Portugal, simples e nutritivo.",
+    "fonte": "Turismo do Alentejo / Direção-Geral de Agricultura",
+    "factClusterId": "fc_pao_acorda_01"
+  },
+  {
+    "id": "GAST_PAO_0045",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Qual é a árvore milenar de fruto em Portugal, cuja madeira nobre é usada em marcenaria e cujas folhas prateadas simbolizam a paz e a abundância na cultura mediterrânica?",
+    "opcoes": [
+      "Oliveira (Olea europaea)",
+      "Sobreiro",
+      "Azinheira",
+      "Alfarrobeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A oliveira é cultivada em Portugal há mais de três milénios, existindo exemplares milenares classificados como monumentos vivos (ex: Oliveira de Santa Iria de Azoia com mais de 2850 anos).",
+    "fonte": "ICNF / Casa do Azeite",
+    "factClusterId": "fc_azeite_oliveira_01"
+  },
+  {
+    "id": "GAST_PAO_0046",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do concelho de Monção e Melgaço é amassado com farinha de milho e centeio, envolvendo sardinhas ou fatias de carne gorda de porco antes de ir ao forno?",
+    "opcoes": [
+      "Pastel de Chaves",
+      "Bôla de Sardinha (ou Bôla de Milho)",
+      "Broa Doce",
+      "Pão de Queijo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Bôla de Sardinha minhota assa a sardinha fresca dentro da massa de broa, aromatizando o pão com os sucos do peixe.",
+    "fonte": "Município de Monção / Confraria do Vinho Verde e Gastronomia",
+    "factClusterId": "fc_pao_bolasardinha_01"
+  },
+  {
+    "id": "GAST_PAO_0047",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Em que época do ano se realiza tradicionalmente a colheita da azeitona («apanha da azeitona») em Portugal continental?",
+    "opcoes": [
+      "Em pleno verão (julho e agosto)",
+      "Na primavera (abril e maio)",
+      "Entre outubro e janeiro (outono/inverno)",
+      "Apenas no mês de agosto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A apanha decorre no outono e inverno consoante se pretenda azeitona mais verde (azeite mais frutado/picante) ou mais madura.",
+    "fonte": "Casa do Azeite / Ministério da Agricultura",
+    "factClusterId": "fc_azeite_apanha_01"
+  },
+  {
+    "id": "GAST_PAO_0048",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que instituição nacional fundada em 1976 representa os produtores, industriais e exportadores de azeite em Portugal e promove a qualidade e consumo do azeite português?",
+    "opcoes": [
+      "Instituto da Vinha e do Vinho",
+      "Turismo de Portugal",
+      "Ordem dos Nutricionistas",
+      "Casa do Azeite (Associação do Azeite de Portugal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Casa do Azeite coordena a defesa da autenticidade, dos painéis de prova e da exportação do azeite português para todo o mundo.",
+    "fonte": "Casa do Azeite",
+    "factClusterId": "fc_azeite_casadoazeite_01"
+  },
+  {
+    "id": "GAST_PAO_0049",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "Que pão tradicional do Nordeste Transmontano, feito de trigo e centeio em fornos comunitários de Gimonde (Bragança), possui marca de certificação de qualidade?",
+    "opcoes": [
+      "Pão de Gimonde",
+      "Pão Alentejano",
+      "Pão de Mafra",
+      "Broa de Avintes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Pão de Gimonde é elaborado segundo métodos ancestrais no Parque Natural de Montesinho, com fermentação longa e farinhas moídas em mós de pedra.",
+    "fonte": "Município de Bragança / Parque Natural de Montesinho",
+    "factClusterId": "fc_pao_gimonde_01"
+  },
+  {
+    "id": "GAST_PAO_0050",
+    "tema": "Gastronomia",
+    "subtema": "Pão & Azeite",
+    "pergunta": "O que indica a designação «Extração a Frio» num rótulo de Azeite Virgem Extra português?",
+    "opcoes": [
+      "Que as azeitonas foram colhidas congeladas durante a geada",
+      "Que o azeite deve ser guardado no congelador",
+      "Que o azeite foi extraído a temperaturas inferiores a 27 ºC, preservando os compostos voláteis e as vitaminas da azeitona",
+      "Que foi adicionada água com gelo durante a prensagem"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A extração a frio garante que os polifenóis, tocoferóis (vitamina E) e aromas frutados não são alterados pelo calor.",
+    "fonte": "Regulamento Europeu de Rotulagem de Azeite / Casa do Azeite",
+    "factClusterId": "fc_azeite_extracaoafrio_01"
+  }
+]

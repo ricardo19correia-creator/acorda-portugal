@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_TEA_0001",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que dramaturgo e poeta quinhentista (c. 1465-1536), considerado o «Pai do Teatro Português», representou o «Auto da Visitação» (ou Monólogo do Vaqueiro) em junho de 1502 nos aposentos da Rainha D. Maria para celebrar o nascimento do futuro D. João III?",
+    "opcoes": [
+      "Gil Vicente",
+      "António Ferreira",
+      "Sá de Miranda",
+      "Jorge Ferreira de Vasconcelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gil Vicente criou o teatro nacional português combinando a sátira social em redondilha maior com profunda espiritualidade e tipos populares.",
+    "fonte": "Biblioteca Nacional de Portugal / Compilaçam de Todalas Obras de Gil Vicente (1562)",
+    "factClusterId": "fc_tea_gilvicente1502_01"
+  },
+  {
+    "id": "CULT_TEA_0002",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que célebre trilogia dramática moral de Gil Vicente (1517-1519) coloca as almas dos mortos perante o Anjo e o Diabo nas margens de um rio para serem julgadas pelo seu comportamento terreno?",
+    "opcoes": [
+      "A Trilogia dos Reis",
+      "A Trilogia das Barcas (Auto da Barca do Inferno, do Purgatório e da Glória)",
+      "O Ciclo das Farsas",
+      "Os Autos Pastorais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "No 'Auto da Barca do Inferno' desfilam figuras satíricas como o Fidalgo, o Onzeneiro, o Frade com a mofa, o Sapateiro e o Judeu, salvando-se apenas os Quatro Cavaleiros e o Parvo Joane.",
+    "fonte": "DGLAB / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_tea_trilogiadasbarcas_01"
+  },
+  {
+    "id": "CULT_TEA_0003",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que famosa farsa de Gil Vicente, escrita em 1523 a partir do mote popular «Mais quero asno que me leve que cavalo que me derrube», retrata os casamentos sucessivos de uma jovem ambiciosa com o escudeiro Brás da Mata e o camponês Pero Marques?",
+    "opcoes": [
+      "Quem Tem Farelos?",
+      "O Velho da Horta",
+      "Farsa de Inês Pereira",
+      "Auto da Índia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Farsa de Inês Pereira é a comédia de costumes vicentina mais perfeita e encenada de sempre nos palcos portugueses.",
+    "fonte": "BNP / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_tea_inespereira_01"
+  },
+  {
+    "id": "CULT_TEA_0004",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que tragédia clássica humanista em verso decassílabo, escrita por António Ferreira em 1558 e publicada em 1587, dramatiza os amores trágicos e o assassinato de D. Inês de Castro, sendo a primeira grande tragédia do Renascimento na Península Ibérica?",
+    "opcoes": [
+      "Frei Luís de Sousa",
+      "D. Branca",
+      "Cioso de Si Mesmo",
+      "A Castro (Tragédia de Inês de Castro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Ferreira utilizou a estrutura clássica grega com coro para imortalizar o mito universal de Inês de Castro.",
+    "fonte": "Biblioteca Nacional de Portugal / História do Teatro Português",
+    "factClusterId": "fc_tea_antonioferreira_castro_01"
+  },
+  {
+    "id": "CULT_TEA_0005",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que brilhante dramaturgo luso-brasileiro setecentista (1705-1739), conhecido como «O Judeu», criou as famosas óperas cómicas com marionetas no Teatro do Bairro Alto («Guerras do Alecrim e Manjerona») antes de ser martirizado e executado pela Inquisição?",
+    "opcoes": [
+      "António José da Silva («O Judeu»)",
+      "Manuel da Silva Gaio",
+      "Nicolau Tolentino",
+      "Curvo Semedo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António José da Silva foi a maior figura do teatro barroco e popular do século XVIII em Lisboa, cuja vida inspirou a peça de Bernardo Santareno.",
+    "fonte": "Museu do Teatro / BNP",
+    "factClusterId": "fc_tea_antoniojosedasilva_ojudeu_01"
+  },
+  {
+    "id": "CULT_TEA_0006",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que escritor e estadista romântico português fundou o Teatro Nacional D. Maria II e o Conservatório Nacional em 1836 por decreto de Passos Manuel, revolucionando para sempre a arte cénica em Portugal?",
+    "opcoes": [
+      "Alexandre Herculano",
+      "Almeida Garrett (João Baptista da Silva Leitão de Almeida Garrett)",
+      "Camilo Castelo Branco",
+      "Eça de Queirós"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Almeida Garrett formou gerações de atores e escreveu 'Frei Luís de Sousa' (1843) como expoente máximo do drama romântico português.",
+    "fonte": "Teatro Nacional D. Maria II / Conservatório Nacional",
+    "factClusterId": "fc_tea_garrettdmariaii_01"
+  },
+  {
+    "id": "CULT_TEA_0007",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que obra-prima do teatro romântico português de Almeida Garrett (estreada no Teatro da Quinta do Pinheiro em 1843) narra o regresso trágico de D. João de Portugal (o romeiro) após 21 anos do desastre de Alcácer Quibir, destruindo o lar de D. Madalena de Vilhena e Manuel de Sousa Coutinho?",
+    "opcoes": [
+      "Um Auto de Gil Vicente",
+      "O Alfageme de Santarém",
+      "Frei Luís de Sousa (1843)",
+      "A Sobrinha do Marquês"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A peça culmina na trágica morte por tuberculose da jovem Maria de Noronha e no ingresso dos pais na ordem religiosa sob o hábito dominicano.",
+    "fonte": "Teatro Nacional D. Maria II / DGLAB",
+    "factClusterId": "fc_tea_freiluísdesousa_01"
+  },
+  {
+    "id": "CULT_TEA_0008",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que médico e dramaturgo português natural de Santarém (1920-1980), autor de «A Promessa», «O Lugre», «O Crime da Aldeia Velha», «António Marinheiro» e «O Judeu», é o maior nome do teatro português contemporâneo?",
+    "opcoes": [
+      "Luís de Sttau Monteiro",
+      "Romeu Correia",
+      "Miguel Rovisco",
+      "Bernardo Santareno (pseudónimo de António Martinho do Rosário)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bernardo Santareno aliou o teatro poético e social à denúncia da opressão, da intolerância moral e do preconceito.",
+    "fonte": "Museu Nacional do Teatro e da Dança / Município de Santarém",
+    "factClusterId": "fc_tea_bernardosantareno_01"
+  },
+  {
+    "id": "CULT_TEA_0009",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que peça histórica em dois atos de Luís de Sttau Monteiro, publicada em 1961 e proibida pela censura do Estado Novo, reconstitui o julgamento e a execução do General Gomes Freire de Andrade em 1817 como metáfora da luta contra a ditadura?",
+    "opcoes": [
+      "Felizmente Há Luar! (1961)",
+      "As Mãos de Abraão Zacuto",
+      "Sua Excelência",
+      "O Barão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A personagem de Matilde de Melo encarna a coragem indomável perante a tirania de Beresford e dos governadores.",
+    "fonte": "DGLAB / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_tea_felizmentehaluar_01"
+  },
+  {
+    "id": "CULT_TEA_0010",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que género cénico popular português nascido em Lisboa em 1851 no Teatro do Ginásio com a peça «Lisboa em 1850», combinando música ligeira, sátira política, números de dança e atrizes vedetas com boás de penas, é o:",
+    "opcoes": [
+      "Teatro de Vaudeville",
+      "Teatro de Revista à Portuguesa (Revista de Ano)",
+      "Commedia dell'Arte",
+      "Auto Sacramental"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Revista à Portuguesa tornou-se a grande paixão das classes populares e o palco da resistência bem-humorada à censura.",
+    "fonte": "Museu Nacional do Teatro / Parque Mayer",
+    "factClusterId": "fc_tea_revistaaportuguesa_01"
+  },
+  {
+    "id": "CULT_TEA_0011",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que histórico recinto de entretenimento e teatros inaugurado em 1922 na Avenida da Liberdade em Lisboa reuniu os célebres Teatro Maria Vitória, Teatro Variedades, Teatro Capitólio e Teatro ABC, sendo a catedral da Revista à Portuguesa?",
+    "opcoes": [
+      "Passeio Público",
+      "Feira Popular de Lisboa",
+      "Parque Mayer",
+      "Jardim Zoológico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Parque Mayer celebrou o seu centenário em 2022 após obras de requalificação urbana pela Câmara Municipal de Lisboa.",
+    "fonte": "Câmara Municipal de Lisboa / EGEAC / Teatro Maria Vitória",
+    "factClusterId": "fc_tea_parquemayer1922_01"
+  },
+  {
+    "id": "CULT_TEA_0012",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que lendária atriz e vedeta da revista à portuguesa (1907-1996), natural de Charneca da Malveira, imortalizou o corte de cabelo «à la garçonne», a canção «Tiro-Liro-Liro» e o filme «A Canção de Lisboa» (1933)?",
+    "opcoes": [
+      "Laura Alves",
+      "Ivone Silva",
+      "Hermínia Silva",
+      "Beatriz Costa (Beatriz da Conceição)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Beatriz Costa foi um fenómeno de popularidade em Portugal e no Brasil e viveu os seus últimos anos no Hotel Tivoli em Lisboa.",
+    "fonte": "Museu da Música Teatral / Cinemateca Portuguesa",
+    "factClusterId": "fc_tea_beatrizcosta_01"
+  },
+  {
+    "id": "CULT_TEA_0013",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que versátil atriz e encenadora portuguesa (1921-1986), consagrada como a «Primeira Dama do Teatro Português», brilhou na comédia e no drama e deu o nome ao Teatro Laura Alves em Lisboa?",
+    "opcoes": [
+      "Laura Alves (Laura Alves Magno)",
+      "Eunice Muñoz",
+      "Glicínia Quartin",
+      "Lurdes Norberto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Laura Alves interpretou dezenas de sucessos como 'A Menina do Chocolate' e 'O Pai Tirano'.",
+    "fonte": "Museu Nacional do Teatro e da Dança",
+    "factClusterId": "fc_tea_lauraalves_01"
+  },
+  {
+    "id": "CULT_TEA_0014",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que monumental atriz portuguesa (1928-2022), natural da Amareleja (Moura), comemorou 80 anos de carreira nos palcos e recebeu a Grã-Cruz da Ordem do Infante D. Henrique, repousando no Panteão Nacional?",
+    "opcoes": [
+      "Laura Alves",
+      "Eunice Muñoz (Eunice do Carmo Muñoz)",
+      "Cucha Carvalheiro",
+      "Manuela Maria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Eunice Muñoz foi aclamada como uma das maiores atrizes da história da dramaturgia europeia, célebre pelas suas atuações nos clássicos de Brecht, Racine, Beckett e Shakespeare.",
+    "fonte": "Teatro Nacional D. Maria II / Panteão Nacional",
+    "factClusterId": "fc_tea_eunicemunoz_01"
+  },
+  {
+    "id": "CULT_TEA_0015",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que comediante e ator português (1929-2009), mestre supremo do monólogo e do humor do absurdo («A Guerra de 1908»), fundou o Teatro Villaret em Lisboa em 1964 com o seu próprio património?",
+    "opcoes": [
+      "Camilo de Oliveira",
+      "Nicolau Breyner",
+      "Raul Solnado",
+      "Herman José"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Raul Solnado criou a 'Casa do Artista' em 1999 para apoiar os profissionais do espetáculo na velhice e popularizou o programa 'Zip-Zip'.",
+    "fonte": "Casa do Artista / Teatro Villaret / Museu do Teatro",
+    "factClusterId": "fc_tea_raulsolnado_01"
+  },
+  {
+    "id": "CULT_TEA_0016",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que popular ator cómico português (1924-2016), célebre pelas suas rábulas teatrais e séries televisivas como «Sabadabadu», «Camilo & Filho Lda.» e «A Loja do Camilo», dedicou mais de 65 anos ao teatro de comédia?",
+    "opcoes": [
+      "Raul Solnado",
+      "António Feio",
+      "José Pedro Gomes",
+      "Camilo de Oliveira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Camilo de Oliveira foi um dos atores de revista e comédia mais amados e premiados do público português.",
+    "fonte": "RTP Arquivos / Museu Nacional do Teatro",
+    "factClusterId": "fc_tea_camilodeoliveira_01"
+  },
+  {
+    "id": "CULT_TEA_0017",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que talentosa atriz e comediante de revista (1935-1987), imortalizada pela dupla «Olívia Costureira e Olívia Patroa» com Camilo de Oliveira no programa «Sabadabadu» («Isto é que vai uma crise!»), é:",
+    "opcoes": [
+      "Ivone Silva (Ivone Silva dos Santos)",
+      "Henriqueta Maya",
+      "Vera Mântua",
+      "Rita Ribeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ivone Silva foi uma das mais geniais figuras do humor e da revista à portuguesa do século XX.",
+    "fonte": "Museu Nacional do Teatro / RTP",
+    "factClusterId": "fc_tea_ivonesilva_01"
+  },
+  {
+    "id": "CULT_TEA_0018",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que ator, encenador e realizador de cinema português (1949-2020), cofundador do Teatro da Cornucópia em 1973 e fundador da companhia Artistas Unidos em 1995, dirigiu e traduziu dezenas de dramaturgos mundiais contemporâneos?",
+    "opcoes": [
+      "Luís Miguel Cintra",
+      "Jorge Silva Melo",
+      "João Mota",
+      "Carlos Avilez"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jorge Silva Melo marcou o teatro e cinema português pela divulgação de dramaturgos como Harold Pinter, Jon Fosse e Sarah Kane nos Artistas Unidos.",
+    "fonte": "Artistas Unidos / Teatro da Politécnica / Cinemateca",
+    "factClusterId": "fc_tea_jorgesilvamelo_01"
+  },
+  {
+    "id": "CULT_TEA_0019",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que histórica companhia de teatro independente de Lisboa, fundada em 1973 por Luís Miguel Cintra e Jorge Silva Melo, funcionou no Teatro do Bairro Alto durante mais de quatro décadas até ao seu encerramento em 2016?",
+    "opcoes": [
+      "A Comuna - Teatro de Pesquisa",
+      "A Barraca",
+      "Teatro da Cornucópia",
+      "Teatro Aberto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cornucópia foi um dos mais rigorosos e influentes projetos cénicos de arte contemporânea de Portugal.",
+    "fonte": "Arquivo do Teatro da Cornucópia / Museu Nacional do Teatro",
+    "factClusterId": "fc_tea_cornucopia1973_01"
+  },
+  {
+    "id": "CULT_TEA_0020",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia teatral de intervenção cultural e comunitária em Lisboa, fundada em 1972 pelo encenador João Mota e instalada no antigo edifício da Praça de Espanha, é:",
+    "opcoes": [
+      "A Barraca",
+      "Teatro Aberto",
+      "Teatro da Garagem",
+      "A Comuna — Teatro de Pesquisa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Comuna formou dezenas de atores de elite através do método de pesquisa e expressão corporal de João Mota.",
+    "fonte": "A Comuna / Direção-Geral das Artes (DGARTES)",
+    "factClusterId": "fc_tea_acomuna1972_01"
+  },
+  {
+    "id": "CULT_TEA_0021",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia de teatro sediada no Cinearte em Santos (Lisboa), fundada em 1975 pela prestigiada atriz Maria do Céu Guerra e pelo dramaturgo Mário Alberto, encena espetáculos de cariz popular e clássico?",
+    "opcoes": [
+      "A Barraca",
+      "Teatro da Cornucópia",
+      "Artistas Unidos",
+      "Teatro Meridional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Maria do Céu Guerra é uma das mais respeitadas atrizes de Portugal, Prémio Vasco Santana e diretora artística da Barraca.",
+    "fonte": "Teatro A Barraca / DGARTES",
+    "factClusterId": "fc_tea_abarraca1975_01"
+  },
+  {
+    "id": "CULT_TEA_0022",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia de teatro fundada em 1965 pelo encenador Carlos Avilez no Teatro Municipal Mirita Casimiro no Monte Estoril revelou nomes lendários como Eunice Muñoz, João Vasco e Ruy de Carvalho?",
+    "opcoes": [
+      "Teatro Experimental do Porto (TEP)",
+      "Teatro Experimental de Cascais (TEC)",
+      "Seiva Trupe",
+      "Teatro da Trindade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O TEC de Carlos Avilez é a mais antiga companhia profissional de teatro subsidiada de forma contínua em Portugal.",
+    "fonte": "Teatro Experimental de Cascais / Município de Cascais",
+    "factClusterId": "fc_tea_tec_cascais1965_01"
+  },
+  {
+    "id": "CULT_TEA_0023",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia teatral profissional fundada no Porto em 1953 por António Pedro (a mais antiga companhia teatral profissional independente em atividade contínua em Portugal) é o:",
+    "opcoes": [
+      "Seiva Trupe",
+      "As Boas Raparigas",
+      "Teatro Experimental do Porto (TEP)",
+      "Teatro Art'Imagem"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O TEP introduziu as vanguardas teatrais e a encenação moderna na cidade do Porto a partir dos anos 1950.",
+    "fonte": "Teatro Experimental do Porto / DGARTES",
+    "factClusterId": "fc_tea_tep_porto1953_01"
+  },
+  {
+    "id": "CULT_TEA_0024",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que histórica companhia teatral cooperativa fundada no Porto em 1973 por Júlio Cardoso, Estrela Novais e António Reis dinamizou sucessos como «Queda d'um Anjo» e a recuperação do Teatro do Campo Alegre?",
+    "opcoes": [
+      "Teatro Experimental do Porto",
+      "Ensemble",
+      "Teatro Universitário do Porto",
+      "Seiva Trupe — Teatro Vivo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Seiva Trupe é uma instituição de Utilidade Pública do Porto agraciada com a Medalha de Mérito Cultural.",
+    "fonte": "Seiva Trupe / Câmara Municipal do Porto",
+    "factClusterId": "fc_tea_seivatrupe1973_01"
+  },
+  {
+    "id": "CULT_TEA_0025",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que teatro nacional situado na Praça da Batalha no Porto, fundado em 1798 como Real Teatro de São João e reconstruído após incêndio pelo arquiteto Marques da Silva em 1920, é o:",
+    "opcoes": [
+      "Teatro Nacional São João (TNSJ)",
+      "Teatro Sá da Bandeira",
+      "Teatro Rivoli",
+      "Coliseu do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O TNSJ é o principal teatro estatal do norte do país e Monumento Nacional, gerindo também o Mosteiro de São Bento da Vitória.",
+    "fonte": "Teatro Nacional São João / DGPC",
+    "factClusterId": "fc_tea_tnsj_porto_01"
+  },
+  {
+    "id": "CULT_TEA_0026",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que ator português incontornável (nascido em Lisboa em 1927), decano da representação portuguesa com mais de 80 anos de carreira contínua nos palcos, é uma das maiores figuras vivas da cultura nacional?",
+    "opcoes": [
+      "João Perry",
+      "Ruy de Carvalho",
+      "Luís Miguel Cintra",
+      "Armando Cortez"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ruy de Carvalho foi condecorado com a Grã-Cruz da Ordem de Sant'Iago da Espada e do Mérito pelos Presidentes da República.",
+    "fonte": "Presidência da República / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_tea_ruydecarvalho_01"
+  },
+  {
+    "id": "CULT_TEA_0027",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que prestigiado festival internacional de artes cénicas no Porto e na região Norte («FITEI»), criado em 1977, é o mais antigo festival de teatro da Península Ibérica?",
+    "opcoes": [
+      "Festival de Almada",
+      "FIMP",
+      "FITEI (Festival Internacional de Teatro de Expressão Ibérica)",
+      "Citemor"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O FITEI cruza anualmente produções inovadoras de Portugal, Espanha, América Latina e África.",
+    "fonte": "FITEI / DGARTES / CMP",
+    "factClusterId": "fc_tea_fitei1977_01"
+  },
+  {
+    "id": "CULT_TEA_0028",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que grande festival de teatro ao ar livre e em salas na Margem Sul do Tejo, fundado em 1984 por Joaquim Benite e pela Companhia de Teatro de Almada, realiza-se anualmente em julho?",
+    "opcoes": [
+      "FITEI",
+      "Festival de Teatro de Viana",
+      "Festival de Teatro do Alentejo",
+      "Festival de Almada (Festival Internacional de Teatro de Almada)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Festival de Almada é considerado o maior acontecimento cénico de verão de Portugal, com palcos em Almada e Lisboa.",
+    "fonte": "Companhia de Teatro de Almada / Município de Almada",
+    "factClusterId": "fc_tea_festivaldealmada_01"
+  },
+  {
+    "id": "CULT_TEA_0029",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que espaço teatral histórico na Baixa de Lisboa (Rua das Portas de Santo Antão), inaugurado em 1890 pelo empresário Luís Galhardo e remodelado pelo encenador Filipe La Féria em 1992, é o:",
+    "opcoes": [
+      "Teatro Politeama (de Filipe La Féria)",
+      "Teatro da Trindade",
+      "Teatro Variedades",
+      "Teatro Eden"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Filipe La Féria reabriu o Politeama com o lendário musical 'Passa por Mim no Rossio', revitalizando os grandes musicais em Portugal.",
+    "fonte": "Teatro Politeama / Produções Filipe La Féria",
+    "factClusterId": "fc_tea_politeamalferia_01"
+  },
+  {
+    "id": "CULT_TEA_0030",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que importante teatro no Chiado em Lisboa, inaugurado em 1867 pela iniciativa do escritor Francisco Palha com fachada neoclássica e sala à italiana, é propriedade da Fundação INATEL?",
+    "opcoes": [
+      "Teatro São Luiz",
+      "Teatro da Trindade INATEL",
+      "Teatro São Carlos",
+      "Teatro Maria Matos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Teatro da Trindade acolheu a estreia de óperas cómicas de Offenbach e dramas de Eça de Queirós e Garrett.",
+    "fonte": "Fundação INATEL / Teatro da Trindade",
+    "factClusterId": "fc_tea_teatrotrindade_01"
+  },
+  {
+    "id": "CULT_TEA_0031",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que teatro municipal em Lisboa (Rua António Maria Cardoso no Chiado), inaugurado em 1894 como Teatro D. Amélia e rebatizado em homenagem ao grande barítono lisboeta Francisco de Andrade, é o:",
+    "opcoes": [
+      "Teatro Maria Matos",
+      "Teatro Luís de Camões (LU.CA)",
+      "Teatro São Luiz (Teatro Municipal São Luiz)",
+      "Teatro Aberto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O São Luiz é um dos principais palcos da programação artística e cénica contemporânea da Câmara Municipal de Lisboa.",
+    "fonte": "EGEAC / Teatro São Luiz",
+    "factClusterId": "fc_tea_teatrosaoluiz_01"
+  },
+  {
+    "id": "CULT_TEA_0032",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que museu nacional instalado no Palácio do Monteiro-Mor no Lumiar em Lisboa abriga a maior coleção pública portuguesa de trajes de cena, figurinos, maquetas de cenários, cartazes e manuscritos de teatro?",
+    "opcoes": [
+      "Museu Nacional do Traje",
+      "Museu da Música",
+      "Museu de Lisboa",
+      "Museu Nacional do Teatro e da Dança (MNTD)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Teatro preserva a memória documental de 500 anos de artes performativas em Portugal.",
+    "fonte": "DGPC / Museu Nacional do Teatro e da Dança",
+    "factClusterId": "fc_tea_museunacionaldoteatro_01"
+  },
+  {
+    "id": "CULT_TEA_0033",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que comédia de costumes do dramaturgo romântico Júlio César Machado («Os Fidalgos da Casa Mourisca») retrata com fino humor a transição da nobreza rural decadente para a nova sociedade burguesa oitocentista?",
+    "opcoes": [
+      "Os Fidalgos da Casa Mourisca",
+      "O Morgado de Fafe",
+      "A Morgadinha dos Canaviais",
+      "O Primo Basílio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Júlio César Machado foi um dos cronistas e dramaturgos mais espirituosos do Romantismo tardio.",
+    "fonte": "BNP / DGLAB",
+    "factClusterId": "fc_tea_juliocesarmachado_01"
+  },
+  {
+    "id": "CULT_TEA_0034",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que comédia de enorme êxito de Camilo Castelo Branco (escrita em 1861 e estreada no Porto), protagonizada pela personagem cómica do morgado transmontano D. Lourenço de Vizela, é:",
+    "opcoes": [
+      "Amor de Perdição",
+      "O Morgado de Fafe em Lisboa (e O Morgado de Fafe Amoroso)",
+      "A Queda dum Anjo",
+      "O Judeu"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A figura hilariante do Morgado de Fafe com a sua espada de honra entrou para o anedotário popular português.",
+    "fonte": "Casa de Camilo / Município de Famalicão",
+    "factClusterId": "fc_tea_camilo_morgadofafe_01"
+  },
+  {
+    "id": "CULT_TEA_0035",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que peça satírica de Gil Vicente (1509) retrata o drama de um camponês idoso e apaixonado que entrega os seus bens a uma alcoviteira (Branca Gil) em troca dos favores de uma jovem donzela que troça dele na sua horta?",
+    "opcoes": [
+      "Auto da Índia",
+      "Farsa dos Almocreves",
+      "O Velho da Horta",
+      "Auto de Mofina Mendes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Velho da Horta é uma magistral sátira da paixão senil e da cupidez das alcoviteiras medievais.",
+    "fonte": "DGLAB / Compilaçam de Gil Vicente",
+    "factClusterId": "fc_tea_velhodahorta_01"
+  },
+  {
+    "id": "CULT_TEA_0036",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que auto de Gil Vicente (representado em 1509) é a primeira sátira dramática ao reverso doméstico das Descobertas, mostrando uma mulher lisboeta infiel (Constança) que se diverte com amantes enquanto o marido está embarcado na armada da Índia?",
+    "opcoes": [
+      "Auto da Fama",
+      "Exortação da Guerra",
+      "Cortes de Júpiter",
+      "Auto da Índia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Auto da Índia desmistifica o heroísmo das navegações ao expor a hipocrisia e a corrupção de costumes na capital do império.",
+    "fonte": "BNP / Teatro Nacional D. Maria II",
+    "factClusterId": "fc_tea_autodaindia_01"
+  },
+  {
+    "id": "CULT_TEA_0037",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que grande ator, encenador e produtor teatral português (1954-2010), em dupla histórica com José Pedro Gomes na comédia «Conversa da Treta», marcou o teatro e o humor nacional contemporâneo?",
+    "opcoes": [
+      "António Feio",
+      "João Lourenço",
+      "Vítor Norte",
+      "Diogo Infante"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A 'Conversa da Treta' (texto de José Fanha e Rui Cardoso Martins) de António Feio e José Pedro Gomes bateu todos os recordes de bilheteira.",
+    "fonte": "Teatro Villaret / Fundação GDA",
+    "factClusterId": "fc_tea_antoniofeio_conversadatreta_01"
+  },
+  {
+    "id": "CULT_TEA_0038",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia teatral de Lisboa fundada em 1982 por João Lourenço e Vera San Payo de Lemos, instalada na Praça de Espanha, é uma das mais inovadoras na encenação de dramaturgia europeia contemporânea?",
+    "opcoes": [
+      "Artistas Unidos",
+      "Teatro Aberto",
+      "Teatro Experimental de Cascais",
+      "Teatro da Garagem"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Aberto foi galardoado com múltiplos Prémios da Crítica e da Associação Portuguesa de Críticos de Teatro.",
+    "fonte": "Teatro Aberto / DGARTES",
+    "factClusterId": "fc_tea_teatroaberto1982_01"
+  },
+  {
+    "id": "CULT_TEA_0039",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que importante companhia profissional sediada no Teatro Garcia de Resende em Évora (criada em 1975 por Mário Barradas) é a grande referência do teatro profissional no Alentejo?",
+    "opcoes": [
+      "Teatro do Noroeste",
+      "Teatro das Beiras",
+      "CENDREV (Centro Dramático de Évora)",
+      "ACTA — A Companhia de Teatro do Algarve"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O CENDREV promove a descentralização cultural levando peças clássicas a aldeias e vilas de todo o sul do país.",
+    "fonte": "CENDREV / Teatro Garcia de Resende / Município de Évora",
+    "factClusterId": "fc_tea_cendrev_evora1975_01"
+  },
+  {
+    "id": "CULT_TEA_0040",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia de teatro profissional sediada no Teatro Municipal Sá de Miranda em Viana do Castelo desde 1991 dinamiza a atividade teatral e a formação cénica no Alto Minho?",
+    "opcoes": [
+      "Companhia de Teatro de Braga",
+      "Teatro Art'Imagem",
+      "Teatro Montemuro",
+      "Teatro do Noroeste — CDV (Centro Dramático de Viana)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Teatro do Noroeste - CDV mantém o Festival de Teatro de Viana e residências artísticas no Minho e Galiza.",
+    "fonte": "Teatro do Noroeste / Município de Viana do Castelo",
+    "factClusterId": "fc_tea_teatrodonoroeste_01"
+  },
+  {
+    "id": "CULT_TEA_0041",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia residente no Theatro Circo em Braga desde 1980 (Companhia de Teatro de Braga - CTB), dirigida pelo encenador Rui Madeira, é o motor da criação dramática clássica e contemporânea no Baixo Minho?",
+    "opcoes": [
+      "Companhia de Teatro de Braga (CTB)",
+      "Teatro Experimental do Porto",
+      "Seiva Trupe",
+      "Teatro de Marionetas do Porto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A CTB realiza intercâmbios regulares com teatros nacionais do Brasil, Roménia, Cuba e Espanha.",
+    "fonte": "Companhia de Teatro de Braga / Theatro Circo",
+    "factClusterId": "fc_tea_ctb_braga1980_01"
+  },
+  {
+    "id": "CULT_TEA_0042",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que companhia pioneira de teatro de marionetas fundada no Porto em 1988 pelo mestre marionetista João Paulo Seara Cardoso criou o Museu das Marionetas do Porto na Rua de Belomonte?",
+    "opcoes": [
+      "Marionetas de Lisboa",
+      "Teatro de Marionetas do Porto",
+      "A Tarumba",
+      "Bonecos de Santo Aleixo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Teatro de Marionetas do Porto alcançou prestígio mundial com peças poéticas para adultos e crianças como 'Miséria' e 'Macbeth'.",
+    "fonte": "Museu das Marionetas do Porto / DGARTES",
+    "factClusterId": "fc_tea_marionetasdoporto_01"
+  },
+  {
+    "id": "CULT_TEA_0043",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que tradição secular de títeres e marionetas de varão do Alentejo (aldeia de Santo Aleixo da Restauração, Moura), manipuladas por detrás de uma retábulo de madeira iluminado a candeia com vozes em falsete e acompanhamento de guitarra portuguesa, é conhecida como:",
+    "opcoes": [
+      "Marionetas de Belomonte",
+      "Bonecos de Estremoz",
+      "Bonecos de Santo Aleixo (Títeres Tradicionais do Alentejo)",
+      "Robertos de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Bonecos de Santo Aleixo são preservados pelo CENDREV de Évora e constituem uma das mais singulares joias do teatro popular europeu.",
+    "fonte": "CENDREV / Centro UNESCO de Évora",
+    "factClusterId": "fc_tea_bonecosdesantoaleixo_01"
+  },
+  {
+    "id": "CULT_TEA_0044",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que teatro de bonecos de luva tradicional de feira e praça pública em Portugal, com raízes na Commedia dell'Arte e animado pela palheta vocal estridente do titereiro com personagens como o Dom Roberto e o Toureiro, é o:",
+    "opcoes": [
+      "Bonecos de Santo Aleixo",
+      "Mamulengo",
+      "Guignol",
+      "Teatro Dom Roberto (Os Robertos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Dom Roberto foi inscrito no Inventário Nacional do Património Cultural Imaterial em 2021 graças à recuperação de mestres como João Paulo Cardoso e José Gil.",
+    "fonte": "DGPC / Museu da Marioneta de Lisboa",
+    "factClusterId": "fc_tea_teatrodomroberto_01"
+  },
+  {
+    "id": "CULT_TEA_0045",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que museu instalado no histórico Convento das Bernardas na Madragoa em Lisboa é o único espaço museológico nacional inteiramente dedicado à história universal e portuguesa das marionetas e máscaras?",
+    "opcoes": [
+      "Museu da Marioneta de Lisboa",
+      "Museu Nacional do Teatro",
+      "Museu do Fado",
+      "Museu das Artes Decorativas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu da Marioneta abriga uma valiosa coleção de Robertos, Bonecos de Santo Aleixo e sombras do sudeste asiático.",
+    "fonte": "EGEAC / Museu da Marioneta",
+    "factClusterId": "fc_tea_museudamarioneta_01"
+  },
+  {
+    "id": "CULT_TEA_0046",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que célebre ator, encenador e dramaturgo português (1918-1990), nascido em Lisboa e autor de peças como «O Pombo da Paz» e «Bocage», notabilizou-se como um dos pioneiros da encenação moderna na RTP e no Teatro Experimental?",
+    "opcoes": [
+      "Varela Silva",
+      "Gaston Cruz e Artur Ramos",
+      "Jacinto Ramos",
+      "Morais e Castro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Artur Ramos dirigiu dezenas de tele-teatros históricos na RTP que levaram as grandes obras da dramaturgia clássica e moderna a milhões de lares portugueses.",
+    "fonte": "RTP Arquivos / Museu Nacional do Teatro",
+    "factClusterId": "fc_tea_arturramos_01"
+  },
+  {
+    "id": "CULT_TEA_0047",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que sala de espetáculos emblemática em Viseu, com a sua arquitetura neo-clássica e moderna reaberta em 2008, homenageia o grande historiador e orador viseense:",
+    "opcoes": [
+      "Theatro Circo",
+      "Teatro Micaelense",
+      "Teatro Viriato (Viseu)",
+      "Teatro Pax Julia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Viriato é um dos mais dinâmicos polos de acolhimento e coprodução de dança e teatro contemporâneo da região Centro.",
+    "fonte": "Centro Dramático de Viseu / Município de Viseu",
+    "factClusterId": "fc_tea_teatroviriato_01"
+  },
+  {
+    "id": "CULT_TEA_0048",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que majestoso teatro na Avenida da Liberdade em Braga, inaugurado em 1915 e desenhado pelo arquiteto Moura Coutinho como um dos mais luxuosos teatros-circo da Península Ibérica, é o:",
+    "opcoes": [
+      "Teatro Gil Vicente",
+      "Teatro Garcia de Resende",
+      "Teatro Constantino Nery",
+      "Theatro Circo de Braga"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Theatro Circo destaca-se pelo seu teto oval pintado, veludos vermelhos e acústica notável para concertos e teatro.",
+    "fonte": "Theatro Circo / Município de Braga",
+    "factClusterId": "fc_tea_theatrocircobraga_01"
+  },
+  {
+    "id": "CULT_TEA_0049",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que histórico teatro municipal em Évora, inaugurado em 1892 e projetado pelo arquiteto italiano Giuseppe Cinatti no estilo da Ópera de Paris com pinturas murais no teto, é o:",
+    "opcoes": [
+      "Teatro Garcia de Resende (Évora)",
+      "Teatro Lethes (Faro)",
+      "Teatro Bernardim Ribeiro (Estremoz)",
+      "Teatro Baltazar Dias (Funchal)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Garcia de Resende acolhe a companhia CENDREV e conserva a sua traça original intacta.",
+    "fonte": "Município de Évora / CENDREV",
+    "factClusterId": "fc_tea_garciaderesende_evora_01"
+  },
+  {
+    "id": "CULT_TEA_0050",
+    "tema": "Cultura",
+    "subtema": "Teatro",
+    "pergunta": "Que antigo colégio jesuíta do século XVI em Faro transformado em teatro à italiana em 1845, o mais antigo espaço teatral do Algarve com o lema latino «Docendo Discimus» na boca de cena, é o:",
+    "opcoes": [
+      "Teatro das Figuras",
+      "Teatro Municipal de Portimão",
+      "Teatro Lethes (Faro)",
+      "Teatro de Olhão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Lethes é a casa da ACTA (A Companhia de Teatro do Algarve) e um Monumento de Interesse Público.",
+    "fonte": "ACTA / Município de Faro / DGPC",
+    "factClusterId": "fc_tea_teatrolethesfaro_01"
+  }
+]

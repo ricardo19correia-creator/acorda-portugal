@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CIEN_INV_0001",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que instrumento matemático revolucionário foi inventado pelo matemático português Pedro Nunes em 1542 para permitir medições angulares de frações de grau com extrema precisão na navegação?",
+    "opcoes": [
+      "Nónio (precursor do nónio/vernier)",
+      "Astrolábio náutico",
+      "Balestilha",
+      "Quadrante de Davis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nunes inventou o nónio, sistema de escalas concêntricas graduadas que permitiu medir minutos e frações de grau em instrumentos de navegação e astronomia.",
+    "fonte": "Academia das Ciências de Lisboa / Universidade de Coimbra",
+    "factClusterId": "fc_inv_pedronunes_01"
+  },
+  {
+    "id": "CIEN_INV_0002",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em 1709, que sacerdote e inventor luso-brasileiro fez voar em Lisboa o primeiro aeróstato de ar quente do mundo («A Passarola»), perante a corte de D. João V?",
+    "opcoes": [
+      "Padre Himalaia",
+      "Padre Bartolomeu de Gusmão",
+      "Gago Coutinho",
+      "Sacadura Cabral"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bartolomeu Lourenço de Gusmão demonstrou o princípio da aerostação no Paço da Ribeira mais de 70 anos antes dos irmãos Montgolfier.",
+    "fonte": "Academia da Força Aérea / Museu do Ar",
+    "factClusterId": "fc_inv_gusmao_01"
+  },
+  {
+    "id": "CIEN_INV_0003",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que sistema pioneiro de pagamento automático eletrónico de portagens sem paragem foi inventado e implementado em Portugal em 1991 por investigadores da Universidade de Aveiro e da Brisa?",
+    "opcoes": [
+      "EasyToll",
+      "ViaCard",
+      "Via Verde",
+      "PortagemFlash"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Via Verde foi um dos primeiros sistemas de teleportagem do mundo a operar em escala nacional e interoperável em autoestradas, parques e bombas de gasolina.",
+    "fonte": "Universidade de Aveiro / Brisa Autoestradas",
+    "factClusterId": "fc_inv_viaverde_01"
+  },
+  {
+    "id": "CIEN_INV_0004",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que exame médico inovador de imagiologia vascular foi inventado pelo médico português António Egas Moniz em 1927, permitindo visualizar pela primeira vez os vasos sanguíneos cerebrais?",
+    "opcoes": [
+      "Ressonância Magnética",
+      "Tomografia Computorizada",
+      "Eletroencefalograma",
+      "Angiografia Cerebral (Arteriografia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz desenvolveu a angiografia cerebral contrastada em Lisboa, um dos maiores marcos da história da neurologia mundial.",
+    "fonte": "Nobel Prize Committee / Faculdade de Medicina de Lisboa",
+    "factClusterId": "fc_inv_egasmoniz_01"
+  },
+  {
+    "id": "CIEN_INV_0005",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que rede de caixas automáticas bancárias, criada em Portugal pela SIBS em 1985, é mundialmente reconhecida pelo seu elevado número de funcionalidades integradas (pagamentos, bilhetes, impostos)?",
+    "opcoes": [
+      "Rede Multibanco",
+      "Rede Unicre",
+      "Rede Euronet",
+      "Rede Payshop"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Rede Multibanco desenvolvida pela SIBS tornou-se uma das redes interbancárias mais sofisticadas e completas do planeta.",
+    "fonte": "SIBS / Banco de Portugal",
+    "factClusterId": "fc_inv_multibanco_01"
+  },
+  {
+    "id": "CIEN_INV_0006",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que instrumento astronómico de navegação marítima foi inventado e adaptado por Gago Coutinho para a primeira travessia aérea do Atlântico Sul em 1922?",
+    "opcoes": [
+      "Bússola giroscópica",
+      "Sextante com horizonte artificial (Sextante de bolha)",
+      "Astrolábio esférico",
+      "Octante de reflexão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Gago Coutinho adaptou o sextante náutico clássico com um nível de bolha de ar, permitindo a navegação astronómica precisa a bordo de aviões.",
+    "fonte": "Museu de Marinha / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_inv_gagocoutinho_01"
+  },
+  {
+    "id": "CIEN_INV_0007",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em 1900, na Exposição Universal de Paris, que padre e cientista português conquistou o Grande Prémio ao inventar o «Pirelióforo», um forno solar gigante que atingia mais de 3000 ºC?",
+    "opcoes": [
+      "Padre Bartolomeu de Gusmão",
+      "Padre Américo",
+      "Padre Manuel António Gomes (Padre Himalaia)",
+      "Padre Cruz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Padre Himalaia foi um pioneiro mundial da energia solar, construindo um concentrador solar parabólico de alta eficiência com mais de 3000 espelhos.",
+    "fonte": "Sociedade de Geografia de Lisboa / Ciência Viva",
+    "factClusterId": "fc_inv_himalaia_01"
+  },
+  {
+    "id": "CIEN_INV_0008",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que navio de velas latinas triangulares foi desenvolvido pelos construtores navais portugueses no século XV para permitir navegar «à bolina» contra o vento?",
+    "opcoes": [
+      "Galeão",
+      "Fragata",
+      "Nau de guerra",
+      "Caravela"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A caravela dos Descobrimentos permitia manobrar com vento desfavorável graças às velas triangulares (latinas) e ao casco leve.",
+    "fonte": "Museu de Marinha / Academia de Marinha",
+    "factClusterId": "fc_inv_caravela_01"
+  },
+  {
+    "id": "CIEN_INV_0009",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que obra fundamental da medicina e botânica tropical foi publicada pelo médico judeu português Garcia de Orta em Goa, em 1563 («Colóquios dos Simples e Drogas e Cousas Medicinais da Índia»)?",
+    "opcoes": [
+      "O primeiro tratado ocidental sobre farmacologia e plantas medicinais asiáticas",
+      "O primeiro atlas anatómico do cérebro",
+      "O primeiro manual de cirurgia vascular",
+      "O primeiro mapa das correntes do Índico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Garcia de Orta introduziu a medicina científica moderna na Ásia, descrevendo detalhadamente a cólera, a pimenta, o gengibre, o aloés e a noz-moscada.",
+    "fonte": "Universidade de Coimbra / BNP",
+    "factClusterId": "fc_inv_garciadeorta_01"
+  },
+  {
+    "id": "CIEN_INV_0010",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que empresa portuguesa de biotecnologia sediada em Cantanhede (Biocant) desenvolveu processos inovadores mundiais para isolamento de compostos e medicamentos à base de biopolímeros?",
+    "opcoes": [
+      "Bial",
+      "Crioestaminal",
+      "Bluepharma",
+      "InnovPlantProtect"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "A Crioestaminal foi o primeiro banco de células estaminais da Península Ibérica, sediado no Biocant Park em Cantanhede.",
+    "fonte": "Biocant Park / Agência Nacional de Inovação (ANI)",
+    "factClusterId": "fc_inv_biocant_01"
+  },
+  {
+    "id": "CIEN_INV_0011",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que cientista e botânico português do século XVIII foi pioneiro na classificação da flora da América do Sul e introduziu a planta da borracha em Portugal?",
+    "opcoes": [
+      "Félix da Silva Avelar Brotero",
+      "Abade Correia da Serra",
+      "Alexandre Rodrigues Ferreira",
+      "Domingos Vandelli"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Alexandre Rodrigues Ferreira liderou a célebre «Viagem Filosófica» pela Amazónia e Pantanal entre 1783 e 1792.",
+    "fonte": "Jardim Botânico da Universidade de Coimbra / BNP",
+    "factClusterId": "fc_inv_viagemfilosofica_01"
+  },
+  {
+    "id": "CIEN_INV_0012",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em 1999, que produto farmacêutico 100% português, o primeiro medicamento de investigação própria aprovado a nível global, foi desenvolvido pelos laboratórios BIAL (acetato de eslicarbazepina)?",
+    "opcoes": [
+      "Ben-u-ron",
+      "Aero-OM",
+      "Brufen",
+      "Zebinix (antiepilético)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Zebinix foi o primeiro fármaco inovador com patente totalmente portuguesa aprovado pela Agência Europeia de Medicamentos (EMA) e FDA americana.",
+    "fonte": "BIAL / Infarmed",
+    "factClusterId": "fc_inv_bial_01"
+  },
+  {
+    "id": "CIEN_INV_0013",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que material natural de origem florestal português é amplamente utilizado pela NASA e pela Agência Espacial Europeia (ESA) como escudo térmico em naves e foguetões espaciais?",
+    "opcoes": [
+      "Cortiça (compostos de aglomerado)",
+      "Madeira de pinho bravo",
+      "Resina natural",
+      "Fibra de eucalipto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A cortiça portuguesa (produzida pela Corticeira Amorim) protege naves espaciais contra temperaturas extremas de reentrada na atmosfera.",
+    "fonte": "ESA / Corticeira Amorim / Amorim Cork Composites",
+    "factClusterId": "fc_inv_cortica_espaco_01"
+  },
+  {
+    "id": "CIEN_INV_0014",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que astrónomo e matemático português descobriu e demonstrou a curva de rumo constante na superfície da Terra, denominada Linha de Loxodromia?",
+    "opcoes": [
+      "D. João de Castro",
+      "Pedro Nunes",
+      "Rui Faleiro",
+      "Abraão Zacuto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Pedro Nunes definiu matematicamente a loxodrómia em 1537, conceito basilar que permitiu a projeção cartográfica de Mercator.",
+    "fonte": "Sociedade Portuguesa de Matemática (SPM)",
+    "factClusterId": "fc_inv_loxodromia_01"
+  },
+  {
+    "id": "CIEN_INV_0015",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem foi o vice-rei e cientista naval português que realizou as primeiras medições rigorosas do desvio magnético da agulha náutica (bússola) no oceano Índico em 1538?",
+    "opcoes": [
+      "Afonso de Albuquerque",
+      "Vasco da Gama",
+      "D. João de Castro",
+      "D. Lourenço de Almeida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "D. João de Castro registou nos seus Roteiros observações científicas pioneiras sobre o magnetismo terrestre e o magnetismo induzido por rochas basálticas.",
+    "fonte": "Academia de Marinha / BNP",
+    "factClusterId": "fc_inv_joaodecastro_01"
+  },
+  {
+    "id": "CIEN_INV_0016",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que aplicação móvel pioneira de pagamentos instantâneos entre particulares e comerciantes associada ao número de telemóvel foi lançada pela SIBS em 2014?",
+    "opcoes": [
+      "Revolut",
+      "Bizum",
+      "PayPal Express",
+      "MB WAY"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O MB WAY tornou-se o serviço líder em Portugal para transferências bancárias imediatas e levantamento de dinheiro sem cartão.",
+    "fonte": "SIBS / Banco de Portugal",
+    "factClusterId": "fc_inv_mbway_01"
+  },
+  {
+    "id": "CIEN_INV_0017",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que físico e médico luso-brasileiro da Universidade de Coimbra foi pioneiro no estudo das correntes elétricas e dos geradores eletrostáticos no século XVIII?",
+    "opcoes": [
+      "Vicente Seabra Silva Telles",
+      "Martinho de Mendonça",
+      "Dr. António Ribeiro Sanches",
+      "Padre Manuel de Campos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "Vicente Coelho de Seabra Silva Telles publicou em 1788 os «Elementos de Química», obra vanguardista alinhada com as descobertas de Lavoisier.",
+    "fonte": "Universidade de Coimbra / Sociedade Portuguesa de Química",
+    "factClusterId": "fc_inv_seabra_01"
+  },
+  {
+    "id": "CIEN_INV_0018",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que invenção da empresa portuguesa ColorADD, criada pelo designer Miguel Neiva em 2008, permite que pessoas com daltonismo identifiquem cores?",
+    "opcoes": [
+      "Óculos de lentes ultravioleta",
+      "Um alfabeto de símbolos gráficos associados às cores primárias",
+      "Um sensor de som que vibra com a cor",
+      "Um filtro digital para ecrãs"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O ColorADD é um código universal monocromático adotado mundialmente em transportes, hospitais, lápis de cor e embalagens.",
+    "fonte": "ColorADD / Universidade do Minho",
+    "factClusterId": "fc_inv_coloradd_01"
+  },
+  {
+    "id": "CIEN_INV_0019",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em 1989, quem inventou a World Wide Web (WWW) no laboratório do CERN na Suíça?",
+    "opcoes": [
+      "Bill Gates",
+      "Steve Jobs",
+      "Tim Berners-Lee",
+      "Vint Cerf"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O cientista britânico Tim Berners-Lee inventou o protocolo HTTP, a linguagem HTML e o primeiro servidor web mundial.",
+    "fonte": "CERN / W3C",
+    "factClusterId": "fc_inv_www_01"
+  },
+  {
+    "id": "CIEN_INV_0020",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que astrónomo polaco formulou a teoria heliocêntrica moderna em 1543 na obra «De revolutionibus orbium coelestium»?",
+    "opcoes": [
+      "Galileu Galilei",
+      "Johannes Kepler",
+      "Tycho Brahe",
+      "Nicolau Copérnico"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Copérnico estabeleceu que a Terra e os outros planetas giram em torno do Sol, revolucionando a cosmologia renascentista.",
+    "fonte": "União Astronómica Internacional (IAU)",
+    "factClusterId": "fc_inv_copernico_01"
+  },
+  {
+    "id": "CIEN_INV_0021",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em que ano o cientista escocês Alexander Fleming descobriu acidentalmente o primeiro antibiótico natural, a penicilina?",
+    "opcoes": [
+      "1928",
+      "1914",
+      "1945",
+      "1953"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fleming observou em 1928 que uma cultura de estafilococos tinha sido contaminada e destruída pelo fungo Penicillium notatum.",
+    "fonte": "Nobel Prize Committee",
+    "factClusterId": "fc_inv_penicilina_01"
+  },
+  {
+    "id": "CIEN_INV_0022",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que física e química polaco-francesa foi a primeira pessoa a receber dois Prémios Nobel em áreas científicas distintas (Física em 1903 e Química em 1911)?",
+    "opcoes": [
+      "Rosalind Franklin",
+      "Marie Curie (Maria Skłodowska-Curie)",
+      "Lise Meitner",
+      "Dorothy Hodgkin"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Marie Curie descobriu os elementos radioativos Polónio e Rádio, desenvolvendo estudos pioneiros sobre a radioatividade.",
+    "fonte": "Nobel Prize Committee / Instituto Curie",
+    "factClusterId": "fc_inv_mariecurie_01"
+  },
+  {
+    "id": "CIEN_INV_0023",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem patenteou a primeira lâmpada elétrica incandescente comercialmente viável em 1879 e o fonógrafo em 1877?",
+    "opcoes": [
+      "Nikola Tesla",
+      "Alexander Graham Bell",
+      "Thomas Edison",
+      "James Watt"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Thomas Edison registou mais de 1000 patentes, revolucionando a iluminação pública, a gravação de som e o cinema.",
+    "fonte": "Smithsonian Institution",
+    "factClusterId": "fc_inv_edison_01"
+  },
+  {
+    "id": "CIEN_INV_0024",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que biólogo e médico britânico é considerado o «Pai da Imunologia» por ter desenvolvido a primeira vacina do mundo (contra a varíola) em 1796?",
+    "opcoes": [
+      "Louis Pasteur",
+      "Robert Koch",
+      "Joseph Lister",
+      "Edward Jenner"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Edward Jenner inoculou o vírus da varíola bovina (cowpox) para induzir imunidade contra a varíola humana.",
+    "fonte": "Organização Mundial da Saúde (OMS)",
+    "factClusterId": "fc_inv_jenner_01"
+  },
+  {
+    "id": "CIEN_INV_0025",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem desenvolveu a tabela periódica dos elementos químicos organizada pela massa atómica em 1869?",
+    "opcoes": [
+      "Dmitri Mendeleiev",
+      "Antoine Lavoisier",
+      "John Dalton",
+      "J. J. Thomson"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mendeleiev organizou os 63 elementos conhecidos na época e previu com precisão a existência e propriedades de elementos ainda não descobertos.",
+    "fonte": "IUPAC",
+    "factClusterId": "fc_inv_mendeleiev_01"
+  },
+  {
+    "id": "CIEN_INV_0026",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que microbiologista francês inventou o processo térmico de eliminação de bactérias em alimentos (pasteurização) e a vacina contra a raiva em 1885?",
+    "opcoes": [
+      "Robert Koch",
+      "Louis Pasteur",
+      "Paul Ehrlich",
+      "Élie Metchnikoff"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pasteur refutou a geração espontânea e estabeleceu a teoria microbiana das doenças infecciosas.",
+    "fonte": "Institut Pasteur",
+    "factClusterId": "fc_inv_pasteur_01"
+  },
+  {
+    "id": "CIEN_INV_0027",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que estrutura molecular em dupla hélice foi descoberta por James Watson, Francis Crick e Rosalind Franklin em 1953?",
+    "opcoes": [
+      "A molécula de ARN mensageiro",
+      "A estrutura da hemoglobina",
+      "A molécula de ADN (Ácido Desoxirribonucleico)",
+      "A síntese do colesterol"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A elucidação da estrutura do ADN permitiu compreender o código genético e o mecanismo de hereditariedade dos seres vivos.",
+    "fonte": "Nature / Nobel Prize Committee",
+    "factClusterId": "fc_inv_adn_01"
+  },
+  {
+    "id": "CIEN_INV_0028",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem formulou as leis da gravitação universal e as três leis fundamentais do movimento na obra «Philosophiae Naturalis Principia Mathematica» (1687)?",
+    "opcoes": [
+      "Galileu Galilei",
+      "René Descartes",
+      "Gottfried Leibniz",
+      "Isaac Newton"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Sir Isaac Newton lançou os fundamentos da mecânica clássica e do cálculo infinitesimal moderno.",
+    "fonte": "Royal Society de Londres",
+    "factClusterId": "fc_inv_newton_01"
+  },
+  {
+    "id": "CIEN_INV_0029",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que inventor alemão desenvolveu a prensa mecânica de tipos móveis metálicos por volta de 1440, permitindo a impressão em massa de livros na Europa?",
+    "opcoes": [
+      "Johannes Gutenberg",
+      "Albrecht Dürer",
+      "Peter Schöffer",
+      "Johann Fust"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A imprensa de Gutenberg democratizou o acesso ao conhecimento e acelerou o Renascimento e a difusão científica.",
+    "fonte": "Gutenberg Museum Mainz / BNP",
+    "factClusterId": "fc_inv_gutenberg_01"
+  },
+  {
+    "id": "CIEN_INV_0030",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que físico alemão descobriu acidentalmente os Raios X em 1895, tendo recebido o primeiro Prémio Nobel da Física da história em 1901?",
+    "opcoes": [
+      "Max Planck",
+      "Wilhelm Röntgen",
+      "Heinrich Hertz",
+      "Albert Einstein"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Wilhelm Conrad Röntgen produziu e detetou a radiação eletromagnética que permitiu a criação da radiografia médica.",
+    "fonte": "Nobel Prize Committee",
+    "factClusterId": "fc_inv_rontgen_01"
+  },
+  {
+    "id": "CIEN_INV_0031",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem patenteou o primeiro modelo prático de telefone eletromagnético em 1876 nos Estados Unidos?",
+    "opcoes": [
+      "Antonio Meucci",
+      "Elisha Gray",
+      "Alexander Graham Bell",
+      "Guglielmo Marconi"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Graham Bell obteve a patente fundadora das telecomunicações de voz e fundou a Bell Telephone Company.",
+    "fonte": "Library of Congress / Smithsonian",
+    "factClusterId": "fc_inv_telefone_01"
+  },
+  {
+    "id": "CIEN_INV_0032",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que físico sérvio-americano inventou o motor de indução de corrente alternada (AC) e a bobina de alta tensão que permitiram a eletrificação global?",
+    "opcoes": [
+      "Thomas Edison",
+      "George Westinghouse",
+      "Michael Faraday",
+      "Nikola Tesla"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nikola Tesla concebeu os princípios do sistema polifásico de corrente alternada e a transmissão de energia e rádio sem fios.",
+    "fonte": "IEEE History Center",
+    "factClusterId": "fc_inv_tesla_01"
+  },
+  {
+    "id": "CIEN_INV_0033",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que naturalista britânico propôs a teoria da evolução das espécies por seleção natural na obra «A Origem das Espécies» (1859)?",
+    "opcoes": [
+      "Charles Darwin",
+      "Alfred Russel Wallace",
+      "Jean-Baptiste Lamarck",
+      "Gregor Mendel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Darwin formulou a teoria evolutiva moderna após a sua circum-navegação a bordo do HMS Beagle.",
+    "fonte": "Natural History Museum de Londres",
+    "factClusterId": "fc_inv_darwin_01"
+  },
+  {
+    "id": "CIEN_INV_0034",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que engenheiro escocês aperfeiçoou a máquina a vapor com condensador separado em 1769, tornando-se o motor da Revolução Industrial?",
+    "opcoes": [
+      "Thomas Newcomen",
+      "James Watt",
+      "George Stephenson",
+      "Richard Trevithick"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As inovações de James Watt multiplicaram a eficiência energética do vapor e deram nome à unidade de potência (Watt).",
+    "fonte": "Science Museum de Londres",
+    "factClusterId": "fc_inv_watt_01"
+  },
+  {
+    "id": "CIEN_INV_0035",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem descobriu o fenómeno da indução eletromagnética em 1831, permitindo a construção dos primeiros dínamos e transformadores elétricos?",
+    "opcoes": [
+      "James Clerk Maxwell",
+      "André-Marie Ampère",
+      "Michael Faraday",
+      "Hans Christian Ørsted"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Faraday demonstrou que a variação de um campo magnético induz uma corrente elétrica num condutor fechado.",
+    "fonte": "Royal Institution",
+    "factClusterId": "fc_inv_faraday_01"
+  },
+  {
+    "id": "CIEN_INV_0036",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que físico italiano construiu a primeira pilha elétrica química da história («Pilha Voltaica») em 1800?",
+    "opcoes": [
+      "Luigi Galvani",
+      "Evangelista Torricelli",
+      "Enrico Fermi",
+      "Alessandro Volta"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Volta empilhou discos alternados de zinco e cobre embebidos em água salgada, gerando a primeira corrente contínua da história.",
+    "fonte": "Museo per la Storia dell'Università di Pavia",
+    "factClusterId": "fc_inv_volta_01"
+  },
+  {
+    "id": "CIEN_INV_0037",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem foi o físico teórico que formulou a Teoria da Relatividade Restrita (1905) e a Teoria da Relatividade Geral (1915)?",
+    "opcoes": [
+      "Albert Einstein",
+      "Niels Bohr",
+      "Werner Heisenberg",
+      "Erwin Schrödinger"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Einstein redefiniu os conceitos de espaço, tempo, matéria e gravidade, postulando a equivalência $E=mc^2$.",
+    "fonte": "Nobel Prize Committee / Institute for Advanced Study",
+    "factClusterId": "fc_inv_einstein_01"
+  },
+  {
+    "id": "CIEN_INV_0038",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em 1919, que cientista britânico viajou até à ilha do Príncipe para comprovar experimentalmente a deflexão da luz da Relatividade de Einstein durante um eclipse solar total?",
+    "opcoes": [
+      "Ernest Rutherford",
+      "Arthur Eddington",
+      "Paul Dirac",
+      "J. J. Thomson"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A expedição de Eddington ao arquipélago de São Tomé e Príncipe em maio de 1919 confirmou pela primeira vez a curvatura do espaço-tempo prevista por Einstein.",
+    "fonte": "Royal Astronomical Society / Museu de Ciência da Universidade de Lisboa",
+    "factClusterId": "fc_inv_eddington_01"
+  },
+  {
+    "id": "CIEN_INV_0039",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que monge agostiniano austríaco formulou as leis básicas da hereditariedade genética através de experiências com ervilhas entre 1856 e 1863?",
+    "opcoes": [
+      "Hugo de Vries",
+      "Thomas Hunt Morgan",
+      "Gregor Mendel",
+      "Carl Correns"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mendel descobriu as regras de transmissão de traços dominantes e recessivos, sendo o fundador da genética clássica.",
+    "fonte": "Mendel Museum em Brno",
+    "factClusterId": "fc_inv_mendel_01"
+  },
+  {
+    "id": "CIEN_INV_0040",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem inventou o telégrafo elétrico prático e o código alfanumérico de pontos e traços na década de 1830?",
+    "opcoes": [
+      "Charles Wheatstone",
+      "William Cooke",
+      "Alexander Bain",
+      "Samuel Morse"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Código Morse e o telégrafo permitiram a primeira comunicação instantânea a longas distâncias via impulsos elétricos.",
+    "fonte": "Smithsonian National Museum of American History",
+    "factClusterId": "fc_inv_morse_01"
+  },
+  {
+    "id": "CIEN_INV_0041",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que físico italiano recebeu o Prémio Nobel da Física em 1909 por ter desenvolvido o sistema de telégrafo sem fios (rádio)?",
+    "opcoes": [
+      "Guglielmo Marconi",
+      "Enrico Fermi",
+      "Antonio Pacinotti",
+      "Augusto Righi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Marconi realizou as primeiras transmissões transatlânticas de sinais de rádio a partir da Cornualha para o Canadá em 1901.",
+    "fonte": "Nobel Prize Committee",
+    "factClusterId": "fc_inv_marconi_01"
+  },
+  {
+    "id": "CIEN_INV_0042",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem foi o cientista neozelandês que descobriu o núcleo atómico e o protão através da famosa experiência da folha de ouro em 1911?",
+    "opcoes": [
+      "J. J. Thomson",
+      "Ernest Rutherford",
+      "James Chadwick",
+      "Niels Bohr"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Rutherford propôs o modelo atómico planetário e cunhou os conceitos de radiação alfa, beta e tempo de meia-vida radioativo.",
+    "fonte": "Nobel Prize Committee",
+    "factClusterId": "fc_inv_rutherford_01"
+  },
+  {
+    "id": "CIEN_INV_0043",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem descobriu o neutrão em 1932 no Laboratório Cavendish da Universidade de Cambridge, completando a estrutura fundamental do átomo?",
+    "opcoes": [
+      "Ernest Rutherford",
+      "Enrico Fermi",
+      "James Chadwick",
+      "Lise Meitner"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "James Chadwick recebeu o Prémio Nobel da Física de 1935 pela descoberta da partícula subatómica sem carga elétrica.",
+    "fonte": "Cavendish Laboratory / Nobel Prize",
+    "factClusterId": "fc_inv_chadwick_01"
+  },
+  {
+    "id": "CIEN_INV_0044",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que astrónomo italiano aperfeiçoou o telescópio refrator em 1609 e descobriu as quatro maiores luas de Júpiter (Io, Europa, Ganimedes e Calisto)?",
+    "opcoes": [
+      "Giordano Bruno",
+      "Giovanni Cassini",
+      "Christiaan Huygens",
+      "Galileu Galilei"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Galileu Galilei realizou as primeiras observações sistemáticas das crateras lunares, manchas solares e fases de Vénus na obra «Sidereus Nuncius».",
+    "fonte": "Museo Galileo em Florença",
+    "factClusterId": "fc_inv_galileu_01"
+  },
+  {
+    "id": "CIEN_INV_0045",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que matemático e filósofo francês inventou a «Pascalina» em 1642, a primeira calculadora mecânica funcional da história?",
+    "opcoes": [
+      "Blaise Pascal",
+      "René Descartes",
+      "Pierre de Fermat",
+      "Gottfried Leibniz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Blaise Pascal concebeu a máquina para ajudar o pai no cálculo de impostos em Rouen, capaz de realizar somas e subtrações diretas.",
+    "fonte": "Musée des Arts et Métiers de Paris",
+    "factClusterId": "fc_inv_pascal_01"
+  },
+  {
+    "id": "CIEN_INV_0046",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem foi o matemático britânico que concebeu a «Máquina Analítica» em 1837, considerada o primeiro conceito de computador programável do mundo?",
+    "opcoes": [
+      "Alan Turing",
+      "Charles Babbage",
+      "John von Neumann",
+      "George Boole"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Babbage projetou uma máquina com unidade de processamento (moinho), memória e entrada por cartões perfurados.",
+    "fonte": "Science Museum de Londres",
+    "factClusterId": "fc_inv_babbage_01"
+  },
+  {
+    "id": "CIEN_INV_0047",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que matemática britânica escreveu em 1843 o primeiro algoritmo para ser processado por uma máquina, sendo reconhecida como a primeira programadora da história?",
+    "opcoes": [
+      "Grace Hopper",
+      "Katherine Johnson",
+      "Ada Lovelace (Augusta Ada King)",
+      "Margaret Hamilton"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ada Lovelace traduziu e expandiu as notas de Menabrea sobre a Máquina de Babbage, antevendo que os computadores poderiam manipular símbolos e música.",
+    "fonte": "British Computer Society",
+    "factClusterId": "fc_inv_adalovelace_01"
+  },
+  {
+    "id": "CIEN_INV_0048",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Que matemático britânico descodificou a máquina Enigma na Segunda Guerra Mundial em Bletchley Park e formulou o conceito de Máquina Universal em 1936?",
+    "opcoes": [
+      "John Maynard Keynes",
+      "Bertrand Russell",
+      "Norbert Wiener",
+      "Alan Turing"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alan Turing é o pai da ciência da computação teórica e da inteligência artificial moderna.",
+    "fonte": "Bletchley Park Trust / Turing Institute",
+    "factClusterId": "fc_inv_turing_01"
+  },
+  {
+    "id": "CIEN_INV_0049",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Quem inventou a dinamite em 1867 e utilizou a sua vasta fortuna para instituir os Prémios Nobel em testamento?",
+    "opcoes": [
+      "Alfred Nobel",
+      "Ascanio Sobrero",
+      "Fritz Haber",
+      "Carl Bosch"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alfred Nobel estabilizou a nitroglicerina misturando-a com terra de diatomáceas, criando um explosivo seguro e industrial.",
+    "fonte": "Nobel Foundation",
+    "factClusterId": "fc_inv_nobel_01"
+  },
+  {
+    "id": "CIEN_INV_0050",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Invenções & Descobertas",
+    "pergunta": "Em que laboratório americano da Bell Labs foi inventado o primeiro transístor de estado sólido em 1947 por Bardeen, Brattain e Shockley?",
+    "opcoes": [
+      "IBM Thomas J. Watson Research Center",
+      "Xerox PARC",
+      "Bell Labs (Bell Telephone Laboratories)",
+      "MIT Lincoln Laboratory"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A invenção do transístor substituiu as válvulas termoiónicas e desencadeou a revolução dos semicondutores e da microeletrónica.",
+    "fonte": "Nokia Bell Labs / Nobel Prize",
+    "factClusterId": "fc_inv_transistor_01"
+  }
+]

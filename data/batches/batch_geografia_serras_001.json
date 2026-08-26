@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GEO_SER_0001",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é o ponto mais alto de todo o território português, com 2.351 metros de altitude acima do nível do mar, situado no arquipélago dos Açores?",
+    "opcoes": [
+      "Montanha do Pico (Piquinho, Ilha do Pico)",
+      "Torre (Serra da Estrela)",
+      "Pico Ruivo (Madeira)",
+      "Pico do Arieiro (Madeira)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Montanha do Pico é um imponente estratovulcão que se ergue diretamente do oceano Atlântico até aos 2.351 metros de altitude na Ilha do Pico.",
+    "fonte": "Instituto Geográfico Português (DGT) / Parque Natural do Pico",
+    "factClusterId": "fc_geo_montanhadopico_01"
+  },
+  {
+    "id": "GEO_SER_0002",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é o ponto mais alto de Portugal Continental, situado no planalto central da Serra da Estrela com 1.993 metros de altitude natural (completados até aos 2.000 metros pela torre de cantaria mandada erguer por D. João VI)?",
+    "opcoes": [
+      "Pico da Nevosa (Gerês)",
+      "Torre (Serra da Estrela)",
+      "Pico do Larouco (Montalegre)",
+      "Alto da Pedrada (Soajo)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O cume da Torre situa-se no limite dos concelhos de Seia, Manteigas e Covilhã no Parque Natural da Serra da Estrela.",
+    "fonte": "DGT / Parque Natural da Serra da Estrela / ICNF",
+    "factClusterId": "fc_geo_torreserradaestrela_01"
+  },
+  {
+    "id": "GEO_SER_0003",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é o ponto mais alto do arquipélago da Madeira, com 1.862 metros de altitude acima do nível do mar, acessível pelo trilho panorâmico que o liga ao Pico do Arieiro?",
+    "opcoes": [
+      "Pico do Arieiro (1.818 m)",
+      "Pico das Torres (1.851 m)",
+      "Pico Ruivo (1.862 m)",
+      "Pico Grande"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O maciço montanhoso central da Madeira abriga o Pico Ruivo, com vistas panorâmicas sobre o vale da Ribeira da Janela e a Laurissilva.",
+    "fonte": "IFCN Madeira / Parque Natural da Madeira",
+    "factClusterId": "fc_geo_picoruivomadeira_01"
+  },
+  {
+    "id": "GEO_SER_0004",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é a segunda serra mais alta de Portugal Continental (1.546 metros no Pico da Nevosa), situada na fronteira entre o Minho, Trás-os-Montes e a Galiza dentro do único Parque Nacional do país?",
+    "opcoes": [
+      "Serra do Larouco",
+      "Serra do Marão",
+      "Serra de Montesinho",
+      "Serra do Gerês (Pico da Nevosa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pico da Nevosa no Gerês conserva neves perpétuas nos invernos rigorosos e penedias graníticas agrestes.",
+    "fonte": "Parque Nacional da Peneda-Gerês / ICNF",
+    "factClusterId": "fc_geo_serradogeres_nevosa_01"
+  },
+  {
+    "id": "GEO_SER_0005",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra transmontana no concelho de Montalegre («Serra do Larouco»), que atinge os 1.527 metros de altitude, é a terceira mais alta de Portugal continental e a meca do voo livre em parapente?",
+    "opcoes": [
+      "Serra do Larouco",
+      "Serra do Barroso",
+      "Serra da Padrela",
+      "Serra de Bornes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Larouco domina o planalto barrosão e abriga a nascente do rio Cávado nas suas encostas.",
+    "fonte": "Município de Montalegre / DGT",
+    "factClusterId": "fc_geo_serradolarouco_01"
+  },
+  {
+    "id": "GEO_SER_0006",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é o ponto mais alto de Portugal a sul do rio Tejo, com 1.025 metros de altitude, situado no nordeste alentejano na serra com o mesmo nome?",
+    "opcoes": [
+      "Fóia (Serra de Monchique)",
+      "Pico de São Mamede (Serra de São Mamede)",
+      "Serra d'Ossa",
+      "Serra de Portel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Serra de São Mamede no Alto Alentejo funciona como barreira de condensação criando um microclima atlântico verdejante rodeado pela planície seca.",
+    "fonte": "Parque Natural da Serra de São Mamede / ICNF",
+    "factClusterId": "fc_geo_serradesaomamede_01"
+  },
+  {
+    "id": "GEO_SER_0007",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Qual é o ponto mais alto da região do Algarve, situado na Serra de Monchique com 902 metros de altitude («Fóia»), que oferece uma vista panorâmica deslumbrante desde o Cabo de São Vicente até Portimão?",
+    "opcoes": [
+      "Picota",
+      "Pelados (Caldeirão)",
+      "Fóia (Serra de Monchique)",
+      "Monte Figo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Fóia é coroada por rochas de sienito nefelínico («foiaíto»), uma rocha magmática rara que só existe em Monchique.",
+    "fonte": "Município de Monchique / DGT",
+    "factClusterId": "fc_geo_foia_monchique_01"
+  },
+  {
+    "id": "GEO_SER_0008",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que imponente maciço montanhoso que separa o Litoral Norte de Trás-os-Montes (entre Amarante, Baião, Vila Real e Santa Marta de Penaguião), com 1.415 metros de altitude no vértice da Senhora da Serra, é a:",
+    "opcoes": [
+      "Serra do Alvão",
+      "Serra de Montemuro",
+      "Serra da Cabreira",
+      "Serra do Marão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Túnel do Marão, inaugurado em 2016 com 5,6 km de extensão na autoestrada A4, atravessa o coração da Serra do Marão.",
+    "fonte": "DGT / Infraestruturas de Portugal",
+    "factClusterId": "fc_geo_serradomarao_01"
+  },
+  {
+    "id": "GEO_SER_0009",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que parque natural transmontano no concelho de Mondim de Basto e Vila Real («Parque Natural do Alvão») abriga as espetaculares quedas de água do rio Olo sobre quartzitos («Fisgas de Ermelo»), uma das maiores cascatas da Península Ibérica?",
+    "opcoes": [
+      "Fisgas de Ermelo (Serra do Alvão)",
+      "Frecha da Mizarela",
+      "Cascata do Arado",
+      "Pulo do Lobo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Fisgas de Ermelo precipitam-se em socalcos de mais de 200 metros de desnível através de desfiladeiros quartzíticos impressionantes.",
+    "fonte": "Parque Natural do Alvão / ICNF / Município de Mondim de Basto",
+    "factClusterId": "fc_geo_fisgasdeermelo_alvao_01"
+  },
+  {
+    "id": "GEO_SER_0010",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do distrito de Aveiro integrada no Arouca Geopark («Serra da Freita»), com 1.100 metros de altitude, abriga os fenómenos geológicos raros das «Pedras Parideiras» (Castanheira) e a majestosa cascata da «Frecha da Mizarela» (75 metros no rio Caima)?",
+    "opcoes": [
+      "Serra de Arada",
+      "Serra da Freita (Arouca Geopark)",
+      "Serra de São Macário",
+      "Serra do Caramulo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Pedras Parideiras da Castanheira são nódulos de biotite que se libertam naturalmente da rocha-mãe de granito pela erosão térmica.",
+    "fonte": "Arouca Geopark / UNESCO / Município de Arouca",
+    "factClusterId": "fc_geo_serradafreita_arouca_01"
+  },
+  {
+    "id": "GEO_SER_0011",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do Centro de Portugal situada entre Tondela e Vouzela («Serra do Caramulo»), famosa pela pureza do seu ar e antigos sanatórios de altitude, atinge os 1.075 metros no vértice do Caramulinho?",
+    "opcoes": [
+      "Serra da Lousã",
+      "Serra da Estrela",
+      "Serra do Caramulo (Caramulinho)",
+      "Serra do Buçaco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vila do Caramulo acolhe também o famoso Museu do Caramulo com coleções de automóveis antigos e arte.",
+    "fonte": "Município de Tondela / Museu do Caramulo",
+    "factClusterId": "fc_geo_serradocaramulo_01"
+  },
+  {
+    "id": "GEO_SER_0012",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra integrada na Cordilheira Central (distritos de Coimbra e Leiria), com 1.205 metros de altitude no ponto culminante do Trevim, é célebre pelas suas Aldeias do Xisto (Talasnal, Candal, Cerdeira) e pelos veados em liberdade?",
+    "opcoes": [
+      "Serra do Açor",
+      "Serra da Estrela",
+      "Serra de Alvaiázere",
+      "Serra da Lousã (Alto do Trevim)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Trevim possui o famoso baloiço panorâmico de madeira e é um dos principais destinos de turismo de natureza e BTT de Portugal.",
+    "fonte": "ADXTUR / Município da Lousã / ICNF",
+    "factClusterId": "fc_geo_serradalousa_trevim_01"
+  },
+  {
+    "id": "GEO_SER_0013",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do concelho de Arganil e Pampilhosa da Serra («Serra do Açor»), com 1.418 metros no Pico da Cebola, abriga a deslumbrante Mata da Margaraça, a Fraga da Pena e a histórica aldeia monumental de Piódão?",
+    "opcoes": [
+      "Serra do Açor (Pico da Cebola)",
+      "Serra da Lousã",
+      "Serra da Gardunha",
+      "Serra da Estrela"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Mata da Margaraça na Serra do Açor preserva uma das raras florestas primitivas de carvalhos e azereiros da Beira Serra.",
+    "fonte": "Paisagem Protegida da Serra do Açor / ICNF / Município de Arganil",
+    "factClusterId": "fc_geo_serradoacor_piodao_01"
+  },
+  {
+    "id": "GEO_SER_0014",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra granítica na Beira Baixa (entre o Fundão e Castelo Branco), com 1.227 metros de altitude na Pirâmide de São Brás («Serra da Gardunha»), separa a Cova da Beira dos campos de Castelo Branco e é o berço da afamada Cereja do Fundão?",
+    "opcoes": [
+      "Serra da Estrela",
+      "Serra da Gardunha",
+      "Serra de Alvelos",
+      "Serra da Malcata"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As encostas soalheiras da Gardunha proporcionam as condições de solo e temperatura ideais para os pomares de cerejeiras em flor.",
+    "fonte": "Município do Fundão / ICNF",
+    "factClusterId": "fc_geo_serradagardunha_fundao_01"
+  },
+  {
+    "id": "GEO_SER_0015",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que reserva natural raiana nos concelhos de Penamacor e Sabugal («Reserva Natural da Serra da Malcata»), com 1.078 metros de altitude no Alto da Machoca, foi criada em 1981 com o objetivo primordial de proteger o habitat do Lince-Ibérico?",
+    "opcoes": [
+      "Parque Natural do Tejo Internacional",
+      "Serra de São Mamede",
+      "Reserva Natural da Serra da Malcata",
+      "Serra de Montesinho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A campanha cívica «Salvem o Lince e a Serra da Malcata» nos anos 1970 foi o primeiro grande movimento ecologista da história de Portugal.",
+    "fonte": "ICNF / Reserva Natural da Serra da Malcata",
+    "factClusterId": "fc_geo_serramalcata_lince_01"
+  },
+  {
+    "id": "GEO_SER_0016",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que parque natural transmontano no extremo nordeste de Portugal (concelhos de Bragança e Vinhais), com 1.486 metros de altitude na Lombada («Parque Natural de Montesinho»), abriga aldeias comunitárias com fornos de povo (Rio de Onor e Montesinho) e uma das maiores populações de Lobo-Ibérico?",
+    "opcoes": [
+      "Parque Natural do Douro Internacional",
+      "Serra do Larouco",
+      "Serra da Nogueira",
+      "Parque Natural de Montesinho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Montesinho é um dos maiores e mais bem conservados parques naturais de Portugal com florestas centenárias de castanheiros e carvalhos negral.",
+    "fonte": "Parque Natural de Montesinho / ICNF / Município de Bragança",
+    "factClusterId": "fc_geo_montesinho_braganca_01"
+  },
+  {
+    "id": "GEO_SER_0017",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que vale de origem glaciar em forma de 'U' perfeito na Serra da Estrela, com mais de 13 quilómetros de extensão esculpido durante a última glaciação pelo rio Zêzere entre o Cântaro Magro e Manteigas («Vale Glaciar do Zêzere»), é um dos maiores da Europa?",
+    "opcoes": [
+      "Vale Glaciar do Zêzere (Manteigas)",
+      "Vale Glaciar de Alforfa",
+      "Vale Glaciar de Loriga",
+      "Vale Glaciar da Covilhã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Vale do Zêzere preserva moreias glaciares, blocos erráticos e circos glaciares classificados pelo Geopark Estrela da UNESCO.",
+    "fonte": "Estrela Geopark / UNESCO / Município de Manteigas",
+    "factClusterId": "fc_geo_valeglaciarzezere_01"
+  },
+  {
+    "id": "GEO_SER_0018",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que três imponentes escarpas e agulhas de granito na cabeceira do Vale Glaciar do Zêzere na Serra da Estrela («Cântaro Magro» com 1.928 m, «Cântaro Gordo» com 1.875 m e «Cântaro Raso»), são o paraíso da escalada alpina em Portugal?",
+    "opcoes": [
+      "As Três Marias",
+      "Os Três Cântaros da Serra da Estrela (Magro, Gordo e Raso)",
+      "As Fragas de São Simão",
+      "Os Penedos de Fóia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cântaro Magro é uma parede vertical de granito de mais de 200 metros que desafia alpinistas e montanhistas desde o século XIX.",
+    "fonte": "Estrela Geopark / Federação de Campismo e Montanhismo de Portugal",
+    "factClusterId": "fc_geo_trescantaros_estrela_01"
+  },
+  {
+    "id": "GEO_SER_0019",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que lagoa no planalto da Serra da Estrela («Lagoa Comprida»), ampliada no século XX por uma barragem hidroelétrica de gravidade de betão, é a maior das cerca de 25 lagoas de origem glaciar da serra?",
+    "opcoes": [
+      "Lagoa Redonda",
+      "Lagoa Seca",
+      "Lagoa Comprida",
+      "Lagoa dos Conchos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Lagoa Comprida foi formada pela escavação do gelo no granito e é o ponto de partida para trilhos até ao famoso funil do Covão dos Conchos.",
+    "fonte": "Estrela Geopark / EDP / Município de Seia",
+    "factClusterId": "fc_geo_lagoacomprida_estrela_01"
+  },
+  {
+    "id": "GEO_SER_0020",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que sistema montanhoso calcário do Centro litoral de Portugal («Parque Natural das Serras de Aire e Candeeiros»), com 679 metros no vértice de Aire, é a maior área cársica do país, famosa por algares, campos de lapiás e grutas subterrâneas?",
+    "opcoes": [
+      "Serra de Montejunto",
+      "Serra da Arrábida",
+      "Serra de Sicó",
+      "Serra de Aire e Candeeiros (Maciço Calcário Estremenho)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O PNSAC abriga as Grutas de Mira de Aire (uma das 7 Maravilhas Naturais de Portugal), as Grutas de Santo António e o Polje de Minde.",
+    "fonte": "Parque Natural das Serras de Aire e Candeeiros / ICNF",
+    "factClusterId": "fc_geo_serraairecandeeiros_01"
+  },
+  {
+    "id": "GEO_SER_0021",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que monumento natural no concelho de Ourém (na Serra de Aire) preserva na laje de calcário da antiga pedreira do Galinha a mais longa e mais antiga pista de pegadas fossilizadas de dinossáurios saurópodes do mundo (com cerca de 175 milhões de anos do Jurássico Médio)?",
+    "opcoes": [
+      "Monumento Natural das Pegadas de Dinossáurios da Serra de Aire (Pedreira do Galinha)",
+      "Pegadas de Dinossauro da Praia Grande",
+      "Monumento Natural do Cabo Espichel",
+      "Jazida de Carenque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O sítio da Pedreira do Galinha em Ourém contém cerca de 20 pistas com centenas de pegadas de saurópodes com pegadas de pés de até 1 metro de diâmetro.",
+    "fonte": "ICNF / Museu Nacional de História Natural e da Ciência / Município de Ourém",
+    "factClusterId": "fc_geo_pegadasdinossaurio_serraaire_01"
+  },
+  {
+    "id": "GEO_SER_0022",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do distrito de Lisboa (concelhos de Cadaval e Alenquer), que se ergue isolada até aos 666 metros de altitude («Serra de Montejunto»), é conhecida como «A Varanda da Estremadura» e alberga a histórica Real Fábrica do Gelo do século XVIII?",
+    "opcoes": [
+      "Serra de Sintra",
+      "Serra de Montejunto (Real Fábrica do Gelo)",
+      "Serra da Arrábida",
+      "Serra de Monsanto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Na Serra de Montejunto a água dos tanques congelava nas noites frias de inverno sendo o gelo transportado a cavalo e de barco para abastecer os cafés e a corte de Lisboa.",
+    "fonte": "Paisagem Protegida da Serra de Montejunto / Município do Cadaval",
+    "factClusterId": "fc_geo_serramontejunto_gelo_01"
+  },
+  {
+    "id": "GEO_SER_0023",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que maciço eruptivo subvulcânico de granito e sienito na Península de Lisboa («Serra de Sintra» / Monte da Lua), classificado como Paisagem Cultural pela UNESCO com 528 metros de altitude na Cruz Alta, abriga o Palácio da Pena e o Castelo dos Mouros?",
+    "opcoes": [
+      "Serra de Monsanto",
+      "Serra de Montejunto",
+      "Serra de Sintra (Monte da Lua)",
+      "Serra da Arrábida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Serra de Sintra retém os nevoeiros atlânticos («capacete de Sintra») criando um microclima húmido com vegetação luxuriante.",
+    "fonte": "Parques de Sintra — Monte da Lua / UNESCO / ICNF",
+    "factClusterId": "fc_geo_serradesintra_01"
+  },
+  {
+    "id": "GEO_SER_0024",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra calcária na Península de Setúbal («Serra da Arrábida»), com 501 metros no ponto mais alto do Formosinho, ergue-se em arribas vertiginosas sobre o oceano Atlântico e preserva uma rara vegetação de maquis mediterrânico primitivo?",
+    "opcoes": [
+      "Serra de São Luís",
+      "Serra do Louro",
+      "Serra de Grândola",
+      "Serra da Arrábida (Formosinho)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Parque Natural da Arrábida conjuga praias de águas azul-turquesa (Portinho da Arrábida, Galapinhos) com falésias calcárias e grutas marinhas (Lapa de Santa Margarida).",
+    "fonte": "Parque Natural da Arrábida / ICNF",
+    "factClusterId": "fc_geo_serradaarrabida_formosinho_01"
+  },
+  {
+    "id": "GEO_SER_0025",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra alentejana nos concelhos de Redondo e Estremoz («Serra d'Ossa»), com 653 metros de altitude, é o segundo relevo mais elevado do Alentejo e abriga o histórico Convento de São Paulo com milhares de azulejos joaninos?",
+    "opcoes": [
+      "Serra d'Ossa",
+      "Serra de Portel",
+      "Serra de Grândola",
+      "Serra de São Mamede"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Serra d'Ossa possui passadiços de madeira e trilhos que percorrem florestas de sobreiros, azinheiras e eucaliptos na planície central alentejana.",
+    "fonte": "Município de Redondo / Município de Estremoz",
+    "factClusterId": "fc_geo_serradossa_redondo_01"
+  },
+  {
+    "id": "GEO_SER_0026",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra algarvia e alentejana que separa o Litoral algarvio do Baixo Alentejo («Serra do Caldeirão»), com 589 metros de altitude no vértice do Pelados, é dominada por montados de sobreiro para produção de cortiça de alta qualidade?",
+    "opcoes": [
+      "Serra de Monchique",
+      "Serra do Caldeirão",
+      "Serra do Espinhaço de Cão",
+      "Serra de Mértola"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Caldeirão é formado por xistos e grauvaques e acolhe aldeias tradicionais de cumeada como Salir, Querença e Alte.",
+    "fonte": "Município de Loulé / DGT",
+    "factClusterId": "fc_geo_serradocaldeirao_01"
+  },
+  {
+    "id": "GEO_SER_0027",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do concelho de Arcos de Valdevez e Ponte de Lima («Serra do Soajo»), com 1.416 metros de altitude no Alto da Pedrada, é mundialmente famosa pelos seus 24 espigueiros comunitários de granito assentes sobre uma eira de pedra?",
+    "opcoes": [
+      "Serra da Peneda",
+      "Serra Amarela",
+      "Serra do Soajo (Alto da Pedrada)",
+      "Serra de Arga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vila do Soajo preserva os espigueiros medievais encimados por cruzes para afastar pragas e secar o milho protegido de roedores.",
+    "fonte": "PNPG / Município de Arcos de Valdevez",
+    "factClusterId": "fc_geo_serradosoajo_espigueiros_01"
+  },
+  {
+    "id": "GEO_SER_0028",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do Parque Nacional da Peneda-Gerês no concelho de Melgaço («Serra da Peneda»), que atinge os 1.374 metros de altitude na Pedrada da Peneda, acolhe o monumental Santuário de Nossa Senhora da Peneda com a sua imponente escadaria de virtudes?",
+    "opcoes": [
+      "Serra do Soajo",
+      "Serra Amarela",
+      "Serra do Gerês",
+      "Serra da Peneda"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Santuário da Peneda está incrustado num imenso penhasco de granito ('Fraga da Meadinha') venerado por peregrinos desde o século XIII.",
+    "fonte": "PNPG / Município de Melgaço / Confraria da Peneda",
+    "factClusterId": "fc_geo_serrapeneda_santuario_01"
+  },
+  {
+    "id": "GEO_SER_0029",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do concelho de Ponte de Lima, Caminha e Viana do Castelo («Serra de Arga»), com 825 metros de altitude no Alto do Espadanal, é famosa pela raça de cavalos selvagens «Garranos» e pelo Mosteiro de São João de Arga?",
+    "opcoes": [
+      "Serra de Arga (Alto do Espadanal)",
+      "Serra da Peneda",
+      "Serra de Santa Luzia",
+      "Serra de Corno de Bico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Serra de Arga é um maciço granítico isolado no Alto Minho com lagoas naturais cristalinas (Cascata do Pincho).",
+    "fonte": "Município de Caminha / Município de Ponte de Lima",
+    "factClusterId": "fc_geo_serradearga_01"
+  },
+  {
+    "id": "GEO_SER_0030",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do Norte de Portugal situada entre os concelhos de Castro Daire, São Pedro do Sul e Cinfães («Serra de Montemuro»), com 1.382 metros de altitude, é a oitava serra mais alta de Portugal continental e conserva as aldeias tradicionais de Campo Benfeito e Gralheira?",
+    "opcoes": [
+      "Serra da Arada",
+      "Serra de Montemuro",
+      "Serra da Lapa",
+      "Serra da Freita"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Serra de Montemuro é conhecida como 'a serra mais desconhecida de Portugal', com pastores de ovelhas e artesanato de burel e linho.",
+    "fonte": "Município de Castro Daire / Município de Cinfães",
+    "factClusterId": "fc_geo_serrademontemuro_01"
+  },
+  {
+    "id": "GEO_SER_0031",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do concelho de São Pedro do Sul («Serra de São Macário»), com 1.052 metros de altitude, abriga o santuário de São Macário e a emblemática «Aldeia da Pena», uma das mais bem preservadas aldeias de xisto encaixada no fundo de um vale profundo?",
+    "opcoes": [
+      "Serra da Freita",
+      "Serra do Caramulo",
+      "Serra de São Macário (Aldeia da Pena)",
+      "Serra da Arada"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Aldeia da Pena tem menos de 10 habitantes permanentes e é um dos testemunhos mais comoventes da arquitetura vernacular de xisto.",
+    "fonte": "Município de São Pedro do Sul / Turismo Centro de Portugal",
+    "factClusterId": "fc_geo_saomacario_aldeiadapena_01"
+  },
+  {
+    "id": "GEO_SER_0032",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra do distrito de Viseu (concelho de Sernancelhe), com 980 metros de altitude («Serra da Lapa»), acolhe o histórico Santuário de Nossa Senhora da Lapa e a «Pedra da Lapa», uma fenda estreita na rocha por onde a tradição diz que só passa quem não tem pecados graves?",
+    "opcoes": [
+      "Serra de Leomil",
+      "Serra da Nave",
+      "Serra de Santa Helena",
+      "Serra da Lapa (Santuário da Lapa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Santuário da Lapa foi fundado pelos jesuítas no século XVI e tornou-se um dos maiores centros de peregrinação mariana da Península Ibérica.",
+    "fonte": "Município de Sernancelhe / Diocese de Lamego",
+    "factClusterId": "fc_geo_serradalapa_01"
+  },
+  {
+    "id": "GEO_SER_0033",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que serra no concelho da Mealhada («Serra do Buçaco» ou Bussaco), com 549 metros de altitude no vértice da Cruz Alta, abriga a famosa Mata Nacional do Buçaco com o seu Palace Hotel neomanuelino e espécies botânicas exóticas de todo o mundo?",
+    "opcoes": [
+      "Serra do Buçaco (Mata Nacional do Buçaco)",
+      "Serra da Lousã",
+      "Serra do Caramulo",
+      "Serra de Sicó"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Mata do Buçaco foi plantada pelos monges Carmelitas Descalços no século XVII e protegida por Bula Papal de excomunhão contra o corte de árvores.",
+    "fonte": "Fundação Mata do Buçaco / Município da Mealhada",
+    "factClusterId": "fc_geo_serradobucaco_01"
+  },
+  {
+    "id": "GEO_SER_0034",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que maciço calcário nos distritos de Coimbra e Leiria («Maciço de Sicó» / Serra de Sicó), com 553 metros de altitude, é famoso pelas suas formações cársicas de lapiás, grutas e pela produção do Queijo Rabaçal DOP?",
+    "opcoes": [
+      "Serra de Aire",
+      "Serra de Sicó (Terras de Sicó)",
+      "Serra de Candeeiros",
+      "Serra de Alvaiázere"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As Terras de Sicó agrupam os concelhos de Condeixa-a-Nova, Penela, Ansião, Alvaiázere, Pombal e Soure em torno do relevo cársico.",
+    "fonte": "Terras de Sicó / Município de Condeixa",
+    "factClusterId": "fc_geo_serradesico_01"
+  },
+  {
+    "id": "GEO_SER_0035",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que vale fértil e planalto agrícola no distrito de Castelo Branco («Cova da Beira»), encaixado entre a Serra da Estrela e a Serra da Gardunha onde correm o rio Zêzere e o rio Meimoa, é a principal região pomar de cerejas e pêssegos de Portugal?",
+    "opcoes": [
+      "Campina de Idanha",
+      "Choupal de Coimbra",
+      "Cova da Beira",
+      "Lezíria do Ribatejo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cova da Beira engloba os concelhos de Covilhã, Belmonte e Fundão beneficiando de água pura da serra e regadio da Cova da Beira.",
+    "fonte": "Comunidade Intermunicipal das Beiras e Serra da Estrela / DGT",
+    "factClusterId": "fc_geo_covadabeira_01"
+  },
+  {
+    "id": "GEO_SER_0036",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que grande planície de aluvião fértil nas margens do rio Tejo («Lezíria do Ribatejo» / Campo de Santarém), com solos argilosos riquíssimos inundados pelas cheias periódicas, é o coração da criação de toiros bravos, cavalos puro-sangue lusitanos e culturas de arroz e tomate?",
+    "opcoes": [
+      "Campina de Faro",
+      "Planície de Moura",
+      "Gândaras de Aveiro",
+      "Lezíria do Ribatejo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Companhia das Lezírias, fundada pela Coroa em 1836, é a maior exploração agropecuária e florestal pública de Portugal com mais de 18.000 hectares.",
+    "fonte": "Companhia das Lezírias / Município de Santarém",
+    "factClusterId": "fc_geo_leziriadoribatejo_01"
+  },
+  {
+    "id": "GEO_SER_0037",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que planície arenosa litoral do Centro de Portugal situada entre o rio Vouga e o rio Mondego (concelhos de Cantanhede, Mira e Vagos), caracterizada por pinhais de pinheiro-bravo sobre dunas e campos de batata («Gândara» / Terras da Gândara), inspirou as obras de Carlos de Oliveira?",
+    "opcoes": [
+      "A Gândara (Região Gândara)",
+      "A Bairrada",
+      "A Lezíria",
+      "A Charneca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os gandareses transformaram as areias estéreis em campos férteis misturando moliço da Ria de Aveiro e limo dos charcos.",
+    "fonte": "Município de Cantanhede / Município de Mira",
+    "factClusterId": "fc_geo_gandara_carlosdeoliveira_01"
+  },
+  {
+    "id": "GEO_SER_0038",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que região natural e vitivinícola do Centro de Portugal situada entre a serra do Caramulo e o mar (concelhos de Anadia, Mealhada, Cantanhede e Oliveira do Bairro), de solos argilo-calcários («Bairrada»), é famosa pelo Leitão Assado e vinhos espumantes da casta Baga?",
+    "opcoes": [
+      "A Gândara",
+      "A Bairrada",
+      "O Dão",
+      "O Ribatejo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A palavra 'Bairrada' deriva de 'barro' devido aos solos argilosos vermelhos onde a casta tinta Baga atinge grande longevidade e estrutura.",
+    "fonte": "Comissão Vitivinícola da Bairrada / Município de Anadia",
+    "factClusterId": "fc_geo_bairrada_solos_01"
+  },
+  {
+    "id": "GEO_SER_0039",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que planalto rochoso vulcânico situado no centro-oeste da Ilha da Madeira («Paul da Serra»), com cerca de 1.500 metros de altitude média e 24 km² de superfície plana, é o único planalto extenso do arquipélago madeirense?",
+    "opcoes": [
+      "Achada do Teixeira",
+      "Curral das Freiras",
+      "Paul da Serra (Madeira)",
+      "Ponta de São Lourenço"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Paul da Serra funciona como uma gigantesca esponja que recarrega os aquíferos subterrâneos da Madeira e alimenta as principais levadas da ilha.",
+    "fonte": "Parque Natural da Madeira / IFCN",
+    "factClusterId": "fc_geo_pauldaserramadeira_01"
+  },
+  {
+    "id": "GEO_SER_0040",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que profunda caldeira vulcânica e anfiteatro natural rodeado por escarpas montanhosas vertiginosas de quase 1.000 metros de desnível na Ilha da Madeira («Curral das Freiras»), serviu de refúgio às freiras do Convento de Santa Clara durante o ataque dos piratas franceses em 1566?",
+    "opcoes": [
+      "Ribeira Brava",
+      "Chão dos Louros",
+      "Fanal",
+      "Curral das Freiras"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O miradouro da Eira do Serrado oferece uma vista aérea vertiginosa sobre a povoação do Curral das Freiras no fundo do vale.",
+    "fonte": "Município de Câmara de Lobos / Turismo da Madeira",
+    "factClusterId": "fc_geo_curraldasfreiras_01"
+  },
+  {
+    "id": "GEO_SER_0041",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que longa e estreita península vulcânica rochosa no extremo oriental da Ilha da Madeira («Ponta de São Lourenço»), com arribas basálticas coloridas esculpidas pelo vento e mar, é uma reserva natural com flora e fauna semiárida endémica?",
+    "opcoes": [
+      "Ponta de São Lourenço",
+      "Ponta do Pargo",
+      "Cabo Girão",
+      "Ponta do Sol"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ponta de São Lourenço termina no Ilhéu do Farol onde se ergue o mais antigo farol da Madeira (1870).",
+    "fonte": "IFCN Madeira / Parque Natural da Madeira",
+    "factClusterId": "fc_geo_pontadesaolourenco_01"
+  },
+  {
+    "id": "GEO_SER_0042",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que imponente cabo e falésia marítima na costa sul da Ilha da Madeira (concelho de Câmara de Lobos), com 580 metros de queda vertical sobre o oceano («Cabo Girão»), é uma das falésias marítimas mais altas da Europa e possui um famoso miradouro com chão de vidro suspenso (skywalk)?",
+    "opcoes": [
+      "Ponta de São Lourenço",
+      "Cabo Girão (580 m)",
+      "Cabo Espichel",
+      "Cabo da Roca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Na base do Cabo Girão existem pequenas fajãs agrícolas («Fajãs do Cabo Girão») acessíveis por teleférico e barco.",
+    "fonte": "Turismo da Madeira / Município de Câmara de Lobos",
+    "factClusterId": "fc_geo_cabogirao_madeira_01"
+  },
+  {
+    "id": "GEO_SER_0043",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que deslumbrante caldeira vulcânica na Ilha de São Miguel (Açores) abriga a maior lagoa de água doce do arquipélago («Lagoa das Sete Cidades»), dividida pela ponte em Lagoa Azul e Lagoa Verde segundo a lenda dos amores impossíveis de uma princesa e de um pastor?",
+    "opcoes": [
+      "Lagoa do Fogo",
+      "Lagoa das Furnas",
+      "Caldeira das Sete Cidades (Lagoa das Sete Cidades)",
+      "Lagoa do Congro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vista panorâmica a partir do Miradouro da Vista do Rei sobre as Sete Cidades foi eleita uma das 7 Maravilhas Naturais de Portugal.",
+    "fonte": "Parque Natural de São Miguel / Governo Regional dos Açores",
+    "factClusterId": "fc_geo_setecidades_acores_01"
+  },
+  {
+    "id": "GEO_SER_0044",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que lagoa natural límpida situada no interior da caldeira do vulcão do Água de Pau na Ilha de São Miguel («Lagoa do Fogo»), a cerca de 575 metros de altitude rodeada por densa vegetação endémica de laurissilva açoriana, é Reserva Natural protegida?",
+    "opcoes": [
+      "Lagoa das Furnas",
+      "Lagoa de Santiago",
+      "Lagoa Rasa",
+      "Lagoa do Fogo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Lagoa do Fogo é a segunda maior lagoa de São Miguel e a mais selvagem e intocada do arquipélago dos Açores.",
+    "fonte": "Reserva Natural da Lagoa do Fogo / ICNF / Governo dos Açores",
+    "factClusterId": "fc_geo_lagoadofogo_acores_01"
+  },
+  {
+    "id": "GEO_SER_0045",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que vale vulcânico ativo na Ilha de São Miguel («Vale das Furnas»), famoso pelas suas fumarolas, caldeiras de água fervente sulfurosa e nascentes de águas minerais gaseificadas, é onde se confeciona o tradicional «Cozido das Furnas» enterrado no solo geotérmico?",
+    "opcoes": [
+      "Vale das Furnas (Caldeiras das Furnas)",
+      "Sete Cidades",
+      "Pico do Fogo",
+      "Mosteiros"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As panelas de ferro com carnes e legumes são cozinhadas lentamente durante 6 horas a 90°C pelo calor natural do vulcão das Furnas.",
+    "fonte": "Observatório Vulcanológico dos Açores / Parque Terra Nostra",
+    "factClusterId": "fc_geo_valedasfurnas_acores_01"
+  },
+  {
+    "id": "GEO_SER_0046",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que gigantesca cavidade vulcânica e chaminé vulcânica fossilizada na Ilha Terceira («Algar do Carvão»), com cerca de 90 metros de profundidade até a uma lagoa subterrânea de águas cristalinas rodeada por estalactites de sílica amorfa, é um dos raros vulcões visitáveis por dentro no mundo?",
+    "opcoes": [
+      "Gruta das Torres (Pico)",
+      "Algar do Carvão (Ilha Terceira)",
+      "Furna do Enxofre (Graciosa)",
+      "Gruta do Natal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Algar do Carvão é gerido pela associação ambientalista Os Montanheiros e é Monumento Natural Regional dos Açores.",
+    "fonte": "Os Montanheiros / Governo Regional dos Açores",
+    "factClusterId": "fc_geo_algardocarvao_terceira_01"
+  },
+  {
+    "id": "GEO_SER_0047",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que colossal tubo lávico subterrâneo na Ilha do Pico («Gruta das Torres»), com mais de 5,1 quilómetros de galerias vulcânicas formadas há cerca de 1.500 anos com estalactites e estalagmites de lava, é a maior gruta vulcânica de Portugal?",
+    "opcoes": [
+      "Algar do Carvão",
+      "Furna do Enxofre",
+      "Gruta das Torres (Ilha do Pico)",
+      "Gruta dos Balcões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Centro de Visitantes da Gruta das Torres no concelho da Madalena foi premiado internacionalmente pela sua integração arquitetónica sustentável.",
+    "fonte": "Parque Natural do Pico / Governo Regional dos Açores",
+    "factClusterId": "fc_geo_grutadastorres_pico_01"
+  },
+  {
+    "id": "GEO_SER_0048",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que imensa cúpula de lava vulcânica na Ilha Graciosa («Furna do Enxofre»), situada no interior da Caldeira da Graciosa com um teto abobadado de 40 metros de altura e uma lagoa de água fria com emanações gasosas de dióxido de carbono e ácido sulfídrico, é acessível por uma escadaria em caracol dentro de uma torre de pedra?",
+    "opcoes": [
+      "Algar do Carvão",
+      "Gruta das Torres",
+      "Furna da Maria Encantada",
+      "Furna do Enxofre (Ilha Graciosa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Furna do Enxofre é uma das maiores catedrais geológicas subterrâneas do vulcanismo europeu visitada pelo Príncipe Alberto I do Mónaco em 1879.",
+    "fonte": "Parque Natural da Graciosa / Governo dos Açores",
+    "factClusterId": "fc_geo_furnadoenxofre_graciosa_01"
+  },
+  {
+    "id": "GEO_SER_0049",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que estreito istmo e península calcária no concelho de Peniche («Península de Peniche»), outrora uma ilha marítima isolada até ao século XVI quando a acumulação de areias e sedimentos marítimos a ligou definitivamente ao continente por um tômbolo, é o:",
+    "opcoes": [
+      "Tômbolo de Peniche (Península de Peniche)",
+      "Cabo Carvoeiro",
+      "Baleal",
+      "Papôa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A formação do tômbolo de Peniche e do Baleal é um caso clássico de geomorfologia litoral estudado internacionalmente.",
+    "fonte": "Município de Peniche / LNEG",
+    "factClusterId": "fc_geo_tombolopeniche_01"
+  },
+  {
+    "id": "GEO_SER_0050",
+    "tema": "Geografia",
+    "subtema": "Serras e Relevo",
+    "pergunta": "Que plataforma litoral fóssil de arriba no concelho de Sintra e Cascais que se projeta no oceano Atlântico com 140 metros de falésia vertical («Cabo da Roca»), com as coordenadas geográficas 38° 47' N e 9° 30' W, é o ponto mais ocidental de todo o continente europeu?",
+    "opcoes": [
+      "Cabo de São Vicente",
+      "Cabo Espichel",
+      "Cabo da Roca («Onde a Terra Acaba e o Mar Começa»)",
+      "Cabo Carvoeiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "No monumento do Cabo da Roca estão gravados os célebres versos de Luís de Camões em Os Lusíadas: 'Onde a terra acaba e o mar começa'.",
+    "fonte": "Câmara Municipal de Sintra / Parque Natural de Sintra-Cascais",
+    "factClusterId": "fc_geo_cabodaroca_pontomaisocidental_01"
+  }
+]

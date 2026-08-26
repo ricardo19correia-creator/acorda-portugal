@@ -1,0 +1,852 @@
+[
+  {
+    "id": "VIS_BRA_0001",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento heráldico lendário e central figura no Brasão Oficial do Município de Lisboa: uma embarcação medieval navegando sobre o mar acompanhada por:",
+    "opcoes": [
+      "Dois corvos negros na proa e na popa (Corvos de São Vicente)",
+      "Duas gaivotas brancas",
+      "Dois golfinhos prateados",
+      "Duas andorinhas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os dois corvos representam a lenda da escolta milagrosa que acompanhou o barco com as relíquias de São Vicente desde o Cabo de São Vicente até Lisboa em 1173 a mando de D. Afonso Henriques.",
+    "fonte": "Câmara Municipal de Lisboa / Gabinete de Heráldica Municipal",
+    "factClusterId": "fc_vis_brasao_lisboa_01"
+  },
+  {
+    "id": "VIS_BRA_0002",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento régio e de homenagem foi acrescentado ao Brasão de Armas da Cidade do Porto pela Rainha D. Maria II em 1837, em reconhecimento pelo sacrifício e heroísmo da cidade durante o Cerco do Porto nas Guerras Liberais?",
+    "opcoes": [
+      "A Cruz de Cristo",
+      "O Coração de D. Pedro IV em campo de ouro dentro do escudo",
+      "A Esfera Armilar",
+      "A Espada de D. Afonso Henriques"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Pedro IV doou em testamento o seu coração à cidade do Porto, que repousa num mausoléu na Igreja da Lapa, figurando no centro do brasão da cidade 'Antiga, Mui Nobre, Sempre Leal e Invicta'.",
+    "fonte": "Câmara Municipal do Porto / Arquivo Histórico Municipal do Porto",
+    "factClusterId": "fc_vis_brasao_porto_01"
+  },
+  {
+    "id": "VIS_BRA_0003",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que herói lendário da Reconquista Cristã figura no Brasão Oficial do Município de Évora («Geraldo Sem Pavor»), representado a cavalo de espada em riste empunhando:",
+    "opcoes": [
+      "A bandeira das quinas",
+      "O escudo dos templários",
+      "As cabeças decepadas do alcaide mouro e da sua filha",
+      "Uma chave de ouro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Geraldo Sem Pavor conquistou Évora aos mouros por surpresa e escalada noturna das muralhas em 1165 oferecendo a cidade a D. Afonso Henriques.",
+    "fonte": "Câmara Municipal de Évora / Arquivo Distrital de Évora",
+    "factClusterId": "fc_vis_brasao_evora_01"
+  },
+  {
+    "id": "VIS_BRA_0004",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que figura feminina coroada emergindo de uma taça de ouro («Busto de Mulher»), ladeada por um leão e uma serpe alada (dragão), constitui o elemento central enigmático do Brasão da Cidade de Coimbra?",
+    "opcoes": [
+      "Nossa Senhora da Oliveira",
+      "A Princesa Cindazunda",
+      "A Padeira de Aljubarrota",
+      "A Rainha Santa Isabel / Donzela de Coimbra (Colo de Dona Ceva)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A figura feminina no cálice do brasão de Coimbra remonta a mitos medievais e simboliza a pureza e lealdade da cidade e a princesa Cindazunda.",
+    "fonte": "Câmara Municipal de Coimbra / Universidade de Coimbra",
+    "factClusterId": "fc_vis_brasao_coimbra_01"
+  },
+  {
+    "id": "VIS_BRA_0005",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que árvore sagrada secular associada a um milagre de Nossa Senhora figura no centro do Brasão Oficial do Município de Guimarães («O Berço da Nação»), entre dois escudos com as quinas de Portugal?",
+    "opcoes": [
+      "Uma Oliveira verdejante (A Oliveira de Guimarães)",
+      "Um Carvalho monumental",
+      "Um Sobreiro",
+      "Um Pinheiro bravo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O brasão evoca o milagre da oliveira seca que reverdeceu quando a cruz de Cristo foi colocada no Largo da Oliveira em 1342.",
+    "fonte": "Câmara Municipal de Guimarães / Colegiada de Nossa Senhora da Oliveira",
+    "factClusterId": "fc_vis_brasao_guimaraes_01"
+  },
+  {
+    "id": "VIS_BRA_0006",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento religioso da Sé Primaz figura no Brasão Oficial do Município de Braga: a imagem de Nossa Senhora com o Menino Jesus ao colo sobre a torre ameada do castelo segurando:",
+    "opcoes": [
+      "A espada da justiça",
+      "Um ramo de açucenas e as chaves da cidade",
+      "A cruz arquiepiscopal",
+      "O cálice sagrado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Braga é a 'Cidade dos Arcebispos' e a sua heráldica celebra Nossa Senhora de Braga e a sua vetusta condição de Sé Primaz das Espanhas.",
+    "fonte": "Câmara Municipal de Braga / Arquidiocese de Braga",
+    "factClusterId": "fc_vis_brasao_braga_01"
+  },
+  {
+    "id": "VIS_BRA_0007",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento agrícola histórico e de grande riqueza colonial figura no Brasão Oficial da Cidade do Funchal (Madeira): cinco elementos vegetais atados por um laço vermelho?",
+    "opcoes": [
+      "Cinco cachos de uvas da casta Malvasia",
+      "Cinco espigas de trigo",
+      "Cinco Canas-de-Açúcar de ouro («O Ouro Branco» da Madeira)",
+      "Cinco flores de orquídea"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A cana-de-açúcar foi a base da pujança económica e comercial da Madeira e do Funchal nos séculos XV e XVI.",
+    "fonte": "Câmara Municipal do Funchal / Governo Regional da Madeira",
+    "factClusterId": "fc_vis_brasao_funchal_01"
+  },
+  {
+    "id": "VIS_BRA_0008",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que imponente ave de rapina com as asas estendidas voando sobre o mar e segurando nas garras as quinas de Portugal figura no centro do Brasão Oficial do Município de Ponta Delgada (São Miguel, Açores)?",
+    "opcoes": [
+      "Uma Águia-real",
+      "Um Falcão peregrino",
+      "Um Garajau",
+      "Um Açor de ouro voando (Açor dos Açores)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O açor é a ave símbolo heráldica do arquipélago dos Açores, que deu o próprio nome às nove ilhas atlânticas.",
+    "fonte": "Câmara Municipal de Ponta Delgada / Governo Regional dos Açores",
+    "factClusterId": "fc_vis_brasao_pontadelgada_01"
+  },
+  {
+    "id": "VIS_BRA_0009",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que embarcação tradicional com vela redonda enfunada carregada com a Cruz de Cristo navega sobre as ondas do mar no Brasão Oficial do Município de Viana do Castelo?",
+    "opcoes": [
+      "Uma Caravela dos Descobrimentos (Navio Histórico)",
+      "Um Barco Moliceiro",
+      "Um Dóri de pesca",
+      "Um Barco Rabelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O brasão celebra os marinheiros e carpinteiros navais de Viana do Castelo que construíram e armaram as frotas dos Descobrimentos e da pesca do bacalhau.",
+    "fonte": "Câmara Municipal de Viana do Castelo",
+    "factClusterId": "fc_vis_brasao_vianadocastelo_01"
+  },
+  {
+    "id": "VIS_BRA_0010",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que histórica ponte romana de cantaria sobre o rio Tâmega, mandada construir pelo imperador Trajano no século I d.C., é a peça central monumental do Brasão Oficial do Município de Chaves?",
+    "opcoes": [
+      "Ponte de D. Luís I",
+      "Ponte Romana de Trajano sobre o rio Tâmega",
+      "Ponte de Lima",
+      "Ponte da Mizarela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ponte Romana de Trajano em Chaves (Aquae Flaviae) tem 140 metros e ainda hoje suporta o tráfego pedonal sobre o Tâmega.",
+    "fonte": "Câmara Municipal de Chaves / DGPC",
+    "factClusterId": "fc_vis_brasao_chaves_01"
+  },
+  {
+    "id": "VIS_BRA_0011",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que insígnia da mais antiga ordem militar e religiosa figura no centro do Brasão Oficial da Cidade de Tomar sobre as muralhas do Castelo Templário:",
+    "opcoes": [
+      "A Cruz de Avis",
+      "A Cruz de Santiago",
+      "A Cruz da Ordem de Cristo (Cruz Templária octogonal)",
+      "A Cruz de Malta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tomar foi fundada em 1160 por Gualdim Pais como sede da Ordem dos Templários e mais tarde da Ordem de Cristo.",
+    "fonte": "Câmara Municipal de Tomar / Convento de Cristo",
+    "factClusterId": "fc_vis_brasao_tomar_01"
+  },
+  {
+    "id": "VIS_BRA_0012",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que famosa ave heráldica com as asas abertas e a cabeça voltada à direita sustenta a Cruz do Santo Lenho sobre o mar e a Ria no Brasão Oficial do Município de Aveiro («A Veneza Portuguesa»)?",
+    "opcoes": [
+      "Um Açor",
+      "Uma Gaivota",
+      "Um Pelicano",
+      "Uma Águia de prata de asas abertas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A águia no brasão de Aveiro evoca o símbolo de São João Evangelista e a nobreza e elevação da cidade lagunar.",
+    "fonte": "Câmara Municipal de Aveiro / Museu de Aveiro",
+    "factClusterId": "fc_vis_brasao_aveiro_01"
+  },
+  {
+    "id": "VIS_BRA_0013",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que árvore secular mandada plantar pelo Rei D. Dinis para fixar as areias litorais e fornecer madeira à construção naval dos Descobrimentos figura no Brasão Oficial do Município da Marinha Grande e de Leiria?",
+    "opcoes": [
+      "Um Pinheiro-bravo / Pinheiro-manso do Pinhal de Leiria (Pinhal do Rei)",
+      "Um Sobreiro",
+      "Um Castanheiro",
+      "Uma Azinheira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Pinhal do Rei em Leiria e Marinha Grande é uma das mais antigas florestas plantadas da Europa com mais de 700 anos.",
+    "fonte": "Câmara Municipal de Leiria / Câmara Municipal da Marinha Grande",
+    "factClusterId": "fc_vis_brasao_leiria_pinhal_01"
+  },
+  {
+    "id": "VIS_BRA_0014",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento marinho de grande dinamismo figura na base do Brasão Oficial do Município de Cascais fundado sobre o oceano Atlântico:",
+    "opcoes": [
+      "Duas Baleias",
+      "Dois Golfinhos de prata nadando em sentido oposto",
+      "Dois Tubarões",
+      "Duas Estrelas-do-mar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os golfinhos no mar de Cascais representam a tradição piscatória, a nobreza marítima e a costa atlântica do concelho.",
+    "fonte": "Câmara Municipal de Cascais",
+    "factClusterId": "fc_vis_brasao_cascais_01"
+  },
+  {
+    "id": "VIS_BRA_0015",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que monumento histórico sobre o rio Gilão figura no centro do Brasão Oficial da Cidade de Tavira (Algarve), encimada pelo castelo medieval e pelas quinas de Portugal?",
+    "opcoes": [
+      "A Ponte D. Maria Pia",
+      "O Aqueduto de Pegões",
+      "A Ponte Antiga de sete arcos sobre o rio Gilão (Ponte Romana de Tavira)",
+      "As Muralhas de Silves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A emblemática Ponte Antiga sobre o rio Gilão liga as duas margens históricas da cidade de Tavira.",
+    "fonte": "Câmara Municipal de Tavira / Museu Municipal de Tavira",
+    "factClusterId": "fc_vis_brasao_tavira_01"
+  },
+  {
+    "id": "VIS_BRA_0016",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que figura de cavaleiro com armadura medieval completa empunhando estandarte e montado a cavalo sobre a fortaleza raiana figura no Brasão Oficial do Município de Elvas («A Chave do Reino»)?",
+    "opcoes": [
+      "Geraldo Sem Pavor",
+      "D. Nuno Álvares Pereira",
+      "Martim Moniz",
+      "O Cavaleiro Defensor da Praça-Forte de Elvas (Sancho Vaz)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elvas ostenta as maiores fortificações abaluartadas terrestres do mundo classificadas como Património Mundial da UNESCO.",
+    "fonte": "Câmara Municipal de Elvas / UNESCO",
+    "factClusterId": "fc_vis_brasao_elvas_01"
+  },
+  {
+    "id": "VIS_BRA_0017",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que imponente e famosa fortaleza mourisca em grés vermelho sobre a colina figura no centro do Brasão Oficial do Município de Silves (antiga capital do Reino Muçulmano do Algarve)?",
+    "opcoes": [
+      "O Castelo de Silves em grés vermelho (Al-Hamra)",
+      "O Castelo de Alcoutim",
+      "O Castelo de Castro Marim",
+      "O Castelo de Paderne"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Silves é a mais imponente fortaleza militar islâmica conservada em todo o território português.",
+    "fonte": "Câmara Municipal de Silves / DGPC",
+    "factClusterId": "fc_vis_brasao_silves_01"
+  },
+  {
+    "id": "VIS_BRA_0018",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que instrumento de navegação astronómica desenhado por D. Manuel I como sua empresa pessoal (divisa régia), representando o cosmos e a esfera celeste, figura no centro da Bandeira Nacional e no Brasão de Armas da República Portuguesa?",
+    "opcoes": [
+      "O Astrolábio náutico",
+      "A Esfera Armilar manuelina de ouro",
+      "O Nónio",
+      "O Quadrante"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Esfera Armilar foi adotada por D. Manuel I e incorporada na heráldica oficial de Portugal e do Brasil para simbolizar a epopeia marítima universal.",
+    "fonte": "Assembleia da República / Presidência da República",
+    "factClusterId": "fc_vis_brasao_esferaarmilar_01"
+  },
+  {
+    "id": "VIS_BRA_0019",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Quantos Castelos de ouro em campo vermelho (bordadura) figuram oficialmente no Brasão de Armas e na Bandeira Nacional de Portugal desde a reforma heráldica de D. João II em 1485?",
+    "opcoes": [
+      "5 Castelos",
+      "12 Castelos",
+      "Exatamente 7 Castelos de ouro",
+      "9 Castelos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os 7 castelos na bordadura vermelha foram fixados por D. João II simbolizando as praças-fortes tomadas aos mouros no Reino do Algarve.",
+    "fonte": "Presidência da República / Museu da Presidência",
+    "factClusterId": "fc_vis_brasao_setecastelos_01"
+  },
+  {
+    "id": "VIS_BRA_0020",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Quantos escudetes azuis (as «Quinas») figuram dispostos em cruz no campo de prata do Brasão de Armas de Portugal, simbolizando os cinco reis mouros vencidos na Batalha de Ourique por D. Afonso Henriques em 1139 e as cinco chagas de Cristo?",
+    "opcoes": [
+      "7 Quinas",
+      "4 Quinas",
+      "3 Quinas",
+      "Exatamente 5 Quinas azuis"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Cada quina azul contém cinco besantes brancos de prata (perfazendo 30 moedas de prata com a contagem dobrada da quina central).",
+    "fonte": "Presidência da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_vis_brasao_cincoquinas_01"
+  },
+  {
+    "id": "VIS_BRA_0021",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento heráldico vegetal de grande significado clássico envolve a Esfera Armilar e o Escudo das Quinas no Brasão Oficial da República Portuguesa:",
+    "opcoes": [
+      "Dois ramos de Loureiro de ouro atados por um laço verde e vermelho",
+      "Dois ramos de Oliveira",
+      "Dois ramos de Carvalho",
+      "Dois ramos de Videira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os ramos de loureiro simbolizam a glória, a vitória e a paz da nação portuguesa.",
+    "fonte": "Presidência da República / Diário do Governo (1911)",
+    "factClusterId": "fc_vis_brasao_ramosloureiro_01"
+  },
+  {
+    "id": "VIS_BRA_0022",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que insígnia da mais alta condecoração militar portuguesa foi outorgada por Decreto Régio e figura pendente do Brasão da Cidade de Angra do Heroísmo (Ilha Terceira, Açores) pelos seus feitos em defesa da causa liberal?",
+    "opcoes": [
+      "A Ordem Militar de Cristo",
+      "O Colar e a Grã-Cruz da Ordem Militar da Torre e Espada, do Valor, Lealdade e Mérito",
+      "A Ordem de Avis",
+      "A Ordem de Sant'Iago"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Maria II concedeu o título de 'Heroísmo' e a Torre e Espada a Angra em 1837 pela resistência contra o absolutismo miguelista.",
+    "fonte": "Câmara Municipal de Angra do Heroísmo / Chancelaria das Ordens Honoríficas",
+    "factClusterId": "fc_vis_brasao_angradoheroismo_01"
+  },
+  {
+    "id": "VIS_BRA_0023",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elementos arquitetónicos medievais e montanhosos figuram no Brasão Oficial do Município de Sintra: dois castelos sobre a serra entre:",
+    "opcoes": [
+      "Duas oliveiras",
+      "Duas caravelas",
+      "O mar azul e a Serra de Sintra sob o céu de prata",
+      "Dois leões"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O brasão de Sintra evoca o Castelo dos Mouros e o Palácio da Vila incrustados na majestosa serra com o oceano Atlântico aos pés.",
+    "fonte": "Câmara Municipal de Sintra / Parques de Sintra",
+    "factClusterId": "fc_vis_brasao_sintra_01"
+  },
+  {
+    "id": "VIS_BRA_0024",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que importante fortaleza renascentista no topo da Arrábida figura no centro do Brasão Oficial do Município de Setúbal sobre um mar azul onde navega um barco de pesca à vela tradicional?",
+    "opcoes": [
+      "O Forte de Santiago de Sesimbra",
+      "O Castelo de Palmela",
+      "A Fortaleza de Peniche",
+      "O Forte de São Filipe de Setúbal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Forte de São Filipe foi mandado construir por Filipe I em 1582 no topo da colina para proteger a foz do Sado.",
+    "fonte": "Câmara Municipal de Setúbal",
+    "factClusterId": "fc_vis_brasao_setubal_01"
+  },
+  {
+    "id": "VIS_BRA_0025",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que imponente e famosa torre de vigia quinhentista sobre a foz do Tejo (Património Mundial da UNESCO desenhada por Francisco de Arruda) figura no Brasão Oficial da Junta de Freguesia de Belém em Lisboa?",
+    "opcoes": [
+      "A Torre de Belém (Torre de São Vicente de Belém)",
+      "O Padrão dos Descobrimentos",
+      "O Mosteiro dos Jerónimos",
+      "O Farol do Bugio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Torre de Belém é o monumento náutico e defensivo mais emblemático do manuelino português no mundo.",
+    "fonte": "Junta de Freguesia de Belém / UNESCO",
+    "factClusterId": "fc_vis_brasao_torredebelem_01"
+  },
+  {
+    "id": "VIS_BRA_0026",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que lendário monumento fortificado e sede da Ordem de Santiago no Alentejo litoral figura no centro do Brasão Oficial do Município de Palmela sobre o cume da serra:",
+    "opcoes": [
+      "O Castelo de Sesimbra",
+      "O Castelo de Palmela e a Espada-Cruz Vermelha de Santiago",
+      "O Forte de São Filipe",
+      "O Castelo de Alcácer do Sal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Palmela foi a sede da Ordem Militar de Sant'Iago da Espada desde 1443 albergando o convento e a igreja de Santiago.",
+    "fonte": "Câmara Municipal de Palmela / DGPC",
+    "factClusterId": "fc_vis_brasao_palmela_01"
+  },
+  {
+    "id": "VIS_BRA_0027",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de arquitetura monumental romana figura no Brasão Oficial do Município de Vila Franca de Xira e no Município de Tomar evocando as grandes obras hidráulicas:",
+    "opcoes": [
+      "A Ponte Romana",
+      "O Arco do Triunfo",
+      "Os arcos do Aqueduto (Aqueduto de Pegões / Aqueduto das Águas Livres)",
+      "O Pelourinho Manuelino"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Aqueduto dos Pegões Altos em Tomar tem 6 km de extensão e 180 arcos para abastecer o Convento de Cristo.",
+    "fonte": "Câmara Municipal de Tomar / DGPC",
+    "factClusterId": "fc_vis_brasao_aqueduto_01"
+  },
+  {
+    "id": "VIS_BRA_0028",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de grande significado heráldico figura na coroa que encima os brasões de armas de todas as CIDADES de Portugal segundo a Lei da Heráldica Municipal (Lei n.º 53/91)?",
+    "opcoes": [
+      "Uma Coroa Mural de 4 torres",
+      "Uma Coroa Mural de 3 torres",
+      "Uma Coroa Real dourada",
+      "Uma Coroa Mural de prata com 5 torres ameadas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Em Portugal: Cidades têm coroa mural de 5 torres de prata, Vilas têm 4 torres de prata, e Aldeias/Freguesias têm 3 torres de prata.",
+    "fonte": "Comissão de Heráldica da Associação dos Arqueólogos Portugueses (CHAAP) / DRE",
+    "factClusterId": "fc_vis_brasao_coroamural_cidades_01"
+  },
+  {
+    "id": "VIS_BRA_0029",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Segundo as regras da heráldica autárquica portuguesa, quantas torres de prata possui a coroa mural que encima o brasão de armas de uma VILA?",
+    "opcoes": [
+      "Exatamente 4 torres de prata",
+      "5 torres de prata",
+      "3 torres de prata",
+      "Nenhuma torre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A coroa mural de 4 torres de prata identifica heraldicamente as vilas portuguesas em todo o território nacional.",
+    "fonte": "Comissão de Heráldica / AAP",
+    "factClusterId": "fc_vis_brasao_coroamural_vilas_01"
+  },
+  {
+    "id": "VIS_BRA_0030",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Segundo as regras oficiais da heráldica autárquica portuguesa, quantas torres de prata possui a coroa mural que encima o brasão de uma FREGUESIA / ALDEIA?",
+    "opcoes": [
+      "4 torres de prata",
+      "Exatamente 3 torres de prata",
+      "5 torres de prata",
+      "2 torres de prata"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As freguesias que não possuem estatuto de vila ou cidade utilizam a coroa mural de 3 torres de prata.",
+    "fonte": "Comissão de Heráldica / Associação dos Arqueólogos Portugueses",
+    "factClusterId": "fc_vis_brasao_coroamural_freguesias_01"
+  },
+  {
+    "id": "VIS_BRA_0031",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de artesanato de luxo e indústria tradicional mundial figura no Brasão Oficial do Município da Marinha Grande: uma peça de vidro soprado ladeada por:",
+    "opcoes": [
+      "Dois martelos de ferreiro",
+      "Dois teares manuais",
+      "Dois fornos de vidro e canas de vidreiro em aspa",
+      "Duas tesouras de lapidação"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Marinha Grande é a capital do vidro e do molde em Portugal com a Real Fábrica de Vidros fundada por Guilherme Stephens em 1769.",
+    "fonte": "Câmara Municipal da Marinha Grande / Museu do Vidro",
+    "factClusterId": "fc_vis_brasao_marinhagrande_vidro_01"
+  },
+  {
+    "id": "VIS_BRA_0032",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que instrumento e monumento de punição e autonomia municipal manuelino figura em destaque no centro do Brasão Oficial do Município de Arcos de Valdevez e de Fornos de Algodres:",
+    "opcoes": [
+      "A Forca medieval",
+      "O Castelo de menagem",
+      "A Barca de passagem",
+      "O Pelourinho de cantaria de estilo manuelino"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os pelourinhos manuelinos eram o símbolo máximo da concessão de Carta de Foral Régio e da autonomia jurisdicional do concelho.",
+    "fonte": "DGPC / Município de Arcos de Valdevez",
+    "factClusterId": "fc_vis_brasao_pelourinho_01"
+  },
+  {
+    "id": "VIS_BRA_0033",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que produto e cultura nobre dos montados alentejanos figura no Brasão Oficial do Município de Coruche («A Capital Mundial da Cortiça»): um sobreiro arrancado de verde frutado de ouro com o tronco descortiçado de:",
+    "opcoes": [
+      "Vermelho vivo (tronco descortiçado na tiragem da cortiça)",
+      "Branco prateado",
+      "Castanho escuro",
+      "Amarelo ouro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O sobreiro com tronco vermelho após o desbóia representa o coração da extração sustentável da cortiça em Coruche e no vale do Sorraia.",
+    "fonte": "Câmara Municipal de Coruche / Observatório do Sobreiro e da Cortiça",
+    "factClusterId": "fc_vis_brasao_coruche_cortica_01"
+  },
+  {
+    "id": "VIS_BRA_0034",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que célebre figura heráldica e animal místico alado («O Dragão de ouro» / Serpe alada) figura no timbre do Brasão do FC Porto e do antigo Brasão da Cidade do Porto dado por D. Maria II, simbolizando:",
+    "opcoes": [
+      "A força marítima",
+      "A invencibilidade e a defesa leal da Carta Constitucional",
+      "O fogo dos vulcões",
+      "A sabedoria milenar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Dragão coroado era a divisa heráldica dos reis da Dinastia de Bragança adotada pela cidade do Porto e mais tarde incorporada no emblema do FC Porto.",
+    "fonte": "FC Porto Museu / Arquivo Histórico Municipal do Porto",
+    "factClusterId": "fc_vis_brasao_dragao_porto_01"
+  },
+  {
+    "id": "VIS_BRA_0035",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento marítimo e de pescas figura no centro do Brasão Oficial do Município de Peniche («A Capital da Onda»): duas embarcações tradicionais e:",
+    "opcoes": [
+      "Dois faróis luminosos",
+      "Dois atuns",
+      "Duas âncoras de prata com as suas amarras",
+      "Duas redes de xávega"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O brasão de Peniche celebra a comunidade marítima e a península fortificada do Cabo Carvoeiro.",
+    "fonte": "Câmara Municipal de Peniche",
+    "factClusterId": "fc_vis_brasao_peniche_01"
+  },
+  {
+    "id": "VIS_BRA_0036",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que instrumento musical e de comunicação militar do século XII figura no Brasão Oficial do Município de Torres Novas e no de Trancoso:",
+    "opcoes": [
+      "Uma Harpa celta",
+      "Um Tambor de guerra",
+      "Uma Gaita-de-foles",
+      "Duas Trombetas ou Clarins de ouro em aspa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As trombetas no brasão evocam os sentinelas que alertavam as fortalezas medievais da aproximação dos exércitos inimigos.",
+    "fonte": "Câmara Municipal de Torres Novas / Município de Trancoso",
+    "factClusterId": "fc_vis_brasao_trombetas_01"
+  },
+  {
+    "id": "VIS_BRA_0037",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que animal de pastoreio e produção de lã do maciço da Serra da Estrela figura no Brasão Oficial do Município da Covilhã («A Cidade-Fábrica da Lã») e de Seia:",
+    "opcoes": [
+      "Um Cordeiro / Ovelha Bordaleira da Serra da Estrela de prata",
+      "Um Bode montês",
+      "Um Cavalo garrano",
+      "Um Toiro bravo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O cordeiro simboliza a secular indústria de lanifícios e tecelagem da Covilhã e o afamado Queijo Serra da Estrela.",
+    "fonte": "Câmara Municipal da Covilhã / Museu dos Lanifícios da UBI",
+    "factClusterId": "fc_vis_brasao_covilha_cordeiro_01"
+  },
+  {
+    "id": "VIS_BRA_0038",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de património militar templário único figura no Brasão Oficial do Município de Ferreira do Zêzere e de Vila Nova da Barquinha no Tejo:",
+    "opcoes": [
+      "O Forte de Peniche",
+      "O Castelo de Almourol erguido sobre a ilha rochosa no Tejo",
+      "A Torre de Belém",
+      "O Castelo de Guimarães"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Almourol ergue-se numa escarpa rochosa no meio das águas do Tejo desde 1171.",
+    "fonte": "Câmara Municipal de Vila Nova da Barquinha / DGPC",
+    "factClusterId": "fc_vis_brasao_almourol_01"
+  },
+  {
+    "id": "VIS_BRA_0039",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que famoso herói que se sacrificou na porta de ferro do Castelo de São Jorge em 1147 entalando o seu próprio corpo para permitir a entrada dos cavaleiros de D. Afonso Henriques («Martim Moniz»), é a figura central do Brasão de:",
+    "opcoes": [
+      "Junta de Freguesia de Belém",
+      "Município de Sintra",
+      "Junta de Freguesia de Santa Maria Maior (Castelo de São Jorge) e Família Moniz",
+      "Município de Tomar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A lenda do sacrifício heroico de Martim Moniz é recordada na 'Porta de Martim Moniz' nas muralhas da Mouraria em Lisboa.",
+    "fonte": "Museu de Lisboa / Castelo de São Jorge",
+    "factClusterId": "fc_vis_brasao_martimmoniz_01"
+  },
+  {
+    "id": "VIS_BRA_0040",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento fluvial e de transporte tradicional do Vinho do Porto figura no Brasão Oficial do Município do Peso da Régua e de Santa Marta de Penaguião no Douro:",
+    "opcoes": [
+      "O Moliceiro",
+      "A Caravela",
+      "A Barcaça do Tejo",
+      "O Barco Rabelo com as pipas de Vinho do Porto navegando no rio Douro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os barcos rabelos transportavam as pipas de vinho desde as quintas do Alto Douro Vinhateiro até às caves de Vila Nova de Gaia.",
+    "fonte": "Museu do Douro / Câmara Municipal do Peso da Régua",
+    "factClusterId": "fc_vis_brasao_barcorabelo_regua_01"
+  },
+  {
+    "id": "VIS_BRA_0041",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que monumento histórico e polo universitário no cimo da colina figura no centro do Brasão Oficial do Município de Évora ao lado do templo romano:",
+    "opcoes": [
+      "O Templo Romano de Évora (Templo de Diana) com as colunas coríntias",
+      "A Capela dos Ossos",
+      "O Aqueduto da Água de Prata",
+      "A Sé de Évora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Templo Romano de Évora do século I d.C. é o mais bem conservado vestígio monumental da Lusitânia romana.",
+    "fonte": "DGPC / Câmara Municipal de Évora",
+    "factClusterId": "fc_vis_brasao_temploromano_evora_01"
+  },
+  {
+    "id": "VIS_BRA_0042",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que famoso produto agroalimentar de denominação de origem protegida (DOP) figura simbolizado no Brasão Oficial do Município do Fundão:",
+    "opcoes": [
+      "Dois cachos de uvas",
+      "Dois ramos de cerejeira carregados com Cerejas do Fundão de vermelho",
+      "Duas maçãs bravas de Esmolfe",
+      "Duas peras rocha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Cereja do Fundão é o fruto emblemático da encosta da Gardunha e da Cova da Beira.",
+    "fonte": "Câmara Municipal do Fundão",
+    "factClusterId": "fc_vis_brasao_fundao_cerejas_01"
+  },
+  {
+    "id": "VIS_BRA_0043",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que flor de cultura secular aromática e medicinal figura no centro do Brasão Oficial do Município de Vila Franca de Xira e de Alenquer:",
+    "opcoes": [
+      "A Flor de Lótus",
+      "A Flor de Amendoeira",
+      "A Flor de Cravo / Rosa heráldica",
+      "A Flor de Laranja"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A flor heráldica simboliza a fertilidade dos campos agrícolas e a beleza dos vales da Estremadura.",
+    "fonte": "Câmara Municipal de Alenquer",
+    "factClusterId": "fc_vis_brasao_rosaheraldica_01"
+  },
+  {
+    "id": "VIS_BRA_0044",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que instrumento náutico de orientação em alto-mar figura no Brasão Oficial do Município de Sagres (Vila do Bispo) e da Escola Naval da Marinha Portuguesa:",
+    "opcoes": [
+      "A Bússola magnética",
+      "A Ampulheta",
+      "O Leme de madeira",
+      "A Rosa dos Ventos com as pontas cardeais estilizadas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Rosa dos Ventos monumental na Fortaleza de Sagres é o símbolo mítico da Escola de Navegação do Infante D. Henrique.",
+    "fonte": "Câmara Municipal de Vila do Bispo / Fortaleza de Sagres",
+    "factClusterId": "fc_vis_brasao_rosadosventos_sagres_01"
+  },
+  {
+    "id": "VIS_BRA_0045",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento natural de relevo alpino figura no Brasão Oficial do Município da Madalena e do Município de São Roque na Ilha do Pico (Açores):",
+    "opcoes": [
+      "O estratovulcão da Montanha do Pico com o seu cume fumegante",
+      "A Caldeira das Sete Cidades",
+      "O Algar do Carvão",
+      "A Furna do Enxofre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A silhueta majestosa do Pico a 2.351 metros domina a heráldica e a paisagem dos concelhos da Ilha do Pico.",
+    "fonte": "Câmara Municipal da Madalena / Parque Natural do Pico",
+    "factClusterId": "fc_vis_brasao_montanhadopico_01"
+  },
+  {
+    "id": "VIS_BRA_0046",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que insígnia histórica figura pendente no Brasão Oficial do Município de Miranda do Douro em homenagem ao sacrifício heróico dos mirandeses na Guerra da Restauração de 1640 e nas invasões espanholas:",
+    "opcoes": [
+      "A Ordem de Cristo",
+      "O Colar da Torre e Espada e as muralhas com o castelo fronteiriço",
+      "A Ordem da Liberdade",
+      "A Cruz de Guerra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Miranda do Douro resistiu heroicamentes a sucessivos cercos com mulheres e homens na defesa da soberania nacional.",
+    "fonte": "Câmara Municipal de Miranda do Douro / Museu da Terra de Miranda",
+    "factClusterId": "fc_vis_brasao_mirandadodouro_01"
+  },
+  {
+    "id": "VIS_BRA_0047",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de património militar da Ordem de Avis figura no centro do Brasão Oficial do Município de Avis (Portalegre):",
+    "opcoes": [
+      "A Cruz Vermelha de Cristo",
+      "A Cruz de Malta",
+      "A Cruz Floreada de Verde da Ordem de Avis sobre o castelo",
+      "O Escudo de Santiago"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Avis foi a sede da célebre Ordem Militar de São Bento de Avis que deu origem à Dinastia de Avis em 1385 com D. João I.",
+    "fonte": "Câmara Municipal de Avis / DGPC",
+    "factClusterId": "fc_vis_brasao_ordemdeavis_01"
+  },
+  {
+    "id": "VIS_BRA_0048",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento fluvial e agrícola tradicional figura no Brasão Oficial do Município de Vila Nova de Gaia no estuário do Douro:",
+    "opcoes": [
+      "O Barco Moliceiro",
+      "A Torre dos Clérigos",
+      "O Navio Gil Eannes",
+      "O Galo de Barcelos e as pipas de vinho sobre o rio Douro com o castelo de Gaia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O brasão de Gaia acolhe as famosas pipas de Vinho do Porto que envelhecem secularmente nas caves do cais de Gaia.",
+    "fonte": "Câmara Municipal de Vila Nova de Gaia",
+    "factClusterId": "fc_vis_brasao_gaia_douro_01"
+  },
+  {
+    "id": "VIS_BRA_0049",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que famoso animal lendário de barro de Barcelos (símbolo turístico internacional de Portugal) figura no Brasão Oficial do Município de Barcelos:",
+    "opcoes": [
+      "O Galo de Barcelos com a sua crista e lenda do peregrino de Santiago",
+      "O Lobo Ibérico",
+      "A Águia real",
+      "O Corvo de São Vicente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Galo de Barcelos canta no milagre do peregrino galego injustamente condenado à forca que provou a sua inocência quando o galo assado cantou perante o juiz.",
+    "fonte": "Câmara Municipal de Barcelos / Museu de Olaria",
+    "factClusterId": "fc_vis_brasao_galodebarcelos_01"
+  },
+  {
+    "id": "VIS_BRA_0050",
+    "tema": "Desafio Visual",
+    "subtema": "Brasões",
+    "pergunta": "Que elemento de património militar raiano e fortificação abaluartada em estrela perfeita figura no centro do Brasão Oficial do Município de Almeida (Guarda):",
+    "opcoes": [
+      "O Castelo de Marvão",
+      "O Castelo de Monsanto",
+      "A Fortaleza Abaluartada em Estrela de 12 pontas de Almeida",
+      "A Fortaleza de Valença"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Vila de Almeida é uma das mais monumentais praças-fortes abaluartadas hexagonais do mundo, célebre pela resistência heroica nas Invasões Francesas em 1810.",
+    "fonte": "Câmara Municipal de Almeida / Museu Histórico Militar de Almeida",
+    "factClusterId": "fc_vis_brasao_almeida_fortaleza_01"
+  }
+]

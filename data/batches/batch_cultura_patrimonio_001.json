@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_PAT_0001",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Quais foram os dois primeiros monumentos de Portugal continental classificados conjuntamente pela UNESCO como Património Mundial da Humanidade em 1983?",
+    "opcoes": [
+      "Mosteiro dos Jerónimos e Torre de Belém",
+      "Castelo de Guimarães e Paço dos Duques",
+      "Mosteiro de Alcobaça e Mosteiro da Batalha",
+      "Palácio da Pena e Castelo dos Mouros"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro dos Jerónimos e a Torre de Belém, expoentes máximos do estilo Manuelino em Lisboa, foram inscritos na lista da UNESCO na 7.ª sessão do comité em 1983.",
+    "fonte": "Comissão Nacional da UNESCO / DGPC",
+    "factClusterId": "fc_pat_jeronimos_01"
+  },
+  {
+    "id": "CULT_PAT_0002",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que cidade dos Açores foi classificado o primeiro centro urbano português como Património Mundial da Humanidade pela UNESCO em 1983, após o terramoto de 1980?",
+    "opcoes": [
+      "Ponta Delgada",
+      "Angra do Heroísmo (Ilha Terceira)",
+      "Horta",
+      "Vila do Porto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Zona Central da Cidade de Angra do Heroísmo foi distinguida pelo seu traçado renascentista e papel de escala obrigatória na rota das Índias e Américas.",
+    "fonte": "UNESCO / Governo Regional dos Açores",
+    "factClusterId": "fc_pat_angra_01"
+  },
+  {
+    "id": "CULT_PAT_0003",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que complexo monumental de Braga, célebre pela sua monumental escadaria barroca dos Cinco Sentidos e das Três Virtudes e pelo funicular movido a contrapeso de água, foi inscrito pela UNESCO em 2019?",
+    "opcoes": [
+      "Santuário do Sameiro",
+      "Sé de Braga",
+      "Santuário do Bom Jesus do Monte",
+      "Mosteiro de Tibães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bom Jesus do Monte é um Sacro Monte barroco extraordinário com um escadório alegórico que culmina na basílica neoclássica.",
+    "fonte": "Confraria do Bom Jesus do Monte / UNESCO",
+    "factClusterId": "fc_pat_bomjesus_01"
+  },
+  {
+    "id": "CULT_PAT_0004",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que género musical tradicional português, imortalizado por Amália Rodrigues e Carlos do Carmo, foi classificado pela UNESCO como Património Cultural Imaterial da Humanidade em novembro de 2011?",
+    "opcoes": [
+      "Cante Alentejano",
+      "Chula do Douro",
+      "Fado de Coimbra",
+      "Fado (canção urbana de Portugal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Fado foi consagrado pela UNESCO pela sua singularidade poética e musical ligada à identidade de Lisboa e de Portugal.",
+    "fonte": "Museu do Fado / UNESCO",
+    "factClusterId": "fc_pat_fado_01"
+  },
+  {
+    "id": "CULT_PAT_0005",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que ano foi classificado o Cante Alentejano pela UNESCO como Património Cultural Imaterial da Humanidade, destacando o canto coral polifónico sem instrumentos?",
+    "opcoes": [
+      "2014",
+      "2008",
+      "2016",
+      "2020"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cante Alentejano foi inscrito em novembro de 2014 pela UNESCO como uma expressão comunitária única do Baixo Alentejo.",
+    "fonte": "Associação MODA / UNESCO / Município de Serpa",
+    "factClusterId": "fc_pat_cante_01"
+  },
+  {
+    "id": "CULT_PAT_0006",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que santuário de arte rupestre ao ar livre no nordeste de Portugal, com gravuras paleolíticas de cavalos e auroques com mais de 20.000 anos, é Património Mundial da UNESCO desde 1998?",
+    "opcoes": [
+      "Gruta do Escoural",
+      "Sítios de Arte Rupestre do Vale do Côa",
+      "Anta Grande do Zambujeiro",
+      "Cromeleque dos Almendres"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Vale do Côa é o mais importante complexo de arte rupestre paleolítica ao ar livre do mundo.",
+    "fonte": "Fundação Côa Parque / Museu do Côa",
+    "factClusterId": "fc_pat_coa_01"
+  },
+  {
+    "id": "CULT_PAT_0007",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que conjunto monumental mandado construir por D. João V em 1711, composto por palácio real, basílica, convento franciscano, biblioteca de 36.000 volumes e tapada de caça, foi classificado pela UNESCO em 2019?",
+    "opcoes": [
+      "Palácio Nacional de Queluz",
+      "Palácio Nacional da Ajuda",
+      "Real Edifício de Mafra",
+      "Palácio das Necessidades"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Real Edifício de Mafra é uma das obras mais monumentais do barroco europeu, financiada com o ouro das minas do Brasil.",
+    "fonte": "Palácio Nacional de Mafra / UNESCO",
+    "factClusterId": "fc_pat_mafra_01"
+  },
+  {
+    "id": "CULT_PAT_0008",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que cidade alentejana se situa o maior conjunto de fortificações abaluartadas do mundo, classificado pela UNESCO em 2012 («Cidade-Quartel Fronteiriça de Elvas e suas Fortificações»)?",
+    "opcoes": [
+      "Campo Maior",
+      "Estremoz",
+      "Marvão",
+      "Elvas"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elvas possui muralhas seiscentistas, o Forte de Santa Luzia, o Forte da Graça e o Aqueduto da Amoreira de 8 km.",
+    "fonte": "Município de Elvas / UNESCO",
+    "factClusterId": "fc_pat_elvas_01"
+  },
+  {
+    "id": "CULT_PAT_0009",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que instituição de ensino superior e conjunto urbano foi classificado pela UNESCO em 2013 («Universidade de Coimbra — Alta e Sofia»)?",
+    "opcoes": [
+      "Universidade de Coimbra",
+      "Universidade de Évora",
+      "Universidade do Porto",
+      "Universidade de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Universidade de Coimbra, fundada em 1290 por D. Dinis, foi distinguida pela sua Biblioteca Joanina, Paço das Escolas e colégios da Rua da Sofia.",
+    "fonte": "Universidade de Coimbra / UNESCO",
+    "factClusterId": "fc_pat_ucoimbra_01"
+  },
+  {
+    "id": "CULT_PAT_0010",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que vila histórica romântica foi classificada pela UNESCO em 1995 como a primeira «Paisagem Cultural» da Europa, congregando palácios, quintas e serra?",
+    "opcoes": [
+      "Óbidos",
+      "Sintra",
+      "Marvão",
+      "Monsaraz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Paisagem Cultural de Sintra engloba o Palácio da Pena, Castelo dos Mouros, Palácio Nacional de Sintra, Monserrate e Quinta da Regaleira.",
+    "fonte": "Parques de Sintra / UNESCO",
+    "factClusterId": "fc_pat_sintra_01"
+  },
+  {
+    "id": "CULT_PAT_0011",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que cidade do norte de Portugal se localiza o Centro Histórico classificado pela UNESCO em 2001, conhecido como a «Cidade-Berço da Nação»?",
+    "opcoes": [
+      "Braga",
+      "Barcelos",
+      "Guimarães",
+      "Viana do Castelo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Centro Histórico de Guimarães é um exemplo excecionalmente preservado de cidade medieval associada à fundação de Portugal.",
+    "fonte": "Município de Guimarães / UNESCO",
+    "factClusterId": "fc_pat_guimaraes_01"
+  },
+  {
+    "id": "CULT_PAT_0012",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que centro urbano nortenho ribeirinho, incluindo a Ponte Luís I e o Mosteiro da Serra do Pilar, foi classificado pela UNESCO como Património Mundial em 1996?",
+    "opcoes": [
+      "Centro Histórico de Viana",
+      "Centro Histórico de Vila Real",
+      "Centro Histórico de Amarante",
+      "Centro Histórico do Porto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Centro Histórico do Porto engloba a Ribeira, a Sé, a Torre dos Clérigos, a Estação de São Bento e a escarpa do Douro.",
+    "fonte": "Município do Porto / UNESCO",
+    "factClusterId": "fc_pat_porto_01"
+  },
+  {
+    "id": "CULT_PAT_0013",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que cidade do Alentejo se situa o Centro Histórico classificado pela UNESCO em 1986, famoso pelo Templo Romano e pela Sé gótica?",
+    "opcoes": [
+      "Évora",
+      "Beja",
+      "Portalegre",
+      "Mértola"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Centro Histórico de Évora (cidade-museu) preserva vestígios romanos, mouriscos, manuelinos e renascentistas intactos dentro da muralha.",
+    "fonte": "Município de Évora / UNESCO",
+    "factClusterId": "fc_pat_evora_01"
+  },
+  {
+    "id": "CULT_PAT_0014",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que mosteiro cisterciense do século XII, mandado fundar por D. Afonso Henriques em 1153 e que guarda os túmulos góticos de D. Pedro e D. Inês de Castro, é Património Mundial da UNESCO desde 1989?",
+    "opcoes": [
+      "Mosteiro de Tibães",
+      "Mosteiro de Alcobaça",
+      "Mosteiro de Santa Clara",
+      "Mosteiro de Lorvão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Real Abadia de Santa Maria de Alcobaça é a primeira e maior obra em estilo gótico primitivo em Portugal.",
+    "fonte": "Mosteiro de Alcobaça / DGPC",
+    "factClusterId": "fc_pat_alcobaca_01"
+  },
+  {
+    "id": "CULT_PAT_0015",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que convento templário de Tomar, fundado por D. Gualdim Pais em 1160 e célebre pela Janela Manuelina da Sala do Capítulo esculpida por Diogo de Arruda, foi classificado pela UNESCO em 1983?",
+    "opcoes": [
+      "Convento dos Capuchos",
+      "Convento de São Francisco",
+      "Convento de Cristo",
+      "Convento de Mafra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Convento de Cristo em Tomar serviu de sede aos Templários e à Ordem de Cristo, albergando a famosa Charola octogonal românica.",
+    "fonte": "DGPC / Convento de Cristo",
+    "factClusterId": "fc_pat_conventocristo_01"
+  },
+  {
+    "id": "CULT_PAT_0016",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que mosteiro dominicano mandado erguer por D. João I para cumprir o voto feito a Nossa Senhora antes da Batalha de Aljubarrota é Património Mundial da UNESCO desde 1983?",
+    "opcoes": [
+      "Mosteiro dos Jerónimos",
+      "Mosteiro de Jesus de Setúbal",
+      "Mosteiro de Odivelas",
+      "Mosteiro da Batalha (Santa Maria da Vitória)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Mosteiro da Batalha combina gótico flamejante e manuelino, albergando as Capelas Imperfeitas e o túmulo do Soldado Desconhecido.",
+    "fonte": "Mosteiro da Batalha / UNESCO",
+    "factClusterId": "fc_pat_batalha_01"
+  },
+  {
+    "id": "CULT_PAT_0017",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que arte tradicional de caça com aves de rapina (falcões e açores), praticada historicamente em Salvaterra de Magos, foi reconhecida pela UNESCO como Património Cultural Imaterial em 2016?",
+    "opcoes": [
+      "Falcoaria Portuguesa",
+      "Montería",
+      "Coudelaria Real",
+      "Toureio a cavalo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Falcoaria Real de Salvaterra de Magos mantém viva a secular arte da criação e treino de aves de presa para a caça sustentável.",
+    "fonte": "Município de Salvaterra de Magos / UNESCO",
+    "factClusterId": "fc_pat_falcoaria_01"
+  },
+  {
+    "id": "CULT_PAT_0018",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que tradição artesanal de modelação de barro policromado, típica do concelho de Estremoz desde o século XVII («Bonecos de Estremoz»), foi inscrita pela UNESCO em 2017?",
+    "opcoes": [
+      "Olaria de Nisa",
+      "Produção de Figurado em Barro de Estremoz",
+      "Louça Preta de Bisalhães",
+      "Barro de Barcelos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Os Bonecos de Estremoz representam figuras etnográficas, religiosas e profissões tradicionais do Alentejo.",
+    "fonte": "Museu Municipal de Estremoz / UNESCO",
+    "factClusterId": "fc_pat_estremoz_01"
+  },
+  {
+    "id": "CULT_PAT_0019",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que processo artesanal ancestral de cozedura redutora de cerâmica em fornos abertos na terra («Processo de Fabrico da Louça Preta de Bisalhães») foi inscrito pela UNESCO em 2016?",
+    "opcoes": [
+      "Louça de Coimbra",
+      "Faiança de Viana",
+      "Louça de Bisalhães (Vila Real)",
+      "Porcelana de Vista Alegre"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Bisalhães, no concelho de Vila Real, produz peças pretas com cinza e terra (soenga), inscrita na lista de salvaguarda urgente da UNESCO.",
+    "fonte": "Município de Vila Real / UNESCO",
+    "factClusterId": "fc_pat_bisalhaes_01"
+  },
+  {
+    "id": "CULT_PAT_0020",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que festa carnavalesca tradicional de Trás-os-Montes, em que rapazes mascarados com fatos de franjas de lã coloridas e chocalhos saem à rua, foi declarada Património da UNESCO em 2019?",
+    "opcoes": [
+      "Festa dos Tabuleiros",
+      "Festa das Cruzes",
+      "Festa da Coca de Monção",
+      "Entrudo Chocalheiro dos Caretos de Podence"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Caretos de Podence (Macedo de Cavaleiros) celebram o ritual pagão de passagem e fertilidade no Carnaval transmontano.",
+    "fonte": "Associação dos Caretos de Podence / UNESCO",
+    "factClusterId": "fc_pat_podence_unesco_01"
+  },
+  {
+    "id": "CULT_PAT_0021",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que padrão alimentar e estilo de vida saudável partilhado por Portugal, com destaque para a comunidade representativa de Tavira no Algarve, é Património Imaterial da UNESCO desde 2013?",
+    "opcoes": [
+      "Dieta Mediterrânica",
+      "Dieta Atlântica",
+      "Cozinha Conventual",
+      "Gastronomia Litoral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Dieta Mediterrânica engloba o consumo de azeite, peixe, produtos hortícolas, cereais, convívio à mesa e respeito pela sazonalidade.",
+    "fonte": "Município de Tavira / UNESCO",
+    "factClusterId": "fc_pat_dietamediterranica_01"
+  },
+  {
+    "id": "CULT_PAT_0022",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que arte secular de fundição e afinação manual de artefactos metálicos para o gado, com polo histórico em Alcáçovas (Viana do Alentejo), foi declarada Património da UNESCO em 2015?",
+    "opcoes": [
+      "Filigrana de Gondomar",
+      "Manufatura de Chocalhos (Arte Chocalheira)",
+      "Cutelaria de Guimarães",
+      "Ferraria de Tomar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Arte Chocalheira é um ofício tradicional dos mestres chocalheiros para identificar e orientar os rebanhos nos campos do Alentejo.",
+    "fonte": "Turismo do Alentejo / Município de Viana do Alentejo",
+    "factClusterId": "fc_pat_chocalhos_01"
+  },
+  {
+    "id": "CULT_PAT_0023",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que festividade comunitária do concelho de Campo Maior, em que os moradores decoram voluntariamente as ruas com milhares de flores feitas à mão em papel, foi inscrita pela UNESCO em 2021?",
+    "opcoes": [
+      "Festa dos Tabuleiros de Tomar",
+      "Festa da Flor do Funchal",
+      "Festas do Povo de Campo Maior (Festas das Flores)",
+      "Romaria da Senhora da Agonia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Festas do Povo de Campo Maior transformam a vila alentejana num jardim mágico com flores de papel confecionadas em segredo pelos vizinhos.",
+    "fonte": "Município de Campo Maior / UNESCO",
+    "factClusterId": "fc_pat_campomaior_01"
+  },
+  {
+    "id": "CULT_PAT_0024",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que biblioteca barroca da Universidade de Coimbra, construída no reinado de D. João V com talha dourada e tetos pintados em trompe-l'œil, é uma das jóias do Património Mundial da UNESCO?",
+    "opcoes": [
+      "Biblioteca do Convento de Mafra",
+      "Biblioteca Pública de Évora",
+      "Biblioteca Geral da Universidade",
+      "Biblioteca Joanina"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Biblioteca Joanina acolhe mais de 60.000 volumes antigos e conserva uma colónia de morcegos que protege os livros dos insetos xilófagos.",
+    "fonte": "Universidade de Coimbra",
+    "factClusterId": "fc_pat_joanina_01"
+  },
+  {
+    "id": "CULT_PAT_0025",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "A Janela do Capítulo do Convento de Cristo em Tomar, expoente do estilo Manuelino e Património da UNESCO, apresenta elementos escultóricos decorativos alusivos a:",
+    "opcoes": [
+      "Cordas marítimas, nós de marinheiro, algas, troncos e a Cruz de Cristo",
+      "Mitologia clássica grega",
+      "Batalhas romanas",
+      "Instrumentos musicais barrocos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A janela manuelina criada por Diogo de Arruda em 1510 condensa o imaginário dos Descobrimentos marítimos portugueses.",
+    "fonte": "DGPC / Convento de Cristo",
+    "factClusterId": "fc_pat_janelacap_01"
+  },
+  {
+    "id": "CULT_PAT_0026",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que concelho ribatejano se situa a Quinta da Golegã e os centros equestres que sustentam a candidatura da Equitação Tradicional Portuguesa à UNESCO?",
+    "opcoes": [
+      "Santarém",
+      "Golegã",
+      "Chamusca",
+      "Cartaxo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Golegã é o epicentro da cultura do Cavalo Lusitano e da arte equestre tradicional portuguesa.",
+    "fonte": "Município da Golegã / Escola Portuguesa de Arte Equestre",
+    "factClusterId": "fc_pat_equitacao_01"
+  },
+  {
+    "id": "CULT_PAT_0027",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que templo de ordem coríntia erguido no século I d.C. é o mais célebre monumento romano preservado no Centro Histórico de Évora (Património UNESCO)?",
+    "opcoes": [
+      "Termas de São Pedro",
+      "Templo de Marte",
+      "Templo Romano de Évora (Templo de Diana)",
+      "Templo de Júpiter"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Templo Romano de Évora, com 14 colunas de mármore e granito de Estremoz, resistiu intacto no centro do fórum romano de Liberalitas Julia.",
+    "fonte": "DGPC / Município de Évora",
+    "factClusterId": "fc_pat_temploevora_01"
+  },
+  {
+    "id": "CULT_PAT_0028",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "A Torre de Belém, erguida entre 1514 e 1520 pelo arquiteto Francisco de Arruda no estuário do Tejo, tinha como orago oficial o nome de:",
+    "opcoes": [
+      "Torre de São Jorge",
+      "Torre de Santa Maria",
+      "Torre de São Sebastião",
+      "Torre de São Vicente de Belém"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Torre de Belém foi dedicada a São Vicente, padroeiro de Lisboa, para defender a barra do Tejo com uma bateria de artilharia naval moderna.",
+    "fonte": "DGPC / Torre de Belém",
+    "factClusterId": "fc_pat_torrebelem_01"
+  },
+  {
+    "id": "CULT_PAT_0029",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que castelo românico erigido no século X pela Condessa Mumadona Dias domina o Centro Histórico de Guimarães (Património Mundial)?",
+    "opcoes": [
+      "Castelo de Guimarães",
+      "Castelo de Lanhoso",
+      "Castelo de Santa Maria da Feira",
+      "Castelo de Bragança"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Guimarães protegeu o mosteiro fundado por Mumadona Dias e serviu de residência aos condes D. Henrique e D. Teresa.",
+    "fonte": "Paço dos Duques / DGPC",
+    "factClusterId": "fc_pat_casteloguimaraes_01"
+  },
+  {
+    "id": "CULT_PAT_0030",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que palácio neogótico e romântico, mandado construir pelo milionário António Augusto Carvalho Monteiro com projeto do arquiteto Luigi Manini, integra o Património UNESCO de Sintra?",
+    "opcoes": [
+      "Palácio de Monserrate",
+      "Quinta da Regaleira",
+      "Palácio de Seteais",
+      "Chalet da Condessa d'Edla"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Quinta da Regaleira é famosa pelos seus jardins iniciáticos, grutas subterrâneas e pelo monumental Poço Iniciático em espiral.",
+    "fonte": "Fundação Cultursintra / Parques de Sintra",
+    "factClusterId": "fc_pat_regaleira_01"
+  },
+  {
+    "id": "CULT_PAT_0031",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que igreja barroca do Porto, projetada pelo arquiteto italiano Nicolau Nasoni entre 1732 e 1763 com uma torre sineira de 75 metros, integra a zona histórica classificada pela UNESCO?",
+    "opcoes": [
+      "Igreja de São Francisco",
+      "Igreja da Lapa",
+      "Igreja e Torre dos Clérigos",
+      "Igreja de Santo Ildefonso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Torre dos Clérigos é o ex-líbris do Porto e um dos mais notáveis exemplares do barroco granítico de Nasoni.",
+    "fonte": "Irmandade dos Clérigos / DGPC",
+    "factClusterId": "fc_pat_clerigos_01"
+  },
+  {
+    "id": "CULT_PAT_0032",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "A Floresta Laurissilva da ilha da Madeira, Património Mundial Natural da UNESCO, destaca-se por abrigar árvores autóctones raras como o til, o vinhático, o barbusano e o:",
+    "opcoes": [
+      "Sobreiro",
+      "Eucalipto",
+      "Pinheiro manso",
+      "Loureiro da Madeira (Laurus novocanariensis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Laurissilva macaronésica da Madeira é uma floresta húmida subtropical com árvores centenárias e elevada taxa de endemismos botânicos e animais.",
+    "fonte": "IFCN Madeira / UNESCO",
+    "factClusterId": "fc_pat_laurissilva_flora_01"
+  },
+  {
+    "id": "CULT_PAT_0033",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que forte seiscentista em forma de estrela de cinco pontas, situado na colina a norte de Elvas (Património UNESCO), é considerado uma obra-prima da arquitetura militar abaluartada?",
+    "opcoes": [
+      "Forte de Nossa Senhora da Graça (Forte de Lippe)",
+      "Forte de Santa Luzia",
+      "Forte de São Lourenço",
+      "Forte de São Pedro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Forte da Graça foi construído pelo conde de Lippe no século XVIII com três corpos defensivos e cisterna monumental.",
+    "fonte": "Município de Elvas / Exército Português",
+    "factClusterId": "fc_pat_fortedagraca_01"
+  },
+  {
+    "id": "CULT_PAT_0034",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que carrilhão monumental de sinos, composto por dois carrilhões de 98 sinos fundidos em Antuérpia e Liège no século XVIII, faz parte do Palácio de Mafra (Património UNESCO)?",
+    "opcoes": [
+      "Carrilhões de Coimbra",
+      "Carrilhões Históricos de Mafra",
+      "Sinos de Braga",
+      "Carrilhão dos Jerónimos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Os carrilhões de Mafra constituem o maior conjunto histórico de carrilhões afinados do século XVIII existente no mundo.",
+    "fonte": "Palácio Nacional de Mafra / DGPC",
+    "factClusterId": "fc_pat_carrilhoes_01"
+  },
+  {
+    "id": "CULT_PAT_0035",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que rio afluente do Douro se localiza o Parque Arqueológico do Vale do Côa, Património Mundial da UNESCO?",
+    "opcoes": [
+      "Rio Tua",
+      "Rio Sabor",
+      "Rio Côa",
+      "Rio Corgo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O rio Côa nasce na Serra das Mesas (Sabugal) e corre para norte até desaguar no Douro junto a Vila Nova de Foz Côa.",
+    "fonte": "Fundação Côa Parque",
+    "factClusterId": "fc_pat_riocoa_01"
+  },
+  {
+    "id": "CULT_PAT_0036",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que monumento funerário do Mosteiro de Alcobaça (UNESCO) exibe a célebre inscrição «Até ao Fim do Mundo» e a rosácea da Roda da Vida?",
+    "opcoes": [
+      "Túmulo de D. Fernando I",
+      "Túmulo de D. Dinis",
+      "Túmulo de D. Afonso II",
+      "Túmulo de D. Pedro I"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O túmulo gótico de D. Pedro I em Alcobaça é amparado por seis cães alões e retrata a história do seu amor por D. Inês de Castro.",
+    "fonte": "Mosteiro de Alcobaça / DGPC",
+    "factClusterId": "fc_pat_tumulopedro_01"
+  },
+  {
+    "id": "CULT_PAT_0037",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que sala de exames solenes da Universidade de Coimbra (Património UNESCO), antiga Sala dos Capelos do Paço Real da Alcáçova, acolhe as cerimónias de Doutoramento Honoris Causa?",
+    "opcoes": [
+      "Sala dos Capelos (Grande Sala dos Actos)",
+      "Sala do Senado",
+      "Sala das Armas",
+      "Sala Amarela"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Sala dos Capelos é o espaço mais nobre da Universidade de Coimbra, com teto de madeira de mancebia pintado e retratos de todos os reis de Portugal.",
+    "fonte": "Universidade de Coimbra",
+    "factClusterId": "fc_pat_capelos_01"
+  },
+  {
+    "id": "CULT_PAT_0038",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que palácio renascentista e gótico do século XV, mandado construir por D. Afonso (1.º Duque de Bragança) junto ao castelo, é uma das grandes atrações de Guimarães (UNESCO)?",
+    "opcoes": [
+      "Paço dos Condes de Barcelos",
+      "Paço dos Duques de Bragança",
+      "Palácio de Vila Flor",
+      "Paço de São Cipriano"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Paço dos Duques de Bragança possui 39 chaminés cilíndricas de tijolo e magníficos tetos de madeira em casco de navio invertido.",
+    "fonte": "Paço dos Duques de Bragança / DGPC",
+    "factClusterId": "fc_pat_pacoduques_01"
+  },
+  {
+    "id": "CULT_PAT_0039",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que estrutura militar de traçado renascentista e baluartes protege a Baía de Angra do Heroísmo na ilha Terceira (Património UNESCO)?",
+    "opcoes": [
+      "Forte de São Sebastião",
+      "Forte das Cinco Ribeiras",
+      "Fortaleza de São João Baptista do Monte Brasil",
+      "Forte de Santa Catarina"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Fortaleza de São João Baptista no Monte Brasil é a maior fortificação construída pela monarquia filipina no mundo (século XVI).",
+    "fonte": "Governo Regional dos Açores / Exército",
+    "factClusterId": "fc_pat_montebrasil_01"
+  },
+  {
+    "id": "CULT_PAT_0040",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que convento feminino histórico no Centro Histórico de Évora (UNESCO), com uma fachada de colunas góticas e renascentistas, abriga a famosa Lenda do Amor Proibido?",
+    "opcoes": [
+      "Convento dos Lóios",
+      "Convento de São Bento de Cástris",
+      "Convento da Graça",
+      "Convento de Santa Clara de Évora"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "O Convento de Santa Clara e o Convento dos Lóios fazem parte do tecido monumental quinhentista de Évora.",
+    "fonte": "Município de Évora",
+    "factClusterId": "fc_pat_conventos_evora_01"
+  },
+  {
+    "id": "CULT_PAT_0041",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que aqueduto monumental renascentista de quatro ordens de arcadas sobrepostas, construído pelo arquiteto Francisco de Arruda entre 1530 e 1622, abastece a cidade de Elvas (UNESCO)?",
+    "opcoes": [
+      "Aqueduto da Amoreira",
+      "Aqueduto das Águas Livres",
+      "Aqueduto de São Sebastião",
+      "Aqueduto dos Pegões"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Aqueduto da Amoreira possui 8,5 km de extensão e mais de 800 arcos, considerado o maior aqueduto da Península Ibérica.",
+    "fonte": "Município de Elvas / DGPC",
+    "factClusterId": "fc_pat_amoreira_01"
+  },
+  {
+    "id": "CULT_PAT_0042",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que nave gótica da Sé Catedral de Évora (Património UNESCO), a maior catedral medieval de Portugal, apresenta a rara imagem de:",
+    "opcoes": [
+      "São Bartolomeu",
+      "Nossa Senhora do Ó (Nossa Senhora Grávida)",
+      "São Miguel Arcanjo",
+      "Nossa Senhora da Piedade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Sé de Évora guarda uma estátua gótica de calcário policromado do século XV de Nossa Senhora do Ó em adiantado estado de gravidez.",
+    "fonte": "Sé de Évora / Cabido da Sé",
+    "factClusterId": "fc_pat_seevora_01"
+  },
+  {
+    "id": "CULT_PAT_0043",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que portal manuelino monumental e inacabado, com profusa decoração vegetalista de pedra rendilhada, se destaca no Mosteiro da Batalha (Património UNESCO)?",
+    "opcoes": [
+      "Claustro Real",
+      "Sala do Capítulo",
+      "Capelas Imperfeitas (Panteão de D. Duarte)",
+      "Capela do Fundador"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O portal das Capelas Imperfeitas, desenhado por Mateus Fernandes, é uma das maiores obras-primas da escultura gótico-manuelina.",
+    "fonte": "Mosteiro da Batalha / DGPC",
+    "factClusterId": "fc_pat_capelasimperfeitas_01"
+  },
+  {
+    "id": "CULT_PAT_0044",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Em que igreja de Lisboa repousam os restos mortais do navegador Vasco da Gama e do poeta Luís Vaz de Camões (Património UNESCO)?",
+    "opcoes": [
+      "Igreja de Santa Engrácia (Panteão Nacional)",
+      "Sé Patriarcal de Lisboa",
+      "Igreja de São Roque",
+      "Igreja de Santa Maria de Belém (Mosteiro dos Jerónimos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os túmulos neomanuelinos de Vasco da Gama e de Luís de Camões encontram-se na nave do Mosteiro dos Jerónimos.",
+    "fonte": "Mosteiro dos Jerónimos / DGPC",
+    "factClusterId": "fc_pat_camoesgama_01"
+  },
+  {
+    "id": "CULT_PAT_0045",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que famoso funicular de passageiros do Bom Jesus do Monte em Braga (UNESCO), inaugurado em 1882, é o mais antigo do mundo a funcionar em contrapeso de água?",
+    "opcoes": [
+      "Elevador do Bom Jesus",
+      "Elevador da Glória",
+      "Elevador de Santa Justa",
+      "Elevador da Bica"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Elevador do Bom Jesus utiliza tanques de água como contrapeso hidromecânico, descendo um carro enquanto puxa o outro por gravidade.",
+    "fonte": "Confraria do Bom Jesus do Monte",
+    "factClusterId": "fc_pat_elevadorbomjesus_01"
+  },
+  {
+    "id": "CULT_PAT_0046",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que capela revestida com ossos e crânios humanos na Igreja de São Francisco de Évora (UNESCO) ostenta à entrada a advertência «Nós ossos que aqui estamos pelos vossos esperamos»?",
+    "opcoes": [
+      "Capela das Almas",
+      "Capela dos Ossos de Évora",
+      "Capela dos Milagres",
+      "Capela dos Mortos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Capela dos Ossos de Évora foi edificada no século XVII por frades franciscanos para transmitir uma reflexão sobre a transitoriedade da vida humana.",
+    "fonte": "Igreja de São Francisco de Évora",
+    "factClusterId": "fc_pat_capelaossos_01"
+  },
+  {
+    "id": "CULT_PAT_0047",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que palácio nacional no centro histórico da vila de Sintra (UNESCO) é imediatamente reconhecido pelas suas duas monumentais chaminés cónicas brancas de 33 metros?",
+    "opcoes": [
+      "Palácio Nacional da Pena",
+      "Palácio de Monserrate",
+      "Palácio Nacional de Sintra (Palácio da Vila)",
+      "Palácio de Seteais"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Palácio da Vila foi residência da família real portuguesa desde o século XII, exibindo as famosas chaminés da grande cozinha régia.",
+    "fonte": "Parques de Sintra / Palácio Nacional de Sintra",
+    "factClusterId": "fc_pat_palaciosintra_01"
+  },
+  {
+    "id": "CULT_PAT_0048",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que praça medieval cercada por arcadas renascentistas e casas senhoriais é o coração cívico do Centro Histórico de Guimarães (UNESCO)?",
+    "opcoes": [
+      "Praça do Giraldo",
+      "Praça da Batalha",
+      "Praça do Comércio",
+      "Largo da Oliveira e Praça de São Tiago"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Largo da Oliveira abriga a Igreja de Nossa Senhora da Oliveira e o Padrão do Salado erigido por D. Afonso IV em 1342.",
+    "fonte": "Município de Guimarães",
+    "factClusterId": "fc_pat_largooliveira_01"
+  },
+  {
+    "id": "CULT_PAT_0049",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que jardim botânico exótico com espécies dos cinco continentes envolve o palácio neogótico e oriental de Monserrate em Sintra (UNESCO)?",
+    "opcoes": [
+      "Parque de Monserrate",
+      "Jardim da Pena",
+      "Jardim Botânico de Lisboa",
+      "Parque da Gandarinha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Parque de Monserrate foi criado por Sir Francis Cook com árvores de climas tropicais, bambuzais, fetos arbóreos e cascata de água.",
+    "fonte": "Parques de Sintra",
+    "factClusterId": "fc_pat_monserrate_01"
+  },
+  {
+    "id": "CULT_PAT_0050",
+    "tema": "Cultura",
+    "subtema": "Património da Humanidade",
+    "pergunta": "Que documento histórico de D. Afonso Henriques outorgado aos cidadãos de Guimarães em 1128 é conservado no arquivo municipal e evocado no Património Mundial da cidade?",
+    "opcoes": [
+      "Carta de Doação de Zamora",
+      "Bula Papal",
+      "Foral de Guimarães",
+      "Tratado de Paz de Tui"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O foral concedido pelo conde D. Henrique e confirmado por D. Afonso Henriques assegurava privilégios aos burgueses e artesãos vimaranenses.",
+    "fonte": "Arquivo Municipal Alfredo Pimenta de Guimarães",
+    "factClusterId": "fc_pat_foralguimaraes_01"
+  }
+]

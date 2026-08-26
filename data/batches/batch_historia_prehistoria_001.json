@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_PRE_0001",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que monumental sítio arqueológico pré-histórico no concelho de Évora («Cromeleque dos Almendres»), composto por cerca de 95 monólitos erguidos em recinto elíptico há cerca de 7.000 anos (Neolítico/Calcolítico), é o maior recinto megalítico da Península Ibérica e um dos mais antigos do mundo?",
+    "opcoes": [
+      "Cromeleque dos Almendres (Guadalupe, Évora)",
+      "Anta Grande do Zambujeiro",
+      "Menir da Meada",
+      "Cromeleque do Vale Maria do Meio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cromeleque dos Almendres foi construído cerca de 2.000 anos antes de Stonehenge (Reino Unido) e alinhado com os solstícios e equinócios astronómicos.",
+    "fonte": "DGPC / Museu Nacional de Arqueologia / Câmara Municipal de Évora",
+    "factClusterId": "fc_hist_pre_almendres_megalitico_01"
+  },
+  {
+    "id": "HIST_PRE_0002",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que extraordinário complexo de gravuras paleolíticas ao ar livre situado nas margens do rio Côa (Vila Nova de Foz Côa), com figuras gravadas de cavalos, auroques, cabras e veados de há 25.000 a 10.000 anos, foi classificado como Património Mundial da UNESCO em 1998 sob o lema «As gravuras não sabem nadar»?",
+    "opcoes": [
+      "Gruta do Escoural",
+      "Parque Arqueológico do Vale do Côa",
+      "Arte Rupestre do Tejo",
+      "Gruta da Aroeira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A descoberta do Vale do Côa em 1994 travou a construção de uma barragem hidroelétrica e salvou o maior museu de arte rupestre ao ar livre do mundo.",
+    "fonte": "Fundação Côa Parque / UNESCO / Museu do Côa",
+    "factClusterId": "fc_hist_pre_valedocoa_unesco_01"
+  },
+  {
+    "id": "HIST_PRE_0003",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que excecional esqueleto infantil fóssil do Paleolítico Superior (com cerca de 24.500 anos) descoberto no abrigo do Lagar Velho no Vale do Lapedo (Leiria) em 1998 por João Zilhão («O Menino do Lapedo»), forneceu a primeira prova fóssil mundial de hibridação entre Homo sapiens e Neandertais?",
+    "opcoes": [
+      "O Crânio da Aroeira",
+      "O Homem de Grimaldi",
+      "O Menino do Lapedo (Homo sapiens / Neandertal)",
+      "O Homem de Neanderthal da Furninha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Menino do Lapedo foi sepultado ritualmente com ocre vermelho, um pendente de concha furada e pernas com proporções neandertais.",
+    "fonte": "Museu de Leiria / Museu Nacional de Arqueologia / PNAS",
+    "factClusterId": "fc_hist_pre_meninodolapedo_leiria_01"
+  },
+  {
+    "id": "HIST_PRE_0004",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que crânio fóssil humano completo com cerca de 400.000 anos de idade descoberto na Gruta da Aroeira (Torres Novas) no sistema cársico do Almonda em 2014, associado a machados de mão acheulenses e vestígios de fogo («Crânio da Aroeira»), é o mais antigo fóssil humano encontrado em Portugal?",
+    "opcoes": [
+      "Menino do Lapedo",
+      "Mandíbula de Bañolas",
+      "Homem da Capelinha",
+      "Crânio da Aroeira 3 (Homo heidelbergensis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Crânio da Aroeira pertence à espécie Homo heidelbergensis (antepassado direto dos Neandertais) e encontra-se depositado no Museu Nacional de Arqueologia.",
+    "fonte": "Museu Nacional de Arqueologia / PNAS / Universidade de Lisboa",
+    "factClusterId": "fc_hist_pre_cranioaroeira_400mil_01"
+  },
+  {
+    "id": "HIST_PRE_0005",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Qual é o maior menir megalítico isolado de toda a Península Ibérica, com 7,15 metros de altura e cerca de 18 toneladas de peso, situado no concelho de Castelo Branco / Castelo de Vide (Portalegre)?",
+    "opcoes": [
+      "Menir da Meada (Castelo de Vide)",
+      "Menir dos Almendres",
+      "Menir de Bulhoa",
+      "Menir de Outeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Menir da Meada foi erguido no Neolítico e é o mais alto monólito fálico preservado no sudoeste europeu.",
+    "fonte": "DGPC / Município de Castelo de Vide",
+    "factClusterId": "fc_hist_pre_menirdameada_01"
+  },
+  {
+    "id": "HIST_PRE_0006",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que célebre monumento funerário megalítico (dólmen de corredor) situado na freguesia de Nossa Senhora da Tourega (Évora), com uma câmara poligonal de 8 metros de altura e corredor de 12 metros («Anta Grande do Zambujeiro»), é um dos maiores dólmenes da Europa?",
+    "opcoes": [
+      "Anta da Comenda da Igreja",
+      "Anta Grande do Zambujeiro",
+      "Anta de Pavia",
+      "Dólmen de Carapito"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Anta Grande do Zambujeiro serviu de necrópole coletiva sagrada no quarto milénio a.C. com ricos espólios de machados de pedra polida e placas de xisto gravadas.",
+    "fonte": "DGPC / Museu Nacional de Arqueologia",
+    "factClusterId": "fc_hist_pre_antazambujeiro_01"
+  },
+  {
+    "id": "HIST_PRE_0007",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que gruta natural no concelho de Montemor-o-Novo (Évora), descoberta acidentalmente em 1963 durante a extração de rocha para uma pedreira («Gruta do Escoural»), preserva o único santuário com pinturas rupestres a ocre e carvão e gravuras do Paleolítico Superior em gruta profunda no Alentejo?",
+    "opcoes": [
+      "Gruta da Furninha",
+      "Gruta do Almonda",
+      "Gruta do Escoural",
+      "Gruta da Salemas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Gruta do Escoural possui representações de cavalos e motivos geométricos sagrados com mais de 15.000 anos.",
+    "fonte": "DGPC / Município de Montemor-o-Novo",
+    "factClusterId": "fc_hist_pre_grutadoescoural_01"
+  },
+  {
+    "id": "HIST_PRE_0008",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que lendário chefe guerreiro e pastor lusitano (c. 180-139 a.C.), nascido na Serra da Estrela (Montes Hermínios), liderou a resistência da confederação dos povos lusitanos derrotando sucessivos exércitos da República Romana durante as Guerras Lusitanas?",
+    "opcoes": [
+      "Púnico",
+      "Cauceno",
+      "Tautalo",
+      "Viriato (Dux Lusitanorum)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Viriato utilizava táticas brilhantes de guerrilha e emboscada ('guerra de surpresa') sendo chamado pelos historiadores romanos de terror das legiões.",
+    "fonte": "Dicionário de História de Portugal / Tito Lívio / Apiano",
+    "factClusterId": "fc_hist_pre_viriato_lusitano_01"
+  },
+  {
+    "id": "HIST_PRE_0009",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Como morreu o líder guerreiro lusitano Viriato em 139 a.C., após resistir invicto aos exércitos de Roma durante mais de uma década?",
+    "opcoes": [
+      "Assassinado à traição durante o sono pelos seus emissários Audax, Ditalco e Minuro (subornados pelo general romano Servílio Cipião)",
+      "Morto em combate na Batalha de Numância",
+      "Capturado e executado em Roma no Fórum Romano",
+      "Envenenado num banquete em Olissipo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Quando os três traidores foram a Roma pedir a recompensa prometida, o cônsul Cipião respondeu com a célebre frase: 'Roma non praemiis traditores' (Roma não paga a traidores).",
+    "fonte": "Apiano (Iberike) / História de Roma",
+    "factClusterId": "fc_hist_pre_morte_viriato_traidores_01"
+  },
+  {
+    "id": "HIST_PRE_0010",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante citânia e povoado fortificado da Cultura Castreja do noroeste peninsular (situado em Sanfins de Ferreira, Paços de Ferreira), com mais de 15 hectares e quatro linhas de muralhas concêntricas («Citânia de Sanfins»), preserva uma monumental «Pedra Formosa» no balneário castrejo?",
+    "opcoes": [
+      "Citânia de Briteiros",
+      "Citânia de Sanfins",
+      "Castro de Santa Trega",
+      "Castro de Romariz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O balneário castrejo e a Pedra Formosa serviam para banhos de vapor e rituais de purificação e iniciação guerreira dos povos galaico-lusitanos.",
+    "fonte": "Museu Arqueológico da Citânia de Sanfins / DGPC",
+    "factClusterId": "fc_hist_pre_citaniadesanfins_01"
+  },
+  {
+    "id": "HIST_PRE_0011",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que emblemática citânia da Idade do Ferro escavada no século XIX pelo pioneiro arqueólogo Francisco Martins Sarmento em São Salvador de Briteiros (Guimarães), com dezenas de casas circulares de pedra com átrio e muralhas fortificadas («Citânia de Briteiros»), é o maior símbolo da cultura castreja?",
+    "opcoes": [
+      "Citânia de Sanfins",
+      "Castro de São Lourenço",
+      "Citânia de Briteiros",
+      "Castro de Alvarelhos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Citânia de Briteiros foi habitada até à época da romanização preservando pedras formosas e inscrições epigráficas latinas.",
+    "fonte": "Sociedade Martins Sarmento / DGPC",
+    "factClusterId": "fc_hist_pre_citaniadebriteiros_01"
+  },
+  {
+    "id": "HIST_PRE_0012",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Qual é a mais famosa e monumental cidade romana escavada em Portugal, situada em Condeixa-a-Nova (Coimbra), célebre pela sua magnífica «Casa dos Repuxos» (com jardins de mais de 500 jatos de água e mosaicos intactos dos quatro elementos e estações do ano) e muralhas tardo-romanas?",
+    "opcoes": [
+      "Miróbriga",
+      "Tongóbriga",
+      "Ammaia",
+      "Conímbriga (Conimbriga)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Conímbriga possui termas públicas grandiosas, fórum augustano e o Museu Monográfico de Conímbriga (Museu Nacional).",
+    "fonte": "Museu Nacional de Conímbriga / DGPC",
+    "factClusterId": "fc_hist_pre_conimbriga_repuxos_01"
+  },
+  {
+    "id": "HIST_PRE_0013",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que icónico monumento romano de cantaria do século I d.C. situado no Largo Conde de Vila Flor em Évora (Património Mundial da UNESCO), com 14 colunas coríntias em mármore de Estremoz sobre pódio de granito, é erradamente conhecido na tradição popular como «Templo de Diana»?",
+    "opcoes": [
+      "Templo Romano de Évora (Templo do Culto Imperial / Liberalitas Iulia)",
+      "Templo de Baco",
+      "Templo de Júpiter de Conímbriga",
+      "Templo de Milreu"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O templo romano de Évora foi dedicado ao culto imperial de Augusto e serviu de casa-forte e matadouro na Idade Média o que garantiu a sua sobrevivência.",
+    "fonte": "DGPC / UNESCO / Museu de Évora",
+    "factClusterId": "fc_hist_pre_templodeevora_01"
+  },
+  {
+    "id": "HIST_PRE_0014",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante estação arqueológica romana no concelho de Santiago do Cacém (Setúbal), Miróbriga («Miróbriga dos Célticos»), preserva o único exemplar completo e identificado de um circuito de corridas de bigas romano em território português:",
+    "opcoes": [
+      "Coliseu de Miróbriga",
+      "Circo Romano / Hipódromo de Miróbriga",
+      "Anfiteatro de Conímbriga",
+      "Naumaquia de Olissipo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Miróbriga possui um hipódromo com 370 metros de comprimento, fórum imperial com templo duplo e termas este e oeste.",
+    "fonte": "DGPC / Estação Arqueológica de Miróbriga",
+    "factClusterId": "fc_hist_pre_mirobriga_hipodromo_01"
+  },
+  {
+    "id": "HIST_PRE_0015",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Qual era a principal indústria e produto exportado em grande escala por barco para todo o Império Romano a partir do estuário do Sado e da Península de Troia (o maior centro industrial de salga do mundo romano)?",
+    "opcoes": [
+      "Azeite de talha",
+      "Vinho licoroso",
+      "«Garum» (pasta/molho de peixe fermentado) e conserva de peixe salgado em ânforas",
+      "Sal-gema"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Ruínas Romanas de Troia conservam dezenas de tanques (cetárias) onde o garum lusitano de excelência era produzido para Roma e Pompeia.",
+    "fonte": "Ruínas Romanas de Troia / ICNF / DGPC",
+    "factClusterId": "fc_hist_pre_troia_garum_01"
+  },
+  {
+    "id": "HIST_PRE_0016",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que monumental villa romana de dois pisos situada no concelho da Vidigueira (Beja), com arcadas de tijolo e abóbadas que foram mais tarde transformadas num mosteiro medieval («Ruínas de São Cucufate»), é o mais impressionante exemplar de arquitetura residencial rústica romana de Portugal?",
+    "opcoes": [
+      "Villa Romana de Pisões",
+      "Villa Romana de Tourega",
+      "Villa Romana do Rabaçal",
+      "Villa Romana de São Cucufate"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "São Cucufate é uma villa com criptopórtico, lagares de azeite e termas que funcionou desde o século I ao período paleocristão e islâmico.",
+    "fonte": "DGPC / Museu Nacional de Arqueologia",
+    "factClusterId": "fc_hist_pre_saocucufate_vidigueira_01"
+  },
+  {
+    "id": "HIST_PRE_0017",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que sumptuosa villa romana situada na freguesia de Estoi (Faro), com magníficos mosaicos policromados de temática marinha (golfinhos e peixes), termas e um templo paleocristão que sobreviveu à passagem dos séculos («Ruínas Romanas de Milreu»), é:",
+    "opcoes": [
+      "Ruínas Romanas de Milreu (Estoi)",
+      "Ruínas de Abicada",
+      "Ruínas de Boca do Rio",
+      "Balsa romana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Milreu era o solar luxuoso de uma abastada família senatorial romana na Lusitânia meridional com culto das divindades da água.",
+    "fonte": "Direção Regional de Cultura do Algarve / DGPC",
+    "factClusterId": "fc_hist_pre_milreu_estoi_01"
+  },
+  {
+    "id": "HIST_PRE_0018",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que cidade romana no concelho de Marco de Canaveses (Freixo), povoada desde a Idade do Ferro até à Idade Média («Tongóbriga»), possui uma monumental área termal romana, fórum e necrópole com pedras funerárias?",
+    "opcoes": [
+      "Bracara Augusta",
+      "Tongóbriga (Freixo, Marco de Canaveses)",
+      "Caladunum",
+      "Aquae Flaviae"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Tongóbriga é uma cidade com mais de 50 hectares escavada pelo arqueólogo Lino Tavares Dias classificada como Monumento Nacional.",
+    "fonte": "DGPC / Área Arqueológica de Tongóbriga",
+    "factClusterId": "fc_hist_pre_tongobriga_marco_01"
+  },
+  {
+    "id": "HIST_PRE_0019",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que extraordinária estrutura subterrânea romana do século I d.C., construída sobre uma encosta íngreme para nivelar a colina e sustentar o Fórum da cidade de Aeminium (atual Coimbra), serve hoje de fundação ao Museu Nacional de Machado de Castro?",
+    "opcoes": [
+      "Termas do Fórum",
+      "Cisterna Tardo-Romana",
+      "Criptopórtico Romano de Coimbra (Aeminium)",
+      "Aqueduto de São Sebastião"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Criptopórtico de Aeminium é uma das maiores e mais bem conservadas galerias abobadadas de sustentação de fórum romano do mundo ocidental.",
+    "fonte": "Museu Nacional de Machado de Castro / DGPC",
+    "factClusterId": "fc_hist_pre_criptoportico_coimbra_01"
+  },
+  {
+    "id": "HIST_PRE_0020",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que monumento romano de espetáculos do século I a.C. construído na encosta sul do Castelo de São Jorge em Alfama (Lisboa) durante o governo de Augusto e reformado no tempo de Nero («Teatro Romano de Lisboa»), foi descoberto após o terramoto de 1755?",
+    "opcoes": [
+      "Anfiteatro da Baixa",
+      "Circo Máximo de Olissipo",
+      "Termas dos Cássios",
+      "Teatro Romano de Olissipo (Museu de Lisboa — Teatro Romano)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Teatro Romano de Lisboa podia acolher cerca de 4.000 espetadores e conserva as bancadas (cavea) e a orquestra em cantaria.",
+    "fonte": "Museu de Lisboa / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_hist_pre_teatroromano_lisboa_01"
+  },
+  {
+    "id": "HIST_PRE_0021",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que labirinto de galerias subterrâneas abobadadas romanas do século I d.C. sob a Baixa de Lisboa (Rua da Prata e Rua da Conceição), aberto ao público apenas uma ou duas vezes por ano devido ao nível da água («Galerias Romanas da Rua da Prata»), funcionava originalmente como:",
+    "opcoes": [
+      "Um Criptopórtico romano para criar uma plataforma plana e estável sobre o terreno lodoso do esteiro do Tejo",
+      "As catacumbas secretas dos cristãos",
+      "Os depósitos de ouro da Lusitânia",
+      "As prisões dos gladiadores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As galerias romanas garantiam a estabilidade dos grandes edifícios públicos da cidade romana de Olissipo junto ao rio.",
+    "fonte": "Museu de Lisboa / EGEAC / CML",
+    "factClusterId": "fc_hist_pre_galeriasromanas_ruadaprata_01"
+  },
+  {
+    "id": "HIST_PRE_0022",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que cidade alentejana («Beja») foi fundada em 48 a.C. por Júlio César com o estatuto de colónia de direito itálico com o nome latino de «Pax Julia» para celebrar a pacificação da Lusitânia?",
+    "opcoes": [
+      "Ebora Liberalitas Iulia (Évora)",
+      "Pax Julia (Beja)",
+      "Scallabis Praesidium Iulium (Santarém)",
+      "Myrtilis Iulia (Mértola)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pax Julia foi a capital de um dos três conventos jurídicos da província da Lusitânia (Conventus Pacensis).",
+    "fonte": "Museu Regional de Beja / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_paxjulia_beja_01"
+  },
+  {
+    "id": "HIST_PRE_0023",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que cidade romana no norte de Portugal («Bracara Augusta»), fundada pelo imperador Augusto em 16 a.C. para ser a capital do Conventus Bracaraugustanus e mais tarde capital da província romana da Gallaecia, deu origem à atual cidade de:",
+    "opcoes": [
+      "Bragança",
+      "Barcelos",
+      "Braga",
+      "Baião"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bracara Augusta era o ponto de convergência de cinco vias militares romanas e a cidade mais próspera do noroeste peninsular.",
+    "fonte": "Museu D. Diogo de Sousa (Braga) / Universidade do Minho",
+    "factClusterId": "fc_hist_pre_bracaraaugusta_braga_01"
+  },
+  {
+    "id": "HIST_PRE_0024",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que famosa via militar romana (Via XVIII do Itinerário de Antonino) atravessa o Parque Nacional da Peneda-Gerês ligando Bracara Augusta (Braga) a Asturica Augusta (Astorga, Espanha), conservando a maior concentração de marcos miliários romanos de toda a Europa («A Geira Romana»)?",
+    "opcoes": [
+      "A Via XVII",
+      "A Via XIX",
+      "A Via da Prata",
+      "A Geira Romana (Via Nova / Via XVIII)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Geira Romana no Gerês preserva mais de 200 miliários epigráficos dedicados aos imperadores romanos ao longo de 30 km.",
+    "fonte": "Parque Nacional da Peneda-Gerês / DGPC",
+    "factClusterId": "fc_hist_pre_geiraromana_geres_01"
+  },
+  {
+    "id": "HIST_PRE_0025",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que povo bárbaro germânico (fundador do primeiro reino bárbaro independente na Península Ibérica em 409 d.C.) estabeleceu a sua corte e capital em Bracara Augusta (Braga) sob a liderança do rei Hermerico?",
+    "opcoes": [
+      "Os Suevos (Reino Suevo)",
+      "Os Visigodos",
+      "Os Vândalos Asdingos",
+      "Os Alanos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Reino Suevo governou o noroeste ibérico durante quase dois séculos e converteu-se ao catolicismo sob a influência de São Martinho de Dume.",
+    "fonte": "Dicionário de História de Portugal / Arquidiocese de Braga",
+    "factClusterId": "fc_hist_pre_suevos_braga409_01"
+  },
+  {
+    "id": "HIST_PRE_0026",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que bispo e apóstolo de Dume (520-580 d.C.), nascido na Panónia e conselheiro dos reis suevos Teodomiro e Miro («São Martinho de Dume» / São Martinho de Braga), converteu os suevos do arianismo e aboliu os nomes pagãos dos dias da semana em português (adotando segunda-feira, terça-feira, etc.)?",
+    "opcoes": [
+      "São Frutuoso de Montélios",
+      "São Martinho de Dume (São Martinho de Braga)",
+      "Santo Agostinho",
+      "Santo Isidoro de Sevilha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Graças a São Martinho de Dume, a língua portuguesa é a única língua neolatina que não tem dias da semana dedicados a deuses romanos (Marte, Mercúrio, Júpiter, Vénus).",
+    "fonte": "Arquidiocese de Braga / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_saomartinhodedume_01"
+  },
+  {
+    "id": "HIST_PRE_0027",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que monumento pré-românico visigótico do século VII situado em Real (Braga), com planta em cruz grega e arcos em ferradura («Capela de São Frutuoso de Montélios»), foi mandado construir pelo bispo São Frutuoso para servir de seu mausoléu funerário?",
+    "opcoes": [
+      "Igreja de São Pedro de Balsemão",
+      "Igreja de São Gião da Nazaré",
+      "Capela de São Frutuoso de Montélios (Braga)",
+      "Sé de Idanha-a-Velha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Capela de São Frutuoso de Montélios é uma das mais raras e bem conservadas obras-primas da arquitetura visigótico-bizantina na Península Ibérica.",
+    "fonte": "DGPC / Museu D. Diogo de Sousa",
+    "factClusterId": "fc_hist_pre_saofrutuosodemontelios_01"
+  },
+  {
+    "id": "HIST_PRE_0028",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que antiga cidade romana (Egitânia) no concelho de Idanha-a-Nova (Castelo Branco), com muralhas romanas, catedral suevo-visigótica e rica coleção epigráfica («Idanha-a-Velha»), foi uma das principais sés episcopais da época visigótica?",
+    "opcoes": [
+      "Monsanto",
+      "Castelo Mendo",
+      "Sortelha",
+      "Idanha-a-Velha (Egitânia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sé Catedral da Egitânia em Idanha-a-Velha acolhe um dos mais importantes núcleos epigráficos romanos e visigóticos da Europa.",
+    "fonte": "DGPC / Município de Idanha-a-Nova / Aldeias Históricas",
+    "factClusterId": "fc_hist_pre_egitania_idanhaavelha_01"
+  },
+  {
+    "id": "HIST_PRE_0029",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante estação arqueológica e cidade romana do Alto Alentejo no concelho de Marvão («Cidade Romana de Ammaia»), com fórum, termas públicas e pórtico de entrada monumental do século I d.C., foi descoberta nas margens do rio Sever?",
+    "opcoes": [
+      "Cidade Romana de Ammaia (São Salvador da Aramenha, Marvão)",
+      "Miróbriga",
+      "Pisões",
+      "Balsa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ammaia obteve o estatuto de município no reinado de Lúcio Vero e é gerida pela Fundação Cidade de Ammaia.",
+    "fonte": "Fundação Cidade de Ammaia / DGPC",
+    "factClusterId": "fc_hist_pre_ammaia_marvao_01"
+  },
+  {
+    "id": "HIST_PRE_0030",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que famosa ponte romana de cantaria com 140 metros de comprimento e 12 arcos sobre o rio Tâmega, inaugurada no ano 104 d.C. em honra do imperador Trajano («Ponte de Trajano de Chaves»), conserva duas colunas epigráficas romanas com dedicatórias dos povos flavienses?",
+    "opcoes": [
+      "Ponte de Lima",
+      "Ponte Romana de Trajano em Chaves (Aquae Flaviae)",
+      "Ponte de Vila Formosa",
+      "Ponte da Mizarela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Padrão dos Povos na ponte de Chaves lista os dez povos indígenas da Galécia que contribuíram para a sua construção.",
+    "fonte": "DGPC / Museu da Região Flaviense (Chaves)",
+    "factClusterId": "fc_hist_pre_ponteromana_chaves_01"
+  },
+  {
+    "id": "HIST_PRE_0031",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que estação arqueológica mesolítica de enorme importância internacional no vale do rio Tejo (Salvaterra de Magos), composta por gigantescas acumulações de conchas fluviais e marinhas com mais de 300 sepulturas humanas de há 8.000 anos («Concheiros de Muge»), foi pioneira na arqueologia pré-histórica europeia?",
+    "opcoes": [
+      "Concheiros do Sado",
+      "Concheiros de Mira",
+      "Concheiros de Muge (Cabeço da Arruda e Moita do Sebastião)",
+      "Concheiros do Algarve"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Concheiros de Muge foram escavados desde 1863 por Carlos Ribeiro e mostram a transição de caçadores-recoletores para a sedentarização.",
+    "fonte": "Museu Nacional de Arqueologia / DGPC",
+    "factClusterId": "fc_hist_pre_concheirosdemuge_01"
+  },
+  {
+    "id": "HIST_PRE_0032",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que extraordinária anta megalítica em Pavia (Mora, Évora), do terceiro milénio a.C., foi cristianizada no século XVII sendo a sua câmara poligonal adaptada para o interior de uma capela («Capela-Anta de São Dinis de Pavia»)?",
+    "opcoes": [
+      "Anta de São Brissos (Montemor-o-Novo)",
+      "Anta de Santa Marta",
+      "Anta de Tourega",
+      "Anta-Capela de São Dinis de Pavia (Mora)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Anta de Pavia tem 4 metros de diâmetro e constitui um dos mais belos exemplos de sincretismo religioso entre o megalitismo pré-histórico e o cristianismo.",
+    "fonte": "DGPC / Município de Mora",
+    "factClusterId": "fc_hist_pre_antapavia_mora_01"
+  },
+  {
+    "id": "HIST_PRE_0033",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que antigo povo marinheiro de origem semítica do Médio Oriente (Fenícios) fundou feitorias comerciais na foz dos rios Tejo, Sado e Guadiana a partir do século VIII a.C. introduzindo a escrita, o torno de oleiro e o cultivo da vinha e oliveira em Portugal?",
+    "opcoes": [
+      "Os Fenícios (Feitorias fenícias de Lisboa, Abul e Castro Marim)",
+      "Os Cartagineses",
+      "Os Gregos Focenses",
+      "Os Celtas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Escavações no Claustro da Sé de Lisboa e no Castelo de São Jorge revelaram vestígios de uma próspera colónia fenícia do século VII a.C.",
+    "fonte": "Museu de Lisboa / Centro de Arqueologia de Lisboa",
+    "factClusterId": "fc_hist_pre_fenicios_portugal_01"
+  },
+  {
+    "id": "HIST_PRE_0034",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante colónia e praça-forte militar romana fundada por Júlio César nas colinas sobre o Tejo (atual Santarém), Scallabis («Scallabis Praesidium Iulium»), foi a sede de um dos três conventos jurídicos da província da Lusitânia?",
+    "opcoes": [
+      "Pax Julia (Beja)",
+      "Scallabis Praesidium Iulium (Santarém)",
+      "Ebora (Évora)",
+      "Olisipo (Lisboa)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Conventus Scallabitanus abrangia todo o território entre o Tejo e o Douro na província da Lusitânia romana.",
+    "fonte": "Dicionário de História de Portugal / Município de Santarém",
+    "factClusterId": "fc_hist_pre_scallabis_santarem_01"
+  },
+  {
+    "id": "HIST_PRE_0035",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que estátuas monumentais em granito esculpidas pelos povos galaico-lusitanos da Idade do Ferro (como as estátuas encontradas em Boticas, Montalegre e Guimarães), retratando chefes de armadura com escudo redondo (caetra) e punhal («Guerreiros Galaicos»), encontram-se expostas no Museu Nacional de Arqueologia?",
+    "opcoes": [
+      "Berrões de Trás-os-Montes",
+      "Damas Ibéricas",
+      "Estátuas de Guerreiros Galaicos / Lusitanos",
+      "Cariátides Romanas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As estátuas de guerreiros galaicos guardavam as entradas das citânias e simbolizavam o culto heroico aos antepassados.",
+    "fonte": "Museu Nacional de Arqueologia / Museu D. Diogo de Sousa",
+    "factClusterId": "fc_hist_pre_guerreirosgalaicos_01"
+  },
+  {
+    "id": "HIST_PRE_0036",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que esculturas zoomórficas pré-históricas em granito típicas da Idade do Ferro e do povo dos Vetões em Trás-os-Montes (como a famosa «Porca de Murça»), representando javalis ou toiros sagrados («Berrões»), eram símbolos de fecundidade e proteção dos rebanhos?",
+    "opcoes": [
+      "Guerreiros castrejos",
+      "Menires fálicos",
+      "Leões de pedra",
+      "Berrões / Porcas de pedra (ex: A Porca de Murça)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Porca de Murça é o mais célebre berrão de Trás-os-Montes esculpido pelos vetões há mais de 2.300 anos.",
+    "fonte": "Município de Murça / Museu Nacional de Arqueologia",
+    "factClusterId": "fc_hist_pre_porcademurca_berroes_01"
+  },
+  {
+    "id": "HIST_PRE_0037",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que magnífica ponte romana com seis arcos de cantaria e talha-mares triangulares sobre a ribeira de Seda no concelho de Alter do Chão (Portalegre), perfeitamente preservada («Ponte Romana de Vila Formosa»), integrava a via romana de Lisboa a Mérida?",
+    "opcoes": [
+      "Ponte Romana de Vila Formosa (Alter do Chão)",
+      "Ponte de Trajano de Chaves",
+      "Ponte de Lima",
+      "Ponte de Segura"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ponte de Vila Formosa tem 116 metros de comprimento e continua aberta à circulação pedonal como monumento nacional.",
+    "fonte": "DGPC / Município de Alter do Chão",
+    "factClusterId": "fc_hist_pre_pontevilaformosa_01"
+  },
+  {
+    "id": "HIST_PRE_0038",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que general e cônsul romano («Décimo Júnio Bruto Galaico»), na sua campanha militar de 137 a.C. no norte de Portugal, atravessou o rio Lima para quebrar o terror das suas legiões que acreditavam ser o mitológico «Rio do Esquecimento» (Lethes), chamando os soldados um a um pelo seu próprio nome da outra margem?",
+    "opcoes": [
+      "Júlio César",
+      "Décimo Júnio Bruto Galaico (Décimo Júnio Bruto)",
+      "Servílio Cipião",
+      "Quinto Sertório"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A lendária travessia do Rio Lethes deu origem ao povoamento de Ponte de Lima e é recordada com estátuas de soldados romanos na margem do rio Lima.",
+    "fonte": "Município de Ponte de Lima / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_juniobruto_riolima_01"
+  },
+  {
+    "id": "HIST_PRE_0039",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que general e estadista rebelde romano (c. 123-72 a.C.), líder do partido democrático em Roma («Quinto Sertório»), uniu os povos lusitanos e hispânicos e fundou em Évora uma república independente com Senado próprio e uma academia de estudos em Osca resistindo ao ditador Sila e a Pompeu?",
+    "opcoes": [
+      "Viriato",
+      "Júlio César",
+      "Quinto Sertório (A Guerra Sertoriana)",
+      "Metelo Pio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sertório era aclamado pelos lusitanos como o novo Viriato e acompanhado por uma corça branca que dizia ser inspirada pela deusa Diana.",
+    "fonte": "Plutarco (Vidas Paralelas) / Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_quintosertorio_evora_01"
+  },
+  {
+    "id": "HIST_PRE_0040",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que antiga cidade e porto comercial marítimo da Lusitânia meridional romana (situada na foz da ribeira de Quarteira no concelho de Loulé), «Ruínas Romanas do Cerro da Vila», conserva sumptuosas habitações com mosaicos marinhos, termas públicas e tanques de salga de peixe?",
+    "opcoes": [
+      "Balsa romana",
+      "Ossonoba",
+      "Lacóbriga",
+      "Cerro da Vila (Vilamoura, Loulé)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Cerro da Vila em Vilamoura funcionou desde o século I a.C. até ao período islâmico com um dinâmico porto comercial.",
+    "fonte": "Museu do Cerro da Vila / DGPC / Loulé",
+    "factClusterId": "fc_hist_pre_cerrodavila_vilamoura_01"
+  },
+  {
+    "id": "HIST_PRE_0041",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Qual era o nome romano da atual cidade de Faro, importante cidade portuária e bispado da Lusitânia meridional que conservava um fórum e mosaicos do Deus Oceano (atualmente no Museu Municipal de Faro)?",
+    "opcoes": [
+      "Ossonoba (Faro)",
+      "Balsa (Tavira)",
+      "Lacóbriga (Lagos)",
+      "Baesuris (Castro Marim)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ossonoba cunhou a sua própria moeda e foi a antecessora direta da capital algarvia Faro.",
+    "fonte": "Museu Municipal de Faro / DGPC",
+    "factClusterId": "fc_hist_pre_ossonoba_faro_01"
+  },
+  {
+    "id": "HIST_PRE_0042",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que famosa cidade romana perdida no Algarve (situada na Quinta da Torre d'Aires, Luz de Tavira), «Balsa Romana», com mais de 45 hectares e cais portuário no interior da Ria Formosa, foi uma das maiores cidades do sul da Lusitânia?",
+    "opcoes": [
+      "Ossonoba",
+      "Balsa (Luz de Tavira)",
+      "Cilpes",
+      "Arandis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Balsa é objeto de grandes projetos de georadár e escavação arqueológica pela Universidade do Algarve.",
+    "fonte": "Universidade do Algarve / Município de Tavira",
+    "factClusterId": "fc_hist_pre_balsaromana_tavira_01"
+  },
+  {
+    "id": "HIST_PRE_0043",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que povo e reino germânico derrotou e anexou definitivamente o Reino Suevo em 585 d.C. sob o comando do rei Leovigildo, unificando toda a Península Ibérica sob a capital de Toledo até à invasão muçulmana de 711?",
+    "opcoes": [
+      "Os Francos",
+      "Os Bizantinos",
+      "Os Visigodos (Reino Visigótico)",
+      "Os Ostrogodos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os visigodos integraram as dioceses da Galécia e da Lusitânia na monarquia visigótica hispânica de Toledo.",
+    "fonte": "Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_visigodos_leovigildo_01"
+  },
+  {
+    "id": "HIST_PRE_0044",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante sítio arqueológico paleocristão e visigótico no concelho de Lamego («Igreja de São Pedro de Balsemão»), do século VII, conserva arcos em ferradura, capitéis coríntios romanos reaproveitados e o túmulo do bispo D. Afonso Pires?",
+    "opcoes": [
+      "São Frutuoso de Montélios",
+      "São Gião da Nazaré",
+      "Igreja de Paço de Sousa",
+      "Capela de São Pedro de Balsemão (Lamego)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Capela de São Pedro de Balsemão é considerada o segundo mais antigo templo cristão conservado em Portugal.",
+    "fonte": "DGPC / Museu de Lamego",
+    "factClusterId": "fc_hist_pre_saopedrodebalsemao_01"
+  },
+  {
+    "id": "HIST_PRE_0045",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante elemento funerário paleolítico e neolítico em xisto gravado com motivos geométricos, olhos e deusas-mãe («Placas de Xisto Gravadas»), exclusivo do sudoeste da Península Ibérica, é encontrado aos milhares nas antas do Alentejo e Algarve?",
+    "opcoes": [
+      "Placas de Xisto Gravadas Megalíticas",
+      "Estelas de Guerreiro",
+      "Tégulas romanas",
+      "Lucernas de barro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As placas de xisto gravadas representavam a identidade tribal ou heráldica dos antepassados sepultados nos dólmenes megalíticos há 5.000 anos.",
+    "fonte": "Museu Nacional de Arqueologia / DGPC",
+    "factClusterId": "fc_hist_pre_placasdexisto_01"
+  },
+  {
+    "id": "HIST_PRE_0046",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que povo antigo pré-romano habitava o sudoeste de Portugal (Algarve e Baixo Alentejo), falando a enigmática «Língua Tartéssica / Escrita do Sudoeste» gravada em mais de 100 estelas de xisto encontradas em Almodôvar e Silves («Estelas da Escrita do Sudoeste»)?",
+    "opcoes": [
+      "Os Lusitanos",
+      "Os Cónios (Conii)",
+      "Os Brácaros",
+      "Os Calaicos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Escrita do Sudoeste ou tartéssica (século VII-V a.C.) é a mais antiga manifestação de escrita indígena de toda a Península Ibérica exposta no MESA em Almodôvar.",
+    "fonte": "Museu da Escrita do Sudoeste Almodôvar (MESA) / DGPC",
+    "factClusterId": "fc_hist_pre_conios_escritasudoeste_01"
+  },
+  {
+    "id": "HIST_PRE_0047",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que grande povo celta e pré-romano do centro de Portugal habitava a região entre os rios Douro e Tejo e resistiu à conquista romana («Os Lusitanos»), cuja capital sagrada ficava nos Montes Hermínios (Serra da Estrela)?",
+    "opcoes": [
+      "Os Galaicos",
+      "Os Turdetanos",
+      "Os Lusitanos (Lusitani)",
+      "Os Celtiberos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Lusitanos deram o nome à província romana da Lusitânia criada em 27 a.C. pelo imperador Augusto.",
+    "fonte": "Dicionário de História de Portugal",
+    "factClusterId": "fc_hist_pre_povolusitano_01"
+  },
+  {
+    "id": "HIST_PRE_0048",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que importante complexo arqueológico romano em Beja («Villa Romana de Pisões»), descoberto em 1967, conserva uma das mais luxuosas residências agrícolas com mais de 40 divisões, peristilo e mosaicos polícromos geométricos e o balneário privado?",
+    "opcoes": [
+      "Villa de São Cucufate",
+      "Villa de Tourega",
+      "Villa do Alto da Cidreira",
+      "Villa Romana de Pisões (Beja)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Villa de Pisões possuía uma enorme piscina de água tépida (natatio) e sistema de aquecimento subterrâneo por hipocausto.",
+    "fonte": "Universidade de Évora / DGPC",
+    "factClusterId": "fc_hist_pre_pisoes_beja_01"
+  },
+  {
+    "id": "HIST_PRE_0049",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que estação arqueológica romana situada no concelho de Penela (Coimbra), «Villa Romana do Rabaçal», destaca-se pelos seus raros mosaicos geométricos e figurativos octogonais que retratam as quatro estações do ano e a carruagem do Sol?",
+    "opcoes": [
+      "Villa Romana do Rabaçal (Penela)",
+      "Conímbriga",
+      "Bobadela",
+      "Ruínas de Cárquere"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Villa do Rabaçal situa-se a poucos quilómetros da via romana que ligava Olissipo a Bracara Augusta.",
+    "fonte": "Museu da Villa Romana do Rabaçal / Município de Penela",
+    "factClusterId": "fc_hist_pre_rabacal_penela_01"
+  },
+  {
+    "id": "HIST_PRE_0050",
+    "tema": "História",
+    "subtema": "Pré-História & Antiguidade",
+    "pergunta": "Que monumento romano único no concelho de Oliveira do Hospital («Ruínas Romanas da Bobadela»), conserva um magnífico anfiteatro romano em elipse com bancadas de cantaria e o Arco Romano monumental do Fórum?",
+    "opcoes": [
+      "Conímbriga",
+      "Tongóbriga",
+      "Ruínas Romanas da Bobadela (Splendidissima Civitas)",
+      "Ammaia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Bobadela era chamada na epigrafia latina de 'Splendidissima Civitas' e possui o anfiteatro romano mais bem conservado da Beira Alta.",
+    "fonte": "DGPC / Município de Oliveira do Hospital",
+    "factClusterId": "fc_hist_pre_bobadela_oliveiradohospital_01"
+  }
+]

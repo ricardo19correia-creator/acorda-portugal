@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_TRA_0001",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado histórico assinado a 5 de outubro de 1143 entre D. Afonso Henriques e o seu primo Afonso VII de Leão e Castela, na presença do cardeal legado papal Guido de Vico, marcou o reconhecimento político da independência de Portugal como reino?",
+    "opcoes": [
+      "Tratado de Zamora (1143)",
+      "Tratado de Alcanizes",
+      "Tratado de Tordesilhas",
+      "Tratado de Badajoz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pelo Tratado de Zamora Afonso VII reconheceu a D. Afonso Henriques a dignidade e o título régio de Rei dos Portugueses.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / Academia Portuguesa da História",
+    "factClusterId": "fc_tra_zamora1143_01"
+  },
+  {
+    "id": "HIST_TRA_0002",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que solene bula papal emitida a 23 de maio de 1179 pelo Papa Alexandre III concedeu a confirmação canónica e jurídica suprema do Reino de Portugal e declarou D. Afonso Henriques e os seus sucessores legítimos reis soberanos?",
+    "opcoes": [
+      "Bula Inter Caetera",
+      "Bula Manifestis Probatum (1179)",
+      "Bula Romanus Pontifex",
+      "Bula Aeterni Regis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Bula Manifestis Probatum colocou o Reino de Portugal sob a proteção direta da Santa Sé em troca de um tributo anual em ouro.",
+    "fonte": "Arquivo Secreto do Vaticano / Torre do Tombo",
+    "factClusterId": "fc_tra_manifestisprobatum1179_01"
+  },
+  {
+    "id": "HIST_TRA_0003",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado de paz e fronteiras assinado a 12 de setembro de 1297 entre D. Dinis de Portugal e Fernando IV de Castela fixou as fronteiras terrestres mais antigas e estáveis da Europa (incluindo Riba-Côa, Olivença e Campo Maior)?",
+    "opcoes": [
+      "Tratado de Zamora",
+      "Tratado de Badajoz",
+      "Tratado de Alcanizes (1297)",
+      "Tratado de Salvaterra de Magos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Alcanizes integrou em Portugal castelos fundamentais como Almeida, Castelo Rodrigo, Sabugal, Vilar Maior e Olivença.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / D. Dinis (Livro das Posturas)",
+    "factClusterId": "fc_tra_alcanizes1297_01"
+  },
+  {
+    "id": "HIST_TRA_0004",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que célebre tratado diplomático assinado a 9 de maio de 1386 entre D. João I de Portugal e Ricardo II de Inglaterra selou uma «liga, amizade e confederação perpétua», constituindo a mais antiga aliança diplomática internacional ainda em vigor no mundo?",
+    "opcoes": [
+      "Tratado de Londres",
+      "Tratado de Tagilde",
+      "Tratado de Methuen",
+      "Tratado de Windsor (1386)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Aliança Luso-Britânica iniciada no Tratado de Tagilde (1372) e consagrada em Windsor em 1386 tem mais de 640 anos de vigência ininterrupta.",
+    "fonte": "The National Archives (Kew, Reino Unido) / Torre do Tombo",
+    "factClusterId": "fc_tra_windsor1386_01"
+  },
+  {
+    "id": "HIST_TRA_0005",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado assinado a 4 de setembro de 1479 entre D. Afonso V e os Reis Católicos pôs fim à Guerra de Sucessão de Castela, garantindo a Portugal a exclusividade da navegação na costa da Guiné e a soberania sobre a Madeira, Açores e Cabo Verde?",
+    "opcoes": [
+      "Tratado de Alcáçovas-Toledo (1479)",
+      "Tratado de Tordesilhas",
+      "Tratado de Madrid",
+      "Tratado de Saragoça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pelo Tratado de Alcáçovas, Castela manteve as Ilhas Canárias e Portugal garantiu o monopólio da rota marítima africana.",
+    "fonte": "Arquivo Geral de Simancas / Torre do Tombo",
+    "factClusterId": "fc_tra_alcacovas1479_01"
+  },
+  {
+    "id": "HIST_TRA_0006",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que histórico tratado internacional assinado a 7 de junho de 1494 entre D. João II de Portugal e os Reis Católicos dividiu o mundo descoberto e por descobrir através de um meridiano a 370 léguas a oeste de Cabo Verde, garantindo a futura posse do Brasil a Portugal?",
+    "opcoes": [
+      "Tratado de Saragoça",
+      "Tratado de Tordesilhas (1494)",
+      "Tratado de Alcáçovas",
+      "Bula Inter Caetera"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. João II exigiu a deslocação da linha das 100 para as 370 léguas, demonstrando ter conhecimento prévio das correntes do Atlântico Sul.",
+    "fonte": "Torre do Tombo / UNESCO Memory of the World",
+    "factClusterId": "fc_tra_tordesilhas1494_01"
+  },
+  {
+    "id": "HIST_TRA_0007",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado diplomático assinado a 22 de abril de 1529 entre D. João III de Portugal e o Imperador Carlos V fixou a linha de demarcação no Extremo Oriente a leste das ilhas Molucas (as «Ilhas das Especiarias»), mediante o pagamento português de 350.000 ducados?",
+    "opcoes": [
+      "Tratado de Tordesilhas",
+      "Tratado de Cintra",
+      "Tratado de Saragoça (1529)",
+      "Tratado de Madrid"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Saragoça completou a divisão global iniciada em Tordesilhas, fechando a circum-navegação diplomática da Terra.",
+    "fonte": "Arquivo Geral de Índias / Torre do Tombo",
+    "factClusterId": "fc_tra_saragoca1529_01"
+  },
+  {
+    "id": "HIST_TRA_0008",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado de paz assinado a 13 de fevereiro de 1668 em Lisboa, mediado pela coroa de Inglaterra, pôs fim formal a quase três décadas de Guerra da Restauração, reconhecendo a soberania da Casa de Bragança e a independência perpétua de Portugal frente a Espanha?",
+    "opcoes": [
+      "Tratado dos Pirenéus",
+      "Tratado de Madrid",
+      "Tratado de Utrecht",
+      "Tratado de Lisboa de 1668"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pelo Tratado de Lisboa de 1668 a rainha regente de Espanha D. Mariana de Áustria reconheceu D. Afonso VI e o Regente D. Pedro II.",
+    "fonte": "Arquivo Nacional da Torre do Tombo / MNE",
+    "factClusterId": "fc_tra_lisboa1668_01"
+  },
+  {
+    "id": "HIST_TRA_0009",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que famoso tratado comercial assinado a 27 de dezembro de 1703 entre Portugal e a Grã-Bretanha («Tratado dos Panos e Vinhos») estabeleceu a entrada livre dos têxteis de lã britânicos em Portugal em troca de tarifas preferenciais para o Vinho do Porto na alfândega de Londres?",
+    "opcoes": [
+      "Tratado de Methuen (1703)",
+      "Tratado de Windsor",
+      "Tratado de Utrecht",
+      "Tratado de Fontainebleau"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Methuen foi negociado por John Methuen e D. Manuel Teles da Silva, impulsionando a produção vinhateira do Douro mas limitando as manufaturas portuguesas.",
+    "fonte": "The National Archives (UK) / Torre do Tombo",
+    "factClusterId": "fc_tra_methuen1703_01"
+  },
+  {
+    "id": "HIST_TRA_0010",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado assinado a 13 de janeiro de 1750 entre D. João V de Portugal e Fernando VI de Espanha, negociado pelo diplomata santareno Alexandre de Gusmão com base no princípio do «Uti Possidetis» (posse efetiva do solo), desenhou os contornos territoriais do Brasil moderno?",
+    "opcoes": [
+      "Tratado de Santo Ildefonso",
+      "Tratado de Madrid de 1750",
+      "Tratado de El Pardo",
+      "Tratado de Badajoz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alexandre de Gusmão fez valer a ocupação pelos bandeirantes e missionários portugueses, multiplicando por três a área do território brasileiro.",
+    "fonte": "Arquivo Histórico do Itamaraty / Torre do Tombo",
+    "factClusterId": "fc_tra_madrid1750_01"
+  },
+  {
+    "id": "HIST_TRA_0011",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que diplomata e estadista português do século XVIII nascido em Santos (1695-1753), irmão do inventor Bartolomeu de Gusmão e secretário particular de D. João V, é considerado o pai da diplomacia territorial moderna de Portugal?",
+    "opcoes": [
+      "D. Luís da Cunha",
+      "Marquês de Pombal",
+      "Alexandre de Gusmão",
+      "Conde de Tarouca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Alexandre de Gusmão formulou pela primeira vez no direito internacional o princípio de que a posse real da terra supera linhas teóricas traçadas em mapas.",
+    "fonte": "Academia Portuguesa da História / MNE",
+    "factClusterId": "fc_tra_alexandregusmao_01"
+  },
+  {
+    "id": "HIST_TRA_0012",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que embaixador e diplomata português do Iluminismo (1662-1749), autor das clássicas «Instruções Políticas» e representante de Portugal no Congresso de Utrecht de 1713, formulou a visão profética da importância estratégica do Brasil e das reformas do Estado?",
+    "opcoes": [
+      "Conde de Ericeira",
+      "Mouzinho da Silveira",
+      "Duque de Palmela",
+      "D. Luís da Cunha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "D. Luís da Cunha serviu como embaixador em Londres, Haia, Madrid e Paris, sendo quem recomendou o futuro Marquês de Pombal a D. João V.",
+    "fonte": "Biblioteca Nacional de Portugal / MNE",
+    "factClusterId": "fc_tra_dluisdacunha_01"
+  },
+  {
+    "id": "HIST_TRA_0013",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado secreto foi assinado a 27 de outubro de 1807 entre a França de Napoleão Bonaparte e a Espanha de Godoy («Tratado de Fontainebleau»), prevendo a invasão, ocupação e divisão do Reino de Portugal em três partes?",
+    "opcoes": [
+      "Tratado de Fontainebleau (1807)",
+      "Tratado de Paris",
+      "Tratado de Amiens",
+      "Tratado de Tilsit"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A assinatura de Fontainebleau precipitou a transferência estratégica da Corte Portuguesa para o Brasil a 29 de novembro de 1807 sob escolta da Royal Navy.",
+    "fonte": "Ministère des Affaires Étrangères (França) / Torre do Tombo",
+    "factClusterId": "fc_tra_fontainebleau1807_01"
+  },
+  {
+    "id": "HIST_TRA_0014",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que artigo do Ato Final do Congresso de Viena de 9 de junho de 1815 (Artigo 105.º), assinado pelas grandes potências europeias incluindo a Espanha, reconheceu os direitos legítimos de Portugal sobre a vila de Olivença e determinou a sua restituição?",
+    "opcoes": [
+      "Artigo 1.º do Tratado de Paris",
+      "Artigo 105.º do Ato Final do Congresso de Viena (1815)",
+      "Artigo 50.º do Tratado de Badajoz",
+      "Artigo 12.º da Paz de Versalhes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Apesar de ter assinado e ratificado o tratado em 1817, a Espanha nunca cumpriu a devolução de Olivença, mantendo a questão pendente no direito diplomático luso.",
+    "fonte": "Ministério dos Negócios Estrangeiros / Congresso de Viena (1815)",
+    "factClusterId": "fc_tra_olivencaviena1815_01"
+  },
+  {
+    "id": "HIST_TRA_0015",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que influente diplomata e político português (1781-1850), 1.º Duque de Palmela, chefiou a delegação portuguesa no Congresso de Viena de 1815 e liderou a diplomacia liberal no exílio em Londres e Paris?",
+    "opcoes": [
+      "Duque de Saldanha",
+      "Duque de Terceira",
+      "Pedro de Sousa Holstein (1.º Duque de Palmela)",
+      "Marquês de Sá da Bandeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Palmela foi um dos maiores diplomatas da história europeia do século XIX e várias vezes Presidente do Conselho de Ministros.",
+    "fonte": "Assembleia da República / Palácio Palmela / MNE",
+    "factClusterId": "fc_tra_duquepalmela_01"
+  },
+  {
+    "id": "HIST_TRA_0016",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que grave crise diplomática ocorreu a 11 de janeiro de 1890, quando a Grã-Bretanha de Lord Salisbury enviou um memorando coercivo a Portugal exigindo a retirada imediata das forças portuguesas do território entre Angola e Moçambique («Mapa Cor-de-Rosa»)?",
+    "opcoes": [
+      "A Crise do Chaimite",
+      "O Bloqueio do Tejo",
+      "O Incidente da Baía de Delagoa",
+      "O Ultimato Britânico de 1890"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Ultimato Britânico provocou uma onda patriótica de indignação nacional que inspirou a criação do hino 'A Portuguesa' e acelerou a queda da Monarquia.",
+    "fonte": "Arquivo Histórico Diplomático do MNE / Sociedade de Geografia de Lisboa",
+    "factClusterId": "fc_tra_ultimatobritanico1890_01"
+  },
+  {
+    "id": "HIST_TRA_0017",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado de paz assinado a 28 de junho de 1919 na Galeria dos Espelhos do Palácio de Versalhes pôs fim oficial à Primeira Guerra Mundial, tendo como signatários por Portugal o Dr. Afonso Costa e o Dr. Augusto Soares?",
+    "opcoes": [
+      "Tratado de Versalhes (1919)",
+      "Tratado de Saint-Germain",
+      "Tratado de Trianon",
+      "Tratado de Neuilly"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pelo Tratado de Versalhes Portugal recuperou o Triângulo de Quionga no norte de Moçambique e garantiu indemnizações de guerra da Alemanha.",
+    "fonte": "Sociedade das Nações / Arquivo Histórico Militar",
+    "factClusterId": "fc_tra_versalhes1919_01"
+  },
+  {
+    "id": "HIST_TRA_0018",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado diplomático assinado a 17 de março de 1939 em Lisboa entre o Estado Novo português de Salazar e o governo de Franco («Tratado de Amizade e Não Agressão Luso-Espanhol») garantiu a neutralidade da Península Ibérica na Segunda Guerra Mundial?",
+    "opcoes": [
+      "Tratado de Madrid",
+      "Pacto Ibérico (1939)",
+      "Pacto de Cintra",
+      "Declaração de Sintra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pacto Ibérico evitou a entrada de Espanha na guerra ao lado do Eixo nazi-fascista e manteve o porto de Lisboa e os Açores abertos aos Aliados.",
+    "fonte": "Ministério dos Negócios Estrangeiros / D.G. de Política Externa",
+    "factClusterId": "fc_tra_pactoiberico1939_01"
+  },
+  {
+    "id": "HIST_TRA_0019",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Em que ano e cidade foi assinado o Tratado do Atlântico Norte, sendo Portugal um dos doze países fundadores originais da NATO / OTAN através do ministro dos Negócios Estrangeiros José Caeiro da Matta?",
+    "opcoes": [
+      "1955 em Paris",
+      "1945 em Londres",
+      "4 de Abril de 1949 em Washington, D.C.",
+      "1950 em Roma"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A posição geoestratégica dos Açores (Base das Lajes) foi determinante para que Portugal integrasse a fundação da NATO em 1949.",
+    "fonte": "NATO Official Archives (Bruxelas) / MNE",
+    "factClusterId": "fc_tra_fundacaonato1949_01"
+  },
+  {
+    "id": "HIST_TRA_0020",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Em que monumento de Lisboa foi assinado solenemente a 12 de junho de 1985 o Tratado de Adesão de Portugal à Comunidade Económica Europeia (CEE), pelo Primeiro-Ministro Mário Soares e pelo ministro Jaime Gama?",
+    "opcoes": [
+      "Palácio Nacional da Ajuda",
+      "Palácio de São Bento",
+      "Castelo de São Jorge",
+      "Mosteiro dos Jerónimos (no Claustro Manuelino)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A adesão formal entrou em vigor a 1 de janeiro de 1986, marcando a integração plena de Portugal na Europa democrática e moderna.",
+    "fonte": "Comissão Europeia / Presidência do Conselho de Ministros",
+    "factClusterId": "fc_tra_adesaocee1985_01"
+  },
+  {
+    "id": "HIST_TRA_0021",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que importante tratado de reforma institucional da União Europeia foi assinado a 13 de dezembro de 2007 no Mosteiro dos Jerónimos durante a Presidência Portuguesa da UE chefiada por José Sócrates?",
+    "opcoes": [
+      "Tratado de Lisboa (2007)",
+      "Tratado de Nice",
+      "Tratado de Amesterdão",
+      "Tratado de Maastricht"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Lisboa criou o cargo de Presidente do Conselho Europeu e de Alto Representante para os Negócios Estrangeiros e Política de Segurança.",
+    "fonte": "União Europeia / Portal Diplomático",
+    "factClusterId": "fc_tra_tratadolisboa2007_01"
+  },
+  {
+    "id": "HIST_TRA_0022",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo histórico de paz assinado a 31 de maio de 1991 em Bicesse (Estoril), mediado pelo governo de Portugal e pelo secretário de Estado Durão Barroso, estabeleceu as bases para as primeiras eleições multipartidárias em Angola entre o MPLA e a UNITA?",
+    "opcoes": [
+      "Protocolo de Lusaka",
+      "Acordos de Bicesse (1991)",
+      "Memorando do Luena",
+      "Acordos de Alvor"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Acordos de Bicesse foram assinados por José Eduardo dos Santos e Jonas Savimbi sob os auspícios de Portugal, dos EUA e da União Soviética.",
+    "fonte": "Ministério dos Negócios Estrangeiros / Nações Unidas",
+    "factClusterId": "fc_tra_bicesse1991_01"
+  },
+  {
+    "id": "HIST_TRA_0023",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo de descolonização assinado a 15 de janeiro de 1975 na vila algarvia de Alvor entre o governo português e os três movimentos de libertação (MPLA, FNLA e UNITA) previu a independência de Angola?",
+    "opcoes": [
+      "Acordo de Lusaka",
+      "Acordo de Argel",
+      "Acordo do Alvor (1975)",
+      "Acordo de Bissau"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Acordo do Alvor previa um governo de transição quadripartido antes da proclamação da independência a 11 de novembro de 1975.",
+    "fonte": "Centro de Documentação 25 de Abril / Universidade de Coimbra",
+    "factClusterId": "fc_tra_alvor1975_01"
+  },
+  {
+    "id": "HIST_TRA_0024",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo tripartido assinado em Nova Iorque a 5 de maio de 1999 entre Portugal e a Indonésia sob os auspícios do secretário-geral da ONU Kofi Annan abriu caminho ao referendo de autodeterminação de Timor-Leste?",
+    "opcoes": [
+      "Acordo de Jacarta",
+      "Declaração de Díli",
+      "Tratado de Bandung",
+      "Acordo de 5 de Maio de 1999 (Acordo de Nova Iorque sobre Timor-Leste)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Acordo de 5 de Maio permitiu a realização da Consulta Popular de 30 de agosto de 1999 onde 78,5% dos timorenses votaram pela independência.",
+    "fonte": "Nações Unidas (UNAMET) / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_tra_acordotimor1999_01"
+  },
+  {
+    "id": "HIST_TRA_0025",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que declaração diplomática conjunta assinada em Pequim a 13 de abril de 1987 entre o Primeiro-Ministro Cavaco Silva e o Primeiro-Ministro Zhao Ziyang estabeleceu a transferência pacífica da administração de Macau para a República Popular da China a 20 de dezembro de 1999?",
+    "opcoes": [
+      "Declaração Conjunta Luso-Chinesa sobre a Questão de Macau (1987)",
+      "Tratado de Pequim de 1887",
+      "Pacto de Cantão",
+      "Acordo de Xangai"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Declaração Conjunta garantiu o princípio 'Um País, Dois Sistemas' e a autonomia de Macau por um período de 50 anos.",
+    "fonte": "Gabinete de Ligação do Governo Popular Central em Macau / MNE",
+    "factClusterId": "fc_tra_declaracaomacau1987_01"
+  },
+  {
+    "id": "HIST_TRA_0026",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado assinado a 1 de dezembro de 1887 em Pequim pelo diplomata Tomás de Rosa e pelo príncipe Qing reconheceu formalmente pela primeira vez a soberania e administração perpétua de Portugal sobre Macau?",
+    "opcoes": [
+      "Tratado de Tianjin",
+      "Tratado de Amizade e Comércio Sino-Português de Pequim (1887)",
+      "Tratado de Nanquim",
+      "Tratado de Cantão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Tratado de 1887 consagrou no direito internacional a presença portuguesa em Macau iniciada no século XVI.",
+    "fonte": "Arquivo Histórico de Macau / BNP",
+    "factClusterId": "fc_tra_tratadopequim1887_01"
+  },
+  {
+    "id": "HIST_TRA_0027",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que convenção militar assinada a 26 de maio de 1834 na vila alentejana de Évora-Monte pôs fim oficial à sangrenta Guerra Civil Portuguesa (Guerras Liberais), determinando a rendição e o exílio perpétuo do infante absolutista D. Miguel?",
+    "opcoes": [
+      "Tratado de Chaves",
+      "Convenção de Gramido",
+      "Convenção de Évora-Monte (1834)",
+      "Pacto de Cintra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Convenção de Évora-Monte foi assinada pelos generais Duque de Terceira e Saldanha pelos liberais e General Lemos pelos miguelistas.",
+    "fonte": "Casa da Convenção em Évora-Monte / Município de Estremoz",
+    "factClusterId": "fc_tra_evoramonte1834_01"
+  },
+  {
+    "id": "HIST_TRA_0028",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que convenção militar assinada a 29 de junho de 1847 na Casa do Gramido (Valbom, Gondomar) pôs fim à Revolta da Maria da Fonte e à Guerra da Patuleia, mediada pela Quádrupla Aliança (Portugal, Espanha, Grã-Bretanha e França)?",
+    "opcoes": [
+      "Convenção de Évora-Monte",
+      "Tratado de Sintra",
+      "Acordo de Gaia",
+      "Convenção de Gramido (1847)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Casa Branca de Gramido em Gondomar é hoje um centro interpretativo histórico da Guerra da Patuleia.",
+    "fonte": "Município de Gondomar / Centro Interpretativo da Casa de Gramido",
+    "factClusterId": "fc_tra_gramido1847_01"
+  },
+  {
+    "id": "HIST_TRA_0029",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que célebre diplomata português (1888-1970), natural de Cabanas de Viriato, atuou como Cônsul em Bordéus em 1940 emitindo mais de 30.000 vistos diplomáticos para salvar refugiados do Holocausto nazi na maior ação de salvamento individual da Segunda Guerra Mundial?",
+    "opcoes": [
+      "Aristides de Sousa Mendes do Amaral e Abranches",
+      "Sampaio Garrido",
+      "Teixeira Branquinho",
+      "Vasco da Gama Fernandes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Aristides de Sousa Mendes sacrificou a sua carreira diplomática por imperativo de consciência humanitária ('Prefiro estar com Deus contra os homens do que com os homens contra Deus').",
+    "fonte": "Fundação Aristides de Sousa Mendes / Panteão Nacional",
+    "factClusterId": "fc_tra_sousamendesdiplomata_01"
+  },
+  {
+    "id": "HIST_TRA_0030",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que embaixador de Portugal em Budapeste (Hungria) em 1944 («Carlos Sampaio Garrido») salvou centenas de judeus húngaros da deportação para os campos de extermínio ao emitir passaportes de proteção diplomática portuguesa, sendo reconhecido como Justo entre as Nações?",
+    "opcoes": [
+      "Aristides de Sousa Mendes",
+      "Carlos de Almeida Afonseca de Sampaio Garrido",
+      "Alberto Teixeira Branquinho",
+      "Luís Martins de Sousa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Sampaio Garrido abrigou dezenas de judeus na legação portuguesa em Budapeste arriscando a sua vida face à Gestapo e às Cruzes Flechadas.",
+    "fonte": "Yad Vashem / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_tra_sampaiogarridobudapeste_01"
+  },
+  {
+    "id": "HIST_TRA_0031",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que diplomata português encarregado de negócios em Budapeste em 1944 continuou a obra de Sampaio Garrido, alugando casas sob a proteção da bandeira de Portugal para acolher mais de 1.000 perseguidos judeus?",
+    "opcoes": [
+      "Carlos Sampaio Garrido",
+      "César de Sousa Mendes",
+      "Alberto Carlos de Liz-Texeira Branquinho",
+      "Aristides de Sousa Mendes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Teixeira Branquinho concedeu passaportes e cartas de proteção com a anuência do Ministério dos Negócios Estrangeiros de Lisboa.",
+    "fonte": "Yad Vashem / Instituto Diplomático",
+    "factClusterId": "fc_tra_teixeirabranquinho_01"
+  },
+  {
+    "id": "HIST_TRA_0032",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado assinado a 29 de janeiro de 1454 entre D. Afonso V e Henrique IV de Castela delimitou as esferas de influência de caça marítima e pesca na costa ocidental de África?",
+    "opcoes": [
+      "Tratado de Medina del Campo",
+      "Tratado de Toledo",
+      "Tratado de Sevilha",
+      "Tratado de Alcáçovas (Tratados Preliminares de 1454)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Os tratados preliminares do século XV consolidaram a exclusividade das explorações do Infante D. Henrique.",
+    "fonte": "Academia Portuguesa da História / BNP",
+    "factClusterId": "fc_tra_tratadoshenriquinos_01"
+  },
+  {
+    "id": "HIST_TRA_0033",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que conferência internacional realizada em 1884-1885 («Conferência de Berlim»), convocada pelo chanceler alemão Otto von Bismarck, substituiu o princípio histórico do «Direito Histórico de Descoberta» pelo princípio da «Ocupação Efetiva» do território africano?",
+    "opcoes": [
+      "Conferência de Berlim (1884-1885)",
+      "Conferência de Bruxelas",
+      "Conferência de Paris",
+      "Conferência de Londres"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Conferência de Berlim forçou Portugal a organizar expedições militares e científicas imediatas para o interior de Angola e Moçambique.",
+    "fonte": "Sociedade de Geografia de Lisboa / Arquivo Histórico Ultramarino",
+    "factClusterId": "fc_tra_conferenciaberlim1884_01"
+  },
+  {
+    "id": "HIST_TRA_0034",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que diplomata e político português liderou a delegação na Sociedade das Nações em Genebra nos anos 1920, sendo eleito por unanimidade Presidente da Assembleia da Sociedade das Nações em 1926?",
+    "opcoes": [
+      "Bernardino Machado",
+      "Dr. Afonso Costa",
+      "Augusto de Vasconcelos",
+      "António José de Almeida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Afonso Costa alcançou enorme notoriedade internacional e prestígio diplomático nas conferências financeiras e de desarmamento da Sociedade das Nações.",
+    "fonte": "Panteão Nacional / Assembleia da República",
+    "factClusterId": "fc_tra_afonsocostasdnl1926_01"
+  },
+  {
+    "id": "HIST_TRA_0035",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que médico e diplomata português foi o Presidente da Assembleia Geral da Sociedade das Nações em 1935-1937 («Augusto de Vasconcelos»), mediando o fim da Guerra do Chaco entre a Bolívia e o Paraguai?",
+    "opcoes": [
+      "Afonso Costa",
+      "Armindo Monteiro",
+      "Augusto de Vasconcelos",
+      "João Chagas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Augusto de Vasconcelos presidiu à comissão de paz da Sociedade das Nações com aplauso internacional.",
+    "fonte": "Arquivo Histórico Diplomático / Sociedade das Nações",
+    "factClusterId": "fc_tra_augustodevasconcelos_01"
+  },
+  {
+    "id": "HIST_TRA_0036",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo militar luso-americano assinado em 1951 permitiu aos Estados Unidos a utilização contínua da Base Aérea n.º 4 das Lajes na Ilha Terceira (Açores) como ponto estratégico vital de reabastecimento no Atlântico Norte?",
+    "opcoes": [
+      "Tratado de Ponta Delgada",
+      "Pacto de Angra",
+      "Acordo de Santa Maria",
+      "Acordo de Defesa e Cooperação Luso-Americano das Lajes (1951)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Base das Lajes desempenhou um papel geoestratégico fundamental durante a Guerra Fria e em operações humanitárias e de manutenção da paz.",
+    "fonte": "Força Aérea Portuguesa / Ministério da Defesa Nacional",
+    "factClusterId": "fc_tra_acordolajes1951_01"
+  },
+  {
+    "id": "HIST_TRA_0037",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Em que ano aderiu Portugal formalmente como Estado-membro de pleno direito à Organização das Nações Unidas (ONU), juntamente com outros 15 países após o desbloqueio do veto cruzado da Guerra Fria?",
+    "opcoes": [
+      "14 de Dezembro de 1955",
+      "1945",
+      "1960",
+      "1974"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A entrada de Portugal na ONU em 1955 foi negociada no 'pacote global' de 16 novos membros aprovado pela Assembleia Geral e Conselho de Segurança.",
+    "fonte": "Nações Unidas (UN.org) / Missão Permanente de Portugal junto da ONU",
+    "factClusterId": "fc_tra_entradanaonu1955_01"
+  },
+  {
+    "id": "HIST_TRA_0038",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que diplomata português foi eleito em 2016 e reeleito em 2021 por aclamação como o 9.º Secretário-Geral da Organização das Nações Unidas (ONU)?",
+    "opcoes": [
+      "Jorge Sampaio",
+      "António Guterres",
+      "António Vitorino",
+      "Paulo Portas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Guterres é o primeiro ex-primeiro-ministro a chefiar as Nações Unidas e um dos maiores defensores do multilateralismo global.",
+    "fonte": "Organização das Nações Unidas / Portal Presidência",
+    "factClusterId": "fc_tra_antonioguterresonugeral_01"
+  },
+  {
+    "id": "HIST_TRA_0039",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que político e diplomata português (1939-2021), antigo Presidente da República, foi nomeado pelo Secretário-Geral da ONU em 2006 como o primeiro Alto Representante da ONU para a Aliança das Civilizações?",
+    "opcoes": [
+      "Mário Soares",
+      "Ramalho Eanes",
+      "Jorge Sampaio",
+      "Diogo Freitas do Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jorge Sampaio liderou o diálogo intercultural global e fundou a Plataforma Global de Assistência Académica a Estudantes Sírios.",
+    "fonte": "Aliança das Civilizações da ONU (UNAOC) / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_tra_jorgesampaio_unaoc_01"
+  },
+  {
+    "id": "HIST_TRA_0040",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que jurista e professor universitário português foi eleito em 1995 Presidente da 50.ª Sessão da Assembleia Geral da Organização das Nações Unidas (Sessão do Cinquentenário da ONU)?",
+    "opcoes": [
+      "José Manuel Durão Barroso",
+      "Marcelo Rebelo de Sousa",
+      "Adriano Moreira",
+      "Diogo Freitas do Amaral"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Freitas do Amaral conduziu a sessão histórica do 50.º aniversário da fundação das Nações Unidas em Nova Iorque.",
+    "fonte": "United Nations General Assembly / MNE",
+    "factClusterId": "fc_tra_freitasdoamaralonu1995_01"
+  },
+  {
+    "id": "HIST_TRA_0041",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que político português exerceu dois mandatos consecutivos como Presidente da Comissão Europeia em Bruxelas entre 2004 e 2014, liderando a resposta à crise da Zona Euro e a assinatura do Tratado de Lisboa?",
+    "opcoes": [
+      "José Manuel Durão Barroso",
+      "Mário Soares",
+      "António Vitorino",
+      "Carlos Moedas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Durão Barroso recebeu em nome da União Europeia o Prémio Nobel da Paz atribuído à UE em Oslo em 2012.",
+    "fonte": "Comissão Europeia / Fundação Nobel",
+    "factClusterId": "fc_tra_duraobarrosocomissao_01"
+  },
+  {
+    "id": "HIST_TRA_0042",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que político e jurista português foi eleito em 2018 Diretor-Geral da OIM (Organização Internacional para as Migrações), agência especializada da ONU com sede em Genebra?",
+    "opcoes": [
+      "Vasco Cordeiro",
+      "António Vitorino",
+      "João Vale de Almeida",
+      "Francisco Ribeiro de Menezes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Vitorino foi também Comissário Europeu para a Justiça e Assuntos Internos (1999-2004).",
+    "fonte": "Organização Internacional para as Migrações (IOM.int) / MNE",
+    "factClusterId": "fc_tra_antoniovitorino_oim_01"
+  },
+  {
+    "id": "HIST_TRA_0043",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo de descolonização assinado a 26 de agosto de 1974 em Argel entre a delegação portuguesa chefiada por Mário Soares e o PAIGC reconheceu a independência de jure do Estado da Guiné-Bissau?",
+    "opcoes": [
+      "Acordo de Lusaka",
+      "Acordo de Bissau",
+      "Acordo de Argel (1974)",
+      "Acordo de Conacri"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Acordo de Argel formalizou a retirada pacífica das tropas portuguesas e a plena soberania da Guiné-Bissau.",
+    "fonte": "Centro de Documentação 25 de Abril / MNE",
+    "factClusterId": "fc_tra_acordoargel1974_01"
+  },
+  {
+    "id": "HIST_TRA_0044",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que acordo assinado a 7 de setembro de 1974 em Lusaka (Zâmbia) entre o governo português e a FRELIMO (Frente de Libertação de Moçambique) estabeleceu o cessar-fogo e a transição para a independência de Moçambique?",
+    "opcoes": [
+      "Acordo de Maputo",
+      "Acordo do Alvor",
+      "Acordo de Nampula",
+      "Acordo de Lusaka (1974)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Acordo de Lusaka fixou o dia 25 de junho de 1975 como data da proclamação oficial da independência moçambicana.",
+    "fonte": "Centro de Documentação 25 de Abril / Arquivo Histórico de Moçambique",
+    "factClusterId": "fc_tra_acordolusaka1974_01"
+  },
+  {
+    "id": "HIST_TRA_0045",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que conferência multilateral de segurança e cooperação europeia (CSCE), cujas atas finais foram assinadas em Helsínquia em 1975, contou com a intervenção do Presidente Costa Gomes consolidando o rumo democrático ocidental de Portugal?",
+    "opcoes": [
+      "Acordos de Helsínquia de 1975 (Ato Final de Helsínquia)",
+      "Conferência de Genebra",
+      "Conferência de Madrid",
+      "Pacto de Varsóvia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os Acordos de Helsínquia consagraram a inviolabilidade das fronteiras europeias e o respeito universal pelos direitos humanos.",
+    "fonte": "OSCE / Presidência da República",
+    "factClusterId": "fc_tra_helsinquia1975_01"
+  },
+  {
+    "id": "HIST_TRA_0046",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Quantas presidências rotativas semestrais do Conselho da União Europeia organizou Portugal com sucesso desde a sua adesão em 1986 (1992, 2000, 2007 e 2021)?",
+    "opcoes": [
+      "2 Presidências",
+      "4 Presidências do Conselho da UE",
+      "6 Presidências",
+      "1 Presidência"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As quatro presidências portuguesas aprovaram marcos decisivos como a Estratégia de Lisboa (2000), o Tratado de Lisboa (2007) e a Cimeira Social do Porto (2021).",
+    "fonte": "Conselho da União Europeia / Portal Diplomático",
+    "factClusterId": "fc_tra_quatrieniospresidenciasue_01"
+  },
+  {
+    "id": "HIST_TRA_0047",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que cimeira histórica realizada em Lisboa em março de 2000 definiu o objetivo de tornar a União Europeia na economia baseada no conhecimento mais competitiva do mundo («Estratégia de Lisboa»)?",
+    "opcoes": [
+      "Declaração do Porto",
+      "Pacto de Sintra",
+      "Estratégia de Lisboa (Cimeira Europeia de Lisboa de 2000)",
+      "Conselho de Oeiras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Estratégia de Lisboa colocou a inovação, a investigação científica e a coesão social no centro das políticas europeias.",
+    "fonte": "Conselho Europeu / Gabinete do Primeiro-Ministro",
+    "factClusterId": "fc_tra_estrategialisboa2000_01"
+  },
+  {
+    "id": "HIST_TRA_0048",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que cimeira pioneira realizada no Cairo (Egito) em abril de 2000, durante a Presidência Portuguesa da UE, lançou a primeira parceria estratégica institucional formal entre a União Europeia e a União Africana?",
+    "opcoes": [
+      "Cimeira de Luanda",
+      "Cimeira de Maputo",
+      "Conferência de Argel",
+      "I Cimeira União Europeia - África (Cairo 2000)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A diplomacia portuguesa liderou a aproximação pioneira entre o continente europeu e o continente africano (seguida da II Cimeira em Lisboa em 2007).",
+    "fonte": "União Europeia / União Africana / MNE",
+    "factClusterId": "fc_tra_cimeiraeuafrica2000_01"
+  },
+  {
+    "id": "HIST_TRA_0049",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que tratado internacional de cooperação multilateral firmado em 1991 em Guadalajara (México) reúne anualmente os chefes de Estado e de Governo de Portugal, Espanha e dos países da América Latina?",
+    "opcoes": [
+      "Cimeira Ibero-Americana (Comunidade Ibero-Americana de Nações / SEGIB)",
+      "Pacto Andino",
+      "Cimeira das Américas",
+      "Aliança do Pacífico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal acolheu as Cimeiras Ibero-Americanas do Porto (1998) e do Estoril (2009).",
+    "fonte": "Secretaria-Geral Ibero-Americana (SEGIB) / Presidência da República",
+    "factClusterId": "fc_tra_iberoamericana_01"
+  },
+  {
+    "id": "HIST_TRA_0050",
+    "tema": "História",
+    "subtema": "Tratados & Diplomacia",
+    "pergunta": "Que antigo palácio aristocrático na Calçada das Necessidades em Lisboa (convento da Congregação do Oratório construído no século XVIII por D. João V) é a sede histórica do Ministério dos Negócios Estrangeiros de Portugal?",
+    "opcoes": [
+      "Palácio Foz",
+      "Palácio da Ajuda",
+      "Palácio das Necessidades (Largo do Rilvas)",
+      "Palácio de Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Palácio das Necessidades foi residência régia e é há mais de meio século o centro nevrálgico da diplomacia portuguesa no mundo.",
+    "fonte": "Ministério dos Negócios Estrangeiros (MNE) / Portal Diplomático",
+    "factClusterId": "fc_tra_palacionecessidades_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CIE_MED_0001",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre médico e neurocirurgião português de Avanca (Estarreja, 1874-1955), António Egas Moniz («Egas Moniz»), foi galardoado em 1949 com o Prémio Nobel de Fisiologia ou Medicina pelo desenvolvimento da leucotomia pré-frontal e inventor em 1927 da:",
+    "opcoes": [
+      "Angiografia Cerebral (ou Arteriografia Cerebral)",
+      "Ressonância Magnética",
+      "Tomografia Axial Computorizada (TAC)",
+      "Eletrocardiografia Digital"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz foi o primeiro e único português até à data a ser galardoado com o Prémio Nobel da Medicina.",
+    "fonte": "Fundação Nobel / Museu Casa Egas Moniz / Faculdade de Medicina de Lisboa",
+    "factClusterId": "fc_cie_med_egasmoniz_nobel_angiografia_01"
+  },
+  {
+    "id": "CIE_MED_0002",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que pioneiro médico e botânico renascentista português de Castelo de Vide (1501-1568), Garcia de Orta («Garcia de Orta»), publicou em Goa em 1563 os «Colóquios dos Simples e Drogas da Índia» (com a primeira descrição clínica ocidental da cólera asiática)?",
+    "opcoes": [
+      "Amato Lusitano",
+      "Garcia de Orta (1563, «Colóquios dos Simples»)",
+      "Ribeiro Sanches",
+      "Curvo Semedo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A obra de Garcia de Orta é um marco da farmacologia e botânica médica mundial, contendo o primeiro poema impresso de Luís de Camões.",
+    "fonte": "Biblioteca Nacional de Portugal / Dicionário de História de Portugal",
+    "factClusterId": "fc_cie_med_garciadeorta_coloquios_1563_01"
+  },
+  {
+    "id": "CIE_MED_0003",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que insigne médico judeu português de Castelo Branco (1511-1568), João Rodrigues de Castelo Branco («Amato Lusitano»), médico de papas e reis na Europa renascentista, descobriu a existência das válvulas venosas e publicou as célebres «Centúrias de Curas Medicinais»?",
+    "opcoes": [
+      "Garcia de Orta",
+      "Zacuto Lusitano",
+      "Amato Lusitano (1511-1568)",
+      "Jacob de Castro Sarmento"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Amato Lusitano realizou dissecações pioneiras demonstrando a circulação centrípeta do sangue e recusou converter-se preservando o Juramento de Amato.",
+    "fonte": "Dicionário de História de Portugal / Faculdade de Medicina da Universidade de Coimbra",
+    "factClusterId": "fc_cie_med_amatolusitano_1511_01"
+  },
+  {
+    "id": "CIE_MED_0004",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre médico higienista do Porto (1858-1939), Ricardo Jorge («Ricardo Jorge»), combateu com sucesso o surto de peste bubónica no Porto em 1899 criando o Instituto Central de Higiene (atual Instituto Nacional de Saúde Doutor Ricardo Jorge — INSA)?",
+    "opcoes": [
+      "Câmara Pestana",
+      "Sousa Martins",
+      "Pulido Valente",
+      "Ricardo Jorge (1858-1939)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Jorge é considerado o pai da Saúde Pública moderna em Portugal e representou o país na Organização de Higiene da Sociedade das Nações.",
+    "fonte": "INSA — Instituto Nacional de Saúde Doutor Ricardo Jorge / DGS",
+    "factClusterId": "fc_cie_med_ricardojorge_insa_01"
+  },
+  {
+    "id": "CIE_MED_0005",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que carismático médico lisboeta e professor catedrático da Escola Médico-Cirúrgica (1843-1897), José Tomás de Sousa Martins («Sousa Martins»), dedicou a vida a tratar gratuitamente os pobres e pioneiro no combate à tuberculose na Serra da Estrela?",
+    "opcoes": [
+      "Dr. Sousa Martins (1843-1897)",
+      "Egas Moniz",
+      "Francisco Gentil",
+      "Sobrinho Simões"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sousa Martins é homenageado com uma estátua repleta de placas de agradecimento e flores no Campo dos Mártires da Pátria em Lisboa.",
+    "fonte": "Faculdade de Ciências Médicas de Lisboa / DHP",
+    "factClusterId": "fc_cie_med_sousamartins_1843_01"
+  },
+  {
+    "id": "CIE_MED_0006",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que heróico médico e bacteriologista português da Madeira (1862-1899), Luís da Câmara Pestana («Câmara Pestana»), fundador do Instituto Bacteriológico de Lisboa, faleceu com apenas 36 anos vítima de peste bubónica contraída durante a investigação laboratorial do surto no Porto?",
+    "opcoes": [
+      "Ricardo Jorge",
+      "Luís da Câmara Pestana (1862-1899)",
+      "Garcia de Orta",
+      "Jaime Celestino da Costa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Instituto Bacteriológico Câmara Pestana (IBCP) foi batizado em sua honra perpétua pelo seu sacrifício científico em prol da saúde pública.",
+    "fonte": "Instituto Bacteriológico Câmara Pestana / Universidade de Lisboa",
+    "factClusterId": "fc_cie_med_camarapestana_1899_01"
+  },
+  {
+    "id": "CIE_MED_0007",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que eminente e internacionalmente aclamado médico patologista portuense (nascido em 1947), Manuel Sobrinho Simões («Sobrinho Simões»), fundador do IPATIMUP e professor emérito da Universidade do Porto, foi eleito em 2015 pela revista britânica «The Pathologist» como o:",
+    "opcoes": [
+      "Melhor Cirurgião da Europa",
+      "Descobridor da Penicilina Sintética",
+      "Patologista Mais Influente do Mundo",
+      "Presidente da OMS"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sobrinho Simões é uma autoridade científica planetária no estudo do cancro da tiróide e na patologia molecular.",
+    "fonte": "Ipatimup / i3S / Universidade do Porto / The Pathologist",
+    "factClusterId": "fc_cie_med_sobrinhosimoes_ipatimup_01"
+  },
+  {
+    "id": "CIE_MED_0008",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que insigne médica e cientista imunologista portuguesa de Lisboa e Porto (1939-2020), Maria de Sousa («Maria de Sousa»), professora emérita e investigadora no Instituto Gulbenkian de Ciência e IBMC, descobriu em 1966 o fenómeno fundamental da:",
+    "opcoes": [
+      "Circulação Pulmonar",
+      "Fagocitose Celular",
+      "Vacina contra a Rubéola",
+      "Ecotaxis (migração orientada dos linfócitos T e B no sistema imunitário)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria de Sousa foi condecorada com a Grã-Cruz da Ordem de Sant'Iago da Espada e inspirou a criação do Prémio Maria de Sousa da Fundação Balsemão.",
+    "fonte": "IBMC / i3S / Ordem dos Médicos / FCT",
+    "factClusterId": "fc_cie_med_mariadesousa_ecotaxis_01"
+  },
+  {
+    "id": "CIE_MED_0009",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que brilhante neurocirurgião, professor catedrático e ensaísta de Lisboa (1944-2016), João Lobo Antunes («João Lobo Antunes»), pioneiro na neurocirurgia moderna no Hospital de Santa Maria e Presidente do Conselho Nacional de Ética para as Ciências da Vida, dá nome ao Instituto de Medicina Molecular (iMM)?",
+    "opcoes": [
+      "João Lobo Antunes (1944-2016)",
+      "Egas Moniz",
+      "Gentil Martins",
+      "António Arnaut"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Lobo Antunes foi pioneiro na implantação de elétrodos cerebrais para a doença de Parkinson e autor de livros humanistas como 'Um Olhar Sobre a Cidade'.",
+    "fonte": "iMM João Lobo Antunes / Faculdade de Medicina de Lisboa",
+    "factClusterId": "fc_cie_med_joaoloboantunes_imm_01"
+  },
+  {
+    "id": "CIE_MED_0010",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre cirurgião pediátrico português de Lisboa (nascido em 1927), António Gentil Martins («Gentil Martins»), Bastonário da Ordem dos Médicos e pioneiro mundial na cirurgia pediátrica, liderou intervenções históricas de extrema complexidade para a:",
+    "opcoes": [
+      "Descoberta de vacinas pediátricas",
+      "Separação cirúrgica de gémeos siameses no Hospital de Dona Estefânia",
+      "Cirurgia robótica cardíaca",
+      "Transplantação de medula"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Gentil Martins separou com sucesso vários pares de gémeos siameses unidos pelo tórax e abdómen ganhando prestígio internacional.",
+    "fonte": "Hospital de Dona Estefânia / Ordem dos Médicos",
+    "factClusterId": "fc_cie_med_gentilmartins_siameses_01"
+  },
+  {
+    "id": "CIE_MED_0011",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que insigne médico cirurgião e professor lisboeta (1878-1964), Francisco Gentil («Francisco Gentil»), fundou em 1923 o Instituto Português para o Estudo do Cancro (atual Instituto Português de Oncologia Francisco Gentil — IPO), pioneiro no tratamento oncológico multidisciplinar em Portugal?",
+    "opcoes": [
+      "Egas Moniz",
+      "Pulido Valente",
+      "Francisco Gentil (Fundador do IPO, 1923)",
+      "Sousa Martins"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O IPO possui três polos de excelência nacional em Lisboa, Porto e Coimbra para diagnóstico e tratamento oncológico.",
+    "fonte": "IPO Lisboa / Instituto Português de Oncologia",
+    "factClusterId": "fc_cie_med_franciscogentil_ipo_1923_01"
+  },
+  {
+    "id": "CIE_MED_0012",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que advogado, escritor e estadista de Cumieira (Penela, 1936-2018), António Arnaut («António Arnaut»), Ministro dos Assuntos Sociais no II Governo Constitucional, promulgou a Lei n.º 56/79 que instituiu o Serviço Nacional de Saúde sendo aclamado como o:",
+    "opcoes": [
+      "«O Fundador do INEM»",
+      "«O Criador da Ordem dos Médicos»",
+      "«O Reformador dos Hospitais»",
+      "«O Pai do Serviço Nacional de Saúde (SNS)»"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A criação do SNS garantiu a todos os cidadãos portugueses o acesso universal e geral aos cuidados de saúde.",
+    "fonte": "Assembleia da República / Ministério da Saúde / Diário da República",
+    "factClusterId": "fc_cie_med_antonioarnaut_paisns_1979_01"
+  },
+  {
+    "id": "CIE_MED_0013",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e avançado centro privado de investigação científica e medicina clínica inaugurado em 2010 em Lisboa junto à Torre de Belém («Centro Champalimaud» / Fundação Champalimaud), é uma referência internacional no tratamento do cancro e na investigação em neurociências?",
+    "opcoes": [
+      "Fundação Champalimaud (Centro Champalimaud)",
+      "Fundação Calouste Gulbenkian",
+      "Instituto Gulbenkian de Ciência",
+      "Hospital dos Capuchos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Criada pelo legado de António Champalimaud, a fundação atribui também o prestigiado Prémio de Visão António Champalimaud no valor de 1 milhão de euros.",
+    "fonte": "Fundação Champalimaud / Nature Medicine",
+    "factClusterId": "fc_cie_med_fundacaochampalimaud_01"
+  },
+  {
+    "id": "CIE_MED_0014",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que instituto de investigação biomédica de excelência sediado em Oeiras («Instituto Gulbenkian de Ciência» / IGC), fundado em 1961 pela Fundação Calouste Gulbenkian, formou gerações de cientistas biomédicos e geneticistas em Portugal?",
+    "opcoes": [
+      "i3S (Porto)",
+      "Instituto Gulbenkian de Ciência (IGC, Oeiras)",
+      "iMM (Lisboa)",
+      "Biocant (Cantanhede)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O IGC integrou em 2024 o novo consórcio GIMM (Gulbenkian Institute for Molecular Medicine) unindo forças com o iMM.",
+    "fonte": "Fundação Calouste Gulbenkian / IGC",
+    "factClusterId": "fc_cie_med_igc_gulbenkian_01"
+  },
+  {
+    "id": "CIE_MED_0015",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que organismo público fundado em 1899 sob a direção de Ricardo Jorge («Direção-Geral da Saúde» / DGS), tem a missão de planear, regulamentar e coordenar as atividades de promoção da saúde, prevenção de doenças e vigilância epidemiológica em Portugal?",
+    "opcoes": [
+      "INFARMED",
+      "INSA",
+      "Direção-Geral da Saúde (DGS)",
+      "Administração Central do Sistema de Saúde (ACSS)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Diretor-Geral da Saúde exerce por inerência o cargo de Autoridade de Saúde Nacional coordenando as respostas a emergências sanitárias.",
+    "fonte": "DGS — Direção-Geral da Saúde / Ministério da Saúde",
+    "factClusterId": "fc_cie_med_dgs_1899_01"
+  },
+  {
+    "id": "CIE_MED_0016",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que autoridade pública reguladora fundada em 1993 («INFARMED» — Autoridade Nacional do Medicamento e Produtos de Saúde), com sede no Parque de Saúde de Lisboa, é responsável por avaliar, licenciar e fiscalizar a qualidade, eficácia e segurança dos medicamentos de uso humano em Portugal?",
+    "opcoes": [
+      "DGS",
+      "Ordem dos Farmacêuticos",
+      "ASAE",
+      "INFARMED"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O INFARMED colabora estreitamente com a Agência Europeia de Medicamentos (EMA) e garante a farmacovigilância nacional.",
+    "fonte": "INFARMED / Ministério da Saúde",
+    "factClusterId": "fc_cie_med_infarmed_1993_01"
+  },
+  {
+    "id": "CIE_MED_0017",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que organismo público criado em 1981 pelo Decreto-Lei n.º 234/81 («INEM» — Instituto Nacional de Emergência Médica), coordena o Sistema Integrado de Emergência Médica (SIEM) em Portugal continental através dos Centros de Orientação de Doentes Urgentes (CODU) e do número europeu de emergência 112?",
+    "opcoes": [
+      "INEM (Instituto Nacional de Emergência Médica)",
+      "Cruz Vermelha Portuguesa",
+      "Proteção Civil",
+      "GNR"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O INEM opera Viaturas Médicas de Emergência e Reanimação (VMER), ambulâncias de Suporte Imediato de Vida (SIV) e helicópteros de emergência médica.",
+    "fonte": "INEM / Ministério da Saúde",
+    "factClusterId": "fc_cie_med_inem_1981_01"
+  },
+  {
+    "id": "CIE_MED_0018",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico hospital geral monumental mandado construir no Rossio em Lisboa pelo Rei D. João II e inaugurado em 1504 por D. Manuel I («Hospital Real de Todos os Santos»), destruído pelo Terramoto de 1755, foi o maior e mais inovador hospital renascentista da Europa?",
+    "opcoes": [
+      "Hospital de São José",
+      "Hospital Real de Todos os Santos (1504)",
+      "Hospital de Santa Marta",
+      "Hospital dos Capuchos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Após o terramoto, os doentes foram transferidos para o Colégio de Santo Antão dando origem ao atual Hospital de São José.",
+    "fonte": "Museu de São Roque / CHULC / DHP",
+    "factClusterId": "fc_cie_med_hospitaltodosossantos_1504_01"
+  },
+  {
+    "id": "CIE_MED_0019",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e histórico complexo hospitalar universitário do Porto fundado no século XVIII no Largo Prof. Abel Salazar («Hospital Geral de Santo António»), projetado em estilo neoclássico paladiano pelo arquiteto inglês John Carr, integra a ULS Santo António?",
+    "opcoes": [
+      "Hospital de São João",
+      "Hospital da Prelada",
+      "Hospital Geral de Santo António (Porto)",
+      "Hospital Pedro Hispano"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Hospital de Santo António é Monumento Nacional e hospital universitário do Instituto de Ciências Biomédicas Abel Salazar (ICBAS).",
+    "fonte": "ULS Santo António / ICBAS / DGPC",
+    "factClusterId": "fc_cie_med_hospitalstantoantonio_porto_01"
+  },
+  {
+    "id": "CIE_MED_0020",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que grande e histórico hospital universitário inaugurado em 1959 na Alameda Hernâni Monteiro no Porto («Hospital de São João» / ULS São João), associado à Faculdade de Medicina da Universidade do Porto (FMUP), é um dos maiores centros de cuidados terciários e investigação clínica do país?",
+    "opcoes": [
+      "Hospital de Santo António",
+      "Hospital de Santa Maria",
+      "Hospital de Gaia",
+      "Hospital de São João (Porto, 1959)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Hospital de São João foi pioneiro em Portugal em múltiplas áreas de transplantação de órgãos e inovação em pediatria.",
+    "fonte": "ULS São João / FMUP / SNS",
+    "factClusterId": "fc_cie_med_hospitalsaojoao_porto_1959_01"
+  },
+  {
+    "id": "CIE_MED_0021",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que monumental hospital universitário de Lisboa inaugurado em 1954 pelo Presidente Craveiro Lopes na Cidade Universitária («Hospital de Santa Maria» / CHULN), associado à Faculdade de Medicina da Universidade de Lisboa, é o maior edifício hospitalar público de Portugal?",
+    "opcoes": [
+      "Hospital de Santa Maria (Lisboa, 1954)",
+      "Hospital de São José",
+      "Hospital Curry Cabral",
+      "Hospital Pulido Valente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O edifício do Hospital de Santa Maria foi projetado pelo arquiteto Hermann Distel com capacidade inicial para mais de 1.500 camas.",
+    "fonte": "CHULN / Faculdade de Medicina da Universidade de Lisboa",
+    "factClusterId": "fc_cie_med_hospitalsantamaria_lisboa_1954_01"
+  },
+  {
+    "id": "CIE_MED_0022",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico hospital de Lisboa fundado em 1906 («Hospital Curry Cabral»), batizado em honra do cirurgião José Curry da Câmara Cabral, é o principal centro de referência nacional em doenças infeciosas e o maior centro de transplantação de fígado de Portugal liderado pelo cirurgião Eduardo Barroso?",
+    "opcoes": [
+      "Hospital dos Capuchos",
+      "Hospital Curry Cabral (Centro de Transplantação Hepática)",
+      "Hospital de Dona Estefânia",
+      "Hospital de São Francisco Xavier"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Curry Cabral já realizou mais de 2.000 transplantes de fígado com taxas de sucesso ao nível dos melhores centros internacionais.",
+    "fonte": "CHULC / Sociedade Portuguesa de Transplantação",
+    "factClusterId": "fc_cie_med_hospitalcurrycabral_transplantes_01"
+  },
+  {
+    "id": "CIE_MED_0023",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que prestigiado centro de investigação e inovação biomédica sediado no Porto («i3S» — Instituto de Investigação e Inovação em Saúde), criado em 2015 pela junção do IPATIMUP, IBMC e INEB junto ao Hospital de São João, é o maior instituto de investigação em saúde de Portugal?",
+    "opcoes": [
+      "iMM (Lisboa)",
+      "IGC (Oeiras)",
+      "i3S (Universidade do Porto)",
+      "Champalimaud"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O i3S acolhe mais de 1.000 investigadores focados nas áreas do cancro, neurobiologia, imunologia e bioengenharia.",
+    "fonte": "i3S / Universidade do Porto / FCT",
+    "factClusterId": "fc_cie_med_i3s_porto_2015_01"
+  },
+  {
+    "id": "CIE_MED_0024",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que cardiologista de topo e professor catedrático português (1927-2022), Fernando de Pádua («Prof. Fernando Pádua»), conhecido nacionalmente como o «Médico do Coração», foi o grande pioneiro da cardiologia preventiva e da promoção de hábitos de vida saudáveis em Portugal com a Fundação Portuguesa de Cardiologia?",
+    "opcoes": [
+      "Prof. João Lobo Antunes",
+      "Prof. Gentil Martins",
+      "Prof. Daniel Serrão",
+      "Prof. Fernando de Pádua («O Médico do Coração»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pádua alertou durante décadas para os perigos do tabaco, sal e sedentarismo nas doenças cardiovasculares.",
+    "fonte": "Fundação Portuguesa de Cardiologia / Sociedade Portuguesa de Cardiologia",
+    "factClusterId": "fc_cie_med_fernandopadua_cardiologia_01"
+  },
+  {
+    "id": "CIE_MED_0025",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre médico patologista e bioeticista de São Pedro do Sul e Porto (1928-2017), Daniel Serrão («Daniel Serrão»), professor catedrático da FMUP, foi membro da Academia Pontifícia para a Vida no Vaticano e uma das maiores referências do debate ético da medicina e início/fim de vida em Portugal?",
+    "opcoes": [
+      "Daniel Serrão (1928-2017)",
+      "Sobrinho Simões",
+      "Lobo Antunes",
+      "Walter Osswald"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Daniel Serrão presidiu à Sociedade Europeia de Patologia e influenciou a legislação nacional sobre transplantes e cuidados paliativos.",
+    "fonte": "Universidade do Porto / Conselho Nacional de Ética",
+    "factClusterId": "fc_cie_med_danielserrao_bioetica_01"
+  },
+  {
+    "id": "CIE_MED_0026",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que pioneiro parque biotecnológico e polo de inovação em ciências da vida sediado em Cantanhede (distrito de Coimbra) («Biocant Park»), criado em 2005, foi o primeiro parque tecnológico exclusivamente dedicado à biotecnologia em Portugal?",
+    "opcoes": [
+      "Taguspark (Oeiras)",
+      "Biocant Park (Cantanhede)",
+      "UPTEC (Porto)",
+      "Madan Parque (Caparica)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Biocant concentra dezenas de empresas de biotecnologia, farmacêutica e medicina regenerativa (como a Crioestaminal).",
+    "fonte": "Biocant Park / Município de Cantanhede",
+    "factClusterId": "fc_cie_med_biocant_cantanhede_2005_01"
+  },
+  {
+    "id": "CIE_MED_0027",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico complexo termal fundado em 1484 pela Rainha D. Leonor nas Caldas da Rainha («Hospital Termal Rainha D. Leonor»), é considerado o hospital termal mais antigo em funcionamento contínuo do mundo?",
+    "opcoes": [
+      "Termas de Monchique",
+      "Termas de São Pedro do Sul",
+      "Hospital Termal Rainha D. Leonor (Caldas da Rainha, 1484)",
+      "Termas de Vidago"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Rainha D. Leonor fundou o hospital após testemunhar o efeito cicatrizante e curativo das águas sulfúreas nas úlceras e dores reumáticas.",
+    "fonte": "Município das Caldas da Rainha / Centro Hospitalar do Oeste",
+    "factClusterId": "fc_cie_med_hospitaltermal_caldasdarainha_1484_01"
+  },
+  {
+    "id": "CIE_MED_0028",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórica e mais importante estância termal de Portugal e da Península Ibérica desde a época romana («Termas de São Pedro do Sul»), frequentada pelo primeiro Rei D. Afonso Henriques para curar as fraturas da Batalha de Badajoz de 1169, é líder nacional em tratamentos termais?",
+    "opcoes": [
+      "Termas de Chaves",
+      "Termas de Luso",
+      "Termas de Monfortinho",
+      "Termas de São Pedro do Sul"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As águas hipermarítimas a 68,7ºC de São Pedro do Sul são indicadas para doenças respiratórias, metabólicas e reumáticas.",
+    "fonte": "Termas de São Pedro do Sul / Município de São Pedro do Sul",
+    "factClusterId": "fc_cie_med_termassaopedrodosul_1169_01"
+  },
+  {
+    "id": "CIE_MED_0029",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que eminente e pioneiro médico de Boticas e Viseu (1864-1941), Miguel Bombarda («Miguel Bombarda»), pioneiro da moderna psiquiatria e neurologia em Portugal e líder republicano, dá nome ao antigo hospital psiquiátrico de Lisboa?",
+    "opcoes": [
+      "Miguel Bombarda (1864-1941)",
+      "Júlio de Matos",
+      "Sobral Cid",
+      "Magalhães Lemos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Miguel Bombarda foi assassinado nas vésperas do 5 de Outubro de 1910 por um doente mental tendo sido homenageado como mártir da República.",
+    "fonte": "Dicionário de História de Portugal / Museu Miguel Bombarda",
+    "factClusterId": "fc_cie_med_miguelbombarda_psiquiatria_01"
+  },
+  {
+    "id": "CIE_MED_0030",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que grande e histórico psiquiatra português do Porto (1856-1922), Júlio de Matos («Júlio de Matos»), professor e pioneiro no tratamento humanizado das doenças mentais e na reforma dos manicómios, dá nome ao Hospital Psiquiátrico Júlio de Matos em Lisboa?",
+    "opcoes": [
+      "Miguel Bombarda",
+      "Júlio de Matos (1856-1922)",
+      "Abel Salazar",
+      "Egas Moniz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Júlio de Matos defendeu o fim das camisas de forças violentas e a introdução da terapia ocupacional e reinserção social.",
+    "fonte": "Hospital Júlio de Matos / CHPL / DHP",
+    "factClusterId": "fc_cie_med_juliodematos_psiquiatria_01"
+  },
+  {
+    "id": "CIE_MED_0031",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que médico e investigador biomédico de Guimarães (1889-1946), Abel Salazar («Abel Salazar»), professor catedrático de Histologia no ICBAS da Universidade do Porto e pintor neorrealista afastado pelo Estado Novo, celebrizou a frase «O médico que só sabe Medicina, nem Medicina sabe»?",
+    "opcoes": [
+      "Egas Moniz",
+      "Pulido Valente",
+      "Abel Salazar (1889-1946)",
+      "Reynaldo dos Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa-Museu Abel Salazar em São Mamede de Infesta preserva a memória do cientista e filósofo que deu nome ao ICBAS no Porto.",
+    "fonte": "Casa-Museu Abel Salazar / ICBAS / Universidade do Porto",
+    "factClusterId": "fc_cie_med_abelsalazar_icbas_01"
+  },
+  {
+    "id": "CIE_MED_0032",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e histórico cirurgião, urologista e historiador de arte de Vila Franca de Xira (1880-1970), Reynaldo dos Santos («Reynaldo dos Santos»), colaborador de Egas Moniz no desenvolvimento da angiografia e pioneiro da aortografia lombar, foi Presidente da Academia Nacional de Belas-Artes?",
+    "opcoes": [
+      "Francisco Gentil",
+      "Câmara Pestana",
+      "Pulido Valente",
+      "Reynaldo dos Santos (1880-1970)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Reynaldo dos Santos celebrizou também a obra seminal sobre a arte manuelina e os Painéis de São Vicente de Fora.",
+    "fonte": "Academia Nacional de Belas-Artes / Sociedade Portuguesa de Cirurgia",
+    "factClusterId": "fc_cie_med_reynaldodossantos_aortografia_01"
+  },
+  {
+    "id": "CIE_MED_0033",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico médico internista e político lisboeta (1884-1963), Francisco Pulido Valente («Pulido Valente»), considerado o maior diagnosticador clínico da medicina portuguesa do século XX, dá nome ao Hospital Pulido Valente em Lisboa?",
+    "opcoes": [
+      "Francisco Pulido Valente (1884-1963)",
+      "Sousa Martins",
+      "Egas Moniz",
+      "Curry Cabral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pulido Valente lecionou na Faculdade de Medicina de Lisboa formando gerações de clínicos de topo e combatendo a ditadura.",
+    "fonte": "Hospital Pulido Valente / CHULN / DHP",
+    "factClusterId": "fc_cie_med_pulidovalente_1884_01"
+  },
+  {
+    "id": "CIE_MED_0034",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e pioneira médica e feminista portuguesa de Alenquer (1875-1961), Carolina Beatriz Ângelo («Carolina Beatriz Ângelo»), foi a primeira mulher cirurgiã no Hospital de São José e a primeira mulher a votar em Portugal nas eleições constituintes de 28 de maio de 1911?",
+    "opcoes": [
+      "Adelaide Cabete",
+      "Carolina Beatriz Ângelo (1875-1961)",
+      "Domitila de Carvalho",
+      "Maria de Lourdes Pintasilgo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carolina Beatriz Ângelo votou invocando o seu estatuto de médica viúva e 'chefe de família', dando hoje nome ao Hospital de Loures.",
+    "fonte": "Hospital de Loures Carolina Beatriz Ângelo / Dicionário Feminino Português",
+    "factClusterId": "fc_cie_med_carolinabeatrizangelo_1911_01"
+  },
+  {
+    "id": "CIE_MED_0035",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórica médica obstetra e líder feminista de Elvas (1867-1935), Adelaide Cabete («Adelaide Cabete»), fundadora do Conselho Nacional das Mulheres Portuguesas e professora de puericultura, lutou pela criação de maternidades públicas e licenças de parto em Portugal?",
+    "opcoes": [
+      "Carolina Beatriz Ângelo",
+      "Elina Guimarães",
+      "Adelaide Cabete (1867-1935)",
+      "Maria Lamas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Adelaide Cabete foi pioneira na proteção da saúde materno-infantil e dos direitos laborais das mulheres grávidas.",
+    "fonte": "Dicionário de História de Portugal / Ordem dos Médicos",
+    "factClusterId": "fc_cie_med_adelaidecabete_maternidade_01"
+  },
+  {
+    "id": "CIE_MED_0036",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que emblemática maternidade pública de Lisboa inaugurada em 1932 («Maternidade Dr. Alfredo da Costa» / MAC), batizada em honra do obstetra Alfredo da Costa, é a maternidade onde nasceu o maior número de portugueses da história contemporânea?",
+    "opcoes": [
+      "Maternidade Júlio Dinis (Porto)",
+      "Maternidade Daniel de Matos (Coimbra)",
+      "Maternidade Bissaya Barreto",
+      "Maternidade Dr. Alfredo da Costa (MAC, Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A MAC já assistiu ao nascimento de mais de 500.000 bebés sendo centro terciário de referência em neonatologia e medicina fetal.",
+    "fonte": "CHULC / Maternidade Dr. Alfredo da Costa",
+    "factClusterId": "fc_cie_med_maternidadealfredodacosta_1932_01"
+  },
+  {
+    "id": "CIE_MED_0037",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico professor de medicina e humanista de Coimbra (1886-1974), Fernando Baeta Bissaya Barreto («Bissaya Barreto»), fundou uma rede exemplar de assistência materno-infantil com os Sanatórios da Serra da Estrela, a Maternidade Bissaya Barreto e a Fundação «Portugal dos Pequenitos»?",
+    "opcoes": [
+      "Bissaya Barreto (1886-1974)",
+      "António Arnaut",
+      "Sousa Martins",
+      "Gentil Martins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bissaya Barreto deixou uma vasta obra de proteção social na região Centro gerida pela Fundação Bissaya Barreto.",
+    "fonte": "Fundação Bissaya Barreto / Universidade de Coimbra",
+    "factClusterId": "fc_cie_med_bissayabarreto_coimbra_01"
+  },
+  {
+    "id": "CIE_MED_0038",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que pioneira empresa farmacêutica portuguesa fundada em 1924 em Lisboa pelo farmacêutico Alberto da Cunha Silva («Bial» / Laboratórios Bial), com sede no Coronado (Trofa), desenvolveu o primeiro medicamento de investigação própria e inovação global português (o antiepilético Zebinix / Eslicarbazepina)?",
+    "opcoes": [
+      "Hovione",
+      "Bial (Portela & C.ª / Laboratórios Bial, 1924)",
+      "Laboratórios Atral",
+      "Laboratórios Basi"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Bial liderada pela família Lourenço da Silva comercializa medicamentos inovadores para a Doença de Parkinson e Epilepsia em mais de 50 países.",
+    "fonte": "Bial / Fundação Bial / APIFARMA",
+    "factClusterId": "fc_cie_med_bial_zebinix_1924_01"
+  },
+  {
+    "id": "CIE_MED_0039",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante multinacional farmacêutica portuguesa fundada em Loures em 1959 por Ivan Villax («Hovione»), é uma líder mundial no desenvolvimento e fabrico de princípios ativos farmacêuticos (APIs) e sistemas avançados de inalação pulmonar?",
+    "opcoes": [
+      "Bial",
+      "Generis",
+      "Hovione (1959)",
+      "Tecnimede"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Hovione tem fábricas em Portugal, EUA, China e Irlanda fornecendo as maiores farmacêuticas mundiais com tecnologias patenteadas de química fina.",
+    "fonte": "Hovione / APIFARMA",
+    "factClusterId": "fc_cie_med_hovione_1959_01"
+  },
+  {
+    "id": "CIE_MED_0040",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre cientista e imunologista português (nascido em 1947), António Coutinho («António Coutinho»), antigo Diretor do Instituto Gulbenkian de Ciência (1998-2012) e professor no Instituto Pasteur de Paris, é mundialmente reconhecido pela teoria das redes idiotípicas do sistema imunitário?",
+    "opcoes": [
+      "Alexandre Quintanilha",
+      "Sobrinho Simões",
+      "Henrique Veiga-Fernandes",
+      "António Coutinho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "António Coutinho é membro da Academia das Ciências de Paris e condecorado com a Legião de Honra de França e o Prémio Lacassagne.",
+    "fonte": "IGC / Instituto Pasteur / Academia das Ciências",
+    "factClusterId": "fc_cie_med_antoniocoutinho_imunologia_01"
+  },
+  {
+    "id": "CIE_MED_0041",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que destacado cientista e imunologista português (nascido em 1978), Henrique Veiga-Fernandes («Henrique Veiga-Fernandes»), codiretor da Fundação Champalimaud, foi pioneiro mundial na descoberta da comunicação direta entre o sistema nervoso e o sistema imunitário no intestino?",
+    "opcoes": [
+      "Henrique Veiga-Fernandes",
+      "Cláudio Sunkel",
+      "Miguel Seabra",
+      "Bruno Silva-Santos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Henrique Veiga-Fernandes foi galardoado com quatro bolsas consecutivas do prestigiado European Research Council (ERC).",
+    "fonte": "Fundação Champalimaud / ERC / Nature",
+    "factClusterId": "fc_cie_med_veigafernandes_champalimaud_01"
+  },
+  {
+    "id": "CIE_MED_0042",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que prestigiada cientista e bióloga celular portuguesa (nascida em 1960), Maria Manuel Mota («Maria Mota»), investigadora e diretora do Instituto de Medicina Molecular (iMM), é uma das maiores autoridades mundiais na investigação dos mecanismos de infeção do parasita da:",
+    "opcoes": [
+      "Doença de Chagas",
+      "Malária (Plasmodium)",
+      "Tuberculose",
+      "Leishmaniose"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria Mota recebeu o Prémio Pessoa em 2013 e bolsas do ERC pelas suas descobertas sobre o estágio hepático do parasita da malária.",
+    "fonte": "iMM João Lobo Antunes / Prémio Pessoa / Nature Microbiology",
+    "factClusterId": "fc_cie_med_mariamota_malaria_01"
+  },
+  {
+    "id": "CIE_MED_0043",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e histórico programa nacional de saúde pública criado em Portugal em 1965 («Plano Nacional de Vacinação» / PNV), é considerado internacionalmente um modelo de sucesso com taxas de cobertura vacinal superiores a 95% e acesso universal e gratuito?",
+    "opcoes": [
+      "Programa Saúde 24",
+      "Cheque Dentista",
+      "Plano Nacional de Vacinação (PNV, 1965)",
+      "Programa Nacional de Saúde Infantil"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O PNV permitiu erradicar a poliomielite, difteria e tétano neonatal em Portugal sendo administrado nos centros de saúde de todo o país.",
+    "fonte": "DGS / SNS / OMS",
+    "factClusterId": "fc_cie_med_pnv_vacinacao_1965_01"
+  },
+  {
+    "id": "CIE_MED_0044",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que serviço telefónico e digital público e gratuito do Serviço Nacional de Saúde criado em 2007 («SNS 24» / Linha Saúde 24 — 808 24 24 24), presta triagem médica e encaminhamento de doentes 24 horas por dia?",
+    "opcoes": [
+      "112 (Emergência Nacional)",
+      "Linha Apoio ao Cidadão",
+      "Linha SOS Voz Amiga",
+      "SNS 24 (808 24 24 24)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O SNS 24 desempenhou um papel determinante na triagem epidemiológica e emissão de declarações de isolamento na crise de COVID-19.",
+    "fonte": "SPMS — Serviços Partilhados do Ministério da Saúde / SNS",
+    "factClusterId": "fc_cie_med_sns24_triagem_01"
+  },
+  {
+    "id": "CIE_MED_0045",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que histórico médico e cirurgião oftalmologista de Castelo de Vide e Coimbra (1834-1904), António Gama Pinto («Gama Pinto»), fundou em 1888 em Lisboa o Instituto de Oftalmologia Dr. Gama Pinto pioneiro nas cirurgias de cataratas e glaucoma em Portugal?",
+    "opcoes": [
+      "António Gama Pinto (1888)",
+      "Sousa Martins",
+      "Câmara Pestana",
+      "Pulido Valente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gama Pinto foi professor na Universidade de Heidelberg na Alemanha antes de regressar a Portugal para fundar o prestigiado instituto.",
+    "fonte": "Instituto de Oftalmologia Dr. Gama Pinto / DHP",
+    "factClusterId": "fc_cie_med_gamapinto_oftalmologia_1888_01"
+  },
+  {
+    "id": "CIE_MED_0046",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que ilustre e pioneiro médico psiquiatra e professor da Faculdade de Medicina de Coimbra (1877-1941), António de Almeida Sobral Cid («Sobral Cid»), fundou a moderna escola de psiquiatria de Coimbra dando nome ao Hospital Sobral Cid?",
+    "opcoes": [
+      "Bissaya Barreto",
+      "Sobral Cid (1877-1941)",
+      "Miguel Bombarda",
+      "Júlio de Matos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sobral Cid foi pioneiro na aplicação de métodos psicológicos científicos e clínicos no estudo das perturbações mentais.",
+    "fonte": "CHUC / Universidade de Coimbra",
+    "factClusterId": "fc_cie_med_sobralcid_coimbra_01"
+  },
+  {
+    "id": "CIE_MED_0047",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e histórico médico diplomata português do século XVIII de Idanha-a-Nova (1699-1783), António Ribeiro Sanches («Ribeiro Sanches»), médico da czarina Catarina, a Grande na Rússia e enciclopedista em Paris, escreveu o tratado pioneiro «Cartas Sobre a Educação da Mocidade»?",
+    "opcoes": [
+      "Jacob de Castro Sarmento",
+      "Garcia de Orta",
+      "Ribeiro Sanches (1699-1783)",
+      "Curvo Semedo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ribeiro Sanches foi um dos maiores vultos do Iluminismo europeu propondo a reforma médica pombalina da Universidade de Coimbra.",
+    "fonte": "Biblioteca Nacional de Portugal / DHP",
+    "factClusterId": "fc_cie_med_ribeiro_sanches_iluminismo_01"
+  },
+  {
+    "id": "CIE_MED_0048",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que eminente médico e biofísico moçambicano e português (nascido em 1945), Alexandre Quintanilha («Alexandre Quintanilha»), catedrático jubilado da Universidade do Porto e antigo diretor do IBMC, destacou-se pela sua investigação em mecanismos de stress oxidativo e envelhecimento celular?",
+    "opcoes": [
+      "Sobrinho Simões",
+      "António Coutinho",
+      "Lobo Antunes",
+      "Alexandre Quintanilha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alexandre Quintanilha trabalhou no prestigiado Lawrence Berkeley National Laboratory na Califórnia e presidiu à comissão parlamentar de Educação e Ciência.",
+    "fonte": "Universidade do Porto / IBMC / Assembleia da República",
+    "factClusterId": "fc_cie_med_alexandrequintanilha_01"
+  },
+  {
+    "id": "CIE_MED_0049",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que associação pública profissional fundada em 1938 («Ordem dos Médicos»), tem a responsabilidade de conceder a cédula profissional, validar a formação médica especializada através dos Colégios de Especialidade e defender a ética e deontologia médica em Portugal?",
+    "opcoes": [
+      "Ordem dos Médicos (1938)",
+      "Ordem dos Farmacêuticos",
+      "Ordem dos Enfermeiros",
+      "Conselho Nacional de Saúde"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ordem dos Médicos tem sede nacional em Lisboa e conselhos regionais no Norte, Centro e Sul.",
+    "fonte": "Ordem dos Médicos / Estatuto da Ordem dos Médicos",
+    "factClusterId": "fc_cie_med_ordemdosmedicos_1938_01"
+  },
+  {
+    "id": "CIE_MED_0050",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Medicina & Saúde",
+    "pergunta": "Que importante e histórico médico português do século XVII (1635-1704), João Curvo Semedo («Curvo Semedo»), foi pioneiro na farmacopeia popular com a criação do célebre «Segredo Semedo» e da «Água de Inglaterra» para o tratamento das febres e malária?",
+    "opcoes": [
+      "Garcia de Orta",
+      "Amato Lusitano",
+      "João Curvo Semedo (1635-1704)",
+      "Ribeiro Sanches"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Curvo Semedo foi médico da Casa Real e autor de tratados médicos de grande difusão popular como a 'Polianteia Medicinal'.",
+    "fonte": "Museu da Farmácia / Dicionário de História de Portugal",
+    "factClusterId": "fc_cie_med_curvosemedo_farmacopeia_01"
+  }
+]

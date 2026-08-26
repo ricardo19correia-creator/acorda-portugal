@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GEO_PRA_0001",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que emblemático cabo situado na Serra de Sintra («Cabo da Roca»), com falésias vertiginosas a 140 metros sobre o Atlântico, foi imortalizado por Luís de Camões em «Os Lusíadas» como o ponto «Onde a terra acaba e o mar começa», sendo o ponto mais ocidental de Portugal continental e da Europa continental?",
+    "opcoes": [
+      "Cabo da Roca (Sintra)",
+      "Cabo de São Vicente",
+      "Cabo Espichel",
+      "Cabo Carvoeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cabo da Roca situa-se na latitude 38º 47' Norte e longitude 9º 30' Oeste no Parque Natural de Sintra-Cascais.",
+    "fonte": "Instituto Geográfico Português (IGP) / ICNF / Câmara Municipal de Sintra",
+    "factClusterId": "fc_geo_pra_cabodaroca_pontomaisocidental_01"
+  },
+  {
+    "id": "GEO_PRA_0002",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que mítico cabo rochoso situado no concelho de Vila do Bispo («Cabo de São Vicente»), no extremo sudoeste de Portugal e da Europa continental, possui um dos faróis com maior alcance luminoso do continente europeu e acolheu o lendário promontório sagrado dos navegadores quinhentistas?",
+    "opcoes": [
+      "Cabo de Santa Maria",
+      "Cabo de São Vicente (Sagres)",
+      "Cabo Sardão",
+      "Cabo Raso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cabo de São Vicente é local de passagem obrigatória de aves migratórias e foi considerado sagrado ('Promontorium Sacrum') pelos romanos.",
+    "fonte": "Autoridade Marítima Nacional / ICNF / Município de Vila do Bispo",
+    "factClusterId": "fc_geo_pra_cabosaovicente_sagres_01"
+  },
+  {
+    "id": "GEO_PRA_0003",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa praia da Costa Nova do Prado no concelho de Ílhavo («Praia da Costa Nova»), entre a Ria de Aveiro e o Oceano Atlântico, é mundialmente conhecida pelas suas tradicionais casas de madeira pintadas com riscas verticais e horizontais coloridas conhecidas como:",
+    "opcoes": [
+      "Os Moinhos de Vento",
+      "As Barracas de Sal",
+      "Os Palheiros da Costa Nova",
+      "As Casas dos Moliceiros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os palheiros serviam originalmente de armazéns de alfaias de pesca aos pescadores da ria antes de serem adaptados a habitações de veraneio.",
+    "fonte": "Município de Ílhavo / Turismo Centro de Portugal",
+    "factClusterId": "fc_geo_pra_costanova_palheiros_01"
+  },
+  {
+    "id": "GEO_PRA_0004",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que monumental e impressionante gruta marinha cársica no concelho de Lagoa no Algarve («Algar de Benagil» / Praia de Benagil), com uma abertura circular no teto («o olho») e uma praia de areia dourada no seu interior acessível apenas por mar, é uma das maravilhas naturais mais fotografadas do planeta?",
+    "opcoes": [
+      "Gruta da Boneca",
+      "Gruta de Zorreira",
+      "Algar Seco",
+      "Algar de Benagil (Praia de Benagil)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Algar de Benagil foi esculpido pela erosão marinha ao longo de milhões de anos nas falésias de calcário miocénico do Algarve.",
+    "fonte": "Município de Lagoa / Região de Turismo do Algarve",
+    "factClusterId": "fc_geo_pra_benagil_algar_01"
+  },
+  {
+    "id": "GEO_PRA_0005",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que paradisíaca praia abrigada na Serra da Arrábida em Setúbal («Praia de Galapinhos» / Galapos), com águas calmas e cristalinas em tons azul-turquesa cercada pela vegetação mediterrânica do Parque Natural da Arrábida, foi eleita a Melhor Praia da Europa em 2017 pelo portal European Best Destinations?",
+    "opcoes": [
+      "Praia de Galapinhos (Setúbal)",
+      "Praia da Figueirinha",
+      "Praia do Creiro",
+      "Praia dos Coelhos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Arrábida beneficia de uma orientação a sul que a protege dos ventos do norte criando um microclima de águas transparentes e serenas.",
+    "fonte": "European Best Destinations / ICNF / Município de Setúbal",
+    "factClusterId": "fc_geo_pra_galapinhos_arrabida_01"
+  },
+  {
+    "id": "GEO_PRA_0006",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa praia de Gaia («Praia de Miramar»), situada na freguesia de Gulpilhares, possui sobre um rochedo batido pelas ondas do mar a singular e histórica capela seiscentista hexagonal de:",
+    "opcoes": [
+      "Capela de Nossa Senhora da Guia",
+      "Capela do Senhor da Pedra",
+      "Capela de Santa Marinha",
+      "Capela de São João Baptista"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Construída em 1686 sobre um antigo local de culto pagão marítimo, a Capela do Senhor da Pedra acolhe uma famosa romaria anual no areal.",
+    "fonte": "Câmara Municipal de Vila Nova de Gaia / DGPC",
+    "factClusterId": "fc_geo_pra_senhordapedra_miramar_01"
+  },
+  {
+    "id": "GEO_PRA_0007",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que emblemática praia do Parque Natural do Sudoeste Alentejano e Costa Vicentina no concelho de Odemira («Praia da Zambujeira do Mar»), cercada por imponentes arribas xistosas escuras, acolhe anualmente no início de agosto um dos maiores festivais de música de verão de Portugal (o Festival MEO Sudoeste)?",
+    "opcoes": [
+      "Praia de Almograve",
+      "Praia do Carvalhal",
+      "Praia da Zambujeira do Mar",
+      "Praia de Odeceixe"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Zambujeira do Mar combina a beleza selvagem das praias alentejanas com as tradições piscatórias e gastronómicas da costa alentejana.",
+    "fonte": "Município de Odemira / ICNF / Turismo do Alentejo",
+    "factClusterId": "fc_geo_pra_zambujeiradomar_01"
+  },
+  {
+    "id": "GEO_PRA_0008",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que deslumbrante praia situada na fronteira natural entre o Alentejo e o Algarve («Praia de Odeceixe»), no concelho de Aljezur, tem a particularidade única de ser banhada em simultâneo pelo mar alto atlântico e pelas águas calmas da foz do:",
+    "opcoes": [
+      "Rio Mira",
+      "Rio Arade",
+      "Ribeira de Aljezur",
+      "Rio Seixe"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A língua de areia de Odeceixe permite tomar banho de rio de um lado e de mar com ondas do outro sendo uma das 7 Maravilhas - Praias de Portugal.",
+    "fonte": "Município de Aljezur / ICNF / 7 Maravilhas de Portugal",
+    "factClusterId": "fc_geo_pra_odeceixe_rioseixe_01"
+  },
+  {
+    "id": "GEO_PRA_0009",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia de postal ilustrado no concelho de Lagoa no Algarve («Praia da Marinha»), famosa pelos seus icónicos arcos duplos naturais esculpidos na rocha, poças de maré cristalinas e arribas douradas, é considerada uma das 10 praias mais belas da Europa pelo Guia Michelin?",
+    "opcoes": [
+      "Praia da Marinha",
+      "Praia de Albandeira",
+      "Praia do Carvalho",
+      "Praia dos Três Castelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praia da Marinha é o ponto de partida do célebre percurso pedonal 'Sete Vales Suspensos' que percorre o cimo das arribas calcárias.",
+    "fonte": "Guia Michelin / Turismo do Algarve / Município de Lagoa",
+    "factClusterId": "fc_geo_pra_praiamarinha_lagoa_01"
+  },
+  {
+    "id": "GEO_PRA_0010",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia da Ilha de Tavira na Ria Formosa («Praia do Barril»), famosa pelo seu acesso através de um pitoresco comboio turístico de via estreita que atravessa o sapal e pela antiga armação de atum, abriga na areia o célebre monumento evocativo:",
+    "opcoes": [
+      "O Forte de Santo António",
+      "O Cemitério das Âncoras (centenas de âncoras alinhadas nas dunas)",
+      "O Museu da Sardinha",
+      "O Farol de Santa Maria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cemitério das Âncoras homenageia os pescadores da antiga comunidade da Armação do Barril que pescavam o atum-rabilho com a técnica da almadrava.",
+    "fonte": "Parque Natural da Ria Formosa / Município de Tavira",
+    "factClusterId": "fc_geo_pra_barril_cemiterioancoras_01"
+  },
+  {
+    "id": "GEO_PRA_0011",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que ilha-barreira desabitada da Ria Formosa em Faro («Ilha Deserta» / Ilha da Barreta), onde se localiza o ponto mais a sul de Portugal continental («Cabo de Santa Maria»), possui um areal intocado de 11 km acessível apenas por barco?",
+    "opcoes": [
+      "Ilha da Culatra",
+      "Ilha de Armona",
+      "Ilha Deserta (Cabo de Santa Maria)",
+      "Ilha de Tavira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Cabo de Santa Maria fica situado no extremo sul da Ilha Deserta em frente à barra de São Luís na Ria Formosa.",
+    "fonte": "Parque Natural da Ria Formosa / Município de Faro",
+    "factClusterId": "fc_geo_pra_ilhadeserta_cabosantamaria_01"
+  },
+  {
+    "id": "GEO_PRA_0012",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que espetacular extensão contínua de 6 km de areal dourado entre Vilamoura e Olhos de Água (Albufeira) («Praia da Falésia»), é ladeada por monumentais arribas esculpidas em tons avermelhados, brancos e ocres coroadas por pinheiros mansos?",
+    "opcoes": [
+      "Praia da Rocha Baixinha",
+      "Praia de Santa Eulália",
+      "Praia dos Salgados",
+      "Praia da Falésia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Praia da Falésia foi eleita pelos utilizadores do TripAdvisor como a Melhor Praia do Mundo em 2024 no Travelers' Choice Awards.",
+    "fonte": "TripAdvisor Travelers' Choice 2024 / Turismo de Portugal",
+    "factClusterId": "fc_geo_pra_praiafalesia_albufeira_01"
+  },
+  {
+    "id": "GEO_PRA_0013",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que paradisíaca praia da Ilha de Porto Santo no arquipélago da Madeira («Praia do Porto Santo» / Ponta da Calheta), com 9 km ininterruptos de areia fina dourada e águas límpidas, é internacionalmente famosa pelas propriedades terapêuticas das suas areias ricas em:",
+    "opcoes": [
+      "Carbonato de cálcio, magnésio e estrôncio (areias carbonatadas biogénicas)",
+      "Quartzo e basalto vulcânico negro",
+      "Silício e ferro magnético",
+      "Argila verde medicinal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Estudos científicos da Universidade de Aveiro e Oslo comprovaram a eficácia das areias quentes de Porto Santo no tratamento de doenças reumáticas e ósseas.",
+    "fonte": "Governo Regional da Madeira / Universidade de Aveiro / Município do Porto Santo",
+    "factClusterId": "fc_geo_pra_portosanto_areias_terapeuticas_01"
+  },
+  {
+    "id": "GEO_PRA_0014",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que singular baía marítima no concelho de Alcobaça («Baía de São Martinho do Porto»), com um formato quase perfeito de concha fechada ligada ao oceano por uma estreita barra entre duas colinas rochosas, proporciona uma praia de águas serenas sem ondulação?",
+    "opcoes": [
+      "Lagoa de Óbidos",
+      "Baía de São Martinho do Porto",
+      "Foz do Arelho",
+      "Baía de Cascais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Baía de São Martinho do Porto é o último vestígio de um antigo e vasto golfo marinho que se estendia até Alfeizerão e Cós na Idade Média.",
+    "fonte": "Município de Alcobaça / Turismo do Centro",
+    "factClusterId": "fc_geo_pra_saomartinhodoporto_concha_01"
+  },
+  {
+    "id": "GEO_PRA_0015",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que maior lagoa costeira de Portugal («Lagoa de Óbidos»), situada entre os concelhos de Óbidos e Caldas da Rainha com a Praia da Foz do Arelho, é um santuário de bivalves e aves aquáticas ligada ao mar por um canal aberto artificialmente todos os anos?",
+    "opcoes": [
+      "Lagoa de Santo André",
+      "Lagoa de Melides",
+      "Lagoa de Óbidos (Foz do Arelho)",
+      "Lagoa de Albufeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A abertura sazonal da 'aberta' da Lagoa de Óbidos renova as águas lagunares permitindo a entrada de peixes e a apanha do berbigão e amêijoa.",
+    "fonte": "APA — Agência Portuguesa do Ambiente / Município de Óbidos",
+    "factClusterId": "fc_geo_pra_lagoadeobidos_fozdoarelho_01"
+  },
+  {
+    "id": "GEO_PRA_0016",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que extensa restinga de areia com 30 km de comprimento na Península de Setúbal («Costa da Caparica»), entre a foz do Tejo e a Fonte da Telha, é a maior extensão contínua de praias da Área Metropolitana de Lisboa ladeada pela Paisagem Protegida da Arriba Fóssil?",
+    "opcoes": [
+      "Praia de Carcavelos",
+      "Praia de Troia",
+      "Praia do Guincho",
+      "Costa da Caparica"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Arriba Fóssil da Caparica preserva camadas sedimentares do Miocénico com milhões de fósseis marinhos.",
+    "fonte": "ICNF / Câmara Municipal de Almada",
+    "factClusterId": "fc_geo_pra_costadacaparica_arribafossil_01"
+  },
+  {
+    "id": "GEO_PRA_0017",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que histórica praia de Sesimbra situada a sul da Arriba Fóssil («Praia do Meco» / Praia do Moinho de Baixo), cercada por pinhais e dunas selvagens, foi pioneira na década de 1970 como uma das primeiras praias oficiais de naturismo em Portugal?",
+    "opcoes": [
+      "Praia do Meco",
+      "Praia da Bicas",
+      "Praia da Lagoa de Albufeira",
+      "Praia da Foz"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praia do Meco é também famosa pelas suas argilas naturais nas falésias e pelo mar aberto atlântico.",
+    "fonte": "Federação Portuguesa de Naturismo / Município de Sesimbra",
+    "factClusterId": "fc_geo_pra_meco_sesimbra_01"
+  },
+  {
+    "id": "GEO_PRA_0018",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia selvagem e recôndita de Sesimbra («Praia da Ribeira do Cavalo»), acessível apenas por barco ou por um trilho pedestre íngreme na falésia, atrai milhares de visitantes pelas suas águas cor de esmeralda e formações rochosas pontiagudas?",
+    "opcoes": [
+      "Praia do Inferno",
+      "Praia da Ribeira do Cavalo",
+      "Praia da Mijona",
+      "Praia do Cação"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O nome provém de uma imponente formação rochosa saliente na falésia que se assemelha à cabeça de um cavalo.",
+    "fonte": "Município de Sesimbra / Turismo da Região de Lisboa",
+    "factClusterId": "fc_geo_pra_ribeiradocavalo_sesimbra_01"
+  },
+  {
+    "id": "GEO_PRA_0019",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famoso promontório rochoso e cabo no concelho de Peniche («Cabo Carvoeiro»), com falésias calcárias estratificadas esculpidas pelo mar, abriga a famosa rocha isolada em forma de pináculo conhecida como a «Nau dos Corvos» e o Farol do Cabo Carvoeiro?",
+    "opcoes": [
+      "Cabo Raso",
+      "Cabo Espichel",
+      "Cabo Carvoeiro (Peniche)",
+      "Cabo Mondego"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Cabo Carvoeiro oferece uma vista deslumbrante sobre o Arquipélago das Berlengas e possui a Gruta da Furninha onde foram encontrados vestígios neandertais.",
+    "fonte": "Município de Peniche / ICNF",
+    "factClusterId": "fc_geo_pra_cabocarvoeiro_peniche_01"
+  },
+  {
+    "id": "GEO_PRA_0020",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que imponente cabo no concelho de Sesimbra («Cabo Espichel»), com falésias que caem a pique de 130 metros sobre o oceano, abriga o Santuário de Nossa Senhora da Pedra Muge e trilhos com pegadas fossilizadas de dinossauros saurópodes e terópodes?",
+    "opcoes": [
+      "Cabo da Roca",
+      "Cabo de São Vicente",
+      "Cabo Sardão",
+      "Cabo Espichel (Sesimbra)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As jazidas de pegadas de dinossauros da Pedra da Mua e dos Lagosteiros no Cabo Espichel têm mais de 145 milhões de anos (Jurássico Superior e Cretácico).",
+    "fonte": "ICNF / Município de Sesimbra / Monumento Natural da Pedra da Mua",
+    "factClusterId": "fc_geo_pra_caboespichel_dinossauros_01"
+  },
+  {
+    "id": "GEO_PRA_0021",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que cabo rochoso no concelho da Figueira da Foz («Cabo Mondego»), classificado como Monumento Natural, é internacionalmente reconhecido como o Estratótipo de Limite Global (GSSP) do andar Bajociano do período Jurássico Médio?",
+    "opcoes": [
+      "Cabo Mondego (Figueira da Foz)",
+      "Cabo Carvoeiro",
+      "Cabo da Roca",
+      "Cabo Raso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Cabo Mondego possui uma das sequências geológicas jurássicas mais completas e contínuas do mundo com fósseis de amonites e pegadas de dinossauros.",
+    "fonte": "ICNF / Sociedade Geológica de Portugal / Município da Figueira da Foz",
+    "factClusterId": "fc_geo_pra_cabomondego_jurassico_01"
+  },
+  {
+    "id": "GEO_PRA_0022",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia de Esposende («Praia da Apúlia»), famosa pelas suas dunas com uma linha de tradicionais moinhos de vento em xisto e madeira, mantém viva a tradição da apanha de sargaço (algas marítimas para fertilizante agrícola) pelos sargaceiros vestidos de branquetas?",
+    "opcoes": [
+      "Praia de Ofir",
+      "Praia da Apúlia (Esposende)",
+      "Praia de Moledo",
+      "Praia de Suave Mar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os moinhos da Apúlia foram construídos no topo das dunas no século XIX para aproveitar os ventos atlânticos na moagem do milho.",
+    "fonte": "Município de Esposende / Parque Natural do Litoral Norte",
+    "factClusterId": "fc_geo_pra_apulia_moinhos_sargaceiros_01"
+  },
+  {
+    "id": "GEO_PRA_0023",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que emblemática praia do concelho de Caminha («Praia de Moledo»), com vista imponente sobre o Monte de Santa Tecla na Galiza, tem em frente numa pequena ilha rochosa no mar o histórico e único monumento militar fortificado de:",
+    "opcoes": [
+      "Forte de São João da Foz",
+      "Forte do Bugio",
+      "Forte da Ínsua (século XVII com convento franciscano no interior)",
+      "Forte de Santiago"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Forte da Ínsua possui no seu pátio de armas um raro poço de água doce potável mesmo estando cercado pelo oceano salgado.",
+    "fonte": "DGPC / Município de Caminha",
+    "factClusterId": "fc_geo_pra_moledo_fortedainsua_01"
+  },
+  {
+    "id": "GEO_PRA_0024",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia da Figueira da Foz («Praia da Claridade» / Praia de Buarcos), possui o mais largo areal urbano da Europa com passadiços de madeira e o icónico relógio de sol monumental, sendo uma das primeiras estâncias balneares aristocráticas do século XIX?",
+    "opcoes": [
+      "Praia de Mira",
+      "Praia da Tocha",
+      "Praia do Furadouro",
+      "Praia da Claridade (Figueira da Foz)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Figueira da Foz foi apelidada no século XIX como a 'Rainha das Praias de Portugal' frequentada pela burguesia e realeza.",
+    "fonte": "Município da Figueira da Foz / Turismo Centro de Portugal",
+    "factClusterId": "fc_geo_pra_figueiradafoz_claridade_01"
+  },
+  {
+    "id": "GEO_PRA_0025",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia do concelho de Cantanhede («Praia da Tocha») e de Mira («Praia de Mira»), preservam antigos palheiros de pescadores e a tradição secular da «Arte Xávega» com barcos em meia-lua puxados antigamente por juntas de bois e hoje por tratores?",
+    "opcoes": [
+      "Arte Xávega (pesca tradicional de arrasto costeiro)",
+      "Pesca da Almadrava",
+      "Pesca de Cerco",
+      "Apanha do Moliço"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praia de Mira detém o recorde mundial ininterrupto da atribuição da Bandeira Azul desde a sua criação em 1987.",
+    "fonte": "ABAE (Bandeira Azul) / Município de Mira",
+    "factClusterId": "fc_geo_pra_artexavega_praiamira_01"
+  },
+  {
+    "id": "GEO_PRA_0026",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia do concelho de Ílhavo («Praia da Barra»), possui junto à embocadura da Ria de Aveiro o «Farol da Barra», que é o farol mais alto de Portugal e o segundo mais alto da Península Ibérica com exatamente:",
+    "opcoes": [
+      "45 metros de altura",
+      "62 metros de altura",
+      "80 metros de altura",
+      "35 metros de altura"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Inaugurado em 1893, o Farol da Barra possui 271 degraus em caracol e um feixe luminoso visível a 23 milhas náuticas.",
+    "fonte": "Direção de Faróis / Autoridade Marítima Nacional",
+    "factClusterId": "fc_geo_pra_faroldabarra_62metros_01"
+  },
+  {
+    "id": "GEO_PRA_0027",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que península costeira arenosa com 17 km de praias no estuário do rio Sado («Península de Tróia»), no concelho de Grândola, é famosa pelas ruínas romanas de salga de peixe do século I e por ser o habitat da única comunidade residente em estuário em Portugal de:",
+    "opcoes": [
+      "Focas-monge",
+      "Tartarugas-verdes",
+      "Golfinhos-roazes (Tursiops truncatus no Sado)",
+      "Lontras-marinhas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A comunidade de roazes do Sado conta com cerca de três dezenas de indivíduos protegidos pela Reserva Natural do Estuário do Sado.",
+    "fonte": "ICNF / Reserva Natural do Estuário do Sado / Tróia Resort",
+    "factClusterId": "fc_geo_pra_troia_golfinhos_sado_01"
+  },
+  {
+    "id": "GEO_PRA_0028",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia e aldeia costeira do concelho de Grândola («Praia da Comporta»), rodeada por extensos arrozais verdes, dunas e pinhais mansos, tornou-se um dos destinos balneares e refúgios de luxo ecológico mais exclusivos da Europa?",
+    "opcoes": [
+      "Praia do Carvalhal",
+      "Praia da Galé",
+      "Praia de Melides",
+      "Praia da Comporta"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Comporta integra a Herdade da Comporta preservando uma arquitetura tradicional em colmo e madeira.",
+    "fonte": "Município de Grândola / Turismo do Alentejo",
+    "factClusterId": "fc_geo_pra_comporta_grandola_01"
+  },
+  {
+    "id": "GEO_PRA_0029",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que pitoresca aldeia de pescadores com casas brancas com barras azuis no concelho de Sines («Porto Covo»), imortalizada na canção de Rui Veloso («Havia um cais... em Porto Covo»), tem em frente no mar a histórica Ilha do Pessegueiro e o Forte de Santo Alberto?",
+    "opcoes": [
+      "Porto Covo (Ilha do Pessegueiro)",
+      "Vila Nova de Milfontes",
+      "Sines",
+      "Zambujeira do Mar"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ilha do Pessegueiro conserva vestígios de uma fábrica romana de preparados de peixe e pedreiras antigas.",
+    "fonte": "Município de Sines / ICNF / DGPC",
+    "factClusterId": "fc_geo_pra_portocovo_pessegueiro_01"
+  },
+  {
+    "id": "GEO_PRA_0030",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa vila balnear e fluvial do concelho de Odemira («Vila Nova de Milfontes»), situada na foz do rio Mira («A Princesa do Alentejo»), possui as praias do Farol, Franquia e Furnas guardadas pelo Forte de São Clemente?",
+    "opcoes": [
+      "Zambujeira do Mar",
+      "Vila Nova de Milfontes (Foz do Rio Mira)",
+      "Porto Covo",
+      "Almograve"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Vila Nova de Milfontes foi o ponto de partida da histórica primeira travessia aérea Portugal-Macau em 1924 por Brito Pais e Sarmento de Beires no avião 'Pátria'.",
+    "fonte": "Município de Odemira / ICNF",
+    "factClusterId": "fc_geo_pra_vilanovademilfontes_riomira_01"
+  },
+  {
+    "id": "GEO_PRA_0031",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que espetacular praia de surf do concelho de Aljezur («Praia da Arrifana»), embutida numa enseada em anfiteatro natural protegida por altas arribas negras com o rochedo da «Pedra da Agulha» no mar, é coroada pelas ruínas do Ribat muçulmano da Arrifana fundado pelo místico Ibn Qasi?",
+    "opcoes": [
+      "Praia do Amado",
+      "Praia de Monte Clérigo",
+      "Praia da Arrifana (Aljezur)",
+      "Praia da Bordeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Ribat da Arrifana é o único convento-fortaleza islâmico sufi identificado na Península Ibérica classificado como Monumento Nacional.",
+    "fonte": "DGPC / Município de Aljezur / ICNF",
+    "factClusterId": "fc_geo_pra_arrifana_aljezur_01"
+  },
+  {
+    "id": "GEO_PRA_0032",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa praia do concelho de Lagos no Algarve («Praia Dona Ana» e «Praia do Camilo»), cercada por algares, arcos marinhos e leixões dourados esculpidos no calcário, conduz ao magnífico promontório rochoso da:",
+    "opcoes": [
+      "Ponta de Sagres",
+      "Ponta dos Corvos",
+      "Ponta do Altar",
+      "Ponta da Piedade (Lagos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Ponta da Piedade possui um labirinto de grutas e túneis marítimos de águas verde-esmeralda visitáveis em pequenos barcos tradicionais.",
+    "fonte": "Município de Lagos / Região de Turismo do Algarve",
+    "factClusterId": "fc_geo_pra_pontadapiedade_lagos_01"
+  },
+  {
+    "id": "GEO_PRA_0033",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que histórica e ampla praia urbana do concelho de Portimão («Praia da Rocha»), foi a primeira grande estância balnear de renome internacional do Algarve desde os anos 1930, famosa pelas suas rochas vermelhas na areia e pelo Forte de Santa Catarina?",
+    "opcoes": [
+      "Praia da Rocha (Portimão)",
+      "Praia dos Três Castelos",
+      "Praia do Vau",
+      "Praia de Alvor"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praia da Rocha foi frequentada por escritores como Teixeira de Pascoaes e acolheu os primeiros hotéis de luxo do Algarve.",
+    "fonte": "Município de Portimão / Turismo do Algarve",
+    "factClusterId": "fc_geo_pra_praiadarocha_portimao_01"
+  },
+  {
+    "id": "GEO_PRA_0034",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia da orla oriental do Algarve no concelho de Vila Real de Santo António («Praia de Monte Gordo»), junto à Mata Nacional das Dunas de Vila Real de Santo António, é célebre por ter as águas do mar com a temperatura mais quente de Portugal continental (atingindo frequentemente 24ºC a 26ºC no verão)?",
+    "opcoes": [
+      "Praia da Manta Rota",
+      "Praia de Monte Gordo",
+      "Praia de Altura",
+      "Praia de Cacela Velha"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A proximidade do Golfo de Cádis e as correntes quentes do Levante mediterrânico aquecem as águas da Baía de Monte Gordo.",
+    "fonte": "Instituto Português do Mar e da Atmosfera (IPMA) / Município de VRSA",
+    "factClusterId": "fc_geo_pra_montegordo_aguasquentes_01"
+  },
+  {
+    "id": "GEO_PRA_0035",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que mágica e histórica praia na ponta nascente da Ria Formosa («Praia de Cacela Velha» / Praia da Fábrica), no concelho de Vila Real de Santo António, proporciona uma vista deslumbrante a partir da aldeia fortificada de Cacela Velha e da sua fortaleza sobre a ria?",
+    "opcoes": [
+      "Praia da Lota",
+      "Praia da Manta Rota",
+      "Praia de Cacela Velha",
+      "Praia de Cabanas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Cacela Velha foi elogiada por poetas como Sophia de Mello Breyner Andresen sendo considerada uma das praias mais bem preservadas da Península Ibérica.",
+    "fonte": "Parque Natural da Ria Formosa / Município de VRSA",
+    "factClusterId": "fc_geo_pra_cacelavelha_01"
+  },
+  {
+    "id": "GEO_PRA_0036",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Qual é a extensão aproximada da costa litoral da Zona Económica Exclusiva (ZEE) de Portugal, a 3.ª maior da União Europeia e a 10.ª maior do mundo, que cobre cerca de:",
+    "opcoes": [
+      "500 mil km²",
+      "800 mil km²",
+      "300 mil km²",
+      "1,7 milhões de quilómetros quadrados (com proposta de extensão da plataforma para 3,8 milhões de km²)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A ZEE portuguesa é cerca de 18 vezes maior do que o território emerso do país graças aos arquipélagos dos Açores e da Madeira.",
+    "fonte": "Estrutura de Missão para a Extensão da Plataforma Continental (EMEPC) / Marinha Portuguesa",
+    "factClusterId": "fc_geo_pra_zee_portugal_01"
+  },
+  {
+    "id": "GEO_PRA_0037",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia e estância balnear da Ilha de São Miguel nos Açores («Praia de Santa Bárbara» / Ribeira Seca), na costa norte em Ribeira Grande, é famosa pelo seu extenso areal de areia negra vulcânica e por acolher etapas da Liga Mundial de Surf (WSL)?",
+    "opcoes": [
+      "Praia de Santa Bárbara (Ribeira Grande, São Miguel)",
+      "Praia das Milícias",
+      "Praia do Pópulo",
+      "Praia de Água d'Alto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Praia de Santa Bárbara estende-se por mais de 1 km com excelentes ondas para a prática de surf durante todo o ano.",
+    "fonte": "Governo dos Açores / WSL / Município de Ribeira Grande",
+    "factClusterId": "fc_geo_pra_santabarbara_saomiguel_01"
+  },
+  {
+    "id": "GEO_PRA_0038",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa praia açoriana na costa sudoeste da Ilha de São Miguel («Ponta da Ferraria» / Ginetes), tem a particularidade natural extraordinária de permitir banhos no mar em piscinas naturais com água termal vulcânica aquecida geotermicamente a mais de 30ºC durante a maré baixa?",
+    "opcoes": [
+      "Caldeira Velha",
+      "Ponta da Ferraria (Termas do Mar da Ferraria)",
+      "Poça da Dona Beija",
+      "Ilhéu de Vila Franca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nascente termal subaquática mistura água salgada oceânica com água quente a mais de 60ºC na maré vazia.",
+    "fonte": "Monumento Natural da Ponta da Ferraria / Parque Natural de São Miguel",
+    "factClusterId": "fc_geo_pra_pontadaferraria_termas_01"
+  },
+  {
+    "id": "GEO_PRA_0039",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que espetacular praia e reserva natural numa cratera vulcânica no mar na Ilha de São Miguel («Ilhéu de Vila Franca do Campo»), possui uma lagoa perfeitamente circular no seu interior ligada ao oceano por uma estreita fenda («o Boquete»)?",
+    "opcoes": [
+      "Ilhéus das Cabras",
+      "Ilhéu de Baixo",
+      "Ilhéu de Vila Franca do Campo (Açores)",
+      "Ilhéu da Praia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A lagoa interior é uma caldeira de cone hidromagmático fóssil que acolhe uma rica biodiversidade marinha e a etapa do Red Bull Cliff Diving.",
+    "fonte": "Governo dos Açores / Reserva Natural do Ilhéu de Vila Franca",
+    "factClusterId": "fc_geo_pra_ilheuvilafranca_acores_01"
+  },
+  {
+    "id": "GEO_PRA_0040",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia de areia branca na Ilha de Santa Maria nos Açores («Praia Formosa»), no concelho de Vila do Porto, é a única praia natural de areia clara de origem sedimentar calcária de todo o arquipélago açoriano?",
+    "opcoes": [
+      "Praia de São Lourenço",
+      "Praia dos Anjos",
+      "Praia da Vitória",
+      "Praia Formosa (Ilha de Santa Maria)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Santa Maria é a ilha mais antiga dos Açores e a única com depósitos sedimentares marinhos fossilíferos ricos em calcário biogénico.",
+    "fonte": "Parque Natural de Santa Maria / Governo dos Açores",
+    "factClusterId": "fc_geo_pra_praiaformosa_santamaria_01"
+  },
+  {
+    "id": "GEO_PRA_0041",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosa praia da Ilha da Madeira («Prainha do Caniçal»), situada na Ponta de São Lourenço no concelho de Machico, é a única praia natural de areia preta/acobreada da ilha da Madeira cercada pela paisagem árida vulcânica?",
+    "opcoes": [
+      "Prainha do Caniçal (Madeira)",
+      "Praia Formosa (Funchal)",
+      "Praia da Calheta",
+      "Praia de Machico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ponta de São Lourenço é uma península vulcânica desértica classificada como Reserva Natural com arribas fósseis imponentes.",
+    "fonte": "Instituto das Florestas e Conservação da Natureza da Madeira (IFCN) / Machico",
+    "factClusterId": "fc_geo_pra_prainhacanical_madeira_01"
+  },
+  {
+    "id": "GEO_PRA_0042",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que famosas piscinas naturais esculpidas em rocha de lava vulcânica basáltica negra no noroeste da Ilha da Madeira («Piscinas Naturais de Porto Moniz»), são continuamente abastecidas pelas ondas límpidas do oceano Atlântico?",
+    "opcoes": [
+      "Piscinas do Seixal",
+      "Piscinas Naturais de Porto Moniz",
+      "Piscinas da Doca do Cavaco",
+      "Complexo Balnear do Lido"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As piscinas formaram-se pelo arrefecimento de escoadas lávicas em contacto com a água do mar há milhares de anos.",
+    "fonte": "Município de Porto Moniz / Turismo da Madeira",
+    "factClusterId": "fc_geo_pra_portomoniz_piscinas_01"
+  },
+  {
+    "id": "GEO_PRA_0043",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que espetacular praia de areia preta fina no concelho de Porto Moniz na Madeira («Praia do Porto do Seixal»), é emoldurada por uma majestosa falésia verdejante com uma cascata de água doce natural («o Véu da Noiva») que cai diretamente no oceano?",
+    "opcoes": [
+      "Praia da Maiata",
+      "Praia da Ribeira da Janela",
+      "Praia do Porto do Seixal",
+      "Praia da Laje"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A praia do Seixal assemelha-se a cenários do Havai com montanhas verdejantes da floresta Laurissilva a mergulhar no mar.",
+    "fonte": "Turismo da Madeira / Município de Porto Moniz",
+    "factClusterId": "fc_geo_pra_seixal_madeira_01"
+  },
+  {
+    "id": "GEO_PRA_0044",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia de Cascais («Praia do Guincho»), situada no Parque Natural de Sintra-Cascais entre dunas e a Serra de Sintra, é mundialmente famosa pelas suas fortes 'Nortadas' e ondulação oceânica constante sendo palco de mundiais de windsurf e kitesurf?",
+    "opcoes": [
+      "Praia da Cresmina",
+      "Praia Grande",
+      "Praia da Adraga",
+      "Praia do Guincho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Guincho foi cenário de abertura do célebre filme de James Bond '007 - Ao Serviço de Sua Majestade' em 1969.",
+    "fonte": "Câmara Municipal de Cascais / ICNF",
+    "factClusterId": "fc_geo_pra_guincho_cascais_01"
+  },
+  {
+    "id": "GEO_PRA_0045",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia do concelho de Sintra («Praia da Adraga»), aninhada entre altas falésias recortadas e rochas pontiagudas, é famosa pelo seu túnel natural ('Fojo da Adraga') e pelas rochas esculpidas em forma de arco de pedra?",
+    "opcoes": [
+      "Praia da Adraga (Sintra)",
+      "Praia das Maçãs",
+      "Praia da Ursa",
+      "Praia da Samarra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Adraga foi considerada pelo jornal britânico The Sunday Times como uma das melhores praias da Europa.",
+    "fonte": "The Sunday Times / Câmara Municipal de Sintra",
+    "factClusterId": "fc_geo_pra_adraga_sintra_01"
+  },
+  {
+    "id": "GEO_PRA_0046",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia selvagem de Sintra («Praia da Ursa»), próxima do Cabo da Roca e acessível apenas por um trilho íngreme de terra batida, é famosa pelos seus dois leixões colossais no mar: a 'Rocha da Ursa' e a 'Rocha do Gigante'?",
+    "opcoes": [
+      "Praia da Vigia",
+      "Praia da Ursa (Sintra)",
+      "Praia do Abano",
+      "Praia das Azenhas do Mar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Segundo a lenda mitológica, a rocha representa uma ursa mãe petrificada com as suas crias virada para o mar.",
+    "fonte": "ICNF / Município de Sintra",
+    "factClusterId": "fc_geo_pra_praiaursasintra_01"
+  },
+  {
+    "id": "GEO_PRA_0047",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que pitoresca aldeia costeira encavalitada numa falésia no concelho de Sintra («Azenhas do Mar»), possui casario branco tradicional empoleirado sobre o oceano com uma piscina natural de água salgada oceânica na base da ravina?",
+    "opcoes": [
+      "Fontanelas",
+      "Janelas do Mar",
+      "Azenhas do Mar (Sintra)",
+      "Penedo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O nome deve-se às antigas azenhas e moinhos de água que aproveitavam as linhas de água que corriam para o mar.",
+    "fonte": "Câmara Municipal de Sintra / Turismo de Portugal",
+    "factClusterId": "fc_geo_pra_azenhasdomar_sintra_01"
+  },
+  {
+    "id": "GEO_PRA_0048",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia da Linha de Cascais no concelho de Oeiras («Praia de Carcavelos»), a maior praia da foz do estuário do Tejo cercada pelo histórico Forte de São Julião da Barra, é o berço histórico do surf na região de Lisboa?",
+    "opcoes": [
+      "Praia da Torre",
+      "Praia de Santo Amaro de Oeiras",
+      "Praia de Paço de Arcos",
+      "Praia de Carcavelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Carcavelos atrai milhares de banhistas e praticantes de desportos de ondas durante todo o ano com ligação direta ao comboio da Linha de Cascais.",
+    "fonte": "Município de Oeiras / Município de Cascais",
+    "factClusterId": "fc_geo_pra_carcavelos_oeiras_01"
+  },
+  {
+    "id": "GEO_PRA_0049",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que histórica e protegida península costeira em Peniche («Península de Baleal» / Praia do Baleal), ligada a terra por um istmo arenoso de calçada com praias a norte e a sul que garantem mar calmo ou ondas dependendo da direção do vento, é uma das capitais europeias de escolas de surf?",
+    "opcoes": [
+      "Baleal (Peniche)",
+      "Supertubos",
+      "Consolação",
+      "São Bernardino"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O nome Baleal provém da antiga atividade de caça e desmanche de baleias realizada pelos pescadores bascos e portugueses na Idade Média.",
+    "fonte": "Município de Peniche / Turismo do Centro",
+    "factClusterId": "fc_geo_pra_baleal_peniche_01"
+  },
+  {
+    "id": "GEO_PRA_0050",
+    "tema": "Geografia",
+    "subtema": "Litoral & Praias",
+    "pergunta": "Que praia do concelho de Torres Vedras («Praia de Santa Cruz»), famosa pelos seus rochedos imponentes e pelo Penedo do Guincho, inspirou o poeta e escritor Antero de Quental e o místico Kazuo Dan acolhendo o festival anual de desportos de ondas «Ocean Spirit»?",
+    "opcoes": [
+      "Praia Formosa",
+      "Praia da Foz do Sizandro",
+      "Praia de Santa Cruz (Torres Vedras)",
+      "Praia Azul"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Santa Cruz Ocean Spirit reúne competições internacionais de surf, bodyboard, kayak surf e waveski com atletas de todo o mundo.",
+    "fonte": "Município de Torres Vedras / Santa Cruz Ocean Spirit",
+    "factClusterId": "fc_geo_pra_santacruz_torresvedras_01"
+  }
+]

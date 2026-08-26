@@ -1,0 +1,852 @@
+[
+  {
+    "id": "PERS_POL_0001",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que insigne estadista e advogado lisboeta (1924-2017), Mário Soares («Mário Soares»), cofundador do Partido Socialista e histórico opositor ao Estado Novo deportado para São Tomé, exerceu os cargos de Primeiro-Ministro em três governos e Presidente da República durante dois mandatos (1986-1996), sendo amplamente aclamado como o «Pai da Democracia»?",
+    "opcoes": [
+      "Mário Soares (1924-2017)",
+      "Francisco Sá Carneiro",
+      "Jorge Sampaio",
+      "Ramalho Eanes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mário Soares liderou as negociações para a adesão de Portugal à Comunidade Económica Europeia (CEE) assinada em 1985 nos Jerónimos.",
+    "fonte": "Fundação Mário Soares e Maria Barroso / Assembleia da República / Presidência da República",
+    "factClusterId": "fc_pers_pol_mariosoares_paidademocracia_01"
+  },
+  {
+    "id": "PERS_POL_0002",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que carismático advogado portuense e estadista (1934-1980), Francisco Sá Carneiro («Francisco Sá Carneiro»), fundador do PPD/PSD e líder da Aliança Democrática (AD), Primeiro-Ministro do VI Governo Constitucional, faleceu tragicamente a 4 de dezembro de 1980 na queda do avião em Camarate?",
+    "opcoes": [
+      "Adelino Amaro da Costa",
+      "Francisco Sá Carneiro (1934-1980)",
+      "Pinto Balsemão",
+      "Mota Pinto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sá Carneiro é o patrono do PSD e o aeroporto internacional do Porto foi batizado Aeroporto Francisco Sá Carneiro em sua homenagem.",
+    "fonte": "Instituto Francisco Sá Carneiro / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_sacarneiro_camarate_1980_01"
+  },
+  {
+    "id": "PERS_POL_0003",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre general e militar transmontano de Alcains / Castelo Branco (nascido em 1935), General António Ramalho Eanes («Ramalho Eanes»), figura central na contenção militar da crise do 25 de Novembro de 1975, foi o primeiro Presidente da República democraticamente eleito por sufrágio universal direto em 1976?",
+    "opcoes": [
+      "General António de Spínola",
+      "General Costa Gomes",
+      "General Ramalho Eanes",
+      "General Vasco Gonçalves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ramalho Eanes cumpriu dois mandatos presidenciais completos (1976-1986) consolidando a transição civil e democrática.",
+    "fonte": "Museu da Presidência da República / CNE",
+    "factClusterId": "fc_pers_pol_ramalhoeanes_1976_01"
+  },
+  {
+    "id": "PERS_POL_0004",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável engenheira química e líder cívica de São Pedro do Sul e Abrantes (1930-2004), Maria de Lourdes Pintasilgo («Maria de Lourdes Pintasilgo»), fez história em 1979 ao ser nomeada pelo Presidente Ramalho Eanes como a primeira e única mulher a chefiar um governo em Portugal como:",
+    "opcoes": [
+      "Presidente da Assembleia da República",
+      "Presidente do Tribunal Constitucional",
+      "Provedora de Justiça",
+      "Primeira-Ministra de Portugal (V Governo Constitucional)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Maria de Lourdes Pintasilgo foi também embaixadora de Portugal na UNESCO e candidata independente à Presidência da República em 1986.",
+    "fonte": "Fundação Cuidar o Futuro / DHP / Assembleia da República",
+    "factClusterId": "fc_pers_pol_mariadelourdespintasilgo_1979_01"
+  },
+  {
+    "id": "PERS_POL_0005",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que prestigiado advogado e estadista lisboeta (1939-2021), Jorge Sampaio («Jorge Sampaio»), líder do Partido Socialista, Presidente da Câmara Municipal de Lisboa (1989-1995) e Presidente da República durante dois mandatos (1996-2006), foi nomeado Alto Representante da ONU para a Aliança das Civilizações?",
+    "opcoes": [
+      "Jorge Sampaio (1939-2021)",
+      "Mário Soares",
+      "António Guterres",
+      "Ferro Rodrigues"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Jorge Sampaio desempenhou um papel internacional decisivo na independência de Timor-Leste e criou a Plataforma Global para Estudantes Sírios.",
+    "fonte": "Museu da Presidência da República / ONU",
+    "factClusterId": "fc_pers_pol_jorgesampaio_1996_01"
+  },
+  {
+    "id": "PERS_POL_0006",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente economista e professor catedrático algarvio de Boliqueime (nascido em 1939), Aníbal Cavaco Silva («Cavaco Silva»), exerceu o cargo de Primeiro-Ministro durante uma década (1985-1995) conquistando duas maiorias absolutas pelo PSD, e foi Presidente da República durante dois mandatos (2006-2016)?",
+    "opcoes": [
+      "Durão Barroso",
+      "Aníbal Cavaco Silva",
+      "Passos Coelho",
+      "Pinto Balsemão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Cavaco Silva é o político com mais anos acumulados na chefia do Governo e da Chefia de Estado (20 anos) na história democrática portuguesa.",
+    "fonte": "Assembleia da República / Presidência da República",
+    "factClusterId": "fc_pers_pol_cavacosilva_01"
+  },
+  {
+    "id": "PERS_POL_0007",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável engenheiro e estadista de Lisboa e Fundão (nascido em 1949), António Guterres («António Guterres»), Primeiro-Ministro de Portugal de 1995 a 2002 e Alto-Comissário da ONU para os Refugiados (2005-2015), foi eleito em 2016 para o cargo de topo da diplomacia mundial como:",
+    "opcoes": [
+      "Presidente da Comissão Europeia",
+      "Presidente do Conselho Europeu",
+      "Secretário-Geral das Nações Unidas (ONU)",
+      "Diretor-Geral da UNESCO"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Guterres foi reeleito por unanimidade em 2021 para um segundo mandato à frente da Organização das Nações Unidas.",
+    "fonte": "Organização das Nações Unidas (ONU) / Governo de Portugal",
+    "factClusterId": "fc_pers_pol_antonioguterres_onu_01"
+  },
+  {
+    "id": "PERS_POL_0008",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente político e jurista de Lisboa (nascido em 1956), José Manuel Durão Barroso («Durão Barroso»), Primeiro-Ministro de Portugal pelo PSD (2002-2004), liderou o executivo comunitário europeu durante 10 anos (2004-2014) como:",
+    "opcoes": [
+      "Presidente do Parlamento Europeu",
+      "Secretário-Geral da NATO",
+      "Presidente do Eurogrupo",
+      "Presidente da Comissão Europeia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Durão Barroso liderou a Comissão Europeia durante a maior expansão da União Europeia a Leste e a assinatura do Tratado de Lisboa em 2007.",
+    "fonte": "Comissão Europeia / DHP",
+    "factClusterId": "fc_pers_pol_duraobarroso_comissaoeuropeia_01"
+  },
+  {
+    "id": "PERS_POL_0009",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que prestigiado professor catedrático de Direito, comentador e político de Lisboa (nascido em 1948), Marcelo Rebelo de Sousa («Marcelo Rebelo de Sousa»), antigo líder do PSD e deputado constituinte, foi eleito Presidente da República em 2016 e reeleito à primeira volta em 2021?",
+    "opcoes": [
+      "Marcelo Rebelo de Sousa",
+      "António Costa",
+      "Jorge Miranda",
+      "Rui Rio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Marcelo Rebelo de Sousa notabilizou-se pela sua enorme proximidade afetiva aos cidadãos, viagens constantes e promulgações célebres.",
+    "fonte": "Presidência da República / CNE",
+    "factClusterId": "fc_pers_pol_marcelorebelodesousa_2016_01"
+  },
+  {
+    "id": "PERS_POL_0010",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente advogado e político lisboeta (nascido em 1961), António Costa («António Costa»), antigo Presidente da CML (2007-2015) e Primeiro-Ministro de Portugal durante 8 anos (2015-2024 através da «Geringonça» e maioria absoluta), foi eleito em 2024 como:",
+    "opcoes": [
+      "Secretário-Geral da NATO",
+      "Presidente do Conselho Europeu",
+      "Presidente do Banco Central Europeu",
+      "Comissário Europeu para a Economia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Costa é o primeiro português a ser eleito para presidir às cimeiras de Chefes de Estado e de Governo dos 27 países da União Europeia.",
+    "fonte": "Conselho Europeu / Assembleia da República",
+    "factClusterId": "fc_pers_pol_antoniocosta_conselhoeuropeu_2024_01"
+  },
+  {
+    "id": "PERS_POL_0011",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que corajoso oficial da Força Aérea portuguesa de Torres Novas (1906-1965), General Humberto Delgado («O General Sem Medo»), protagonizou a histórica candidatura presidencial de oposição à ditadura em 1958 proclamando que demitiria Salazar («Obviamente, demito-o!»)?",
+    "opcoes": [
+      "General Norton de Matos",
+      "General Henrique Galvão",
+      "General Humberto Delgado («O General Sem Medo»)",
+      "Almirante Américo Thomaz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Humberto Delgado foi assassinado pela polícia política PIDE numa emboscada em Los Hurones (Olivença) em 1965 e repousa no Panteão Nacional.",
+    "fonte": "Panteão Nacional / Fundação Humberto Delgado / DHP",
+    "factClusterId": "fc_pers_pol_humbertodelgado_1958_01"
+  },
+  {
+    "id": "PERS_POL_0012",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente e poderoso estadista do século XVIII (1699-1782), Sebastião José de Carvalho e Melo («Marquês de Pombal»), Primeiro-Ministro do Rei D. José I, liderou a reconstrução iluminista da Baixa de Lisboa após o Terramoto de 1755 e aboliu a escravatura no reino em 1761?",
+    "opcoes": [
+      "Duque de Palmela",
+      "Duque de Saldanha",
+      "Conde de Castelo Melhor",
+      "Marquês de Pombal (1699-1782)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pombal expulsou os jesuítas em 1759, reformou a Universidade de Coimbra em 1772 e instituiu a Real Companhia das Vinhas do Alto Douro.",
+    "fonte": "Dicionário de História de Portugal / Torre do Tombo",
+    "factClusterId": "fc_pers_pol_marquesdepombal_01"
+  },
+  {
+    "id": "PERS_POL_0013",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que proeminente jurista e professor catedrático da Faculdade de Direito de Lisboa de Viseu (1941-2019), Diogo Freitas do Amaral («Freitas do Amaral»), fundou o CDS em 1974, foi Primeiro-Ministro interino e presidiu em 1995-1996 à 50.ª Sessão da Assembleia Geral da ONU?",
+    "opcoes": [
+      "Diogo Freitas do Amaral (1941-2019)",
+      "Adelino Amaro da Costa",
+      "Basílio Horta",
+      "Adriano Moreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Freitas do Amaral foi também Ministro dos Negócios Estrangeiros em governos de diferentes matrizes políticas (AD e PS).",
+    "fonte": "Instituto Diogo Freitas do Amaral / Assembleia da República",
+    "factClusterId": "fc_pers_pol_freitasdoamaral_onu_01"
+  },
+  {
+    "id": "PERS_POL_0014",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado professor e jurista de Grijó (Macedo de Cavaleiros, 1922-2022), Adriano Moreira («Adriano Moreira»), Ministro do Ultramar (1961-1962), aboliu o discriminatório Estatuto do Indigenato e fundou as Universidades de Angola e Moçambique presidindo ao CDS-PP?",
+    "opcoes": [
+      "Franco Nogueira",
+      "Adriano Moreira (1922-2022)",
+      "Marcello Caetano",
+      "Veiga Simão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Adriano Moreira foi uma das vozes mais respeitadas da academia e do parlamento português até aos 100 anos de idade.",
+    "fonte": "Academia das Ciências de Lisboa / Assembleia da República",
+    "factClusterId": "fc_pers_pol_adrianomoreira_01"
+  },
+  {
+    "id": "PERS_POL_0015",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que notável e histórico líder republicano de Lagos e Lisboa (1871-1937), Afonso Augusto da Costa («Afonso Costa»), três vezes Chefe do Governo e autor da célebre Lei da Separação do Estado das Igrejas de 1911, foi a figura dominante da Primeira República?",
+    "opcoes": [
+      "Bernardino Machado",
+      "António José de Almeida",
+      "Afonso Costa («O Rachador», 1871-1937)",
+      "Manuel de Arriaga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Afonso Costa conseguiu os únicos orçamentos de Estado com superavit da 1.ª República e chefiou a delegação portuguesa na Conferência de Paz de Paris em 1919.",
+    "fonte": "Panteão Nacional / DHP",
+    "factClusterId": "fc_pers_pol_afonsocosta_primeirarepublica_01"
+  },
+  {
+    "id": "PERS_POL_0016",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente e culto jurista e orador açoriano da Horta / Faial (1840-1917), Manuel José de Arriaga («Manuel de Arriaga»), foi eleito em 24 de agosto de 1911 como o:",
+    "opcoes": [
+      "Primeiro-Ministro de Portugal",
+      "Presidente da Assembleia Constituinte",
+      "Governador Civil de Lisboa",
+      "Primeiro Presidente da República Portuguesa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuel de Arriaga venceu o candidato Bernardino Machado na eleição parlamentar de 1911 e repousa no Panteão Nacional.",
+    "fonte": "Museu da Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_pers_pol_manueldearriaga_primeiropresidente_01"
+  },
+  {
+    "id": "PERS_POL_0017",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que oficial militar e político de Caminha (1872-1918), Sidónio Pais («Sidónio Pais»), liderou o golpe de dezembro de 1917 instaurando o regime presidencialista da «República Nova» («O Presidente-Rei»), até ser assassinado a tiro na Estação do Rossio em Lisboa?",
+    "opcoes": [
+      "Sidónio Pais (1872-1918)",
+      "Pimenta de Castro",
+      "Gomes da Costa",
+      "Sinel de Cordes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sidónio Pais foi o primeiro Presidente a ser eleito por sufrágio universal direto e o seu funeral foi um dos maiores cortejos fúnebres da história de Lisboa.",
+    "fonte": "Panteão Nacional (Igreja de Santa Engrácia) / DHP",
+    "factClusterId": "fc_pers_pol_sidoniopais_presidenterei_01"
+  },
+  {
+    "id": "PERS_POL_0018",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre e carismático médico republicano de Penacova e Lisboa (1866-1929), António José de Almeida («António José de Almeida»), orador brilhante e fundador do Partido Republicano Evolucionista, foi o único Presidente da 1.ª República a cumprir integralmente o seu mandato presidencial de:",
+    "opcoes": [
+      "Cinco anos",
+      "Quatro anos completos (1919 a 1923)",
+      "Seis anos",
+      "Sete anos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António José de Almeida visitou o Brasil no Centenário da Independência em 1922 sendo aclamado em apoteose no Rio de Janeiro.",
+    "fonte": "Museu da Presidência da República / Panteão Nacional",
+    "factClusterId": "fc_pers_pol_antoniojosedealmeida_01"
+  },
+  {
+    "id": "PERS_POL_0019",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que general de cavalaria de Estremoz (1910-1996), António de Spínola («General Spínola»), autor do livro-bomba «Portugal e o Futuro» que acelerou a Revolução de Abril, assumiu a presidência da Junta de Salvação Nacional sendo o primeiro Presidente da República pós-25 de Abril?",
+    "opcoes": [
+      "General Costa Gomes",
+      "Major Otelo Saraiva de Carvalho",
+      "General António de Spínola (1910-1996)",
+      "General Vasco Gonçalves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Spínola demitiu-se em setembro de 1974 na sequência do apelo à 'maioria silenciosa' e liderou o MDLP no exílio antes de ser reabilitado como Marechal.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Histórico Militar",
+    "factClusterId": "fc_pers_pol_antoniodespinola_1974_01"
+  },
+  {
+    "id": "PERS_POL_0020",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre general e matemático militar de Nisa (1914-2001), General Francisco da Costa Gomes («Costa Gomes»), Chefe do Estado-Maior General das Forças Armadas demitido antes de Abril e Presidente da República de 1974 a 1976 («O Rolha»), evitou uma guerra civil durante o Processo Revolucionário Em Curso (PREC)?",
+    "opcoes": [
+      "General Ramalho Eanes",
+      "General Spínola",
+      "General Galvão de Melo",
+      "General Francisco da Costa Gomes (1914-2001)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Costa Gomes conduziu a descolonização e a assinatura do pacto MFA-Partidos até à aprovação da Constituição de 1976.",
+    "fonte": "Museu da Presidência da República / DHP",
+    "factClusterId": "fc_pers_pol_costagomes_1974_01"
+  },
+  {
+    "id": "PERS_POL_0021",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que economista e político lisboeta (nascido em 1964), Pedro Passos Coelho («Passos Coelho»), Presidente do PSD e Primeiro-Ministro de Portugal (2011-2015), governou o país durante a execução do programa de assistência financeira da Troika (FMI, BCE e CE)?",
+    "opcoes": [
+      "Pedro Passos Coelho (2011-2015)",
+      "José Sócrates",
+      "Durão Barroso",
+      "Santana Lopes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O governo de coligação PSD/CDS de Passos Coelho concluiu a saída limpa do programa da Troika em maio de 2014.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_passoscoelho_troika_01"
+  },
+  {
+    "id": "PERS_POL_0022",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que economista e professor do ISEG de Coimbra e Lisboa (nascido em 1965), Mário Centeno («Mário Centeno»), Ministro das Finanças (2015-2020) celebrizado por Wolfgang Schäuble como «O Ronaldo do Eurogrupo», foi eleito Presidente do Eurogrupo em 2017 e Governador do Banco de Portugal em 2020?",
+    "opcoes": [
+      "Vítor Gaspar",
+      "Mário Centeno (Presidente do Eurogrupo, 2018-2020)",
+      "Teixeira dos Santos",
+      "Fernando Medina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mário Centeno alcançou o primeiro excedente orçamental da democracia portuguesa em 2019.",
+    "fonte": "Banco de Portugal / Eurogrupo / Ministério das Finanças",
+    "factClusterId": "fc_pers_pol_mariocenteno_eurogrupo_01"
+  },
+  {
+    "id": "PERS_POL_0023",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente jurista e político de Lisboa (nascido em 1956), Pedro Santana Lopes («Santana Lopes»), antigo Presidente da CML e líder do PSD, exerceu o cargo de Primeiro-Ministro do XVI Governo Constitucional em 2004 antes da dissolução do parlamento por Jorge Sampaio?",
+    "opcoes": [
+      "Durão Barroso",
+      "Marques Mendes",
+      "Pedro Santana Lopes (2004-2005)",
+      "Manuela Ferreira Leite"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Santana Lopes presidiu também à Santa Casa da Misericórdia de Lisboa e foi eleito Presidente da Câmara da Figueira da Foz.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_santanalopes_2004_01"
+  },
+  {
+    "id": "PERS_POL_0024",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente economista e política lisboeta (nascida em 1940), Manuela Ferreira Leite («Manuela Ferreira Leite»), foi a primeira mulher a liderar o Partido Social Democrata (PSD, 2008-2010) e a exercer os cargos de Ministra da Educação e Ministra das Finanças com o objetivo do défice zero?",
+    "opcoes": [
+      "Maria Luís Albuquerque",
+      "Assunção Cristas",
+      "Teresa Patrício Gouveia",
+      "Manuela Ferreira Leite"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Manuela Ferreira Leite foi uma das economistas com maior influência nas finanças públicas portuguesas sendo membro do Conselho de Estado.",
+    "fonte": "PSD / Assembleia da República",
+    "factClusterId": "fc_pers_pol_manuelaferreiraleite_01"
+  },
+  {
+    "id": "PERS_POL_0025",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente advogado e político de Espinho (nascido em 1973), Luís Montenegro («Luís Montenegro»), líder parlamentar do PSD durante o governo de Passos Coelho e eleito Presidente do PSD em 2022, tornou-se Primeiro-Ministro de Portugal no XXIV Governo Constitucional em abril de 2024?",
+    "opcoes": [
+      "Luís Montenegro (XXIV Governo Constitucional)",
+      "Pedro Nuno Santos",
+      "Rui Rio",
+      "Paulo Rangel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Luís Montenegro liderou a coligação Aliança Democrática (AD) à vitória nas eleições legislativas de março de 2024.",
+    "fonte": "Governo de Portugal / Assembleia da República",
+    "factClusterId": "fc_pers_pol_luismontenegro_2024_01"
+  },
+  {
+    "id": "PERS_POL_0026",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que brilhante economista e professor universitário de Vila Nova de Gaia (nascido em 1955), Paulo Rangel («Paulo Rangel»), líder da delegação do PSD no Parlamento Europeu durante 15 anos e Vice-Presidente do PPE, foi nomeado em 2024 como Ministro de Estado e dos Negócios Estrangeiros de Portugal?",
+    "opcoes": [
+      "Nuno Melo",
+      "Paulo Rangel",
+      "José Pedro Aguiar-Branco",
+      "Joaquim Miranda Sarmento"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Paulo Rangel é uma das figuras portuguesas de maior prestígio nas instituições da União Europeia em Bruxelas e Estrasburgo.",
+    "fonte": "Ministério dos Negócios Estrangeiros / Parlamento Europeu",
+    "factClusterId": "fc_pers_pol_paulorangel_mne_01"
+  },
+  {
+    "id": "PERS_POL_0027",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que experiente jurista e político do Porto (nascido em 1957), José Pedro Aguiar-Branco («Aguiar-Branco»), antigo Ministro da Justiça e Ministro da Defesa Nacional, foi eleito em março de 2024 como o Presidente da Assembleia da República da XVI Legislatura?",
+    "opcoes": [
+      "Augusto Santos Silva",
+      "Eduardo Ferro Rodrigues",
+      "José Pedro Aguiar-Branco",
+      "Jaime Gama"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Presidente da Assembleia da República é a segunda figura na hierarquia do Estado Português substituindo o Presidente da República nas suas ausências.",
+    "fonte": "Assembleia da República / Diário da Assembleia",
+    "factClusterId": "fc_pers_pol_aguiarbranco_parlamento_2024_01"
+  },
+  {
+    "id": "PERS_POL_0028",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente sociólogo, professor catedrático da Universidade do Porto e estadista (nascido em 1956), Augusto Santos Silva («Santos Silva»), exerceu as funções de Ministro da Educação, Ministro da Defesa, Ministro dos Negócios Estrangeiros e Presidente da Assembleia da República (2022-2024)?",
+    "opcoes": [
+      "Ferro Rodrigues",
+      "Jaime Gama",
+      "António Vitorino",
+      "Augusto Santos Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Santos Silva desempenhou um papel central na diplomacia europeia e na defesa dos valores democráticos parlamentares.",
+    "fonte": "Assembleia da República / Universidade do Porto",
+    "factClusterId": "fc_pers_pol_augustosantossilva_01"
+  },
+  {
+    "id": "PERS_POL_0029",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico economista e político lisboeta (nascido em 1949), Eduardo Ferro Rodrigues («Ferro Rodrigues»), Secretário-Geral do Partido Socialista (2002-2004) e Ministro do Trabalho e Solidariedade criador do Rendimento Mínimo Garantido (RMG), presidiu à Assembleia da República de 2015 a 2022?",
+    "opcoes": [
+      "Eduardo Ferro Rodrigues (2015-2022)",
+      "António de Almeida Santos",
+      "Jaime Gama",
+      "Assunção Esteves"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ferro Rodrigues presidiu ao parlamento durante os dois governos da 'Geringonça' e da pandemia.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_ferrorodrigues_01"
+  },
+  {
+    "id": "PERS_POL_0030",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórica e notável jurista de Valpaços (nascida em 1949), Maria da Assunção Esteves («Assunção Esteves»), juíza do Tribunal Constitucional e eurodeputada pelo PSD, foi a primeira mulher na história de Portugal a ser eleita Presidente da Assembleia da República (2011-2015)?",
+    "opcoes": [
+      "Manuela Ferreira Leite",
+      "Assunção Esteves (Primeira Mulher Presidente da AR)",
+      "Teresa Patrício Gouveia",
+      "Elisa Ferreira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Assunção Esteves presidiu à Assembleia da República durante a XII Legislatura desempenhando a segunda magistratura da Nação.",
+    "fonte": "Assembleia da República / Tribunal Constitucional",
+    "factClusterId": "fc_pers_pol_assuncaoesteves_primeiramulher_ar_01"
+  },
+  {
+    "id": "PERS_POL_0031",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre advogado e estadista da Beira Baixa / Cabeça Gorda (1926-2016), António de Almeida Santos («Almeida Santos»), Ministro da Coordenação Interterritorial e Ministro dos Assuntos Parlamentares, foi Presidente da Assembleia da República durante três mandatos (1995-2002) e Presidente Honorário do PS?",
+    "opcoes": [
+      "Manuel Tito de Morais",
+      "Barbosa de Melo",
+      "António de Almeida Santos (1926-2016)",
+      "Mota Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Almeida Santos foi um dos parlamentares e legisladores mais brilhantes da democracia portuguesa e conselheiro de Estado.",
+    "fonte": "Assembleia da República / Fundação Mário Soares",
+    "factClusterId": "fc_pers_pol_almeidasantos_01"
+  },
+  {
+    "id": "PERS_POL_0032",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado jornalista e político lisboeta (nascido em 1937), Francisco Pinto Balsemão («Pinto Balsemão»), cofundador do PPD com Sá Carneiro, fundou o semanário Expresso em 1973 e foi Primeiro-Ministro de Portugal nos VII e VIII Governos Constitucionais (1981-1983) e criador da SIC em 1992?",
+    "opcoes": [
+      "Vítor Cunha Rego",
+      "Marcelo Rebelo de Sousa",
+      "Nuno Brederode dos Santos",
+      "Francisco Pinto Balsemão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pinto Balsemão presidiu ao grupo Impresa e conduziu a 1.ª Revisão Constitucional de 1982 que extinguiu o Conselho da Revolução militar.",
+    "fonte": "Grupo Impresa / Assembleia da República / DHP",
+    "factClusterId": "fc_pers_pol_pintobalsemao_expresso_sic_01"
+  },
+  {
+    "id": "PERS_POL_0033",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político açoriano de Ponta Delgada (nascido em 1943), João Bosco Mota Amaral («Mota Amaral»), foi o primeiro Presidente do Governo Regional dos Açores durante quase duas décadas (1976-1995) e Presidente da Assembleia da República (2002-2005)?",
+    "opcoes": [
+      "João Bosco Mota Amaral",
+      "Alberto João Jardim",
+      "Carlos César",
+      "Vasco Cordeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mota Amaral foi o principal artífice do regime de autonomia político-administrativa da Região Autónoma dos Açores na Constituinte de 1975/76.",
+    "fonte": "Governo dos Açores / Assembleia da República",
+    "factClusterId": "fc_pers_pol_motaamaral_acores_01"
+  },
+  {
+    "id": "PERS_POL_0034",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que carismático e controverso líder político do Funchal (nascido em 1943), Alberto João Jardim («Alberto João Jardim»), liderou o Governo Regional da Madeira de forma ininterrupta durante 37 anos (1978-2015) conquistando dez maiorias absolutas pelo PSD-Madeira?",
+    "opcoes": [
+      "Miguel Albuquerque",
+      "Alberto João Jardim (37 anos de governação)",
+      "Jaime Ramos",
+      "Ornelas Camacho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alberto João Jardim transformou as infraestruturas da Madeira com recurso a fundos comunitários construindo túneis, vias rápidas e o alargamento do aeroporto.",
+    "fonte": "Governo Regional da Madeira / DHP",
+    "factClusterId": "fc_pers_pol_albertojoaojardim_madeira_01"
+  },
+  {
+    "id": "PERS_POL_0035",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que destacado líder político açoriano de Ponta Delgada (nascido em 1956), Carlos César («Carlos César»), Presidente do Governo Regional dos Açores durante 16 anos (1996-2012) e Presidente do Partido Socialista, consolidou a modernização social e económica do arquipélago?",
+    "opcoes": [
+      "Vasco Cordeiro",
+      "José Manuel Bolieiro",
+      "Carlos César",
+      "Mota Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos César liderou o PS Açores e foi líder parlamentar e Presidente da Comissão Nacional do Partido Socialista.",
+    "fonte": "Governo dos Açores / Partido Socialista",
+    "factClusterId": "fc_pers_pol_carloscesar_acores_01"
+  },
+  {
+    "id": "PERS_POL_0036",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente economista e política portuense (nascida em 1952), Elisa Ferreira («Elisa Ferreira»), antiga Ministra do Ambiente e do Planeamento e Vice-Governadora do Banco de Portugal, foi nomeada em 2019 como a primeira mulher portuguesa Comissária Europeia na Comissão de Ursula von der Leyen com a pasta da:",
+    "opcoes": [
+      "Concorrência",
+      "Agricultura e Pescas",
+      "Comércio Internacional",
+      "Coesão e Reformas (Comissão Europeia, 2019-2024)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elisa Ferreira geriu os fundos estruturais europeus e o Fundo de Transição Justa para apoiar as regiões europeias.",
+    "fonte": "Comissão Europeia / Banco de Portugal",
+    "factClusterId": "fc_pers_pol_elisaferreira_comissaria_2019_01"
+  },
+  {
+    "id": "PERS_POL_0037",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que conceituada economista portuguesa de Alenquer (nascida em 1967), Maria Luís Albuquerque («Maria Luís Albuquerque»), Ministra de Estado e das Finanças (2013-2015), foi indicada pelo governo português em 2024 para o cargo de Comissária Europeia para os Serviços Financeiros e União das Poupanças e Investimentos?",
+    "opcoes": [
+      "Maria Luís Albuquerque",
+      "Elisa Ferreira",
+      "Manuela Ferreira Leite",
+      "Assunção Cristas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Maria Luís Albuquerque geriu a saída de Portugal do programa de ajustamento financeiro internacional.",
+    "fonte": "Comissão Europeia / Governo de Portugal",
+    "factClusterId": "fc_pers_pol_marialuisalbuquerque_comissaria_2024_01"
+  },
+  {
+    "id": "PERS_POL_0038",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que experiente jurista e diplomata de Lisboa (nascido em 1957), António Vitorino («António Vitorino»), Ministro da Presidência e da Defesa Nacional e Comissário Europeu da Justiça e Assuntos Internos (1999-2004), exerceu o cargo de Diretor-Geral da Organização Internacional para as Migrações (OIM da ONU) entre 2018 e 2023?",
+    "opcoes": [
+      "António Guterres",
+      "António Vitorino (Diretor-Geral da OIM)",
+      "José Manuel Durão Barroso",
+      "Vítor Constâncio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "António Vitorino foi uma das figuras cimeiras do direito constitucional e da política europeia de migrações e asilo.",
+    "fonte": "IOM / ONU / Assembleia da República",
+    "factClusterId": "fc_pers_pol_antoniovitorino_oim_01"
+  },
+  {
+    "id": "PERS_POL_0039",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente economista de Lisboa (nascido em 1943), Vítor Constâncio («Vítor Constâncio»), Secretário-Geral do PS (1986-1989) e Governador do Banco de Portugal durante uma década (2000-2010), exerceu o prestigiado cargo de Vice-Presidente do Banco Central Europeu (BCE) de 2010 a 2018 ao lado de Mario Draghi?",
+    "opcoes": [
+      "Mário Centeno",
+      "Vítor Bento",
+      "Vítor Constâncio (Vice-Presidente do BCE)",
+      "Silva Lopes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Constâncio desempenhou um papel decisivo na estabilização do Euro e na criação da União Bancária Europeia após a crise financeira de 2008.",
+    "fonte": "Banco Central Europeu (BCE) / Banco de Portugal",
+    "factClusterId": "fc_pers_pol_vitorconstancio_bce_01"
+  },
+  {
+    "id": "PERS_POL_0040",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político e jurista micaelense das Flores e Açores (nascido em 1947), Jaime Gama («Jaime Gama»), fundador do PS e Ministro dos Negócios Estrangeiros em múltiplos governos constitucionais, presidiu à Assembleia da República durante duas legislaturas (2005-2011)?",
+    "opcoes": [
+      "Almeida Santos",
+      "Ferro Rodrigues",
+      "Mota Amaral",
+      "Jaime Gama (2005-2011)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jaime Gama foi um dos diplomatas de maior influência na política externa portuguesa e no processo de paz de Timor-Leste.",
+    "fonte": "Assembleia da República / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_pers_pol_jaimegama_01"
+  },
+  {
+    "id": "PERS_POL_0041",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que importante e histórico professor catedrático de Direito de Coimbra (1927-2007), António Barbosa de Melo («Barbosa de Melo»), cofundador do PPD/PSD e deputado constituinte em 1975, presidiu à Assembleia da República entre 1991 e 1995 durante a maioria absoluta de Cavaco Silva?",
+    "opcoes": [
+      "António Barbosa de Melo (1991-1995)",
+      "Mota Pinto",
+      "Vítor Crespo",
+      "Amaral da Costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Barbosa de Melo foi um dos mais distintos especialistas em Direito Administrativo e Constitucional da Universidade de Coimbra.",
+    "fonte": "Universidade de Coimbra / Assembleia da República",
+    "factClusterId": "fc_pers_pol_barbosademelo_1991_01"
+  },
+  {
+    "id": "PERS_POL_0042",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente e carismático professor de Direito de Pombal e Coimbra (1936-1985), Carlos Alberto da Mota Pinto («Mota Pinto»), líder do PSD e Primeiro-Ministro do IV Governo Constitucional de iniciativa presidencial em 1978-1979, foi Vice-Primeiro-Ministro no governo do Bloco Central (PS/PSD)?",
+    "opcoes": [
+      "Sá Carneiro",
+      "Carlos Alberto da Mota Pinto (1936-1985)",
+      "Pinto Balsemão",
+      "Lucas Pires"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mota Pinto foi um jurista de topo e faleceu subitamente aos 48 anos nas vésperas do Congresso do PSD da Figueira da Foz em 1985.",
+    "fonte": "Faculdade de Direito da Universidade de Coimbra / DHP",
+    "factClusterId": "fc_pers_pol_motapinto_1978_01"
+  },
+  {
+    "id": "PERS_POL_0043",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que brilhante jurista, escritor e político de Coimbra (1944-1998), Francisco Lucas Pires («Lucas Pires»), Ministro da Cultura e líder do CDS (1983-1985), destacou-se pela sua visão europeísta inovadora e foi Vice-Presidente do Parlamento Europeu?",
+    "opcoes": [
+      "Freitas do Amaral",
+      "Manuel Monteiro",
+      "Francisco Lucas Pires (1944-1998)",
+      "Paulo Portas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Lucas Pires foi autor de obras de referência sobre o futuro da União Europeia e a teoria do Estado.",
+    "fonte": "Parlamento Europeu / CDS / DHP",
+    "factClusterId": "fc_pers_pol_lucaspires_01"
+  },
+  {
+    "id": "PERS_POL_0044",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que célebre e histórico estadista monárquico de Coimbra e Lisboa (1812-1875), Nuno José Severo de Mendoça Rolim de Moura Barreto («1.º Duque de Loulé»), líder do Partido Histórico e cunhado do Rei D. Miguel por casamento com a Infanta D. Ana de Jesus Maria, chefiou três governos na Monarquia Constitucional?",
+    "opcoes": [
+      "Duque de Saldanha",
+      "Duque da Terceira",
+      "Marquês de Tomar",
+      "Duque de Loulé (1812-1875)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Duque de Loulé liderou o governo que inaugurou o primeiro caminho de ferro em Portugal em 1856 com Fontes Pereira de Melo.",
+    "fonte": "Dicionário de História de Portugal / Assembleia da República",
+    "factClusterId": "fc_pers_pol_duquedeloule_1856_01"
+  },
+  {
+    "id": "PERS_POL_0045",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico político e jurista de Ponta Delgada (1849-1907), Ernesto Rodolfo Hintze Ribeiro («Hintze Ribeiro»), líder do Partido Regenerador e três vezes Presidente do Conselho de Ministros de D. Carlos I, concedeu em 1895 o primeiro Decreto de Autonomia Administrativa aos Açores e Madeira?",
+    "opcoes": [
+      "Ernesto Rodolfo Hintze Ribeiro (1849-1907)",
+      "José Luciano de Castro",
+      "Fontes Pereira de Melo",
+      "João Franco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Decreto de 2 de março de 1895 de Hintze Ribeiro foi a génese do regime de autonomia dos distritos insulares atlânticos.",
+    "fonte": "Governo dos Açores / Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_hintzeribeiro_autonomia_1895_01"
+  },
+  {
+    "id": "PERS_POL_0046",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que influente político e jornalista de Oliveirinha / Aveiro (1834-1914), José Luciano de Castro («José Luciano de Castro»), líder incontestado do Partido Progressista durante mais de vinte anos, alternou no poder com os Regeneradores no célebre sistema do «Rotativismo» monárquico?",
+    "opcoes": [
+      "Hintze Ribeiro",
+      "José Luciano de Castro (1834-1914)",
+      "Fontes Pereira de Melo",
+      "Anselmo Braamcamp"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "José Luciano de Castro era aclamado pelos seus correligionários como o 'Velho de Anadia' controlando as eleições através da máquina partidária.",
+    "fonte": "Dicionário de História de Portugal / Torre do Tombo",
+    "factClusterId": "fc_pers_pol_joselucianodecastro_rotativismo_01"
+  },
+  {
+    "id": "PERS_POL_0047",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que controverso político de Alcaide / Fundão (1855-1929), João Franco («João Franco»), fundou o Partido Regenerador-Liberal e governou em ditadura administrativa com o apoio do Rei D. Carlos I (1906-1908) até ao Regicídio de 1 de fevereiro de 1908?",
+    "opcoes": [
+      "Hintze Ribeiro",
+      "Teixeira de Sousa",
+      "João Franco (1855-1929)",
+      "Ferreira do Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A repressão de João Franco contra os republicanos e o decreto de deportação de opositores precipitaram o atentado do Terreiro do Paço.",
+    "fonte": "Dicionário de História de Portugal / Arquivo Nacional",
+    "factClusterId": "fc_pers_pol_joaofranco_1908_01"
+  },
+  {
+    "id": "PERS_POL_0048",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que eminente e histórico professor e botânico de Coimbra (1876-1951), António Garcia Ribeiro de Vasconcelos e Manuel de Oliveira Chaves e Castro, e o político Afonso de Melo Pinto Veloso, foram figuras de proa na transição do Direito em Portugal?",
+    "opcoes": [
+      "Bernardino Machado",
+      "Magalhães Lima",
+      "Manuel de Arriaga",
+      "Afonso de Melo Pinto Veloso"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Pinto Veloso foi jurista, deputado e Ministro da Justiça nos governos republicanos da década de 1920.",
+    "fonte": "Dicionário de História de Portugal",
+    "factClusterId": "fc_pers_pol_pintoveloso_01"
+  },
+  {
+    "id": "PERS_POL_0049",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que ilustre e histórico professor da Faculdade de Direito de Coimbra (1844-1928), Manuel de Arriaga e Magalhães Lima («Sebastião de Magalhães Lima»), jornalista e fundador do jornal «O Século» em 1880, foi Grão-Mestre do Grande Oriente Lusitano e líder republicano?",
+    "opcoes": [
+      "Sebastião de Magalhães Lima (1850-1928)",
+      "Manuel de Arriaga",
+      "Teófilo Braga",
+      "França Borges"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Magalhães Lima foi a voz da propaganda republicana em Paris e embaixador da causa democrática junto da opinião pública europeia.",
+    "fonte": "Grande Oriente Lusitano / DHP",
+    "factClusterId": "fc_pers_pol_magalhaeslima_oseculo_01"
+  },
+  {
+    "id": "PERS_POL_0050",
+    "tema": "Personalidades",
+    "subtema": "Políticos & Estadistas",
+    "pergunta": "Que histórico jurista e jornalista republicano de Lisboa (1862-1915), José França Borges («França Borges»), fundou em 1900 o combativo jornal diário republicano «O Mundo» que galvanizou as massas populares e operárias de Lisboa para a Revolução de 5 de Outubro de 1910?",
+    "opcoes": [
+      "Magalhães Lima",
+      "António José de Almeida",
+      "França Borges (1862-1915, jornal «O Mundo»)",
+      "Brito Camacho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O jornal 'O Mundo' foi a mais influente publicação antimonárquica do início do século XX e França Borges é homenageado com um monumento no Jardim do Príncipe Real em Lisboa.",
+    "fonte": "Hemeroteca Municipal de Lisboa / DHP",
+    "factClusterId": "fc_pers_pol_francaborges_omundo_1900_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "POL_AR_0001",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a sede histórica da Assembleia da República Portuguesa, edifício neoclássico em Lisboa construído originalmente no século XVI como Mosteiro de São Bento da Saúde dos monges beneditinos e transformado em Palácio das Cortes em 1834?",
+    "opcoes": [
+      "Palácio de São Bento (Lisboa)",
+      "Palácio de Belém",
+      "Palácio das Necessidades",
+      "Palácio da Ajuda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Palácio de São Bento foi adaptado a sede parlamentar pelo arquiteto Possidónio da Silva e profundamente reformado por Ventura Terra após o incêndio de 1895.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_pol_ar_palaciosãobento_01"
+  },
+  {
+    "id": "POL_AR_0002",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "De acordo com o Artigo 148.º da Constituição da República Portuguesa e a lei eleitoral em vigor, quantos Deputados compõem a Assembleia da República eleitos por sufrágio universal direto e secreto?",
+    "opcoes": [
+      "250 Deputados",
+      "Exatamente 230 Deputados",
+      "200 Deputados",
+      "180 Deputados"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Constituição estabelece que a AR é composta por um mínimo de 180 e um máximo de 230 deputados, fixando a lei ordinária o número em 230 desde a revisão de 1989.",
+    "fonte": "Constituição da República Portuguesa (Art. 148.º) / Assembleia da República",
+    "factClusterId": "fc_pol_ar_230deputados_01"
+  },
+  {
+    "id": "POL_AR_0003",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que método matemático proporcional de representação é utilizado no sistema eleitoral português para a conversão dos votos expressos em mandatos de deputados nos 22 círculos eleitorais da Assembleia da República?",
+    "opcoes": [
+      "Método de Sainte-Laguë",
+      "Método de Hare-Niemeyer",
+      "Método de Hondt (Regra de D'Hondt)",
+      "Sistema Maioritário Uninominal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Método de Hondt é consagrado no Artigo 149.º da CRP garantindo a proporcionalidade na distribuição de mandatos por divisão sucessiva (1, 2, 3, 4...).",
+    "fonte": "Comissão Nacional de Eleições (CNE) / Art. 149.º da CRP",
+    "factClusterId": "fc_pol_ar_metododhondt_01"
+  },
+  {
+    "id": "POL_AR_0004",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a posição hierárquica protocolar do Presidente da Assembleia da República (PAR) na estrutura do Estado Português, cabendo-lhe substituir interinamente o Presidente da República em caso de ausência ou impedimento temporário?",
+    "opcoes": [
+      "Primeira figura do Estado",
+      "Terceira figura do Estado",
+      "Quarta figura do Estado",
+      "Segunda figura do Estado Português (Segunda mais alta autoridade)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Presidente da AR precede o Primeiro-Ministro na ordem de precedências do Estado e assume a Chefia de Estado interina se o Presidente da República estiver no estrangeiro.",
+    "fonte": "Constituição da República Portuguesa (Art. 132.º) / Lei das Precedências do Estado",
+    "factClusterId": "fc_pol_ar_presidente_segundafigura_01"
+  },
+  {
+    "id": "POL_AR_0005",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que ilustre jurista e política do PSD (nascida em 1951), professora da Faculdade de Direito de Lisboa («Maria da Assunção Esteves»), tornou-se em 2011 a primeira mulher na história democrática de Portugal a ser eleita Presidente da Assembleia da República?",
+    "opcoes": [
+      "Maria da Assunção Esteves (2011-2015)",
+      "Manuela Ferreira Leite",
+      "Maria de Belém Roseira",
+      "Ana Catarina Mendes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Assunção Esteves foi também a mais jovem juíza conselheira do Tribunal Constitucional e eurodeputada.",
+    "fonte": "Assembleia da República / Arquivo Parlamentar",
+    "factClusterId": "fc_pol_ar_assuncaoesteves_primeiramulher_01"
+  },
+  {
+    "id": "POL_AR_0006",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Quantos círculos eleitorais existem oficialmente nas eleições para a Assembleia da República Portuguesa (18 distritos do continente, 2 regiões autónomas e 2 círculos da emigração)?",
+    "opcoes": [
+      "18 círculos",
+      "Exatamente 22 círculos eleitorais",
+      "20 círculos",
+      "24 círculos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "São 18 círculos distritais continentais, Região Autónoma dos Açores, Região Autónoma da Madeira, Círculo da Europa e Círculo de Fora da Europa.",
+    "fonte": "Comissão Nacional de Eleições / Assembleia da República",
+    "factClusterId": "fc_pol_ar_22circuloseleitorais_01"
+  },
+  {
+    "id": "POL_AR_0007",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é o círculo eleitoral que elege o maior número de deputados para a Assembleia da República Portuguesa em virtude da sua densidade populacional (com 48 deputados em legislaturas recentes)?",
+    "opcoes": [
+      "Círculo Eleitoral do Porto (40 deputados)",
+      "Círculo de Braga (19 deputados)",
+      "Círculo Eleitoral de Lisboa (48 deputados)",
+      "Círculo de Setúbal (19 deputados)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Lisboa e Porto elegem juntos quase 40% de todos os deputados do hemiciclo parlamentar português.",
+    "fonte": "CNE / Mapa Oficial de Deputados",
+    "factClusterId": "fc_pol_ar_circulolisboa_48deputados_01"
+  },
+  {
+    "id": "POL_AR_0008",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é o círculo eleitoral continental que elege o menor número de deputados para a Assembleia da República Portuguesa (apenas 2 deputados)?",
+    "opcoes": [
+      "Círculo de Évora (3 deputados)",
+      "Círculo de Beja (3 deputados)",
+      "Círculo de Bragança (3 deputados)",
+      "Círculo Eleitoral de Portalegre (2 deputados)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Portalegre é o círculo continental com menor número de eleitores registados elegendo o mínimo de dois deputados.",
+    "fonte": "Comissão Nacional de Eleições / Assembleia da República",
+    "factClusterId": "fc_pol_ar_circuloportalegre_2deputados_01"
+  },
+  {
+    "id": "POL_AR_0009",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que órgão parlamentar especial da Assembleia da República funciona obrigatoriamente fora do período de funcionamento efetivo da AR (férias parlamentares), durante o período em que a AR se encontrar dissolvida ou após o termo da legislatura?",
+    "opcoes": [
+      "Comissão Permanente da Assembleia da República",
+      "Conferência de Líderes",
+      "Conselho de Estado",
+      "Mesa da Assembleia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Comissão Permanente é presidida pelo PAR e composta pelos Vice-Presidentes e deputados indicados por todos os partidos proporcionalmente aos seus assentos.",
+    "fonte": "Constituição da República Portuguesa (Art. 179.º)",
+    "factClusterId": "fc_pol_ar_comissaopermanente_01"
+  },
+  {
+    "id": "POL_AR_0010",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a designação técnica dada a uma iniciativa de lei quando é apresentada à Assembleia da República por Deputados ou Grupos Parlamentares (em contraste com as apresentadas pelo Governo)?",
+    "opcoes": [
+      "Proposta de Lei",
+      "Projeto de Lei",
+      "Decreto-Lei",
+      "Portaria Parlamentar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Deputados/Grupos apresentam 'Projetos de Lei'; o Governo e as Assembleias Regionais apresentam 'Propostas de Lei'.",
+    "fonte": "Regimento da Assembleia da República (Art. 118.º)",
+    "factClusterId": "fc_pol_ar_projetodelei_vs_proposta_01"
+  },
+  {
+    "id": "POL_AR_0011",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a designação formal dada ao texto legislativo quando é apresentado à Assembleia da República pelo Governo ou pelas Assembleias Legislativas das Regiões Autónomas dos Açores e Madeira?",
+    "opcoes": [
+      "Projeto de Lei",
+      "Iniciativa Cidadã",
+      "Proposta de Lei",
+      "Resolução Parlamentar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Propostas de Lei emanadas do Conselho de Ministros são submetidas à AR para discussão e votação legislativa.",
+    "fonte": "Regimento da Assembleia da República / CRP",
+    "factClusterId": "fc_pol_ar_propostadelei_governo_01"
+  },
+  {
+    "id": "POL_AR_0012",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Até que data limite do ano civil é o Governo obrigado pela Lei de Enquadramento Orçamental a entregar formalmente na Assembleia da República a Proposta de Lei do Orçamento do Estado (OE) para o ano económico seguinte?",
+    "opcoes": [
+      "Até 15 de novembro",
+      "Até 31 de dezembro",
+      "Até 15 de setembro",
+      "Até 10 de outubro de cada ano"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Ministro das Finanças entrega tradicionalmente o 'pen drive' ou documento oficial do OE ao PAR até ao dia 10 de outubro.",
+    "fonte": "Lei de Enquadramento Orçamental (LEO) / Assembleia da República",
+    "factClusterId": "fc_pol_ar_oe_10outubro_01"
+  },
+  {
+    "id": "POL_AR_0013",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que maioria parlamentar é exigida pelo Artigo 286.º da Constituição da República Portuguesa para a aprovação das alterações num processo de Revisão Constitucional na Assembleia da República?",
+    "opcoes": [
+      "Maioria de dois terços dos Deputados em efetividade de funções (Maioria qualificada de 2/3)",
+      "Maioria simples dos deputados presentes",
+      "Maioria absoluta de 116 deputados",
+      "Três quartos dos deputados"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A exigência de maioria qualificada de 2/3 obriga ao consenso entre os maiores partidos para qualquer emenda constitucional.",
+    "fonte": "Constituição da República Portuguesa (Art. 286.º)",
+    "factClusterId": "fc_pol_ar_revisaoconstitucional_2tercos_01"
+  },
+  {
+    "id": "POL_AR_0014",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que instrumento parlamentar de fiscalização extrema pode ser apresentado por um quarto dos Deputados em efetividade de funções para demitir o Governo em funções («Moção de Censura»), exigindo para a sua aprovação:",
+    "opcoes": [
+      "Maioria simples dos deputados presentes",
+      "Maioria absoluta dos Deputados em efetividade de funções (mínimo de 116 votos a favor)",
+      "Dois terços dos votos",
+      "Unanimidade dos partidos da oposição"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Se uma Moção de Censura for aprovada por maioria absoluta (116 deputados), o Governo é demitido pelo Presidente da República.",
+    "fonte": "Constituição da República Portuguesa (Art. 193.º e 195.º)",
+    "factClusterId": "fc_pol_ar_mocaodecensura_maioriaabsoluta_01"
+  },
+  {
+    "id": "POL_AR_0015",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que moção parlamentar de iniciativa exclusiva do Governo («Moção de Confiança») pode ser submetida à AR sobre uma declaração de política geral ou sobre qualquer assunto de relevante interesse nacional?",
+    "opcoes": [
+      "Moção de Censura",
+      "Voto de Louvor",
+      "Moção de Confiança (Art. 192.º da CRP)",
+      "Requerimento de Urgência"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A não aprovação de uma Moção de Confiança implica a demissão obrigatória do Governo.",
+    "fonte": "Constituição da República Portuguesa (Art. 192.º)",
+    "factClusterId": "fc_pol_ar_mocaodeconfianca_01"
+  },
+  {
+    "id": "POL_AR_0016",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que prestigiado estadista e jurista socialista de Coimbra (1926-2016), cofundador do PS e Presidente da Assembleia da República durante três legislaturas (1995-2002), «António de Almeida Santos», presidiu ao Parlamento e foi o principal redator da legislação democrática pós-25 de Abril?",
+    "opcoes": [
+      "Jaime Gama",
+      "Eduardo Ferro Rodrigues",
+      "Manuel Tito de Morais",
+      "António de Almeida Santos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Almeida Santos foi Ministro dos Assuntos Parlamentares e Ministro da Justiça e uma das figuras tutelares do regime parlamentar democrático.",
+    "fonte": "Assembleia da República / Arquivo Parlamentar",
+    "factClusterId": "fc_pol_ar_almeidasantos_par_01"
+  },
+  {
+    "id": "POL_AR_0017",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que ilustre político açoriano de São Miguel (nascido em 1943), fundador do PSD e histórico Presidente do Governo Regional dos Açores durante 20 anos («João Bosco Mota Amaral»), presidiu à Assembleia da República entre 2002 e 2005?",
+    "opcoes": [
+      "João Bosco Mota Amaral",
+      "Jaime Gama",
+      "Fernando Amaral",
+      "Alberto João Jardim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mota Amaral foi o pai da autonomia açoriana e presidiu ao Parlamento nacional durante o governo de Durão Barroso e Santana Lopes.",
+    "fonte": "Assembleia da República / Governo Regional dos Açores",
+    "factClusterId": "fc_pol_ar_motaamaral_par_01"
+  },
+  {
+    "id": "POL_AR_0018",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que político e diplomata açoriano de São Miguel (nascido em 1947), que foi Ministro dos Negócios Estrangeiros, da Administração Interna e da Defesa Nacional («Jaime Gama»), presidiu à Assembleia da República durante duas legislaturas (2005-2011)?",
+    "opcoes": [
+      "António Almeida Santos",
+      "Jaime Gama (Jaime José de Matos da Gama)",
+      "Augusto Santos Silva",
+      "Vítor Crespo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jaime Gama foi deputado constituinte em 1975 e liderou a modernização tecnológica e institucional do Palácio de São Bento.",
+    "fonte": "Assembleia da República / Galeria dos Presidentes",
+    "factClusterId": "fc_pol_ar_jaimegama_par_01"
+  },
+  {
+    "id": "POL_AR_0019",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que sociólogo, professor universitário e político do Porto (nascido em 1956), Ministro dos Negócios Estrangeiros e da Defesa Nacional («Augusto Santos Silva»), desempenhou as funções de Presidente da Assembleia da República entre 2022 e 2024?",
+    "opcoes": [
+      "Eduardo Ferro Rodrigues",
+      "José Pedro Aguiar-Branco",
+      "Augusto Santos Silva",
+      "Manuel Alegre"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Santos Silva notabilizou-se pela defesa enérgica das instituições democráticas e das regras de decoro e urbanidade parlamentar no plenário.",
+    "fonte": "Assembleia da República / Arquivo Parlamentar",
+    "factClusterId": "fc_pol_ar_augustosantossilva_par_01"
+  },
+  {
+    "id": "POL_AR_0020",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que advogado e político portuense (nascido em 1957), antigo Ministro da Justiça e Ministro da Defesa Nacional («José Pedro Aguiar-Branco»), foi eleito Presidente da Assembleia da República na XVI Legislatura em março de 2024?",
+    "opcoes": [
+      "Augusto Santos Silva",
+      "Hugo Soares",
+      "Luís Montenegro",
+      "José Pedro Aguiar-Branco"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Aguiar-Branco foi líder da bancada parlamentar do PSD e Bastonário da Ordem dos Advogados antes de assumir a presidência da AR.",
+    "fonte": "Assembleia da República (XVI Legislatura) / Diário da Assembleia da República",
+    "factClusterId": "fc_pol_ar_aguiarbranco_par2024_01"
+  },
+  {
+    "id": "POL_AR_0021",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a duração constitucional regular de uma Legislatura da Assembleia da República (composta por quatro sessões legislativas de um ano cada, iniciando-se a 15 de setembro)?",
+    "opcoes": [
+      "4 anos civis (quatro sessões legislativas)",
+      "5 anos",
+      "3 anos",
+      "6 anos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Cada sessão legislativa decorre de 15 de setembro a 15 de junho, podendo ser prorrogada por deliberação do plenário.",
+    "fonte": "Constituição da República Portuguesa (Art. 171.º e 174.º)",
+    "factClusterId": "fc_pol_ar_legislatura4anos_01"
+  },
+  {
+    "id": "POL_AR_0022",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que comissões parlamentares criadas na AR dispõem dos mesmos poderes de investigação e instrução das autoridades judiciais (podendo convocar testemunhas sob juramento e solicitar quebra de sigilo bancário ou fiscal):",
+    "opcoes": [
+      "Comissões Eventuais de Acompanhamento",
+      "Comissões Parlamentares de Inquérito (CPI)",
+      "Comissões de Ética",
+      "Subcomissões de Trabalho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As CPIs podem ser constituídas potestativamente a requerimento de um quinto dos deputados em efetividade de funções (Regime Jurídico dos Inquéritos Parlamentares).",
+    "fonte": "Lei n.º 5/93 (Regime Jurídico dos Inquéritos Parlamentares) / AR",
+    "factClusterId": "fc_pol_ar_comissoesdeinquerito_01"
+  },
+  {
+    "id": "POL_AR_0023",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a comissão parlamentar permanente mais antiga e nuclear da Assembleia da República, tradicionalmente designada por «1.ª Comissão»:",
+    "opcoes": [
+      "Comissão de Orçamento e Finanças (COF)",
+      "Comissão de Negócios Estrangeiros",
+      "Comissão de Assuntos Constitucionais, Direitos, Liberdades e Garantias",
+      "Comissão de Defesa Nacional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A 1.ª Comissão aprecia a conformidade constitucional das leis, matéria penal, direitos cívicos e organização judiciária.",
+    "fonte": "Regimento da Assembleia da República (Art. 38.º)",
+    "factClusterId": "fc_pol_ar_primeiracomissao_01"
+  },
+  {
+    "id": "POL_AR_0024",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que importante mecanismo de democracia participativa permite aos cidadãos eleitores apresentar diretamente à Assembleia da República projetos de lei subscritos por um número mínimo de assinaturas certificadas («Iniciativa Legislativa de Cidadãos»)?",
+    "opcoes": [
+      "Petição Pública de Cidadãos",
+      "Referendo Nacional Obrigatório",
+      "Consulta Popular Direta",
+      "Iniciativa Legislativa de Cidadãos (ILC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A ILC exige um mínimo de 20.000 assinaturas de cidadãos eleitores para ser admitida e discutida obrigatoriamente em plenário.",
+    "fonte": "Lei n.º 17/2003 (Iniciativa Legislativa de Cidadãos) / AR",
+    "factClusterId": "fc_pol_ar_iniciativalegislativacidadaos_01"
+  },
+  {
+    "id": "POL_AR_0025",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que prestigiada biblioteca parlamentar situada no torreão do Palácio de São Bento («Biblioteca Passos Manuel»), fundada em 1836 por Manuel da Silva Passos («Passos Manuel»), preserva centenas de milhares de volumes e diários históricos das cortes?",
+    "opcoes": [
+      "Biblioteca Passos Manuel (Assembleia da República)",
+      "Biblioteca Nacional de Portugal",
+      "Biblioteca da Ajuda",
+      "Biblioteca do Grémio Literário"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Passos Manuel criou a biblioteca com um teto abobadado em ferro e madeira para apoiar o trabalho legislativo dos deputados liberais.",
+    "fonte": "Assembleia da República / Divisão de Biblioteca da AR",
+    "factClusterId": "fc_pol_ar_bibliotecapassosmanuel_01"
+  },
+  {
+    "id": "POL_AR_0026",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a publicação oficial diária onde são integralmente transcritos todos os discursos, intervenções, apartes, votações e textos legislativos da Assembleia da República («Diário da Assembleia da República» — DAR)?",
+    "opcoes": [
+      "Diário da República (DRE)",
+      "Diário da Assembleia da República (DAR — I e II Séries)",
+      "Gazeta Parlamentar",
+      "Boletim Oficial do Estado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A 1.ª Série do DAR regista os debates no plenário e a 2.ª Série publica os projetos, propostas, relatórios e textos de comissões.",
+    "fonte": "Assembleia da República / Imprensa Nacional",
+    "factClusterId": "fc_pol_ar_dar_diarioassembleia_01"
+  },
+  {
+    "id": "POL_AR_0027",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que importante órgão consultivo e deliberativo do Parlamento, composto pelo Presidente da AR e pelos líderes de todos os grupos parlamentares com assento («Conferência de Líderes»), tem como missão principal:",
+    "opcoes": [
+      "Aprovar as leis em substituição do plenário",
+      "Nomear os juízes dos tribunais",
+      "Fixar a ordem do dia, agendar os debates em plenário e definir os tempos de intervenção de cada bancada",
+      "Decidir a dissolução do Governo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Conferência de Líderes reúne-se semanalmente para acertar os consensos sobre a agenda legislativa e calendário parlamentar.",
+    "fonte": "Regimento da Assembleia da República (Art. 23.º)",
+    "factClusterId": "fc_pol_ar_conferenciadelideres_01"
+  },
+  {
+    "id": "POL_AR_0028",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Quantos Vice-Presidentes compõem a Mesa da Assembleia da República eleitos pelos deputados no início de cada legislatura, propostos pelos quatro maiores grupos parlamentares?",
+    "opcoes": [
+      "2 Vice-Presidentes",
+      "6 Vice-Presidentes",
+      "3 Vice-Presidentes",
+      "Exatamente 4 Vice-Presidentes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Mesa da AR é composta pelo PAR, 4 Vice-Presidentes, 4 Secretários e 4 Vice-Secretários (Art. 20.º do Regimento).",
+    "fonte": "Regimento da Assembleia da República",
+    "factClusterId": "fc_pol_ar_4vicepresidentes_01"
+  },
+  {
+    "id": "POL_AR_0029",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que solenidade anual máxima do calendário político português realiza-se no hemiciclo da Assembleia da República na manhã de 25 de Abril, com discursos de todos os partidos e do Presidente da República?",
+    "opcoes": [
+      "Sessão Solene Comemorativa do 25 de Abril (Revolução dos Cravos)",
+      "Debate do Estado da Nação",
+      "Abertura do Ano Judicial",
+      "Sessão do 10 de Junho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sessão Solene do 25 de Abril é a mais emblemática celebração da liberdade e da democracia parlamentar em Portugal.",
+    "fonte": "Assembleia da República / Arquivo RTP",
+    "factClusterId": "fc_pol_ar_sessaosolene25abril_01"
+  },
+  {
+    "id": "POL_AR_0030",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que grande debate parlamentar realiza-se obrigatoriamente no final de cada sessão legislativa (em julho), no qual o Primeiro-Ministro e os deputados fazem o balanço político e económico do país perante a nação?",
+    "opcoes": [
+      "Debate do Programa de Governo",
+      "Debate sobre o Estado da Nação",
+      "Debate Quinzenal",
+      "Debate do Orçamento Retificativo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Debate do Estado da Nação encerra tradicionalmente os trabalhos parlamentares antes das férias de verão.",
+    "fonte": "Regimento da Assembleia da República (Art. 228.º)",
+    "factClusterId": "fc_pol_ar_debatestadodanacao_01"
+  },
+  {
+    "id": "POL_AR_0031",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a maioria de votos exigida na Assembleia da República para que os deputados confirmem um decreto vetado politicamente pelo Presidente da República, obrigando o Chefe de Estado a promulgá-lo no prazo de 8 dias?",
+    "opcoes": [
+      "Maioria simples dos presentes",
+      "Unanimidade",
+      "Maioria absoluta dos Deputados em efetividade de funções (116 deputados) ou maioria qualificada de 2/3 para matérias reservadas",
+      "Três quintos dos deputados"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Artigo 136.º da CRP consagra o poder de superação do veto presidencial pela confirmação por maioria absoluta parlamentar.",
+    "fonte": "Constituição da República Portuguesa (Art. 136.º)",
+    "factClusterId": "fc_pol_ar_superacaoveto_maioriaabsoluta_01"
+  },
+  {
+    "id": "POL_AR_0032",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que importante alto-comissário independente do Estado («Provedor de Justiça»), com a missão de defender os direitos, liberdades e garantias dos cidadãos contra injustiças da administração pública (Artigo 23.º da CRP), é eleito pela Assembleia da República por:",
+    "opcoes": [
+      "Maioria simples",
+      "Nomeação direta do Primeiro-Ministro",
+      "Sufrágio popular direto",
+      "Maioria de dois terços dos Deputados presentes (desde que superior à maioria absoluta)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Provedoria de Justiça recebe queixas dos cidadãos e tem legitimidade para requerer a inconstitucionalidade de leis junto do Tribunal Constitucional.",
+    "fonte": "Constituição da República Portuguesa (Art. 23.º) / Provedoria de Justiça",
+    "factClusterId": "fc_pol_ar_provedordejustica_eleicao_01"
+  },
+  {
+    "id": "POL_AR_0033",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Quantos dos 13 Juízes Conselheiros do Tribunal Constitucional (com sede no Palácio Ratton) são eleitos diretamente pela Assembleia da República por maioria de dois terços?",
+    "opcoes": [
+      "Exatamente 10 Juízes Conselheiros (sendo os restantes 3 cooptados por estes)",
+      "Todos os 13 juízes",
+      "6 juízes",
+      "8 juízes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Artigo 222.º da CRP fixa que a AR elege 10 juízes do Tribunal Constitucional por maioria de 2/3 e esses 10 elegem (cooptam) os restantes 3 juízes.",
+    "fonte": "Constituição da República Portuguesa (Art. 222.º) / Tribunal Constitucional",
+    "factClusterId": "fc_pol_ar_tribunalconstitucional_10juizes_01"
+  },
+  {
+    "id": "POL_AR_0034",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Quantos membros do Conselho de Estado (órgão político de consulta do Presidente da República) são eleitos diretamente pela Assembleia da República pelo princípio da representação proporcional?",
+    "opcoes": [
+      "10 cidadãos",
+      "Exatamente 5 cidadãos eleitos pela AR",
+      "3 cidadãos",
+      "7 cidadãos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Conselho de Estado integra 5 personalidades eleitas pelo Parlamento para o período correspondente à duração da legislatura.",
+    "fonte": "Constituição da República Portuguesa (Art. 142.º) / Presidência da República",
+    "factClusterId": "fc_pol_ar_conselhodeestado_5eleitos_01"
+  },
+  {
+    "id": "POL_AR_0035",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que importante dirigente histórico socialista e combatente antifascista de Lisboa (1910-1999), cofundador do PS («Manuel Alfredo Tito de Morais»), presidiu à Assembleia da República entre 1983 e 1984 durante o governo do Bloco Central?",
+    "opcoes": [
+      "Vasco da Gama Fernandes",
+      "Teófilo Carvalho dos Santos",
+      "Manuel Alfredo Tito de Morais",
+      "Fernando Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Tito de Morais foi um dos fundadores da Ação Socialista Portuguesa em Genebra e resistente histórico no exílio.",
+    "fonte": "Assembleia da República / Fundação Mário Soares",
+    "factClusterId": "fc_pol_ar_titodemorais_par_01"
+  },
+  {
+    "id": "POL_AR_0036",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que advogado e deputado social-democrata de Lamego (1925-2016), «Fernando Monteiro do Amaral», presidiu à Assembleia da República durante as maiorias de Cavaco Silva entre 1984 e 1987?",
+    "opcoes": [
+      "Vítor Crespo",
+      "António Barbosa de Melo",
+      "Leonardo Ribeiro de Almeida",
+      "Fernando Monteiro do Amaral (Fernando Amaral)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Fernando Amaral conduziu os trabalhos parlamentares num dos períodos mais dinâmicos de estabilização política e adesão à CEE.",
+    "fonte": "Assembleia da República / Galeria dos Presidentes",
+    "factClusterId": "fc_pol_ar_fernandoamaral_par_01"
+  },
+  {
+    "id": "POL_AR_0037",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que professor catedrático de Química de Coimbra (1932-2014), Ministro da Educação e Ciência («Vítor Pereira Crespo»), presidiu à Assembleia da República entre 1987 e 1991 durante a primeira maioria absoluta do PSD?",
+    "opcoes": [
+      "Vítor Pereira Crespo (Vítor Crespo)",
+      "Barbosa de Melo",
+      "Oliveira Dias",
+      "Almeida Santos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Vítor Crespo conduziu as históricas revisões constitucionais e a modernização da administração parlamentar.",
+    "fonte": "Assembleia da República / Universidade de Coimbra",
+    "factClusterId": "fc_pol_ar_vitorcrespo_par_01"
+  },
+  {
+    "id": "POL_AR_0038",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que eminente professor catedrático de Direito da Faculdade de Direito de Coimbra (1932-2016), «António Moreira Barbosa de Melo», presidiu à Assembleia da República entre 1991 e 1995?",
+    "opcoes": [
+      "Vítor Crespo",
+      "António Moreira Barbosa de Melo (Barbosa de Melo)",
+      "Mota Amaral",
+      "Santos Silva"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Barbosa de Melo foi deputado constituinte em 1975 e uma das mentes mais brilhantes do direito constitucional português.",
+    "fonte": "Assembleia da República / FDUC",
+    "factClusterId": "fc_pol_ar_barbosademelo_par_01"
+  },
+  {
+    "id": "POL_AR_0039",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que histórico economista e político do Partido Socialista de Lisboa (nascido em 1949), Ministro do Trabalho e da Solidariedade («Eduardo Ferro Rodrigues»), presidiu à Assembleia da República durante duas legislaturas entre 2015 e 2022 (durante os governos da «Geringonça»)?",
+    "opcoes": [
+      "Augusto Santos Silva",
+      "Jaime Gama",
+      "Eduardo Ferro Rodrigues",
+      "Carlos César"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ferro Rodrigues foi Secretário-Geral do PS e conduziu os trabalhos parlamentares nos governos de António Costa.",
+    "fonte": "Assembleia da República / Arquivo Parlamentar",
+    "factClusterId": "fc_pol_ar_ferrorodrigues_par_01"
+  },
+  {
+    "id": "POL_AR_0040",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que primeiro Presidente da Assembleia Constituinte de 1975 («Henrique de Barros»), professor catedrático de Agronomia e pioneiro da reforma agrária democrática, conduziu os trabalhos de redação da Constituição de 1976?",
+    "opcoes": [
+      "Vasco da Gama Fernandes",
+      "Mário Soares",
+      "Francisco Sá Carneiro",
+      "Henrique de Barros (Presidente da Assembleia Constituinte)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Henrique de Barros proclamou a aprovação final da Constituição da República Portuguesa em 2 de abril de 1976.",
+    "fonte": "Assembleia da República / Diário da Assembleia Constituinte",
+    "factClusterId": "fc_pol_ar_henriquedebarros_constituinte_01"
+  },
+  {
+    "id": "POL_AR_0041",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que histórico advogado e político socialista de São Brás de Alportel (1908-1991), «Vasco da Gama Fernandes», foi o primeiro Presidente da Assembleia da República da história constitucional portuguesa eleito na I Legislatura em 1976?",
+    "opcoes": [
+      "Vasco da Gama Fernandes (1.º Presidente da AR)",
+      "Henrique de Barros",
+      "Teófilo Carvalho dos Santos",
+      "Leonardo Ribeiro de Almeida"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Vasco da Gama Fernandes inaugurou o funcionamento do parlamento democrático constitucional português entre 1976 e 1978.",
+    "fonte": "Assembleia da República / Galeria dos Presidentes",
+    "factClusterId": "fc_pol_ar_vascodagamafernandes_primeiropar_01"
+  },
+  {
+    "id": "POL_AR_0042",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a imunidade parlamentar consagrada no Artigo 157.º da CRP que garante que os Deputados não respondem civil, criminal ou disciplinarmente pelos votos e opiniões que emitirem no exercício das suas funções:",
+    "opcoes": [
+      "Inviolabilidade de Domicílio",
+      "Inviolabilidade / Irresponsabilidade Parlamentar",
+      "Sigilo de Estado",
+      "Isenção Tributária"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A inviolabilidade protege a liberdade de expressão e a independência dos deputados contra perseguições políticas.",
+    "fonte": "Constituição da República Portuguesa (Art. 157.º)",
+    "factClusterId": "fc_pol_ar_imunidadeparlamentar_01"
+  },
+  {
+    "id": "POL_AR_0043",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Em que circunstância excecional pode um Deputado à Assembleia da República ser detido ou preso sem autorização prévia da própria Assembleia da República?",
+    "opcoes": [
+      "Em qualquer processo cível",
+      "Por simples ordem do Ministério Público",
+      "Apenas em caso de flagrante delito por crime punível com pena de prisão superior a 3 anos",
+      "Em caso de dívida fiscal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fora do flagrante delito com pena superior a 3 anos, a detenção ou levantamento de imunidade exige sempre autorização prévia da AR.",
+    "fonte": "Estatuto dos Deputados (Lei n.º 7/93) / Art. 157.º da CRP",
+    "factClusterId": "fc_pol_ar_detencaodeputado_flagrante_01"
+  },
+  {
+    "id": "POL_AR_0044",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que deputado ou deputados que não pertençam a nenhum Grupo Parlamentar (por desfiliação partidária ou eleição independente) são formalmente classificados no Regimento da AR como:",
+    "opcoes": [
+      "Deputados Suplentes",
+      "Deputados Observadores",
+      "Deputados Honorários",
+      "Deputados Não Inscritos (ou Deputado Único Representante de um Partido)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Deputados Não Inscritos dispõem de direitos regimentais próprios de apresentação de iniciativas e tempos de debate fixados pelo regimento.",
+    "fonte": "Regimento da Assembleia da República (Art. 12.º e 13.º)",
+    "factClusterId": "fc_pol_ar_deputadosnaoinscritos_01"
+  },
+  {
+    "id": "POL_AR_0045",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que importante órgão consultivo e de apoio da Assembleia da República é responsável por prestar assessoria técnica independente de orçamento e finanças públicas aos deputados («UTAO»)?",
+    "opcoes": [
+      "Unidade Técnica de Apoio Orçamental (UTAO)",
+      "Conselho das Finanças Públicas",
+      "Tribunal de Contas",
+      "Gabinete de Estudos Jurídicos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A UTAO elabora relatórios técnicos rigorosos sobre a execução orçamental e o impacto financeiro das propostas de lei.",
+    "fonte": "Assembleia da República / UTAO",
+    "factClusterId": "fc_pol_ar_utao_orcamento_01"
+  },
+  {
+    "id": "POL_AR_0046",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que prestigiado canal de televisão público em sinal aberto transmite em direto todas as sessões plenárias, reuniões de comissões e debates parlamentares a partir do Palácio de São Bento («ARtv» / Canal Parlamento)?",
+    "opcoes": [
+      "RTP3",
+      "ARtv (Canal Parlamento)",
+      "RTP Informação",
+      "Canal Q"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A ARtv emite desde 1998 e em canal aberto na TDT desde 2013 garantindo a total transparência dos trabalhos legislativos.",
+    "fonte": "Assembleia da República / ARtv",
+    "factClusterId": "fc_pol_ar_artv_canalparlamento_01"
+  },
+  {
+    "id": "POL_AR_0047",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que famoso programa cívico educativo anual da Assembleia da República em cooperação com as escolas básicas e secundárias de todo o país e das regiões autónomas («Parlamento dos Jovens»), promove a participação política e cidadania dos estudantes?",
+    "opcoes": [
+      "Escola de Deputados",
+      "Assembleia Júnior",
+      "Parlamento dos Jovens",
+      "República dos Estudantes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Parlamento dos Jovens realiza sessões plenárias anuais em São Bento onde alunos deputados debatem e aprovam projetos de recomendação.",
+    "fonte": "Assembleia da República / Ministério da Educação",
+    "factClusterId": "fc_pol_ar_parlamentodosjovens_01"
+  },
+  {
+    "id": "POL_AR_0048",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Qual é a designação formal do local físico no centro do Palácio de São Bento onde os 230 deputados tomam assento em semicírculo e realizam as votações parlamentares sob a presidência da Mesa?",
+    "opcoes": [
+      "Salão Nobre",
+      "Sala dos Passos Perdidos",
+      "Claustro do Cardeal",
+      "Hemiciclo / Sala das Sessões Plenárias"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O hemiciclo de São Bento possui painéis escultóricos de Teixeira Lopes e pinturas históricas de Columbano Bordalo Pinheiro e Acácio Lino.",
+    "fonte": "Assembleia da República / Museu da AR",
+    "factClusterId": "fc_pol_ar_hemiciclo_saobento_01"
+  },
+  {
+    "id": "POL_AR_0049",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que ampla sala de aparato do Palácio de São Bento, contígua ao hemiciclo («Sala dos Passos Perdidos»), é célebre pelos seus tetos pintados e por ser o local onde deputados e jornalistas se encontram nos intervalos das sessões?",
+    "opcoes": [
+      "Sala dos Passos Perdidos",
+      "Sala das Bicas",
+      "Sala do Senado",
+      "Galeria dos Embaixadores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sala dos Passos Perdidos é decorada com pinturas murais alusivas à história constitucional e das cortes medievais.",
+    "fonte": "Assembleia da República / Guia do Palácio de São Bento",
+    "factClusterId": "fc_pol_ar_passosperdidos_01"
+  },
+  {
+    "id": "POL_AR_0050",
+    "tema": "Portugal Político",
+    "subtema": "Assembleia da República",
+    "pergunta": "Que órgão supremo de controlo da legalidade e regularidade das despesas e receitas públicas de Portugal («Tribunal de Contas»), com sede na Avenida Barbosa du Bocage em Lisboa, presta contas e apresenta anualmente à Assembleia da República o «Parecer sobre a Conta Geral do Estado»?",
+    "opcoes": [
+      "Tribunal Constitucional",
+      "Banco de Portugal",
+      "Tribunal de Contas (TdC)",
+      "Inspeção-Geral de Finanças"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tribunal de Contas fiscaliza a execução do Orçamento do Estado e emite o parecer que é votado em plenário na Assembleia da República.",
+    "fonte": "Constituição da República Portuguesa (Art. 214.º) / Tribunal de Contas",
+    "factClusterId": "fc_pol_ar_tribunaldecontas_01"
+  }
+]

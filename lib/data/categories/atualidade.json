@@ -9748,5 +9748,1905 @@
     ],
     "correctAnswer": "Porto Espacial de Santa Maria (Spaceport dos Açores)",
     "explanation": "O ecossistema espacial nos Açores aproveita a localização atlântica estratégica para o lançamento e monitorização de satélites europeus."
+  },
+  {
+    "id": "ATU_STA_0001",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que plataforma global de comércio eletrónico de moda de luxo fundada pelo empresário português José Neves em 2007 tornou-se o primeiro unicórnio tecnológico com fundação e ADN português (avaliado em mais de mil milhões de dólares)?",
+    "opcoes": [
+      "Farfetch",
+      "OutSystems",
+      "Talkdesk",
+      "Feedzai"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Farfetch entrou na Bolsa de Nova Iorque (NYSE) em 2018 e estabeleceu centros de engenharia em Guimarães, Braga, Porto e Lisboa.",
+    "fonte": "Startup Portugal / NYSE / Ministério da Economia",
+    "factClusterId": "fc_sta_farfetchunicórnio_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0002",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa tecnológica portuguesa de software fundada em 2001 por Paulo Rosado («OutSystems»), pioneira mundial em plataformas de desenvolvimento «low-code» para aplicações empresariais rápidas, é um dos unicórnios mais valiosos de Portugal?",
+    "opcoes": [
+      "Feedzai",
+      "OutSystems",
+      "Sword Health",
+      "Talkdesk"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A OutSystems atingiu o estatuto de unicórnio em 2018 após investimento conjunto da KKR e Goldman Sachs.",
+    "fonte": "Startup Portugal / AICEP",
+    "factClusterId": "fc_sta_outsystems_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0003",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa de contact center na nuvem (cloud) movida por inteligência artificial, fundada em 2011 por Tiago Paiva e Cristina Fonseca, tornou-se o 3.º unicórnio com ADN português e sede técnica em Lisboa?",
+    "opcoes": [
+      "Remote",
+      "Anchorage Digital",
+      "Talkdesk",
+      "Casafari"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Talkdesk atingiu o estatuto de unicórnio em 2018 e atende mais de 1.800 empresas clientes em todo o mundo.",
+    "fonte": "Startup Portugal / Talkdesk",
+    "factClusterId": "fc_sta_talkdesk_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0004",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa tecnológica de inteligência artificial aplicada à prevenção e combate à fraude bancária e lavagem de dinheiro, fundada em Coimbra em 2011 por Nuno Sebastião, tornou-se o 4.º unicórnio português em 2021?",
+    "opcoes": [
+      "OutSystems",
+      "Sword Health",
+      "Defined.ai",
+      "Feedzai"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Feedzai protege anualmente transações financeiras de centenas de milhões de pessoas nos maiores bancos globais como Citibank e Santander.",
+    "fonte": "Feedzai / Universidade de Coimbra / Startup Portugal",
+    "factClusterId": "fc_sta_feedzai_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0005",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup fundada em 2019 pelo português Marcelo Lebre e pelo holandês Job van der Voort, especializada em gestão global de contratações, salários e recursos humanos para equipas remotas em mais de 170 países, atingiu o estatuto de unicórnio em apenas dois anos?",
+    "opcoes": [
+      "Remote",
+      "Deel",
+      "Talkdesk",
+      "Sword Health"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Remote é uma das empresas de crescimento mais rápido do mundo na era do trabalho remoto internacional.",
+    "fonte": "Remote / Startup Portugal",
+    "factClusterId": "fc_sta_remoteunicórnio_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0006",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que unicórnio de tecnologia médica («MedTech») fundado pelo engenheiro português Virgílio Bento em 2015 («Sword Health»), pioneiro no tratamento digital da dor músculo-esquelética com recurso a sensores e Inteligência Artificial clínica, é avaliado em milhares de milhões de dólares?",
+    "opcoes": [
+      "Knok Healthcare",
+      "Sword Health",
+      "Defined.ai",
+      "Bioalvo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sword Health desenvolveu o 'Digital Therapist' que permite aos doentes realizarem sessões de fisioterapia guiadas em casa com acompanhamento médico contínuo.",
+    "fonte": "Sword Health / Startup Portugal / Universidade de Aveiro",
+    "factClusterId": "fc_sta_swordhealth_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0007",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que banco de ativos digitais e criptoativos fundado pelo engenheiro de cibersegurança português Diogo Mónica («Anchorage Digital»), o primeiro banco de criptoativos a obter uma licença bancária federal nos Estados Unidos (OCC) em 2021, é um dos unicórnios fundados por portugueses?",
+    "opcoes": [
+      "Revolut",
+      "Kraken",
+      "Anchorage Digital",
+      "Uphold"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Diogo Mónica estudou no Instituto Superior Técnico e cofundou a Anchorage para fornecer custódia segura institucional de criptoativos para grandes bancos mundiais.",
+    "fonte": "Anchorage Digital / OCC / IST",
+    "factClusterId": "fc_sta_anchoragedigital_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0008",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que gigantesca cimeira tecnológica mundial criada pelo irlandês Paddy Cosgrave («Web Summit»), realizada anualmente em Lisboa na MEO Arena e FIL desde novembro de 2016, atrai mais de 70.000 participantes e 2.500 startups de 160 países?",
+    "opcoes": [
+      "Mobile World Congress",
+      "TechCrunch Disrupt",
+      "CES Lisboa",
+      "Web Summit (Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A realização do Web Summit em Lisboa impulsionou o reconhecimento internacional de Portugal como um dos principais hubs de inovação e investimento da Europa.",
+    "fonte": "Web Summit / AICEP / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_sta_websummitlisboa_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0009",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que antigo complexo fabril da Manutenção Militar na zona oriental de Lisboa (com mais de 35.000 m² no Beato), transformado num dos maiores polos e campus de inovação, empreendedorismo e criatividade da Europa, é o:",
+    "opcoes": [
+      "Hub Criativo do Beato (HCB)",
+      "Lx Factory",
+      "Taguspark",
+      "Braço de Prata"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Hub Criativo do Beato acolhe a Fábrica de Unicórnios de Lisboa, a incubadora internacional Factory Berlin e centros de inovação da Web Summit.",
+    "fonte": "Câmara Municipal de Lisboa / Startup Lisboa / HCB",
+    "factClusterId": "fc_sta_hubcriativobeato_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0010",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que iniciativa pioneira do Município de Lisboa lançada em 2022 («Unicorn Factory Lisboa / Fábrica de Unicórnios»), sediada no Beato e Saldanha, visa apoiar startups de alto potencial («scaleups») na sua expansão global acelerada?",
+    "opcoes": [
+      "Startup Portugal",
+      "Unicorn Factory Lisboa",
+      "Casa do Impacto",
+      "Portugal Ventures"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Unicorn Factory Lisboa já apoiou dezenas de scaleups em programas de aceleração em Web3, Inteligência Artificial e Saúde Digital.",
+    "fonte": "Câmara Municipal de Lisboa / Unicorn Factory Lisboa",
+    "factClusterId": "fc_sta_unicornfactorylisboa_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0011",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia da Universidade do Porto («UPTEC»), com polos no Polo Universitário e na Baixa, já apoiou a criação de mais de 700 projetos empresariais inovadores e atraiu centros de I&D de multinacionais?",
+    "opcoes": [
+      "Taguspark",
+      "Nonagon",
+      "UPTEC (Parque de Ciência e Tecnologia da Universidade do Porto)",
+      "Madeira Tecnopolo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O UPTEC foi galardoado pela Comissão Europeia com o Prémio RegioStars como o melhor projeto de transição económica e inovação regional da UE.",
+    "fonte": "Universidade do Porto / UPTEC / Comissão Europeia",
+    "factClusterId": "fc_sta_uptec_porto_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0012",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que instituição privada sem fins lucrativos de Coimbra («Instituto Pedro Nunes — IPN»), ligada à Universidade de Coimbra, foi distinguida internacionalmente como uma das melhores incubadoras universitárias do mundo e acolhe o centro de incubação de empresas da ESA (Agência Espacial Europeia)?",
+    "opcoes": [
+      "INESC TEC",
+      "CEiiA",
+      "BIOCANT Park",
+      "Instituto Pedro Nunes (IPN Coimbra)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O IPN de Coimbra viu nascer unicórnios como a Feedzai e dezenas de empresas de biotecnologia, espaço e informática.",
+    "fonte": "Instituto Pedro Nunes / ESA Space Solutions Portugal",
+    "factClusterId": "fc_sta_ipncoimbra_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0013",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro parque de biotecnologia de Portugal («Biocant Park»), situado no concelho de Cantanhede (distrito de Coimbra), concentra dezenas de empresas e centros de investigação de biotecnologia médica, agroalimentar e farmacêutica?",
+    "opcoes": [
+      "Biocant Park (Cantanhede)",
+      "Taguspark",
+      "Sanjotec",
+      "Avepark"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Biocant Park é o maior polo de biociências do país e alberga o Centro de Neurociências e Biologia Celular.",
+    "fonte": "Biocant Park / Município de Cantanhede",
+    "factClusterId": "fc_sta_biocant_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0014",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que centro de engenharia e desenvolvimento de produto sediado em Matosinhos («CEiiA»), pioneiro em mobilidade sustentável, aeroespacial e oceanos, concebeu o veículo elétrico Buddy e estruturas para o avião cargueiro militar KC-390?",
+    "opcoes": [
+      "INESC TEC",
+      "CEiiA (Centro de Engenharia e Desenvolvimento)",
+      "PIEP",
+      "CITEVE"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CEiiA lidera consórcios de satélites portugueses e a plataforma de créditos de carbono e mobilidade descarbonizada AYR.",
+    "fonte": "CEiiA / Embraer / Ministério da Ciência",
+    "factClusterId": "fc_sta_ceiia_matosinhos_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0015",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro parque de ciência e tecnologia de Portugal («Taguspark — Cidade do Conhecimento»), inaugurado em 1992 em Porto Salvo (concelho de Oeiras), alberga centros de investigação do IST, empresas farmacêuticas e tecnológicas?",
+    "opcoes": [
+      "Lispolis",
+      "Madan Parque",
+      "Taguspark (Oeiras)",
+      "Regia-Douro Park"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Taguspark integra o ecossistema do 'Oeiras Valley' e é a sede de centenas de empresas inovadoras que empregam mais de 16.000 profissionais.",
+    "fonte": "Taguspark / Município de Oeiras",
+    "factClusterId": "fc_sta_taguspark_oeiras_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0016",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que laboratório internacional de nanotecnologia situado em Braga («INL — International Iberian Nanotechnology Laboratory»), criado conjuntamente pelos governos de Portugal e Espanha em 2005, é o único centro de investigação em nanociência totalmente internacional do mundo?",
+    "opcoes": [
+      "INESC TEC",
+      "IBMC",
+      "ITQB",
+      "INL (Laboratório Ibérico Internacional de Nanotecnologia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O INL em Braga reúne cientistas de mais de 40 nacionalidades na vanguarda dos nanosensores, computação quântica e nanomateriais.",
+    "fonte": "INL / Fundação para a Ciência e a Tecnologia (FCT)",
+    "factClusterId": "fc_sta_inl_braga_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0017",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia dos Açores situado na cidade de Lagoa (Ilha de São Miguel), focado em inovação digital, sustentabilidade e turismo espacial («Nonagon»), é o polo central da economia do conhecimento no arquipélago?",
+    "opcoes": [
+      "Nonagon — Parque de Ciência e Tecnologia de São Miguel",
+      "Terinov",
+      "Madeira Tecnopolo",
+      "Parkurbis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Nonagon acolhe empresas de desenvolvimento de software, dados oceânicos e tecnologias de observação da Terra.",
+    "fonte": "Governo Regional dos Açores / Nonagon",
+    "factClusterId": "fc_sta_nonagon_acores_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0018",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia na Ilha Terceira (Açores), instalado na freguesia da Terra Chã (Angra do Heroísmo), focado em agroindústria, energias renováveis e tecnologias ambientais, é o:",
+    "opcoes": [
+      "Nonagon",
+      "Terinov (Parque de Ciência e Tecnologia da Ilha Terceira)",
+      "Madeira Tecnopolo",
+      "Sanjotec"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Terinov apoia a transferência de tecnologia entre a Universidade dos Açores e as empresas do setor primário e serviços.",
+    "fonte": "Terinov / Governo dos Açores",
+    "factClusterId": "fc_sta_terinov_terceira_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0019",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que entidade pública sem fins lucrativos («Startup Portugal»), criada pelo Governo português no âmbito da Estratégia Nacional para o Empreendedorismo, gere instrumentos como o Startup Visa, o Tech Visa e o Vale Incubação?",
+    "opcoes": [
+      "AICEP",
+      "IAPMEI",
+      "Startup Portugal",
+      "ANI (Agência Nacional de Inovação)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Portugal funciona como ponte oficial entre os fundadores, investidores de capital de risco e as políticas públicas do Estado.",
+    "fonte": "Startup Portugal / IAPMEI / Ministério da Economia",
+    "factClusterId": "fc_sta_startupportugal_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0020",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que sociedade de capital de risco pública («Portugal Ventures»), integrada no Grupo Banco Português de Fomento, é o investidor institucional de referência que financia startups em fases iniciais («pre-seed» e «seed»)?",
+    "opcoes": [
+      "Indico Capital Partners",
+      "Shilling Capital",
+      "Armilar Venture Partners",
+      "Portugal Ventures"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Portugal Ventures tem mais de 150 empresas inovadoras em carteira nos setores da tecnologia, ciências da vida e turismo.",
+    "fonte": "Banco Português de Fomento / Portugal Ventures",
+    "factClusterId": "fc_sta_portugalventures_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0021",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que importante fundo privado independente de capital de risco sediado em Lisboa («Indico Capital Partners»), fundado por Stephan Morais, Cristina Fonseca e Bernardo Correia, é um dos maiores investidores em tecnologia oceânica sustentável («Blue Economy») e software do Sul da Europa?",
+    "opcoes": [
+      "Indico Capital Partners",
+      "Armilar Venture Partners",
+      "Faber Ventures",
+      "LC Ventures"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O fundo Indico Blue Ocean financia startups focadas em dados marinhos, aquacultura e conservação dos oceanos.",
+    "fonte": "Indico Capital Partners / Fundo Europeu de Investimento (FEI)",
+    "factClusterId": "fc_sta_indicocapital_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0022",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que centro e polo de inovação social e empreendedorismo de impacto da Santa Casa da Misericórdia de Lisboa instalado no Convento de São Pedro de Alcântara («Casa do Impacto») apoia startups com soluções para os Objetivos de Desenvolvimento Sustentável (ODS)?",
+    "opcoes": [
+      "Startup Lisboa",
+      "Casa do Impacto (SCML)",
+      "Beta-i",
+      "Fábrica de Startups"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Casa do Impacto financia projetos com impacto ecológico, inclusão de pessoas com deficiência e combate à solidão dos idosos.",
+    "fonte": "Santa Casa da Misericórdia de Lisboa / Casa do Impacto",
+    "factClusterId": "fc_sta_casadoimpacto_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0023",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de inteligência artificial de treino de dados e linguística («Defined.ai» / antiga DefinedCrowd), fundada pela empresária e investigadora Daniela Braga em 2015, fornece dados de voz e texto para assistentes de IA de gigantes como Amazon e Microsoft?",
+    "opcoes": [
+      "Unbabel",
+      "Barkyn",
+      "Defined.ai (Daniela Braga)",
+      "Sensei"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Daniela Braga foi convidada pela administração dos EUA para integrar a Task Force Nacional de Inteligência Artificial.",
+    "fonte": "Defined.ai / Startup Portugal / Casa Branca",
+    "factClusterId": "fc_sta_definedai_danielabraga_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0024",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de tecnologia de tradução automática baseada em inteligência artificial e revisão humana descentralizada («Unbabel»), fundada em 2013 por Vasco Pedro e João Graça, permite atendimento multilíngue instantâneo para multinacionais?",
+    "opcoes": [
+      "Defined.ai",
+      "Talkdesk",
+      "Inovretail",
+      "Unbabel"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Unbabel foi graduada da célebre aceleradora Y Combinator de Silicon Valley e mantém sede em Lisboa e São Francisco.",
+    "fonte": "Unbabel / Y Combinator / Startup Lisboa",
+    "factClusterId": "fc_sta_unbabel_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0025",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup tecnológica portuguesa pioneira no retalho autónomo sem caixas de pagamento («Sensei»), fundada em 2017 por Vasco Portugal e Joana Rafael, abriu os primeiros supermercados autónomos inteligentes da Europa em parceria com o Continente e a Galp?",
+    "opcoes": [
+      "Sensei",
+      "Barkyn",
+      "Jumia",
+      "Pleez"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sensei utiliza visão computacional e sensores de peso nas prateleiras para permitir compras sem filas nem registadoras manuais.",
+    "fonte": "Sensei Tech / Sonae MC / Galp",
+    "factClusterId": "fc_sta_senseitech_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0026",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de assinatura de comida personalizada e telemedicina para cães e gatos («Barkyn»), fundada no Porto por André Jordão e Madalena Rugeroni em 2017, expandiu-se com sucesso para Espanha e Itália?",
+    "opcoes": [
+      "Petz",
+      "Barkyn",
+      "DogHero",
+      "Mido"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Barkyn foi selecionada pelo programa Google for Startups Accelerator e é um dos líderes de 'pet tech' no sul da Europa.",
+    "fonte": "Google for Startups / Barkyn / UPTEC",
+    "factClusterId": "fc_sta_barkyn_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0027",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeira incubadora de empresas municipal de Lisboa («Startup Lisboa»), fundada em 2011 na Rua da Prata por iniciativa do Município de Lisboa e do Montepio após a crise financeira, foi o embrião da transformação tecnológica da capital?",
+    "opcoes": [
+      "Fábrica de Startups",
+      "Beta-i",
+      "Startup Lisboa",
+      "Lispolis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Lisboa já incubou centenas de projetos de fundadores de mais de 40 nacionalidades na Baixa Pombalina.",
+    "fonte": "Startup Lisboa / CML / Montepio",
+    "factClusterId": "fc_sta_startuplisboa_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0028",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que programa oficial de vistos criado pelo Governo de Portugal em 2018 («Startup Visa») permite a empreendedores e fundadores de países terceiros fixarem-se em Portugal para criar empresas tecnológicas em incubadoras certificadas?",
+    "opcoes": [
+      "Tech Visa",
+      "Golden Visa",
+      "Visto D7",
+      "Startup Visa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Startup Visa é gerido pelo IAPMEI e pela Startup Portugal e já aprovou centenas de empreendedores mundiais.",
+    "fonte": "IAPMEI / Startup Portugal / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_sta_startupvisa_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0029",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que vila na Ilha da Madeira («Ponta do Sol») lançou em fevereiro de 2021 a pioneira «Digital Nomads Madeira Islands», a primeira aldeia para nómadas digitais da Europa que atraiu milhares de trabalhadores remotos de todo o mundo?",
+    "opcoes": [
+      "Ponta do Sol (Madeira)",
+      "Machico",
+      "Porto Moniz",
+      "Santana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O projeto da Startup Madeira no Centro Cultural John dos Passos na Ponta do Sol serviu de modelo internacional para comunidades de trabalho remoto.",
+    "fonte": "Startup Madeira / Governo Regional da Madeira",
+    "factClusterId": "fc_sta_nomadasdigitais_madeira_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0030",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que agência espacial portuguesa criada em 2019 com sede na Ilha de Santa Maria (Açores) e escritórios em Lisboa («Portugal Space»), é responsável pela implementação da Estratégia Espacial Portugal 2030 e pelo futuro Porto Espacial de Santa Maria?",
+    "opcoes": [
+      "ESA Portugal",
+      "Portugal Space (Agência Espacial Portuguesa)",
+      "Lusospace",
+      "Geosat"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Portugal Space fomenta a criação do ecossistema New Space, constelações de microssatélites atlânticos e observação dos oceanos.",
+    "fonte": "Portugal Space / Ministério da Ciência e Tecnologia",
+    "factClusterId": "fc_sta_portugalspace_santamaria_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0031",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro satélite inteiramente desenvolvido, desenhado e construído em Portugal após o pioneiro PoSAT-1 de 1993, lançado em março de 2024 a bordo de um foguetão Falcon 9 da SpaceX («Aeros MH-1»), monitoriza a superfície dos oceanos e a biodiversidade marítima?",
+    "opcoes": [
+      "PoSAT-1",
+      "Infante Satellite",
+      "Aeros MH-1",
+      "Lusat-1"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O nanossatélite Aeros MH-1 foi batizado em homenagem a Manuel Heitor e construído por um consórcio liderado pelo CEiiA em Matosinhos.",
+    "fonte": "CEiiA / Portugal Space / SpaceX",
+    "factClusterId": "fc_sta_aerosmh1_satelite_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0032",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de software de gestão de frotas e telemática («Veniam»), fundada no Porto por João Barros e Susana Sargento em 2012 para criar redes de veículos conectados («Internet of Moving Things»), foi adquirida pela multinacional americana Nexar em 2022?",
+    "opcoes": [
+      "Stratio Automotive",
+      "Mobilytics",
+      "Casafari",
+      "Veniam"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Veniam transformou os autocarros da STCP no Porto na maior rede Wi-Fi veicular em malha do mundo.",
+    "fonte": "UPTEC / Veniam / Universidade do Porto",
+    "factClusterId": "fc_sta_veniam_joaobarros_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0033",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup tecnológica portuguesa de inteligência artificial aplicada à manutenção preditiva de frotas de autocarros e camiões («Stratio Automotive»), fundada por Ricardo Margalho e Rui Sales em Coimbra em 2017, monitoriza veículos em múltiplos continentes?",
+    "opcoes": [
+      "Stratio Automotive (Stratio)",
+      "Veniam",
+      "Infraspeak",
+      "Sensei"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Stratio analisa milhões de dados de telemetria por segundo para evitar avarias súbitas em frotas de transportes públicos.",
+    "fonte": "Instituto Pedro Nunes / Stratio Automotive",
+    "factClusterId": "fc_sta_stratio_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0034",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuense fundada no UPTEC em 2015 por Felipe Ávila da Costa e Luís Martins («Infraspeak»), que criou uma plataforma inteligente de gestão de manutenção de edifícios e instalações hoteleiras baseada em IoT e IA, opera em mais de 30 países?",
+    "opcoes": [
+      "Stratio",
+      "Infraspeak",
+      "Barkyn",
+      "Coverflex"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Infraspeak é utilizada por cadeias hoteleiras como Vila Galé e Pestana e empresas como Siemens e Domino's.",
+    "fonte": "UPTEC / Infraspeak / Portugal Ventures",
+    "factClusterId": "fc_sta_infraspeak_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0035",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de compensação flexível e benefícios laborais («Coverflex»), fundada em Braga em 2019 por Luís Rocha, Miguel Amaro e Nuno Pinto, permite aos colaboradores gerir seguros, cheques de infância e refeição num único cartão?",
+    "opcoes": [
+      "Remote",
+      "Doutor Finanças",
+      "Coverflex",
+      "Kidept"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Coverflex angariou uma das maiores rondas de investimento Série A em fintech em Portugal para expansão em Itália e Espanha.",
+    "fonte": "Coverflex / Startup Portugal",
+    "factClusterId": "fc_sta_coverflex_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0036",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa pioneira na recolha e inteligência de dados do mercado imobiliário europeu («Casafari»), fundada em 2018 com sede em Lisboa, agregou a maior base de dados imobiliária limpa da Europa com mais de 200 milhões de imóveis?",
+    "opcoes": [
+      "Imovirtual",
+      "Doutor Finanças",
+      "Alfredo Real Estate",
+      "Casafari"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Casafari elimina anúncios duplicados e fornece ferramentas de análise de preços de mercado para agências imobiliárias e fundos em Espanha, França, Itália e Portugal.",
+    "fonte": "Casafari / Startup Lisboa",
+    "factClusterId": "fc_sta_casafari_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0037",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que polo de ciência e inovação em São João da Madeira («Sanjotec»), pioneiro na indústria 4.0, calçado inteligente e tecnologias aplicadas aos setores tradicionais, é o:",
+    "opcoes": [
+      "Sanjotec — Parque de Ciência e Inovação",
+      "Avepark",
+      "Biocant",
+      "Parkurbis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Sanjotec liga o ecossistema de startups ao cluster do calçado, chapelaria e componentes automóveis de São João da Madeira.",
+    "fonte": "Município de São João da Madeira / Sanjotec",
+    "factClusterId": "fc_sta_sanjotec_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0038",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia em Guimarães (Caldas das Taipas), sede do polo de engenharia biomédica e novos materiais («Avepark»), acolhe o Instituto Europeu de Excelência em Engenharia de Tecidos e Medicina Regenerativa (3B's)?",
+    "opcoes": [
+      "UPTEC",
+      "Avepark (Parque de Ciência e Tecnologia de Guimarães)",
+      "Taguspark",
+      "Regia-Douro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Grupo 3B's liderado pelo Professor Rui L. Reis no Avepark é uma referência mundial em biomateriais marinhos e regeneração de órgãos.",
+    "fonte": "Universidade do Minho / Avepark / Grupo 3B's",
+    "factClusterId": "fc_sta_avepark_guimaraes_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0039",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia em Vila Real dedicado à agroindústria, vitivinicultura sustentável e economia verde («Regia-Douro Park»), funciona em articulação direta com a UTAD?",
+    "opcoes": [
+      "Parkurbis",
+      "Nonagon",
+      "Regia-Douro Park (Parque de Ciência e Tecnologia de Vila Real)",
+      "Madis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Regia-Douro Park acolhe o Centro de Excelência da Vinha e do Vinho e incuba empresas do setor agroalimentar transmontano e duriense.",
+    "fonte": "UTAD / Regia-Douro Park / Município de Vila Real",
+    "factClusterId": "fc_sta_regiadouropark_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0040",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia situado na Covilhã («Parkurbis»), especializado em tecnologias de informação, telecomunicações e têxteis técnicos avançados, é impulsionado pela Universidade da Beira Interior (UBI)?",
+    "opcoes": [
+      "Taguspark",
+      "Sanjotec",
+      "Terinov",
+      "Parkurbis (Parque de Ciência e Tecnologia da Covilhã)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Parkurbis posiciona a Beira Interior como polo atrativo de engenharia de software e centros de competência tecnológica.",
+    "fonte": "Parkurbis / UBI / Município da Covilhã",
+    "factClusterId": "fc_sta_parkurbis_covilha_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0041",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que evento anual de inovação e startups no Porto («Porto Tech Hub Conference» / «Scaleup Porto»), dinamizado pela Câmara Municipal do Porto, apoia o crescimento das empresas tecnológicas da região Norte?",
+    "opcoes": [
+      "Scaleup Porto",
+      "Web Summit",
+      "Lisbon Investment Summit",
+      "Tech in Azores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O programa ScaleUp Porto apoia o ecossistema empreendedor portuense que atrai centenas de empresas internacionais para a cidade.",
+    "fonte": "Câmara Municipal do Porto / ScaleUp Porto",
+    "factClusterId": "fc_sta_scaleupporto_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0042",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que importante programa de aceleração e consultoria de inovação aberta português fundado em 2010 («Beta-i»), sediado em Lisboa, liga grandes corporações multinacionais a startups em todo o mundo?",
+    "opcoes": [
+      "Fábrica de Startups",
+      "Beta-i",
+      "Startup Lisboa",
+      "BGI (Building Global Innovators)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Beta-i organiza o 'Lisbon Challenge' e programas de aceleração colaborativa em setores como a energia, seguros e economia circular.",
+    "fonte": "Beta-i / Startup Portugal",
+    "factClusterId": "fc_sta_betai_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0043",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que iniciativa pioneira de educação em programação informática gratuita e sem professores tradicionais («Escola 42 Lisboa» e «Escola 42 Porto»), baseada em aprendizagem prática entre pares (peer-to-peer), formou milhares de programadores em Portugal?",
+    "opcoes": [
+      "Le Wagon",
+      "Ironhack",
+      "Escola 42 (42 Lisboa / 42 Porto)",
+      "Code for All"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A 42 foi fundada em Paris e trazida para Portugal por Pedro Santa Clara e mecenas privados para democratizar o acesso à engenharia de software.",
+    "fonte": "Escola 42 Lisboa / Fundação José Neves",
+    "factClusterId": "fc_sta_escola42portugal_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0044",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que fundação criada em 2020 pelo fundador da Farfetch, José Neves («Fundação José Neves»), com dotação de 50 milhões de euros, financia bolsas e promove a educação, competências digitais e empreendedorismo através do portal Brighter Future?",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Fundação Champalimaud",
+      "Fundação Francisco Manuel dos Santos",
+      "Fundação José Neves (FJN)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação José Neves lançou o programa 'ISA FJN' (Acordos de Partilha de Rendimentos) para financiar cursos e mestrados aos jovens portugueses.",
+    "fonte": "Fundação José Neves / Brighter Future",
+    "factClusterId": "fc_sta_fundacaojoseneves_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0045",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que prestigiado instituto de investigação aplicada sediado no Porto («INESC TEC — Instituto de Engenharia de Sistemas e Computadores, Tecnologia e Ciência»), associado à Universidade do Porto, é líder em sistemas de energia, inteligência artificial e robótica marinha?",
+    "opcoes": [
+      "INESC TEC",
+      "INL",
+      "ITQB",
+      "LNEC"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O INESC TEC desenvolve robôs submarinos autónomos para exploração oceânica e algoritmos de gestão de redes elétricas inteligentes.",
+    "fonte": "INESC TEC / Faculdade de Engenharia da U.Porto",
+    "factClusterId": "fc_sta_inesctec_porto_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0046",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa portuguesa de inteligência artificial e visão computacional («YData»), fundada em Lisboa em 2020 por Fabiana Clemente e Gonçalo Martins Ribeiro, pioneira na geração de dados sintéticos para treino seguro de IA sem violação de privacidade, recebeu investimento do Google?",
+    "opcoes": [
+      "Defined.ai",
+      "YData",
+      "Feedzai",
+      "Unbabel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A YData foi selecionada pelo Google for Startups e lidera a comunidade internacional de ciência de dados focada em 'Data-Centric AI'.",
+    "fonte": "Google for Startups / YData",
+    "factClusterId": "fc_sta_ydata_fabianaclemente_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0047",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de software financeiro para planeamento e consolidação orçamental de PMEs («DoiT International» / «Valispace»), fundada em Lisboa para engenharia de satélites e sistemas complexos, foi adquirida pela gigante de software de engenharia Altair em 2024?",
+    "opcoes": [
+      "Veniam",
+      "Zaask",
+      "Valispace",
+      "Uniplaces"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Valispace foi fundada por Marco Witzmann e Louise Lindblad para desenhar satélites e foguetões em ambiente colaborativo na nuvem.",
+    "fonte": "Valispace / Altair / Startup Portugal",
+    "factClusterId": "fc_sta_valispace_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0048",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que plataforma digital portuguesa de alojamento universitário e de estudantes internacionais fundada em Lisboa em 2011 («Uniplaces»), por Miguel Amaro, Mariano Kostelec e Ben Grech, foi uma das pioneiras do ecossistema de startups de Lisboa?",
+    "opcoes": [
+      "Student.com",
+      "Spotahome",
+      "Casafari",
+      "Uniplaces"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Uniplaces revolucionou o arrendamento para estudantes Erasmus e abriu caminho para a geração de ouro de empreendedores de Lisboa.",
+    "fonte": "Startup Lisboa / Uniplaces",
+    "factClusterId": "fc_sta_uniplaces_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0049",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de consultoria financeira e renegociação de crédito à habitação («Doutor Finanças»), fundada em Lisboa em 2014, ajuda centenas de milhares de famílias portuguesas a poupar em créditos e seguros?",
+    "opcoes": [
+      "Doutor Finanças",
+      "Coverflex",
+      "ComparaJá",
+      "Fixando"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Doutor Finanças é um dos principais intermediários de crédito certificados pelo Banco de Portugal e líder em literacia financeira.",
+    "fonte": "Banco de Portugal / Doutor Finanças",
+    "factClusterId": "fc_sta_doutorfinancas_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_STA_0050",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que classificação internacional atribuída no relatório da European Innovation Scoreboard da Comissão Europeia posiciona Portugal no grupo dos países com ecossistemas de inovação mais dinâmicos e abertos a investimento externo na Europa?",
+    "opcoes": [
+      "Líder Mundial",
+      "Mercado Emergente",
+      "Inovador Moderado / Inovador Notável (European Innovation Scoreboard)",
+      "Zona de Baixa Inovação"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal destaca-se internacionalmente na percentagem de licenciados em ciências e engenharia, digitalização dos serviços públicos e atração de investimento em I&D.",
+    "fonte": "Comissão Europeia / COTEC Portugal / DGEEC",
+    "factClusterId": "fc_sta_european_innovation_scoreboard_01",
+    "category": "Atualidade — Portugal Agora",
+    "subcategory": "Inovação & Startups"
+  },
+  {
+    "id": "ATU_MUN_0001",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que eminente diplomata e político português de Lisboa (nascido em 1949), António Guterres («António Guterres»), antigo Primeiro-Ministro de Portugal e Alto Comissário da ONU para os Refugiados (ACNUR), desempenha desde 2017 o mais alto cargo diplomático do planeta como:",
+    "opcoes": [
+      "Secretário-Geral da Organização das Nações Unidas (ONU)",
+      "Presidente da Comissão Europeia",
+      "Presidente do Conselho Europeu",
+      "Diretor-Geral da UNESCO"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António Guterres foi reeleito por unanimidade pela Assembleia Geral da ONU para um segundo mandato de cinco anos (2022-2026).",
+    "fonte": "Organização das Nações Unidas (ONU) / Presidência da República Portuguesa",
+    "factClusterId": "fc_atu_mun_antonioguterres_onu_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0002",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que consagrado político português de Lisboa (nascido em 1956), José Manuel Durão Barroso («Durão Barroso»), antigo Primeiro-Ministro de Portugal, liderou o executivo da União Europeia durante uma década histórica (2004-2014) como:",
+    "opcoes": [
+      "Presidente do Parlamento Europeu",
+      "Presidente da Comissão Europeia (durante dois mandatos)",
+      "Presidente do Eurogrupo",
+      "Secretário-Geral da NATO"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Durante o seu mandato, a União Europeia expandiu-se para 28 Estados-Membros e recebeu o Prémio Nobel da Paz em 2012 em Oslo.",
+    "fonte": "Comissão Europeia / European Commission Archives",
+    "factClusterId": "fc_atu_mun_duraobarroso_ce_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0003",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que histórico tratado constitucional e institucional europeu assinado no Mosteiro dos Jerónimos em Lisboa a 13 de dezembro de 2007 durante a Presidência Portuguesa do Conselho da União Europeia («Tratado de Lisboa»), reformou a arquitetura política e decisória da União Europeia contemporânea?",
+    "opcoes": [
+      "Tratado de Maastricht",
+      "Tratado de Nice",
+      "Tratado de Lisboa (2007)",
+      "Tratado de Amesterdão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tratado de Lisboa criou as figuras do Presidente Permanente do Conselho Europeu e do Alto Representante para os Negócios Estrangeiros.",
+    "fonte": "Conselho da União Europeia / Diário da República",
+    "factClusterId": "fc_atu_mun_tratadodelisboa_2007_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0004",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que prestigiado economista algarvio de Vila Real de Santo António (nascido em 1965), Mário Centeno («Mário Centeno»), Ministro das Finanças de Portugal e atual Governador do Banco de Portugal, presidiu entre 2018 e 2020 ao:",
+    "opcoes": [
+      "Banco Central Europeu",
+      "Fundo Monetário Internacional",
+      "Banco Europeu de Investimento",
+      "Eurogrupo (Reunião dos Ministros das Finanças da Zona Euro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mário Centeno foi apelidado pelo Ministro das Finanças alemão Wolfgang Schäuble como 'O Ronaldo do Ecofin'.",
+    "fonte": "Conselho da União Europeia / Banco de Portugal",
+    "factClusterId": "fc_atu_mun_mariocenteno_eurogrupo_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0005",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que eminente economista e política portuense (nascida em 1955), Elisa Ferreira («Elisa Ferreira»), antiga Ministra do Planeamento e Vice-Governadora do Banco de Portugal, integrou a Comissão Europeia liderada por Ursula von der Leyen (2019-2024) como:",
+    "opcoes": [
+      "Comissária Europeia para a Coesão e Reformas",
+      "Comissária para a Concorrência",
+      "Comissária para o Comércio",
+      "Comissária para a Agricultura"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Elisa Ferreira geriu os fundos de coesão estrutural e a transição justa regional em toda a União Europeia.",
+    "fonte": "Comissão Europeia / Representação em Portugal",
+    "factClusterId": "fc_atu_mun_elisaferreira_comissao_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0006",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que lendário astro do futebol mundial do Funchal (nascido em 1985), Cristiano Ronaldo («CR7»), 5 vezes vencedor da Bola de Ouro e capitão de Portugal campeão do Euro 2016, detém o recorde mundial absoluto de golos marcados e internacionalizações por seleções na história do desporto?",
+    "opcoes": [
+      "Lionel Messi",
+      "Cristiano Ronaldo (Mais de 130 golos pela Seleção Nacional)",
+      "Pelé",
+      "Ali Daei"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Cristiano Ronaldo ultrapassou a barreira dos 900 golos oficiais na sua carreira profissional e é a figura pública mais seguida do mundo nas redes sociais.",
+    "fonte": "FIFA / UEFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_atu_mun_cristianoronaldo_recorde_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0007",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que carismático e laureado treinador de futebol de Setúbal (nascido em 1963), José Mourinho («The Special One»), tornou-se o primeiro treinador da história do futebol europeu a conquistar as três principais competições europeias de clubes da UEFA (Champions League, Europa League e Conference League)?",
+    "opcoes": [
+      "Pep Guardiola",
+      "Carlo Ancelotti",
+      "José Mourinho (The Special One)",
+      "Alex Ferguson"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mourinho venceu a Champions League pelo FC Porto (2004) e Inter de Milão (2010), a Taça UEFA/Liga Europa pelo FC Porto e Manchester United, e a Conference League pela AS Roma (2022).",
+    "fonte": "UEFA / Federação Portuguesa de Futebol",
+    "factClusterId": "fc_atu_mun_josemourinho_uefa_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0008",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que gigantesca conferência internacional e cimeira global de tecnologia e empreendedorismo («Web Summit»), fundada por Paddy Cosgrave, realiza-se anualmente em Lisboa na MEO Arena e FIL desde 2016 reunindo mais de 70.000 participantes e líderes de tecnologia mundiais?",
+    "opcoes": [
+      "Mobile World Congress",
+      "CES Las Vegas",
+      "TechCrunch Disrupt",
+      "Web Summit (Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O governo português e o município de Lisboa garantiram a permanência da Web Summit em Portugal com um acordo de longo prazo até 2028.",
+    "fonte": "Web Summit / AICEP / Município de Lisboa",
+    "factClusterId": "fc_atu_mun_websummit_lisboa_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0009",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que país do mundo é o líder absoluto global na produção, transformação industrial e exportação mundial de cortiça («Cortiça»), responsável por mais de 50% de toda a cortiça comercializada no planeta através de empresas de ponta como a Corticeira Amorim?",
+    "opcoes": [
+      "Portugal (Líder mundial absoluto da cortiça)",
+      "Espanha",
+      "Itália",
+      "França"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O montado de sobro português é protegido por lei desde o século XIII e a cortiça portuguesa reveste desde foguetões da NASA e da ESA até pavimentos ecológicos e rolhas de vinho de luxo.",
+    "fonte": "APCOR (Associação Portuguesa da Cortiça) / AICEP",
+    "factClusterId": "fc_atu_mun_cortica_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0010",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que mundialmente consagrado arquiteto de Matosinhos (nascido em 1933), Álvaro Siza Vieira («Siza Vieira»), foi o primeiro arquiteto português a ser galardoado em 1992 com a mais alta distinção da arquitetura mundial:",
+    "opcoes": [
+      "Medalha de Ouro da RIBA",
+      "Prémio Pritzker de Arquitetura (1992)",
+      "Prémio Mies van der Rohe",
+      "Leão de Ouro de Veneza"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Siza Vieira desenhou edifícios icónicos como o Pavilhão de Portugal na Expo 98, o Museu de Serralves no Porto e a Fundação Iberê Camargo no Brasil.",
+    "fonte": "The Hyatt Foundation / The Pritzker Architecture Prize / Fundação de Serralves",
+    "factClusterId": "fc_atu_mun_sizavieira_pritzker_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0011",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que mestre arquiteto portuense (nascido em 1952), Eduardo Souto de Moura («Souto de Moura»), discípulo de Siza Vieira, venceu o conceituado Prémio Pritzker em 2011 pelo projeto genial e inovador do:",
+    "opcoes": [
+      "Casa da Música do Porto",
+      "Terminal de Cruzeiros de Lisboa",
+      "Estádio Municipal de Braga (cravado na pedreira de Monte Castro)",
+      "Museu dos Coches"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Souto de Moura projetou também a Casa das Histórias Paula Rego em Cascais e o Metro do Porto.",
+    "fonte": "The Pritzker Architecture Prize / Ordem dos Arquitectos",
+    "factClusterId": "fc_atu_mun_soutodemoura_pritzker_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0012",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que prestigiosa fundação privada de investigação biomédica de ponta com sede junto ao rio Tejo em Lisboa («Fundação Champalimaud»), criada pelo legado testamentário do empresário António Champalimaud, é uma referência global na investigação e tratamento do:",
+    "opcoes": [
+      "Doenças Cardiovasculares",
+      "Doenças Tropicais",
+      "Genómica Agrícola",
+      "Cancro e Neurociências (com o Centro Botton-Champalimaud)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Champalimaud atribui anualmente o 'Prémio de Visão António Champalimaud' (no valor de 1 milhão de euros), o maior do mundo em oftalmologia.",
+    "fonte": "Fundação Champalimaud / Centro Botton-Champalimaud",
+    "factClusterId": "fc_atu_mun_fundacaochampalimaud_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0013",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que célebre e secular vinho licoroso fortificado português produzido nas encostas do Alto Douro Vinhateiro («Vinho do Porto»), envelhecido nas caves de Vila Nova de Gaia, é exportado para mais de 120 países sendo o mais antigo produto com Região Demarcada do mundo (1756)?",
+    "opcoes": [
+      "Vinho do Porto",
+      "Vinho da Madeira",
+      "Moscatel de Setúbal",
+      "Vinho Verde"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Marquês de Pombal instituiu a Real Companhia Geral da Agricultura das Vinhas do Alto Douro em 1756 delimitando a região com os Marcos Pombalinos.",
+    "fonte": "IVDP (Instituto dos Vinhos do Douro e do Porto) / UNESCO",
+    "factClusterId": "fc_atu_mun_vinhodoporto_global_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0014",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que prestigiada política e economista portuguesa de Lisboa (nascida em 1965), Maria Luís Albuquerque («Maria Luís Albuquerque»), antiga Ministra de Estado e das Finanças, foi nomeada em 2024 para o Colégio de Comissários Europeus com a pasta de:",
+    "opcoes": [
+      "Comércio Internacional",
+      "Serviços Financeiros e União das Poupanças e Investimentos",
+      "Competitividade e Indústria",
+      "Ambiente e Oceanos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A pasta dos Serviços Financeiros é uma das pastas económicas mais estratégicas da União Europeia em Bruxelas.",
+    "fonte": "Comissão Europeia / Presidência da República",
+    "factClusterId": "fc_atu_mun_marialuisalbuquerque_2024_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0015",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que influente político e jurista português de Lisboa (nascido em 1957), António Vitorino («António Vitorino»), antigo Ministro da Defesa e Comissário Europeu da Justiça e Assuntos Internos, liderou entre 2018 e 2023 uma importante agência das Nações Unidas:",
+    "opcoes": [
+      "Alto Comissariado dos Direitos Humanos",
+      "Programa Alimentar Mundial",
+      "Organização Internacional para as Migrações (OIM / IOM)",
+      "Agência Internacional de Energia Atómica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "António Vitorino foi eleito pelos Estados-membros em Genebra para liderar a gestão global das migrações e acolhimento humanitário.",
+    "fonte": "Organização Internacional para as Migrações (OIM) / Nações Unidas",
+    "factClusterId": "fc_atu_mun_antoniovitorino_oim_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0016",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e histórico economista e banqueiro central lisboeta (nascido em 1943), Vítor Constâncio («Vítor Constâncio»), antigo Governador do Banco de Portugal, desempenhou entre 2010 e 2018 o cargo europeu de:",
+    "opcoes": [
+      "Presidente do Banco Europeu de Reconstrução",
+      "Diretor do Banco Mundial",
+      "Presidente do Mecanismo Europeu de Estabilidade",
+      "Vice-Presidente do Banco Central Europeu (BCE)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vítor Constâncio esteve na linha da frente da gestão da crise das dívidas soberanas europeias e do programa 'Whatever it takes' de Mario Draghi.",
+    "fonte": "Banco Central Europeu (BCE) / Banco de Portugal",
+    "factClusterId": "fc_atu_mun_vitorconstancio_bce_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0017",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante empresa multinacional de software e engenharia fundada em Portugal em 2001 por Paulo Rosado («OutSystems»), pioneira global na tecnologia de «low-code», tornou-se o primeiro:",
+    "opcoes": [
+      "Unicórnio tecnológico com raízes portuguesas (avaliado em mais de mil milhões de dólares)",
+      "Banco digital europeu",
+      "Fornecedor da Microsoft",
+      "Fabricante de microchips em Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A OutSystems abriu caminho para uma nova vaga de unicórnios portugueses como Talkdesk, Feedzai, Remote e Sword Health.",
+    "fonte": "OutSystems / AICEP / Startup Portugal",
+    "factClusterId": "fc_atu_mun_outsystems_unicornio_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0018",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que aclamado e talentoso cineasta e produtor de animação português de Lisboa (nascido em 1980), João Gonzalez («João Gonzalez»), fez história na cultura nacional ao ser nomeado em 2023 para o Óscar da Academia de Hollywood de Melhor Curta-Metragem de Animação com o filme:",
+    "opcoes": [
+      "A Suspeita",
+      "Ice Merchants (Vencedor em Cannes e nomeado aos Óscares)",
+      "Fado Lusitano",
+      "Tio Tomás, A Contabilidade dos Dias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "'Ice Merchants' foi o primeiro filme português de sempre a ser nomeado para os prestigiados Prémios da Academia (Óscares).",
+    "fonte": "Academia de Artes e Ciências Cinematográficas (Óscares) / ICA",
+    "factClusterId": "fc_atu_mun_icemerchants_oscares2023_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0019",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que lendário atleta de atletismo de Santarém (1909-2004), Carlos Lopes («Carlos Lopes»), fez soar pela primeira vez na história o Hino Nacional Português no lugar mais alto do pódio olímpico ao vencer a Maratona dos Jogos Olímpicos de 1984 em:",
+    "opcoes": [
+      "Seul (1988)",
+      "Moscovo (1980)",
+      "Los Angeles (1984 — com recorde olímpico de 2h09m21s)",
+      "Montreal (1976)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Carlos Lopes conquistou a primeira medalha de ouro de sempre de Portugal nos Jogos Olímpicos aos 37 anos de idade.",
+    "fonte": "Comité Olímpico de Portugal (COP) / World Athletics",
+    "factClusterId": "fc_atu_mun_carloslopes_ouro1984_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0020",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que genial atleta de fundo de Vila Nova de Gaia (nascida em 1957), Rosa Mota («Rosa Mota»), campeã mundial e europeia da maratona, conquistou a medalha de ouro na Maratona Feminina dos Jogos Olímpicos de 1988 em:",
+    "opcoes": [
+      "Los Angeles (1984)",
+      "Barcelona (1992)",
+      "Atlanta (1996)",
+      "Seul (Jogos Olímpicos de 1988)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rosa Mota foi a primeira mulher portuguesa a vencer uma medalha de ouro olímpica e é uma das maiores maratonistas de todos os tempos.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_atu_mun_rosamota_seul1988_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0021",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que prestigiado e extraordinário atleta do triplo salto e salto em comprimento de Lisboa (nascido em 1984), Nelson Évora («Nelson Évora»), sagrou-se campeão olímpico ao conquistar a medalha de ouro nos Jogos Olímpicos de 2008 em:",
+    "opcoes": [
+      "Pequim (2008 — com a marca de 17,67 metros)",
+      "Atenas (2004)",
+      "Londres (2012)",
+      "Rio de Janeiro (2016)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nelson Évora conquistou a medalha de ouro olímpica no Estádio Nacional de Pequim ('Ninho de Pássaro').",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_atu_mun_nelsonevora_pequim2008_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0022",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que extraordinário e portentoso atleta luso-cubano de triplo salto (nascido em Havana em 1993, naturalizado português em 2018), Pedro Pablo Pichardo («Pedro Pichardo»), conquistou a quarta medalha de ouro olímpica da história de Portugal nos Jogos de:",
+    "opcoes": [
+      "Rio 2016",
+      "Tóquio 2020 (em 2021 — com o salto monumental de 17,98 metros)",
+      "Paris 2024",
+      "Londres 2012"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pedro Pichardo sagrou-se também Campeão do Mundo em Eugene 2022 e Campeão da Europa em Munique e Roma pelo Sport Lisboa e Benfica e Portugal.",
+    "fonte": "Comité Olímpico de Portugal / World Athletics",
+    "factClusterId": "fc_atu_mun_pedropichardo_toquio2020_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0023",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante distinção internacional turística é atribuída anualmente a Portugal («World Travel Awards» / Óscares do Turismo), tendo o país sido eleito consecutivamente em múltiplos anos como:",
+    "opcoes": [
+      "Melhor Destino Gastronómico da Ásia",
+      "Melhor Destino de Cruzeiros das Caraíbas",
+      "Melhor Destino Turístico da Europa e Melhor Destino do Mundo",
+      "Melhor Destino de Desportos de Inverno"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal, a Madeira (Melhor Destino Insular), o Algarve (Melhor Destino de Praia) e Lisboa (Melhor Destino City Break) acumulam dezenas de prémios globais.",
+    "fonte": "World Travel Awards / Turismo de Portugal",
+    "factClusterId": "fc_atu_mun_worldtravelawards_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0024",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que centro internacional de excelência em investigação científica e espacial sediado na Ilha Terceira nos Açores («AIR Centre» — Atlantic International Research Centre), promove a cooperação científica e monitorização ambiental e climática de todo o:",
+    "opcoes": [
+      "Mar Mediterrâneo",
+      "Oceano Pacífico",
+      "Oceano Índico",
+      "Oceano Atlântico (do Ártico à Antártida)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O AIR Centre reúne dezenas de países atlânticos (incluindo Portugal, Brasil, Espanha, Cabo Verde, Noruega, África do Sul e EUA).",
+    "fonte": "AIR Centre / FCT (Fundação para a Ciência e a Tecnologia)",
+    "factClusterId": "fc_atu_mun_aircentre_acores_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0025",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que agência governamental pública portuguesa («AICEP Portugal Global»), tutelada pelo Ministério dos Negócios Estrangeiros e da Economia, tem como missão estratégica promover a captação de investimento estrangeiro e a internacionalização das:",
+    "opcoes": [
+      "Empresas e produtos portugueses nos mercados externos",
+      "Universidades portuguesas",
+      "Forças Armadas Portuguesas",
+      "Associações desportivas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A AICEP possui uma vasta rede de delegados e câmaras de comércio em mais de 50 países do mundo.",
+    "fonte": "AICEP Portugal Global / Portal do Governo de Portugal",
+    "factClusterId": "fc_atu_mun_aicep_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0026",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e antigo tratado de aliança militar e diplomática assinado em 1386 entre D. João I de Portugal e o Rei Ricardo II de Inglaterra («Tratado de Windsor»), é formalmente reconhecido no direito internacional como:",
+    "opcoes": [
+      "O primeiro tratado da NATO",
+      "A aliança diplomática mais antiga do mundo ainda em vigor (Aliança Luso-Britânica)",
+      "O Tratado de Paz da Europa",
+      "A Santa Aliança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Aliança Luso-Britânica foi ratificada com o casamento de D. João I com D. Filipa de Lencastre e celebrada solenemente ao longo de mais de seis séculos.",
+    "fonte": "Arquivo Histórico Diplomático / Foreign and Commonwealth Office / Torre do Tombo",
+    "factClusterId": "fc_atu_mun_tratadowindsor_1386_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0027",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante instituto público português fundado em 1992 com sede no Palácio Seixas em Lisboa («Instituto Camões» / Camões — Instituto da Cooperação e da Língua), tem como missão a promoção e ensino internacional da:",
+    "opcoes": [
+      "Economia Digital",
+      "Defesa Marítima",
+      "Língua e Cultura Portuguesa e a Cooperação para o Desenvolvimento",
+      "Investigação Agrária"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Instituto Camões coordena centenas de cátedras universitárias, leitorados e centros de língua portuguesa em universidades dos cinco continentes.",
+    "fonte": "Camões I.P. / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_atu_mun_institutocamoes_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0028",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Quantos falantes nativos e totais da Língua Portuguesa existem atualmente em todo o mundo na Comunidade dos Países de Língua Portuguesa (CPLP), fazendo do português a 4.ª língua materna mais falada no planeta e a mais falada do Hemisfério Sul?",
+    "opcoes": [
+      "Cerca de 100 milhões",
+      "Cerca de 50 milhões",
+      "Mais de 500 milhões",
+      "Mais de 260 a 280 milhões de falantes"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A UNESCO declarou o dia 5 de Maio como o 'Dia Mundial da Língua Portuguesa' reconhecendo a projeção global do idioma.",
+    "fonte": "UNESCO / CPLP / Instituto Camões",
+    "factClusterId": "fc_atu_mun_falantes_portugues_global_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0029",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que país europeu acolhe a maior comunidade de emigrantes portugueses e lusodescendentes no continente europeu (com mais de 1,5 a 2 milhões de pessoas de origem portuguesa concentradas em cidades como Paris, Lyon e Clermont-Ferrand)?",
+    "opcoes": [
+      "França (Maior comunidade portuguesa na Europa)",
+      "Suíça",
+      "Alemanha",
+      "Reino Unido"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A comunidade portuguesa em França desempenha um papel fulcral na economia e na cultura, com representação autárquica e empresarial destacada.",
+    "fonte": "Observatório da Emigração / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_atu_mun_comunidade_franca_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0030",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que estado norte-americano possui a mais histórica e concentrada comunidade de emigrantes e lusodescendentes açorianos e madeirenses dos EUA (em cidades como New Bedford, Fall River, Boston e Taunton)?",
+    "opcoes": [
+      "Florida",
+      "Massachusetts (seguido de Califórnia e Rhode Island)",
+      "Texas",
+      "Nova Iorque"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Em Fall River e New Bedford realiza-se a Grande Festa do Santíssimo Sacramento, a maior celebração cultural portuguesa no continente americano.",
+    "fonte": "US Census Bureau / Observatório da Emigração",
+    "factClusterId": "fc_atu_mun_emigracao_massachusetts_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0031",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e histórico professor e político social-democrata de Lisboa (1927-2023), Adriano Moreira («Adriano Moreira»), pai de Isabel Moreira, foi uma das figuras tutelares do direito ultramarino e das relações internacionais da lusofonia?",
+    "opcoes": [
+      "Marcelo Caetano",
+      "Franco Nogueira",
+      "Adriano Moreira",
+      "Diogo Freitas do Amaral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Adriano Moreira foi Ministro do Ultramar (onde aboliu o Estatuto do Indigenato em 1961), Presidente do CDS e membro do Conselho de Estado.",
+    "fonte": "Assembleia da República / Academia das Ciências de Lisboa",
+    "factClusterId": "fc_atu_mun_adrianomoreira_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0032",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que eminente político e professor catedrático português (1941-2019), Diogo Freitas do Amaral («Freitas do Amaral»), fundador do CDS e Ministro dos Negócios Estrangeiros, presidiu com distinção à:",
+    "opcoes": [
+      "Comissão de Direitos Humanos de Genebra",
+      "Assembleia Parlamentar da NATO",
+      "Conferência de Desarmamento",
+      "50.ª Sessão da Assembleia Geral da ONU (1995-1996)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Freitas do Amaral conduziu os trabalhos comemorativos do cinquentenário da criação das Nações Unidas em Nova Iorque.",
+    "fonte": "Organização das Nações Unidas / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_atu_mun_freitasdoamaral_onu_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0033",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e histórica cimeira ambiental e oceânica global das Nações Unidas foi coorganizada por Portugal e pelo Quénia e realizada na Altice Arena em Lisboa em junho de 2022 («Conferência dos Oceanos da ONU»)?",
+    "opcoes": [
+      "Conferência dos Oceanos da ONU de 2022 (Declaração de Lisboa)",
+      "Cimeira da Terra do Rio de Janeiro",
+      "COP26 de Glasgow",
+      "Cimeira do Clima de Paris"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A conferência reuniu chefes de Estado de mais de 120 países e aprovou a Declaração de Lisboa para a sustentabilidade marinha.",
+    "fonte": "Nações Unidas / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_atu_mun_conferenciaoceanos_2022_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0034",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Qual é a classificação de Portugal no índice de paz global («Global Peace Index»), situando-se consistentemente entre os 10 países mais pacíficos e seguros de todo o mundo?",
+    "opcoes": [
+      "Abaixo do 50.º lugar",
+      "Entre os 10 países mais pacíficos do mundo (Top 10 Mundial)",
+      "Entre o 80.º e o 100.º lugar",
+      "Fora dos 100 primeiros"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O ranking elaborado pelo Institute for Economics and Peace (IEP) destaca o baixo nível de criminalidade violenta e a estabilidade democrática portuguesa.",
+    "fonte": "Institute for Economics and Peace (IEP) / Global Peace Index",
+    "factClusterId": "fc_atu_mun_globalpeaceindex_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0035",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante projeto científico e observatório astronómico internacional no Deserto do Atacama no Chile («Observatório Europeu do Sul» / ESO), do qual Portugal é membro de pleno direito desde 2001, acolhe instrumentos de ponta concebidos por engenheiros e astrofísicos portugueses?",
+    "opcoes": [
+      "NASA Deep Space Network",
+      "CERN",
+      "ESO (European Southern Observatory — VLT e ELT)",
+      "ESA Kourou"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Investigadores do Instituto de Astrofísica e Ciências do Espaço (IA) de Portugal lideram o desenvolvimento de instrumentos para o Extremely Large Telescope (ELT).",
+    "fonte": "ESO (European Southern Observatory) / FCT / Instituto de Astrofísica",
+    "factClusterId": "fc_atu_mun_eso_astrofisica_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0036",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante navio-escola da Marinha Portuguesa (NRP Sagres III), com as suas emblemáticas velas brancas com a Cruz de Cristo vermelha, realiza regularmente missões de diplomacia naval e viagens de circum-navegação representando Portugal nos portos mundiais?",
+    "opcoes": [
+      "NRP Creoula",
+      "NRP Arpão",
+      "NRP Bartolomeu Dias",
+      "NRP Sagres (O Navio-Escola Sagres)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Navio-Escola Sagres foi construído em 1937 nos estaleiros Blohm & Voss e é o principal embaixador itinerante de Portugal nos mares.",
+    "fonte": "Marinha Portuguesa / Museu de Marinha",
+    "factClusterId": "fc_atu_mun_nrpsagres_diplomacia_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0037",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que histórica e prestigiada instituição filantrópica e cultural internacional criada em Lisboa em 1956 pelo testamento do magnata arménio Calouste Sarkis Gulbenkian («Fundação Calouste Gulbenkian»), projeta a arte e a ciência portuguesa no mundo?",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Fundação Champalimaud",
+      "Fundação Oriente",
+      "Fundação Bial"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Gulbenkian possui delegações em Paris e Londres e mantém orquestra sinfónica, coro, museu e biblioteca de renome global.",
+    "fonte": "Fundação Calouste Gulbenkian / Paris / Londres",
+    "factClusterId": "fc_atu_mun_fundacaogulbenkian_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0038",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que influente empresário e agente desportivo de Lisboa (nascido em 1966), Jorge Mendes («Jorge Mendes»), fundador da empresa GestiFute, foi eleito múltiplas vezes nos Globe Soccer Awards no Dubai como:",
+    "opcoes": [
+      "Melhor Dirigente da FIFA",
+      "Melhor Agente de Futebol do Ano do Mundo (Best Agent of the Year)",
+      "Melhor Treinador da Europa",
+      "Presidente da ECA"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Jorge Mendes geriu as carreiras e transferências de Cristiano Ronaldo, José Mourinho, Bernardo Silva, Rúben Dias e João Félix.",
+    "fonte": "Globe Soccer Awards / GestiFute / Forbes",
+    "factClusterId": "fc_atu_mun_jorgemendes_gestifute_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0039",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e prestigiada distinção ambiental e de sustentabilidade concedida pela Foundation for Environmental Education (FEE) («Bandeira Azul»), distingue anualmente mais de 400 praias, marinas e embarcações ecoturísticas em Portugal?",
+    "opcoes": [
+      "Selo Verde Europeu",
+      "Estrela Michelin das Praias",
+      "Bandeira Azul (Blue Flag)",
+      "Património Natural"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal é o 2.º país do mundo com maior percentagem de praias interiores fluviais e costeiras galardoadas com a Bandeira Azul.",
+    "fonte": "Associação Bandeira Azul da Europa (ABAE) / FEE",
+    "factClusterId": "fc_atu_mun_bandeiraazul_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0040",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que célebre e prestigiado guia gastronómico internacional («Guia Michelin»), distingue dezenas de restaurantes em Portugal com Estrelas Michelin, tendo chefs como José Avillez (Belcanto) e Hans Neuner (Ocean) conquistado:",
+    "opcoes": [
+      "Três Garfos de Ouro",
+      "Cinco Estrelas Forbes",
+      "Chave de Ouro",
+      "Duas Estrelas Michelin (Classificação de Alta Gastronomia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Em 2024, realizou-se a primeira Gala do Guia Michelin exclusivamente dedicada a Portugal celebrando a riqueza gastronómica nacional.",
+    "fonte": "Guia Michelin Portugal / Turismo de Portugal",
+    "factClusterId": "fc_atu_mun_guiamichelin_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0041",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que notável e histórica cantora lírica e soprano portuguesa de Lisboa (nascida em 1947), Elisabete Matos («Elisabete Matos»), diretora artística do Teatro Nacional de São Carlos, atuou nos maiores teatros de ópera mundiais como La Scala de Milão, Metropolitan de Nova Iorque e Teatro Real de Madrid?",
+    "opcoes": [
+      "Elisabete Matos",
+      "Teresa Berganza",
+      "Maria João Pires",
+      "Luísa Todi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Elisabete Matos venceu um Grammy Award e cantou com Plácido Domingo em produções lendárias de Richard Wagner e Puccini.",
+    "fonte": "Teatro Nacional de São Carlos / OPART / Grammy Awards",
+    "factClusterId": "fc_atu_mun_elisabetematos_opera_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0042",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que consagrada pianista lisboeta de música erudita (nascida em 1944), Maria João Pires («Maria João Pires»), aclamada internacionalmente pelas suas interpretações magistrais e gravações antológicas de Mozart, Chopin e Beethoven pela Deutsche Grammophon, foi distinguida com os maiores prémios musicais da Europa e do Japão?",
+    "opcoes": [
+      "Helena Sá e Costa",
+      "Maria João Pires",
+      "Guilhermina Suggia",
+      "Marta Argerich"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria João Pires fundou o Centro de Belgais para o Estudo das Artes em Castelo Branco e recebeu o prestigiado Prémio Praemium Imperiale no Japão.",
+    "fonte": "Deutsche Grammophon / Praemium Imperiale / Centro de Belgais",
+    "factClusterId": "fc_atu_mun_mariajoaopires_piano_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0043",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que influente organização internacional intergovernamental de cooperação policial («INTERPOL» / Organização Internacional de Polícia Criminal), sediada em Lyon, conta com a participação ativa e destacada da Polícia Judiciária (PJ) portuguesa nas suas operações globais contra o crime organizado?",
+    "opcoes": [
+      "EUROPOL",
+      "Frontex",
+      "INTERPOL",
+      "Eurojust"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Polícia Judiciária acolhe a Unidade Nacional Europol/Interpol em Lisboa cooperando na segurança internacional.",
+    "fonte": "Polícia Judiciária (PJ) / INTERPOL",
+    "factClusterId": "fc_atu_mun_interpol_pj_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0044",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante e histórico estatuto de proteção internacional concedido pela UNESCO («Património Cultural Imaterial da Humanidade»), reconheceu a universalidade de tradições portuguesas como o Fado (2011), o Cante Alentejano (2014), a Falcoaria e a Dieta Mediterrânica?",
+    "opcoes": [
+      "Monumento Histórico Global",
+      "Reserva da Biosfera",
+      "Memória do Mundo",
+      "Património Cultural Imaterial da Humanidade (UNESCO)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Portugal possui também as Festas do Povo de Campo Maior e a Olaria Negra de Bisalhães na lista da UNESCO.",
+    "fonte": "UNESCO / Direção-Geral do Património Cultural (DGPC)",
+    "factClusterId": "fc_atu_mun_unesco_imaterial_portugal_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0045",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que célebre e secular sobremesa da doçaria conventual portuguesa criada no Mosteiro dos Jerónimos («Pastéis de Belém» / Pastel de Nata), tornou-se uma das sobremesas portuguesas mais famosas e exportadas do mundo com franquias em Tóquio, Londres, Nova Iorque e Xangai?",
+    "opcoes": [
+      "Pastel de Nata (Pastéis de Belém)",
+      "Ovos Moles de Aveiro",
+      "Pão de Ló de Ovar",
+      "Travesseiros de Sintra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O jornal britânico The Guardian considerou o Pastel de Nata uma das 50 melhores comidas do mundo.",
+    "fonte": "Antiga Confeitaria de Belém / Turismo de Portugal / TasteAtlas",
+    "factClusterId": "fc_atu_mun_pasteldenata_global_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0046",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que inovadora tecnologia desportiva e empresa unicórnio com engenharia desenvolvida em Portugal («Sensei» / «Sportway»), desenvolve sistemas pioneiros de câmaras inteligentes e inteligência artificial para transmissões desportivas e lojas sem caixas registadoras?",
+    "opcoes": [
+      "Talkdesk",
+      "Sensei (Lojas Autónomas e Visão Computacional)",
+      "Feedzai",
+      "Sword Health"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sensei abriu em Lisboa a primeira loja autónoma da Europa sem caixas de pagamento para o grupo retalhista Sonae (Continente Labs).",
+    "fonte": "Sensei Tech / Sonae / Startup Portugal",
+    "factClusterId": "fc_atu_mun_sensei_continente_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0047",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que importante arquipélago no Atlântico Norte («Arquipélago dos Açores»), cuja posição geográfica a meio caminho entre a Europa e a América do Norte conferiu um papel estratégico na Segunda Guerra Mundial e na Guerra Fria através da Base Aérea das Lajes na Ilha:",
+    "opcoes": [
+      "Ilha de São Miguel",
+      "Ilha do Faial",
+      "Ilha Terceira (Base Aérea n.º 4 das Lajes)",
+      "Ilha de Santa Maria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Acordo das Lajes de 1943 entre Salazar e os Aliados permitiu a utilização militar britânica e norte-americana da base estratégica das Lajes.",
+    "fonte": "Força Aérea Portuguesa / US Air Force / Governo dos Açores",
+    "factClusterId": "fc_atu_mun_baseaerealajes_terceira_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0048",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que grande diplomata e professor de relações internacionais de Santarém (1918-2006), Franco Nogueira («Alberto Franco Nogueira»), foi o mais longevo Ministro dos Negócios Estrangeiros do Estado Novo (1961-1969) e biógrafo de António de Oliveira Salazar?",
+    "opcoes": [
+      "Marcelo Mathias",
+      "Rui Patrício",
+      "Paulo Cunha",
+      "Franco Nogueira (Ministro dos Negócios Estrangeiros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Franco Nogueira defendeu a política ultramarina portuguesa na Assembleia Geral e no Conselho de Segurança da ONU.",
+    "fonte": "Arquivo Histórico Diplomático / Livraria Civilização",
+    "factClusterId": "fc_atu_mun_franconogueira_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0049",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que histórica e secular universidade portuguesa («Universidade de Coimbra — Alta e Sofia»), fundada em 1290 por D. Dinis e transferida definitivamente para Coimbra em 1537 por D. João III, foi classificada como Património Mundial da UNESCO pela sua influência na criação de universidades no Brasil e no mundo lusófono?",
+    "opcoes": [
+      "Universidade de Coimbra — Alta e Sofia (UNESCO 2013)",
+      "Universidade de Lisboa",
+      "Universidade do Porto",
+      "Universidade de Évora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Coimbra formou os líderes das independências e constituições de Portugal e do Brasil (como José Bonifácio de Andrada e Silva).",
+    "fonte": "UNESCO / Universidade de Coimbra",
+    "factClusterId": "fc_atu_mun_universidadecoimbra_unesco_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
+  },
+  {
+    "id": "ATU_MUN_0050",
+    "tema": "Atualidade",
+    "subtema": "Portugal no Mundo",
+    "pergunta": "Que país sul-americano acolhe a maior comunidade histórica de cidadãos de nacionalidade e ascendência portuguesa fora de Portugal (com mais de 5 milhões de pessoas e a maior comunidade no estado do Rio de Janeiro e São Paulo), unidos pela língua comum e por laços fraternos?",
+    "opcoes": [
+      "Venezuela",
+      "Argentina",
+      "Brasil (Maior comunidade da diáspora e de lusodescendentes no mundo)",
+      "África do Sul"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Real Gabinete Português de Leitura no Rio de Janeiro e a Beneficência Portuguesa em São Paulo são monumentos vivos desta união.",
+    "fonte": "Embaixada de Portugal em Brasília / Observatório da Emigração",
+    "factClusterId": "fc_atu_mun_brasil_diaspora_01",
+    "category": "Atualidade",
+    "subcategory": "Portugal no Mundo"
   }
 ]

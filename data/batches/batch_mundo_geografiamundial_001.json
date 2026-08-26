@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUN_GEO_0001",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta do planeta Terra acima do nível médio do mar, situada na cordilheira dos Himalaias na fronteira entre o Nepal e a China (Tibete), com uma altitude oficial de 8.848,86 metros?",
+    "opcoes": [
+      "Monte Evereste (Sagarmatha / Chomolungma — 8.848m)",
+      "K2 (Godwin-Austen — 8.611m)",
+      "Kangchenjunga (8.586m)",
+      "Lhotse (8.516m)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Monte Evereste foi escalado pela primeira vez no cume por Edmund Hillary e Tenzing Norgay a 29 de maio de 1953.",
+    "fonte": "National Geographic / Survey of Nepal / Royal Geographical Society",
+    "factClusterId": "fc_mun_geo_evereste_01"
+  },
+  {
+    "id": "MUN_GEO_0002",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior rio do mundo em volume de água caudal e extensão, que nasce nos Andes peruanos e atravessa a maior floresta tropical do planeta desaguando no Oceano Atlântico com uma bacia hidrográfica de mais de 7 milhões de km²?",
+    "opcoes": [
+      "Rio Nilo",
+      "Rio Amazonas",
+      "Rio Yangtzé",
+      "Rio Mississípi"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O rio Amazonas descarrega mais água no oceano do que os sete maiores rios seguintes combinados, representando cerca de 20% da água doce fluvial que entra nos oceanos.",
+    "fonte": "Encyclopaedia Britannica / USGS / Instituto Geográfico Nacional",
+    "factClusterId": "fc_mun_geo_rioamazonas_01"
+  },
+  {
+    "id": "MUN_GEO_0003",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior e mais profundo oceano da Terra, cobrindo uma área de mais de 165 milhões de km² (mais de 30% da superfície de todo o globo terrestre e maior do que todas as massas de terra continentais somadas)?",
+    "opcoes": [
+      "Oceano Atlântico",
+      "Oceano Índico",
+      "Oceano Pacífico",
+      "Oceano Glacial Ártico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Oceano Pacífico foi batizado pelo navegador português Fernão de Magalhães em 1520 pelas suas águas calmas ao cruzar o Estreito de Magalhães.",
+    "fonte": "NOAA / National Geographic Atlas of the World",
+    "factClusterId": "fc_mun_geo_oceanopacifico_01"
+  },
+  {
+    "id": "MUN_GEO_0004",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o ponto mais profundo conhecido de todos os oceanos da Terra, situado na Fossa das Marianas no Oceano Pacífico Ocidental («Depressão Challenger» / Challenger Deep), atingindo cerca de 10.994 metros de profundidade abaixo do nível do mar?",
+    "opcoes": [
+      "Fossa de Porto Rico",
+      "Fossa de Java",
+      "Fossa das Sandwich do Sul",
+      "Fossa das Marianas (Depressão Challenger — 10.994 metros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O batíscafo Trieste tripulado por Jacques Piccard e Don Walsh atingiu o fundo da Fossa das Marianas em 1960, repetido pelo cineasta James Cameron em 2012.",
+    "fonte": "NOAA / Woods Hole Oceanographic Institution",
+    "factClusterId": "fc_mun_geo_fossadasmarianas_01"
+  },
+  {
+    "id": "MUN_GEO_0005",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o lago mais profundo do mundo (com 1.642 metros de profundidade máxima) e o maior em volume de água doce superficial líquida do planeta (contendo cerca de 20% de toda a água doce não congelada da Terra), situado na Sibéria (Rússia)?",
+    "opcoes": [
+      "Lago Baikal (Rússia)",
+      "Lago Tanganica",
+      "Lago Superior",
+      "Lago Vitória"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Lago Baikal tem mais de 25 milhões de anos sendo também o lago mais antigo do planeta, classificado como Património Mundial da UNESCO.",
+    "fonte": "UNESCO / Limnological Institute of the Russian Academy of Sciences",
+    "factClusterId": "fc_mun_geo_lagobaikal_01"
+  },
+  {
+    "id": "MUN_GEO_0006",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a mais longa cordilheira montanhosa continental do planeta, estendendo-se por mais de 7.000 km ao longo de sete países da América do Sul (desde a Venezuela até ao Chile e Argentina)?",
+    "opcoes": [
+      "Montanhas Rochosas",
+      "Cordilheira dos Andes (7.000 km)",
+      "Himalaias",
+      "Alpes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Andes abrigam o Monte Aconcágua (6.961m na Argentina), o ponto mais alto fora da Ásia e de todo o hemisfério ocidental.",
+    "fonte": "Encyclopaedia Britannica / Instituto Geográfico Nacional da Argentina",
+    "factClusterId": "fc_mun_geo_cordilheiradosandes_01"
+  },
+  {
+    "id": "MUN_GEO_0007",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta de todo o continente americano e do Hemisfério Ocidental, com 6.961 metros de altitude, situada na província de Mendoza na Argentina?",
+    "opcoes": [
+      "Ojos del Salado",
+      "Huascarán",
+      "Monte Aconcágua (6.961 metros)",
+      "Monte Denali"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Aconcágua é o pico mais alto das Américas e um dos 'Sete Cumes' mais cobiçados do montanhismo mundial.",
+    "fonte": "Parque Provincial Aconcagua / IGN Argentina",
+    "factClusterId": "fc_mun_geo_aconcagua_01"
+  },
+  {
+    "id": "MUN_GEO_0008",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior deserto quente do mundo, cobrindo uma área de mais de 9,2 milhões de km² através de 11 países no norte do continente africano?",
+    "opcoes": [
+      "Deserto da Arábia",
+      "Deserto de Calaári",
+      "Deserto de Gobi",
+      "Deserto do Sara (Sahara)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Sara é quase do tamanho de todo o território dos Estados Unidos ou da China, abrangendo dunas de areia (ergs), planaltos rochosos (hamadas) e oásis.",
+    "fonte": "National Geographic / USGS",
+    "factClusterId": "fc_mun_geo_desertodosara_01"
+  },
+  {
+    "id": "MUN_GEO_0009",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o deserto não-polar mais árido e seco do planeta Terra, situado no norte do Chile entre o Oceano Pacífico e a Cordilheira dos Andes, onde existem estações meteorológicas que nunca registaram uma única gota de chuva?",
+    "opcoes": [
+      "Deserto do Atacama (Chile)",
+      "Deserto do Sara",
+      "Deserto da Namíbia",
+      "Deserto de Mojave"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Atacama acolhe alguns dos maiores observatórios astronómicos do mundo (como o ALMA e o VLT) devido ao céu límpido e ausência de humidade.",
+    "fonte": "European Southern Observatory (ESO) / NASA",
+    "factClusterId": "fc_mun_geo_desertodoatacama_01"
+  },
+  {
+    "id": "MUN_GEO_0010",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a maior ilha do planeta Terra (não considerada continente), cobrindo mais de 2,16 milhões de km² com 80% do seu território coberto por uma calota de gelo permanente, pertencente politicamente ao Reino da Dinamarca?",
+    "opcoes": [
+      "Nova Guiné",
+      "Gronelândia (Greenland)",
+      "Bornéu",
+      "Madagáscar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Gronelândia situa-se entre o Ártico e o Atlântico Norte e tem como capital a cidade de Nuuk.",
+    "fonte": "Danish Geodata Agency / Naalakkersuisut",
+    "factClusterId": "fc_mun_geo_gronelandia_01"
+  },
+  {
+    "id": "MUN_GEO_0011",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a única ilha do mundo cujo território está politicamente dividido entre três países soberanos (Indonésia, Malásia e o Sultanato do Brunei)?",
+    "opcoes": [
+      "Ilha da Nova Guiné",
+      "Ilha de Samatra",
+      "Ilha de Bornéu (Kalimantan)",
+      "Ilha de Chipre"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bornéu é a terceira maior ilha do mundo e alberga uma das mais antigas florestas tropicais do planeta com mais de 140 milhões de anos.",
+    "fonte": "WWF / World Atlas",
+    "factClusterId": "fc_mun_geo_borneu_3paises_01"
+  },
+  {
+    "id": "MUN_GEO_0012",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior corpo de água fechado interior (lago endorreico salgado) da Terra em área e volume, cobrindo 371.000 km² na fronteira entre a Europa e a Ásia bordado por 5 países (Rússia, Cazaquistão, Turquemenistão, Irão e Azerbaijão)?",
+    "opcoes": [
+      "Mar Morto",
+      "Mar Negro",
+      "Lago Vitória",
+      "Mar Cáspio"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Apesar do nome 'Mar', o Cáspio é tecnicamente o maior lago do mundo por não ter ligação direta a nenhum oceano aberto.",
+    "fonte": "Encyclopaedia Britannica / Caspian Sea Environmental Program",
+    "factClusterId": "fc_mun_geo_marcaspio_01"
+  },
+  {
+    "id": "MUN_GEO_0013",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o ponto em terra firme de menor altitude do planeta Terra, situado a mais de 430 metros abaixo do nível do mar na fronteira entre Israel, Palestina e Jordânia («Mar Morto»), famoso pela sua hipersalinidade onde os corpos humanos flutuam naturalmente?",
+    "opcoes": [
+      "Mar Morto (-430 metros)",
+      "Depressão de Danakil",
+      "Vale da Morte (EUA)",
+      "Depressão de Turpan"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mar Morto tem uma salinidade de cerca de 34% (quase dez vezes superior à dos oceanos), impedindo a sobrevivência de peixes ou plantas aquáticas.",
+    "fonte": "Geological Survey of Israel / USGS",
+    "factClusterId": "fc_mun_geo_marmorto_01"
+  },
+  {
+    "id": "MUN_GEO_0014",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a mais alta queda de água ininterrupta do mundo, com uma altura impressionante de 979 metros (e queda livre de 807 metros), situada no Parque Nacional Canaima na Venezuela («Salto Ángel» / Kerepakupai Merú)?",
+    "opcoes": [
+      "Cataratas de Tugela (África do Sul)",
+      "Salto Ángel (Venezuela — 979 metros)",
+      "Cataratas do Niágara",
+      "Cataratas de Vitória"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Salto Ángel precipita-se do cume do planalto do Auyán-tepui e foi batizado em honra do aviador norte-americano Jimmie Angel que o sobrevoou em 1933.",
+    "fonte": "UNESCO / World Waterfall Database / Instituto Nacional de Parques de Venezuela",
+    "factClusterId": "fc_mun_geo_saltoangel_01"
+  },
+  {
+    "id": "MUN_GEO_0015",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que espetacular complexo de 275 quedas de água em forma de ferradura na fronteira entre o Brasil (Paraná) e a Argentina (Misiones), «Cataratas do Iguaçu», é uma das 7 Maravilhas da Natureza com a imponente «Garganta do Diabo»?",
+    "opcoes": [
+      "Cataratas de Vitória",
+      "Cataratas do Niágara",
+      "Cataratas do Iguaçu",
+      "Salto de Sete Quedas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Cataratas do Iguaçu foram descobertas pelos europeus em 1541 pelo explorador espanhol Álvar Núñez Cabeza de Vaca e são Património Mundial da UNESCO.",
+    "fonte": "UNESCO / Parque Nacional do Iguaçu (ICMBio) / Parque Nacional Iguazú",
+    "factClusterId": "fc_mun_geo_cataratasdoiguacu_01"
+  },
+  {
+    "id": "MUN_GEO_0016",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que monumental catarata no rio Zambeze na fronteira entre a Zâmbia e o Zimbabué («Cataratas de Vitória» / Mosi-oa-Tunya — 'O Fumo Que Troveja'), forma a maior cortina de água em queda contínua do mundo com 1,7 km de largura e 108 metros de altura?",
+    "opcoes": [
+      "Cataratas do Iguaçu",
+      "Cataratas do Niágara",
+      "Cataratas de Kaieteur",
+      "Cataratas de Vitória (Mosi-oa-Tunya)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "David Livingstone foi o primeiro europeu a ver as cataratas em 1855 batizando-as em honra da Rainha Vitória do Reino Unido.",
+    "fonte": "UNESCO / Zambia Wildlife Authority / Zimbabwe Parks",
+    "factClusterId": "fc_mun_geo_cataratasdevitoria_01"
+  },
+  {
+    "id": "MUN_GEO_0017",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta de todo o continente africano (com 5.895 metros de altitude), um estratovulcão adormecido coroado por glaciares eternos situado no nordeste da Tanzânia?",
+    "opcoes": [
+      "Monte Quilimanjaro (Uhuru Peak — 5.895 metros)",
+      "Monte Quénia (5.199m)",
+      "Montanhas Ruwenzori (Monte Stanley — 5.109m)",
+      "Monte Meru (4.562m)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Quilimanjaro é a montanha isolada (não pertencente a cordilheira) mais alta do mundo erguendo-se dramaticamente sobre as savanas da África Oriental.",
+    "fonte": "Tanzania National Parks (TANAPA) / UNESCO",
+    "factClusterId": "fc_mun_geo_quilimanjaro_01"
+  },
+  {
+    "id": "MUN_GEO_0018",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta de todo o continente europeu (se considerada a cordilheira do Cáucaso na fronteira entre a Europa e a Ásia), com 5.642 metros de altitude na Rússia?",
+    "opcoes": [
+      "Mont Blanc (4.808m nos Alpes)",
+      "Monte Elbrus (5.642 metros na Rússia)",
+      "Monte Rosa (4.634m)",
+      "Matterhorn (4.478m)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Monte Elbrus é o cume mais elevado da Europa na lista dos Sete Cumes; na Europa Ocidental alpina o ponto culminante é o Mont Blanc.",
+    "fonte": "Russian Geographical Society / International Climbing and Mountaineering Federation (UIAA)",
+    "factClusterId": "fc_mun_geo_monteelbrus_01"
+  },
+  {
+    "id": "MUN_GEO_0019",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta dos Alpes e de toda a Europa Ocidental, com 4.808 metros de altitude, situada no maciço alpino na fronteira entre a França e a Itália?",
+    "opcoes": [
+      "Monte Cervino / Matterhorn",
+      "Jungfrau",
+      "Mont Blanc / Monte Bianco (4.808 metros)",
+      "Grossglockner"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mont Blanc foi escalado pela primeira vez em 1786 por Jacques Balmat e Michel Paccard marcando o nascimento do alpinismo moderno.",
+    "fonte": "IGN France / Club Alpino Italiano",
+    "factClusterId": "fc_mun_geo_montblanc_01"
+  },
+  {
+    "id": "MUN_GEO_0020",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o rio mais longo da Europa (com 3.530 km de extensão), que corre integralmente dentro da Rússia europeia e desagua no Mar Cáspio formando o maior delta fluvial europeu?",
+    "opcoes": [
+      "Rio Danúbio (2.850 km)",
+      "Rio Ural (2.428 km)",
+      "Rio Dnieper (2.201 km)",
+      "Rio Volga (3.530 km)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O rio Volga é carinhosamente chamado de 'Mãe Volga' na cultura russa e acolhe algumas das maiores albufeiras hidroelétricas do continente.",
+    "fonte": "Federal Water Resources Agency of Russia / Encyclopaedia Britannica",
+    "factClusterId": "fc_mun_geo_riovolga_01"
+  },
+  {
+    "id": "MUN_GEO_0021",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que importante e histórico rio europeu (o segundo mais longo da Europa com 2.850 km), nasce na Floresta Negra na Alemanha e atravessa ou serve de fronteira a dez países europeus (mais do que qualquer outro rio no mundo) até desaguar no Mar Negro?",
+    "opcoes": [
+      "Rio Danúbio (Alemanha, Áustria, Eslováquia, Hungria, Croácia, Sérvia, Roménia, Bulgária, Moldávia, Ucrânia)",
+      "Rio Reno",
+      "Rio Elba",
+      "Rio Ródano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O rio Danúbio banha quatro capitais europeias: Viena, Bratislava, Budapeste e Belgrado.",
+    "fonte": "International Commission for the Protection of the Danube River (ICPDR)",
+    "factClusterId": "fc_mun_geo_riodanubio_10paises_01"
+  },
+  {
+    "id": "MUN_GEO_0022",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a mais extensa península do planeta Terra, cobrindo uma área de cerca de 3,23 milhões de km² no Médio Oriente (englobando a Arábia Saudita, Iémen, Omã, EAU, Catar, Kuwait e Bahrein)?",
+    "opcoes": [
+      "Península da Indochina",
+      "Península Arábica (3,23 milhões de km²)",
+      "Península Escandinava",
+      "Península Ibérica"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Península Arábica é banhada pelo Mar Vermelho a oeste, Golfo de Áden a sul e Golfo Pérsico a leste, contendo as maiores reservas de petróleo do mundo.",
+    "fonte": "World Atlas / National Geographic",
+    "factClusterId": "fc_mun_geo_peninsulaarabica_01"
+  },
+  {
+    "id": "MUN_GEO_0023",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que colossal cordilheira montanhosa de mais de 2.500 km de extensão na Rússia («Montes Urais»), estende-se desde o Oceano Ártico até ao Cazaquistão formando a fronteira física e geográfica natural tradicional entre a Europa e a Ásia?",
+    "opcoes": [
+      "Montanhas do Cáucaso",
+      "Montes Altai",
+      "Montes Urais",
+      "Montes Cárpatos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Montes Urais são uma das mais antigas cadeias de montanhas do planeta (formadas há cerca de 300 milhões de anos) ricas em minérios e pedras preciosas.",
+    "fonte": "Russian Academy of Sciences / Encyclopaedia Britannica",
+    "factClusterId": "fc_mun_geo_montesurais_01"
+  },
+  {
+    "id": "MUN_GEO_0024",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que importante canal marítimo artificial inaugurado em 1869 no Egito («Canal de Suez»), com cerca de 193 km de extensão ligando o Mar Mediterrâneo ao Mar Vermelho, permite aos navios navegar diretamente entre a Europa e a Ásia sem contornar a África pelo Cabo da Boa Esperança?",
+    "opcoes": [
+      "Canal do Panamá",
+      "Canal de Corinto",
+      "Canal de Kiel",
+      "Canal de Suez (Egito)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Canal de Suez foi construído sob a direção do engenheiro francês Ferdinand de Lesseps e movimenta cerca de 12% de todo o comércio marítimo global.",
+    "fonte": "Suez Canal Authority (SCA) / International Maritime Organization",
+    "factClusterId": "fc_mun_geo_canaldesuez_1869_01"
+  },
+  {
+    "id": "MUN_GEO_0025",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que célebre canal marítimo com 82 km de extensão inaugurado em 1914 na América Central («Canal do Panamá»), com um sistema monumental de eclusas que eleva os navios até ao Lago Gatún (a 26 metros acima do nível do mar), liga diretamente o Oceano Atlântico ao Oceano Pacífico?",
+    "opcoes": [
+      "Canal do Panamá",
+      "Canal de Suez",
+      "Canal de Beagle",
+      "Estreito de Magalhães"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Canal do Panamá foi considerado uma das Sete Maravilhas do Mundo Moderno pela Sociedade Americana de Engenheiros Civis.",
+    "fonte": "Autoridad del Canal de Panamá (ACP) / ASCE",
+    "factClusterId": "fc_mun_geo_canaldopanama_1914_01"
+  },
+  {
+    "id": "MUN_GEO_0026",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que estreito estratégico de grande relevância geopolítica separa a Europa (Espanha e Gibraltar) de África (Marrocos), com apenas 14,3 km na sua largura mínima («Estreito de Gibraltar»), ligando o Oceano Atlântico ao Mar Mediterrâneo?",
+    "opcoes": [
+      "Estreito de Messina",
+      "Estreito de Gibraltar",
+      "Estreito de Dardanelos",
+      "Estreito de Bósforo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Estreito de Gibraltar era conhecido na Antiguidade clássica como as 'Colunas de Hércules' com o lema latino 'Non Plus Ultra'.",
+    "fonte": "Instituto Hidrográfico / Marinha Espanhola / Marinha Real Marroquina",
+    "factClusterId": "fc_mun_geo_estreitodegibraltar_01"
+  },
+  {
+    "id": "MUN_GEO_0027",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que estreito marítimo de 800 km entre a Península Malaia e a ilha de Samatra na Indonésia («Estreito de Malaca»), é a rota de navegação comercial mais movimentada do mundo por onde passa mais de um quarto de todo o comércio marítimo do planeta e o petróleo do Médio Oriente para a Ásia?",
+    "opcoes": [
+      "Estreito de Ormuz",
+      "Estreito de Sunda",
+      "Estreito de Malaca",
+      "Estreito de Taiwan"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Estreito de Malaca foi conquistado em 1511 pelo governador português Afonso de Albuquerque para controlar o comércio das especiarias.",
+    "fonte": "International Maritime Organization (IMO) / World Bank",
+    "factClusterId": "fc_mun_geo_estreitodemalaca_01"
+  },
+  {
+    "id": "MUN_GEO_0028",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que estreito marítimo crucial entre o Golfo Pérsico e o Golfo de Omã («Estreito de Ormuz»), com apenas 39 km de largura no ponto mais estreito, por onde é transportado diariamente cerca de 20% de todo o petróleo consumido no mundo?",
+    "opcoes": [
+      "Estreito de Bab-el-Mandeb",
+      "Estreito de Malaca",
+      "Canal de Suez",
+      "Estreito de Ormuz"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A fortaleza de Ormuz foi fundada por Afonso de Albuquerque em 1507 tornando-se a chave do comércio entre a Índia e o Médio Oriente.",
+    "fonte": "U.S. Energy Information Administration (EIA) / Lloyd's List",
+    "factClusterId": "fc_mun_geo_estreitodeormuz_01"
+  },
+  {
+    "id": "MUN_GEO_0029",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a mais extensa área de recifes de coral do planeta, com mais de 2.300 km de comprimento cobrindo 344.000 km² ao largo da costa de Queensland na Austrália («Grande Barreira de Corais» / Great Barrier Reef), visível a partir do espaço?",
+    "opcoes": [
+      "Grande Barreira de Corais (Austrália)",
+      "Barreira de Corais do Belize",
+      "Recifes de Tubbataha",
+      "Recife de Nova Caledónia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Grande Barreira de Corais abriga milhares de espécies de peixes, tartarugas e corais sendo a maior estrutura viva do planeta.",
+    "fonte": "UNESCO / Great Barrier Reef Marine Park Authority (GBRMPA)",
+    "factClusterId": "fc_mun_geo_grandebarreira_australia_01"
+  },
+  {
+    "id": "MUN_GEO_0030",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que gigantesca cintura em forma de ferradura com mais de 40.000 km de extensão ao longo das margens do Oceano Pacífico («Círculo de Fogo do Pacífico» / Anel de Fogo), concentra mais de 75% dos vulcões ativos da Terra e 90% dos sismos mundiais?",
+    "opcoes": [
+      "Dorsal Meso-Atlântica",
+      "Círculo de Fogo do Pacífico (Anel de Fogo)",
+      "Frente Polar Antártica",
+      "Rift da África Oriental"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Círculo de Fogo resulta do choque e subducção contínua de placas tectónicas oceânicas e continentais em redor do Pacífico.",
+    "fonte": "USGS (United States Geological Survey) / National Geographic",
+    "factClusterId": "fc_mun_geo_circulodefogo_pacifico_01"
+  },
+  {
+    "id": "MUN_GEO_0031",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior vulcão em escudo da Terra em altura absoluta medida desde a sua base no fundo oceânico até ao cume (com mais de 10.200 metros de altura total, sendo 4.207 metros acima do nível do mar), situado na Ilha do Havai?",
+    "opcoes": [
+      "Mauna Loa",
+      "Monte Fuji (Japão)",
+      "Mauna Kea (Havai — 10.200m da base ao topo)",
+      "Monte Etna (Itália)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Se medido da base no leito oceânico ao topo, o Mauna Kea é consideravelmente mais alto do que o Monte Evereste.",
+    "fonte": "USGS / Hawaii Center for Volcanology",
+    "factClusterId": "fc_mun_geo_maunakea_havai_01"
+  },
+  {
+    "id": "MUN_GEO_0032",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior e mais alto lago navegável comercialmente do planeta, situado a 3.812 metros de altitude na Cordilheira dos Andes na fronteira entre o Peru e a Bolívia («Lago Titicaca»), berço lendário da civilização Inca?",
+    "opcoes": [
+      "Lago Poopó",
+      "Lago Tanganica",
+      "Lago Atitlán",
+      "Lago Titicaca (Peru e Bolívia — 3.812 metros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Lago Titicaca é famoso pelas ilhas flutuantes de totora construídas à mão pelo povo indígena Uros.",
+    "fonte": "UNESCO / Autoridad Binacional del Lago Titicaca (ALT)",
+    "factClusterId": "fc_mun_geo_lagotiticaca_01"
+  },
+  {
+    "id": "MUN_GEO_0033",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior lago de água doce em superfície/área territorial da Terra, cobrindo mais de 82.100 km² na fronteira entre o Canadá e os Estados Unidos («Lago Superior»), integrando o sistema dos Grandes Lagos?",
+    "opcoes": [
+      "Lago Superior (82.100 km²)",
+      "Lago Huron",
+      "Lago Michigan",
+      "Lago Vitória"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Lago Superior contém mais água doce do que todos os outros quatro Grandes Lagos da América do Norte combinados.",
+    "fonte": "EPA (U.S. Environmental Protection Agency) / Great Lakes Commission",
+    "factClusterId": "fc_mun_geo_lagosuperior_01"
+  },
+  {
+    "id": "MUN_GEO_0034",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior lago do continente africano e o maior lago tropical do planeta em superfície, cobrindo cerca de 68.800 km² partilhado por três países (Uganda, Tanzânia e Quénia), sendo a principal nascente do rio Nilo Branco?",
+    "opcoes": [
+      "Lago Tanganica",
+      "Lago Vitória (68.800 km²)",
+      "Lago Malawi / Niassa",
+      "Lago Chade"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Lago Vitória foi batizado pelo explorador britânico John Hanning Speke em 1858 em honra da Rainha Vitória.",
+    "fonte": "East African Community (EAC) / Lake Victoria Basin Commission",
+    "factClusterId": "fc_mun_geo_lagovitoria_01"
+  },
+  {
+    "id": "MUN_GEO_0035",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o rio mais profundo do mundo (atingindo profundidades superiores a 220 metros nos seus desfiladeiros rochosos) e o segundo maior em volume de caudal na África Central («Rio Congo» / Zaire)?",
+    "opcoes": [
+      "Rio Níger",
+      "Rio Zambeze",
+      "Rio Congo (Zaire — >220 metros de profundidade)",
+      "Rio Limpopo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O rio Congo é o único grande rio do planeta que cruza a linha do Equador duas vezes no seu percurso.",
+    "fonte": "USGS / International Commission of the Congo-Oubangui-Sangha Basin",
+    "factClusterId": "fc_mun_geo_riocongo_01"
+  },
+  {
+    "id": "MUN_GEO_0036",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o rio mais longo da Ásia e o terceiro maior do planeta (com 6.300 km de extensão), que corre integralmente dentro da China desde os planaltos do Tibete até ao Mar da China Oriental em Xangai («Rio Yangtzé» / Chang Jiang)?",
+    "opcoes": [
+      "Rio Amarelo (Huang He — 5.464 km)",
+      "Rio Mekong (4.350 km)",
+      "Rio Ganges (2.525 km)",
+      "Rio Yangtzé (Chang Jiang — 6.300 km)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "No rio Yangtzé foi construída a colossal Barragem das Três Gargantas, a maior central hidroelétrica do planeta em capacidade instalada (22.500 MW).",
+    "fonte": "Changjiang Water Resources Commission / Encyclopaedia Britannica",
+    "factClusterId": "fc_mun_geo_rioyangtze_01"
+  },
+  {
+    "id": "MUN_GEO_0037",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que importante e sagrado rio do norte da Índia e do Bangladeche (com 2.525 km de extensão), que nasce nos Himalaias em Gangotri e desagua na Baía de Bengala formando o maior mangal e delta do mundo («Os Sundarbans»), «Rio Ganges»?",
+    "opcoes": [
+      "Rio Ganges (Ganga)",
+      "Rio Indo",
+      "Rio Bramaputra",
+      "Rio Godavari"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O rio Ganges é reverenciado como a deusa Ganga no Hinduísmo e sustenta uma das bacias hidrográficas mais populosas do mundo (mais de 400 milhões de pessoas).",
+    "fonte": "National Mission for Clean Ganga (Government of India) / UNESCO",
+    "factClusterId": "fc_mun_geo_rioganges_01"
+  },
+  {
+    "id": "MUN_GEO_0038",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o deserto mais antigo do mundo (com mais de 55 milhões de anos de idade geológica), situado na costa atlântica do sudoeste de África («Deserto da Namíbia»), célebre pelas suas gigantescas dunas vermelhas de areia em Sossusvlei e pelas plantas Welwitschia mirabilis?",
+    "opcoes": [
+      "Deserto do Calaári",
+      "Deserto da Namíbia (Namib-Naukluft)",
+      "Deserto do Sara",
+      "Deserto de Danakil"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Deserto da Namíbia encontra o oceano Atlântico na famosa 'Costa dos Esqueletos' e é Património Mundial da UNESCO.",
+    "fonte": "UNESCO / Namibia Tourism Board",
+    "factClusterId": "fc_mun_geo_desertodanamibia_01"
+  },
+  {
+    "id": "MUN_GEO_0039",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que impressionante e monumental desfiladeiro esculpido pelo rio Colorado no estado do Arizona nos EUA («Grand Canyon» / Grande Canhão), com 446 km de extensão e até 1.800 metros de profundidade, expõe quase dois mil milhões de anos de estratos geológicos da Terra?",
+    "opcoes": [
+      "Canyon do Bryce",
+      "Canyon do Antelope",
+      "Grand Canyon (Grande Canhão do Colorado)",
+      "Canyon de Zion"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Grand Canyon é considerado uma das maiores maravilhas naturais do mundo visitado por mais de 6 milhões de pessoas por ano.",
+    "fonte": "National Park Service (NPS) / USGS",
+    "factClusterId": "fc_mun_geo_grandcanyon_01"
+  },
+  {
+    "id": "MUN_GEO_0040",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o ponto mais alto de todo o continente da América do Norte, com 6.190 metros de altitude, situado na cordilheira do Alasca (EUA) («Monte Denali» / antigamente designado Monte McKinley)?",
+    "opcoes": [
+      "Monte Logan (5.959m no Canadá)",
+      "Pico de Orizaba (5.636m no México)",
+      "Monte Rainier (4.392m)",
+      "Monte Denali (6.190 metros no Alasca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O nome original indígena Koyukon 'Denali' significa 'O Grande' e foi oficialmente restaurado pelo governo dos EUA em 2015.",
+    "fonte": "USGS / Denali National Park & Preserve",
+    "factClusterId": "fc_mun_geo_montedenali_01"
+  },
+  {
+    "id": "MUN_GEO_0041",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta de todo o continente da Antártida, com 4.892 metros de altitude, situada no Maciço Sentinel na Cordilheira Ellsworth («Maciço Vinson» / Vinson Massif)?",
+    "opcoes": [
+      "Maciço Vinson (4.892 metros)",
+      "Monte Erebus",
+      "Monte Sidley",
+      "Monte Kirkpatrick"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Maciço Vinson situa-se a cerca de 1.200 km do Polo Sul geográfico integrando a lista dos Sete Cumes do montanhismo mundial.",
+    "fonte": "USGS Antarctic Names / Scientific Committee on Antarctic Research (SCAR)",
+    "factClusterId": "fc_mun_geo_macicovinson_01"
+  },
+  {
+    "id": "MUN_GEO_0042",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a montanha mais alta de toda a Oceania e a montanha em ilha mais alta do mundo, com 4.884 metros de altitude na ilha da Nova Guiné (na província de Papua, Indonésia), coroada por glaciares equatoriais («Puncak Jaya» / Pirâmide Carstensz)?",
+    "opcoes": [
+      "Monte Wilhelm (4.509m)",
+      "Puncak Jaya / Pirâmide Carstensz (4.884 metros)",
+      "Monte Kosciuszko (2.228m na Austrália)",
+      "Monte Cook / Aoraki (3.724m na Nova Zelândia)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Pirâmide Carstensz foi escalada pela primeira vez pelo lendário alpinista austríaco Heinrich Harrer em 1962.",
+    "fonte": "Indonesian National Mapping Agency / UIAA",
+    "factClusterId": "fc_mun_geo_puncakjaya_01"
+  },
+  {
+    "id": "MUN_GEO_0043",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que espetacular fenómeno de luz natural que ocorre nas altas latitudes das regiões polares, gerado pelo impacto das partículas carregadas do vento solar contra os gases da atmosfera terrestre, «Aurora Boreal» no hemisfério norte e «Aurora Austral» no hemisfério sul?",
+    "opcoes": [
+      "Sol da Meia-Noite",
+      "Fata Morgana",
+      "Auroras Polares (Aurora Boreal e Aurora Austral)",
+      "Nuvem Mesosférica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As auroras brilham em tons esmeralda, violeta e vermelho devido à ionização do oxigénio e azoto nas camadas superiores da termosfera.",
+    "fonte": "NASA Space Place / Geophysical Institute (University of Alaska)",
+    "factClusterId": "fc_mun_geo_auroras_polares_01"
+  },
+  {
+    "id": "MUN_GEO_0044",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que impressionante e histórico vulcão cónico sagrado de simetria perfeita com 3.776 metros de altitude na ilha de Honshu no Japão («Monte Fuji» / Fuji-san), coroado por neve durante a maior parte do ano, é o símbolo nacional japonês e Património Mundial da UNESCO?",
+    "opcoes": [
+      "Monte Ontake",
+      "Monte Aso",
+      "Sakurajima",
+      "Monte Fuji (Fuji-san — 3.776 metros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Monte Fuji inspirou obras-primas da arte mundial como 'Trinta e Seis Vistas do Monte Fuji' e 'A Grande Onda de Kanagawa' de Hokusai.",
+    "fonte": "UNESCO / Geospatial Information Authority of Japan",
+    "factClusterId": "fc_mun_geo_montefuji_japao_01"
+  },
+  {
+    "id": "MUN_GEO_0045",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a mais profunda e extensa fenda tectónica continental do planeta, que se estende por mais de 6.000 km desde a Jordânia até Moçambique («Vale do Rift» / Grande Vale do Rift Africano), onde o continente africano se está a dividir lentamente em duas placas tectónicas?",
+    "opcoes": [
+      "Grande Vale do Rift Africano (East African Rift)",
+      "Falha de Santo André",
+      "Fossa do Reno",
+      "Fenda de Silfra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Vale do Rift é considerado o 'Berço da Humanidade' onde foram descobertos os mais antigos fósseis de hominídeos primitivos (como 'Lucy' na Etiópia).",
+    "fonte": "UNESCO / Geological Society of London / National Geographic",
+    "factClusterId": "fc_mun_geo_valedorift_01"
+  },
+  {
+    "id": "MUN_GEO_0046",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que célebre e perigosa falha geológica de transformação na Califórnia (EUA) com mais de 1.200 km de extensão («Falha de Santo André» / San Andreas Fault), marca o limite tectónico entre a Placa do Pacífico e a Placa Norte-Americana sendo a responsável por grandes sismos como o de São Francisco de 1906?",
+    "opcoes": [
+      "Falha de Hayward",
+      "Falha de Santo André (San Andreas Fault)",
+      "Falha da Anatólia",
+      "Falha Alpina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Falha de Santo André desloca-se a uma velocidade média de 3 a 5 centímetros por ano provocando grande fricção tectónica.",
+    "fonte": "USGS / California Geological Survey",
+    "factClusterId": "fc_mun_geo_falhasantoandre_01"
+  },
+  {
+    "id": "MUN_GEO_0047",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é a maior extensão contínua de floresta tropical do planeta Terra, cobrindo mais de 6 milhões de km² através de 9 países na América do Sul e concentrando mais de 10% de toda a biodiversidade de espécies do planeta («Floresta Amazónica» / Pulmão Verde do Planeta)?",
+    "opcoes": [
+      "Floresta do Congo",
+      "Floresta de Bornéu e Samatra",
+      "Floresta Amazónica (Bacia do Amazonas)",
+      "Taiga Siberiana"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Amazónia armazena mais de 150 mil milhões de toneladas de carbono desempenhando um papel crucial na regulação do clima global.",
+    "fonte": "INPE / WWF / OTCA (Organização do Tratado de Cooperação Amazónica)",
+    "factClusterId": "fc_mun_geo_florestaamazonica_01"
+  },
+  {
+    "id": "MUN_GEO_0048",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior bioma terrestre contínuo do planeta, uma floresta de coníferas e pinheiros boreais que se estende por mais de 15 milhões de km² no norte da Rússia, Escandinávia e Canadá («Taiga» / Floresta Boreal)?",
+    "opcoes": [
+      "Tundra Ártica",
+      "Savana Africana",
+      "Estepe Euroasiática",
+      "Taiga (Floresta Boreal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Taiga abriga quase um terço de todas as árvores do planeta Terra e atua como um dos maiores sumidouros de carbono do hemisfério norte.",
+    "fonte": "Encyclopaedia Britannica / WWF",
+    "factClusterId": "fc_mun_geo_taigaboreal_01"
+  },
+  {
+    "id": "MUN_GEO_0049",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Qual é o maior arquipélago do mundo em número total de ilhas oceânicas (com mais de 17.500 ilhas catalogadas, das quais mais de 6.000 são habitadas), estendendo-se por mais de 5.000 km entre o Oceano Índico e o Oceano Pacífico na Ásia («Arquipélago Indonésio» / Indonésia)?",
+    "opcoes": [
+      "Arquipélago Indonésio (Indonésia — mais de 17.500 ilhas)",
+      "Arquipélago das Filipinas (7.641 ilhas)",
+      "Arquipélago Japonês (6.852 ilhas)",
+      "Arquipélago Malaio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Indonésia engloba ilhas monumentais como Samatra, Java (a ilha mais populosa do mundo com mais de 150 milhões de hab.), Sulawesi e partes de Bornéu e Nova Guiné.",
+    "fonte": "Geospatial Information Agency of Indonesia (BIG) / World Factbook",
+    "factClusterId": "fc_mun_geo_arquipelagoindonesio_01"
+  },
+  {
+    "id": "MUN_GEO_0050",
+    "tema": "Mundo",
+    "subtema": "Geografia Mundial",
+    "pergunta": "Que importante e histórico estreito marítimo no extremo sul da América do Sul (descoberto e navegado pela primeira vez em novembro de 1520 pelo lendário navegador português Fernão de Magalhães ao serviço da Coroa de Castela), «Estreito de Magalhães», liga o Oceano Atlântico ao Oceano Pacífico separando o continente da Terra do Fogo?",
+    "opcoes": [
+      "Passagem de Drake",
+      "Canal de Beagle",
+      "Estreito de Magalhães (Fernão de Magalhães, 1520)",
+      "Estreito de Bering"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernão de Magalhães descobriu a passagem marítima interoceânica durante a histórica primeira viagem de circum-navegação da Terra.",
+    "fonte": "Instituto Hidrográfico da Armada do Chile / Biblioteca Nacional de Portugal",
+    "factClusterId": "fc_mun_geo_estreitodemagalhaes_1520_01"
+  }
+]

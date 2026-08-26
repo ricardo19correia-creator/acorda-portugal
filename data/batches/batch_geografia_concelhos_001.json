@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GEO_CON_0001",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Quantos municípios (concelhos) e freguesias compõem oficialmente a organização político-administrativa do território de Portugal (incluindo o continente e as duas regiões autónomas)?",
+    "opcoes": [
+      "308 Municípios e 3.092 Freguesias",
+      "278 Municípios e 4.259 Freguesias",
+      "350 Municípios e 2.500 Freguesias",
+      "300 Municípios e 3.500 Freguesias"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Portugal possui 278 municípios no continente, 19 na Região Autónoma dos Açores e 11 na Região Autónoma da Madeira.",
+    "fonte": "DGAL (Direção-Geral das Autarquias Locais) / INE / Carta Administrativa Oficial de Portugal",
+    "factClusterId": "fc_geo_con_totais_308_01"
+  },
+  {
+    "id": "GEO_CON_0002",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o maior município de Portugal em área territorial, cobrindo uma vasta extensão de 1.720,6 km² na costa sudoeste do Alentejo Litoral (distrito de Beja)?",
+    "opcoes": [
+      "Alcácer do Sal (1.499,9 km²)",
+      "Odemira (1.720,6 km²)",
+      "Mértola (1.292,9 km²)",
+      "Castelo Branco (1.438,2 km²)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Odemira é maior do que ilhas inteiras e abriga vilas costeiras famosas como Vila Nova de Milfontes e Zambujeira do Mar.",
+    "fonte": "CAOP / Instituto Geográfico Nacional / Município de Odemira",
+    "factClusterId": "fc_geo_con_maiorconcelho_odemira_01"
+  },
+  {
+    "id": "GEO_CON_0003",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o menor município de Portugal em área territorial, cobrindo apenas 7,94 km² no distrito de Aveiro, sendo constituído por uma única freguesia urbana e industrial?",
+    "opcoes": [
+      "Entroncamento (13,73 km²)",
+      "Alpiarça (63,11 km²)",
+      "São João da Madeira (7,94 km²)",
+      "Amadora (23,78 km²)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "São João da Madeira é conhecido como a Capital do Calçado e do Chapéu e tem uma das maiores densidades populacionais do país.",
+    "fonte": "INE / CAOP / Município de São João da Madeira",
+    "factClusterId": "fc_geo_con_menorconcelho_saojoaodamadeira_01"
+  },
+  {
+    "id": "GEO_CON_0004",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município mais populoso de Portugal, concentrando mais de 545.000 habitantes residentes no seu território urbano distribuídos por 24 freguesias?",
+    "opcoes": [
+      "Sintra",
+      "Vila Nova de Gaia",
+      "Porto",
+      "Lisboa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Lisboa é a capital do país e o centro da Área Metropolitana de Lisboa que alberga cerca de 2,9 milhões de habitantes.",
+    "fonte": "INE — Censos 2021 / PORDATA",
+    "factClusterId": "fc_geo_con_maispopuloso_lisboa_01"
+  },
+  {
+    "id": "GEO_CON_0005",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o segundo município mais populoso de Portugal (e o mais populoso sem estatuto de capital de distrito), com mais de 385.000 habitantes no distrito de Lisboa?",
+    "opcoes": [
+      "Sintra (385.000 habitantes)",
+      "Vila Nova de Gaia",
+      "Cascais",
+      "Loures"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sintra integra vilas densamente povoadas como Algueirão-Mem Martins, Rio de Mouro, Queluz e Massamá.",
+    "fonte": "INE — Censos 2021 / Município de Sintra",
+    "factClusterId": "fc_geo_con_sintra_populacao_01"
+  },
+  {
+    "id": "GEO_CON_0006",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município menos populoso de todo o território português, constituído por uma única ilha de 17 km² e apenas cerca de 400 habitantes na Região Autónoma dos Açores?",
+    "opcoes": [
+      "Barrancos",
+      "Corvo (Vila do Corvo)",
+      "Lajes das Flores",
+      "Porto Moniz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ilha do Corvo é a mais pequena dos Açores e constitui uma única autarquia e freguesia sem câmara municipal tradicional dividida.",
+    "fonte": "SREA / INE — Censos / Governo dos Açores",
+    "factClusterId": "fc_geo_con_menos_populoso_corvo_01"
+  },
+  {
+    "id": "GEO_CON_0007",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município menos populoso de Portugal continental, situado na Raia alentejana junto a Espanha (distrito de Beja), com cerca de 1.400 habitantes e com dialecto próprio («o barranquenho»)?",
+    "opcoes": [
+      "Mourão",
+      "Marvão",
+      "Barrancos",
+      "Alvito"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Barrancos é famoso pelo Presunto de Barrancos DOP e pelo Parque de Natureza de Noudar.",
+    "fonte": "INE / Município de Barrancos",
+    "factClusterId": "fc_geo_con_barrancos_continental_01"
+  },
+  {
+    "id": "GEO_CON_0008",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município de Portugal com o maior número total de freguesias do país, totalizando 61 freguesias e uniões de freguesia no distrito de Braga (Cávado)?",
+    "opcoes": [
+      "Braga",
+      "Guimarães",
+      "Vila Verde",
+      "Barcelos (61 freguesias)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Barcelos tinha 89 freguesias antes da agregação de 2013 mantendo-se como o concelho com maior rede paroquial e comunitária.",
+    "fonte": "DGAL / Município de Barcelos",
+    "factClusterId": "fc_geo_con_mais_freguesias_barcelos_01"
+  },
+  {
+    "id": "GEO_CON_0009",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é a freguesia mais populosa de Portugal, concentrando mais de 66.000 habitantes residentes no município de Sintra?",
+    "opcoes": [
+      "Algueirão-Mem Martins (Sintra)",
+      "Rio de Mouro (Sintra)",
+      "Corroios (Seixal)",
+      "Amora (Seixal)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A freguesia de Algueirão-Mem Martins tem mais população do que capitais de distrito como Évora, Guarda, Castelo Branco ou Bragança.",
+    "fonte": "INE — Censos / Junta de Freguesia de Algueirão-Mem Martins",
+    "factClusterId": "fc_geo_con_maisfreguesiapopulosa_memmartins_01"
+  },
+  {
+    "id": "GEO_CON_0010",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Quantos municípios compõem a Região Autónoma da Madeira, distribuídos pela Ilha da Madeira (10 concelhos) e Ilha do Porto Santo (1 concelho)?",
+    "opcoes": [
+      "19 Municípios",
+      "11 Municípios",
+      "15 Municípios",
+      "9 Municípios"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os 11 municípios são: Funchal, Câmara de Lobos, Ribeira Brava, Ponta do Sol, Calheta, Porto Moniz, São Vicente, Santana, Machico, Santa Cruz e Porto Santo.",
+    "fonte": "Governo Regional da Madeira / DGAL",
+    "factClusterId": "fc_geo_con_madeira_11concelhos_01"
+  },
+  {
+    "id": "GEO_CON_0011",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Quantos municípios compõem a Região Autónoma dos Açores, distribuídos pelas suas 9 ilhas oceânicas (com 6 concelhos na Ilha de São Miguel, 3 no Pico e 2 na Terceira)?",
+    "opcoes": [
+      "11 Municípios",
+      "22 Municípios",
+      "19 Municípios",
+      "9 Municípios"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ilha de São Miguel abriga os concelhos de Ponta Delgada, Ribeira Grande, Lagoa, Vila Franca do Campo, Nordeste e Povoação.",
+    "fonte": "SREA / Governo Regional dos Açores",
+    "factClusterId": "fc_geo_con_acores_19concelhos_01"
+  },
+  {
+    "id": "GEO_CON_0012",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município mais setentrional (mais a norte) de todo o território de Portugal, situado no distrito de Viana do Castelo encostado à Galiza?",
+    "opcoes": [
+      "Monção",
+      "Montalegre",
+      "Valença",
+      "Melgaço (com o lugar de Cevide)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A aldeia de Cevide na freguesia de Cristóval (Melgaço) marca o ponto extremo norte do país: 'Portugal começa em Cevide'.",
+    "fonte": "IGP / Município de Melgaço",
+    "factClusterId": "fc_geo_con_extremo_norte_melgaco_01"
+  },
+  {
+    "id": "GEO_CON_0013",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município mais meridional (mais a sul) de Portugal continental, situado no sotavento algarvio na margem do rio Guadiana («Vila Real de Santo António»)?",
+    "opcoes": [
+      "Vila Real de Santo António (com a Ponta de Sagres / Cabo de Santa Maria em Faro)",
+      "Castro Marim",
+      "Olhão",
+      "Tavira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O ponto mais a sul de Portugal continental é o Cabo de Santa Maria na Ilha da Barreta (município de Faro); nas ilhas é o Ilhéu de Fora nas Selvagens (Madeira).",
+    "fonte": "Instituto Hidrográfico / CAOP",
+    "factClusterId": "fc_geo_con_extremo_sul_faro_01"
+  },
+  {
+    "id": "GEO_CON_0014",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município mais ocidental (mais a oeste) de Portugal e de todo o continente europeu, situado no distrito de Lisboa («Sintra»), que abriga o emblemático «Cabo da Roca»?",
+    "opcoes": [
+      "Cascais",
+      "Sintra (Cabo da Roca — 9º 30' W)",
+      "Mafra",
+      "Peniche"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "No Cabo da Roca lê-se a frase de Camões: 'Onde a terra acaba e o mar começa'. Nas ilhas, o ponto mais ocidental é o Ilhéu do Monchique no Corvo/Flores.",
+    "fonte": "Município de Sintra / Instituto Hidrográfico",
+    "factClusterId": "fc_geo_con_extremo_oeste_sintra_01"
+  },
+  {
+    "id": "GEO_CON_0015",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o município mais oriental (mais a leste) de Portugal, situado em Trás-os-Montes na fronteira com Samora (Espanha), com a aldeia fronteiriça de Paradela?",
+    "opcoes": [
+      "Mogadouro",
+      "Vimioso",
+      "Miranda do Douro (com o lugar de Paradela)",
+      "Bragança"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Miranda do Douro é também o berço da segunda língua oficial reconhecida de Portugal, a Língua Mirandesa (Lhéngua Mirandesa).",
+    "fonte": "CAOP / Município de Miranda do Douro",
+    "factClusterId": "fc_geo_con_extremo_leste_miranda_01"
+  },
+  {
+    "id": "GEO_CON_0016",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Qual é o maior município da região da Beira Baixa e do Centro de Portugal em área territorial, cobrindo 1.438,2 km² no distrito com o mesmo nome?",
+    "opcoes": [
+      "Idanha-a-Nova",
+      "Fundão",
+      "Covilhã",
+      "Castelo Branco"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Castelo Branco é o terceiro maior concelho de Portugal em extensão territorial logo a seguir a Odemira e Alcácer do Sal.",
+    "fonte": "CAOP / Município de Castelo Branco",
+    "factClusterId": "fc_geo_con_castelobranco_area_01"
+  },
+  {
+    "id": "GEO_CON_0017",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que importante município alentejano do distrito de Setúbal («Alcácer do Sal»), com 1.499,9 km² nas margens do rio Sado, é o segundo maior município de Portugal em área territorial?",
+    "opcoes": [
+      "Alcácer do Sal",
+      "Grândola",
+      "Santiago do Cacém",
+      "Montemor-o-Novo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Alcácer do Sal tem uma história milenar ligada à produção de sal, arrozais e ao Castelo medieval com a Pousada D. Afonso II.",
+    "fonte": "Município de Alcácer do Sal / CAOP",
+    "factClusterId": "fc_geo_con_alcacerdosal_segundomaior_01"
+  },
+  {
+    "id": "GEO_CON_0018",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município alentejano do distrito de Beja nas margens do rio Guadiana («Mértola»), com 1.292,9 km² e famosa «Vila Museu» islâmica, é o quarto maior concelho de Portugal em área?",
+    "opcoes": [
+      "Serpa",
+      "Mértola",
+      "Moura",
+      "Castro Verde"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Mértola acolhe o Festival Islâmico bienal e a histórica Igreja Matriz que foi a antiga mesquita almóada.",
+    "fonte": "Campo Arqueológico de Mértola / Município de Mértola",
+    "factClusterId": "fc_geo_con_mertola_area_01"
+  },
+  {
+    "id": "GEO_CON_0019",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município ribatejano do distrito de Santarém («Entroncamento»), criado em 1945 a partir de Torres Novas e Vila Nova da Barquinha devido ao nó ferroviário das Linhas do Norte e da Beira Baixa, tem apenas 13,73 km²?",
+    "opcoes": [
+      "Alpiarça",
+      "Golegã",
+      "Entroncamento",
+      "Constância"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Entroncamento é a 'Cidade dos Comboios' e alberga o Museu Nacional Ferroviário.",
+    "fonte": "Município do Entroncamento / Museu Ferroviário",
+    "factClusterId": "fc_geo_con_entroncamento_01"
+  },
+  {
+    "id": "GEO_CON_0020",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município ribatejano do distrito de Santarém («Alpiarça»), com 63,11 km² e célebre pela Casa dos Patudos de José Relvas, é constituído por uma única freguesia?",
+    "opcoes": [
+      "Almeirim",
+      "Chamusca",
+      "Cartaxo",
+      "Alpiarça"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alpiarça foi desanexada de Almeirim em 1914 por decreto do governo republicano.",
+    "fonte": "Município de Alpiarça / Casa dos Patudos",
+    "factClusterId": "fc_geo_con_alpiarca_freguesiaunica_01"
+  },
+  {
+    "id": "GEO_CON_0021",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que importante e populoso município do Grande Porto («Vila Nova de Gaia»), com mais de 300.000 habitantes na margem sul do Douro, é o terceiro município mais populoso do país e o maior do Norte de Portugal?",
+    "opcoes": [
+      "Vila Nova de Gaia",
+      "Porto",
+      "Matosinhos",
+      "Maia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gaia tem 15 quilómetros de praias com Bandeira Azul e alberga as centenárias Caves do Vinho do Porto.",
+    "fonte": "INE — Censos / Município de Gaia",
+    "factClusterId": "fc_geo_con_vilanovadegaia_populacao_01"
+  },
+  {
+    "id": "GEO_CON_0022",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Quantos municípios compõem a Área Metropolitana de Lisboa (AML), abrangendo ambas as margens do estuário do rio Tejo?",
+    "opcoes": [
+      "15 Municípios",
+      "18 Municípios (9 na margem norte e 9 na Península de Setúbal)",
+      "22 Municípios",
+      "12 Municípios"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os municípios da AML são: Lisboa, Amadora, Cascais, Loures, Mafra, Odivelas, Oeiras, Sintra, Vila Franca de Xira, Alcochete, Almada, Barreiro, Moita, Montijo, Palmela, Seixal, Sesimbra e Setúbal.",
+    "fonte": "Área Metropolitana de Lisboa / DGAL",
+    "factClusterId": "fc_geo_con_aml_18municipios_01"
+  },
+  {
+    "id": "GEO_CON_0023",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Quantos municípios compõem a Área Metropolitana do Porto (AMP), articulados em torno da bacia do rio Douro e do litoral norte?",
+    "opcoes": [
+      "14 Municípios",
+      "20 Municípios",
+      "17 Municípios",
+      "10 Municípios"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os 17 municípios da AMP incluem: Porto, Gaia, Matosinhos, Maia, Gondomar, Valongo, Santo Tirso, Trofa, Vila do Conde, Póvoa de Varzim, Arouca, Espinho, Santa Maria da Feira, Oliveira de Azeméis, Paredes, São João da Madeira e Vale de Cambra.",
+    "fonte": "Área Metropolitana do Porto / DGAL",
+    "factClusterId": "fc_geo_con_amp_17municipios_01"
+  },
+  {
+    "id": "GEO_CON_0024",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município ribatejano («Golegã»), banhado pelos rios Tejo e Almonda, é universalmente aclamado como a «Capital Nacional do Cavalo» acolhendo anualmente em novembro a secular Feira de São Martinho?",
+    "opcoes": [
+      "Almeirim",
+      "Chamusca",
+      "Coruche",
+      "Golegã"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Golegã acolhe os melhores criadores mundiais do cavalo puro-sangue lusitano no Largo do Arneiro.",
+    "fonte": "Município da Golegã / Feira Nacional do Cavalo",
+    "factClusterId": "fc_geo_con_golega_cavalo_01"
+  },
+  {
+    "id": "GEO_CON_0025",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que importante município do distrito de Santarém («Coruche»), com 1.115,7 km² na bacia do rio Sorraia, é conhecido como a «Capital Mundial da Cortiça» pela vasta extensão de montado de sobro e extração corticeira?",
+    "opcoes": [
+      "Coruche",
+      "Benavente",
+      "Salvaterra de Magos",
+      "Mora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Coruche acolhe o Observatório do Sobreiro e da Cortiça e extrai diariamente toneladas de cortiça no verão.",
+    "fonte": "Município de Coruche / Observatório do Sobreiro",
+    "factClusterId": "fc_geo_con_coruche_cortica_01"
+  },
+  {
+    "id": "GEO_CON_0026",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município minhoto no distrito de Braga («Fafe»), famoso pelo Museu da Emigração, pelas casas de 'Brasileiros de Torna-Viagem' e pelos troços do Rali de Portugal (como o mítico Salto da Pedra Sentada), é associado à célebre lenda «A Justiça de Fafe»?",
+    "opcoes": [
+      "Guimarães",
+      "Fafe",
+      "Vieira do Minho",
+      "Póvoa de Lanhoso"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A estátua da Justiça de Fafe na praça principal exibe uma figura com um varapau na mão simbolizando a justiça pelas próprias mãos.",
+    "fonte": "Município de Fafe / Turismo do Porto e Norte",
+    "factClusterId": "fc_geo_con_fafe_justica_01"
+  },
+  {
+    "id": "GEO_CON_0027",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que pitoresco município da Beira Alta no distrito da Guarda («Foz Côa» / Vila Nova de Foz Côa), no vale do rio Côa, é mundialmente famoso pelo maior museu a céu aberto de gravuras rupestres do Paleolítico Superior?",
+    "opcoes": [
+      "Mêda",
+      "Figueira de Castelo Rodrigo",
+      "Vila Nova de Foz Côa (Parque Arqueológico do Vale do Côa)",
+      "Pinhel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As gravuras do Côa foram salvas da inundação de uma barragem nos anos 1990 e declaradas Património Mundial da UNESCO em 1998.",
+    "fonte": "UNESCO / Fundação Côa Parque / Museu do Côa",
+    "factClusterId": "fc_geo_con_fozcoa_unesco_01"
+  },
+  {
+    "id": "GEO_CON_0028",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que importante e histórico município do Alto Douro Vinhateiro («Peso da Régua»), na confluência do rio Douro com o rio Corgo, acolhe o Museu do Douro e foi o centro histórico de despacho dos barcos rabelos com as pipas de Vinho do Porto?",
+    "opcoes": [
+      "Lamego",
+      "Pinhão / Alijó",
+      "São João da Pesqueira",
+      "Peso da Régua"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Régua foi elevada a cidade em 1985 e é o nó central de comunicação ferroviária e fluvial do Douro.",
+    "fonte": "Município de Peso da Régua / Museu do Douro",
+    "factClusterId": "fc_geo_con_pesodaregua_douro_01"
+  },
+  {
+    "id": "GEO_CON_0029",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município duriense no distrito de Viseu («São João da Pesqueira»), detém a maior área de vinha classificada como Património Mundial da UNESCO de todo o Alto Douro e o célebre miradouro de São Salvador do Mundo?",
+    "opcoes": [
+      "São João da Pesqueira",
+      "Tabuaço",
+      "Armamar",
+      "Penedono"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "São João da Pesqueira acolhe o Museu do Vinho e o miradouro do Cachão da Valeira onde o Barão de Forrester naufragou em 1861.",
+    "fonte": "Município de São João da Pesqueira / Museu do Vinho",
+    "factClusterId": "fc_geo_con_saojoaodapesqueira_01"
+  },
+  {
+    "id": "GEO_CON_0030",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município minhoto no distrito de Braga («Póvoa de Lanhoso»), dominado pelo Monte do Pilar e pelo imponente Castelo de Lanhoso onde D. Teresa se refugiou, é a capital nacional da:",
+    "opcoes": [
+      "Olaria de Barro Preto",
+      "Filigrana de Ouro e Prata (arte dos ourives e corações de Viana)",
+      "Cutelaria",
+      "Renda de Bilros"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Póvoa de Lanhoso concentra centenas de oficinas artesanais de filigrana certificada.",
+    "fonte": "Município da Póvoa de Lanhoso / Casa da Filigrana",
+    "factClusterId": "fc_geo_con_povoade_lanhoso_filigrana_01"
+  },
+  {
+    "id": "GEO_CON_0031",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município algarvio no sotavento («Castro Marim»), situado na foz do Guadiana e cercado pela Reserva Natural do Sapal, acolhe a histórica sede inicial dos Cavaleiros da Ordem de Cristo em 1319?",
+    "opcoes": [
+      "Alcoutim",
+      "Vila Real de Santo António",
+      "Castro Marim",
+      "Tavira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Castro Marim realiza anualmente os célebres 'Dias Medievais' dentro das muralhas do seu castelo.",
+    "fonte": "Município de Castro Marim / ICNF",
+    "factClusterId": "fc_geo_con_castromarim_01"
+  },
+  {
+    "id": "GEO_CON_0032",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município serrano do interior algarvio («Monchique»), com o pico da Fóia (902 metros) no topo da Serra de Monchique e as famosas Termas das Caldas de Monchique, é célebre pela aguardente de:",
+    "opcoes": [
+      "Figo",
+      "Alfarroba",
+      "Amêndoa Amarga",
+      "Medronho (Aguardente de Medronho de Monchique)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Monchique é o 'Jardim do Algarve' devido à abundante vegetação subtropical e água alcalina pura (pH 9,5).",
+    "fonte": "Município de Monchique / Turismo do Algarve",
+    "factClusterId": "fc_geo_con_monchique_medronho_01"
+  },
+  {
+    "id": "GEO_CON_0033",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que importante e cosmopolita município algarvio («Loulé»), o maior e mais populoso do Algarve com mais de 72.000 habitantes, abriga resorts de luxo internacionais como a Quinta do Lago e Vale do Lobo e o Festival MED?",
+    "opcoes": [
+      "Loulé",
+      "Faro",
+      "Albufeira",
+      "Portimão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Mercado Municipal de Loulé em estilo neoárabe com cúpulas vermelhas é um dos edifícios mais icónicos do sul do país.",
+    "fonte": "Município de Loulé / Turismo do Algarve",
+    "factClusterId": "fc_geo_con_loule_maioralgarve_01"
+  },
+  {
+    "id": "GEO_CON_0034",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município do Barlavento Algarvio («Aljezur»), no Parque Natural do Sudoeste Alentejano e Costa Vicentina, é famoso pelo Castelo árabe no topo da colina, praias selvagens como a Arrifana e Monte Clérigo e pela produção de:",
+    "opcoes": [
+      "Laranja do Algarve",
+      "Batata-doce de Aljezur (com Indicação Geográfica Protegida — IGP)",
+      "Arroz Carolino",
+      "Tomate Coração de Boi"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Batata-doce da variedade 'Lira' de Aljezur tem sabor doce característico devido ao microclima costeiro.",
+    "fonte": "Município de Aljezur / Associação de Produtores de Batata-Doce",
+    "factClusterId": "fc_geo_con_aljezur_batatadoce_01"
+  },
+  {
+    "id": "GEO_CON_0035",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município insular açoriano na Ilha do Pico («Madalena»), é a capital da Paisagem da Cultura da Vinha da Ilha do Pico classificada como Património Mundial da UNESCO com os seus currais de pedra vulcânica negra (lajidos)?",
+    "opcoes": [
+      "São Roque do Pico",
+      "Lajes do Pico",
+      "Madalena (Ilha do Pico)",
+      "Horta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O concelho da Madalena produz o famoso vinho licoroso Verdelho do Pico que era servido aos Czares da Rússia.",
+    "fonte": "UNESCO / Município da Madalena / Governo dos Açores",
+    "factClusterId": "fc_geo_con_madalena_pico_unesco_01"
+  },
+  {
+    "id": "GEO_CON_0036",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município açoriano na costa sul da Ilha do Pico («Lajes do Pico»), é a capital da baleação tradicional açoriana acolhendo o famoso Museu dos Baleeiros e a principal base de observação de baleias e golfinhos (whale watching)?",
+    "opcoes": [
+      "Madalena",
+      "São Roque",
+      "Velas",
+      "Lajes do Pico"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Museu dos Baleeiros nas Lajes do Pico preserva botes baleeiros de madeira, arpões e peças de 'scrimshaw' em dentes de cachalote.",
+    "fonte": "Museu dos Baleeiros / Município de Lajes do Pico",
+    "factClusterId": "fc_geo_con_lajesdopico_baleacao_01"
+  },
+  {
+    "id": "GEO_CON_0037",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município da Ilha de São Jorge nos Açores («Velas»), localizado na falésia com vista para o canal e a montanha do Pico, é a sede de produção do famoso:",
+    "opcoes": [
+      "Queijo São Jorge DOP (queijo de cura curada de sabor picante)",
+      "Queijo do Rabaçal",
+      "Queijo de Azeitão",
+      "Queijo da Ilha da Graciosa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Queijo São Jorge DOP é produzido com leite cru de vaca não pasteurizado na Uniqueijo segundo métodos introduzidos por colonos flamengos.",
+    "fonte": "Confraria do Queijo de São Jorge / Município de Velas",
+    "factClusterId": "fc_geo_con_velas_queijosaojorge_01"
+  },
+  {
+    "id": "GEO_CON_0038",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município da Ilha de São Miguel («Vila Franca do Campo»), antiga primeira capital dos Açores até ao catastrófico terramoto de 1522, é famoso pelo «Ilhéu de Vila Franca» (cratera vulcânica circular perfeita que acolhe o Red Bull Cliff Diving)?",
+    "opcoes": [
+      "Lagoa",
+      "Vila Franca do Campo",
+      "Povoação",
+      "Nordeste"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Vila Franca do Campo é também a terra natal das deliciosas 'Queijadas da Vila' conventuais.",
+    "fonte": "Município de Vila Franca do Campo / Turismo dos Açores",
+    "factClusterId": "fc_geo_con_vilafrancadocampo_01"
+  },
+  {
+    "id": "GEO_CON_0039",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho da Ilha de São Miguel («Ribeira Grande»), no litoral norte da ilha, acolhe as praias de surf de Santa Bárbara e a histórica Fábrica de Licores Eduardo Ferreira produtora do famoso licor açoriano:",
+    "opcoes": [
+      "Ginjinha de Óbidos",
+      "Licor Beirão",
+      "Licor de Maracujá Ezequiel",
+      "Brandymel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Ribeira Grande é a segunda maior cidade da ilha de São Miguel destacando-se pelo seu centro histórico em basalto.",
+    "fonte": "Município da Ribeira Grande / Turismo dos Açores",
+    "factClusterId": "fc_geo_con_ribeiragrande_acores_01"
+  },
+  {
+    "id": "GEO_CON_0040",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho da Ilha da Madeira («Câmara de Lobos»), situado junto ao imponente Cabo Girão (com a sua plataforma suspensa de vidro skywalk a 580 metros de altitude), foi imortalizado nas telas de pintura de Sir Winston Churchill em 1950?",
+    "opcoes": [
+      "Ribeira Brava",
+      "Ponta do Sol",
+      "Machico",
+      "Câmara de Lobos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Câmara de Lobos é a terra berço da 'Poncha da Madeira' e da pesca tradicional do peixe-espada preto.",
+    "fonte": "Município de Câmara de Lobos / Turismo da Madeira",
+    "factClusterId": "fc_geo_con_camaradelobos_churchill_01"
+  },
+  {
+    "id": "GEO_CON_0041",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que pitoresco concelho do norte da Ilha da Madeira («Santana»), classificado como Reserva da Biosfera pela UNESCO, é universalmente famoso pelas tradicionais casas triangulares com telhados de colmo de palha («Palheiros de Santana»)?",
+    "opcoes": [
+      "Santana (Reserva da Biosfera da UNESCO)",
+      "São Vicente",
+      "Porto Moniz",
+      "Machico"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As casas típicas de Santana eram caiadas de branco com portas e janelas azuis e vermelhas e o Parque Temático da Madeira situa-se no concelho.",
+    "fonte": "UNESCO / Município de Santana / Turismo da Madeira",
+    "factClusterId": "fc_geo_con_santana_palheiros_01"
+  },
+  {
+    "id": "GEO_CON_0042",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho no extremo noroeste da Ilha da Madeira («Porto Moniz»), é mundialmente célebre pelas suas espetaculares piscinas naturais de água salgada formadas por rochas vulcânicas de basalto negro constantemente renovadas pelo mar?",
+    "opcoes": [
+      "São Vicente",
+      "Porto Moniz (Piscinas Naturais Vulcânicas)",
+      "Ponta do Sol",
+      "Calheta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Porto Moniz é uma das maiores atrações turísticas da Madeira atraindo banhistas e amantes da natureza marinha.",
+    "fonte": "Município de Porto Moniz / Turismo da Madeira",
+    "factClusterId": "fc_geo_con_portomoniz_piscinas_01"
+  },
+  {
+    "id": "GEO_CON_0043",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico concelho da costa leste da Madeira («Machico»), foi o local do primeiro desembarque dos navegadores portugueses João Gonçalves Zarco e Tristão Vaz Teixeira em 1419, acolhendo a única praia de areia amarela importada da ilha?",
+    "opcoes": [
+      "Santa Cruz",
+      "Santana",
+      "Machico",
+      "Caniçal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Machico deve o seu nome à lenda medieval dos amantes ingleses Robert Machim e Ana d'Arfet.",
+    "fonte": "Município de Machico / Museu da Baleia (Caniçal)",
+    "factClusterId": "fc_geo_con_machico_1419_01"
+  },
+  {
+    "id": "GEO_CON_0044",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho do distrito de Aveiro («Ílhavo»), situado na Ria de Aveiro, abriga o Farol da Barra (o farol mais alto de Portugal com 62 metros), as casas coloridas de riscas da Costa Nova e o Museu Marítimo com aquário de bacalhaus?",
+    "opcoes": [
+      "Vagos",
+      "Murtosa",
+      "Ovar",
+      "Ílhavo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ílhavo é a capital histórica dos marinheiros e capitães da pesca do bacalhau nos mares da Terra Nova e Gronelândia.",
+    "fonte": "Museu Marítimo de Ílhavo / Município de Ílhavo",
+    "factClusterId": "fc_geo_con_ilhavo_faroldabarra_01"
+  },
+  {
+    "id": "GEO_CON_0045",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho do distrito de Aveiro («Ovar»), situado junto à Ria e ao mar, é famoso nacionalmente pelo tradicional Pão de Ló de Ovar húmido e cremoso e pelo Museu Vivo do Azulejo nas fachadas das suas casas?",
+    "opcoes": [
+      "Ovar (Capital do Azulejo)",
+      "Estarreja",
+      "Espinho",
+      "Santa Maria da Feira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Ló de Ovar possui Indicação Geográfica Protegida (IGP) e o Carnaval de Ovar é dos mais antigos do país.",
+    "fonte": "Município de Ovar / APPLO",
+    "factClusterId": "fc_geo_con_ovar_paodelo_01"
+  },
+  {
+    "id": "GEO_CON_0046",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que concelho do distrito de Aveiro («Santa Maria da Feira»), famoso pelo imponente Castelo da Feira de quatro torreões coroados por coruchéus cônicos, acolhe o maior evento medieval da Europa («Viagem Medieval em Terra de Santa Maria»)?",
+    "opcoes": [
+      "São João da Madeira",
+      "Santa Maria da Feira",
+      "Oliveira de Azeméis",
+      "Arouca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Viagem Medieval atrai anualmente mais de 500.000 visitantes recriando episódios da história de Portugal.",
+    "fonte": "Feira Viva / Município de Santa Maria da Feira",
+    "factClusterId": "fc_geo_con_santamariadafeira_castelo_01"
+  },
+  {
+    "id": "GEO_CON_0047",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município da Área Metropolitana do Porto («Arouca»), no distrito de Aveiro, abriga o Arouca Geopark da UNESCO (com as Pedras Parideiras da Castanheira e os Passadiços do Paiva) e a famosa ponte pedonal suspensa «516 Arouca»?",
+    "opcoes": [
+      "Vale de Cambra",
+      "Castelo de Paiva",
+      "Arouca",
+      "Sever do Vouga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A ponte '516 Arouca' tem 516 metros de vão suspensa a 175 metros de altura sobre a garganta do rio Paiva.",
+    "fonte": "Arouca Geopark / UNESCO / Município de Arouca",
+    "factClusterId": "fc_geo_con_arouca_516_01"
+  },
+  {
+    "id": "GEO_CON_0048",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município serrano de Trás-os-Montes no distrito de Vila Real («Montalegre»), no coração do Parque Nacional da Peneda-Gerês e terras de Barroso, celebra as célebres «Sextas-Feiras 13» com a Queimada e o Padre Fontes?",
+    "opcoes": [
+      "Boticas",
+      "Chaves",
+      "Valpaços",
+      "Montalegre (Terras de Barroso)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Barroso (Montalegre e Boticas) foi a primeira região de Portugal declarada Património Agrícola Mundial (GIAHS) pela FAO.",
+    "fonte": "FAO / Município de Montalegre / Ecomuseu de Barroso",
+    "factClusterId": "fc_geo_con_montalegre_barroso_01"
+  },
+  {
+    "id": "GEO_CON_0049",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que município transmontano («Boticas»), na região do Barroso, é mundialmente famoso pelo «Vinho dos Mortos», garrafas de vinho enterradas no chão de terra batida das adegas durante as Invasões Francesas de 1809?",
+    "opcoes": [
+      "Boticas (Vinho dos Mortos)",
+      "Montalegre",
+      "Ribeira de Pena",
+      "Murça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O povo enterrou o vinho para não ser saqueado pelas tropas de Soult, descobrindo depois que o vinho adquiriu qualidades excecionais de gás natural.",
+    "fonte": "Município de Boticas / Rota do Vinho dos Mortos",
+    "factClusterId": "fc_geo_con_boticas_vinhodosmortos_01"
+  },
+  {
+    "id": "GEO_CON_0050",
+    "tema": "Geografia",
+    "subtema": "Concelhos e Freguesias",
+    "pergunta": "Que histórico município transmontano («Murça»), no distrito de Vila Real, tem como símbolo heráldico e lendário a célebre escultura zoomórfica celta em granito erguida no jardim municipal conhecida como:",
+    "opcoes": [
+      "O Galo de Barcelos",
+      "O Touro de Guisando",
+      "A Porca de Murça (Berrão proto-histórico celta)",
+      "O Cão de Castro Laboreiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Porca de Murça é um monumento nacional pré-romano esculpido pelos povos galaico-lusitanos e dá nome a vinhos DOC Douro premiados.",
+    "fonte": "Município de Murça / DGPC",
+    "factClusterId": "fc_geo_con_porcademurca_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUS_BAN_0001",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que histórica banda de rock portuguesa fundada em Almada em 1978 por Zé Pedro, Tim, Kalú e Zé Leonel («Xutos & Pontapés»), autora de hinos nacionais como «Homem do Leme», «Não Sou o Único», «Minha Casinha» e «Chuva Dissolvente», é o maior símbolo do rock em português?",
+    "opcoes": [
+      "Xutos & Pontapés",
+      "GNR",
+      "UHF",
+      "Táxi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Xutos & Pontapés comemoraram mais de 45 anos de carreira ininterrupta atuando nos maiores palcos e festivais de Portugal.",
+    "fonte": "Dicionário da Música Portuguesa / Arquivo Blitz",
+    "factClusterId": "fc_mus_xutosepontapes_01"
+  },
+  {
+    "id": "MUS_BAN_0002",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que emblemática banda portuense de pop-rock («GNR — Grupo Novo Rock»), liderada pelo vocalista Rui Reininho e pelo compositor Tóli César Machado, compôs clássicos eternos como «Dunas», «Efectivamente», «Pronúncia do Norte» e «Sangue Oculto»?",
+    "opcoes": [
+      "Xutos & Pontapés",
+      "GNR (Grupo Novo Rock)",
+      "Clã",
+      "Ornatos Violeta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os GNR foram a primeira banda de rock portuguesa a encher um estádio de futebol em nome próprio (Estádio José Alvalade em 1992 com 40.000 pessoas).",
+    "fonte": "Arquivo Blitz / EMI-Valentim de Carvalho",
+    "factClusterId": "fc_mus_gnr_gruponovorock_01"
+  },
+  {
+    "id": "MUS_BAN_0003",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de rock de Almada liderada por António Manuel Ribeiro («UHF»), pioneira do «boom» do rock cantado em português em 1980 com o histórico single «Cavalos de Corrida» e o álbum «À Flor da Pele» («Rua do Carmo»), marcou a música nacional?",
+    "opcoes": [
+      "Xutos & Pontapés",
+      "Táxi",
+      "UHF (António Manuel Ribeiro)",
+      "Heróis do Mar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O tema 'Cavalos de Corrida' dos UHF em 1980 vendeu mais de 100.000 exemplares iniciando a febre do rock português.",
+    "fonte": "Dicionário do Rock Português / SPA",
+    "factClusterId": "fc_mus_uhf_cavalosdecorrida_01"
+  },
+  {
+    "id": "MUS_BAN_0004",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que mundialmente aclamado grupo musical português fundado em 1985 em Lisboa por Pedro Ayres Magalhães e Rodrigo Leão, com a voz cristalina de Teresa Salgueiro («Madredeus»), alcançou estrondoso sucesso internacional com álbuns como «Existir», «O Espírito da Paz» e a banda sonora do filme «Lisbon Story» de Wim Wenders?",
+    "opcoes": [
+      "Sétima Legião",
+      "Deolinda",
+      "Ala dos Namorados",
+      "Madredeus"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Madredeus venderam mais de três milhões de discos em todo o mundo atuando em salas como a Ópera de Sydney e Olympia de Paris com canções como 'O Pastor'.",
+    "fonte": "EMI Classics / Dicionário de Música Portuguesa",
+    "factClusterId": "fc_mus_madredeus_teresasalgueiro_01"
+  },
+  {
+    "id": "MUS_BAN_0005",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de heavy metal gótico da Brandoa (Amadora) fundada em 1992 e liderada pelo vocalista e escritor Fernando Ribeiro («Moonspell»), alcançou reconhecimento mundial com álbuns icónicos como «Wolfheart» (1995), «Irreligious» (1996) e os hinos «Opium» e «Alma Mater»?",
+    "opcoes": [
+      "Moonspell",
+      "Ramp",
+      "Bizarra Locomotiva",
+      "Heavenwood"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Moonspell são a banda de metal portuguesa mais famosa e internacional de sempre, com digressões mundiais na Europa, EUA, América Latina e Japão.",
+    "fonte": "Century Media / Napalm Records / SPA",
+    "factClusterId": "fc_mus_moonspell_fernandoribeiro_01"
+  },
+  {
+    "id": "MUS_BAN_0006",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que quarteto pop-acústico de Leiria fundado em 1996 («Silence 4»), liderado por David Fonseca e Sofia Lisboa, bateu o recorde de vendas de um álbum de estreia em Portugal com «Silence Becomes It» em 1998 (mais de 240.000 cópias e 6 platinas) com os temas «Borrow» e «My Friends»?",
+    "opcoes": [
+      "The Gift",
+      "Silence 4 (David Fonseca e Sofia Lisboa)",
+      "Toranja",
+      "Fingertips"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Silence 4 esgotaram por duas vezes o Pavilhão Atlântico e o Coliseu dos Recreios antes de David Fonseca iniciar a sua carreira a solo.",
+    "fonte": "Universal Music Portugal / Blitz",
+    "factClusterId": "fc_mus_silence4_borrow_01"
+  },
+  {
+    "id": "MUS_BAN_0007",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que consagrada banda de Alcobaça fundada em 1994 («The Gift»), liderada pela carismática vocalista Sónia Tavares e pelo teclista e compositor Nuno Gonçalves, conquistou o MTV Europe Music Award em 2005 e lançou sucessos como «Fácil de Entender», «Music» e «Driving You Slow»?",
+    "opcoes": [
+      "Silence 4",
+      "Amor Electro",
+      "The Gift",
+      "Clã"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "The Gift lançaram álbuns conceituados como 'Vinyl', 'AM-FM', 'Explode' e 'Altar' (este último produzido pelo lendário Brian Eno).",
+    "fonte": "La Folie / SPA / MTV",
+    "factClusterId": "fc_mus_thegift_soniatavares_01"
+  },
+  {
+    "id": "MUS_BAN_0008",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que genial e lendária banda de rock alternativo do Porto («Ornatos Violeta»), liderada por Manel Cruz e com Peixe, Nuno Prata, Kinorm e Elísio Donas, lançou apenas dois álbuns de estúdio magistrais («Cão!» em 1997 e «O Monstro Precisa de Amigos» em 1999) com hinos como «Ouvi Dizer» e «Capitão Romance»?",
+    "opcoes": [
+      "Pluto",
+      "Supernada",
+      "Mão Morta",
+      "Ornatos Violeta"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O álbum 'O Monstro Precisa de Amigos' é amplamente considerado pela crítica especializada como um dos melhores álbuns de sempre da música portuguesa.",
+    "fonte": "Polydor / Universal Music / Blitz",
+    "factClusterId": "fc_mus_ornatosvioleta_01"
+  },
+  {
+    "id": "MUS_BAN_0009",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que pioneiro grupo de hip-hop e rap-rock de Almada fundado em 1993 («Da Weasel»), liderado por Pacman (Carlão) e Virgul com Jay Jay, Quaresma e Guilherme Silva, arrastou multidões com álbuns como «Re-Definições» e os temas «Re-Tratamento», «Dialetos de Ternura» e «Duia»?",
+    "opcoes": [
+      "Da Weasel (A Doninha)",
+      "Mind da Gap",
+      "Dealema",
+      "Expensive Soul"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Da Weasel venceram o Best Portuguese Act da MTV em 2004 e 2007 e protagonizaram um regresso histórico no festival NOS Alive em 2022.",
+    "fonte": "EMI / Universal Music Portugal",
+    "factClusterId": "fc_mus_daweasel_carlao_01"
+  },
+  {
+    "id": "MUS_BAN_0010",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock de Vila Nova de Gaia fundada em 1992 e liderada pela expressiva voz de Manuela Azevedo e pelo compositor Hélder Gonçalves («Clã»), com letras de Carlos Tê e Sérgio Godinho, compôs êxitos como «Problema de Expressão», «Sopro do Coração» e «Dança do Ouro»?",
+    "opcoes": [
+      "The Gift",
+      "Clã (Manuela Azevedo e Hélder Gonçalves)",
+      "Ornatos Violeta",
+      "Deolinda"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Clã destacam-se pela inteligência poética e arranjos musicais sofisticados em álbuns como 'Lusoqualquercoisa', 'Lustro' e 'Véspera'.",
+    "fonte": "Warner Music Portugal / SPA",
+    "factClusterId": "fc_mus_cla_manuelaazevedo_01"
+  },
+  {
+    "id": "MUS_BAN_0011",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que influente banda pós-punk e new wave fundada em 1981 por Rui Pregal da Cunha, Pedro Ayres Magalhães e Paulo Pedro Gonçalves («Heróis do Mar»), causou sensação com a sua estética nacionalista sofisticada e o megaêxito «Amor» (single de platina em 1982) e «Paixão»?",
+    "opcoes": [
+      "Sétima Legião",
+      "Corpo Diplomático",
+      "Heróis do Mar",
+      "Rádio Macau"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Heróis do Mar redefiniram o pop moderno português e deram origem mais tarde aos projetos Madredeus, LX 90 e Resistência.",
+    "fonte": "PolyGram / Dicionário do Rock Português",
+    "factClusterId": "fc_mus_heroisdomar1981_01"
+  },
+  {
+    "id": "MUS_BAN_0012",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda portuense de new wave e pop-rock formada em 1979 por João Grande, Henrique Oliveira, Rodrigo Freitas e Rui Taborda («Táxi»), conquistou o primeiro Disco de Ouro do rock português com o álbum homónimo de 1981 e os temas «Chiclete», «Cairo» e «Rosete»?",
+    "opcoes": [
+      "GNR",
+      "Trabalhadores do Comércio",
+      "Salada de Frutas",
+      "Táxi (João Grande)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Chiclete' tornou-se um dos maiores sucessos de rádio de 1981 tocada nas pistas de dança de todo o país.",
+    "fonte": "PolyGram / Arquivo Blitz",
+    "factClusterId": "fc_mus_taxi_chiclete1981_01"
+  },
+  {
+    "id": "MUS_BAN_0013",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que histórica banda de música popular urbana e pós-punk de Lisboa fundada em 1982 («Sétima Legião»), com Pedro Oliveira, Rodrigo Leão, Nuno Cruz e Gabriel Gomes com gaita-de-foles e acordeão («Sete Mares» e «Por Quem Não Esqueci»), celebrou a alma marítima portuguesa?",
+    "opcoes": [
+      "Sétima Legião",
+      "Madredeus",
+      "Heróis do Mar",
+      "Delfins"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Sete Mares' (1987) dos Sétima Legião é um dos temas mais emblemáticos da música portuguesa de cariz épico.",
+    "fonte": "Fundação Atlântica / EMI",
+    "factClusterId": "fc_mus_setimalegiao_setemares_01"
+  },
+  {
+    "id": "MUS_BAN_0014",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop de Cascais fundada em 1984 por Miguel Ângelo e Fernando Cunha («Delfins»), dominou as rádios dos anos 1980 e 1990 com sucessos como «A Queda de Um Anjo», «1 Lugar ao Sol», «Saber Amar», «Nasce Selvagem» e «Sou Como Um Rio»?",
+    "opcoes": [
+      "Santos & Pecadores",
+      "Delfins (Miguel Ângelo e Fernando Cunha)",
+      "Pólo Norte",
+      "D'ZRT"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Delfins venderam mais de 500.000 discos ao longo da carreira e protagonizaram concertos épicos em arenas e estádios.",
+    "fonte": "BMG Portugal / 1Beat",
+    "factClusterId": "fc_mus_delfins_miguelangelo_01"
+  },
+  {
+    "id": "MUS_BAN_0015",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de folk-rock de Tomar fundada em 1987 e liderada por Carlos Moisés («Quinta do Bill»), apaixonou o país com o megaêxito «Os Filhos da Nação» (1994), «Se Te Amo», «No Trilho do Sol» e «Voa (Voa)»?",
+    "opcoes": [
+      "Kussondulola",
+      "Terra d'Água",
+      "Quinta do Bill (Carlos Moisés)",
+      "Dazkarieh"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Quinta do Bill misturou guitarras elétricas, violino e acordeão criando o estilo de folk-rock enérgico mais popular de Portugal.",
+    "fonte": "Farol Música / SPA / Município de Tomar",
+    "factClusterId": "fc_mus_quintadobill_filhosdanacao_01"
+  },
+  {
+    "id": "MUS_BAN_0016",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que requintado grupo musical fundado em 1992 por João Gil, Manuel Paulo, João Monge e a voz inconfundível de contratenor de Nuno Guerreiro («Ala dos Namorados»), imortalizou canções poéticas como «Solta-se o Beijo» (com Sara Tavares), «Fim do Mundo» e «Loucos de Lisboa»?",
+    "opcoes": [
+      "Rio Grande",
+      "Cabeças no Ar",
+      "Resistência",
+      "Ala dos Namorados (Nuno Guerreiro e Manuel Paulo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Ala dos Namorados casou o cancioneiro tradicional português, o fado e o pop lírico com arranjos harmónicos primorosos.",
+    "fonte": "EMI-Valentim de Carvalho / SPA",
+    "factClusterId": "fc_mus_aladosnamorados_01"
+  },
+  {
+    "id": "MUS_BAN_0017",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock de Cascais fundada em 1992 com a voz rouca e carismática de Olavo Bilac («Santos & Pecadores»), conquistou o país nos anos 1990 e 2000 com baladas inesquecíveis como «Não Voltarei a Ser Fiel», «Fala-me de Amor» e «Procura o Teu Bem»?",
+    "opcoes": [
+      "Santos & Pecadores (Olavo Bilac)",
+      "Pólo Norte",
+      "Delfins",
+      "Anjos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Olavo Bilac e os Santos & Pecadores foram presenças constantes nas bandas sonoras das primeiras grandes telenovelas portuguesas.",
+    "fonte": "União Lisboa / Sony Music",
+    "factClusterId": "fc_mus_santospecadores_olavobilac_01"
+  },
+  {
+    "id": "MUS_BAN_0018",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock de Belas (Sintra) fundada em 1992 por Miguel Gameiro («Pólo Norte»), alcançou estrondoso sucesso com o álbum «Expedição» (1995) e temas intemporais como «Lisboa», «Aprender a Ser Feliz», «Grito» e «De Quem É a Culpa?»?",
+    "opcoes": [
+      "Santos & Pecadores",
+      "Pólo Norte (Miguel Gameiro)",
+      "Toranja",
+      "Per7ume"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Lisboa' dos Pólo Norte tornou-se uma das mais belas e tocadas declarações de amor à capital portuguesa.",
+    "fonte": "BMG / Farol Música",
+    "factClusterId": "fc_mus_polonorte_miguelgameiro_01"
+  },
+  {
+    "id": "MUS_BAN_0019",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de rock do Porto fundada em 1994 e liderada pelo vocalista Miguel Guedes («Blind Zero»), pioneira do rock cantado em inglês em Portugal com álbuns como «Trigger» (1995) e «A Way to Bleed your Lover», venceu o primeiro MTV Europe Music Award de Best Portuguese Act em 2003?",
+    "opcoes": [
+      "The Gift",
+      "Silence 4",
+      "Blind Zero (Miguel Guedes)",
+      "Zen"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Miguel Guedes e os Blind Zero abriram concertos para bandas lendárias mundiais como Smashing Pumpkins e U2 em Portugal.",
+    "fonte": "NorteSul / Universal Music Portugal",
+    "factClusterId": "fc_mus_blindzero_miguelguedes_01"
+  },
+  {
+    "id": "MUS_BAN_0020",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de neo-fado e música popular de Lisboa formada em 2006 («Deolinda»), com a voz exuberante de Ana Bacalhau e composições de Pedro da Silva Martins («Canção ao Lado» e «Dois Selos e Um Carimbo»), compôs o hino da juventude precarizada «Parva Que Sou» estreado no Coliseu em 2011?",
+    "opcoes": [
+      "Amor Electro",
+      "A Naifa",
+      "Os Quatro e Meia",
+      "Deolinda (Ana Bacalhau)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Parva Que Sou' dos Deolinda transformou-se no símbolo musical das manifestações da 'Geração à Rasca' em 2011.",
+    "fonte": "iPlay / Sons da Lusofonia / SPA",
+    "factClusterId": "fc_mus_deolinda_anabacalhau_01"
+  },
+  {
+    "id": "MUS_BAN_0021",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda lisboeta de pop-rock eletrónico e eletro-fado fundada em 2010 por Tiago Pais Dias e pela carismática cantora Mariza Liz («Amor Electro»), conquistou discos de platina com os álbuns «Cai o Carmo e a Trindade» e êxitos como «A Máquina», «Rosa Sangue» e «Juntos Somos Mais Fortes»?",
+    "opcoes": [
+      "Amor Electro (Mariza Liz)",
+      "The Gift",
+      "Deolinda",
+      "Clã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Amor Electro recriaram clássicos da música portuguesa com arranjos modernos de guitarras e sintetizadores enérgicos.",
+    "fonte": "Edições Valentim de Carvalho / Universal Music",
+    "factClusterId": "fc_mus_amorelectro_marizaliz_01"
+  },
+  {
+    "id": "MUS_BAN_0022",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que consagrada banda de indie-rock e pop lisboeta fundada em 2009 («Capitão Fausto»), composta por Tomás Wallenstein, Domingos Coimbra, Manuel Palha, Salvador Seabra e Francisco Ferreira, assinou obras-primas aclamadas pela crítica como «Capitão Fausto Têm os Dias Contados» (2016) e «A Invenção do Dia Claro»?",
+    "opcoes": [
+      "B Fachada",
+      "Capitão Fausto (Tomás Wallenstein)",
+      "Os Pontos Negros",
+      "Glockenwise"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Capitão Fausto fundaram a editora independente Cuca Monga e são a principal referência do rock português do século XXI com hinos como 'Amanhã Tou Melhor'.",
+    "fonte": "Sony Music Portugal / Cuca Monga",
+    "factClusterId": "fc_mus_capitaofausto_01"
+  },
+  {
+    "id": "MUS_BAN_0023",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que revolucionário coletivo de música eletrónica e kuduro progressivo da Amadora e Lisboa fundado em 2006 («Buraka Som Sistema»), formado por Branko (João Barbosa), Riot, Conductor, Kalaf Epalanga e Blaya, conquistou festivais de todo o mundo com o álbum «Black Diamond» e o hit planetário «Wegue Wegue»?",
+    "opcoes": [
+      "Throes + The Shine",
+      "Batida",
+      "Buraka Som Sistema (Branko, Kalaf, Blaya)",
+      "Da Weasel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Buraka Som Sistema colocaram o som da periferia de Lisboa e dos subúrbios lusófonos no mapa da vanguarda da eletrónica mundial.",
+    "fonte": "Enchufada / Sony Music / Red Bull Music Academy",
+    "factClusterId": "fc_mus_burakasomsistema_01"
+  },
+  {
+    "id": "MUS_BAN_0024",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que supergrupo acústico acústico português criado em 1991 por Pedro Ayres Magalhães («Resistência»), que reuniu vozes e músicos de topo como Tim, Miguel Ângelo, Olavo Bilac, Fernando Cunha e Alexandre Frazão para cantar versões corais e acústicas dos maiores clássicos do pop-rock português («Palavras ao Vento» e «Nasce Selvagem»), foi:",
+    "opcoes": [
+      "Rio Grande",
+      "Cabeças no Ar",
+      "Fado Vadio",
+      "Resistência"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O projeto Resistência vendeu mais de meio milhão de cópias enchendo o Coliseu dos Recreios e o Estádio de Alvalade.",
+    "fonte": "BMG / Warner Music Portugal",
+    "factClusterId": "fc_mus_resistencia_palavrasaovento_01"
+  },
+  {
+    "id": "MUS_BAN_0025",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que supergrupo de música tradicional e popular portuguesa formado em 1996 por Rui Veloso, Tim, João Gil, Jorge Palma e Vitorino («Rio Grande»), lançou o álbum campeão de vendas com letras de João Monge e os temas inesquecíveis «Postal dos Correios» e «A Fisga»?",
+    "opcoes": [
+      "Rio Grande (1996)",
+      "Resistência",
+      "Cabeças no Ar",
+      "Os Quatro e Meia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O álbum de estreia dos Rio Grande vendeu mais de 200.000 cópias tornando-se quádrupla platina imediata em Portugal.",
+    "fonte": "EMI-Valentim de Carvalho / SPA",
+    "factClusterId": "fc_mus_riogrande1996_01"
+  },
+  {
+    "id": "MUS_BAN_0026",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que popular banda pop de Coimbra formada em 2013 por seis amigos universitários e médicos («Os Quatro e Meia»), autores de sucessos como «P'ra Frente É Que É Lisboa», «A Terra Gira» e «Olá Solidão», esgotou a MEO Arena e o Estádio Cidade de Coimbra?",
+    "opcoes": [
+      "D.A.M.A",
+      "Os Quatro e Meia",
+      "Átoa",
+      "Capitão Fausto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Quatro e Meia misturam influências da canção de Coimbra, pop e bossa nova com grande adesão de público intergeracional.",
+    "fonte": "Sony Music Portugal / Primeiro Foco",
+    "factClusterId": "fc_mus_osquatroemeia_01"
+  },
+  {
+    "id": "MUS_BAN_0027",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que boyband e grupo pop de Lisboa formado em 2006 por Francisco Maria Pereira (Kasha), Miguel Coimbra e Miguel Cristovinho («D.A.M.A — Deixa-me Aclarar a Mente Amigo»), bateu recordes de rádio e streaming com temas como «Às Vezes», «Luísa», «Não Faço Questão» e «O Amor Não É Somente Beijar»?",
+    "opcoes": [
+      "D'ZRT",
+      "4Taste",
+      "D.A.M.A",
+      "Anjos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os D.A.M.A colaboraram com artistas consagrados como Buba Espinho e Los Romeros aproximando o pop jovem do cante alentejano.",
+    "fonte": "Sony Music Portugal / Live Communication",
+    "factClusterId": "fc_mus_dama_kasha_01"
+  },
+  {
+    "id": "MUS_BAN_0028",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock saída da série Morangos com Açúcar em 2004 («D'ZRT»), composta por Angélico Vieira, Paulo Vintém, Cifrão e Edmundo Vieira, quebrou todos os recordes históricos de vendas com o tema «Para Mim Tanto Me Faz» e mais de 13 platinas no álbum de estreia?",
+    "opcoes": [
+      "4Taste",
+      "Just Girls",
+      "Excesso",
+      "D'ZRT"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Em 2023, os D'ZRT regressaram com uma digressão de doze concertos esgotados na MEO Arena e noutras salas do país.",
+    "fonte": "Farol Música / Universal Music",
+    "factClusterId": "fc_mus_dzrt2004_01"
+  },
+  {
+    "id": "MUS_BAN_0029",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que primeira «boyband» de grande sucesso da música pop portuguesa fundada em 1997 («Excesso»), com Gonzo, Melão, Duck, Carlos e João Portugal, parou Portugal com o tema «Eu Sou Aquele» e coreografias sincronizadas?",
+    "opcoes": [
+      "Excesso (Eu Sou Aquele)",
+      "D'ZRT",
+      "Milénio",
+      "Santa Maria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Excesso foram um fenómeno de histeria juvenil sem precedentes nos anos 1990 conquistando quádrupla platina.",
+    "fonte": "PolyGram Portugal / Arquivo Blitz",
+    "factClusterId": "fc_mus_excesso1997_01"
+  },
+  {
+    "id": "MUS_BAN_0030",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de eurodance e pop de Santa Maria da Feira fundada em 1997 e liderada pela vocalista Filipa Lemos («Santamaria»), vendeu mais de 1,5 milhões de discos em Portugal com êxitos retumbantes como «Eu Sei, Tu És...», «Tudo Pra Te Amar» e «Falésia do Amor»?",
+    "opcoes": [
+      "Nonstop",
+      "Santamaria (Filipa Lemos)",
+      "Onda Choc",
+      "Tentações"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Santamaria conquistaram 21 discos de platina e dois de ouro, sendo a banda de música de dança mais bem-sucedida de Portugal.",
+    "fonte": "Vidisco / SPA",
+    "factClusterId": "fc_mus_santamaria_filipalemos_01"
+  },
+  {
+    "id": "MUS_BAN_0031",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda punk e avant-garde de Braga fundada em 1984 por Adolfo Luxúria Canibal («Mão Morta»), com textos de crítica social implacável e teatralidade lírica em temas como «Budapeste», «Oub'Lá» e «Anarquista Duval», é a instituição do rock underground português?",
+    "opcoes": [
+      "Censurados",
+      "Peste & Sida",
+      "Mão Morta (Adolfo Luxúria Canibal)",
+      "Tara Perdida"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Adolfo Luxúria Canibal, formado em Direito, lidera os Mão Morta há quatro décadas com concertos performativos marcantes.",
+    "fonte": "NorteSul / Cobra Discos / Theatro Circo",
+    "factClusterId": "fc_mus_maomorta_adolfo_01"
+  },
+  {
+    "id": "MUS_BAN_0032",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que histórica banda punk-rock de Lisboa fundada em 1986 por João San Payo («Peste & Sida»), marcou a juventude com a irreverência e energia de canções como «Sol da Caparica», «Gingão» e «Portem-se Bem»?",
+    "opcoes": [
+      "Censurados",
+      "Tara Perdida",
+      "Kussondulola",
+      "Peste & Sida (João San Payo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Peste & Sida foram os grandes embaixadores do punk urbano lisboeta dos anos 1980 com cassetes e concertos no Rock Rendez-Vous.",
+    "fonte": "PolyGram / Dicionário do Rock Português",
+    "factClusterId": "fc_mus_peste_sida_01"
+  },
+  {
+    "id": "MUS_BAN_0033",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda punk seminal de Alvalade formada em 1988 por João Ribas («Censurados»), com temas explosivos como «Enquanto a Noite Cai», «Angústia» e «Srs. Políticos», marcou para sempre a história da música de protesto em Portugal?",
+    "opcoes": [
+      "Censurados (João Ribas)",
+      "Tara Perdida",
+      "Peste & Sida",
+      "Subensaios"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Após os Censurados, o carismático João Ribas fundou em 1995 os 'Tara Perdida', tornando-se o eterno padrinho do punk-rock nacional.",
+    "fonte": "El Tatu / Arquivo Blitz",
+    "factClusterId": "fc_mus_censurados_joaoribas_01"
+  },
+  {
+    "id": "MUS_BAN_0034",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda punk e hardcore de Lisboa fundada em 1995 por João Ribas («Tara Perdida»), que compôs hinos como «Desalinhado», «Falta de Ar» e «Nasci Hoje», é uma das formações mais influentes da música pesada portuguesa?",
+    "opcoes": [
+      "Censurados",
+      "Tara Perdida (João Ribas)",
+      "Devil in Me",
+      "Trinta & Um"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Tara Perdida abriram concertos para bandas internacionais como Offspring e NOFX e mantêm o legado de João Ribas vivo.",
+    "fonte": "Sony Music / Radar dos Sons",
+    "factClusterId": "fc_mus_taraperdida_01"
+  },
+  {
+    "id": "MUS_BAN_0035",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de reggae de matriz angolana e portuguesa fundada em Lisboa em 1992 por Janelo da Costa («Kussondulola»), popularizou o reggae em língua portuguesa com êxitos de verão como «Dançar no Verão», «Perigo de Morte» e «Amor É...»?",
+    "opcoes": [
+      "One Sun Tribe",
+      "Souls of Fire",
+      "Kussondulola (Janelo da Costa)",
+      "Mercado Negro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Kussondulola foram pioneiros do roots reggae em Portugal abrindo concertos de Jimmy Cliff e Ziggy Marley.",
+    "fonte": "EMI-Valentim de Carvalho / Blitz",
+    "factClusterId": "fc_mus_kussondulola_reggae_01"
+  },
+  {
+    "id": "MUS_BAN_0036",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop de Leça da Palmeira fundada em 1999 por Demo e New Max («Expensive Soul»), com uma fusão irresistível de soul, funk, R&B e hip-hop com grandes orquestras de metais em temas como «O Amor É Mágico», «Cupido» e «Que Saudade», é:",
+    "opcoes": [
+      "Mind da Gap",
+      "Da Weasel",
+      "HMB",
+      "Expensive Soul (New Max e Demo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Expensive Soul esgotaram duas noites na MEO Arena com a Jaguar Band celebrando a soul music cantada em português.",
+    "fonte": "NorteSul / Som Livre",
+    "factClusterId": "fc_mus_expensivesoul_01"
+  },
+  {
+    "id": "MUS_BAN_0037",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda portuguesa de soul, funk e R&B de Lisboa fundada em 2007 e liderada pelo cantor Héber Marques («HMB — Hold My Band»), compôs os sucessos contagiantes «O Amor É Assim» (com Carminho), «Feeling» e «Não Me Leves a Mal»?",
+    "opcoes": [
+      "HMB (Héber Marques)",
+      "Expensive Soul",
+      "Cais do Sodré Funk Connection",
+      "Black Mamba"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os HMB conquistaram o Globo de Ouro de Melhor Música com 'O Amor É Assim' e são presenças habituais nos grandes festivais.",
+    "fonte": "Farol Música / Warner Music",
+    "factClusterId": "fc_mus_hmb_hebermarques_01"
+  },
+  {
+    "id": "MUS_BAN_0038",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de blues, soul e funk de Lisboa fundada em 2010 por Tatanka (Iuri Menezes) e Ciro Cruz («The Black Mamba»), venceu o Festival RTP da Canção em 2021 com a canção «Love Is On My Side», alcançando a final da Eurovisão em Roterdão?",
+    "opcoes": [
+      "HMB",
+      "The Black Mamba (Tatanka)",
+      "The Lucky Duckies",
+      "Legendary Tigerman"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Love Is On My Side' foi a primeira canção integralmente cantada em inglês a representar Portugal na história do Festival Eurovisão.",
+    "fonte": "RTP / Universal Music Portugal",
+    "factClusterId": "fc_mus_theblackmamba_tatanka_01"
+  },
+  {
+    "id": "MUS_BAN_0039",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que projeto musical de fusão de fado e spoken-word com eletrónica fundado em Lisboa em 2004 por Luís Varatojo e João Aguardela com a voz de Mitó Mendes («A Naifa»), utilizou poemas de Adília Lopes, Ary dos Santos e Maria do Rosário Pedreira em álbuns aclamados como «Canções Subterrâneas»?",
+    "opcoes": [
+      "Deolinda",
+      "Oquestrada",
+      "A Naifa (Luís Varatojo e João Aguardela)",
+      "Amor Electro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Naifa revolucionou o cruzamento da poesia urbana contemporânea com o baixo elétrico e a guitarra portuguesa.",
+    "fonte": "Farol Música / Blitz",
+    "factClusterId": "fc_mus_anaifa_varatojo_01"
+  },
+  {
+    "id": "MUS_BAN_0040",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que original grupo de música de baile e swing acústico de Almada fundado em 2002 por Marta Miranda e Jean-Marc Pablo («Oquestrada» / ÓqueStrada), com instrumentos caseiros como a contrabacia de plástico, atuou na cerimónia do Prémio Nobel da Paz em Oslo em 2012?",
+    "opcoes": [
+      "Deolinda",
+      "Kumpania Algazarra",
+      "Terrakota",
+      "Oquestrada (Marta Miranda)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Oquestrada levou o conceito de 'tasca beat' e fado suburbano cosmopolita aos maiores festivais de world music internacionais com 'Oxigénio'.",
+    "fonte": "Sony Music / Nobel Peace Prize Concert",
+    "factClusterId": "fc_mus_oquestrada_tasca_01"
+  },
+  {
+    "id": "MUS_BAN_0041",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que lendária banda humorística de rock e música tradicional de Gondomar/Porto («Trabalhadores do Comércio»), liderada por Sérgio Castro e com o humorista João Rebocho, triunfou nos anos 1980 com canções em sotaque nortenho como «Chamem a Polícia», «A Galinha» e «Ta-se Bem»?",
+    "opcoes": [
+      "Trabalhadores do Comércio (Sérgio Castro)",
+      "GNR",
+      "Táxi",
+      "Salada de Frutas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Trabalhadores do Comércio foram pioneiros no uso assumido da fonética e expressões populares do Norte no rock nacional.",
+    "fonte": "PolyGram / Arquivo Blitz",
+    "factClusterId": "fc_mus_trabalhadoresdocomercio_01"
+  },
+  {
+    "id": "MUS_BAN_0042",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock dos anos 1980 («Salada de Frutas»), formada por Lena d'Água, Luís Pedro Fonseca e Zé da Ponte, assinou o single de platina de 1980 «Olhó Robot» com o célebre refrão «Olhó robot, olhó robot, tão bonitinho!»?",
+    "opcoes": [
+      "Doce",
+      "Salada de Frutas (Lena d'Água)",
+      "Trio Odemira",
+      "Roque Riba"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O single 'Olhó Robot' vendeu mais de 30.000 cópias em poucas semanas e lançou a carreira de Lena d'Água para o estrelato.",
+    "fonte": "Rossil / Dicionário do Rock Português",
+    "factClusterId": "fc_mus_saladadefrutas_lenadagua_01"
+  },
+  {
+    "id": "MUS_BAN_0043",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que primeira «girl group» de grande sucesso da música pop portuguesa fundada em 1979 por Tozé Brito («Doce»), composta por Laura Diogo, Helena Coelho, Fátima Padinha e Teresa Miguel, venceu o Festival RTP da Canção em 1982 com «Bem Bom» após êxitos como «Amanhã de Manhã» e «Ali Babá»?",
+    "opcoes": [
+      "Nonstop",
+      "Just Girls",
+      "Doce (1979-1987)",
+      "Cocktail"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Doce foram um fenómeno sociológico em Portugal quebrando barreiras com os seus fatos arrojados e coreografias no Festival da Eurovisão.",
+    "fonte": "PolyGram / Museu da RTP",
+    "factClusterId": "fc_mus_doce_tozebrito_01"
+  },
+  {
+    "id": "MUS_BAN_0044",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-rock e new wave de Oeiras fundada em 1983 por Xana (vocalista) e António Vaz («Rádio Macau»), assinou baladas intemporais da música portuguesa como «O Anzol», «A Morte do Poeta» e «Elevador da Glória»?",
+    "opcoes": [
+      "Heróis do Mar",
+      "Mler Ife Dada",
+      "Sétima Legião",
+      "Rádio Macau (Xana)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A voz inconfundível de Xana e o tema 'O Anzol' (1987) tornaram os Rádio Macau num dos grupos mais queridos da geração dos anos 1980.",
+    "fonte": "EMI / União Lisboa",
+    "factClusterId": "fc_mus_radiomacau_oanzol_01"
+  },
+  {
+    "id": "MUS_BAN_0045",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que histórica e vanguardista banda pop e pós-moderna portuguesa dos anos 1980 («Mler Ife Dada»), liderada pela cantora e artista plástica Anabela Duarte e por Nuno Rebelo, compôs o icónico êxito «Zuvi Zeva Novi» e o álbum «Coisas Que os Olhos Não Vêem»?",
+    "opcoes": [
+      "Mler Ife Dada (Anabela Duarte e Nuno Rebelo)",
+      "Rádio Macau",
+      "Pop Dell'Arte",
+      "Três Tristes Tigres"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os Mler Ife Dada marcaram a cena musical com uma estética teatral sofisticada e ritmos tropicais experimentais.",
+    "fonte": "PolyGram / Cinemateca Portuguesa",
+    "factClusterId": "fc_mus_mlerifedada_01"
+  },
+  {
+    "id": "MUS_BAN_0046",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda de vanguarda e art-rock de Lisboa fundada em 1985 pelo carismático vocalista João Peste («Pop Dell'Arte»), autora de faixas de culto como «Sonhos Pop», «Querelle» e «Ill Legitima», marcou o underground português?",
+    "opcoes": [
+      "Mão Morta",
+      "Pop Dell'Arte (João Peste)",
+      "Mler Ife Dada",
+      "Ena Pá 2000"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Os Pop Dell'Arte venceram o Prémio de Originalidade no Festival de Música Moderna do Rock Rendez-Vous em 1986.",
+    "fonte": "Ama Romanta / Blitz",
+    "factClusterId": "fc_mus_popdellarte_joaopeste_01"
+  },
+  {
+    "id": "MUS_BAN_0047",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que irreverente e satírica banda de rock comédia de Lisboa fundada pelo artista plástico e candidato presidencial Manuel João Vieira («Ena Pá 2000»), célebre por letras humorísticas e atuações de cabaret brejeiro, é:",
+    "opcoes": [
+      "Irmãos Catita",
+      "Corações com Coroa",
+      "Ena Pá 2000 (Manuel João Vieira)",
+      "Chaimite"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Manuel João Vieira lidera em paralelo os Ena Pá 2000, os Irmãos Catita e Corações com Coroa nos palcos nacionais.",
+    "fonte": "Discos Tigre / Blitz",
+    "factClusterId": "fc_mus_enapa2000_manueljoaovieira_01"
+  },
+  {
+    "id": "MUS_BAN_0048",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que banda pop-acústica de Lisboa fundada em 2001 e liderada pelo vocalista e compositor Tiago Bettencourt («Toranja»), atingiu os primeiros lugares do top nacional com o álbum «Esquissos» (2003) e os hinos «Carta» e «Fogo e Água»?",
+    "opcoes": [
+      "Silence 4",
+      "Fingertips",
+      "Pólo Norte",
+      "Toranja (Tiago Bettencourt)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O tema 'Carta' dos Toranja venceu o Globo de Ouro para Melhor Canção do Ano em 2004 e impulsionou a carreira a solo de Tiago Bettencourt.",
+    "fonte": "Universal Music Portugal / Blitz",
+    "factClusterId": "fc_mus_toranja_tiagobettencourt_01"
+  },
+  {
+    "id": "MUS_BAN_0049",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que histórica banda de música tradicional e de intervenção fundada em 1974 em Coimbra por José Niza, Afonso Dias e Fausto Bordalo Dias («Brigada Victor Jara»), recuperou os cantares de trabalho e instrumentos rurais de Trás-os-Montes e Alentejo ao longo de 50 anos de história?",
+    "opcoes": [
+      "Brigada Victor Jara",
+      "Danças Ocultas",
+      "Gaiteiros de Lisboa",
+      "Trovante"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Brigada Victor Jara é uma das mais respeitadas instituições da etnomusicologia e recriação do folclore vivo português.",
+    "fonte": "Mundo da Canção / Tradisom",
+    "factClusterId": "fc_mus_brigadavictorjara_01"
+  },
+  {
+    "id": "MUS_BAN_0050",
+    "tema": "Música",
+    "subtema": "Bandas Portuguesas",
+    "pergunta": "Que lendária banda de música popular de matriz poética e acústica fundada em Sagres em 1976 por Luís Represas, João Gil, Manuel Faria e João Nuno Represas («Trovante»), deu voz às esperanças da democracia com temas inesquecíveis como «Saudade», «Balada das Trouxas», «Fizeram os Dias Assim» e «Perdidamente»?",
+    "opcoes": [
+      "Resistência",
+      "Rio Grande",
+      "Trovante (Luís Represas e João Gil)",
+      "Ala dos Namorados"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O concerto de despedida dos Trovante no Estádio de Alvalade em 1991 e no Pavilhão Atlântico em 1999 reuniu dezenas de milhares de fãs num dos momentos mais emocionantes da música portuguesa.",
+    "fonte": "EMI-Valentim de Carvalho / Blitz / SPA",
+    "factClusterId": "fc_mus_trovante_luisrepresas_01"
+  }
+]

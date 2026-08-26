@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_DOP_0001",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que famoso e nobre queijo português com Denominação de Origem Protegida («Queijo Serra da Estrela DOP»), produzido com leite cru de ovelha das raças Bordaleira ou Churra Mondegueira, utiliza como coagulante vegetal natural a flor de:",
+    "opcoes": [
+      "Cardo (Cynara cardunculus)",
+      "Camomila",
+      "Alecrim",
+      "Hipericão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A flor do cardo confere a consistência cremosa amanteigada ou semidura e o sabor suave ligeiramente acidulado característico.",
+    "fonte": "ESTRELACOOP / DGADR / Qualifica Portugal",
+    "factClusterId": "fc_gast_dop_queijoserradaestrela_cardo_01"
+  },
+  {
+    "id": "GAST_DOP_0002",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que prestigiado queijo amanteigado com certificação DOP produzido na Península de Setúbal (nos concelhos de Palmela, Sesimbra e Setúbal) a partir de leite cru de ovelha coagulado com cardo («Queijo de Azeitão DOP»), é embalado em pequenas formas circulares de 250g?",
+    "opcoes": [
+      "Queijo de Nisa DOP",
+      "Queijo de Azeitão DOP",
+      "Queijo de Serpa DOP",
+      "Queijo de Évora DOP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Queijo de Azeitão foi criado no século XIX por Gaspar Henriques de Paiva que trouxe ovelhas e queijeiros da Serra da Estrela.",
+    "fonte": "ARCOLSA / DGADR",
+    "factClusterId": "fc_gast_dop_queijoazeitao_01"
+  },
+  {
+    "id": "GAST_DOP_0003",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo curado açoriano de pasta dura ou semidura com certificação DOP («Queijo São Jorge DOP»), produzido na Ilha de São Jorge exclusivamente com leite cru de vaca e maturado durante um mínimo de 3, 4 ou 7 meses, apresenta um travo tipicamente picante?",
+    "opcoes": [
+      "Queijo do Pico DOP",
+      "Queijo de Castelo Branco DOP",
+      "Queijo São Jorge DOP",
+      "Queijo do Rabaçal DOP"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Queijo São Jorge DOP pesa entre 8 e 12 kg por queijo e foi introduzido por colonos flamengos no século XV.",
+    "fonte": "Confraria do Queijo de São Jorge / Uniqueijo / DGADR",
+    "factClusterId": "fc_gast_dop_queijosaojorge_01"
+  },
+  {
+    "id": "GAST_DOP_0004",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que emblemático queijo alentejano com DOP («Queijo de Serpa DOP»), produzido nos concelhos do Baixo Alentejo a partir de leite cru de ovelha, caracteriza-se pela pasta semimole e pela crosta untada tradicionalmente com:",
+    "opcoes": [
+      "Vinho tinto",
+      "Mel e canela",
+      "Cera de abelha",
+      "Azeite e pimentão-doce / colorau"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cura lenta em queijarias tradicionais («roupeiros») confere ao Serpa um aroma forte e textura untuosa.",
+    "fonte": "DGADR / Qualifica Portugal / Município de Serpa",
+    "factClusterId": "fc_gast_dop_queijoserpa_01"
+  },
+  {
+    "id": "GAST_DOP_0005",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo histórico da região de Sicó / Coimbra com certificação DOP («Queijo do Rabaçal DOP»), produzido nos concelhos de Penela, Condeixa, Ansião, Soure e Pombal com leite de ovelha e cabra, deve o seu aroma único à alimentação dos animais com a planta autóctone:",
+    "opcoes": [
+      "Erva-de-Santa-Maria (Thymus mastichina)",
+      "Trevo de quatro folhas",
+      "Hortelã-da-ribeira",
+      "Rosmaninho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A erva-de-santa-maria abundante nas encostas calcárias da Serra de Sicó confere ao queijo um sabor herbáceo inconfundível.",
+    "fonte": "DGADR / Rota do Queijo do Rabaçal / Município de Penela",
+    "factClusterId": "fc_gast_dop_queijorabacal_01"
+  },
+  {
+    "id": "GAST_DOP_0006",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo transmontano de excelência com certificação DOP («Queijo Terrincho DOP»), de pasta semidura e cura mínima de 30 dias (ou 90 dias na versão «Velho»), é produzido exclusivamente com leite cru de ovelha da raça autóctone:",
+    "opcoes": [
+      "Merina Branca",
+      "Churra da Terra Quente (ou Churra Terrincha)",
+      "Campaniça",
+      "Bordaleira de Entre Douro e Minho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Terrincho é produzido nos concelhos de Bragança, Mirandela, Vila Flor, Torre de Moncorvo e Freixo de Espada à Cinta.",
+    "fonte": "ANCRAT / DGADR",
+    "factClusterId": "fc_gast_dop_queijoterrincho_01"
+  },
+  {
+    "id": "GAST_DOP_0007",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que afamado queijo do Alto Alentejo com DOP («Queijo de Nisa DOP»), produzido no distrito de Portalegre a partir de leite cru de ovelhas de raça Regional Merina coagulado com cardo, apresenta pasta semidura com pequenos olhos e cor branca-amarelada?",
+    "opcoes": [
+      "Queijo de Évora DOP",
+      "Queijo de Serpa DOP",
+      "Queijo de Nisa DOP",
+      "Queijo de Castelo Branco DOP"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Queijo de Nisa foi eleito um dos melhores queijos do mundo pela revista Wine Spectator e pelos World Cheese Awards.",
+    "fonte": "DGADR / Qualifica Portugal / Município de Nisa",
+    "factClusterId": "fc_gast_dop_queijonisa_01"
+  },
+  {
+    "id": "GAST_DOP_0008",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo alentejano com certificação DOP («Queijo de Évora DOP»), produzido no distrito de Évora a partir de leite de ovelha merina, é famoso tanto na versão de pasta semidura fresca como na versão curada dura em azeite («Queijo Duro de Évora»)?",
+    "opcoes": [
+      "Queijo de Nisa DOP",
+      "Queijo de Azeitão DOP",
+      "Queijo Picante da Beira Baixa",
+      "Queijo de Évora DOP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Queijo de Évora tem sabor levemente acidulado e picante nos queijos mais velhos e é consumido tradicionalmente com pão alentejano.",
+    "fonte": "DGADR / Confraria do Queijo de Évora",
+    "factClusterId": "fc_gast_dop_queijoevora_01"
+  },
+  {
+    "id": "GAST_DOP_0009",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que três variedades distintas compõem o prestigiado grupo com Denominação de Origem Protegida «Queijos da Beira Baixa DOP»?",
+    "opcoes": [
+      "Queijo de Castelo Branco, Queijo Amarelo da Beira Baixa e Queijo Picante da Beira Baixa",
+      "Queijo Serra da Estrela, Queijo de Nisa e Queijo do Rabaçal",
+      "Queijo de Serpa, Queijo de Évora e Queijo de Azeitão",
+      "Queijo Terrincho, Queijo de Cabra Transmontano e Queijo de São Jorge"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Queijo Picante da Beira Baixa é especialmente afamado pelo seu sabor picante intenso obtido através de uma cura prolongada com sal e leite cru.",
+    "fonte": "Associação de Produtores de Queijo da Beira Baixa / DGADR",
+    "factClusterId": "fc_gast_dop_queijosbeirabaixa_01"
+  },
+  {
+    "id": "GAST_DOP_0010",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo do Nordeste Transmontano com DOP («Queijo de Cabra Transmontano DOP»), de pasta extradura curada, aroma forte e sabor agradavelmente picante, é produzido a partir de leite cru de cabra da raça autóctone:",
+    "opcoes": [
+      "Cabra Charnequeira",
+      "Cabra de raça Serrana (ecótipo transmontano)",
+      "Cabra Algarvia",
+      "Cabra Serpentina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Queijo de Cabra Transmontano tem cura mínima de 60 dias podendo atingir a consistência ideal para ralar ou cortar em fatias finas.",
+    "fonte": "DGADR / Capriserra / Município de Mirandela",
+    "factClusterId": "fc_gast_dop_queijocabratransmontano_01"
+  },
+  {
+    "id": "GAST_DOP_0011",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que presunto de excelência com Denominação de Origem Protegida («Presunto de Barrancos DOP»), produzido no concelho raiano de Barrancos a partir de porco de raça alentejana alimentado a bolota, é curado exclusivamente ao ar natural sem recurso a fumo?",
+    "opcoes": [
+      "Presunto de Chaves IGP",
+      "Presunto de Vinhais IGP",
+      "Presunto de Barrancos DOP",
+      "Presunto de Santana da Serra IGP"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O microclima único e seco de Barrancos permite a cura natural lenta das pernas de porco preto durante mais de 24 a 36 meses.",
+    "fonte": "DGADR / Município de Barrancos / Qualifica Portugal",
+    "factClusterId": "fc_gast_dop_presuntobarrancos_01"
+  },
+  {
+    "id": "GAST_DOP_0012",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que histórico enchido de Trás-os-Montes com Indicação Geográfica Protegida («Alheira de Mirandela IGP»), criado no século XV por cristãos-novos para escapar à Inquisição simulando o consumo de porco, é preparado com carne de aves, pão de trigo, azeite transmontano e condimentos?",
+    "opcoes": [
+      "Farinheira de Estremoz",
+      "Chouriço Mouro",
+      "Morcela de Arroz",
+      "Alheira de Mirandela IGP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Alheira de Mirandela foi eleita uma das '7 Maravilhas da Gastronomia de Portugal' e detém selo IGP da União Europeia.",
+    "fonte": "DGADR / Município de Mirandela / Qualifica Portugal",
+    "factClusterId": "fc_gast_dop_alheiramirandela_01"
+  },
+  {
+    "id": "GAST_DOP_0013",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que carne bovina de montanha com Denominação de Origem Protegida («Carne Barrosã DOP»), originária das Terras de Barroso e Minho, provém de animais da raça Barrosã caracterizados pelos seus imponentes cornos em forma de:",
+    "opcoes": [
+      "Lira (cornos longos e recurvados em lira)",
+      "Caracol",
+      "V invertido",
+      "Pontas direitas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A raça Barrosã alimenta-se nas pastagens naturais e lameiros do Gerês e Barroso, produzindo carne de suculência e tenrura inigualáveis.",
+    "fonte": "CAPOLIB / DGADR / Município de Montalegre",
+    "factClusterId": "fc_gast_dop_carnebarrosa_lira_01"
+  },
+  {
+    "id": "GAST_DOP_0014",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que raça bovina autóctone do Parque Nacional da Peneda-Gerês («Carne Cachena da Peneda DOP»), célebre pela sua pequena estatura (a menor raça bovina de Portugal) e longos cornos, vive em regime semisselvagem nas serras da Peneda e Soajo?",
+    "opcoes": [
+      "Carne Maronesa DOP",
+      "Carne Cachena da Peneda DOP (Raça Cachena)",
+      "Carne Arouquesa DOP",
+      "Carne Mertolenga DOP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os bovinos cachenos alimentam-se de tojo, giesta e erva das serras graníticas produzindo carne de sabor rústico muito apreciado.",
+    "fonte": "DGADR / Associação de Criadores de Raça Cachena / Arcos de Valdevez",
+    "factClusterId": "fc_gast_dop_cachenadapeneda_01"
+  },
+  {
+    "id": "GAST_DOP_0015",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que carne bovina de montanha com Denominação de Origem Protegida («Carne Maronesa DOP»), de cor vermelha-escura e sabor requintado, é produzida a partir de animais de pelagem preta criados nas encostas das Serras do Marão e do Alvão?",
+    "opcoes": [
+      "Carne Mirandesa DOP",
+      "Carne Barrosã DOP",
+      "Carne Maronesa DOP (Raça Maronesa)",
+      "Carne Marinhoa DOP"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A raça Maronesa está na base dos famosos pratos tradicionais como a Posta Maronesa grelhada nas brasas com sal grosso.",
+    "fonte": "Associação de Criadores do Marão / DGADR / Vila Real",
+    "factClusterId": "fc_gast_dop_carnemaronesa_01"
+  },
+  {
+    "id": "GAST_DOP_0016",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que carne bovina de excelência do Planalto Mirandês com DOP («Carne Mirandesa DOP»), de raça Mirandesa com pelagem castanha clara e carrapelo na cabeça, é famosa pelo corte grelhado de vitela conhecido como «Posta Mirandesa»?",
+    "opcoes": [
+      "Carne Barrosã DOP",
+      "Carne Alentejana DOP",
+      "Carne Minhota",
+      "Carne Mirandesa DOP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Posta Mirandesa é um bife espesso da vazia ou alcatra temperado apenas com sal grosso e azeite com alho.",
+    "fonte": "Associação de Criadores de Bovinos de Raça Mirandesa / DGADR",
+    "factClusterId": "fc_gast_dop_carnemirandesa_posta_01"
+  },
+  {
+    "id": "GAST_DOP_0017",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que carne bovina com DOP («Carne Arouquesa DOP»), proveniente de animais criados nos socalcos das Serras da Freita, Arada e Montemuro, dá origem ao prato tradicional da «Vitela Assada no Forno de Lenha à Moda de Arouca»?",
+    "opcoes": [
+      "Carne Arouquesa DOP",
+      "Carne Cachena DOP",
+      "Carne Marinhoa DOP",
+      "Carne Brava do Ribatejo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A raça Arouquesa conquistou prestígio internacional desde o século XIX quando era exportada viva de Portugal para Inglaterra.",
+    "fonte": "ANCRA / Município de Arouca / DGADR",
+    "factClusterId": "fc_gast_dop_carnearouquesa_01"
+  },
+  {
+    "id": "GAST_DOP_0018",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que histórico enchido transmontano com IGP («Butelo de Vinhais IGP» / Bucho), feito com ossinhos tenros de costela e vértebra de porco bísaro envolvidos na bexiga ou estômago, é servido tradicionalmente com:",
+    "opcoes": [
+      "Grelos e arroz branco",
+      "Cascas ou cascas de feijão seco (cascas de feijão) e batata cozida",
+      "Favas guisadas",
+      "Migas de espargos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O 'Butelo com Cascas' é a iguaria rainha do Entrudo em Trás-os-Montes celebrada na Feira do Fumeiro de Vinhais.",
+    "fonte": "Município de Vinhais / Confraria do Butelo e da Casula",
+    "factClusterId": "fc_gast_dop_butelodevinhais_cascas_01"
+  },
+  {
+    "id": "GAST_DOP_0019",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que carne de porco de raça autóctone do Norte de Portugal com DOP («Carne de Bísaro Transmontano DOP»), de animais de grandes orelhas caídas e pernas compridas criados com castanhas, dá origem ao fumeiro certificado de Vinhais?",
+    "opcoes": [
+      "Porco Alentejano",
+      "Porco Malhado de Alcobaça",
+      "Porco Bísaro (Carne de Bísaro Transmontano DOP)",
+      "Javali Ibérico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Porco Bísaro foi salvo da extinção nos anos 1990 graças a programas de valorização do fumeiro transmontano.",
+    "fonte": "ANCSUB / DGADR / Município de Vinhais",
+    "factClusterId": "fc_gast_dop_porcobisaro_vinhais_01"
+  },
+  {
+    "id": "GAST_DOP_0020",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que famosa e doce variedade de pêra portuguesa com Denominação de Origem Protegida («Pêra Rocha do Oeste DOP»), descoberta por acaso em 1836 na Quinta do Rocha em Sintra pelo lavrador Pedro António Rocha, é um dos maiores sucessos de exportação agrícola de Portugal?",
+    "opcoes": [
+      "Pêra Pérola",
+      "Pêra Williams",
+      "Pêra Passa de Viseu",
+      "Pêra Rocha do Oeste DOP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Pêra Rocha é cultivada em 29 concelhos da região Oeste e exportada para o Brasil, Reino Unido, Alemanha e França.",
+    "fonte": "ANP (Associação Nacional de Produtores de Pêra Rocha) / DGADR",
+    "factClusterId": "fc_gast_dop_perarocha_oeste_1836_01"
+  },
+  {
+    "id": "GAST_DOP_0021",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que aromática e tradicional maçã da Beira Alta com Denominação de Origem Protegida («Maçã Bravo de Esmolfe DOP»), descoberta no século XVIII na aldeia de Esmolfe (Penalva do Castelo), destaca-se pela sua polpa branca muito sumarenta e aroma intenso?",
+    "opcoes": [
+      "Maçã Bravo de Esmolfe DOP",
+      "Maçã Camoesa",
+      "Maçã de Alcobaça",
+      "Maçã Porta da Loja"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Bravo de Esmolfe foi obtida a partir de uma árvore de semente silvestre e tem estudos que comprovam as suas propriedades antioxidantes.",
+    "fonte": "Município de Penalva do Castelo / DGADR",
+    "factClusterId": "fc_gast_dop_macabravodeesmolfe_01"
+  },
+  {
+    "id": "GAST_DOP_0022",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que maçã com Indicação Geográfica Protegida («Maçã de Alcobaça IGP»), produzida nos concelhos litorais da região Oeste entre a Serra dos Candeeiros e o mar, engloba variedades como Royal Gala, Golden Delicious e Fuji caracterizadas pela polpa crocante e equilíbrio agridoce?",
+    "opcoes": [
+      "Maçã de Armamar",
+      "Maçã de Alcobaça IGP",
+      "Maçã de Portalegre",
+      "Maçã Riscadinha de Palmela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O microclima da região de Alcobaça com noites frescas de brisa marítima confere às maçãs um teor elevado de açúcares naturais e cor viva.",
+    "fonte": "APMA (Associação dos Produtores de Maçã de Alcobaça) / DGADR",
+    "factClusterId": "fc_gast_dop_macadealcobaca_01"
+  },
+  {
+    "id": "GAST_DOP_0023",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que fruto doce e vermelho da Cova da Beira com Indicação Geográfica Protegida («Cereja do Fundão IGP»), produzido nas encostas soalheiras da Serra da Gardunha, é o ex-líbris frutícola da Beira Baixa?",
+    "opcoes": [
+      "Cereja de Resende",
+      "Cereja de São Julião",
+      "Cereja do Fundão IGP",
+      "Cereja de Alfândega da Fé"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cereja do Fundão atrai anualmente milhares de turistas na época da cereja em flor e da colheita em maio e junho.",
+    "fonte": "Município do Fundão / DGADR / Qualifica Portugal",
+    "factClusterId": "fc_gast_dop_cerejadofundao_01"
+  },
+  {
+    "id": "GAST_DOP_0024",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que fruto tropical único produzido na Ilha de São Miguel nos Açores com Denominação de Origem Protegida («Ananás dos Açores / São Miguel DOP»), é cultivado em estufas de vidro caiadas recorrendo à técnica tradicional das «fumeiras» para floração sincronizada?",
+    "opcoes": [
+      "Banana da Madeira",
+      "Maracujá da Madeira",
+      "Manga dos Açores",
+      "Ananás dos Açores / São Miguel DOP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O processo de cultivo dura cerca de 2 anos em camas quentes de matéria orgânica resultando num ananás de coroa pequena e polpa agridoce e aromática.",
+    "fonte": "Plantação de Ananases Augusto Arruda / SREA / DGADR",
+    "factClusterId": "fc_gast_dop_ananasdosacores_01"
+  },
+  {
+    "id": "GAST_DOP_0025",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que fruto subtropical com Indicação Geográfica Protegida («Banana da Madeira IGP»), cultivado nos socalcos da costa sul da Ilha da Madeira com rega por levadas, destaca-se pelo seu tamanho mais reduzido e sabor intensamente doce e perfumado?",
+    "opcoes": [
+      "Banana da Madeira IGP",
+      "Ananás dos Açores",
+      "Maracujá dos Açores",
+      "Papaia da Madeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Banana da Madeira (da variedade Musa acuminata Cavendish) beneficia de mais de 3.000 horas de sol por ano e solos vulcânicos ricos.",
+    "fonte": "GESBA / Governo Regional da Madeira / DGADR",
+    "factClusterId": "fc_gast_dop_bananadamadeira_01"
+  },
+  {
+    "id": "GAST_DOP_0026",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que importante e histórico doce conventual de Aveiro com Indicação Geográfica Protegida («Ovos Moles de Aveiro IGP»), foi o primeiro produto de confeitaria português a obter o selo de proteção IGP da União Europeia em 2008?",
+    "opcoes": [
+      "Pastel de Tentúgal IGP",
+      "Ovos Moles de Aveiro IGP (2008)",
+      "Pastel de Belém",
+      "Pão de Ló de Ovar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Ovos Moles são feitos exclusivamente com gemas de ovos frescos e calda de açúcar envolvidos em hóstia de formas marinhas (peixes, búzios, conchas).",
+    "fonte": "APOMA (Associação de Produtores de Ovos Moles de Aveiro) / DGADR",
+    "factClusterId": "fc_gast_dop_ovosmolesdeaveiro_01"
+  },
+  {
+    "id": "GAST_DOP_0027",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que famoso doce conventual do Baixo Mondego com Indicação Geográfica Protegida («Pastel de Tentúgal IGP»), criado pelas freiras carmelitas do Convento de Nossa Senhora do Carmo de Tentúgal (Montemor-o-Velho), é confecionado com uma massa folhada estendida até ficar transparente e recheio de ovos moles?",
+    "opcoes": [
+      "Pastel de Santa Clara",
+      "Cornucópia de Alcobaça",
+      "Pastel de Tentúgal IGP",
+      "Trouxa de Ovos das Caldas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A arte de estender a massa folhada manualmente numa sala fechada sem correntes de ar é um segredo transmitido há séculos em Tentúgal.",
+    "fonte": "Associação de Pasteleiros de Tentúgal / DGADR",
+    "factClusterId": "fc_gast_dop_pasteltentugal_01"
+  },
+  {
+    "id": "GAST_DOP_0028",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que salgado tradicional transmontano com Indicação Geográfica Protegida («Pastel de Chaves IGP»), criado em 1862 por Teresa Felizarda na cidade de Chaves, apresenta massa folhada fina e estaladiça em forma de meia-lua recheada com carne picada de vitela?",
+    "opcoes": [
+      "Empada de Arraiolos",
+      "Coxinha de Frango",
+      "Pastel de Vouzela",
+      "Pastel de Chaves IGP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Pastel de Chaves obteve a classificação IGP da União Europeia protegendo a receita autêntica flaviense.",
+    "fonte": "Município de Chaves / DGADR",
+    "factClusterId": "fc_gast_dop_pasteldechaves_01"
+  },
+  {
+    "id": "GAST_DOP_0029",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que bolo tradicional de massa fofa e cremosa com Indicação Geográfica Protegida («Pão de Ló de Ovar IGP»), cozido em formas de barro forradas com papel branco na cidade de Ovar, apresenta no centro um creme húmido de ovos?",
+    "opcoes": [
+      "Pão de Ló de Ovar IGP",
+      "Pão de Ló de Alfeizerão",
+      "Pão de Ló de Margaride (Felgueiras)",
+      "Bolo de Ançã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Ló de Ovar é certificado pela APPLO e utiliza apenas ovos, açúcar e farinha de trigo sem aditivos químicos.",
+    "fonte": "APPLO / Município de Ovar / DGADR",
+    "factClusterId": "fc_gast_dop_paodelo_ovar_01"
+  },
+  {
+    "id": "GAST_DOP_0030",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que castanha de Trás-os-Montes com Denominação de Origem Protegida («Castanha da Terra Fria DOP»), produzida nos soutos dos concelhos de Bragança, Vinhais, Macedo de Cavaleiros e Valpaços (variedades Longal, Judia e Côta), é a maior produtora nacional de castanha?",
+    "opcoes": [
+      "Castanha dos Soutos da Lapa DOP",
+      "Castanha da Terra Fria DOP",
+      "Castanha Marvão-Portalegre DOP",
+      "Castanha da Padrela DOP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A variedade Longal é a rainha das castanhas portuguesas pela facilidade em descascar e pelo sabor doce e textura firme.",
+    "fonte": "Arborea / DGADR / Município de Bragança",
+    "factClusterId": "fc_gast_dop_castanhaterrafria_01"
+  },
+  {
+    "id": "GAST_DOP_0031",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que azeite virgem extra de Trás-os-Montes com Denominação de Origem Protegida («Azeite de Trás-os-Montes DOP»), obtido a partir de azeitonas de variedades autóctones como Madural, Cobrançosa, Verdeal Transmontana e Cordovil, destaca-se pelo seu frutado fresco com notas de maçã e amêndoa?",
+    "opcoes": [
+      "Azeite de Moura DOP",
+      "Azeite do Alentejo Interior DOP",
+      "Azeite de Trás-os-Montes DOP",
+      "Azeite da Beira Interior DOP"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os olivais de encosta da Terra Quente e do vale do Douro produzem um dos azeites mais premiados do mundo em concursos internacionais.",
+    "fonte": "Associação de Olivicultores de Trás-os-Montes / DGADR",
+    "factClusterId": "fc_gast_dop_azeitetrasosmontes_01"
+  },
+  {
+    "id": "GAST_DOP_0032",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que histórico azeite do Baixo Alentejo com Denominação de Origem Protegida («Azeite de Moura DOP»), produzido a partir da variedade de azeitona Galega Vulgar e Cordovil nos concelhos de Moura, Serpa e Mourão, é famoso pelo seu aroma suave e doce com notas de maçã madura?",
+    "opcoes": [
+      "Azeite de Trás-os-Montes DOP",
+      "Azeite do Norte Alentejano DOP",
+      "Azeite da Beira Baixa",
+      "Azeite de Moura DOP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Moura tem uma tradição milenar olivarícia desde o tempo dos romanos e árabes acolhendo o Museu do Azeite (Lagar de Varas do Fojo).",
+    "fonte": "Cooperativa Agrícola de Moura e Barrancos / DGADR",
+    "factClusterId": "fc_gast_dop_azeitedemoura_01"
+  },
+  {
+    "id": "GAST_DOP_0033",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que sal marinho artesanal do Sotavento Algarvio com Denominação de Origem Protegida («Sal de Tavira DOP / Flor de Sal de Tavira DOP»), colhido à mão com rodos de madeira nas salinas da Ria Formosa, é 100% natural sem aditivos nem lavagem química?",
+    "opcoes": [
+      "Sal de Tavira DOP e Flor de Sal de Tavira DOP",
+      "Sal de Rio Maior",
+      "Sal de Aveiro",
+      "Sal de Castro Marim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Flor de Sal forma uma película cristalina delicada na superfície das salinas ao entardecer sendo rica em minerais e magnésio.",
+    "fonte": "Rui Simeão — Sal Tavira / DGADR / Parque Natural da Ria Formosa",
+    "factClusterId": "fc_gast_dop_saldetavira_flordesal_01"
+  },
+  {
+    "id": "GAST_DOP_0034",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que mel de montanha com Denominação de Origem Protegida («Mel da Serra da Estrela DOP»), produzido pelas abelhas da espécie *Apis mellifera iberiensis* a partir do néctar de urzes e castanheiros nos socalcos da Serra da Estrela, tem cor escura e sabor encorpado?",
+    "opcoes": [
+      "Mel da Serra de Monchique DOP",
+      "Mel da Serra da Estrela DOP",
+      "Mel do Barroso DOP",
+      "Mel dos Açores DOP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Mel da Serra da Estrela é um mel monofloral de urze ou multifloral com elevadas propriedades medicinais e nutritivas.",
+    "fonte": "DGADR / Associação de Apicultores da Serra da Estrela",
+    "factClusterId": "fc_gast_dop_melserraestrela_01"
+  },
+  {
+    "id": "GAST_DOP_0035",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que ameixas confitadas de Alto Alentejo com Denominação de Origem Protegida («Ameixas d'Elvas DOP»), preparadas na cidade de Elvas a partir de ameixas da variedade Rainha Cláudia Verde cozidas em calda sucessiva de açúcar ao longo de semanas, eram apreciadas pelos reis portugueses?",
+    "opcoes": [
+      "Ameixas de Silves",
+      "Figos de Torres Novas",
+      "Ameixas d'Elvas DOP",
+      "Passas de Viseu"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Ameixas d'Elvas foram premiadas na Exposição Universal de Paris de 1900 e mantêm o fabrico artesanal familiar.",
+    "fonte": "Fábrica Museu Ameixas d'Elvas / DGADR / Município de Elvas",
+    "factClusterId": "fc_gast_dop_ameixasdelvas_01"
+  },
+  {
+    "id": "GAST_DOP_0036",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que variedade de arroz português com Indicação Geográfica Protegida («Arroz Carolino das Lezírias do Ribatejo IGP»), cultivado nos solos aluviais férteis dos estuários dos rios Tejo e Sorraia, é o arroz por excelência para a confeção de pratos caldosos tradicionais (como arroz de marisco ou arroz de pato)?",
+    "opcoes": [
+      "Arroz Agulha do Sado",
+      "Arroz Basmati",
+      "Arroz Vaporizado",
+      "Arroz Carolino das Lezírias do Ribatejo IGP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Arroz Carolino tem grande capacidade de absorção dos temperos e caldos mantendo o grão aveludado e cremoso sem empapar.",
+    "fonte": "Orivárzea / Companhia das Lezírias / DGADR",
+    "factClusterId": "fc_gast_dop_arrozcarolino_ribatejo_01"
+  },
+  {
+    "id": "GAST_DOP_0037",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que enchido tradicional do Alto Alentejo com Indicação Geográfica Protegida («Farinheira de Estremoz e Borba IGP»), preparado com gordura de porco alentejano, farinha de trigo, pimentão-doce, vinho branco e alho, é fumado lentamente em fumeiro de azinho?",
+    "opcoes": [
+      "Farinheira de Estremoz e Borba IGP",
+      "Farinheira de Lamego",
+      "Alheira de Mirandela",
+      "Maranho da Sertã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Farinheira de Estremoz e Borba é ingrediente essencial no Cozido à Portuguesa e nos Ovos Mexidos com Farinheira.",
+    "fonte": "DGADR / Município de Estremoz / Qualifica Portugal",
+    "factClusterId": "fc_gast_dop_farinheiraestremoz_01"
+  },
+  {
+    "id": "GAST_DOP_0038",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que enchido nobre de porco preto de Portalegre com Indicação Geográfica Protegida («Paio de Portalegre IGP» e «Painho de Portalegre IGP»), curado com lenha de azinho e carvalho na Serra de São Mamede, é considerado o topo de gama do fumeiro alentejano?",
+    "opcoes": [
+      "Salpicão de Chaves",
+      "Paio de Portalegre IGP",
+      "Paio de Beja",
+      "Morcela de Estremoz"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O fumeiro de Portalegre combina carne nobre de lombo de porco alentejano marinada em vinho e alho.",
+    "fonte": "DGADR / Município de Portalegre",
+    "factClusterId": "fc_gast_dop_paiodeportalegre_01"
+  },
+  {
+    "id": "GAST_DOP_0039",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que doce conventual açoriano tradicional com Indicação Geográfica Protegida («Queijadas da Graciosa IGP»), em formato de flor estrelada de massa fina e crocante recheada com leite, ovos, açúcar e canela, é a iguaria símbolo da Ilha Graciosa?",
+    "opcoes": [
+      "Queijadas de Sintra",
+      "Queijadas de Vila Franca",
+      "Queijadas da Graciosa IGP",
+      "Dona Amélia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As Queijadas da Graciosa receberam o selo IGP em 2015 sendo exportadas da 'Ilha Branca' para o mundo inteiro.",
+    "fonte": "Fábrica das Queijadas da Graciosa / SREA / DGADR",
+    "factClusterId": "fc_gast_dop_queijadasdagraciosa_01"
+  },
+  {
+    "id": "GAST_DOP_0040",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que citrinos doces e sumarentos com Indicação Geográfica Protegida («Citrinos do Algarve IGP»), englobam as laranjas das variedades Newhall, Dalmau e Valência Late e as clementinas produzidas nos pomares solarengos de Silves, Tavira e Faro?",
+    "opcoes": [
+      "Laranja de Setúbal",
+      "Laranja da Vidigueira",
+      "Limão de Mafra",
+      "Citrinos do Algarve IGP (Laranjas do Algarve)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Silves é considerada a Capital da Laranja e o Algarve produz mais de 80% dos citrinos de Portugal.",
+    "fonte": "Uniprofruta / DGADR / Município de Silves",
+    "factClusterId": "fc_gast_dop_citrinosdoalgarve_01"
+  },
+  {
+    "id": "GAST_DOP_0041",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo açoriano de leite cru de vaca com Denominação de Origem Protegida («Queijo do Pico DOP»), produzido na Ilha do Pico com cura mínima de 20 dias, apresenta pasta mole ou semimole untuosa, cor amarelada e sabor salgado com ligeiro amargor característico?",
+    "opcoes": [
+      "Queijo do Pico DOP",
+      "Queijo de São Jorge DOP",
+      "Queijo Vaquinha",
+      "Queijo do Topo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Queijo do Pico é produzido há séculos pelas famílias de lavradores da ilha montanha a partir das pastagens de altitude.",
+    "fonte": "DGADR / SREA / Confraria do Queijo do Pico",
+    "factClusterId": "fc_gast_dop_queijodopico_01"
+  },
+  {
+    "id": "GAST_DOP_0042",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que histórico enchido transmontano de lombo de porco com Indicação Geográfica Protegida («Salpicão de Vinhais IGP» / Salpicão de Chaves), marinado com vinho tinto maduro ou verde tinto, alho, louro e pimentão, é fumado com lenha de carvalho e castanheiro?",
+    "opcoes": [
+      "Chouriço de Sangue",
+      "Salpicão de Vinhais IGP",
+      "Morcela de Cozer",
+      "Linguiça de Bragança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Salpicão de Vinhais utiliza a peça inteira do lombo de porco bísaro sendo consumido cru em fatias muito finas.",
+    "fonte": "Município de Vinhais / DGADR",
+    "factClusterId": "fc_gast_dop_salpicaodevinhais_01"
+  },
+  {
+    "id": "GAST_DOP_0043",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que bolo tradicional de Natal e celebrações da Madeira com Indicação Geográfica («Bolo de Mel da Madeira»), confecionado com melaço de cana-de-açúcar da Madeira, especiarias (noz-moscada, cravinho, canela, erva-doce) e frutos secos, tem a tradição de ser partido à mão e não à faca?",
+    "opcoes": [
+      "Bolo-Rei de Lisboa",
+      "Broa de Avintes",
+      "Bolo de Mel da Madeira",
+      "Folar de Chaves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bolo de Mel da Madeira tem uma capacidade excecional de conservação podendo durar até um ano mantendo a humidade e sabor aromático.",
+    "fonte": "Governo Regional da Madeira / DGADR",
+    "factClusterId": "fc_gast_dop_bolodemeldamadeira_01"
+  },
+  {
+    "id": "GAST_DOP_0044",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que doce conventual histórico da Ilha Terceira nos Açores («Bolo Dona Amélia»), confecionado com melaço de cana, canela, noz-moscada e passas, foi oferecido em 1901 pelos terceirenses à Rainha D. Amélia de Orleães aquando da visita régia aos Açores?",
+    "opcoes": [
+      "Queijadas da Graciosa",
+      "Bolo Lêvedo das Furnas",
+      "Esperanças de São Jorge",
+      "Bolo Dona Amélia (Ilha Terceira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O doce chamava-se originalmente 'Bolo das Índias' sendo rebatizado em homenagem à rainha consorte de Portugal.",
+    "fonte": "Município de Angra do Heroísmo / Turismo dos Açores",
+    "factClusterId": "fc_gast_dop_bolodonaamelia_1901_01"
+  },
+  {
+    "id": "GAST_DOP_0045",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que pão tradicional doce e fofo açoriano cozido em chapa quente («Bolo Lêvedo das Furnas»), originário da freguesia das Furnas (concelho da Povoação, São Miguel), é consumido com manteiga açoriana, compotas ou hambúrgueres?",
+    "opcoes": [
+      "Bolo Lêvedo das Furnas",
+      "Broa de Milho do Minho",
+      "Pão de Mafra",
+      "Pão Alentejano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Bolo Lêvedo tem massa enriquecida com ovos, leite e açúcar levedada lentamente e assada em sertã polvilhada com farinha.",
+    "fonte": "Turismo dos Açores / Município da Povoação",
+    "factClusterId": "fc_gast_dop_bololevedofurnas_01"
+  },
+  {
+    "id": "GAST_DOP_0046",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que cabrito jovem com Indicação Geográfica Protegida («Cabrito do Barroso IGP»), criado em pastoreio extensivo pelas serras de Montalegre e Boticas a partir de cabras de raça Brava ou Serrana alimentadas com tojo e carqueja, é a carne de eleição da Páscoa transmontana?",
+    "opcoes": [
+      "Cabrito do Alentejo",
+      "Cabrito do Barroso IGP",
+      "Borrego da Serra da Estrela",
+      "Leitão de Negrais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cabrito do Barroso é assado em forno de lenha com arroz de forno ou grelhado na brasa com batatas a murro.",
+    "fonte": "CAPOLIB / DGADR / Município de Montalegre",
+    "factClusterId": "fc_gast_dop_cabritodobarroso_01"
+  },
+  {
+    "id": "GAST_DOP_0047",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que borrego alentejano com Indicação Geográfica Protegida («Borrego de Montemor-o-Novo IGP»), produzido a partir de ovelhas de raça Merina criadas no montado alentejano, dá origem às afamadas «Costeletas de Borrego Fritas» e ao «Ensopado de Borrego»?",
+    "opcoes": [
+      "Borrego do Nordeste Transmontano",
+      "Cabrito da Gralheira",
+      "Borrego de Montemor-o-Novo IGP",
+      "Borrego do Rabaçal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Borrego de Montemor-o-Novo beneficia das ervas aromáticas espontâneas do montado alentejano como o poejo e tomilho.",
+    "fonte": "APORMOR / Município de Montemor-o-Novo / DGADR",
+    "factClusterId": "fc_gast_dop_borregomontemornovo_01"
+  },
+  {
+    "id": "GAST_DOP_0048",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que queijo misto de ovelha e cabra com Indicação Geográfica Protegida («Queijo Mestiço de Tolosa IGP»), de pasta semimole a dura e cor alaranjada na casca, é produzido na freguesia de Tolosa (concelho de Nisa, Alto Alentejo)?",
+    "opcoes": [
+      "Queijo de Azeitão",
+      "Queijo de Nisa DOP",
+      "Queijo de Tomar",
+      "Queijo Mestiço de Tolosa IGP"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Mestiço de Tolosa combina o leite gordo de ovelha com a acidez fresca do leite de cabra da região de Nisa.",
+    "fonte": "DGADR / Município de Nisa",
+    "factClusterId": "fc_gast_dop_mesticotolosa_01"
+  },
+  {
+    "id": "GAST_DOP_0049",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que importante e histórico pão escuro de centeio e milho («Broa de Avintes»), produzido há séculos na freguesia de Avintes (Vila Nova de Gaia) cozido lentamente durante 5 a 6 horas em forno de lenha, tem textura húmida e densa e sabor agridoce?",
+    "opcoes": [
+      "Broa de Avintes",
+      "Broa de Milho de Viana",
+      "Pão Alentejano",
+      "Pão de Rio Maior"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Broa de Avintes era levada nos barcos rabelos e celebrizou a 'Festa da Broa de Avintes' celebrada todos os anos em Gaia.",
+    "fonte": "Confraria da Broa de Avintes / Município de Gaia",
+    "factClusterId": "fc_gast_dop_broadeavintes_01"
+  },
+  {
+    "id": "GAST_DOP_0050",
+    "tema": "Gastronomia",
+    "subtema": "Produtos DOP & IGP",
+    "pergunta": "Que tradicional pão de trigo e centeio com crosta estaladiça polvilhada de farinha e miolo fofo («Pão de Mafra»), cozido a lenha na região saloia de Mafra desde o tempo dos fornos comunitários, é um dos pães regionais mais consumidos na Grande Lisboa?",
+    "opcoes": [
+      "Broa de Avintes",
+      "Pão de Padronelo",
+      "Pão de Mafra",
+      "Pão de Gimonde"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Pão de Mafra tem alto teor de hidratação e fermentação prolongada o que lhe confere frescura e conservação por vários dias.",
+    "fonte": "Associação de Produtores de Pão de Mafra / Município de Mafra",
+    "factClusterId": "fc_gast_dop_paodemafra_01"
+  }
+]

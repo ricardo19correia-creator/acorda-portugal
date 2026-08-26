@@ -12,6 +12,7 @@ import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { PlayerCard, type UserProfile } from './player-card'
+import { ECONOMY_CONFIG } from '@/src/data/economy'
 import { cn } from '@/lib/utils'
 import {
   Coins,
@@ -47,7 +48,8 @@ function createDefaultUserProfile(user: User): UserProfile {
     photoURL: user.photoURL ?? '',
     level: 1,
     xp: 0,
-    euros: 100,
+    euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+    coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     district: '',
     gamesPlayed: 0,
     correctAnswers: 0,

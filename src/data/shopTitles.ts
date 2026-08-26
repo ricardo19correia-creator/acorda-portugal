@@ -282,11 +282,11 @@ export const TITLE_SHOP_CATALOG: TitleItem[] = [
   // ============================================================================
   // DISTRITO (5 TÍTULOS)
   // ============================================================================
-  { id: 'tit_dist_1', name: 'Orgulho do Distrito', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 300, rarity: 'Comum', badgeColor: getTitleRarityBadge('Comum') },
-  { id: 'tit_dist_2', name: 'Representante Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 800, rarity: 'Raro', badgeColor: getTitleRarityBadge('Raro') },
-  { id: 'tit_dist_3', name: 'Campeão Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 1800, rarity: 'Épico', badgeColor: getTitleRarityBadge('Épico') },
-  { id: 'tit_dist_4', name: 'Rei do Distrito', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 3000, rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
-  { id: 'tit_dist_5', name: 'Lenda Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 5000, rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
+  { id: 'tit_dist_1', name: 'Orgulho do Distrito', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 1000, rarity: 'Comum', badgeColor: getTitleRarityBadge('Comum') },
+  { id: 'tit_dist_2', name: 'Representante Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 2500, rarity: 'Raro', badgeColor: getTitleRarityBadge('Raro') },
+  { id: 'tit_dist_3', name: 'Campeão Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 3500, rarity: 'Épico', badgeColor: getTitleRarityBadge('Épico') },
+  { id: 'tit_dist_4', name: 'Rei do Distrito', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 5000, rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
+  { id: 'tit_dist_5', name: 'Lenda Distrital', categoryKey: 'distrito', categoryTitle: 'Distrito', group: 'distrito', price: 10000, rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
 
   // ============================================================================
   // TÍTULOS EXCLUSIVOS POR MÉRITO & CONQUISTAS (price: null)

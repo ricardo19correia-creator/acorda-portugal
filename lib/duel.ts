@@ -18,8 +18,11 @@ import {
   onSnapshot,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
-import { ALL_QUIZ_QUESTIONS, type QuizQuestion } from '@/lib/game-data'
+import { QuestionRegistry } from '@/lib/question-system/registry'
+import { selectBalancedMatchQuestions, shuffleQuestions } from '@/src/lib/questionEngine'
+import type { QuizQuestion } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
+import { ECONOMY_CONFIG, calculateLevelUpCoinReward } from '@/src/data/economy'
 import { QUESTION_TIME_MS } from '@/config/quiz'
 import { getArenaById, getRandomArena, OFFICIAL_ARENAS } from '@/src/data/arenas'
 import { getEmoteById, type EmoteItem } from '@/src/data/emotes'
@@ -198,28 +201,29 @@ function shuffleArray<T>(array: T[]): T[] {
 
 // Select 10 distinct, varied questions with deterministic option orders
 export function generateDuelQuestions(count = 10): DuelQuestion[] {
-  const pool = shuffleArray(ALL_QUIZ_QUESTIONS)
-  const selected = pool.slice(0, Math.min(count, pool.length))
+  const pool = QuestionRegistry.getInstance().getJogarTudo()
+  const selected = selectBalancedMatchQuestions(pool, count, new Set(), true)
 
   return selected.map((q) => {
-    const shuffledOptions = shuffleArray(q.options)
-    const correctOption = shuffledOptions.find((opt) => opt.key === q.correct)
+    const rawOptions = q.options || []
+    const correctText = rawOptions[q.correctAnswer] || rawOptions[0] || ''
 
-    const remappedOptions = shuffledOptions.map((opt, idx) => ({
+    const shuffledOptions = shuffleQuestions(rawOptions)
+    const remappedOptions = shuffledOptions.map((optText, idx) => ({
       key: ['A', 'B', 'C', 'D'][idx] as 'A' | 'B' | 'C' | 'D',
-      text: opt.text,
+      text: optText,
     }))
 
     const newCorrectKey =
-      remappedOptions.find((opt) => opt.text === correctOption?.text)?.key ?? 'A'
+      remappedOptions.find((opt) => opt.text === correctText)?.key ?? 'A'
 
     return {
-      id: (q as any).id || (q as any).question || crypto.randomUUID(),
+      id: q.id,
       question: q.question,
       category: q.category,
       options: remappedOptions,
       correct: newCorrectKey,
-      explanation: q.explanation,
+      explanation: q.explanation || `Resposta correta: ${correctText}`,
     }
   })
 }
@@ -1090,12 +1094,13 @@ export async function claimDuelRewards(
     const isLoser = !isWinner && !isDraw
 
     const xpReward = isWinner ? 300 : isDraw ? 150 : 100
-    const coinReward = isWinner ? 100 : isDraw ? 50 : 30
+    const baseWin = ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS
+    const coinReward = isWinner ? baseWin + ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : isDraw ? baseWin : 5
 
     const userSnap = await transaction.get(userRef)
     const userData = userSnap.exists() ? userSnap.data() : {}
     const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-    const currentEuros = typeof userData.euros === 'number' ? userData.euros : 100
+    const currentEuros = typeof userData.euros === 'number' ? userData.euros : 50
     const oldLevel = typeof userData.level === 'number' ? userData.level : 1
 
     const rewardsClaimed = duel.rewardsClaimed || {}
@@ -1119,15 +1124,18 @@ export async function claimDuelRewards(
     }
 
     const newTotalXp = currentXp + xpReward
-    const newTotalEuros = currentEuros + coinReward
     const levelProgress = calculateLevelProgress(newTotalXp)
     const newLevel = levelProgress.currentLevel.level
     const leveledUp = newLevel > oldLevel
+    const levelUpCoins = leveledUp ? calculateLevelUpCoinReward(oldLevel, newLevel) : 0
+    const totalAwardedEuros = coinReward + levelUpCoins
+    const newTotalEuros = currentEuros + totalAwardedEuros
 
     if (userSnap.exists()) {
       transaction.update(userRef, {
         xp: newTotalXp,
         euros: newTotalEuros,
+        coins: newTotalEuros,
         level: newLevel,
         gamesPlayed: (userData.gamesPlayed || 0) + 1,
         wins: (userData.wins || 0) + (isWinner ? 1 : 0),

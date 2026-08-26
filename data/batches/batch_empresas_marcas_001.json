@@ -1,0 +1,852 @@
+[
+  {
+    "id": "EMP_MAR_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo empresarial português sediado em Mozelos (Santa Maria da Feira), fundado em 1870 por António Alves de Amorim, é o líder mundial incontestado na transformação de cortiça e produção de rolhas para o setor vitivinícola global?",
+    "opcoes": [
+      "Corticeira Amorim (Grupo Amorim)",
+      "The Navigator Company",
+      "Semapa",
+      "Sonae Indústria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Corticeira Amorim processa cerca de um terço de toda a cortiça do planeta e exporta rolhas de alta tecnologia para mais de 100 países.",
+    "fonte": "Corticeira Amorim / APCOR / AICEP",
+    "factClusterId": "fc_emp_corticeiraamorim_01"
+  },
+  {
+    "id": "EMP_MAR_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica empresa de porcelanas fundada em 1824 por José Ferreira Pinto Basto no lugar da Vista Alegre (Ílhavo), reconhecida mundialmente pela excelência artística da sua porcelana fina e cristal, é a:",
+    "opcoes": [
+      "Bordalo Pinheiro",
+      "Vista Alegre (Vista Alegre Atlantis)",
+      "Fábrica de Loiça de Sacavém",
+      "Costa Nova"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Vista Alegre fornece serviços de mesa oficiais para a Casa Branca, Palácio de Belém, Vaticano e casas reais de toda a Europa.",
+    "fonte": "Grupo Vista Alegre Atlantis / Município de Ílhavo",
+    "factClusterId": "fc_emp_vistaalegre1824_01"
+  },
+  {
+    "id": "EMP_MAR_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que mítica marca de café e grupo português sediado em Campo Maior (Alentejo), fundado em 1961 pelo Comendador Rui Nabeiro («Delta Cafés»), é o líder absoluto de torrefação e distribuição de café em Portugal?",
+    "opcoes": [
+      "Café Nicola",
+      "Sical",
+      "Delta Cafés (Grupo Nabeiro)",
+      "Buondi"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Nabeiro desenvolveu a marca de cápsulas Delta Q e o Centro de Ciência do Café em Campo Maior.",
+    "fonte": "Grupo Nabeiro - Delta Cafés / Município de Campo Maior",
+    "factClusterId": "fc_emp_deltacafes_ruinabeiro_01"
+  },
+  {
+    "id": "EMP_MAR_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa portuguesa de produtos de papel e higiene sediada em Torres Novas («Renova»), famosa pela criação inovadora do primeiro papel higiénico preto do mundo («Renova Black») e cores vivas, exporta para os cinco continentes?",
+    "opcoes": [
+      "The Navigator Company",
+      "Altri",
+      "Papéis Vouga",
+      "Renova"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Renova revolucionou o design e o marketing de produtos de grande consumo a nível mundial com papéis perfumados e coloridos.",
+    "fonte": "Renova / AICEP",
+    "factClusterId": "fc_emp_renova_01"
+  },
+  {
+    "id": "EMP_MAR_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de faiança artística fundada nas Caldas da Rainha em 1884 pelo genial desenhador e ceramista Rafael Bordalo Pinheiro, célebre pelas suas travessas de couves, andorinhas em relevo e figuras populares do Zé Povinho, é:",
+    "opcoes": [
+      "Faianças Bordalo Pinheiro",
+      "Vista Alegre",
+      "Viúva Lamego",
+      "Olaria de Barcelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Bordalo Pinheiro integra o Grupo Visabeira e exporta peças decorativas de faiança policromada para todo o mundo.",
+    "fonte": "Fábrica de Faianças Bordalo Pinheiro / Museu Bordalo Pinheiro",
+    "factClusterId": "fc_emp_bordalopinheiro_caldas_01"
+  },
+  {
+    "id": "EMP_MAR_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que licor tradicional doce de ervas aromáticas produzido na Quinta do Meiral na Lousã pela família Redondo («O Licor de Portugal»), criado a partir de uma receita secreta com dupla destilação, é o:",
+    "opcoes": [
+      "Ginjinha de Óbidos",
+      "Licor Beirão (J. Carranca Redondo)",
+      "Licor de Singeverga",
+      "Brandymel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Licor Beirão celebrizou-se nos anos 1960 pelas campanhas publicitárias pioneiras criadas por José Carranca Redondo.",
+    "fonte": "Licor Beirão / Município da Lousã",
+    "factClusterId": "fc_emp_licorbeirao_01"
+  },
+  {
+    "id": "EMP_MAR_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo internacional de distribuição alimentar português («Jerónimo Martins»), fundado em Lisboa em 1792, é o proprietário da cadeia de supermercados Pingo Doce em Portugal, Biedronka na Polónia e Ara na Colômbia?",
+    "opcoes": [
+      "Sonae MC",
+      "Auchan Portugal",
+      "Jerónimo Martins",
+      "Intermarché"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Biedronka (que significa 'joaninha' em polaco) é a maior cadeia de retalho alimentar da Polónia com mais de 3.400 lojas.",
+    "fonte": "Jerónimo Martins / Euronext Lisbon",
+    "factClusterId": "fc_emp_jeronimomartins_biedronka_01"
+  },
+  {
+    "id": "EMP_MAR_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórico conglomerado empresarial português sediado na Maia («Grupo Sonae»), fundado em 1959 por Afonso Pinto de Magalhães e expandido por Belmiro de Azevedo, gere marcas líderes como Continente, Worten, Wells e Salsa Jeans?",
+    "opcoes": [
+      "Jerónimo Martins",
+      "Amorim",
+      "Mota-Engil",
+      "Sonae"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sonae abriu o primeiro hipermercado de Portugal (Continente de Matosinhos) em 1985 e é um dos maiores empregadores privados do país.",
+    "fonte": "Sonae / Euronext Lisbon",
+    "factClusterId": "fc_emp_sonae_belmirodeazevedo_01"
+  },
+  {
+    "id": "EMP_MAR_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa energética integrada portuguesa («Galp Energia»), cotada no índice PSI da Bolsa de Lisboa, opera refinarias, postos de combustíveis e projetos de transição energética solar e eólica na Península Ibérica e Brasil?",
+    "opcoes": [
+      "Galp (Galp Energia)",
+      "EDP",
+      "REN",
+      "Repsol Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Galp tem grande presença na exploração de petróleo e gás natural no pré-sal da Bacia de Santos no Brasil e projetos de hidrogénio verde em Sines.",
+    "fonte": "Galp Energia / DGEG / Euronext Lisbon",
+    "factClusterId": "fc_emp_galpenergia_01"
+  },
+  {
+    "id": "EMP_MAR_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que multinacional elétrica portuguesa («EDP — Energias de Portugal»), uma das maiores empresas cotadas do PSI, é líder mundial em energia eólica e solar através da sua subsidiária EDP Renováveis (EDPR)?",
+    "opcoes": [
+      "Galp",
+      "EDP (Energias de Portugal)",
+      "Endesa",
+      "Iberdrola Portugal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A EDP Renováveis é o 4.º maior produtor mundial de energia eólica com parques em operação na Europa, América do Norte, América do Sul e Ásia.",
+    "fonte": "EDP / EDPR / Euronext",
+    "factClusterId": "fc_emp_edprenovaveis_01"
+  },
+  {
+    "id": "EMP_MAR_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante produtora portuguesa de pasta e papel de escritório («The Navigator Company» / antiga Portucel Soporcel), com fábricas em Setúbal e Figueira da Foz, é a líder europeia de papel fino de impressão não revestido (UWF)?",
+    "opcoes": [
+      "Altri",
+      "Renova",
+      "The Navigator Company",
+      "Prado Cartolinas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A marca de papel 'Navigator' é a marca de papel de escritório mais vendida e reconhecida em mais de 130 países.",
+    "fonte": "The Navigator Company / CELPA / AICEP",
+    "factClusterId": "fc_emp_navigatorcompany_01"
+  },
+  {
+    "id": "EMP_MAR_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária saboaria e perfumaria de luxo portuense fundada em 1887 pelos químicos alemães Ferdinand Claus e Georges Schweder («Claus Porto» / Ach. Brito), famosa pelas suas embalagens Art Nouveau pintadas à mão, é um ícone global de luxo?",
+    "opcoes": [
+      "Benamôr",
+      "Confiança",
+      "Castelbel",
+      "Claus Porto (Ach. Brito)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os sabonetes Claus Porto e a marca Musgo Real são vendidos em lojas exclusivas de Nova Iorque, Paris, Londres e Tóquio.",
+    "fonte": "Claus Porto / Museu Ach. Brito / Porto",
+    "factClusterId": "fc_emp_clausporto1887_01"
+  },
+  {
+    "id": "EMP_MAR_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica marca de cosmética e cremes lisboeta criada em 1925 na farmácia da Rua dos Fanqueiros («Benamôr»), célebre pelo creme de rosto «Alantoíne» e pelas loções perfumadas estilo Art Déco, foi fornecedora da Rainha D. Amélia?",
+    "opcoes": [
+      "Benamôr 1925",
+      "Claus Porto",
+      "Couto",
+      "Castelbel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Benamôr preserva as receitas tradicionais e os frascos vintage icónicos inspirados na natureza botânica portuguesa.",
+    "fonte": "Benamôr Lisboa / Museu da Farmácia",
+    "factClusterId": "fc_emp_benamor1925_01"
+  },
+  {
+    "id": "EMP_MAR_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que famosa pasta de dentes medicinal criada no Porto em 1932 pelo Dr. Alberto Ferreira Couto («Pasta Medicinal Couto»), com a sua icónica bisnaga amarela e o homem com a escova de dentes na boca, é um símbolo da memória industrial portuguesa?",
+    "opcoes": [
+      "Pasta Benamôr",
+      "Pasta Medicinal Couto (Laboratórios Couto)",
+      "Pasta Odol",
+      "Pasta Confiança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Pasta Couto foi concebida para combater as infeções gengivais e tornou-se sinónimo de design e identidade gráfica vintage portuguesa.",
+    "fonte": "Laboratórios Couto / Museu da Farmácia",
+    "factClusterId": "fc_emp_pastacouto1932_01"
+  },
+  {
+    "id": "EMP_MAR_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca líder de cerveja portuguesa e maior cervejeira nacional («Super Bock Group» / antiga Unicer), com sede em Leça do Balio (Matosinhos), foi fundada em 1890 como Companhia União Fabril Portuense?",
+    "opcoes": [
+      "Cerveja Sagres",
+      "Cerveja Coral",
+      "Super Bock (Super Bock Group)",
+      "Cerveja Especial"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Super Bock é a cerveja portuguesa mais premiada de sempre no concurso internacional Monde Selection com dezenas de medalhas de ouro consecutivas.",
+    "fonte": "Super Bock Group / Monde Selection",
+    "factClusterId": "fc_emp_superbock_unicer_01"
+  },
+  {
+    "id": "EMP_MAR_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca de cerveja emblemática de Lisboa («Cerveja Sagres»), criada em 1940 para a Exposição do Mundo Português e produzida na fábrica de Vialonga pela Sociedade Central de Cervejas e Bebidas (SCC), patrocina historicamente a Seleção Nacional de Futebol?",
+    "opcoes": [
+      "Super Bock",
+      "Cerveja Cintra",
+      "Cerveja Tagus",
+      "Cerveja Sagres (Central de Cervejas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sagres foi criada pela Central de Cervejas no Parque Mayer e na fábrica de Vialonga, sendo uma das marcas mais associadas ao desporto português.",
+    "fonte": "Sociedade Central de Cervejas e Bebidas (SCC) / FPF",
+    "factClusterId": "fc_emp_cervejasagres_01"
+  },
+  {
+    "id": "EMP_MAR_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que água mineral natural gasocarbónica portuguesa engarrafada na fonte em Trás-os-Montes («Água das Pedras» / Pedras Salgadas, concelho de Pouca de Aguiar), com gás 100% natural, é uma das águas mais premiadas da Europa?",
+    "opcoes": [
+      "Água das Pedras (Pedras Salgadas)",
+      "Água de Vidago",
+      "Água Castello",
+      "Água de Luso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Água das Pedras brota naturalmente gaseificada do subsolo granítico do vale do rio Avelames desde a época romana.",
+    "fonte": "Super Bock Group / Parque Termal de Pedras Salgadas",
+    "factClusterId": "fc_emp_aguadaspedras_01"
+  },
+  {
+    "id": "EMP_MAR_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca de água mineral natural lisa portuguesa («Água de Luso»), que brota da Serra do Buçaco (concelho da Mealhada) com baixíssima mineralização, é líder de mercado e abastece as históricas Termas de Luso?",
+    "opcoes": [
+      "Água do Fastio",
+      "Água de Luso",
+      "Água do Vimeiro",
+      "Água de Monchique"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sociedade da Água de Luso foi fundada em 1852 para engarrafar e preservar a pureza hidrológica da serra do Buçaco.",
+    "fonte": "Sociedade da Água de Luso / Central de Cervejas",
+    "factClusterId": "fc_emp_aguadeluso_01"
+  },
+  {
+    "id": "EMP_MAR_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que água mineral natural hiperalcalina portuguesa («Água de Monchique»), com o pH mais elevado de Portugal (pH 9,5) que brota da Serra de Monchique no Algarve, é muito procurada pelas suas propriedades antioxidantes e digestivas?",
+    "opcoes": [
+      "Água de Luso",
+      "Água das Pedras",
+      "Água de Monchique (Termas de Monchique)",
+      "Água Castello"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Água de Monchique é a água mais alcalina da Europa continental e ganhou múltiplos prémios internacionais de sabor do ITQI.",
+    "fonte": "Sociedade da Água de Monchique / Município de Monchique",
+    "factClusterId": "fc_emp_aguademonchique_01"
+  },
+  {
+    "id": "EMP_MAR_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo agroalimentar português líder mundial de azeites e óleos vegetais («Sovena»), proprietário das marcas «Oliveira da Serra», «Andorinha» e «Fula», detém o maior olival contínuo de regadio do mundo no Alentejo (Ferreira do Alentejo)?",
+    "opcoes": [
+      "Gallo Worldwide",
+      "Victor Guedes",
+      "Lactogal",
+      "Grupo Sovena (Nutrinveste)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Lagar do Marmelo da Sovena em Ferreira do Alentejo, desenhado pelo arquiteto Ricardo Bak Gordon, é um monumento à olivicultura moderna sustentável.",
+    "fonte": "Grupo Sovena / Casa do Azeite / AICEP",
+    "factClusterId": "fc_emp_sovena_oliveiradaserra_01"
+  },
+  {
+    "id": "EMP_MAR_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária marca de azeite portuguesa fundada em 1919 por Victor Guedes em Abrantes («Azeite Gallo»), cujo símbolo é o galo cantando sobre o sol nascente, é a mais internacional marca de azeite de origem portuguesa presente no Brasil e no mundo?",
+    "opcoes": [
+      "Azeite Gallo (Gallo Worldwide)",
+      "Oliveira da Serra",
+      "Azeite Andorinha",
+      "Azeite Herdade do Esporão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Azeite Gallo é líder absoluto de vendas no Brasil e exporta azeites virgem extra para mais de 40 países.",
+    "fonte": "Gallo Worldwide / Casa do Azeite",
+    "factClusterId": "fc_emp_azeitegallo_victorguedes_01"
+  },
+  {
+    "id": "EMP_MAR_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo de bebidas português («Sumol+Compal»), resultante da fusão da Sumol (fundada em 1954 em Algés por António Eusébio com o primeiro refrigerante de sumo de fruta natural pasteurizado) com a Compal (fundada em 1952 no Entroncamento), lidera os sumos e néctares em Portugal?",
+    "opcoes": [
+      "Unicer",
+      "Sumol+Compal",
+      "Central de Cervejas",
+      "Frutis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sumol+Compal opera grandes fábricas em Almeirim e Pombal e detém marcas icónicas como Compal, Sumol, Um Bongo, Frize e B!.",
+    "fonte": "Sumol+Compal / AICEP",
+    "factClusterId": "fc_emp_sumolcompal_01"
+  },
+  {
+    "id": "EMP_MAR_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de conservas de peixe portuguesa situada em Matosinhos («Conservas Ramirez»), fundada em 1853 em Vila Real de Santo António pelo pioneiro Sebastian Ramirez, é a mais antiga empresa conserveira do mundo em laboração contínua?",
+    "opcoes": [
+      "Pinhais & C.ª",
+      "Briosa Conservas",
+      "Conservas Ramirez (Ramirez & C.ª Filhos)",
+      "Conserveira de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fábrica ecologicamente sustentável 'Ramirez 1853' em Lavra (Matosinhos) produz conservas de sardinha, atum e cavala exportadas para 50 mercados.",
+    "fonte": "Conservas Ramirez / Associação Nacional dos Fabricantes de Conservas de Peixe (ANICP)",
+    "factClusterId": "fc_emp_conservasramirez1853_01"
+  },
+  {
+    "id": "EMP_MAR_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de conservas artesanais de sardinha fundada em 1920 em Matosinhos («Conservas Pinhais» / marca Nuri), que mantém os métodos tradicionais de corte e encaixotamento manual em azeite puro, criou o museu vivo «Conservas Pinhais Factory Tour»?",
+    "opcoes": [
+      "Ramirez",
+      "Bom Petisco",
+      "Nazaré Conservas",
+      "Conservas Pinhais (Nuri)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A marca de sardinhas Nuri das Conservas Pinhais é um objeto de culto gastronómico na Áustria e Europa Central.",
+    "fonte": "Conservas Pinhais / Município de Matosinhos",
+    "factClusterId": "fc_emp_conservaspinhais_nuri_01"
+  },
+  {
+    "id": "EMP_MAR_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa de cutelarias de luxo sediada em Caldas das Taipas (Guimarães), fundada em 1963 por José Ribeiro («Cutipol»), desenha talheres de aço e resina premiados mundialmente com presença nas mesas dos melhores restaurantes Michelin e hotéis de topo do planeta?",
+    "opcoes": [
+      "Cutipol (Cutelarias Portuguesas)",
+      "Herdmar",
+      "Icel",
+      "Belo Inox"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A linha de talheres 'GOA' da Cutipol, com cabo ergonómico em resina, é um dos designs industriais portugueses mais celebrados do mundo.",
+    "fonte": "Cutipol / Associação Comercial e Industrial de Guimarães",
+    "factClusterId": "fc_emp_cutipol_guimaraes_01"
+  },
+  {
+    "id": "EMP_MAR_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa familiar fundada na Benedita (concelho de Alcobaça) em 1945 («ICEL — Indústria de Cutelarias da Estremadura»), é uma das maiores fabricantes europeias de facas profissionais para hotelaria, cutelaria e chefs?",
+    "opcoes": [
+      "Cutipol",
+      "ICEL (Benedita)",
+      "Herdmar",
+      "Palaçoulo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A vila da Benedita e a ICEL tornaram-se a capital da cutelaria e cutelos profissionais de Portugal.",
+    "fonte": "ICEL / Município de Alcobaça",
+    "factClusterId": "fc_emp_icel_benedita_01"
+  },
+  {
+    "id": "EMP_MAR_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa portuguesa de revestimentos cerâmicos sediada em Barrô (Águeda), fundada em 1977 («Revigrés»), forneceu pavimentos de alta tecnologia para a Basílica da Sagrada Família em Barcelona e aeroportos internacionais?",
+    "opcoes": [
+      "Aleluia Cerâmicas",
+      "Pavigrés",
+      "Revigrés",
+      "Recer"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Revigrés ganhou múltiplos prémios internacionais Red Dot Design Award pelas suas coleções de grés porcelânico ecológico.",
+    "fonte": "Revigrés / APICER",
+    "factClusterId": "fc_emp_revigres_agueda_01"
+  },
+  {
+    "id": "EMP_MAR_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa industrial portuguesa sediada em Ílhavo e Aveiro («Sanindusa»), fundada em 1991, é uma das principais fabricantes ibéricas de louça sanitária cerâmica, banheiras e torneiras com exportação para mais de 80 países?",
+    "opcoes": [
+      "Roca Portugal",
+      "Valadares",
+      "Cifial",
+      "Sanindusa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sanindusa é um dos líderes de inovação em louça sanitária de cerâmica fina com redução do consumo de água.",
+    "fonte": "Sanindusa / APICER",
+    "factClusterId": "fc_emp_sanindusa_01"
+  },
+  {
+    "id": "EMP_MAR_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo calçadista português sediado em Penselo (Guimarães) e Paredes de Coura («Grupo Kyaia»), fundado por Fortunato Frederico e Amílcar Monteiro em 1984, é o criador e detentor da famosa marca global de calçado «Fly London»?",
+    "opcoes": [
+      "Grupo Kyaia (Fly London)",
+      "Procalçado",
+      "Luís Onofre",
+      "Dkode"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fly London vende sapatos e botas com solas de borracha de vanguarda em lojas próprias em Londres, Nova Iorque e Lisboa.",
+    "fonte": "Grupo Kyaia / APICCAPS / AICEP",
+    "factClusterId": "fc_emp_flylondon_kyaia_01"
+  },
+  {
+    "id": "EMP_MAR_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que prestigiado designer de calçado de luxo e empresário português de Santa Maria da Feira («Luís Onofre»), cujos sapatos de salto alto e carteiras são usados por celebridades e primeiras-damas mundiais, é o presidente da confederação europeia do calçado?",
+    "opcoes": [
+      "Miguel Vieira",
+      "Luís Onofre",
+      "Carlos Santos",
+      "Nuno Baltazar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Luís Onofre exporta mais de 90% da sua produção para boutiques de luxo nos EUA, Dubai, França e Japão.",
+    "fonte": "APICCAPS / CEC (Confederação Europeia de Calçado)",
+    "factClusterId": "fc_emp_luisonofre_01"
+  },
+  {
+    "id": "EMP_MAR_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica fábrica de azulejaria e cerâmica artística fundada em Lisboa em 1849 («Fábrica de Cerâmica Viúva Lamego»), famosa pelos azulejos artesanais de autor criados com Vieira da Silva, Querubim Lapa, Siza Vieira e Joana Vasconcelos, opera atualmente na Abrunheira (Sintra)?",
+    "opcoes": [
+      "Fábrica de Santana",
+      "Fábrica Bordalo Pinheiro",
+      "Fábrica Viúva Lamego",
+      "Fábrica Aleluia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fachada histórica da Viúva Lamego no Largo do Intendente em Lisboa, decorada com azulejos figurativos de Ferreira das Tabuletas, é Monumento de Interesse Público.",
+    "fonte": "Viúva Lamego / Museu Nacional do Azulejo",
+    "factClusterId": "fc_emp_viuvalamego1849_01"
+  },
+  {
+    "id": "EMP_MAR_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa portuguesa de sabonetes e fragrâncias de luxo para a casa fundada no Porto em 1999 por Aquiles Barros («Castelbel» / Portus Cale), exporta para mais de 50 países produtos artesanais aromáticos feitos no Castêlo da Maia?",
+    "opcoes": [
+      "Claus Porto",
+      "Ach. Brito",
+      "Benamôr",
+      "Castelbel (Portus Cale)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Castelbel batizou as suas linhas em homenagem ao Douro, azulejos e flores portuguesas com grande sucesso no mercado norte-americano.",
+    "fonte": "Castelbel Porto / AICEP",
+    "factClusterId": "fc_emp_castelbel_01"
+  },
+  {
+    "id": "EMP_MAR_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa têxtil familiar fundada em Guimarães em 1922 («Lameirinho»), uma das maiores produtoras europeias de roupa de cama e têxteis-lar de alta gama, produz para as marcas de luxo mais conceituadas do mundo?",
+    "opcoes": [
+      "Lameirinho (Indústria Têxtil)",
+      "Coelima",
+      "Mundotêxtil",
+      "Somelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O cluster têxtil de Guimarães e do Vale do Ave lidera a inovação europeia em acabamentos antibacterianos e algodão orgânico.",
+    "fonte": "Lameirinho / ATP (Associação Têxtil de Portugal)",
+    "factClusterId": "fc_emp_lameirinho_guimaraes_01"
+  },
+  {
+    "id": "EMP_MAR_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa têxtil portuguesa sediada em Vizela («Mundotêxtil»), fundada em 1975, é a maior fabricante de toalhas de banho e felpos da Europa, exportando mais de 98% da sua produção?",
+    "opcoes": [
+      "Lameirinho",
+      "Mundotêxtil",
+      "Têxteis Penedo",
+      "MoreTextile"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Mundotêxtil desenvolve toalhas ecológicas recicladas e fornece grandes cadeias hoteleiras e retalhistas mundiais.",
+    "fonte": "Mundotêxtil / Município de Vizela",
+    "factClusterId": "fc_emp_mundotextil_vizela_01"
+  },
+  {
+    "id": "EMP_MAR_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica e famosa confeitaria lisboeta fundada em 1837 junto ao Mosteiro dos Jerónimos («Pastéis de Belém»), produz diariamente segundo a receita secreta guardada na «Oficina do Segredo» os genuínos pastéis de nata originais?",
+    "opcoes": [
+      "Confeitaria Nacional",
+      "Pastelaria Versailles",
+      "Antiga Confeitaria de Belém (Pastéis de Belém)",
+      "Pastelaria Benard"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Antiga Confeitaria de Belém produz até 20.000 a 40.000 pastéis de nata por dia servidos quentes com canela e açúcar em pó.",
+    "fonte": "Pastéis de Belém / Turismo de Lisboa",
+    "factClusterId": "fc_emp_pasteisdebelem1837_01"
+  },
+  {
+    "id": "EMP_MAR_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que pastelaria e confeitaria histórica na Praça da Figueira em Lisboa, fundada em 1829 por Balthazar Roiz Castanheiro («Confeitaria Nacional»), foi a introdutora da receita do Bolo-Rei em Portugal por volta de 1870?",
+    "opcoes": [
+      "Pastéis de Belém",
+      "Pastelaria Suíça",
+      "Pastelaria Garrett",
+      "Confeitaria Nacional"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Confeitaria Nacional foi fornecedora oficial da Casa Real Portuguesa e é a pastelaria em funcionamento mais antiga da Baixa de Lisboa.",
+    "fonte": "Confeitaria Nacional / Lojas com História de Lisboa",
+    "factClusterId": "fc_emp_confeitarianacional1829_01"
+  },
+  {
+    "id": "EMP_MAR_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária fábrica de biscoitos e bolachas artesanais de Valongo (fundada em 1874), famosa pelos seus biscoitos «Milho», «Fidalguinhos» e pelas icónicas latas de folha-de-flandres litografadas vintage («Biscoitos Paupério»), é a:",
+    "opcoes": [
+      "Paupério (Fábrica de Biscoitos Paupério)",
+      "Triunfo",
+      "Nacional",
+      "Dan Cake"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Paupério mantém o fabrico tradicional a lenha e receitas seculares de biscoitos que venceram prémios na Exposição de Filadélfia de 1876.",
+    "fonte": "Paupério / Município de Valongo",
+    "factClusterId": "fc_emp_pauperio_valongo1874_01"
+  },
+  {
+    "id": "EMP_MAR_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante cooperativa de lacticínios portuguesa («Lactogal»), com unidades industriais em Vila do Conde, Modivas e Tocha, é detentora das marcas líderes de leite e iogurtes «Agros», «Mimosa», «Matinal» e «Gresso»?",
+    "opcoes": [
+      "Lacticínios das Marinhas",
+      "Lactogal (Produtos Alimentares)",
+      "Unileite Açores",
+      "Bel Portugal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Lactogal processa a grande maioria da produção de leite dos produtores pecuários do Norte e Centro de Portugal continental.",
+    "fonte": "Lactogal / Federação Nacional das Cooperativas de Produtores de Leite",
+    "factClusterId": "fc_emp_lactogal_mimosa_01"
+  },
+  {
+    "id": "EMP_MAR_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que cooperativa de lacticínios da Ilha de São Miguel nos Açores («Unileite»), produtora do afamado leite e queijo da marca «Terra Nostra» («Pastagens Felizes» de vacas ao ar livre 365 dias por ano), é a:",
+    "opcoes": [
+      "Lactaçores",
+      "Uniqueijo (São Jorge)",
+      "Unileite (Lacticínios dos Açores / Terra Nostra)",
+      "CALF (Faial)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A marca Terra Nostra promove a certificação de bem-estar animal e leite de pastagem exclusiva dos Açores.",
+    "fonte": "Unileite / Governo Regional dos Açores",
+    "factClusterId": "fc_emp_terranostra_unileite_01"
+  },
+  {
+    "id": "EMP_MAR_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante cooperativa da Ilha de São Jorge («Uniqueijo — União das Cooperativas Agrícolas de Laticínios de São Jorge»), agrupa as cooperativas que produzem o autêntico Queijo São Jorge DOP curado em tábuas de madeira?",
+    "opcoes": [
+      "Unileite",
+      "Lactogal",
+      "Lactaçores",
+      "Uniqueijo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Queijo São Jorge DOP é produzido exclusivamente a partir de leite cru de vaca não pasteurizado com cura mínima de 3 a 7 meses.",
+    "fonte": "Uniqueijo / Confraria do Queijo de São Jorge",
+    "factClusterId": "fc_emp_uniqueijo_saojorge_01"
+  },
+  {
+    "id": "EMP_MAR_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa portuguesa de chocolates fundada em 1914 em Viana do Castelo («Chocolates Avianense»), a mais antiga fábrica de chocolates de Portugal, produz as tradicionais bombocas e caixas de bombons?",
+    "opcoes": [
+      "Chocolates Avianense",
+      "Imperial (Jubileu / Regina)",
+      "Arcádia",
+      "Chococard"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Avianense foi transferida para Durrães (Barcelos) e mantém um museu do chocolate com a maquinaria centenária de fabrico.",
+    "fonte": "Chocolates Avianense / Museu Avianense",
+    "factClusterId": "fc_emp_avianense1914_01"
+  },
+  {
+    "id": "EMP_MAR_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária confeitaria e chocolataria artesanal do Porto fundada em 1933 pela família Bastos na Praça da Liberdade («Arcádia — Casa do Chocolate»), famosa pelas suas línguas de gato de chocolate e amêndoas de Páscoa licorosas, tem lojas em todo o país?",
+    "opcoes": [
+      "Avianense",
+      "Arcádia (Chocolates Arcádia)",
+      "Imperial",
+      "Regina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arcádia preserva o fabrico artesanal com chocolate de alta percentagem de cacau e bombons de Vinho do Porto e aguardente.",
+    "fonte": "Arcádia Porto / Associação Comercial do Porto",
+    "factClusterId": "fc_emp_arcadiaporto1933_01"
+  },
+  {
+    "id": "EMP_MAR_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que maior fabricante portuguesa de chocolates sediada em Vila do Conde («Imperial — Produtos Alimentares»), fundada em 1932, é a detentora de marcas icónicas do imaginário coletivo português como «Regina», «Jubileu», «Pintarolas» e «Pantagruel»?",
+    "opcoes": [
+      "Arcádia",
+      "Avianense",
+      "Imperial (Produtos Alimentares)",
+      "Nestlé Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O chocolate de culinária Pantagruel e os tubos de confetis coloridos Pintarolas são líderes de vendas absolutos em Portugal.",
+    "fonte": "Imperial / Chocolates Regina",
+    "factClusterId": "fc_emp_imperial_regina_01"
+  },
+  {
+    "id": "EMP_MAR_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo hoteleiro português fundado no Funchal (Madeira) em 1972 por Manuel Pestana e Dionísio Pestana («Grupo Pestana»), com mais de 100 hotéis em 16 países e gestor da rede das Pousadas de Portugal, é o maior grupo hoteleiro de Portugal?",
+    "opcoes": [
+      "Vila Galé Hotéis",
+      "Tivoli Hotels",
+      "Sana Hotels",
+      "Grupo Pestana (Pestana Hotel Group)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Pestana estabeleceu a marca hoteleira global 'Pestana CR7' em parceria com o futebolista Cristiano Ronaldo.",
+    "fonte": "Pestana Hotel Group / Turismo de Portugal",
+    "factClusterId": "fc_emp_grupopestana_01"
+  },
+  {
+    "id": "EMP_MAR_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante grupo hoteleiro português fundado em 1986 pelo empresário Jorge Rebelo de Almeida («Vila Galé Hotéis»), com o seu primeiro hotel inaugurado na Praia da Galé (Albufeira), é um dos maiores operadores hoteleiros de resorts e património no Brasil e em Portugal?",
+    "opcoes": [
+      "Vila Galé Hotéis",
+      "Grupo Pestana",
+      "Hoti Hoteis",
+      "PortoBay"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Vila Galé opera mais de 40 hotéis e é o maior operador de resorts de praia 'all-inclusive' do Brasil.",
+    "fonte": "Vila Galé / Turismo de Portugal",
+    "factClusterId": "fc_emp_vilagale_01"
+  },
+  {
+    "id": "EMP_MAR_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante empresa de engenharia e construção portuguesa fundada em 1946 por Manuel António da Mota («Mota-Engil»), com sede no Porto e grandes obras públicas de infraestruturas em África, América Latina e Europa, é a maior construtora de Portugal?",
+    "opcoes": [
+      "Teixeira Duarte",
+      "Mota-Engil",
+      "Somague",
+      "Casais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Mota-Engil constrói pontes, linhas de caminho-de-ferro, autoestradas e portos de águas profundas em mais de 20 países.",
+    "fonte": "Mota-Engil / Euronext Lisbon",
+    "factClusterId": "fc_emp_motaengil_01"
+  },
+  {
+    "id": "EMP_MAR_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grande grupo construtor português fundado em Braga em 1958 («Grupo Casais»), pioneiro na construção industrializada sustentável em madeira de engenharia («off-site construction») e hotelaria sustentável, opera em dezenas de países?",
+    "opcoes": [
+      "Mota-Engil",
+      "dst group",
+      "Grupo Casais",
+      "Conduril"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Grupo Casais construiu os primeiros edifícios híbridos em madeira e betão de emissões quase nulas em Portugal e Espanha.",
+    "fonte": "Grupo Casais / AICCOPN",
+    "factClusterId": "fc_emp_grupocasais_braga_01"
+  },
+  {
+    "id": "EMP_MAR_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa industrial farmacêutica portuguesa fundada em 1924 na Amadora pelo farmacêutico António Lourenço da Cunha («Laboratórios BIAL»), líder em inovação médica que desenvolveu o primeiro medicamento de patente e I&D 100% portuguesa aprovado na Europa e EUA (Zebinix para a epilepsia e Ongentys para Parkinson), é a:",
+    "opcoes": [
+      "Medinfar",
+      "Tecnimede",
+      "Generis",
+      "BIAL (Portela & C.ª)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A BIAL tem sede na Trofa e investe mais de 20% da sua faturação em investigação científica em neurociências e sistema nervoso central.",
+    "fonte": "BIAL / Infarmed / Fundação Bial",
+    "factClusterId": "fc_emp_bial_medicamentos_01"
+  },
+  {
+    "id": "EMP_MAR_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórico operador postal e de serviços financeiros fundado em 1520 por D. Manuel I com a nomeação de Luís Homem como Correio-Mor («CTT — Correios de Portugal»), cotado em bolsa com uma das mais extensas redes de retalho e entregas do país, é os:",
+    "opcoes": [
+      "CTT — Correios de Portugal (Banco CTT)",
+      "DPD Portugal",
+      "Chronopost",
+      "Nacex"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os CTT comemoraram 500 anos de história postal em 2020 e expandiram-se fortemente para os cacifos automáticos e e-commerce expresso.",
+    "fonte": "CTT Correios de Portugal / Fundação Portuguesa das Comunicações",
+    "factClusterId": "fc_emp_ctt1520_01"
+  },
+  {
+    "id": "EMP_MAR_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e rede de distribuição de combustíveis e serviços de conveniência («Prio Energy»), com base de distribuição e parque de biocombustíveis no Porto de Aveiro, é a maior produtora nacional de biodiesel a partir de óleos alimentares reciclados?",
+    "opcoes": [
+      "Galp",
+      "Repsol",
+      "Prio (Prio Energy)",
+      "BP Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fábrica da Prio em Ílhavo/Aveiro é pioneira europeia na transição para biocombustíveis avançados e carregamento elétrico ultra-rápido.",
+    "fonte": "Prio Energy / Porto de Aveiro / DGEG",
+    "factClusterId": "fc_emp_prioenergy_aveiro_01"
+  }
+]

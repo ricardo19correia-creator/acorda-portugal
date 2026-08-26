@@ -1,0 +1,852 @@
+[
+  {
+    "id": "DESP_MOT_0001",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto português de Fórmula 1 (nascido no Porto em 1976), Tiago Monteiro («Tiago Monteiro»), fez história no Grande Prémio dos Estados Unidos em Indianápolis em 2005 ao tornar-se o primeiro português a subir ao pódio na F1 ao volante de um monolugar da equipa:",
+    "opcoes": [
+      "Jordan-Toyota (3.º lugar no GP dos EUA 2005)",
+      "Minardi-Ford",
+      "Williams-BMW",
+      "Sauber-Petronas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Tiago Monteiro terminou em 3.º lugar em Indianápolis e estabeleceu o recorde de 16 Grandes Prémios consecutivos a terminar no seu ano de estreia na Fórmula 1.",
+    "fonte": "FIA / Formula 1 Official / Federação Portuguesa de Automobilismo e Karting (FPAK)",
+    "factClusterId": "fc_desp_mot_tiagomonteiro_podio2005_01"
+  },
+  {
+    "id": "DESP_MOT_0002",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de motos de Almada (nascido em 1995), conhecido como «O Falcão» («Miguel Oliveira»), tornou-se o primeiro português a competir e a vencer na categoria rainha do motociclismo mundial (MotoGP), conquistando a histórica primeira vitória no GP da Estíria em 2020?",
+    "opcoes": [
+      "Paulo Gonçalves",
+      "Miguel Oliveira (Miguel Ângelo Falcão de Oliveira)",
+      "Hélder Rodrigues",
+      "Ruben Faria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Miguel Oliveira venceu no Red Bull Ring ultrapassando Jack Miller e Pol Espargaró na última curva e venceu depois o GP de Portugal em Portimão.",
+    "fonte": "MotoGP / FIM / Federação de Motociclismo de Portugal (FMP)",
+    "factClusterId": "fc_desp_mot_migueloliveira_motogp_01"
+  },
+  {
+    "id": "DESP_MOT_0003",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de Cascais (nascido em 1991), António Félix da Costa («António Félix da Costa»), sagrou-se Campeão Mundial de Fórmula E na temporada 2019/20 com a DS Techeetah e venceu por duas vezes o prestigiado Grande Prémio de Macau de F3?",
+    "opcoes": [
+      "Filipe Albuquerque",
+      "Álvaro Parente",
+      "António Félix da Costa",
+      "Pedro Lamy"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Félix da Costa é piloto oficial da Porsche na Fórmula E e no Campeonato Mundial de Resistência (WEC).",
+    "fonte": "FIA Formula E / FPAK",
+    "factClusterId": "fc_desp_mot_antoniofelixdacosta_01"
+  },
+  {
+    "id": "DESP_MOT_0004",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de Alenquer (nascido em 1972), Pedro Lamy («Pedro Lamy»), foi o primeiro português a pontuar no Campeonato do Mundo de Fórmula 1 ao terminar em 6.º lugar no Grande Prémio da Austrália em Adelaide em 1995 ao volante de um monolugar da equipa:",
+    "opcoes": [
+      "Lotus-Mugen",
+      "Tyrrell-Yamaha",
+      "Footwork-Hart",
+      "Minardi-Ford (Minardi M195)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Pedro Lamy construiu depois uma lendária carreira na resistência mundial tornando-se pentacampeão das 24 Horas de Nürburgring e piloto oficial da Aston Martin e Peugeot.",
+    "fonte": "FIA / Formula 1 / FPAK",
+    "factClusterId": "fc_desp_mot_pedrolamy_f1_01"
+  },
+  {
+    "id": "DESP_MOT_0005",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico rali do Campeonato do Mundo de Ralis (WRC), fundado em 1967 pelo Automóvel Club de Portugal (ACP) sob a liderança de César Torres («Rali de Portugal»), foi eleito por cinco vezes o «Melhor Rali do Mundo» e celebrizou o lendário salto de:",
+    "opcoes": [
+      "Salto da Pedra Sentada em Fafe",
+      "Salto da Arganil",
+      "Salto de Sintra",
+      "Salto de Mortágua"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O troço de Fafe e a Lameirinha atraem centenas de milhares de adeptos de todo o mundo para ver os carros do WRC voar no Salto da Pedra Sentada.",
+    "fonte": "WRC / Automóvel Club de Portugal (ACP)",
+    "factClusterId": "fc_desp_mot_ralideportugal_fafe_01"
+  },
+  {
+    "id": "DESP_MOT_0006",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que mítico autódromo português inaugurado em 1972 perto de Cascais («Autódromo do Estoril» / Circuito Fernanda Pires da Silva), acolheu o Grande Prémio de Portugal de Fórmula 1 entre 1984 e 1996 e foi o palco da primeira vitória da carreira de Ayrton Senna na F1 à chuva em 1985?",
+    "opcoes": [
+      "Autódromo Internacional do Algarve",
+      "Autódromo do Estoril",
+      "Circuito da Boavista",
+      "Circuito de Vila Real"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ayrton Senna venceu no Estoril a 21 de abril de 1985 com a Lotus 97T debaixo de um dilúvio histórico dando uma volta de avanço a quase todo o pelotão.",
+    "fonte": "Autódromo do Estoril / FIA / Arquivo RTP",
+    "factClusterId": "fc_desp_mot_estoril_senna1985_01"
+  },
+  {
+    "id": "DESP_MOT_0007",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que moderno complexo de desportos motorizados inaugurado em 2008 em Portimão («Autódromo Internacional do Algarve» — AIA), apelidado internacionalmente de «A Montanha-Russa» devido às suas acentuadas variações de relevo e curvas cegas, acolheu os Grandes Prémios de Portugal de Fórmula 1 em 2020 e 2021?",
+    "opcoes": [
+      "Autódromo do Estoril",
+      "Circuito de Braga",
+      "Autódromo Internacional do Algarve (Portimão)",
+      "Kartódromo de Viana"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Em 2020, Lewis Hamilton bateu no AIA de Portimão o recorde absoluto de vitórias de Michael Schumacher na Fórmula 1 alcançando o 92.º triunfo.",
+    "fonte": "Autódromo Internacional do Algarve / FIA / Formula 1",
+    "factClusterId": "fc_desp_mot_aiaportimao_01"
+  },
+  {
+    "id": "DESP_MOT_0008",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de Coimbra (nascido em 1985), Filipe Albuquerque («Filipe Albuquerque»), venceu em 2020 as lendárias 24 Horas de Le Mans na categoria LMP2 com a United Autosports e conquistou por duas vezes à geral as famosas 24 Horas de Daytona nos EUA (2018 e 2021)?",
+    "opcoes": [
+      "Álvaro Parente",
+      "Pedro Couceiro",
+      "Manuel Gião",
+      "Filipe Albuquerque"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Filipe Albuquerque é um dos mais consagrados pilotos de protótipos de resistência do mundo no campeonato norte-americano IMSA e WEC.",
+    "fonte": "IMSA / ACO / FPAK",
+    "factClusterId": "fc_desp_mot_filipealbuquerque_01"
+  },
+  {
+    "id": "DESP_MOT_0009",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que lendário piloto de ralis de Santo Tirso (nascido em 1977), Armindo Araújo («Armindo Araújo»), sagrou-se bicampeão mundial de ralis de produção (PWRC / WRC-3) em 2009 e 2010 com a Ralliart Itália e é hepta-campeão nacional de ralis?",
+    "opcoes": [
+      "Armindo Araújo",
+      "Bernardo Sousa",
+      "Bruno Magalhães",
+      "Ricardo Teodósio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Armindo Araújo é o piloto português de ralis mais titulado de sempre em competições oficiais da FIA.",
+    "fonte": "WRC / FPAK",
+    "factClusterId": "fc_desp_mot_armindoaraujo_01"
+  },
+  {
+    "id": "DESP_MOT_0010",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico piloto de todo-o-terreno e ralis português de Lisboa (nascido em 1966), Carlos Sousa («Carlos Sousa»), foi o primeiro português a vencer etapas no mítico Rali Dakar em carros e terminou em 4.º lugar da classificação geral em 2003 com a equipa oficial da Mitsubishi?",
+    "opcoes": [
+      "Miguel Barbosa",
+      "Carlos Sousa",
+      "Elisabete Jacinto",
+      "Ricardo Porém"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Carlos Sousa venceu a Taça do Mundo de Todo-o-Terreno da FIA em 2003 e participou em 17 edições do Rali Dakar.",
+    "fonte": "Dakar / FIA / FPAK",
+    "factClusterId": "fc_desp_mot_carlossousa_dakar_01"
+  },
+  {
+    "id": "DESP_MOT_0011",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que saudoso piloto de motos de Esposende (1979-2020), Paulo Gonçalves («Speedy Gonçalves»), sagrou-se Campeão Mundial de Ralis Todo-o-Terreno da FIM em 2013 e vice-campeão do Rali Dakar em 2015 pela equipa oficial da Honda HRC?",
+    "opcoes": [
+      "Hélder Rodrigues",
+      "Ruben Faria",
+      "Paulo Gonçalves («Speedy Gonçalves»)",
+      "Mário Patrão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paulo Gonçalves era adorado no paddock mundial pelo seu fair-play e bravura, tendo falecido tragicamente no Dakar 2020 na Arábia Saudita.",
+    "fonte": "FIM / Dakar / Federação de Motociclismo de Portugal",
+    "factClusterId": "fc_desp_mot_paulogoncalves_speedy_01"
+  },
+  {
+    "id": "DESP_MOT_0012",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que pioneira piloto de todo-o-terreno de Montachique (Loures, nascida em 1964), Elisabete Jacinto («Elisabete Jacinto»), fez história no desporto motorizado mundial ao vencer a categoria de camiões do África Eco Race em 2019 ao volante de um camião MAN?",
+    "opcoes": [
+      "Joana Lemos",
+      "Rita Vieira",
+      "Inês Ponte",
+      "Elisabete Jacinto"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elisabete Jacinto foi a primeira mulher a vencer um rali todo-o-terreno internacional na categoria de camiões pesados.",
+    "fonte": "Africa Eco Race / FPAK",
+    "factClusterId": "fc_desp_mot_elisabetejacinto_01"
+  },
+  {
+    "id": "DESP_MOT_0013",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico circuito citadino transmontano fundado em 1931 («Circuito Internacional de Vila Real»), com o seu traçado veloz e desafiante em redor da cidade sobre a serra do Marão, acolheu etapas do Campeonato do Mundo de Carros de Turismo (WTCC / WTCR) com vitórias de Tiago Monteiro?",
+    "opcoes": [
+      "Circuito Internacional de Vila Real",
+      "Circuito da Boavista",
+      "Circuito de Montes Claros",
+      "Circuito de Monsanto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O traçado citadino de Vila Real é considerado 'O Mónaco do Norte' pelas velocidades vertiginosas entre rails e casas.",
+    "fonte": "Clube Automóvel de Vila Real / FIA WTCR",
+    "factClusterId": "fc_desp_mot_circuitodevilareal_01"
+  },
+  {
+    "id": "DESP_MOT_0014",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico circuito urbano no Porto nas avenidas da Boavista e Circunvalação («Circuito da Boavista»), acolheu os Grandes Prémios de Portugal de Fórmula 1 em 1958 (com vitória de Stirling Moss e gesto de desportivismo com Mike Hawthorn) e 1960?",
+    "opcoes": [
+      "Circuito de Monsanto (Lisboa)",
+      "Circuito da Boavista (Porto)",
+      "Circuito do Estoril",
+      "Circuito de Cascais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "No GP de Portugal de 1958 na Boavista, Stirling Moss defendeu Hawthorn perante os comissários salvando os pontos do rival que viria a sagrar-se campeão do mundo.",
+    "fonte": "FIA / Arquivo Histórico Municipal do Porto",
+    "factClusterId": "fc_desp_mot_circuitodaboavista_1958_01"
+  },
+  {
+    "id": "DESP_MOT_0015",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que primeiro piloto português a alinhar numa corrida oficial do Campeonato do Mundo de Fórmula 1 («Mário de Araújo Cabral» / Nicha Cabral), estreou-se no Grande Prémio de Portugal de 1959 no Circuito de Monsanto ao volante de um Cooper-Maserati terminando em 10.º lugar?",
+    "opcoes": [
+      "Pedro Lamy",
+      "Tiago Monteiro",
+      "Mário de Araújo Cabral (Nicha Cabral)",
+      "Filipe Albuquerque"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nicha Cabral (1934-2020) foi o pioneiro de Portugal na F1 correndo também na Fórmula 2 e em provas de protótipos de resistência.",
+    "fonte": "FPAK / Dicionário de História do Desporto",
+    "factClusterId": "fc_desp_mot_nichacabral_1959_01"
+  },
+  {
+    "id": "DESP_MOT_0016",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto portuense (nascido em 1984), Álvaro Parente («Álvaro Parente»), sagrou-se campeão da World Series by Renault em 2007, venceu na GP2 e conquistou a vitória histórica nas lendárias 12 Horas de Bathurst na Austrália em 2016 com a McLaren GT?",
+    "opcoes": [
+      "Filipe Albuquerque",
+      "Tiago Monteiro",
+      "Manuel Gião",
+      "Álvaro Parente"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Álvaro Parente foi piloto oficial de fábrica da McLaren GT conquistando múltiplos títulos no Pirelli World Challenge nos EUA.",
+    "fonte": "McLaren Automotive / FPAK",
+    "factClusterId": "fc_desp_mot_alvaroparente_01"
+  },
+  {
+    "id": "DESP_MOT_0017",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de motos de Olhão (nascido em 1977), Ruben Faria («Ruben Faria»), fez história no desporto nacional ao conquistar o 2.º lugar da classificação geral do Rali Dakar em 2013 em motos ao serviço da equipa Red Bull KTM Factory Racing?",
+    "opcoes": [
+      "Ruben Faria (Vice-campeão do Dakar 2013)",
+      "Hélder Rodrigues",
+      "Paulo Gonçalves",
+      "António Maio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ruben Faria terminou o Dakar 2013 logo atrás do seu companheiro de equipa Cyril Despres e assumiu mais tarde a direção da equipa oficial Monster Energy Honda.",
+    "fonte": "Dakar / FIM / FMP",
+    "factClusterId": "fc_desp_mot_rubenfaria_dakar2013_01"
+  },
+  {
+    "id": "DESP_MOT_0018",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que consagrado piloto de motos de Lisboa (nascido em 1979), Hélder Rodrigues («Estrelinha»), alcançou duas vezes o pódio final no Rali Dakar (3.º lugar em 2011 com a Yamaha e 3.º lugar em 2012) e sagrou-se Campeão Mundial de Ralis TT da FIM em 2011?",
+    "opcoes": [
+      "Paulo Gonçalves",
+      "Hélder Rodrigues",
+      "Ruben Faria",
+      "Joaquim Rodrigues"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Hélder Rodrigues conquistou 9 vitórias em etapas do Rali Dakar ao longo da sua carreira nas motos.",
+    "fonte": "FIM / Dakar / FMP",
+    "factClusterId": "fc_desp_mot_helderrodrigues_dakar_01"
+  },
+  {
+    "id": "DESP_MOT_0019",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que emblemático piloto de ralis de Penafiel (nascido em 1952), Joaquim Santos («Joaquim Santos»), tetracampeão nacional de ralis pelo histórico Team Diabolique nos anos 1980, celebrizou-se ao volante do mítico:",
+    "opcoes": [
+      "Lancia Delta Integrale",
+      "Renault 5 Turbo",
+      "Ford Escort RS 1800 (Team Diabolique)",
+      "Audi Quattro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Joaquim Santos e o navegador Miguel Oliveira venceram dezenas de provas com o Ford Escort e o Ford Sierra Cosworth da Diabolique.",
+    "fonte": "FPAK / Museu do Automóvel de Penafiel",
+    "factClusterId": "fc_desp_mot_joaquimsantos_diabolique_01"
+  },
+  {
+    "id": "DESP_MOT_0020",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto madeirense de ralis (nascido no Funchal em 1987), Bernardo Sousa («Bernardo Sousa»), foi campeão nacional de ralis em 2010 e venceu a ronda do WRC no Rali da Jordânia na categoria S-WRC em 2011 com um Ford Fiesta S2000?",
+    "opcoes": [
+      "Rui Madeira",
+      "Vítor Pascoal",
+      "Adruzilo Lopes",
+      "Bernardo Sousa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bernardo Sousa representou Portugal no WRC durante várias temporadas integrado no programa de jovens talentos da FIA.",
+    "fonte": "WRC / FPAK",
+    "factClusterId": "fc_desp_mot_bernardosousa_01"
+  },
+  {
+    "id": "DESP_MOT_0021",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de ralis de Almada (nascido em 1969), Rui Madeira («Rui Madeira»), fez história no desporto motorizado nacional em 1995 ao sagrar-se o primeiro português campeão do mundo de ralis na Taça FIA de Grupo N (Produção) com um Mitsubishi Lancer Evolution?",
+    "opcoes": [
+      "Rui Madeira (Campeão do Mundo Grupo N 1995)",
+      "Armindo Araújo",
+      "Carlos Bica",
+      "José Pedro Fontes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Rui Madeira e o navegador Nuno Rodrigues da Silva venceram a Taça do Mundo de Grupo N em 1995 e venceram o Rali de Portugal de Grupo N.",
+    "fonte": "FIA / WRC / FPAK",
+    "factClusterId": "fc_desp_mot_ruimadeira_1995_01"
+  },
+  {
+    "id": "DESP_MOT_0022",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórica prova de resistência de 24 horas para carros de turismo e clássicos realiza-se no Autódromo de Portimão e no Autódromo do Estoril («24 Horas de Portugal / 24 Horas de TT de Fronteira»), sendo a prova de Fronteira no Alentejo considerada a maior maratona de todo-o-terreno da Europa?",
+    "opcoes": [
+      "Baja Portalegre 500",
+      "24 Horas de TT de Fronteira (Terras do Grande Lago / ACP)",
+      "Rali de Portugal",
+      "Rali Vinho da Madeira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As 24 Horas TT de Fronteira decorrem num circuito de terra de 16 km no concelho alentejano de Fronteira com mais de 80 equipas em pista durante dia e noite.",
+    "fonte": "Automóvel Club de Portugal (ACP) / Município de Fronteira",
+    "factClusterId": "fc_desp_mot_24horasfronteira_01"
+  },
+  {
+    "id": "DESP_MOT_0023",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Qual é a mais antiga e prestigiada prova de todo-o-terreno da Europa, criada pelo ACP e José Megre em 1987 no Alto Alentejo («Baja Portalegre 500»), pontuável para a Taça do Mundo de Bajas da FIA e da FIM?",
+    "opcoes": [
+      "Baja de Loulé",
+      "Baja do Pinhal",
+      "Baja Portalegre 500 (ACP)",
+      "Rali Dakar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Baja Portalegre 500 atrai todos os anos os maiores pilotos internacionais de carros, motos, quads e SSV aos trilhos alentejanos.",
+    "fonte": "ACP / FIA World Cup for Cross-Country Bajas",
+    "factClusterId": "fc_desp_mot_bajaportalegre500_01"
+  },
+  {
+    "id": "DESP_MOT_0024",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que visionário piloto e dirigente desportivo de Lisboa (1942-2009), conhecido como o «Pai do Todo-o-Terreno em Portugal» («José Megre»), fundou o Clube Aventura, criou a Baja de Portalegre e foi o primeiro português a competir no Rali Paris-Dakar em 1982?",
+    "opcoes": [
+      "César Torres",
+      "Carlos Barbosa",
+      "Nicha Cabral",
+      "José Megre (O Pai do TT em Portugal)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "José Megre pilotou um UMM no deserto do Sara abrindo as portas do todo-o-terreno internacional a Portugal.",
+    "fonte": "Clube Aventura / ACP / FPAK",
+    "factClusterId": "fc_desp_mot_josemegre_01"
+  },
+  {
+    "id": "DESP_MOT_0025",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que lendário veículo todo-o-terreno de fabrico 100% português (União Metalo-Mecânica), «UMM Alter / UMM Cournil», fabricado em Queluz entre 1977 e 1996, participou com bravura no Rali Dakar no Sara e serviu as Forças Armadas e os Bombeiros de Portugal?",
+    "opcoes": [
+      "UMM (União Metalo-Mecânica)",
+      "Portaro",
+      "Sado 550",
+      "Famel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O UMM destacava-se pela sua robustez quase indestrutível e tração 4x4 mecânica superando as dunas do Sara.",
+    "fonte": "Clube UMM / Museu do Automóvel",
+    "factClusterId": "fc_desp_mot_umm_dakar_01"
+  },
+  {
+    "id": "DESP_MOT_0026",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico veículo 4x4 português produzido em Tramagal (Abrantes) entre 1975 e 1990 pela Sociedade de Montagem de Automóveis («Portaro»), baseado no chassi do ARO romeno com motores Daihatsu e Volvo, foi um dos primeiros veículos de todo-o-terreno montados em série em Portugal?",
+    "opcoes": [
+      "UMM",
+      "Portaro (Portaro 4X4 do Tramagal)",
+      "Sado",
+      "Marlei"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Portaro (fusão de Portugal e ARO) foi exportado para vários países e venceu o rali Paris-Dakar de 1983 na sua classe.",
+    "fonte": "Município de Abrantes / Museu Nacional dos Coches",
+    "factClusterId": "fc_desp_mot_portaro_tramagal_01"
+  },
+  {
+    "id": "DESP_MOT_0027",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que prestigiada prova do Campeonato da Europa de Ralis (ERC) e do Campeonato de Portugal de Ralis, disputada nas estradas de asfalto sinuosas da ilha da Madeira («Rali Vinho da Madeira»), é um dos mais antigos e apaixonantes ralis insulares do mundo?",
+    "opcoes": [
+      "Rali dos Açores",
+      "Rali Serras de Fafe",
+      "Rali Vinho da Madeira (Club Sports da Madeira)",
+      "Rali de Castelo Branco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Rali Vinho da Madeira percorre as serras e montanhas da Madeira perante mais de 100.000 espetadores nas bermas da estrada.",
+    "fonte": "Club Sports da Madeira / FIA ERC",
+    "factClusterId": "fc_desp_mot_ralivinhodamadeira_01"
+  },
+  {
+    "id": "DESP_MOT_0028",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que famosa prova do Campeonato dos Açores e da Europa de Ralis disputada na Ilha de São Miguel («Rali dos Açores» / Azores Rallye), celebrizou o troço mágico e vertiginoso desenhado na crista vulcânica da:",
+    "opcoes": [
+      "Lagoa do Fogo",
+      "Lagoa das Furnas",
+      "Pico da Vara",
+      "Caldeira das Sete Cidades (Troço das Sete Cidades)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O troço das Sete Cidades é considerado um dos mais belos e fotogénicos troços de rali de todo o planeta com os carros a acelerar no cume estreito da cratera.",
+    "fonte": "Grupo Desportivo Comercial / FIA ERC / Turismo dos Açores",
+    "factClusterId": "fc_desp_mot_ralidosacores_setecidades_01"
+  },
+  {
+    "id": "DESP_MOT_0029",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que lendário piloto e mecânico portuense (1913-1994), Mário Moreira da Silva («Mário Silva»), construiu artesanalmente nos anos 1950 no Porto o famoso carro de corrida desportivo de dois lugares com motor Opel («O Marlei»)?",
+    "opcoes": [
+      "O Marlei (Mário Silva, 1950)",
+      "O Alba",
+      "O Dima",
+      "O DM"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Marlei (nome derivado das filhas MArgarida e LEInor) bateu os carros importados em vários circuitos nacionais e repousa no Museu do Caramulo.",
+    "fonte": "Museu do Caramulo / FPAK",
+    "factClusterId": "fc_desp_mot_marlei_mariosilva_01"
+  },
+  {
+    "id": "DESP_MOT_0030",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórica e elegante marca de automóveis desportivos de competição construída em Albergaria-a-Velha na fundição de António Augusto Martins Pereira entre 1952 e 1961 («O Alba»), com motor próprio de 1.500cc em alumínio, dominou o Campeonato Nacional de Velocidade?",
+    "opcoes": [
+      "Olda",
+      "Automóveis Alba (Albergaria-a-Velha)",
+      "Marlei",
+      "DM"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Alba é um dos mais belos carros de corrida vintage alguma vez construídos em Portugal, vencedor de dezenas de Taças de Ouro.",
+    "fonte": "Museu do Caramulo / Associação Alba",
+    "factClusterId": "fc_desp_mot_alba_albergaria_01"
+  },
+  {
+    "id": "DESP_MOT_0031",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que lendária prova de montanha do Campeonato de Portugal de Montanha e do Europeu de Montanha da FIA, disputada na majestosa rampa da Serra da Falperra em Braga («Rampa da Falperra»), atrai mais de 150.000 espetadores?",
+    "opcoes": [
+      "Rampa da Serra da Estrela",
+      "Rampa da Penha (Guimarães)",
+      "Rampa Internacional da Falperra (Braga)",
+      "Rampa da Fóia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Rampa da Falperra tem 5,2 km de traçado a subir com protótipos Osella e Norma a superar os 200 km/h de média.",
+    "fonte": "Clube Automóvel do Minho (CAM) / FIA Hill Climb Masters",
+    "factClusterId": "fc_desp_mot_rampadafalperra_01"
+  },
+  {
+    "id": "DESP_MOT_0032",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de ralis de Lisboa (nascido em 1980), Bruno Magalhães («Bruno Magalhães»), conquistou por três vezes o título de Campeão Nacional de Ralis e foi vice-campeão da Europa de Ralis (FIA ERC) em 2017 com a equipa da ARC Sport?",
+    "opcoes": [
+      "Ricardo Teodósio",
+      "José Pedro Fontes",
+      "Miguel Campos",
+      "Bruno Magalhães"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bruno Magalhães venceu no ERC os ralis dos Açores, Canárias e Acrópole na Grécia.",
+    "fonte": "FIA ERC / FPAK",
+    "factClusterId": "fc_desp_mot_brunomagalhaes_01"
+  },
+  {
+    "id": "DESP_MOT_0033",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que carismático piloto de ralis algarvio da Guia (Albufeira), Ricardo Teodósio («Ricardo Teodósio»), celebrizou-se pelo seu estilo de condução espetacular, a frase «Tá a bater, tá!» e os títulos de Campeão Nacional de Ralis em 2019 e 2021 com o Skoda Fabia R5?",
+    "opcoes": [
+      "Ricardo Teodósio (Team Teodósio Motorsport)",
+      "Armindo Araújo",
+      "Bruno Magalhães",
+      "Pedro Meireles"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ricardo Teodósio é um dos pilotos mais queridos do público português pela sua proximidade e garra em todas as especiais.",
+    "fonte": "FPAK / CPR",
+    "factClusterId": "fc_desp_mot_ricardoteodosio_01"
+  },
+  {
+    "id": "DESP_MOT_0034",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórico piloto de ralis de Guimarães (nascido em 1962), Adruzilo Lopes («Adruzilo Lopes»), celebrizou-se pelos seus três títulos consecutivos de Campeão Nacional de Ralis (1997, 1998 e 2001) ao volante do mítico:",
+    "opcoes": [
+      "Renault Megane Maxi",
+      "Peugeot 306 Maxi (Peugeot Portugal)",
+      "Ford Escort Cosworth",
+      "Subaru Impreza WRC"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O som estridente do motor atmosférico do Peugeot 306 Maxi de Adruzilo Lopes e Luís Lisboa marcou a era de ouro dos ralis em Portugal.",
+    "fonte": "FPAK / Peugeot Sport Portugal",
+    "factClusterId": "fc_desp_mot_adruzilolopes_306maxi_01"
+  },
+  {
+    "id": "DESP_MOT_0035",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que prestigiado museu de automóveis clássicos e arte situado na Serra do Caramulo (Tondela), fundado em 1953 pelos irmãos Abel e Salvador de Lacerda («Museu do Caramulo»), alberga uma das mais raras coleções de automóveis de corrida e presidenciais da Europa e organiza o histórico «Caramulo Motorfestival»?",
+    "opcoes": [
+      "Museu dos Transportes do Porto",
+      "Museu do Ar de Sintra",
+      "Museu do Caramulo (Fundação Abel e Salvador de Lacerda)",
+      "Museu da Miniatura Automóvel de Gouveia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu do Caramulo preserva o Bugatti 35B de 1930, o Mercedes blindado de Salazar e o monolugar Jordan F1 de Tiago Monteiro.",
+    "fonte": "Museu do Caramulo / Caramulo Motorfestival",
+    "factClusterId": "fc_desp_mot_museudocaramulo_01"
+  },
+  {
+    "id": "DESP_MOT_0036",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de motocross e enduro de Barcelos (nascido em 1981), Rui Gonçalves («Rui Gonçalves»), sagrou-se Vice-Campeão Mundial de Motocross na categoria MX2 em 2009 com a equipa oficial Red Bull KTM Factory?",
+    "opcoes": [
+      "Paulo Gonçalves",
+      "Hugo Basaúla",
+      "Luís Correia",
+      "Rui Gonçalves"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rui Gonçalves conquistou várias vitórias em Grandes Prémios de MX2 e transmutou com sucesso a sua carreira para o Rali Dakar nas motos da Sherco.",
+    "fonte": "FIM / FMP / Red Bull Motorsport",
+    "factClusterId": "fc_desp_mot_ruigoncalves_mx2_01"
+  },
+  {
+    "id": "DESP_MOT_0037",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que antigo e emblemático kartódromo no concelho de Palmela e no concelho de Viana do Castelo («Kartódromo Internacional de Palmela» / «Kartódromo Internacional de Braga»), foi a pista escola onde começaram as carreiras de quase todos os pilotos portugueses de topo?",
+    "opcoes": [
+      "Kartódromos Oficiais de Formação da FPAK (Palmela, Braga, Viana, Évora, Portimão)",
+      "Pistas de Autocross",
+      "Circuitos de Drag Racing",
+      "Pistas de Slot Cars"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Karting é a base obrigatória dos desportos motorizados onde Tiago Monteiro, Félix da Costa e Albuquerque deram as primeiras voltas aos 7 anos.",
+    "fonte": "FPAK / Federação Internacional de Automobilismo",
+    "factClusterId": "fc_desp_mot_karting_formacao_01"
+  },
+  {
+    "id": "DESP_MOT_0038",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que prestigiada prova náutica de motonáutica e barcos de velocidade do Campeonato do Mundo de Fórmula 1 em motonáutica («F1H2O»), realiza-se há décadas nas águas do rio Douro no Porto e no rio Tejo em Vila Velha de Ródão?",
+    "opcoes": [
+      "Regata de Barcos Rabelos",
+      "Grande Prémio de Portugal de F1H2O (Fórmula 1 de Motonáutica)",
+      "Volvo Ocean Race",
+      "Troféu do Tejo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os catamarãs de F1H2O atingem velocidades superiores a 220 km/h na água com acelerações de 0 a 100 km/h em menos de 2 segundos.",
+    "fonte": "UIM (Union Internationale Motonautique) / Federação Portuguesa de Motonáutica",
+    "factClusterId": "fc_desp_mot_f1h2o_motonautica_01"
+  },
+  {
+    "id": "DESP_MOT_0039",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que troço lendário de asfalto do Rali de Portugal nos anos 1970 e 1980 na Serra de Sintra («A Noite de Sintra» / Lagoa Azul e Peninha), atraía centenas de milhares de pessoas criando paredes humanas que abriam à passagem dos monstros do Grupo B?",
+    "opcoes": [
+      "A Noite de Arganil",
+      "O Troço do Marão",
+      "A Noite de Sintra (Lagoa Azul e Peninha)",
+      "O Salto da Lameirinha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Noite de Sintra tornou-se lendária na história mundial dos ralis, com pilotos como Walter Röhrl e Markku Alén a rasgar a escuridão entre a multidão.",
+    "fonte": "WRC / Arquivo ACP / Diário de Notícias",
+    "factClusterId": "fc_desp_mot_noitedesintra_01"
+  },
+  {
+    "id": "DESP_MOT_0040",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que mítico troço de terra da Serra do Açor no Rali de Portugal («O Troço de Arganil» / Candosa e Luadas), com mais de 40 km de extensão percorrido muitas vezes debaixo de nevoeiro cerrado e chuva, definia o vencedor do rali?",
+    "opcoes": [
+      "Troço de Fafe",
+      "Troço de Cabeceiras de Basto",
+      "Troço de Vieira do Minho",
+      "Troço de Arganil (Serra do Açor)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Em 1980, Walter Röhrl impôs o Fiat 131 Abarth no nevoeiro de Arganil ganhando mais de 4 minutos a todos os adversários numa das mais lendárias exibições da história do WRC.",
+    "fonte": "WRC / Município de Arganil / ACP",
+    "factClusterId": "fc_desp_mot_arganil_rohrl1980_01"
+  },
+  {
+    "id": "DESP_MOT_0041",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que famosa equipa de fábrica portuguesa de ralis dos anos 1980 criada pelo Dr. Miguel Oliveira («Team Diabolique»), celebrizou-se pela decoração vermelha e branca com a silhueta do diabo com o tridente nos seus Ford Escort e Ford RS200?",
+    "opcoes": [
+      "Team Diabolique (Dr. Miguel Oliveira e Joaquim Santos)",
+      "Team Galp",
+      "Team Portela Cafés",
+      "Team Totta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Team Diabolique revolucionou o profissionalismo e a imagem dos ralis em Portugal com vitórias consecutivas no campeonato nacional.",
+    "fonte": "FPAK / Museu Automóvel",
+    "factClusterId": "fc_desp_mot_teamdiabolique_01"
+  },
+  {
+    "id": "DESP_MOT_0042",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto português de resistencia (nascido em Lisboa em 1978), Manuel Gião («Manuel Gião»), sagrou-se Campeão de Espanha de GT e Campeão do International GT Open com a equipa da Autorlando Porsche?",
+    "opcoes": [
+      "Pedro Couceiro",
+      "Manuel Gião",
+      "Miguel Ramos",
+      "César Campaniço"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Manuel Gião conta com mais de 30 anos de carreira e múltiplos títulos nacionais e ibéricos de velocidade e GT.",
+    "fonte": "FPAK / International GT Open",
+    "factClusterId": "fc_desp_mot_manuelgiao_01"
+  },
+  {
+    "id": "DESP_MOT_0043",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de Vila Nova de Famalicão (nascido em 1971), Miguel Ramos («Miguel Ramos»), é o piloto português com maior número de títulos internacionais de Grande Turismo (GT), tendo sido Campeão do International GT Open em 2008, 2015 e 2021 com a Ferrari e McLaren?",
+    "opcoes": [
+      "Álvaro Parente",
+      "Pedro Lamy",
+      "Miguel Ramos",
+      "Filipe Barreiros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Miguel Ramos ultrapassou a marca histórica de mais de 200 corridas internacionais em campeonatos de GT da FIA e SRO.",
+    "fonte": "International GT Open / SRO Motorsports",
+    "factClusterId": "fc_desp_mot_miguelramos_gtopen_01"
+  },
+  {
+    "id": "DESP_MOT_0044",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que piloto de ralis de Santo Tirso (nascido em 1973), José Pedro Fontes («José Pedro Fontes»), sagrou-se bicampeão nacional de ralis em 2015 e 2016 com o Citroën DS3 R5 e lidera a equipa oficial da Citroën Vodafone Team?",
+    "opcoes": [
+      "Armindo Araújo",
+      "Ricardo Teodósio",
+      "Pedro Meireles",
+      "José Pedro Fontes (Citroën Vodafone Team)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "José Pedro Fontes é também campeão nacional de velocidade e uma das referências técnicas dos ralis em Portugal com a Sports & You.",
+    "fonte": "FPAK / Citroën Racing",
+    "factClusterId": "fc_desp_mot_josepedrofontes_01"
+  },
+  {
+    "id": "DESP_MOT_0045",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que jovem piloto luso-angolano de monolugares (nascido em 1999), Rui Andrade («Rui Andrade»), sagrou-se Campeão Mundial de Resistência da FIA (WEC) na categoria LMP2 em 2023 com a equipa Team WRT, tornando-se o primeiro português campeão do mundo da classe?",
+    "opcoes": [
+      "Rui Andrade (Campeão Mundial FIA WEC LMP2 2023)",
+      "Filipe Albuquerque",
+      "Henrique Chaves",
+      "Guilherme Oliveira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Rui Andrade venceu as 6 Horas de Spa-Francorchamps, as 6 Horas de Monza e as 8 Horas do Bahrein a caminho do título mundial com Robert Kubica e Louis Delétraz.",
+    "fonte": "FIA WEC / Automobile Club de l'Ouest",
+    "factClusterId": "fc_desp_mot_ruiandrade_wec2023_01"
+  },
+  {
+    "id": "DESP_MOT_0046",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que jovem piloto de Oeiras (nascido em 1997), Henrique Chaves («Henrique Chaves»), venceu em 2022 a mítica prova das 24 Horas de Le Mans na categoria LMGTE Am ao volante do Aston Martin Vantage AMR da TF Sport?",
+    "opcoes": [
+      "Filipe Albuquerque",
+      "Henrique Chaves (Vencedor em Le Mans LMGTE Am 2022)",
+      "Álvaro Parente",
+      "Pedro Lamy"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Henrique Chaves juntou o seu nome à galeria de vencedores portugueses em Le Mans ao lado de Pedro Lamy e Filipe Albuquerque.",
+    "fonte": "24 Horas de Le Mans / FIA WEC / FPAK",
+    "factClusterId": "fc_desp_mot_henriquechaves_lemans2022_01"
+  },
+  {
+    "id": "DESP_MOT_0047",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórica prova de motocross internacional de topo realiza-se no circuito do Crossódromo Internacional de Águeda (concelho de Águeda), sendo uma das etapas europeias mais aclamadas do Campeonato do Mundo de Motocross (MXGP)?",
+    "opcoes": [
+      "MXGP de Cortelha",
+      "Motocross de Casais de São Quintino",
+      "Grande Prémio de Portugal de Motocross (MXGP de Águeda)",
+      "Supercross da Moita"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A pista de terra vermelha do Crossódromo do Casarão em Águeda é considerada uma das melhores e mais técnicas pistas de motocross do mundo pela FIM.",
+    "fonte": "FIM / MXGP / ACTIB Águeda",
+    "factClusterId": "fc_desp_mot_mxgp_agueda_01"
+  },
+  {
+    "id": "DESP_MOT_0048",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que prestigiada prova de Enduro internacional disputada nas serras íngremes e escadarias do centro histórico do Porto e Vila Nova de Gaia («Extreme XL Lagares»), integra o Campeonato Mundial de Hard Enduro da FIM atraindo os melhores pilotos mundiais de motos?",
+    "opcoes": [
+      "Enduro de Góis",
+      "Rali de Mação",
+      "Trilhos de Baltar",
+      "Extreme XL Lagares (Porto e Penafiel / FIM Hard Enduro)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O prólogo da Extreme XL Lagares na Ribeira do Porto com passagens pelas escadas medievais e pontões flutuantes sobre o Douro é uma das imagens mais virais do desporto motorizado.",
+    "fonte": "FIM Hard Enduro / Melícias Team",
+    "factClusterId": "fc_desp_mot_extremexllagares_01"
+  },
+  {
+    "id": "DESP_MOT_0049",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que lendário piloto de ralis finlandês (1940-2023), Hannu Mikkola, e o alemão Walter Röhrl nos anos 1980, consideravam o público português do Rali de Portugal como o mais fervoroso e conhecedor do mundo, celebrizando a frase de César Torres:",
+    "opcoes": [
+      "«O Rali de Portugal é a grande festa do desporto motorizado e a catedral mundial dos ralis»",
+      "«O rali é uma corrida de cavalos»",
+      "«Quem tem medo compra um cão»",
+      "«A estrada não perdoa»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "César Torres (1933-1997) foi o grande obreiro da internacionalização do Rali de Portugal e vice-presidente da FIA.",
+    "fonte": "Automóvel Club de Portugal / FIA",
+    "factClusterId": "fc_desp_mot_cesartorres_acp_01"
+  },
+  {
+    "id": "DESP_MOT_0050",
+    "tema": "Desporto",
+    "subtema": "Desportos Motorizados",
+    "pergunta": "Que histórica e mais antiga entidade desportiva e clube automobilístico de Portugal, fundado em Lisboa em 1903 («Automóvel Club de Portugal» — ACP), organiza o Rali de Portugal, a Baja Portalegre 500 e é o representante oficial da FIA e da FIM em território nacional?",
+    "opcoes": [
+      "Federação Portuguesa de Automobilismo",
+      "Clube de Automóveis Antigos",
+      "Automóvel Club de Portugal (ACP — fundado em 1903)",
+      "Real Automóvel Clube"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ACP é a maior organização não-governamental de Portugal com mais de 250.000 sócios e mais de 120 anos de história cívica e desportiva.",
+    "fonte": "Automóvel Club de Portugal (ACP) / FIA",
+    "factClusterId": "fc_desp_mot_acp_1903_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUS_PIM_0001",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor, compositor e produtor de Covas do Douro / Ourém (nascido em 1957), Emanuel («Emanuel»), celebrizou em 1995 o estrondoso tema «Pimba, Pimba» («Nós Pimba») que batizou e consagrou nacionalmente todo o género da «Música Pimba»?",
+    "opcoes": [
+      "Emanuel (1995, «Pimba, Pimba»)",
+      "Quim Barreiros",
+      "Toy",
+      "José Malhoa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O álbum vendeu centenas de milhares de cópias e o termo 'pimba' entrou no léxico da cultura popular e dos dicionários da língua portuguesa.",
+    "fonte": "Dicionário de Música Popular Portuguesa / SPA / RTP",
+    "factClusterId": "fc_mus_pim_emanuel_pimbapimba_1995_01"
+  },
+  {
+    "id": "MUS_PIM_0002",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que lendário acordeonista e cantor popular de Vila Praia de Âncora (Caminha, nascido em 1947), Quim Barreiros («Quim Barreiros»), rei absoluto das rimas de duplo sentido brejeiro, celebrizou em 2000 o hino popular «A Garagem da Vizinha»?",
+    "opcoes": [
+      "Augusto Canário",
+      "Quim Barreiros",
+      "Nel Monteiro",
+      "Saúl Ricardo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Quim Barreiros é presença obrigatória todos os anos nas maiores festas académicas do país como a Queima das Fitas de Coimbra e Porto.",
+    "fonte": "Quim Barreiros / SPA / Museu do Som",
+    "factClusterId": "fc_mus_pim_quimbarreiros_garagem_01"
+  },
+  {
+    "id": "MUS_PIM_0003",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que célebre cantora lisboeta (nascida em 1959), Ágata («Ágata»), antiga vocalista das Doce e das Cocktail, alcançou o estatuto de estrela da música ligeira romântica com o megassucesso de 1996 «Perfume de Mulher» («Sozinha... Sem Ti...»)?",
+    "opcoes": [
+      "Romana",
+      "Mónica Sintra",
+      "Ágata (1996, «Perfume de Mulher»)",
+      "Ruth Marlene"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O álbum 'Perfume de Mulher' esteve semanas no topo das tabelas e conquistou múltiplos galardões de platina.",
+    "fonte": "SPA / Dicionário da Música Popular",
+    "factClusterId": "fc_mus_pim_agata_perfumedemulher_1996_01"
+  },
+  {
+    "id": "MUS_PIM_0004",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que popular e versátil cantor e compositor de Setúbal (nascido em 1963), Toy («Toy» / António Ferrão), alcançou um estrondoso fenómeno viral intergeracional em 2018 com o tema «Coração Não Tem Idade (Vou Beijar na Boca)»?",
+    "opcoes": [
+      "Emanuel",
+      "Sérgio Rossi",
+      "José Malhoa",
+      "Toy (António Ferrão)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Toy é famoso pelas suas capacidades vocais e de improvisação ao vivo tendo participado em dezenas de programas de televisão e novelas.",
+    "fonte": "Toy / SPA / Sociedade Portuguesa de Autores",
+    "factClusterId": "fc_mus_pim_toy_coracaonaotemidade_2018_01"
+  },
+  {
+    "id": "MUS_PIM_0005",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora e acordeonista do Montijo (nascida em 1977), Rosa Maria Rocha («Rosinha»), famosa pelos seus óculos escuros e letras hilariantes de duplo sentido, explodiu em 2007 com o êxito «Eu Levo no Pacote (De Bolachas)»?",
+    "opcoes": [
+      "Rosinha",
+      "Ruth Marlene",
+      "Joana",
+      "Rebeca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Rosinha é uma das artistas mais requisitadas nas romarias de verão em Portugal e nas comunidades portuguesas no estrangeiro.",
+    "fonte": "Rosinha / Espacial Música",
+    "factClusterId": "fc_mus_pim_rosinha_pacote_01"
+  },
+  {
+    "id": "MUS_PIM_0006",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que fenómeno da música popular de Vila Nova de Gaia (nascido em 1987), Saúl Ricardo («O Pequeno Saúl»), conquistou o país aos 6 anos de idade em 1994 no programa «Chuva de Estrelas» com a canção:",
+    "opcoes": [
+      "«A Garagem da Vizinha»",
+      "«O Bacalhau Quer Alho»",
+      "«O Bicho da Maçã»",
+      "«Baile de Verão»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pequeno Saúl vendeu mais de 300.000 cópias em cassetes e CDs e atuou em estádios lotados em Portugal e na diáspora.",
+    "fonte": "SIC / Arquivo Musical / SPA",
+    "factClusterId": "fc_mus_pim_pequenosaul_bacalhauqueralho_1994_01"
+  },
+  {
+    "id": "MUS_PIM_0007",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora pop e popular do Barreiro (nascida em 1978), Ruth Marlene («Ruth Marlene»), conhecida como a «Menina dos Olhos de Mel», celebrizou os estrondosos êxitos de dança «Pisca Pisca» e «Coisinha Sexy»?",
+    "opcoes": [
+      "Romana",
+      "Ágata",
+      "Ruth Marlene",
+      "Micaela"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ruth Marlene tornou-se uma das cantoras de música de baile mais populares dos anos 1990 e 2000 em Portugal.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_ruthmarlene_piscapisca_01"
+  },
+  {
+    "id": "MUS_PIM_0008",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórico cantor popular de Lisboa (nascido em 1947), José Malhoa («José Malhoa»), pai da cantora Ana Malhoa, é o autor do mítico e eterno sucesso das festas de aldeia «Baile de Verão» («Aperta, aperta com ela... está turbinada»)?",
+    "opcoes": [
+      "Emanuel",
+      "Nel Monteiro",
+      "Dino Meira",
+      "José Malhoa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "José Malhoa soma mais de quatro décadas de carreira com dezenas de discos de ouro e platina em ritmos latinos e populares.",
+    "fonte": "José Malhoa / Espacial / SPA",
+    "factClusterId": "fc_mus_pim_josemalhoa_bailedeverao_01"
+  },
+  {
+    "id": "MUS_PIM_0009",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que inesquecível cantor romântico de Espinho (1940-1993), Dino Meira («Dino Meira»), considerado o «Ídolo dos Emigrantes», imortalizou a icónica canção «Meu Querido Mês de Agosto»?",
+    "opcoes": [
+      "Dino Meira (1940-1993)",
+      "Clemente",
+      "António Mourão",
+      "Marco Paulo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Meu Querido Mês de Agosto' tornou-se o hino não oficial do regresso dos emigrantes portugueses às suas terras natais no verão.",
+    "fonte": "RTP / Arquivo Sonoro / DHP",
+    "factClusterId": "fc_mus_pim_dinomeira_mesdeagosto_01"
+  },
+  {
+    "id": "MUS_PIM_0010",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórico grupo de música ligeira e de baile de Santa Maria da Feira liderado por Marante («Conjunto Diapasão»), imortalizou em 1993 a canção «A Bela Portuguesa»?",
+    "opcoes": [
+      "Bandarlhos",
+      "Conjunto Diapasão (Marante)",
+      "Santamaria",
+      "Chave D'Ouro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Diapasão são um dos conjuntos de baile com maior longevidade e vendas de discos no Norte e Centro do país.",
+    "fonte": "Vidisco / SPA",
+    "factClusterId": "fc_mus_pim_diapasao_marante_belaportuguesa_01"
+  },
+  {
+    "id": "MUS_PIM_0011",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que carismático tocador de concertina e cantador de desgarradas de Viana do Castelo («Augusto Canário» / Canário e Amigos), é a grande referência do folclore minhoto e das desgarradas populares ao vivo?",
+    "opcoes": [
+      "Quim Barreiros",
+      "Borghes",
+      "Augusto Canário",
+      "Tino de Rans"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Augusto Canário preserva a tradição das cantigas ao desafio e é autor de temas como 'O Frete' e 'O Piolho'.",
+    "fonte": "Augusto Canário / Município de Viana do Castelo",
+    "factClusterId": "fc_mus_pim_augustocanario_desgarrada_01"
+  },
+  {
+    "id": "MUS_PIM_0012",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que talentosa cantora de Sintra (nascida em 1978), Mónica Sintra («Mónica Sintra»), alcançou enorme sucesso no final dos anos 1990 com a célebre canção dramática «Afinal Havia Outra»?",
+    "opcoes": [
+      "Ágata",
+      "Romana",
+      "Ruth Marlene",
+      "Mónica Sintra (1998, «Afinal Havia Outra»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mónica Sintra venceu o concurso 'Cantigas da Rua' e construiu uma carreira sólida na música romântica e televisão.",
+    "fonte": "SPA / Vidisco",
+    "factClusterId": "fc_mus_pim_monicasintra_afinalhaviaoutra_01"
+  },
+  {
+    "id": "MUS_PIM_0013",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que célebre cantora lisboeta (nascida em 1981), Romana («Romana»), sobrinha de Ágata, celebrizou-se na adolescência aos 14 anos com o tema «Já Não Sou Bebé» e mais tarde com «Não És Homem Pra Mim»?",
+    "opcoes": [
+      "Romana",
+      "Micaela",
+      "Ana Malhoa",
+      "Suzana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Romana destacou-se pela sua voz potente gravando fado, música romântica e participando em programas como 'A Tua Cara Não Me É Estranha'.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_romana_janaosoubebe_01"
+  },
+  {
+    "id": "MUS_PIM_0014",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famosa banda de música eurodance e pop eletrónica de Santa Maria da Feira formada em 1997 («Santamaria»), liderada pela vocalista Filipa Lemos, bateu recordes de vendas com os êxitos «Eu Sei, Tu És...», «Tudo Pra Te Amar» e «Não Dá Pra Viver Sem Ti»?",
+    "opcoes": [
+      "D'Arrasar",
+      "Santamaria (Filipa Lemos)",
+      "Milénio",
+      "Nonstop"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Santamaria venderam mais de 1,5 milhões de discos conquistando mais de 20 discos de platina.",
+    "fonte": "Vidisco / Santamaria / SPA",
+    "factClusterId": "fc_mus_pim_santamaria_euseitues_1998_01"
+  },
+  {
+    "id": "MUS_PIM_0015",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor açoriano radicado nos EUA (nascido em 1947), Jorge Ferreira («Jorge Ferreira»), gravou dezenas de sucessos para a diáspora portuguesa na América do Norte como «Carro Preto», «Era Pouco e Acabou-se» e «Viva Fall River»?",
+    "opcoes": [
+      "Dino Meira",
+      "Marc Dennis",
+      "Jorge Ferreira",
+      "Roberto Leal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Jorge Ferreira é o artista de música popular portuguesa com maior sucesso comercial na comunidade luso-americana nos EUA e Canadá.",
+    "fonte": "City Records / SPA",
+    "factClusterId": "fc_mus_pim_jorgeferreira_carropreto_01"
+  },
+  {
+    "id": "MUS_PIM_0016",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famoso cantor luso-brasileiro de Macedo de Cavaleiros (1951-2019), Roberto Leal («Roberto Leal»), vendeu mais de 17 milhões de discos divulgando as tradições portuguesas no Brasil com êxitos como «Arrebita» e «Uma Casa Portuguesa»?",
+    "opcoes": [
+      "Dino Meira",
+      "Paco Bandeira",
+      "José Cid",
+      "Roberto Leal (1951-2019)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Roberto Leal foi um verdadeiro embaixador da cultura e folclore português na televisão brasileira durante quatro décadas.",
+    "fonte": "Dicionário da Música Popular Portuguesa / TV Globo / RTP",
+    "factClusterId": "fc_mus_pim_robertoleal_arrebita_01"
+  },
+  {
+    "id": "MUS_PIM_0017",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor e compositor alentejano de Freixo de Espada à Cinta e Lisboa («Nel Monteiro»), autor do êxito cómico «Azar na Praia», foi o produtor musical que descobriu nomes como Saúl e Chave D'Ouro?",
+    "opcoes": [
+      "Nel Monteiro",
+      "Emanuel",
+      "Toy",
+      "José Malhoa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Nel Monteiro é uma das figuras históricas da produção discográfica de música ligeira portuguesa com a editora Metro-Som.",
+    "fonte": "Nel Monteiro / SPA",
+    "factClusterId": "fc_mus_pim_nelmonteiro_01"
+  },
+  {
+    "id": "MUS_PIM_0018",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que popular e bem-humorado grupo musical português («Chave D'Ouro»), celebrizou em 2005 o estrondoso tema de verão «O Pai da Criança» («De quem é o filho? É do vizinho!»)?",
+    "opcoes": [
+      "Santamaria",
+      "Chave D'Ouro",
+      "Trio Odemira",
+      "Diapasão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A música tornou-se uma das mais tocadas e parodiadas em festas académicas e arraiais populares de Portugal.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_chavedouro_paidiacrianca_2005_01"
+  },
+  {
+    "id": "MUS_PIM_0019",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que popular cantora e apresentadora lisboeta (nascida em 1979), Ana Malhoa («Ana Malhoa»), que começou como estrela infantil no «Super Buéréré», transformou-se na «Rainha Latina» de Portugal com êxitos como «Sube la Temperatura» e «Tá Turbinada»?",
+    "opcoes": [
+      "Romana",
+      "Luciana Abreu",
+      "Ana Malhoa",
+      "Blaya"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Ana Malhoa é uma das artistas femininas mais premiadas com discos de platina no pop latino e reggaeton em Portugal.",
+    "fonte": "Ana Malhoa / SPA / SIC",
+    "factClusterId": "fc_mus_pim_anamalhoa_01"
+  },
+  {
+    "id": "MUS_PIM_0020",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor romântico de Setúbal (nascido em 1955), Clemente («Clemente»), venceu festivais internacionais e celebrizou clássicos da música ligeira portuguesa como «Vais Pagar» e «A Colmeia do Amor»?",
+    "opcoes": [
+      "Toy",
+      "Ágata",
+      "Marco Paulo",
+      "Clemente"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Clemente é uma presença assídua nos ecrãs de televisão e foi condecorado pela sua carreira internacional nos países de língua portuguesa.",
+    "fonte": "Clemente / SPA / RTP",
+    "factClusterId": "fc_mus_pim_clemente_vaispagar_01"
+  },
+  {
+    "id": "MUS_PIM_0021",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famosa canção popular de Quim Barreiros lançada em 1994 («O Cabritinha» / «A Cabritinha»), celebrizou o refrão hilariante «Porque eu gosto de mamar nos peitos da cabritinha»?",
+    "opcoes": [
+      "«A Cabritinha» (Quim Barreiros)",
+      "«A Garagem da Vizinha»",
+      "«Bacalhau à Portuguesa»",
+      "«O Melhor Dia Pra Casar»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Cabritinha é uma adaptação bem-humorada que se tornou um clássico intemporal nas noites académicas de norte a sul do país.",
+    "fonte": "Quim Barreiros / SPA",
+    "factClusterId": "fc_mus_pim_quimbarreiros_cabritinha_01"
+  },
+  {
+    "id": "MUS_PIM_0022",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que célebre cantora da Maia (nascida em 1976), Micaela («Micaela»), alcançou enorme popularidade no final dos anos 1990 com o tema de música de baile «Chupa no Dedo» («Guga Chupa no Dedo»)?",
+    "opcoes": [
+      "Rebeca",
+      "Micaela",
+      "Ruth Marlene",
+      "Suzana"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Micaela participou no Festival RTP da Canção e em reality shows apresentando também programas de música popular na TV.",
+    "fonte": "Micaela / Vidisco / SPA",
+    "factClusterId": "fc_mus_pim_micaela_chupanodedo_01"
+  },
+  {
+    "id": "MUS_PIM_0023",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor lisboeta e sobrinho de Ágata (nascido em 1980), Sérgio Rossi («Sérgio Rossi»), celebrizou-se com ritmos populares de verão como «Menina Top» e «És Perigosa»?",
+    "opcoes": [
+      "Leandro",
+      "Toy",
+      "Sérgio Rossi",
+      "Saúl"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sérgio Rossi é um dos artistas mais concorridos nos palcos das festas populares e festivais de verão.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_sergiorossi_meninatop_01"
+  },
+  {
+    "id": "MUS_PIM_0024",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora das Caldas da Rainha (nascida em 1979), Rebeca («Rebeca»), superou problemas de saúde graves tornando-se um exemplo de resiliência e voz de sucessos como «Meu Nome É Rebeca» e «O Meu Coração Bate Por Ti»?",
+    "opcoes": [
+      "Rosinha",
+      "Joana",
+      "Mónica Sintra",
+      "Rebeca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rebeca é presença habitual nos programas de domingo da televisão portuguesa.",
+    "fonte": "Rebeca / Espacial",
+    "factClusterId": "fc_mus_pim_rebeca_01"
+  },
+  {
+    "id": "MUS_PIM_0025",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórica e tradicional arte poética e musical espontânea do Norte de Portugal e da Galiza («A Desgarrada» / Cantares ao Desafio), consiste no confronto improvisado em verso rimado entre dois ou mais cantadores ao som da concertina?",
+    "opcoes": [
+      "A Desgarrada (ou Cantares ao Desafio)",
+      "O Fado Vadio",
+      "O Cante Alentejano",
+      "As Janeiras"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A desgarrada exige enorme agilidade mental, rima perfeita em quadras ou sextilhas e sentido de humor brejeiro.",
+    "fonte": "INATEL / Museu dos Cordofones / DGPC",
+    "factClusterId": "fc_mus_pim_desgarrada_desafio_01"
+  },
+  {
+    "id": "MUS_PIM_0026",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famoso instrumento de fole com botões («A Concertina» / Acordeão diatónico), é o instrumento rei absoluto da música popular do Minho, Douro Litoral e Trás-os-Montes acompanhando as rusgas e chulas?",
+    "opcoes": [
+      "O Bandolim",
+      "A Concertina",
+      "O Cavaquinho",
+      "A Flauta de Bisel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Ponte de Lima e Viana do Castelo acolhem anualmente os maiores encontros mundiais de tocadores de concertina com milhares de participantes.",
+    "fonte": "Município de Ponte de Lima / Museu da Concertina",
+    "factClusterId": "fc_mus_pim_concertina_minho_01"
+  },
+  {
+    "id": "MUS_PIM_0027",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famosa canção de Quim Barreiros («Bacalhau à Portuguesa»), contém o célebre refrão satírico «Queres cheirar o meu bacalhau?» lançado em 1986?",
+    "opcoes": [
+      "«A Garagem da Vizinha»",
+      "«A Chupeta»",
+      "«Bacalhau à Portuguesa»",
+      "«O Grilinho»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O tema foi dos primeiros grandes êxitos de vendas de cassetes piratas e oficiais nas feiras e bombas de gasolina portuguesas.",
+    "fonte": "Quim Barreiros / Discos Dó-Ré-Mi",
+    "factClusterId": "fc_mus_pim_quimbarreiros_bacalhau_1986_01"
+  },
+  {
+    "id": "MUS_PIM_0028",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que popular e bem-humorada canção de Quim Barreiros («O Melhor Dia Pra Casar»), aconselha em tom cómico a casar no dia «31 de Julho» porque:",
+    "opcoes": [
+      "«Porque não há calor»",
+      "«Porque a noiva não paga»",
+      "«Porque há festa na aldeia»",
+      "«Porque depois entra Agosto (a gosto)!»"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O trocadilho entre o mês de Agosto e a expressão 'a gosto' é uma das marcas de humor inconfundíveis de Quim Barreiros.",
+    "fonte": "Quim Barreiros / SPA",
+    "factClusterId": "fc_mus_pim_quimbarreiros_melhordiacasar_01"
+  },
+  {
+    "id": "MUS_PIM_0029",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que grupo de comédia e música brejeira («Sons do Minho»), originário de Viana do Castelo, conquistou grande notoriedade nacional e na diáspora com temas como «Dá-me um Beijinho» e «Vamos à Festa»?",
+    "opcoes": [
+      "Sons do Minho",
+      "Diapasão",
+      "Chave D'Ouro",
+      "Bandalhos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Sons do Minho combinam concertinas tradicionais com ritmos modernos de festa e trajes minhotos estilizados.",
+    "fonte": "Sons do Minho / Espacial",
+    "factClusterId": "fc_mus_pim_sonsdominho_01"
+  },
+  {
+    "id": "MUS_PIM_0030",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora de música popular e de desgarrada de Marco de Canaveses («Bandalheira» / «Joana»), famosa pela sua voz estridente e despachada nas desgarradas com Canário e Quim Barreiros, tem como lema a defesa das mulheres do campo?",
+    "opcoes": [
+      "Rosinha",
+      "Joana (A Rainha das Desgarradas)",
+      "Rebeca",
+      "Romana"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Joana celebrizou os despiques ao vivo em romarias minhotas e transmontanas.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_joana_desgarrada_01"
+  },
+  {
+    "id": "MUS_PIM_0031",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famoso programa de televisão de domingo da TVI («Somos Portugal»), transmitido ao vivo a partir de feiras e romarias por todo o país durante mais de uma década (2011-2024), foi a maior montra televisiva da música pimba e do artesanato regional?",
+    "opcoes": [
+      "Domingão (SIC)",
+      "Aqui Portugal (RTP1)",
+      "Somos Portugal (TVI)",
+      "Big Show SIC"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O 'Somos Portugal' percorria semanalmente as vilas portuguesas promovendo a gastronomia, os produtos da terra e a música de baile.",
+    "fonte": "TVI / Media Capital",
+    "factClusterId": "fc_mus_pim_somosportugal_tvi_01"
+  },
+  {
+    "id": "MUS_PIM_0032",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que programa televisivo das tardes de domingo da SIC («Domingão»), emitido com o icónico camião-palco em andamento pelas ruas animado por Luciana Abreu e Emanuel, consagrou o contacto direto com o povo durante o período pós-pandemia?",
+    "opcoes": [
+      "Somos Portugal",
+      "Praça da Alegria",
+      "All Together Now",
+      "Domingão (SIC / Camião da SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O camião do Domingão levou música e alegria porta a porta pelas aldeias e bairros portugueses.",
+    "fonte": "SIC / Impresa",
+    "factClusterId": "fc_mus_pim_domingao_sic_01"
+  },
+  {
+    "id": "MUS_PIM_0033",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórico e louco programa de televisão dos anos 1990 na SIC apresentado por João Baião («Big Show SIC»), foi o palco de explosão e consagração definitiva da música pimba com o famoso macaco «Mico Preto» e as bailarinas?",
+    "opcoes": [
+      "Big Show SIC (João Baião, 1995-2001)",
+      "Roda dos Milhões",
+      "Chuva de Estrelas",
+      "Made in Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Big Show SIC alcançava quotas de audiência superiores a 60% e revelou dezenas de artistas populares ao som do grito 'Dona Laurinda!'.",
+    "fonte": "SIC / Arquivo Histórico de Televisão",
+    "factClusterId": "fc_mus_pim_bigshow_sic_joaobaiao_1995_01"
+  },
+  {
+    "id": "MUS_PIM_0034",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora e atriz de Guimarães (nascida em 1985), Luciana Abreu («Luciana Abreu» / Floribella), alcançou enorme êxito popular com a música «Vestido Azul» e temas de baile latino?",
+    "opcoes": [
+      "Ana Malhoa",
+      "Luciana Abreu",
+      "Romana",
+      "Mia Rose"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Luciana Abreu representou Portugal na Eurovisão em 2005 (2B) e bateu recordes de vendas com a banda sonora da telenovela infantil Floribella.",
+    "fonte": "SIC / SPA",
+    "factClusterId": "fc_mus_pim_lucianaabreu_floribella_01"
+  },
+  {
+    "id": "MUS_PIM_0035",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórico cantor romântico de Elvas (1945-2024), Marco Paulo («Marco Paulo» / João Simão da Silva), celebrizou canções que atravessaram gerações em todas as festas portuguesas como «Eu Tenho Dois Amores», «Maravilhoso Coração» e «Taras e Manias»?",
+    "opcoes": [
+      "Dino Meira",
+      "Clemente",
+      "Marco Paulo (1945-2024)",
+      "Paco Bandeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marco Paulo foi o maior vendedor de discos da história da música ligeira portuguesa com mais de 5 milhões de discos vendidos e 140 galardões de platina e ouro.",
+    "fonte": "Valentim de Carvalho / SPA / DHP",
+    "factClusterId": "fc_mus_pim_marcopaulo_doisamores_01"
+  },
+  {
+    "id": "MUS_PIM_0036",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor e compositor popular alentejano de Montemor-o-Novo (nascido em 1945), Paco Bandeira («Paco Bandeira»), compôs e interpretou alguns dos maiores hinos da música tradicional portuguesa como «A Minha Cidade (Oh Elvas, Oh Elvas...)» e «Chula da Livração»?",
+    "opcoes": [
+      "Dino Meira",
+      "Vitorino",
+      "Janita Salomé",
+      "Paco Bandeira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Paco Bandeira aliou a raiz do cancioneiro alentejano e ribatejano à música ligeira de grande apelo radiofónico.",
+    "fonte": "SPA / Arquivo Sonoro",
+    "factClusterId": "fc_mus_pim_pacobandeira_ohelvas_01"
+  },
+  {
+    "id": "MUS_PIM_0037",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que emblemática e centenária tradição festiva das aldeias e vilas de Portugal, realizada massivamente durante os fins de semana dos meses de julho e agosto («As Romarias e Festas de Verão»), junta procissões religiosas, fogo de artifício, febras e concertos de música popular?",
+    "opcoes": [
+      "As Romarias e Arraiais Populares de Verão",
+      "O Festival da Canção",
+      "Os Santos Populares de Lisboa apenas",
+      "As Feiras Francas de Inverno"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As comissões de festas trabalham durante o ano inteiro para angariar fundos e contratar os melhores artistas de música ligeira e conjuntos de baile.",
+    "fonte": "DGPC / Antropologia Cultural Portuguesa",
+    "factClusterId": "fc_mus_pim_romariasdeverao_arraiais_01"
+  },
+  {
+    "id": "MUS_PIM_0038",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que tema cómico de Rosinha («Eu Seguro no Pincel»), explora de forma bem-humorada o trabalho de pintura de paredes com o refrão «Tu bates com a trincha que eu seguro no pincel»?",
+    "opcoes": [
+      "«Eu Levo no Pacote»",
+      "«Eu Seguro no Pincel» (Rosinha)",
+      "«É de Gatas que Eu Gosto»",
+      "«Eu Tenho Uma Coisa»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O humor visual e a encenação nos videoclipes de Rosinha tornaram as suas canções um fenómeno de visualizações no YouTube.",
+    "fonte": "Espacial / YouTube Rosinha Oficial",
+    "factClusterId": "fc_mus_pim_rosinha_pincel_01"
+  },
+  {
+    "id": "MUS_PIM_0039",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famosa canção de Ágata lançada no álbum de 1997 («Comunhão de Bens»), retrata o drama conjugal de uma separação com o refrão dramático «Leva tudo o que quiseres... mas deixa-me o meu filho»?",
+    "opcoes": [
+      "«Perfume de Mulher»",
+      "«Mãe Querida»",
+      "«Comunhão de Bens» (Ágata, 1997)",
+      "«Sozinha»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A canção 'Comunhão de Bens' consolidou Ágata como a voz emotiva das mulheres da classe média e popular portuguesa.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_agata_comunhaodebens_1997_01"
+  },
+  {
+    "id": "MUS_PIM_0040",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que projeto musical e disco coletivo com fins beneficentes lançado em 1998 («Mãe Querida, Mãe Querida»), reuniu os maiores cantores de música ligeira (Ágata, Romana, Toy, José Malhoa, Tony Carreira) tornando-se o álbum mais vendido desse ano?",
+    "opcoes": [
+      "«Coração Português»",
+      "«Vozes de Portugal»",
+      "«Portugal a Cantar»",
+      "«Mãe Querida» (1998)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O álbum 'Mãe Querida' vendeu mais de 400.000 cópias em Portugal homenageando as mães portuguesas.",
+    "fonte": "Espacial Música / SPA",
+    "factClusterId": "fc_mus_pim_maequerida_coletivo_1998_01"
+  },
+  {
+    "id": "MUS_PIM_0041",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que grupo de comediantes de Viseu e Porto (Pedro Alves e João Paulo Rodrigues), criadores das personagens «Quim Roscas & Zeca Estacionâncio», gravaram a canção e paródia musical «O Amor em Penafiel»?",
+    "opcoes": [
+      "Quim Roscas & Zeca Estacionâncio (Pedro Alves e João Paulo Rodrigues)",
+      "Gato Fedorento",
+      "Herman José e Nelito",
+      "Os Malucos do Riso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A dupla encheu teatros e arraiais com o seu espetáculo que combinava stand-up comedy rural e música popular brejeira.",
+    "fonte": "Tele Rural / RTP / SPA",
+    "factClusterId": "fc_mus_pim_quimroscas_zecaestacionancio_01"
+  },
+  {
+    "id": "MUS_PIM_0042",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que famosa canção de Quim Barreiros («O Peixe»), brinca com a comparação entre as profissões e as espécies de peixes na lota com o trocadilho «O polícia é o carapau»?",
+    "opcoes": [
+      "«A Garagem da Vizinha»",
+      "«O Peixe» (Quim Barreiros)",
+      "«A Chupeta»",
+      "«O Ténis»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Quim Barreiros utiliza expressões populares da gíria portuguesa nas suas rimas bem-humoradas.",
+    "fonte": "Quim Barreiros / SPA",
+    "factClusterId": "fc_mus_pim_quimbarreiros_opeixe_01"
+  },
+  {
+    "id": "MUS_PIM_0043",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantor e fadista de Pampilhosa da Serra (nascido em 1963), Tony Carreira («Tony Carreira» / António Antunes), começou a sua carreira nos bailes de emigrantes em França antes de encher sucessivamente o Altice Arena e o Olympia de Paris?",
+    "opcoes": [
+      "Mickael Carreira",
+      "David Carreira",
+      "Tony Carreira (António Antunes)",
+      "Jorge Ferreira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tony Carreira é um dos maiores fenómenos de vendas de sempre da música romântica em Portugal com mais de 4 milhões de discos vendidos.",
+    "fonte": "Tony Carreira / SPA / Sony Music",
+    "factClusterId": "fc_mus_pim_tonycarreira_01"
+  },
+  {
+    "id": "MUS_PIM_0044",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que importante editora discográfica portuguesa fundada em 1993 («Espacial Música»), é a principal e histórica editora responsável pela gravação, promoção e lançamento das maiores estrelas da música pimba e popular portuguesa?",
+    "opcoes": [
+      "Vidisco",
+      "Valentim de Carvalho",
+      "Farol Música",
+      "Espacial Música"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Espacial Música domina o catálogo nacional de música ligeira, romântica e de romaria em Portugal.",
+    "fonte": "Espacial Música / Associação Fonográfica Portuguesa",
+    "factClusterId": "fc_mus_pim_espacialmusica_1993_01"
+  },
+  {
+    "id": "MUS_PIM_0045",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que histórica e famosa editora de música de dança e compilações fundada em 1989 em Lisboa («Vidisco»), celebrizou as coletâneas de verão «Dance Mania» e produziu álbuns de bandas como os Santamaria?",
+    "opcoes": [
+      "Vidisco",
+      "Espacial",
+      "Metro-Som",
+      "Movieplay"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Vidisco foi pioneira na edição de música eletrónica comercial e dance pop em Portugal.",
+    "fonte": "Vidisco / AFP",
+    "factClusterId": "fc_mus_pim_vidisco_1989_01"
+  },
+  {
+    "id": "MUS_PIM_0046",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que célebre cantiga de escárnio e paródia tradicional transmontana e minhota («O Vira do Minho» e «A Chula»), tocada em ritmo acelerado de 3/4 com concertinas, triângulos e bombos, é a dança de roda tradicional por excelência das festas do Norte?",
+    "opcoes": [
+      "O Fado Corrido",
+      "O Vira e a Chula",
+      "O Cante ao Baldão",
+      "O Bailinho da Madeira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Vira é dançado aos pares com os braços erguidos girando em círculo ao ritmo das batutas dos tocadores de concertina.",
+    "fonte": "Federação do Folclore Português / Museu de Etnologia",
+    "factClusterId": "fc_mus_pim_vira_chula_folclore_01"
+  },
+  {
+    "id": "MUS_PIM_0047",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que tradicional instrumento madeirense de percussão em madeira composto por pequenas figuras articuladas em trajes típicos que batem castanholas («O Brinquinho» / Bonecos de Cana), é a alma rítmica do Bailinho da Madeira?",
+    "opcoes": [
+      "A Ferradura",
+      "A Matraca",
+      "O Brinquinho (Bonecos de cana com castanholas)",
+      "O Pandeiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O tocador agita verticalmente a cana fazendo os bonecos de madeira baterem as castanholas e caricas ao ritmo da música tradicional madeirense.",
+    "fonte": "Direção Regional dos Assuntos Culturais da Madeira / Museu Etnográfico da Madeira",
+    "factClusterId": "fc_mus_pim_brinquinho_bailinho_01"
+  },
+  {
+    "id": "MUS_PIM_0048",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que cantora e apresentadora lisboeta (nascida em 1974), Suzana («Suzana»), foi uma das vozes mais destacadas da música ligeira nos anos 1990 com o tema «Foste Cobarde» e duetos românticos com Toy?",
+    "opcoes": [
+      "Romana",
+      "Micaela",
+      "Ágata",
+      "Suzana"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Suzana atuou em centenas de palcos de emigrantes e conquistou discos de ouro na música romântica.",
+    "fonte": "Espacial / SPA",
+    "factClusterId": "fc_mus_pim_suzana_01"
+  },
+  {
+    "id": "MUS_PIM_0049",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que grupo cómico e musical dos Açores («Trio Ases do Ritmo»), celebrizou canções populares insulares que animam as festas do Divino Espírito Santo e os arraiais de verão pelas 9 ilhas açorianas?",
+    "opcoes": [
+      "Trio Ases do Ritmo",
+      "Santamaria",
+      "Banda Filarmónica de Velas",
+      "Cantadores da Terceira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A música de baile nos Açores tem uma tradição fortíssima ligada às 'chamarritas' e aos bailes de salão populares.",
+    "fonte": "SREA / Rádio Voz do Emigrante",
+    "factClusterId": "fc_mus_pim_musica_acores_baile_01"
+  },
+  {
+    "id": "MUS_PIM_0050",
+    "tema": "Música",
+    "subtema": "Música Popular & Pimba",
+    "pergunta": "Que célebre cantiga satírica e bem-humorada de Toy lançada em 1990 («Estupidamente Apaixonado»), celebrizou o carisma e a expressividade dramática do cantor sadino no Festival da Canção e nos palcos populares?",
+    "opcoes": [
+      "«Coração Não Tem Idade»",
+      "«Rosa Negra»",
+      "«Estupidamente Apaixonado» (Toy, 1990)",
+      "«Verão e Amor»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Toy conquistou o Prémio Nacional de Música e consolidou uma carreira de autor para outros grandes cantores nacionais.",
+    "fonte": "Toy / SPA / RTP",
+    "factClusterId": "fc_mus_pim_toy_estupidamenteapaixonado_1990_01"
+  }
+]

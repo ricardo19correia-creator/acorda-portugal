@@ -1,0 +1,244 @@
+{
+  "timestamp": "2026-08-26T04:51:23.190Z",
+  "auditMode": "DESAFIO_NACIONAL_SYSTEM_AUDIT",
+  "systemArchitecture": {
+    "entryRoute": "/jogar",
+    "gameHubComponent": "components/game-hub.tsx",
+    "quizScreenComponent": "components/quiz/quiz-screen.tsx",
+    "engineRouter": "src/lib/questionEngine.ts -> loadQuestionsPool()",
+    "registrySingleton": "lib/question-system/registry.ts -> QuestionRegistry.getInstance().getJogarTudo()",
+    "isolationRule": "Modo Maluco (5.000 Qs) estritamente isolado (0% de contaminação)"
+  },
+  "questionMetrics": {
+    "totalPhysicalQuestionsInRepo": 32177,
+    "usableByDesafioNacional": 25857,
+    "excludedSpecialModoMaluco": 6320,
+    "validStructuralQuestions": 25840,
+    "invalidStructuralQuestions": 17,
+    "duplicateIdsCount": 11350,
+    "duplicateTextsCount": 11352,
+    "missingCategoryCount": 0,
+    "missingSubthemeCount": 2000,
+    "withSourceCount": 650,
+    "withoutSourceCount": 25207,
+    "withExplanationCount": 23357,
+    "withoutExplanationCount": 2500
+  },
+  "fileProvenanceBreakdown": {
+    "lib/data/categories/atualidade.json": 650,
+    "lib/data/categories/ciencia-tecnologia.json": 718,
+    "lib/data/categories/cinema-tv.json": 767,
+    "lib/data/categories/cultura.json": 674,
+    "lib/data/categories/desafio-visual.json": 650,
+    "lib/data/categories/desporto.json": 680,
+    "lib/data/categories/empresas-portuguesas.json": 650,
+    "lib/data/categories/futebol-portugues.json": 710,
+    "lib/data/categories/gastronomia.json": 718,
+    "lib/data/categories/geografia.json": 705,
+    "lib/data/categories/historia.json": 704,
+    "lib/data/categories/humor.json": 650,
+    "lib/data/categories/mundo.json": 650,
+    "lib/data/categories/musica.json": 674,
+    "lib/data/categories/personalidades.json": 650,
+    "lib/data/categories/portugal-politico.json": 700,
+    "lib/data/categories/portugal.json": 1050,
+    "src/data/questions_desafio_nacional.json": 2000,
+    "lib/data/questions.json": 11357,
+    "data/perguntas_vila_real_500.json": 500
+  },
+  "difficultyDistribution": {
+    "1": 9113,
+    "2": 892,
+    "3": 7918,
+    "4": 7519,
+    "5": 415,
+    "other": 0
+  },
+  "answerOptionDistribution": {
+    "A": 1242,
+    "B": 681,
+    "C": 631,
+    "D": 603,
+    "other": 22700
+  },
+  "categoryDistribution": {
+    "atualidade — portugal agora": 1300,
+    "ciência e tecnologia": 1386,
+    "cinema e televisão": 1434,
+    "cultura": 1338,
+    "desafio visual": 1300,
+    "desporto": 1360,
+    "empresas portuguesas": 1300,
+    "futebol português": 1360,
+    "gastronomia": 1386,
+    "geografia": 1395,
+    "história": 1393,
+    "humor": 1300,
+    "mundo": 1300,
+    "música": 1348,
+    "personalidades": 1300,
+    "portugal político": 1350,
+    "portugal": 1800,
+    "desafio nacional": 2000,
+    "futebol-portugues": 7,
+    "desafio-cidade": 500
+  },
+  "topSubcategories": {
+    "Literatura Portuguesa": 1290,
+    "Inovação e Infraestruturas": 1284,
+    "História dos Meios de Comunicação": 1282,
+    "Organizações Internacionais": 1282,
+    "Presidentes de Portugal": 1282,
+    "Competências Constitucionais": 1282,
+    "Biologia e Medicina": 1280,
+    "Setor Energético e Industrial": 1280,
+    "Instrumentos Tradicionais": 1274,
+    "Provérbios e Ditados": 1270,
+    "Ervas e Temperos": 1220,
+    "Oceanografia": 1190,
+    "Tratados Internacionais": 1164,
+    "Identidade e Cultura": 1000,
+    "Atletismo": 647,
+    "Símbolos": 640,
+    "Heráldica e Símbolos Visuais": 640,
+    "Competições": 638,
+    "Competições Nacionais": 638,
+    "Atletismo e Modalidades": 638,
+    "Monarquia Portuguesa": 134,
+    "Identidade e Património": 110,
+    "Monumentos": 86,
+    "Capitais do Mundo": 84,
+    "História de Portugal": 79,
+    "Geografia de Portugal": 62,
+    "Cultura Portuguesa": 54,
+    "Praias": 51,
+    "Cientistas Portugueses": 50,
+    "Cinema Português": 50
+  },
+  "duplicateSamples": {
+    "byIds": [
+      {
+        "id": "portugal_0001",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0002",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0003",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0004",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0005",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0006",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0007",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0008",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0009",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      },
+      {
+        "id": "portugal_0010",
+        "source1": "lib/data/categories/portugal.json",
+        "source2": "lib/data/questions.json"
+      }
+    ],
+    "byText": [
+      {
+        "text": "Em que dia se celebra o Dia de Portugal, de Camões e das Comunidades Portuguesas?",
+        "id1": "portugal_0007",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "DN_0179",
+        "file2": "src/data/questions_desafio_nacional.json"
+      },
+      {
+        "text": "Quantas Bolas de Ouro conquistou Cristiano Ronaldo ao longo da sua carreira?",
+        "id1": "DN_0548",
+        "file1": "src/data/questions_desafio_nacional.json",
+        "id2": "fut-jog-01",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Em que ano foi assinada a declaração da independência de Portugal no Tratado de Zamora?",
+        "id1": "portugal_0001",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0001",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Quais são as duas cores predominantemente presentes na bandeira nacional de Portugal?",
+        "id1": "portugal_0002",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0002",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Qual é o ponto mais alto de Portugal Continental?",
+        "id1": "portugal_0003",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0003",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Quem foi o primeiro rei de Portugal?",
+        "id1": "portugal_0004",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0004",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Qual é o estilo musical tradicional português classificado como Património Imaterial da Humanidade pela UNESCO?",
+        "id1": "portugal_0005",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0005",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Em que cidade portuguesa se situa a emblemática Torre de Belém?",
+        "id1": "portugal_0006",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0006",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Em que dia se celebra o Dia de Portugal, de Camões e das Comunidades Portuguesas?",
+        "id1": "portugal_0007",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0007",
+        "file2": "lib/data/questions.json"
+      },
+      {
+        "text": "Onde se reúne a Assembleia da República Portuguesa?",
+        "id1": "portugal_0008",
+        "file1": "lib/data/categories/portugal.json",
+        "id2": "portugal_0008",
+        "file2": "lib/data/questions.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "POL_GOV_0001",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que primeiro Governo Constitucional de Portugal tomou posse a 23 de julho de 1976 após as primeiras eleições legislativas da III República, chefiado pelo Primeiro-Ministro Mário Soares?",
+    "opcoes": [
+      "I Governo Constitucional (PS minoritário, 1976-1978)",
+      "II Governo Constitucional",
+      "VI Governo Constitucional",
+      "IX Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O I Governo Constitucional inaugurou a governação sob a vigência da Constituição democrática de 1976.",
+    "fonte": "Governo de Portugal / Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_primeirogoverno_1976_01"
+  },
+  {
+    "id": "POL_GOV_0002",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1980) chefiado por Francisco Sá Carneiro reuniu a coligação de centro-direita Aliança Democrática (PPD/PSD, CDS e PPM) até ao trágico acidente aéreo de Camarate?",
+    "opcoes": [
+      "I Governo Constitucional",
+      "VI Governo Constitucional (Aliança Democrática, 1980)",
+      "IV Governo Constitucional",
+      "X Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O VI Governo foi o primeiro governo com maioria absoluta parlamentar na história da democracia portuguesa pós-25 de Abril.",
+    "fonte": "Assembleia da República / Instituto Francisco Sá Carneiro",
+    "factClusterId": "fc_pol_gov_vigoverno_ad_1980_01"
+  },
+  {
+    "id": "POL_GOV_0003",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que histórico governo de coligação pós-eleitoral conhecido como «Governo do Bloco Central» (1983-1985), uniu o PS e o PSD sob a liderança de Mário Soares (Primeiro-Ministro) e Carlos Mota Pinto (Vice-Primeiro-Ministro)?",
+    "opcoes": [
+      "VII Governo Constitucional",
+      "XII Governo Constitucional",
+      "IX Governo Constitucional (Bloco Central, 1983-1985)",
+      "XV Governo Constitucional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Bloco Central negociou o acordo de estabilização financeira com o FMI e concluiu o tratado de adesão de Portugal à CEE.",
+    "fonte": "Assembleia da República / Dicionário de História de Portugal",
+    "factClusterId": "fc_pol_gov_blocotral_ixgoverno_1983_01"
+  },
+  {
+    "id": "POL_GOV_0004",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1987-1991) liderado por Aníbal Cavaco Silva conquistou a primeira maioria absoluta monopartidária de um só partido (PSD com 50,2% dos votos) na história da Assembleia da República?",
+    "opcoes": [
+      "X Governo Constitucional",
+      "XII Governo Constitucional",
+      "XIII Governo Constitucional",
+      "XI Governo Constitucional (1987-1991)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O XI Governo acelerou a modernização das autoestradas, a reprivatização de empresas públicas e a integração nos fundos estruturais europeus.",
+    "fonte": "Assembleia da República / Comissão Nacional de Eleições",
+    "factClusterId": "fc_pol_gov_xigoverno_maioriaabsoluta_1987_01"
+  },
+  {
+    "id": "POL_GOV_0005",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que inovadora solução política de governação parlamentar governou o país no XXI Governo Constitucional (2015-2019), unindo um governo minoritário do PS chefiado por António Costa a posições conjuntas com o BE, PCP e PEV («A Geringonça»)?",
+    "opcoes": [
+      "XXI Governo Constitucional (A Geringonça, 2015-2019)",
+      "XIX Governo Constitucional",
+      "XXII Governo Constitucional",
+      "XVII Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Geringonça permitiu a reposição de salários, pensões e feriados e a descida inédita do défice público.",
+    "fonte": "Assembleia da República / Governo de Portugal",
+    "factClusterId": "fc_pol_gov_geringonca_xxigoverno_2015_01"
+  },
+  {
+    "id": "POL_GOV_0006",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional da história democrática portuguesa (2015), chefiado por Pedro Passos Coelho e Paulo Portas (coligação Portugal à Frente), foi o governo com o mandato mais curto de sempre, durando apenas 27 dias até ser derrubado por uma moção de rejeição?",
+    "opcoes": [
+      "XVIII Governo Constitucional",
+      "XX Governo Constitucional (27 dias de governação)",
+      "XVI Governo Constitucional",
+      "III Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A rejeição do programa do XX Governo pela maioria de esquerda abriu caminho à inédita solução parlamentar da Geringonça.",
+    "fonte": "Assembleia da República / Diário da Assembleia",
+    "factClusterId": "fc_pol_gov_xxgoverno_27dias_2015_01"
+  },
+  {
+    "id": "POL_GOV_0007",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional chefiado por Luís Montenegro tomou posse a 2 de abril de 2024 após a vitória da coligação Aliança Democrática (PSD/CDS/PPM) nas legislativas de março de 2024?",
+    "opcoes": [
+      "XXIII Governo Constitucional",
+      "XXII Governo Constitucional",
+      "XXIV Governo Constitucional (2024)",
+      "XXV Governo Constitucional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O XXIV Governo Constitucional é um governo minoritário apoiado pelos grupos parlamentares do PSD e CDS-PP.",
+    "fonte": "Presidência da República / Governo de Portugal",
+    "factClusterId": "fc_pol_gov_xxivgoverno_montenegro_2024_01"
+  },
+  {
+    "id": "POL_GOV_0008",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1979-1980) de iniciativa presidencial do General Ramalho Eanes foi chefiado por Maria de Lourdes Pintasilgo para preparar a realização de eleições intercalares?",
+    "opcoes": [
+      "III Governo Constitucional",
+      "IV Governo Constitucional",
+      "II Governo Constitucional",
+      "V Governo Constitucional (Maria de Lourdes Pintasilgo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O V Governo foi o único governo liderado por uma mulher na história de Portugal.",
+    "fonte": "Museu da Presidência / DHP",
+    "factClusterId": "fc_pol_gov_vgoverno_pintasilgo_1979_01"
+  },
+  {
+    "id": "POL_GOV_0009",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional chefiado por José Manuel Durão Barroso (2002-2004) reuniu a coligação PSD/CDS com Paulo Portas no Ministério da Defesa até à nomeação de Barroso para a Presidência da Comissão Europeia?",
+    "opcoes": [
+      "XV Governo Constitucional (2002-2004)",
+      "XIV Governo Constitucional",
+      "XVI Governo Constitucional",
+      "XVII Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A saída a meio do mandato de Durão Barroso para Bruxelas originou a nomeação de Pedro Santana Lopes para o XVI Governo.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_xvgoverno_duraobarroso_2002_01"
+  },
+  {
+    "id": "POL_GOV_0010",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2004-2005) chefiado por Pedro Santana Lopes tomou posse em julho de 2004 e foi dissolvido em novembro pelo Presidente Jorge Sampaio devido a crises de instabilidade política?",
+    "opcoes": [
+      "XV Governo Constitucional",
+      "XVI Governo Constitucional (Santana Lopes)",
+      "XVII Governo Constitucional",
+      "XIX Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A dissolução parlamentar decretada por Jorge Sampaio conduziu à histórica vitória por maioria absoluta do PS em 2005.",
+    "fonte": "Museu da Presidência da República / Assembleia da República",
+    "factClusterId": "fc_pol_gov_xvigoverno_santanalopes_2004_01"
+  },
+  {
+    "id": "POL_GOV_0011",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2005-2009) chefiado por José Sócrates conquistou a primeira e única maioria absoluta do Partido Socialista (PS) com 121 deputados na Assembleia da República?",
+    "opcoes": [
+      "XIII Governo Constitucional",
+      "XVIII Governo Constitucional",
+      "XVII Governo Constitucional (2005-2009)",
+      "XXI Governo Constitucional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O XVII Governo assinou o Tratado de Lisboa da UE em 2007, criou o programa Simplex e implementou a distribuição dos computadores Magalhães nas escolas.",
+    "fonte": "Assembleia da República / CNE",
+    "factClusterId": "fc_pol_gov_xviigoverno_socrates_2005_01"
+  },
+  {
+    "id": "POL_GOV_0012",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1995-1999) liderado por António Guterres sob o lema da «Paixão pela Educação» e do «Diálogo Social», preparou a Exposição Mundial de Lisboa (Expo 98) e a qualificação de Portugal para o pelotão da frente da Moeda Única Europeia (Euro)?",
+    "opcoes": [
+      "XII Governo Constitucional",
+      "XIV Governo Constitucional",
+      "XI Governo Constitucional",
+      "XIII Governo Constitucional (1995-1999)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O XIII Governo alcançou grande estabilidade e popularidade com o Rendimento Mínimo Garantido e o Conselho Económico e Social.",
+    "fonte": "Governo de Portugal / Assembleia da República",
+    "factClusterId": "fc_pol_gov_xiiigoverno_guterres_1995_01"
+  },
+  {
+    "id": "POL_GOV_0013",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1999-2002) de António Guterres ficou conhecido pelo empate de 115 deputados na Assembleia da República e pela negociação parlamentar do «Orçamento do Limiano» com o deputado Daniel Campelo?",
+    "opcoes": [
+      "XIV Governo Constitucional (1999-2002)",
+      "XIII Governo Constitucional",
+      "XV Governo Constitucional",
+      "XVIII Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "António Guterres demitiu-se em dezembro de 2001 para evitar que o país caísse num 'pântano político' após as eleições autárquicas.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_xivgoverno_limiano_1999_01"
+  },
+  {
+    "id": "POL_GOV_0014",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2011-2015) chefiado por Pedro Passos Coelho executou o Programa de Assistência Económica e Financeira (PAEF) da Troika concluindo a «saída limpa» em maio de 2014?",
+    "opcoes": [
+      "XX Governo Constitucional",
+      "XIX Governo Constitucional (2011-2015)",
+      "XVIII Governo Constitucional",
+      "XVII Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O XIX Governo foi sustentado pela coligação maioritária PSD/CDS-PP superando a crise política da 'demissão irrevogável' de Paulo Portas em 2013.",
+    "fonte": "Assembleia da República / Ministério das Finanças",
+    "factClusterId": "fc_pol_gov_xixgoverno_passoscoelho_2011_01"
+  },
+  {
+    "id": "POL_GOV_0015",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2022-2024) foi formado por António Costa após a histórica conquista de uma Maioria Absoluta do PS com 120 deputados nas eleições de janeiro de 2022?",
+    "opcoes": [
+      "XXII Governo Constitucional",
+      "XXI Governo Constitucional",
+      "XXIII Governo Constitucional (2022-2024)",
+      "XXIV Governo Constitucional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O XXIII Governo terminou prematuramente após a demissão de António Costa a 7 de novembro de 2023.",
+    "fonte": "Governo de Portugal / Presidência da República",
+    "factClusterId": "fc_pol_gov_xxiiigoverno_maioria_2022_01"
+  },
+  {
+    "id": "POL_GOV_0016",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1985-1987) chefiado por Cavaco Silva governou em minoria relativa apoiado pelo PRD de Eanes até ser derrubado por uma moção de censura do deputado Hermínio Martinho?",
+    "opcoes": [
+      "IX Governo Constitucional",
+      "XI Governo Constitucional",
+      "VIII Governo Constitucional",
+      "X Governo Constitucional (1985-1987)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O chumbo do X Governo levou o Presidente Mário Soares a dissolver a AR convocando as eleições de 1987 que deram a primeira maioria absoluta ao PSD.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_xgoverno_cavaco_1985_01"
+  },
+  {
+    "id": "POL_GOV_0017",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1978) chefiado por Alfredo Nobre da Costa foi o primeiro de três governos de iniciativa presidencial nomeados pelo General Ramalho Eanes?",
+    "opcoes": [
+      "III Governo Constitucional (Nobre da Costa, 1978)",
+      "IV Governo Constitucional",
+      "II Governo Constitucional",
+      "V Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O III Governo durou apenas 85 dias ao não ver o seu programa aprovado na Assembleia da República.",
+    "fonte": "Museu da Presidência / Assembleia da República",
+    "factClusterId": "fc_pol_gov_iiigoverno_nobredacosta_1978_01"
+  },
+  {
+    "id": "POL_GOV_0018",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1978-1979) de iniciativa presidencial foi chefiado pelo ilustre professor de Direito de Coimbra Carlos Alberto da Mota Pinto?",
+    "opcoes": [
+      "III Governo Constitucional",
+      "IV Governo Constitucional (Mota Pinto, 1978-1979)",
+      "V Governo Constitucional",
+      "VI Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O IV Governo enfrentou forte oposição parlamentar do PS e PCP antes da convocação de eleições pelo Presidente Eanes.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_ivgoverno_motapinto_1978_01"
+  },
+  {
+    "id": "POL_GOV_0019",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governos Constitucionais (VII e VIII, 1981-1983) foram chefiados por Francisco Pinto Balsemão após o falecimento de Sá Carneiro, tendo conduzido a 1.ª Revisão Constitucional de 1982 que extinguiu o Conselho da Revolução?",
+    "opcoes": [
+      "IX e X Governos Constitucionais",
+      "VI e VII Governos Constitucionais",
+      "VII e VIII Governos Constitucionais (Pinto Balsemão)",
+      "V e VI Governos Constitucionais"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A 1.ª Revisão Constitucional civilizou totalmente o regime político extinguindo a tutela militar.",
+    "fonte": "Assembleia da República / Tribunal Constitucional",
+    "factClusterId": "fc_pol_gov_viieviigoverno_balsemao_1981_01"
+  },
+  {
+    "id": "POL_GOV_0020",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1991-1995) liderado por Cavaco Silva conquistou a segunda maioria absoluta consecutiva do PSD com 50,6% dos votos e 135 deputados?",
+    "opcoes": [
+      "XI Governo Constitucional",
+      "XIII Governo Constitucional",
+      "X Governo Constitucional",
+      "XII Governo Constitucional (1991-1995)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O XII Governo aprovou a adesão ao Tratado de Maastricht da União Europeia e presidiu à primeira Presidência Portuguesa do Conselho da UE em 1992.",
+    "fonte": "Assembleia da República / CNE",
+    "factClusterId": "fc_pol_gov_xiigoverno_segundamaioria_1991_01"
+  },
+  {
+    "id": "POL_GOV_0021",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (1978) de curta duração uniu pela primeira vez o Partido Socialista (PS) e o CDS de Freitas do Amaral através de um acordo governamental de coligação?",
+    "opcoes": [
+      "II Governo Constitucional (PS/CDS, 1978)",
+      "I Governo Constitucional",
+      "III Governo Constitucional",
+      "VI Governo Constitucional"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O II Governo caiu após divergências profundas sobre a lei agrária entre Mário Soares e o CDS.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_iigoverno_pscds_1978_01"
+  },
+  {
+    "id": "POL_GOV_0022",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2009-2011) de José Sócrates governou em minoria relativa até à rejeição do 4.º Programa de Estabilidade e Crescimento (PEC IV) pelo parlamento a 23 de março de 2011?",
+    "opcoes": [
+      "XVII Governo Constitucional",
+      "XVIII Governo Constitucional (2009-2011)",
+      "XIX Governo Constitucional",
+      "XVI Governo Constitucional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A demissão de José Sócrates na sequência da rejeição do PEC IV levou ao pedido formal de resgate financeiro à UE e FMI em abril de 2011.",
+    "fonte": "Assembleia da República / Banco de Portugal",
+    "factClusterId": "fc_pol_gov_xviiigoverno_peciv_2011_01"
+  },
+  {
+    "id": "POL_GOV_0023",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Governo Constitucional (2019-2022) chefiado por António Costa enfrentou a gestão nacional da pandemia de COVID-19 e foi dissolvido após o histórico chumbo do Orçamento do Estado para 2022 na Assembleia da República?",
+    "opcoes": [
+      "XXI Governo Constitucional",
+      "XXIII Governo Constitucional",
+      "XXII Governo Constitucional (2019-2022)",
+      "XX Governo Constitucional"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O voto contra do BE e do PCP ao Orçamento de 2022 ditou o fim do ciclo político e a convocação de eleições antecipadas por Marcelo Rebelo de Sousa.",
+    "fonte": "Presidência da República / Diário da Assembleia",
+    "factClusterId": "fc_pol_gov_xxiigoverno_covid_orcamento_01"
+  },
+  {
+    "id": "POL_GOV_0024",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Qual é a residência oficial do Primeiro-Ministro de Portugal onde se realizam tradicionalmente as reuniões solenes e a tomada de decisões do executivo?",
+    "opcoes": [
+      "Palácio de Belém",
+      "Palácio das Necessidades",
+      "Palácio da Ajuda",
+      "Palacete de São Bento (junto à Assembleia da República)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Palacete de São Bento é a residência oficial do Primeiro-Ministro desde 1938 com belíssimos jardins classificados.",
+    "fonte": "Gabinete do Primeiro-Ministro / DGPC",
+    "factClusterId": "fc_pol_gov_palacetesaobento_residencia_01"
+  },
+  {
+    "id": "POL_GOV_0025",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que órgão colegial de topo do Governo reúne semanalmente todas as quintas-feiras sob a presidência do Primeiro-Ministro para aprovar propostas de lei, decretos-lei e resoluções políticas?",
+    "opcoes": [
+      "Conselho de Ministros",
+      "Conselho de Estado",
+      "Conselho Superior de Defesa Nacional",
+      "Conselho Económico e Social"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Conselho de Ministros reúne no Palácio da Ajuda ou no Campus XXI da Presidência do Conselho de Ministros.",
+    "fonte": "Constituição da República Portuguesa (Artigo 184.º)",
+    "factClusterId": "fc_pol_gov_conselhodeministros_01"
+  },
+  {
+    "id": "POL_GOV_0026",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Segundo o artigo 183.º da Constituição da República Portuguesa, o Governo é politicamente responsável perante:",
+    "opcoes": [
+      "O Tribunal Constitucional apenas",
+      "O Presidente da República e a Assembleia da República",
+      "O Povo em referendo anual",
+      "O Conselho de Estado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O sistema de governo semipresidencialista português consagra a dupla responsabilidade política do executivo.",
+    "fonte": "Constituição da República Portuguesa",
+    "factClusterId": "fc_pol_gov_responsabilidadepolitica_01"
+  },
+  {
+    "id": "POL_GOV_0027",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Quantos dias tem um novo Governo Constitucional após a sua tomada de posse para submeter o seu Programa de Governo à apreciação da Assembleia da República (nos termos do artigo 192.º da CRP)?",
+    "opcoes": [
+      "No prazo de trinta dias",
+      "No prazo de quinze dias",
+      "No prazo máximo de dez dias",
+      "No prazo de quarenta e oito horas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O debate do Programa de Governo na AR não pode exceder três dias e permite aos grupos parlamentares apresentarem moções de rejeição.",
+    "fonte": "Constituição da República Portuguesa (Artigo 192.º)",
+    "factClusterId": "fc_pol_gov_prazo_programagoverno_10dias_01"
+  },
+  {
+    "id": "POL_GOV_0028",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Qual é a maioria parlamentar exigida na Assembleia da República para que uma moção de censura ao Governo seja aprovada e provoque a sua demissão imediata?",
+    "opcoes": [
+      "Maioria simples dos deputados presentes",
+      "Dois terços dos deputados",
+      "Três quintos dos votos",
+      "Maioria absoluta dos deputados em efetividade de funções (pelo menos 116 em 230 deputados)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Apenas uma moção de censura foi aprovada na história constitucional portuguesa: a moção do PRD contra o X Governo de Cavaco Silva em 1987.",
+    "fonte": "Constituição da República Portuguesa (Artigo 194.º)",
+    "factClusterId": "fc_pol_gov_mocaodecensura_maioriaabsoluta_01"
+  },
+  {
+    "id": "POL_GOV_0029",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que importante e histórico Ministério sediado no Terreiro do Paço (Praça do Comércio em Lisboa), é responsável pela elaboração do Orçamento do Estado e pela gestão do Tesouro Nacional?",
+    "opcoes": [
+      "Ministério das Finanças",
+      "Ministério da Economia",
+      "Ministério da Administração Interna",
+      "Ministério da Justiça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Ministério das Finanças funciona no torreão poente do Terreiro do Paço desde o século XVIII.",
+    "fonte": "Ministério das Finanças / DHP",
+    "factClusterId": "fc_pol_gov_ministeriodasfinancas_terreirodopaco_01"
+  },
+  {
+    "id": "POL_GOV_0030",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que histórico palácio no bairro de Alcântara em Lisboa («Palácio das Necessidades»), é a sede oficial do Ministério dos Negócios Estrangeiros (MNE) e da diplomacia portuguesa desde 1950?",
+    "opcoes": [
+      "Palácio de Santos",
+      "Palácio das Necessidades (MNE)",
+      "Palácio Foz",
+      "Palácio da Bemposta"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Palácio das Necessidades foi antigo convento e residência dos monarcas da dinastia de Bragança até 1910.",
+    "fonte": "Ministério dos Negócios Estrangeiros / DGPC",
+    "factClusterId": "fc_pol_gov_palaciodasnecessidades_mne_01"
+  },
+  {
+    "id": "POL_GOV_0031",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que instrumento jurídico legislativo emitido pelo Governo no exercício da sua competência legislativa primária ou autorizada («Decreto-Lei»), tem força de lei igual às Leis aprovadas pela Assembleia da República?",
+    "opcoes": [
+      "Portaria",
+      "Despacho Normativo",
+      "Decreto-Lei",
+      "Resolução do Conselho de Ministros"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os decretos-lei necessitam da promulgação obrigatória do Presidente da República para entrarem em vigor.",
+    "fonte": "Constituição da República Portuguesa (Artigo 198.º)",
+    "factClusterId": "fc_pol_gov_decretolei_legislativo_01"
+  },
+  {
+    "id": "POL_GOV_0032",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que mecanismo constitucional permite à Assembleia da República chamar à sua apreciação um Decreto-Lei aprovado pelo Governo (a pedido de 10 deputados) para propor a sua alteração ou cessação de vigência?",
+    "opcoes": [
+      "Veto de Bolso",
+      "Fiscalização Sucessiva Abstrata",
+      "Moção de Inquérito",
+      "Apreciação Parlamentar de Decretos-Leis"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A apreciação parlamentar permite ao parlamento controlar o poder legislativo delegado ao executivo.",
+    "fonte": "Constituição da República Portuguesa (Artigo 169.º)",
+    "factClusterId": "fc_pol_gov_apreciacaoparlamentar_01"
+  },
+  {
+    "id": "POL_GOV_0033",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Como se designa o estatuto de um Governo Constitucional que já se encontra demitido pelo Presidente da República ou após eleições, ficando limitado à prática dos atos estritamente necessários à gestão dos negócios públicos?",
+    "opcoes": [
+      "Governo de Gestão",
+      "Governo de Salvação Nacional",
+      "Governo Provisório",
+      "Governo Intercalar"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Governo de Gestão não pode tomar medidas orçamentais estruturais nem nomeações de longo prazo até à posse do novo executivo.",
+    "fonte": "Constituição da República Portuguesa (Artigo 186.º n.º 5)",
+    "factClusterId": "fc_pol_gov_governodegestao_01"
+  },
+  {
+    "id": "POL_GOV_0034",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Quem foi o Ministro da Defesa Nacional no XIX Governo Constitucional de Passos Coelho que apresentou a sua demissão com a célebre carta de «demissão irrevogável» em julho de 2013 antes de ser nomeado Vice-Primeiro-Ministro?",
+    "opcoes": [
+      "Vítor Gaspar",
+      "Paulo Portas",
+      "Álvaro Santos Pereira",
+      "José Pedro Aguiar-Branco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A crise política foi superada com a criação do cargo de Vice-Primeiro-Ministro com a coordenação económica e das negociações com a Troika.",
+    "fonte": "Assembleia da República / DHP",
+    "factClusterId": "fc_pol_gov_pauloportas_demissaoirrevogavel_2013_01"
+  },
+  {
+    "id": "POL_GOV_0035",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que destacado economista e professor universitário foi Ministro de Estado e das Finanças de Cavaco Silva nos XI e XII Governos Constitucionais (1987-1993) conduzindo a vaga de privatizações e a reforma fiscal?",
+    "opcoes": [
+      "Mário Centeno",
+      "Vítor Gaspar",
+      "Miguel Cadilhe e Jorge Braga de Macedo",
+      "Sousa Franco"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Miguel Cadilhe introduziu o IRS e o IRC modernos em 1989 e as primeiras grandes reprivatizações de bancos e seguradoras.",
+    "fonte": "Ministério das Finanças / DHP",
+    "factClusterId": "fc_pol_gov_miguelcadilhe_financas_1989_01"
+  },
+  {
+    "id": "POL_GOV_0036",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Ministro das Obras Públicas, Transportes e Comunicações nos XI e XII Governos de Cavaco Silva (1987-1995) ficou célebre como o grande construtor da rede moderna de autoestradas (Brisa) e da Ponte Vasco da Gama?",
+    "opcoes": [
+      "João Cravinho",
+      "Mário Lino",
+      "Pedro Nuno Santos",
+      "Joaquim Ferreira do Amaral"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ferreira do Amaral transformou as ligações rodoviárias em Portugal construindo mais de 800 km de autoestradas fundamentais.",
+    "fonte": "Ministério das Obras Públicas / DHP",
+    "factClusterId": "fc_pol_gov_ferreiradoamaral_obraspublicas_01"
+  },
+  {
+    "id": "POL_GOV_0037",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que proeminente político e economista do Partido Socialista («António de Sousa Franco»), exerceu o cargo de Ministro das Finanças no I Governo Constitucional (1976) e no XIII Governo de António Guterres (1995-1999) garantindo o cumprimento dos critérios de Maastricht?",
+    "opcoes": [
+      "António de Sousa Franco (1942-2004)",
+      "Pina Moura",
+      "Vítor Constâncio",
+      "Medina Carreira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sousa Franco presidiu ao Tribunal de Contas e liderou as finanças que permitiram a adesão histórica de Portugal ao Euro a 1 de janeiro de 1999.",
+    "fonte": "Tribunal de Contas / Ministério das Finanças",
+    "factClusterId": "fc_pol_gov_sousafranco_financas_01"
+  },
+  {
+    "id": "POL_GOV_0038",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que jurista e professor catedrático português («Henrique Medina Carreira»), Ministro das Finanças no I Governo Constitucional (1976-1978), notabilizou-se como um dos mais rigorosos e respeitados analistas críticos da despesa pública e da sustentabilidade das contas do Estado?",
+    "opcoes": [
+      "Miguel Cadilhe",
+      "Henrique Medina Carreira (1931-2017)",
+      "Bagão Félix",
+      "Manuela Ferreira Leite"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Medina Carreira alertou com anos de antecedência na televisão para o risco iminente de bancarrota e endividamento excessivo do país.",
+    "fonte": "Ministério das Finanças / DHP",
+    "factClusterId": "fc_pol_gov_medinacarreira_1976_01"
+  },
+  {
+    "id": "POL_GOV_0039",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que destacado economista e político social-democrata («António Bagão Félix»), exerceu o cargo de Ministro da Segurança Social e do Trabalho no XV Governo (2002-2004) e Ministro das Finanças no XVI Governo (2004-2005)?",
+    "opcoes": [
+      "Guilherme d'Oliveira Martins",
+      "Teixeira dos Santos",
+      "António Bagão Félix",
+      "Vítor Bento"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Bagão Félix é um dos maiores especialistas nacionais em sistemas de pensões e segurança social.",
+    "fonte": "Ministério da Segurança Social / Assembleia da República",
+    "factClusterId": "fc_pol_gov_bagaofelix_01"
+  },
+  {
+    "id": "POL_GOV_0040",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que ilustre jurista e ensaísta lisboeta («Guilherme d'Oliveira Martins»), exerceu os cargos de Ministro da Educação e Ministro das Finanças no XIV Governo de Guterres e presidiu ao Tribunal de Contas (2005-2015) e ao Centro Nacional de Cultura?",
+    "opcoes": [
+      "Marçal Grilo",
+      "Augusto Santos Silva",
+      "Roberto Carneiro",
+      "Guilherme d'Oliveira Martins"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Oliveira Martins é membro do Conselho de Estado e administrador executivo da Fundação Calouste Gulbenkian.",
+    "fonte": "Tribunal de Contas / Centro Nacional de Cultura",
+    "factClusterId": "fc_pol_gov_oliveiramartins_01"
+  },
+  {
+    "id": "POL_GOV_0041",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que eminente e reformador Ministro da Educação nos X e XI Governos de Cavaco Silva («Roberto Carneiro»), implementou a histórica Lei de Bases do Sistema Educativo (LBSE de 1986) que alargou a escolaridade obrigatória para 9 anos?",
+    "opcoes": [
+      "Roberto Carneiro",
+      "Eduardo Marçal Grilo",
+      "David Justino",
+      "Maria de Lurdes Rodrigues"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A reforma educativa de Roberto Carneiro modernizou o ensino pré-escolar, básico e secundário em Portugal.",
+    "fonte": "Ministério da Educação / LBSE / DHP",
+    "factClusterId": "fc_pol_gov_robertocarneiro_lbse_1986_01"
+  },
+  {
+    "id": "POL_GOV_0042",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que influente e combativo Ministro das Infraestruturas e da Habitação no XXI e XXII Governos de António Costa («Pedro Nuno Santos»), liderou o dossiê da ferrovia nacional (Plano Ferroviário Nacional) e a reestruturação da TAP antes de ser eleito Secretário-Geral do PS em 2023?",
+    "opcoes": [
+      "João Galamba",
+      "Pedro Nuno Santos",
+      "Hugo Santos Mendes",
+      "Fernando Medina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Pedro Nuno Santos foi o principal articulador político da Geringonça entre 2015 e 2019 enquanto Secretário de Estado dos Assuntos Parlamentares.",
+    "fonte": "Assembleia da República / Partido Socialista",
+    "factClusterId": "fc_pol_gov_pedronunosantos_01"
+  },
+  {
+    "id": "POL_GOV_0043",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que importante economista e político lisboeta («Fernando Medina»), antigo Secretário de Estado e Presidente da Câmara Municipal de Lisboa (2015-2021), exerceu o cargo de Ministro das Finanças no XXIII Governo Constitucional (2022-2024)?",
+    "opcoes": [
+      "João Leão",
+      "Mário Centeno",
+      "Fernando Medina",
+      "Teixeira dos Santos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Medina alcançou uma redução histórica da dívida pública portuguesa para menos de 100% do PIB e um excedente orçamental de 1,2% em 2023.",
+    "fonte": "Ministério das Finanças / Banco de Portugal",
+    "factClusterId": "fc_pol_gov_fernandomedina_financas_2022_01"
+  },
+  {
+    "id": "POL_GOV_0044",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que importante Ministro de Estado e das Finanças no XVII e XVIII Governos de José Sócrates («Fernando Teixeira dos Santos»), professor catedrático da FEP e ex-presidente da CMVM, geriu as contas públicas durante a crise internacional do 'Subprime' em 2008?",
+    "opcoes": [
+      "Luís Campos e Cunha",
+      "Bagão Félix",
+      "Manuela Ferreira Leite",
+      "Fernando Teixeira dos Santos (2005-2011)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Teixeira dos Santos anunciou a necessidade do pedido de assistência financeira externa a 6 de abril de 2011.",
+    "fonte": "Ministério das Finanças / DHP",
+    "factClusterId": "fc_pol_gov_teixeiradossantos_2005_01"
+  },
+  {
+    "id": "POL_GOV_0045",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que Ministro da Economia no XIX Governo de Passos Coelho («Álvaro Santos Pereira»), professor e economista, celebrizou a defesa do empreendedorismo e a redução da burocracia antes de ser nomeado Economista-Chefe da OCDE em Paris?",
+    "opcoes": [
+      "Álvaro Santos Pereira",
+      "António Pires de Lima",
+      "Manuel Caldeira Cabral",
+      "Pedro Siza Vieira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Santos Pereira liderou a pasta da Economia durante os anos mais difíceis da intervenção da Troika.",
+    "fonte": "OCDE / Ministério da Economia",
+    "factClusterId": "fc_pol_gov_alvarosantospereira_ocde_01"
+  },
+  {
+    "id": "POL_GOV_0046",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que destacada jurista e professora de Direito do Porto («Francisca Van Dunem»), exerceu as funções de Ministra da Justiça (2015-2022) e Ministra da Administração Interna no XXI e XXII Governos de Costa, sendo a primeira mulher negra a integrar um governo em Portugal?",
+    "opcoes": [
+      "Catarina Sarmento e Castro",
+      "Francisca Van Dunem",
+      "Paula Teixeira da Cruz",
+      "Alberto Martins"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Francisca Van Dunem foi Procuradora-Geral Distrital de Lisboa antes de assumir as pastas ministeriais.",
+    "fonte": "Ministério da Justiça / Conselho Superior do Ministério Público",
+    "factClusterId": "fc_pol_gov_franciscavandunem_2015_01"
+  },
+  {
+    "id": "POL_GOV_0047",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que experiente político e advogado social-democrata («Luís Marques Mendes»), Ministro Adjunto nos governos de Cavaco Silva e Presidente do PSD (2005-2007), celebrizou-se como um dos mais influentes comentadores políticos da televisão portuguesa na SIC e Conselheiro de Estado?",
+    "opcoes": [
+      "Marcelo Rebelo de Sousa",
+      "Luís Montenegro",
+      "Luís Marques Mendes",
+      "Rui Rio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marques Mendes foi deputado e secretário de Estado com apenas 28 anos no início da era cavaquista.",
+    "fonte": "Conselho de Estado / Assembleia da República",
+    "factClusterId": "fc_pol_gov_marquesmendes_01"
+  },
+  {
+    "id": "POL_GOV_0048",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que importante e histórico professor catedrático da Faculdade de Direito de Lisboa («Jorge Miranda»), o «Pai da Constituição de 1976», foi deputado constituinte e redator principal dos princípios fundamentais da Lei Fundamental?",
+    "opcoes": [
+      "Vital Moreira",
+      "Gomes Canotilho",
+      "Marcelo Rebelo de Sousa",
+      "Jorge Miranda («Pai da Constituição»)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Jorge Miranda é a autoridade máxima em Direito Constitucional da língua portuguesa autor de tratados de referência internacional.",
+    "fonte": "Faculdade de Direito da Universidade de Lisboa / Assembleia Constituinte",
+    "factClusterId": "fc_pol_gov_jorgemiranda_paiconstituicao_01"
+  },
+  {
+    "id": "POL_GOV_0049",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que eminente e histórico jurista de Coimbra («José Joaquim Gomes Canotilho»), professor catedrático emérito da Faculdade de Direito da Universidade de Coimbra e Prémio Pessoa em 2003, é mundialmente aclamado pela sua obra seminal de Direito Constitucional?",
+    "opcoes": [
+      "J. J. Gomes Canotilho",
+      "Vital Moreira",
+      "Jorge Miranda",
+      "Rui Machete"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gomes Canotilho influenciou as reformas constitucionais de Portugal, Brasil e vários países da América Latina e Europa.",
+    "fonte": "Universidade de Coimbra / Prémio Pessoa",
+    "factClusterId": "fc_pol_gov_gomescanotilho_01"
+  },
+  {
+    "id": "POL_GOV_0050",
+    "tema": "Portugal Político",
+    "subtema": "Governos Constitucionais",
+    "pergunta": "Que importante órgão consultivo superior de fiscalização e controlo da legalidade financeira e julgamento das contas públicas em Portugal («Tribunal de Contas»), com raízes na Casa dos Contos de D. Dinis de 1389, fiscaliza os atos e contratos do Governo e da administração pública?",
+    "opcoes": [
+      "Tribunal Constitucional",
+      "Supremo Tribunal de Justiça",
+      "Tribunal de Contas (TC)",
+      "Conselho de Prevenção da Corrupção"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Tribunal de Contas emite o visto prévio a grandes contratos públicos e aprova o Parecer sobre a Conta Geral do Estado.",
+    "fonte": "Tribunal de Contas de Portugal / CRP",
+    "factClusterId": "fc_pol_gov_tribunaldecontas_01"
+  }
+]

@@ -1017,7 +1017,7 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="h-[100dvh] w-full flex flex-col justify-between p-3 pb-6 max-w-lg mx-auto select-none animate-rise">
+      <div className="min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
         {/* ========================================================= */}
         {/* 1. TOPO: VS HEADER + REAGIR + TEMPO (SHRINK-0)            */}
         {/* ========================================================= */}
@@ -1179,47 +1179,44 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, MIN-H-140, MAX-H-220)*/}
+        {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, H-AUTO)             */}
         {/* ========================================================= */}
-        <div className="my-auto w-full flex flex-col items-center justify-center relative">
+        <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
           {/* Feedback visual instantâneo overlay */}
           {feedback && (
             <div
               className={cn(
-                'mb-2 px-3 py-1 rounded-xl font-display text-xs font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0',
+                'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
                 feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
                 feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
                 feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
               )}
             >
-              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />}
-              {feedback.status === 'WRONG' && <XCircle className="h-3.5 w-3.5 shrink-0" />}
-              {feedback.status === 'TIMEOUT' && <Clock className="h-3.5 w-3.5 shrink-0" />}
-              <span>{feedback.message}</span>
+              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-4 w-4 shrink-0" />}
+              {feedback.status === 'WRONG' && <XCircle className="h-4 w-4 shrink-0" />}
+              {feedback.status === 'TIMEOUT' && <Clock className="h-4 w-4 shrink-0" />}
+              <span className="break-words">{feedback.message}</span>
             </div>
           )}
 
-          {/* Card com corpo e presença visual elegante */}
-          <div className="w-full min-h-[140px] max-h-[220px] p-4 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-cyan-500/30 rounded-2xl shadow-xl shadow-black/40 backdrop-blur-md overflow-y-auto">
-            <span className="text-[11px] text-cyan-400 font-bold uppercase tracking-wider mb-1 shrink-0">
-              {currentQuestion?.category || 'Portugal'} · Pergunta {currentQIndex + 1} de 10
-            </span>
-            <h1 className="text-sm sm:text-base font-bold text-center leading-snug text-white text-balance line-clamp-4">
+          {/* Card com corpo e presença visual elegante adaptativa */}
+          <div className="w-full min-h-[100px] h-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
+            <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
               {currentQuestion?.question}
             </h1>
           </div>
 
           {/* Pista Histórica no Duelo */}
           {activeClue && (
-            <div className="mt-1.5 rounded-xl border border-amber-500/50 bg-amber-500/15 px-3 py-1 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
+            <div className="mt-2 rounded-xl border border-amber-500/50 bg-amber-500/15 px-3 py-1.5 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
               <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-              <span className="font-medium truncate">{activeClue}</span>
+              <span className="font-medium break-words">{activeClue}</span>
             </div>
           )}
 
           {/* Freeze Banner no Duelo */}
           {isFrozen && (
-            <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+            <div className="mt-2 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
               <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
               <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
             </div>
@@ -1227,7 +1224,7 @@ export function DuelArena({
         </div>
 
         {/* ========================================================= */}
-        {/* 3. FUNDO: AJUDAS + GRELHA DE RESPOSTAS 2x2 (SHRINK-0)     */}
+        {/* 3. FUNDO: AJUDAS + GRELHA DE RESPOSTAS RESPONSIVA         */}
         {/* ========================================================= */}
         <div className="w-full flex flex-col gap-2 shrink-0">
           {/* Barra de Ajudas */}
@@ -1247,8 +1244,8 @@ export function DuelArena({
             />
           </div>
 
-          {/* Grelha 2x2 com botões h-16 confortáveis */}
-          <div className="grid grid-cols-2 gap-2 w-full">
+          {/* Grelha 100% adaptativa (1 coluna em mobile, 2 colunas em tablets/desktops) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full">
             {currentQuestion?.options.map((opt, idx) => {
               const isSelected = selectedOption === opt.key
               const isCorrectOption = opt.key === currentQuestion.correct
@@ -1260,12 +1257,12 @@ export function DuelArena({
                 return (
                   <div
                     key={opt.key}
-                    className="h-16 w-full p-2.5 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                    className="min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
                   >
-                    <span className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs flex items-center justify-center shrink-0 line-through">
+                    <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 line-through">
                       {optionKey}
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-tight line-through line-clamp-2 flex-1">
+                    <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
                       {opt.text}
                     </span>
                   </div>
@@ -1292,13 +1289,13 @@ export function DuelArena({
                   disabled={selectedOption !== null || isSubmitting}
                   onClick={() => handleSelectOption(opt.key)}
                   className={cn(
-                    'h-16 w-full p-2.5 rounded-xl flex items-center gap-2 text-left transition-all select-none cursor-pointer active:scale-98 relative',
+                    'min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
                     buttonStyles,
                   )}
                 >
                   <span
                     className={cn(
-                      'w-7 h-7 rounded-lg font-extrabold text-xs flex items-center justify-center shrink-0 border transition-colors',
+                      'w-7 h-7 sm:w-8 sm:h-8 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border transition-colors',
                       showFeedback && isCorrectOption
                         ? 'bg-emerald-500 border-emerald-300 text-slate-950'
                         : showFeedback && isSelected
@@ -1308,7 +1305,7 @@ export function DuelArena({
                   >
                     {optionKey}
                   </span>
-                  <span className="text-xs sm:text-sm font-semibold text-white leading-tight line-clamp-2 flex-1">
+                  <span className="text-xs sm:text-sm font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
                     {opt.text}
                   </span>
 

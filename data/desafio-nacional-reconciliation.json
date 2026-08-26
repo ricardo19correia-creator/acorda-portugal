@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-26T15:00:00.000Z",
+  "auditMode": "CONTINUOUS_PRODUCTION_RECONCILIATION",
+  "counters": {
+    "physicalQuestionCount": 18810,
+    "validQuestionCount": 18793,
+    "invalidQuestionCount": 17,
+    "approvedQuestionCount": 18793,
+    "editorialApprovedCount": 8244,
+    "unmappedCanonicalPoolCount": 10549,
+    "newProductionCount": 4750,
+    "legacyQuestionCount": 14060
+  },
+  "mathProof": {
+    "physicalValidation": "18793 (válidas) + 17 (inválidas) = 18810 (total físico)",
+    "approvedValidation": "8244 (editorial aprovado) + 10549 (pool canónico geral) = 18793 (aprovadas)",
+    "provenanceValidation": "4750 (produção nova) + 14060 (base legada) = 18810 (total físico)",
+    "globalTarget": "8244 / 466000 (1.77%)"
+  },
+  "fileProvenance": {
+    "physicalCountByCategoryFile": {
+      "lib/data/categories/cultura.json": 1324,
+      "lib/data/categories/historia.json": 1304,
+      "lib/data/categories/portugal.json": 1250,
+      "lib/data/categories/futebol-portugues.json": 1110,
+      "lib/data/categories/gastronomia.json": 1068,
+      "lib/data/categories/portugal-politico.json": 950,
+      "lib/data/categories/ciencia-tecnologia.json": 918,
+      "lib/data/categories/cinema-tv.json": 917,
+      "lib/data/categories/geografia.json": 905,
+      "lib/data/categories/empresas-portuguesas.json": 850,
+      "lib/data/categories/desporto.json": 830,
+      "lib/data/categories/musica.json": 824,
+      "lib/data/categories/humor.json": 800,
+      "lib/data/categories/personalidades.json": 800,
+      "lib/data/categories/mundo.json": 800,
+      "lib/data/categories/desafio-visual.json": 750,
+      "lib/data/categories/atualidade.json": 750,
+      "src/data/questions_desafio_nacional.json": 2000,
+      "data/perguntas_vila_real_500.json": 500
+    }
+  },
+  "subthemes": {
+    "total": 233,
+    "complete": 0,
+    "inProduction": 131,
+    "notStarted": 102
+  }
+}

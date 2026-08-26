@@ -1,0 +1,852 @@
+[
+  {
+    "id": "PT_VIL_0001",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a emblemática aldeia do Piódão, famosa pelas suas casas em xisto e janelas azuis?",
+    "opcoes": [
+      "Arganil",
+      "Góis",
+      "Lousã",
+      "Seia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A aldeia histórica do Piódão pertence ao concelho de Arganil, no distrito de Coimbra, encravada na Serra do Açor.",
+    "fonte": "Rede das Aldeias Históricas de Portugal / Município de Arganil",
+    "factClusterId": "fc_piodao_01"
+  },
+  {
+    "id": "PT_VIL_0002",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila fortificada do Alentejo, erguida sobre uma colina sobranceira ao grande lago de Alqueva, conserva o seu casario caiado dentro de muralhas medievais?",
+    "opcoes": [
+      "Mértola",
+      "Monsaraz",
+      "Marvão",
+      "Castelo de Vide"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Monsaraz, no concelho de Reguengos de Monsaraz, é uma das vilas medievais mais preservadas de Portugal, com vista privilegiada para o Alqueva.",
+    "fonte": "Turismo do Alentejo / Município de Reguengos de Monsaraz",
+    "factClusterId": "fc_monsaraz_01"
+  },
+  {
+    "id": "PT_VIL_0003",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em 1938, que aldeia da Beira Baixa foi galardoada com o título de «A Aldeia Mais Portuguesa de Portugal»?",
+    "opcoes": [
+      "Sortelha",
+      "Belmonte",
+      "Monsanto",
+      "Idanha-a-Velha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Monsanto, situada no concelho de Idanha-a-Nova, venceu o concurso nacional de 1938, recebendo o galo de prata esculpido.",
+    "fonte": "Direção-Geral do Património Cultural / Município de Idanha-a-Nova",
+    "factClusterId": "fc_monsanto_01"
+  },
+  {
+    "id": "PT_VIL_0004",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que parque nacional se localiza a aldeia comunitária de Rio de Onor, dividida a meio pela fronteira entre Portugal e Espanha?",
+    "opcoes": [
+      "Parque Natural da Serra da Estrela",
+      "Parque Natural do Vale do Guadiana",
+      "Parque Nacional da Peneda-Gerês",
+      "Parque Natural de Montesinho"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Rio de Onor fica situada no Parque Natural de Montesinho, no concelho de Bragança, famosa pelas suas regras históricas de gestão comunitária.",
+    "fonte": "Instituto da Conservação da Natureza e das Florestas (ICNF)",
+    "factClusterId": "fc_riodeonor_01"
+  },
+  {
+    "id": "PT_VIL_0005",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que estrutura tradicional de pedra, utilizada para secar e proteger as espigas de milho dos roedores, é famosa e abundante nas aldeias de Soajo e Lindoso?",
+    "opcoes": [
+      "Espigueiro",
+      "Moinho de rodízio",
+      "Azenha",
+      "Forno do povo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os espigueiros comunitários de granito do Soajo (Arcos de Valdevez) e de Lindoso (Ponte da Barca) são ícones do património rural minhoto.",
+    "fonte": "Parque Nacional da Peneda-Gerês",
+    "factClusterId": "fc_soajo_01"
+  },
+  {
+    "id": "PT_VIL_0006",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho transmontano se realiza o famoso Entrudo dos Caretos, na aldeia de Podence, classificado pela UNESCO como Património Cultural Imaterial?",
+    "opcoes": [
+      "Mirandela",
+      "Macedo de Cavaleiros",
+      "Vinhais",
+      "Valpaços"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A aldeia de Podence pertence ao concelho de Macedo de Cavaleiros e preserva a tradição carnavalesca dos Caretos.",
+    "fonte": "UNESCO / Associação dos Caretos de Podence",
+    "factClusterId": "fc_podence_01"
+  },
+  {
+    "id": "PT_VIL_0007",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "A aldeia de Sistelo, no concelho de Arcos de Valdevez, é frequentemente apelidada de:",
+    "opcoes": [
+      "A Veneza do Minho",
+      "A Suíça Transmontana",
+      "O Tibete Português",
+      "A Capital do Granito"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Sistelo é conhecida como «o pequeno Tibete português» devido aos seus socalcos verdes esculpidos na montanha para cultivo agrícola.",
+    "fonte": "DGPC / Paisagem Cultural de Sistelo",
+    "factClusterId": "fc_sistelo_01"
+  },
+  {
+    "id": "PT_VIL_0008",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que península fluvial da albufeira de Castelo do Bode se situa a pitoresca aldeia templária de Dornes?",
+    "opcoes": [
+      "Rio Alviela",
+      "Rio Nabão",
+      "Rio Sever",
+      "Rio Zêzere"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "Dornes, no concelho de Ferreira do Zêzere, ergue-se numa península contornada pelas águas do rio Zêzere e possui uma torre pentagonal templária.",
+    "fonte": "Município de Ferreira do Zêzere",
+    "factClusterId": "fc_dornes_01"
+  },
+  {
+    "id": "PT_VIL_0009",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia do concelho de Penafiel se destaca pela preservação das suas casas em xisto amarelo e lousa na rota do Românico?",
+    "opcoes": [
+      "Quintandona",
+      "Casal de São Simão",
+      "Gondramaz",
+      "Ferraria de São João"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "A aldeia preservada de Quintandona situa-se na freguesia de Lagares e Figueira, concelho de Penafiel.",
+    "fonte": "Rota do Românico / Município de Penafiel",
+    "factClusterId": "fc_quintandona_01"
+  },
+  {
+    "id": "PT_VIL_0010",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que distrito alentejano se localiza a vila de Marvão, situada a mais de 800 metros de altitude no topo da Serra de São Mamede?",
+    "opcoes": [
+      "Évora",
+      "Portalegre",
+      "Beja",
+      "Santarém"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Marvão é uma vila histórica fortificada pertencente ao distrito de Portalegre, no Alto Alentejo.",
+    "fonte": "Turismo do Alentejo / Município de Marvão",
+    "factClusterId": "fc_marvao_01"
+  },
+  {
+    "id": "PT_VIL_0011",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se encontra a aldeia histórica de Sortelha, célebre pela formação rochosa da «Cabeça da Velha» e pela muralha oval?",
+    "opcoes": [
+      "Almeida",
+      "Figueira de Castelo Rodrigo",
+      "Sabugal",
+      "Trancoso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Sortelha é uma das aldeias históricas mais antigas e bem conservadas de Portugal, pertencente ao concelho do Sabugal, distrito da Guarda.",
+    "fonte": "Rede das Aldeias Históricas de Portugal",
+    "factClusterId": "fc_sortelha_01"
+  },
+  {
+    "id": "PT_VIL_0012",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila da região Centro é nacionalmente conhecida como a «Capital do Móvel»?",
+    "opcoes": [
+      "Gouveia",
+      "Albergaria-a-Velha",
+      "Cantanhede",
+      "Paços de Ferreira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Paços de Ferreira, no distrito do Porto, é tradicionalmente reconhecida como a Capital do Móvel em Portugal.",
+    "fonte": "Associação Empresarial de Paços de Ferreira",
+    "factClusterId": "fc_pacos_01"
+  },
+  {
+    "id": "PT_VIL_0013",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que serra se situam as aldeias de xisto de Talasnal, Cerdeira e Candal?",
+    "opcoes": [
+      "Serra da Lousã",
+      "Serra do Gerês",
+      "Serra do Marão",
+      "Serra de Montejunto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "As aldeias de Talasnal, Cerdeira e Candal pertencem à Rede das Aldeias do Xisto da Serra da Lousã.",
+    "fonte": "Rede das Aldeias do Xisto (ADXTUR)",
+    "factClusterId": "fc_lousa_xisto_01"
+  },
+  {
+    "id": "PT_VIL_0014",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila costeira do distrito de Leiria foi vila de corsários e é célebre pelos seus moinhos de vento e doces «brisas do Lis»?",
+    "opcoes": [
+      "Peniche",
+      "São Martinho do Porto",
+      "Foz do Arelho",
+      "Pataias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "São Martinho do Porto, no concelho de Alcobaça, possui uma baía natural em forma de concha única na Europa.",
+    "fonte": "Turismo do Centro de Portugal",
+    "factClusterId": "fc_smartinho_01"
+  },
+  {
+    "id": "PT_VIL_0015",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a aldeia de Vilarinho da Furna, submersa em 1971 pela construção da barragem?",
+    "opcoes": [
+      "Vieira do Minho",
+      "Montalegre",
+      "Terras de Bouro",
+      "Cabeceiras de Basto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A antiga aldeia comunitária de Vilarinho da Furna ficava na serra do Gerês, no concelho de Terras de Bouro.",
+    "fonte": "Museu Etnográfico de Vilarinho da Furna",
+    "factClusterId": "fc_vilarinho_01"
+  },
+  {
+    "id": "PT_VIL_0016",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila raiana da Beira Alta possui uma fortaleza com muralhas em forma de estrela de doze pontas?",
+    "opcoes": [
+      "Marvão",
+      "Valença",
+      "Elvas",
+      "Almeida"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Almeida é uma vila histórica cercada por um dos mais perfeitos sistemas defensivos abaluartados da Europa.",
+    "fonte": "Aldeias Históricas de Portugal / Município de Almeida",
+    "factClusterId": "fc_almeida_01"
+  },
+  {
+    "id": "PT_VIL_0017",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "A aldeia de Belmonte, na Beira Baixa, é historicamente conhecida pela forte presença e preservação da comunidade:",
+    "opcoes": [
+      "Judaica (Criptojudaica)",
+      "Flamenga",
+      "Celta",
+      "Templária"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Belmonte manteve uma comunidade judaica secreta (maranos/criptojudeus) ao longo de séculos e é a terra natal de Pedro Álvares Cabral.",
+    "fonte": "Museu Judaico de Belmonte",
+    "factClusterId": "fc_belmonte_01"
+  },
+  {
+    "id": "PT_VIL_0018",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que ilha dos Açores se localiza a freguesia e vila da Calheta, famosa pelas suas fajãs vulcânicas como a Fajã da Caldeira de Santo Cristo?",
+    "opcoes": [
+      "Pico",
+      "São Jorge",
+      "Faial",
+      "Terceira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A ilha de São Jorge é mundialmente célebre pelas suas fajãs litorais, sendo a Fajã da Caldeira de Santo Cristo uma reserva natural protegida.",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_saojorge_fajas_01"
+  },
+  {
+    "id": "PT_VIL_0019",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila alentejana do distrito de Beja é conhecida como a «Vila Museu» junto ao rio Guadiana?",
+    "opcoes": [
+      "Serpa",
+      "Moura",
+      "Mértola",
+      "Alvito"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mértola alberga um rico património islâmico, romano e visigótico, tendo a sua antiga mesquita sido transformada na Igreja Matriz.",
+    "fonte": "Campo Arqueológico de Mértola",
+    "factClusterId": "fc_mertola_01"
+  },
+  {
+    "id": "PT_VIL_0020",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a vila de Óbidos, doada tradicionalmente como dote às rainhas de Portugal («Casa das Rainhas»)?",
+    "opcoes": [
+      "Caldas da Rainha",
+      "Peniche",
+      "Bombarral",
+      "Óbidos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Óbidos é sede de concelho próprio no distrito de Leiria, vila muralhada com castelo medieval e rica história monárquica.",
+    "fonte": "Município de Óbidos / DGPC",
+    "factClusterId": "fc_obidos_01"
+  },
+  {
+    "id": "PT_VIL_0021",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia histórica da Beira Baixa alberga o mais antigo exemplar de arquitetura civil romana em Portugal, conhecido como a Torre de Centum Cellas?",
+    "opcoes": [
+      "Belmonte",
+      "Idanha-a-Velha",
+      "Castelo Novo",
+      "Linhares da Beira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "A misteriosa torre romana de Centum Cellas situa-se na freguesia de Colmeal da Torre, concelho de Belmonte.",
+    "fonte": "DGPC / Aldeias Históricas de Portugal",
+    "factClusterId": "fc_centumcellas_01"
+  },
+  {
+    "id": "PT_VIL_0022",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a aldeia de Linhares da Beira, considerada a «Capital do Parapente» em Portugal?",
+    "opcoes": [
+      "Manteigas",
+      "Celorico da Beira",
+      "Seia",
+      "Gouveia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Linhares da Beira, no concelho de Celorico da Beira, na encosta da Serra da Estrela, é um polo europeu de desportos de voo livre.",
+    "fonte": "Aldeias Históricas de Portugal",
+    "factClusterId": "fc_linhares_01"
+  },
+  {
+    "id": "PT_VIL_0023",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "A vila de Castelo de Vide, no Alto Alentejo, é amplamente conhecida pela alcunha de:",
+    "opcoes": [
+      "Princesa do Lima",
+      "Veneza do Sul",
+      "Sintra do Alentejo",
+      "Cidade Branca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Castelo de Vide é carinhosamente apelidada de «Sintra do Alentejo» devido à sua vegetação verdejante, fontes de água fresca e casario medieval.",
+    "fonte": "Turismo do Alentejo / Município de Castelo de Vide",
+    "factClusterId": "fc_castelodevide_01"
+  },
+  {
+    "id": "PT_VIL_0024",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho transmontano se localiza a aldeia de Montesinho, que dá nome ao Parque Natural envolvente?",
+    "opcoes": [
+      "Vinhais",
+      "Chaves",
+      "Miranda do Douro",
+      "Bragança"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A aldeia serrana de Montesinho pertence ao município de Bragança, situada a mais de 1000 metros de altitude.",
+    "fonte": "Parque Natural de Montesinho",
+    "factClusterId": "fc_montesinho_01"
+  },
+  {
+    "id": "PT_VIL_0025",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila ribatejana, situada numa ilha do rio Tejo, tem como atração central um castelo templário edificado por Gualdim Pais em 1171?",
+    "opcoes": [
+      "Almourol (Vila Nova da Barquinha)",
+      "Constância",
+      "Chamusca",
+      "Golegã"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Castelo de Almourol ergue-se num ilhéu rochoso no Tejo, no concelho de Vila Nova da Barquinha.",
+    "fonte": "DGPC / Município de Vila Nova da Barquinha",
+    "factClusterId": "fc_almourol_01"
+  },
+  {
+    "id": "PT_VIL_0026",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho do Minho se localiza a aldeia de Castro Laboreiro, famosa pelas suas brandas e inverneiras e pela raça de cão autóctone?",
+    "opcoes": [
+      "Monção",
+      "Melgaço",
+      "Paredes de Coura",
+      "Valença"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Castro Laboreiro situa-se no concelho de Melgaço, no planalto laboreiro dentro do Parque Nacional da Peneda-Gerês.",
+    "fonte": "Município de Melgaço / ICNF",
+    "factClusterId": "fc_castrolaboreiro_01"
+  },
+  {
+    "id": "PT_VIL_0027",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila histórica da Beira Interior foi palco da assinatura de importantes documentos e acolhe anualmente uma famosa feira medieval em torno do seu castelo?",
+    "opcoes": [
+      "Pinhel",
+      "Mêda",
+      "Trancoso",
+      "Idanha-a-Nova"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Trancoso possui um centro histórico cercado por muralhas medievais e foi a terra do profeta e sapateiro Bandarra.",
+    "fonte": "Aldeias Históricas de Portugal / Município de Trancoso",
+    "factClusterId": "fc_trancoso_01"
+  },
+  {
+    "id": "PT_VIL_0028",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho da região Centro se encontra a aldeia de Casal de São Simão, famosa pelas suas Fragas e passadiços naturais?",
+    "opcoes": [
+      "Castanheira de Pera",
+      "Pedrógão Grande",
+      "Ansião",
+      "Figueiró dos Vinhos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A aldeia do xisto de Casal de São Simão pertence ao município de Figueiró dos Vinhos, junto à imponente garganta das Fragas de São Simão.",
+    "fonte": "Rede das Aldeias do Xisto",
+    "factClusterId": "fc_casalsaosimao_01"
+  },
+  {
+    "id": "PT_VIL_0029",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila do Ribatejo é internacionalmente celebrada como a «Capital Nacional do Cavalo», acolhendo a secular Feira de São Martinho?",
+    "opcoes": [
+      "Golegã",
+      "Almeirim",
+      "Cartaxo",
+      "Salvaterra de Magos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Golegã acolhe todos os anos em novembro a Feira Nacional do Cavalo, congregando criadores e cavaleiros de todo o mundo.",
+    "fonte": "Município da Golegã",
+    "factClusterId": "fc_golega_01"
+  },
+  {
+    "id": "PT_VIL_0030",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho do Douro Superior se localiza a aldeia histórica de Castelo Rodrigo, junto à serra da Marofa?",
+    "opcoes": [
+      "Vila Nova de Foz Côa",
+      "Figueira de Castelo Rodrigo",
+      "Torre de Moncorvo",
+      "Mêda"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Castelo Rodrigo é uma aldeia histórica monumental no concelho de Figueira de Castelo Rodrigo, no distrito da Guarda.",
+    "fonte": "Aldeias Históricas de Portugal",
+    "factClusterId": "fc_castelorodrigo_01"
+  },
+  {
+    "id": "PT_VIL_0031",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia do concelho de Pampilhosa da Serra preserva a tradição de xisto junto à albufeira de Santa Luzia?",
+    "opcoes": [
+      "Janeiro de Cima",
+      "Janeiro de Baixo",
+      "Fajão",
+      "Benfeita"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "Fajão é uma aldeia típica de xisto encoleirada nos rochedos da Serra da Rocha da Pena, no concelho de Pampilhosa da Serra.",
+    "fonte": "Aldeias do Xisto / Município de Pampilhosa da Serra",
+    "factClusterId": "fc_fajao_01"
+  },
+  {
+    "id": "PT_VIL_0032",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que ilha da Madeira se situa a pitoresca vila de pescadores de Câmara de Lobos, imortalizada em pinturas por Winston Churchill?",
+    "opcoes": [
+      "Porto Santo",
+      "Desertas",
+      "Selvagens",
+      "Ilha da Madeira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Câmara de Lobos fica na costa sul da ilha da Madeira, célebre pela sua baía de barcos tradicionais e pela bebida regional «poncha».",
+    "fonte": "Turismo da Madeira",
+    "factClusterId": "fc_camaralobos_01"
+  },
+  {
+    "id": "PT_VIL_0033",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila alentejana do distrito de Évora é famosa pelo fabrico de chocalhos tradicionais classificados pela UNESCO?",
+    "opcoes": [
+      "Viana do Alentejo (Alcáçovas)",
+      "Redondo",
+      "Mora",
+      "Portel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A vila de Alcáçovas, no concelho de Viana do Alentejo, é a capital portuguesa do fabrico de chocalhos, arte reconhecida pela UNESCO.",
+    "fonte": "UNESCO / Município de Viana do Alentejo",
+    "factClusterId": "fc_alcacovas_01"
+  },
+  {
+    "id": "PT_VIL_0034",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a vila de Santana, afamada pelas suas casas típicas triangulares cobertas de colmo?",
+    "opcoes": [
+      "Machico",
+      "Santana",
+      "São Vicente",
+      "Ribeira Brava"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Santana é sede de concelho no norte da ilha da Madeira, classificada pela UNESCO como Reserva da Biosfera.",
+    "fonte": "Turismo da Madeira / Município de Santana",
+    "factClusterId": "fc_santana_01"
+  },
+  {
+    "id": "PT_VIL_0035",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "A aldeia histórica de Idanha-a-Velha foi outrora uma importante cidade romana e sede episcopal visigótica com o nome de:",
+    "opcoes": [
+      "Conímbriga",
+      "Bracara Augusta",
+      "Egitânia",
+      "Scalabis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "Idanha-a-Velha foi a prestigiada civitas romana e diocese visigótica de Egitânia, conservando notável património arqueológico.",
+    "fonte": "DGPC / Aldeias Históricas de Portugal",
+    "factClusterId": "fc_idanhaavelha_01"
+  },
+  {
+    "id": "PT_VIL_0036",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho transmontano se localiza a aldeia histórica de Castelo Mendo, protegida por duas linhas de muralhas?",
+    "opcoes": [
+      "Guarda",
+      "Sabugal",
+      "Pinhel",
+      "Almeida"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "Castelo Mendo pertence ao concelho de Almeida e conserva traçado urbano medieval e estátuas de berrões proto-históricos.",
+    "fonte": "Aldeias Históricas de Portugal",
+    "factClusterId": "fc_castelomendo_01"
+  },
+  {
+    "id": "PT_VIL_0037",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila do distrito de Viana do Castelo é considerada a «mais antiga vila de Portugal», fundada por carta de foral de D. Teresa em 1125?",
+    "opcoes": [
+      "Ponte de Lima",
+      "Arcos de Valdevez",
+      "Ponte da Barca",
+      "Caminha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ponte de Lima obteve foral outorgado pela condessa D. Teresa em 4 de março de 1125, ostentando o título de vila mais antiga do país.",
+    "fonte": "Município de Ponte de Lima",
+    "factClusterId": "fc_pontedelima_01"
+  },
+  {
+    "id": "PT_VIL_0038",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a aldeia de Gondramaz, muito apreciada por escultores e praticantes de BTT na Serra da Lousã?",
+    "opcoes": [
+      "Lousã",
+      "Miranda do Corvo",
+      "Castanheira de Pera",
+      "Penela"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "Gondramaz é uma das mais belas aldeias de xisto, pertencente ao concelho de Miranda do Corvo.",
+    "fonte": "Aldeias do Xisto / Município de Miranda do Corvo",
+    "factClusterId": "fc_gondramaz_01"
+  },
+  {
+    "id": "PT_VIL_0039",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila medieval do Algarve ocidental conserva uma antiga fortaleza ligada à escola náutica do Infante D. Henrique?",
+    "opcoes": [
+      "Aljezur",
+      "Monchique",
+      "Sagres (Vila do Bispo)",
+      "Castro Marim"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A vila de Sagres, no concelho de Vila do Bispo, abriga a célebre Fortaleza de Sagres e a rosa-dos-ventos de pedra.",
+    "fonte": "DGPC / Fortaleza de Sagres",
+    "factClusterId": "fc_sagres_01"
+  },
+  {
+    "id": "PT_VIL_0040",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho alentejano se encontra a vila histórica de Mértola, banhada pelas margens do rio de prata dos romanos?",
+    "opcoes": [
+      "Beja",
+      "Serpa",
+      "Castro Verde",
+      "Mértola"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Mértola é município próprio no Baixo Alentejo e ponto mais a montante navegável do rio Guadiana.",
+    "fonte": "Município de Mértola",
+    "factClusterId": "fc_mertola_02"
+  },
+  {
+    "id": "PT_VIL_0041",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia do concelho de Arganil foi classificada com o galardão de «Aldeia Monumento» devido ao seu conjunto arquitetónico de xisto e granito?",
+    "opcoes": [
+      "Piódão",
+      "Benfeita",
+      "Vila Cova de Alva",
+      "Folgosinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Piódão é conjunto de interesse público e uma das mais emblemáticas aldeias históricas de Portugal.",
+    "fonte": "DGPC / Aldeias Históricas de Portugal",
+    "factClusterId": "fc_piodao_02"
+  },
+  {
+    "id": "PT_VIL_0042",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a vila de Sintra, classificada pela UNESCO como Paisagem Cultural e Património da Humanidade em 1995?",
+    "opcoes": [
+      "Cascais",
+      "Sintra",
+      "Oeiras",
+      "Mafra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sintra é sede de concelho no distrito de Lisboa, famosa pelos seus palácios românticos como a Pena, Monserrate e Quinta da Regaleira.",
+    "fonte": "UNESCO / Parques de Sintra",
+    "factClusterId": "fc_sintra_01"
+  },
+  {
+    "id": "PT_VIL_0043",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia raiana do concelho de Valença do Minho é célebre pela sua ponte internacional metálica concebida pela escola de Gustave Eiffel?",
+    "opcoes": [
+      "São Pedro da Torre",
+      "Friestas",
+      "Valença (Fortaleza)",
+      "Verdoejo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A vila fortificada de Valença liga-se a Tui através da ponte rodoferroviária sobre o rio Minho inaugurada em 1886.",
+    "fonte": "Município de Valença / Infraestruturas de Portugal",
+    "factClusterId": "fc_valenca_01"
+  },
+  {
+    "id": "PT_VIL_0044",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho alentejano se localiza a aldeia de Santa Susana, famosa pelas suas casas térreas uniformes brancas com barras azuis?",
+    "opcoes": [
+      "Grândola",
+      "Viana do Alentejo",
+      "Montemor-o-Novo",
+      "Alcácer do Sal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "Santa Susana é uma das mais belas aldeias típicas do Alentejo litoral, no concelho de Alcácer do Sal.",
+    "fonte": "Turismo do Alentejo / Município de Alcácer do Sal",
+    "factClusterId": "fc_santasusana_01"
+  },
+  {
+    "id": "PT_VIL_0045",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "A aldeia de Belver, situada sobre o rio Tejo, pertence a que concelho do Alto Alentejo?",
+    "opcoes": [
+      "Gavião",
+      "Nisa",
+      "Crato",
+      "Ponte de Sor"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Belver é uma freguesia e aldeia histórica do concelho de Gavião, com um imponente castelo erigido pela Ordem dos Hospitalários.",
+    "fonte": "Município de Gavião",
+    "factClusterId": "fc_belver_01"
+  },
+  {
+    "id": "PT_VIL_0046",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho se situa a vila de Alter do Chão, conhecida internacionalmente pela sua secular Coudelaria Real fundada por D. João V em 1748?",
+    "opcoes": [
+      "Crato",
+      "Alter do Chão",
+      "Fronteira",
+      "Monforte"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Coudelaria de Alter, situada em Alter do Chão, é a mais antiga coudelaria do mundo a funcionar ininterruptamente no mesmo local.",
+    "fonte": "Coudelaria de Alter / Companhia das Lezírias",
+    "factClusterId": "fc_alter_01"
+  },
+  {
+    "id": "PT_VIL_0047",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que aldeia de xisto do concelho da Lousã acolhe anualmente residências artísticas internacionais e projetos sustentáveis de cerâmica?",
+    "opcoes": [
+      "Talasnal",
+      "Aigra Nova",
+      "Cerdeira (Cerdeira Home for Creativity)",
+      "Comareira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Cerdeira foi reconstruída como polo internacional de criação artística e artesanato contemporâneo na Serra da Lousã.",
+    "fonte": "Rede das Aldeias do Xisto / Cerdeira Creativity",
+    "factClusterId": "fc_cerdeira_01"
+  },
+  {
+    "id": "PT_VIL_0048",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho do Minho se localiza a vila de Ponte da Barca, atravessada pelo rio Lima e vizinha do Parque Nacional da Peneda-Gerês?",
+    "opcoes": [
+      "Ponte de Lima",
+      "Arcos de Valdevez",
+      "Vila Verde",
+      "Ponte da Barca"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Ponte da Barca é sede de município com notável ponte gótica e rica tradição no Minho.",
+    "fonte": "Município de Ponte da Barca",
+    "factClusterId": "fc_pontedabarca_01"
+  },
+  {
+    "id": "PT_VIL_0049",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Que vila costeira do concelho de Mafra é a única Reserva Mundial de Surf na Europa, reconhecida pela Save the Waves Coalition?",
+    "opcoes": [
+      "Ericeira",
+      "Nazaré",
+      "Peniche",
+      "Espinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Ericeira foi consagrada Reserva Mundial de Surf em 2011, preservando 4 km de praias e ondas de classe mundial como Ribeira d'Ilhas e Coxos.",
+    "fonte": "Save the Waves Coalition / Município de Mafra",
+    "factClusterId": "fc_ericeira_01"
+  },
+  {
+    "id": "PT_VIL_0050",
+    "tema": "Portugal",
+    "subtema": "Vilas e Aldeias",
+    "pergunta": "Em que concelho da Serra da Estrela se situa a aldeia de Folgosinho, terra associada à lenda do guerreiro lusitano Viriato?",
+    "opcoes": [
+      "Manteigas",
+      "Seia",
+      "Gouveia",
+      "Covilhã"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Folgosinho é uma pitoresca aldeia de montanha do concelho de Gouveia, situada a quase 1000 metros de altitude.",
+    "fonte": "Parque Natural da Serra da Estrela / Município de Gouveia",
+    "factClusterId": "fc_folgosinho_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "GAST_MAR_0051",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie nobre de atum capturada nas armações tradicionais da costa algarvia (Tavira e Vila Real de Santo António) é a mais valorizada nos mercados mundiais pela sua gordura entremeada?",
+    "opcoes": [
+      "Atum-rabilho (Thunnus thynnus)",
+      "Atum-albacora",
+      "Atum-patudo",
+      "Bonito-do-sul"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A pesca do atum-rabilho por armações de redes em Tavira e Olhão remonta aos fenícios e romanos.",
+    "fonte": "IPMA / Museu Municipal de Tavira",
+    "factClusterId": "fc_mar_atumrabilho_01"
+  },
+  {
+    "id": "GAST_MAR_0052",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de bacalhau inventado no concelho de Ílhavo junta bacalhau desfiado, batatas e cebola salteados em azeite, envolvidos em natas e molho bechamel gratinado com queijo?",
+    "opcoes": [
+      "Bacalhau à Brás",
+      "Bacalhau com Natas",
+      "Bacalhau à Lagareiro",
+      "Bacalhau com Todos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Bacalhau com Natas é uma das receitas de forno mais populares e confortáveis das famílias portuguesas.",
+    "fonte": "Dicionário de Gastronomia Portuguesa / Município de Ílhavo",
+    "factClusterId": "fc_mar_bacalhaucomnatas_01"
+  },
+  {
+    "id": "GAST_MAR_0053",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe marinho de águas costeiras rochosas, de cor avermelhada e espinhos venenosos na barbatana dorsal, é indispensável na confeção do caldo rico de peixe e sopas de marisco?",
+    "opcoes": [
+      "Robalo",
+      "Dourada",
+      "Rascasso (ou Peixe-escorpião / Scorpaena scrofa)",
+      "Linguado"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O rascasso confere gelatina natural e sabor oceânico profundo às caldeiradas e sopas de peixe da costa atlântica.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_rascasso_01"
+  },
+  {
+    "id": "GAST_MAR_0054",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que bivalves de casca preta alongada cultivados em bateiras e cordas na ria de Aveiro e na lagoa de Albufeira são servidos abertos com azeite, alho e cebola picada («Mexilhões à Pescador»)?",
+    "opcoes": [
+      "Ostras",
+      "Amêijoas",
+      "Conquilhas",
+      "Mexilhões (Mytilus galloprovincialis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O mexilhão da costa portuguesa é rico em ferro e iodo, consumido de cebolada, em vinagrete ou frito em polme.",
+    "fonte": "Docapesca / Turismo Centro de Portugal",
+    "factClusterId": "fc_mar_mexilhoes_01"
+  },
+  {
+    "id": "GAST_MAR_0055",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato típico de Setúbal e Sesimbra junta chocos pequenos ou médios inteiros com a sua tinta e vísceras («chocos com tinta»), assados na brasa ou estufados em azeite e vinho branco?",
+    "opcoes": [
+      "Chocos com Tinta à Setubalense",
+      "Lulas Recheadas",
+      "Polvo Suado",
+      "Pataniscas de Choco"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A tinta natural do choco confere um molho aveludado e rico a acompanhar batatas cozidas e salada mista.",
+    "fonte": "Município de Setúbal / Turismo da Região de Lisboa",
+    "factClusterId": "fc_mar_chocostinta_01"
+  },
+  {
+    "id": "GAST_MAR_0056",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que grande crustáceo marinho sem pinças com antenas compridas e carapaça espinhosa avermelhada (Palinurus elephas) é o rei dos viveiros rochosos da Ericeira e Peniche?",
+    "opcoes": [
+      "Lavagante azul",
+      "Lagosta-legítima (ou Lagosta-castanha)",
+      "Santola",
+      "Sapateira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A lagosta da Ericeira e das Berlengas é afamada desde o século XIX pela sua textura adocicada e firmeza da carne.",
+    "fonte": "Município de Mafra / Confraria da Lagosta da Ericeira",
+    "factClusterId": "fc_mar_lagosta_01"
+  },
+  {
+    "id": "GAST_MAR_0057",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que crustáceo azul-escuro com duas grandes pinças assimétricas robustas (Homarus gammarus) é muito valorizado em arrozes caldosos de marisco e grelhado na brasa com manteiga?",
+    "opcoes": [
+      "Lagostim de rio",
+      "Navalheira",
+      "Lavagante (ou Lubrigante)",
+      "Caranguejo-mouro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O lavagante da costa rochosa portuguesa atinge grande cotação nas marisqueiras pela riqueza de sabor das suas pinças.",
+    "fonte": "IPMA / Guia de Mariscos de Portugal",
+    "factClusterId": "fc_mar_lavagante_01"
+  },
+  {
+    "id": "GAST_MAR_0058",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional do Algarve consiste em lulas limpas recheadas com os seus próprios tentáculos picados, chouriço de carne, presunto, cebola, alho e ovo cozido, estufadas em molho de tomate?",
+    "opcoes": [
+      "Lulas Grelhadas com Molho Verde",
+      "Choco de Coentrada",
+      "Calamares à Moda do Porto",
+      "Lulas Recheadas à Algarvia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As lulas recheadas unem os sabores do mar e da terra (chouriço e presunto), típicos da gastronomia costeira algarvia.",
+    "fonte": "Região de Turismo do Algarve",
+    "factClusterId": "fc_mar_lulasrecheadas_01"
+  },
+  {
+    "id": "GAST_MAR_0059",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe plano ovalado com ambos os olhos no lado direito do corpo e carne branca nobilíssima é servido habitualmente frito ou grelhado com arroz de tomate?",
+    "opcoes": [
+      "Linguado (Solea solea)",
+      "Pregado",
+      "Solha",
+      "Rodovalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O linguado capturado na costa da Figueira da Foz, Setúbal e Aveiro é um dos peixes mais delicados e digestivos da gastronomia nacional.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_linguado_01"
+  },
+  {
+    "id": "GAST_MAR_0060",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de arroz caldoso aromático com sangue do próprio animal e vinagre utiliza polvo fresco da costa, cebola, louro e pimento?",
+    "opcoes": [
+      "Arroz de Cabidela de Galo",
+      "Arroz de Polvo Malandrinho (à Minhota)",
+      "Arroz de Lampreia",
+      "Arroz de Pato"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Polvo malandrinho no tacho de barro é uma das maiores delícias das tascas marítimas do norte ao sul.",
+    "fonte": "Receitas Tradicionais Portuguesas",
+    "factClusterId": "fc_mar_arrozpolvo_01"
+  },
+  {
+    "id": "GAST_MAR_0061",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que crustáceo pequeno e muito ágil de patas aveludadas e carapaça rugosa (Necora puber) é cozido com água salgada e consumido como petisco de cervejaria?",
+    "opcoes": [
+      "Sapateira",
+      "Caranguejo-aranha",
+      "Navalheira",
+      "Camarão-duende"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A navalheira é capturada nas pedras da maré baixa e oferece um sabor intenso a maresia.",
+    "fonte": "IPMA / Guia de Crustáceos de Portugal",
+    "factClusterId": "fc_mar_navalheira_01"
+  },
+  {
+    "id": "GAST_MAR_0062",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de cabeça grande e esqueleto cartilagíneo sem espinhas (Lophius piscatorius) fornece os suculentos «medalhões de tamboril» usados em espetadas com camarão e pimentos?",
+    "opcoes": [
+      "Cação",
+      "Raia",
+      "Cherne",
+      "Tamboril (ou Peixe-diabo / Peixe-pescador)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O tamboril possui carne muito firme e branca que se assemelha à consistência da lagosta.",
+    "fonte": "Docapesca / IPMA",
+    "factClusterId": "fc_mar_tamboril_01"
+  },
+  {
+    "id": "GAST_MAR_0063",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de conforto da região de Aveiro e Ílhavo é feito com as línguas do bacalhau salgadas e demolhadas, fritas em polme de farinha e ovos?",
+    "opcoes": [
+      "Línguas de Bacalhau Fritas (ou de Cebolada)",
+      "Caras de Bacalhau",
+      "Samos de Bacalhau",
+      "Chicharro Frito"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As línguas e os samos (bexigas natatórias) de bacalhau são aproveitamentos nobres e gelatinosos da culinária dos bacalhoeiros.",
+    "fonte": "Município de Ílhavo / Museu Marítimo",
+    "factClusterId": "fc_mar_linguasbacalhau_01"
+  },
+  {
+    "id": "GAST_MAR_0064",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional do Ribatejo (Chamusca, Alpiarça e Santarém) consiste numa sopa grossa de peixes do rio Tejo (barbo, boga, carpa) aromatizada com hortelã-da-ribeira e fatias de pão?",
+    "opcoes": [
+      "Caldeirada de Peniche",
+      "Sopa de Peixe do Rio à Ribatejana (ou Fatão)",
+      "Sopa de Cação",
+      "Ensopado de Enguias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A comunidade avieira das margens do Tejo desenvolveu uma culinária ímpar de peixes de água doce.",
+    "fonte": "Município de Santarém / Cultura Avieira",
+    "factClusterId": "fc_mar_peixedorio_01"
+  },
+  {
+    "id": "GAST_MAR_0065",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe costeiro de dorso azul-escuro com manchas douradas entre os olhos e no opérculo (Sparus aurata) é um dos peixes mais apreciados grelhado no carvão com flor de sal?",
+    "opcoes": [
+      "Sargo",
+      "Bodião",
+      "Dourada-legítima (Sparus aurata)",
+      "Pargo-legítimo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A dourada selvagem captura-se nas águas costeiras e estuários portugueses, com carne branca e textura suculenta.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_dourada_01"
+  },
+  {
+    "id": "GAST_MAR_0066",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que petisco algarvio de verão é feito com chocos pequeninos salteados inteiros em lume vivo com azeite, alho e coentros frescos picados?",
+    "opcoes": [
+      "Choco Frito",
+      "Lulas à Sevilhana",
+      "Polvo à Galega",
+      "Choquinhos de Coentrada à Algarvia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os choquinhos de coentrada são uma das entradas mais pedidas nos restaurantes de Faro, Olhão e Portimão.",
+    "fonte": "Região de Turismo do Algarve",
+    "factClusterId": "fc_mar_choquinhoscoentrada_01"
+  },
+  {
+    "id": "GAST_MAR_0067",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie de camarão autóctone português, de cor avermelhada transparente e tamanho médio pescado nas costas de Vila Real de Santo António e Cascais, é famosa pela sua doçura?",
+    "opcoes": [
+      "Gamba da Costa (Parapenaeus longirostris)",
+      "Camarão-tigre",
+      "Camarão-de-espinho de Moçambique",
+      "Camarão-do-rio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A gamba da costa cozida em água de mar com sal grosso é uma referência de frescura nas marisqueiras portuguesas.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_gambadacosta_01"
+  },
+  {
+    "id": "GAST_MAR_0068",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de bacalhau em Viana do Castelo é servido no restaurante «Margarida da Praça», cozinhado em posta alta frita com cebolada aromática e batatas cozidas?",
+    "opcoes": [
+      "Bacalhau à Zé do Pipo",
+      "Bacalhau à Margarida da Praça",
+      "Bacalhau à Gomes de Sá",
+      "Bacalhau com Natas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Bacalhau à Margarida da Praça era o prato preferido do escritor Camilo Castelo Branco quando visitava Viana.",
+    "fonte": "Município de Viana do Castelo / Gastronomia Vianense",
+    "factClusterId": "fc_mar_margaridadapraca_01"
+  },
+  {
+    "id": "GAST_MAR_0069",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que conserva tradicional portuguesa em lata, produzida nas fábricas de Matosinhos, Peniche, Setúbal e Olhão com azeite virgem extra, é exportada para mais de 70 países?",
+    "opcoes": [
+      "Conservas de Caranguejo",
+      "Conservas de Pescada",
+      "Conservas de Sardinha em Azeite (e Conservas de Cavala/Atum)",
+      "Conservas de Robalo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A indústria conserveira de peixe portuguesa é um setor histórico de prestígio internacional com marcas centenárias.",
+    "fonte": "ANICP (Associação Nacional dos Industriais de Conservas de Peixe)",
+    "factClusterId": "fc_mar_conservas_01"
+  },
+  {
+    "id": "GAST_MAR_0070",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que bivalve marinho em forma de leque (Pecten maximus), símbolo histórico dos peregrinos do Caminho de Santiago que cruzam Portugal, é servido gratinado na própria concha?",
+    "opcoes": [
+      "Amêijoa-boa",
+      "Ostra",
+      "Mexilhão",
+      "Vieira (Pecten maximus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A vieira é o emblema dos peregrinos de Santiago e um marisco nobre servido nas vilas costeiras do Minho.",
+    "fonte": "Caminhos de Santiago em Portugal / Docapesca",
+    "factClusterId": "fc_mar_vieira_01"
+  },
+  {
+    "id": "GAST_MAR_0071",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe costeiro de escamas prateadas com faixas verticais escuras (Diplodus sargus), que habita a rebentação das falésias da Costa Vicentina, alimenta-se de percebes e marisco?",
+    "opcoes": [
+      "Sargo-legítimo (Diplodus sargus)",
+      "Choupa",
+      "Salema",
+      "Boga"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Por se alimentar de percebes e mexilhões na rocha, o sargo da Costa Vicentina tem um dos sabores a mar mais intensos e cobiçados.",
+    "fonte": "IPMA / Parque Natural do Sudoeste Alentejano e Costa Vicentina",
+    "factClusterId": "fc_mar_sargo_01"
+  },
+  {
+    "id": "GAST_MAR_0072",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de arroz caldoso da Póvoa de Varzim e Vila do Conde é confecionado com ovas de peixe fresco, tomate maduro e pimentos verdes?",
+    "opcoes": [
+      "Arroz de Pato",
+      "Arroz de Ovas à Poveira",
+      "Arroz Doce",
+      "Arroz de Lampreia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Arroz de Ovas à Poveira é uma tradição secular das famílias piscatórias poveiras da colmeia marítima.",
+    "fonte": "Município da Póvoa de Varzim / Confraria dos Sabores Poveiros",
+    "factClusterId": "fc_mar_arrozovas_01"
+  },
+  {
+    "id": "GAST_MAR_0073",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe achatado de grandes dimensões (Psetta maxima), de olhos no lado esquerdo do corpo e pele sem escamas com tubérculos ósseos, é um dos peixes mais nobres da gastronomia costeira?",
+    "opcoes": [
+      "Solha",
+      "Linguado",
+      "Pregado (Scophthalmus maximus)",
+      "Areeiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O pregado é muito apreciado cozido ao vapor ou assado no forno com batatas e azeite pela sua carne branca firme.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_pregado_01"
+  },
+  {
+    "id": "GAST_MAR_0074",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato açoriano da ilha Terceira e de São Miguel consiste em peixes locais cozinhados em caldo rico aromatizado com piripiri, toucinho e massa sovada esfarelada?",
+    "opcoes": [
+      "Cozido das Furnas",
+      "Alcatra da Terceira",
+      "Sopa de Espírito Santo",
+      "Caldo de Peixe à Moda dos Açores (ou Caldo de Peixe do Pico)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Caldo de Peixe do Pico e dos Açores serve primeiro o caldo com pão ou massa e depois as postas de peixe com batata-doce e molho verde.",
+    "fonte": "Governo Regional dos Açores / Confraria dos Gastrónomos dos Açores",
+    "factClusterId": "fc_mar_caldopeixeacores_01"
+  },
+  {
+    "id": "GAST_MAR_0075",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que marisco da Ria Formosa e Ria de Alvor, constituído por pequenos crustáceos de corpo achatado e carapaça espinhosa (Maja squinado), tem carne perfumada nas suas pernas compridas?",
+    "opcoes": [
+      "Santola (Maja squinado)",
+      "Sapateira",
+      "Caranguejo-real",
+      "Camarão-tigre"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A santola é servida aberta com o recheio da carapaça e as suas patas quebradas para retirar a carne delicada.",
+    "fonte": "Docapesca / Guia de Mariscos de Portugal",
+    "factClusterId": "fc_mar_santola_01"
+  },
+  {
+    "id": "GAST_MAR_0076",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie de caranguejo marinho capturado na ria Formosa é consumido quando perde a casca velha para mudar de carapaça, sendo frito inteiro em azeite com alho («Caranguejo de Casca Mole»)?",
+    "opcoes": [
+      "Sapateira",
+      "Caranguejo de Casca Mole (ou Caranguejo de Muda / Mole)",
+      "Santola",
+      "Navalheira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O caranguejo de casca mole é frito inteiro e consumido na totalidade sem necessidade de descascar.",
+    "fonte": "Docapesca / Ria Formosa",
+    "factClusterId": "fc_mar_cascamole_01"
+  },
+  {
+    "id": "GAST_MAR_0077",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de profundidade da ilha da Madeira e dos Açores (Helicolenus dactylopterus), de cor vermelha-alaranjada, é a base dos caldos de peixe tradicionais do arquipélago?",
+    "opcoes": [
+      "Peixe-espada",
+      "Atum",
+      "Boca-negra (Helicolenus dactylopterus)",
+      "Chicharro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O boca-negra é pescado nos fundos rochosos da Madeira e Açores com palangres de profundidade.",
+    "fonte": "Direção Regional de Pescas da Madeira / IPMA",
+    "factClusterId": "fc_mar_bocanegra_01"
+  },
+  {
+    "id": "GAST_MAR_0078",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional da Póvoa de Varzim junta pescada fresca cozida com batatas, cenouras, couve portuguesa, ovos cozidos e um molho fervente de azeite, alho e colorau («Pescada à Poveira»)?",
+    "opcoes": [
+      "Bacalhau à Gomes de Sá",
+      "Caldeirada Poveira",
+      "Polvo à Lagareiro",
+      "Pescada à Poveira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Pescada à Poveira é o prato de gala das famílias marítimas da Póvoa de Varzim.",
+    "fonte": "Município da Póvoa de Varzim / Confraria dos Sabores Poveiros",
+    "factClusterId": "fc_mar_pescadapoveira_01"
+  },
+  {
+    "id": "GAST_MAR_0079",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que molusco cefalópode sem concha externa mas com pequenas lamelas internas (Sepiola rondeleti), frito inteiro em azeite com batatinhas novas, é afamado na Nazaré e Peniche?",
+    "opcoes": [
+      "Chopinhos Fritos (ou Chocos Pequenos)",
+      "Polvo Assado",
+      "Lulas Grelhadas",
+      "Búzios"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os chopinhos ou sepiolas fritas são uma entrada crocante e muito apreciada nas marisqueiras do oeste.",
+    "fonte": "Docapesca / Município da Nazaré",
+    "factClusterId": "fc_mar_chopinhos_01"
+  },
+  {
+    "id": "GAST_MAR_0080",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que método tradicional de pesca do atum na costa do Algarve utilizava um labirinto monumental de redes fixadas ao fundo do mar por âncoras para encaminhar os cardumes para o «copo da morte»?",
+    "opcoes": [
+      "Pesca de arrasto",
+      "Armação de Atum (ou Almadrava)",
+      "Linha de mão",
+      "Palangre de superfície"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A armação de atum do Barril (Tavira) e do Medo das Cascas (Fuzeta) alimentou a indústria conserveira algarvia até ao século XX.",
+    "fonte": "Museu Municipal de Tavira / Praia do Barril (Cemitério das Âncoras)",
+    "factClusterId": "fc_mar_armacaoatum_01"
+  },
+  {
+    "id": "GAST_MAR_0081",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de rocha da costa atlântica de Portugal com formato redondo e escamas escuras (Spondyliosoma cantharus) é habitualmente assado no forno sobre cama de batatas e cebolas?",
+    "opcoes": [
+      "Robalo",
+      "Dourada",
+      "Choupa (ou Ferreiro / Salema)",
+      "Pargo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A choupa é um peixe de escama costeiro muito abundante nas lotas e acessível nas bancas dos mercados.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_choupa_01"
+  },
+  {
+    "id": "GAST_MAR_0082",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato aromático da costa da Ericeira e Sesimbra junta ouriços-do-mar frescos abertos, cujas gónadas alaranjadas e cremosas são misturadas com arroz caldoso ou torradas?",
+    "opcoes": [
+      "Arroz de Marisco",
+      "Açorda de Gambas",
+      "Caldeirada de Marisco",
+      "Arroz de Ouriços-do-Mar (ou Ovas de Ouriço da Ericeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Ericeira realiza anualmente o Festival do Ouriço-do-Mar, celebrando esta iguaria de sabor marinho iodado supremo.",
+    "fonte": "Município de Mafra / Festival do Ouriço da Ericeira",
+    "factClusterId": "fc_mar_ouricosmar_01"
+  },
+  {
+    "id": "GAST_MAR_0083",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de corpo serpentiforme e mandíbulas dentadas poderosas (Muraena helena), pescado nas fendas dos rochedos da Madeira, Açores e costa sul, é servido frito de escabeche?",
+    "opcoes": [
+      "Moreia (Moreia Frita com Molho Vilão)",
+      "Safio",
+      "Enguia",
+      "Congro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A moreia frita crocante temperada com o tradicional Molho Vilão (vinagre, alho, orégãos e malagueta) é típica da Madeira.",
+    "fonte": "Turismo da Madeira / Gastronomia Tradicional Madeirense",
+    "factClusterId": "fc_mar_moreia_01"
+  },
+  {
+    "id": "GAST_MAR_0084",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe marinho de grande porte e focinho pontiagudo em forma de espada (Xiphias gladius), capturado nas águas oceânicas dos Açores e Sesimbra, é grelhado em postas suculentas?",
+    "opcoes": [
+      "Peixe-espada preto",
+      "Espadarte (Xiphias gladius)",
+      "Atum",
+      "Marlim"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O bife de espadarte grelhado com azeite e ervas aromáticas é uma opção nobre nos restaurantes de peixe do litoral.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_espadarte_01"
+  },
+  {
+    "id": "GAST_MAR_0085",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato açoriano da ilha de São Jorge e Faial consiste em pequenas fatias de atum fresco marinadas em vinagre, alho e pimenta-da-terra e fritas em azeite?",
+    "opcoes": [
+      "Estupeta",
+      "Muxama",
+      "Atum de Salmoura Frito com Molho Vilão",
+      "Carpaccio de Atum"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O bife de atum à açoriana com molho vilão e batata cozida é o prato de atum mais famoso dos Açores.",
+    "fonte": "Governo Regional dos Açores / Confraria dos Gastrónomos",
+    "factClusterId": "fc_mar_atumacores_01"
+  },
+  {
+    "id": "GAST_MAR_0086",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que sopa de peixe tradicional da Costa da Caparica e Trafaria é feita com peixes pequenos de arrasto (fanecas, carapaus, sardinhas) e fatias de pão no fundo da terrina?",
+    "opcoes": [
+      "Sopa da Pedra",
+      "Caldeirada",
+      "Canja de Marisco",
+      "Sopa de Peixe da Trafaria"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Trafaria na margem sul do Tejo é famosa pelas suas tascas de caldeirada e sopa de peixe à pescador.",
+    "fonte": "Município de Almada / Turismo da Região de Lisboa",
+    "factClusterId": "fc_mar_trafaria_01"
+  },
+  {
+    "id": "GAST_MAR_0087",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie de camarão gigante de águas profundas do Atlântico e da costa do Algarve (Aristaeopsis edwardsiana), de cor vermelho-escarlate brilhante e cabeça muito rica em sucos, é a jóia máxima das marisqueiras?",
+    "opcoes": [
+      "Carabineiro (ou Camarão-carabineiro)",
+      "Gamba da Costa",
+      "Camarão-tigre",
+      "Camarão-da-costa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O carabineiro grelhado aberto ao meio com sal marinho é um dos mariscos mais nobres e caros do mundo gastronómico.",
+    "fonte": "Docapesca / Guia de Mariscos de Portugal",
+    "factClusterId": "fc_mar_carabineiro_01"
+  },
+  {
+    "id": "GAST_MAR_0088",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que iguaria tradicional do concelho de Caminha e Vila Nova de Cerveira consiste em lampreia recheada e fumada em fumeiro de lenha de carvalho e louro?",
+    "opcoes": [
+      "Bacalhau Fumado",
+      "Lampreia Fumada de Caminha e do Rio Minho",
+      "Truta Assada",
+      "Sável Recheado"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A lampreia seca e fumada era cortada em fatias finas para acompanhar pão de centeio e vinho verde tinto durante o ano.",
+    "fonte": "Município de Caminha / Confraria da Lampreia do Rio Minho",
+    "factClusterId": "fc_mar_lampreiafumada_01"
+  },
+  {
+    "id": "GAST_MAR_0089",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe costeiro de corpo prateado comprimido e cauda amarela (Trachurus trachurus) é servido frito com arroz de feijão vermelho ou escalado na brasa?",
+    "opcoes": [
+      "Cavala",
+      "Sardinha",
+      "Carapau (ou Chicharro)",
+      "Biqueirão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O carapau pequeno («jaquinzinho») frito crocante acompanhado de arroz de tomate é um dos clássicos mais queridos das tascas portuguesas.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_carapau_01"
+  },
+  {
+    "id": "GAST_MAR_0090",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de Peniche junta lagosta fresca da costa cozinhada com arroz carolino de grão longo num caldo aromático apurado em tacho de barro?",
+    "opcoes": [
+      "Arroz de Cabidela",
+      "Arroz de Pato",
+      "Arroz de Corvina",
+      "Arroz de Lagosta de Peniche (ou da Ericeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Lagosta nos restaurantes de Peniche e Berlenga é um dos pratos de topo da gastronomia marítima nacional.",
+    "fonte": "Município de Peniche / Turismo Centro de Portugal",
+    "factClusterId": "fc_mar_arrozlagosta_01"
+  },
+  {
+    "id": "GAST_MAR_0091",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que bivalve alongado e castanho apanhado nas areias limpas da costa de Aveiro e Figueira da Foz (Donax trunculus) é aberto na frigideira com alho e azeite?",
+    "opcoes": [
+      "Cadelinha (ou Conquilha / Cuchareta)",
+      "Mexilhão",
+      "Ostra",
+      "Lapa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "As cadelinhas da costa de areia fina abrem-se rapidamente ao lume, libertando um caldo marinho saboroso.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_cadelinha_01"
+  },
+  {
+    "id": "GAST_MAR_0092",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe de rocha costeiro muito apreciado pela sua cabeça grande e carne estaladiça (Zeus faber), conhecido pelas duas manchas circulares negras nos flancos, é o:",
+    "opcoes": [
+      "Peixe-espada",
+      "Peixe-galo (ou Peixe de São Pedro / Zeus faber)",
+      "Robalo",
+      "Garoupa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Segundo a lenda popular cristã, as duas marcas escuras nos flancos foram deixadas pelos dedos do apóstolo São Pedro ao retirar uma moeda da boca do peixe.",
+    "fonte": "IPMA / Docapesca",
+    "factClusterId": "fc_mar_peixegalo_01"
+  },
+  {
+    "id": "GAST_MAR_0093",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato tradicional de bacalhau em Guimarães e no Minho combina bacalhau alto demolhado e assado nas brasas regado com azeite fervente com alho e pimentão-doce?",
+    "opcoes": [
+      "Bacalhau Espiritual",
+      "Bacalhau de Cebolada",
+      "Bacalhau Assado na Brasa com Batatas a Murro",
+      "Bacalhau à Brás"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O bacalhau assado na grelha no carvão é uma das refeições mais apreciadas em todas as romarias e feiras minhotas.",
+    "fonte": "Turismo Porto e Norte",
+    "factClusterId": "fc_mar_bacalhaubrasa_01"
+  },
+  {
+    "id": "GAST_MAR_0094",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que método tradicional de pesca costeira com rede de cerco puxada por juntas de bois na praia (e hoje por tratores), preservado na Nazaré, Espinho e Mira, é a:",
+    "opcoes": [
+      "Pesca de Arrasto",
+      "Ganchorra",
+      "Palangre",
+      "Arte Xávega"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Arte Xávega é um património etnográfico secular dos pescadores da costa de areia aberta em Portugal.",
+    "fonte": "Museu Marítimo de Ílhavo / Município de Espinho",
+    "factClusterId": "fc_mar_artexavega_01"
+  },
+  {
+    "id": "GAST_MAR_0095",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que peixe costeiro de dorso azul e ventre prateado muito aromático (Engraulis encrasicolus), marinado em vinagre branco com azeite e salsa picada, dá os afamados «Biqueirões em Vinagrete»?",
+    "opcoes": [
+      "Biqueirão (ou Anchova / Engraulis encrasicolus)",
+      "Sardinha",
+      "Carapau",
+      "Peixe-agulha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os biqueirões marinados em vinagre e azeite com alho laminado são um petisco de verão clássico de norte a sul.",
+    "fonte": "Docapesca / IPMA",
+    "factClusterId": "fc_mar_biqueirao_01"
+  },
+  {
+    "id": "GAST_MAR_0096",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que grande peixe costeiro migrador com corpo fusiforme (Argyrosomus regius), que atinge mais de 30 kg no estuário do Tejo e Sado, fornece postas suculentas para arroz caldoso?",
+    "opcoes": [
+      "Atum",
+      "Corvina-legítima (Argyrosomus regius)",
+      "Pargo",
+      "Cherne"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Arroz de Corvina e a corvina assada no forno são pratos de referência nos restaurantes das margens do Tejo e Sado.",
+    "fonte": "Docapesca / IPMA",
+    "factClusterId": "fc_mar_corvina_01"
+  },
+  {
+    "id": "GAST_MAR_0097",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que bivalve gigante de águas profundas do Algarve e Açores com concha grossa e carne carnuda é servido em caldeiradas ou estufado com grão-de-bico?",
+    "opcoes": [
+      "Mexilhão",
+      "Conquilha",
+      "Pé-de-burro (ou Ameijoa-gigante)",
+      "Búzio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "O pé-de-burro requer cozedura lenta para amaciar a sua carne compacta e saborosa.",
+    "fonte": "IPMA / Gastronomia Algarvia",
+    "factClusterId": "fc_mar_pedeburro_01"
+  },
+  {
+    "id": "GAST_MAR_0098",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que espécie de ostra nativa da costa europeia e portuguesa (Ostrea edulis), de concha plana e circular, é considerada o diamante das ostras selvagens da Ria Formosa?",
+    "opcoes": [
+      "Ostra-japonesa",
+      "Ostra-do-pacífico",
+      "Ostra-de-mangue",
+      "Ostra-plana (Ostrea edulis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A ostra-plana é mais rara e possui notas minerais e textura aveludada inigualável.",
+    "fonte": "IPMA / Parque Natural da Ria Formosa",
+    "factClusterId": "fc_mar_ostraplana_01"
+  },
+  {
+    "id": "GAST_MAR_0099",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que prato de pescadores de Olhão junta atum fresco picado, batatas, pimento e ervilhas estufados num tacho de barro («Atum de Cebolada à Olhanense»)?",
+    "opcoes": [
+      "Atum de Cebolada à Olhanense",
+      "Caldeirada",
+      "Muxama",
+      "Estupeta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Atum de Cebolada é o prato de conforto das famílias conserveiras e marítimas de Olhão.",
+    "fonte": "Município de Olhão / Turismo do Algarve",
+    "factClusterId": "fc_mar_atumcebolada_01"
+  },
+  {
+    "id": "GAST_MAR_0100",
+    "tema": "Gastronomia",
+    "subtema": "Marisco & Peixe",
+    "pergunta": "Que porto de pesca do concelho de Peniche acolhe o maior volume de desembarque de sardinha fresca e peixe de linha do país na sua moderna lota da Docapesca?",
+    "opcoes": [
+      "Porto de Sesimbra",
+      "Porto de Matosinhos",
+      "Porto de Pesca de Peniche",
+      "Porto de Portimão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A frota de cerco e arrasto de Peniche é líder na captura sustentável de sardinha e peixe fresco em Portugal.",
+    "fonte": "Docapesca / Município de Peniche",
+    "factClusterId": "fc_mar_lota_peniche_01"
+  }
+]

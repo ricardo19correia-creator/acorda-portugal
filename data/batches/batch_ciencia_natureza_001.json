@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CIE_NAT_0001",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que emblemático e outrora criticamente ameaçado felino autóctone da Península Ibérica («Lince-Ibérico» / Lynx pardinus), com os seus caraterísticos tufos de pelos em forma de pincel nas orelhas e barbas faciais, foi salvo da extinção e reintroduzido com estrondoso sucesso no Parque Natural do Vale do Guadiana (Mértola)?",
+    "opcoes": [
+      "Lince-Ibérico (Lynx pardinus)",
+      "Gato-Bravo (Felis silvestris)",
+      "Geneta (Genetta genetta)",
+      "Sacarrabos (Herpestes ichneumon)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Centro Nacional de Reprodução do Lince-Ibérico (CNRLI) em Silves e o programa LIFE criaram as condições para a população selvagem em Mértola ultrapassar várias centenas de espécimes.",
+    "fonte": "ICNF / Programa LIFE Lince / Município de Mértola",
+    "factClusterId": "fc_cie_nat_linceiberico_01"
+  },
+  {
+    "id": "CIE_NAT_0002",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que floresta húmida subtropical relíquia da Era Terciária na Ilha da Madeira, cobrindo cerca de 15.000 hectares com árvores ancestrais da família das lauráceas (como o til, o loureiro, o vinhático e o barbusano), foi declarada Património Natural da Humanidade pela UNESCO em 1999?",
+    "opcoes": [
+      "Mata Nacional do Buçaco",
+      "Floresta Laurissilva da Madeira (UNESCO)",
+      "Pinhal de Leiria",
+      "Floresta da Tijuca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Laurissilva da Madeira é a maior e mais bem conservada mancha de floresta laurissilva sobrevivente no mundo, captando a água do nevoeiro nas levadas.",
+    "fonte": "UNESCO / Instituto das Florestas e Conservação da Natureza (IFCN Madeira)",
+    "factClusterId": "fc_cie_nat_laurissilva_madeira_01"
+  },
+  {
+    "id": "CIE_NAT_0003",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que mamífero marinho carnívoro e foca mais rara do mundo («Lobo-Marinho» / Foca-Monge-do-Mediterrâneo — Monachus monachus), encontrou o seu mais seguro refúgio mundial e colónia reprodutora na Reserva Natural das Ilhas Desertas (Madeira)?",
+    "opcoes": [
+      "Leão-Marinho-da-Califórnia",
+      "Foca-Comum",
+      "Lobo-Marinho / Foca-Monge-do-Mediterrâneo (Monachus monachus)",
+      "Morsa do Ártico"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A colónia de lobos-marinhos das Desertas recuperou de apenas 6 a 8 indivíduos nos anos 1980 para cerca de 40 exemplares protegidos pelo IFCN.",
+    "fonte": "Parque Natural da Madeira / IFCN / Reserva Natural das Ilhas Desertas",
+    "factClusterId": "fc_cie_nat_lobomarinhodesertas_01"
+  },
+  {
+    "id": "CIE_NAT_0004",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que única população residente de golfinhos em estuário em Portugal (e uma das três únicas comunidades fluvio-marítimas residentes de toda a Europa), habita a foz do rio Sado e a Península de Troia?",
+    "opcoes": [
+      "Golfinhos-Comuns do Tejo",
+      "Boto-Cor-de-Rosa",
+      "Toninhas do Algarve",
+      "Roazes-Corvineiros do Sado (Tursiops truncatus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A comunidade de roazes do Sado é monitorizada há quatro décadas pelo ICNF e pela Reserva Natural do Estuário do Sado.",
+    "fonte": "ICNF / Reserva Natural do Estuário do Sado",
+    "factClusterId": "fc_cie_nat_roazesdosado_01"
+  },
+  {
+    "id": "CIE_NAT_0005",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que pequeno e raríssimo réptil capaz de mudar de cor e movimentar os olhos de forma independente («Camaleão-Comum» / Chamaeleo chamaeleon), tem em Portugal continental a sua única distribuição natural nos pinhais e dunas litorais de:",
+    "opcoes": [
+      "Litoral do Sotavento e Barlavento Algarvio (Algarve)",
+      "Dunas de Mira e Aveiro",
+      "Costa Alentejana de Sines",
+      "Mata Nacional dos Medos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O camaleão algarvio é uma espécie protegida e o Centro de Recuperação e Investigação do Camaleão em Olhão (RIAS) dedica-se à sua conservação.",
+    "fonte": "ICNF / Parque Natural da Ria Formosa / RIAS",
+    "factClusterId": "fc_cie_nat_camaleao_algarve_01"
+  },
+  {
+    "id": "CIE_NAT_0006",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que ave passeriforme florestal de plumagem castanha e bico cónico («Priolo» / Pyrrhula murina), uma das aves mais raras e ameaçadas de toda a Europa, é endémica exclusiva da floresta laurissilva da Serra da Tronqueira e Nordeste na Ilha de São Miguel (Açores)?",
+    "opcoes": [
+      "Canário-da-Terra",
+      "Priolo (Pyrrhula murina)",
+      "Estrelinha-dos-Açores",
+      "Tentilhão-Comum"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Centro Ambiental do Priolo no Nordeste (São Miguel) e a SPEA recuperaram o habitat da floresta nativa de louro-da-terra e azevinho salvando o priolo da extinção.",
+    "fonte": "SPEA / Centro Ambiental do Priolo / Governo dos Açores",
+    "factClusterId": "fc_cie_nat_priolo_saomiguel_01"
+  },
+  {
+    "id": "CIE_NAT_0007",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que ave marinha oceânica endémica da Ilha da Madeira («Freira-da-Madeira» / Pterodroma madeira), que nidifica em tocas no solo nos cumes mais inacessíveis do Maciço Montanhoso Central (Pico do Areeiro e Pico Ruivo), é a ave mais ameaçada de todo o continente europeu?",
+    "opcoes": [
+      "Cagarra dos Açores",
+      "Pombo-Trocaz",
+      "Freira-da-Madeira (Pterodroma madeira)",
+      "Alma-Negra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Freira-da-Madeira emite chamamentos noturnos arrepiantes quando regressa do oceano para as escarpas montanhosas a 1.600m de altitude.",
+    "fonte": "IFCN Madeira / SPEA / Parque Natural da Madeira",
+    "factClusterId": "fc_cie_nat_freiradamadeira_01"
+  },
+  {
+    "id": "CIE_NAT_0008",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que grande predador terrestre autóctone estritamente protegido por lei em Portugal («Lobo-Ibérico» / Canis lupus signatus), tem as suas principais alcateias reprodutoras concentradas nas serras a norte do rio Douro (como no Gerês, Montesinho, Alvão e Peneda)?",
+    "opcoes": [
+      "Chacal-Dourado",
+      "Raposa-Vermelha",
+      "Cão-Feral",
+      "Lobo-Ibérico (Canis lupus signatus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A população de lobo-ibérico em Portugal estima-se em cerca de 300 indivíduos organizados em cerca de 50 a 60 alcateias.",
+    "fonte": "ICNF / Grupo Lobo / Parque Nacional da Peneda-Gerês",
+    "factClusterId": "fc_cie_nat_loboiberico_01"
+  },
+  {
+    "id": "CIE_NAT_0009",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Qual é o ÚNICO Parque Nacional existente em território português, criado em 1971 abrangendo 72.000 hectares nos distritos de Viana do Castelo, Braga e Vila Real com uma biodiversidade e geomorfologia granítica excecionais?",
+    "opcoes": [
+      "Parque Nacional da Peneda-Gerês (PNPG)",
+      "Parque Natural da Serra da Estrela",
+      "Parque Natural de Montesinho",
+      "Parque Natural do Sudoeste Alentejano"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O PNPG é o único parque com estatuto de 'Parque Nacional' em Portugal classificado pela UNESCO como Reserva da Biosfera Transfronteiriça Gerês-Xurés.",
+    "fonte": "ICNF / PNPG / UNESCO",
+    "factClusterId": "fc_cie_nat_pnpg_geres_01"
+  },
+  {
+    "id": "CIE_NAT_0010",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que raça equina autóctone e ancestral do norte de Portugal, de pequena estatura, pelagem castanha escura e extraordinária resistência física («Cavalo Garrano»), vive em estado semisselvagem nas serras do Gerês, Soajo e Cabreira?",
+    "opcoes": [
+      "Cavalo Sorraia",
+      "Cavalo Garrano",
+      "Cavalo Puro-Sangue Lusitano",
+      "Pónei da Terceira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Garrano é uma raça protegida que descende diretamente dos cavalos pré-históricos retratados na arte rupestre ibérica.",
+    "fonte": "Associação de Criadores de Equinos de Raça Garrana / ICNF",
+    "factClusterId": "fc_cie_nat_cavalogarrano_01"
+  },
+  {
+    "id": "CIE_NAT_0011",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que rara e primitiva raça de cavalos autóctones portugueses descoberta no vale do rio Sorraia (Coruche) pelo Dr. Ruy d'Andrade em 1920 («Cavalo Sorraia»), apresenta pelagem baia ou cinzenta com risca de mulo no dorso e zebruras nas patas?",
+    "opcoes": [
+      "Cavalo Garrano",
+      "Cavalo Lusitano",
+      "Cavalo Sorraia",
+      "Cavalo de Alter Real"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Cavalo Sorraia é considerado o elo vivo mais próximo do Tarpan primitivo selvagem que habitava o sul da Península Ibérica.",
+    "fonte": "Associação Internacional do Cavalo Sorraia / Fundação Alter Real",
+    "factClusterId": "fc_cie_nat_cavalosorraia_01"
+  },
+  {
+    "id": "CIE_NAT_0012",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que majestosa ave de rapina em perigo crítico de extinção (Aquila adalberti), que nidifica nas copas de grandes sobreiros e azinheiras em herdades tranquilas do Baixo Alentejo e Tejo Internacional («Águia-Imperial-Ibérica»), é exclusiva do sudoeste peninsular?",
+    "opcoes": [
+      "Águia-Real",
+      "Águia-de-Bonelli",
+      "Águia-Calçada",
+      "Águia-Imperial-Ibérica (Aquila adalberti)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Águia-Imperial-Ibérica distingue-se pelas manchas brancas nos ombros e recuperou graças a ninhos artificiais e proteção do ICNF.",
+    "fonte": "ICNF / Sociedade Portuguesa para o Estudo das Aves (SPEA)",
+    "factClusterId": "fc_cie_nat_aguiaimperialiberica_01"
+  },
+  {
+    "id": "CIE_NAT_0013",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que fenómeno ecológico e ornitológico único no mundo ocorre no Parque Natural do Sudoeste Alentejano e Costa Vicentina com as Cegonhas-Brancas (Ciconia ciconia):",
+    "opcoes": [
+      "Nidificam em ninhos construídos diretamente no cimo de falésias rochosas e ilhéus marítimos batidos pelas ondas do mar",
+      "Mergulham no oceano para pescar sardinhas",
+      "Hibernam em grutas marinhas",
+      "Voam durante a noite sem paragens"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Costa Vicentina é o único local do planeta onde as cegonhas-brancas nidificam em falésias costeiras marinhas rochosas.",
+    "fonte": "ICNF / Parque Natural do Sudoeste Alentejano / SPEA",
+    "factClusterId": "fc_cie_nat_cegonhascostavicentina_01"
+  },
+  {
+    "id": "CIE_NAT_0014",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que majestoso cetáceo com dentes (o maior carnívoro com dentes do planeta, Physeter macrocephalus), que se alimenta de lulas-gigantes nos abismos oceânicos em redor das ilhas dos Açores (com destaque para o canal Faial-Pico e ilha de São Jorge)?",
+    "opcoes": [
+      "Baleia-de-Bossas",
+      "Cachalote (Physeter macrocephalus)",
+      "Orca",
+      "Baleia-Piloto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os Açores transformaram a antiga caça à baleia numa das mecas mundiais do ecoturismo de observação responsável de cetáceos.",
+    "fonte": "Governo Regional dos Açores / Universidade dos Açores / Museu dos Baleeiros",
+    "factClusterId": "fc_cie_nat_cachalote_acores_01"
+  },
+  {
+    "id": "CIE_NAT_0015",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que anfíbio urodelo endémico exclusivo do noroeste da Península Ibérica («Salamandra-Lusitânica» / Chioglossa lusitanica), com cauda comprida que pode libertar quando atacada e corpo escuro com duas riscas douradas no dorso, habita riachos límpidos da serra da Freita e Gerês?",
+    "opcoes": [
+      "Tritão-Marmoreado",
+      "Salamandra-de-Pintas-Amarelas",
+      "Salamandra-Lusitânica (Chioglossa lusitanica)",
+      "Sapo-Parteiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Salamandra-Lusitânica é uma espécie bioindicadora de águas puras e oxigenadas dos vales montanhosos do norte e centro.",
+    "fonte": "ICNF / Universidade de Coimbra / Livro Vermelho dos Vertebrados",
+    "factClusterId": "fc_cie_nat_salamandralusitanica_01"
+  },
+  {
+    "id": "CIE_NAT_0016",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que flor rara e endémica exclusiva das fendas de rochedos graníticos da Serra do Gerês a mais de 1.000 metros de altitude («Lírio-do-Gerês» / Iris boissieri), floresce no início do verão com deslumbrantes pétalas azul-violeta com pelos amarelos?",
+    "opcoes": [
+      "Narciso-do-Gerês",
+      "Orquídea-Selvagem",
+      "Rosa-Albardeira",
+      "Lírio-do-Gerês (Iris boissieri)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Lírio-do-Gerês é um dos maiores tesouros botânicos protegidos do Parque Nacional da Peneda-Gerês.",
+    "fonte": "ICNF / PNPG / Jardim Botânico da Universidade do Porto",
+    "factClusterId": "fc_cie_nat_liriodogeres_01"
+  },
+  {
+    "id": "CIE_NAT_0017",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que árvore nobre e secular da floresta mediterrânica (Quercus suber), cuja casca é extraída de 9 em 9 anos sem cortar a árvore e que faz de Portugal o maior produtor e exportador mundial de cortiça, foi declarada por unanimidade pela Assembleia da República em 2011 como a «Árvore Nacional de Portugal»?",
+    "opcoes": [
+      "O Sobreiro (Quercus suber) — Árvore Nacional de Portugal",
+      "A Azinheira (Quercus rotundifolia)",
+      "O Carvalho-Cerquinho",
+      "O Pinheiro-Manso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O sobreiro é protegido por lei régia desde o século XIII e o montado de sobro é um dos ecossistemas de maior biodiversidade da Europa.",
+    "fonte": "Assembleia da República / ICNF / APCOR",
+    "factClusterId": "fc_cie_nat_sobreiro_arvore_nacional_01"
+  },
+  {
+    "id": "CIE_NAT_0018",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que sobreiro monumental de Águas de Moura (Palmela), plantado em 1783 com mais de 240 anos («O Sobreiro Assobiador» / The Whistler Tree), considerado o maior e mais produtivo sobreiro do mundo pelo Guinness World Records, foi eleito «Árvore Europeia do Ano» em 2018?",
+    "opcoes": [
+      "A Oliveira do Mouchão",
+      "O Sobreiro Assobiador de Palmela (Árvore Europeia do Ano 2018)",
+      "O Castanheiro de Guimarães",
+      "O Eucalipto de Satão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Numa única tiragem de cortiça em 1991, o Sobreiro Assobiador produziu mais de 1.200 kg de cortiça pura (suficiente para mais de 100.000 rolhas de vinho).",
+    "fonte": "European Tree of the Year / ICNF / Município de Palmela",
+    "factClusterId": "fc_cie_nat_sobreiroassobiador_01"
+  },
+  {
+    "id": "CIE_NAT_0019",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Qual é a árvore viva documentada mais antiga de Portugal e de toda a Península Ibérica, uma oliveira secular situada em Mouriscas (Abrantes) com mais de 3.350 anos de idade classificada como Monumento Vivo?",
+    "opcoes": [
+      "A Oliveira de Santa Iria de Azóia",
+      "O Sobreiro de Lavre",
+      "A Oliveira do Mouchão (Mouriscas, Abrantes — 3.350 anos)",
+      "A Azinheira das Covas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Oliveira do Mouchão nasceu na Idade do Bronze (c. 1300 a.C.) e continua a produzir azeitonas até aos dias de hoje.",
+    "fonte": "ICNF / UTAD / Município de Abrantes",
+    "factClusterId": "fc_cie_nat_oliveiradomouchao_01"
+  },
+  {
+    "id": "CIE_NAT_0020",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que floresta mágica e histórica plantada na Serra do Buçaco pelos monges Carmelitas Descalços no século XVII (Mata Nacional do Buçaco), rodeada por uma muralha com as Portas de Coimbra e a bula papal de excomunhão para quem cortasse árvores, preserva o monumental:",
+    "opcoes": [
+      "Pau-Brasil",
+      "Sequoias da Califórnia",
+      "Ginkgo Biloba",
+      "Cedro-do-Buçaco (Cupressus lusitanica) e fetos arbóreos gigantes da Tasmânia"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Mata do Buçaco possui mais de 400 espécies exóticas e autóctones trazidas pelos navegadores e missionários portugueses.",
+    "fonte": "Fundação Mata do Buçaco / Município da Mealhada",
+    "factClusterId": "fc_cie_nat_matadobucaco_01"
+  },
+  {
+    "id": "CIE_NAT_0021",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que parque natural transfronteiriço nas escarpas dos rios Douro e Águeda (Parque Natural do Douro Internacional), com canhões fluviais de mais de 200 metros de altura em xisto e granito, é o santuário das maiores aves necrófagas de Portugal como:",
+    "opcoes": [
+      "O Britango (Abutre-do-Egito), o Grifo e a Cegonha-Preta",
+      "O Flamingo-Comum",
+      "O Pelicano-Branco",
+      "A Abetarda"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Douro Internacional abriga as maiores colónias rupícolas de aves de rapina ameaçadas da Europa.",
+    "fonte": "ICNF / Parque Natural do Douro Internacional",
+    "factClusterId": "fc_cie_nat_dourointernacional_aves_01"
+  },
+  {
+    "id": "CIE_NAT_0022",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que maior ave voadora de Portugal e da Europa, habitante das estepes cerealíferas abertas do Baixo Alentejo em Castro Verde («Abetarda-Comum» / Otis tarda), é famosa pelos seus rituais de acasalamento («a roda» dos machos)?",
+    "opcoes": [
+      "Sisão (Tetrax tetrax)",
+      "Abetarda-Comum (Otis tarda)",
+      "Cortiçol-de-Barriga-Preta",
+      "Alcaravão"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Castro Verde foi classificado como Reserva da Biosfera da UNESCO pelo seu ecossistema único de estepes cerealíferas e conservação da abetarda.",
+    "fonte": "LPN / ICNF / UNESCO / Campo Branco",
+    "factClusterId": "fc_cie_nat_abetarda_castroverde_01"
+  },
+  {
+    "id": "CIE_NAT_0023",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que fascinante peixe-marinho de pequenas dimensões com corpo protegido por anéis ósseos e cauda preensil, onde os machos é que engravidam e transportam os ovos numa bolsa ventral («Cavalo-Marinho» / Hippocampus guttulatus e Hippocampus hippocampus), tem na Ria Formosa (Algarve) uma das suas maiores densidades do mundo?",
+    "opcoes": [
+      "Peixe-Agulha",
+      "Peixe-Cachimbo",
+      "Cavalo-Marinho da Ria Formosa",
+      "Choco-Anão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A comunidade de cavalos-marinhos da Ria Formosa é protegida com santuários marinhos e pradarias marinhas de Zostera marina.",
+    "fonte": "Universidade do Algarve / Centro de Ciências do Mar (CCMAR) / ICNF",
+    "factClusterId": "fc_cie_nat_cavalosmarinhos_riaformosa_01"
+  },
+  {
+    "id": "CIE_NAT_0024",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que arquipélago vulcânico desabitado a 10 milhas a oeste de Peniche (Reserva Natural das Berlengas), classificado como Reserva Mundial da Biosfera pela UNESCO em 2011, abriga plantas endémicas únicas no mundo (como a Armeria berlengensis) e colónias marinhas de:",
+    "opcoes": [
+      "Pinguim-Imperador",
+      "Albatroz-Gigante",
+      "Fragata",
+      "Airo (Uria aalge) e Cagarra-de-Cory"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Berlenga Grande é um paraíso marinho e o airo é o símbolo alado da reserva natural.",
+    "fonte": "ICNF / Reserva Natural das Berlengas / UNESCO",
+    "factClusterId": "fc_cie_nat_berlengas_unesco_01"
+  },
+  {
+    "id": "CIE_NAT_0025",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que magnífico arquipélago selvagem desabitado da Madeira («Ilhas Selvagens»), situado a sul da Madeira e a norte das Canárias, foi a primeira Reserva Natural oficial criada em Portugal em 1971 para proteger a maior colónia do Atlântico Norte da ave marinha:",
+    "opcoes": [
+      "Cagarra (Calonectris borealis)",
+      "Alma-de-Mestre",
+      "Gaivota-de-Audouin",
+      "Roque-de-Castro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As Selvagens possuem águas cristalinas protegidas com a maior reserva marinha integral da Europa (444.000 km²).",
+    "fonte": "IFCN Madeira / Parque Natural da Madeira / Marinha Portuguesa",
+    "factClusterId": "fc_cie_nat_selvagens_cagarras_01"
+  },
+  {
+    "id": "CIE_NAT_0026",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que impressionante parque natural na Península de Setúbal («Parque Natural da Arrábida»), fundado em 1976, preserva nas suas encostas viradas ao sul o «Mata do Solitário», um dos raros testemunhos intactos de:",
+    "opcoes": [
+      "Floresta Boreal de Taiga",
+      "Maquis Mediterrânico primitivo e carvalhal costeiro da Europa",
+      "Mangal tropical",
+      "Estepe árida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arrábida apresenta um microclima subtropical abrigado que permitiu a sobrevivência da vegetação mediterrânica primária pré-glaciar.",
+    "fonte": "ICNF / Parque Natural da Arrábida",
+    "factClusterId": "fc_cie_nat_arrabida_maquis_01"
+  },
+  {
+    "id": "CIE_NAT_0027",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que impressionante planta carnívora / insetívora que cresce em solos pantanosos e turfeiras ácidas das serras do noroeste de Portugal e serra de Sintra («Orvalhinha» / Drosera rotundifolia), captura formigas e mosquitos com:",
+    "opcoes": [
+      "Garras de fecho rápido",
+      "Descargas elétricas",
+      "Gotículas brilhantes de mucilagem pegajosa nas pontas dos tentáculos foliares",
+      "Espinhas afiadas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A drosera atrai os insetos com gotas transparentes que parecem orvalho da manhã digerindo as presas para obter azoto.",
+    "fonte": "Sociedade Portuguesa de Botânica / ICNF",
+    "factClusterId": "fc_cie_nat_orvalhinha_drosera_01"
+  },
+  {
+    "id": "CIE_NAT_0028",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que arbusto endémico dos Açores e da Madeira pertencente à família dos mirtos («Uva-da-Serra» / Vaccinium cylindraceum), produz deliciosos frutos silvestres negros aromáticos com propriedades antioxidantes nos planaltos vulcânicos?",
+    "opcoes": [
+      "Medronheiro",
+      "Amora-Silvestre",
+      "Mirtilo-Americano",
+      "Uva-da-Serra dos Açores (Vaccinium cylindraceum)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A uva-da-serra é usada em licores e compotas tradicionais nos Açores e Madeira.",
+    "fonte": "Parques Naturais dos Açores / Universidade dos Açores",
+    "factClusterId": "fc_cie_nat_uvadaserra_acores_01"
+  },
+  {
+    "id": "CIE_NAT_0029",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que magnífico arbusto autóctone do Mediterrâneo (Arbutus unedo), muito abundante nas serras de Monchique, Caldeirão e Alentejo, produz frutos esféricos vermelhos rugosos que são destilados em alambiques de cobre tradicionais para produzir a afamada:",
+    "opcoes": [
+      "Aguardente de Medronho (Medronho de Monchique)",
+      "Ginjinha",
+      "Aguardente Bagaceira",
+      "Licor Beirão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O medronheiro floresce e frutifica em simultâneo no outono e o Medronho do Algarve e Alentejo possui Indicação Geográfica Protegida.",
+    "fonte": "ICNF / Município de Monchique / Qualifica",
+    "factClusterId": "fc_cie_nat_medronheiro_monchique_01"
+  },
+  {
+    "id": "CIE_NAT_0030",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que ave passeriforme e símbolo alado do Parque Natural de Montesinho e serras transmontanas («Picanço-Barreteiro» e «Escrevedeira-Amarela»), partilha o habitat com o raríssimo e tímido veado-vermelho e:",
+    "opcoes": [
+      "O Urso-Pardo",
+      "O Corço (Capreolus capreolus) e o Javali",
+      "A Rena",
+      "O Alce"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Parque Natural de Montesinho em Bragança e Vinhais conserva uma das maiores populações de cervídeos selvagens de Portugal.",
+    "fonte": "ICNF / Parque Natural de Montesinho",
+    "factClusterId": "fc_cie_nat_montesinho_corco_01"
+  },
+  {
+    "id": "CIE_NAT_0031",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que planta rupícola endémica exclusiva das arribas calcárias da costa de Sesimbra e do Cabo Espichel («Craveiro-de-Fenda» / Dianthus cintranus subsp. barbatus), floresce com pétalas cor-de-rosa recortadas diretamente no calcário marítimo?",
+    "opcoes": [
+      "Margarida-do-Cabo",
+      "Camomila-da-Serra",
+      "Cravo-Romano / Dianthus da Arrábida",
+      "Papoilas-Bravas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A flora calcícola da Península de Setúbal possui mais de 1.400 espécies de plantas registadas.",
+    "fonte": "ICNF / Sociedade Portuguesa de Botânica",
+    "factClusterId": "fc_cie_nat_cravodaarrabida_01"
+  },
+  {
+    "id": "CIE_NAT_0032",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que espécie de ave limícola pernalta perfeitamente adaptada às salinas e sapais da Ria de Aveiro, Ria Formosa e Estuário do Sado («Perna-Longa» / Himantopus himantopus), possui as pernas mais compridas do mundo em proporção ao seu tamanho corporal?",
+    "opcoes": [
+      "Alfaiate",
+      "Pilrito-das-Praias",
+      "Borrelho-de-Coleira-Interrompida",
+      "Perna-Longa (Himantopus himantopus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Perna-Longa é a ave símbolo da Reserva Natural das Dunas de São Jacinto em Aveiro e da Ria Formosa.",
+    "fonte": "ICNF / Reserva Natural de São Jacinto / SPEA",
+    "factClusterId": "fc_cie_nat_pernalonga_sapal_01"
+  },
+  {
+    "id": "CIE_NAT_0033",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que emblemático mamífero mustelídeo semiaquático de cauda achatada e pelos impermeáveis («Lontra-Euroasiática» / Lutra lutra), habita rios, barragens e tem em Portugal o comportamento invulgar de pescar e nadar diariamente em pleno mar aberto nas praias rochosas de:",
+    "opcoes": [
+      "Costa Alentejana e Costa Vicentina",
+      "Praia da Rocha",
+      "Costa da Caparica",
+      "Praia de Espinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As lontras marinhas da Costa Vicentina pescam polvos e caranguejos no oceano e lavam o sal do pelo nas ribeiras de água doce costeiras.",
+    "fonte": "ICNF / Universidade de Évora / Parque Natural do Sudoeste Alentejano",
+    "factClusterId": "fc_cie_nat_lontrascostavicentina_01"
+  },
+  {
+    "id": "CIE_NAT_0034",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que raça canina de pastoreio autóctone de Portugal, originária dos planaltos da Serra da Estrela («Cão da Serra da Estrela»), protege secularmente os rebanhos de ovelhas bordaleiras dos ataques dos lobos-ibéricos?",
+    "opcoes": [
+      "Cão de Castro Laboreiro",
+      "Cão da Serra da Estrela (Estrela Mountain Dog)",
+      "Rafeiro do Alentejo",
+      "Cão de Fila de São Miguel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Cão da Serra da Estrela é uma das mais antigas raças caninas da Península Ibérica com pelo comprido ou curto adaptado ao frio da serra.",
+    "fonte": "Clube do Cão da Serra da Estrela / Clube Português de Canicultura",
+    "factClusterId": "fc_cie_nat_caoserradaestrela_01"
+  },
+  {
+    "id": "CIE_NAT_0035",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que raça de cão guardião autóctone de Melgaço no Parque Nacional da Peneda-Gerês («Cão de Castro Laboreiro»), com pelagem 'lobeira' tigrada e latido grave («o boste»), defende o gado bovino nas brandas e inverneiras?",
+    "opcoes": [
+      "Cão de Gado Transmontano",
+      "Perdigueiro Português",
+      "Cão de Castro Laboreiro",
+      "Cão de Água Português"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Castro Laboreiro preserva este cão molossoide rústico adaptado aos invernos rigorosos do planalto granítico.",
+    "fonte": "Município de Melgaço / Clube Português de Canicultura",
+    "factClusterId": "fc_cie_nat_caodecastrolaboreiro_01"
+  },
+  {
+    "id": "CIE_NAT_0036",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que histórico cão marinheiro português de pelo encaracolado impermeável e membranas interdigitais nas patas («Cão de Água Português»), era levado pelos pescadores do Algarve e das frotas de bacalhau para nadar entre barcos e recuperar redes e peixes caídos na água?",
+    "opcoes": [
+      "Podengo Português",
+      "Barbado da Terceira",
+      "Cão de Fila",
+      "Cão de Água Português (Portuguese Water Dog)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Cão de Água Português tornou-se célebre mundialmente após o presidente dos EUA Barack Obama ter adotado 'Bo' e 'Sunny' na Casa Branca.",
+    "fonte": "Clube do Cão de Água Português / Museu de Faro",
+    "factClusterId": "fc_cie_nat_caodeaguaportugues_01"
+  },
+  {
+    "id": "CIE_NAT_0037",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que réptil quelónio de água doce autóctone dos rios e pauis de Portugal («Cágado-de-Carapaça-Estriada» / Emys orbicularis e «Cágado-Mediterrânico» / Mauremys leprosa), encontra-se ameaçado pela introdução de espécies invasoras como:",
+    "opcoes": [
+      "A Tartaruga-da-Flórida / Tartaruga-de-Orelhas-Vermelhas (invasora)",
+      "O Lagarto-de-Água",
+      "A Rã-Verde",
+      "O Lúcio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O abandono ilegal de tartarugas exóticas em lagos e rios portugueses compete com os cágados autóctones pelo alimento e locais de postura ao sol.",
+    "fonte": "ICNF / Sociedade Portuguesa de Herpetologia",
+    "factClusterId": "fc_cie_nat_cagadosautoctones_01"
+  },
+  {
+    "id": "CIE_NAT_0038",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que importante reserva natural na foz do rio Tejo (Reserva Natural do Estuário do Tejo), a maior zona húmida de Portugal e uma das dez mais importantes da Europa, acolhe no inverno mais de 50.000 aves aquáticas migratórias com destaque para os milhares de:",
+    "opcoes": [
+      "Pinguins",
+      "Flamingos-Rosa (Phoenicopterus roseus) e Alfaiates",
+      "Pelicanos",
+      "Casuares"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As salinas de Alcochete e a Ponta da Erva no estuário do Tejo acolhem bandos cor-de-rosa espetaculares de flamingos durante todo o ano.",
+    "fonte": "ICNF / Reserva Natural do Estuário do Tejo / EVOA",
+    "factClusterId": "fc_cie_nat_flamingos_tejo_01"
+  },
+  {
+    "id": "CIE_NAT_0039",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que peixe anádromo migrador primitivo do rio Minho e Lima (Petromyzon marinus), sem mandíbulas e com boca em ventosa com dentes córneos circulares («Lampreia-Marinha»), sobe os rios na primavera para desovar e é a base da tradição gastronómica do norte?",
+    "opcoes": [
+      "Sável",
+      "Salmão do Atlântico",
+      "Lampreia-Marinha (Petromyzon marinus)",
+      "Enguia-Europeia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A lampreia-marinha é um ciclóstomo vertebrado fóssil vivo que existe na Terra há mais de 350 milhões de anos.",
+    "fonte": "Universidade de Évora / ICNF / Aquamuseu do Rio Minho",
+    "factClusterId": "fc_cie_nat_lampreiamarinha_01"
+  },
+  {
+    "id": "CIE_NAT_0040",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que espécie de peixe teleósteo migrador catádromo (Anguilla anguilla), cujas larvas microscópicas («enguias-de-vidro» ou «meixão») viajam mais de 5.000 km desde o Mar dos Sargaços no Atlântico Norte até aos rios e lagoas de Portugal (como a Ria de Aveiro e Lagoa de Óbidos)?",
+    "opcoes": [
+      "Truta-Fário",
+      "Boga-Portuguesa",
+      "Barbo-do-Norte",
+      "Enguia-Europeia (Anguilla anguilla) / Meixão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A apanha ilegal do meixão é severamente punida por lei por colocar a enguia-europeia em perigo crítico de extinção.",
+    "fonte": "ICNF / GNR / Marinha Portuguesa",
+    "factClusterId": "fc_cie_nat_enguia_meixao_01"
+  },
+  {
+    "id": "CIE_NAT_0041",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que peixe fluvial de água doce estritamente endémico de Portugal (Iberochondrostoma lusitanicum), habitante das bacias dos rios Tejo, Sado e ribeiras do Algarve («Boga-Portuguesa»), é uma espécie ameaçada protegida pela Diretiva Habitats da UE?",
+    "opcoes": [
+      "Boga-Portuguesa (Iberochondrostoma lusitanicum)",
+      "Achigã (introduzido)",
+      "Carpa (introduzida)",
+      "Perca-Sol (invasora)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Boga-Portuguesa evoluiu isolada na Península Ibérica e o Aquário Vasco da Gama mantém programas pioneiros de reprodução em cativeiro para conservação.",
+    "fonte": "Aquário Vasco da Gama / ICNF / MARE",
+    "factClusterId": "fc_cie_nat_bogaportuguesa_01"
+  },
+  {
+    "id": "CIE_NAT_0042",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que inseto lepidóptero noturno espetacular e maior borboleta da Europa (Saturnia pyri), com envergadura de asas de até 15 cm e quatro ocelos em forma de olho que afugentam predadores («Grande Pavão-Noturno»), habita pomares e matas do Alentejo e Ribatejo?",
+    "opcoes": [
+      "Borboleta-Monarca",
+      "Grande Pavão-Noturno (Saturnia pyri)",
+      "Borboleta-Cauda-de-Andorinha",
+      "Traça-do-Buxo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Saturnia pyri vive apenas alguns dias como adulto sem se alimentar com o único propósito da reprodução.",
+    "fonte": "Tagis — Centro de Conservação das Borboletas de Portugal / ICNF",
+    "factClusterId": "fc_cie_nat_saturniapyri_01"
+  },
+  {
+    "id": "CIE_NAT_0043",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que cogumelo silvestre nobre e muito valorizado na gastronomia transmontana e beirã («Amanita cesarea» / Míscaro real), com chapéu cor de laranja vivo e lamelas amarelas douradas, cresce associado a carvalhais e sobreirais no outono?",
+    "opcoes": [
+      "Amanita phalloides (venenoso mortal)",
+      "Cogumelo de Paris",
+      "Amanita dos Césares / Míscaro Real (Amanita caesarea)",
+      "Tortulho-Venenoso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Amanita dos Césares era considerada a rainha dos cogumelos na Roma antiga e dá o mote ao Festival do Míscaro em Alcongosta (Fundão).",
+    "fonte": "Sociedade Portuguesa de Micologia / Município do Fundão",
+    "factClusterId": "fc_cie_nat_amanitacaesarea_01"
+  },
+  {
+    "id": "CIE_NAT_0044",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que impressionante planta parasita de cor vermelha e aspeto carnudo exótico («Pau-de-Cabinda» / Cytinus hypocistis), desprovida de clorofila, que vive agarrada às raízes dos sargaços e estevas nas charnecas do Alentejo e Algarve?",
+    "opcoes": [
+      "Orobanche",
+      "Musgo-de-Viena",
+      "Visco-de-Carvalho",
+      "Pútega / Púcaro-da-Esteva (Cytinus hypocistis)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A pútega obtém toda a água e nutrientes exclusivamente da esteva através de haustórios subterrâneos.",
+    "fonte": "Sociedade Portuguesa de Botânica / Herbário da Universidade de Coimbra",
+    "factClusterId": "fc_cie_nat_putega_esteva_01"
+  },
+  {
+    "id": "CIE_NAT_0045",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que flor rústica aromática e resinosa de grandes pétalas brancas com manchas púrpuras na base (Cistus ladanifer), domina os montados e matagais do Alentejo e Baixo Guadiana libertando o aroma caraterístico do «lábdano» no verão quente?",
+    "opcoes": [
+      "A Esteva (Cistus ladanifer)",
+      "A Urze-Branca",
+      "O Rosmaninho",
+      "A Tojeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A resina da esteva protege a planta da desidratação e é colhida para fixador natural na alta perfumaria internacional.",
+    "fonte": "ICNF / Turismo do Alentejo",
+    "factClusterId": "fc_cie_nat_esteva_alentejo_01"
+  },
+  {
+    "id": "CIE_NAT_0046",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que rara e bela ave de plumagem azul-turquesa e peito alaranjado («Guarda-Rios-Comum» / Alcedo atthis), que caça peixinhos em mergulhos verticais a alta velocidade, escava os seus ninhos em galerias tubulares nas barreiras arenosas das margens de rios limpos?",
+    "opcoes": [
+      "Abelharuco (Merops apiaster)",
+      "Guarda-Rios (Alcedo atthis)",
+      "Poupa (Upupa epops)",
+      "Melro-d'Água"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Guarda-Rios é uma das aves aquáticas mais coloridas e emblemáticas da avifauna ribeirinha de Portugal.",
+    "fonte": "SPEA / ICNF / Aves de Portugal",
+    "factClusterId": "fc_cie_nat_guardarios_01"
+  },
+  {
+    "id": "CIE_NAT_0047",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que espetacular ave migradora multicolor (com penas amarelas, verdes, azuis e castanhas), que chega a Portugal na primavera vinda de África («Abelharuco» / Merops apiaster), é especialista em capturar abelhas e vespas em pleno voo retirando o ferrão antes de as engolir?",
+    "opcoes": [
+      "Guarda-Rios",
+      "Rolieiro",
+      "Abelharuco (Merops apiaster)",
+      "Papa-Figos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os abelharucos nidificam em colónias ruidosas escavando túneis de postura em taludes de terra no Alentejo e Ribatejo.",
+    "fonte": "SPEA / Livro das Aves de Portugal",
+    "factClusterId": "fc_cie_nat_abelharuco_01"
+  },
+  {
+    "id": "CIE_NAT_0048",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que pequeno e fascinante carnívoro de origem africana introduzido na Península Ibérica na Antiguidade («Sacarrabos» ou Mongoose / Herpestes ichneumon), com cauda comprida terminada num tufo de pelos pretos, é imune ao veneno das víboras?",
+    "opcoes": [
+      "Geneta",
+      "Toirão",
+      "Doninha",
+      "Sacarrabos (Herpestes ichneumon)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O sacarrabos anda frequentemente em fila indiana com as crias ('o comboio do sacarrabos') e caça cobras venenosas e roedores.",
+    "fonte": "ICNF / Universidade de Lisboa",
+    "factClusterId": "fc_cie_nat_sacarrabos_01"
+  },
+  {
+    "id": "CIE_NAT_0049",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que víbora venenosa autóctone do norte e centro de Portugal («Víbora-de-Seoane» e «Víbora-Cornuda» / Vipera latastei), distingue-se pelo apêndice córneo na ponta do focinho e padrão em ziguezague no dorso?",
+    "opcoes": [
+      "Víbora-Cornuda (Vipera latastei)",
+      "Cobra-Rateira",
+      "Cobra-de-Escada",
+      "Cobra-de-Água-de-Colar"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Víbora-Cornuda é uma das duas únicas espécies de serpentes com veneno perigoso em Portugal continental, habitando zonas rochosas e matagais.",
+    "fonte": "Sociedade Portuguesa de Herpetologia / ICNF",
+    "factClusterId": "fc_cie_nat_viboracornuda_01"
+  },
+  {
+    "id": "CIE_NAT_0050",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Natureza & Biodiversidade",
+    "pergunta": "Que gigante geológico de origem vulcânica no concelho de Angra do Heroísmo (Ilha Terceira, Açores), «Algar do Carvão», permite aos visitantes descer mais de 90 metros pelo interior de uma chaminé vulcânica extinta até uma lagoa subterrânea de águas cristalinas rodeada por estalactites de sílica raras e fetos primitivos?",
+    "opcoes": [
+      "Furna do Enxofre (Graciosa)",
+      "Gruta das Torres (Pico)",
+      "Algar do Carvão (Monumento Natural Regional)",
+      "Gruta do Natal (Terceira)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Algar do Carvão é um dos pouquíssimos vulcões visitáveis por dentro em todo o mundo gerido pela associação ambientalista Os Montanheiros.",
+    "fonte": "Sociedade de Exploração Espeleológica Os Montanheiros / Governo dos Açores",
+    "factClusterId": "fc_cie_nat_algardocarvao_01"
+  }
+]

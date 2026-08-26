@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CULT_ESC_0001",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que mestre escultor realista natural de Vila Nova de Gaia (1847-1889) criou a obra-prima em mármore de Carrara «O Desterrado» (1872) durante a sua estada em Roma, hoje peça central do Museu Nacional que ostenta o seu nome no Porto?",
+    "opcoes": [
+      "António Soares dos Reis",
+      "António Teixeira Lopes",
+      "Machado de Castro",
+      "Canto da Maia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "«O Desterrado» é inspirado no poema «Tristezas do Desterro» de Alexandre Herculano e é considerada a escultura cimeira do século XIX em Portugal.",
+    "fonte": "Museu Nacional de Soares dos Reis / DGPC",
+    "factClusterId": "fc_esc_soaresdosreis_desterrado_01"
+  },
+  {
+    "id": "CULT_ESC_0002",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que monumental estátua equestre em bronze no centro do Terreiro do Paço em Lisboa, fundida numa única peça pelo mestre escultor conimbricense Joaquim Machado de Castro e inaugurada em 1775, representa que monarca português?",
+    "opcoes": [
+      "Rei D. João V",
+      "Rei D. José I («O Reformador»)",
+      "Rei D. Pedro IV",
+      "Rei D. João IV"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A estátua de D. José I com o cavalo Gentil a esmagar serpentes foi a primeira estátua equestre monumental e a primeira escultura pública em bronze fundida em Portugal.",
+    "fonte": "Museu de Lisboa / DGPC",
+    "factClusterId": "fc_esc_estatuaequestre_djosei_01"
+  },
+  {
+    "id": "CULT_ESC_0003",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor contemporâneo português (1937-2021), natural de Lisboa e radicado em Évora, revolucionou a estatuária pública portuguesa com a controversa estátua de «D. Sebastião» em Lagos (1973) e o Monumento ao 25 de Abril no Parque Eduardo VII?",
+    "opcoes": [
+      "Rui Chafes",
+      "Jorge Vieira",
+      "João Cutileiro",
+      "Alberto Carneiro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "João Cutileiro rompeu com a escultura heroica tradicional utilizando o mármore cortado em blocos e superfícies polidas e toscas.",
+    "fonte": "Casa de Cutileiro em Évora / Município de Lagos",
+    "factClusterId": "fc_esc_joaocutileiro_01"
+  },
+  {
+    "id": "CULT_ESC_0004",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que dois túmulos góticos monumentais em pedra de Ançã no Mosteiro de Alcobaça, esculpidos no século XIV com rendilhados de gótico flamejante e a representação da Roda da Vida e do Juízo Final, guardam os restos mortais de que amantes trágicos da história portuguesa?",
+    "opcoes": [
+      "D. João I e D. Filipa de Lencastre",
+      "D. Afonso Henriques e D. Mafalda",
+      "D. Dinis e Rainha Santa Isabel",
+      "D. Pedro I e D. Inês de Castro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os túmulos de Alcobaça foram colocados 'pés com pés' (frente a frente) no transepto para que, ao ressuscitar no Juízo Final, o primeiro olhar de cada um seja para o outro.",
+    "fonte": "DGPC / Mosteiro de Alcobaça / UNESCO",
+    "factClusterId": "fc_esc_tumulosalcobaca_01"
+  },
+  {
+    "id": "CULT_ESC_0005",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor renascentista francês de origem normanda radicado em Portugal no século XVI («Nicolau Chanterene») esculpiu as célebres estátuas de D. Manuel I e D. Maria no Portal Ocidental dos Jerónimos e os túmulos reais no Mosteiro de Santa Cruz de Coimbra?",
+    "opcoes": [
+      "Nicolau Chanterene (Nicolau de Chanterenne)",
+      "João de Ruão",
+      "Filipe Hodart",
+      "Diogo Pires o Moço"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Chanterene introduziu a linguagem escultórica clássica do Renascimento italiano e plateresco em Portugal.",
+    "fonte": "Museu Nacional de Machado de Castro / Mosteiro dos Jerónimos",
+    "factClusterId": "fc_esc_chanterene_01"
+  },
+  {
+    "id": "CULT_ESC_0006",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor escultor renascentista francês fixado em Coimbra no século XVI («João de Ruão»), autor do Retábulo da Capela do Sacramento na Sé Velha de Coimbra, deu o nome a uma influente oficina escultórica em pedra de Ançã?",
+    "opcoes": [
+      "Nicolau Chanterene",
+      "João de Ruão (Jean de Rouen)",
+      "Filipe Hodart",
+      "Tomé Velho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "João de Ruão decorou dezenas de capelas e retábulos em igrejas de Coimbra, Cantanhede e Guarda.",
+    "fonte": "Universidade de Coimbra / Sé Velha",
+    "factClusterId": "fc_esc_joaoderuao_01"
+  },
+  {
+    "id": "CULT_ESC_0007",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que extraordinário grupo escultórico em terracota em tamanho natural («A Última Ceia»), esculpido entre 1530 e 1534 pelo escultor francês Filipe Hodart para o refeitório do Mosteiro de Santa Cruz de Coimbra, é uma das obras cimeiras do Museu Nacional de Machado de Castro?",
+    "opcoes": [
+      "A Descida da Cruz",
+      "A Dormição da Virgem",
+      "A Última Ceia de Filipe Hodart",
+      "Os Quatro Evangelistas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "As figuras dos apóstolos de Hodart impressionam pelo expressivo realismo facial, tensão dramática e detalhe anatómico.",
+    "fonte": "Museu Nacional de Machado de Castro / DGPC",
+    "factClusterId": "fc_esc_filipehodart_ultimaceia_01"
+  },
+  {
+    "id": "CULT_ESC_0008",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que mestre escultor do século XIV («Mestre Pero») esculpiu em pedra de Ançã o túmulo gótico monumental da Rainha Santa Isabel no Mosteiro de Santa Clara-a-Velha em Coimbra, com a imagem jacente da soberana vestida de peregrina?",
+    "opcoes": [
+      "Diogo Pires o Velho",
+      "Afonso Domingues",
+      "Mestre Huguet",
+      "Mestre Pero"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O túmulo da Rainha Santa ostenta o bordão de peregrina a Santiago de Compostela e relevos de santas franciscanas.",
+    "fonte": "Mosteiro de Santa Clara-a-Nova / DGPC",
+    "factClusterId": "fc_esc_mestrepero_rainhasanta_01"
+  },
+  {
+    "id": "CULT_ESC_0009",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que grande escultor modernista português (1898-1975), autor das 33 figuras esculpidas em cantaria de calcário no monumental Padrão dos Descobrimentos em Belém (1960) e da estátua de D. Afonso Henriques em Guimarães, é:",
+    "opcoes": [
+      "Leopoldo de Almeida",
+      "Francisco Franco",
+      "Barata Feyo",
+      "Canto da Maia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Leopoldo de Almeida foi professor da Escola de Belas-Artes de Lisboa e o escultor mais representativo da arte monumental do século XX português.",
+    "fonte": "Padrão dos Descobrimentos / EGEAC / Belas-Artes",
+    "factClusterId": "fc_esc_leopoldodealmeida_01"
+  },
+  {
+    "id": "CULT_ESC_0010",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor madeirense (1885-1955) foi o autor da gigantesca estátua do Sagrado Coração de Jesus no Santuário Nacional de Cristo Rei em Almada (1959) e da imponente estátua de João Gonçalves Zarco no Funchal?",
+    "opcoes": [
+      "Henrique Moreira",
+      "Francisco Franco de Sousa",
+      "Rui Chafes",
+      "Maximiano Alves"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A escultura de Cristo com os braços abertos mede 28 metros de altura e coroa o pedestal de 82 metros em Almada.",
+    "fonte": "Santuário de Cristo Rei / Museu Henrique e Francisco Franco (Funchal)",
+    "factClusterId": "fc_esc_franciscofranco_cristorei_01"
+  },
+  {
+    "id": "CULT_ESC_0011",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural de Vila Nova de Gaia (1866-1942), discípulo de Soares dos Reis e autor das esculturas «A Viúva», «A Dor» e dos monumentos ao Infante D. Henrique e a Garrett no Porto, fundou a sua Casa-Museu em Gaia?",
+    "opcoes": [
+      "Henrique Moreira",
+      "Rodolfo Pinto do Couto",
+      "António Teixeira Lopes",
+      "Fernandes de Sá"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa-Museu Teixeira Lopes em Vila Nova de Gaia preserva o atelier do artista e uma valiosa coleção de escultura realista e romântica.",
+    "fonte": "Casa-Museu Teixeira Lopes / Município de Gaia",
+    "factClusterId": "fc_esc_teixeiralopes_01"
+  },
+  {
+    "id": "CULT_ESC_0012",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que artista contemporânea portuguesa nascida em Paris em 1971, primeira mulher a expor no Palácio de Versalhes (2012) e criadora das obras «A Noiva» (lustre de tampões), «Coração Independente» (em talheres de plástico) e «Pop Galo», é:",
+    "opcoes": [
+      "Fernanda Fragateiro",
+      "Helena Almeida",
+      "Paula Rego",
+      "Joana Vasconcelos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Joana Vasconcelos apropria-se de objetos quotidianos e técnicas tradicionais portuguesas como o crochê e a filigrana em esculturas monumentais.",
+    "fonte": "Fundação Joana Vasconcelos / Museu de Serralves",
+    "factClusterId": "fc_esc_joanavasconcelos_01"
+  },
+  {
+    "id": "CULT_ESC_0013",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor contemporâneo português (nascido em Lisboa em 1966), vencedor do Prémio Pessoa em 2004 e representante de Portugal na Bienal de Veneza de 1995, trabalha exclusivamente o ferro pintado a negro mate em esculturas que desafiam o espaço e o peso?",
+    "opcoes": [
+      "Rui Chafes",
+      "Pedro Cabrita Reis",
+      "José Pedro Croft",
+      "Zulmiro de Carvalho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Rui Chafes cria formas orgânicas e herméticas em ferro negro que dialogam com a espiritualidade e a poesia germânica.",
+    "fonte": "Fundação de Serralves / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_esc_ruichafes_01"
+  },
+  {
+    "id": "CULT_ESC_0014",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural de Coronado (Santo Tirso, 1937-2010), pioneiro da Land Art e da arte ecológica em Portugal, utilizava troncos de árvores, ramos, pedras e folhas em esculturas sob o princípio «A Arte é o Corpo, o Corpo é a Natureza»?",
+    "opcoes": [
+      "Zulmiro de Carvalho",
+      "Alberto Carneiro",
+      "Jorge Vieira",
+      "Ângelo de Sousa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Alberto Carneiro criou o Centro de Arte Alberto Carneiro em Santo Tirso e obras fundamentais de integração na paisagem.",
+    "fonte": "Museu Internacional de Escultura Contemporânea (MIEC) / Santo Tirso",
+    "factClusterId": "fc_esc_albertocarneiro_01"
+  },
+  {
+    "id": "CULT_ESC_0015",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor surrealista e modernista lisboeta (1922-1998), autor do «Monumento a Humberto Delgado» em Lisboa e de figuras zoomórficas em bronze e terracota, possui o seu museu monográfico em Beja?",
+    "opcoes": [
+      "Lagoa Henriques",
+      "Barata Feyo",
+      "Jorge Vieira",
+      "António Duarte"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu Jorge Vieira na Casa do Governador em Beja acolhe a doação permanente das suas esculturas abstratas e surrealistas.",
+    "fonte": "Museu Jorge Vieira / Município de Beja",
+    "factClusterId": "fc_esc_jorgevieirabeja_01"
+  },
+  {
+    "id": "CULT_ESC_0016",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor açoriano de Ponta Delgada (1890-1959), radicado em Paris onde conviveu com Bourdelle e Le Corbusier, destacou-se pelo lirismo de figuras escultóricas como «Hino ao Amor» e os relevos no Pavilhão de Portugal em Paris?",
+    "opcoes": [
+      "Francisco Franco",
+      "Numídico Bessone",
+      "Domingos Soares Branco",
+      "Ernesto Canto da Maia (Canto da Maya)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Museu Carlos Machado em Ponta Delgada abriga a mais importante coleção de obras em gesso e terracota de Canto da Maia.",
+    "fonte": "Museu Carlos Machado / Governo Regional dos Açores",
+    "factClusterId": "fc_esc_cantodamaia_01"
+  },
+  {
+    "id": "CULT_ESC_0017",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor portuense (1899-1990), professor e diretor da Escola de Belas-Artes do Porto, foi o autor da famosa estátua em bronze de D. João VI na Praça de Gonçalves Zarco (Castelo do Queijo) e da estátua de Antero de Quental em Coimbra?",
+    "opcoes": [
+      "Salvador Barata Feyo",
+      "Henrique Moreira",
+      "Manuel da Silva Pereira",
+      "Sousa Caldas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Barata Feyo renovou a estatuária cívica com grande sobriedade plástica e elegância formal.",
+    "fonte": "Câmara Municipal do Porto / Faculdade de Belas Artes da U.Porto",
+    "factClusterId": "fc_esc_baratafeyo_01"
+  },
+  {
+    "id": "CULT_ESC_0018",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor prolífico da cidade do Porto (1890-1969) foi o autor das estátuas mais emblemáticas da Avenida dos Aliados e da Baixa, como «A Juventude» (Menina Nua), «Os Salteadores» e a fonte monumental da Praça de D. João I?",
+    "opcoes": [
+      "Soares dos Reis",
+      "Henrique Moreira",
+      "Teixeira Lopes",
+      "Barata Feyo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Henrique Moreira modelou a paisagem escultórica urbana do Porto no século XX.",
+    "fonte": "Câmara Municipal do Porto / Ágora",
+    "factClusterId": "fc_esc_henriquemoreiraporto_01"
+  },
+  {
+    "id": "CULT_ESC_0019",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor e professor de Belas-Artes (1923-2009), mestre do desenho e da escultura figurativa que modelou a estátua de Fernando Pessoa sentado à esplanada do café «A Brasileira» no Chiado em Lisboa, é:",
+    "opcoes": [
+      "João Cutileiro",
+      "Rui Sanches",
+      "Mestre António Lagoa Henriques",
+      "José Rodrigues"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A escultura de bronze de Fernando Pessoa na esplanada d'A Brasileira é uma das estátuas mais fotografadas do mundo.",
+    "fonte": "Câmara Municipal de Lisboa / A Brasileira do Chiado",
+    "factClusterId": "fc_esc_lagoahenriques_pessoabrasileira_01"
+  },
+  {
+    "id": "CULT_ESC_0020",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor nascido em Luanda e radicado no Porto (1936-2016), membro do grupo «Os Quatro Vintes» com Ângelo de Sousa, Armando Alves e Jorge Pinheiro, criou o monumento «O Cubo da Ribeira» na Praça da Ribeira no Porto?",
+    "opcoes": [
+      "Zulmiro de Carvalho",
+      "Alberto Carneiro",
+      "Paulo Neves",
+      "José Rodrigues (Mestre José Rodrigues)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação José Rodrigues na antiga Fábrica Social no Porto preserva o espólio escultórico do artista.",
+    "fonte": "Fundação José Rodrigues / CMP",
+    "factClusterId": "fc_esc_joserodrigues_cuboribeira_01"
+  },
+  {
+    "id": "CULT_ESC_0021",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que museu pioneiro ao ar livre e em sala no concelho de Santo Tirso, criado em 1991 e com edifícios desenhados pelos arquitetos Álvaro Siza Vieira e Eduardo Souto de Moura, reúne mais de 50 esculturas monumentais de mestres mundiais espalhadas pelos parques e praças da cidade?",
+    "opcoes": [
+      "Museu Internacional de Escultura Contemporânea (MIEC de Santo Tirso)",
+      "Parque das Esculturas de Sintra",
+      "Quinta dos Loridos (Buddha Eden)",
+      "Jardim das Esculturas de Belém"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O MIEC de Santo Tirso é um museu único em Portugal com esculturas de artistas contemporâneos de todos os continentes integradas no tecido urbano.",
+    "fonte": "Município de Santo Tirso / MIEC",
+    "factClusterId": "fc_esc_miec_santotirso_01"
+  },
+  {
+    "id": "CULT_ESC_0022",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que maior jardim oriental e de esculturas da Europa, situado na Quinta dos Loridos no concelho do Bombarral com mais de 35 hectares, abriga centenas de estátuas monumentais de Budas, guerreiros de terracota e esculturas de arte moderna africana?",
+    "opcoes": [
+      "Jardim Botânico da Madeira",
+      "Bacalhôa Buddha Eden (Jardim da Paz)",
+      "Jardins de Monserrate",
+      "Mata do Buçaco"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Buddha Eden foi criado pelo comendador Joe Berardo em resposta à destruição talibã dos Budas Gigantes de Bamiyan em 2001.",
+    "fonte": "Bacalhôa Vinhos de Portugal / Município do Bombarral",
+    "factClusterId": "fc_esc_buddhaeden_01"
+  },
+  {
+    "id": "CULT_ESC_0023",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que importante escultor português do século XVIII («António Ferreira»), colaborador de Machado de Castro, esculpiu o monumental presépio barroco de terracota do Palácio das Necessidades em Lisboa?",
+    "opcoes": [
+      "Frei Cipriano da Cruz",
+      "Manuel Dias",
+      "António Ferreira",
+      "João da Silva"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "António Ferreira destacou-se pela modelação minuciosa e expressão devota das figuras bíblicas e populares do barroco joanino.",
+    "fonte": "Museu Nacional de Arte Antiga / Palácio das Necessidades",
+    "factClusterId": "fc_esc_antonioferreira_presepio_01"
+  },
+  {
+    "id": "CULT_ESC_0024",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que monge beneditino escultor do século XVII («Frei Cipriano da Cruz»), mestre do Mosteiro de São Martinho de Tibães em Braga e do Mosteiro de Santo Tirso, criou esculturas barrocas em barro cozido de grande intensidade dramática («Pietà» e «Santa Escolástica»)?",
+    "opcoes": [
+      "Frei José de Santo António Vilaça",
+      "Frei Manuel do Cenáculo",
+      "Frei Carlos",
+      "Frei Cipriano da Cruz"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Frei Cipriano da Cruz é considerado o maior escultor barroco seiscentista em terracota do norte de Portugal.",
+    "fonte": "Museu Nacional de Machado de Castro / Mosteiro de Tibães",
+    "factClusterId": "fc_esc_freiciprianodacruz_01"
+  },
+  {
+    "id": "CULT_ESC_0025",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que mestre entalhador e arquiteto barroco beneditino do século XVIII («Frei José de Santo António Vilaça») desenhou e esculpiu os mais exuberantes retábulos rococó em talha dourada nos mosteiros de Tibães, Refojos de Basto e Lamego?",
+    "opcoes": [
+      "Frei José de Santo António Vilaça",
+      "Frei Cipriano da Cruz",
+      "Nicolau Nasoni",
+      "Marceliano de Araújo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Santo António Vilaça foi o génio do Rococó português na talha dourada e marcenaria artística com curvas e concheados.",
+    "fonte": "Mosteiro de Tibães / DGPC",
+    "factClusterId": "fc_esc_santantoniovilaca_01"
+  },
+  {
+    "id": "CULT_ESC_0026",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor portuense contemporâneo (nascido em Rebordões em 1940), com obras públicas em granito e ferro em vários países («Zulmiro de Carvalho»), lecionou na Faculdade de Belas-Artes do Porto?",
+    "opcoes": [
+      "José Pedro Croft",
+      "Zulmiro de Carvalho",
+      "Paulo Neves",
+      "Manuel Rosa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Zulmiro de Carvalho é um dos grandes mestres do minimalismo escultórico em pedra e metal em Portugal.",
+    "fonte": "Fundação de Serralves / FBAUP",
+    "factClusterId": "fc_esc_zulmirodecarvalho_01"
+  },
+  {
+    "id": "CULT_ESC_0027",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que artista contemporâneo português (nascido no Porto em 1957), representante de Portugal na Bienal de Veneza de 2017, cria esculturas e instalações com espelhos, vidro colorido, pedra e estruturas de aço que transformam a perceção da luz e da arquitetura?",
+    "opcoes": [
+      "Pedro Cabrita Reis",
+      "Rui Chafes",
+      "José Pedro Croft",
+      "Francisco Tropa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "José Pedro Croft expõe internacionalmente em Madrid, Paris e São Paulo e tem obras permanentes no Museu de Serralves e Fundação Gulbenkian.",
+    "fonte": "Fundação Calouste Gulbenkian / Serralves",
+    "factClusterId": "fc_esc_josepedrocroft_01"
+  },
+  {
+    "id": "CULT_ESC_0028",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que artista visual lisboeta contemporâneo (nascido em 1956), autor de monumentais instalações com materiais industriais (tijolos, vigas de ferro, lâmpadas fluorescentes e cabos como «A Linha do Sonho»), representou Portugal na 50.ª Bienal de Veneza em 2003?",
+    "opcoes": [
+      "Rui Chafes",
+      "Jorge Molder",
+      "Julião Sarmento",
+      "Pedro Cabrita Reis"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Cabrita Reis é um dos artistas portugueses com maior projeção internacional, com obras expostas na Tate Modern de Londres e no Centro Pompidou em Paris.",
+    "fonte": "Tate Modern / Centre Pompidou / Serralves",
+    "factClusterId": "fc_esc_pedrocabritareis_01"
+  },
+  {
+    "id": "CULT_ESC_0029",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que artista plástica portuguesa (nascida em Montijo em 1962), conhecida pelas suas esculturas conceptuais com livros desconstruídos, mármore e madeira («Caixas de Leitura»), desenvolve projetos no espaço público e em museus de todo o mundo?",
+    "opcoes": [
+      "Fernanda Fragateiro",
+      "Joana Vasconcelos",
+      "Cristina Ataíde",
+      "Leonor Antunes"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Fernanda Fragateiro reflete sobre a história da arquitetura modernista, a literatura e o papel das mulheres no design e arte.",
+    "fonte": "Museu de Serralves / Fundação Calouste Gulbenkian",
+    "factClusterId": "fc_esc_fernandafragateiro_01"
+  },
+  {
+    "id": "CULT_ESC_0030",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que artista portuguesa (nascida em Lisboa em 1972), representante de Portugal na 58.ª Bienal de Veneza de 2019 com o projeto «a costura da sobreposição», trabalha com couro, latão, cordas e técnicas artesanais de tapeçaria e escultura?",
+    "opcoes": [
+      "Joana Vasconcelos",
+      "Leonor Antunes",
+      "Fernanda Fragateiro",
+      "Gracinda Candeias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Leonor Antunes reside em Berlim e é aclamada pelo diálogo entre o artesanato têxtil tradicional e a escultura espacial modernista.",
+    "fonte": "Bienal de Veneza / Direção-Geral das Artes (DGARTES)",
+    "factClusterId": "fc_esc_leonorantunes_01"
+  },
+  {
+    "id": "CULT_ESC_0031",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor de Cucujães (Oliveira de Azeméis, nascido em 1959), autor de figuras antropomórficas monumentais talhadas diretamente em troncos inteiros de cedro, carvalho e mármore com moto-serra («Paulo Neves»), é:",
+    "opcoes": [
+      "Alberto Carneiro",
+      "Cutileiro",
+      "Paulo Neves",
+      "Rui Sanches"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Paulo Neves tem esculturas públicas monumentais em Portugal, Espanha, França, Brasil e Coreia do Sul.",
+    "fonte": "Município de Santo Tirso (MIEC) / Município de Oliveira de Azeméis",
+    "factClusterId": "fc_esc_pauloneves_01"
+  },
+  {
+    "id": "CULT_ESC_0032",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor lisboeta (nascido em 1954), com formação no Goldsmiths College de Londres e na Universidade de Yale, desenvolve construções escultóricas com camadas de contraplacado de madeira recortado e bronze?",
+    "opcoes": [
+      "Rui Chafes",
+      "Manuel Rosa",
+      "Xavier",
+      "Rui Sanches"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Rui Sanches foi diretor do Centro de Arte Moderna da Fundação Gulbenkian e um dos mestres da tridimensionalidade em madeira.",
+    "fonte": "Fundação Calouste Gulbenkian / Serralves",
+    "factClusterId": "fc_esc_ruisanches_01"
+  },
+  {
+    "id": "CULT_ESC_0033",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor e professor de Belas-Artes de Lisboa (1844-1926), autor da estátua de D. Afonso Henriques na Alameda Afonso Henriques e do monumento ao Duque de Saldanha em Lisboa, é:",
+    "opcoes": [
+      "Tomás Costa e Simões de Almeida (Tio)",
+      "Soares dos Reis",
+      "Teixeira Lopes",
+      "Leopoldo de Almeida"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "José Simões de Almeida (Tio) foi um dos maiores mestres da estatuária cívica do Romantismo e Realismo oitocentista em Lisboa.",
+    "fonte": "Museu de Belas Artes de Lisboa / DGPC",
+    "factClusterId": "fc_esc_simoesdealmeida_01"
+  },
+  {
+    "id": "CULT_ESC_0034",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural de Figueiró dos Vinhos (1880-1950), sobrinho de Simões de Almeida, foi o autor do «Monumento aos Heróis da Grande Guerra» na Avenida da Liberdade em Lisboa e do busto oficial da República de 1911?",
+    "opcoes": [
+      "Costa Motta (Tio)",
+      "José Simões de Almeida (Sobrinho)",
+      "Maximiano Alves",
+      "Francisco Santos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O busto da República de Simões de Almeida (Sobrinho) serviu de modelo oficial à moeda e selos da 1.ª República.",
+    "fonte": "Museu da Presidência da República / Município de Figueiró dos Vinhos",
+    "factClusterId": "fc_esc_simoesdealmeidasobrinho_01"
+  },
+  {
+    "id": "CULT_ESC_0035",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural de Coimbra (1862-1930), autor do túmulo de Luís de Camões e de Vasco da Gama no Mosteiro dos Jerónimos e da estátua de Afonso de Albuquerque em Belém, é:",
+    "opcoes": [
+      "Soares dos Reis",
+      "Teixeira Lopes",
+      "António Augusto da Costa Motta (Costa Motta, Tio)",
+      "Machado de Castro"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Costa Motta (Tio) esculpiu os magníficos túmulos neo-manuelinos em calcário que guardam os restos mortais de Camões e Vasco da Gama na nave dos Jerónimos.",
+    "fonte": "Mosteiro dos Jerónimos / DGPC",
+    "factClusterId": "fc_esc_costamottatio_tumulosjeronimos_01"
+  },
+  {
+    "id": "CULT_ESC_0036",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor lisboeta (1888-1954), autor do «Monumento aos Mortos da Grande Guerra» em Lisboa com Guilherme Rebelo de Andrade e do monumento ao Marechal Carmona, é:",
+    "opcoes": [
+      "Raul Xavier",
+      "Anjos Teixeira",
+      "Martins Correia",
+      "Maximiano Alves"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "Maximiano Alves modelou dezenas de estátuas públicas e bustos históricos para praças e ministérios de Lisboa.",
+    "fonte": "Câmara Municipal de Lisboa / Museu de Lisboa",
+    "factClusterId": "fc_esc_maximianoalves_01"
+  },
+  {
+    "id": "CULT_ESC_0037",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que famosa dinastia familiar de escultores natural de Sintra e Viseu (Artur Anjos Teixeira e Pedro Anjos Teixeira) possui o Museu Anjos Teixeira instalado no centro histórico da vila de Sintra?",
+    "opcoes": [
+      "Os Mestres Anjos Teixeira (Artur e Pedro Anjos Teixeira)",
+      "Os Mestres Laranjeira",
+      "Os Irmãos Franco",
+      "Os Mestres Fernandes de Sá"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Museu Anjos Teixeira em Sintra expõe obras de escultura naturalista e anatomia artística de pai e filho.",
+    "fonte": "Câmara Municipal de Sintra / Museu Anjos Teixeira",
+    "factClusterId": "fc_esc_anjosteixeira_sintra_01"
+  },
+  {
+    "id": "CULT_ESC_0038",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural da Golegã (1910-1999), mestre do figurado popular e da policromia em madeira e bronze, tem o seu museu monográfico municipal instalado na Golegã?",
+    "opcoes": [
+      "Lagoa Henriques",
+      "Mestre Martins Correia",
+      "Jorge Vieira",
+      "António Duarte"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Museu Municipal Martins Correia na Golegã acolhe a doação de centenas de esculturas coloridas que celebram o Ribatejo e figuras universais.",
+    "fonte": "Município da Golegã / Museu Martins Correia",
+    "factClusterId": "fc_esc_martinscorreia_golega_01"
+  },
+  {
+    "id": "CULT_ESC_0039",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultor natural das Caldas da Rainha (1912-1998), discípulo de Simões de Almeida e autor da estátua de D. Afonso III em Faro e das estátuas no Santuário de Fátima, fundou o Atelier-Museu António Duarte nas Caldas?",
+    "opcoes": [
+      "João da Silva",
+      "José Farinha",
+      "António Duarte",
+      "Borges de Oliveira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Atelier-Museu António Duarte integra o Centro de Artes das Caldas da Rainha com esculturas de arte sacra e figuras cívicas.",
+    "fonte": "Centro de Artes das Caldas da Rainha / Município das Caldas",
+    "factClusterId": "fc_esc_antonioduarte_caldas_01"
+  },
+  {
+    "id": "CULT_ESC_0040",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que medalhista e escultor lisboeta (1880-1960), mestre da arte animalista em bronze («A Porca e os Leitões») e da ourivesaria escultórica, doou a sua coleção ao Museu de Lisboa?",
+    "opcoes": [
+      "Raul Xavier",
+      "Canto da Maia",
+      "Henrique Moreira",
+      "João da Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "João da Silva foi um dos maiores expoentes da medalhística e pequenas esculturas em bronze e marfim do Art Déco em Portugal.",
+    "fonte": "Museu de Lisboa / Palácio Pimenta",
+    "factClusterId": "fc_esc_joaodasilva_01"
+  },
+  {
+    "id": "CULT_ESC_0041",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que célebre tipo de pedra calcária branca e macia extraída no concelho de Cantanhede («Pedra de Ançã») foi a matéria-prima de eleição utilizada por escultores medievais e renascentistas para os mais finos rendilhados góticos e estátuas de Portugal?",
+    "opcoes": [
+      "Pedra de Ançã (Calcário de Ançã)",
+      "Mármore de Estremoz",
+      "Granito de Pedras Salgadas",
+      "Xisto de Piódão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A facilidade de corte da Pedra de Ançã permitiu a criação dos complexos túmulos de Alcobaça, Coimbra e Batalha.",
+    "fonte": "Município de Cantanhede / Rota da Pedra de Ançã",
+    "factClusterId": "fc_esc_pedradeanca_01"
+  },
+  {
+    "id": "CULT_ESC_0042",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que nobre pedra metamórfica alentejana de renome mundial extraída no «Triângulo do Mármore» (Estremoz, Borba e Vila Viçosa) é utilizada desde a época romana para a grande estatuária e cantarias nobres de Portugal?",
+    "opcoes": [
+      "Pedra de Ançã",
+      "Mármore de Estremoz (Mármore do Alentejo)",
+      "Lioz de Sintra",
+      "Brecha da Arrábida"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O mármore branco e rosa de Estremoz foi utilizado no Templo Romano de Évora, no Palácio de Vila Viçosa e no Mosteiro dos Jerónimos.",
+    "fonte": "Centro de Ciência Viva do Mármore de Estremoz / ASSIMAGRA",
+    "factClusterId": "fc_esc_marmoreestremoz_01"
+  },
+  {
+    "id": "CULT_ESC_0043",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que calcário fossilífero compacto e nobre extraído na região de Sintra, Pêro Pinheiro e Mafra («Pedra Lioz») foi utilizado na construção monumental da Torre de Belém, dos Jerónimos, da Baixa Pombalina e do Palácio de Mafra?",
+    "opcoes": [
+      "Pedra de Ançã",
+      "Granito Amarelo",
+      "Pedra Lioz (Calcário Lioz / Mármore de Lisboa)",
+      "Basalto dos Açores"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Lioz é resistente à erosão marítima e adquire uma tonalidade dourada única ao sol de Lisboa.",
+    "fonte": "Museu Geológico de Lisboa / LNEG",
+    "factClusterId": "fc_esc_pedralioz_01"
+  },
+  {
+    "id": "CULT_ESC_0044",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que rara rocha ornamental brecha de cores verde, vermelha e branca («Brecha da Arrábida»), única no mundo e hoje de pedreira esgotada e protegida no Parque Natural da Arrábida, foi utilizada nas colunas do Convento de Jesus em Setúbal?",
+    "opcoes": [
+      "Lioz de Sintra",
+      "Pedra de Ançã",
+      "Xisto de Foz Côa",
+      "Brecha da Arrábida (Mármore da Arrábida)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Brecha da Arrábida decora igrejas e palácios barrocos de Setúbal, Évora e Lisboa.",
+    "fonte": "Parque Natural da Arrábida / ICNF / Convento de Jesus",
+    "factClusterId": "fc_esc_brechadaarrabida_01"
+  },
+  {
+    "id": "CULT_ESC_0045",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que portal manuelino de transição renascentista na Igreja do Mosteiro de Santa Cruz de Coimbra, esculpido por Diogo de Castilho e Nicolau Chanterene em 1522 com imagens dos Doutores da Igreja, é o:",
+    "opcoes": [
+      "Portal do Mosteiro de Santa Cruz de Coimbra",
+      "Portal da Sé Velha",
+      "Portal dos Jerónimos",
+      "Portal da Batalha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Portal de Santa Cruz é um dos mais harmoniosos exemplos da escultura manuelina de inspiração renascentista.",
+    "fonte": "Mosteiro de Santa Cruz de Coimbra / DGPC",
+    "factClusterId": "fc_esc_portalsantacruzcoimbra_01"
+  },
+  {
+    "id": "CULT_ESC_0046",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que grande escultor quinhentista português de Coimbra («Diogo Pires, o Moço»), autor do túmulo de D. Diogo de Azambuja em Montemor-o-Velho e da estátua de São Teotónio, marcou a transição para o Renascimento?",
+    "opcoes": [
+      "Diogo Pires, o Velho",
+      "Diogo Pires, o Moço",
+      "Tomé Velho",
+      "Mestre Pero"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Diogo Pires o Moço assinou e datou dezenas de estátuas em pedra de Ançã com extraordinária pureza de linhas.",
+    "fonte": "Museu Nacional de Machado de Castro / DGPC",
+    "factClusterId": "fc_esc_diogopiresomoco_01"
+  },
+  {
+    "id": "CULT_ESC_0047",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que monumental presépio barroco de terracota policromada na Basílica da Estrela em Lisboa, composto por mais de 500 figuras esculpidas por Joaquim Machado de Castro entre 1781 e 1786 protegido numa redoma de vidro, é o:",
+    "opcoes": [
+      "Presépio da Sé de Lisboa",
+      "Presépio das Necessidades",
+      "Presépio da Basílica da Estrela (de Machado de Castro)",
+      "Presépio de Mafra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O presépio da Estrela foi encomendado pela Rainha D. Maria I e reúne cenas da Natividade entrelaçadas com os costumes e tipos populares de Lisboa setecentista.",
+    "fonte": "Basílica da Estrela / Patriarcado de Lisboa",
+    "factClusterId": "fc_esc_presepioestrelamachadodecastro_01"
+  },
+  {
+    "id": "CULT_ESC_0048",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que escultura pública em bronze no Jardim do Carregal no Porto, esculpida por Soares dos Reis em homenagem ao médico cirurgião que curou a sua mãe, é:",
+    "opcoes": [
+      "Monumento a Soares dos Reis",
+      "Monumento a Camilo Castelo Branco",
+      "Monumento ao Duque da Ribeira",
+      "Monumento a Abel Salazar e Dr. Ferreira da Silva"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Porto acolhe dezenas de estátuas de homenagem cívica de Soares dos Reis e dos seus discípulos.",
+    "fonte": "Museu Nacional de Soares dos Reis / CMP",
+    "factClusterId": "fc_esc_soaresdosreis_portoobras_01"
+  },
+  {
+    "id": "CULT_ESC_0049",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que estátua em bronze do poeta Luís Vaz de Camões inaugurada em 1867 na Praça Luís de Camões em Lisboa, esculpida por Victor Bastos com oito estátuas menores de vultos da cultura quinhentista na base, é o:",
+    "opcoes": [
+      "Monumento a Luís de Camões (no Chiado)",
+      "Monumento a Fernando Pessoa",
+      "Monumento a Eça de Queirós",
+      "Monumento a Garrett"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A inauguração do monumento a Camões em 1867 foi a maior festa cívica e literária de Lisboa no século XIX.",
+    "fonte": "Câmara Municipal de Lisboa / Museu de Lisboa",
+    "factClusterId": "fc_esc_monumentocamoes1867_01"
+  },
+  {
+    "id": "CULT_ESC_0050",
+    "tema": "Cultura",
+    "subtema": "Escultura",
+    "pergunta": "Que estátua em bronze de D. Pedro IV no centro da Praça do Rossio em Lisboa, inaugurada em 1870 pelo escultor francês Gabriel Davioud e Elias Robert no cimo de uma coluna coríntia de 27 metros com as quatro virtudes na base, é o:",
+    "opcoes": [
+      "Monumento aos Restauradores",
+      "Estátua de D. José I",
+      "Monumento a D. Pedro IV (Coluna de D. Pedro IV no Rossio)",
+      "Monumento a D. João I"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As quatro estátuas femininas na base da coluna representam a Justiça, a Prudência, a Fortaleza e a Moderação.",
+    "fonte": "Câmara Municipal de Lisboa / EGEAC",
+    "factClusterId": "fc_esc_colunadpedroivrossio_01"
+  }
+]

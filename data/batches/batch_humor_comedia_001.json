@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HUM_COM_0001",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que revolucionário programa de sketches e humor de autor estreado na RTP1 em 1983 («O Tal Canal»), da autoria de Herman José, parodiou a grelha de uma estação de televisão inteira criando personagens míticas como o cantor emigrante «Tony Silva», «Nelito», «Hermanias» e «Filipa Vasconcelos»?",
+    "opcoes": [
+      "O Tal Canal (1983)",
+      "Hermanias",
+      "Humor de Perdição",
+      "Casino Royal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "'O Tal Canal' marcou o nascimento do humor moderno na televisão portuguesa e é considerado pela crítica uma obra-prima audiovisual.",
+    "fonte": "RTP Arquivos / Dicionário de Televisão Portuguesa / Herman José",
+    "factClusterId": "fc_hum_com_otalcanal_1983_01"
+  },
+  {
+    "id": "HUM_COM_0002",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que célebre personagem moralista e beata criada e interpretada por Herman José («Diácono Remédios»), celebrizou o bordão satírico «Não havia nexexidade!» para censurar qualquer manifestação de liberdade e alegria?",
+    "opcoes": [
+      "Serafim Saudade",
+      "Diácono Remédios («Não havia nexexidade!»)",
+      "José Estebes",
+      "Lauro Dérmio"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Diácono Remédios surgiu no programa 'Hermanias' em 1984 criticando o mundanismo com a sua pronúncia arrastada em 'x'.",
+    "fonte": "RTP Arquivos / Herman José Oficial",
+    "factClusterId": "fc_hum_com_diaconoremedios_01"
+  },
+  {
+    "id": "HUM_COM_0003",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que lendário quarteto de humoristas portugueses formado por Ricardo Araújo Pereira, Zé Diogo Quintela, Miguel Góis e Tiago Dores («Gato Fedorento»), revolucionou o humor televisivo português a partir de 2003 com as séries «Fonseca», «Meireles», «Barbosa» e «Lopes da Silva»?",
+    "opcoes": [
+      "Os Contemporâneos",
+      "Commedia a la Carte",
+      "Gato Fedorento",
+      "Porta dos Fundos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Gato Fedorento apresentaram depois 'Diz Que É Uma Espécie de Magazine' (RTP1) e 'Esmiúça os Sufrágios' (SIC) tornando-se o maior fenómeno do humor português nos anos 2000.",
+    "fonte": "SIC Radical / RTP / Produções Fictícias",
+    "factClusterId": "fc_hum_com_gatofedorento_01"
+  },
+  {
+    "id": "HUM_COM_0004",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que aclamado e líder talk-show semanal de humor e sátira política na SIC apresentado por Ricardo Araújo Pereira nas noites de domingo («Isto É Gozar Com Quem Trabalha»), analisa a atualidade nacional com convidados políticos e sketches satíricos?",
+    "opcoes": [
+      "Gente Que Não Sabe Estar",
+      "Governo Sombra",
+      "Programa da Tarde",
+      "Isto É Gozar Com Quem Trabalha (SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O programa conta com a colaboração de Miguel Góis, Zé Diogo Quintela, Guilherme Fonseca, Joana Marques e Cátia Domingues.",
+    "fonte": "SIC / Altice Arena / Kilt Produções",
+    "factClusterId": "fc_hum_com_istoegozarcomquemtrabalha_01"
+  },
+  {
+    "id": "HUM_COM_0005",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que fenómeno espontâneo de diretos no Instagram criado pelo humorista Bruno Nogueira durante o confinamento geral da pandemia de COVID-19 em março/abril de 2020 («Como É Que o Bicho Mexe?»), reuniu diariamente mais de 150.000 pessoas em direto até ao espetáculo final de Natal?",
+    "opcoes": [
+      "Como É Que o Bicho Mexe? (Bruno Nogueira)",
+      "Último a Sair",
+      "Tubo de Ensaio",
+      "Princípio, Meio e Fim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O programa contou com intervenções de Nuno Markl, João Manzarra, Nuno Lopes, Albano Jerónimo, Mariana Camacho e Salvador Martinha, tornando-se um marco de alento emocional nacional.",
+    "fonte": "Força de Produção / Instagram / SIC",
+    "factClusterId": "fc_hum_com_comoeequeobichomexe_2020_01"
+  },
+  {
+    "id": "HUM_COM_0006",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que histórica e inesquecível frase («Ó Evaristo, tens cá disto?») foi dita pelo ator Vasco Santana (no papel de Narciso) a António Silva (Evaristo) na clássica comédia de ouro do cinema português de 1942:",
+    "opcoes": [
+      "A Canção de Lisboa (1933)",
+      "O Pátio das Cantigas (1942, de Ribeirinho)",
+      "O Costa do Castelo (1943)",
+      "O Leão da Estrela (1947)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A cena da discussão e do desafio da garrafa entre Narciso e Evaristo na noite de Santo António na vila lisboeta é o diálogo mais famoso do cinema português.",
+    "fonte": "Cinemateca Portuguesa / Tóbis Portuguesa",
+    "factClusterId": "fc_hum_com_opatiodascantigas_1942_01"
+  },
+  {
+    "id": "HUM_COM_0007",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que brilhante filme de comédia sonora de 1933 realizado por Cottinelli Telmo («A Canção de Lisboa»), primeiro filme integralmente sonoro rodado nos estúdios da Tóbis em Lisboa, imortalizou Vasco Santana no papel do estudante de medicina «Vasco Leitão» e o bordão:",
+    "opcoes": [
+      "«Não havia nexexidade!»",
+      "«Isto anda tudo ligado!»",
+      "«Chapéus há muitos, seu palerma!»",
+      "«Bota a mão na cabeça!»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O filme contou também com Beatriz Costa cantando 'A Agulha e o Dedal' e António Silva no papel do alfaiate Caetano.",
+    "fonte": "Cinemateca Portuguesa / Tóbis Portuguesa",
+    "factClusterId": "fc_hum_com_acancaodelisboa_1933_01"
+  },
+  {
+    "id": "HUM_COM_0008",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que clássica comédia de 1947 realizada por Arthur Duarte («O Leão da Estrela»), acompanha as peripécias de Anastácio da Silva (interpretado por António Silva), um fervoroso adepto do Sporting que finge ser milionário para ir ao Porto ver o clássico contra o FC Porto?",
+    "opcoes": [
+      "O Costa do Castelo",
+      "A Menina da Rádio",
+      "Sonhar É Fácil",
+      "O Leão da Estrela (1947)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O filme gerou frases icónicas sobre o fanatismo clubístico e rivalidades desportivas familiares.",
+    "fonte": "Cinemateca Portuguesa / Arthur Duarte",
+    "factClusterId": "fc_hum_com_oleaodaestrela_1947_01"
+  },
+  {
+    "id": "HUM_COM_0009",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que genial comédia de culto do cinema independente nortenho realizada por Luís Ismael («Balas & Bolinhos», 2001), acompanha as desventuras criminosas e hilariantes do gangue liderado por Tone com os seus compinchas Culatra, Rato e Bino?",
+    "opcoes": [
+      "Balas & Bolinhos (Luís Ismael)",
+      "Capitão Falcão",
+      "7 Pecados Rurais",
+      "Zona J"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A saga 'Balas & Bolinhos' gerou quatro filmes de enorme êxito de bilheteira sendo um fenómeno sociológico no Norte de Portugal.",
+    "fonte": "Lightbox Produções / ICA",
+    "factClusterId": "fc_hum_com_balasebolinhos_01"
+  },
+  {
+    "id": "HUM_COM_0010",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que brilhante e premiada série de falso reality show (mockumentary) exibida na RTP1 em 2011 («Último a Sair»), criada por Bruno Nogueira, Frederico Pombares e João Quadros, parodiou os reality shows portugueses com o cantor Roberto Leal e Luciana Abreu?",
+    "opcoes": [
+      "Odisseia",
+      "Último a Sair (2011)",
+      "Os Contemporâneos",
+      "Casa dos Segredos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O programa levou muitos espetadores a acreditar no início que se tratava de um reality show verdadeiro e venceu o Prémio Autores da SPA de Melhor Programa de Entretenimento.",
+    "fonte": "RTP1 / SPA / Até ao Fim do Mundo",
+    "factClusterId": "fc_hum_com_ultimoasair_2011_01"
+  },
+  {
+    "id": "HUM_COM_0011",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que emblemático programa de sketches de humor da RTP1 exibido entre 2008 e 2009 («Os Contemporâneos»), reuniu no elenco Bruno Nogueira, Nuno Lopes, Eduardo Madeira, Manuel Marques, Carla Vasconcelos, Maria Flor e Dinarte Branco?",
+    "opcoes": [
+      "Estado de Graça",
+      "Gato Fedorento",
+      "Os Contemporâneos (RTP1)",
+      "Herman Enciclopédia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O programa parodiou a política e os costumes contemporâneos com o 'Panflato', 'O Chato' e 'As Grandes Questões da Humanidade'.",
+    "fonte": "RTP1 / Produções Fictícias",
+    "factClusterId": "fc_hum_com_oscontemporaneos_2008_01"
+  },
+  {
+    "id": "HUM_COM_0012",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que histórico programa de anedotas dramatizadas exibido pela SIC durante 15 anos entre 1995 e 2010 («Os Malucos do Riso»), produzido pela Spress e realizado por Jorge Marecos Duarte, celebrizou personagens como o «Alentejano», o «Bêbado» e as gargalhadas mecânicas gravadas?",
+    "opcoes": [
+      "Camilo & Filho Lda.",
+      "Prédio do Vasco",
+      "Batanetes",
+      "Os Malucos do Riso (SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "'Os Malucos do Riso' foi um dos maiores sucessos diários de audiência da televisão portuguesa e deu origem a várias versões de verão.",
+    "fonte": "SIC Arquivos / Spress",
+    "factClusterId": "fc_hum_com_malucosdoriso_1995_01"
+  },
+  {
+    "id": "HUM_COM_0013",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que lendário ator e comediante português (1924-2016), Camilo de Oliveira («Camilo de Oliveira»), protagonizou durante décadas séries de comédia de enorme sucesso na SIC como «Camilo & Filho Lda.», «As Aventuras do Camilo», «Camilo na Prisão» e «A Loja do Camilo»?",
+    "opcoes": [
+      "Camilo de Oliveira",
+      "Raul Solnado",
+      "Nicolau Breyner",
+      "António Feio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Camilo de Oliveira formou com Nuno Melo uma das duplas mais hilariantes da ficção televisiva portuguesa.",
+    "fonte": "SIC Arquivos / Teatro Maria Vitória",
+    "factClusterId": "fc_hum_com_camilodeoliveira_01"
+  },
+  {
+    "id": "HUM_COM_0014",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que grande senhor do humor e teatro português (1929-2009), Raul Solnado («Raul Solnado»), fez rir gerações com o lendário monólogo pacifista «A Guerra de 1908» («Fizemos uma guerra para lá das quatro e meia...») e apresentou programas históricos como «1-2-3» e «Visita de Saúde»?",
+    "opcoes": [
+      "Vasco Santana",
+      "Raul Solnado (O Monólogo da Guerra)",
+      "António Silva",
+      "Herman José"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Raul Solnado fundou o Teatro Villaret em Lisboa e a Casa do Artista para acolher artistas idosos na reforma.",
+    "fonte": "RTP Arquivos / Casa do Artista",
+    "factClusterId": "fc_hum_com_raulsolnado_aguerra_01"
+  },
+  {
+    "id": "HUM_COM_0015",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que famosa dupla de comédia formada por João Paulo Rodrigues e Pedro Alves («Quim Roscas e Zeca Estacionâncio»), criou o noticiário rural satírico «Tele Rural» e a fictícia e tresloucada aldeia de «Curral de Moinas»?",
+    "opcoes": [
+      "Nilton e Aldo Lima",
+      "Gato Fedorento",
+      "Quim Roscas e Zeca Estacionâncio (Tele Rural)",
+      "Marafados do Riso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A dupla protagonizou os filmes '7 Pecados Rurais' (2013) e 'Curral de Moinas — Os Banqueiros do Povo' (2022) com grande sucesso de bilheteira.",
+    "fonte": "RTP1 / Cinemundo / Vozes Animadas",
+    "factClusterId": "fc_hum_com_telerural_curraldemoinas_01"
+  },
+  {
+    "id": "HUM_COM_0016",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que famosa série satírica e paródia aos melodramas das telenovelas portuguesas exibida na RTP1 («Pôr do Sol», 2021-2022), criada por Henrique Dias, Manuel Pureza e Rui Melo, celebrizou a herdade da família «Bourbon de Linhaça» e a banda fictícia de rock «Jesus Quisto»?",
+    "opcoes": [
+      "Vila Faia",
+      "A Banqueira do Povo",
+      "O Último a Sair",
+      "Pôr do Sol (RTP1 / Netflix)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A banda Jesus Quisto transcendeu a televisão atuando ao vivo em festivais como o Super Bock Super Rock e o Festival de Vilar de Mouros.",
+    "fonte": "Coyote Vadio / RTP1 / Netflix",
+    "factClusterId": "fc_hum_com_pordosol_jesusquisto_01"
+  },
+  {
+    "id": "HUM_COM_0017",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que hilariante e aclamado filme de comédia e sátira retro-futurista de 2015 realizado por João Leitão («Capitão Falcão»), acompanha um patriota fascista e super-herói de capa encarnada (interpretado por Gonçalo Waddington) que luta contra a ameaça dos «comunistas e capitães de Abril»?",
+    "opcoes": [
+      "Capitão Falcão (Gonçalo Waddington)",
+      "Balas & Bolinhos",
+      "O Pátio das Cantigas",
+      "Linhas de Sangue"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O filme venceu 6 Prémios Sophia da Academia Portuguesa de Cinema tornando-se um filme de culto imediato.",
+    "fonte": "Academia Portuguesa de Cinema / ICA",
+    "factClusterId": "fc_hum_com_capitaofalcao_2015_01"
+  },
+  {
+    "id": "HUM_COM_0018",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que famoso remake moderno da comédia de ouro clássica portuguesa estreado em 2015 pelo realizador Leonel Vieira («O Pátio das Cantigas»), com César Mourão, Miguel Guilherme, Dânia Neto e Sara Matos, tornou-se o filme português mais visto de sempre nos cinemas com mais de 600.000 espetadores?",
+    "opcoes": [
+      "O Leão da Estrela (2015)",
+      "O Pátio das Cantigas (Remake de 2015)",
+      "A Canção de Lisboa (2016)",
+      "7 Pecados Rurais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme liderou as bilheteiras nacionais ultrapassando blockbusters de Hollywood nas salas portuguesas.",
+    "fonte": "ICA (Instituto do Cinema e do Audiovisual) / Stopline Films",
+    "factClusterId": "fc_hum_com_opatiodascantigas_remake2015_01"
+  },
+  {
+    "id": "HUM_COM_0019",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que popular e bem-sucedido programa de entretenimento e humor da RTP1 («Taskmaster Portugal»), adaptação do formato britânico apresentado pela dupla Vasco Palmeirim e Nuno Markl, põe concorrentes famosos a cumprir tarefas absurdas e hilariantes?",
+    "opcoes": [
+      "Isto É Gozar Com Quem Trabalha",
+      "Vale Tudo",
+      "Taskmaster Portugal (Vasco Palmeirim e Nuno Markl)",
+      "Joker"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O programa contou com concorrentes regulares como Toy, Cândido Costa, Inês Aires Pereira, Gilmário Vemba e Jessica Athayde.",
+    "fonte": "RTP1 / Avalon Television / Fremantle Portugal",
+    "factClusterId": "fc_hum_com_taskmasterportugal_01"
+  },
+  {
+    "id": "HUM_COM_0020",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que histórica e hilariante personagem criada por Herman José no talk-show «Parabéns» (1993), «José Estebes», adepto fervoroso e fanático do FC Porto de bigode farto e copo de vinho de três pipas na mão, celebrizou as tiradas «E não me venham com tangas!» e «Bota a mão na cabeça!»?",
+    "opcoes": [
+      "Serafim Saudade",
+      "Tony Silva",
+      "Lauro Dérmio",
+      "José Estebes (Herman José)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "José Estebes satirizava os dirigentes desportivos e adeptos do futebol com improvisos inesquecíveis.",
+    "fonte": "RTP Arquivos / Herman José",
+    "factClusterId": "fc_hum_com_joseestebes_1993_01"
+  },
+  {
+    "id": "HUM_COM_0021",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que icónica dupla de charlatões vendedores da televendas criada por Herman José e José Pedro Gomes no programa Casino Royal («Mike & Melga»), vendia invenções estapafúrdias com o jargão rápido «Compre já!» e «Corta as unhas dos pés e tira nódoas da gravata!»?",
+    "opcoes": [
+      "Mike & Melga (Herman José e José Pedro Gomes)",
+      "Artur Sanches e Denis",
+      "Os Batanetes",
+      "Os Malucos do Riso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Mike e Melga parodiavam com virtuosismo os anúncios americanos de televendas com produtos absurdos como o 'Faca Laser'.",
+    "fonte": "RTP Arquivos / Casino Royal (1990)",
+    "factClusterId": "fc_hum_com_mikeemelga_1990_01"
+  },
+  {
+    "id": "HUM_COM_0022",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que famosa série de comédia dos anos 1990 escrita por Ana Bola («A Mulher do Senhor Ministro»), satirizava o quotidiano e as manias de grandeza de Lola Cordeiro (Ana Bola), casada com um ministro do governo (interpretado por Victor de Sousa)?",
+    "opcoes": [
+      "Dona Pura e os Camaradas d'Alvalade",
+      "A Mulher do Senhor Ministro (Ana Bola)",
+      "Débora",
+      "A Banqueira do Povo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A série deu origem à personagem Débora que mais tarde ganhou a sua própria série independente na RTP.",
+    "fonte": "RTP Arquivos / Ana Bola",
+    "factClusterId": "fc_hum_com_amulherdosenhorministro_01"
+  },
+  {
+    "id": "HUM_COM_0023",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que influente programa de rádio e debate político-satírico de grande sucesso («Governo Sombra» / rebatizado «Programa Cujo Nome Estamos Legalmente Impedidos de Dizer»), reúne Carlos Vaz Marques, Ricardo Araújo Pereira, Pedro Mexia e João Miguel Tavares?",
+    "opcoes": [
+      "Eixo do Mal",
+      "Sem Moderação",
+      "Governo Sombra / Programa Cujo Nome Estamos Legalmente Impedidos de Dizer",
+      "Tubo de Ensaio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O programa começou na TSF em 2008, passou pela TVI24 e mudou-se para a SIC Notícias em 2020 vencendo o Prémio Autores da SPA.",
+    "fonte": "TSF / SIC Notícias / SPA",
+    "factClusterId": "fc_hum_com_governosombra_01"
+  },
+  {
+    "id": "HUM_COM_0024",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que talentoso comediante, ator e apresentador lisboeta (nascido em 1979), César Mourão («César Mourão»), destaca-se pelo génio do improviso ao vivo nos «Commedia a la Carte» e no programa de sucesso da SIC «Terra Nossa»?",
+    "opcoes": [
+      "Eduardo Madeira",
+      "Fernando Rocha",
+      "Rui Unas",
+      "César Mourão (Commedia a la Carte / Terra Nossa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "No 'Terra Nossa', César Mourão viaja pelas localidades de Portugal homenageando figuras e costumes populares com enorme empatia e humor.",
+    "fonte": "SIC / Commedia a la Carte / Warner Bros. Discovery",
+    "factClusterId": "fc_hum_com_cesarmourao_terranossa_01"
+  },
+  {
+    "id": "HUM_COM_0025",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que popular e irreverente comediante de Rio Tinto (Gondomar, nascido em 1975), Fernando Rocha («Fernando Rocha»), celebrizou-se pela rapidez do seu repertório de anedotas no programa «Levanta-te e Ri» da SIC?",
+    "opcoes": [
+      "Fernando Rocha (Levanta-te e Ri)",
+      "Francisco Menezes",
+      "Hugo Sousa",
+      "Nilton"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "'Levanta-te e Ri' foi o programa pioneiro de stand-up comedy transmitido em direto nas madrugadas da SIC no início dos anos 2000.",
+    "fonte": "SIC Arquivos / Levanta-te e Ri",
+    "factClusterId": "fc_hum_com_fernandorocha_levantateeri_01"
+  },
+  {
+    "id": "HUM_COM_0026",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que programa matinal e rubrica diária da Rádio Renascença conduzida por Joana Marques («Extremamente Desagradável»), disseca com ironia mordaz as gafes de figuras públicas e influenciadores digitais, tornando-se o podcast mais ouvido de Portugal?",
+    "opcoes": [
+      "O Homem Que Mordeu o Cão",
+      "Extremamente Desagradável (Joana Marques)",
+      "Tubo de Ensaio",
+      "Mata-Bicho"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Joana Marques esgotou os Coliseus de Lisboa e Porto e a Altice Arena com o espetáculo 'Desconfia' baseado na rubrica.",
+    "fonte": "Rádio Renascença / Globos de Ouro",
+    "factClusterId": "fc_hum_com_joanamarques_extremamentedesagradavel_01"
+  },
+  {
+    "id": "HUM_COM_0027",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que histórica e longeva rubrica de rádio criada por Nuno Markl em 1997 na Rádio Comercial («O Homem Que Mordeu o Cão»), relata notícias insólitas e bizarras de todo o mundo, tendo gerado livros, jogos de tabuleiro e espetáculos de teatro?",
+    "opcoes": [
+      "Caderneta de Cromos",
+      "Extremamente Desagradável",
+      "O Homem Que Mordeu o Cão (Nuno Markl)",
+      "Grandes Quadros da História"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A rubrica está no ar há mais de 25 anos nas manhãs da Rádio Comercial ao lado de Vasco Palmeirim, Pedro Ribeiro e Vera Fernandes.",
+    "fonte": "Rádio Comercial / Media Capital",
+    "factClusterId": "fc_hum_com_nunomarkl_homemquemordeucaocomercial_01"
+  },
+  {
+    "id": "HUM_COM_0028",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que influente empresa e coletivo de argumentistas fundado em 1993 por Nuno Artur Silva e Rui Cardoso Martins («Produções Fictícias»), foi a responsável pelos guiões dos programas mais marcantes da comédia portuguesa como Herman Enciclopédia, Contra Informação e Inimigo Público?",
+    "opcoes": [
+      "Coral Europa",
+      "Shine Iberia",
+      "Plural Entertainment",
+      "Produções Fictícias (Nuno Artur Silva)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As Produções Fictícias foram o viveiro criativo onde despontaram Ricardo Araújo Pereira, Nuno Markl, Zé Diogo Quintela e Bruno Nogueira.",
+    "fonte": "Produções Fictícias / O Inimigo Público / RTP",
+    "factClusterId": "fc_hum_com_producoesficticias_1993_01"
+  },
+  {
+    "id": "HUM_COM_0029",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que lendário programa satírico de marionetas da RTP1 exibido diariamente entre 1996 e 2010 («Contra Informação»), parodiava os políticos e dirigentes desportivos portugueses com bonecos como «Toninho Guterres», «Santana Flopes» e «Pinto da Chucha»?",
+    "opcoes": [
+      "Contra Informação (RTP1, 1996-2010)",
+      "Spitting Image",
+      "Os Bonecos da Bola",
+      "Jornal de Sexta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O programa foi inspirado no francês 'Les Guignols de l'Info' e venceu vários prémios europeus de sátira política.",
+    "fonte": "RTP Arquivos / Produções Fictícias",
+    "factClusterId": "fc_hum_com_contrainformacao_1996_01"
+  },
+  {
+    "id": "HUM_COM_0030",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que célebre e premiado ator cómico português (nascido em 1968), Joaquim Monchique («Joaquim Monchique»), celebrizou-se pelos seus papéis camaleónicos no programa Herman Enciclopédia (como a «Super Tia») e pela comédia teatral «Parvoice Empinada»?",
+    "opcoes": [
+      "Manuel Marques",
+      "Joaquim Monchique",
+      "Eduardo Madeira",
+      "José Pedro Gomes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Monchique protagonizou também a comédia 'Enfim, Sós' e 'God' enchendo salas de teatro por todo o país.",
+    "fonte": "Teatro Maria Matos / Força de Produção",
+    "factClusterId": "fc_hum_com_joaquimmonchique_01"
+  },
+  {
+    "id": "HUM_COM_0031",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que famosa dupla de comédia teatral formada por António Feio e José Pedro Gomes («Conversa da Treta»), estreou em 1997 a histórica conversa de café entre as personagens Zezé e Tóni, gerando filme, série de TV e peças de enorme sucesso?",
+    "opcoes": [
+      "Commedia a la Carte",
+      "Os Contemporâneos",
+      "Conversa da Treta (António Feio e José Pedro Gomes)",
+      "Dez Mandamentos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Escrita por José Fanha e Rui Cardoso Martins, 'Conversa da Treta' imortalizou o linguajar 'pato-bravo' e popular lisboeta.",
+    "fonte": "Teatro Villaret / Produções Fictícias / SPA",
+    "factClusterId": "fc_hum_com_conversadatreta_1997_01"
+  },
+  {
+    "id": "HUM_COM_0032",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que emblemático ator, realizador e produtor português (1933-2016), Nicolau Breyner («Nicolau Breyner»), criou com Herman José a mítica dupla cómica «Senhor Feliz e Senhor Contente» no programa Nicolau no País das Maravilhas (1975)?",
+    "opcoes": [
+      "Raul Solnado",
+      "Armando Cortez",
+      "Camilo de Oliveira",
+      "Nicolau Breyner (Senhor Feliz e Senhor Contente)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O 'Senhor Feliz e Senhor Contente' foi o primeiro grande êxito televisivo nacional de Herman José ao lado do veterano Nicolau Breyner.",
+    "fonte": "RTP Arquivos / Cinemateca Portuguesa",
+    "factClusterId": "fc_hum_com_nicolaubreyner_senhorfeliz_01"
+  },
+  {
+    "id": "HUM_COM_0033",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que clássica comédia de 1943 realizada por Arthur Duarte («O Costa do Castelo»), protagonizada por António Silva e pela jovem Milú cantando a emblemática canção «Apanhar o Trévoledo», retratou a vida alegre de uma pensão típica na encosta do Castelo de São Jorge?",
+    "opcoes": [
+      "O Costa do Castelo (1943)",
+      "A Menina da Rádio",
+      "O Pátio das Cantigas",
+      "Fado, História d'uma Cantadeira"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Milú tornou-se um símbolo de beleza e graciosidade do cinema clássico português interpretando Rosa Maria.",
+    "fonte": "Cinemateca Portuguesa / Arthur Duarte",
+    "factClusterId": "fc_hum_com_ocostadocastelo_1943_01"
+  },
+  {
+    "id": "HUM_COM_0034",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que comédia musical portuguesa de 1944 («A Menina da Rádio»), realizada por Arthur Duarte, retratou a rivalidade cómica entre duas estações de rádio locais de bairro com as interpretações geniais de Maria Matos e Óscar de Lemos?",
+    "opcoes": [
+      "O Costa do Castelo",
+      "A Menina da Rádio (1944)",
+      "Sonhar É Fácil",
+      "Ribatejo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria Matos brilhou no papel de D. Rosaura com a sua inigualável energia teatral.",
+    "fonte": "Cinemateca Portuguesa / Tóbis Portuguesa",
+    "factClusterId": "fc_hum_com_ameninadaradio_1944_01"
+  },
+  {
+    "id": "HUM_COM_0035",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que talentoso ator e imitador de Setúbal (nascido em 1968), Manuel Marques («Manuel Marques»), celebrizou-se pelas suas imitações perfeitas no Herman Enciclopédia, no programa Estado de Graça e no papel de Nando na novela de comédia Festa é Festa?",
+    "opcoes": [
+      "Eduardo Madeira",
+      "Rui Melo",
+      "Manuel Marques",
+      "Pedro Alves"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Manuel Marques é irmão da apresentadora Ana Marques e mestre na imitação vocal e corporal de figuras públicas.",
+    "fonte": "RTP1 / TVI / Plural Entertainment",
+    "factClusterId": "fc_hum_com_manuelmarques_01"
+  },
+  {
+    "id": "HUM_COM_0036",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que versátil humorista e escritor de Alenquer (nascido em 1972), Eduardo Madeira («Eduardo Madeira»), destacou-se por personagens memoráveis como o fadista «Tó Ferreira», participações em Os Contemporâneos, Estado de Graça e no filme Tiro e Queda?",
+    "opcoes": [
+      "Manuel Marques",
+      "António Machado",
+      "João Paulo Rodrigues",
+      "Eduardo Madeira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Eduardo Madeira foi também um dos argumentistas de programas de humor de Herman José e autor de livros cómicos.",
+    "fonte": "RTP1 / TVI / Produções Fictícias",
+    "factClusterId": "fc_hum_com_eduardomadeira_01"
+  },
+  {
+    "id": "HUM_COM_0037",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que pioneiro programa de rádio e comédia de improviso transmitido pela TSF nos anos 1990 («O Fiel Inimigo»), deu visibilidade pública a nomes incontornáveis do humor português contemporâneo?",
+    "opcoes": [
+      "O Fiel Inimigo (TSF)",
+      "Tubo de Ensaio",
+      "Governo Sombra",
+      "Radicais Livres"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A TSF foi pioneira em dar espaço radiofónico ao humor satírico no pós-25 de Abril.",
+    "fonte": "TSF Rádio Notícias / Arquivo Sonoro",
+    "factClusterId": "fc_hum_com_ofielinimigo_tsf_01"
+  },
+  {
+    "id": "HUM_COM_0038",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que célebre personagem de cantora romântica de cabaret criada por Herman José («Serafim Saudade»), vestida de fato branco e cravo na lapela, celebrizou a canção «Eu sou aquele que tu sabes bem... / Um canário a cantar!»?",
+    "opcoes": [
+      "Tony Silva",
+      "Serafim Saudade (Herman José)",
+      "Nelito",
+      "Artur Sanches"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Serafim Saudade parodiava os cantores de charme da música ligeira e as suas pretensões românticas.",
+    "fonte": "RTP Arquivos / Hermanias",
+    "factClusterId": "fc_hum_com_serafimsaudade_01"
+  },
+  {
+    "id": "HUM_COM_0039",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que programa inovador da SIC apresentado por Bruno Nogueira em 2022 («Tabu»), abordou com sensibilidade, empatia e humor temas difíceis e minorias (como deficiências físicas, doenças mentais e obesidade), mostrando que o riso pode ser inclusivo?",
+    "opcoes": [
+      "Como É Que o Bicho Mexe?",
+      "Último a Sair",
+      "Tabu (Bruno Nogueira)",
+      "Gente da Minha Terra"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O formato adaptado da Bélgica foi amplamente elogiado pela crítica e pelo público pela sua humanidade e inteligência.",
+    "fonte": "SIC / Fremantle Portugal",
+    "factClusterId": "fc_hum_com_tabu_brunonogueira_01"
+  },
+  {
+    "id": "HUM_COM_0040",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que comediante e autor angolano-português (nascido em Luanda em 1981), Gilmário Vemba («Gilmário Vemba»), ex-membro dos «Os Tuneza», conquistou enorme popularidade em Portugal com espetáculos a solo e no programa Taskmaster?",
+    "opcoes": [
+      "Calado Show",
+      "Tigre",
+      "Costa Neto",
+      "Gilmário Vemba"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Gilmário Vemba é uma das maiores figuras do stand-up comedy da lusofonia com digressões esgotadas em Portugal e Angola.",
+    "fonte": "RTP1 / Rádio Comercial / Karga Eventos",
+    "factClusterId": "fc_hum_com_gilmariovemba_01"
+  },
+  {
+    "id": "HUM_COM_0041",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que comediante, guionista e podcaster lisboeta (nascido em 1989), Guilherme Geirinhas («Guilherme Geirinhas»), celebrizou-se com vídeos virais na internet e pelo aclamado programa de entrevistas e mockumentary «Vai Correr Tudo Bem»?",
+    "opcoes": [
+      "Guilherme Geirinhas",
+      "Diogo Batáguas",
+      "Carlos Coutinho Vilhena",
+      "Manuel Cardoso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Guilherme Geirinhas é licenciado em Economia e é um dos nomes de referência da nova geração de criadores digitais de comédia.",
+    "fonte": "YouTube / Bumerangue / Kilt",
+    "factClusterId": "fc_hum_com_guilhermegeirinhas_01"
+  },
+  {
+    "id": "HUM_COM_0042",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que popular comediante e YouTuber de Sintra (nascido em 1985), Diogo Batáguas («Diogo Batáguas»), destacou-se pelo seu programa mensal de crítica e sátira à atualidade no YouTube «Relatório DB» com milhões de visualizações?",
+    "opcoes": [
+      "Carlos Coutinho Vilhena",
+      "Diogo Batáguas (Relatório DB)",
+      "Guilherme Duarte",
+      "Rui Sinel de Cordes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Diogo Batáguas esgotou a Super Bock Arena no Porto e o Campo Pequeno em Lisboa com os seus espetáculos de stand-up ao vivo.",
+    "fonte": "YouTube / Relatório DB / Altice Arena",
+    "factClusterId": "fc_hum_com_diogobataguas_01"
+  },
+  {
+    "id": "HUM_COM_0043",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que criador de conteúdos e comediante da Buraca (nascido em 1985), Guilherme Duarte («Guilherme Duarte»), engenheiro informático de formação, ganhou enorme notoriedade com o blogue satírico «Por Falar Noutra Coisa»?",
+    "opcoes": [
+      "Diogo Batáguas",
+      "Hugo van der Ding",
+      "Guilherme Duarte (Por Falar Noutra Coisa)",
+      "Luís Franco-Bastos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Guilherme Duarte é autor de vários livros e podcasts como 'Sem Remorsos' e 'Dumbass'.",
+    "fonte": "Por Falar Noutra Coisa / Bertrand Editora",
+    "factClusterId": "fc_hum_com_guilhermeduarte_01"
+  },
+  {
+    "id": "HUM_COM_0044",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que talentoso imitador e humorista lisboeta (nascido em 1987), Luís Franco-Bastos («Luís Franco-Bastos»), celebrizou-se pelas suas imitações cirúrgicas de futebolistas como Cristiano Ronaldo, Jorge Jesus e comentadores desportivos?",
+    "opcoes": [
+      "Pedro Granger",
+      "Alexandre Santos",
+      "Rui Unas",
+      "Luís Franco-Bastos"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Luís Franco-Bastos apresentou os solos 'Papel Principal', 'Voz da Razão' e 'Diogo' aclamados pela crítica e pelo público.",
+    "fonte": "Kilt Produções / Rádio Comercial",
+    "factClusterId": "fc_hum_com_luisfrancobastos_01"
+  },
+  {
+    "id": "HUM_COM_0045",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que ilustrador, historiador e humorista português (Hugo van der Ding), criou a célebre personagem desenhada «A Criada Malcriada» e a rubrica histórica cómica na Antena 3 «Vamos Todos Morrer»?",
+    "opcoes": [
+      "Hugo van der Ding (Vamos Todos Morrer)",
+      "Nuno Markl",
+      "Pedro Mexia",
+      "Carlos Vaz Marques"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Hugo van der Ding relata as biografias das figuras históricas com humor mordaz e transformou a rubrica em espetáculos teatrais.",
+    "fonte": "Antena 3 / RTP Play / Companhia de Teatro",
+    "factClusterId": "fc_hum_com_hugovanderding_01"
+  },
+  {
+    "id": "HUM_COM_0046",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que popular comediante e apresentador lisboeta (nascido em 1974), Rui Unas («Rui Unas»), conduziu o inovador programa da SIC Radical «Curto Circuito» nos anos 2000 e o podcast pioneiro em formato de vídeo «Maluco Beleza»?",
+    "opcoes": [
+      "Fernando Alvim",
+      "Rui Unas (Maluco Beleza / Curto Circuito)",
+      "César Mourão",
+      "Pedro Ribeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rui Unas foi um dos primeiros apresentadores a explorar o potencial dos podcasts independentes de conversas em Portugal.",
+    "fonte": "SIC Radical / Maluco Beleza",
+    "factClusterId": "fc_hum_com_ruiunas_01"
+  },
+  {
+    "id": "HUM_COM_0047",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que carismático animador de rádio e comediante de Mafra (nascido em 1974), Fernando Alvim («Fernando Alvim»), criou o icónico programa da Antena 3 «Prova Oral» e eventos cómicos como os «Monstros do Ano» e o «Festival Termómetro»?",
+    "opcoes": [
+      "Nuno Markl",
+      "Rui Unas",
+      "Fernando Alvim (Prova Oral)",
+      "Pedro Fernandes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Fernando Alvim é uma figura emblemática das tardes da rádio pública há mais de 20 anos entrevistando personalidades da cultura.",
+    "fonte": "Antena 3 / RTP Play",
+    "factClusterId": "fc_hum_com_fernandoalvim_01"
+  },
+  {
+    "id": "HUM_COM_0048",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que programa de comédia de variedades transmitido na SIC nos anos 1990 («Biqueirão»), produzido por Herman José, lançou as bases do humor de sketch moderno nas televisões privadas?",
+    "opcoes": [
+      "Chuva de Estrelas",
+      "Roda dos Milhões",
+      "Ponto de Encontro",
+      "Biqueirão (SIC)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O programa contou com grandes nomes do humor e marcou a transição da ficção de entretenimento nos canais privados.",
+    "fonte": "SIC Arquivos / Herman José",
+    "factClusterId": "fc_hum_com_biqueirao_sic_01"
+  },
+  {
+    "id": "HUM_COM_0049",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que emblemática comédia cinematográfica de 2022 realizada por Manuel Pureza («Curral de Moinas — Os Banqueiros do Povo»), levou a dupla Quim e Zé a herdar um banco e a mudar-se para a alta finança de Lisboa?",
+    "opcoes": [
+      "Curral de Moinas — Os Banqueiros do Povo (2022)",
+      "7 Pecados Rurais",
+      "Balas & Bolinhos",
+      "O Leão da Estrela"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O filme foi o maior sucesso de bilheteira nacional do ano de 2022 ultrapassando os 300.000 espetadores.",
+    "fonte": "Cinemundo / ICA / Coyote Vadio",
+    "factClusterId": "fc_hum_com_curraldemoinas_filme2022_01"
+  },
+  {
+    "id": "HUM_COM_0050",
+    "tema": "Humor",
+    "subtema": "Comédia na TV & Cinema",
+    "pergunta": "Que programa satírico de culto dos anos 1980 na RTP1 («Humor de Perdição», 1987), escrito por Herman José e Miguel Esteves Cardoso, foi temporariamente suspenso pela administração da RTP devido ao célebre sketch sobre a:",
+    "opcoes": [
+      "Batalha de Aljubarrota",
+      "Padeira de Aljubarrota",
+      "Rainha Santa Isabel e o Milagre das Rosas",
+      "D. Afonso Henriques"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O sketch retratava D. Dinis e a Rainha Santa de forma irreverente gerando polémica e a célebre frase 'D. Dinis perguntou: Que levas no regaço?... E eram rosas!'.",
+    "fonte": "RTP Arquivos / Miguel Esteves Cardoso / Herman José",
+    "factClusterId": "fc_hum_com_humordeperdicao_1987_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUND_BAN_0001",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país asiático nos Himalaias (Nepal), possui a única bandeira nacional do mundo que não tem formato quadrilátero ou retangular, sendo formada por dois triângulos sobrepostos com os símbolos do Sol e da Lua?",
+    "opcoes": [
+      "Nepal",
+      "Butão",
+      "Mianmar",
+      "Sri Lanka"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A bandeira do Nepal simboliza os picos do Himalaia e as duas principais religiões do país: o hinduísmo e o budismo.",
+    "fonte": "Constituição do Nepal / FIAV (Federação Internacional de Associações Vexilológicas)",
+    "factClusterId": "fc_mund_ban_nepal_formato_01"
+  },
+  {
+    "id": "MUND_BAN_0002",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Quais são os dois únicos estados soberanos do mundo cujas bandeiras nacionais oficiais têm um formato perfeitamente quadrado (proporção 1:1)?",
+    "opcoes": [
+      "Mónaco e São Marino",
+      "Suíça e Vaticano (Santa Sé)",
+      "Bélgica e Luxemburgo",
+      "Liechtenstein e Andorra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Tanto a bandeira da Confederação Suíça (cruz branca sobre fundo vermelho) como a da Cidade do Vaticano têm o formato oficial quadrado 1:1.",
+    "fonte": "FIAV / Associação Vexilológica Internacional",
+    "factClusterId": "fc_mund_ban_suica_vaticano_quadradas_01"
+  },
+  {
+    "id": "MUND_BAN_0003",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país escandinavo («Dannebrog»), detém o Recorde Mundial do Guinness para a mais antiga bandeira nacional em uso contínuo ininterrupto do mundo (com registos históricos que remontam à Batalha de Lyndanisse em 1219)?",
+    "opcoes": [
+      "Suécia",
+      "Noruega",
+      "Dinamarca (Dannebrog)",
+      "Islândia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A bandeira dinamarquesa com a cruz nórdica branca sobre fundo vermelho inspirou todas as outras bandeiras dos países nórdicos.",
+    "fonte": "Guinness World Records / Rigsdagen da Dinamarca",
+    "factClusterId": "fc_mund_ban_dinamarca_dannebrog_1219_01"
+  },
+  {
+    "id": "MUND_BAN_0004",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que nação insular das Caraíbas (Jamaica), possui a única bandeira nacional do mundo atual que não contém nenhuma das três cores vexilológicas mais comuns: vermelho, branco ou azul?",
+    "opcoes": [
+      "Bahamas",
+      "Barbados",
+      "Trindade e Tobago",
+      "Jamaica (Verde, Preto e Amarelo Dourado em cruz de Santo André)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A bandeira jamaicana foi adotada na independência em 1962 com o lema 'As dificuldades existem (preto), mas a terra é verde e o sol brilha (ouro)'.",
+    "fonte": "Governo da Jamaica / FIAV",
+    "factClusterId": "fc_mund_ban_jamaica_cores_01"
+  },
+  {
+    "id": "MUND_BAN_0005",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país africano lusófono (Moçambique), possui a única bandeira nacional do mundo que exibe uma espingarda moderna de assalto (a célebre Kalashnikov AK-47 com baioneta calada cruzada com uma enxada sobre um livro aberto e estrela amarela)?",
+    "opcoes": [
+      "Moçambique",
+      "Angola",
+      "Guiné-Bissau",
+      "Zimbabwe"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os símbolos representam a defesa da pátria (espingarda), a produção agrícola (enxada), a educação (livro) e a esperança socialista (estrela).",
+    "fonte": "Constituição da República de Moçambique / FIAV",
+    "factClusterId": "fc_mund_ban_mocambique_ak47_01"
+  },
+  {
+    "id": "MUND_BAN_0006",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país africano lusófono (Cabo Verde), adotou em 1992 uma bandeira com fundo azul oceânico, três faixas branca-vermelha-branca e um círculo de dez estrelas amarelas de cinco pontas que representam as:",
+    "opcoes": [
+      "Dez décadas de luta pela independência",
+      "Dez ilhas principais que compõem o arquipélago cabo-verdiano",
+      "Dez províncias administrativas",
+      "Dez etnias fundadoras"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As 10 ilhas representadas são Santo Antão, São Vicente, Santa Luzia, São Nicolau, Sal, Boavista, Maio, Santiago, Fogo e Brava.",
+    "fonte": "Constituição da República de Cabo Verde / Assembleia Nacional",
+    "factClusterId": "fc_mund_ban_caboverde_10ilhas_01"
+  },
+  {
+    "id": "MUND_BAN_0007",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país sul-americano lusófono (Brasil), adotou a sua bandeira republicana em 1889 com o losango amarelo sobre fundo verde e a esfera celeste azul que ostenta o lema de inspiração positivista:",
+    "opcoes": [
+      "«Liberdade, Igualdade, Fraternidade»",
+      "«Deus, Pátria, Família»",
+      "«Ordem e Progresso»",
+      "«União e Liberdade»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A esfera celeste representa o céu da cidade do Rio de Janeiro na noite da Proclamação da República a 15 de novembro de 1889.",
+    "fonte": "Governo Federal do Brasil / Lei da Bandeira Nacional",
+    "factClusterId": "fc_mund_ban_brasil_ordemeprogresso_1889_01"
+  },
+  {
+    "id": "MUND_BAN_0008",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país africano lusófono (Angola), possui uma bandeira bicolor dividida horizontalmente em vermelho (o sangue derramado) e preto (o continente africano) com um emblema central amarelo composto por:",
+    "opcoes": [
+      "Uma foice e um martelo",
+      "Um leão e duas lanças",
+      "Um embondeiro e um sol",
+      "Um segmento de roda dentada, uma catana e uma estrela"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A roda dentada simboliza os trabalhadores industriais, a catana os camponeses e a produção agrícola e a estrela o progresso e solidariedade internacional.",
+    "fonte": "Constituição da República de Angola / Assembleia Nacional de Angola",
+    "factClusterId": "fc_mund_ban_angola_roda_catana_01"
+  },
+  {
+    "id": "MUND_BAN_0009",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país do sudeste asiático lusófono (Timor-Leste), restaurou em 2002 a sua bandeira histórica proclamada em 1975 com um triângulo amarelo (marcas do colonialismo), um triângulo preto (o obscurantismo a vencer), fundo vermelho e uma estrela branca de cinco pontas que simboliza:",
+    "opcoes": [
+      "A luz da paz e a liberdade que guia o povo",
+      "O Monte Ramelau",
+      "O Tratado de Tordesilhas",
+      "A riqueza do petróleo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A bandeira de Timor-Leste foi desenhada originalmente pela FRETILIN e consagrada na Constituição pós-independência de 2002.",
+    "fonte": "Parlamento Nacional de Timor-Leste / FIAV",
+    "factClusterId": "fc_mund_ban_timorleste_estrela_01"
+  },
+  {
+    "id": "MUND_BAN_0010",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país asiático insular («Japão» / Hinomaru / Nisshōki), ostenta na sua bandeira nacional um simples disco carmesim perfeitamente centrado sobre fundo branco que simboliza:",
+    "opcoes": [
+      "A flor de cerejeira",
+      "O Sol Nascente e a deusa solar Amaterasu",
+      "O Monte Fuji",
+      "A lua cheia de outono"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Japão é conhecido poeticamente como a 'Terra do Sol Nascente' e o símbolo solar remonta ao período Heian e às lendas imperiais.",
+    "fonte": "Gabinete do Primeiro-Ministro do Japão / National Flag Law 1999",
+    "factClusterId": "fc_mund_ban_japao_hinomaru_01"
+  },
+  {
+    "id": "MUND_BAN_0011",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país norte-americano («Canadá»), adotou em 1965 a célebre «Maple Leaf Flag» que ostenta ao centro uma folha de bordo vermelha estilizada com exatamente:",
+    "opcoes": [
+      "9 pontas",
+      "13 pontas",
+      "11 pontas",
+      "7 pontas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O desenho de 11 pontas foi escolhido após rigorosos testes em túnel de vento para manter a máxima legibilidade visual mesmo com vento forte.",
+    "fonte": "Government of Canada / Canadian Heritage",
+    "factClusterId": "fc_mund_ban_canada_mapleleaf_11pontas_01"
+  },
+  {
+    "id": "MUND_BAN_0012",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira nacional do Reino Unido («Union Jack» ou «Union Flag»), é formada pela sobreposição histórica das cruzes heráldicas dos santos padroeiros de que três nações constituintes?",
+    "opcoes": [
+      "Inglaterra, País de Gales e Escócia",
+      "Inglaterra, França e Irlanda",
+      "Grã-Bretanha, Canadá e Austrália",
+      "Inglaterra (São Jorge), Escócia (São André) e Irlanda (São Patrício)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O País de Gales não está representado na Union Jack porque já estava administrativamente unido ao Reino de Inglaterra quando a bandeira foi criada em 1606.",
+    "fonte": "College of Arms / The Flag Institute (UK)",
+    "factClusterId": "fc_mund_ban_reunido_unionjack_01"
+  },
+  {
+    "id": "MUND_BAN_0013",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira dos Estados Unidos da América («Stars and Stripes» / «Old Glory»), contém 50 estrelas brancas no cantão azul e exatamente 13 riscas horizontais (7 vermelhas e 6 brancas) que representam:",
+    "opcoes": [
+      "As 13 colónias britânicas originais que declararam a independência em 1776",
+      "Os primeiros 13 presidentes americanos",
+      "As 13 emendas à Constituição",
+      "Os 13 signatários da Carta dos Direitos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Sempre que um novo estado adere à União dos EUA, é adicionada uma nova estrela à bandeira no dia 4 de Julho seguinte.",
+    "fonte": "US Flag Code / Library of Congress",
+    "factClusterId": "fc_mund_ban_eua_starsandstripes_13riscas_01"
+  },
+  {
+    "id": "MUND_BAN_0014",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Qual é a diferença visual essencial entre a bandeira da Austrália e a da Nova Zelândia, ambas de fundo azul com a Union Jack no cantão superior esquerdo?",
+    "opcoes": [
+      "A Nova Zelândia tem um kiwi desenhado",
+      "A Austrália tem estrelas brancas de 7 pontas e a Commonwealth Star; a Nova Zelândia tem 4 estrelas vermelhas com bordo branco",
+      "A Austrália não tem a Union Jack",
+      "A Nova Zelândia tem o fundo preto"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Nova Zelândia representa as 4 estrelas principais da constelação do Cruzeiro do Sul em vermelho com bordo branco, enquanto a Austrália exibe 5 estrelas brancas mais a Estrela da Federação de 7 pontas.",
+    "fonte": "Australian Government / New Zealand Ministry for Culture and Heritage",
+    "factClusterId": "fc_mund_ban_australia_novazelandia_diferenca_01"
+  },
+  {
+    "id": "MUND_BAN_0015",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira nacional da Grécia («Galanolefki»), é composta por uma cruz branca no cantão e nove riscas horizontais azuis e brancas que correspondem historicamente:",
+    "opcoes": [
+      "Aos nove deuses do Olimpo",
+      "Aos nove mares da Grécia",
+      "Às nove sílabas do lema nacional grego «Eleftheria i thanatos» (Liberdade ou Morte)",
+      "Às nove ilhas Jónicas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As nove riscas simbolizam as nove sílabas do grito da Revolução Grega de 1821 contra o Império Otomano.",
+    "fonte": "Presidência da República Helénica / FIAV",
+    "factClusterId": "fc_mund_ban_grecia_9riscas_01"
+  },
+  {
+    "id": "MUND_BAN_0016",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país africano adotou em abril de 1994 a célebre «Bandeira da Nação Arco-Íris» com um design em forma de «Y» horizontal com seis cores que simbolizou o fim do regime do Apartheid e a união de todos os povos sob Nelson Mandela?",
+    "opcoes": [
+      "Namíbia",
+      "Zimbabwe",
+      "Botsuana",
+      "África do Sul"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Desenhada por Fred Brownell, a bandeira converteu-se num dos maiores símbolos de reconciliação e orgulho nacional do mundo.",
+    "fonte": "Government of South Africa / Nelson Mandela Foundation",
+    "factClusterId": "fc_mund_ban_africadosul_1994_01"
+  },
+  {
+    "id": "MUND_BAN_0017",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira da Coreia do Sul («Taegeukgi»), possui no centro o círculo 'Taegeuk' (o Yin-Yang vermelho e azul) rodeado nos quatro cantos por quatro trigramas negros do I Ching («Kwae») que representam:",
+    "opcoes": [
+      "O Céu, a Terra, a Água e o Fogo (harmonia cósmica)",
+      "As quatro estações do ano",
+      "Os quatro reis da dinastia Joseon",
+      "Os quatro pontos cardeais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O fundo branco representa a pureza e a paz do povo coreano e os trigramas simbolizam o equilíbrio e o movimento perpétuo.",
+    "fonte": "Ministry of the Interior and Safety (South Korea)",
+    "factClusterId": "fc_mund_ban_coreiadosul_taegeukgi_01"
+  },
+  {
+    "id": "MUND_BAN_0018",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Quais são os dois únicos estados soberanos ou territórios do mundo cujas bandeiras nacionais oficiais exibem o mapa geográfico do seu próprio contorno territorial?",
+    "opcoes": [
+      "Islândia e Malta",
+      "Chipre e Kosovo",
+      "Madagáscar e Sri Lanka",
+      "Jamaica e Cuba"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A bandeira de Chipre mostra o mapa da ilha na cor cobre sobre dois ramos de oliveira e o Kosovo mostra o seu mapa dourado encimado por seis estrelas.",
+    "fonte": "FIAV / Governo de Chipre / Assembleia do Kosovo",
+    "factClusterId": "fc_mund_ban_chipre_kosovo_mapa_01"
+  },
+  {
+    "id": "MUND_BAN_0019",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que reino budista nos Himalaias («Butão» / Druk Yul), ostenta na sua bandeira dividida diagonalmente em amarelo e laranja a figura imponente do «Druk» (o Grande Dragão Branco do Trovão) segurando joias nas garras?",
+    "opcoes": [
+      "Tibete",
+      "Mongólia",
+      "Butão",
+      "Laos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O amarelo representa a autoridade secular do Rei e o laranja a tradição monástica budista Drukpa Kagyu.",
+    "fonte": "Royal Government of Bhutan / National Portal",
+    "factClusterId": "fc_mund_ban_butao_dragao_01"
+  },
+  {
+    "id": "MUND_BAN_0020",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que arquipélago no Oceano Índico («Seicheles»), adotou em 1996 uma das bandeiras mais coloridas e dinâmicas do mundo com cinco raios oblíquos que partem do canto inferior esquerdo em leque (azul, amarelo, vermelho, branco e verde)?",
+    "opcoes": [
+      "Maurícia",
+      "Maldivas",
+      "Comores",
+      "Seicheles"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os raios divergentes simbolizam uma nação jovem e vibrante a mover-se com confiança em direção ao futuro.",
+    "fonte": "Government of Seychelles / FIAV",
+    "factClusterId": "fc_mund_ban_seicheles_raios_01"
+  },
+  {
+    "id": "MUND_BAN_0021",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que nação da Oceânia («Papua-Nova Guiné»), ostenta na sua bandeira dividida diagonalmente em preto e vermelho a silhueta dourada em voo da mítica «Ave-do-Paraíso de Raggi» e as estrelas da constelação do Cruzeiro do Sul?",
+    "opcoes": [
+      "Papua-Nova Guiné",
+      "Fiji",
+      "Samoa",
+      "Ilhas Salomão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A bandeira foi desenhada em 1971 por Susan Karike, uma jovem estudante de 15 anos vencedora de um concurso nacional.",
+    "fonte": "Government of Papua New Guinea / FIAV",
+    "factClusterId": "fc_mund_ban_papuanovaguine_avedoparaiso_01"
+  },
+  {
+    "id": "MUND_BAN_0022",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que símbolo solar dourado com rosto humano estilizado e raios flamejantes aparece destacado nas bandeiras nacionais da Argentina e do Uruguai?",
+    "opcoes": [
+      "O Sol Asteca de Tonatiuh",
+      "O «Sol de Maio» (Sol de Mayo / Sol Inca Inti)",
+      "O Disco Solar de Ra",
+      "A Estrela do Sul"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Sol de Maio homenageia a Revolução de Maio de 1810 em Buenos Aires que iniciou o processo de independência do vice-reino do Rio da Prata.",
+    "fonte": "Governo da República Argentina / Presidência do Uruguai",
+    "factClusterId": "fc_mund_ban_argentina_uruguai_soldemaio_01"
+  },
+  {
+    "id": "MUND_BAN_0023",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "O brasão de armas ao centro da bandeira do México retrata uma lendária cena fundadora mexica/asteca: uma águia real pousada sobre um cato a devorar uma:",
+    "opcoes": [
+      "Piraña",
+      "Lagartixa",
+      "Serpente (fundação da mítica Tenochtitlan no lago Texcoco)",
+      "Coruja"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Segundo a profecia do deus Huitzilopochtli, os astecas deveriam fundar a sua capital onde encontrassem uma águia sobre um nopal a devorar uma cobra.",
+    "fonte": "Gobierno de México / Ley sobre el Escudo, la Bandera y el Himno Nacionales",
+    "factClusterId": "fc_mund_ban_mexico_aguia_serpente_01"
+  },
+  {
+    "id": "MUND_BAN_0024",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país do Médio Oriente («Líbano»), ostenta ao centro da sua faixa horizontal branca a árvore milenar e sagrada símbolo de imortalidade e resiliência citada na Bíblia:",
+    "opcoes": [
+      "A Oliveira",
+      "A Palmeira Real",
+      "O Carvalho da Judeia",
+      "O Cedro do Líbano (Cedrus libani)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As duas faixas vermelhas simbolizam o sangue derramado para proteger o país e o branco a neve pura dos montes e a paz.",
+    "fonte": "Presidência da República Libanesa / FIAV",
+    "factClusterId": "fc_mund_ban_libano_cedro_01"
+  },
+  {
+    "id": "MUND_BAN_0025",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país balcânico («Albânia» / Shqipëria), ostenta uma impressionante águia bicéfala negra siluetada sobre um fundo vermelho sangue, inspirada no herói nacional Skanderbeg?",
+    "opcoes": [
+      "Albânia (Shqipëria — «A Terra das Águias»)",
+      "Sérvia",
+      "Montenegro",
+      "Macedónia do Norte"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Gjergj Kastrioti (Skanderbeg) utilizou o estandarte com a águia bizantina de duas cabeças no século XV contra a invasão otomana.",
+    "fonte": "Parlamento da Albânia / FIAV",
+    "factClusterId": "fc_mund_ban_albania_aguiabicefala_01"
+  },
+  {
+    "id": "MUND_BAN_0026",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que nação insular das Pequenas Antilhas nas Caraíbas («Dominica»), possui a única bandeira nacional do mundo que contém a rara cor púrpura/roxa no peito da sua ave nacional:",
+    "opcoes": [
+      "O Colibri Real",
+      "O Papagaio Imperial (Sisserou / Amazona imperialis)",
+      "O Flamingo Rosa",
+      "O Tucano Esmeralda"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Apenas a Dominica e a Nicarágua (num minúsculo detalhe do arco-íris no brasão) utilizam pigmento roxo nas suas bandeiras nacionais.",
+    "fonte": "Government of the Commonwealth of Dominica / FIAV",
+    "factClusterId": "fc_mund_ban_dominica_roxo_sisserou_01"
+  },
+  {
+    "id": "MUND_BAN_0027",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país africano no Corno de África («Somália»), adotou uma bandeira com uma estrela branca de cinco pontas sobre um fundo azul-celeste em honra da Organização das Nações Unidas (ONU) pela ajuda na transição para a independência?",
+    "opcoes": [
+      "Djibuti",
+      "Eritreia",
+      "Somália",
+      "Etiópia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As 5 pontas da estrela simbolizam as 5 regiões históricas habitadas pelo povo somali.",
+    "fonte": "Governo Federal da Somália / FIAV",
+    "factClusterId": "fc_mund_ban_somalia_azul_onu_01"
+  },
+  {
+    "id": "MUND_BAN_0028",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira da República da Irlanda (o «Tricolor Irlandês» — verde, branco e laranja), simboliza a união entre que duas comunidades históricas da ilha mediadas pela paz (a faixa branca central)?",
+    "opcoes": [
+      "Os camponeses e a nobreza",
+      "Os celtas e os vikings",
+      "Os pescadores e os agricultores",
+      "A tradição nacionalista católica gaélica (verde) e a comunidade protestante de Guilherme de Orange (laranja)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O tricolor foi oferecido a Thomas Francis Meagher em 1848 por mulheres republicanas francesas como símbolo de paz e reconciliação entre católicos e protestantes.",
+    "fonte": "Department of the Taoiseach / National Flag of Ireland",
+    "factClusterId": "fc_mund_ban_irlanda_tricolor_01"
+  },
+  {
+    "id": "MUND_BAN_0029",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que três cores horizontais clássicas formam o célebre modelo da bandeira tricolor da Rússia («Trícolo»), que serviu de inspiração direta para as cores pan-eslavas de países como a Sérvia, Eslováquia, Eslovénia e República Checa?",
+    "opcoes": [
+      "Branco, Azul e Vermelho (de cima para baixo)",
+      "Vermelho, Branco e Azul",
+      "Azul, Branco e Vermelho",
+      "Preto, Vermelho e Ouro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O czar Pedro, o Grande adotou as cores no final do século XVII inspirado na marinha mercante holandesa.",
+    "fonte": "State Hermitage Museum / Russian Vexillology Society",
+    "factClusterId": "fc_mund_ban_russia_paneslavas_01"
+  },
+  {
+    "id": "MUND_BAN_0030",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país asiático («Mianmar» / antiga Birmânia), adotou em 2010 a sua atual bandeira tricolor amarela, verde e vermelha com uma enorme estrela branca de cinco pontas ao centro?",
+    "opcoes": [
+      "Camboja",
+      "Mianmar",
+      "Tailândia",
+      "Filipinas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O amarelo representa a solidariedade, o verde a paz e a tranquilidade da vegetação e o vermelho a coragem e determinação.",
+    "fonte": "Constituição de Mianmar de 2008 / FIAV",
+    "factClusterId": "fc_mund_ban_mianmar_2010_01"
+  },
+  {
+    "id": "MUND_BAN_0031",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país do sudeste asiático («Camboja»), tem a única bandeira nacional do mundo que exibe o desenho detalhado de um complexo de templos religiosos e monumento histórico património mundial da UNESCO:",
+    "opcoes": [
+      "Borobudur",
+      "Pagode Shwedagon",
+      "Angkor Wat (o monumental templo khmer)",
+      "Wat Phra Kaew"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Angkor Wat foi construído no século XII pelo rei Suryavarman II e é o símbolo máximo da alma e identidade nacional cambojana.",
+    "fonte": "Reino do Camboja / UNESCO",
+    "factClusterId": "fc_mund_ban_camboja_angkorwat_01"
+  },
+  {
+    "id": "MUND_BAN_0032",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Qual é a peculiaridade única no mundo da bandeira nacional das Filipinas no que respeita ao estado de paz ou guerra?",
+    "opcoes": [
+      "Muda de cor para preto em caso de luto",
+      "Adiciona uma quarta estrela em guerra",
+      "É queimada formalmente no final de cada conflito",
+      "Em tempo de guerra é hasteada invertida (com a faixa vermelha virada para cima)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Em tempo de paz o azul fica virado para cima simbolizando patriotismo; em estado oficial de guerra declarado pelo congresso, a faixa vermelha fica no topo.",
+    "fonte": "National Historical Commission of the Philippines / Republic Act No. 8491",
+    "factClusterId": "fc_mund_ban_filipinas_guerradetalhe_01"
+  },
+  {
+    "id": "MUND_BAN_0033",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país da América Central («Guatemala»), ostenta na sua bandeira vertical celeste e branca duas espingardas e duas espadas cruzadas com a sua ave sagrada nacional de cauda comprida e peito vermelho:",
+    "opcoes": [
+      "O Quetzal-resplandecente (Pharomachrus mocinno)",
+      "O Tucano-toco",
+      "O Condor-dos-Andes",
+      "O Colibri-rubi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O quetzal simboliza a liberdade suprema porque segundo a tradição maia morre de tristeza se for colocado numa gaiola, dando também nome à moeda nacional.",
+    "fonte": "Gobierno de Guatemala / FIAV",
+    "factClusterId": "fc_mund_ban_guatemala_quetzal_01"
+  },
+  {
+    "id": "MUND_BAN_0034",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira nacional da Índia («Tiranga»), possui três faixas horizontais (açafrão, branco e verde) e no centro uma roda azul-marinho de 24 raios conhecida como:",
+    "opcoes": [
+      "Roda de Buda",
+      "Ashoka Chakra (a Roda da Lei e do Dharma)",
+      "Moinho de Oração",
+      "Mandala Solar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Ashoka Chakra provém do capitel dos leões de Ashoka em Sarnath datado do século III a.C. e simboliza o movimento perpétuo da justiça e progresso.",
+    "fonte": "Flag Code of India / Government of India",
+    "factClusterId": "fc_mund_ban_india_ashokachakra_01"
+  },
+  {
+    "id": "MUND_BAN_0035",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país da América do Sul («Paraguai»), é o único do mundo cuja bandeira nacional oficial possui dois lados (anverso e reverso) com brasões completamente distintos?",
+    "opcoes": [
+      "Bolívia",
+      "Equador",
+      "Paraguai (Estrela de Maio na frente e Leão com Barrete Frígio atrás)",
+      "Suriname"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Na frente exibe o Brasão Nacional com a estrela amarela na palma e oliveira; no verso exibe o Selo da Fazenda com um leão sentado guardando o barrete frígio com o lema 'Paz y Justicia'.",
+    "fonte": "Constitución de la República del Paraguay / FIAV",
+    "factClusterId": "fc_mund_ban_paraguai_anverso_reverso_01"
+  },
+  {
+    "id": "MUND_BAN_0036",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que pequena nação insular do Pacífico («Nauru»), possui uma bandeira azul cortada ao meio por uma linha amarela horizontal fina que representa a Linha do Equador e uma estrela branca de 12 pontas posicionada:",
+    "opcoes": [
+      "No polo sul",
+      "No hemisfério norte",
+      "No meridiano de Greenwich",
+      "Exatamente a um grau a sul do Equador (a localização geográfica real da ilha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As 12 pontas da estrela branca representam as 12 tribos originais que povoaram a ilha de Nauru.",
+    "fonte": "Government of the Republic of Nauru / FIAV",
+    "factClusterId": "fc_mund_ban_nauru_equador_01"
+  },
+  {
+    "id": "MUND_BAN_0037",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira nacional da Arábia Saudita exibe sobre fundo verde uma espada branca apontada para a esquerda e a inscrição caligráfica sagrada em árabe da:",
+    "opcoes": [
+      "Shahada («Não há outro Deus além de Alá e Maomé é o Seu mensageiro»)",
+      "Surata da Abertura",
+      "Citação das Mil e Uma Noites",
+      "Oração da Alvorada"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Por conter a sagrada Shahada islâmica, a bandeira saudita nunca pode ser hasteada a meia-haste mesmo em períodos de luto nacional.",
+    "fonte": "Kingdom of Saudi Arabia / Flag Law",
+    "factClusterId": "fc_mund_ban_arabiasaudita_shahada_01"
+  },
+  {
+    "id": "MUND_BAN_0038",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país do Cáucaso («Geórgia» / Sakartvelo), adotou em 2004 a célebre «Bandeira das Cinco Cruzes» (a Cruz de São Jorge vermelha central acompanhada por quatro cruzes menores de Bolnisi nos quadrantes)?",
+    "opcoes": [
+      "Arménia",
+      "Geórgia (Sakartvelo)",
+      "Azerbaijão",
+      "Moldávia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O desenho das cinco cruzes foi o estandarte medieval do Reino da Geórgia durante a Idade de Ouro da Rainha Tamar no século XII.",
+    "fonte": "Parlamento da Geórgia / State Council of Heraldry",
+    "factClusterId": "fc_mund_ban_georgia_cincocruzes_01"
+  },
+  {
+    "id": "MUND_BAN_0039",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país sul-americano andino («Bolívia»), reconhece na sua Constituição de 2009 duas bandeiras com estatuto oficial de igualdade: o tricolor vermelho-amarelo-verde e a bandeira axadrezada multicolor dos povos indígenas andinos conhecida como:",
+    "opcoes": [
+      "O Poncho Inca",
+      "O Quipu Real",
+      "A Wiphala (arco-íris de 49 quadrados)",
+      "A Chakana"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Wiphala é o símbolo ancestral dos povos quéchua e aimará nos Andes representando a harmonia com a Pachamama (Mãe Terra).",
+    "fonte": "Constitución Política del Estado Plurinacional de Bolivia / Decreto Supremo 241",
+    "factClusterId": "fc_mund_ban_bolivia_wiphala_01"
+  },
+  {
+    "id": "MUND_BAN_0040",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país europeu («Bósnia-Herzegovina»), adotou em 1998 a sua atual bandeira azul com um grande triângulo amarelo e uma linha diagonal de nove estrelas brancas cortadas nas pontas simbolizando o número infinito de estrelas?",
+    "opcoes": [
+      "Croácia",
+      "Eslovénia",
+      "Kosovo",
+      "Bósnia-Herzegovina"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O triângulo amarelo representa a forma geográfica aproximada do país e os três povos constituintes: bósnios, croatas e sérvios.",
+    "fonte": "Presidência da Bósnia e Herzegovina / Gabinete do Alto Representante (OHR)",
+    "factClusterId": "fc_mund_ban_bosniaherzegovina_1998_01"
+  },
+  {
+    "id": "MUND_BAN_0041",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira da Malásia («Jalur Gemilang» / Riscas de Glória), é composta por 14 riscas horizontais vermelhas e brancas e um cantão azul com uma lua crescente e uma estrela amarela de exatamente:",
+    "opcoes": [
+      "14 pontas (representando os 13 estados e o governo federal)",
+      "10 pontas",
+      "12 pontas",
+      "8 pontas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A estrela de 14 pontas ('Bintang Persekutuan') simboliza a unidade inquebrantável entre os estados da federação malaia.",
+    "fonte": "Prime Minister's Office of Malaysia / FIAV",
+    "factClusterId": "fc_mund_ban_malasia_14pontas_01"
+  },
+  {
+    "id": "MUND_BAN_0042",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que pequeno principado alpino europeu («Liechtenstein»), descobriu nos Jogos Olímpicos de Berlim 1936 que a sua bandeira azul e vermelha era idêntica à do Haiti, tendo adicionado no ano seguinte uma coroa principesca dourada no cantão azul?",
+    "opcoes": [
+      "Mónaco",
+      "Liechtenstein",
+      "Andorra",
+      "San Marino"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O incidente olímpico levou as autoridades do Liechtenstein a oficializarem a inclusão da coroa principesca a 24 de junho de 1937.",
+    "fonte": "Governo do Principado do Liechtenstein / Comitê Olímpico Internacional",
+    "factClusterId": "fc_mund_ban_liechtenstein_haiti_1936_01"
+  },
+  {
+    "id": "MUND_BAN_0043",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira nacional da Coreia do Norte («Ramhongsaek Konghwagukgi»), é composta por faixas azuis e vermelhas separadas por linhas brancas com uma estrela vermelha de cinco pontas dentro de um círculo branco que simboliza:",
+    "opcoes": [
+      "O Monte Paektu",
+      "A Coreia unificada",
+      "As tradições revolucionárias e a liderança do Partido dos Trabalhadores da Coreia",
+      "A energia atómica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A bandeira foi adotada em 1948 na proclamação da República Popular Democrática da Coreia sob Kim Il-sung.",
+    "fonte": "KCNA / FIAV",
+    "factClusterId": "fc_mund_ban_coreiadonorte_1948_01"
+  },
+  {
+    "id": "MUND_BAN_0044",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país nórdico («Islândia»), adotou em 1944 a sua bandeira oficial com uma cruz nórdica vermelha orlada a branco sobre fundo azul-celeste profundo que representa:",
+    "opcoes": [
+      "A monarquia dinamarquesa",
+      "Os três fiordes sagrados",
+      "O sol da meia-noite",
+      "O fogo dos vulcões (vermelho), o gelo dos glaciares (branco) e o Oceano Atlântico (azul)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As cores refletem a natureza extrema da Islândia como a 'terra do fogo e do gelo'.",
+    "fonte": "Gabinete do Primeiro-Ministro da Islândia / Althingi",
+    "factClusterId": "fc_mund_ban_islandia_fogoegelo_01"
+  },
+  {
+    "id": "MUND_BAN_0045",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país da América Central («Panamá»), possui uma bandeira dividida em quatro quartos (dois brancos com uma estrela azul e uma vermelha, um quarto azul e um vermelho) desenhada em 1903 por Manuel Amador Guerrero simbolizando a paz entre os partidos Liberal e Conservador?",
+    "opcoes": [
+      "Panamá (1903)",
+      "Costa Rica",
+      "Honduras",
+      "El Salvador"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O quarto azul representa o Partido Conservador, o quarto vermelho o Partido Liberal e o branco a pureza e a paz civil no novo estado que construiu o Canal do Panamá.",
+    "fonte": "Gobierno de la República de Panamá / Ley 34 de 1949",
+    "factClusterId": "fc_mund_ban_panama_quatroquartos_01"
+  },
+  {
+    "id": "MUND_BAN_0046",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país da América Central («Costa Rica»), adotou em 1848 a sua bandeira de cinco faixas horizontais (azul, branco, vermelho duplo central, branco, azul) inspirada nas cores da bandeira francesa da Revolução de 1848 por iniciativa da Primeira Dama Pacífica Fernández?",
+    "opcoes": [
+      "Nicarágua",
+      "Costa Rica (1848)",
+      "Belize",
+      "Guatemala"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "As cores homenageiam os ideais universais de 'Liberdade, Igualdade e Fraternidade' do povo francês.",
+    "fonte": "Asamblea Legislativa de Costa Rica / FIAV",
+    "factClusterId": "fc_mund_ban_costarica_franca_1848_01"
+  },
+  {
+    "id": "MUND_BAN_0047",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "A bandeira de Israel («Degel Yisrael»), criada durante o Primeiro Congresso Sionista em Basileia em 1897 por David Wolffsohn, é composta por duas faixas azuis sobre fundo branco inspiradas nas listras do xaile de oração judaico («Talit») e ao centro a:",
+    "opcoes": [
+      "Menorá de sete braços",
+      "Arca da Aliança",
+      "Estrela de David (Magen David de seis pontas)",
+      "Tábua dos Dez Mandamentos"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Magen David azul (Escudo de David) foi adotado formalmente cinco meses após a declaração de independência de Israel em 1948.",
+    "fonte": "Knesset / Israel Ministry of Foreign Affairs",
+    "factClusterId": "fc_mund_ban_israel_estreladedavid_01"
+  },
+  {
+    "id": "MUND_BAN_0048",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país insular do sudeste asiático («Singapura»), adotou na sua independência em 1965 uma bandeira bicolor vermelha e branca com uma lua crescente e cinco estrelas brancas em círculo que representam os ideais da democracia, paz, progresso, justiça e:",
+    "opcoes": [
+      "Prosperidade",
+      "Soberania",
+      "Tradição",
+      "Igualdade"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A lua crescente representa uma jovem nação em ascensão e as cinco estrelas os cinco pilares da sociedade multicultural de Singapura.",
+    "fonte": "National Heritage Board (Singapore) / Prime Minister's Office",
+    "factClusterId": "fc_mund_ban_singapura_cincopilares_01"
+  },
+  {
+    "id": "MUND_BAN_0049",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país do Norte de África («Marrocos»), possui uma bandeira de fundo vermelho com um pentagrama verde de cinco pontas bordado ao centro conhecido como o:",
+    "opcoes": [
+      "Selo de Salomão (Khatam Sulayman)",
+      "Olho de Hórus",
+      "Mão de Fátima",
+      "Crescente Almoada"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O pentagrama verde linear foi adicionado por decreto real do Sultão Moulay Youssef em 1915 para distinguir a bandeira marroquina de outros estandartes navais vermelhos.",
+    "fonte": "Reino de Marrocos / Ministério dos Assuntos Islâmicos",
+    "factClusterId": "fc_mund_ban_marrocos_selodesalomao_01"
+  },
+  {
+    "id": "MUND_BAN_0050",
+    "tema": "Mundo",
+    "subtema": "Bandeiras do Mundo",
+    "pergunta": "Que país asiático («Sri Lanka» / Ceilão), ostenta na sua bandeira nacional («A Bandeira do Leão») um leão dourado empunhando uma espada de guerreiro numa mão e quatro folhas de figueira-dos-pagodes («Folhas de Bo») nos cantos que representam:",
+    "opcoes": [
+      "As quatro castas ancestrais",
+      "As quatro províncias reais",
+      "As quatro virtudes supremas budistas: Amor-Bondade, Compaixão, Alegria e Equanimidade",
+      "Os quatro mares sagrados"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A folha de Bo simboliza a árvore sagrada sob a qual Siddhartha Gautama alcançou a Iluminação em Bodh Gaya.",
+    "fonte": "Government of Sri Lanka / National Flag Law 1972",
+    "factClusterId": "fc_mund_ban_srilanka_leao_folhasbo_01"
+  }
+]

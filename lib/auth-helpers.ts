@@ -10,6 +10,7 @@ import {
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
+import { ECONOMY_CONFIG } from '@/src/data/economy'
 
 const REDIRECT_TARGET_KEY = 'acorda_auth_redirect_target'
 
@@ -336,8 +337,8 @@ export async function createNewUserDocument(
     districtLocked: true,
     level: 1,
     xp: 0,
-    coins: 100,
-    euros: 100,
+    coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+    euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     streak: 0,
     gamesPlayed: 0,
     wins: 0,

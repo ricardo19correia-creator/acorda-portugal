@@ -1,0 +1,852 @@
+[
+  {
+    "id": "PT_REG_0001",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que província histórica do noroeste de Portugal é tradicionalmente conhecida pelo Rio Minho, pelo cultivo do Vinho Verde e pela cultura dos ranchos folclóricos?",
+    "opcoes": [
+      "Minho",
+      "Trás-os-Montes",
+      "Beira Alta",
+      "Ribatejo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Minho é a província histórica no extremo noroeste de Portugal continental, englobando os distritos de Braga e Viana do Castelo.",
+    "fonte": "INE / Atlas Geográfico de Portugal",
+    "factClusterId": "fc_reg_minho_01"
+  },
+  {
+    "id": "PT_REG_0002",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que região estatística (NUTS II) de Portugal continental se situa a vasta planície dourada de montados de sobro e olivais?",
+    "opcoes": [
+      "Centro",
+      "Alentejo",
+      "Norte",
+      "Algarve"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Alentejo ocupa mais de um terço do território de Portugal continental, caracterizado pelas suas planícies e florestas de sobreiros.",
+    "fonte": "Comissão de Coordenação e Desenvolvimento Regional do Alentejo (CCDR-A)",
+    "factClusterId": "fc_reg_alentejo_01"
+  },
+  {
+    "id": "PT_REG_0003",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região histórica de Trás-os-Montes e Alto Douro divide-se tradicionalmente em duas grandes zonas geomorfológicas: a Terra Fria e a:",
+    "opcoes": [
+      "Terra Média",
+      "Terra Alta",
+      "Terra Quente",
+      "Terra Seca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Trás-os-Montes divide-se climaticamente na Terra Fria Transmontana (a norte) e na Terra Quente Transmontana (a sul, no vale do Tua e Douro).",
+    "fonte": "Associação de Municípios da Terra Quente Transmontana",
+    "factClusterId": "fc_reg_trasosmontes_01"
+  },
+  {
+    "id": "PT_REG_0004",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Quantas ilhas habitadas constituem o arquipélago da Região Autónoma dos Açores?",
+    "opcoes": [
+      "Sete",
+      "Oito",
+      "Dez",
+      "Nove"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os Açores são formados por nove ilhas divididas em três grupos: Ocidental (Corvo, Flores), Central (Faial, Pico, São Jorge, Graciosa, Terceira) e Oriental (São Miguel, Santa Maria).",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_reg_acores_01"
+  },
+  {
+    "id": "PT_REG_0005",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que sub-região portuguesa (NUTS III) do Centro é delimitada pelas Serras da Lousã e do Açor e pelo vale do rio Zêzere?",
+    "opcoes": [
+      "Pinhal Interior",
+      "Lezíria do Tejo",
+      "Oeste",
+      "Médio Tejo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "O Pinhal Interior engloba concelhos montanhosos de xisto e pinhais nos distritos de Coimbra, Leiria e Castelo Branco.",
+    "fonte": "CCDR Centro",
+    "factClusterId": "fc_reg_pinhal_01"
+  },
+  {
+    "id": "PT_REG_0006",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região do Algarve é tradicionalmente dividida em três faixas paisagísticas e ecológicas: o Litoral, o Barrocal e a:",
+    "opcoes": [
+      "Charneca",
+      "Serra",
+      "Campina",
+      "Planície"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Algarve estrutura-se de sul para norte no Litoral (praias e rias), Barrocal (pomares de sequeiro) e Serra (Monchique e Caldeirão).",
+    "fonte": "Região de Turismo do Algarve",
+    "factClusterId": "fc_reg_algarve_01"
+  },
+  {
+    "id": "PT_REG_0007",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que província histórica se situam as cidades de Coimbra, Aveiro e Leiria?",
+    "opcoes": [
+      "Beira Alta",
+      "Estremadura",
+      "Beira Litoral",
+      "Douro Litoral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Beira Litoral correspondia à faixa costeira da região das Beiras, abarcando grande parte dos distritos de Aveiro, Coimbra e Leiria.",
+    "fonte": "Divisão Administrativa Histórica de Portugal (1936)",
+    "factClusterId": "fc_reg_beiralitoral_01"
+  },
+  {
+    "id": "PT_REG_0008",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que rio divide historicamente as províncias do Alto Alentejo e do Baixo Alentejo a sul?",
+    "opcoes": [
+      "Rio Mira",
+      "Rio Guadiana",
+      "Rio Xévora",
+      "Rio Sado"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A divisão física e administrativa das bacias hidrográficas do Sado e do Guadiana demarca a transição entre o Alto e o Baixo Alentejo.",
+    "fonte": "Atlas do Alentejo",
+    "factClusterId": "fc_reg_baixoalentejo_01"
+  },
+  {
+    "id": "PT_REG_0009",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região demarcada do Douro Vinhateiro, Património Mundial da UNESCO, divide-se em Baixo Corgo, Cima Corgo e:",
+    "opcoes": [
+      "Douro Superior",
+      "Alto Douro",
+      "Douro Raiano",
+      "Douro Litoral"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "As três sub-regiões da Região Demarcada do Douro são o Baixo Corgo, o Cima Corgo e o Douro Superior.",
+    "fonte": "Instituto dos Vinhos do Douro e do Porto (IVDP)",
+    "factClusterId": "fc_reg_douro_01"
+  },
+  {
+    "id": "PT_REG_0010",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que região se localiza a Reserva Natural das Berlengas, arquipélago classificado como Reserva da Biosfera pela UNESCO?",
+    "opcoes": [
+      "Algarve",
+      "Oeste (Estremadura)",
+      "Litoral Alentejano",
+      "Douro Litoral"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O arquipélago das Berlengas situa-se ao largo de Peniche, na região Oeste de Portugal continental.",
+    "fonte": "ICNF / UNESCO",
+    "factClusterId": "fc_reg_berlengas_01"
+  },
+  {
+    "id": "PT_REG_0011",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que província histórica portuguesa é atravessada pelo rio Tejo e tradicionalmente associada à criação de cavalos e à cultura campina?",
+    "opcoes": [
+      "Beira Baixa",
+      "Alto Alentejo",
+      "Ribatejo",
+      "Minho"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Ribatejo situa-se ao longo da bacia fértil da lezíria do rio Tejo, terra de touros bravos, cavalos lusitanos e campinos.",
+    "fonte": "Turismo do Alentejo e Ribatejo",
+    "factClusterId": "fc_reg_ribatejo_01"
+  },
+  {
+    "id": "PT_REG_0012",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A Serra da Estrela, ponto mais alto de Portugal continental (1993 m na Torre), faz a fronteira natural entre a Beira Alta e a:",
+    "opcoes": [
+      "Beira Litoral",
+      "Trás-os-Montes",
+      "Estremadura",
+      "Beira Baixa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O maciço central da Serra da Estrela separa a Beira Alta (a norte, bacia do Mondego) da Beira Baixa (a sul, bacia do Zêzere e Tejo).",
+    "fonte": "Parque Natural da Serra da Estrela",
+    "factClusterId": "fc_reg_serraestrela_01"
+  },
+  {
+    "id": "PT_REG_0013",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Quantos municípios compõem a Área Metropolitana de Lisboa (AML), distribuídos pelas margens Norte e Sul do Tejo?",
+    "opcoes": [
+      "18",
+      "12",
+      "16",
+      "24"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Área Metropolitana de Lisboa é composta por 18 municípios (9 na Grande Lisboa e 9 na Península de Setúbal).",
+    "fonte": "Área Metropolitana de Lisboa (AML)",
+    "factClusterId": "fc_reg_aml_01"
+  },
+  {
+    "id": "PT_REG_0014",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que ilha da Região Autónoma da Madeira é conhecida como a «Ilha Dourada» devido à sua extensa praia de areia amarela de 9 km?",
+    "opcoes": [
+      "Ilha da Madeira",
+      "Porto Santo",
+      "Deserta Grande",
+      "Ilhéu de Cima"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A ilha de Porto Santo possui uma praia de areia carbonatada com propriedades terapêuticas reconhecidas.",
+    "fonte": "Turismo da Madeira",
+    "factClusterId": "fc_reg_portosanto_01"
+  },
+  {
+    "id": "PT_REG_0015",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que sub-região de Portugal continental engloba municípios como Torres Vedras, Caldas da Rainha, Óbidos e Peniche?",
+    "opcoes": [
+      "Médio Tejo",
+      "Lezíria",
+      "Oeste",
+      "Península de Setúbal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A região Oeste fica situada na faixa litoral centro entre o oceano Atlântico e a serra de Montejunto.",
+    "fonte": "Comunidade Intermunicipal do Oeste (OesteCIM)",
+    "factClusterId": "fc_reg_oeste_01"
+  },
+  {
+    "id": "PT_REG_0016",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que grupo geográfico do arquipélago dos Açores se encontram as ilhas das Flores e do Corvo?",
+    "opcoes": [
+      "Grupo Oriental",
+      "Grupo Central",
+      "Grupo Setentrional",
+      "Grupo Ocidental"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Grupo Ocidental dos Açores é formado pelas ilhas das Flores e do Corvo, situadas na placa tectónica norte-americana.",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_reg_acores_ocidental_01"
+  },
+  {
+    "id": "PT_REG_0017",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Quantos municípios integram a Área Metropolitana do Porto (AMP), articulados em torno da foz do rio Douro?",
+    "opcoes": [
+      "17",
+      "14",
+      "16",
+      "21"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Área Metropolitana do Porto é constituída por 17 municípios nos distritos do Porto, Aveiro e Braga.",
+    "fonte": "Área Metropolitana do Porto (AMP)",
+    "factClusterId": "fc_reg_amp_01"
+  },
+  {
+    "id": "PT_REG_0018",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que região natural do Alentejo, em redor de Grândola, Alcácer do Sal e Sines, possui costa arenosa de mais de 60 km contínuos?",
+    "opcoes": [
+      "Alto Alentejo",
+      "Litoral Alentejano",
+      "Alentejo Central",
+      "Baixo Alentejo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Litoral Alentejano combina praias oceânicas preservadas, arribas fósseis e a Reserva Natural do Estuário do Sado.",
+    "fonte": "Turismo do Alentejo",
+    "factClusterId": "fc_reg_alentejolitoral_01"
+  },
+  {
+    "id": "PT_REG_0019",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A Cova da Beira é um vale fértil situado entre as serras da Estrela e da Gardunha, mundialmente famoso pela produção de:",
+    "opcoes": [
+      "Maçã de Alcobaça",
+      "Laranja do Algarve",
+      "Cereja do Fundão",
+      "Pera Rocha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cova da Beira, no distrito de Castelo Branco, acolhe os pomares da afamada Cereja do Fundão com Indicação Geográfica Protegida.",
+    "fonte": "Município do Fundão / DGDR",
+    "factClusterId": "fc_reg_covadabeira_01"
+  },
+  {
+    "id": "PT_REG_0020",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que região se localiza a maior lagoa costeira de água salgada de Portugal continental, a Ria Formosa?",
+    "opcoes": [
+      "Litoral Alentejano",
+      "Estremadura",
+      "Douro Litoral",
+      "Algarve"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Parque Natural da Ria Formosa estende-se por 60 km ao longo da costa do sotavento algarvio entre a Quinta do Lago e Cacela Velha.",
+    "fonte": "ICNF / Parque Natural da Ria Formosa",
+    "factClusterId": "fc_reg_riaformosa_01"
+  },
+  {
+    "id": "PT_REG_0021",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que planalto árido e rochoso do nordeste transmontano acolhe a cultura e a segunda língua oficial de Portugal, o Mirandês?",
+    "opcoes": [
+      "Planalto Mirandês",
+      "Planalto das Cesaredas",
+      "Planalto Central",
+      "Planalto Beirão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Planalto Mirandês abrange Miranda do Douro, Mogadouro e Vimioso, onde a língua mirandesa tem estatuto oficial reconhecido pela Lei n.º 7/99.",
+    "fonte": "Assembleia da República / Município de Miranda do Douro",
+    "factClusterId": "fc_reg_mirandes_01"
+  },
+  {
+    "id": "PT_REG_0022",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A Ria de Aveiro é um vasto acidente hidrográfico lagunar situado na foz de que rio português?",
+    "opcoes": [
+      "Rio Lima",
+      "Rio Vouga",
+      "Rio Cávado",
+      "Rio Lis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Ria de Aveiro forma-se na desembocadura do rio Vouga, criando canais, sapais e salinas que se estendem de Ovar a Mira.",
+    "fonte": "Universidade de Aveiro / APA",
+    "factClusterId": "fc_reg_riaaveiro_01"
+  },
+  {
+    "id": "PT_REG_0023",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que província histórica engloba a bacia hidrográfica do rio Lima e cidades como Viana do Castelo, Ponte de Lima e Arcos de Valdevez?",
+    "opcoes": [
+      "Baixo Minho",
+      "Douro Litoral",
+      "Alto Minho",
+      "Trás-os-Montes"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Alto Minho corresponde administrativamente ao distrito de Viana do Castelo, no noroeste português.",
+    "fonte": "Comunidade Intermunicipal do Alto Minho",
+    "factClusterId": "fc_reg_altominho_01"
+  },
+  {
+    "id": "PT_REG_0024",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região montanhosa de Trás-os-Montes é separada do litoral pela barreira orográfica formada pelas Serras do Marão e do:",
+    "opcoes": [
+      "Gerês",
+      "Montemuro",
+      "Caramulo",
+      "Alvão"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "As serras do Marão e do Alvão constituem a fronteira natural entre o Entre-Douro-e-Minho e Trás-os-Montes.",
+    "fonte": "Instituto Geográfico do Exército",
+    "factClusterId": "fc_reg_marao_alvao_01"
+  },
+  {
+    "id": "PT_REG_0025",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que sub-região de Portugal se situa a serra da Arrábida e o estuário do rio Sado com a sua comunidade de roazes-corvineiros?",
+    "opcoes": [
+      "Península de Setúbal",
+      "Lezíria do Tejo",
+      "Alentejo Litoral",
+      "Oeste"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Península de Setúbal engloba os concelhos de Setúbal, Sesimbra, Palmela e a Reserva Natural do Estuário do Sado.",
+    "fonte": "ICNF / Parque Natural da Arrábida",
+    "factClusterId": "fc_reg_arrabida_01"
+  },
+  {
+    "id": "PT_REG_0026",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que região histórica da Beira é tradicionalmente apelidada de «Celeiro da Beira» pelos seus campos abertos junto à raia espanhola?",
+    "opcoes": [
+      "Campo de Ourique",
+      "Campina de Idanha",
+      "Campo Maior",
+      "Lezíria"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "A Campina de Idanha é uma vasta planície cerealífera e pastoril na Beira Baixa, no concelho de Idanha-a-Nova.",
+    "fonte": "Município de Idanha-a-Nova",
+    "factClusterId": "fc_reg_idanha_01"
+  },
+  {
+    "id": "PT_REG_0027",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A ilha de São Miguel, a maior do arquipélago dos Açores, é popularmente conhecida como a:",
+    "opcoes": [
+      "Ilha Lilás",
+      "Ilha Azul",
+      "Ilha Verde",
+      "Ilha Cinzenta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "São Miguel é a Ilha Verde devido às suas pastagens, lagoas e vegetação luxuriante nas Sete Cidades e Furnas.",
+    "fonte": "Turismo dos Açores",
+    "factClusterId": "fc_reg_ilhaverde_01"
+  },
+  {
+    "id": "PT_REG_0028",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que ilha dos Açores tem como cognome oficial «Ilha Lilás» devido à cor das hortênsias e ao centro histórico de Angra do Heroísmo?",
+    "opcoes": [
+      "Graciosa",
+      "São Jorge",
+      "Pico",
+      "Terceira"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A ilha Terceira é a Ilha Lilás, cujo centro histórico de Angra do Heroísmo é Património Mundial da UNESCO desde 1983.",
+    "fonte": "UNESCO / Governo dos Açores",
+    "factClusterId": "fc_reg_terceira_01"
+  },
+  {
+    "id": "PT_REG_0029",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que região se situa a maior floresta Laurissilva do mundo, Património Natural Mundial da UNESCO desde 1999?",
+    "opcoes": [
+      "Região Autónoma da Madeira",
+      "Região Autónoma dos Açores",
+      "Parque Nacional da Peneda-Gerês",
+      "Serra de Sintra"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Floresta Laurissilva da Madeira é uma relíquia subtropical do período Terciário que cobre cerca de 20% da ilha.",
+    "fonte": "UNESCO / Instituto das Florestas e Conservação da Natureza da Madeira",
+    "factClusterId": "fc_reg_laurissilva_01"
+  },
+  {
+    "id": "PT_REG_0030",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que sub-região hidrográfica e agrícola do Ribatejo é formada pelos terrenos aluviais fertilizados pelas cheias periódicas do Tejo?",
+    "opcoes": [
+      "Charneca",
+      "Lezíria",
+      "Bairro",
+      "Gândara"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Lezíria do Tejo é uma das terras agrícolas mais férteis da Península Ibérica, onde se cultivam cereais, tomate e arroz.",
+    "fonte": "Companhia das Lezírias",
+    "factClusterId": "fc_reg_leziria_01"
+  },
+  {
+    "id": "PT_REG_0031",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que província histórica se situam as serras do Caramulo e da Lapa e o vale vinhateiro do rio Dão?",
+    "opcoes": [
+      "Beira Litoral",
+      "Beira Baixa",
+      "Beira Alta",
+      "Douro Litoral"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Beira Alta compreende o planalto beirão em torno de Viseu e Guarda, berço da Região Demarcada do Dão.",
+    "fonte": "Comissão Vitivinícola Regional do Dão",
+    "factClusterId": "fc_reg_beiraalta_01"
+  },
+  {
+    "id": "PT_REG_0032",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que região costeira e lagunar do Alentejo alberga a albufeira do Alqueva, o maior lago artificial da Europa Ocidental?",
+    "opcoes": [
+      "Alentejo Litoral",
+      "Alto Alentejo",
+      "Baixo Alentejo",
+      "Alentejo Central"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Grande Lago de Alqueva estende-se pelo Alentejo Central e Baixo Alentejo ao longo de 250 km² de espelho de água.",
+    "fonte": "EDIA (Empresa de Desenvolvimento e Infraestruturas do Alqueva)",
+    "factClusterId": "fc_reg_alqueva_01"
+  },
+  {
+    "id": "PT_REG_0033",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região das Gândaras, caracterizada por terrenos arenosos de pinhal e dunas, situa-se no litoral entre Aveiro e:",
+    "opcoes": [
+      "Figueira da Foz",
+      "Porto",
+      "Nazaré",
+      "Viana do Castelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "A Gândara é uma região natural do litoral centro que abrange Mira, Cantanhede, Vagos e Figueira da Foz.",
+    "fonte": "Turismo do Centro de Portugal",
+    "factClusterId": "fc_reg_gandara_01"
+  },
+  {
+    "id": "PT_REG_0034",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que ilha dos Açores é dominada pela montanha mais alta de todo o território português, a 2351 metros de altitude?",
+    "opcoes": [
+      "São Miguel",
+      "Pico",
+      "Faial",
+      "Terceira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Montanha do Pico, na ilha do Pico, é um estratovulcão que constitui o ponto culminante de Portugal.",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_reg_pico_01"
+  },
+  {
+    "id": "PT_REG_0035",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A Bairrada é uma sub-região vinhateira e gastronómica famosa pelo leitão assado e espumantes, situada no distrito de:",
+    "opcoes": [
+      "Porto e Braga",
+      "Santarém e Leiria",
+      "Coimbra e Aveiro",
+      "Viseu e Guarda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Bairrada abrange concelhos como Anadia, Mealhada, Cantanhede e Oliveira do Bairro, entre Coimbra e Aveiro.",
+    "fonte": "Comissão Vitivinícola da Bairrada",
+    "factClusterId": "fc_reg_bairrada_01"
+  },
+  {
+    "id": "PT_REG_0036",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que região se situa a Serra de Monchique, cujo cume da Fóia (902 m) é o ponto mais alto do Algarve?",
+    "opcoes": [
+      "Sotavento Algarvio",
+      "Litoral Central",
+      "Baixo Guadiana",
+      "Barlavento Algarvio"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Serra de Monchique situa-se no Barlavento (Algarve ocidental), com microclima ameno e águas termais milenares.",
+    "fonte": "Município de Monchique",
+    "factClusterId": "fc_reg_monchique_01"
+  },
+  {
+    "id": "PT_REG_0037",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que ilha dos Açores ostenta a alcunha de «Ilha Branca» devido à toponímia de locais como a Pedras Brancas e a Serra Branca?",
+    "opcoes": [
+      "Graciosa",
+      "Faial",
+      "Santa Maria",
+      "Corvo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Graciosa é a Ilha Branca, famosa pela Caldeira, pela Furna do Enxofre e pelos moinhos de vento de cúpula vermelha.",
+    "fonte": "Turismo dos Açores",
+    "factClusterId": "fc_reg_graciosa_01"
+  },
+  {
+    "id": "PT_REG_0038",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que província histórica do norte engloba a foz do rio Douro e cidades como Porto, Vila Nova de Gaia, Matosinhos e Póvoa de Varzim?",
+    "opcoes": [
+      "Minho",
+      "Douro Litoral",
+      "Trás-os-Montes",
+      "Beira Litoral"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Douro Litoral congregava o litoral urbano e industrial do norte de Portugal em torno do grande polo metropolitano do Porto.",
+    "fonte": "Atlas Histórico de Portugal",
+    "factClusterId": "fc_reg_dourolitoral_01"
+  },
+  {
+    "id": "PT_REG_0039",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A ilha de Santa Maria é historicamente notável no arquipélago dos Açores por ter sido:",
+    "opcoes": [
+      "A última a ser descoberta",
+      "A única sem atividade vulcânica fóssil",
+      "A primeira ilha a ser descoberta e povoada",
+      "A maior produtora de chá da Europa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Santa Maria foi a primeira ilha dos Açores a ser avistada por Diogo de Silves por volta de 1427 e a primeira a ser povoada por Gonçalo Velho Cabral.",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_reg_santamaria_01"
+  },
+  {
+    "id": "PT_REG_0040",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que rio internacional marca a fronteira natural entre o sudeste do Alentejo / leste do Algarve e a Andaluzia em Espanha?",
+    "opcoes": [
+      "Rio Chança",
+      "Rio Sever",
+      "Rio Minho",
+      "Rio Guadiana"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O rio Guadiana desagua no oceano Atlântico entre Vila Real de Santo António e Ayamonte, servindo de fronteira meridional entre Portugal e Espanha.",
+    "fonte": "Agência Portuguesa do Ambiente (APA)",
+    "factClusterId": "fc_reg_guadiana_01"
+  },
+  {
+    "id": "PT_REG_0041",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que região montanhosa de Portugal continental acolhe o único Parque Nacional do país, criado em 1971?",
+    "opcoes": [
+      "Peneda-Gerês (Minho e Trás-os-Montes)",
+      "Serra da Estrela (Beiras)",
+      "Montesinho (Trás-os-Montes)",
+      "São Mamede (Alentejo)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Parque Nacional da Peneda-Gerês (PNPG) é o único parque com estatuto de Parque Nacional em Portugal, abrangendo 5 municípios.",
+    "fonte": "ICNF / PNPG",
+    "factClusterId": "fc_reg_pnpg_01"
+  },
+  {
+    "id": "PT_REG_0042",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A ilha do Faial, nos Açores, é conhecida como a «Ilha Azul» devido à intensa presença de sebes de:",
+    "opcoes": [
+      "Jacarandás",
+      "Hortênsias (hidrângeas)",
+      "Agapantos",
+      "Buganvílias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Faial é a Ilha Azul pelas suas sebes de hortênsias azuis ao longo das estradas e pastagens, além da marina cosmopolita da Horta.",
+    "fonte": "Turismo dos Açores",
+    "factClusterId": "fc_reg_faial_01"
+  },
+  {
+    "id": "PT_REG_0043",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que região vinícola da Estremadura engloba a famosa vila de Colares, onde as vinhas de casta Ramisco são plantadas em chão de areia?",
+    "opcoes": [
+      "Bucelas",
+      "Carcavelos",
+      "Colares (Sintra)",
+      "Torres Vedras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Colares, na costa de Sintra, é uma das regiões vinícolas mais raras do mundo, tendo resistido à filoxera graças ao cultivo em areia do mar.",
+    "fonte": "Adega Regional de Colares / Região Demarcada de Colares",
+    "factClusterId": "fc_reg_colares_01"
+  },
+  {
+    "id": "PT_REG_0044",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Em que província histórica se localiza a cidade raiana de Elvas e o seu imponente sistema de muralhas e aqueduto da Amoreira?",
+    "opcoes": [
+      "Baixo Alentejo",
+      "Ribatejo",
+      "Beira Baixa",
+      "Alto Alentejo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Elvas situa-se no Alto Alentejo (distrito de Portalegre), sendo Património Mundial da UNESCO pelas suas fortificações abaluartadas.",
+    "fonte": "UNESCO / Município de Elvas",
+    "factClusterId": "fc_reg_elvas_01"
+  },
+  {
+    "id": "PT_REG_0045",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que vale glacial da Serra da Estrela, com mais de 13 km de extensão, é considerado um dos maiores e mais perfeitos da Europa?",
+    "opcoes": [
+      "Vale Glaciar do Zêzere",
+      "Vale do Alvoco",
+      "Vale do Mondego",
+      "Vale do Rossim"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Vale Glaciar do Zêzere, em forma de «U», estende-se desde o sopé da Torre até à vila de Manteigas.",
+    "fonte": "Geopark Estrela / ICNF",
+    "factClusterId": "fc_reg_valeglaciar_01"
+  },
+  {
+    "id": "PT_REG_0046",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que ilha é a mais pequena e menos povoada de todo o arquipélago dos Açores, com cerca de 400 habitantes na Vila do Corvo?",
+    "opcoes": [
+      "Graciosa",
+      "Corvo",
+      "Santa Maria",
+      "Flores"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Corvo tem apenas 17 km² e um único povoado (Vila do Corvo), sendo classificada como Reserva da Biosfera da UNESCO.",
+    "fonte": "Governo Regional dos Açores",
+    "factClusterId": "fc_reg_corvo_01"
+  },
+  {
+    "id": "PT_REG_0047",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A região do Barroso, célebre pela raça bovina barrosã e pelo fumeiro tradicional, abrange os municípios de Boticas e:",
+    "opcoes": [
+      "Chaves",
+      "Valpaços",
+      "Montalegre",
+      "Vila Pouca de Aguiar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Barroso é Património Agrícola Mundial (GIAHS/FAO), composto pelos municípios de Montalegre e Boticas.",
+    "fonte": "FAO / Ecomuseu de Barroso",
+    "factClusterId": "fc_reg_barroso_01"
+  },
+  {
+    "id": "PT_REG_0048",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que concelho da região Centro é atravessado pelo rio Lis e dominado pelo histórico Pinhal do Rei (Pinhal de Leiria)?",
+    "opcoes": [
+      "Leiria",
+      "Pombal",
+      "Batalha",
+      "Marinha Grande"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Marinha Grande é o coração da indústria vidreira e do Pinhal do Rei plantado por D. Dinis.",
+    "fonte": "Município da Marinha Grande",
+    "factClusterId": "fc_reg_marinhagrande_01"
+  },
+  {
+    "id": "PT_REG_0049",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "Que cabo rochoso na foz do rio Guadiana assinala o extremo sudeste do território de Portugal continental?",
+    "opcoes": [
+      "Cabo de Santa Maria",
+      "Ponta da Piedade",
+      "Cabo de São Vicente",
+      "Cabo Espichel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Cabo de Santa Maria, situado na ilha Deserta (Faro), é o ponto mais meridional de Portugal continental.",
+    "fonte": "Instituto Hidrográfico de Portugal",
+    "factClusterId": "fc_reg_cabosantamaria_01"
+  },
+  {
+    "id": "PT_REG_0050",
+    "tema": "Portugal",
+    "subtema": "Regiões",
+    "pergunta": "A cidade e concelho de Tomar, no Médio Tejo, nasceu e cresceu historicamente em torno da sede portuguesa da Ordem:",
+    "opcoes": [
+      "De Santiago",
+      "De Avis",
+      "Dos Templários (depois Ordem de Cristo)",
+      "De Malta"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Tomar foi fundada em 1160 por D. Gualdim Pais como sede dos Cavaleiros Templários em Portugal, albergando o Convento de Cristo.",
+    "fonte": "DGPC / Convento de Cristo",
+    "factClusterId": "fc_reg_tomar_01"
+  }
+]

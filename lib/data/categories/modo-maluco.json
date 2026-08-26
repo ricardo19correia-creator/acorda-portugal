@@ -12,7 +12,13 @@
       "Nenhuma porque o Zé está de dieta"
     ],
     "correctAnswer": "Pelo menos uma bem fresca",
-    "explanation": "Tradição sagrada de tasca portuguesa: tremoço sem cerveja fresca ao lado é um sacrilégio moral."
+    "explanation": "Tradição sagrada de tasca portuguesa: tremoço sem cerveja fresca ao lado é um sacrilégio moral.",
+    "tema": "Modo Maluco",
+    "temaSlug": "modo-maluco",
+    "subtema": "Humor & Rir",
+    "subtemaSlug": "humor-rir",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "modo-maluco_0002",
@@ -57,7 +63,13 @@
       "Ela volta a chamar com o nome completo e o tom aumenta 200%"
     ],
     "correctAnswer": "Ela volta a chamar com o nome completo e o tom aumenta 200%",
-    "explanation": "O uso do nome completo pela mãe é o sinal universal de perigo iminente na cultura lusitana."
+    "explanation": "O uso do nome completo pela mãe é o sinal universal de perigo iminente na cultura lusitana.",
+    "tema": "Modo Maluco",
+    "temaSlug": "modo-maluco",
+    "subtema": "Cultura Popular Insólita",
+    "subtemaSlug": "cultura-popular-insolita",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "modo-maluco_0005",
@@ -102,7 +114,13 @@
       "Uma conta mais cara"
     ],
     "correctAnswer": "Um olhar de julgamento e uma cerveja de pressão",
-    "explanation": "Pedir 'fino' em Lisboa ou 'imperial' no Porto pode gerar confusão cultural linguística, mas o líquido dourado é o mesmo."
+    "explanation": "Pedir 'fino' em Lisboa ou 'imperial' no Porto pode gerar confusão cultural linguística, mas o líquido dourado é o mesmo.",
+    "tema": "Modo Maluco",
+    "temaSlug": "modo-maluco",
+    "subtema": "Perguntas Inesperadas",
+    "subtemaSlug": "perguntas-inesperadas",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "modo-maluco_0008",
@@ -132,7 +150,13 @@
       "Abrir a janela para entrar calor"
     ],
     "correctAnswer": "Se vires o teu próprio hálito a sair da boca, liga o aquecedor",
-    "explanation": "O isolamento térmico das casas portuguesas é lendário e o Inverno interior é uma prova de sobrevivência."
+    "explanation": "O isolamento térmico das casas portuguesas é lendário e o Inverno interior é uma prova de sobrevivência.",
+    "tema": "Modo Maluco",
+    "temaSlug": "modo-maluco",
+    "subtema": "Cultura Popular Insólita",
+    "subtemaSlug": "cultura-popular-insolita",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "modo-maluco_0010",
@@ -147,7 +171,13 @@
       "O peão no passeio"
     ],
     "correctAnswer": "Quem já estiver dentro da rotunda (exceto se for um pisca inventado)",
-    "explanation": "Segundo o Código da Estrada, a prioridade é de quem circula na rotunda, por muito que o carro comercial tente cortar a via."
+    "explanation": "Segundo o Código da Estrada, a prioridade é de quem circula na rotunda, por muito que o carro comercial tente cortar a via.",
+    "tema": "Modo Maluco",
+    "temaSlug": "modo-maluco",
+    "subtema": "Humor & Rir",
+    "subtemaSlug": "humor-rir",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "modo-maluco_0011",

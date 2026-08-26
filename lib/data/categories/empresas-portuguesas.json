@@ -42,7 +42,13 @@
       "Navigator"
     ],
     "correctAnswer": "Corticeira Amorim",
-    "explanation": "A Corticeira Amorim, fundada em 1870, é a maior empresa de cortiça do mundo."
+    "explanation": "A Corticeira Amorim, fundada em 1870, é a maior empresa de cortiça do mundo.",
+    "tema": "Empresas Portuguesas",
+    "temaSlug": "empresas-portuguesas",
+    "subtema": "Produtos",
+    "subtemaSlug": "produtos",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "empresas-portuguesas_0004",
@@ -117,7 +123,13 @@
       "Renova"
     ],
     "correctAnswer": "Renova",
-    "explanation": "A Renova reinventou o design e marketing no setor de tissue com cores pioneiras no mercado global."
+    "explanation": "A Renova reinventou o design e marketing no setor de tissue com cores pioneiras no mercado global.",
+    "tema": "Empresas Portuguesas",
+    "temaSlug": "empresas-portuguesas",
+    "subtema": "Produtos",
+    "subtemaSlug": "produtos",
+    "status": "approved",
+    "ativa": true
   },
   {
     "id": "empresas-portuguesas_0009",
@@ -9748,5 +9760,3805 @@
     ],
     "correctAnswer": "EDP (Energias de Portugal)",
     "explanation": "A EDP é uma das maiores produtoras mundiais de energia eólica através da EDP Renováveis."
+  },
+  {
+    "id": "EMP_MAR_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo empresarial português sediado em Mozelos (Santa Maria da Feira), fundado em 1870 por António Alves de Amorim, é o líder mundial incontestado na transformação de cortiça e produção de rolhas para o setor vitivinícola global?",
+    "opcoes": [
+      "Corticeira Amorim (Grupo Amorim)",
+      "The Navigator Company",
+      "Semapa",
+      "Sonae Indústria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Corticeira Amorim processa cerca de um terço de toda a cortiça do planeta e exporta rolhas de alta tecnologia para mais de 100 países.",
+    "fonte": "Corticeira Amorim / APCOR / AICEP",
+    "factClusterId": "fc_emp_corticeiraamorim_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica empresa de porcelanas fundada em 1824 por José Ferreira Pinto Basto no lugar da Vista Alegre (Ílhavo), reconhecida mundialmente pela excelência artística da sua porcelana fina e cristal, é a:",
+    "opcoes": [
+      "Bordalo Pinheiro",
+      "Vista Alegre (Vista Alegre Atlantis)",
+      "Fábrica de Loiça de Sacavém",
+      "Costa Nova"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Vista Alegre fornece serviços de mesa oficiais para a Casa Branca, Palácio de Belém, Vaticano e casas reais de toda a Europa.",
+    "fonte": "Grupo Vista Alegre Atlantis / Município de Ílhavo",
+    "factClusterId": "fc_emp_vistaalegre1824_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que mítica marca de café e grupo português sediado em Campo Maior (Alentejo), fundado em 1961 pelo Comendador Rui Nabeiro («Delta Cafés»), é o líder absoluto de torrefação e distribuição de café em Portugal?",
+    "opcoes": [
+      "Café Nicola",
+      "Sical",
+      "Delta Cafés (Grupo Nabeiro)",
+      "Buondi"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Nabeiro desenvolveu a marca de cápsulas Delta Q e o Centro de Ciência do Café em Campo Maior.",
+    "fonte": "Grupo Nabeiro - Delta Cafés / Município de Campo Maior",
+    "factClusterId": "fc_emp_deltacafes_ruinabeiro_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa portuguesa de produtos de papel e higiene sediada em Torres Novas («Renova»), famosa pela criação inovadora do primeiro papel higiénico preto do mundo («Renova Black») e cores vivas, exporta para os cinco continentes?",
+    "opcoes": [
+      "The Navigator Company",
+      "Altri",
+      "Papéis Vouga",
+      "Renova"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Renova revolucionou o design e o marketing de produtos de grande consumo a nível mundial com papéis perfumados e coloridos.",
+    "fonte": "Renova / AICEP",
+    "factClusterId": "fc_emp_renova_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de faiança artística fundada nas Caldas da Rainha em 1884 pelo genial desenhador e ceramista Rafael Bordalo Pinheiro, célebre pelas suas travessas de couves, andorinhas em relevo e figuras populares do Zé Povinho, é:",
+    "opcoes": [
+      "Faianças Bordalo Pinheiro",
+      "Vista Alegre",
+      "Viúva Lamego",
+      "Olaria de Barcelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Bordalo Pinheiro integra o Grupo Visabeira e exporta peças decorativas de faiança policromada para todo o mundo.",
+    "fonte": "Fábrica de Faianças Bordalo Pinheiro / Museu Bordalo Pinheiro",
+    "factClusterId": "fc_emp_bordalopinheiro_caldas_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que licor tradicional doce de ervas aromáticas produzido na Quinta do Meiral na Lousã pela família Redondo («O Licor de Portugal»), criado a partir de uma receita secreta com dupla destilação, é o:",
+    "opcoes": [
+      "Ginjinha de Óbidos",
+      "Licor Beirão (J. Carranca Redondo)",
+      "Licor de Singeverga",
+      "Brandymel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Licor Beirão celebrizou-se nos anos 1960 pelas campanhas publicitárias pioneiras criadas por José Carranca Redondo.",
+    "fonte": "Licor Beirão / Município da Lousã",
+    "factClusterId": "fc_emp_licorbeirao_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo internacional de distribuição alimentar português («Jerónimo Martins»), fundado em Lisboa em 1792, é o proprietário da cadeia de supermercados Pingo Doce em Portugal, Biedronka na Polónia e Ara na Colômbia?",
+    "opcoes": [
+      "Sonae MC",
+      "Auchan Portugal",
+      "Jerónimo Martins",
+      "Intermarché"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Biedronka (que significa 'joaninha' em polaco) é a maior cadeia de retalho alimentar da Polónia com mais de 3.400 lojas.",
+    "fonte": "Jerónimo Martins / Euronext Lisbon",
+    "factClusterId": "fc_emp_jeronimomartins_biedronka_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórico conglomerado empresarial português sediado na Maia («Grupo Sonae»), fundado em 1959 por Afonso Pinto de Magalhães e expandido por Belmiro de Azevedo, gere marcas líderes como Continente, Worten, Wells e Salsa Jeans?",
+    "opcoes": [
+      "Jerónimo Martins",
+      "Amorim",
+      "Mota-Engil",
+      "Sonae"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sonae abriu o primeiro hipermercado de Portugal (Continente de Matosinhos) em 1985 e é um dos maiores empregadores privados do país.",
+    "fonte": "Sonae / Euronext Lisbon",
+    "factClusterId": "fc_emp_sonae_belmirodeazevedo_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa energética integrada portuguesa («Galp Energia»), cotada no índice PSI da Bolsa de Lisboa, opera refinarias, postos de combustíveis e projetos de transição energética solar e eólica na Península Ibérica e Brasil?",
+    "opcoes": [
+      "Galp (Galp Energia)",
+      "EDP",
+      "REN",
+      "Repsol Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Galp tem grande presença na exploração de petróleo e gás natural no pré-sal da Bacia de Santos no Brasil e projetos de hidrogénio verde em Sines.",
+    "fonte": "Galp Energia / DGEG / Euronext Lisbon",
+    "factClusterId": "fc_emp_galpenergia_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que multinacional elétrica portuguesa («EDP — Energias de Portugal»), uma das maiores empresas cotadas do PSI, é líder mundial em energia eólica e solar através da sua subsidiária EDP Renováveis (EDPR)?",
+    "opcoes": [
+      "Galp",
+      "EDP (Energias de Portugal)",
+      "Endesa",
+      "Iberdrola Portugal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A EDP Renováveis é o 4.º maior produtor mundial de energia eólica com parques em operação na Europa, América do Norte, América do Sul e Ásia.",
+    "fonte": "EDP / EDPR / Euronext",
+    "factClusterId": "fc_emp_edprenovaveis_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante produtora portuguesa de pasta e papel de escritório («The Navigator Company» / antiga Portucel Soporcel), com fábricas em Setúbal e Figueira da Foz, é a líder europeia de papel fino de impressão não revestido (UWF)?",
+    "opcoes": [
+      "Altri",
+      "Renova",
+      "The Navigator Company",
+      "Prado Cartolinas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A marca de papel 'Navigator' é a marca de papel de escritório mais vendida e reconhecida em mais de 130 países.",
+    "fonte": "The Navigator Company / CELPA / AICEP",
+    "factClusterId": "fc_emp_navigatorcompany_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária saboaria e perfumaria de luxo portuense fundada em 1887 pelos químicos alemães Ferdinand Claus e Georges Schweder («Claus Porto» / Ach. Brito), famosa pelas suas embalagens Art Nouveau pintadas à mão, é um ícone global de luxo?",
+    "opcoes": [
+      "Benamôr",
+      "Confiança",
+      "Castelbel",
+      "Claus Porto (Ach. Brito)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os sabonetes Claus Porto e a marca Musgo Real são vendidos em lojas exclusivas de Nova Iorque, Paris, Londres e Tóquio.",
+    "fonte": "Claus Porto / Museu Ach. Brito / Porto",
+    "factClusterId": "fc_emp_clausporto1887_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica marca de cosmética e cremes lisboeta criada em 1925 na farmácia da Rua dos Fanqueiros («Benamôr»), célebre pelo creme de rosto «Alantoíne» e pelas loções perfumadas estilo Art Déco, foi fornecedora da Rainha D. Amélia?",
+    "opcoes": [
+      "Benamôr 1925",
+      "Claus Porto",
+      "Couto",
+      "Castelbel"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Benamôr preserva as receitas tradicionais e os frascos vintage icónicos inspirados na natureza botânica portuguesa.",
+    "fonte": "Benamôr Lisboa / Museu da Farmácia",
+    "factClusterId": "fc_emp_benamor1925_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que famosa pasta de dentes medicinal criada no Porto em 1932 pelo Dr. Alberto Ferreira Couto («Pasta Medicinal Couto»), com a sua icónica bisnaga amarela e o homem com a escova de dentes na boca, é um símbolo da memória industrial portuguesa?",
+    "opcoes": [
+      "Pasta Benamôr",
+      "Pasta Medicinal Couto (Laboratórios Couto)",
+      "Pasta Odol",
+      "Pasta Confiança"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Pasta Couto foi concebida para combater as infeções gengivais e tornou-se sinónimo de design e identidade gráfica vintage portuguesa.",
+    "fonte": "Laboratórios Couto / Museu da Farmácia",
+    "factClusterId": "fc_emp_pastacouto1932_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca líder de cerveja portuguesa e maior cervejeira nacional («Super Bock Group» / antiga Unicer), com sede em Leça do Balio (Matosinhos), foi fundada em 1890 como Companhia União Fabril Portuense?",
+    "opcoes": [
+      "Cerveja Sagres",
+      "Cerveja Coral",
+      "Super Bock (Super Bock Group)",
+      "Cerveja Especial"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Super Bock é a cerveja portuguesa mais premiada de sempre no concurso internacional Monde Selection com dezenas de medalhas de ouro consecutivas.",
+    "fonte": "Super Bock Group / Monde Selection",
+    "factClusterId": "fc_emp_superbock_unicer_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca de cerveja emblemática de Lisboa («Cerveja Sagres»), criada em 1940 para a Exposição do Mundo Português e produzida na fábrica de Vialonga pela Sociedade Central de Cervejas e Bebidas (SCC), patrocina historicamente a Seleção Nacional de Futebol?",
+    "opcoes": [
+      "Super Bock",
+      "Cerveja Cintra",
+      "Cerveja Tagus",
+      "Cerveja Sagres (Central de Cervejas)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sagres foi criada pela Central de Cervejas no Parque Mayer e na fábrica de Vialonga, sendo uma das marcas mais associadas ao desporto português.",
+    "fonte": "Sociedade Central de Cervejas e Bebidas (SCC) / FPF",
+    "factClusterId": "fc_emp_cervejasagres_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que água mineral natural gasocarbónica portuguesa engarrafada na fonte em Trás-os-Montes («Água das Pedras» / Pedras Salgadas, concelho de Pouca de Aguiar), com gás 100% natural, é uma das águas mais premiadas da Europa?",
+    "opcoes": [
+      "Água das Pedras (Pedras Salgadas)",
+      "Água de Vidago",
+      "Água Castello",
+      "Água de Luso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Água das Pedras brota naturalmente gaseificada do subsolo granítico do vale do rio Avelames desde a época romana.",
+    "fonte": "Super Bock Group / Parque Termal de Pedras Salgadas",
+    "factClusterId": "fc_emp_aguadaspedras_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca de água mineral natural lisa portuguesa («Água de Luso»), que brota da Serra do Buçaco (concelho da Mealhada) com baixíssima mineralização, é líder de mercado e abastece as históricas Termas de Luso?",
+    "opcoes": [
+      "Água do Fastio",
+      "Água de Luso",
+      "Água do Vimeiro",
+      "Água de Monchique"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sociedade da Água de Luso foi fundada em 1852 para engarrafar e preservar a pureza hidrológica da serra do Buçaco.",
+    "fonte": "Sociedade da Água de Luso / Central de Cervejas",
+    "factClusterId": "fc_emp_aguadeluso_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que água mineral natural hiperalcalina portuguesa («Água de Monchique»), com o pH mais elevado de Portugal (pH 9,5) que brota da Serra de Monchique no Algarve, é muito procurada pelas suas propriedades antioxidantes e digestivas?",
+    "opcoes": [
+      "Água de Luso",
+      "Água das Pedras",
+      "Água de Monchique (Termas de Monchique)",
+      "Água Castello"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Água de Monchique é a água mais alcalina da Europa continental e ganhou múltiplos prémios internacionais de sabor do ITQI.",
+    "fonte": "Sociedade da Água de Monchique / Município de Monchique",
+    "factClusterId": "fc_emp_aguademonchique_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo agroalimentar português líder mundial de azeites e óleos vegetais («Sovena»), proprietário das marcas «Oliveira da Serra», «Andorinha» e «Fula», detém o maior olival contínuo de regadio do mundo no Alentejo (Ferreira do Alentejo)?",
+    "opcoes": [
+      "Gallo Worldwide",
+      "Victor Guedes",
+      "Lactogal",
+      "Grupo Sovena (Nutrinveste)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Lagar do Marmelo da Sovena em Ferreira do Alentejo, desenhado pelo arquiteto Ricardo Bak Gordon, é um monumento à olivicultura moderna sustentável.",
+    "fonte": "Grupo Sovena / Casa do Azeite / AICEP",
+    "factClusterId": "fc_emp_sovena_oliveiradaserra_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária marca de azeite portuguesa fundada em 1919 por Victor Guedes em Abrantes («Azeite Gallo»), cujo símbolo é o galo cantando sobre o sol nascente, é a mais internacional marca de azeite de origem portuguesa presente no Brasil e no mundo?",
+    "opcoes": [
+      "Azeite Gallo (Gallo Worldwide)",
+      "Oliveira da Serra",
+      "Azeite Andorinha",
+      "Azeite Herdade do Esporão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Azeite Gallo é líder absoluto de vendas no Brasil e exporta azeites virgem extra para mais de 40 países.",
+    "fonte": "Gallo Worldwide / Casa do Azeite",
+    "factClusterId": "fc_emp_azeitegallo_victorguedes_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo de bebidas português («Sumol+Compal»), resultante da fusão da Sumol (fundada em 1954 em Algés por António Eusébio com o primeiro refrigerante de sumo de fruta natural pasteurizado) com a Compal (fundada em 1952 no Entroncamento), lidera os sumos e néctares em Portugal?",
+    "opcoes": [
+      "Unicer",
+      "Sumol+Compal",
+      "Central de Cervejas",
+      "Frutis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sumol+Compal opera grandes fábricas em Almeirim e Pombal e detém marcas icónicas como Compal, Sumol, Um Bongo, Frize e B!.",
+    "fonte": "Sumol+Compal / AICEP",
+    "factClusterId": "fc_emp_sumolcompal_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de conservas de peixe portuguesa situada em Matosinhos («Conservas Ramirez»), fundada em 1853 em Vila Real de Santo António pelo pioneiro Sebastian Ramirez, é a mais antiga empresa conserveira do mundo em laboração contínua?",
+    "opcoes": [
+      "Pinhais & C.ª",
+      "Briosa Conservas",
+      "Conservas Ramirez (Ramirez & C.ª Filhos)",
+      "Conserveira de Lisboa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fábrica ecologicamente sustentável 'Ramirez 1853' em Lavra (Matosinhos) produz conservas de sardinha, atum e cavala exportadas para 50 mercados.",
+    "fonte": "Conservas Ramirez / Associação Nacional dos Fabricantes de Conservas de Peixe (ANICP)",
+    "factClusterId": "fc_emp_conservasramirez1853_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que fábrica de conservas artesanais de sardinha fundada em 1920 em Matosinhos («Conservas Pinhais» / marca Nuri), que mantém os métodos tradicionais de corte e encaixotamento manual em azeite puro, criou o museu vivo «Conservas Pinhais Factory Tour»?",
+    "opcoes": [
+      "Ramirez",
+      "Bom Petisco",
+      "Nazaré Conservas",
+      "Conservas Pinhais (Nuri)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A marca de sardinhas Nuri das Conservas Pinhais é um objeto de culto gastronómico na Áustria e Europa Central.",
+    "fonte": "Conservas Pinhais / Município de Matosinhos",
+    "factClusterId": "fc_emp_conservaspinhais_nuri_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa de cutelarias de luxo sediada em Caldas das Taipas (Guimarães), fundada em 1963 por José Ribeiro («Cutipol»), desenha talheres de aço e resina premiados mundialmente com presença nas mesas dos melhores restaurantes Michelin e hotéis de topo do planeta?",
+    "opcoes": [
+      "Cutipol (Cutelarias Portuguesas)",
+      "Herdmar",
+      "Icel",
+      "Belo Inox"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A linha de talheres 'GOA' da Cutipol, com cabo ergonómico em resina, é um dos designs industriais portugueses mais celebrados do mundo.",
+    "fonte": "Cutipol / Associação Comercial e Industrial de Guimarães",
+    "factClusterId": "fc_emp_cutipol_guimaraes_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa familiar fundada na Benedita (concelho de Alcobaça) em 1945 («ICEL — Indústria de Cutelarias da Estremadura»), é uma das maiores fabricantes europeias de facas profissionais para hotelaria, cutelaria e chefs?",
+    "opcoes": [
+      "Cutipol",
+      "ICEL (Benedita)",
+      "Herdmar",
+      "Palaçoulo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A vila da Benedita e a ICEL tornaram-se a capital da cutelaria e cutelos profissionais de Portugal.",
+    "fonte": "ICEL / Município de Alcobaça",
+    "factClusterId": "fc_emp_icel_benedita_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa portuguesa de revestimentos cerâmicos sediada em Barrô (Águeda), fundada em 1977 («Revigrés»), forneceu pavimentos de alta tecnologia para a Basílica da Sagrada Família em Barcelona e aeroportos internacionais?",
+    "opcoes": [
+      "Aleluia Cerâmicas",
+      "Pavigrés",
+      "Revigrés",
+      "Recer"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Revigrés ganhou múltiplos prémios internacionais Red Dot Design Award pelas suas coleções de grés porcelânico ecológico.",
+    "fonte": "Revigrés / APICER",
+    "factClusterId": "fc_emp_revigres_agueda_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa industrial portuguesa sediada em Ílhavo e Aveiro («Sanindusa»), fundada em 1991, é uma das principais fabricantes ibéricas de louça sanitária cerâmica, banheiras e torneiras com exportação para mais de 80 países?",
+    "opcoes": [
+      "Roca Portugal",
+      "Valadares",
+      "Cifial",
+      "Sanindusa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Sanindusa é um dos líderes de inovação em louça sanitária de cerâmica fina com redução do consumo de água.",
+    "fonte": "Sanindusa / APICER",
+    "factClusterId": "fc_emp_sanindusa_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo calçadista português sediado em Penselo (Guimarães) e Paredes de Coura («Grupo Kyaia»), fundado por Fortunato Frederico e Amílcar Monteiro em 1984, é o criador e detentor da famosa marca global de calçado «Fly London»?",
+    "opcoes": [
+      "Grupo Kyaia (Fly London)",
+      "Procalçado",
+      "Luís Onofre",
+      "Dkode"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Fly London vende sapatos e botas com solas de borracha de vanguarda em lojas próprias em Londres, Nova Iorque e Lisboa.",
+    "fonte": "Grupo Kyaia / APICCAPS / AICEP",
+    "factClusterId": "fc_emp_flylondon_kyaia_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que prestigiado designer de calçado de luxo e empresário português de Santa Maria da Feira («Luís Onofre»), cujos sapatos de salto alto e carteiras são usados por celebridades e primeiras-damas mundiais, é o presidente da confederação europeia do calçado?",
+    "opcoes": [
+      "Miguel Vieira",
+      "Luís Onofre",
+      "Carlos Santos",
+      "Nuno Baltazar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Luís Onofre exporta mais de 90% da sua produção para boutiques de luxo nos EUA, Dubai, França e Japão.",
+    "fonte": "APICCAPS / CEC (Confederação Europeia de Calçado)",
+    "factClusterId": "fc_emp_luisonofre_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica fábrica de azulejaria e cerâmica artística fundada em Lisboa em 1849 («Fábrica de Cerâmica Viúva Lamego»), famosa pelos azulejos artesanais de autor criados com Vieira da Silva, Querubim Lapa, Siza Vieira e Joana Vasconcelos, opera atualmente na Abrunheira (Sintra)?",
+    "opcoes": [
+      "Fábrica de Santana",
+      "Fábrica Bordalo Pinheiro",
+      "Fábrica Viúva Lamego",
+      "Fábrica Aleluia"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fachada histórica da Viúva Lamego no Largo do Intendente em Lisboa, decorada com azulejos figurativos de Ferreira das Tabuletas, é Monumento de Interesse Público.",
+    "fonte": "Viúva Lamego / Museu Nacional do Azulejo",
+    "factClusterId": "fc_emp_viuvalamego1849_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa portuguesa de sabonetes e fragrâncias de luxo para a casa fundada no Porto em 1999 por Aquiles Barros («Castelbel» / Portus Cale), exporta para mais de 50 países produtos artesanais aromáticos feitos no Castêlo da Maia?",
+    "opcoes": [
+      "Claus Porto",
+      "Ach. Brito",
+      "Benamôr",
+      "Castelbel (Portus Cale)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Castelbel batizou as suas linhas em homenagem ao Douro, azulejos e flores portuguesas com grande sucesso no mercado norte-americano.",
+    "fonte": "Castelbel Porto / AICEP",
+    "factClusterId": "fc_emp_castelbel_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa têxtil familiar fundada em Guimarães em 1922 («Lameirinho»), uma das maiores produtoras europeias de roupa de cama e têxteis-lar de alta gama, produz para as marcas de luxo mais conceituadas do mundo?",
+    "opcoes": [
+      "Lameirinho (Indústria Têxtil)",
+      "Coelima",
+      "Mundotêxtil",
+      "Somelos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O cluster têxtil de Guimarães e do Vale do Ave lidera a inovação europeia em acabamentos antibacterianos e algodão orgânico.",
+    "fonte": "Lameirinho / ATP (Associação Têxtil de Portugal)",
+    "factClusterId": "fc_emp_lameirinho_guimaraes_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa têxtil portuguesa sediada em Vizela («Mundotêxtil»), fundada em 1975, é a maior fabricante de toalhas de banho e felpos da Europa, exportando mais de 98% da sua produção?",
+    "opcoes": [
+      "Lameirinho",
+      "Mundotêxtil",
+      "Têxteis Penedo",
+      "MoreTextile"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Mundotêxtil desenvolve toalhas ecológicas recicladas e fornece grandes cadeias hoteleiras e retalhistas mundiais.",
+    "fonte": "Mundotêxtil / Município de Vizela",
+    "factClusterId": "fc_emp_mundotextil_vizela_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórica e famosa confeitaria lisboeta fundada em 1837 junto ao Mosteiro dos Jerónimos («Pastéis de Belém»), produz diariamente segundo a receita secreta guardada na «Oficina do Segredo» os genuínos pastéis de nata originais?",
+    "opcoes": [
+      "Confeitaria Nacional",
+      "Pastelaria Versailles",
+      "Antiga Confeitaria de Belém (Pastéis de Belém)",
+      "Pastelaria Benard"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Antiga Confeitaria de Belém produz até 20.000 a 40.000 pastéis de nata por dia servidos quentes com canela e açúcar em pó.",
+    "fonte": "Pastéis de Belém / Turismo de Lisboa",
+    "factClusterId": "fc_emp_pasteisdebelem1837_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que pastelaria e confeitaria histórica na Praça da Figueira em Lisboa, fundada em 1829 por Balthazar Roiz Castanheiro («Confeitaria Nacional»), foi a introdutora da receita do Bolo-Rei em Portugal por volta de 1870?",
+    "opcoes": [
+      "Pastéis de Belém",
+      "Pastelaria Suíça",
+      "Pastelaria Garrett",
+      "Confeitaria Nacional"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Confeitaria Nacional foi fornecedora oficial da Casa Real Portuguesa e é a pastelaria em funcionamento mais antiga da Baixa de Lisboa.",
+    "fonte": "Confeitaria Nacional / Lojas com História de Lisboa",
+    "factClusterId": "fc_emp_confeitarianacional1829_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária fábrica de biscoitos e bolachas artesanais de Valongo (fundada em 1874), famosa pelos seus biscoitos «Milho», «Fidalguinhos» e pelas icónicas latas de folha-de-flandres litografadas vintage («Biscoitos Paupério»), é a:",
+    "opcoes": [
+      "Paupério (Fábrica de Biscoitos Paupério)",
+      "Triunfo",
+      "Nacional",
+      "Dan Cake"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Paupério mantém o fabrico tradicional a lenha e receitas seculares de biscoitos que venceram prémios na Exposição de Filadélfia de 1876.",
+    "fonte": "Paupério / Município de Valongo",
+    "factClusterId": "fc_emp_pauperio_valongo1874_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante cooperativa de lacticínios portuguesa («Lactogal»), com unidades industriais em Vila do Conde, Modivas e Tocha, é detentora das marcas líderes de leite e iogurtes «Agros», «Mimosa», «Matinal» e «Gresso»?",
+    "opcoes": [
+      "Lacticínios das Marinhas",
+      "Lactogal (Produtos Alimentares)",
+      "Unileite Açores",
+      "Bel Portugal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Lactogal processa a grande maioria da produção de leite dos produtores pecuários do Norte e Centro de Portugal continental.",
+    "fonte": "Lactogal / Federação Nacional das Cooperativas de Produtores de Leite",
+    "factClusterId": "fc_emp_lactogal_mimosa_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que cooperativa de lacticínios da Ilha de São Miguel nos Açores («Unileite»), produtora do afamado leite e queijo da marca «Terra Nostra» («Pastagens Felizes» de vacas ao ar livre 365 dias por ano), é a:",
+    "opcoes": [
+      "Lactaçores",
+      "Uniqueijo (São Jorge)",
+      "Unileite (Lacticínios dos Açores / Terra Nostra)",
+      "CALF (Faial)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A marca Terra Nostra promove a certificação de bem-estar animal e leite de pastagem exclusiva dos Açores.",
+    "fonte": "Unileite / Governo Regional dos Açores",
+    "factClusterId": "fc_emp_terranostra_unileite_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante cooperativa da Ilha de São Jorge («Uniqueijo — União das Cooperativas Agrícolas de Laticínios de São Jorge»), agrupa as cooperativas que produzem o autêntico Queijo São Jorge DOP curado em tábuas de madeira?",
+    "opcoes": [
+      "Unileite",
+      "Lactogal",
+      "Lactaçores",
+      "Uniqueijo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Queijo São Jorge DOP é produzido exclusivamente a partir de leite cru de vaca não pasteurizado com cura mínima de 3 a 7 meses.",
+    "fonte": "Uniqueijo / Confraria do Queijo de São Jorge",
+    "factClusterId": "fc_emp_uniqueijo_saojorge_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e empresa portuguesa de chocolates fundada em 1914 em Viana do Castelo («Chocolates Avianense»), a mais antiga fábrica de chocolates de Portugal, produz as tradicionais bombocas e caixas de bombons?",
+    "opcoes": [
+      "Chocolates Avianense",
+      "Imperial (Jubileu / Regina)",
+      "Arcádia",
+      "Chococard"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Avianense foi transferida para Durrães (Barcelos) e mantém um museu do chocolate com a maquinaria centenária de fabrico.",
+    "fonte": "Chocolates Avianense / Museu Avianense",
+    "factClusterId": "fc_emp_avianense1914_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que centenária confeitaria e chocolataria artesanal do Porto fundada em 1933 pela família Bastos na Praça da Liberdade («Arcádia — Casa do Chocolate»), famosa pelas suas línguas de gato de chocolate e amêndoas de Páscoa licorosas, tem lojas em todo o país?",
+    "opcoes": [
+      "Avianense",
+      "Arcádia (Chocolates Arcádia)",
+      "Imperial",
+      "Regina"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arcádia preserva o fabrico artesanal com chocolate de alta percentagem de cacau e bombons de Vinho do Porto e aguardente.",
+    "fonte": "Arcádia Porto / Associação Comercial do Porto",
+    "factClusterId": "fc_emp_arcadiaporto1933_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que maior fabricante portuguesa de chocolates sediada em Vila do Conde («Imperial — Produtos Alimentares»), fundada em 1932, é a detentora de marcas icónicas do imaginário coletivo português como «Regina», «Jubileu», «Pintarolas» e «Pantagruel»?",
+    "opcoes": [
+      "Arcádia",
+      "Avianense",
+      "Imperial (Produtos Alimentares)",
+      "Nestlé Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O chocolate de culinária Pantagruel e os tubos de confetis coloridos Pintarolas são líderes de vendas absolutos em Portugal.",
+    "fonte": "Imperial / Chocolates Regina",
+    "factClusterId": "fc_emp_imperial_regina_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grupo hoteleiro português fundado no Funchal (Madeira) em 1972 por Manuel Pestana e Dionísio Pestana («Grupo Pestana»), com mais de 100 hotéis em 16 países e gestor da rede das Pousadas de Portugal, é o maior grupo hoteleiro de Portugal?",
+    "opcoes": [
+      "Vila Galé Hotéis",
+      "Tivoli Hotels",
+      "Sana Hotels",
+      "Grupo Pestana (Pestana Hotel Group)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Pestana estabeleceu a marca hoteleira global 'Pestana CR7' em parceria com o futebolista Cristiano Ronaldo.",
+    "fonte": "Pestana Hotel Group / Turismo de Portugal",
+    "factClusterId": "fc_emp_grupopestana_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante grupo hoteleiro português fundado em 1986 pelo empresário Jorge Rebelo de Almeida («Vila Galé Hotéis»), com o seu primeiro hotel inaugurado na Praia da Galé (Albufeira), é um dos maiores operadores hoteleiros de resorts e património no Brasil e em Portugal?",
+    "opcoes": [
+      "Vila Galé Hotéis",
+      "Grupo Pestana",
+      "Hoti Hoteis",
+      "PortoBay"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Grupo Vila Galé opera mais de 40 hotéis e é o maior operador de resorts de praia 'all-inclusive' do Brasil.",
+    "fonte": "Vila Galé / Turismo de Portugal",
+    "factClusterId": "fc_emp_vilagale_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que importante empresa de engenharia e construção portuguesa fundada em 1946 por Manuel António da Mota («Mota-Engil»), com sede no Porto e grandes obras públicas de infraestruturas em África, América Latina e Europa, é a maior construtora de Portugal?",
+    "opcoes": [
+      "Teixeira Duarte",
+      "Mota-Engil",
+      "Somague",
+      "Casais"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Mota-Engil constrói pontes, linhas de caminho-de-ferro, autoestradas e portos de águas profundas em mais de 20 países.",
+    "fonte": "Mota-Engil / Euronext Lisbon",
+    "factClusterId": "fc_emp_motaengil_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que grande grupo construtor português fundado em Braga em 1958 («Grupo Casais»), pioneiro na construção industrializada sustentável em madeira de engenharia («off-site construction») e hotelaria sustentável, opera em dezenas de países?",
+    "opcoes": [
+      "Mota-Engil",
+      "dst group",
+      "Grupo Casais",
+      "Conduril"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Grupo Casais construiu os primeiros edifícios híbridos em madeira e betão de emissões quase nulas em Portugal e Espanha.",
+    "fonte": "Grupo Casais / AICCOPN",
+    "factClusterId": "fc_emp_grupocasais_braga_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que empresa industrial farmacêutica portuguesa fundada em 1924 na Amadora pelo farmacêutico António Lourenço da Cunha («Laboratórios BIAL»), líder em inovação médica que desenvolveu o primeiro medicamento de patente e I&D 100% portuguesa aprovado na Europa e EUA (Zebinix para a epilepsia e Ongentys para Parkinson), é a:",
+    "opcoes": [
+      "Medinfar",
+      "Tecnimede",
+      "Generis",
+      "BIAL (Portela & C.ª)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A BIAL tem sede na Trofa e investe mais de 20% da sua faturação em investigação científica em neurociências e sistema nervoso central.",
+    "fonte": "BIAL / Infarmed / Fundação Bial",
+    "factClusterId": "fc_emp_bial_medicamentos_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que histórico operador postal e de serviços financeiros fundado em 1520 por D. Manuel I com a nomeação de Luís Homem como Correio-Mor («CTT — Correios de Portugal»), cotado em bolsa com uma das mais extensas redes de retalho e entregas do país, é os:",
+    "opcoes": [
+      "CTT — Correios de Portugal (Banco CTT)",
+      "DPD Portugal",
+      "Chronopost",
+      "Nacex"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os CTT comemoraram 500 anos de história postal em 2020 e expandiram-se fortemente para os cacifos automáticos e e-commerce expresso.",
+    "fonte": "CTT Correios de Portugal / Fundação Portuguesa das Comunicações",
+    "factClusterId": "fc_emp_ctt1520_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_MAR_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Grandes Marcas",
+    "pergunta": "Que marca e rede de distribuição de combustíveis e serviços de conveniência («Prio Energy»), com base de distribuição e parque de biocombustíveis no Porto de Aveiro, é a maior produtora nacional de biodiesel a partir de óleos alimentares reciclados?",
+    "opcoes": [
+      "Galp",
+      "Repsol",
+      "Prio (Prio Energy)",
+      "BP Portugal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fábrica da Prio em Ílhavo/Aveiro é pioneira europeia na transição para biocombustíveis avançados e carregamento elétrico ultra-rápido.",
+    "fonte": "Prio Energy / Porto de Aveiro / DGEG",
+    "factClusterId": "fc_emp_prioenergy_aveiro_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Grandes Marcas"
+  },
+  {
+    "id": "EMP_HIS_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica empresa estatal e majestática criada em 1756 por Carta Régia de D. José I sob impulso do Marquês de Pombal («Companhia Geral da Agricultura das Vinhas do Alto Douro»), instituiu a primeira região vinícola demarcada e regulamentada do mundo delimitada pelos marcos pombalinos de granito?",
+    "opcoes": [
+      "Real Companhia Velha (Companhia Geral da Agricultura das Vinhas do Alto Douro)",
+      "Companhia do Grão-Pará e Maranhão",
+      "Companhia das Índias Orientais",
+      "Companhia de Moçambique"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Real Companhia Velha (fundada em 1756) é a mais antiga empresa de vinhos em atividade contínua de Portugal, garantindo a autenticidade do Vinho do Porto.",
+    "fonte": "Real Companhia Velha / Instituto dos Vinhos do Douro e do Porto (IVDP)",
+    "factClusterId": "fc_emp_his_realcompanhiavelha_1756_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que prestigiada fábrica de porcelanas finas, cristal e faiança fundada em Ílhavo (Aveiro) em 1824 pelo fidalgo e visionário José Ferreira Pinto Basto («Fábrica de Porcelanas da Vista Alegre»), é a mais emblemática marca de louça de mesa de luxo e arte decorativa de Portugal?",
+    "opcoes": [
+      "Bordalo Pinheiro",
+      "Vista Alegre (Fábrica de Porcelanas da Vista Alegre)",
+      "Cerâmica de Sacavém",
+      "Faianças de Coimbra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Vista Alegre recebeu o título de 'Real Fábrica' em 1829 por D. João VI e as suas peças estão presentes nas cortes reais e embaixadas de todo o mundo.",
+    "fonte": "Museu Vista Alegre (Ílhavo) / Grupo Vista Alegre Atlantis",
+    "factClusterId": "fc_emp_his_vistaalegre_1824_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que colossal conglomerado industrial e químico português fundado em 1898 pelo industrial visionário Alfredo da Silva no Barreiro («Companhia União Fabril» — CUF), com fábricas de adubos, óleos, sabões, têxteis e os estaleiros da Lisnave, tornou-se a maior empresa e polo operário da Península Ibérica no século XX?",
+    "opcoes": [
+      "Siderurgia Nacional",
+      "Cimentos de Portugal (Cimpor)",
+      "Companhia União Fabril (CUF — Alfredo da Silva)",
+      "Sonae"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A CUF de Alfredo da Silva foi pioneira no modelo de parque industrial integrado e serviços sociais aos trabalhadores (Bairro Operário, escolas e hospitais no Barreiro).",
+    "fonte": "Grupo José de Mello / Museu Industrial da Baía do Tejo (Barreiro)",
+    "factClusterId": "fc_emp_his_cuf_alfredodasilva_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e centenária saboaria e perfumaria de luxo portuense fundada em 1887 pelos químicos alemães Ferdinand Claus e Georges Schweder («Claus Porto» / Ach. Brito), famosa pelas suas embalagens artísticas Arte Nova e sabonetes aromáticos em papel vegetal selados à mão com cera, é uma referência cosmética mundial?",
+    "opcoes": [
+      "Couto (Pasta Medicinal Couto)",
+      "Confiança (Saboaria Confiança)",
+      "Benamôr 1925",
+      "Claus Porto (Ach. Brito)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Claus Porto e Ach. Brito exportam sabonetes de luxo para dezenas de países, sendo apreciados por celebridades internacionais.",
+    "fonte": "Museu Claus Porto (Rua das Flores, Porto) / Ach. Brito",
+    "factClusterId": "fc_emp_his_clausporto_1887_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica fábrica de cerâmica artística fundada em 1884 nas Caldas da Rainha pelo genial artista plástico e caricaturista Rafael Bordalo Pinheiro («Fábrica de Faianças das Caldas da Rainha» / Bordallo Pinheiro), celebrizou-se pela loiça zoomórfica e vegetalista (como as folhas de couve, andorinhas e o Zé Povinho)?",
+    "opcoes": [
+      "Fábrica de Faianças das Caldas da Rainha (Bordallo Pinheiro)",
+      "Vista Alegre",
+      "Fábrica Aleluia de Aveiro",
+      "Cerâmica de Alcobaça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bordalo Pinheiro revolucionou a faiança portuguesa com o naturalismo rústico e peças em relevo de couves, rãs e lagostas.",
+    "fonte": "Museu de Cerâmica das Caldas da Rainha / Grupo Vista Alegre",
+    "factClusterId": "fc_emp_his_bordallopinheiro_1884_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que líder mundial indiscutível no setor da transformação da cortiça, fundada em 1870 em Santa Maria de Lamas por António Alves de Amorim e desenvolvida por Américo Amorim («Corticeira Amorim»), processa mais de 5 mil milhões de rolhas por ano para os melhores vinhos e champanhes do planeta?",
+    "opcoes": [
+      "Sedacor",
+      "Corticeira Amorim (Grupo Amorim)",
+      "Granorte",
+      "Amorim Cork Composites"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Corticeira Amorim domina mais de 35% do mercado global de cortiça e desenvolve aplicações aeroespaciais (escudos térmicos de foguetões da ESA e NASA).",
+    "fonte": "Grupo Amorim / Associação Portuguesa da Cortiça (APCOR)",
+    "factClusterId": "fc_emp_his_corticeiraamorim_1870_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que gigante da grande distribuição e retalho fundado em 1959 na Maia como Sociedade Nacional de Estratificados por Afonso Pinto de Magalhães e transformado pelo lendário empresário Belmiro de Azevedo («Sonae»), inaugurou em 1985 em Matosinhos o primeiro hipermercado de Portugal («Continente»)?",
+    "opcoes": [
+      "Jerónimo Martins",
+      "Grupo Auchan",
+      "Grupo Sonae (Belmiro de Azevedo)",
+      "Intermarché"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Belmiro de Azevedo transformou a Sonae num império multinacional que inclui a Sonae MC (Continente), Worten, MO, Salsa e o jornal Público.",
+    "fonte": "Grupo Sonae / Fundação Belmiro de Azevedo",
+    "factClusterId": "fc_emp_his_sonae_belmirodeazevedo_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórico grupo de distribuição fundado em 1792 no Chiado (Lisboa) por Jerónimo Martins com uma mercearia fina fornecedora da Casa Real («Jerónimo Martins»), desenvolvido pela família Soares dos Santos com as cadeias Pingo Doce, Recheio e a gigantesca rede de supermercados Biedronka na Polónia?",
+    "opcoes": [
+      "Grupo Sonae",
+      "El Corte Inglés",
+      "Grupo Marques",
+      "Grupo Jerónimo Martins (Soares dos Santos)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Jerónimo Martins opera mais de 3.500 lojas da cadeia Biedronka na Polónia e a cadeia Ara na Colômbia.",
+    "fonte": "Grupo Jerónimo Martins / Fundação Francisco Manuel dos Santos",
+    "factClusterId": "fc_emp_his_jeronimomartins_1792_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que icónica marca e fábrica de café fundada em 1961 na vila raiana de Campo Maior (Alentejo) pelo Comendador Manuel Rui Azinhais Nabeiro («Delta Cafés»), tornou-se líder ibérica do mercado de cafés e pioneira do modelo de capitalismo de rosto humano e responsabilidade social?",
+    "opcoes": [
+      "Delta Cafés (Grupo Nabeiro)",
+      "Cafés Nicola",
+      "Sical",
+      "Buondi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Comendador Rui Nabeiro iniciou a empresa com duas pequenas máquinas de torra de 30 kg e transformou a Delta Cafés numa multinacional presente em mais de 40 países.",
+    "fonte": "Grupo Nabeiro-Delta Cafés / Centro de Ciência do Café (Campo Maior)",
+    "factClusterId": "fc_emp_his_deltacafes_ruinabeiro_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que prestigiada farmacêutica e multinacional de inovação médica fundada em 1924 no Coronado (Porto) pelo jovem diplomado Álvaro Portela («Laboratórios Bial»), é a primeira empresa portuguesa a criar e patentear internacionalmente medicamentos de investigação e síntese molecular própria (Zebinix para a epilepsia e Ongentys para a doença de Parkinson)?",
+    "opcoes": [
+      "Laboratórios Atral",
+      "Bial (Laboratórios Bial)",
+      "Hovione",
+      "Generis"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Bial investe anualmente mais de 20% do seu volume de negócios em Investigação e Desenvolvimento (I&D) com medicamentos aprovados pela FDA nos EUA e EMA na Europa.",
+    "fonte": "Bial / Fundação Bial / INFARMED",
+    "factClusterId": "fc_emp_his_bial_1924_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que grande multinacional da indústria automóvel portuguesa fundada em 1946 em Vila Nova de Gaia por Salvador Fernandes Caetano («Grupo Salvador Caetano»), construiu carroçarias de autocarros e celebrou em 1968 uma parceria pioneira com a Toyota abrindo a fábrica de montagem em Ovar?",
+    "opcoes": [
+      "AutoEuropa",
+      "CaetanoBus",
+      "Grupo Salvador Caetano (Toyota Caetano)",
+      "Famel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A fábrica da Salvador Caetano em Ovar foi a primeira linha de montagem da Toyota na Europa e é hoje pioneira em autocarros a hidrogénio (CaetanoBus).",
+    "fonte": "Grupo Salvador Caetano / Fundação Salvador Caetano",
+    "factClusterId": "fc_emp_his_salvadorcaetano_1946_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que gigante da engenharia e construção civil de Amarante fundada em 1946 por Manuel António da Mota («Mota & Companhia»), que iniciou as suas obras com exploração de madeiras e pontes em Angola e se fundiu com a Engil em 2000 dando origem à multinacional «Mota-Engil»?",
+    "opcoes": [
+      "Somague",
+      "Teixeira Duarte",
+      "Soares da Costa",
+      "Mota-Engil"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Mota-Engil é líder nacional em engenharia e infraestruturas com presença em mais de 20 países na Europa, África e América Latina.",
+    "fonte": "Grupo Mota-Engil / Fundação Manuel António da Mota",
+    "factClusterId": "fc_emp_his_motaengil_1946_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e mais antiga fábrica de azulejos manuais e cerâmica de Lisboa, fundada em 1849 no Largo do Intendente em Lisboa com fachada icónica revestida a azulejos recortados («Fábrica de Cerâmica Viúva Lamego»), forneceu os azulejos de mestres como Bordalo Pinheiro, Maria Keil e Querubim Lapa?",
+    "opcoes": [
+      "Fábrica Viúva Lamego (1849)",
+      "Cerâmica de Sacavém",
+      "Fábrica Sant'Anna",
+      "Fábrica do Rato"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Viúva Lamego produziu os azulejos das estações do Metropolitano de Lisboa desenhados por Maria Keil e os painéis de artistas internacionais como Siza Vieira e Joana Vasconcelos.",
+    "fonte": "Museu Nacional do Azulejo / Viúva Lamego",
+    "factClusterId": "fc_emp_his_viuvalamego_1849_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que lendário industrial e financeiro português do século XX (1908-2004), António Champalimaud («António de Sommer Champalimaud»), construiu um dos maiores impérios industriais de Portugal com as empresas Cimentos de Leiria, Siderurgia Nacional, Banco Pinto & Sotto Mayor e deixou em testamento 500 milhões de euros para fundar a:",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Fundação Champalimaud (Centro Champalimaud de Investigação)",
+      "Fundação Oriente",
+      "Fundação Serralves"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Champalimaud em Pedrouços (Lisboa) é um centro de excelência biomédica mundial nas áreas do cancro e das neurociências.",
+    "fonte": "Fundação Champalimaud / Dicionário de História de Portugal",
+    "factClusterId": "fc_emp_his_antoniochampalimaud_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e centenária fábrica de faiança e louça de mesa fundada em 1856 na Quinta da Stela em Sacavém («Fábrica de Louça de Sacavém»), foi uma das maiores exportadoras de loiça fina com a célebre marca do carimbo e a frase gravada «Cantou a Inglaterra, chorou Sacavém»?",
+    "opcoes": [
+      "Fábrica do Rato",
+      "Fábrica de Massarelos",
+      "Fábrica de Loiça de Sacavém",
+      "Fábrica da Foz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Museu de Cerâmica de Sacavém foi edificado sobre as ruínas do antigo Forno n.º 18 da histórica fábrica.",
+    "fonte": "Museu de Cerâmica de Sacavém / Município de Loures",
+    "factClusterId": "fc_emp_his_loicadesacavem_1856_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que líder agroindustrial português no setor do azeite e óleos alimentares («Grupo Sovena»), proprietário das marcas líderes «Oliveira da Serra» e «Fula», detém o maior olival contínuo e lagar sustentável do mundo em Ferreira do Alentejo (Lagar do Marmelo)?",
+    "opcoes": [
+      "Sovipor",
+      "Gallo Worldwide",
+      "Compal",
+      "Grupo Sovena (Nutrinveste)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Lagar do Marmelo foi desenhado pelo arquiteto Ricardo Bak Gordon e a Sovena é uma das maiores exportadoras mundiais de azeite engarrafado.",
+    "fonte": "Grupo Sovena / Casa do Azeite",
+    "factClusterId": "fc_emp_his_sovena_oliveiradaserra_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que grande cooperativa agroalimentar e líder dos laticínios em Portugal criada em 1996 através da união estratégica das três históricas uniões de cooperativas do Norte e Centro (Agros, Proleite e Lacticoop), detentora de marcas como Mimosa, Gresso, Agros e Matinal («Lactogal»)?",
+    "opcoes": [
+      "Lactogal Produtos Alimentares",
+      "Lacticínios das Beiras",
+      "Lactaçores",
+      "Nestlé Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Lactogal recolhe e transforma mais de dois terços de todo o leite de vaca produzido em Portugal continental.",
+    "fonte": "Lactogal / Federação Nacional das Cooperativas de Produtores de Leite",
+    "factClusterId": "fc_emp_his_lactogal_1996_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que prestigiado grupo cervejeiro e de bebidas português fundado em 1890 no Porto com o nome de Companhia União Fabril Portuense das Fábricas de Cerveja e Bebidas Refrigerantes («Super Bock Group» / antiga Unicer), detém a cerveja portuguesa mais vendida no mundo?",
+    "opcoes": [
+      "Sociedade Central de Cervejas",
+      "Super Bock Group (Leça do Balio, Matosinhos)",
+      "Cerveja Coral",
+      "Cerveja Especial"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A cerveja Super Bock foi registada em 1927 e detém dezenas de medalhas de ouro consecutivas no concurso internacional Monde Sélection.",
+    "fonte": "Super Bock Group / Museu Super Bock House of Beer",
+    "factClusterId": "fc_emp_his_superbockgroup_1890_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica cervejeira nacional fundada em 1934 pela fusão das históricas fábricas Bohemia, Jansen, Portuguesa e Estrela («Sociedade Central de Cervejas e Bebidas» — SCC), produtora da marca de cerveja «Sagres» e da água mineral natural do Luso e do Cruzeiro?",
+    "opcoes": [
+      "Super Bock Group",
+      "Font Salem",
+      "Sociedade Central de Cervejas e Bebidas (SCC — Vialonga)",
+      "Empresa de Cervejas da Madeira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Cerveja Sagres foi criada em 1940 para comemorar a Exposição do Mundo Português em Lisboa.",
+    "fonte": "Sociedade Central de Cervejas / Cerveja Sagres",
+    "factClusterId": "fc_emp_his_centraldecervejas_1934_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que centenária empresa e marca de calçado e marroquinaria de luxo portuguesa fundada em 1940 em Guimarães por Domingos da Silva («Luís Onofre» / «Carlos Santos» / «Fly London» / «Ambitious»), que integra a tradição do cluster do calçado de Felgueiras e São João da Madeira («A Indústria Mais Sexy da Europa»)?",
+    "opcoes": [
+      "Indústria Têxtil do Vale do Ave",
+      "Cluster da Ourivesaria de Gondomar",
+      "Cluster das Rochas Ornamentais",
+      "Cluster do Calçado Português (APICCAPS)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O calçado português exporta mais de 90% da sua produção para mais de 150 países com o segundo preço médio de exportação mais alto do mundo.",
+    "fonte": "APICCAPS / Museu do Calçado (São João da Madeira)",
+    "factClusterId": "fc_emp_his_calcado_apiccaps_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que icónica marca de pasta de dentes medicinal fundada no Porto em 1932 pelo Dr. Alberto Ferreira Couto («Pasta Medicinal Couto»), com a sua embalagem amarela e vermelha e o famoso anúncio do homem a rodopiar com o tubo na boca?",
+    "opcoes": [
+      "Pasta Medicinal Couto (Laboratórios Couto)",
+      "Pasta Dentífrica Colgate",
+      "Pasta Benamôr",
+      "Pasta Odol"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Pasta Couto foi formulada para combater problemas gengivais e tornou-se um ícone intemporal do design e da indústria nacional.",
+    "fonte": "Laboratórios Couto (Vila Nova de Gaia)",
+    "factClusterId": "fc_emp_his_pastacouto_1932_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e mais antiga confeitaria e chocolataria artesanal do Porto, fundada em 1914 na Rua de Santa Catarina («Chocolates Arcádia» / Confeitaria Arcádia), célebre pelas suas línguas de gato de chocolate, bombons de licor do Porto e amêndoas torradas?",
+    "opcoes": [
+      "Regina",
+      "Arcádia (Casa do Chocolate)",
+      "Imperial",
+      "Avianense"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arcádia foi fundada pela família Bastos e mantém o método de fabrico artesanal e receitas tradicionais há mais de um século.",
+    "fonte": "Arcádia — Casa do Chocolate / Turismo do Porto",
+    "factClusterId": "fc_emp_his_arcadia_chocolates_1914_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica fábrica de chocolates fundada em Viana do Castelo em 1914 («Chocolates Avianense»), considerada a mais antiga fábrica de chocolates em funcionamento contínuo de Portugal, célebre pelos seus bombons «Imperador» e tabletes tradicionais?",
+    "opcoes": [
+      "Chocolates Regina",
+      "Chocolates Jubileu",
+      "Chocolates Avianense (1914)",
+      "Chocolates Pantagruel"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Avianense possui um museu do chocolate em Durrães e preserva máquinas históricas de refinação de cacau do início do século XX.",
+    "fonte": "Museu dos Chocolates Avianense / Município de Viana do Castelo",
+    "factClusterId": "fc_emp_his_avianense_1914_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que famosa marca de chocolates fundada em 1928 em Lisboa («Regina»), celebrizou-se pelos seus chocolates de frutos secos, o chocolate para culinária e as icónicas máquinas de metal com ranhura para moedas com bonecos coloridos?",
+    "opcoes": [
+      "Imperial",
+      "Avianense",
+      "Arcádia",
+      "Regina (Chocolates Regina)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As máquinas de chocolates Regina com formato de caixa de fósforos marcaram a infância de gerações de portugueses nos cinemas e cafés.",
+    "fonte": "Imperial — Chocolates de Portugal / Museu da Marioneta",
+    "factClusterId": "fc_emp_his_regina_chocolates_1928_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica fundição e empresa de máquinas de costura e alfaiataria de São João da Madeira fundada em 1932 por Manuel de Oliveira («Oliva»), celebrizou-se pelas lendárias máquinas de costura de pedal em ferro fundido preto com ornamentos dourados presentes em todos os lares portugueses?",
+    "opcoes": [
+      "Fábrica Oliva (Máquinas de Costura Oliva)",
+      "Fábrica Singer de Portugal",
+      "Fundição de Oeiras",
+      "Metalúrgica Casal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Oliva foi um dos maiores polos industriais metalúrgicos do país e o edifício da Torre Oliva acolhe hoje o Welcome Center e centro de design.",
+    "fonte": "Município de São João da Madeira / Museu da Oliva",
+    "factClusterId": "fc_emp_his_oliva_maquinasdecostura_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e famosa fábrica de lápis fundada em 1907 em Vila Nova de Gaia pelo conselheiro Manoel Vieira Araújo («Viarco» / Empresa Eletro-Cerâmica de Gaia), é a única fábrica de lápis de grafite e de cor ainda em laboração em toda a Península Ibérica?",
+    "opcoes": [
+      "Faber-Castell Portugal",
+      "Viarco (Fábrica de Lápis Viarco de São João da Madeira)",
+      "Staedtler Lusa",
+      "Gicor"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Viarco transferiu-se para São João da Madeira em 1931 e produz lápis de desenho vintage e materiais inovadores como o 'ArtGraf' de grafite solúvel em água.",
+    "fonte": "Viarco / Museu do Lápis / Turismo Industrial de S. João da Madeira",
+    "factClusterId": "fc_emp_his_viarco_lapis_1907_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que lendária fábrica de motorizadas e motociclos fundada em 1949 em Águeda («Famel» — Fábrica de Produtos Metálicos Lda.), celebrizou-se pelo mítico modelo «Famel XF-17» nos anos 1970 com motor Zündapp de 5 velocidades?",
+    "opcoes": [
+      "Casal (Metalúrgica Casal)",
+      "Macal",
+      "Famel (Fábrica de Produtos Metálicos)",
+      "Sisal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Famel XF-17 é a mais icónica motorizada clássica nacional de 50cc com design desportivo e depósito cromado.",
+    "fonte": "Museu das Duas Rodas (Águeda) / Município de Águeda",
+    "factClusterId": "fc_emp_his_famel_xf17_agueda_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que importante e histórica metalúrgica de motociclos de Aveiro fundada em 1964 por João Casal («Metalúrgica Casal»), produziu os famosos motores e ciclomotores Casal (como a Casal Boss e Casal Carina) que bateram o recorde mundial de velocidade de 50cc no circuito de Nardò em 1980?",
+    "opcoes": [
+      "Famel",
+      "Vilar",
+      "SIS Sachs",
+      "Metalúrgica Casal (Casal Boss / Casal Huvo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Casal bateu o recorde do mundo com a Casal Huvo 50cc pilotada pelo holandês Jan Huberts atingindo mais de 221 km/h.",
+    "fonte": "Museu das Duas Rodas / FIM",
+    "factClusterId": "fc_emp_his_metalurgicacasal_1964_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que centenária mercearia fina e casa de cafés fundada em 1887 no Largo Camões e na Praça da Figueira em Lisboa («Manuel Tavares»), famosa pelas suas montras com queijos da Serra, enchidos tradicionais, frutos secos e vinhos do Porto raros?",
+    "opcoes": [
+      "Mercearia Manuel Tavares (1887)",
+      "Manteigaria Silva (1890)",
+      "Pérola do Bolhão",
+      "A Carioca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Mercearia Manuel Tavares mantém o balcão de madeira original e a venda a granel há quase 140 anos no centro histórico lisboeta.",
+    "fonte": "Lojas com História / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_his_manueltavares_1887_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e mais antiga livraria do mundo em funcionamento contínuo no mesmo local (fundada em 1732 pelos irmãos Bertrand no Chiado em Lisboa), «Livraria Bertrand», certificada pelo Guinness World Records?",
+    "opcoes": [
+      "Livraria Lello do Porto",
+      "Livraria Bertrand do Chiado (1732 — Guinness World Records)",
+      "Livraria Ferin",
+      "Livraria Sá da Costa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Livraria Bertrand na Rua Garrett reconstruída após o terramoto de 1755 é a livraria mais antiga do mundo em atividade ininterrupta.",
+    "fonte": "Guinness World Records / Grupo Porto Editora / Lojas com História",
+    "factClusterId": "fc_emp_his_livrariabertrand_1732_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que deslumbrante livraria neogótica portuense fundada em 1906 pelos irmãos José e António Lello na Rua das Carmelitas («Livraria Lello»), célebre pela sua monumental escadaria vermelha de madeira e vitral no teto, é considerada uma das mais belas livrarias do mundo?",
+    "opcoes": [
+      "Livraria Bertrand",
+      "Livraria Chardron",
+      "Livraria Lello (Porto, 1906)",
+      "Livraria Académica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Livraria Lello projetada pelo engenheiro Xavier Esteves atrai milhões de visitantes internacionais e amantes de literatura.",
+    "fonte": "Livraria Lello / DGPC / Município do Porto",
+    "factClusterId": "fc_emp_his_livrarialello_1906_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórico café literário fundado em 1905 na Rua Garrett no Chiado em Lisboa por Adriano Telles («Café A Brasileira do Chiado»), famoso por vender o café de 'bica' (Beba Isto Com Açúcar) e pela estátua de bronze do poeta Fernando Pessoa sentado à mesa na esplanada?",
+    "opcoes": [
+      "Café Nicola (Rossio)",
+      "Café Martinho da Arcada",
+      "Pastelaria Benard",
+      "A Brasileira do Chiado (1905)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A estátua de bronze de Fernando Pessoa d'A Brasileira foi esculpida pelo escultor Lagoa Henriques em 1988.",
+    "fonte": "Lojas com História / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_his_abrasileira_chiado_1905_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que emblemático café histórico fundado em 1921 na Rua de Santa Catarina no Porto com interiores sumptuosos de estilo Arte Nova e espelhos de cristal belga («Café Majestic»), era o ponto de encontro de tertúlias de intelectuais e artistas portuenses?",
+    "opcoes": [
+      "Café Majestic (Porto, 1921)",
+      "Café Guarany",
+      "Café Piolho (Âncora D'Ouro)",
+      "Café Ceuta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Majestic (originalmente chamado Café Élite) foi projetado pelo arquiteto João Queirós e é classificado como Imóvel de Interesse Público.",
+    "fonte": "Café Majestic / DGPC / Porto Turismo",
+    "factClusterId": "fc_emp_his_cafemajestic_porto_1921_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórico e mais antigo café em funcionamento de Lisboa, fundado em 1782 na Praça do Comércio sob as arcadas pombalinas do Terreiro do Paço («Café Martinho da Arcada»), era o poiso diário de Bocage e de Fernando Pessoa (que tinha a sua mesa cativa reservada)?",
+    "opcoes": [
+      "Café Nicola",
+      "Martinho da Arcada (1782)",
+      "A Brasileira",
+      "Pastelaria Versailles"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Fernando Pessoa tomou o seu último café com amigos no Martinho da Arcada a 27 de novembro de 1935 antes de ser internado.",
+    "fonte": "Martinho da Arcada / Lojas com História",
+    "factClusterId": "fc_emp_his_martinhodaarcada_1782_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que tradicional pastelaria e salão de chá fundado em 1922 na Avenida da República em Lisboa («Pastelaria Versailles»), famosa pelos seus espelhos barrocos, estuques dourados e doçaria tradicional conventual e salgados?",
+    "opcoes": [
+      "Confeitaria Nacional",
+      "Pastelaria Benard",
+      "Pastelaria Versailles (1922)",
+      "Casa Baltazar"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Versailles foi classificada como Património da Cidade e mantém os fardamentos clássicos e a atmosfera dos cafés de tertúlia dos anos 1920.",
+    "fonte": "Lojas com História / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_his_pastelariaversailles_1922_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e mais antiga confeitaria em funcionamento contínuo de Lisboa, fundada em 1829 na Praça da Figueira por Balthazar Roiz Castanheiro («Confeitaria Nacional»), foi a responsável por introduzir a receita do tradicional «Bolo Rei» em Portugal trazida de Paris em 1870?",
+    "opcoes": [
+      "Pastelaria Versailles",
+      "Antiga Confeitaria de Belém",
+      "Pastelaria Piriquita",
+      "Confeitaria Nacional (1829)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Balthazar Castanheiro Júnior trouxe de França o pasteleiro Gregório e a receita original do 'Gâteau des Rois' que adaptou ao paladar português.",
+    "fonte": "Confeitaria Nacional / Lojas com História",
+    "factClusterId": "fc_emp_his_confeitarianacional_1829_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica fábrica e pastelaria de Belém (Lisboa) fundada em 1837 contígua ao Mosteiro dos Jerónimos («Pastéis de Belém» / Fábrica dos Pastéis de Belém), guarda a sete chaves na célebre «Oficina do Segredo» a receita original dos monges hieronimitas dos pastéis de nata?",
+    "opcoes": [
+      "Pastéis de Belém (Antiga Confeitaria de Belém — 1837)",
+      "Manteigaria",
+      "Fábrica da Nata",
+      "Pastelaria Aloma"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Apenas três mestres pasteleiros conhecem a receita secreta e assinam termo de confidencialidade confecionando milhares de pastéis diariamente.",
+    "fonte": "Fábrica dos Pastéis de Belém / Turismo de Lisboa",
+    "factClusterId": "fc_emp_his_pasteisdebelem_1837_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórico operador ferroviário público português fundado em 1860 pelo Rei D. Pedro V e pelo engenheiro Fontes Pereira de Melo com o nome de «Companhia Real dos Caminhos de Ferro Portugueses» (atual CP — Comboios de Portugal), inaugurou a linha entre Lisboa e o Carregado em 1856?",
+    "opcoes": [
+      "Infraestruturas de Portugal (IP)",
+      "CP — Comboios de Portugal (antiga Companhia Real dos Caminhos de Ferro)",
+      "Metropolitano de Lisboa",
+      "Fertagus"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A CP opera os serviços de Alfa Pendular, Intercidades e comboios urbanos em mais de 2.500 km de ferrovia.",
+    "fonte": "CP / Museu Nacional Ferroviário (Entroncamento)",
+    "factClusterId": "fc_emp_his_cp_comboiosdeportugal_1856_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que companhia aérea de bandeira nacional de Portugal fundada a 14 de março de 1945 pelo pioneiro da aviação Humberto Delgado («TAP Air Portugal» / Transportes Aéreos Portugueses), realizou o seu primeiro voo comercial em 1946 na Linha Aérea Imperial entre Lisboa e Lourenço Marques (Moçambique)?",
+    "opcoes": [
+      "SATA Air Açores",
+      "PGA Portugália Airlines",
+      "TAP Air Portugal (Transportes Aéreos Portugueses)",
+      "EuroAtlantic Airways"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A TAP foi fundada por Humberto Delgado com dois aviões bimotores Douglas DC-3 Dakota e é o principal hub aéreo europeu de ligação ao Brasil e África.",
+    "fonte": "Museu do Ar / TAP Air Portugal / ANAC",
+    "factClusterId": "fc_emp_his_tap_humbertodelgado_1945_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que operadora postal nacional com mais de 500 anos de história contínua (fundada em 1520 pelo Rei D. Manuel I com a nomeação de Luís Homem como «Correio-Mor do Reino»), «CTT — Correios de Portugal», tem como símbolo heráldico um cavaleiro a tocar a trombeta?",
+    "opcoes": [
+      "DPD Portugal",
+      "Chronopost",
+      "Nacex",
+      "CTT — Correios de Portugal (fundados em 1520)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Os CTT são uma das mais antigas instituições de correio e telecomunicações do mundo em laboração ininterrupta.",
+    "fonte": "Fundação Portuguesa das Comunicações / CTT",
+    "factClusterId": "fc_emp_his_ctt_1520_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica refinaria e grupo açucareiro portuense fundado em 1962 pela fusão de várias refinarias tradicionais do norte pelo empresário João Macedo Silva («RAR — Refinarias de Açúcar Reunidas»), expandiu-se para os setores de embalagens (Colep) e pão (Vitacress)?",
+    "opcoes": [
+      "Grupo RAR (Refinarias de Açúcar Reunidas)",
+      "SIDUL",
+      "Sovena",
+      "Sumol+Compal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Grupo RAR tem sede no Porto e opera em vários mercados internacionais na Europa e Américas.",
+    "fonte": "Grupo RAR / Museu da Indústria",
+    "factClusterId": "fc_emp_his_gruporar_1962_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que importante grupo português de sumos e bebidas refrigerantes criado pela fusão em 2008 da histórica empresa Sumol (fundada em 1954 em Algés por António João Eusébio) com a Compal (fundada em 1952 em Entroncamento por Alberto Salazar de Sousa), «Sumol+Compal»?",
+    "opcoes": [
+      "Unicer",
+      "Sumol+Compal (Sumol e Compal)",
+      "SCC",
+      "Font Salem"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O refrigerante Sumol de laranjada e a marca de néctares naturais Compal de Almeirim são marcas afetivas de Portugal.",
+    "fonte": "Grupo Sumol+Compal / Museu do Design",
+    "factClusterId": "fc_emp_his_sumolcompal_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e emblemática casa de alta costura e confeção de camisaria fundada em 1925 na Rua Augusta em Lisboa («Camisaria Moderna» / «Camisaria Pitta» / «A Carioca»), mantém as técnicas de corte artesanal e tecidos nobres?",
+    "opcoes": [
+      "Armazéns do Chiado",
+      "Ramiro Leão",
+      "Lojas Históricas de Alfaiataria e Camisaria da Baixa de Lisboa",
+      "Grandella"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O comércio tradicional da Baixa de Lisboa preserva alfaiatarias e camisarias fundadas no início do século XX integradas no programa municipal 'Lojas com História'.",
+    "fonte": "Programa Lojas com História / CML",
+    "factClusterId": "fc_emp_his_camisariasbaixa_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que históricos armazéns comerciais monumentais do Chiado fundados em 1894 pelo comerciante visionário Francisco de Almeida Grandella («Armazéns Grandella»), com fachada neoclássica e estátuas de ferro fundido, foram destruídos no grande Incêndio do Chiado de 1988?",
+    "opcoes": [
+      "Armazéns do Chiado",
+      "Armazéns Ramiro Leão",
+      "Armazéns Paris em Lisboa",
+      "Armazéns Grandella (Chiado)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Grandella foi pioneiro na criação de creches e bairros sociais para os seus empregados (Bairro Grandella em Benfica).",
+    "fonte": "Museu de Lisboa / Dicionário de História de Portugal",
+    "factClusterId": "fc_emp_his_armazensgrandella_1894_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórico armazém têxtil e de tecidos de alta qualidade fundado em 1888 na Rua Garrett no Chiado («Armazéns Paris em Lisboa»), é uma das lojas mais antigas e elegantes da capital portuguesa?",
+    "opcoes": [
+      "Paris em Lisboa (1888)",
+      "Pollux",
+      "Casa das Velas do Loreto",
+      "Ourivesaria Aliança"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A loja 'Paris em Lisboa' forneceu a Rainha D. Amélia e mantém as madeiras nobres esculpidas e atendimento personalizado.",
+    "fonte": "Lojas com História / Associação de Comércio do Chiado",
+    "factClusterId": "fc_emp_his_parisemlisboa_1888_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que lendária e mais antiga fábrica e loja de velas artesanais de cera de abelha do mundo, fundada em 1789 junto ao Largo do Chiado («Cordoaria Nacional» / «Casa das Velas do Loreto»), abastece paróquias e palácios desde a época de D. Maria I?",
+    "opcoes": [
+      "Casa das Tochas",
+      "Casa das Velas do Loreto (1789)",
+      "Cordoaria Nacional",
+      "Fábrica do Rato"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Casa das Velas do Loreto fabrica velas de cera pura prensadas à mão sem fumo nem cheiro há mais de 230 anos.",
+    "fonte": "Lojas com História / Junta de Freguesia da Misericórdia",
+    "factClusterId": "fc_emp_his_casadasvelasdoloreto_1789_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que imponente e histórico complexo de fabrico militar e náutico fundado em 1779 pelo Marquês de Pombal e D. Maria I na Junqueira (Belém, Lisboa) com um edifício de quase 400 metros de extensão («Cordoaria Nacional»), fornecia cabos e cordames de cânhamo para as naus da Marinha Portuguesa?",
+    "opcoes": [
+      "Arsenal da Marinha",
+      "Fábrica da Pólvora de Barcarena",
+      "Cordoaria Nacional (1779)",
+      "Fábrica de Armas de Beirolas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O edifício da Cordoaria Nacional é um Monumento Nacional que acolhe exposições de arte e feiras internacionais (como a ARCO Lisboa).",
+    "fonte": "Marinha Portuguesa / DGPC / Monumentos de Portugal",
+    "factClusterId": "fc_emp_his_cordoarianacional_1779_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que histórica e famosa fábrica de pólvora militar e civil fundada no século XVII em Oeiras («Fábrica da Pólvora de Barcarena»), movida pelas águas da ribeira de Barcarena com mós de galgas e oficinas de refinação de salitre?",
+    "opcoes": [
+      "Fábrica da Pólvora de Vale de Milhaços",
+      "Fábrica Militar de Braço de Prata",
+      "Arsenal do Exército",
+      "Fábrica da Pólvora de Barcarena (Oeiras)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fábrica da Pólvora de Barcarena foi desativada em 1988 e transformada pelo Município de Oeiras num parque urbano e Museu da Pólvora Negra.",
+    "fonte": "Museu da Pólvora Negra / Município de Oeiras",
+    "factClusterId": "fc_emp_his_polvoradebarcarena_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que importante e histórico complexo fabril a vapor preservado no Seixal («Fábrica de Pólvora de Vale de Milhaços»), fundada em 1898 pelo engenheiro francês Augusto Falconi, mantém a máquina a vapor original e a caldeira de vapor em perfeito estado funcional de arqueologia industrial?",
+    "opcoes": [
+      "Fábrica de Pólvora de Vale de Milhaços (Seixal)",
+      "Fábrica da Cortiça da Amora",
+      "Seca do Bacalhau da Ponta dos Corvos",
+      "Mundet do Seixal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Fábrica de Vale de Milhaços é Monumento de Interesse Público e integra o Ecomuseu Municipal do Seixal.",
+    "fonte": "Ecomuseu Municipal do Seixal / DGPC",
+    "factClusterId": "fc_emp_his_valedemilhacos_seixal_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_HIS_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "História Empresarial",
+    "pergunta": "Que antiga e histórica fábrica têxtil de fiação de algodão e estampados fundada em 1875 na foz do rio Ave em Vila do Conde («Fábrica do Rio Ave») e a centenária «Fábrica de Lanifícios da Covilhã» (Real Fábrica de Panos fundada pelo Marquês de Pombal em 1764), são os pilares da história industrial têxtil de Portugal?",
+    "opcoes": [
+      "Fábrica de Fiação de Tomar",
+      "Fábrica da Estrela",
+      "Real Fábrica de Panos da Covilhã (1764) e Fábrica do Rio Ave",
+      "Fábrica de Fiação do Alentejo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Real Fábrica de Panos da Covilhã acolhe hoje o Museu dos Lanifícios (MUSLAN) da Universidade da Beira Interior.",
+    "fonte": "Museu dos Lanifícios da UBI / Município da Covilhã",
+    "factClusterId": "fc_emp_his_realfabricadepanos_covilha_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "História Empresarial"
+  },
+  {
+    "id": "EMP_EHI_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e secular empresa pública portuguesa («Imprensa Nacional-Casa da Moeda» / INCM), com origens no século XIII e refundada pela rainha D. Maria I, é a mais antiga instituição fabril e empresarial em laboração contínua de Portugal?",
+    "opcoes": [
+      "Imprensa Nacional-Casa da Moeda (INCM)",
+      "CTT — Correios de Portugal",
+      "Companhia das Lezírias",
+      "Banco de Portugal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A INCM é responsável pela cunhagem de moedas oficiais, emissão de passaportes e cartões de cidadão e edição do Diário da República.",
+    "fonte": "INCM / Diário da República / Museu Casa da Moeda",
+    "factClusterId": "fc_emp_ehi_incm_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica empresa postal fundada em 1520 pelo Rei D. Manuel I com a nomeação de Luís Homem como o primeiro «Correio-Mor do Reino» («CTT — Correios de Portugal»), celebra mais de cinco séculos de serviço postal e comunicações?",
+    "opcoes": [
+      "Altice Portugal",
+      "CTT — Correios de Portugal (1520)",
+      "TAP Air Portugal",
+      "RTP"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Os CTT operaram como correio régio e serviço público estatal antes da privatização em 2013/2014 e criação do Banco CTT.",
+    "fonte": "Fundação Portuguesa das Comunicações / CTT",
+    "factClusterId": "fc_emp_ehi_ctt_1520_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que famosa e prestigiada manufactura de porcelanas finas fundada em 1824 no lugar da Vista Alegre em Ílhavo por José Ferreira Pinto Basto («Fábrica de Porcelana da Vista Alegre»), é fornecedora oficial de louças e serviços das casas reais e chefes de Estado mundiais?",
+    "opcoes": [
+      "Bordalo Pinheiro",
+      "Fábrica de Santana",
+      "Vista Alegre (1824)",
+      "Costa Nova"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Vista Alegre recebeu o título de 'Real Fábrica' de D. João VI e pertence atualmente ao grupo português Grupo Visabeira.",
+    "fonte": "Museu Vista Alegre / Grupo Visabeira",
+    "factClusterId": "fc_emp_ehi_vistaalegre_1824_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que lendária livraria lisboeta fundada em 1732 na Rua Garrett (Chiado) pelo livreiro francês Pedro Faure («Livraria Bertrand»), foi oficialmente certificada pelo Guinness World Records como a livraria mais antiga do mundo em funcionamento contínuo?",
+    "opcoes": [
+      "Livraria Lello",
+      "Livraria Ferin",
+      "Livraria Sá da Costa",
+      "Livraria Bertrand (Guinness World Records, 1732)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Livraria Bertrand sobreviveu ao Terramoto de 1755 e foi o ponto de encontro de Alexandre Herculano, Eça de Queiroz e Antero de Quental.",
+    "fonte": "Guinness World Records / Grupo Porto Editora / Livraria Bertrand",
+    "factClusterId": "fc_emp_ehi_livrariabertrand_1732_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e conceituada saboaria e perfumaria de luxo fundada no Porto em 1887 pelos químicos alemães Ferdinand Claus e Georges Schweder («Claus Porto» / Ach. Brito), célebre pelos seus sabonetes com embalagens Arte Nova pintadas à mão, é exportada para os armazéns mais exclusivos do mundo?",
+    "opcoes": [
+      "Claus Porto (Ach. Brito, 1887)",
+      "Saboaria Confiança",
+      "Benamôr",
+      "Couto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Claus Porto conquistou medalhas de ouro em exposições internacionais no século XIX e XX e abriu lojas de prestígio em Nova Iorque e Paris.",
+    "fonte": "Claus Porto / Ach. Brito / Museu da Cidade do Porto",
+    "factClusterId": "fc_emp_ehi_clausporto_1887_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga empresa de conservas de peixe em laboração contínua do mundo, fundada em 1853 em Vila Real de Santo António pelo empresário Sebastian Ramirez («Conservas Ramirez»), é a pioneira mundial do enlatamento de sardinhas e atum?",
+    "opcoes": [
+      "Conserveira de Lisboa",
+      "Ramirez (Fundada em 1853)",
+      "Briosa Gourmet",
+      "A Poveira"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Ramirez opera hoje na moderna 'Ramirez 1853' em Matosinhos exportando conservas portuguesas para mais de 50 países nos cinco continentes.",
+    "fonte": "Ramirez & C.ª (Filhos) / ANICP",
+    "factClusterId": "fc_emp_ehi_ramirez_1853_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que monumental e histórico conglomerado industrial e químico português fundado em 1898 pelo visionário empresário Alfredo da Silva («CUF» — Companhia União Fabril), ergueu no Barreiro o maior complexo industrial e operário da Península Ibérica?",
+    "opcoes": [
+      "Siderurgia Nacional",
+      "Setenave",
+      "CUF — Companhia União Fabril (Alfredo da Silva)",
+      "Soponata"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O grupo CUF dominou a produção de adubos, sabões, óleos e navegação e renasceu na democracia como o maior grupo privado de saúde de Portugal.",
+    "fonte": "Fundação Amélia de Mello / Grupo José de Mello / Museu Industrial do Barreiro",
+    "factClusterId": "fc_emp_ehi_cuf_alfredodasilva_1898_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e maior empresa agropecuária e florestal de Portugal fundada em 1836 pelo governo liberal da rainha D. Maria II («Companhia das Lezírias»), gere mais de 18.000 hectares de montado de sobro, vinhas e arrozais em Samora Correia e Benavente?",
+    "opcoes": [
+      "Companhia das Índias",
+      "Sogrape",
+      "Sovena",
+      "Companhia das Lezírias (1836)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Companhia das Lezírias é uma empresa de capitais públicos exemplar em sustentabilidade ambiental e criação de cavalos puro-sangue lusitanos.",
+    "fonte": "Companhia das Lezírias / Ministério da Agricultura",
+    "factClusterId": "fc_emp_ehi_companhiadaslezirias_1836_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e pioneira fábrica de faianças e azulejos artísticos fundada em 1849 no Largo do Intendente em Lisboa pelo ceramista António da Costa Lamego («Fábrica de Cerâmica Viúva Lamego»), é a principal responsável pelos painéis de azulejos das estações de metro e monumentos portugueses?",
+    "opcoes": [
+      "Viúva Lamego (1849)",
+      "Bordalo Pinheiro",
+      "Aleluia Cerâmicas",
+      "Fábrica do Rato"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Viúva Lamego produziu obras de grandes mestres da arte contemporânea como Maria Keil, Querubim Lapa, Manuel Cargaleiro e Joana Vasconcelos.",
+    "fonte": "Museu Nacional do Azulejo / Viúva Lamego",
+    "factClusterId": "fc_emp_ehi_viuvalamego_1849_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e emblemática fábrica de cerâmica fundada em 1884 nas Caldas da Rainha pelo genial artista e caricaturista Rafael Bordalo Pinheiro («Fábrica de Faianças das Caldas da Rainha» / Bordalo Pinheiro), celebrizou as icónicas louças em forma de folhas de couve, andorinhas e animais?",
+    "opcoes": [
+      "Vista Alegre",
+      "Bordalo Pinheiro (1884)",
+      "Costa Nova",
+      "Fábrica de Sacavém"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Bordalo Pinheiro preserva as formas e moldes originais de Rafael Bordalo Pinheiro integrando o Grupo Visabeira.",
+    "fonte": "Bordalo Pinheiro / Museu Bordalo Pinheiro / Grupo Visabeira",
+    "factClusterId": "fc_emp_ehi_bordalopinheiro_1884_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica companhia aérea de bandeira nacional fundada a 14 de março de 1945 por Humberto Delgado («TAP Air Portugal» / Transportes Aéreos Portugueses), iniciou os seus voos regulares em 1946 com dois aviões Douglas DC-3 Dakota na Linha Aérea Imperial para Luanda e Lourenço Marques?",
+    "opcoes": [
+      "SATA Air Açores",
+      "Portugália Airlines",
+      "TAP Air Portugal (1945)",
+      "Aero Portuguesa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A TAP foi pioneira na ligação transatlântica ao Brasil e é o principal operador aéreo internacional entre a Europa e a América do Sul.",
+    "fonte": "Museu do Ar / TAP Air Portugal / ANAC",
+    "factClusterId": "fc_emp_ehi_tap_1945_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica companhia ferroviária fundada em 1856 («CP — Comboios de Portugal» / originalmente Companhia Real dos Caminhos de Ferro Portugueses), inaugurou a 28 de outubro de 1856 o primeiro troço de caminho de ferro em Portugal entre Lisboa e o Carregado com a presença do Rei D. Pedro V?",
+    "opcoes": [
+      "REFER",
+      "Metropolitano de Lisboa",
+      "Fertagus",
+      "CP — Comboios de Portugal (1856)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A locomotiva a vapor 'D. Luís' inaugurou os 36 quilómetros da primeira ferrovia portuguesa mudando para sempre o transporte de passageiros e mercadorias.",
+    "fonte": "Museu Nacional Ferroviário (Entroncamento) / CP",
+    "factClusterId": "fc_emp_ehi_cp_caminhosdeferro_1856_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga confeitaria de Lisboa fundada em 1829 na Praça da Figueira por Baltazar Roiz Castanheiro («Confeitaria Nacional»), introduziu em Portugal em 1870 a receita do tradicional Bolo-Rei importada de França?",
+    "opcoes": [
+      "Confeitaria Nacional (1829)",
+      "Pastelaria Versailles",
+      "Pastelaria Suíça",
+      "Pastelaria Garrett"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Confeitaria Nacional foi fornecedora oficial da Casa Real Portuguesa e pertence à mesma família fundadora há seis gerações.",
+    "fonte": "Confeitaria Nacional / Associação de Comércio de Lisboa",
+    "factClusterId": "fc_emp_ehi_confeitarianacional_1829_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que famoso café histórico inaugurado em 1905 no Chiado em Lisboa pelo comerciante Adriano Telles («Café A Brasileira»), foi o primeiro estabelecimento a servir o «café de bica» e acolhe na sua esplanada a célebre estátua em bronze de Fernando Pessoa de Lagoa Henriques?",
+    "opcoes": [
+      "Martinho da Arcada",
+      "A Brasileira do Chiado (1905)",
+      "Café Nicola",
+      "Café Império"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O lema publicitário original criado por Adriano Telles era 'Beba Isto Com Açúcar' dando origem à célebre palavra portuguesa 'Bica'.",
+    "fonte": "A Brasileira / Turismo de Lisboa / DGPC",
+    "factClusterId": "fc_emp_ehi_abrasileira_chiado_1905_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que mítico café lisboeta fundado em 1782 no Terreiro do Paço («Martinho da Arcada» / originalmente Casa de Café da Neve), é o café-restaurante mais antigo em funcionamento contínuo da cidade de Lisboa, frequentado assiduamente por Bocage e Fernando Pessoa?",
+    "opcoes": [
+      "Café Nicola",
+      "A Brasileira",
+      "Martinho da Arcada (1782)",
+      "Pastelaria Benard"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Martinho da Arcada preserva até hoje a mesa cativa onde Fernando Pessoa escreveu poemas e bebeu o seu último café a 18 de novembro de 1935.",
+    "fonte": "Martinho da Arcada / Associação de Restaurantes de Lisboa",
+    "factClusterId": "fc_emp_ehi_martinhodaarcada_1782_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que lendário café de luxo inaugurado em 1921 na Rua de Santa Catarina no Porto («Café Majestic» / originalmente Café Elite), projetado pelo arquiteto João Queiroz, é a mais deslumbrante joia da arquitetura Arte Nova e Belle Époque de Portugal?",
+    "opcoes": [
+      "Café Guarany",
+      "Café Piolho / Âncora d'Ouro",
+      "Café Ceuta",
+      "Café Majestic (Porto, 1921)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Majestic foi classificado como Imóvel de Interesse Público e eleito um dos 10 cafés mais belos do mundo por revistas internacionais.",
+    "fonte": "Café Majestic / Turismo do Porto",
+    "factClusterId": "fc_emp_ehi_cafemajestic_porto_1921_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga agência de navegação marítima e comércio internacional de Portugal fundada em 1771 («Pinto Basto» / E. Pinto Basto & C.ª), desempenhou um papel pioneiro nas rotas marítimas mundiais e introduziu o primeiro jogo de futebol em Portugal em 1888 através de Guilherme Pinto Basto?",
+    "opcoes": [
+      "Pinto Basto (1771)",
+      "Garland Navegação",
+      "Magefesa",
+      "Companhia Colonial de Navegação"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A família Pinto Basto foi fundadora da Vista Alegre e pioneira na introdução do desporto moderno em Portugal.",
+    "fonte": "Pinto Basto / Museu Marítimo / DHP",
+    "factClusterId": "fc_emp_ehi_pintobasto_1771_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que importante e histórica fábrica de vidros do século XVIII fundada em 1748 e grandemente desenvolvida a partir de 1769 pelo empresário britânico Guilherme Stephens com privilégios do Marquês de Pombal («Real Fábrica de Vidros da Marinha Grande»), transformou a Marinha Grande na capital do vidro?",
+    "opcoes": [
+      "Fábrica da Vista Alegre",
+      "Real Fábrica de Vidros da Marinha Grande (Guilherme Stephens)",
+      "Vidreira do Mondego",
+      "Fábrica de Cerâmica do Carvalhido"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Real Fábrica abastecia-se da madeira do Pinhal de Leiria e o Museu do Vidro na Marinha Grande ocupa o palacete Stephens.",
+    "fonte": "Museu do Vidro da Marinha Grande / DGPC",
+    "factClusterId": "fc_emp_ehi_vidrosmarinhagrande_1769_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que emblemática e histórica joalharia da Casa Real Portuguesa fundada em 1822 no Chiado em Lisboa por José Pinto Leitão («Leitão & Irmão»), produziu a coroa e cetro das rainhas de Portugal e desenhou a famosa Taça de Portugal de futebol?",
+    "opcoes": [
+      "Joalharia Ferreira Marques",
+      "Tous Portugal",
+      "Leitão & Irmão (Antigos Joalheiros da Coroa)",
+      "Ourivesaria Cunha"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Leitão & Irmão detém o título de 'Ourives da Casa Imperial do Brasil' e desenha troféus de prestígio internacional em prata e ouro.",
+    "fonte": "Leitão & Irmão / Museu Nacional do Traje",
+    "factClusterId": "fc_emp_ehi_leitaoeirmao_1822_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga cervejeira e casa de pasto de Lisboa («Cervejaria Trindade»), fundada em 1836 nas ruínas do Convento da Santíssima Trindade destruído pelo Terramoto de 1755, é famosa pelas suas salas revestidas por painéis de azulejos maçónicos de Ferreira das Tabuletas?",
+    "opcoes": [
+      "Cervejaria Portugália",
+      "Cervejaria Ramiro",
+      "Gambrinus",
+      "Cervejaria Trindade (1836)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Cervejaria Trindade é a cervejaria mais antiga de Portugal e foi fundada pelo empresário galego Manuel Moreira Garcia.",
+    "fonte": "Cervejaria Trindade / Grupo Portugália / DGPC",
+    "factClusterId": "fc_emp_ehi_cervejariatrindade_1836_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que emblemática empresa conserveira tradicional fundada em 1930 na Rua dos Bacalhoeiros em Lisboa («Conserveira de Lisboa»), celebrizou as marcas históricas de conservas de peixe artesanais «Tricana», «Prata do Mar» e «Minor»?",
+    "opcoes": [
+      "Conserveira de Lisboa (Marcas Tricana / Prata do Mar)",
+      "Conservas Ramirez",
+      "A Poveira",
+      "Conservas Pinhais"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Conserveira de Lisboa preserva o mobiliário original em madeira e foi classificada como 'Lojas com História' pela Câmara Municipal de Lisboa.",
+    "fonte": "Conserveira de Lisboa / Programa Lojas com História",
+    "factClusterId": "fc_emp_ehi_conserveiradelisboa_1930_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que famosa e histórica empresa conserveira de Matosinhos fundada em 1920 («Conservas Pinhais» / Nuri), produz sardinhas em azeite utilizando métodos exclusivamente manuais e artesanais, tendo as latas de «Nuri» um estatuto de culto gastronómico na Áustria e no Médio Oriente?",
+    "opcoes": [
+      "Ramirez",
+      "Conservas Pinhais (Nuri)",
+      "Briosa",
+      "Nazaré Conservas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Conservas Pinhais abriu o museu vivo 'Conservas Pinhais Factory Tour' classificado como atração turística industrial de topo.",
+    "fonte": "Conservas Pinhais / Turismo do Porto e Norte",
+    "factClusterId": "fc_emp_ehi_conservaspinhais_nuri_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga tabacaria de Portugal fundada em 1864 no Largo do Chiado em Lisboa («Casa Havaneza»), comercializa charutos e tabacos de Havana desde o reinado de D. Luís I?",
+    "opcoes": [
+      "Tabacaria Mónaco",
+      "Tabacaria Central",
+      "Casa Havaneza (1864)",
+      "Cigar Club"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa Havaneza foi fundada por François Roussado e Carlos Loureiro e integra a rede 'Lojas com História'.",
+    "fonte": "Lojas com História / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_ehi_casahavaneza_1864_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e emblemática casa de chá e pastelaria de luxo inaugurada em 1922 na Avenida da República em Lisboa («Pastelaria Versailles»), desenhada em estilo Arte Nova e rococó com estuques dourados e espelhos de cristal belgas, é Monumento de Interesse Público?",
+    "opcoes": [
+      "Pastelaria Benard",
+      "Confeitaria Nacional",
+      "Pastelaria Mexicana",
+      "Pastelaria Versailles (1922)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Versailles foi fundada por Salvador Antunes e Manuel José Gonçalves e é famosa pelas suas miniaturas de pastelaria e croquetes.",
+    "fonte": "Pastelaria Versailles / DGPC",
+    "factClusterId": "fc_emp_ehi_pastelariaversailles_1922_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que importante e histórico complexo de estaleiros de reparação e construção naval fundado em 1937 («Lisnave» — Estaleiros Navais de Lisboa), operou durante décadas na Margem Sul em Cacilhas e na Margem da Mitrena em Setúbal sendo líder mundial na reparação de superpetroleiros?",
+    "opcoes": [
+      "Lisnave (Estaleiros Navais de Lisboa)",
+      "Setenave",
+      "Estaleiros de Viana do Castelo",
+      "Arsenal do Alfeite"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A doca seca 'Alfredo da Silva' em Cacilhas conseguia acolher os maiores navios petroleiros do mundo com mais de 1 milhão de toneladas de porte.",
+    "fonte": "Lisnave / Arquivo Histórico Industrial",
+    "factClusterId": "fc_emp_ehi_lisnave_1937_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica sociedade energética fundada em 1938 («SACOR» — Sociedade Anónima Concessionária da Refinação de Petróleos em Portugal), construiu a primeira refinaria de petróleo em Cabo Ruivo (Lisboa) e esteve na génese da Petrogal e da atual Galp Energia?",
+    "opcoes": [
+      "Sonap",
+      "SACOR (1938)",
+      "Cidla",
+      "Petrosul"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A SACOR introduziu os famosos postos de abastecimento modernos e fundiu-se em 1976 com a Sonap, Cidla e Petrosul para criar a Petrogal.",
+    "fonte": "Galp Energia / Fundação Galp / DHP",
+    "factClusterId": "fc_emp_ehi_sacor_petrogal_1938_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que pioneira empresa metalúrgica e siderúrgica pesada fundada em 1954 pelo empresário António Champalimaud («Siderurgia Nacional»), construiu o complexo de altos-fornos no Seixal e na Maia produzindo o primeiro aço líquido português em 1961?",
+    "opcoes": [
+      "Sorefame",
+      "Mague",
+      "Siderurgia Nacional (António Champalimaud, 1954)",
+      "Fundição de Oeiras"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Siderurgia Nacional forneceu aço para as grandes obras públicas do país como a Ponte Salazar (Ponte 25 de Abril) e barragens hidroelétricas.",
+    "fonte": "Arquivo Histórico Champalimaud / Município do Seixal",
+    "factClusterId": "fc_emp_ehi_siderurgianacional_1954_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica empresa metalomecânica e fabricante de comboios e material circulante ferroviário fundada na Amadora em 1943 («SOREFAME» — Sociedade Reunidas de Fabricações Metálicas), construiu as icónicas carruagens de aço inoxidável em aço canelado da CP e do Metropolitano de Lisboa?",
+    "opcoes": [
+      "Mague",
+      "Siderurgia Nacional",
+      "Companhia União Fabril",
+      "SOREFAME (Amadora)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A SOREFAME exportou carruagens e comportas de barragens para mais de 30 países antes de ser integrada na multinacional Bombardier e Alstom.",
+    "fonte": "Museu Nacional Ferroviário / Município da Amadora",
+    "factClusterId": "fc_emp_ehi_sorefame_1943_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e prestigiada casa de moda e alfaiataria de luxo fundada em 1836 na Rua Augusta em Lisboa («Camisaria Pitta» / «Casa das Tesouras»), vestiu a aristocracia e chefes de Estado ao longo de dois séculos?",
+    "opcoes": [
+      "Camisaria Pitta (1836)",
+      "Rosa & Teixeira",
+      "Lourenço & Santos",
+      "Armazéns do Chiado"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Camisaria Pitta foi das mais antigas casas de comércio têxtil e camisaria à medida da Baixa Pombalina.",
+    "fonte": "Lojas com História / CML",
+    "factClusterId": "fc_emp_ehi_camisariapitta_1836_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga companhia de seguros privada de Portugal fundada no Porto em 1808 sob a invocação do patrono dos navegantes («Companhia de Seguros Bonança»), fundiu-se mais tarde com a Fidelidade?",
+    "opcoes": [
+      "Fidelidade (1835)",
+      "Companhia de Seguros Bonança (1808)",
+      "Tranquilidade (1871)",
+      "Império"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Bonança nasceu para segurar o comércio marítimo entre Portugal e o Brasil durante as Invasões Francesas.",
+    "fonte": "Fidelidade — Companhia de Seguros / APS",
+    "factClusterId": "fc_emp_ehi_segurosbonanca_1808_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica empresa de fiação e tecidos fundada em 1845 nas margens do rio Vizela em Santo Tirso («Fábrica de Fiação e Tecidos de Santo Thyrso» / Rio Vizela), é considerada a pioneira da industrialização têxtil moderna no Vale do Ave?",
+    "opcoes": [
+      "Somelos",
+      "Têxteis Lameirinho",
+      "Fábrica do Rio Vizela (1845)",
+      "Cotesi"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A fábrica instalou a primeira máquina a vapor para fiação mecânica do algodão no Norte de Portugal.",
+    "fonte": "Museu Municipal de Santo Tirso / DHP",
+    "factClusterId": "fc_emp_ehi_fabricariovizela_1845_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e tradicional marca de calçado e sapataria artesanal fundada em 1925 em São João da Madeira («Sanjo»), fabricante das famosas sapatilhas de lona com sola de borracha vulcanizada (modelo K100 e K200), foi a sapatilha desportiva nacional por excelência?",
+    "opcoes": [
+      "Fly London",
+      "Ambitious",
+      "Eureka",
+      "Sanjo (1925)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O nome 'Sanjo' resulta da abreviatura de São João da Madeira e a marca foi relançada com sucesso no século XXI.",
+    "fonte": "Museu do Calçado de São João da Madeira / Sanjo",
+    "factClusterId": "fc_emp_ehi_sanjo_1925_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica empresa de pasta de dentes medicinal fundada no Porto em 1932 pelo farmacêutico Alberto Ferreira do Couto («Pasta Medicinal Couto»), celebrizou a sua fórmula contra a gengivite e o anúncio do homem segurando o tubo com a boca?",
+    "opcoes": [
+      "Pasta Medicinal Couto (1932)",
+      "Benamôr",
+      "Ach. Brito",
+      "Laboratórios Basi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Pasta Couto foi criada para combater o problema das gengivas retraídas e mantém a icónica embalagem amarela e vermelha.",
+    "fonte": "Couto S.A. / Museu da Farmácia",
+    "factClusterId": "fc_emp_ehi_pastacouto_1932_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e famosa fábrica de lápis de madeira fundada em 1907 em Vila Nova de Gaia pelo empresário francês Manuel Vieira Araújo («Viarco» / Empresa Eletro-Cerâmica de Gaia), é a única fábrica de lápis da Península Ibérica?",
+    "opcoes": [
+      "Molin",
+      "Viarco (1907)",
+      "Ambar",
+      "Papelaria Fernandes"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Viarco produz os clássicos lápis de desenho e desenvolveu materiais artísticos pioneiros como a plasticina de grafite solúvel em água (ArtGraf).",
+    "fonte": "Viarco / Município de São João da Madeira",
+    "factClusterId": "fc_emp_ehi_viarco_1907_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e prestigiada papelaria lisboeta fundada em 1891 no Largo do Rato por Francisco Fernandes («Papelaria Fernandes»), foi durante mais de um século a maior produtora nacional de cadernos escolares, envelopes e material de escritório?",
+    "opcoes": [
+      "Papelaria Progresso",
+      "Livraria Portugal",
+      "Papelaria Fernandes (1891)",
+      "Papelaria da Moda"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Papelaria Fernandes forneceu gerações de estudantes com os seus cadernos pautados e folhas de arquivo.",
+    "fonte": "Arquivo Municipal de Lisboa / DHP",
+    "factClusterId": "fc_emp_ehi_papelariafernandes_1891_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e luxuosa fábrica de cosmética e perfumaria fundada em 1925 no Campo Grande em Lisboa («Benamôr»), criada pelo boticário Henrique Rostagni, formulou cremes milagrosos de rosto à base de ingredientes naturais portugueses adorados pela Rainha D. Amélia?",
+    "opcoes": [
+      "Claus Porto",
+      "Ach. Brito",
+      "Couto",
+      "Benamôr (1925, Creme de Rosto)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O 'Creme de Rosto Benamôr' na sua bisnaga Art Déco manteve a fórmula inalterada desde 1925 sendo uma marca de culto internacional.",
+    "fonte": "Benamôr 1925 / Lojas com História",
+    "factClusterId": "fc_emp_ehi_benamor_1925_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga fábrica de fiação e lanifícios da Serra da Estrela fundada em 1925 em Manteigas («Ecolã» / Burel Factory), é a mais antiga empresa familiar em funcionamento contínuo na produção do tradicional tecido de lã:",
+    "opcoes": [
+      "Burel (tecido 100% lã de ovelha bordaleira)",
+      "Linho do Minho",
+      "Seda de Freixo de Espada à Cinta",
+      "Algodão de Alcobaça"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O burel era usado antigamente pelas capas de pastores contra a chuva e neve e foi transformado em produto de design de luxo e isolamento acústico.",
+    "fonte": "Ecolã / Burel Factory / Município de Manteigas",
+    "factClusterId": "fc_emp_ehi_ecola_burel_1925_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórico grande armazém comercial inaugurado em 1894 no Chiado em Lisboa pelos irmãos Joaquim da Silva e António da Silva («Armazéns Grandella»), celebrizou-se pela frase «Tudo por todos para todos» e pelo trágico incêndio do Chiado de 1988?",
+    "opcoes": [
+      "Armazéns do Chiado",
+      "Armazéns Grandella (1894)",
+      "Casa Africana",
+      "Grandes Armazéns do Carmo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O empresário Francisco de Almeida Grandella foi pioneiro em Portugal na criação de bairros operários e creches gratuitas para os funcionários.",
+    "fonte": "Arquivo Municipal de Lisboa / Dicionário de História de Portugal",
+    "factClusterId": "fc_emp_ehi_grandella_1894_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e secular casa comercial fundada em 1789 na Rua das Portas de Santo Antão em Lisboa («Casa Pereira da Conceição»), é famosa pela torrefação diária e venda a granel de cafés de Angola, São Tomé e Timor e chás de todo o mundo?",
+    "opcoes": [
+      "A Carioca",
+      "Cafés Negrita",
+      "Casa Pereira da Conceição (1789)",
+      "Casa da Sorte"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casa Pereira preserva os moinhos de café centenários e os balcões de madeira de jacarandá do século XVIII.",
+    "fonte": "Lojas com História / CML",
+    "factClusterId": "fc_emp_ehi_casapereira_1789_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga casa de lotarias e apostas mútuas fundada em 1933 em Lisboa («Casa da Sorte»), criada pelo empresário galego José Garcia, celebrizou o slogan publicitário «A Sorte é Cega mas a Casa da Sorte tem Olhos de Lince»?",
+    "opcoes": [
+      "Santa Casa da Misericórdia de Lisboa",
+      "A Camponeza",
+      "Lotaria Nacional",
+      "Casa da Sorte (1933)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A loja da Casa da Sorte na Rua Garrett foi decorada com painéis de azulejos modernistas de Querubim Lapa.",
+    "fonte": "Lojas com História / Santa Casa da Misericórdia",
+    "factClusterId": "fc_emp_ehi_casadasorte_1933_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga fábrica de chocolates de Portugal fundada em 1914 em Viana do Castelo pelo empresário José Lima («Chocolates Avianense»), produziu as míticas «Bombocas», sombrinhas de chocolate e tabletes de cacau?",
+    "opcoes": [
+      "Chocolates Avianense (1914)",
+      "Chocolates Regina",
+      "Imperial / Pantagruel",
+      "Favorita"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Avianense mudou as suas instalações para Durrães (Barcelos) mantendo as receitas tradicionais centenárias de chocolate.",
+    "fonte": "Chocolates Avianense / Município de Viana do Castelo",
+    "factClusterId": "fc_emp_ehi_avianense_1914_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e famosa marca de chocolates fundada em 1928 em Lisboa («Chocolates Regina»), celebrizou as máquinas de venda automática de madeira das salas de cinema que davam sombrinhas de chocolate e medalhas com o carimbo do furo?",
+    "opcoes": [
+      "Avianense",
+      "Chocolates Regina (1928)",
+      "Imperial",
+      "Arcádia"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Regina pertence hoje ao grupo Imperial mantendo a célebre marca do cão e das caixas de bombons 'Frutos do Mar'.",
+    "fonte": "Imperial — Produtos Alimentares / Regina",
+    "factClusterId": "fc_emp_ehi_regina_1928_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica confeitaria e chocolataria de luxo fundada no Porto em 1933 pela família Bastos na Praça da Liberdade («Arcádia» / Confeitaria Arcádia), celebrizou as tradicionais «Línguas de Gato» e bombons de licor do Porto?",
+    "opcoes": [
+      "Regina",
+      "Leitaria da Quinta do Paço",
+      "Arcádia (Porto, 1933)",
+      "Avianense"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Arcádia expandiu-se com dezenas de lojas por todo o país sendo gerida pela terceira e quarta geração da família fundadora.",
+    "fonte": "Arcádia — Casa do Chocolate / Turismo do Porto",
+    "factClusterId": "fc_emp_ehi_arcadia_porto_1933_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica casa de chá e pastelaria portuense fundada em 1920 na Praça Guilherme Gomes Fernandes («Leitaria da Quinta do Paço»), é famosa há mais de um século pelos seus «Éclairs» artesanais recheados com chantilly fresco caseiro?",
+    "opcoes": [
+      "Confeitaria do Bolhão",
+      "Padaria Ribeiro",
+      "Pastelaria Petúlia",
+      "Leitaria da Quinta do Paço (1920)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Leitaria começou por distribuir leite e manteiga fresca produzida na Quinta do Paço em Paços de Ferreira.",
+    "fonte": "Leitaria da Quinta do Paço / Turismo do Porto",
+    "factClusterId": "fc_emp_ehi_leitariadaquintadopaco_1920_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica cervejeira lisboeta fundada em 1925 na Avenida Almirante Reis («Cervejaria Portugália»), famosa pelo bife da vazia com molho especial de natas e cerveja à pressão (imperial), deu origem a uma das maiores cadeias de restauração do país?",
+    "opcoes": [
+      "Cervejaria Portugália (1925)",
+      "Cervejaria Trindade",
+      "Cervejaria Ramiro",
+      "Galeto"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Portugália nasceu anexa à antiga Fábrica de Cerveja da Almirante Reis e introduziu o conceito de balcão de cerveja moderno.",
+    "fonte": "Grupo Portugália Restauração / Lojas com História",
+    "factClusterId": "fc_emp_ehi_portugalia_1925_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e lendária drogaria e retrosaria fundada em 1860 na Rua dos Bacalhoeiros em Lisboa («Drogarias São Roque» / «Retrosaria Bijou»), é famosa pela preservação dos frascos de vidro de farmácia oitocentistas e pós aromáticos?",
+    "opcoes": [
+      "Retrosaria Rosa Pomar",
+      "Retrosaria Bijou (1860)",
+      "Armazéns do Chiado",
+      "Drogaria Central"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Retrosaria Bijou integra o património protegido de lojas históricas de Lisboa.",
+    "fonte": "Programa Lojas com História / CML",
+    "factClusterId": "fc_emp_ehi_retrosariabijou_1860_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que tradicional cutelaria e fábrica de navalhas e facas artesanais de Trás-os-Montes fundada em 1870 no concelho de Miranda do Douro («Navalhas de Palaçoulo» / Filmam), é célebre pelos cabos de madeira de oliveira e chifre de boi?",
+    "opcoes": [
+      "ICEL (Benedita)",
+      "IVO Cutelarias",
+      "Cutelaria de Palaçoulo (Filmam, 1870)",
+      "Cutelarias Guimarães"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Palaçoulo é conhecida como a 'Capital das Navalhas' com oficinas familiares que transmitem a arte há mais de 150 anos.",
+    "fonte": "Município de Miranda do Douro / Filmam",
+    "factClusterId": "fc_emp_ehi_palacoulo_navalhas_1870_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que importante e histórica empresa de cutelarias profissionais fundada em 1945 na vila da Benedita (Alcobaça) («ICEL» — Indústria de Cutelarias da Estremadura), é uma das líderes europeias no fabrico e exportação de facas para chefes de cozinha e hotelaria?",
+    "opcoes": [
+      "Cutelaria de Palaçoulo",
+      "IVO Cutelarias",
+      "Herdmar",
+      "ICEL (Benedita, Alcobaça, 1945)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A ICEL produz milhões de peças de cutelaria em aço inoxidável e molibdénio-vanádio exportando para mais de 80 países.",
+    "fonte": "ICEL / Associação Portuguesa de Cutelarias",
+    "factClusterId": "fc_emp_ehi_icel_benedita_1945_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica e mais antiga marca de águas minerais naturais gasocarbónicas de Portugal («Água das Pedras» / Pedras Salgadas), engarrafada desde 1871 no concelho de Vila Pouca de Aguiar, foi premiada com medalha de ouro na Exposição Universal de Paris de 1889?",
+    "opcoes": [
+      "Água das Pedras (Pedras Salgadas, 1871)",
+      "Água de Vidago",
+      "Água de Luso",
+      "Água de Castelo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Água das Pedras é uma água mineral 100% naturalmente gaseificada e pertence atualmente ao grupo Super Bock Group.",
+    "fonte": "Super Bock Group / Museu Termal de Pedras Salgadas",
+    "factClusterId": "fc_emp_ehi_aguadaspedras_1871_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_EHI_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Históricas",
+    "pergunta": "Que histórica empresa vinícola familiar do Douro fundada em 1942 por Fernando van Zeller Guedes («Sogrape»), revolucionou o mercado mundial do vinho ao criar a icónica e global marca em garrafa bojuda «Mateus Rosé»?",
+    "opcoes": [
+      "Real Companhia Velha",
+      "Symington Family Estates",
+      "Sogrape (Fernando van Zeller Guedes, 1942)",
+      "Esporão"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Mateus Rosé tornou-se o vinho de marca mais vendido do mundo nos anos 1970/80 e a Sogrape é hoje a maior empresa produtora de vinhos de Portugal.",
+    "fonte": "Sogrape Vinhos / IVDP",
+    "factClusterId": "fc_emp_ehi_sogrape_mateusrose_1942_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Históricas"
+  },
+  {
+    "id": "EMP_TEC_0001",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que plataforma de comércio eletrónico de moda de luxo fundada em 2008 pelo empresário vimaranense José Neves («Farfetch»), tornou-se em 2015 o primeiro «unicórnio» com ADN português (avaliado em mais de 1.000 milhões de dólares) e cotada na Bolsa de Nova Iorque (NYSE) em 2018?",
+    "opcoes": [
+      "Farfetch (José Neves)",
+      "OutSystems",
+      "Talkdesk",
+      "Feedzai"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Farfetch ligou compradores de mais de 190 países às principais marcas de moda e boutiques de luxo do mundo a partir de Guimarães e Londres.",
+    "fonte": "NYSE / Banco de Portugal / AICEP",
+    "factClusterId": "fc_emp_tec_farfetch_joseneves_unicórnio_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0002",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa pioneira fundada em Coimbra em 1997 por Gonçalo Quadros e outros engenheiros («Critical Software»), desenvolve software crítico de elevada tolerância a falhas para a NASA, a Agência Espacial Europeia (ESA) e o setor automóvel mundial?",
+    "opcoes": [
+      "Novabase",
+      "Critical Software (Coimbra)",
+      "Glintt",
+      "Feedzai"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Critical Software forneceu o software de monitorização de integridade para missões da NASA no espaço e satélites europeus.",
+    "fonte": "Critical Software / ESA / NASA / IPN",
+    "factClusterId": "fc_emp_tec_criticalsoftware_coimbra_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0003",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica pioneira fundada em 2001 por Paulo Rosado em Linda-a-Velha («OutSystems»), tornou-se um unicórnio e líder planetária no desenvolvimento de plataformas de software «low-code» e inteligência artificial para grandes empresas?",
+    "opcoes": [
+      "Sword Health",
+      "Remote",
+      "OutSystems (Paulo Rosado)",
+      "Defined.ai"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A OutSystems permite a programadores e empresas criar aplicações empresariais complexas de forma visual com rapidez sem precedentes.",
+    "fonte": "Gartner Magic Quadrant / OutSystems / Forbes",
+    "factClusterId": "fc_emp_tec_outsystems_lowcode_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0004",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica unicórnio fundada em 2011 por Tiago Paiva e Cristina Fonseca («Talkdesk»), desenvolveu uma plataforma inovadora de contact centers na nuvem baseada em inteligência artificial adotada por multinacionais em todo o mundo?",
+    "opcoes": [
+      "Unbabel",
+      "Sensei",
+      "Barkyn",
+      "Talkdesk (Tiago Paiva e Cristina Fonseca)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Talkdesk atingiu o estatuto de unicórnio em 2018 após ser acelerada no programa 500 Startups em Silicon Valley.",
+    "fonte": "Talkdesk / Forbes / TechCrunch",
+    "factClusterId": "fc_emp_tec_talkdesk_contactcenter_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0005",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio tecnológico português fundado em Coimbra em 2011 por Nuno Sebastião, Paulo Marques e Pedro Bizarro («Feedzai»), utiliza inteligência artificial e aprendizagem automática avançada para prevenir e bloquear fraudes financeiras em tempo real nos maiores bancos mundiais?",
+    "opcoes": [
+      "Feedzai",
+      "Anchorage Digital",
+      "Sword Health",
+      "Coverflex"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Feedzai protege transações comerciais de milhares de milhões de euros por ano prevenindo fraudes em cartões e pagamentos eletrónicos.",
+    "fonte": "Feedzai / Universidade de Coimbra / CNBC Disruptor 50",
+    "factClusterId": "fc_emp_tec_feedzai_fraude_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0006",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio de saúde digital fundado no Porto em 2015 pelo engenheiro e neurocientista Virgílio Bento e Márcio Colunas («Sword Health»), desenvolveu uma solução pioneira de fisioterapia digital e reabilitação músculo-esquelética com sensores de movimento e IA?",
+    "opcoes": [
+      "HeartGenetics",
+      "Sword Health (Virgílio Bento)",
+      "Crioestaminal",
+      "CellmAbs"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sword Health foi avaliada em mais de 3.000 milhões de dólares sendo líder nos planos de saúde dos maiores empregadores norte-americanos.",
+    "fonte": "Sword Health / Forbes / Wall Street Journal",
+    "factClusterId": "fc_emp_tec_swordhealth_fisioterapiadigital_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0007",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que unicórnio tecnológico fundado em 2019 pelo engenheiro português Marcelo Lebre e o holandês Job van der Voort («Remote»), desenvolveu uma plataforma global líder de contratação, gestão de recursos humanos e processamento de salários para equipas remotas em mais de 170 países?",
+    "opcoes": [
+      "Coverflex",
+      "Talkdesk",
+      "Remote (Marcelo Lebre)",
+      "Casafari"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Remote atingiu o estatuto de unicórnio em menos de dois anos graças à explosão mundial do trabalho remoto.",
+    "fonte": "Remote / TechCrunch / Financial Times",
+    "factClusterId": "fc_emp_tec_remote_marcelolebre_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0008",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de criptoativos e custódia digital cofundada pelo engenheiro de segurança português Diogo Mónica («Anchorage Digital»), fez história em 2021 ao obter a primeira licença bancária federal para criptomoedas aprovada pelo OCC dos EUA?",
+    "opcoes": [
+      "Utrust",
+      "Feedzai",
+      "Veniam",
+      "Anchorage Digital (Diogo Mónica)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Anchorage Digital converteu-se no primeiro banco digital regulado federalmente para ativos criptográficos institucionais.",
+    "fonte": "OCC (Office of the Comptroller of the Currency) / Anchorage Digital / Forbes",
+    "factClusterId": "fc_emp_tec_anchoragedigital_diogomonica_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0009",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que centro tecnológico de excelência sediado em Aveiro («Altice Labs» / antiga PT Inovação), foi o polo pioneiro no desenvolvimento das tecnologias GPON de fibra ótica (FTTH) que colocaram Portugal como um dos países mais fibrados e rápidos do mundo?",
+    "opcoes": [
+      "Altice Labs (Aveiro)",
+      "CEiiA",
+      "INESC TEC",
+      "Taguspark"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os equipamentos e patentes de telecomunicações desenvolvidos em Aveiro são exportados para mais de 60 países em 4 continentes.",
+    "fonte": "Altice Labs / Universidade de Aveiro / ANACOM",
+    "factClusterId": "fc_emp_tec_alticelabs_aveiro_gpon_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0010",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que Centro de Engenharia e Desenvolvimento sediado em Matosinhos («CEiiA»), é uma referência internacional no desenvolvimento de soluções de mobilidade sustentável, aeroespacial (participação no avião militar Embraer KC-390) e no desenvolvimento do primeiro satélite português?",
+    "opcoes": [
+      "PIEP",
+      "CEiiA (Matosinhos)",
+      "INEGI",
+      "IPN"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CEiiA desenvolve sistemas avançados de estruturas em compósitos e plataformas de descarbonização como a AYR.",
+    "fonte": "CEiiA / Ministério da Economia / Embraer",
+    "factClusterId": "fc_emp_tec_ceiia_matosinhos_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0011",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa fundada em Lisboa em 2013 por Vasco Pedro e Sofia Pessanha («Unbabel»), combina inteligência artificial avançada de tradução automática neural com revisão em tempo real por humanos para apoio ao cliente multinacional?",
+    "opcoes": [
+      "Defined.ai",
+      "Talkdesk",
+      "Unbabel (Vasco Pedro)",
+      "Sensei"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Unbabel foi acelerada na prestigiada Y Combinator e processa comunicações multilíngues para gigantes como a Microsoft e Booking.",
+    "fonte": "Unbabel / Y Combinator / Forbes",
+    "factClusterId": "fc_emp_tec_unbabel_vascopedro_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0012",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de dados e inteligência artificial fundada em 2015 pela cientista da computação portuguesa Daniela Braga («Defined.ai» / antiga DefinedCrowd), fornece conjuntos de dados de treino de voz e linguagem natural para treinar os maiores modelos de IA do mundo?",
+    "opcoes": [
+      "Unbabel",
+      "Feedzai",
+      "Sword Health",
+      "Defined.ai (Daniela Braga)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Daniela Braga foi nomeada para a comissão de inteligência artificial da Casa Branca e do governo dos EUA.",
+    "fonte": "Defined.ai / Casa Branca / Forbes",
+    "factClusterId": "fc_emp_tec_definedai_danielabraga_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0013",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de visão computacional e IA fundada em Lisboa por Vasco Portugal e Joana Rafael («Sensei»), desenvolveu a tecnologia pioneira de lojas autónomas de retalho sem caixas nem filas de pagamento (lojas autónomas Continente Labs)?",
+    "opcoes": [
+      "Sensei (Lojas Autónomas)",
+      "Veniam",
+      "Coverflex",
+      "Barkyn"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sensei utiliza câmaras no teto e sensores de prateleira para identificar os produtos recolhidos pelos clientes cobrando automaticamente na app.",
+    "fonte": "Sensei / Sonae / TechCrunch",
+    "factClusterId": "fc_emp_tec_sensei_lojasautonomas_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0014",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de telecomunicações móveis e redes «mesh» fundada no Porto pelo professor universitário João Barros («Veniam»), conectou frotas de autocarros e táxis transformando veículos em 'hotspots' Wi-Fi em movimento antes de ser adquirida pela Nexar?",
+    "opcoes": [
+      "WeDo Technologies",
+      "Veniam (João Barros)",
+      "Mobbit",
+      "Card4B"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Veniam criou no Porto a maior rede de veículos conectados do mundo sendo premiada no Fórum Económico Mundial de Davos.",
+    "fonte": "Veniam / MIT Technology Review / World Economic Forum",
+    "factClusterId": "fc_emp_tec_veniam_joaobarros_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0015",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e pioneira empresa de inteligência artificial portuguesa fundada em Lisboa em 1988 pelos professores do IST Ernesto Morgado e João Pavão Martins («SISCOG»), desenvolve o software de planeamento e gestão de escalas de comboios e tripulações para operadores como a CP, o Metro de Londres e os caminhos de ferro holandeses?",
+    "opcoes": [
+      "Novabase",
+      "Critical Software",
+      "SISCOG (Sistemas Cognitivos)",
+      "Glintt"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A SISCOG foi pioneira mundial na aplicação prática de sistemas periciais e IA heurística à gestão operacional de caminhos de ferro.",
+    "fonte": "SISCOG / Instituto Superior Técnico / Transport for London",
+    "factClusterId": "fc_emp_tec_siscog_1988_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0016",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa portuguesa de tecnologia para a saúde e farmácias («Glintt» — Global Intelligent Technologies), cotada na Euronext Lisboa, é líder na Península Ibérica na automação robótica de farmácias e sistemas de informação hospitalar?",
+    "opcoes": [
+      "Novabase",
+      "Asseco PST",
+      "PrimeIT",
+      "Glintt"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Glintt resulta da fusão histórica da ParaRede com a Consiste e opera em milhares de farmácias e hospitais em Portugal e Espanha.",
+    "fonte": "Glintt / Euronext Lisboa",
+    "factClusterId": "fc_emp_tec_glintt_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0017",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica empresa portuguesa de tecnologias de informação e consultoria de engenharia fundada em 1989 em Lisboa («Novabase»), cotada em bolsa e criadora da Next-Gen Financial Services (Celfocus), é um dos maiores pilares das TI em Portugal?",
+    "opcoes": [
+      "Novabase (1989)",
+      "Glintt",
+      "Inovinter",
+      "Compta"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Novabase desenvolveu projetos estruturantes de digitalização para as telecomunicações, banca e setor público português.",
+    "fonte": "Novabase / Euronext Lisboa",
+    "factClusterId": "fc_emp_tec_novabase_1989_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0018",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que fintech portuguesa fundada em Braga e Lisboa em 2021 («Coverflex»), desenvolveu uma plataforma inovadora de gestão flexível de benefícios, vales de refeição, seguros de saúde e despesas para trabalhadores de empresas na Europa?",
+    "opcoes": [
+      "Rauva",
+      "Coverflex",
+      "Doutor Finanças",
+      "Casafari"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Coverflex conquistou rondas recorde de financiamento expandindo-se rapidamente para os mercados de Itália e Espanha.",
+    "fonte": "Coverflex / Sifted / TechCrunch",
+    "factClusterId": "fc_emp_tec_coverflex_2021_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0019",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de dados imobiliários e inteligência artificial sediada em Lisboa («Casafari»), fundada por Nils Henning e Mila Suharev, agregou a maior base de dados de propriedades imobiliárias da Europa com ferramentas preditivas para profissionais?",
+    "opcoes": [
+      "Imovirtual",
+      "Idealista",
+      "Casafari",
+      "Alfredo Real Estate"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Casafari monitoriza milhões de imóveis e transações eliminando duplicações e fornecendo transparência ao mercado.",
+    "fonte": "Casafari / Forbes / Financial Times",
+    "factClusterId": "fc_emp_tec_casafari_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0020",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que inovadora marca portuguesa de nutrição personalizada e saúde preventiva para cães e gatos fundada no Porto por André Jordão e Madalena Rugeroni («Barkyn»), combina comida natural por subscrição com assistência veterinária digital 24/7?",
+    "opcoes": [
+      "Petable",
+      "Daufood",
+      "Nutripet",
+      "Barkyn"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Barkyn foi selecionada pela Google for Startups e opera em múltiplos mercados europeus.",
+    "fonte": "Barkyn / Google for Startups / El País",
+    "factClusterId": "fc_emp_tec_barkyn_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0021",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórico parque de ciência e tecnologia de Oeiras fundado em 1992 («Taguspark»), foi o primeiro parque tecnológico criado em Portugal, acolhendo centenas de empresas e o campus do Instituto Superior Técnico?",
+    "opcoes": [
+      "Taguspark (Oeiras, 1992)",
+      "UPTEC (Porto)",
+      "Biocant (Cantanhede)",
+      "Madan Parque (Caparica)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Taguspark foi concebido para aproximar o conhecimento académico das grandes empresas tecnológicas e multinacionais.",
+    "fonte": "Taguspark / Município de Oeiras",
+    "factClusterId": "fc_emp_tec_taguspark_oeiras_1992_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0022",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que prestigiado Parque de Ciência e Tecnologia da Universidade do Porto fundado em 2007 («UPTEC»), com polos de Tecnologias, Biotecnologia e Indústrias Criativas, já apoiou mais de 700 projetos empresariais e startups inovadoras?",
+    "opcoes": [
+      "Taguspark",
+      "UPTEC (Universidade do Porto)",
+      "IPN",
+      "Sanjotec"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A UPTEC recebeu o prémio RegioStars da Comissão Europeia como projeto modelo de transferência de tecnologia na Europa.",
+    "fonte": "UPTEC / Universidade do Porto / Comissão Europeia",
+    "factClusterId": "fc_emp_tec_uptec_porto_2007_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0023",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que incubadora de empresas e instituição de inovação da Universidade de Coimbra («Instituto Pedro Nunes» / IPN), fundada em 1991, foi eleita em 2010 como a Melhor Incubadora de Empresas de Base Tecnológica do Mundo pela associação internacional Technopolicy Network?",
+    "opcoes": [
+      "Startup Lisboa",
+      "UPTEC",
+      "Instituto Pedro Nunes (IPN, Coimbra)",
+      "Fábrica de Startups"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O IPN foi o berço da Critical Software, Feedzai, Wit Software e dezenas de empresas de tecnologia de ponta.",
+    "fonte": "Instituto Pedro Nunes / Universidade de Coimbra",
+    "factClusterId": "fc_emp_tec_ipn_coimbra_1991_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0024",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico polo de inovação e empreendedorismo instalado na antiga Fábrica de Manutenção Militar no Beato em Lisboa («Unicorn Factory Lisboa» / Hub Criativo do Beato), dinamiza a atração de unicórnios e centros de investigação para a capital?",
+    "opcoes": [
+      "Startup Sintra",
+      "Parque das Nações Tech",
+      "LACS Lisboa",
+      "Unicorn Factory Lisboa (Hub Criativo do Beato)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Hub do Beato ocupa mais de 35.000 m2 sendo um dos maiores centros de inovação e startups da Europa.",
+    "fonte": "Câmara Municipal de Lisboa / Unicorn Factory Lisboa",
+    "factClusterId": "fc_emp_tec_unicornfactory_beato_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0025",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que grande e prestigiada conferência global de tecnologia e empreendedorismo fundada por Paddy Cosgrave («Web Summit»), transferiu a sua sede oficial em 2016 para a Altice Arena e FIL no Parque das Nações em Lisboa reunindo mais de 70.000 participantes de todo o mundo?",
+    "opcoes": [
+      "Web Summit (Lisboa, desde 2016)",
+      "Mobile World Congress",
+      "Slush",
+      "VivaTech"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A realização da Web Summit consolidou Lisboa e Portugal no mapa internacional do investimento de capital de risco e do ecossistema de startups.",
+    "fonte": "Web Summit / Governo de Portugal / AICEP",
+    "factClusterId": "fc_emp_tec_websummit_lisboa_2016_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0026",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa pioneira de software para operadoras móveis fundada em Coimbra em 2001 («WIT Software»), desenvolveu soluções inovadoras de RCS (Rich Communication Services), IPTV e mensagens ricas para as maiores operadoras de telecomunicações do planeta?",
+    "opcoes": [
+      "Talkdesk",
+      "WIT Software (Coimbra)",
+      "Inovinter",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A WIT Software tem mais de 20 anos de liderança em software de telecomunicações móveis com clientes em dezenas de países.",
+    "fonte": "WIT Software / IPN",
+    "factClusterId": "fc_emp_tec_witsoftware_coimbra_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0027",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa pioneira na realidade virtual, realidade aumentada e exposições interativas mundiais fundada por António Câmara e Edmundo Nobre («YDreams»), realizou projetos para o Museu do Louvre, Santander e grandes marcas globais?",
+    "opcoes": [
+      "Sensei",
+      "Critical TechWorks",
+      "YDreams (António Câmara)",
+      "Blip"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A YDreams foi pioneira no início dos anos 2000 no desenvolvimento de experiências imersivas de realidade virtual e computação ubiqua.",
+    "fonte": "YDreams / Prémio Pessoa / Universidade Nova de Lisboa",
+    "factClusterId": "fc_emp_tec_ydreams_antoniocamara_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0028",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que joint venture tecnológica criada em 2018 entre o grupo automóvel BMW Group e a portuguesa Critical Software («Critical TechWorks»), com polos no Porto e Lisboa, desenvolve o software de bordo, sistemas de navegação e condução autónoma dos veículos BMW?",
+    "opcoes": [
+      "CEiiA",
+      "Bosch Car Multimedia",
+      "Continental Mabor",
+      "Critical TechWorks (BMW Group & Critical Software)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Critical TechWorks emprega mais de 2.000 engenheiros de software em Portugal criando o ecossistema digital da BMW.",
+    "fonte": "BMW Group / Critical Software / AICEP",
+    "factClusterId": "fc_emp_tec_criticaltechworks_bmw_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0029",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que polo de engenharia e tecnologia multimédia automóvel sediado em Braga («Bosch Car Multimedia Portugal»), é uma das maiores unidades de investigação e desenvolvimento (I&D) de ponta do grupo Bosch no mundo para sensores e cockpits digitais de automóveis?",
+    "opcoes": [
+      "Bosch Car Multimedia (Braga)",
+      "Continental Teves",
+      "Aptiv",
+      "Visteon"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Bosch em Braga tem uma parceria estratégica de investigação com a Universidade do Minho com centenas de patentes registadas.",
+    "fonte": "Bosch Portugal / Universidade do Minho / AICEP",
+    "factClusterId": "fc_emp_tec_bosch_braga_id_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0030",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que polo de engenharia de software sediado no Porto («Blip»), integrado no grupo global Flutter Entertainment, desenvolve a infraestrutura tecnológica de plataformas digitais desportivas de alta escala para mais de 14 milhões de utilizadores ativos globais?",
+    "opcoes": [
+      "Farfetch",
+      "Blip (Porto / Flutter Entertainment)",
+      "Feedzai",
+      "Talkdesk"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Blip é uma das empresas de tecnologia mais premiadas como melhor local para trabalhar no setor de TI no Norte de Portugal.",
+    "fonte": "Blip / Flutter Entertainment / Great Place to Work",
+    "factClusterId": "fc_emp_tec_blip_porto_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0031",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que instituição pioneira de inovação e incubação de empresas da capital fundada em 2011 pela CML, Montepio e IAPMEI («Startup Lisboa»), na Rua da Prata na Baixa pombalina, apoiou o nascimento de centenas de startups na capital?",
+    "opcoes": [
+      "Startup Braga",
+      "Casa do Impacto",
+      "Startup Lisboa (2011)",
+      "Beta-i"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Lisboa foi fundamental para transformar Lisboa num ecossistema de acolhimento de empreendedores e nómadas digitais.",
+    "fonte": "Startup Lisboa / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_emp_tec_startuplisboa_2011_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0032",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que associação portuguesa de promoção da inovação e do empreendedorismo fundada em 2010 («Beta-i»), é uma das maiores aceleradoras de inovação colaborativa da Europa ligando grandes corporações globais a startups inovadoras?",
+    "opcoes": [
+      "Startup Portugal",
+      "BGI",
+      "Fábrica de Startups",
+      "Beta-i"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Beta-i organiza programas de aceleração em setores como a economia azul, sustentabilidade, energia e saúde em vários continentes.",
+    "fonte": "Beta-i / AICEP",
+    "factClusterId": "fc_emp_tec_betai_aceleradora_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0033",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que agência pública e entidade dinamizadora do ecossistema nacional («Startup Portugal»), criada pelo Governo português, é responsável pela gestão da Rede Nacional de Incubadoras (RNI) e pela promoção da estratégia nacional para o empreendedorismo?",
+    "opcoes": [
+      "Startup Portugal",
+      "IAPMEI",
+      "AICEP",
+      "ANI (Agência Nacional de Inovação)"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Startup Portugal apoia a internacionalização e a atribuição do estatuto de startup e tech visa em Portugal.",
+    "fonte": "Startup Portugal / Ministério da Economia",
+    "factClusterId": "fc_emp_tec_startupportugal_rni_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0034",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico instituto de investigação e tecnologia do Porto e Minho («INESC TEC» — Instituto de Engenharia de Sistemas e Computadores, Tecnologia e Ciência), é líder nacional em inteligência artificial, robótica submarina e sistemas de energia?",
+    "opcoes": [
+      "IBMC",
+      "INESC TEC (Porto)",
+      "CISTER",
+      "ISR Lisboa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O INESC TEC atua como ponte entre a Universidade do Porto e o tecido industrial participando em projetos pioneiros da UE.",
+    "fonte": "INESC TEC / Faculdade de Engenharia da Universidade do Porto (FEUP)",
+    "factClusterId": "fc_emp_tec_inesctec_porto_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0035",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que primeiro banco 100% digital e móvel em Portugal criado pelo Grupo BCP em 1995 («ActivoBank» / antigo Banco 7), revolucionou a banca de retalho ao eliminar papel e balcões tradicionais promovendo o 'mobile banking' simplificado?",
+    "opcoes": [
+      "Moey!",
+      "Banco Best",
+      "ActivoBank",
+      "Bison Bank"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ActivoBank antecipou as fintechs com pontos de atendimento em centros comerciais e onboarding de clientes puramente digital.",
+    "fonte": "ActivoBank / Millennium bcp / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_activobank_1995_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0036",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que conta digital e solução financeira móvel inovadora lançada em 2019 pelo Crédito Agrícola («Moey!»), permite pagamentos imediatos entre contactos, divisão de contas de grupo e gestão orçamental através de uma aplicação intuitiva?",
+    "opcoes": [
+      "ActivoBank",
+      "Revolut",
+      "Coverflex",
+      "Moey!"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Moey! foi a primeira solução bancária portuguesa concebida de raiz a integrar a tecnologia de pagamentos da SIBS e Apple Pay / Google Pay.",
+    "fonte": "Crédito Agrícola / Moey! / SIBS",
+    "factClusterId": "fc_emp_tec_moey_creditoagricola_2019_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0037",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e avançada empresa portuguesa de pagamentos e segurança interbancária fundada em 1983 («SIBS» — Sociedade Interbancária de Serviços), desenvolveu a Rede Multibanco e em 2015 o revolucionário serviço de pagamentos instantâneos por telemóvel:",
+    "opcoes": [
+      "MB WAY",
+      "Bizum",
+      "Venmo",
+      "PayPal"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O MB WAY é utilizado por mais de 5 milhões de portugueses para transferências instantâneas, compras online e levantamento de dinheiro sem cartão.",
+    "fonte": "SIBS / Banco de Portugal / MB WAY",
+    "factClusterId": "fc_emp_tec_sibs_mbway_2015_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0038",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que importante e histórico sistema português de bilhética e pagamentos de portagens sem paragem nas autoestradas («Via Verde»), criado pela Brisa em 1991 em parceria com a Universidade de Aveiro, foi o primeiro sistema de portagem eletrónica interoperável em rede aberta do mundo?",
+    "opcoes": [
+      "Telepass",
+      "Via Verde (1991)",
+      "E-ZPass",
+      "AutoPass"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Via Verde expandiu-se mais tarde para o pagamento em parques de estacionamento, postos de combustível Galp, ferries e pontes.",
+    "fonte": "Via Verde Portugal / Brisa / DHP",
+    "factClusterId": "fc_emp_tec_viaverde_1991_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0039",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de segurança e biometria facial fundada em Coimbra por investigadores da universidade («Vision-Box»), é líder mundial no fornecimento de portas biométricas automáticas de controlo de fronteiras (e-Gates) nos maiores aeroportos do mundo?",
+    "opcoes": [
+      "Feedzai",
+      "Critical Software",
+      "Vision-Box (e-Gates)",
+      "Card4B"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As portas biométricas da Vision-Box operam em aeroportos como Londres Heathrow, Amesterdão Schiphol, Dubai e JFK em Nova Iorque.",
+    "fonte": "Vision-Box / ICAO / Amadeus",
+    "factClusterId": "fc_emp_tec_visionbox_egates_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0040",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de bioinformática e genética fundada em Cantanhede («Crioestaminal»), sediada no Biocant Park, é o maior banco de células estaminais do cordão umbilical da Península Ibérica com acreditação internacional da AABB?",
+    "opcoes": [
+      "Bebé Vida",
+      "HeartGenetics",
+      "Stemlab",
+      "Crioestaminal (Biocant Park, Cantanhede)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Crioestaminal preserva amostras de células estaminais de mais de 100.000 famílias para tratamentos de medicina regenerativa.",
+    "fonte": "Crioestaminal / Biocant / AABB",
+    "factClusterId": "fc_emp_tec_crioestaminal_biocant_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0041",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que fintech portuguesa fundada em Lisboa («Rauva»), desenvolveu a primeira superapp financeira e de gestão tudo-em-um para pequenas empresas e trabalhadores independentes em Portugal?",
+    "opcoes": [
+      "Rauva",
+      "Coverflex",
+      "Doutor Finanças",
+      "Tonic App"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Rauva integra contas bancárias empresariais, faturação certificada pela AT e contabilidade numa única aplicação móvel.",
+    "fonte": "Rauva / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_rauva_superapp_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0042",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de saúde digital sediada no Porto fundada pela médica Daniela Seixas («Tonic App»), desenvolveu uma plataforma móvel de agregação de ferramentas clínicas e recursos de diagnóstico utilizada por milhares de médicos na Europa?",
+    "opcoes": [
+      "Sword Health",
+      "Tonic App (Daniela Seixas)",
+      "Barkyn",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Tonic App ajuda a comunidade médica a partilhar conhecimento, consultar calculadoras clínicas e acelerar o encaminhamento de doentes.",
+    "fonte": "Tonic App / Ordem dos Médicos / TechCrunch",
+    "factClusterId": "fc_emp_tec_tonicapp_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0043",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa de tecnologia móvel e jogos fundada em Guimarães em 2012 («Bica Studios»), destacou-se no desenvolvimento de videojogos em realidade aumentada e jogos casuais para smartphones?",
+    "opcoes": [
+      "Nerd Monkeys",
+      "Biodroid",
+      "Bica Studios",
+      "Miniclip"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Bica Studios é um dos pioneiros no ecossistema emergente de desenvolvimento de videojogos em Portugal.",
+    "fonte": "Bica Studios / APVP (Associação de Produtores de Videojogos Portugueses)",
+    "factClusterId": "fc_emp_tec_bicastudios_jogos_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0044",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que estúdio independente de desenvolvimento de videojogos sediado em Lisboa («Nerd Monkeys»), fundado por Diogo Vasconcelos e Filipe Duarte Pina, celebrizou-se com os aclamados títulos «Murdering Murphy» e «Out of Line»?",
+    "opcoes": [
+      "Saber Interactive",
+      "PlayStation Talents",
+      "Bica Studios",
+      "Nerd Monkeys"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Nerd Monkeys publica jogos independentes para PC, Nintendo Switch e PlayStation premiados internacionalmente.",
+    "fonte": "Nerd Monkeys / APVP",
+    "factClusterId": "fc_emp_tec_nerdmonkeys_videojogos_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0045",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que grande multinacional suíça de videojogos online e móveis («Miniclip»), criadora do fenómeno global «8 Ball Pool» e «Agar.io», instalou em 2022 o seu maior centro de engenharia e estúdio de desenvolvimento no Taguspark em Oeiras com mais de 350 profissionais?",
+    "opcoes": [
+      "Miniclip (Oeiras / Taguspark)",
+      "Electronic Arts",
+      "Ubisoft",
+      "Rovio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O campus da Miniclip em Oeiras é o polo central de engenharia dos jogos da empresa que soma mais de 4 mil milhões de downloads.",
+    "fonte": "Miniclip / Município de Oeiras / AICEP",
+    "factClusterId": "fc_emp_tec_miniclip_oeiras_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0046",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica portuguesa de software de bilhética intermodal e transportes inteligentes sediada no Porto («Card4B»), desenvolveu as soluções de validação sem contacto e pagamento por smartphone do sistema Andante no Metro do Porto e STCP?",
+    "opcoes": [
+      "Sensei",
+      "Card4B (Sistema Andante)",
+      "Vision-Box",
+      "Glintt"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A tecnologia do Andante foi pioneira mundial ao calcular automaticamente a tarifa mais vantajosa para o passageiro por aproximação no telemóvel.",
+    "fonte": "Card4B / Metro do Porto / TIP",
+    "factClusterId": "fc_emp_tec_card4b_andante_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0047",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que empresa tecnológica de inovação no setor de restauração («Kitch»), fundada em Lisboa por ex-executivos da Uber Eats (Rui Bento e Nuno Rodrigues), desenvolveu uma plataforma tecnológica para otimizar as operações digitais e entregas de restaurantes?",
+    "opcoes": [
+      "Barkyn",
+      "Sensei",
+      "Kitch (adquirida pela Glovo)",
+      "EatTasty"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Kitch foi adquirida pela multinacional Glovo em 2022 para expandir a sua tecnologia de cozinhas partilhadas e pedidos diretos.",
+    "fonte": "Kitch / Glovo / TechCrunch",
+    "factClusterId": "fc_emp_tec_kitch_ruibento_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0048",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que plataforma portuguesa de literacia e intermediação financeira fundada em 2014 em Lisboa («Doutor Finanças»), ajudou dezenas de milhares de famílias portuguesas a poupar no crédito à habitação e consolidar créditos através de ferramentas digitais gratuitas?",
+    "opcoes": [
+      "ComparaJá",
+      "Coverflex",
+      "Rauva",
+      "Doutor Finanças"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Doutor Finanças é um dos maiores portais de literacia e bem-estar financeiro de Portugal.",
+    "fonte": "Doutor Finanças / Banco de Portugal",
+    "factClusterId": "fc_emp_tec_doutorfinancas_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0049",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que inovadora empresa de tecnologia aeroespacial sediada em Matosinhos e Santa Maria da Feira («Neuraspace»), fundada por Chiara Manfletti, desenvolveu uma plataforma de IA para prevenir colisões espaciais entre satélites e lixo espacial em órbita da Terra?",
+    "opcoes": [
+      "Neuraspace",
+      "CEiiA",
+      "Critical Software",
+      "Deimos Engenharia"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Neuraspace recebeu financiamento do Conselho Europeu de Inovação (EIC) e da ESA para proteger a segurança das constelações de satélites.",
+    "fonte": "Neuraspace / ESA / European Innovation Council",
+    "factClusterId": "fc_emp_tec_neuraspace_satelites_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
+  },
+  {
+    "id": "EMP_TEC_0050",
+    "tema": "Empresas Portuguesas",
+    "subtema": "Empresas Tecnológicas",
+    "pergunta": "Que histórica e prestigiada empresa de engenharia aeroespacial portuguesa fundada em 2002 («Deimos Engenharia»), com sede em Lisboa, lidera missões da ESA para observação da Terra, defesa planetária (missão Hera da ESA) e navegação por satélite (Galileo)?",
+    "opcoes": [
+      "CEiiA",
+      "Neuraspace",
+      "Deimos Engenharia (Lisboa)",
+      "Edisoft"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Deimos Engenharia concebe sistemas de controlo de atitude e órbitas de satélites espaciais para as maiores missões científicas da Europa.",
+    "fonte": "Deimos Engenharia / Agência Espacial Portuguesa (Portugal Space) / ESA",
+    "factClusterId": "fc_emp_tec_deimosengenharia_espaco_01",
+    "category": "Empresas Portuguesas",
+    "subcategory": "Empresas Tecnológicas"
   }
 ]

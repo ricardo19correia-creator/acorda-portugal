@@ -1,0 +1,852 @@
+[
+  {
+    "id": "MUN_CAP_0001",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade de Angola, situada na costa do Oceano Atlântico e fundada em 1576 pelo explorador português Paulo Dias de Novais com o nome de São Paulo de Assunção de Loanda?",
+    "opcoes": [
+      "Luanda",
+      "Benguela",
+      "Huambo",
+      "Lobito"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Luanda é o principal centro económico, financeiro e cultural de Angola e a terceira cidade mais populosa de toda a Lusofonia.",
+    "fonte": "Governo de Angola / CPLP",
+    "factClusterId": "fc_mun_luanda_angola_01"
+  },
+  {
+    "id": "MUN_CAP_0002",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade de Moçambique, situada no sul do país na margem ocidental da baía com o mesmo nome, outrora conhecida até 1976 como Lourenço Marques?",
+    "opcoes": [
+      "Beira",
+      "Maputo",
+      "Nampula",
+      "Matola"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maputo é célebre pela sua arquitetura modernista (incluindo edifícios desenhados por Pancho Guedes) e pela Estação de Caminhos de Ferro.",
+    "fonte": "Governo de Moçambique / CPLP",
+    "factClusterId": "fc_mun_maputo_mocambique_01"
+  },
+  {
+    "id": "MUN_CAP_0003",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital de Cabo Verde, situada na costa sul da Ilha de Santiago, que acolhe o centro histórico do «Plateau» e o porto da Praia?",
+    "opcoes": [
+      "Mindelo",
+      "Espargos",
+      "Praia",
+      "Santa Maria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A cidade da Praia tornou-se capital de Cabo Verde em 1770 substituindo a Cidade Velha (Ribeira Grande).",
+    "fonte": "Governo de Cabo Verde / CPLP",
+    "factClusterId": "fc_mun_praia_caboverde_01"
+  },
+  {
+    "id": "MUN_CAP_0004",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da República Democrática de Timor-Leste, situada na costa norte da ilha de Timor em frente ao estreito de Wetar, com o icónico monumento do Cristo Rei no topo do cabo Fatucama?",
+    "opcoes": [
+      "Baucau",
+      "Maliana",
+      "Lospalos",
+      "Díli"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Díli foi o palco central da luta pela independência de Timor-Leste restaurada em maio de 2002.",
+    "fonte": "Governo de Timor-Leste / CPLP",
+    "factClusterId": "fc_mun_dili_timorleste_01"
+  },
+  {
+    "id": "MUN_CAP_0005",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital federal do Brasil, cidade planeada no Planalto Central inaugurada em 1960 pelo presidente Juscelino Kubitschek com plano urbanístico de Lúcio Costa e monumentos de Oscar Niemeyer em forma de avião («Plano Piloto»)?",
+    "opcoes": [
+      "Brasília",
+      "Rio de Janeiro",
+      "São Paulo",
+      "Salvador"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Brasília sucedeu ao Rio de Janeiro como capital do Brasil e é Património Mundial da UNESCO pela sua arquitetura modernista única.",
+    "fonte": "Governo Federal do Brasil / UNESCO",
+    "factClusterId": "fc_mun_brasilia_brasil_01"
+  },
+  {
+    "id": "MUN_CAP_0006",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Guiné-Bissau, situada no estuário do rio Geba, fundada em 1687 pelos portugueses como porto fortificado e centro comercial raiano?",
+    "opcoes": [
+      "Bafatá",
+      "Bissau",
+      "Gabú",
+      "Cacheu"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de São José da Amura e o porto comercial de Bissau constituem o coração histórico da capital guineense.",
+    "fonte": "Governo da Guiné-Bissau / CPLP",
+    "factClusterId": "fc_mun_bissau_guine_01"
+  },
+  {
+    "id": "MUN_CAP_0007",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade de São Tomé e Príncipe, situada no nordeste da Ilha de São Tomé na Baía de Ana Chaves, fundada em 1485 por Álvaro de Caminha?",
+    "opcoes": [
+      "Santo António (Príncipe)",
+      "Neves",
+      "São Tomé",
+      "Santana"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A cidade de São Tomé preserva o Forte de São Sebastião (atual Museu Nacional) e a Sé Catedral de São Tomé.",
+    "fonte": "Governo de São Tomé e Príncipe / CPLP",
+    "factClusterId": "fc_mun_saotome_capital_01"
+  },
+  {
+    "id": "MUN_CAP_0008",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Suíça («cidade federal» e sede do Conselho Federal e do Parlamento Suíço), situada no cantão homónimo ao longo de uma curva apertada do rio Aar com um centro histórico medieval classificado pela UNESCO?",
+    "opcoes": [
+      "Zurique",
+      "Genebra",
+      "Basileia",
+      "Berna"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Embora Zurique e Genebra sejam as cidades mais populosas, Berna é a sede política oficial da Confederação Suíça.",
+    "fonte": "Confederação Suíça / UNESCO",
+    "factClusterId": "fc_mun_berna_suica_01"
+  },
+  {
+    "id": "MUN_CAP_0009",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital oficial do Reino dos Países Baixos (Holanda), famosa pelos seus canais semicirculares, Museu Van Gogh e Rijksmuseum (embora a sede do governo e do parlamento fique na Haia)?",
+    "opcoes": [
+      "Amesterdão (Amsterdam)",
+      "Haia (Den Haag)",
+      "Roterdão",
+      "Utreque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Constituição dos Países Baixos designa expressamente Amesterdão como a capital oficial da nação.",
+    "fonte": "Governo dos Países Baixos / União Europeia",
+    "factClusterId": "fc_mun_amesterdao_holanda_01"
+  },
+  {
+    "id": "MUN_CAP_0010",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Austrália, uma cidade planeada no Território da Capital Australiana desenhada pelos arquitetos Walter Burley Griffin e Marion Mahony Griffin entre Sydney e Melbourne para resolver a rivalidade entre as duas metrópoles?",
+    "opcoes": [
+      "Sydney",
+      "Camberra (Canberra)",
+      "Melbourne",
+      "Brisbane"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Camberra foi fundada em 1913 e acolhe a Casa do Parlamento e o lago artificial Burley Griffin.",
+    "fonte": "Governo da Austrália",
+    "factClusterId": "fc_mun_camberra_australia_01"
+  },
+  {
+    "id": "MUN_CAP_0011",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Canadá, situada na província de Ontário na margem sul do rio com o mesmo nome em frente a Gatineau (Quebeque), escolhida como capital pela Rainha Vitória em 1857?",
+    "opcoes": [
+      "Toronto",
+      "Montreal",
+      "Otava (Ottawa)",
+      "Vancouver"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Otava abriga o Parliament Hill (Colina do Parlamento) e o Canal Rideau com eclusas históricas da UNESCO.",
+    "fonte": "Governo do Canadá",
+    "factClusterId": "fc_mun_otava_canada_01"
+  },
+  {
+    "id": "MUN_CAP_0012",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Nova Zelândia, a capital nacional mais a sul do planeta situada no extremo sul da Ilha do Norte junto ao Estreito de Cook?",
+    "opcoes": [
+      "Auckland",
+      "Christchurch",
+      "Hamilton",
+      "Wellington"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Wellington é o centro político e cultural da Nova Zelândia e a sede do parlamento em forma de colmeia ('The Beehive').",
+    "fonte": "Governo da Nova Zelândia",
+    "factClusterId": "fc_mun_wellington_novazelandia_01"
+  },
+  {
+    "id": "MUN_CAP_0013",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da República da Irlanda (Eire), situada na costa leste na foz do rio Liffey, famosa pela fábrica da cerveja Guinness e pela biblioteca do Trinity College (onde repousa o Livro de Kells)?",
+    "opcoes": [
+      "Dublin",
+      "Cork",
+      "Galway",
+      "Limerick"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Dublin é berço de gigantes da literatura mundial como James Joyce, Oscar Wilde, Samuel Beckett e W.B. Yeats.",
+    "fonte": "Governo da Irlanda / União Europeia",
+    "factClusterId": "fc_mun_dublin_irlanda_01"
+  },
+  {
+    "id": "MUN_CAP_0014",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Escócia, célebre pelo seu imponente Castelo construído sobre um vulcão extinto, a Royal Mile e o maior festival internacional de artes e comédia do mundo (Edinburgh Fringe)?",
+    "opcoes": [
+      "Glasgow",
+      "Edimburgo (Edinburgh)",
+      "Aberdeen",
+      "Dundee"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Edimburgo é a capital histórica da Escócia desde o século XV e sede do Parlamento Escocês em Holyrood.",
+    "fonte": "Governo da Escócia / UNESCO",
+    "factClusterId": "fc_mun_edimburgo_escocia_01"
+  },
+  {
+    "id": "MUN_CAP_0015",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Dinamarca, situada nas ilhas de Zelândia e Amager, famosa pela estátua d'A Pequena Sereia, pelos jardins do Tivoli e pelo porto de Nyhavn?",
+    "opcoes": [
+      "Aarhus",
+      "Odense",
+      "Copenhaga (København)",
+      "Aalborg"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Copenhaga é ligada à cidade sueca de Malmö pela monumental Ponte do Øresund inaugurada em 2000.",
+    "fonte": "Governo da Dinamarca / União Europeia",
+    "factClusterId": "fc_mun_copenhaga_dinamarca_01"
+  },
+  {
+    "id": "MUN_CAP_0016",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Noruega, situada na cabeceira do fiorde com o mesmo nome, onde é entregue anualmente o prestigiado Prémio Nobel da Paz na Câmara Municipal (Rådhus)?",
+    "opcoes": [
+      "Bergen",
+      "Trondheim",
+      "Stavanger",
+      "Oslo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Oslo (antigamente chamada Cristiania) acolhe o Museu Munch, o Parque de Esculturas de Vigeland e a Ópera de Oslo.",
+    "fonte": "Governo da Noruega / Fundação Nobel",
+    "factClusterId": "fc_mun_oslo_noruega_01"
+  },
+  {
+    "id": "MUN_CAP_0017",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Suécia, construída sobre 14 ilhas no ponto onde o Lago Mälaren se encontra com o Mar Báltico, conhecida como «A Veneza do Norte» e onde são entregues os Prémios Nobel científicos e de literatura?",
+    "opcoes": [
+      "Estocolmo (Stockholm)",
+      "Gotemburgo",
+      "Malmö",
+      "Uppsala"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Estocolmo abriga o centro histórico medieval de Gamla Stan e o famoso Museu do Navio Vasa do século XVII.",
+    "fonte": "Governo da Suécia / União Europeia",
+    "factClusterId": "fc_mun_estocolmo_suecia_01"
+  },
+  {
+    "id": "MUN_CAP_0018",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Finlândia, situada na costa sul junto ao Golfo da Finlândia, famosa pela sua Catedral Luterana neoclássica na Praça do Senado e pela fortaleza marítima de Suomenlinna?",
+    "opcoes": [
+      "Espoo",
+      "Helsínquia (Helsinki)",
+      "Tampere",
+      "Turku"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Helsínquia foi a Capital Mundial do Design em 2012 e acolheu os Jogos Olímpicos de 1952.",
+    "fonte": "Governo da Finlândia / União Europeia",
+    "factClusterId": "fc_mun_helsinquia_finlandia_01"
+  },
+  {
+    "id": "MUN_CAP_0019",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Islândia, a capital de um estado soberano situada mais a norte no mundo, abastecida quase integralmente por energia geotérmica natural de vulcões?",
+    "opcoes": [
+      "Akureyri",
+      "Keflavík",
+      "Reiquiavique (Reykjavík)",
+      "Hafnarfjörður"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Reiquiavique acolhe a imponente igreja expressionista Hallgrímskirkja e a sala de concertos Harpa.",
+    "fonte": "Governo da Islândia",
+    "factClusterId": "fc_mun_reiquiavique_islandia_01"
+  },
+  {
+    "id": "MUN_CAP_0020",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Polónia, situada nas margens do rio Vístula, cujo centro histórico meticulosamente reconstruído após a destruição quase total na 2.ª Guerra Mundial foi classificado como Património Mundial pela UNESCO?",
+    "opcoes": [
+      "Cracóvia",
+      "Gdansk",
+      "Wroclaw",
+      "Varsóvia (Warszawa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Varsóvia é o berço do compositor Frédéric Chopin e da física e química bicampeã Nobel Marie Curie.",
+    "fonte": "Governo da Polónia / UNESCO / União Europeia",
+    "factClusterId": "fc_mun_varsovia_polonia_01"
+  },
+  {
+    "id": "MUN_CAP_0021",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Chéquia (República Checa), conhecida como «A Cidade das Cem Cúpulas» nas margens do rio Moldava, com a sua célebre Ponte Carlos e o Relógio Astronómico Medieval na Praça da Cidade Velha?",
+    "opcoes": [
+      "Praga (Praha)",
+      "Brno",
+      "Ostrava",
+      "Plzen"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Praga preserva um dos mais intactos centros históricos góticos, renascentistas e barrocos da Europa Central.",
+    "fonte": "Governo da Chéquia / UNESCO",
+    "factClusterId": "fc_mun_praga_chequia_01"
+  },
+  {
+    "id": "MUN_CAP_0022",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Hungria, dividida pelo rio Danúbio entre as colinas históricas de Buda (com o Castelo) e a planície vibrante de Peste (com o monumental Parlamento neogótico)?",
+    "opcoes": [
+      "Debrecen",
+      "Budapeste (Budapest)",
+      "Szeged",
+      "Miskolc"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Buda e Peste uniram-se formalmente em 1873 com a famosa Ponte das Correntes sobre o Danúbio.",
+    "fonte": "Governo da Hungria / União Europeia",
+    "factClusterId": "fc_mun_budapeste_hungria_01"
+  },
+  {
+    "id": "MUN_CAP_0023",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Áustria, situada nas margens do Danúbio, histórica capital imperial dos Habsburgos e berço da música clássica de Mozart, Beethoven, Schubert e Johann Strauss?",
+    "opcoes": [
+      "Salzburgo",
+      "Innsbruck",
+      "Viena (Wien)",
+      "Graz"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Viena abriga os palácios imperiais de Hofburg e Schönbrunn e é sede da Agência Internacional de Energia Atómica (AIEA) da ONU.",
+    "fonte": "Governo da Áustria / ONU / União Europeia",
+    "factClusterId": "fc_mun_viena_austria_01"
+  },
+  {
+    "id": "MUN_CAP_0024",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Bélgica e a sede institucional da Comissão Europeia, do Conselho da União Europeia e da sede da NATO, famosa pela sua Grand-Place com edifícios de corporações dourados e o Atomium?",
+    "opcoes": [
+      "Antuérpia",
+      "Gante",
+      "Bruges",
+      "Bruxelas (Bruxelles / Brussel)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Bruxelas é a 'capital de facto' da União Europeia acolhendo milhares de diplomatas e jornalistas internacionais.",
+    "fonte": "Comissão Europeia / Governo da Bélgica",
+    "factClusterId": "fc_mun_bruxelas_belgica_01"
+  },
+  {
+    "id": "MUN_CAP_0025",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Roménia, outrora conhecida no período entre guerras como «A Pequena Paris do Leste», que acolhe o colossal Palácio do Parlamento (segundo maior edifício administrativo do mundo construído por Ceausescu)?",
+    "opcoes": [
+      "Bucareste (București)",
+      "Cluj-Napoca",
+      "Timisoara",
+      "Iasi"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bucareste conjuga grandes avenidas neoclássicas com arquitetura monumental do período comunista.",
+    "fonte": "Governo da Roménia / União Europeia",
+    "factClusterId": "fc_mun_bucareste_romenia_01"
+  },
+  {
+    "id": "MUN_CAP_0026",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Bulgária, situada no sopé do maciço montanhoso de Vitosha, com a imponente Catedral patriarcal ortodoxa de Alexandre Nevsky com cúpulas douradas?",
+    "opcoes": [
+      "Plovdiv",
+      "Sófia (Sofiya)",
+      "Varna",
+      "Burgas"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sófia é uma das capitais mais antigas da Europa com ruínas romanas da cidade de Sérdica integradas no metro.",
+    "fonte": "Governo da Bulgária / União Europeia",
+    "factClusterId": "fc_mun_sofia_bulgaria_01"
+  },
+  {
+    "id": "MUN_CAP_0027",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Croácia, situada entre as encostas da montanha Medvednica e o rio Sava, dividida entre a Cidade Alta medieval (Gornji Grad) e a vibrante Cidade Baixa (Donji Grad)?",
+    "opcoes": [
+      "Split",
+      "Dubrovnik",
+      "Zagrebe (Zagreb)",
+      "Rijeka"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Zagrebe acolhe a icónica Igreja de São Marcos com o telhado de telhas policromadas com os brasões croatas.",
+    "fonte": "Governo da Croácia / União Europeia",
+    "factClusterId": "fc_mun_zagrebe_croacia_01"
+  },
+  {
+    "id": "MUN_CAP_0028",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Eslovénia, cidade verde europeia nas margens do rio Ljubljanica dominada pelo seu Castelo medieval e embelezada pelas pontes e praças do arquiteto Jože Plečnik?",
+    "opcoes": [
+      "Maribor",
+      "Celje",
+      "Koper",
+      "Liubliana (Ljubljana)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Liubliana é famosa pela Ponte dos Dragões e foi eleita Capital Verde Europeia pela sua pedonalização total do centro.",
+    "fonte": "Governo da Eslovénia / União Europeia",
+    "factClusterId": "fc_mun_liubliana_eslovenia_01"
+  },
+  {
+    "id": "MUN_CAP_0029",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Eslováquia, situada nas margens do rio Danúbio junto às fronteiras com a Áustria e a Hungria (a apenas 60 km de Viena), com o seu Castelo quadrangular branco no topo da colina?",
+    "opcoes": [
+      "Bratislava",
+      "Kosice",
+      "Presov",
+      "Zilina"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Bratislava foi a cidade de coroação dos reis da Hungria durante séculos na Catedral de São Martinho.",
+    "fonte": "Governo da Eslováquia / União Europeia",
+    "factClusterId": "fc_mun_bratislava_eslovaquia_01"
+  },
+  {
+    "id": "MUN_CAP_0030",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Estónia, situada no Golfo da Finlândia, cujo centro histórico medieval fortificado de Vanalinn é um dos mais bem conservados do mundo e um polo pioneiro de sociedade digital («e-Estonia»)?",
+    "opcoes": [
+      "Tartu",
+      "Taline (Tallinn)",
+      "Narva",
+      "Pärnu"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Taline combina muralhas góticas medievais com a sede do Centro de Ciberdefesa de Excelência da NATO.",
+    "fonte": "Governo da Estónia / União Europeia",
+    "factClusterId": "fc_mun_taline_estonia_01"
+  },
+  {
+    "id": "MUN_CAP_0031",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Letónia, situada no Golfo de Riga na foz do rio Daugava, famosa pela maior concentração de edifícios de arquitetura «Art Nouveau / Jugendstil» de toda a Europa?",
+    "opcoes": [
+      "Daugavpils",
+      "Liepaja",
+      "Riga",
+      "Jelgava"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mais de um terço dos edifícios do centro histórico de Riga pertencem ao estilo Arte Nova classificado pela UNESCO.",
+    "fonte": "Governo da Letónia / UNESCO",
+    "factClusterId": "fc_mun_riga_letonia_01"
+  },
+  {
+    "id": "MUN_CAP_0032",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Lituânia, situada na confluência dos rios Neris e Vilnia, célebre pela sua arquitetura barroca e pela autoproclamada república artística e boémia de «Uzupis»?",
+    "opcoes": [
+      "Kaunas",
+      "Klaipeda",
+      "Siauliai",
+      "Vílnius (Vilnius)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Vílnius possui um dos maiores centros históricos barrocos da Europa Central e a icónica Igreja de Santa Ana em gótico flamejante.",
+    "fonte": "Governo da Lituânia / União Europeia",
+    "factClusterId": "fc_mun_vilnius_lituania_01"
+  },
+  {
+    "id": "MUN_CAP_0033",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da República de Malta, cidade-fortaleza construída no século XVI pelos Cavaleiros de São João na Península de Xiberras com a magnífica Co-Catedral de São João (com quadros de Caravaggio)?",
+    "opcoes": [
+      "Valeta (Valletta)",
+      "Mdina",
+      "Sliema",
+      "Birgu"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Valeta foi mandada erguer pelo Grão-Mestre Jean Parisot de Valette após a vitória no Grande Cerco de Malta de 1565.",
+    "fonte": "Governo de Malta / UNESCO",
+    "factClusterId": "fc_mun_valeta_malta_01"
+  },
+  {
+    "id": "MUN_CAP_0034",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da ilha de Chipre, a única capital do mundo que permanece dividida por uma «Linha Verde» desmilitarizada vigiada pela ONU entre a República de Chipre e a parte norte cipriota turca?",
+    "opcoes": [
+      "Limassol",
+      "Nicósia (Lefkosia)",
+      "Lárnaca",
+      "Pafos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Nicósia preserva as imponentes muralhas venezianas circulares com onze baluartes em forma de coração.",
+    "fonte": "Governo de Chipre / ONU / União Europeia",
+    "factClusterId": "fc_mun_nicosia_chipre_01"
+  },
+  {
+    "id": "MUN_CAP_0035",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade da Argentina, situada na margem ocidental do Rio da Prata, famosa pelos bairros de San Telmo, La Boca (Caminito) e Recoleta e pelo Obelisco na Avenida 9 de Julio?",
+    "opcoes": [
+      "Córdoba",
+      "Rosário",
+      "Buenos Aires",
+      "Mendoza"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Buenos Aires é a meca internacional do Tango e abriga a Casa Rosada e o Teatro Colón.",
+    "fonte": "Governo da Argentina",
+    "factClusterId": "fc_mun_buenosaires_argentina_01"
+  },
+  {
+    "id": "MUN_CAP_0036",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Chile, situada no vale central rodeada pelos cumes cobertos de neve da Cordilheira dos Andes com o Palácio de La Moneda e o miradouro do Cerro San Cristóbal?",
+    "opcoes": [
+      "Valparaíso",
+      "Concepción",
+      "Viña del Mar",
+      "Santiago (Santiago de Chile)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Santiago foi fundada em 1541 pelo conquistador Pedro de Valdivia e acolhe o edifício mais alto da América do Sul (Gran Torre Santiago com 300m).",
+    "fonte": "Governo do Chile",
+    "factClusterId": "fc_mun_santiago_chile_01"
+  },
+  {
+    "id": "MUN_CAP_0037",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Peru, outrora conhecida na era colonial espanhola como «A Cidade dos Reis», situada na costa do Pacífico e fundada em 1535 por Francisco Pizarro, hoje aclamada capital gastronómica da América Latina?",
+    "opcoes": [
+      "Lima",
+      "Cusco",
+      "Arequipa",
+      "Trujillo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Lima combina o centro histórico barroco da UNESCO com falésias costeiras em Miraflores e o santuário arqueológico de Pachacámac.",
+    "fonte": "Governo do Peru / UNESCO",
+    "factClusterId": "fc_mun_lima_peru_01"
+  },
+  {
+    "id": "MUN_CAP_0038",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Colômbia, situada no planalto andino da Savana de Bogotá a 2.640 metros de altitude, famosa pelo histórico bairro de La Candelaria, o Museu do Ouro e o santuário de Monserrate?",
+    "opcoes": [
+      "Medellín",
+      "Bogotá (Distrito Capital)",
+      "Cáli",
+      "Cartagena das Índias"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Bogotá é uma das capitais mais altas do mundo e o centro financeiro e universitário da Colômbia.",
+    "fonte": "Governo da Colômbia",
+    "factClusterId": "fc_mun_bogota_colombia_01"
+  },
+  {
+    "id": "MUN_CAP_0039",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Equador, a segunda capital mais alta do mundo a 2.850 metros de altitude, cujo centro histórico colonial foi o primeiro sítio cultural do mundo declarado Património Mundial pela UNESCO em 1978 junto às Galápagos?",
+    "opcoes": [
+      "Guayaquil",
+      "Cuenca",
+      "Quito (San Francisco de Quito)",
+      "Ambato"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Quito situa-se nas faldas do vulcão ativo Pichincha e a poucos quilómetros do monumento da Linha do Equador (Mitad del Mundo).",
+    "fonte": "Governo do Equador / UNESCO",
+    "factClusterId": "fc_mun_quito_equador_01"
+  },
+  {
+    "id": "MUN_CAP_0040",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e maior cidade do Uruguai, situada na margem norte do Rio da Prata, famosa pela sua extensa marginal costeira («La Rambla»), pelo Mercado del Puerto e pelo Teatro Solís?",
+    "opcoes": [
+      "Punta del Este",
+      "Colonia del Sacramento",
+      "Salto",
+      "Montevideu (Montevideo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Montevideu é a sede administrativa do Mercosul e foi palco da final do primeiro Campeonato do Mundo de Futebol no Estádio Centenario em 1930.",
+    "fonte": "Governo do Uruguai / Mercosul",
+    "factClusterId": "fc_mun_montevideu_uruguai_01"
+  },
+  {
+    "id": "MUN_CAP_0041",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Paraguai, uma das cidades mais antigas da bacia do Rio da Prata (fundada em 1537 e chamada de «Mãe das Cidades»), situada na margem esquerda do rio Paraguai?",
+    "opcoes": [
+      "Assunção (Nuestra Señora de la Asunción)",
+      "Ciudad del Este",
+      "Encarnación",
+      "Luque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Assunção acolhe o Palácio dos López (sede do governo) e o Panteão Nacional dos Heróis.",
+    "fonte": "Governo do Paraguai",
+    "factClusterId": "fc_mun_assuncao_paraguai_01"
+  },
+  {
+    "id": "MUN_CAP_0042",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Tailândia (cujo nome cerimonial em tailandês é Krung Thep Maha Nakhon), famosa pelos seus templos dourados de Wat Phra Kaew (Buda de Esmeralda), Wat Arun e pelo Grande Palácio Real junto ao rio Chao Phraya?",
+    "opcoes": [
+      "Chiang Mai",
+      "Banguecoque (Bangkok)",
+      "Phuket",
+      "Pattaya"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Banguecoque é uma das cidades mais visitadas do planeta e o centro financeiro do Sudeste Asiático.",
+    "fonte": "Governo da Tailândia",
+    "factClusterId": "fc_mun_banguecoque_tailandia_01"
+  },
+  {
+    "id": "MUN_CAP_0043",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital e centro nevrálgico da Coreia do Sul, uma das maiores metrópoles tecnológicas do mundo nas margens do rio Han, com os palácios dinásticos de Gyeongbokgung e a torre N Seoul Tower?",
+    "opcoes": [
+      "Busan",
+      "Incheon",
+      "Seul (Seoul)",
+      "Daegu"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A área metropolitana de Seul concentra metade da população de toda a Coreia do Sul e acolheu os Jogos Olímpicos de 1988.",
+    "fonte": "Governo da Coreia do Sul",
+    "factClusterId": "fc_mun_seul_coreiadosul_01"
+  },
+  {
+    "id": "MUN_CAP_0044",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Arábia Saudita, situada no planalto de Négede no deserto da Península Arábica, que se transformou de um oásis fortificado numa megacidade futurista com a Kingdom Centre Tower e a Al Faisaliyah Tower?",
+    "opcoes": [
+      "Jidá",
+      "Meca",
+      "Medina",
+      "Riade (Riyadh)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Riade é o centro político e financeiro da maior economia exportadora de petróleo do Médio Oriente.",
+    "fonte": "Governo da Arábia Saudita",
+    "factClusterId": "fc_mun_riade_arabiasaudita_01"
+  },
+  {
+    "id": "MUN_CAP_0045",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital da Turquia (República da Turquia), proclamada capital em 1923 por Mustafa Kemal Atatürk após a fundação da república laica moderna em substituição de Istambul?",
+    "opcoes": [
+      "Ancara (Ankara)",
+      "Istambul",
+      "Esmirna (Izmir)",
+      "Antália"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Ancara acolhe o monumental Anıtkabir (mausoléu de Atatürk) e a Grande Assembleia Nacional da Turquia no centro da Anatólia.",
+    "fonte": "Governo da Turquia",
+    "factClusterId": "fc_mun_ancara_turquia_01"
+  },
+  {
+    "id": "MUN_CAP_0046",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Reino de Marrocos, situada na costa atlântica na foz do rio Bu Regregue, com a histórica Torre de Haçane, o Mausoléu de Maomé V e a Kasbah dos Oudayas?",
+    "opcoes": [
+      "Casablanca",
+      "Rabat",
+      "Marraquexe",
+      "Fez"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Rabat é a capital política e diplomática de Marrocos, classificada pela UNESCO como Património Mundial.",
+    "fonte": "Reino de Marrocos / UNESCO",
+    "factClusterId": "fc_mun_rabat_marrocos_01"
+  },
+  {
+    "id": "MUN_CAP_0047",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Egito e a maior metrópole do Médio Oriente e de África, situada junto ao delta do rio Nilo, nas imediações das monumentais Pirâmides de Gizé e da Grande Esfinge?",
+    "opcoes": [
+      "Alexandria",
+      "Giza",
+      "Cairo (Al-Qāhira)",
+      "Luxor"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Cairo acolhe o Grande Museu Egípcio (GEM), a mesquita milenar de Al-Azhar e o bazar histórico de Khan el-Khalili.",
+    "fonte": "Governo do Egito / UNESCO",
+    "factClusterId": "fc_mun_cairo_egito_01"
+  },
+  {
+    "id": "MUN_CAP_0048",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Quénia, conhecida como «A Cidade Verde ao Sol», a única capital mundial que possui um parque nacional com leões, girafas e rinocerontes em liberdade junto aos arranha-céus da cidade (Parque Nacional de Nairobi) e sede mundial da ONU para o Meio Ambiente (UNEP)?",
+    "opcoes": [
+      "Mombaça",
+      "Kisumu",
+      "Nakuru",
+      "Nairobi"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Nairobi é o principal hub tecnológico, financeiro e aéreo de toda a África Oriental.",
+    "fonte": "Governo do Quénia / Nações Unidas (UNEP)",
+    "factClusterId": "fc_mun_nairobi_quenia_01"
+  },
+  {
+    "id": "MUN_CAP_0049",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital administrativa e sede do governo executivo da África do Sul (enquanto a Cidade do Cabo é a capital legislativa e Bloemfontein a capital judicial)?",
+    "opcoes": [
+      "Pretória (Tshwane)",
+      "Cidade do Cabo (Cape Town)",
+      "Joanesburgo",
+      "Durban"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Pretória acolhe os Union Buildings com a gigantesca estátua de bronze de Nelson Mandela e é famosa pelos milhares de jacarandás em flor.",
+    "fonte": "Governo da África do Sul",
+    "factClusterId": "fc_mun_pretoria_africadosul_01"
+  },
+  {
+    "id": "MUN_CAP_0050",
+    "tema": "Mundo",
+    "subtema": "Países & Capitais",
+    "pergunta": "Qual é a capital do Senegal, situada na Península de Cabo Verde no ponto mais ocidental do continente africano, famosa por ter sido a meta lendária do Rali Dakar e pela histórica Ilha de Gorée (símbolo da memória da escravatura)?",
+    "opcoes": [
+      "Saint-Louis",
+      "Thiès",
+      "Dacar (Dakar)",
+      "Touba"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Dacar é um dos mais efervescentes centros de arte contemporânea e música de África com a Bienal de Dacar e o Monumento do Renascimento Africano.",
+    "fonte": "Governo do Senegal / UNESCO",
+    "factClusterId": "fc_mun_dakar_senegal_01"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "id": "TV_FIL_0001",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que emblemática comédia do cinema português de 1933 («A Canção de Lisboa»), realizada por Cottinelli Telmo, reuniu Vasco Santana (o estudante de medicina Vasco Leitão), António Silva (o alfaiate Caetano) e Beatriz Costa (Alice)?",
+    "opcoes": [
+      "«A Canção de Lisboa» (1933)",
+      "«O Pátio das Cantigas»",
+      "«O Pai Tirano»",
+      "«O Costa do Castelo»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Canção de Lisboa foi a primeira longa-metragem sonora inteiramente produzida nos estúdios da Tobis Portuguesa em Lisboa.",
+    "fonte": "Cinemateca Portuguesa / Tobis Portuguesa / DHP",
+    "factClusterId": "fc_tv_fil_cancao_lisboa_1933_01"
+  },
+  {
+    "id": "TV_FIL_0002",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendária comédia à portuguesa de 1942 realizada por Francisco Ribeiro («O Pátio das Cantigas»), imortalizou a icónica fala de Vasco Santana ao candeeiro: «Ó Evaristo, tens cá disto?» dirigida ao merceeiro interpretado por António Silva?",
+    "opcoes": [
+      "«O Leão da Estrela»",
+      "«O Pátio das Cantigas» (1942)",
+      "«A Menina da Rádio»",
+      "«Sonhar É Fácil»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Pátio das Cantigas é a comédia mais popular e repetida da história da televisão e cinema português.",
+    "fonte": "Cinemateca Portuguesa / Arquivo Nacional das Imagens em Movimento (ANIM)",
+    "factClusterId": "fc_tv_fil_patiodascantigas_1942_01"
+  },
+  {
+    "id": "TV_FIL_0003",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima seminal do cinema português realizada por Manoel de Oliveira no Porto em 1942 («Aniki Bóbó»), baseada no conto «Meninos Milionários» de Rodrigues de Freitas, retratou com realismo poético a infância nas margens do rio Douro?",
+    "opcoes": [
+      "«Douro, Faina Fluvial»",
+      "«O Pintor e a Cidade»",
+      "«Aniki Bóbó» (Manoel de Oliveira, 1942)",
+      "«Amor de Perdição»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Aniki Bóbó antecipou a estética do neorrealismo italiano e é considerada uma das maiores obras cinematográficas sobre a infância de todos os tempos.",
+    "fonte": "Cinemateca Portuguesa / Fundação de Serralves (Casa do Cinema Manoel de Oliveira)",
+    "factClusterId": "fc_tv_fil_anikibobo_manoeldeoliveira_1942_01"
+  },
+  {
+    "id": "TV_FIL_0004",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que famosa comédia de 1941 realizada por António Lopes Ribeiro («O Pai Tirano»), satiriza os ensaios de teatro amador da companhia «Grémio Dramático Familiar» com Vasco Santana e Francisco Ribeiro («Ribeirinho»)?",
+    "opcoes": [
+      "«O Costa do Castelo»",
+      "«A Menina da Rádio»",
+      "«A Vizinha do Lado»",
+      "«O Pai Tirano» (1941)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O filme celebrizou frases como 'Mas que grande sarilho!' e diálogos satíricos sobre as peças de teatro de costumes.",
+    "fonte": "Cinemateca Portuguesa / Tobis Portuguesa",
+    "factClusterId": "fc_tv_fil_opaitirano_1941_01"
+  },
+  {
+    "id": "TV_FIL_0005",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que popular filme de 1947 realizado por Arthur Duarte («O Leão da Estrela»), acompanha as peripécias de Anastácio da Silva (António Silva), um modesto funcionário público e adepto fanático do Sporting CP que finge ser milionário para assistir ao clássico contra o FC Porto?",
+    "opcoes": [
+      "«O Leão da Estrela» (1947)",
+      "«O Pátio das Cantigas»",
+      "«O Costa do Castelo»",
+      "«Dois Dias em Coimbra»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Leão da Estrela satirizou com enorme humor a paixão pelo futebol e o confronto de classes sociais em Portugal.",
+    "fonte": "Cinemateca Portuguesa / ANIM",
+    "factClusterId": "fc_tv_fil_oleaodaestrela_1947_01"
+  },
+  {
+    "id": "TV_FIL_0006",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico de 1943 realizado por Arthur Duarte («O Costa do Castelo»), protagonizado por António Silva, Maria Matos e Milú, celebrizou a famosa cantiga popular «A Agulha e o Dedal» («Cantigas da Rua»)?",
+    "opcoes": [
+      "«A Canção de Lisboa»",
+      "«O Costa do Castelo» (1943)",
+      "«A Menina da Rádio»",
+      "«Fado, História d'uma Cantadeira»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A canção interpretada por Milú tornou-se um êxito radiofónico e popular estrondoso em todo o país.",
+    "fonte": "Cinemateca Portuguesa / Tobis",
+    "factClusterId": "fc_tv_fil_ocostadocastelo_1943_01"
+  },
+  {
+    "id": "TV_FIL_0007",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que comédia musical de 1944 realizada por Arthur Duarte («A Menina da Rádio»), retrata a rivalidade de dois comerciantes vizinhos (António Silva e Maria Matos) que criam postos de rádio concorrentes no mesmo bairro de Lisboa?",
+    "opcoes": [
+      "«A Canção da Terra»",
+      "«A Noiva do Brasil»",
+      "«A Menina da Rádio» (1944)",
+      "«O Grande Elias»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Menina da Rádio celebrizou o talento cómico e a química perfeita entre António Silva e Maria Matos.",
+    "fonte": "Cinemateca Portuguesa / ANIM",
+    "factClusterId": "fc_tv_fil_ameninadaradio_1944_01"
+  },
+  {
+    "id": "TV_FIL_0008",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que primeiro filme sonoro da história do cinema inteiramente falado e cantado em português («A Severa»), realizado por José Leitão de Barros em 1931, teve Dina Teresa no papel da mítica fadista da Mouraria Maria Severa Onofriana?",
+    "opcoes": [
+      "«Fado»",
+      "«A Canção de Lisboa»",
+      "«Gado Bravo»",
+      "«A Severa» (1931, de Leitão de Barros)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Severa foi gravado em Paris nos estúdios da Tobis francesa antes da inauguração dos estúdios portugueses.",
+    "fonte": "Cinemateca Portuguesa / DHP",
+    "factClusterId": "fc_tv_fil_asevera_1931_01"
+  },
+  {
+    "id": "TV_FIL_0009",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que histórico filme de 1947 realizado por Perdigão Queiroga («Fado, História d'uma Cantadeira»), consagrou a grande fadista Amália Rodrigues como atriz de cinema ao lado do ator galã Virgílio Teixeira?",
+    "opcoes": [
+      "«Fado, História d'uma Cantadeira» (1947)",
+      "«Capas Negras»",
+      "«Vendaval Maravilhoso»",
+      "«As Pupilas do Senhor Reitor»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O filme retrata a ascensão de uma humilde cantadeira de fado do bairro de Alfama ao estrelato internacional.",
+    "fonte": "Cinemateca Portuguesa / Fundação Amália Rodrigues",
+    "factClusterId": "fc_tv_fil_amaliarodrigues_fadocantadeira_1947_01"
+  },
+  {
+    "id": "TV_FIL_0010",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que monumental drama etnográfico de 1942 realizado por José Leitão de Barros («Ala-Arriba!»), com argumento de Leitão de Barros e Alfredo Cortez, retratou a vida heróica da comunidade piscatória da Póvoa de Varzim sendo premiado na Bienal de Veneza?",
+    "opcoes": [
+      "«Maria do Mar»",
+      "«Ala-Arriba!» (1942)",
+      "«Nazaré, Praia de Pescadores»",
+      "«Gado Bravo»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme utilizou pescadores reais da Póvoa como atores e recebeu a Taça da Bienal de Veneza em 1942.",
+    "fonte": "Cinemateca Portuguesa / Município da Póvoa de Varzim",
+    "factClusterId": "fc_tv_fil_alaarriba_povoadevarzim_1942_01"
+  },
+  {
+    "id": "TV_FIL_0011",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que filme fundador do Cinema Novo português estreado em 1963 («Os Verdes Anos»), realizado por Paulo Rocha com banda sonora original de Carlos Paredes na guitarra portuguesa e Rui Gomes e Isabel Ruth nos papéis principais, rompeu com o cinema oficial do Estado Novo?",
+    "opcoes": [
+      "«Belarmino»",
+      "«Mudar de Vida»",
+      "«Os Verdes Anos» (1963, Paulo Rocha)",
+      "«Domingo à Tarde»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Os Verdes Anos retratou a solidão, a modernidade fria de Lisboa e o desencanto da juventude trabalhadora e emigrante.",
+    "fonte": "Cinemateca Portuguesa / Centro Português de Cinema",
+    "factClusterId": "fc_tv_fil_osverdesanos_paulorocha_1963_01"
+  },
+  {
+    "id": "TV_FIL_0012",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que inovador documentário-ficção de 1964 realizado por Fernando Lopes («Belarmino»), retrata a vida solitária do pugilista português Belarmino Fragoso pelas ruas e cafés da Baixa de Lisboa com música de jazz de Manuel Jorge Veloso?",
+    "opcoes": [
+      "«Uma Abelha na Chuva»",
+      "«O Recado»",
+      "«Perdido por Cem»",
+      "«Belarmino» (1964, Fernando Lopes)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Belarmino é considerado uma das pedras basilares do documentarismo moderno e da Nouvelle Vague cinematográfica portuguesa.",
+    "fonte": "Cinemateca Portuguesa / ANIM",
+    "factClusterId": "fc_tv_fil_belarmino_fernandolopes_1964_01"
+  },
+  {
+    "id": "TV_FIL_0013",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que filme histórico de 1946 realizado por José Leitão de Barros («Camões»), protagonizado por António Vilar no papel do poeta épico Luís de Camões, representou Portugal na primeira edição histórica do Festival de Cannes em 1946?",
+    "opcoes": [
+      "«Camões» (1946)",
+      "«Inês de Castro»",
+      "«Bocage»",
+      "«Frei Luís de Sousa»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Camões foi a mais ambiciosa superprodução histórica do cinema português da década de 1940 com centenas de figurantes e cenários sumptuosos.",
+    "fonte": "Festival de Cannes (1946) / Cinemateca Portuguesa",
+    "factClusterId": "fc_tv_fil_camoes_leitaodebarros_1946_01"
+  },
+  {
+    "id": "TV_FIL_0014",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que famosa comédia dramática de 1937 realizada por Leitão de Barros («Maria Papoila»), celebrizou a atriz Mirita Casimiro no papel de uma ingénua criada beirã que vai para Lisboa e é presa injustamente terminando no serviço militar?",
+    "opcoes": [
+      "«Aldeia da Roupa Branca»",
+      "«Maria Papoila» (1937)",
+      "«A Menina da Rádio»",
+      "«A Canção da Terra»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Maria Papoila foi um dos maiores sucessos de bilheteira dos anos 1930 revelando o talento cómico e a popularidade de Mirita Casimiro.",
+    "fonte": "Cinemateca Portuguesa / DHP",
+    "factClusterId": "fc_tv_fil_mariapapoila_1937_01"
+  },
+  {
+    "id": "TV_FIL_0015",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que emblemática comédia de 1939 realizada por Jean Choux («Aldeia da Roupa Branca»), protagonizada por Beatriz Costa no papel da lavadeira Gracinda com canções de Raul Portela, retratou as rivalidades entre as lavadeiras de Caneças no rio Trancão?",
+    "opcoes": [
+      "«A Canção de Lisboa»",
+      "«Maria Papoila»",
+      "«Aldeia da Roupa Branca» (1939)",
+      "«O Costa do Castelo»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A cantiga 'Apanhar o Trólei' e as cenas dos carros puxados por mulas com montes de roupa lavada entraram no imaginário popular lisboeta.",
+    "fonte": "Cinemateca Portuguesa / Tobis",
+    "factClusterId": "fc_tv_fil_aldeiadaroupabranca_1939_01"
+  },
+  {
+    "id": "TV_FIL_0016",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendário clássico do cinema romântico de 1942 realizado por Michael Curtiz («Casablanca»), protagonizado por Humphrey Bogart (Rick Blaine) e Ingrid Bergman (Ilsa Lund) em Marrocos durante a Segunda Guerra Mundial, celebrizou a frase «Play it once, Sam» e a canção «As Time Goes By»?",
+    "opcoes": [
+      "«O Terceiro Homem»",
+      "«Relíquia Macabra»",
+      "«Gilda»",
+      "«Casablanca» (1942)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Casablanca venceu 3 Óscares da Academia incluindo Melhor Filme, Melhor Realizador e Melhor Argumento Adaptado.",
+    "fonte": "Academy of Motion Picture Arts and Sciences (AMPAS) / Warner Bros.",
+    "factClusterId": "fc_tv_fil_casablanca_1942_01"
+  },
+  {
+    "id": "TV_FIL_0017",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que revolucionária obra-prima de 1941 realizada, coescrita e protagonizada por Orson Welles aos 25 anos de idade («Citizen Kane» / «O Mundo a Seus Pés»), gira em torno do mistério da última palavra pronunciada pelo magnata da imprensa Charles Foster Kane no seu leito de morte:",
+    "opcoes": [
+      "«Rosebud» (o trenó de infância)",
+      "«Xanadu»",
+      "«Inquirer»",
+      "«Susan»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Citizen Kane revolucionou a linguagem do cinema com a profundidade de campo, ângulos inovadores de câmara e narrativa não linear.",
+    "fonte": "American Film Institute (AFI) / RKO Pictures",
+    "factClusterId": "fc_tv_fil_citizenkane_rosebud_1941_01"
+  },
+  {
+    "id": "TV_FIL_0018",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que monumental drama histórico e romântico de 1939 realizado por Victor Fleming («E Tudo o Vento Levou» / «Gone with the Wind»), baseado no romance de Margaret Mitchell, imortalizou Clark Gable (Rhett Butler) e Vivien Leigh (Scarlett O'Hara) durante a Guerra Civil Americana?",
+    "opcoes": [
+      "«O Feiticeiro de Oz»",
+      "«E Tudo o Vento Levou» (1939)",
+      "«Rebecca»",
+      "«Aconteceu Naquela Noite»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme conquistou 8 Óscares e mantém-se até hoje como o filme com maior receita de bilheteira da história do cinema ajustada à inflação.",
+    "fonte": "AFI / Guinness World Records",
+    "factClusterId": "fc_tv_fil_gonewiththewind_1939_01"
+  },
+  {
+    "id": "TV_FIL_0019",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que genial comédia satírica de 1940 escrita, realizada e protagonizada por Charlie Chaplin («O Grande Ditador» / «The Great Dictator»), ridicularizou Adolf Hitler e o fascismo através da personagem do ditador 'Adenoid Hynkel' de Tomânia e conclui com um imortal discurso de apelo à fraternidade humana?",
+    "opcoes": [
+      "«Tempos Modernos»",
+      "«Luzes da Cidade»",
+      "«O Grande Ditador» (1940, Charlie Chaplin)",
+      "«A Quimera do Ouro»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Foi o primeiro filme inteiramente sonoro de Chaplin lançado em plena Segunda Guerra Mundial como um corajoso manifesto pacifista.",
+    "fonte": "Chaplin Office / United Artists / Library of Congress",
+    "factClusterId": "fc_tv_fil_charliechaplin_ograndeditador_1940_01"
+  },
+  {
+    "id": "TV_FIL_0020",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que icónica comédia muda de 1936 de Charlie Chaplin («Tempos Modernos» / «Modern Times»), satirizou a desumanização do trabalho fabril na Revolução Industrial com a célebre cena do vagabundo Charlot a ser engolido e a deslizar pelas engrenagens gigantes de uma máquina?",
+    "opcoes": [
+      "«O Garoto»",
+      "«O Circo»",
+      "«Luzes da Ribalta»",
+      "«Tempos Modernos» (1936)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Tempos Modernos marcou a última aparição cinematográfica da personagem 'The Tramp' (Charlot) no cinema.",
+    "fonte": "Chaplin Association / British Film Institute (BFI)",
+    "factClusterId": "fc_tv_fil_temposmodernos_chaplin_1936_01"
+  },
+  {
+    "id": "TV_FIL_0021",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima seminal da ficção científica muda expressionista alemã de 1927 realizada por Fritz Lang («Metropolis»), com argumento de Thea von Harbou, retratou uma metrópole distópica futurista dividida entre os operários subterrâneos e os governantes no topo da Torre de Babel?",
+    "opcoes": [
+      "«Metropolis» (1927, Fritz Lang)",
+      "«O Gabinete do Dr. Caligari»",
+      "«Nosferatu»",
+      "«M - O Vampiro de Dusseldorf»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Metropolis foi o primeiro filme incluído no Registo 'Memória do Mundo' da UNESCO pela sua importância visual e filosófica.",
+    "fonte": "UNESCO / Friedrich-Wilhelm-Murnau-Stiftung",
+    "factClusterId": "fc_tv_fil_metropolis_fritzlang_1927_01"
+  },
+  {
+    "id": "TV_FIL_0022",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que famoso thriller de suspense de 1954 realizado por Alfred Hitchcock («Janela Indiscreta» / «Rear Window»), acompanha um fotógrafo imobilizado numa cadeira de rodas com uma perna partida (James Stewart) que espia os seus vizinhos através da teleobjetiva e suspeita de um assassínio?",
+    "opcoes": [
+      "«A Mulher que Viveu Duas Vezes» (Vertigo)",
+      "«Janela Indiscreta» (1954, Alfred Hitchcock)",
+      "«Psico»",
+      "«Intriga Internacional»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme co-protagonizado por Grace Kelly é uma reflexão brilhante sobre o voyeurismo e a linguagem cinematográfica.",
+    "fonte": "AFI / Universal Pictures / Paramount",
+    "factClusterId": "fc_tv_fil_janelaindiscreta_hitchcock_1954_01"
+  },
+  {
+    "id": "TV_FIL_0023",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que aclamada obra-prima de suspense psicológico de 1958 de Alfred Hitchcock («Vertigo» / «A Mulher que Viveu Duas Vezes»), ambientada em São Francisco com James Stewart e Kim Novak, foi eleita em 2012 pela revista Sight & Sound da BFI como o Melhor Filme de Todos os Tempos?",
+    "opcoes": [
+      "«Citizen Kane»",
+      "«Os Sete Samurais»",
+      "«Vertigo» (1958)",
+      "«A Doce Vida»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Hitchcock utilizou pela primeira vez a técnica revolucionária do 'Dolly Zoom' (zoom in com recuo de câmara) para transmitir visualmente a sensação de vertigem.",
+    "fonte": "British Film Institute (BFI Sight & Sound) / AFI",
+    "factClusterId": "fc_tv_fil_vertigo_hitchcock_1958_01"
+  },
+  {
+    "id": "TV_FIL_0024",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendária obra-prima épica de 1972 realizada por Francis Ford Coppola («O Padrinho» / «The Godfather»), adaptada do romance de Mario Puzo, imortalizou Marlon Brando como Don Vito Corleone e Al Pacino como Michael Corleone na máfia italo-americana de Nova Iorque?",
+    "opcoes": [
+      "«Tudo Bons Rapazes»",
+      "«Scarface»",
+      "«Era Uma Vez na América»",
+      "«O Padrinho» (1972, Francis Ford Coppola)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Padrinho venceu o Óscar de Melhor Filme e celebrizou a frase 'Vou fazer-lhe uma proposta que ele não poderá recusar'.",
+    "fonte": "AMPAS / Paramount Pictures / AFI",
+    "factClusterId": "fc_tv_fil_opadrinho_coppola_1972_01"
+  },
+  {
+    "id": "TV_FIL_0025",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que revolucionária obra-prima de ficção científica de 1968 realizada por Stanley Kubrick («2001: Odisseia no Espaço» / «2001: A Space Odyssey»), coescrita com Arthur C. Clarke, apresentou ao mundo o computador inteligente com voz calma e olho vermelho:",
+    "opcoes": [
+      "HAL 9000",
+      "Skynet",
+      "Deep Thought",
+      "JARVIS"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O filme é famoso pela sua precisão científica nos efeitos práticos de gravidade zero e pelo corte temporal do osso primitivo para a nave espacial ao som de Strauss.",
+    "fonte": "MGM / British Film Institute / Warner Bros.",
+    "factClusterId": "fc_tv_fil_2001_odisseiaespaco_kubrick_1968_01"
+  },
+  {
+    "id": "TV_FIL_0026",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico musical inesquecível de 1952 realizado por Stanley Donen e Gene Kelly («Cantando à Chuva» / «Singin' in the Rain»), satirizou a transição dramática de Hollywood do cinema mudo para o sonoro no final dos anos 1920 com a icónica dança de Gene Kelly no meio de poças de água?",
+    "opcoes": [
+      "«Um Americano em Paris»",
+      "«Cantando à Chuva» (1952)",
+      "«Música no Coração»",
+      "«West Side Story»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A sequência de Gene Kelly a cantar à chuva com o guarda-chuva fechado é uma das cenas mais famosas e alegres da história do cinema.",
+    "fonte": "AFI (Melhor Musical Americano de Sempre) / MGM",
+    "factClusterId": "fc_tv_fil_cantandoachuva_genekelly_1952_01"
+  },
+  {
+    "id": "TV_FIL_0027",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendário épico de ação e drama samurai de 1954 realizado pelo mestre japonês Akira Kurosawa («Os Sete Samurais» / Shichinin no Samurai), com Toshiro Mifune e Takashi Shimura, inspirou diretamente o clássico de western de Hollywood «Os Sete Magníficos»?",
+    "opcoes": [
+      "«Rashomon»",
+      "«Yojimbo»",
+      "«Os Sete Samurais» (1954, Akira Kurosawa)",
+      "«Trono de Sangue»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Kurosawa utilizou múltiplas câmaras em simultâneo e câmara lenta na lama para criar a mais influente batalha do cinema de ação.",
+    "fonte": "Toho Studios / Criterion Collection / BFI",
+    "factClusterId": "fc_tv_fil_ossetesamurais_kurosawa_1954_01"
+  },
+  {
+    "id": "TV_FIL_0028",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima cinematográfica de 1950 de Akira Kurosawa («Rashomon»), Leão de Ouro no Festival de Veneza, celebrizou a estrutura narrativa em que o mesmo crime na floresta é relatado com versões contraditórias por quatro testemunhas diferentes (dando origem ao conceito de «Efeito Rashomon»)?",
+    "opcoes": [
+      "«Ran»",
+      "«Kagemusha»",
+      "«Dersu Uzala»",
+      "«Rashomon» (1950)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Rashomon abriu o cinema japonês ao Ocidente e demonstrou a subjetividade e a relatividade da verdade humana.",
+    "fonte": "Bienal de Veneza / Criterion Collection / BFI",
+    "factClusterId": "fc_tv_fil_rashomon_kurosawa_1950_01"
+  },
+  {
+    "id": "TV_FIL_0029",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que célebre obra-prima do cinema italiano de 1960 realizada por Federico Fellini («A Doce Vida» / «La Dolce Vita»), Palma de Ouro em Cannes, imortalizou Marcello Mastroianni e a atriz sueca Anita Ekberg banhando-se de vestido preto nas águas da:",
+    "opcoes": [
+      "Fontana di Trevi (Roma)",
+      "Piazza Navona",
+      "Escadaria da Praça de Espanha",
+      "Piazza del Popolo"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O filme cunhou internacionalmente o termo 'Paparazzo' em alusão ao fotógrafo de celebridades que acompanha o protagonista.",
+    "fonte": "Festival de Cannes / Centro Sperimentale di Cinematografia (Roma)",
+    "factClusterId": "fc_tv_fil_ladolcevita_fellini_1960_01"
+  },
+  {
+    "id": "TV_FIL_0030",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima autobiográfica de 1963 de Federico Fellini («8½» / Otto e Mezzo), com Marcello Mastroianni no papel do realizador em crise criativa Guido Anselmi, venceu o Óscar de Melhor Filme Estrangeiro e influenciou realizadores em todo o mundo?",
+    "opcoes": [
+      "«Amarcord»",
+      "«8½» (1963, Federico Fellini)",
+      "«As Noites de Cabíria»",
+      "«A Estrada» (La Strada)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O título 8½ refere-se ao número de filmes que Fellini tinha realizado até à data (seis longas-metragens, duas curtas e uma correalização).",
+    "fonte": "AMPAS / Criterion Collection",
+    "factClusterId": "fc_tv_fil_ottoemezzo_fellini_1963_01"
+  },
+  {
+    "id": "TV_FIL_0031",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que revolucionária obra-prima muda do cinema soviético de 1925 realizada por Sergei Eisenstein («O Couraçado Potemkin» / Bronenosets Potyomkin), imortalizou a pioneira técnica da «montagem de atrações» na célebre cena do massacre dos civis na:",
+    "opcoes": [
+      "Praça Vermelha de Moscovo",
+      "Ponte do Palácio de São Petersburgo",
+      "Escadaria de Odessa (com o carrinho de bebé a rolar pelos degraus)",
+      "Porto de Sebastopol"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A cena da escadaria de Odessa foi parodiada e homenageada por realizadores como Brian De Palma em 'Os Intocáveis' e Woody Allen.",
+    "fonte": "Mosfilm / British Film Institute",
+    "factClusterId": "fc_tv_fil_couracadopotemkin_eisenstein_1925_01"
+  },
+  {
+    "id": "TV_FIL_0032",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico seminal de terror expressionista alemão de 1922 realizado por F. W. Murnau («Nosferatu, Eine Symphonie des Grauens»), com Max Schreck no papel do aterrador Conde Orlok, foi a primeira grande adaptação cinematográfica do Drácula de Bram Stoker?",
+    "opcoes": [
+      "«O Gabinete do Dr. Caligari»",
+      "«O Golem»",
+      "«Fausto»",
+      "«Nosferatu» (1922, F. W. Murnau)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A silhueta das garras compridas e da sombra do vampiro a subir as escadas é uma das imagens mais icónicas da história da arte cinematográfica.",
+    "fonte": "Murnau Stiftung / BFI",
+    "factClusterId": "fc_tv_fil_nosferatu_murnau_1922_01"
+  },
+  {
+    "id": "TV_FIL_0033",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que filme clássico de 1948 realizado por Vittorio De Sica («Ladrões de Bicicletas» / «Ladri di biciclette»), com argumento de Cesare Zavattini e atores não-profissionais nas ruas empobrecidas de Roma, é o expoente máximo do Neorrealismo Italiano?",
+    "opcoes": [
+      "«Ladrões de Bicicletas» (1948)",
+      "«Roma, Cidade Aberta»",
+      "«Paisà»",
+      "«Umberto D.»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O drama de Antonio Ricci à procura da sua bicicleta roubada para poder trabalhar comoveu o mundo e venceu o Óscar Honorário de 1949.",
+    "fonte": "AMPAS / BFI / Centro Sperimentale di Cinematografia",
+    "factClusterId": "fc_tv_fil_ladroesdebicicletas_desica_1948_01"
+  },
+  {
+    "id": "TV_FIL_0034",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima do cinema francês de 1959 realizada por François Truffaut («Os 400 Golpes» / «Les Quatre Cents Coups»), protagonizada por Jean-Pierre Léaud no papel do jovem rebelde Antoine Doinel, inaugurou a «Nouvelle Vague» francesa?",
+    "opcoes": [
+      "«O Acossado» (À Bout de Souffle)",
+      "«Os 400 Golpes» (1959, François Truffaut)",
+      "«Jules e Jim»",
+      "«Hiroshima, Meu Amor»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Truffaut venceu o prémio de Melhor Realizador em Cannes aos 27 anos com um plano final congelado no rosto de Antoine na praia que marcou a história do cinema.",
+    "fonte": "Festival de Cannes (1959) / Cinémathèque Française",
+    "factClusterId": "fc_tv_fil_os400golpes_truffaut_1959_01"
+  },
+  {
+    "id": "TV_FIL_0035",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que emblemático filme de 1960 realizado por Jean-Luc Godard («O Acossado» / «À Bout de Souffle»), com Jean-Paul Belmondo e Jean Seberg nas avenidas de Paris, revolucionou a montagem cinematográfica mundial com o uso sistemático de cortes abruptos no mesmo plano («jump cuts»)?",
+    "opcoes": [
+      "«Os 400 Golpes»",
+      "«O Desprezo»",
+      "«O Acossado» (1960, Jean-Luc Godard)",
+      "«Pierrot le Fou»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Godard quebrou as convenções do cinema clássico filmando com câmara à mão e luz natural pelas ruas de Paris.",
+    "fonte": "Cinémathèque Française / BFI",
+    "factClusterId": "fc_tv_fil_oacossado_godard_1960_01"
+  },
+  {
+    "id": "TV_FIL_0036",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que famoso épico histórico de 1962 realizado por David Lean («Lawrence da Arábia» / «Lawrence of Arabia»), protagonizado por Peter O'Toole e Omar Sharif filmado no deserto em 70mm com música triunfal de Maurice Jarre, venceu 7 Óscares da Academia?",
+    "opcoes": [
+      "«A Ponte do Rio Kwai»",
+      "«Doutor Jivago»",
+      "«Ben-Hur»",
+      "«Lawrence da Arábia» (1962)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cena da miragem no deserto em que Omar Sharif surge lentamente no horizonte a cavalo de camelo é uma das sequências visuais mais aclamadas da história.",
+    "fonte": "AMPAS / Columbia Pictures / AFI",
+    "factClusterId": "fc_tv_fil_lawrencedaarabia_davidlean_1962_01"
+  },
+  {
+    "id": "TV_FIL_0037",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que monumental épico bíblico de 1959 realizado por William Wyler («Ben-Hur»), protagonizado por Charlton Heston, fez história ao conquistar o recorde lendário de 11 Óscares da Academia e celebrizou a épica corrida de quadrigas de 9 minutos no circo romano?",
+    "opcoes": [
+      "«Ben-Hur» (1959, 11 Óscares)",
+      "«Os Dez Mandamentos»",
+      "«Spartacus»",
+      "«Cleópatra»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O recorde de 11 Óscares de Ben-Hur apenas foi igualado décadas mais tarde por Titanic (1997) e O Senhor dos Anéis: O Regresso do Rei (2003).",
+    "fonte": "AMPAS / MGM / Guinness World Records",
+    "factClusterId": "fc_tv_fil_benhur_11oscares_1959_01"
+  },
+  {
+    "id": "TV_FIL_0038",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico drama psicológico de tribunal de 1957 realizado por Sidney Lumet («12 Homens em Conflito» / «12 Angry Men»), protagonizado por Henry Fonda como o Jurado n.º 8, decorre quase inteiramente no interior fechado de uma sala de deliberação de jurados?",
+    "opcoes": [
+      "«Testemunha de Acusação»",
+      "«12 Homens em Conflito» (1957)",
+      "«Anatomia de um Crime»",
+      "«Mataram a Cotovia»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme é um estudo magistral sobre preconceito, justiça, dúvida razoável e persuasão cívica.",
+    "fonte": "AFI / Orion / MGM",
+    "factClusterId": "fc_tv_fil_12angrymen_sidneylumet_1957_01"
+  },
+  {
+    "id": "TV_FIL_0039",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendário clássico de suspense e terror psicológico de 1960 realizado por Alfred Hitchcock («Psico» / «Psycho»), protagonizado por Anthony Perkins (Norman Bates) e Janet Leigh (Marion Crane), chocou o mundo com a famosa cena do chuveiro ao som dos violinos estridentes de Bernard Herrmann?",
+    "opcoes": [
+      "«Os Pássaros»",
+      "«Festim Diabólico»",
+      "«Psico» (1960, Alfred Hitchcock)",
+      "«Frenzy»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Hitchcock comprou todos os exemplares do romance original de Robert Bloch para manter em segredo o final surpreendente do filme.",
+    "fonte": "AFI / Universal Pictures / BFI",
+    "factClusterId": "fc_tv_fil_psycho_hitchcock_1960_01"
+  },
+  {
+    "id": "TV_FIL_0040",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima existencialista do mestre sueco Ingmar Bergman de 1957 («O Sétimo Selo» / «Det sjunde inseglet»), retrata o cavaleiro medieval Antonius Block (Max von Sydow) a jogar uma partida de xadrez pela sua vida contra a figura encapuzada da:",
+    "opcoes": [
+      "Guerra",
+      "Peste",
+      "Fome",
+      "Morte"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A partida de xadrez na praia pedregosa contra a Morte é uma das alegorias mais influentes da história da cultura e do cinema universal.",
+    "fonte": "Svensk Filmindustri / Festival de Cannes / BFI",
+    "factClusterId": "fc_tv_fil_osetimoselo_bergman_1957_01"
+  },
+  {
+    "id": "TV_FIL_0041",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que extraordinário filme de Ingmar Bergman de 1957 («Morangos Silvestres» / «Smultronstället»), vencedor do Urso de Ouro no Festival de Berlim, acompanha a viagem nostrógica e os sonhos de reconciliação do idoso professor de medicina Isak Borg interpretado pelo realizador pioneiro Victor Sjöström?",
+    "opcoes": [
+      "«Morangos Silvestres» (1957)",
+      "«O Sétimo Selo»",
+      "«Persona»",
+      "«Fanny e Alexandre»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Morangos Silvestres é uma meditação comovente sobre a memória, a velhice, o perdão e o sentido da vida humana.",
+    "fonte": "Festival de Cinema de Berlim / Svensk Filmindustri",
+    "factClusterId": "fc_tv_fil_morangossilvestres_bergman_1957_01"
+  },
+  {
+    "id": "TV_FIL_0042",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico drama distópico e satírico de ficção científica de 1971 realizado por Stanley Kubrick («Laranja Mecânica» / «A Clockwork Orange»), baseado no romance de Anthony Burgess, acompanha o jovem delinquente Alex DeLarge (Malcolm McDowell) submetido ao tratamento de aversão psicológica «Ludovico» ao som da Nona Sinfonia de Beethoven?",
+    "opcoes": [
+      "«Dr. Estranhoamor»",
+      "«Laranja Mecânica» (1971, Stanley Kubrick)",
+      "«Barry Lyndon»",
+      "«Nascido para Matar»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme levantou debates mundiais sobre o livre-arbítrio, a violência institucional e a estética cinematográfica.",
+    "fonte": "Warner Bros. / British Board of Film Classification (BBFC)",
+    "factClusterId": "fc_tv_fil_laranjamecanica_kubrick_1971_01"
+  },
+  {
+    "id": "TV_FIL_0043",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que influente western clássico de 1952 realizado por Fred Zinnemann («O Comboio Apitou Três Vezes» / «High Noon»), protagonizado por Gary Cooper (o xerife Will Kane) e Grace Kelly, decorre rigorosamente em tempo real enquanto o xerife aguarda sozinho a chegada do comboio do meio-dia com o bando de assassinos?",
+    "opcoes": [
+      "«A Desaparecida» (The Searchers)",
+      "«Rio Bravo»",
+      "«O Comboio Apitou Três Vezes» (High Noon, 1952)",
+      "«Sete Homens e um Destino»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Gary Cooper venceu o Óscar de Melhor Ator e o filme é considerado uma das maiores alegorias sobre a coragem individual e a cobardia coletiva.",
+    "fonte": "AFI / AMPAS",
+    "factClusterId": "fc_tv_fil_highnoon_garycooper_1952_01"
+  },
+  {
+    "id": "TV_FIL_0044",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que obra-prima do western americano de 1956 realizada por John Ford («A Desaparecida» / «The Searchers»), protagonizada por John Wayne no papel do veterano confederado Ethan Edwards em busca obsessiva da sua sobrinha raptada pelos Comanches, é considerada o zénite do género?",
+    "opcoes": [
+      "«Cavalgada Heróica» (Stagecoach)",
+      "«O Homem que Matou Liberty Valance»",
+      "«Forte Apache»",
+      "«A Desaparecida» (The Searchers, 1956)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O enquadramento inicial e final de John Wayne recortado pela moldura escura da porta aberta em Monument Valley é um dos planos mais reverenciados da história do cinema.",
+    "fonte": "AFI (Melhor Western Americano de Sempre) / Warner Bros.",
+    "factClusterId": "fc_tv_fil_thesearchers_johnford_1956_01"
+  },
+  {
+    "id": "TV_FIL_0045",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que lendário «Spaghetti Western» de 1966 realizado pelo mestre italiano Sergio Leone («O Bom, o Mau e o Vilão» / «Il buono, il brutto, il cattivo»), com banda sonora imortal de Ennio Morricone, juntou Clint Eastwood, Lee Van Cleef e Eli Wallach no memorável duelo triplo final no cemitério de Sad Hill?",
+    "opcoes": [
+      "«O Bom, o Mau e o Vilão» (1966, Sergio Leone)",
+      "«Por um Punhado de Dólares»",
+      "«Por Mais Alguns Dólares»",
+      "«Era Uma Vez no Oeste»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A montagem rápida dos primeiros planos dos olhos e das mãos dos três pistoleiros ao ritmo da trombeta de Morricone revolucionou a linguagem do cinema de ação.",
+    "fonte": "United Artists / Cineteca di Bologna",
+    "factClusterId": "fc_tv_fil_obomoomaueovilao_sergioleone_1966_01"
+  },
+  {
+    "id": "TV_FIL_0046",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que monumental drama histórico e épico de 1968 de Sergio Leone («Era Uma Vez no Oeste» / «C'era una volta il West»), com argumento de Dario Argento, Bernardo Bertolucci e Leone e música de Ennio Morricone, imortalizou Claudia Cardinale, Henry Fonda como o implacável vilão Frank e Charles Bronson («Gaita de Beiços»)?",
+    "opcoes": [
+      "«O Bom, o Mau e o Vilão»",
+      "«Era Uma Vez no Oeste» (1968)",
+      "«Quando os Homens São Homens»",
+      "«Era Uma Vez na América»"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O filme retrata a transição épica do Oeste selvagem e romântico para a era industrial do caminho de ferro e do capitalismo moderno.",
+    "fonte": "Paramount Pictures / BFI",
+    "factClusterId": "fc_tv_fil_eraumaveznoeste_leone_1968_01"
+  },
+  {
+    "id": "TV_FIL_0047",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que aclamado e intemporal clássico de Hollywood de 1946 realizado por Frank Capra («Do Céu Caiu uma Estrela» / «It's a Wonderful Life»), protagonizado por James Stewart (George Bailey) e Donna Reed, retrata um homem desesperado que aprende com o seu anjo da guarda Clarence como o mundo seria pior se ele nunca tivesse nascido?",
+    "opcoes": [
+      "«Milagre na Rua 34»",
+      "«Aconteceu Naquela Noite»",
+      "«Do Céu Caiu uma Estrela» (1946, Frank Capra)",
+      "«Não Há Menina Como Esta»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O filme tornou-se o clássico de Natal mais amado e transmitido da televisão mundial.",
+    "fonte": "AFI (Filme Mais Inspirador de Sempre) / RKO",
+    "factClusterId": "fc_tv_fil_itsawonderfullife_frankcapra_1946_01"
+  },
+  {
+    "id": "TV_FIL_0048",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que comédia romântica de 1953 realizada por William Wyler («Férias em Roma» / «Roman Holiday»), revelou a atriz Audrey Hepburn (vencedora do Óscar de Melhor Atriz no seu primeiro papel principal) ao lado de Gregory Peck a passear de mota Vespa pelas ruas e monumentos de Roma?",
+    "opcoes": [
+      "«Sabrina»",
+      "«Boneca de Luxo» (Breakfast at Tiffany's)",
+      "«My Fair Lady»",
+      "«Férias em Roma» (1953)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A cena da 'Boca da Verdade' (Bocca della Verità) onde Gregory Peck finge perder a mão foi uma partida real improvisada pregada a Audrey Hepburn que ficou na montagem final.",
+    "fonte": "AMPAS / Paramount Pictures",
+    "factClusterId": "fc_tv_fil_feriasemroma_audreyhepburn_1953_01"
+  },
+  {
+    "id": "TV_FIL_0049",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que inesquecível comédia e sátira de 1959 realizada por Billy Wilder («Em Foco / Quanto Mais Quente Melhor» / «Some Like It Hot»), protagonizada por Marilyn Monroe (Sugar Kane), Jack Lemmon e Tony Curtis disfarçados de mulheres numa banda feminina de jazz, conclui com a célebre frase «Well, nobody's perfect!»?",
+    "opcoes": [
+      "«Quanto Mais Quente Melhor» (1959, Billy Wilder)",
+      "«O Apartamento»",
+      "«Sete Anos de Pecado»",
+      "«Os Homens Preferem as Loiras»"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O American Film Institute (AFI) elegeu este filme como a Melhor Comédia Americana de Todos os Tempos.",
+    "fonte": "AFI (100 Anos... 100 Comédias) / United Artists",
+    "factClusterId": "fc_tv_fil_somelikeithot_billywilder_1959_01"
+  },
+  {
+    "id": "TV_FIL_0050",
+    "tema": "Cinema e Televisão",
+    "subtema": "Filmes Clássicos",
+    "pergunta": "Que clássico drama e filme noir de 1950 de Billy Wilder («Crepúsculo dos Deuses» / «Sunset Boulevard»), protagonizado por William Holden e Gloria Swanson no papel da decadente e delirante ex-estrela do cinema mudo Norma Desmond, imortalizou a fala final: «All right, Mr. DeMille, I'm ready for my close-up»?",
+    "opcoes": [
+      "«Eva» (All About Eve)",
+      "«Pacto de Sangue» (Double Indemnity)",
+      "«Crepúsculo dos Deuses» (Sunset Boulevard, 1950)",
+      "«Gilda»"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Sunset Boulevard é uma das mais mordazes e brilhantes desconstruções dos bastidores e das ilusões da indústria cinematográfica de Hollywood.",
+    "fonte": "AMPAS / AFI / Paramount Pictures",
+    "factClusterId": "fc_tv_fil_sunsetboulevard_billywilder_1950_01"
+  }
+]

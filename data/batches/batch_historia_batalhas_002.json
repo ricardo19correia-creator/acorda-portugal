@@ -1,0 +1,852 @@
+[
+  {
+    "id": "HIST_BAT_0051",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que audaciosa conquista noturna ocorreu a 15 de março de 1147, quando D. Afonso Henriques e 25 cavaleiros escalaram as muralhas inexpugnáveis de Santarém com escadas de madeira sob o silêncio da madrugada?",
+    "opcoes": [
+      "Conquista de Santarém (Tomada de Santarém)",
+      "Conquista de Lisboa",
+      "Tomada de Coimbra",
+      "Conquista de Leiria"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A conquista de Santarém abriu as portas do Ribatejo e permitiu a preparação do cerco de Lisboa no mesmo ano.",
+    "fonte": "De expugnatione Scalabis / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_santarem1147_01"
+  },
+  {
+    "id": "HIST_BAT_0052",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que rei português («O Povoador») liderou em 1189 a primeira grande conquista da cidade e castelo de Silves aos mouros com o auxílio de uma armada de cruzados alemães e ingleses da Terceira Cruzada?",
+    "opcoes": [
+      "D. Afonso Henriques",
+      "D. Sancho I",
+      "D. Afonso II",
+      "D. Sancho II"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Silves era a capital faustosa do reino mouro do Algarve ocidental e um dos maiores centros culturais islâmicos.",
+    "fonte": "Narratio de Itinere Navali / Município de Silves",
+    "factClusterId": "fc_bat_silves1189_01"
+  },
+  {
+    "id": "HIST_BAT_0053",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cerco de seis meses em 1064 terminou com a conquista da cidade de Coimbra aos mouros pelo rei Fernando Magno de Leão, que nomeou o moçárabe D. Sesnando Davides como seu governador?",
+    "opcoes": [
+      "Conquista de Viseu",
+      "Tomada de Lamego",
+      "Conquista / Cerco de Coimbra de 1064",
+      "Tomada de Braga"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "D. Sesnando governou o Condado de Coimbra com grande tolerância entre as comunidades cristã, moçárabe e muçulmana.",
+    "fonte": "Academia Portuguesa da História / Dicionário de História Medieval",
+    "factClusterId": "fc_bat_coimbra1064_01"
+  },
+  {
+    "id": "HIST_BAT_0054",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que praça-forte alentejana no estuário do rio Sado foi conquistada em outubro de 1217 pelas tropas de D. Afonso II e cavaleiros da Ordem de Santiago apoiados por cruzados alemães da Quinta Cruzada?",
+    "opcoes": [
+      "Conquista de Palmela",
+      "Tomada de Setúbal",
+      "Tomada de Sesimbra",
+      "Conquista de Alcácer do Sal"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Alcácer do Sal (Qasr Abi Danis) era a mais temível base naval muçulmana a sul do Tejo.",
+    "fonte": "Município de Alcácer do Sal / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_alcacerdosal1217_01"
+  },
+  {
+    "id": "HIST_BAT_0055",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que rei português conquistou as praças norte-africanas de Arzila e Tânger em agosto de 1471, recebendo por esses feitos o cognome oficial de «O Africano»?",
+    "opcoes": [
+      "D. Afonso V",
+      "D. João II",
+      "D. Duarte",
+      "D. Manuel I"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "D. Afonso V armou o seu filho Príncipe D. João como cavaleiro na mesquita de Arzila após a vitória.",
+    "fonte": "Rui de Pina (Crónica de D. Afonso V) / BNP",
+    "factClusterId": "fc_bat_afonsov_africa_01"
+  },
+  {
+    "id": "HIST_BAT_0056",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que cidade estratégica do Sudeste Asiático Afonso de Albuquerque liderou o assalto anfíbio e conquista em agosto de 1511, controlando o estreito vital que ligava a Índia à China?",
+    "opcoes": [
+      "Goa",
+      "Malaca (na atual Malásia)",
+      "Ormuz",
+      "Macau"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Albuquerque mandou construir a famosa fortaleza «A Famosa» em Malaca, cujos vestígios perduram até hoje.",
+    "fonte": "Comentários de Afonso de Albuquerque / UNESCO",
+    "factClusterId": "fc_bat_malaca1511_01"
+  },
+  {
+    "id": "HIST_BAT_0057",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que fortaleza estratégica à entrada do Golfo Pérsico foi conquistada por Afonso de Albuquerque em 1507 e definitivamente em 1515, controlando todo o comércio do Médio Oriente?",
+    "opcoes": [
+      "Mascate",
+      "Bahrein",
+      "Ormuz (na Ilha de Gerun)",
+      "Adén"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A posse de Ormuz garantiu a Portugal o monopólio das rotas de cavalos e pérolas do Golfo Pérsico.",
+    "fonte": "Marinha Portuguesa / BNP",
+    "factClusterId": "fc_bat_ormuz1515_01"
+  },
+  {
+    "id": "HIST_BAT_0058",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que grande cerco militar em 1127 viu o rei Afonso VII de Leão e Castela cercar D. Afonso Henriques no Castelo de Guimarães, resolvido pela promessa de fidelidade do aio Egas Moniz?",
+    "opcoes": [
+      "Cerco de Lanhoso",
+      "Cerco de Braga",
+      "Cerco de Santa Maria",
+      "Cerco de Guimarães (1127)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "Egas Moniz apresentou-se mais tarde em Toledo de baraço ao pescoço perante o imperador por não poder cumprir a promessa quando Afonso Henriques assumiu o poder em 1128.",
+    "fonte": "Sociedade Martins Sarmento / Crónica de Portugal de 1419",
+    "factClusterId": "fc_bat_cercoguimaraes1127_01"
+  },
+  {
+    "id": "HIST_BAT_0059",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que sangrenta batalha travada a 16 de maio de 1811 perto de Badajoz viu os regimentos de infantaria anglo-portugueses comandados por Beresford repelirem as forças do Marechal francês Soult?",
+    "opcoes": [
+      "Batalha de Albuera",
+      "Batalha de Fuentes de Oñoro",
+      "Batalha de Salamanca",
+      "Batalha de Vitória"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A infantaria portuguesa demonstrou uma solidez inabalável na linha de fogo na sangrenta jornada de Albuera.",
+    "fonte": "Exército Português / Museu Militar de Lisboa",
+    "factClusterId": "fc_bat_albuera1811_01"
+  },
+  {
+    "id": "HIST_BAT_0060",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada entre 3 e 5 de maio de 1811 na fronteira da Beira viu o exército de Wellington e as divisões portuguesas impedirem o Marechal Massena de socorrer a praça sitiada de Almeida?",
+    "opcoes": [
+      "Batalha do Sabugal",
+      "Batalha de Fuentes de Oñoro",
+      "Batalha de Ciudad Rodrigo",
+      "Batalha do Côa"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Batalha de Fuentes de Oñoro culminou a expulsão definitiva do exército francês de Portugal na Terceira Invasão.",
+    "fonte": "Museu Histórico-Militar de Almeida / Exército Português",
+    "factClusterId": "fc_bat_fuentesdeonoro1811_01"
+  },
+  {
+    "id": "HIST_BAT_0061",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que combate das Guerras Liberais travado a 23 de julho de 1832 perto de Valongo foi o primeiro recontro campal após o Desembarque do Mindelo?",
+    "opcoes": [
+      "Batalha de Almoster",
+      "Batalha da Asseiceira",
+      "Batalha de Ponte Ferreira",
+      "Batalha do Cabo de São Vicente"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "Após Ponte Ferreira, o exército liberal retirou para o Porto onde se iniciou o épico Cerco do Porto.",
+    "fonte": "Dicionário das Guerras Liberais / CMP",
+    "factClusterId": "fc_bat_ponteferreira1832_01"
+  },
+  {
+    "id": "HIST_BAT_0062",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que desembarque marítimo histórico a 8 de julho de 1832 na praia de Arnosa de Pampelido (Mindelo / Matosinhos) trouxe D. Pedro IV e os 7.500 «Bravos do Mindelo» para libertar Portugal do absolutismo?",
+    "opcoes": [
+      "Desembarque de Faro",
+      "Desembarque de Peniche",
+      "Desembarque da Baía de Cascais",
+      "Desembarque do Mindelo"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Obelisco da Memória na praia do Mindelo assinala o local do desembarque do exército libertador vindo dos Açores.",
+    "fonte": "Câmara Municipal de Matosinhos / Exército Português",
+    "factClusterId": "fc_bat_mindelo1832_01"
+  },
+  {
+    "id": "HIST_BAT_0063",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que grande operação militar do exército português em Cabo Delgado (Moçambique) em 1970, planeada pelo general Kaúlza de Arriaga, foi a maior manobra ofensiva de toda a Guerra do Ultramar?",
+    "opcoes": [
+      "Operação Nó Górdio",
+      "Operação Viriato",
+      "Operação Mar Verde",
+      "Operação Tridente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Operação Nó Górdio mobilizou mais de 35.000 homens e meios aéreos pesados junto ao planalto dos Macondes.",
+    "fonte": "Arquivo Histórico Militar / História da Guerra Colonial",
+    "factClusterId": "fc_bat_nogordio1970_01"
+  },
+  {
+    "id": "HIST_BAT_0064",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que operação naval e terrestre na Guiné em 1964 as Forças Armadas portuguesas com fuzileiros e paraquedistas recuperaram a ilha de Como sob o comando do capitão Alpoim Calvão?",
+    "opcoes": [
+      "Operação Mar Verde",
+      "Operação Tridente",
+      "Operação Viriato",
+      "Operação Savana"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Operação Tridente foi a mais complexa operação combinada anfíbia das Forças Armadas no teatro da Guiné.",
+    "fonte": "Marinha Portuguesa / Revista da Armada",
+    "factClusterId": "fc_bat_tridente1964_01"
+  },
+  {
+    "id": "HIST_BAT_0065",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que data de dezembro de 1961 as forças armadas da União Indiana invadiram e anexaram os territórios do Estado Português da Índia (Goa, Damão e Diu) na chamada «Operação Vijay»?",
+    "opcoes": [
+      "15 de agosto de 1947",
+      "25 de abril de 1974",
+      "18 e 19 de dezembro de 1961",
+      "1 de dezembro de 1960"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A perda de Goa pôs fim a 451 anos de presença contínua da administração portuguesa na Índia.",
+    "fonte": "Marinha Portuguesa / BNP / Dicionário de História Contemporânea",
+    "factClusterId": "fc_bat_goa1961_01"
+  },
+  {
+    "id": "HIST_BAT_0066",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que navio de guerra da Marinha Portuguesa (aviso de 2.ª classe), comandado pelo capitão-tenente António da Cunha Aragão, enfrentou sozinho fragatas indianas e aviões a jato em combate heroico em Mormugão a 18 de dezembro de 1961?",
+    "opcoes": [
+      "NRP Bartolomeu Dias",
+      "NRP Adamastor",
+      "NRP Vasco da Gama",
+      "NRP Afonso de Albuquerque"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O NRP Afonso de Albuquerque esgotou as suas munições respondendo ao fogo inimigo antes de encalhar na praia de Mormugão.",
+    "fonte": "Marinha Portuguesa / Museu de Marinha",
+    "factClusterId": "fc_bat_nrpafonsoalbuquerque_01"
+  },
+  {
+    "id": "HIST_BAT_0067",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que fortaleza da fronteira de Trás-os-Montes e Beira Alta resistiu a um cerco dramático em agosto de 1810 durante a Terceira Invasão Francesa, até que a explosão do seu paiol de pólvora destruiu as muralhas?",
+    "opcoes": [
+      "Praça-Forte de Almeida (Cerco de Almeida)",
+      "Praça de Valença",
+      "Praça de Elvas",
+      "Forte de Marvão"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A explosão acidental de milhares de quilos de pólvora no castelo forçou a capitulação da guarnição luso-britânica de Almeida.",
+    "fonte": "Museu Histórico-Militar de Almeida",
+    "factClusterId": "fc_bat_cercoalmeida1810_01"
+  },
+  {
+    "id": "HIST_BAT_0068",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que episódio trágico e sangrento ocorreu na cidade do Porto a 29 de março de 1809 quando milhares de cidadãos em pânico caíram ao rio Douro com o colapso da ponte de barcas durante o ataque das tropas francesas do Marechal Soult?",
+    "opcoes": [
+      "Batalha do Porto",
+      "Desastre da Ponte das Barcas",
+      "Cerco das Antas",
+      "Queda de Massarelos"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O monumento das Alminhas da Ponte no Cais da Ribeira no Porto recorda a tragédia que vitimou mais de 4.000 portuenses.",
+    "fonte": "Câmara Municipal do Porto / Alminhas da Ponte",
+    "factClusterId": "fc_bat_pontedasbarcas1809_01"
+  },
+  {
+    "id": "HIST_BAT_0069",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que general britânico desembarcou no Porto em maio de 1809 e realizou a audaciosa «Passagem do Douro» em barcaças de vinho do Porto surpreendendo o Marechal Soult e libertando a cidade na Segunda Invasão Francesa?",
+    "opcoes": [
+      "William Carr Beresford",
+      "John Moore",
+      "Arthur Wellesley (Duque de Wellington)",
+      "Thomas Picton"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Passagem do Douro junto ao Mosteiro da Serra do Pilar obrigou Soult a uma fuga desordenada pelas serras do norte até à Galiza.",
+    "fonte": "Museu da Cidade do Porto / Exército Português",
+    "factClusterId": "fc_bat_passagemdoudro1809_01"
+  },
+  {
+    "id": "HIST_BAT_0070",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que capitão e tenente de Cavalaria liderou a tomada da praça-forte de Chaves a 25 de março de 1809 com tropas milicianas transmontanas, sendo a primeira cidade europeia a ser libertada do domínio napoleónico?",
+    "opcoes": [
+      "Gomes Freire de Andrade",
+      "Marquês de Marialva",
+      "Bernardino Freire",
+      "General Francisco da Silveira (Conde de Amarante)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A tomada do Forte de São Neutel em Chaves cortou a linha de abastecimento francesa para Espanha.",
+    "fonte": "Município de Chaves / Exército Português",
+    "factClusterId": "fc_bat_chaves1809_01"
+  },
+  {
+    "id": "HIST_BAT_0071",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada a 7 de julho de 1664 em Castelo Rodrigo (Beira Interior) viu as forças de Pedro Jacques de Magalhães derrotarem o exército espanhol do Duque de Osuna («Batalha da Salgadela»)?",
+    "opcoes": [
+      "Batalha de Castelo Rodrigo (ou Batalha da Salgadela)",
+      "Batalha de Montes Claros",
+      "Batalha do Ameixial",
+      "Batalha de Linhares"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O padrão da Salgadela comemora a derrota total das tropas espanholas no nordeste beirão durante a Restauração.",
+    "fonte": "Aldeias Históricas de Portugal / Município de Figueira de Castelo Rodrigo",
+    "factClusterId": "fc_bat_castelorodrigo1664_01"
+  },
+  {
+    "id": "HIST_BAT_0072",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que combate em Amarante em abril e maio de 1809 viu as forças transmontanas do General Silveira e populares defenderem a Ponte de São Gonçalo durante 14 dias contra os generais franceses Loison («O Maneta») e Delaborde?",
+    "opcoes": [
+      "Batalha de Guimarães",
+      "Defesa da Ponte de Amarante",
+      "Cerco de Lamego",
+      "Combate de Vila Real"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A heróica resistência na ponte sobre o rio Tâmega impediu a progressão das tropas de Soult para Trás-os-Montes.",
+    "fonte": "Município de Amarante / Museu Municipal Amadeo de Souza-Cardoso",
+    "factClusterId": "fc_bat_amarante1809_01"
+  },
+  {
+    "id": "HIST_BAT_0073",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha naval travada a 20 de outubro de 1606 ao largo de Malaca viu a armada portuguesa do vice-rei D. Martim Afonso de Castro repelir a esquadra holandesa da VOC liderada por Cornelis Matelieff?",
+    "opcoes": [
+      "Batalha de Diu",
+      "Batalha de Chaul",
+      "Batalha de Cabo Rachado",
+      "Batalha de Goa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 3,
+    "explicacao": "A vitória no Cabo Rachado preservou temporariamente a soberania portuguesa na rota das especiarias do Extremo Oriente.",
+    "fonte": "Marinha Portuguesa / Academia de Marinha",
+    "factClusterId": "fc_bat_caborachado1606_01"
+  },
+  {
+    "id": "HIST_BAT_0074",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que nobre e guerreiro português conquistou aos mouros a cidade de Alcácer do Sal em 1191 e a praça de Palmela, fundador da linhagem dos Meneses?",
+    "opcoes": [
+      "D. Afonso Telo",
+      "D. Nuno de Lara",
+      "D. Mem Ramires",
+      "D. Telo Peres de Meneses"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A nobreza guerreira de Entre-Douro-e-Minho foi essencial para a ocupação do vale do Sado.",
+    "fonte": "Academia Portuguesa da História",
+    "factClusterId": "fc_bat_teloperes_01"
+  },
+  {
+    "id": "HIST_BAT_0075",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que capitão português comandou a armada de socorro à Fortaleza de Chaul (Índia) em 1571 que resistiu vitoriosamente ao cerco de mais de 100.000 soldados do sultão de Ahmadnagar?",
+    "opcoes": [
+      "D. Luís de Ataíde (Conde de Atouguia e Vice-Rei da Índia)",
+      "D. António de Noronha",
+      "D. Constantino de Bragança",
+      "Matias de Albuquerque"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "D. Luís de Ataíde coordenou a defesa em simultâneo de Goa e Chaul contra a grande coligação de príncipes indianos.",
+    "fonte": "Dicionário de História de Portugal / BNP",
+    "factClusterId": "fc_bat_luisdeataide1571_01"
+  },
+  {
+    "id": "HIST_BAT_0076",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que batalha da Primeira Guerra Mundial travada no sul de Angola a 18-20 de agosto de 1915 as forças portuguesas do general Pereira de Eça derrotaram as forças cuanhamas de Mandume ya Ndemufayo?",
+    "opcoes": [
+      "Batalha de Naulila",
+      "Batalha de Môngua",
+      "Batalha do Pembe",
+      "Batalha de Cuangar"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O combate de Môngua assegurou o controlo português da região do Cuanhama na fronteira com a Namíbia alemã.",
+    "fonte": "Exército Português / Arquivo Histórico Militar",
+    "factClusterId": "fc_bat_mongua1915_01"
+  },
+  {
+    "id": "HIST_BAT_0077",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha naval ao largo de Peniche travada a 11 e 12 de junho de 1666 viu a guarnição do Forte de São João Baptista das Berlengas (28 soldados comandados pelo Cabo António Avelar) resistir a 14 naus de guerra espanholas?",
+    "opcoes": [
+      "Batalha de Cascais",
+      "Batalha de Setúbal",
+      "Batalha do Forte das Berlengas",
+      "Batalha de Sagres"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A minúscula guarnição causou mais de 500 baixas aos espanhóis e afundou uma nau antes de esgotar as munições.",
+    "fonte": "Marinha Portuguesa / Município de Peniche",
+    "factClusterId": "fc_bat_berlengas1666_01"
+  },
+  {
+    "id": "HIST_BAT_0078",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que combate em Moçambique a 7 de novembro de 1895 viu as tropas de Galhardo e Freire de Andrade derrotarem os guerreiros vátuas em campo aberto («Combate de Coolela»)?",
+    "opcoes": [
+      "Combate de Marracuene",
+      "Tomada de Chaimite",
+      "Combate de Magul",
+      "Combate de Coolela"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 3,
+    "explicacao": "A vitória de Coolela abriu o caminho para a tomada da capital de Gungunhana em Manjacaze.",
+    "fonte": "Arquivo Histórico Militar",
+    "factClusterId": "fc_bat_coolela1895_01"
+  },
+  {
+    "id": "HIST_BAT_0079",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha travada em 1384 no Alentejo viu o Mestre de Avis e D. Nuno Álvares Pereira socorrerem a vila sitiada de Elvas contra os castelhanos?",
+    "opcoes": [
+      "Socorro / Cerco de Elvas de 1384",
+      "Batalha dos Atoleiros",
+      "Batalha de Valverde",
+      "Batalha de Olivença"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A resistência das praças alentejanas impediu a penetração profunda de Castela em direção a Lisboa.",
+    "fonte": "Fernão Lopes / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_socorroelvas1384_01"
+  },
+  {
+    "id": "HIST_BAT_0080",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que praça-forte do Alentejo litoral (Santiago do Cacém) foi conquistada aos mouros em 1217 pelos cavaleiros templários e de Santiago após a vitória em Alcácer do Sal?",
+    "opcoes": [
+      "Castelo de Sines",
+      "Castelo de Santiago do Cacém",
+      "Castelo de Odemira",
+      "Castelo de Aljezur"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Castelo de Santiago do Cacém dominava as rotas costeiras entre o estuário do Sado e o Algarve.",
+    "fonte": "Município de Santiago do Cacém / DGPC",
+    "factClusterId": "fc_bat_santiagodocacem_01"
+  },
+  {
+    "id": "HIST_BAT_0081",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha naval ao largo do Cabo da Roca travada em 1589 viu a armada anglo-holandesa liderada por Sir Francis Drake e Sir John Norreys tentar cercar Lisboa em apoio a D. António Prior do Crato («Contra-Armada Inglesa»)?",
+    "opcoes": [
+      "Batalha de Trafalgar",
+      "Batalha da Salga",
+      "Ataque da Contra-Armada Inglesa a Lisboa (Drake e Norris)",
+      "Batalha de Vila Franca"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A expedição inglesa falhou perante a resistência dos fortes de Lisboa e Peniche e a falta de apoio popular efetivo.",
+    "fonte": "Academia de Marinha / Dicionário de História de Portugal",
+    "factClusterId": "fc_bat_drake1589_01"
+  },
+  {
+    "id": "HIST_BAT_0082",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que fortaleza da foz do rio Minho (em Caminha) construída numa ilha rochosa no século XV repeliu corsários ingleses e espanhóis protegendo a navegação do Alto Minho?",
+    "opcoes": [
+      "Forte de Santiago da Barra",
+      "Forte de Valença",
+      "Forte de Vila Nova de Cerveira",
+      "Forte da Ínsua (Caminha)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Forte da Ínsua alberga no seu interior um convento franciscano com um poço de água doce único no meio do mar.",
+    "fonte": "Município de Caminha / DGPC",
+    "factClusterId": "fc_bat_forteinsua_01"
+  },
+  {
+    "id": "HIST_BAT_0083",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto armado durante a Guerra Civil da Patuleia travado a 22 de dezembro de 1846 em Valpaços viu o exército cartista do Duque de Saldanha derrotar as forças setembristas do Conde de Bonfim?",
+    "opcoes": [
+      "Batalha de Valpaços (Ação de Valpaços)",
+      "Batalha de Torres Vedras",
+      "Batalha da Asseiceira",
+      "Batalha do Alto do Viso"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 3,
+    "explicacao": "A vitória em Valpaços consolidou a posição militar do governo leal a D. Maria II durante a Patuleia.",
+    "fonte": "Dicionário de História de Portugal",
+    "factClusterId": "fc_bat_valpacos1846_01"
+  },
+  {
+    "id": "HIST_BAT_0084",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que combate em Torres Vedras a 23 de dezembro de 1846 durante a Patuleia viu o general cartista Duque de Terceira ser derrotado e preso pelas forças do Conde de Bonfim?",
+    "opcoes": [
+      "Batalha de Mafra",
+      "Batalha de Torres Vedras de 1846",
+      "Batalha de Alhandra",
+      "Batalha de Sintra"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 3,
+    "explicacao": "A Patuleia terminou apenas em 1847 com a intervenção da Quádrupla Aliança e a Convenção de Gramido.",
+    "fonte": "Assembleia da República / D. Maria II",
+    "factClusterId": "fc_bat_torresvedras1846_01"
+  },
+  {
+    "id": "HIST_BAT_0085",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que praça-forte fronteiriça do Alto Minho defendida por D. Lourenço de Sousa resistiu aos ataques galegos na Restauração e é hoje a maior fortaleza abaluartada do norte?",
+    "opcoes": [
+      "Forte de Monção",
+      "Praça de Melgaço",
+      "Fortaleza de Valença do Minho",
+      "Castelo de Lindoso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Fortaleza de Valença possui mais de 5 km de muralhas com baluartes e revelins em forma de coroa sobre o rio Minho.",
+    "fonte": "Município de Valença / DGPC",
+    "factClusterId": "fc_bat_valencadominho_01"
+  },
+  {
+    "id": "HIST_BAT_0086",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que lendária heroína de Monção teria lançado pães quentes do alto das muralhas durante o cerco castelhano de 1368, simulando abundância de víveres e forçando o levantamento do cerco?",
+    "opcoes": [
+      "Brites de Almeida",
+      "Brianda Pereira",
+      "Guiomar de Oliveira",
+      "Deu-la-Deu Martins"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A estátua de Deu-la-Deu Martins figura no brasão de armas de Monção distribuindo pão da torre da fortaleza.",
+    "fonte": "Município de Monção / Lendas de Portugal",
+    "factClusterId": "fc_bat_deuladeu_01"
+  },
+  {
+    "id": "HIST_BAT_0087",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que cerco em 1184 viu o califa almóada Abu Yaqub Yusuf morrer ferido mortalmente perante as muralhas de Santarém defendidas por D. Afonso Henriques e pelo arcebispo de Santiago de Compostela?",
+    "opcoes": [
+      "Grande Cerco de Santarém de 1184",
+      "Cerco de Tomar",
+      "Cerco de Évora",
+      "Cerco de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A vitória no cerco de Santarém em 1184 foi a última grande batalha militar da vida de D. Afonso Henriques antes de falecer em 1185.",
+    "fonte": "Crónica de D. Afonso Henriques / BNP",
+    "factClusterId": "fc_bat_cercosantarem1184_01"
+  },
+  {
+    "id": "HIST_BAT_0088",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que combate no norte de Moçambique a 16 de junho de 1960 em Mueda tornou-se um marco histórico simbólico da luta de libertação nacional contra o regime colonial («Massacre de Mueda»)?",
+    "opcoes": [
+      "Acontecimentos da Baixa de Cassange",
+      "Acontecimentos de Mueda (Massacre de Mueda)",
+      "Ataque a Luanda",
+      "Ataque a Tete"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O protesto pacífico em Mueda reprimido pelas autoridades coloniais catalisou a fundação da FRELIMO em 1962.",
+    "fonte": "Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_bat_mueda1960_01"
+  },
+  {
+    "id": "HIST_BAT_0089",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que revolta de camponeses dos campos de algodão na Baixa do Cassange em janeiro de 1961 marcou os primeiros momentos de insurreição que levaram ao início da Guerra Colonial em Angola?",
+    "opcoes": [
+      "Revolta dos Macondes",
+      "Ataque ao Cuito",
+      "Revolta da Baixa do Cassange",
+      "Cerco do Uíge"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A sublevação contra o trabalho forçado nas plantações de algodão da Cotonang desencadeou o conflito armado em Angola.",
+    "fonte": "História do Século XX Português / BNP",
+    "factClusterId": "fc_bat_cassange1961_01"
+  },
+  {
+    "id": "HIST_BAT_0090",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Em que data de 1961 eclodiram os ataques da UPA (União dos Povos de Angola) no norte de Angola (Quitexe, Nambuangongo), desencadeando o início oficial da Guerra do Ultramar?",
+    "opcoes": [
+      "4 de fevereiro de 1961",
+      "25 de abril de 1974",
+      "1 de janeiro de 1960",
+      "15 de março de 1961"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A 15 de março de 1961 iniciaram-se os massacres no norte de Angola e a famosa resposta militar de Salazar: «Para Angola, rapidamente e em força».",
+    "fonte": "Arquivo Histórico Militar / RTP",
+    "factClusterId": "fc_bat_15demarco1961_01"
+  },
+  {
+    "id": "HIST_BAT_0091",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que operação militar em agosto de 1961 comandada pelo tenente-coronel Maçanita reconquistou a vila estratégica de Nambuangongo no norte de Angola às forças da UPA?",
+    "opcoes": [
+      "Operação Viriato",
+      "Operação Nó Górdio",
+      "Operação Savana",
+      "Operação Mar Verde"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A tomada de Nambuangongo pela coluna militar portuguesa foi um momento decisivo da fase inicial da guerra em Angola.",
+    "fonte": "Exército Português / Revista Militar",
+    "factClusterId": "fc_bat_operacaoviriato1961_01"
+  },
+  {
+    "id": "HIST_BAT_0092",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que operação anfíbia clandestina em novembro de 1970 viu tropas de fuzileiros e comandos portugueses desembarcarem em Conacri para resgatar prisioneiros de guerra portugueses e atacar as bases do PAIGC?",
+    "opcoes": [
+      "Operação Tridente",
+      "Operação Mar Verde",
+      "Operação Viriato",
+      "Operação Ágata"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "Comandada por Alpoim Calvão com o apoio do general Spínola, a operação libertou 26 prisioneiros portugueses.",
+    "fonte": "Marinha Portuguesa / Centro de Documentação 25 de Abril",
+    "factClusterId": "fc_bat_marverde1970_01"
+  },
+  {
+    "id": "HIST_BAT_0093",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto armado entre o Movimento das Forças Armadas e forças leais ao regime ocorreu no Terreiro do Paço e no Largo do Carmo a 25 de Abril de 1974?",
+    "opcoes": [
+      "Golpe de 11 de Março",
+      "Crise de 25 de Novembro",
+      "Cerco do Quartel do Carmo (25 de Abril)",
+      "Revolta de Beja"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O cerco pacífico mas firme de Salgueiro Maia ao Quartel do Carmo forçou a rendição do Presidente do Conselho Marcello Caetano.",
+    "fonte": "Associação 25 de Abril",
+    "factClusterId": "fc_bat_quarteldocarmo_01"
+  },
+  {
+    "id": "HIST_BAT_0094",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que operação militar em 25 de Novembro de 1975, liderada pelos comandos do coronel Jaime Neves e pelo Grupo dos Nove com Ramalho Eanes, pôs fim ao PREC e consolidou a democracia parlamentar em Portugal?",
+    "opcoes": [
+      "Golpe de 11 de Março",
+      "28 de Maio",
+      "Revolta dos Cravos",
+      "Operação / Crise de 25 de Novembro de 1975"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O 25 de Novembro neutralizou a tentativa da esquerda militar radical de tomada do poder, restaurando a normalidade democrática constitucional.",
+    "fonte": "Assembleia da República / Presidência da República",
+    "factClusterId": "fc_bat_25denovembro1975_01"
+  },
+  {
+    "id": "HIST_BAT_0095",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que golpe militar a 28 de Maio de 1926, iniciado em Braga pelo general Manuel Gomes da Costa com a marcha sobre Lisboa, pôs fim à Primeira República Portuguesa e instaurou a Ditadura Militar?",
+    "opcoes": [
+      "Golpe de 28 de Maio de 1926",
+      "Revolução de 1910",
+      "Noite Sangrenta",
+      "18 de Janeiro"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O 28 de Maio abriu caminho à Ditadura Nacional e à fundação posterior do Estado Novo em 1933 sob António de Oliveira Salazar.",
+    "fonte": "Dicionário de História de Portugal / BNP",
+    "factClusterId": "fc_bat_28demaio1926_01"
+  },
+  {
+    "id": "HIST_BAT_0096",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que episódio violento ocorrido a 19 de outubro de 1921 em Lisboa viu um grupo de marinheiros e militares radicais assassinar figuras da República como o Primeiro-Ministro António Granjo e Machado Santos («A Noite Sangrenta»)?",
+    "opcoes": [
+      "Outubro de 1910",
+      "Noite Sangrenta de 19 de outubro de 1921",
+      "Golpe de Sidónio Pais",
+      "Dezembro de 1917"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Noite Sangrenta e a «Camioneta Fantasma» abalaram profundamente a estabilidade da Primeira República.",
+    "fonte": "Dicionário de História da I República / BNP",
+    "factClusterId": "fc_bat_noitesangrenta1921_01"
+  },
+  {
+    "id": "HIST_BAT_0097",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que insurreição monárquica e guerra civil no norte de Portugal entre janeiro e fevereiro de 1919 foi proclamada no Porto pelo capitão Henrique Paiva Couceiro («Monarquia do Norte»)?",
+    "opcoes": [
+      "Guerra da Patuleia",
+      "Revolta da Maria da Fonte",
+      "Monarquia do Norte (Restauração Monárquica de 1919)",
+      "Guerras Liberais"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Monarquia do Norte durou 25 dias até ser derrotada pelas forças civis e militares republicanas na Batalha de Monsanto e na Batalha do Vale do Vouga.",
+    "fonte": "Câmara Municipal do Porto / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_monarquiadonorte1919_01"
+  },
+  {
+    "id": "HIST_BAT_0098",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que confronto armado a 18 de janeiro de 1934 na Marinha Grande viu os operários da indústria vidreira proclamarem a greve geral revolucionária contra a criação dos sindicatos corporativos do Estado Novo?",
+    "opcoes": [
+      "Revolta do 31 de Janeiro",
+      "Golpe de 1926",
+      "Crise de Maio",
+      "Revolta de 18 de Janeiro de 1934 (Marinha Grande)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A insurreição da Marinha Grande foi duramente reprimida, levando à criação do Campo de Concentração do Tarrafal em Cabo Verde.",
+    "fonte": "Município da Marinha Grande / Museu do Vidro",
+    "factClusterId": "fc_bat_18dejaneiro1934_01"
+  },
+  {
+    "id": "HIST_BAT_0099",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que batalha decisiva da Guerra da Sucessão Espanhola travada a 25 de abril de 1707 viu o exército aliado luso-britânico comandado pelo Marquês das Minas e pelo Conde de Galway sofrer uma pesada derrota em Espanha?",
+    "opcoes": [
+      "Batalha de Almansa",
+      "Batalha de Badajoz",
+      "Batalha de Saragoça",
+      "Batalha de Madrid"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O exército de D. Pedro II havia ocupado Madrid em 1706 antes do reverso militar em Almansa.",
+    "fonte": "Exército Português / Academia Portuguesa da História",
+    "factClusterId": "fc_bat_almansa1707_01"
+  },
+  {
+    "id": "HIST_BAT_0100",
+    "tema": "História",
+    "subtema": "Batalhas Históricas",
+    "pergunta": "Que praça-forte alentejana no concelho de Portalegre resistiu a todos os cercos da história militar desde o século IX graças à sua posição escarpada a 860 metros de altitude?",
+    "opcoes": [
+      "Castelo de Castelo de Vide",
+      "Castelo de Alegrete",
+      "Castelo de Marvão («O Ninho de Águias»)",
+      "Castelo de Nisa"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Marvão foi considerada inexpugnável ao longo de séculos, protegendo o flanco norte do Alto Alentejo com a sua cisterna monumental e muralhas duplas.",
+    "fonte": "Município de Marvão / DGPC",
+    "factClusterId": "fc_bat_marvao_01"
+  }
+]

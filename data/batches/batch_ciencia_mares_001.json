@@ -1,0 +1,852 @@
+[
+  {
+    "id": "CIE_MAR_0001",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que monumental desfiladeiro submarino ao largo da costa oeste de Portugal («Canhão da Nazaré»), com cerca de 227 quilómetros de extensão e profundidades que atingem os 5.000 metros, é o maior desfiladeiro submarino da Europa e o gerador das famosas ondas gigantes da Praia do Norte?",
+    "opcoes": [
+      "Canhão da Nazaré",
+      "Canhão de Setúbal",
+      "Canhão de Cascais",
+      "Canhão de Lisboa"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A morfologia afunilada do Canhão da Nazaré funciona como um amplificador hidrográfico natural das ondulações oceânicas do Atlântico Norte.",
+    "fonte": "Instituto Hidrográfico / Marinha Portuguesa / IPMA",
+    "factClusterId": "fc_mar_canhaodanazare_01"
+  },
+  {
+    "id": "CIE_MAR_0002",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que rei português (1863-1908), conhecido internacionalmente como «O Rei Oceanógrafo», realizou entre 1896 e 1907 doze pioneiras campanhas oceanográficas no iate «Amélia» e fundou o Aquário Vasco da Gama no Dafundo (Oeiras)?",
+    "opcoes": [
+      "Rei D. Luís I",
+      "Rei D. Carlos I",
+      "Rei D. Pedro V",
+      "Rei D. Manuel II"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "D. Carlos I catalogou dezenas de novas espécies de peixes e crustáceos das profundezas abissais da costa portuguesa com redes desenhadas por si.",
+    "fonte": "Aquário Vasco da Gama / Marinha Portuguesa",
+    "factClusterId": "fc_mar_d_carlos_oceanografo_01"
+  },
+  {
+    "id": "CIE_MAR_0003",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que eminente biólogo e oceanógrafo português (1927-2017), pioneiro da governança dos oceanos na ONU, Diretor de Pescas da FAO e Secretário-Executivo da Comissão Oceanográfica Intergovernamental da UNESCO, dá o nome ao maior navio de investigação oceanográfica do IPMA?",
+    "opcoes": [
+      "Luiz Saldanha",
+      "Bocage",
+      "Professor Mário Ruivo (Navio Mário Ruivo)",
+      "Henrique Teixeira de Sampaio"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Mário Ruivo foi um dos pais do conceito do Oceano como património comum da Humanidade e liderou a Expo 98.",
+    "fonte": "IPMA / UNESCO-COI / Fundação Mário Ruivo",
+    "factClusterId": "fc_mar_marioruivo_01"
+  },
+  {
+    "id": "CIE_MAR_0004",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que fenómeno oceanográfico sazonal na costa continental portuguesa, induzido pelos ventos de norte («Nortada») durante a primavera e verão, puxa as águas profundas frias e ricas em nutrientes para a superfície («Ressurgência Costeira» ou «Upwelling»), tornando o mar português um dos mais férteis do mundo em fitoplâncton e sardinha?",
+    "opcoes": [
+      "Corrente de El Niño",
+      "Giro Subtropical",
+      "Maré Viva",
+      "Ressurgência Costeira (Upwelling)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O 'upwelling' costeiro alimenta a cadeia trófica marinha sustentando a abundância de sardinha, cavala e polvos na costa portuguesa.",
+    "fonte": "IPMA / Instituto Hidrográfico / Universidade de Aveiro",
+    "factClusterId": "fc_mar_upwelling_nortada_01"
+  },
+  {
+    "id": "CIE_MAR_0005",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que campo de fontes hidrotermais submarinas descoberto em 1992 a sul dos Açores a cerca de 1.700 metros de profundidade («Lucky Strike»), sobre a Crista Médio-Atlântica, alberga comunidades endémicas de mexilhões e camarões que vivem sem luz solar através de bactérias quimiossintéticas?",
+    "opcoes": [
+      "Campo Hidrotermal Lucky Strike",
+      "Campo Rainbow",
+      "Campo Menez Gwen",
+      "Campo Saldanha"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As fontes hidrotermais dos Açores expelem fluidos minerais a mais de 300°C constituindo laboratórios naturais para o estudo da origem da vida na Terra.",
+    "fonte": "Universidade dos Açores / EMEPC / IPMA",
+    "factClusterId": "fc_mar_luckystrike_acores_01"
+  },
+  {
+    "id": "CIE_MAR_0006",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que estrutura estatal criada pelo Governo de Portugal em 2005 («EMEPC — Estrutura de Missão para a Extensão da Plataforma Continental»), preparou a proposta submetida às Nações Unidas para alargar o território submerso sob jurisdição portuguesa para cerca de 3,8 milhões de km²?",
+    "opcoes": [
+      "IPMA",
+      "EMEPC (Extensão da Plataforma Continental)",
+      "Instituto Hidrográfico",
+      "Docapesca"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Com a aprovação da extensão da plataforma continental pela ONU, Portugal passará a gerir um território marítimo equivalente ao tamanho de toda a União Europeia continental.",
+    "fonte": "EMEPC / Nações Unidas (CLCS) / Ministério da Defesa",
+    "factClusterId": "fc_mar_emepc_plataforma_01"
+  },
+  {
+    "id": "CIE_MAR_0007",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que imponente montanha submarina e banco oceânico situado entre o sudoeste de Portugal continental e a Madeira («Banco de Gorringe»), com os montes Gettysburg e Ormonde que quase atingem a superfície (25 metros de profundidade), é um santuário excecional de biodiversidade marinha protegida?",
+    "opcoes": [
+      "Banco de Ampère",
+      "Monte submarino D. Carlos",
+      "Banco de Gorringe",
+      "Banco da Prata"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Banco de Gorringe abriga florestas de kelp gigantes, corais de profundidade, tubarões oceânicos e baleias migradoras.",
+    "fonte": "ICNF / Oceana / CCMAR",
+    "factClusterId": "fc_mar_bancodegorringe_01"
+  },
+  {
+    "id": "CIE_MAR_0008",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que parque eólico flutuante offshore pioneiro no mundo instalado a 20 km ao largo de Viana do Castelo («WindFloat Atlantic»), com três turbinas de 8,4 MW montadas sobre plataformas semi-submersíveis triangulares fundeadas a 100 metros de profundidade, produz eletricidade limpa para 60.000 habitações?",
+    "opcoes": [
+      "Hywind Portugal",
+      "Parque Eólico de Sines",
+      "OceanPlug",
+      "WindFloat Atlantic (Viana do Castelo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O WindFloat Atlantic foi desenvolvido pelo consórcio Ocean Winds (EDPR e Engie) e pela Principle Power, provando a viabilidade da energia eólica em águas profundas.",
+    "fonte": "Ocean Winds / DGEG / Município de Viana do Castelo",
+    "factClusterId": "fc_mar_windfloatatlantic_01"
+  },
+  {
+    "id": "CIE_MAR_0009",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que importante centro de investigação interdisciplinar sediado no moderno edifício do Terminal de Cruzeiros do Porto de Leixões em Matosinhos («CIIMAR»), associado à Universidade do Porto, é líder em biotecnologia marinha, recursos vivos e alterações climáticas nos oceanos?",
+    "opcoes": [
+      "CIIMAR (Centro Interdisciplinar de Investigação Marinha e Ambiental)",
+      "CCMAR",
+      "MARE",
+      "CESAM"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O CIIMAR desenvolve novos fármacos anticancerígenos e antibióticos a partir de algas, esponjas e bactérias marinhas do Atlântico.",
+    "fonte": "CIIMAR / Universidade do Porto / Porto de Leixões",
+    "factClusterId": "fc_mar_ciimar_leixoes_01"
+  },
+  {
+    "id": "CIE_MAR_0010",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que centro de investigação marinha de excelência sediado no Campus de Gambelas da Universidade do Algarve em Faro («CCMAR — Centro de Ciências do Mar»), é líder europeu em aquacultura sustentável, genética de peixes e pradarias marinhas da Ria Formosa?",
+    "opcoes": [
+      "CIIMAR",
+      "CCMAR (Centro de Ciências do Mar do Algarve)",
+      "OOM",
+      "CIBIO"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CCMAR lidera o consórcio europeu de infraestruturas de biologia marinha EMBRC e projetos de restauro dos cavalos-marinhos na Ria Formosa.",
+    "fonte": "Universidade do Algarve / CCMAR / FCT",
+    "factClusterId": "fc_mar_ccmar_ualg_01"
+  },
+  {
+    "id": "CIE_MAR_0011",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que veículo submarino operado remotamente de grande profundidade da EMEPC («ROV Luso»), capaz de mergulhar até aos 6.000 metros de profundidade com braços robóticos e câmaras de ultra-alta definição, recolhe amostras biológicas e geológicas do fundo oceânico português?",
+    "opcoes": [
+      "ROV Argus",
+      "Submarino Nautile",
+      "ROV Luso",
+      "ROV Oceano"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ROV Luso já realizou centenas de mergulhos profundos pioneiros nos canhões submarinos e nas cristas oceânicas dos Açores e Madeira.",
+    "fonte": "EMEPC / Ministério da Defesa Nacional",
+    "factClusterId": "fc_mar_rovluso_01"
+  },
+  {
+    "id": "CIE_MAR_0012",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que observatório oceânico sediado no Funchal («OOM — Observatório Oceânico da Madeira»), instalado no Colégio dos Jesuítas, monitoriza as correntes marinhas da Macaronésia, cetáceos e os montes submarinos do arquipélago da Madeira?",
+    "opcoes": [
+      "CIIMAR-Madeira",
+      "MARE Madeira",
+      "Estação de Biologia Marinha do Funchal",
+      "OOM (Observatório Oceânico da Madeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O OOM utiliza planadores submarinos autónomos (gliders) e boias oceanográficas para prever a temperatura e salinidade do Atlântico.",
+    "fonte": "OOM / Universidade da Madeira / ARDITI",
+    "factClusterId": "fc_mar_oom_madeira_01"
+  },
+  {
+    "id": "CIE_MAR_0013",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que organismo público estatal português com sede em Algés («IPMA — Instituto Português do Mar e da Atmosfera»), criado em 2012 pela fusão do Instituto de Meteorologia com o IPIMAR, é a autoridade nacional para as pescas, marés, oceanografia e meteorologia?",
+    "opcoes": [
+      "IPMA (Instituto Português do Mar e da Atmosfera)",
+      "Instituto Hidrográfico",
+      "LNEC",
+      "DGRM"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O IPMA emite avisos de tempestades marítimas, avalia os stocks de pesca e monitoriza sismos na plataforma submarina.",
+    "fonte": "IPMA / Ministério da Agricultura e Mar",
+    "factClusterId": "fc_mar_ipma_alges_01"
+  },
+  {
+    "id": "CIE_MAR_0014",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que prestigiado órgão da Marinha Portuguesa com sede no Convento das Trinas em Lisboa («Instituto Hidrográfico»), é o laboratório do Estado responsável pelo levantamento hidrográfico, cartografia náutica oficial e marégrafos em Portugal?",
+    "opcoes": [
+      "IPMA",
+      "Instituto Hidrográfico (IH)",
+      "Direção-Geral do Território",
+      "Autoridade Marítima Nacional"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Instituto Hidrográfico produz todas as cartas de navegação oficiais e tábuas de marés que garantem a segurança da navegação no mar português.",
+    "fonte": "Instituto Hidrográfico / Marinha Portuguesa",
+    "factClusterId": "fc_mar_institutohidrografico_01"
+  },
+  {
+    "id": "CIE_MAR_0015",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que importante pradaria marinha subaquática de plantas com flor («Zostera marina» e «Cymodocea nodosa») na Ria Formosa e no Estuário do Sado (Parque Marinho Luiz Saldanha), é um dos maiores sumidouros naturais de «Carbono Azul» e maternidade de peixes da Península Ibérica?",
+    "opcoes": [
+      "Florestas de Kelp",
+      "Recifes de Coral",
+      "Pradarias Marinhas de Ervas Marinhas (Zostera)",
+      "Campos de Sargasso"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "As pradarias marinhas sequestram até 35 vezes mais dióxido de carbono por hectare do que as florestas tropicais terrestres.",
+    "fonte": "CCMAR / Oceanário de Lisboa / ICNF",
+    "factClusterId": "fc_mar_pradariamarinhas_zostera_01"
+  },
+  {
+    "id": "CIE_MAR_0016",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que parque marinho costeiro protegido no Parque Natural da Arrábida entre Sesimbra e o Cabo Espichel («Parque Marinho Professor Luiz Saldanha»), com mais de 50 km² e 1.400 espécies marinhas registadas, homenageia o grande zoólogo marinho português?",
+    "opcoes": [
+      "Reserva Marinha das Berlengas",
+      "Reserva das Ilhas Desertas",
+      "Parque Marinho do Litoral Norte",
+      "Parque Marinho Professor Luiz Saldanha"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Parque Marinho Luiz Saldanha é uma das áreas marinhas protegidas de maior riqueza biológica e proteção integral da Europa.",
+    "fonte": "ICNF / Parque Natural da Arrábida / Museu Bocage",
+    "factClusterId": "fc_mar_parquemarinholuizsaldanha_01"
+  },
+  {
+    "id": "CIE_MAR_0017",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que maior aquário público e centro de educação para a conservação dos oceanos de Portugal, inaugurado no Parque das Nações em Lisboa em 1998 com um aquário central de 5 milhões de litros de água salgada, é o:",
+    "opcoes": [
+      "Oceanário de Lisboa",
+      "Aquário Vasco da Gama",
+      "Sea Life Porto",
+      "Fluviário de Mora"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Oceanário de Lisboa, desenhado pelo arquiteto Peter Chermayeff, recebe mais de 1 milhão de visitantes por ano e foi eleito o melhor aquário do mundo pelo TripAdvisor.",
+    "fonte": "Oceanário de Lisboa / Fundação Oceano Azul",
+    "factClusterId": "fc_mar_oceanariolisboa_01"
+  },
+  {
+    "id": "CIE_MAR_0018",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que fundação privada portuguesa criada em 2017 pela Fundação Francisco Manuel dos Santos («Fundação Oceano Azul»), com sede no Oceanário de Lisboa, financia a criação de novas Áreas Marinhas Protegidas e a literacia oceânica nas escolas?",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Fundação Oceano Azul",
+      "Fundação Champalimaud",
+      "Fundação Aga Khan"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Fundação Oceano Azul impulsionou a criação da maior Reserva Marinha com proteção total da Europa nas Ilhas Selvagens da Madeira (2.677 km²).",
+    "fonte": "Fundação Oceano Azul / Governo Regional da Madeira",
+    "factClusterId": "fc_mar_fundacaooceanoazul_01"
+  },
+  {
+    "id": "CIE_MAR_0019",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que arquipélago desabitado da Região Autónoma da Madeira («Ilhas Selvagens»), classificado como Reserva Natural desde 1971, teve a sua reserva marinha ampliada em 2021 tornando-se a maior área marinha protegida com proteção integral de toda a Europa?",
+    "opcoes": [
+      "Reserva das Ilhas Desertas",
+      "Reserva do Garajau",
+      "Reserva Natural das Ilhas Selvagens",
+      "Reserva das Berlengas"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Nas Selvagens está proibida qualquer atividade de pesca ou extração até às 12 milhas náuticas, garantindo refúgio intocado para a vida marinha.",
+    "fonte": "Governo Regional da Madeira / Instituto das Florestas e Conservação da Natureza (IFCN)",
+    "factClusterId": "fc_mar_ilhasselvagens_reserva_01"
+  },
+  {
+    "id": "CIE_MAR_0020",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que mamífero marinho carnívoro raríssimo («Lobo-Marinho» / Foca-Monge do Mediterrâneo, Monachus monachus), salvo da extinção nas Ilhas Desertas (Madeira) graças à criação da Reserva Natural em 1990, tem ali a sua única colónia reprodutora atlântica?",
+    "opcoes": [
+      "Leão-Marinho",
+      "Elefante-Marinho",
+      "Lontra-Marinha",
+      "Lobo-Marinho (Foca-Monge da Madeira)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A população de lobos-marinhos das Desertas recuperou de apenas 6-8 indivíduos nos anos 1980 para cerca de 40 animais protegidos pelo IFCN.",
+    "fonte": "IFCN Madeira / Parque Natural da Madeira / LIFE Natureza",
+    "factClusterId": "fc_mar_lobomarinho_desertas_01"
+  },
+  {
+    "id": "CIE_MAR_0021",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que gigantesco mamífero marinho com dentes («Cachalote», Physeter macrocephalus), que mergulha a mais de 2.000 metros de profundidade em busca de lulas-gigantes nas fossas submarinas dos Açores, é o símbolo da história marítima e do «whale watching» sustentável açoriano?",
+    "opcoes": [
+      "Cachalote (Physeter macrocephalus)",
+      "Baleia-Azul",
+      "Baleia-Comum",
+      "Orca"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Após a proibição da caça à baleia em 1984, os antigos vigias de baleia nos Açores converteram-se em guias e cientistas de observação turística responsável.",
+    "fonte": "Universidade dos Açores (DOP) / Museu dos Baleeiros (Pico)",
+    "factClusterId": "fc_mar_cachalote_acores_01"
+  },
+  {
+    "id": "CIE_MAR_0022",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que tubarão inofensivo gigante de águas temperadas e o segundo maior peixe do planeta («Tubarão-Frade», Cetorhinus maximus), que se alimenta de plâncton nadando à superfície de boca aberta, é observado com frequência nas costas de Viana do Castelo, Peniche e Algarve?",
+    "opcoes": [
+      "Tubarão-Baleia",
+      "Tubarão-Frade (Cetorhinus maximus)",
+      "Tubarão-Branco",
+      "Tubarão-Azul"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Tubarão-Frade pode atingir 10 a 12 metros de comprimento e é uma espécie protegida nas águas portuguesas.",
+    "fonte": "IPMA / CIIMAR / ICNF",
+    "factClusterId": "fc_mar_tubaraofrade_01"
+  },
+  {
+    "id": "CIE_MAR_0023",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que espécie de peixe ósseo mais pesado do mundo («Peixe-Lua», Mola mola), com corpo arredondado que pode pesar mais de duas toneladas e flutua de lado à superfície ao sol para aquecer e desparasitar, é avistado regularmente no litoral português?",
+    "opcoes": [
+      "Atum-Rabilho",
+      "Espadarte",
+      "Peixe-Lua (Mola mola / Mola alexandrini)",
+      "Peixe-Espada-Preto"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O maior espécime de peixe ósseo do mundo registado pelo Livro Guinness foi um peixe-lua gigante de 2.744 kg encontrado nos Açores em 2021.",
+    "fonte": "Universidade dos Açores / Guinness World Records (2022)",
+    "factClusterId": "fc_mar_peixelua_acores_01"
+  },
+  {
+    "id": "CIE_MAR_0024",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que peixe abissal predador de profundidade («Peixe-Espada-Preto», Aphanopus carbo), capturado tradicionalmente por palangreiros da Madeira entre os 800 e os 1.500 metros de profundidade na escuridão dos mares do arquipélago, é o símbolo da gastronomia madeirense?",
+    "opcoes": [
+      "Peixe-Espada-Branco",
+      "Cherne",
+      "Pargo",
+      "Peixe-Espada-Preto (Aphanopus carbo)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O peixe-espada-preto vive em profundidades abissais e possui olhos gigantes adaptados à bioluminescência.",
+    "fonte": "Museu de História Natural do Funchal / DRP Madeira",
+    "factClusterId": "fc_mar_peixeespadapreto_01"
+  },
+  {
+    "id": "CIE_MAR_0025",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que espécie de tartaruga marinha carnívora protegida («Tartaruga-Boba» ou Tartaruga-Comum, Caretta caretta), que nasce nas praias da Florida e Caraíbas, passa a sua fase juvenil no arquipélago dos Açores e Madeira antes de regressar à América?",
+    "opcoes": [
+      "Tartaruga-Boba (Caretta caretta)",
+      "Tartaruga-Verde",
+      "Tartaruga-de-Couro",
+      "Tartaruga-de-Pente"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "Os Açores são a principal 'maternidade oceânica de desenvolvimento' das tartarugas-bobas do Atlântico Norte monitorizadas por transmissores de satélite pela Universidade dos Açores.",
+    "fonte": "DOP Universidade dos Açores / Centro de Reabilitação de Animais Marinhos",
+    "factClusterId": "fc_mar_tartarugaboba_acores_01"
+  },
+  {
+    "id": "CIE_MAR_0026",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que duas espécies de cavalos-marinhos protegidos («Hippocampus guttulatus» e «Hippocampus hippocampus»), que formavam na Ria Formosa no Algarve a maior densidade populacional de cavalos-marinhos do mundo, são alvo de projetos científicos pioneiros de conservação e reprodução em cativeiro?",
+    "opcoes": [
+      "Cavalo-Marinho-Pigmeu e Gigante",
+      "Cavalo-Marinho-de-Focinho-Comprido e Cavalo-Marinho-de-Focinho-Curto",
+      "Peixe-Cachimbo e Dragão-Marinho",
+      "Cavalo-Marinho-Tropical"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Projeto Cavalos-Marinhos do CCMAR e do ICNF criou santuários protegidos sem fundeio na Ria Formosa para recuperar as populações.",
+    "fonte": "CCMAR / ICNF / Ria Formosa",
+    "factClusterId": "fc_mar_cavalosmarinhos_riaformosa_01"
+  },
+  {
+    "id": "CIE_MAR_0027",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que centro de salvamento e reabilitação de animais marinhos feridos ou arrojados na costa de Portugal («CRAM — Centro de Reabilitação de Animais Marinhos»), com hospital veterinário especializado em golfinhos, tartarugas e aves marinhas, funciona no ECOMARE na Gafanha da Nazaré (Ílhavo)?",
+    "opcoes": [
+      "Aquário Vasco da Gama",
+      "Zoomarine",
+      "ECOMARE / CRAM (Universidade de Aveiro)",
+      "Estação Zootécnica"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O ECOMARE da Universidade de Aveiro no Porto de Aveiro é uma das infraestruturas de biologia marinha mais avançadas da Península Ibérica.",
+    "fonte": "Universidade de Aveiro / ECOMARE / Porto de Aveiro",
+    "factClusterId": "fc_mar_ecomare_cram_ilhavo_01"
+  },
+  {
+    "id": "CIE_MAR_0028",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que famosa população residente de golfinhos («Roazes-Corvineiros», Tursiops truncatus) no Estuário do Sado (Setúbal), uma das três únicas comunidades fluvio-marinhas residentes de golfinhos de toda a Europa, é monitorizada pelo ICNF e Associação Vertigem Azul?",
+    "opcoes": [
+      "Golfinhos-Comuns de Cascais",
+      "Botos do Tejo",
+      "Toninhas da Ria de Aveiro",
+      "Roazes-Corvineiros do Sado (Golfinhos do Sado)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A comunidade do Sado conta com cerca de 30 golfinhos que se alimentam de chocos, tainhas e corvinas nas águas calmas da foz do Sado.",
+    "fonte": "Reserva Natural do Estuário do Sado / ICNF / Vertigem Azul",
+    "factClusterId": "fc_mar_roazesdosado_01"
+  },
+  {
+    "id": "CIE_MAR_0029",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que importante monte submarino isolado entre o Continente e os Açores («Monte Submarino Josephine» ou Monte Ormonde), descoberto em 1869 por navios hidrográficos, é rico em crostas de ferromanganês e cobalto de grande interesse geológico e mineral?",
+    "opcoes": [
+      "Monte Submarino Josephine",
+      "Monte submarino Ampère",
+      "Monte Lion",
+      "Monte Atlantis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os montes submarinos portugueses albergam ecossistemas bentónicos primitivos intactos protegidos pela convenção OSPAR.",
+    "fonte": "Instituto Hidrográfico / EMEPC",
+    "factClusterId": "fc_mar_montesubmarinojosephine_01"
+  },
+  {
+    "id": "CIE_MAR_0030",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que rede internacional de cabos submarinos intercontinentais de fibra ótica de telecomunicações amarra em Sines («Cabo EllaLink» e «2Africa»), ligando diretamente a Europa à América do Sul (Fortaleza, Brasil) e a África sem passar por outros países?",
+    "opcoes": [
+      "Atlantis-2",
+      "EllaLink (Sines - Fortaleza)",
+      "TAT-14",
+      "MainOne"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "Sines consolidou-se como o grande hub digital atlântico europeu de acolhimento de megacentros de processamento de dados e cabos submarinos intercontinentais.",
+    "fonte": "EllaLink / Sines Tech Innovation Hub / AICEP",
+    "factClusterId": "fc_mar_ellalink_sines_01"
+  },
+  {
+    "id": "CIE_MAR_0031",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que alga marinha vermelha («Gelidium corneum» / «Gelidium sesquipedale») colhida tradicionalmente por mergulhadores na costa rochosa de Viana do Castelo, Peniche e Arrifana («Apanha do Sargaço e do Moliço»), é a matéria-prima de excelência mundial para a produção de Agar-Agar farmacêutico e microbiológico?",
+    "opcoes": [
+      "Ulva lactuca (Alface-do-Mar)",
+      "Laminaria",
+      "Gelidium (Alga para Agar-Agar)",
+      "Fucus vesiculosus"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal é um dos maiores produtores europeus de ágar-ágar de pureza médica extraído das algas vermelhas da costa atlântica.",
+    "fonte": "Iberagar / CIIMAR / IPMA",
+    "factClusterId": "fc_mar_gelidium_agar_01"
+  },
+  {
+    "id": "CIE_MAR_0032",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que barco tradicional de madeira com fundo chato e proa em bico erguida pintada com motivos satíricos e populares («Moliceiro»), típico da Ria de Aveiro, era utilizado para colher o «moliço» (plantas aquáticas e algas) para fertilizar os campos agrícolas dunares?",
+    "opcoes": [
+      "Barco Rabelo",
+      "Barco Mercantel",
+      "Muleta do Barreiro",
+      "Barco Moliceiro"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A construção naval e as pinturas dos moliceiros da Ria de Aveiro foram inscritas no Inventário Nacional do Património Cultural Imaterial.",
+    "fonte": "Município da Murtosa / Município de Aveiro / DGPC",
+    "factClusterId": "fc_mar_barcomoliceiro_aveiro_01"
+  },
+  {
+    "id": "CIE_MAR_0033",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que embarcação tradicional de pesca à vela do rio Tejo («Muleta do Barreiro» ou Muleta de Pesca), com proa recurvada armada com múltiplos botalós e paus para arrastar a rede de «tartaranha» com o vento de través, é um dos designs navais mais bizarros da história europeia?",
+    "opcoes": [
+      "Muleta do Barreiro (Muleta do Tejo)",
+      "Fragata do Tejo",
+      "Canoa da Picareira",
+      "Catraio"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O Município do Barreiro reconstruiu uma réplica fiel da Muleta de Pesca do Tejo para preservar esta arte de marear quinhentista.",
+    "fonte": "Município do Barreiro / Museu de Marinha",
+    "factClusterId": "fc_mar_muletadobarreiro_01"
+  },
+  {
+    "id": "CIE_MAR_0034",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que barco de pesca artesanal tradicional da Costa da Caparica, Espinho e Nazaré com proa alta e em crescente («Barco da Arte Xávega»), lançado nas ondas da rebentação com remos compridos para cercar o peixe puxado depois por tratores (ou antigamente juntas de bois) no areal, é a:",
+    "opcoes": [
+      "Barco Rabelo",
+      "Arte Xávega (Barco Saveiro da Xávega)",
+      "Barca da Pesca do Bacalhau",
+      "Bote Baleeiro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Arte Xávega é uma das técnicas de pesca de arrasto de praia mais antigas e espetaculares de Portugal, classificada como património cultural.",
+    "fonte": "Município de Almada / Município de Espinho / DGPC",
+    "factClusterId": "fc_mar_artexavega_01"
+  },
+  {
+    "id": "CIE_MAR_0035",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que histórico lugre bacalhoeiro de quatro mastros construído em ferro em Viana do Castelo em 1937 («Navio-Hospital Gil Eannes»), que prestava assistência médica aos milhares de pescadores portugueses da «Frota Branca» na Terra Nova e Gronelândia, está musealizado no porto de Viana?",
+    "opcoes": [
+      "Navio Creoula",
+      "Navio Santa Maria Manuela",
+      "Navio Gil Eannes",
+      "Navio Argus"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Navio-Hospital Gil Eannes é um dos navios-museu mais visitados de Portugal, preservando as enfermarias, bloco operatório e ponte de comando.",
+    "fonte": "Fundação Gil Eannes / Município de Viana do Castelo",
+    "factClusterId": "fc_mar_gileannes_bacalhau_01"
+  },
+  {
+    "id": "CIE_MAR_0036",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que veleiro clássico de quatro mastros («Lugre Creoula»), construído em 1937 nos Estaleiros da CUF em Lisboa em apenas 62 dias para a pesca do bacalhau à linha em dóris individuais, serve atualmente a Marinha Portuguesa como Navio de Treino de Mar e apoio à investigação científica?",
+    "opcoes": [
+      "Navio Sagres",
+      "Navio Gazela",
+      "Veleiro Polar",
+      "Navio de Treino de Mar Creoula (NTM Creoula)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Creoula realizou 36 campanhas bacalhoeiras na Terra Nova e forma anualmente centenas de jovens em expedições oceanográficas e marítimas.",
+    "fonte": "Marinha Portuguesa / Associação de Amigos do Creoula",
+    "factClusterId": "fc_mar_ntmcreoula_01"
+  },
+  {
+    "id": "CIE_MAR_0037",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que navio-escola de três mastros tipo barca («Navio-Escola Sagres» / Sagres III), construído na Alemanha em 1937 e incorporado na Marinha Portuguesa em 1962 com as cruzes de Cristo nas suas velas redondas, é o principal embaixador itinerante de Portugal nos mares do mundo?",
+    "opcoes": [
+      "NRP Sagres (Navio-Escola Sagres)",
+      "NRP Creoula",
+      "NRP Dom Carlos I",
+      "NRP Almirante Gago Coutinho"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Sagres já realizou três viagens de circum-navegação do globo e treina os cadetes da Escola Naval.",
+    "fonte": "Marinha Portuguesa / Escola Naval",
+    "factClusterId": "fc_mar_nrpsagres_01"
+  },
+  {
+    "id": "CIE_MAR_0038",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que grande porto de águas profundas no litoral alentejano («Porto de Sines»), capaz de receber os maiores navios porta-contentores e petroleiros do mundo («Ultra Large Container Vessels») sem restrições de maré, é o principal porto de mercadorias de Portugal?",
+    "opcoes": [
+      "Porto de Leixões",
+      "Porto de Sines",
+      "Porto de Lisboa",
+      "Porto de Setúbal"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O Porto de Sines movimenta mais de 50% do tráfego marítimo de mercadorias nacional e é a principal porta de entrada de gás natural liquefeito (GNL).",
+    "fonte": "Administração do Porto de Sines (APS) / DGRM",
+    "factClusterId": "fc_mar_portodesines_01"
+  },
+  {
+    "id": "CIE_MAR_0039",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que primeiro porto comercial de Portugal a instalar um sistema pioneiro de eletrificação e abastecimento elétrico a navios acostados a partir de energias renováveis («Onshore Power Supply» / OPS / Cold Ironing no Terminal de Cruzeiros de Leixões), permitindo aos navios desligarem os motores a diesel no cais, é o:",
+    "opcoes": [
+      "Porto de Lisboa",
+      "Porto de Portimão",
+      "Porto de Leixões (Matosinhos)",
+      "Porto do Funchal"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O OPS no Porto de Leixões reduz drasticamente as emissões de dióxido de carbono e ruído nas cidades costeiras vizinhas.",
+    "fonte": "APDL (Administração dos Portos do Douro, Leixões e Viana do Castelo)",
+    "factClusterId": "fc_mar_portodeleixoes_ops_01"
+  },
+  {
+    "id": "CIE_MAR_0040",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que peixe migrador anádromo serpentiforme («Lampreia-Marinha», Petromyzon marinus), com boca em forma de ventosa circular sem mandíbulas, sobe os rios Minho, Lima, Cávado, Douro e Mondego no inverno para desovar, sendo uma iguaria gastronómica secular?",
+    "opcoes": [
+      "Enguia-Europeia",
+      "Sável",
+      "Truta-Marisca",
+      "Lampreia-Marinha (Petromyzon marinus)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A lampreia é um fóssil vivo com mais de 350 milhões de anos que não possui ossos, sendo o seu esqueleto puramente cartilagíneo.",
+    "fonte": "MARE / Universidade de Évora / IPMA",
+    "factClusterId": "fc_mar_lampreiamarinha_01"
+  },
+  {
+    "id": "CIE_MAR_0041",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que peixe pelágico migrador («Atum-Rabilho» do Atlântico, Thunnus thynnus), capturado sazonalmente nas históricas «armações de atum» ao largo de Tavira, Olhão e Vila Real de Santo António no Algarve, é um dos peixes mais valiosos e rápidos do oceano?",
+    "opcoes": [
+      "Atum-Rabilho (Thunnus thynnus)",
+      "Atum-Albacora",
+      "Atum-Patudo",
+      "Bonito"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As armações de atum do Algarve funcionam como labirintos submarinos de redes fixas que capturam o atum na sua passagem do Atlântico para o Mediterrâneo.",
+    "fonte": "Museu Municipal de Tavira / IPMA / DRP Algarve",
+    "factClusterId": "fc_mar_atumrabilho_armacoes_01"
+  },
+  {
+    "id": "CIE_MAR_0042",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que molusco cefalópode de oito tentáculos («Polvo-Comum», Octopus vulgaris), cuja capital gastronómica nacional é a vila de Santa Luzia em Tavira («Capital do Polvo»), é pescado com recurso a alcatruzes de barro e covos artesanais ao largo do Algarve?",
+    "opcoes": [
+      "Choco",
+      "Polvo-Comum (Octopus vulgaris)",
+      "Lula",
+      "Pota"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A pesca com alcatruz de barro é uma arte de pesca seletiva e sustentável introduzida pelos árabes que não danifica o fundo marinho.",
+    "fonte": "IPMA / Município de Tavira / Junta de Freguesia de Santa Luzia",
+    "factClusterId": "fc_mar_polvocomum_santaluzia_01"
+  },
+  {
+    "id": "CIE_MAR_0043",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que crustáceo marinho cirrípede que cresce fixo às rochas batidas pelas ondas em escarpas vertiginosas («Percebe» / Perceves, Pollicipes pollicipes), é apanhado com risco de vida por pescadores artesanais experientes («Percebeiros») na Costa Vicentina e nas Berlengas?",
+    "opcoes": [
+      "Craca dos Açores",
+      "Camarão da Costa",
+      "Percebe (Pollicipes pollicipes)",
+      "Navalheira"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Vila do Bispo é considerada a capital do percebe da Costa Vicentina, onde a apanha é regulamentada por quotas estritas pelo Parque Natural.",
+    "fonte": "ICNF / Parque Natural do Sudoeste Alentejano e Costa Vicentina",
+    "factClusterId": "fc_mar_percebe_costavicentina_01"
+  },
+  {
+    "id": "CIE_MAR_0044",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que crustáceo marinho fixo às rochas vulcânicas do arquipélago dos Açores («Cracas dos Açores», Megabalanus azoricus), apanhado em cachos calcários nas fendas das arribas e servido cozido com sabor intenso a mar nas ilhas de São Miguel, Terceira e Faial, é as:",
+    "opcoes": [
+      "Lapas dos Açores",
+      "Percebes",
+      "Cavaco",
+      "Cracas dos Açores"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "As cracas são um cirrípede gigante endémico da Macaronésia apreciado como uma das maiores iguarias do mar açoriano.",
+    "fonte": "Universidade dos Açores / DRP Açores",
+    "factClusterId": "fc_mar_cracasdosacores_01"
+  },
+  {
+    "id": "CIE_MAR_0045",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que molusco gastrópode marinho univalve com concha cónica achatada («Lapas» / Patella candei e Patella aspera), colhido na maré baixa nas rochas da Madeira e Açores e servido grelhado na frigideira com manteiga de alho e pimenta-da-terra («Lapas Grelhadas»), é:",
+    "opcoes": [
+      "Lapas (Patella spp.)",
+      "Búzios",
+      "Amêijoas",
+      "Conquilhas"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "As lapas são um símbolo da cozinha insular e têm períodos de defeso para garantir a reprodução sustentável nos arquipélagos.",
+    "fonte": "IFCN Madeira / Secretaria Regional do Mar dos Açores",
+    "factClusterId": "fc_mar_lapasacoresmadeira_01"
+  },
+  {
+    "id": "CIE_MAR_0046",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que crustáceo decápode nobre sem pinças e com carapaça castanha aveludada espalmada («Cavaco» ou Lagosta-da-Pedra, Scyllarides latus), capturado em grutas submarinas dos Açores e Madeira, é um dos mariscos mais protegidos e raros de Portugal?",
+    "opcoes": [
+      "Lavagante",
+      "Cavaco (Scyllarides latus)",
+      "Lagosta",
+      "Santola"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O cavaco atinge elevado valor comercial e é estritamente regulamentado com proibição de captura de fêmeas ovadas.",
+    "fonte": "Universidade dos Açores / DRP Açores",
+    "factClusterId": "fc_mar_cavaco_acores_01"
+  },
+  {
+    "id": "CIE_MAR_0047",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que organismo marinho colonial gelatinoso com flutuador pneumatóforo azul-arroxeado que flutua à superfície («Caravela-Portuguesa», Physalia physalis), com tentáculos venenosos que podem atingir 30 metros de comprimento, deve o seu nome comum à semelhança com as velas das caravelas dos Descobrimentos?",
+    "opcoes": [
+      "Medusa-do-Tejo",
+      "Água-Viva",
+      "Caravela-Portuguesa (Physalia physalis)",
+      "Veleiro (Velella velella)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Caravela-Portuguesa não é uma verdadeira alforreca, mas sim um sifonóforo colonial composto por quatro tipos de pólipos especializados com nematocistos de veneno potente.",
+    "fonte": "IPMA (Programa GelAvista) / Autoridade Marítima Nacional",
+    "factClusterId": "fc_mar_caravelaportuguesa_01"
+  },
+  {
+    "id": "CIE_MAR_0048",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que programa de ciência cidadã pioneiro do IPMA («GelAvista»), criado em 2016, convida banhistas, mergulhadores e pescadores a fotografar e comunicar o avistamento de medusas, caravelas-portuguesas e águas-vivas em todas as praias de Portugal através de uma aplicação móvel?",
+    "opcoes": [
+      "Praia Viva",
+      "Oceano Limpo",
+      "Mar Aberto",
+      "GelAvista (IPMA)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O GelAvista permite mapear a distribuição espácio-temporal e a dinâmica populacional dos organismos gelatinosos na costa portuguesa.",
+    "fonte": "IPMA / Programa GelAvista",
+    "factClusterId": "fc_mar_gelavista_ipma_01"
+  },
+  {
+    "id": "CIE_MAR_0049",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que corais fósseis e vivos de águas frias profundas («Lophelia pertusa» e «Madrepora oculata») descobertos nos canhões submarinos de Cascais, Nazaré e Portimão a mais de 1.000 metros de profundidade, formam complexos recifes que servem de berçário a centenas de peixes abissais?",
+    "opcoes": [
+      "Corais de Águas Frias (Lophelia pertusa)",
+      "Corais de Fogo",
+      "Recifes de Barreira",
+      "Atóis Oceânicos"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "Os corais de águas frias portugueses não dependem de luz solar para viver, alimentando-se de partículas orgânicas em suspensão nas correntes profundas.",
+    "fonte": "EMEPC / IPMA / Universidade de Aveiro",
+    "factClusterId": "fc_mar_coraisaguasfrias_01"
+  },
+  {
+    "id": "CIE_MAR_0050",
+    "tema": "Ciência e Tecnologia",
+    "subtema": "Mares & Oceanografia",
+    "pergunta": "Que importante farol no Cabo de São Vicente em Sagres (Vila do Bispo), edificado em 1846 no ponto mais a sudoeste da Europa continental sobre uma falésia de 60 metros, possui um dos aparelhos óticos hiper-radiantes mais potentes da Europa com um alcance luminoso de mais de 30 milhas náuticas (59 km)?",
+    "opcoes": [
+      "Farol do Cabo da Roca",
+      "Farol da Barra de Aveiro",
+      "Farol do Cabo de São Vicente (Sagres)",
+      "Farol de Santa Maria"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Farol do Cabo de São Vicente orienta uma das rotas marítimas mais movimentadas do globo entre o Mediterrâneo, o Atlântico Norte e a África.",
+    "fonte": "Autoridade Marítima Nacional / Direção de Faróis",
+    "factClusterId": "fc_mar_farolsaovicente_01"
+  }
+]

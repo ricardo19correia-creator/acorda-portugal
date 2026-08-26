@@ -24,16 +24,16 @@ export function AnswerOption({
     return (
       <div
         aria-hidden="true"
-        className="flex w-full items-center gap-3.5 sm:gap-4.5 rounded-3xl border-2 border-slate-800/60 bg-slate-950/90 p-3.5 sm:p-4.5 text-left opacity-35 select-none cursor-not-allowed transition-all shadow-inner"
+        className="flex min-h-[3.75rem] h-auto w-full items-center gap-2.5 sm:gap-4 rounded-2xl sm:rounded-3xl border-2 border-slate-800/60 bg-slate-950/90 p-2.5 sm:p-4 text-left opacity-35 select-none cursor-not-allowed transition-all shadow-inner"
       >
-        <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl border border-slate-800 bg-slate-900 font-display text-sm font-black text-slate-500 line-through">
+        <span className="grid h-8 w-8 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl border border-slate-800 bg-slate-900 font-display text-xs sm:text-base font-black text-slate-500 line-through">
           {optionKey}
         </span>
-        <span className="flex-1 text-sm font-bold text-slate-500 line-through">
+        <span className="flex-1 min-w-0 text-xs sm:text-sm md:text-base font-bold text-slate-500 line-through break-words hyphens-auto leading-snug">
           {text}
         </span>
-        <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-[0.62rem] font-black text-slate-400 uppercase tracking-wider">
-          Eliminada (50/50)
+        <span className="shrink-0 rounded-full bg-slate-800 px-2 sm:px-2.5 py-0.5 text-[0.6rem] sm:text-[0.65rem] font-black text-slate-400 uppercase tracking-wider">
+          50/50
         </span>
       </div>
     )
@@ -46,7 +46,7 @@ export function AnswerOption({
       onClick={onSelect}
       aria-label={`Opção ${optionKey}: ${text}`}
       className={cn(
-        'group relative flex w-full items-center gap-2.5 sm:gap-4 rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 text-left transition-all duration-200 outline-none select-none cursor-pointer',
+        'group relative flex min-h-[3.75rem] h-auto w-full items-center gap-2.5 sm:gap-4 rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 text-left transition-all duration-200 outline-none select-none cursor-pointer',
         state === 'idle' &&
           'bg-slate-900/95 border-2 border-slate-700/80 text-white shadow-md hover:border-emerald-400 hover:bg-slate-800 active:scale-98',
         state === 'correct' &&
@@ -81,7 +81,7 @@ export function AnswerOption({
       {/* Answer text */}
       <span
         className={cn(
-          'flex-1 text-pretty text-xs sm:text-sm md:text-base font-bold transition-colors leading-snug',
+          'flex-1 min-w-0 text-xs sm:text-sm md:text-base font-bold transition-colors leading-snug break-words hyphens-auto',
           state === 'idle' && 'text-white group-hover:text-emerald-300',
           state === 'correct' && 'text-emerald-100 font-black',
           state === 'wrong' && 'text-rose-100 font-black',
@@ -93,7 +93,7 @@ export function AnswerOption({
 
       {/* Interactive trailing indicator for idle hover */}
       {state === 'idle' && (
-        <span className="hidden sm:grid h-7 w-7 place-items-center rounded-lg bg-slate-800/0 text-slate-400/0 transition-all duration-200 group-hover:bg-slate-800 group-hover:text-emerald-400">
+        <span className="hidden sm:grid h-7 w-7 place-items-center rounded-lg bg-slate-800/0 text-slate-400/0 transition-all duration-200 group-hover:bg-slate-800 group-hover:text-emerald-400 shrink-0">
           <ChevronRight className="h-4 w-4" />
         </span>
       )}

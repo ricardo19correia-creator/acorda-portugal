@@ -1,0 +1,852 @@
+[
+  {
+    "id": "ATU_STA_0001",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que plataforma global de comércio eletrónico de moda de luxo fundada pelo empresário português José Neves em 2007 tornou-se o primeiro unicórnio tecnológico com fundação e ADN português (avaliado em mais de mil milhões de dólares)?",
+    "opcoes": [
+      "Farfetch",
+      "OutSystems",
+      "Talkdesk",
+      "Feedzai"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Farfetch entrou na Bolsa de Nova Iorque (NYSE) em 2018 e estabeleceu centros de engenharia em Guimarães, Braga, Porto e Lisboa.",
+    "fonte": "Startup Portugal / NYSE / Ministério da Economia",
+    "factClusterId": "fc_sta_farfetchunicórnio_01"
+  },
+  {
+    "id": "ATU_STA_0002",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa tecnológica portuguesa de software fundada em 2001 por Paulo Rosado («OutSystems»), pioneira mundial em plataformas de desenvolvimento «low-code» para aplicações empresariais rápidas, é um dos unicórnios mais valiosos de Portugal?",
+    "opcoes": [
+      "Feedzai",
+      "OutSystems",
+      "Sword Health",
+      "Talkdesk"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A OutSystems atingiu o estatuto de unicórnio em 2018 após investimento conjunto da KKR e Goldman Sachs.",
+    "fonte": "Startup Portugal / AICEP",
+    "factClusterId": "fc_sta_outsystems_01"
+  },
+  {
+    "id": "ATU_STA_0003",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa de contact center na nuvem (cloud) movida por inteligência artificial, fundada em 2011 por Tiago Paiva e Cristina Fonseca, tornou-se o 3.º unicórnio com ADN português e sede técnica em Lisboa?",
+    "opcoes": [
+      "Remote",
+      "Anchorage Digital",
+      "Talkdesk",
+      "Casafari"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Talkdesk atingiu o estatuto de unicórnio em 2018 e atende mais de 1.800 empresas clientes em todo o mundo.",
+    "fonte": "Startup Portugal / Talkdesk",
+    "factClusterId": "fc_sta_talkdesk_01"
+  },
+  {
+    "id": "ATU_STA_0004",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa tecnológica de inteligência artificial aplicada à prevenção e combate à fraude bancária e lavagem de dinheiro, fundada em Coimbra em 2011 por Nuno Sebastião, tornou-se o 4.º unicórnio português em 2021?",
+    "opcoes": [
+      "OutSystems",
+      "Sword Health",
+      "Defined.ai",
+      "Feedzai"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Feedzai protege anualmente transações financeiras de centenas de milhões de pessoas nos maiores bancos globais como Citibank e Santander.",
+    "fonte": "Feedzai / Universidade de Coimbra / Startup Portugal",
+    "factClusterId": "fc_sta_feedzai_01"
+  },
+  {
+    "id": "ATU_STA_0005",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup fundada em 2019 pelo português Marcelo Lebre e pelo holandês Job van der Voort, especializada em gestão global de contratações, salários e recursos humanos para equipas remotas em mais de 170 países, atingiu o estatuto de unicórnio em apenas dois anos?",
+    "opcoes": [
+      "Remote",
+      "Deel",
+      "Talkdesk",
+      "Sword Health"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Remote é uma das empresas de crescimento mais rápido do mundo na era do trabalho remoto internacional.",
+    "fonte": "Remote / Startup Portugal",
+    "factClusterId": "fc_sta_remoteunicórnio_01"
+  },
+  {
+    "id": "ATU_STA_0006",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que unicórnio de tecnologia médica («MedTech») fundado pelo engenheiro português Virgílio Bento em 2015 («Sword Health»), pioneiro no tratamento digital da dor músculo-esquelética com recurso a sensores e Inteligência Artificial clínica, é avaliado em milhares de milhões de dólares?",
+    "opcoes": [
+      "Knok Healthcare",
+      "Sword Health",
+      "Defined.ai",
+      "Bioalvo"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Sword Health desenvolveu o 'Digital Therapist' que permite aos doentes realizarem sessões de fisioterapia guiadas em casa com acompanhamento médico contínuo.",
+    "fonte": "Sword Health / Startup Portugal / Universidade de Aveiro",
+    "factClusterId": "fc_sta_swordhealth_01"
+  },
+  {
+    "id": "ATU_STA_0007",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que banco de ativos digitais e criptoativos fundado pelo engenheiro de cibersegurança português Diogo Mónica («Anchorage Digital»), o primeiro banco de criptoativos a obter uma licença bancária federal nos Estados Unidos (OCC) em 2021, é um dos unicórnios fundados por portugueses?",
+    "opcoes": [
+      "Revolut",
+      "Kraken",
+      "Anchorage Digital",
+      "Uphold"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Diogo Mónica estudou no Instituto Superior Técnico e cofundou a Anchorage para fornecer custódia segura institucional de criptoativos para grandes bancos mundiais.",
+    "fonte": "Anchorage Digital / OCC / IST",
+    "factClusterId": "fc_sta_anchoragedigital_01"
+  },
+  {
+    "id": "ATU_STA_0008",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que gigantesca cimeira tecnológica mundial criada pelo irlandês Paddy Cosgrave («Web Summit»), realizada anualmente em Lisboa na MEO Arena e FIL desde novembro de 2016, atrai mais de 70.000 participantes e 2.500 startups de 160 países?",
+    "opcoes": [
+      "Mobile World Congress",
+      "TechCrunch Disrupt",
+      "CES Lisboa",
+      "Web Summit (Lisboa)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A realização do Web Summit em Lisboa impulsionou o reconhecimento internacional de Portugal como um dos principais hubs de inovação e investimento da Europa.",
+    "fonte": "Web Summit / AICEP / Câmara Municipal de Lisboa",
+    "factClusterId": "fc_sta_websummitlisboa_01"
+  },
+  {
+    "id": "ATU_STA_0009",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que antigo complexo fabril da Manutenção Militar na zona oriental de Lisboa (com mais de 35.000 m² no Beato), transformado num dos maiores polos e campus de inovação, empreendedorismo e criatividade da Europa, é o:",
+    "opcoes": [
+      "Hub Criativo do Beato (HCB)",
+      "Lx Factory",
+      "Taguspark",
+      "Braço de Prata"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Hub Criativo do Beato acolhe a Fábrica de Unicórnios de Lisboa, a incubadora internacional Factory Berlin e centros de inovação da Web Summit.",
+    "fonte": "Câmara Municipal de Lisboa / Startup Lisboa / HCB",
+    "factClusterId": "fc_sta_hubcriativobeato_01"
+  },
+  {
+    "id": "ATU_STA_0010",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que iniciativa pioneira do Município de Lisboa lançada em 2022 («Unicorn Factory Lisboa / Fábrica de Unicórnios»), sediada no Beato e Saldanha, visa apoiar startups de alto potencial («scaleups») na sua expansão global acelerada?",
+    "opcoes": [
+      "Startup Portugal",
+      "Unicorn Factory Lisboa",
+      "Casa do Impacto",
+      "Portugal Ventures"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Unicorn Factory Lisboa já apoiou dezenas de scaleups em programas de aceleração em Web3, Inteligência Artificial e Saúde Digital.",
+    "fonte": "Câmara Municipal de Lisboa / Unicorn Factory Lisboa",
+    "factClusterId": "fc_sta_unicornfactorylisboa_01"
+  },
+  {
+    "id": "ATU_STA_0011",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia da Universidade do Porto («UPTEC»), com polos no Polo Universitário e na Baixa, já apoiou a criação de mais de 700 projetos empresariais inovadores e atraiu centros de I&D de multinacionais?",
+    "opcoes": [
+      "Taguspark",
+      "Nonagon",
+      "UPTEC (Parque de Ciência e Tecnologia da Universidade do Porto)",
+      "Madeira Tecnopolo"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O UPTEC foi galardoado pela Comissão Europeia com o Prémio RegioStars como o melhor projeto de transição económica e inovação regional da UE.",
+    "fonte": "Universidade do Porto / UPTEC / Comissão Europeia",
+    "factClusterId": "fc_sta_uptec_porto_01"
+  },
+  {
+    "id": "ATU_STA_0012",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que instituição privada sem fins lucrativos de Coimbra («Instituto Pedro Nunes — IPN»), ligada à Universidade de Coimbra, foi distinguida internacionalmente como uma das melhores incubadoras universitárias do mundo e acolhe o centro de incubação de empresas da ESA (Agência Espacial Europeia)?",
+    "opcoes": [
+      "INESC TEC",
+      "CEiiA",
+      "BIOCANT Park",
+      "Instituto Pedro Nunes (IPN Coimbra)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O IPN de Coimbra viu nascer unicórnios como a Feedzai e dezenas de empresas de biotecnologia, espaço e informática.",
+    "fonte": "Instituto Pedro Nunes / ESA Space Solutions Portugal",
+    "factClusterId": "fc_sta_ipncoimbra_01"
+  },
+  {
+    "id": "ATU_STA_0013",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro parque de biotecnologia de Portugal («Biocant Park»), situado no concelho de Cantanhede (distrito de Coimbra), concentra dezenas de empresas e centros de investigação de biotecnologia médica, agroalimentar e farmacêutica?",
+    "opcoes": [
+      "Biocant Park (Cantanhede)",
+      "Taguspark",
+      "Sanjotec",
+      "Avepark"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Biocant Park é o maior polo de biociências do país e alberga o Centro de Neurociências e Biologia Celular.",
+    "fonte": "Biocant Park / Município de Cantanhede",
+    "factClusterId": "fc_sta_biocant_01"
+  },
+  {
+    "id": "ATU_STA_0014",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que centro de engenharia e desenvolvimento de produto sediado em Matosinhos («CEiiA»), pioneiro em mobilidade sustentável, aeroespacial e oceanos, concebeu o veículo elétrico Buddy e estruturas para o avião cargueiro militar KC-390?",
+    "opcoes": [
+      "INESC TEC",
+      "CEiiA (Centro de Engenharia e Desenvolvimento)",
+      "PIEP",
+      "CITEVE"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "O CEiiA lidera consórcios de satélites portugueses e a plataforma de créditos de carbono e mobilidade descarbonizada AYR.",
+    "fonte": "CEiiA / Embraer / Ministério da Ciência",
+    "factClusterId": "fc_sta_ceiia_matosinhos_01"
+  },
+  {
+    "id": "ATU_STA_0015",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro parque de ciência e tecnologia de Portugal («Taguspark — Cidade do Conhecimento»), inaugurado em 1992 em Porto Salvo (concelho de Oeiras), alberga centros de investigação do IST, empresas farmacêuticas e tecnológicas?",
+    "opcoes": [
+      "Lispolis",
+      "Madan Parque",
+      "Taguspark (Oeiras)",
+      "Regia-Douro Park"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O Taguspark integra o ecossistema do 'Oeiras Valley' e é a sede de centenas de empresas inovadoras que empregam mais de 16.000 profissionais.",
+    "fonte": "Taguspark / Município de Oeiras",
+    "factClusterId": "fc_sta_taguspark_oeiras_01"
+  },
+  {
+    "id": "ATU_STA_0016",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que laboratório internacional de nanotecnologia situado em Braga («INL — International Iberian Nanotechnology Laboratory»), criado conjuntamente pelos governos de Portugal e Espanha em 2005, é o único centro de investigação em nanociência totalmente internacional do mundo?",
+    "opcoes": [
+      "INESC TEC",
+      "IBMC",
+      "ITQB",
+      "INL (Laboratório Ibérico Internacional de Nanotecnologia)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O INL em Braga reúne cientistas de mais de 40 nacionalidades na vanguarda dos nanosensores, computação quântica e nanomateriais.",
+    "fonte": "INL / Fundação para a Ciência e a Tecnologia (FCT)",
+    "factClusterId": "fc_sta_inl_braga_01"
+  },
+  {
+    "id": "ATU_STA_0017",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia dos Açores situado na cidade de Lagoa (Ilha de São Miguel), focado em inovação digital, sustentabilidade e turismo espacial («Nonagon»), é o polo central da economia do conhecimento no arquipélago?",
+    "opcoes": [
+      "Nonagon — Parque de Ciência e Tecnologia de São Miguel",
+      "Terinov",
+      "Madeira Tecnopolo",
+      "Parkurbis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Nonagon acolhe empresas de desenvolvimento de software, dados oceânicos e tecnologias de observação da Terra.",
+    "fonte": "Governo Regional dos Açores / Nonagon",
+    "factClusterId": "fc_sta_nonagon_acores_01"
+  },
+  {
+    "id": "ATU_STA_0018",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia na Ilha Terceira (Açores), instalado na freguesia da Terra Chã (Angra do Heroísmo), focado em agroindústria, energias renováveis e tecnologias ambientais, é o:",
+    "opcoes": [
+      "Nonagon",
+      "Terinov (Parque de Ciência e Tecnologia da Ilha Terceira)",
+      "Madeira Tecnopolo",
+      "Sanjotec"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Terinov apoia a transferência de tecnologia entre a Universidade dos Açores e as empresas do setor primário e serviços.",
+    "fonte": "Terinov / Governo dos Açores",
+    "factClusterId": "fc_sta_terinov_terceira_01"
+  },
+  {
+    "id": "ATU_STA_0019",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que entidade pública sem fins lucrativos («Startup Portugal»), criada pelo Governo português no âmbito da Estratégia Nacional para o Empreendedorismo, gere instrumentos como o Startup Visa, o Tech Visa e o Vale Incubação?",
+    "opcoes": [
+      "AICEP",
+      "IAPMEI",
+      "Startup Portugal",
+      "ANI (Agência Nacional de Inovação)"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Portugal funciona como ponte oficial entre os fundadores, investidores de capital de risco e as políticas públicas do Estado.",
+    "fonte": "Startup Portugal / IAPMEI / Ministério da Economia",
+    "factClusterId": "fc_sta_startupportugal_01"
+  },
+  {
+    "id": "ATU_STA_0020",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que sociedade de capital de risco pública («Portugal Ventures»), integrada no Grupo Banco Português de Fomento, é o investidor institucional de referência que financia startups em fases iniciais («pre-seed» e «seed»)?",
+    "opcoes": [
+      "Indico Capital Partners",
+      "Shilling Capital",
+      "Armilar Venture Partners",
+      "Portugal Ventures"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Portugal Ventures tem mais de 150 empresas inovadoras em carteira nos setores da tecnologia, ciências da vida e turismo.",
+    "fonte": "Banco Português de Fomento / Portugal Ventures",
+    "factClusterId": "fc_sta_portugalventures_01"
+  },
+  {
+    "id": "ATU_STA_0021",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que importante fundo privado independente de capital de risco sediado em Lisboa («Indico Capital Partners»), fundado por Stephan Morais, Cristina Fonseca e Bernardo Correia, é um dos maiores investidores em tecnologia oceânica sustentável («Blue Economy») e software do Sul da Europa?",
+    "opcoes": [
+      "Indico Capital Partners",
+      "Armilar Venture Partners",
+      "Faber Ventures",
+      "LC Ventures"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "O fundo Indico Blue Ocean financia startups focadas em dados marinhos, aquacultura e conservação dos oceanos.",
+    "fonte": "Indico Capital Partners / Fundo Europeu de Investimento (FEI)",
+    "factClusterId": "fc_sta_indicocapital_01"
+  },
+  {
+    "id": "ATU_STA_0022",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que centro e polo de inovação social e empreendedorismo de impacto da Santa Casa da Misericórdia de Lisboa instalado no Convento de São Pedro de Alcântara («Casa do Impacto») apoia startups com soluções para os Objetivos de Desenvolvimento Sustentável (ODS)?",
+    "opcoes": [
+      "Startup Lisboa",
+      "Casa do Impacto (SCML)",
+      "Beta-i",
+      "Fábrica de Startups"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Casa do Impacto financia projetos com impacto ecológico, inclusão de pessoas com deficiência e combate à solidão dos idosos.",
+    "fonte": "Santa Casa da Misericórdia de Lisboa / Casa do Impacto",
+    "factClusterId": "fc_sta_casadoimpacto_01"
+  },
+  {
+    "id": "ATU_STA_0023",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de inteligência artificial de treino de dados e linguística («Defined.ai» / antiga DefinedCrowd), fundada pela empresária e investigadora Daniela Braga em 2015, fornece dados de voz e texto para assistentes de IA de gigantes como Amazon e Microsoft?",
+    "opcoes": [
+      "Unbabel",
+      "Barkyn",
+      "Defined.ai (Daniela Braga)",
+      "Sensei"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Daniela Braga foi convidada pela administração dos EUA para integrar a Task Force Nacional de Inteligência Artificial.",
+    "fonte": "Defined.ai / Startup Portugal / Casa Branca",
+    "factClusterId": "fc_sta_definedai_danielabraga_01"
+  },
+  {
+    "id": "ATU_STA_0024",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de tecnologia de tradução automática baseada em inteligência artificial e revisão humana descentralizada («Unbabel»), fundada em 2013 por Vasco Pedro e João Graça, permite atendimento multilíngue instantâneo para multinacionais?",
+    "opcoes": [
+      "Defined.ai",
+      "Talkdesk",
+      "Inovretail",
+      "Unbabel"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Unbabel foi graduada da célebre aceleradora Y Combinator de Silicon Valley e mantém sede em Lisboa e São Francisco.",
+    "fonte": "Unbabel / Y Combinator / Startup Lisboa",
+    "factClusterId": "fc_sta_unbabel_01"
+  },
+  {
+    "id": "ATU_STA_0025",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup tecnológica portuguesa pioneira no retalho autónomo sem caixas de pagamento («Sensei»), fundada em 2017 por Vasco Portugal e Joana Rafael, abriu os primeiros supermercados autónomos inteligentes da Europa em parceria com o Continente e a Galp?",
+    "opcoes": [
+      "Sensei",
+      "Barkyn",
+      "Jumia",
+      "Pleez"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "A Sensei utiliza visão computacional e sensores de peso nas prateleiras para permitir compras sem filas nem registadoras manuais.",
+    "fonte": "Sensei Tech / Sonae MC / Galp",
+    "factClusterId": "fc_sta_senseitech_01"
+  },
+  {
+    "id": "ATU_STA_0026",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de assinatura de comida personalizada e telemedicina para cães e gatos («Barkyn»), fundada no Porto por André Jordão e Madalena Rugeroni em 2017, expandiu-se com sucesso para Espanha e Itália?",
+    "opcoes": [
+      "Petz",
+      "Barkyn",
+      "DogHero",
+      "Mido"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Barkyn foi selecionada pelo programa Google for Startups Accelerator e é um dos líderes de 'pet tech' no sul da Europa.",
+    "fonte": "Google for Startups / Barkyn / UPTEC",
+    "factClusterId": "fc_sta_barkyn_01"
+  },
+  {
+    "id": "ATU_STA_0027",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeira incubadora de empresas municipal de Lisboa («Startup Lisboa»), fundada em 2011 na Rua da Prata por iniciativa do Município de Lisboa e do Montepio após a crise financeira, foi o embrião da transformação tecnológica da capital?",
+    "opcoes": [
+      "Fábrica de Startups",
+      "Beta-i",
+      "Startup Lisboa",
+      "Lispolis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Startup Lisboa já incubou centenas de projetos de fundadores de mais de 40 nacionalidades na Baixa Pombalina.",
+    "fonte": "Startup Lisboa / CML / Montepio",
+    "factClusterId": "fc_sta_startuplisboa_01"
+  },
+  {
+    "id": "ATU_STA_0028",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que programa oficial de vistos criado pelo Governo de Portugal em 2018 («Startup Visa») permite a empreendedores e fundadores de países terceiros fixarem-se em Portugal para criar empresas tecnológicas em incubadoras certificadas?",
+    "opcoes": [
+      "Tech Visa",
+      "Golden Visa",
+      "Visto D7",
+      "Startup Visa"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "O Startup Visa é gerido pelo IAPMEI e pela Startup Portugal e já aprovou centenas de empreendedores mundiais.",
+    "fonte": "IAPMEI / Startup Portugal / Ministério dos Negócios Estrangeiros",
+    "factClusterId": "fc_sta_startupvisa_01"
+  },
+  {
+    "id": "ATU_STA_0029",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que vila na Ilha da Madeira («Ponta do Sol») lançou em fevereiro de 2021 a pioneira «Digital Nomads Madeira Islands», a primeira aldeia para nómadas digitais da Europa que atraiu milhares de trabalhadores remotos de todo o mundo?",
+    "opcoes": [
+      "Ponta do Sol (Madeira)",
+      "Machico",
+      "Porto Moniz",
+      "Santana"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O projeto da Startup Madeira no Centro Cultural John dos Passos na Ponta do Sol serviu de modelo internacional para comunidades de trabalho remoto.",
+    "fonte": "Startup Madeira / Governo Regional da Madeira",
+    "factClusterId": "fc_sta_nomadasdigitais_madeira_01"
+  },
+  {
+    "id": "ATU_STA_0030",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que agência espacial portuguesa criada em 2019 com sede na Ilha de Santa Maria (Açores) e escritórios em Lisboa («Portugal Space»), é responsável pela implementação da Estratégia Espacial Portugal 2030 e pelo futuro Porto Espacial de Santa Maria?",
+    "opcoes": [
+      "ESA Portugal",
+      "Portugal Space (Agência Espacial Portuguesa)",
+      "Lusospace",
+      "Geosat"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Portugal Space fomenta a criação do ecossistema New Space, constelações de microssatélites atlânticos e observação dos oceanos.",
+    "fonte": "Portugal Space / Ministério da Ciência e Tecnologia",
+    "factClusterId": "fc_sta_portugalspace_santamaria_01"
+  },
+  {
+    "id": "ATU_STA_0031",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que primeiro satélite inteiramente desenvolvido, desenhado e construído em Portugal após o pioneiro PoSAT-1 de 1993, lançado em março de 2024 a bordo de um foguetão Falcon 9 da SpaceX («Aeros MH-1»), monitoriza a superfície dos oceanos e a biodiversidade marítima?",
+    "opcoes": [
+      "PoSAT-1",
+      "Infante Satellite",
+      "Aeros MH-1",
+      "Lusat-1"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "O nanossatélite Aeros MH-1 foi batizado em homenagem a Manuel Heitor e construído por um consórcio liderado pelo CEiiA em Matosinhos.",
+    "fonte": "CEiiA / Portugal Space / SpaceX",
+    "factClusterId": "fc_sta_aerosmh1_satelite_01"
+  },
+  {
+    "id": "ATU_STA_0032",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de software de gestão de frotas e telemática («Veniam»), fundada no Porto por João Barros e Susana Sargento em 2012 para criar redes de veículos conectados («Internet of Moving Things»), foi adquirida pela multinacional americana Nexar em 2022?",
+    "opcoes": [
+      "Stratio Automotive",
+      "Mobilytics",
+      "Casafari",
+      "Veniam"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "A Veniam transformou os autocarros da STCP no Porto na maior rede Wi-Fi veicular em malha do mundo.",
+    "fonte": "UPTEC / Veniam / Universidade do Porto",
+    "factClusterId": "fc_sta_veniam_joaobarros_01"
+  },
+  {
+    "id": "ATU_STA_0033",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup tecnológica portuguesa de inteligência artificial aplicada à manutenção preditiva de frotas de autocarros e camiões («Stratio Automotive»), fundada por Ricardo Margalho e Rui Sales em Coimbra em 2017, monitoriza veículos em múltiplos continentes?",
+    "opcoes": [
+      "Stratio Automotive (Stratio)",
+      "Veniam",
+      "Infraspeak",
+      "Sensei"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Stratio analisa milhões de dados de telemetria por segundo para evitar avarias súbitas em frotas de transportes públicos.",
+    "fonte": "Instituto Pedro Nunes / Stratio Automotive",
+    "factClusterId": "fc_sta_stratio_01"
+  },
+  {
+    "id": "ATU_STA_0034",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuense fundada no UPTEC em 2015 por Felipe Ávila da Costa e Luís Martins («Infraspeak»), que criou uma plataforma inteligente de gestão de manutenção de edifícios e instalações hoteleiras baseada em IoT e IA, opera em mais de 30 países?",
+    "opcoes": [
+      "Stratio",
+      "Infraspeak",
+      "Barkyn",
+      "Coverflex"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A Infraspeak é utilizada por cadeias hoteleiras como Vila Galé e Pestana e empresas como Siemens e Domino's.",
+    "fonte": "UPTEC / Infraspeak / Portugal Ventures",
+    "factClusterId": "fc_sta_infraspeak_01"
+  },
+  {
+    "id": "ATU_STA_0035",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de compensação flexível e benefícios laborais («Coverflex»), fundada em Braga em 2019 por Luís Rocha, Miguel Amaro e Nuno Pinto, permite aos colaboradores gerir seguros, cheques de infância e refeição num único cartão?",
+    "opcoes": [
+      "Remote",
+      "Doutor Finanças",
+      "Coverflex",
+      "Kidept"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A Coverflex angariou uma das maiores rondas de investimento Série A em fintech em Portugal para expansão em Itália e Espanha.",
+    "fonte": "Coverflex / Startup Portugal",
+    "factClusterId": "fc_sta_coverflex_01"
+  },
+  {
+    "id": "ATU_STA_0036",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa pioneira na recolha e inteligência de dados do mercado imobiliário europeu («Casafari»), fundada em 2018 com sede em Lisboa, agregou a maior base de dados imobiliária limpa da Europa com mais de 200 milhões de imóveis?",
+    "opcoes": [
+      "Imovirtual",
+      "Doutor Finanças",
+      "Alfredo Real Estate",
+      "Casafari"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Casafari elimina anúncios duplicados e fornece ferramentas de análise de preços de mercado para agências imobiliárias e fundos em Espanha, França, Itália e Portugal.",
+    "fonte": "Casafari / Startup Lisboa",
+    "factClusterId": "fc_sta_casafari_01"
+  },
+  {
+    "id": "ATU_STA_0037",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que polo de ciência e inovação em São João da Madeira («Sanjotec»), pioneiro na indústria 4.0, calçado inteligente e tecnologias aplicadas aos setores tradicionais, é o:",
+    "opcoes": [
+      "Sanjotec — Parque de Ciência e Inovação",
+      "Avepark",
+      "Biocant",
+      "Parkurbis"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 2,
+    "explicacao": "A Sanjotec liga o ecossistema de startups ao cluster do calçado, chapelaria e componentes automóveis de São João da Madeira.",
+    "fonte": "Município de São João da Madeira / Sanjotec",
+    "factClusterId": "fc_sta_sanjotec_01"
+  },
+  {
+    "id": "ATU_STA_0038",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia em Guimarães (Caldas das Taipas), sede do polo de engenharia biomédica e novos materiais («Avepark»), acolhe o Instituto Europeu de Excelência em Engenharia de Tecidos e Medicina Regenerativa (3B's)?",
+    "opcoes": [
+      "UPTEC",
+      "Avepark (Parque de Ciência e Tecnologia de Guimarães)",
+      "Taguspark",
+      "Regia-Douro"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "O Grupo 3B's liderado pelo Professor Rui L. Reis no Avepark é uma referência mundial em biomateriais marinhos e regeneração de órgãos.",
+    "fonte": "Universidade do Minho / Avepark / Grupo 3B's",
+    "factClusterId": "fc_sta_avepark_guimaraes_01"
+  },
+  {
+    "id": "ATU_STA_0039",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia em Vila Real dedicado à agroindústria, vitivinicultura sustentável e economia verde («Regia-Douro Park»), funciona em articulação direta com a UTAD?",
+    "opcoes": [
+      "Parkurbis",
+      "Nonagon",
+      "Regia-Douro Park (Parque de Ciência e Tecnologia de Vila Real)",
+      "Madis"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "O Regia-Douro Park acolhe o Centro de Excelência da Vinha e do Vinho e incuba empresas do setor agroalimentar transmontano e duriense.",
+    "fonte": "UTAD / Regia-Douro Park / Município de Vila Real",
+    "factClusterId": "fc_sta_regiadouropark_01"
+  },
+  {
+    "id": "ATU_STA_0040",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que parque de ciência e tecnologia situado na Covilhã («Parkurbis»), especializado em tecnologias de informação, telecomunicações e têxteis técnicos avançados, é impulsionado pela Universidade da Beira Interior (UBI)?",
+    "opcoes": [
+      "Taguspark",
+      "Sanjotec",
+      "Terinov",
+      "Parkurbis (Parque de Ciência e Tecnologia da Covilhã)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 2,
+    "explicacao": "O Parkurbis posiciona a Beira Interior como polo atrativo de engenharia de software e centros de competência tecnológica.",
+    "fonte": "Parkurbis / UBI / Município da Covilhã",
+    "factClusterId": "fc_sta_parkurbis_covilha_01"
+  },
+  {
+    "id": "ATU_STA_0041",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que evento anual de inovação e startups no Porto («Porto Tech Hub Conference» / «Scaleup Porto»), dinamizado pela Câmara Municipal do Porto, apoia o crescimento das empresas tecnológicas da região Norte?",
+    "opcoes": [
+      "Scaleup Porto",
+      "Web Summit",
+      "Lisbon Investment Summit",
+      "Tech in Azores"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O programa ScaleUp Porto apoia o ecossistema empreendedor portuense que atrai centenas de empresas internacionais para a cidade.",
+    "fonte": "Câmara Municipal do Porto / ScaleUp Porto",
+    "factClusterId": "fc_sta_scaleupporto_01"
+  },
+  {
+    "id": "ATU_STA_0042",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que importante programa de aceleração e consultoria de inovação aberta português fundado em 2010 («Beta-i»), sediado em Lisboa, liga grandes corporações multinacionais a startups em todo o mundo?",
+    "opcoes": [
+      "Fábrica de Startups",
+      "Beta-i",
+      "Startup Lisboa",
+      "BGI (Building Global Innovators)"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 1,
+    "explicacao": "A Beta-i organiza o 'Lisbon Challenge' e programas de aceleração colaborativa em setores como a energia, seguros e economia circular.",
+    "fonte": "Beta-i / Startup Portugal",
+    "factClusterId": "fc_sta_betai_01"
+  },
+  {
+    "id": "ATU_STA_0043",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que iniciativa pioneira de educação em programação informática gratuita e sem professores tradicionais («Escola 42 Lisboa» e «Escola 42 Porto»), baseada em aprendizagem prática entre pares (peer-to-peer), formou milhares de programadores em Portugal?",
+    "opcoes": [
+      "Le Wagon",
+      "Ironhack",
+      "Escola 42 (42 Lisboa / 42 Porto)",
+      "Code for All"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "A 42 foi fundada em Paris e trazida para Portugal por Pedro Santa Clara e mecenas privados para democratizar o acesso à engenharia de software.",
+    "fonte": "Escola 42 Lisboa / Fundação José Neves",
+    "factClusterId": "fc_sta_escola42portugal_01"
+  },
+  {
+    "id": "ATU_STA_0044",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que fundação criada em 2020 pelo fundador da Farfetch, José Neves («Fundação José Neves»), com dotação de 50 milhões de euros, financia bolsas e promove a educação, competências digitais e empreendedorismo através do portal Brighter Future?",
+    "opcoes": [
+      "Fundação Calouste Gulbenkian",
+      "Fundação Champalimaud",
+      "Fundação Francisco Manuel dos Santos",
+      "Fundação José Neves (FJN)"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Fundação José Neves lançou o programa 'ISA FJN' (Acordos de Partilha de Rendimentos) para financiar cursos e mestrados aos jovens portugueses.",
+    "fonte": "Fundação José Neves / Brighter Future",
+    "factClusterId": "fc_sta_fundacaojoseneves_01"
+  },
+  {
+    "id": "ATU_STA_0045",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que prestigiado instituto de investigação aplicada sediado no Porto («INESC TEC — Instituto de Engenharia de Sistemas e Computadores, Tecnologia e Ciência»), associado à Universidade do Porto, é líder em sistemas de energia, inteligência artificial e robótica marinha?",
+    "opcoes": [
+      "INESC TEC",
+      "INL",
+      "ITQB",
+      "LNEC"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O INESC TEC desenvolve robôs submarinos autónomos para exploração oceânica e algoritmos de gestão de redes elétricas inteligentes.",
+    "fonte": "INESC TEC / Faculdade de Engenharia da U.Porto",
+    "factClusterId": "fc_sta_inesctec_porto_01"
+  },
+  {
+    "id": "ATU_STA_0046",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que empresa portuguesa de inteligência artificial e visão computacional («YData»), fundada em Lisboa em 2020 por Fabiana Clemente e Gonçalo Martins Ribeiro, pioneira na geração de dados sintéticos para treino seguro de IA sem violação de privacidade, recebeu investimento do Google?",
+    "opcoes": [
+      "Defined.ai",
+      "YData",
+      "Feedzai",
+      "Unbabel"
+    ],
+    "respostaCorreta": 1,
+    "dificuldade": 2,
+    "explicacao": "A YData foi selecionada pelo Google for Startups e lidera a comunidade internacional de ciência de dados focada em 'Data-Centric AI'.",
+    "fonte": "Google for Startups / YData",
+    "factClusterId": "fc_sta_ydata_fabianaclemente_01"
+  },
+  {
+    "id": "ATU_STA_0047",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de software financeiro para planeamento e consolidação orçamental de PMEs («DoiT International» / «Valispace»), fundada em Lisboa para engenharia de satélites e sistemas complexos, foi adquirida pela gigante de software de engenharia Altair em 2024?",
+    "opcoes": [
+      "Veniam",
+      "Zaask",
+      "Valispace",
+      "Uniplaces"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 2,
+    "explicacao": "A Valispace foi fundada por Marco Witzmann e Louise Lindblad para desenhar satélites e foguetões em ambiente colaborativo na nuvem.",
+    "fonte": "Valispace / Altair / Startup Portugal",
+    "factClusterId": "fc_sta_valispace_01"
+  },
+  {
+    "id": "ATU_STA_0048",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que plataforma digital portuguesa de alojamento universitário e de estudantes internacionais fundada em Lisboa em 2011 («Uniplaces»), por Miguel Amaro, Mariano Kostelec e Ben Grech, foi uma das pioneiras do ecossistema de startups de Lisboa?",
+    "opcoes": [
+      "Student.com",
+      "Spotahome",
+      "Casafari",
+      "Uniplaces"
+    ],
+    "respostaCorreta": 3,
+    "dificuldade": 1,
+    "explicacao": "A Uniplaces revolucionou o arrendamento para estudantes Erasmus e abriu caminho para a geração de ouro de empreendedores de Lisboa.",
+    "fonte": "Startup Lisboa / Uniplaces",
+    "factClusterId": "fc_sta_uniplaces_01"
+  },
+  {
+    "id": "ATU_STA_0049",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que startup portuguesa de consultoria financeira e renegociação de crédito à habitação («Doutor Finanças»), fundada em Lisboa em 2014, ajuda centenas de milhares de famílias portuguesas a poupar em créditos e seguros?",
+    "opcoes": [
+      "Doutor Finanças",
+      "Coverflex",
+      "ComparaJá",
+      "Fixando"
+    ],
+    "respostaCorreta": 0,
+    "dificuldade": 1,
+    "explicacao": "O Doutor Finanças é um dos principais intermediários de crédito certificados pelo Banco de Portugal e líder em literacia financeira.",
+    "fonte": "Banco de Portugal / Doutor Finanças",
+    "factClusterId": "fc_sta_doutorfinancas_01"
+  },
+  {
+    "id": "ATU_STA_0050",
+    "tema": "Atualidade — Portugal Agora",
+    "subtema": "Inovação & Startups",
+    "pergunta": "Que classificação internacional atribuída no relatório da European Innovation Scoreboard da Comissão Europeia posiciona Portugal no grupo dos países com ecossistemas de inovação mais dinâmicos e abertos a investimento externo na Europa?",
+    "opcoes": [
+      "Líder Mundial",
+      "Mercado Emergente",
+      "Inovador Moderado / Inovador Notável (European Innovation Scoreboard)",
+      "Zona de Baixa Inovação"
+    ],
+    "respostaCorreta": 2,
+    "dificuldade": 1,
+    "explicacao": "Portugal destaca-se internacionalmente na percentagem de licenciados em ciências e engenharia, digitalização dos serviços públicos e atração de investimento em I&D.",
+    "fonte": "Comissão Europeia / COTEC Portugal / DGEEC",
+    "factClusterId": "fc_sta_european_innovation_scoreboard_01"
+  }
+]
