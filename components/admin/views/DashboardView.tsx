@@ -3,7 +3,7 @@
 import React from 'react'
 import {
   Users,
-  Bot,
+  Trophy,
   Swords,
   HelpCircle,
   TrendingUp,
@@ -26,8 +26,6 @@ export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) 
   const kpis = data?.kpis || {
     totalUsers: 0,
     onlineHumans: 0,
-    activeBots: 0,
-    inMatchBots: 0,
     activeMatchesCount: 0,
     completedMatchesCount: 0,
     totalQuestions: 20050,
@@ -59,7 +57,7 @@ export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) 
               Visão Geral da Plataforma
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 font-medium">
-              Monitorização em tempo real de jogadores, duelos, bots virtuais e base editorial de Portugal.
+              Monitorização em tempo real de jogadores humanos, duelos 1v1 e base editorial de Portugal.
             </p>
           </div>
 
@@ -108,24 +106,24 @@ export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) 
           </div>
         </div>
 
-        {/* Cartão 2: Bots Virtuais Ativos */}
+        {/* Cartão 2: Rankings Nacionais */}
         <div
-          onClick={() => onNavigateToModule('bots')}
+          onClick={() => onNavigateToModule('rankings')}
           className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-xl backdrop-blur-md hover:border-cyan-500/40 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Bots Virtuais</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Rankings & Perfis</span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 group-hover:scale-110 transition-transform">
-              <Bot className="h-4 w-4" />
+              <Trophy className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="font-display text-2xl sm:text-3xl font-black text-white">
-              {kpis.activeBots}{' '}
-              <span className="text-xs font-normal text-slate-400">ativos (isBot: true)</span>
+              {kpis.totalUsers}{' '}
+              <span className="text-xs font-normal text-slate-400">classificados</span>
             </div>
             <p className="mt-1 text-xs text-slate-400">
-              <strong className="text-cyan-400">{kpis.inMatchBots}</strong> atualmente em partidas
+              20 distritos com progressão por XP
             </p>
           </div>
         </div>

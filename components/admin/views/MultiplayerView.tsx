@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import {
   Swords,
   Users,
-  Bot,
   RefreshCw,
   Clock,
   Ban,
@@ -139,7 +138,6 @@ export function MultiplayerView({ getIdToken }: MultiplayerViewProps) {
             {activeDuels.map((duel: any) => {
               const p1 = duel.player1 || {}
               const p2 = duel.player2 || {}
-              const isP2Bot = duel.isBotMatch || p2.isBot || false
 
               return (
                 <div
@@ -175,13 +173,13 @@ export function MultiplayerView({ getIdToken }: MultiplayerViewProps) {
                     {/* Jogador 2 */}
                     <div className="col-span-5 flex flex-col items-center p-3 rounded-2xl bg-slate-950/60 border border-white/5">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 font-bold border border-cyan-500/30 mb-1">
-                        {isP2Bot ? <Bot className="h-5 w-5" /> : <Users className="h-5 w-5" />}
+                        <Users className="h-5 w-5" />
                       </div>
                       <span className="font-bold text-white truncate max-w-full">
-                        {p2.displayName || (isP2Bot ? 'Bot Virtual' : 'Jogador 2')}
+                        {p2.displayName || 'Jogador 2'}
                       </span>
                       <span className="text-[10px] text-slate-400">
-                        {isP2Bot ? '🤖 BOT' : `📍 ${p2.district || 'Porto'}`}
+                        📍 {p2.district || 'Portugal'}
                       </span>
                       <span className="text-cyan-400 font-mono font-bold mt-1">{p2.score || 0} pts</span>
                     </div>

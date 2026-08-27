@@ -647,36 +647,6 @@ export async function sendRoomHeartbeat(roomId: string): Promise<void> {
   }
 }
 
-/**
- * Ativa o fallback automático para um Desafiante Virtual (Bot) se não for encontrado adversário humano
- */
-export async function triggerBotFallback(
-  roomId: string,
-  user: { uid: string; displayName?: string | null; photoURL?: string | null },
-  profile?: { level?: number; district?: string; rating?: number },
-): Promise<{ success: boolean; opponent?: any }> {
-  if (!roomId || !user?.uid) return { success: false }
-  try {
-    const res = await fetch('/api/duel/bot-match', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        roomId,
-        userId: user.uid,
-        level: profile?.level || 1,
-        rating: profile?.rating || 1000,
-      }),
-    })
-    const data = await res.json()
-    if (data.success && data.opponent) {
-      return { success: true, opponent: data.opponent }
-    }
-  } catch (e) {
-    console.warn('[Matchmaking] Falha ao acionar fallback de bot:', e)
-  }
-  return { success: false }
-}
-
 // -------------------------------------------------------------------------
 // Funções de compatibilidade para duelQueue
 // -------------------------------------------------------------------------

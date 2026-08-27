@@ -24,7 +24,6 @@ import {
 import { SessionConflictModal } from '@/components/session-conflict-modal'
 import { VALID_DISTRICTS } from '@/data/districts'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
-import { ensureBotsInitializedClientSide } from '@/lib/bot-network/client-bot-sync'
 
 export type AuthState = {
   user: User | null
@@ -63,10 +62,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('[AUTH] Erro ao terminar sessão:', err)
       window.location.href = redirectUrl
     }
-  }, [])
-
-  useEffect(() => {
-    ensureBotsInitializedClientSide().catch(() => {})
   }, [])
 
   // BLINDAGEM DO LISTENER DE AUTENTICAÇÃO E FIRESTORE

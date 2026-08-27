@@ -35,7 +35,7 @@ export function OnlineUsersBadge({
   }
 
   const hookOnline = useOnlineUsers()
-  const humanOnlineCount = Math.max(1, presenceData?.onlineCount ?? hookOnline ?? 1)
+  const humanOnlineCount = presenceData?.onlineCount ?? hookOnline ?? 0
   const activeMatchesCount = Math.max(0, (presenceData?.duelCount ?? 0) + (presenceData?.playingCount ?? 0))
   const activeUsers = presenceData?.activeUsers || []
 

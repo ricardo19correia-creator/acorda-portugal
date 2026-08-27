@@ -66,7 +66,6 @@ export function SegurancaView({ adminUser }: SegurancaViewProps) {
               <div>✓ adminUsers/* (Apenas Admin/Owner)</div>
               <div>✓ adminAuditLogs/* (Append-only estrito)</div>
               <div>✓ adminSettings/* (Apenas Admin/Owner)</div>
-              <div>✓ botPlayers/* (Apenas Admin/Owner)</div>
             </div>
           </div>
         </div>

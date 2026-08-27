@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Trophy, Medal, MapPin, Search, RefreshCw, Bot, User, Filter } from 'lucide-react'
+import { Trophy, Medal, MapPin, Search, RefreshCw, User } from 'lucide-react'
 import { VALID_DISTRICTS } from '@/data/districts'
 
 interface RankingsViewProps {
@@ -10,7 +10,6 @@ interface RankingsViewProps {
 
 export function RankingsView({ getIdToken }: RankingsViewProps) {
   const [district, setDistrict] = useState('all')
-  const [typeFilter, setTypeFilter] = useState<'all' | 'humans' | 'bots'>('all')
   const [players, setPlayers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -24,40 +23,24 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
       if (district !== 'all') params.set('district', district)
       params.set('limit', '100')
 
-      // 1. Carregar jogadores humanos
+      // Carregar jogadores humanos reais
       const resPlayers = await fetch(`/api/admin/players?${params.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       const dataPlayers = await resPlayers.json()
-      const humanList = (dataPlayers.players || []).map((p: any) => ({ ...p, isBot: false }))
-
-      // 2. Carregar bots
-      const resBots = await fetch(`/api/admin/bots?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      const dataBots = await resBots.json()
-      const botList = (dataBots.bots || []).map((b: any) => ({
-        uid: b.id,
-        displayName: b.displayName,
-        district: b.district,
-        level: b.level,
-        xp: b.xp,
-        rating: b.rating,
-        wins: b.wins,
-        isBot: true,
+      const list = (dataPlayers.players || []).map((p: any) => ({
+        uid: p.uid,
+        displayName: p.displayName,
+        district: p.district,
+        level: p.level,
+        xp: p.xp,
+        rating: p.rating || 1000,
+        wins: p.wins || p.wins1v1 || 0,
       }))
 
-      let combined = [...humanList, ...botList]
-
-      if (typeFilter === 'humans') {
-        combined = combined.filter((p) => !p.isBot)
-      } else if (typeFilter === 'bots') {
-        combined = combined.filter((p) => p.isBot)
-      }
-
-      // Ordenar por XP ou Rating desc
-      combined.sort((a, b) => (b.xp || 0) - (a.xp || 0))
-      setPlayers(combined.slice(0, 50))
+      // Ordenar por XP desc
+      list.sort((a: any, b: any) => (b.xp || 0) - (a.xp || 0))
+      setPlayers(list.slice(0, 50))
     } catch (e) {
       console.error(e)
     } finally {
@@ -67,7 +50,7 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
 
   useEffect(() => {
     loadRankings()
-  }, [district, typeFilter])
+  }, [district])
 
   return (
     <div className="space-y-6">
@@ -83,48 +66,16 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
-          {/* Filtro de Tipo: Todos, Humanos, Bots */}
-          <div className="flex rounded-2xl border border-white/15 bg-slate-950 p-1 text-xs font-bold">
-            <button
-              type="button"
-              onClick={() => setTypeFilter('all')}
-              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
-                typeFilter === 'all' ? 'bg-amber-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Todos
-            </button>
-            <button
-              type="button"
-              onClick={() => setTypeFilter('humans')}
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 cursor-pointer ${
-                typeFilter === 'humans' ? 'bg-emerald-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <User className="h-3 w-3" />
-              <span>Humanos</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setTypeFilter('bots')}
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 cursor-pointer ${
-                typeFilter === 'bots' ? 'bg-cyan-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Bot className="h-3 w-3" />
-              <span>Bots</span>
-            </button>
-          </div>
-
+          {/* Filtro de Distrito */}
           <select
             value={district}
             onChange={(e) => setDistrict(e.target.value)}
-            className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-amber-400 cursor-pointer"
+            className="rounded-2xl border border-white/15 bg-slate-950 px-3.5 py-2 text-xs font-bold text-white focus:outline-none focus:border-amber-500/50"
           >
-            <option value="all">🏆 Ranking Geral de Portugal</option>
+            <option value="all">Todos os Distritos</option>
             {VALID_DISTRICTS.map((d) => (
               <option key={d} value={d}>
-                📍 {d}
+                {d}
               </option>
             ))}
           </select>
@@ -132,76 +83,83 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
           <button
             type="button"
             onClick={loadRankings}
-            className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 transition-colors cursor-pointer"
+            disabled={loading}
+            className="flex items-center gap-1.5 rounded-2xl border border-white/15 bg-slate-950 px-3.5 py-2 text-xs font-bold text-slate-300 hover:text-white transition-all cursor-pointer"
           >
-            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin text-amber-400' : ''}`} />
+            <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
+            <span>Atualizar</span>
           </button>
         </div>
       </div>
 
+      {/* Tabela de Rankings */}
       <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur-md">
-        <table className="w-full text-left text-xs text-slate-300">
-          <thead className="border-b border-white/10 bg-slate-950/60 font-display text-[10px] font-black uppercase tracking-wider text-slate-400">
-            <tr>
-              <th className="px-5 py-3.5">Posição</th>
-              <th className="px-5 py-3.5">Jogador</th>
-              <th className="px-4 py-3.5">Distrito</th>
-              <th className="px-4 py-3.5">Nível</th>
-              <th className="px-4 py-3.5">XP Total</th>
-              <th className="px-4 py-3.5">Rating ELO</th>
-              <th className="px-4 py-3.5">Vitórias</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {loading ? (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="border-b border-white/10 bg-slate-950/60 font-bold uppercase tracking-wider text-slate-400 text-[10px]">
               <tr>
-                <td colSpan={7} className="py-12 text-center text-slate-400">
-                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-amber-400" />
-                  <span>A carregar ranking com filtros aplicados...</span>
-                </td>
+                <th className="py-3 px-4">Pos</th>
+                <th className="py-3 px-4">Jogador</th>
+                <th className="py-3 px-4">Distrito</th>
+                <th className="py-3 px-4">Nível</th>
+                <th className="py-3 px-4 text-right">XP Acumulado</th>
+                <th className="py-3 px-4 text-right">Rating ELO</th>
+                <th className="py-3 px-4 text-right">Vitórias</th>
               </tr>
-            ) : players.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="py-12 text-center text-slate-400">
-                  Sem jogadores classificados para este filtro.
-                </td>
-              </tr>
-            ) : (
-              players.map((p, index) => (
-                <tr key={p.uid} className="hover:bg-white/5 transition-colors">
-                  <td className="px-5 py-3.5 font-display font-black text-xs">
-                    {index === 0 ? (
-                      <span className="text-amber-400">🥇 1º</span>
-                    ) : index === 1 ? (
-                      <span className="text-slate-300">🥈 2º</span>
-                    ) : index === 2 ? (
-                      <span className="text-amber-600">🥉 3º</span>
-                    ) : (
-                      <span className="text-slate-500 font-mono">#{index + 1}</span>
-                    )}
+            </thead>
+            <tbody className="divide-y divide-white/5 font-medium text-slate-300">
+              {loading ? (
+                <tr>
+                  <td colSpan={7} className="py-12 text-center text-slate-500">
+                    <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-amber-500" />
+                    <span>A carregar classificações...</span>
                   </td>
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-white">{p.displayName || 'Jogador'}</span>
-                      {p.isBot && (
-                        <span className="px-1.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                          🤖 Bot
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-4 py-3.5 font-bold text-slate-300">📍 {p.district || 'Portugal'}</td>
-                  <td className="px-4 py-3.5 font-bold text-emerald-400 font-mono">Nv.{p.level || 1}</td>
-                  <td className="px-4 py-3.5 font-black text-amber-400 font-mono">
-                    {(p.xp || 0).toLocaleString('pt-PT')} XP
-                  </td>
-                  <td className="px-4 py-3.5 font-mono text-white">{p.rating || 1000}</td>
-                  <td className="px-4 py-3.5 font-mono text-emerald-400">{p.wins || p.stats?.wins || 0}</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : players.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="py-12 text-center text-slate-500">
+                    Nenhum jogador encontrado para este distrito.
+                  </td>
+                </tr>
+              ) : (
+                players.map((p, idx) => (
+                  <tr key={p.uid} className="hover:bg-white/5 transition-colors">
+                    <td className="py-3 px-4 font-black">
+                      {idx === 0 && <span className="text-amber-400">🥇 1º</span>}
+                      {idx === 1 && <span className="text-slate-300">🥈 2º</span>}
+                      {idx === 2 && <span className="text-amber-600">🥉 3º</span>}
+                      {idx > 2 && <span className="text-slate-500">{idx + 1}º</span>}
+                    </td>
+                    <td className="py-3 px-4 font-bold text-white flex items-center gap-2">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-slate-300">
+                        <User className="h-4 w-4" />
+                      </div>
+                      <span>{p.displayName || 'Jogador'}</span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="inline-flex items-center gap-1 text-slate-400">
+                        <MapPin className="h-3 w-3 text-slate-500" />
+                        {p.district || 'Portugal'}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="font-mono font-bold text-cyan-400">Nv.{p.level || 1}</span>
+                    </td>
+                    <td className="py-3 px-4 text-right font-mono font-bold text-amber-400">
+                      {(p.xp || 0).toLocaleString('pt-PT')} XP
+                    </td>
+                    <td className="py-3 px-4 text-right font-mono font-bold text-purple-400">
+                      {p.rating || 1000}
+                    </td>
+                    <td className="py-3 px-4 text-right font-mono font-bold text-emerald-400">
+                      {p.wins || 0}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )

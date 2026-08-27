@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 export function useOnlineUsers() {
-  const [onlineCount, setOnlineCount] = useState<number>(1)
+  const [onlineCount, setOnlineCount] = useState<number>(0)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -28,9 +28,9 @@ export function useOnlineUsers() {
         if (res.ok && isMounted) {
           const data = await res.json()
           if (typeof data?.online === 'number') {
-            setOnlineCount(Math.max(1, data.online))
+            setOnlineCount(data.online)
           } else if (typeof data?.onlineCount === 'number') {
-            setOnlineCount(Math.max(1, data.onlineCount))
+            setOnlineCount(data.onlineCount)
           }
         }
       } catch (e) {

@@ -4,7 +4,6 @@ import React from 'react'
 import {
   LayoutDashboard,
   Users,
-  Bot,
   Swords,
   HelpCircle,
   Trophy,
@@ -27,7 +26,6 @@ import { cn } from '@/lib/utils'
 export type AdminModuleId =
   | 'dashboard'
   | 'jogadores'
-  | 'bots'
   | 'multiplayer'
   | 'perguntas'
   | 'rankings'
@@ -55,7 +53,6 @@ interface NavItem {
 export const ADMIN_NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'jogadores', label: 'Jogadores', icon: Users },
-  { id: 'bots', label: 'Bot Control', icon: Bot, badge: 'IA' },
   { id: 'multiplayer', label: 'Multiplayer 1v1', icon: Swords, badge: 'Live' },
   { id: 'perguntas', label: 'Perguntas & Duplicados', icon: HelpCircle, badge: '20K' },
   { id: 'rankings', label: 'Rankings', icon: Trophy },

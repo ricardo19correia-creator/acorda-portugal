@@ -296,7 +296,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     })
 
     return {
-      onlineCount: Math.max(1, validUsers.length),
+      onlineCount: validUsers.length,
       playingCount: playing,
       duelCount: duel,
       activeUsers: formattedList,

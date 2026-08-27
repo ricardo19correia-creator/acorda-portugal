@@ -141,17 +141,6 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // Perfil PÚBLICO de Bots Oficiais (isBot: true)
-    match /botPlayers/{botId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
-    // Configuração PRIVADA de Bots Oficiais (Sensível / Exclusivo Admin)
-    match /botPlayersPrivate/{botId} {
-      allow read, write: if isAdmin();
-    }
-
     // Alertas do Sistema
     match /adminAlerts/{alertId} {
       allow read, write: if isAdmin();
