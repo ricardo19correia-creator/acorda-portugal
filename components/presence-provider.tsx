@@ -26,12 +26,14 @@ import { usePathname } from 'next/navigation'
 import {
   type PresenceData,
   type PublicActiveUser,
+  type Participant,
   type UserActivityState,
   type DistrictPresenceSummary,
   type CanonicalPresenceState,
   ACTIVITY_LABELS,
   OFFLINE_THRESHOLD_MS,
   sanitizeDisplayName,
+  normalizeParticipant,
 } from '@/lib/presence'
 import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
 import { OFFICIAL_20_DISTRICTS } from '@/lib/npc-system/npc-catalog'
@@ -269,6 +271,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     districtDistribution,
     byDistrictList,
     activeUsers,
+    participants,
   } = useMemo(() => {
     const validUsers = rawPresenceDocs.filter((p) => {
       if (!p.online) return false
@@ -355,6 +358,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     })
 
     const distList = Object.values(distMap).sort((a, b) => b.total - a.total || a.name.localeCompare(b.name, 'pt-PT'))
+    const normalizedParticipants: Participant[] = combinedList.map((u) => normalizeParticipant(u, sessionId))
 
     return {
       onlineCount: totalVisibleOnline,
@@ -368,6 +372,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       districtDistribution: distMap,
       byDistrictList: distList,
       activeUsers: combinedList,
+      participants: normalizedParticipants,
     }
   }, [rawPresenceDocs, now, sessionId])
 
@@ -384,6 +389,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       districtDistribution,
       byDistrictList,
       activeUsers,
+      participants,
       currentActivity,
       setActivity,
       loading,
@@ -401,6 +407,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       districtDistribution,
       byDistrictList,
       activeUsers,
+      participants,
       currentActivity,
       setActivity,
       loading,

@@ -80,6 +80,12 @@ export interface DuelPlayerData {
   answers: DuelAnswer[]
   finished: boolean
   finishedAt?: number | null
+  playerType?: 'human' | 'npc'
+  isNpc?: boolean
+  xp?: number
+  elo?: number
+  rating?: number
+  accuracy?: number
 }
 
 export interface DuelQuestion {

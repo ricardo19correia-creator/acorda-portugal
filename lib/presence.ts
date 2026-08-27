@@ -31,6 +31,22 @@ export type PublicActiveUser = {
   isCurrentUser: boolean
   playerType: PlayerType
   isNpc?: boolean
+  elo?: number
+}
+
+export interface Participant {
+  id: string
+  playerType: PlayerType
+  name: string
+  avatar: string
+  xp: number
+  level: number
+  district: string
+  activity: UserActivityState
+  activityLabel: string
+  elo?: number
+  isCurrentUser?: boolean
+  lastSeen?: number
 }
 
 export interface DistrictPresenceSummary {
@@ -52,6 +68,7 @@ export interface CanonicalPresenceState {
   districtDistribution: Record<string, DistrictPresenceSummary>
   byDistrictList: DistrictPresenceSummary[]
   activeUsers: PublicActiveUser[]
+  participants: Participant[]
   currentActivity: UserActivityState
   setActivity: (activity: UserActivityState, gameId?: string | null) => void
   loading: boolean
@@ -98,4 +115,33 @@ export function sanitizeDisplayName(name?: string | null, isGuest = false, distr
     return usernamePart.length > 0 ? usernamePart : 'Jogador'
   }
   return clean.slice(0, 24)
+}
+
+export function normalizeParticipant(raw: any, currentSessionOrUid?: string): Participant {
+  const isNpc = raw?.playerType === 'npc' || raw?.isNpc === true || String(raw?.id || raw?.uid || raw?.userId || '').startsWith('npc_')
+  const playerType: PlayerType = isNpc ? 'npc' : 'human'
+  const id = String(raw?.id || raw?.uid || raw?.userId || raw?.npcId || 'anonymous')
+  const name = sanitizeDisplayName(raw?.name || raw?.displayName || raw?.username, !raw?.uid && !raw?.id, raw?.district)
+  const avatar = raw?.avatar || raw?.photoURL || raw?.avatarUrl || '/images/avatars/camoes-2050.jpg'
+  const xp = typeof raw?.xp === 'number' && !isNaN(raw.xp) && raw.xp >= 0 ? raw.xp : (isNpc ? 25000 : 0)
+  const level = typeof raw?.level === 'number' && raw.level > 0 ? raw.level : 1
+  const district = raw?.district && String(raw.district).trim() ? String(raw.district).trim() : 'Lisboa'
+  const activity: UserActivityState = (raw?.activity as UserActivityState) || 'browsing'
+  const activityLabel = raw?.activityLabel || ACTIVITY_LABELS[activity]?.label || 'A explorar'
+  const elo = typeof raw?.elo === 'number' ? raw.elo : typeof raw?.rating === 'number' ? raw.rating : 1000
+
+  return {
+    id,
+    playerType,
+    name,
+    avatar,
+    xp,
+    level,
+    district,
+    activity,
+    activityLabel,
+    elo,
+    isCurrentUser: Boolean(currentSessionOrUid && (id === currentSessionOrUid || raw?.userId === currentSessionOrUid)),
+    lastSeen: typeof raw?.lastSeen === 'number' ? raw.lastSeen : Date.now(),
+  }
 }

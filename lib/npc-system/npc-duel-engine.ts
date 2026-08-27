@@ -34,11 +34,11 @@ export function simulateNpcDuelPerformance(
     // Probabilidade estocástica com base na precisão do NPC
     const isCorrect = Math.random() <= effectiveAcc
 
-    // Tempo gaussiano humanizado
-    const baseTime = npc.avgResponseTimeSeconds
-    const jitter = (Math.random() - 0.5) * 2.2
-    const hesitation = !isCorrect ? 1.2 : 0
-    const responseTimeSeconds = Number(Math.max(1.8, Math.min(9.5, baseTime + jitter + hesitation)).toFixed(1))
+    // Tempo gaussiano humanizado (entre 2.2s e 5.8s)
+    const baseTime = npc.avgResponseTimeSeconds || 3.5
+    const jitter = (Math.random() - 0.5) * 1.6
+    const hesitation = !isCorrect ? 0.8 : 0
+    const responseTimeSeconds = Number(Math.max(2.2, Math.min(5.8, baseTime + jitter + hesitation)).toFixed(1))
 
     totalTimeSeconds += responseTimeSeconds
 

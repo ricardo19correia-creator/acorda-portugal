@@ -183,10 +183,15 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
         (opponentInfo as any).avatar ||
         null
       const normalizedOpponent = {
+        uid: (opponentInfo as any).uid || (opponentInfo as any).id || 'opponent_id',
+        playerType: (opponentInfo as any).playerType || 'npc',
+        isNpc: (opponentInfo as any).isNpc ?? true,
         displayName: opponentInfo.displayName,
         photoURL: oppPhoto,
         level: opponentInfo.level ?? 1,
-        district: opponentInfo.district ?? 'Portugal',
+        xp: (opponentInfo as any).xp ?? 25000,
+        elo: (opponentInfo as any).elo ?? (opponentInfo as any).rating ?? 1000,
+        district: opponentInfo.district ?? 'Lisboa',
       }
       setTicket({
         userId: playerUid,
