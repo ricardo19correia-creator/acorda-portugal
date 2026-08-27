@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Trophy, Medal, MapPin, Search, RefreshCw, Flame, Award } from 'lucide-react'
+import { Trophy, Medal, MapPin, Search, RefreshCw, Bot, User, Filter } from 'lucide-react'
 import { VALID_DISTRICTS } from '@/data/districts'
 
 interface RankingsViewProps {
@@ -10,6 +10,7 @@ interface RankingsViewProps {
 
 export function RankingsView({ getIdToken }: RankingsViewProps) {
   const [district, setDistrict] = useState('all')
+  const [typeFilter, setTypeFilter] = useState<'all' | 'humans' | 'bots'>('all')
   const [players, setPlayers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -21,17 +22,42 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
 
       const params = new URLSearchParams()
       if (district !== 'all') params.set('district', district)
-      params.set('limit', '50')
+      params.set('limit', '100')
 
-      const res = await fetch(`/api/admin/players?${params.toString()}`, {
+      // 1. Carregar jogadores humanos
+      const resPlayers = await fetch(`/api/admin/players?${params.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      const data = await res.json()
-      if (data.success) {
-        // Ordenar por XP ou Rating
-        const sorted = (data.players || []).sort((a: any, b: any) => (b.xp || 0) - (a.xp || 0))
-        setPlayers(sorted)
+      const dataPlayers = await resPlayers.json()
+      const humanList = (dataPlayers.players || []).map((p: any) => ({ ...p, isBot: false }))
+
+      // 2. Carregar bots
+      const resBots = await fetch(`/api/admin/bots?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      const dataBots = await resBots.json()
+      const botList = (dataBots.bots || []).map((b: any) => ({
+        uid: b.id,
+        displayName: b.displayName,
+        district: b.district,
+        level: b.level,
+        xp: b.xp,
+        rating: b.rating,
+        wins: b.wins,
+        isBot: true,
+      }))
+
+      let combined = [...humanList, ...botList]
+
+      if (typeFilter === 'humans') {
+        combined = combined.filter((p) => !p.isBot)
+      } else if (typeFilter === 'bots') {
+        combined = combined.filter((p) => p.isBot)
       }
+
+      // Ordenar por XP ou Rating desc
+      combined.sort((a, b) => (b.xp || 0) - (a.xp || 0))
+      setPlayers(combined.slice(0, 50))
     } catch (e) {
       console.error(e)
     } finally {
@@ -41,7 +67,7 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
 
   useEffect(() => {
     loadRankings()
-  }, [district])
+  }, [district, typeFilter])
 
   return (
     <div className="space-y-6">
@@ -56,18 +82,61 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
           </p>
         </div>
 
-        <select
-          value={district}
-          onChange={(e) => setDistrict(e.target.value)}
-          className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-amber-400 cursor-pointer"
-        >
-          <option value="all">🏆 Ranking Geral de Portugal</option>
-          {VALID_DISTRICTS.map((d) => (
-            <option key={d} value={d}>
-              📍 {d}
-            </option>
-          ))}
-        </select>
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Filtro de Tipo: Todos, Humanos, Bots */}
+          <div className="flex rounded-2xl border border-white/15 bg-slate-950 p-1 text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => setTypeFilter('all')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                typeFilter === 'all' ? 'bg-amber-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Todos
+            </button>
+            <button
+              type="button"
+              onClick={() => setTypeFilter('humans')}
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 cursor-pointer ${
+                typeFilter === 'humans' ? 'bg-emerald-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <User className="h-3 w-3" />
+              <span>Humanos</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTypeFilter('bots')}
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 cursor-pointer ${
+                typeFilter === 'bots' ? 'bg-cyan-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Bot className="h-3 w-3" />
+              <span>Bots</span>
+            </button>
+          </div>
+
+          <select
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+            className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-amber-400 cursor-pointer"
+          >
+            <option value="all">🏆 Ranking Geral de Portugal</option>
+            {VALID_DISTRICTS.map((d) => (
+              <option key={d} value={d}>
+                📍 {d}
+              </option>
+            ))}
+          </select>
+
+          <button
+            type="button"
+            onClick={loadRankings}
+            className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 transition-colors cursor-pointer"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin text-amber-400' : ''}`} />
+          </button>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur-md">
@@ -88,7 +157,7 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
               <tr>
                 <td colSpan={7} className="py-12 text-center text-slate-400">
                   <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-amber-400" />
-                  <span>A carregar ranking...</span>
+                  <span>A carregar ranking com filtros aplicados...</span>
                 </td>
               </tr>
             ) : players.length === 0 ? (
@@ -112,9 +181,16 @@ export function RankingsView({ getIdToken }: RankingsViewProps) {
                     )}
                   </td>
                   <td className="px-5 py-3.5">
-                    <span className="font-bold text-white">{p.displayName || 'Jogador'}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-white">{p.displayName || 'Jogador'}</span>
+                      {p.isBot && (
+                        <span className="px-1.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                          🤖 Bot
+                        </span>
+                      )}
+                    </div>
                   </td>
-                  <td className="px-4 py-3.5 font-bold text-slate-300">📍 {p.district || 'Lisboa'}</td>
+                  <td className="px-4 py-3.5 font-bold text-slate-300">📍 {p.district || 'Portugal'}</td>
                   <td className="px-4 py-3.5 font-bold text-emerald-400 font-mono">Nv.{p.level || 1}</td>
                   <td className="px-4 py-3.5 font-black text-amber-400 font-mono">
                     {(p.xp || 0).toLocaleString('pt-PT')} XP
