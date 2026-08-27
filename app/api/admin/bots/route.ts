@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { verifyAdminRequest, recordAdminAuditLog } from '@/lib/admin-auth'
 import { getAdminFirestore } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
-import { generate125Bots } from '@/lib/bot-network/bot-generator'
+import { generateBotsPool } from '@/lib/bot-network/bot-generator'
 import { syncBotPopulationState } from '@/lib/bot-network/bot-population-manager'
 import type { BotPlayerRecord } from '@/lib/bot-network/types'
 
@@ -20,13 +20,13 @@ export async function GET(req: Request) {
     const districtFilter = searchParams.get('district') || 'all'
     const personalityFilter = searchParams.get('personality') || 'all'
     const statusFilter = searchParams.get('status') || 'all'
-    const limit = Math.min(200, Math.max(10, Number(searchParams.get('limit') || 150)))
+    const limit = Math.min(500, Math.max(10, Number(searchParams.get('limit') || 200)))
 
     const db = getAdminFirestore()
     let snap = await db.collection('botPlayers').get()
 
-    // Se estiver vazio, inicializar a rede de 125 bots
-    if (snap.empty) {
+    // Se estiver com menos de 157 bots, inicializar a rede completa de 457 bots
+    if (snap.size < 157) {
       await syncBotPopulationState()
       snap = await db.collection('botPlayers').get()
     }
@@ -88,32 +88,35 @@ export async function POST(req: Request) {
 
     const db = getAdminFirestore()
 
-    // 1. Gerar / Regenerar 125 Bots
-    if (action === 'generate_125') {
-      const newBots = generate125Bots()
-      const batch = db.batch()
+    // 1. Gerar / Regenerar 457 Bots (157 Ativos Imediatamente + 300 em 15h)
+    if (action === 'generate_125' || action === 'generate_457' || action === 'generate_pool') {
+      const newBots = generateBotsPool(457, 157)
 
-      newBots.forEach((b) => {
-        const ref = db.collection('botPlayers').doc(b.id)
-        batch.set(ref, b)
-      })
-
-      await batch.commit()
+      // Gravação em chunks seguros para Firestore
+      for (let i = 0; i < newBots.length; i += 300) {
+        const batch = db.batch()
+        const slice = newBots.slice(i, i + 300)
+        slice.forEach((b) => {
+          const ref = db.collection('botPlayers').doc(b.id)
+          batch.set(ref, b)
+        })
+        await batch.commit()
+      }
 
       await recordAdminAuditLog({
         adminUid: authResult.adminUser.uid,
         adminEmail: authResult.adminUser.email,
-        action: 'BOT_NETWORK_GENERATED_125',
+        action: 'BOT_NETWORK_GENERATED_457',
         entity: 'BOT_NETWORK',
-        entityId: '125_BOTS_POOL',
-        details: 'Gerou e inicializou a rede oficial de 125 desafiantes virtuais.',
+        entityId: '457_BOTS_POOL',
+        details: 'Gerou e inicializou a rede oficial de 457 desafiantes virtuais (157 ativos imediatamente + 300 em 15h).',
         status: 'SUCCESS',
       })
 
       const population = await syncBotPopulationState()
       return NextResponse.json({
         success: true,
-        message: 'Rede de 125 bots gerada com sucesso!',
+        message: 'Rede de 457 bots gerada com sucesso (157 ativos agora + 300 ao longo de 15 horas)!',
         population,
       })
     }
@@ -122,16 +125,18 @@ export async function POST(req: Request) {
     if (action === 'mass_status') {
       const targetStatus = massStatus === 'ACTIVE' ? 'ACTIVE' : 'INACTIVE'
       const snap = await db.collection('botPlayers').get()
-      const batch = db.batch()
 
-      snap.docs.forEach((docSnap) => {
-        batch.update(docSnap.ref, {
-          status: targetStatus,
-          updatedAt: FieldValue.serverTimestamp(),
+      for (let i = 0; i < snap.docs.length; i += 300) {
+        const batch = db.batch()
+        const slice = snap.docs.slice(i, i + 300)
+        slice.forEach((docSnap) => {
+          batch.update(docSnap.ref, {
+            status: targetStatus,
+            updatedAt: FieldValue.serverTimestamp(),
+          })
         })
-      })
-
-      await batch.commit()
+        await batch.commit()
+      }
 
       await recordAdminAuditLog({
         adminUid: authResult.adminUser.uid,
@@ -144,9 +149,11 @@ export async function POST(req: Request) {
         status: 'SUCCESS',
       })
 
+      const population = await syncBotPopulationState()
       return NextResponse.json({
         success: true,
         message: `Todos os ${snap.size} bots foram atualizados para: ${targetStatus}`,
+        population,
       })
     }
 

@@ -31,6 +31,7 @@ import {
   subscribeToWaitingRoom,
   cancelWaitingRoom,
   sendRoomHeartbeat,
+  triggerBotFallback,
   createDuel,
   joinDuelByCode,
   resolveUserAvatar,
@@ -351,10 +352,18 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Contador de segundos e timeout de 30 segundos
+    // Contador de segundos com Fallback Inteligente para Bot Network aos 10 segundos
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
+
+        // Aos 10 segundos de busca sem humano: Acionar Fallback automático para a Bot Network Oficial
+        if (next === 10 && waitingRoomIdRef.current && !matchedDuelIdRef.current) {
+          console.log('[Matchmaking] 10s decorridos: Acionando fallback automático para desafiante virtual...')
+          triggerBotFallback(waitingRoomIdRef.current, playerObj, profileObj).catch((e) => {
+            console.warn('[Matchmaking] Bot fallback notice:', e)
+          })
+        }
 
         if (next >= 30) {
           console.log('[Matchmaking] Timeout de 30 segundos atingido!')

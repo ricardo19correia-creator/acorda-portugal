@@ -38,12 +38,14 @@ export interface BotPlayerRecord {
 }
 
 export interface BotPopulationConfig {
-  totalBots: number
-  activationDurationHours: number
+  initialActiveBots: number // 157
+  additionalBots: number // 300
+  totalBots: number // 457
+  activationDurationHours: number // 15
   activationStartTime: number
   curve: 'linear' | 'sigmoid' | 'dynamic'
-  minimumBotsActive: number
-  maximumBotsActive: number
+  minimumBotsActive: number // 157
+  maximumBotsActive: number // 457
   isNetworkPaused: boolean
   lastEvaluatedAt?: number
 }
@@ -57,6 +59,7 @@ export interface BotPopulationStatus {
   retiredBots: number
   targetActiveByCurve: number
   hoursElapsedSinceStart: number
+  activationDurationHours: number
   completionPercentage: number
   isPaused: boolean
   avgRating: number

@@ -69,7 +69,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       if (districtFilter !== 'all') params.set('district', districtFilter)
       if (personalityFilter !== 'all') params.set('personality', personalityFilter)
       if (statusFilter !== 'all') params.set('status', statusFilter)
-      params.set('limit', '150')
+      params.set('limit', '300')
 
       const res = await fetch(`/api/admin/bots?${params.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -94,8 +94,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
     loadBots()
   }, [districtFilter, personalityFilter, statusFilter])
 
-  const handleGenerate125 = async () => {
-    if (!confirm('Deseja inicializar/regenerar a rede oficial com 125 desafiantes virtuais de Portugal?')) return
+  const handleGeneratePool = async () => {
+    if (!confirm('Deseja gerar a pool completa de 457 desafiantes (157 ativos imediatamente + 300 nas próximas 15h)?')) return
     setIsSubmitting(true)
     try {
       const token = await getIdToken()
@@ -104,7 +104,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       const res = await fetch('/api/admin/bots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ action: 'generate_125' }),
+        body: JSON.stringify({ action: 'generate_pool' }),
       })
 
       const data = await res.json()
@@ -164,8 +164,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
     }
   }
 
-  const handleRestart24h = async () => {
-    if (!confirm('Reiniciar o cronómetro de ativação progressiva de 24 horas a partir de agora?')) return
+  const handleRestart15h = async () => {
+    if (!confirm('Reiniciar o ciclo de 15 horas a partir de agora (157 ativos + 300 progressivos)?')) return
     setIsSubmitting(true)
     try {
       const token = await getIdToken()
@@ -179,7 +179,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
       const data = await res.json()
       if (data.success) {
-        showToast(data.message)
+        showToast('Ciclo de 15 horas reiniciado com sucesso!')
         loadBots()
       }
     } catch (e) {
@@ -225,14 +225,14 @@ export function BotsView({ getIdToken }: BotsViewProps) {
         </div>
       )}
 
-      {/* PAINEL DE CONTROLO POPULACIONAL (CURVA 24H) */}
+      {/* PAINEL DE CONTROLO POPULACIONAL (157 ATIVOS AGORA + 300 EM 15H) */}
       <div className="rounded-3xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl space-y-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/30 flex items-center gap-1.5">
                 <Bot className="h-3.5 w-3.5" />
-                Bot Population Controller (125 Desafiantes)
+                Rede de 457 Bots (157 Ativos Imediatos + 300 em 15h)
               </span>
               {population?.isPaused && (
                 <span className="text-xs font-black uppercase tracking-wider text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/30">
@@ -241,10 +241,10 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               )}
             </div>
             <h2 className="mt-1.5 font-display text-xl sm:text-2xl font-black uppercase text-white">
-              Rede de Jogadores Virtuais (isBot: true)
+              Centro de Desafiantes Virtuais (isBot: true)
             </h2>
             <p className="text-xs text-slate-400">
-              Ativação progressiva ao longo de 24 horas com sensibilidade estocástica e balanceamento em tempo real.
+              157 bots 100% ativos nos rankings, distritos e duelos 1v1 neste momento, com +300 bots a ativar gradualmente ao longo das próximas 15 horas.
             </p>
           </div>
 
@@ -261,12 +261,12 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
             <button
               type="button"
-              onClick={handleGenerate125}
+              onClick={handleGeneratePool}
               disabled={isSubmitting}
               className="flex items-center gap-1.5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-4 py-2 text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-cyan-500/20 disabled:opacity-50 cursor-pointer"
             >
               <Zap className="h-4 w-4" />
-              <span>Gerar 125 Bots</span>
+              <span>Gerar Pool 457 Bots</span>
             </button>
 
             {population?.isPaused ? (
@@ -293,8 +293,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
             <button
               type="button"
-              onClick={handleRestart24h}
-              title="Reiniciar Ciclo 24h"
+              onClick={handleRestart15h}
+              title="Reiniciar Ciclo 15h"
               className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition-colors cursor-pointer"
             >
               <RotateCcw className="h-4 w-4" />
@@ -302,23 +302,23 @@ export function BotsView({ getIdToken }: BotsViewProps) {
           </div>
         </div>
 
-        {/* Linha do Tempo e Curva de 24 Horas */}
+        {/* Linha do Tempo e Curva de 15 Horas */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
             <span className="text-slate-300 font-bold flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-cyan-400" />
-              Progresso do Ciclo de 24h:{' '}
-              <strong className="text-white">{population?.hoursElapsedSinceStart || 0}h decorridas</strong>
+              Ciclo de 15 Horas:{' '}
+              <strong className="text-white">{population?.hoursElapsedSinceStart || 0}h / 15h decorridas</strong>
             </span>
             <span className="font-mono text-cyan-400 font-bold">
-              {population?.activeBots || 0} ativos / {population?.targetActiveByCurve || 0} alvo ({population?.completionPercentage || 0}%)
+              {population?.activeBots || 157} ativos agora / {population?.targetActiveByCurve || 157} alvo ({population?.completionPercentage || 0}%)
             </span>
           </div>
 
           <div className="w-full h-3 rounded-full bg-slate-950 overflow-hidden border border-white/5 p-0.5">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400 transition-all duration-500"
-              style={{ width: `${Math.min(100, population?.completionPercentage || 5)}%` }}
+              className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-cyan-400 to-teal-300 transition-all duration-500"
+              style={{ width: `${Math.max(34, Math.min(100, population?.completionPercentage || 34))}%` }}
             />
           </div>
         </div>
@@ -327,22 +327,22 @@ export function BotsView({ getIdToken }: BotsViewProps) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
             <span className="text-[10px] text-slate-400 block uppercase tracking-wider">Total na Pool</span>
-            <span className="font-display font-black text-xl text-white">{population?.totalBotsInPool || 0} bots</span>
+            <span className="font-display font-black text-xl text-white">{population?.totalBotsInPool || 457} bots</span>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🟢 Ativos Agora</span>
-            <span className="font-display font-black text-xl text-emerald-400">{population?.activeBots || 0}</span>
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🟢 157 Ativos Imediatos</span>
+            <span className="font-display font-black text-xl text-emerald-400">{population?.activeBots || 157}</span>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">⚔️ Em Partidas</span>
-            <span className="font-display font-black text-xl text-amber-400">{population?.inMatchBots || 0}</span>
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🕒 +300 em 15h</span>
+            <span className="font-display font-black text-xl text-cyan-300">+{population?.inactiveBots || 300} agendados</span>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
             <span className="text-[10px] text-slate-400 block uppercase tracking-wider">Rating Médio / ELO</span>
-            <span className="font-display font-black text-xl text-cyan-300 font-mono">{population?.avgRating || 1200} pts</span>
+            <span className="font-display font-black text-xl text-amber-400 font-mono">{population?.avgRating || 1280} pts</span>
           </div>
         </div>
       </div>
@@ -399,8 +399,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
             className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-cyan-400 cursor-pointer"
           >
             <option value="all">🛡️ Todos os Estados</option>
-            <option value="ACTIVE">✅ Ativos</option>
-            <option value="INACTIVE">⚪ Inativos</option>
+            <option value="ACTIVE">✅ Ativos (157+)</option>
+            <option value="INACTIVE">⚪ Inativos (Agendados)</option>
             <option value="IN_MATCH">⚔️ Em Partida</option>
           </select>
 
@@ -435,7 +435,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               <tr>
                 <td colSpan={9} className="py-12 text-center text-slate-400">
                   <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-cyan-400" />
-                  <span>A carregar bots virtuais...</span>
+                  <span>A carregar rede de desafiantes virtuais...</span>
                 </td>
               </tr>
             ) : bots.length === 0 ? (
@@ -488,11 +488,11 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                         </span>
                       ) : isActive ? (
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                          Ativo
+                          Ativo (157)
                         </span>
                       ) : (
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/5 text-slate-400 border border-white/10">
-                          Inativo
+                          Agendado (15h)
                         </span>
                       )}
                     </td>

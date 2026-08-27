@@ -16,10 +16,13 @@ const FIRST_NAMES = [
   'Luis', 'Tania', 'Fernando', 'Liliana', 'Fabio', 'Vanessa', 'Jose', 'Raquel', 'Renato',
   'Cristina', 'Daniel', 'Filipa', 'Ruben', 'Telma', 'Leandro', 'Adriana', 'Cesar', 'Ana',
   'Mauro', 'Bruna', 'Simão', 'Jessica', 'Gil', 'Debora', 'Emanuel', 'Irina', 'Artur', 'Katia',
-  'Celso', 'Elsa', 'Ivo', 'Neide', 'Nelson', 'Dulce', 'Telmo',
+  'Celso', 'Elsa', 'Ivo', 'Neide', 'Nelson', 'Dulce', 'Telmo', 'Silvia', 'Fabiano', 'Claudia',
 ]
 
-const SUFFIXES = ['_AP', '_PT', 'Quiz', '_Luso', '_SabeTudo', '_Desafio', '_QuizPT', '_Fado', '_Minhoto', '_Norte']
+const SUFFIXES = [
+  '_AP', '_PT', 'Quiz', '_Luso', '_SabeTudo', '_Desafio', '_QuizPT', '_Fado', '_Minhoto', '_Norte',
+  '_Sul', '_Centro', '_Tripeiro', '_Alfacinha', '_Galo', '_Madeira', '_Acores', '_Lenda', '_Pro',
+]
 
 const OFFICIAL_AVATARS = [
   '/images/avatars/avatar_galo.png',
@@ -35,11 +38,12 @@ const OFFICIAL_AVATARS = [
 const CATEGORY_SLUGS = MAIN_CATEGORIES.map((c) => c.slug)
 
 /**
- * Gera 125 desafiantes virtuais autênticos e equilibrados
+ * Gera a pool completa de 457 desafiantes virtuais autênticos
+ * (157 ativos imediatamente + 300 a ativar nas próximas 15 horas)
  */
-export function generate125Bots(): BotPlayerRecord[] {
+export function generateBotsPool(total = 457, initialActiveCount = 157): BotPlayerRecord[] {
   const bots: BotPlayerRecord[] = []
-  const total = 125
+  const now = Date.now()
 
   for (let i = 1; i <= total; i++) {
     const botId = `BOT_${String(i).padStart(4, '0')}`
@@ -48,19 +52,16 @@ export function generate125Bots(): BotPlayerRecord[] {
     const displayName = `${firstName}${suffix}`
     const username = `${firstName.toLowerCase()}_${String(i).padStart(3, '0')}`
 
-    // Distrito equilibrado (18 distritos + Açores e Madeira)
+    // Distribuição equilibrada pelos 20 distritos e regiões
     const districtIndex = (i - 1) % PORTUGAL_DISTRICTS.length
     const district = PORTUGAL_DISTRICTS[districtIndex]
 
-    // Avatar
+    // Avatar oficial rotativo
     const avatar = OFFICIAL_AVATARS[(i - 1) % OFFICIAL_AVATARS.length]
 
     // Distribuição de Personalidades:
-    // 1 a 38 (~30%): CASUAL
-    // 39 a 82 (~35%): NORMAL
-    // 83 a 107 (~20%): COMPETITIVO
-    // 108 a 119 (~10%): ESPECIALISTA
-    // 120 a 125 (~5%): ELITE
+    // 30% CASUAL, 35% NORMAL, 20% COMPETITIVO, 10% ESPECIALISTA, 5% ELITE
+    const mod = i % 100
     let personality: BotPersonality = 'NORMAL'
     let difficulty: BotDifficulty = 'MEDIO'
     let baseAccuracy = 68
@@ -72,7 +73,7 @@ export function generate125Bots(): BotPlayerRecord[] {
     let losses = 30
     let streak = 2
 
-    if (i <= 38) {
+    if (mod < 30) {
       personality = 'CASUAL'
       difficulty = 'FACIL'
       baseAccuracy = 45 + Math.floor(Math.random() * 16) // 45 a 60%
@@ -83,7 +84,7 @@ export function generate125Bots(): BotPlayerRecord[] {
       wins = 10 + Math.floor(Math.random() * 25)
       losses = 15 + Math.floor(Math.random() * 30)
       streak = Math.random() > 0.7 ? 2 : 0
-    } else if (i <= 82) {
+    } else if (mod < 65) {
       personality = 'NORMAL'
       difficulty = 'MEDIO'
       baseAccuracy = 60 + Math.floor(Math.random() * 16) // 60 a 75%
@@ -94,7 +95,7 @@ export function generate125Bots(): BotPlayerRecord[] {
       wins = 35 + Math.floor(Math.random() * 40)
       losses = 25 + Math.floor(Math.random() * 35)
       streak = Math.floor(Math.random() * 4)
-    } else if (i <= 107) {
+    } else if (mod < 85) {
       personality = 'COMPETITIVO'
       difficulty = 'DIFICIL'
       baseAccuracy = 70 + Math.floor(Math.random() * 16) // 70 a 85%
@@ -105,10 +106,10 @@ export function generate125Bots(): BotPlayerRecord[] {
       wins = 75 + Math.floor(Math.random() * 60)
       losses = 30 + Math.floor(Math.random() * 40)
       streak = 2 + Math.floor(Math.random() * 6)
-    } else if (i <= 119) {
+    } else if (mod < 95) {
       personality = 'ESPECIALISTA'
       difficulty = 'DIFICIL'
-      baseAccuracy = 65 + Math.floor(Math.random() * 15) // 65 a 80% base, altíssimo nas especialidades
+      baseAccuracy = 65 + Math.floor(Math.random() * 15) // 65 a 80% base, alto nas especialidades
       minTime = 3000
       maxTime = 5500
       level = 15 + Math.floor(Math.random() * 16) // 15 a 30
@@ -134,7 +135,6 @@ export function generate125Bots(): BotPlayerRecord[] {
     const strengths = shuffledCats.slice(0, personality === 'ESPECIALISTA' ? 4 : 2)
     const weaknesses = shuffledCats.slice(4, 6)
 
-    // Afinidades por categoria (mapa completo)
     const categoryAffinities: Record<string, number> = {}
     CATEGORY_SLUGS.forEach((slug) => {
       if (strengths.includes(slug)) {
@@ -147,8 +147,11 @@ export function generate125Bots(): BotPlayerRecord[] {
     })
 
     const avgResponseTimeMs = Math.round((minTime + maxTime) / 2)
-    const xp = level * level * 85
+    const xp = level * level * 85 + Math.floor(Math.random() * 500)
     const coins = 200 + Math.round(wins * 25)
+
+    // Os primeiros 157 bots são ATIVOS IMEDIATAMENTE!
+    const isImmediatelyActive = i <= initialActiveCount
 
     bots.push({
       id: botId,
@@ -157,7 +160,7 @@ export function generate125Bots(): BotPlayerRecord[] {
       username,
       avatar,
       district,
-      status: 'INACTIVE', // Inicialmente Inativos para ativação progressiva
+      status: isImmediatelyActive ? 'ACTIVE' : 'INACTIVE',
       personality,
       difficulty,
       accuracyPercentage: baseAccuracy,
@@ -172,7 +175,9 @@ export function generate125Bots(): BotPlayerRecord[] {
       losses,
       draws: 0,
       streak,
-      createdAt: Date.now(),
+      createdAt: now,
+      activatedAt: isImmediatelyActive ? now : null,
+      lastActiveAt: isImmediatelyActive ? now : null,
       strengths,
       weaknesses,
       categoryAffinities,
@@ -181,3 +186,5 @@ export function generate125Bots(): BotPlayerRecord[] {
 
   return bots
 }
+
+export const generate125Bots = generateBotsPool
