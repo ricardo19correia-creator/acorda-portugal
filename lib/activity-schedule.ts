@@ -19,17 +19,26 @@ export interface ActivityScheduleInfo {
  * Retorna as informações da fase de atividade atual de 24 horas para o fuso horário de Portugal (Europe/Lisbon)
  */
 export function getLisbonActivitySchedule(date = new Date(), liveMatchesCount = 0): ActivityScheduleInfo {
-  // Obter hora local em Europe/Lisbon (respeitando horário de verão/inverno)
-  const formatter = new Intl.DateTimeFormat('pt-PT', {
-    timeZone: 'Europe/Lisbon',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false,
-  })
+  let hour = 12
+  let minute = 0
 
-  const parts = formatter.formatToParts(date)
-  const hour = parseInt(parts.find((p) => p.type === 'hour')?.value || '12', 10)
-  const minute = parseInt(parts.find((p) => p.type === 'minute')?.value || '0', 10)
+  try {
+    const formatter = new Intl.DateTimeFormat('pt-PT', {
+      timeZone: 'Europe/Lisbon',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+    })
+    const parts = formatter.formatToParts(date)
+    const rawHour = parseInt(parts.find((p) => p.type === 'hour')?.value || '12', 10)
+    hour = (isNaN(rawHour) ? date.getHours() : rawHour) % 24
+    const rawMin = parseInt(parts.find((p) => p.type === 'minute')?.value || '0', 10)
+    minute = isNaN(rawMin) ? date.getMinutes() : rawMin
+  } catch {
+    hour = date.getHours() % 24
+    minute = date.getMinutes()
+  }
+
   const timeString = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
 
   // Curva de Atividade 24 Horas em Portugal

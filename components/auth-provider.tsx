@@ -185,18 +185,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               setProfileError(null)
 
               if (typeof window !== 'undefined') {
-                localStorage.setItem('user_coins', String(coinsVal))
-                localStorage.setItem('user_euros', String(coinsVal))
-                localStorage.setItem('user_display_name', nameVal)
-                if (districtVal) {
-                  localStorage.setItem('user_district', districtVal)
-                } else {
-                  localStorage.removeItem('user_district')
+                try {
+                  localStorage.setItem('user_coins', String(coinsVal))
+                  localStorage.setItem('user_euros', String(coinsVal))
+                  localStorage.setItem('user_display_name', nameVal)
+                  if (districtVal) {
+                    localStorage.setItem('user_district', districtVal)
+                  } else {
+                    localStorage.removeItem('user_district')
+                  }
+                  localStorage.setItem('user_equipped_avatar', avatarVal)
+                  localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
+                  localStorage.setItem('equipped_avatar_id', avatarIdVal)
+                  localStorage.setItem('equipped_title', titleVal)
+                } catch (storageErr) {
+                  console.warn('[AUTH] Storage local restrito:', storageErr)
                 }
-                localStorage.setItem('user_equipped_avatar', avatarVal)
-                localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
-                localStorage.setItem('equipped_avatar_id', avatarIdVal)
-                localStorage.setItem('equipped_title', titleVal)
               }
 
               // Sincronizar perfil público para ranking nacional se tiver distrito definido

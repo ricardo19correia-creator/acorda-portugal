@@ -25,17 +25,25 @@ export function getActiveNpcs(date = new Date()): {
   npcCount: number
   targetCount: number
 } {
-  // Obter hora e minuto em Europe/Lisbon
-  const formatter = new Intl.DateTimeFormat('pt-PT', {
-    timeZone: 'Europe/Lisbon',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false,
-  })
+  let hour = 12
+  let minute = 0
 
-  const parts = formatter.formatToParts(date)
-  const hour = parseInt(parts.find((p) => p.type === 'hour')?.value || '12', 10)
-  const minute = parseInt(parts.find((p) => p.type === 'minute')?.value || '0', 10)
+  try {
+    const formatter = new Intl.DateTimeFormat('pt-PT', {
+      timeZone: 'Europe/Lisbon',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+    })
+    const parts = formatter.formatToParts(date)
+    const rawHour = parseInt(parts.find((p) => p.type === 'hour')?.value || '12', 10)
+    hour = (isNaN(rawHour) ? date.getHours() : rawHour) % 24
+    const rawMin = parseInt(parts.find((p) => p.type === 'minute')?.value || '0', 10)
+    minute = isNaN(rawMin) ? date.getMinutes() : rawMin
+  } catch {
+    hour = date.getHours() % 24
+    minute = date.getMinutes()
+  }
 
   // Bloco de 5 minutos para rotação determinística e suave
   const fiveMinBucket = Math.floor(minute / 5)

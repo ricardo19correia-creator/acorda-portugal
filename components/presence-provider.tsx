@@ -63,13 +63,14 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     if (explicitActivity) {
       return explicitActivity.activity
     }
-    if (pathname.startsWith('/jogar')) {
+    const safePath = pathname || ''
+    if (safePath.startsWith('/jogar')) {
       return 'playing'
     }
-    if (pathname.startsWith('/perfil')) {
+    if (safePath.startsWith('/perfil')) {
       return 'profile'
     }
-    if (pathname.startsWith('/ranking')) {
+    if (safePath.startsWith('/ranking')) {
       return 'ranking'
     }
     return 'browsing'
