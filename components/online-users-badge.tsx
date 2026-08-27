@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { usePresence } from '@/components/presence-provider'
-import { useOnlineUsers } from '@/hooks/use-online-users'
 import { cn } from '@/lib/utils'
 import { Swords } from 'lucide-react'
 import { OnlinePlayersModal } from './online-players-modal'
@@ -20,26 +19,11 @@ export function OnlineUsersBadge({
 }: OnlineUsersBadgeProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Obter presença real de humanos via Context
-  let presenceData: {
-    onlineCount: number
-    duelCount: number
-    playingCount: number
-    activeUsers: Array<{ id: string; username: string; photoURL?: string | null; level: number; district: string }>
-  } | null = null
+  const { onlineCount, activeMatches, activeUsers } = usePresence()
 
-  try {
-    presenceData = usePresence()
-  } catch {
-    // Fallback gracioso se fora do provider
-  }
-
-  const hookOnline = useOnlineUsers()
-  const visibleOnlineCount = presenceData?.onlineCount ?? hookOnline ?? 0
-  const activeMatchesCount = Math.max(0, (presenceData?.duelCount ?? 0) + (presenceData?.playingCount ?? 0))
-  const activeUsers = presenceData?.activeUsers || []
-
-  const previewUsers = activeUsers.slice(0, 3)
+  const visibleOnlineCount = onlineCount
+  const activeMatchesCount = activeMatches
+  const previewUsers = (activeUsers || []).slice(0, 3)
 
   if (variant === 'hero') {
     return (
@@ -105,23 +89,24 @@ export function OnlineUsersBadge({
     )
   }
 
-  if (variant === 'compact') {
+  if (variant === 'header' || variant === 'compact') {
     return (
       <>
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
           className={cn(
-            'flex items-center gap-1.5 px-2 py-1 bg-zinc-950/80 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-md backdrop-blur-md select-none shrink-0 hover:border-emerald-400 transition cursor-pointer',
-            className
+            'inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300 transition hover:bg-emerald-500/20 active:scale-95 cursor-pointer',
+            className,
           )}
-          title={`${visibleOnlineCount} jogadores online. Clica para ver lista.`}
+          title="Ver participantes em direto"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          <strong className="text-emerald-400 font-mono font-black text-[11px]">{visibleOnlineCount}</strong>
+          <span className="font-mono font-black">{visibleOnlineCount}</span>
+          <span className="hidden sm:inline">online</span>
         </button>
 
         <OnlinePlayersModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
@@ -129,46 +114,25 @@ export function OnlineUsersBadge({
     )
   }
 
-  // Header / Default variant
   return (
     <>
-      <div className="flex items-center gap-1.5">
-        <button
-          type="button"
-          onClick={() => setIsModalOpen(true)}
-          className={cn(
-            'flex items-center gap-2 px-3 py-1 bg-zinc-950/85 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-lg backdrop-blur-md select-none transition-all hover:border-emerald-500/60 hover:scale-105 active:scale-95 cursor-pointer',
-            className,
-          )}
-          title={`${visibleOnlineCount} jogadores online em tempo real. Clica para ver quem está ativo.`}
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
-          </span>
-          <span className="text-[11px]">
-            <strong className="text-emerald-400 font-mono font-black">{visibleOnlineCount}</strong> Online
-          </span>
-        </button>
-
-        {(showMatches || variant === 'with-matches') && activeMatchesCount > 0 && (
-          <div
-            className={cn(
-              'hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-zinc-950/85 border border-amber-500/30 rounded-full text-[11px] text-amber-300 font-bold shadow-md backdrop-blur-md select-none',
-              className
-            )}
-            title={`${activeMatchesCount} partidas ativas a decorrer`}
-          >
-            <Swords className="h-3 w-3 text-amber-400" />
-            <span className="font-mono text-amber-400">{activeMatchesCount}</span>
-            <span>Partidas</span>
-          </div>
+      <button
+        type="button"
+        onClick={() => setIsModalOpen(true)}
+        className={cn(
+          'inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-zinc-900/80 px-3 py-1 text-xs font-bold text-zinc-200 backdrop-blur transition hover:border-emerald-400 active:scale-95 cursor-pointer',
+          className,
         )}
-      </div>
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        </span>
+        <span className="font-mono font-black text-emerald-400">{visibleOnlineCount}</span>
+        <span>online</span>
+      </button>
 
       <OnlinePlayersModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }
-
-export const OnlinePlayersIndicator = OnlineUsersBadge

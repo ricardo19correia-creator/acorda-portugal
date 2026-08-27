@@ -1,10 +1,27 @@
 import type { NpcProfile, NpcDifficulty, NpcPersonality } from './types'
+import { PROGRESSION_LEVELS } from '@/lib/progression'
 
-const DISTRICTS = [
-  'Aveiro', 'Beja', 'Braga', 'Bragança', 'Castelo Branco', 'Coimbra',
-  'Évora', 'Faro', 'Guarda', 'Leiria', 'Lisboa', 'Portalegre',
-  'Porto', 'Santarém', 'Setúbal', 'Viana do Castelo', 'Vila Real',
-  'Viseu', 'Açores', 'Madeira',
+export const OFFICIAL_20_DISTRICTS = [
+  'Aveiro',
+  'Beja',
+  'Braga',
+  'Bragança',
+  'Castelo Branco',
+  'Coimbra',
+  'Évora',
+  'Faro',
+  'Guarda',
+  'Leiria',
+  'Lisboa',
+  'Portalegre',
+  'Porto',
+  'Santarém',
+  'Setúbal',
+  'Viana do Castelo',
+  'Vila Real',
+  'Viseu',
+  'Açores',
+  'Madeira',
 ]
 
 const AVATAR_IMAGES = [
@@ -45,17 +62,27 @@ function generateDeterministicNpcs(): NpcProfile[] {
     const lastName = LAST_NAMES[(i * 11) % LAST_NAMES.length]
     const displayName = `${firstName} ${lastName}`
     const username = `@${firstName.toLowerCase()}${lastName.toLowerCase()}`
-    const district = DISTRICTS[(i * 3) % DISTRICTS.length]
+    
+    // Distribuição perfeitamente equilibrada pelos 20 distritos (5 NPCs por distrito)
+    const district = OFFICIAL_20_DISTRICTS[(i - 1) % OFFICIAL_20_DISTRICTS.length]
     const avatar = AVATAR_IMAGES[i % AVATAR_IMAGES.length]
 
-    // Nível coerente entre 3 e 38
-    const level = 3 + ((i * 17) % 35)
-    // XP proporcional ao nível
-    const xp = Math.round(level * level * 85 + ((i * 31) % 400))
-    // Rating ELO entre 850 e 2150
-    const rating = 850 + Math.round((level / 38) * 1200 + ((i * 23) % 100))
+    // Nível RPG oficial (2 a 20)
+    const level = 2 + ((i * 7) % 19)
 
-    const wins = Math.round(level * 4 + ((i * 13) % 25))
+    // Cálculo rigoroso de XP com base na tabela PROGRESSION_LEVELS
+    const tierIndex = PROGRESSION_LEVELS.findIndex((t) => t.level === level)
+    const currentTier = tierIndex >= 0 ? PROGRESSION_LEVELS[tierIndex] : PROGRESSION_LEVELS[1]
+    const nextTier = tierIndex >= 0 && tierIndex < PROGRESSION_LEVELS.length - 1 ? PROGRESSION_LEVELS[tierIndex + 1] : null
+    const baseXp = currentTier.xpRequired
+    const span = nextTier ? Math.max(100, nextTier.xpRequired - baseXp - 100) : 50000
+    const progressFraction = ((i * 37) % 85) / 100 // 0% a 85% do nível
+    const xp = Math.round(baseXp + span * progressFraction)
+
+    // Rating ELO calibrado (850 a 2150)
+    const rating = 850 + Math.round((level / 21) * 1200 + ((i * 19) % 80))
+
+    const wins = Math.round(level * 4 + ((i * 13) % 20))
     const losses = Math.max(1, Math.round(wins * (0.35 + (i % 5) * 0.08)))
 
     const diffIndex = (i % 4)
@@ -73,10 +100,10 @@ function generateDeterministicNpcs(): NpcProfile[] {
     if (difficulty === 'dificil') { minAcc = 0.70; maxAcc = 0.88 }
     if (difficulty === 'mestre') { minAcc = 0.82; maxAcc = 0.95 }
 
-    const avgResponseTimeSeconds = Number((3.0 + ((i % 7) * 0.6)).toFixed(1))
+    const avgResponseTimeSeconds = Number((2.8 + ((i % 7) * 0.5)).toFixed(1))
 
-    // Intervalo de horas preferenciais
-    const startHour = (i * 2) % 24
+    // Horários preferenciais de atividade
+    const startHour = (i * 3) % 24
     const preferredHours = [startHour, (startHour + 1) % 24, (startHour + 2) % 24, (startHour + 3) % 24]
 
     npcs.push({
@@ -112,12 +139,12 @@ export function getNpcById(npcId: string): NpcProfile | undefined {
 export function getCompatibleNpcForDuel(playerLevel = 1, playerRating = 1000): NpcProfile {
   // Procura NPCs com rating e nível próximos
   const sorted = [...NPC_CATALOG].sort((a, b) => {
-    const diffA = Math.abs(a.rating - playerRating) + Math.abs(a.level - playerLevel) * 20
-    const diffB = Math.abs(b.rating - playerRating) + Math.abs(b.level - playerLevel) * 20
+    const diffA = Math.abs(a.rating - playerRating) + Math.abs(a.level - playerLevel) * 25
+    const diffB = Math.abs(b.rating - playerRating) + Math.abs(b.level - playerLevel) * 25
     return diffA - diffB
   })
 
-  // Seleciona aleatoriamente entre os 5 mais próximos para variedade
+  // Seleciona aleatoriamente entre os 5 mais compatíveis para variedade
   const topCandidates = sorted.slice(0, 5)
   const randomIndex = Math.floor(Math.random() * topCandidates.length)
   return topCandidates[randomIndex] || sorted[0]

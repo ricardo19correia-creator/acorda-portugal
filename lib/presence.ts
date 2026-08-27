@@ -33,6 +33,31 @@ export type PublicActiveUser = {
   isNpc?: boolean
 }
 
+export interface DistrictPresenceSummary {
+  name: string
+  total: number
+  humans: number
+  npcs: number
+}
+
+export interface CanonicalPresenceState {
+  onlineCount: number
+  humanOnlineCount: number
+  npcOnlineCount: number
+  playingCount: number
+  duelCount: number
+  activeMatches: number
+  humanVsHumanMatches: number
+  humanVsNpcMatches: number
+  districtDistribution: Record<string, DistrictPresenceSummary>
+  byDistrictList: DistrictPresenceSummary[]
+  activeUsers: PublicActiveUser[]
+  currentActivity: UserActivityState
+  setActivity: (activity: UserActivityState, gameId?: string | null) => void
+  loading: boolean
+  error: string | null
+}
+
 export const HEARTBEAT_INTERVAL_MS = 20_000
 export const OFFLINE_THRESHOLD_MS = 45_000
 

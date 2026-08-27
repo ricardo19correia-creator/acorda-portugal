@@ -1,6 +1,6 @@
 'use client'
 
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -10,43 +10,33 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { usePathname } from 'next/navigation'
 import {
   collection,
   doc,
+  limit,
   onSnapshot,
   query,
   serverTimestamp,
   setDoc,
   where,
-  limit,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { usePathname } from 'next/navigation'
 import {
-  ACTIVITY_LABELS,
-  OFFLINE_THRESHOLD_MS,
-  sanitizeDisplayName,
   type PresenceData,
   type PublicActiveUser,
   type UserActivityState,
+  type DistrictPresenceSummary,
+  type CanonicalPresenceState,
+  ACTIVITY_LABELS,
+  OFFLINE_THRESHOLD_MS,
+  sanitizeDisplayName,
 } from '@/lib/presence'
 import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
+import { OFFICIAL_20_DISTRICTS } from '@/lib/npc-system/npc-catalog'
 
-type PresenceContextValue = {
-  onlineCount: number // Total visível (humanOnline + npcOnline)
-  humanOnlineCount: number // Apenas humanos reais
-  npcOnlineCount: number // Apenas NPCs ativos
-  playingCount: number
-  duelCount: number
-  activeUsers: PublicActiveUser[]
-  currentActivity: UserActivityState
-  setActivity: (activity: UserActivityState, gameId?: string | null) => void
-  loading: boolean
-  error: string | null
-}
-
-const PresenceContext = createContext<PresenceContextValue | null>(null)
+const PresenceContext = createContext<CanonicalPresenceState | null>(null)
 
 export function PresenceProvider({ children }: { children: ReactNode }) {
   const { user, profile } = useAuth()
@@ -267,7 +257,19 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // Filter valid active users within threshold
-  const { onlineCount, humanOnlineCount, npcOnlineCount, playingCount, duelCount, activeUsers } = useMemo(() => {
+  const {
+    onlineCount,
+    humanOnlineCount,
+    npcOnlineCount,
+    playingCount,
+    duelCount,
+    activeMatches,
+    humanVsHumanMatches,
+    humanVsNpcMatches,
+    districtDistribution,
+    byDistrictList,
+    activeUsers,
+  } = useMemo(() => {
     const validUsers = rawPresenceDocs.filter((p) => {
       if (!p.online) return false
       const timeDiff = now - p.lastSeen
@@ -275,12 +277,12 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     })
 
     const humanCount = validUsers.length
-    let playing = 0
-    let duel = 0
+    let humanPlaying = 0
+    let humanDuel = 0
 
     const humanFormattedList: PublicActiveUser[] = validUsers.map((u) => {
-      if (u.activity === 'playing') playing++
-      if (u.activity === 'duel') duel++
+      if (u.activity === 'playing') humanPlaying++
+      if (u.activity === 'duel') humanDuel++
 
       const meta = ACTIVITY_LABELS[u.activity] || ACTIVITY_LABELS.browsing
       return {
@@ -302,10 +304,13 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     // Obter NPCs ativos para o horário atual
     const { activeNpcs, npcCount } = getActiveNpcs(new Date(now))
 
+    let npcPlaying = 0
+    let npcDuel = 0
+
     // Incrementar contadores de atividade com NPCs
     activeNpcs.forEach((npc) => {
-      if (npc.activity === 'playing') playing++
-      if (npc.activity === 'duel') duel++
+      if (npc.activity === 'playing') npcPlaying++
+      if (npc.activity === 'duel') npcDuel++
     })
 
     // Combinar lista visualmente sem rótulos artificiais
@@ -319,24 +324,65 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     })
 
     const totalVisibleOnline = humanCount + npcCount
+    const totalPlaying = humanPlaying + npcPlaying
+    const totalDuel = humanDuel + npcDuel
+    const totalMatches = totalPlaying + totalDuel
+
+    // Distribuição canónica por distrito cobrindo os 20 distritos oficiais
+    const distMap: Record<string, DistrictPresenceSummary> = {}
+    for (const d of OFFICIAL_20_DISTRICTS) {
+      distMap[d] = {
+        name: d,
+        total: 0,
+        humans: 0,
+        npcs: 0,
+      }
+    }
+
+    combinedList.forEach((u) => {
+      const rawDist = (u.district || '').trim()
+      const matched = OFFICIAL_20_DISTRICTS.find((od) => od.toLowerCase() === rawDist.toLowerCase())
+      const targetDist = matched || 'Lisboa'
+
+      if (distMap[targetDist]) {
+        distMap[targetDist].total += 1
+        if (u.playerType === 'human') {
+          distMap[targetDist].humans += 1
+        } else {
+          distMap[targetDist].npcs += 1
+        }
+      }
+    })
+
+    const distList = Object.values(distMap).sort((a, b) => b.total - a.total || a.name.localeCompare(b.name, 'pt-PT'))
 
     return {
       onlineCount: totalVisibleOnline,
       humanOnlineCount: humanCount,
       npcOnlineCount: npcCount,
-      playingCount: playing,
-      duelCount: duel,
+      playingCount: totalPlaying,
+      duelCount: totalDuel,
+      activeMatches: totalMatches,
+      humanVsHumanMatches: Math.floor(humanDuel / 2),
+      humanVsNpcMatches: Math.max(0, totalDuel - Math.floor(humanDuel / 2) * 2),
+      districtDistribution: distMap,
+      byDistrictList: distList,
       activeUsers: combinedList,
     }
   }, [rawPresenceDocs, now, sessionId])
 
-  const value = useMemo(
+  const value: CanonicalPresenceState = useMemo(
     () => ({
       onlineCount,
       humanOnlineCount,
       npcOnlineCount,
       playingCount,
       duelCount,
+      activeMatches,
+      humanVsHumanMatches,
+      humanVsNpcMatches,
+      districtDistribution,
+      byDistrictList,
       activeUsers,
       currentActivity,
       setActivity,
@@ -349,6 +395,11 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       npcOnlineCount,
       playingCount,
       duelCount,
+      activeMatches,
+      humanVsHumanMatches,
+      humanVsNpcMatches,
+      districtDistribution,
+      byDistrictList,
       activeUsers,
       currentActivity,
       setActivity,
@@ -360,7 +411,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   return <PresenceContext.Provider value={value}>{children}</PresenceContext.Provider>
 }
 
-export function usePresence() {
+export function usePresence(): CanonicalPresenceState {
   const context = useContext(PresenceContext)
   if (!context) {
     throw new Error('usePresence deve ser utilizado dentro de um PresenceProvider.')

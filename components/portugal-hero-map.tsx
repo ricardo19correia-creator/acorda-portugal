@@ -238,23 +238,20 @@ export const DISTRICT_THEMES: Record<string, DistrictTheme> = {
 
 export function PortugalHeroMap() {
   const { user, profile } = useAuth()
-  const { activeUsers } = usePresence()
+  const { districtDistribution, activeUsers, onlineCount } = usePresence()
 
   const districtOnlineCounts = useMemo(() => {
     const counts: Record<string, number> = {}
-    activeUsers.forEach((u) => {
-      if (u.district) {
-        const d = u.district.trim()
-        counts[d] = (counts[d] || 0) + 1
-      }
-    })
+    for (const d of ALL_20_DISTRICTS) {
+      counts[d] = districtDistribution[d]?.total || 0
+    }
     return counts
-  }, [activeUsers])
+  }, [districtDistribution])
 
   const [districtData, setDistrictData] = useState<Map<string, HeroDistrictStat>>(new Map())
   const [topPlayer, setTopPlayer] = useState<{ name: string; xp: number; level: number } | null>(null)
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null)
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('Vila Real')
+  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => profile?.district || 'Lisboa')
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
   const [tilt, setTilt] = useState<{ rotateX: number; rotateY: number }>({ rotateX: 12, rotateY: -2 })
   const containerRef = useRef<HTMLDivElement>(null)
@@ -912,6 +909,12 @@ export function PortugalHeroMap() {
                   <span>Jogadores:</span>
                   <strong className="text-foreground font-bold">
                     {activeDistrictStat.players.toLocaleString('pt-PT')}
+                  </strong>
+                </div>
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Em Direto:</span>
+                  <strong className="text-emerald-400 font-bold">
+                    {(districtOnlineCounts[activeDistrictStat.name] || 0)} Online
                   </strong>
                 </div>
                 <div className="flex justify-between text-muted-foreground">

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { X, Users, Swords, MapPin, Shield, Clock } from 'lucide-react'
+import { X, Users, Swords, MapPin, Shield, Clock, Sparkles } from 'lucide-react'
 import { usePresence } from '@/components/presence-provider'
 import { getLisbonActivitySchedule } from '@/lib/activity-schedule'
 import { cn } from '@/lib/utils'
@@ -12,17 +12,17 @@ interface OnlinePlayersModalProps {
 }
 
 export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps) {
-  const { onlineCount, duelCount, playingCount, activeUsers } = usePresence()
-  const [schedule, setSchedule] = useState(() => getLisbonActivitySchedule(new Date(), duelCount + playingCount))
+  const { onlineCount, activeMatches, activeUsers } = usePresence()
+  const [schedule, setSchedule] = useState(() => getLisbonActivitySchedule(new Date(), activeMatches))
 
   // Atualizar informação horária a cada 30 segundos
   useEffect(() => {
     if (!isOpen) return
     const interval = setInterval(() => {
-      setSchedule(getLisbonActivitySchedule(new Date(), duelCount + playingCount))
+      setSchedule(getLisbonActivitySchedule(new Date(), activeMatches))
     }, 30_000)
     return () => clearInterval(interval)
-  }, [isOpen, duelCount, playingCount])
+  }, [isOpen, activeMatches])
 
   // Fechar com tecla Escape
   useEffect(() => {
@@ -35,8 +35,6 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
   }, [isOpen, onClose])
 
   if (!isOpen) return null
-
-  const activeMatches = duelCount + playingCount
 
   return (
     <div
@@ -121,7 +119,7 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
             <span className="text-[10px] text-emerald-400 font-mono">Em direto</span>
           </div>
 
-          <div className="space-y-1.5 max-h-60 overflow-y-auto custom-scrollbar pr-1">
+          <div className="space-y-1.5 max-h-64 overflow-y-auto custom-scrollbar pr-1">
             {activeUsers.length === 0 ? (
               <div className="py-8 text-center text-xs text-slate-400">
                 A carregar jogadores ativos em Portugal...
@@ -161,7 +159,15 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
                       </div>
                       <span className="text-[10px] text-slate-400 truncate flex items-center gap-1">
                         <MapPin className="h-2.5 w-2.5" />
-                        {u.district} • Nv.{u.level || 1}
+                        <span>{u.district}</span>
+                        <span>•</span>
+                        <span className="text-amber-300 font-bold">Nv.{u.level || 1}</span>
+                        {typeof u.xp === 'number' && u.xp > 0 && (
+                          <>
+                            <span>•</span>
+                            <span className="text-slate-300">{u.xp.toLocaleString('pt-PT')} XP</span>
+                          </>
+                        )}
                       </span>
                     </div>
                   </div>
