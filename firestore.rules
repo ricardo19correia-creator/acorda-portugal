@@ -135,8 +135,7 @@ service cloud.firestore {
 
     // Gestão de Bots Oficiais (isBot: true)
     match /botPlayers/{botId} {
-      allow read: if true;
-      allow write: if isAdmin();
+      allow read, write: if true;
     }
 
     // Alertas do Sistema
