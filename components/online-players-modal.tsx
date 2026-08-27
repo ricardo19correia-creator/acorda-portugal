@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { X, Users, Activity, Swords, Trophy, MapPin, Sparkles, Shield, Clock } from 'lucide-react'
+import { X, Users, Swords, MapPin, Shield, Clock } from 'lucide-react'
 import { usePresence } from '@/components/presence-provider'
 import { getLisbonActivitySchedule } from '@/lib/activity-schedule'
 import { cn } from '@/lib/utils'
@@ -59,7 +59,7 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                {onlineCount} {onlineCount === 1 ? 'Pessoa Online' : 'Pessoas Online'}
+                {onlineCount} {onlineCount === 1 ? 'Jogador Online' : 'Jogadores Online'}
               </span>
 
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10">
@@ -69,10 +69,10 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
             </div>
 
             <h2 id="online-players-title" className="font-display text-lg sm:text-xl font-black uppercase text-white">
-              Jogadores em Tempo Real
+              Jogadores Ativos
             </h2>
             <p className="text-[11px] text-slate-400">
-              Presença humana verificada em direto em Portugal ({schedule.timeStringLisbon} • Europe/Lisbon).
+              Comunidade nacional em direto ({schedule.timeStringLisbon} • Europe/Lisbon).
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
           <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/5 space-y-1">
             <span className="text-[10px] text-slate-400 block uppercase font-bold flex items-center gap-1">
               <Users className="h-3.5 w-3.5 text-emerald-400" />
-              Humanos Conectados
+              Jogadores Online
             </span>
             <span className="font-display font-black text-lg text-emerald-400">{onlineCount}</span>
           </div>
@@ -118,7 +118,7 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-slate-400 px-1">
             <span>Quem está online agora ({activeUsers.length})</span>
-            <span className="text-[10px] text-emerald-400 font-mono">100% Humanos Reais</span>
+            <span className="text-[10px] text-emerald-400 font-mono">Em direto</span>
           </div>
 
           <div className="space-y-1.5 max-h-60 overflow-y-auto custom-scrollbar pr-1">
@@ -179,7 +179,7 @@ export function OnlinePlayersModal({ isOpen, onClose }: OnlinePlayersModalProps)
         <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-500">
           <span className="flex items-center gap-1">
             <Shield className="h-3 w-3 text-emerald-400" />
-            Contador estrito • Zero bots incluídos
+            Presença e atividade em tempo real
           </span>
           <button
             type="button"

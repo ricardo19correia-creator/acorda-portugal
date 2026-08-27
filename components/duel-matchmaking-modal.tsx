@@ -351,10 +351,26 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Contador de segundos de busca por adversário humano
+    // Contador de segundos de busca por adversário com fallback aos 10s
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
+
+        // Aos 10 segundos de busca: emparelhar com adversário do ecossistema
+        if (next === 10 && waitingRoomIdRef.current && !matchedDuelIdRef.current) {
+          fetch('/api/duel/npc-match', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              roomId: waitingRoomIdRef.current,
+              userId: playerUid,
+              level: profileObj?.level || 1,
+              rating: profileObj?.rating || 1000,
+            }),
+          }).catch((err) => {
+            console.warn('[Matchmaking] NPC match notice:', err)
+          })
+        }
 
         if (next >= 30) {
           console.log('[Matchmaking] Timeout de 30 segundos atingido!')

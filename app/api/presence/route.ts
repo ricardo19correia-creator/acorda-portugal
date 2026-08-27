@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { db } from '@/lib/firebase'
 import { doc, setDoc, getDocs, deleteDoc, collection } from 'firebase/firestore'
+import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -16,14 +17,18 @@ export async function POST(req: NextRequest) {
     const now = Date.now()
     const cutoff = now - 30_000 // 30 segundos
 
+    const { npcCount } = getActiveNpcs(new Date(now))
+
     // 1. Chamar RPC no Supabase com SECURITY DEFINER
     const { data, error } = await supabaseAdmin.rpc('heartbeat_online', {
       p_client_id: clientId,
     })
 
-    if (!error && typeof data === 'number' && data > 0) {
+    if (!error && typeof data === 'number') {
+      const humanOnline = Number(data)
+      const totalVisible = humanOnline + npcCount
       return NextResponse.json(
-        { online: Number(data) || 1, onlineCount: Number(data) || 1 },
+        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -63,10 +68,11 @@ export async function POST(req: NextRequest) {
         Promise.all(deletePromises).catch(() => {})
       }
 
-      const totalCount = Math.max(activeFirestoreCount, localPresence.size, 1)
+      const humanOnline = Math.max(activeFirestoreCount, localPresence.size)
+      const totalVisible = humanOnline + npcCount
 
       return NextResponse.json(
-        { online: totalCount, onlineCount: totalCount },
+        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -76,9 +82,10 @@ export async function POST(req: NextRequest) {
         },
       )
     } catch {
-      const memCount = Math.max(localPresence.size, 1)
+      const humanOnline = localPresence.size
+      const totalVisible = humanOnline + npcCount
       return NextResponse.json(
-        { online: memCount, onlineCount: memCount },
+        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -89,8 +96,9 @@ export async function POST(req: NextRequest) {
       )
     }
   } catch {
+    const { npcCount } = getActiveNpcs(new Date())
     return NextResponse.json(
-      { online: 1, onlineCount: 1 },
+      { online: npcCount, onlineCount: npcCount, humanOnline: 0, npcOnline: npcCount },
       {
         headers: {
           'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',

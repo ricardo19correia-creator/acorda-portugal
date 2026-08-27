@@ -106,24 +106,24 @@ export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) 
           </div>
         </div>
 
-        {/* Cartão 2: Rankings Nacionais */}
+        {/* Cartão 2: Comunidade & Atividade 24h */}
         <div
-          onClick={() => onNavigateToModule('rankings')}
+          onClick={() => onNavigateToModule('jogadores')}
           className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-xl backdrop-blur-md hover:border-cyan-500/40 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Rankings & Perfis</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Atividade 24h</span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 group-hover:scale-110 transition-transform">
-              <Trophy className="h-4 w-4" />
+              <Sparkles className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="font-display text-2xl sm:text-3xl font-black text-white">
-              {kpis.totalUsers}{' '}
-              <span className="text-xs font-normal text-slate-400">classificados</span>
+              {kpis.totalVisibleOnline || (kpis.onlineHumans + (kpis.npcOnline || 0))}{' '}
+              <span className="text-xs font-normal text-slate-400">visíveis</span>
             </div>
             <p className="mt-1 text-xs text-slate-400">
-              20 distritos com progressão por XP
+              <strong className="text-cyan-400">{kpis.npcOnline || 0}</strong> NPCs em atividade simulada
             </p>
           </div>
         </div>

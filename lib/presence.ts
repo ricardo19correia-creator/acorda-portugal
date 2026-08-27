@@ -1,3 +1,4 @@
+export type PlayerType = 'human' | 'npc'
 export type UserActivityState = 'browsing' | 'playing' | 'duel' | 'ranking' | 'profile'
 
 export type PresenceData = {
@@ -12,6 +13,8 @@ export type PresenceData = {
   username: string
   photoURL?: string | null
   isAnonymous?: boolean
+  playerType?: PlayerType
+  isNpc?: boolean
   updatedAt?: unknown
 }
 
@@ -26,6 +29,8 @@ export type PublicActiveUser = {
   photoURL?: string | null
   lastSeen: number
   isCurrentUser: boolean
+  playerType: PlayerType
+  isNpc?: boolean
 }
 
 export const HEARTBEAT_INTERVAL_MS = 20_000

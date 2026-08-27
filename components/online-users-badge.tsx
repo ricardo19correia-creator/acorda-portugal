@@ -35,7 +35,7 @@ export function OnlineUsersBadge({
   }
 
   const hookOnline = useOnlineUsers()
-  const humanOnlineCount = presenceData?.onlineCount ?? hookOnline ?? 0
+  const visibleOnlineCount = presenceData?.onlineCount ?? hookOnline ?? 0
   const activeMatchesCount = Math.max(0, (presenceData?.duelCount ?? 0) + (presenceData?.playingCount ?? 0))
   const activeUsers = presenceData?.activeUsers || []
 
@@ -53,7 +53,7 @@ export function OnlineUsersBadge({
               className,
             )}
             style={{ animationDelay: '60ms' }}
-            title="Clica para ver os jogadores reais online"
+            title="Clica para ver os jogadores online em Portugal"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -78,9 +78,9 @@ export function OnlineUsersBadge({
             )}
 
             <span className="flex items-center gap-1">
-              <strong className="text-emerald-400 font-mono font-black">{humanOnlineCount}</strong>
+              <strong className="text-emerald-400 font-mono font-black">{visibleOnlineCount}</strong>
               <span className="text-emerald-300">
-                {humanOnlineCount === 1 ? 'PESSOA ONLINE' : 'PESSOAS ONLINE'}
+                {visibleOnlineCount === 1 ? 'PESSOA ONLINE' : 'PESSOAS ONLINE'}
               </span>
             </span>
           </button>
@@ -115,13 +115,13 @@ export function OnlineUsersBadge({
             'flex items-center gap-1.5 px-2 py-1 bg-zinc-950/80 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-md backdrop-blur-md select-none shrink-0 hover:border-emerald-400 transition cursor-pointer',
             className
           )}
-          title={`${humanOnlineCount} humanos online. Clica para ver lista.`}
+          title={`${visibleOnlineCount} jogadores online. Clica para ver lista.`}
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
           </span>
-          <strong className="text-emerald-400 font-mono font-black text-[11px]">{humanOnlineCount}</strong>
+          <strong className="text-emerald-400 font-mono font-black text-[11px]">{visibleOnlineCount}</strong>
         </button>
 
         <OnlinePlayersModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
@@ -140,14 +140,14 @@ export function OnlineUsersBadge({
             'flex items-center gap-2 px-3 py-1 bg-zinc-950/85 border border-emerald-500/30 rounded-full text-xs text-zinc-200 font-semibold shadow-lg backdrop-blur-md select-none transition-all hover:border-emerald-500/60 hover:scale-105 active:scale-95 cursor-pointer',
             className,
           )}
-          title={`${humanOnlineCount} humanos online em tempo real. Clica para ver quem está ativo.`}
+          title={`${visibleOnlineCount} jogadores online em tempo real. Clica para ver quem está ativo.`}
         >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
           </span>
           <span className="text-[11px]">
-            <strong className="text-emerald-400 font-mono font-black">{humanOnlineCount}</strong> Online
+            <strong className="text-emerald-400 font-mono font-black">{visibleOnlineCount}</strong> Online
           </span>
         </button>
 

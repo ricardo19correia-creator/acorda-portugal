@@ -31,9 +31,12 @@ import {
   type PublicActiveUser,
   type UserActivityState,
 } from '@/lib/presence'
+import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
 
 type PresenceContextValue = {
-  onlineCount: number
+  onlineCount: number // Total visível (humanOnline + npcOnline)
+  humanOnlineCount: number // Apenas humanos reais
+  npcOnlineCount: number // Apenas NPCs ativos
   playingCount: number
   duelCount: number
   activeUsers: PublicActiveUser[]
@@ -134,6 +137,8 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
 
     const payload: PresenceData = {
       userId: currentUser?.uid || currentSessionId,
+      playerType: 'human',
+      isNpc: false,
       online: isOnline,
       lastSeen: Date.now(),
       activity: currentAct,
@@ -220,6 +225,8 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
           if (data && typeof data.lastSeen === 'number') {
             docs.push({
               userId: d.id,
+              playerType: 'human',
+              isNpc: false,
               online: data.online ?? true,
               lastSeen: data.lastSeen,
               activity: (data.activity as UserActivityState) || 'browsing',
@@ -259,23 +266,26 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // Filter valid active users within threshold
-  const { onlineCount, playingCount, duelCount, activeUsers } = useMemo(() => {
+  const { onlineCount, humanOnlineCount, npcOnlineCount, playingCount, duelCount, activeUsers } = useMemo(() => {
     const validUsers = rawPresenceDocs.filter((p) => {
       if (!p.online) return false
       const timeDiff = now - p.lastSeen
       return timeDiff >= 0 && timeDiff <= OFFLINE_THRESHOLD_MS
     })
 
+    const humanCount = validUsers.length
     let playing = 0
     let duel = 0
 
-    const formattedList: PublicActiveUser[] = validUsers.map((u) => {
+    const humanFormattedList: PublicActiveUser[] = validUsers.map((u) => {
       if (u.activity === 'playing') playing++
       if (u.activity === 'duel') duel++
 
       const meta = ACTIVITY_LABELS[u.activity] || ACTIVITY_LABELS.browsing
       return {
         id: u.userId,
+        playerType: 'human' as const,
+        isNpc: false,
         username: u.username,
         district: u.district || 'Portugal',
         level: u.level || 1,
@@ -288,24 +298,42 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
       }
     })
 
-    // Sort: current user first, then by lastSeen descending
-    formattedList.sort((a, b) => {
+    // Obter NPCs ativos para o horário atual
+    const { activeNpcs, npcCount } = getActiveNpcs(new Date(now))
+
+    // Incrementar contadores de atividade com NPCs
+    activeNpcs.forEach((npc) => {
+      if (npc.activity === 'playing') playing++
+      if (npc.activity === 'duel') duel++
+    })
+
+    // Combinar lista visualmente sem rótulos artificiais
+    const combinedList: PublicActiveUser[] = [...humanFormattedList, ...activeNpcs]
+
+    // Sort: Utilizador atual no topo, seguido de mais recentemente ativos
+    combinedList.sort((a, b) => {
       if (a.isCurrentUser) return -1
       if (b.isCurrentUser) return 1
       return b.lastSeen - a.lastSeen
     })
 
+    const totalVisibleOnline = humanCount + npcCount
+
     return {
-      onlineCount: validUsers.length,
+      onlineCount: totalVisibleOnline,
+      humanOnlineCount: humanCount,
+      npcOnlineCount: npcCount,
       playingCount: playing,
       duelCount: duel,
-      activeUsers: formattedList,
+      activeUsers: combinedList,
     }
   }, [rawPresenceDocs, now, sessionId])
 
   const value = useMemo(
     () => ({
       onlineCount,
+      humanOnlineCount,
+      npcOnlineCount,
       playingCount,
       duelCount,
       activeUsers,
@@ -316,6 +344,8 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
     }),
     [
       onlineCount,
+      humanOnlineCount,
+      npcOnlineCount,
       playingCount,
       duelCount,
       activeUsers,
