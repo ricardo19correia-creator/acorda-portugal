@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import {
   collection,
   addDoc,
@@ -11,6 +11,7 @@ import {
   doc,
   updateDoc,
   increment,
+  Timestamp,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
@@ -21,7 +22,7 @@ import { CreatorsHero } from '@/components/creators/CreatorsHero'
 import { CreatorsSidebar } from '@/components/creators/CreatorsSidebar'
 import { VALID_DISTRICTS } from '@/data/districts'
 import { cn } from '@/lib/utils'
-import { Heart, MessageSquare, Sparkles, Send, PenSquare, Search, Filter } from 'lucide-react'
+import { Heart, MessageSquare, Send, PenSquare, Search, Sparkles } from 'lucide-react'
 
 export interface PublicacaoComunidade {
   id: string
@@ -34,11 +35,19 @@ export interface PublicacaoComunidade {
   oficial: boolean
   likes: number
   comentariosCount: number
-  createdAt: any
+  createdAt: Timestamp | Date | string | null
 }
 
 export default function CriadoresPage() {
   const { user, profile } = useAuth()
+
+  // 1. Proteção de ciclo de vida e montagem no cliente (Zero Hydration Mismatch)
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // Estado das publicações
   const [publicacoes, setPublicacoes] = useState<PublicacaoComunidade[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -57,21 +66,31 @@ export default function CriadoresPage() {
   // Toast de feedback
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
-  const showToast = (msg: string) => {
+  const showToast = useCallback((msg: string) => {
     setToastMessage(msg)
-    setTimeout(() => setToastMessage(null), 3000)
-  }
+    const timer = setTimeout(() => setToastMessage(null), 3000)
+    return () => clearTimeout(timer)
+  }, [])
 
-  // Preencher distrito com o do perfil autenticado
+  // Preencher distrito padrão com o do perfil autenticado
   useEffect(() => {
     if (profile?.district) {
       setDistrito(profile.district)
     }
   }, [profile?.district])
 
-  // 1. Escuta em TEMPO REAL 100% ligada ao Firestore (Coleção: publicacoes_comunidade)
+  // 2. Escuta em TEMPO REAL blindada com Firestore (Coleção: publicacoes_comunidade)
   useEffect(() => {
+    if (!isMounted) return
+
+    if (!db) {
+      console.warn('[CRIADORES] Instância do Firebase Firestore (db) não disponível.')
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
+
     try {
       const q = query(
         collection(db, 'publicacoes_comunidade'),
@@ -81,55 +100,70 @@ export default function CriadoresPage() {
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          const docs = snapshot.docs.map((docSnap) => {
+          const docs: PublicacaoComunidade[] = snapshot.docs.map((docSnap) => {
             const data = docSnap.data()
             return {
               id: docSnap.id,
-              autor: data.autor || 'Jogador',
-              tag: data.tag || 'jogador_pt',
-              distrito: data.distrito || 'Portugal',
-              conteudo: data.conteudo || '',
-              categoria: data.categoria || 'Geral',
+              autor: typeof data.autor === 'string' && data.autor.trim() ? data.autor : 'Jogador',
+              tag: typeof data.tag === 'string' && data.tag.trim() ? data.tag : 'jogador_pt',
+              distrito: typeof data.distrito === 'string' && data.distrito.trim() ? data.distrito : 'Portugal',
+              conteudo: typeof data.conteudo === 'string' ? data.conteudo : '',
+              categoria: typeof data.categoria === 'string' && data.categoria.trim() ? data.categoria : 'Geral',
               destaque: Boolean(data.destaque),
               oficial: Boolean(data.oficial),
               likes: typeof data.likes === 'number' ? data.likes : 0,
               comentariosCount: typeof data.comentariosCount === 'number' ? data.comentariosCount : 0,
-              createdAt: data.createdAt,
-            } as PublicacaoComunidade
+              createdAt: data.createdAt || null,
+            }
           })
 
           setPublicacoes(docs)
           setLoading(false)
         },
         (error) => {
-          console.warn('[CRIADORES] Firestore listener notice:', error)
+          console.error('[CRIADORES] Erro na subscrição em tempo real Firestore:', error)
           setLoading(false)
         }
       )
 
-      return () => unsubscribe()
-    } catch (e) {
-      console.warn('[CRIADORES] Erro ao iniciar listener Firestore:', e)
+      return () => {
+        try {
+          unsubscribe()
+        } catch (e) {
+          console.error('[CRIADORES] Erro ao fechar subscrição Firestore:', e)
+        }
+      }
+    } catch (err) {
+      console.error('[CRIADORES] Exceção ao inicializar consulta Firestore:', err)
       setLoading(false)
     }
-  }, [])
+  }, [isMounted])
 
-  // 2. Envio e publicação imediata na coleção oficial
+  // 3. Envio e persistência real no Firestore
   const handlePublicar = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!novoTexto.trim() || carregando) return
+    const textoLimpo = novoTexto.trim()
+    if (!textoLimpo || carregando) return
+
+    if (!db) {
+      showToast('Erro: Base de dados indisponível.')
+      return
+    }
 
     setCarregando(true)
+
     try {
       const autorFinal = profile?.displayName || user?.displayName || 'Jogador'
       const tagFinal = profile?.username || (user?.email ? user.email.split('@')[0] : 'jogador_pt')
+      const distritoFinal = distrito || profile?.district || 'Lisboa'
+      const categoriaFinal = categoria || 'Ideias'
 
       await addDoc(collection(db, 'publicacoes_comunidade'), {
         autor: autorFinal,
         tag: tagFinal,
-        distrito: distrito,
-        conteudo: novoTexto.trim(),
-        categoria: categoria,
+        distrito: distritoFinal,
+        categoria: categoriaFinal,
+        conteudo: textoLimpo,
         destaque: false,
         oficial: false,
         likes: 0,
@@ -140,15 +174,16 @@ export default function CriadoresPage() {
       setNovoTexto('')
       showToast('Publicação criada com sucesso! 🇵🇹')
     } catch (error) {
-      console.error('Erro ao publicar mensagem:', error)
+      console.error('[CRIADORES] Erro ao gravar documento no Firestore:', error)
       showToast('Erro ao publicar mensagem. Tenta novamente.')
     } finally {
       setCarregando(false)
     }
   }
 
-  // 3. Gosto / Like em tempo real
+  // 4. Interação de Like em tempo real
   const handleLike = async (postId: string) => {
+    if (!db) return
     try {
       const postRef = doc(db, 'publicacoes_comunidade', postId)
       await updateDoc(postRef, {
@@ -156,11 +191,20 @@ export default function CriadoresPage() {
       })
       showToast('Gosto registado! ❤️')
     } catch (err) {
-      console.error('Erro ao dar like:', err)
+      console.error('[CRIADORES] Erro ao registar like no Firestore:', err)
     }
   }
 
-  // 4. Filtragem dinâmica
+  // 5. Scroll seguro para elementos da interface
+  const scrollToElement = (elementId: string) => {
+    if (typeof document === 'undefined') return
+    const target = document.getElementById(elementId)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // 6. Filtragem dinâmica das mensagens
   const publicacoesFiltradas = useMemo(() => {
     return publicacoes.filter((p) => {
       // Filtro de Abas (Destaques vs Recentes)
@@ -192,6 +236,25 @@ export default function CriadoresPage() {
     })
   }, [publicacoes, filtroAba, categoriaFiltro, distritoFiltro, searchQuery])
 
+  // Se ainda não montou no cliente, renderiza estrutura base estável sem mismatch de hidratação
+  if (!isMounted) {
+    return (
+      <div className="relative min-h-screen bg-transparent flex flex-col">
+        <BackgroundFx variant="about" />
+        <div className="relative z-20 flex-1 flex flex-col">
+          <SiteHeader />
+          <main className="flex-1 pb-20 sm:pb-12">
+            <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-6 space-y-6">
+              <div className="h-64 rounded-3xl border border-white/10 bg-slate-900/60 animate-pulse" />
+              <div className="h-96 rounded-3xl border border-white/10 bg-slate-900/40 animate-pulse" />
+            </div>
+          </main>
+          <SiteFooter />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="about" />
@@ -211,7 +274,7 @@ export default function CriadoresPage() {
             {/* Hero Principal Oficial */}
             <CreatorsHero
               onOpenCreateModal={() => {
-                const el = document.getElementById('caixa-publicacao')
+                const el = typeof document !== 'undefined' ? document.getElementById('caixa-publicacao') : null
                 if (el) {
                   el.scrollIntoView({ behavior: 'smooth', block: 'center' })
                   const textarea = el.querySelector('textarea')
@@ -220,10 +283,7 @@ export default function CriadoresPage() {
               }}
               onSelectHighlights={() => {
                 setFiltroAba('destaque')
-                const feed = document.getElementById('feed-publicacoes')
-                if (feed) {
-                  feed.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }
+                scrollToElement('feed-publicacoes')
               }}
               totalPostsCount={publicacoes.length}
             />
@@ -376,7 +436,7 @@ export default function CriadoresPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          const el = document.getElementById('caixa-publicacao')
+                          const el = typeof document !== 'undefined' ? document.getElementById('caixa-publicacao') : null
                           if (el) {
                             el.scrollIntoView({ behavior: 'smooth', block: 'center' })
                             const textarea = el.querySelector('textarea')
@@ -448,7 +508,7 @@ export default function CriadoresPage() {
               <div className="lg:col-span-4">
                 <CreatorsSidebar
                   onOpenCreateForChallenge={() => {
-                    const el = document.getElementById('caixa-publicacao')
+                    const el = typeof document !== 'undefined' ? document.getElementById('caixa-publicacao') : null
                     if (el) {
                       el.scrollIntoView({ behavior: 'smooth', block: 'center' })
                       setCategoria('Debates')
