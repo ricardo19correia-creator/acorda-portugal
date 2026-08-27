@@ -1,8 +1,8 @@
 import { getAdminFirestore } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
-import type { BotPlayerRecord, BotMatchSimulationResult } from './types'
+import type { BotPlayerRecord, BotMatchSimulationResult, BotPlayerPrivateRecord } from './types'
 import { decideBotAnswer } from './bot-engine'
-import type { DuelDocument, DuelQuestion, DuelAnswer } from '@/lib/duel'
+import type { DuelQuestion, DuelAnswer } from '@/lib/duel'
 
 /**
  * Simula a execução completa e human-like das 10 perguntas pelo bot
@@ -11,6 +11,7 @@ export function generateBotDuelAnswers(
   bot: BotPlayerRecord,
   questions: DuelQuestion[],
   startedAt: number,
+  privateConfig?: Partial<BotPlayerPrivateRecord> | null,
 ): { answers: DuelAnswer[]; totalScore: number; correctCount: number; totalTimeSpent: number } {
   const answers: DuelAnswer[] = []
   let totalScore = 0
@@ -21,7 +22,7 @@ export function generateBotDuelAnswers(
 
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i]
-    const decision = decideBotAnswer(bot, q, 3, currentStreak)
+    const decision = decideBotAnswer(bot, q, 3, currentStreak, privateConfig)
 
     const pointsGained = decision.isCorrect ? 100 : 0
     totalScore += pointsGained
@@ -148,10 +149,13 @@ export function simulateBotVsBotMatch(
     botBTime: simB.answers[idx]?.timeSpentSeconds || 3.5,
   }))
 
+  const intelA = (botA as any).intelligencePercent || (botA.accuracyPercentage ? Math.round(botA.accuracyPercentage * 0.9 + 5) : 60)
+  const intelB = (botB as any).intelligencePercent || (botB.accuracyPercentage ? Math.round(botB.accuracyPercentage * 0.9 + 5) : 60)
+
   return {
     matchId,
-    botA: { id: botA.id, name: botA.displayName, score: simA.totalScore, correctCount: simA.correctCount },
-    botB: { id: botB.id, name: botB.displayName, score: simB.totalScore, correctCount: simB.correctCount },
+    botA: { id: botA.id, name: botA.displayName, score: simA.totalScore, correctCount: simA.correctCount, intelligence: intelA },
+    botB: { id: botB.id, name: botB.displayName, score: simB.totalScore, correctCount: simB.correctCount, intelligence: intelB },
     winnerId,
     winnerReason,
     durationSeconds: Math.round(Math.max(simA.totalTimeSpent, simB.totalTimeSpent)),

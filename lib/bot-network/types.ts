@@ -7,6 +7,10 @@ export interface BotCategoryAffinity {
   proficiencyPercentage: number // 30 a 98
 }
 
+/**
+ * Dados PÚBLICOS do Bot (armazenados em botPlayers/{botId})
+ * Acessíveis pelo jogo, duelos, matchmaking e rankings
+ */
 export interface BotPlayerRecord {
   id: string
   isBot: true
@@ -15,37 +19,73 @@ export interface BotPlayerRecord {
   avatar: string
   district: string
   status: BotStatus
-  personality: BotPersonality
-  difficulty: BotDifficulty
-  accuracyPercentage: number
-  minResponseTimeMs: number
-  maxResponseTimeMs: number
-  avgResponseTimeMs: number
-  rating: number
   level: number
   xp: number
   coins: number
+  rating: number // ELO Rating
   wins: number
   losses: number
   draws: number
   streak: number
-  createdAt: any
-  activatedAt?: any
-  lastActiveAt?: any
+  accuracyPercentage: number
+  avgResponseTimeMs: number
   strengths: string[] // slugs das categorias fortes
   weaknesses: string[] // slugs das categorias fracas
   categoryAffinities?: Record<string, number>
+  createdAt: any
+  activatedAt?: any
+  lastActiveAt?: any
+}
+
+/**
+ * Configuração PRIVADA do Bot (armazenada em botPlayersPrivate/{botId})
+ * Acessível EXCLUSIVAMENTE por Administradores / Backend
+ */
+export interface BotPlayerPrivateRecord {
+  id: string
+  isBot: true
+  intelligencePercent: number // 1 a 99 (influencia probabilidade e inteligência geral)
+  personality: BotPersonality
+  difficulty: BotDifficulty
+  accuracyModel: {
+    baseAccuracy: number
+    categoryWeights: Record<string, number>
+    streakSensitivity: number
+  }
+  responseModel: {
+    minResponseTimeMs: number
+    maxResponseTimeMs: number
+    baseJitterMs: number
+    difficultyScale: number
+  }
+  activationSchedule: {
+    order: number
+    scheduledHour: number
+  }
+  recentMatchesHistory: Array<{
+    matchId: string
+    opponentUid: string
+    opponentName?: string
+    userScore: number
+    botScore: number
+    won: boolean
+    date: number
+  }>
+  internalSeed: string
+  adminMetadata?: {
+    notes?: string
+    lastEditedBy?: string
+    updatedAt?: number
+  }
 }
 
 export interface BotPopulationConfig {
-  initialActiveBots: number // 157
-  additionalBots: number // 300
-  totalBots: number // 457
-  activationDurationHours: number // 15
+  totalBotsInPool: number // 125
+  activationScheduleHours: number // 24
   activationStartTime: number
-  curve: 'linear' | 'sigmoid' | 'dynamic'
-  minimumBotsActive: number // 157
-  maximumBotsActive: number // 457
+  hourlyActiveTargets: number[] // Curva de 24h: [5, 8, 12, 18, 25, 32, 40, 50, 62, 75, 85, 95, 105, 120, 125...]
+  minimumBotsActive: number // 5
+  maximumBotsActive: number // 125
   isNetworkPaused: boolean
   lastEvaluatedAt?: number
 }
@@ -64,6 +104,9 @@ export interface BotPopulationStatus {
   isPaused: boolean
   avgRating: number
   avgAccuracy: number
+  avgIntelligence: number
+  humanPlayersOnline: number
+  activeMatchesCount: number
 }
 
 export interface BotAnswerDecision {
@@ -76,8 +119,8 @@ export interface BotAnswerDecision {
 
 export interface BotMatchSimulationResult {
   matchId: string
-  botA: { id: string; name: string; score: number; correctCount: number }
-  botB: { id: string; name: string; score: number; correctCount: number }
+  botA: { id: string; name: string; score: number; correctCount: number; intelligence: number }
+  botB: { id: string; name: string; score: number; correctCount: number; intelligence: number }
   winnerId: string | null
   winnerReason: 'score' | 'time' | 'draw'
   durationSeconds: number

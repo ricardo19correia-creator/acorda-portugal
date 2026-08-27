@@ -1,0 +1,2268 @@
+{
+  "timestamp": "2026-08-26T02:48:23.255Z",
+  "totalQuestionsLoaded": 14360,
+  "globalTarget": 466000,
+  "totalApprovedValid": 3945,
+  "completionPercentage": 0.85,
+  "themes": [
+    {
+      "id": "portugal",
+      "name": "Portugal",
+      "emoji": "🇵🇹",
+      "totalValidApproved": 347,
+      "totalTarget": 24000,
+      "subcategories": [
+        {
+          "name": "História de Portugal",
+          "slug": "historia-de-portugal",
+          "totalRaw": 74,
+          "validApproved": 74,
+          "target": 2000,
+          "missing": 1926,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Geografia de Portugal",
+          "slug": "geografia-de-portugal",
+          "totalRaw": 55,
+          "validApproved": 55,
+          "target": 2000,
+          "missing": 1945,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cultura Portuguesa",
+          "slug": "cultura-portuguesa",
+          "totalRaw": 53,
+          "validApproved": 53,
+          "target": 2000,
+          "missing": 1947,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Tradições",
+          "slug": "tradicoes",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Monumentos",
+          "slug": "monumentos",
+          "totalRaw": 73,
+          "validApproved": 73,
+          "target": 2000,
+          "missing": 1927,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cidades",
+          "slug": "cidades",
+          "totalRaw": 50,
+          "validApproved": 50,
+          "target": 2000,
+          "missing": 1950,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Vilas e Aldeias",
+          "slug": "vilas-e-aldeias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Praias",
+          "slug": "praias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Regiões",
+          "slug": "regioes",
+          "totalRaw": 35,
+          "validApproved": 35,
+          "target": 2000,
+          "missing": 1965,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Gastronomia Portuguesa",
+          "slug": "gastronomia-portuguesa",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Personalidades Portuguesas",
+          "slug": "personalidades-portuguesas",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Curiosidades de Portugal",
+          "slug": "curiosidades-de-portugal",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        }
+      ]
+    },
+    {
+      "id": "futebol-portugues",
+      "name": "Futebol Português",
+      "emoji": "⚽",
+      "totalValidApproved": 663,
+      "totalTarget": 34000,
+      "subcategories": [
+        {
+          "name": "Clubes",
+          "slug": "clubes",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Jogadores",
+          "slug": "jogadores",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Jogadoras",
+          "slug": "jogadoras",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Estádios",
+          "slug": "estadios",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Competições",
+          "slug": "competicoes",
+          "totalRaw": 638,
+          "validApproved": 638,
+          "target": 2000,
+          "missing": 1362,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Liga Portuguesa",
+          "slug": "liga-portuguesa",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Taça de Portugal",
+          "slug": "taca-de-portugal",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Seleção Nacional",
+          "slug": "selecao-nacional",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Futebol Feminino",
+          "slug": "futebol-feminino",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Treinadores",
+          "slug": "treinadores",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "História do Futebol",
+          "slug": "historia-do-futebol",
+          "totalRaw": 12,
+          "validApproved": 12,
+          "target": 2000,
+          "missing": 1988,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Momentos Marcantes",
+          "slug": "momentos-marcantes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Dérbis & Clássicos",
+          "slug": "derbis-classicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Recordes",
+          "slug": "recordes",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Transferências",
+          "slug": "transferencias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Equipamentos",
+          "slug": "equipamentos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Futebol Europeu & Clubes Portugueses",
+          "slug": "futebol-europeu-clubes-portugueses",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        }
+      ]
+    },
+    {
+      "id": "atualidade",
+      "name": "Atualidade — Portugal Agora",
+      "emoji": "📰",
+      "totalValidApproved": 554,
+      "totalTarget": 34000,
+      "subcategories": [
+        {
+          "name": "Política e Governo",
+          "slug": "politica-e-governo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Assembleia da República",
+          "slug": "assembleia-da-republica",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Partidos Políticos",
+          "slug": "partidos-politicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Líderes Políticos",
+          "slug": "lideres-politicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Economia",
+          "slug": "economia",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Salário Mínimo",
+          "slug": "salario-minimo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Inflação",
+          "slug": "inflacao",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "PIB",
+          "slug": "pib",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Emprego",
+          "slug": "emprego",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Habitação",
+          "slug": "habitacao",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Euribor",
+          "slug": "euribor",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Turismo",
+          "slug": "turismo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresas Portuguesas",
+          "slug": "empresas-portuguesas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Cultura",
+          "slug": "cultura",
+          "totalRaw": 553,
+          "validApproved": 553,
+          "target": 2000,
+          "missing": 1447,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Desporto",
+          "slug": "desporto",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Acontecimentos Nacionais",
+          "slug": "acontecimentos-nacionais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Notícias e Factos Verificáveis",
+          "slug": "noticias-e-factos-verificaveis",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "portugal-politico",
+      "name": "Portugal Político",
+      "emoji": "🏛️",
+      "totalValidApproved": 36,
+      "totalTarget": 24000,
+      "subcategories": [
+        {
+          "name": "Partidos",
+          "slug": "partidos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Representação Parlamentar",
+          "slug": "representacao-parlamentar",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Líderes",
+          "slug": "lideres",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "História Política",
+          "slug": "historia-politica",
+          "totalRaw": 24,
+          "validApproved": 24,
+          "target": 2000,
+          "missing": 1976,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Instituições",
+          "slug": "instituicoes",
+          "totalRaw": 12,
+          "validApproved": 12,
+          "target": 2000,
+          "missing": 1988,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Constituição",
+          "slug": "constituicao",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Sistema Político",
+          "slug": "sistema-politico",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Eleições",
+          "slug": "eleicoes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Propostas Políticas",
+          "slug": "propostas-politicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Governos",
+          "slug": "governos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Presidentes da República",
+          "slug": "presidentes-da-republica",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Primeiros-Ministros",
+          "slug": "primeiros-ministros",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "empresas-portuguesas",
+      "name": "Empresas Portuguesas",
+      "emoji": "🏢",
+      "totalValidApproved": 10,
+      "totalTarget": 22000,
+      "subcategories": [
+        {
+          "name": "Empresas",
+          "slug": "empresas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Marcas",
+          "slug": "marcas",
+          "totalRaw": 10,
+          "validApproved": 10,
+          "target": 2000,
+          "missing": 1990,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Fundadores",
+          "slug": "fundadores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "História Empresarial",
+          "slug": "historia-empresarial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Setores",
+          "slug": "setores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Produtos",
+          "slug": "produtos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Serviços",
+          "slug": "servicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresas Históricas",
+          "slug": "empresas-historicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresas Atuais",
+          "slug": "empresas-atuais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresas Tecnológicas",
+          "slug": "empresas-tecnologicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresas Internacionais Portuguesas",
+          "slug": "empresas-internacionais-portuguesas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "historia",
+      "name": "História",
+      "emoji": "🏺",
+      "totalValidApproved": 43,
+      "totalTarget": 30000,
+      "subcategories": [
+        {
+          "name": "História de Portugal",
+          "slug": "historia-de-portugal",
+          "totalRaw": 5,
+          "validApproved": 5,
+          "target": 2000,
+          "missing": 1995,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "História Mundial",
+          "slug": "historia-mundial",
+          "totalRaw": 7,
+          "validApproved": 7,
+          "target": 2000,
+          "missing": 1993,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Reis e Rainhas",
+          "slug": "reis-e-rainhas",
+          "totalRaw": 5,
+          "validApproved": 5,
+          "target": 2000,
+          "missing": 1995,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Descobrimentos & Navegações",
+          "slug": "descobrimentos-navegacoes",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Batalhas & Conflitos",
+          "slug": "batalhas-conflitos",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Impérios Históricos",
+          "slug": "imperios-historicos",
+          "totalRaw": 7,
+          "validApproved": 7,
+          "target": 2000,
+          "missing": 1993,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Revoluções",
+          "slug": "revolucoes",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Implantação da República",
+          "slug": "implantacao-da-republica",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Estado Novo",
+          "slug": "estado-novo",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "25 de Abril & Cravos",
+          "slug": "25-de-abril-cravos",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Personalidades Históricas",
+          "slug": "personalidades-historicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Civilizações Antigas",
+          "slug": "civilizacoes-antigas",
+          "totalRaw": 8,
+          "validApproved": 8,
+          "target": 2000,
+          "missing": 1992,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Idade Média",
+          "slug": "idade-media",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Idade Moderna",
+          "slug": "idade-moderna",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "História Contemporânea",
+          "slug": "historia-contemporanea",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        }
+      ]
+    },
+    {
+      "id": "geografia",
+      "name": "Geografia",
+      "emoji": "🌍",
+      "totalValidApproved": 132,
+      "totalTarget": 28000,
+      "subcategories": [
+        {
+          "name": "Geografia de Portugal",
+          "slug": "geografia-de-portugal",
+          "totalRaw": 7,
+          "validApproved": 7,
+          "target": 2000,
+          "missing": 1993,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Europa",
+          "slug": "europa",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Mundo",
+          "slug": "mundo",
+          "totalRaw": 42,
+          "validApproved": 42,
+          "target": 2000,
+          "missing": 1958,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Países",
+          "slug": "paises",
+          "totalRaw": 8,
+          "validApproved": 8,
+          "target": 2000,
+          "missing": 1992,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Capitais",
+          "slug": "capitais",
+          "totalRaw": 55,
+          "validApproved": 55,
+          "target": 2000,
+          "missing": 1945,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Grandes Cidades",
+          "slug": "grandes-cidades",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Rios",
+          "slug": "rios",
+          "totalRaw": 7,
+          "validApproved": 7,
+          "target": 2000,
+          "missing": 1993,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Montanhas & Serras",
+          "slug": "montanhas-serras",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Ilhas & Arquipélagos",
+          "slug": "ilhas-arquipelagos",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Oceanos & Mares",
+          "slug": "oceanos-mares",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Fronteiras & Tratados",
+          "slug": "fronteiras-tratados",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Regiões",
+          "slug": "regioes",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Mapas & Cartografia",
+          "slug": "mapas-cartografia",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Localização Geográfica",
+          "slug": "localizacao-geografica",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "ciencia-tecnologia",
+      "name": "Ciência e Tecnologia",
+      "emoji": "🔬",
+      "totalValidApproved": 657,
+      "totalTarget": 24000,
+      "subcategories": [
+        {
+          "name": "Ciência Geral",
+          "slug": "ciencia-geral",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Física",
+          "slug": "fisica",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Química",
+          "slug": "quimica",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Biologia",
+          "slug": "biologia",
+          "totalRaw": 644,
+          "validApproved": 644,
+          "target": 2000,
+          "missing": 1356,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Astronomia & Espaço",
+          "slug": "astronomia-espaco",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Corpo Humano",
+          "slug": "corpo-humano",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Animais & Natureza",
+          "slug": "animais-natureza",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Tecnologia",
+          "slug": "tecnologia",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Informática & Internet",
+          "slug": "informatica-internet",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Inteligência Artificial",
+          "slug": "inteligencia-artificial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Invenções",
+          "slug": "invencoes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Descobertas Científicas",
+          "slug": "descobertas-cientificas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "cultura",
+      "name": "Cultura",
+      "emoji": "🎭",
+      "totalValidApproved": 671,
+      "totalTarget": 22000,
+      "subcategories": [
+        {
+          "name": "Cultura Portuguesa",
+          "slug": "cultura-portuguesa",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cultura Mundial",
+          "slug": "cultura-mundial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Arte, Pintura e Escultura",
+          "slug": "arte-pintura-e-escultura",
+          "totalRaw": 7,
+          "validApproved": 7,
+          "target": 2000,
+          "missing": 1993,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Literatura",
+          "slug": "literatura",
+          "totalRaw": 659,
+          "validApproved": 659,
+          "target": 2000,
+          "missing": 1341,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Teatro",
+          "slug": "teatro",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Fotografia",
+          "slug": "fotografia",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Música Erudita & Tradicional",
+          "slug": "musica-erudita-tradicional",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Cinema de Autor",
+          "slug": "cinema-de-autor",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Televisão Cultural",
+          "slug": "televisao-cultural",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Cultura Popular",
+          "slug": "cultura-popular",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Tradições & Folclore",
+          "slug": "tradicoes-folclore",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        }
+      ]
+    },
+    {
+      "id": "gastronomia",
+      "name": "Gastronomia",
+      "emoji": "🍲",
+      "totalValidApproved": 30,
+      "totalTarget": 22000,
+      "subcategories": [
+        {
+          "name": "Gastronomia Portuguesa",
+          "slug": "gastronomia-portuguesa",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Pratos Típicos Portugueses",
+          "slug": "pratos-tipicos-portugueses",
+          "totalRaw": 20,
+          "validApproved": 20,
+          "target": 2000,
+          "missing": 1980,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Doces & Sobremesas Tradicionais",
+          "slug": "doces-sobremesas-tradicionais",
+          "totalRaw": 5,
+          "validApproved": 5,
+          "target": 2000,
+          "missing": 1995,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Bebidas & Vinhos de Portugal",
+          "slug": "bebidas-vinhos-de-portugal",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Ingredientes & Especiarias",
+          "slug": "ingredientes-especiarias",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Receitas Tradicionais",
+          "slug": "receitas-tradicionais",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Regiões Gastronómicas",
+          "slug": "regioes-gastronomicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Gastronomia Mundial",
+          "slug": "gastronomia-mundial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Comida Internacional",
+          "slug": "comida-internacional",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Identificação Visual de Pratos",
+          "slug": "identificacao-visual-de-pratos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Curiosidades Gastronómicas",
+          "slug": "curiosidades-gastronomicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "personalidades",
+      "name": "Personalidades",
+      "emoji": "👤",
+      "totalValidApproved": 0,
+      "totalTarget": 24000,
+      "subcategories": [
+        {
+          "name": "Figuras Históricas",
+          "slug": "figuras-historicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Políticos & Estadistas",
+          "slug": "politicos-estadistas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Artistas & Pintores",
+          "slug": "artistas-pintores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Atletas Lendários",
+          "slug": "atletas-lendarios",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Cientistas & Pensadores",
+          "slug": "cientistas-pensadores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Empresários & Empreendedores",
+          "slug": "empresarios-empreendedores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Escritores & Poetas",
+          "slug": "escritores-poetas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Músicos & Compositores",
+          "slug": "musicos-compositores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Atores & Intérpretes",
+          "slug": "atores-interpretes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Criadores & Inovadores",
+          "slug": "criadores-inovadores",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Personalidades Internacionais",
+          "slug": "personalidades-internacionais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Personalidades Portuguesas",
+          "slug": "personalidades-portuguesas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "mundo",
+      "name": "Mundo",
+      "emoji": "🌐",
+      "totalValidApproved": 0,
+      "totalTarget": 26000,
+      "subcategories": [
+        {
+          "name": "Países & Continentes",
+          "slug": "paises-continentes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Capitais do Mundo",
+          "slug": "capitais-do-mundo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "História Mundial",
+          "slug": "historia-mundial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Geografia Mundial",
+          "slug": "geografia-mundial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Culturas & Costumes Globais",
+          "slug": "culturas-costumes-globais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Ciência & Tecnologia no Mundo",
+          "slug": "ciencia-tecnologia-no-mundo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Economia Global",
+          "slug": "economia-global",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Desporto Mundial",
+          "slug": "desporto-mundial",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Música do Mundo",
+          "slug": "musica-do-mundo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Cinema Internacional",
+          "slug": "cinema-internacional",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Personalidades do Mundo",
+          "slug": "personalidades-do-mundo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Curiosidades Mundiais",
+          "slug": "curiosidades-mundiais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Atualidade Internacional",
+          "slug": "atualidade-internacional",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "desporto",
+      "name": "Desporto",
+      "emoji": "🏆",
+      "totalValidApproved": 29,
+      "totalTarget": 30000,
+      "subcategories": [
+        {
+          "name": "Futebol Geral",
+          "slug": "futebol-geral",
+          "totalRaw": 10,
+          "validApproved": 10,
+          "target": 2000,
+          "missing": 1990,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Atletismo & Maratonas",
+          "slug": "atletismo-maratonas",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Ténis",
+          "slug": "tenis",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Ciclismo & Volta a Portugal",
+          "slug": "ciclismo-volta-a-portugal",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Basquetebol & NBA",
+          "slug": "basquetebol-nba",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Fórmula 1 & Motores",
+          "slug": "formula-1-motores",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Surf & Ondas Gigantes",
+          "slug": "surf-ondas-gigantes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Natação & Desportos Aquáticos",
+          "slug": "natacao-desportos-aquaticos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Jogos Olímpicos",
+          "slug": "jogos-olimpicos",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Artes Marciais & Judo",
+          "slug": "artes-marciais-judo",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Motociclismo & MotoGP",
+          "slug": "motociclismo-motogp",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Desporto Português",
+          "slug": "desporto-portugues",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Desporto Internacional",
+          "slug": "desporto-internacional",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Recordes Mundiais",
+          "slug": "recordes-mundiais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Grandes Competições",
+          "slug": "grandes-competicoes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "humor",
+      "name": "Humor",
+      "emoji": "😂",
+      "totalValidApproved": 15,
+      "totalTarget": 16000,
+      "subcategories": [
+        {
+          "name": "Humor Português",
+          "slug": "humor-portugues",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Expressões Populares Portuguesas",
+          "slug": "expressoes-populares-portuguesas",
+          "totalRaw": 15,
+          "validApproved": 15,
+          "target": 2000,
+          "missing": 1985,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Memes & Internet",
+          "slug": "memes-internet",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Comédia na TV & Cinema",
+          "slug": "comedia-na-tv-cinema",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Situações do Quotidiano",
+          "slug": "situacoes-do-quotidiano",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Perguntas Engraçadas",
+          "slug": "perguntas-engracadas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Curiosidades Hilariantes",
+          "slug": "curiosidades-hilariantes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Humor Absurdo",
+          "slug": "humor-absurdo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "musica",
+      "name": "Música",
+      "emoji": "🎵",
+      "totalValidApproved": 36,
+      "totalTarget": 26000,
+      "subcategories": [
+        {
+          "name": "Música Portuguesa",
+          "slug": "musica-portuguesa",
+          "totalRaw": 13,
+          "validApproved": 13,
+          "target": 2000,
+          "missing": 1987,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Fado & Guitarra Portuguesa",
+          "slug": "fado-guitarra-portuguesa",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Música Popular & Pimba",
+          "slug": "musica-popular-pimba",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Artistas & Cantores Portugueses",
+          "slug": "artistas-cantores-portugueses",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Bandas Portuguesas",
+          "slug": "bandas-portuguesas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Música Internacional",
+          "slug": "musica-internacional",
+          "totalRaw": 5,
+          "validApproved": 5,
+          "target": 2000,
+          "missing": 1995,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Artistas Internacionais",
+          "slug": "artistas-internacionais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Bandas Internacionais Lendárias",
+          "slug": "bandas-internacionais-lendarias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Grandes Canções",
+          "slug": "grandes-cancoes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Álbuns Históricos",
+          "slug": "albuns-historicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Instrumentos Musicais",
+          "slug": "instrumentos-musicais",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "História da Música",
+          "slug": "historia-da-musica",
+          "totalRaw": 14,
+          "validApproved": 14,
+          "target": 2000,
+          "missing": 1986,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Festivais de Música",
+          "slug": "festivais-de-musica",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "cinema-tv",
+      "name": "Cinema e Televisão",
+      "emoji": "🎬",
+      "totalValidApproved": 67,
+      "totalTarget": 22000,
+      "subcategories": [
+        {
+          "name": "Grandes Filmes",
+          "slug": "grandes-filmes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Séries Marcantes",
+          "slug": "series-marcantes",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Atores e Atrizes",
+          "slug": "atores-e-atrizes",
+          "totalRaw": 4,
+          "validApproved": 4,
+          "target": 2000,
+          "missing": 1996,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Personagens Inesquecíveis",
+          "slug": "personagens-inesqueciveis",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Realizadores",
+          "slug": "realizadores",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cinema Português",
+          "slug": "cinema-portugues",
+          "totalRaw": 54,
+          "validApproved": 54,
+          "target": 2000,
+          "missing": 1946,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Televisão Portuguesa",
+          "slug": "televisao-portuguesa",
+          "totalRaw": 3,
+          "validApproved": 3,
+          "target": 2000,
+          "missing": 1997,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Programas de Televisão Clássicos",
+          "slug": "programas-de-televisao-classicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Streaming & Novas Séries",
+          "slug": "streaming-novas-series",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cultura Pop & Geek",
+          "slug": "cultura-pop-geek",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Filmes Clássicos",
+          "slug": "filmes-classicos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "desafio-visual",
+      "name": "Desafio Visual",
+      "emoji": "👁️",
+      "totalValidApproved": 650,
+      "totalTarget": 38000,
+      "subcategories": [
+        {
+          "name": "Que lugar é este?",
+          "slug": "que-lugar-e-este",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Quem é esta pessoa?",
+          "slug": "quem-e-esta-pessoa",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Bandeiras",
+          "slug": "bandeiras",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Brasões",
+          "slug": "brasoes",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Símbolos",
+          "slug": "simbolos",
+          "totalRaw": 640,
+          "validApproved": 640,
+          "target": 2000,
+          "missing": 1360,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Gastronomia",
+          "slug": "gastronomia",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Futebol",
+          "slug": "futebol",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Estádios",
+          "slug": "estadios",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Monumentos",
+          "slug": "monumentos",
+          "totalRaw": 10,
+          "validApproved": 10,
+          "target": 2000,
+          "missing": 1990,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cidades",
+          "slug": "cidades",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Praias",
+          "slug": "praias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Vilas e Aldeias",
+          "slug": "vilas-e-aldeias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Onde fica?",
+          "slug": "onde-fica",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Encontra o detalhe",
+          "slug": "encontra-o-detalhe",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Fotografias Históricas",
+          "slug": "fotografias-historicas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Imagens de Objetos",
+          "slug": "imagens-de-objetos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Imagens de Animais",
+          "slug": "imagens-de-animais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Imagens de Natureza",
+          "slug": "imagens-de-natureza",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Desafio Visual Maluco",
+          "slug": "desafio-visual-maluco",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    },
+    {
+      "id": "modo-maluco",
+      "name": "Modo Maluco",
+      "emoji": "🤪",
+      "totalValidApproved": 5,
+      "totalTarget": 20000,
+      "subcategories": [
+        {
+          "name": "Perguntas Absurdas",
+          "slug": "perguntas-absurdas",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Perguntas Inesperadas",
+          "slug": "perguntas-inesperadas",
+          "totalRaw": 1,
+          "validApproved": 1,
+          "target": 2000,
+          "missing": 1999,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Humor & Rir",
+          "slug": "humor-rir",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Cultura Popular Insólita",
+          "slug": "cultura-popular-insolita",
+          "totalRaw": 2,
+          "validApproved": 2,
+          "target": 2000,
+          "missing": 1998,
+          "status": "EM PRODUÇÃO"
+        },
+        {
+          "name": "Regras Aleatórias",
+          "slug": "regras-aleatorias",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Desafios Rápidos",
+          "slug": "desafios-rapidos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Efeitos Especiais",
+          "slug": "efeitos-especiais",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Modificadores de Jogo",
+          "slug": "modificadores-de-jogo",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Perguntas com Lógica Diferente",
+          "slug": "perguntas-com-logica-diferente",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        },
+        {
+          "name": "Modo Caos",
+          "slug": "modo-caos",
+          "totalRaw": 0,
+          "validApproved": 0,
+          "target": 2000,
+          "missing": 2000,
+          "status": "NÃO INICIADO"
+        }
+      ]
+    }
+  ]
+}

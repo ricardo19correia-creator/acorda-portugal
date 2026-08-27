@@ -23,8 +23,12 @@ export async function GET(req: Request) {
     const usersCountSnap = await db.collection('users').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
     const totalUsers = usersCountSnap.data().count
 
-    const presenceSnap = await db.collection('presence').where('online', '==', true).get().catch(() => ({ size: 0, docs: [] }))
-    const onlineHumans = presenceSnap.size
+    const nowMs = Date.now()
+    const presenceSnap = await db.collection('presence').get().catch(() => ({ size: 0, docs: [] }))
+    const onlineHumans = Math.max(1, presenceSnap.docs.filter((d: any) => {
+      const data = d.data()
+      return data.online === true || (data.lastActive && data.lastActive >= nowMs - 45_000)
+    }).length)
 
     // 3. Bots Registados
     const botsSnap = await db.collection('botPlayers').get().catch(() => ({ size: 0, docs: [] }))

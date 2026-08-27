@@ -1,6 +1,6 @@
 // ============================================================================
-// ACORDA PORTUGAL — FONTE ÚNICA DE VERDADE DOS AVATARES
-// EXCLUSIVAMENTE OS 9 AVATARES REAIS DO PROJETO
+// ACORDA PORTUGAL — SISTEMA CANÓNICO & DIVERSIDADE VISUAL DE AVATARES
+// 9 Avatares Oficiais do Lore + 50+ Personas Virtuais Diversificadas
 // ============================================================================
 
 export type AvatarRarity = 'comum' | 'raro' | 'epico' | 'lendario' | 'mitico';
@@ -23,8 +23,7 @@ export interface AvatarItem {
 }
 
 /**
- * Os 9 Avatares Reais e Canónicos do Acorda Portugal
- * Ficheiros reais em /public/images/avatars/ e /public/imagens/avatar/
+ * Os 9 Avatares Oficiais do Lore do Acorda Portugal
  */
 export const REAL_AVATARS: AvatarItem[] = [
   {
@@ -155,188 +154,196 @@ export const REAL_AVATARS: AvatarItem[] = [
   },
 ];
 
-export const DEFAULT_AVATAR: AvatarItem = REAL_AVATARS[0];
+/**
+ * Biblioteca Expandida de 50+ Avatares Estilizados para Jogadores e Bots
+ * Combina os 9 avatares de lore com retratos de alta definição e sementes visuais
+ */
+export const BOT_AVATARS_LIBRARY: string[] = [
+  // 9 Avatares do Lore
+  '/images/avatars/camoes-2050.jpg',
+  '/images/avatars/vulcao-acores.jpg',
+  '/images/avatars/lenda-futebol-2050.jpg',
+  '/images/avatars/alma-alfama-2050.jpg',
+  '/images/avatars/sebastiao-2050.jpg',
+  '/images/avatars/Campeão Nacional.png',
+  '/images/avatars/LENDA SUPREMA DO ACORDA.png',
+  '/images/avatars/REPRESENTANTE DISTRITAL.png',
+  '/images/avatars/TITÃ DO TOP 10.png',
 
+  // 45+ Personas Visuais Únicas (Dicebear Adventurer / Lorelei / Avataaars com seeds portuguesas estáveis)
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Afonso&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Beatriz&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Carolina&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Duarte&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Eva&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Francisco&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Goncalo&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Helena&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Ines&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Joao&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Katia&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Lourenco&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Madalena&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Nuno&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Olivia&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Pedro&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Raquel&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Salvador&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Teresa&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/adventurer/svg?seed=Vasco&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Mariana&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Rodrigo&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Sofia&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Tiago&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Clara&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Martim&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Diana&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Henrique&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Francisca&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/lorelei/svg?seed=Guilherme&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=LusoBot1&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=LusoBot2&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=LusoBot3&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=LusoBot4&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=LusoBot5&backgroundColor=050505',
+  'https://api.dicebear.com/7.x/micah/svg?seed=PortoMinho&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=LisboaSul&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=CentroCoimbra&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=AlentejoEvora&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=AlgarveFaro&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=MadeiraFunchal&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=AcoresPontaDelgada&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=BragaNorte&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=AveiroRia&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=SetubalSado&backgroundColor=0a0a0a',
+  'https://api.dicebear.com/7.x/micah/svg?seed=ViseuDao&backgroundColor=0a0a0a',
+];
+
+export const DEFAULT_AVATAR: AvatarItem = REAL_AVATARS[0];
 export const AVATARS_2050: AvatarItem[] = REAL_AVATARS;
 export const AVATAR_CATALOG: AvatarItem[] = REAL_AVATARS;
 
 /**
- * Mapa de aliases para retrocompatibilidade com dados de Firestore, LocalStorage e caminhos
+ * Mapa de aliases para retrocompatibilidade
  */
 const ALIAS_MAP: Record<string, string> = {
-  // 1. Camões
   camoes_2050: 'camoes_2050',
   'camoes-2050': 'camoes_2050',
-  avatar_camoes_2050: 'camoes_2050',
-  'avatar-01': 'camoes_2050',
-  camoes: 'camoes_2050',
   '/images/avatars/camoes-2050.jpg': 'camoes_2050',
   '/images/avatars/camoes-2050.png': 'camoes_2050',
-  '/imagens/avatar/camoes-2050.jpg': 'camoes_2050',
-  '/imagens/avatar/camoes-2050.png': 'camoes_2050',
   '/avatars/camoes-2050.jpg': 'camoes_2050',
   '/avatars/camoes-2050.png': 'camoes_2050',
 
-  // 2. Guardião dos Açores
   guardiao_acores: 'guardiao_acores',
-  'guardiao-vulcanico': 'guardiao_acores',
   'vulcao-acores': 'guardiao_acores',
-  avatar_vulcao_acores: 'guardiao_acores',
-  'avatar-02': 'guardiao_acores',
-  'acores-guardiao-2050': 'guardiao_acores',
   '/images/avatars/vulcao-acores.jpg': 'guardiao_acores',
   '/images/avatars/vulcao-acores.png': 'guardiao_acores',
-  '/images/avatars/guardiao-vulcanico.jpg': 'guardiao_acores',
-  '/images/avatars/acores-guardiao-2050.jpg': 'guardiao_acores',
-  '/imagens/avatar/vulcao-acores.jpg': 'guardiao_acores',
-  '/imagens/avatar/vulcao-acores.png': 'guardiao_acores',
-  '/avatars/vulcao-acores.jpg': 'guardiao_acores',
-  '/avatars/vulcao-acores.png': 'guardiao_acores',
 
-  // 3. Lenda do Futebol
   lenda_futebol: 'lenda_futebol',
   'lenda-futebol-2050': 'lenda_futebol',
-  avatar_lenda_futebol: 'lenda_futebol',
-  'cyborg-quinas': 'lenda_futebol',
-  'avatar-03': 'lenda_futebol',
   '/images/avatars/lenda-futebol-2050.jpg': 'lenda_futebol',
   '/images/avatars/lenda-futebol-2050.png': 'lenda_futebol',
-  '/images/shop/cyborg-quinas.jpg': 'lenda_futebol',
-  '/imagens/avatar/lenda-futebol-2050.jpg': 'lenda_futebol',
-  '/imagens/avatar/lenda-futebol-2050.png': 'lenda_futebol',
-  '/avatars/lenda-futebol-2050.jpg': 'lenda_futebol',
-  '/avatars/lenda-futebol-2050.png': 'lenda_futebol',
 
-  // 4. Alma de Alfama
   alma_alfama: 'alma_alfama',
   'alma-alfama-2050': 'alma_alfama',
-  avatar_alma_alfama: 'alma_alfama',
-  'fadista-cyber-alfama': 'alma_alfama',
-  avatar_fadista_cyber: 'alma_alfama',
-  'avatar-04': 'alma_alfama',
   '/images/avatars/alma-alfama-2050.jpg': 'alma_alfama',
   '/images/avatars/alma-alfama-2050.png': 'alma_alfama',
-  '/images/shop/fadista-cyber.jpg': 'alma_alfama',
-  '/imagens/avatar/alma-alfama-2050.jpg': 'alma_alfama',
-  '/imagens/avatar/alma-alfama-2050.png': 'alma_alfama',
-  '/avatars/alma-alfama-2050.jpg': 'alma_alfama',
-  '/avatars/alma-alfama-2050.png': 'alma_alfama',
 
-  // 5. D. Sebastião
   sebastiao_nevoeiro: 'sebastiao_nevoeiro',
   'sebastiao-2050': 'sebastiao_nevoeiro',
-  avatar_sebastiao_2050: 'sebastiao_nevoeiro',
-  sebastiao: 'sebastiao_nevoeiro',
-  'avatar-05': 'sebastiao_nevoeiro',
   '/images/avatars/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
   '/images/avatars/sebastiao-2050.png': 'sebastiao_nevoeiro',
-  '/imagens/avatar/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
-  '/imagens/avatar/sebastiao-2050.png': 'sebastiao_nevoeiro',
-  '/avatars/sebastiao-2050.jpg': 'sebastiao_nevoeiro',
-  '/avatars/sebastiao-2050.png': 'sebastiao_nevoeiro',
 
-  // 6. Campeão Nacional
   campeao_nacional: 'campeao_nacional',
   'campeao-nacional': 'campeao_nacional',
-  'exclusivo_campeao': 'campeao_nacional',
-  'campeão nacional': 'campeao_nacional',
-  'campeao nacional.png': 'campeao_nacional',
   '/images/avatars/Campeão Nacional.png': 'campeao_nacional',
   '/images/avatars/Campe%C3%A3o%20Nacional.png': 'campeao_nacional',
-  '/imagens/avatar/Campeão Nacional.png': 'campeao_nacional',
-  '/imagens/avatar/Campe%C3%A3o%20Nacional.png': 'campeao_nacional',
-  '/avatars/Campeão Nacional.png': 'campeao_nacional',
-  '/avatars/Campe%C3%A3o%20Nacional.png': 'campeao_nacional',
 
-  // 7. Lenda Suprema do Acorda
   lenda_suprema_acorda: 'lenda_suprema_acorda',
   'lenda-suprema-acorda': 'lenda_suprema_acorda',
-  'exclusivo_lenda_100': 'lenda_suprema_acorda',
-  'lenda suprema do acorda': 'lenda_suprema_acorda',
-  'lenda suprema do acorda.png': 'lenda_suprema_acorda',
   '/images/avatars/LENDA SUPREMA DO ACORDA.png': 'lenda_suprema_acorda',
   '/images/avatars/LENDA%20SUPREMA%20DO%20ACORDA.png': 'lenda_suprema_acorda',
-  '/imagens/avatar/LENDA SUPREMA DO ACORDA.png': 'lenda_suprema_acorda',
-  '/imagens/avatar/LENDA%20SUPREMA%20DO%20ACORDA.png': 'lenda_suprema_acorda',
-  '/avatars/LENDA SUPREMA DO ACORDA.png': 'lenda_suprema_acorda',
-  '/avatars/LENDA%20SUPREMA%20DO%20ACORDA.png': 'lenda_suprema_acorda',
 
-  // 8. Representante Distrital
   representante_distrital: 'representante_distrital',
   'representante-distrital': 'representante_distrital',
-  'exclusivo_distrital': 'representante_distrital',
-  'representante distrital': 'representante_distrital',
-  'representante distrital.png': 'representante_distrital',
   '/images/avatars/REPRESENTANTE DISTRITAL.png': 'representante_distrital',
   '/images/avatars/REPRESENTANTE%20DISTRITAL.png': 'representante_distrital',
-  '/imagens/avatar/REPRESENTANTE DISTRITAL.png': 'representante_distrital',
-  '/imagens/avatar/REPRESENTANTE%20DISTRITAL.png': 'representante_distrital',
-  '/avatars/REPRESENTANTE DISTRITAL.png': 'representante_distrital',
-  '/avatars/REPRESENTANTE%20DISTRITAL.png': 'representante_distrital',
 
-  // 9. Titã do Top 10
   tita_top_10: 'tita_top_10',
   'tita-top-10': 'tita_top_10',
-  'exclusivo_top10': 'tita_top_10',
-  'titã do top 10': 'tita_top_10',
-  'tita do top 10': 'tita_top_10',
-  'titã do top 10.png': 'tita_top_10',
   '/images/avatars/TITÃ DO TOP 10.png': 'tita_top_10',
   '/images/avatars/TIT%C3%83%20DO%20TOP%2010.png': 'tita_top_10',
-  '/imagens/avatar/TITÃ DO TOP 10.png': 'tita_top_10',
-  '/imagens/avatar/TIT%C3%83%20DO%20TOP%2010.png': 'tita_top_10',
-  '/avatars/TITÃ DO TOP 10.png': 'tita_top_10',
-  '/avatars/TIT%C3%83%20DO%20TOP%2010.png': 'tita_top_10',
 };
 
 /**
- * Resolve qualquer ID, alias ou caminho antigo para o AvatarItem oficial correspondente
+ * Resolve qualquer ID, alias ou URL para o AvatarItem correspondente
  */
 export function getAvatarById(idOrUrl?: string | null): AvatarItem {
   if (!idOrUrl || typeof idOrUrl !== 'string') {
     return DEFAULT_AVATAR;
   }
 
-  const cleaned = idOrUrl.trim().toLowerCase();
+  const cleaned = idOrUrl.trim();
+  const lower = cleaned.toLowerCase();
 
   // 1. Verificação direta no alias map
-  const canonicalId = ALIAS_MAP[cleaned] || ALIAS_MAP[idOrUrl.trim()];
+  const canonicalId = ALIAS_MAP[lower] || ALIAS_MAP[cleaned];
   if (canonicalId) {
     const found = REAL_AVATARS.find((a) => a.id === canonicalId);
     if (found) return found;
   }
 
-  // 2. Verificação por substring de ficheiro/nome
-  if (cleaned.includes('camoes')) return REAL_AVATARS[0];
-  if (cleaned.includes('vulcao') || cleaned.includes('guardiao') || cleaned.includes('acores')) return REAL_AVATARS[1];
-  if (cleaned.includes('futebol') || cleaned.includes('quinas')) return REAL_AVATARS[2];
-  if (cleaned.includes('alfama') || cleaned.includes('fadista')) return REAL_AVATARS[3];
-  if (cleaned.includes('sebastiao')) return REAL_AVATARS[4];
-  if (cleaned.includes('campeao') || cleaned.includes('campeão')) return REAL_AVATARS[5];
-  if (cleaned.includes('suprema')) return REAL_AVATARS[6];
-  if (cleaned.includes('distrital') || cleaned.includes('representante')) return REAL_AVATARS[7];
-  if (cleaned.includes('top 10') || cleaned.includes('top10') || cleaned.includes('tita') || cleaned.includes('titã')) return REAL_AVATARS[8];
+  // 2. Se for uma URL externa ou data URI, criar um AvatarItem dinâmico para preservar a imagem
+  if (cleaned.startsWith('http://') || cleaned.startsWith('https://') || cleaned.startsWith('data:image/')) {
+    return {
+      id: `custom_${Math.abs(cleaned.split('').reduce((acc, c) => (acc << 5) - acc + c.charCodeAt(0), 0))}`,
+      name: 'Desafiante Nacional',
+      image: cleaned,
+      category: 'geral',
+      price: 'Grátis',
+      currency: 'free',
+      rarity: 'raro',
+      icon: '🇵🇹',
+    };
+  }
 
-  // 3. Fallback seguro para o primeiro avatar real
+  // 3. Verificação por substring de ficheiro/nome
+  if (lower.includes('camoes')) return REAL_AVATARS[0];
+  if (lower.includes('vulcao') || lower.includes('guardiao') || lower.includes('acores')) return REAL_AVATARS[1];
+  if (lower.includes('futebol') || lower.includes('quinas')) return REAL_AVATARS[2];
+  if (lower.includes('alfama') || lower.includes('fadista')) return REAL_AVATARS[3];
+  if (lower.includes('sebastiao')) return REAL_AVATARS[4];
+  if (lower.includes('campeao') || lower.includes('campeão')) return REAL_AVATARS[5];
+  if (lower.includes('suprema')) return REAL_AVATARS[6];
+  if (lower.includes('distrital') || lower.includes('representante')) return REAL_AVATARS[7];
+  if (lower.includes('top 10') || lower.includes('top10') || lower.includes('tita') || lower.includes('titã')) return REAL_AVATARS[8];
+
   return DEFAULT_AVATAR;
 }
 
 /**
- * Retorna o caminho absoluto público para a imagem do avatar oficial
+ * Retorna o caminho ou URL para a imagem do avatar
  */
 export function getAvatarImage(idOrUrl?: string | null): string {
-  return getAvatarById(idOrUrl).image;
+  if (!idOrUrl || typeof idOrUrl !== 'string') {
+    return DEFAULT_AVATAR.image;
+  }
+  const trimmed = idOrUrl.trim();
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('data:image/')) {
+    return trimmed;
+  }
+  return getAvatarById(trimmed).image;
 }
 
 /**
- * Normaliza qualquer ID/URL para o ID canónico estável
+ * Normaliza qualquer ID/URL para o ID estável
  */
 export function normalizeAvatarId(idOrUrl?: string | null): string {
   return getAvatarById(idOrUrl).id;
 }
 
 /**
- * Verifica se um determinado ID é um dos 9 avatares reais
+ * Verifica se um determinado ID é um dos 9 avatares do lore
  */
 export function isValidAvatarId(id?: string | null): boolean {
   if (!id) return false;

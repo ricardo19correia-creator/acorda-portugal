@@ -21,16 +21,22 @@ import {
   Shield,
   Activity,
   RotateCcw,
+  Users,
+  Brain,
 } from 'lucide-react'
 import { PORTUGAL_DISTRICTS } from '@/data/districts'
 import type { BotPlayerRecord, BotPopulationStatus, BotMatchSimulationResult } from '@/lib/bot-network/types'
+
+interface ExtendedBotRecord extends BotPlayerRecord {
+  intelligencePercent?: number
+}
 
 interface BotsViewProps {
   getIdToken: () => Promise<string | null>
 }
 
 export function BotsView({ getIdToken }: BotsViewProps) {
-  const [bots, setBots] = useState<BotPlayerRecord[]>([])
+  const [bots, setBots] = useState<ExtendedBotRecord[]>([])
   const [population, setPopulation] = useState<BotPopulationStatus | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -41,13 +47,25 @@ export function BotsView({ getIdToken }: BotsViewProps) {
   const [statusFilter, setStatusFilter] = useState('all')
 
   // Modais
-  const [selectedBot, setSelectedBot] = useState<BotPlayerRecord | null>(null)
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const [editingBot, setEditingBot] = useState<ExtendedBotRecord | null>(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false)
   const [simBotA, setSimBotA] = useState<string>('')
   const [simBotB, setSimBotB] = useState<string>('')
   const [simulationResult, setSimulationResult] = useState<BotMatchSimulationResult | null>(null)
   const [isSimulating, setIsSimulating] = useState(false)
+
+  // Form de edição
+  const [editForm, setEditForm] = useState({
+    displayName: '',
+    district: '',
+    level: 1,
+    rating: 1000,
+    intelligencePercent: 60,
+    personality: 'NORMAL',
+    difficulty: 'MEDIO',
+    status: 'ACTIVE',
+  })
 
   // Ações em massa
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -69,7 +87,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       if (districtFilter !== 'all') params.set('district', districtFilter)
       if (personalityFilter !== 'all') params.set('personality', personalityFilter)
       if (statusFilter !== 'all') params.set('status', statusFilter)
-      params.set('limit', '300')
+      params.set('limit', '200')
 
       const res = await fetch(`/api/admin/bots?${params.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +113,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
   }, [districtFilter, personalityFilter, statusFilter])
 
   const handleGeneratePool = async () => {
-    if (!confirm('Deseja gerar a pool completa de 457 desafiantes (157 ativos imediatamente + 300 nas próximas 15h)?')) return
+    if (!confirm('Deseja gerar a rede de 125 bots V2 com identidades portuguesas autênticas e curva de 24h?')) return
     setIsSubmitting(true)
     try {
       const token = await getIdToken()
@@ -104,7 +122,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       const res = await fetch('/api/admin/bots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ action: 'generate_pool' }),
+        body: JSON.stringify({ action: 'generate_125' }),
       })
 
       const data = await res.json()
@@ -119,7 +137,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
     }
   }
 
-  const handleToggleStatus = async (botId: string) => {
+  const handleToggleStatus = async (botId: string, currentStatus: string) => {
     try {
       const token = await getIdToken()
       if (!token) return
@@ -137,6 +155,55 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       }
     } catch (e) {
       console.error(e)
+    }
+  }
+
+  const handleOpenEdit = (bot: ExtendedBotRecord) => {
+    setEditingBot(bot)
+    setEditForm({
+      displayName: bot.displayName || '',
+      district: bot.district || 'Lisboa',
+      level: bot.level || 1,
+      rating: bot.rating || 1000,
+      intelligencePercent: bot.intelligencePercent || 60,
+      personality: (bot as any).personality || 'NORMAL',
+      difficulty: (bot as any).difficulty || 'MEDIO',
+      status: bot.status || 'ACTIVE',
+    })
+    setIsEditModalOpen(true)
+  }
+
+  const handleSaveEdit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!editingBot) return
+
+    setIsSubmitting(true)
+    try {
+      const token = await getIdToken()
+      if (!token) return
+
+      const res = await fetch('/api/admin/bots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          action: 'update',
+          botId: editingBot.id,
+          botData: editForm,
+        }),
+      })
+
+      const data = await res.json()
+      if (data.success) {
+        showToast(`Bot ${editForm.displayName} atualizado com sucesso!`)
+        setIsEditModalOpen(false)
+        loadBots()
+      } else {
+        alert(data.error || 'Erro ao atualizar bot.')
+      }
+    } catch (e: any) {
+      alert(e.message || 'Erro na comunicação.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -164,8 +231,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
     }
   }
 
-  const handleRestart15h = async () => {
-    if (!confirm('Reiniciar o ciclo de 15 horas a partir de agora (157 ativos + 300 progressivos)?')) return
+  const handleRestart24h = async () => {
+    if (!confirm('Reiniciar o ciclo de 24 horas de ativação progressiva a partir do minuto 0?')) return
     setIsSubmitting(true)
     try {
       const token = await getIdToken()
@@ -179,7 +246,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
       const data = await res.json()
       if (data.success) {
-        showToast('Ciclo de 15 horas reiniciado com sucesso!')
+        showToast('Ciclo de 24 horas reiniciado com sucesso!')
         loadBots()
       }
     } catch (e) {
@@ -205,7 +272,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
       const data = await res.json()
       if (data.success) {
         setSimulationResult(data.simulation)
-        showToast('Partida Bot vs Bot simulada com sucesso!')
+        showToast('Duelo simulado com sucesso!')
       } else {
         alert(data.error || 'Erro na simulação.')
       }
@@ -225,14 +292,14 @@ export function BotsView({ getIdToken }: BotsViewProps) {
         </div>
       )}
 
-      {/* PAINEL DE CONTROLO POPULACIONAL (157 ATIVOS AGORA + 300 EM 15H) */}
+      {/* PAINEL DE CONTROLO POPULACIONAL & PRESENCE */}
       <div className="rounded-3xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl space-y-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/30 flex items-center gap-1.5">
                 <Bot className="h-3.5 w-3.5" />
-                Rede de 457 Bots (157 Ativos Imediatos + 300 em 15h)
+                Rede de Bots V2 • População Dinâmica
               </span>
               {population?.isPaused && (
                 <span className="text-xs font-black uppercase tracking-wider text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/30">
@@ -244,7 +311,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               Centro de Desafiantes Virtuais (isBot: true)
             </h2>
             <p className="text-xs text-slate-400">
-              157 bots 100% ativos nos rankings, distritos e duelos 1v1 neste momento, com +300 bots a ativar gradualmente ao longo das próximas 15 horas.
+              Gestão de jogadores virtuais com identidades portuguesas autênticas, inteligência variável (1–99) e ativação progressiva.
             </p>
           </div>
 
@@ -266,7 +333,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               className="flex items-center gap-1.5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-4 py-2 text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-cyan-500/20 disabled:opacity-50 cursor-pointer"
             >
               <Zap className="h-4 w-4" />
-              <span>Gerar Pool 457 Bots</span>
+              <span>Gerar Pool 125 Bots</span>
             </button>
 
             {population?.isPaused ? (
@@ -293,8 +360,8 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
             <button
               type="button"
-              onClick={handleRestart15h}
-              title="Reiniciar Ciclo 15h"
+              onClick={handleRestart24h}
+              title="Reiniciar Ciclo 24h"
               className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition-colors cursor-pointer"
             >
               <RotateCcw className="h-4 w-4" />
@@ -302,47 +369,52 @@ export function BotsView({ getIdToken }: BotsViewProps) {
           </div>
         </div>
 
-        {/* Linha do Tempo e Curva de 15 Horas */}
+        {/* Linha do Tempo e Curva de 24 Horas */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
             <span className="text-slate-300 font-bold flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-cyan-400" />
-              Ciclo de 15 Horas:{' '}
-              <strong className="text-white">{population?.hoursElapsedSinceStart || 0}h / 15h decorridas</strong>
+              Ciclo de 24 Horas:{' '}
+              <strong className="text-white">{population?.hoursElapsedSinceStart || 0}h / 24h decorridas</strong>
             </span>
             <span className="font-mono text-cyan-400 font-bold">
-              {population?.activeBots || 157} ativos agora / {population?.targetActiveByCurve || 157} alvo ({population?.completionPercentage || 0}%)
+              {population?.activeBots || 5} ativos agora / {population?.targetActiveByCurve || 5} alvo da curva ({population?.completionPercentage || 0}%)
             </span>
           </div>
 
           <div className="w-full h-3 rounded-full bg-slate-950 overflow-hidden border border-white/5 p-0.5">
             <div
               className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-cyan-400 to-teal-300 transition-all duration-500"
-              style={{ width: `${Math.max(34, Math.min(100, population?.completionPercentage || 34))}%` }}
+              style={{ width: `${Math.max(4, Math.min(100, population?.completionPercentage || 4))}%` }}
             />
           </div>
         </div>
 
-        {/* Grade de 4 Métricas Chave */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        {/* Grade de 5 Métricas Chave */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
+          <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">👤 Humanos Online</span>
+            <span className="font-display font-black text-xl text-emerald-400">{population?.humanPlayersOnline || 1}</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">⚔️ Partidas Ativas</span>
+            <span className="font-display font-black text-xl text-amber-400">{population?.activeMatchesCount || 0}</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🤖 Bots Ativos</span>
+            <span className="font-display font-black text-xl text-cyan-400">{population?.activeBots || 5}</span>
+          </div>
+
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
             <span className="text-[10px] text-slate-400 block uppercase tracking-wider">Total na Pool</span>
-            <span className="font-display font-black text-xl text-white">{population?.totalBotsInPool || 457} bots</span>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🟢 157 Ativos Imediatos</span>
-            <span className="font-display font-black text-xl text-emerald-400">{population?.activeBots || 157}</span>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">🕒 +300 em 15h</span>
-            <span className="font-display font-black text-xl text-cyan-300">+{population?.inactiveBots || 300} agendados</span>
+            <span className="font-display font-black text-xl text-white">{population?.totalBotsInPool || 125}</span>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-slate-950/60 border border-white/5">
             <span className="text-[10px] text-slate-400 block uppercase tracking-wider">Rating Médio / ELO</span>
-            <span className="font-display font-black text-xl text-amber-400 font-mono">{population?.avgRating || 1280} pts</span>
+            <span className="font-display font-black text-xl text-purple-400 font-mono">{population?.avgRating || 1240}</span>
           </div>
         </div>
       </div>
@@ -386,11 +458,11 @@ export function BotsView({ getIdToken }: BotsViewProps) {
             className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-cyan-400 cursor-pointer"
           >
             <option value="all">🧠 Todas as Personalidades</option>
-            <option value="CASUAL">Casual (45-60%)</option>
-            <option value="NORMAL">Normal (60-75%)</option>
-            <option value="COMPETITIVO">Competitivo (70-85%)</option>
-            <option value="ESPECIALISTA">Especialista (&gt;90% chave)</option>
-            <option value="ELITE">Elite (80-92%)</option>
+            <option value="CASUAL">Casual (1-50%)</option>
+            <option value="NORMAL">Normal (51-65%)</option>
+            <option value="COMPETITIVO">Competitivo (66-75%)</option>
+            <option value="ESPECIALISTA">Especialista (76-85%)</option>
+            <option value="ELITE">Elite (86-99%)</option>
           </select>
 
           <select
@@ -399,9 +471,10 @@ export function BotsView({ getIdToken }: BotsViewProps) {
             className="rounded-2xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300 outline-none focus:border-cyan-400 cursor-pointer"
           >
             <option value="all">🛡️ Todos os Estados</option>
-            <option value="ACTIVE">✅ Ativos (157+)</option>
-            <option value="INACTIVE">⚪ Inativos (Agendados)</option>
+            <option value="ACTIVE">✅ Ativos</option>
+            <option value="INACTIVE">⚪ Inativos</option>
             <option value="IN_MATCH">⚔️ Em Partida</option>
+            <option value="RETIRED">🛑 Reformados</option>
           </select>
 
           <button
@@ -419,12 +492,12 @@ export function BotsView({ getIdToken }: BotsViewProps) {
         <table className="w-full text-left text-xs text-slate-300">
           <thead className="border-b border-white/10 bg-slate-950/60 font-display text-[10px] font-black uppercase tracking-wider text-slate-400">
             <tr>
-              <th className="px-5 py-3.5">Bot ID & Nome</th>
+              <th className="px-5 py-3.5">Avatar & Jogador</th>
               <th className="px-4 py-3.5">Distrito</th>
               <th className="px-4 py-3.5">Nível / XP</th>
               <th className="px-4 py-3.5">Rating ELO</th>
+              <th className="px-4 py-3.5">Inteligência</th>
               <th className="px-4 py-3.5">Personalidade</th>
-              <th className="px-4 py-3.5">Precisão</th>
               <th className="px-4 py-3.5">Tempo Médio</th>
               <th className="px-4 py-3.5">Estado</th>
               <th className="px-5 py-3.5 text-right">Ações</th>
@@ -435,7 +508,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               <tr>
                 <td colSpan={9} className="py-12 text-center text-slate-400">
                   <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-cyan-400" />
-                  <span>A carregar rede de desafiantes virtuais...</span>
+                  <span>A carregar desafiantes virtuais...</span>
                 </td>
               </tr>
             ) : bots.length === 0 ? (
@@ -448,17 +521,20 @@ export function BotsView({ getIdToken }: BotsViewProps) {
               bots.map((b) => {
                 const isActive = b.status === 'ACTIVE'
                 const isInMatch = b.status === 'IN_MATCH'
+                const isRetired = b.status === 'RETIRED'
 
                 return (
                   <tr key={b.id} className="hover:bg-white/5 transition-colors">
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 font-bold border border-cyan-500/30">
-                          🤖
-                        </div>
+                        <img
+                          src={b.avatar || '/images/avatars/camoes-2050.jpg'}
+                          alt={b.displayName}
+                          className="h-8 w-8 rounded-full border border-white/20 object-cover bg-slate-950"
+                        />
                         <div className="flex flex-col min-w-0">
                           <span className="font-bold text-white truncate">{b.displayName}</span>
-                          <span className="text-[10px] text-cyan-400 font-mono">#{b.id}</span>
+                          <span className="text-[10px] text-slate-400 font-mono">@{b.username} • #{b.id}</span>
                         </div>
                       </div>
                     </td>
@@ -472,27 +548,36 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                     <td className="px-4 py-3.5 font-bold font-mono text-amber-400">{b.rating} pts</td>
 
                     <td className="px-4 py-3.5">
-                      <span className="font-bold text-cyan-300">{b.personality}</span>
+                      <div className="flex items-center gap-1.5">
+                        <Brain className="h-3 w-3 text-cyan-400" />
+                        <span className="font-mono font-black text-cyan-300">{b.intelligencePercent || 60}%</span>
+                      </div>
                     </td>
 
-                    <td className="px-4 py-3.5 font-mono text-white font-bold">{b.accuracyPercentage}%</td>
+                    <td className="px-4 py-3.5">
+                      <span className="font-bold text-slate-300">{(b as any).personality || 'NORMAL'}</span>
+                    </td>
 
                     <td className="px-4 py-3.5 font-mono text-slate-400">
                       {((b.avgResponseTimeMs || 4000) / 1000).toFixed(1)}s
                     </td>
 
                     <td className="px-4 py-3.5">
-                      {isInMatch ? (
+                      {isRetired ? (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-800 text-slate-400 border border-white/10">
+                          Reformado
+                        </span>
+                      ) : isInMatch ? (
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/30">
                           Em Partida
                         </span>
                       ) : isActive ? (
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                          Ativo (157)
+                          Ativo
                         </span>
                       ) : (
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/5 text-slate-400 border border-white/10">
-                          Agendado (15h)
+                          Inativo
                         </span>
                       )}
                     </td>
@@ -501,26 +586,26 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           type="button"
-                          onClick={() => {
-                            setSelectedBot(b)
-                            setIsDetailModalOpen(true)
-                          }}
-                          className="px-2 py-1 rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 text-[10px] font-bold cursor-pointer"
+                          onClick={() => handleOpenEdit(b)}
+                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 text-[10px] font-bold cursor-pointer"
                         >
-                          Perfil
+                          <Edit3 className="h-3 w-3" />
+                          <span>Editar</span>
                         </button>
 
-                        <button
-                          type="button"
-                          onClick={() => handleToggleStatus(b.id)}
-                          className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
-                            isActive
-                              ? 'bg-red-500/10 text-red-400 border border-red-500/30'
-                              : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                          }`}
-                        >
-                          {isActive ? 'Pausar' : 'Ativar'}
-                        </button>
+                        {!isRetired && (
+                          <button
+                            type="button"
+                            onClick={() => handleToggleStatus(b.id, b.status)}
+                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
+                              isActive
+                                ? 'bg-red-500/10 text-red-400 border border-red-500/30'
+                                : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+                            }`}
+                          >
+                            {isActive ? 'Pausar' : 'Ativar'}
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -531,77 +616,134 @@ export function BotsView({ getIdToken }: BotsViewProps) {
         </table>
       </div>
 
-      {/* MODAL: PERFIL COMPLETO DO BOT */}
-      {isDetailModalOpen && selectedBot && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="w-full max-w-md rounded-3xl border border-white/15 bg-slate-900 p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      {/* MODAL: EDITAR BOT COMPLETO (PÚBLICO + PRIVADO) */}
+      {isEditModalOpen && editingBot && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
+          <div className="w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900 p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-500/20 text-cyan-400 font-bold border border-cyan-500/30">
-                  🤖
-                </div>
+                <img
+                  src={editingBot.avatar || '/images/avatars/camoes-2050.jpg'}
+                  alt={editingBot.displayName}
+                  className="h-10 w-10 rounded-full border border-white/20 object-cover bg-slate-950"
+                />
                 <div>
-                  <h3 className="font-display font-black text-sm text-white">{selectedBot.displayName}</h3>
-                  <span className="text-[10px] text-cyan-400 font-mono">ID: {selectedBot.id} • isBot: true</span>
+                  <h3 className="font-display font-black text-sm text-white">Editar Desafiante #{editingBot.id}</h3>
+                  <span className="text-[10px] text-cyan-400 font-mono">Dados Públicos e Configuração Privada</span>
                 </div>
               </div>
-              <button type="button" onClick={() => setIsDetailModalOpen(false)} className="text-slate-400 hover:text-white">
+              <button type="button" onClick={() => setIsEditModalOpen(false)} className="text-slate-400 hover:text-white">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="text-xs text-slate-300 space-y-3">
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/5">
-                  <span className="text-[10px] text-slate-400 block">Distrito</span>
-                  <span className="font-bold text-white">📍 {selectedBot.district}</span>
+            <form onSubmit={handleSaveEdit} className="space-y-3.5 text-xs">
+              <div className="space-y-1">
+                <label className="font-bold text-slate-300">Nome de Apresentação:</label>
+                <input
+                  type="text"
+                  value={editForm.displayName}
+                  onChange={(e) => setEditForm({ ...editForm, displayName: e.target.value })}
+                  className="w-full rounded-xl border border-white/15 bg-slate-950 p-2 text-white font-bold"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-300">Distrito:</label>
+                  <select
+                    value={editForm.district}
+                    onChange={(e) => setEditForm({ ...editForm, district: e.target.value })}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-2 text-white font-bold"
+                  >
+                    {PORTUGAL_DISTRICTS.map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/5">
-                  <span className="text-[10px] text-slate-400 block">Personalidade</span>
-                  <span className="font-bold text-cyan-300">{selectedBot.personality}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/5">
-                  <span className="text-[10px] text-slate-400 block">Nível & Rating</span>
-                  <span className="font-bold text-emerald-400 font-mono">Nv.{selectedBot.level} ({selectedBot.rating} ELO)</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/5">
-                  <span className="text-[10px] text-slate-400 block">Vitórias / Derrotas</span>
-                  <span className="font-bold text-white font-mono">{selectedBot.wins}V / {selectedBot.losses}D</span>
+
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-300">Estado Operacional:</label>
+                  <select
+                    value={editForm.status}
+                    onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-2 text-white font-bold"
+                  >
+                    <option value="ACTIVE">Ativo</option>
+                    <option value="INACTIVE">Inativo</option>
+                    <option value="RETIRED">Reformado</option>
+                  </select>
                 </div>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-950/60 border border-white/5 space-y-1.5">
-                <span className="text-[10px] font-bold text-slate-400 block uppercase">Especializações (Categorias Fortes):</span>
-                <div className="flex flex-wrap gap-1">
-                  {(selectedBot.strengths || []).map((s) => (
-                    <span key={s} className="text-[10px] font-bold text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
-                      ★ {s}
-                    </span>
-                  ))}
+              {/* Slider de Inteligência (1 a 99) */}
+              <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-cyan-500/20 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-cyan-300 flex items-center gap-1.5">
+                    <Brain className="h-4 w-4 text-cyan-400" />
+                    Percentagem de Inteligência:
+                  </span>
+                  <strong className="font-mono text-base text-cyan-400">{editForm.intelligencePercent}%</strong>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="99"
+                  value={editForm.intelligencePercent}
+                  onChange={(e) => setEditForm({ ...editForm, intelligencePercent: Number(e.target.value) })}
+                  className="w-full accent-cyan-400 cursor-pointer"
+                />
+                <span className="text-[10px] text-slate-400 block">
+                  Determina a probabilidade base de acerto, tempo de hesitação e sensibilidade às categorias.
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-300">Nível (1–40):</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={editForm.level}
+                    onChange={(e) => setEditForm({ ...editForm, level: Number(e.target.value) })}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-2 text-white font-mono"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-bold text-slate-300">Rating ELO (800–2200):</label>
+                  <input
+                    type="number"
+                    min="500"
+                    max="3000"
+                    value={editForm.rating}
+                    onChange={(e) => setEditForm({ ...editForm, rating: Number(e.target.value) })}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 p-2 text-white font-mono"
+                  />
                 </div>
               </div>
 
-              <div className="p-3 rounded-2xl bg-slate-950/60 border border-white/5 space-y-1.5">
-                <span className="text-[10px] font-bold text-slate-400 block uppercase">Vulnerabilidades (Categorias Fracas):</span>
-                <div className="flex flex-wrap gap-1">
-                  {(selectedBot.weaknesses || []).map((w) => (
-                    <span key={w} className="text-[10px] font-bold text-red-300 bg-red-500/10 px-2 py-0.5 rounded-md border border-red-500/20">
-                      {w}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex justify-end gap-2 pt-3 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setIsEditModalOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-wider"
+                >
+                  {isSubmitting ? 'A guardar...' : 'Guardar Alterações'}
+                </button>
               </div>
-            </div>
-
-            <div className="flex justify-end pt-3 border-t border-white/10">
-              <button
-                type="button"
-                onClick={() => setIsDetailModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold"
-              >
-                Fechar
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       )}
@@ -630,7 +772,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                 >
                   {bots.map((b) => (
                     <option key={b.id} value={b.id}>
-                      {b.displayName} (Nv.{b.level} • {b.personality})
+                      {b.displayName} (Nv.{b.level} • {b.intelligencePercent || 60}%)
                     </option>
                   ))}
                 </select>
@@ -645,7 +787,7 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                 >
                   {bots.map((b) => (
                     <option key={b.id} value={b.id}>
-                      {b.displayName} (Nv.{b.level} • {b.personality})
+                      {b.displayName} (Nv.{b.level} • {b.intelligencePercent || 60}%)
                     </option>
                   ))}
                 </select>

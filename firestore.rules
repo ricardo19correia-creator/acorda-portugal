@@ -110,6 +110,14 @@ service cloud.firestore {
       allow delete: if isAuthenticated() || isAdmin();
     }
 
+    // Presença em Tempo Real de Humanos (Heartbeat Realtime)
+    match /presence/{sessionId} {
+      allow read, write: if true;
+    }
+    match /active_presence/{clientId} {
+      allow read, write: if true;
+    }
+
     // ==========================================
     // 👑 COLEÇÕES DO CENTRO DE CONTROLO MÁXIMO
     // ==========================================
@@ -133,9 +141,15 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // Gestão de Bots Oficiais (isBot: true)
+    // Perfil PÚBLICO de Bots Oficiais (isBot: true)
     match /botPlayers/{botId} {
-      allow read, write: if true;
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Configuração PRIVADA de Bots Oficiais (Sensível / Exclusivo Admin)
+    match /botPlayersPrivate/{botId} {
+      allow read, write: if isAdmin();
     }
 
     // Alertas do Sistema

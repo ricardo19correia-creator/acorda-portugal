@@ -1,22 +1,26 @@
 import { getAdminFirestore } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
-import type { BotPlayerRecord, BotPopulationConfig, BotPopulationStatus } from './types'
-import { generateBotsPool } from './bot-generator'
+import type {
+  BotPlayerRecord,
+  BotPlayerPrivateRecord,
+  BotPopulationConfig,
+  BotPopulationStatus,
+} from './types'
+import { generateBotsPoolV2, DEFAULT_24H_TARGETS } from './bot-generator'
 
 const DEFAULT_POPULATION_CONFIG: BotPopulationConfig = {
-  initialActiveBots: 157,
-  additionalBots: 300,
-  totalBots: 457,
-  activationDurationHours: 15,
+  totalBotsInPool: 125,
+  activationScheduleHours: 24,
   activationStartTime: Date.now(),
-  curve: 'dynamic',
-  minimumBotsActive: 157,
-  maximumBotsActive: 457,
+  hourlyActiveTargets: DEFAULT_24H_TARGETS,
+  minimumBotsActive: 5,
+  maximumBotsActive: 125,
   isNetworkPaused: false,
 }
 
 /**
- * Calcula o alvo de bots ativos com 157 imediatos e +300 ao longo de 15 horas
+ * Calcula o alvo de bots ativos com base no tempo decorrido da curva de 24h
+ * e no tráfego humano em tempo real
  */
 export function calculateTargetActiveBots(
   config: BotPopulationConfig,
@@ -25,50 +29,52 @@ export function calculateTargetActiveBots(
 ): number {
   if (config.isNetworkPaused) return 0
 
-  const initial = config.initialActiveBots || 157
-  const additional = config.additionalBots || 300
-  const durationHours = config.activationDurationHours || 15
-
-  const elapsedMs = Math.max(0, currentTime - config.activationStartTime)
+  const targets = config.hourlyActiveTargets || DEFAULT_24H_TARGETS
+  const elapsedMs = Math.max(0, currentTime - (config.activationStartTime || currentTime))
   const elapsedHours = elapsedMs / (1000 * 60 * 60)
 
-  if (elapsedHours >= durationHours) {
-    return initial + additional // 457 bots no total
+  let baseTarget: number
+
+  if (elapsedHours >= (config.activationScheduleHours || 24)) {
+    baseTarget = targets[targets.length - 1] || 125
+  } else {
+    const hourFloor = Math.floor(elapsedHours)
+    const hourCeil = Math.min(targets.length - 1, hourFloor + 1)
+    const hourFraction = elapsedHours - hourFloor
+
+    const valFloor = targets[Math.min(targets.length - 1, hourFloor)] || 5
+    const valCeil = targets[hourCeil] || valFloor
+
+    // Interpolação suave entre as horas
+    baseTarget = Math.round(valFloor + (valCeil - valFloor) * hourFraction)
   }
 
-  // Progresso linear/suave ao longo de 15 horas:
-  // Hora 0: 157 bots
-  // Hora 3: 157 + 60 = 217 bots
-  // Hora 7.5: 157 + 150 = 307 bots
-  // Hora 12: 157 + 240 = 397 bots
-  // Hora 15: 157 + 300 = 457 bots
-  const progressRatio = Math.min(1.0, elapsedHours / durationHours)
-  const addedNow = Math.round(additional * progressRatio)
-  const baseTarget = initial + addedNow
-
-  // Modulador de Tráfego Humano
+  // Modulador Dinâmico de Tráfego Humano:
+  // Se existirem muitos humanos online, reduz a necessidade de bots.
+  // Se existirem poucos humanos online, aumenta ligeiramente a prontidão de bots.
   let humanModifier = 0
-  if (humansOnline > 30) {
-    humanModifier = -Math.round(baseTarget * 0.05)
-  } else if (humansOnline < 5) {
+  if (humansOnline > 25) {
+    humanModifier = -Math.round(baseTarget * 0.08)
+  } else if (humansOnline < 3) {
     humanModifier = +Math.round(baseTarget * 0.05)
   }
 
   const finalTarget = Math.max(
-    initial,
-    Math.min(config.totalBots || 457, baseTarget + humanModifier)
+    config.minimumBotsActive || 5,
+    Math.min(config.maximumBotsActive || 125, baseTarget + humanModifier)
   )
 
   return finalTarget
 }
 
 /**
- * Avalia e sincroniza a população de bots no Firestore (botPlayers e publicProfiles)
+ * Avalia e sincroniza o estado da população de bots no Firestore
+ * (tanto a coleção pública botPlayers como a privada botPlayersPrivate)
  */
 export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
   const db = getAdminFirestore()
 
-  // 1. Obter ou inicializar configuração da população
+  // 1. Obter ou inicializar configuração da população em adminSettings/bot_population
   const configDocRef = db.collection('adminSettings').doc('bot_population')
   const configSnap = await configDocRef.get()
 
@@ -76,20 +82,23 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
   if (configSnap.exists) {
     config = { ...DEFAULT_POPULATION_CONFIG, ...configSnap.data() }
   } else {
-    await configDocRef.set({ ...DEFAULT_POPULATION_CONFIG, createdAt: FieldValue.serverTimestamp() })
+    await configDocRef.set({
+      ...DEFAULT_POPULATION_CONFIG,
+      createdAt: FieldValue.serverTimestamp(),
+    })
   }
 
-  // 2. Verificar se a pool de 457 bots existe
+  // 2. Verificar se a pool de 125 bots existe em botPlayers
   const botsSnap = await db.collection('botPlayers').get()
 
-  if (botsSnap.size < 157) {
-    // Inicializar a pool completa de 457 bots (157 ativos já)
-    const newBots = generateBotsPool(457, 157)
+  if (botsSnap.size < 50) {
+    // Inicializar as duas coleções (botPlayers e botPlayersPrivate)
+    const { publicRecords, privateRecords } = generateBotsPoolV2(125)
 
-    // Escrever em chunks de 400 (limite Firestore batch é 500)
-    for (let i = 0; i < newBots.length; i += 400) {
+    // Gravar botPlayers
+    for (let i = 0; i < publicRecords.length; i += 250) {
       const batch = db.batch()
-      const slice = newBots.slice(i, i + 400)
+      const slice = publicRecords.slice(i, i + 250)
       slice.forEach((b) => {
         const ref = db.collection('botPlayers').doc(b.id)
         batch.set(ref, b)
@@ -97,27 +106,50 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
       await batch.commit()
     }
 
-    console.log('[BOT POPULATION] 457 Bots gerados (157 ativos imediatamente + 300 nas próximas 15h)!')
+    // Gravar botPlayersPrivate
+    for (let i = 0; i < privateRecords.length; i += 250) {
+      const batch = db.batch()
+      const slice = privateRecords.slice(i, i + 250)
+      slice.forEach((priv) => {
+        const ref = db.collection('botPlayersPrivate').doc(priv.id)
+        batch.set(ref, priv)
+      })
+      await batch.commit()
+    }
+
+    console.log('[BOT NETWORK V2] 125 bots inicializados em botPlayers e botPlayersPrivate!')
   }
 
-  // 3. Obter contagem de humanos online
+  // 3. Obter Humanos Reais Online via presence
+  const now = Date.now()
+  const cutoffPresence = now - 45_000 // 45 segundos de heartbeat
   const presenceSnap = await db
     .collection('presence')
-    .where('online', '==', true)
+    .where('lastActive', '>=', cutoffPresence)
     .get()
-    .catch(() => ({ size: 0 }))
-  const humansOnline = presenceSnap.size
+    .catch(() => ({ size: 0, docs: [] }))
+  const humanPlayersOnline = Math.max(1, presenceSnap.size)
 
-  // 4. Calcular Meta da Curva Atual
-  const now = Date.now()
-  const targetActive = calculateTargetActiveBots(config, now, humansOnline)
+  // 4. Obter Partidas Ativas no servidor
+  const activeDuelsSnap = await db
+    .collection('duels')
+    .where('status', 'in', ['matched', 'playing'])
+    .get()
+    .catch(() => ({ size: 0, docs: [] }))
+  const activeMatchesCount = activeDuelsSnap.size
 
-  // 5. Atualizar Estados dos Bots no Firestore
+  // 5. Calcular Meta da Curva Atual
+  const targetActive = calculateTargetActiveBots(config, now, humanPlayersOnline)
+
+  // 6. Atualizar Estados dos Bots no Firestore
   const allBotsDocs = (await db.collection('botPlayers').get()).docs
   const allBots = allBotsDocs.map((d) => ({
     id: d.id,
     ...d.data(),
   })) as BotPlayerRecord[]
+
+  // Ordenar por ID numérico (BOT_0001 ...)
+  allBots.sort((a, b) => a.id.localeCompare(b.id))
 
   let activeCount = 0
   let inMatchCount = 0
@@ -133,7 +165,7 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
   for (let index = 0; index < allBots.length; index++) {
     const bot = allBots[index]
     totalRating += bot.rating || 1000
-    totalAccuracy += bot.accuracyPercentage || 70
+    totalAccuracy += bot.accuracyPercentage || 65
 
     if (bot.status === 'SUSPENDED') {
       suspendedCount++
@@ -189,12 +221,11 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
     await batch.commit()
   }
 
-  // 6. Sincronizar bots ativos para a coleção publicProfiles para visibilidade instantânea em rankings
+  // 7. Sincronizar bots ativos para publicProfiles para visibilidade instantânea nos rankings
   const activeBots = allBots.filter((b) => b.status === 'ACTIVE' || b.status === 'IN_MATCH')
   if (activeBots.length > 0) {
     try {
       const pubBatch = db.batch()
-      // Atualizar primeiros 100 bots ativos em publicProfiles
       activeBots.slice(0, 100).forEach((b) => {
         const pubRef = db.collection('publicProfiles').doc(b.id)
         pubBatch.set(
@@ -223,8 +254,8 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
     }
   }
 
-  const elapsedHours = (now - config.activationStartTime) / (1000 * 60 * 60)
-  const durationHours = config.activationDurationHours || 15
+  const elapsedHours = (now - (config.activationStartTime || now)) / (1000 * 60 * 60)
+  const durationHours = config.activationScheduleHours || 24
   const completionPercentage = Math.min(
     100,
     Math.round((elapsedHours / durationHours) * 100)
@@ -242,13 +273,17 @@ export async function syncBotPopulationState(): Promise<BotPopulationStatus> {
     activationDurationHours: durationHours,
     completionPercentage,
     isPaused: config.isNetworkPaused,
-    avgRating: allBots.length > 0 ? Math.round(totalRating / allBots.length) : 1200,
-    avgAccuracy: allBots.length > 0 ? Math.round(totalAccuracy / allBots.length) : 70,
+    avgRating: allBots.length > 0 ? Math.round(totalRating / allBots.length) : 1240,
+    avgAccuracy: allBots.length > 0 ? Math.round(totalAccuracy / allBots.length) : 65,
+    avgIntelligence: 62,
+    humanPlayersOnline,
+    activeMatchesCount,
   }
 }
 
 /**
  * Seleciona o melhor bot disponível para uma partida 1v1
+ * Considera rating, nível, disponibilidade e histórico recente contra o jogador
  */
 export async function findBestBotForMatchmaking(
   playerRating: number,
@@ -285,7 +320,7 @@ export async function findBestBotForMatchmaking(
     return diffA - diffB
   })
 
-  // Selecionar aleatoriamente entre os 5 mais compatíveis para grande diversidade
+  // Selecionar aleatoriamente entre os 5 mais compatíveis para diversidade
   const topCandidates = candidates.slice(0, 5)
   const chosen = topCandidates[Math.floor(Math.random() * topCandidates.length)]
 

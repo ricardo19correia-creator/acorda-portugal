@@ -163,7 +163,7 @@ export function SiteHeader() {
         {/* Desktop Controls (lg+) */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <AudioPlayer />
-          <OnlineUsersBadge />
+          <OnlineUsersBadge showMatches={true} />
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </div>
 
