@@ -10,28 +10,34 @@ service cloud.firestore {
     function isOwner(userId) {
       return isAuthenticated() && request.auth.uid == userId;
     }
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+      );
+    }
 
     // Coleção de Utilizadores (Perfis, moedas, inventário e estatísticas)
     match /users/{userId} {
       allow read: if true;
       allow create: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid);
-      allow update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid);
-      allow delete: if isOwner(userId);
+      allow update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid || isAdmin());
+      allow delete: if isOwner(userId) || isAdmin();
 
       match /completedGames/{gameId} {
-        allow read, write: if isOwner(userId);
+        allow read, write: if isOwner(userId) || isAdmin();
       }
 
       match /transactions/{txId} {
-        allow read, write: if isOwner(userId);
+        allow read, write: if isOwner(userId) || isAdmin();
       }
 
       match /match_rewards/{matchId} {
-        allow read, write: if isOwner(userId);
+        allow read, write: if isOwner(userId) || isAdmin();
       }
 
       match /walletTransactions/{txId} {
-        allow read, write: if isOwner(userId);
+        allow read, write: if isOwner(userId) || isAdmin();
       }
     }
 
@@ -39,14 +45,14 @@ service cloud.firestore {
     match /transactions/{txId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated();
-      allow update, delete: if false;
+      allow update, delete: if isAdmin();
     }
 
     // Perfis públicos para Rankings Nacionais e Disputa Distrital
     match /publicProfiles/{profileId} {
       allow read: if true;
-      allow create, update: if isAuthenticated() && (request.auth.uid == profileId || request.resource.data.uid == request.auth.uid);
-      allow delete: if isOwner(profileId);
+      allow create, update: if isAuthenticated() && (request.auth.uid == profileId || request.resource.data.uid == request.auth.uid || isAdmin());
+      allow delete: if isOwner(profileId) || isAdmin();
     }
 
     // Presença em tempo real (Conexões ativas)
@@ -68,14 +74,14 @@ service cloud.firestore {
     match /games/{gameId} {
       allow read: if true;
       allow create: if isAuthenticated();
-      allow update, delete: if false;
+      allow update, delete: if isAdmin();
     }
 
     // Reportes de Perguntas e Suporte
     match /reports/{reportId} {
       allow read: if isAuthenticated();
       allow create: if true;
-      allow update, delete: if false;
+      allow update, delete: if isAdmin();
     }
 
     // Módulo Oficial «Os Criadores» (Página Social Comunitária)
@@ -83,25 +89,65 @@ service cloud.firestore {
       allow read: if true;
       allow create: if isAuthenticated() || request.resource.data.isAnonymous == true;
       allow update: if isAuthenticated();
-      allow delete: if isAuthenticated() && (request.auth.uid == resource.data.authorId || request.auth.token.admin == true);
+      allow delete: if isAuthenticated() && (request.auth.uid == resource.data.authorId || isAdmin());
 
       match /comments/{commentId} {
         allow read: if true;
         allow create: if isAuthenticated();
-        allow update, delete: if isAuthenticated() && (request.auth.uid == resource.data.authorId || request.auth.token.admin == true);
+        allow update, delete: if isAuthenticated() && (request.auth.uid == resource.data.authorId || isAdmin());
       }
     }
 
     match /creatorReports/{reportId} {
       allow read: if isAuthenticated();
       allow create: if true;
-      allow update, delete: if false;
+      allow update, delete: if isAdmin();
     }
 
     // Publicações da Comunidade (CriadoresFeed)
     match /publicacoes_comunidade/{postId} {
       allow read, create, update: if true;
-      allow delete: if isAuthenticated();
+      allow delete: if isAuthenticated() || isAdmin();
+    }
+
+    // ==========================================
+    // 👑 COLEÇÕES DO CENTRO DE CONTROLO MÁXIMO
+    // ==========================================
+
+    // Utilizadores Administradores
+    match /adminUsers/{adminId} {
+      allow read: if isAuthenticated() && (request.auth.uid == adminId || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // Registo Imutável de Auditoria
+    match /adminAuditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false; // Append-only estrito
+    }
+
+    // Configurações Globais do Jogo
+    match /adminSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Gestão de Bots Oficiais (isBot: true)
+    match /botPlayers/{botId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Alertas do Sistema
+    match /adminAlerts/{alertId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Métricas do Sistema
+    match /systemMetrics/{metricId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
   }
 }
