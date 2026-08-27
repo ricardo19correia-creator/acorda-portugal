@@ -1100,6 +1100,28 @@ export async function claimDuelRewards(
   duelId: string,
   userUid: string,
 ): Promise<DuelRewardResult> {
+  // 1. Tentar primeiro via API Server-Side Segura (Single Source of Truth)
+  try {
+    const token = await auth?.currentUser?.getIdToken()
+    if (token) {
+      const res = await fetch('/api/duel/claim', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ duelId }),
+      })
+      const json = await res.json()
+      if (json.success && json.data) {
+        return json.data as DuelRewardResult
+      }
+    }
+  } catch (apiErr) {
+    console.warn('[DUEL REWARDS] Fallback para transação de segurança:', apiErr)
+  }
+
+  // 2. Transação de segurança caso a API falhe
   const duelRef = doc(db, 'duels', duelId)
   const userRef = doc(db, 'users', userUid)
   const publicProfileRef = doc(db, 'publicProfiles', userUid)

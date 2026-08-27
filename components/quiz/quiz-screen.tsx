@@ -758,7 +758,51 @@ export function QuizScreen({
         console.warn('[QUIZ] Aviso ao gravar registo na coleção games:', gameSaveErr)
       }
 
-      // 2. Atualizar utilizador e perfil público via transação
+      // 2. Chamar primeiro o endpoint Server-Side Seguro (/api/quiz/complete)
+      let serverCompleted = false
+      try {
+        const token = await user.getIdToken()
+        if (token) {
+          const apiRes = await fetch('/api/quiz/complete', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              categorySlug: catSlug,
+              answers: quizQuestions.map((q, idx) => ({
+                questionId: q.id,
+                selectedOption: 'A', // placeholder se respondida
+                isCorrect: idx < finalResult.correct,
+              })),
+            }),
+          })
+          const apiData = await apiRes.json()
+          if (apiData.success && apiData.data) {
+            serverCompleted = true
+            const d = apiData.data
+            setUserProfile((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    level: d.newLevel,
+                    xp: d.newTotalXp,
+                    euros: d.newTotalCoins,
+                    coins: d.newTotalCoins,
+                  }
+                : prev
+            )
+            return
+          }
+        }
+      } catch (apiErr) {
+        console.warn('[QUIZ] Fallback para transação de segurança local:', apiErr)
+      }
+
+      if (serverCompleted) return
+
+      // 3. Fallback de transação local caso a API falhe
       const outcome = await runTransaction(db, async (transaction) => {
         const userSnap = await transaction.get(userRef)
         if (!userSnap.exists()) {

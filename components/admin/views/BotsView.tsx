@@ -54,6 +54,9 @@ export function BotsView({ getIdToken }: BotsViewProps) {
   const [simBotB, setSimBotB] = useState<string>('')
   const [simulationResult, setSimulationResult] = useState<BotMatchSimulationResult | null>(null)
   const [isSimulating, setIsSimulating] = useState(false)
+  const [isQaModalOpen, setIsQaModalOpen] = useState(false)
+  const [qaReport, setQaReport] = useState<any>(null)
+  const [isQaRunning, setIsQaRunning] = useState(false)
 
   // Form de edição
   const [editForm, setEditForm] = useState({
@@ -283,6 +286,33 @@ export function BotsView({ getIdToken }: BotsViewProps) {
     }
   }
 
+  const handleRunQaStress = async () => {
+    setIsQaRunning(true)
+    setIsQaModalOpen(true)
+    try {
+      const token = await getIdToken()
+      if (!token) return
+
+      const res = await fetch('/api/admin/bots/qa-stress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ matchesCount: 500 }),
+      })
+
+      const data = await res.json()
+      if (data.success) {
+        setQaReport(data.report)
+        showToast('QA Stress Test de 500 partidas concluído com sucesso!')
+      } else {
+        alert(data.error || 'Erro no QA Stress Test.')
+      }
+    } catch (e: any) {
+      alert(e.message || 'Erro na comunicação.')
+    } finally {
+      setIsQaRunning(false)
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Toast */}
@@ -317,6 +347,16 @@ export function BotsView({ getIdToken }: BotsViewProps) {
 
           {/* Botões de Ação Master */}
           <div className="flex items-center gap-2 flex-wrap shrink-0">
+            <button
+              type="button"
+              onClick={handleRunQaStress}
+              disabled={isQaRunning}
+              className="flex items-center gap-1.5 rounded-2xl border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 px-3.5 py-2 text-xs font-bold text-purple-300 transition-all cursor-pointer disabled:opacity-50"
+            >
+              <Activity className="h-4 w-4 text-purple-400" />
+              <span>QA Stress (500 Partidas)</span>
+            </button>
+
             <button
               type="button"
               onClick={() => setIsSimulatorOpen(true)}
@@ -842,6 +882,85 @@ export function BotsView({ getIdToken }: BotsViewProps) {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: QA STRESS TEST (500 PARTIDAS) */}
+      {isQaModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
+          <div className="w-full max-w-2xl rounded-3xl border border-purple-500/30 bg-slate-900 p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2 text-purple-400 font-display font-black text-sm uppercase">
+                <Activity className="h-5 w-5" />
+                <span>QA Stress Test — 500 Partidas Simuladas</span>
+              </div>
+              <button type="button" onClick={() => setIsQaModalOpen(false)} className="text-slate-400 hover:text-white">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {isQaRunning ? (
+              <div className="py-12 text-center space-y-3 text-slate-300">
+                <RefreshCw className="h-8 w-8 animate-spin mx-auto text-purple-400" />
+                <h4 className="font-display font-black uppercase text-sm text-white">A simular 500 partidas Bot vs Bot...</h4>
+                <p className="text-xs text-slate-400 max-w-md mx-auto">
+                  A processar 10.000 decisões de perguntas estocásticas, tempos gaussianos humanizados e curva de distribuição estatística.
+                </p>
+              </div>
+            ) : qaReport ? (
+              <div className="space-y-4 text-xs animate-in zoom-in-95">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-white/5">
+                    <span className="text-[10px] text-slate-400 block uppercase">Partidas Simuladas</span>
+                    <span className="font-display font-black text-xl text-purple-400">{qaReport.totalMatchesSimulated}</span>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-white/5">
+                    <span className="text-[10px] text-slate-400 block uppercase">Perguntas Processadas</span>
+                    <span className="font-display font-black text-xl text-cyan-400">{qaReport.totalQuestionsProcessed}</span>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-white/5">
+                    <span className="text-[10px] text-slate-400 block uppercase">Precisão Global</span>
+                    <span className="font-display font-black text-xl text-emerald-400">{qaReport.overallAccuracyPercent}%</span>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-950/80 border border-white/5">
+                    <span className="text-[10px] text-slate-400 block uppercase">Tempo Médio / Perg.</span>
+                    <span className="font-display font-black text-xl text-amber-400">{qaReport.averageResponseTimePerQuestion}s</span>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-950/80 border border-purple-500/20 space-y-2">
+                  <span className="text-xs font-bold text-slate-300 block">Distribuição de Vitórias e Equilíbrio Competitivo:</span>
+                  <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-mono">
+                    <div className="p-2 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                      <strong>Desafiante A:</strong> {qaReport.outcomes.player1Wins} ({qaReport.outcomes.winRateP1}%)
+                    </div>
+                    <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                      <strong>Desafiante B:</strong> {qaReport.outcomes.player2Wins} ({qaReport.outcomes.winRateP2}%)
+                    </div>
+                    <div className="p-2 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                      <strong>Empates:</strong> {qaReport.outcomes.draws} ({qaReport.outcomes.drawRate}%)
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-slate-400 pt-1">
+                    Classificação de Equilíbrio: <strong className="text-emerald-400">{qaReport.balanceScore}</strong> • Bots Testados: <strong className="text-white">{qaReport.botsTestedCount}</strong>
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsQaModalOpen(false)}
+                    className="px-5 py-2 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-black uppercase tracking-wider text-xs"
+                  >
+                    Fechar Relatório
+                  </button>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       )}

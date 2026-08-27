@@ -108,6 +108,24 @@
 }
 
 @layer utilities {
+  /* Mobile First Safe Areas & Touch Optimization */
+  .safe-area-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* 3D Glassmorphic Cards across All Game Screens */
   .card-game,
   .card-hud-cyber,
