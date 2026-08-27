@@ -7,6 +7,8 @@ export type PresenceData = {
   activity: UserActivityState
   gameId?: string | null
   district?: string
+  level?: number
+  xp?: number
   username: string
   photoURL?: string | null
   isAnonymous?: boolean
@@ -17,6 +19,8 @@ export type PublicActiveUser = {
   id: string
   username: string
   district: string
+  level: number
+  xp: number
   activity: UserActivityState
   activityLabel: string
   photoURL?: string | null
