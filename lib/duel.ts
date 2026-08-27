@@ -598,10 +598,11 @@ export function subscribeToWaitingRoom(
       }
 
       const duel = snap.data() as DuelDocument
+      const opp = duel.playerB || (duel as any).player2
 
-      if (duel.status === 'matched' && duel.playerB) {
-        console.log('[Matchmaking] Room matched via onSnapshot! Room:', roomId, 'Adversário:', duel.playerB.displayName)
-        onMatched(duel, duel.playerB)
+      if (duel.status === 'matched' && opp) {
+        console.log('[Matchmaking] Room matched via onSnapshot! Room:', roomId, 'Adversário:', opp.displayName)
+        onMatched(duel, opp)
       } else if (duel.status === 'cancelled') {
         if (onCancelled) onCancelled()
       }
@@ -1004,27 +1005,82 @@ export async function submitDuelAnswer(
     let winnerReason: 'score' | 'draw' | 'abandon' | 'surrender' | 'opponent_forfeit' | null = duel.winnerReason || null
     let finishedAt: number | null = duel.finishedAt || null
 
-    if (player.finished && opponent?.finished) {
+    let updatedOpponent = opponent ? { ...opponent } : null
+
+    // Se o adversário for NPC, sincronizar as respostas e progresso do NPC
+    const isOpponentNpc =
+      opponent &&
+      ((opponent as any).playerType === 'npc' ||
+        (opponent as any).isNpc === true ||
+        opponent.uid?.startsWith('npc_') ||
+        Boolean((opponent as any).simulation))
+
+    if (isOpponentNpc && updatedOpponent) {
+      const sim = (updatedOpponent as any).simulation
+      const simResults: any[] = sim?.questionResults || []
+
+      const targetIndex = Math.min(duel.questions.length, questionIndex + 1)
+      const npcAnswers: DuelAnswer[] = []
+      let npcScore = 0
+      let npcCorrectCount = 0
+
+      for (let i = 0; i < targetIndex; i++) {
+        const q = duel.questions[i]
+        const simQ = simResults[i]
+        const isNpcCorrect = simQ ? Boolean(simQ.isCorrect) : Math.random() > 0.35
+        const respTime = simQ ? Number(simQ.responseTimeSeconds) || 4.2 : 4.0
+        const pts = simQ ? Number(simQ.pointsAwarded) || (isNpcCorrect ? 100 : 0) : (isNpcCorrect ? 100 : 0)
+
+        if (isNpcCorrect) npcCorrectCount++
+        npcScore += pts
+
+        npcAnswers.push({
+          questionId: q.id,
+          questionIndex: i,
+          selectedOption: isNpcCorrect ? q.correct : ((['A', 'B', 'C', 'D'].find((k) => k !== q.correct) as any) || 'A'),
+          correctOption: q.correct,
+          isCorrect: isNpcCorrect,
+          status: isNpcCorrect ? 'CORRECT' : 'WRONG',
+          pointsAwarded: pts,
+          answeredAt: now - Math.round((targetIndex - i) * respTime * 1000),
+          timeSpentSeconds: respTime,
+        })
+      }
+
+      updatedOpponent.answers = npcAnswers
+      updatedOpponent.score = npcScore
+      updatedOpponent.correctCount = npcCorrectCount
+      updatedOpponent.currentQuestionIndex = targetIndex
+
+      if (isLastQuestion || targetIndex >= duel.questions.length) {
+        updatedOpponent.finished = true
+        updatedOpponent.finishedAt = now
+      }
+    }
+
+    const opponentIsFinished = updatedOpponent ? updatedOpponent.finished : false
+
+    if (player.finished && opponentIsFinished) {
       newStatus = 'finished'
       finishedAt = Date.now()
 
-      const scoreA = isPlayerA ? player.score : opponent.score
-      const scoreB = isPlayerA ? opponent.score : player.score
+      const scoreA = isPlayerA ? player.score : (updatedOpponent?.score || 0)
+      const scoreB = isPlayerA ? (updatedOpponent?.score || 0) : player.score
 
-      const timeA = (isPlayerA ? player.answers : opponent.answers).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
-      const timeB = (isPlayerA ? opponent.answers : player.answers).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
+      const timeA = (isPlayerA ? player.answers : (updatedOpponent?.answers || [])).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
+      const timeB = (isPlayerA ? (updatedOpponent?.answers || []) : player.answers).reduce((acc, a) => acc + (a.timeSpentSeconds || 0), 0)
 
       if (scoreA > scoreB) {
         winnerUid = duel.playerA.uid
         winnerReason = 'score'
       } else if (scoreB > scoreA) {
-        winnerUid = duel.playerB!.uid
+        winnerUid = duel.playerB?.uid || 'npc_opponent'
         winnerReason = 'score'
       } else if (timeA < timeB) {
         winnerUid = duel.playerA.uid
         winnerReason = 'score'
       } else if (timeB < timeA) {
-        winnerUid = duel.playerB!.uid
+        winnerUid = duel.playerB?.uid || 'npc_opponent'
         winnerReason = 'score'
       } else {
         winnerUid = null
@@ -1037,7 +1093,16 @@ export async function submitDuelAnswer(
       winnerUid,
       winnerReason,
       finishedAt,
-      ...(isPlayerA ? { playerA: player } : { playerB: player }),
+      ...(isPlayerA
+        ? {
+            playerA: player,
+            ...(updatedOpponent ? { playerB: updatedOpponent, player2: updatedOpponent } : {}),
+          }
+        : {
+            playerB: player,
+            player2: player,
+            ...(updatedOpponent ? { playerA: updatedOpponent } : {}),
+          }),
     }
 
     transaction.update(duelRef, updates)
