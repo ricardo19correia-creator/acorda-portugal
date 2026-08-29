@@ -11,7 +11,7 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error('[CRITICAL_APP_ERROR]', {
+    console.error('[GLOBAL_APP_ERROR]', {
       message: error?.message,
       stack: error?.stack,
       digest: error?.digest,
@@ -34,7 +34,7 @@ export default function GlobalError({
             </div>
 
             <h1 className="text-2xl font-black uppercase text-white tracking-tight">
-              Recuperação de Sistema
+              Desafio Nacional
             </h1>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">

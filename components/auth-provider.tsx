@@ -1,18 +1,15 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { onAuthStateChanged, type User } from 'firebase/auth'
-import { doc, setDoc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore'
+import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import {
   getAvatarById,
-  getAvatarImage,
-  normalizeAvatarId,
   DEFAULT_AVATAR,
-  REAL_AVATARS,
 } from '@/lib/avatars'
 
 import {
@@ -32,9 +29,19 @@ import {
 } from '@/data/districts'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 
+export type AuthLifecycleState =
+  | 'AUTH_INITIALIZING'
+  | 'AUTHENTICATED'
+  | 'AUTH_UNAUTHENTICATED'
+  | 'NETWORK_TEMPORARY_ERROR'
+  | 'AUTH_ERROR_REAL'
+  | 'FIRESTORE_TEMPORARY_ERROR'
+  | 'SESSION_EXPIRED_REAL'
+
 export type AuthState = {
   user: User | null
   authResolved: boolean
+  authStatus: AuthLifecycleState
   authInitializationError: string | null
   profile: UserProfile | null
   profileLoading: boolean
@@ -46,349 +53,471 @@ export type AuthState = {
 
 const AuthContext = createContext<AuthState | null>(null)
 
+/**
+ * Função auxiliar para hidratar um perfil inicial a partir da cache local
+ * para evitar qualquer ecrã em branco enquanto o Firestore responde.
+ */
+function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmail: string): UserProfile | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
+    const savedName = localStorage.getItem('user_display_name') || fallbackName
+    const savedDistrict = localStorage.getItem('user_district') || ''
+    const savedCity = localStorage.getItem('user_city') || ''
+    const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || DEFAULT_AVATAR.id
+    const savedTitle = localStorage.getItem('equipped_title') || 'Noviço da Nação'
+
+    const coinsVal = savedCoins && !isNaN(Number(savedCoins)) ? Number(savedCoins) : ECONOMY_CONFIG.INITIAL_BONUS_COINS
+    const resolvedAvatar = getAvatarById(savedAvatarId)
+
+    return {
+      uid,
+      email: fallbackEmail,
+      displayName: savedName,
+      username: savedName,
+      district: savedDistrict,
+      districtLocked: Boolean(savedDistrict),
+      city: savedCity,
+      cityLocked: Boolean(savedCity),
+      representedDistrict: savedDistrict,
+      representedCity: savedCity,
+      equippedTitle: savedTitle,
+      level: 1,
+      xp: 0,
+      coins: coinsVal,
+      euros: coinsVal,
+      photoURL: resolvedAvatar.image,
+      streak: 0,
+      gamesPlayed: 0,
+      wins: 0,
+      losses: 0,
+      questionsAnswered: 0,
+      correctAnswers: 0,
+      incorrectAnswers: 0,
+      totalQuestions: 0,
+      bestStreak: 0,
+      unlockedAchievements: [],
+      badges: ['novico'],
+      inventory: {
+        avatars: [resolvedAvatar.id],
+        arenas: ['arena_1'],
+        titles: ['tit_novico'],
+        taunts: ['pack_basico'],
+        frames: ['default'],
+        utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
+      },
+      equipped: {
+        avatar: resolvedAvatar.image,
+        avatarId: resolvedAvatar.id,
+        title: savedTitle,
+        arena: 'arena_1',
+      },
+      consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
+    }
+  } catch {
+    return null
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [authResolved, setAuthResolved] = useState(false)
+  const [authStatus, setAuthStatus] = useState<AuthLifecycleState>('AUTH_INITIALIZING')
   const [authInitializationError, setAuthInitializationError] = useState<string | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [profileLoading, setProfileLoading] = useState(true)
   const [profileError, setProfileError] = useState<string | null>(null)
-  const [profileRetry, setProfileRetry] = useState(0)
   const [needsDistrictSelection, setNeedsDistrictSelection] = useState(false)
   const [selectedDistrictInput, setSelectedDistrictInput] = useState('')
   const [selectedCityInput, setSelectedCityInput] = useState('')
   const [isSubmittingDistrict, setIsSubmittingDistrict] = useState(false)
   const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
 
-  const retryProfile = useCallback(() => setProfileRetry((current) => current + 1), [])
+  // Referências para controlo de listeners e retries sem re-render excessivo
+  const snapshotUnsubRef = useRef<(() => void) | null>(null)
+  const firestoreRetryCountRef = useRef(0)
+  const firestoreRetryTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const currentUidRef = useRef<string | null>(null)
 
-  const logout = useCallback(async (redirectUrl = '/') => {
+  const retryProfile = useCallback(() => {
+    if (firestoreRetryTimerRef.current) {
+      clearTimeout(firestoreRetryTimerRef.current)
+      firestoreRetryTimerRef.current = null
+    }
+    firestoreRetryCountRef.current = 0
+    if (user?.uid) {
+      subscribeToUserProfile(user)
+    }
+  }, [user])
+
+  // 1. Resiliência de Rede Passiva
+  useEffect(() => {
+    const handleOnline = () => {
+      console.log('[AUTH] Ligação de rede restaurada.')
+      setAuthStatus((prev) => (prev === 'NETWORK_TEMPORARY_ERROR' ? (user ? 'AUTHENTICATED' : 'AUTH_UNAUTHENTICATED') : prev))
+      if (user?.uid && !profile) {
+        subscribeToUserProfile(user)
+      }
+    }
+
+    const handleOffline = () => {
+      console.warn('[AUTH] Ligação de rede offline detetada. Sessão e estado preservados.')
+      setAuthStatus('NETWORK_TEMPORARY_ERROR')
+    }
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [user, profile])
+
+  // 2. Função segura de subscrição ao perfil Firestore com Silent Retry
+  const subscribeToUserProfile = useCallback((currentUser: User) => {
+    // Limpar listener anterior se existir
+    if (snapshotUnsubRef.current) {
+      snapshotUnsubRef.current()
+      snapshotUnsubRef.current = null
+    }
+
+    currentUidRef.current = currentUser.uid
+    const userDocRef = doc(db, 'users', currentUser.uid)
+
+    // Hidratação instantânea da cache se ainda não houver perfil
+    setProfile((prev) => {
+      if (prev && prev.uid === currentUser.uid) return prev
+      return getCachedInitialProfile(
+        currentUser.uid,
+        currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador',
+        currentUser.email || ''
+      )
+    })
+
+    console.log('[AUTH] A iniciar listener Firestore de perfil para UID:', currentUser.uid)
+
     try {
-      clearLocalSession()
-      await performLogout(redirectUrl)
-    } catch (err) {
-      console.error('[AUTH] Erro ao terminar sessão:', err)
-      window.location.href = redirectUrl
+      const unsub = onSnapshot(
+        userDocRef,
+        (docSnap) => {
+          firestoreRetryCountRef.current = 0
+          if (firestoreRetryTimerRef.current) {
+            clearTimeout(firestoreRetryTimerRef.current)
+            firestoreRetryTimerRef.current = null
+          }
+
+          if (docSnap.exists()) {
+            const data = docSnap.data()
+
+            // Sincronização segura de ID de sessão única
+            const remoteSessionId = data.currentSessionId
+            const localSessionId = getLocalSessionId()
+            if (!remoteSessionId) {
+              void registerUserSession(currentUser)
+            } else if (!localSessionId || remoteSessionId !== localSessionId) {
+              setLocalSessionId(remoteSessionId)
+            }
+
+            const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
+            const xpVal = typeof data.xp === 'number' ? data.xp : 0
+            const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
+            const nameVal = data.name || data.displayName || data.username || currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
+
+            // Validação territorial
+            const rawDistrict = typeof data.district === 'string' ? data.district.trim() : typeof data.representedDistrict === 'string' ? data.representedDistrict.trim() : ''
+            const isValidDist = isValidDistrict(rawDistrict)
+            const districtVal = isValidDist ? (normalizeDistrict(rawDistrict) || rawDistrict) : ''
+            const rawCity = typeof data.city === 'string' ? data.city.trim() : typeof data.representedCity === 'string' ? data.representedCity.trim() : ''
+            const cityVal = rawCity && isValidCityForDistrict(districtVal, rawCity) ? rawCity : (districtVal ? getDefaultCityForDistrict(districtVal) : '')
+            const districtLockedVal = Boolean(data.districtLocked && districtVal)
+            const cityLockedVal = Boolean(data.cityLocked && cityVal)
+            const needsDistrict = !districtVal || !isValidDist || !districtLockedVal
+            setNeedsDistrictSelection(needsDistrict)
+
+            const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
+
+            // Resolução do avatar
+            const rawAvatarCandidate = data.avatarId || data.equippedAvatar || data.avatar || data.photoURL || currentUser.photoURL
+            const resolvedAvatar = getAvatarById(rawAvatarCandidate)
+            const avatarVal = resolvedAvatar.image
+            const avatarIdVal = resolvedAvatar.id
+
+            const loadedProfile: UserProfile = {
+              uid: currentUser.uid,
+              email: currentUser.email || data.email || '',
+              displayName: nameVal,
+              username: data.username || nameVal,
+              district: districtVal,
+              districtLocked: districtLockedVal,
+              city: cityVal,
+              cityLocked: cityLockedVal,
+              representedDistrict: districtVal,
+              representedCity: cityVal,
+              equippedTitle: titleVal,
+              level: levelVal,
+              xp: xpVal,
+              coins: coinsVal,
+              euros: coinsVal,
+              photoURL: avatarVal,
+              streak: typeof data.streak === 'number' ? data.streak : 0,
+              gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
+              wins: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
+              losses: typeof data.losses === 'number' ? data.losses : Math.max(0, (data.gamesPlayed || 0) - (data.wins || 0)),
+              questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : (data.totalQuestions || 0),
+              correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
+              incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
+              totalQuestions: typeof data.totalQuestions === 'number' ? data.totalQuestions : 0,
+              bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
+              unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
+              badges: Array.isArray(data.badges) ? data.badges : ['novico'],
+              inventory: {
+                ...(data.inventory || {}),
+                avatars: Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [DEFAULT_AVATAR.id],
+                arenas: Array.isArray(data.inventory?.arenas) ? data.inventory.arenas : ['arena_1'],
+                titles: Array.isArray(data.inventory?.titles) ? data.inventory.titles : ['tit_novico'],
+                taunts: Array.isArray(data.inventory?.taunts) ? data.inventory.taunts : ['pack_basico'],
+                frames: Array.isArray(data.inventory?.frames) ? data.inventory.frames : ['default'],
+                utilities: {
+                  fiftyFifty: data.inventory?.utilities?.fiftyFifty ?? data.consumables?.help5050 ?? 0,
+                  freezeTime: data.inventory?.utilities?.freezeTime ?? data.consumables?.freezeTime ?? 0,
+                  publicVote: data.inventory?.utilities?.publicVote ?? data.consumables?.publicVote ?? 0,
+                },
+              },
+              equipped: {
+                ...(data.equipped || {}),
+                avatar: avatarVal,
+                avatarId: avatarIdVal,
+                title: titleVal,
+                arena: (data.equipped as any)?.arena || 'arena_1',
+              },
+              consumables: {
+                help5050: data.consumables?.help5050 ?? data.inventory?.utilities?.fiftyFifty ?? 0,
+                freezeTime: data.consumables?.freezeTime ?? data.inventory?.utilities?.freezeTime ?? 0,
+                publicVote: data.consumables?.publicVote ?? data.inventory?.utilities?.publicVote ?? 0,
+              },
+            }
+
+            setProfile(loadedProfile)
+            setProfileLoading(false)
+            setProfileError(null)
+            setAuthStatus('AUTHENTICATED')
+
+            // Cache local para restauração imediata em futuros carregamentos
+            if (typeof window !== 'undefined') {
+              try {
+                localStorage.setItem('user_coins', String(coinsVal))
+                localStorage.setItem('user_euros', String(coinsVal))
+                localStorage.setItem('user_display_name', nameVal)
+                if (districtVal) {
+                  localStorage.setItem('user_district', districtVal)
+                  localStorage.setItem('user_represented_district', districtVal)
+                }
+                if (cityVal) {
+                  localStorage.setItem('user_city', cityVal)
+                  localStorage.setItem('user_represented_city', cityVal)
+                }
+                localStorage.setItem('user_equipped_avatar', avatarVal)
+                localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
+                localStorage.setItem('equipped_avatar_id', avatarIdVal)
+                localStorage.setItem('equipped_title', titleVal)
+              } catch (storageErr) {
+                console.warn('[AUTH] Storage local restrito:', storageErr)
+              }
+            }
+
+            // Sincronização em background do publicProfiles (segura e não bloqueante)
+            if (districtVal) {
+              const publicProfileRef = doc(db, 'publicProfiles', currentUser.uid)
+              setDoc(
+                publicProfileRef,
+                {
+                  uid: currentUser.uid,
+                  displayName: nameVal,
+                  photoURL: avatarVal,
+                  avatarId: avatarIdVal,
+                  district: districtVal,
+                  city: cityVal,
+                  representedDistrict: districtVal,
+                  representedCity: cityVal,
+                  level: levelVal,
+                  xp: xpVal,
+                  equippedTitle: titleVal,
+                  updatedAt: serverTimestamp(),
+                },
+                { merge: true },
+              ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles:', syncErr))
+            }
+          } else {
+            // Novo Utilizador — Criar documento com defaults e merge seguro
+            const fallbackName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
+            const fallbackAvatar = DEFAULT_AVATAR.image
+            const fallbackAvatarId = DEFAULT_AVATAR.id
+
+            const defaultProfileData = {
+              uid: currentUser.uid,
+              displayName: fallbackName,
+              name: fallbackName,
+              email: currentUser.email || '',
+              photoURL: fallbackAvatar,
+              avatar: fallbackAvatar,
+              avatarId: fallbackAvatarId,
+              equippedAvatar: fallbackAvatarId,
+              district: '',
+              districtLocked: false,
+              level: 1,
+              xp: 0,
+              coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              title: 'Noviço da Nação',
+              equippedTitle: 'Noviço da Nação',
+              equippedFrame: 'default',
+              unlockedFrames: ['default'],
+              unlockedAvatars: [fallbackAvatarId],
+              unlockedAchievements: [],
+              claimedAchievements: {},
+              badges: ['novico'],
+              inventory: {
+                avatars: [fallbackAvatarId],
+                arenas: ['arena_1'],
+                titles: ['tit_novico'],
+                taunts: ['pack_basico'],
+                frames: ['default'],
+                utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
+              },
+              equipped: {
+                avatar: fallbackAvatar,
+                avatarId: fallbackAvatarId,
+                title: 'Noviço da Nação',
+                arena: 'arena_1',
+                frameId: 'default',
+              },
+              consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp(),
+            }
+
+            setDoc(userDocRef, defaultProfileData, { merge: true }).catch((createErr) =>
+              console.warn('[AUTH] Aviso ao criar documento inicial:', createErr)
+            )
+
+            setProfile({
+              uid: currentUser.uid,
+              displayName: fallbackName,
+              email: currentUser.email || '',
+              photoURL: fallbackAvatar,
+              district: '',
+              districtLocked: false,
+              level: 1,
+              xp: 0,
+              coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              streak: 0,
+              gamesPlayed: 0,
+              wins: 0,
+              losses: 0,
+              correctAnswers: 0,
+              incorrectAnswers: 0,
+              totalQuestions: 0,
+              bestStreak: 0,
+              unlockedAchievements: [],
+              badges: ['novico'],
+              equippedTitle: 'Noviço da Nação',
+              inventory: {
+                avatars: [fallbackAvatarId],
+                arenas: ['arena_1'],
+                titles: ['tit_novico'],
+                taunts: ['pack_basico'],
+                frames: ['default'],
+                utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
+              },
+              equipped: {
+                avatar: fallbackAvatar,
+                title: 'Noviço da Nação',
+                arena: 'arena_1',
+              },
+              consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
+            })
+            setProfileLoading(false)
+            setNeedsDistrictSelection(true)
+            setAuthStatus('AUTHENTICATED')
+          }
+        },
+        (error) => {
+          console.warn('[AUTH] Oscilação transitória no Firestore para UID:', currentUser.uid, error)
+          setAuthStatus('FIRESTORE_TEMPORARY_ERROR')
+
+          // Silent retry com backoff exponencial (1s, 2s, 4s, 8s)
+          if (firestoreRetryCountRef.current < 4) {
+            firestoreRetryCountRef.current += 1
+            const delay = Math.min(8000, 1000 * Math.pow(2, firestoreRetryCountRef.current - 1))
+            console.log(`[AUTH] A agendar retry silencioso do Firestore (${firestoreRetryCountRef.current}/4) em ${delay}ms`)
+            firestoreRetryTimerRef.current = setTimeout(() => {
+              if (currentUidRef.current === currentUser.uid) {
+                subscribeToUserProfile(currentUser)
+              }
+            }, delay)
+          } else {
+            // Após múltiplos retries sem sucesso, mantém perfil em memória e sinaliza erro amigável sem logout
+            setProfileError('Ligação momentaneamente lenta. O teu jogo continuará sincronizado.')
+            setProfileLoading(false)
+          }
+        }
+      )
+
+      snapshotUnsubRef.current = unsub
+    } catch (listenerErr) {
+      console.warn('[AUTH] Erro ao iniciar listener Firestore:', listenerErr)
+      setProfileLoading(false)
     }
   }, [])
 
-  // BLINDAGEM DO LISTENER DE AUTENTICAÇÃO E FIRESTORE
+  // 3. Listener Principal de Autenticação Firebase (Single Source of Truth)
   useEffect(() => {
-    let unsubscribeSnapshot: (() => void) | undefined
+    console.log('[AUTH] A inicializar listener onAuthStateChanged do Firebase...')
 
-    const unsubscribeAuth = onAuthStateChanged(auth, async (currentAuthUser) => {
-      setUser(currentAuthUser)
-      setAuthResolved(true)
+    const unsubscribeAuth = onAuthStateChanged(
+      auth,
+      (currentAuthUser) => {
+        console.log('[AUTH] onAuthStateChanged emitiu estado:', currentAuthUser ? `UID: ${currentAuthUser.uid}` : 'Não autenticado')
 
-      if (currentAuthUser) {
-        setProfileLoading(true)
-        const userDocRef = doc(db, 'users', currentAuthUser.uid)
+        setUser(currentAuthUser)
 
-        // 1. Ouvir atualizações em tempo real sem sobrescrever dados
-        unsubscribeSnapshot = onSnapshot(
-          userDocRef,
-          async (docSnap) => {
-            if (docSnap.exists()) {
-              const data = docSnap.data()
-
-              // Verificação de Sessão Única Ativa (Single Active Session)
-              const remoteSessionId = data.currentSessionId
-              const localSessionId = getLocalSessionId()
-
-              if (!remoteSessionId) {
-                // Primeira sessão ou migração: registar sessão atual
-                void registerUserSession(currentAuthUser)
-              } else if (!localSessionId || remoteSessionId !== localSessionId) {
-                // Sincronização silenciosa e transparente da sessão local
-                setLocalSessionId(remoteSessionId)
-              }
-              const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
-              const xpVal = typeof data.xp === 'number' ? data.xp : 0
-              const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
-              const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
-              
-              // Verificação estrita de validade do distrito nos 20 distritos oficiais
-              const rawDistrict = typeof data.district === 'string' ? data.district.trim() : typeof data.representedDistrict === 'string' ? data.representedDistrict.trim() : ''
-              const isValidDist = isValidDistrict(rawDistrict)
-              const districtVal = isValidDist ? (normalizeDistrict(rawDistrict) || rawDistrict) : ''
-              const rawCity = typeof data.city === 'string' ? data.city.trim() : typeof data.representedCity === 'string' ? data.representedCity.trim() : ''
-              const cityVal = rawCity && isValidCityForDistrict(districtVal, rawCity) ? rawCity : (districtVal ? getDefaultCityForDistrict(districtVal) : '')
-              const districtLockedVal = Boolean(data.districtLocked && districtVal)
-              const cityLockedVal = Boolean(data.cityLocked && cityVal)
-              const needsDistrict = !districtVal || !isValidDist || !districtLockedVal
-              setNeedsDistrictSelection(needsDistrict)
-
-              const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
-              
-              // Resolução canónica e migração transparente dos 5 avatares reais
-              const rawAvatarCandidate = data.avatarId || data.equippedAvatar || data.avatar || data.photoURL || currentAuthUser.photoURL
-              const resolvedAvatar = getAvatarById(rawAvatarCandidate)
-              const avatarVal = resolvedAvatar.image
-              const avatarIdVal = resolvedAvatar.id
-
-              const loadedProfile: UserProfile = {
-                uid: currentAuthUser.uid,
-                email: currentAuthUser.email || data.email || '',
-                displayName: nameVal,
-                username: data.username || nameVal,
-                district: districtVal,
-                districtLocked: districtLockedVal,
-                city: cityVal,
-                cityLocked: cityLockedVal,
-                representedDistrict: districtVal,
-                representedCity: cityVal,
-                equippedTitle: titleVal,
-                level: levelVal,
-                xp: xpVal,
-                coins: coinsVal,
-                euros: coinsVal,
-                photoURL: avatarVal,
-                streak: typeof data.streak === 'number' ? data.streak : 0,
-                gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
-                wins: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
-                losses: typeof data.losses === 'number' ? data.losses : Math.max(0, (data.gamesPlayed || 0) - (data.wins || 0)),
-                questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : (data.totalQuestions || 0),
-                correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
-                incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
-                totalQuestions: typeof data.totalQuestions === 'number' ? data.totalQuestions : 0,
-                bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
-                unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
-                badges: Array.isArray(data.badges) ? data.badges : ['novico'],
-                inventory: {
-                  ...(data.inventory || {}),
-                  avatars: Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [DEFAULT_AVATAR.id],
-                  arenas: Array.isArray(data.inventory?.arenas) ? data.inventory.arenas : ['arena_1'],
-                  titles: Array.isArray(data.inventory?.titles) ? data.inventory.titles : ['tit_novico'],
-                  taunts: Array.isArray(data.inventory?.taunts) ? data.inventory.taunts : ['pack_basico'],
-                  frames: Array.isArray(data.inventory?.frames) ? data.inventory.frames : ['default'],
-                  utilities: {
-                    fiftyFifty: data.inventory?.utilities?.fiftyFifty ?? data.consumables?.help5050 ?? 0,
-                    freezeTime: data.inventory?.utilities?.freezeTime ?? data.consumables?.freezeTime ?? 0,
-                    publicVote: data.inventory?.utilities?.publicVote ?? data.consumables?.publicVote ?? 0,
-                  },
-                },
-                equipped: {
-                  ...(data.equipped || {}),
-                  avatar: avatarVal,
-                  avatarId: avatarIdVal,
-                  title: titleVal,
-                  arena: (data.equipped as any)?.arena || 'arena_1',
-                },
-                consumables: {
-                  help5050: data.consumables?.help5050 ?? data.inventory?.utilities?.fiftyFifty ?? 0,
-                  freezeTime: data.consumables?.freezeTime ?? data.inventory?.utilities?.freezeTime ?? 0,
-                  publicVote: data.consumables?.publicVote ?? data.inventory?.utilities?.publicVote ?? 0,
-                },
-              }
-
-              setProfile(loadedProfile)
-              setProfileLoading(false)
-              setProfileError(null)
-
-              if (typeof window !== 'undefined') {
-                try {
-                  localStorage.setItem('user_coins', String(coinsVal))
-                  localStorage.setItem('user_euros', String(coinsVal))
-                  localStorage.setItem('user_display_name', nameVal)
-                  if (districtVal) {
-                    localStorage.setItem('user_district', districtVal)
-                    localStorage.setItem('user_represented_district', districtVal)
-                  } else {
-                    localStorage.removeItem('user_district')
-                    localStorage.removeItem('user_represented_district')
-                  }
-                  if (cityVal) {
-                    localStorage.setItem('user_city', cityVal)
-                    localStorage.setItem('user_represented_city', cityVal)
-                  } else {
-                    localStorage.removeItem('user_city')
-                    localStorage.removeItem('user_represented_city')
-                  }
-                  localStorage.setItem('user_equipped_avatar', avatarVal)
-                  localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
-                  localStorage.setItem('equipped_avatar_id', avatarIdVal)
-                  localStorage.setItem('equipped_title', titleVal)
-                } catch (storageErr) {
-                  console.warn('[AUTH] Storage local restrito:', storageErr)
-                }
-              }
-
-              // Sincronizar perfil público para ranking nacional se tiver distrito definido
-              if (districtVal) {
-                try {
-                  const publicProfileRef = doc(db, 'publicProfiles', currentAuthUser.uid)
-                  await setDoc(
-                    publicProfileRef,
-                    {
-                      uid: currentAuthUser.uid,
-                      displayName: nameVal,
-                      photoURL: avatarVal,
-                      avatarId: avatarIdVal,
-                      district: districtVal,
-                      city: cityVal,
-                      representedDistrict: districtVal,
-                      representedCity: cityVal,
-                      level: levelVal,
-                      xp: xpVal,
-                      equippedTitle: titleVal,
-                      updatedAt: serverTimestamp(),
-                    },
-                    { merge: true },
-                  )
-                } catch (syncErr) {
-                  console.warn('[AUTH] Aviso ao sincronizar publicProfiles:', syncErr)
-                }
-              }
-            } else {
-              // 2. Criar apenas se o documento REALMENTE não existir, USANDO MERGE
-              const fallbackName = currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
-              const fallbackAvatar = DEFAULT_AVATAR.image
-              const fallbackAvatarId = DEFAULT_AVATAR.id
-
-              const defaultProfileData = {
-                uid: currentAuthUser.uid,
-                displayName: fallbackName,
-                name: fallbackName,
-                email: currentAuthUser.email || '',
-                photoURL: fallbackAvatar,
-                avatar: fallbackAvatar,
-                avatarId: fallbackAvatarId,
-                equippedAvatar: fallbackAvatarId,
-                district: '',
-                districtLocked: false,
-                level: 1,
-                xp: 0,
-                coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-                euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-                title: 'Noviço da Nação',
-                equippedTitle: 'Noviço da Nação',
-                equippedFrame: 'default',
-                unlockedFrames: ['default'],
-                unlockedAvatars: [fallbackAvatarId],
-                unlockedAchievements: [],
-                claimedAchievements: {},
-                badges: ['novico'],
-                inventory: {
-                  avatars: [fallbackAvatarId],
-                  arenas: ['arena_1'],
-                  titles: ['tit_novico'],
-                  taunts: ['pack_basico'],
-                  frames: ['default'],
-                  utilities: {
-                    fiftyFifty: 0,
-                    freezeTime: 0,
-                    publicVote: 0,
-                  },
-                },
-                equipped: {
-                  avatar: fallbackAvatar,
-                  avatarId: fallbackAvatarId,
-                  title: 'Noviço da Nação',
-                  arena: 'arena_1',
-                  frameId: 'default',
-                },
-                consumables: {
-                  help5050: 0,
-                  freezeTime: 0,
-                  publicVote: 0,
-                },
-                createdAt: serverTimestamp(),
-                updatedAt: serverTimestamp(),
-              }
-
-              try {
-                await setDoc(userDocRef, defaultProfileData, { merge: true })
-              } catch (createErr) {
-                console.warn('[AUTH] Erro ao criar documento inicial com merge:', createErr)
-              }
-
-              if (typeof window !== 'undefined') {
-                localStorage.setItem('user_coins', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
-                localStorage.setItem('user_euros', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
-                localStorage.setItem('user_display_name', fallbackName)
-                localStorage.removeItem('user_district')
-                localStorage.setItem('user_equipped_avatar', fallbackAvatar)
-                localStorage.setItem('user_equipped_avatar_id', fallbackAvatarId)
-                localStorage.setItem('equipped_avatar_id', fallbackAvatarId)
-                localStorage.setItem('equipped_title', 'Noviço da Nação')
-              }
-
-              setProfile({
-                uid: currentAuthUser.uid,
-                displayName: fallbackName,
-                email: currentAuthUser.email || '',
-                photoURL: fallbackAvatar,
-                district: '',
-                districtLocked: false,
-                level: 1,
-                xp: 0,
-                coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-                euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-                streak: 0,
-                gamesPlayed: 0,
-                wins: 0,
-                losses: 0,
-                correctAnswers: 0,
-                incorrectAnswers: 0,
-                totalQuestions: 0,
-                bestStreak: 0,
-                unlockedAchievements: [],
-                badges: ['novico'],
-                equippedTitle: 'Noviço da Nação',
-                inventory: {
-                  avatars: [fallbackAvatarId],
-                  arenas: ['arena_1'],
-                  titles: ['tit_novico'],
-                  taunts: ['pack_basico'],
-                  frames: ['default'],
-                  utilities: {
-                    fiftyFifty: 0,
-                    freezeTime: 0,
-                    publicVote: 0,
-                  },
-                },
-                equipped: {
-                  avatar: fallbackAvatar,
-                  title: 'Noviço da Nação',
-                  arena: 'arena_1',
-                },
-                consumables: {
-                  help5050: 0,
-                  freezeTime: 0,
-                  publicVote: 0,
-                },
-              })
-              setProfileLoading(false)
-              setNeedsDistrictSelection(true)
-            }
-          },
-          (error) => {
-            console.warn('[AUTH] Aviso transitório no listener de dados do utilizador:', error)
-            setProfile((currentProfile) => {
-              if (currentProfile) {
-                // Preserva o perfil atual na memória durante oscilações transitórias de rede
-                return currentProfile
-              }
-              setProfileError('Não foi possível carregar o teu perfil. A tentar restabelecer...')
-              return null
-            })
-            setProfileLoading(false)
-          },
-        )
-      } else {
-        if (unsubscribeSnapshot) unsubscribeSnapshot()
-        setProfile(null)
+        if (currentAuthUser) {
+          setAuthStatus('AUTHENTICATED')
+          setAuthInitializationError(null)
+          subscribeToUserProfile(currentAuthUser)
+        } else {
+          // Utilizador não autenticado
+          if (snapshotUnsubRef.current) {
+            snapshotUnsubRef.current()
+            snapshotUnsubRef.current = null
+          }
+          currentUidRef.current = null
+          setProfile(null)
+          setProfileLoading(false)
+          setProfileError(null)
+          setNeedsDistrictSelection(false)
+          setAuthStatus('AUTH_UNAUTHENTICATED')
+        }
+      },
+      (authErr) => {
+        console.error('[AUTH] Erro crítico no Firebase Auth:', authErr)
+        setAuthInitializationError(authErr?.message || 'Erro de autenticação')
+        setAuthStatus('AUTH_ERROR_REAL')
         setProfileLoading(false)
-        setProfileError(null)
-        setNeedsDistrictSelection(false)
       }
-    })
+    )
 
     return () => {
       unsubscribeAuth()
-      if (unsubscribeSnapshot) unsubscribeSnapshot()
+      if (snapshotUnsubRef.current) {
+        snapshotUnsubRef.current()
+        snapshotUnsubRef.current = null
+      }
+      if (firestoreRetryTimerRef.current) {
+        clearTimeout(firestoreRetryTimerRef.current)
+      }
     }
-  }, [profileRetry])
+  }, [subscribeToUserProfile])
 
   const handleSessionConflictConfirm = useCallback(() => {
     setIsSessionConflictOpen(false)
@@ -397,11 +526,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  const authResolved = authStatus !== 'AUTH_INITIALIZING'
+
   return (
     <AuthContext.Provider
       value={{
         user,
         authResolved,
+        authStatus,
         authInitializationError,
         profile,
         profileLoading,
@@ -413,7 +545,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     >
       {children}
 
-      {/* BLOQUEIO GLOBAL NO APP WRAPPER: MODAL DE SELEÇÃO OBRIGATÓRIA DE DISTRITO */}
+      {/* MODAL DE SELEÇÃO OBRIGATÓRIA DE DISTRITO APENAS PARA NOVAS CONTAS */}
       {needsDistrictSelection && user && (
         <div className="fixed inset-0 z-[9999] bg-slate-950/98 backdrop-blur-xl flex items-center justify-center p-4">
           <div className="bg-slate-900 border-2 border-emerald-500 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(16,185,129,0.3)] space-y-6 animate-in fade-in duration-200">
@@ -499,7 +631,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
                 setIsSubmittingDistrict(true)
                 try {
-                  // Atualiza no Firestore
                   await setDoc(
                     doc(db, 'users', user.uid),
                     {
@@ -533,7 +664,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     localStorage.setItem('user_represented_city', city)
                   }
 
-                  // Atualiza estado local
                   setNeedsDistrictSelection(false)
                   setProfile((prev) =>
                     prev
@@ -574,6 +704,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 const fallbackAuthState: AuthState = {
   user: null,
   authResolved: false,
+  authStatus: 'AUTH_INITIALIZING',
   authInitializationError: null,
   profile: null,
   profileLoading: true,

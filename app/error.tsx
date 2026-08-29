@@ -14,15 +14,15 @@ export default function Error({
   const [autoRetrying, setAutoRetrying] = useState(false)
 
   useEffect(() => {
-    // 1. Expor a causa real nos logs da consola conforme especificado
-    console.error('[CRITICAL_APP_ERROR]', {
+    // 1. Diagnóstico completo nos logs para depuração
+    console.error('[APP_ERROR_CAUGHT]', {
       message: error?.message,
       stack: error?.stack,
       digest: error?.digest,
       error,
     })
 
-    // 2. Auto-recuperação silenciosa para erros transitórios de rede ou carregamento de chunks
+    // 2. Auto-recuperação transparente e silenciosa para erros transitórios de chunks ou rede
     const errorMsg = String(error?.message || '').toLowerCase()
     const isTransient =
       errorMsg.includes('chunk') ||
@@ -38,18 +38,14 @@ export default function Error({
         setAutoRetrying(true)
         const timer = setTimeout(() => {
           reset()
-        }, 1200)
+        }, 1000)
         return () => clearTimeout(timer)
       }
     }
   }, [error, reset])
 
-  const handleManualReset = async () => {
+  const handleManualReset = () => {
     sessionStorage.removeItem('ap_error_auto_retried')
-    try {
-      const { connectionManager } = await import('@/lib/connection-manager')
-      await connectionManager.forceReconnect()
-    } catch {}
     reset()
   }
 
@@ -71,13 +67,13 @@ export default function Error({
           </div>
 
           <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">
-            Recuperação de Sessão
+            Desafio Nacional
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             {autoRetrying
-              ? 'A restabelecer a tua ligação de forma automática...'
-              : 'O teu progresso e dados de conta estão protegidos. Clica abaixo para continuar a jogar.'}
+              ? 'A restabelecer a ligação automaticamente...'
+              : 'O teu progresso e dados de conta estão protegidos. Clica abaixo para recarregar o jogo.'}
           </p>
         </div>
 
@@ -88,7 +84,7 @@ export default function Error({
             className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer"
           >
             <RefreshCw className={`h-4 w-4 ${autoRetrying ? 'animate-spin' : ''}`} />
-            <span>{autoRetrying ? 'A restaurar...' : 'Continuar Jogo'}</span>
+            <span>{autoRetrying ? 'A restaurar...' : 'Recarregar Jogo'}</span>
           </button>
 
           <Link
@@ -101,13 +97,16 @@ export default function Error({
           </Link>
         </div>
 
-        {process.env.NODE_ENV !== 'production' && error?.message && (
-          <div className="pt-4 border-t border-white/5 text-left">
-            <p className="text-[10px] font-mono text-red-400 bg-red-950/40 p-3 rounded-xl border border-red-500/20 break-words">
-              {error.message}
-            </p>
-          </div>
-        )}
+        <div className="pt-2">
+          <Link
+            href="/"
+            onClick={() => sessionStorage.removeItem('ap_error_auto_retried')}
+            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <Home className="h-3.5 w-3.5" />
+            <span>Voltar à Página Principal</span>
+          </Link>
+        </div>
       </div>
     </div>
   )

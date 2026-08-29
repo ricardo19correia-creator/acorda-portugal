@@ -3,3 +3,7 @@ data/geo-portugal.zip
 node_modules/
 .next/
 pnpm-lock.yaml
+android/
+scripts/
+*.log
+public/downloads/*.apk

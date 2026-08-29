@@ -1,6 +1,6 @@
 'use client'
 
-import { doc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 
 export const ACTIVE_SESSION_STORAGE_KEY = 'active_session_id'
@@ -19,20 +19,24 @@ export async function registerUserSession(user: { uid: string }): Promise<string
       sessionStorage.setItem(ACTIVE_SESSION_STORAGE_KEY, sessionId)
       localStorage.setItem(ACTIVE_SESSION_STORAGE_KEY, sessionId)
     } catch (e) {
-      console.warn('[SESSION] Erro ao guardar sessão local:', e)
+      console.warn('[SESSION] Aviso ao guardar sessão local:', e)
     }
   }
 
   try {
     const userRef = doc(db, 'users', user.uid)
-    await updateDoc(userRef, {
-      currentSessionId: sessionId,
-      lastLoginAt: new Date().toISOString(),
-      lastSessionUpdate: serverTimestamp(),
-    })
-    console.log('[SESSION] Nova sessão registada com sucesso:', sessionId)
+    await setDoc(
+      userRef,
+      {
+        currentSessionId: sessionId,
+        lastLoginAt: new Date().toISOString(),
+        lastSessionUpdate: serverTimestamp(),
+      },
+      { merge: true }
+    )
+    console.log('[SESSION] Sessão registada no Firestore:', sessionId)
   } catch (error) {
-    console.warn('[SESSION] Aviso ao registar sessão no Firestore:', error)
+    console.warn('[SESSION] Aviso não-bloqueante ao registar sessão no Firestore:', error)
   }
 
   return sessionId

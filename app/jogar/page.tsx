@@ -3,26 +3,25 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
-import { ARENA_SHOP_CATALOG, getArenaById } from '@/data/shopArenas'
 import { getArenaGameBackground } from '@/lib/arena-assets'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
-import { cn } from '@/lib/utils'
+import { Loader2 } from 'lucide-react'
 
 function JogarContainer() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { user, authResolved } = useAuth()
+  const { user, authResolved, authStatus } = useAuth()
 
-  // Bloqueio Total: Redirecionamento obrigatório para /entrar para utilizadores não autenticados
+  // Redirecionamento seguro apenas quando a autenticação estiver formalmente resolvida como não autenticado
   useEffect(() => {
-    if (authResolved && !user && !auth?.currentUser) {
+    if (authResolved && !user && !auth?.currentUser && authStatus === 'AUTH_UNAUTHENTICATED') {
       const search = searchParams?.toString()
       const currentUrl = search ? `/jogar?${search}` : '/jogar'
       router.replace(`/entrar?redirect=${encodeURIComponent(currentUrl)}`)
     }
-  }, [user, authResolved, router, searchParams])
+  }, [user, authResolved, authStatus, router, searchParams])
 
   const categoryParam =
     searchParams.get('cat') ||
@@ -69,13 +68,23 @@ function JogarContainer() {
     }
   }, [])
 
-  // Enquanto verifica autenticação ou se não houver utilizador autenticado, bloqueia renderização
-  if (!authResolved || (!user && !auth?.currentUser)) {
+  // Durante a inicialização do Firebase Auth, renderiza um loading discreto sem mensagens alarmistas
+  if (!authResolved) {
     return (
-      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4">
-        <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="text-cyan-400 font-bold text-lg">A verificar autenticação...</p>
-        <p className="text-slate-400 text-sm mt-1">Redirecionando para o ecrã de início de sessão.</p>
+      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4 text-white">
+        <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4 shadow-[0_0_20px_rgba(16,185,129,0.3)]" />
+        <p className="text-emerald-400 font-black uppercase tracking-wider text-sm">A carregar o Desafio Nacional...</p>
+        <p className="text-slate-400 text-xs mt-1">A preparar a tua sessão de jogo com segurança.</p>
+      </main>
+    )
+  }
+
+  // Se confirmado como não autenticado, aguarda transição para /entrar
+  if (!user && !auth?.currentUser) {
+    return (
+      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4 text-white">
+        <Loader2 className="w-8 h-8 text-emerald-400 animate-spin mb-3" />
+        <p className="text-slate-300 text-sm font-medium">A aceder à autenticação...</p>
       </main>
     )
   }
