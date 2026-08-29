@@ -1,12 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Volume2, VolumeX, Music, ChevronUp, ChevronDown, Volume1 } from 'lucide-react'
 import { useAudio } from '@/context/AudioContext'
 
 export function FloatingBgmWidget() {
+  const pathname = usePathname()
   const { isPlaying, isMuted, volume, toggleMute, togglePlay, setVolume } = useAudio()
   const [isExpanded, setIsExpanded] = useState(false)
+
+  const publicRoutes = ['/criadores', '/termos', '/privacidade', '/contacto']
+
+  if (publicRoutes.some((route) => pathname?.startsWith(route))) {
+    return null
+  }
 
   const isActive = isPlaying && !isMuted
 
