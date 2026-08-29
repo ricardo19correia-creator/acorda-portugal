@@ -10,9 +10,9 @@ import Link from 'next/link'
 import { ArrowLeft, Swords, Sparkles, Lock } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
-
-// IMAGEM DE FUNDO FIXA E PERMANENTE DA ARENA 1v1
-const DUEL_ARENA_BACKGROUND = '/images/arenas/arena-1v1.png'
+import { getArenaById, getDefaultArena, type ArenaDefinition } from '@/src/data/shopArenas'
+import { getArenaDuelBackground } from '@/lib/arena-assets'
+import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 
 function DuelPageContent() {
   const router = useRouter()
@@ -20,7 +20,19 @@ function DuelPageContent() {
   const duelIdFromUrl = searchParams.get('id') || ''
   const [activeDuelId, setActiveDuelId] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(true)
-  const { user, authResolved } = useAuth()
+  const { user, authResolved, profile } = useAuth()
+
+  const [currentArena, setCurrentArena] = useState<ArenaDefinition>(() => {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('equipped_arena') : null
+    return saved ? getArenaById(saved) : getDefaultArena()
+  })
+
+  // Sincronizar com a arena equipada do perfil do utilizador
+  useEffect(() => {
+    if ((profile as any)?.equippedArena) {
+      setCurrentArena(getArenaById((profile as any).equippedArena))
+    }
+  }, [profile])
 
   // Bloqueio Absoluto: Redirecionar utilizadores não autenticados
   useEffect(() => {
@@ -76,15 +88,20 @@ function DuelPageContent() {
   if (!effectiveDuelId) {
     return (
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
-        {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS (100% NÍTIDO E SEM OVERLAYS) */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={DUEL_ARENA_BACKGROUND}
-          alt="Arena de Duelos"
-          className="fixed inset-0 -z-10 w-full h-full object-cover object-center pointer-events-none select-none"
-          onError={(e) => {
-            ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
-          }}
+        {/* 1. FUNDO DINÂMICO DA ARENA DE DUELOS (FOTOGRAFIA OFICIAL & EFEITOS) */}
+        {currentArena.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={currentArena.image}
+            alt={currentArena.name}
+            className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none transition-opacity duration-700"
+          />
+        )}
+        <div className="fixed inset-0 -z-10 bg-black/65 backdrop-blur-[1px] pointer-events-none" />
+        <ArenaEffectsLayer
+          effect={currentArena.effect || 'particles'}
+          intensity="medium"
+          className="fixed inset-0 -z-10 pointer-events-none"
         />
 
         <div className="relative z-20 flex-1 flex flex-col">
@@ -99,7 +116,7 @@ function DuelPageContent() {
               Voltar à Central de Jogo
             </Link>
 
-            <div className="card-game-purple mt-6 overflow-hidden rounded-4xl p-8 sm:p-12 text-center shadow-2xl">
+            <div className="card-game-purple mt-6 overflow-hidden rounded-4xl p-8 sm:p-12 text-center shadow-2xl backdrop-blur-xl border border-white/20">
               <div className="mx-auto grid h-20 w-20 place-items-center rounded-3xl border border-purple-500/50 bg-purple-500/20 text-purple-400 shadow-xl shadow-purple-500/30 animate-pulse">
                 <Swords className="h-10 w-10" />
               </div>
@@ -110,11 +127,17 @@ function DuelPageContent() {
               </span>
 
               <h1 className="mt-4 font-display text-4xl sm:text-6xl font-black uppercase tracking-tight text-foreground text-glow-purple">
-                Arena de Duelos
+                {currentArena.name}
               </h1>
 
+              {currentArena.meaning && (
+                <p className="mt-2 text-xs sm:text-sm text-amber-300 font-bold italic max-w-md mx-auto">
+                  “{currentArena.meaning}”
+                </p>
+              )}
+
               <p className="mt-3 max-w-lg mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Desafia outro jogador em tempo real. 10 perguntas simultâneas, 60 segundos por ronda e bónus de <strong className="text-gold text-glow-gold">+300 XP</strong> ao vencedor.
+                {currentArena.description || 'Desafia outro jogador em tempo real. 10 perguntas simultâneas, 60 segundos por ronda e bónus de +300 XP ao vencedor.'}
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -148,15 +171,20 @@ function DuelPageContent() {
 
   return (
     <div className="relative w-full min-h-[100dvh] overflow-x-hidden bg-transparent">
-      {/* 1. FUNDO PERMANENTE DA ARENA DE DUELOS (100% NÍTIDO E SEM OVERLAYS) */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={DUEL_ARENA_BACKGROUND}
-        alt="Arena de Duelos"
-        className="fixed inset-0 -z-10 w-full h-full object-cover object-center pointer-events-none select-none"
-        onError={(e) => {
-          ;(e.target as HTMLImageElement).src = '/arenas/arena-1v1.png'
-        }}
+      {/* 1. FUNDO DINÂMICO DA ARENA DE DUELOS (FOTOGRAFIA OFICIAL & EFEITOS) */}
+      {currentArena.image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={currentArena.image}
+          alt={currentArena.name}
+          className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none transition-opacity duration-700"
+        />
+      )}
+      <div className="fixed inset-0 -z-10 bg-black/65 backdrop-blur-[1px] pointer-events-none" />
+      <ArenaEffectsLayer
+        effect={currentArena.effect || 'particles'}
+        intensity="medium"
+        className="fixed inset-0 -z-10 pointer-events-none"
       />
 
       {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}
@@ -165,6 +193,9 @@ function DuelPageContent() {
           key={effectiveDuelId}
           duelId={effectiveDuelId}
           onDuelChange={handleDuelChange}
+          onArenaLoaded={(loadedArena: any) => {
+            if (loadedArena) setCurrentArena(typeof loadedArena === 'string' ? getArenaById(loadedArena) : loadedArena)
+          }}
         />
       </div>
     </div>

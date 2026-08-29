@@ -292,42 +292,14 @@ export function ArenaDynamicBackground({
     }
   }, [effectiveThemeId])
 
-  const [arenaImg, setArenaImg] = useState<string>('/arenas/arena-1.jpg')
-
-  useEffect(() => {
-    const sync = () => {
-      if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem('equipped_arena_image') || '/arenas/arena-1.jpg'
-        setArenaImg(saved)
-      }
-    }
-    sync()
-    window.addEventListener('arenaChanged', sync)
-    window.addEventListener('storage', sync)
-    return () => {
-      window.removeEventListener('arenaChanged', sync)
-      window.removeEventListener('storage', sync)
-    }
-  }, [])
-
   return (
     <div
       aria-hidden="true"
       className={cn(
-        'pointer-events-none fixed inset-0 z-[-1] overflow-hidden select-none',
+        'pointer-events-none fixed inset-0 z-[-1] overflow-hidden select-none bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950',
         className,
       )}
     >
-      {/* Cenário de Fundo da Arena Equipado */}
-      <div 
-        className="absolute inset-0 w-full h-full opacity-100 bg-cover bg-center bg-no-repeat transition-all duration-700"
-        style={{
-          backgroundImage: `url('${arenaImg}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-70 pointer-events-none" />
 
       {/* VULCÃO DOS AÇORES: REBORDO DE ECRÃ A PULSAR EM VERMELHO-LAVA NOS STREAKS ALTOS (>= 3) */}

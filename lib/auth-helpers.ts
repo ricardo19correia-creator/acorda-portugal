@@ -246,6 +246,11 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
         'user_euros',
         'user_display_name',
         'user_district',
+        'user_city',
+        'user_represented_district',
+        'user_represented_city',
+        'selected_district',
+        'selected_city',
         'user_equipped_avatar',
         'user_equipped_avatar_id',
         'equipped_avatar_id',
@@ -313,6 +318,7 @@ export const logoutUser = performLogout
 export async function createNewUserDocument(
   user: any,
   selectedDistrict: string,
+  selectedCity?: string,
   username?: string,
   customAvatarUrl?: string
 ): Promise<void> {
@@ -320,9 +326,17 @@ export async function createNewUserDocument(
   const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
   const { db } = await import('@/lib/firebase')
   const { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } = await import('@/data/constants')
+  const { normalizeDistrict, getDefaultCityForDistrict, isValidCityForDistrict } = await import('@/data/districts')
 
   const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
   const photoURL = customAvatarUrl || user.photoURL || DEFAULT_AVATAR_URL
+
+  const canonicalDistrict = normalizeDistrict(selectedDistrict) || selectedDistrict.trim()
+  const rawCity = selectedCity ? selectedCity.trim() : ''
+  const canonicalCity =
+    rawCity && isValidCityForDistrict(canonicalDistrict, rawCity)
+      ? rawCity
+      : rawCity || getDefaultCityForDistrict(canonicalDistrict)
 
   const initialData = {
     uid: user.uid,
@@ -333,8 +347,12 @@ export async function createNewUserDocument(
     avatar: photoURL,
     avatarId: DEFAULT_AVATAR_ID,
     equippedAvatar: DEFAULT_AVATAR_ID,
-    district: selectedDistrict, // Definido no registo/onboarding e permanente
+    district: canonicalDistrict, // Definido no registo/onboarding e PERMANENTE
+    city: canonicalCity,         // Definido no registo/onboarding e PERMANENTE
+    representedDistrict: canonicalDistrict,
+    representedCity: canonicalCity,
     districtLocked: true,
+    cityLocked: true,
     level: 1,
     xp: 0,
     coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
@@ -395,7 +413,10 @@ export async function createNewUserDocument(
         displayName: cleanName,
         photoURL: photoURL,
         avatarId: DEFAULT_AVATAR_ID,
-        district: selectedDistrict,
+        district: canonicalDistrict,
+        city: canonicalCity,
+        representedDistrict: canonicalDistrict,
+        representedCity: canonicalCity,
         level: 1,
         xp: 0,
         equippedTitle: 'Noviço da Nação',

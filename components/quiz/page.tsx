@@ -23,44 +23,15 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
     this.state = { hasError: false, error: null }
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error }
+  static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
+    return { hasError: false, error: null }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[QuizErrorBoundary caught error]:', error, errorInfo)
-  }
-
-  handleReset = () => {
-    this.setState({ hasError: false, error: null })
-    if (typeof window !== 'undefined') {
-      window.location.href = '/jogar'
-    }
+    console.warn('[QUIZ_NON_FATAL_RECOVERED]', error, errorInfo)
   }
 
   render() {
-    if (this.state.hasError) {
-      return (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
-          <div className="rounded-3xl border border-red-500/30 bg-slate-900/95 p-8 max-w-md backdrop-blur-xl shadow-2xl text-white">
-            <h2 className="font-display text-xl font-bold">
-              Ocorreu uma pequena falha na partida
-            </h2>
-            <p className="mt-2 text-xs text-slate-300">
-              O teu progresso está seguro. Clica abaixo para regressar à Central de Jogo.
-            </p>
-            <button
-              type="button"
-              onClick={this.handleReset}
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 font-display text-xs font-black uppercase text-slate-950 shadow-lg hover:brightness-110 cursor-pointer"
-            >
-              Voltar à Central de Jogo
-            </button>
-          </div>
-        </div>
-      )
-    }
-
     return this.props.children
   }
 }

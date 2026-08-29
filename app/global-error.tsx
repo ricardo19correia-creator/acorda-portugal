@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { RefreshCw, Home, ShieldAlert } from 'lucide-react'
+import { RefreshCw, Home, ShieldCheck } from 'lucide-react'
 
 export default function GlobalError({
   error,
@@ -11,15 +11,20 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error('[NEXT GLOBAL ERROR BOUNDARY]', error)
+    console.error('[CRITICAL_APP_ERROR]', {
+      message: error?.message,
+      stack: error?.stack,
+      digest: error?.digest,
+      error,
+    })
   }, [error])
 
   return (
     <html lang="pt-PT" className="dark">
       <body className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-slate-950 text-white antialiased font-sans">
-        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-900 p-6 sm:p-8 shadow-2xl text-center space-y-6">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-400 border border-amber-500/30">
-            <ShieldAlert className="h-8 w-8" />
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-900/95 p-6 sm:p-8 shadow-2xl text-center space-y-6">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+            <ShieldCheck className="h-8 w-8" />
           </div>
 
           <div className="space-y-2">
@@ -29,11 +34,11 @@ export default function GlobalError({
             </div>
 
             <h1 className="text-2xl font-black uppercase text-white tracking-tight">
-              Instabilidade de Sistema
+              Recuperação de Sistema
             </h1>
 
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Ocorreu um erro inesperado ao carregar a plataforma. Clica abaixo para recarregar a aplicação de forma segura.
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              A tua sessão e dados de jogo estão protegidos. Clica abaixo para recarregar a plataforma com segurança.
             </p>
           </div>
 
@@ -49,11 +54,15 @@ export default function GlobalError({
 
             <button
               type="button"
-              onClick={() => { window.location.href = '/' }}
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.href = '/jogar'
+                }
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-5 py-3 text-xs font-bold text-slate-200 transition-all cursor-pointer"
             >
               <Home className="h-4 w-4" />
-              <span>Início</span>
+              <span>Central de Jogos</span>
             </button>
           </div>
         </div>

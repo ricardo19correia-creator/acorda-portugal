@@ -237,6 +237,10 @@ export type UserProfile = {
   photoURL: string
   district: string
   districtLocked?: boolean
+  city?: string
+  cityLocked?: boolean
+  representedDistrict?: string
+  representedCity?: string
   level: number
   xp: number
   euros: number

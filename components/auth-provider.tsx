@@ -22,7 +22,14 @@ import {
   clearLocalSession,
 } from '@/lib/session-manager'
 import { SessionConflictModal } from '@/components/session-conflict-modal'
-import { VALID_DISTRICTS } from '@/data/districts'
+import {
+  VALID_DISTRICTS,
+  getDistrictCities,
+  isValidDistrict,
+  isValidCityForDistrict,
+  getDefaultCityForDistrict,
+  normalizeDistrict,
+} from '@/data/districts'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 
 export type AuthState = {
@@ -49,6 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profileRetry, setProfileRetry] = useState(0)
   const [needsDistrictSelection, setNeedsDistrictSelection] = useState(false)
   const [selectedDistrictInput, setSelectedDistrictInput] = useState('')
+  const [selectedCityInput, setSelectedCityInput] = useState('')
   const [isSubmittingDistrict, setIsSubmittingDistrict] = useState(false)
   const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
 
@@ -90,23 +98,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               if (!remoteSessionId) {
                 // Primeira sessão ou migração: registar sessão atual
                 void registerUserSession(currentAuthUser)
-              } else if (!localSessionId) {
-                // Sessão local ainda não gravada (ex: refresh ou login direto): adotar a sessão remota
+              } else if (!localSessionId || remoteSessionId !== localSessionId) {
+                // Sincronização silenciosa e transparente da sessão local
                 setLocalSessionId(remoteSessionId)
-              } else if (remoteSessionId !== localSessionId) {
-                // Conflito de sessão detetado: outro dispositivo/navegador iniciou sessão
-                console.warn('[SESSION CONFLICT] Sessão sobreposta por outro login:', {
-                  remote: remoteSessionId,
-                  local: localSessionId,
-                })
-                clearLocalSession()
-                setIsSessionConflictOpen(true)
-                try {
-                  await auth.signOut()
-                } catch (e) {}
-                setProfile(null)
-                setProfileLoading(false)
-                return
               }
               const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
               const xpVal = typeof data.xp === 'number' ? data.xp : 0
@@ -114,11 +108,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               const nameVal = data.name || data.displayName || data.username || currentAuthUser.displayName || currentAuthUser.email?.split('@')[0] || 'Jogador'
               
               // Verificação estrita de validade do distrito nos 20 distritos oficiais
-              const rawDistrict = typeof data.district === 'string' ? data.district.trim() : ''
-              const isValidDistrict = VALID_DISTRICTS.includes(rawDistrict as any)
-              const districtVal = isValidDistrict ? rawDistrict : ''
-              const districtLockedVal = Boolean(data.districtLocked && isValidDistrict)
-              const needsDistrict = !districtVal || !isValidDistrict || !districtLockedVal
+              const rawDistrict = typeof data.district === 'string' ? data.district.trim() : typeof data.representedDistrict === 'string' ? data.representedDistrict.trim() : ''
+              const isValidDist = isValidDistrict(rawDistrict)
+              const districtVal = isValidDist ? (normalizeDistrict(rawDistrict) || rawDistrict) : ''
+              const rawCity = typeof data.city === 'string' ? data.city.trim() : typeof data.representedCity === 'string' ? data.representedCity.trim() : ''
+              const cityVal = rawCity && isValidCityForDistrict(districtVal, rawCity) ? rawCity : (districtVal ? getDefaultCityForDistrict(districtVal) : '')
+              const districtLockedVal = Boolean(data.districtLocked && districtVal)
+              const cityLockedVal = Boolean(data.cityLocked && cityVal)
+              const needsDistrict = !districtVal || !isValidDist || !districtLockedVal
               setNeedsDistrictSelection(needsDistrict)
 
               const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
@@ -136,6 +133,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 username: data.username || nameVal,
                 district: districtVal,
                 districtLocked: districtLockedVal,
+                city: cityVal,
+                cityLocked: cityLockedVal,
+                representedDistrict: districtVal,
+                representedCity: cityVal,
                 equippedTitle: titleVal,
                 level: levelVal,
                 xp: xpVal,
@@ -191,8 +192,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   localStorage.setItem('user_display_name', nameVal)
                   if (districtVal) {
                     localStorage.setItem('user_district', districtVal)
+                    localStorage.setItem('user_represented_district', districtVal)
                   } else {
                     localStorage.removeItem('user_district')
+                    localStorage.removeItem('user_represented_district')
+                  }
+                  if (cityVal) {
+                    localStorage.setItem('user_city', cityVal)
+                    localStorage.setItem('user_represented_city', cityVal)
+                  } else {
+                    localStorage.removeItem('user_city')
+                    localStorage.removeItem('user_represented_city')
                   }
                   localStorage.setItem('user_equipped_avatar', avatarVal)
                   localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
@@ -215,6 +225,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                       photoURL: avatarVal,
                       avatarId: avatarIdVal,
                       district: districtVal,
+                      city: cityVal,
+                      representedDistrict: districtVal,
+                      representedCity: cityVal,
                       level: levelVal,
                       xp: xpVal,
                       equippedTitle: titleVal,
@@ -350,8 +363,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
           },
           (error) => {
-            console.error('Erro no listener de dados do utilizador:', error)
-            setProfileError('Não foi possível carregar o teu perfil.')
+            console.warn('[AUTH] Aviso transitório no listener de dados do utilizador:', error)
+            setProfile((currentProfile) => {
+              if (currentProfile) {
+                // Preserva o perfil atual na memória durante oscilações transitórias de rede
+                return currentProfile
+              }
+              setProfileError('Não foi possível carregar o teu perfil. A tentar restabelecer...')
+              return null
+            })
             setProfileLoading(false)
           },
         )
@@ -403,38 +423,77 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
             <div className="space-y-2">
               <h2 className="text-2xl font-black text-white uppercase tracking-wider font-display">
-                Escolhe o teu Distrito
+                Escolhe o teu Território
               </h2>
               <p className="text-slate-400 text-xs leading-relaxed">
-                Para representar a tua região no Ranking Nacional, seleciona a tua origem. Esta escolha é{' '}
+                Para representar a tua região no Ranking Nacional e nos Desafios Locais, escolhe o teu distrito e cidade. Esta escolha é{' '}
                 <strong className="text-amber-400">única e definitiva</strong>.
               </p>
             </div>
 
-            <select
-              id="select-district-input"
-              value={selectedDistrictInput}
-              onChange={(e) => setSelectedDistrictInput(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 rounded-xl py-3.5 px-4 text-white text-sm outline-none cursor-pointer"
-            >
-              <option value="" disabled>
-                Seleciona o teu distrito ou arquipélago...
-              </option>
-              {VALID_DISTRICTS.map((d) => (
-                <option key={d} value={d}>
-                  {d}
+            {/* Seletor de Distrito */}
+            <div className="text-left space-y-1">
+              <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                Distrito de Representação *
+              </label>
+              <select
+                id="select-district-input"
+                value={selectedDistrictInput}
+                onChange={(e) => {
+                  const newDist = e.target.value
+                  setSelectedDistrictInput(newDist)
+                  const cities = getDistrictCities(newDist)
+                  setSelectedCityInput(cities[0] || newDist)
+                }}
+                className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 rounded-xl py-3 px-4 text-white text-sm outline-none cursor-pointer"
+              >
+                <option value="" disabled>
+                  Seleciona o teu distrito ou arquipélago...
                 </option>
-              ))}
-            </select>
+                {VALID_DISTRICTS.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Seletor de Cidade */}
+            <div className="text-left space-y-1">
+              <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                Cidade / Município de Representação *
+              </label>
+              <select
+                id="select-city-input"
+                value={selectedCityInput}
+                disabled={!selectedDistrictInput}
+                onChange={(e) => setSelectedCityInput(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 focus:border-cyan-400 rounded-xl py-3 px-4 text-white text-sm outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <option value="" disabled>
+                  {selectedDistrictInput ? 'Seleciona a tua cidade...' : 'Escolhe primeiro o distrito acima...'}
+                </option>
+                {selectedDistrictInput &&
+                  getDistrictCities(selectedDistrictInput).map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+              </select>
+            </div>
 
             <button
               type="button"
-              disabled={!selectedDistrictInput || isSubmittingDistrict}
+              disabled={!selectedDistrictInput || !selectedCityInput || isSubmittingDistrict}
               onClick={async () => {
-                const select = document.getElementById('select-district-input') as HTMLSelectElement
-                const val = select?.value || selectedDistrictInput
-                if (!val || !VALID_DISTRICTS.includes(val as any)) {
-                  alert('Por favor seleciona um distrito!')
+                const dist = selectedDistrictInput.trim()
+                const city = selectedCityInput.trim() || getDefaultCityForDistrict(dist)
+                if (!dist || !isValidDistrict(dist)) {
+                  alert('Por favor seleciona um distrito válido!')
+                  return
+                }
+                if (!city || !isValidCityForDistrict(dist, city)) {
+                  alert('Por favor seleciona uma cidade válida para o distrito escolhido!')
                   return
                 }
 
@@ -444,8 +503,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   await setDoc(
                     doc(db, 'users', user.uid),
                     {
-                      district: val,
+                      district: dist,
+                      city: city,
+                      representedDistrict: dist,
+                      representedCity: city,
                       districtLocked: true,
+                      cityLocked: true,
                       updatedAt: serverTimestamp(),
                     },
                     { merge: true }
@@ -454,29 +517,47 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   await setDoc(
                     doc(db, 'publicProfiles', user.uid),
                     {
-                      district: val,
+                      district: dist,
+                      city: city,
+                      representedDistrict: dist,
+                      representedCity: city,
                       updatedAt: serverTimestamp(),
                     },
                     { merge: true }
                   )
 
                   if (typeof window !== 'undefined') {
-                    localStorage.setItem('user_district', val)
+                    localStorage.setItem('user_district', dist)
+                    localStorage.setItem('user_represented_district', dist)
+                    localStorage.setItem('user_city', city)
+                    localStorage.setItem('user_represented_city', city)
                   }
 
                   // Atualiza estado local
                   setNeedsDistrictSelection(false)
-                  setProfile((prev) => (prev ? { ...prev, district: val, districtLocked: true } : null))
+                  setProfile((prev) =>
+                    prev
+                      ? {
+                          ...prev,
+                          district: dist,
+                          city: city,
+                          representedDistrict: dist,
+                          representedCity: city,
+                          districtLocked: true,
+                          cityLocked: true,
+                        }
+                      : null
+                  )
                 } catch (e) {
-                  console.error('[AUTH] Erro ao gravar distrito:', e)
-                  alert('Erro ao guardar distrito. Tenta novamente.')
+                  console.error('[AUTH] Erro ao gravar território:', e)
+                  alert('Erro ao guardar território. Tenta novamente.')
                 } finally {
                   setIsSubmittingDistrict(false)
                 }
               }}
               className="w-full py-4 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/30 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmittingDistrict ? 'A registar...' : 'Confirmar Distrito e Jogar →'}
+              {isSubmittingDistrict ? 'A registar...' : 'Confirmar Território e Jogar →'}
             </button>
           </div>
         </div>
@@ -490,10 +571,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   )
 }
 
+const fallbackAuthState: AuthState = {
+  user: null,
+  authResolved: false,
+  authInitializationError: null,
+  profile: null,
+  profileLoading: true,
+  profileError: null,
+  needsDistrictSelection: false,
+  setNeedsDistrictSelection: () => {},
+  retryProfile: () => {},
+}
+
 export function useAuth(): AuthState {
   const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error('useAuth deve ser utilizado dentro de um AuthProvider')
-  }
-  return context
+  return context || fallbackAuthState
 }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X } from 'lucide-react'
+import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X, Coins } from 'lucide-react'
 import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
@@ -15,7 +15,7 @@ import {
   REAL_AVATARS,
 } from '@/lib/avatars'
 import { TITLE_SHOP_CATALOG, type TitleItem, type TitleGroup, type TitleRarity, getTitleRarityBadge } from '@/data/shopTitles'
-import { ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRarity, type ArenaEffect, getArenaRarityBadge } from '@/data/shopArenas'
+import { shopArenas, ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRarity, type ArenaEffect, getArenaRarityBadge } from '@/data/shopArenas'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
@@ -77,7 +77,7 @@ const AVATAR_SHOP_ITEMS: ShopItem[] = avatarShopList.map((av) => ({
   avatarCategoryLabel: av.categoryTitle,
   rarity: av.rarity,
   description: av.description,
-  price: av.price !== null ? `€${av.price.toLocaleString('pt-PT')}` : 'POR MÉRITO',
+  price: av.price !== null ? (av.price === 0 ? 'GRÁTIS' : `${av.price.toLocaleString('pt-PT')} Moedas`) : 'POR MÉRITO',
   priceValue: av.price ?? 0,
   isExclusive: av.isExclusive,
   unlockCondition: av.unlockCondition,
@@ -96,7 +96,7 @@ const TITLE_SHOP_ITEMS: ShopItem[] = TITLE_SHOP_CATALOG.map((t) => ({
   avatarCategoryLabel: t.categoryTitle,
   rarity: t.rarity,
   description: t.requirement ? `Desbloqueio: ${t.requirement}` : `Título oficial exibido no teu perfil, duelos e rankings.`,
-  price: t.price !== null ? `€${t.price.toLocaleString('pt-PT')}` : 'POR MÉRITO',
+  price: t.price !== null ? (t.price === 0 ? 'GRÁTIS' : `${t.price.toLocaleString('pt-PT')} Moedas`) : 'POR MÉRITO',
   priceValue: t.price ?? 0,
   isExclusive: t.price === null,
   unlockCondition: t.requirement,
@@ -105,7 +105,7 @@ const TITLE_SHOP_ITEMS: ShopItem[] = TITLE_SHOP_CATALOG.map((t) => ({
   badgeColor: t.badgeColor,
 }))
 
-const ARENA_SHOP_ITEMS: ShopItem[] = ARENA_SHOP_CATALOG.map((a) => ({
+const ARENA_SHOP_ITEMS: ShopItem[] = shopArenas.map((a) => ({
   id: a.id,
   name: a.name,
   category: 'arenas',
@@ -113,11 +113,17 @@ const ARENA_SHOP_ITEMS: ShopItem[] = ARENA_SHOP_CATALOG.map((a) => ({
   avatarCategoryLabel: a.categoryLabel,
   rarity: a.rarity,
   description: a.description,
-  price: a.price !== null ? (a.price === 0 ? 'GRÁTIS' : `€${a.price.toLocaleString('pt-PT')}`) : 'POR MÉRITO',
+  meaning: a.meaning,
+  price: a.price !== null ? (a.price === 0 ? 'GRÁTIS' : `${a.price.toLocaleString('pt-PT')} Moedas`) : 'POR MÉRITO',
   priceValue: a.price ?? 0,
   isExclusive: a.price === null,
   unlockCondition: a.unlockCondition,
+  icon: a.icon || '🏟️',
   image: a.image,
+  shopImage: a.shopImage || a.image,
+  gameImage: a.gameImage || a.image,
+  gameBackground: a.gameBackground || a.image,
+  duelBackground: a.duelBackground || a.image,
   effect: a.effect,
   badge: a.rarity,
   badgeColor: a.badgeColor,
@@ -130,7 +136,7 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
   categoryKey: e.category,
   rarity: e.rarity as any,
   description: `Reação oficial para duelos multiplayer 1v1 (${e.category}).`,
-  price: e.price === 0 ? 'GRÁTIS' : `€${e.price.toLocaleString('pt-PT')}`,
+  price: e.price === 0 ? 'GRÁTIS' : `${e.price.toLocaleString('pt-PT')} Moedas`,
   priceValue: e.price,
   badge: e.rarity,
   badgeColor: getEmoteRarityBadge(e.rarity),
@@ -144,7 +150,7 @@ const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
   category: 'molduras',
   rarity: f.rarity as any,
   description: f.description,
-  price: `€${f.price.toLocaleString('pt-PT')}`,
+  price: `${f.price.toLocaleString('pt-PT')} Moedas`,
   priceValue: f.price,
   badge: f.rarity,
   badgeColor: getRarityBadgeColor(f.rarity as any),
@@ -153,9 +159,9 @@ const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
   // AJUDAS & UTILIDADES
-  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)', icon: '✨' },
-  { id: 'HELP_005', name: 'Pack x3 Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.', price: '€500', priceValue: 500, image: '/images/shop/ajuda-publico.jpg', badge: 'Consumível (+3)', icon: '👥' },
-  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '€750', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)', icon: '⏳' },
+  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '500 Moedas', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)', icon: '✨' },
+  { id: 'HELP_005', name: 'Pack x3 Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.', price: '500 Moedas', priceValue: 500, image: '/images/shop/ajuda-publico.jpg', badge: 'Consumível (+3)', icon: '👥' },
+  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '750 Moedas', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)', icon: '⏳' },
 ]
 
 const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...FRAME_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
@@ -467,13 +473,13 @@ export default function LojaPage() {
     // 1. CONSUMÍVEIS (SEMPRE COMPRA)
     if (item.category === 'ajudas') {
       if (userBalance < item.priceValue) {
-        showToast('Saldo de € Acorda insuficiente!', 'error')
+        showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
       const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
       if (!deductSuccess) {
-        showToast('Saldo de € Acorda insuficiente!', 'error')
+        showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
@@ -699,13 +705,13 @@ export default function LojaPage() {
       }
 
       if (userBalance < item.priceValue) {
-        showToast('Saldo de € Acorda insuficiente!', 'error')
+        showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
       const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
       if (!deductSuccess) {
-        showToast('Saldo de € Acorda insuficiente!', 'error')
+        showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
@@ -813,7 +819,7 @@ export default function LojaPage() {
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
-      showToast(`Parabéns! Adquiriste "${item.name}" por €${item.priceValue.toLocaleString('pt-PT')}!`)
+      showToast(`Parabéns! Adquiriste "${item.name}" por ${item.priceValue.toLocaleString('pt-PT')} Moedas!`)
     }
   }
 
@@ -897,8 +903,10 @@ export default function LojaPage() {
             <span className="text-[10px] font-black tracking-widest text-amber-400 uppercase block mb-0.5">
               O TEU SALDO VIRTUAL
             </span>
-            <div className="text-2xl font-black text-amber-300">
-              €{userBalance.toLocaleString('pt-PT')} <span className="text-xs text-amber-400 font-bold">€ Acorda</span>
+            <div className="flex items-center justify-end gap-1.5 text-2xl font-black text-amber-300">
+              <Coins className="w-5 h-5 text-amber-400 shrink-0" />
+              <span>{userBalance.toLocaleString('pt-PT')}</span>
+              <span className="text-xs text-amber-400 font-bold uppercase tracking-wider ml-1">Moedas</span>
             </div>
           </div>
         </div>
@@ -935,7 +943,7 @@ export default function LojaPage() {
                 : 'bg-slate-900/70 text-emerald-400 border border-emerald-500/30 hover:bg-slate-800'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" /> Todos os Itens (€ Acorda)
+            <Layers className="w-3.5 h-3.5" /> Todos os Itens (Moedas)
           </button>
 
           <button
@@ -990,7 +998,7 @@ export default function LojaPage() {
                 : 'bg-slate-900/70 text-amber-400 border border-amber-500/30 hover:bg-slate-800'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5" /> EXCLUSIVOS VIP (€)
+            <Sparkles className="w-3.5 h-3.5" /> EXCLUSIVOS VIP (€ Real)
           </button>
         </div>
 
@@ -1241,8 +1249,8 @@ export default function LojaPage() {
                     )}
                   >
                     <div>
-                      {/* Badge & Category Tag */}
-                      <div className="flex justify-between items-center mb-2 gap-1">
+                      {/* Badge & Category Tag com Altura Reservada */}
+                      <div className="flex justify-between items-center mb-2 gap-1 min-h-[24px]">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           {item.badge && (
                             <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${
@@ -1301,27 +1309,18 @@ export default function LojaPage() {
                       ) : item.category === 'arenas' ? (
                         <div 
                           onClick={() => setPreviewArenaItem(item)}
-                          className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md"
+                          className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md bg-slate-950"
                         >
-                          {item.image ? (
-                            <img 
-                              src={item.image} 
-                              alt={item.name} 
-                              className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
-                              onError={(e) => {
-                                e.currentTarget.src = '/arenas/arena-1.jpg'
-                              }}
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-slate-600">
-                              <Globe className="w-8 h-8" />
-                            </div>
-                          )}
+                          <img 
+                            src={item.image || item.shopImage || ''} 
+                            alt={item.name} 
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
+                          />
                           <ArenaEffectsLayer effect={item.effect || 'particles'} intensity="low" showContrastOverlay={false} className="z-10" />
                           
-                          {/* Botão de Testar (canto superior direito, sem overlay escuro na imagem) */}
+                          {/* Botão de Testar */}
                           <div className="absolute top-2 right-2 z-20">
-                            <span className="px-2 py-0.5 rounded-lg bg-blue-600 text-white font-black text-[10px] flex items-center gap-1 shadow-md opacity-90 group-hover/arena:opacity-100 transition">
+                            <span className="px-2 py-0.5 rounded-lg bg-blue-600/90 hover:bg-blue-600 text-white font-black text-[10px] flex items-center gap-1 shadow-md backdrop-blur-sm group-hover/arena:opacity-100 transition">
                               <Eye className="w-3 h-3" /> Testar
                             </span>
                           </div>
@@ -1381,19 +1380,36 @@ export default function LojaPage() {
                         </div>
                       )}
 
-                      <div className="flex items-center justify-between mt-1 mb-0.5">
-                        <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                      {/* Título com line-clamp-1 e tooltip */}
+                      <div className="flex items-center justify-between mt-1 mb-0.5 min-h-[24px]">
+                        <h3 
+                          className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1 truncate"
+                          title={item.name}
+                        >
                           {item.name}
                         </h3>
                         {item.category === 'arenas' && (
-                          <span className="text-[10px] font-bold text-slate-400 shrink-0 ml-1">
+                          <span className="text-[10px] font-bold text-slate-400 shrink-0 ml-1.5 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/50">
                             {item.effect === 'fire' ? '🔥 Fogo' : item.effect === 'lava' ? '🌋 Lava' : item.effect === 'rain' ? '🌧️ Chuva' : item.effect === 'stars' ? '⭐ Estrelas' : item.effect === 'waves' ? '🌊 Ondas' : item.effect === 'lightning' ? '⚡ Trovões' : item.effect === 'fireworks' ? '🎆 Pirotecnia' : item.effect === 'fog' ? '🌫️ Névoa' : '✨ Partículas'}
                           </span>
                         )}
                       </div>
-                      <p className="mt-1 text-xs text-slate-400 line-clamp-2 leading-relaxed">
+
+                      {/* Descrição com altura fixa line-clamp-2 min-h-[40px] */}
+                      <p 
+                        className="mt-1 text-xs text-slate-400 line-clamp-2 min-h-[40px] leading-relaxed"
+                        title={item.description}
+                      >
                         {item.description}
                       </p>
+                      {item.category === 'arenas' && (item as any).meaning && (
+                        <p 
+                          className="mt-1.5 text-[11px] text-amber-300/90 italic font-medium border-l-2 border-amber-500/50 pl-2 leading-snug line-clamp-1 truncate"
+                          title={(item as any).meaning}
+                        >
+                          “{(item as any).meaning}”
+                        </p>
+                      )}
                     </div>
 
                     {/* Ação e Preço / Condição de Mérito */}
@@ -1415,10 +1431,11 @@ export default function LojaPage() {
                           </div>
                         </div>
                       ) : (
-                        <div className="flex items-center justify-between">
-                          <span className="font-mono text-sm font-semibold text-yellow-400">
-                            {item.price}
-                          </span>
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1 font-mono text-sm font-black text-amber-400">
+                            {item.priceValue > 0 && <Coins className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                            <span>{item.price}</span>
+                          </div>
 
                           <button
                             type="button"
@@ -1433,7 +1450,7 @@ export default function LojaPage() {
                                 : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                             }`}
                           >
-                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✅' : isUnlocked ? 'Equipar' : `Comprar ${item.price}`}
+                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✅' : isUnlocked ? 'Equipar' : item.price === 'GRÁTIS' ? 'Ativar Grátis' : `Comprar`}
                           </button>
                         </div>
                       )}
@@ -1452,7 +1469,9 @@ export default function LojaPage() {
               {/* Arena Background Layer with Particle Engine */}
               <div 
                 className="relative h-72 sm:h-96 w-full bg-cover bg-center overflow-hidden flex flex-col justify-between p-6"
-                style={{ backgroundImage: `url('${previewArenaItem.image || '/arenas/arena-1.jpg'}')` }}
+                style={{
+                  backgroundImage: `url('${(previewArenaItem as any).gameBackground || previewArenaItem.image || previewArenaItem.shopImage || ''}')`,
+                }}
               >
                 <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={false} />
                 
@@ -1504,10 +1523,18 @@ export default function LojaPage() {
               {/* Action Bar */}
               <div className="p-6 bg-slate-900 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-white">{previewArenaItem.name}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">{previewArenaItem.description}</p>
+                  <h3 className="text-xl font-black text-white flex items-center gap-2">
+                    <span>{(previewArenaItem as any).icon || '🏛️'}</span>
+                    <span>{previewArenaItem.name}</span>
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1">{previewArenaItem.description}</p>
+                  {(previewArenaItem as any).meaning && (
+                    <p className="text-xs font-bold text-amber-300 italic mt-1.5 border-l-2 border-amber-500/60 pl-2 leading-relaxed">
+                      “{(previewArenaItem as any).meaning}”
+                    </p>
+                  )}
                   {previewArenaItem.isExclusive && !isItemUnlocked(previewArenaItem) && (
-                    <p className="text-xs font-bold text-rose-400 mt-1 flex items-center gap-1">
+                    <p className="text-xs font-bold text-rose-400 mt-2 flex items-center gap-1">
                       <span>🔒 Requisito:</span> {previewArenaItem.unlockCondition}
                     </p>
                   )}

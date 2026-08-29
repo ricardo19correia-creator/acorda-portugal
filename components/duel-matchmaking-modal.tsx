@@ -36,6 +36,7 @@ import {
   resolveUserAvatar,
 } from '@/lib/duel'
 import { OFFICIAL_ARENAS, getArenaById, type Arena } from '@/data/shopArenas'
+import { getArenaAssets, getArenaShopImage, getArenaDuelBackground } from '@/lib/arena-assets'
 import { cn } from '@/lib/utils'
 
 interface DuelMatchmakingModalProps {
@@ -245,7 +246,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
       try {
         const res = await findOrCreateMatchmakingRoom(playerObj, profileObj, {
           arenaId: selectedArena.id,
-          arenaImage: selectedArena.imagePath,
+          arenaImage: selectedArena.duelBackground || selectedArena.imagePath || selectedArena.image,
           arenaName: selectedArena.name,
         })
         if (!isSubscribed || matchedDuelIdRef.current) {
@@ -320,7 +321,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
           level: String(playerPropsRef.current.playerLevel),
           district: playerPropsRef.current.playerDistrict,
           arenaId: selectedArena.id,
-          arenaImage: selectedArena.imagePath || selectedArena.image || '',
+          arenaImage: selectedArena.duelBackground || selectedArena.imagePath || selectedArena.image || '',
           arenaName: selectedArena.name,
         })
         const res = await fetch(`/api/matchmaking/status?${queryParams.toString()}`, {
@@ -530,7 +531,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     try {
       const res = await createDuel(currentPlayer, profile ?? undefined, {
         arenaId: selectedArena.id,
-        arenaImage: selectedArena.imagePath,
+        arenaImage: selectedArena.duelBackground || selectedArena.imagePath || selectedArena.image,
         arenaName: selectedArena.name,
       })
       onClose()
@@ -705,7 +706,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       <div
                         className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
                         style={{
-                          backgroundImage: `url('${selectedArena.imagePath}')`,
+                          backgroundImage: `url('${selectedArena.shopImage || selectedArena.imagePath || selectedArena.image}')`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -743,7 +744,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                               setSelectedArenaId(arena.id)
                               if (typeof window !== 'undefined') {
                                 localStorage.setItem('equipped_arena', arena.id)
-                                localStorage.setItem('equipped_arena_image', arena.imagePath || arena.image || '')
+                                localStorage.setItem('equipped_arena_image', arena.gameBackground || arena.image || '')
                                 window.dispatchEvent(new Event('arenaChanged'))
                               }
                               setShowArenaPicker(false)
@@ -758,7 +759,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                             <div
                               className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
                               style={{
-                                backgroundImage: `url('${arena.imagePath || arena.image}')`,
+                                backgroundImage: `url('${arena.shopImage || arena.imagePath || arena.image}')`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
@@ -999,7 +1000,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       <div
                         className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
                         style={{
-                          backgroundImage: `url('${selectedArena.imagePath}')`,
+                          backgroundImage: `url('${selectedArena.shopImage || selectedArena.imagePath || selectedArena.image}')`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -1037,7 +1038,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                               setSelectedArenaId(arena.id)
                               if (typeof window !== 'undefined') {
                                 localStorage.setItem('equipped_arena', arena.id)
-                                localStorage.setItem('equipped_arena_image', arena.imagePath || arena.image || '')
+                                localStorage.setItem('equipped_arena_image', arena.gameBackground || arena.image || '')
                                 window.dispatchEvent(new Event('arenaChanged'))
                               }
                               setShowArenaPicker(false)
@@ -1052,7 +1053,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                             <div
                               className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
                               style={{
-                                backgroundImage: `url('${arena.imagePath || arena.image}')`,
+                                backgroundImage: `url('${arena.shopImage || arena.imagePath || arena.image}')`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',

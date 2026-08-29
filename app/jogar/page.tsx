@@ -3,7 +3,8 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
-import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
+import { ARENA_SHOP_CATALOG, getArenaById } from '@/data/shopArenas'
+import { getArenaGameBackground } from '@/lib/arena-assets'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
@@ -47,20 +48,11 @@ function JogarContainer() {
   useEffect(() => {
     const sync = () => {
       if (typeof window !== 'undefined') {
-        const savedImage = localStorage.getItem('equipped_arena_image')
         const savedArena = localStorage.getItem('equipped_arena')
-
-        if (savedImage && savedImage.startsWith('/') && !savedImage.includes('hero-bg') && !savedImage.includes('fundo-espaco')) {
-          setArenaImage(savedImage)
-        } else if (savedArena) {
-          const catalogItem = ARENA_SHOP_CATALOG.find((a) => a.id === savedArena)
-          if (catalogItem?.image) {
-            setArenaImage(catalogItem.image)
-          } else {
-            setArenaImage('/arenas/arena-1.jpg')
-          }
+        if (savedArena) {
+          setArenaImage(getArenaGameBackground(savedArena) || '')
         } else {
-          setArenaImage('')
+          setArenaImage(getArenaGameBackground('arena_praca_liberdade') || '')
         }
       }
     }
@@ -90,10 +82,8 @@ function JogarContainer() {
 
   return (
     <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
-      {/* 1. FUNDO GLOBAL OFICIAL (FORA DE JOGO) OU ARENA EQUIPADA (DURANTE O JOGO) */}
-      <AppBackground
-        customImage={isPlaying ? (arenaImage || '/arenas/arena-1.jpg') : undefined}
-      />
+      {/* 1. FUNDO GLOBAL OFICIAL DO JOGO */}
+      <AppBackground customImage={isPlaying && arenaImage ? arenaImage : undefined} />
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex flex-col justify-between bg-transparent">

@@ -1,6 +1,12 @@
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider, type Auth } from 'firebase/auth'
-import { getFirestore, type Firestore } from 'firebase/firestore'
+import {
+  initializeFirestore,
+  getFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+  type Firestore,
+} from 'firebase/firestore'
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE",
@@ -13,7 +19,23 @@ export const firebaseConfig = {
 
 export const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 export const auth: Auth = getAuth(app)
-export const db: Firestore = getFirestore(app)
+
+let firestoreInstance: Firestore
+try {
+  if (typeof window !== 'undefined') {
+    firestoreInstance = initializeFirestore(app, {
+      localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager(),
+      }),
+    })
+  } else {
+    firestoreInstance = getFirestore(app)
+  }
+} catch {
+  firestoreInstance = getFirestore(app)
+}
+
+export const db: Firestore = firestoreInstance
 
 export const googleProvider = new GoogleAuthProvider()
 googleProvider.setCustomParameters({ prompt: 'select_account' })

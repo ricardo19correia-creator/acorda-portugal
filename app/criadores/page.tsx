@@ -21,22 +21,10 @@ import { SiteFooter } from '@/components/site-footer'
 import { CreatorsHero } from '@/components/creators/CreatorsHero'
 import { CreatorsSidebar } from '@/components/creators/CreatorsSidebar'
 import { VALID_DISTRICTS } from '@/data/districts'
-import { cn } from '@/lib/utils'
-import { Heart, MessageSquare, Send, PenSquare, Search, Sparkles } from 'lucide-react'
+import { Heart, MessageSquare, Send, PenSquare, Search, Sparkles, Clock } from 'lucide-react'
+import { formatPostDate, getFullFormattedDate, type CommunityPost, type PublicacaoComunidade } from '@/types/community'
 
-export interface PublicacaoComunidade {
-  id: string
-  autor: string
-  tag: string
-  distrito: string
-  conteudo: string
-  categoria: string
-  destaque: boolean
-  oficial: boolean
-  likes: number
-  comentariosCount: number
-  createdAt: Timestamp | Date | string | null
-}
+export type { CommunityPost, PublicacaoComunidade }
 
 export default function CriadoresPage() {
   const { user, profile } = useAuth()
@@ -102,18 +90,30 @@ export default function CriadoresPage() {
         (snapshot) => {
           const docs: PublicacaoComunidade[] = snapshot.docs.map((docSnap) => {
             const data = docSnap.data()
+            const authorName = typeof data.authorName === 'string' && data.authorName.trim() ? data.authorName : (typeof data.autor === 'string' && data.autor.trim() ? data.autor : 'Jogador')
+            const authorHandle = typeof data.authorHandle === 'string' && data.authorHandle.trim() ? data.authorHandle : (typeof data.tag === 'string' && data.tag.trim() ? data.tag : 'jogador_pt')
+            const district = typeof data.district === 'string' && data.district.trim() ? data.district : (typeof data.distrito === 'string' && data.distrito.trim() ? data.distrito : 'Portugal')
+            const category = typeof data.category === 'string' && data.category.trim() ? data.category : (typeof data.categoria === 'string' && data.categoria.trim() ? data.categoria : 'Geral')
+            const content = typeof data.content === 'string' ? data.content : (typeof data.conteudo === 'string' ? data.conteudo : '')
+            const createdAt = data.createdAt || null
+
             return {
               id: docSnap.id,
-              autor: typeof data.autor === 'string' && data.autor.trim() ? data.autor : 'Jogador',
-              tag: typeof data.tag === 'string' && data.tag.trim() ? data.tag : 'jogador_pt',
-              distrito: typeof data.distrito === 'string' && data.distrito.trim() ? data.distrito : 'Portugal',
-              conteudo: typeof data.conteudo === 'string' ? data.conteudo : '',
-              categoria: typeof data.categoria === 'string' && data.categoria.trim() ? data.categoria : 'Geral',
+              authorName,
+              authorHandle,
+              district,
+              category,
+              content,
+              autor: authorName,
+              tag: authorHandle,
+              distrito: district,
+              categoria: category,
+              conteudo: content,
               destaque: Boolean(data.destaque),
               oficial: Boolean(data.oficial),
               likes: typeof data.likes === 'number' ? data.likes : 0,
-              comentariosCount: typeof data.comentariosCount === 'number' ? data.comentariosCount : 0,
-              createdAt: data.createdAt || null,
+              commentsCount: typeof data.commentsCount === 'number' ? data.commentsCount : (typeof data.comentariosCount === 'number' ? data.comentariosCount : 0),
+              createdAt,
             }
           })
 
@@ -159,6 +159,11 @@ export default function CriadoresPage() {
       const categoriaFinal = categoria || 'Ideias'
 
       await addDoc(collection(db, 'publicacoes_comunidade'), {
+        authorName: autorFinal,
+        authorHandle: tagFinal,
+        district: distritoFinal,
+        category: categoriaFinal,
+        content: textoLimpo,
         autor: autorFinal,
         tag: tagFinal,
         distrito: distritoFinal,
@@ -167,6 +172,7 @@ export default function CriadoresPage() {
         destaque: false,
         oficial: false,
         likes: 0,
+        commentsCount: 0,
         comentariosCount: 0,
         createdAt: serverTimestamp(),
       })
@@ -469,9 +475,19 @@ export default function CriadoresPage() {
                                   </span>
                                 )}
                               </div>
-                              <span className="text-xs text-slate-400">
-                                @{post.tag} • {post.distrito}
-                              </span>
+                              <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
+                                <span className="font-semibold text-slate-300">@{post.tag || post.authorHandle}</span>
+                                <span>•</span>
+                                <span>{post.distrito || post.district}</span>
+                                <span>•</span>
+                                <span
+                                  className="inline-flex items-center gap-1 text-slate-400 font-medium hover:text-slate-300 transition-colors"
+                                  title={getFullFormattedDate(post.createdAt)}
+                                >
+                                  <Clock className="w-3 h-3 text-slate-500 shrink-0" />
+                                  <span>{formatPostDate(post.createdAt)}</span>
+                                </span>
+                              </div>
                             </div>
                           </div>
 

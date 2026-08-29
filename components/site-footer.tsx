@@ -8,6 +8,7 @@ import { useAuth } from '@/components/auth-provider'
 
 const LINKS = [
   { label: 'Jogar', href: '/jogar' },
+  { label: '📱 App Android', href: '/download' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Categorias', href: '/categorias' },
   { label: 'Portugal & Mapa', href: '/portugal' },

@@ -436,11 +436,8 @@ export function DuelArena({
       setDuel(updatedDuel)
 
       if (onArenaLoaded) {
-        const resolvedImage =
-          updatedDuel.arenaImage ||
-          (updatedDuel.arenaId ? getArenaById(updatedDuel.arenaId)?.imagePath : null) ||
-          '/arenas/arena-1.jpg'
-        onArenaLoaded(resolvedImage)
+        const resolvedArena = getArenaById(updatedDuel.arenaId || updatedDuel.arenaImage || 'arena_praca_liberdade')
+        onArenaLoaded(resolvedArena as any)
       }
 
       // Se a revanche foi aceite, redirecionar ambos os jogadores para o novo duelo
@@ -472,6 +469,10 @@ export function DuelArena({
     if (duel.playerA?.uid === currentPlayer.uid) return duel.playerB || null
     return duel.playerA || null
   }, [duel, currentPlayer.uid])
+
+  const currentArenaDef = useMemo(() => {
+    return getArenaById(duel?.arenaId || duel?.arenaImage || 'arena_praca_liberdade')
+  }, [duel?.arenaId, duel?.arenaImage])
 
   // Índice da pergunta atual deste jogador
   const currentQIndex = me ? me.currentQuestionIndex : 0
@@ -1182,6 +1183,21 @@ export function DuelArena({
         {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, H-AUTO)             */}
         {/* ========================================================= */}
         <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
+          {/* Banner de Identidade Visual da Arena & Significado */}
+          <div className="w-full mb-2 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-white/15 backdrop-blur-md flex items-center justify-between gap-2 shadow-sm">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="text-sm shrink-0">{currentArenaDef.icon}</span>
+              <span className="text-[11px] font-black text-white uppercase tracking-wider truncate">
+                {currentArenaDef.name}
+              </span>
+            </div>
+            {currentArenaDef.meaning && (
+              <span className="text-[10px] text-amber-300/90 font-medium italic truncate max-w-[240px] hidden sm:inline">
+                “{currentArenaDef.meaning}”
+              </span>
+            )}
+          </div>
+
           {/* Feedback visual instantâneo overlay */}
           {feedback && (
             <div

@@ -31,6 +31,7 @@ import {
   ALL_DISTRICTS_LIST,
   subscribeRankings,
   fetchRankings,
+  computeDistrictStats,
   type RankingPlayer,
 } from '@/lib/rankings'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
@@ -188,53 +189,17 @@ export default function RankingsPage() {
     return nationalPlayers.reduce((sum, p) => sum + (p.xp || 0), 0)
   }, [nationalPlayers])
 
-  // Calcular Estatísticas Distritais para o Mapa Interativo e Classificação Territorial
+  // Calcular Estatísticas Distritais para o Mapa Interativo e Classificação Territorial (Soma de Humanos + Bots)
   const districtStatsMap = useMemo(() => {
-    const tempMap = new Map<string, { name: string; players: number; xp: number }>()
-    ALL_DISTRICTS_LIST.forEach((name) => {
-      tempMap.set(name, {
-        name,
-        players: 0,
-        xp: 0,
-      })
-    })
-
-    nationalPlayers.forEach((p) => {
-      const match = ALL_DISTRICTS_LIST.find((d) => d.toLowerCase() === p.district.toLowerCase())
-      if (match) {
-        const current = tempMap.get(match)!
-        tempMap.set(match, {
-          name: match,
-          players: current.players + 1,
-          xp: current.xp + (p.xp || 0),
-        })
-      }
-    })
-
-    // Separar distritos com XP (>0) dos que têm 0 XP
-    const withXP = Array.from(tempMap.values())
-      .filter((d) => d.xp > 0)
-      .sort((a, b) => b.xp - a.xp || b.players - a.players)
-
-    const zeroXP = Array.from(tempMap.values())
-      .filter((d) => d.xp === 0)
-      .sort((a, b) => a.name.localeCompare(b.name, 'pt-PT'))
-
+    const rawMap = computeDistrictStats(nationalPlayers)
     const rankedMap = new Map<string, DistrictStatItem>()
 
-    // Distritos com XP recebem posição 1, 2, 3...
-    withXP.forEach((item, index) => {
-      rankedMap.set(item.name, {
-        ...item,
-        pos: index + 1,
-      })
-    })
-
-    // Distritos com 0 XP recebem pos: 0 (sem classificação)
-    zeroXP.forEach((item) => {
-      rankedMap.set(item.name, {
-        ...item,
-        pos: 0,
+    rawMap.forEach((stat, districtName) => {
+      rankedMap.set(districtName, {
+        name: districtName,
+        pos: stat.pos,
+        players: stat.players,
+        xp: stat.xp,
       })
     })
 

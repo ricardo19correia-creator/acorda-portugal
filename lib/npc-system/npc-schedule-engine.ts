@@ -19,8 +19,9 @@ const POSSIBLE_ACTIVITIES: Array<'playing' | 'duel' | 'ranking' | 'profile' | 'b
 
 /**
  * Retorna os NPCs atualmente simulados como ativos em Portugal (Europe/Lisbon)
+ * de acordo com a curva horária natural de 24 horas.
  */
-export function getActiveNpcs(date = new Date()): {
+export function getActiveNPCs(date = new Date()): {
   activeNpcs: ActiveNpcPresence[]
   npcCount: number
   targetCount: number
@@ -48,24 +49,24 @@ export function getActiveNpcs(date = new Date()): {
   // Bloco de 5 minutos para rotação determinística e suave
   const fiveMinBucket = Math.floor(minute / 5)
 
-  // Alvo de NPCs ativos por faixa horária
+  // Alvo de NPCs ativos por faixa horária rigorosa (Europe/Lisbon)
   let targetCount = 12
   if (hour >= 0 && hour < 6) {
-    targetCount = 5 // Madrugada
+    targetCount = 5 // 00:00–06:00: Madrugada
   } else if (hour >= 6 && hour < 9) {
-    targetCount = 8 // Início da manhã
+    targetCount = 8 // 06:00–09:00: Início da manhã
   } else if (hour >= 9 && hour < 12) {
-    targetCount = 12 // Manhã
+    targetCount = 12 // 09:00–12:00: Manhã
   } else if (hour >= 12 && hour < 14) {
-    targetCount = 18 // Almoço
+    targetCount = 18 // 12:00–14:00: Almoço
   } else if (hour >= 14 && hour < 18) {
-    targetCount = 14 // Tarde
+    targetCount = 14 // 14:00–18:00: Tarde
   } else if (hour >= 18 && hour < 20) {
-    targetCount = 20 // Fim de tarde
+    targetCount = 20 // 18:00–20:00: Fim de tarde
   } else if (hour >= 20 && hour < 23) {
-    targetCount = 26 // Horário nobre
+    targetCount = 26 // 20:00–23:00: Horário nobre
   } else {
-    targetCount = 12 // Noite
+    targetCount = 12 // 23:00–00:00: Noite
   }
 
   // Filtrar e selecionar NPCs com base no offset temporal do bucket
@@ -90,15 +91,23 @@ export function getActiveNpcs(date = new Date()): {
       npcId: npc.npcId,
       playerType: 'npc',
       isNpc: true,
+      name: npc.displayName,
+      displayName: npc.displayName,
       username: npc.displayName,
       district: npc.district,
       level: npc.level,
       xp: npc.xp,
+      elo: npc.rating,
+      rating: npc.rating,
       activity,
       activityLabel,
+      avatar: npc.avatar,
       photoURL: npc.avatar,
       lastSeen: nowMs - (idx * 2500),
       isCurrentUser: false,
+      title: npc.title,
+      equippedFrame: npc.equippedFrame,
+      virtualMoney: npc.virtualMoney,
     }
   })
 
@@ -108,3 +117,6 @@ export function getActiveNpcs(date = new Date()): {
     targetCount,
   }
 }
+
+// Alias para compatibilidade
+export const getActiveNpcs = getActiveNPCs

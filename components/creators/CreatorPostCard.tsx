@@ -17,8 +17,10 @@ import {
   Award,
   Crown,
   Lock,
+  Clock,
 } from 'lucide-react'
 import type { CreatorPost, PollOption } from '@/src/types/creators'
+import { formatPostDate, getFullFormattedDate } from '@/types/community'
 import { CREATOR_CATEGORIES } from '@/lib/creators-service'
 import { UserAvatar } from '@/components/user-avatar'
 import { cn } from '@/lib/utils'
@@ -197,7 +199,7 @@ export function CreatorPostCard({
               )}
             </div>
 
-            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
               {!post.isAnonymous && (
                 <>
                   <span className="text-slate-400">@{post.authorUsername}</span>
@@ -206,7 +208,13 @@ export function CreatorPostCard({
                   <span>•</span>
                 </>
               )}
-              <span>{timeAgo(post.createdAt)}</span>
+              <span
+                className="inline-flex items-center gap-1 text-slate-400 hover:text-slate-200 transition-colors"
+                title={getFullFormattedDate(post.createdAt)}
+              >
+                <Clock className="w-3 h-3 text-slate-500 shrink-0" />
+                <span>{formatPostDate(post.createdAt)}</span>
+              </span>
             </div>
           </div>
         </div>

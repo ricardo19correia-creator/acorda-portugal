@@ -8,7 +8,6 @@ import { GameThemeProvider } from '@/context/game-theme-context'
 import { AudioProvider } from '@/context/AudioContext'
 import { FloatingBgmWidget } from '@/components/FloatingBgmWidget'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
-import { OnlineConnectionStatus } from '@/components/ui/OnlineConnectionStatus'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -43,7 +42,6 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="relative min-h-screen bg-transparent text-zinc-100 antialiased overflow-x-hidden">
-        <OnlineConnectionStatus />
         <AuthProvider>
           <EconomyProvider>
             <DeepLinkHandler />

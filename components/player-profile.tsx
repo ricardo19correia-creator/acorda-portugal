@@ -45,6 +45,7 @@ import {
   Calendar,
   Layers,
   Lock,
+  Building2,
 } from 'lucide-react'
 
 import { useAuth } from '@/components/auth-provider'
@@ -596,15 +597,15 @@ export function PlayerProfile() {
           </div>
         </div>
 
-        {/* Formulário de Edição de Nome e Distrito */}
+        {/* Formulário de Edição de Nome e Território Permanente */}
         {editing && (
           <div className="relative mt-6 border-t border-white/10 pt-6 animate-rise">
             <h3 className="font-display text-base font-bold text-foreground mb-4 flex items-center gap-2">
               <UserRound className="h-4 w-4 text-primary" />
-              <span>Atualizar Nome e Distrito Oficial</span>
+              <span>Atualizar Nome e Consultar Território Oficial</span>
             </h3>
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground sm:col-span-2">
                 Nome de Jogador
                 <input
                   value={draft.displayName}
@@ -612,6 +613,7 @@ export function PlayerProfile() {
                   className="mt-1.5 w-full rounded-2xl border border-white/15 bg-background/80 px-4 py-2.5 text-sm font-semibold text-foreground focus:border-primary outline-none"
                 />
               </label>
+
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
                   Distrito de Representação
@@ -626,11 +628,31 @@ export function PlayerProfile() {
                     <span>Imutável</span>
                   </div>
                 </div>
-                <p className="text-[10px] text-slate-400 mt-1">
-                  * O distrito de origem é permanente e intransferível para integridade dos rankings.
+              </div>
+
+              <div>
+                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
+                  Cidade de Representação
+                </label>
+                <div className="flex items-center justify-between gap-2 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-2.5 text-sm font-semibold text-cyan-300">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-4 w-4 text-cyan-400" />
+                    <span>{player.city || player.district || 'Portugal'}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] font-mono uppercase bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-lg border border-cyan-500/40">
+                    <Lock className="h-3 w-3" />
+                    <span>Imutável</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <p className="text-[10px] text-slate-400">
+                  * A representação territorial (distrito e cidade) é definitiva e intransferível para integridade dos rankings nacionais e regionais.
                 </p>
               </div>
-              <div className="sm:col-span-2 flex items-center gap-3 mt-2">
+
+              <div className="sm:col-span-2 flex items-center gap-3 mt-1">
                 <button
                   type="button"
                   disabled={saving}

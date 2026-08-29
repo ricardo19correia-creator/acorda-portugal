@@ -90,10 +90,10 @@ export const MOBILE_LAUNCH_CONFIG: MobileLaunchConfig = {
   platforms: {
     android: {
       name: 'Android',
-      status: 'coming_soon',
-      url: '', // Inserir a URL oficial da Google Play Store quando publicada
-      comingSoonText: 'Disponível em breve',
-      buttonText: 'DESCARREGAR ANDROID',
+      status: 'available',
+      url: '/download',
+      comingSoonText: 'Disponível',
+      buttonText: '📱 DESCARREGAR APK ANDROID',
       iconType: 'android',
     },
     ios: {

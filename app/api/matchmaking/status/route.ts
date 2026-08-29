@@ -60,9 +60,9 @@ async function handleMatchmaking(params: {
   const userLevel = Number(params.level) || 1
   const userDistrict = params.district || 'Portugal'
   const arena = params.arenaId ? getArenaById(params.arenaId) : getRandomArena()
-  const chosenArenaId = arena?.id || 'arena-1'
-  const chosenArenaImage = params.arenaImage || arena?.image || '/arenas/arena-1.jpg'
-  const chosenArenaName = params.arenaName || arena?.name || 'Praça do Império'
+  const chosenArenaId = arena?.id || 'arena_praca_liberdade'
+  const chosenArenaImage = params.arenaImage || arena?.image || ''
+  const chosenArenaName = params.arenaName || arena?.name || 'Praça da Liberdade'
 
   const myUserTicketRef = doc(db, 'duelQueue', userId)
 

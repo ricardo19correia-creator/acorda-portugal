@@ -17,7 +17,7 @@ import {
   type Unsubscribe,
   onSnapshot,
 } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { db, auth } from '@/lib/firebase'
 import { QuestionRegistry } from '@/lib/question-system/registry'
 import { selectBalancedMatchQuestions, shuffleQuestions } from '@/src/lib/questionEngine'
 import type { QuizQuestion } from '@/lib/game-data'
@@ -28,6 +28,7 @@ import { getArenaById, getRandomArena, OFFICIAL_ARENAS } from '@/src/data/arenas
 import { getEmoteById, type EmoteItem } from '@/src/data/emotes'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { getEquippedAvatarImage } from '@/lib/inventory'
+import { silentFetchWithRetry, silentAsyncRetry } from '@/lib/network-resilience'
 
 export function resolveUserAvatar(
   user?: { photoURL?: string | null } | null,
@@ -140,6 +141,11 @@ export interface DuelDocument {
   arenaId?: string
   arenaImage?: string
   arenaName?: string
+  arenaDescription?: string
+  arenaMeaning?: string
+  arenaBackground?: string
+  arenaEffect?: string
+  arenaAccent?: string
   playerA: DuelPlayerData
   playerB?: DuelPlayerData | null
   questions: DuelQuestion[]
@@ -411,13 +417,18 @@ export async function findOrCreateMatchmakingRoom(
   // Selecionar arena do Host ou aleatória
   const selectedArena = options?.arenaId
     ? getArenaById(options.arenaId)
-    : profile?.equippedArena
-    ? getArenaById(profile.equippedArena)
+    : (profile as any)?.equippedArena
+    ? getArenaById((profile as any).equippedArena)
     : getRandomArena()
 
-  const chosenArenaId = selectedArena?.id || 'arena_1'
-  const chosenArenaImage = options?.arenaImage || selectedArena?.imagePath || '/arenas/arena-1.jpg'
-  const chosenArenaName = options?.arenaName || selectedArena?.name || 'Praça do Império'
+  const chosenArenaId = selectedArena.id
+  const chosenArenaImage = options?.arenaImage || selectedArena.image
+  const chosenArenaName = options?.arenaName || selectedArena.name
+  const chosenArenaDescription = selectedArena.description || ''
+  const chosenArenaMeaning = selectedArena.meaning || ''
+  const chosenArenaBackground = selectedArena.image
+  const chosenArenaEffect = selectedArena.effect || 'particles'
+  const chosenArenaAccent = selectedArena.accent || '#F59E0B'
 
   const hostPlayer: DuelPlayerData = {
     ...myPlayerData,
@@ -434,6 +445,11 @@ export async function findOrCreateMatchmakingRoom(
     arenaId: chosenArenaId,
     arenaImage: chosenArenaImage,
     arenaName: chosenArenaName,
+    arenaDescription: chosenArenaDescription,
+    arenaMeaning: chosenArenaMeaning,
+    arenaBackground: chosenArenaBackground,
+    arenaEffect: chosenArenaEffect,
+    arenaAccent: chosenArenaAccent,
     playerA: hostPlayer,
     playerB: null,
     questions,
@@ -797,13 +813,18 @@ export async function createDuelRoom(
 
   const selectedArena = options?.arenaId
     ? getArenaById(options.arenaId)
-    : profile?.equippedArena
-    ? getArenaById(profile.equippedArena)
+    : (profile as any)?.equippedArena
+    ? getArenaById((profile as any).equippedArena)
     : getRandomArena()
 
-  const chosenArenaId = selectedArena?.id || 'arena_1'
-  const chosenArenaImage = options?.arenaImage || selectedArena?.imagePath || '/arenas/arena-1.jpg'
-  const chosenArenaName = options?.arenaName || selectedArena?.name || 'Praça do Império'
+  const chosenArenaId = selectedArena.id
+  const chosenArenaImage = options?.arenaImage || selectedArena.image
+  const chosenArenaName = options?.arenaName || selectedArena.name
+  const chosenArenaDescription = selectedArena.description || ''
+  const chosenArenaMeaning = selectedArena.meaning || ''
+  const chosenArenaBackground = selectedArena.image
+  const chosenArenaEffect = selectedArena.effect || 'particles'
+  const chosenArenaAccent = selectedArena.accent || '#F59E0B'
 
   const playerPhoto = resolveUserAvatar(user, profile)
 
@@ -834,6 +855,11 @@ export async function createDuelRoom(
     arenaId: chosenArenaId,
     arenaImage: chosenArenaImage,
     arenaName: chosenArenaName,
+    arenaDescription: chosenArenaDescription,
+    arenaMeaning: chosenArenaMeaning,
+    arenaBackground: chosenArenaBackground,
+    arenaEffect: chosenArenaEffect,
+    arenaAccent: chosenArenaAccent,
     playerA,
     playerB: null,
     questions,
@@ -1141,11 +1167,11 @@ export async function claimDuelRewards(
   duelId: string,
   userUid: string,
 ): Promise<DuelRewardResult> {
-  // 1. Tentar primeiro via API Server-Side Segura (Single Source of Truth)
+  // 1. Tentar primeiro via API Server-Side Segura (Single Source of Truth) com Silent Retry
   try {
     const token = await auth?.currentUser?.getIdToken()
     if (token) {
-      const res = await fetch('/api/duel/claim', {
+      const res = await silentFetchWithRetry('/api/duel/claim', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1162,24 +1188,25 @@ export async function claimDuelRewards(
     console.warn('[DUEL REWARDS] Fallback para transação de segurança:', apiErr)
   }
 
-  // 2. Transação de segurança caso a API falhe
+  // 2. Transação de segurança caso a API falhe (com silentAsyncRetry)
   const duelRef = doc(db, 'duels', duelId)
   const userRef = doc(db, 'users', userUid)
   const publicProfileRef = doc(db, 'publicProfiles', userUid)
 
-  return await runTransaction(db, async (transaction) => {
-    const duelSnap = await transaction.get(duelRef)
-    if (!duelSnap.exists()) {
-      throw new Error('Duelo não encontrado.')
-    }
+  return await silentAsyncRetry(() =>
+    runTransaction(db, async (transaction) => {
+      const duelSnap = await transaction.get(duelRef)
+      if (!duelSnap.exists()) {
+        throw new Error('Duelo não encontrado.')
+      }
 
-    const duel = duelSnap.data() as DuelDocument
-    const isPlayerA = duel.playerA.uid === userUid
-    const isPlayerB = duel.playerB?.uid === userUid
+      const duel = duelSnap.data() as DuelDocument
+      const isPlayerA = duel.playerA.uid === userUid
+      const isPlayerB = duel.playerB?.uid === userUid
 
-    if (!isPlayerA && !isPlayerB) {
-      throw new Error('Não pertences a este duelo.')
-    }
+      if (!isPlayerA && !isPlayerB) {
+        throw new Error('Não pertences a este duelo.')
+      }
 
     const player = isPlayerA ? duel.playerA : duel.playerB!
     const isWinner = duel.winnerUid === userUid
@@ -1289,7 +1316,7 @@ export async function claimDuelRewards(
       leveledUp,
       levelTitle: levelProgress.currentLevel.title,
     }
-  })
+  }))
 }
 
 // =========================================================================
@@ -1424,9 +1451,9 @@ export async function respondDuelRematch(
     createdAt: now,
     startedAt: duelStartedAt,
     expiresAt: now + 15 * 60 * 1000,
-    arenaId: duel.arenaId || 'arena_1',
-    arenaImage: duel.arenaImage || '/arenas/arena-1.jpg',
-    arenaName: duel.arenaName || 'Praça do Império',
+    arenaId: duel.arenaId || 'arena_praca_liberdade',
+    arenaImage: duel.arenaImage || '',
+    arenaName: duel.arenaName || 'Praça da Liberdade',
     playerA: newPlayerA,
     playerB: newPlayerB,
     questions,

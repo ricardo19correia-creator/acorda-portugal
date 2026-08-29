@@ -107,13 +107,13 @@ export function Hero() {
             <span>Duelo 1v1</span>
           </button>
 
-          {/* Rankings Mech Gold Button */}
+          {/* Download App Android CTA Button */}
           <Link
-            href="/rankings"
-            className="btn-mech-gold w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-bold uppercase tracking-wider text-gold-foreground backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-amber-500/30"
+            href="/download"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 hover:border-emerald-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-emerald-950/50"
           >
-            <Trophy className="h-4 w-4 text-gold" />
-            <span className="text-gold">Rankings</span>
+            <span className="text-base">📱</span>
+            <span>Descarregar App</span>
           </Link>
         </div>
 

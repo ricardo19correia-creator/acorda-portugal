@@ -25,18 +25,13 @@ import { useAuth } from '@/components/auth-provider'
 import { usePathname } from 'next/navigation'
 import {
   type PresenceData,
-  type PublicActiveUser,
-  type Participant,
   type UserActivityState,
-  type DistrictPresenceSummary,
+  type CommunityState,
   type CanonicalPresenceState,
-  ACTIVITY_LABELS,
+  HEARTBEAT_INTERVAL_MS,
   OFFLINE_THRESHOLD_MS,
-  sanitizeDisplayName,
-  normalizeParticipant,
+  getCommunityState,
 } from '@/lib/presence'
-import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
-import { OFFICIAL_20_DISTRICTS } from '@/lib/npc-system/npc-catalog'
 
 const PresenceContext = createContext<CanonicalPresenceState | null>(null)
 
@@ -94,7 +89,7 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
 
   // Local state for all online users retrieved from Firestore
   const [rawPresenceDocs, setRawPresenceDocs] = useState<PresenceData[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [now, setNow] = useState(() => Date.now())
 
@@ -118,65 +113,55 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
   }, [sessionId, user, profile, currentActivity, explicitActivity])
 
   // Heartbeat sender
-  const sendHeartbeat = useCallback(async (isOnline = true) => {
-    const { sessionId: currentSessionId, user: currentUser, profile: currentProfile, currentActivity: currentAct, gameId: currentGameId } = presenceInfoRef.current
-    if (!currentSessionId) return
-
-    const username = sanitizeDisplayName(
-      currentUser?.displayName ?? currentProfile?.displayName,
-      !currentUser,
-      currentProfile?.district
-    )
-
-    const payload: PresenceData = {
-      userId: currentUser?.uid || currentSessionId,
-      playerType: 'human',
-      isNpc: false,
-      online: isOnline,
-      lastSeen: Date.now(),
-      activity: currentAct,
-      gameId: currentGameId,
-      district: currentProfile?.district || 'Portugal',
-      level: currentProfile?.level || 1,
-      xp: currentProfile?.xp || 0,
-      username,
-      photoURL: currentUser?.photoURL || currentProfile?.photoURL || null,
-      isAnonymous: !currentUser,
-      updatedAt: serverTimestamp(),
-    }
+  const sendHeartbeat = useCallback(async () => {
+    const { sessionId: currentSessionId, user: currentUser, profile: currentProfile, currentActivity: currentAct, gameId } = presenceInfoRef.current
 
     try {
-      const docRef = doc(db, 'presence', currentSessionId)
-      await setDoc(docRef, payload, { merge: true })
-    } catch (err) {
-      console.warn('[PRESENCE] Heartbeat warning:', err)
+      const presenceUid = currentUser?.uid || currentSessionId
+      const userRef = doc(db, 'presence', presenceUid)
+
+      const rawDistrict = (currentProfile?.district || '').trim()
+      const rawName = (currentProfile?.displayName || currentUser?.displayName || '').trim()
+
+      const payload: Record<string, any> = {
+        userId: presenceUid,
+        online: true,
+        lastSeen: Date.now(),
+        updatedAt: serverTimestamp(),
+        activity: currentAct,
+        gameId: gameId || null,
+        district: rawDistrict || 'Portugal',
+        level: currentProfile?.level || 1,
+        xp: currentProfile?.xp || 0,
+        username: rawName || (currentUser ? 'Jogador' : 'Visitante'),
+        photoURL: currentProfile?.photoURL || currentUser?.photoURL || null,
+        isAnonymous: !currentUser,
+        playerType: 'human',
+        isNpc: false,
+      }
+
+      await setDoc(userRef, payload, { merge: true })
+    } catch (err: any) {
+      console.warn('Erro ao atualizar heartbeat de presença:', err)
     }
   }, [])
 
-  // Manage heartbeat lifecycle
+  // Setup periodic heartbeat
   useEffect(() => {
-    if (!sessionId) return
+    sendHeartbeat()
+    const interval = setInterval(sendHeartbeat, HEARTBEAT_INTERVAL_MS)
+    return () => clearInterval(interval)
+  }, [sendHeartbeat])
 
-    // Send immediate heartbeat on mount or activity/session change
-    void sendHeartbeat(true)
-
-    // Schedule periodic heartbeat (a cada 10s para presença ágil)
-    const heartbeatTimer = setInterval(() => {
-      void sendHeartbeat(true)
-    }, 10_000)
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        void sendHeartbeat(true)
-      }
-    }
-
+  // Send offline status on tab unload/beforeunload
+  useEffect(() => {
     const handleBeforeUnload = () => {
-      // Mark offline on unload
+      const { sessionId: currentSessionId, user: currentUser } = presenceInfoRef.current
+      const presenceUid = currentUser?.uid || currentSessionId
       try {
-        const docRef = doc(db, 'presence', sessionId)
-        void setDoc(
-          docRef,
+        const userRef = doc(db, 'presence', presenceUid)
+        setDoc(
+          userRef,
           {
             online: false,
             lastSeen: Date.now(),
@@ -184,244 +169,93 @@ export function PresenceProvider({ children }: { children: ReactNode }) {
           },
           { merge: true }
         )
-      } catch {}
-    }
-
-    if (typeof window !== 'undefined') {
-      document.addEventListener('visibilitychange', handleVisibilityChange)
-      window.addEventListener('beforeunload', handleBeforeUnload)
-    }
-
-    return () => {
-      clearInterval(heartbeatTimer)
-      if (typeof window !== 'undefined') {
-        document.removeEventListener('visibilitychange', handleVisibilityChange)
-        window.removeEventListener('beforeunload', handleBeforeUnload)
+      } catch {
+        // Unload context: ignore error
       }
     }
-  }, [sessionId, sendHeartbeat, currentActivity])
 
-  // Single subscription to active presence in Firestore
-  useEffect(() => {
-    const presenceQuery = query(
-      collection(db, 'presence'),
-      where('online', '==', true),
-      limit(200)
-    )
-
-    const unsubscribe = onSnapshot(
-      presenceQuery,
-      (snapshot) => {
-        const docs: PresenceData[] = []
-        snapshot.forEach((d) => {
-          const data = d.data() as Partial<PresenceData>
-          if (data && typeof data.lastSeen === 'number') {
-            docs.push({
-              userId: d.id,
-              playerType: 'human',
-              isNpc: false,
-              online: data.online ?? true,
-              lastSeen: data.lastSeen,
-              activity: (data.activity as UserActivityState) || 'browsing',
-              gameId: data.gameId || null,
-              district: data.district || 'Portugal',
-              level: typeof data.level === 'number' ? data.level : 1,
-              xp: typeof data.xp === 'number' ? data.xp : 0,
-              username: data.username || 'Jogador',
-              photoURL: data.photoURL || null,
-              isAnonymous: Boolean(data.isAnonymous),
-              updatedAt: data.updatedAt,
-            })
-          }
-        })
-        setRawPresenceDocs(docs)
-        setLoading(false)
-        setError(null)
-      },
-      (err) => {
-        console.error('[PRESENCE] Subscription error:', err)
-        setError('Não foi possível carregar a presença em tempo real.')
-        setLoading(false)
-      }
-    )
-
-    return () => {
-      unsubscribe()
-    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [])
 
-  // Local ticker to re-evaluate active users rapidly without requiring Firestore writes
+  // Update `now` periodically every 5s to refresh relative time calculations & NPC rotation
   useEffect(() => {
-    const ticker = setInterval(() => {
-      setNow(Date.now())
-    }, 2_000)
-    return () => clearInterval(ticker)
+    const timer = setInterval(() => setNow(Date.now()), 5000)
+    return () => clearInterval(timer)
   }, [])
 
-  // Filter valid active users within threshold
-  const {
-    onlineCount,
-    humanOnlineCount,
-    npcOnlineCount,
-    playingCount,
-    duelCount,
-    activeMatches,
-    humanVsHumanMatches,
-    humanVsNpcMatches,
-    districtDistribution,
-    byDistrictList,
-    activeUsers,
-    participants,
-  } = useMemo(() => {
-    const validUsers = rawPresenceDocs.filter((p) => {
-      if (!p.online) return false
-      const timeDiff = now - p.lastSeen
-      return timeDiff >= 0 && timeDiff <= OFFLINE_THRESHOLD_MS
-    })
+  // Subscribe to real-time presence collection
+  useEffect(() => {
+    setLoading(true)
+    setError(null)
 
-    const humanCount = validUsers.length
-    let humanPlaying = 0
-    let humanDuel = 0
+    try {
+      const presenceCol = collection(db, 'presence')
+      const q = query(presenceCol, where('online', '==', true), limit(250))
 
-    const humanFormattedList: PublicActiveUser[] = validUsers.map((u) => {
-      if (u.activity === 'playing') humanPlaying++
-      if (u.activity === 'duel') humanDuel++
-
-      const meta = ACTIVITY_LABELS[u.activity] || ACTIVITY_LABELS.browsing
-      return {
-        id: u.userId,
-        playerType: 'human' as const,
-        isNpc: false,
-        username: u.username,
-        district: u.district || 'Portugal',
-        level: u.level || 1,
-        xp: u.xp || 0,
-        activity: u.activity,
-        activityLabel: meta.label,
-        photoURL: u.photoURL,
-        lastSeen: u.lastSeen,
-        isCurrentUser: u.userId === sessionId,
-      }
-    })
-
-    // Obter NPCs ativos para o horário atual
-    const { activeNpcs, npcCount } = getActiveNpcs(new Date(now))
-
-    let npcPlaying = 0
-    let npcDuel = 0
-
-    // Incrementar contadores de atividade com NPCs
-    activeNpcs.forEach((npc) => {
-      if (npc.activity === 'playing') npcPlaying++
-      if (npc.activity === 'duel') npcDuel++
-    })
-
-    // Combinar lista visualmente sem rótulos artificiais
-    const combinedList: PublicActiveUser[] = [...humanFormattedList, ...activeNpcs]
-
-    // Sort: Utilizador atual no topo, seguido de mais recentemente ativos
-    combinedList.sort((a, b) => {
-      if (a.isCurrentUser) return -1
-      if (b.isCurrentUser) return 1
-      return b.lastSeen - a.lastSeen
-    })
-
-    const totalVisibleOnline = humanCount + npcCount
-    const totalPlaying = humanPlaying + npcPlaying
-    const totalDuel = humanDuel + npcDuel
-    const totalMatches = totalPlaying + totalDuel
-
-    // Distribuição canónica por distrito cobrindo os 20 distritos oficiais
-    const distMap: Record<string, DistrictPresenceSummary> = {}
-    for (const d of OFFICIAL_20_DISTRICTS) {
-      distMap[d] = {
-        name: d,
-        total: 0,
-        humans: 0,
-        npcs: 0,
-      }
-    }
-
-    combinedList.forEach((u) => {
-      const rawDist = (u.district || '').trim()
-      const matched = OFFICIAL_20_DISTRICTS.find((od) => od.toLowerCase() === rawDist.toLowerCase())
-      const targetDist = matched || 'Lisboa'
-
-      if (distMap[targetDist]) {
-        distMap[targetDist].total += 1
-        if (u.playerType === 'human') {
-          distMap[targetDist].humans += 1
-        } else {
-          distMap[targetDist].npcs += 1
+      const unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          const docs: PresenceData[] = []
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data() as PresenceData
+            if (data && data.userId) {
+              docs.push(data)
+            }
+          })
+          setRawPresenceDocs(docs)
+          setLoading(false)
+        },
+        (err) => {
+          console.warn('Erro ao subscrever presença no Firestore:', err)
+          setError(err.message)
+          setLoading(false)
         }
-      }
-    })
+      )
 
-    const distList = Object.values(distMap).sort((a, b) => b.total - a.total || a.name.localeCompare(b.name, 'pt-PT'))
-    const normalizedParticipants: Participant[] = combinedList.map((u) => normalizeParticipant(u, sessionId))
-
-    return {
-      onlineCount: totalVisibleOnline,
-      humanOnlineCount: humanCount,
-      npcOnlineCount: npcCount,
-      playingCount: totalPlaying,
-      duelCount: totalDuel,
-      activeMatches: totalMatches,
-      humanVsHumanMatches: Math.floor(humanDuel / 2),
-      humanVsNpcMatches: Math.max(0, totalDuel - Math.floor(humanDuel / 2) * 2),
-      districtDistribution: distMap,
-      byDistrictList: distList,
-      activeUsers: combinedList,
-      participants: normalizedParticipants,
+      return () => unsubscribe()
+    } catch (err: any) {
+      console.warn('Erro ao configurar listener de presença:', err)
+      setError(err?.message || 'Erro desconhecido')
+      setLoading(false)
     }
+  }, [])
+
+  // Canonical Single Source of Truth for Community State
+  const communityState: CommunityState = useMemo(() => {
+    return getCommunityState(rawPresenceDocs, new Date(now), sessionId)
   }, [rawPresenceDocs, now, sessionId])
 
   const value: CanonicalPresenceState = useMemo(
     () => ({
-      onlineCount,
-      humanOnlineCount,
-      npcOnlineCount,
-      playingCount,
-      duelCount,
-      activeMatches,
-      humanVsHumanMatches,
-      humanVsNpcMatches,
-      districtDistribution,
-      byDistrictList,
-      activeUsers,
-      participants,
+      ...communityState,
+      onlineCount: communityState.humanOnline,
+      humanOnlineCount: communityState.humanOnline,
+      npcOnlineCount: communityState.npcOnline,
+      districtDistribution: communityState.byDistrict,
       currentActivity,
       setActivity,
       loading,
       error,
     }),
-    [
-      onlineCount,
-      humanOnlineCount,
-      npcOnlineCount,
-      playingCount,
-      duelCount,
-      activeMatches,
-      humanVsHumanMatches,
-      humanVsNpcMatches,
-      districtDistribution,
-      byDistrictList,
-      activeUsers,
-      participants,
-      currentActivity,
-      setActivity,
-      loading,
-      error,
-    ]
+    [communityState, currentActivity, setActivity, loading, error]
   )
 
   return <PresenceContext.Provider value={value}>{children}</PresenceContext.Provider>
 }
 
+const fallbackPresenceState: CanonicalPresenceState = {
+  activeTotal: 0,
+  regionalDistribution: {},
+  onlineUsers: [],
+  communityActivity: [],
+  currentActivity: 'browsing',
+  setActivity: () => {},
+  loading: false,
+  error: null,
+}
+
 export function usePresence(): CanonicalPresenceState {
   const context = useContext(PresenceContext)
-  if (!context) {
-    throw new Error('usePresence deve ser utilizado dentro de um PresenceProvider.')
-  }
-  return context
+  return context || fallbackPresenceState
 }

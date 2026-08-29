@@ -106,16 +106,37 @@ function generateDeterministicNpcs(): NpcProfile[] {
     const startHour = (i * 3) % 24
     const preferredHours = [startHour, (startHour + 1) % 24, (startHour + 2) % 24, (startHour + 3) % 24]
 
+    const titles = [
+      `Mestre de ${district}`,
+      `Guardião de ${district}`,
+      `Orgulho de ${district}`,
+      `Conquistador de ${district}`,
+      `Veterano de ${district}`,
+      `Duelista Nato`,
+      `Sábio Lusitano`,
+      `Lenda Regional`,
+    ]
+    const title = titles[(i * 3) % titles.length]
+    const frames = [undefined, 'frame_ouro', 'frame_prata', 'frame_neon', 'frame_fogo']
+    const equippedFrame = level >= 8 ? frames[i % frames.length] : undefined
+    const virtualMoney = Math.round(500 + level * 450 + wins * 80 + ((i * 19) % 250))
+    const accuracyRate = Math.round(((minAcc + maxAcc) / 2) * 100)
+
+    const npcId = `npc_${String(i).padStart(3, '0')}`
+
     npcs.push({
-      npcId: `npc_${String(i).padStart(3, '0')}`,
+      id: npcId,
+      npcId,
       playerType: 'npc',
       isNpc: true,
+      name: displayName,
       displayName,
       username,
       avatar,
       district,
       level,
       xp,
+      elo: rating,
       rating,
       wins,
       losses,
@@ -124,6 +145,15 @@ function generateDeterministicNpcs(): NpcProfile[] {
       accuracyRange: [minAcc, maxAcc],
       avgResponseTimeSeconds,
       preferredHours,
+      title,
+      equippedTitle: title,
+      equippedFrame,
+      virtualMoney,
+      stats: {
+        duelsWon: wins,
+        duelsTotal: wins + losses,
+        accuracyRate,
+      },
     })
   }
 

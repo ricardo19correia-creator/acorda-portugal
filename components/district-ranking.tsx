@@ -8,7 +8,10 @@ import { db } from '@/lib/firebase'
 import { SectionHeading } from '@/components/section-heading'
 import { PortugalMapInteractive, type DistrictStatItem } from '@/components/portugal-map-interactive'
 import { useAuth } from '@/components/auth-provider'
+import { usePresence } from '@/components/presence-provider'
 import { cn } from '@/lib/utils'
+import { NPC_CATALOG } from '@/lib/npc-system/npc-catalog'
+import { subscribeRankings, computeDistrictStats } from '@/lib/rankings'
 
 export const ALL_20_DISTRICTS = [
   'Aveiro',
@@ -52,106 +55,54 @@ export function DistrictRanking() {
     return initialMap
   })
 
-  // Subscrição em Tempo Real aos pontos distritais reais dos utilizadores no Firestore
+  // Subscrição em Tempo Real combinando publicProfiles e botPlayers com agregação nos 20 Distritos
   useEffect(() => {
-    let unsubscribe: (() => void) | undefined
-
-    try {
-      const q = query(collection(db, 'publicProfiles'), limit(500))
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const tempMap = new Map<string, { players: number; xp: number }>()
-          for (const d of ALL_20_DISTRICTS) {
-            tempMap.set(d, { players: 0, xp: 0 })
-          }
-
-          if (snapshot && !snapshot.empty) {
-            snapshot.forEach((docSnap) => {
-              const data = docSnap.data()
-              if (!data) return
-
-              const rawDistrict = (data.district || '').trim()
-              const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
-
-              const matchedName = ALL_20_DISTRICTS.find(
-                (d) => d.toLowerCase() === rawDistrict.toLowerCase(),
-              )
-
-              if (matchedName) {
-                const current = tempMap.get(matchedName)!
-                tempMap.set(matchedName, {
-                  players: current.players + 1,
-                  xp: current.xp + xp,
-                })
-              }
+    const unsubscribe = subscribeRankings(
+      'all',
+      'xp',
+      (allPlayers) => {
+        let unifiedList = [...allPlayers]
+        if (user?.uid && profile) {
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? profile.xp : 0
+          const userLevel = typeof profile.level === 'number' ? profile.level : 1
+          const userDistrict = (profile.district || 'Portugal').trim()
+          const hasUser = unifiedList.some((p) => p.uid === user.uid)
+          if (!hasUser) {
+            unifiedList.push({
+              uid: user.uid,
+              displayName: profile.displayName || user.displayName || 'Jogador',
+              photoURL: profile.photoURL || user.photoURL || undefined,
+              level: userLevel,
+              xp: userXp,
+              district: userDistrict,
+              region: userDistrict,
+              title: profile.equippedTitle || 'Jogador Nacional',
+              playerType: 'human',
+              isNpc: false,
             })
           }
+        }
 
-          // Se o utilizador atual estiver autenticado e não constar ainda do snapshot
-          if (profile?.district && profile.xp && snapshot) {
-            const userDist = ALL_20_DISTRICTS.find(
-              (d) => d.toLowerCase() === profile.district.toLowerCase(),
-            )
-            if (userDist) {
-              const hasUserInSnap = snapshot.docs.some((d: any) => d.id === profile.uid)
-              if (!hasUserInSnap) {
-                const current = tempMap.get(userDist)!
-                tempMap.set(userDist, {
-                  players: current.players + 1,
-                  xp: current.xp + profile.xp,
-                })
-              }
-            }
-          }
+        // Agregação Distrital Exata: XP = SUM(publicProfiles.xp) + SUM(botPlayers.xp)
+        const statsMap = computeDistrictStats(unifiedList)
+        const districtStatMap = new Map<string, DistrictStatItem>()
 
-          const sortedList = Array.from(tempMap.entries()).map(([name, stat]) => ({
-            name,
+        statsMap.forEach((stat, districtName) => {
+          districtStatMap.set(districtName, {
+            name: districtName,
+            pos: stat.pos,
             players: stat.players,
             xp: stat.xp,
-          }))
-
-          sortedList.sort((a, b) => {
-            if (b.xp !== a.xp) return b.xp - a.xp
-            if (b.players !== a.players) return b.players - a.players
-            return a.name.localeCompare(b.name, 'pt-PT')
           })
+        })
 
-          const withXP = sortedList.filter((d) => d.xp > 0)
-          const zeroXP = sortedList.filter((d) => d.xp === 0)
+        setDistrictData(districtStatMap)
+      },
+      500
+    )
 
-          const finalMap = new Map<string, DistrictStatItem>()
-          withXP.forEach((item, index) => {
-            finalMap.set(item.name, {
-              name: item.name,
-              pos: index + 1,
-              players: item.players,
-              xp: item.xp,
-            })
-          })
-          zeroXP.forEach((item) => {
-            finalMap.set(item.name, {
-              name: item.name,
-              pos: 0,
-              players: item.players,
-              xp: item.xp,
-            })
-          })
-
-          setDistrictData(finalMap)
-        },
-        (err) => {
-          console.warn('[DISTRICTS] Aviso ao ler dados distritais Firestore:', err)
-        },
-      )
-    } catch (e) {
-      console.warn('[DISTRICTS] Erro ao criar subscrição:', e)
-    }
-
-    return () => {
-      if (unsubscribe) unsubscribe()
-    }
-  }, [profile?.district, profile?.xp, profile?.uid])
+    return () => unsubscribe()
+  }, [profile?.district, profile?.xp, profile?.uid, user?.uid, profile])
 
   useEffect(() => {
     if (!hasInitializedSelection) {

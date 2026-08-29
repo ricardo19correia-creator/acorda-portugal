@@ -73,7 +73,7 @@ export function LivePresence() {
             </div>
             <div className="mt-4">
               <div className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
-                {loading ? '...' : onlineCount}
+                {onlineCount}
               </div>
               <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Utilizadores Online
@@ -93,7 +93,7 @@ export function LivePresence() {
             </div>
             <div className="mt-4">
               <div className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
-                {loading ? '...' : playingCount}
+                {playingCount}
               </div>
               <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 A Jogar neste momento
@@ -113,7 +113,7 @@ export function LivePresence() {
             </div>
             <div className="mt-4">
               <div className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
-                {loading ? '...' : duelCount}
+                {duelCount}
               </div>
               <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Em Duelo 1v1
@@ -202,7 +202,7 @@ function UserActivityCard({ user }: { user: PublicActiveUser }) {
           </div>
           <p className="flex items-center gap-1 truncate text-[0.68rem] text-muted-foreground">
             <MapPin className="h-2.5 w-2.5 text-primary/70" />
-            {user.district}
+            {user.district} • Nível {user.level || 1}
           </p>
         </div>
       </div>

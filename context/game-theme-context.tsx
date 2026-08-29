@@ -114,10 +114,21 @@ export function GameThemeProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useGameTheme() {
+const fallbackGameTheme: GameThemeContextType = {
+  themeId: 'default_tron',
+  themeMeta: { id: 'default_tron', name: 'Original', description: 'Tema clássico' } as any,
+  soundpackId: 'classic',
+  streakEffectId: 'default',
+  previewThemeId: null,
+  previewSoundpackId: null,
+  setPreviewThemeId: () => {},
+  setPreviewSoundpackId: () => {},
+  playSound: () => {},
+  currentStreak: 0,
+  setCurrentStreak: () => {},
+}
+
+export function useGameTheme(): GameThemeContextType {
   const context = useContext(GameThemeContext)
-  if (!context) {
-    throw new Error('useGameTheme deve ser utilizado dentro de um GameThemeProvider.')
-  }
-  return context
+  return context || fallbackGameTheme
 }

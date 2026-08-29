@@ -27,14 +27,13 @@ import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
 import {
   HUB_CATEGORIES,
-  PORTUGUESE_CITIES,
   DIFFICULTY_LEVELS,
-  ALL_20_DISTRICTS,
   getSubcategoriesForCategory,
   type GameDifficulty,
   type CategoryGroupKey,
   type HubCategory,
 } from '@/lib/quiz-engine'
+import { getDefaultCityForDistrict } from '@/data/districts'
 import { calculateLevelProgress } from '@/lib/progression'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { cn } from '@/lib/utils'
@@ -47,12 +46,26 @@ export function GameHub() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<GameDifficulty>(2)
   const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryGroupKey>('portugal')
   const [searchCategory, setSearchCategory] = useState('')
-  const [selectedDistrict, setSelectedDistrict] = useState<string>(profile?.district || 'Vila Real')
-  const [selectedCity, setSelectedCity] = useState<string>('Vila Real')
-  const [searchCity, setSearchCity] = useState('')
-  const [showCityModal, setShowCityModal] = useState(false)
-  const [showDistrictModal, setShowDistrictModal] = useState(false)
   const [subcatModalCategory, setSubcatModalCategory] = useState<HubCategory | null>(null)
+
+  // Representação Territorial Permanente e Inalterável da Conta
+  const userDistrict = useMemo(() => {
+    return (
+      profile?.district ||
+      profile?.representedDistrict ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) ||
+      'Portugal'
+    )
+  }, [profile?.district, profile?.representedDistrict])
+
+  const userCity = useMemo(() => {
+    return (
+      profile?.city ||
+      profile?.representedCity ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_city') : null) ||
+      (userDistrict !== 'Portugal' ? getDefaultCityForDistrict(userDistrict) : 'Portugal')
+    )
+  }, [profile?.city, profile?.representedCity, userDistrict])
 
   // 1v1 Duel Matchmaking Modal State
   const [showDuelModal, setShowDuelModal] = useState(false)
@@ -73,16 +86,6 @@ export function GameHub() {
       return matchesTab && matchesSearch
     })
   }, [activeCategoryTab, searchCategory])
-
-  // Filtered cities
-  const filteredCities = useMemo(() => {
-    if (!searchCity.trim()) return PORTUGUESE_CITIES
-    return PORTUGUESE_CITIES.filter(
-      (c) =>
-        c.name.toLowerCase().includes(searchCity.toLowerCase()) ||
-        c.district.toLowerCase().includes(searchCity.toLowerCase()),
-    )
-  }, [searchCity])
 
   // Handlers to launch solo games with strict authentication requirement
   const handleLaunchGame = (params: {
@@ -317,19 +320,16 @@ export function GameHub() {
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/20 text-primary ring-1 ring-primary/40">
                   <MapPin className="h-6 w-6" />
                 </div>
-                <button
-                  onClick={() => setShowDistrictModal(true)}
-                  className="rounded-full bg-primary/15 border border-primary/30 px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-wider text-primary hover:bg-primary/25 transition cursor-pointer"
-                >
-                  Trocar: {selectedDistrict} ▾
-                </button>
+                <span className="rounded-full bg-primary/15 border border-primary/30 px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-wider text-primary">
+                  {userDistrict}
+                </span>
               </div>
 
               <h4 className="mt-4 font-display text-xl font-black uppercase text-foreground">
                 📍 O Meu Distrito
               </h4>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Representa o distrito de <strong className="text-primary font-bold">{selectedDistrict}</strong>. Cada resposta certa soma pontos ao mapa distrital.
+                Representa o distrito de <strong className="text-primary font-bold">{userDistrict}</strong>. Cada resposta certa soma pontos ao mapa distrital.
               </p>
 
               <div className="mt-4 flex items-center gap-2 text-xs font-bold">
@@ -340,10 +340,10 @@ export function GameHub() {
             </div>
 
             <button
-              onClick={() => handleLaunchGame({ categorySlug: 'o-meu-distrito', district: selectedDistrict })}
+              onClick={() => handleLaunchGame({ categorySlug: 'o-meu-distrito', district: userDistrict })}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/25 transition-all cursor-pointer"
             >
-              <span>Representar {selectedDistrict}</span>
+              <span>Representar {userDistrict}</span>
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
@@ -355,19 +355,16 @@ export function GameHub() {
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-accent/20 text-accent ring-1 ring-accent/40">
                   <Building2 className="h-6 w-6" />
                 </div>
-                <button
-                  onClick={() => setShowCityModal(true)}
-                  className="rounded-full bg-accent/15 border border-accent/30 px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-wider text-accent hover:bg-accent/25 transition cursor-pointer"
-                >
-                  Cidade: {selectedCity} ▾
-                </button>
+                <span className="rounded-full bg-accent/15 border border-accent/30 px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-wider text-accent">
+                  {userCity}
+                </span>
               </div>
 
               <h4 className="mt-4 font-display text-xl font-black uppercase text-foreground">
                 🏙️ Desafio da Cidade
               </h4>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Conheces mesmo <strong className="text-accent font-bold">{selectedCity}</strong>? Perguntas locais sobre monumentos, ruas e tradições.
+                Conheces mesmo <strong className="text-accent font-bold">{userCity}</strong>? Perguntas locais sobre monumentos, ruas e tradições.
               </p>
 
               <div className="mt-4 flex items-center gap-2 text-xs font-bold">
@@ -378,10 +375,10 @@ export function GameHub() {
             </div>
 
             <button
-              onClick={() => handleLaunchGame({ categorySlug: 'desafio-cidade', city: selectedCity })}
+              onClick={() => handleLaunchGame({ categorySlug: 'desafio-cidade', city: userCity, district: userDistrict })}
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-accent/20 border border-accent/40 px-4 py-3 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-accent hover:bg-accent hover:text-black transition-all cursor-pointer"
             >
-              <span>Jogar {selectedCity}</span>
+              <span>Jogar {userCity}</span>
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
@@ -670,136 +667,6 @@ export function GameHub() {
           router.push(`/jogar/duelo?id=${id}`)
         }}
       />
-
-      {/* ========================================================= */}
-      {/* CITY SELECTION MODAL */}
-      {/* ========================================================= */}
-      {showCityModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-card p-6 shadow-2xl animate-scale-in">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div>
-                <h4 className="font-display text-xl font-black text-foreground">
-                  Escolhe a Tua Cidade / Concelho
-                </h4>
-                <p className="text-xs text-muted-foreground">
-                  Mais de 30 cidades portuguesas preparadas.
-                </p>
-              </div>
-              <button
-                onClick={() => setShowCityModal(false)}
-                className="rounded-xl border border-white/10 bg-white/5 p-2 text-muted-foreground hover:text-foreground cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="mt-4 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <input
-                type="text"
-                value={searchCity}
-                onChange={(e) => setSearchCity(e.target.value)}
-                placeholder="Procurar cidade ou distrito..."
-                className="w-full rounded-xl border border-white/10 bg-card/90 pl-9 pr-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
-              />
-            </div>
-
-            <div className="mt-4 max-h-64 overflow-y-auto space-y-1 pr-1">
-              {filteredCities.map((city) => {
-                const isSelected = selectedCity === city.name
-                return (
-                  <button
-                    key={city.name}
-                    onClick={() => {
-                      setSelectedCity(city.name)
-                      setShowCityModal(false)
-                    }}
-                    className={cn(
-                      'w-full flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-bold transition text-left cursor-pointer',
-                      isSelected
-                        ? 'bg-accent/20 text-accent border border-accent/40'
-                        : 'bg-white/[0.02] hover:bg-white/10 text-foreground',
-                    )}
-                  >
-                    <div>
-                      <span className="block">{city.name}</span>
-                      <span className="text-[0.65rem] text-muted-foreground font-normal">
-                        Distrito de {city.district} • {city.region}
-                      </span>
-                    </div>
-                    {isSelected && <Check className="h-4 w-4 text-accent" />}
-                  </button>
-                )
-              })}
-            </div>
-
-            <button
-              onClick={() => setShowCityModal(false)}
-              className="mt-5 w-full rounded-xl bg-white/10 py-2.5 font-display text-xs font-bold uppercase text-foreground hover:bg-white/20 transition cursor-pointer"
-            >
-              Fechar
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================= */}
-      {/* DISTRICT SELECTION MODAL */}
-      {/* ========================================================= */}
-      {showDistrictModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-md rounded-3xl border border-white/15 bg-card p-6 shadow-2xl animate-scale-in">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div>
-                <h4 className="font-display text-xl font-black text-foreground">
-                  Escolhe o Teu Distrito
-                </h4>
-                <p className="text-xs text-muted-foreground">
-                  18 Distritos Continentais + Açores e Madeira.
-                </p>
-              </div>
-              <button
-                onClick={() => setShowDistrictModal(false)}
-                className="rounded-xl border border-white/10 bg-white/5 p-2 text-muted-foreground hover:text-foreground cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="mt-4 max-h-72 overflow-y-auto space-y-1 pr-1">
-              {ALL_20_DISTRICTS.map((dist) => {
-                const isSelected = selectedDistrict === dist
-                return (
-                  <button
-                    key={dist}
-                    onClick={() => {
-                      setSelectedDistrict(dist)
-                      setShowDistrictModal(false)
-                    }}
-                    className={cn(
-                      'w-full flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-bold transition text-left cursor-pointer',
-                      isSelected
-                        ? 'bg-primary/20 text-primary border border-primary/40'
-                        : 'bg-white/[0.02] hover:bg-white/10 text-foreground',
-                    )}
-                  >
-                    <span>{dist}</span>
-                    {isSelected && <Check className="h-4 w-4 text-primary" />}
-                  </button>
-                )
-              })}
-            </div>
-
-            <button
-              onClick={() => setShowDistrictModal(false)}
-              className="mt-5 w-full rounded-xl bg-white/10 py-2.5 font-display text-xs font-bold uppercase text-foreground hover:bg-white/20 transition cursor-pointer"
-            >
-              Confirmar Distrito
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

@@ -35,7 +35,8 @@ import {
   mapAuthErrorMessage,
   createNewUserDocument,
 } from '@/lib/auth'
-import { PORTUGAL_DISTRICTS } from '@/data/constants'
+import { PORTUGAL_DISTRICTS, getDistrictCities, isValidCityForDistrict, getDefaultCityForDistrict } from '@/data/districts'
+import { Building2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -56,6 +57,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   // Form fields
   const [name, setName] = useState('')
   const [district, setDistrict] = useState<string>('')
+  const [city, setCity] = useState<string>('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -125,13 +127,22 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
     const cleanPassword = typeof password === 'string' ? password : ''
     const cleanConfirmPassword = typeof confirmPassword === 'string' ? confirmPassword : ''
     const cleanDistrict = typeof district === 'string' ? district.trim() : ''
+    const cleanCity = typeof city === 'string' ? city.trim() : ''
 
     if (!cleanName) {
       setError('Por favor, escolhe um nome ou nickname.')
       return
     }
     if (!cleanDistrict) {
-      setError('Por favor, escolhe obrigatoriamente o teu Distrito de Origem.')
+      setError('Por favor, escolhe obrigatoriamente o teu Distrito de representação.')
+      return
+    }
+    if (!cleanCity) {
+      setError('Por favor, escolhe obrigatoriamente a tua Cidade de representação.')
+      return
+    }
+    if (!isValidCityForDistrict(cleanDistrict, cleanCity)) {
+      setError('A cidade selecionada não pertence ao distrito escolhido.')
       return
     }
     if (!cleanEmail || !cleanPassword) {
@@ -167,8 +178,8 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
           displayName: cleanName,
         })
 
-        // Criar documento padronizado com Avatar Oficial e Distrito Permanente
-        await createNewUserDocument(newUser, cleanDistrict, cleanName)
+        // Criar documento padronizado com Avatar Oficial, Distrito e Cidade Permanentes
+        await createNewUserDocument(newUser, cleanDistrict, cleanCity, cleanName)
 
         const { registerUserSession } = await import('@/lib/session-manager')
         await registerUserSession(newUser)
@@ -408,18 +419,23 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
               {/* Seleção de Distrito Obrigatória e Permanente */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                  Distrito de Origem / Representação *
+                  Distrito de Representação *
                 </label>
                 <div className="relative">
                   <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-400" />
                   <select
                     required
                     value={district}
-                    onChange={(e) => setDistrict(e.target.value)}
+                    onChange={(e) => {
+                      const newDist = e.target.value
+                      setDistrict(newDist)
+                      const cities = getDistrictCities(newDist)
+                      setCity(cities[0] || newDist)
+                    }}
                     className="w-full rounded-2xl border border-emerald-500/40 bg-card pl-10 pr-4 py-2.5 text-sm font-bold text-foreground focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 cursor-pointer"
                   >
                     <option value="" disabled className="bg-card text-muted-foreground">
-                      Seleciona obrigatoriamente o teu distrito...
+                      Seleciona o teu distrito ou arquipélago...
                     </option>
                     {PORTUGAL_DISTRICTS.map((dist) => (
                       <option key={dist} value={dist} className="bg-card text-foreground">
@@ -428,11 +444,38 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
                     ))}
                   </select>
                 </div>
+              </div>
+
+              {/* Seleção de Cidade Obrigatória e Permanente */}
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
+                  Cidade / Município de Representação *
+                </label>
+                <div className="relative">
+                  <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan-400" />
+                  <select
+                    required
+                    disabled={!district}
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="w-full rounded-2xl border border-cyan-500/40 bg-card pl-10 pr-4 py-2.5 text-sm font-bold text-foreground focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <option value="" disabled className="bg-card text-muted-foreground">
+                      {district ? 'Seleciona a tua cidade...' : 'Escolhe primeiro o distrito acima...'}
+                    </option>
+                    {district &&
+                      getDistrictCities(district).map((c) => (
+                        <option key={c} value={c} className="bg-card text-foreground">
+                          {c}
+                        </option>
+                      ))}
+                  </select>
+                </div>
                 {/* Aviso em destaque */}
                 <div className="mt-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-2.5 flex items-start gap-2 text-[11px] text-emerald-300">
                   <MapPin className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>
-                    📍 O teu distrito de representação fica associado ao teu perfil para os Rankings Territoriais.
+                    📍 O teu distrito e cidade de representação ficam permanentemente associados à tua conta para os Rankings e Desafios Territoriais.
                   </span>
                 </div>
               </div>

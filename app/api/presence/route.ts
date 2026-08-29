@@ -26,9 +26,8 @@ export async function POST(req: NextRequest) {
 
     if (!error && typeof data === 'number') {
       const humanOnline = Number(data)
-      const totalVisible = humanOnline + npcCount
       return NextResponse.json(
-        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
+        { online: humanOnline, onlineCount: humanOnline, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -69,10 +68,9 @@ export async function POST(req: NextRequest) {
       }
 
       const humanOnline = Math.max(activeFirestoreCount, localPresence.size)
-      const totalVisible = humanOnline + npcCount
 
       return NextResponse.json(
-        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
+        { online: humanOnline, onlineCount: humanOnline, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -83,9 +81,8 @@ export async function POST(req: NextRequest) {
       )
     } catch {
       const humanOnline = localPresence.size
-      const totalVisible = humanOnline + npcCount
       return NextResponse.json(
-        { online: totalVisible, onlineCount: totalVisible, humanOnline, npcOnline: npcCount },
+        { online: humanOnline, onlineCount: humanOnline, humanOnline, npcOnline: npcCount },
         {
           headers: {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -98,7 +95,7 @@ export async function POST(req: NextRequest) {
   } catch {
     const { npcCount } = getActiveNpcs(new Date())
     return NextResponse.json(
-      { online: npcCount, onlineCount: npcCount, humanOnline: 0, npcOnline: npcCount },
+      { online: 0, onlineCount: 0, humanOnline: 0, npcOnline: npcCount },
       {
         headers: {
           'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',

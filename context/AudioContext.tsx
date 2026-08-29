@@ -174,12 +174,20 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
+const fallbackAudio = {
+  isPlaying: false,
+  isMuted: true,
+  volume: 0.5,
+  toggleMute: () => {},
+  togglePlay: () => {},
+  setVolume: () => {},
+  playBgm: async () => {},
+  pauseBgm: () => {},
+}
+
 export function useAudio() {
   const context = useContext(AudioContext)
-  if (!context) {
-    throw new Error('useAudio deve ser utilizado dentro de um AudioProvider')
-  }
-  return context
+  return context || fallbackAudio
 }
 
 export default AudioContext

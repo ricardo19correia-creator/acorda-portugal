@@ -19,6 +19,8 @@ import {
   UserPlus,
   LogOut,
   ChevronRight,
+  ShieldCheck,
+  Smartphone,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -61,17 +63,26 @@ export function SiteHeader() {
     }
   }
 
+  const isOwner =
+    user?.email?.toLowerCase() === 'ricardo19correia@gmail.com' ||
+    (profile as any)?.role === 'owner' ||
+    (profile as any)?.role === 'admin'
+
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Ranking', href: '/rankings', icon: Trophy },
     { label: 'Os Criadores 🇵🇹', href: '/criadores', icon: Sparkles },
     { label: 'Explorar', href: '/explorar', icon: Sparkles },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
+    { label: '📱 App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
+    ...(isOwner ? [{ label: 'Controlo 🛡️', href: '/admin/controlo', icon: ShieldCheck }] : []),
   ]
 
   const MOBILE_NAV = [
+    ...(isOwner ? [{ label: '🛡️ Centro de Controlo (Master)', href: '/admin/controlo', icon: ShieldCheck }] : []),
     { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
+    { label: '📱 Descarregar App Android', href: '/download', icon: Smartphone },
     { label: '🇵🇹 Os Criadores (Comunidade)', href: '/criadores', icon: Sparkles },
     { label: 'Explorar o Desafio', href: '/explorar', icon: Sparkles },
     { label: 'Categorias de Quiz', href: '/categorias', icon: LayoutGrid },

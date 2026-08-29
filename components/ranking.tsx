@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
+import { subscribeRankings } from '@/lib/rankings'
 
 export type RankedPlayer = {
   uid: string
@@ -80,101 +81,76 @@ export function Ranking() {
     }
   }, [user?.photoURL])
 
-  // Subscrição em Tempo Real aos Utilizadores Reais no Firestore
+  // Subscrição em Tempo Real combinando publicProfiles e botPlayers
   useEffect(() => {
-    let unsubscribe: (() => void) | undefined
+    setLoading(true)
+    const unsubscribe = subscribeRankings(
+      'all',
+      'xp',
+      (allPlayers) => {
+        let playersList = [...allPlayers]
 
-    const processSnapshot = (snapshot: any) => {
-      const playersMap = new Map<string, RankedPlayer>()
+        // Garantir que o utilizador autenticado atual está presente
+        if (user?.uid && profile) {
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? profile.xp : 0
+          const userLevel = typeof profile.level === 'number' ? profile.level : calculateLevelProgress(userXp).currentLevel.level
+          const userTitle = profile.equippedTitle || (profile as any)?.title || 'Membro Fundador'
+          const userDistrict = (profile.district || 'Portugal').trim()
 
-      // 1. Processar estritamente perfis reais da coleção publicProfiles
-      if (snapshot && !snapshot.empty) {
-        snapshot.forEach((docSnap: any) => {
-          const data = docSnap.data()
-          if (!data) return
+          const hasCurrentUser = playersList.some((p) => p.uid === user.uid)
+          if (!hasCurrentUser) {
+            playersList.push({
+              uid: user.uid,
+              displayName: profile.displayName || user.displayName || 'Jogador',
+              photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+              level: userLevel,
+              xp: userXp,
+              district: userDistrict,
+              region: userDistrict,
+              title: userTitle,
+              equippedTitle: userTitle,
+              equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
+              wins1v1: profile.wins || 0,
+              gamesPlayed: profile.gamesPlayed || 0,
+              accuracyRate: profile.totalQuestions && profile.totalQuestions > 0 ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100) : 0,
+              isFounder: Boolean((profile as any)?.isFounder),
+              playerType: 'human',
+              isNpc: false,
+            })
+          }
+        }
 
-          const rawName = (data.displayName || data.name || data.username || data.email?.split('@')[0] || '').trim()
-          const name = rawName || 'Jogador'
-          const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
-          const level = typeof data.level === 'number' ? data.level : calculateLevelProgress(xp).currentLevel.level
-          const district = data.district || 'Portugal'
-          const photoURL = getAvatarImage(data.photoURL || data.avatar || data.avatarId || null)
-          const equipped = data.equipped || {}
-          const equippedTitle = data.equippedTitle || data.title || data.equipped?.title || ''
-
-          playersMap.set(docSnap.id, {
-            uid: docSnap.id,
-            name,
-            photoURL,
-            level,
-            xp,
-            district,
-            pos: 0,
-            equippedTitle,
-            equipped,
-            duelWins: typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0,
-            duelsTotal: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : 0,
-            accuracyRate: typeof data.accuracy === 'number' ? data.accuracy : typeof data.accuracyRate === 'number' ? data.accuracyRate : 0,
-          })
+        // Ordenar decrescente por XP
+        playersList.sort((a, b) => {
+          if (b.xp !== a.xp) return b.xp - a.xp
+          return b.level - a.level
         })
-      }
 
-      // 2. Garantir que o utilizador autenticado atual está presente na lista se tiver perfil
-      if (user?.uid && profile) {
-        const userXp = profile.xp ?? 0
-        const userLevel = profile.level ?? calculateLevelProgress(userXp).currentLevel.level
-        const userTitle = profile.equippedTitle || (profile as any)?.title || profile.equipped?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : '') || 'Membro Fundador'
-        
-        playersMap.set(user.uid, {
-          uid: user.uid,
-          name: profile.displayName || user.displayName || 'Jogador',
-          photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
-          level: userLevel,
-          xp: userXp,
-          district: profile.district || 'Portugal',
-          pos: 0,
-          equippedTitle: userTitle,
-          equipped: profile.equipped,
-          duelWins: profile.wins || 0,
-          duelsTotal: profile.gamesPlayed || 0,
-          accuracyRate: profile.totalQuestions && profile.totalQuestions > 0 ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100) : 0,
-        })
-      }
+        const mapped: RankedPlayer[] = playersList.map((p, idx) => ({
+          uid: p.uid,
+          name: p.displayName,
+          photoURL: p.photoURL || null,
+          level: p.level,
+          xp: p.xp,
+          district: p.district,
+          pos: idx + 1,
+          equippedTitle: p.equippedTitle || p.title,
+          equipped: (p as any).equipped,
+          duelWins: p.wins1v1 || 0,
+          duelsTotal: p.gamesPlayed || 0,
+          accuracyRate: p.accuracyRate || 0,
+          playerType: p.playerType,
+          isNpc: p.isNpc,
+        }))
 
-      // 3. Ordenar decrescente por XP real
-      const sorted = Array.from(playersMap.values()).sort((a, b) => {
-        if (b.xp !== a.xp) return b.xp - a.xp
-        return b.level - a.level
-      })
-
-      // 4. Atribuir posições oficiais reais (1º, 2º, 3º...)
-      sorted.forEach((p, idx) => {
-        p.pos = idx + 1
-      })
-
-      setRanking(sorted)
-      setLoading(false)
-    }
-
-    try {
-      const rankingQuery = query(collection(db, 'publicProfiles'), limit(100))
-      unsubscribe = onSnapshot(
-        rankingQuery,
-        (snapshot) => {
-          processSnapshot(snapshot)
-        },
-        (err) => {
-          console.warn('[RANKING] Snapshot publicProfiles com aviso:', err)
-          processSnapshot(null)
-        },
-      )
-    } catch (e) {
-      console.warn('[RANKING] Erro ao subscrever Firestore:', e)
-      processSnapshot(null)
-    }
+        setRanking(mapped)
+        setLoading(false)
+      },
+      100
+    )
 
     return () => {
-      if (unsubscribe) unsubscribe()
+      unsubscribe()
     }
   }, [user?.uid, profile, userDisplayAvatar])
 

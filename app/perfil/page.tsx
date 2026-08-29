@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { 
   ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
-  ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Check, Plus, Globe, 
+  ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Building2, Check, Plus, Globe, 
   User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
-  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle
+  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck
 } from 'lucide-react'
 import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
 import { 
@@ -52,6 +52,7 @@ interface InventoryItem {
   category: 'avatars' | 'molduras' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'
   description: string
   image?: string
+  icon?: string
   badge?: string
   badgeColor?: string
   effect?: string
@@ -102,6 +103,7 @@ const MASTER_PROFILE_CATALOG: InventoryItem[] = [
     category: 'arenas' as const,
     description: ar.description,
     image: ar.image,
+    icon: ar.icon || '🏟️',
     badge: ar.rarity,
     badgeColor: ar.badgeColor,
     effect: ar.effect,
@@ -1427,6 +1429,16 @@ function PerfilContent() {
 
           {/* Botões de Ação Rápida no Perfil */}
           <div className="flex flex-wrap items-center justify-center gap-3">
+            {(user?.email?.toLowerCase() === 'ricardo19correia@gmail.com' || (profile as any)?.role === 'owner' || (profile as any)?.role === 'admin') && (
+              <Link
+                href="/admin/controlo"
+                className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-600 hover:from-amber-400 hover:to-emerald-500 text-slate-950 font-black text-xs transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] active:scale-95 border border-amber-400/50"
+              >
+                <ShieldCheck className="w-4 h-4 text-slate-950" />
+                <span>Centro de Controlo</span>
+              </Link>
+            )}
+
             <button
               onClick={openEditModal}
               className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-600 transition-all shadow-md active:scale-95"
@@ -1764,16 +1776,24 @@ function PerfilContent() {
                               <div className="w-full h-36 flex flex-col items-center justify-center p-2">
                                 <UserAvatar avatarUrl={avatar} activeFrame={item.id} size="lg" showBadge={false} />
                               </div>
-                            ) : item.category === 'arenas' && item.image ? (
-                              <div className="relative w-full h-36 overflow-hidden">
-                                <img 
-                                  src={item.image} 
-                                  alt={item.name} 
-                                  className="w-full h-full object-cover" 
-                                  onError={(e) => {
-                                    e.currentTarget.src = '/arenas/arena-1.jpg'
-                                  }}
-                                />
+                            ) : item.category === 'arenas' ? (
+                              <div className="relative w-full h-36 overflow-hidden bg-slate-950">
+                                {item.image ? (
+                                  <img 
+                                    src={item.image} 
+                                    alt={item.name} 
+                                    className="w-full h-full object-cover" 
+                                  />
+                                ) : (
+                                  <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center">
+                                    <span className="text-3xl mb-1 filter drop-shadow-md">
+                                      {item.icon || '🏟️'}
+                                    </span>
+                                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-300">
+                                      {item.name}
+                                    </span>
+                                  </div>
+                                )}
                                 <ArenaEffectsLayer effect={(item.effect as any) || 'particles'} intensity="low" showContrastOverlay={false} />
                               </div>
                             ) : item.category === 'titulos' ? (
@@ -1796,6 +1816,11 @@ function PerfilContent() {
 
                           <h3 className="font-bold text-sm text-white">{item.name}</h3>
                           <p className="text-xs text-slate-400 mt-1 line-clamp-2">{item.description}</p>
+                          {(item as any).meaning && (
+                            <p className="text-[11px] text-amber-300/90 italic mt-1 font-medium border-l border-amber-500/50 pl-1.5 leading-snug line-clamp-2">
+                              “{(item as any).meaning}”
+                            </p>
+                          )}
                         </div>
 
                         <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-end">
@@ -2767,25 +2792,44 @@ function PerfilContent() {
                 />
               </div>
 
-              {/* Distrito Permanente / Imutável */}
-              <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                  Distrito de Origem / Representação
-                </label>
-                <div className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-sm text-amber-300 font-bold shadow-inner">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-amber-400" />
-                    <span>{district || 'Portugal'}</span>
+              {/* Distrito e Cidade Permanentes / Imutáveis */}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                    Distrito de Representação
+                  </label>
+                  <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-sm text-amber-300 font-bold shadow-inner">
+                    <div className="flex items-center gap-2 truncate">
+                      <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                      <span className="truncate">{district || profile?.district || 'Portugal'}</span>
+                    </div>
+                    <span className="flex items-center gap-1 text-[10px] font-mono uppercase bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-lg border border-amber-500/40 shrink-0">
+                      <Lock className="w-3 h-3" />
+                      Imutável
+                    </span>
                   </div>
-                  <span className="flex items-center gap-1 text-[10px] font-mono uppercase bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-lg border border-amber-500/40">
-                    <Lock className="w-3 h-3" />
-                    Imutável
-                  </span>
                 </div>
-                <p className="text-[10px] text-slate-400 mt-1">
-                  * A tua afiliação territorial é definitiva para garantir a integridade dos rankings distritais.
-                </p>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                    Cidade de Representação
+                  </label>
+                  <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-sm text-cyan-300 font-bold shadow-inner">
+                    <div className="flex items-center gap-2 truncate">
+                      <Building2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <span className="truncate">{profile?.city || profile?.representedCity || district || 'Portugal'}</span>
+                    </div>
+                    <span className="flex items-center gap-1 text-[10px] font-mono uppercase bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-lg border border-cyan-500/40 shrink-0">
+                      <Lock className="w-3 h-3" />
+                      Imutável
+                    </span>
+                  </div>
+                </div>
               </div>
+
+              <p className="text-[10px] text-slate-400">
+                * A tua afiliação territorial (distrito e cidade) é definitiva e intransferível para garantir a integridade dos rankings nacionais e regionais.
+              </p>
 
               {/* Seletor de Avatar Ativo */}
               <div>

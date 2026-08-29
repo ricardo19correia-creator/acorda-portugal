@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     const userId = decodedToken.uid
     const body = await request.json().catch(() => ({}))
-    const { categorySlug = 'portugal', answers = [], timeSpent = 0 } = body
+    const { gameId, categorySlug = 'portugal', answers = [], timeSpent = 0 } = body
 
     if (!Array.isArray(answers) || answers.length === 0) {
       return NextResponse.json({ error: 'Respostas inválidas.' }, { status: 400 })
@@ -70,8 +70,28 @@ export async function POST(request: NextRequest) {
     const db = getAdminFirestore()
     const userRef = db.collection('users').doc(userId)
     const publicProfileRef = db.collection('publicProfiles').doc(userId)
+    const gameRef = gameId ? db.collection('games').doc(String(gameId)) : null
 
     const result = await db.runTransaction(async (transaction) => {
+      // 2.1 Verificação de idempotência: se o jogo já foi processado, não duplicar recompensas
+      if (gameRef) {
+        const gameSnap = await transaction.get(gameRef)
+        if (gameSnap.exists && gameSnap.data()?.processed === true) {
+          const gData = gameSnap.data() || {}
+          return {
+            newTotalXp: gData.newTotalXp || 0,
+            newTotalCoins: gData.newTotalCoins || 0,
+            newLevel: gData.newLevel || 1,
+            leveledUp: false,
+            xpReward: 0,
+            coinReward: 0,
+            correctCount,
+            totalCount: answers.length,
+            alreadyProcessed: true,
+          }
+        }
+      }
+
       const userSnap = await transaction.get(userRef)
       if (!userSnap.exists) {
         throw new Error('Utilizador não registado no sistema.')
@@ -148,6 +168,28 @@ export async function POST(request: NextRequest) {
           reason: `Quiz: ${categorySlug} (${correctCount}/${answers.length} corretas)`,
           createdAt: FieldValue.serverTimestamp(),
         })
+      }
+
+      // Marcar partida como processada atomicamente
+      if (gameRef) {
+        transaction.set(
+          gameRef,
+          {
+            id: String(gameId),
+            userId,
+            category: categorySlug,
+            correctAnswers: correctCount,
+            totalQuestions: answers.length,
+            xpEarned: xpReward,
+            coinsEarned: totalAwardedCoins,
+            newTotalXp,
+            newTotalCoins,
+            newLevel,
+            processed: true,
+            processedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
       }
 
       return {

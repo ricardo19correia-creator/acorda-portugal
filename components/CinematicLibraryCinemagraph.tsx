@@ -92,12 +92,7 @@ export default function CinematicLibraryCinemagraph({
     <div className={`fixed inset-0 overflow-hidden pointer-events-none select-none bg-[#030611] ${className}`}>
       {/* 1. IMAGEM BASE CINEMATOGRÁFICA COM MOVIMENTO DE CÂMARA (KEN BURNS LENTO) */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105 animate-[pulse_12s_ease-in-out_infinite]"
-        style={{
-          backgroundImage: `url('/arenas/biblioteca-sagrada.jpg')`,
-          filter: 'brightness(0.75) contrast(1.15) saturate(1.25)',
-          animation: 'subtle-drift 24s ease-in-out infinite alternate',
-        }}
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105 bg-gradient-to-b from-[#030611] via-slate-950 to-[#030611]"
       />
 
       {/* 2. FEIXES DE LUZ DOURADA VOLUMÉTRICA A EMANAR DO LIVRO E ALTAR */}

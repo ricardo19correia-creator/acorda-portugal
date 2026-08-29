@@ -34,6 +34,7 @@ import {
   cleanQuestionPrompt,
 } from '@/src/lib/questionEngine'
 import type { Question } from '@/src/types/quiz'
+import { silentFetchWithRetry, silentAsyncRetry } from '@/lib/network-resilience'
 import { calculateMatchCoinReward, calculateLevelUpCoinReward, getDifficultyMultiplier } from '@/src/data/economy'
 import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
@@ -338,9 +339,34 @@ export function QuizScreen({
   const [reactionCooldown, setReactionCooldown] = useState(0)
   const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
 
-  // Sincronizar estado e carregar perguntas estritamente anti-repetição
+  // Sincronizar estado e carregar perguntas estritamente anti-repetição (com recuperação de sessão)
   useEffect(() => {
     let isCancelled = false
+
+    // 1. Tentar recuperar sessão ativa de jogo em caso de oscilação ou soft-reload
+    if (typeof window !== 'undefined' && gameId) {
+      try {
+        const savedSession = sessionStorage.getItem(`ap_quiz_state_${gameId}`)
+        if (savedSession) {
+          const parsed = JSON.parse(savedSession)
+          if (parsed && Array.isArray(parsed.quizQuestions) && parsed.quizQuestions.length > 0) {
+            console.log('[QuizScreen] Sessão de jogo recuperada com sucesso da cache local:', gameId)
+            setQuizQuestions(parsed.quizQuestions)
+            setStep(parsed.step ?? 0)
+            setSelected(parsed.selected ?? null)
+            setSeconds(parsed.seconds ?? 60)
+            setScore(parsed.score ?? 0)
+            setCorrectCount(parsed.correctCount ?? 0)
+            setStreak(parsed.streak ?? 0)
+            setBestStreak(parsed.bestStreak ?? 0)
+            setPhase(parsed.phase ?? 'answering')
+            return
+          }
+        }
+      } catch (e) {
+        console.warn('[QuizScreen] Aviso ao ler cache de sessão:', e)
+      }
+    }
 
     getUniqueMatchQuestions(
       user?.uid || '',
@@ -392,6 +418,34 @@ export function QuizScreen({
       isCancelled = true
     }
   }, [gameId, categorySlug, subcategorySlug, diffLevel, difficultyParam, districtParam, cityParam, user?.uid])
+
+  // Persistir estado da sessão ativa de jogo a cada passo / pontuação
+  useEffect(() => {
+    if (typeof window === 'undefined' || !gameId || quizQuestions.length === 0) return
+    if (phase === 'finished') {
+      try {
+        sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+      } catch {}
+      return
+    }
+
+    try {
+      const sessionPayload = {
+        gameId,
+        step,
+        score,
+        correctCount,
+        streak,
+        bestStreak,
+        seconds,
+        phase,
+        selected,
+        quizQuestions,
+        timestamp: Date.now(),
+      }
+      sessionStorage.setItem(`ap_quiz_state_${gameId}`, JSON.stringify(sessionPayload))
+    } catch {}
+  }, [gameId, step, score, correctCount, streak, bestStreak, seconds, phase, selected, quizQuestions])
 
   // Prevenção de fecho acidental no meio de uma partida
   useEffect(() => {
@@ -481,8 +535,8 @@ export function QuizScreen({
     }
   }, [gameId, setActivity])
 
-  const total = quizQuestions.length
-  const q = quizQuestions[step] || quizQuestions[0]
+  const total = quizQuestions?.length || 0
+  const q = (quizQuestions && quizQuestions.length > step ? quizQuestions[step] : quizQuestions?.[0]) || null
 
   const handleTriggerReaction = (emote: EmoteItem) => {
     if (reactionCooldown > 0) return
@@ -515,7 +569,7 @@ export function QuizScreen({
 
   // 1. Power-Up: 50/50
   const handleUse5050 = async () => {
-    if (stock5050 <= 0 || eliminatedOptions.length > 0 || phase !== 'answering' || !q) return
+    if (stock5050 <= 0 || eliminatedOptions.length > 0 || phase !== 'answering' || !q || !q?.options) return
 
     const eliminated = calculate5050Eliminated(q.options, q.correct)
     setEliminatedOptions(eliminated)
@@ -573,7 +627,7 @@ export function QuizScreen({
 
   // 3. Power-Up: Pergunta ao Público (Votação Simulada)
   const handleUsePublicVote = async () => {
-    if (stockPublicVote <= 0 || publicVoteResults !== null || phase !== 'answering' || !q) return
+    if (stockPublicVote <= 0 || publicVoteResults !== null || phase !== 'answering' || !q || !q?.options) return
 
     const correctIdx = q.options.findIndex((opt) => opt.key === q.correct)
     const results = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
@@ -700,6 +754,9 @@ export function QuizScreen({
   }
 
   const restart = () => {
+    try {
+      sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+    } catch {}
     const nextGameId = crypto.randomUUID()
     router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
     setQuizQuestions(createGameQuestions(categorySlug))
@@ -758,18 +815,19 @@ export function QuizScreen({
         console.warn('[QUIZ] Aviso ao gravar registo na coleção games:', gameSaveErr)
       }
 
-      // 2. Chamar primeiro o endpoint Server-Side Seguro (/api/quiz/complete)
+      // 2. Chamar primeiro o endpoint Server-Side Seguro (/api/quiz/complete) com Silent Retry
       let serverCompleted = false
       try {
         const token = await user.getIdToken()
         if (token) {
-          const apiRes = await fetch('/api/quiz/complete', {
+          const apiRes = await silentFetchWithRetry('/api/quiz/complete', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
+              gameId: gid,
               categorySlug: catSlug,
               answers: quizQuestions.map((q, idx) => ({
                 questionId: q.id,
@@ -802,23 +860,24 @@ export function QuizScreen({
 
       if (serverCompleted) return
 
-      // 3. Fallback de transação local caso a API falhe
-      const outcome = await runTransaction(db, async (transaction) => {
-        const userSnap = await transaction.get(userRef)
-        if (!userSnap.exists()) {
-          return { awarded: false } as GameCompletionOutcome
-        }
+      // 3. Fallback de transação local caso a API falhe (com silentAsyncRetry)
+      const outcome = await silentAsyncRetry(() =>
+        runTransaction(db, async (transaction) => {
+          const userSnap = await transaction.get(userRef)
+          if (!userSnap.exists()) {
+            return { awarded: false } as GameCompletionOutcome
+          }
 
-        const currentProfile = userSnap.data() as UserProfile
-        const nextTotalXp = (currentProfile.xp || 0) + finalResult.xp
-        const levelInfo = calculateLevelProgress(nextTotalXp)
-        const newLevel = levelInfo.currentLevel.level
+          const currentProfile = userSnap.data() as UserProfile
+          const nextTotalXp = (currentProfile.xp || 0) + finalResult.xp
+          const levelInfo = calculateLevelProgress(nextTotalXp)
+          const newLevel = levelInfo.currentLevel.level
 
-        // Recompensa por subida de nível (€25 por nível)
-        const currentLevelVal = currentProfile.level || 1
-        const levelUpCoins = newLevel > currentLevelVal ? calculateLevelUpCoinReward(currentLevelVal, newLevel) : 0
-        const totalEarnedCoins = finalResult.euros + levelUpCoins
-        const nextEuros = (currentProfile.euros || 0) + totalEarnedCoins
+          // Recompensa por subida de nível (€25 por nível)
+          const currentLevelVal = currentProfile.level || 1
+          const levelUpCoins = newLevel > currentLevelVal ? calculateLevelUpCoinReward(currentLevelVal, newLevel) : 0
+          const totalEarnedCoins = finalResult.euros + levelUpCoins
+          const nextEuros = (currentProfile.euros || 0) + totalEarnedCoins
 
         const nextQuestionsAnswered = (currentProfile.questionsAnswered || 0) + finalResult.total
         const nextCorrectAnswers = (currentProfile.correctAnswers || 0) + finalResult.correct
@@ -884,7 +943,7 @@ export function QuizScreen({
           newTotalXp: nextTotalXp,
           newEuros: nextEuros,
         } as GameCompletionOutcome
-      })
+      }))
 
       if (outcome.awarded) {
         if (finalResult.euros > 0) {

@@ -267,10 +267,16 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
   )
 }
 
+const fallbackEconomy: EconomyContextType = {
+  coins: 0,
+  formattedCoins: '0',
+  isBalancePulsing: false,
+  addCoins: async () => 0,
+  deductCoins: async () => false,
+  refreshBalance: async () => 0,
+}
+
 export function useEconomy(): EconomyContextType {
   const context = useContext(EconomyContext)
-  if (!context) {
-    throw new Error('useEconomy deve ser utilizado dentro de um EconomyProvider')
-  }
-  return context
+  return context || fallbackEconomy
 }

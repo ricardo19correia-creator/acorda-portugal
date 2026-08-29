@@ -358,11 +358,11 @@ function PlatformDownloadCard({
   const isAndroid = platform.iconType === 'android'
 
   if (isAvailable && platform.url) {
+    const isInternal = platform.url.startsWith('/')
     return (
-      <a
+      <Link
         href={platform.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(!isInternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         className="group relative flex items-center justify-between rounded-2xl border border-emerald-500/50 bg-gradient-to-r from-emerald-950/80 to-zinc-950 p-4 transition-all duration-300 hover:border-emerald-400 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(16,185,129,0.35)] shadow-lg"
       >
         <div className="flex items-center gap-3.5">
@@ -379,7 +379,7 @@ function PlatformDownloadCard({
           </div>
         </div>
         <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-      </a>
+      </Link>
     )
   }
 

@@ -12,6 +12,8 @@ import { useAuth } from '@/components/auth-provider'
 import { usePresence } from '@/components/presence-provider'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
+import { NPC_CATALOG } from '@/lib/npc-system/npc-catalog'
+import { subscribeRankings, computeDistrictStats } from '@/lib/rankings'
 
 export type HeroDistrictStat = {
   name: string
@@ -256,85 +258,67 @@ export function PortugalHeroMap() {
   const [tilt, setTilt] = useState<{ rotateX: number; rotateY: number }>({ rotateX: 12, rotateY: -2 })
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Listen to live publicProfiles for real district statistics
+  // Listen to unified publicProfiles and botPlayers for real district statistics
   useEffect(() => {
-    let unsubscribe: (() => void) | undefined
-
-    try {
-      const q = query(collection(db, 'publicProfiles'))
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const tempMap = new Map<string, { players: number; xp: number }>()
-          for (const d of ALL_20_DISTRICTS) {
-            tempMap.set(d, { players: 0, xp: 0 })
-          }
-
-          let top: { name: string; xp: number; level: number } | null = null
-
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data()
-            if (!data) return
-
-            const rawDistrict = (data.district || '').trim()
-            const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
-            const rawName = (data.displayName || data.name || '').trim() || 'Jogador'
-
-            if (!top || xp > top.xp) {
-              const lvl = calculateLevelProgress(xp).currentLevel.level
-              top = { name: rawName, xp, level: lvl }
-            }
-
-            const matched = ALL_20_DISTRICTS.find(
-              (d) => d.toLowerCase() === rawDistrict.toLowerCase(),
-            )
-
-            if (matched) {
-              const cur = tempMap.get(matched)!
-              tempMap.set(matched, {
-                players: cur.players + 1,
-                xp: cur.xp + xp,
-              })
-            }
-          })
-
-          setTopPlayer(top)
-
-          // Rank all 20 districts by XP
-          const sorted = Array.from(tempMap.entries()).map(([name, s]) => ({
-            name,
-            players: s.players,
-            xp: s.xp,
-          }))
-
-          sorted.sort((a, b) => {
-            if (b.xp !== a.xp) return b.xp - a.xp
-            if (b.players !== a.players) return b.players - a.players
-            return a.name.localeCompare(b.name, 'pt-PT')
-          })
-
-          const finalMap = new Map<string, HeroDistrictStat>()
-          sorted.forEach((item, index) => {
-            finalMap.set(item.name, {
-              name: item.name,
-              pos: index + 1,
-              players: item.players,
-              xp: item.xp,
+    const unsubscribe = subscribeRankings(
+      'all',
+      'xp',
+      (allPlayers) => {
+        // 1. Integrar jogador atual autenticado se ainda não constar na lista
+        let unifiedList = [...allPlayers]
+        if (user?.uid && profile) {
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? profile.xp : 0
+          const userLevel = typeof profile.level === 'number' ? profile.level : calculateLevelProgress(userXp).currentLevel.level
+          const userDistrict = (profile.district || 'Portugal').trim()
+          const hasUser = unifiedList.some((p) => p.uid === user.uid)
+          if (!hasUser) {
+            unifiedList.push({
+              uid: user.uid,
+              displayName: profile.displayName || user.displayName || 'Jogador',
+              photoURL: profile.photoURL || user.photoURL || undefined,
+              level: userLevel,
+              xp: userXp,
+              district: userDistrict,
+              region: userDistrict,
+              title: profile.equippedTitle || 'Jogador Nacional',
+              playerType: 'human',
+              isNpc: false,
             })
+          }
+        }
+
+        // 2. Definir Top Player Geral
+        const top = unifiedList[0]
+          ? {
+              name: unifiedList[0].displayName,
+              xp: unifiedList[0].xp,
+              level: unifiedList[0].level,
+            }
+          : null
+        setTopPlayer(top)
+
+        // 3. Agregação Distrital Exata:
+        // XP_Distrito = SUM(publicProfiles.xp) + SUM(botPlayers.xp)
+        // Jogadores_Distrito = COUNT(humanos) + COUNT(bots)
+        const statsMap = computeDistrictStats(unifiedList)
+        const heroStatsMap = new Map<string, HeroDistrictStat>()
+
+        statsMap.forEach((stat, districtName) => {
+          heroStatsMap.set(districtName, {
+            name: districtName,
+            pos: stat.pos,
+            players: stat.players,
+            xp: stat.xp,
           })
+        })
 
-          setDistrictData(finalMap)
-        },
-        (err) => {
-          console.warn('Erro ao carregar dados do mapa Hero:', err)
-        },
-      )
-    } catch (e) {
-      console.warn('Erro Firestore Hero Map:', e)
-    }
+        setDistrictData(heroStatsMap)
+      },
+      500
+    )
 
-    return () => unsubscribe && unsubscribe()
-  }, [])
+    return () => unsubscribe()
+  }, [user?.uid, profile])
 
   // Identify top leading district
   const leadingDistrict = useMemo(() => {
