@@ -23,6 +23,7 @@ import { CreatorsSidebar } from '@/components/creators/CreatorsSidebar'
 import { VALID_DISTRICTS } from '@/data/districts'
 import { Heart, MessageSquare, Send, PenSquare, Search, Sparkles, Clock } from 'lucide-react'
 import { formatPostDate, getFullFormattedDate, type CommunityPost, type PublicacaoComunidade } from '@/types/community'
+import { cn } from '@/lib/utils'
 
 export type { CommunityPost, PublicacaoComunidade }
 
