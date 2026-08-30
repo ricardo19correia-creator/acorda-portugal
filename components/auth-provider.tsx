@@ -528,8 +528,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const pathname = usePathname()
-  const publicRoutes = ['/criadores', '/termos', '/privacidade', '/contacto']
-  const isPublicRoute = publicRoutes.some((route) => pathname?.startsWith(route))
+  const isGameOrProfileRoute = Boolean(
+    pathname?.startsWith('/jogar') ||
+    pathname?.startsWith('/perfil') ||
+    pathname?.startsWith('/jogo')
+  )
   const authResolved = authStatus !== 'AUTH_INITIALIZING'
 
   return (
@@ -549,8 +552,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     >
       {children}
 
-      {/* MODAL DE SELEÇÃO OBRIGATÓRIA DE DISTRITO APENAS PARA NOVAS CONTAS FORA DE ROTAS PÚBLICAS */}
-      {needsDistrictSelection && user && !isPublicRoute && (
+      {/* MODAL DE SELEÇÃO DE DISTRITO APENAS PARA UTILIZADORES AUTENTICADOS EM /jogar OU /perfil */}
+      {needsDistrictSelection && user && isGameOrProfileRoute && (
         <div className="fixed inset-0 z-[9999] bg-slate-950/98 backdrop-blur-xl flex items-center justify-center p-4">
           <div className="bg-slate-900 border-2 border-emerald-500 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(16,185,129,0.3)] space-y-6 animate-in fade-in duration-200">
             <div className="w-16 h-16 bg-emerald-500/20 border border-emerald-500/40 rounded-2xl flex items-center justify-center mx-auto text-3xl">
