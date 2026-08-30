@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { RefreshCw, Home, ShieldCheck, Play } from 'lucide-react'
+import { RefreshCw, Home, ShieldCheck, Play, Sparkles } from 'lucide-react'
 
 export default function Error({
   error,
@@ -11,11 +12,20 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const pathname = usePathname()
+  const isPublicRoute =
+    pathname?.startsWith('/criadores') ||
+    pathname === '/termos' ||
+    pathname === '/privacidade' ||
+    pathname === '/contacto'
+
   const [autoRetrying, setAutoRetrying] = useState(false)
 
   useEffect(() => {
     // 1. Diagnóstico completo nos logs para depuração
     console.error('[APP_ERROR_CAUGHT]', {
+      pathname,
+      isPublicRoute,
       message: error?.message,
       stack: error?.stack,
       digest: error?.digest,
@@ -42,11 +52,59 @@ export default function Error({
         return () => clearTimeout(timer)
       }
     }
-  }, [error, reset])
+  }, [error, reset, pathname, isPublicRoute])
 
   const handleManualReset = () => {
     sessionStorage.removeItem('ap_error_auto_retried')
     reset()
+  }
+
+  // Em rotas públicas institucionais/comunitárias, apresenta ecrã limpo de recarregamento sem referências a sessões de jogo
+  if (isPublicRoute) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-slate-950 text-white relative overflow-hidden">
+        <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-slate-900/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl text-center space-y-6">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+            <Sparkles className="h-8 w-8 text-emerald-400" />
+          </div>
+
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10">
+              <span>🇵🇹</span>
+              <span>Acorda Portugal</span>
+            </div>
+
+            <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">
+              Página Comunitária
+            </h1>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Ocorreu uma oscilação ao carregar este conteúdo. Clica abaixo para recarregar a página.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <button
+              type="button"
+              onClick={handleManualReset}
+              className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer"
+            >
+              <RefreshCw className={`h-4 w-4 ${autoRetrying ? 'animate-spin' : ''}`} />
+              <span>{autoRetrying ? 'A carregar...' : 'Recarregar'}</span>
+            </button>
+
+            <Link
+              href="/"
+              onClick={() => sessionStorage.removeItem('ap_error_auto_retried')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-5 py-3 text-xs font-bold text-slate-200 transition-all active:scale-95 cursor-pointer"
+            >
+              <Home className="h-4 w-4" />
+              <span>Página Inicial</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
