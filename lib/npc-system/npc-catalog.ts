@@ -67,23 +67,45 @@ function generateDeterministicNpcs(): NpcProfile[] {
     const district = OFFICIAL_20_DISTRICTS[(i - 1) % OFFICIAL_20_DISTRICTS.length]
     const avatar = AVATAR_IMAGES[i % AVATAR_IMAGES.length]
 
-    // Nível RPG oficial (2 a 20)
-    const level = 2 + ((i * 7) % 19)
+    // Distribuição balanceada e orgânica de níveis RPG realistas (Níveis 1 a 5)
+    // 40% bots Nível 1-2 (Iniciantes/Casuais: 150 a 2,500 XP)
+    // 35% bots Nível 2-3 (Intermédios: 2,500 a 7,500 XP)
+    // 20% bots Nível 3-4 (Avançados: 7,500 a 15,000 XP)
+    // 5% bots Nível 4-5 (Elite/Mestres Distritais: 15,000 a 25,000 XP)
+    let level = 1
+    let xp = 200
 
-    // Cálculo rigoroso de XP com base na tabela PROGRESSION_LEVELS
-    const tierIndex = PROGRESSION_LEVELS.findIndex((t) => t.level === level)
-    const currentTier = tierIndex >= 0 ? PROGRESSION_LEVELS[tierIndex] : PROGRESSION_LEVELS[1]
-    const nextTier = tierIndex >= 0 && tierIndex < PROGRESSION_LEVELS.length - 1 ? PROGRESSION_LEVELS[tierIndex + 1] : null
-    const baseXp = currentTier.xpRequired
-    const span = nextTier ? Math.max(100, nextTier.xpRequired - baseXp - 100) : 50000
-    const progressFraction = ((i * 37) % 85) / 100 // 0% a 85% do nível
-    const xp = Math.round(baseXp + span * progressFraction)
+    if (i <= 5) {
+      // Top 5 Elite Nacional / Mestres
+      level = 4 + (i % 2) // Nível 4 ou 5
+      const baseXp = level === 5 ? 20000 : 12000
+      const span = level === 5 ? 5000 : 6000
+      xp = baseXp + Math.round(((i * 73) % span))
+    } else if (i <= 25) {
+      // 20 Competidores Avançados Distritais (Nível 3 a 4)
+      level = 3 + (i % 2)
+      const baseXp = level === 4 ? 12000 : 6000
+      const span = level === 4 ? 4000 : 4500
+      xp = baseXp + Math.round(((i * 47) % span))
+    } else if (i <= 60) {
+      // 35 Jogadores Intermédios (Nível 2 a 3)
+      level = 2 + (i % 2)
+      const baseXp = level === 3 ? 5500 : 2000
+      const span = level === 3 ? 3000 : 3000
+      xp = baseXp + Math.round(((i * 31) % span))
+    } else {
+      // 40 Jogadores Casuais / Em Ascensão (Nível 1 a 2)
+      level = 1 + (i % 2)
+      const baseXp = level === 2 ? 1800 : 150
+      const span = level === 2 ? 1600 : 1500
+      xp = baseXp + Math.round(((i * 19) % span))
+    }
 
-    // Rating ELO calibrado (850 a 2150)
-    const rating = 850 + Math.round((level / 21) * 1200 + ((i * 19) % 80))
+    // Rating ELO calibrado (800 a 1350)
+    const rating = 800 + Math.round((level / 6) * 450 + ((i * 13) % 100))
 
-    const wins = Math.round(level * 4 + ((i * 13) % 20))
-    const losses = Math.max(1, Math.round(wins * (0.35 + (i % 5) * 0.08)))
+    const wins = Math.max(1, Math.round((xp / 400) + ((i * 7) % 6)))
+    const losses = Math.max(0, Math.round(wins * (0.35 + (i % 5) * 0.08)))
 
     const diffIndex = (i % 4)
     const difficulties: NpcDifficulty[] = ['facil', 'medio', 'dificil', 'mestre']
@@ -118,8 +140,8 @@ function generateDeterministicNpcs(): NpcProfile[] {
     ]
     const title = titles[(i * 3) % titles.length]
     const frames = [undefined, 'frame_ouro', 'frame_prata', 'frame_neon', 'frame_fogo']
-    const equippedFrame = level >= 8 ? frames[i % frames.length] : undefined
-    const virtualMoney = Math.round(500 + level * 450 + wins * 80 + ((i * 19) % 250))
+    const equippedFrame = level >= 4 ? frames[i % frames.length] : undefined
+    const virtualMoney = Math.round(100 + level * 100 + wins * 20 + ((i * 19) % 150))
     const accuracyRate = Math.round(((minAcc + maxAcc) / 2) * 100)
 
     const npcId = `npc_${String(i).padStart(3, '0')}`

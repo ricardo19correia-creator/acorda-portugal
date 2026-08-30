@@ -840,6 +840,36 @@ export default function RankingsPage() {
               </div>
             )}
 
+            {/* Controlos de Paginação Progressiva */}
+            {!loading && players.length > 3 && (
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
+                <div className="text-xs text-slate-400 font-medium">
+                  A apresentar <strong className="text-white">{players.length}</strong> competidores classificados
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  {rankingLimit < 200 && players.length >= rankingLimit && (
+                    <button
+                      type="button"
+                      onClick={() => setRankingLimit((prev) => prev + 50)}
+                      className="cursor-pointer rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 px-4 py-2 text-xs font-bold text-emerald-300 transition-all hover:scale-105"
+                    >
+                      Carregar Mais (+50)
+                    </button>
+                  )}
+                  {rankingLimit < 200 && players.length >= rankingLimit && (
+                    <button
+                      type="button"
+                      onClick={() => setRankingLimit(200)}
+                      className="cursor-pointer rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-xs font-bold text-slate-300 transition-all"
+                    >
+                      Mostrar Todos
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* CARTÃO FIXO DO UTILIZADOR ATUAL (CASO NÃO ESTEJA NO PÓDIO) */}
             {currentUserRank && currentUserRank.pos && currentUserRank.pos > 3 && (
               <div
