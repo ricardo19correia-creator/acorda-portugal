@@ -64,13 +64,15 @@ export const ALL_DISTRICTS_LIST = [
  */
 export function mapDocToRankingPlayer(id: string, data: any, defaultType: 'human' | 'npc' = 'human'): RankingPlayer {
   const isBot = Boolean(data.isNpc || data.playerType === 'npc' || defaultType === 'npc')
-  const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? data.xp : 0
-  const level = typeof data.level === 'number' ? data.level : calculateLevelProgress(xp).currentLevel.level
+  const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
+  // FONTE CANÓNICA ÚNICA: O nível é SEMPRE calculado matematicamente a partir do XP Total
+  const levelInfo = calculateLevelProgress(xp)
+  const level = levelInfo.currentLevel.level
   const rawName = (data.displayName || data.name || data.username || data.email?.split('@')[0] || '').trim()
   const displayName = rawName || (isBot ? 'NPC Lusitano' : 'Jogador')
   const district = (data.district || data.region || 'Portugal').trim()
   const photoURL = getAvatarImage(data.photoURL || data.avatar || data.avatarId || (data.equipped?.avatar) || null)
-  const title = data.equippedTitle || data.title || data.equipped?.title || (isBot ? `Competidor de ${district}` : 'Jogador Nacional')
+  const title = data.equippedTitle || data.title || data.equipped?.title || levelInfo.currentLevel.title || (isBot ? `Competidor de ${district}` : 'Jogador Nacional')
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
   const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
   const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + (data.losses || 0)))
@@ -102,25 +104,32 @@ export function mapDocToRankingPlayer(id: string, data: any, defaultType: 'human
  * Retorna a lista canónica de NPCs/Bots formatada para o Ranking com XP e Níveis Oficiais
  */
 export function getNpcRankingPlayers(): RankingPlayer[] {
-  return NPC_CATALOG.map((npc) => ({
-    uid: npc.npcId,
-    displayName: npc.displayName,
-    photoURL: npc.avatar,
-    district: npc.district,
-    region: npc.district,
-    xp: npc.xp,
-    level: npc.level,
-    title: npc.title || `Competidor de ${npc.district}`,
-    equippedTitle: npc.title || `Competidor de ${npc.district}`,
-    equippedFrame: npc.equippedFrame,
-    isFounder: false,
-    wins1v1: npc.wins,
-    gamesPlayed: npc.wins + npc.losses,
-    accuracyRate: Math.round(((npc.accuracyRange[0] + npc.accuracyRange[1]) / 2) * 100),
-    playerType: 'npc',
-    isNpc: true,
-    virtualMoney: npc.virtualMoney,
-  }))
+  return NPC_CATALOG.map((npc) => {
+    const xp = typeof npc.xp === 'number' ? Math.max(0, npc.xp) : 0
+    const levelInfo = calculateLevelProgress(xp)
+    const level = levelInfo.currentLevel.level
+    const title = npc.title || levelInfo.currentLevel.title || `Competidor de ${npc.district}`
+
+    return {
+      uid: npc.npcId,
+      displayName: npc.displayName,
+      photoURL: npc.avatar,
+      district: npc.district,
+      region: npc.district,
+      xp,
+      level,
+      title,
+      equippedTitle: title,
+      equippedFrame: npc.equippedFrame,
+      isFounder: false,
+      wins1v1: npc.wins,
+      gamesPlayed: npc.wins + npc.losses,
+      accuracyRate: Math.round(((npc.accuracyRange[0] + npc.accuracyRange[1]) / 2) * 100),
+      playerType: 'npc',
+      isNpc: true,
+      virtualMoney: npc.virtualMoney,
+    }
+  })
 }
 
 /**

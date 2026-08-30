@@ -1,5 +1,5 @@
 import type { NpcProfile, NpcDifficulty, NpcPersonality } from './types'
-import { PROGRESSION_LEVELS } from '@/lib/progression'
+import { PROGRESSION_LEVELS, calculateLevelProgress } from '@/lib/progression'
 
 export const OFFICIAL_20_DISTRICTS = [
   'Aveiro',
@@ -67,39 +67,39 @@ function generateDeterministicNpcs(): NpcProfile[] {
     const district = OFFICIAL_20_DISTRICTS[(i - 1) % OFFICIAL_20_DISTRICTS.length]
     const avatar = AVATAR_IMAGES[i % AVATAR_IMAGES.length]
 
-    // Distribuição balanceada e orgânica de níveis RPG realistas (Níveis 1 a 5)
-    // 40% bots Nível 1-2 (Iniciantes/Casuais: 150 a 2,500 XP)
-    // 35% bots Nível 2-3 (Intermédios: 2,500 a 7,500 XP)
-    // 20% bots Nível 3-4 (Avançados: 7,500 a 15,000 XP)
-    // 5% bots Nível 4-5 (Elite/Mestres Distritais: 15,000 a 25,000 XP)
-    let level = 1
+    // Distribuição balanceada e orgânica de XP RPG (150 a 25,000 XP)
     let xp = 200
 
     if (i <= 5) {
-      // Top 5 Elite Nacional / Mestres
-      level = 4 + (i % 2) // Nível 4 ou 5
-      const baseXp = level === 5 ? 20000 : 12000
-      const span = level === 5 ? 5000 : 6000
+      // Top 5 Elite Nacional / Mestres (15,000 a 25,000 XP -> Níveis 4 a 5)
+      const targetLevel = 4 + (i % 2)
+      const baseXp = targetLevel === 5 ? 25000 : 15000
+      const span = targetLevel === 5 ? 4000 : 8000
       xp = baseXp + Math.round(((i * 73) % span))
     } else if (i <= 25) {
-      // 20 Competidores Avançados Distritais (Nível 3 a 4)
-      level = 3 + (i % 2)
-      const baseXp = level === 4 ? 12000 : 6000
-      const span = level === 4 ? 4000 : 4500
+      // 20 Competidores Avançados Distritais (7,500 a 15,000 XP -> Níveis 3 a 4)
+      const targetLevel = 3 + (i % 2)
+      const baseXp = targetLevel === 4 ? 15000 : 7500
+      const span = targetLevel === 4 ? 4000 : 5000
       xp = baseXp + Math.round(((i * 47) % span))
     } else if (i <= 60) {
-      // 35 Jogadores Intermédios (Nível 2 a 3)
-      level = 2 + (i % 2)
-      const baseXp = level === 3 ? 5500 : 2000
-      const span = level === 3 ? 3000 : 3000
+      // 35 Jogadores Intermédios (2,500 a 7,500 XP -> Níveis 2 a 3)
+      const targetLevel = 2 + (i % 2)
+      const baseXp = targetLevel === 3 ? 7500 : 2500
+      const span = targetLevel === 3 ? 3000 : 3500
       xp = baseXp + Math.round(((i * 31) % span))
     } else {
-      // 40 Jogadores Casuais / Em Ascensão (Nível 1 a 2)
-      level = 1 + (i % 2)
-      const baseXp = level === 2 ? 1800 : 150
-      const span = level === 2 ? 1600 : 1500
+      // 40 Jogadores Casuais / Em Ascensão (150 a 2,500 XP -> Níveis 1 a 2)
+      const targetLevel = 1 + (i % 2)
+      const baseXp = targetLevel === 2 ? 2500 : 150
+      const span = targetLevel === 2 ? 1800 : 1800
       xp = baseXp + Math.round(((i * 19) % span))
     }
+
+    // CÁLCULO CANÓNICO E DETERMINÍSTICO DE NÍVEL E TÍTULO
+    const levelInfo = calculateLevelProgress(xp)
+    const level = levelInfo.currentLevel.level
+    const title = levelInfo.currentLevel.title
 
     // Rating ELO calibrado (800 a 1350)
     const rating = 800 + Math.round((level / 6) * 450 + ((i * 13) % 100))
@@ -128,17 +128,6 @@ function generateDeterministicNpcs(): NpcProfile[] {
     const startHour = (i * 3) % 24
     const preferredHours = [startHour, (startHour + 1) % 24, (startHour + 2) % 24, (startHour + 3) % 24]
 
-    const titles = [
-      `Mestre de ${district}`,
-      `Guardião de ${district}`,
-      `Orgulho de ${district}`,
-      `Conquistador de ${district}`,
-      `Veterano de ${district}`,
-      `Duelista Nato`,
-      `Sábio Lusitano`,
-      `Lenda Regional`,
-    ]
-    const title = titles[(i * 3) % titles.length]
     const frames = [undefined, 'frame_ouro', 'frame_prata', 'frame_neon', 'frame_fogo']
     const equippedFrame = level >= 4 ? frames[i % frames.length] : undefined
     const virtualMoney = Math.round(100 + level * 100 + wins * 20 + ((i * 19) % 150))

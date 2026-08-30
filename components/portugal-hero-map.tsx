@@ -267,8 +267,8 @@ export function PortugalHeroMap() {
         // 1. Integrar jogador atual autenticado se ainda não constar na lista
         let unifiedList = [...allPlayers]
         if (user?.uid && profile) {
-          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? profile.xp : 0
-          const userLevel = typeof profile.level === 'number' ? profile.level : calculateLevelProgress(userXp).currentLevel.level
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+          const userLevel = calculateLevelProgress(userXp).currentLevel.level
           const userDistrict = (profile.district || 'Portugal').trim()
           const hasUser = unifiedList.some((p) => p.uid === user.uid)
           if (!hasUser) {
@@ -280,7 +280,7 @@ export function PortugalHeroMap() {
               xp: userXp,
               district: userDistrict,
               region: userDistrict,
-              title: profile.equippedTitle || 'Jogador Nacional',
+              title: profile.equippedTitle || calculateLevelProgress(userXp).currentLevel.title,
               playerType: 'human',
               isNpc: false,
             })

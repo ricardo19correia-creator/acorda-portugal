@@ -92,9 +92,9 @@ export function Ranking() {
 
         // Garantir que o utilizador autenticado atual está presente
         if (user?.uid && profile) {
-          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? profile.xp : 0
-          const userLevel = typeof profile.level === 'number' ? profile.level : calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || 'Membro Fundador'
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+          const userLevel = calculateLevelProgress(userXp).currentLevel.level
+          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
           const userDistrict = (profile.district || 'Portugal').trim()
 
           const hasCurrentUser = playersList.some((p) => p.uid === user.uid)

@@ -470,9 +470,9 @@ function PerfilContent() {
         const liveBalance = profile?.coins ?? profile?.euros ?? (typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || 0) : 0)
         setUserCoins(liveBalance)
 
-        const currentXp = profile?.xp ?? 0
+        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
         setUserXp(currentXp)
-        setUserLevel(profile?.level ?? calculateLevelProgress(currentXp).currentLevel.level)
+        setUserLevel(calculateLevelProgress(currentXp).currentLevel.level)
 
         if (profile?.claimedAchievements) {
           setClaimedAchievements(profile.claimedAchievements)
@@ -513,9 +513,10 @@ function PerfilContent() {
               localStorage.setItem('user_coins', String(coinsVal))
               localStorage.setItem('user_euros', String(coinsVal))
             }
-            if (typeof data.xp === 'number') {
-              setUserXp(data.xp)
-              setUserLevel(data.level ?? calculateLevelProgress(data.xp).currentLevel.level)
+            if (typeof data.xp === 'number' && !isNaN(data.xp)) {
+              const liveXp = Math.max(0, data.xp)
+              setUserXp(liveXp)
+              setUserLevel(calculateLevelProgress(liveXp).currentLevel.level)
             }
             if (data.claimedAchievements) {
               setClaimedAchievements(data.claimedAchievements)

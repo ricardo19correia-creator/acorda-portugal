@@ -95,10 +95,10 @@ export default function RankingsPage() {
 
         // Integrar utilizador autenticado se aplicável
         if (user?.uid && profile) {
-          const userXp = profile.xp ?? 0
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userWins = profile.wins ?? 0
-          const userLevel = profile.level ?? calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || 'Membro Fundador'
+          const userLevel = calculateLevelProgress(userXp).currentLevel.level
+          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
           const userDistrict = profile.district || 'Portugal'
 
           const matchesDistrict =
@@ -155,10 +155,10 @@ export default function RankingsPage() {
       (data) => {
         let allList = [...data]
         if (user?.uid && profile) {
-          const userXp = profile.xp ?? 0
+          const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userWins = profile.wins ?? 0
-          const userLevel = profile.level ?? calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || 'Membro Fundador'
+          const userLevel = calculateLevelProgress(userXp).currentLevel.level
+          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
           const userDistrict = profile.district || 'Portugal'
           const hasCurrentUser = allList.some((p) => p.uid === user.uid)
           if (!hasCurrentUser) {

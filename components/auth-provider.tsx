@@ -219,8 +219,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
 
             const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
-            const xpVal = typeof data.xp === 'number' ? data.xp : 0
-            const levelVal = typeof data.level === 'number' ? data.level : calculateLevelProgress(xpVal).currentLevel.level
+            const xpVal = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
+            const levelVal = calculateLevelProgress(xpVal).currentLevel.level
             const nameVal = data.name || data.displayName || data.username || currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
 
             // Validação territorial

@@ -125,6 +125,42 @@ function formatFirestoreField(val) {
   return { stringValue: String(val) };
 }
 
+const PROGRESSION_LEVELS = [
+  { level: 1, xpRequired: 0, title: 'Curioso' },
+  { level: 2, xpRequired: 2500, title: 'Aprendiz' },
+  { level: 3, xpRequired: 7500, title: 'Explorador' },
+  { level: 4, xpRequired: 15000, title: 'Conhecedor' },
+  { level: 5, xpRequired: 25000, title: 'Iniciado' },
+  { level: 6, xpRequired: 40000, title: 'Estudioso' },
+  { level: 7, xpRequired: 60000, title: 'Adepto' },
+  { level: 8, xpRequired: 85000, title: 'Competente' },
+  { level: 9, xpRequired: 115000, title: 'Experiente' },
+  { level: 10, xpRequired: 150000, title: 'Especialista' },
+  { level: 11, xpRequired: 200000, title: 'Veterano' },
+  { level: 12, xpRequired: 275000, title: 'Mestre' },
+  { level: 13, xpRequired: 375000, title: 'Grande Mestre' },
+  { level: 14, xpRequired: 500000, title: 'Lenda' },
+  { level: 15, xpRequired: 650000, title: 'Sábio de Portugal' },
+  { level: 16, xpRequired: 825000, title: 'Guardião do Conhecimento' },
+  { level: 17, xpRequired: 1050000, title: 'Elite Nacional' },
+  { level: 18, xpRequired: 1350000, title: 'Campeão de Portugal' },
+  { level: 19, xpRequired: 1750000, title: 'Lenda Nacional' },
+  { level: 20, xpRequired: 2250000, title: 'Imortal' },
+  { level: 21, xpRequired: 3000000, title: 'Mestre de Portugal' },
+];
+
+function calculateLevelProgress(xp) {
+  const safeXp = Math.max(0, typeof xp === 'number' && !isNaN(xp) ? xp : 0);
+  let currentTier = PROGRESSION_LEVELS[0];
+  for (let i = PROGRESSION_LEVELS.length - 1; i >= 0; i--) {
+    if (safeXp >= PROGRESSION_LEVELS[i].xpRequired) {
+      currentTier = PROGRESSION_LEVELS[i];
+      break;
+    }
+  }
+  return { level: currentTier.level, title: currentTier.title };
+}
+
 function generate100Bots() {
   const bots = [];
 
@@ -137,30 +173,43 @@ function generate100Bots() {
     // Distribuição pelos 20 distritos (5 bots por distrito)
     const district = OFFICIAL_20_DISTRICTS[(i - 1) % OFFICIAL_20_DISTRICTS.length];
     const avatar = AVATAR_IMAGES[i % AVATAR_IMAGES.length];
-    const level = 2 + ((i * 7) % 19);
 
-    const baseXp = level * 1200;
-    const span = 800;
-    const progressFraction = ((i * 37) % 85) / 100;
-    const xp = Math.round(baseXp + span * progressFraction);
-    const rating = 850 + Math.round((level / 21) * 1200 + ((i * 19) % 80));
-    const wins = Math.round(level * 4 + ((i * 13) % 20));
+    let xp = 200;
+    if (i <= 5) {
+      // Top 5 Elite Nacional / Mestres (15,000 a 25,000 XP -> Níveis 4 a 5)
+      const targetLevel = 4 + (i % 2);
+      const baseXp = targetLevel === 5 ? 25000 : 15000;
+      const span = targetLevel === 5 ? 4000 : 8000;
+      xp = baseXp + Math.round(((i * 73) % span));
+    } else if (i <= 25) {
+      // 20 Competidores Avançados Distritais (7,500 a 15,000 XP -> Níveis 3 a 4)
+      const targetLevel = 3 + (i % 2);
+      const baseXp = targetLevel === 4 ? 15000 : 7500;
+      const span = targetLevel === 4 ? 4000 : 5000;
+      xp = baseXp + Math.round(((i * 47) % span));
+    } else if (i <= 60) {
+      // 35 Jogadores Intermédios (2,500 a 7,500 XP -> Níveis 2 a 3)
+      const targetLevel = 2 + (i % 2);
+      const baseXp = targetLevel === 3 ? 7500 : 2500;
+      const span = targetLevel === 3 ? 3000 : 3500;
+      xp = baseXp + Math.round(((i * 31) % span));
+    } else {
+      // 40 Jogadores Casuais / Em Ascensão (150 a 2,500 XP -> Níveis 1 a 2)
+      const targetLevel = 1 + (i % 2);
+      const baseXp = targetLevel === 2 ? 2500 : 150;
+      const span = targetLevel === 2 ? 1800 : 1800;
+      xp = baseXp + Math.round(((i * 19) % span));
+    }
+
+    const { level, title } = calculateLevelProgress(xp);
+
+    const rating = 800 + Math.round((level / 6) * 450 + ((i * 19) % 80));
+    const wins = Math.max(1, Math.round((xp / 400) + ((i * 13) % 20)));
     const losses = Math.max(1, Math.round(wins * (0.35 + (i % 5) * 0.08)));
 
-    const titles = [
-      `Mestre de ${district}`,
-      `Guardião de ${district}`,
-      `Orgulho de ${district}`,
-      `Conquistador de ${district}`,
-      `Veterano de ${district}`,
-      `Duelista Nato`,
-      `Sábio Lusitano`,
-      `Lenda Regional`,
-    ];
-    const title = titles[(i * 3) % titles.length];
     const frames = [null, 'frame_ouro', 'frame_prata', 'frame_neon', 'frame_fogo'];
-    const equippedFrame = level >= 8 ? frames[i % frames.length] : null;
-    const virtualMoney = Math.round(500 + level * 450 + wins * 80 + ((i * 19) % 250));
+    const equippedFrame = level >= 4 ? frames[i % frames.length] : null;
+    const virtualMoney = Math.round(100 + level * 100 + wins * 20 + ((i * 19) % 150));
     const accuracyRate = Math.round(55 + ((i * 13) % 35));
 
     const botId = `npc_${String(i).padStart(3, '0')}`;
