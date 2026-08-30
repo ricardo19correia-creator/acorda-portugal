@@ -280,6 +280,10 @@ export function QuizScreen({
   cityParam?: string | null
   gameId: string
 }) {
+  if (typeof window !== 'undefined' && window.location.pathname.includes('/criadores')) {
+    return null
+  }
+
   const router = useRouter()
   const category = useMemo(
     () => resolveCategoryInfo(categorySlug, subcategorySlug, districtParam, cityParam),
