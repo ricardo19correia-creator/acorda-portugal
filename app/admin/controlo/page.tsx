@@ -174,16 +174,30 @@ export default function CentroDeControloPage() {
                 onClick={() => handleGoogleLogin('/admin/controlo')}
                 className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer active:scale-95"
               >
-                Iniciar Sessão com Google
+                Iniciar Sessão com Conta Administradora
               </button>
             ) : (
-              <button
-                type="button"
-                onClick={() => handleGoogleLogin('/admin/controlo')}
-                className="w-full py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
-              >
-                Trocar de Conta Google
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => verifyServerAuth()}
+                  className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <RefreshCw className="h-3.5 w-3.5" />
+                  <span>Validar Autorização Novamente</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await performLogout()
+                    handleGoogleLogin('/admin/controlo')
+                  }}
+                  className="w-full py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  Trocar / Iniciar com Outra Conta Google
+                </button>
+              </>
             )}
 
             <button
