@@ -26,18 +26,69 @@ import { formatPostDate, getFullFormattedDate, type CommunityPost, type Publicac
 
 export type { CommunityPost, PublicacaoComunidade }
 
+const INITIAL_POSTS: PublicacaoComunidade[] = [
+  {
+    id: 'post_oficial_1',
+    authorName: 'Riky Moreira',
+    authorHandle: 'criador_oficial',
+    district: 'Lisboa',
+    category: 'Portugal',
+    content: 'Bem-vindos ao espaço oficial dos Criadores do Acorda Portugal! 🇵🇹 Este é o ponto de encontro da comunidade para partilhar ideias, memórias das nossas terras e sugestões para o jogo.',
+    autor: 'Riky Moreira',
+    tag: 'criador_oficial',
+    distrito: 'Lisboa',
+    categoria: 'Portugal',
+    conteudo: 'Bem-vindos ao espaço oficial dos Criadores do Acorda Portugal! 🇵🇹 Este é o ponto de encontro da comunidade para partilhar ideias, memórias das nossas terras e sugestões para o jogo.',
+    destaque: true,
+    oficial: true,
+    likes: 1910,
+    commentsCount: 43,
+    createdAt: null,
+  },
+  {
+    id: 'post_oficial_2',
+    authorName: 'Mestre do Norte',
+    authorHandle: 'portugal_norte',
+    district: 'Porto',
+    category: 'Ideias',
+    content: 'O que acham de adicionarmos arenas temáticas para cada rota dos vinhos e castelos medievais de Portugal no próximo update?',
+    autor: 'Mestre do Norte',
+    tag: 'portugal_norte',
+    distrito: 'Porto',
+    categoria: 'Ideias',
+    conteudo: 'O que acham de adicionarmos arenas temáticas para cada rota dos vinhos e castelos medievais de Portugal no próximo update?',
+    destaque: true,
+    oficial: false,
+    likes: 384,
+    commentsCount: 18,
+    createdAt: null,
+  },
+  {
+    id: 'post_oficial_3',
+    authorName: 'Explorador dos Açores',
+    authorHandle: 'acores_vivo',
+    district: 'Açores',
+    category: 'Histórias',
+    content: 'Representar os Açores no radar tático e nas 43 arenas temáticas é um orgulho imenso! Que venha o torneio distrital.',
+    autor: 'Explorador dos Açores',
+    tag: 'acores_vivo',
+    distrito: 'Açores',
+    categoria: 'Histórias',
+    conteudo: 'Representar os Açores no radar tático e nas 43 arenas temáticas é um orgulho imenso! Que venha o torneio distrital.',
+    destaque: false,
+    oficial: false,
+    likes: 215,
+    commentsCount: 9,
+    createdAt: null,
+  },
+]
+
 export default function CriadoresPage() {
   const { user, profile } = useAuth()
 
-  // 1. Proteção de ciclo de vida e montagem no cliente (Zero Hydration Mismatch)
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  // Estado das publicações
-  const [publicacoes, setPublicacoes] = useState<PublicacaoComunidade[]>([])
-  const [loading, setLoading] = useState(true)
+  // Estado das publicações com dados iniciais ricos
+  const [publicacoes, setPublicacoes] = useState<PublicacaoComunidade[]>(INITIAL_POSTS)
+  const [loading, setLoading] = useState(false)
 
   // Formulário de publicação
   const [novoTexto, setNovoTexto] = useState('')
@@ -67,17 +118,9 @@ export default function CriadoresPage() {
     }
   }, [profile?.district])
 
-  // 2. Escuta em TEMPO REAL blindada com Firestore (Coleção: publicacoes_comunidade)
+  // Escuta em TEMPO REAL com Firestore
   useEffect(() => {
-    if (!isMounted) return
-
-    if (!db) {
-      console.warn('[CRIADORES] Instância do Firebase Firestore (db) não disponível.')
-      setLoading(false)
-      return
-    }
-
-    setLoading(true)
+    if (!db) return
 
     try {
       const q = query(
@@ -88,56 +131,56 @@ export default function CriadoresPage() {
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          const docs: PublicacaoComunidade[] = snapshot.docs.map((docSnap) => {
-            const data = docSnap.data()
-            const authorName = typeof data.authorName === 'string' && data.authorName.trim() ? data.authorName : (typeof data.autor === 'string' && data.autor.trim() ? data.autor : 'Jogador')
-            const authorHandle = typeof data.authorHandle === 'string' && data.authorHandle.trim() ? data.authorHandle : (typeof data.tag === 'string' && data.tag.trim() ? data.tag : 'jogador_pt')
-            const district = typeof data.district === 'string' && data.district.trim() ? data.district : (typeof data.distrito === 'string' && data.distrito.trim() ? data.distrito : 'Portugal')
-            const category = typeof data.category === 'string' && data.category.trim() ? data.category : (typeof data.categoria === 'string' && data.categoria.trim() ? data.categoria : 'Geral')
-            const content = typeof data.content === 'string' ? data.content : (typeof data.conteudo === 'string' ? data.conteudo : '')
-            const createdAt = data.createdAt || null
+          if (!snapshot.empty) {
+            const docs: PublicacaoComunidade[] = snapshot.docs.map((docSnap) => {
+              const data = docSnap.data()
+              const authorName = typeof data.authorName === 'string' && data.authorName.trim() ? data.authorName : (typeof data.autor === 'string' && data.autor.trim() ? data.autor : 'Jogador')
+              const authorHandle = typeof data.authorHandle === 'string' && data.authorHandle.trim() ? data.authorHandle : (typeof data.tag === 'string' && data.tag.trim() ? data.tag : 'jogador_pt')
+              const district = typeof data.district === 'string' && data.district.trim() ? data.district : (typeof data.distrito === 'string' && data.distrito.trim() ? data.distrito : 'Portugal')
+              const category = typeof data.category === 'string' && data.category.trim() ? data.category : (typeof data.categoria === 'string' && data.categoria.trim() ? data.categoria : 'Geral')
+              const content = typeof data.content === 'string' ? data.content : (typeof data.conteudo === 'string' ? data.conteudo : '')
+              const createdAt = data.createdAt || null
 
-            return {
-              id: docSnap.id,
-              authorName,
-              authorHandle,
-              district,
-              category,
-              content,
-              autor: authorName,
-              tag: authorHandle,
-              distrito: district,
-              categoria: category,
-              conteudo: content,
-              destaque: Boolean(data.destaque),
-              oficial: Boolean(data.oficial),
-              likes: typeof data.likes === 'number' ? data.likes : 0,
-              commentsCount: typeof data.commentsCount === 'number' ? data.commentsCount : (typeof data.comentariosCount === 'number' ? data.comentariosCount : 0),
-              createdAt,
-            }
-          })
+              return {
+                id: docSnap.id,
+                authorName,
+                authorHandle,
+                district,
+                category,
+                content,
+                autor: authorName,
+                tag: authorHandle,
+                distrito: district,
+                categoria: category,
+                conteudo: content,
+                destaque: Boolean(data.destaque),
+                oficial: Boolean(data.oficial),
+                likes: typeof data.likes === 'number' ? data.likes : 0,
+                commentsCount: typeof data.commentsCount === 'number' ? data.commentsCount : (typeof data.comentariosCount === 'number' ? data.comentariosCount : 0),
+                createdAt,
+              }
+            })
 
-          setPublicacoes(docs)
-          setLoading(false)
+            // Mesclar posts oficiais iniciais com os do Firestore sem duplicados
+            const ids = new Set(docs.map((d) => d.id))
+            const combined = [...docs, ...INITIAL_POSTS.filter((p) => !ids.has(p.id))]
+            setPublicacoes(combined)
+          }
         },
         (error) => {
-          console.error('[CRIADORES] Erro na subscrição em tempo real Firestore:', error)
-          setLoading(false)
+          console.warn('[CRIADORES] Firestore listener notice:', error)
         }
       )
 
       return () => {
         try {
           unsubscribe()
-        } catch (e) {
-          console.error('[CRIADORES] Erro ao fechar subscrição Firestore:', e)
-        }
+        } catch (e) {}
       }
     } catch (err) {
-      console.error('[CRIADORES] Exceção ao inicializar consulta Firestore:', err)
-      setLoading(false)
+      console.warn('[CRIADORES] Firestore initialization notice:', err)
     }
-  }, [isMounted])
+  }, [])
 
   // 3. Envio e persistência real no Firestore
   const handlePublicar = async (e: React.FormEvent) => {
@@ -241,25 +284,6 @@ export default function CriadoresPage() {
       return true
     })
   }, [publicacoes, filtroAba, categoriaFiltro, distritoFiltro, searchQuery])
-
-  // Se ainda não montou no cliente, renderiza estrutura base estável sem mismatch de hidratação
-  if (!isMounted) {
-    return (
-      <div className="relative min-h-screen bg-transparent flex flex-col">
-        <BackgroundFx variant="about" />
-        <div className="relative z-20 flex-1 flex flex-col">
-          <SiteHeader />
-          <main className="flex-1 pb-20 sm:pb-12">
-            <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-6 space-y-6">
-              <div className="h-64 rounded-3xl border border-white/10 bg-slate-900/60 animate-pulse" />
-              <div className="h-96 rounded-3xl border border-white/10 bg-slate-900/40 animate-pulse" />
-            </div>
-          </main>
-          <SiteFooter />
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
