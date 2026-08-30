@@ -27,10 +27,6 @@ export function PlayButton({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    if (!user && !auth.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
-      return
-    }
     router.push(href)
   }
 

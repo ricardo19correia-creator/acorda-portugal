@@ -14,10 +14,6 @@ export function GuzmaniaSection() {
 
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault()
-    if (!user && !auth?.currentUser) {
-      router.push('/entrar?redirect=/jogar')
-      return
-    }
     router.push('/jogar')
   }
   return (

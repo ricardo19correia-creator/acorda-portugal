@@ -42,6 +42,7 @@ import { GameExitControl } from '@/components/game-exit-modal'
 import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
+import { safeRandomUUID } from '@/lib/utils'
 
 import {
   ALL_QUIZ_QUESTIONS,
@@ -757,7 +758,7 @@ export function QuizScreen({
     try {
       sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
     } catch {}
-    const nextGameId = crypto.randomUUID()
+    const nextGameId = safeRandomUUID()
     router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
     setQuizQuestions(createGameQuestions(categorySlug))
     setStep(0)

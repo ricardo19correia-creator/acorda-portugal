@@ -50,17 +50,8 @@ export function SiteHeader() {
     await performLogout('/')
   }
 
-  const handleNavClick = (e: React.MouseEvent, href: string) => {
-    if (href === '/jogar' || href.startsWith('/jogar')) {
-      e.preventDefault()
-      if (!user && !auth?.currentUser) {
-        router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
-        setOpen(false)
-        return
-      }
-      router.push(href)
-      setOpen(false)
-    }
+  const handleNavClick = (_e: React.MouseEvent, href: string) => {
+    setOpen(false)
   }
 
   const isOwner =

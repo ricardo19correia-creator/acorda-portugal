@@ -41,13 +41,8 @@ const HERO_STATS = [
 
 export function Hero() {
   const router = useRouter()
-  const { user } = useAuth()
 
   const handleStartGame = (gameRoute: string) => {
-    if (!user && !auth.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
-      return
-    }
     router.push(gameRoute)
   }
 

@@ -36,7 +36,7 @@ import {
 import { getDefaultCityForDistrict } from '@/data/districts'
 import { calculateLevelProgress } from '@/lib/progression'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
-import { cn } from '@/lib/utils'
+import { cn, safeRandomUUID } from '@/lib/utils'
 
 export function GameHub() {
   const router = useRouter()
@@ -87,7 +87,7 @@ export function GameHub() {
     })
   }, [activeCategoryTab, searchCategory])
 
-  // Handlers to launch solo games with strict authentication requirement
+  // Handlers to launch solo games with safe UUID and guest support
   const handleLaunchGame = (params: {
     categorySlug: string
     subcategorySlug?: string
@@ -95,7 +95,7 @@ export function GameHub() {
     city?: string
     difficulty?: GameDifficulty
   }) => {
-    const gameId = crypto.randomUUID()
+    const gameId = safeRandomUUID()
     const diff = params.difficulty || selectedDifficulty
     let url = `/jogar?cat=${encodeURIComponent(params.categorySlug)}&game=${gameId}&diff=${diff}`
     if (params.subcategorySlug) {
@@ -108,19 +108,10 @@ export function GameHub() {
       url += `&city=${encodeURIComponent(params.city)}`
     }
 
-    if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(url)}`)
-      return
-    }
-
     router.push(url)
   }
 
   const handleOpenDuelModal = () => {
-    if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent('/jogar/duelo')}`)
-      return
-    }
     setShowDuelModal(true)
   }
 

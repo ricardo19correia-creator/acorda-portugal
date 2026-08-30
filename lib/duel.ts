@@ -29,6 +29,7 @@ import { getEmoteById, type EmoteItem } from '@/src/data/emotes'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { getEquippedAvatarImage } from '@/lib/inventory'
 import { silentFetchWithRetry, silentAsyncRetry } from '@/lib/network-resilience'
+import { safeRandomUUID } from '@/lib/utils'
 
 export function resolveUserAvatar(
   user?: { photoURL?: string | null } | null,
@@ -409,7 +410,7 @@ export async function findOrCreateMatchmakingRoom(
   }
 
   // 3. Se nenhuma sala foi associada, criar uma nova sala como Host
-  const newRoomId = `duel_${crypto.randomUUID()}`
+  const newRoomId = `duel_${safeRandomUUID()}`
   const newCode = generateDuelCode()
   const questions = generateDuelQuestions(10)
   const expiresAt = now + 15 * 60 * 1000
@@ -677,7 +678,7 @@ export async function sendRoomHeartbeat(roomId: string): Promise<void> {
 export async function joinMatchmakingQueue(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
   profile?: { level?: number; district?: string },
-  matchAttemptId: string = crypto.randomUUID(),
+  matchAttemptId: string = safeRandomUUID(),
 ): Promise<string> {
   if (!user || !user.uid) return matchAttemptId
   try {
@@ -804,7 +805,7 @@ export async function createDuelRoom(
     throw new Error('Identificador de jogador ausente.')
   }
 
-  const duelId = `duel_${crypto.randomUUID()}`
+  const duelId = `duel_${safeRandomUUID()}`
   const code = generateDuelCode()
   const now = Date.now()
   const expiresAt = now + 15 * 60 * 1000
@@ -1337,7 +1338,7 @@ export async function respondDuelRematch(
   }
 
   // Criar novo duelo 100% fresco com novo conjunto de 10 perguntas
-  const newDuelId = `duel_${crypto.randomUUID()}`
+  const newDuelId = `duel_${safeRandomUUID()}`
   const newDuelRef = doc(db, 'duels', newDuelId)
   const now = Date.now()
   const questions = generateDuelQuestions(10)

@@ -24,15 +24,8 @@ export function SiteFooter() {
   const router = useRouter()
   const { user } = useAuth()
 
-  const handleLinkClick = (e: React.MouseEvent, href: string) => {
-    if (href === '/jogar' || href.startsWith('/jogar')) {
-      e.preventDefault()
-      if (!user && !auth?.currentUser) {
-        router.push(`/entrar?redirect=${encodeURIComponent(href)}`)
-        return
-      }
-      router.push(href)
-    }
+  const handleLinkClick = (_e: React.MouseEvent, _href: string) => {
+    // Permite navegação direta standard
   }
 
   return (

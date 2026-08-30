@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useId, useSyncExternalStore, useMemo } from 'react'
+import React, { useId, useMemo } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
   Smartphone,
@@ -35,32 +36,36 @@ export interface MobileLaunchCountdownProps {
 
 // Hook de subscrição de tempo seguro para React 19 / SSR
 function useCurrentTimestamp(mockTimestamp?: number): number {
-  const subscribe = useMemo(() => {
-    return (callback: () => void) => {
-      if (typeof window === 'undefined' || mockTimestamp) {
-        return () => {}
-      }
-      const interval = setInterval(callback, 1000)
-      const handleVisibilityChange = () => {
-        if (document.visibilityState === 'visible') {
-          callback()
-        }
-      }
-      window.addEventListener('visibilitychange', handleVisibilityChange)
-      window.addEventListener('focus', callback)
+  const [timestamp, setTimestamp] = React.useState<number>(() => mockTimestamp ?? (typeof window !== 'undefined' ? Date.now() : 0))
 
-      return () => {
-        clearInterval(interval)
-        window.removeEventListener('visibilitychange', handleVisibilityChange)
-        window.removeEventListener('focus', callback)
+  React.useEffect(() => {
+    if (mockTimestamp) {
+      setTimestamp(mockTimestamp)
+      return
+    }
+
+    setTimestamp(Date.now())
+    const interval = setInterval(() => {
+      setTimestamp(Date.now())
+    }, 1000)
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        setTimestamp(Date.now())
       }
+    }
+
+    window.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('focus', handleVisibilityChange)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', handleVisibilityChange)
     }
   }, [mockTimestamp])
 
-  const getSnapshot = () => mockTimestamp ?? Date.now()
-  const getServerSnapshot = () => mockTimestamp ?? Date.now()
-
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+  return timestamp
 }
 
 export function MobileLaunchCountdown({
@@ -69,23 +74,18 @@ export function MobileLaunchCountdown({
   className,
 }: MobileLaunchCountdownProps) {
   const router = useRouter()
-  const { user } = useAuth()
   const accessibleId = useId()
 
   const currentTimestamp = useCurrentTimestamp(mockCurrentTimestampMs)
 
   // Cálculo da contagem regressiva em tempo real
   const timeRemaining: TimeRemaining = useMemo(() => {
-    const timestampToUse = currentTimestamp > 0 ? currentTimestamp : Date.now()
+    const timestampToUse = currentTimestamp > 0 ? currentTimestamp : (typeof window !== 'undefined' ? Date.now() : config.targetTimestampMs)
     return calculateTimeRemaining(config.targetTimestampMs, timestampToUse)
   }, [config.targetTimestampMs, currentTimestamp])
 
   const handleStartGame = (e: React.MouseEvent, route: string = '/jogar') => {
     e.preventDefault()
-    if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(route)}`)
-      return
-    }
     router.push(route)
   }
 

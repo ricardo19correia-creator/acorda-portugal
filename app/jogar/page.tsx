@@ -10,18 +10,7 @@ import { auth } from '@/lib/firebase'
 import { Loader2 } from 'lucide-react'
 
 function JogarContainer() {
-  const router = useRouter()
   const searchParams = useSearchParams()
-  const { user, authResolved, authStatus } = useAuth()
-
-  // Redirecionamento seguro apenas quando a autenticação estiver formalmente resolvida como não autenticado
-  useEffect(() => {
-    if (authResolved && !user && !auth?.currentUser && authStatus === 'AUTH_UNAUTHENTICATED') {
-      const search = searchParams?.toString()
-      const currentUrl = search ? `/jogar?${search}` : '/jogar'
-      router.replace(`/entrar?redirect=${encodeURIComponent(currentUrl)}`)
-    }
-  }, [user, authResolved, authStatus, router, searchParams])
 
   const categoryParam =
     searchParams.get('cat') ||
@@ -67,27 +56,6 @@ function JogarContainer() {
       window.removeEventListener('storage', sync)
     }
   }, [])
-
-  // Durante a inicialização do Firebase Auth, renderiza um loading discreto sem mensagens alarmistas
-  if (!authResolved) {
-    return (
-      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4 text-white">
-        <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4 shadow-[0_0_20px_rgba(16,185,129,0.3)]" />
-        <p className="text-emerald-400 font-black uppercase tracking-wider text-sm">A carregar o Desafio Nacional...</p>
-        <p className="text-slate-400 text-xs mt-1">A preparar a tua sessão de jogo com segurança.</p>
-      </main>
-    )
-  }
-
-  // Se confirmado como não autenticado, aguarda transição para /entrar
-  if (!user && !auth?.currentUser) {
-    return (
-      <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-center p-4 text-white">
-        <Loader2 className="w-8 h-8 text-emerald-400 animate-spin mb-3" />
-        <p className="text-slate-300 text-sm font-medium">A aceder à autenticação...</p>
-      </main>
-    )
-  }
 
   return (
     <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">

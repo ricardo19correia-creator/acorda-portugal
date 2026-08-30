@@ -7,6 +7,7 @@ import { BackgroundFx } from '@/components/background-fx'
 import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
 import { GameHub } from '@/components/game-hub'
 import { QuizScreen } from '@/components/quiz/quiz-screen'
+import { safeRandomUUID } from '@/lib/utils'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -67,7 +68,7 @@ function QuizPageContent() {
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null)
 
-  const [generatedGameId] = useState(() => crypto.randomUUID())
+  const [generatedGameId] = useState(() => safeRandomUUID())
   const gameId = gameIdFromUrl ?? generatedGameId
 
   useEffect(() => {
