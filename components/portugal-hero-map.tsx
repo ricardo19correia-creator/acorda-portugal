@@ -12,7 +12,6 @@ import { useAuth } from '@/components/auth-provider'
 import { usePresence } from '@/components/presence-provider'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
-import { NPC_CATALOG } from '@/lib/npc-system/npc-catalog'
 import { subscribeRankings, computeDistrictStats } from '@/lib/rankings'
 
 export type HeroDistrictStat = {

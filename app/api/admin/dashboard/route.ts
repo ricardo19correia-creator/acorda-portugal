@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { verifyAdminRequest } from '@/lib/admin-auth'
 import { getAdminFirestore } from '@/lib/firebase-admin'
 import { QuestionRegistry } from '@/lib/question-system/registry'
-import { getActiveNpcs } from '@/lib/npc-system/npc-schedule-engine'
 
 export const dynamic = 'force-dynamic'
 
@@ -63,17 +62,14 @@ export async function GET(req: Request) {
       }
     }
 
-    const { npcCount } = getActiveNpcs(new Date(nowMs))
-    const totalVisibleOnline = onlineHumans + npcCount
-
     return NextResponse.json({
       success: true,
       data: {
         kpis: {
           totalUsers,
           onlineHumans,
-          npcOnline: npcCount,
-          totalVisibleOnline,
+          npcOnline: 0,
+          totalVisibleOnline: onlineHumans,
           activeMatchesCount,
           completedMatchesCount,
           totalQuestions: allQuestions.length,

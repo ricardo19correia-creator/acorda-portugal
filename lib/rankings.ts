@@ -2,7 +2,6 @@ import { collection, query, limit, getDocs, onSnapshot } from 'firebase/firestor
 import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getAvatarImage } from '@/lib/avatars'
-import { NPC_CATALOG } from '@/lib/npc-system/npc-catalog'
 
 export interface RankingPlayer {
   uid: string
@@ -20,8 +19,8 @@ export interface RankingPlayer {
   gamesPlayed?: number
   accuracyRate?: number
   pos?: number
-  playerType?: 'human' | 'npc'
-  isNpc?: boolean
+  playerType?: 'human'
+  isNpc?: false
   virtualMoney?: number
 }
 
@@ -60,19 +59,18 @@ export const ALL_DISTRICTS_LIST = [
 ]
 
 /**
- * Normaliza os dados de qualquer documento (publicProfiles ou botPlayers) para RankingPlayer
+ * Normaliza os dados de qualquer documento de jogador humano (publicProfiles) para RankingPlayer
  */
-export function mapDocToRankingPlayer(id: string, data: any, defaultType: 'human' | 'npc' = 'human'): RankingPlayer {
-  const isBot = Boolean(data.isNpc || data.playerType === 'npc' || defaultType === 'npc')
+export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
   // FONTE CANÓNICA ÚNICA: O nível é SEMPRE calculado matematicamente a partir do XP Total
   const levelInfo = calculateLevelProgress(xp)
   const level = levelInfo.currentLevel.level
   const rawName = (data.displayName || data.name || data.username || data.email?.split('@')[0] || '').trim()
-  const displayName = rawName || (isBot ? 'NPC Lusitano' : 'Jogador')
+  const displayName = rawName || 'Jogador'
   const district = (data.district || data.region || 'Portugal').trim()
   const photoURL = getAvatarImage(data.photoURL || data.avatar || data.avatarId || (data.equipped?.avatar) || null)
-  const title = data.equippedTitle || data.title || data.equipped?.title || levelInfo.currentLevel.title || (isBot ? `Competidor de ${district}` : 'Jogador Nacional')
+  const title = data.equippedTitle || data.title || data.equipped?.title || levelInfo.currentLevel.title || 'Jogador Nacional'
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
   const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
   const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + (data.losses || 0)))
@@ -94,48 +92,14 @@ export function mapDocToRankingPlayer(id: string, data: any, defaultType: 'human
     wins1v1,
     gamesPlayed,
     accuracyRate,
-    playerType: isBot ? 'npc' : 'human',
-    isNpc: isBot,
+    playerType: 'human',
+    isNpc: false,
     virtualMoney,
   }
 }
 
 /**
- * Retorna a lista canónica de NPCs/Bots formatada para o Ranking com XP e Níveis Oficiais
- */
-export function getNpcRankingPlayers(): RankingPlayer[] {
-  return NPC_CATALOG.map((npc) => {
-    const xp = typeof npc.xp === 'number' ? Math.max(0, npc.xp) : 0
-    const levelInfo = calculateLevelProgress(xp)
-    const level = levelInfo.currentLevel.level
-    const title = npc.title || levelInfo.currentLevel.title || `Competidor de ${npc.district}`
-
-    return {
-      uid: npc.npcId,
-      displayName: npc.displayName,
-      photoURL: npc.avatar,
-      district: npc.district,
-      region: npc.district,
-      xp,
-      level,
-      title,
-      equippedTitle: title,
-      equippedFrame: npc.equippedFrame,
-      isFounder: false,
-      wins1v1: npc.wins,
-      gamesPlayed: npc.wins + npc.losses,
-      accuracyRate: Math.round(((npc.accuracyRange[0] + npc.accuracyRange[1]) / 2) * 100),
-      playerType: 'npc',
-      isNpc: true,
-      virtualMoney: npc.virtualMoney,
-    }
-  })
-}
-
-/**
- * Calcula a agregação distrital de XP e Jogadores Ativos:
- * XP_Distrito = SUM(publicProfiles.xp) + SUM(botPlayers.xp)
- * Jogadores_Distrito = COUNT(humanos) + COUNT(bots)
+ * Calcula a agregação distrital de XP e Jogadores Humanos Ativos
  */
 export function computeDistrictStats(players: RankingPlayer[]): Map<string, DistrictAggregateStat> {
   const tempMap = new Map<string, {
@@ -164,14 +128,13 @@ export function computeDistrictStats(players: RankingPlayer[]): Map<string, Dist
     if (matched) {
       const cur = tempMap.get(matched)!
       const pXp = typeof p.xp === 'number' && !isNaN(p.xp) ? p.xp : 0
-      const isBot = Boolean(p.isNpc || p.playerType === 'npc')
       tempMap.set(matched, {
         players: cur.players + 1,
         xp: cur.xp + pXp,
-        humanPlayers: cur.humanPlayers + (isBot ? 0 : 1),
-        botPlayers: cur.botPlayers + (isBot ? 1 : 0),
-        humanXp: cur.humanXp + (isBot ? 0 : pXp),
-        botXp: cur.botXp + (isBot ? pXp : 0),
+        humanPlayers: cur.humanPlayers + 1,
+        botPlayers: 0,
+        humanXp: cur.humanXp + pXp,
+        botXp: 0,
       })
     }
   })
@@ -199,56 +162,26 @@ export function computeDistrictStats(players: RankingPlayer[]): Map<string, Dist
 }
 
 /**
- * Obter Top Geral ou por Distrito combinando Jogadores Reais (publicProfiles) e Bots (botPlayers / NPC_CATALOG)
+ * Obter Top Geral ou por Distrito exclusivamente com Jogadores Humanos Reais (publicProfiles)
  */
 export async function fetchRankings(
   districtFilter: string = 'all',
   mode: 'xp' | 'duelos' = 'xp',
-  queryLimit: number = 50,
-  includeNpcs: boolean = true
+  queryLimit: number = 50
 ): Promise<RankingPlayer[]> {
   const humanList: RankingPlayer[] = []
-  const firestoreBotsList: RankingPlayer[] = []
 
   try {
     const pubRef = collection(db, 'publicProfiles')
     const pubSnap = await getDocs(query(pubRef, limit(200)))
     pubSnap.docs.forEach((d) => {
-      humanList.push(mapDocToRankingPlayer(d.id, d.data(), 'human'))
+      humanList.push(mapDocToRankingPlayer(d.id, d.data()))
     })
   } catch (error) {
     console.warn('[RANKINGS] Erro ao carregar publicProfiles do Firestore:', error)
   }
 
-  if (includeNpcs) {
-    try {
-      const botsRef = collection(db, 'botPlayers')
-      const botsSnap = await getDocs(query(botsRef, limit(200)))
-      botsSnap.docs.forEach((d) => {
-        firestoreBotsList.push(mapDocToRankingPlayer(d.id, d.data(), 'npc'))
-      })
-    } catch (error) {
-      console.warn('[RANKINGS] Erro ao carregar botPlayers do Firestore:', error)
-    }
-  }
-
-  let list: RankingPlayer[] = []
-
-  if (includeNpcs) {
-    const fallbackNpcs = getNpcRankingPlayers()
-    const mergedMap = new Map<string, RankingPlayer>()
-
-    // 1. Fallback base de catálogo
-    fallbackNpcs.forEach((npc) => mergedMap.set(npc.uid, npc))
-    // 2. Documentos da coleção botPlayers do Firestore
-    firestoreBotsList.forEach((bot) => mergedMap.set(bot.uid, bot))
-    // 3. Jogadores humanos reais sobrepõem-se com prioridade máxima
-    humanList.forEach((human) => mergedMap.set(human.uid, human))
-
-    list = Array.from(mergedMap.values())
-  } else {
-    list = [...humanList]
-  }
+  let list = [...humanList]
 
   if (districtFilter !== 'all') {
     list = list.filter((p) => (p.district || p.region || '').toLowerCase() === districtFilter.toLowerCase())
@@ -264,35 +197,18 @@ export async function fetchRankings(
 }
 
 /**
- * Subscrição em Tempo Real aos Rankings combinando publicProfiles e botPlayers com agregação nos 20 distritos
+ * Subscrição em Tempo Real aos Rankings exclusivamente com Jogadores Humanos Reais (publicProfiles)
  */
 export function subscribeRankings(
   districtFilter: string = 'all',
   mode: 'xp' | 'duelos' = 'xp',
   callback: (players: RankingPlayer[]) => void,
-  queryLimit: number = 50,
-  includeNpcs: boolean = true
+  queryLimit: number = 50
 ): () => void {
-  const fallbackNpcs = includeNpcs ? getNpcRankingPlayers() : []
   let currentHumans: RankingPlayer[] = []
-  let currentBots: RankingPlayer[] = []
 
   const emitRankings = () => {
-    let list: RankingPlayer[] = []
-
-    if (includeNpcs) {
-      const mergedMap = new Map<string, RankingPlayer>()
-      // 1. Catálogo base
-      fallbackNpcs.forEach((npc) => mergedMap.set(npc.uid, npc))
-      // 2. Coleção botPlayers
-      currentBots.forEach((bot) => mergedMap.set(bot.uid, bot))
-      // 3. Perfis reais publicProfiles
-      currentHumans.forEach((human) => mergedMap.set(human.uid, human))
-
-      list = Array.from(mergedMap.values())
-    } else {
-      list = [...currentHumans]
-    }
+    let list = [...currentHumans]
 
     if (districtFilter !== 'all') {
       list = list.filter((p) => (p.district || p.region || '').toLowerCase() === districtFilter.toLowerCase())
@@ -316,17 +232,15 @@ export function subscribeRankings(
   emitRankings()
 
   let unsubPub: (() => void) | undefined
-  let unsubBots: (() => void) | undefined
 
   try {
-    // 1. Escutar publicProfiles
     const pubRef = collection(db, 'publicProfiles')
     unsubPub = onSnapshot(
       query(pubRef, limit(200)),
       (snapshot) => {
         currentHumans = []
         snapshot.docs.forEach((doc) => {
-          currentHumans.push(mapDocToRankingPlayer(doc.id, doc.data(), 'human'))
+          currentHumans.push(mapDocToRankingPlayer(doc.id, doc.data()))
         })
         emitRankings()
       },
@@ -338,31 +252,8 @@ export function subscribeRankings(
     console.warn('[RANKINGS] Erro no listener de publicProfiles:', e)
   }
 
-  if (includeNpcs) {
-    try {
-      // 2. Escutar botPlayers
-      const botsRef = collection(db, 'botPlayers')
-      unsubBots = onSnapshot(
-        query(botsRef, limit(200)),
-        (snapshot) => {
-          currentBots = []
-          snapshot.docs.forEach((doc) => {
-            currentBots.push(mapDocToRankingPlayer(doc.id, doc.data(), 'npc'))
-          })
-          emitRankings()
-        },
-        (err) => {
-          console.warn('[RANKINGS] botPlayers listener notice:', err)
-        }
-      )
-    } catch (e) {
-      console.warn('[RANKINGS] Erro no listener de botPlayers:', e)
-    }
-  }
-
   return () => {
     if (unsubPub) unsubPub()
-    if (unsubBots) unsubBots()
   }
 }
 

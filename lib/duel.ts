@@ -1039,57 +1039,6 @@ export async function submitDuelAnswer(
 
     let updatedOpponent = opponent ? { ...opponent } : null
 
-    // Se o adversário for NPC, sincronizar as respostas e progresso do NPC
-    const isOpponentNpc =
-      opponent &&
-      ((opponent as any).playerType === 'npc' ||
-        (opponent as any).isNpc === true ||
-        opponent.uid?.startsWith('npc_') ||
-        Boolean((opponent as any).simulation))
-
-    if (isOpponentNpc && updatedOpponent) {
-      const sim = (updatedOpponent as any).simulation
-      const simResults: any[] = sim?.questionResults || []
-
-      const targetIndex = Math.min(duel.questions.length, questionIndex + 1)
-      const npcAnswers: DuelAnswer[] = []
-      let npcScore = 0
-      let npcCorrectCount = 0
-
-      for (let i = 0; i < targetIndex; i++) {
-        const q = duel.questions[i]
-        const simQ = simResults[i]
-        const isNpcCorrect = simQ ? Boolean(simQ.isCorrect) : Math.random() > 0.35
-        const respTime = simQ ? Number(simQ.responseTimeSeconds) || 4.2 : 4.0
-        const pts = simQ ? Number(simQ.pointsAwarded) || (isNpcCorrect ? 100 : 0) : (isNpcCorrect ? 100 : 0)
-
-        if (isNpcCorrect) npcCorrectCount++
-        npcScore += pts
-
-        npcAnswers.push({
-          questionId: q.id,
-          questionIndex: i,
-          selectedOption: isNpcCorrect ? q.correct : ((['A', 'B', 'C', 'D'].find((k) => k !== q.correct) as any) || 'A'),
-          correctOption: q.correct,
-          isCorrect: isNpcCorrect,
-          status: isNpcCorrect ? 'CORRECT' : 'WRONG',
-          pointsAwarded: pts,
-          answeredAt: now - Math.round((targetIndex - i) * respTime * 1000),
-          timeSpentSeconds: respTime,
-        })
-      }
-
-      updatedOpponent.answers = npcAnswers
-      updatedOpponent.score = npcScore
-      updatedOpponent.correctCount = npcCorrectCount
-      updatedOpponent.currentQuestionIndex = targetIndex
-
-      if (isLastQuestion || targetIndex >= duel.questions.length) {
-        updatedOpponent.finished = true
-        updatedOpponent.finishedAt = now
-      }
-    }
-
     const opponentIsFinished = updatedOpponent ? updatedOpponent.finished : false
 
     if (player.finished && opponentIsFinished) {

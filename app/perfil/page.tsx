@@ -1430,16 +1430,6 @@ function PerfilContent() {
 
           {/* Botões de Ação Rápida no Perfil */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {(user?.email?.toLowerCase() === 'ricardo19correia@gmail.com' || (profile as any)?.role === 'owner' || (profile as any)?.role === 'admin') && (
-              <Link
-                href="/admin/controlo"
-                className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-600 hover:from-amber-400 hover:to-emerald-500 text-slate-950 font-black text-xs transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] active:scale-95 border border-amber-400/50"
-              >
-                <ShieldCheck className="w-4 h-4 text-slate-950" />
-                <span>Centro de Controlo</span>
-              </Link>
-            )}
-
             <button
               onClick={openEditModal}
               className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-600 transition-all shadow-md active:scale-95"

@@ -357,41 +357,13 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    // Contador de segundos de busca por adversário com fallback aos 10s
+    // Contador de segundos de busca por adversário humano real
     searchTimerRef.current = setInterval(() => {
       setSearchTimeSeconds((s) => {
         const next = s + 1
 
-        // Aos 10 segundos de busca sem humano: emparelhar com adversário do ecossistema
-        if (next >= 10 && (next === 10 || next === 13 || next === 16) && waitingRoomIdRef.current && !matchedDuelIdRef.current) {
-          const currentRoomId = waitingRoomIdRef.current
-          console.log('[Matchmaking] Fallback ativo: a requisitar adversário...', currentRoomId)
-          fetch('/api/duel/npc-match', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              roomId: currentRoomId,
-              userId: playerUid,
-              level: profileObj?.level || 1,
-              rating: profileObj?.rating || 1000,
-            }),
-          })
-            .then(async (res) => {
-              if (res.ok) {
-                const data = await res.json()
-                if (data.success && data.opponent && !matchedDuelIdRef.current && waitingRoomIdRef.current === currentRoomId) {
-                  console.log('[Matchmaking] Adversário confirmado via API:', data.opponent.displayName)
-                  handleMatchFound(currentRoomId, data.opponent)
-                }
-              }
-            })
-            .catch((err) => {
-              console.warn('[Matchmaking] NPC match notice:', err)
-            })
-        }
-
         if (next >= 30) {
-          console.log('[Matchmaking] Timeout de 30 segundos atingido!')
+          console.log('[Matchmaking] Tempo limite de 30 segundos atingido sem outros jogadores humanos na fila.')
           if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
           if (heartbeatIntervalRef.current) clearInterval(heartbeatIntervalRef.current)
           if (searchTimerRef.current) clearInterval(searchTimerRef.current)

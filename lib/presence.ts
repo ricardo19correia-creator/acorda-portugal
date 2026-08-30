@@ -1,7 +1,27 @@
-import { getNpcById, OFFICIAL_20_DISTRICTS } from '@/lib/npc-system/npc-catalog'
-import { getActiveNPCs } from '@/lib/npc-system/npc-schedule-engine'
+export const OFFICIAL_20_DISTRICTS = [
+  'Aveiro',
+  'Beja',
+  'Braga',
+  'Bragança',
+  'Castelo Branco',
+  'Coimbra',
+  'Évora',
+  'Faro',
+  'Guarda',
+  'Leiria',
+  'Lisboa',
+  'Portalegre',
+  'Porto',
+  'Santarém',
+  'Setúbal',
+  'Viana do Castelo',
+  'Vila Real',
+  'Viseu',
+  'Açores',
+  'Madeira',
+]
 
-export type PlayerType = 'human' | 'npc'
+export type PlayerType = 'human'
 export type UserActivityState = 'browsing' | 'playing' | 'duel' | 'ranking' | 'profile'
 
 export type PresenceData = {
@@ -17,7 +37,7 @@ export type PresenceData = {
   photoURL?: string | null
   isAnonymous?: boolean
   playerType?: PlayerType
-  isNpc?: boolean
+  isNpc?: false
   updatedAt?: unknown
 }
 
@@ -33,7 +53,7 @@ export type PublicActiveUser = {
   lastSeen: number
   isCurrentUser: boolean
   playerType: PlayerType
-  isNpc?: boolean
+  isNpc?: false
   elo?: number
   virtualMoney?: number
   title?: string
@@ -132,27 +152,22 @@ export function sanitizeDisplayName(name?: string | null, isGuest = false, distr
 }
 
 export function normalizeParticipant(raw: any, currentSessionOrUid?: string): Participant {
-  const isNpc = raw?.playerType === 'npc' || raw?.isNpc === true || String(raw?.id || raw?.uid || raw?.userId || raw?.npcId || '').includes('npc')
-  const playerType: PlayerType = isNpc ? 'npc' : 'human'
-  const rawId = String(raw?.id || raw?.uid || raw?.userId || raw?.npcId || 'anonymous')
-  const npcLookupKey = raw?.npcId || (rawId.startsWith('presence_') ? rawId.replace('presence_', '') : rawId)
-  const npcMeta = isNpc ? getNpcById(npcLookupKey) : null
-
+  const rawId = String(raw?.id || raw?.uid || raw?.userId || 'anonymous')
   const id = rawId
-  const name = sanitizeDisplayName(raw?.name || raw?.displayName || raw?.username || npcMeta?.displayName, !raw?.uid && !raw?.id, raw?.district || npcMeta?.district)
-  const avatar = raw?.avatar || raw?.photoURL || raw?.avatarUrl || npcMeta?.avatar || '/images/avatars/camoes-2050.jpg'
-  const xp = typeof raw?.xp === 'number' && !isNaN(raw.xp) && raw.xp > 0 ? raw.xp : (npcMeta?.xp || (isNpc ? 25000 : 0))
-  const level = typeof raw?.level === 'number' && raw.level > 0 ? raw.level : (npcMeta?.level || 1)
-  const district = raw?.district && String(raw.district).trim() ? String(raw.district).trim() : (npcMeta?.district || 'Lisboa')
+  const name = sanitizeDisplayName(raw?.name || raw?.displayName || raw?.username, !raw?.uid && !raw?.id, raw?.district)
+  const avatar = raw?.avatar || raw?.photoURL || raw?.avatarUrl || '/images/avatars/camoes-2050.jpg'
+  const xp = typeof raw?.xp === 'number' && !isNaN(raw.xp) && raw.xp > 0 ? raw.xp : 0
+  const level = typeof raw?.level === 'number' && raw.level > 0 ? raw.level : 1
+  const district = raw?.district && String(raw.district).trim() ? String(raw.district).trim() : 'Lisboa'
   const activity: UserActivityState = (raw?.activity as UserActivityState) || 'browsing'
   const activityLabel = raw?.activityLabel || ACTIVITY_LABELS[activity]?.label || 'A explorar'
-  const elo = typeof raw?.elo === 'number' ? raw.elo : typeof raw?.rating === 'number' ? raw.rating : (npcMeta?.rating || 1000)
-  const virtualMoney = typeof raw?.virtualMoney === 'number' ? raw.virtualMoney : npcMeta?.virtualMoney
-  const title = raw?.title || npcMeta?.title
+  const elo = typeof raw?.elo === 'number' ? raw.elo : typeof raw?.rating === 'number' ? raw.rating : 1000
+  const virtualMoney = typeof raw?.virtualMoney === 'number' ? raw.virtualMoney : 100
+  const title = raw?.title || 'Jogador Nacional'
 
   return {
     id,
-    playerType,
+    playerType: 'human',
     name,
     avatar,
     xp,
@@ -169,12 +184,7 @@ export function normalizeParticipant(raw: any, currentSessionOrUid?: string): Pa
 }
 
 /**
- * Função canónica pura que deriva o Estado Único da Comunidade
- * Invariantes rigorosas:
- * 1. totalVisibleOnline = humanOnline + npcOnline
- * 2. SUM(byDistrict.total) === totalVisibleOnline
- * 3. SUM(byDistrict.humans) === humanOnline
- * 4. SUM(byDistrict.npcs) === npcOnline
+ * Função canónica pura que deriva o Estado Único da Comunidade (100% Jogadores Humanos Reais)
  */
 export function getCommunityState(
   rawHumanDocs: PresenceData[] = [],
@@ -227,45 +237,17 @@ export function getCommunityState(
     })
   })
 
-  // 2. Obter NPCs ativos determinísticos para a hora atual em Europe/Lisbon
-  const { activeNpcs, npcCount } = getActiveNPCs(date)
-  let npcPlaying = 0
-  let npcDuel = 0
-
-  const npcOnlineList: PublicActiveUser[] = activeNpcs.map((npc) => {
-    if (npc.activity === 'playing') npcPlaying++
-    if (npc.activity === 'duel') npcDuel++
-
-    return {
-      id: npc.id,
-      username: npc.displayName,
-      district: npc.district,
-      level: npc.level,
-      xp: npc.xp,
-      activity: npc.activity,
-      activityLabel: npc.activityLabel,
-      photoURL: npc.photoURL,
-      lastSeen: npc.lastSeen,
-      isCurrentUser: false,
-      playerType: 'npc',
-      isNpc: true,
-      elo: npc.elo,
-      virtualMoney: npc.virtualMoney,
-      title: npc.title,
-    }
-  })
-
-  // 3. Totais canónicos
+  // 2. Totais canónicos 100% humanos
   const humanOnline = humanOnlineList.length
-  const npcOnline = npcCount
-  const totalVisibleOnline = humanOnline + npcOnline
+  const npcOnline = 0
+  const totalVisibleOnline = humanOnline
 
-  const playingCount = humanPlaying + npcPlaying
-  const duelCount = humanDuel + npcDuel
+  const playingCount = humanPlaying
+  const duelCount = humanDuel
   const activeMatches = playingCount + duelCount
 
-  // 4. Lista combinada de utilizadores ativos e participantes normalizados
-  const combinedUsers: PublicActiveUser[] = [...humanOnlineList, ...npcOnlineList]
+  // 3. Lista de utilizadores ativos e participantes normalizados
+  const combinedUsers: PublicActiveUser[] = [...humanOnlineList]
   combinedUsers.sort((a, b) => {
     if (a.isCurrentUser) return -1
     if (b.isCurrentUser) return 1
@@ -274,7 +256,7 @@ export function getCommunityState(
 
   const participants: Participant[] = combinedUsers.map((u) => normalizeParticipant(u, currentSessionOrUid))
 
-  // 5. Distribuição distrital rigorosa
+  // 4. Distribuição distrital rigorosa
   const byDistrict: Record<string, DistrictPresenceSummary> = {}
   for (const d of OFFICIAL_20_DISTRICTS) {
     byDistrict[d] = {
@@ -290,11 +272,7 @@ export function getCommunityState(
     const matched = OFFICIAL_20_DISTRICTS.find((d) => d.toLowerCase() === rawDist.toLowerCase()) || 'Lisboa'
 
     byDistrict[matched].total += 1
-    if (p.playerType === 'human') {
-      byDistrict[matched].humans += 1
-    } else {
-      byDistrict[matched].npcs += 1
-    }
+    byDistrict[matched].humans += 1
   })
 
   const byDistrictList = Object.values(byDistrict).sort(
@@ -303,14 +281,14 @@ export function getCommunityState(
 
   return {
     humanOnline,
-    npcOnline,
+    npcOnline: 0,
     totalVisibleOnline,
     participants,
     byDistrict,
     byDistrictList,
     activeMatches,
     humanVsHumanMatches: Math.floor(humanDuel / 2),
-    humanVsNpcMatches: Math.max(0, duelCount - Math.floor(humanDuel / 2) * 2),
+    humanVsNpcMatches: 0,
     playingCount,
     duelCount,
     activeUsers: combinedUsers,

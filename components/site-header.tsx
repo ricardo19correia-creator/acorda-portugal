@@ -76,11 +76,9 @@ export function SiteHeader() {
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: '📱 App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
-    ...(isOwner ? [{ label: 'Controlo 🛡️', href: '/admin/controlo', icon: ShieldCheck }] : []),
   ]
 
   const MOBILE_NAV = [
-    ...(isOwner ? [{ label: '🛡️ Centro de Controlo (Master)', href: '/admin/controlo', icon: ShieldCheck }] : []),
     { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
     { label: '📱 Descarregar App Android', href: '/download', icon: Smartphone },
     { label: '🇵🇹 Os Criadores (Comunidade)', href: '/criadores', icon: Sparkles },
