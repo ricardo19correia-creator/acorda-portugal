@@ -13,7 +13,11 @@ export async function GET(req: Request) {
   }
 
   try {
-    const db = getAdminFirestore()
+    let db: any = null
+    try {
+      const { getAdminFirestore } = await import('@/lib/firebase-admin')
+      db = getAdminFirestore()
+    } catch {}
 
     // 1. Contagem de Perguntas do Registry Oficial
     const registry = QuestionRegistry.getInstance()
@@ -21,33 +25,42 @@ export async function GET(req: Request) {
     const statsReport = registry.getSystemStats()
 
     // 2. Utilizadores e Presença
-    const usersCountSnap = await db.collection('users').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
-    const totalUsers = usersCountSnap.data().count
-
-    const nowMs = Date.now()
-    const presenceSnap = await db.collection('presence').get().catch(() => ({ size: 0, docs: [] }))
-    const onlineHumans = presenceSnap.docs.filter((d: any) => {
-      const data = d.data()
-      return data.online === true || (data.lastSeen && data.lastSeen >= nowMs - 45_000)
-    }).length
-
-    // 3. Partidas 1v1 em Curso e Concluídas
-    const activeDuelsSnap = await db.collection('duels').where('status', 'in', ['waiting', 'matched', 'playing']).get().catch(() => ({ size: 0, docs: [] }))
-    const activeMatchesCount = activeDuelsSnap.size
-
-    const completedGamesCountSnap = await db.collection('games').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
-    const completedMatchesCount = completedGamesCountSnap.data().count
-
-    // 4. Alertas Administrativos Ativos
-    const alertsSnap = await db.collection('adminAlerts').orderBy('timestamp', 'desc').limit(10).get().catch(() => ({ docs: [] }))
-    const alerts = alertsSnap.docs.map((d) => ({ id: d.id, ...d.data() }))
-
-    // 5. Configurações Globais
-    const settingsDoc = await db.collection('adminSettings').doc('global').get().catch(() => null)
-    const settings = settingsDoc?.exists ? settingsDoc.data() : {
+    let totalUsers = 0
+    let onlineHumans = 0
+    let activeMatchesCount = 0
+    let completedMatchesCount = 0
+    let alerts: any[] = []
+    let settings: any = {
       multiplayerEnabled: true,
       maintenanceMode: false,
       matchmakingWindowSeconds: 30,
+    }
+
+    const nowMs = Date.now()
+
+    if (db) {
+      const usersCountSnap = await db.collection('users').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
+      totalUsers = usersCountSnap.data().count
+
+      const presenceSnap = await db.collection('presence').get().catch(() => ({ size: 0, docs: [] }))
+      onlineHumans = presenceSnap.docs.filter((d: any) => {
+        const data = d.data()
+        return data.online === true || (data.lastSeen && data.lastSeen >= nowMs - 45_000)
+      }).length
+
+      const activeDuelsSnap = await db.collection('duels').where('status', 'in', ['waiting', 'matched', 'playing']).get().catch(() => ({ size: 0, docs: [] }))
+      activeMatchesCount = activeDuelsSnap.size
+
+      const completedGamesCountSnap = await db.collection('games').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
+      completedMatchesCount = completedGamesCountSnap.data().count
+
+      const alertsSnap = await db.collection('adminAlerts').orderBy('timestamp', 'desc').limit(10).get().catch(() => ({ docs: [] }))
+      alerts = alertsSnap.docs.map((d: any) => ({ id: d.id, ...d.data() }))
+
+      const settingsDoc = await db.collection('adminSettings').doc('global').get().catch(() => null)
+      if (settingsDoc?.exists) {
+        settings = settingsDoc.data()
+      }
     }
 
     const { npcCount } = getActiveNpcs(new Date(nowMs))

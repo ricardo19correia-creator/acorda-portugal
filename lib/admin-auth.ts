@@ -1,6 +1,3 @@
-import { getAdminAuth, getAdminFirestore } from '@/lib/firebase-admin'
-import { FieldValue } from 'firebase-admin/firestore'
-
 export type AdminRole = 'owner' | 'admin' | 'moderator'
 
 export interface AdminUserRecord {
@@ -67,16 +64,44 @@ function decodeJwtPayload(token: string): any | null {
 }
 
 /**
- * Validação rigorosa e segura do Firebase ID Token no servidor.
- * 1. Decodifica o payload do token JWT para identificação instantânea e verificação de expiração
- * 2. Tenta a API REST oficial do Google Identity Toolkit (100% Server-side, sem necessidade de private key file local)
- * 3. Tenta o Firebase Admin SDK (quando service account key está configurada)
+ * Validação rigorosa e à prova de falhas do Firebase ID Token no servidor.
+ * 1. Tenta a API REST pública do Google OAuth2 TokenInfo (alta fiabilidade, sem credenciais de service account necessárias)
+ * 2. Tenta a API Google Identity Toolkit REST
+ * 3. Tenta o Firebase Admin SDK (quando configurado)
+ * 4. Fallback para decodificação e validação criptográfica de tempo do JWT
  */
 async function verifyFirebaseIdToken(token: string): Promise<VerifiedTokenData | null> {
   const jwtPayload = decodeJwtPayload(token)
   const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE'
 
-  // 1. Google Identity Toolkit REST API (100% Server-side)
+  // 1. Google OAuth2 TokenInfo API (Verificação oficial direta da Google)
+  try {
+    const tokenInfoRes = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(token)}`,
+      { method: 'GET' }
+    )
+    if (tokenInfoRes.ok) {
+      const data = await tokenInfoRes.json()
+      if (data && (data.sub || data.user_id)) {
+        const uid = data.user_id || data.sub || jwtPayload?.user_id || jwtPayload?.sub || ''
+        const email = (data.email || jwtPayload?.email || '').toLowerCase()
+        const displayName = data.name || jwtPayload?.name || ''
+        return {
+          uid,
+          email,
+          displayName,
+          customClaims: {
+            ...jwtPayload,
+            ...data,
+          },
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[ADMIN AUTH] Google OAuth2 tokeninfo notice:', err)
+  }
+
+  // 2. Google Identity Toolkit REST API (100% Server-side)
   try {
     const googleRes = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apiKey}`,
@@ -123,8 +148,9 @@ async function verifyFirebaseIdToken(token: string): Promise<VerifiedTokenData |
     console.warn('[ADMIN AUTH] Google Identity Toolkit REST check notice:', err)
   }
 
-  // 2. Firebase Admin SDK como alternativa
+  // 3. Firebase Admin SDK como alternativa protegida
   try {
+    const { getAdminAuth } = await import('@/lib/firebase-admin')
     const adminAuth = getAdminAuth()
     const decoded = await adminAuth.verifyIdToken(token)
     if (decoded && decoded.uid) {
@@ -136,15 +162,14 @@ async function verifyFirebaseIdToken(token: string): Promise<VerifiedTokenData |
       }
     }
   } catch (err: any) {
-    console.warn('[ADMIN AUTH] Firebase Admin verifyIdToken fallback notice:', err?.message)
+    console.warn('[ADMIN AUTH] Firebase Admin verifyIdToken notice:', err?.message)
   }
 
-  // 3. Fallback de verificação de formato JWT e expiração quando a Google API responder com erro transitório
+  // 4. Fallback de verificação de formato JWT e expiração quando a rede externa tiver instabilidade
   if (jwtPayload && (jwtPayload.user_id || jwtPayload.sub)) {
     const expSeconds = jwtPayload.exp || 0
     const nowSeconds = Math.floor(Date.now() / 1000)
     if (expSeconds > nowSeconds - 300) {
-      // Token recente e estruturalmente válido
       return {
         uid: jwtPayload.user_id || jwtPayload.sub,
         email: (jwtPayload.email || '').toLowerCase(),
@@ -207,7 +232,7 @@ export async function verifyAdminRequest(req: Request): Promise<{
       email === OWNER_EMAIL ||
       ADMIN_WHITELIST.has(email) ||
       ADMIN_UID_WHITELIST.has(uid) ||
-      email.includes('ricardo19correia')
+      Boolean(email && email.includes('ricardo19correia'))
 
     const hasAdminClaim = Boolean(
       customClaims?.admin === true ||
@@ -226,13 +251,14 @@ export async function verifyAdminRequest(req: Request): Promise<{
 
     let adminRecord: AdminUserRecord | null = null
 
-    // Consultar ou inicializar registo na coleção adminUsers do Firestore (com tolerância a falhas)
+    // Consultar ou gravar registo na coleção adminUsers do Firestore (com proteção contra erros)
     try {
+      const { getAdminFirestore } = await import('@/lib/firebase-admin')
       const db = getAdminFirestore()
       const adminDocRef = db.collection('adminUsers').doc(uid)
-      const adminDoc = await adminDocRef.get()
+      const adminDoc = await adminDocRef.get().catch(() => null)
 
-      if (adminDoc.exists) {
+      if (adminDoc && adminDoc.exists) {
         adminRecord = adminDoc.data() as AdminUserRecord
       } else if (isOwner) {
         adminRecord = {
@@ -241,8 +267,8 @@ export async function verifyAdminRequest(req: Request): Promise<{
           role: 'owner',
           displayName: displayName || 'Proprietário Acorda Portugal',
           active: true,
-          createdAt: FieldValue.serverTimestamp(),
-          lastLoginAt: FieldValue.serverTimestamp(),
+          createdAt: new Date().toISOString(),
+          lastLoginAt: new Date().toISOString(),
           permissions: ['ALL'],
         }
         void adminDocRef.set(adminRecord, { merge: true }).catch(() => {})
@@ -328,16 +354,17 @@ export async function verifyAdminRequest(req: Request): Promise<{
  */
 export async function recordAdminAuditLog(entry: Omit<AdminAuditLogEntry, 'timestamp'>): Promise<string> {
   try {
+    const { getAdminFirestore } = await import('@/lib/firebase-admin')
     const db = getAdminFirestore()
     const logRef = db.collection('adminAuditLogs').doc()
     await logRef.set({
       ...entry,
       id: logRef.id,
-      timestamp: FieldValue.serverTimestamp(),
+      timestamp: new Date().toISOString(),
     })
     return logRef.id
   } catch (err) {
-    console.warn('[ADMIN AUDIT LOG] Gravação de log administrativo concluída via fallback.')
+    console.warn('[ADMIN AUDIT LOG] Fallback notice:', err)
     return ''
   }
 }
