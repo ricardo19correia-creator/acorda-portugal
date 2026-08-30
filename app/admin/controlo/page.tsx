@@ -63,9 +63,17 @@ export default function CentroDeControloPage() {
 
   // Validar Autorização no Servidor
   const verifyServerAuth = useCallback(async () => {
+    if (!user && authResolved) {
+      setIsCheckingAuth(false)
+      setAdminUser(null)
+      setAuthError('Sessão não iniciada. Por favor, inicia sessão com a tua conta autorizada de administrador.')
+      return
+    }
+
     const token = await getIdToken()
     if (!token) {
       setIsCheckingAuth(false)
+      setAdminUser(null)
       setAuthError('Sessão não iniciada. Por favor, inicia sessão com a conta autorizada.')
       return
     }
@@ -78,7 +86,7 @@ export default function CentroDeControloPage() {
         headers: { Authorization: `Bearer ${token}` },
       })
 
-      const data = await res.json()
+      const data = await res.json().catch(() => ({}))
       if (res.ok && data.authorized) {
         setAdminUser(data.adminUser)
         setAuthError(null)
@@ -87,11 +95,12 @@ export default function CentroDeControloPage() {
         setAuthError(data.error || 'Acesso Recusado (403). A tua conta não possui privilégios de administrador.')
       }
     } catch (e: any) {
-      setAuthError('Erro de conexão ao validar autorização administrativa.')
+      setAdminUser(null)
+      setAuthError(`Erro ao validar autorização administrativa: ${e?.message || 'Falha de comunicação'}`)
     } finally {
       setIsCheckingAuth(false)
     }
-  }, [getIdToken])
+  }, [getIdToken, user, authResolved])
 
   // Carregar Dados do Dashboard
   const refreshDashboardData = useCallback(async () => {
