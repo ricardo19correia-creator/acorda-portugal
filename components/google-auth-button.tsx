@@ -92,6 +92,21 @@ export default function GoogleAuthButton({
         return
       } catch (nativeErr: any) {
         console.error('[GOOGLE-AUTH] sign-in-error no fluxo nativo:', nativeErr)
+
+        // Se o plugin nativo reportar UNIMPLEMENTED, executar fallback automático para browser externo
+        if (nativeErr?.message && (nativeErr.message.includes('UNIMPLEMENTED') || nativeErr.message.includes('not implemented'))) {
+          console.warn('[GOOGLE-AUTH] Fallback para navegador do sistema devido a UNIMPLEMENTED...')
+          try {
+            const { Browser } = await import('@capacitor/browser')
+            const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
+            await Browser.open({ url: callbackUrl, windowName: '_system' })
+            setTimeout(() => setLoading(false), 3000)
+            return
+          } catch (bErr) {
+            console.error('[GOOGLE-AUTH] Erro no fallback de browser:', bErr)
+          }
+        }
+
         setLoading(false)
         if (nativeErr?.message && !nativeErr.message.includes('cancel') && !nativeErr.message.includes('user_cancel') && !nativeErr.message.includes('16:')) {
           const errorMsg = mapAuthErrorMessage(nativeErr)
