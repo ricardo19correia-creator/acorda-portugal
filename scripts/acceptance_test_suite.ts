@@ -100,8 +100,8 @@ async function runAcceptanceTests() {
   // --- TESTE 22: IDENTIFICADOR DA BUILD E ROTA DE VERSÃO ---
   console.log('\n--- TESTES 22 A 24: SEGURANÇA SERVER-SIDE, ATOMICIDADE E BUILD INFO ---')
   const buildInfoCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'build-info.ts'), 'utf8')
-  assert(buildInfoCode.includes("version: '1.0.0-rc.2'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.2')
-  assert(buildInfoCode.includes("commit: 'google-android-oauth-v2'"), 'lib/build-info.ts com commit hash google-android-oauth-v2')
+  assert(buildInfoCode.includes("version: '1.0.0-rc.3'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.3')
+  assert(buildInfoCode.includes("commit: 'master-final-repair-v3'"), 'lib/build-info.ts com commit hash master-final-repair-v3')
   const versionRouteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'version', 'route.ts'), 'utf8')
   assert(versionRouteCode.includes('BUILD_INFO'), 'app/api/version/route.ts exporta dados da build para diagnóstico')
 
