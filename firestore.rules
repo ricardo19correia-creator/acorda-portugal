@@ -62,11 +62,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Presença em tempo real (Conexões ativas)
-    match /presence/{presenceId} {
-      allow read, create, update, delete: if true;
-    }
-
     // Fila de Matchmaking 1v1
     match /duelQueue/{ticketId} {
       allow read, create, update, delete: if true;
@@ -115,14 +110,6 @@ service cloud.firestore {
     match /publicacoes_comunidade/{postId} {
       allow read, create, update: if true;
       allow delete: if isAuthenticated() || isAdmin();
-    }
-
-    // Presença em Tempo Real de Humanos (Heartbeat Realtime)
-    match /presence/{sessionId} {
-      allow read, write: if true;
-    }
-    match /active_presence/{clientId} {
-      allow read, write: if true;
     }
 
     // ==========================================

@@ -23,9 +23,8 @@ export async function GET(req: Request) {
     const allQuestions = registry.getAllQuestions()
     const statsReport = registry.getSystemStats()
 
-    // 2. Utilizadores e Presença
+    // 2. Utilizadores e Estatísticas de Jogo
     let totalUsers = 0
-    let onlineHumans = 0
     let activeMatchesCount = 0
     let completedMatchesCount = 0
     let alerts: any[] = []
@@ -35,17 +34,9 @@ export async function GET(req: Request) {
       matchmakingWindowSeconds: 30,
     }
 
-    const nowMs = Date.now()
-
     if (db) {
       const usersCountSnap = await db.collection('users').count().get().catch(() => ({ data: () => ({ count: 0 }) }))
       totalUsers = usersCountSnap.data().count
-
-      const presenceSnap = await db.collection('presence').get().catch(() => ({ size: 0, docs: [] }))
-      onlineHumans = presenceSnap.docs.filter((d: any) => {
-        const data = d.data()
-        return data.online === true || (data.lastSeen && data.lastSeen >= nowMs - 45_000)
-      }).length
 
       const activeDuelsSnap = await db.collection('duels').where('status', 'in', ['waiting', 'matched', 'playing']).get().catch(() => ({ size: 0, docs: [] }))
       activeMatchesCount = activeDuelsSnap.size
@@ -67,9 +58,6 @@ export async function GET(req: Request) {
       data: {
         kpis: {
           totalUsers,
-          onlineHumans,
-          npcOnline: 0,
-          totalVisibleOnline: onlineHumans,
           activeMatchesCount,
           completedMatchesCount,
           totalQuestions: allQuestions.length,

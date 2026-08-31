@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/firebase'
-import { doc, getDoc, updateDoc, arrayUnion, increment } from 'firebase/firestore'
+import { getAdminFirestore } from '@/lib/firebase-admin'
+import { FieldValue } from 'firebase-admin/firestore'
 import { OFFICIAL_EMOTES } from '@/src/data/emotes'
 import { SHOP_CATALOG } from '@/lib/economy'
+import { ARENA_SHOP_CATALOG } from '@/data/shopArenas'
+import { avatarShopList } from '@/data/shopAvatars'
+import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,75 +18,134 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'UID e itemId são obrigatórios.' }, { status: 400 })
     }
 
-    // Identificar o item no catálogo de emotes/taunts ou catálogo geral
+    // 1. Identificar o item nos catálogos oficiais
     let itemPrice = 0
     let itemCategory = category || 'taunts'
+    let isConsumable = false
 
-    if (itemId === 'PROV_010' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
+    if (itemId === 'HELP_005' || itemId === 'ajuda_publico' || itemId.startsWith('HELP_') || itemId.startsWith('consumable_')) {
+      isConsumable = true
+      itemCategory = 'ajudas'
+      itemPrice = itemId === 'HELP_005' || itemId === 'ajuda_publico' ? 250 : 150
+    } else if (itemId === 'PROV_010' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
       const foundEmote = OFFICIAL_EMOTES.find((e) => e.id === itemId)
-      if (foundEmote) {
-        itemPrice = foundEmote.price
-        itemCategory = 'taunts'
-      } else if (itemId === 'PROV_010') {
-        itemPrice = 250
-        itemCategory = 'taunts'
-      }
+      itemPrice = foundEmote ? foundEmote.price : 250
+      itemCategory = 'taunts'
     } else {
+      const foundArena = ARENA_SHOP_CATALOG.find((a) => a.id === itemId)
+      const foundAvatar = avatarShopList.find((av) => av.id === itemId)
+      const foundTitle = TITLE_SHOP_CATALOG.find((t) => t.id === itemId)
       const foundShop = SHOP_CATALOG.find((s) => s.id === itemId)
-      if (foundShop) {
+
+      if (foundArena) {
+        itemPrice = foundArena.priceValue || 500
+        itemCategory = 'arenas'
+      } else if (foundAvatar) {
+        itemPrice = foundAvatar.priceValue || 350
+        itemCategory = 'avatars'
+      } else if (foundTitle) {
+        itemPrice = foundTitle.priceValue || 200
+        itemCategory = 'titulos'
+      } else if (foundShop) {
         itemPrice = foundShop.price || 0
         itemCategory = foundShop.category || category || 'general'
       }
     }
 
-    const userRef = doc(db, 'users', uid)
-    const userSnap = await getDoc(userRef)
+    const db = getAdminFirestore()
+    const userRef = db.collection('users').doc(uid)
 
-    if (!userSnap.exists()) {
-      return NextResponse.json({ error: 'Utilizador não encontrado.' }, { status: 404 })
+    const transactionResult = await db.runTransaction(async (transaction) => {
+      const userSnap = await transaction.get(userRef)
+      if (!userSnap.exists) {
+        throw new Error('Utilizador não encontrado.')
+      }
+
+      const userData = userSnap.data() || {}
+      const currentCoins = typeof userData.coins === 'number' ? userData.coins : typeof userData.euros === 'number' ? userData.euros : 0
+
+      // Verificação de dupla compra para itens não consumíveis
+      if (!isConsumable) {
+        const invCategory = itemCategory === 'titulos' ? 'titles' : itemCategory
+        const existingInv = userData.inventory?.[invCategory] || []
+        if (Array.isArray(existingInv) && existingInv.includes(itemId)) {
+          return {
+            alreadyOwned: true,
+            itemId,
+            currentCoins,
+          }
+        }
+      }
+
+      if (currentCoins < itemPrice) {
+        throw new Error(`Saldo insuficiente. Precisas de €${itemPrice} e tens €${currentCoins}.`)
+      }
+
+      const newCoins = currentCoins - itemPrice
+      const updatePayload: Record<string, any> = {
+        coins: newCoins,
+        euros: newCoins,
+        updatedAt: FieldValue.serverTimestamp(),
+      }
+
+      if (isConsumable) {
+        updatePayload['inventory.helps'] = FieldValue.arrayUnion(itemId)
+        updatePayload[`inventory.${itemId}`] = FieldValue.increment(3)
+        updatePayload['inventory.utilities.publicVote'] = FieldValue.increment(3)
+        updatePayload['consumables.publicVote'] = FieldValue.increment(3)
+      } else if (itemCategory === 'taunts' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
+        updatePayload['inventory.taunts'] = FieldValue.arrayUnion(itemId)
+        updatePayload['inventory.emotes'] = FieldValue.arrayUnion(itemId)
+      } else if (itemCategory === 'avatars') {
+        updatePayload['inventory.avatars'] = FieldValue.arrayUnion(itemId)
+      } else if (itemCategory === 'arenas') {
+        updatePayload['inventory.arenas'] = FieldValue.arrayUnion(itemId)
+      } else if (itemCategory === 'titulos') {
+        updatePayload['inventory.titles'] = FieldValue.arrayUnion(itemId)
+      } else {
+        updatePayload[`inventory.${itemCategory}`] = FieldValue.arrayUnion(itemId)
+      }
+
+      transaction.update(userRef, updatePayload)
+
+      // Registar recibo atómico
+      const txRef = userRef.collection('transactions').doc()
+      transaction.set(txRef, {
+        id: txRef.id,
+        userId: uid,
+        type: 'spend',
+        amount: -itemPrice,
+        reason: `Compra de ${itemCategory}: ${itemId}`,
+        createdAt: FieldValue.serverTimestamp(),
+      })
+
+      return {
+        alreadyOwned: false,
+        itemId,
+        deducted: itemPrice,
+        remainingCoins: newCoins,
+      }
+    })
+
+    if (transactionResult.alreadyOwned) {
+      return NextResponse.json({
+        success: true,
+        message: 'Item já consta no teu inventário.',
+        itemId,
+        alreadyOwned: true,
+        remainingCoins: transactionResult.currentCoins,
+      })
     }
-
-    const userData = userSnap.data()
-    const currentCoins = typeof userData.coins === 'number' ? userData.coins : typeof userData.euros === 'number' ? userData.euros : 0
-
-    if (currentCoins < itemPrice) {
-      return NextResponse.json({ error: 'Saldo de € Acorda insuficiente.', currentCoins, required: itemPrice }, { status: 400 })
-    }
-
-    const updatePayload: Record<string, any> = {
-      coins: increment(-itemPrice),
-      euros: increment(-itemPrice),
-    }
-
-    if (itemId === 'HELP_005' || itemId === 'ajuda_publico') {
-      updatePayload['inventory.helps'] = arrayUnion('HELP_005')
-      updatePayload['inventory.HELP_005'] = increment(3)
-      updatePayload['inventory.utilities.publicVote'] = increment(3)
-      updatePayload['consumables.publicVote'] = increment(3)
-    } else if (itemCategory === 'taunts' || itemId.startsWith('PROV_') || itemId.startsWith('emote_')) {
-      updatePayload['inventory.taunts'] = arrayUnion(itemId)
-      updatePayload['inventory.emotes'] = arrayUnion(itemId)
-    } else if (itemCategory === 'avatars') {
-      updatePayload['inventory.avatars'] = arrayUnion(itemId)
-    } else if (itemCategory === 'arenas') {
-      updatePayload['inventory.arenas'] = arrayUnion(itemId)
-    } else if (itemCategory === 'titulos') {
-      updatePayload['inventory.titles'] = arrayUnion(itemId)
-    } else {
-      updatePayload[`inventory.${itemCategory}`] = arrayUnion(itemId)
-    }
-
-    await updateDoc(userRef, updatePayload)
 
     return NextResponse.json({
       success: true,
       message: `Item ${itemId} adquirido com sucesso por €${itemPrice}!`,
       itemId,
-      deducted: itemPrice,
-      remainingCoins: currentCoins - itemPrice,
+      deducted: transactionResult.deducted,
+      remainingCoins: transactionResult.remainingCoins,
     })
   } catch (error: any) {
     console.error('[API Buy-Item] Erro:', error)
-    return NextResponse.json({ error: error?.message || 'Erro ao processar compra.' }, { status: 500 })
+    return NextResponse.json({ error: error?.message || 'Erro ao processar compra.' }, { status: 400 })
   }
 }

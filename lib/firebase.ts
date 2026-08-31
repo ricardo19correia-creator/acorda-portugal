@@ -7,10 +7,12 @@ import {
   persistentMultipleTabManager,
   type Firestore,
 } from 'firebase/firestore'
+import { getDatabase, type Database } from 'firebase/database'
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE",
   authDomain: "desafio-nacional-5fe71.firebaseapp.com",
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "https://desafio-nacional-5fe71-default-rtdb.firebaseio.com",
   projectId: "desafio-nacional-5fe71",
   storageBucket: "desafio-nacional-5fe71.firebasestorage.app",
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "130539395859",
@@ -36,6 +38,8 @@ try {
 }
 
 export const db: Firestore = firestoreInstance
+
+export const rtdb: Database = getDatabase(app, firebaseConfig.databaseURL)
 
 export const googleProvider = new GoogleAuthProvider()
 googleProvider.setCustomParameters({ prompt: 'select_account' })

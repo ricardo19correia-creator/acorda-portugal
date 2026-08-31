@@ -4,7 +4,6 @@
 
 ### Coleções Públicas
 - `publicProfiles/{userId}`: Leitura pública (`allow read: if true;`), escrita apenas por utilizador autenticado proprietário do documento ou Admin.
-- `presence/{sessionId}`: Leitura e escrita públicas para registo do heartbeat de sessão de jogadores humanos.
 
 ### Coleções Privadas / Protegidas
 - `adminUsers/{adminId}`: Apenas o próprio administrador ou super-admins.

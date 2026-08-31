@@ -35,26 +35,3 @@ export interface NpcProfile {
   }
 }
 
-export interface ActiveNpcPresence {
-  id: string
-  npcId: string
-  playerType: 'npc'
-  isNpc: true
-  name: string
-  displayName: string
-  username: string
-  district: string
-  level: number
-  xp: number
-  elo: number
-  rating: number
-  activity: 'playing' | 'duel' | 'ranking' | 'profile' | 'browsing'
-  activityLabel: string
-  avatar: string
-  photoURL: string
-  lastSeen: number
-  isCurrentUser: false
-  title?: string
-  equippedFrame?: string
-  virtualMoney?: number
-}

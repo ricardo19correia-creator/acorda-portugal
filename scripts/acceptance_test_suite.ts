@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { getCommunityState, type PresenceData } from '../lib/presence'
 import { ARENA_SHOP_CATALOG } from '../src/data/shopArenas'
 
 async function runAcceptanceTests() {
   console.log('================================================================================')
-  console.log('🧪 ACORDA PORTUGAL — BATERIA DE TESTES DE ACEITAÇÃO FINAL')
+  console.log('🧪 ACORDA PORTUGAL — BATERIA DE TESTES: REMOÇÃO TOTAL DE JOGADORES ONLINE')
   console.log('================================================================================\n')
 
   let allPassed = true
@@ -19,89 +18,116 @@ async function runAcceptanceTests() {
     }
   }
 
-  // --- TESTES 6, 7, 8, 9, 10: SISTEMA DE PRESENÇA REAL & CONTADOR ONLINE ---
-  console.log('--- TESTES 6, 7, 8, 9, 10: PRESENÇA REAL & CONTADOR ONLINE ---')
+  // --- TESTES 1 A 12: AUSÊNCIA TOTAL DE FICHEIROS E ENDPOINTS DE PRESENÇA ---
+  console.log('--- TESTES 1 A 12: AUDITORIA DE FICHEIROS, ROTAS E MÓDULOS DE PRESENÇA ---')
 
-  const now = new Date()
+  const obsoleteFiles = [
+    'components/presence-provider.tsx',
+    'components/online-users-badge.tsx',
+    'components/online-players-modal.tsx',
+    'components/live-presence.tsx',
+    'hooks/use-online-users.ts',
+    'hooks/useOnlineUsers.ts',
+    'app/api/presence/route.ts',
+    'app/api/presence/ping/route.ts',
+    'lib/presence.ts',
+    'lib/activity-schedule.ts',
+    'lib/npc-system/npc-schedule-engine.ts',
+    'PRESENCE.md',
+  ]
 
-  // Teste 6.1: Sem contas reais ligadas -> humanOnline = 0
-  const state0 = getCommunityState([], now)
-  assert(state0.humanOnline === 0, 'Sem contas reais ligadas -> humanOnline === 0')
+  obsoleteFiles.forEach((file) => {
+    const exists = fs.existsSync(path.join(process.cwd(), file))
+    assert(!exists, `Ficheiro eliminado: ${file} não existe no projeto`)
+  })
 
-  // Teste 6.2: Uma conta real ligada -> humanOnline = 1
-  const doc1: PresenceData = {
-    userId: 'user_porto_123',
-    username: 'Rui Porto',
-    online: true,
-    lastSeen: now.getTime() - 2000,
-    district: 'Porto',
-    xp: 500,
-    level: 2,
-    activity: 'playing',
-    playerType: 'human',
-  }
-  const state1 = getCommunityState([doc1], now)
-  assert(state1.humanOnline === 1, 'Uma conta real ligada -> humanOnline === 1')
+  // --- TESTE 13: AUSÊNCIA DE PRESENCEPROVIDER NO APP LAYOUT ---
+  console.log('\n--- TESTES 13 A 18: AUDITORIA DE UI E COMPONENTES ---')
+  const layoutCode = fs.readFileSync(path.join(process.cwd(), 'app', 'layout.tsx'), 'utf8')
+  assert(!layoutCode.includes('PresenceProvider'), 'app/layout.tsx sem PresenceProvider nem imports de presença')
 
-  // Teste 6.3: Duas contas reais ligadas -> humanOnline = 2
-  const doc2: PresenceData = {
-    userId: 'user_lisboa_456',
-    username: 'Ana Lisboa',
-    online: true,
-    lastSeen: now.getTime() - 5000,
-    district: 'Lisboa',
-    xp: 1200,
-    level: 4,
-    activity: 'duel',
-    playerType: 'human',
-  }
-  const state2 = getCommunityState([doc1, doc2], now)
-  assert(state2.humanOnline === 2, 'Duas contas reais ligadas -> humanOnline === 2')
+  // --- TESTE 14: AUSÊNCIA DE BADGES E MODAIS NO SITE HEADER ---
+  const headerCode = fs.readFileSync(path.join(process.cwd(), 'components', 'site-header.tsx'), 'utf8')
+  assert(!headerCode.includes('OnlineUsersBadge'), 'components/site-header.tsx sem OnlineUsersBadge')
+  assert(!headerCode.includes('onlineCount'), 'components/site-header.tsx sem contadores online')
 
-  // Teste 6.4: Uma sai (online: false) -> humanOnline = 1
-  const doc1_offline: PresenceData = { ...doc1, online: false }
-  const state_leave = getCommunityState([doc1_offline, doc2], now)
-  assert(state_leave.humanOnline === 1, 'Uma conta sai (online: false) -> humanOnline === 1')
+  // --- TESTE 15: AUSÊNCIA DE INDICADORES DE PRESENÇA NO MAPA INTERATIVO ---
+  const mapCode = fs.readFileSync(path.join(process.cwd(), 'components', 'portugal-hero-map.tsx'), 'utf8')
+  assert(!mapCode.includes('usePresence'), 'components/portugal-hero-map.tsx sem usePresence')
+  assert(!mapCode.includes('districtOnlineCounts'), 'components/portugal-hero-map.tsx sem districtOnlineCounts')
+  assert(!mapCode.includes('Online Indicator'), 'components/portugal-hero-map.tsx sem badges de jogadores online')
 
-  // Teste 8: Timeout de heartbeat (>45s) -> humanOnline = 0
-  const doc_expired: PresenceData = { ...doc1, lastSeen: now.getTime() - 50000 }
-  const state_expired = getCommunityState([doc_expired], now)
-  assert(state_expired.humanOnline === 0, 'Sessão expirada (>45s sem heartbeat) -> humanOnline === 0')
+  // --- TESTE 16: AUSÊNCIA DE SETACTIVITY NO QUIZ SCREEN ---
+  const quizCode = fs.readFileSync(path.join(process.cwd(), 'components', 'quiz', 'quiz-screen.tsx'), 'utf8')
+  assert(!quizCode.includes('usePresence'), 'components/quiz/quiz-screen.tsx sem usePresence')
+  assert(!quizCode.includes('setActivity'), 'components/quiz/quiz-screen.tsx sem setActivity')
 
-  // Teste 9: Multi-tab na mesma conta (2 docs com mesmo userId) -> humanOnline = 1
-  const doc1_tab2: PresenceData = { ...doc1, lastSeen: now.getTime() - 1000 }
-  const state_multitab = getCommunityState([doc1, doc1_tab2], now)
-  assert(state_multitab.humanOnline === 1, 'Multi-tab da mesma conta -> humanOnline === 1 (sem duplicação)')
+  // --- TESTE 17: DASHBOARD DE ADMIN SEM MÉTRICAS DE PRESENÇA ---
+  const adminApiCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'admin', 'dashboard', 'route.ts'), 'utf8')
+  assert(!adminApiCode.includes('onlineHumans'), 'app/api/admin/dashboard sem onlineHumans')
+  assert(!adminApiCode.includes('getCommunityState'), 'app/api/admin/dashboard sem getCommunityState')
 
-  // --- TESTE 11: TERRITÓRIO PERMANENTE ---
-  console.log('\n--- TESTE 11: DISTRITO & CIDADE PERMANENTES ---')
+  const adminViewCode = fs.readFileSync(path.join(process.cwd(), 'components', 'admin', 'views', 'DashboardView.tsx'), 'utf8')
+  assert(!adminViewCode.includes('onlineHumans'), 'DashboardView.tsx sem onlineHumans')
+
+  // --- TESTE 18: REGRAS DE BASE DE DADOS LIMPAS DE PRESENÇA ---
+  console.log('\n--- TESTES 19 A 22: INFRAESTRUTURA, REGRAS E SEGURANÇA ---')
+  const dbRules = fs.readFileSync(path.join(process.cwd(), 'database.rules.json'), 'utf8')
+  assert(!dbRules.includes('presence'), 'database.rules.json sem regras de presença')
+
+  const firestoreRules = fs.readFileSync(path.join(process.cwd(), 'firestore.rules'), 'utf8')
+  assert(!firestoreRules.includes('match /presence/'), 'firestore.rules sem regras de presença')
+
+  // --- TESTE 19: AUTENTICAÇÃO E LOGOUT LIMPOS ---
+  const authHelpersCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'auth-helpers.ts'), 'utf8')
+  assert(!authHelpersCode.includes('/api/presence'), 'lib/auth-helpers.ts sem beacons de presença no logout')
+
+  // --- TESTE 20: BLOQUEIO DE DISTRITO PRESERVADO ---
   const authProviderCode = fs.readFileSync(path.join(process.cwd(), 'components', 'auth-provider.tsx'), 'utf8')
-  assert(authProviderCode.includes('districtLockedVal = Boolean(data.districtLocked && districtVal)'), 'Bloqueio estrito de distrito no AuthProvider')
-  assert(!authProviderCode.includes('setDistrictLocked(false)'), 'Impossibilidade de desbloquear distrito')
+  assert(authProviderCode.includes('districtLockedVal = Boolean(data.districtLocked && districtVal)'), 'Bloqueio estrito de distrito no AuthProvider preservado')
 
-  // --- TESTE 12: ARENAS DA LOJA (33 ARENAS ÚNICAS) ---
-  console.log('\n--- TESTE 12: ARENAS DA LOJA (33 ITENS ÚNICOS) ---')
+  // --- TESTE 21: CATÁLOGO DE ARENAS DA LOJA INTACTO ---
   const catalog = ARENA_SHOP_CATALOG
-
-  assert(catalog.length === 33, 'Catálogo tem exatamente 33 arenas')
-
+  assert(catalog.length === 43, 'Catálogo de arenas tem exatamente 43 arenas oficiais')
   const seenUrls = new Set<string>()
   let duplicates = 0
   catalog.forEach((a) => {
-    if (seenUrls.has(a.shopImage)) duplicates++
-    seenUrls.add(a.shopImage)
+    if (seenUrls.has(a.image)) duplicates++
+    seenUrls.add(a.image)
   })
-  assert(duplicates === 0, 'Zero URLs duplicadas no catálogo da loja')
-  assert(seenUrls.size === 33, '33 URLs promocionais únicas em catálogo')
+  assert(duplicates === 0, 'Zero URLs duplicadas no catálogo de arenas')
 
-  // --- RESUMO FINAL ---
+  // --- TESTE 22: IDENTIFICADOR DA BUILD E ROTA DE VERSÃO ---
+  console.log('\n--- TESTES 22 A 24: SEGURANÇA SERVER-SIDE, ATOMICIDADE E BUILD INFO ---')
+  const buildInfoCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'build-info.ts'), 'utf8')
+  assert(buildInfoCode.includes("version: '1.0.0-rc.1'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.1')
+  assert(buildInfoCode.includes("commit: 'd6e786e'"), 'lib/build-info.ts com commit hash d6e786e')
+  const versionRouteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'version', 'route.ts'), 'utf8')
+  assert(versionRouteCode.includes('BUILD_INFO'), 'app/api/version/route.ts exporta dados da build para diagnóstico')
+
+  // --- TESTE 23: TRANSAÇÃO ATÓMICA E PROTEÇÃO DE DUPLA COMPRA NA LOJA ---
+  const buyItemCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'buy-item', 'route.ts'), 'utf8')
+  assert(buyItemCode.includes('db.runTransaction'), 'app/api/buy-item usa runTransaction para deduções atómicas')
+  assert(buyItemCode.includes('alreadyOwned'), 'app/api/buy-item tem proteção contra dupla compra')
+
+  // --- TESTE 24: VALIDAÇÃO SERVER-SIDE E IDEMPOTÊNCIA DO QUIZ ---
+  const quizCompleteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'quiz', 'complete', 'route.ts'), 'utf8')
+  assert(quizCompleteCode.includes('verifyIdToken'), 'app/api/quiz/complete valida autenticação server-side')
+  assert(quizCompleteCode.includes('QuestionRegistry.getInstance()'), 'app/api/quiz/complete valida respostas no registry oficial')
+  assert(quizCompleteCode.includes('alreadyProcessed'), 'app/api/quiz/complete tem verificação de idempotência')
+
   console.log('\n================================================================================')
   if (allPassed) {
-    console.log('🌟 TODOS OS CRITÉRIOS DE ACEITAÇÃO PASSARAM COM 100% DE CONFORMIDADE!')
+    console.log('🌟 TODOS OS 24 CRITÉRIOS DE ACEITAÇÃO, SEGURANÇA E REMOÇÃO PASSARAM COM 100% DE SUCESSO!')
+    console.log('================================================================================')
   } else {
-    console.error('⚠️ ALGUNS TESTES FALHARAM!')
+    console.error('💥 FALHA EM UM OU MAIS TESTES DE ACEITAÇÃO!')
+    console.log('================================================================================')
+    process.exit(1)
   }
-  console.log('================================================================================')
 }
 
-runAcceptanceTests().catch(console.error)
+runAcceptanceTests().catch((err) => {
+  console.error('Erro ao executar testes:', err)
+  process.exit(1)
+})

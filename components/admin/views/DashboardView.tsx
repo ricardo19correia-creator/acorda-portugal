@@ -25,7 +25,6 @@ interface DashboardViewProps {
 export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) {
   const kpis = data?.kpis || {
     totalUsers: 0,
-    onlineHumans: 0,
     activeMatchesCount: 0,
     completedMatchesCount: 0,
     totalQuestions: 20050,
@@ -84,46 +83,44 @@ export function DashboardView({ data, onNavigateToModule }: DashboardViewProps) 
 
       {/* Grade de 4 Cartões KPI Principais */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Cartão 1: Jogadores Online & Humanos */}
+        {/* Cartão 1: Utilizadores Registados */}
         <div
           onClick={() => onNavigateToModule('jogadores')}
           className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-xl backdrop-blur-md hover:border-emerald-500/40 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Jogadores</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Utilizadores</span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 group-hover:scale-110 transition-transform">
               <Users className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="font-display text-2xl sm:text-3xl font-black text-white">
-              {kpis.onlineHumans}{' '}
-              <span className="text-xs font-normal text-slate-400">online agora</span>
+              {kpis.totalUsers}
             </div>
             <p className="mt-1 text-xs text-slate-400">
-              <strong className="text-emerald-400">{kpis.totalUsers}</strong> registados na base de dados
+              Contas registadas no Acorda Portugal
             </p>
           </div>
         </div>
 
-        {/* Cartão 2: Comunidade & Atividade 24h */}
+        {/* Cartão 2: Categorias Territoriais */}
         <div
-          onClick={() => onNavigateToModule('jogadores')}
+          onClick={() => onNavigateToModule('perguntas')}
           className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-xl backdrop-blur-md hover:border-cyan-500/40 transition-all cursor-pointer group"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Atividade 24h</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Categorias</span>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 group-hover:scale-110 transition-transform">
               <Sparkles className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-3">
             <div className="font-display text-2xl sm:text-3xl font-black text-white">
-              {kpis.totalVisibleOnline || (kpis.onlineHumans + (kpis.npcOnline || 0))}{' '}
-              <span className="text-xs font-normal text-slate-400">visíveis</span>
+              {kpis.categoriesCount || 18}
             </div>
             <p className="mt-1 text-xs text-slate-400">
-              <strong className="text-cyan-400">{kpis.npcOnline || 0}</strong> NPCs em atividade simulada
+              <strong className="text-cyan-400">{kpis.subcategoriesCount || 233}</strong> subtemas nacionais
             </p>
           </div>
         </div>

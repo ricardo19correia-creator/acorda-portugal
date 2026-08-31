@@ -9,7 +9,6 @@ import { Trophy, Flame, Sparkles, MapPin, Coins, Crown, Users, Zap, Compass, Shi
 import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { usePresence } from '@/components/presence-provider'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 import { subscribeRankings, computeDistrictStats } from '@/lib/rankings'
@@ -239,15 +238,6 @@ export const DISTRICT_THEMES: Record<string, DistrictTheme> = {
 
 export function PortugalHeroMap() {
   const { user, profile } = useAuth()
-  const { districtDistribution, activeUsers, onlineCount } = usePresence()
-
-  const districtOnlineCounts = useMemo(() => {
-    const counts: Record<string, number> = {}
-    for (const d of ALL_20_DISTRICTS) {
-      counts[d] = districtDistribution[d]?.total || 0
-    }
-    return counts
-  }, [districtDistribution])
 
   const [districtData, setDistrictData] = useState<Map<string, HeroDistrictStat>>(new Map())
   const [topPlayer, setTopPlayer] = useState<{ name: string; xp: number; level: number } | null>(null)
@@ -590,26 +580,18 @@ export function PortugalHeroMap() {
               })}
             </g>
 
-            {/* LAYER 3.5: ACCURATE COMPACT DISTRICT LABELS & LIVE ONLINE PRESENCE INDICATORS */}
+            {/* LAYER 3.5: ACCURATE COMPACT DISTRICT LABELS */}
             <g id="layer-district-labels" className="pointer-events-none">
               {mainlandDistricts.map((district) => {
-                const onlineCount = districtOnlineCounts[district.name] || 0
                 return (
                   <g
                     key={`label-${district.name}`}
                     transform={`translate(${district.centroid[0]}, ${district.centroid[1]})`}
                   >
-                    {/* Live Online Pulsing Radar Dot */}
-                    {onlineCount > 0 && (
-                      <g transform="translate(0, -9)">
-                        <circle r="7" fill="#10b981" opacity="0.45" className="animate-ping" />
-                        <circle r="3" fill="#34d399" stroke="#ffffff" strokeWidth="1" />
-                      </g>
-                    )}
                     {/* Compact Clean District Name */}
                     <text
                       x="0"
-                      y={onlineCount > 0 ? 6 : 1}
+                      y="1"
                       textAnchor="middle"
                       dominantBaseline="central"
                       className="font-display text-[8px] sm:text-[9px] font-bold fill-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] select-none uppercase tracking-wider"
@@ -688,32 +670,6 @@ export function PortugalHeroMap() {
                 >
                   9 ILHAS • REG. AUTÓNOMA
                 </text>
-
-                {/* Online Indicator Badge */}
-                <g transform="translate(180, 80)">
-                  <rect
-                    x="-32"
-                    y="-9"
-                    width="64"
-                    height="18"
-                    rx="9"
-                    fill="rgba(56, 189, 248, 0.2)"
-                    stroke="rgba(56, 189, 248, 0.6)"
-                    strokeWidth="1"
-                  />
-                  <circle cx="-20" cy="0" r="2.5" fill="#34d399" className="animate-pulse" />
-                  <text
-                    x="5"
-                    y="0.5"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#38bdf8"
-                    fontSize="8.5"
-                    fontWeight="800"
-                  >
-                    {districtOnlineCounts['Açores'] || 0} Online
-                  </text>
-                </g>
 
                 {/* 100% Centered 9 Islands without Overflow */}
                 <g
@@ -806,32 +762,6 @@ export function PortugalHeroMap() {
                   ARQUIPÉLAGO • REG. AUTÓNOMA
                 </text>
 
-                {/* Online Indicator Badge */}
-                <g transform="translate(160, 538)">
-                  <rect
-                    x="-32"
-                    y="-9"
-                    width="64"
-                    height="18"
-                    rx="9"
-                    fill="rgba(74, 222, 128, 0.2)"
-                    stroke="rgba(74, 222, 128, 0.6)"
-                    strokeWidth="1"
-                  />
-                  <circle cx="-20" cy="0" r="2.5" fill="#34d399" className="animate-pulse" />
-                  <text
-                    x="5"
-                    y="0.5"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#4ade80"
-                    fontSize="8.5"
-                    fontWeight="800"
-                  >
-                    {districtOnlineCounts['Madeira'] || 0} Online
-                  </text>
-                </g>
-
                 {/* 100% Centered Madeira & Porto Santo without Overflow */}
                 <g
                   transform="translate(112, 640) scale(1.05) translate(-104, -575)"
@@ -892,12 +822,6 @@ export function PortugalHeroMap() {
                   <span>Jogadores:</span>
                   <strong className="text-foreground font-bold">
                     {activeDistrictStat.players.toLocaleString('pt-PT')}
-                  </strong>
-                </div>
-                <div className="flex justify-between text-muted-foreground">
-                  <span>Em Direto:</span>
-                  <strong className="text-emerald-400 font-bold">
-                    {(districtOnlineCounts[activeDistrictStat.name] || 0)} Online
                   </strong>
                 </div>
                 <div className="flex justify-between text-muted-foreground">

@@ -22,7 +22,6 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { useEconomy } from '@/context/economy-context'
-import { usePresence } from '@/components/presence-provider'
 import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
 import {
@@ -300,7 +299,6 @@ export function QuizScreen({
 
   const { user, profile, authResolved } = useAuth()
   const { addCoins } = useEconomy()
-  const { setActivity } = usePresence()
   const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
 
   // Bloqueio Absoluto: Jogadores não autenticados não podem aceder ao Quiz
@@ -527,14 +525,6 @@ export function QuizScreen({
       window.removeEventListener('storage', syncStock)
     }
   }, [profile])
-
-  // Mark activity as 'playing' during quiz lifetime
-  useEffect(() => {
-    setActivity('playing', gameId)
-    return () => {
-      setActivity('browsing', null)
-    }
-  }, [gameId, setActivity])
 
   const total = quizQuestions?.length || 0
   const q = (quizQuestions && quizQuestions.length > step ? quizQuestions[step] : quizQuestions?.[0]) || null

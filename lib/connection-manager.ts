@@ -120,8 +120,8 @@ class ConnectionManager {
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 8000)
 
-      const res = await fetch('/api/presence/ping', {
-        method: 'GET',
+      const res = await fetch('/robots.txt', {
+        method: 'HEAD',
         cache: 'no-store',
         signal: controller.signal,
       })

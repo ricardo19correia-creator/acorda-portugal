@@ -109,13 +109,30 @@ export default function DeepLinkHandler() {
         }
 
         // 2. Tratar eventos de abertura de URL enquanto a aplicação está ativa / em background
-        const handle = await App.addListener('appUrlOpen', async (event) => {
+        const urlHandle = await App.addListener('appUrlOpen', async (event) => {
           console.log('[DEEP LINK - RESUME] Evento appUrlOpen recebido:', event.url)
           await processDeepLinkUrl(event.url, 'APP_URL_OPEN')
         })
 
+        // 3. Tratar botão físico / gestual de voltar (Android Back Button)
+        const backHandle = await App.addListener('backButton', ({ canGoBack }) => {
+          if (typeof window !== 'undefined') {
+            const path = window.location.pathname
+            if (path === '/' || path === '') {
+              App.minimizeApp().catch(() => App.exitApp())
+            } else {
+              if (window.history.length > 1) {
+                window.history.back()
+              } else {
+                router.push('/')
+              }
+            }
+          }
+        })
+
         removeListener = () => {
-          handle.remove()
+          urlHandle.remove()
+          backHandle.remove()
         }
       } catch (err) {
         // Não está em ambiente Capacitor ou plugin indisponível

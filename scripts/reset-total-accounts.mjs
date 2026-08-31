@@ -25,8 +25,6 @@ const COLLECTIONS_TO_PURGE = [
   'duels',
   'gameRooms',
   'duelQueue',
-  'presence',
-  'active_presence',
   'reports',
   'support_tickets',
   'purchases',

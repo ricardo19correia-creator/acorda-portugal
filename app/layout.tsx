@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/auth-provider'
 import { EconomyProvider } from '@/context/economy-context'
-import { PresenceProvider } from '@/components/presence-provider'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import { AudioProvider } from '@/context/AudioContext'
 import { FloatingBgmWidget } from '@/components/FloatingBgmWidget'
@@ -46,12 +45,10 @@ export default function RootLayout({
           <EconomyProvider>
             <DeepLinkHandler />
             <GameThemeProvider>
-              <PresenceProvider>
-                <AudioProvider>
-                  {children}
-                  <FloatingBgmWidget />
-                </AudioProvider>
-              </PresenceProvider>
+              <AudioProvider>
+                {children}
+                <FloatingBgmWidget />
+              </AudioProvider>
             </GameThemeProvider>
           </EconomyProvider>
         </AuthProvider>

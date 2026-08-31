@@ -24,7 +24,6 @@ import {
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
-import { OnlineUsersBadge } from '@/components/online-users-badge'
 import { PlayerAvatar } from '@/components/player-avatar'
 import AudioPlayer from '@/components/AudioPlayer'
 import { UserAvatar } from '@/components/user-avatar'
@@ -163,14 +162,12 @@ export function SiteHeader() {
         {/* Desktop Controls (lg+) */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <AudioPlayer />
-          <OnlineUsersBadge showMatches={true} />
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </div>
 
-        {/* Mobile / Tablet Controls (< lg): Som compacto, Online compacto e Botão Hambúrguer sempre visível */}
+        {/* Mobile / Tablet Controls (< lg): Som compacto e Botão Hambúrguer sempre visível */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 lg:hidden">
           <AudioPlayer variant="compact" />
-          <OnlineUsersBadge variant="compact" />
 
           {/* Botão Hambúrguer (Mobile) */}
           <button
@@ -204,7 +201,6 @@ export function SiteHeader() {
                 <span className="text-emerald-400 font-extrabold">€</span> {formattedCoins}
               </span>
             </Link>
-            <OnlineUsersBadge variant="default" className="w-full justify-center" />
           </div>
 
           {!authResolved ? (
