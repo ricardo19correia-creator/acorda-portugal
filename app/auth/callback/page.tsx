@@ -32,7 +32,7 @@ function AuthCallbackContent() {
           const idToken = await user.getIdToken(true)
 
           console.log('[AUTH CALLBACK] A obter credencial de transferência...')
-          let token = idToken
+          let deepLink = ''
           try {
             const res = await fetch('/api/auth/token', {
               method: 'POST',
@@ -41,13 +41,18 @@ function AuthCallbackContent() {
             })
             if (res.ok) {
               const data = await res.json()
-              token = data.customToken || data.idToken || idToken
+              if (data.customToken) {
+                deepLink = `acordaportugal://auth-callback?type=custom_token&token=${encodeURIComponent(data.customToken)}&target=${encodeURIComponent(targetParam)}`
+              } else {
+                deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
+              }
+            } else {
+              deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
             }
           } catch (fetchErr) {
-            console.warn('[AUTH CALLBACK] Fallback para idToken direto:', fetchErr)
+            console.warn('[AUTH CALLBACK] Fallback para google_credential idToken:', fetchErr)
+            deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
           }
-
-          const deepLink = `acordaportugal://auth-callback?token=${encodeURIComponent(token)}&target=${encodeURIComponent(targetParam)}`
 
           console.log('[AUTH CALLBACK] Deep link preparado:', deepLink)
           setDeepLinkUrl(deepLink)

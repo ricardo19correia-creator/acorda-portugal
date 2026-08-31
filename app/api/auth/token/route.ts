@@ -65,15 +65,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid or expired idToken' }, { status: 401 })
     }
 
-    // 3. Create custom token if possible
+    // 3. Criar Custom Token assinado pelo Admin SDK se a chave de serviço estiver configurada
     try {
       const app = getAdminApp()
       const adminAuth = getAuth(app)
       const customToken = await adminAuth.createCustomToken(uid)
-      return NextResponse.json({ customToken, uid })
+      return NextResponse.json({ customToken, uid, type: 'custom_token' })
     } catch (e) {
-      console.warn('Could not create custom token via admin SDK, returning idToken payload:', e)
-      return NextResponse.json({ customToken: null, idToken, uid })
+      console.warn('[API AUTH TOKEN] Chave privada não disponível para custom token; a devolver id_token:', e)
+      return NextResponse.json({ customToken: null, idToken, uid, type: 'id_token' })
     }
   } catch (error: any) {
     console.error('[API AUTH TOKEN ERROR]', error)

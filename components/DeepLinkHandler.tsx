@@ -35,42 +35,49 @@ export default function DeepLinkHandler() {
           return
         }
 
+        const type = parsed.searchParams.get('type') || (parsed.searchParams.has('idToken') ? 'google_credential' : 'custom_token')
         const token = parsed.searchParams.get('token')
+        const idToken = parsed.searchParams.get('idToken')
+        const accessToken = parsed.searchParams.get('accessToken')
+        const target = parsed.searchParams.get('target') || '/jogar'
 
-        if (!token || !token.trim()) {
+        const uniqueKey = token || idToken
+        if (!uniqueKey || !uniqueKey.trim()) {
           console.warn(`[DEEP LINK - ${source}] Nenhum token encontrado no URL:`, urlStr)
           return
         }
 
-        const cleanToken = token.trim()
-
-        // Evitar processar o mesmo token repetidamente em ciclo
-        if (processedTokensRef.current.has(cleanToken)) {
+        const cleanKey = uniqueKey.trim()
+        if (processedTokensRef.current.has(cleanKey)) {
           console.log(`[DEEP LINK - ${source}] Token já processado anteriormente.`)
           return
         }
-
-        processedTokensRef.current.add(cleanToken)
+        processedTokensRef.current.add(cleanKey)
 
         if (!auth) {
           console.error(`[DEEP LINK - ${source}] Firebase Auth não está inicializado.`)
           return
         }
 
-        console.log(`[DEEP LINK - ${source}] A autenticar no Firebase com o token recebido...`)
         let loggedUser = null
-        try {
-          const userCred = await signInWithCustomToken(auth, cleanToken)
-          loggedUser = userCred?.user
-        } catch (customErr: any) {
-          console.warn(`[DEEP LINK - ${source}] signInWithCustomToken falhou (${customErr?.code || customErr?.message}), a tentar via GoogleAuthProvider credential...`)
+        if (type === 'custom_token' && token) {
+          console.log(`[DEEP LINK - ${source}] A executar signInWithCustomToken com Custom Token...`)
+          try {
+            const userCred = await signInWithCustomToken(auth, token.trim())
+            loggedUser = userCred?.user
+          } catch (customErr: any) {
+            console.error(`[DEEP LINK - ${source}] Erro ao autenticar com Custom Token:`, customErr)
+          }
+        } else if ((type === 'google_credential' || idToken) && (idToken || token)) {
+          const rawIdToken = (idToken || token)!.trim()
+          console.log(`[DEEP LINK - ${source}] A executar GoogleAuthProvider.credential + signInWithCredential...`)
           try {
             const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
-            const credential = GoogleAuthProvider.credential(cleanToken)
+            const credential = GoogleAuthProvider.credential(rawIdToken, accessToken ? accessToken.trim() : undefined)
             const userCred = await signInWithCredential(auth, credential)
             loggedUser = userCred?.user
-          } catch (credErr) {
-            console.error(`[DEEP LINK - ${source}] Erro final ao autenticar com credential:`, credErr)
+          } catch (credErr: any) {
+            console.error(`[DEEP LINK - ${source}] Erro ao autenticar com Google Credential:`, credErr)
           }
         }
 
@@ -79,7 +86,6 @@ export default function DeepLinkHandler() {
           console.log(`[DEEP LINK - ${source}] Autenticação confirmada para UID:`, activeUser.uid)
           const { registerUserSession } = await import('@/lib/session-manager')
           await registerUserSession(activeUser)
-          const target = parsed.searchParams.get('target') || '/jogar'
           router.push(target)
         }
       } catch (err: any) {
