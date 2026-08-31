@@ -52,7 +52,7 @@ export default function GoogleAuthButton({
         await SocialLogin.initialize({
           google: {
             webClientId: '130539395859-webclient.apps.googleusercontent.com',
-            mode: 'offline',
+            mode: 'online',
           }
         }).catch((initErr) => {
           console.warn('[GOOGLE-AUTH] SocialLogin.initialize warning:', initErr)
