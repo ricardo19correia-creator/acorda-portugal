@@ -8,7 +8,12 @@ import { CheckCircle2, Smartphone, ArrowRight, RefreshCw } from 'lucide-react'
 import GoogleAuthButton from '@/components/google-auth-button'
 import { AppBackground } from '@/components/AppBackground'
 
+import { useSearchParams } from 'next/navigation'
+
 function AuthCallbackContent() {
+  const searchParams = useSearchParams()
+  const targetParam = searchParams.get('target') || '/jogar'
+
   const [status, setStatus] = useState<'checking' | 'requesting_token' | 'redirecting' | 'manual_login' | 'error'>('checking')
   const [deepLinkUrl, setDeepLinkUrl] = useState<string | null>(null)
   const [userEmail, setUserEmail] = useState<string | null>(null)
@@ -24,23 +29,25 @@ function AuthCallbackContent() {
 
         try {
           console.log('[AUTH CALLBACK] Utilizador autenticado no browser:', user.uid)
-          const idToken = await user.getIdToken()
+          const idToken = await user.getIdToken(true)
 
-          console.log('[AUTH CALLBACK] A pedir customToken ao endpoint /api/auth/token...')
-          const res = await fetch('/api/auth/token', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idToken }),
-          })
-
-          const data = await res.json()
-
-          if (!res.ok || (!data.customToken && !data.idToken)) {
-            throw new Error(data.error || 'Não foi possível gerar a credencial de transferência.')
+          console.log('[AUTH CALLBACK] A obter credencial de transferência...')
+          let token = idToken
+          try {
+            const res = await fetch('/api/auth/token', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ idToken }),
+            })
+            if (res.ok) {
+              const data = await res.json()
+              token = data.customToken || data.idToken || idToken
+            }
+          } catch (fetchErr) {
+            console.warn('[AUTH CALLBACK] Fallback para idToken direto:', fetchErr)
           }
 
-          const token = data.customToken || data.idToken
-          const deepLink = `acordaportugal://auth-callback?token=${encodeURIComponent(token)}`
+          const deepLink = `acordaportugal://auth-callback?token=${encodeURIComponent(token)}&target=${encodeURIComponent(targetParam)}`
 
           console.log('[AUTH CALLBACK] Deep link preparado:', deepLink)
           setDeepLinkUrl(deepLink)
@@ -63,7 +70,7 @@ function AuthCallbackContent() {
     })
 
     return () => unsubscribe()
-  }, [])
+  }, [targetParam])
 
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col items-center justify-center p-6 text-center text-white">

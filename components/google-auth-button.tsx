@@ -35,6 +35,38 @@ export default function GoogleAuthButton({
 
     const safeTarget = sanitizeRedirectUrl(redirectTarget, '/jogar')
 
+    // 1. Deteção de ambiente Capacitor Android (APK Nativo)
+    const isCapacitor =
+      typeof window !== 'undefined' &&
+      (((window as any).Capacitor && typeof (window as any).Capacitor.isNativePlatform === 'function' && (window as any).Capacitor.isNativePlatform()) ||
+        (window as any).Capacitor?.platform === 'android' ||
+        navigator.userAgent.includes('Capacitor') ||
+        window.location.protocol === 'capacitor:')
+
+    if (isCapacitor) {
+      console.log('[AUTH] APK Android Capacitor detectado. A iniciar Google Login via Browser do Sistema...')
+      const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
+      
+      try {
+        // No Capacitor, abrir no browser externo (Chrome) para contornar a restrição disallowed_useragent da Google
+        if (typeof window !== 'undefined') {
+          window.open(callbackUrl, '_system')
+        }
+      } catch (openErr) {
+        console.warn('[AUTH] Erro ao abrir browser do sistema:', openErr)
+        if (typeof window !== 'undefined') {
+          window.location.href = callbackUrl
+        }
+      }
+
+      // Desativar loading local após abertura para permitir novas tentativas se o utilizador regressar
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+      return
+    }
+
+    // 2. Fluxo Web Standard (Desktop e Mobile Web no Chrome / Safari / Firefox)
     try {
       if (!auth) {
         throw new Error('Firebase Auth não está inicializado.')
@@ -53,7 +85,7 @@ export default function GoogleAuthButton({
     } catch (error: any) {
       console.warn('[AUTH] Erro ou aviso durante autenticação Google:', error?.code, error?.message)
 
-      // Fallback para signInWithRedirect em caso de bloqueio de popup pelo navegador ou WebView
+      // Fallback para signInWithRedirect em caso de bloqueio de popup pelo navegador
       if (
         error?.code === 'auth/popup-blocked' ||
         error?.code === 'auth/cancelled-popup-request'

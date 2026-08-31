@@ -57,12 +57,30 @@ export default function DeepLinkHandler() {
           return
         }
 
-        console.log(`[DEEP LINK - ${source}] A executar signInWithCustomToken...`)
-        const userCred = await signInWithCustomToken(auth, cleanToken)
+        console.log(`[DEEP LINK - ${source}] A autenticar no Firebase com o token recebido...`)
+        let loggedUser = null
+        try {
+          const userCred = await signInWithCustomToken(auth, cleanToken)
+          loggedUser = userCred?.user
+        } catch (customErr: any) {
+          console.warn(`[DEEP LINK - ${source}] signInWithCustomToken falhou (${customErr?.code || customErr?.message}), a tentar via GoogleAuthProvider credential...`)
+          try {
+            const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
+            const credential = GoogleAuthProvider.credential(cleanToken)
+            const userCred = await signInWithCredential(auth, credential)
+            loggedUser = userCred?.user
+          } catch (credErr) {
+            console.error(`[DEEP LINK - ${source}] Erro final ao autenticar com credential:`, credErr)
+          }
+        }
 
-        if (userCred?.user || auth.currentUser) {
-          console.log(`[DEEP LINK - ${source}] Autenticação confirmada para UID:`, auth.currentUser?.uid)
-          router.push('/jogar')
+        const activeUser = loggedUser || auth.currentUser
+        if (activeUser) {
+          console.log(`[DEEP LINK - ${source}] Autenticação confirmada para UID:`, activeUser.uid)
+          const { registerUserSession } = await import('@/lib/session-manager')
+          await registerUserSession(activeUser)
+          const target = parsed.searchParams.get('target') || '/jogar'
+          router.push(target)
         }
       } catch (err: any) {
         console.error(`[DEEP LINK - ${source}] Erro ao processar autenticação via deep link:`, err)
