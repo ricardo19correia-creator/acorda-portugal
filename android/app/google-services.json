@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "130539395859",
+    "project_id": "desafio-nacional-5fe71",
+    "storage_bucket": "desafio-nacional-5fe71.firebasestorage.app",
+    "firebase_url": "https://desafio-nacional-5fe71-default-rtdb.firebaseio.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130539395859:android:e3b8153477ae41d6fe98e6",
+        "android_client_info": {
+          "package_name": "pt.acordaportugal.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130539395859-acordaportugal.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pt.acordaportugal.app",
+            "certificate_hash": "c9641ca171f27ef5486dee01c9871c08e8d0c88c"
+          }
+        },
+        {
+          "client_id": "130539395859-webclient.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,8 +4,6 @@ import { useEffect } from 'react'
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   type UserCredential,
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
@@ -173,9 +171,9 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
 }
 
 /**
- * Executa o Login Google via signInWithRedirect para suporte a WebView, APK e browsers com popups bloqueados
+ * Executa o Login Google via popup Web ou credencial nativa
  */
-export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void> => {
+export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<UserCredential | null> => {
   if (!auth) {
     console.error('[AUTH DIAGNOSTIC] Erro: auth está nulo ou indefinido.')
     throw new Error('Firebase Auth não está inicializado.')
@@ -185,8 +183,13 @@ export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void
   setPostLoginRedirectTarget(safeTarget)
 
   const provider = getGoogleAuthProvider()
-  console.log('[AUTH] A iniciar signInWithRedirect com Google para destino:', safeTarget)
-  await signInWithRedirect(auth, provider)
+  console.log('[AUTH] A iniciar signInWithPopup com Google para destino:', safeTarget)
+  const cred = await signInWithPopup(auth, provider)
+  if (cred?.user) {
+    const { registerUserSession } = await import('@/lib/session-manager')
+    await registerUserSession(cred.user)
+  }
+  return cred
 }
 
 /**
@@ -195,32 +198,13 @@ export const handleGoogleLogin = async (redirectTarget = '/jogar'): Promise<void
 export const performGoogleSignIn = handleGoogleLogin
 
 /**
- * Hook para processar o regresso da autenticação via redirect
+ * Hook seguro mantido para compatibilidade (sem chamadas a getRedirectResult que quebram sessionStorage)
  */
 export const useCheckRedirectLogin = (
-  defaultFallback = '/jogar',
-  onError?: (errorMsg: string) => void
+  _defaultFallback = '/jogar',
+  _onError?: (errorMsg: string) => void
 ) => {
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!auth) return
-
-    getRedirectResult(auth)
-      .then(async (result) => {
-        if (result?.user) {
-          console.log('[AUTH REDIRECT RESULT] Utilizador autenticado via redirect:', result.user.uid)
-          const { registerUserSession } = await import('@/lib/session-manager')
-          await registerUserSession(result.user)
-        }
-      })
-      .catch((error) => {
-        console.error('[AUTH REDIRECT ERROR] Erro no retorno do login Google:', error)
-        if (error && error?.code && onError) {
-          onError(mapAuthErrorMessage(error))
-        }
-      })
-  }, [onError])
+  // Bypassed: redirecionamentos OAuth obsoletos eliminados a favor de autenticação nativa e popups
 }
 
 /**

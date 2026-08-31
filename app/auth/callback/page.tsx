@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, Suspense } from 'react'
 import { auth } from '@/lib/firebase'
-import { onAuthStateChanged, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth'
+import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import Link from 'next/link'
 import { CheckCircle2, Smartphone, ArrowRight, Loader2, AlertCircle } from 'lucide-react'
 import { AppBackground } from '@/components/AppBackground'
@@ -34,19 +34,8 @@ function AuthCallbackContent() {
       console.log('[AUTH CALLBACK] Sucesso signInWithPopup:', userCred.user.uid)
     } catch (err: any) {
       console.warn('[AUTH CALLBACK] Erro signInWithPopup:', err?.code, err?.message)
-      if (err?.code === 'auth/popup-blocked' || err?.code === 'auth/cancelled-popup-request') {
-        try {
-          if (!auth) return
-          const provider = getGoogleAuthProvider()
-          await signInWithRedirect(auth, provider)
-          return
-        } catch (redirErr) {
-          console.error('[AUTH CALLBACK] Erro signInWithRedirect:', redirErr)
-        }
-      }
-
       setIsSigningIn(false)
-      if (err?.code !== 'auth/popup-closed-by-user') {
+      if (err?.code !== 'auth/popup-closed-by-user' && err?.code !== 'auth/cancelled-popup-request') {
         setErrorDetails(mapAuthErrorMessage(err))
       }
     }

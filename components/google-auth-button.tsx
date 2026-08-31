@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
 import {
   getGoogleAuthProvider,
@@ -45,25 +45,60 @@ export default function GoogleAuthButton({
 
     if (isCapacitor) {
       console.log('[GOOGLE-AUTH] platform: Capacitor Android')
-      console.log('[GOOGLE-AUTH] starting browser-open flow')
-      const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
+      console.log('[GOOGLE-AUTH] starting native Google Sign-In with SocialLogin + signInWithCredential')
       
       try {
-        const { Browser } = await import('@capacitor/browser')
-        await Browser.open({ url: callbackUrl, windowName: '_system' })
-        console.log('[GOOGLE-AUTH] browser-open successful')
-      } catch (browserErr) {
-        console.warn('[GOOGLE-AUTH] @capacitor/browser error, trying window.open fallback:', browserErr)
-        if (typeof window !== 'undefined') {
-          window.open(callbackUrl, '_system')
-        }
-      }
+        const { SocialLogin } = await import('@capgo/capacitor-social-login')
+        await SocialLogin.initialize({
+          google: {
+            webClientId: '130539395859-webclient.apps.googleusercontent.com',
+            mode: 'offline',
+          }
+        }).catch((initErr) => {
+          console.warn('[GOOGLE-AUTH] SocialLogin.initialize warning:', initErr)
+        })
 
-      // Desativar loading local após abertura para permitir novas tentativas se o utilizador regressar
-      setTimeout(() => {
+        console.log('[GOOGLE-AUTH] A solicitar conta Google nativa...')
+        const loginRes: any = await SocialLogin.login({
+          provider: 'google',
+          options: {
+            scopes: ['email', 'profile']
+          }
+        })
+
+        console.log('[GOOGLE-AUTH] Resposta nativa recebida:', loginRes)
+        const idToken = loginRes?.result?.idToken || loginRes?.idToken || loginRes?.result?.token
+        const accessToken = loginRes?.result?.accessToken?.token || (typeof loginRes?.result?.accessToken === 'string' ? loginRes.result.accessToken : undefined)
+
+        if (!idToken) {
+          throw new Error('Google Sign-In não retornou um ID token válido.')
+        }
+
+        if (!auth) {
+          throw new Error('Firebase Auth não está inicializado.')
+        }
+
+        console.log('[GOOGLE-AUTH] credential-created: A converter ID token em credencial Firebase...')
+        const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
+        const credential = GoogleAuthProvider.credential(idToken, accessToken)
+
+        console.log('[GOOGLE-AUTH] A autenticar no Firebase com signInWithCredential...')
+        const userCred = await signInWithCredential(auth, credential)
+
+        console.log('[GOOGLE-AUTH] sign-in-success: UID autenticado:', userCred.user.uid)
+        await registerUserSession(userCred.user)
+        const destination = getPostLoginRedirectTarget(safeTarget)
+        router.push(destination)
+        return
+      } catch (nativeErr: any) {
+        console.error('[GOOGLE-AUTH] sign-in-error no fluxo nativo:', nativeErr)
         setLoading(false)
-      }, 3000)
-      return
+        if (nativeErr?.message && !nativeErr.message.includes('cancel') && !nativeErr.message.includes('user_cancel') && !nativeErr.message.includes('16:')) {
+          const errorMsg = mapAuthErrorMessage(nativeErr)
+          if (onError) onError(errorMsg)
+        }
+        return
+      }
     }
 
     // 2. Fluxo Web Standard (Desktop e Mobile Web no Chrome / Safari / Firefox)
@@ -83,26 +118,9 @@ export default function GoogleAuthButton({
       const destination = getPostLoginRedirectTarget(safeTarget)
       router.push(destination)
     } catch (error: any) {
-      console.warn('[AUTH] Erro ou aviso durante autenticação Google:', error?.code, error?.message)
-
-      // Fallback para signInWithRedirect em caso de bloqueio de popup pelo navegador
-      if (
-        error?.code === 'auth/popup-blocked' ||
-        error?.code === 'auth/cancelled-popup-request'
-      ) {
-        try {
-          console.log('[AUTH] Popup bloqueado ou cancelado. A executar fallback para signInWithRedirect...')
-          const provider = getGoogleAuthProvider()
-          await signInWithRedirect(auth, provider)
-          return
-        } catch (redirectErr: any) {
-          console.error('[AUTH] Erro no fallback signInWithRedirect:', redirectErr)
-        }
-      }
-
+      console.warn('[AUTH] Erro durante autenticação Google:', error?.code, error?.message)
       setLoading(false)
-
-      if (error?.code !== 'auth/popup-closed-by-user') {
+      if (error?.code !== 'auth/popup-closed-by-user' && error?.code !== 'auth/cancelled-popup-request') {
         const errorMsg = mapAuthErrorMessage(error)
         if (onError) onError(errorMsg)
       }
