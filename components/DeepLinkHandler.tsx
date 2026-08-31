@@ -15,7 +15,7 @@ export default function DeepLinkHandler() {
     const processDeepLinkUrl = async (urlStr: string | null | undefined, source: string) => {
       if (!urlStr || typeof urlStr !== 'string') return
 
-      console.log(`[DEEP LINK - ${source}] A processar URL:`, urlStr)
+      console.log(`[GOOGLE-AUTH] callback-received (source: ${source})`, urlStr)
 
       try {
         if (!urlStr.includes('auth-callback') && !urlStr.startsWith('acordaportugal://')) {
@@ -31,7 +31,7 @@ export default function DeepLinkHandler() {
           parsed.pathname.includes('auth-callback')
 
         if (!isAuthCallback) {
-          console.warn(`[DEEP LINK - ${source}] Host/Path não corresponde a auth-callback:`, urlStr)
+          console.warn(`[GOOGLE-AUTH] Host/Path não corresponde a auth-callback:`, urlStr)
           return
         }
 
@@ -43,53 +43,64 @@ export default function DeepLinkHandler() {
 
         const uniqueKey = token || idToken
         if (!uniqueKey || !uniqueKey.trim()) {
-          console.warn(`[DEEP LINK - ${source}] Nenhum token encontrado no URL:`, urlStr)
+          console.warn(`[GOOGLE-AUTH] Nenhum token encontrado no URL:`, urlStr)
           return
         }
 
         const cleanKey = uniqueKey.trim()
         if (processedTokensRef.current.has(cleanKey)) {
-          console.log(`[DEEP LINK - ${source}] Token já processado anteriormente.`)
+          console.log(`[GOOGLE-AUTH] Token já processado anteriormente.`)
           return
         }
         processedTokensRef.current.add(cleanKey)
 
         if (!auth) {
-          console.error(`[DEEP LINK - ${source}] Firebase Auth não está inicializado.`)
+          console.error(`[GOOGLE-AUTH] sign-in-error: Firebase Auth não está inicializado.`)
           return
         }
 
         let loggedUser = null
         if (type === 'custom_token' && token) {
-          console.log(`[DEEP LINK - ${source}] A executar signInWithCustomToken com Custom Token...`)
+          console.log(`[GOOGLE-AUTH] credential-created: A autenticar com Custom Token...`)
           try {
             const userCred = await signInWithCustomToken(auth, token.trim())
             loggedUser = userCred?.user
           } catch (customErr: any) {
-            console.error(`[DEEP LINK - ${source}] Erro ao autenticar com Custom Token:`, customErr)
+            console.error(`[GOOGLE-AUTH] sign-in-error: Erro com Custom Token:`, customErr)
           }
         } else if ((type === 'google_credential' || idToken) && (idToken || token)) {
           const rawIdToken = (idToken || token)!.trim()
-          console.log(`[DEEP LINK - ${source}] A executar GoogleAuthProvider.credential + signInWithCredential...`)
+          console.log(`[GOOGLE-AUTH] credential-created: A autenticar com Google Credential...`)
           try {
             const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
             const credential = GoogleAuthProvider.credential(rawIdToken, accessToken ? accessToken.trim() : undefined)
             const userCred = await signInWithCredential(auth, credential)
             loggedUser = userCred?.user
           } catch (credErr: any) {
-            console.error(`[DEEP LINK - ${source}] Erro ao autenticar com Google Credential:`, credErr)
+            console.error(`[GOOGLE-AUTH] sign-in-error: Erro com Google Credential:`, credErr)
           }
         }
 
         const activeUser = loggedUser || auth.currentUser
         if (activeUser) {
-          console.log(`[DEEP LINK - ${source}] Autenticação confirmada para UID:`, activeUser.uid)
+          console.log(`[GOOGLE-AUTH] sign-in-success: Autenticação confirmada para UID:`, activeUser.uid)
+          
+          // Fechar a janela do browser nativo se estiver aberta
+          try {
+            const { Browser } = await import('@capacitor/browser')
+            await Browser.close()
+          } catch (bErr) {
+            // Browser já fechado ou não aplicável
+          }
+
           const { registerUserSession } = await import('@/lib/session-manager')
           await registerUserSession(activeUser)
           router.push(target)
+        } else {
+          console.error(`[GOOGLE-AUTH] sign-in-error: Falha ao obter utilizador ativo.`)
         }
       } catch (err: any) {
-        console.error(`[DEEP LINK - ${source}] Erro ao processar autenticação via deep link:`, err)
+        console.error(`[GOOGLE-AUTH] sign-in-error: Erro ao processar deep link:`, err)
       }
     }
 

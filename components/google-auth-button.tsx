@@ -44,25 +44,25 @@ export default function GoogleAuthButton({
         window.location.protocol === 'capacitor:')
 
     if (isCapacitor) {
-      console.log('[AUTH] APK Android Capacitor detectado. A iniciar Google Login via Browser do Sistema...')
+      console.log('[GOOGLE-AUTH] platform: Capacitor Android')
+      console.log('[GOOGLE-AUTH] starting browser-open flow')
       const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
       
       try {
-        // No Capacitor, abrir no browser externo (Chrome) para contornar a restrição disallowed_useragent da Google
+        const { Browser } = await import('@capacitor/browser')
+        await Browser.open({ url: callbackUrl, windowName: '_system' })
+        console.log('[GOOGLE-AUTH] browser-open successful')
+      } catch (browserErr) {
+        console.warn('[GOOGLE-AUTH] @capacitor/browser error, trying window.open fallback:', browserErr)
         if (typeof window !== 'undefined') {
           window.open(callbackUrl, '_system')
-        }
-      } catch (openErr) {
-        console.warn('[AUTH] Erro ao abrir browser do sistema:', openErr)
-        if (typeof window !== 'undefined') {
-          window.location.href = callbackUrl
         }
       }
 
       // Desativar loading local após abertura para permitir novas tentativas se o utilizador regressar
       setTimeout(() => {
         setLoading(false)
-      }, 2000)
+      }, 3000)
       return
     }
 
