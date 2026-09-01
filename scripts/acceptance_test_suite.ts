@@ -100,8 +100,8 @@ async function runAcceptanceTests() {
   // --- TESTE 22: IDENTIFICADOR DA BUILD E ROTA DE VERSÃO ---
   console.log('\n--- TESTES 22 A 24: SEGURANÇA SERVER-SIDE, ATOMICIDADE E BUILD INFO ---')
   const buildInfoCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'build-info.ts'), 'utf8')
-  assert(buildInfoCode.includes("version: '1.0.0-rc.8'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.8')
-  assert(buildInfoCode.includes("commit: 'release-rc8-clean'"), 'lib/build-info.ts com commit hash release-rc8-clean')
+  assert(buildInfoCode.includes("version: '1.0.0-rc.9'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.9')
+  assert(buildInfoCode.includes("commit: 'forensic-session-v9'"), 'lib/build-info.ts com commit hash forensic-session-v9')
   const versionRouteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'version', 'route.ts'), 'utf8')
   assert(versionRouteCode.includes('BUILD_INFO'), 'app/api/version/route.ts exporta dados da build para diagnóstico')
 

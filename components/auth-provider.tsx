@@ -473,6 +473,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 3. Listener Principal de Autenticação Firebase (Single Source of Truth)
   useEffect(() => {
+    console.log('[AUTH][STATE] loading')
     console.log('[AUTH] A inicializar listener onAuthStateChanged do Firebase...')
 
     const unsubscribeAuth = onAuthStateChanged(
@@ -483,10 +484,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(currentAuthUser)
 
         if (currentAuthUser) {
+          console.log('[AUTH][STATE] authenticated uid=', currentAuthUser.uid, 'email=', currentAuthUser.email || 'N/A')
           setAuthStatus('AUTHENTICATED')
           setAuthInitializationError(null)
           subscribeToUserProfile(currentAuthUser)
         } else {
+          console.log('[AUTH][STATE] unauthenticated')
           // Utilizador não autenticado
           if (snapshotUnsubRef.current) {
             snapshotUnsubRef.current()

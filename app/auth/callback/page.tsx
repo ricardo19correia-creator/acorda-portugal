@@ -32,6 +32,39 @@ function AuthCallbackContent() {
       console.log('[AUTH CALLBACK] A executar signInWithPopup no browser...')
       const userCred = await signInWithPopup(auth, provider)
       console.log('[AUTH CALLBACK] Sucesso signInWithPopup:', userCred.user.uid)
+
+      // Extrair credencial Google OAuth direta
+      const googleCredential = GoogleAuthProvider.credentialFromResult(userCred)
+      const googleIdToken = googleCredential?.idToken
+      const googleAccessToken = googleCredential?.accessToken
+
+      console.log('[AUTH CALLBACK] Google OAuth ID Token presente:', Boolean(googleIdToken))
+
+      if (googleIdToken) {
+        setUserEmail(userCred.user.email)
+        const deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(googleIdToken)}&accessToken=${encodeURIComponent(googleAccessToken || '')}&target=${encodeURIComponent(targetParam)}`
+        console.log('[AUTH CALLBACK] Deep link oficial preparado')
+        setDeepLinkUrl(deepLink)
+        setStatus('redirecting')
+
+        try {
+          window.location.href = deepLink
+        } catch (navErr) {
+          console.warn('[AUTH CALLBACK] Redirecionamento automático bloqueado pelo navegador:', navErr)
+        }
+        return
+      }
+
+      // Fallback: se por algum motivo credentialFromResult não tiver idToken, obter token do utilizador
+      const idToken = await userCred.user.getIdToken(true)
+      const deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
+      setDeepLinkUrl(deepLink)
+      setStatus('redirecting')
+      try {
+        window.location.href = deepLink
+      } catch (navErr) {
+        console.warn('[AUTH CALLBACK] Redirecionamento automático bloqueado pelo navegador:', navErr)
+      }
     } catch (err: any) {
       console.warn('[AUTH CALLBACK] Erro signInWithPopup:', err?.code, err?.message)
       setIsSigningIn(false)
@@ -47,49 +80,10 @@ function AuthCallbackContent() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUserEmail(user.email)
-        setStatus('requesting_token')
-
-        try {
-          console.log('[AUTH CALLBACK] Utilizador autenticado no browser:', user.uid)
-          const idToken = await user.getIdToken(true)
-
-          console.log('[AUTH CALLBACK] A obter credencial de transferência...')
-          let deepLink = ''
-          try {
-            const res = await fetch('/api/auth/token', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ idToken }),
-            })
-            if (res.ok) {
-              const data = await res.json()
-              if (data.customToken) {
-                deepLink = `acordaportugal://auth-callback?type=custom_token&token=${encodeURIComponent(data.customToken)}&target=${encodeURIComponent(targetParam)}`
-              } else {
-                deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
-              }
-            } else {
-              deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
-            }
-          } catch (fetchErr) {
-            console.warn('[AUTH CALLBACK] Fallback para google_credential idToken:', fetchErr)
-            deepLink = `acordaportugal://auth-callback?type=google_credential&idToken=${encodeURIComponent(idToken)}&target=${encodeURIComponent(targetParam)}`
-          }
-
-          console.log('[AUTH CALLBACK] Deep link preparado:', deepLink)
-          setDeepLinkUrl(deepLink)
-          setStatus('redirecting')
-
-          // Redireciona o Android de volta para o APK
-          try {
-            window.location.href = deepLink
-          } catch (navErr) {
-            console.warn('[AUTH CALLBACK] Redirecionamento automático bloqueado pelo navegador:', navErr)
-          }
-        } catch (err: any) {
-          console.error('[AUTH CALLBACK] Erro ao obter token do servidor:', err)
-          setErrorDetails(err?.message || 'Erro de comunicação.')
-          setStatus('error')
+        // Se ainda não temos o deepLink gerado com a credencial Google OAuth, solicitamos o login interativo
+        if (!deepLinkUrl && autoParam && !autoTriggeredRef.current) {
+          autoTriggeredRef.current = true
+          handleBrowserGoogleLogin()
         }
       } else {
         setStatus('manual_login')
@@ -101,7 +95,7 @@ function AuthCallbackContent() {
     })
 
     return () => unsubscribe()
-  }, [targetParam, autoParam])
+  }, [targetParam, autoParam, deepLinkUrl])
 
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col items-center justify-center p-6 text-center text-white">

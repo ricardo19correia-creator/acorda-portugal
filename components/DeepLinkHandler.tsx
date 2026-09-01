@@ -1,13 +1,34 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { signInWithCustomToken } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
 
+const globalProcessedTokens = new Set<string>()
+
+function isTokenProcessed(tokenKey: string): boolean {
+  if (globalProcessedTokens.has(tokenKey)) return true
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = sessionStorage.getItem(`auth_deeplink_${tokenKey.substring(0, 32)}`)
+      if (stored) return true
+    } catch {}
+  }
+  return false
+}
+
+function markTokenProcessed(tokenKey: string): void {
+  globalProcessedTokens.add(tokenKey)
+  if (typeof window !== 'undefined') {
+    try {
+      sessionStorage.setItem(`auth_deeplink_${tokenKey.substring(0, 32)}`, String(Date.now()))
+    } catch {}
+  }
+}
+
 export default function DeepLinkHandler() {
   const router = useRouter()
-  const processedTokensRef = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     let removeListener: (() => void) | undefined
@@ -15,25 +36,16 @@ export default function DeepLinkHandler() {
     const processDeepLinkUrl = async (urlStr: string | null | undefined, source: string) => {
       if (!urlStr || typeof urlStr !== 'string') return
 
-      console.log(`[GOOGLE-AUTH] callback-received (source: ${source})`, urlStr)
+      const cleanUrl = urlStr.trim()
+      if (!cleanUrl.includes('auth-callback') && !cleanUrl.startsWith('acordaportugal://')) {
+        return
+      }
+
+      console.log(`[AUTH][DEEPLINK] URL RECEBIDO (source: ${source})`)
 
       try {
-        if (!urlStr.includes('auth-callback') && !urlStr.startsWith('acordaportugal://')) {
-          return
-        }
-
-        const normalizedUrl = urlStr.replace(/^acordaportugal:\/\//i, 'https://auth-callback.local/')
+        const normalizedUrl = cleanUrl.replace(/^acordaportugal:\/\//i, 'https://auth-callback.local/')
         const parsed = new URL(normalizedUrl)
-
-        const isAuthCallback =
-          parsed.hostname === 'auth-callback.local' ||
-          parsed.hostname === 'auth-callback' ||
-          parsed.pathname.includes('auth-callback')
-
-        if (!isAuthCallback) {
-          console.warn(`[GOOGLE-AUTH] Host/Path não corresponde a auth-callback:`, urlStr)
-          return
-        }
 
         const type = parsed.searchParams.get('type') || (parsed.searchParams.has('idToken') ? 'google_credential' : 'custom_token')
         const token = parsed.searchParams.get('token')
@@ -41,66 +53,80 @@ export default function DeepLinkHandler() {
         const accessToken = parsed.searchParams.get('accessToken')
         const target = parsed.searchParams.get('target') || '/jogar'
 
-        const uniqueKey = token || idToken
-        if (!uniqueKey || !uniqueKey.trim()) {
-          console.warn(`[GOOGLE-AUTH] Nenhum token encontrado no URL:`, urlStr)
+        const rawToken = (idToken || token || '').trim()
+        const idTokenPresent = Boolean(rawToken)
+
+        console.log('[AUTH][DEEPLINK] type=', type)
+        console.log('[AUTH][DEEPLINK] idToken presente=', idTokenPresent, idTokenPresent ? `(length: ${rawToken.length}, preview: ${rawToken.substring(0, 6)}...${rawToken.slice(-4)})` : '')
+
+        if (!rawToken) {
+          console.warn('[AUTH][DEEPLINK] Nenhum token encontrado no URL.')
           return
         }
 
-        const cleanKey = uniqueKey.trim()
-        if (processedTokensRef.current.has(cleanKey)) {
-          console.log(`[GOOGLE-AUTH] Token já processado anteriormente.`)
+        if (isTokenProcessed(rawToken)) {
+          console.log('[AUTH][DEEPLINK] Token já processado anteriormente (idempotência garantida).')
           return
         }
-        processedTokensRef.current.add(cleanKey)
+        markTokenProcessed(rawToken)
 
         if (!auth) {
-          console.error(`[GOOGLE-AUTH] sign-in-error: Firebase Auth não está inicializado.`)
+          console.error('[AUTH][FIREBASE] ERROR: Firebase Auth não está inicializado.')
           return
         }
 
         let loggedUser = null
+
         if (type === 'custom_token' && token) {
-          console.log(`[GOOGLE-AUTH] credential-created: A autenticar com Custom Token...`)
+          console.log('[AUTH][FIREBASE] signInWithCustomToken START')
           try {
             const userCred = await signInWithCustomToken(auth, token.trim())
+            console.log('[AUTH][FIREBASE] signInWithCustomToken SUCCESS')
             loggedUser = userCred?.user
           } catch (customErr: any) {
-            console.error(`[GOOGLE-AUTH] sign-in-error: Erro com Custom Token:`, customErr)
+            console.error('[AUTH][FIREBASE] ERROR code=', customErr?.code, 'message=', customErr?.message)
           }
-        } else if ((type === 'google_credential' || idToken) && (idToken || token)) {
-          const rawIdToken = (idToken || token)!.trim()
-          console.log(`[GOOGLE-AUTH] credential-created: A autenticar com Google Credential...`)
+        } else if ((type === 'google_credential' || idToken) && rawToken) {
           try {
             const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
-            const credential = GoogleAuthProvider.credential(rawIdToken, accessToken ? accessToken.trim() : undefined)
+            const credential = GoogleAuthProvider.credential(rawToken, accessToken ? accessToken.trim() : undefined)
+            console.log('[AUTH][GOOGLE] credential criada')
+
+            console.log('[AUTH][FIREBASE] signInWithCredential START')
             const userCred = await signInWithCredential(auth, credential)
+            console.log('[AUTH][FIREBASE] signInWithCredential SUCCESS')
             loggedUser = userCred?.user
           } catch (credErr: any) {
-            console.error(`[GOOGLE-AUTH] sign-in-error: Erro com Google Credential:`, credErr)
+            console.error('[AUTH][GOOGLE] credential ERROR:', {
+              code: credErr?.code,
+              message: credErr?.message,
+              stack: credErr?.stack,
+            })
+            console.error('[AUTH][FIREBASE] ERROR code=', credErr?.code, 'message=', credErr?.message)
           }
         }
 
         const activeUser = loggedUser || auth.currentUser
         if (activeUser) {
-          console.log(`[GOOGLE-AUTH] sign-in-success: Autenticação confirmada para UID:`, activeUser.uid)
-          
-          // Fechar a janela do browser nativo se estiver aberta
+          console.log('[AUTH][FIREBASE] currentUser EXISTS uid=', activeUser.uid, 'email=', activeUser.email || 'N/A')
+
+          // Fechar janela do browser se estiver aberta
           try {
             const { Browser } = await import('@capacitor/browser')
             await Browser.close()
-          } catch (bErr) {
-            // Browser já fechado ou não aplicável
-          }
+          } catch {}
 
           const { registerUserSession } = await import('@/lib/session-manager')
           await registerUserSession(activeUser)
-          router.push(target)
+
+          console.log('[AUTH][STATE] authenticated uid=', activeUser.uid, 'email=', activeUser.email || 'N/A')
+          console.log('[AUTH] A navegar para o destino:', target)
+          router.replace(target)
         } else {
-          console.error(`[GOOGLE-AUTH] sign-in-error: Falha ao obter utilizador ativo.`)
+          console.error('[AUTH][FIREBASE] currentUser NULL - Falha na autenticação após deep link')
         }
       } catch (err: any) {
-        console.error(`[GOOGLE-AUTH] sign-in-error: Erro ao processar deep link:`, err)
+        console.error('[AUTH][FIREBASE] ERROR inesperado ao processar deep link:', err)
       }
     }
 
