@@ -7,17 +7,7 @@ const config: CapacitorConfig = {
   server: {
     url: 'https://acordaportugal.pt',
     cleartext: false
-  },
-  plugins: {
-    SocialLogin: {
-      providers: {
-        google: true,
-        facebook: false,
-        apple: false,
-        twitter: false,
-      },
-    },
-  },
+  }
 };
 
 export default config;

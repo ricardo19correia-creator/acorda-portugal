@@ -45,71 +45,19 @@ export default function GoogleAuthButton({
 
     if (isCapacitor) {
       console.log('[GOOGLE-AUTH] platform: Capacitor Android')
-      console.log('[GOOGLE-AUTH] starting native Google Sign-In with SocialLogin + signInWithCredential')
-      
+      console.log('[GOOGLE-AUTH] A iniciar fluxo seguro Google OAuth no Android...')
+
       try {
-        const { SocialLogin } = await import('@capgo/capacitor-social-login')
-        await SocialLogin.initialize({
-          google: {
-            webClientId: '130539395859-webclient.apps.googleusercontent.com',
-            mode: 'online',
-          }
-        }).catch((initErr) => {
-          console.warn('[GOOGLE-AUTH] SocialLogin.initialize warning:', initErr)
-        })
-
-        console.log('[GOOGLE-AUTH] A solicitar conta Google nativa...')
-        const loginRes: any = await SocialLogin.login({
-          provider: 'google',
-          options: {
-            scopes: ['email', 'profile']
-          }
-        })
-
-        console.log('[GOOGLE-AUTH] Resposta nativa recebida:', loginRes)
-        const idToken = loginRes?.result?.idToken || loginRes?.idToken || loginRes?.result?.token
-        const accessToken = loginRes?.result?.accessToken?.token || (typeof loginRes?.result?.accessToken === 'string' ? loginRes.result.accessToken : undefined)
-
-        if (!idToken) {
-          throw new Error('Google Sign-In não retornou um ID token válido.')
-        }
-
-        if (!auth) {
-          throw new Error('Firebase Auth não está inicializado.')
-        }
-
-        console.log('[GOOGLE-AUTH] credential-created: A converter ID token em credencial Firebase...')
-        const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth')
-        const credential = GoogleAuthProvider.credential(idToken, accessToken)
-
-        console.log('[GOOGLE-AUTH] A autenticar no Firebase com signInWithCredential...')
-        const userCred = await signInWithCredential(auth, credential)
-
-        console.log('[GOOGLE-AUTH] sign-in-success: UID autenticado:', userCred.user.uid)
-        await registerUserSession(userCred.user)
-        const destination = getPostLoginRedirectTarget(safeTarget)
-        router.push(destination)
+        const { Browser } = await import('@capacitor/browser')
+        const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
+        await Browser.open({ url: callbackUrl, windowName: '_system' })
+        setTimeout(() => setLoading(false), 3000)
         return
-      } catch (nativeErr: any) {
-        console.error('[GOOGLE-AUTH] sign-in-error no fluxo nativo:', nativeErr)
-
-        // Se o plugin nativo reportar UNIMPLEMENTED, executar fallback automático para browser externo
-        if (nativeErr?.message && (nativeErr.message.includes('UNIMPLEMENTED') || nativeErr.message.includes('not implemented'))) {
-          console.warn('[GOOGLE-AUTH] Fallback para navegador do sistema devido a UNIMPLEMENTED...')
-          try {
-            const { Browser } = await import('@capacitor/browser')
-            const callbackUrl = `https://acordaportugal.pt/auth/callback?target=${encodeURIComponent(safeTarget)}&auto=true`
-            await Browser.open({ url: callbackUrl, windowName: '_system' })
-            setTimeout(() => setLoading(false), 3000)
-            return
-          } catch (bErr) {
-            console.error('[GOOGLE-AUTH] Erro no fallback de browser:', bErr)
-          }
-        }
-
+      } catch (browserErr: any) {
+        console.error('[GOOGLE-AUTH] Erro ao abrir browser no Android:', browserErr)
         setLoading(false)
-        if (nativeErr?.message && !nativeErr.message.includes('cancel') && !nativeErr.message.includes('user_cancel') && !nativeErr.message.includes('16:')) {
-          const errorMsg = mapAuthErrorMessage(nativeErr)
+        if (browserErr?.message && !browserErr.message.includes('cancel')) {
+          const errorMsg = mapAuthErrorMessage(browserErr)
           if (onError) onError(errorMsg)
         }
         return
