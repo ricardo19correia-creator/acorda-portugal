@@ -53,9 +53,8 @@ import {
   getDistrictTerritory,
   filterQuizQuestions,
 } from '@/lib/game-data'
-import vilaRealQuestionsRaw from '@/data/perguntas_vila_real_500.json'
-import modoMalucoQuestionsRaw from '@/data/perguntas_modo_maluco_5000.json'
 import { calculateLevelProgress } from '@/lib/progression'
+import { awardMatchReward, type MatchRewardOutcome } from '@/lib/xp-service'
 
 import { QuizProgress } from '@/components/quiz/quiz-progress'
 import {
@@ -81,57 +80,6 @@ type Phase = 'answering' | 'revealed' | 'finished'
 type GameQuestion = QuizQuestion & { image?: string }
 
 type OptionKey = 'A' | 'B' | 'C' | 'D'
-
-const VILA_REAL_QUESTIONS: QuizQuestion[] = (vilaRealQuestionsRaw as any[]).map((q, i) => {
-  const correctOptionText = q.correct
-  const correctIdx = q.options.indexOf(correctOptionText)
-  const correctKey = (['A', 'B', 'C', 'D'][correctIdx >= 0 && correctIdx < 4 ? correctIdx : 0]) as OptionKey
-  const points = q.difficulty === 3 ? 300 : q.difficulty === 2 ? 200 : 100
-
-  return {
-    category: 'desafio-cidade',
-    city: 'Vila Real',
-    district: 'Vila Real',
-    id: q.id || `vr_${i + 1}`,
-    index: i + 1,
-    total: vilaRealQuestionsRaw.length,
-    question: q.question,
-    options: q.options.map((text: string, optIdx: number) => ({
-      key: (['A', 'B', 'C', 'D'][optIdx] as OptionKey),
-      text,
-    })),
-    correct: correctKey,
-    explanation: `Resposta correta: ${q.correct}`,
-    points,
-  }
-})
-
-const MODO_MALUCO_5000_QUESTIONS: QuizQuestion[] = (modoMalucoQuestionsRaw as any[]).map((q, i) => {
-  const correctOptionText = q.correct
-  const correctIdx = q.options.indexOf(correctOptionText)
-  const correctKey = (['A', 'B', 'C', 'D'][correctIdx >= 0 && correctIdx < 4 ? correctIdx : 0]) as OptionKey
-  const points = q.difficulty === 3 ? 300 : q.difficulty === 2 ? 200 : 100
-
-  return {
-    category: 'modo-maluco',
-    subcategory: q.subcategory,
-    id: q.id || `mm_${i + 1}`,
-    index: i + 1,
-    total: modoMalucoQuestionsRaw.length,
-    question: q.question,
-    options: q.options.map((text: string, optIdx: number) => ({
-      key: (['A', 'B', 'C', 'D'][optIdx] as OptionKey),
-      text,
-    })),
-    correct: correctKey,
-    explanation: q.explanation || `Resposta correta: ${q.correct}`,
-    points,
-  }
-})
-
-type GameCompletionOutcome =
-  | { awarded: false }
-  | { awarded: true; newLevel: number; newTotalXp: number; newEuros: number }
 
 function shuffle<T>(array: T[]): T[] {
   if (!Array.isArray(array)) return []
@@ -323,6 +271,8 @@ export function QuizScreen({
   const [correctCount, setCorrectCount] = useState(0)
   const [streak, setStreak] = useState(0)
   const [bestStreak, setBestStreak] = useState(0)
+  const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
+  const [savingReward, setSavingReward] = useState<boolean>(false)
 
   // Power-Ups Stock State (Zero por defeito se não comprados)
   const [stock5050, setStock5050] = useState<number>(0)
@@ -444,7 +394,7 @@ export function QuizScreen({
       }
       sessionStorage.setItem(`ap_quiz_state_${gameId}`, JSON.stringify(sessionPayload))
     } catch {}
-  }, [gameId, step, score, correctCount, streak, bestStreak, seconds, phase, selected, quizQuestions])
+  }, [gameId, step, score, correctCount, streak, bestStreak, phase, selected, quizQuestions])
 
   // Prevenção de fecho acidental no meio de uma partida
   useEffect(() => {
@@ -728,9 +678,83 @@ export function QuizScreen({
     return () => clearTimeout(timer)
   }, [phase, isFrozen, seconds, reveal])
 
+  const result: QuizResult = useMemo(() => {
+    const earnedCoins = calculateMatchCoinReward({
+      correctCount,
+      totalQuestions: total,
+      bestStreak,
+      difficulty: diffLevel,
+    })
+
+    const multiplier = getDifficultyMultiplier(diffLevel)
+    const baseMatchXp = correctCount * 50 + Math.round(score / 10)
+    const totalXp = Math.round(baseMatchXp * multiplier)
+
+    return {
+      score,
+      correct: correctCount,
+      total,
+      xp: totalXp,
+      euros: earnedCoins,
+      bestStreak,
+    }
+  }, [score, correctCount, total, bestStreak, diffLevel])
+
+  const processMatchCompletion = useCallback(
+    async (gid: string, finalResult: QuizResult) => {
+      if (!user) return
+
+      setSavingReward(true)
+      try {
+        const answeredIds = quizQuestions.map((q) => String(q.id)).filter(Boolean)
+        if (answeredIds.length > 0) {
+          void saveAnsweredQuestions(user.uid, answeredIds)
+        }
+
+        const outcome = await awardMatchReward({
+          userId: user.uid,
+          matchId: gid,
+          categorySlug: categorySlug || 'geral',
+          categoryName: category?.name || 'Portugal',
+          matchType: 'solo_quiz',
+          correctAnswers: finalResult.correct,
+          totalQuestions: finalResult.total,
+          score: finalResult.score,
+          bestStreak: finalResult.bestStreak,
+          difficultyMultiplier: getDifficultyMultiplier(diffLevel),
+          answeredQuestionIds: answeredIds,
+        })
+
+        setRewardOutcome(outcome)
+
+        if (finalResult.euros > 0) {
+          void addCoins(finalResult.euros, `Quiz: ${category?.name || 'Portugal'}`)
+        }
+
+        setUserProfile((currentProfile) =>
+          currentProfile
+            ? {
+                ...currentProfile,
+                level: outcome.newLevel,
+                xp: outcome.newTotalXp,
+                euros: outcome.newTotalCoins,
+                coins: outcome.newTotalCoins,
+              }
+            : currentProfile
+        )
+      } catch (error) {
+        console.error('[QUIZ] Erro ao atribuir recompensa da partida:', error)
+      } finally {
+        setSavingReward(false)
+      }
+    },
+    [user, categorySlug, category?.name, diffLevel, quizQuestions, addCoins]
+  )
+
   const next = () => {
     if (step + 1 >= total) {
       setPhase('finished')
+      void processMatchCompletion(gameId, result)
       return
     }
 
@@ -761,6 +785,8 @@ export function QuizScreen({
     setCorrectCount(0)
     setStreak(0)
     setBestStreak(0)
+    setRewardOutcome(null)
+    setSavingReward(false)
     setPhase('answering')
   }
 
@@ -772,212 +798,6 @@ export function QuizScreen({
       }
     }
   }, [profile, previousLevel])
-
-  const handleGameEnd = useCallback(async (gid: string, finalResult: QuizResult) => {
-    if (!user) return
-
-    const userRef = doc(db, "users", user.uid)
-    const publicProfileRef = doc(db, "publicProfiles", user.uid)
-    const catSlug = categorySlug || 'geral'
-
-    try {
-      // 1. Gravar documento persistente da partida na coleção 'games'
-      try {
-        const gameDocRef = doc(db, 'games', gid)
-        await setDoc(
-          gameDocRef,
-          {
-            id: gid,
-            userId: user.uid,
-            userDisplayName: user.displayName || profile?.displayName || 'Jogador',
-            category: catSlug,
-            categoryName: category?.name || 'Portugal',
-            score: finalResult.score,
-            correctAnswers: finalResult.correct,
-            totalQuestions: finalResult.total,
-            xpEarned: finalResult.xp,
-            eurosEarned: finalResult.euros,
-            bestStreak: finalResult.bestStreak,
-            createdAt: serverTimestamp(),
-          },
-          { merge: true }
-        )
-      } catch (gameSaveErr) {
-        console.warn('[QUIZ] Aviso ao gravar registo na coleção games:', gameSaveErr)
-      }
-
-      // 2. Chamar primeiro o endpoint Server-Side Seguro (/api/quiz/complete) com Silent Retry
-      let serverCompleted = false
-      try {
-        const token = await user.getIdToken()
-        if (token) {
-          const apiRes = await silentFetchWithRetry('/api/quiz/complete', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              gameId: gid,
-              categorySlug: catSlug,
-              answers: quizQuestions.map((q, idx) => ({
-                questionId: q.id,
-                selectedOption: 'A', // placeholder se respondida
-                isCorrect: idx < finalResult.correct,
-              })),
-            }),
-          })
-          const apiData = await apiRes.json()
-          if (apiData.success && apiData.data) {
-            serverCompleted = true
-            const d = apiData.data
-            setUserProfile((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    level: d.newLevel,
-                    xp: d.newTotalXp,
-                    euros: d.newTotalCoins,
-                    coins: d.newTotalCoins,
-                  }
-                : prev
-            )
-            return
-          }
-        }
-      } catch (apiErr) {
-        console.warn('[QUIZ] Fallback para transação de segurança local:', apiErr)
-      }
-
-      if (serverCompleted) return
-
-      // 3. Fallback de transação local caso a API falhe (com silentAsyncRetry)
-      const outcome = await silentAsyncRetry(() =>
-        runTransaction(db, async (transaction) => {
-          const userSnap = await transaction.get(userRef)
-          if (!userSnap.exists()) {
-            return { awarded: false } as GameCompletionOutcome
-          }
-
-          const currentProfile = userSnap.data() as UserProfile
-          const nextTotalXp = (currentProfile.xp || 0) + finalResult.xp
-          const levelInfo = calculateLevelProgress(nextTotalXp)
-          const newLevel = levelInfo.currentLevel.level
-
-          // Recompensa por subida de nível (€25 por nível)
-          const currentLevelVal = currentProfile.level || 1
-          const levelUpCoins = newLevel > currentLevelVal ? calculateLevelUpCoinReward(currentLevelVal, newLevel) : 0
-          const totalEarnedCoins = finalResult.euros + levelUpCoins
-          const nextEuros = (currentProfile.euros || 0) + totalEarnedCoins
-
-        const nextQuestionsAnswered = (currentProfile.questionsAnswered || 0) + finalResult.total
-        const nextCorrectAnswers = (currentProfile.correctAnswers || 0) + finalResult.correct
-        const nextIncorrectAnswers = (currentProfile.incorrectAnswers || 0) + (finalResult.total - finalResult.correct)
-        const nextTotalQuestions = (currentProfile.totalQuestions || 0) + finalResult.total
-        const nextBestStreak = Math.max(currentProfile.bestStreak || 0, finalResult.bestStreak)
-        const nextGamesPlayed = (currentProfile.gamesPlayed || 0) + 1
-
-        const existingCategoryStats = (currentProfile as any).categoryStats || {}
-        const currentCat = existingCategoryStats[catSlug] || { totalQuestions: 0, correctAnswers: 0, gamesPlayed: 0, score: 0 }
-        const nextCategoryStats = {
-          ...existingCategoryStats,
-          [catSlug]: {
-            totalQuestions: (currentCat.totalQuestions || 0) + finalResult.total,
-            correctAnswers: (currentCat.correctAnswers || 0) + finalResult.correct,
-            gamesPlayed: (currentCat.gamesPlayed || 0) + 1,
-            score: (currentCat.score || 0) + finalResult.score,
-          }
-        }
-
-        const answeredIds = quizQuestions.map((q) => String(q.id)).filter(Boolean)
-        if (answeredIds.length > 0) {
-          void saveAnsweredQuestions(user.uid, answeredIds)
-        }
-
-        const updatePayload: Record<string, any> = {
-          xp: nextTotalXp,
-          euros: nextEuros,
-          coins: nextEuros,
-          level: newLevel,
-          gamesPlayed: nextGamesPlayed,
-          questionsAnswered: nextQuestionsAnswered,
-          correctAnswers: nextCorrectAnswers,
-          incorrectAnswers: nextIncorrectAnswers,
-          totalQuestions: nextTotalQuestions,
-          bestStreak: nextBestStreak,
-          categoryStats: nextCategoryStats,
-          lastPlayedAt: serverTimestamp(),
-        }
-
-        if (answeredIds.length > 0) {
-          updatePayload.answeredQuestionIds = arrayUnion(...answeredIds)
-        }
-
-        transaction.update(userRef, updatePayload)
-
-        transaction.set(
-          publicProfileRef,
-          {
-            uid: user.uid,
-            displayName: currentProfile.displayName || user.displayName || "Jogador",
-            photoURL: currentProfile.photoURL || user.photoURL || null,
-            district: currentProfile.district || "Portugal",
-            level: newLevel,
-            xp: nextTotalXp,
-          },
-          { merge: true }
-        )
-
-        return {
-          awarded: true,
-          newLevel,
-          newTotalXp: nextTotalXp,
-          newEuros: nextEuros,
-        } as GameCompletionOutcome
-      }))
-
-      if (outcome.awarded) {
-        if (finalResult.euros > 0) {
-          void addCoins(finalResult.euros, `Quiz: ${category?.name || 'Portugal'}`)
-        }
-        setUserProfile((currentProfile) =>
-          currentProfile
-            ? {
-                ...currentProfile,
-                level: outcome.newLevel,
-                xp: outcome.newTotalXp,
-                euros: outcome.newEuros,
-                coins: outcome.newEuros,
-              }
-            : currentProfile
-        )
-      }
-    } catch (error) {
-      console.error("Error updating user profile:", error)
-    }
-  }, [user, category, profile, addCoins, quizQuestions])
-
-  const result: QuizResult = useMemo(() => {
-    const earnedCoins = calculateMatchCoinReward({
-      correctCount,
-      totalQuestions: total,
-      bestStreak,
-      difficulty: diffLevel,
-    })
-
-    const multiplier = getDifficultyMultiplier(diffLevel)
-    const baseMatchXp = correctCount * 50 + Math.round(score / 10)
-    const totalXp = Math.round(baseMatchXp * multiplier)
-
-    return {
-      score,
-      correct: correctCount,
-      total,
-      xp: totalXp,
-      euros: earnedCoins,
-      bestStreak,
-    }
-  }, [score, correctCount, total, bestStreak, diffLevel])
 
   const levelUpInfo =
     previousLevel !== null && userProfile && userProfile.level > previousLevel
@@ -1004,7 +824,9 @@ export function QuizScreen({
             result={result}
             gameId={gameId}
             levelUpInfo={levelUpInfo}
-            onGameEnd={handleGameEnd}
+            rewardOutcome={rewardOutcome}
+            savingReward={savingReward}
+            onGameEnd={processMatchCompletion}
             onReplay={restart}
           />
         </div>

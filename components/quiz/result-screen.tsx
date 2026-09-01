@@ -26,25 +26,38 @@ export function ResultScreen({
   onReplay,
   onGameEnd,
   levelUpInfo,
+  rewardOutcome,
+  savingReward,
 }: {
   result: QuizResult
   gameId: string
   onReplay?: () => void
   onGameEnd?: (gameId: string, result: QuizResult) => Promise<void>
   levelUpInfo?: LevelUpInfo
+  rewardOutcome?: {
+    xpEarned: number
+    coinsEarned: number
+    newTotalXp: number
+    newLevel: number
+    leveledUp: boolean
+    alreadyProcessed: boolean
+  } | null
+  savingReward?: boolean
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
   const [showLevelUp, setShowLevelUp] = useState(false)
 
   useEffect(() => {
-    // Save progress when the result screen is shown
-    void onGameEnd?.(gameId, result)
+    // If not already processed, invoke onGameEnd as fallback
+    if (!rewardOutcome && !savingReward) {
+      void onGameEnd?.(gameId, result)
+    }
 
-    if (levelUpInfo) {
+    if (levelUpInfo || rewardOutcome?.leveledUp) {
       const timer = setTimeout(() => setShowLevelUp(true), 500)
       return () => clearTimeout(timer)
     }
-  }, [gameId, result, onGameEnd, levelUpInfo])
+  }, [gameId, result, onGameEnd, levelUpInfo, rewardOutcome, savingReward])
 
   return (
     <div className="animate-rise mx-auto max-w-lg px-2 sm:px-0">
@@ -113,9 +126,34 @@ export function ResultScreen({
 
         {/* Rewards Grid */}
         <div className="relative mt-4 grid grid-cols-3 gap-2.5 sm:gap-3">
-          <Reward icon={Sparkles} tone="primary" value={`+${result.xp}`} label="XP Ganho" />
-          <Reward icon={Coins} tone="gold" value={`+€${result.euros}`} label="Euros" />
+          <Reward
+            icon={Sparkles}
+            tone="primary"
+            value={rewardOutcome ? `+${rewardOutcome.xpEarned}` : `+${result.xp}`}
+            label="XP Ganho"
+          />
+          <Reward
+            icon={Coins}
+            tone="gold"
+            value={rewardOutcome ? `+€${rewardOutcome.coinsEarned}` : `+€${result.euros}`}
+            label="Euros"
+          />
           <Reward icon={Flame} tone="red" value={`${result.bestStreak}x`} label="Sequência" />
+        </div>
+
+        {/* Status de Sincronização da Recompensa */}
+        <div className="mt-3 text-center text-xs">
+          {savingReward ? (
+            <span className="inline-flex items-center gap-1.5 text-amber-400 font-bold animate-pulse">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+              A sincronizar XP com o servidor...
+            </span>
+          ) : rewardOutcome ? (
+            <span className="inline-flex items-center gap-1 text-emerald-400 font-bold">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              XP e Progresso Confirmados no Perfil
+            </span>
+          ) : null}
         </div>
 
         {/* Actions */}

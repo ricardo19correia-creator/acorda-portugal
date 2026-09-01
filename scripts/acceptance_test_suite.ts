@@ -100,8 +100,8 @@ async function runAcceptanceTests() {
   // --- TESTE 22: IDENTIFICADOR DA BUILD E ROTA DE VERSÃO ---
   console.log('\n--- TESTES 22 A 24: SEGURANÇA SERVER-SIDE, ATOMICIDADE E BUILD INFO ---')
   const buildInfoCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'build-info.ts'), 'utf8')
-  assert(buildInfoCode.includes("version: '1.0.0-rc.9'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.9')
-  assert(buildInfoCode.includes("commit: 'forensic-session-v9'"), 'lib/build-info.ts com commit hash forensic-session-v9')
+  assert(buildInfoCode.includes("version: '1.0.0-rc.10'"), 'lib/build-info.ts com versão canónica 1.0.0-rc.10')
+  assert(buildInfoCode.includes("commit: 'forensic-session-v10'"), 'lib/build-info.ts com commit hash forensic-session-v10')
   const versionRouteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'version', 'route.ts'), 'utf8')
   assert(versionRouteCode.includes('BUILD_INFO'), 'app/api/version/route.ts exporta dados da build para diagnóstico')
 
@@ -110,11 +110,11 @@ async function runAcceptanceTests() {
   assert(buyItemCode.includes('db.runTransaction'), 'app/api/buy-item usa runTransaction para deduções atómicas')
   assert(buyItemCode.includes('alreadyOwned'), 'app/api/buy-item tem proteção contra dupla compra')
 
-  // --- TESTE 24: VALIDAÇÃO SERVER-SIDE E IDEMPOTÊNCIA DO QUIZ ---
-  const quizCompleteCode = fs.readFileSync(path.join(process.cwd(), 'app', 'api', 'quiz', 'complete', 'route.ts'), 'utf8')
-  assert(quizCompleteCode.includes('verifyIdToken'), 'app/api/quiz/complete valida autenticação server-side')
-  assert(quizCompleteCode.includes('QuestionRegistry.getInstance()'), 'app/api/quiz/complete valida respostas no registry oficial')
-  assert(quizCompleteCode.includes('alreadyProcessed'), 'app/api/quiz/complete tem verificação de idempotência')
+  // --- TESTE 24: ATOMICIDADE E IDEMPOTÊNCIA DO SERVIÇO DE XP E QUIZ ---
+  const xpServiceCode = fs.readFileSync(path.join(process.cwd(), 'lib', 'xp-service.ts'), 'utf8')
+  assert(xpServiceCode.includes('awardMatchReward'), 'lib/xp-service exporta awardMatchReward canónico')
+  assert(xpServiceCode.includes('match_rewards'), 'lib/xp-service persiste em subcoleção match_rewards para idempotência')
+  assert(xpServiceCode.includes('runTransaction'), 'lib/xp-service executa transação Firestore atómica e segura')
 
   console.log('\n================================================================================')
   if (allPassed) {

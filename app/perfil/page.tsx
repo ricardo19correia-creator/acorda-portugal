@@ -10,7 +10,7 @@ import {
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
   Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck
 } from 'lucide-react'
-import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
 import { 
   signOut, 
   deleteUser, 
@@ -415,29 +415,32 @@ function PerfilContent() {
   useEffect(() => {
     setMounted(true)
     // Sincronizar Posição no Ranking Nacional
-    let unsubRank: (() => void) | undefined
     if (user?.uid) {
       try {
         const qRank = query(collection(db, 'publicProfiles'), limit(100))
-        unsubRank = onSnapshot(qRank, (snap: any) => {
-          if (!snap || snap.empty) {
-            setNationalRank(1)
-            return
-          }
-          const sorted = snap.docs.map((d: any) => ({
-            id: d.id,
-            xp: typeof d.data()?.xp === 'number' ? d.data().xp : 0,
-          })).sort((a: { xp: number }, b: { xp: number }) => b.xp - a.xp)
+        getDocs(qRank)
+          .then((snap) => {
+            if (!snap || snap.empty) {
+              setNationalRank(1)
+              return
+            }
+            const sorted = snap.docs
+              .map((d: any) => ({
+                id: d.id,
+                xp: typeof d.data()?.xp === 'number' ? d.data().xp : 0,
+              }))
+              .sort((a: { xp: number }, b: { xp: number }) => b.xp - a.xp)
 
-          const idx = sorted.findIndex((p: { id: string }) => p.id === user.uid)
-          if (idx !== -1) {
-            setNationalRank(idx + 1)
-          } else {
-            const userXp = profile?.xp ?? 0
-            const higher = sorted.filter((p: { xp: number }) => p.xp > userXp).length
-            setNationalRank(higher + 1)
-          }
-        })
+            const idx = sorted.findIndex((p: { id: string }) => p.id === user.uid)
+            if (idx !== -1) {
+              setNationalRank(idx + 1)
+            } else {
+              const currentXp = profile?.xp ?? (typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0)
+              const higher = sorted.filter((p: { xp: number }) => p.xp > currentXp).length
+              setNationalRank(higher + 1)
+            }
+          })
+          .catch(() => {})
       } catch (e) {}
     }
 
@@ -600,17 +603,19 @@ function PerfilContent() {
     window.addEventListener('consumables_updated', syncProfile)
     window.addEventListener('inventory_updated', syncProfile)
     window.addEventListener('balance_updated', syncProfile)
+    window.addEventListener('profile_updated', syncProfile)
     window.addEventListener('storage', syncProfile)
 
     return () => {
       if (unsubscribeSnapshot) unsubscribeSnapshot()
-      if (unsubRank) unsubRank()
       window.removeEventListener('avatarChanged', syncProfile)
+      window.removeEventListener('frameChanged', syncProfile)
       window.removeEventListener('arenaChanged', syncProfile)
       window.removeEventListener('titleChanged', syncProfile)
       window.removeEventListener('consumables_updated', syncProfile)
       window.removeEventListener('inventory_updated', syncProfile)
       window.removeEventListener('balance_updated', syncProfile)
+      window.removeEventListener('profile_updated', syncProfile)
       window.removeEventListener('storage', syncProfile)
     }
   }, [user, profile])

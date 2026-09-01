@@ -1117,34 +1117,17 @@ export async function claimDuelRewards(
   duelId: string,
   userUid: string,
 ): Promise<DuelRewardResult> {
-  // 1. Tentar primeiro via API Server-Side Segura (Single Source of Truth) com Silent Retry
-  try {
-    const token = await auth?.currentUser?.getIdToken()
-    if (token) {
-      const res = await silentFetchWithRetry('/api/duel/claim', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ duelId }),
-      })
-      const json = await res.json()
-      if (json.success && json.data) {
-        return json.data as DuelRewardResult
-      }
-    }
-  } catch (apiErr) {
-    console.warn('[DUEL REWARDS] Fallback para transação de segurança:', apiErr)
-  }
-
-  // 2. Transação de segurança caso a API falhe (com silentAsyncRetry)
   const duelRef = doc(db, 'duels', duelId)
   const userRef = doc(db, 'users', userUid)
   const publicProfileRef = doc(db, 'publicProfiles', userUid)
+  const rewardRef = doc(db, 'users', userUid, 'match_rewards', duelId)
 
-  return await silentAsyncRetry(() =>
+  console.log(`[GAME] MATCH_COMPLETE (duelId: ${duelId}, userUid: ${userUid})`)
+
+  const outcome = await silentAsyncRetry(() =>
     runTransaction(db, async (transaction) => {
+      // 1. Idempotência por match_rewards
+      const rewardSnap = await transaction.get(rewardRef)
       const duelSnap = await transaction.get(duelRef)
       if (!duelSnap.exists()) {
         throw new Error('Duelo não encontrado.')
@@ -1158,24 +1141,114 @@ export async function claimDuelRewards(
         throw new Error('Não pertences a este duelo.')
       }
 
-    const player = isPlayerA ? duel.playerA : duel.playerB!
-    const isWinner = duel.winnerUid === userUid
-    const isDraw = duel.winnerUid === null
-    const isLoser = !isWinner && !isDraw
+      const player = isPlayerA ? duel.playerA : duel.playerB!
+      const isWinner = duel.winnerUid === userUid
+      const isDraw = duel.winnerUid === null
+      const isLoser = !isWinner && !isDraw
 
-    const xpReward = isWinner ? 300 : isDraw ? 150 : 100
-    const baseWin = ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS
-    const coinReward = isWinner ? baseWin + ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : isDraw ? baseWin : 5
+      const xpReward = isWinner ? 300 : isDraw ? 150 : 100
+      const baseWin = ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS
+      const coinReward = isWinner ? baseWin + ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : isDraw ? baseWin : 5
 
-    const userSnap = await transaction.get(userRef)
-    const userData = userSnap.exists() ? userSnap.data() : {}
-    const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-    const currentEuros = typeof userData.euros === 'number' ? userData.euros : 50
-    const oldLevel = typeof userData.level === 'number' ? userData.level : 1
+      const userSnap = await transaction.get(userRef)
+      const userData = userSnap.exists() ? userSnap.data() : {}
+      const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+      const currentEuros = typeof userData.euros === 'number' ? userData.euros : 50
+      const oldLevel = typeof userData.level === 'number' ? userData.level : 1
 
-    const rewardsClaimed = duel.rewardsClaimed || {}
-    if (rewardsClaimed[userUid]) {
-      const levelProg = calculateLevelProgress(currentXp)
+      const rewardsClaimed = duel.rewardsClaimed || {}
+      if (rewardsClaimed[userUid] || rewardSnap.exists()) {
+        console.log(`[XP] REWARD_ALREADY_PROCESSED (duelId: ${duelId})`)
+        const levelProg = calculateLevelProgress(currentXp)
+        return {
+          xp: xpReward,
+          euros: coinReward,
+          isWinner,
+          isDraw,
+          isLoser,
+          oldXp: currentXp,
+          newXp: currentXp,
+          oldEuros: currentEuros,
+          newEuros: currentEuros,
+          oldLevel,
+          newLevel: levelProg.currentLevel.level,
+          leveledUp: false,
+          levelTitle: levelProg.currentLevel.title,
+        }
+      }
+
+      console.log(`[XP] CALCULATED (duelId: ${duelId}, xp: +${xpReward}, coins: +${coinReward})`)
+      console.log(`[XP] PERSIST_START (userUid: ${userUid}, duelId: ${duelId})`)
+
+      const newTotalXp = currentXp + xpReward
+      const levelProgress = calculateLevelProgress(newTotalXp)
+      const newLevel = levelProgress.currentLevel.level
+      const leveledUp = newLevel > oldLevel
+      const levelUpCoins = leveledUp ? calculateLevelUpCoinReward(oldLevel, newLevel) : 0
+      const totalAwardedEuros = coinReward + levelUpCoins
+      const newTotalEuros = currentEuros + totalAwardedEuros
+
+      if (userSnap.exists()) {
+        transaction.update(userRef, {
+          xp: newTotalXp,
+          euros: newTotalEuros,
+          coins: newTotalEuros,
+          level: newLevel,
+          gamesPlayed: (userData.gamesPlayed || 0) + 1,
+          wins: (userData.wins || 0) + (isWinner ? 1 : 0),
+          losses: (userData.losses || 0) + (isLoser ? 1 : 0),
+          draws: (userData.draws || 0) + (isDraw ? 1 : 0),
+          totalQuestions: (userData.totalQuestions || 0) + 10,
+          questionsAnswered: (userData.questionsAnswered || 0) + 10,
+          correctAnswers: (userData.correctAnswers || 0) + (player.correctCount || 0),
+          incorrectAnswers: (userData.incorrectAnswers || 0) + Math.max(0, 10 - (player.correctCount || 0)),
+        })
+
+        transaction.set(
+          publicProfileRef,
+          {
+            uid: userUid,
+            displayName: userData.displayName || 'Jogador',
+            photoURL: userData.photoURL || null,
+            district: userData.district || 'Portugal',
+            xp: newTotalXp,
+            level: newLevel,
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true },
+        )
+
+        const txRef = doc(collection(db, 'users', userUid, 'transactions'))
+        transaction.set(txRef, {
+          id: txRef.id,
+          userId: userUid,
+          type: 'earn',
+          amount: coinReward,
+          reason: isWinner
+            ? `⚔️ Vitória em Duelo 1v1 (${duel.code})`
+            : isDraw
+              ? `🤝 Empate em Duelo 1v1 (${duel.code})`
+              : `💪 Participação em Duelo 1v1 (${duel.code})`,
+          matchId: duelId,
+          createdAt: serverTimestamp(),
+        })
+
+        transaction.set(rewardRef, {
+          matchId: duelId,
+          userId: userUid,
+          matchType: 'duel_1v1',
+          xpEarned: xpReward,
+          coinsEarned: totalAwardedEuros,
+          newTotalXp,
+          newLevel,
+          processedAt: serverTimestamp(),
+        })
+      }
+
+      transaction.update(duelRef, {
+        [`rewardsClaimed.${userUid}`]: true,
+      })
+
       return {
         xp: xpReward,
         euros: coinReward,
@@ -1183,90 +1256,35 @@ export async function claimDuelRewards(
         isDraw,
         isLoser,
         oldXp: currentXp,
-        newXp: currentXp,
+        newXp: newTotalXp,
         oldEuros: currentEuros,
-        newEuros: currentEuros,
+        newEuros: newTotalEuros,
         oldLevel,
-        newLevel: levelProg.currentLevel.level,
-        leveledUp: false,
-        levelTitle: levelProg.currentLevel.title,
+        newLevel,
+        leveledUp,
+        levelTitle: levelProgress.currentLevel.title,
       }
-    }
-
-    const newTotalXp = currentXp + xpReward
-    const levelProgress = calculateLevelProgress(newTotalXp)
-    const newLevel = levelProgress.currentLevel.level
-    const leveledUp = newLevel > oldLevel
-    const levelUpCoins = leveledUp ? calculateLevelUpCoinReward(oldLevel, newLevel) : 0
-    const totalAwardedEuros = coinReward + levelUpCoins
-    const newTotalEuros = currentEuros + totalAwardedEuros
-
-    if (userSnap.exists()) {
-      transaction.update(userRef, {
-        xp: newTotalXp,
-        euros: newTotalEuros,
-        coins: newTotalEuros,
-        level: newLevel,
-        gamesPlayed: (userData.gamesPlayed || 0) + 1,
-        wins: (userData.wins || 0) + (isWinner ? 1 : 0),
-        losses: (userData.losses || 0) + (isLoser ? 1 : 0),
-        draws: (userData.draws || 0) + (isDraw ? 1 : 0),
-        totalQuestions: (userData.totalQuestions || 0) + 10,
-        questionsAnswered: (userData.questionsAnswered || 0) + 10,
-        correctAnswers: (userData.correctAnswers || 0) + (player.correctCount || 0),
-        incorrectAnswers: (userData.incorrectAnswers || 0) + Math.max(0, 10 - (player.correctCount || 0)),
-      })
-
-      transaction.set(
-        publicProfileRef,
-        {
-          uid: userUid,
-          displayName: userData.displayName || 'Jogador',
-          photoURL: userData.photoURL || null,
-          district: userData.district || 'Portugal',
-          xp: newTotalXp,
-          level: newLevel,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true },
-      )
-
-      const txRef = doc(collection(db, 'users', userUid, 'transactions'))
-      transaction.set(txRef, {
-        id: txRef.id,
-        userId: userUid,
-        type: 'earn',
-        amount: coinReward,
-        reason: isWinner
-          ? `⚔️ Vitória em Duelo 1v1 (${duel.code})`
-          : isDraw
-            ? `🤝 Empate em Duelo 1v1 (${duel.code})`
-            : `💪 Participação em Duelo 1v1 (${duel.code})`,
-        matchId: duelId,
-        createdAt: serverTimestamp(),
-      })
-    }
-
-    transaction.update(duelRef, {
-      [`rewardsClaimed.${userUid}`]: true,
     })
+  )
 
-    return {
-      xp: xpReward,
-      euros: coinReward,
-      isWinner,
-      isDraw,
-      isLoser,
-      oldXp: currentXp,
-      newXp: newTotalXp,
-      oldEuros: currentEuros,
-      newEuros: newTotalEuros,
-      oldLevel,
-      newLevel,
-      leveledUp,
-      levelTitle: levelProgress.currentLevel.title,
-    }
-  }))
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('user_xp', String(outcome.newXp))
+      localStorage.setItem('user_level', String(outcome.newLevel))
+      localStorage.setItem('user_coins', String(outcome.newEuros))
+      localStorage.setItem('user_euros', String(outcome.newEuros))
+      localStorage.setItem(`match_reward_${duelId}`, '1')
+    } catch {}
+
+    window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: outcome.newEuros } }))
+    window.dispatchEvent(new CustomEvent('profile_updated', { detail: { xp: outcome.newXp, level: outcome.newLevel } }))
+  }
+
+  console.log(`[XP] PERSIST_SUCCESS (duelId: ${duelId}, newTotalXp: ${outcome.newXp}, newLevel: ${outcome.newLevel})`)
+  console.log(`[XP] CURRENT_TOTAL (xp: ${outcome.newXp}, level: ${outcome.newLevel})`)
+  console.log(`[PROFILE] XP_REFRESH (dispatched events and updated localStorage)`)
+
+  return outcome
 }
 
 // =========================================================================
