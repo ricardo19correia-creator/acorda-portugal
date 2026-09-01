@@ -55,6 +55,13 @@ service cloud.firestore {
       allow delete: if isOwner(profileId) || isAdmin();
     }
 
+    // Presença pública em tempo real (100% Utilizadores Humanos Reais Autenticados)
+    match /publicPresence/{userId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
     // Coleção de Bots e NPCs para Ranking e Mapa Tático
     match /botPlayers/{botId} {
       allow read: if true;

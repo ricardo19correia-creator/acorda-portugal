@@ -8,6 +8,7 @@ import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
+import { sendRealHeartbeat, markRealOffline, HEARTBEAT_INTERVAL_MS } from '@/lib/real-presence'
 import {
   getAvatarById,
   DEFAULT_AVATAR,
@@ -536,6 +537,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     pathname?.startsWith('/perfil') ||
     pathname?.startsWith('/jogo')
   )
+  // 4. Heartbeat de Presença Real (100% Utilizadores Autenticados Reais)
+  useEffect(() => {
+    if (!user?.uid) return
+
+    const getPathActivity = () => {
+      if (pathname?.startsWith('/jogar/duelo')) return 'duel'
+      if (pathname?.startsWith('/jogar') || pathname?.startsWith('/jogo')) return 'playing'
+      return 'browsing'
+    }
+
+    // Heartbeat inicial
+    sendRealHeartbeat(user, profile, getPathActivity())
+
+    // Heartbeat periódico (35s)
+    const interval = setInterval(() => {
+      sendRealHeartbeat(user, profile, getPathActivity())
+    }, HEARTBEAT_INTERVAL_MS)
+
+    const handleUnload = () => {
+      markRealOffline(user.uid)
+    }
+    window.addEventListener('beforeunload', handleUnload)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('beforeunload', handleUnload)
+    }
+  }, [user?.uid, profile?.displayName, profile?.district, profile?.photoURL, profile?.level, pathname])
+
   const authResolved = authStatus !== 'AUTH_INITIALIZING'
 
   return (

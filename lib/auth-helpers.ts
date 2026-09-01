@@ -215,6 +215,10 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
 
   try {
     if (auth) {
+      if (auth.currentUser?.uid) {
+        const { markRealOffline } = await import('@/lib/real-presence')
+        await markRealOffline(auth.currentUser.uid)
+      }
       const { signOut } = await import('firebase/auth')
       await signOut(auth)
     }
