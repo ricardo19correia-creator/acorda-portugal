@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X, Coins } from 'lucide-react'
 import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
@@ -208,10 +209,23 @@ const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...FRAME_SHOP_ITEMS, ...AR
 const AVATAR_CATEGORIES = AVATAR_18_CATEGORIES
 const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', 'Épico', 'Lendário', 'Exclusivo']
 
-export default function LojaPage() {
+function LojaContent() {
   const { coins: userBalance, formattedCoins, deductCoins, isBalancePulsing } = useEconomy()
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab') as Category | null
   const [mounted, setMounted] = useState(false)
-  const [activeTab, setActiveTab] = useState<Category>('avatars')
+  const [activeTab, setActiveTab] = useState<Category>(() => {
+    if (tabParam && ['vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+      return tabParam
+    }
+    return 'avatars'
+  })
+
+  useEffect(() => {
+    if (tabParam && ['vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+      setActiveTab(tabParam)
+    }
+  }, [tabParam])
   const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
   const [frameCategoryFilter, setFrameCategoryFilter] = useState<string>('todas')
@@ -1913,3 +1927,18 @@ export default function LojaPage() {
     </div>
   )
 }
+
+export default function LojaPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500" />
+        </div>
+      }
+    >
+      <LojaContent />
+    </Suspense>
+  )
+}
+
