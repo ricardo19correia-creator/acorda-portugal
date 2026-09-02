@@ -11,7 +11,7 @@ import { useAuth } from '@/components/auth-provider'
 const HERO_STATS = [
   {
     icon: Sparkles,
-    value: '+1.000',
+    value: '+5.000',
     label: 'Perguntas Oficiais',
     sub: '18 categorias temáticas',
     tone: 'text-primary',
@@ -70,11 +70,23 @@ export function Hero() {
           Acorda Portugal
         </h1>
 
+        {/* 5-Second Conversion Punchline */}
+        <div
+          className="animate-rise mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-2 text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300 shadow-sm backdrop-blur-md"
+          style={{ animationDelay: '190ms' }}
+        >
+          <span>🇵🇹 Testa o Teu Conhecimento</span>
+          <span className="text-white/25 hidden sm:inline">•</span>
+          <span>Representa o Teu Distrito</span>
+          <span className="text-white/25 hidden sm:inline">•</span>
+          <span>Sobe no Ranking de Portugal</span>
+        </div>
+
         <p
-          className="animate-rise mt-5 max-w-2xl text-pretty text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground font-medium mx-auto"
+          className="animate-rise mt-4 max-w-2xl text-pretty text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground font-medium mx-auto"
           style={{ animationDelay: '240ms' }}
         >
-          Testa o teu conhecimento. Representa o teu distrito. Conquista o topo de Portugal no maior videojogo de trivia nacional.
+          O maior videojogo de trivia e cultura de Portugal. Joga a solo ou em Duelos 1v1, ganha XP, acumula moedas e coloca a tua região no topo nacional.
         </p>
 
         {/* Action CTAs: 3D Console/Mech Gaming Buttons Perfectly Centered */}

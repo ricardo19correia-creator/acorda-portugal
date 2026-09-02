@@ -247,7 +247,7 @@ export function PortugalHeroMap() {
   const [tilt, setTilt] = useState<{ rotateX: number; rotateY: number }>({ rotateX: 12, rotateY: -2 })
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Listen to unified publicProfiles and botPlayers for real district statistics
+  // Listen to publicProfiles for real district statistics
   useEffect(() => {
     const unsubscribe = subscribeRankings(
       'all',
@@ -287,8 +287,8 @@ export function PortugalHeroMap() {
         setTopPlayer(top)
 
         // 3. Agregação Distrital Exata:
-        // XP_Distrito = SUM(publicProfiles.xp) + SUM(botPlayers.xp)
-        // Jogadores_Distrito = COUNT(humanos) + COUNT(bots)
+        // XP_Distrito = SUM(publicProfiles.xp)
+        // Jogadores_Distrito = COUNT(humanos)
         const statsMap = computeDistrictStats(unifiedList)
         const heroStatsMap = new Map<string, HeroDistrictStat>()
 

@@ -284,8 +284,8 @@ export function PlayerProfile() {
     ownedItems: ['default_tron'],
     equippedTheme: 'default_tron',
     isVip: false,
-    ownedAvatars: ['camoes_2050'],
-    equippedAvatar: 'camoes_2050',
+    ownedAvatars: ['avatar_01'],
+    equippedAvatar: 'avatar_01',
   })
 
   useEffect(() => {
@@ -1293,8 +1293,8 @@ export function PlayerProfile() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {AVATAR_CATALOG.map((av) => {
-            const isOwned = (invState.ownedAvatars || ['camoes_2050']).includes(av.id);
-            const isEquipped = (invState.equippedAvatar || 'camoes_2050') === av.id;
+            const isOwned = (invState.ownedAvatars || ['avatar_01']).includes(av.id);
+            const isEquipped = (invState.equippedAvatar || 'avatar_01') === av.id;
 
             return (
               <div

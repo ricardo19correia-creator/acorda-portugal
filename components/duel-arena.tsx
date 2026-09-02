@@ -788,13 +788,10 @@ export function DuelArena({
       claimDuelRewards(duel.id, currentPlayer.uid)
         .then((res) => {
           setClaimedReward(res)
-          if (res?.euros && res.euros > 0) {
-            void addCoins(res.euros, 'Vitória em Duelo 1v1')
-          }
         })
         .catch((e) => console.error('Erro ao resgatar recompensas:', e))
     }
-  }, [duel?.status, currentPlayer.uid, claimedReward, addCoins])
+  }, [duel?.status, currentPlayer.uid, claimedReward])
 
   const copyCode = () => {
     if (!duel) return

@@ -33,10 +33,10 @@ export function EventosView() {
             </div>
 
             <h4 className="font-display font-black text-sm text-white">{e.title}</h4>
-            <p className="text-xs text-slate-300 leading-relaxed">{e.description}</p>
+            <p className="text-xs text-slate-300 leading-relaxed">{e.timeLeft}</p>
 
             <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
-              <span>{e.questions}</span>
+              <span>Recompensa</span>
               <span className="text-emerald-400 font-bold">{e.reward}</span>
             </div>
           </div>

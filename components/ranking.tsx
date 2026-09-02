@@ -81,7 +81,7 @@ export function Ranking() {
     }
   }, [user?.photoURL])
 
-  // Subscrição em Tempo Real combinando publicProfiles e botPlayers
+  // Subscrição em Tempo Real de Jogadores Reais (publicProfiles)
   useEffect(() => {
     setLoading(true)
     const unsubscribe = subscribeRankings(

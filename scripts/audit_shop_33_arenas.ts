@@ -26,7 +26,7 @@ function auditShopArenas() {
   const missingFiles: string[] = []
 
   ARENA_SHOP_CATALOG.forEach((a, i) => {
-    const filename = path.basename(a.image)
+    const filename = path.basename(a.image || '')
     const exists = fs.existsSync(path.join(publicArenasDir, filename))
     foundImages.add(filename)
     if (!exists) missingFiles.push(filename)

@@ -43,7 +43,7 @@ export async function GET(req: Request) {
     if (mode === 'duplicates') {
       let pool = registry.getAllQuestions()
       if (categoryFilter !== 'all') {
-        pool = pool.filter((q) => q.tema === categoryFilter)
+        pool = pool.filter((q) => (q as any).tema === categoryFilter || q.category === categoryFilter)
       }
       // Amostra comparativa representativa
       const sample = pool.slice(0, 1000)
@@ -63,24 +63,24 @@ export async function GET(req: Request) {
     let questions = registry.getAllQuestions()
 
     if (categoryFilter !== 'all') {
-      questions = questions.filter((q) => q.tema === categoryFilter)
+      questions = questions.filter((q) => (q as any).tema === categoryFilter || q.category === categoryFilter)
     }
 
     if (subcategoryFilter !== 'all') {
-      questions = questions.filter((q) => q.subtema === subcategoryFilter)
+      questions = questions.filter((q) => (q as any).subtema === subcategoryFilter || q.subcategory === subcategoryFilter)
     }
 
     if (difficultyFilter !== 'all') {
       const diffNum = Number(difficultyFilter)
-      questions = questions.filter((q) => q.dificuldade === diffNum)
+      questions = questions.filter((q) => (q as any).dificuldade === diffNum || q.difficulty === diffNum)
     }
 
     if (searchQuery) {
       questions = questions.filter((q) => {
-        const text = (q.pergunta || '').toLowerCase()
+        const text = (q.question || (q as any).pergunta || '').toLowerCase()
         const id = String(q.id || '').toLowerCase()
-        const explanation = (q.explicacao || '').toLowerCase()
-        const opts = (q.opcoes || []).join(' ').toLowerCase()
+        const explanation = (q.explanation || (q as any).explicacao || '').toLowerCase()
+        const opts = (Array.isArray(q.options) ? q.options.map((o: any) => typeof o === 'string' ? o : o.text) : []).join(' ').toLowerCase()
         return text.includes(searchQuery) || id.includes(searchQuery) || explanation.includes(searchQuery) || opts.includes(searchQuery)
       })
     }
@@ -129,11 +129,11 @@ export async function POST(req: Request) {
     if (action === 'edit') {
       const updated = {
         ...question,
-        pergunta: questionData?.pergunta || question.pergunta,
-        opcoes: questionData?.opcoes || question.opcoes,
-        respostaCorreta: questionData?.respostaCorreta ?? question.respostaCorreta,
-        explicacao: questionData?.explicacao ?? question.explicacao,
-        dificuldade: questionData?.dificuldade ?? question.dificuldade,
+        question: questionData?.question || questionData?.pergunta || question.question,
+        options: questionData?.options || questionData?.opcoes || question.options,
+        correctAnswer: questionData?.correctAnswer ?? questionData?.respostaCorreta ?? question.correctAnswer,
+        explanation: questionData?.explanation ?? questionData?.explicacao ?? question.explanation,
+        difficulty: questionData?.difficulty ?? questionData?.dificuldade ?? question.difficulty,
       }
 
       await recordAdminAuditLog({

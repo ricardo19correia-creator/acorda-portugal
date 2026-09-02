@@ -30,7 +30,7 @@ export function ConquistasView() {
                 {ach.icon || '🏅'}
               </div>
               <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                +{ach.xpReward} XP
+                +€{ach.reward.coins} Moedas
               </span>
             </div>
 
@@ -40,8 +40,8 @@ export function ConquistasView() {
             </div>
 
             <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Recompensa Moedas</span>
-              <span className="text-amber-400 font-mono font-bold">+€{ach.coinReward || 0}</span>
+              <span>Recompensa</span>
+              <span className="text-amber-400 font-mono font-bold">+€{ach.reward.coins || 0}</span>
             </div>
           </div>
         ))}

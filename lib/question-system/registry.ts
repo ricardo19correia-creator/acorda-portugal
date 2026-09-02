@@ -240,6 +240,10 @@ export class QuestionRegistry {
     return this.byId.get(id)
   }
 
+  public getQuestionById(id: string): Question | undefined {
+    return this.getById(id)
+  }
+
   /**
    * Seleção para "Tema Completo" — Mistura perguntas de todos os subtemas daquele tema
    */

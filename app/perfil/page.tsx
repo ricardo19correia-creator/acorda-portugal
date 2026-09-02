@@ -470,10 +470,12 @@ function PerfilContent() {
         const savedTitle = (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : null) || 'Membro Fundador'
         if (savedTitle) setTitle(savedTitle)
 
-        const liveBalance = profile?.coins ?? profile?.euros ?? (typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || 0) : 0)
+        const savedCoins = typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || 0) : 0
+        const liveBalance = profile?.coins ?? profile?.euros ?? savedCoins
         setUserCoins(liveBalance)
 
-        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+        const cachedXp = typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0
+        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(profile.xp, cachedXp) : cachedXp
         setUserXp(currentXp)
         setUserLevel(calculateLevelProgress(currentXp).currentLevel.level)
 
@@ -2842,7 +2844,7 @@ function PerfilContent() {
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 max-h-56 overflow-y-auto p-2.5 bg-slate-900/60 rounded-2xl border border-slate-800">
                   {REAL_AVATARS.map((avatarItem) => {
-                    const isFree = avatarItem.currency === 'free' || avatarItem.id === 'camoes_2050' || avatarItem.price === 'Grátis' || avatarItem.price === 0
+                    const isFree = avatarItem.currency === 'free' || avatarItem.id === DEFAULT_AVATAR_ID || avatarItem.price === 'Grátis' || avatarItem.price === 0
                     const isOwned = isFree || inventory.avatars.includes(avatarItem.id) || unlockedItems.includes(avatarItem.id)
                     const isSelected = editAvatar === avatarItem.image || editAvatarId === avatarItem.id
 

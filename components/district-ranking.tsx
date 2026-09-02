@@ -54,7 +54,7 @@ export function DistrictRanking() {
     return initialMap
   })
 
-  // Subscrição em Tempo Real combinando publicProfiles e botPlayers com agregação nos 20 Distritos
+  // Subscrição em Tempo Real de Jogadores Reais com agregação nos 20 Distritos
   useEffect(() => {
     const unsubscribe = subscribeRankings(
       'all',
@@ -82,7 +82,7 @@ export function DistrictRanking() {
           }
         }
 
-        // Agregação Distrital Exata: XP = SUM(publicProfiles.xp) + SUM(botPlayers.xp)
+        // Agregação Distrital Exata: XP = SUM(publicProfiles.xp)
         const statsMap = computeDistrictStats(unifiedList)
         const districtStatMap = new Map<string, DistrictStatItem>()
 

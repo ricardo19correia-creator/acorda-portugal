@@ -284,7 +284,7 @@ export function PerguntasView({ getIdToken }: PerguntasViewProps) {
                 <option value="all">📂 Todas as 18 Categorias</option>
                 {MAIN_CATEGORIES.map((c) => (
                   <option key={c.slug} value={c.slug}>
-                    {c.icon} {c.name}
+                    {c.name}
                   </option>
                 ))}
               </select>

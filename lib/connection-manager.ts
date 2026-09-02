@@ -77,6 +77,10 @@ class ConnectionManager {
     })
   }
 
+  public getState(): ConnectionState {
+    return this.state
+  }
+
   public getDetail(): ConnectionStatusDetail {
     return {
       isOnline: this.isOnline,

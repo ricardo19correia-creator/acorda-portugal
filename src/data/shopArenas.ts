@@ -66,8 +66,8 @@ export function getOfficialArenaImage(arenaId: string): string {
     return ARENA_IMAGES[normalizedId as ArenaImageKey]
   }
   const match = ARENA_SHOP_CATALOG.find((a) => a.id.toLowerCase() === normalizedId)
-  if (match) return match.image
-  return ARENA_SHOP_CATALOG[0].image
+  if (match && match.image) return match.image
+  return ARENA_SHOP_CATALOG[0].image || '/arenas/praca-liberdade.jpg'
 }
 
 export const getArenaRarityBadge = (rarity: ArenaRarity): string => {

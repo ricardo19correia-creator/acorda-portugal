@@ -219,6 +219,7 @@ export type Player = {
 
 export type EquippedCosmetics = {
   avatar?: string | null
+  avatarId?: string | null
   arena?: string | null
   frame?: string | null
   title?: string | null

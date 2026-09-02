@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAdminFirestore, getAdminAuth } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 import { calculateLevelProgress } from '@/lib/progression'
-import { ECONOMY_CONFIG, calculateLevelUpCoinReward } from '@/lib/economy'
+import { ECONOMY_CONFIG, calculateLevelUpCoinReward, calculateMatchCoinReward } from '@/lib/economy'
 import { QuestionRegistry } from '@/lib/question-system/registry'
 
 export const dynamic = 'force-dynamic'
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
       let isCorrect = false
       if (canonicalQ) {
-        const correctIndex = typeof canonicalQ.respostaCorreta === 'number' ? canonicalQ.respostaCorreta : 0
+        const correctIndex = typeof canonicalQ.correctAnswer === 'number' ? canonicalQ.correctAnswer : (typeof (canonicalQ as any).respostaCorreta === 'number' ? (canonicalQ as any).respostaCorreta : 0)
         const letters = ['A', 'B', 'C', 'D']
         const correctLetter = letters[correctIndex] || 'A'
         isCorrect = ans.selectedOption === correctLetter
@@ -64,8 +64,12 @@ export async function POST(request: NextRequest) {
     const perfectBonus = correctCount === answers.length && answers.length >= 10 ? 250 : 0
     const xpReward = baseWinXp + perfectBonus
 
-    const baseCoins = Math.round(correctCount * ECONOMY_CONFIG.QUIZ_REWARDS.COINS_PER_CORRECT_ANSWER)
-    const coinReward = baseCoins
+    const coinReward = calculateMatchCoinReward({
+      correctCount,
+      totalQuestions: answers.length || 1,
+      bestStreak: 1,
+      difficulty: 1,
+    })
 
     const db = getAdminFirestore()
     const userRef = db.collection('users').doc(userId)

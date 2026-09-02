@@ -1,7 +1,7 @@
 import { doc, runTransaction, serverTimestamp, increment, arrayUnion } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
-import { calculateLevelUpCoinReward, ECONOMY_CONFIG } from '@/lib/economy'
+import { calculateLevelUpCoinReward, calculateMatchCoinReward, ECONOMY_CONFIG } from '@/lib/economy'
 import type { UserProfile } from '@/lib/game-data'
 
 export interface AwardMatchRewardParams {
@@ -20,6 +20,19 @@ export interface AwardMatchRewardParams {
   answeredQuestionIds?: string[]
 }
 
+export interface UnlockedAchievementInfo {
+  id: string
+  title: string
+  icon: string
+  description?: string
+}
+
+export interface CompletedMissionInfo {
+  id: string
+  title: string
+  reward: string
+}
+
 export interface MatchRewardOutcome {
   alreadyProcessed: boolean
   matchId: string
@@ -33,10 +46,14 @@ export interface MatchRewardOutcome {
   newLevel: number
   leveledUp: boolean
   levelTitle: string
+  oldStreak: number
+  newStreak: number
+  unlockedAchievements: UnlockedAchievementInfo[]
+  completedMissions: CompletedMissionInfo[]
 }
 
-// In-memory cache de matchIds processados no cliente para resposta instantânea
-const clientProcessedMatches = new Set<string>()
+// In-memory cache de matchIds processados no cliente para resposta e retry instantâneos
+const clientProcessedMatches = new Map<string, MatchRewardOutcome>()
 
 /**
  * Atribui XP e moedas de forma estritamente ATÓMICA e IDEMPOTENTE no Firestore.
@@ -73,23 +90,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
   // 1. Verificação rápida em memória no cliente
   if (clientProcessedMatches.has(matchId)) {
     console.log(`[XP] REWARD_ALREADY_PROCESSED (in-memory matchId: ${matchId})`)
-    const savedXp = typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0
-    const savedCoins = typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || 0) : 0
-    const prog = calculateLevelProgress(savedXp)
-    return {
-      alreadyProcessed: true,
-      matchId,
-      xpEarned: 0,
-      coinsEarned: 0,
-      oldXp: savedXp,
-      newTotalXp: savedXp,
-      oldCoins: savedCoins,
-      newTotalCoins: savedCoins,
-      oldLevel: prog.currentLevel.level,
-      newLevel: prog.currentLevel.level,
-      leveledUp: false,
-      levelTitle: prog.currentLevel.title,
-    }
+    return clientProcessedMatches.get(matchId)!
   }
 
   // 2. Cálculo determinístico da recompensa
@@ -105,9 +106,12 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
     const baseMatchXp = correctAnswers * 50 + Math.round(score / 10)
     calculatedXp = Math.max(10, Math.round(baseMatchXp * difficultyMultiplier))
 
-    const baseWinCoins = Math.round(correctAnswers * ECONOMY_CONFIG.QUIZ_REWARDS.COINS_PER_CORRECT_ANSWER)
-    const streakBonus = bestStreak >= 5 ? ECONOMY_CONFIG.STREAK_BONUSES.STREAK_5 : 0
-    calculatedCoins = baseWinCoins + streakBonus
+    calculatedCoins = calculateMatchCoinReward({
+      correctCount: correctAnswers,
+      totalQuestions,
+      bestStreak,
+      difficulty: difficultyMultiplier,
+    })
   }
 
   console.log(`[XP] CALCULATED (xp: +${calculatedXp}, coins: +${calculatedCoins}, matchId: ${matchId})`)
@@ -125,20 +129,25 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       if (rewardSnap.exists()) {
         const rData = rewardSnap.data() || {}
         console.log(`[XP] REWARD_ALREADY_PROCESSED (firestore matchId: ${matchId})`)
-        return {
+        const existingOutcome: MatchRewardOutcome = {
           alreadyProcessed: true,
           matchId,
-          xpEarned: 0,
-          coinsEarned: 0,
-          oldXp: rData.newTotalXp || 0,
-          newTotalXp: rData.newTotalXp || 0,
-          oldCoins: rData.newTotalCoins || 0,
-          newTotalCoins: rData.newTotalCoins || 0,
-          oldLevel: rData.newLevel || 1,
-          newLevel: rData.newLevel || 1,
-          leveledUp: false,
-          levelTitle: '',
-        } as MatchRewardOutcome
+          xpEarned: typeof rData.xpEarned === 'number' ? rData.xpEarned : calculatedXp,
+          coinsEarned: typeof rData.coinsEarned === 'number' ? rData.coinsEarned : calculatedCoins,
+          oldXp: typeof rData.oldXp === 'number' ? rData.oldXp : 0,
+          newTotalXp: typeof rData.newTotalXp === 'number' ? rData.newTotalXp : (rData.oldXp || 0) + calculatedXp,
+          oldCoins: typeof rData.oldCoins === 'number' ? rData.oldCoins : 0,
+          newTotalCoins: typeof rData.newTotalCoins === 'number' ? rData.newTotalCoins : (rData.oldCoins || 0) + calculatedCoins,
+          oldLevel: typeof rData.oldLevel === 'number' ? rData.oldLevel : 1,
+          newLevel: typeof rData.newLevel === 'number' ? rData.newLevel : 1,
+          leveledUp: (rData.newLevel || 1) > (rData.oldLevel || 1),
+          levelTitle: calculateLevelProgress(rData.newTotalXp || 0).currentLevel.title,
+          oldStreak: typeof rData.oldStreak === 'number' ? rData.oldStreak : 0,
+          newStreak: typeof rData.newStreak === 'number' ? rData.newStreak : 1,
+          unlockedAchievements: Array.isArray(rData.unlockedAchievements) ? rData.unlockedAchievements : [],
+          completedMissions: Array.isArray(rData.completedMissions) ? rData.completedMissions : [],
+        }
+        return existingOutcome
       }
 
       // B. Ler utilizador atual
@@ -159,7 +168,26 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       const totalAwardedCoins = calculatedCoins + levelUpBonusCoins
       const nextTotalCoins = currentCoins + totalAwardedCoins
 
-      // D. Atualização estatística de categorias
+      // D. Cálculo de Sequência Diária (Streak em dias consecutivos)
+      const todayStr = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+      const lastDate = typeof (userData as any).lastPlayedDate === 'string' ? (userData as any).lastPlayedDate : ''
+      const currentStreak = typeof userData.streak === 'number' ? userData.streak : 0
+      let nextStreak = currentStreak
+
+      if (lastDate === todayStr) {
+        nextStreak = currentStreak > 0 ? currentStreak : 1
+      } else {
+        const yesterday = new Date()
+        yesterday.setDate(yesterday.getDate() - 1)
+        const yesterdayStr = yesterday.toISOString().slice(0, 10)
+        if (lastDate === yesterdayStr) {
+          nextStreak = currentStreak + 1
+        } else {
+          nextStreak = 1
+        }
+      }
+
+      // E. Atualização estatística de categorias
       const existingCategoryStats = (userData as any).categoryStats || {}
       const curCat = existingCategoryStats[categorySlug] || { totalQuestions: 0, correctAnswers: 0, gamesPlayed: 0, score: 0 }
       const updatedCat = {
@@ -169,7 +197,43 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         score: (curCat.score || 0) + score,
       }
 
-      // E. Registar documento de recompensa única (Garante idempotência absoluta)
+      // F. Verificação de Conquistas alcançadas nesta partida
+      const existingAchievements = Array.isArray(userData.unlockedAchievements) ? userData.unlockedAchievements : []
+      const newlyUnlocked: UnlockedAchievementInfo[] = []
+
+      const totalGamesAfter = (userData.gamesPlayed || 0) + 1
+      const totalQuestionsAfter = (userData.questionsAnswered || 0) + totalQuestions
+      const totalCorrectAfter = (userData.correctAnswers || 0) + correctAnswers
+
+      if (!existingAchievements.includes('ach_primeiros_passos') && totalGamesAfter >= 1) {
+        newlyUnlocked.push({ id: 'ach_primeiros_passos', title: 'Primeiros Passos', icon: '🎯', description: 'Concluíste a tua primeira partida de quiz!' })
+      }
+      if (!existingAchievements.includes('ach_aprendiz_lusitano') && totalQuestionsAfter >= 25) {
+        newlyUnlocked.push({ id: 'ach_aprendiz_lusitano', title: 'Aprendiz Lusitano', icon: '📚', description: 'Respondeste a 25 perguntas no total!' })
+      }
+      if (!existingAchievements.includes('ach_sabio_nacao') && totalQuestionsAfter >= 100) {
+        newlyUnlocked.push({ id: 'ach_sabio_nacao', title: 'Sábio da Nação', icon: '🧠', description: 'Respondeste a 100 perguntas!' })
+      }
+      if (!existingAchievements.includes('ach_nivel_5') && newLevel >= 5) {
+        newlyUnlocked.push({ id: 'ach_nivel_5', title: 'Veterano em Ascensão', icon: '⚡', description: 'Alcançaste o Nível 5!' })
+      }
+      if (!existingAchievements.includes('ach_nivel_10') && newLevel >= 10) {
+        newlyUnlocked.push({ id: 'ach_nivel_10', title: 'Lenda Viva', icon: '🌟', description: 'Alcançaste o Nível 10!' })
+      }
+      if (!existingAchievements.includes('ach_sequencia_ouro') && nextStreak >= 7) {
+        newlyUnlocked.push({ id: 'ach_sequencia_ouro', title: 'Fidelidade de Ouro', icon: '🔥', description: '7 dias consecutivos de jogo!' })
+      }
+
+      // G. Verificação de Missões Diárias concluídas
+      const completedMissions: CompletedMissionInfo[] = []
+      if (totalGamesAfter >= 1) {
+        completedMissions.push({ id: 'daily_match_1', title: 'Participação Diária', reward: '+€50' })
+      }
+      if (correctAnswers >= 5) {
+        completedMissions.push({ id: 'daily_correct_5', title: 'Precisão Lusa', reward: '+€100' })
+      }
+
+      // H. Registar documento de recompensa única (Garante idempotência absoluta)
       transaction.set(rewardRef, {
         matchId,
         userId,
@@ -182,17 +246,25 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         coinsEarned: totalAwardedCoins,
         oldXp: currentXp,
         newTotalXp: nextTotalXp,
+        oldCoins: currentCoins,
+        newTotalCoins: nextTotalCoins,
         oldLevel,
         newLevel,
+        oldStreak: currentStreak,
+        newStreak: nextStreak,
+        unlockedAchievements: newlyUnlocked,
+        completedMissions,
         processedAt: serverTimestamp(),
       })
 
-      // F. Atualizar documento do utilizador
+      // I. Atualizar documento do utilizador
       const userUpdatePayload: Record<string, any> = {
         xp: nextTotalXp,
         coins: nextTotalCoins,
         euros: nextTotalCoins,
         level: newLevel,
+        streak: nextStreak,
+        lastPlayedDate: todayStr,
         gamesPlayed: increment(1),
         questionsAnswered: increment(totalQuestions),
         correctAnswers: increment(correctAnswers),
@@ -201,6 +273,10 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         [`categoryStats.${categorySlug}`]: updatedCat,
         lastPlayedAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
+      }
+
+      if (newlyUnlocked.length > 0) {
+        userUpdatePayload.unlockedAchievements = arrayUnion(...newlyUnlocked.map((a) => a.id))
       }
 
       if (matchType === 'duel_1v1') {
@@ -222,7 +298,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
 
       transaction.update(userRef, userUpdatePayload)
 
-      // G. Atualizar Perfil Público
+      // J. Atualizar Perfil Público
       transaction.set(
         publicProfileRef,
         {
@@ -237,7 +313,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         { merge: true }
       )
 
-      // H. Registar na coleção games
+      // K. Registar na coleção games
       transaction.set(
         gameRef,
         {
@@ -272,26 +348,45 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         newLevel,
         leveledUp,
         levelTitle: levelProg.currentLevel.title,
+        oldStreak: currentStreak,
+        newStreak: nextStreak,
+        unlockedAchievements: newlyUnlocked,
+        completedMissions,
       } as MatchRewardOutcome
     })
 
-    clientProcessedMatches.add(matchId)
+    clientProcessedMatches.set(matchId, outcome)
 
-    // Sincronizar cache local imediatamente
+    // Sincronizar cache local e eventos imediatamente
     if (typeof window !== 'undefined') {
       try {
         localStorage.setItem('user_xp', String(outcome.newTotalXp))
         localStorage.setItem('user_level', String(outcome.newLevel))
         localStorage.setItem('user_coins', String(outcome.newTotalCoins))
         localStorage.setItem('user_euros', String(outcome.newTotalCoins))
+        localStorage.setItem('user_streak', String(outcome.newStreak))
         localStorage.setItem(`match_reward_${matchId}`, '1')
       } catch {}
 
       window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: outcome.newTotalCoins } }))
-      window.dispatchEvent(new CustomEvent('profile_updated', { detail: { xp: outcome.newTotalXp, level: outcome.newLevel } }))
+      window.dispatchEvent(
+        new CustomEvent('profile_updated', {
+          detail: {
+            xp: outcome.newTotalXp,
+            level: outcome.newLevel,
+            coins: outcome.newTotalCoins,
+            euros: outcome.newTotalCoins,
+            streak: outcome.newStreak,
+            gamesPlayed: 1,
+            correctAnswers,
+            questionsAnswered: totalQuestions,
+            bestStreak,
+          },
+        })
+      )
     }
 
-    console.log(`[XP] PERSIST_SUCCESS (matchId: ${matchId}, newTotalXp: ${outcome.newTotalXp}, newLevel: ${outcome.newLevel})`)
+    console.log(`[XP] PERSIST_SUCCESS (matchId: ${matchId}, newTotalXp: ${outcome.newTotalXp}, newLevel: ${outcome.newLevel}, streak: ${outcome.newStreak})`)
     console.log(`[XP] CURRENT_TOTAL (xp: ${outcome.newTotalXp}, level: ${outcome.newLevel})`)
     console.log(`[PROFILE] XP_REFRESH (dispatched events and updated localStorage)`)
 

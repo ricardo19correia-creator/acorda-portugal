@@ -72,20 +72,21 @@ export function runArenaAudit(): AuditResult {
     if (names.has(arena.name)) errors.push(`Nome duplicado: ${arena.name}`)
     names.add(arena.name)
 
-    if (images.has(arena.image)) errors.push(`Imagem duplicada no catálogo: ${arena.image}`)
-    images.add(arena.image)
+    const img = arena.image || ''
+    if (images.has(img)) errors.push(`Imagem duplicada no catálogo: ${img}`)
+    images.add(img)
 
-    const basename = path.basename(arena.image)
-    const exists = fs.existsSync(path.join(arenasDir, basename))
+    const basename = path.basename(img)
+    const exists = Boolean(basename) && fs.existsSync(path.join(arenasDir, basename))
     if (!exists) {
-      missingImages.push(`Imagem em falta no disco: ${arena.image} (Arena: ${arena.name})`)
+      missingImages.push(`Imagem em falta no disco: ${img} (Arena: ${arena.name})`)
     }
 
     const officialImg = getOfficialArenaImage(arena.id)
-    const mapConsistent = officialImg === arena.image
+    const mapConsistent = officialImg === img
 
     console.log(
-      `Arena ${String(idx + 1).padStart(2, '0')} [${arena.id.padEnd(30)}] -> ${arena.image.padEnd(32)} ${exists && mapConsistent ? '✓' : '❌'}`
+      `Arena ${String(idx + 1).padStart(2, '0')} [${arena.id.padEnd(30)}] -> ${img.padEnd(32)} ${exists && mapConsistent ? '✓' : '❌'}`
     )
   })
 

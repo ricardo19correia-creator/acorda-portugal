@@ -12,6 +12,12 @@ export interface CommunityPost {
   createdAt: Timestamp | Date | string | number | null
   destaque?: boolean
   oficial?: boolean
+  autor?: string
+  tag?: string
+  distrito?: string
+  categoria?: string
+  conteudo?: string
+  comentariosCount?: number
 }
 
 export type PublicacaoComunidade = CommunityPost

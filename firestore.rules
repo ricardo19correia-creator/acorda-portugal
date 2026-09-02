@@ -62,11 +62,9 @@ service cloud.firestore {
       allow delete: if isOwner(userId) || isAdmin();
     }
 
-    // Coleção de Bots e NPCs para Ranking e Mapa Tático
+    // Coleção legada desativada (Acesso exclusivo de administração para higienização)
     match /botPlayers/{botId} {
-      allow read: if true;
-      allow create, update: if true;
-      allow delete: if isAdmin();
+      allow read, write: if isAdmin();
     }
 
     // Fila de Matchmaking 1v1
@@ -83,7 +81,8 @@ service cloud.firestore {
     match /games/{gameId} {
       allow read: if true;
       allow create: if isAuthenticated();
-      allow update, delete: if isAdmin();
+      allow update: if isAuthenticated() && (request.auth.uid == resource.data.userId || request.auth.uid == request.resource.data.userId || isAdmin());
+      allow delete: if isAdmin();
     }
 
     // Reportes de Perguntas e Suporte

@@ -82,8 +82,8 @@ export interface DuelPlayerData {
   answers: DuelAnswer[]
   finished: boolean
   finishedAt?: number | null
-  playerType?: 'human' | 'npc'
-  isNpc?: boolean
+  playerType?: 'human'
+  isNpc?: false
   xp?: number
   elo?: number
   rating?: number
@@ -1056,13 +1056,13 @@ export async function submitDuelAnswer(
         winnerUid = duel.playerA.uid
         winnerReason = 'score'
       } else if (scoreB > scoreA) {
-        winnerUid = duel.playerB?.uid || 'npc_opponent'
+        winnerUid = duel.playerB?.uid || 'opponent'
         winnerReason = 'score'
       } else if (timeA < timeB) {
         winnerUid = duel.playerA.uid
         winnerReason = 'score'
       } else if (timeB < timeA) {
-        winnerUid = duel.playerB?.uid || 'npc_opponent'
+        winnerUid = duel.playerB?.uid || 'opponent'
         winnerReason = 'score'
       } else {
         winnerUid = null
@@ -1277,7 +1277,17 @@ export async function claimDuelRewards(
     } catch {}
 
     window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: outcome.newEuros } }))
-    window.dispatchEvent(new CustomEvent('profile_updated', { detail: { xp: outcome.newXp, level: outcome.newLevel } }))
+    window.dispatchEvent(
+      new CustomEvent('profile_updated', {
+        detail: {
+          xp: outcome.newXp,
+          level: outcome.newLevel,
+          coins: outcome.newEuros,
+          euros: outcome.newEuros,
+          gamesPlayed: 1,
+        },
+      })
+    )
   }
 
   console.log(`[XP] PERSIST_SUCCESS (duelId: ${duelId}, newTotalXp: ${outcome.newXp}, newLevel: ${outcome.newLevel})`)

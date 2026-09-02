@@ -100,12 +100,12 @@ export function LivePlayersModal({
                     <div className="relative shrink-0">
                       {/* Imagem do Avatar */}
                       <img
-                        src={player.photoURL || '/images/avatars/camoes-2050.jpg'}
+                        src={player.photoURL || '/images/avatars/avatar_01.png'}
                         alt={player.displayName}
                         className="h-11 w-11 rounded-full object-cover border-2 border-emerald-400/50 bg-slate-800"
                         onError={(e) => {
                           // Fallback gracioso caso a imagem quebre
-                          (e.target as HTMLImageElement).src = '/images/avatars/camoes-2050.jpg'
+                          (e.target as HTMLImageElement).src = '/images/avatars/avatar_01.png'
                         }}
                       />
                       {/* Ponto indicador no avatar */}

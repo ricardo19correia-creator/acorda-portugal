@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "cap:sync": "cap sync android",
     "cap:copy": "cap copy android",
-    "build:apk": "cmd /c \"set JAVA_HOME=C:\\Users\\Riky Moreira\\.jdks\\jbr-21.0.11& set PATH=C:\\Users\\Riky Moreira\\.jdks\\jbr-21.0.11\\bin;%PATH%& cd android & gradlew.bat assembleRelease\"",
-    "build:aab": "cmd /c \"set JAVA_HOME=C:\\Users\\Riky Moreira\\.jdks\\jbr-21.0.11& set PATH=C:\\Users\\Riky Moreira\\.jdks\\jbr-21.0.11\\bin;%PATH%& cd android & gradlew.bat bundleRelease\"",
+    "build:apk": "cmd /c \"set JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr& set PATH=C:\\Program Files\\Android\\Android Studio\\jbr\\bin;%PATH%& cd android & gradlew.bat assembleRelease\"",
+    "build:aab": "cmd /c \"set JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr& set PATH=C:\\Program Files\\Android\\Android Studio\\jbr\\bin;%PATH%& cd android & gradlew.bat bundleRelease\"",
     "audit:release": "tsx scripts/master_release_audit.ts"
   },
   "dependencies": {

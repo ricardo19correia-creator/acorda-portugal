@@ -82,7 +82,7 @@ const AVATAR_SHOP_ITEMS: ShopItem[] = avatarShopList.map((av) => ({
   isExclusive: av.isExclusive,
   unlockCondition: av.unlockCondition,
   icon: av.icon,
-  image: av.image,
+  image: av.image ? `${av.image}?v=2` : '',
   badge: av.rarity,
   badgeColor: getRarityBadgeColor(av.rarity),
 }))
@@ -1312,7 +1312,7 @@ export default function LojaPage() {
                           className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md bg-slate-950"
                         >
                           <img 
-                            src={item.image || item.shopImage || ''} 
+                            src={item.image || (item as any).shopImage || ''} 
                             alt={item.name} 
                             className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
                           />
@@ -1470,7 +1470,7 @@ export default function LojaPage() {
               <div 
                 className="relative h-72 sm:h-96 w-full bg-cover bg-center overflow-hidden flex flex-col justify-between p-6"
                 style={{
-                  backgroundImage: `url('${(previewArenaItem as any).gameBackground || previewArenaItem.image || previewArenaItem.shopImage || ''}')`,
+                  backgroundImage: `url('${(previewArenaItem as any).gameBackground || previewArenaItem.image || (previewArenaItem as any).shopImage || ''}')`,
                 }}
               >
                 <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={false} />

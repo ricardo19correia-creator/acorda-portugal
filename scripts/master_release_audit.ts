@@ -27,8 +27,8 @@ async function runMasterAudit() {
   let brokenAssets = 0
   ARENA_SHOP_CATALOG.forEach(arena => {
     if (!arena.id || !arena.name || !arena.category) brokenAssets++
-    const basename = path.basename(arena.image)
-    if (!fs.existsSync(path.join(arenasDir, basename))) missingImages++
+    const basename = path.basename(arena.image || '')
+    if (!basename || !fs.existsSync(path.join(arenasDir, basename))) missingImages++
   })
 
   // 3. Validar Artefactos de Release Android

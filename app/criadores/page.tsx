@@ -265,20 +265,22 @@ export default function CriadoresPage() {
 
       // Filtro de Categoria
       if (categoriaFiltro !== 'todas') {
-        if (p.categoria.toLowerCase() !== categoriaFiltro.toLowerCase()) return false
+        const cat = p.categoria || p.category || ''
+        if (cat.toLowerCase() !== categoriaFiltro.toLowerCase()) return false
       }
 
       // Filtro de Distrito
       if (distritoFiltro !== 'Todos os Distritos') {
-        if (p.distrito.toLowerCase() !== distritoFiltro.toLowerCase()) return false
+        const dist = p.distrito || p.district || ''
+        if (dist.toLowerCase() !== distritoFiltro.toLowerCase()) return false
       }
 
       // Pesquisa Textual
       if (searchQuery.trim()) {
         const queryNorm = searchQuery.toLowerCase()
-        const matchText = p.conteudo.toLowerCase().includes(queryNorm)
-        const matchAuthor = p.autor.toLowerCase().includes(queryNorm)
-        const matchTag = p.tag.toLowerCase().includes(queryNorm)
+        const matchText = (p.conteudo || p.content || '').toLowerCase().includes(queryNorm)
+        const matchAuthor = (p.autor || p.authorName || '').toLowerCase().includes(queryNorm)
+        const matchTag = (p.tag || p.authorHandle || '').toLowerCase().includes(queryNorm)
         if (!matchText && !matchAuthor && !matchTag) return false
       }
 

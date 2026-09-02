@@ -24,6 +24,7 @@ import {
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { AppBackground } from '@/components/AppBackground'
+import { BUILD_INFO } from '@/lib/build-info'
 
 const APK_DOWNLOAD_URL = '/downloads/acorda-portugal-release.apk'
 const APK_FILE_NAME = 'acorda-portugal-release.apk'
@@ -238,7 +239,7 @@ export default function DownloadPage() {
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-300 font-bold">
               <span>Android</span>
               <span>•</span>
-              <span className="text-emerald-400 font-black">v1.0.0</span>
+              <span className="text-emerald-400 font-black">v{BUILD_INFO.version}</span>
               <span>•</span>
               <span>124,41 MB</span>
             </div>

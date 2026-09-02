@@ -92,8 +92,9 @@ async function runAcceptanceTests() {
   const seenUrls = new Set<string>()
   let duplicates = 0
   catalog.forEach((a) => {
-    if (seenUrls.has(a.image)) duplicates++
-    seenUrls.add(a.image)
+    const img = a.image || ''
+    if (seenUrls.has(img)) duplicates++
+    seenUrls.add(img)
   })
   assert(duplicates === 0, 'Zero URLs duplicadas no catálogo de arenas')
 

@@ -38,13 +38,13 @@ export async function POST(req: NextRequest) {
       const foundShop = SHOP_CATALOG.find((s) => s.id === itemId)
 
       if (foundArena) {
-        itemPrice = foundArena.priceValue || 500
+        itemPrice = (foundArena as any).priceValue || (foundArena as any).price || 500
         itemCategory = 'arenas'
       } else if (foundAvatar) {
-        itemPrice = foundAvatar.priceValue || 350
+        itemPrice = (foundAvatar as any).priceValue || (foundAvatar as any).price || 350
         itemCategory = 'avatars'
       } else if (foundTitle) {
-        itemPrice = foundTitle.priceValue || 200
+        itemPrice = (foundTitle as any).priceValue || (foundTitle as any).price || 200
         itemCategory = 'titulos'
       } else if (foundShop) {
         itemPrice = foundShop.price || 0

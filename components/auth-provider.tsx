@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { onAuthStateChanged, type User } from 'firebase/auth'
-import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, onSnapshot, serverTimestamp, getDoc } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
@@ -51,6 +51,8 @@ export type AuthState = {
   needsDistrictSelection: boolean
   setNeedsDistrictSelection: (needs: boolean) => void
   retryProfile: () => void
+  updateProfileLocally: (updater: Partial<UserProfile> | ((prev: UserProfile | null) => UserProfile | null)) => void
+  refreshProfile: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthState | null>(null)
@@ -151,7 +153,54 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [user])
 
-  // 1. Resiliência de Rede Passiva
+  const updateProfileLocally = useCallback((updater: Partial<UserProfile> | ((prev: UserProfile | null) => UserProfile | null)) => {
+    setProfile((prev) => {
+      const updated = typeof updater === 'function' ? updater(prev) : (prev ? { ...prev, ...updater } : null)
+      if (updated && typeof window !== 'undefined') {
+        try {
+          if (typeof updated.xp === 'number') localStorage.setItem('user_xp', String(updated.xp))
+          if (typeof updated.level === 'number') localStorage.setItem('user_level', String(updated.level))
+          if (typeof updated.coins === 'number') {
+            localStorage.setItem('user_coins', String(updated.coins))
+            localStorage.setItem('user_euros', String(updated.coins))
+          }
+          if (typeof updated.streak === 'number') localStorage.setItem('user_streak', String(updated.streak))
+        } catch {}
+      }
+      return updated
+    })
+  }, [])
+
+  const refreshProfile = useCallback(async () => {
+    if (!user?.uid) return
+    try {
+      const snap = await getDoc(doc(db, 'users', user.uid))
+      if (snap.exists()) {
+        const data = snap.data()
+        const currentXp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
+        const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : 50
+        const levelVal = calculateLevelProgress(currentXp).currentLevel.level
+        setProfile((prev) => {
+          if (!prev) return prev
+          return {
+            ...prev,
+            xp: currentXp,
+            coins: coinsVal,
+            euros: coinsVal,
+            level: levelVal,
+            streak: typeof data.streak === 'number' ? data.streak : prev.streak,
+            gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : prev.gamesPlayed,
+            correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : prev.correctAnswers,
+            questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : prev.questionsAnswered,
+          }
+        })
+      }
+    } catch (err) {
+      console.warn('[AUTH] Erro ao atualizar perfil remotamente:', err)
+    }
+  }, [user?.uid])
+
+  // 1. Resiliência de Rede Passiva e Sincronização em Tempo Real via Eventos
   useEffect(() => {
     const handleOnline = () => {
       console.log('[AUTH] Ligação de rede restaurada.')
@@ -166,11 +215,80 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setAuthStatus('NETWORK_TEMPORARY_ERROR')
     }
 
+    const handleProfileUpdated = (e: Event) => {
+      const customEvt = e as CustomEvent<{
+        xp?: number
+        level?: number
+        coins?: number
+        euros?: number
+        streak?: number
+        gamesPlayed?: number
+        correctAnswers?: number
+        questionsAnswered?: number
+        bestStreak?: number
+      }>
+      if (customEvt.detail) {
+        console.log('[AUTH] Sincronização em tempo real via profile_updated:', customEvt.detail)
+        setProfile((prev) => {
+          if (!prev) return prev
+          const newXp = typeof customEvt.detail.xp === 'number' ? customEvt.detail.xp : prev.xp
+          const newLevel = typeof customEvt.detail.level === 'number'
+            ? customEvt.detail.level
+            : (typeof customEvt.detail.xp === 'number' ? calculateLevelProgress(newXp).currentLevel.level : prev.level)
+          const newCoins = typeof customEvt.detail.coins === 'number'
+            ? customEvt.detail.coins
+            : (typeof customEvt.detail.euros === 'number' ? customEvt.detail.euros : (prev.coins ?? prev.euros ?? 0))
+          const newStreak = typeof customEvt.detail.streak === 'number' ? customEvt.detail.streak : prev.streak
+
+          if (typeof window !== 'undefined') {
+            try {
+              localStorage.setItem('user_xp', String(newXp))
+              localStorage.setItem('user_level', String(newLevel))
+              localStorage.setItem('user_coins', String(newCoins))
+              localStorage.setItem('user_euros', String(newCoins))
+              localStorage.setItem('user_streak', String(newStreak))
+            } catch {}
+          }
+
+          return {
+            ...prev,
+            xp: newXp,
+            level: newLevel,
+            coins: newCoins,
+            euros: newCoins,
+            streak: newStreak,
+            gamesPlayed: typeof customEvt.detail.gamesPlayed === 'number' ? customEvt.detail.gamesPlayed : prev.gamesPlayed,
+            correctAnswers: typeof customEvt.detail.correctAnswers === 'number' ? customEvt.detail.correctAnswers : prev.correctAnswers,
+            questionsAnswered: typeof customEvt.detail.questionsAnswered === 'number' ? customEvt.detail.questionsAnswered : prev.questionsAnswered,
+            bestStreak: typeof customEvt.detail.bestStreak === 'number' ? customEvt.detail.bestStreak : prev.bestStreak,
+          }
+        })
+      }
+    }
+
+    const handleBalanceUpdated = (e: Event) => {
+      const customEvt = e as CustomEvent<{ coins?: number }>
+      if (typeof customEvt.detail?.coins === 'number') {
+        const c = customEvt.detail.coins
+        setProfile((prev) => (prev ? { ...prev, coins: c, euros: c } : prev))
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('user_coins', String(c))
+            localStorage.setItem('user_euros', String(c))
+          } catch {}
+        }
+      }
+    }
+
     window.addEventListener('online', handleOnline)
     window.addEventListener('offline', handleOffline)
+    window.addEventListener('profile_updated', handleProfileUpdated)
+    window.addEventListener('balance_updated', handleBalanceUpdated)
     return () => {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
+      window.removeEventListener('profile_updated', handleProfileUpdated)
+      window.removeEventListener('balance_updated', handleBalanceUpdated)
     }
   }, [user, profile])
 
@@ -581,6 +699,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         needsDistrictSelection,
         setNeedsDistrictSelection,
         retryProfile,
+        updateProfileLocally,
+        refreshProfile,
       }}
     >
       {children}
@@ -752,6 +872,8 @@ const fallbackAuthState: AuthState = {
   needsDistrictSelection: false,
   setNeedsDistrictSelection: () => {},
   retryProfile: () => {},
+  updateProfileLocally: () => {},
+  refreshProfile: async () => {},
 }
 
 export function useAuth(): AuthState {

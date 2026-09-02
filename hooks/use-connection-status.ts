@@ -10,9 +10,9 @@ export function useConnectionStatus() {
   const [isReconnecting, setIsReconnecting] = useState<boolean>(false)
 
   useEffect(() => {
-    const unsubscribe = connectionManager.subscribe((newState) => {
-      setState(newState)
-      setIsReconnecting(newState === 'reconnecting')
+    const unsubscribe = connectionManager.subscribe((detail) => {
+      setState(detail.state)
+      setIsReconnecting(detail.state === 'reconnecting')
     })
     return () => unsubscribe()
   }, [])
@@ -21,7 +21,7 @@ export function useConnectionStatus() {
     state,
     isConnected: state === 'connected',
     isReconnecting: state === 'reconnecting',
-    isFailed: state === 'failed',
+    isFailed: state === 'offline',
     forceReconnect: () => connectionManager.forceReconnect(),
   }
 }

@@ -15,7 +15,9 @@ import {
   Clock,
   Coins,
   Lock,
+  Flag,
 } from 'lucide-react'
+import { QuestionReportModal } from '@/components/question-report-modal'
 import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc, arrayUnion } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
@@ -245,7 +247,7 @@ export function QuizScreen({
     return 2
   }, [difficultyParam])
 
-  const { user, profile, authResolved } = useAuth()
+  const { user, profile, authResolved, updateProfileLocally } = useAuth()
   const { addCoins } = useEconomy()
   const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
 
@@ -273,6 +275,8 @@ export function QuizScreen({
   const [bestStreak, setBestStreak] = useState(0)
   const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
   const [savingReward, setSavingReward] = useState<boolean>(false)
+  const [syncError, setSyncError] = useState<string | null>(null)
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
   // Power-Ups Stock State (Zero por defeito se não comprados)
   const [stock5050, setStock5050] = useState<number>(0)
@@ -702,9 +706,58 @@ export function QuizScreen({
 
   const processMatchCompletion = useCallback(
     async (gid: string, finalResult: QuizResult) => {
-      if (!user) return
+      if (rewardOutcome && !rewardOutcome.alreadyProcessed) return
+
+      if (!user) {
+        // Utilizador Convidado / Sessão Local: calcular e persistir localmente para feedback imediato
+        const savedXp = Number(localStorage.getItem('user_xp') || 0)
+        const savedCoins = Number(localStorage.getItem('user_coins') || 50)
+        const newTotalXp = savedXp + finalResult.xp
+        const newTotalCoins = savedCoins + finalResult.euros
+        const oldLevel = calculateLevelProgress(savedXp).currentLevel.level
+        const newLevel = calculateLevelProgress(newTotalXp).currentLevel.level
+
+        try {
+          localStorage.setItem('user_xp', String(newTotalXp))
+          localStorage.setItem('user_coins', String(newTotalCoins))
+          localStorage.setItem('user_euros', String(newTotalCoins))
+          localStorage.setItem('user_level', String(newLevel))
+        } catch {}
+
+        const guestOutcome: MatchRewardOutcome = {
+          alreadyProcessed: false,
+          matchId: gid,
+          xpEarned: finalResult.xp,
+          coinsEarned: finalResult.euros,
+          oldXp: savedXp,
+          newTotalXp: newTotalXp,
+          oldCoins: savedCoins,
+          newTotalCoins: newTotalCoins,
+          oldLevel: oldLevel,
+          newLevel: newLevel,
+          leveledUp: newLevel > oldLevel,
+          levelTitle: calculateLevelProgress(newTotalXp).currentLevel.title,
+          oldStreak: 0,
+          newStreak: 1,
+          unlockedAchievements: [],
+          completedMissions: [],
+        }
+
+        setRewardOutcome(guestOutcome)
+        if (updateProfileLocally) {
+          updateProfileLocally({
+            xp: newTotalXp,
+            level: newLevel,
+            coins: newTotalCoins,
+            euros: newTotalCoins,
+            streak: 1,
+          })
+        }
+        return
+      }
 
       setSavingReward(true)
+      setSyncError(null)
       try {
         const answeredIds = quizQuestions.map((q) => String(q.id)).filter(Boolean)
         if (answeredIds.length > 0) {
@@ -727,10 +780,6 @@ export function QuizScreen({
 
         setRewardOutcome(outcome)
 
-        if (finalResult.euros > 0) {
-          void addCoins(finalResult.euros, `Quiz: ${category?.name || 'Portugal'}`)
-        }
-
         setUserProfile((currentProfile) =>
           currentProfile
             ? {
@@ -739,16 +788,28 @@ export function QuizScreen({
                 xp: outcome.newTotalXp,
                 euros: outcome.newTotalCoins,
                 coins: outcome.newTotalCoins,
+                streak: outcome.newStreak,
               }
             : currentProfile
         )
-      } catch (error) {
+
+        if (updateProfileLocally) {
+          updateProfileLocally({
+            xp: outcome.newTotalXp,
+            level: outcome.newLevel,
+            coins: outcome.newTotalCoins,
+            euros: outcome.newTotalCoins,
+            streak: outcome.newStreak,
+          })
+        }
+      } catch (error: any) {
         console.error('[QUIZ] Erro ao atribuir recompensa da partida:', error)
+        setSyncError(error?.message || 'Falha de comunicação com o servidor ao gravar recompensa.')
       } finally {
         setSavingReward(false)
       }
     },
-    [user, categorySlug, category?.name, diffLevel, quizQuestions, addCoins]
+    [user, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome]
   )
 
   const next = () => {
@@ -787,6 +848,7 @@ export function QuizScreen({
     setBestStreak(0)
     setRewardOutcome(null)
     setSavingReward(false)
+    setSyncError(null)
     setPhase('answering')
   }
 
@@ -826,6 +888,7 @@ export function QuizScreen({
             levelUpInfo={levelUpInfo}
             rewardOutcome={rewardOutcome}
             savingReward={savingReward}
+            syncError={syncError}
             onGameEnd={processMatchCompletion}
             onReplay={restart}
           />
@@ -1008,6 +1071,16 @@ export function QuizScreen({
             <span>Torneio: <strong className="text-slate-300">{gameId ? gameId.slice(0, 8) : 'SOLO'}</strong></span>
             <span className="text-white/20">•</span>
             <span>Dif: <strong className="text-rose-300">{q.difficulty}/5</strong></span>
+            <span className="text-white/20">•</span>
+            <button
+              type="button"
+              onClick={() => setIsReportModalOpen(true)}
+              className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition cursor-pointer font-bold px-1.5 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
+              title="Reportar erro editorial nesta pergunta"
+            >
+              <Flag className="h-2.5 w-2.5 text-amber-400" />
+              <span>Reportar</span>
+            </button>
           </div>
         </div>
 
@@ -1126,6 +1199,15 @@ export function QuizScreen({
           })}
         </div>
       </div>
+
+      <QuestionReportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        questionId={q.id || 0}
+        questionText={q.question || ''}
+        categoryName={category?.name}
+        user={user}
+      />
     </div>
   )
 }

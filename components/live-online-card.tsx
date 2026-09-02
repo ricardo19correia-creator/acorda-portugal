@@ -147,11 +147,11 @@ export function LiveOnlineCard() {
                       onClick={() => setIsModalOpen(true)}
                     >
                       <img
-                        src={player.photoURL || '/images/avatars/camoes-2050.jpg'}
+                        src={player.photoURL || '/images/avatars/avatar_01.png'}
                         alt={player.displayName}
                         className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border-2 border-slate-900 bg-slate-800 shadow-md ring-1 ring-emerald-500/30"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/images/avatars/camoes-2050.jpg'
+                          (e.target as HTMLImageElement).src = '/images/avatars/avatar_01.png'
                         }}
                       />
                     </div>
