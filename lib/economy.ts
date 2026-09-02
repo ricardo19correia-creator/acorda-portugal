@@ -21,6 +21,7 @@ import {
   calculateMatchCoinReward,
   calculateLevelUpCoinReward,
 } from '@/src/data/economy'
+import { equipTitle } from '@/lib/titles-service'
 
 export {
   ECONOMY_CONFIG,
@@ -28,6 +29,8 @@ export {
   calculateMatchCoinReward,
   calculateLevelUpCoinReward,
 }
+
+import { ANIMATED_FRAMES } from '@/data/frames'
 
 export type ItemCategory = 'arenas' | 'soundpacks' | 'streaks' | 'personalizacao' | 'utilidade' | 'prestigio' | 'packs'
 export type ItemRarity = 'comum' | 'raro' | 'epico' | 'lendario'
@@ -99,103 +102,19 @@ export type WalletTransaction = {
 
 // Configuração centralizada de preços e produtos da loja
 export const SHOP_CATALOG: ShopItem[] = [
-  // 🎨 PERSONALIZAÇÃO: MOLDURAS DE AVATAR (Cosméticos permanentes animados)
-  {
-    id: 'frame_chama_sebastiao',
-    name: 'Moldura Chama de D. Sebastião',
-    description: 'Moldura mítica em chamas holográficas rubi e douradas com partículas e fumo néon a subir.',
+  // 🎨 PERSONALIZAÇÃO: MOLDURAS VIVAS DE AVATAR (24 Molduras Canónicas)
+  ...ANIMATED_FRAMES.map((f): ShopItem => ({
+    id: f.id,
+    name: f.name,
+    description: f.description,
     category: 'personalizacao',
-    rarity: 'lendario',
+    rarity: f.rarity === 'Mítico' ? 'lendario' : f.rarity === 'Lendário' ? 'lendario' : f.rarity === 'Épico' ? 'epico' : 'raro',
     type: 'permanent',
     slot: 'frame',
-    price: 25000,
-    icon: 'Flame',
-    previewColor: 'border-amber-500',
-  },
-  {
-    id: 'frame_cyber_galo',
-    name: 'Moldura Cyber Galo de Barcelos',
-    description: 'Crista e arestas néon multicolor com rotação de brilho e reflexos cyberpunk.',
-    category: 'personalizacao',
-    rarity: 'epico',
-    type: 'permanent',
-    slot: 'frame',
-    price: 8500,
-    icon: 'Crown',
-    previewColor: 'border-emerald-400',
-  },
-  {
-    id: 'frame_onda_nazare',
-    name: 'Moldura Onda da Nazaré',
-    description: 'Vórtice de água translúcida com reflexos azuis néon e maré pulsante em tempo real.',
-    category: 'personalizacao',
-    rarity: 'raro',
-    type: 'permanent',
-    slot: 'frame',
-    price: 3200,
-    icon: 'Sparkles',
-    previewColor: 'border-cyan-400',
-  },
-  {
-    id: 'frame_padrao_descobrimentos',
-    name: 'Moldura Padrão dos Descobrimentos',
-    description: 'Acabamento nobre em pedra calcária cinzelada com iluminação laser verde esmeralda.',
-    category: 'personalizacao',
-    rarity: 'comum',
-    type: 'permanent',
-    slot: 'frame',
-    price: 1200,
-    icon: 'Shield',
-    previewColor: 'border-emerald-600',
-  },
-  {
-    id: 'frame_ouro_real',
-    name: 'Moldura Ouro Real',
-    description: 'Moldura lendária banhada a ouro maciço com brilho reluzente para mestres do saber.',
-    category: 'personalizacao',
-    rarity: 'lendario',
-    type: 'permanent',
-    slot: 'frame',
-    price: 15000,
-    icon: 'Crown',
-    previewColor: 'border-gold',
-  },
-  {
-    id: 'frame_azulejo_nobre',
-    name: 'Moldura Azulejo Nobre',
-    description: 'Padrão tradicional de azulejo português refinado com reflexos prateados e violeta.',
-    category: 'personalizacao',
-    rarity: 'epico',
-    type: 'permanent',
-    slot: 'frame',
-    price: 5000,
-    icon: 'Sparkles',
-    previewColor: 'border-purple-400',
-  },
-  {
-    id: 'frame_mar_portugues',
-    name: 'Moldura Mar Português',
-    description: 'Moldura aquática inspirada na epopeia e bravura dos navegadores portugueses.',
-    category: 'personalizacao',
-    rarity: 'raro',
-    type: 'permanent',
-    slot: 'frame',
-    price: 1500,
-    icon: 'Sparkles',
-    previewColor: 'border-cyan-400',
-  },
-  {
-    id: 'frame_verde_esperanca',
-    name: 'Moldura Verde Esperança',
-    description: 'Moldura de avatar clássica com o anel de luz verde néon nacional.',
-    category: 'personalizacao',
-    rarity: 'comum',
-    type: 'permanent',
-    slot: 'frame',
-    price: 500,
-    icon: 'Shield',
-    previewColor: 'border-primary',
-  },
+    price: f.price,
+    icon: f.rarity === 'Mítico' ? 'Flame' : f.rarity === 'Lendário' ? 'Crown' : f.rarity === 'Épico' ? 'Sparkles' : 'Shield',
+    previewColor: `border-[${f.accentColor}]`,
+  })),
 
   // 🏷️ PERSONALIZAÇÃO: TÍTULOS DE PERFIL COM ANIMAÇÃO
   {
@@ -682,10 +601,18 @@ export async function equipItem(
 
   let targetSlot = slot
   if (!targetSlot && itemId) {
-    const item = SHOP_CATALOG.find((i) => i.id === itemId)
-    if (item) {
-      targetSlot = getItemSlot(item) || undefined
+    if (itemId.startsWith('tit_') || itemId.startsWith('title_')) {
+      targetSlot = 'title'
+    } else {
+      const item = SHOP_CATALOG.find((i) => i.id === itemId)
+      if (item) {
+        targetSlot = getItemSlot(item) || undefined
+      }
     }
+  }
+
+  if (targetSlot === 'title') {
+    return await equipTitle(userId, itemId)
   }
 
   if (!targetSlot) {

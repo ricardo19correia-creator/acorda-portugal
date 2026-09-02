@@ -146,6 +146,3 @@ export function UserAvatar({
     </div>
   )
 }
-
-export default UserAvatar
-

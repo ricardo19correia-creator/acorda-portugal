@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X, Coins } from 'lucide-react'
-import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
 import { avatarShopList, type AvatarItem, type AvatarRarity, AVATAR_18_CATEGORIES } from '@/data/shopAvatars'
@@ -22,9 +22,18 @@ import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { useEconomy } from '@/context/economy-context'
-import { ANIMATED_FRAMES } from '@/data/frames'
+import { ANIMATED_FRAMES, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
 import { DEFAULT_AVATAR_ID } from '@/data/constants'
+import { equipTitle } from '@/lib/titles-service'
+import {
+  DEFAULT_STARTER_TITLE_ID,
+  DEFAULT_STARTER_TITLE_NAME,
+  resolvePlayerEquippedTitle,
+  resolveTitle,
+  isTitleOwned,
+  sanitizeTitleName,
+} from '@/lib/titles'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -33,11 +42,15 @@ interface ShopItem {
   name: string
   category: Category
   categoryKey?: string
+  categoryTitle?: string
   group?: TitleGroup
   avatarCategory?: string
   avatarCategoryLabel?: string
-  rarity?: AvatarRarity | TitleRarity | ArenaRarity
+  rarity?: AvatarRarity | TitleRarity | ArenaRarity | FrameRarity
   description: string
+  story?: string
+  accentColor?: string
+  secondaryColor?: string
   price: string
   priceValue: number
   isRealMoney?: boolean
@@ -45,6 +58,7 @@ interface ShopItem {
   unlockCondition?: string
   icon?: string
   image?: string
+  shopImage?: string
   effect?: ArenaEffect
   badge?: string
   badgeColor?: string
@@ -144,17 +158,42 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
   phrases: [e.text],
 }))
 
+export const FRAME_CATEGORIES_LIST = [
+  { key: 'todas', title: 'Todas as Molduras', icon: '✨' },
+  { key: 'elemental', title: 'Elementais', icon: '🔥' },
+  { key: 'cosmico', title: 'Cósmicas & Cyber', icon: '🌌' },
+  { key: 'real', title: 'Realeza & Deuses', icon: '👑' },
+  { key: 'lusitano', title: 'Lusitanas & PT', icon: '🇵🇹' },
+  { key: 'especial', title: 'Especiais & Arcade', icon: '👾' },
+]
+
+export const FRAME_RARITIES: (FrameRarity | 'todas')[] = ['todas', 'Raro', 'Épico', 'Lendário', 'Mítico']
+
+export const FRAME_PREVIEW_AVATARS = [
+  { id: 'equipped', label: 'O Teu Avatar Atual', icon: '👤', fallback: '/images/avatars/avatar_01.png' },
+  { id: 'avatar_01', label: 'O Estratega', icon: '🧠', fallback: '/images/avatars/avatar_01.png' },
+  { id: 'avatar_02', label: 'A Líder', icon: '👑', fallback: '/images/avatars/avatar_02.png' },
+  { id: 'avatar_03', label: 'O Explorador', icon: '⛵', fallback: '/images/avatars/avatar_03.png' },
+  { id: 'avatar_04', label: 'O Inovador', icon: '⚡', fallback: '/images/avatars/avatar_04.png' },
+  { id: 'avatar_05', label: 'A Guardiã', icon: '🛡️', fallback: '/images/avatars/avatar_05.png' },
+]
+
 const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
   id: f.id,
   name: f.name,
   category: 'molduras',
+  categoryKey: f.categoryKey,
+  categoryTitle: f.categoryTitle,
   rarity: f.rarity as any,
   description: f.description,
+  story: f.story,
+  accentColor: f.accentColor,
+  secondaryColor: f.secondaryColor,
   price: `${f.price.toLocaleString('pt-PT')} Moedas`,
   priceValue: f.price,
   badge: f.rarity,
-  badgeColor: getRarityBadgeColor(f.rarity as any),
-  icon: '✨',
+  badgeColor: getFrameRarityBadge(f.rarity),
+  icon: f.rarity === 'Mítico' ? '🔥' : f.rarity === 'Lendário' ? '👑' : f.rarity === 'Épico' ? '✨' : '⭐',
 }))
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
@@ -175,6 +214,10 @@ export default function LojaPage() {
   const [activeTab, setActiveTab] = useState<Category>('avatars')
   const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
+  const [frameCategoryFilter, setFrameCategoryFilter] = useState<string>('todas')
+  const [frameRarityFilter, setFrameRarityFilter] = useState<FrameRarity | 'todas'>('todas')
+  const [previewAvatarId, setPreviewAvatarId] = useState<string>('equipped')
+  const [inspectingFrameItem, setInspectingFrameItem] = useState<ShopItem | null>(null)
   const [titleSubFilter, setTitleSubFilter] = useState<'todos' | 'tematico' | 'competicao' | 'exclusivo'>('todos')
   const [titleThemeCategory, setTitleThemeCategory] = useState<string>('todas')
   const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
@@ -182,7 +225,8 @@ export default function LojaPage() {
   const [equippedAvatar, setEquippedAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
   const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null))
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
-  const [equippedTitle, setEquippedTitle] = useState<string>('')
+  const [equippedTitleId, setEquippedTitleId] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID : DEFAULT_STARTER_TITLE_ID))
+  const [equippedTitle, setEquippedTitle] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME : DEFAULT_STARTER_TITLE_NAME))
   const [equippedTauntId, setEquippedTauntId] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('equipped_taunt_id') || 'PROV_010'
@@ -200,13 +244,13 @@ export default function LojaPage() {
     avatars: [DEFAULT_AVATAR_ID],
     frames: ['default'],
     arenas: ['arena_1'],
-    titles: ['tit_novico'],
+    titles: [DEFAULT_STARTER_TITLE_ID],
     taunts: ['pack_basico'],
   })
   const [unlockedItems, setUnlockedItems] = useState<string[]>([
     DEFAULT_AVATAR_ID,
     'arena_1',
-    'tit_novico',
+    DEFAULT_STARTER_TITLE_ID,
     'pack_basico',
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
@@ -231,7 +275,9 @@ export default function LojaPage() {
         if (savedEmotes) {
           try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
         }
-        const savedTitle = localStorage.getItem('equipped_title')
+        const savedTitleId = localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID
+        const savedTitle = localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME
+        if (savedTitleId) setEquippedTitleId(savedTitleId)
         if (savedTitle) setEquippedTitle(savedTitle)
       } catch (err) {
         console.error(err)
@@ -257,7 +303,7 @@ export default function LojaPage() {
                 avatars: Array.isArray(data.inventory.avatars) && data.inventory.avatars.length > 0 ? data.inventory.avatars : [DEFAULT_AVATAR_ID],
                 frames: Array.isArray(data.inventory.frames) ? data.inventory.frames : ['default'],
                 arenas: Array.isArray(data.inventory.arenas) && data.inventory.arenas.length > 0 ? data.inventory.arenas : ['arena_1'],
-                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : ['tit_novico'],
+                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : [DEFAULT_STARTER_TITLE_ID],
                 taunts: invTaunts,
               })
               localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
@@ -301,11 +347,13 @@ export default function LojaPage() {
               setEquippedArena(ar)
               localStorage.setItem('equipped_arena', ar)
             }
-            if (data.equippedTitle || data.equipped?.title) {
-              const tit = data.equipped?.title || data.equippedTitle
-              setEquippedTitle(tit)
-              localStorage.setItem('equipped_title', tit)
-            }
+            const resolvedTit = resolvePlayerEquippedTitle(data as any, data.xp || 0)
+            const titId = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTit.id
+            const titName = resolvedTit.cleanName || DEFAULT_STARTER_TITLE_NAME
+            setEquippedTitleId(titId)
+            setEquippedTitle(titName)
+            localStorage.setItem('equipped_title_id', titId)
+            localStorage.setItem('equipped_title', titName)
             if (data.equippedTauntId || data.equipped?.taunt) {
               const tId = data.equippedTauntId || data.equipped?.taunt
               setEquippedTauntId(tId)
@@ -378,8 +426,7 @@ export default function LojaPage() {
       return isDefault || inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
     }
     if (item.category === 'titulos') {
-      const isDefault = item.id === 'tit_novico' || item.name === 'Noviço da Nação'
-      return isDefault || inventory.titles.includes(item.id) || inventory.titles.includes(item.name) || unlockedItems.includes(item.id) || unlockedItems.includes(item.name)
+      return isTitleOwned(inventory.titles, item.id) || unlockedItems.includes(item.id)
     }
     if (item.category === 'taunts') {
       return (
@@ -404,7 +451,20 @@ export default function LojaPage() {
     }
     if (item.category === 'avatars') return equippedAvatar === item.image || normalizeAvatarId(equippedAvatar) === normalizeAvatarId(item.id)
     if (item.category === 'arenas') return equippedArena === item.id
-    if (item.category === 'titulos') return equippedTitle === item.name || equippedTitle === item.id
+    if (item.category === 'titulos') {
+      const resolvedTarget = resolveTitle(item.id)
+      const targetCanonicalId = resolvedTarget ? resolvedTarget.id : item.id
+      const targetClean = sanitizeTitleName(item.name).toLowerCase()
+      const equippedClean = sanitizeTitleName(equippedTitle).toLowerCase()
+
+      return (
+        equippedTitleId === targetCanonicalId ||
+        equippedTitleId === item.id ||
+        equippedClean === targetClean ||
+        equippedTitle === item.name ||
+        resolveTitle(equippedTitleId)?.id === targetCanonicalId
+      )
+    }
     return false
   }
 
@@ -417,21 +477,19 @@ export default function LojaPage() {
         return
       }
       if (item.category === 'titulos') {
-        setEquippedTitle(item.name)
-        localStorage.setItem('equipped_title', item.name)
-        localStorage.setItem('user_equipped_title', item.name)
+        const cleanName = sanitizeTitleName(item.name)
+        setEquippedTitleId(item.id)
+        setEquippedTitle(cleanName)
         if (auth.currentUser) {
-          try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              'equipped.title': item.name,
-              equippedTitle: item.name,
-            })
-          } catch (e) {
-            console.error(e)
+          const res = await equipTitle(auth.currentUser.uid, item.id)
+          if (res.success) {
+            showToast(res.message)
+          } else {
+            showToast(res.message, 'error')
           }
+        } else {
+          showToast(`Título exclusivo "${cleanName}" ativado com sucesso!`)
         }
-        window.dispatchEvent(new Event('titleChanged'))
-        showToast(`Título exclusivo "${item.name}" ativado com sucesso!`)
         return
       }
       if (item.category === 'arenas') {
@@ -470,64 +528,61 @@ export default function LojaPage() {
       }
       return
     }
-    // 1. CONSUMÍVEIS (SEMPRE COMPRA)
+    // 1. CONSUMÍVEIS (SEMPRE COMPRA VIA SERVIDOR)
     if (item.category === 'ajudas') {
       if (userBalance < item.priceValue) {
         showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
-      const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
-      if (!deductSuccess) {
-        showToast('Saldo de Moedas insuficiente!', 'error')
-        return
+      if (auth.currentUser) {
+        try {
+          const idToken = await auth.currentUser.getIdToken().catch(() => null)
+          const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+          if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+
+          const res = await fetch('/api/buy-item', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+              uid: auth.currentUser.uid,
+              itemId: item.id,
+              category: 'ajudas',
+            }),
+          })
+
+          const json = await res.json().catch(() => ({}))
+          if (!json.success) {
+            showToast(json.error || 'Erro ao processar compra.', 'error')
+            return
+          }
+        } catch (e: any) {
+          showToast(e.message || 'Erro de comunicação ao comprar.', 'error')
+          return
+        }
+      } else {
+        const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
+        if (!deductSuccess) {
+          showToast('Saldo de Moedas insuficiente!', 'error')
+          return
+        }
       }
 
       let updatedConsumables = { ...consumables }
-      let amountAdded = 0
-      let consumableKey = ''
-
-      if (item.id === 'ajuda_5050') {
-        amountAdded = 5
-        consumableKey = 'consumables.help5050'
+      if (item.id === 'ajuda_5050' || item.id === 'consumable_50_50') {
         updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 5
       } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico') {
-        amountAdded = 3
-        consumableKey = 'consumables.publicVote'
         updatedConsumables.publicVote = (updatedConsumables.publicVote || 0) + 3
-      } else if (item.id === 'ajuda_congelar') {
-        amountAdded = 3
-        consumableKey = 'consumables.freezeTime'
+      } else if (item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo') {
         updatedConsumables.freezeTime = (updatedConsumables.freezeTime || 0) + 3
       }
 
       setConsumables(updatedConsumables)
       localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
 
-      if (auth.currentUser) {
-        try {
-          const updatePayload: any = {}
-          if (item.id === 'ajuda_5050') {
-            updatePayload['inventory.utilities.fiftyFifty'] = increment(5)
-            updatePayload['consumables.help5050'] = increment(5)
-          } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico') {
-            updatePayload['inventory.utilities.publicVote'] = increment(3)
-            updatePayload['inventory.HELP_005'] = increment(3)
-            updatePayload['inventory.helps'] = arrayUnion('HELP_005')
-            updatePayload['consumables.publicVote'] = increment(3)
-          } else if (item.id === 'ajuda_congelar') {
-            updatePayload['inventory.utilities.freezeTime'] = increment(3)
-            updatePayload['consumables.freezeTime'] = increment(3)
-          }
-          await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
-        } catch (e) {
-          console.error(e)
-        }
-      }
-
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
-      const totalAmount = item.id === 'ajuda_5050'
+      const totalAmount = item.id === 'ajuda_5050' || item.id === 'consumable_50_50'
         ? updatedConsumables.help5050
         : item.id === 'HELP_005' || item.id === 'ajuda_publico'
           ? updatedConsumables.publicVote
@@ -590,25 +645,19 @@ export default function LojaPage() {
         window.dispatchEvent(new Event('arenaChanged'))
         showToast(`Arena "${item.name}" equipada no jogo!`)
       } else if (item.category === 'titulos') {
-        setEquippedTitle(item.name)
-        localStorage.setItem('equipped_title', item.name)
+        const cleanName = sanitizeTitleName(item.name)
+        setEquippedTitleId(item.id)
+        setEquippedTitle(cleanName)
         if (auth.currentUser) {
-          try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              equippedTitle: item.name,
-              'equipped.title': item.name,
-            })
-            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
-              equippedTitle: item.name,
-              'equipped.title': item.name,
-              title: item.name,
-            }, { merge: true })
-          } catch (e) {
-            console.error(e)
+          const res = await equipTitle(auth.currentUser.uid, item.id)
+          if (res.success) {
+            showToast(res.message)
+          } else {
+            showToast(res.message, 'error')
           }
+        } else {
+          showToast(`Título "${cleanName}" ativado no perfil!`)
         }
-        window.dispatchEvent(new Event('titleChanged'))
-        showToast(`Título "${item.name}" ativado no perfil!`)
       } else if (item.category === 'molduras') {
         if (equippedFrame === item.id) {
           setEquippedFrame(null)
@@ -698,7 +747,7 @@ export default function LojaPage() {
 
       window.dispatchEvent(new Event('inventory_updated'))
     } else {
-      // COMPRAR COSMÉTICO
+      // COMPRAR COSMÉTICO (VIA SERVIDOR COM TRANSAÇÃO ATÓMICA)
       if (item.isRealMoney) {
         showToast(`Acesso antecipado em breve!`)
         return
@@ -709,28 +758,50 @@ export default function LojaPage() {
         return
       }
 
-      const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
-      if (!deductSuccess) {
-        showToast('Saldo de Moedas insuficiente!', 'error')
-        return
+      if (auth.currentUser) {
+        try {
+          const idToken = await auth.currentUser.getIdToken().catch(() => null)
+          const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+          if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+
+          const res = await fetch('/api/buy-item', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+              uid: auth.currentUser.uid,
+              itemId: item.id,
+              category: item.category,
+            }),
+          })
+
+          const json = await res.json().catch(() => ({}))
+          if (!json.success) {
+            showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
+            return
+          }
+        } catch (e: any) {
+          showToast(e.message || 'Erro de rede ao comprar cosmético.', 'error')
+          return
+        }
+      } else {
+        const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
+        if (!deductSuccess) {
+          showToast('Saldo de Moedas insuficiente!', 'error')
+          return
+        }
       }
 
-      // Atualizar Inventário
+      // Atualizar Inventário Local e Estado Reativo
       let updatedInv = { ...inventory }
-      let firestoreInvField = ''
 
       if (item.category === 'avatars') {
         updatedInv.avatars = Array.from(new Set([...updatedInv.avatars, item.id]))
-        firestoreInvField = 'inventory.avatars'
       } else if (item.category === 'molduras') {
         updatedInv.frames = Array.from(new Set([...(updatedInv.frames || []), item.id]))
-        firestoreInvField = 'inventory.frames'
       } else if (item.category === 'arenas') {
         updatedInv.arenas = Array.from(new Set([...updatedInv.arenas, item.id]))
-        firestoreInvField = 'inventory.arenas'
       } else if (item.category === 'titulos') {
         updatedInv.titles = Array.from(new Set([...updatedInv.titles, item.id]))
-        firestoreInvField = 'inventory.titles'
       } else if (item.category === 'taunts') {
         const localTaunts = Array.from(new Set([...JSON.parse(localStorage.getItem('user_inventory_taunts') || localStorage.getItem('user_inventory_emotes') || '[]'), item.id]))
         localStorage.setItem('user_inventory_taunts', JSON.stringify(localTaunts))
@@ -741,7 +812,6 @@ export default function LojaPage() {
         setEquippedEmotes(newEquipped)
         localStorage.setItem('equipped_emotes', JSON.stringify(newEquipped))
         localStorage.setItem('equipped_taunts', JSON.stringify(newEquipped))
-        firestoreInvField = 'inventory.emotes'
       }
 
       setInventory(updatedInv)
@@ -766,8 +836,12 @@ export default function LojaPage() {
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         window.dispatchEvent(new Event('arenaChanged'))
       } else if (item.category === 'titulos') {
-        setEquippedTitle(item.name)
-        localStorage.setItem('equipped_title', item.name)
+        const cleanName = sanitizeTitleName(item.name)
+        setEquippedTitleId(item.id)
+        setEquippedTitle(cleanName)
+        localStorage.setItem('equipped_title_id', item.id)
+        localStorage.setItem('equipped_title', cleanName)
+        localStorage.setItem('user_equipped_title', cleanName)
         window.dispatchEvent(new Event('titleChanged'))
       } else if (item.category === 'taunts') {
         setEquippedTauntId(item.id)
@@ -779,9 +853,6 @@ export default function LojaPage() {
       if (auth.currentUser) {
         try {
           const updatePayload: any = {}
-          if (firestoreInvField) {
-            updatePayload[firestoreInvField] = arrayUnion(item.id)
-          }
           if (item.category === 'avatars') {
             updatePayload.equippedAvatar = item.id
             updatePayload['equipped.avatar'] = item.image || item.id
@@ -789,18 +860,20 @@ export default function LojaPage() {
           } else if (item.category === 'molduras') {
             updatePayload.equippedFrame = item.id
             updatePayload['equipped.frameId'] = item.id
-            updatePayload.unlockedFrames = arrayUnion(item.id)
           } else if (item.category === 'arenas') {
             updatePayload.equippedArena = item.id
             updatePayload['equipped.arena'] = item.id
           } else if (item.category === 'titulos') {
-            updatePayload.equippedTitle = item.name
-            updatePayload['equipped.title'] = item.name
+            const cleanName = sanitizeTitleName(item.name)
+            updatePayload.equippedTitleId = item.id
+            updatePayload.equippedTitle = cleanName
+            updatePayload.title = cleanName
+            updatePayload['equipped.title'] = item.id
+            updatePayload['equipped.titleId'] = item.id
+            updatePayload['equipped.titleName'] = cleanName
           } else if (item.category === 'taunts') {
             updatePayload.equippedTauntId = item.id
             updatePayload['equipped.taunt'] = item.id
-            updatePayload['inventory.taunts'] = arrayUnion(item.id)
-            updatePayload['inventory.emotes'] = arrayUnion(item.id)
             const newEm = [item.id, ...equippedEmotes.filter((id) => id !== item.id)].slice(0, 4)
             updatePayload.equippedEmotes = newEm
             updatePayload['equipped.emotes'] = newEm
@@ -812,6 +885,14 @@ export default function LojaPage() {
               equippedFrame: item.id,
               'equipped.frameId': item.id,
             }, { merge: true })
+          } else if (item.category === 'titulos') {
+            const cleanName = sanitizeTitleName(item.name)
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedTitleId: item.id,
+              equippedTitle: cleanName,
+              title: cleanName,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
           }
         } catch (e) {
           console.error(e)
@@ -819,7 +900,8 @@ export default function LojaPage() {
       }
 
       window.dispatchEvent(new Event('inventory_updated'))
-      showToast(`Parabéns! Adquiriste "${item.name}" por ${item.priceValue.toLocaleString('pt-PT')} Moedas!`)
+      window.dispatchEvent(new Event('balance_updated'))
+      showToast(`Sucesso! Adquiriste ${item.name}!`)
     }
   }
 
@@ -832,6 +914,12 @@ export default function LojaPage() {
       if (item.category !== 'avatars') return false
       if (avatarCategoryFilter !== 'todos' && item.categoryKey !== avatarCategoryFilter) return false
       if (avatarRarityFilter !== 'todas' && item.rarity !== avatarRarityFilter) return false
+      return true
+    }
+    if (activeTab === 'molduras') {
+      if (item.category !== 'molduras') return false
+      if (frameCategoryFilter !== 'todas' && item.categoryKey !== frameCategoryFilter) return false
+      if (frameRarityFilter !== 'todas' && item.rarity !== frameRarityFilter) return false
       return true
     }
     if (activeTab === 'titulos') {
@@ -932,7 +1020,7 @@ export default function LojaPage() {
                 : 'bg-slate-900/70 text-purple-300 border border-purple-500/30 hover:bg-slate-800'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-purple-300" /> MOLDURAS VIVAS (5)
+            <Sparkles className="w-3.5 h-3.5 text-purple-300" /> MOLDURAS VIVAS ({ANIMATED_FRAMES.length})
           </button>
 
           <button
@@ -1073,6 +1161,99 @@ export default function LojaPage() {
                     className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${badgeStyle}`}
                   >
                     {rarity === 'todas' ? 'Todas' : rarity}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* SUB-FILTROS DE MOLDURAS VIVAS (COLEÇÃO, RARIDADE & TESTE DE AVATAR) */}
+        {activeTab === 'molduras' && (
+          <div className="w-full max-w-6xl space-y-3 mb-6 p-4 rounded-2xl bg-slate-900/70 border border-purple-500/30 backdrop-blur-md shadow-[0_0_25px_rgba(168,85,247,0.15)]">
+            {/* Categorias Temáticas */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
+              <span className="text-[11px] font-black uppercase tracking-wider text-purple-300 shrink-0 mr-1 flex items-center gap-1.5">
+                <Filter className="w-3.5 h-3.5 text-purple-400" /> Coleção:
+              </span>
+              {FRAME_CATEGORIES_LIST.map((cat) => {
+                const isSelected = frameCategoryFilter === cat.key
+                return (
+                  <button
+                    key={cat.key}
+                    onClick={() => setFrameCategoryFilter(cat.key)}
+                    className={`cursor-pointer shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-[0_0_15px_rgba(236,72,153,0.5)] font-black'
+                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                    }`}
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.title}</span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Raridades */}
+            <div className="flex items-center gap-2 overflow-x-auto pt-1.5 border-t border-slate-800/60 scrollbar-none">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+                Raridade:
+              </span>
+              {FRAME_RARITIES.map((rarity) => {
+                const isSelected = frameRarityFilter === rarity
+                let badgeStyle = 'bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-700/40'
+
+                if (isSelected) {
+                  switch (rarity) {
+                    case 'Mítico':
+                      badgeStyle = 'bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 text-white font-black shadow-[0_0_15px_rgba(236,72,153,0.5)] animate-pulse'
+                      break
+                    case 'Lendário':
+                      badgeStyle = 'bg-amber-500 text-slate-950 font-black shadow-[0_0_10px_rgba(245,158,11,0.4)]'
+                      break
+                    case 'Épico':
+                      badgeStyle = 'bg-purple-500 text-white font-black shadow-[0_0_10px_rgba(168,85,247,0.4)]'
+                      break
+                    case 'Raro':
+                      badgeStyle = 'bg-cyan-500 text-slate-950 font-black shadow-[0_0_10px_rgba(6,182,212,0.4)]'
+                      break
+                    default:
+                      badgeStyle = 'bg-white text-slate-950 font-black'
+                  }
+                }
+
+                return (
+                  <button
+                    key={rarity}
+                    onClick={() => setFrameRarityFilter(rarity)}
+                    className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${badgeStyle}`}
+                  >
+                    {rarity === 'todas' ? 'Todas as Raridades' : rarity}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Seletor de Avatar de Pré-Visualização */}
+            <div className="flex items-center gap-2 overflow-x-auto pt-1.5 border-t border-slate-800/60 scrollbar-none">
+              <span className="text-[11px] font-black uppercase tracking-wider text-purple-300 shrink-0 mr-1 flex items-center gap-1">
+                <User className="w-3.5 h-3.5 text-purple-400" /> Testar no Avatar:
+              </span>
+              {FRAME_PREVIEW_AVATARS.map((av) => {
+                const isSelected = previewAvatarId === av.id
+                return (
+                  <button
+                    key={av.id}
+                    onClick={() => setPreviewAvatarId(av.id)}
+                    className={`cursor-pointer shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-purple-500 text-white font-black shadow-[0_0_10px_rgba(168,85,247,0.4)]'
+                        : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700 border border-slate-700/40'
+                    }`}
+                  >
+                    <span>{av.icon}</span>
+                    <span>{av.label}</span>
                   </button>
                 )
               })}
@@ -1284,15 +1465,44 @@ export default function LojaPage() {
 
                       {/* Image / Preview */}
                       {item.category === 'molduras' ? (
-                        <div className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/30 border border-purple-500/30 p-4 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame">
-                          <UserAvatar
-                            avatarUrl={equippedAvatar}
-                            activeFrame={item.id}
-                            size="lg"
-                            showBadge={false}
+                        <div 
+                          onClick={() => setInspectingFrameItem(item)}
+                          className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/40 border border-purple-500/30 p-4 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame cursor-pointer transition-all hover:border-purple-400"
+                        >
+                          {/* Ambient Glow */}
+                          <div
+                            className="pointer-events-none absolute -inset-4 opacity-35 blur-2xl transition-opacity group-hover/frame:opacity-75"
+                            style={{
+                              background: item.accentColor
+                                ? `radial-gradient(circle, ${item.accentColor} 0%, transparent 70%)`
+                                : 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
+                            }}
                           />
-                          <span className="mt-2 text-[10px] font-black uppercase tracking-wider text-purple-300">
-                            Pré-visualização
+
+                          {/* Avatar com Moldura */}
+                          <div className="relative z-10 w-24 h-24 flex items-center justify-center transition-transform duration-300 group-hover/frame:scale-105">
+                            <UserAvatar
+                              avatarUrl={
+                                previewAvatarId === 'equipped'
+                                  ? equippedAvatar
+                                  : REAL_AVATARS.find((a) => a.id === previewAvatarId)?.image || equippedAvatar
+                              }
+                              activeFrame={item.id}
+                              size="lg"
+                              showBadge={false}
+                            />
+                          </div>
+
+                          {/* Tag de raridade & Botão Inspecionar */}
+                          <div className="absolute top-2 right-2 z-20">
+                            <span className="px-2 py-0.5 rounded-lg bg-purple-600/90 hover:bg-purple-500 text-white font-black text-[10px] flex items-center gap-1 shadow-md backdrop-blur-sm group-hover/frame:opacity-100 transition">
+                              <Eye className="w-3 h-3" /> Inspecionar
+                            </span>
+                          </div>
+
+                          <span className="mt-2 text-[10px] font-black uppercase tracking-wider text-purple-300 z-10 flex items-center gap-1">
+                            <span>{item.icon}</span>
+                            <span>{item.categoryTitle || 'Moldura Viva'}</span>
                           </span>
                         </div>
                       ) : item.category === 'titulos' ? (
@@ -1572,6 +1782,127 @@ export default function LojaPage() {
                       : previewArenaItem.isExclusive
                       ? '🔒 Bloqueada'
                       : `Comprar ${previewArenaItem.price}`}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* MODAL DE INSPEÇÃO E PRÉ-VISUALIZAÇÃO DE MOLDURAS VIVAS */}
+        {inspectingFrameItem && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+            <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-purple-500/40 bg-slate-950 shadow-[0_0_50px_rgba(168,85,247,0.3)]">
+              {/* Top ambient glow */}
+              <div 
+                className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full opacity-40 blur-3xl"
+                style={{
+                  background: inspectingFrameItem.accentColor
+                    ? `radial-gradient(circle, ${inspectingFrameItem.accentColor} 0%, transparent 70%)`
+                    : 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
+                }}
+              />
+
+              {/* Modal Header */}
+              <div className="relative z-20 flex items-center justify-between p-5 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md">
+                <div className="flex items-center gap-2">
+                  <span className={`px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider border shadow-md ${
+                    inspectingFrameItem.badgeColor || 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+                  }`}>
+                    {inspectingFrameItem.badge} • {inspectingFrameItem.categoryTitle || 'Moldura Viva'}
+                  </span>
+                </div>
+                
+                <button
+                  onClick={() => setInspectingFrameItem(null)}
+                  className="p-2 rounded-xl bg-slate-800 border border-white/10 text-white hover:bg-slate-700 transition cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Frame Visual Showcase */}
+              <div className="relative z-10 flex flex-col items-center justify-center p-8 bg-gradient-to-b from-slate-900/40 via-slate-950 to-slate-950">
+                <div className="w-36 h-36 flex items-center justify-center mb-6">
+                  <UserAvatar
+                    avatarUrl={
+                      previewAvatarId === 'equipped'
+                        ? equippedAvatar
+                        : REAL_AVATARS.find((a) => a.id === previewAvatarId)?.image || equippedAvatar
+                    }
+                    activeFrame={inspectingFrameItem.id}
+                    size="xl"
+                    showBadge={false}
+                  />
+                </div>
+
+                {/* Avatar Switcher in Modal */}
+                <div className="flex items-center gap-1.5 overflow-x-auto max-w-full p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 scrollbar-none mb-4">
+                  <span className="text-[10px] font-bold text-slate-400 px-2 shrink-0">Avatar:</span>
+                  {FRAME_PREVIEW_AVATARS.map((av) => (
+                    <button
+                      key={av.id}
+                      onClick={() => setPreviewAvatarId(av.id)}
+                      className={`cursor-pointer shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold transition flex items-center gap-1 ${
+                        previewAvatarId === av.id
+                          ? 'bg-purple-500 text-white font-black shadow-sm'
+                          : 'bg-slate-800 text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <span>{av.icon}</span>
+                      <span>{av.label.replace('O Teu Avatar Atual', 'Meu Avatar')}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <h3 className="text-xl font-black text-white text-center flex items-center gap-2">
+                  <span>{inspectingFrameItem.icon}</span>
+                  <span>{inspectingFrameItem.name}</span>
+                </h3>
+                <p className="text-xs text-slate-300 text-center max-w-md mt-1.5 leading-relaxed">
+                  {inspectingFrameItem.description}
+                </p>
+                {inspectingFrameItem.story && (
+                  <p className="text-xs font-bold text-purple-300 italic text-center max-w-md mt-2 border-l-2 border-purple-500/50 pl-3 leading-relaxed">
+                    “{inspectingFrameItem.story}”
+                  </p>
+                )}
+              </div>
+
+              {/* Modal Footer / Actions */}
+              <div className="p-5 bg-slate-900 border-t border-slate-800 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5 font-mono text-base font-black text-amber-400">
+                  <Coins className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>{inspectingFrameItem.price}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setInspectingFrameItem(null)}
+                    className="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-xs font-bold text-slate-300 hover:bg-slate-700 transition cursor-pointer"
+                  >
+                    Fechar
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handleAction(inspectingFrameItem)
+                      if (isItemUnlocked(inspectingFrameItem)) {
+                        setInspectingFrameItem(null)
+                      }
+                    }}
+                    className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer ${
+                      isItemEquipped(inspectingFrameItem)
+                        ? 'bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+                        : isItemUnlocked(inspectingFrameItem)
+                        ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                        : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+                    }`}
+                  >
+                    {isItemEquipped(inspectingFrameItem)
+                      ? 'Equipada ✓'
+                      : isItemUnlocked(inspectingFrameItem)
+                      ? 'Equipar Moldura'
+                      : `Comprar ${inspectingFrameItem.price}`}
                   </button>
                 </div>
               </div>

@@ -1,7 +1,9 @@
 import { SHOP_CATALOG, type ShopItem } from '@/lib/economy'
 import type { UserProfile, EquippedCosmetics } from '@/lib/game-data'
+import { resolvePlayerEquippedTitle, resolveTitle, getTitleRarityBadge, sanitizeTitleName, type TitleItem } from '@/lib/titles'
 
 export type { EquippedCosmetics, ShopItem }
+export type { TitleItem }
 
 export type GameThemeId =
   | 'theme_fado_cyberpunk'
@@ -172,7 +174,8 @@ export function getThemeMeta(themeId?: string | null): GameThemeMeta {
 export function getEquippedCosmetics(profile: Partial<UserProfile> | null | undefined) {
   const equipped: EquippedCosmetics = (profile as any)?.equipped || {}
   const frameId = equipped.frame || null
-  const titleId = equipped.title || null
+  const resolvedTitle = resolvePlayerEquippedTitle(profile, profile?.xp || 0)
+  const titleId = resolvedTitle.id
   const themeId = equipped.theme || null
   const auraId = equipped.aura || null
   const sfxId = equipped.sfx || null
@@ -180,7 +183,7 @@ export function getEquippedCosmetics(profile: Partial<UserProfile> | null | unde
   const streakEffectId = equipped.streak_effect || null
 
   const frameItem: ShopItem | null = frameId ? SHOP_CATALOG.find((i) => i.id === frameId) || null : null
-  const titleItem: ShopItem | null = titleId ? SHOP_CATALOG.find((i) => i.id === titleId) || null : null
+  const titleItem: TitleItem | null = resolvedTitle.item
   const themeItem: ShopItem | null = themeId ? SHOP_CATALOG.find((i) => i.id === themeId) || null : null
   const auraItem: ShopItem | null = auraId ? SHOP_CATALOG.find((i) => i.id === auraId) || null : null
   const sfxItem: ShopItem | null = sfxId ? SHOP_CATALOG.find((i) => i.id === sfxId) || null : null
@@ -197,6 +200,7 @@ export function getEquippedCosmetics(profile: Partial<UserProfile> | null | unde
     streakEffectId,
     frameItem,
     titleItem,
+    resolvedTitle,
     themeItem,
     auraItem,
     sfxItem,
@@ -205,39 +209,45 @@ export function getEquippedCosmetics(profile: Partial<UserProfile> | null | unde
   }
 }
 
+import { getFrameById } from '@/data/frames'
+
 /**
  * Retorna as classes CSS de borda e efeito luminoso correspondentes à moldura equipada
  */
 export function getFrameStyle(frameId?: string | null): string {
-  switch (frameId) {
-    case 'frame_fundador_ouro':
-      return 'ring-4 ring-amber-400 border-2 border-emerald-400 shadow-[0_0_35px_rgba(251,191,36,0.95),0_0_20px_rgba(16,185,129,0.8)] animate-pulse'
-    case 'frame_chama_sebastiao':
-      return 'ring-4 ring-amber-500 shadow-[0_0_35px_rgba(239,68,68,0.95),0_0_18px_rgba(245,158,11,0.9)] animate-pulse'
-    case 'frame_cyber_galo':
-      return 'ring-4 ring-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.9),0_0_12px_rgba(6,182,212,0.85)] border border-cyan-400'
-    case 'frame_onda_nazare':
-      return 'ring-4 ring-cyan-400 shadow-[0_0_28px_rgba(6,182,212,0.9),0_0_14px_rgba(59,130,246,0.8)]'
-    case 'frame_padrao_descobrimentos':
-      return 'ring-4 ring-emerald-600 shadow-[0_0_20px_rgba(5,150,105,0.8)] border border-white/20'
-    case 'frame_ouro_real':
-      return 'ring-4 ring-gold shadow-[0_0_32px_rgba(250,204,21,0.9)]'
-    case 'frame_azulejo_nobre':
-      return 'ring-4 ring-purple-400 shadow-[0_0_26px_rgba(192,132,252,0.8)]'
-    case 'frame_mar_portugues':
-      return 'ring-4 ring-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.75)]'
-    case 'frame_verde_esperanca':
-      return 'ring-4 ring-primary shadow-[0_0_22px_rgba(16,185,129,0.7)]'
-    default:
-      return 'ring-2 ring-primary/40'
+  if (!frameId || frameId === 'default') {
+    return 'ring-2 ring-primary/40'
   }
+  const frame = getFrameById(frameId)
+  if (frame) {
+    if (frame.rarity === 'Mítico') {
+      return 'ring-4 ring-pink-500 border-2 border-red-500 shadow-[0_0_35px_rgba(236,72,153,0.95)] animate-pulse'
+    }
+    if (frame.rarity === 'Lendário') {
+      return 'ring-4 ring-amber-400 border-2 border-yellow-300 shadow-[0_0_30px_rgba(251,191,36,0.9)] animate-pulse'
+    }
+    if (frame.rarity === 'Épico') {
+      return 'ring-4 ring-purple-400 border-2 border-indigo-400 shadow-[0_0_25px_rgba(168,85,247,0.85)]'
+    }
+    return 'ring-4 ring-cyan-400 border border-sky-300 shadow-[0_0_20px_rgba(6,182,212,0.8)]'
+  }
+  return 'ring-2 ring-primary/40'
 }
 
 /**
  * Retorna o estilo do badge do título cosmético equipado
  */
-export function getTitleBadgeStyle(titleId?: string | null): string {
-  switch (titleId) {
+export function getTitleBadgeStyle(titleIdOrName?: string | null): string {
+  if (!titleIdOrName) {
+    return 'bg-white/10 border border-white/15 text-muted-foreground font-semibold'
+  }
+
+  const resolved = resolveTitle(titleIdOrName)
+  if (resolved) {
+    return `${resolved.badgeColor} font-bold`
+  }
+
+  switch (titleIdOrName) {
     case 'title_conquistador_supremo':
       return 'bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 text-black font-black shadow-[0_0_25px_rgba(234,179,8,0.9)] border border-yellow-200 animate-pulse'
     case 'title_rei_18_distritos':
@@ -266,9 +276,9 @@ export function getPlayerDisplayTitle(
   profile: Partial<UserProfile> | null | undefined,
   fallbackTitle: string = 'Navegador',
 ): string {
-  const { titleItem } = getEquippedCosmetics(profile)
-  if (titleItem) {
-    return titleItem.name.replace(/^Título:\s*«?/, '').replace(/»?$/, '')
+  const resolved = resolvePlayerEquippedTitle(profile, profile?.xp || 0)
+  if (resolved && resolved.cleanName) {
+    return resolved.cleanName
   }
   return fallbackTitle
 }

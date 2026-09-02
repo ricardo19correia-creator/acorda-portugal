@@ -223,11 +223,14 @@ export type EquippedCosmetics = {
   arena?: string | null
   frame?: string | null
   title?: string | null
+  titleId?: string | null
+  titleName?: string | null
   theme?: string | null
   aura?: string | null
   sfx?: string | null
   soundpack?: string | null
   streak_effect?: string | null
+  [key: string]: any
 }
 
 export type UserProfile = {
@@ -257,8 +260,15 @@ export type UserProfile = {
   bestStreak: number
   unlockedAchievements: string[]
   claimedAchievements?: Record<string, boolean>
+  categoryStats?: Record<string, any>
+  stats?: Record<string, any>
+  isFounder?: boolean
+  answeredQuestionIds?: string[]
   badges?: string[]
+  title?: string
   equippedTitle?: string
+  equippedTitleId?: string
+  ownedTitleIds?: string[]
   equippedFrame?: string
   consumables?: {
     help5050?: number

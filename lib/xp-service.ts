@@ -3,6 +3,11 @@ import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { calculateLevelUpCoinReward, calculateMatchCoinReward, ECONOMY_CONFIG } from '@/lib/economy'
 import type { UserProfile } from '@/lib/game-data'
+import {
+  computeCategoryBreakdownFromAnswers,
+  getCanonicalCategory,
+  type MatchAnswerPayload,
+} from '@/lib/category-registry'
 
 export interface AwardMatchRewardParams {
   userId: string
@@ -18,6 +23,7 @@ export interface AwardMatchRewardParams {
   isWinner?: boolean
   isDraw?: boolean
   answeredQuestionIds?: string[]
+  answers?: MatchAnswerPayload[]
 }
 
 export interface UnlockedAchievementInfo {
@@ -50,6 +56,7 @@ export interface MatchRewardOutcome {
   newStreak: number
   unlockedAchievements: UnlockedAchievementInfo[]
   completedMissions: CompletedMissionInfo[]
+  categoryStats?: Record<string, any>
 }
 
 // In-memory cache de matchIds processados no cliente para resposta e retry instantâneos
@@ -79,6 +86,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
     isWinner,
     isDraw,
     answeredQuestionIds = [],
+    answers = [],
   } = params
 
   if (!userId || !matchId) {
@@ -187,14 +195,60 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         }
       }
 
-      // E. Atualização estatística de categorias
+      // E. Atualização estatística de categorias (granular por pergunta com suporte canónico)
       const existingCategoryStats = (userData as any).categoryStats || {}
-      const curCat = existingCategoryStats[categorySlug] || { totalQuestions: 0, correctAnswers: 0, gamesPlayed: 0, score: 0 }
-      const updatedCat = {
-        totalQuestions: (curCat.totalQuestions || 0) + totalQuestions,
-        correctAnswers: (curCat.correctAnswers || 0) + correctAnswers,
-        gamesPlayed: (curCat.gamesPlayed || 0) + 1,
-        score: (curCat.score || 0) + score,
+      const categoryBreakdown = computeCategoryBreakdownFromAnswers(
+        Array.isArray(answers) && answers.length > 0
+          ? answers
+          : [
+              {
+                questionId: 'match_fallback',
+                categoryId: categorySlug,
+                isCorrect: true,
+              },
+            ],
+        categorySlug,
+      )
+
+      // Se answers estava vazio (chamada legada ou fallback), ajustar contadores com os valores reais da partida
+      if (!Array.isArray(answers) || answers.length === 0) {
+        const canonicalKey = getCanonicalCategory(categorySlug)
+        categoryBreakdown[canonicalKey] = {
+          totalQuestions,
+          correctAnswers,
+          score,
+          gamesPlayed: 1,
+        }
+      }
+
+      const updatedCategoryStatsMap: Record<string, any> = { ...existingCategoryStats }
+
+      for (const [catKey, inc] of Object.entries(categoryBreakdown)) {
+        const curCat = existingCategoryStats[catKey] || {
+          totalQuestions: 0,
+          correctAnswers: 0,
+          total: 0,
+          correct: 0,
+          gamesPlayed: 0,
+          score: 0,
+        }
+        const newTotal = (curCat.totalQuestions || curCat.total || 0) + inc.totalQuestions
+        const newCorrect = (curCat.correctAnswers || curCat.correct || 0) + inc.correctAnswers
+        const newGames = (curCat.gamesPlayed || 0) + (inc.gamesPlayed || 1)
+        const newScore = (curCat.score || 0) + inc.score
+
+        const updatedCat = {
+          totalQuestions: newTotal,
+          correctAnswers: newCorrect,
+          total: newTotal,
+          correct: newCorrect,
+          gamesPlayed: newGames,
+          score: newScore,
+          accuracy: newTotal > 0 ? Math.round((newCorrect / newTotal) * 100) : 0,
+          lastPlayedAt: todayStr,
+        }
+
+        updatedCategoryStatsMap[catKey] = updatedCat
       }
 
       // F. Verificação de Conquistas alcançadas nesta partida
@@ -254,6 +308,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         newStreak: nextStreak,
         unlockedAchievements: newlyUnlocked,
         completedMissions,
+        categoryBreakdown,
         processedAt: serverTimestamp(),
       })
 
@@ -270,9 +325,12 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         correctAnswers: increment(correctAnswers),
         incorrectAnswers: increment(Math.max(0, totalQuestions - correctAnswers)),
         totalQuestions: increment(totalQuestions),
-        [`categoryStats.${categorySlug}`]: updatedCat,
         lastPlayedAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
+      }
+
+      for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {
+        userUpdatePayload[`categoryStats.${catKey}`] = catData
       }
 
       if (newlyUnlocked.length > 0) {
@@ -352,6 +410,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         newStreak: nextStreak,
         unlockedAchievements: newlyUnlocked,
         completedMissions,
+        categoryStats: updatedCategoryStatsMap,
       } as MatchRewardOutcome
     })
 
@@ -381,6 +440,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
             correctAnswers,
             questionsAnswered: totalQuestions,
             bestStreak,
+            categoryStats: outcome.categoryStats,
           },
         })
       )

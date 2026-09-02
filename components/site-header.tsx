@@ -31,6 +31,7 @@ import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import { calculateLevelProgress } from '@/lib/progression'
+import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { useEconomy } from '@/context/economy-context'
 import { cn } from '@/lib/utils'
 
@@ -42,7 +43,7 @@ export function SiteHeader() {
 
   const progressInfo = profile?.xp ? calculateLevelProgress(profile.xp) : null
   const userLevel = profile?.level || progressInfo?.currentLevel.level || 1
-  const userTier = progressInfo?.currentLevel.cleanTitle || 'Curioso'
+  const userTier = getPlayerDisplayTitle(profile, progressInfo?.currentLevel.cleanTitle || 'Curioso')
 
   const handleLogout = async () => {
     setOpen(false)

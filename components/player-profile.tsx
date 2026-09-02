@@ -66,6 +66,7 @@ import {
   type WalletTransaction,
 } from '@/lib/economy'
 import { getEquippedCosmetics, getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { MASTER_TITLE_CATALOG, isTitleOwned } from '@/lib/titles'
 import { getInventory, equipTheme, equipAvatar, type InventoryState } from '@/lib/inventory'
 import { AVATAR_CATALOG, getAvatarById, DEFAULT_AVATAR, type AvatarItem } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
@@ -420,8 +421,9 @@ export function PlayerProfile() {
   )
   const allOwnedTitleIds = Array.from(
     new Set([
-      ...SHOP_CATALOG.filter((i) => i.id.startsWith('title_') && (inventory[i.id] || 0) > 0).map((i) => i.id),
-      ...localOwnedList.filter((id) => id.startsWith('title_')),
+      'tit_novico',
+      ...MASTER_TITLE_CATALOG.filter((i) => (inventory[i.id] || 0) > 0 || isTitleOwned((inventory as any)?.titles || [], i.id)).map((i) => i.id),
+      ...localOwnedList.filter((id) => id.startsWith('title_') || id.startsWith('tit_')),
     ]),
   )
 
@@ -465,7 +467,7 @@ export function PlayerProfile() {
     setEquipping(item.id)
     const slot = item.id.startsWith('frame_')
       ? 'frame'
-      : item.id.startsWith('title_')
+      : item.id.startsWith('title_') || item.id.startsWith('tit_')
         ? 'title'
         : item.id.startsWith('theme_')
           ? 'theme'
@@ -524,7 +526,7 @@ export function PlayerProfile() {
               )}
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <span className="text-xs font-black uppercase tracking-[0.28em] text-primary">
-                  {equippedTitleItem ? equippedTitleItem.name.replace('Título: ', '') : progressInfo.currentLevel.title}
+                  {getPlayerDisplayTitle(player, progressInfo.currentLevel.title)}
                 </span>
                 {equippedAvatarItem && (
                   <span className="rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2.5 py-0.5 text-[0.62rem] font-black text-cyan-300 flex items-center gap-1">

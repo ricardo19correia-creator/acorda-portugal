@@ -7,6 +7,7 @@ import { PORTUGAL_DISTRICTS } from '@/data/districts'
 import { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } from '@/data/constants'
 import { REAL_AVATARS } from '@/lib/avatars'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
+import { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } from '@/lib/titles'
 
 export interface DistrictOnboardingModalProps {
   user: any
@@ -32,7 +33,7 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
     setError(null)
 
     try {
-      const cleanName = (user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
+      const cleanName = (user.displayName || user.email?.split('@')[0] || 'Jogador').trim()
       const starterAvatarObj = STARTER_AVATARS.find((a) => a.id === selectedAvatar) || STARTER_AVATARS[0]
       const chosenAvatarId = starterAvatarObj.id
       const chosenAvatarUrl = starterAvatarObj.image
@@ -55,8 +56,9 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           xp: 0,
           coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
           euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-          title: 'Noviço da Nação',
-          equippedTitle: 'Noviço da Nação',
+          title: DEFAULT_STARTER_TITLE_NAME,
+          equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+          equippedTitleId: DEFAULT_STARTER_TITLE_ID,
           equippedFrame: 'default',
           unlockedFrames: ['default'],
           unlockedAvatars: [chosenAvatarId],
@@ -66,7 +68,7 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           inventory: {
             avatars: [chosenAvatarId],
             arenas: ['arena_1'],
-            titles: ['tit_novico'],
+            titles: [DEFAULT_STARTER_TITLE_ID],
             taunts: ['pack_basico'],
             frames: ['default'],
             utilities: {
@@ -78,7 +80,9 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           equipped: {
             avatar: chosenAvatarUrl,
             avatarId: chosenAvatarId,
-            title: 'Noviço da Nação',
+            title: DEFAULT_STARTER_TITLE_ID,
+            titleId: DEFAULT_STARTER_TITLE_ID,
+            titleName: DEFAULT_STARTER_TITLE_NAME,
             arena: 'arena_1',
             frameId: 'default',
           },
@@ -104,7 +108,9 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           district: selectedDistrict,
           level: 1,
           xp: 0,
-          equippedTitle: 'Noviço da Nação',
+          title: DEFAULT_STARTER_TITLE_NAME,
+          equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+          equippedTitleId: DEFAULT_STARTER_TITLE_ID,
           updatedAt: serverTimestamp(),
         },
         { merge: true }

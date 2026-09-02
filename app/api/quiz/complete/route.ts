@@ -4,6 +4,10 @@ import { FieldValue } from 'firebase-admin/firestore'
 import { calculateLevelProgress } from '@/lib/progression'
 import { ECONOMY_CONFIG, calculateLevelUpCoinReward, calculateMatchCoinReward } from '@/lib/economy'
 import { QuestionRegistry } from '@/lib/question-system/registry'
+import {
+  computeCategoryBreakdownFromAnswers,
+  type MatchAnswerPayload,
+} from '@/lib/category-registry'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,6 +39,7 @@ export async function POST(request: NextRequest) {
     let correctCount = 0
     let score = 0
     const answeredIds: string[] = []
+    const enrichedAnswers: MatchAnswerPayload[] = []
 
     for (const ans of answers) {
       const qId = String(ans.questionId)
@@ -56,6 +61,15 @@ export async function POST(request: NextRequest) {
         correctCount++
         score += 100
       }
+
+      enrichedAnswers.push({
+        questionId: qId,
+        categoryId: ans.categoryId || canonicalQ?.category || categorySlug,
+        subcategory: canonicalQ?.subcategory,
+        prompt: canonicalQ?.question,
+        selectedOption: ans.selectedOption,
+        isCorrect,
+      })
     }
 
     // 2. Cálculo Server-Side de XP e Moedas
@@ -116,13 +130,32 @@ export async function POST(request: NextRequest) {
       const newTotalCoins = currentCoins + totalAwardedCoins
 
       const catStats = userData.categoryStats || {}
-      const curCat = catStats[categorySlug] || { totalQuestions: 0, correctAnswers: 0, gamesPlayed: 0, score: 0 }
+      const categoryBreakdown = computeCategoryBreakdownFromAnswers(enrichedAnswers, categorySlug)
+      const updatedCategoryStatsMap: Record<string, any> = { ...catStats }
 
-      const updatedCat = {
-        totalQuestions: (curCat.totalQuestions || 0) + answers.length,
-        correctAnswers: (curCat.correctAnswers || 0) + correctCount,
-        gamesPlayed: (curCat.gamesPlayed || 0) + 1,
-        score: (curCat.score || 0) + score,
+      for (const [catKey, inc] of Object.entries(categoryBreakdown)) {
+        const curCat = catStats[catKey] || {
+          totalQuestions: 0,
+          correctAnswers: 0,
+          total: 0,
+          correct: 0,
+          gamesPlayed: 0,
+          score: 0,
+        }
+        const newTotal = (curCat.totalQuestions || curCat.total || 0) + inc.totalQuestions
+        const newCorrect = (curCat.correctAnswers || curCat.correct || 0) + inc.correctAnswers
+        const newGames = (curCat.gamesPlayed || 0) + (inc.gamesPlayed || 1)
+        const newScore = (curCat.score || 0) + inc.score
+
+        updatedCategoryStatsMap[catKey] = {
+          totalQuestions: newTotal,
+          correctAnswers: newCorrect,
+          total: newTotal,
+          correct: newCorrect,
+          gamesPlayed: newGames,
+          score: newScore,
+          accuracy: newTotal > 0 ? Math.round((newCorrect / newTotal) * 100) : 0,
+        }
       }
 
       const updatePayload: Record<string, any> = {
@@ -135,9 +168,12 @@ export async function POST(request: NextRequest) {
         correctAnswers: FieldValue.increment(correctCount),
         incorrectAnswers: FieldValue.increment(answers.length - correctCount),
         totalQuestions: FieldValue.increment(answers.length),
-        [`categoryStats.${categorySlug}`]: updatedCat,
         lastPlayedAt: FieldValue.serverTimestamp(),
         updatedAt: FieldValue.serverTimestamp(),
+      }
+
+      for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {
+        updatePayload[`categoryStats.${catKey}`] = catData
       }
 
       if (answeredIds.length > 0) {

@@ -69,6 +69,7 @@ export interface ArenaDefinition {
   categoryLabel: string
   rarity: ArenaRarity
   price: number | null
+  isExclusive?: boolean
   unlockCondition?: string
   unlockedByDefault?: boolean
   unlocked?: boolean

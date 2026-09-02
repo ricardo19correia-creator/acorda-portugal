@@ -45,6 +45,20 @@ import { AppBackground } from '@/components/AppBackground'
 import { DEFAULT_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
+import { equipTitle } from '@/lib/titles-service'
+import {
+  MASTER_TITLE_CATALOG,
+  DEFAULT_STARTER_TITLE_ID,
+  DEFAULT_STARTER_TITLE_NAME,
+  resolvePlayerEquippedTitle,
+  resolveTitle,
+  isTitleOwned,
+  sanitizeTitleName,
+} from '@/lib/titles'
+import {
+  CANONICAL_PROFILE_CATEGORIES,
+  getCanonicalCategoryData,
+} from '@/lib/category-registry'
 
 interface InventoryItem {
   id: string
@@ -70,7 +84,7 @@ const getAvatarBadgeColor = (rarity: string) => {
     case 'Épico':
       return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40'
     case 'Raro':
-      return 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+      return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
     default:
       return 'bg-slate-500/20 text-slate-300 border-slate-500/40'
   }
@@ -109,7 +123,7 @@ const MASTER_PROFILE_CATALOG: InventoryItem[] = [
     effect: ar.effect,
     price: ar.price,
   })),
-  ...TITLE_SHOP_CATALOG.map((t) => ({
+  ...MASTER_TITLE_CATALOG.map((t) => ({
     id: t.id,
     name: t.name,
     category: 'titulos' as const,
@@ -144,7 +158,8 @@ function PerfilContent() {
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
   const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId || null))
   const [arena, setArena] = useState<string>(() => (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_1')
-  const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || profile?.equipped?.title || '')
+  const [equippedTitleId, setEquippedTitleId] = useState<string>(() => (profile as any)?.equippedTitleId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID : DEFAULT_STARTER_TITLE_ID))
+  const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME : DEFAULT_STARTER_TITLE_NAME))
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userCoins, setUserCoins] = useState<number>(() => profile?.coins ?? profile?.euros ?? 0)
@@ -541,33 +556,30 @@ function PerfilContent() {
                 freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : 0,
                 publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : 0,
               })
-            } else {
-              setConsumables({ help5050: 0, freezeTime: 0, publicVote: 0 })
             }
-            if (data.inventory) {
-              setInventory({
-                avatars: Array.isArray(data.inventory.avatars) && data.inventory.avatars.length > 0 ? data.inventory.avatars : [DEFAULT_AVATAR_ID],
-                frames: Array.isArray(data.inventory.frames) ? data.inventory.frames : ['default'],
-                arenas: Array.isArray(data.inventory.arenas) && data.inventory.arenas.length > 0 ? data.inventory.arenas : ['arena_1'],
-                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : ['tit_novico'],
-                taunts: Array.isArray(data.inventory.taunts) ? data.inventory.taunts : ['pack_basico'],
-              })
-              localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
+            if (data.coins !== undefined || data.euros !== undefined) {
+              const b = data.coins ?? data.euros ?? 0
+              setUserCoins(b)
+              localStorage.setItem('user_coins', String(b))
+              localStorage.setItem('user_euros', String(b))
             }
-            if (data.unlockedFrames && Array.isArray(data.unlockedFrames)) {
-              setUnlockedItems((prev) => Array.from(new Set([...prev, ...data.unlockedFrames])))
-              setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
+            if (data.xp !== undefined) {
+              const x = Math.max(0, Number(data.xp) || 0)
+              setUserXp(x)
+              setUserLevel(calculateLevelProgress(x).currentLevel.level)
+              localStorage.setItem('user_xp', String(x))
             }
-            if (data.equippedAvatar || data.equipped?.avatar || data.avatar) {
-              const avImg = data.equipped?.avatar || data.avatar
-              if (avImg && !avImg.includes('moldura')) {
-                setAvatar(avImg)
-                localStorage.setItem('user_equipped_avatar', avImg)
+            if (data.photoURL || data.avatar || data.equipped?.avatar) {
+              const av = data.equipped?.avatar || data.photoURL || data.avatar
+              if (av && !av.includes('moldura')) {
+                setAvatar(getAvatarImage(av))
+                localStorage.setItem('user_equipped_avatar', av)
               }
-              if (data.equippedAvatar) {
-                setEquippedAvatarId(data.equippedAvatar)
-                localStorage.setItem('equipped_avatar_id', data.equippedAvatar)
-              }
+            }
+            if (data.equippedAvatar || data.avatarId || data.equipped?.avatarId) {
+              const avId = normalizeAvatarId(data.equippedAvatar || data.avatarId || data.equipped?.avatarId)
+              setEquippedAvatarId(avId)
+              localStorage.setItem('equipped_avatar_id', avId)
             }
             if (data.equippedFrame || data.equipped?.frameId) {
               const fr = data.equippedFrame || data.equipped?.frameId
@@ -575,7 +587,7 @@ function PerfilContent() {
               localStorage.setItem('user_equipped_frame', fr)
             }
             if (data.equippedArena || data.equipped?.arena) {
-              const ar = data.equipped?.arena || data.equippedArena
+              const ar = data.equippedArena || data.equipped?.arena
               setArena(ar)
               localStorage.setItem('equipped_arena', ar)
             }
@@ -586,11 +598,13 @@ function PerfilContent() {
                 localStorage.setItem('equipped_emotes', JSON.stringify(em))
               }
             }
-            if (data.equippedTitle || data.equipped?.title) {
-              const tit = data.equipped?.title || data.equippedTitle
-              setTitle(tit)
-              localStorage.setItem('equipped_title', tit)
-            }
+            const resolvedTit = resolvePlayerEquippedTitle(data as any, (typeof data.xp === 'number' && !isNaN(data.xp)) ? data.xp : 0)
+            const titId = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTit.id
+            const titName = resolvedTit.cleanName || DEFAULT_STARTER_TITLE_NAME
+            setEquippedTitleId(titId)
+            setTitle(titName)
+            localStorage.setItem('equipped_title_id', titId)
+            localStorage.setItem('equipped_title', titName)
           }
         })
       } catch (e) {
@@ -774,26 +788,15 @@ function PerfilContent() {
       window.dispatchEvent(new Event('arenaChanged'))
       showToast(`Arena "${item.name}" equipada no jogo!`)
     } else if (item.category === 'titulos') {
-      setTitle(item.name)
-      localStorage.setItem('equipped_title', item.name)
-      localStorage.setItem('equipped_title_id', item.id)
+      const cleanName = sanitizeTitleName(item.name)
+      setEquippedTitleId(item.id)
+      setTitle(cleanName)
       if (auth.currentUser) {
-        try {
-          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            equippedTitle: item.name,
-            'equipped.title': item.name,
-          })
-          await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
-            equippedTitle: item.name,
-            'equipped.title': item.name,
-            title: item.name,
-          }, { merge: true })
-        } catch (e) {
-          console.error(e)
-        }
+        const res = await equipTitle(auth.currentUser.uid, item.id)
+        showToast(res.message)
+      } else {
+        showToast(`Título «${cleanName}» ativado no perfil!`)
       }
-      window.dispatchEvent(new Event('titleChanged'))
-      showToast(`Título «${item.name}» ativado no perfil!`)
     }
 
     window.dispatchEvent(new Event('inventory_updated'))
@@ -1136,13 +1139,7 @@ function PerfilContent() {
         const isDefault = item.id === 'arena_1'
         isUnlocked = isDefault || inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
       } else if (item.category === 'titulos') {
-        const isDefault = item.id === 'tit_novico' || item.name === 'Noviço da Nação'
-        isUnlocked = 
-          isDefault ||
-          inventory.titles.includes(item.id) ||
-          inventory.titles.includes(item.name) ||
-          unlockedItems.includes(item.id) ||
-          unlockedItems.includes(item.name)
+        isUnlocked = isTitleOwned(inventory.titles, item.id) || unlockedItems.includes(item.id) || unlockedItems.includes(item.name)
       }
 
       if (!isUnlocked) return false
@@ -1172,22 +1169,22 @@ function PerfilContent() {
           progress = profile?.bestStreak ?? 0
           break
         case 'historiaCorrect':
-          progress = (profile as any)?.categoryStats?.historia?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'historia', ['historia-portugal', 'historia_de_portugal', 'história']).correctAnswers
           break
         case 'geografiaCorrect':
-          progress = (profile as any)?.categoryStats?.geografia?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'geografia', ['geografia-territorio', 'distrito', 'o-meu-distrito']).correctAnswers
           break
         case 'desportoCorrect':
-          progress = (profile as any)?.categoryStats?.desporto?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'desporto', ['desporto-nacional', 'futebol', 'futebol-portugues']).correctAnswers
           break
         case 'culturaCorrect':
-          progress = (profile as any)?.categoryStats?.cultura?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'cultura', ['cultura-tradicoes', 'musica', 'cinema-tv']).correctAnswers
           break
         case 'simbolosCorrect':
-          progress = (profile as any)?.categoryStats?.simbolos?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'simbolos', ['gastronomia', 'simbolos-gastronomia', 'gastronomia-portuguesa']).correctAnswers
           break
         case 'districtGames':
-          progress = (profile as any)?.categoryStats?.distrito?.games ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'geografia', ['distrito', 'o-meu-distrito', 'desafio-cidade']).gamesPlayed
           break
         case 'districtsFaced':
           progress = (profile as any)?.stats?.districtsFaced ?? 0
@@ -1196,10 +1193,10 @@ function PerfilContent() {
           progress = userCoins
           break
         case 'malucoGames':
-          progress = (profile as any)?.categoryStats?.maluco?.games ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'maluco', ['modo-maluco', 'modo_maluco']).gamesPlayed
           break
         case 'malucoCorrect':
-          progress = (profile as any)?.categoryStats?.maluco?.correct ?? 0
+          progress = getCanonicalCategoryData((profile as any)?.categoryStats, 'maluco', ['modo-maluco', 'modo_maluco']).correctAnswers
           break
         case 'isFounder':
           progress = (profile as any)?.isFounder ? 1 : 0
@@ -1240,103 +1237,26 @@ function PerfilContent() {
     return userAchievements.filter((a) => a.category === achievementCategory)
   }, [userAchievements, achievementCategory])
 
-  // Estatísticas por Categoria (Performance Real de Quiz)
+  // Estatísticas por Categoria (Performance Real de Quiz 100% Determinística e Fiel)
   const categoryStats = useMemo(() => {
     const userCatStats = (profile as any)?.categoryStats || {}
-    return [
-      {
-        id: 'historia',
-        name: 'História de Portugal',
-        icon: '🏛️',
-        accuracy:
-          userCatStats.historia?.total > 0
-            ? Math.round((userCatStats.historia.correct / userCatStats.historia.total) * 100)
-            : profile?.totalQuestions && profile.totalQuestions > 0
-              ? Math.round(((profile.correctAnswers || 0) / profile.totalQuestions) * 100)
-              : 0,
-        answered: userCatStats.historia?.total || (profile?.totalQuestions ? Math.round(profile.totalQuestions / 6) : 0),
-        correct: userCatStats.historia?.correct || (profile?.correctAnswers ? Math.round(profile.correctAnswers / 6) : 0),
-        levelName: 'Mestre da Lusitânia',
-        gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
-        borderColor: 'border-amber-500/40',
-        barColor: 'bg-amber-500',
-      },
-      {
-        id: 'geografia',
-        name: 'Geografia & Território',
-        icon: '🌍',
-        accuracy:
-          userCatStats.geografia?.total > 0
-            ? Math.round((userCatStats.geografia.correct / userCatStats.geografia.total) * 100)
-            : 0,
-        answered: userCatStats.geografia?.total || 0,
-        correct: userCatStats.geografia?.correct || 0,
-        levelName: 'Navegador Cartógrafo',
-        gradient: 'from-emerald-500/20 via-teal-500/10 to-transparent',
-        borderColor: 'border-emerald-500/40',
-        barColor: 'bg-emerald-500',
-      },
-      {
-        id: 'desporto',
-        name: 'Desporto Nacional',
-        icon: '⚽',
-        accuracy:
-          userCatStats.desporto?.total > 0
-            ? Math.round((userCatStats.desporto.correct / userCatStats.desporto.total) * 100)
-            : 0,
-        answered: userCatStats.desporto?.total || 0,
-        correct: userCatStats.desporto?.correct || 0,
-        levelName: 'Campeão Ibérico',
-        gradient: 'from-blue-500/20 via-indigo-500/10 to-transparent',
-        borderColor: 'border-blue-500/40',
-        barColor: 'bg-blue-500',
-      },
-      {
-        id: 'cultura',
-        name: 'Cultura & Tradições',
-        icon: '🎭',
-        accuracy:
-          userCatStats.cultura?.total > 0
-            ? Math.round((userCatStats.cultura.correct / userCatStats.cultura.total) * 100)
-            : 0,
-        answered: userCatStats.cultura?.total || 0,
-        correct: userCatStats.cultura?.correct || 0,
-        levelName: 'Erudito das Beiras',
-        gradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
-        borderColor: 'border-purple-500/40',
-        barColor: 'bg-purple-500',
-      },
-      {
-        id: 'simbolos',
-        name: 'Símbolos & Gastronomia',
-        icon: '🇵🇹',
-        accuracy:
-          userCatStats.simbolos?.total > 0
-            ? Math.round((userCatStats.simbolos.correct / userCatStats.simbolos.total) * 100)
-            : 0,
-        answered: userCatStats.simbolos?.total || 0,
-        correct: userCatStats.simbolos?.correct || 0,
-        levelName: 'Paladar Lusitano',
-        gradient: 'from-red-500/20 via-amber-500/10 to-transparent',
-        borderColor: 'border-red-500/40',
-        barColor: 'bg-red-500',
-      },
-      {
-        id: 'maluco',
-        name: 'Modo Maluco',
-        icon: '🤪',
-        accuracy:
-          userCatStats.maluco?.total > 0
-            ? Math.round((userCatStats.maluco.correct / userCatStats.maluco.total) * 100)
-            : 0,
-        answered: userCatStats.maluco?.total || 0,
-        correct: userCatStats.maluco?.correct || 0,
-        levelName: 'Maluco Veterano',
-        gradient: 'from-yellow-500/20 via-lime-500/10 to-transparent',
-        borderColor: 'border-yellow-500/40',
-        barColor: 'bg-yellow-500',
-      },
-    ]
+
+    return CANONICAL_PROFILE_CATEGORIES.map((catConfig) => {
+      const catData = getCanonicalCategoryData(userCatStats, catConfig.id, catConfig.aliases)
+
+      return {
+        id: catConfig.id,
+        name: catConfig.name,
+        icon: catConfig.icon,
+        accuracy: catData.accuracy,
+        answered: catData.totalQuestions,
+        correct: catData.correctAnswers,
+        levelName: catConfig.levelName,
+        gradient: catConfig.gradient,
+        borderColor: catConfig.borderColor,
+        barColor: catConfig.barColor,
+      }
+    })
   }, [profile])
 
   if (!mounted || !authResolved || (profileLoading && !profile) || !user) {
@@ -1739,7 +1659,12 @@ function PerfilContent() {
                       (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || normalizeAvatarId(avatar) === normalizeAvatarId(item.id))) ||
                       (item.category === 'molduras' && equippedFrame === item.id) ||
                       (item.category === 'arenas' && arena === item.id) ||
-                      (item.category === 'titulos' && (title === item.name || title === item.id))
+                      (item.category === 'titulos' && (
+                        equippedTitleId === item.id ||
+                        resolveTitle(equippedTitleId)?.id === item.id ||
+                        title === item.name ||
+                        sanitizeTitleName(title).toLowerCase() === sanitizeTitleName(item.name).toLowerCase()
+                      ))
 
                     return (
                       <div 

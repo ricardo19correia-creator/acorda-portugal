@@ -138,8 +138,8 @@ async function runMasterAuditSuite() {
   assert(fs.existsSync(path.resolve('components/question-report-modal.tsx')), 'components/question-report-modal.tsx existe e está disponível');
   assert(fs.existsSync(path.resolve('components/daily-reward-modal.tsx')), 'components/daily-reward-modal.tsx existe e está disponível');
 
-  const homeCode = fs.readFileSync(path.resolve('app/page.tsx'), 'utf8');
-  assert(homeCode.includes('<HowItWorks />'), 'Homepage integra a secção Como Funciona?');
+  const explorarCode = fs.readFileSync(path.resolve('app/explorar/page.tsx'), 'utf8');
+  assert(explorarCode.includes('<HowItWorks />'), 'Página Explorar integra a secção Como Funciona?');
 
   const heroCode = fs.readFileSync(path.resolve('components/hero.tsx'), 'utf8');
   assert(heroCode.includes('+5.000'), 'Hero destaca métrica real de +5.000 perguntas oficiais');

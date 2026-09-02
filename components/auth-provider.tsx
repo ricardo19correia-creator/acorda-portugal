@@ -30,6 +30,12 @@ import {
   normalizeDistrict,
 } from '@/data/districts'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
+import {
+  DEFAULT_STARTER_TITLE_ID,
+  DEFAULT_STARTER_TITLE_NAME,
+  resolvePlayerEquippedTitle,
+  sanitizeTitleName,
+} from '@/lib/titles'
 
 export type AuthLifecycleState =
   | 'AUTH_INITIALIZING'
@@ -69,7 +75,8 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
     const savedDistrict = localStorage.getItem('user_district') || ''
     const savedCity = localStorage.getItem('user_city') || ''
     const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || DEFAULT_AVATAR.id
-    const savedTitle = localStorage.getItem('equipped_title') || 'Noviço da Nação'
+    const savedTitleId = localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID
+    const savedTitleName = localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME
 
     const coinsVal = savedCoins && !isNaN(Number(savedCoins)) ? Number(savedCoins) : ECONOMY_CONFIG.INITIAL_BONUS_COINS
     const resolvedAvatar = getAvatarById(savedAvatarId)
@@ -85,7 +92,9 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       cityLocked: Boolean(savedCity),
       representedDistrict: savedDistrict,
       representedCity: savedCity,
-      equippedTitle: savedTitle,
+      title: savedTitleName,
+      equippedTitle: savedTitleName,
+      equippedTitleId: savedTitleId,
       level: 1,
       xp: 0,
       coins: coinsVal,
@@ -101,11 +110,14 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       totalQuestions: 0,
       bestStreak: 0,
       unlockedAchievements: [],
+      claimedAchievements: {},
+      categoryStats: {},
+      stats: {},
       badges: ['novico'],
       inventory: {
         avatars: [resolvedAvatar.id],
         arenas: ['arena_1'],
-        titles: ['tit_novico'],
+        titles: [DEFAULT_STARTER_TITLE_ID],
         taunts: ['pack_basico'],
         frames: ['default'],
         utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
@@ -113,7 +125,9 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       equipped: {
         avatar: resolvedAvatar.image,
         avatarId: resolvedAvatar.id,
-        title: savedTitle,
+        title: savedTitleId,
+        titleId: savedTitleId,
+        titleName: savedTitleName,
         arena: 'arena_1',
       },
       consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
@@ -226,6 +240,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         correctAnswers?: number
         questionsAnswered?: number
         bestStreak?: number
+        categoryStats?: Record<string, any>
       }>
       if (customEvt.detail) {
         console.log('[AUTH] Sincronização em tempo real via profile_updated:', customEvt.detail)
@@ -261,6 +276,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             correctAnswers: typeof customEvt.detail.correctAnswers === 'number' ? customEvt.detail.correctAnswers : prev.correctAnswers,
             questionsAnswered: typeof customEvt.detail.questionsAnswered === 'number' ? customEvt.detail.questionsAnswered : prev.questionsAnswered,
             bestStreak: typeof customEvt.detail.bestStreak === 'number' ? customEvt.detail.bestStreak : prev.bestStreak,
+            categoryStats: customEvt.detail.categoryStats
+              ? { ...(prev.categoryStats || {}), ...customEvt.detail.categoryStats }
+              : prev.categoryStats,
           }
         })
       }
@@ -353,7 +371,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const needsDistrict = !districtVal || !isValidDist || !districtLockedVal
             setNeedsDistrictSelection(needsDistrict)
 
-            const titleVal = data.title || data.equippedTitle || (data.equipped as any)?.title || 'Noviço da Nação'
+            const resolvedTitle = resolvePlayerEquippedTitle(data as any, xpVal)
+            const equippedTitleIdVal = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTitle.id
+            const equippedTitleNameVal = resolvedTitle.cleanName || DEFAULT_STARTER_TITLE_NAME
 
             // Resolução do avatar
             const rawAvatarCandidate = data.avatarId || data.equippedAvatar || data.avatar || data.photoURL || currentUser.photoURL
@@ -372,7 +392,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               cityLocked: cityLockedVal,
               representedDistrict: districtVal,
               representedCity: cityVal,
-              equippedTitle: titleVal,
+              title: equippedTitleNameVal,
+              equippedTitle: equippedTitleNameVal,
+              equippedTitleId: equippedTitleIdVal,
               level: levelVal,
               xp: xpVal,
               coins: coinsVal,
@@ -388,12 +410,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               totalQuestions: typeof data.totalQuestions === 'number' ? data.totalQuestions : 0,
               bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
               unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
+              claimedAchievements: (data.claimedAchievements as Record<string, boolean>) || {},
+              categoryStats: (data.categoryStats as Record<string, any>) || {},
+              stats: (data.stats as Record<string, any>) || {},
+              isFounder: Boolean(data.isFounder),
+              answeredQuestionIds: Array.isArray(data.answeredQuestionIds) ? data.answeredQuestionIds : [],
               badges: Array.isArray(data.badges) ? data.badges : ['novico'],
               inventory: {
                 ...(data.inventory || {}),
                 avatars: Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [DEFAULT_AVATAR.id],
                 arenas: Array.isArray(data.inventory?.arenas) ? data.inventory.arenas : ['arena_1'],
-                titles: Array.isArray(data.inventory?.titles) ? data.inventory.titles : ['tit_novico'],
+                titles: Array.isArray(data.inventory?.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : [DEFAULT_STARTER_TITLE_ID],
                 taunts: Array.isArray(data.inventory?.taunts) ? data.inventory.taunts : ['pack_basico'],
                 frames: Array.isArray(data.inventory?.frames) ? data.inventory.frames : ['default'],
                 utilities: {
@@ -406,7 +433,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 ...(data.equipped || {}),
                 avatar: avatarVal,
                 avatarId: avatarIdVal,
-                title: titleVal,
+                title: equippedTitleIdVal,
+                titleId: equippedTitleIdVal,
+                titleName: equippedTitleNameVal,
                 arena: (data.equipped as any)?.arena || 'arena_1',
               },
               consumables: {
@@ -438,7 +467,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_equipped_avatar', avatarVal)
                 localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
                 localStorage.setItem('equipped_avatar_id', avatarIdVal)
-                localStorage.setItem('equipped_title', titleVal)
+                localStorage.setItem('equipped_title_id', equippedTitleIdVal)
+                localStorage.setItem('equipped_title', equippedTitleNameVal)
+                localStorage.setItem('user_equipped_title', equippedTitleNameVal)
               } catch (storageErr) {
                 console.warn('[AUTH] Storage local restrito:', storageErr)
               }
@@ -460,7 +491,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   representedCity: cityVal,
                   level: levelVal,
                   xp: xpVal,
-                  equippedTitle: titleVal,
+                  title: equippedTitleNameVal,
+                  equippedTitle: equippedTitleNameVal,
+                  equippedTitleId: equippedTitleIdVal,
                   updatedAt: serverTimestamp(),
                 },
                 { merge: true },
@@ -487,8 +520,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               xp: 0,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-              title: 'Noviço da Nação',
-              equippedTitle: 'Noviço da Nação',
+              title: DEFAULT_STARTER_TITLE_NAME,
+              equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+              equippedTitleId: DEFAULT_STARTER_TITLE_ID,
               equippedFrame: 'default',
               unlockedFrames: ['default'],
               unlockedAvatars: [fallbackAvatarId],
@@ -498,7 +532,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               inventory: {
                 avatars: [fallbackAvatarId],
                 arenas: ['arena_1'],
-                titles: ['tit_novico'],
+                titles: [DEFAULT_STARTER_TITLE_ID],
                 taunts: ['pack_basico'],
                 frames: ['default'],
                 utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
@@ -506,7 +540,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               equipped: {
                 avatar: fallbackAvatar,
                 avatarId: fallbackAvatarId,
-                title: 'Noviço da Nação',
+                title: DEFAULT_STARTER_TITLE_ID,
+                titleId: DEFAULT_STARTER_TITLE_ID,
+                titleName: DEFAULT_STARTER_TITLE_NAME,
                 arena: 'arena_1',
                 frameId: 'default',
               },
@@ -540,18 +576,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               bestStreak: 0,
               unlockedAchievements: [],
               badges: ['novico'],
-              equippedTitle: 'Noviço da Nação',
+              title: DEFAULT_STARTER_TITLE_NAME,
+              equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+              equippedTitleId: DEFAULT_STARTER_TITLE_ID,
               inventory: {
                 avatars: [fallbackAvatarId],
                 arenas: ['arena_1'],
-                titles: ['tit_novico'],
+                titles: [DEFAULT_STARTER_TITLE_ID],
                 taunts: ['pack_basico'],
                 frames: ['default'],
                 utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
               },
               equipped: {
                 avatar: fallbackAvatar,
-                title: 'Noviço da Nação',
+                title: DEFAULT_STARTER_TITLE_ID,
                 arena: 'arena_1',
               },
               consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },

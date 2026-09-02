@@ -36,6 +36,7 @@ import {
 } from '@/lib/rankings'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { calculateLevelProgress } from '@/lib/progression'
+import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { cn } from '@/lib/utils'
 
 const PODIUM_ORDER = [1, 0, 2] // 2º Lugar (Esquerda), 1º Lugar (Centro), 3º Lugar (Direita)
@@ -98,7 +99,7 @@ export default function RankingsPage() {
           const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userWins = profile.wins ?? 0
           const userLevel = calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
+          const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
           const userDistrict = profile.district || 'Portugal'
 
           const matchesDistrict =
@@ -158,7 +159,7 @@ export default function RankingsPage() {
           const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userWins = profile.wins ?? 0
           const userLevel = calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
+          const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
           const userDistrict = profile.district || 'Portugal'
           const hasCurrentUser = allList.some((p) => p.uid === user.uid)
           if (!hasCurrentUser) {

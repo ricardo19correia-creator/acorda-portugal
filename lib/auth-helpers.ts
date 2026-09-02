@@ -315,8 +315,9 @@ export async function createNewUserDocument(
   const { db } = await import('@/lib/firebase')
   const { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } = await import('@/data/constants')
   const { normalizeDistrict, getDefaultCityForDistrict, isValidCityForDistrict } = await import('@/data/districts')
+  const { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } = await import('@/lib/titles')
 
-  const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Noviço da Nação').trim()
+  const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Jogador').trim()
   const photoURL = customAvatarUrl || user.photoURL || DEFAULT_AVATAR_URL
 
   const canonicalDistrict = normalizeDistrict(selectedDistrict) || selectedDistrict.trim()
@@ -353,8 +354,9 @@ export async function createNewUserDocument(
     incorrectAnswers: 0,
     totalQuestions: 0,
     bestStreak: 0,
-    title: 'Noviço da Nação',
-    equippedTitle: 'Noviço da Nação',
+    title: DEFAULT_STARTER_TITLE_NAME,
+    equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+    equippedTitleId: DEFAULT_STARTER_TITLE_ID,
     equippedFrame: 'default',
     unlockedFrames: ['default'],
     unlockedAvatars: [DEFAULT_AVATAR_ID],
@@ -364,7 +366,7 @@ export async function createNewUserDocument(
     inventory: {
       avatars: [DEFAULT_AVATAR_ID],
       arenas: ['arena_1'],
-      titles: ['tit_novico'],
+      titles: [DEFAULT_STARTER_TITLE_ID],
       taunts: ['pack_basico'],
       frames: ['default'],
       utilities: {
@@ -376,7 +378,9 @@ export async function createNewUserDocument(
     equipped: {
       avatar: photoURL,
       avatarId: DEFAULT_AVATAR_ID,
-      title: 'Noviço da Nação',
+      title: DEFAULT_STARTER_TITLE_ID,
+      titleId: DEFAULT_STARTER_TITLE_ID,
+      titleName: DEFAULT_STARTER_TITLE_NAME,
       arena: 'arena_1',
       frameId: 'default',
     },
@@ -407,7 +411,9 @@ export async function createNewUserDocument(
         representedCity: canonicalCity,
         level: 1,
         xp: 0,
-        equippedTitle: 'Noviço da Nação',
+        title: DEFAULT_STARTER_TITLE_NAME,
+        equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+        equippedTitleId: DEFAULT_STARTER_TITLE_ID,
         equippedFrame: 'default',
         updatedAt: serverTimestamp(),
       },

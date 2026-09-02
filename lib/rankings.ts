@@ -2,6 +2,7 @@ import { collection, query, limit, getDocs, onSnapshot } from 'firebase/firestor
 import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getAvatarImage } from '@/lib/avatars'
+import { resolvePlayerEquippedTitle } from '@/lib/titles'
 
 export interface RankingPlayer {
   uid: string
@@ -70,7 +71,8 @@ export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const displayName = rawName || 'Jogador'
   const district = (data.district || data.region || 'Portugal').trim()
   const photoURL = getAvatarImage(data.photoURL || data.avatar || data.avatarId || (data.equipped?.avatar) || null)
-  const title = data.equippedTitle || data.title || data.equipped?.title || levelInfo.currentLevel.title || 'Jogador Nacional'
+  const resolvedTitle = resolvePlayerEquippedTitle(data, xp)
+  const title = resolvedTitle.cleanName || levelInfo.currentLevel.cleanTitle || 'Jogador Nacional'
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
   const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
   const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + (data.losses || 0)))

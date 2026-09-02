@@ -20,6 +20,7 @@ import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerP
 import { PlayerAvatar } from '@/components/player-avatar'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { subscribeRankings } from '@/lib/rankings'
+import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 
 export type RankedPlayer = {
   uid: string
@@ -94,7 +95,7 @@ export function Ranking() {
         if (user?.uid && profile) {
           const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userLevel = calculateLevelProgress(userXp).currentLevel.level
-          const userTitle = profile.equippedTitle || (profile as any)?.title || calculateLevelProgress(userXp).currentLevel.title
+          const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
           const userDistrict = (profile.district || 'Portugal').trim()
 
           const hasCurrentUser = playersList.some((p) => p.uid === user.uid)

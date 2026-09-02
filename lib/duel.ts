@@ -30,6 +30,10 @@ import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { getEquippedAvatarImage } from '@/lib/inventory'
 import { silentFetchWithRetry, silentAsyncRetry } from '@/lib/network-resilience'
 import { safeRandomUUID } from '@/lib/utils'
+import {
+  computeCategoryBreakdownFromAnswers,
+  type MatchAnswerPayload,
+} from '@/lib/category-registry'
 
 export function resolveUserAvatar(
   user?: { photoURL?: string | null } | null,
@@ -1189,7 +1193,51 @@ export async function claimDuelRewards(
       const newTotalEuros = currentEuros + totalAwardedEuros
 
       if (userSnap.exists()) {
-        transaction.update(userRef, {
+        const questionsList = Array.isArray(duel.questions) ? duel.questions : []
+        const duelAnswers: MatchAnswerPayload[] = []
+        for (let i = 0; i < questionsList.length; i++) {
+          const q: any = questionsList[i]
+          const ansObj = player.answers ? (Array.isArray(player.answers) ? player.answers[i] : player.answers[q?.id || i]) : undefined
+          const isAnsCorrect = ansObj ? Boolean(ansObj.isCorrect) : false
+          duelAnswers.push({
+            questionId: String(q?.id || `duel_${i}`),
+            categoryId: q?.category || 'desafio-nacional',
+            subcategory: q?.subcategory,
+            prompt: q?.question || q?.pergunta,
+            isCorrect: isAnsCorrect,
+          })
+        }
+
+        const existingCatStats = (userData.categoryStats as Record<string, any>) || {}
+        const categoryBreakdown = computeCategoryBreakdownFromAnswers(duelAnswers, 'desafio-nacional')
+        const updatedCategoryStatsMap: Record<string, any> = { ...existingCatStats }
+
+        for (const [catKey, inc] of Object.entries(categoryBreakdown)) {
+          const curCat = existingCatStats[catKey] || {
+            totalQuestions: 0,
+            correctAnswers: 0,
+            total: 0,
+            correct: 0,
+            gamesPlayed: 0,
+            score: 0,
+          }
+          const newTotal = (curCat.totalQuestions || curCat.total || 0) + inc.totalQuestions
+          const newCorrect = (curCat.correctAnswers || curCat.correct || 0) + inc.correctAnswers
+          const newGames = (curCat.gamesPlayed || 0) + (inc.gamesPlayed || 1)
+          const newScore = (curCat.score || 0) + inc.score
+
+          updatedCategoryStatsMap[catKey] = {
+            totalQuestions: newTotal,
+            correctAnswers: newCorrect,
+            total: newTotal,
+            correct: newCorrect,
+            gamesPlayed: newGames,
+            score: newScore,
+            accuracy: newTotal > 0 ? Math.round((newCorrect / newTotal) * 100) : 0,
+          }
+        }
+
+        const userUpdates: Record<string, any> = {
           xp: newTotalXp,
           euros: newTotalEuros,
           coins: newTotalEuros,
@@ -1198,11 +1246,17 @@ export async function claimDuelRewards(
           wins: (userData.wins || 0) + (isWinner ? 1 : 0),
           losses: (userData.losses || 0) + (isLoser ? 1 : 0),
           draws: (userData.draws || 0) + (isDraw ? 1 : 0),
-          totalQuestions: (userData.totalQuestions || 0) + 10,
-          questionsAnswered: (userData.questionsAnswered || 0) + 10,
+          totalQuestions: (userData.totalQuestions || 0) + questionsList.length,
+          questionsAnswered: (userData.questionsAnswered || 0) + questionsList.length,
           correctAnswers: (userData.correctAnswers || 0) + (player.correctCount || 0),
-          incorrectAnswers: (userData.incorrectAnswers || 0) + Math.max(0, 10 - (player.correctCount || 0)),
-        })
+          incorrectAnswers: (userData.incorrectAnswers || 0) + Math.max(0, questionsList.length - (player.correctCount || 0)),
+        }
+
+        for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {
+          userUpdates[`categoryStats.${catKey}`] = catData
+        }
+
+        transaction.update(userRef, userUpdates)
 
         transaction.set(
           publicProfileRef,

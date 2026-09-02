@@ -57,6 +57,7 @@ import {
 } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import { awardMatchReward, type MatchRewardOutcome } from '@/lib/xp-service'
+import { getCanonicalCategory, type MatchAnswerPayload } from '@/lib/category-registry'
 
 import { QuizProgress } from '@/components/quiz/quiz-progress'
 import {
@@ -277,6 +278,7 @@ export function QuizScreen({
   const [savingReward, setSavingReward] = useState<boolean>(false)
   const [syncError, setSyncError] = useState<string | null>(null)
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+  const recordedAnswersRef = React.useRef<MatchAnswerPayload[]>([])
 
   // Power-Ups Stock State (Zero por defeito se não comprados)
   const [stock5050, setStock5050] = useState<number>(0)
@@ -295,7 +297,6 @@ export function QuizScreen({
   // Sincronizar estado e carregar perguntas estritamente anti-repetição (com recuperação de sessão)
   useEffect(() => {
     let isCancelled = false
-
     // 1. Tentar recuperar sessão ativa de jogo em caso de oscilação ou soft-reload
     if (typeof window !== 'undefined' && gameId) {
       try {
@@ -313,6 +314,9 @@ export function QuizScreen({
             setStreak(parsed.streak ?? 0)
             setBestStreak(parsed.bestStreak ?? 0)
             setPhase(parsed.phase ?? 'answering')
+            if (Array.isArray(parsed.recordedAnswers)) {
+              recordedAnswersRef.current = parsed.recordedAnswers
+            }
             return
           }
         }
@@ -333,6 +337,7 @@ export function QuizScreen({
       .then((uniqueQuestions) => {
         if (isCancelled) return
         const formatted = uniqueQuestions.map((q, i) => formatEngineQuestion(q, i, uniqueQuestions.length))
+        recordedAnswersRef.current = []
         setQuizQuestions(formatted)
         setStep(0)
         setSelected(null)
@@ -351,6 +356,7 @@ export function QuizScreen({
         console.error('[QuizScreen] Erro ao carregar perguntas anti-repetição:', err)
         if (!isCancelled) {
           const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+          recordedAnswersRef.current = []
           setQuizQuestions(fallback)
           setStep(0)
           setSelected(null)
@@ -394,6 +400,7 @@ export function QuizScreen({
         phase,
         selected,
         quizQuestions,
+        recordedAnswers: recordedAnswersRef.current,
         timestamp: Date.now(),
       }
       sessionStorage.setItem(`ap_quiz_state_${gameId}`, JSON.stringify(sessionPayload))
@@ -629,6 +636,18 @@ export function QuizScreen({
 
       const hit = choice === q.correct
 
+      // Registo da resposta canónica com metadados para reconstrução determinística
+      recordedAnswersRef.current.push({
+        questionId: String(q.id),
+        categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
+        category: q.category,
+        subcategory: q.subcategory,
+        prompt: q.question,
+        selectedOption: choice || '',
+        isCorrect: hit,
+        answeredAt: Date.now(),
+      })
+
       if (hit) {
         const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
         const nextStreak = streak + 1
@@ -776,6 +795,7 @@ export function QuizScreen({
           bestStreak: finalResult.bestStreak,
           difficultyMultiplier: getDifficultyMultiplier(diffLevel),
           answeredQuestionIds: answeredIds,
+          answers: recordedAnswersRef.current,
         })
 
         setRewardOutcome(outcome)
@@ -789,6 +809,9 @@ export function QuizScreen({
                 euros: outcome.newTotalCoins,
                 coins: outcome.newTotalCoins,
                 streak: outcome.newStreak,
+                categoryStats: outcome.categoryStats
+                  ? { ...(currentProfile.categoryStats || {}), ...outcome.categoryStats }
+                  : currentProfile.categoryStats,
               }
             : currentProfile
         )
@@ -800,6 +823,7 @@ export function QuizScreen({
             coins: outcome.newTotalCoins,
             euros: outcome.newTotalCoins,
             streak: outcome.newStreak,
+            categoryStats: outcome.categoryStats,
           })
         }
       } catch (error: any) {
@@ -833,6 +857,7 @@ export function QuizScreen({
     try {
       sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
     } catch {}
+    recordedAnswersRef.current = []
     const nextGameId = safeRandomUUID()
     router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
     setQuizQuestions(createGameQuestions(categorySlug))
