@@ -36,6 +36,7 @@ import {
   sanitizeTitleName,
 } from '@/lib/titles'
 import VipShopSection from '@/components/shop/VipShopSection'
+import { AID_SHOP_ITEMS } from '@/lib/shop-catalog'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -43,6 +44,7 @@ interface ShopItem {
   id: string
   name: string
   category: Category
+  maxOwned?: number
   categoryKey?: string
   categoryTitle?: string
   group?: TitleGroup
@@ -198,14 +200,19 @@ const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
   icon: f.rarity === 'Mítico' ? '🔥' : f.rarity === 'Lendário' ? '👑' : f.rarity === 'Épico' ? '✨' : '⭐',
 }))
 
-const OTHER_SHOP_ITEMS: ShopItem[] = [
-  // AJUDAS & UTILIDADES (Anti-Pay-to-Win com Limites Rigorosos)
-  { id: 'consumable_pista', name: 'Pista Histórica', category: 'ajudas', description: 'Recebe uma dica contextual que aponta para a resposta certa. (Máx: 3 em stock | Limite: 3/dia).', price: '750 Moedas', priceValue: 750, image: '/images/shop/ajuda-pista.jpg', badge: 'Ajuda Básica (1 un.)', icon: '💡' },
-  { id: 'consumable_50_50', name: 'Ajuda 50/50', category: 'ajudas', description: 'Elimina duas opções erradas instantaneamente no quiz. (Máx: 3 em stock | Limite: 2/dia).', price: '1.800 Moedas', priceValue: 1800, image: '/images/shop/ajuda-5050.jpg', badge: 'Ajuda Média (1 un.)', icon: '✨' },
-  { id: 'consumable_congelar_tempo', name: 'Congelar Tempo (+15s)', category: 'ajudas', description: 'Pausa o cronómetro durante 15 segundos para pensares com calma. (Máx: 2 em stock | Limite: 1/dia).', price: '4.500 Moedas', priceValue: 4500, image: '/images/shop/ajuda-congelar.jpg', badge: 'Ajuda Forte (1 un.)', icon: '⏳' },
-  { id: 'HELP_005', name: 'Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção. (Máx: 2 em stock | Limite: 1/dia).', price: '5.000 Moedas', priceValue: 5000, image: '/images/shop/ajuda-publico.jpg', badge: 'Ajuda Forte (1 un.)', icon: '👥' },
-  { id: 'consumable_protecao_streak', name: 'Proteção de Sequência', category: 'ajudas', description: 'Salva a tua sequência de dias se te esqueceres de jogar 24 horas. (Máx: 1 em stock | Limite: 1/dia).', price: '12.500 Moedas', priceValue: 12500, image: '/images/shop/ajuda-streak.jpg', badge: 'Ajuda Especial (1 un.)', icon: '🛡️' },
-]
+const OTHER_SHOP_ITEMS: ShopItem[] = AID_SHOP_ITEMS.map((aid) => ({
+  id: aid.id,
+  name: aid.name,
+  category: 'ajudas',
+  description: aid.description,
+  price: `${aid.priceCoins?.toLocaleString('pt-PT')} Moedas`,
+  priceValue: aid.priceCoins || 0,
+  image: aid.asset || '/images/shop/ajuda-5050.jpg',
+  badge: aid.badgeText || 'Ajuda',
+  badgeColor: aid.badgeColor,
+  icon: aid.icon || '✨',
+  maxOwned: aid.maxOwned || 50,
+}))
 
 const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...FRAME_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
 
@@ -252,13 +259,28 @@ function LojaContent() {
   })
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number; hints: number; streakProtection: number }>({
+  const [consumables, setConsumables] = useState<Record<string, number>>({
     help5050: 0,
     freezeTime: 0,
     publicVote: 0,
     hints: 0,
+    secondChance: 0,
+    tripleElimination: 0,
+    fastAnswer: 0,
     streakProtection: 0,
   })
+
+  const getAidStock = (itemId: string): number => {
+    if (itemId === 'aid_50_50' || itemId === 'ajuda_5050' || itemId === 'consumable_50_50') return consumables.help5050 || 0
+    if (itemId === 'aid_public_vote' || itemId === 'HELP_005' || itemId === 'ajuda_publico' || itemId === 'consumable_public_vote') return consumables.publicVote || 0
+    if (itemId === 'aid_freeze_time' || itemId === 'ajuda_congelar' || itemId === 'consumable_congelar_tempo') return consumables.freezeTime || 0
+    if (itemId === 'aid_hint' || itemId === 'consumable_pista') return consumables.hints || 0
+    if (itemId === 'aid_second_chance') return consumables.secondChance || (rawInventory[itemId] || 0)
+    if (itemId === 'aid_triple_elimination') return consumables.tripleElimination || (rawInventory[itemId] || 0)
+    if (itemId === 'aid_fast_answer') return consumables.fastAnswer || (rawInventory[itemId] || 0)
+    if (itemId === 'aid_streak_protection' || itemId === 'consumable_protecao_streak') return consumables.streakProtection || 0
+    return rawInventory[itemId] || 0
+  }
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
     avatars: [DEFAULT_AVATAR_ID],
     frames: ['default'],
@@ -563,75 +585,82 @@ function LojaContent() {
       }
       return
     }
-    // 1. CONSUMÍVEIS (SEMPRE COMPRA VIA SERVIDOR)
+    // 1. CONSUMÍVEIS (SEMPRE COMPRA VIA SERVIDOR /api/shop/purchase)
     if (item.category === 'ajudas') {
-      if (userBalance < item.priceValue) {
-        showToast('Saldo de Moedas insuficiente!', 'error')
+      if (!auth.currentUser) {
+        showToast('Inicia sessão para adquirires Ajudas & Utilidades de gameplay.', 'error')
         return
       }
 
-      if (auth.currentUser) {
-        try {
-          const idToken = await auth.currentUser.getIdToken().catch(() => null)
-          const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-          if (idToken) headers['Authorization'] = `Bearer ${idToken}`
-
-          const res = await fetch('/api/buy-item', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({
-              uid: auth.currentUser.uid,
-              itemId: item.id,
-              category: 'ajudas',
-            }),
-          })
-
-          const json = await res.json().catch(() => ({}))
-          if (!json.success) {
-            showToast(json.error || 'Erro ao processar compra.', 'error')
-            return
-          }
-        } catch (e: any) {
-          showToast(e.message || 'Erro de comunicação ao comprar.', 'error')
-          return
-        }
-      } else {
-        const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
-        if (!deductSuccess) {
-          showToast('Saldo de Moedas insuficiente!', 'error')
-          return
-        }
+      if (userBalance < item.priceValue) {
+        showToast(`Saldo insuficiente! Precisas de ${item.priceValue.toLocaleString('pt-PT')} Moedas.`, 'error')
+        return
       }
 
-      let updatedConsumables = { ...consumables }
-      if (item.id === 'ajuda_5050' || item.id === 'consumable_50_50') {
-        updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 1
-      } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote') {
-        updatedConsumables.publicVote = (updatedConsumables.publicVote || 0) + 1
-      } else if (item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo') {
-        updatedConsumables.freezeTime = (updatedConsumables.freezeTime || 0) + 1
-      } else if (item.id === 'consumable_pista') {
-        updatedConsumables.hints = (updatedConsumables.hints || 0) + 1
-      } else if (item.id === 'consumable_protecao_streak') {
-        updatedConsumables.streakProtection = (updatedConsumables.streakProtection || 0) + 1
+      const currentAidStock = getAidStock(item.id)
+      const maxLimit = item.maxOwned || 50
+      if (currentAidStock >= maxLimit) {
+        showToast(`Inventário cheio! Já possuis ${currentAidStock} unidades (limite: ${maxLimit}).`, 'error')
+        return
       }
 
-      setConsumables(updatedConsumables)
-      localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
+      try {
+        const idToken = await auth.currentUser.getIdToken().catch(() => null)
+        const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+        if (idToken) headers['Authorization'] = `Bearer ${idToken}`
 
-      window.dispatchEvent(new Event('consumables_updated'))
-      window.dispatchEvent(new Event('inventory_updated'))
-      const totalAmount = item.id === 'ajuda_5050' || item.id === 'consumable_50_50'
-        ? updatedConsumables.help5050
-        : item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote'
-          ? updatedConsumables.publicVote
-          : item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo'
-            ? updatedConsumables.freezeTime
-            : item.id === 'consumable_pista'
-              ? updatedConsumables.hints
-              : updatedConsumables.streakProtection
-      showToast(`Sucesso! Adquiriste ${item.name}! Em stock: ${totalAmount}`)
-      return
+        const idempotencyKey = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `pur_${Date.now()}_${Math.random()}`
+
+        const res = await fetch('/api/shop/purchase', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            uid: auth.currentUser.uid,
+            itemId: item.id,
+            idempotencyKey,
+          }),
+        })
+
+        const json = await res.json().catch(() => ({}))
+        if (!json.success) {
+          showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
+          return
+        }
+
+        const qtyToAdd = item.id === 'aid_50_50' ? 5 : item.id === 'aid_streak_protection' ? 1 : 3
+        const newStock = json.newStock !== undefined ? json.newStock : currentAidStock + qtyToAdd
+        let updatedConsumables = { ...consumables }
+        if (item.id === 'aid_50_50' || item.id === 'ajuda_5050' || item.id === 'consumable_50_50') {
+          updatedConsumables.help5050 = newStock
+        } else if (item.id === 'aid_public_vote' || item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote') {
+          updatedConsumables.publicVote = newStock
+        } else if (item.id === 'aid_freeze_time' || item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo') {
+          updatedConsumables.freezeTime = newStock
+        } else if (item.id === 'aid_hint' || item.id === 'consumable_pista') {
+          updatedConsumables.hints = newStock
+        } else if (item.id === 'aid_second_chance') {
+          updatedConsumables.secondChance = newStock
+        } else if (item.id === 'aid_triple_elimination') {
+          updatedConsumables.tripleElimination = newStock
+        } else if (item.id === 'aid_fast_answer') {
+          updatedConsumables.fastAnswer = newStock
+        } else if (item.id === 'aid_streak_protection' || item.id === 'consumable_protecao_streak') {
+          updatedConsumables.streakProtection = newStock
+        }
+
+        setConsumables(updatedConsumables)
+        localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
+
+        window.dispatchEvent(new Event('consumables_updated'))
+        window.dispatchEvent(new Event('inventory_updated'))
+        window.dispatchEvent(new Event('balance_updated'))
+
+        showToast(json.message || `Sucesso! Adquiriste ${item.name}! Tens: ${newStock}`)
+        return
+      } catch (e: any) {
+        showToast(e.message || 'Erro de comunicação ao comprar.', 'error')
+        return
+      }
     }
 
     // 2. COSMÉTICOS (EQUIPAR SE DESBLOQUEADO, COMPRAR SE NÃO)
@@ -796,42 +825,41 @@ function LojaContent() {
         return
       }
 
-      if (userBalance < item.priceValue) {
+      if (!auth.currentUser) {
+        showToast('Inicia sessão para adquirires cosméticos na loja.', 'error')
+        return
+      }
+
+      if (item.priceValue > 0 && userBalance < item.priceValue) {
         showToast('Saldo de Moedas insuficiente!', 'error')
         return
       }
 
-      if (auth.currentUser) {
-        try {
-          const idToken = await auth.currentUser.getIdToken().catch(() => null)
-          const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-          if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+      try {
+        const idToken = await auth.currentUser.getIdToken().catch(() => null)
+        const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+        if (idToken) headers['Authorization'] = `Bearer ${idToken}`
 
-          const res = await fetch('/api/buy-item', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({
-              uid: auth.currentUser.uid,
-              itemId: item.id,
-              category: item.category,
-            }),
-          })
+        const idempotencyKey = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `pur_${Date.now()}_${Math.random()}`
 
-          const json = await res.json().catch(() => ({}))
-          if (!json.success) {
-            showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
-            return
-          }
-        } catch (e: any) {
-          showToast(e.message || 'Erro de rede ao comprar cosmético.', 'error')
+        const res = await fetch('/api/shop/purchase', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            uid: auth.currentUser.uid,
+            itemId: item.id,
+            idempotencyKey,
+          }),
+        })
+
+        const json = await res.json().catch(() => ({}))
+        if (!json.success) {
+          showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
           return
         }
-      } else {
-        const deductSuccess = await deductCoins(item.priceValue, `Compra: ${item.name}`)
-        if (!deductSuccess) {
-          showToast('Saldo de Moedas insuficiente!', 'error')
-          return
-        }
+      } catch (e: any) {
+        showToast(e.message || 'Erro de rede ao comprar cosmético.', 'error')
+        return
       }
 
       // Atualizar Inventário Local e Estado Reativo
@@ -1675,6 +1703,39 @@ function LojaContent() {
                             </div>
                           </div>
                         </div>
+                      ) : isConsumable ? (
+                        (() => {
+                          const aidStock = getAidStock(item.id)
+                          const maxLimit = item.maxOwned || 50
+                          const isStockFull = aidStock >= maxLimit
+
+                          return (
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex flex-col">
+                                <div className="flex items-center gap-1 font-mono text-sm font-black text-amber-400">
+                                  {item.priceValue > 0 && <Coins className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                                  <span>{item.price}</span>
+                                </div>
+                                <span className="text-[11px] font-bold text-slate-400 mt-0.5">
+                                  Tens: <strong className={isStockFull ? 'text-amber-400 font-black' : 'text-cyan-400'}>{aidStock}</strong> / {maxLimit}
+                                </span>
+                              </div>
+
+                              <button
+                                type="button"
+                                disabled={isStockFull}
+                                onClick={() => handleAction(item)}
+                                className={`rounded-xl px-3.5 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 active:scale-95 z-20 ${
+                                  isStockFull
+                                    ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed select-none'
+                                    : 'cursor-pointer bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
+                                }`}
+                              >
+                                {isStockFull ? 'Inventário Cheio' : 'Comprar'}
+                              </button>
+                            </div>
+                          )
+                        })()
                       ) : (
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-1 font-mono text-sm font-black text-amber-400">
@@ -1686,16 +1747,16 @@ function LojaContent() {
                             type="button"
                             onClick={() => handleAction(item)}
                             className={`cursor-pointer rounded-xl px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 active:scale-95 z-20 ${
-                              isConsumable
-                                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
-                                : isEquipped
+                              isEquipped
                                 ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/50'
                                 : isUnlocked
                                 ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                                : item.price === 'GRÁTIS'
+                                ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'
                                 : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                             }`}
                           >
-                            {isConsumable ? 'Comprar' : isEquipped ? 'Equipado ✅' : isUnlocked ? 'Equipar' : item.price === 'GRÁTIS' ? 'Ativar Grátis' : `Comprar`}
+                            {isEquipped ? 'Equipado ✅' : isUnlocked ? 'Equipar' : item.price === 'GRÁTIS' ? 'Ativar Grátis' : 'Comprar'}
                           </button>
                         </div>
                       )}

@@ -1,1 +1,1 @@
-export * from '@/src/data/vipCatalog'
+export * from '../src/data/vipCatalog'

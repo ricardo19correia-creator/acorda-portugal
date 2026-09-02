@@ -135,17 +135,28 @@ export async function grantVipEntitlement(
     const entitlementRef = doc(db, 'users', userId, 'entitlements', product.id)
     const userRef = doc(db, 'users', userId)
 
-    const entitlementData: VipEntitlementData = {
+    const inventoryGrantId = `grant_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+
+    const entitlementData: VipEntitlementData & {
+      inventoryGrantId?: string
+      verifiedAt?: any
+      bundleComponents?: string[]
+      collectionNumber?: number
+    } = {
       productId: product.id,
       sku: product.sku,
       category: product.category,
       acquisitionType: 'vip_real_money',
       acquiredAt: serverTimestamp(),
+      verifiedAt: serverTimestamp(),
       paymentId,
+      inventoryGrantId,
       status: 'active',
       entitlementType: 'permanent',
       priceCents: product.priceCents,
       currency: 'EUR',
+      ...(product.bundleComponents ? { bundleComponents: product.bundleComponents } : {}),
+      ...(product.collectionNumber ? { collectionNumber: product.collectionNumber } : {}),
     }
 
     // Criar subdocumento de entitlement canónico
@@ -176,11 +187,63 @@ export async function grantVipEntitlement(
     } else if (product.category === 'tauntpack') {
       updates['inventory.tauntpacks'] = arrayUnion(product.id)
       updates['unlockedTauntPacks'] = arrayUnion(product.id)
-      // Desbloquear também as frases individuais do pack
       if (product.taunts) {
         product.taunts.forEach((t) => {
           updates[`inventory.taunts`] = arrayUnion(t.id)
         })
+      }
+    }
+
+    // DESEMPACOTAMENTO DE BUNDLES / PACOTES ULTIMATE
+    if ((product.category === 'bundle' || product.category === 'ultimate') && product.bundleComponents) {
+      for (const componentId of product.bundleComponents) {
+        updates[`inventory.${componentId}`] = 1
+        updates.vipEntitlements = arrayUnion(componentId)
+
+        const compProduct = getVipProductById(componentId)
+        if (compProduct) {
+          const compEntitlementRef = doc(db, 'users', userId, 'entitlements', componentId)
+          await setDoc(compEntitlementRef, {
+            productId: componentId,
+            sku: compProduct.sku,
+            category: compProduct.category,
+            parentBundleId: product.id,
+            acquisitionType: 'vip_real_money_bundle',
+            acquiredAt: serverTimestamp(),
+            verifiedAt: serverTimestamp(),
+            paymentId,
+            inventoryGrantId,
+            status: 'active',
+            entitlementType: 'permanent',
+            priceCents: compProduct.priceCents,
+            currency: 'EUR',
+          }, { merge: true })
+
+          if (compProduct.category === 'avatar') {
+            updates['inventory.avatars'] = arrayUnion(componentId)
+            updates['unlockedAvatars'] = arrayUnion(componentId)
+          } else if (compProduct.category === 'frame') {
+            updates['inventory.frames'] = arrayUnion(componentId)
+            updates['unlockedFrames'] = arrayUnion(componentId)
+          } else if (compProduct.category === 'title') {
+            updates['inventory.titles'] = arrayUnion(componentId)
+            updates['ownedTitleIds'] = arrayUnion(componentId)
+          } else if (compProduct.category === 'arena') {
+            updates['inventory.arenas'] = arrayUnion(componentId)
+            updates['unlockedArenas'] = arrayUnion(componentId)
+          } else if (compProduct.category === 'emote') {
+            updates['inventory.emotes'] = arrayUnion(componentId)
+            updates['unlockedEmotes'] = arrayUnion(componentId)
+          } else if (compProduct.category === 'tauntpack') {
+            updates['inventory.tauntpacks'] = arrayUnion(componentId)
+            updates['unlockedTauntPacks'] = arrayUnion(componentId)
+            if (compProduct.taunts) {
+              compProduct.taunts.forEach((t) => {
+                updates[`inventory.taunts`] = arrayUnion(t.id)
+              })
+            }
+          }
+        }
       }
     }
 

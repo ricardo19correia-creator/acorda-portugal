@@ -7,31 +7,29 @@ import {
   Sparkles,
   Shield,
   Palette,
-  Volume2,
   Check,
-  Lock,
-  ExternalLink,
   ChevronRight,
   Eye,
   X,
   AlertCircle,
   Flame,
-  Star,
   Award,
+  Layers,
+  Sparkle,
+  Zap,
 } from 'lucide-react'
 import {
   VIP_CATALOG,
-  getAllVipProducts,
-  getVipProductsByCategory,
+  getVipProductsBySection,
+  getVipProductById,
   formatVipPrice,
   type VipProduct,
-  type VipCategory,
+  type StoreSection,
   type VipRarity,
 } from '@/src/data/vipCatalog'
 import UserAvatar from '@/components/ui/UserAvatar'
 import AnimatedFrameWrapper from '@/components/ui/AnimatedFrameWrapper'
 import { equipItem } from '@/lib/economy'
-import { getAvatarById } from '@/lib/avatars'
 
 interface VipShopSectionProps {
   userId?: string
@@ -60,7 +58,7 @@ export default function VipShopSection({
   onErrorToast,
   onRefreshData,
 }: VipShopSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'todos' | VipCategory>('todos')
+  const [selectedSection, setSelectedSection] = useState<'all' | StoreSection>('all')
   const [selectedRarity, setSelectedRarity] = useState<'todas' | VipRarity>('todas')
   const [loadingProductId, setLoadingProductId] = useState<string | null>(null)
   const [providerConfigStatus, setProviderConfigStatus] = useState<'READY' | 'BLOCKED_PENDING_PROVIDER_CONFIG'>('READY')
@@ -69,7 +67,7 @@ export default function VipShopSection({
   const [providerModalOpen, setProviderModalOpen] = useState(false)
   const [providerModalMessage, setProviderModalMessage] = useState('')
 
-  // Consultar estado de configuração do gateway
+  // Consultar estado de configuração do gateway Stripe
   useEffect(() => {
     async function checkProviderStatus() {
       try {
@@ -106,13 +104,18 @@ export default function VipShopSection({
 
   // Filtragem dos produtos VIP
   const filteredProducts = VIP_CATALOG.filter((product) => {
-    if (selectedCategory !== 'todos' && product.category !== selectedCategory) return false
+    if (selectedSection !== 'all' && product.storeSection !== selectedSection) return false
     if (selectedRarity !== 'todas' && product.rarity !== selectedRarity) return false
     return true
   })
 
   // Ação de Compra via Checkout
   const handleBuy = async (product: VipProduct) => {
+    if (product.isSoldOut || (product.isLimited && product.stock === 0)) {
+      if (onErrorToast) onErrorToast('Este item de edição limitada está esgotado.')
+      return
+    }
+
     if (!userId || userId.startsWith('guest_')) {
       if (onErrorToast) {
         onErrorToast('Cria uma conta permanente ou faz login para adquirir itens VIP exclusivos.')
@@ -180,39 +183,39 @@ export default function VipShopSection({
   }
 
   return (
-    <div className="w-full max-w-6xl space-y-8 animate-fade-in pb-16">
-      {/* BANNER PRINCIPAL VIP */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-950/70 via-slate-900/90 to-purple-950/60 border border-amber-500/40 p-6 sm:p-10 shadow-[0_0_50px_rgba(245,158,11,0.25)]">
-        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-64 h-64 bg-purple-500/15 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full max-w-7xl space-y-8 animate-fade-in pb-16">
+      {/* BANNER PRINCIPAL VIP COLLECTION 2.0 */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-950/80 via-slate-900/95 to-purple-950/70 border border-amber-500/50 p-6 sm:p-10 shadow-[0_0_60px_rgba(245,158,11,0.3)]">
+        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-80 h-80 bg-purple-500/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300 text-xs font-black tracking-wider uppercase">
               <Crown className="w-4 h-4 text-amber-400 animate-pulse" />
-              <span>Coleção Oficial · 38 Exclusivos VIP</span>
+              <span>VIP Collection 2.0 · 38 Premium Exclusives</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-              Prestígio Lusitano <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">(€ Real)</span>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+              A Coleção Definitiva <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">(€ Real)</span>
             </h2>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Itens cosméticos permanentes com identidade gráfica de alta fidelidade para perfis, duelos 1v1 e rankings nacionais.
-              <span className="block mt-1 font-bold text-amber-200/90">
-                100% cosméticos · Zero Pay-to-Win · A economia de moedas virtuais permanece independente.
+              O catálogo oficial de 38 cosméticos de elite: Avatares Signature, Arenas Ultimate, Molduras Reais, Títulos de Prestígio, Reações Cinematográficas, Taunt Packs e Edições Fundador.
+              <span className="block mt-1.5 font-bold text-amber-200/95">
+                💎 Cosméticos Permanentes · Zero Pay-to-Win · Validação Server-Authoritative no Firestore.
               </span>
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
-            <div className="px-5 py-3 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-md text-center w-full sm:w-auto">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Total Exclusivos</span>
-              <span className="text-2xl font-black text-amber-400">38 Itens</span>
+            <div className="px-5 py-3 rounded-2xl bg-black/60 border border-amber-500/20 backdrop-blur-md text-center w-full sm:w-auto shadow-lg">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Total de Peças</span>
+              <span className="text-2xl font-black text-amber-400">38 Exclusivos</span>
             </div>
 
-            <div className="px-5 py-3 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-md text-center w-full sm:w-auto">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Adquiridos</span>
+            <div className="px-5 py-3 rounded-2xl bg-black/60 border border-emerald-500/20 backdrop-blur-md text-center w-full sm:w-auto shadow-lg">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">No Teu Inventário</span>
               <span className="text-2xl font-black text-emerald-400">
                 {VIP_CATALOG.filter((p) => isOwned(p.id)).length} / 38
               </span>
@@ -220,19 +223,19 @@ export default function VipShopSection({
           </div>
         </div>
 
-        {/* ALERTA SE O GATEWAY ESTIVER EM CONFIGURAÇÃO PENDENTE */}
+        {/* MODO DE PRÉ-LANÇAMENTO / STATUS DE GATEWAY */}
         {providerConfigStatus === 'BLOCKED_PENDING_PROVIDER_CONFIG' && (
           <div className="mt-6 pt-4 border-t border-amber-500/30 flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-2.5 text-xs text-amber-200">
               <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
               <span>
-                <strong>Modo de Pré-Lançamento Seguro:</strong> O catálogo e entitlements estão ativos. A conclusão de compras com dinheiro real aguarda credenciais Stripe de produção no servidor.
+                <strong>Modo de Produção Protegido:</strong> Os 38 itens e assets estão prontos. Transações com dinheiro real exigem a configuração da chave Stripe em produção.
               </span>
             </div>
             <button
               onClick={() => {
                 setProviderModalMessage(
-                  'PAYMENT_PROVIDER_CONFIGURATION_REQUIRED: Conforme as regras da secção 13 e 38 do sistema, sem credenciais de produção (STRIPE_SECRET_KEY) o sistema não inventa compras falsas nem fakes de sucesso. A infraestrutura está 100% pronta para transacionar assim que as chaves forem providenciadas no ambiente.',
+                  'PAYMENT_PROVIDER_CONFIGURATION_REQUIRED: Conforme as diretrizes canónicas, nenhuma compra fictícia é simulada no frontend. Os 38 itens, assets WebP de alta resolução, rotas de verificação idempotentes e desempacotamento de bundles estão totalmente codificados.',
                 )
                 setProviderModalOpen(true)
               }}
@@ -244,33 +247,37 @@ export default function VipShopSection({
         )}
       </div>
 
-      {/* FILTROS DE CATEGORIA E RARIDADE */}
+      {/* AS 7 SECÇÕES CANÓNICAS DA LOJA VIP 2.0 */}
       <div className="space-y-4 p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-md">
-        {/* Categorias */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {[
-            { key: 'todos', label: 'Todos', icon: '✨', count: 38 },
-            { key: 'avatar', label: 'Avatares', icon: '👑', count: 6 },
-            { key: 'frame', label: 'Molduras', icon: '🖼️', count: 6 },
-            { key: 'title', label: 'Títulos', icon: '🏆', count: 8 },
-            { key: 'arena', label: 'Arenas', icon: '🏟️', count: 6 },
-            { key: 'emote', label: 'Reações', icon: '😎', count: 8 },
-            { key: 'tauntpack', label: 'Taunt Packs', icon: '😈', count: 4 },
+            { key: 'all', label: 'Todos', icon: '✨', count: 38 },
+            { key: 'signature', label: 'Signature', icon: '👑', count: 4 },
+            { key: 'arenas', label: 'Ultimate Arenas', icon: '🏟️', count: 5 },
+            { key: 'identities', label: 'Royal Identities', icon: '✨', count: 11 },
+            { key: 'reactions', label: 'Cinematic Reactions', icon: '💥', count: 6 },
+            { key: 'taunts', label: 'Elite Taunts', icon: '😈', count: 4 },
+            { key: 'bundles', label: 'Complete Sets', icon: '💎', count: 3 },
+            { key: 'ultimate', label: 'Ultimate', icon: '👑', count: 5 },
           ].map((tab) => {
-            const isSelected = selectedCategory === tab.key
+            const isSelected = selectedSection === tab.key
             return (
               <button
                 key={tab.key}
-                onClick={() => setSelectedCategory(tab.key as any)}
-                className={`cursor-pointer shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                onClick={() => setSelectedSection(tab.key as any)}
+                className={`cursor-pointer shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-amber-500 text-slate-950 font-black shadow-[0_0_15px_rgba(245,158,11,0.4)] scale-105'
+                    ? 'bg-amber-500 text-slate-950 font-black shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-105'
                     : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50'
                 }`}
               >
                 <span>{tab.icon}</span>
                 <span>{tab.label}</span>
-                <span className={`px-1.5 py-0.5 rounded-md text-[10px] ${isSelected ? 'bg-slate-950/20 text-slate-950' : 'bg-slate-900 text-slate-400'}`}>
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] ${
+                    isSelected ? 'bg-slate-950/20 text-slate-950' : 'bg-slate-900 text-slate-400'
+                  }`}
+                >
                   {tab.count}
                 </span>
               </button>
@@ -278,15 +285,15 @@ export default function VipShopSection({
           })}
         </div>
 
-        {/* Raridades */}
+        {/* FILTRO DE RARIDADE */}
         <div className="flex items-center gap-2 overflow-x-auto pt-2 border-t border-slate-800/60 scrollbar-none">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1">Raridade:</span>
           {[
             { key: 'todas', label: 'Todas' },
-            { key: 'rare', label: 'Raro', color: 'text-cyan-400 border-cyan-500/40' },
-            { key: 'epic', label: 'Épico', color: 'text-purple-400 border-purple-500/40' },
-            { key: 'legendary', label: 'Lendário', color: 'text-amber-400 border-amber-500/40' },
-            { key: 'mythic', label: 'Mítico', color: 'text-rose-400 border-rose-500/50' },
+            { key: 'Rare', label: 'Raro' },
+            { key: 'Epic', label: 'Épico' },
+            { key: 'Legendary', label: 'Lendário' },
+            { key: 'Mythic', label: 'Mítico' },
           ].map((r) => {
             const isSelected = selectedRarity === r.key
             return (
@@ -306,117 +313,111 @@ export default function VipShopSection({
         </div>
       </div>
 
-      {/* GRELHA DOS PRODUTOS VIP */}
+      {/* GRELHA DOS 38 PRODUTOS VIP 2.0 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map((product) => {
           const owned = isOwned(product.id)
           const equipped = isEquipped(product)
           const isLoading = loadingProductId === product.id
+          const isSoldOut = Boolean(product.isSoldOut || (product.isLimited && product.stock === 0))
 
           return (
             <div
               key={product.id}
               className={`group relative flex flex-col justify-between rounded-3xl p-5 border transition-all duration-300 hover:-translate-y-1.5 ${
                 owned
-                  ? 'bg-slate-900/60 border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                  : 'bg-slate-900/80 border-slate-800 hover:border-amber-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)]'
+                  ? 'bg-slate-900/70 border-emerald-500/40 shadow-[0_0_25px_rgba(16,185,129,0.15)]'
+                  : 'bg-slate-900/85 border-slate-800 hover:border-amber-500/50 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]'
               }`}
             >
               {/* Top Meta */}
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${product.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/40'}`}>
-                    {product.rarityLabel}
+                  <span
+                    className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${
+                      product.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    }`}
+                  >
+                    {product.rarity}
                   </span>
                   <span className="text-[10px] font-mono font-bold text-slate-400">
                     {product.sku}
                   </span>
                 </div>
 
-                {/* Visual Asset Showcase */}
-                <div className="relative w-full h-44 rounded-2xl bg-gradient-to-b from-slate-950/80 to-slate-900/60 border border-white/5 flex items-center justify-center p-3 mb-4 overflow-hidden group-hover:border-amber-500/30 transition-all">
-                  {/* Subtle Background Accent */}
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-20 blur-xl transition-all group-hover:opacity-35"
-                    style={{ background: product.accentColor || '#f59e0b' }}
-                  />
+                {/* SHOWCASE VISUAL REAL (ASSETS WEBP) */}
+                <div className="relative w-full h-48 rounded-2xl bg-gradient-to-b from-slate-950 to-slate-900/80 border border-white/5 flex items-center justify-center p-3 mb-4 overflow-hidden group-hover:border-amber-500/30 transition-all">
+                  {/* Subtle Aura */}
+                  <div className="pointer-events-none absolute inset-0 opacity-20 blur-xl bg-amber-500/20 group-hover:opacity-40 transition-all" />
 
-                  {/* Renderização específica por categoria */}
-                  {product.category === 'avatar' && (
-                    <div className="relative w-28 h-28 flex items-center justify-center transition-transform group-hover:scale-105 duration-300">
-                      <Image
-                        src={product.assetPath}
-                        alt={product.name}
-                        width={112}
-                        height={112}
-                        className="rounded-2xl shadow-xl object-contain"
-                        unoptimized
-                      />
+                  {/* Asset WebP Real */}
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={product.assetPath}
+                      alt={product.name}
+                      fill
+                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  </div>
+
+                  {/* Badges de Edição Limitada / Bundles */}
+                  {product.isLimited && (
+                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-rose-950/80 border border-rose-500/60 text-rose-300 text-[9px] font-black tracking-wider uppercase backdrop-blur-sm">
+                      {isSoldOut ? 'Esgotado' : `Edição Limitada (${product.stock} un.)`}
                     </div>
                   )}
 
-                  {product.category === 'frame' && (
-                    <div className="relative w-28 h-28 flex items-center justify-center">
-                      <AnimatedFrameWrapper frameId={product.id}>
-                        <UserAvatar avatarUrl={equippedAvatar} size="lg" showBadge={false} />
-                      </AnimatedFrameWrapper>
+                  {product.bundleComponents && (
+                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-950/80 border border-amber-500/60 text-amber-300 text-[9px] font-black tracking-wider uppercase backdrop-blur-sm flex items-center gap-1">
+                      <Layers className="w-3 h-3" />
+                      <span>{product.bundleComponents.length} Itens</span>
                     </div>
                   )}
 
-                  {product.category === 'title' && (
-                    <div className="flex flex-col items-center justify-center text-center p-3">
-                      <Award className="w-8 h-8 text-amber-400 mb-2" />
-                      <span className="text-base font-black text-white tracking-wide">{product.name}</span>
-                      <span className="text-[10px] font-bold text-amber-300 mt-1 uppercase tracking-widest">TÍTULO VIP</span>
-                    </div>
-                  )}
-
-                  {product.category === 'arena' && (
-                    <div className="relative w-full h-full rounded-xl overflow-hidden">
-                      <Image
-                        src={product.assetPath}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-                        <span className="text-xs font-black text-white">{product.name}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {product.category === 'emote' && (
-                    <div className="flex flex-col items-center justify-center">
-                      <span className="text-5xl group-hover:scale-110 transition-transform">{product.emoji}</span>
-                      <span className="text-xs font-bold text-slate-300 mt-2">{product.name}</span>
-                    </div>
-                  )}
-
-                  {product.category === 'tauntpack' && (
-                    <div className="flex flex-col items-center justify-center text-center p-2">
-                      <span className="text-3xl mb-1">😈</span>
-                      <span className="text-sm font-black text-white">{product.name}</span>
-                      <button
-                        onClick={() => setTauntModalProduct(product)}
-                        className="mt-2 text-[11px] font-bold text-amber-400 underline hover:text-amber-200 transition cursor-pointer"
-                      >
-                        Ver 6 Frases 💬
-                      </button>
-                    </div>
-                  )}
+                  {/* Botão de Preview Rápido */}
+                  <button
+                    onClick={() => setInspectingProduct(product)}
+                    className="absolute bottom-2 right-2 p-1.5 rounded-xl bg-black/70 hover:bg-amber-500 hover:text-slate-950 text-slate-300 border border-white/10 backdrop-blur-sm transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+                    title="Ver Efeitos e Preview Completo"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
                 </div>
 
-                {/* Informação Textual */}
-                <h3 className="text-base font-black text-white tracking-tight group-hover:text-amber-300 transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
-                  {product.description}
+                {/* Identificação Textual */}
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="text-base font-black text-white tracking-tight group-hover:text-amber-300 transition-colors line-clamp-1">
+                    {product.name}
+                  </h3>
+                </div>
+                <span className="text-[10px] font-bold text-amber-400/90 uppercase tracking-wider block mt-0.5">
+                  Tier {product.tier} · {product.tierName}
+                </span>
+
+                <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
+                  {product.visualConcept}
                 </p>
+
+                {/* Sub-itens de Bundles */}
+                {product.bundleComponents && product.bundleComponents.length > 0 && (
+                  <div className="mt-2.5 pt-2 border-t border-slate-800/60 flex flex-wrap gap-1">
+                    {product.bundleComponents.map((cId) => {
+                      const cItem = getVipProductById(cId)
+                      return (
+                        <span
+                          key={cId}
+                          className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-800 text-slate-300 border border-slate-700/50"
+                        >
+                          {cItem ? cItem.name : cId}
+                        </span>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
 
-              {/* Bottom Actions */}
+              {/* Botões Inferiores */}
               <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Preço Real</span>
@@ -424,6 +425,16 @@ export default function VipShopSection({
                 </div>
 
                 <div className="flex items-center gap-2">
+                  {product.category === 'tauntpack' && (
+                    <button
+                      onClick={() => setTauntModalProduct(product)}
+                      className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer text-xs font-bold"
+                      title="Ouvir / Ler 6 Frases"
+                    >
+                      💬
+                    </button>
+                  )}
+
                   {owned ? (
                     <button
                       onClick={() => handleEquip(product)}
@@ -435,6 +446,13 @@ export default function VipShopSection({
                       }`}
                     >
                       {equipped ? 'Equipado ✓' : 'Equipar'}
+                    </button>
+                  ) : isSoldOut ? (
+                    <button
+                      disabled
+                      className="px-4 py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed uppercase"
+                    >
+                      Esgotado
                     </button>
                   ) : (
                     <button
@@ -453,6 +471,121 @@ export default function VipShopSection({
         })}
       </div>
 
+      {/* MODAL DE PREVIEW FUNCIONAL COMPLETO */}
+      {inspectingProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-amber-500/50 bg-slate-950 p-6 sm:p-8 shadow-[0_0_60px_rgba(245,158,11,0.3)] space-y-6">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider border ${inspectingProduct.badgeColor}`}>
+                    {inspectingProduct.rarity}
+                  </span>
+                  <span className="text-xs font-bold text-amber-400">
+                    Tier {inspectingProduct.tier} · {inspectingProduct.tierName}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-black text-white mt-1">{inspectingProduct.name}</h3>
+                <span className="text-xs font-mono text-slate-400">{inspectingProduct.sku}</span>
+              </div>
+
+              <button
+                onClick={() => setInspectingProduct(null)}
+                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Preview Visual Grande */}
+            <div className="relative w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-slate-900 to-black border border-white/10 flex items-center justify-center overflow-hidden">
+              <Image
+                src={inspectingProduct.assetPath}
+                alt={inspectingProduct.name}
+                fill
+                className="object-contain p-4"
+                unoptimized
+              />
+            </div>
+
+            {/* Metadados Detalhados */}
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Conceito Visual</span>
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed">{inspectingProduct.visualConcept}</p>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>Animação &amp; Efeitos em Duelo</span>
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed">{inspectingProduct.animation}</p>
+                <p className="text-xs text-amber-200/90 mt-1 font-medium italic">{inspectingProduct.effect}</p>
+              </div>
+
+              {inspectingProduct.bundleDescription && (
+                <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5 mb-1.5">
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>Conteúdo do Pacote</span>
+                  </h4>
+                  <p className="text-xs text-slate-300">{inspectingProduct.bundleDescription}</p>
+                </div>
+              )}
+
+              <div className="p-3 rounded-xl bg-amber-950/20 border border-amber-500/20 text-[11px] text-amber-200/90">
+                <strong>Regras de Posse:</strong> {inspectingProduct.purchaseRules}
+              </div>
+            </div>
+
+            {/* Preço e Ações */}
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Preço Final (€ Real)</span>
+                <span className="text-2xl font-black text-amber-400">{formatVipPrice(inspectingProduct.priceCents)}</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setInspectingProduct(null)}
+                  className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition cursor-pointer"
+                >
+                  Fechar
+                </button>
+
+                {isOwned(inspectingProduct.id) ? (
+                  <button
+                    onClick={() => {
+                      handleEquip(inspectingProduct)
+                      setInspectingProduct(null)
+                    }}
+                    className="px-6 py-2.5 rounded-xl text-xs font-black bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg cursor-pointer"
+                  >
+                    Equipar no Jogo
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      handleBuy(inspectingProduct)
+                      setInspectingProduct(null)
+                    }}
+                    disabled={inspectingProduct.isSoldOut || (inspectingProduct.isLimited && inspectingProduct.stock === 0)}
+                    className="px-6 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 shadow-lg flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    <span>Prosseguir para Checkout Seguro</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* MODAL DE PROVOCAÇÕES (TAUNT PACKS) */}
       {tauntModalProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
@@ -470,18 +603,18 @@ export default function VipShopSection({
               </button>
             </div>
 
-            <p className="text-xs text-slate-300">{tauntModalProduct.description}</p>
+            <p className="text-xs text-slate-300">{tauntModalProduct.visualConcept}</p>
 
             <div className="space-y-2 py-2">
               <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block">
-                6 Provocações Incluídas:
+                6 Provocações Oficiais Gravadas:
               </span>
               {tauntModalProduct.taunts?.map((t, idx) => (
                 <div
                   key={t.id}
                   className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-white flex items-center gap-2.5"
                 >
-                  <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[10px]">
+                  <span className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[10px] shrink-0">
                     {idx + 1}
                   </span>
                   <span>{t.text}</span>
@@ -499,7 +632,7 @@ export default function VipShopSection({
         </div>
       )}
 
-      {/* MODAL EXPLICATIVO DE CONFIGURAÇÃO DE GATEWAY DE PAGAMENTOS */}
+      {/* MODAL DE STATUS DO GATEWAY DE PAGAMENTOS */}
       {providerModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
           <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-amber-500/50 bg-slate-950 p-6 shadow-[0_0_50px_rgba(245,158,11,0.3)] space-y-4">
@@ -508,15 +641,15 @@ export default function VipShopSection({
             </div>
 
             <h3 className="text-xl font-black text-white text-center">
-              Configuração de Pagamento Real Necessária
+              Gateway de Pagamento Real (€)
             </h3>
 
             <div className="p-4 rounded-2xl bg-amber-950/30 border border-amber-500/30 text-xs text-amber-200 leading-relaxed space-y-2">
               <p>
-                <strong>Regra Master Prompt #13 &amp; #38:</strong> O sistema cumpre o princípio de verdade absoluta de pagamentos. Sem chaves de ambiente reais configuradas, <strong>nenhuma compra fictícia ou aprovação falsa é realizada</strong>.
+                <strong>Regra Global de Economia:</strong> O sistema cumpre rigorosamente a exigência de transações financeiras reais. Sem chaves de ambiente válidas configuradas no servidor, <strong>nenhuma transação fictícia é realizada</strong>.
               </p>
               <p className="text-[11px] text-slate-300">
-                Todo o catálogo dos 38 itens VIP, arquitetura de checkout, webhooks idempotentes e entidades de entitlement estão 100% implementados e prontos para produção. Assim que a chave <code className="bg-slate-900 px-1 py-0.5 rounded text-amber-300">STRIPE_SECRET_KEY</code> for adicionada ao ficheiro de ambiente, os pagamentos passam de imediato a reais.
+                Todo o catálogo dos 38 itens VIP 2.0, assets WebP em alta definição, rotas de verificação idempotente e entidades de entitlement estão 100% implementados e verificados. Quando a chave <code className="bg-slate-900 px-1 py-0.5 rounded text-amber-300">STRIPE_SECRET_KEY</code> for providenciada no ambiente de produção, as cobranças em dinheiro real ocorrem de forma imediata e transparente.
               </p>
             </div>
 

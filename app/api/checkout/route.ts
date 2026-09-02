@@ -96,7 +96,7 @@ export async function POST(request: Request) {
                 currency: 'eur',
                 product_data: {
                   name: vipProduct.name,
-                  description: vipProduct.description,
+                  description: vipProduct.description || vipProduct.visualConcept,
                   images: [
                     `${cleanOrigin}${vipProduct.assetPath}`
                   ],

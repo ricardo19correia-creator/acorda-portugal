@@ -1,4 +1,4 @@
-export type ShopAvatarRarity = 'COMUM' | 'RARO' | 'EPICO' | 'LENDARIO' | 'EXCLUSIVO'
+export type ShopAvatarRarity = 'COMUM' | 'RARO' | 'EPICO' | 'LENDARIO' | 'MITICO' | 'EXCLUSIVO'
 export type AvatarRarity = 'Comum' | 'Raro' | 'Épico' | 'Lendário' | 'Mítico' | 'Exclusivo'
 
 export interface ShopAvatar {
@@ -34,7 +34,7 @@ export interface AvatarCategoryMeta {
 }
 
 export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
-  // 1-4: Iniciais / Grátis
+  // 1-4: Iniciais / Grátis (0 moedas)
   {
     id: 'avatar_01',
     name: 'O Estratega',
@@ -71,7 +71,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     rarity: 'COMUM',
     price: 0,
   },
-  // 5-10 & 19: Raros (Tier 3: 6.000 – 9.000 Moedas)
+  // 5-10 & 19: Raros (500–1.000 moedas)
   {
     id: 'avatar_05',
     name: 'O Mestre',
@@ -79,7 +79,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_05.png',
     category: 'História',
     rarity: 'RARO',
-    price: 6000,
+    price: 500,
   },
   {
     id: 'avatar_06',
@@ -88,7 +88,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_06.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 6500,
+    price: 600,
   },
   {
     id: 'avatar_07',
@@ -97,7 +97,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_07.png',
     category: 'Cidadania',
     rarity: 'RARO',
-    price: 7000,
+    price: 700,
   },
   {
     id: 'avatar_08',
@@ -106,7 +106,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_08.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 7500,
+    price: 800,
   },
   {
     id: 'avatar_09',
@@ -115,7 +115,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_09.png',
     category: 'Cidadania',
     rarity: 'RARO',
-    price: 8000,
+    price: 900,
   },
   {
     id: 'avatar_10',
@@ -124,81 +124,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_10.png',
     category: 'História',
     rarity: 'RARO',
-    price: 8500,
-  },
-  // 11-17, 20, 22-27, 32: Épicos (Tier 4: 15.000 – 25.000 Moedas)
-  {
-    id: 'avatar_11',
-    name: 'O Desportista',
-    description: 'Velocidade, resistência atlética e espírito de superação.',
-    image: '/images/avatars/avatar_11.png',
-    category: 'Desporto',
-    rarity: 'EPICO',
-    price: 15000,
-  },
-  {
-    id: 'avatar_12',
-    name: 'A Artista',
-    description: 'A voz profunda, emoção pura e poesia da alma portuguesa.',
-    image: '/images/avatars/avatar_12.png',
-    category: 'Cultura',
-    rarity: 'EPICO',
-    price: 15000,
-  },
-  {
-    id: 'avatar_13',
-    name: 'O Professor',
-    description: 'A erudição carismática de quem inspira gerações de mentes brilhantes.',
-    image: '/images/avatars/avatar_13.png',
-    category: 'História',
-    rarity: 'EPICO',
-    price: 16000,
-  },
-  {
-    id: 'avatar_14',
-    name: 'A Aventureira',
-    description: 'Coragem destemida para conquistar serras, mares e arquipélagos.',
-    image: '/images/avatars/avatar_14.png',
-    category: 'Cultura',
-    rarity: 'EPICO',
-    price: 16500,
-  },
-  {
-    id: 'avatar_15',
-    name: 'O Técnico',
-    description: 'Precisão algorítmica e raciocínio lógico infalível.',
-    image: '/images/avatars/avatar_15.png',
-    category: 'Cidadania',
-    rarity: 'EPICO',
-    price: 17500,
-  },
-  {
-    id: 'avatar_16',
-    name: 'A Estratega',
-    description: 'Paciência cirúrgica que antecipa o adversário xeque por xeque.',
-    image: '/images/avatars/avatar_16.png',
-    category: 'Cidadania',
-    rarity: 'EPICO',
-    price: 18000,
-  },
-  {
-    id: 'avatar_17',
-    name: 'O Visionário',
-    description: 'Audácia e pensamento inovador que quebram velhos paradigmas.',
-    image: '/images/avatars/avatar_17.png',
-    category: 'Cultura',
-    rarity: 'EPICO',
-    price: 18500,
-  },
-  // 18-21: Lendários & Raros Intermédios
-  {
-    id: 'avatar_18',
-    name: 'A Campeã',
-    description: 'A dignidade triunfante de quem ergue a taça nacional.',
-    image: '/images/avatars/avatar_18.png',
-    category: 'Desporto',
-    rarity: 'LENDARIO',
-    price: 40000,
+    price: 1000,
   },
   {
     id: 'avatar_19',
@@ -207,7 +133,71 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_19.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 9000,
+    price: 850,
+  },
+  // 11-17, 20, 22-27, 32: Épicos (1.250–2.500 moedas)
+  {
+    id: 'avatar_11',
+    name: 'O Desportista',
+    description: 'Velocidade, resistência atlética e espírito de superação.',
+    image: '/images/avatars/avatar_11.png',
+    category: 'Desporto',
+    rarity: 'EPICO',
+    price: 1250,
+  },
+  {
+    id: 'avatar_12',
+    name: 'A Artista',
+    description: 'A voz profunda, emoção pura e poesia da alma portuguesa.',
+    image: '/images/avatars/avatar_12.png',
+    category: 'Cultura',
+    rarity: 'EPICO',
+    price: 1400,
+  },
+  {
+    id: 'avatar_13',
+    name: 'O Professor',
+    description: 'A erudição carismática de quem inspira gerações de mentes brilhantes.',
+    image: '/images/avatars/avatar_13.png',
+    category: 'História',
+    rarity: 'EPICO',
+    price: 1500,
+  },
+  {
+    id: 'avatar_14',
+    name: 'A Aventureira',
+    description: 'Coragem destemida para conquistar serras, mares e arquipélagos.',
+    image: '/images/avatars/avatar_14.png',
+    category: 'Cultura',
+    rarity: 'EPICO',
+    price: 1600,
+  },
+  {
+    id: 'avatar_15',
+    name: 'O Técnico',
+    description: 'Precisão algorítmica e raciocínio lógico infalível.',
+    image: '/images/avatars/avatar_15.png',
+    category: 'Cidadania',
+    rarity: 'EPICO',
+    price: 1800,
+  },
+  {
+    id: 'avatar_16',
+    name: 'A Estratega',
+    description: 'Paciência cirúrgica que antecipa o adversário xeque por xeque.',
+    image: '/images/avatars/avatar_16.png',
+    category: 'Cidadania',
+    rarity: 'EPICO',
+    price: 2000,
+  },
+  {
+    id: 'avatar_17',
+    name: 'O Visionário',
+    description: 'Audácia e pensamento inovador que quebram velhos paradigmas.',
+    image: '/images/avatars/avatar_17.png',
+    category: 'Cultura',
+    rarity: 'EPICO',
+    price: 2200,
   },
   {
     id: 'avatar_20',
@@ -216,18 +206,8 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_20.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 19000,
+    price: 1750,
   },
-  {
-    id: 'avatar_21',
-    name: 'O Capitão',
-    description: 'O líder firme e respeitado que conduz a tripulação à glória.',
-    image: '/images/avatars/avatar_21.png',
-    category: 'Cidadania',
-    rarity: 'LENDARIO',
-    price: 45000,
-  },
-  // 22-27: Criatividade e Ciência (Tier 4: Épicos)
   {
     id: 'avatar_22',
     name: 'A Criativa',
@@ -235,7 +215,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_22.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 20000,
+    price: 1900,
   },
   {
     id: 'avatar_23',
@@ -244,7 +224,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_23.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 21000,
+    price: 2100,
   },
   {
     id: 'avatar_24',
@@ -253,7 +233,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_24.png',
     category: 'Desporto',
     rarity: 'EPICO',
-    price: 22500,
+    price: 2300,
   },
   {
     id: 'avatar_25',
@@ -262,7 +242,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_25.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 23000,
+    price: 2400,
   },
   {
     id: 'avatar_26',
@@ -271,7 +251,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_26.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 24000,
+    price: 2500,
   },
   {
     id: 'avatar_27',
@@ -280,9 +260,36 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_27.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 24500,
+    price: 2500,
   },
-  // 28-32: Elite Digital e Histórica (Lendários Tier 5 e Épicos)
+  {
+    id: 'avatar_32',
+    name: 'A Nova Geração',
+    description: 'A força jovem e vibrante que está a redefinir o futuro da nação.',
+    image: '/images/avatars/avatar_32.png',
+    category: 'Cidadania',
+    rarity: 'EPICO',
+    price: 2500,
+  },
+  // 18, 21, 28, 29, 31, 33: Lendários (3.000–6.000 moedas)
+  {
+    id: 'avatar_18',
+    name: 'A Campeã',
+    description: 'A dignidade triunfante de quem ergue a taça nacional.',
+    image: '/images/avatars/avatar_18.png',
+    category: 'Desporto',
+    rarity: 'LENDARIO',
+    price: 3500,
+  },
+  {
+    id: 'avatar_21',
+    name: 'O Capitão',
+    description: 'O líder firme e respeitado que conduz a tripulação à glória.',
+    image: '/images/avatars/avatar_21.png',
+    category: 'Cidadania',
+    rarity: 'LENDARIO',
+    price: 4000,
+  },
   {
     id: 'avatar_28',
     name: 'A Exploradora Digital',
@@ -290,7 +297,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_28.png',
     category: 'Cultura',
     rarity: 'LENDARIO',
-    price: 48000,
+    price: 4500,
   },
   {
     id: 'avatar_29',
@@ -299,8 +306,37 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_29.png',
     category: 'História',
     rarity: 'LENDARIO',
-    price: 52000,
+    price: 5000,
   },
+  {
+    id: 'avatar_31',
+    name: 'O Veterano',
+    description: 'Anos de sabedoria e prestígio respeitados por toda a comunidade.',
+    image: '/images/avatars/avatar_31.png',
+    category: 'História',
+    rarity: 'LENDARIO',
+    price: 5500,
+  },
+  {
+    id: 'avatar_33',
+    name: 'O Campeão',
+    description: 'Consagrado no panteão dos maiores vencedores do Acorda Portugal.',
+    image: '/images/avatars/avatar_33.png',
+    category: 'Desporto',
+    rarity: 'LENDARIO',
+    price: 6000,
+  },
+  // 34: Mítico (9.500 moedas)
+  {
+    id: 'avatar_34',
+    name: 'A Lenda',
+    description: 'Uma presença marcante e memorável que inspira o país inteiro.',
+    image: '/images/avatars/avatar_34.png',
+    category: 'História',
+    rarity: 'MITICO',
+    price: 9500,
+  },
+  // 30, 35, 36: Exclusivos por Mérito (NÃO Comprar com Moedas)
   {
     id: 'avatar_30',
     name: 'A Rainha do Ranking',
@@ -311,43 +347,6 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     price: 0,
     isAchievementOnly: true,
     unlockRequirement: 'Alcançar o Top 10 no Ranking Nacional',
-  },
-  {
-    id: 'avatar_31',
-    name: 'O Veterano',
-    description: 'Anos de sabedoria e prestígio respeitados por toda a comunidade.',
-    image: '/images/avatars/avatar_31.png',
-    category: 'História',
-    rarity: 'LENDARIO',
-    price: 55000,
-  },
-  {
-    id: 'avatar_32',
-    name: 'A Nova Geração',
-    description: 'A força jovem e vibrante que está a redefinir o futuro da nação.',
-    image: '/images/avatars/avatar_32.png',
-    category: 'Cidadania',
-    rarity: 'EPICO',
-    price: 25000,
-  },
-  // 33-36: Mestres e Lendas Máximas (Tier 5 e Exclusivos por Mérito)
-  {
-    id: 'avatar_33',
-    name: 'O Campeão',
-    description: 'Consagrado no panteão dos maiores vencedores do Acorda Portugal.',
-    image: '/images/avatars/avatar_33.png',
-    category: 'Desporto',
-    rarity: 'LENDARIO',
-    price: 60000,
-  },
-  {
-    id: 'avatar_34',
-    name: 'A Lenda',
-    description: 'Uma presença marcante e memorável que inspira o país inteiro.',
-    image: '/images/avatars/avatar_34.png',
-    category: 'História',
-    rarity: 'LENDARIO',
-    price: 65000,
   },
   {
     id: 'avatar_35',
@@ -388,6 +387,7 @@ export const avatarShopList: AvatarItem[] = OFFICIAL_SHOP_AVATARS.map((av) => {
     RARO: 'Raro',
     EPICO: 'Épico',
     LENDARIO: 'Lendário',
+    MITICO: 'Mítico',
     EXCLUSIVO: 'Exclusivo',
   }
 
@@ -428,7 +428,7 @@ export const avatarShopList: AvatarItem[] = OFFICIAL_SHOP_AVATARS.map((av) => {
     avatar_34: '🔥',
     avatar_35: '⚔️',
     avatar_36: '🇵🇹',
-  };
+  }
 
   return {
     id: av.id,
@@ -442,7 +442,5 @@ export const avatarShopList: AvatarItem[] = OFFICIAL_SHOP_AVATARS.map((av) => {
     image: av.image,
     icon: iconMap[av.id] || '✨',
     isExclusive: Boolean(av.isAchievementOnly),
-  };
+  }
 })
-
-

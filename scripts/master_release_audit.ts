@@ -77,8 +77,8 @@ async function runMasterAudit() {
   console.log('DISTRICTS                     PASS')
   console.log('PROFILE                       PASS\n')
 
-  const baseArenas = ARENA_SHOP_CATALOG.filter(a => !a.id.startsWith('vip_'))
-  const vipArenas = ARENA_SHOP_CATALOG.filter(a => a.id.startsWith('vip_'))
+  const baseArenas = ARENA_SHOP_CATALOG.filter(a => !a.id.startsWith('vip_') && !a.id.startsWith('AP-VIP-'))
+  const vipArenas = ARENA_SHOP_CATALOG.filter(a => a.id.startsWith('vip_') || a.id.startsWith('AP-VIP-'))
 
   console.log('STORE                         PASS')
   console.log(`ARENAS (CATALOG)              ${ARENA_SHOP_CATALOG.length} (${baseArenas.length} Base + ${vipArenas.length} VIP) PASS`)

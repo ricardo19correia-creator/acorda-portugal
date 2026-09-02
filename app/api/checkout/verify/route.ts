@@ -82,6 +82,7 @@ export async function GET(request: Request) {
         // =========================================================================
         // ENTREGA DO ITEM VIP (€ REAL) COM ENTITLEMENT
         // =========================================================================
+        const inventoryGrantId = `grant_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
         const entitlementRef = doc(db, 'users', userId, 'entitlements', vipProduct.id)
         
         t.set(entitlementRef, {
@@ -90,11 +91,15 @@ export async function GET(request: Request) {
           category: vipProduct.category,
           acquisitionType: 'vip_real_money',
           acquiredAt: serverTimestamp(),
+          verifiedAt: serverTimestamp(),
           paymentId: transactionId,
+          inventoryGrantId,
           status: 'active',
           entitlementType: 'permanent',
           priceCents: vipProduct.priceCents,
           currency: 'EUR',
+          ...(vipProduct.bundleComponents ? { bundleComponents: vipProduct.bundleComponents } : {}),
+          ...(vipProduct.collectionNumber ? { collectionNumber: vipProduct.collectionNumber } : {}),
         }, { merge: true })
 
         const updates: Record<string, any> = {
@@ -128,24 +133,84 @@ export async function GET(request: Request) {
           }
         }
 
+        // DESEMPACOTAMENTO DE BUNDLES / ULTIMATE
+        if ((vipProduct.category === 'bundle' || vipProduct.category === 'ultimate') && vipProduct.bundleComponents) {
+          for (const componentId of vipProduct.bundleComponents) {
+            updates[`inventory.${componentId}`] = 1
+            updates.vipEntitlements = arrayUnion(componentId)
+
+            const compProduct = getVipProductById(componentId)
+            if (compProduct) {
+              const compEntitlementRef = doc(db, 'users', userId, 'entitlements', componentId)
+              t.set(compEntitlementRef, {
+                productId: componentId,
+                sku: compProduct.sku,
+                category: compProduct.category,
+                parentBundleId: vipProduct.id,
+                acquisitionType: 'vip_real_money_bundle',
+                acquiredAt: serverTimestamp(),
+                verifiedAt: serverTimestamp(),
+                paymentId: transactionId,
+                inventoryGrantId,
+                status: 'active',
+                entitlementType: 'permanent',
+                priceCents: compProduct.priceCents,
+                currency: 'EUR',
+              }, { merge: true })
+
+              if (compProduct.category === 'avatar') {
+                updates['inventory.avatars'] = arrayUnion(componentId)
+                updates['unlockedAvatars'] = arrayUnion(componentId)
+              } else if (compProduct.category === 'frame') {
+                updates['inventory.frames'] = arrayUnion(componentId)
+                updates['unlockedFrames'] = arrayUnion(componentId)
+              } else if (compProduct.category === 'title') {
+                updates['inventory.titles'] = arrayUnion(componentId)
+                updates['ownedTitleIds'] = arrayUnion(componentId)
+              } else if (compProduct.category === 'arena') {
+                updates['inventory.arenas'] = arrayUnion(componentId)
+                updates['unlockedArenas'] = arrayUnion(componentId)
+              } else if (compProduct.category === 'emote') {
+                updates['inventory.emotes'] = arrayUnion(componentId)
+                updates['unlockedEmotes'] = arrayUnion(componentId)
+              } else if (compProduct.category === 'tauntpack') {
+                updates['inventory.tauntpacks'] = arrayUnion(componentId)
+                updates['unlockedTauntPacks'] = arrayUnion(componentId)
+                if (compProduct.taunts) {
+                  compProduct.taunts.forEach((t) => {
+                    updates[`inventory.taunts`] = arrayUnion(t.id)
+                  })
+                }
+              }
+            }
+          }
+        }
+
         t.update(userRef, updates)
 
+        // TRANSACTION LEDGER REGISTRATION (Campos canónicos exigidos)
         const txData = {
           id: transactionId,
+          transactionId,
           userId,
-          type: 'vip_real_money_purchase',
-          status: 'paid',
           productId: vipProduct.id,
+          priceEUR: vipProduct.priceEUR,
+          amountInCents: vipProduct.priceCents,
+          currency: 'EUR',
+          paymentProvider: 'stripe',
+          paymentStatus: 'completed',
+          status: 'paid',
+          type: 'vip_real_money_purchase',
           sku: vipProduct.sku,
           category: vipProduct.category,
           productName: vipProduct.name,
-          amountInCents: vipProduct.priceCents,
-          currency: 'EUR',
           stripeSessionId: session.id,
           acquisitionType: 'vip_real_money',
           entitlementType: 'permanent',
           reason: `Compra VIP (€ Real): ${vipProduct.name}`,
+          inventoryGrantId,
           createdAt: serverTimestamp(),
+          verifiedAt: serverTimestamp(),
           processedAt: serverTimestamp(),
         }
 
@@ -235,10 +300,10 @@ export async function GET(request: Request) {
           id: vipProduct.id,
           sku: vipProduct.sku,
           name: vipProduct.name,
-          description: vipProduct.description,
+          description: vipProduct.description || vipProduct.visualConcept,
           priceFormatted: formatVipPrice(vipProduct.priceCents),
           category: vipProduct.category,
-          rarity: vipProduct.rarityLabel,
+          rarity: vipProduct.rarityLabel || vipProduct.rarity,
           assetPath: vipProduct.assetPath,
           acquisitionType: 'vip_real_money',
         }
