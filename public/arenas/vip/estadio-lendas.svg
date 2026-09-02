@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sky_stad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#022C22" />
+      <stop offset="60%" stop-color="#064E3B" />
+      <stop offset="100%" stop-color="#052E16" />
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky_stad)" />
+  <!-- Stadium Floodlights -->
+  <circle cx="300" cy="180" r="140" fill="#34D399" opacity="0.25" />
+  <circle cx="1620" cy="180" r="140" fill="#34D399" opacity="0.25" />
+  <!-- Stadium Rings and Pitch Lines -->
+  <ellipse cx="960" cy="850" rx="800" ry="320" fill="#065F46" stroke="#34D399" stroke-width="8" />
+  <ellipse cx="960" cy="850" rx="300" ry="120" fill="none" stroke="#FFF" stroke-width="6" opacity="0.8" />
+  <text x="960" y="220" fill="#34D399" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">ESTÁDIO DAS LENDAS</text>
+</svg>

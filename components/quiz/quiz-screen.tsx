@@ -536,10 +536,10 @@ export function QuizScreen({
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, help5050: newStock }))
 
       if (auth.currentUser) {
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-          'consumables.help5050': increment(-1),
-          'inventory.consumable_50_50': increment(-1),
-        })
+        const res = await useConsumablePowerUp(auth.currentUser.uid, 'consumable_50_50')
+        if (res.success) {
+          setStock5050(res.remainingCount)
+        }
       }
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
@@ -565,10 +565,10 @@ export function QuizScreen({
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, freezeTime: newStock }))
 
       if (auth.currentUser) {
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-          'consumables.freezeTime': increment(-1),
-          'inventory.consumable_congelar_tempo': increment(-1),
-        })
+        const res = await useConsumablePowerUp(auth.currentUser.uid, 'consumable_congelar_tempo')
+        if (res.success) {
+          setStockFreeze(res.remainingCount)
+        }
       }
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
@@ -595,11 +595,10 @@ export function QuizScreen({
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, publicVote: newStock }))
 
       if (auth.currentUser) {
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-          'consumables.publicVote': increment(-1),
-          'inventory.HELP_005': increment(-1),
-          'inventory.consumable_public_vote': increment(-1),
-        })
+        const res = await useConsumablePowerUp(auth.currentUser.uid, 'HELP_005')
+        if (res.success) {
+          setStockPublicVote(res.remainingCount)
+        }
       }
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))

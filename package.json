@@ -11,7 +11,9 @@
     "cap:copy": "cap copy android",
     "build:apk": "cmd /c \"set JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr& set PATH=C:\\Program Files\\Android\\Android Studio\\jbr\\bin;%PATH%& cd android & gradlew.bat assembleRelease\"",
     "build:aab": "cmd /c \"set JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr& set PATH=C:\\Program Files\\Android\\Android Studio\\jbr\\bin;%PATH%& cd android & gradlew.bat bundleRelease\"",
-    "audit:release": "tsx scripts/master_release_audit.ts"
+    "audit:release": "tsx scripts/master_release_audit.ts",
+    "audit:questions": "node scripts/audit_question_inventory.js && node scripts/test_question_integrity.js",
+    "test:questions": "node scripts/test_question_integrity.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

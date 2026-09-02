@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="f3_cosmic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="48" fill="none" stroke="url(#f3_cosmic)" stroke-width="10" />
+  <!-- Floating Diamonds -->
+  <g fill="url(#f3_cosmic)">
+    <polygon points="256,12 268,26 256,40 244,26" />
+    <polygon points="256,472 268,486 256,500 244,486" />
+    <polygon points="12,256 26,268 40,256 26,244" />
+    <polygon points="472,256 486,268 500,256 486,244" />
+  </g>
+  <circle cx="256" cy="256" r="215" fill="none" stroke="url(#f3_cosmic)" stroke-width="2" stroke-dasharray="6,8" opacity="0.7" />
+</svg>

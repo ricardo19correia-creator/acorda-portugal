@@ -35,6 +35,7 @@ import {
   isTitleOwned,
   sanitizeTitleName,
 } from '@/lib/titles'
+import VipShopSection from '@/components/shop/VipShopSection'
 
 type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
@@ -198,10 +199,12 @@ const FRAME_SHOP_ITEMS: ShopItem[] = ANIMATED_FRAMES.map((f) => ({
 }))
 
 const OTHER_SHOP_ITEMS: ShopItem[] = [
-  // AJUDAS & UTILIDADES
-  { id: 'ajuda_5050', name: 'Pack x5 Ajudas 50/50', category: 'ajudas', description: 'Elimina duas respostas erradas instantaneamente no quiz.', price: '500 Moedas', priceValue: 500, image: '/images/shop/ajuda-5050.jpg', badge: 'Consumível (+5)', icon: '✨' },
-  { id: 'HELP_005', name: 'Pack x3 Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.', price: '500 Moedas', priceValue: 500, image: '/images/shop/ajuda-publico.jpg', badge: 'Consumível (+3)', icon: '👥' },
-  { id: 'ajuda_congelar', name: 'Pack x3 Congelar Tempo', category: 'ajudas', description: 'Dá +15 segundos adicionais para responder à questão.', price: '750 Moedas', priceValue: 750, image: '/images/shop/ajuda-congelar.jpg', badge: 'Consumível (+3)', icon: '⏳' },
+  // AJUDAS & UTILIDADES (Anti-Pay-to-Win com Limites Rigorosos)
+  { id: 'consumable_pista', name: 'Pista Histórica', category: 'ajudas', description: 'Recebe uma dica contextual que aponta para a resposta certa. (Máx: 3 em stock | Limite: 3/dia).', price: '750 Moedas', priceValue: 750, image: '/images/shop/ajuda-pista.jpg', badge: 'Ajuda Básica (1 un.)', icon: '💡' },
+  { id: 'consumable_50_50', name: 'Ajuda 50/50', category: 'ajudas', description: 'Elimina duas opções erradas instantaneamente no quiz. (Máx: 3 em stock | Limite: 2/dia).', price: '1.800 Moedas', priceValue: 1800, image: '/images/shop/ajuda-5050.jpg', badge: 'Ajuda Média (1 un.)', icon: '✨' },
+  { id: 'consumable_congelar_tempo', name: 'Congelar Tempo (+15s)', category: 'ajudas', description: 'Pausa o cronómetro durante 15 segundos para pensares com calma. (Máx: 2 em stock | Limite: 1/dia).', price: '4.500 Moedas', priceValue: 4500, image: '/images/shop/ajuda-congelar.jpg', badge: 'Ajuda Forte (1 un.)', icon: '⏳' },
+  { id: 'HELP_005', name: 'Pergunta ao Público', category: 'ajudas', description: 'Gera uma votação simulada da plateia com percentagens em cada opção. (Máx: 2 em stock | Limite: 1/dia).', price: '5.000 Moedas', priceValue: 5000, image: '/images/shop/ajuda-publico.jpg', badge: 'Ajuda Forte (1 un.)', icon: '👥' },
+  { id: 'consumable_protecao_streak', name: 'Proteção de Sequência', category: 'ajudas', description: 'Salva a tua sequência de dias se te esqueceres de jogar 24 horas. (Máx: 1 em stock | Limite: 1/dia).', price: '12.500 Moedas', priceValue: 12500, image: '/images/shop/ajuda-streak.jpg', badge: 'Ajuda Especial (1 un.)', icon: '🛡️' },
 ]
 
 const SHOP_ITEMS: ShopItem[] = [...AVATAR_SHOP_ITEMS, ...FRAME_SHOP_ITEMS, ...ARENA_SHOP_ITEMS, ...TITLE_SHOP_ITEMS, ...TAUNT_SHOP_ITEMS, ...OTHER_SHOP_ITEMS]
@@ -249,10 +252,12 @@ function LojaContent() {
   })
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(['PROV_010', 'emote_ola', 'emote_boa_sorte', 'emote_vamos'])
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number; hints: number; streakProtection: number }>({
     help5050: 0,
     freezeTime: 0,
     publicVote: 0,
+    hints: 0,
+    streakProtection: 0,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
     avatars: [DEFAULT_AVATAR_ID],
@@ -268,6 +273,8 @@ function LojaContent() {
     'pack_basico',
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
+  const [rawInventory, setRawInventory] = useState<Record<string, number>>({})
+  const [vipEntitlements, setVipEntitlements] = useState<string[]>([])
 
   useEffect(() => {
     setMounted(true)
@@ -308,6 +315,7 @@ function LojaContent() {
           if (snap.exists()) {
             const data = snap.data()
             if (data.inventory) {
+              setRawInventory(typeof data.inventory === 'object' ? data.inventory : {})
               const invTaunts = Array.from(new Set([
                 'pack_basico',
                 ...(data.inventory.taunts || []),
@@ -327,22 +335,35 @@ function LojaContent() {
               setUnlockedItems((prev) => Array.from(new Set([...prev, ...data.unlockedFrames])))
               setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
             }
+            if (data.vipEntitlements && Array.isArray(data.vipEntitlements)) {
+              setVipEntitlements(data.vipEntitlements)
+            }
             if (data.consumables) {
               setConsumables({
                 help5050: typeof data.consumables.help5050 === 'number' ? data.consumables.help5050 : 0,
                 freezeTime: typeof data.consumables.freezeTime === 'number' ? data.consumables.freezeTime : 0,
                 publicVote: typeof data.consumables.publicVote === 'number' ? data.consumables.publicVote : 0,
+                hints: typeof data.consumables.hints === 'number' ? data.consumables.hints : (typeof data.inventory?.consumable_pista === 'number' ? data.inventory.consumable_pista : 0),
+                streakProtection: typeof data.consumables.streakProtection === 'number' ? data.consumables.streakProtection : (typeof data.inventory?.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0),
               })
               localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
             } else if (data.inventory?.utilities) {
               const utils = data.inventory.utilities
               setConsumables({
-                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : 0,
-                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : 0,
-                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : 0,
+                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : (typeof data.inventory.consumable_50_50 === 'number' ? data.inventory.consumable_50_50 : 0),
+                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : (typeof data.inventory.consumable_congelar_tempo === 'number' ? data.inventory.consumable_congelar_tempo : 0),
+                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : (typeof data.inventory.HELP_005 === 'number' ? data.inventory.HELP_005 : 0),
+                hints: typeof data.inventory.consumable_pista === 'number' ? data.inventory.consumable_pista : 0,
+                streakProtection: typeof data.inventory.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0,
               })
             } else {
-              setConsumables({ help5050: 0, freezeTime: 0, publicVote: 0 })
+              setConsumables({
+                help5050: typeof data.inventory?.consumable_50_50 === 'number' ? data.inventory.consumable_50_50 : 0,
+                freezeTime: typeof data.inventory?.consumable_congelar_tempo === 'number' ? data.inventory.consumable_congelar_tempo : 0,
+                publicVote: typeof data.inventory?.HELP_005 === 'number' ? data.inventory.HELP_005 : 0,
+                hints: typeof data.inventory?.consumable_pista === 'number' ? data.inventory.consumable_pista : 0,
+                streakProtection: typeof data.inventory?.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0,
+              })
             }
             if (data.equippedAvatar || data.equipped?.avatar) {
               const av = data.equipped?.avatar || data.equippedAvatar
@@ -584,11 +605,15 @@ function LojaContent() {
 
       let updatedConsumables = { ...consumables }
       if (item.id === 'ajuda_5050' || item.id === 'consumable_50_50') {
-        updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 5
-      } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico') {
-        updatedConsumables.publicVote = (updatedConsumables.publicVote || 0) + 3
+        updatedConsumables.help5050 = (updatedConsumables.help5050 || 0) + 1
+      } else if (item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote') {
+        updatedConsumables.publicVote = (updatedConsumables.publicVote || 0) + 1
       } else if (item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo') {
-        updatedConsumables.freezeTime = (updatedConsumables.freezeTime || 0) + 3
+        updatedConsumables.freezeTime = (updatedConsumables.freezeTime || 0) + 1
+      } else if (item.id === 'consumable_pista') {
+        updatedConsumables.hints = (updatedConsumables.hints || 0) + 1
+      } else if (item.id === 'consumable_protecao_streak') {
+        updatedConsumables.streakProtection = (updatedConsumables.streakProtection || 0) + 1
       }
 
       setConsumables(updatedConsumables)
@@ -598,10 +623,14 @@ function LojaContent() {
       window.dispatchEvent(new Event('inventory_updated'))
       const totalAmount = item.id === 'ajuda_5050' || item.id === 'consumable_50_50'
         ? updatedConsumables.help5050
-        : item.id === 'HELP_005' || item.id === 'ajuda_publico'
+        : item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote'
           ? updatedConsumables.publicVote
-          : updatedConsumables.freezeTime
-      showToast(`Sucesso! Adquiriste ${item.name}! Total: ${totalAmount}`)
+          : item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo'
+            ? updatedConsumables.freezeTime
+            : item.id === 'consumable_pista'
+              ? updatedConsumables.hints
+              : updatedConsumables.streakProtection
+      showToast(`Sucesso! Adquiriste ${item.name}! Em stock: ${totalAmount}`)
       return
     }
 
@@ -1379,37 +1408,25 @@ function LojaContent() {
           </div>
         )}
 
-        {/* VIP Tab Coming Soon Teaser */}
+        {/* VIP Section Oficial (€ Real) */}
         {activeTab === 'vip' ? (
-          <div className="w-full max-w-6xl py-16 px-6 text-center rounded-3xl bg-slate-900/50 border border-amber-500/20 backdrop-blur-xl relative overflow-hidden my-6">
-            {/* Glow néon âmbar */}
-            <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-            
-            <div className="relative z-10 max-w-md mx-auto space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(245,158,11,0.2)]">
-                🔒
-              </div>
-              
-              <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black tracking-widest uppercase">
-                Acesso Antecipado
-              </span>
-              
-              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                EXCLUSIVOS VIP <span className="text-amber-400">BREVEMENTE</span>
-              </h3>
-              
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Estamos a preparar o Passe Fundador da Nação, pacotes de cosméticos lendários e arenas animadas com suporte a MB WAY.
-              </p>
-              
-              <div className="pt-2">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-300">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                  Lançamento na Temporada 1
-                </span>
-              </div>
-            </div>
-          </div>
+          <VipShopSection
+            userId={auth.currentUser?.uid}
+            userEmail={auth.currentUser?.email || undefined}
+            equippedAvatar={equippedAvatar}
+            equippedFrame={equippedFrame || 'default'}
+            equippedTitle={equippedTitle}
+            equippedArena={equippedArena}
+            userInventory={rawInventory}
+            vipEntitlements={vipEntitlements}
+            onSuccessToast={(msg) => showToast(msg)}
+            onErrorToast={(msg) => showToast(msg, 'error')}
+            onRefreshData={() => {
+              if (auth.currentUser?.uid) {
+                // Sincronização em tempo real via snapshot
+              }
+            }}
+          />
         ) : (
           /* Items Grid */
           <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -1468,11 +1485,15 @@ function LojaContent() {
                         )}
                         {isConsumable && (
                           <span className="text-[10px] font-bold text-amber-400 shrink-0">
-                            {item.id === 'ajuda_5050'
+                            {item.id === 'ajuda_5050' || item.id === 'consumable_50_50'
                               ? `Tens: ${consumables.help5050 || 0}`
-                              : item.id === 'HELP_005' || item.id === 'ajuda_publico'
+                              : item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote'
                                 ? `Tens: ${consumables.publicVote || 0}`
-                                : `Tens: ${consumables.freezeTime || 0}`}
+                                : item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo'
+                                  ? `Tens: ${consumables.freezeTime || 0}`
+                                  : item.id === 'consumable_pista'
+                                    ? `Tens: ${consumables.hints || 0}`
+                                    : `Tens: ${consumables.streakProtection || 0}`}
                           </span>
                         )}
                       </div>

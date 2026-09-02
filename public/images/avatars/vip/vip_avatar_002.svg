@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg_guard" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#4C0519" />
+      <stop offset="60%" stop-color="#1F030B" />
+      <stop offset="100%" stop-color="#050003" />
+    </radialGradient>
+    <linearGradient id="mythic_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDA4AF" />
+      <stop offset="50%" stop-color="#E11D48" />
+      <stop offset="100%" stop-color="#881337" />
+    </linearGradient>
+    <linearGradient id="armillary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#CA8A04" />
+    </linearGradient>
+    <filter id="ruby_glow">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg_guard)" />
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#mythic_grad)" stroke-width="4" stroke-dasharray="12,8" opacity="0.8" />
+  
+  <!-- Armillary Sphere In Background -->
+  <g opacity="0.2" stroke="url(#armillary)" stroke-width="4" fill="none">
+    <circle cx="256" cy="230" r="160" />
+    <ellipse cx="256" cy="230" rx="160" ry="60" />
+    <ellipse cx="256" cy="230" rx="60" ry="160" />
+    <line x1="96" y1="70" x2="416" y2="390" stroke-width="6" />
+  </g>
+
+  <!-- Heavy Guardian Plate Pauldrons -->
+  <path d="M100 512 L130 360 L210 370 L230 512 Z" fill="#0F172A" stroke="url(#mythic_grad)" stroke-width="6" />
+  <path d="M412 512 L382 360 L302 370 L282 512 Z" fill="#0F172A" stroke="url(#mythic_grad)" stroke-width="6" />
+  <path d="M180 512 C180 390, 332 390, 332 512 Z" fill="#1E293B" stroke="url(#mythic_grad)" stroke-width="6" />
+
+  <!-- Supreme Quinas Crest On Chest -->
+  <polygon points="256,410 286,430 286,470 256,495 226,470 226,430" fill="#1D4ED8" stroke="#FFF" stroke-width="3" />
+  <circle cx="256" cy="445" r="4" fill="#FFF" />
+  <circle cx="244" cy="455" r="3.5" fill="#FFF" />
+  <circle cx="268" cy="455" r="3.5" fill="#FFF" />
+  <circle cx="248" cy="472" r="3.5" fill="#FFF" />
+  <circle cx="264" cy="472" r="3.5" fill="#FFF" />
+
+  <!-- Guardian Helm & Glowing Ruby Visor -->
+  <path d="M186 270 C186 160, 326 160, 326 270 L306 350 L206 350 Z" fill="#0F172A" stroke="url(#mythic_grad)" stroke-width="6" />
+  <path d="M210 240 L302 240 L292 280 L256 300 L220 280 Z" fill="#020617" stroke="url(#mythic_grad)" stroke-width="3" />
+  
+  <!-- Glowing Slit Visor -->
+  <g filter="url(#ruby_glow)">
+    <polygon points="225,255 287,255 280,268 256,275 232,268" fill="#FB7185" />
+  </g>
+
+  <!-- Crowned Helm Crest -->
+  <path d="M256 120 L276 180 L236 180 Z" fill="url(#mythic_grad)" stroke="#FDA4AF" stroke-width="2" />
+  <circle cx="256" cy="115" r="8" fill="#FDE047" stroke="#FFF" stroke-width="2" />
+
+  <!-- Banner Badge -->
+  <rect x="136" y="460" width="240" height="36" rx="18" fill="#0F172A" stroke="url(#mythic_grad)" stroke-width="3" />
+  <text x="256" y="484" text-anchor="middle" fill="#FDA4AF" font-family="sans-serif" font-weight="900" font-size="14" letter-spacing="2">GUARDIÃO NACIONAL</text>
+</svg>

@@ -20,14 +20,19 @@ import {
   getDifficultyMultiplier,
   calculateMatchCoinReward,
   calculateLevelUpCoinReward,
+  getConsumableRule,
+  CONSUMABLE_RULES,
 } from '@/src/data/economy'
 import { equipTitle } from '@/lib/titles-service'
+import { getAvatarById } from '@/lib/avatars'
 
 export {
   ECONOMY_CONFIG,
   getDifficultyMultiplier,
   calculateMatchCoinReward,
   calculateLevelUpCoinReward,
+  getConsumableRule,
+  CONSUMABLE_RULES,
 }
 
 import { ANIMATED_FRAMES } from '@/data/frames'
@@ -59,7 +64,7 @@ export function formatItemStatusBadge(rarity: ItemRarity, isEquipped: boolean): 
   return rarityLabel
 }
 
-export type EquipSlot = 'frame' | 'title' | 'theme' | 'aura' | 'sfx' | 'soundpack' | 'streak_effect'
+export type EquipSlot = 'frame' | 'title' | 'theme' | 'aura' | 'sfx' | 'soundpack' | 'streak_effect' | 'avatar' | 'arena' | 'emote' | 'tauntpack'
 
 export type ShopItem = {
   id: string
@@ -125,7 +130,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'title',
-    price: 18000,
+    price: 55000,
     icon: 'Crown',
   },
   {
@@ -136,7 +141,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'title',
-    price: 6000,
+    price: 18000,
     icon: 'Zap',
   },
   {
@@ -147,7 +152,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'raro',
     type: 'permanent',
     slot: 'title',
-    price: 2800,
+    price: 6000,
     icon: 'Flame',
   },
   {
@@ -158,7 +163,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'title',
-    price: 2500,
+    price: 15000,
     icon: 'Award',
   },
   {
@@ -169,7 +174,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'comum',
     type: 'permanent',
     slot: 'title',
-    price: 850,
+    price: 1000,
     icon: 'Award',
   },
   {
@@ -180,7 +185,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'comum',
     type: 'permanent',
     slot: 'title',
-    price: 750,
+    price: 850,
     icon: 'Award',
   },
 
@@ -205,7 +210,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'raro',
     type: 'permanent',
     slot: 'theme',
-    price: 6000,
+    price: 8500,
     icon: 'Sparkles',
     previewColor: 'from-cyan-950/90 via-blue-950/70 to-black',
   },
@@ -217,7 +222,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'theme',
-    price: 12500,
+    price: 22000,
     icon: 'Palette',
     previewColor: 'from-purple-950/90 via-amber-950/60 to-black',
   },
@@ -229,7 +234,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'theme',
-    price: 25000,
+    price: 55000,
     icon: 'Flame',
     previewColor: 'from-red-950/90 via-amber-950/70 to-black',
   },
@@ -241,7 +246,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'theme',
-    price: 35000,
+    price: 65000,
     icon: 'Crown',
     previewColor: 'from-yellow-950/90 via-amber-950/80 to-black',
   },
@@ -253,7 +258,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'theme',
-    price: 45000,
+    price: 95000,
     icon: 'Sparkles',
     previewColor: 'from-indigo-950/95 via-purple-950/80 to-black',
   },
@@ -267,7 +272,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'soundpack',
-    price: 6000,
+    price: 18000,
     icon: 'Volume2',
   },
   {
@@ -278,7 +283,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'raro',
     type: 'permanent',
     slot: 'soundpack',
-    price: 4500,
+    price: 6500,
     icon: 'UtensilsCrossed',
   },
   {
@@ -289,7 +294,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'raro',
     type: 'permanent',
     slot: 'soundpack',
-    price: 3000,
+    price: 6500,
     icon: 'Zap',
   },
 
@@ -302,7 +307,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'streak_effect',
-    price: 7500,
+    price: 18000,
     icon: 'Flame',
   },
   {
@@ -313,7 +318,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'streak_effect',
-    price: 10000,
+    price: 45000,
     icon: 'Coins',
   },
   {
@@ -324,7 +329,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'permanent',
     slot: 'streak_effect',
-    price: 7500,
+    price: 18000,
     icon: 'Sparkles',
   },
   {
@@ -335,7 +340,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'streak_effect',
-    price: 12000,
+    price: 50000,
     icon: 'Zap',
   },
   {
@@ -346,7 +351,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'streak_effect',
-    price: 15000,
+    price: 55000,
     icon: 'Swords',
   },
   {
@@ -357,7 +362,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'frame',
-    price: 25000,
+    price: 50000,
     icon: 'Crown',
   },
   {
@@ -368,7 +373,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'title',
-    price: 20000,
+    price: 45000,
     icon: 'Award',
   },
   {
@@ -379,7 +384,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'aura',
-    price: 25000,
+    price: 65000,
     icon: 'Sun',
   },
   {
@@ -390,7 +395,7 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'lendario',
     type: 'permanent',
     slot: 'title',
-    price: 30000,
+    price: 85000,
     icon: 'Crown',
   },
   // 💬 PROVOCAÇÕES & REAÇÕES 1v1
@@ -402,81 +407,81 @@ export const SHOP_CATALOG: ShopItem[] = [
     rarity: 'epico',
     type: 'taunt' as any,
     slot: 'taunt' as any,
-    price: 250,
+    price: 16000,
     icon: 'Crown',
   },
 
-  // ⚡ UTILIDADE (Consumíveis de jogo)
-  {
-    id: 'consumable_50_50',
-    name: 'Ajuda 50/50',
-    description: 'Elimina duas opções erradas numa pergunta difícil durante o quiz.',
-    category: 'utilidade',
-    rarity: 'comum',
-    type: 'consumable',
-    price: 300,
-    icon: 'Sparkles',
-  },
+  // ⚡ UTILIDADE (Consumíveis de jogo - Anti-Pay-To-Win)
   {
     id: 'consumable_pista',
     name: 'Pista Histórica',
-    description: 'Recebe uma dica contextual que aponta para a resposta certa.',
+    description: 'Recebe uma dica contextual que aponta para a resposta certa. (Máx 3 em stock | Limite: 3/dia).',
     category: 'utilidade',
     rarity: 'comum',
     type: 'consumable',
-    price: 250,
+    price: 750,
     icon: 'Lightbulb',
   },
   {
-    id: 'consumable_congelar_tempo',
-    name: 'Congelar Tempo',
-    description: 'Pausa o cronómetro durante 15 segundos para pensares com calma.',
+    id: 'consumable_50_50',
+    name: 'Ajuda 50/50',
+    description: 'Elimina duas opções erradas numa pergunta difícil durante o quiz. (Máx 3 em stock | Limite: 2/dia).',
     category: 'utilidade',
     rarity: 'raro',
     type: 'consumable',
-    price: 400,
+    price: 1800,
+    icon: 'Sparkles',
+  },
+  {
+    id: 'consumable_congelar_tempo',
+    name: 'Congelar Tempo (+15s)',
+    description: 'Pausa o cronómetro durante 15 segundos para pensares com calma. (Máx 2 em stock | Limite: 1/dia).',
+    category: 'utilidade',
+    rarity: 'epico',
+    type: 'consumable',
+    price: 4500,
     icon: 'Timer',
   },
   {
     id: 'HELP_005',
     name: 'Pergunta ao Público',
-    description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.',
+    description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta. (Máx 2 em stock | Limite: 1/dia).',
     category: 'ajudas_utilidades' as any,
-    rarity: 'raro',
+    rarity: 'epico',
     type: 'consumable',
-    price: 500,
+    price: 5000,
     icon: 'Users',
   },
   {
     id: 'consumable_protecao_streak',
     name: 'Proteção de Sequência',
-    description: 'Salva a tua sequência de dias se te esqueceres de jogar durante 24 horas.',
+    description: 'Salva a tua sequência de dias se te esqueceres de jogar durante 24 horas. (Máx 1 em stock | Limite: 1/dia).',
     category: 'utilidade',
-    rarity: 'epico',
+    rarity: 'lendario',
     type: 'consumable',
-    price: 750,
+    price: 12500,
     icon: 'Flame',
   },
 
-  // 🎁 PACKS (Conjuntos com desconto)
+  // 🎁 PACKS (Conjuntos Premium)
   {
     id: 'pack_iniciado',
     name: 'Pack Iniciado',
-    description: 'Inclui 2x 50/50, 2x Pistas e a Moldura Verde Esperança.',
+    description: 'Inclui 1x 50/50, 1x Pista e a Moldura Verde Esperança.',
     category: 'packs',
     rarity: 'raro',
     type: 'consumable',
-    price: 900,
+    price: 7500,
     icon: 'Package',
   },
   {
     id: 'pack_mestre',
     name: 'Pack Grande Mestre',
-    description: 'Inclui 5x 50/50, 5x Congelar Tempo, 2x Proteções de Streak e Moldura Azulejo Nobre.',
+    description: 'Inclui 2x 50/50, 1x Congelar Tempo, 1x Proteção de Streak e Moldura Azulejo Nobre.',
     category: 'packs',
     rarity: 'epico',
     type: 'consumable',
-    price: 6500,
+    price: 25000,
     icon: 'PackageCheck',
   },
 ]
@@ -522,45 +527,89 @@ export async function buyShopItem(userId: string, itemId: string): Promise<Purch
       }
 
       const userData = userDoc.data()
-      const currentBalance = typeof userData.euros === 'number' ? userData.euros : 0
+      const currentBalance = typeof userData.euros === 'number' ? userData.euros : (userData.coins || 0)
       const currentInventory: Record<string, number> = userData.inventory || {}
+      const todayStr = new Date().toISOString().slice(0, 10)
+      const dailyPurchasesMap = (userData.dailyPurchases && userData.dailyPurchases[todayStr]) ? { ...userData.dailyPurchases[todayStr] } : {}
 
-      // Verificar se já possui o item se for permanente
+      // 1. Verificar se já possui o item se for permanente
       if (item.type === 'permanent' && (currentInventory[itemId] || 0) > 0) {
         throw new Error('Já possuis este cosmético permanente no teu inventário.')
       }
 
-      // Verificar saldo suficiente
+      // 2. Verificar regras de consumíveis / ajudas (Anti-Pay-to-Win)
+      const consumableRule = getConsumableRule(itemId) || (item.type === 'consumable' ? getConsumableRule(item.id) : undefined)
+      if (consumableRule) {
+        const currentStock = currentInventory[consumableRule.canonicalId] || 0
+        const quantityToAdd = consumableRule.quantityGranted || 1
+
+        // Validação de Max Owned (limite máximo de stock acumulado)
+        if (currentStock + quantityToAdd > consumableRule.maxOwned) {
+          throw new Error(`Atingiste o stock máximo de «${consumableRule.name}» (${consumableRule.maxOwned} un.). Usa as que possuis antes de comprar mais.`)
+        }
+
+        // Validação de Limite Diário de Compras
+        const boughtToday = dailyPurchasesMap[consumableRule.canonicalId] || 0
+        if (boughtToday >= consumableRule.dailyLimit) {
+          throw new Error(`Atingiste o limite diário de compras para «${consumableRule.name}» (${consumableRule.dailyLimit}/dia). Volta amanhã!`)
+        }
+      }
+
+      // 3. Verificar saldo suficiente
       if (currentBalance < item.price) {
         throw new Error(`Não tens € Acorda suficientes. Necessitas de €${item.price.toLocaleString('pt-PT')}, mas o teu saldo é de €${currentBalance.toLocaleString('pt-PT')}.`)
       }
 
       const newBalance = currentBalance - item.price
       const updatedInventory = { ...currentInventory }
+      const updatePayload: Record<string, any> = {
+        euros: newBalance,
+        coins: newBalance,
+        updatedAt: serverTimestamp(),
+      }
 
-      // Tratar packs especiais
+      // 4. Atribuição de itens e atualização de inventário
       if (itemId === 'pack_iniciado') {
-        updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 2
-        updatedInventory['consumable_pista'] = (updatedInventory['consumable_pista'] || 0) + 2
+        updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 1
+        updatedInventory['consumable_pista'] = (updatedInventory['consumable_pista'] || 0) + 1
         updatedInventory['frame_verde_esperanca'] = 1
+        updatePayload['consumables.help5050'] = updatedInventory['consumable_50_50']
       } else if (itemId === 'pack_mestre') {
-        updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 5
-        updatedInventory['consumable_congelar_tempo'] = (updatedInventory['consumable_congelar_tempo'] || 0) + 5
-        updatedInventory['consumable_protecao_streak'] = (updatedInventory['consumable_protecao_streak'] || 0) + 2
+        updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 2
+        updatedInventory['consumable_congelar_tempo'] = (updatedInventory['consumable_congelar_tempo'] || 0) + 1
+        updatedInventory['consumable_protecao_streak'] = (updatedInventory['consumable_protecao_streak'] || 0) + 1
         updatedInventory['frame_azulejo_nobre'] = 1
+        updatePayload['consumables.help5050'] = updatedInventory['consumable_50_50']
+        updatePayload['consumables.freezeTime'] = updatedInventory['consumable_congelar_tempo']
+      } else if (consumableRule) {
+        const currentStock = updatedInventory[consumableRule.canonicalId] || 0
+        const newStock = currentStock + (consumableRule.quantityGranted || 1)
+        updatedInventory[consumableRule.canonicalId] = newStock
+        consumableRule.aliases.forEach(alias => {
+          updatedInventory[alias] = newStock
+        })
+
+        if (consumableRule.consumableType === 'help5050') {
+          updatePayload['consumables.help5050'] = newStock
+        } else if (consumableRule.consumableType === 'freezeTime') {
+          updatePayload['consumables.freezeTime'] = newStock
+        } else if (consumableRule.consumableType === 'publicVote') {
+          updatePayload['consumables.publicVote'] = newStock
+        }
+
+        // Incrementar compras do dia
+        dailyPurchasesMap[consumableRule.canonicalId] = (dailyPurchasesMap[consumableRule.canonicalId] || 0) + 1
+        updatePayload[`dailyPurchases.${todayStr}`] = dailyPurchasesMap
       } else {
         updatedInventory[itemId] = (updatedInventory[itemId] || 0) + 1
       }
 
-      // 1. Atualizar documento do utilizador
-      transaction.update(userRef, {
-        euros: newBalance,
-        coins: newBalance,
-        inventory: updatedInventory,
-        updatedAt: serverTimestamp(),
-      })
+      updatePayload.inventory = updatedInventory
 
-      // 2. Registar transação no histórico
+      // 5. Executar update atómico
+      transaction.update(userRef, updatePayload)
+
+      // 6. Registar transação financeira imutável
       const txRef = doc(collection(db, 'users', userId, 'transactions'))
       transaction.set(txRef, {
         id: txRef.id,
@@ -601,8 +650,18 @@ export async function equipItem(
 
   let targetSlot = slot
   if (!targetSlot && itemId) {
-    if (itemId.startsWith('tit_') || itemId.startsWith('title_')) {
+    if (itemId.startsWith('tit_') || itemId.startsWith('title_') || itemId.startsWith('vip_title_')) {
       targetSlot = 'title'
+    } else if (itemId.startsWith('avatar_') || itemId.startsWith('vip_avatar_')) {
+      targetSlot = 'avatar'
+    } else if (itemId.startsWith('frame_') || itemId.startsWith('vip_frame_')) {
+      targetSlot = 'frame'
+    } else if (itemId.startsWith('arena_') || itemId.startsWith('vip_arena_')) {
+      targetSlot = 'arena'
+    } else if (itemId.startsWith('emote_') || itemId.startsWith('vip_emote_')) {
+      targetSlot = 'emote'
+    } else if (itemId.startsWith('pack_') || itemId.startsWith('vip_tauntpack_')) {
+      targetSlot = 'tauntpack'
     } else {
       const item = SHOP_CATALOG.find((i) => i.id === itemId)
       if (item) {
@@ -628,10 +687,16 @@ export async function equipItem(
       const data = userDoc.data()
       const inventory = data.inventory || {}
       const equipped = data.equipped || {}
+      const vipEntitlements: string[] = data.vipEntitlements || []
 
       // theme_matriz_tron é grátis e desbloqueado para todos
-      if (itemId && itemId !== 'theme_matriz_tron' && !inventory[itemId]) {
-        throw new Error('Não possuis este item no inventário.')
+      if (itemId && itemId !== 'theme_matriz_tron') {
+        const isVip = itemId.startsWith('vip_')
+        const hasVipEntitlement = isVip && vipEntitlements.includes(itemId)
+        const inInventory = Boolean(inventory[itemId] && inventory[itemId] > 0)
+        if (!inInventory && !hasVipEntitlement) {
+          throw new Error('Não possuis este item no inventário.')
+        }
       }
 
       const updatedEquipped = { ...equipped }
@@ -648,6 +713,19 @@ export async function equipItem(
 
       if (targetSlot === 'theme') {
         updatePayload.equipped_game_theme = itemId || 'theme_matriz_tron'
+      } else if (targetSlot === 'avatar') {
+        updatePayload.avatar = itemId
+        updatePayload.avatarId = itemId
+        if (itemId) {
+          updatePayload.photoURL = getAvatarById(itemId).image
+        }
+      } else if (targetSlot === 'frame') {
+        updatePayload.frame = itemId
+        updatePayload.frameId = itemId
+      } else if (targetSlot === 'arena') {
+        updatePayload.arena = itemId
+        updatePayload.arenaId = itemId
+        updatePayload.equipped_arena = itemId
       }
 
       transaction.update(userRef, updatePayload)
@@ -740,6 +818,7 @@ export type ConsumablePowerUpId =
   | 'consumable_public_vote'
   | 'HELP_005'
   | 'ajuda_publico'
+  | 'consumable_protecao_streak'
 
 /**
  * Consome 1 unidade de power-up do inventário de forma atómica no Firestore
@@ -760,19 +839,45 @@ export async function useConsumablePowerUp(
       if (!userDoc.exists()) throw new Error('Utilizador não encontrado.')
 
       const data = userDoc.data()
-      const inventory: Record<string, number> = data.inventory || {}
+      const inventory: Record<string, any> = data.inventory || {}
+      const consumables: Record<string, any> = data.consumables || {}
       
-      const count1 = inventory[powerUpId] || 0
-      const count2 = (powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico')
-        ? (inventory['HELP_005'] || inventory['consumable_public_vote'] || data.consumables?.publicVote || 0)
-        : 0
-      const currentCount = Math.max(count1, count2)
+      let currentCount = 0
+      if (powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico') {
+        currentCount = Math.max(
+          Number(inventory['HELP_005']) || 0,
+          Number(inventory['consumable_public_vote']) || 0,
+          Number(consumables.publicVote) || 0
+        )
+      } else if (powerUpId === 'consumable_50_50') {
+        currentCount = Math.max(
+          Number(inventory['consumable_50_50']) || 0,
+          Number(consumables.help5050) || 0
+        )
+      } else if (powerUpId === 'consumable_congelar_tempo') {
+        currentCount = Math.max(
+          Number(inventory['consumable_congelar_tempo']) || 0,
+          Number(consumables.freezeTime) || 0
+        )
+      } else if (powerUpId === 'consumable_pista') {
+        currentCount = Math.max(
+          Number(inventory['consumable_pista']) || 0,
+          Number(consumables.hints) || 0
+        )
+      } else if (powerUpId === 'consumable_protecao_streak') {
+        currentCount = Math.max(
+          Number(inventory['consumable_protecao_streak']) || 0,
+          Number(consumables.streakProtection) || 0
+        )
+      } else {
+        currentCount = Number(inventory[powerUpId]) || 0
+      }
 
       if (currentCount <= 0) {
         throw new Error('Não tens este power-up disponível no inventário.')
       }
 
-      const newCount = currentCount - 1
+      const newCount = Math.max(0, currentCount - 1)
       const updatedInventory = {
         ...inventory,
         [powerUpId]: newCount,
@@ -788,10 +893,20 @@ export async function useConsumablePowerUp(
 
       if (powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico') {
         updatePayload['consumables.publicVote'] = newCount
+        updatePayload['inventory.HELP_005'] = newCount
+        updatePayload['inventory.consumable_public_vote'] = newCount
       } else if (powerUpId === 'consumable_50_50') {
         updatePayload['consumables.help5050'] = newCount
+        updatePayload['inventory.consumable_50_50'] = newCount
       } else if (powerUpId === 'consumable_congelar_tempo') {
         updatePayload['consumables.freezeTime'] = newCount
+        updatePayload['inventory.consumable_congelar_tempo'] = newCount
+      } else if (powerUpId === 'consumable_pista') {
+        updatePayload['consumables.hints'] = newCount
+        updatePayload['inventory.consumable_pista'] = newCount
+      } else if (powerUpId === 'consumable_protecao_streak') {
+        updatePayload['consumables.streakProtection'] = newCount
+        updatePayload['inventory.consumable_protecao_streak'] = newCount
       }
 
       transaction.update(userRef, updatePayload)

@@ -27,8 +27,9 @@ async function runMasterAudit() {
   let brokenAssets = 0
   ARENA_SHOP_CATALOG.forEach(arena => {
     if (!arena.id || !arena.name || !arena.category) brokenAssets++
-    const basename = path.basename(arena.image || '')
-    if (!basename || !fs.existsSync(path.join(arenasDir, basename))) missingImages++
+    const relPath = (arena.image || '').replace(/^\//, '')
+    const fullPath = path.join(process.cwd(), 'public', relPath)
+    if (!relPath || !fs.existsSync(fullPath)) missingImages++
   })
 
   // 3. Validar Artefactos de Release Android
@@ -76,8 +77,11 @@ async function runMasterAudit() {
   console.log('DISTRICTS                     PASS')
   console.log('PROFILE                       PASS\n')
 
+  const baseArenas = ARENA_SHOP_CATALOG.filter(a => !a.id.startsWith('vip_'))
+  const vipArenas = ARENA_SHOP_CATALOG.filter(a => a.id.startsWith('vip_'))
+
   console.log('STORE                         PASS')
-  console.log(`ARENAS (CATALOG)              ${ARENA_SHOP_CATALOG.length}/43 PASS`)
+  console.log(`ARENAS (CATALOG)              ${ARENA_SHOP_CATALOG.length} (${baseArenas.length} Base + ${vipArenas.length} VIP) PASS`)
   console.log('STORE IMAGES                  PASS')
   console.log('GAME BACKGROUNDS              PASS')
   console.log(`DUPLICATE IMAGES              ${duplicateCount}`)
@@ -105,8 +109,8 @@ async function runMasterAudit() {
   console.log('========================================================')
 
   if (
-    physicalArenas.length === 43 &&
-    ARENA_SHOP_CATALOG.length === 43 &&
+    physicalArenas.length >= 43 &&
+    ARENA_SHOP_CATALOG.length >= 43 &&
     duplicateCount === 0 &&
     missingImages === 0 &&
     brokenAssets === 0 &&

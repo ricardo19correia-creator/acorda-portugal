@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="f4_sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+  </defs>
+  <rect x="28" y="28" width="456" height="456" rx="40" fill="none" stroke="url(#f4_sky)" stroke-width="12" />
+  <!-- Laurel leaves around frame border -->
+  <g fill="url(#f4_sky)">
+    <ellipse cx="60" cy="60" rx="14" ry="7" transform="rotate(45 60 60)" />
+    <ellipse cx="452" cy="60" rx="14" ry="7" transform="rotate(-45 452 60)" />
+    <ellipse cx="60" cy="452" rx="14" ry="7" transform="rotate(-45 60 452)" />
+    <ellipse cx="452" cy="452" rx="14" ry="7" transform="rotate(45 452 452)" />
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg_nav" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#0C4A6E" />
+      <stop offset="70%" stop-color="#082F49" />
+      <stop offset="100%" stop-color="#02121E" />
+    </radialGradient>
+    <linearGradient id="ocean_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="gold_brass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" />
+      <stop offset="100%" stop-color="#CA8A04" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg_nav)" />
+  <!-- Wind Rose Compass in Background -->
+  <circle cx="256" cy="240" r="180" fill="none" stroke="url(#gold_brass)" stroke-width="2" stroke-dasharray="6,6" opacity="0.4" />
+  <g opacity="0.35" fill="url(#gold_brass)">
+    <polygon points="256,60 264,240 256,220 248,240" />
+    <polygon points="256,420 264,240 256,260 248,240" />
+    <polygon points="76,240 256,248 236,240 256,232" />
+    <polygon points="436,240 256,248 276,240 256,232" />
+  </g>
+
+  <!-- Captain Coat -->
+  <path d="M120 512 C120 370, 190 330, 256 330 C322 330, 392 370, 392 512 Z" fill="#032B44" stroke="url(#gold_brass)" stroke-width="5" />
+  <path d="M220 340 L256 420 L292 340 Z" fill="#F8FAFC" stroke="url(#gold_brass)" stroke-width="2" />
+  <!-- Gold epaulets -->
+  <ellipse cx="140" cy="375" rx="35" ry="18" fill="url(#gold_brass)" />
+  <ellipse cx="372" cy="375" rx="35" ry="18" fill="url(#gold_brass)" />
+
+  <!-- Head, Determined Navigator Face -->
+  <circle cx="256" cy="240" r="70" fill="#FDBA74" />
+  <path d="M196 230 C196 300, 230 330, 256 330 C282 330, 316 300, 316 230 C296 250, 276 260, 256 260 C236 260, 216 250, 196 230 Z" fill="#451A03" />
+
+  <!-- Navigator Eyes scanning the horizon -->
+  <ellipse cx="235" cy="225" rx="8" ry="5" fill="#0F172A" />
+  <ellipse cx="277" cy="225" rx="8" ry="5" fill="#0F172A" />
+  <circle cx="237" cy="223" r="2.5" fill="#38BDF8" />
+  <circle cx="279" cy="223" r="2.5" fill="#38BDF8" />
+
+  <!-- Classic Bicorne/Captains Hat with Order of Christ Cross -->
+  <path d="M140 180 C180 100, 332 100, 372 180 C320 170, 192 170, 140 180 Z" fill="#021727" stroke="url(#gold_brass)" stroke-width="5" />
+  <!-- Red Cross of Christ -->
+  <g transform="translate(256, 145) scale(0.7)">
+    <path d="M-15 -35 L15 -35 L10 -15 L35 -15 L35 15 L10 15 L15 35 L-15 35 L-10 15 L-35 15 L-35 -15 L-10 -15 Z" fill="#DC2626" stroke="#FFF" stroke-width="3" />
+  </g>
+
+  <!-- Banner Badge -->
+  <rect x="136" y="460" width="240" height="36" rx="18" fill="#021727" stroke="url(#ocean_grad)" stroke-width="3" />
+  <text x="256" y="484" text-anchor="middle" fill="#38BDF8" font-family="sans-serif" font-weight="900" font-size="14" letter-spacing="2">NAVEGADOR SUPREMO</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg_conq" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#451A03" />
+      <stop offset="60%" stop-color="#1C0A00" />
+      <stop offset="100%" stop-color="#080200" />
+    </radialGradient>
+    <linearGradient id="gold_armor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="40%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#78350F" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg_conq)" />
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#gold_armor)" stroke-width="4" stroke-dasharray="8,4" opacity="0.7" />
+
+  <!-- Cuirass Armor -->
+  <path d="M120 512 C120 370, 180 340, 256 340 C332 340, 392 370, 392 512 Z" fill="url(#gold_armor)" stroke="#451A03" stroke-width="6" />
+  <!-- Collar / Gorget -->
+  <path d="M190 340 C200 390, 312 390, 322 340 Z" fill="#78350F" stroke="#FDE68A" stroke-width="3" />
+
+  <!-- Conquistador Head & Stern Look -->
+  <circle cx="256" cy="240" r="70" fill="#FDBA74" />
+  <!-- Spanish/Portuguese Styled Goatee -->
+  <path d="M236 290 L256 345 L276 290 Z" fill="#1C1917" />
+  <path d="M220 270 Q256 255 292 270 Q256 285 220 270 Z" fill="#1C1917" />
+
+  <!-- Fierce Eyes -->
+  <ellipse cx="235" cy="230" rx="8" ry="4.5" fill="#1C1917" />
+  <ellipse cx="277" cy="230" rx="8" ry="4.5" fill="#1C1917" />
+  <circle cx="236" cy="228" r="2" fill="#F59E0B" />
+  <circle cx="278" cy="228" r="2" fill="#F59E0B" />
+
+  <!-- Classic Morion Helmet -->
+  <path d="M130 200 C200 170, 312 170, 382 200 C340 215, 172 215, 130 200 Z" fill="url(#gold_armor)" stroke="#451A03" stroke-width="4" />
+  <path d="M190 195 C190 120, 322 120, 322 195 Z" fill="url(#gold_armor)" stroke="#451A03" stroke-width="4" />
+  <!-- Morion High Curved Comb -->
+  <path d="M246 80 C246 80, 256 60, 266 80 L266 180 L246 180 Z" fill="url(#gold_armor)" stroke="#FFF" stroke-width="2" />
+  <path d="M236 70 C240 50, 272 50, 276 70 C270 120, 242 120, 236 70 Z" fill="#B45309" />
+
+  <!-- Banner Badge -->
+  <rect x="156" y="460" width="200" height="36" rx="18" fill="#1C1917" stroke="url(#gold_armor)" stroke-width="3" />
+  <text x="256" y="484" text-anchor="middle" fill="#F59E0B" font-family="sans-serif" font-weight="900" font-size="14" letter-spacing="2">CONQUISTADOR</text>
+</svg>

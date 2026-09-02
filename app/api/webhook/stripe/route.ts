@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getStripeInstance, STRIPE_WEBHOOK_SECRET } from '@/lib/stripe'
 import { getRealProductById } from '@/lib/real-products'
+import { getVipProductById } from '@/src/data/vipCatalog'
 import { db } from '@/lib/firebase'
-import { doc, runTransaction, serverTimestamp } from 'firebase/firestore'
+import { doc, runTransaction, serverTimestamp, arrayUnion, arrayRemove } from 'firebase/firestore'
 import { calculateLevelProgress } from '@/lib/progression'
 
 export const dynamic = 'force-dynamic'
@@ -43,8 +44,10 @@ export async function POST(request: Request) {
         return NextResponse.json({ received: true, error: 'Metadata incompleta' })
       }
 
-      const product = getRealProductById(productId)
-      if (!product) {
+      const vipProduct = getVipProductById(productId)
+      const legacyProduct = !vipProduct ? getRealProductById(productId) : null
+
+      if (!vipProduct && !legacyProduct) {
         console.error('[STRIPE WEBHOOK] Produto inexistente no catálogo:', productId)
         return NextResponse.json({ received: true, error: 'Produto inválido' })
       }
@@ -68,84 +71,159 @@ export async function POST(request: Request) {
             throw new Error(`Utilizador ${userId} não encontrado na base de dados.`)
           }
 
-          const userData = userSnap.data()
-          const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
-          const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-          const currentInventory: Record<string, number> = userData.inventory || {}
-          const currentBadges: string[] = userData.badges || []
+          if (vipProduct) {
+            // =========================================================================
+            // ENTREGA DO ITEM VIP (€ REAL) COM ENTITLEMENT
+            // =========================================================================
+            const entitlementRef = doc(db, 'users', userId, 'entitlements', vipProduct.id)
 
-          // 2. Calcular recompensas
-          const reward = product.reward
-          const newEuros = currentEuros + (reward.euros || 0)
-          const newXp = currentXp + (reward.xp || 0)
-          const levelProgress = calculateLevelProgress(newXp)
-          const newLevel = levelProgress.currentLevel.level
+            t.set(entitlementRef, {
+              productId: vipProduct.id,
+              sku: vipProduct.sku,
+              category: vipProduct.category,
+              acquisitionType: 'vip_real_money',
+              acquiredAt: serverTimestamp(),
+              paymentId: transactionId,
+              status: 'active',
+              entitlementType: 'permanent',
+              priceCents: vipProduct.priceCents,
+              currency: 'EUR',
+            }, { merge: true })
 
-          const updatedInventory = { ...currentInventory }
-          if (reward.items) {
-            Object.entries(reward.items).forEach(([itemId, qty]) => {
-              updatedInventory[itemId] = (updatedInventory[itemId] || 0) + qty
+            const updates: Record<string, any> = {
+              [`inventory.${vipProduct.id}`]: 1,
+              vipEntitlements: arrayUnion(vipProduct.id),
+              updatedAt: serverTimestamp(),
+            }
+
+            if (vipProduct.category === 'avatar') {
+              updates['inventory.avatars'] = arrayUnion(vipProduct.id)
+              updates['unlockedAvatars'] = arrayUnion(vipProduct.id)
+            } else if (vipProduct.category === 'frame') {
+              updates['inventory.frames'] = arrayUnion(vipProduct.id)
+              updates['unlockedFrames'] = arrayUnion(vipProduct.id)
+            } else if (vipProduct.category === 'title') {
+              updates['inventory.titles'] = arrayUnion(vipProduct.id)
+              updates['ownedTitleIds'] = arrayUnion(vipProduct.id)
+            } else if (vipProduct.category === 'arena') {
+              updates['inventory.arenas'] = arrayUnion(vipProduct.id)
+              updates['unlockedArenas'] = arrayUnion(vipProduct.id)
+            } else if (vipProduct.category === 'emote') {
+              updates['inventory.emotes'] = arrayUnion(vipProduct.id)
+              updates['unlockedEmotes'] = arrayUnion(vipProduct.id)
+            } else if (vipProduct.category === 'tauntpack') {
+              updates['inventory.tauntpacks'] = arrayUnion(vipProduct.id)
+              updates['unlockedTauntPacks'] = arrayUnion(vipProduct.id)
+              if (vipProduct.taunts) {
+                vipProduct.taunts.forEach((tItem) => {
+                  updates['inventory.taunts'] = arrayUnion(tItem.id)
+                })
+              }
+            }
+
+            t.update(userRef, updates)
+
+            const txData = {
+              id: transactionId,
+              userId,
+              type: 'vip_real_money_purchase',
+              status: 'paid',
+              productId: vipProduct.id,
+              sku: vipProduct.sku,
+              category: vipProduct.category,
+              productName: vipProduct.name,
+              amountInCents: vipProduct.priceCents,
+              currency: 'EUR',
+              stripeSessionId: session.id,
+              acquisitionType: 'vip_real_money',
+              entitlementType: 'permanent',
+              reason: `Compra VIP (€ Real): ${vipProduct.name}`,
+              createdAt: serverTimestamp(),
+              processedAt: serverTimestamp(),
+            }
+
+            t.set(userTxRef, txData)
+            t.set(globalTxRef, txData)
+          } else if (legacyProduct) {
+            // =========================================================================
+            // ENTREGA DE PRODUTO LEGADO
+            // =========================================================================
+            const userData = userSnap.data()
+            const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
+            const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+            const currentInventory: Record<string, number> = userData.inventory || {}
+            const currentBadges: string[] = userData.badges || []
+
+            const reward = legacyProduct.reward
+            const newEuros = currentEuros + (reward.euros || 0)
+            const newXp = currentXp + (reward.xp || 0)
+            const levelProgress = calculateLevelProgress(newXp)
+            const newLevel = levelProgress.currentLevel.level
+
+            const updatedInventory = { ...currentInventory }
+            if (reward.items) {
+              Object.entries(reward.items).forEach(([itemId, qty]) => {
+                updatedInventory[itemId] = (updatedInventory[itemId] || 0) + qty
+              })
+            }
+
+            const updatedBadges = [...currentBadges]
+            if (reward.badge && !updatedBadges.includes(reward.badge)) {
+              updatedBadges.push(reward.badge)
+            }
+
+            t.update(userRef, {
+              euros: newEuros,
+              xp: newXp,
+              level: newLevel,
+              inventory: updatedInventory,
+              badges: updatedBadges,
+              ...(reward.vipPass ? { isVip: true, vipPassPurchasedAt: serverTimestamp() } : {}),
+              ...(reward.isFounder
+                ? {
+                    is_founder: true,
+                    isFounder: true,
+                    founderMultiplier: 1.25,
+                    founderPurchasedAt: serverTimestamp(),
+                  }
+                : {}),
+              ...(reward.authorLicense
+                ? {
+                    can_submit_questions: true,
+                    hasAuthorLicense: true,
+                    authorLicensePurchasedAt: serverTimestamp(),
+                  }
+                : {}),
+              updatedAt: serverTimestamp(),
             })
+
+            const txData = {
+              id: transactionId,
+              userId,
+              type: 'stripe_purchase',
+              status: 'paid',
+              productId: legacyProduct.id,
+              productName: legacyProduct.name,
+              amountInCents: legacyProduct.priceInCents,
+              currency: legacyProduct.currency,
+              stripeSessionId: session.id,
+              rewardsDelivered: {
+                euros: reward.euros,
+                xp: reward.xp,
+                items: reward.items || {},
+                badge: reward.badge || null,
+              },
+              reason: `Compra de Pacote: ${legacyProduct.name}`,
+              createdAt: serverTimestamp(),
+              processedAt: serverTimestamp(),
+            }
+
+            t.set(userTxRef, txData)
+            t.set(globalTxRef, txData)
           }
-
-          const updatedBadges = [...currentBadges]
-          if (reward.badge && !updatedBadges.includes(reward.badge)) {
-            updatedBadges.push(reward.badge)
-          }
-
-          // 3. Atualizar perfil do utilizador
-          t.update(userRef, {
-            euros: newEuros,
-            xp: newXp,
-            level: newLevel,
-            inventory: updatedInventory,
-            badges: updatedBadges,
-            ...(reward.vipPass ? { isVip: true, vipPassPurchasedAt: serverTimestamp() } : {}),
-            ...(reward.isFounder
-              ? {
-                  is_founder: true,
-                  isFounder: true,
-                  founderMultiplier: 1.25,
-                  founderPurchasedAt: serverTimestamp(),
-                }
-              : {}),
-            ...(reward.authorLicense
-              ? {
-                  can_submit_questions: true,
-                  hasAuthorLicense: true,
-                  authorLicensePurchasedAt: serverTimestamp(),
-                }
-              : {}),
-            updatedAt: serverTimestamp(),
-          })
-
-          // 4. Registar no histórico de transações do utilizador
-          const txData = {
-            id: transactionId,
-            userId,
-            type: 'stripe_purchase',
-            status: 'paid',
-            productId: product.id,
-            productName: product.name,
-            amountInCents: product.priceInCents,
-            currency: product.currency,
-            stripeSessionId: session.id,
-            rewardsDelivered: {
-              euros: reward.euros,
-              xp: reward.xp,
-              items: reward.items || {},
-              badge: reward.badge || null,
-            },
-            reason: `Compra de Pacote: ${product.name}`,
-            createdAt: serverTimestamp(),
-            processedAt: serverTimestamp(),
-          }
-
-          t.set(userTxRef, txData)
-          t.set(globalTxRef, txData)
         })
 
-        console.log(`[STRIPE WEBHOOK SUCCESS] Entrega de «${product.name}» concluída para utilizador ${userId}!`)
+        console.log(`[STRIPE WEBHOOK SUCCESS] Entrega de «${vipProduct?.name || legacyProduct?.name}» concluída para utilizador ${userId}!`)
       } catch (procErr) {
         console.error('[STRIPE WEBHOOK PROCESSING ERROR]:', procErr)
         return NextResponse.json({ error: 'Erro ao processar entrega' }, { status: 500 })
@@ -173,10 +251,25 @@ export async function POST(request: Request) {
                   status: 'refunded',
                   refundedAt: serverTimestamp(),
                 })
+
+                // Revogar entitlement caso seja compra VIP
+                if (data.productId) {
+                  const entitlementRef = doc(db, 'users', data.userId, 'entitlements', data.productId)
+                  t.update(entitlementRef, {
+                    status: 'revoked',
+                    revokedAt: serverTimestamp(),
+                  })
+                  const userRef = doc(db, 'users', data.userId)
+                  t.update(userRef, {
+                    vipEntitlements: arrayRemove(data.productId),
+                    [`inventory.${data.productId}`]: 0,
+                    updatedAt: serverTimestamp(),
+                  })
+                }
               }
             }
           })
-          console.log('[STRIPE WEBHOOK REFUND] Reembolso registado para:', paymentIntentId)
+          console.log('[STRIPE WEBHOOK REFUND] Reembolso e revogação processados para:', paymentIntentId)
         } catch (refErr) {
           console.warn('[STRIPE WEBHOOK REFUND ERROR]:', refErr)
         }

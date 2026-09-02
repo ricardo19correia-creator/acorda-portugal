@@ -46,7 +46,7 @@
     "question": "O famoso doce tradicional «Pastel de Belém» é originário de que localidade ou distrito de Portugal?",
     "options": [
       "Lisboa",
-      "Lisboa",
+      "Porto",
       "Açores",
       "Coimbra"
     ],
@@ -74,7 +74,7 @@
     "question": "Em que distrito português se situa a famosa cidade de Porto?",
     "options": [
       "Faro",
-      "Porto",
+      "Lisboa",
       "Porto",
       "Braga"
     ],
@@ -131,10 +131,10 @@
     "options": [
       "Faro",
       "Porto",
-      "Braga",
+      "Viseu",
       "Braga"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 3,
     "difficulty": 1,
     "category": "Desafio Nacional",
     "districtRef": "Braga"
@@ -496,7 +496,7 @@
       "Coimbra",
       "Lisboa",
       "Açores",
-      "Coimbra"
+      "Évora"
     ],
     "correctAnswer": 0,
     "difficulty": 1,
@@ -969,7 +969,7 @@
     "id": "DN_0070",
     "question": "Em que distrito português se situa a famosa cidade de Faro?",
     "options": [
-      "Faro",
+      "Aveiro",
       "Porto",
       "Faro",
       "Braga"
@@ -1055,7 +1055,7 @@
     "options": [
       "Açores",
       "Lisboa",
-      "Açores",
+      "Madeira",
       "Coimbra"
     ],
     "correctAnswer": 0,
@@ -1097,7 +1097,7 @@
     "options": [
       "Minho",
       "Algarve",
-      "Madeira",
+      "Açores",
       "Madeira"
     ],
     "correctAnswer": 3,
@@ -1294,7 +1294,7 @@
       "Lisboa",
       "Bragança",
       "Faro",
-      "Bragança"
+      "Vila Real"
     ],
     "correctAnswer": 1,
     "difficulty": 1,
@@ -1322,9 +1322,9 @@
       "Bragança",
       "Lisboa",
       "Faro",
-      "Bragança"
+      "Guarda"
     ],
-    "correctAnswer": 3,
+    "correctAnswer": 0,
     "difficulty": 1,
     "category": "Desafio Nacional",
     "districtRef": "Bragança"
@@ -1712,7 +1712,7 @@
     "question": "Em que distrito português fica situado o concelho de Sintra?",
     "options": [
       "Bragança",
-      "Lisboa",
+      "Setúbal",
       "Faro",
       "Lisboa"
     ],
@@ -1739,7 +1739,7 @@
     "id": "DN_0125",
     "question": "Em que distrito português fica situado o concelho de Cascais?",
     "options": [
-      "Lisboa",
+      "Leiria",
       "Lisboa",
       "Faro",
       "Bragança"
@@ -1768,7 +1768,7 @@
     "question": "Em que distrito português fica situado o concelho de Mafra?",
     "options": [
       "Bragança",
-      "Lisboa",
+      "Santarém",
       "Faro",
       "Lisboa"
     ],
@@ -1795,7 +1795,7 @@
     "id": "DN_0129",
     "question": "Em que distrito português fica situado o concelho de Torres Vedras?",
     "options": [
-      "Lisboa",
+      "Castelo Branco",
       "Lisboa",
       "Faro",
       "Bragança"
@@ -2076,11 +2076,11 @@
     "question": "Em que distrito português fica situado o concelho de Lagos?",
     "options": [
       "Lisboa",
-      "Faro",
+      "Beja",
       "Faro",
       "Bragança"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "difficulty": 1,
     "category": "Desafio Nacional",
     "districtRef": "Faro"
@@ -2105,7 +2105,7 @@
     "options": [
       "Bragança",
       "Lisboa",
-      "Faro",
+      "Évora",
       "Faro"
     ],
     "correctAnswer": 3,
@@ -2132,11 +2132,11 @@
     "question": "Em que distrito português fica situado o concelho de Tavira?",
     "options": [
       "Lisboa",
-      "Faro",
+      "Portalegre",
       "Faro",
       "Bragança"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "difficulty": 1,
     "category": "Desafio Nacional",
     "districtRef": "Faro"
@@ -5858,7 +5858,7 @@
       "O Bravo",
       "O Santo",
       "O Magnífico",
-      "O Bravo"
+      "O Lavrador"
     ],
     "correctAnswer": 0,
     "difficulty": 2,

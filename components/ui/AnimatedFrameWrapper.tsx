@@ -523,6 +523,117 @@ export function AnimatedFrameWrapper({
     );
   }
 
+  // =========================================================================
+  // 6. EXCLUSIVOS VIP (€ REAL)
+  // =========================================================================
+
+  // 6.1 COROA IMPERIAL PORTUGUESA (Mítico)
+  if (frame.id === 'vip_frame_001') {
+    return (
+      <div className={`relative w-full h-full p-[4px] rounded-2xl bg-gradient-to-tr from-amber-600 via-yellow-300 to-rose-600 border-2 border-amber-300 shadow-[0_0_30px_rgba(245,158,11,0.85)] animate-pulse ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-3.5 left-1/2 -translate-x-1/2 text-[14px] filter drop-shadow-[0_0_10px_#f59e0b] z-20">👑</span>
+            <span className="pointer-events-none absolute -bottom-1.5 -left-1 text-[9px] text-amber-300 filter drop-shadow-[0_0_5px_#f59e0b] z-20">⚜️</span>
+            <span className="pointer-events-none absolute -bottom-1.5 -right-1 text-[9px] text-amber-300 filter drop-shadow-[0_0_5px_#f59e0b] z-20">⚜️</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[12px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // 6.2 PORTUGAL DOURADO (Lendário)
+  if (frame.id === 'vip_frame_002') {
+    return (
+      <div className={`relative w-full h-full p-[3.5px] rounded-2xl bg-gradient-to-b from-yellow-400 via-emerald-500 to-amber-500 border border-yellow-300 shadow-[0_0_24px_rgba(234,179,8,0.75)] ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] filter drop-shadow-[0_0_8px_#eab308] z-20">🇵🇹</span>
+            <span className="pointer-events-none absolute -bottom-1 -left-1 text-[9px] text-yellow-300 z-20">✨</span>
+            <span className="pointer-events-none absolute -bottom-1 -right-1 text-[9px] text-yellow-300 z-20">✨</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[12px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // 6.3 REINO CELESTIAL (Lendário)
+  if (frame.id === 'vip_frame_003') {
+    return (
+      <div className={`relative w-full h-full p-[3.5px] rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-400 to-sky-400 border border-indigo-300 shadow-[0_0_22px_rgba(129,140,248,0.7)] ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] filter drop-shadow-[0_0_8px_#818cf8] z-20">🌌</span>
+            <span className="pointer-events-none absolute top-1 -right-1 text-[8px] text-purple-300 animate-spin z-20">✦</span>
+            <span className="pointer-events-none absolute -bottom-1 left-1 text-[8px] text-sky-300 z-20">✦</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[12px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // 6.4 GLÓRIA NACIONAL (Épico)
+  if (frame.id === 'vip_frame_004') {
+    return (
+      <div className={`relative w-full h-full p-[3px] rounded-2xl bg-gradient-to-tr from-sky-400 via-blue-600 to-cyan-300 border border-sky-300 shadow-[0_0_18px_rgba(56,189,248,0.65)] ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] filter drop-shadow-[0_0_6px_#38bdf8] z-20">🎖️</span>
+            <span className="pointer-events-none absolute -bottom-1 -left-1 text-[9px] text-sky-300 z-20">🌿</span>
+            <span className="pointer-events-none absolute -bottom-1 -right-1 text-[9px] text-sky-300 z-20">🌿</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[13px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // 6.5 DIAMANTE LUSITANO (Épico)
+  if (frame.id === 'vip_frame_005') {
+    return (
+      <div className={`relative w-full h-full p-[3px] rounded-2xl bg-gradient-to-tr from-cyan-100 via-sky-300 to-indigo-200 border-2 border-white shadow-[0_0_20px_rgba(224,242,254,0.8)] ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] filter drop-shadow-[0_0_8px_#ffffff] z-20">💎</span>
+            <span className="pointer-events-none absolute -bottom-1 -right-1 text-[9px] text-white z-20">💠</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[13px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // 6.6 FOGO DE PORTUGAL (Raro)
+  if (frame.id === 'vip_frame_006') {
+    return (
+      <div className={`relative w-full h-full p-[3px] rounded-2xl bg-gradient-to-b from-red-600 via-amber-500 to-yellow-400 border border-orange-400 shadow-[0_0_18px_rgba(239,68,68,0.7)] animate-pulse ${className}`}>
+        {showOrnaments && (
+          <>
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] filter drop-shadow-[0_0_8px_#ef4444] z-20">🔥</span>
+            <span className="pointer-events-none absolute -bottom-1 -left-1 text-[8px] text-amber-300 z-20">💥</span>
+            <span className="pointer-events-none absolute -bottom-1 -right-1 text-[8px] text-amber-300 z-20">💥</span>
+          </>
+        )}
+        <div className="relative z-10 w-full h-full bg-slate-950 rounded-[13px] overflow-hidden">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   // Fallback seguro caso seja um ID desconhecido
   return (
     <div className={`relative w-full h-full p-[3px] rounded-2xl bg-slate-900 border border-cyan-500/50 shadow-[0_0_10px_rgba(6,182,212,0.3)] ${className}`}>

@@ -1,0 +1,3396 @@
+{
+  "generatedAt": "2026-09-02T14:05:38.105Z",
+  "totalDatasetRaw": 24310,
+  "totalValidRaw": 24310,
+  "totalDuplicatesExcluded": 4249,
+  "totalInvalidRejected": 0,
+  "totalUniqueActiveInGame": 20061,
+  "totalPublished": 24310,
+  "totalPlayable": 20061,
+  "totalWithoutCategory": 0,
+  "totalWithoutSubcategory": 0,
+  "categoriesCount": 18,
+  "subcategoriesOfficialCount": 233,
+  "emptyCategoriesCount": 0,
+  "emptySubcategoriesCount": 95,
+  "sourcesInventory": [
+    {
+      "id": "cat_portugal",
+      "path": "lib/data/categories/portugal.json",
+      "count": 1250,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_futebol",
+      "path": "lib/data/categories/futebol-portugues.json",
+      "count": 1110,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_atualidade",
+      "path": "lib/data/categories/atualidade.json",
+      "count": 750,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_politica",
+      "path": "lib/data/categories/portugal-politico.json",
+      "count": 950,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_empresas",
+      "path": "lib/data/categories/empresas-portuguesas.json",
+      "count": 850,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_historia",
+      "path": "lib/data/categories/historia.json",
+      "count": 1304,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_geografia",
+      "path": "lib/data/categories/geografia.json",
+      "count": 905,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_ciencia",
+      "path": "lib/data/categories/ciencia-tecnologia.json",
+      "count": 918,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_cultura",
+      "path": "lib/data/categories/cultura.json",
+      "count": 1324,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_gastronomia",
+      "path": "lib/data/categories/gastronomia.json",
+      "count": 1068,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_personalidades",
+      "path": "lib/data/categories/personalidades.json",
+      "count": 800,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_mundo",
+      "path": "lib/data/categories/mundo.json",
+      "count": 800,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_desporto",
+      "path": "lib/data/categories/desporto.json",
+      "count": 830,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_humor",
+      "path": "lib/data/categories/humor.json",
+      "count": 800,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_musica",
+      "path": "lib/data/categories/musica.json",
+      "count": 824,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_cinema",
+      "path": "lib/data/categories/cinema-tv.json",
+      "count": 917,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_visual",
+      "path": "lib/data/categories/desafio-visual.json",
+      "count": 750,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "cat_maluco",
+      "path": "lib/data/categories/modo-maluco.json",
+      "count": 660,
+      "isCategoryFile": true,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "src_desafio_nacional",
+      "path": "src/data/questions_desafio_nacional.json",
+      "count": 2000,
+      "isCategoryFile": false,
+      "isExternal": true,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "data_vila_real_500",
+      "path": "data/perguntas_vila_real_500.json",
+      "count": 500,
+      "isCategoryFile": false,
+      "isExternal": true,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "data_modo_maluco_5000",
+      "path": "data/perguntas_modo_maluco_5000.json",
+      "count": 5000,
+      "isCategoryFile": false,
+      "isExternal": true,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "lib_questions_json",
+      "path": "lib/data/questions.json",
+      "count": 12017,
+      "isCategoryFile": false,
+      "isExternal": false,
+      "isSnapshot": true,
+      "isBackup": false,
+      "isSeed": false
+    },
+    {
+      "id": "lib_questions_backup",
+      "path": "lib/data/questions-backup.json",
+      "count": 332,
+      "isCategoryFile": false,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": true,
+      "isSeed": false
+    },
+    {
+      "id": "lib_portugal_50",
+      "path": "lib/data/Portugal.json",
+      "count": 50,
+      "isCategoryFile": false,
+      "isExternal": false,
+      "isSnapshot": false,
+      "isBackup": false,
+      "isSeed": true
+    }
+  ],
+  "categories": [
+    {
+      "id": "portugal",
+      "slug": "portugal",
+      "name": "Portugal",
+      "emoji": "🇵🇹",
+      "total": 3247,
+      "valid": 3247,
+      "published": 3247,
+      "playable": 3247,
+      "percentageOfTotal": 16.19,
+      "subcategories": [
+        {
+          "id": "historia-portugal",
+          "name": "História de Portugal",
+          "total": 2200,
+          "valid": 2200,
+          "published": 2200,
+          "playable": 2200
+        },
+        {
+          "id": "geografia-portugal",
+          "name": "Geografia de Portugal",
+          "total": 55,
+          "valid": 55,
+          "published": 55,
+          "playable": 55
+        },
+        {
+          "id": "cultura-portuguesa",
+          "name": "Cultura Portuguesa",
+          "total": 553,
+          "valid": 553,
+          "published": 553,
+          "playable": 553
+        },
+        {
+          "id": "tradicoes",
+          "name": "Tradições",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        },
+        {
+          "id": "monumentos",
+          "name": "Monumentos",
+          "total": 93,
+          "valid": 93,
+          "published": 93,
+          "playable": 93
+        },
+        {
+          "id": "cidades",
+          "name": "Cidades",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "vilas-aldeias",
+          "name": "Vilas e Aldeias",
+          "total": 102,
+          "valid": 102,
+          "published": 102,
+          "playable": 102
+        },
+        {
+          "id": "praias",
+          "name": "Praias",
+          "total": 54,
+          "valid": 54,
+          "published": 54,
+          "playable": 54
+        },
+        {
+          "id": "regioes",
+          "name": "Regiões",
+          "total": 85,
+          "valid": 85,
+          "published": 85,
+          "playable": 85
+        },
+        {
+          "id": "gastronomia-portuguesa",
+          "name": "Gastronomia Portuguesa",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "personalidades-portuguesas",
+          "name": "Personalidades Portuguesas",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "curiosidades-portugal",
+          "name": "Curiosidades de Portugal",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        }
+      ]
+    },
+    {
+      "id": "atualidade",
+      "slug": "atualidade",
+      "name": "Atualidade — Portugal Agora",
+      "emoji": "📰",
+      "total": 750,
+      "valid": 750,
+      "published": 750,
+      "playable": 750,
+      "percentageOfTotal": 3.74,
+      "subcategories": [
+        {
+          "id": "politica-governo",
+          "name": "Política e Governo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "assembleia-republica",
+          "name": "Assembleia da República",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "partidos-politicos",
+          "name": "Partidos Políticos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "lideres-politicos",
+          "name": "Líderes Políticos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "economia",
+          "name": "Economia",
+          "total": 642,
+          "valid": 642,
+          "published": 642,
+          "playable": 642
+        },
+        {
+          "id": "salario-minimo",
+          "name": "Salário Mínimo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "inflacao",
+          "name": "Inflação",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "pib",
+          "name": "PIB",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "emprego",
+          "name": "Emprego",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "habitacao",
+          "name": "Habitação",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "euribor",
+          "name": "Euribor",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "turismo",
+          "name": "Turismo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "empresas-portuguesas-atual",
+          "name": "Empresas Portuguesas",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "cultura-atual",
+          "name": "Cultura",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "desporto-atual",
+          "name": "Desporto",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "acontecimentos-nacionais",
+          "name": "Acontecimentos Nacionais",
+          "total": 8,
+          "valid": 8,
+          "published": 8,
+          "playable": 8
+        },
+        {
+          "id": "noticias-verificaveis",
+          "name": "Notícias e Factos Verificáveis",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        }
+      ]
+    },
+    {
+      "id": "portugal-politico",
+      "slug": "portugal-politico",
+      "name": "Portugal Político",
+      "emoji": "🏛️",
+      "total": 950,
+      "valid": 950,
+      "published": 950,
+      "playable": 950,
+      "percentageOfTotal": 4.74,
+      "subcategories": [
+        {
+          "id": "partidos",
+          "name": "Partidos",
+          "total": 100,
+          "valid": 100,
+          "published": 100,
+          "playable": 100
+        },
+        {
+          "id": "representacao-parlamentar",
+          "name": "Representação Parlamentar",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "lideres",
+          "name": "Líderes",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "historia-politica",
+          "name": "História Política",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "instituicoes",
+          "name": "Instituições",
+          "total": 9,
+          "valid": 9,
+          "published": 9,
+          "playable": 9
+        },
+        {
+          "id": "constituicao",
+          "name": "Constituição",
+          "total": 691,
+          "valid": 691,
+          "published": 691,
+          "playable": 691
+        },
+        {
+          "id": "sistema-politico",
+          "name": "Sistema Político",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "eleicoes",
+          "name": "Eleições",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "propostas-politicas",
+          "name": "Propostas Políticas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "governos",
+          "name": "Governos",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "presidentes-republica",
+          "name": "Presidentes da República",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "primeiros-ministros",
+          "name": "Primeiros-Ministros",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        }
+      ]
+    },
+    {
+      "id": "empresas-portuguesas",
+      "slug": "empresas-portuguesas",
+      "name": "Empresas Portuguesas",
+      "emoji": "🏢",
+      "total": 850,
+      "valid": 850,
+      "published": 850,
+      "playable": 850,
+      "percentageOfTotal": 4.24,
+      "subcategories": [
+        {
+          "id": "empresas",
+          "name": "Empresas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "marcas",
+          "name": "Marcas",
+          "total": 60,
+          "valid": 60,
+          "published": 60,
+          "playable": 60
+        },
+        {
+          "id": "fundadores",
+          "name": "Fundadores",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "historia-empresarial",
+          "name": "História Empresarial",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "setores",
+          "name": "Setores",
+          "total": 640,
+          "valid": 640,
+          "published": 640,
+          "playable": 640
+        },
+        {
+          "id": "produtos",
+          "name": "Produtos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "servicos",
+          "name": "Serviços",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "empresas-historicas",
+          "name": "Empresas Históricas",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "empresas-atuais",
+          "name": "Empresas Atuais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "empresas-tecnologicas",
+          "name": "Empresas Tecnológicas",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "empresas-internacionais",
+          "name": "Empresas Internacionais Portuguesas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "futebol-portugues",
+      "slug": "futebol-portugues",
+      "name": "Futebol Português",
+      "emoji": "⚽",
+      "total": 1110,
+      "valid": 1110,
+      "published": 1110,
+      "playable": 1110,
+      "percentageOfTotal": 5.53,
+      "subcategories": [
+        {
+          "id": "clubes",
+          "name": "Clubes",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "jogadores",
+          "name": "Jogadores",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "jogadoras",
+          "name": "Jogadoras",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "estadios",
+          "name": "Estádios",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "competicoes",
+          "name": "Competições",
+          "total": 738,
+          "valid": 738,
+          "published": 738,
+          "playable": 738
+        },
+        {
+          "id": "liga-portuguesa",
+          "name": "Liga Portuguesa",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "taca-portugal",
+          "name": "Taça de Portugal",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "selecao-nacional",
+          "name": "Seleção Nacional",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "futebol-feminino",
+          "name": "Futebol Feminino",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "treinadores",
+          "name": "Treinadores",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "historia-futebol",
+          "name": "História do Futebol",
+          "total": 62,
+          "valid": 62,
+          "published": 62,
+          "playable": 62
+        },
+        {
+          "id": "momentos-marcantes",
+          "name": "Momentos Marcantes",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "derbis",
+          "name": "Dérbis & Clássicos",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "recordes-futebol",
+          "name": "Recordes",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "transferencias",
+          "name": "Transferências",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "equipamentos",
+          "name": "Equipamentos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "futebol-europeu",
+          "name": "Futebol Europeu & Clubes Portugueses",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "desafio-visual",
+      "slug": "desafio-visual",
+      "name": "Desafio Visual",
+      "emoji": "👁️",
+      "total": 750,
+      "valid": 750,
+      "published": 750,
+      "playable": 750,
+      "percentageOfTotal": 3.74,
+      "subcategories": [
+        {
+          "id": "que-lugar-e-este",
+          "name": "Que lugar é este?",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "quem-e-esta-pessoa",
+          "name": "Quem é esta pessoa?",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "bandeiras",
+          "name": "Bandeiras",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "bracoes",
+          "name": "Brasões",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "simbolos",
+          "name": "Símbolos",
+          "total": 640,
+          "valid": 640,
+          "published": 640,
+          "playable": 640
+        },
+        {
+          "id": "gastronomia-visual",
+          "name": "Gastronomia",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "futebol-visual",
+          "name": "Futebol",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "estadios-visual",
+          "name": "Estádios",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "monumentos-visual",
+          "name": "Monumentos",
+          "total": 10,
+          "valid": 10,
+          "published": 10,
+          "playable": 10
+        },
+        {
+          "id": "cidades-visual",
+          "name": "Cidades",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "praias-visual",
+          "name": "Praias",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "vilas-aldeias-visual",
+          "name": "Vilas e Aldeias",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "onde-fica-visual",
+          "name": "Onde fica?",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "encontra-detalhe",
+          "name": "Encontra o detalhe",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "fotografias-historicas",
+          "name": "Fotografias Históricas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "imagens-objetos",
+          "name": "Imagens de Objetos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "imagens-animais",
+          "name": "Imagens de Animais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "imagens-natureza",
+          "name": "Imagens de Natureza",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "desafio-visual-maluco",
+          "name": "Desafio Visual Maluco",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "modo-maluco",
+      "slug": "modo-maluco",
+      "name": "Modo Maluco",
+      "emoji": "🤪",
+      "total": 1418,
+      "valid": 1418,
+      "published": 1418,
+      "playable": 1418,
+      "percentageOfTotal": 7.07,
+      "subcategories": [
+        {
+          "id": "perguntas-absurdas",
+          "name": "Perguntas Absurdas",
+          "total": 142,
+          "valid": 142,
+          "published": 142,
+          "playable": 142
+        },
+        {
+          "id": "perguntas-inesperadas",
+          "name": "Perguntas Inesperadas",
+          "total": 152,
+          "valid": 152,
+          "published": 152,
+          "playable": 152
+        },
+        {
+          "id": "humor-maluco",
+          "name": "Humor & Rir",
+          "total": 142,
+          "valid": 142,
+          "published": 142,
+          "playable": 142
+        },
+        {
+          "id": "cultura-popular-maluca",
+          "name": "Cultura Popular Insólita",
+          "total": 142,
+          "valid": 142,
+          "published": 142,
+          "playable": 142
+        },
+        {
+          "id": "regras-aleatorias",
+          "name": "Regras Aleatórias",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        },
+        {
+          "id": "desafios-rapidos",
+          "name": "Desafios Rápidos",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        },
+        {
+          "id": "efeitos-especiais",
+          "name": "Efeitos Especiais",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        },
+        {
+          "id": "modificadores-jogo",
+          "name": "Modificadores de Jogo",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        },
+        {
+          "id": "perguntas-logica-diferente",
+          "name": "Perguntas com Lógica Diferente",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        },
+        {
+          "id": "modo-caos",
+          "name": "Modo Caos",
+          "total": 140,
+          "valid": 140,
+          "published": 140,
+          "playable": 140
+        }
+      ]
+    },
+    {
+      "id": "historia",
+      "slug": "historia",
+      "name": "História",
+      "emoji": "🏺",
+      "total": 1300,
+      "valid": 1300,
+      "published": 1300,
+      "playable": 1300,
+      "percentageOfTotal": 6.48,
+      "subcategories": [
+        {
+          "id": "historia-de-portugal",
+          "name": "História de Portugal",
+          "total": 55,
+          "valid": 55,
+          "published": 55,
+          "playable": 55
+        },
+        {
+          "id": "historia-mundial",
+          "name": "História Mundial",
+          "total": 7,
+          "valid": 7,
+          "published": 7,
+          "playable": 7
+        },
+        {
+          "id": "reis-e-rainhas",
+          "name": "Reis e Rainhas",
+          "total": 168,
+          "valid": 168,
+          "published": 168,
+          "playable": 168
+        },
+        {
+          "id": "descobrimentos",
+          "name": "Descobrimentos & Navegações",
+          "total": 685,
+          "valid": 685,
+          "published": 685,
+          "playable": 685
+        },
+        {
+          "id": "batalhas",
+          "name": "Batalhas & Conflitos",
+          "total": 111,
+          "valid": 111,
+          "published": 111,
+          "playable": 111
+        },
+        {
+          "id": "imperios",
+          "name": "Impérios Históricos",
+          "total": 57,
+          "valid": 57,
+          "published": 57,
+          "playable": 57
+        },
+        {
+          "id": "revolucoes",
+          "name": "Revoluções",
+          "total": 53,
+          "valid": 53,
+          "published": 53,
+          "playable": 53
+        },
+        {
+          "id": "republica",
+          "name": "Implantação da República",
+          "total": 51,
+          "valid": 51,
+          "published": 51,
+          "playable": 51
+        },
+        {
+          "id": "estado-novo",
+          "name": "Estado Novo",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "vinte-cinco-abril",
+          "name": "25 de Abril & Cravos",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "personalidades-historicas",
+          "name": "Personalidades Históricas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "civilizacoes-antigas",
+          "name": "Civilizações Antigas",
+          "total": 58,
+          "valid": 58,
+          "published": 58,
+          "playable": 58
+        },
+        {
+          "id": "idade-media",
+          "name": "Idade Média",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "idade-moderna",
+          "name": "Idade Moderna",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "historia-contemporanea",
+          "name": "História Contemporânea",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        }
+      ]
+    },
+    {
+      "id": "geografia",
+      "slug": "geografia",
+      "name": "Geografia",
+      "emoji": "🌍",
+      "total": 1405,
+      "valid": 1405,
+      "published": 1405,
+      "playable": 1405,
+      "percentageOfTotal": 7,
+      "subcategories": [
+        {
+          "id": "geografia-portugal",
+          "name": "Geografia de Portugal",
+          "total": 663,
+          "valid": 663,
+          "published": 663,
+          "playable": 663
+        },
+        {
+          "id": "geografia-europa",
+          "name": "Europa",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "geografia-mundo",
+          "name": "Mundo",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "paises",
+          "name": "Países",
+          "total": 8,
+          "valid": 8,
+          "published": 8,
+          "playable": 8
+        },
+        {
+          "id": "capitais",
+          "name": "Capitais",
+          "total": 55,
+          "valid": 55,
+          "published": 55,
+          "playable": 55
+        },
+        {
+          "id": "cidades-mundo",
+          "name": "Grandes Cidades",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "rios",
+          "name": "Rios",
+          "total": 7,
+          "valid": 7,
+          "published": 7,
+          "playable": 7
+        },
+        {
+          "id": "montanhas",
+          "name": "Montanhas & Serras",
+          "total": 65,
+          "valid": 65,
+          "published": 65,
+          "playable": 65
+        },
+        {
+          "id": "ilhas",
+          "name": "Ilhas & Arquipélagos",
+          "total": 4,
+          "valid": 4,
+          "published": 4,
+          "playable": 4
+        },
+        {
+          "id": "oceanos-mares",
+          "name": "Oceanos & Mares",
+          "total": 596,
+          "valid": 596,
+          "published": 596,
+          "playable": 596
+        },
+        {
+          "id": "fronteiras",
+          "name": "Fronteiras & Tratados",
+          "total": 4,
+          "valid": 4,
+          "published": 4,
+          "playable": 4
+        },
+        {
+          "id": "regioes-mundo",
+          "name": "Regiões",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "mapas",
+          "name": "Mapas & Cartografia",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "localizacao-geografica",
+          "name": "Localização Geográfica",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "ciencia-tecnologia",
+      "slug": "ciencia-tecnologia",
+      "name": "Ciência e Tecnologia",
+      "emoji": "🔬",
+      "total": 918,
+      "valid": 918,
+      "published": 918,
+      "playable": 918,
+      "percentageOfTotal": 4.58,
+      "subcategories": [
+        {
+          "id": "ciencia-geral",
+          "name": "Ciência Geral",
+          "total": 8,
+          "valid": 8,
+          "published": 8,
+          "playable": 8
+        },
+        {
+          "id": "fisica",
+          "name": "Física",
+          "total": 4,
+          "valid": 4,
+          "published": 4,
+          "playable": 4
+        },
+        {
+          "id": "quimica",
+          "name": "Química",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "biologia",
+          "name": "Biologia",
+          "total": 694,
+          "valid": 694,
+          "published": 694,
+          "playable": 694
+        },
+        {
+          "id": "astronomia-espaco",
+          "name": "Astronomia & Espaço",
+          "total": 4,
+          "valid": 4,
+          "published": 4,
+          "playable": 4
+        },
+        {
+          "id": "corpo-humano",
+          "name": "Corpo Humano",
+          "total": 53,
+          "valid": 53,
+          "published": 53,
+          "playable": 53
+        },
+        {
+          "id": "animais-natureza",
+          "name": "Animais & Natureza",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "tecnologia-geral",
+          "name": "Tecnologia",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "informatica-internet",
+          "name": "Informática & Internet",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "inteligencia-artificial",
+          "name": "Inteligência Artificial",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "invencoes",
+          "name": "Invenções",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "descobertas-cientificas",
+          "name": "Descobertas Científicas",
+          "total": 52,
+          "valid": 52,
+          "published": 52,
+          "playable": 52
+        }
+      ]
+    },
+    {
+      "id": "cultura",
+      "slug": "cultura",
+      "name": "Cultura",
+      "emoji": "🎭",
+      "total": 1324,
+      "valid": 1324,
+      "published": 1324,
+      "playable": 1324,
+      "percentageOfTotal": 6.6,
+      "subcategories": [
+        {
+          "id": "cultura-portuguesa-geral",
+          "name": "Cultura Portuguesa",
+          "total": 54,
+          "valid": 54,
+          "published": 54,
+          "playable": 54
+        },
+        {
+          "id": "cultura-mundial",
+          "name": "Cultura Mundial",
+          "total": 100,
+          "valid": 100,
+          "published": 100,
+          "playable": 100
+        },
+        {
+          "id": "arte-pintura-escultura",
+          "name": "Arte, Pintura e Escultura",
+          "total": 257,
+          "valid": 257,
+          "published": 257,
+          "playable": 257
+        },
+        {
+          "id": "literatura",
+          "name": "Literatura",
+          "total": 709,
+          "valid": 709,
+          "published": 709,
+          "playable": 709
+        },
+        {
+          "id": "teatro",
+          "name": "Teatro",
+          "total": 51,
+          "valid": 51,
+          "published": 51,
+          "playable": 51
+        },
+        {
+          "id": "fotografia",
+          "name": "Fotografia",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "musica-cultura",
+          "name": "Música Erudita & Tradicional",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cinema-cultura",
+          "name": "Cinema de Autor",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "televisao-cultura",
+          "name": "Televisão Cultural",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cultura-popular",
+          "name": "Cultura Popular",
+          "total": 102,
+          "valid": 102,
+          "published": 102,
+          "playable": 102
+        },
+        {
+          "id": "tradicoes-folclore",
+          "name": "Tradições & Folclore",
+          "total": 51,
+          "valid": 51,
+          "published": 51,
+          "playable": 51
+        }
+      ]
+    },
+    {
+      "id": "gastronomia",
+      "slug": "gastronomia",
+      "name": "Gastronomia",
+      "emoji": "🍲",
+      "total": 1068,
+      "valid": 1068,
+      "published": 1068,
+      "playable": 1068,
+      "percentageOfTotal": 5.32,
+      "subcategories": [
+        {
+          "id": "gastronomia-portuguesa-geral",
+          "name": "Gastronomia Portuguesa",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "pratos-portugueses",
+          "name": "Pratos Típicos Portugueses",
+          "total": 178,
+          "valid": 178,
+          "published": 178,
+          "playable": 178
+        },
+        {
+          "id": "doces-portugueses",
+          "name": "Doces & Sobremesas Tradicionais",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "bebidas-vinhos",
+          "name": "Bebidas & Vinhos de Portugal",
+          "total": 57,
+          "valid": 57,
+          "published": 57,
+          "playable": 57
+        },
+        {
+          "id": "ingredientes",
+          "name": "Ingredientes & Especiarias",
+          "total": 763,
+          "valid": 763,
+          "published": 763,
+          "playable": 763
+        },
+        {
+          "id": "receitas-tradicionais",
+          "name": "Receitas Tradicionais",
+          "total": 17,
+          "valid": 17,
+          "published": 17,
+          "playable": 17
+        },
+        {
+          "id": "regioes-gastronomicas",
+          "name": "Regiões Gastronómicas",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "gastronomia-mundial",
+          "name": "Gastronomia Mundial",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "comida-internacional",
+          "name": "Comida Internacional",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "identificacao-visual-pratos",
+          "name": "Identificação Visual de Pratos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "curiosidades-gastronomicas",
+          "name": "Curiosidades Gastronómicas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "desporto",
+      "slug": "desporto",
+      "name": "Desporto",
+      "emoji": "🏆",
+      "total": 830,
+      "valid": 830,
+      "published": 830,
+      "playable": 830,
+      "percentageOfTotal": 4.14,
+      "subcategories": [
+        {
+          "id": "futebol-modalidade",
+          "name": "Futebol Geral",
+          "total": 13,
+          "valid": 13,
+          "published": 13,
+          "playable": 13
+        },
+        {
+          "id": "atletismo",
+          "name": "Atletismo & Maratonas",
+          "total": 642,
+          "valid": 642,
+          "published": 642,
+          "playable": 642
+        },
+        {
+          "id": "tenis",
+          "name": "Ténis",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "ciclismo",
+          "name": "Ciclismo & Volta a Portugal",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "basquetebol",
+          "name": "Basquetebol & NBA",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "formula-1",
+          "name": "Fórmula 1 & Motores",
+          "total": 52,
+          "valid": 52,
+          "published": 52,
+          "playable": 52
+        },
+        {
+          "id": "surf",
+          "name": "Surf & Ondas Gigantes",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "natacao",
+          "name": "Natação & Desportos Aquáticos",
+          "total": 51,
+          "valid": 51,
+          "published": 51,
+          "playable": 51
+        },
+        {
+          "id": "jogos-olimpicos",
+          "name": "Jogos Olímpicos",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        },
+        {
+          "id": "artes-marciais",
+          "name": "Artes Marciais & Judo",
+          "total": 1,
+          "valid": 1,
+          "published": 1,
+          "playable": 1
+        },
+        {
+          "id": "motociclismo",
+          "name": "Motociclismo & MotoGP",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "desporto-portugues",
+          "name": "Desporto Português",
+          "total": 65,
+          "valid": 65,
+          "published": 65,
+          "playable": 65
+        },
+        {
+          "id": "desporto-internacional",
+          "name": "Desporto Internacional",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "recordes-desportivos",
+          "name": "Recordes Mundiais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "competicoes-desportivas",
+          "name": "Grandes Competições",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "humor",
+      "slug": "humor",
+      "name": "Humor",
+      "emoji": "😂",
+      "total": 800,
+      "valid": 800,
+      "published": 800,
+      "playable": 800,
+      "percentageOfTotal": 3.99,
+      "subcategories": [
+        {
+          "id": "humor-portugues",
+          "name": "Humor Português",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "expressoes-portuguesas",
+          "name": "Expressões Populares Portuguesas",
+          "total": 650,
+          "valid": 650,
+          "published": 650,
+          "playable": 650
+        },
+        {
+          "id": "memes",
+          "name": "Memes & Internet",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "cultura-popular-humor",
+          "name": "Comédia na TV & Cinema",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "situacoes-quotidiano",
+          "name": "Situações do Quotidiano",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "perguntas-engracadas",
+          "name": "Perguntas Engraçadas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "curiosidades-engracadas",
+          "name": "Curiosidades Hilariantes",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "modo-maluco-humor",
+          "name": "Humor Absurdo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "musica",
+      "slug": "musica",
+      "name": "Música",
+      "emoji": "🎵",
+      "total": 824,
+      "valid": 824,
+      "published": 824,
+      "playable": 824,
+      "percentageOfTotal": 4.11,
+      "subcategories": [
+        {
+          "id": "musica-portuguesa-geral",
+          "name": "Música Portuguesa",
+          "total": 13,
+          "valid": 13,
+          "published": 13,
+          "playable": 13
+        },
+        {
+          "id": "fado",
+          "name": "Fado & Guitarra Portuguesa",
+          "total": 3,
+          "valid": 3,
+          "published": 3,
+          "playable": 3
+        },
+        {
+          "id": "musica-popular-portuguesa",
+          "name": "Música Popular & Pimba",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "artistas-portugueses",
+          "name": "Artistas & Cantores Portugueses",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "bandas-portuguesas",
+          "name": "Bandas Portuguesas",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "musica-internacional",
+          "name": "Música Internacional",
+          "total": 6,
+          "valid": 6,
+          "published": 6,
+          "playable": 6
+        },
+        {
+          "id": "artistas-internacionais",
+          "name": "Artistas Internacionais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "bandas-internacionais",
+          "name": "Bandas Internacionais Lendárias",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cancoes",
+          "name": "Grandes Canções",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "albuns",
+          "name": "Álbuns Históricos",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "instrumentos",
+          "name": "Instrumentos Musicais",
+          "total": 638,
+          "valid": 638,
+          "published": 638,
+          "playable": 638
+        },
+        {
+          "id": "historia-musica",
+          "name": "História da Música",
+          "total": 14,
+          "valid": 14,
+          "published": 14,
+          "playable": 14
+        },
+        {
+          "id": "festivais-musica",
+          "name": "Festivais de Música",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "cinema-tv",
+      "slug": "cinema-tv",
+      "name": "Cinema e Televisão",
+      "emoji": "🎬",
+      "total": 917,
+      "valid": 917,
+      "published": 917,
+      "playable": 917,
+      "percentageOfTotal": 4.57,
+      "subcategories": [
+        {
+          "id": "filmes",
+          "name": "Grandes Filmes",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        },
+        {
+          "id": "series",
+          "name": "Séries Marcantes",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        },
+        {
+          "id": "atores-atrizes",
+          "name": "Atores e Atrizes",
+          "total": 4,
+          "valid": 4,
+          "published": 4,
+          "playable": 4
+        },
+        {
+          "id": "personagens",
+          "name": "Personagens Inesquecíveis",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "realizadores",
+          "name": "Realizadores",
+          "total": 2,
+          "valid": 2,
+          "published": 2,
+          "playable": 2
+        },
+        {
+          "id": "cinema-portugues",
+          "name": "Cinema Português",
+          "total": 63,
+          "valid": 63,
+          "published": 63,
+          "playable": 63
+        },
+        {
+          "id": "televisao-portuguesa",
+          "name": "Televisão Portuguesa",
+          "total": 744,
+          "valid": 744,
+          "published": 744,
+          "playable": 744
+        },
+        {
+          "id": "programas-televisao",
+          "name": "Programas de Televisão Clássicos",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "streaming",
+          "name": "Streaming & Novas Séries",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cultura-pop",
+          "name": "Cultura Pop & Geek",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "filmes-classicos",
+          "name": "Filmes Clássicos",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        }
+      ]
+    },
+    {
+      "id": "personalidades",
+      "slug": "personalidades",
+      "name": "Personalidades",
+      "emoji": "👤",
+      "total": 800,
+      "valid": 800,
+      "published": 800,
+      "playable": 800,
+      "percentageOfTotal": 3.99,
+      "subcategories": [
+        {
+          "id": "figuras-historicas",
+          "name": "Figuras Históricas",
+          "total": 9,
+          "valid": 9,
+          "published": 9,
+          "playable": 9
+        },
+        {
+          "id": "politicos",
+          "name": "Políticos & Estadistas",
+          "total": 691,
+          "valid": 691,
+          "published": 691,
+          "playable": 691
+        },
+        {
+          "id": "artistas",
+          "name": "Artistas & Pintores",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "atletas",
+          "name": "Atletas Lendários",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cientistas",
+          "name": "Cientistas & Pensadores",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "empresarios",
+          "name": "Empresários & Empreendedores",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "escritores",
+          "name": "Escritores & Poetas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "musicos",
+          "name": "Músicos & Compositores",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "atores",
+          "name": "Atores & Intérpretes",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "criadores",
+          "name": "Criadores & Inovadores",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "personalidades-internacionais",
+          "name": "Personalidades Internacionais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "personalidades-portuguesas",
+          "name": "Personalidades Portuguesas",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    },
+    {
+      "id": "mundo",
+      "slug": "mundo",
+      "name": "Mundo",
+      "emoji": "🌐",
+      "total": 800,
+      "valid": 800,
+      "published": 800,
+      "playable": 800,
+      "percentageOfTotal": 3.99,
+      "subcategories": [
+        {
+          "id": "paises-mundo",
+          "name": "Países & Continentes",
+          "total": 691,
+          "valid": 691,
+          "published": 691,
+          "playable": 691
+        },
+        {
+          "id": "capitais-mundo",
+          "name": "Capitais do Mundo",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "historia-mundial-geral",
+          "name": "História Mundial",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "geografia-mundial-geral",
+          "name": "Geografia Mundial",
+          "total": 50,
+          "valid": 50,
+          "published": 50,
+          "playable": 50
+        },
+        {
+          "id": "cultura-mundo",
+          "name": "Culturas & Costumes Globais",
+          "total": 9,
+          "valid": 9,
+          "published": 9,
+          "playable": 9
+        },
+        {
+          "id": "ciencia-tecnologia-mundo",
+          "name": "Ciência & Tecnologia no Mundo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "economia-mundo",
+          "name": "Economia Global",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "desporto-mundo",
+          "name": "Desporto Mundial",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "musica-mundo",
+          "name": "Música do Mundo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "cinema-mundo",
+          "name": "Cinema Internacional",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "personalidades-mundo",
+          "name": "Personalidades do Mundo",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "curiosidades-mundo",
+          "name": "Curiosidades Mundiais",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        },
+        {
+          "id": "atualidade-internacional",
+          "name": "Atualidade Internacional",
+          "total": 0,
+          "valid": 0,
+          "published": 0,
+          "playable": 0
+        }
+      ]
+    }
+  ],
+  "duplicateBreakdown": {
+    "totalDuplicates": 4249,
+    "byQuestionId": 0,
+    "byExactHash": 4242,
+    "byExactText": 4243,
+    "bySemanticFingerprint": 4249,
+    "sampleDuplicates": [
+      {
+        "incomingId": "historia_0086",
+        "incomingFile": "lib/data/categories/historia.json",
+        "existingId": "historia_0059",
+        "existingFile": "lib/data/categories/historia.json",
+        "type": "DUPLICADO_QUASE_IDENTICO",
+        "reason": "Fingerprint semântico idêntico (reformula os mesmos conceitos).",
+        "text": "Em que ano iniciou o seu reinado ou governação o rei português D. João V?"
+      },
+      {
+        "incomingId": "historia_0087",
+        "incomingFile": "lib/data/categories/historia.json",
+        "existingId": "historia_0060",
+        "existingFile": "lib/data/categories/historia.json",
+        "type": "DUPLICADO_QUASE_IDENTICO",
+        "reason": "Fingerprint semântico idêntico (reformula os mesmos conceitos).",
+        "text": "Qual foi a principal marca histórica deixada pelo monarca português D. João V?"
+      },
+      {
+        "incomingId": "historia_0100",
+        "incomingFile": "lib/data/categories/historia.json",
+        "existingId": "historia_0055",
+        "existingFile": "lib/data/categories/historia.json",
+        "type": "DUPLICADO_QUASE_IDENTICO",
+        "reason": "Fingerprint semântico idêntico (reformula os mesmos conceitos).",
+        "text": "Em que ano iniciou o seu reinado ou governação o rei português D. Pedro V?"
+      },
+      {
+        "incomingId": "historia_0101",
+        "incomingFile": "lib/data/categories/historia.json",
+        "existingId": "historia_0056",
+        "existingFile": "lib/data/categories/historia.json",
+        "type": "DUPLICADO_QUASE_IDENTICO",
+        "reason": "Fingerprint semântico idêntico (reformula os mesmos conceitos).",
+        "text": "Qual foi a principal marca histórica deixada pelo monarca português D. Pedro V?"
+      },
+      {
+        "incomingId": "modo-maluco_0020",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0021",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0022",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0023",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0024",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0025",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0026",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0027",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0028",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0029",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0030",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0031",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0032",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0033",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0034",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0035",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0036",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0037",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0038",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0039",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0040",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0041",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0042",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0043",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0044",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0045",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0046",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0047",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0048",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0049",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0050",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0051",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0052",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0053",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0054",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0055",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0056",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0057",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0058",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0059",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0060",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0061",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0062",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0063",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0064",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      },
+      {
+        "incomingId": "modo-maluco_0065",
+        "incomingFile": "lib/data/categories/modo-maluco.json",
+        "existingId": "modo-maluco_0019",
+        "existingFile": "lib/data/categories/modo-maluco.json",
+        "type": "DUPLICADO_EXATO",
+        "reason": "Texto da pergunta e 4 opções são 100% idênticos.",
+        "text": "Se um galo botar um ovo exatamente no cimo de um telhado pontiagudo entre Portugal e Espanha, para que lado cai o ovo?"
+      }
+    ]
+  },
+  "rejectedBreakdown": {
+    "totalRejected": 0,
+    "sampleRejected": []
+  },
+  "emptyAlerts": {
+    "emptyCategories": [],
+    "emptySubcategories": [
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "politica-governo",
+        "subcategoryName": "Política e Governo"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "assembleia-republica",
+        "subcategoryName": "Assembleia da República"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "partidos-politicos",
+        "subcategoryName": "Partidos Políticos"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "lideres-politicos",
+        "subcategoryName": "Líderes Políticos"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "salario-minimo",
+        "subcategoryName": "Salário Mínimo"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "inflacao",
+        "subcategoryName": "Inflação"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "pib",
+        "subcategoryName": "PIB"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "emprego",
+        "subcategoryName": "Emprego"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "habitacao",
+        "subcategoryName": "Habitação"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "euribor",
+        "subcategoryName": "Euribor"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "turismo",
+        "subcategoryName": "Turismo"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "cultura-atual",
+        "subcategoryName": "Cultura"
+      },
+      {
+        "categoryId": "atualidade",
+        "categoryName": "Atualidade — Portugal Agora",
+        "subcategoryId": "desporto-atual",
+        "subcategoryName": "Desporto"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "representacao-parlamentar",
+        "subcategoryName": "Representação Parlamentar"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "lideres",
+        "subcategoryName": "Líderes"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "historia-politica",
+        "subcategoryName": "História Política"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "sistema-politico",
+        "subcategoryName": "Sistema Político"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "eleicoes",
+        "subcategoryName": "Eleições"
+      },
+      {
+        "categoryId": "portugal-politico",
+        "categoryName": "Portugal Político",
+        "subcategoryId": "propostas-politicas",
+        "subcategoryName": "Propostas Políticas"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "empresas",
+        "subcategoryName": "Empresas"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "fundadores",
+        "subcategoryName": "Fundadores"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "produtos",
+        "subcategoryName": "Produtos"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "servicos",
+        "subcategoryName": "Serviços"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "empresas-atuais",
+        "subcategoryName": "Empresas Atuais"
+      },
+      {
+        "categoryId": "empresas-portuguesas",
+        "categoryName": "Empresas Portuguesas",
+        "subcategoryId": "empresas-internacionais",
+        "subcategoryName": "Empresas Internacionais Portuguesas"
+      },
+      {
+        "categoryId": "futebol-portugues",
+        "categoryName": "Futebol Português",
+        "subcategoryId": "transferencias",
+        "subcategoryName": "Transferências"
+      },
+      {
+        "categoryId": "futebol-portugues",
+        "categoryName": "Futebol Português",
+        "subcategoryId": "equipamentos",
+        "subcategoryName": "Equipamentos"
+      },
+      {
+        "categoryId": "futebol-portugues",
+        "categoryName": "Futebol Português",
+        "subcategoryId": "futebol-europeu",
+        "subcategoryName": "Futebol Europeu & Clubes Portugueses"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "que-lugar-e-este",
+        "subcategoryName": "Que lugar é este?"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "quem-e-esta-pessoa",
+        "subcategoryName": "Quem é esta pessoa?"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "bandeiras",
+        "subcategoryName": "Bandeiras"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "gastronomia-visual",
+        "subcategoryName": "Gastronomia"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "futebol-visual",
+        "subcategoryName": "Futebol"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "estadios-visual",
+        "subcategoryName": "Estádios"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "praias-visual",
+        "subcategoryName": "Praias"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "vilas-aldeias-visual",
+        "subcategoryName": "Vilas e Aldeias"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "onde-fica-visual",
+        "subcategoryName": "Onde fica?"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "encontra-detalhe",
+        "subcategoryName": "Encontra o detalhe"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "fotografias-historicas",
+        "subcategoryName": "Fotografias Históricas"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "imagens-objetos",
+        "subcategoryName": "Imagens de Objetos"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "imagens-animais",
+        "subcategoryName": "Imagens de Animais"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "imagens-natureza",
+        "subcategoryName": "Imagens de Natureza"
+      },
+      {
+        "categoryId": "desafio-visual",
+        "categoryName": "Desafio Visual",
+        "subcategoryId": "desafio-visual-maluco",
+        "subcategoryName": "Desafio Visual Maluco"
+      },
+      {
+        "categoryId": "historia",
+        "categoryName": "História",
+        "subcategoryId": "personalidades-historicas",
+        "subcategoryName": "Personalidades Históricas"
+      },
+      {
+        "categoryId": "historia",
+        "categoryName": "História",
+        "subcategoryId": "idade-moderna",
+        "subcategoryName": "Idade Moderna"
+      },
+      {
+        "categoryId": "geografia",
+        "categoryName": "Geografia",
+        "subcategoryId": "geografia-europa",
+        "subcategoryName": "Europa"
+      },
+      {
+        "categoryId": "geografia",
+        "categoryName": "Geografia",
+        "subcategoryId": "mapas",
+        "subcategoryName": "Mapas & Cartografia"
+      },
+      {
+        "categoryId": "geografia",
+        "categoryName": "Geografia",
+        "subcategoryId": "localizacao-geografica",
+        "subcategoryName": "Localização Geográfica"
+      },
+      {
+        "categoryId": "ciencia-tecnologia",
+        "categoryName": "Ciência e Tecnologia",
+        "subcategoryId": "tecnologia-geral",
+        "subcategoryName": "Tecnologia"
+      },
+      {
+        "categoryId": "ciencia-tecnologia",
+        "categoryName": "Ciência e Tecnologia",
+        "subcategoryId": "informatica-internet",
+        "subcategoryName": "Informática & Internet"
+      },
+      {
+        "categoryId": "ciencia-tecnologia",
+        "categoryName": "Ciência e Tecnologia",
+        "subcategoryId": "inteligencia-artificial",
+        "subcategoryName": "Inteligência Artificial"
+      },
+      {
+        "categoryId": "cultura",
+        "categoryName": "Cultura",
+        "subcategoryId": "fotografia",
+        "subcategoryName": "Fotografia"
+      },
+      {
+        "categoryId": "cultura",
+        "categoryName": "Cultura",
+        "subcategoryId": "musica-cultura",
+        "subcategoryName": "Música Erudita & Tradicional"
+      },
+      {
+        "categoryId": "cultura",
+        "categoryName": "Cultura",
+        "subcategoryId": "cinema-cultura",
+        "subcategoryName": "Cinema de Autor"
+      },
+      {
+        "categoryId": "cultura",
+        "categoryName": "Cultura",
+        "subcategoryId": "televisao-cultura",
+        "subcategoryName": "Televisão Cultural"
+      },
+      {
+        "categoryId": "gastronomia",
+        "categoryName": "Gastronomia",
+        "subcategoryId": "gastronomia-portuguesa-geral",
+        "subcategoryName": "Gastronomia Portuguesa"
+      },
+      {
+        "categoryId": "gastronomia",
+        "categoryName": "Gastronomia",
+        "subcategoryId": "gastronomia-mundial",
+        "subcategoryName": "Gastronomia Mundial"
+      },
+      {
+        "categoryId": "gastronomia",
+        "categoryName": "Gastronomia",
+        "subcategoryId": "comida-internacional",
+        "subcategoryName": "Comida Internacional"
+      },
+      {
+        "categoryId": "gastronomia",
+        "categoryName": "Gastronomia",
+        "subcategoryId": "identificacao-visual-pratos",
+        "subcategoryName": "Identificação Visual de Pratos"
+      },
+      {
+        "categoryId": "gastronomia",
+        "categoryName": "Gastronomia",
+        "subcategoryId": "curiosidades-gastronomicas",
+        "subcategoryName": "Curiosidades Gastronómicas"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "basquetebol",
+        "subcategoryName": "Basquetebol & NBA"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "surf",
+        "subcategoryName": "Surf & Ondas Gigantes"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "motociclismo",
+        "subcategoryName": "Motociclismo & MotoGP"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "desporto-internacional",
+        "subcategoryName": "Desporto Internacional"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "recordes-desportivos",
+        "subcategoryName": "Recordes Mundiais"
+      },
+      {
+        "categoryId": "desporto",
+        "categoryName": "Desporto",
+        "subcategoryId": "competicoes-desportivas",
+        "subcategoryName": "Grandes Competições"
+      },
+      {
+        "categoryId": "humor",
+        "categoryName": "Humor",
+        "subcategoryId": "situacoes-quotidiano",
+        "subcategoryName": "Situações do Quotidiano"
+      },
+      {
+        "categoryId": "humor",
+        "categoryName": "Humor",
+        "subcategoryId": "perguntas-engracadas",
+        "subcategoryName": "Perguntas Engraçadas"
+      },
+      {
+        "categoryId": "humor",
+        "categoryName": "Humor",
+        "subcategoryId": "curiosidades-engracadas",
+        "subcategoryName": "Curiosidades Hilariantes"
+      },
+      {
+        "categoryId": "humor",
+        "categoryName": "Humor",
+        "subcategoryId": "modo-maluco-humor",
+        "subcategoryName": "Humor Absurdo"
+      },
+      {
+        "categoryId": "musica",
+        "categoryName": "Música",
+        "subcategoryId": "artistas-internacionais",
+        "subcategoryName": "Artistas Internacionais"
+      },
+      {
+        "categoryId": "musica",
+        "categoryName": "Música",
+        "subcategoryId": "bandas-internacionais",
+        "subcategoryName": "Bandas Internacionais Lendárias"
+      },
+      {
+        "categoryId": "musica",
+        "categoryName": "Música",
+        "subcategoryId": "cancoes",
+        "subcategoryName": "Grandes Canções"
+      },
+      {
+        "categoryId": "musica",
+        "categoryName": "Música",
+        "subcategoryId": "albuns",
+        "subcategoryName": "Álbuns Históricos"
+      },
+      {
+        "categoryId": "musica",
+        "categoryName": "Música",
+        "subcategoryId": "festivais-musica",
+        "subcategoryName": "Festivais de Música"
+      },
+      {
+        "categoryId": "cinema-tv",
+        "categoryName": "Cinema e Televisão",
+        "subcategoryId": "personagens",
+        "subcategoryName": "Personagens Inesquecíveis"
+      },
+      {
+        "categoryId": "cinema-tv",
+        "categoryName": "Cinema e Televisão",
+        "subcategoryId": "streaming",
+        "subcategoryName": "Streaming & Novas Séries"
+      },
+      {
+        "categoryId": "cinema-tv",
+        "categoryName": "Cinema e Televisão",
+        "subcategoryId": "cultura-pop",
+        "subcategoryName": "Cultura Pop & Geek"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "atletas",
+        "subcategoryName": "Atletas Lendários"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "empresarios",
+        "subcategoryName": "Empresários & Empreendedores"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "escritores",
+        "subcategoryName": "Escritores & Poetas"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "musicos",
+        "subcategoryName": "Músicos & Compositores"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "atores",
+        "subcategoryName": "Atores & Intérpretes"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "criadores",
+        "subcategoryName": "Criadores & Inovadores"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "personalidades-internacionais",
+        "subcategoryName": "Personalidades Internacionais"
+      },
+      {
+        "categoryId": "personalidades",
+        "categoryName": "Personalidades",
+        "subcategoryId": "personalidades-portuguesas",
+        "subcategoryName": "Personalidades Portuguesas"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "historia-mundial-geral",
+        "subcategoryName": "História Mundial"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "ciencia-tecnologia-mundo",
+        "subcategoryName": "Ciência & Tecnologia no Mundo"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "economia-mundo",
+        "subcategoryName": "Economia Global"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "desporto-mundo",
+        "subcategoryName": "Desporto Mundial"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "musica-mundo",
+        "subcategoryName": "Música do Mundo"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "cinema-mundo",
+        "subcategoryName": "Cinema Internacional"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "personalidades-mundo",
+        "subcategoryName": "Personalidades do Mundo"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "curiosidades-mundo",
+        "subcategoryName": "Curiosidades Mundiais"
+      },
+      {
+        "categoryId": "mundo",
+        "categoryName": "Mundo",
+        "subcategoryId": "atualidade-internacional",
+        "subcategoryName": "Atualidade Internacional"
+      }
+    ]
+  }
+}

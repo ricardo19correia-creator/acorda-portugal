@@ -49,7 +49,7 @@ export const CATEGORIES: Category[] = [
     icon: Flag,
     tone: 'primary',
     description: 'A identidade, raízes, história, geografia e encantos de Portugal.',
-    questions: '250',
+    questions: '3.247',
     difficulty: 'Variado',
   },
   {
@@ -58,7 +58,7 @@ export const CATEGORIES: Category[] = [
     icon: Trophy,
     tone: 'red',
     description: 'Clubes, craques, seleção das quinas, estádios e dérbis históricos.',
-    questions: '200',
+    questions: '1.110',
     difficulty: 'Variado',
   },
   {
@@ -67,7 +67,7 @@ export const CATEGORIES: Category[] = [
     icon: TrendingUp,
     tone: 'primary',
     description: 'Factos recentes, economia, sociedade e acontecimentos nacionais.',
-    questions: '140',
+    questions: '750',
     difficulty: 'Médio',
   },
   {
@@ -76,7 +76,7 @@ export const CATEGORIES: Category[] = [
     icon: Vote,
     tone: 'gold',
     description: 'História política, constituição, instituições e eleições.',
-    questions: '110',
+    questions: '950',
     difficulty: 'Médio',
   },
   {
@@ -85,7 +85,7 @@ export const CATEGORIES: Category[] = [
     icon: Briefcase,
     tone: 'primary',
     description: 'Marcas históricas, inovação, fundadores e economia lusa.',
-    questions: '90',
+    questions: '850',
     difficulty: 'Médio',
   },
   {
@@ -94,7 +94,7 @@ export const CATEGORIES: Category[] = [
     icon: Landmark,
     tone: 'gold',
     description: 'Dos grandes reis e Descobrimentos às eras da antiguidade.',
-    questions: '180',
+    questions: '1.300',
     difficulty: 'Médio',
   },
   {
@@ -103,7 +103,7 @@ export const CATEGORIES: Category[] = [
     icon: Globe,
     tone: 'primary',
     description: 'Capitais do mundo, rios, ilhas, serras, oceanos e fronteiras.',
-    questions: '160',
+    questions: '1.405',
     difficulty: 'Médio',
   },
   {
@@ -112,7 +112,7 @@ export const CATEGORIES: Category[] = [
     icon: FlaskConical,
     tone: 'accent',
     description: 'Invenções, inteligência artificial, física, biologia e o espaço.',
-    questions: '140',
+    questions: '918',
     difficulty: 'Médio',
   },
   {
@@ -121,7 +121,7 @@ export const CATEGORIES: Category[] = [
     icon: Drama,
     tone: 'accent',
     description: 'Artes plásticas, literatura, teatro, folclore e património.',
-    questions: '130',
+    questions: '1.324',
     difficulty: 'Médio',
   },
   {
@@ -130,7 +130,7 @@ export const CATEGORIES: Category[] = [
     icon: UtensilsCrossed,
     tone: 'gold',
     description: 'Pratos típicos, doçaria conventual, queijos, petiscos e néctares.',
-    questions: '170',
+    questions: '1.068',
     difficulty: 'Fácil',
   },
   {
@@ -139,7 +139,7 @@ export const CATEGORIES: Category[] = [
     icon: Lightbulb,
     tone: 'primary',
     description: 'Figuras históricas, escritores, cientistas, artistas e atletas lendários.',
-    questions: '140',
+    questions: '800',
     difficulty: 'Médio',
   },
   {
@@ -148,7 +148,7 @@ export const CATEGORIES: Category[] = [
     icon: Earth,
     tone: 'primary',
     description: 'Culturas globais, capitais, história mundial e geopolítica.',
-    questions: '180',
+    questions: '800',
     difficulty: 'Variado',
   },
   {
@@ -157,7 +157,7 @@ export const CATEGORIES: Category[] = [
     icon: Medal,
     tone: 'red',
     description: 'Jogos Olímpicos, atletismo, ciclismo, surf, ténis e motores.',
-    questions: '160',
+    questions: '830',
     difficulty: 'Variado',
   },
   {
@@ -166,7 +166,7 @@ export const CATEGORIES: Category[] = [
     icon: Laugh,
     tone: 'gold',
     description: 'Expressões populares, piadas, memes e tiradas inesquecíveis.',
-    questions: '120',
+    questions: '800',
     difficulty: 'Fácil',
   },
   {
@@ -175,7 +175,7 @@ export const CATEGORIES: Category[] = [
     icon: Music,
     tone: 'accent',
     description: 'Do Fado ao Rock, do Pop aos festivais e bandas lendárias.',
-    questions: '150',
+    questions: '824',
     difficulty: 'Variado',
   },
   {
@@ -184,7 +184,7 @@ export const CATEGORIES: Category[] = [
     icon: Clapperboard,
     tone: 'red',
     description: 'Filmes icónicos, séries, atores, realizadores e grandes clássicos.',
-    questions: '120',
+    questions: '917',
     difficulty: 'Médio',
   },
   {
@@ -193,7 +193,7 @@ export const CATEGORIES: Category[] = [
     icon: Eye,
     tone: 'accent',
     description: 'Imagens, monumentos, bandeiras, brasões e detalhe visual.',
-    questions: '120',
+    questions: '750',
     difficulty: 'Médio',
     special: true,
   },
@@ -203,7 +203,7 @@ export const CATEGORIES: Category[] = [
     icon: Laugh,
     tone: 'red',
     description: 'Humor absurdo, armadilhas e lógica com um toque de caos.',
-    questions: '150',
+    questions: '1.418',
     difficulty: 'Variado',
     special: true,
   },

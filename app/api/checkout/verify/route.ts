@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getStripeInstance } from '@/lib/stripe'
 import { getRealProductById } from '@/lib/real-products'
+import { getVipProductById, formatVipPrice } from '@/src/data/vipCatalog'
 import { db } from '@/lib/firebase'
-import { doc, runTransaction, serverTimestamp, getDoc } from 'firebase/firestore'
+import { doc, runTransaction, serverTimestamp, arrayUnion } from 'firebase/firestore'
 import { calculateLevelProgress } from '@/lib/progression'
 
 export const dynamic = 'force-dynamic'
@@ -51,8 +52,10 @@ export async function GET(request: Request) {
       })
     }
 
-    const product = getRealProductById(productId)
-    if (!product) {
+    const vipProduct = getVipProductById(productId)
+    const legacyProduct = !vipProduct ? getRealProductById(productId) : null
+
+    if (!vipProduct && !legacyProduct) {
       return NextResponse.json({
         success: true,
         paid: true,
@@ -68,97 +71,189 @@ export async function GET(request: Request) {
     await runTransaction(db, async (t) => {
       const txSnap = await t.get(userTxRef)
       if (txSnap.exists() && txSnap.data()?.status === 'paid') {
-        // Já entregue
+        // Já entregue de forma idempotente
         return
       }
 
       const userSnap = await t.get(userRef)
       if (!userSnap.exists()) return
 
-      const userData = userSnap.data()
-      const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
-      const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-      const currentInventory: Record<string, number> = userData.inventory || {}
-      const currentBadges: string[] = userData.badges || []
+      if (vipProduct) {
+        // =========================================================================
+        // ENTREGA DO ITEM VIP (€ REAL) COM ENTITLEMENT
+        // =========================================================================
+        const entitlementRef = doc(db, 'users', userId, 'entitlements', vipProduct.id)
+        
+        t.set(entitlementRef, {
+          productId: vipProduct.id,
+          sku: vipProduct.sku,
+          category: vipProduct.category,
+          acquisitionType: 'vip_real_money',
+          acquiredAt: serverTimestamp(),
+          paymentId: transactionId,
+          status: 'active',
+          entitlementType: 'permanent',
+          priceCents: vipProduct.priceCents,
+          currency: 'EUR',
+        }, { merge: true })
 
-      const reward = product.reward
-      const newEuros = currentEuros + (reward.euros || 0)
-      const newXp = currentXp + (reward.xp || 0)
-      const levelProgress = calculateLevelProgress(newXp)
-      const newLevel = levelProgress.currentLevel.level
+        const updates: Record<string, any> = {
+          [`inventory.${vipProduct.id}`]: 1,
+          vipEntitlements: arrayUnion(vipProduct.id),
+          updatedAt: serverTimestamp(),
+        }
 
-      const updatedInventory = { ...currentInventory }
-      if (reward.items) {
-        Object.entries(reward.items).forEach(([itemId, qty]) => {
-          updatedInventory[itemId] = (updatedInventory[itemId] || 0) + qty
+        if (vipProduct.category === 'avatar') {
+          updates['inventory.avatars'] = arrayUnion(vipProduct.id)
+          updates['unlockedAvatars'] = arrayUnion(vipProduct.id)
+        } else if (vipProduct.category === 'frame') {
+          updates['inventory.frames'] = arrayUnion(vipProduct.id)
+          updates['unlockedFrames'] = arrayUnion(vipProduct.id)
+        } else if (vipProduct.category === 'title') {
+          updates['inventory.titles'] = arrayUnion(vipProduct.id)
+          updates['ownedTitleIds'] = arrayUnion(vipProduct.id)
+        } else if (vipProduct.category === 'arena') {
+          updates['inventory.arenas'] = arrayUnion(vipProduct.id)
+          updates['unlockedArenas'] = arrayUnion(vipProduct.id)
+        } else if (vipProduct.category === 'emote') {
+          updates['inventory.emotes'] = arrayUnion(vipProduct.id)
+          updates['unlockedEmotes'] = arrayUnion(vipProduct.id)
+        } else if (vipProduct.category === 'tauntpack') {
+          updates['inventory.tauntpacks'] = arrayUnion(vipProduct.id)
+          updates['unlockedTauntPacks'] = arrayUnion(vipProduct.id)
+          if (vipProduct.taunts) {
+            vipProduct.taunts.forEach((tItem) => {
+              updates['inventory.taunts'] = arrayUnion(tItem.id)
+            })
+          }
+        }
+
+        t.update(userRef, updates)
+
+        const txData = {
+          id: transactionId,
+          userId,
+          type: 'vip_real_money_purchase',
+          status: 'paid',
+          productId: vipProduct.id,
+          sku: vipProduct.sku,
+          category: vipProduct.category,
+          productName: vipProduct.name,
+          amountInCents: vipProduct.priceCents,
+          currency: 'EUR',
+          stripeSessionId: session.id,
+          acquisitionType: 'vip_real_money',
+          entitlementType: 'permanent',
+          reason: `Compra VIP (€ Real): ${vipProduct.name}`,
+          createdAt: serverTimestamp(),
+          processedAt: serverTimestamp(),
+        }
+
+        t.set(userTxRef, txData)
+        t.set(globalTxRef, txData)
+      } else if (legacyProduct) {
+        // =========================================================================
+        // ENTREGA DE PRODUTO LEGADO
+        // =========================================================================
+        const userData = userSnap.data()
+        const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
+        const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+        const currentInventory: Record<string, number> = userData.inventory || {}
+        const currentBadges: string[] = userData.badges || []
+
+        const reward = legacyProduct.reward
+        const newEuros = currentEuros + (reward.euros || 0)
+        const newXp = currentXp + (reward.xp || 0)
+        const levelProgress = calculateLevelProgress(newXp)
+        const newLevel = levelProgress.currentLevel.level
+
+        const updatedInventory = { ...currentInventory }
+        if (reward.items) {
+          Object.entries(reward.items).forEach(([itemId, qty]) => {
+            updatedInventory[itemId] = (updatedInventory[itemId] || 0) + qty
+          })
+        }
+
+        const updatedBadges = [...currentBadges]
+        if (reward.badge && !updatedBadges.includes(reward.badge)) {
+          updatedBadges.push(reward.badge)
+        }
+
+        t.update(userRef, {
+          euros: newEuros,
+          xp: newXp,
+          level: newLevel,
+          inventory: updatedInventory,
+          badges: updatedBadges,
+          ...(reward.vipPass ? { isVip: true, vipPassPurchasedAt: serverTimestamp() } : {}),
+          ...(reward.isFounder
+            ? {
+                is_founder: true,
+                isFounder: true,
+                founderMultiplier: 1.25,
+                founderPurchasedAt: serverTimestamp(),
+              }
+            : {}),
+          ...(reward.authorLicense
+            ? {
+                can_submit_questions: true,
+                hasAuthorLicense: true,
+                authorLicensePurchasedAt: serverTimestamp(),
+              }
+            : {}),
+          updatedAt: serverTimestamp(),
         })
+
+        const txData = {
+          id: transactionId,
+          userId,
+          type: 'stripe_purchase',
+          status: 'paid',
+          productId: legacyProduct.id,
+          productName: legacyProduct.name,
+          amountInCents: legacyProduct.priceInCents,
+          currency: legacyProduct.currency,
+          stripeSessionId: session.id,
+          rewardsDelivered: {
+            euros: reward.euros,
+            xp: reward.xp,
+            items: reward.items || {},
+            badge: reward.badge || null,
+          },
+          reason: `Compra de Pacote: ${legacyProduct.name}`,
+          createdAt: serverTimestamp(),
+          processedAt: serverTimestamp(),
+        }
+
+        t.set(userTxRef, txData)
+        t.set(globalTxRef, txData)
       }
-
-      const updatedBadges = [...currentBadges]
-      if (reward.badge && !updatedBadges.includes(reward.badge)) {
-        updatedBadges.push(reward.badge)
-      }
-
-      t.update(userRef, {
-        euros: newEuros,
-        xp: newXp,
-        level: newLevel,
-        inventory: updatedInventory,
-        badges: updatedBadges,
-        ...(reward.vipPass ? { isVip: true, vipPassPurchasedAt: serverTimestamp() } : {}),
-        ...(reward.isFounder
-          ? {
-              is_founder: true,
-              isFounder: true,
-              founderMultiplier: 1.25,
-              founderPurchasedAt: serverTimestamp(),
-            }
-          : {}),
-        ...(reward.authorLicense
-          ? {
-              can_submit_questions: true,
-              hasAuthorLicense: true,
-              authorLicensePurchasedAt: serverTimestamp(),
-            }
-          : {}),
-        updatedAt: serverTimestamp(),
-      })
-
-      const txData = {
-        id: transactionId,
-        userId,
-        type: 'stripe_purchase',
-        status: 'paid',
-        productId: product.id,
-        productName: product.name,
-        amountInCents: product.priceInCents,
-        currency: product.currency,
-        stripeSessionId: session.id,
-        rewardsDelivered: {
-          euros: reward.euros,
-          xp: reward.xp,
-          items: reward.items || {},
-          badge: reward.badge || null,
-        },
-        reason: `Compra de Pacote: ${product.name}`,
-        createdAt: serverTimestamp(),
-        processedAt: serverTimestamp(),
-      }
-
-      t.set(userTxRef, txData)
-      t.set(globalTxRef, txData)
     })
+
+    const productPayload = vipProduct
+      ? {
+          id: vipProduct.id,
+          sku: vipProduct.sku,
+          name: vipProduct.name,
+          description: vipProduct.description,
+          priceFormatted: formatVipPrice(vipProduct.priceCents),
+          category: vipProduct.category,
+          rarity: vipProduct.rarityLabel,
+          assetPath: vipProduct.assetPath,
+          acquisitionType: 'vip_real_money',
+        }
+      : {
+          id: legacyProduct!.id,
+          name: legacyProduct!.name,
+          description: legacyProduct!.description,
+          priceFormatted: `€${(legacyProduct!.priceInCents / 100).toFixed(2).replace('.', ',')}`,
+          reward: legacyProduct!.reward,
+        }
 
     return NextResponse.json({
       success: true,
       paid: true,
-      product: {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        priceFormatted: `€${(product.priceInCents / 100).toFixed(2).replace('.', ',')}`,
-        reward: product.reward,
-      },
+      product: productPayload,
       transactionId,
       customerEmail: session.customer_details?.email || session.customer_email,
     })

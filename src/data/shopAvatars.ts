@@ -71,7 +71,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     rarity: 'COMUM',
     price: 0,
   },
-  // 5-10: Raros (500 - 750 Moedas)
+  // 5-10 & 19: Raros (Tier 3: 6.000 – 9.000 Moedas)
   {
     id: 'avatar_05',
     name: 'O Mestre',
@@ -79,7 +79,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_05.png',
     category: 'História',
     rarity: 'RARO',
-    price: 500,
+    price: 6000,
   },
   {
     id: 'avatar_06',
@@ -88,7 +88,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_06.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 500,
+    price: 6500,
   },
   {
     id: 'avatar_07',
@@ -97,7 +97,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_07.png',
     category: 'Cidadania',
     rarity: 'RARO',
-    price: 500,
+    price: 7000,
   },
   {
     id: 'avatar_08',
@@ -106,7 +106,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_08.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 750,
+    price: 7500,
   },
   {
     id: 'avatar_09',
@@ -115,7 +115,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_09.png',
     category: 'Cidadania',
     rarity: 'RARO',
-    price: 750,
+    price: 8000,
   },
   {
     id: 'avatar_10',
@@ -124,9 +124,9 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_10.png',
     category: 'História',
     rarity: 'RARO',
-    price: 750,
+    price: 8500,
   },
-  // 11-17: Épicos (1000 - 1500 Moedas)
+  // 11-17, 20, 22-27, 32: Épicos (Tier 4: 15.000 – 25.000 Moedas)
   {
     id: 'avatar_11',
     name: 'O Desportista',
@@ -134,7 +134,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_11.png',
     category: 'Desporto',
     rarity: 'EPICO',
-    price: 1000,
+    price: 15000,
   },
   {
     id: 'avatar_12',
@@ -143,7 +143,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_12.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1000,
+    price: 15000,
   },
   {
     id: 'avatar_13',
@@ -152,7 +152,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_13.png',
     category: 'História',
     rarity: 'EPICO',
-    price: 1000,
+    price: 16000,
   },
   {
     id: 'avatar_14',
@@ -161,7 +161,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_14.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1250,
+    price: 16500,
   },
   {
     id: 'avatar_15',
@@ -170,7 +170,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_15.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 1250,
+    price: 17500,
   },
   {
     id: 'avatar_16',
@@ -179,7 +179,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_16.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 1500,
+    price: 18000,
   },
   {
     id: 'avatar_17',
@@ -188,7 +188,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_17.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1500,
+    price: 18500,
   },
   // 18-21: Lendários & Raros Intermédios
   {
@@ -198,7 +198,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_18.png',
     category: 'Desporto',
     rarity: 'LENDARIO',
-    price: 2000,
+    price: 40000,
   },
   {
     id: 'avatar_19',
@@ -207,7 +207,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_19.png',
     category: 'Cultura',
     rarity: 'RARO',
-    price: 750,
+    price: 9000,
   },
   {
     id: 'avatar_20',
@@ -216,7 +216,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_20.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1000,
+    price: 19000,
   },
   {
     id: 'avatar_21',
@@ -225,9 +225,9 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_21.png',
     category: 'Cidadania',
     rarity: 'LENDARIO',
-    price: 2500,
+    price: 45000,
   },
-  // 22-27: Criatividade e Ciência
+  // 22-27: Criatividade e Ciência (Tier 4: Épicos)
   {
     id: 'avatar_22',
     name: 'A Criativa',
@@ -235,7 +235,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_22.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1000,
+    price: 20000,
   },
   {
     id: 'avatar_23',
@@ -244,7 +244,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_23.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 1250,
+    price: 21000,
   },
   {
     id: 'avatar_24',
@@ -253,7 +253,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_24.png',
     category: 'Desporto',
     rarity: 'EPICO',
-    price: 1750,
+    price: 22500,
   },
   {
     id: 'avatar_25',
@@ -262,7 +262,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_25.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1000,
+    price: 23000,
   },
   {
     id: 'avatar_26',
@@ -271,7 +271,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_26.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 1500,
+    price: 24000,
   },
   {
     id: 'avatar_27',
@@ -280,9 +280,9 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_27.png',
     category: 'Cultura',
     rarity: 'EPICO',
-    price: 1250,
+    price: 24500,
   },
-  // 28-32: Elite Digital e Histórica
+  // 28-32: Elite Digital e Histórica (Lendários Tier 5 e Épicos)
   {
     id: 'avatar_28',
     name: 'A Exploradora Digital',
@@ -290,7 +290,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_28.png',
     category: 'Cultura',
     rarity: 'LENDARIO',
-    price: 2000,
+    price: 48000,
   },
   {
     id: 'avatar_29',
@@ -299,7 +299,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_29.png',
     category: 'História',
     rarity: 'LENDARIO',
-    price: 2500,
+    price: 52000,
   },
   {
     id: 'avatar_30',
@@ -319,7 +319,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_31.png',
     category: 'História',
     rarity: 'LENDARIO',
-    price: 3500,
+    price: 55000,
   },
   {
     id: 'avatar_32',
@@ -328,9 +328,9 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_32.png',
     category: 'Cidadania',
     rarity: 'EPICO',
-    price: 1500,
+    price: 25000,
   },
-  // 33-36: Mestres e Lendas Máximas
+  // 33-36: Mestres e Lendas Máximas (Tier 5 e Exclusivos por Mérito)
   {
     id: 'avatar_33',
     name: 'O Campeão',
@@ -338,7 +338,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_33.png',
     category: 'Desporto',
     rarity: 'LENDARIO',
-    price: 5000,
+    price: 60000,
   },
   {
     id: 'avatar_34',
@@ -347,7 +347,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_34.png',
     category: 'História',
     rarity: 'LENDARIO',
-    price: 7500,
+    price: 65000,
   },
   {
     id: 'avatar_35',

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg_king" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#311B92" />
+      <stop offset="50%" stop-color="#1A0A3A" />
+      <stop offset="100%" stop-color="#05020E" />
+    </radialGradient>
+    <linearGradient id="gold_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4" />
+      <stop offset="35%" stop-color="#F59E0B" />
+      <stop offset="70%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#78350F" />
+    </linearGradient>
+    <linearGradient id="robe_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#991B1B" />
+      <stop offset="60%" stop-color="#7F1D1D" />
+      <stop offset="100%" stop-color="#450A0A" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg_king)" />
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#gold_grad)" stroke-width="6" opacity="0.6" />
+  <circle cx="256" cy="256" r="236" fill="none" stroke="url(#gold_grad)" stroke-width="2" stroke-dasharray="8,6" opacity="0.8" />
+  
+  <!-- Rays of Majesty -->
+  <g opacity="0.25" stroke="url(#gold_grad)" stroke-width="2">
+    <line x1="256" y1="20" x2="256" y2="492" />
+    <line x1="20" y1="256" x2="492" y2="256" />
+    <line x1="89" y1="89" x2="423" y2="423" />
+    <line x1="89" y1="423" x2="423" y2="89" />
+  </g>
+
+  <!-- Imperial Robe / Mantle -->
+  <path d="M120 512 C120 380, 180 340, 256 340 C332 340, 392 380, 392 512 Z" fill="url(#robe_grad)" stroke="url(#gold_grad)" stroke-width="6" />
+  <path d="M160 512 C170 410, 200 370, 256 370 C312 370, 342 410, 352 512 Z" fill="#FEF3C7" stroke="url(#gold_grad)" stroke-width="4" />
+  <!-- Ermine spots -->
+  <g fill="#1E1B4B" opacity="0.8">
+    <polygon points="230,420 234,428 226,428" /><circle cx="230" cy="432" r="1.5" />
+    <polygon points="282,420 286,428 278,428" /><circle cx="282" cy="432" r="1.5" />
+    <polygon points="256,450 260,458 252,458" /><circle cx="256" cy="462" r="1.5" />
+  </g>
+
+  <!-- King Head & Beard Silhouette -->
+  <circle cx="256" cy="240" r="75" fill="#FED7AA" stroke="url(#gold_grad)" stroke-width="4" />
+  <path d="M190 245 C190 320, 230 350, 256 350 C282 350, 322 320, 322 245 C305 260, 290 270, 256 270 C222 270, 207 260, 190 245 Z" fill="#78350F" />
+  <!-- Royal Mustache -->
+  <path d="M220 265 Q256 250 292 265 Q256 280 220 265 Z" fill="#92400E" />
+
+  <!-- Eyes of Authority -->
+  <ellipse cx="230" cy="225" rx="8" ry="5" fill="#1E293B" />
+  <ellipse cx="282" cy="225" rx="8" ry="5" fill="#1E293B" />
+  <circle cx="232" cy="223" r="2.5" fill="#FFF" />
+  <circle cx="284" cy="223" r="2.5" fill="#FFF" />
+
+  <!-- Imperial Crown of Portugal -->
+  <g filter="url(#glow)">
+    <path d="M180 185 L195 95 L225 145 L256 70 L287 145 L317 95 L332 185 Z" fill="url(#gold_grad)" stroke="#FFF9C4" stroke-width="3" />
+    <rect x="175" y="180" width="162" height="24" rx="6" fill="url(#gold_grad)" stroke="#FFF9C4" stroke-width="2" />
+    <!-- Jewels -->
+    <circle cx="200" cy="192" r="5" fill="#DC2626" />
+    <circle cx="228" cy="192" r="5" fill="#16A34A" />
+    <circle cx="256" cy="192" r="6" fill="#2563EB" />
+    <circle cx="284" cy="192" r="5" fill="#16A34A" />
+    <circle cx="312" cy="192" r="5" fill="#DC2626" />
+    <!-- Cross atop crown -->
+    <path d="M256 50 L256 70 M248 58 L264 58" stroke="url(#gold_grad)" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+  <!-- Banner Badge -->
+  <rect x="146" y="460" width="220" height="36" rx="18" fill="#111827" stroke="url(#gold_grad)" stroke-width="3" />
+  <text x="256" y="484" text-anchor="middle" fill="#F59E0B" font-family="sans-serif" font-weight="900" font-size="14" letter-spacing="2">REI DE PORTUGAL</text>
+</svg>

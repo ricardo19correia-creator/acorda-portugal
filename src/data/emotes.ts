@@ -90,7 +90,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     animation: 'sparkle',
   },
 
-  // 2. PROVOCAÇÕES EM DESTAQUE (250 MOEDAS)
+  // 2. PROVOCAÇÕES EM DESTAQUE (ÉPICO - TIER 4)
   {
     id: 'PROV_010',
     emoji: '👑',
@@ -98,13 +98,13 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '👑 Quem manda aqui soy yoo',
     category: 'competicao',
     rarity: 'Épico',
-    price: 250,
+    price: 16000,
     isDefault: false,
     sortOrder: 0,
     animation: 'flame',
   },
 
-  // 3. COMUNS (500 MOEDAS)
+  // 3. COMUNS (TIER 1: 1.000 MOEDAS)
   {
     id: 'emote_ahahah',
     emoji: '😂',
@@ -112,7 +112,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '😂 Ahahah!',
     category: 'reacao',
     rarity: 'Comum',
-    price: 500,
+    price: 1000,
     isDefault: false,
     sortOrder: 7,
     animation: 'bounce',
@@ -124,13 +124,13 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '😱 Uau!',
     category: 'reacao',
     rarity: 'Comum',
-    price: 500,
+    price: 1000,
     isDefault: false,
     sortOrder: 8,
     animation: 'pulse',
   },
 
-  // 3. RAROS (1.500 MOEDAS)
+  // 4. RAROS (TIER 3: 5.000 MOEDAS)
   {
     id: 'emote_hmm',
     emoji: '🤔',
@@ -138,7 +138,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🤔 Hmm...',
     category: 'reacao',
     rarity: 'Raro',
-    price: 1500,
+    price: 5000,
     isDefault: false,
     sortOrder: 9,
     animation: 'shake',
@@ -150,7 +150,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '💪 Força!',
     category: 'competicao',
     rarity: 'Raro',
-    price: 1500,
+    price: 5000,
     isDefault: false,
     sortOrder: 10,
     animation: 'pulse',
@@ -162,7 +162,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🎯 Acertei!',
     category: 'competicao',
     rarity: 'Raro',
-    price: 1500,
+    price: 5000,
     isDefault: false,
     sortOrder: 11,
     animation: 'sparkle',
@@ -174,7 +174,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '⚡ Rápido!',
     category: 'psicologico',
     rarity: 'Raro',
-    price: 1500,
+    price: 5000,
     isDefault: false,
     sortOrder: 12,
     animation: 'sparkle',
@@ -186,13 +186,13 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '👀 Estou de olho!',
     category: 'psicologico',
     rarity: 'Raro',
-    price: 1500,
+    price: 5000,
     isDefault: false,
     sortOrder: 13,
     animation: 'pulse',
   },
 
-  // 4. ÉPICOS (3.500 MOEDAS)
+  // 5. ÉPICOS (TIER 4: 16.000 MOEDAS)
   {
     id: 'emote_agora_vai',
     emoji: '😈',
@@ -200,7 +200,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '😈 Agora é que vai!',
     category: 'psicologico',
     rarity: 'Épico',
-    price: 3500,
+    price: 16000,
     isDefault: false,
     sortOrder: 14,
     animation: 'flame',
@@ -212,7 +212,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🥶 Estou pronto!',
     category: 'competicao',
     rarity: 'Épico',
-    price: 3500,
+    price: 16000,
     isDefault: false,
     sortOrder: 15,
     animation: 'pulse',
@@ -224,7 +224,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🫡 Respeito!',
     category: 'geral',
     rarity: 'Épico',
-    price: 3500,
+    price: 16000,
     isDefault: false,
     sortOrder: 16,
     animation: 'bounce',
@@ -236,7 +236,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🔥 Isto está renhido!',
     category: 'competicao',
     rarity: 'Épico',
-    price: 3500,
+    price: 16000,
     isDefault: false,
     sortOrder: 17,
     animation: 'flame',
@@ -248,13 +248,13 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '😭 Não acredito!',
     category: 'reacao',
     rarity: 'Épico',
-    price: 3500,
+    price: 16000,
     isDefault: false,
     sortOrder: 18,
     animation: 'shake',
   },
 
-  // 5. LENDÁRIOS (7.500 MOEDAS)
+  // 6. LENDÁRIOS (TIER 5: 45.000 MOEDAS)
   {
     id: 'emote_que_sorte',
     emoji: '🤣',
@@ -262,7 +262,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🤣 Que sorte!',
     category: 'psicologico',
     rarity: 'Lendário',
-    price: 7500,
+    price: 45000,
     isDefault: false,
     sortOrder: 19,
     animation: 'bounce',
@@ -274,7 +274,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '👑 Rei de Portugal!',
     category: 'patriotico',
     rarity: 'Lendário',
-    price: 7500,
+    price: 45000,
     isDefault: false,
     sortOrder: 20,
     animation: 'sparkle',
@@ -286,13 +286,13 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🇵🇹 Acorda Portugal!',
     category: 'patriotico',
     rarity: 'Lendário',
-    price: 7500,
+    price: 45000,
     isDefault: false,
     sortOrder: 21,
     animation: 'pulse',
   },
 
-  // 6. MÍTICOS (15.000 MOEDAS)
+  // 7. MÍTICOS (TIER 6: 85.000 MOEDAS)
   {
     id: 'emote_dominio_total',
     emoji: '🔥🔥',
@@ -300,7 +300,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🔥🔥 DOMÍNIO TOTAL 🔥🔥',
     category: 'competicao',
     rarity: 'Mítico',
-    price: 15000,
+    price: 85000,
     isDefault: false,
     sortOrder: 22,
     animation: 'flame',
@@ -312,7 +312,7 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '⚡ LENDA NACIONAL ⚡',
     category: 'patriotico',
     rarity: 'Mítico',
-    price: 15000,
+    price: 85000,
     isDefault: false,
     sortOrder: 23,
     animation: 'sparkle',
@@ -324,10 +324,109 @@ export const OFFICIAL_EMOTES: EmoteItem[] = [
     text: '🇵🇹 PORTUGAL NO TOPO! 🇵🇹',
     category: 'patriotico',
     rarity: 'Mítico',
-    price: 15000,
+    price: 85000,
     isDefault: false,
     sortOrder: 24,
     animation: 'pulse',
+  },
+  // =========================================================================
+  // 8 EMOTES VIP OFICIAIS (€ REAL)
+  // =========================================================================
+  {
+    id: 'vip_emote_001',
+    emoji: '👑',
+    label: 'Coroa',
+    text: '👑 Coroa Real',
+    category: 'competicao',
+    rarity: 'Lendário',
+    price: 0,
+    isDefault: false,
+    sortOrder: 101,
+    animation: 'sparkle',
+  },
+  {
+    id: 'vip_emote_002',
+    emoji: '🇵🇹',
+    label: 'Vitória Nacional',
+    text: '🇵🇹 Vitória Nacional',
+    category: 'patriotico',
+    rarity: 'Épico',
+    price: 0,
+    isDefault: false,
+    sortOrder: 102,
+    animation: 'pulse',
+  },
+  {
+    id: 'vip_emote_003',
+    emoji: '😂👑',
+    label: 'Risada Real',
+    text: '😂👑 Risada Real',
+    category: 'psicologico',
+    rarity: 'Épico',
+    price: 0,
+    isDefault: false,
+    sortOrder: 103,
+    animation: 'bounce',
+  },
+  {
+    id: 'vip_emote_004',
+    emoji: '🔥',
+    label: 'Fogo',
+    text: '🔥 Fogo!',
+    category: 'competicao',
+    rarity: 'Raro',
+    price: 0,
+    isDefault: false,
+    sortOrder: 104,
+    animation: 'flame',
+  },
+  {
+    id: 'vip_emote_005',
+    emoji: '😱',
+    label: 'Sem Palavras',
+    text: '😱 Sem Palavras',
+    category: 'reacao',
+    rarity: 'Raro',
+    price: 0,
+    isDefault: false,
+    sortOrder: 105,
+    animation: 'shake',
+  },
+  {
+    id: 'vip_emote_006',
+    emoji: '🧠',
+    label: 'Mestre',
+    text: '🧠 Mestre',
+    category: 'competicao',
+    rarity: 'Épico',
+    price: 0,
+    isDefault: false,
+    sortOrder: 106,
+    animation: 'pulse',
+  },
+  {
+    id: 'vip_emote_007',
+    emoji: '👏',
+    label: 'Boa Jogada',
+    text: '👏 Boa Jogada',
+    category: 'geral',
+    rarity: 'Raro',
+    price: 0,
+    isDefault: false,
+    sortOrder: 107,
+    animation: 'bounce',
+  },
+  {
+    id: 'vip_emote_008',
+    emoji: '🇵🇹🔥',
+    label: 'Portugal Ganhou',
+    text: '🇵🇹🔥 Portugal Ganhou!',
+    category: 'patriotico',
+    rarity: 'Lendário',
+    price: 0,
+    isDefault: false,
+    sortOrder: 108,
+    animation: 'flame',
   },
 ]
 
@@ -338,7 +437,7 @@ export const DEFAULT_EQUIPPED_EMOTES = [
   'emote_boa',
 ]
 
-export const DEFAULT_UNLOCKED_EMOTES = OFFICIAL_EMOTES.filter(e => e.price === 0).map(e => e.id)
+export const DEFAULT_UNLOCKED_EMOTES = OFFICIAL_EMOTES.filter(e => e.isDefault).map(e => e.id)
 
 export function getEmoteById(id: string): EmoteItem | undefined {
   return OFFICIAL_EMOTES.find(e => e.id === id)

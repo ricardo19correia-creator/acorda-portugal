@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sky_cas" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#18181B" />
+      <stop offset="60%" stop-color="#27272A" />
+      <stop offset="100%" stop-color="#09090B" />
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky_cas)" />
+  <!-- Medieval Battlements -->
+  <g fill="#18181B" stroke="#D97706" stroke-width="6">
+    <rect x="300" y="450" width="240" height="630" />
+    <rect x="1380" y="450" width="240" height="630" />
+    <path d="M540 600 L1380 600 L1380 1080 L540 1080 Z" />
+  </g>
+  <text x="960" y="240" fill="#D97706" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">CASTELO DOS CAMPEÕES</text>
+</svg>

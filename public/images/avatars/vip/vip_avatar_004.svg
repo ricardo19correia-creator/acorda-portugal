@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg_kn" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="60%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </radialGradient>
+    <linearGradient id="steel_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="50%" stop-color="#94A3B8" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+    <linearGradient id="silver_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" />
+      <stop offset="100%" stop-color="#CA8A04" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg_kn)" />
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#silver_gold)" stroke-width="4" opacity="0.6" />
+
+  <!-- Shield of Arms Behind -->
+  <polygon points="256,70 380,120 360,340 256,420 152,340 132,120" fill="#0F172A" stroke="url(#silver_gold)" stroke-width="6" opacity="0.7" />
+
+  <!-- Steel Armor Shoulders & Tunic -->
+  <path d="M120 512 L140 370 L256 360 L372 370 L392 512 Z" fill="url(#steel_grad)" stroke="#1E293B" stroke-width="6" />
+  <!-- Red Cross Over Armor -->
+  <rect x="244" y="370" width="24" height="142" fill="#DC2626" />
+  <rect x="180" y="420" width="152" height="24" fill="#DC2626" />
+
+  <!-- Medieval Great Helm -->
+  <path d="M190 290 L190 190 C190 140, 322 140, 322 190 L322 290 L256 340 Z" fill="url(#steel_grad)" stroke="#0F172A" stroke-width="6" />
+  <!-- Brass Reinforcement Band -->
+  <path d="M190 220 L322 220 L322 250 L190 250 Z" fill="url(#silver_gold)" stroke="#0F172A" stroke-width="2" />
+  <line x1="256" y1="150" x2="256" y2="335" stroke="url(#silver_gold)" stroke-width="12" />
+
+  <!-- Vision Slits -->
+  <rect x="205" y="230" width="40" height="8" rx="2" fill="#020617" />
+  <rect x="267" y="230" width="40" height="8" rx="2" fill="#020617" />
+  <!-- Breathing Holes -->
+  <g fill="#020617">
+    <circle cx="225" cy="275" r="3" /><circle cx="240" cy="275" r="3" /><circle cx="272" cy="275" r="3" /><circle cx="287" cy="275" r="3" />
+    <circle cx="232" cy="290" r="3" /><circle cx="280" cy="290" r="3" />
+  </g>
+
+  <!-- Crest Feather Plume (Red & Green) -->
+  <path d="M256 145 C230 90, 200 80, 180 90 C220 120, 240 130, 256 145 Z" fill="#16A34A" />
+  <path d="M256 145 C270 80, 310 70, 330 80 C290 110, 270 130, 256 145 Z" fill="#DC2626" />
+
+  <!-- Banner Badge -->
+  <rect x="136" y="460" width="240" height="36" rx="18" fill="#0F172A" stroke="url(#silver_gold)" stroke-width="3" />
+  <text x="256" y="484" text-anchor="middle" fill="#FEF08A" font-family="sans-serif" font-weight="900" font-size="14" letter-spacing="2">CAVALEIRO DE PORTUGAL</text>
+</svg>

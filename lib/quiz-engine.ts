@@ -123,7 +123,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'A identidade, raízes, história, geografia e encantos de Portugal.',
     icon: Flag,
     tone: 'primary',
-    questionCountEstimate: 750,
+    questionCountEstimate: 3247,
     difficultyLabel: 'Variado',
   },
   {
@@ -133,7 +133,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Clubes, craques, seleção das quinas, estádios e dérbis históricos.',
     icon: Trophy,
     tone: 'red',
-    questionCountEstimate: 650,
+    questionCountEstimate: 1110,
     difficultyLabel: 'Variado',
   },
   {
@@ -143,7 +143,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Factos recentes, economia, sociedade e acontecimentos nacionais verificáveis.',
     icon: TrendingUp,
     tone: 'primary',
-    questionCountEstimate: 650,
+    questionCountEstimate: 750,
     difficultyLabel: 'Médio',
   },
   {
@@ -153,7 +153,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'História política, constituição, instituições e eleições democráticas.',
     icon: Vote,
     tone: 'gold',
-    questionCountEstimate: 650,
+    questionCountEstimate: 950,
     difficultyLabel: 'Médio',
   },
   {
@@ -163,7 +163,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Marcas históricas, inovação, fundadores e economia lusa.',
     icon: Briefcase,
     tone: 'primary',
-    questionCountEstimate: 650,
+    questionCountEstimate: 850,
     difficultyLabel: 'Médio',
   },
 
@@ -177,7 +177,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Dos grandes reis e Descobrimentos às civilizações da antiguidade.',
     icon: Landmark,
     tone: 'gold',
-    questionCountEstimate: 680,
+    questionCountEstimate: 1300,
     difficultyLabel: 'Médio',
   },
   {
@@ -187,7 +187,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Capitais do mundo, rios, ilhas, serras, oceanos e fronteiras.',
     icon: Globe,
     tone: 'primary',
-    questionCountEstimate: 690,
+    questionCountEstimate: 1405,
     difficultyLabel: 'Médio',
   },
   {
@@ -197,7 +197,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Invenções, inteligência artificial, física, biologia e o universo.',
     icon: FlaskConical,
     tone: 'accent',
-    questionCountEstimate: 660,
+    questionCountEstimate: 918,
     difficultyLabel: 'Médio',
   },
   {
@@ -207,7 +207,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Artes plásticas, literatura, teatro, folclore e património.',
     icon: Drama,
     tone: 'accent',
-    questionCountEstimate: 660,
+    questionCountEstimate: 1324,
     difficultyLabel: 'Variado',
   },
   {
@@ -217,7 +217,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Pratos típicos, doçaria, vinhos, queijos e culinária internacional.',
     icon: UtensilsCrossed,
     tone: 'gold',
-    questionCountEstimate: 660,
+    questionCountEstimate: 1068,
     difficultyLabel: 'Fácil',
   },
   {
@@ -227,7 +227,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Figuras históricas, escritores, cientistas, artistas e atletas lendários.',
     icon: Lightbulb,
     tone: 'primary',
-    questionCountEstimate: 650,
+    questionCountEstimate: 800,
     difficultyLabel: 'Médio',
   },
   {
@@ -237,7 +237,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Culturas globais, capitais, história mundial e geopolítica.',
     icon: Earth,
     tone: 'primary',
-    questionCountEstimate: 650,
+    questionCountEstimate: 800,
     difficultyLabel: 'Variado',
   },
 
@@ -251,7 +251,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Jogos Olímpicos, atletismo, ténis, ciclismo, surf e F1.',
     icon: Medal,
     tone: 'red',
-    questionCountEstimate: 680,
+    questionCountEstimate: 830,
     difficultyLabel: 'Variado',
   },
   {
@@ -261,7 +261,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Expressões portuguesas, piadas, memes e tiradas inesquecíveis.',
     icon: Laugh,
     tone: 'gold',
-    questionCountEstimate: 650,
+    questionCountEstimate: 800,
     difficultyLabel: 'Fácil',
   },
   {
@@ -271,7 +271,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Do Fado ao Rock, do Pop aos festivais e bandas lendárias.',
     icon: Music,
     tone: 'accent',
-    questionCountEstimate: 670,
+    questionCountEstimate: 824,
     difficultyLabel: 'Variado',
   },
   {
@@ -281,7 +281,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Filmes icónicos, séries, novelas portuguesas e realizadores.',
     icon: Clapperboard,
     tone: 'red',
-    questionCountEstimate: 660,
+    questionCountEstimate: 917,
     difficultyLabel: 'Médio',
   },
   {
@@ -291,7 +291,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Imagens, monumentos, bandeiras, brasões e detalhe visual.',
     icon: Eye,
     tone: 'purple',
-    questionCountEstimate: 650,
+    questionCountEstimate: 750,
     difficultyLabel: 'Médio',
     special: true,
   },
@@ -302,7 +302,7 @@ export const HUB_CATEGORIES: HubCategory[] = [
     description: 'Humor absurdo, perguntas inesperadas e regras com toque de caos.',
     icon: Laugh,
     tone: 'red',
-    questionCountEstimate: 660,
+    questionCountEstimate: 1418,
     difficultyLabel: 'Insano',
     special: true,
   },
