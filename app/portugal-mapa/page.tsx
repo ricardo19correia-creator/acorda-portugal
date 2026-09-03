@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import {
   ArrowLeft,
   Play,
@@ -22,7 +23,6 @@ import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
-import { Portugal3DExperience } from '@/components/portugal-3d-map/Portugal3DExperience'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
@@ -30,14 +30,44 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 
+// Import dinâmico com SSR desativado para prevenir Hydration Mismatch no motor 3D
+const Portugal3DExperienceDynamic = dynamic(
+  () =>
+    import('@/components/portugal-3d-map/Portugal3DExperience').then(
+      (mod) => mod.Portugal3DExperience
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full h-[640px] sm:h-[720px] rounded-3xl overflow-hidden border border-emerald-500/30 bg-slate-950 flex flex-col items-center justify-center p-8 text-center shadow-2xl">
+        <div className="relative mb-4">
+          <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
+          <Globe className="w-7 h-7 text-emerald-400 absolute inset-0 m-auto" />
+        </div>
+        <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400">
+          A INICIALIZAR RADAR 3D // PORTUGAL 2150
+        </span>
+      </div>
+    ),
+  }
+)
+
 export default function PortugalMapaPage() {
   const router = useRouter()
   const { user, profile } = useAuth()
 
-  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => profile?.district || 'Lisboa')
+  // Estado determinístico inicial no SSR para evitar React Error #418
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('Lisboa')
   const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerProfileData | null>(null)
   const [copiedShare, setCopiedShare] = useState<boolean>(false)
+
+  // Sincroniza distrito do perfil no cliente após montagem
+  useEffect(() => {
+    if (profile?.district) {
+      setSelectedDistrict(profile.district)
+    }
+  }, [profile?.district])
 
   // Subscrição Global para Alimentar o Mapa Tático
   useEffect(() => {
@@ -119,9 +149,9 @@ export default function PortugalMapaPage() {
   const handleShare = () => {
     const text = `Explora o Mapa Tático de Portugal 2050 no Acorda Portugal! 🇵🇹`
     const url = typeof window !== 'undefined' ? window.location.href : 'https://acordaportugal.pt/portugal-mapa'
-    if (navigator.share) {
+    if (typeof navigator !== 'undefined' && navigator.share) {
       navigator.share({ title: 'Portugal 2050 — Mapa Tático 3D', text, url }).catch(() => {})
-    } else if (navigator.clipboard) {
+    } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(`${text} ${url}`)
       setCopiedShare(true)
       setTimeout(() => setCopiedShare(false), 3000)
@@ -193,7 +223,7 @@ export default function PortugalMapaPage() {
 
             {/* Mapa 3D Completo */}
             <div className="mt-4">
-              <Portugal3DExperience
+              <Portugal3DExperienceDynamic
                 territories={districtWarTerritories}
                 selectedDistrict={selectedDistrict}
                 onSelectDistrict={(dist) => setSelectedDistrict(dist)}

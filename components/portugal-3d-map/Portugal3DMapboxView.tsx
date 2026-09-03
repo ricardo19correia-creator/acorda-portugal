@@ -30,6 +30,8 @@ import {
   ArrowRight,
   Flame,
   X,
+  AlertTriangle,
+  RefreshCw,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -41,10 +43,6 @@ interface Portugal3DMapboxViewProps {
   onSelectDistrict?: (districtName: string) => void
   onStartGame?: (route: string) => void
 }
-
-const DEFAULT_MAPBOX_TOKEN =
-  process.env.NEXT_PUBLIC_MAPBOX_TOKEN ||
-  'pk.eyJ1IjoicmljYXJkbzE5Y29ycmVpYSIsImEiOiJjbTdtbTVydzcwMTdvMmtzZjB6a25jMnQxIn0.a3KxT863U1m6w9x6x9'
 
 const CAMERA_PRESETS = {
   continente: {
@@ -67,6 +65,32 @@ const CAMERA_PRESETS = {
   },
 }
 
+// Estilo de satélite livre de contingência (ArcGIS World Imagery + OpenStreetMap)
+// Usado automaticamente se o token Mapbox for inválido ou responder com erro 401
+const FALLBACK_RASTER_STYLE: mapboxgl.Style = {
+  version: 8,
+  sources: {
+    'esri-satellite': {
+      type: 'raster',
+      tiles: [
+        'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      ],
+      tileSize: 256,
+      attribution: '&copy; Esri &mdash; World Imagery',
+      maxzoom: 19,
+    },
+  },
+  layers: [
+    {
+      id: 'esri-satellite-layer',
+      type: 'raster',
+      source: 'esri-satellite',
+      minzoom: 0,
+      maxzoom: 19,
+    },
+  ],
+}
+
 export function Portugal3DMapboxView({
   className,
   territories = [],
@@ -77,16 +101,19 @@ export function Portugal3DMapboxView({
   const router = useRouter()
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<mapboxgl.Map | null>(null)
-  const [mapLoaded, setMapLoaded] = useState(false)
+
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [mapLoaded, setMapLoaded] = useState<boolean>(false)
+  const [hasAuthError, setHasAuthError] = useState<boolean>(false)
+  const [usingFallbackStyle, setUsingFallbackStyle] = useState<boolean>(false)
   const [activeDistrict, setActiveDistrict] = useState<string>(selectedDistrict || 'Lisboa')
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null)
   const [showTacticalLayer, setShowTacticalLayer] = useState<boolean>(true)
-  const [terrainExaggeration, setTerrainExaggeration] = useState<number>(1.6)
+  const [terrainExaggeration, setTerrainExaggeration] = useState<number>(1.5)
   const [activeRegion, setActiveRegion] = useState<'continente' | 'acores' | 'madeira'>('continente')
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [tokenWarning, setTokenWarning] = useState(false)
 
-  // Território ativo e dados competitivos
+  // Metadados do distrito ativo
   const currentMetadata = useMemo(() => {
     return getTerritoryByName(activeDistrict) || TERRITORY_METADATA['Lisboa']
   }, [activeDistrict])
@@ -95,169 +122,227 @@ export function Portugal3DMapboxView({
     return territories.find((t) => t.name.toLowerCase() === activeDistrict.toLowerCase())
   }, [territories, activeDistrict])
 
-  // Inicialização do Mapbox GL JS 3D
-  useEffect(() => {
+  // Inicialização do Mapbox
+  const initMap = useCallback((useFallback = false) => {
     if (!mapContainerRef.current) return
 
-    mapboxgl.accessToken = DEFAULT_MAPBOX_TOKEN
-
-    // Instancia o mapa
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/satellite-streets-v12',
-      center: [-8.2245, 39.3999],
-      zoom: 5.5,
-      pitch: 45,
-      bearing: 0,
-      antialias: true,
-      maxPitch: 85,
-    })
-
-    mapRef.current = map
-
-    map.on('load', () => {
-      setMapLoaded(true)
-
-      // 1. ELEVAÇÃO 3D REAL (DEM)
+    // Limpar instância anterior se existir
+    if (mapRef.current) {
       try {
-        map.addSource('mapbox-dem', {
-          type: 'raster-dem',
-          url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-          tileSize: 512,
-          maxzoom: 14,
-        })
-        map.setTerrain({ source: 'mapbox-dem', exaggeration: terrainExaggeration })
-      } catch (err) {
-        console.warn('Mapbox DEM layer warning:', err)
+        mapRef.current.remove()
+      } catch (e) {
+        console.warn('Map cleanup notice:', e)
       }
+      mapRef.current = null
+    }
 
-      // 2. ATMOSFERA & HORIZONTE ESPACIAL (FOG)
-      try {
-        map.setFog({
-          range: [0.5, 10],
-          color: 'rgb(11, 15, 25)',
-          'high-color': 'rgb(36, 92, 223)',
-          'horizon-blend': 0.02,
-          'space-color': 'rgb(11, 15, 25)',
-          'star-intensity': 0.6,
-        })
-      } catch (err) {
-        console.warn('Mapbox Fog setup warning:', err)
-      }
+    setIsLoading(true)
 
-      // 3. CAMADA GEOJSON DOS DISTRITOS
-      try {
-        map.addSource('portugal-districts', {
-          type: 'geojson',
-          data: PORTUGAL_DISTRICTS_GEOJSON,
-        })
+    const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
+    const isTokenMissing = !rawToken || rawToken.length < 15
 
-        // Polígonos translúcidos com cores táticas
-        map.addLayer({
-          id: 'districts-fill',
-          type: 'fill',
-          source: 'portugal-districts',
-          layout: {
-            visibility: showTacticalLayer ? 'visible' : 'none',
-          },
-          paint: {
-            'fill-color': ['get', 'color'],
-            'fill-opacity': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              0.45,
-              0.22,
-            ],
-          },
-        })
+    if (isTokenMissing || useFallback) {
+      setUsingFallbackStyle(true)
+      mapboxgl.accessToken = ''
+    } else {
+      mapboxgl.accessToken = rawToken
+      setUsingFallbackStyle(false)
+    }
 
-        // Fronteiras neon táticas
-        map.addLayer({
-          id: 'districts-line',
-          type: 'line',
-          source: 'portugal-districts',
-          layout: {
-            visibility: showTacticalLayer ? 'visible' : 'none',
-          },
-          paint: {
-            'line-color': '#10b981',
-            'line-width': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              3.5,
-              1.8,
-            ],
-            'line-opacity': 0.9,
-          },
-        })
+    const initialStyle = isTokenMissing || useFallback
+      ? FALLBACK_RASTER_STYLE
+      : 'mapbox://styles/mapbox/satellite-streets-v12'
 
-        // Cursor & Eventos de Interação
-        let hoveredId: string | number | null = null
-
-        map.on('mousemove', 'districts-fill', (e) => {
-          if (e.features && e.features.length > 0) {
-            map.getCanvas().style.cursor = 'pointer'
-            const feature = e.features[0]
-            const name = feature.properties?.name
-            if (name) {
-              setHoveredDistrict(name)
-            }
-          }
-        })
-
-        map.on('mouseleave', 'districts-fill', () => {
-          map.getCanvas().style.cursor = ''
-          setHoveredDistrict(null)
-        })
-
-        map.on('click', 'districts-fill', (e) => {
-          if (e.features && e.features.length > 0) {
-            const feature = e.features[0]
-            const name = feature.properties?.name
-            if (name) {
-              handleSelectDistrict(name)
-            }
-          }
-        })
-      } catch (err) {
-        console.warn('Mapbox GeoJSON layers warning:', err)
-      }
-
-      // 4. FLY-IN CINEMATOGRÁFICO DE ENTRADA
-      map.flyTo({
+    try {
+      const map = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: initialStyle,
         center: [-8.2245, 39.3999],
         zoom: 6.8,
         pitch: 65,
         bearing: -12,
-        duration: 2500,
-        essential: true,
+        antialias: true,
+        maxPitch: 85,
       })
-    })
 
-    map.on('error', (e) => {
-      console.warn('Mapbox GL runtime event:', e)
-      if (e.error?.message?.includes('token') || e.error?.message?.includes('Unauthorized')) {
-        setTokenWarning(true)
+      mapRef.current = map
+
+      // 1. Tratamento de Erros de Autenticação / 401
+      map.on('error', (e) => {
+        console.error('Erro de runtime do Mapbox:', e)
+        const errorMsg = e.error?.message || ''
+        const errorStatus = (e.error as any)?.status
+
+        if (
+          errorStatus === 401 ||
+          errorMsg.includes('401') ||
+          errorMsg.includes('Unauthorized') ||
+          errorMsg.includes('Forbidden') ||
+          errorMsg.includes('token')
+        ) {
+          setHasAuthError(true)
+          setIsLoading(false)
+          // Se falhou com estilo Mapbox proprietário, alterna graciosamente para o satélite aberto
+          if (!usingFallbackStyle && !useFallback) {
+            console.warn('Token 401 detectado: a carregar satélite aberto de contingência...')
+            setTimeout(() => initMap(true), 100)
+          }
+        }
+      })
+
+      // 2. Configuração no Load
+      map.on('load', () => {
+        setMapLoaded(true)
+        setIsLoading(false)
+        setHasAuthError(false)
+
+        // ELEVAÇÃO 3D REAL (DEM)
+        if (!useFallback && !isTokenMissing) {
+          try {
+            map.addSource('mapbox-dem', {
+              type: 'raster-dem',
+              url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+              tileSize: 512,
+              maxzoom: 14,
+            })
+            map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 })
+          } catch (err) {
+            console.warn('Mapbox DEM layer warning:', err)
+          }
+
+          // ATMOSFERA & HORIZONTE ESPACIAL (FOG)
+          try {
+            map.setFog({
+              range: [0.5, 10],
+              color: 'rgb(11, 15, 25)',
+              'high-color': 'rgb(36, 92, 223)',
+              'horizon-blend': 0.02,
+              'space-color': 'rgb(11, 15, 25)',
+              'star-intensity': 0.6,
+            })
+          } catch (err) {
+            console.warn('Mapbox Fog setup warning:', err)
+          }
+        }
+
+        // CAMADA GEOJSON DOS 20 DISTRITOS
+        try {
+          if (!map.getSource('portugal-districts')) {
+            map.addSource('portugal-districts', {
+              type: 'geojson',
+              data: PORTUGAL_DISTRICTS_GEOJSON,
+            })
+
+            // Camada de preenchimento tático
+            map.addLayer({
+              id: 'districts-fill',
+              type: 'fill',
+              source: 'portugal-districts',
+              layout: {
+                visibility: 'visible',
+              },
+              paint: {
+                'fill-color': ['get', 'color'],
+                'fill-opacity': [
+                  'case',
+                  ['boolean', ['feature-state', 'hover'], false],
+                  0.48,
+                  0.22,
+                ],
+              },
+            })
+
+            // Camada de contorno néon
+            map.addLayer({
+              id: 'districts-line',
+              type: 'line',
+              source: 'portugal-districts',
+              layout: {
+                visibility: 'visible',
+              },
+              paint: {
+                'line-color': '#10b981',
+                'line-width': [
+                  'case',
+                  ['boolean', ['feature-state', 'hover'], false],
+                  3.5,
+                  1.8,
+                ],
+                'line-opacity': 0.9,
+              },
+            })
+
+            // Eventos de Mouse
+            map.on('mousemove', 'districts-fill', (e) => {
+              if (e.features && e.features.length > 0) {
+                map.getCanvas().style.cursor = 'pointer'
+                const name = e.features[0].properties?.name
+                if (name) setHoveredDistrict(name)
+              }
+            })
+
+            map.on('mouseleave', 'districts-fill', () => {
+              map.getCanvas().style.cursor = ''
+              setHoveredDistrict(null)
+            })
+
+            map.on('click', 'districts-fill', (e) => {
+              if (e.features && e.features.length > 0) {
+                const name = e.features[0].properties?.name
+                if (name) handleSelectDistrict(name)
+              }
+            })
+          }
+        } catch (err) {
+          console.warn('GeoJSON layers setup warning:', err)
+        }
+      })
+
+      // 3. Desbloqueio seguro no evento 'idle'
+      map.on('idle', () => {
+        setIsLoading(false)
+      })
+    } catch (err) {
+      console.error('Erro ao instanciar mapa Mapbox:', err)
+      setIsLoading(false)
+      if (!useFallback) {
+        initMap(true)
       }
-    })
+    }
+  }, [usingFallbackStyle])
+
+  useEffect(() => {
+    initMap(false)
+
+    // Timeout de segurança para nunca manter o loader preso
+    const safetyTimer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2800)
 
     return () => {
-      map.remove()
-      mapRef.current = null
+      clearTimeout(safetyTimer)
+      if (mapRef.current) {
+        try {
+          mapRef.current.remove()
+        } catch (e) {
+          console.warn('Cleanup warning:', e)
+        }
+        mapRef.current = null
+      }
     }
-  }, [])
+  }, [initMap])
 
-  // Sincronização do relevo quando a escala de elevação muda
+  // Atualização do Relevo 3D
   useEffect(() => {
-    if (!mapRef.current || !mapLoaded) return
+    if (!mapRef.current || !mapLoaded || usingFallbackStyle) return
     try {
       mapRef.current.setTerrain({ source: 'mapbox-dem', exaggeration: terrainExaggeration })
     } catch (e) {
-      console.warn('Terrain update warning:', e)
+      console.warn('Terrain update error:', e)
     }
-  }, [terrainExaggeration, mapLoaded])
+  }, [terrainExaggeration, mapLoaded, usingFallbackStyle])
 
-  // Alternância da camada tática
+  // Visibilidade das Fronteiras Táticas
   useEffect(() => {
     if (!mapRef.current || !mapLoaded) return
     try {
@@ -269,11 +354,11 @@ export function Portugal3DMapboxView({
         mapRef.current.setLayoutProperty('districts-line', 'visibility', visibility)
       }
     } catch (e) {
-      console.warn('Layer visibility warning:', e)
+      console.warn('Layer visibility error:', e)
     }
   }, [showTacticalLayer, mapLoaded])
 
-  // Voo suave para um distrito selecionado
+  // Voo suave para distrito
   const handleSelectDistrict = useCallback(
     (name: string) => {
       setActiveDistrict(name)
@@ -294,7 +379,7 @@ export function Portugal3DMapboxView({
     [onSelectDistrict]
   )
 
-  // Voo para regiões globais
+  // Voo suave para regiões
   const handleSwitchRegion = useCallback((regionKey: 'continente' | 'acores' | 'madeira') => {
     setActiveRegion(regionKey)
     const preset = CAMERA_PRESETS[regionKey]
@@ -310,12 +395,10 @@ export function Portugal3DMapboxView({
     }
   }, [])
 
-  // Reset de câmara
   const handleResetCamera = useCallback(() => {
     handleSwitchRegion('continente')
   }, [handleSwitchRegion])
 
-  // Ações de jogo
   const handleDefendTerritory = () => {
     const route = `/jogar?distrito=${encodeURIComponent(activeDistrict)}`
     if (onStartGame) {
@@ -337,18 +420,59 @@ export function Portugal3DMapboxView({
         className
       )}
     >
-      {/* MAPBOX CANVAS CONTAINER */}
+      {/* MAPBOX CONTAINER */}
       <div ref={mapContainerRef} className="absolute inset-0 w-full h-full z-0" />
 
-      {/* GRADIENTE SUPERIOR / ATMOSFERA TÁTICA */}
+      {/* GRADIENTE SUPERIOR / ATMOSFERA */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-slate-950/90 via-slate-950/40 to-transparent z-10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent z-10" />
 
       {/* ========================================================= */}
-      {/* 1. HUD SUPERIOR TÁTICO: RADAR 3D 2150                    */}
+      {/* LOADER ELEGANTE (REMOVIDO AUTOMATICAMENTE NO LOAD/IDLE)    */}
+      {/* ========================================================= */}
+      {isLoading && (
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-slate-950/80 backdrop-blur-md animate-fade-in pointer-events-none">
+          <div className="relative mb-4">
+            <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
+            <Globe className="w-7 h-7 text-emerald-400 absolute inset-0 m-auto animate-pulse" />
+          </div>
+          <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400">
+            A CALIBRAR SATÉLITE // PORTUGAL 3D
+          </span>
+          <span className="text-[11px] text-slate-400 mt-1 font-mono">
+            A carregar relevo da Serra da Estrela e Gerês...
+          </span>
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* AVISO ELEGANTE DE TOKEN (SE MODO DE CONTINGÊNCIA ATIVO)   */}
+      {/* ========================================================= */}
+      {hasAuthError && (
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 z-30 max-w-md w-full px-4 animate-rise">
+          <div className="rounded-2xl bg-amber-950/90 border border-amber-500/50 p-3.5 backdrop-blur-md shadow-2xl flex items-center justify-between gap-3 text-amber-200 text-xs">
+            <div className="flex items-center gap-2 min-w-0">
+              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="truncate">
+                Satélite Aberto Ativo (Chave Mapbox padrão em contingência).
+              </span>
+            </div>
+            <button
+              onClick={() => initMap(false)}
+              className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider flex items-center gap-1 shrink-0 cursor-pointer"
+            >
+              <RefreshCw className="w-3 h-3" />
+              Recarregar
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* 1. HUD SUPERIOR TÁTICO: RADAR 3D                         */}
       {/* ========================================================= */}
       <div className="relative z-20 flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5">
-        {/* Indicador de Estado Tático */}
+        {/* Indicador de Estado */}
         <div className="flex items-center gap-2.5 rounded-2xl bg-slate-950/80 border border-emerald-500/40 px-3.5 py-2 backdrop-blur-md shadow-lg shadow-emerald-950/40">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -359,12 +483,12 @@ export function Portugal3DMapboxView({
               PORTUGAL 3D REAL-TIME // RADAR ATIVO
             </span>
             <span className="text-[11px] font-bold text-slate-300">
-              {hoveredDistrict ? `Foco: ${hoveredDistrict}` : `Alvo Selecionado: ${activeDistrict}`}
+              {hoveredDistrict ? `Foco: ${hoveredDistrict}` : `Alvo: ${activeDistrict}`}
             </span>
           </div>
         </div>
 
-        {/* Quick Region Selectors (Continente / Açores / Madeira) */}
+        {/* Quick Region Selectors */}
         <div className="flex items-center gap-1.5 rounded-2xl bg-slate-950/80 border border-white/15 p-1 backdrop-blur-md shadow-lg">
           <button
             onClick={() => handleSwitchRegion('continente')}
@@ -401,7 +525,7 @@ export function Portugal3DMapboxView({
           </button>
         </div>
 
-        {/* Controlos de Câmara e Camada */}
+        {/* Controlos de Câmara & Camada */}
         <div className="flex items-center gap-2">
           {/* Toggle Fronteiras Táticas */}
           <button
@@ -421,17 +545,19 @@ export function Portugal3DMapboxView({
           </button>
 
           {/* Toggle Relevo 3D (DEM) */}
-          <button
-            onClick={() => {
-              const next = terrainExaggeration === 1.0 ? 1.6 : terrainExaggeration === 1.6 ? 2.2 : 1.0
-              setTerrainExaggeration(next)
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-white/30 text-xs font-bold text-slate-300 backdrop-blur-md transition cursor-pointer"
-            title="Ajustar Exagero de Elevação 3D"
-          >
-            <Compass className="w-3.5 h-3.5 text-amber-400" />
-            <span>3D {terrainExaggeration}x</span>
-          </button>
+          {!usingFallbackStyle && (
+            <button
+              onClick={() => {
+                const next = terrainExaggeration === 1.0 ? 1.5 : terrainExaggeration === 1.5 ? 2.2 : 1.0
+                setTerrainExaggeration(next)
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-white/30 text-xs font-bold text-slate-300 backdrop-blur-md transition cursor-pointer"
+              title="Ajustar Exagero de Elevação 3D"
+            >
+              <Compass className="w-3.5 h-3.5 text-amber-400" />
+              <span>3D {terrainExaggeration}x</span>
+            </button>
+          )}
 
           {/* Reset Câmara */}
           <button
@@ -478,7 +604,7 @@ export function Portugal3DMapboxView({
               </p>
             </div>
 
-            {/* Brasão / Ícone de Poder */}
+            {/* Brasão / Ícone */}
             <div className="shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-900/40 border border-emerald-500/40 flex items-center justify-center text-2xl shadow-inner">
               🏛️
             </div>
@@ -514,7 +640,7 @@ export function Portugal3DMapboxView({
             </div>
           </div>
 
-          {/* Botões de Ação Tática */}
+          {/* Botões de Ação */}
           <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
             <button
               onClick={handleDefendTerritory}

@@ -3,25 +3,52 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
-import { Portugal3DExperience } from '@/components/portugal-3d-map/Portugal3DExperience'
 import { DistrictRanking } from '@/components/district-ranking'
 import { SiteFooter } from '@/components/site-footer'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { ArrowLeft, Play, Globe, Flag, Trophy, Swords } from 'lucide-react'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 
+const Portugal3DExperienceDynamic = dynamic(
+  () =>
+    import('@/components/portugal-3d-map/Portugal3DExperience').then(
+      (mod) => mod.Portugal3DExperience
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full h-[640px] sm:h-[720px] rounded-3xl overflow-hidden border border-emerald-500/30 bg-slate-950 flex flex-col items-center justify-center p-8 text-center shadow-2xl">
+        <div className="relative mb-4">
+          <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
+          <Globe className="w-7 h-7 text-emerald-400 absolute inset-0 m-auto" />
+        </div>
+        <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400">
+          A INICIALIZAR RADAR 3D // PORTUGAL 2150
+        </span>
+      </div>
+    ),
+  }
+)
+
 export default function PortugalPage() {
   const router = useRouter()
   const { user, profile } = useAuth()
 
-  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => profile?.district || 'Lisboa')
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('Lisboa')
   const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerProfileData | null>(null)
+
+  useEffect(() => {
+    if (profile?.district) {
+      setSelectedDistrict(profile.district)
+    }
+  }, [profile?.district])
 
   useEffect(() => {
     const unsub = subscribeRankings(
@@ -124,7 +151,7 @@ export default function PortugalPage() {
 
             {/* Interactive 3D Map Showcase */}
             <div className="mt-4">
-              <Portugal3DExperience
+              <Portugal3DExperienceDynamic
                 territories={districtWarTerritories}
                 selectedDistrict={selectedDistrict}
                 onSelectDistrict={(dist) => setSelectedDistrict(dist)}
