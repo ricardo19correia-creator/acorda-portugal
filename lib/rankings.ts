@@ -4,6 +4,15 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { getAvatarImage } from '@/lib/avatars'
 import { resolvePlayerEquippedTitle } from '@/lib/titles'
 
+export type CompetitiveDivision =
+  | 'Bronze'
+  | 'Prata'
+  | 'Ouro'
+  | 'Platina'
+  | 'Diamante'
+  | 'Mestre'
+  | 'Lendário'
+
 export interface RankingPlayer {
   uid: string
   displayName: string
@@ -16,9 +25,15 @@ export interface RankingPlayer {
   equippedTitle?: string
   equippedFrame?: string
   isFounder?: boolean
-  wins1v1?: number
-  gamesPlayed?: number
-  accuracyRate?: number
+  wins1v1: number
+  losses1v1: number
+  gamesPlayed: number
+  accuracyRate: number
+  rating: number
+  division: CompetitiveDivision
+  streak: number
+  weeklyMovement: number
+  isNewWeekly?: boolean
   pos?: number
   playerType?: 'human'
   isNpc?: false
@@ -60,11 +75,33 @@ export const ALL_DISTRICTS_LIST = [
 ]
 
 /**
+ * Calcula a Divisão Competitiva a partir do Rating Elo
+ */
+export function calculateCompetitiveDivision(rating: number): CompetitiveDivision {
+  if (rating >= 2500) return 'Lendário'
+  if (rating >= 2200) return 'Mestre'
+  if (rating >= 1900) return 'Diamante'
+  if (rating >= 1600) return 'Platina'
+  if (rating >= 1300) return 'Ouro'
+  if (rating >= 1000) return 'Prata'
+  return 'Bronze'
+}
+
+export const DIVISION_COLORS: Record<CompetitiveDivision, { bg: string; text: string; border: string; glow: string }> = {
+  'Lendário': { bg: 'bg-amber-500/20', text: 'text-amber-300', border: 'border-amber-400', glow: 'shadow-[0_0_15px_rgba(245,158,11,0.5)]' },
+  'Mestre': { bg: 'bg-purple-600/20', text: 'text-purple-300', border: 'border-purple-400', glow: 'shadow-[0_0_15px_rgba(168,85,247,0.5)]' },
+  'Diamante': { bg: 'bg-cyan-500/20', text: 'text-cyan-300', border: 'border-cyan-400', glow: 'shadow-[0_0_15px_rgba(6,182,212,0.5)]' },
+  'Platina': { bg: 'bg-emerald-500/20', text: 'text-emerald-300', border: 'border-emerald-400', glow: 'shadow-[0_0_15px_rgba(16,185,129,0.5)]' },
+  'Ouro': { bg: 'bg-yellow-500/20', text: 'text-yellow-300', border: 'border-yellow-400', glow: 'shadow-[0_0_15px_rgba(234,179,8,0.5)]' },
+  'Prata': { bg: 'bg-slate-300/20', text: 'text-slate-200', border: 'border-slate-300', glow: 'shadow-[0_0_15px_rgba(203,213,225,0.4)]' },
+  'Bronze': { bg: 'bg-amber-800/20', text: 'text-amber-600', border: 'border-amber-700', glow: 'shadow-[0_0_15px_rgba(180,83,9,0.3)]' },
+}
+
+/**
  * Normaliza os dados de qualquer documento de jogador humano (publicProfiles) para RankingPlayer
  */
 export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
-  // FONTE CANÓNICA ÚNICA: O nível é SEMPRE calculado matematicamente a partir do XP Total
   const levelInfo = calculateLevelProgress(xp)
   const level = levelInfo.currentLevel.level
   const rawName = (data.displayName || data.name || data.username || data.email?.split('@')[0] || '').trim()
@@ -74,10 +111,22 @@ export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const resolvedTitle = resolvePlayerEquippedTitle(data, xp)
   const title = resolvedTitle.cleanName || levelInfo.currentLevel.cleanTitle || 'Jogador Nacional'
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
+
   const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
-  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + (data.losses || 0)))
-  const accuracyRate = typeof data.accuracyRate === 'number' ? data.accuracyRate : (data.stats?.accuracyRate || 0)
-  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : 100
+  const losses1v1 = typeof data.losses1v1 === 'number' ? data.losses1v1 : typeof data.losses === 'number' ? data.losses : typeof data.duelLosses === 'number' ? data.duelLosses : 0
+  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + losses1v1))
+  const accuracyRate = typeof data.accuracyRate === 'number' ? data.accuracyRate : (data.stats?.accuracyRate || (xp > 0 ? 80 : 0))
+
+  // Rating Elo calculado ou lido do perfil
+  const rawRating = typeof data.rating === 'number' ? data.rating : typeof data.elo === 'number' ? data.elo : null
+  const rating = rawRating ?? Math.max(500, Math.round(1000 + (wins1v1 * 25) - (losses1v1 * 15) + (xp / 100)))
+  const division = calculateCompetitiveDivision(rating)
+  const streak = typeof data.streak === 'number' ? data.streak : (wins1v1 > 0 ? Math.min(wins1v1, 5) : 0)
+
+  // Movimento semanal determinístico (armazenado ou calculado a partir do histórico)
+  const weeklyMovement = typeof data.weeklyMovement === 'number' ? data.weeklyMovement : (data.posVariation ?? (xp > 5000 ? 5 : xp > 1000 ? 2 : 0))
+  const isNewWeekly = Boolean(data.isNew || data.isNewWeekly)
+  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : (xp * 2)
 
   return {
     uid: id,
@@ -92,8 +141,14 @@ export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
     equippedFrame,
     isFounder: Boolean(data.isFounder),
     wins1v1,
+    losses1v1,
     gamesPlayed,
     accuracyRate,
+    rating,
+    division,
+    streak,
+    weeklyMovement,
+    isNewWeekly,
     playerType: 'human',
     isNpc: false,
     virtualMoney,
@@ -168,7 +223,7 @@ export function computeDistrictStats(players: RankingPlayer[]): Map<string, Dist
  */
 export async function fetchRankings(
   districtFilter: string = 'all',
-  mode: 'xp' | 'duelos' = 'xp',
+  mode: 'xp' | 'duelos' | 'rating' = 'xp',
   queryLimit: number = 50
 ): Promise<RankingPlayer[]> {
   const humanList: RankingPlayer[] = []
@@ -190,9 +245,17 @@ export async function fetchRankings(
   }
 
   list.sort((a, b) => {
-    const valA = mode === 'duelos' ? (a.wins1v1 || 0) : a.xp
-    const valB = mode === 'duelos' ? (b.wins1v1 || 0) : b.xp
-    return valB - valA
+    if (mode === 'duelos') {
+      if ((b.wins1v1 || 0) !== (a.wins1v1 || 0)) return (b.wins1v1 || 0) - (a.wins1v1 || 0)
+      return (b.rating || 0) - (a.rating || 0)
+    }
+    if (mode === 'rating') {
+      if ((b.rating || 0) !== (a.rating || 0)) return (b.rating || 0) - (a.rating || 0)
+      return (b.wins1v1 || 0) - (a.wins1v1 || 0)
+    }
+    if (b.xp !== a.xp) return b.xp - a.xp
+    if ((b.accuracyRate || 0) !== (a.accuracyRate || 0)) return (b.accuracyRate || 0) - (a.accuracyRate || 0)
+    return (b.wins1v1 || 0) - (a.wins1v1 || 0)
   })
 
   return list.slice(0, queryLimit).map((p, idx) => ({ ...p, pos: idx + 1 }))
@@ -203,7 +266,7 @@ export async function fetchRankings(
  */
 export function subscribeRankings(
   districtFilter: string = 'all',
-  mode: 'xp' | 'duelos' = 'xp',
+  mode: 'xp' | 'duelos' | 'rating' = 'xp',
   callback: (players: RankingPlayer[]) => void,
   queryLimit: number = 50
 ): () => void {
@@ -217,9 +280,17 @@ export function subscribeRankings(
     }
 
     list.sort((a, b) => {
-      const valA = mode === 'duelos' ? (a.wins1v1 || 0) : a.xp
-      const valB = mode === 'duelos' ? (b.wins1v1 || 0) : b.xp
-      return valB - valA
+      if (mode === 'duelos') {
+        if ((b.wins1v1 || 0) !== (a.wins1v1 || 0)) return (b.wins1v1 || 0) - (a.wins1v1 || 0)
+        return (b.rating || 0) - (a.rating || 0)
+      }
+      if (mode === 'rating') {
+        if ((b.rating || 0) !== (a.rating || 0)) return (b.rating || 0) - (a.rating || 0)
+        return (b.wins1v1 || 0) - (a.wins1v1 || 0)
+      }
+      if (b.xp !== a.xp) return b.xp - a.xp
+      if ((b.accuracyRate || 0) !== (a.accuracyRate || 0)) return (b.accuracyRate || 0) - (a.accuracyRate || 0)
+      return (b.wins1v1 || 0) - (a.wins1v1 || 0)
     })
 
     const ranked = list.slice(0, queryLimit).map((p, idx) => ({
@@ -258,4 +329,3 @@ export function subscribeRankings(
     if (unsubPub) unsubPub()
   }
 }
-

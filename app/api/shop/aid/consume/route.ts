@@ -122,15 +122,19 @@ export async function POST(req: NextRequest) {
         [`inventory.${aidRule.id}`]: newStock,
         updatedAt: FieldValue.serverTimestamp(),
       }
-      if (aidRule.id === 'aid_50_50') {
+      if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
         updatePayload['consumables.help5050'] = newStock
         updatePayload['inventory.utilities.fiftyFifty'] = newStock
-      } else if (aidRule.id === 'aid_public_vote') {
+      } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
         updatePayload['consumables.publicVote'] = newStock
         updatePayload['inventory.utilities.publicVote'] = newStock
-      } else if (aidRule.id === 'aid_freeze_time') {
+      } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
         updatePayload['consumables.freezeTime'] = newStock
         updatePayload['inventory.utilities.freezeTime'] = newStock
+      } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
+        updatePayload['consumables.hints'] = newStock
+      } else if (aidRule.id === 'AID_008' || aidRule.id === 'aid_streak_protection' || aidRule.aliases?.includes('consumable_protecao_streak')) {
+        updatePayload['consumables.streakProtection'] = newStock
       }
       transaction.update(userRef, updatePayload)
 
@@ -144,7 +148,7 @@ export async function POST(req: NextRequest) {
     // 5. Cálculo Determinado pelo Servidor do Efeito de Gameplay
     let effectData: Record<string, any> = {}
 
-    if (aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
+    if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
       // 50/50: elimina exatamente 2 erradas
       const options = questionData?.options || [
         { key: 'A', text: '' },
@@ -158,7 +162,7 @@ export async function POST(req: NextRequest) {
         eliminatedOptions: eliminated,
         keptOptions: options.filter((o: any) => !eliminated.includes(o.key)).map((o: any) => o.key),
       }
-    } else if (aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
+    } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
       // Pergunta ao Público: soma exatamente 100% com viés plausível
       const options = questionData?.options || []
       const correct = String(questionData?.correct || 'A').toUpperCase()
@@ -173,7 +177,7 @@ export async function POST(req: NextRequest) {
           percentage: pct,
         })),
       }
-    } else if (aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
+    } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
       // Congelar tempo: +15 segundos autorizados
       const now = Date.now()
       const bonusSeconds = 15
@@ -182,7 +186,7 @@ export async function POST(req: NextRequest) {
         freezeGrantedAt: now,
         expiresAt: now + bonusSeconds * 1000,
       }
-    } else if (aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
+    } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
       // Pista inteligente
       const clue = generateQuestionClue({
         question: questionData?.prompt || '',
@@ -194,12 +198,12 @@ export async function POST(req: NextRequest) {
       effectData = {
         clue,
       }
-    } else if (aidRule.id === 'aid_second_chance') {
+    } else if (aidRule.id === 'AID_005' || aidRule.id === 'aid_second_chance') {
       effectData = {
         secondChanceGranted: true,
         maxRetries: 1,
       }
-    } else if (aidRule.id === 'aid_triple_elimination') {
+    } else if (aidRule.id === 'AID_006' || aidRule.id === 'aid_triple_elimination') {
       const options = questionData?.options || []
       const correct = String(questionData?.correct || 'A').toUpperCase()
       const wrongKeys = options.filter((o: any) => o.key !== correct).map((o: any) => o.key)
@@ -207,7 +211,7 @@ export async function POST(req: NextRequest) {
       effectData = {
         eliminatedOptions: eliminated,
       }
-    } else if (aidRule.id === 'aid_fast_answer') {
+    } else if (aidRule.id === 'AID_007' || aidRule.id === 'aid_fast_answer') {
       effectData = {
         bonusSeconds: 5,
         noPenalty: true,

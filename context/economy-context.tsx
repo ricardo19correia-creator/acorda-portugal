@@ -21,6 +21,8 @@ import {
 import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
+import { extractUserCoins, safeSyncLog } from '@/lib/economy-helpers'
+
 export interface EconomyContextType {
   coins: number
   formattedCoins: string
@@ -54,40 +56,55 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
   // 1. Subscrição em Tempo Real ao Firestore (users/{uid})
   useEffect(() => {
     if (!user?.uid) {
-      setCoins(0)
       return
     }
 
     let unsubscribe: (() => void) | undefined
     try {
       const userRef = doc(db, 'users', user.uid)
-      unsubscribe = onSnapshot(userRef, (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.data()
-          const firestoreBalance =
-            typeof data.coins === 'number'
-              ? data.coins
-              : typeof data.euros === 'number'
-                ? data.euros
-                : typeof data.acordaCoins === 'number'
-                  ? data.acordaCoins
-                  : 0
+      unsubscribe = onSnapshot(
+        userRef,
+        (snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.data()
+            const firestoreBalance = extractUserCoins(data)
 
-          setCoins(firestoreBalance)
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('user_coins', String(firestoreBalance))
-            localStorage.setItem('user_euros', String(firestoreBalance))
+            safeSyncLog('ECONOMY_SNAPSHOT', {
+              uid: user.uid,
+              coins: firestoreBalance,
+              fromCache: snapshot.metadata.fromCache,
+            })
+
+            setCoins((prev) => {
+              if (prev !== firestoreBalance) {
+                triggerPulse()
+              }
+              return firestoreBalance
+            })
+
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('user_coins', String(firestoreBalance))
+              localStorage.setItem('user_euros', String(firestoreBalance))
+              window.dispatchEvent(
+                new CustomEvent('balance_updated', {
+                  detail: { coins: firestoreBalance, source: 'firestore_snapshot' },
+                }),
+              )
+            }
           }
-        }
-      })
+        },
+        (err) => {
+          console.warn('[ECONOMY] Aviso transitório no listener de saldo:', err)
+        },
+      )
     } catch (err) {
-      console.warn('[ECONOMY] Aviso no listener de saldo:', err)
+      console.warn('[ECONOMY] Erro ao subscrever listener de saldo:', err)
     }
 
     return () => {
       if (unsubscribe) unsubscribe()
     }
-  }, [user?.uid])
+  }, [user?.uid, triggerPulse])
 
   // 2. Ouvir eventos de sincronização local entre abas
   useEffect(() => {
@@ -140,7 +157,9 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
           const userRef = doc(db, 'users', user.uid)
           await updateDoc(userRef, {
             coins: increment(amount),
+            acordas: increment(amount),
             euros: increment(amount),
+            moedas: increment(amount),
             updatedAt: serverTimestamp(),
           })
 
@@ -195,7 +214,9 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
           const userRef = doc(db, 'users', user.uid)
           await updateDoc(userRef, {
             coins: increment(-amount),
+            acordas: increment(-amount),
             euros: increment(-amount),
+            moedas: increment(-amount),
             updatedAt: serverTimestamp(),
           })
 
@@ -223,16 +244,16 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
   const refreshBalance = useCallback(async (): Promise<number> => {
     if (user?.uid) {
       try {
-        const { getDoc } = await import('firebase/firestore')
-        const snap = await getDoc(doc(db, 'users', user.uid))
+        const { getDoc, getDocFromServer } = await import('firebase/firestore')
+        let snap
+        try {
+          snap = await getDocFromServer(doc(db, 'users', user.uid))
+        } catch {
+          snap = await getDoc(doc(db, 'users', user.uid))
+        }
         if (snap.exists()) {
           const data = snap.data()
-          const b =
-            typeof data.coins === 'number'
-              ? data.coins
-              : typeof data.euros === 'number'
-                ? data.euros
-                : 0
+          const b = extractUserCoins(data)
           setCoins(b)
           if (typeof window !== 'undefined') {
             localStorage.setItem('user_coins', String(b))

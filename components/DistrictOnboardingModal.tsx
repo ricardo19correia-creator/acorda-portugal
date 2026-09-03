@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { PORTUGAL_DISTRICTS } from '@/data/districts'
-import { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } from '@/data/constants'
-import { REAL_AVATARS } from '@/lib/avatars'
+import { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 import { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } from '@/lib/titles'
 
@@ -14,15 +14,7 @@ export interface DistrictOnboardingModalProps {
   onComplete: (district: string) => void
 }
 
-const STARTER_AVATARS = [
-  { id: 'avatar_01', name: 'Cavaleiro Lusitano', image: '/images/avatars/avatar_01.png' },
-  { id: 'avatar_02', name: 'Dama das Quinas', image: '/images/avatars/avatar_02.png' },
-  { id: 'avatar_03', name: 'Navegador dos Mares', image: '/images/avatars/avatar_03.png' },
-  { id: 'avatar_04', name: 'Estudante de Coimbra', image: '/images/avatars/avatar_04.png' },
-]
-
 export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboardingModalProps) {
-  const [selectedAvatar, setSelectedAvatar] = useState('avatar_01')
   const [selectedDistrict, setSelectedDistrict] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -34,98 +26,152 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
 
     try {
       const cleanName = (user.displayName || user.email?.split('@')[0] || 'Jogador').trim()
-      const starterAvatarObj = STARTER_AVATARS.find((a) => a.id === selectedAvatar) || STARTER_AVATARS[0]
-      const chosenAvatarId = starterAvatarObj.id
-      const chosenAvatarUrl = starterAvatarObj.image
+      const chosenAvatarId = STARTER_AVATAR_ID
+      const chosenAvatarUrl = DEFAULT_AVATAR_URL
+      const userRef = doc(db, 'users', user.uid)
+      const { getDoc } = await import('firebase/firestore')
+      const userSnap = await getDoc(userRef)
 
-      // 1. Grava o documento completo do utilizador no Firestore
-      await setDoc(
-        doc(db, 'users', user.uid),
-        {
-          uid: user.uid,
-          displayName: cleanName,
-          name: cleanName,
-          email: user.email || '',
-          photoURL: chosenAvatarUrl,
-          avatar: chosenAvatarUrl,
-          avatarId: chosenAvatarId,
-          equippedAvatar: chosenAvatarId,
-          district: selectedDistrict, // OBRIGATÓRIO (escolhido no seletor)
-          districtLocked: true,
-          level: 1,
-          xp: 0,
-          coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-          euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
-          title: DEFAULT_STARTER_TITLE_NAME,
-          equippedTitle: DEFAULT_STARTER_TITLE_NAME,
-          equippedTitleId: DEFAULT_STARTER_TITLE_ID,
-          equippedFrame: 'default',
-          unlockedFrames: ['default'],
-          unlockedAvatars: [chosenAvatarId],
-          unlockedAchievements: [],
-          claimedAchievements: {},
-          badges: ['novico'],
-          inventory: {
-            avatars: [chosenAvatarId],
-            arenas: ['arena_1'],
-            titles: [DEFAULT_STARTER_TITLE_ID],
-            taunts: ['pack_basico'],
-            frames: ['default'],
-            utilities: {
-              fiftyFifty: 0,
+      if (userSnap.exists()) {
+        const existingData = userSnap.data()
+        // 1. Atualizar apenas território e campos em falta (NUNCA sobrescrever progresso nem moedas)
+        await setDoc(
+          userRef,
+          {
+            district: selectedDistrict,
+            representedDistrict: selectedDistrict,
+            districtLocked: true,
+            updatedAt: serverTimestamp(),
+            ...(existingData.displayName || existingData.name ? {} : { displayName: cleanName, name: cleanName }),
+            ...(existingData.avatarId || existingData.equippedAvatar ? {} : {
+              avatarId: chosenAvatarId,
+              equippedAvatar: chosenAvatarId,
+              avatar: chosenAvatarUrl,
+              photoURL: chosenAvatarUrl,
+              'equipped.avatar': chosenAvatarUrl,
+              'equipped.avatarId': chosenAvatarId,
+            }),
+          },
+          { merge: true }
+        )
+
+        // 2. Atualizar perfil público
+        await setDoc(
+          doc(db, 'publicProfiles', user.uid),
+          {
+            district: selectedDistrict,
+            representedDistrict: selectedDistrict,
+            updatedAt: serverTimestamp(),
+            ...(existingData.displayName || existingData.name ? {} : { displayName: cleanName }),
+          },
+          { merge: true }
+        )
+
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('user_district', selectedDistrict)
+          localStorage.setItem('user_represented_district', selectedDistrict)
+          window.dispatchEvent(new CustomEvent('profile_updated'))
+        }
+      } else {
+        // 1. Novo registo completo com saldo e inventário inicial
+        await setDoc(
+          userRef,
+          {
+            uid: user.uid,
+            displayName: cleanName,
+            name: cleanName,
+            email: user.email || '',
+            photoURL: chosenAvatarUrl,
+            avatar: chosenAvatarUrl,
+            avatarId: chosenAvatarId,
+            equippedAvatar: chosenAvatarId,
+            district: selectedDistrict,
+            representedDistrict: selectedDistrict,
+            districtLocked: true,
+            level: 1,
+            xp: 0,
+            coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+            euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+            title: DEFAULT_STARTER_TITLE_NAME,
+            equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+            equippedTitleId: DEFAULT_STARTER_TITLE_ID,
+            equippedFrame: 'default',
+            unlockedFrames: ['default'],
+            unlockedAvatars: [chosenAvatarId],
+            unlockedAchievements: [],
+            claimedAchievements: {},
+            badges: ['novico'],
+            inventory: {
+              avatars: [chosenAvatarId],
+              arenas: ['arena_1'],
+              titles: [DEFAULT_STARTER_TITLE_ID],
+              taunts: ['pack_basico'],
+              frames: ['default'],
+              utilities: {
+                fiftyFifty: 0,
+                freezeTime: 0,
+                publicVote: 0,
+              },
+            },
+            equipped: {
+              avatar: chosenAvatarUrl,
+              avatarId: chosenAvatarId,
+              title: DEFAULT_STARTER_TITLE_ID,
+              titleId: DEFAULT_STARTER_TITLE_ID,
+              titleName: DEFAULT_STARTER_TITLE_NAME,
+              arena: 'arena_1',
+              frameId: 'default',
+            },
+            consumables: {
+              help5050: 0,
               freezeTime: 0,
               publicVote: 0,
             },
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
           },
-          equipped: {
+          { merge: true }
+        )
+
+        // 2. Sincroniza o perfil público para os Rankings Nacionais
+        await setDoc(
+          doc(db, 'publicProfiles', user.uid),
+          {
+            uid: user.uid,
+            displayName: cleanName,
+            photoURL: chosenAvatarUrl,
             avatar: chosenAvatarUrl,
             avatarId: chosenAvatarId,
-            title: DEFAULT_STARTER_TITLE_ID,
-            titleId: DEFAULT_STARTER_TITLE_ID,
-            titleName: DEFAULT_STARTER_TITLE_NAME,
-            arena: 'arena_1',
-            frameId: 'default',
+            equippedAvatar: chosenAvatarId,
+            'equipped.avatar': chosenAvatarUrl,
+            'equipped.avatarId': chosenAvatarId,
+            district: selectedDistrict,
+            representedDistrict: selectedDistrict,
+            level: 1,
+            xp: 0,
+            title: DEFAULT_STARTER_TITLE_NAME,
+            equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+            equippedTitleId: DEFAULT_STARTER_TITLE_ID,
+            updatedAt: serverTimestamp(),
           },
-          consumables: {
-            help5050: 0,
-            freezeTime: 0,
-            publicVote: 0,
-          },
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      )
+          { merge: true }
+        )
 
-      // 2. Sincroniza o perfil público para os Rankings Nacionais
-      await setDoc(
-        doc(db, 'publicProfiles', user.uid),
-        {
-          uid: user.uid,
-          displayName: cleanName,
-          photoURL: chosenAvatarUrl,
-          avatarId: chosenAvatarId,
-          district: selectedDistrict,
-          level: 1,
-          xp: 0,
-          title: DEFAULT_STARTER_TITLE_NAME,
-          equippedTitle: DEFAULT_STARTER_TITLE_NAME,
-          equippedTitleId: DEFAULT_STARTER_TITLE_ID,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      )
-
-      // 3. Atualiza dados locais de sessão
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('user_district', selectedDistrict)
-        localStorage.setItem('user_avatar', chosenAvatarId)
-        localStorage.setItem('user_photo', chosenAvatarUrl)
-        localStorage.setItem('user_coins', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
-        localStorage.setItem('user_euros', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
-        localStorage.setItem('user_display_name', cleanName)
-        window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS } }))
-        window.dispatchEvent(new CustomEvent('avatarChanged', { detail: { avatarId: chosenAvatarId } }))
+        // 3. Atualiza dados locais de sessão
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('user_district', selectedDistrict)
+          localStorage.setItem('user_represented_district', selectedDistrict)
+          localStorage.setItem('user_avatar', chosenAvatarId)
+          localStorage.setItem('user_equipped_avatar_id', chosenAvatarId)
+          localStorage.setItem('equipped_avatar_id', chosenAvatarId)
+          localStorage.setItem('user_photo', chosenAvatarUrl)
+          localStorage.setItem('user_equipped_avatar', chosenAvatarUrl)
+          localStorage.setItem('user_coins', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
+          localStorage.setItem('user_euros', String(ECONOMY_CONFIG.INITIAL_BONUS_COINS))
+          localStorage.setItem('user_display_name', cleanName)
+          window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS } }))
+          window.dispatchEvent(new CustomEvent('avatarChanged', { detail: { avatarId: chosenAvatarId } }))
+        }
       }
 
       onComplete(selectedDistrict)
@@ -138,7 +184,7 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-4 animate-in fade-in duration-200">
+      <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 animate-in fade-in duration-200">
         <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto text-emerald-400 text-2xl shadow-lg shadow-emerald-500/20">
           🇵🇹
         </div>
@@ -158,33 +204,29 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           </div>
         )}
 
-        {/* Escolha do Avatar Inicial */}
-        <div className="text-left space-y-1.5">
+        {/* Avatar Inicial Canónico Gratuito */}
+        <div className="text-left space-y-2">
           <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-            1. Escolhe o teu Avatar Inicial:
+            1. Avatar Inicial Oficial:
           </label>
-          <div className="grid grid-cols-4 gap-2">
-            {STARTER_AVATARS.map((av) => (
-              <button
-                key={av.id}
-                type="button"
-                onClick={() => setSelectedAvatar(av.id)}
-                className={`flex flex-col items-center p-1.5 rounded-2xl border transition-all cursor-pointer ${
-                  selectedAvatar === av.id
-                    ? 'border-emerald-400 bg-emerald-500/20 ring-2 ring-emerald-400/50 scale-105 shadow-md shadow-emerald-500/20'
-                    : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.05] opacity-70 hover:opacity-100'
-                }`}
-              >
-                <img
-                  src={av.image}
-                  alt={av.name}
-                  className="w-12 h-12 rounded-xl object-cover"
-                />
-                <span className="text-[9px] font-bold text-white mt-1 text-center line-clamp-1">
-                  {av.name.split(' ')[0]}
+          <div className="flex items-center gap-3.5 p-3 rounded-2xl border border-emerald-500/30 bg-emerald-950/20">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={DEFAULT_AVATAR.image}
+              alt={DEFAULT_AVATAR.name}
+              className="w-14 h-14 rounded-xl object-cover border border-emerald-400/40 shadow-md shadow-emerald-500/20 shrink-0"
+            />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-white truncate">{DEFAULT_AVATAR.name}</h3>
+                <span className="px-2 py-0.5 text-[9px] font-black uppercase rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                  Grátis
                 </span>
-              </button>
-            ))}
+              </div>
+              <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                {DEFAULT_AVATAR.subtitle || DEFAULT_AVATAR.description}
+              </p>
+            </div>
           </div>
         </div>
 

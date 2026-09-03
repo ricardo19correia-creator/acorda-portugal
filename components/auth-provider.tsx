@@ -12,6 +12,7 @@ import { sendRealHeartbeat, markRealOffline, HEARTBEAT_INTERVAL_MS } from '@/lib
 import {
   getAvatarById,
   DEFAULT_AVATAR,
+  STARTER_AVATAR_ID,
 } from '@/lib/avatars'
 
 import {
@@ -36,6 +37,14 @@ import {
   resolvePlayerEquippedTitle,
   sanitizeTitleName,
 } from '@/lib/titles'
+import {
+  extractUserCoins,
+  extractUserXp,
+  extractUserLevel,
+  extractUserInventory,
+  extractUserEquipped,
+  safeSyncLog,
+} from '@/lib/economy-helpers'
 
 export type AuthLifecycleState =
   | 'AUTH_INITIALIZING'
@@ -74,7 +83,7 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
     const savedName = localStorage.getItem('user_display_name') || fallbackName
     const savedDistrict = localStorage.getItem('user_district') || ''
     const savedCity = localStorage.getItem('user_city') || ''
-    const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || DEFAULT_AVATAR.id
+    const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || STARTER_AVATAR_ID
     const savedTitleId = localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID
     const savedTitleName = localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME
 
@@ -115,7 +124,7 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       stats: {},
       badges: ['novico'],
       inventory: {
-        avatars: [resolvedAvatar.id],
+        avatars: [resolvedAvatar.id || STARTER_AVATAR_ID],
         arenas: ['arena_1'],
         titles: [DEFAULT_STARTER_TITLE_ID],
         taunts: ['pack_basico'],
@@ -124,7 +133,7 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       },
       equipped: {
         avatar: resolvedAvatar.image,
-        avatarId: resolvedAvatar.id,
+        avatarId: resolvedAvatar.id || STARTER_AVATAR_ID,
         title: savedTitleId,
         titleId: savedTitleId,
         titleName: savedTitleName,
@@ -188,12 +197,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const refreshProfile = useCallback(async () => {
     if (!user?.uid) return
     try {
-      const snap = await getDoc(doc(db, 'users', user.uid))
+      const { getDoc, getDocFromServer } = await import('firebase/firestore')
+      let snap
+      try {
+        snap = await getDocFromServer(doc(db, 'users', user.uid))
+      } catch {
+        snap = await getDoc(doc(db, 'users', user.uid))
+      }
       if (snap.exists()) {
         const data = snap.data()
-        const currentXp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
-        const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : 50
-        const levelVal = calculateLevelProgress(currentXp).currentLevel.level
+        const currentXp = extractUserXp(data)
+        const coinsVal = extractUserCoins(data)
+        const levelVal = extractUserLevel(data, currentXp)
         setProfile((prev) => {
           if (!prev) return prev
           return {
@@ -355,10 +370,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               setLocalSessionId(remoteSessionId)
             }
 
-            const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : (typeof data.acordaCoins === 'number' ? data.acordaCoins : 100)
-            const xpVal = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
-            const levelVal = calculateLevelProgress(xpVal).currentLevel.level
+            const coinsVal = extractUserCoins(data)
+            const xpVal = extractUserXp(data)
+            const levelVal = extractUserLevel(data, xpVal)
             const nameVal = data.name || data.displayName || data.username || currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
+
+            safeSyncLog('AUTH_SNAPSHOT', {
+              uid: currentUser.uid,
+              coins: coinsVal,
+              xp: xpVal,
+              level: levelVal,
+              fromCache: docSnap.metadata.fromCache,
+            })
 
             // Validação territorial
             const rawDistrict = typeof data.district === 'string' ? data.district.trim() : typeof data.representedDistrict === 'string' ? data.representedDistrict.trim() : ''
@@ -375,11 +398,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const equippedTitleIdVal = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTitle.id
             const equippedTitleNameVal = resolvedTitle.cleanName || DEFAULT_STARTER_TITLE_NAME
 
-            // Resolução do avatar
-            const rawAvatarCandidate = data.avatarId || data.equippedAvatar || data.avatar || data.photoURL || currentUser.photoURL
-            const resolvedAvatar = getAvatarById(rawAvatarCandidate)
-            const avatarVal = resolvedAvatar.image
-            const avatarIdVal = resolvedAvatar.id
+            // Resolução do avatar (autoritativa e canónica sem higienização destrutiva)
+            const rawAvatarCandidate = data.avatarId || data.equippedAvatar || (data.equipped as any)?.avatarId || (data.equipped as any)?.avatar || data.avatar
+            let resolvedAvatar = getAvatarById(rawAvatarCandidate)
+            let avatarVal = resolvedAvatar.image
+            let avatarIdVal = resolvedAvatar.id
+
+            // Higienização de posse: se o avatar atual não é o starter e não pertence ao inventário legítimo
+            const rawUserAvatars: string[] = Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [STARTER_AVATAR_ID]
+            const isStarter = avatarIdVal === STARTER_AVATAR_ID
+            const isOwned = isStarter || rawUserAvatars.includes(avatarIdVal) || (Array.isArray(data.unlockedAvatars) && data.unlockedAvatars.includes(avatarIdVal))
+
+            if (!isOwned) {
+              resolvedAvatar = DEFAULT_AVATAR
+              avatarVal = DEFAULT_AVATAR.image
+              avatarIdVal = STARTER_AVATAR_ID
+            }
+
+            // Preservar SEMPRE todos os avatares já adquiridos / desbloqueados
+            const sanitizedInventoryAvatars = Array.from(new Set([
+              STARTER_AVATAR_ID,
+              ...rawUserAvatars,
+              ...(Array.isArray(data.unlockedAvatars) ? data.unlockedAvatars : []),
+            ]))
+
+            // Se o perfil necessita de migração para a versão canónica 2
+            if (data.avatarCanonicalVersion !== 2 || data.avatarId !== avatarIdVal || data.photoURL !== avatarVal) {
+              setDoc(
+                userDocRef,
+                {
+                  avatarId: avatarIdVal,
+                  equippedAvatar: avatarIdVal,
+                  avatar: avatarVal,
+                  photoURL: avatarVal,
+                  'inventory.avatars': sanitizedInventoryAvatars,
+                  unlockedAvatars: sanitizedInventoryAvatars,
+                  'equipped.avatar': avatarVal,
+                  'equipped.avatarId': avatarIdVal,
+                  avatarCanonicalVersion: 2,
+                },
+                { merge: true }
+              ).catch((mErr) => console.warn('[AUTH] Auto-migração não fatal:', mErr))
+            }
+
+            const invData = extractUserInventory(data)
+            const equippedData = extractUserEquipped(data, xpVal)
 
             const loadedProfile: UserProfile = {
               uid: currentUser.uid,
@@ -418,16 +481,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               badges: Array.isArray(data.badges) ? data.badges : ['novico'],
               inventory: {
                 ...(data.inventory || {}),
-                avatars: Array.isArray(data.inventory?.avatars) ? data.inventory.avatars : [DEFAULT_AVATAR.id],
-                arenas: Array.isArray(data.inventory?.arenas) ? data.inventory.arenas : ['arena_1'],
-                titles: Array.isArray(data.inventory?.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : [DEFAULT_STARTER_TITLE_ID],
-                taunts: Array.isArray(data.inventory?.taunts) ? data.inventory.taunts : ['pack_basico'],
-                frames: Array.isArray(data.inventory?.frames) ? data.inventory.frames : ['default'],
-                utilities: {
-                  fiftyFifty: data.inventory?.utilities?.fiftyFifty ?? data.consumables?.help5050 ?? 0,
-                  freezeTime: data.inventory?.utilities?.freezeTime ?? data.consumables?.freezeTime ?? 0,
-                  publicVote: data.inventory?.utilities?.publicVote ?? data.consumables?.publicVote ?? 0,
-                },
+                avatars: invData.avatars,
+                arenas: invData.arenas,
+                titles: invData.titles,
+                taunts: invData.taunts,
+                frames: invData.frames,
+                utilities: invData.utilities,
               },
               equipped: {
                 ...(data.equipped || {}),
@@ -439,9 +498,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 arena: (data.equipped as any)?.arena || 'arena_1',
               },
               consumables: {
-                help5050: data.consumables?.help5050 ?? data.inventory?.utilities?.fiftyFifty ?? 0,
-                freezeTime: data.consumables?.freezeTime ?? data.inventory?.utilities?.freezeTime ?? 0,
-                publicVote: data.consumables?.publicVote ?? data.inventory?.utilities?.publicVote ?? 0,
+                help5050: invData.utilities.fiftyFifty,
+                freezeTime: invData.utilities.freezeTime,
+                publicVote: invData.utilities.publicVote,
               },
             }
 
@@ -455,6 +514,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               try {
                 localStorage.setItem('user_coins', String(coinsVal))
                 localStorage.setItem('user_euros', String(coinsVal))
+                localStorage.setItem('user_xp', String(xpVal))
+                localStorage.setItem('user_level', String(levelVal))
                 localStorage.setItem('user_display_name', nameVal)
                 if (districtVal) {
                   localStorage.setItem('user_district', districtVal)
@@ -470,6 +531,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('equipped_title_id', equippedTitleIdVal)
                 localStorage.setItem('equipped_title', equippedTitleNameVal)
                 localStorage.setItem('user_equipped_title', equippedTitleNameVal)
+
+                window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: coinsVal } }))
+                window.dispatchEvent(new CustomEvent('profile_updated', { detail: loadedProfile }))
+                window.dispatchEvent(new CustomEvent('inventory_updated'))
               } catch (storageErr) {
                 console.warn('[AUTH] Storage local restrito:', storageErr)
               }
@@ -503,7 +568,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             // Novo Utilizador — Criar documento com defaults e merge seguro
             const fallbackName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
             const fallbackAvatar = DEFAULT_AVATAR.image
-            const fallbackAvatarId = DEFAULT_AVATAR.id
+            const fallbackAvatarId = STARTER_AVATAR_ID
 
             const defaultProfileData = {
               uid: currentUser.uid,
@@ -519,7 +584,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               level: 1,
               xp: 0,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              moedas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               title: DEFAULT_STARTER_TITLE_NAME,
               equippedTitle: DEFAULT_STARTER_TITLE_NAME,
               equippedTitleId: DEFAULT_STARTER_TITLE_ID,
@@ -565,7 +632,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               level: 1,
               xp: 0,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+              moedas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               streak: 0,
               gamesPlayed: 0,
               wins: 0,
@@ -589,6 +658,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               },
               equipped: {
                 avatar: fallbackAvatar,
+                avatarId: fallbackAvatarId,
                 title: DEFAULT_STARTER_TITLE_ID,
                 arena: 'arena_1',
               },

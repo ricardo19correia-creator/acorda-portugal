@@ -42,7 +42,7 @@ import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
-import { DEFAULT_AVATAR_ID } from '@/data/constants'
+import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 import { equipTitle } from '@/lib/titles-service'
@@ -55,6 +55,14 @@ import {
   isTitleOwned,
   sanitizeTitleName,
 } from '@/lib/titles'
+import {
+  extractUserCoins,
+  extractUserXp,
+  extractUserLevel,
+  extractUserInventory,
+  extractUserEquipped,
+  safeSyncLog,
+} from '@/lib/economy-helpers'
 import {
   CANONICAL_PROFILE_CATEGORIES,
   getCanonicalCategoryData,
@@ -482,15 +490,15 @@ function PerfilContent() {
         if (savedEmotes) {
           try { setEquippedEmotes(JSON.parse(savedEmotes)) } catch {}
         }
-        const savedTitle = (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : null) || 'Membro Fundador'
+        const savedTitle = (profile as any)?.equippedTitle || profile?.equipped?.title || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') : null) || DEFAULT_STARTER_TITLE_NAME
         if (savedTitle) setTitle(savedTitle)
 
         const savedCoins = typeof window !== 'undefined' ? Number(localStorage.getItem('user_coins') || localStorage.getItem('user_euros') || 0) : 0
-        const liveBalance = profile?.coins ?? profile?.euros ?? savedCoins
+        const liveBalance = profile?.coins !== undefined ? profile.coins : profile?.euros !== undefined ? profile.euros : savedCoins
         setUserCoins(liveBalance)
 
         const cachedXp = typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0
-        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(profile.xp, cachedXp) : cachedXp
+        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? profile.xp : cachedXp
         setUserXp(currentXp)
         setUserLevel(calculateLevelProgress(currentXp).currentLevel.level)
 
@@ -504,6 +512,23 @@ function PerfilContent() {
             publicVote: typeof (profile.consumables as any).publicVote === 'number' ? (profile.consumables as any).publicVote : 0,
           })
         }
+        if (profile?.inventory) {
+          const invData = extractUserInventory(profile)
+          setInventory({
+            avatars: invData.avatars,
+            frames: invData.frames,
+            arenas: invData.arenas,
+            titles: invData.titles,
+            taunts: invData.taunts,
+          })
+          setUnlockedItems(Array.from(new Set([
+            ...invData.avatars,
+            ...invData.frames,
+            ...invData.arenas,
+            ...invData.titles,
+            ...invData.taunts,
+          ])))
+        }
       } catch (err) {
         console.error(err)
       }
@@ -512,103 +537,111 @@ function PerfilContent() {
     syncProfile()
 
     // Firestore Realtime Listener
+    const targetUid = user?.uid || auth.currentUser?.uid
     let unsubscribeSnapshot: (() => void) | undefined
-    if (auth.currentUser) {
+    if (targetUid) {
       try {
-        const userRef = doc(db, 'users', auth.currentUser.uid)
-        unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
-          if (snap.exists()) {
-            const data = snap.data()
-            if (data.displayName) {
-              setDisplayName(data.displayName)
-              localStorage.setItem('user_display_name', data.displayName)
-            }
-            if (data.district) {
-              setDistrict(data.district)
-              localStorage.setItem('user_district', data.district)
-            }
-            const coinsVal = typeof data.coins === 'number' ? data.coins : typeof data.euros === 'number' ? data.euros : null
-            if (coinsVal !== null) {
+        const userRef = doc(db, 'users', targetUid)
+        unsubscribeSnapshot = onSnapshot(
+          userRef,
+          (snap) => {
+            if (snap.exists()) {
+              const data = snap.data()
+              const coinsVal = extractUserCoins(data)
+              const liveXp = extractUserXp(data)
+              const liveLevel = extractUserLevel(data, liveXp)
+              const invData = extractUserInventory(data)
+              const equippedData = extractUserEquipped(data, liveXp)
+
+              safeSyncLog('PERFIL_SNAPSHOT', {
+                uid: targetUid,
+                coins: coinsVal,
+                xp: liveXp,
+                level: liveLevel,
+                fromCache: snap.metadata.fromCache,
+              })
+
+              if (data.displayName || data.name) {
+                const n = data.displayName || data.name
+                setDisplayName(n)
+                localStorage.setItem('user_display_name', n)
+              }
+              if (data.district) {
+                setDistrict(data.district)
+                localStorage.setItem('user_district', data.district)
+              }
               setUserCoins(coinsVal)
               localStorage.setItem('user_coins', String(coinsVal))
               localStorage.setItem('user_euros', String(coinsVal))
-            }
-            if (typeof data.xp === 'number' && !isNaN(data.xp)) {
-              const liveXp = Math.max(0, data.xp)
+
               setUserXp(liveXp)
-              setUserLevel(calculateLevelProgress(liveXp).currentLevel.level)
-            }
-            if (data.claimedAchievements) {
-              setClaimedAchievements(data.claimedAchievements)
-              localStorage.setItem('user_claimed_achievements', JSON.stringify(data.claimedAchievements))
-            }
-            if (data.consumables) {
-              setConsumables({
-                help5050: typeof data.consumables.help5050 === 'number' ? data.consumables.help5050 : 0,
-                freezeTime: typeof data.consumables.freezeTime === 'number' ? data.consumables.freezeTime : 0,
-                publicVote: typeof data.consumables.publicVote === 'number' ? data.consumables.publicVote : 0,
-              })
-              localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
-            } else if (data.inventory?.utilities) {
-              const utils = data.inventory.utilities
-              setConsumables({
-                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : 0,
-                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : 0,
-                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : 0,
-              })
-            }
-            if (data.coins !== undefined || data.euros !== undefined) {
-              const b = data.coins ?? data.euros ?? 0
-              setUserCoins(b)
-              localStorage.setItem('user_coins', String(b))
-              localStorage.setItem('user_euros', String(b))
-            }
-            if (data.xp !== undefined) {
-              const x = Math.max(0, Number(data.xp) || 0)
-              setUserXp(x)
-              setUserLevel(calculateLevelProgress(x).currentLevel.level)
-              localStorage.setItem('user_xp', String(x))
-            }
-            if (data.photoURL || data.avatar || data.equipped?.avatar) {
-              const av = data.equipped?.avatar || data.photoURL || data.avatar
-              if (av && !av.includes('moldura')) {
-                setAvatar(getAvatarImage(av))
-                localStorage.setItem('user_equipped_avatar', av)
+              setUserLevel(liveLevel)
+              localStorage.setItem('user_xp', String(liveXp))
+              localStorage.setItem('user_level', String(liveLevel))
+
+              if (data.claimedAchievements) {
+                setClaimedAchievements(data.claimedAchievements)
+                localStorage.setItem('user_claimed_achievements', JSON.stringify(data.claimedAchievements))
               }
-            }
-            if (data.equippedAvatar || data.avatarId || data.equipped?.avatarId) {
-              const avId = normalizeAvatarId(data.equippedAvatar || data.avatarId || data.equipped?.avatarId)
-              setEquippedAvatarId(avId)
-              localStorage.setItem('equipped_avatar_id', avId)
-            }
-            if (data.equippedFrame || data.equipped?.frameId) {
-              const fr = data.equippedFrame || data.equipped?.frameId
-              setEquippedFrame(fr)
-              localStorage.setItem('user_equipped_frame', fr)
-            }
-            if (data.equippedArena || data.equipped?.arena) {
-              const ar = data.equippedArena || data.equipped?.arena
-              setArena(ar)
-              localStorage.setItem('equipped_arena', ar)
-            }
-            if (data.equippedEmotes || data.equipped?.emotes) {
-              const em = data.equipped?.emotes || data.equippedEmotes
-              if (Array.isArray(em)) {
-                setEquippedEmotes(em)
-                localStorage.setItem('equipped_emotes', JSON.stringify(em))
+              setConsumables({
+                help5050: invData.utilities.fiftyFifty,
+                freezeTime: invData.utilities.freezeTime,
+                publicVote: invData.utilities.publicVote,
+              })
+              localStorage.setItem('user_consumables', JSON.stringify(invData.utilities))
+
+              if (equippedData.avatarImage && !equippedData.avatarImage.includes('moldura')) {
+                setAvatar(equippedData.avatarImage)
+                setEquippedAvatarId(equippedData.avatarId)
+                localStorage.setItem('user_equipped_avatar', equippedData.avatarImage)
+                localStorage.setItem('equipped_avatar_id', equippedData.avatarId)
               }
+              if (equippedData.frameId) {
+                setEquippedFrame(equippedData.frameId)
+                localStorage.setItem('user_equipped_frame', equippedData.frameId)
+              }
+              if (equippedData.arenaId) {
+                setArena(equippedData.arenaId)
+                localStorage.setItem('equipped_arena', equippedData.arenaId)
+              }
+              if (data.equippedEmotes || data.equipped?.emotes) {
+                const em = data.equipped?.emotes || data.equippedEmotes
+                if (Array.isArray(em)) {
+                  setEquippedEmotes(em)
+                  localStorage.setItem('equipped_emotes', JSON.stringify(em))
+                }
+              }
+              setEquippedTitleId(equippedData.titleId)
+              setTitle(equippedData.titleName)
+              localStorage.setItem('equipped_title_id', equippedData.titleId)
+              localStorage.setItem('equipped_title', equippedData.titleName)
+
+              setInventory({
+                avatars: invData.avatars,
+                frames: invData.frames,
+                arenas: invData.arenas,
+                titles: invData.titles,
+                taunts: invData.taunts,
+              })
+              setUnlockedItems(
+                Array.from(
+                  new Set([
+                    ...invData.avatars,
+                    ...invData.frames,
+                    ...invData.arenas,
+                    ...invData.titles,
+                    ...invData.taunts,
+                  ]),
+                ),
+              )
             }
-            const resolvedTit = resolvePlayerEquippedTitle(data as any, (typeof data.xp === 'number' && !isNaN(data.xp)) ? data.xp : 0)
-            const titId = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTit.id
-            const titName = resolvedTit.cleanName || DEFAULT_STARTER_TITLE_NAME
-            setEquippedTitleId(titId)
-            setTitle(titName)
-            localStorage.setItem('equipped_title_id', titId)
-            localStorage.setItem('equipped_title', titName)
-          }
-        })
+          },
+          (err) => {
+            console.warn('[PERFIL] Aviso transitório no snapshot do utilizador:', err)
+          },
+        )
       } catch (e) {
-        console.error(e)
+        console.error('[PERFIL] Erro no listener do Firestore:', e)
       }
     }
 
@@ -699,6 +732,14 @@ function PerfilContent() {
     if (item.category === 'avatars') {
       const imgToSet = getAvatarImage(item.image || item.id)
       const idToSet = normalizeAvatarId(item.id)
+
+      const isFree = idToSet === STARTER_AVATAR_ID || idToSet === DEFAULT_AVATAR_ID
+      const isOwned = isFree || inventory.avatars.includes(idToSet) || unlockedItems.includes(idToSet)
+      if (!isOwned) {
+        showToast('Não possuis este avatar no teu inventário!')
+        return
+      }
+
       setAvatar(imgToSet)
       setEquippedAvatarId(idToSet)
       localStorage.setItem('user_equipped_avatar', imgToSet)
@@ -898,8 +939,15 @@ function PerfilContent() {
       const newName = editName.trim() || displayName
       const permanentDistrict = district || 'Portugal'
       const rawAvatar = editAvatar || avatar
-      const newAvatar = getAvatarImage(rawAvatar)
-      const newAvatarId = normalizeAvatarId(editAvatarId || equippedAvatarId || rawAvatar)
+      let newAvatar = getAvatarImage(rawAvatar)
+      let newAvatarId = normalizeAvatarId(editAvatarId || equippedAvatarId || rawAvatar)
+
+      const isFree = newAvatarId === STARTER_AVATAR_ID || newAvatarId === DEFAULT_AVATAR_ID
+      const isOwned = isFree || inventory.avatars.includes(newAvatarId) || unlockedItems.includes(newAvatarId)
+      if (!isOwned) {
+        newAvatarId = equippedAvatarId || STARTER_AVATAR_ID
+        newAvatar = getAvatarImage(newAvatarId)
+      }
 
       setDisplayName(newName)
       setDistrict(permanentDistrict)
@@ -2769,7 +2817,7 @@ function PerfilContent() {
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 max-h-56 overflow-y-auto p-2.5 bg-slate-900/60 rounded-2xl border border-slate-800">
                   {REAL_AVATARS.map((avatarItem) => {
-                    const isFree = avatarItem.currency === 'free' || avatarItem.id === DEFAULT_AVATAR_ID || avatarItem.price === 'Grátis' || avatarItem.price === 0
+                    const isFree = avatarItem.id === STARTER_AVATAR_ID || avatarItem.id === DEFAULT_AVATAR_ID
                     const isOwned = isFree || inventory.avatars.includes(avatarItem.id) || unlockedItems.includes(avatarItem.id)
                     const isSelected = editAvatar === avatarItem.image || editAvatarId === avatarItem.id
 

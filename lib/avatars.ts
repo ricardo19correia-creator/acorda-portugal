@@ -5,13 +5,19 @@
 
 export type AvatarRarity = 'comum' | 'raro' | 'epico' | 'lendario' | 'mitico';
 
+/**
+ * ID Canónico Oficial do Avatar Inicial Gratuito
+ * Todo e qualquer novo jogador nasce exclusivamente com este avatar.
+ */
+export const STARTER_AVATAR_ID = 'avatar_01';
+
 export interface AvatarItem {
   id: string;
   name: string;
   subtitle?: string;
   category: 'geral' | 'historia' | 'geografia' | 'desporto' | 'cultura';
   price: number | string;
-  currency: 'free' | 'coins' | 'real_money' | 'points' | 'eur';
+  currency: 'free' | 'coins' | 'real_money' | 'points' | 'eur' | 'merit';
   icon?: string;
   image: string;
   description?: string;
@@ -440,7 +446,7 @@ export const REAL_AVATARS: AvatarItem[] = [
     image: '/images/avatars/avatar_30.png',
     category: 'geral',
     price: 'Mérito',
-    currency: 'free',
+    currency: 'merit',
     badge: 'Exclusivo',
     rarity: 'lendario',
     glowColor: 'border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.45)]',
@@ -510,7 +516,7 @@ export const REAL_AVATARS: AvatarItem[] = [
     image: '/images/avatars/avatar_35.png',
     category: 'geral',
     price: 'Mérito',
-    currency: 'free',
+    currency: 'merit',
     badge: 'Exclusivo',
     rarity: 'mitico',
     glowColor: 'border-rose-500/60 shadow-[0_0_30px_rgba(244,63,94,0.5)]',
@@ -524,7 +530,7 @@ export const REAL_AVATARS: AvatarItem[] = [
     image: '/images/avatars/avatar_36.png',
     category: 'historia',
     price: 'Mérito',
-    currency: 'free',
+    currency: 'merit',
     badge: 'Exclusivo',
     rarity: 'mitico',
     glowColor: 'border-amber-400/80 shadow-[0_0_35px_rgba(251,191,36,0.6)]',
@@ -678,7 +684,7 @@ export const BOT_AVATARS_LIBRARY: string[] = [
   'https://api.dicebear.com/7.x/micah/svg?seed=ViseuDao&backgroundColor=0a0a0a',
 ];
 
-export const DEFAULT_AVATAR: AvatarItem = REAL_AVATARS[0];
+export const DEFAULT_AVATAR: AvatarItem = REAL_AVATARS.find((a) => a.id === STARTER_AVATAR_ID) || REAL_AVATARS[0];
 export const AVATARS_2050: AvatarItem[] = REAL_AVATARS;
 export const AVATAR_CATALOG: AvatarItem[] = REAL_AVATARS;
 

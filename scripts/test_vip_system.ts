@@ -78,11 +78,16 @@ assert(duplicateSkus === 0, 'Zero SKUs duplicados (38 SKUs únicos)')
 assert(duplicateAssets === 0, 'Zero caminhos de assets duplicados (38 assets WebP únicos)')
 
 // -------------------------------------------------------------------------
-// 3. PREÇOS EM CÊNTIMOS E MOEDA EUR
+// 3. PREÇOS EM CÊNTIMOS E MOEDA EUR + CAPS DE PREÇO
 // -------------------------------------------------------------------------
-console.log('\n3. Validação Financeira (€ Real / Cêntimos):')
+console.log('\n3. Validação Financeira (€ Real / Cêntimos / Caps de Preço):')
 let invalidPrices = 0
 let invalidCurrency = 0
+let pricesAboveCap = 0
+let majorityBelowTarget = 0
+
+const MAX_PRICE_CENTS = 3999 // €39,99 — máximo absoluto permitido
+const TARGET_PRICE_CENTS = 2999 // maioria deve ficar abaixo de €29,99
 
 VIP_CATALOG.forEach(p => {
   if (typeof p.priceCents !== 'number' || p.priceCents <= 0 || !Number.isInteger(p.priceCents)) {
@@ -91,10 +96,55 @@ VIP_CATALOG.forEach(p => {
   if (p.currency !== 'EUR') {
     invalidCurrency++
   }
+  if (p.priceCents > MAX_PRICE_CENTS) {
+    console.error(`    Preço acima do cap: ${p.name} = €${(p.priceCents / 100).toFixed(2)}`)
+    pricesAboveCap++
+  }
+  if (p.priceCents <= TARGET_PRICE_CENTS) {
+    majorityBelowTarget++
+  }
 })
 
 assert(invalidPrices === 0, '38/38 produtos possuem preço inteiro válido em cêntimos de Euro')
 assert(invalidCurrency === 0, '38/38 produtos possuem moeda estritamente "EUR"')
+assert(pricesAboveCap === 0, 'Nenhum produto acima do cap de €39,99 (máximo absoluto)')
+assert(majorityBelowTarget >= 25, `Maioria dos produtos (≥25/38) abaixo de €29,99 — Obtido: ${majorityBelowTarget}`)
+
+// -------------------------------------------------------------------------
+// 3b. PAY-TO-WIN = FALSE EM TODOS OS 38
+// -------------------------------------------------------------------------
+console.log('\n3b. Validação Zero Pay-to-Win:')
+let payToWinViolations = 0
+
+VIP_CATALOG.forEach(p => {
+  if ((p as any).payToWin !== false) {
+    console.error(`    payToWin violado: ${p.name}`)
+    payToWinViolations++
+  }
+})
+
+assert(payToWinViolations === 0, 'payToWin: false em todos os 38 produtos VIP — regra absoluta')
+
+// -------------------------------------------------------------------------
+// 3c. CAMPOS OBRIGATÓRIOS DE PRESTIGE E STATUS
+// -------------------------------------------------------------------------
+console.log('\n3c. Campos Obrigatórios de Prestige/Status:')
+let missingRarityBadge = 0
+let missingPrestigeTier = 0
+let missingProfileBannerTag = 0
+let missingVisualEffectsList = 0
+
+VIP_CATALOG.forEach(p => {
+  if (!p.rarityBadge) missingRarityBadge++
+  if (!p.prestigeTier) missingPrestigeTier++
+  if (!p.profileBannerTag) missingProfileBannerTag++
+  if (!p.visualEffectsList || p.visualEffectsList.length === 0) missingVisualEffectsList++
+})
+
+assert(missingRarityBadge === 0, 'rarityBadge presente em todos os 38 produtos')
+assert(missingPrestigeTier === 0, 'prestigeTier presente em todos os 38 produtos')
+assert(missingProfileBannerTag === 0, 'profileBannerTag presente em todos os 38 produtos')
+assert(missingVisualEffectsList === 0, 'visualEffectsList com ≥1 efeito em todos os 38 produtos')
 
 // -------------------------------------------------------------------------
 // 4. EXISTÊNCIA FÍSICA DOS 38 ASSETS WEBP EM DISCO

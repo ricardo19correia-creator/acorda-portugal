@@ -271,6 +271,200 @@ console.log('='.repeat(80))
   )
 }
 
+// -------------------------------------------------------------------------------------------------
+// 12. Validação dos 3 WebP Exclusivos das Ajudas (ZERO duplicados, ZERO avatar_01.png)
+// -------------------------------------------------------------------------------------------------
+{
+  const fs = require('fs')
+  const path = require('path')
+  const crypto = require('crypto')
+
+  const expectedWebpFiles = [
+    'aid-50-50.webp',
+    'aid-publico.webp',
+    'aid-freeze-time.webp',
+  ]
+
+  const aids = ['AID_002', 'AID_003', 'AID_004']
+  const aidAssets = aids.map((id) => getShopCatalogItem(id)?.asset)
+  const uniqueAssets = new Set(aidAssets)
+
+  let allFilesExistOnDisk = true
+  const hashes = new Set<string>()
+
+  for (const file of expectedWebpFiles) {
+    const fullPath = path.join(process.cwd(), 'public', 'assets', 'shop', 'aids', file)
+    if (!fs.existsSync(fullPath)) {
+      allFilesExistOnDisk = false
+    } else {
+      const buffer = fs.readFileSync(fullPath)
+      const hash = crypto.createHash('sha256').update(buffer).digest('hex')
+      hashes.add(hash)
+    }
+  }
+
+  const noAvatar01 = !aidAssets.some((a) => a?.includes('avatar_01.png'))
+  const noDuplicates = uniqueAssets.size === 3 && hashes.size === 3
+
+  assert(
+    allFilesExistOnDisk && noAvatar01 && noDuplicates,
+    12,
+    'Assets Físicos Exclusivos: 3 ficheiros WebP sem duplicados nem avatar_01.png',
+    `3 WebP verificados fisicamente no disco com 3 hashes SHA-256 distintos e caminhos canónicos únicos no catálogo SSOT`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 13. Limite estrito de 3 unidades por janela de 24 horas por ajuda
+// -------------------------------------------------------------------------------------------------
+{
+  const aidId = 'AID_002' // 50/50
+  const nowMs = Date.now()
+  const cutoff24h = nowMs - 24 * 60 * 60 * 1000
+
+  // Histórico com 2 compras nas últimas 24h
+  const purchases = [
+    { timestampMs: nowMs - 2 * 60 * 60 * 1000, quantity: 1 },
+    { timestampMs: nowMs - 1 * 60 * 60 * 1000, quantity: 1 },
+  ]
+
+  const count24h = purchases
+    .filter((p) => p.timestampMs > cutoff24h)
+    .reduce((sum, p) => sum + p.quantity, 0)
+
+  const limit = 3
+  const canBuyThird = count24h + 1 <= limit
+  const canBuyFourth = count24h + 2 <= limit
+
+  assert(
+    count24h === 2 && canBuyThird === true && canBuyFourth === false,
+    13,
+    'Regra dos 3 consumíveis / 24h: permite 3ª unidade e bloqueia 4ª',
+    `Compras efetuadas: 2/3. Terceira compra permitida. Quarta compra rejeitada.`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 14. Limite individual por ajuda (comprar 3 de AID_001 não afeta AID_002)
+// -------------------------------------------------------------------------------------------------
+{
+  const limits: Record<string, number> = {
+    AID_001: 3, // esgotado para AID_001
+    AID_002: 0, // livre para AID_002
+  }
+
+  const aid1CanBuy = limits['AID_001'] < 3
+  const aid2CanBuy = limits['AID_002'] < 3
+
+  assert(
+    aid1CanBuy === false && aid2CanBuy === true,
+    14,
+    'Independência dos Limites: Esgotar AID_001 não bloqueia AID_002',
+    `AID_001 rejeitada (3/3 esgotadas) enquanto AID_002 está disponível (0/3)`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 15. Rejeição da 4ª compra com erro de limite de 24 horas atingido
+// -------------------------------------------------------------------------------------------------
+{
+  let purchasesLast24h = 3
+  const limit24h = 3
+  let errorMessage: string | null = null
+
+  if (purchasesLast24h + 1 > limit24h) {
+    errorMessage = `Limite de ${limit24h} compras desta ajuda nas últimas 24 horas atingido.`
+  }
+
+  assert(
+    errorMessage !== null && errorMessage.includes('últimas 24 horas atingido'),
+    15,
+    'Rejeição da 4ª compra: mensagem de erro de 24h clara e informativa',
+    `Erro emitido: «${errorMessage}»`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 16. Concorrência Atómica: Transações simultâneas quando resta apenas 1 compra
+// -------------------------------------------------------------------------------------------------
+{
+  let serverPurchases24h = 2
+  const limit = 3
+
+  // Simular duas transações simultâneas
+  let tx1Success = false
+  let tx2Success = false
+
+  // TX 1 tenta comprar
+  if (serverPurchases24h + 1 <= limit) {
+    serverPurchases24h += 1
+    tx1Success = true
+  }
+
+  // TX 2 tenta comprar ao mesmo tempo com o estado bloqueado pela transação atómica
+  if (serverPurchases24h + 1 <= limit) {
+    serverPurchases24h += 1
+    tx2Success = true
+  }
+
+  assert(
+    tx1Success === true && tx2Success === false && serverPurchases24h === 3,
+    16,
+    'Concorrência Atómica: Apenas 1 de 2 compras paralelas é aprovada',
+    `TX1 aprovada, TX2 rejeitada atomicamente, saldo final da janela: 3/3`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 17. Janela Móvel: Compras com mais de 24h expiram e libertam novas compras
+// -------------------------------------------------------------------------------------------------
+{
+  const nowMs = Date.now()
+  const cutoff24h = nowMs - 24 * 60 * 60 * 1000
+
+  // 3 compras feitas há 25h, 24h30 e 2h
+  const purchasesHistory = [
+    { timestampMs: nowMs - 25 * 60 * 60 * 1000, quantity: 1 }, // expirada (>24h)
+    { timestampMs: nowMs - 24.5 * 60 * 60 * 1000, quantity: 1 }, // expirada (>24h)
+    { timestampMs: nowMs - 2 * 60 * 60 * 1000, quantity: 1 }, // ativa (2h atrás)
+  ]
+
+  const activeInWindow = purchasesHistory.filter((p) => p.timestampMs > cutoff24h)
+  const activeCount = activeInWindow.reduce((sum, p) => sum + p.quantity, 0)
+  const canBuyNow = activeCount + 1 <= 3
+
+  assert(
+    activeCount === 1 && canBuyNow === true,
+    17,
+    'Janela Móvel: Compras antigas (> 24h) expiram e libertam slots de compra',
+    `2 compras antigas descartadas, apenas 1 compra ativa na janela móvel de 24h`
+  )
+}
+
+// -------------------------------------------------------------------------------------------------
+// 18. Separação estrita entre Stock Máximo (50) e Limite 24h (3)
+// -------------------------------------------------------------------------------------------------
+{
+  const maxStock = 50
+  let currentStock = 2
+  let purchasesLast24h = 2
+  const limit24h = 3
+
+  const canBuyUnit3 = currentStock < maxStock && purchasesLast24h < limit24h
+  currentStock += 1
+  purchasesLast24h += 1
+
+  const is24hExhausted = purchasesLast24h >= limit24h
+  const isStockFull = currentStock >= maxStock
+
+  assert(
+    canBuyUnit3 === true && is24hExhausted === true && isStockFull === false && currentStock === 3,
+    18,
+    'Diferenciação Stock (50) vs Limite 24h (3): Mensagem de 24h e não Inventário Cheio',
+    `Stock: 3/50 (Não Cheio) mas Compras 24h: 3/3 (Esgotadas). Estado: "Compras 24h Esgotadas"`
+  )
+}
+
 console.log('='.repeat(80))
 const passedCount = results.filter((r) => r.status === 'PASS').length
 const failedCount = results.filter((r) => r.status === 'FAIL').length

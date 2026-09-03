@@ -411,21 +411,11 @@ export const SHOP_CATALOG: ShopItem[] = [
     icon: 'Crown',
   },
 
-  // ⚡ UTILIDADE (Consumíveis de jogo - Anti-Pay-To-Win)
-  {
-    id: 'consumable_pista',
-    name: 'Pack x3 Pista Inteligente',
-    description: 'Dica contextual inteligente para a pergunta atual sem revelar a resposta.',
-    category: 'utilidade',
-    rarity: 'raro',
-    type: 'consumable',
-    price: 750,
-    icon: 'Lightbulb',
-  },
+  // ⚡ UTILIDADE (Consumíveis de jogo - Anti-Pay-To-Win - 3 Ajudas Canónicas)
   {
     id: 'consumable_50_50',
     name: 'Pack x5 Ajudas 50/50',
-    description: 'Elimina duas opções erradas numa pergunta difícil durante o quiz.',
+    description: 'Elimina exatamente duas alternativas erradas, deixando duas respostas possíveis.',
     category: 'utilidade',
     rarity: 'raro',
     type: 'consumable',
@@ -433,56 +423,24 @@ export const SHOP_CATALOG: ShopItem[] = [
     icon: 'Sparkles',
   },
   {
+    id: 'HELP_005',
+    name: 'Pack x3 Pergunta ao Público',
+    description: 'Simula uma votação do público com percentagens realistas e tendência para a resposta correta.',
+    category: 'ajudas_utilidades' as any,
+    rarity: 'epico',
+    type: 'consumable',
+    price: 1500,
+    icon: 'Users',
+  },
+  {
     id: 'consumable_congelar_tempo',
-    name: 'Pack x3 Congelar Tempo (+15s)',
-    description: 'Pausa o cronómetro e adiciona 15 segundos para pensares com calma.',
+    name: 'Pack x3 Congelar Tempo',
+    description: 'Pausa o cronómetro e adiciona +15 segundos para responder com mais calma.',
     category: 'utilidade',
     rarity: 'epico',
     type: 'consumable',
     price: 900,
     icon: 'Timer',
-  },
-  {
-    id: 'HELP_005',
-    name: 'Pack x3 Pergunta ao Público',
-    description: 'Gera uma votação simulada da plateia com percentagens em cada opção de resposta.',
-    category: 'ajudas_utilidades' as any,
-    rarity: 'raro',
-    type: 'consumable',
-    price: 600,
-    icon: 'Users',
-  },
-  {
-    id: 'consumable_protecao_streak',
-    name: 'Proteção de Sequência',
-    description: 'Salva a tua sequência de dias se te esqueceres de jogar durante 24 horas.',
-    category: 'utilidade',
-    rarity: 'epico',
-    type: 'consumable',
-    price: 2500,
-    icon: 'Flame',
-  },
-
-  // 🎁 PACKS (Conjuntos Rebalanceados)
-  {
-    id: 'pack_iniciado',
-    name: 'Pack Iniciado',
-    description: 'Inclui 1x 50/50, 1x Pista e a Moldura Verde Esperança.',
-    category: 'packs',
-    rarity: 'raro',
-    type: 'consumable',
-    price: 3500,
-    icon: 'Package',
-  },
-  {
-    id: 'pack_mestre',
-    name: 'Pack Grande Mestre',
-    description: 'Inclui 2x 50/50, 1x Congelar Tempo, 1x Proteção de Streak e Moldura Azulejo Nobre.',
-    category: 'packs',
-    rarity: 'epico',
-    type: 'consumable',
-    price: 8000,
-    icon: 'PackageCheck',
   },
 ]
 
@@ -901,25 +859,33 @@ export async function useConsumablePowerUp(
         updatedAt: serverTimestamp(),
       }
 
-      if (powerUpId === 'aid_public_vote' || powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico') {
+      if (powerUpId === 'AID_003' || powerUpId === 'aid_public_vote' || powerUpId === 'HELP_005' || powerUpId === 'consumable_public_vote' || powerUpId === 'ajuda_publico' || powerUpId === 'publicVote') {
         updatePayload['consumables.publicVote'] = newCount
+        updatePayload['inventory.AID_003'] = newCount
         updatePayload['inventory.aid_public_vote'] = newCount
         updatePayload['inventory.HELP_005'] = newCount
         updatePayload['inventory.consumable_public_vote'] = newCount
-      } else if (powerUpId === 'aid_50_50' || powerUpId === 'consumable_50_50' || powerUpId === 'ajuda_5050') {
+        updatePayload['inventory.utilities.publicVote'] = newCount
+      } else if (powerUpId === 'AID_002' || powerUpId === 'aid_50_50' || powerUpId === 'consumable_50_50' || powerUpId === 'ajuda_5050' || powerUpId === 'help5050') {
         updatePayload['consumables.help5050'] = newCount
+        updatePayload['inventory.AID_002'] = newCount
         updatePayload['inventory.aid_50_50'] = newCount
         updatePayload['inventory.consumable_50_50'] = newCount
-      } else if (powerUpId === 'aid_freeze_time' || powerUpId === 'consumable_congelar_tempo' || powerUpId === 'ajuda_congelar') {
+        updatePayload['inventory.utilities.fiftyFifty'] = newCount
+      } else if (powerUpId === 'AID_004' || powerUpId === 'aid_freeze_time' || powerUpId === 'consumable_congelar_tempo' || powerUpId === 'ajuda_congelar' || powerUpId === 'freezeTime') {
         updatePayload['consumables.freezeTime'] = newCount
+        updatePayload['inventory.AID_004'] = newCount
         updatePayload['inventory.aid_freeze_time'] = newCount
         updatePayload['inventory.consumable_congelar_tempo'] = newCount
-      } else if (powerUpId === 'aid_hint' || powerUpId === 'consumable_pista') {
+        updatePayload['inventory.utilities.freezeTime'] = newCount
+      } else if (powerUpId === 'AID_001' || powerUpId === 'aid_hint' || powerUpId === 'consumable_pista') {
         updatePayload['consumables.hints'] = newCount
+        updatePayload['inventory.AID_001'] = newCount
         updatePayload['inventory.aid_hint'] = newCount
         updatePayload['inventory.consumable_pista'] = newCount
-      } else if (powerUpId === 'aid_streak_protection' || powerUpId === 'consumable_protecao_streak') {
+      } else if (powerUpId === 'AID_008' || powerUpId === 'aid_streak_protection' || powerUpId === 'consumable_protecao_streak') {
         updatePayload['consumables.streakProtection'] = newCount
+        updatePayload['inventory.AID_008'] = newCount
         updatePayload['inventory.aid_streak_protection'] = newCount
         updatePayload['inventory.consumable_protecao_streak'] = newCount
       } else {

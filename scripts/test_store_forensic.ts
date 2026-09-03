@@ -99,6 +99,11 @@ VIP_CATALOG.forEach(p => {
     allCurrencyEur = false
   }
   const anyP = p as any
+  // payToWin: false deve estar explícito no catálogo
+  if (anyP.payToWin !== false) {
+    zeroP2W = false
+  }
+  // Também verificar propriedades Pay-to-Win antigas (retrocompatibilidade)
   if (anyP.xpBoost || anyP.coinBoost || anyP.extraLives || anyP.hintBoost) {
     zeroP2W = false
   }
@@ -106,7 +111,14 @@ VIP_CATALOG.forEach(p => {
 
 test('38/38 produtos VIP com priceCents inteiro positivo', allPriceInCentsValid)
 test('38/38 produtos VIP com moeda estrita EUR', allCurrencyEur)
-test('38/38 produtos VIP com Zero Pay-to-Win (Apenas cosméticos/prestígio)', zeroP2W)
+test('38/38 produtos VIP com Zero Pay-to-Win (payToWin: false explícito)', zeroP2W)
+
+// Validação de cap de preço
+const pricesAboveCap = VIP_CATALOG.filter(p => p.priceCents > 3999)
+test('Nenhum produto acima do cap absoluto de €39,99', pricesAboveCap.length === 0)
+
+const sig001 = getVipProductById('AP-VIP-SIGNATURE-001')
+const sig001ExpectedPrice = sig001?.priceCents ?? 0
 
 // -------------------------------------------------------------------------
 // 3. INTEGRIDADE FÍSICA DOS ASSETS
@@ -142,11 +154,13 @@ function simulateServerPriceValidation(clientPrice: number, productId: string) {
   return { valid: true, chargedPrice: authoritativePrice }
 }
 const attack1 = simulateServerPriceValidation(0, 'AP-VIP-SIGNATURE-001')
-test('Ataque 1: Cliente envia preço 0 -> Servidor força preço SSOT (€39,99 / 3999c)', attack1.valid && attack1.chargedPrice === 3999)
+test(`Ataque 1: Cliente envia preço 0 → Servidor força preço SSOT (${(sig001ExpectedPrice / 100).toFixed(2)}€ / ${sig001ExpectedPrice}c)`, attack1.valid && attack1.chargedPrice === sig001ExpectedPrice)
 
 // Vetor 2: Tentativa de forçar preço irrisório em item VIP
+const frm001 = getVipProductById('AP-VIP-FRAME-001')
+const frm001ExpectedPrice = frm001?.priceCents ?? 0
 const attack2 = simulateServerPriceValidation(50, 'AP-VIP-FRAME-001')
-test('Ataque 2: Cliente tenta forçar 50c em Moldura Imperial (€29,99) -> Servidor força 2999c', attack2.valid && attack2.chargedPrice === 2999)
+test(`Ataque 2: Cliente tenta forçar 50c em Moldura "Ordem de Cristo" (${(frm001ExpectedPrice / 100).toFixed(2)}€) → Servidor força ${frm001ExpectedPrice}c`, attack2.valid && attack2.chargedPrice === frm001ExpectedPrice)
 
 // Vetor 3: Tentativa de compra com produto inexistente
 const attack3 = simulateServerPriceValidation(999, 'vip_hacked_item_999')

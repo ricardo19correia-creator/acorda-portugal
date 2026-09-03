@@ -25,23 +25,24 @@ async function runAvatarTestSuite() {
 
   const avatarsDir = path.resolve('public/images/avatars');
 
-  // TEST 1: Catálogo tem exatamente 36 avatares
-  assert(REAL_AVATARS.length === 36, `REAL_AVATARS contém exatamente 36 avatares (atual: ${REAL_AVATARS.length})`);
+  // TEST 1: Catálogo base tem exatamente 36 avatares canónicos
+  const baseAvatars = REAL_AVATARS.filter((a) => a.id.startsWith('avatar_'));
+  assert(baseAvatars.length === 36, `Catálogo canónico contém exatamente 36 avatares base (atual: ${baseAvatars.length})`);
 
-  // TEST 2: Todos os 36 IDs são únicos e canónicos
-  const ids = REAL_AVATARS.map((a) => a.id);
+  // TEST 2: Todos os 36 IDs base são únicos e canónicos
+  const ids = baseAvatars.map((a) => a.id);
   const uniqueIds = new Set(ids);
-  assert(uniqueIds.size === 36, `Todos os 36 IDs são únicos (encontrados: ${uniqueIds.size})`);
+  assert(uniqueIds.size === 36, `Todos os 36 IDs base são únicos (encontrados: ${uniqueIds.size})`);
 
   for (let i = 1; i <= 36; i++) {
     const expectedId = `avatar_${String(i).padStart(2, '0')}`;
     assert(ids.includes(expectedId), `ID canónico ${expectedId} existe no catálogo`);
   }
 
-  // TEST 3: Todos os 36 nomes são únicos
-  const names = REAL_AVATARS.map((a) => a.name.trim());
+  // TEST 3: Todos os 36 nomes base são únicos
+  const names = baseAvatars.map((a) => a.name.trim());
   const uniqueNames = new Set(names);
-  assert(uniqueNames.size === 36, `Todos os 36 nomes são únicos (sem duplicados nominais: ${uniqueNames.size}/36)`);
+  assert(uniqueNames.size === 36, `Todos os 36 nomes base são únicos (sem duplicados nominais: ${uniqueNames.size}/36)`);
 
   // TEST 4: Todos os 36 ficheiros físicos existem no disco e são válidos
   const fileHashes = new Set<string>();

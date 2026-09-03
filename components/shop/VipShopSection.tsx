@@ -126,31 +126,41 @@ export default function VipShopSection({
     setLoadingProductId(product.id)
 
     try {
+      const auth = (await import('@/lib/firebase')).auth
+      const idToken = auth.currentUser ? await auth.currentUser.getIdToken().catch(() => null) : null
+
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+      if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           productId: product.id,
-          userId,
-          userEmail,
         }),
       })
 
       const data = await res.json()
 
-      if (res.status === 503 || data.code === 'PAYMENT_PROVIDER_CONFIGURATION_REQUIRED') {
+      if (res.status === 503 || data.error?.code === 'PAYMENT_PROVIDER_NOT_CONFIGURED' || data.code === 'PAYMENT_PROVIDER_CONFIGURATION_REQUIRED') {
         setProviderModalMessage(
-          data.message ||
-            'PAYMENT_PROVIDER_CONFIGURATION_REQUIRED: O fornecedor de pagamentos reais (Stripe) requer configuração das chaves de ambiente (STRIPE_SECRET_KEY) no servidor de produção.',
+          data.error?.message ||
+            data.message ||
+            'PAYMENT_PROVIDER_NOT_CONFIGURED: O fornecedor de pagamentos reais (Stripe) requer configuração das chaves de ambiente (STRIPE_SECRET_KEY) no servidor de produção.',
         )
         setProviderModalOpen(true)
+        return
+      }
+
+      if (res.status === 409 || data.error?.code === 'ALREADY_OWNED') {
+        if (onErrorToast) onErrorToast(data.error?.message || 'Já possuis este item VIP na tua conta.')
         return
       }
 
       if (data.success && data.url) {
         window.location.href = data.url
       } else {
-        throw new Error(data.message || 'Não foi possível inicializar a sessão de pagamento.')
+        throw new Error(data.error?.message || data.message || 'Não foi possível inicializar a sessão de pagamento.')
       }
     } catch (err: any) {
       console.error('[VIP CHECKOUT ERROR]:', err)
@@ -330,7 +340,7 @@ export default function VipShopSection({
                   : 'bg-slate-900/85 border-slate-800 hover:border-amber-500/50 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]'
               }`}
             >
-              {/* Top Meta */}
+              {/* Top Meta — nunca expor IDs técnicos ao utilizador */}
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span
@@ -338,11 +348,13 @@ export default function VipShopSection({
                       product.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/40'
                     }`}
                   >
-                    {product.rarity}
+                    {product.rarityBadge || product.prestigeTier || product.rarity}
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-slate-400">
-                    {product.sku}
-                  </span>
+                  {product.isLimited && product.limitedUnits && (
+                    <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider">
+                      ED. LIMITADA · {product.limitedUnits} UN.
+                    </span>
+                  )}
                 </div>
 
                 {/* SHOWCASE VISUAL REAL (ASSETS WEBP) */}
@@ -479,14 +491,21 @@ export default function VipShopSection({
               <div>
                 <div className="flex items-center gap-2">
                   <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider border ${inspectingProduct.badgeColor}`}>
-                    {inspectingProduct.rarity}
+                    {inspectingProduct.rarityBadge || inspectingProduct.prestigeTier || inspectingProduct.rarity}
                   </span>
-                  <span className="text-xs font-bold text-amber-400">
-                    Tier {inspectingProduct.tier} · {inspectingProduct.tierName}
-                  </span>
+                  {inspectingProduct.isLimited && inspectingProduct.limitedUnits && (
+                    <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider">
+                      ED. LIMITADA · {inspectingProduct.limitedUnits} UN.
+                    </span>
+                  )}
+                  {!inspectingProduct.isLimited && (
+                    <span className="text-xs font-bold text-amber-400">
+                      {inspectingProduct.profileBannerTag}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-2xl font-black text-white mt-1">{inspectingProduct.name}</h3>
-                <span className="text-xs font-mono text-slate-400">{inspectingProduct.sku}</span>
+                <p className="text-xs text-slate-400 mt-0.5">{inspectingProduct.description}</p>
               </div>
 
               <button
@@ -518,14 +537,24 @@ export default function VipShopSection({
                 <p className="text-xs text-slate-300 leading-relaxed">{inspectingProduct.visualConcept}</p>
               </div>
 
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
-                  <Zap className="w-3.5 h-3.5" />
-                  <span>Animação &amp; Efeitos em Duelo</span>
-                </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">{inspectingProduct.animation}</p>
-                <p className="text-xs text-amber-200/90 mt-1 font-medium italic">{inspectingProduct.effect}</p>
-              </div>
+              {/* Efeitos visuais em lista */}
+              {inspectingProduct.visualEffectsList && inspectingProduct.visualEffectsList.length > 0 && (
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1.5">
+                    <Zap className="w-3.5 h-3.5" />
+                    <span>Efeitos Visuais Incluídos</span>
+                  </h4>
+                  <ul className="space-y-1">
+                    {inspectingProduct.visualEffectsList.map((fx, i) => (
+                      <li key={i} className="text-xs text-slate-300 flex items-center gap-1.5">
+                        <span className="text-amber-400">✦</span>
+                        <span>{fx}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-amber-200/90 mt-2 font-medium italic">{inspectingProduct.effect}</p>
+                </div>
+              )}
 
               {inspectingProduct.bundleDescription && (
                 <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
@@ -533,7 +562,7 @@ export default function VipShopSection({
                     <Layers className="w-3.5 h-3.5" />
                     <span>Conteúdo do Pacote</span>
                   </h4>
-                  <p className="text-xs text-slate-300">{inspectingProduct.bundleDescription}</p>
+                  <p className="text-xs text-slate-300 whitespace-pre-line">{inspectingProduct.bundleDescription}</p>
                 </div>
               )}
 

@@ -5,6 +5,7 @@ import {
   getAvatarImage,
   normalizeAvatarId,
   DEFAULT_AVATAR,
+  STARTER_AVATAR_ID,
 } from './avatars';
 
 export interface InventoryState {
@@ -24,8 +25,8 @@ export const getInventory = (): InventoryState => {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: [DEFAULT_AVATAR.id],
-      equippedAvatar: DEFAULT_AVATAR.id,
+      ownedAvatars: [STARTER_AVATAR_ID],
+      equippedAvatar: STARTER_AVATAR_ID,
     };
   }
   try {
@@ -60,15 +61,15 @@ export const getInventory = (): InventoryState => {
         equippedTheme: legacyTheme,
         isVip: legacyOwned.includes('vip_founder_pass'),
         vipTitle: legacyOwned.includes('vip_founder_pass') ? 'Fundador da Nação' : undefined,
-        ownedAvatars: [normalizedEquippedAvatar || DEFAULT_AVATAR.id],
-        equippedAvatar: normalizedEquippedAvatar || DEFAULT_AVATAR.id,
+        ownedAvatars: [normalizedEquippedAvatar || STARTER_AVATAR_ID],
+        equippedAvatar: normalizedEquippedAvatar || STARTER_AVATAR_ID,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
       return initial;
     }
     const parsed = JSON.parse(data);
     if (!Array.isArray(parsed.ownedAvatars) || parsed.ownedAvatars.length === 0) {
-      parsed.ownedAvatars = [DEFAULT_AVATAR.id];
+      parsed.ownedAvatars = [STARTER_AVATAR_ID];
     }
     parsed.equippedAvatar = normalizeAvatarId(parsed.equippedAvatar);
     return parsed;
@@ -77,8 +78,8 @@ export const getInventory = (): InventoryState => {
       ownedItems: ['default_tron'],
       equippedTheme: 'default_tron',
       isVip: false,
-      ownedAvatars: [DEFAULT_AVATAR.id],
-      equippedAvatar: DEFAULT_AVATAR.id,
+      ownedAvatars: [STARTER_AVATAR_ID],
+      equippedAvatar: STARTER_AVATAR_ID,
     };
   }
 };

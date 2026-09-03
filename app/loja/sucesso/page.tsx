@@ -39,18 +39,50 @@ function SuccessContent() {
 
     async function verify() {
       try {
-        const res = await fetch(`/api/checkout/verify?session_id=${encodeURIComponent(sessionId || '')}`)
-        const json = await res.json()
+        const auth = (await import('@/lib/firebase')).auth
+        const currentUser = auth.currentUser
+        const idToken = currentUser ? await currentUser.getIdToken().catch(() => null) : null
 
-        if (!res.ok || !json.success) {
-          setError(json.message || 'Falha ao verificar pagamento com o servidor.')
-        } else if (!json.paid) {
-          setError('O pagamento ainda não foi confirmado pela entidade bancária.')
+        const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+        if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+
+        // Sondar o estado até 6 vezes (intervalo de 1.5s) para dar tempo ao webhook Stripe
+        let attempts = 0
+        const maxAttempts = 6
+        let verifiedData: any = null
+
+        while (attempts < maxAttempts) {
+          attempts++
+          const res = await fetch(`/api/checkout/status?session_id=${encodeURIComponent(sessionId || '')}`, {
+            headers,
+          })
+          const json = await res.json().catch(() => ({}))
+
+          if (res.ok && json.success) {
+            if (json.paid) {
+              verifiedData = json
+              // Se já foi processado pelo Firestore ou se esgotámos as tentativas, termina o loop
+              if (json.processed || json.owned || attempts >= maxAttempts) {
+                break
+              }
+            }
+          }
+          await new Promise((resolve) => setTimeout(resolve, 1500))
+        }
+
+        if (verifiedData && verifiedData.paid) {
+          setData(verifiedData)
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('inventory_updated'))
+            window.dispatchEvent(new Event('balance_updated'))
+          }
         } else {
-          setData(json)
+          setError(
+            'O pagamento ainda se encontra em validação bancária ou aguarda confirmação final do fornecedor.'
+          )
         }
       } catch (err: any) {
-        setError(err?.message || 'Erro de comunicação com o servidor.')
+        setError(err?.message || 'Erro de comunicação com o servidor ao confirmar pagamento.')
       } finally {
         setLoading(false)
       }

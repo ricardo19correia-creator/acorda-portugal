@@ -8,6 +8,9 @@
  */
 
 import { VIP_CATALOG } from '../src/data/vipCatalog'
+import { TITLE_SHOP_CATALOG } from '../src/data/shopTitles'
+import { OFFICIAL_EMOTES } from '../src/data/emotes'
+import { ANIMATED_FRAMES, type AnimatedFrame, type FrameRarity } from '../src/data/frames'
 
 export type ShopItemType =
   | 'avatar'
@@ -70,165 +73,182 @@ export interface ShopCatalogItem {
   effect?: string
   icon?: string
   maxOwned?: number
+  purchaseLimit24h?: number
   aliases?: string[]
   unlockCondition?: string
 }
 
 export const AID_MAX_OWNED_LIMIT = 50
+export const AID_PURCHASE_DAILY_LIMIT = 3
 
 // ============================================================================
-// 1. AJUDAS & UTILIDADES (CONSUMÍVEIS DE GAMEPLAY — 8 PACKS)
+// 1. AJUDAS & UTILIDADES (CONSUMÍVEIS DE GAMEPLAY — 3 AJUDAS CANÓNICAS OFICIAIS)
+// Regra Absoluta: Máximo 3 compras por 24h móveis. Limite de stock: 50 unidades.
 // ============================================================================
 export const AID_SHOP_ITEMS: ShopCatalogItem[] = [
   {
-    id: 'aid_50_50',
+    id: 'AID_002',
     type: 'aid',
     name: 'Pack x5 Ajudas 50/50',
-    description: 'Elimina exatamente duas alternativas erradas em perguntas difíceis do quiz.',
+    description: 'Elimina exatamente duas alternativas erradas, deixando duas respostas possíveis.',
     rarity: 'rare',
     currency: 'coins',
     priceCoins: 750,
     consumable: true,
     quantity: 5,
     unlockType: 'purchase',
-    asset: '/images/shop/ajuda-5050.jpg',
+    asset: '/assets/shop/aids/aid-50-50.webp',
     active: true,
     category: 'ajudas',
     categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x5 (150/un.)',
+    badgeText: 'Pack x5 · 50/50',
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-    icon: '✨',
+    icon: '🌓',
     maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['ajuda_5050', 'consumable_50_50', 'help_5050', 'help5050'],
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_50_50', 'ajuda_5050', 'consumable_50_50', 'help_5050', 'help5050'],
   },
   {
-    id: 'aid_public_vote',
+    id: 'AID_003',
     type: 'aid',
     name: 'Pack x3 Pergunta ao Público',
-    description: 'Simula a votação do público com percentagens realistas e tendência para a resposta correta.',
-    rarity: 'rare',
-    currency: 'coins',
-    priceCoins: 600,
-    consumable: true,
-    quantity: 3,
-    unlockType: 'purchase',
-    asset: '/images/shop/ajuda-publico.jpg',
-    active: true,
-    category: 'ajudas',
-    categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (200/un.)',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-    icon: '👥',
-    maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['ajuda_publico', 'HELP_005', 'consumable_public_vote', 'publicVote'],
-  },
-  {
-    id: 'aid_freeze_time',
-    type: 'aid',
-    name: 'Pack x3 Congelar Tempo',
-    description: 'Pausa o cronómetro e adiciona +15 segundos ao tempo de resposta.',
-    rarity: 'epic',
-    currency: 'coins',
-    priceCoins: 900,
-    consumable: true,
-    quantity: 3,
-    unlockType: 'purchase',
-    asset: '/images/shop/ajuda-congelar.jpg',
-    active: true,
-    category: 'ajudas',
-    categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (+15s)',
-    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
-    icon: '⏳',
-    maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['ajuda_congelar', 'consumable_congelar_tempo', 'freezeTime'],
-  },
-  {
-    id: 'aid_hint',
-    type: 'aid',
-    name: 'Pack x3 Pista Inteligente',
-    description: 'Revela uma dica contextual educativa sem entregar a resposta diretamente.',
-    rarity: 'rare',
-    currency: 'coins',
-    priceCoins: 750,
-    consumable: true,
-    quantity: 3,
-    unlockType: 'purchase',
-    asset: '/images/shop/ajuda-pista.jpg',
-    active: true,
-    category: 'ajudas',
-    categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (Dica)',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-    icon: '💡',
-    maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['ajuda_pista', 'consumable_pista', 'pista_historica', 'hint'],
-  },
-  {
-    id: 'aid_second_chance',
-    type: 'aid',
-    name: 'Pack x3 Segunda Oportunidade',
-    description: 'Permite uma segunda tentativa imediata caso seleciones uma alternativa incorreta.',
-    rarity: 'epic',
-    currency: 'coins',
-    priceCoins: 1250,
-    consumable: true,
-    quantity: 3,
-    unlockType: 'purchase',
-    asset: '/images/shop/ajuda-streak.jpg',
-    active: true,
-    category: 'ajudas',
-    categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (2ª Chance)',
-    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
-    icon: '🔄',
-    maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['segunda_chance', 'second_chance', 'consumable_second_chance'],
-  },
-  {
-    id: 'aid_triple_elimination',
-    type: 'aid',
-    name: 'Pack x3 Eliminação Tripla',
-    description: 'Elimina três opções erradas quando a pergunta possui 4 ou mais alternativas.',
+    description: 'Simula uma votação do público com percentagens realistas e tendência para a resposta correta.',
     rarity: 'epic',
     currency: 'coins',
     priceCoins: 1500,
     consumable: true,
     quantity: 3,
     unlockType: 'purchase',
-    asset: '/images/shop/ajuda-5050.jpg',
+    asset: '/assets/shop/aids/aid-publico.webp',
     active: true,
     category: 'ajudas',
     categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (Tripla)',
+    badgeText: 'Pack x3 · Premium',
     badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
-    icon: '🧠',
+    icon: '🗳️',
     maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['eliminacao_tripla', 'triple_elimination', 'consumable_triple_elimination'],
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_public_vote', 'ajuda_publico', 'HELP_005', 'consumable_public_vote', 'publicVote'],
   },
   {
-    id: 'aid_fast_answer',
+    id: 'AID_004',
     type: 'aid',
-    name: 'Pack x3 Resposta Rápida',
+    name: 'Pack x3 Congelar Tempo',
+    description: 'Pausa o cronómetro e adiciona +15 segundos para responder com mais calma.',
+    rarity: 'epic',
+    currency: 'coins',
+    priceCoins: 900,
+    consumable: true,
+    quantity: 3,
+    unlockType: 'purchase',
+    asset: '/assets/shop/aids/aid-freeze-time.webp',
+    active: true,
+    category: 'ajudas',
+    categoryTitle: 'Ajudas & Utilidades',
+    badgeText: 'Pack x3 · +15s',
+    badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40',
+    icon: '⏱️',
+    maxOwned: AID_MAX_OWNED_LIMIT,
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_freeze_time', 'ajuda_congelar', 'consumable_congelar_tempo', 'freezeTime'],
+  },
+]
+
+// ============================================================================
+// ITENS LEGADOS (RETROCOMPATIBILIDADE DE INVENTÁRIO — DESATIVADOS DA LOJA)
+// Não aparecem na loja nem no catálogo ativo, mas permanecem no inventário de quem os possui.
+// ============================================================================
+export const LEGACY_AID_ITEMS: ShopCatalogItem[] = [
+  {
+    id: 'AID_001',
+    type: 'aid',
+    name: 'Pista Histórica',
+    description: 'Revela uma dica contextual educativa sem entregar a resposta diretamente.',
+    rarity: 'rare',
+    currency: 'coins',
+    priceCoins: 750,
+    consumable: true,
+    quantity: 1,
+    unlockType: 'purchase',
+    asset: '/images/shop/aids/aid-pista-historica.webp',
+    active: false,
+    category: 'ajudas',
+    categoryTitle: 'Ajudas & Utilidades',
+    badgeText: 'Legado',
+    badgeColor: 'bg-slate-700 text-slate-400',
+    icon: '💡',
+    maxOwned: AID_MAX_OWNED_LIMIT,
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_hint', 'ajuda_pista', 'consumable_pista', 'pista_historica', 'hint'],
+  },
+  {
+    id: 'AID_005',
+    type: 'aid',
+    name: 'Segunda Oportunidade',
+    description: 'Permite uma segunda tentativa imediata caso seleciones uma alternativa incorreta.',
+    rarity: 'epic',
+    currency: 'coins',
+    priceCoins: 1250,
+    consumable: true,
+    quantity: 1,
+    unlockType: 'purchase',
+    asset: '/images/shop/aids/aid-segunda-oportunidade.webp',
+    active: false,
+    category: 'ajudas',
+    categoryTitle: 'Ajudas & Utilidades',
+    badgeText: 'Legado',
+    badgeColor: 'bg-slate-700 text-slate-400',
+    icon: '🔄',
+    maxOwned: AID_MAX_OWNED_LIMIT,
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_second_chance', 'segunda_chance', 'second_chance', 'consumable_second_chance'],
+  },
+  {
+    id: 'AID_006',
+    type: 'aid',
+    name: 'Eliminação Tripla',
+    description: 'Elimina três opções erradas quando a pergunta possui 4 ou mais alternativas.',
+    rarity: 'epic',
+    currency: 'coins',
+    priceCoins: 1500,
+    consumable: true,
+    quantity: 1,
+    unlockType: 'purchase',
+    asset: '/images/shop/aids/aid-eliminacao-tripla.webp',
+    active: false,
+    category: 'ajudas',
+    categoryTitle: 'Ajudas & Utilidades',
+    badgeText: 'Legado',
+    badgeColor: 'bg-slate-700 text-slate-400',
+    icon: '🧠',
+    maxOwned: AID_MAX_OWNED_LIMIT,
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_triple_elimination', 'eliminacao_tripla', 'triple_elimination', 'consumable_triple_elimination'],
+  },
+  {
+    id: 'AID_007',
+    type: 'aid',
+    name: 'Resposta Rápida',
     description: 'Concede uma janela assistida de +5 segundos de tempo sem penalizar o streak.',
     rarity: 'rare',
     currency: 'coins',
     priceCoins: 1000,
     consumable: true,
-    quantity: 3,
+    quantity: 1,
     unlockType: 'purchase',
-    asset: '/images/shop/ajuda-congelar.jpg',
-    active: true,
+    asset: '/images/shop/aids/aid-resposta-rapida.webp',
+    active: false,
     category: 'ajudas',
     categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Pack x3 (Velocidade)',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+    badgeText: 'Legado',
+    badgeColor: 'bg-slate-700 text-slate-400',
     icon: '⚡',
     maxOwned: AID_MAX_OWNED_LIMIT,
-    aliases: ['resposta_rapida', 'fast_answer', 'consumable_fast_answer'],
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_fast_answer', 'resposta_rapida', 'fast_answer', 'consumable_fast_answer'],
   },
   {
-    id: 'aid_streak_protection',
+    id: 'AID_008',
     type: 'utility',
     name: 'Proteção de Sequência',
     description: 'Salva a tua sequência de dias seguidos (streak) se te esqueceres de jogar 24 horas.',
@@ -238,15 +258,16 @@ export const AID_SHOP_ITEMS: ShopCatalogItem[] = [
     consumable: true,
     quantity: 1,
     unlockType: 'purchase',
-    asset: '/images/shop/ajuda-streak.jpg',
-    active: true,
+    asset: '/images/shop/aids/aid-protecao-sequencia.webp',
+    active: false,
     category: 'ajudas',
     categoryTitle: 'Ajudas & Utilidades',
-    badgeText: '1 Proteção',
-    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
+    badgeText: 'Legado',
+    badgeColor: 'bg-slate-700 text-slate-400',
     icon: '🛡️',
     maxOwned: 10,
-    aliases: ['protecao_streak', 'consumable_protecao_streak', 'streak_protection'],
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_streak_protection', 'protecao_streak', 'consumable_protecao_streak', 'streak_protection'],
   },
 ]
 
@@ -299,38 +320,34 @@ export const AVATAR_SHOP_ITEMS: ShopCatalogItem[] = [
 ]
 
 // ============================================================================
-// 3. MOLDURAS VIVAS (24 ITENS)
+// 3. MOLDURAS VIVAS (24 ITENS OFICIAIS CANÓNICOS)
 // ============================================================================
-export const FRAME_SHOP_ITEMS: ShopCatalogItem[] = [
-  // Raras (1.500–3.000 moedas)
-  { id: 'frame_ondas_atlantico', type: 'frame', name: 'Ondas do Atlântico', description: 'Cristas oceânicas bioluminescentes, marés vivas em movimento e partículas de água.', rarity: 'rare', currency: 'coins', priceCoins: 2000, unlockType: 'purchase', active: true, accentColor: '#0ea5e9', secondaryColor: '#06b6d4', cssClass: 'frame-effect-ocean', category: 'elemental' },
-  { id: 'frame_gelo_ancestral', type: 'frame', name: 'Zero Absoluto & Gelo Ancestral', description: 'Estalagmites de gelo eterno, geada prismática e névoa ártica congelante.', rarity: 'rare', currency: 'coins', priceCoins: 2200, unlockType: 'purchase', active: true, accentColor: '#a5f3fc', secondaryColor: '#0284c7', cssClass: 'frame-effect-glacial', category: 'elemental' },
-  { id: 'frame_terra_viva', type: 'frame', name: 'Raízes Antigas & Terra Viva', description: 'Raízes vivas que respiram em torno do avatar, com botões florais a desabrochar.', rarity: 'rare', currency: 'coins', priceCoins: 2400, unlockType: 'purchase', active: true, accentColor: '#84cc16', secondaryColor: '#15803d', cssClass: 'frame-effect-roots', category: 'elemental' },
-  { id: 'frame_orvalho_floresta', type: 'frame', name: 'Esmeralda dos Bosques Sagrados', description: 'Luzes de pirilampos pulsantes, gotas de orvalho reluzente e cipós ancestrais.', rarity: 'rare', currency: 'coins', priceCoins: 2500, unlockType: 'purchase', active: true, accentColor: '#10b981', secondaryColor: '#059669', cssClass: 'frame-effect-forest', category: 'elemental' },
-  { id: 'frame_calcada_portuguesa', type: 'frame', name: 'Alma da Calçada & Estilo Urbano', description: 'Padrões geométricos em pedra preta e branca de calcário com reflexos dourados.', rarity: 'rare', currency: 'coins', priceCoins: 2600, unlockType: 'purchase', active: true, accentColor: '#f1f5f9', secondaryColor: '#334155', cssClass: 'frame-effect-pavement', category: 'lusitano' },
-  { id: 'frame_azulejo_seculoxvii', type: 'frame', name: 'Mestre dos Azulejos Históricos', description: 'Moldura barroca de cerâmica azul-cobalto e branco com brilho vítreo artesanal.', rarity: 'rare', currency: 'coins', priceCoins: 2700, unlockType: 'purchase', active: true, accentColor: '#1d4ed8', secondaryColor: '#ffffff', cssClass: 'frame-effect-tile', category: 'lusitano' },
-  { id: 'frame_caravela_dourada', type: 'frame', name: 'Vento nas Velas & Cruz de Cristo', description: 'Bandeiras das Quinas enfunadas pelo vento atlântico e bússolas de latão animadas.', rarity: 'rare', currency: 'coins', priceCoins: 3000, unlockType: 'purchase', active: true, accentColor: '#dc2626', secondaryColor: '#eab308', cssClass: 'frame-effect-caravel', category: 'lusitano' },
-  { id: 'frame_neon_arcade_80s', type: 'frame', name: 'Retro Laser Synthwave 80s', description: 'Tubo de néon rosa-choque e azul-elétrico com pulsação estroboscópica e grelha laser.', rarity: 'rare', currency: 'coins', priceCoins: 2200, unlockType: 'purchase', active: true, accentColor: '#ec4899', secondaryColor: '#06b6d4', cssClass: 'frame-effect-synthwave', category: 'especial' },
-  { id: 'frame_matrix_digital', type: 'frame', name: 'Ciber-Rede Nacional & Código Verde', description: 'Chuva de glifos hexadecimais verde-esmeralda e nós de rede neural em fluxo.', rarity: 'rare', currency: 'coins', priceCoins: 2500, unlockType: 'purchase', active: true, accentColor: '#22c55e', secondaryColor: '#15803d', cssClass: 'frame-effect-matrix', category: 'especial' },
-  { id: 'frame_prisma_holografico', type: 'frame', name: 'Prisma Holográfico Hexagonal', description: 'Revestimento iridescente prismático que decompõe a luz branca em arco-íris dinâmico.', rarity: 'rare', currency: 'coins', priceCoins: 2800, unlockType: 'purchase', active: true, accentColor: '#f43f5e', secondaryColor: '#8b5cf6', cssClass: 'frame-effect-prism', category: 'especial' },
-  { id: 'frame_cyber_glitch_2077', type: 'frame', name: 'Glitch Holográfico Cyber-Luso 2077', description: 'Interferências eletromagnéticas estocásticas, aberração cromática RGB e ruído analógico.', rarity: 'rare', currency: 'coins', priceCoins: 3000, unlockType: 'purchase', active: true, accentColor: '#f43f5e', secondaryColor: '#06b6d4', cssClass: 'frame-effect-glitch', category: 'especial' },
-  // Épicas (3.500–6.000 moedas)
-  { id: 'frame_fogo_eterno', type: 'frame', name: 'Inferno Solar & Fogo Eterno', description: 'Dentes de magma em combustão ascendente, brasas incandescentes e calor ardente.', rarity: 'epic', currency: 'coins', priceCoins: 4500, unlockType: 'purchase', active: true, accentColor: '#f59e0b', secondaryColor: '#ef4444', cssClass: 'frame-effect-flame', category: 'elemental' },
-  { id: 'frame_tempestade_eletrica', type: 'frame', name: 'Fúria do Trovão & Raios', description: 'Arcos elétricos de plasma, relâmpagos estocásticos e nós de alta voltagem.', rarity: 'epic', currency: 'coins', priceCoins: 5000, unlockType: 'purchase', active: true, accentColor: '#38bdf8', secondaryColor: '#818cf8', cssClass: 'frame-effect-lightning', category: 'elemental' },
-  { id: 'frame_nevoa_sintrense', type: 'frame', name: 'Névoa Mística de Sintra', description: 'Névoa espessa em tons de ametista e prata, com runas célticas reluzentes.', rarity: 'epic', currency: 'coins', priceCoins: 5500, unlockType: 'purchase', active: true, accentColor: '#c084fc', secondaryColor: '#e879f9', cssClass: 'frame-effect-mist', category: 'elemental' },
-  { id: 'frame_ouro_afonso', type: 'frame', name: 'Aço de Guimarães & Ouro Lusitano', description: 'Gume de espada lendária em aço forjado a frio, com rebordo banhado a ouro 24k.', rarity: 'epic', currency: 'coins', priceCoins: 5800, unlockType: 'purchase', active: true, accentColor: '#eab308', secondaryColor: '#94a3b8', cssClass: 'frame-effect-sword', category: 'real' },
-  { id: 'frame_galo_barcelos', type: 'frame', name: 'Lenda Viva do Galo de Barcelos', description: 'Crista flamejante em carmesim com ornamentos populares e motivos florais vivos.', rarity: 'epic', currency: 'coins', priceCoins: 6000, unlockType: 'purchase', active: true, accentColor: '#ef4444', secondaryColor: '#eab308', cssClass: 'frame-effect-rooster', category: 'lusitano' },
-  // Lendárias (7.500–12.500 moedas)
-  { id: 'frame_aurora_boreal', type: 'frame', name: 'Aurora Boreal Atlântica', description: 'Cortinas ondulantes de luz turquesa, esmeralda e violeta.', rarity: 'legendary', currency: 'coins', priceCoins: 10000, unlockType: 'purchase', active: true, accentColor: '#2dd4bf', secondaryColor: '#a855f7', cssClass: 'frame-effect-aurora', category: 'cosmico' },
-  { id: 'frame_vortex_cosmico', type: 'frame', name: 'Vórtice Dimensional Infinito', description: 'Espiral gravitacional de buraco negro estelar que curva o espaço-tempo.', rarity: 'legendary', currency: 'coins', priceCoins: 11500, unlockType: 'purchase', active: true, accentColor: '#a855f7', secondaryColor: '#3b82f6', cssClass: 'frame-effect-vortex', category: 'cosmico' },
-  { id: 'frame_realeza_lusitana', type: 'frame', name: 'Brasão Real & Ouro Nobre', description: 'Filigrana dourada com relevos da realeza, incrustações de rubis e coroa imperial.', rarity: 'legendary', currency: 'coins', priceCoins: 12000, unlockType: 'purchase', active: true, accentColor: '#eab308', secondaryColor: '#ef4444', cssClass: 'frame-effect-royalty', category: 'real' },
-  { id: 'frame_coroa_louros', type: 'frame', name: 'Coroa Imperial dos Vencedores', description: 'Folhas de louro em ouro maciço com chuva perpétua de partículas douradas triunfais.', rarity: 'legendary', currency: 'coins', priceCoins: 12500, unlockType: 'purchase', active: true, accentColor: '#eab308', secondaryColor: '#ca8a04', cssClass: 'frame-effect-laurel', category: 'real' },
-  { id: 'frame_cristal_diamante', type: 'frame', name: 'Prisma Imperial de Diamante Puro', description: 'Facetas lapidadas de diamante brilhante com dispersão de luz volumétrica.', rarity: 'legendary', currency: 'coins', priceCoins: 11000, unlockType: 'purchase', active: true, accentColor: '#e2e8f0', secondaryColor: '#60a5fa', cssClass: 'frame-effect-diamond', category: 'real' },
-  // Míticas (15.000–28.000 moedas)
-  { id: 'frame_sol_dourado', type: 'frame', name: 'Fénix Solar & Labaredas Míticas', description: 'Erupções cromosféricas solares, plumas de plasma dourado e anéis coronais.', rarity: 'mythic', currency: 'coins', priceCoins: 22500, unlockType: 'purchase', active: true, accentColor: '#fbbf24', secondaryColor: '#f97316', cssClass: 'frame-effect-solar', category: 'elemental' },
-  { id: 'frame_abismo_oceanico', type: 'frame', name: 'Leviatã do Abismo das Quinas', description: 'Tentáculos bio-mecânicos bioluminescentes que emergem de uma fenda oceânica abissal.', rarity: 'mythic', currency: 'coins', priceCoins: 25000, unlockType: 'purchase', active: true, accentColor: '#06b6d4', secondaryColor: '#4f46e5', cssClass: 'frame-effect-abyss', category: 'cosmico' },
-  { id: 'frame_imperador_galactico', type: 'frame', name: 'Singularidade Cósmica das Quinas', description: 'A mais poderosa manifestação cósmica: matéria escura em rotação orbital e anéis de pulsars.', rarity: 'mythic', currency: 'coins', priceCoins: 28000, unlockType: 'purchase', active: true, accentColor: '#f43f5e', secondaryColor: '#8b5cf6', cssClass: 'frame-effect-singularity', category: 'cosmico' },
-]
+const frameRarityMap: Record<FrameRarity, ShopRarity> = {
+  'Raro': 'rare',
+  'Épico': 'epic',
+  'Lendário': 'legendary',
+  'Mítico': 'mythic',
+}
+
+export const FRAME_SHOP_ITEMS: ShopCatalogItem[] = ANIMATED_FRAMES.map((f): ShopCatalogItem => ({
+  id: f.id,
+  type: 'frame',
+  name: f.name,
+  description: f.description,
+  rarity: frameRarityMap[f.rarity] || 'rare',
+  currency: 'coins',
+  priceCoins: f.priceCoins || f.price,
+  unlockType: 'purchase',
+  active: true,
+  category: f.categoryKey,
+  categoryTitle: f.categoryTitle,
+  accentColor: f.accentColor,
+  secondaryColor: f.secondaryColor,
+  cssClass: f.cssClass,
+  story: f.story,
+  badgeText: f.badge || f.rarity,
+  badgeColor: f.badgeColor,
+}))
 
 // ============================================================================
 // 4. ARENAS & CENÁRIOS (43 BASE + 3 ULTRA-EXCLUSIVAS POR MÉRITO)
@@ -536,17 +553,75 @@ export const VIP_SHOP_ITEMS: ShopCatalogItem[] = VIP_CATALOG.map((vip): ShopCata
   }
 })
 
+export const TITLE_CATALOG_ITEMS: ShopCatalogItem[] = TITLE_SHOP_CATALOG.map((t): ShopCatalogItem => {
+  const isFree = t.price === 0
+  const isMerit = t.price === null
+  const rMap: Record<string, ShopRarity> = {
+    comum: 'common',
+    raro: 'rare',
+    épico: 'epic',
+    lendário: 'legendary',
+    mítico: 'mythic',
+  }
+  const rarity = rMap[t.rarity.toLowerCase()] || 'common'
+  return {
+    id: t.id,
+    type: 'title',
+    name: t.name,
+    description: t.requirement ? `Desbloqueio: ${t.requirement}` : `Título oficial exibido no teu perfil, duelos e rankings.`,
+    rarity,
+    currency: isFree ? 'free' : isMerit ? 'merit' : 'coins',
+    priceCoins: isMerit ? undefined : (t.price ?? 0),
+    unlockType: isFree ? 'free' : isMerit ? 'achievement' : 'purchase',
+    unlockCondition: t.requirement,
+    active: true,
+    category: t.categoryKey,
+    categoryTitle: t.categoryTitle,
+    badgeText: t.rarity,
+    badgeColor: t.badgeColor,
+    icon: '📜',
+  }
+})
+
+export const EMOTE_CATALOG_ITEMS: ShopCatalogItem[] = OFFICIAL_EMOTES.map((e): ShopCatalogItem => {
+  const isFree = e.price === 0
+  const rMap: Record<string, ShopRarity> = {
+    comum: 'common',
+    raro: 'rare',
+    épico: 'epic',
+    lendário: 'legendary',
+    mítico: 'mythic',
+  }
+  const rarity = rMap[e.rarity.toLowerCase()] || 'common'
+  return {
+    id: e.id,
+    type: 'reaction',
+    name: e.text,
+    description: `Reação oficial para duelos multiplayer 1v1 (${e.category}).`,
+    rarity,
+    currency: isFree ? 'free' : 'coins',
+    priceCoins: e.price,
+    unlockType: isFree ? 'free' : 'purchase',
+    active: true,
+    category: e.category,
+    icon: e.emoji,
+  }
+})
+
 // ============================================================================
 // CATÁLOGO UNIFICADO DEFINITIVO (SSOT)
 // ============================================================================
 export const SHOP_CATALOG: ShopCatalogItem[] = [
   ...AID_SHOP_ITEMS,
+  ...LEGACY_AID_ITEMS,
   ...AVATAR_SHOP_ITEMS,
   ...FRAME_SHOP_ITEMS,
   ...ARENA_SHOP_ITEMS,
+  ...TITLE_CATALOG_ITEMS,
   ...[STARTER_TITLE_ITEM],
   ...THEMATIC_TITLE_ITEMS,
   ...MERIT_TITLE_ITEMS,
+  ...EMOTE_CATALOG_ITEMS,
   ...REACTION_SHOP_ITEMS,
   ...VIP_SHOP_ITEMS,
 ]
@@ -562,10 +637,22 @@ export function getShopCatalogItem(itemId: string): ShopCatalogItem | undefined 
   if (!itemId) return undefined
   const normalized = itemId.trim()
 
-  const direct = SHOP_CATALOG.find((item) => item.id === normalized)
+  const vipAliases: Record<string, string> = {
+    vip_avatar_001: 'AP-VIP-SIGNATURE-001',
+    vip_arena_001: 'AP-VIP-ARENA-ULTIMATE-004',
+    vip_arena_002: 'AP-VIP-ARENA-ULTIMATE-003',
+    vip_arena_003: 'AP-VIP-ARENA-ULTIMATE-002',
+    vip_arena_004: 'AP-VIP-ARENA-ULTIMATE-001',
+    vip_arena_005: 'AP-VIP-ARENA-ULTIMATE-005',
+    vip_arena_006: 'AP-VIP-ARENA-ULTIMATE-002',
+  }
+
+  const resolvedId = vipAliases[normalized] || normalized
+
+  const direct = SHOP_CATALOG.find((item) => item.id === resolvedId)
   if (direct) return direct
 
-  return SHOP_CATALOG.find((item) => item.aliases?.includes(normalized))
+  return SHOP_CATALOG.find((item) => item.aliases?.includes(resolvedId) || item.aliases?.includes(normalized))
 }
 
 /**

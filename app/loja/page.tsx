@@ -23,9 +23,17 @@ import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { useEconomy } from '@/context/economy-context'
+import { useAuth } from '@/components/auth-provider'
+import {
+  extractUserCoins,
+  extractUserInventory,
+  extractUserEquipped,
+  parseSafeNumber,
+  safeSyncLog,
+} from '@/lib/economy-helpers'
 import { ANIMATED_FRAMES, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
-import { DEFAULT_AVATAR_ID } from '@/data/constants'
+import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { equipTitle } from '@/lib/titles-service'
 import {
   DEFAULT_STARTER_TITLE_ID,
@@ -207,7 +215,7 @@ const OTHER_SHOP_ITEMS: ShopItem[] = AID_SHOP_ITEMS.map((aid) => ({
   description: aid.description,
   price: `${aid.priceCoins?.toLocaleString('pt-PT')} Moedas`,
   priceValue: aid.priceCoins || 0,
-  image: aid.asset || '/images/shop/ajuda-5050.jpg',
+  image: aid.asset || '/assets/shop/aids/aid-50-50.webp',
   badge: aid.badgeText || 'Ajuda',
   badgeColor: aid.badgeColor,
   icon: aid.icon || '✨',
@@ -221,6 +229,7 @@ const AVATAR_RARITIES: (AvatarRarity | 'todas')[] = ['todas', 'Comum', 'Raro', '
 
 function LojaContent() {
   const { coins: userBalance, formattedCoins, deductCoins, isBalancePulsing } = useEconomy()
+  const { user } = useAuth()
   const searchParams = useSearchParams()
   const tabParam = searchParams.get('tab') as Category | null
   const [mounted, setMounted] = useState(false)
@@ -269,16 +278,49 @@ function LojaContent() {
     fastAnswer: 0,
     streakProtection: 0,
   })
+  const [aidStatus, setAidStatus] = useState<Record<string, {
+    id?: string
+    name?: string
+    stock: number
+    maxOwned: number
+    purchasesLast24h: number
+    purchaseLimit24h: number
+    remainingPurchases24h: number
+    is24hLimitReached?: boolean
+    isStockFull?: boolean
+  }>>({})
+
+  const fetchAidStatus = async () => {
+    const targetUser = user || auth.currentUser
+    if (!targetUser) return
+    try {
+      const idToken = await targetUser.getIdToken().catch(() => null)
+      if (!idToken) return
+      const res = await fetch('/api/shop/purchase', {
+        headers: { Authorization: `Bearer ${idToken}` },
+        cache: 'no-store',
+      })
+      if (res.ok) {
+        const json = await res.json().catch(() => ({}))
+        if (json.success && json.aids) {
+          setAidStatus(json.aids)
+        }
+      }
+    } catch (e) {
+      console.warn('[SHOP_FETCH_STATUS_WARN]', e)
+    }
+  }
 
   const getAidStock = (itemId: string): number => {
-    if (itemId === 'aid_50_50' || itemId === 'ajuda_5050' || itemId === 'consumable_50_50') return consumables.help5050 || 0
-    if (itemId === 'aid_public_vote' || itemId === 'HELP_005' || itemId === 'ajuda_publico' || itemId === 'consumable_public_vote') return consumables.publicVote || 0
-    if (itemId === 'aid_freeze_time' || itemId === 'ajuda_congelar' || itemId === 'consumable_congelar_tempo') return consumables.freezeTime || 0
-    if (itemId === 'aid_hint' || itemId === 'consumable_pista') return consumables.hints || 0
-    if (itemId === 'aid_second_chance') return consumables.secondChance || (rawInventory[itemId] || 0)
-    if (itemId === 'aid_triple_elimination') return consumables.tripleElimination || (rawInventory[itemId] || 0)
-    if (itemId === 'aid_fast_answer') return consumables.fastAnswer || (rawInventory[itemId] || 0)
-    if (itemId === 'aid_streak_protection' || itemId === 'consumable_protecao_streak') return consumables.streakProtection || 0
+    if (aidStatus[itemId]?.stock !== undefined) return aidStatus[itemId].stock
+    if (itemId === 'AID_002' || itemId === 'aid_50_50' || itemId === 'ajuda_5050' || itemId === 'consumable_50_50' || itemId === 'help5050') return consumables.help5050 || 0
+    if (itemId === 'AID_003' || itemId === 'aid_public_vote' || itemId === 'HELP_005' || itemId === 'ajuda_publico' || itemId === 'consumable_public_vote' || itemId === 'publicVote') return consumables.publicVote || 0
+    if (itemId === 'AID_004' || itemId === 'aid_freeze_time' || itemId === 'ajuda_congelar' || itemId === 'consumable_congelar_tempo' || itemId === 'freezeTime') return consumables.freezeTime || 0
+    if (itemId === 'AID_001' || itemId === 'aid_hint' || itemId === 'consumable_pista' || itemId === 'pista_historica') return consumables.hints || 0
+    if (itemId === 'AID_005' || itemId === 'aid_second_chance') return consumables.secondChance || (rawInventory[itemId] || 0)
+    if (itemId === 'AID_006' || itemId === 'aid_triple_elimination') return consumables.tripleElimination || (rawInventory[itemId] || 0)
+    if (itemId === 'AID_007' || itemId === 'aid_fast_answer') return consumables.fastAnswer || (rawInventory[itemId] || 0)
+    if (itemId === 'AID_008' || itemId === 'aid_streak_protection' || itemId === 'consumable_protecao_streak') return consumables.streakProtection || 0
     return rawInventory[itemId] || 0
   }
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>({
@@ -329,135 +371,165 @@ function LojaContent() {
 
     syncStore()
 
-    let unsubscribeSnapshot: (() => void) | undefined
-    if (auth.currentUser) {
-      try {
-        const userRef = doc(db, 'users', auth.currentUser.uid)
-        unsubscribeSnapshot = onSnapshot(userRef, (snap) => {
-          if (snap.exists()) {
-            const data = snap.data()
-            if (data.inventory) {
-              setRawInventory(typeof data.inventory === 'object' ? data.inventory : {})
-              const invTaunts = Array.from(new Set([
-                'pack_basico',
-                ...(data.inventory.taunts || []),
-                ...(data.inventory.emotes || []),
-              ]))
-              setInventory({
-                avatars: Array.isArray(data.inventory.avatars) && data.inventory.avatars.length > 0 ? data.inventory.avatars : [DEFAULT_AVATAR_ID],
-                frames: Array.isArray(data.inventory.frames) ? data.inventory.frames : ['default'],
-                arenas: Array.isArray(data.inventory.arenas) && data.inventory.arenas.length > 0 ? data.inventory.arenas : ['arena_1'],
-                titles: Array.isArray(data.inventory.titles) && data.inventory.titles.length > 0 ? data.inventory.titles : [DEFAULT_STARTER_TITLE_ID],
-                taunts: invTaunts,
-              })
-              localStorage.setItem('user_inventory', JSON.stringify(data.inventory))
-              localStorage.setItem('user_inventory_taunts', JSON.stringify(invTaunts))
-            }
-            if (data.unlockedFrames && Array.isArray(data.unlockedFrames)) {
-              setUnlockedItems((prev) => Array.from(new Set([...prev, ...data.unlockedFrames])))
-              setInventory((prev) => ({ ...prev, frames: Array.from(new Set([...prev.frames, ...data.unlockedFrames])) }))
-            }
-            if (data.vipEntitlements && Array.isArray(data.vipEntitlements)) {
-              setVipEntitlements(data.vipEntitlements)
-            }
-            if (data.consumables) {
-              setConsumables({
-                help5050: typeof data.consumables.help5050 === 'number' ? data.consumables.help5050 : 0,
-                freezeTime: typeof data.consumables.freezeTime === 'number' ? data.consumables.freezeTime : 0,
-                publicVote: typeof data.consumables.publicVote === 'number' ? data.consumables.publicVote : 0,
-                hints: typeof data.consumables.hints === 'number' ? data.consumables.hints : (typeof data.inventory?.consumable_pista === 'number' ? data.inventory.consumable_pista : 0),
-                streakProtection: typeof data.consumables.streakProtection === 'number' ? data.consumables.streakProtection : (typeof data.inventory?.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0),
-              })
-              localStorage.setItem('user_consumables', JSON.stringify(data.consumables))
-            } else if (data.inventory?.utilities) {
-              const utils = data.inventory.utilities
-              setConsumables({
-                help5050: typeof utils.fiftyFifty === 'number' ? utils.fiftyFifty : (typeof data.inventory.consumable_50_50 === 'number' ? data.inventory.consumable_50_50 : 0),
-                freezeTime: typeof utils.freezeTime === 'number' ? utils.freezeTime : (typeof data.inventory.consumable_congelar_tempo === 'number' ? data.inventory.consumable_congelar_tempo : 0),
-                publicVote: typeof utils.publicVote === 'number' ? utils.publicVote : (typeof data.inventory.HELP_005 === 'number' ? data.inventory.HELP_005 : 0),
-                hints: typeof data.inventory.consumable_pista === 'number' ? data.inventory.consumable_pista : 0,
-                streakProtection: typeof data.inventory.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0,
-              })
-            } else {
-              setConsumables({
-                help5050: typeof data.inventory?.consumable_50_50 === 'number' ? data.inventory.consumable_50_50 : 0,
-                freezeTime: typeof data.inventory?.consumable_congelar_tempo === 'number' ? data.inventory.consumable_congelar_tempo : 0,
-                publicVote: typeof data.inventory?.HELP_005 === 'number' ? data.inventory.HELP_005 : 0,
-                hints: typeof data.inventory?.consumable_pista === 'number' ? data.inventory.consumable_pista : 0,
-                streakProtection: typeof data.inventory?.consumable_protecao_streak === 'number' ? data.inventory.consumable_protecao_streak : 0,
-              })
-            }
-            if (data.equippedAvatar || data.equipped?.avatar) {
-              const av = data.equipped?.avatar || data.equippedAvatar
-              if (av && !av.includes('moldura')) {
-                setEquippedAvatar(av)
-                localStorage.setItem('user_equipped_avatar', av)
-              }
-            }
-            if (data.equippedFrame || data.equipped?.frameId) {
-              const fr = data.equippedFrame || data.equipped?.frameId
-              setEquippedFrame(fr)
-              localStorage.setItem('user_equipped_frame', fr)
-            }
-            if (data.equippedArena || data.equipped?.arena) {
-              const ar = data.equipped?.arena || data.equippedArena
-              setEquippedArena(ar)
-              localStorage.setItem('equipped_arena', ar)
-            }
-            const resolvedTit = resolvePlayerEquippedTitle(data as any, data.xp || 0)
-            const titId = data.equippedTitleId || (data.equipped as any)?.titleId || (data.equipped as any)?.title || resolvedTit.id
-            const titName = resolvedTit.cleanName || DEFAULT_STARTER_TITLE_NAME
-            setEquippedTitleId(titId)
-            setEquippedTitle(titName)
-            localStorage.setItem('equipped_title_id', titId)
-            localStorage.setItem('equipped_title', titName)
-            if (data.equippedTauntId || data.equipped?.taunt) {
-              const tId = data.equippedTauntId || data.equipped?.taunt
-              setEquippedTauntId(tId)
-              localStorage.setItem('equipped_taunt_id', tId)
-            }
-            if (data.equippedEmotes || data.equipped?.emotes || data.equipped?.taunts) {
-              const em = data.equipped?.emotes || data.equipped?.taunts || data.equippedEmotes
-              if (Array.isArray(em)) {
-                setEquippedEmotes(em)
-                localStorage.setItem('equipped_emotes', JSON.stringify(em))
-                localStorage.setItem('equipped_taunts', JSON.stringify(em))
-              }
-            }
-          }
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
     window.addEventListener('avatarChanged', syncStore)
     window.addEventListener('arenaChanged', syncStore)
     window.addEventListener('titleChanged', syncStore)
     window.addEventListener('tauntsChanged', syncStore)
     window.addEventListener('emotesChanged', syncStore)
     window.addEventListener('consumables_updated', syncStore)
+    window.addEventListener('consumables_updated', fetchAidStatus)
     window.addEventListener('inventory_updated', syncStore)
     window.addEventListener('balance_updated', syncStore)
-    window.addEventListener('storage', syncStore)
 
     return () => {
-      if (unsubscribeSnapshot) unsubscribeSnapshot()
       window.removeEventListener('avatarChanged', syncStore)
       window.removeEventListener('arenaChanged', syncStore)
       window.removeEventListener('titleChanged', syncStore)
       window.removeEventListener('tauntsChanged', syncStore)
       window.removeEventListener('emotesChanged', syncStore)
       window.removeEventListener('consumables_updated', syncStore)
+      window.removeEventListener('consumables_updated', fetchAidStatus)
       window.removeEventListener('inventory_updated', syncStore)
       window.removeEventListener('balance_updated', syncStore)
-      window.removeEventListener('storage', syncStore)
     }
   }, [])
 
+  // Subscrição Reativa em Tempo Real ao Firestore baseada no utilizador autenticado
+  useEffect(() => {
+    const targetUid = user?.uid || auth.currentUser?.uid
+    if (!targetUid) return
+
+    let unsubscribeSnapshot: (() => void) | undefined
+    try {
+      const userRef = doc(db, 'users', targetUid)
+      unsubscribeSnapshot = onSnapshot(
+        userRef,
+        (snap) => {
+          if (snap.exists()) {
+            const data = snap.data()
+            const invData = extractUserInventory(data)
+            const equippedData = extractUserEquipped(data)
+
+            safeSyncLog('SHOP_SNAPSHOT', {
+              uid: targetUid,
+              avatarsCount: invData.avatars.length,
+              fromCache: snap.metadata.fromCache,
+            })
+
+            setRawInventory(invData.rawMap)
+            setInventory({
+              avatars: invData.avatars,
+              frames: invData.frames,
+              arenas: invData.arenas,
+              titles: invData.titles,
+              taunts: invData.taunts,
+            })
+            setUnlockedItems(
+              Array.from(
+                new Set([
+                  ...invData.avatars,
+                  ...invData.frames,
+                  ...invData.arenas,
+                  ...invData.titles,
+                  ...invData.taunts,
+                ]),
+              ),
+            )
+            if (Array.isArray(data.vipEntitlements)) {
+              setVipEntitlements(data.vipEntitlements)
+            }
+            setConsumables({
+              help5050: invData.utilities.fiftyFifty,
+              freezeTime: invData.utilities.freezeTime,
+              publicVote: invData.utilities.publicVote,
+              hints:
+                parseSafeNumber(data.consumables?.hints) ??
+                parseSafeNumber(invData.rawMap.consumable_pista) ??
+                0,
+              streakProtection:
+                parseSafeNumber(data.consumables?.streakProtection) ??
+                parseSafeNumber(invData.rawMap.consumable_protecao_streak) ??
+                0,
+              secondChance:
+                parseSafeNumber(data.consumables?.secondChance) ??
+                parseSafeNumber(invData.rawMap.aid_second_chance) ??
+                0,
+              tripleElimination:
+                parseSafeNumber(data.consumables?.tripleElimination) ??
+                parseSafeNumber(invData.rawMap.aid_triple_elimination) ??
+                0,
+              fastAnswer:
+                parseSafeNumber(data.consumables?.fastAnswer) ??
+                parseSafeNumber(invData.rawMap.aid_fast_answer) ??
+                0,
+            })
+
+            if (equippedData.avatarImage && !equippedData.avatarImage.includes('moldura')) {
+              setEquippedAvatar(equippedData.avatarImage)
+            }
+            if (equippedData.frameId) {
+              setEquippedFrame(equippedData.frameId)
+            }
+            if (equippedData.arenaId) {
+              setEquippedArena(equippedData.arenaId)
+            }
+            if (equippedData.titleId) {
+              setEquippedTitleId(equippedData.titleId)
+              setEquippedTitle(equippedData.titleName)
+            }
+            if (data.equippedTauntId || data.equipped?.taunt) {
+              setEquippedTauntId(data.equippedTauntId || data.equipped?.taunt)
+            }
+            if (Array.isArray(data.equippedEmotes || data.equipped?.emotes || data.equipped?.taunts)) {
+              setEquippedEmotes(data.equippedEmotes || data.equipped?.emotes || data.equipped?.taunts)
+            }
+          }
+        },
+        (err) => {
+          console.warn('[SHOP] Aviso transitório no snapshot do utilizador:', err)
+        },
+      )
+    } catch (e) {
+      console.error('[SHOP] Erro ao subscrever snapshot da loja:', e)
+    }
+
+    void fetchAidStatus()
+
+    return () => {
+      if (unsubscribeSnapshot) unsubscribeSnapshot()
+    }
+  }, [user?.uid])
+
   const showToast = (text: string, type: 'success' | 'error' = 'success') => {
     setFeedbackMessage({ text, type })
-    setTimeout(() => setFeedbackMessage(null), 3500)
+    setTimeout(() => setFeedbackMessage(null), type === 'error' ? 8000 : 3500)
+  }
+
+  const formatPurchaseErrorMessage = (json: any, resStatus?: number): string => {
+    const reqId = json?.requestId || 'N/A'
+    const code =
+      json?.error?.code ||
+      (typeof json?.code === 'string' ? json.code : '') ||
+      (resStatus === 401
+        ? 'UNAUTHORIZED'
+        : resStatus === 403
+          ? 'FORBIDDEN'
+          : resStatus === 404
+            ? 'PRODUCT_NOT_FOUND'
+            : resStatus === 409
+              ? 'CONFLICT'
+              : resStatus === 503
+                ? 'FIRESTORE_SERVICE_UNAVAILABLE'
+                : 'PURCHASE_FAILED')
+
+    const msg =
+      json?.error?.message ||
+      (typeof json?.error === 'string' ? json.error : '') ||
+      (typeof json?.message === 'string' ? json.message : 'Erro ao processar compra no servidor.')
+
+    const httpText = resStatus ? ` | HTTP: ${resStatus}` : ''
+
+    return `[${code}] ${msg}${httpText} | Req: ${reqId}`
   }
 
   const isItemUnlocked = (item: ShopItem) => {
@@ -475,7 +547,7 @@ function LojaContent() {
       )
     }
     if (item.category === 'avatars') {
-      const isFree = item.id === DEFAULT_AVATAR_ID
+      const isFree = item.id === DEFAULT_AVATAR_ID || item.id === STARTER_AVATAR_ID
       return isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
     }
     if (item.category === 'arenas') {
@@ -588,74 +660,95 @@ function LojaContent() {
     // 1. CONSUMÍVEIS (SEMPRE COMPRA VIA SERVIDOR /api/shop/purchase)
     if (item.category === 'ajudas') {
       if (!auth.currentUser) {
-        showToast('Inicia sessão para adquirires Ajudas & Utilidades de gameplay.', 'error')
+        showToast('Precisas de iniciar sessão para comprar.', 'error')
         return
       }
 
       if (userBalance < item.priceValue) {
-        showToast(`Saldo insuficiente! Precisas de ${item.priceValue.toLocaleString('pt-PT')} Moedas.`, 'error')
+        showToast(`Saldo insuficiente. Precisas de ${item.priceValue.toLocaleString('pt-PT')} Moedas e tens ${userBalance.toLocaleString('pt-PT')} Moedas.`, 'error')
         return
       }
 
       const currentAidStock = getAidStock(item.id)
-      const maxLimit = item.maxOwned || 50
+      const st = aidStatus[item.id]
+      const maxLimit = st?.maxOwned || item.maxOwned || 50
       if (currentAidStock >= maxLimit) {
-        showToast(`Inventário cheio! Já possuis ${currentAidStock} unidades (limite: ${maxLimit}).`, 'error')
+        showToast(`Inventário cheio para «${item.name}». Já possuis ${currentAidStock} unidades (limite: ${maxLimit} un.).`, 'error')
+        return
+      }
+      if (st && st.remainingPurchases24h <= 0) {
+        showToast(`Limite de 3 compras desta ajuda nas últimas 24 horas atingido.`, 'error')
         return
       }
 
       try {
         const idToken = await auth.currentUser.getIdToken().catch(() => null)
-        const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-        if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+        if (!idToken) {
+          showToast('Sessão expirada. Inicia sessão novamente.', 'error')
+          return
+        }
 
-        const idempotencyKey = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `pur_${Date.now()}_${Math.random()}`
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
+        }
+
+        const idempotencyKey =
+          typeof crypto !== 'undefined' && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `pur_${Date.now()}_${Math.random().toString(36).slice(2)}`
 
         const res = await fetch('/api/shop/purchase', {
           method: 'POST',
           headers,
+          cache: 'no-store',
           body: JSON.stringify({
-            uid: auth.currentUser.uid,
+            productId: item.id,
             itemId: item.id,
             idempotencyKey,
           }),
         })
 
         const json = await res.json().catch(() => ({}))
-        if (!json.success) {
-          showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
+        if (!json.success && !json.ok) {
+          const errMsg = formatPurchaseErrorMessage(json, res.status)
+          showToast(errMsg, 'error')
+          fetchAidStatus()
           return
         }
 
-        const qtyToAdd = item.id === 'aid_50_50' ? 5 : item.id === 'aid_streak_protection' ? 1 : 3
-        const newStock = json.newStock !== undefined ? json.newStock : currentAidStock + qtyToAdd
-        let updatedConsumables = { ...consumables }
-        if (item.id === 'aid_50_50' || item.id === 'ajuda_5050' || item.id === 'consumable_50_50') {
-          updatedConsumables.help5050 = newStock
-        } else if (item.id === 'aid_public_vote' || item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote') {
-          updatedConsumables.publicVote = newStock
-        } else if (item.id === 'aid_freeze_time' || item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo') {
-          updatedConsumables.freezeTime = newStock
-        } else if (item.id === 'aid_hint' || item.id === 'consumable_pista') {
-          updatedConsumables.hints = newStock
-        } else if (item.id === 'aid_second_chance') {
-          updatedConsumables.secondChance = newStock
-        } else if (item.id === 'aid_triple_elimination') {
-          updatedConsumables.tripleElimination = newStock
-        } else if (item.id === 'aid_fast_answer') {
-          updatedConsumables.fastAnswer = newStock
-        } else if (item.id === 'aid_streak_protection' || item.id === 'consumable_protecao_streak') {
-          updatedConsumables.streakProtection = newStock
+        // Sincronizar saldo imediatamente
+        if (typeof json.remainingCoins === 'number') {
+          localStorage.setItem('user_coins', String(json.remainingCoins))
+          localStorage.setItem('user_euros', String(json.remainingCoins))
+          window.dispatchEvent(
+            new CustomEvent('balance_updated', { detail: { coins: json.remainingCoins } })
+          )
         }
 
-        setConsumables(updatedConsumables)
-        localStorage.setItem('user_consumables', JSON.stringify(updatedConsumables))
+        // Atualizar estado da ajuda no client com a resposta do servidor
+        if (json.stock !== undefined) {
+          setAidStatus((prev) => ({
+            ...prev,
+            [item.id]: {
+              id: item.id,
+              name: item.name,
+              stock: json.stock,
+              maxOwned: json.maxOwned || maxLimit,
+              purchasesLast24h: json.purchasesLast24h,
+              purchaseLimit24h: json.purchaseLimit24h,
+              remainingPurchases24h: json.remainingPurchases24h,
+              is24hLimitReached: json.remainingPurchases24h === 0,
+              isStockFull: json.stock >= (json.maxOwned || maxLimit),
+            },
+          }))
+        }
 
+        fetchAidStatus()
         window.dispatchEvent(new Event('consumables_updated'))
         window.dispatchEvent(new Event('inventory_updated'))
-        window.dispatchEvent(new Event('balance_updated'))
 
-        showToast(json.message || `Sucesso! Adquiriste ${item.name}! Tens: ${newStock}`)
+        showToast(json.message || `«${item.name}» adquirida com sucesso!`)
         return
       } catch (e: any) {
         showToast(e.message || 'Erro de comunicação ao comprar.', 'error')
@@ -837,25 +930,45 @@ function LojaContent() {
 
       try {
         const idToken = await auth.currentUser.getIdToken().catch(() => null)
-        const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-        if (idToken) headers['Authorization'] = `Bearer ${idToken}`
+        if (!idToken) {
+          showToast('Sessão expirada. Inicia sessão novamente.', 'error')
+          return
+        }
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
+        }
 
-        const idempotencyKey = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `pur_${Date.now()}_${Math.random()}`
+        const idempotencyKey =
+          typeof crypto !== 'undefined' && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `pur_${Date.now()}_${Math.random().toString(36).slice(2)}`
 
         const res = await fetch('/api/shop/purchase', {
           method: 'POST',
           headers,
+          cache: 'no-store',
           body: JSON.stringify({
-            uid: auth.currentUser.uid,
+            productId: item.id,
             itemId: item.id,
             idempotencyKey,
           }),
         })
 
         const json = await res.json().catch(() => ({}))
-        if (!json.success) {
-          showToast(json.error || 'Erro ao processar compra no servidor.', 'error')
+        if (!json.success && !json.ok) {
+          const errMsg = formatPurchaseErrorMessage(json, res.status)
+          showToast(errMsg, 'error')
           return
+        }
+
+        // Sincronizar saldo imediatamente
+        if (typeof json.remainingCoins === 'number') {
+          localStorage.setItem('user_coins', String(json.remainingCoins))
+          localStorage.setItem('user_euros', String(json.remainingCoins))
+          window.dispatchEvent(
+            new CustomEvent('balance_updated', { detail: { coins: json.remainingCoins } })
+          )
         }
       } catch (e: any) {
         showToast(e.message || 'Erro de rede ao comprar cosmético.', 'error')
@@ -1477,6 +1590,7 @@ function LojaContent() {
                 const isUnlocked = isItemUnlocked(item)
                 const isEquipped = isItemEquipped(item)
                 const isExclusive = item.isExclusive
+                const isPremiumAid = item.id === 'AID_003'
 
                 return (
                   <div 
@@ -1485,7 +1599,9 @@ function LojaContent() {
                       "group relative flex flex-col justify-between rounded-2xl border bg-slate-900/80 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 shadow-lg",
                       isExclusive
                         ? "border-rose-500/40 hover:border-rose-400 hover:shadow-[0_0_25px_rgba(244,63,94,0.3)] bg-gradient-to-b from-slate-900/90 to-rose-950/20"
-                        : "border-slate-800 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]"
+                        : isPremiumAid
+                          ? "border-purple-500/60 hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.25)] bg-gradient-to-b from-slate-900/90 via-purple-950/25 to-slate-900/90"
+                          : "border-slate-800 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]"
                     )}
                   >
                     <div>
@@ -1513,15 +1629,7 @@ function LojaContent() {
                         )}
                         {isConsumable && (
                           <span className="text-[10px] font-bold text-amber-400 shrink-0">
-                            {item.id === 'ajuda_5050' || item.id === 'consumable_50_50'
-                              ? `Tens: ${consumables.help5050 || 0}`
-                              : item.id === 'HELP_005' || item.id === 'ajuda_publico' || item.id === 'consumable_public_vote'
-                                ? `Tens: ${consumables.publicVote || 0}`
-                                : item.id === 'ajuda_congelar' || item.id === 'consumable_congelar_tempo'
-                                  ? `Tens: ${consumables.freezeTime || 0}`
-                                  : item.id === 'consumable_pista'
-                                    ? `Tens: ${consumables.hints || 0}`
-                                    : `Tens: ${consumables.streakProtection || 0}`}
+                            Tens: {getAidStock(item.id)}
                           </span>
                         )}
                       </div>
@@ -1705,9 +1813,16 @@ function LojaContent() {
                         </div>
                       ) : isConsumable ? (
                         (() => {
-                          const aidStock = getAidStock(item.id)
-                          const maxLimit = item.maxOwned || 50
-                          const isStockFull = aidStock >= maxLimit
+                          const st = aidStatus[item.id]
+                          const aidStock = typeof st?.stock === 'number' ? st.stock : getAidStock(item.id)
+                          const maxLimit = typeof st?.maxOwned === 'number' ? st.maxOwned : (item.maxOwned || 50)
+                          const purchases24h = typeof st?.purchasesLast24h === 'number' ? st.purchasesLast24h : 0
+                          const limit24h = typeof st?.purchaseLimit24h === 'number' ? st.purchaseLimit24h : 3
+                          const remaining24h = typeof st?.remainingPurchases24h === 'number' ? st.remainingPurchases24h : Math.max(0, limit24h - purchases24h)
+
+                          const is24hLimitReached = Boolean(st?.is24hLimitReached || remaining24h <= 0 || purchases24h >= limit24h)
+                          const isStockFull = Boolean(st?.isStockFull || aidStock >= maxLimit)
+                          const isDisabled = is24hLimitReached || isStockFull
 
                           return (
                             <div className="flex items-center justify-between gap-2">
@@ -1719,19 +1834,28 @@ function LojaContent() {
                                 <span className="text-[11px] font-bold text-slate-400 mt-0.5">
                                   Tens: <strong className={isStockFull ? 'text-amber-400 font-black' : 'text-cyan-400'}>{aidStock}</strong> / {maxLimit}
                                 </span>
+                                <span className="text-[10px] font-bold text-slate-400">
+                                  Compras últimas 24h: <strong className={is24hLimitReached ? 'text-rose-400 font-black' : 'text-amber-300'}>{purchases24h}</strong> / {limit24h}
+                                </span>
                               </div>
 
                               <button
                                 type="button"
-                                disabled={isStockFull}
+                                disabled={isDisabled}
                                 onClick={() => handleAction(item)}
-                                className={`rounded-xl px-3.5 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 active:scale-95 z-20 ${
-                                  isStockFull
+                                className={`rounded-xl px-3 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 active:scale-95 z-20 ${
+                                  is24hLimitReached
+                                    ? 'bg-rose-950/60 text-rose-400 border border-rose-800/60 cursor-not-allowed select-none shadow-none text-[10px] leading-tight text-center'
+                                    : isStockFull
                                     ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed select-none'
                                     : 'cursor-pointer bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_0_10px_rgba(245,158,11,0.3)]'
                                 }`}
                               >
-                                {isStockFull ? 'Inventário Cheio' : 'Comprar'}
+                                {is24hLimitReached
+                                  ? 'Compras 24h Esgotadas'
+                                  : isStockFull
+                                  ? 'Inventário Cheio'
+                                  : 'Comprar'}
                               </button>
                             </div>
                           )

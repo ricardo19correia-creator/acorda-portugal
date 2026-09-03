@@ -1,12 +1,27 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Play, Trophy, Sparkles, MapPin, Award, Crown, Swords, ArrowRight } from 'lucide-react'
+import {
+  Play,
+  Trophy,
+  Sparkles,
+  MapPin,
+  Award,
+  Crown,
+  Swords,
+  ArrowRight,
+  Globe,
+  Clock,
+  Flame,
+  Shield,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { auth } from '@/lib/firebase'
-import { useAuth } from '@/components/auth-provider'
+import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
+import { Portugal3DExperience } from '@/components/portugal-3d-map/Portugal3DExperience'
+import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
+import { calculateDistrictWarTerritories } from '@/lib/district-war'
 
 const HERO_STATS = [
   {
@@ -18,8 +33,8 @@ const HERO_STATS = [
   },
   {
     icon: MapPin,
-    value: '18 + 2',
-    label: 'Distritos & Regiões',
+    value: '20 Territórios',
+    label: '18 Distritos + Ilhas',
     sub: 'Continente, Açores e Madeira',
     tone: 'text-accent',
   },
@@ -27,128 +42,175 @@ const HERO_STATS = [
     icon: Award,
     value: '21 Níveis',
     label: 'Progressão RPG',
-    sub: 'De Curioso a Mestre',
+    sub: 'De Curioso a Mestre Supremo',
     tone: 'text-gold',
   },
   {
     icon: Crown,
-    value: '1 Topo',
-    label: 'Rei do Distrito',
-    sub: 'Conquista territorial',
+    value: 'Guerra dos Distritos',
+    label: 'Rei do Território',
+    sub: 'Poder & Domínio Nacional',
     tone: 'text-flag-red',
   },
 ]
 
 export function Hero() {
   const router = useRouter()
+  const [seasonTime, setSeasonTime] = useState(() => calculateTimeRemaining(ACTIVE_SEASON_01.endDate))
+  const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('Lisboa')
+
+  // Atualizar temporizador decrescente a cada segundo
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSeasonTime(calculateTimeRemaining(ACTIVE_SEASON_01.endDate))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  // Subscrição em Tempo Real para alimentar o radar do Hero
+  useEffect(() => {
+    const unsub = subscribeRankings(
+      'all',
+      'xp',
+      (players) => {
+        setNationalPlayers(players)
+      },
+      100
+    )
+    return () => unsub()
+  }, [])
+
+  const territories = useMemo(() => {
+    return calculateDistrictWarTerritories(nationalPlayers)
+  }, [nationalPlayers])
 
   const handleStartGame = (gameRoute: string) => {
     router.push(gameRoute)
   }
 
   return (
-    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-8 bg-transparent">
+    <section id="top" className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8 lg:pb-12 lg:pt-6 bg-transparent">
       {/* Main Centered Hero Copy & CTAs */}
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-        {/* Official Badge Pill */}
+        {/* Official Badge Pill & Season Timer */}
         <div
-          className="animate-rise inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 backdrop-blur-md shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+          className="animate-rise inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-slate-900/80 to-amber-500/15 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]"
           style={{ animationDelay: '60ms' }}
         >
           <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
-          <span className="font-display text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-amber-300">
-            Desafio Nacional • Edição Oficial
+          <span className="font-display text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-amber-300">
+            DESAFIO NACIONAL 🇵🇹 {ACTIVE_SEASON_01.name}
           </span>
-          <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]" />
+          <span className="text-white/30 hidden sm:inline">•</span>
+          <span className="text-xs font-mono text-cyan-300 font-bold flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5" /> {seasonTime.formatted}
+          </span>
         </div>
 
-        {/* Main 3D Title with Neon Glint */}
-        <h1
-          className="animate-rise mt-6 font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-foreground text-3d-chrome leading-[0.95]"
-          style={{ animationDelay: '140ms' }}
-        >
-          Acorda Portugal
-        </h1>
-
-        {/* 5-Second Conversion Punchline */}
-        <div
-          className="animate-rise mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-2 text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300 shadow-sm backdrop-blur-md"
-          style={{ animationDelay: '190ms' }}
-        >
-          <span>🇵🇹 Testa o Teu Conhecimento</span>
-          <span className="text-white/25 hidden sm:inline">•</span>
-          <span>Representa o Teu Distrito</span>
-          <span className="text-white/25 hidden sm:inline">•</span>
-          <span>Sobe no Ranking de Portugal</span>
+        {/* Main 3D Title with Chrome & Neon Glint */}
+        <div className="mt-6">
+          <h1
+            className="animate-rise font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white text-3d-chrome leading-[0.92]"
+            style={{ animationDelay: '140ms' }}
+          >
+            ACORDA PORTUGAL
+          </h1>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-widest text-cyan-400 font-display mt-2 drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">
+            DESAFIO NACIONAL
+          </h2>
         </div>
 
+        {/* Subtítulo Oficial 2150 */}
         <p
-          className="animate-rise mt-4 max-w-2xl text-pretty text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground font-medium mx-auto"
-          style={{ animationDelay: '240ms' }}
+          className="animate-rise mt-5 max-w-2xl text-pretty text-base sm:text-lg md:text-xl leading-relaxed text-slate-200 font-bold mx-auto"
+          style={{ animationDelay: '200ms' }}
         >
-          O maior videojogo de trivia e cultura de Portugal. Joga a solo ou em Duelos 1v1, ganha XP, acumula moedas e coloca a tua região no topo nacional.
+          Portugal entrou no futuro. Agora és tu que decides quem domina o mapa.
         </p>
 
-        {/* Action CTAs: 3D Console/Mech Gaming Buttons Perfectly Centered */}
+        <p
+          className="animate-rise mt-2 max-w-xl text-xs sm:text-sm text-slate-400 font-medium mx-auto"
+          style={{ animationDelay: '240ms' }}
+        >
+          Joga a solo, desafia em Duelos 1v1, ganha Acordas Virtuais e defende o teu território na Guerra dos Distritos.
+        </p>
+
+        {/* Os 3 CTAs Principais Requeridos */}
         <div
           className="animate-rise mt-8 flex w-full flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4"
           style={{ animationDelay: '300ms' }}
         >
-          {/* Primary Mech Emerald Button */}
+          {/* CTA 1: Jogar Agora */}
           <button
             type="button"
             onClick={() => handleStartGame('/jogar')}
-            className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-emerald-500/30"
+            className="btn-mech-emerald light-sweep w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 font-display text-base sm:text-lg font-black uppercase tracking-wider text-emerald-950 cursor-pointer shadow-2xl hover:scale-105 transition-all duration-300 shadow-emerald-500/40"
           >
             <Play className="h-5 w-5 fill-current text-emerald-950 drop-shadow-sm" />
             <span>Jogar Agora</span>
           </button>
 
-          {/* Duelo 1v1 Fast Match Mech Button */}
-          <button
-            type="button"
-            onClick={() => handleStartGame('/jogar/duelo')}
-            className="btn-mech-purple w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-white cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-purple-500/30"
-          >
-            <Swords className="h-5 w-5 drop-shadow-sm" />
-            <span>Duelo 1v1</span>
-          </button>
-
-          {/* Download App Android CTA Button */}
+          {/* CTA 2: Explorar Portugal 3D */}
           <Link
-            href="/download"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-emerald-300 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 hover:border-emerald-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-emerald-950/50"
+            href="/portugal-mapa"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-cyan-300 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/50 hover:border-cyan-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-cyan-950/50"
           >
-            <span className="text-base">📱</span>
-            <span>Descarregar App</span>
+            <Globe className="h-5 w-5 text-cyan-400" />
+            <span>Explorar Portugal 3D</span>
+          </Link>
+
+          {/* CTA 3: Classificação Nacional */}
+          <Link
+            href="/rankings"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-amber-300 bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 hover:border-amber-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-amber-950/50"
+          >
+            <Trophy className="h-5 w-5 text-amber-400" />
+            <span>Classificação Nacional</span>
           </Link>
         </div>
 
         {/* Quick Hub Links Centered */}
         <div
-          className="animate-rise mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-bold text-muted-foreground"
+          className="animate-rise mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-bold text-slate-400"
           style={{ animationDelay: '360ms' }}
         >
-          <Link href="/categorias" className="hover:text-primary transition flex items-center gap-1.5 group">
+          <Link href="/jogar/duelo" className="hover:text-purple-400 transition flex items-center gap-1.5 group">
+            <Swords className="w-3.5 h-3.5 text-purple-400" />
+            <span className="group-hover:translate-x-0.5 transition">⚔️ Duelos 1v1 Elo</span>
+          </Link>
+          <span className="text-white/20">•</span>
+          <Link href="/loja" className="hover:text-amber-300 transition flex items-center gap-1.5 group">
+            <span className="group-hover:translate-x-0.5 transition">🛒 Loja & VIP</span>
+          </Link>
+          <span className="text-white/20">•</span>
+          <Link href="/categorias" className="hover:text-cyan-300 transition flex items-center gap-1.5 group">
             <span className="group-hover:translate-x-0.5 transition">📚 18 Categorias</span>
           </Link>
           <span className="text-white/20">•</span>
-          <Link href="/rankings" className="hover:text-accent transition flex items-center gap-1.5 group">
-            <span className="group-hover:translate-x-0.5 transition">🏆 Classificação Nacional</span>
-          </Link>
-          <span className="text-white/20">•</span>
-          <Link href="/ajuda" className="hover:text-emerald-300 transition flex items-center gap-1.5 group">
-            <span className="group-hover:translate-x-0.5 transition">❓ Perguntas Frequentes</span>
-          </Link>
-          <span className="text-white/20">•</span>
-          <Link href="/explorar" className="hover:text-gold transition flex items-center gap-1.5 group">
-            <span className="group-hover:translate-x-0.5 transition">✨ Explorar o Jogo</span>
-            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition" />
+          <Link href="/download" className="hover:text-emerald-300 transition flex items-center gap-1.5 group">
+            <span className="group-hover:translate-x-0.5 transition">📱 App Android</span>
           </Link>
         </div>
       </div>
 
-      {/* Transition Statistics Bar: Holographic Glassmorphism Cards */}
+      {/* MAPA 3D TÁTICO DE PORTUGAL 2050 (EMBED DIRETO NA HERO) */}
+      <div className="mt-10 max-w-6xl mx-auto">
+        <div className="text-center mb-4">
+          <span className="tactical-node-badge">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+            PORTUGAL EM TEMPO REAL // 20 TERRITÓRIOS CONECTADOS
+          </span>
+        </div>
+        <Portugal3DExperience
+          territories={territories}
+          selectedDistrict={selectedDistrict}
+          onSelectDistrict={(d) => setSelectedDistrict(d)}
+          onStartGame={handleStartGame}
+        />
+      </div>
+
+      {/* Estatísticas do Ecossistema */}
       <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10">
         <div className="grid grid-cols-2 gap-3.5 sm:gap-5 lg:grid-cols-4">
           {HERO_STATS.map((stat) => {
@@ -156,20 +218,20 @@ export function Hero() {
             return (
               <div
                 key={stat.label}
-                className="card-hud-cyber group relative overflow-hidden rounded-3xl p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)]"
+                className="card-hud-cyber group relative overflow-hidden rounded-3xl p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]"
               >
                 <div className="flex items-center gap-3.5">
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/[0.06] transition-transform duration-300 group-hover:scale-110 shadow-md">
                     <Icon className={cn('h-5 w-5', stat.tone)} />
                   </div>
                   <div>
-                    <dd className="font-display text-xl sm:text-2xl font-black text-foreground">
+                    <dd className="font-display text-xl sm:text-2xl font-black text-white">
                       {stat.value}
                     </dd>
-                    <dt className="text-xs font-bold text-foreground/90 uppercase tracking-wider">{stat.label}</dt>
+                    <dt className="text-xs font-bold text-slate-300 uppercase tracking-wider">{stat.label}</dt>
                   </div>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground leading-snug font-medium">
+                <p className="mt-2 text-xs text-slate-400 leading-snug font-medium">
                   {stat.sub}
                 </p>
               </div>
@@ -180,4 +242,3 @@ export function Hero() {
     </section>
   )
 }
-

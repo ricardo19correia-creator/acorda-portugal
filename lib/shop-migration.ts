@@ -107,11 +107,11 @@ export async function migrateUserInventory(userId: string): Promise<MigrationRes
     }
 
     // Consumables object check
-    if (aid.id === 'aid_50_50') {
+    if (aid.id === 'AID_002' || aid.aliases?.includes('consumable_50_50')) {
       totalStock = Math.max(totalStock, Number(consumables.help5050 || 0))
-    } else if (aid.id === 'aid_public_vote') {
+    } else if (aid.id === 'AID_003' || aid.aliases?.includes('consumable_public_vote')) {
       totalStock = Math.max(totalStock, Number(consumables.publicVote || 0))
-    } else if (aid.id === 'aid_freeze_time') {
+    } else if (aid.id === 'AID_004' || aid.aliases?.includes('consumable_congelar_tempo')) {
       totalStock = Math.max(totalStock, Number(consumables.freezeTime || 0))
     }
 

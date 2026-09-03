@@ -61,24 +61,24 @@ export function SiteHeader() {
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
+    { label: 'Mapa 3D', href: '/portugal-mapa', icon: Flag },
     { label: 'Ranking', href: '/rankings', icon: Trophy },
-    { label: 'Os Criadores 🇵🇹', href: '/criadores', icon: Sparkles },
-    { label: 'Explorar', href: '/explorar', icon: Sparkles },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
+    { label: 'Os Criadores 🇵🇹', href: '/criadores', icon: Sparkles },
     { label: '📱 App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
   const MOBILE_NAV = [
     { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
+    { label: '🗺️ Mapa de Portugal 3D', href: '/portugal-mapa', icon: Flag },
+    { label: '🏆 Ranking Nacional & Distritos', href: '/rankings', icon: Trophy },
+    { label: '🛒 Loja Oficial', href: '/loja', icon: ShoppingBag },
     { label: '📱 Descarregar App Android', href: '/download', icon: Smartphone },
     { label: '🇵🇹 Os Criadores (Comunidade)', href: '/criadores', icon: Sparkles },
     { label: 'Explorar o Desafio', href: '/explorar', icon: Sparkles },
     { label: 'Categorias de Quiz', href: '/categorias', icon: LayoutGrid },
-    { label: 'Ranking Nacional', href: '/rankings', icon: Trophy },
-    { label: 'Mapa de Portugal', href: '/portugal', icon: Flag },
     { label: 'Eventos em Direto', href: '/eventos', icon: Flame },
-    { label: 'Loja € Acorda', href: '/loja', icon: ShoppingBag },
     { label: 'Central de Ajuda', href: '/ajuda', icon: HelpCircle },
     { label: 'O Meu Perfil', href: '/perfil', icon: User },
   ]

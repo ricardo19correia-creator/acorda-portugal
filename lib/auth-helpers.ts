@@ -308,7 +308,7 @@ export async function createNewUserDocument(
   selectedDistrict: string,
   selectedCity?: string,
   username?: string,
-  customAvatarUrl?: string
+  _customAvatarUrl?: string
 ): Promise<void> {
   if (!user?.uid) return
   const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
@@ -318,7 +318,7 @@ export async function createNewUserDocument(
   const { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } = await import('@/lib/titles')
 
   const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Jogador').trim()
-  const photoURL = customAvatarUrl || user.photoURL || DEFAULT_AVATAR_URL
+  const photoURL = DEFAULT_AVATAR_URL
 
   const canonicalDistrict = normalizeDistrict(selectedDistrict) || selectedDistrict.trim()
   const rawCity = selectedCity ? selectedCity.trim() : ''
@@ -332,8 +332,8 @@ export async function createNewUserDocument(
     displayName: cleanName,
     name: cleanName,
     email: user.email || '',
-    photoURL: photoURL,
-    avatar: photoURL,
+    photoURL: DEFAULT_AVATAR_URL,
+    avatar: DEFAULT_AVATAR_URL,
     avatarId: DEFAULT_AVATAR_ID,
     equippedAvatar: DEFAULT_AVATAR_ID,
     district: canonicalDistrict, // Definido no registo/onboarding e PERMANENTE
@@ -376,7 +376,7 @@ export async function createNewUserDocument(
       },
     },
     equipped: {
-      avatar: photoURL,
+      avatar: DEFAULT_AVATAR_URL,
       avatarId: DEFAULT_AVATAR_ID,
       title: DEFAULT_STARTER_TITLE_ID,
       titleId: DEFAULT_STARTER_TITLE_ID,
@@ -403,8 +403,12 @@ export async function createNewUserDocument(
       {
         uid: user.uid,
         displayName: cleanName,
-        photoURL: photoURL,
+        photoURL: DEFAULT_AVATAR_URL,
+        avatar: DEFAULT_AVATAR_URL,
         avatarId: DEFAULT_AVATAR_ID,
+        equippedAvatar: DEFAULT_AVATAR_ID,
+        'equipped.avatar': DEFAULT_AVATAR_URL,
+        'equipped.avatarId': DEFAULT_AVATAR_ID,
         district: canonicalDistrict,
         city: canonicalCity,
         representedDistrict: canonicalDistrict,

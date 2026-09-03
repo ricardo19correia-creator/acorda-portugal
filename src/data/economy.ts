@@ -59,118 +59,139 @@ export interface ConsumableRule {
  * Anti-Pay-to-Win: limites estritos de maxOwned (50 un.) e compras diárias
  */
 export const CONSUMABLE_RULES: Record<string, ConsumableRule> = {
-  aid_50_50: {
-    id: 'aid_50_50',
-    canonicalId: 'aid_50_50',
+  AID_002: {
+    id: 'AID_002',
+    canonicalId: 'AID_002',
     name: 'Pack x5 Ajudas 50/50',
-    description: 'Elimina duas opções erradas instantaneamente.',
+    description: 'Elimina exatamente duas alternativas erradas, deixando duas respostas possíveis.',
     price: 750,
     category: 'ajuda_media',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'help5050',
     quantityGranted: 5,
-    aliases: ['ajuda_5050', 'consumable_50_50', 'help_5050', 'help5050'],
+    aliases: ['aid_50_50', 'ajuda_5050', 'consumable_50_50', 'help_5050', 'help5050'],
   },
-  aid_public_vote: {
-    id: 'aid_public_vote',
-    canonicalId: 'aid_public_vote',
+  AID_003: {
+    id: 'AID_003',
+    canonicalId: 'AID_003',
     name: 'Pack x3 Pergunta ao Público',
-    description: 'Votação simulada da plateia com percentagens plausíveis somando 100%.',
-    price: 600,
+    description: 'Simula uma votação do público com percentagens realistas e tendência para a resposta correta.',
+    price: 1500,
     category: 'ajuda_forte',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'publicVote',
     quantityGranted: 3,
-    aliases: ['ajuda_publico', 'HELP_005', 'consumable_public_vote', 'publicVote'],
+    aliases: ['aid_public_vote', 'ajuda_publico', 'HELP_005', 'consumable_public_vote', 'publicVote'],
   },
-  aid_freeze_time: {
-    id: 'aid_freeze_time',
-    canonicalId: 'aid_freeze_time',
-    name: 'Pack x3 Congelar Tempo (+15s)',
-    description: 'Pausa o cronómetro durante 15 segundos.',
+  AID_004: {
+    id: 'AID_004',
+    canonicalId: 'AID_004',
+    name: 'Pack x3 Congelar Tempo',
+    description: 'Pausa o cronómetro e adiciona +15 segundos para responder com mais calma.',
     price: 900,
     category: 'ajuda_forte',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'freezeTime',
     quantityGranted: 3,
-    aliases: ['ajuda_congelar', 'consumable_congelar_tempo', 'freezeTime'],
+    aliases: ['aid_freeze_time', 'ajuda_congelar', 'consumable_congelar_tempo', 'freezeTime'],
   },
-  aid_hint: {
-    id: 'aid_hint',
-    canonicalId: 'aid_hint',
-    name: 'Pack x3 Pista Inteligente',
+  // Regras legadas para retrocompatibilidade de inventário existente
+  AID_001: {
+    id: 'AID_001',
+    canonicalId: 'AID_001',
+    name: 'Pista Histórica',
     description: 'Dica contextual inteligente para a pergunta atual sem revelar a resposta.',
     price: 750,
     category: 'ajuda_basica',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'hint',
-    quantityGranted: 3,
-    aliases: ['pista_historica', 'ajuda_pista', 'consumable_pista', 'hint'],
+    quantityGranted: 1,
+    aliases: ['aid_hint', 'pista_historica', 'ajuda_pista', 'consumable_pista', 'hint'],
   },
-  aid_second_chance: {
-    id: 'aid_second_chance',
-    canonicalId: 'aid_second_chance',
-    name: 'Pack x3 Segunda Oportunidade',
+  AID_005: {
+    id: 'AID_005',
+    canonicalId: 'AID_005',
+    name: 'Segunda Oportunidade',
     description: 'Permite uma segunda tentativa se errares uma pergunta.',
     price: 1250,
     category: 'ajuda_media',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'secondChance',
-    quantityGranted: 3,
-    aliases: ['segunda_chance', 'second_chance', 'consumable_second_chance'],
+    quantityGranted: 1,
+    aliases: ['aid_second_chance', 'segunda_chance', 'second_chance', 'consumable_second_chance'],
   },
-  aid_triple_elimination: {
-    id: 'aid_triple_elimination',
-    canonicalId: 'aid_triple_elimination',
-    name: 'Pack x3 Eliminação Tripla',
+  AID_006: {
+    id: 'AID_006',
+    canonicalId: 'AID_006',
+    name: 'Eliminação Tripla',
     description: 'Remove três respostas erradas quando a pergunta tem 4 ou mais alternativas.',
     price: 1500,
     category: 'ajuda_forte',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'tripleElimination',
-    quantityGranted: 3,
-    aliases: ['eliminacao_tripla', 'triple_elimination', 'consumable_triple_elimination'],
+    quantityGranted: 1,
+    aliases: ['aid_triple_elimination', 'eliminacao_tripla', 'triple_elimination', 'consumable_triple_elimination'],
   },
-  aid_fast_answer: {
-    id: 'aid_fast_answer',
-    canonicalId: 'aid_fast_answer',
-    name: 'Pack x3 Resposta Rápida',
+  AID_007: {
+    id: 'AID_007',
+    canonicalId: 'AID_007',
+    name: 'Resposta Rápida',
     description: 'Concede uma pequena janela adicional de tempo (+5s) sem quebrar o streak.',
     price: 1000,
     category: 'ajuda_basica',
     maxOwned: 50,
-    dailyLimit: 10,
+    dailyLimit: 3,
     consumableType: 'fastAnswer',
-    quantityGranted: 3,
-    aliases: ['resposta_rapida', 'fast_answer', 'consumable_fast_answer'],
+    quantityGranted: 1,
+    aliases: ['aid_fast_answer', 'resposta_rapida', 'fast_answer', 'consumable_fast_answer'],
   },
-  aid_streak_protection: {
-    id: 'aid_streak_protection',
-    canonicalId: 'aid_streak_protection',
+  AID_008: {
+    id: 'AID_008',
+    canonicalId: 'AID_008',
     name: 'Proteção de Sequência',
     description: 'Salva a tua sequência de dias se esqueceres de jogar 24h.',
     price: 2500,
     category: 'ajuda_especial',
     maxOwned: 10,
-    dailyLimit: 2,
+    dailyLimit: 3,
     consumableType: 'streakProtection',
     quantityGranted: 1,
-    aliases: ['protecao_streak', 'consumable_protecao_streak', 'streak_protection'],
+    aliases: ['aid_streak_protection', 'protecao_streak', 'consumable_protecao_streak', 'streak_protection'],
   },
 }
 
-// Aliases para retrocompatibilidade com IDs legados
-CONSUMABLE_RULES['consumable_50_50'] = CONSUMABLE_RULES.aid_50_50
-CONSUMABLE_RULES['consumable_congelar_tempo'] = CONSUMABLE_RULES.aid_freeze_time
-CONSUMABLE_RULES['HELP_005'] = CONSUMABLE_RULES.aid_public_vote
-CONSUMABLE_RULES['consumable_pista'] = CONSUMABLE_RULES.aid_hint
-CONSUMABLE_RULES['consumable_protecao_streak'] = CONSUMABLE_RULES.aid_streak_protection
+// Aliases para retrocompatibilidade completa com IDs legados
+CONSUMABLE_RULES['aid_50_50'] = CONSUMABLE_RULES.AID_002
+CONSUMABLE_RULES['consumable_50_50'] = CONSUMABLE_RULES.AID_002
+CONSUMABLE_RULES['ajuda_5050'] = CONSUMABLE_RULES.AID_002
+CONSUMABLE_RULES['help_5050'] = CONSUMABLE_RULES.AID_002
+CONSUMABLE_RULES['help5050'] = CONSUMABLE_RULES.AID_002
+
+CONSUMABLE_RULES['aid_public_vote'] = CONSUMABLE_RULES.AID_003
+CONSUMABLE_RULES['HELP_005'] = CONSUMABLE_RULES.AID_003
+CONSUMABLE_RULES['consumable_public_vote'] = CONSUMABLE_RULES.AID_003
+CONSUMABLE_RULES['ajuda_publico'] = CONSUMABLE_RULES.AID_003
+CONSUMABLE_RULES['publicVote'] = CONSUMABLE_RULES.AID_003
+
+CONSUMABLE_RULES['aid_freeze_time'] = CONSUMABLE_RULES.AID_004
+CONSUMABLE_RULES['consumable_congelar_tempo'] = CONSUMABLE_RULES.AID_004
+CONSUMABLE_RULES['ajuda_congelar'] = CONSUMABLE_RULES.AID_004
+CONSUMABLE_RULES['freezeTime'] = CONSUMABLE_RULES.AID_004
+
+CONSUMABLE_RULES['aid_hint'] = CONSUMABLE_RULES.AID_001
+CONSUMABLE_RULES['consumable_pista'] = CONSUMABLE_RULES.AID_001
+CONSUMABLE_RULES['pista_historica'] = CONSUMABLE_RULES.AID_001
+CONSUMABLE_RULES['aid_second_chance'] = CONSUMABLE_RULES.AID_005
+CONSUMABLE_RULES['aid_triple_elimination'] = CONSUMABLE_RULES.AID_006
+CONSUMABLE_RULES['aid_fast_answer'] = CONSUMABLE_RULES.AID_007
+CONSUMABLE_RULES['aid_streak_protection'] = CONSUMABLE_RULES.AID_008
+CONSUMABLE_RULES['consumable_protecao_streak'] = CONSUMABLE_RULES.AID_008
 
 /**
  * Procura a regra do consumível pelo ID ou alias
