@@ -76,7 +76,7 @@ export function formatPrivateKey(rawKey: string): string {
   }
 
   // Se a chave for Base64
-  if (!key.includes('-----BEGIN') && (key.startsWith('LS0t') || key.length > 500)) {
+  if (!key.includes('BEGIN PRIVATE KEY') && (key.startsWith('LS0t') || key.length > 500)) {
     try {
       const decoded = Buffer.from(key, 'base64').toString('utf8')
       if (decoded.includes('BEGIN PRIVATE KEY') || decoded.includes('BEGIN RSA PRIVATE KEY')) {
@@ -95,7 +95,9 @@ export function formatPrivateKey(rawKey: string): string {
 
 export function hasAdminCredentials(): boolean {
   const { clientEmail, rawKey } = getAdminCredentials()
-  return Boolean(clientEmail && rawKey)
+  if (!clientEmail || !rawKey) return false
+  const pk = formatPrivateKey(rawKey)
+  return Boolean(pk && (pk.includes('BEGIN PRIVATE KEY') || pk.includes('BEGIN RSA PRIVATE KEY') || pk.length > 50))
 }
 
 /**
@@ -113,23 +115,33 @@ export function getAdminApp(): App {
   if (clientEmail && rawKey) {
     try {
       const privateKey = formatPrivateKey(rawKey)
-      adminApp = initializeApp({
-        credential: cert({
+      if (privateKey && (privateKey.includes('BEGIN PRIVATE KEY') || privateKey.includes('BEGIN RSA PRIVATE KEY'))) {
+        adminApp = initializeApp({
+          credential: cert({
+            projectId,
+            clientEmail,
+            privateKey,
+          }),
           projectId,
-          clientEmail,
-          privateKey,
-        }),
-        projectId,
-      })
-      return adminApp
+        })
+        return adminApp
+      }
     } catch (e: any) {
       console.warn('[FIREBASE ADMIN] Erro ao inicializar com credenciais de Service Account:', e?.message || e)
     }
   }
 
-  adminApp = initializeApp({
-    projectId,
-  })
+  try {
+    adminApp = initializeApp({
+      projectId,
+    })
+  } catch (e) {
+    if (getApps().length > 0) {
+      adminApp = getApp()
+    } else {
+      throw e
+    }
+  }
   return adminApp
 }
 

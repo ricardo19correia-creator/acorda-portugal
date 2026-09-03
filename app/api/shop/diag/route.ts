@@ -23,11 +23,13 @@ export async function GET(req: NextRequest) {
         authMethod = 'test-token'
       } else {
         try {
-          const adminAuth = getAdminAuth()
-          const decoded = await adminAuth.verifyIdToken(idToken)
-          if (decoded?.uid) {
-            authenticatedUid = decoded.uid
-            authMethod = 'firebase-admin-verify'
+          if (hasAdminCredentials()) {
+            const adminAuth = getAdminAuth()
+            const decoded = await adminAuth.verifyIdToken(idToken)
+            if (decoded?.uid) {
+              authenticatedUid = decoded.uid
+              authMethod = 'firebase-admin-verify'
+            }
           }
         } catch {
           try {
