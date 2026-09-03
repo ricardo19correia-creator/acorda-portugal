@@ -11,6 +11,7 @@ import {
 } from '@/components/portugal-map-interactive'
 import type { DistrictWarTerritory } from '@/lib/district-war'
 import { DistrictTerritorySheet } from './DistrictTerritorySheet'
+import { Portugal3DMapboxWrapper } from './Portugal3DMapboxWrapper'
 import {
   Globe,
   Trophy,
@@ -58,6 +59,7 @@ export function Portugal3DExperience({
   onSelectPlayer,
   onStartGame,
 }: Portugal3DExperienceProps) {
+  const [engine, setEngine] = useState<'satellite_mapbox' | 'tactical_mesh'>('satellite_mapbox')
   const [viewMode, setViewMode] = useState<MapViewMode>('guerra')
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictWarTerritory | null>(null)
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false)
@@ -223,6 +225,54 @@ export function Portugal3DExperience({
     }
   }
 
+  if (engine === 'satellite_mapbox') {
+    return (
+      <div className="space-y-4">
+        {/* Engine Switcher Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-lg">
+          <div className="flex items-center gap-2.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-xs font-mono font-black uppercase text-emerald-400 tracking-wider">
+              MOTOR 3D: GOOGLE EARTH ULTRA-REAL (MAPBOX DEM ELEVATION)
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setEngine('satellite_mapbox')}
+              className={cn(
+                'px-3.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer',
+                engine === 'satellite_mapbox'
+                  ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/30'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              )}
+            >
+              🛰️ Satélite 3D Real
+            </button>
+            <button
+              onClick={() => setEngine('tactical_mesh')}
+              className={cn(
+                'px-3.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer',
+                engine === 'tactical_mesh'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/30'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              )}
+            >
+              ⚡ Radar Isométrico
+            </button>
+          </div>
+        </div>
+
+        <Portugal3DMapboxWrapper
+          className={className}
+          territories={territories}
+          selectedDistrict={selectedDistrict}
+          onSelectDistrict={onSelectDistrict}
+          onStartGame={onStartGame}
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       ref={containerRef}
@@ -301,6 +351,15 @@ export function Portugal3DExperience({
             className="h-8 w-8 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-cyan-400 cursor-pointer transition-colors"
           >
             <ZoomOut className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            title="Mudar para Satélite 3D (Google Earth)"
+            onClick={() => setEngine('satellite_mapbox')}
+            className="h-8 px-3 rounded-xl bg-emerald-950/80 border border-emerald-500/50 flex items-center gap-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-900 cursor-pointer transition-colors"
+          >
+            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+            <span>🛰️ Satélite 3D</span>
           </button>
           <button
             type="button"
