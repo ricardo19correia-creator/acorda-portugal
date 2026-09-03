@@ -3,7 +3,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  serverExternalPackages: ['firebase-admin'],
   images: {
     unoptimized: true,
   },

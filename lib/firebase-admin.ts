@@ -1,8 +1,4 @@
-import { getApps, getApp, initializeApp, cert, type App } from 'firebase-admin/app'
-import { getAuth, type Auth } from 'firebase-admin/auth'
-import { getFirestore, type Firestore } from 'firebase-admin/firestore'
-
-let adminApp: App | null = null
+let adminApp: any = null
 
 export interface FirebaseAdminValidationResult {
   valid: boolean
@@ -101,10 +97,15 @@ export function hasAdminCredentials(): boolean {
 }
 
 /**
- * Inicialização Singleton do Firebase Admin SDK
+ * Inicialização Singleton Lazy do Firebase Admin SDK
  */
-export function getAdminApp(): App {
+export function getAdminApp(): any {
   if (adminApp) return adminApp
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const adminAppPkg = require('firebase-admin/app')
+  const { getApps, getApp, initializeApp, cert } = adminAppPkg
+
   if (getApps().length > 0) {
     adminApp = getApp()
     return adminApp
@@ -145,11 +146,15 @@ export function getAdminApp(): App {
   return adminApp
 }
 
-export function getAdminAuth(): Auth {
+export function getAdminAuth(): any {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { getAuth } = require('firebase-admin/auth')
   return getAuth(getAdminApp())
 }
 
-export function getAdminFirestore(): Firestore {
+export function getAdminFirestore(): any {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { getFirestore } = require('firebase-admin/firestore')
   return getFirestore(getAdminApp())
 }
 
@@ -178,28 +183,26 @@ export async function testFirestoreAdminConnection(uid?: string): Promise<{
         projectId,
         hasCredentials: hasCreds,
         latencyMs,
-        userData: docSnap.exists ? docSnap.data() || {} : null,
-      }
-    } else {
-      // Teste de consulta leve
-      await db.collection('users').limit(1).get()
-      const latencyMs = Date.now() - start
-      return {
-        success: true,
-        projectId,
-        hasCredentials: hasCreds,
-        latencyMs,
+        userData: docSnap.exists ? docSnap.data() : null,
       }
     }
-  } catch (err: any) {
+
+    const testSnap = await db.collection('system_status').limit(1).get()
     const latencyMs = Date.now() - start
+    return {
+      success: true,
+      projectId,
+      hasCredentials: hasCreds,
+      latencyMs,
+      userData: { testDocs: testSnap.size },
+    }
+  } catch (err: any) {
     return {
       success: false,
       projectId,
       hasCredentials: hasCreds,
-      latencyMs,
-      error: err?.message || String(err),
+      latencyMs: Date.now() - start,
+      error: err?.message || 'Falha na conexão ao Firestore Admin',
     }
   }
 }
-
