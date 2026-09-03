@@ -23,7 +23,7 @@ export function requireAuthOrRedirect(
     if (router && typeof router.push === 'function') {
       router.push(target)
     } else if (typeof window !== 'undefined') {
-      window.location.href = target
+      window.location.assign(target)
     }
     return false
   }

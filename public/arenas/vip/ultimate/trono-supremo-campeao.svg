@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="supreme_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" />
+      <stop offset="40%" stop-color="#1c1917" />
+      <stop offset="80%" stop-color="#450a0a" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    <linearGradient id="ultra_gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="25%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="75%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#supreme_bg)" />
+
+  <!-- Colunas de Fogo e Pilares Volumétricos de Ouro -->
+  <g stroke="url(#ultra_gold)" stroke-width="6" fill="#18181b">
+    <polygon points="180,180 320,180 280,880 140,880" />
+    <polygon points="1600,180 1740,180 1780,880 1640,880" />
+  </g>
+
+  <!-- Trono Colossal de Mestre Supremo -->
+  <g transform="translate(960, 480)">
+    <!-- Auréola Gigante Imperial -->
+    <circle cx="0" cy="-220" r="160" fill="none" stroke="url(#ultra_gold)" stroke-width="8" filter="drop-shadow(0 0 35px #f59e0b)" />
+    <!-- Trono de Platina e Ouro -->
+    <path d="M -220,240 L -220,-280 L 0,-380 L 220,-280 L 220,240 Z" fill="#09090b" stroke="url(#ultra_gold)" stroke-width="10" />
+    <!-- Grande Brasão com Rubis -->
+    <circle cx="0" cy="-160" r="70" fill="#dc2626" stroke="url(#ultra_gold)" stroke-width="6" />
+    <polygon points="0,-210 20,-170 65,-170 30,-140 45,-95 0,-125 -45,-95 -30,-140 -65,-170 -20,-170" fill="url(#ultra_gold)" />
+  </g>
+</svg>

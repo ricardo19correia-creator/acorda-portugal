@@ -1,21 +1,72 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
   <defs>
-    <linearGradient id="sky_3d" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#030712" />
-      <stop offset="60%" stop-color="#0C4A6E" />
-      <stop offset="100%" stop-color="#082F49" />
+    <linearGradient id="cyber_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="60%" stop-color="#082f49" />
+      <stop offset="100%" stop-color="#020617" />
     </linearGradient>
+    <radialGradient id="core_glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#020617" stop-opacity="0" />
+    </radialGradient>
   </defs>
-  <rect width="1920" height="1080" fill="url(#sky_3d)" />
-  <!-- 3D Perspective Grid -->
-  <g stroke="#38BDF8" stroke-width="2" opacity="0.35">
-    <line x1="960" y1="400" x2="0" y2="1080" />
-    <line x1="960" y1="400" x2="400" y2="1080" />
-    <line x1="960" y1="400" x2="800" y2="1080" />
-    <line x1="960" y1="400" x2="1120" y2="1080" />
-    <line x1="960" y1="400" x2="1520" y2="1080" />
-    <line x1="960" y1="400" x2="1920" y2="1080" />
-    <ellipse cx="960" cy="740" rx="700" ry="240" fill="none" />
+
+  <rect width="1920" height="1080" fill="url(#cyber_bg)" />
+  <rect width="1920" height="1080" fill="url(#core_glow)" />
+
+  <!-- Grelha de Radar Isométrico Hexagonal -->
+  <g stroke="rgba(6, 182, 212, 0.2)" stroke-width="1.5" fill="none">
+    <ellipse cx="960" cy="580" rx="750" ry="340" />
+    <ellipse cx="960" cy="580" rx="550" ry="250" />
+    <ellipse cx="960" cy="580" rx="350" ry="160" />
+    <line x1="210" y1="580" x2="1710" y2="580" />
+    <line x1="960" y1="240" x2="960" y2="920" />
+    <line x1="430" y1="340" x2="1490" y2="820" />
+    <line x1="430" y1="820" x2="1490" y2="340" />
   </g>
-  <text x="960" y="240" fill="#38BDF8" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">PORTUGAL 3D</text>
+
+  <!-- Silhueta Tridimensional de Portugal Continental em Neon Ciano -->
+  <g fill="#0e7490" stroke="#22d3ee" stroke-width="5" filter="drop-shadow(0 0 25px rgba(6,182,212,0.8))">
+    <polygon points="
+      920,280 970,290 1020,330 1010,420 1040,480 1000,560 970,620 980,720
+      950,780 890,790 850,780 840,700 860,620 840,540 850,440 890,340 920,280
+    " />
+  </g>
+
+  <!-- Açores (3 Grupos de Ilhas Holográficas) -->
+  <g fill="#14b8a6" stroke="#5eead4" stroke-width="3" filter="drop-shadow(0 0 15px #14b8a6)">
+    <!-- Grupo Ocidental -->
+    <circle cx="500" cy="460" r="14" />
+    <circle cx="525" cy="480" r="10" />
+    <!-- Grupo Central -->
+    <circle cx="580" cy="500" r="16" />
+    <circle cx="610" cy="520" r="14" />
+    <circle cx="630" cy="490" r="12" />
+    <!-- Grupo Oriental -->
+    <circle cx="690" cy="540" r="18" />
+    <circle cx="720" cy="565" r="12" />
+  </g>
+
+  <!-- Madeira & Porto Santo -->
+  <g fill="#06b6d4" stroke="#67e8f9" stroke-width="3" filter="drop-shadow(0 0 15px #06b6d4)">
+    <ellipse cx="640" cy="740" rx="28" ry="15" />
+    <circle cx="680" cy="715" r="12" />
+  </g>
+
+  <!-- 20 Nós Territoriais Conectados por Feixes de Dados -->
+  <g fill="#ffffff" stroke="#38bdf8" stroke-width="2">
+    <circle cx="940" cy="340" r="8" /><!-- Braga -->
+    <circle cx="900" cy="380" r="10" /><!-- Porto -->
+    <circle cx="870" cy="520" r="9" /><!-- Coimbra -->
+    <circle cx="850" cy="640" r="14" /><!-- Lisboa -->
+    <circle cx="880" cy="710" r="9" /><!-- Setúbal -->
+    <circle cx="910" cy="780" r="10" /><!-- Faro -->
+  </g>
+
+  <!-- Varredura Holográfica de Radar 2150 -->
+  <g opacity="0.6">
+    <line x1="960" y1="580" x2="1600" y2="400" stroke="#38bdf8" stroke-width="4" filter="drop-shadow(0 0 12px #38bdf8)" />
+    <path d="M 960,580 L 1600,400 A 700,700 0 0,0 1450,280 Z" fill="rgba(56, 189, 248, 0.15)" />
+  </g>
 </svg>

@@ -1,17 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
   <defs>
-    <radialGradient id="throne_bg" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" stop-color="#450A0A" />
-      <stop offset="60%" stop-color="#1C0404" />
-      <stop offset="100%" stop-color="#050000" />
+    <linearGradient id="throne_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917" />
+      <stop offset="50%" stop-color="#450a0a" />
+      <stop offset="100%" stop-color="#0c0a09" />
+    </linearGradient>
+    <radialGradient id="torch_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#ef4444" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
     </radialGradient>
+    <linearGradient id="gold_throne" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="50%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
   </defs>
+
   <rect width="1920" height="1080" fill="url(#throne_bg)" />
-  <!-- Monumental Royal Throne Silhoutte -->
-  <g fill="#1F2937" stroke="#EAB308" stroke-width="6">
-    <polygon points="760,1080 840,400 960,320 1080,400 1160,1080" />
-    <!-- Crown on top of throne -->
-    <path d="M900 320 L930 250 L960 280 L990 250 L1020 320 Z" fill="#EAB308" stroke="#FFF" stroke-width="2" />
+
+  <!-- Tochas Murais com Luz Viva -->
+  <circle cx="280" cy="380" r="180" fill="url(#torch_glow)" />
+  <circle cx="1640" cy="380" r="180" fill="url(#torch_glow)" />
+  <!-- Suportes de Ferro das Tochas -->
+  <g fill="#292524" stroke="#78716c" stroke-width="4">
+    <rect x="270" y="380" width="20" height="140" />
+    <polygon points="260,370 300,370 290,410 270,410" fill="#f59e0b" />
+    <rect x="1630" y="380" width="20" height="140" />
+    <polygon points="1620,370 1660,370 1650,410 1630,410" fill="#f59e0b" />
   </g>
-  <text x="960" y="200" fill="#EAB308" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">TRONO REAL</text>
+
+  <!-- Trono Monumental Central -->
+  <g transform="translate(960, 520)">
+    <!-- Espaldar Alto do Trono com Brasão -->
+    <path d="M -180,180 L -180,-240 Q 0,-340 180,-240 L 180,180 Z" fill="#1c1917" stroke="url(#gold_throne)" stroke-width="8" />
+    <circle cx="0" cy="-180" r="55" fill="#dc2626" stroke="url(#gold_throne)" stroke-width="5" />
+    <!-- Esfera Armilar Dourada no Espaldar -->
+    <circle cx="0" cy="-180" r="35" fill="none" stroke="url(#gold_throne)" stroke-width="4" />
+    <ellipse cx="0" cy="-180" rx="35" ry="12" fill="none" stroke="url(#gold_throne)" stroke-width="3" />
+
+    <!-- Assento e Braços do Trono -->
+    <rect x="-190" y="160" width="380" height="60" rx="12" fill="#7f1d1d" stroke="url(#gold_throne)" stroke-width="6" />
+    <rect x="-220" y="80" width="50" height="120" rx="8" fill="url(#gold_throne)" />
+    <rect x="170" y="80" width="50" height="120" rx="8" fill="url(#gold_throne)" />
+
+    <!-- Degraus do Estrado Real -->
+    <polygon points="-320,240 320,240 380,320 -380,320" fill="#292524" stroke="url(#gold_throne)" stroke-width="5" />
+    <polygon points="-420,320 420,320 500,420 -500,420" fill="#1c1917" stroke="url(#gold_throne)" stroke-width="5" />
+  </g>
 </svg>

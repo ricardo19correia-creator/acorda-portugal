@@ -1,12 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
   <defs>
-    <linearGradient id="sky_ceu" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1E1B4B" />
-      <stop offset="50%" stop-color="#312E81" />
-      <stop offset="100%" stop-color="#4338CA" />
+    <linearGradient id="aurora_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="40%" stop-color="#042f2e" />
+      <stop offset="80%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="aurora_wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0" />
+      <stop offset="30%" stop-color="#14b8a6" stop-opacity="0.6" />
+      <stop offset="60%" stop-color="#ec4899" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
     </linearGradient>
   </defs>
-  <rect width="1920" height="1080" fill="url(#sky_ceu)" />
-  <circle cx="960" cy="540" r="300" fill="#818CF8" opacity="0.25" />
-  <text x="960" y="240" fill="#C7D2FE" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">CÉU LUSITANO</text>
+
+  <rect width="1920" height="1080" fill="url(#aurora_bg)" />
+
+  <!-- Ondas de Aurora Boreal Verde-Rubi -->
+  <path d="M 0,340 Q 480,140 960,280 T 1920,220 L 1920,540 Q 1440,680 960,480 T 0,560 Z" fill="url(#aurora_wave)" />
+  <path d="M 0,220 Q 560,420 1120,240 T 1920,380 L 1920,620 Q 1360,440 800,580 T 0,440 Z" fill="url(#aurora_wave)" opacity="0.6" />
+
+  <!-- Constelações e Esfera Armilar Celeste -->
+  <g stroke="#fef08a" stroke-width="2" fill="none">
+    <circle cx="960" cy="460" r="220" stroke-width="3" stroke="#38bdf8" />
+    <ellipse cx="960" cy="460" rx="220" ry="80" stroke="#facc15" />
+    <ellipse cx="960" cy="460" rx="80" ry="220" stroke="#ec4899" />
+  </g>
 </svg>

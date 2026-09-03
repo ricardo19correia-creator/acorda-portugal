@@ -1,7 +1,8 @@
 import { ARENA_SHOP_CATALOG, ARENA_IMAGES, getArenaById, getOfficialArenaImage } from '@/src/data/shopArenas'
+import { getSupremeArenaById, SUPREME_ARENAS, type SupremeArenaDefinition } from '@/lib/supreme-arenas'
 import type { ArenaDefinition } from '@/src/types/arena'
 
-export { ARENA_IMAGES, getOfficialArenaImage }
+export { ARENA_IMAGES, getOfficialArenaImage, SUPREME_ARENAS }
 
 export interface ArenaAssetProfile {
   id: string
@@ -15,12 +16,35 @@ export interface ArenaAssetProfile {
   thumbnail: string
   effect: string
   meaning: string
+  isSupreme?: boolean
+  supremeData?: SupremeArenaDefinition
 }
 
 /**
- * Obtém os metadados e imagem oficial 1:1 de uma arena
+ * Obtém os metadados e imagem oficial 1:1 de uma arena (com prioridade para as 11 Arenas Supremas 2150)
  */
 export function getArenaAssets(arenaIdOrDef: string | ArenaDefinition | null | undefined): ArenaAssetProfile {
+  if (typeof arenaIdOrDef === 'string' && arenaIdOrDef) {
+    const supreme = getSupremeArenaById(arenaIdOrDef)
+    if (supreme) {
+      return {
+        id: supreme.id,
+        name: supreme.name,
+        image: supreme.assetPath,
+        shopImage: supreme.assetPath,
+        gameBackground: supreme.assetPath,
+        gameImage: supreme.assetPath,
+        duelBackground: supreme.assetPath,
+        duelImage: supreme.assetPath,
+        thumbnail: supreme.thumbnailPath,
+        effect: supreme.effectType,
+        meaning: supreme.description,
+        isSupreme: true,
+        supremeData: supreme,
+      }
+    }
+  }
+
   const arena: ArenaDefinition =
     typeof arenaIdOrDef === 'string'
       ? getArenaById(arenaIdOrDef)
@@ -40,6 +64,7 @@ export function getArenaAssets(arenaIdOrDef: string | ArenaDefinition | null | u
     thumbnail: img,
     effect: arena.effect || 'none',
     meaning: arena.meaning || '',
+    isSupreme: false,
   }
 }
 

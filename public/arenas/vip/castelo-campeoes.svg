@@ -1,17 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
   <defs>
-    <linearGradient id="sky_cas" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#18181B" />
-      <stop offset="60%" stop-color="#27272A" />
-      <stop offset="100%" stop-color="#09090B" />
+    <linearGradient id="castle_sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#090514" />
+      <stop offset="50%" stop-color="#2e1065" />
+      <stop offset="100%" stop-color="#172554" />
+    </linearGradient>
+    <linearGradient id="stone_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="50%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#1e293b" />
     </linearGradient>
   </defs>
-  <rect width="1920" height="1080" fill="url(#sky_cas)" />
-  <!-- Medieval Battlements -->
-  <g fill="#18181B" stroke="#D97706" stroke-width="6">
-    <rect x="300" y="450" width="240" height="630" />
-    <rect x="1380" y="450" width="240" height="630" />
-    <path d="M540 600 L1380 600 L1380 1080 L540 1080 Z" />
+
+  <rect width="1920" height="1080" fill="url(#castle_sky)" />
+
+  <!-- Montanhas da Beira Baixa ao Fundo -->
+  <polygon points="0,580 480,340 960,540 1440,310 1920,560 1920,1080 0,1080" fill="#0f172a" opacity="0.9" />
+
+  <!-- Muralhas e Ameias Medievais de Granito -->
+  <g fill="url(#stone_grad)" stroke="#94a3b8" stroke-width="4">
+    <!-- Muralha Esquerda -->
+    <polygon points="80,480 540,480 540,880 80,880" />
+    <!-- Ameias Esquerda -->
+    <rect x="80" y="440" width="60" height="40" />
+    <rect x="180" y="440" width="60" height="40" />
+    <rect x="280" y="440" width="60" height="40" />
+    <rect x="380" y="440" width="60" height="40" />
+    <rect x="480" y="440" width="60" height="40" />
+
+    <!-- Torre de Menagem Central Imponente -->
+    <polygon points="720,260 1200,260 1220,880 700,880" />
+    <rect x="720" y="220" width="70" height="40" />
+    <rect x="830" y="220" width="70" height="40" />
+    <rect x="940" y="220" width="70" height="40" />
+    <rect x="1050" y="220" width="70" height="40" />
+    <rect x="1150" y="220" width="70" height="40" />
+
+    <!-- Muralha Direita -->
+    <polygon points="1380,480 1840,480 1840,880 1380,880" />
+    <rect x="1380" y="440" width="60" height="40" />
+    <rect x="1480" y="440" width="60" height="40" />
+    <rect x="1580" y="440" width="60" height="40" />
+    <rect x="1680" y="440" width="60" height="40" />
+    <rect x="1780" y="440" width="60" height="40" />
   </g>
-  <text x="960" y="240" fill="#D97706" font-family="sans-serif" font-weight="900" font-size="44" letter-spacing="8" text-anchor="middle">CASTELO DOS CAMPEÕES</text>
+
+  <!-- Tochas e Bandeiras Heráldicas -->
+  <polygon points="940,120 980,120 980,220 960,200 940,220" fill="#dc2626" stroke="#facc15" stroke-width="3" />
 </svg>

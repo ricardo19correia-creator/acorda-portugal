@@ -102,7 +102,6 @@ export function hasAdminCredentials(): boolean {
 export function getAdminApp(): any {
   if (adminApp) return adminApp
 
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const adminAppPkg = require('firebase-admin/app')
   const { getApps, getApp, initializeApp, cert } = adminAppPkg
 
@@ -196,7 +195,6 @@ export function getAdminAuth(): any {
 }
 
 export function getAdminFirestore(): any {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { getFirestore } = require('firebase-admin/firestore')
   return getFirestore(getAdminApp())
 }

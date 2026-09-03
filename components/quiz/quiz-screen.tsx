@@ -22,6 +22,9 @@ import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment,
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { auth, db } from '@/lib/firebase'
+import { getSupremeArenaById, getAllSupremeArenas, type SupremeArenaDefinition } from '@/lib/supreme-arenas'
+import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
+import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
 import { useAuth } from '@/components/auth-provider'
 import { useEconomy } from '@/context/economy-context'
 import { useGameTheme } from '@/context/game-theme-context'
@@ -265,6 +268,21 @@ export function QuizScreen({
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(() =>
     createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
   )
+
+  const [equippedArenaId, setEquippedArenaId] = useState<string>('arena_palacio_nacional')
+  const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(true)
+  const [arenaBurstTrigger, setArenaBurstTrigger] = useState<'correct' | 'wrong' | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('equipped_arena') || 'arena_palacio_nacional'
+      setEquippedArenaId(saved)
+    }
+  }, [])
+
+  const activeSupremeArena = useMemo(() => {
+    return getSupremeArenaById(equippedArenaId) || getSupremeArenaById('arena_palacio_nacional') || getAllSupremeArenas()[0]
+  }, [equippedArenaId])
 
   const [step, setStep] = useState(0)
   const [phase, setPhase] = useState<Phase>('answering')
@@ -648,6 +666,8 @@ export function QuizScreen({
       })
 
       if (hit) {
+        setArenaBurstTrigger('correct')
+        setTimeout(() => setArenaBurstTrigger(null), 1000)
         const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
         const nextStreak = streak + 1
 
@@ -668,6 +688,8 @@ export function QuizScreen({
           setTimeout(() => playSound('streak'), 400)
         }
       } else {
+        setArenaBurstTrigger('wrong')
+        setTimeout(() => setArenaBurstTrigger(null), 1000)
         setStreak(0)
         setCurrentStreak(0)
         playSound('wrong')
@@ -960,7 +982,27 @@ export function QuizScreen({
   }
 
   return (
-    <div className="min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
+    <>
+      {/* 0. INTRODUÇÃO CINEMATOGRÁFICA DE ABERTURA DA ARENA (1-2s) */}
+      {showCinematicIntro && activeSupremeArena && (
+        <ArenaCinematicIntro
+          arena={activeSupremeArena}
+          playerName={user?.displayName || profile?.displayName || 'CAMPEÃO NACIONAL'}
+          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'MESTRE'}
+          onComplete={() => setShowCinematicIntro(false)}
+          onSkip={() => setShowCinematicIntro(false)}
+        />
+      )}
+
+      <div className="relative min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
+        {/* Camada de Partículas e Atmosfera Viva da Arena Equipada */}
+        {activeSupremeArena && (
+          <SupremeArenaAtmosphere
+            effectType={activeSupremeArena.effectType}
+            quality="ultra"
+            burstTrigger={arenaBurstTrigger}
+          />
+        )}
       {/* ========================================================= */}
       {/* 1. CABEÇALHO SOLO (TOPO COMPACTO SHRINK-0)                 */}
       {/* ========================================================= */}
@@ -1233,5 +1275,6 @@ export function QuizScreen({
         user={user}
       />
     </div>
+  </>
   )
 }

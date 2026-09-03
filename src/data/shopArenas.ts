@@ -57,20 +57,31 @@ export const ARENA_IMAGES = {
   "arena_excl_fundadores": "/arenas/monumento-fundadores.jpg",
   "arena_excl_lenda_100": "/arenas/coliseu-100.jpg",
   // =========================================================================
-  // VIP COLLECTION 2.0 — ULTIMATE ARENAS (€ REAL)
+  // VIP SUPREME ARENAS 2150 (COINS & € REAL)
   // =========================================================================
-  "AP-VIP-ARENA-ULTIMATE-001": "/arenas/vip/ultimate/trono-supremo-campeao.webp",
-  "AP-VIP-ARENA-ULTIMATE-002": "/arenas/vip/ultimate/portugal-celestial.webp",
-  "AP-VIP-ARENA-ULTIMATE-003": "/arenas/vip/ultimate/coliseu-campeoes.webp",
-  "AP-VIP-ARENA-ULTIMATE-004": "/arenas/vip/ultimate/palacio-reis.webp",
-  "AP-VIP-ARENA-ULTIMATE-005": "/arenas/vip/ultimate/cidadela-eterna.webp",
-  // Aliases Legados
-  "vip_arena_001": "/arenas/vip/ultimate/palacio-reis.webp",
-  "vip_arena_002": "/arenas/vip/ultimate/coliseu-campeoes.webp",
-  "vip_arena_003": "/arenas/vip/ultimate/portugal-celestial.webp",
-  "vip_arena_004": "/arenas/vip/ultimate/trono-supremo-campeao.webp",
-  "vip_arena_005": "/arenas/vip/ultimate/cidadela-eterna.webp",
-  "vip_arena_006": "/arenas/vip/ultimate/portugal-celestial.webp"
+  "arena_palacio_nacional": "/arenas/vip/palacio-nacional.svg",
+  "arena_estadio_das_lendas": "/arenas/vip/estadio-lendas.svg",
+  "arena_portugal_3d": "/arenas/vip/portugal-3d.svg",
+  "arena_trono_real": "/arenas/vip/trono-real.svg",
+  "arena_castelo_dos_campeoes": "/arenas/vip/castelo-campeoes.svg",
+  "arena_ceu_lusitano": "/arenas/vip/ceu-lusitano.svg",
+  "AP-VIP-ARENA-ULTIMATE-001": "/arenas/vip/ultimate/trono-supremo-campeao.svg",
+  "AP-VIP-ARENA-ULTIMATE-002": "/arenas/vip/ultimate/portugal-celestial.svg",
+  "AP-VIP-ARENA-ULTIMATE-003": "/arenas/vip/ultimate/coliseu-campeoes.svg",
+  "AP-VIP-ARENA-ULTIMATE-004": "/arenas/vip/ultimate/palacio-reis.svg",
+  "AP-VIP-ARENA-ULTIMATE-005": "/arenas/vip/ultimate/cidadela-eterna.svg",
+  // Aliases Legados e Canónicos
+  "arena_trono_supremo_campeao": "/arenas/vip/ultimate/trono-supremo-campeao.svg",
+  "arena_portugal_celestial": "/arenas/vip/ultimate/portugal-celestial.svg",
+  "arena_coliseu_campeoes": "/arenas/vip/ultimate/coliseu-campeoes.svg",
+  "arena_palacio_reis": "/arenas/vip/ultimate/palacio-reis.svg",
+  "arena_cidadela_eterna": "/arenas/vip/ultimate/cidadela-eterna.svg",
+  "vip_arena_001": "/arenas/vip/ultimate/palacio-reis.svg",
+  "vip_arena_002": "/arenas/vip/ultimate/coliseu-campeoes.svg",
+  "vip_arena_003": "/arenas/vip/ultimate/portugal-celestial.svg",
+  "vip_arena_004": "/arenas/vip/ultimate/trono-supremo-campeao.svg",
+  "vip_arena_005": "/arenas/vip/ultimate/cidadela-eterna.svg",
+  "vip_arena_006": "/arenas/vip/ultimate/portugal-celestial.svg"
 } as const
 
 export type ArenaImageKey = keyof typeof ARENA_IMAGES
