@@ -29,6 +29,7 @@ import {
 } from '@/src/data/vipCatalog'
 import UserAvatar from '@/components/ui/UserAvatar'
 import AnimatedFrameWrapper from '@/components/ui/AnimatedFrameWrapper'
+import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { equipItem } from '@/lib/economy'
 
 interface VipShopSectionProps {
@@ -516,15 +517,25 @@ export default function VipShopSection({
               </button>
             </div>
 
-            {/* Preview Visual Grande */}
+            {/* Showcase Visual Master */}
             <div className="relative w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-slate-900 to-black border border-white/10 flex items-center justify-center overflow-hidden">
-              <Image
-                src={inspectingProduct.assetPath}
-                alt={inspectingProduct.name}
-                fill
-                className="object-contain p-4"
-                unoptimized
-              />
+              {inspectingProduct.category === 'arena' ? (
+                <ArenaRenderer
+                  arenaId={inspectingProduct.id}
+                  showAtmosphere={true}
+                  showLighting={true}
+                  showBadge={false}
+                  className="w-full h-full"
+                />
+              ) : (
+                <Image
+                  src={inspectingProduct.assetPath}
+                  alt={inspectingProduct.name}
+                  fill
+                  className="object-contain p-4"
+                  unoptimized
+                />
+              )}
             </div>
 
             {/* Metadados Detalhados */}

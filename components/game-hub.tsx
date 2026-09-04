@@ -36,6 +36,7 @@ import {
 import { getDefaultCityForDistrict } from '@/data/districts'
 import { calculateLevelProgress } from '@/lib/progression'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
+import { resolveArena, VIP_ARENAS } from '@/src/data/arenaCatalog'
 import { cn, safeRandomUUID } from '@/lib/utils'
 
 export function GameHub() {
@@ -47,6 +48,26 @@ export function GameHub() {
   const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryGroupKey>('portugal')
   const [searchCategory, setSearchCategory] = useState('')
   const [subcatModalCategory, setSubcatModalCategory] = useState<HubCategory | null>(null)
+  const [selectedArenaId, setSelectedArenaId] = useState<string>('auto')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('equipped_arena')
+      if (saved && saved !== 'arena_palacio_nacional') {
+        setSelectedArenaId(saved)
+      } else if (saved === 'arena_palacio_nacional') {
+        const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
+        if (explicitlyEquipped) {
+          setSelectedArenaId(saved)
+        }
+      }
+    }
+  }, [])
+
+  const currentArenaObj = useMemo(() => {
+    if (selectedArenaId === 'auto') return null
+    return resolveArena(selectedArenaId)
+  }, [selectedArenaId])
 
   // Representação Territorial Permanente e Inalterável da Conta
   const userDistrict = useMemo(() => {
@@ -94,6 +115,7 @@ export function GameHub() {
     district?: string
     city?: string
     difficulty?: GameDifficulty
+    arenaId?: string
   }) => {
     const gameId = safeRandomUUID()
     const diff = params.difficulty || selectedDifficulty
@@ -106,6 +128,10 @@ export function GameHub() {
     }
     if (params.city) {
       url += `&city=${encodeURIComponent(params.city)}`
+    }
+    const chosenArena = params.arenaId || (selectedArenaId !== 'auto' ? selectedArenaId : undefined)
+    if (chosenArena) {
+      url += `&arena=${encodeURIComponent(chosenArena)}`
     }
 
     router.push(url)
@@ -202,6 +228,52 @@ export function GameHub() {
               </button>
             )
           })}
+        </div>
+      </div>
+
+      {/* ========================================================= */}
+      {/* 2.5 ARENA ATIVA & SELETOR 2150                            */}
+      {/* ========================================================= */}
+      <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl border border-amber-500/20 bg-card/60 p-4 backdrop-blur-xl">
+        <div className="flex items-center gap-2.5">
+          <Crown className="h-5 w-5 text-amber-400" />
+          <div>
+            <p className="text-xs font-black uppercase tracking-wider text-foreground">
+              Arena do Desafio // 2150
+            </p>
+            <p className="text-[0.72rem] text-muted-foreground">
+              {currentArenaObj ? (
+                <>Ativa: <strong className="text-amber-400 font-bold">{currentArenaObj.name}</strong> ({currentArenaObj.rarity})</>
+              ) : (
+                <>Modo: <strong className="text-emerald-400 font-bold">Dinâmico por Categoria</strong></>
+              )}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/arenas"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs font-black uppercase tracking-wider text-amber-300 hover:bg-amber-500/20 transition cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span>Explorar 43 Arenas</span>
+          </Link>
+          {selectedArenaId !== 'auto' && (
+            <button
+              onClick={() => {
+                setSelectedArenaId('auto')
+                if (typeof window !== 'undefined') {
+                  localStorage.removeItem('equipped_arena')
+                  localStorage.removeItem('arena_explicitly_equipped')
+                }
+              }}
+              className="rounded-xl border border-white/10 bg-white/5 px-2.5 py-2 text-[0.7rem] font-bold text-muted-foreground hover:text-white transition cursor-pointer"
+              title="Voltar ao modo dinâmico por categoria"
+            >
+              Reset Auto
+            </button>
+          )}
         </div>
       </div>
 

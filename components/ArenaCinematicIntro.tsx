@@ -3,10 +3,11 @@
 import React, { useState, useEffect } from 'react'
 import { Sparkles, Crown, Shield, Zap } from 'lucide-react'
 import type { SupremeArenaDefinition } from '@/lib/supreme-arenas'
+import type { CanonicalArena } from '@/src/data/arenaCatalog'
 import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 
 interface ArenaCinematicIntroProps {
-  arena: SupremeArenaDefinition
+  arena: SupremeArenaDefinition | CanonicalArena
   playerName?: string
   playerTier?: string
   onComplete: () => void
@@ -46,6 +47,9 @@ export function ArenaCinematicIntro({
     }
   }, [onComplete])
 
+  const effectType = ('effectType' in arena ? arena.effectType : (arena.effects as any)) || 'palacio_dourado'
+  const spotlightBeam = arena.lightingProfile?.spotlightBeam && arena.lightingProfile.spotlightBeam !== 'none' ? arena.lightingProfile.spotlightBeam : undefined
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden transition-opacity duration-300 ${
@@ -66,16 +70,18 @@ export function ArenaCinematicIntro({
       />
 
       {/* Camada de Partículas Vivas da Arena */}
-      <SupremeArenaAtmosphere effectType={arena.effectType} quality="ultra" />
+      <SupremeArenaAtmosphere effectType={effectType} quality="ultra" />
 
       {/* Brilho de Iluminação Volumétrica */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-700"
-        style={{
-          background: arena.lightingProfile.spotlightBeam,
-          opacity: phase === 'reveal' || phase === 'ready' ? 0.8 : 0,
-        }}
-      />
+      {spotlightBeam && (
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-700"
+          style={{
+            background: spotlightBeam,
+            opacity: phase === 'reveal' || phase === 'ready' ? 0.8 : 0,
+          }}
+        />
+      )}
 
       {/* Cartão de Apresentação Central do Palco */}
       <div className="relative z-10 text-center max-w-xl px-6 animate-in fade-in zoom-in duration-500">

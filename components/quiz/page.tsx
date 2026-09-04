@@ -60,6 +60,10 @@ function QuizPageContent() {
   const district = searchParams.get('dist') || searchParams.get('distrito')
   const city = searchParams.get('city') || searchParams.get('cidade')
   const gameIdFromUrl = searchParams.get('game') || searchParams.get('gameId')
+  const rawArena =
+    searchParams.get('arena') ||
+    searchParams.get('arenaId') ||
+    searchParams.get('arena_id')
 
   // Se passou distrito ou cidade sem cat explícito, ativa o modo correspondente
   const categorySlug =
@@ -79,9 +83,10 @@ function QuizPageContent() {
     if (difficulty) nextUrl += `&diff=${encodeURIComponent(difficulty)}`
     if (district) nextUrl += `&dist=${encodeURIComponent(district)}`
     if (city) nextUrl += `&city=${encodeURIComponent(city)}`
+    if (rawArena) nextUrl += `&arena=${encodeURIComponent(rawArena)}`
 
     router.replace(nextUrl)
-  }, [categorySlug, subcategorySlug, difficulty, district, city, gameIdFromUrl, generatedGameId, router])
+  }, [categorySlug, subcategorySlug, difficulty, district, city, rawArena, gameIdFromUrl, generatedGameId, router])
 
   return (
     <QuizErrorBoundary>
@@ -95,6 +100,7 @@ function QuizPageContent() {
             districtParam={district}
             cityParam={city}
             gameId={gameId}
+            arenaParam={rawArena}
           />
         ) : (
           <GameHub />

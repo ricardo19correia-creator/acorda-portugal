@@ -21,8 +21,9 @@ import { QuestionReportModal } from '@/components/question-report-modal'
 import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc, arrayUnion } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
-import { auth, db } from '@/lib/firebase'
 import { getSupremeArenaById, getAllSupremeArenas, type SupremeArenaDefinition } from '@/lib/supreme-arenas'
+import { resolveArenaForGame, type CanonicalArena } from '@/src/data/arenaCatalog'
+import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
 import { useAuth } from '@/components/auth-provider'
@@ -226,6 +227,7 @@ export function QuizScreen({
   districtParam,
   cityParam,
   gameId,
+  arenaParam,
 }: {
   categorySlug: string
   subcategorySlug?: string | null
@@ -233,6 +235,7 @@ export function QuizScreen({
   districtParam?: string | null
   cityParam?: string | null
   gameId: string
+  arenaParam?: string | null
 }) {
   const router = useRouter()
   const category = useMemo(
@@ -269,20 +272,34 @@ export function QuizScreen({
     createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
   )
 
-  const [equippedArenaId, setEquippedArenaId] = useState<string>('arena_palacio_nacional')
+  const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
   const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(true)
   const [arenaBurstTrigger, setArenaBurstTrigger] = useState<'correct' | 'wrong' | null>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('equipped_arena') || 'arena_palacio_nacional'
-      setEquippedArenaId(saved)
+      const saved = localStorage.getItem('equipped_arena')
+      if (saved && saved !== 'arena_palacio_nacional') {
+        setEquippedArenaId(saved)
+      } else if (saved === 'arena_palacio_nacional') {
+        const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
+        if (explicitlyEquipped) {
+          setEquippedArenaId(saved)
+        }
+      }
     }
   }, [])
 
-  const activeSupremeArena = useMemo(() => {
-    return getSupremeArenaById(equippedArenaId) || getSupremeArenaById('arena_palacio_nacional') || getAllSupremeArenas()[0]
-  }, [equippedArenaId])
+  // Resolução Autoritativa da Arena (SSOT): Parâmetro explícito -> Arena equipada -> Padrão da Categoria
+  const arenaResolution = useMemo(() => {
+    return resolveArenaForGame({
+      arenaId: arenaParam,
+      categorySlug,
+      equippedArenaId,
+    })
+  }, [arenaParam, categorySlug, equippedArenaId])
+
+  const activeArena = arenaResolution.arena
 
   const [step, setStep] = useState(0)
   const [phase, setPhase] = useState<Phase>('answering')
@@ -981,12 +998,26 @@ export function QuizScreen({
     )
   }
 
+  // 0. FAIL-LOUD: Se a arena for inválida ou falhar resolução, NUNCA usar Palácio Nacional silencioso
+  if (arenaResolution.error || !activeArena) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center p-4">
+        <ArenaRenderer
+          arenaId={arenaParam}
+          categorySlug={categorySlug}
+          equippedArenaId={equippedArenaId}
+          className="max-w-xl shadow-2xl"
+        />
+      </div>
+    )
+  }
+
   return (
     <>
       {/* 0. INTRODUÇÃO CINEMATOGRÁFICA DE ABERTURA DA ARENA (1-2s) */}
-      {showCinematicIntro && activeSupremeArena && (
+      {showCinematicIntro && activeArena && (
         <ArenaCinematicIntro
-          arena={activeSupremeArena}
+          arena={activeArena}
           playerName={user?.displayName || profile?.displayName || 'CAMPEÃO NACIONAL'}
           playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'MESTRE'}
           onComplete={() => setShowCinematicIntro(false)}
@@ -994,15 +1025,20 @@ export function QuizScreen({
         />
       )}
 
+      {/* Camada Master da Arena: Arte 2150, Iluminação Volumétrica e Partículas Vivas */}
+      {activeArena && (
+        <ArenaRenderer
+          arenaId={activeArena.id}
+          streak={streak}
+          burstTrigger={arenaBurstTrigger}
+          className="fixed inset-0 pointer-events-none -z-40"
+          showAtmosphere={true}
+          showLighting={true}
+          showBadge={false}
+        />
+      )}
+
       <div className="relative min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
-        {/* Camada de Partículas e Atmosfera Viva da Arena Equipada */}
-        {activeSupremeArena && (
-          <SupremeArenaAtmosphere
-            effectType={activeSupremeArena.effectType}
-            quality="ultra"
-            burstTrigger={arenaBurstTrigger}
-          />
-        )}
       {/* ========================================================= */}
       {/* 1. CABEÇALHO SOLO (TOPO COMPACTO SHRINK-0)                 */}
       {/* ========================================================= */}
