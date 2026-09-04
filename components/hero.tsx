@@ -19,7 +19,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
-import { Portugal3DExperience } from '@/components/portugal-3d-map/Portugal3DExperience'
+import { PortugalVectorFallback } from '@/components/portugal-map/PortugalVectorFallback'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 
@@ -194,19 +194,27 @@ export function Hero() {
         </div>
       </div>
 
-      {/* MAPA 3D TÁTICO DE PORTUGAL 2050 (EMBED DIRETO NA HERO) */}
-      <div className="mt-10 max-w-6xl mx-auto">
-        <div className="text-center mb-4">
-          <span className="tactical-node-badge">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-            PORTUGAL EM TEMPO REAL // 20 TERRITÓRIOS CONECTADOS
-          </span>
+      {/* MAPA TÁTICO DE PORTUGAL (PRÉ-VISUALIZAÇÃO INTERATIVA) */}
+      <div className="mt-10 max-w-4xl mx-auto rounded-3xl border border-cyan-500/30 bg-slate-950/80 backdrop-blur-xl p-5 sm:p-6 shadow-2xl">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
+          <div className="flex items-center gap-2.5">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400">
+              PORTUGAL EM TEMPO REAL // 20 TERRITÓRIOS
+            </span>
+          </div>
+          <Link
+            href="/portugal-mapa"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg shadow-cyan-500/25 hover:scale-102 transition-all cursor-pointer"
+          >
+            <span>Explorar Portugal 2150 em 3D</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
-        <Portugal3DExperience
+        <PortugalVectorFallback
           territories={territories}
           selectedDistrict={selectedDistrict}
           onSelectDistrict={(d) => setSelectedDistrict(d)}
-          onStartGame={handleStartGame}
         />
       </div>
 

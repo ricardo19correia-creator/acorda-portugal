@@ -536,6 +536,27 @@ export const PORTUGAL_DISTRICTS_GEOJSON: FeatureCollection = {
   ]
 }
 
+export const REGION_CAMERA_PRESETS = {
+  continente: {
+    center: [-8.2245, 39.55] as [number, number],
+    zoom: 6.2,
+    pitch: 38,
+    bearing: -4,
+  },
+  acores: {
+    center: [-26.5, 38.2] as [number, number],
+    zoom: 6.8,
+    pitch: 42,
+    bearing: 0,
+  },
+  madeira: {
+    center: [-16.95, 32.75] as [number, number],
+    zoom: 9.2,
+    pitch: 45,
+    bearing: 12,
+  },
+} as const
+
 export function getTerritoryByName(name: string): TerritoryGeoMetadata | undefined {
   if (!name) return undefined
   const clean = name.trim().toLowerCase()
@@ -551,3 +572,8 @@ export function getTerritoryByName(name: string): TerritoryGeoMetadata | undefin
   }
   return undefined
 }
+
+export function getAllTerritoriesList(): TerritoryGeoMetadata[] {
+  return Object.values(TERRITORY_METADATA)
+}
+

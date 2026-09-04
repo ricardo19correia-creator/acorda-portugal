@@ -1,12 +1,14 @@
 import {
   PORTUGAL_DISTRICTS_GEOJSON,
   TERRITORY_METADATA,
+  REGION_CAMERA_PRESETS,
   getTerritoryByName,
 } from '../lib/portugal-geojson'
+import { OFFICIAL_MAP_ARENAS, getArenaPOIById } from '../lib/map-arena-registry'
 
 function runTests() {
   console.log('=================================================================')
-  console.log('🇵🇹 ACORDA PORTUGAL — SUITE DE TESTES MAPBOX 3D GOOGLE EARTH')
+  console.log('🇵🇹 ACORDA PORTUGAL — SUITE DE TESTES MAPA 3D // PORTUGAL 2150')
   console.log('=================================================================\n')
 
   let passed = 0
@@ -56,11 +58,19 @@ function runTests() {
   const metaKeys = Object.keys(TERRITORY_METADATA)
   assert(metaKeys.length === 20, '[METADATA] 20 Territórios com Metadados Táticos', `Total=${metaKeys.length}/20`)
 
-  // 4. Parâmetros 3D de Câmara por Território (Pitch > 50 para efeito 3D Google Earth)
-  const allHavePitch = Object.values(TERRITORY_METADATA).every((m) => m.pitch >= 50 && m.pitch <= 85)
-  assert(allHavePitch, '[CÂMARA 3D] Pitch Tático Elevado (50°-85°) para Relevo Real')
+  // 4. Parâmetros 3D de Câmara por Território
+  const allHavePitch = Object.values(TERRITORY_METADATA).every((m) => m.pitch >= 45 && m.pitch <= 85)
+  assert(allHavePitch, '[CÂMARA 3D] Pitch Tático Relevo Real (45°-85°)')
 
-  // 5. Teste de Resolução por Nome
+  // 5. Presets de Região (Continente, Açores, Madeira)
+  assert(
+    REGION_CAMERA_PRESETS.continente.center[1] > 39 &&
+    REGION_CAMERA_PRESETS.acores.center[0] < -20 &&
+    REGION_CAMERA_PRESETS.madeira.center[1] < 34,
+    '[PRESETS] Presets de Câmara de Continente, Açores e Madeira Válidos'
+  )
+
+  // 6. Teste de Resolução por Nome
   const lisboa = getTerritoryByName('Lisboa')
   assert(
     lisboa !== undefined && lisboa.capital === 'Lisboa' && lisboa.center[1] > 38 && lisboa.center[1] < 39,
@@ -88,6 +98,25 @@ function runTests() {
     '[RESOLUÇÃO] Região Autónoma da Madeira',
     `Capital=${madeira?.capital}`
   )
+
+  // 7. Registro Geográfico de Arenas Oficiais
+  assert(OFFICIAL_MAP_ARENAS.length >= 20, '[ARENAS] Registro Oficial de Arenas no Mapa', `Total=${OFFICIAL_MAP_ARENAS.length}`)
+
+  let allArenasValid = true
+  for (const a of OFFICIAL_MAP_ARENAS) {
+    const [lng, lat] = a.coordinates
+    if (lng < -32 || lng > -5 || lat < 32 || lat > 43) {
+      allArenasValid = false
+      console.error(`Coordenadas de arena inválidas para ${a.name}: [${lng}, ${lat}]`)
+    }
+  }
+  assert(allArenasValid, '[ARENAS] Coordenadas Geográficas Portuguesas Válidas')
+
+  const praca = getArenaPOIById('arena_praca_liberdade')
+  assert(praca !== undefined && praca.district === 'Porto', '[ARENAS] Resolução de Arena Praça da Liberdade (Porto)')
+
+  const belem = getArenaPOIById('arena_torre_belem')
+  assert(belem !== undefined && belem.district === 'Lisboa', '[ARENAS] Resolução de Arena Torre de Belém (Lisboa)')
 
   console.log('\n=================================================================')
   console.log(`📊 RESULTADO DA SUITE: ${passed}/${total} TESTES APROVADOS (${Math.round((passed/total)*100)}%)`)

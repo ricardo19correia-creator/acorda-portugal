@@ -1,81 +1,51 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic'
-import {
-  ArrowLeft,
-  Play,
-  MapPin,
-  Trophy,
-  Swords,
-  Globe,
-  Flame,
-  Shield,
-  Clock,
-  Sparkles,
-  Share2,
-  Check,
-} from 'lucide-react'
+import React, { useState, useEffect, useMemo, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
-import { BackgroundFx } from '@/components/background-fx'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
-import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
+import { PortugalGameMap } from '@/components/portugal-map/PortugalGameMap'
+import type { MapRegion } from '@/components/portugal-map/types'
+import { Globe } from 'lucide-react'
 
-// Import dinâmico com SSR desativado para prevenir Hydration Mismatch no motor 3D
-const Portugal3DExperienceDynamic = dynamic(
-  () =>
-    import('@/components/portugal-3d-map/Portugal3DExperience').then(
-      (mod) => mod.Portugal3DExperience
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="relative w-full h-[640px] sm:h-[720px] rounded-3xl overflow-hidden border border-emerald-500/30 bg-slate-950 flex flex-col items-center justify-center p-8 text-center shadow-2xl">
-        <div className="relative mb-4">
-          <div className="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
-          <Globe className="w-7 h-7 text-emerald-400 absolute inset-0 m-auto" />
-        </div>
-        <span className="font-mono text-xs font-black uppercase tracking-widest text-emerald-400">
-          A INICIALIZAR RADAR 3D // PORTUGAL 2150
-        </span>
-      </div>
-    ),
-  }
-)
-
-export default function PortugalMapaPage() {
+function PortugalMapaContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { user, profile } = useAuth()
 
-  // Estado determinístico inicial no SSR para evitar React Error #418
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('Lisboa')
+  // Read URL parameters if present
+  const queryDistrict = searchParams.get('district') || searchParams.get('distrito')
+  const queryRegion = searchParams.get('region') || searchParams.get('regiao')
+
+  const initialDistrict = useMemo(() => {
+    if (queryDistrict) return queryDistrict
+    if (profile?.district) return profile.district
+    return 'Lisboa'
+  }, [queryDistrict, profile?.district])
+
+  const initialRegion = useMemo<MapRegion>(() => {
+    if (queryRegion === 'acores' || queryRegion === 'açores') return 'acores'
+    if (queryRegion === 'madeira') return 'madeira'
+    return 'continente'
+  }, [queryRegion])
+
+  const [selectedDistrict, setSelectedDistrict] = useState<string>(initialDistrict)
   const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerProfileData | null>(null)
-  const [copiedShare, setCopiedShare] = useState<boolean>(false)
 
-  // Sincroniza distrito do perfil no cliente após montagem
-  useEffect(() => {
-    if (profile?.district) {
-      setSelectedDistrict(profile.district)
-    }
-  }, [profile?.district])
-
-  // Subscrição Global para Alimentar o Mapa Tático
+  // Real-time Rankings Subscription for National War Map
   useEffect(() => {
     const unsub = subscribeRankings(
       'all',
       'xp',
       (data) => {
-        let allList = [...data]
+        const allList = [...data]
         if (user?.uid && profile) {
           const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userWins = profile.wins ?? 0
@@ -83,6 +53,7 @@ export default function PortugalMapaPage() {
           const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
           const userDistrict = (profile.district || 'Portugal').trim()
           const hasCurrentUser = allList.some((p) => p.uid === user.uid)
+
           if (!hasCurrentUser) {
             allList.push({
               uid: user.uid,
@@ -110,8 +81,9 @@ export default function PortugalMapaPage() {
       300
     )
     return () => unsub()
-  }, [user?.uid, profile])
+  }, [user?.uid, user?.displayName, user?.photoURL, profile])
 
+  // Server-Authoritative District War calculation using real player data
   const districtWarTerritories = useMemo(() => {
     return calculateDistrictWarTerritories(nationalPlayers)
   }, [nationalPlayers])
@@ -125,117 +97,38 @@ export default function PortugalMapaPage() {
   }
 
   const handleSelectPlayer = (p: any) => {
+    if (!p) return
     setSelectedPlayer({
-      id: p.uid,
-      username: p.displayName,
+      id: p.uid || p.id,
+      username: p.displayName || p.name || 'Jogador',
       avatarUrl: p.photoURL || undefined,
       equippedFrame: p.equippedFrame,
       level: p.level || 1,
       xp: p.xp || 0,
       district: p.district || 'Portugal',
       rankPosition: p.pos || 1,
-      virtualMoney: p.xp * 2,
+      virtualMoney: (p.xp || 0) * 2,
       isVip: Boolean(p.isFounder),
       title: p.title || 'Guardião Distrital',
       stats: {
         duelsWon: p.wins1v1 || 0,
         duelsTotal: p.gamesPlayed || 10,
-        accuracyRate: 85,
+        accuracyRate: p.accuracyRate || 85,
       },
       badges: [{ icon: '🇵🇹', name: p.district || 'Portugal' }],
     })
   }
 
-  const handleShare = () => {
-    const text = `Explora o Mapa Tático de Portugal 2050 no Acorda Portugal! 🇵🇹`
-    const url = typeof window !== 'undefined' ? window.location.href : 'https://acordaportugal.pt/portugal-mapa'
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      navigator.share({ title: 'Portugal 2050 — Mapa Tático 3D', text, url }).catch(() => {})
-    } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(`${text} ${url}`)
-      setCopiedShare(true)
-      setTimeout(() => setCopiedShare(false), 3000)
-    }
-  }
-
   return (
-    <div className="relative min-h-screen bg-slate-950 flex flex-col selection:bg-cyan-500 selection:text-black">
-      <BackgroundFx variant="about" />
-
-      <div className="relative z-20 flex-1 flex flex-col">
-        <SiteHeader />
-
-        <main className="flex-1 pb-16">
-          <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-            {/* Header Banner */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-              <div>
-                <Link
-                  href="/rankings"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Ir para Rankings Gerais
-                </Link>
-                <div className="mt-3 flex items-center gap-2">
-                  <span className="badge-hud text-cyan-400 border-cyan-500/40 bg-cyan-500/15 shadow-md shadow-cyan-500/20 flex items-center gap-1.5 font-mono">
-                    <Globe className="h-3.5 w-3.5" />
-                    18 Distritos + 2 Regiões Autónomas
-                  </span>
-                </div>
-                <h1 className="mt-2 font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-white">
-                  PORTUGAL DIGITAL 2050
-                </h1>
-                <p className="mt-1.5 text-sm sm:text-base text-slate-300 font-medium max-w-2xl">
-                  Explora o território nacional em 3D, inspeciona o domínio da Guerra dos Distritos e apoia a tua região.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleShare}
-                  className="px-5 py-4 rounded-2xl bg-slate-900 border border-white/15 text-slate-300 hover:text-white text-xs font-black uppercase tracking-wider flex items-center gap-2 cursor-pointer transition-colors shadow-md"
-                >
-                  {copiedShare ? (
-                    <>
-                      <Check className="w-4 h-4 text-emerald-400" />
-                      <span>Copiado!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Share2 className="w-4 h-4 text-cyan-400" />
-                      <span>Partilhar Mapa</span>
-                    </>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleStartGame(`/jogar?distrito=${encodeURIComponent(selectedDistrict)}`)}
-                  className="button-game-gold inline-flex items-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-xl"
-                >
-                  <Play className="h-4 w-4 fill-current" />
-                  <span>Conquistar Território</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Mapa 3D Completo */}
-            <div className="mt-4">
-              <Portugal3DExperienceDynamic
-                territories={districtWarTerritories}
-                selectedDistrict={selectedDistrict}
-                onSelectDistrict={(dist) => setSelectedDistrict(dist)}
-                onSelectPlayer={handleSelectPlayer}
-                onStartGame={handleStartGame}
-              />
-            </div>
-          </div>
-        </main>
-
-        <SiteFooter />
-      </div>
+    <div className="relative w-full h-[100dvh] bg-slate-950 overflow-hidden flex flex-col">
+      <PortugalGameMap
+        initialDistrict={selectedDistrict}
+        initialRegion={initialRegion}
+        territories={districtWarTerritories}
+        onSelectDistrict={(dist) => setSelectedDistrict(dist)}
+        onSelectPlayer={handleSelectPlayer}
+        onStartGame={handleStartGame}
+      />
 
       <PlayerProfileModal
         player={selectedPlayer}
@@ -243,5 +136,28 @@ export default function PortugalMapaPage() {
         onClose={() => setSelectedPlayer(null)}
       />
     </div>
+  )
+}
+
+export default function PortugalMapaPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="relative w-full h-[100dvh] bg-slate-950 flex flex-col items-center justify-center p-8 text-center">
+          <div className="relative mb-4">
+            <div className="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin" />
+            <Globe className="w-7 h-7 text-cyan-400 absolute inset-0 m-auto" />
+          </div>
+          <span className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400">
+            A CARREGAR MAPA NACIONAL // PORTUGAL 2150
+          </span>
+          <span className="text-[10px] font-mono text-emerald-400/90 mt-2 uppercase tracking-widest">
+            BUILD-ID: MAP2150-REAL-001
+          </span>
+        </div>
+      }
+    >
+      <PortugalMapaContent />
+    </Suspense>
   )
 }
