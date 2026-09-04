@@ -1,11 +1,12 @@
 'use client'
 
-import { Suspense, useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import Link from 'next/link'
 import { ArrowLeft, Swords, Sparkles, Lock } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
@@ -22,10 +23,19 @@ function DuelPageContent() {
   const [modalOpen, setModalOpen] = useState(true)
   const { user, authResolved, profile } = useAuth()
 
-  const [currentArena, setCurrentArena] = useState<ArenaDefinition>(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('equipped_arena') : null
-    return saved ? getArenaById(saved) : getDefaultArena()
-  })
+  // Inicialização neutra segura para evitar Hydration Mismatch #418
+  const [currentArena, setCurrentArena] = useState<ArenaDefinition>(() => getDefaultArena())
+
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('equipped_arena')
+        if (saved) {
+          setCurrentArena(getArenaById(saved))
+        }
+      }
+    } catch {}
+  }, [])
 
   // Sincronizar com a arena equipada do perfil do utilizador
   useEffect(() => {
@@ -55,6 +65,14 @@ function DuelPageContent() {
       return
     }
     setModalOpen(true)
+  }
+
+  if (!authResolved) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+        <LoadingQuiz message="A verificar sessão..." submessage="A sincronizar credenciais para o duelo..." />
+      </div>
+    )
   }
 
   if (authResolved && !user && !auth?.currentUser) {
@@ -204,7 +222,7 @@ function DuelPageContent() {
 
 export default function DuelPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center p-4"><LoadingQuiz message="A carregar arena de duelo..." /></div>}>
       <DuelPageContent />
     </Suspense>
   )

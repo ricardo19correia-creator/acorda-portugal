@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
+import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import {
   HUB_CATEGORIES,
   DIFFICULTY_LEVELS,
@@ -41,7 +42,7 @@ import { cn, safeRandomUUID } from '@/lib/utils'
 
 export function GameHub() {
   const router = useRouter()
-  const { user, profile } = useAuth()
+  const { user, profile, authResolved, profileLoading } = useAuth()
 
   // State
   const [selectedDifficulty, setSelectedDifficulty] = useState<GameDifficulty>(2)
@@ -49,18 +50,29 @@ export function GameHub() {
   const [searchCategory, setSearchCategory] = useState('')
   const [subcatModalCategory, setSubcatModalCategory] = useState<HubCategory | null>(null)
   const [selectedArenaId, setSelectedArenaId] = useState<string>('auto')
+  const [localDistrict, setLocalDistrict] = useState<string | null>(null)
+  const [localCity, setLocalCity] = useState<string | null>(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('equipped_arena')
-      if (saved && saved !== 'arena_palacio_nacional') {
-        setSelectedArenaId(saved)
-      } else if (saved === 'arena_palacio_nacional') {
-        const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
-        if (explicitlyEquipped) {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('equipped_arena')
+        if (saved && saved !== 'arena_palacio_nacional') {
           setSelectedArenaId(saved)
+        } else if (saved === 'arena_palacio_nacional') {
+          const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
+          if (explicitlyEquipped) {
+            setSelectedArenaId(saved)
+          }
         }
+
+        const d = localStorage.getItem('user_district')
+        if (d) setLocalDistrict(d)
+        const c = localStorage.getItem('user_city')
+        if (c) setLocalCity(c)
       }
+    } catch (err) {
+      console.warn('[GameHub] Erro seguro ao aceder a localStorage:', err)
     }
   }, [])
 
@@ -69,24 +81,24 @@ export function GameHub() {
     return resolveArena(selectedArenaId)
   }, [selectedArenaId])
 
-  // Representação Territorial Permanente e Inalterável da Conta
+  // Representação Territorial Permanente e Inalterável da Conta (sem leituras diretas de window durante a renderização)
   const userDistrict = useMemo(() => {
     return (
       profile?.district ||
       profile?.representedDistrict ||
-      (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) ||
+      localDistrict ||
       'Portugal'
     )
-  }, [profile?.district, profile?.representedDistrict])
+  }, [profile?.district, profile?.representedDistrict, localDistrict])
 
   const userCity = useMemo(() => {
     return (
       profile?.city ||
       profile?.representedCity ||
-      (typeof window !== 'undefined' ? localStorage.getItem('user_city') : null) ||
+      localCity ||
       (userDistrict !== 'Portugal' ? getDefaultCityForDistrict(userDistrict) : 'Portugal')
     )
-  }, [profile?.city, profile?.representedCity, userDistrict])
+  }, [profile?.city, profile?.representedCity, localCity, userDistrict])
 
   // 1v1 Duel Matchmaking Modal State
   const [showDuelModal, setShowDuelModal] = useState(false)
@@ -142,6 +154,11 @@ export function GameHub() {
   }
 
   const currentDiffConfig = DIFFICULTY_LEVELS[selectedDifficulty]
+
+  // Blindagem do Ciclo de Vida da Sessão Firebase
+  if (!authResolved || (user && profileLoading)) {
+    return <LoadingQuiz message="A carregar central de jogos..." submessage="A sincronizar a tua sessão e perfil..." />
+  }
 
   return (
     <div className="relative mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import {
   Trophy,
@@ -40,42 +40,51 @@ export function ResultScreen({
   result,
   gameId,
   onReplay,
+  onRestart,
   onGameEnd,
   levelUpInfo,
   rewardOutcome,
   savingReward,
   syncError,
+  categoryTitle,
+  difficultyLabel,
+  answers,
+  onExit,
 }: {
   result: QuizResult
   gameId: string
   onReplay?: () => void
+  onRestart?: () => void
   onGameEnd?: (gameId: string, result: QuizResult) => Promise<void>
   levelUpInfo?: LevelUpInfo
   rewardOutcome?: MatchRewardOutcome | null
   savingReward?: boolean
   syncError?: string | null
+  categoryTitle?: string
+  difficultyLabel?: string
+  answers?: any
+  onExit?: () => void
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
   const [showLevelUpModal, setShowLevelUpModal] = useState(false)
 
-  // Estados animados para contagem suave de números
-  const [displayedXp, setDisplayedXp] = useState<number>(() => {
-    if (rewardOutcome) return rewardOutcome.oldXp
-    if (typeof window !== 'undefined') {
-      const s = Number(localStorage.getItem('user_xp') || 0)
-      return s > 0 ? s : 0
-    }
-    return 0
-  })
+  // Estados animados para contagem suave de números (sem leitura de localStorage na renderização inicial para prevenir erro #418)
+  const [displayedXp, setDisplayedXp] = useState<number>(() => rewardOutcome?.oldXp ?? 0)
+  const [displayedCoins, setDisplayedCoins] = useState<number>(() => rewardOutcome?.oldCoins ?? 0)
 
-  const [displayedCoins, setDisplayedCoins] = useState<number>(() => {
-    if (rewardOutcome) return rewardOutcome.oldCoins
-    if (typeof window !== 'undefined') {
-      const s = Number(localStorage.getItem('user_coins') || 0)
-      return s > 0 ? s : 0
+  // Leitura segura em useEffect exclusivamente no cliente
+  useEffect(() => {
+    if (!rewardOutcome && typeof window !== 'undefined') {
+      try {
+        const sXp = Number(localStorage.getItem('user_xp') || 0)
+        if (sXp > 0) setDisplayedXp(sXp)
+        const sCoins = Number(localStorage.getItem('user_coins') || 0)
+        if (sCoins > 0) setDisplayedCoins(sCoins)
+      } catch (err) {
+        console.warn('[ResultScreen] Erro seguro ao aceder a localStorage:', err)
+      }
     }
-    return 0
-  })
+  }, [rewardOutcome])
 
   // Flag para disparar a animação apenas uma vez por transição confirmada
   const hasAnimatedRef = useRef(false)
@@ -358,7 +367,7 @@ export function ResultScreen({
         <div className="relative mt-5 flex flex-col gap-2.5">
           <button
             type="button"
-            onClick={onReplay}
+            onClick={onReplay || onRestart}
             className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-emerald-400 to-primary bg-[length:200%_100%] py-3.5 px-6 font-display text-sm sm:text-base font-black uppercase tracking-wider text-primary-foreground shadow-[0_12px_40px_-5px_rgba(0,255,162,0.4)] transition-all duration-300 hover:scale-[1.01] hover:bg-[position:100%_0] active:scale-[0.99] cursor-pointer"
           >
             <RotateCcw className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-45" />

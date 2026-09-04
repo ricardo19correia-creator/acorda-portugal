@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense, useEffect, useState, Component, type ErrorInfo, type ReactNode } from 'react'
+import React, { Suspense, useState, useEffect, useRef, useMemo, useCallback, Component, type ErrorInfo, type ReactNode } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { BackgroundFx } from '@/components/background-fx'
@@ -8,6 +8,8 @@ import { ArenaDynamicBackground } from '@/components/arena-dynamic-background'
 import { GameHub } from '@/components/game-hub'
 import { QuizScreen } from '@/components/quiz/quiz-screen'
 import { safeRandomUUID } from '@/lib/utils'
+import { LoadingQuiz } from '@/components/quiz/loading-quiz'
+import { useAuth } from '@/components/auth-provider'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -24,15 +26,18 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
     this.state = { hasError: false, error: null }
   }
 
-  static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
-    return { hasError: false, error: null }
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.warn('[QUIZ_NON_FATAL_RECOVERED]', error, errorInfo)
+    console.error('[CRASH /jogar]:', error, errorInfo)
   }
 
   render() {
+    if (this.state.hasError) {
+      return <LoadingQuiz message="A recuperar sessão do desafio..." />
+    }
     return this.props.children
   }
 }
@@ -40,8 +45,9 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
 function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const { user, authResolved, profileLoading } = useAuth()
 
-  // Extrair parâmetros flexíveis
+  // Extrair parâmetros flexíveis com fallbacks seguros
   const rawCategorySlug =
     searchParams.get('cat') ||
     searchParams.get('category') ||
@@ -78,15 +84,25 @@ function QuizPageContent() {
   useEffect(() => {
     if (!categorySlug || gameIdFromUrl) return
 
-    let nextUrl = `/jogar?cat=${encodeURIComponent(categorySlug)}&game=${generatedGameId}`
-    if (subcategorySlug) nextUrl += `&subcat=${encodeURIComponent(subcategorySlug)}`
-    if (difficulty) nextUrl += `&diff=${encodeURIComponent(difficulty)}`
-    if (district) nextUrl += `&dist=${encodeURIComponent(district)}`
-    if (city) nextUrl += `&city=${encodeURIComponent(city)}`
-    if (rawArena) nextUrl += `&arena=${encodeURIComponent(rawArena)}`
+    try {
+      let nextUrl = `/jogar?cat=${encodeURIComponent(categorySlug)}&game=${generatedGameId}`
+      if (subcategorySlug) nextUrl += `&subcat=${encodeURIComponent(subcategorySlug)}`
+      if (difficulty) nextUrl += `&diff=${encodeURIComponent(difficulty)}`
+      if (district) nextUrl += `&dist=${encodeURIComponent(district)}`
+      if (city) nextUrl += `&city=${encodeURIComponent(city)}`
+      if (rawArena) nextUrl += `&arena=${encodeURIComponent(rawArena)}`
 
-    router.replace(nextUrl)
+      router.replace(nextUrl)
+    } catch (e) {
+      console.warn('[QuizPageContent] Erro na navegação de parâmetros:', e)
+    }
   }, [categorySlug, subcategorySlug, difficulty, district, city, rawArena, gameIdFromUrl, generatedGameId, router])
+
+  // Blindagem do Ciclo de Vida da Sessão Firebase:
+  // Impede a montagem do motor de quiz e o acesso a user.uid enquanto a autenticação/perfil sincronizam
+  if (!authResolved || (user && profileLoading)) {
+    return <LoadingQuiz message="A sincronizar sessão..." submessage="A preparar os dados de jogador..." />
+  }
 
   return (
     <QuizErrorBoundary>
@@ -113,7 +129,7 @@ function QuizPageContent() {
 export function QuizPage() {
   return (
     <div className="relative h-full w-full bg-transparent">
-      <Suspense fallback={<div className="min-h-screen bg-transparent" />}>
+      <Suspense fallback={<LoadingQuiz message="A carregar desafio..." />}>
         <QuizPageContent />
       </Suspense>
     </div>

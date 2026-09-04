@@ -59,6 +59,7 @@ export interface ShopCatalogItem {
   quantity?: number
   unlockType: ShopUnlockType
   asset?: string
+  image?: string
   active: boolean
 
   // Metadados complementares para UI e gameplay
@@ -71,6 +72,7 @@ export interface ShopCatalogItem {
   previewColor?: string
   cssClass?: string
   effect?: string
+  story?: string
   icon?: string
   maxOwned?: number
   purchaseLimit24h?: number
@@ -533,6 +535,7 @@ export const VIP_SHOP_ITEMS: ShopCatalogItem[] = VIP_CATALOG.map((vip): ShopCata
     quantity: undefined,
     unlockType: 'vip',
     asset: vip.assetPath,
+    image: vip.image || `/store/vip/${vip.id}.webp`,
     active: true,
     category: 'vip',
     categoryTitle: 'Exclusivos VIP (€ Real)',

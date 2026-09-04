@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -16,17 +16,18 @@ import {
   Coins,
   Lock,
   Flag,
+  AlertTriangle,
+  RefreshCw,
+  Loader2,
 } from 'lucide-react'
 import { QuestionReportModal } from '@/components/question-report-modal'
-import { collection, doc, runTransaction, serverTimestamp, updateDoc, increment, setDoc, arrayUnion } from 'firebase/firestore'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
-import { getSupremeArenaById, getAllSupremeArenas, type SupremeArenaDefinition } from '@/lib/supreme-arenas'
-import { resolveArenaForGame, type CanonicalArena } from '@/src/data/arenaCatalog'
+import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { ArenaRenderer } from '@/components/ArenaRenderer'
-import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
 import { useAuth } from '@/components/auth-provider'
+import { auth } from '@/lib/firebase'
 import { useEconomy } from '@/context/economy-context'
 import { useGameTheme } from '@/context/game-theme-context'
 import { useConsumablePowerUp } from '@/lib/economy'
@@ -39,33 +40,25 @@ import {
   cleanQuestionPrompt,
 } from '@/src/lib/questionEngine'
 import type { Question } from '@/src/types/quiz'
-import { silentFetchWithRetry, silentAsyncRetry } from '@/lib/network-resilience'
-import { calculateMatchCoinReward, calculateLevelUpCoinReward, getDifficultyMultiplier } from '@/src/data/economy'
-import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
+import { calculateMatchCoinReward, getDifficultyMultiplier } from '@/src/data/economy'
+import { calculate5050Eliminated, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { GameExitControl } from '@/components/game-exit-modal'
-import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { safeRandomUUID } from '@/lib/utils'
 
 import {
-  ALL_QUIZ_QUESTIONS,
   CATEGORIES,
-  MODO_MALUCO_QUESTIONS,
   type QuizQuestion,
-  normalizeCategorySlug,
   getCategoryBySlug,
   getDistrictTerritory,
-  filterQuizQuestions,
 } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import { awardMatchReward, type MatchRewardOutcome } from '@/lib/xp-service'
 import { getCanonicalCategory, type MatchAnswerPayload } from '@/lib/category-registry'
 
-import { QuizProgress } from '@/components/quiz/quiz-progress'
 import {
-  AnswerOption,
   type AnswerState,
 } from '@/components/quiz/answer-option'
 import {
@@ -77,6 +70,7 @@ import {
   calculateTimeBonus,
   WARNING_TIME_THRESHOLD,
 } from '@/config/quiz'
+import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import { cn } from '@/lib/utils'
 
 const MAX_SECONDS = QUESTION_TIME_SECONDS
@@ -84,7 +78,14 @@ const QUESTIONS_PER_GAME = 10
 
 type Phase = 'answering' | 'revealed' | 'finished'
 
-type GameQuestion = QuizQuestion & { image?: string }
+export type GameQuestion = QuizQuestion & {
+  image?: string
+  pergunta?: string
+  opcoes?: [string, string, string, string] | string[]
+  respostaCorreta?: number
+  correctAnswer?: number
+  explicacao?: string
+}
 
 type OptionKey = 'A' | 'B' | 'C' | 'D'
 
@@ -154,39 +155,192 @@ function resolveCategoryInfo(
     return { name: category.name, emoji: '🇵🇹', special: category.special }
   }
 
-  const formatted = categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  const formatted = (categorySlug || 'Desafio').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
   return { name: formatted, emoji: '🇵🇹', special: false }
 }
 
-function formatEngineQuestion(q: Question, index: number, total: number): GameQuestion {
-  const rawOptions = q.options || []
-  const correctText = rawOptions[q.correctAnswer] || rawOptions[0] || ''
+/**
+ * Perguntas de emergência garantidas caso a base de dados falhe ou retorne vazio
+ */
+const EMERGENCY_FALLBACK_QUESTIONS: GameQuestion[] = [
+  {
+    id: 'emg_1',
+    index: 1,
+    total: 5,
+    question: 'Qual é a capital oficial de Portugal?',
+    pergunta: 'Qual é a capital oficial de Portugal?',
+    category: 'portugal',
+    difficulty: 1,
+    options: [
+      { key: 'A', text: 'Lisboa' },
+      { key: 'B', text: 'Porto' },
+      { key: 'C', text: 'Coimbra' },
+      { key: 'D', text: 'Braga' },
+    ],
+    opcoes: ['Lisboa', 'Porto', 'Coimbra', 'Braga'],
+    correct: 'A',
+    correctAnswer: 0,
+    respostaCorreta: 0,
+    explanation: 'Lisboa é a capital e a maior cidade de Portugal.',
+    explicacao: 'Lisboa é a capital e a maior cidade de Portugal.',
+    points: 100,
+  },
+  {
+    id: 'emg_2',
+    index: 2,
+    total: 5,
+    question: 'Em que ano foi assinado o Tratado de Zamora, reconhecendo a independência de Portugal?',
+    pergunta: 'Em que ano foi assinado o Tratado de Zamora, reconhecendo a independência de Portugal?',
+    category: 'historia',
+    difficulty: 2,
+    options: [
+      { key: 'A', text: '1128' },
+      { key: 'B', text: '1143' },
+      { key: 'C', text: '1249' },
+      { key: 'D', text: '1385' },
+    ],
+    opcoes: ['1128', '1143', '1249', '1385'],
+    correct: 'B',
+    correctAnswer: 1,
+    respostaCorreta: 1,
+    explanation: 'O Tratado de Zamora foi assinado em 1143 por D. Afonso Henriques.',
+    explicacao: 'O Tratado de Zamora foi assinado em 1143 por D. Afonso Henriques.',
+    points: 100,
+  },
+  {
+    id: 'emg_3',
+    index: 3,
+    total: 5,
+    question: 'Qual é o ponto mais alto de Portugal Continental?',
+    pergunta: 'Qual é o ponto mais alto de Portugal Continental?',
+    category: 'geografia',
+    difficulty: 1,
+    options: [
+      { key: 'A', text: 'Torre na Serra da Estrela' },
+      { key: 'B', text: 'Pico da Nevosa' },
+      { key: 'C', text: 'Monte do Fóia' },
+      { key: 'D', text: 'Piquinho' },
+    ],
+    opcoes: ['Torre na Serra da Estrela', 'Pico da Nevosa', 'Monte do Fóia', 'Piquinho'],
+    correct: 'A',
+    correctAnswer: 0,
+    respostaCorreta: 0,
+    explanation: 'A Torre, na Serra da Estrela, tem 1993 metros de altitude.',
+    explicacao: 'A Torre, na Serra da Estrela, tem 1993 metros de altitude.',
+    points: 100,
+  },
+  {
+    id: 'emg_4',
+    index: 4,
+    total: 5,
+    question: 'Qual é a famosa iguaria doce tradicional de Belém, em Lisboa?',
+    pergunta: 'Qual é a famosa iguaria doce tradicional de Belém, em Lisboa?',
+    category: 'gastronomia',
+    difficulty: 1,
+    options: [
+      { key: 'A', text: 'Pastel de Belém / Nata' },
+      { key: 'B', text: 'Ovos Moles' },
+      { key: 'C', text: 'Travesseiro de Sintra' },
+      { key: 'D', text: 'Queijada de Sintra' },
+    ],
+    opcoes: ['Pastel de Belém / Nata', 'Ovos Moles', 'Travesseiro de Sintra', 'Queijada de Sintra'],
+    correct: 'A',
+    correctAnswer: 0,
+    respostaCorreta: 0,
+    explanation: 'Os Pastéis de Belém foram criados no início do século XIX no Mosteiro dos Jerónimos.',
+    explicacao: 'Os Pastéis de Belém foram criados no início do século XIX no Mosteiro dos Jerónimos.',
+    points: 100,
+  },
+  {
+    id: 'emg_5',
+    index: 5,
+    total: 5,
+    question: 'Quem escreveu a célebre epopeia nacional "Os Lusíadas"?',
+    pergunta: 'Quem escreveu a célebre epopeia nacional "Os Lusíadas"?',
+    category: 'cultura',
+    difficulty: 1,
+    options: [
+      { key: 'A', text: 'Luís de Camões' },
+      { key: 'B', text: 'Fernando Pessoa' },
+      { key: 'C', text: 'Eça de Queirós' },
+      { key: 'D', text: 'José Saramago' },
+    ],
+    opcoes: ['Luís de Camões', 'Fernando Pessoa', 'Eça de Queirós', 'José Saramago'],
+    correct: 'A',
+    correctAnswer: 0,
+    respostaCorreta: 0,
+    explanation: 'Luís de Camões publicou "Os Lusíadas" em 1572.',
+    explicacao: 'Luís de Camões publicou "Os Lusíadas" em 1572.',
+    points: 100,
+  },
+]
+
+function formatEngineQuestion(q: any, index: number, total: number): GameQuestion {
+  const rawPrompt = q?.question || q?.pergunta || 'Pergunta sobre Portugal'
+  const cleanPrompt = cleanQuestionPrompt(rawPrompt)
+
+  let rawOpts: string[] = []
+  if (Array.isArray(q?.options)) {
+    rawOpts = q.options.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
+  } else if (Array.isArray(q?.opcoes)) {
+    rawOpts = q.opcoes.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
+  }
+
+  if (rawOpts.length === 0) {
+    rawOpts = ['Opção A', 'Opção B', 'Opção C', 'Opção D']
+  }
+  while (rawOpts.length < 4) {
+    rawOpts.push(`Alternativa ${rawOpts.length + 1}`)
+  }
+
+  let correctIndex = 0
+  if (typeof q?.correctAnswer === 'number' && q.correctAnswer >= 0 && q.correctAnswer <= 3) {
+    correctIndex = q.correctAnswer
+  } else if (typeof q?.respostaCorreta === 'number' && q.respostaCorreta >= 0 && q.respostaCorreta <= 3) {
+    correctIndex = q.respostaCorreta
+  } else if (typeof q?.correct === 'number' && q.correct >= 0 && q.correct <= 3) {
+    correctIndex = q.correct
+  } else if (typeof q?.correct === 'string') {
+    const keyIdx = ['A', 'B', 'C', 'D'].indexOf(q.correct.toUpperCase())
+    if (keyIdx >= 0) correctIndex = keyIdx
+  }
+
+  const correctText = rawOpts[correctIndex] || rawOpts[0]
+
   const shuffled = shuffle(
-    rawOptions.map((opt, i) => ({
-      key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
-      text: opt,
+    rawOpts.map((text, i) => ({
+      originalIndex: i,
+      text,
     }))
   )
-  const reindexed = shuffled.map((opt, i) => ({
+  const reindexed = shuffled.map((item, i) => ({
     key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
-    text: opt.text,
+    text: item.text,
   }))
   const newCorrectKey = reindexed.find((opt) => opt.text === correctText)?.key ?? 'A'
+  const newCorrectIdx = ['A', 'B', 'C', 'D'].indexOf(newCorrectKey)
+  const explanation = q?.explanation || q?.explicacao || `Resposta correta: ${correctText}`
+
   return {
-    id: q.id,
+    id: q?.id ? String(q.id) : `q_${index + 1}`,
     index: index + 1,
     total,
-    question: cleanQuestionPrompt(q.question),
-    category: q.category,
-    subcategory: q.subcategory,
-    district: q.district,
-    city: q.city,
-    difficulty: q.difficulty,
+    question: cleanPrompt,
+    pergunta: cleanPrompt,
+    category: q?.category || q?.tema || 'geral',
+    subcategory: q?.subcategory || q?.subtema,
+    district: q?.district || q?.distrito,
+    city: q?.city || q?.cidade,
+    difficulty: Number(q?.difficulty || q?.dificuldadeNivel) || 2,
     options: reindexed,
+    opcoes: reindexed.map((o) => o.text) as [string, string, string, string],
     correct: newCorrectKey,
-    explanation: q.explanation || `Resposta correta: ${correctText}`,
-    points: q.difficulty >= 4 ? 300 : q.difficulty === 3 ? 200 : 100,
-    image: q.image,
+    correctAnswer: newCorrectIdx,
+    respostaCorreta: newCorrectIdx,
+    explanation,
+    explicacao: explanation,
+    points: (Number(q?.difficulty) || 2) >= 4 ? 300 : (Number(q?.difficulty) || 2) === 3 ? 200 : 100,
+    image: q?.image || q?.visual?.imageUrl,
   }
 }
 
@@ -197,27 +351,38 @@ function createGameQuestions(
   districtParam?: string | null,
   cityParam?: string | null,
 ): GameQuestion[] {
-  const diff = difficultyParam ? Number(difficultyParam) || 2 : 2
-  const rawPool = loadQuestionsPool(
-    categorySlug,
-    diff,
-    subcategorySlug || undefined,
-    districtParam || undefined,
-    cityParam || undefined
-  )
-  const catLower = (categorySlug || '').toLowerCase().trim()
-  const isNational =
-    !catLower ||
-    catLower === 'desafio-nacional' ||
-    catLower === 'desafio nacional' ||
-    catLower === 'nacional' ||
-    catLower === 'quick' ||
-    catLower === 'todos' ||
-    catLower === 'jogar-tudo'
+  try {
+    const diff = difficultyParam ? Number(difficultyParam) || 2 : 2
+    const rawPool = loadQuestionsPool(
+      categorySlug,
+      diff,
+      subcategorySlug || undefined,
+      districtParam || undefined,
+      cityParam || undefined
+    )
+    const catLower = (categorySlug || '').toLowerCase().trim()
+    const isNational =
+      !catLower ||
+      catLower === 'desafio-nacional' ||
+      catLower === 'desafio nacional' ||
+      catLower === 'nacional' ||
+      catLower === 'quick' ||
+      catLower === 'todos' ||
+      catLower === 'jogar-tudo'
 
-  const recentSet = new Set(getRecentQuestionIds())
-  const selected = selectBalancedMatchQuestions(rawPool, QUESTIONS_PER_GAME, recentSet, isNational)
-  return selected.map((q, i) => formatEngineQuestion(q, i, selected.length))
+    let recentSet = new Set<string>()
+    try {
+      recentSet = new Set(getRecentQuestionIds())
+    } catch {}
+
+    const selected = selectBalancedMatchQuestions(rawPool, QUESTIONS_PER_GAME, recentSet, isNational)
+    if (Array.isArray(selected) && selected.length > 0) {
+      return selected.map((q, i) => formatEngineQuestion(q, i, selected.length))
+    }
+  } catch (err) {
+    console.error('[CRASH /jogar]: Erro na geração de perguntas:', err)
+  }
+  return EMERGENCY_FALLBACK_QUESTIONS
 }
 
 export function QuizScreen({
@@ -254,20 +419,36 @@ export function QuizScreen({
     return 2
   }, [difficultyParam])
 
-  const { user, profile, authResolved, updateProfileLocally } = useAuth()
+  // Contextos globais protegidos
+  const { user, profile, authResolved, profileLoading, updateProfileLocally } = useAuth()
   const { addCoins } = useEconomy()
-  const { playSound, setCurrentStreak, streakEffectId } = useGameTheme()
+  const { playSound, setCurrentStreak } = useGameTheme()
 
-  // Bloqueio Absoluto: Jogadores não autenticados não podem aceder ao Quiz
+  // 1. GESTÃO SEGURA DE AUTENTICAÇÃO E CONVIDADO
+  // Criação automática de fallback anónimo/temporário para convidados jogarem de imediato sem rebentar a app
+  const [guestId, setGuestId] = useState<string>('anon_guest')
   useEffect(() => {
-    if (authResolved && !user && !auth?.currentUser) {
-      const currentUrl = typeof window !== 'undefined' ? window.location.pathname + window.location.search : '/jogar'
-      router.replace(`/entrar?redirect=${encodeURIComponent(currentUrl)}`)
+    try {
+      if (typeof window !== 'undefined') {
+        let storedGuest = localStorage.getItem('ap_guest_player_id')
+        if (!storedGuest) {
+          storedGuest = `anon_${safeRandomUUID().slice(0, 8)}`
+          localStorage.setItem('ap_guest_player_id', storedGuest)
+        }
+        setGuestId(storedGuest)
+      }
+    } catch (err) {
+      console.warn('[QuizScreen] Erro seguro ao ler guestId:', err)
     }
-  }, [authResolved, user, router])
+  }, [])
+
+  const effectiveUserId = user?.uid || guestId
+  const effectiveDisplayName = user?.displayName || profile?.displayName || 'Explorador Convidado'
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
+
+  // Perguntas iniciais seguras
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(() =>
     createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
   )
@@ -276,27 +457,37 @@ export function QuizScreen({
   const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(true)
   const [arenaBurstTrigger, setArenaBurstTrigger] = useState<'correct' | 'wrong' | null>(null)
 
+  // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('equipped_arena')
-      if (saved && saved !== 'arena_palacio_nacional') {
-        setEquippedArenaId(saved)
-      } else if (saved === 'arena_palacio_nacional') {
-        const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
-        if (explicitlyEquipped) {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('equipped_arena')
+        if (saved && saved !== 'arena_palacio_nacional') {
           setEquippedArenaId(saved)
+        } else if (saved === 'arena_palacio_nacional') {
+          const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
+          if (explicitlyEquipped) {
+            setEquippedArenaId(saved)
+          }
         }
       }
+    } catch (err) {
+      console.warn('[QuizScreen] Erro ao ler arena do storage:', err)
     }
   }, [])
 
-  // Resolução Autoritativa da Arena (SSOT): Parâmetro explícito -> Arena equipada -> Padrão da Categoria
+  // Resolução Autoritativa da Arena
   const arenaResolution = useMemo(() => {
-    return resolveArenaForGame({
-      arenaId: arenaParam,
-      categorySlug,
-      equippedArenaId,
-    })
+    try {
+      return resolveArenaForGame({
+        arenaId: arenaParam,
+        categorySlug,
+        equippedArenaId,
+      })
+    } catch (err) {
+      console.warn('[QuizScreen] Erro na resolução da arena:', err)
+      return { arena: null, isExplicit: false, isFallback: true }
+    }
   }, [arenaParam, categorySlug, equippedArenaId])
 
   const activeArena = arenaResolution.arena
@@ -311,35 +502,32 @@ export function QuizScreen({
   const [bestStreak, setBestStreak] = useState(0)
   const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
   const [savingReward, setSavingReward] = useState<boolean>(false)
-  const [syncError, setSyncError] = useState<string | null>(null)
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const recordedAnswersRef = React.useRef<MatchAnswerPayload[]>([])
 
-  // Power-Ups Stock State (Zero por defeito se não comprados)
-  const [stock5050, setStock5050] = useState<number>(0)
-  const [stockFreeze, setStockFreeze] = useState<number>(0)
-  const [stockPublicVote, setStockPublicVote] = useState<number>(0)
+  // Power-Ups Stock State
+  const [stock5050, setStock5050] = useState<number>(1)
+  const [stockFreeze, setStockFreeze] = useState<number>(1)
+  const [stockPublicVote, setStockPublicVote] = useState<number>(1)
   const [eliminatedOptions, setEliminatedOptions] = useState<OptionKey[]>([])
   const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
   // Provocações / Reações no Tabuleiro
-  const [reactionModalOpen, setReactionModalOpen] = useState(false)
   const [reactionCooldown, setReactionCooldown] = useState(0)
-  const [activeReaction, setActiveReaction] = useState<{ icon: string; text: string; timestamp: number } | null>(null)
 
-  // Sincronizar estado e carregar perguntas estritamente anti-repetição (com recuperação de sessão)
+  // Sincronizar estado e carregar perguntas anti-repetição
   useEffect(() => {
     let isCancelled = false
-    // 1. Tentar recuperar sessão ativa de jogo em caso de oscilação ou soft-reload
+
+    // 1. Tentar recuperar sessão ativa de jogo de sessionStorage dentro de try/catch
     if (typeof window !== 'undefined' && gameId) {
       try {
         const savedSession = sessionStorage.getItem(`ap_quiz_state_${gameId}`)
         if (savedSession) {
           const parsed = JSON.parse(savedSession)
           if (parsed && Array.isArray(parsed.quizQuestions) && parsed.quizQuestions.length > 0) {
-            console.log('[QuizScreen] Sessão de jogo recuperada com sucesso da cache local:', gameId)
             setQuizQuestions(parsed.quizQuestions)
             setStep(parsed.step ?? 0)
             setSelected(parsed.selected ?? null)
@@ -361,7 +549,7 @@ export function QuizScreen({
     }
 
     getUniqueMatchQuestions(
-      user?.uid || '',
+      effectiveUserId,
       categorySlug,
       diffLevel,
       QUESTIONS_PER_GAME,
@@ -371,9 +559,15 @@ export function QuizScreen({
     )
       .then((uniqueQuestions) => {
         if (isCancelled) return
-        const formatted = uniqueQuestions.map((q, i) => formatEngineQuestion(q, i, uniqueQuestions.length))
-        recordedAnswersRef.current = []
-        setQuizQuestions(formatted)
+        if (Array.isArray(uniqueQuestions) && uniqueQuestions.length > 0) {
+          const formatted = uniqueQuestions.map((q, i) => formatEngineQuestion(q, i, uniqueQuestions.length))
+          recordedAnswersRef.current = []
+          setQuizQuestions(formatted)
+        } else {
+          const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+          recordedAnswersRef.current = []
+          setQuizQuestions(fallback.length > 0 ? fallback : EMERGENCY_FALLBACK_QUESTIONS)
+        }
         setStep(0)
         setSelected(null)
         setEliminatedOptions([])
@@ -388,11 +582,11 @@ export function QuizScreen({
         setPhase('answering')
       })
       .catch((err) => {
-        console.error('[QuizScreen] Erro ao carregar perguntas anti-repetição:', err)
+        console.error('[CRASH /jogar]: Erro ao carregar perguntas anti-repetição:', err)
         if (!isCancelled) {
           const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
           recordedAnswersRef.current = []
-          setQuizQuestions(fallback)
+          setQuizQuestions(fallback.length > 0 ? fallback : EMERGENCY_FALLBACK_QUESTIONS)
           setStep(0)
           setSelected(null)
           setEliminatedOptions([])
@@ -411,9 +605,9 @@ export function QuizScreen({
     return () => {
       isCancelled = true
     }
-  }, [gameId, categorySlug, subcategorySlug, diffLevel, difficultyParam, districtParam, cityParam, user?.uid])
+  }, [gameId, categorySlug, subcategorySlug, diffLevel, difficultyParam, districtParam, cityParam, effectiveUserId])
 
-  // Persistir estado da sessão ativa de jogo a cada passo / pontuação
+  // Persistir sessão ativa com try/catch
   useEffect(() => {
     if (typeof window === 'undefined' || !gameId || quizQuestions.length === 0) return
     if (phase === 'finished') {
@@ -457,22 +651,13 @@ export function QuizScreen({
     router.push('/jogar')
   }, [router])
 
-  // Cooldown de reações
-  useEffect(() => {
-    if (reactionCooldown <= 0) return
-    const timer = setInterval(() => {
-      setReactionCooldown((prev) => Math.max(0, prev - 1))
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [reactionCooldown])
-
-  // Real-time power-ups stock synchronization
+  // Sincronização segura de power-ups stock
   useEffect(() => {
     const syncStock = () => {
       try {
-        let h5050 = 0
-        let fTime = 0
-        let pVote = 0
+        let h5050 = 1
+        let fTime = 1
+        let pVote = 1
 
         const savedConsumables = localStorage.getItem('user_consumables')
         if (savedConsumables) {
@@ -487,7 +672,7 @@ export function QuizScreen({
 
         const savedF = localStorage.getItem('user_freezeTime')
         if (savedF !== null) fTime = Number(savedF) || 0
-        
+
         const savedP = localStorage.getItem('user_publicVote')
         if (savedP !== null) pVote = Number(savedP) || 0
 
@@ -495,18 +680,13 @@ export function QuizScreen({
           if (typeof profile.consumables.help5050 === 'number') h5050 = profile.consumables.help5050
           if (typeof profile.consumables.freezeTime === 'number') fTime = profile.consumables.freezeTime
           if (typeof (profile.consumables as any).publicVote === 'number') pVote = (profile.consumables as any).publicVote
-        } else if ((profile as any)?.inventory?.utilities) {
-          const utils = (profile as any).inventory.utilities
-          if (typeof utils.fiftyFifty === 'number') h5050 = utils.fiftyFifty
-          if (typeof utils.freezeTime === 'number') fTime = utils.freezeTime
-          if (typeof utils.publicVote === 'number') pVote = utils.publicVote
         }
 
         setStock5050(h5050)
         setStockFreeze(fTime)
         setStockPublicVote(pVote)
       } catch (err) {
-        console.error('Erro ao sincronizar stock:', err)
+        console.warn('[QuizScreen] Aviso ao sincronizar stock:', err)
       }
     }
 
@@ -522,41 +702,33 @@ export function QuizScreen({
     }
   }, [profile])
 
-  const total = quizQuestions?.length || 0
-  const q = (quizQuestions && quizQuestions.length > step ? quizQuestions[step] : quizQuestions?.[0]) || null
-
-  const handleTriggerReaction = (emote: EmoteItem) => {
-    if (reactionCooldown > 0) return
-    setReactionCooldown(3)
-    setReactionModalOpen(false)
-
-    playEmoteSound(emote.label)
-
-    const now = Date.now()
-    setActiveReaction({
-      icon: emote.emoji,
-      text: emote.label,
-      timestamp: now,
-    })
-    setTimeout(() => {
-      setActiveReaction(null)
-    }, 2500)
-
-    try {
-      const eventPayload = {
-        event: 'taunt',
-        type: 'PLAYER_REACTION',
-        senderId: user?.uid || profile?.uid || 'player',
-        taunt: { icon: emote.emoji, text: emote.label },
-        timestamp: now,
-      }
-      window.dispatchEvent(new CustomEvent('PLAYER_REACTION', { detail: eventPayload }))
-    } catch {}
+  // BLINDAGEM DO CICLO DE VIDA DA SESSÃO FIREBASE
+  // Não inicia a montagem do tabuleiro nem renderiza HUD sem a sessão de autenticação resolvida
+  if (!authResolved || (user && profileLoading)) {
+    return <LoadingQuiz message="A sincronizar sessão de jogo..." submessage="A preparar perfil e progresso..." />
   }
 
-  // 1. Power-Up: 50/50
+  // BLINDAGEM DO BANCO DE PERGUNTAS (EXIGÊNCIA DE ROBUSTEZ)
+  const questions = quizQuestions
+  const currentIndex = step
+
+  // 1. Validar existência e tamanho do array
+  if (!questions || !Array.isArray(questions) || questions.length === 0) {
+    return <LoadingQuiz message="A preparar perguntas do desafio..." />
+  }
+
+  // 2. Nunca assumir que questions[currentIndex] existe. Usar encadeamento opcional e fallbacks seguros
+  const currentQuestion = questions[currentIndex] || questions[0]
+  if (!currentQuestion?.opcoes || !currentQuestion?.pergunta) {
+    return <LoadingQuiz message="A carregar questão..." />
+  }
+
+  const q = currentQuestion
+  const total = questions.length
+
+  // Power-Ups Handlers protegidos
   const handleUse5050 = async () => {
-    if (stock5050 <= 0 || eliminatedOptions.length > 0 || phase !== 'answering' || !q || !q?.options) return
+    if (stock5050 <= 0 || eliminatedOptions.length > 0 || phase !== 'answering' || !q?.options) return
 
     const eliminated = calculate5050Eliminated(q.options, q.correct)
     setEliminatedOptions(eliminated)
@@ -570,7 +742,7 @@ export function QuizScreen({
       const parsed = saved ? JSON.parse(saved) : {}
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, help5050: newStock }))
 
-      if (auth.currentUser) {
+      if (auth?.currentUser?.uid) {
         const res = await useConsumablePowerUp(auth.currentUser.uid, 'consumable_50_50')
         if (res.success) {
           setStock5050(res.remainingCount)
@@ -579,11 +751,10 @@ export function QuizScreen({
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
     } catch (e) {
-      console.error('Erro ao debitar 50/50:', e)
+      console.warn('[QuizScreen] Aviso ao debitar 50/50:', e)
     }
   }
 
-  // 2. Power-Up: Freeze Time
   const handleUseFreeze = async () => {
     if (stockFreeze <= 0 || isFrozen || phase !== 'answering') return
 
@@ -599,7 +770,7 @@ export function QuizScreen({
       const parsed = saved ? JSON.parse(saved) : {}
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, freezeTime: newStock }))
 
-      if (auth.currentUser) {
+      if (auth?.currentUser?.uid) {
         const res = await useConsumablePowerUp(auth.currentUser.uid, 'consumable_congelar_tempo')
         if (res.success) {
           setStockFreeze(res.remainingCount)
@@ -608,13 +779,12 @@ export function QuizScreen({
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
     } catch (e) {
-      console.error('Erro ao debitar Congelar Tempo:', e)
+      console.warn('[QuizScreen] Aviso ao debitar Congelar Tempo:', e)
     }
   }
 
-  // 3. Power-Up: Pergunta ao Público (Votação Simulada)
   const handleUsePublicVote = async () => {
-    if (stockPublicVote <= 0 || publicVoteResults !== null || phase !== 'answering' || !q || !q?.options) return
+    if (stockPublicVote <= 0 || publicVoteResults !== null || phase !== 'answering' || !q?.options) return
 
     const correctIdx = q.options.findIndex((opt) => opt.key === q.correct)
     const results = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
@@ -629,7 +799,7 @@ export function QuizScreen({
       const parsed = saved ? JSON.parse(saved) : {}
       localStorage.setItem('user_consumables', JSON.stringify({ ...parsed, publicVote: newStock }))
 
-      if (auth.currentUser) {
+      if (auth?.currentUser?.uid) {
         const res = await useConsumablePowerUp(auth.currentUser.uid, 'HELP_005')
         if (res.success) {
           setStockPublicVote(res.remainingCount)
@@ -638,7 +808,7 @@ export function QuizScreen({
       window.dispatchEvent(new Event('consumables_updated'))
       window.dispatchEvent(new Event('inventory_updated'))
     } catch (e) {
-      console.error('Erro ao debitar Pergunta ao Público:', e)
+      console.warn('[QuizScreen] Aviso ao debitar Pergunta ao Público:', e)
     }
   }
 
@@ -670,17 +840,19 @@ export function QuizScreen({
 
       const hit = choice === q.correct
 
-      // Registo da resposta canónica com metadados para reconstrução determinística
-      recordedAnswersRef.current.push({
-        questionId: String(q.id),
-        categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
-        category: q.category,
-        subcategory: q.subcategory,
-        prompt: q.question,
-        selectedOption: choice || '',
-        isCorrect: hit,
-        answeredAt: Date.now(),
-      })
+      // Registo da resposta canónica para relatório final
+      try {
+        recordedAnswersRef.current.push({
+          questionId: String(q.id),
+          categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
+          category: q.category,
+          subcategory: q.subcategory,
+          prompt: q.question,
+          selectedOption: choice || '',
+          isCorrect: hit,
+          answeredAt: Date.now(),
+        })
+      } catch {}
 
       if (hit) {
         setArenaBurstTrigger('correct')
@@ -714,10 +886,10 @@ export function QuizScreen({
 
       setPhase('revealed')
     },
-    [phase, q, seconds, streak, playSound, setCurrentStreak],
+    [phase, q, seconds, streak, playSound, setCurrentStreak]
   )
 
-  // Main Question Countdown Timer
+  // Question Countdown Timer
   useEffect(() => {
     if (phase !== 'answering' || isFrozen) {
       return
@@ -765,64 +937,56 @@ export function QuizScreen({
     async (gid: string, finalResult: QuizResult) => {
       if (rewardOutcome && !rewardOutcome.alreadyProcessed) return
 
-      if (!user) {
-        // Utilizador Convidado / Sessão Local: calcular e persistir localmente para feedback imediato
-        const savedXp = Number(localStorage.getItem('user_xp') || 0)
-        const savedCoins = Number(localStorage.getItem('user_coins') || 50)
-        const newTotalXp = savedXp + finalResult.xp
-        const newTotalCoins = savedCoins + finalResult.euros
-        const oldLevel = calculateLevelProgress(savedXp).currentLevel.level
-        const newLevel = calculateLevelProgress(newTotalXp).currentLevel.level
-
+      // Utilizador Convidado (sem conta autenticada): processamento local 100% seguro sem crash
+      if (!user?.uid) {
         try {
+          const savedXp = Number(localStorage.getItem('user_xp') || 0)
+          const savedCoins = Number(localStorage.getItem('user_coins') || 50)
+          const newTotalXp = savedXp + finalResult.xp
+          const newTotalCoins = savedCoins + finalResult.euros
+          const oldLevel = calculateLevelProgress(savedXp).currentLevel.level
+          const newLevel = calculateLevelProgress(newTotalXp).currentLevel.level
+
           localStorage.setItem('user_xp', String(newTotalXp))
           localStorage.setItem('user_coins', String(newTotalCoins))
           localStorage.setItem('user_euros', String(newTotalCoins))
           localStorage.setItem('user_level', String(newLevel))
-        } catch {}
 
-        const guestOutcome: MatchRewardOutcome = {
-          alreadyProcessed: false,
-          matchId: gid,
-          xpEarned: finalResult.xp,
-          coinsEarned: finalResult.euros,
-          oldXp: savedXp,
-          newTotalXp: newTotalXp,
-          oldCoins: savedCoins,
-          newTotalCoins: newTotalCoins,
-          oldLevel: oldLevel,
-          newLevel: newLevel,
-          leveledUp: newLevel > oldLevel,
-          levelTitle: calculateLevelProgress(newTotalXp).currentLevel.title,
-          oldStreak: 0,
-          newStreak: 1,
-          unlockedAchievements: [],
-          completedMissions: [],
-        }
-
-        setRewardOutcome(guestOutcome)
-        if (updateProfileLocally) {
-          updateProfileLocally({
-            xp: newTotalXp,
-            level: newLevel,
-            coins: newTotalCoins,
-            euros: newTotalCoins,
-            streak: 1,
-          })
+          const guestOutcome: MatchRewardOutcome = {
+            alreadyProcessed: false,
+            matchId: gid,
+            xpEarned: finalResult.xp,
+            coinsEarned: finalResult.euros,
+            oldXp: savedXp,
+            newTotalXp: newTotalXp,
+            oldCoins: savedCoins,
+            newTotalCoins: newTotalCoins,
+            oldLevel: oldLevel,
+            newLevel: newLevel,
+            leveledUp: newLevel > oldLevel,
+            levelTitle: calculateLevelProgress(newTotalXp).currentLevel.title,
+            oldStreak: 0,
+            newStreak: 1,
+            unlockedAchievements: [],
+            completedMissions: [],
+          }
+          setRewardOutcome(guestOutcome)
+        } catch (e) {
+          console.warn('[QuizScreen] Erro ao gravar progresso local de convidado:', e)
         }
         return
       }
 
+      // Utilizador Autenticado: Gravação na nuvem com tratamento de exceções
       setSavingReward(true)
-      setSyncError(null)
       try {
-        const answeredIds = quizQuestions.map((q) => String(q.id)).filter(Boolean)
-        if (answeredIds.length > 0) {
+        const answeredIds = quizQuestions.map((quest) => String(quest.id)).filter(Boolean)
+        if (answeredIds.length > 0 && user?.uid) {
           void saveAnsweredQuestions(user.uid, answeredIds)
         }
 
         const outcome = await awardMatchReward({
-          userId: user.uid,
+          userId: user?.uid || effectiveUserId,
           matchId: gid,
           categorySlug: categorySlug || 'geral',
           categoryName: category?.name || 'Portugal',
@@ -860,18 +1024,15 @@ export function QuizScreen({
             level: outcome.newLevel,
             coins: outcome.newTotalCoins,
             euros: outcome.newTotalCoins,
-            streak: outcome.newStreak,
-            categoryStats: outcome.categoryStats,
           })
         }
-      } catch (error: any) {
-        console.error('[QUIZ] Erro ao atribuir recompensa da partida:', error)
-        setSyncError(error?.message || 'Falha de comunicação com o servidor ao gravar recompensa.')
+      } catch (err) {
+        console.error('[CRASH /jogar]: Erro na atribuição de recompensa:', err)
       } finally {
         setSavingReward(false)
       }
     },
-    [user, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome]
+    [user?.uid, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome]
   )
 
   const next = () => {
@@ -911,7 +1072,6 @@ export function QuizScreen({
     setBestStreak(0)
     setRewardOutcome(null)
     setSavingReward(false)
-    setSyncError(null)
     setPhase('answering')
   }
 
@@ -929,18 +1089,14 @@ export function QuizScreen({
       ? { from: previousLevel, to: userProfile.level }
       : undefined
 
-  if (!q) {
-    return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
-        <div className="h-12 w-12 rounded-full border-4 border-primary/30 border-t-primary animate-spin" />
-        <p className="mt-4 font-display text-lg font-bold text-foreground">
-          A preparar o teu desafio...
-        </p>
-        <p className="text-xs text-muted-foreground">A carregar perguntas de {category?.name || 'Portugal'}.</p>
-      </div>
-    )
+  // SEÇÃO DE RENDERIZAÇÃO
+  // 1. Se a sessão de autenticação estiver a carregar inicialmente, exibe espera neutra
+  const isAuthInitializing = !authResolved || profileLoading
+  if (isAuthInitializing && !user) {
+    return <LoadingQuiz message="A verificar sessão de jogo..." />
   }
 
+  // 2. Fim de jogo: Apresentar ecrã de resultados
   if (phase === 'finished') {
     return (
       <div className="min-h-screen w-full overflow-y-auto px-3 sm:px-4 py-6 sm:py-8 pb-24">
@@ -948,12 +1104,14 @@ export function QuizScreen({
           <ResultScreen
             result={result}
             gameId={gameId}
-            levelUpInfo={levelUpInfo}
+            onRestart={restart}
+            categoryTitle={category?.name || 'Desafio Nacional'}
+            difficultyLabel={diffLevel >= 4 ? 'DIFÍCIL' : diffLevel === 3 ? 'MÉDIO' : 'NORMAL'}
             rewardOutcome={rewardOutcome}
             savingReward={savingReward}
-            syncError={syncError}
-            onGameEnd={processMatchCompletion}
-            onReplay={restart}
+            levelUpInfo={levelUpInfo}
+            answers={recordedAnswersRef.current}
+            onExit={handleAbandonSolo}
           />
         </div>
       </div>
@@ -973,32 +1131,7 @@ export function QuizScreen({
     return 'muted'
   }
 
-  // Barreira Visual Imediata: Não renderizar perguntas a jogadores não autenticados
-  if (authResolved && !user && !auth?.currentUser) {
-    return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center text-center px-4">
-        <div className="rounded-3xl border border-amber-500/40 bg-slate-900/95 p-8 max-w-md backdrop-blur-xl shadow-2xl text-white">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 animate-pulse">
-            <Lock className="h-7 w-7" />
-          </div>
-          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-white">
-            Login Obrigatório
-          </h2>
-          <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Para responder a perguntas e pontuar em qualquer modo de jogo, precisas de ter sessão iniciada.
-          </p>
-          <Link
-            href={`/entrar?redirect=${encodeURIComponent(typeof window !== 'undefined' ? window.location.pathname + window.location.search : '/jogar')}`}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-emerald-500/25 transition cursor-pointer"
-          >
-            Entrar com a Minha Conta
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
-  // 0. FAIL-LOUD: Se a arena for inválida ou falhar resolução, NUNCA usar Palácio Nacional silencioso
+  // Resolução da Arena
   if (arenaResolution.error || !activeArena) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center p-4">
@@ -1014,18 +1147,18 @@ export function QuizScreen({
 
   return (
     <>
-      {/* 0. INTRODUÇÃO CINEMATOGRÁFICA DE ABERTURA DA ARENA (1-2s) */}
+      {/* 0. INTRODUÇÃO CINEMATOGRÁFICA DA ARENA */}
       {showCinematicIntro && activeArena && (
         <ArenaCinematicIntro
           arena={activeArena}
-          playerName={user?.displayName || profile?.displayName || 'CAMPEÃO NACIONAL'}
-          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'MESTRE'}
+          playerName={effectiveDisplayName}
+          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'CONVIDADO'}
           onComplete={() => setShowCinematicIntro(false)}
           onSkip={() => setShowCinematicIntro(false)}
         />
       )}
 
-      {/* Camada Master da Arena: Arte 2150, Iluminação Volumétrica e Partículas Vivas */}
+      {/* Camada Master da Arena */}
       {activeArena && (
         <ArenaRenderer
           arenaId={activeArena.id}
@@ -1039,278 +1172,280 @@ export function QuizScreen({
       )}
 
       <div className="relative min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
-      {/* ========================================================= */}
-      {/* 1. CABEÇALHO SOLO (TOPO COMPACTO SHRINK-0)                 */}
-      {/* ========================================================= */}
-      <div className="w-full shrink-0">
-        <div className="w-full flex items-center justify-between px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl shadow-md">
-          {/* Lado Esquerdo: Botão Desistir/Sair + Avatar + Nome/Nível */}
-          <div className="flex items-center gap-2 min-w-0">
-            <GameExitControl
-              mode="solo"
-              onConfirmExit={handleAbandonSolo}
-            />
-            <div className="shrink-0 w-8 h-8 flex items-center justify-center">
-              <PlayerAvatar profile={profile ?? undefined} displayName={user?.displayName || profile?.displayName || 'Tu'} isCurrentUser={true} size="sm" />
+        {/* ========================================================= */}
+        {/* 1. CABEÇALHO SOLO COMPACTO                                */}
+        {/* ========================================================= */}
+        <div className="w-full shrink-0">
+          <div className="w-full flex items-center justify-between px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl shadow-md">
+            {/* Lado Esquerdo: Sair + Avatar + Jogador */}
+            <div className="flex items-center gap-2 min-w-0">
+              <GameExitControl mode="solo" onConfirmExit={handleAbandonSolo} />
+              <div className="shrink-0 w-8 h-8 flex items-center justify-center">
+                <PlayerAvatar
+                  profile={profile ?? undefined}
+                  displayName={effectiveDisplayName}
+                  isCurrentUser={true}
+                  size="sm"
+                />
+              </div>
+              <div className="min-w-0">
+                <span className="font-display text-xs font-bold text-white truncate block leading-none">
+                  {effectiveDisplayName}
+                </span>
+                <span className="text-[10px] text-muted-foreground leading-none mt-0.5 block font-medium">
+                  {profile?.level ? `Nível ${profile.level}` : 'Convidado'}
+                </span>
+              </div>
             </div>
-            <div className="min-w-0">
-              <span className="font-display text-xs font-bold text-white truncate block leading-none">
-                {user?.displayName || profile?.displayName || 'Jogador'}
+
+            {/* Centro: Progresso da Ronda */}
+            <div className="flex items-center px-1.5 shrink-0">
+              <span className="badge-hud text-gold border-gold/50 bg-gold/20 py-0.5 px-2 text-[10px] font-black rounded-lg">
+                Q{step + 1}/{total}
               </span>
-              <span className="text-[10px] text-muted-foreground leading-none mt-0.5 block font-medium">
-                Nível {profile?.level || 1}
-              </span>
             </div>
-          </div>
 
-          {/* Centro: Progresso da Ronda */}
-          <div className="flex items-center px-1.5 shrink-0">
-            <span className="badge-hud text-gold border-gold/50 bg-gold/20 py-0.5 px-2 text-[10px] font-black rounded-lg">
-              Q{step + 1}/{total}
-            </span>
-          </div>
-
-          {/* Lado Direito: Pontuação Atual + Tempo */}
-          <div className="flex flex-col items-end shrink-0">
-            <div className="flex items-center gap-1 font-display text-xs font-bold text-cyan-400">
-              <Sparkles className="h-3 w-3 text-gold" />
-              <span>{score} pts</span>
-            </div>
-            <span className={cn(
-              'font-mono text-[10px] font-bold mt-0.5 leading-none',
-              seconds <= WARNING_TIME_THRESHOLD ? 'text-flag-red animate-pulse' : 'text-slate-400'
-            )}>
-              {seconds}s
-            </span>
-          </div>
-        </div>
-
-        {/* Barra de Tempo Compacta */}
-        <div className="flex items-center gap-1 mt-1.5 w-full px-0.5">
-          <div className={cn(
-            'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
-            seconds <= WARNING_TIME_THRESHOLD ? 'border-flag-red/60' : 'border-slate-700/40'
-          )}>
-            <div
-              className={cn(
-                'h-full rounded-full transition-all duration-1000 ease-linear shadow-sm',
-                seconds > 15
-                  ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
-                  : seconds > WARNING_TIME_THRESHOLD
-                    ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
-                    : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
-              )}
-              style={{ width: `${(seconds / MAX_SECONDS) * 100}%` }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================================= */}
-      {/* 2. ZONA CENTRAL: CARD DA PERGUNTA (MY-AUTO, H-AUTO)        */}
-      {/* ========================================================= */}
-      <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
-        {/* Feedback visual instantâneo overlay */}
-        {phase === 'revealed' && (
-          <div
-            className={cn(
-              'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
-              selected === q.correct
-                ? 'bg-primary/30 border border-primary text-primary text-glow-primary'
-                : selected === null
-                  ? 'bg-gold/30 border border-gold text-gold text-glow-gold'
-                  : 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red'
-            )}
-          >
-            {selected === q.correct ? (
-              <>
-                <CheckCircle2 className="h-4 w-4 shrink-0" />
-                <span className="break-words">Resposta Correta! (+{q.points} pts)</span>
-              </>
-            ) : selected === null ? (
-              <>
-                <Clock className="h-4 w-4 shrink-0" />
-                <span className="break-words">Tempo Esgotado!</span>
-              </>
-            ) : (
-              <>
-                <XCircle className="h-4 w-4 shrink-0" />
-                <span className="break-words">Resposta Incorreta</span>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* Card da Pergunta: focado exclusivamente no texto da pergunta */}
-        <div className="w-full min-h-[100px] h-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
-          <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
-            {q.question}
-          </h1>
-
-          {/* Explicação resumida quando revelada */}
-          {phase === 'revealed' && q.explanation && (
-            <p className="mt-3 text-xs sm:text-sm text-slate-300 border-t border-white/10 pt-2.5 break-words leading-relaxed w-full">
-              {q.explanation}
-            </p>
-          )}
-
-          {/* HUD Diagnóstico de Runtime (Auditável em Tempo Real) */}
-          <div className="mt-3 w-full flex flex-wrap items-center justify-center gap-1.5 px-2.5 py-1 rounded-xl border border-white/10 bg-black/40 text-[10px] font-mono text-slate-400 select-all">
-            <span className="text-emerald-400 font-bold">ID: {q.id}</span>
-            <span className="text-white/20">•</span>
-            <span>Fonte: <strong className="text-slate-200">QuestionRegistry</strong></span>
-            <span className="text-white/20">•</span>
-            <span>Cat: <strong className="text-cyan-300">{q.category}</strong></span>
-            {q.subcategory && (
-              <>
-                <span className="text-white/20">•</span>
-                <span>Sub: <strong className="text-amber-300">{q.subcategory}</strong></span>
-              </>
-            )}
-            <span className="text-white/20">•</span>
-            <span>Sessão: <strong className="text-purple-300">NVL {diffLevel}</strong></span>
-            <span className="text-white/20">•</span>
-            <span>Torneio: <strong className="text-slate-300">{gameId ? gameId.slice(0, 8) : 'SOLO'}</strong></span>
-            <span className="text-white/20">•</span>
-            <span>Dif: <strong className="text-rose-300">{q.difficulty}/5</strong></span>
-            <span className="text-white/20">•</span>
-            <button
-              type="button"
-              onClick={() => setIsReportModalOpen(true)}
-              className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition cursor-pointer font-bold px-1.5 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
-              title="Reportar erro editorial nesta pergunta"
-            >
-              <Flag className="h-2.5 w-2.5 text-amber-400" />
-              <span>Reportar</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Freeze Banner no Solo */}
-        {isFrozen && (
-          <div className="mt-2 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
-            <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
-            <span className="font-bold">Tempo Congelado ({freezeTimeLeft}s)</span>
-          </div>
-        )}
-      </div>
-
-      {/* ========================================================= */}
-      {/* 3. FUNDO: PODERES + GRELHA DE RESPOSTAS RESPONSIVA        */}
-      {/* ========================================================= */}
-      <div className="w-full flex flex-col gap-2 shrink-0">
-        {/* Barra de Ajudas OU Botão Próxima Pergunta */}
-        {phase === 'revealed' ? (
-          <div className="flex justify-center my-1 shrink-0">
-            <button
-              type="button"
-              onClick={next}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
-            >
-              <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        ) : (
-          <div className="flex justify-center gap-3 my-1 shrink-0">
-            <QuizPowerUpsBar
-              stock5050={stock5050}
-              stockFreeze={stockFreeze}
-              stockPublicVote={stockPublicVote}
-              used5050={eliminatedOptions.length > 0}
-              usedPublicVote={publicVoteResults !== null}
-              isFrozen={isFrozen}
-              freezeTimeLeft={freezeTimeLeft}
-              onUse5050={handleUse5050}
-              onUseFreeze={handleUseFreeze}
-              onUsePublicVote={handleUsePublicVote}
-            />
-          </div>
-        )}
-
-        {/* Grelha de Respostas 100% Adaptativa (1 coluna em mobile, 2 colunas em tablets/desktops) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full">
-          {q.options.map((option, idx) => {
-            const isEliminated = eliminatedOptions.includes(option.key)
-            const state = stateFor(option.key)
-            const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
-
-            if (isEliminated) {
-              return (
-                <div
-                  key={option.key}
-                  className="min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
-                >
-                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 line-through">
-                    {optionKey}
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
-                    {option.text}
-                  </span>
-                </div>
-              )
-            }
-
-            let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
-
-            if (phase === 'revealed') {
-              if (state === 'correct') {
-                buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
-              } else if (state === 'wrong') {
-                buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
-              } else {
-                buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
-              }
-            }
-
-            return (
-              <button
-                key={option.key}
-                disabled={phase !== 'answering'}
-                onClick={() => reveal(option.key)}
+            {/* Lado Direito: Pontuação Atual + Tempo */}
+            <div className="flex flex-col items-end shrink-0">
+              <div className="flex items-center gap-1 font-display text-xs font-bold text-cyan-400">
+                <Sparkles className="h-3 w-3 text-gold" />
+                <span>{score} pts</span>
+              </div>
+              <span
                 className={cn(
-                  'min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
-                  buttonStyles
+                  'font-mono text-[10px] font-bold mt-0.5 leading-none',
+                  seconds <= WARNING_TIME_THRESHOLD ? 'text-flag-red animate-pulse' : 'text-slate-400'
                 )}
               >
-                <span
+                {seconds}s
+              </span>
+            </div>
+          </div>
+
+          {/* Barra de Tempo Compacta */}
+          <div className="flex items-center gap-1 mt-1.5 w-full px-0.5">
+            <div
+              className={cn(
+                'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+                seconds <= WARNING_TIME_THRESHOLD ? 'border-flag-red/60' : 'border-slate-700/40'
+              )}
+            >
+              <div
+                className={cn(
+                  'h-full rounded-full transition-all duration-1000 ease-linear shadow-sm',
+                  seconds > 15
+                    ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
+                    : seconds > WARNING_TIME_THRESHOLD
+                      ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
+                      : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
+                )}
+                style={{ width: `${(seconds / MAX_SECONDS) * 100}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* 2. ZONA CENTRAL: CARD DA PERGUNTA                         */}
+        {/* ========================================================= */}
+        <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
+          {/* Feedback visual instantâneo overlay */}
+          {phase === 'revealed' && (
+            <div
+              className={cn(
+                'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
+                selected === q.correct
+                  ? 'bg-primary/30 border border-primary text-primary text-glow-primary'
+                  : selected === null
+                    ? 'bg-gold/30 border border-gold text-gold text-glow-gold'
+                    : 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red'
+              )}
+            >
+              {selected === q.correct ? (
+                <>
+                  <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <span className="break-words">Resposta Correta! (+{q.points} pts)</span>
+                </>
+              ) : selected === null ? (
+                <>
+                  <Clock className="h-4 w-4 shrink-0" />
+                  <span className="break-words">Tempo Esgotado!</span>
+                </>
+              ) : (
+                <>
+                  <XCircle className="h-4 w-4 shrink-0" />
+                  <span className="break-words">Resposta Incorreta</span>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Card da Pergunta */}
+          <div className="w-full min-h-[100px] h-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
+            <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
+              {q.question || q.pergunta}
+            </h1>
+
+            {/* Explicação contextual */}
+            {phase === 'revealed' && (q.explanation || q.explicacao) && (
+              <p className="mt-3 text-xs sm:text-sm text-slate-300 border-t border-white/10 pt-2.5 break-words leading-relaxed w-full">
+                {q.explanation || q.explicacao}
+              </p>
+            )}
+
+            {/* HUD Diagnóstico de Runtime */}
+            <div className="mt-3 w-full flex flex-wrap items-center justify-center gap-1.5 px-2.5 py-1 rounded-xl border border-white/10 bg-black/40 text-[10px] font-mono text-slate-400 select-all">
+              <span className="text-emerald-400 font-bold">ID: {q.id}</span>
+              <span className="text-white/20">•</span>
+              <span>Cat: <strong className="text-cyan-300">{q.category}</strong></span>
+              {q.subcategory && (
+                <>
+                  <span className="text-white/20">•</span>
+                  <span>Sub: <strong className="text-amber-300">{q.subcategory}</strong></span>
+                </>
+              )}
+              <span className="text-white/20">•</span>
+              <span>NVL: <strong className="text-purple-300">{diffLevel}</strong></span>
+              <span className="text-white/20">•</span>
+              <button
+                type="button"
+                onClick={() => setIsReportModalOpen(true)}
+                className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition cursor-pointer font-bold px-1.5 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
+                title="Reportar erro editorial nesta pergunta"
+              >
+                <Flag className="h-2.5 w-2.5 text-amber-400" />
+                <span>Reportar</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Banner de tempo congelado */}
+          {isFrozen && (
+            <div className="mt-2 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+              <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
+              <span className="font-bold">Tempo Congelado ({freezeTimeLeft}s)</span>
+            </div>
+          )}
+        </div>
+
+        {/* ========================================================= */}
+        {/* 3. FUNDO: PODERES + GRELHA DE RESPOSTAS                   */}
+        {/* ========================================================= */}
+        <div className="w-full flex flex-col gap-2 shrink-0">
+          {/* Barra de Ajudas OU Botão Próxima Pergunta */}
+          {phase === 'revealed' ? (
+            <div className="flex justify-center my-1 shrink-0">
+              <button
+                type="button"
+                onClick={next}
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+              >
+                <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-center gap-3 my-1 shrink-0">
+              <QuizPowerUpsBar
+                stock5050={stock5050}
+                stockFreeze={stockFreeze}
+                stockPublicVote={stockPublicVote}
+                used5050={eliminatedOptions.length > 0}
+                usedPublicVote={publicVoteResults !== null}
+                isFrozen={isFrozen}
+                freezeTimeLeft={freezeTimeLeft}
+                onUse5050={handleUse5050}
+                onUseFreeze={handleUseFreeze}
+                onUsePublicVote={handleUsePublicVote}
+              />
+            </div>
+          )}
+
+          {/* Grelha de Respostas Adaptativa */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full">
+            {q.options.map((option, idx) => {
+              const isEliminated = eliminatedOptions.includes(option.key)
+              const state = stateFor(option.key)
+              const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
+
+              if (isEliminated) {
+                return (
+                  <div
+                    key={option.key}
+                    className="min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                  >
+                    <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 line-through">
+                      {optionKey}
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
+                      {option.text}
+                    </span>
+                  </div>
+                )
+              }
+
+              let buttonStyles =
+                'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
+
+              if (phase === 'revealed') {
+                if (state === 'correct') {
+                  buttonStyles =
+                    'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
+                } else if (state === 'wrong') {
+                  buttonStyles =
+                    'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+                } else {
+                  buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+                }
+              }
+
+              return (
+                <button
+                  key={option.key}
+                  disabled={phase !== 'answering'}
+                  onClick={() => reveal(option.key)}
                   className={cn(
-                    'w-7 h-7 sm:w-8 sm:h-8 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border transition-colors',
-                    phase === 'revealed' && state === 'correct'
-                      ? 'bg-emerald-500 border-emerald-300 text-slate-950'
-                      : phase === 'revealed' && state === 'wrong'
-                        ? 'bg-rose-600 border-rose-400 text-white'
-                        : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30'
+                    'min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
+                    buttonStyles
                   )}
                 >
-                  {optionKey}
-                </span>
-                <span className="text-xs sm:text-sm font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
-                  {option.text}
-                </span>
+                  <span
+                    className={cn(
+                      'w-7 h-7 sm:w-8 sm:h-8 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border transition-colors',
+                      phase === 'revealed' && state === 'correct'
+                        ? 'bg-emerald-500 border-emerald-300 text-slate-950'
+                        : phase === 'revealed' && state === 'wrong'
+                          ? 'bg-rose-600 border-rose-400 text-white'
+                          : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30'
+                    )}
+                  >
+                    {optionKey}
+                  </span>
+                  <span className="text-xs sm:text-sm font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
+                    {option.text}
+                  </span>
 
-                {/* Exibe a percentagem se a votação do público foi usada */}
-                {publicVoteResults && publicVoteResults[idx] !== undefined && (
-                  <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
-                    <span className="text-[10px]">👥</span>
-                    <span>{publicVoteResults[idx]}%</span>
-                  </div>
-                )}
-              </button>
-            )
-          })}
+                  {publicVoteResults && publicVoteResults[idx] !== undefined && (
+                    <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
+                      <span className="text-[10px]">👥</span>
+                      <span>{publicVoteResults[idx]}%</span>
+                    </div>
+                  )}
+                </button>
+              )
+            })}
+          </div>
         </div>
-      </div>
 
-      <QuestionReportModal
-        isOpen={isReportModalOpen}
-        onClose={() => setIsReportModalOpen(false)}
-        questionId={q.id || 0}
-        questionText={q.question || ''}
-        categoryName={category?.name}
-        user={user}
-      />
-    </div>
-  </>
+        <QuestionReportModal
+          isOpen={isReportModalOpen}
+          onClose={() => setIsReportModalOpen(false)}
+          questionId={q?.id ? Number(q.id) || 0 : 0}
+          questionText={q?.question || q?.pergunta || ''}
+          categoryName={category?.name}
+          user={user ?? null}
+        />
+      </div>
+    </>
   )
 }

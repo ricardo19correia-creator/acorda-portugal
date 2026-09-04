@@ -2,11 +2,12 @@
 
 import React, {
   createContext,
-  useCallback,
   useContext,
-  useEffect,
-  useMemo,
   useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
   type ReactNode,
 } from 'react'
 import {
@@ -36,16 +37,22 @@ const EconomyContext = createContext<EconomyContextType | null>(null)
 
 export function EconomyProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth()
-  const [coins, setCoins] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
-      if (saved && !isNaN(Number(saved))) {
-        return Number(saved)
-      }
-    }
-    return 0
-  })
+  const [coins, setCoins] = useState<number>(0)
   const [isBalancePulsing, setIsBalancePulsing] = useState(false)
+
+  // Leitura segura de localStorage exclusivamente dentro de useEffect (elimina Hydration Mismatch #418)
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
+        if (saved && !isNaN(Number(saved))) {
+          setCoins(Number(saved))
+        }
+      }
+    } catch (err) {
+      console.warn('[EconomyProvider] Erro ao carregar moedas locais:', err)
+    }
+  }, [])
 
   const triggerPulse = useCallback(() => {
     setIsBalancePulsing(true)

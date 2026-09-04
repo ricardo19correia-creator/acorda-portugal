@@ -1,12 +1,13 @@
 'use client'
 
-import {
+import React, {
   createContext,
-  useCallback,
   useContext,
-  useEffect,
-  useMemo,
   useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
   type ReactNode,
 } from 'react'
 import { useAuth } from '@/components/auth-provider'
@@ -45,12 +46,21 @@ export function GameThemeProvider({ children }: { children: ReactNode }) {
   const [previewThemeId, setPreviewThemeId] = useState<string | null>(null)
   const [previewSoundpackId, setPreviewSoundpackId] = useState<string | null>(null)
   const [currentStreak, setCurrentStreak] = useState<number>(0)
-  const [localSavedTheme, setLocalSavedTheme] = useState<string | null>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('game_theme') || localStorage.getItem('equipped_game_theme')
+  const [localSavedTheme, setLocalSavedTheme] = useState<string | null>(null)
+
+  // Leitura segura de localStorage exclusivamente dentro de useEffect (elimina Hydration Mismatch #418)
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('game_theme') || localStorage.getItem('equipped_game_theme')
+        if (saved) {
+          setLocalSavedTheme(saved)
+        }
+      }
+    } catch (err) {
+      console.warn('[GameThemeProvider] Erro ao ler tema local:', err)
     }
-    return null
-  })
+  }, [])
 
   const equipped = useMemo(() => getEquippedCosmetics(profile), [profile])
 

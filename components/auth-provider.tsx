@@ -663,7 +663,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 arena: 'arena_1',
               },
               consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
-            })
+            } as UserProfile)
             setProfileLoading(false)
             setNeedsDistrictSelection(true)
             setAuthStatus('AUTHENTICATED')

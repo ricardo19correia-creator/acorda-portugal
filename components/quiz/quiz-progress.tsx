@@ -1,3 +1,6 @@
+'use client'
+
+import React from 'react'
 import {
   QUESTION_TIME_SECONDS,
   WARNING_TIME_THRESHOLD,
