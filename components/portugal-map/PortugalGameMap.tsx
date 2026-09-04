@@ -27,15 +27,24 @@ const PortugalMapboxEngineDynamic = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="relative w-full h-full min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none">
+      <div
+        className="relative w-full h-full min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none"
+        suppressHydrationWarning
+      >
         <div className="relative mb-5">
           <div className="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin" />
           <Globe className="w-7 h-7 text-cyan-400 absolute inset-0 m-auto animate-pulse" />
         </div>
-        <span className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400">
+        <span
+          className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400"
+          suppressHydrationWarning
+        >
           PORTUGAL 2150 // A CARREGAR MOTOR 3D
         </span>
-        <span className="text-[11px] text-slate-400 mt-1 font-mono">
+        <span
+          className="text-[11px] text-slate-400 mt-1 font-mono"
+          suppressHydrationWarning
+        >
           A sincronizar relevo e dados nacionais...
         </span>
       </div>
@@ -266,7 +275,10 @@ export function PortugalGameMap({
       />
 
       {/* Production Verification Proof Marker */}
-      <div className="absolute bottom-2 left-2 z-20 pointer-events-none opacity-80 font-mono text-[9px] text-emerald-400/80 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-emerald-500/30 backdrop-blur-sm">
+      <div
+        suppressHydrationWarning
+        className="absolute bottom-2 left-2 z-20 pointer-events-none opacity-80 font-mono text-[9px] text-emerald-400/80 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-emerald-500/30 backdrop-blur-sm"
+      >
         PORTUGAL MAP 2150 BUILD PROOF // BUILD-ID: MAP2150-REAL-001
       </div>
     </div>

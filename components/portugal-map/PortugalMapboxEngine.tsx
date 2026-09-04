@@ -115,15 +115,8 @@ export function PortugalMapboxEngine({
   const initMap = useCallback(() => {
     if (!containerRef.current) return
 
-    // Clean up existing map if present
-    if (mapRef.current) {
-      try {
-        mapRef.current.remove()
-      } catch (e) {
-        console.warn('Map cleanup notice:', e)
-      }
-      mapRef.current = null
-    }
+    // Prevent duplicate initialization in React Strict Mode
+    if (mapRef.current) return
 
     const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
     const hasValidToken = rawToken.length > 20
@@ -185,6 +178,7 @@ export function PortugalMapboxEngine({
       })
 
       map.on('load', () => {
+        map.resize()
         setIsMapReady(true)
 
         // 1. ADD REAL 3D TERRAIN ELEVATION (DEM)
@@ -317,7 +311,18 @@ export function PortugalMapboxEngine({
   useEffect(() => {
     initMap()
 
+    const resizeTimer = setTimeout(() => {
+      mapRef.current?.resize()
+    }, 500)
+
+    const handleWindowResize = () => {
+      mapRef.current?.resize()
+    }
+    window.addEventListener('resize', handleWindowResize)
+
     return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleWindowResize)
       // Clear markers
       markersRef.current.forEach((m) => m.remove())
       markersRef.current = []
@@ -331,7 +336,7 @@ export function PortugalMapboxEngine({
         mapRef.current = null
       }
     }
-  }, [initMap])
+  }, [])
 
   // Sync Arena Markers on Map
   useEffect(() => {
@@ -466,8 +471,11 @@ export function PortugalMapboxEngine({
   }, [activeRegion, is3DPitch, isMapReady])
 
   return (
-    <div className="relative w-full h-full overflow-hidden bg-slate-950">
-      <div ref={containerRef} className="absolute inset-0 w-full h-full" />
+    <div className="relative w-full h-full min-h-screen overflow-hidden bg-slate-950">
+      <div
+        ref={containerRef}
+        className="absolute inset-0 w-full h-full min-h-screen overflow-hidden"
+      />
     </div>
   )
 }

@@ -62,13 +62,13 @@ export function MapHUDHeader({
             </Link>
 
             <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-cyan-500/30 backdrop-blur-md shadow-lg shadow-cyan-950/30">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5" suppressHydrationWarning>
                 <span className="text-base leading-none">🇵🇹</span>
                 <span className="font-display font-black text-xs sm:text-sm tracking-wider uppercase text-white">
                   PORTUGAL <span className="text-cyan-400">2150</span>
                 </span>
               </div>
-              <span className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-mono font-black text-emerald-300 uppercase tracking-widest">
+              <span suppressHydrationWarning className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-mono font-black text-emerald-300 uppercase tracking-widest">
                 BUILD-ID: MAP2150-REAL-001
               </span>
             </div>
@@ -112,7 +112,7 @@ export function MapHUDHeader({
               className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-98"
             >
               <Swords className="w-3.5 h-3.5" />
-              <span>Jogar em {selectedDistrict}</span>
+              <span suppressHydrationWarning>Jogar em {selectedDistrict}</span>
             </button>
           </div>
         </div>

@@ -96,6 +96,7 @@ export function MapStatusBadge({ state, className }: MapStatusBadgeProps) {
 
       <div className="flex flex-col leading-none">
         <span
+          suppressHydrationWarning
           className={cn(
             'font-mono text-[9px] font-black uppercase tracking-wider',
             info.color
@@ -103,7 +104,10 @@ export function MapStatusBadge({ state, className }: MapStatusBadgeProps) {
         >
           {info.label}
         </span>
-        <span className="text-[10px] font-medium text-slate-400 truncate max-w-[170px] sm:max-w-none">
+        <span
+          suppressHydrationWarning
+          className="text-[10px] font-medium text-slate-400 truncate max-w-[170px] sm:max-w-none"
+        >
           {info.sub}
         </span>
       </div>
