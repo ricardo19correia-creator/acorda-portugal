@@ -22,6 +22,7 @@ import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
 import { PortugalVectorFallback } from '@/components/portugal-map/PortugalVectorFallback'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
+import { logGameFlow } from '@/lib/game-session'
 
 const HERO_STATS = [
   {
@@ -86,6 +87,10 @@ export function Hero() {
   }, [nationalPlayers])
 
   const handleStartGame = (gameRoute: string) => {
+    logGameFlow('JOGAR_CLICK', {
+      from: 'Hero',
+      route: gameRoute,
+    })
     router.push(gameRoute)
   }
 

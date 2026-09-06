@@ -13,6 +13,7 @@ import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
+import { logGameFlow } from '@/lib/game-session'
 
 export default function Page() {
   const router = useRouter()
@@ -54,6 +55,11 @@ export default function Page() {
   }, [user?.uid, profile?.district])
 
   const handleStartGame = (gameRoute: string) => {
+    logGameFlow('JOGAR_CLICK', {
+      from: 'HomePage_CommandCenter',
+      route: gameRoute,
+      hasUser: Boolean(user),
+    })
     if (!user) {
       router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
       return

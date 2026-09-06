@@ -119,7 +119,7 @@ export function PortugalMapboxEngine({
     if (mapRef.current) return
 
     const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
-    const hasValidToken = rawToken.length > 20
+    const hasValidToken = rawToken.length > 20 && rawToken.startsWith('pk.')
 
     if (hasValidToken) {
       mapboxgl.accessToken = rawToken
@@ -163,9 +163,22 @@ export function PortugalMapboxEngine({
       // Handle map errors gracefully
       map.on('error', (e) => {
         const msg = e.error?.message || ''
-        if (msg.includes('401') || msg.includes('token') || msg.includes('Unauthorized')) {
+        if (
+          msg.includes('401') ||
+          msg.includes('token') ||
+          msg.includes('Unauthorized') ||
+          msg.includes('forbidden') ||
+          msg.includes('Forbidden')
+        ) {
           console.warn('Mapbox token error: transitioning to reliable open imagery fallback.')
           setUsingFallback(true)
+          mapboxgl.accessToken = ''
+          const fallbackStyle = activeMode === 'tactical' ? TACTICAL_DARK_STYLE : FALLBACK_SATELLITE_STYLE
+          try {
+            map.setStyle(fallbackStyle)
+          } catch (err) {
+            console.warn('Fallback style switch error:', err)
+          }
           onEngineStateChange({
             isReady: true,
             is3DSupported: true,

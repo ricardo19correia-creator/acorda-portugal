@@ -132,12 +132,12 @@ assert(
   `Legacy ID 'arena_1' resolves cleanly via alias to 'arena_praca_liberdade' (Got: ${resAlias?.id})`
 )
 
-// TEST SUITE 6: STRICT FAIL-LOUD ON INVALID ARENA (Zero Silent Fallback)
-console.log('\n--- 6. FAIL-LOUD ON INVALID ARENA (NO SILENT PALÁCIO NACIONAL FALLBACK) ---')
+// TEST SUITE 6: CONTROLLED FAIL-SAFE ON INVALID ARENA (Never Null, Never Undefined)
+console.log('\n--- 6. CONTROLLED FAIL-SAFE ON INVALID ARENA (NEVER NULL) ---')
 const resInvalid = resolveArenaForGame({ arenaId: 'non_existent_arena_xyz', categorySlug: 'desafio-nacional' })
 assert(
-  resInvalid.arena === null && Boolean(resInvalid.error),
-  `Invalid arena returns null arena with explicit error (Got error: "${resInvalid.error}")`
+  resInvalid.arena !== null && resInvalid.arena !== undefined && Boolean(resInvalid.warning || resInvalid.error),
+  `Invalid arena returns guaranteed valid fallback arena with warning (Got: ${resInvalid.arena?.id}, warning: "${resInvalid.warning}")`
 )
 assert(
   resInvalid.arena?.id !== 'arena_palacio_nacional',

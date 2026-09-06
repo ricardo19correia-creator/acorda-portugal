@@ -1,7 +1,7 @@
 import type { DistrictWarTerritory } from '@/lib/district-war'
 import type { ArenaRarity } from '@/src/types/arena'
 
-export type MapDisplayMode = 'satellite' | 'terrain' | 'tactical' | 'night'
+export type MapDisplayMode = 'satellite' | 'terrain' | 'tactical' | 'night' | 'hologram'
 export type MapRegion = 'continente' | 'acores' | 'madeira'
 
 export interface CameraPreset {

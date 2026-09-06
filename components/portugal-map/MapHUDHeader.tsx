@@ -12,6 +12,7 @@ import {
   Moon,
   ArrowLeft,
   Swords,
+  Radar,
 } from 'lucide-react'
 
 interface MapHUDHeaderProps {
@@ -26,8 +27,9 @@ interface MapHUDHeaderProps {
 
 const MODES: Array<{ id: MapDisplayMode; label: string; icon: React.ElementType; color: string }> = [
   { id: 'satellite', label: 'Satélite 3D', icon: Globe, color: 'text-emerald-400' },
+  { id: 'hologram', label: 'Holograma 2150', icon: Radar, color: 'text-cyan-400' },
+  { id: 'tactical', label: 'Tático', icon: Crosshair, color: 'text-sky-400' },
   { id: 'terrain', label: 'Terreno', icon: Mountain, color: 'text-amber-400' },
-  { id: 'tactical', label: 'Tático', icon: Crosshair, color: 'text-cyan-400' },
   { id: 'night', label: 'Noite', icon: Moon, color: 'text-indigo-400' },
 ]
 
@@ -68,8 +70,12 @@ export function MapHUDHeader({
                   PORTUGAL <span className="text-cyan-400">2150</span>
                 </span>
               </div>
-              <span suppressHydrationWarning className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-mono font-black text-emerald-300 uppercase tracking-widest">
-                BUILD-ID: MAP2150-REAL-001
+              <span suppressHydrationWarning className="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-[9px] font-mono font-black text-emerald-300 uppercase tracking-widest">
+                MAP2150-V2
+              </span>
+              <span suppressHydrationWarning className="hidden xl:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-[9px] font-mono font-bold text-cyan-300 uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                18 Distritos • 2 Regiões • 43 Arenas
               </span>
             </div>
 

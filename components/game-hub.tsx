@@ -39,6 +39,7 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { resolveArena, VIP_ARENAS } from '@/src/data/arenaCatalog'
 import { cn, safeRandomUUID } from '@/lib/utils'
+import { logGameFlow } from '@/lib/game-session'
 
 export function GameHub() {
   const router = useRouter()
@@ -145,6 +146,20 @@ export function GameHub() {
     if (chosenArena) {
       url += `&arena=${encodeURIComponent(chosenArena)}`
     }
+
+    logGameFlow('JOGAR_CLICK', {
+      from: 'GameHub',
+      categorySlug: params.categorySlug,
+      difficulty: diff,
+    })
+    logGameFlow('CATEGORY_SELECT', {
+      categorySlug: params.categorySlug,
+      subcategorySlug: params.subcategorySlug,
+      district: params.district,
+      city: params.city,
+      difficulty: diff,
+      arenaId: chosenArena,
+    })
 
     router.push(url)
   }

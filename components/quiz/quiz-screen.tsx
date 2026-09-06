@@ -26,6 +26,7 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
+import { logGameFlow } from '@/lib/game-session'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
 import { useEconomy } from '@/context/economy-context'
@@ -492,6 +493,26 @@ export function QuizScreen({
 
   const activeArena = arenaResolution.arena
 
+  // Registo de fluxo autoritativo: criação de partida e seleção de arena
+  useEffect(() => {
+    logGameFlow('MATCH_CREATE', {
+      gameId,
+      categorySlug,
+      categoryName: category?.name,
+      difficulty: diffLevel,
+      equippedArenaId,
+    })
+    if (activeArena) {
+      logGameFlow('ARENA_SELECT', {
+        categorySlug,
+        arenaId: activeArena.id,
+        arenaName: activeArena.name,
+        isFallback: arenaResolution.isFallback,
+        isExplicit: arenaResolution.isExplicit,
+      })
+    }
+  }, [gameId, categorySlug, category?.name, diffLevel, equippedArenaId, activeArena, arenaResolution.isFallback, arenaResolution.isExplicit])
+
   const [step, setStep] = useState(0)
   const [phase, setPhase] = useState<Phase>('answering')
   const [selected, setSelected] = useState<OptionKey | null>(null)
@@ -702,29 +723,12 @@ export function QuizScreen({
     }
   }, [profile])
 
-  // BLINDAGEM DO CICLO DE VIDA DA SESSÃO FIREBASE
-  // Não inicia a montagem do tabuleiro nem renderiza HUD sem a sessão de autenticação resolvida
-  if (!authResolved || (user && profileLoading)) {
-    return <LoadingQuiz message="A sincronizar sessão de jogo..." submessage="A preparar perfil e progresso..." />
-  }
-
-  // BLINDAGEM DO BANCO DE PERGUNTAS (EXIGÊNCIA DE ROBUSTEZ)
+  // BLINDAGEM DO BANCO DE PERGUNTAS (DECLARAÇÃO ESTÁVEL PARA EXECUÇÃO SEGURA DOS HOOKS)
   const questions = quizQuestions
-  const currentIndex = step
-
-  // 1. Validar existência e tamanho do array
-  if (!questions || !Array.isArray(questions) || questions.length === 0) {
-    return <LoadingQuiz message="A preparar perguntas do desafio..." />
-  }
-
-  // 2. Nunca assumir que questions[currentIndex] existe. Usar encadeamento opcional e fallbacks seguros
-  const currentQuestion = questions[currentIndex] || questions[0]
-  if (!currentQuestion?.opcoes || !currentQuestion?.pergunta) {
-    return <LoadingQuiz message="A carregar questão..." />
-  }
-
+  const currentIndex = Math.min(Math.max(0, step), Math.max(0, (questions?.length || 1) - 1))
+  const currentQuestion = questions[currentIndex] || questions[0] || EMERGENCY_FALLBACK_QUESTIONS[0]
   const q = currentQuestion
-  const total = questions.length
+  const total = questions?.length || 10
 
   // Power-Ups Handlers protegidos
   const handleUse5050 = async () => {
@@ -1089,14 +1093,51 @@ export function QuizScreen({
       ? { from: previousLevel, to: userProfile.level }
       : undefined
 
-  // SEÇÃO DE RENDERIZAÇÃO
-  // 1. Se a sessão de autenticação estiver a carregar inicialmente, exibe espera neutra
-  const isAuthInitializing = !authResolved || profileLoading
+  // Efeito de ciclo de vida da Arena
+  useEffect(() => {
+    if (activeArena) {
+      logGameFlow('ARENA_LOAD', {
+        arenaId: activeArena.id,
+        arenaName: activeArena.name,
+        assetPath: activeArena.assetPath,
+      })
+      logGameFlow('ARENA_READY', {
+        arenaId: activeArena.id,
+        arenaName: activeArena.name,
+      })
+    }
+  }, [activeArena])
+
+  const handleCompleteIntro = useCallback(() => {
+    setShowCinematicIntro(false)
+    if (activeArena && questions.length > 0) {
+      logGameFlow('QUIZ_START', {
+        gameId,
+        categorySlug,
+        arenaId: activeArena.id,
+        totalQuestions: questions.length,
+        firstQuestionPrompt: questions[0]?.question,
+      })
+    }
+  }, [gameId, categorySlug, activeArena, questions])
+
+  // SEÇÃO DE RENDERIZAÇÃO (TODOS OS HOOKS EXECUTADOS DE FORMA INCONDICIONAL)
+  // 1. Se a sessão de autenticação estiver a carregar inicialmente sem utilizador, exibe espera neutra
+  const isAuthInitializing = !authResolved || (Boolean(user) && profileLoading)
   if (isAuthInitializing && !user) {
-    return <LoadingQuiz message="A verificar sessão de jogo..." />
+    return <LoadingQuiz message="A sincronizar sessão de jogo..." submessage="A preparar perfil e progresso..." />
   }
 
-  // 2. Fim de jogo: Apresentar ecrã de resultados
+  // 2. Validação segura do banco de perguntas
+  if (!questions || !Array.isArray(questions) || questions.length === 0) {
+    return <LoadingQuiz message="A preparar perguntas do desafio..." />
+  }
+
+  if (!currentQuestion?.opcoes || !currentQuestion?.pergunta) {
+    return <LoadingQuiz message="A carregar questão..." />
+  }
+
+  // 3. Fim de jogo: Apresentar ecrã de resultados
   if (phase === 'finished') {
     return (
       <div className="min-h-screen w-full overflow-y-auto px-3 sm:px-4 py-6 sm:py-8 pb-24">
@@ -1153,8 +1194,8 @@ export function QuizScreen({
           arena={activeArena}
           playerName={effectiveDisplayName}
           playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'CONVIDADO'}
-          onComplete={() => setShowCinematicIntro(false)}
-          onSkip={() => setShowCinematicIntro(false)}
+          onComplete={handleCompleteIntro}
+          onSkip={handleCompleteIntro}
         />
       )}
 

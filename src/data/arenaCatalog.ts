@@ -1263,6 +1263,8 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
     case 'desafio-nacional':
     case 'nacional':
     case 'quick':
+    case 'todos':
+    case 'jogar-tudo':
       return resolveArena('arena_estadio_das_lendas') || MASTER_ARENA_CATALOG[1]
 
     case 'o-meu-distrito':
@@ -1275,6 +1277,7 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
 
     case 'modo-maluco':
     case 'perguntas-idiotas':
+    case 'maluco':
       return resolveArena('arena_portugal_ao_contrario') || MASTER_ARENA_CATALOG[35]
 
     case 'historia':
@@ -1284,19 +1287,31 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
       return resolveArena('arena_palacio_nacional') || MASTER_ARENA_CATALOG[0]
 
     case 'geografia':
+    case 'geografia-portugal':
     case 'mapa':
     case 'territorio':
       return resolveArena('arena_portugal_3d') || MASTER_ARENA_CATALOG[2]
 
     case 'cultura':
+    case 'cultura-portuguesa':
     case 'literatura':
     case 'cinema':
+    case 'cinema-tv':
+    case 'artes':
       return resolveArena('arena_teatro_nacional') || MASTER_ARENA_CATALOG[25]
 
     case 'desporto':
     case 'futebol':
+    case 'futebol-portugues':
     case 'campeoes':
       return resolveArena('arena_estadio_nacional') || MASTER_ARENA_CATALOG[26]
+
+    case 'entretenimento':
+    case 'musica':
+    case 'humor':
+    case 'comedia':
+    case 'espetaculo':
+      return resolveArena('arena_fado_alfama') || resolveArena('arena_teatro_nacional') || MASTER_ARENA_CATALOG[25]
 
     case 'gastronomia':
     case 'vinhos':
@@ -1305,8 +1320,17 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
 
     case 'ciencia':
     case 'tecnologia':
+    case 'ciencia-tecnologia':
     case 'inovacao':
       return resolveArena('arena_lisboa_cybercore') || MASTER_ARENA_CATALOG[32]
+
+    case 'atualidade':
+    case 'portugal-politico':
+    case 'politica':
+    case 'governo':
+    case 'empresas-portuguesas':
+    case 'economia':
+      return resolveArena('arena_lisboa_imperial') || resolveArena('arena_palacio_nacional') || MASTER_ARENA_CATALOG[0]
 
     case 'desafio-visual':
     case 'monumentos':
@@ -1323,18 +1347,20 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
 }
 
 export interface ResolveGameArenaResult {
-  arena: CanonicalArena | null
+  arena: CanonicalArena
   isExplicit: boolean
   isFallback: boolean
+  warning?: string
   error?: string
 }
 
 /**
  * Pipeline determinístico de resolução de Arena para uma partida:
  * 1. Se foi passado arenaId explicitamente na URL (?arena=...), tenta resolver.
- *    Se falhar, RETORNA ERRO 'ARENA NÃO DEFINIDA'.
+ *    Se falhar, emite aviso controlado e recorre à arena temática da categoria (NUNCA devolve null).
  * 2. Se não foi passado arenaId, verifica se o jogador tem arena equipada no perfil/localStorage.
  * 3. Se não houver arena equipada, usa a arena temática padrão DA CATEGORIA.
+ * REGRA ABSOLUTA: arena NUNCA é null nem undefined.
  */
 export function resolveArenaForGame(params: {
   arenaId?: string | null
@@ -1343,7 +1369,7 @@ export function resolveArenaForGame(params: {
 }): ResolveGameArenaResult {
   const { arenaId, categorySlug, equippedArenaId } = params
 
-  // 1. Parâmetro explícito na URL tem prioridade absoluta
+  // 1. Parâmetro explícito na URL tem prioridade
   if (arenaId && arenaId.trim() !== '') {
     const explicit = resolveArena(arenaId)
     if (explicit) {
@@ -1353,12 +1379,14 @@ export function resolveArenaForGame(params: {
         isFallback: false,
       }
     }
-    // O utilizador pediu uma arena específica que não existe! NÃO fazer fallback silencioso!
+    // Arena explícita não encontrada: fallback gracioso sem bloquear a partida
+    console.warn(`[resolveArenaForGame] Arena explícita "${arenaId}" não encontrada no catálogo. A ativar arena temática segura.`)
+    const categoryDefault = getDefaultArenaForCategory(categorySlug)
     return {
-      arena: null,
-      isExplicit: true,
-      isFallback: false,
-      error: `ARENA NÃO DEFINIDA // ID INVÁLIDO: "${arenaId}"`,
+      arena: categoryDefault,
+      isExplicit: false,
+      isFallback: true,
+      warning: `Arena solicitada "${arenaId}" não encontrada. Foi atribuída a arena "${categoryDefault.name}".`,
     }
   }
 

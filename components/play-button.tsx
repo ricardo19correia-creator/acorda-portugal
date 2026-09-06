@@ -6,6 +6,7 @@ import { Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { logGameFlow } from '@/lib/game-session'
 
 /**
  * The primary call-to-action of the whole app. Glowing gradient, animated sheen,
@@ -27,6 +28,11 @@ export function PlayButton({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
+    logGameFlow('JOGAR_CLICK', {
+      from: 'PlayButton',
+      href,
+      label,
+    })
     router.push(href)
   }
 

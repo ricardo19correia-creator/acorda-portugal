@@ -18,6 +18,9 @@ import { MapSearchBar } from './MapSearchBar'
 import { DistrictDetailsPanel } from './DistrictDetailsPanel'
 import { ArenaDetailsModal } from './ArenaDetailsModal'
 import { PortugalVectorFallback } from './PortugalVectorFallback'
+import { DistrictWarLeaderboardWidget } from './DistrictWarLeaderboardWidget'
+import { DistrictIntelCard } from './DistrictIntelCard'
+import { ActiveArenasDrawer } from './ActiveArenasDrawer'
 import {
   PORTUGAL_DISTRICTS_GEOJSON,
   REGION_CAMERA_PRESETS,
@@ -124,6 +127,7 @@ export function PortugalMapComponent() {
   const [isWebGLSupported, setIsWebGLSupported] = useState(true)
   const [isMapReady, setIsMapReady] = useState(false)
   const [usingFallback, setUsingFallback] = useState(false)
+  const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null)
 
   const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerProfileData | null>(null)
@@ -143,6 +147,16 @@ export function PortugalMapComponent() {
   const mapRef = useRef<mapboxgl.Map | null>(null)
   const markersRef = useRef<mapboxgl.Marker[]>([])
   const isInitializingRef = useRef<boolean>(false)
+  const isMapReadyRef = useRef<boolean>(false)
+  const usingFallbackRef = useRef<boolean>(false)
+  const handleSelectDistrictRef = useRef(handleSelectDistrict)
+  handleSelectDistrictRef.current = handleSelectDistrict
+  const activeModeRef = useRef(activeMode)
+  activeModeRef.current = activeMode
+  const activeRegionRef = useRef(activeRegion)
+  activeRegionRef.current = activeRegion
+  isMapReadyRef.current = isMapReady
+  usingFallbackRef.current = usingFallback
 
   // Real-time Rankings Subscription for National War Map
   useEffect(() => {
@@ -201,6 +215,15 @@ export function PortugalMapComponent() {
       ) || null
     )
   }, [districtWarTerritories, selectedDistrict])
+
+  const displayedTerritory = useMemo(() => {
+    const target = hoveredDistrict || selectedDistrict
+    return (
+      districtWarTerritories.find(
+        (t) => t.name.toLowerCase() === target.toLowerCase()
+      ) || activeTerritory
+    )
+  }, [districtWarTerritories, hoveredDistrict, selectedDistrict, activeTerritory])
 
   // Handle District Selection with Smooth Camera Fly-To
   const handleSelectDistrict = useCallback(
@@ -316,8 +339,125 @@ export function PortugalMapComponent() {
     }
   }
 
+  // 2. MODULAR LAYER INITIALIZATION (DEM, FOG, GEOJSON DISTRICTS)
+  const setupLayers = useCallback(
+    (map: mapboxgl.Map, isFallback: boolean) => {
+      if (!map) return
+      try {
+        map.resize()
+      } catch {}
+
+      // 2.1 DEM 3D Elevation
+      try {
+        const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
+        const canUseMapboxDem = !isFallback && rawToken.length > 20 && rawToken.startsWith('pk.')
+
+        if (canUseMapboxDem) {
+          if (!map.getSource('mapbox-dem')) {
+            map.addSource('mapbox-dem', {
+              type: 'raster-dem',
+              url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+              tileSize: 512,
+              maxzoom: 14,
+            })
+          }
+          map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 })
+        } else {
+          // Open AWS Terrarium DEM elevation tiles (zero external token required)
+          if (!map.getSource('terrarium-dem')) {
+            map.addSource('terrarium-dem', {
+              type: 'raster-dem',
+              tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
+              encoding: 'terrarium',
+              tileSize: 256,
+              maxzoom: 15,
+            })
+          }
+          map.setTerrain({ source: 'terrarium-dem', exaggeration: 1.5 })
+        }
+      } catch (err) {
+        console.warn('[PortugalMapbox] DEM Terrain layer initialization notice:', err)
+      }
+
+      // 2.2 Atmospheric Horizon Fog
+      try {
+        map.setFog({
+          range: [0.8, 12],
+          color: 'rgb(8, 14, 26)',
+          'high-color': 'rgb(24, 68, 168)',
+          'horizon-blend': 0.03,
+          'space-color': 'rgb(2, 6, 14)',
+          'star-intensity': activeModeRef.current === 'night' ? 0.8 : 0.4,
+        })
+      } catch (err) {
+        console.warn('[PortugalMapbox] Atmospheric fog setup notice:', err)
+      }
+
+      // 2.3 GeoJSON District Boundaries
+      try {
+        if (!map.getSource('portugal-districts')) {
+          map.addSource('portugal-districts', {
+            type: 'geojson',
+            data: PORTUGAL_DISTRICTS_GEOJSON,
+          })
+        }
+
+        if (!map.getLayer('districts-fill')) {
+          map.addLayer({
+            id: 'districts-fill',
+            type: 'fill',
+            source: 'portugal-districts',
+            paint: {
+              'fill-color': 'rgba(6, 182, 212, 0.08)',
+              'fill-opacity': 0.6,
+            },
+          })
+        }
+
+        if (!map.getLayer('districts-line')) {
+          map.addLayer({
+            id: 'districts-line',
+            type: 'line',
+            source: 'portugal-districts',
+            paint: {
+              'line-color': 'rgba(6, 182, 212, 0.6)',
+              'line-width': 1.5,
+            },
+          })
+        }
+
+        if (!map.getLayer('districts-hover-line')) {
+          map.addLayer({
+            id: 'districts-hover-line',
+            type: 'line',
+            source: 'portugal-districts',
+            paint: {
+              'line-color': '#10b981',
+              'line-width': 3,
+            },
+            filter: ['==', 'name', ''],
+          })
+        }
+      } catch (err) {
+        console.warn('[PortugalMapbox] GeoJSON layer setup notice:', err)
+      }
+
+      setIsMapReady(true)
+      isMapReadyRef.current = true
+      setEngineState({
+        isReady: true,
+        is3DSupported: true,
+        isUsingFallbackImagery: isFallback,
+        isTerrainActive: true,
+        activeMode: activeModeRef.current,
+        activeRegion: activeRegionRef.current,
+      })
+    },
+    []
+  )
+
   // =========================================================================
-  // 2. MAPBOX INITIALIZATION & STRICT LIFECYCLE (NO PREMATURE DESTRUCTION)
+  // 3. MAPBOX INITIALIZATION & STRICT LIFECYCLE (FAIL-SAFE & RECOVERY)
   // =========================================================================
   useEffect(() => {
     if (!mounted || !containerRef.current) return
@@ -325,7 +465,7 @@ export function PortugalMapComponent() {
     if (mapRef.current || isInitializingRef.current) return
     isInitializingRef.current = true
 
-    // 2.1 WebGL Compatibility Verification
+    // 3.1 WebGL Compatibility Verification
     try {
       const testCanvas = document.createElement('canvas')
       const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')
@@ -345,28 +485,15 @@ export function PortugalMapComponent() {
       return
     }
 
-    // 2.2 Token Resolution
+    // 3.2 Token Resolution & Preemptive Fallback
     const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
-    const hasValidToken = rawToken.length > 20
+    const hasValidToken = rawToken.length > 20 && rawToken.startsWith('pk.')
 
+    let initialStyle: mapboxgl.Style | string
     if (hasValidToken) {
       mapboxgl.accessToken = rawToken
       setUsingFallback(false)
-    } else {
-      mapboxgl.accessToken = ''
-      setUsingFallback(true)
-    }
-
-    const isMobile = window.innerWidth < 640
-    const preset = REGION_CAMERA_PRESETS[activeRegion] || REGION_CAMERA_PRESETS.continente
-    const initialCenter = preset.center
-    const initialZoom = isMobile ? 5.3 : 6.3
-    const initialPitch = is3DPitch ? 38 : 0
-
-    let initialStyle: mapboxgl.Style | string
-    if (!hasValidToken) {
-      initialStyle = activeMode === 'tactical' ? TACTICAL_DARK_STYLE : FALLBACK_SATELLITE_STYLE
-    } else {
+      usingFallbackRef.current = false
       if (activeMode === 'satellite' || activeMode === 'terrain') {
         initialStyle = 'mapbox://styles/mapbox/satellite-streets-v12'
       } else if (activeMode === 'night' || activeMode === 'tactical') {
@@ -374,7 +501,18 @@ export function PortugalMapComponent() {
       } else {
         initialStyle = 'mapbox://styles/mapbox/satellite-streets-v12'
       }
+    } else {
+      mapboxgl.accessToken = ''
+      setUsingFallback(true)
+      usingFallbackRef.current = true
+      initialStyle = activeMode === 'tactical' ? TACTICAL_DARK_STYLE : FALLBACK_SATELLITE_STYLE
     }
+
+    const isMobile = window.innerWidth < 640
+    const preset = REGION_CAMERA_PRESETS[activeRegion] || REGION_CAMERA_PRESETS.continente
+    const initialCenter = preset.center
+    const initialZoom = isMobile ? 5.3 : 6.3
+    const initialPitch = is3DPitch ? 38 : 0
 
     try {
       const map = new mapboxgl.Map({
@@ -390,153 +528,103 @@ export function PortugalMapComponent() {
 
       mapRef.current = map
 
-      // Handle map errors gracefully
+      // Interceptar qualquer erro de 401 / Token e transitar de imediato para fallback
       map.on('error', (e) => {
         const msg = e.error?.message || ''
-        if (msg.includes('401') || msg.includes('token') || msg.includes('Unauthorized')) {
+        if (
+          msg.includes('401') ||
+          msg.includes('token') ||
+          msg.includes('Unauthorized') ||
+          msg.includes('forbidden') ||
+          msg.includes('Forbidden') ||
+          msg.includes('Not Found')
+        ) {
           console.warn('[PortugalMapbox] Token error, switching to open high-res fallback imagery.')
-          setUsingFallback(true)
+          if (!usingFallbackRef.current) {
+            usingFallbackRef.current = true
+            setUsingFallback(true)
+            mapboxgl.accessToken = ''
+            const fallbackStyle =
+              activeModeRef.current === 'tactical' ? TACTICAL_DARK_STYLE : FALLBACK_SATELLITE_STYLE
+            try {
+              map.setStyle(fallbackStyle)
+            } catch (err) {
+              console.warn('[PortugalMapbox] Fallback style switch notice:', err)
+            }
+          }
+        }
+      })
+
+      // Ouvir tanto load inicial quanto style.load para inicialização idempotente das camadas
+      map.on('load', () => {
+        setupLayers(map, usingFallbackRef.current)
+      })
+
+      map.on('style.load', () => {
+        setupLayers(map, usingFallbackRef.current)
+      })
+
+      // Interatividade de cliques e hover nos distritos
+      map.on('click', 'districts-fill', (e) => {
+        if (e.features && e.features[0]) {
+          const name = e.features[0].properties?.name
+          if (name) {
+            handleSelectDistrictRef.current(name)
+          }
+        }
+      })
+
+      map.on('mousemove', 'districts-fill', (e) => {
+        if (e.features && e.features[0]) {
+          map.getCanvas().style.cursor = 'pointer'
+          const name = e.features[0].properties?.name
+          if (name && map.getLayer('districts-hover-line')) {
+            map.setFilter('districts-hover-line', ['==', 'name', name])
+            setHoveredDistrict(name)
+          }
+        }
+      })
+
+      map.on('mouseleave', 'districts-fill', () => {
+        map.getCanvas().style.cursor = ''
+        if (map.getLayer('districts-hover-line')) {
+          map.setFilter('districts-hover-line', ['==', 'name', ''])
+          setHoveredDistrict(null)
+        }
+      })
+
+      // Temporizador de Segurança 1: 3.5s anti-bloqueio de token
+      const safetyTimer1 = setTimeout(() => {
+        if (!isMapReadyRef.current && mapRef.current) {
+          console.warn('[PortugalMapbox] 3.5s timeout: Mapbox not ready, activating high-res fallback.')
+          if (!usingFallbackRef.current) {
+            usingFallbackRef.current = true
+            setUsingFallback(true)
+            mapboxgl.accessToken = ''
+            try {
+              mapRef.current.setStyle(FALLBACK_SATELLITE_STYLE)
+            } catch {
+              setIsWebGLSupported(false)
+            }
+          }
+        }
+      }, 3500)
+
+      // Temporizador de Segurança 2: 6s anti-loading infinito (transição para modo vetorial SVG 2D)
+      const safetyTimer2 = setTimeout(() => {
+        if (!isMapReadyRef.current) {
+          console.warn('[PortugalMapbox] 6s timeout: WebGL unresponsive, switching to 2D vector fallback.')
+          setIsWebGLSupported(false)
           setEngineState((prev) => ({
             ...prev,
             isReady: true,
-            is3DSupported: true,
-            isUsingFallbackImagery: true,
-            isTerrainActive: true,
-            activeMode,
-            activeRegion,
+            is3DSupported: false,
+            errorMessage: 'Modo vetorial tático ativo.',
           }))
         }
-      })
+      }, 6000)
 
-      // Listener map.on('load', () => map.resize())
-      map.on('load', () => {
-        map.resize()
-        setIsMapReady(true)
-
-        // 1. ADD REAL 3D TERRAIN ELEVATION (DEM)
-        try {
-          if (hasValidToken) {
-            map.addSource('mapbox-dem', {
-              type: 'raster-dem',
-              url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-              tileSize: 512,
-              maxzoom: 14,
-            })
-            map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 })
-          } else {
-            // Open AWS Terrarium DEM elevation tiles (no token required)
-            map.addSource('terrarium-dem', {
-              type: 'raster-dem',
-              tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
-              encoding: 'terrarium',
-              tileSize: 256,
-              maxzoom: 15,
-            })
-            map.setTerrain({ source: 'terrarium-dem', exaggeration: 1.5 })
-          }
-        } catch (err) {
-          console.warn('[PortugalMapbox] DEM Terrain layer initialization notice:', err)
-        }
-
-        // 2. ATMOSPHERIC HORIZON FOG
-        try {
-          map.setFog({
-            range: [0.8, 12],
-            color: 'rgb(8, 14, 26)',
-            'high-color': 'rgb(24, 68, 168)',
-            'horizon-blend': 0.03,
-            'space-color': 'rgb(2, 6, 14)',
-            'star-intensity': activeMode === 'night' ? 0.8 : 0.4,
-          })
-        } catch (err) {
-          console.warn('[PortugalMapbox] Atmospheric fog setup notice:', err)
-        }
-
-        // 3. GEOJSON DISTRICT BOUNDARIES
-        try {
-          if (!map.getSource('portugal-districts')) {
-            map.addSource('portugal-districts', {
-              type: 'geojson',
-              data: PORTUGAL_DISTRICTS_GEOJSON,
-            })
-
-            // District Fill Layer
-            map.addLayer({
-              id: 'districts-fill',
-              type: 'fill',
-              source: 'portugal-districts',
-              paint: {
-                'fill-color': 'rgba(6, 182, 212, 0.08)',
-                'fill-opacity': 0.6,
-              },
-            })
-
-            // District Borders Line
-            map.addLayer({
-              id: 'districts-line',
-              type: 'line',
-              source: 'portugal-districts',
-              paint: {
-                'line-color': 'rgba(6, 182, 212, 0.6)',
-                'line-width': 1.5,
-              },
-            })
-
-            // District Hover Highlight
-            map.addLayer({
-              id: 'districts-hover-line',
-              type: 'line',
-              source: 'portugal-districts',
-              paint: {
-                'line-color': '#10b981',
-                'line-width': 3,
-              },
-              filter: ['==', 'name', ''],
-            })
-          }
-        } catch (err) {
-          console.warn('[PortugalMapbox] GeoJSON layer setup notice:', err)
-        }
-
-        // Interactive District Clicking
-        map.on('click', 'districts-fill', (e) => {
-          if (e.features && e.features[0]) {
-            const name = e.features[0].properties?.name
-            if (name) {
-              handleSelectDistrict(name)
-            }
-          }
-        })
-
-        // Hover Effect
-        map.on('mousemove', 'districts-fill', (e) => {
-          if (e.features && e.features[0]) {
-            map.getCanvas().style.cursor = 'pointer'
-            const name = e.features[0].properties?.name
-            if (name && map.getLayer('districts-hover-line')) {
-              map.setFilter('districts-hover-line', ['==', 'name', name])
-            }
-          }
-        })
-
-        map.on('mouseleave', 'districts-fill', () => {
-          map.getCanvas().style.cursor = ''
-          if (map.getLayer('districts-hover-line')) {
-            map.setFilter('districts-hover-line', ['==', 'name', ''])
-          }
-        })
-
-        setEngineState({
-          isReady: true,
-          is3DSupported: true,
-          isUsingFallbackImagery: !hasValidToken,
-          isTerrainActive: true,
-          activeMode,
-          activeRegion,
-        })
-      })
-
-      // Redimensionamento WebGL com setTimeout 500ms garantindo que não colapsa a 0px
+      // Redimensionamento WebGL garantindo que não colapsa a 0px
       const resizeTimeout = setTimeout(() => {
         if (mapRef.current) {
           mapRef.current.resize()
@@ -551,9 +639,10 @@ export function PortugalMapComponent() {
       isInitializingRef.current = false
 
       return () => {
+        clearTimeout(safetyTimer1)
+        clearTimeout(safetyTimer2)
         clearTimeout(resizeTimeout)
         window.removeEventListener('resize', handleWindowResize)
-        // Cleanup seguro apenas na desmontagem genuína do componente
         markersRef.current.forEach((m) => m.remove())
         markersRef.current = []
 
@@ -580,10 +669,10 @@ export function PortugalMapComponent() {
       })
       isInitializingRef.current = false
     }
-  }, [mounted])
+  }, [mounted, setupLayers, activeRegion, is3DPitch, activeMode])
 
   // =========================================================================
-  // 3. REACTIVE CAMERA, MODE & MARKER SYNC (SEM REINICIAR MAPBOX)
+  // 4. REACTIVE CAMERA, MODE & MARKER SYNC (SEM REINICIAR MAPBOX)
   // =========================================================================
 
   // Handle Mode Switching without recreating Mapbox instance
@@ -592,7 +681,7 @@ export function PortugalMapComponent() {
     if (!map || !isMapReady) return
 
     const rawToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() || ''
-    const hasValidToken = rawToken.length > 20
+    const hasValidToken = !usingFallback && rawToken.length > 20 && rawToken.startsWith('pk.')
 
     let targetStyle: mapboxgl.Style | string
     if (!hasValidToken) {
@@ -607,43 +696,12 @@ export function PortugalMapComponent() {
       }
     }
 
-    map.setStyle(targetStyle)
-    map.once('style.load', () => {
-      map.resize()
-      // Re-apply terrain if supported
-      try {
-        if (hasValidToken && (activeMode === 'satellite' || activeMode === 'terrain')) {
-          if (!map.getSource('mapbox-dem')) {
-            map.addSource('mapbox-dem', {
-              type: 'raster-dem',
-              url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-              tileSize: 512,
-              maxzoom: 14,
-            })
-          }
-          map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 })
-        } else if (!hasValidToken && (activeMode === 'satellite' || activeMode === 'terrain')) {
-          if (!map.getSource('terrarium-dem')) {
-            map.addSource('terrarium-dem', {
-              type: 'raster-dem',
-              tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
-              encoding: 'terrarium',
-              tileSize: 256,
-              maxzoom: 15,
-            })
-          }
-          map.setTerrain({ source: 'terrarium-dem', exaggeration: 1.5 })
-        }
-      } catch (e) {
-        console.warn('[PortugalMapbox] Terrain reapply notice:', e)
-      }
-
-      setEngineState((prev) => ({
-        ...prev,
-        activeMode,
-      }))
-    })
-  }, [activeMode, isMapReady])
+    try {
+      map.setStyle(targetStyle)
+    } catch (e) {
+      console.warn('[PortugalMapbox] Mode switch error:', e)
+    }
+  }, [activeMode, isMapReady, usingFallback])
 
   // Handle 3D Pitch Toggle
   useEffect(() => {
@@ -747,7 +805,7 @@ export function PortugalMapComponent() {
           className="text-[10px] font-mono text-emerald-400/90 mt-2 uppercase tracking-widest"
           suppressHydrationWarning
         >
-          BUILD-ID: MAP2150-REAL-001
+          BUILD-ID: MAP2150-V2
         </span>
       </div>
     )
@@ -792,22 +850,57 @@ export function PortugalMapComponent() {
 
       {/* 4. MAIN MAP CANVAS (Edge-to-Edge) */}
       <main className="relative flex-1 w-full h-full inset-0 z-0">
-        {isWebGLSupported ? (
-          <div className="relative w-full h-full min-h-screen overflow-hidden bg-slate-950">
+        {isWebGLSupported && (
+          <div
+            className={cn(
+              'relative w-full h-full min-h-screen overflow-hidden bg-slate-950',
+              activeMode === 'hologram' && 'hidden'
+            )}
+          >
             {/* Explicit container with absolute inset-0 w-full h-full min-h-screen overflow-hidden as mandated */}
             <div
               ref={containerRef}
               className="absolute inset-0 w-full h-full min-h-screen overflow-hidden"
             />
           </div>
-        ) : (
+        )}
+
+        {(!isWebGLSupported || activeMode === 'hologram') && (
           <PortugalVectorFallback
             territories={districtWarTerritories}
             selectedDistrict={selectedDistrict}
             onSelectDistrict={handleSelectDistrict}
+            onSelectArena={handleSelectArena}
+            onHoverDistrict={setHoveredDistrict}
           />
         )}
       </main>
+
+      {/* 4.1 FLOATING DISTRICT WAR LEADERBOARD WIDGET (Left stack) */}
+      <div className="absolute top-36 sm:top-40 left-3 sm:left-6 z-20 pointer-events-none">
+        <DistrictWarLeaderboardWidget
+          territories={districtWarTerritories}
+          selectedDistrict={selectedDistrict}
+          onSelectDistrict={handleSelectDistrict}
+        />
+      </div>
+
+      {/* 4.2 TACTICAL DISTRICT INTEL DOSSIER CARD (Bottom-Left Stack) */}
+      {!isDistrictPanelOpen && (
+        <div className="absolute bottom-6 left-3 sm:left-6 z-20 pointer-events-none hidden md:block">
+          <DistrictIntelCard
+            districtName={hoveredDistrict || selectedDistrict}
+            territory={displayedTerritory}
+            onOpenDetails={() => setIsDistrictPanelOpen(true)}
+            onStartGame={handleStartGame}
+          />
+        </div>
+      )}
+
+      {/* 4.3 ACTIVE ARENAS DRAWER (Bottom-Right Stack) */}
+      <div className="absolute bottom-6 right-3 sm:right-6 z-20 pointer-events-none hidden sm:block">
+        <ActiveArenasDrawer onSelectArena={handleSelectArena} />
+      </div>
 
       {/* 5. DISTRICT DETAILS PANEL (Side drawer / Bottom sheet) */}
       <DistrictDetailsPanel
@@ -839,7 +932,7 @@ export function PortugalMapComponent() {
         suppressHydrationWarning
         className="absolute bottom-2 left-2 z-20 pointer-events-none opacity-80 font-mono text-[9px] text-emerald-400/80 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-emerald-500/30 backdrop-blur-sm"
       >
-        PORTUGAL MAP 2150 BUILD PROOF // BUILD-ID: MAP2150-REAL-001
+        PORTUGAL MAP 2150 BUILD PROOF // BUILD-ID: MAP2150-V2
       </div>
     </div>
   )

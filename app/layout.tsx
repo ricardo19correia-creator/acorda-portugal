@@ -5,7 +5,6 @@ import { AuthProvider } from '@/components/auth-provider'
 import { EconomyProvider } from '@/context/economy-context'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import { AudioProvider } from '@/context/AudioContext'
-import { FloatingBgmWidget } from '@/components/FloatingBgmWidget'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
 import './globals.css'
 
@@ -47,7 +46,6 @@ export default function RootLayout({
             <GameThemeProvider>
               <AudioProvider>
                 {children}
-                <FloatingBgmWidget />
               </AudioProvider>
             </GameThemeProvider>
           </EconomyProvider>

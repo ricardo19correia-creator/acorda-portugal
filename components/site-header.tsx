@@ -25,7 +25,6 @@ import {
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
 import { PlayerAvatar } from '@/components/player-avatar'
-import AudioPlayer from '@/components/AudioPlayer'
 import { UserAvatar } from '@/components/user-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
@@ -162,13 +161,11 @@ export function SiteHeader() {
 
         {/* Desktop Controls (lg+) */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <AudioPlayer />
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </div>
 
-        {/* Mobile / Tablet Controls (< lg): Som compacto e Botão Hambúrguer sempre visível */}
+        {/* Mobile / Tablet Controls (< lg): Botão Hambúrguer sempre visível */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 lg:hidden">
-          <AudioPlayer variant="compact" />
 
           {/* Botão Hambúrguer (Mobile) */}
           <button

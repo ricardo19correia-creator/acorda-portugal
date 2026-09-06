@@ -22,30 +22,53 @@ export function ArenaCinematicIntro({
   onSkip,
 }: ArenaCinematicIntroProps) {
   const [phase, setPhase] = useState<'black' | 'reveal' | 'ready' | 'exit'>('black')
+  const onCompleteRef = React.useRef(onComplete)
+  onCompleteRef.current = onComplete
+  const onSkipRef = React.useRef(onSkip)
+  onSkipRef.current = onSkip
+
+  const handleFinish = React.useCallback(() => {
+    setPhase('exit')
+    if (onSkipRef.current) {
+      onSkipRef.current()
+    } else if (onCompleteRef.current) {
+      onCompleteRef.current()
+    }
+  }, [])
 
   useEffect(() => {
-    // Fase 1: Black to Reveal (0.3s)
+    // Fase 1: Black to Reveal (150ms)
     const t1 = setTimeout(() => {
       setPhase('reveal')
-    }, 250)
+    }, 150)
 
-    // Fase 2: Ready Prompt (1.1s)
+    // Fase 2: Ready Prompt (650ms)
     const t2 = setTimeout(() => {
       setPhase('ready')
-    }, 1100)
+    }, 650)
 
-    // Fase 3: Exit & Quiz Start (1.8s)
+    // Fase 3: Exit & Quiz Start (1100ms)
     const t3 = setTimeout(() => {
       setPhase('exit')
-      setTimeout(onComplete, 350)
-    }, 1900)
+      setTimeout(() => {
+        if (onCompleteRef.current) onCompleteRef.current()
+      }, 200)
+    }, 1100)
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+        handleFinish()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
       clearTimeout(t1)
       clearTimeout(t2)
       clearTimeout(t3)
+      window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [onComplete])
+  }, [handleFinish])
 
   const effectType = ('effectType' in arena ? arena.effectType : (arena.effects as any)) || 'palacio_dourado'
   const spotlightBeam = arena.lightingProfile?.spotlightBeam && arena.lightingProfile.spotlightBeam !== 'none' ? arena.lightingProfile.spotlightBeam : undefined

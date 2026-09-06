@@ -7,6 +7,7 @@ import type { Category, Tone } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { logGameFlow } from '@/lib/game-session'
 
 const TONE_TEXT: Record<Tone, string> = {
   primary: 'text-primary',
@@ -41,10 +42,16 @@ export function CategoryCard({ cat, className }: { cat: Category; className?: st
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(targetUrl)}`)
-      return
-    }
+    logGameFlow('JOGAR_CLICK', {
+      from: 'CategoryCard',
+      categorySlug: cat.slug,
+      categoryName: cat.name,
+    })
+    logGameFlow('CATEGORY_SELECT', {
+      categorySlug: cat.slug,
+      categoryName: cat.name,
+      from: 'CategoryCard',
+    })
     router.push(targetUrl)
   }
 

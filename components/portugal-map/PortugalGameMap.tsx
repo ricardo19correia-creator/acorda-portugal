@@ -279,7 +279,7 @@ export function PortugalGameMap({
         suppressHydrationWarning
         className="absolute bottom-2 left-2 z-20 pointer-events-none opacity-80 font-mono text-[9px] text-emerald-400/80 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-emerald-500/30 backdrop-blur-sm"
       >
-        PORTUGAL MAP 2150 BUILD PROOF // BUILD-ID: MAP2150-REAL-001
+        PORTUGAL MAP 2150 BUILD PROOF // BUILD-ID: MAP2150-V2
       </div>
     </div>
   )
