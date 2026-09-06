@@ -187,7 +187,7 @@ export function DistrictDetailsPanel({
               <div className="relative">
                 <UserAvatar
                   src={territory.king.photoURL}
-                  name={territory.king.displayName}
+                  alt={territory.king.displayName}
                   size="md"
                   frameId={territory.king.equippedFrame}
                 />

@@ -100,8 +100,8 @@ export function DistrictWarLeaderboardWidget({
                     {t.king && (
                       <div className="relative shrink-0">
                         <UserAvatar
-                          src={t.king.avatarUrl}
-                          name={t.king.displayName}
+                          src={t.king.photoURL}
+                          alt={t.king.displayName}
                           size="xs"
                           className="w-5 h-5 ring-1 ring-white/20"
                         />

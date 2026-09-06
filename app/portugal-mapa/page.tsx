@@ -34,13 +34,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
   }
 
   handleReset = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        window.location.reload()
-      }
-    } catch {
-      this.setState({ hasError: false, error: null })
-    }
+    this.setState({ hasError: false, error: null })
   }
 
   render() {
@@ -62,14 +56,14 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
               </div>
 
               <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">
-                Recuperação de Mapa Tático
+                Falha ao Carregar Mapa
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                O motor gráfico encontrou uma oscilação na renderização do mapa. Clica abaixo para recarregar ou voltar à central.
+                Não foi possível inicializar a interface do mapa. Clica abaixo para tentar novamente ou regressar à central.
               </p>
 
-              {process.env.NODE_ENV !== 'production' && this.state.error?.message && (
+              {this.state.error?.message && (
                 <div className="p-2.5 rounded-xl bg-black/60 border border-white/10 text-left font-mono text-[11px] text-rose-300 max-h-24 overflow-y-auto">
                   {this.state.error.message}
                 </div>
@@ -83,7 +77,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
                 className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-500 hover:bg-cyan-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-cyan-500/20 active:scale-95 cursor-pointer"
               >
                 <RefreshCw className="h-4 w-4" />
-                <span>Recarregar Mapa</span>
+                <span>Tentar Novamente</span>
               </button>
 
               <Link

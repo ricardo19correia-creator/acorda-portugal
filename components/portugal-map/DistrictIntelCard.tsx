@@ -26,8 +26,8 @@ export function DistrictIntelCard({
   const displayName = territory?.name || metadata?.name || districtName
   const pos = territory?.pos || 1
   const power = territory?.powerFormatted || '50.000'
-  const players = territory?.totalPlayers || 120
-  const arenaCount = metadata?.arenasCount || 2
+  const players = territory?.activePlayers ?? 120
+  const arenaCount = (metadata as any)?.arenasCount || 2
   const king = territory?.king
 
   return (
@@ -90,8 +90,8 @@ export function DistrictIntelCard({
           <div className="flex items-center gap-2 min-w-0">
             <div className="relative">
               <UserAvatar
-                src={king.avatarUrl}
-                name={king.displayName}
+                src={king.photoURL}
+                alt={king.displayName}
                 size="sm"
                 className="w-8 h-8 ring-2 ring-amber-400/60"
               />

@@ -12,7 +12,7 @@ export const DISTRICT_MAP: DistrictMapEntry[] = [
   { slug: 'braga', name: 'Braga', svgId: 'district-braga' },
   { slug: 'aveiro', name: 'Aveiro', svgId: 'district-aveiro' },
   { slug: 'beja', name: 'Beja', svgId: 'district-beja' },
-  { slug: 'braganca', name: 'Braganca', svgId: 'district-braganca' },
+  { slug: 'braganca', name: 'Bragança', svgId: 'district-braganca' },
   { slug: 'castelo-branco', name: 'Castelo Branco', svgId: 'district-castelo-branco' },
   { slug: 'coimbra', name: 'Coimbra', svgId: 'district-coimbra' },
   { slug: 'evora', name: 'Évora', svgId: 'district-evora' },
@@ -28,3 +28,13 @@ export const DISTRICT_MAP: DistrictMapEntry[] = [
   { slug: 'acores', name: 'Açores', svgId: 'district-acores' },
   { slug: 'madeira', name: 'Madeira', svgId: 'district-madeira' },
 ]
+
+export function getDistrictMapEntry(nameOrSlug: string): DistrictMapEntry | undefined {
+  if (!nameOrSlug) return undefined
+  const cleaned = nameOrSlug.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+  return DISTRICT_MAP.find((d) => {
+    const dCleanedName = d.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+    const dCleanedSlug = d.slug.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+    return dCleanedName === cleaned || dCleanedSlug === cleaned || d.svgId === nameOrSlug
+  })
+}
