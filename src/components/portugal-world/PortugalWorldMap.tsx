@@ -56,11 +56,44 @@ function PortugalWorldMapInner({
   onSelectArena: externalSelectArena,
 }: PortugalWorldMapProps) {
   const router = useRouter()
+  const outerContainerRef = useRef<HTMLDivElement>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const engineRef = useRef<PortugalWorldEngine | null>(null)
 
   const [hasWebGL, setHasWebGL] = useState(true)
   const [engineReady, setEngineReady] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  // Fullscreen change listener to sync state and trigger engine resize
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const active = Boolean(document.fullscreenElement)
+      setIsFullscreen(active)
+      if (engineRef.current) {
+        setTimeout(() => engineRef.current?.resize(), 120)
+      }
+    }
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  }, [])
+
+  const handleToggleFullscreen = useCallback(() => {
+    try {
+      if (!document.fullscreenElement) {
+        if (outerContainerRef.current?.requestFullscreen) {
+          outerContainerRef.current.requestFullscreen().catch((err) => {
+            console.warn('[PortugalWorldMap] Fullscreen negado:', err)
+          })
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(console.warn)
+        }
+      }
+    } catch (e) {
+      console.warn('[PortugalWorldMap] Erro ao alternar ecrã total:', e)
+    }
+  }, [])
 
   const {
     districts,
@@ -203,7 +236,7 @@ function PortugalWorldMapInner({
   }, [])
 
   const handlePlayDistrict = useCallback((d: DistrictItem) => {
-    router.push(`/jogar?district=${encodeURIComponent(d.slug)}`)
+    router.push(`/jogar?dist=${encodeURIComponent(d.slug)}&cat=o-meu-distrito`)
   }, [router])
 
   if (!hasWebGL) {
@@ -211,7 +244,10 @@ function PortugalWorldMapInner({
   }
 
   return (
-    <div className={`relative w-full h-full overflow-hidden select-none isolate bg-slate-950 ${className || ''}`}>
+    <div
+      ref={outerContainerRef}
+      className={`relative w-full h-full overflow-hidden select-none isolate bg-slate-950 ${className || ''}`}
+    >
       {/* 1. MapLibre WebGL Canvas Container */}
       <div
         ref={mapContainerRef}
@@ -236,6 +272,8 @@ function PortugalWorldMapInner({
           onZoomOut={handleZoomOut}
           layers={layers}
           onToggleLayer={toggleLayer}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={handleToggleFullscreen}
         />
       )}
 

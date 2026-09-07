@@ -11,6 +11,9 @@ import {
   Layers,
   Check,
   ChevronDown,
+  Shield,
+  Maximize2,
+  Minimize2,
 } from 'lucide-react'
 import { DISTRICTS_LIST, type DistrictItem } from '@/src/data/districts'
 import type { WorldSector, WorldLayersConfig } from '@/src/game/world/WorldState'
@@ -25,6 +28,8 @@ interface WorldHUDProps {
   onZoomOut: () => void
   layers: WorldLayersConfig
   onToggleLayer: (layerKey: keyof WorldLayersConfig) => void
+  isFullscreen?: boolean
+  onToggleFullscreen?: () => void
 }
 
 export function WorldHUD({
@@ -36,6 +41,8 @@ export function WorldHUD({
   onZoomOut,
   layers,
   onToggleLayer,
+  isFullscreen,
+  onToggleFullscreen,
 }: WorldHUDProps) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -180,6 +187,33 @@ export function WorldHUD({
             )}
           </div>
 
+          {/* Central de Comando Button */}
+          <Link
+            href="/jogar"
+            className="flex items-center gap-1.5 h-9 px-3 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 hover:from-emerald-500/30 hover:to-teal-500/30 border border-emerald-500/40 text-emerald-300 hover:text-white text-xs font-mono font-bold uppercase transition-all cursor-pointer active:scale-95 shadow-lg shadow-emerald-500/10"
+            title="Abrir Central de Comando"
+          >
+            <Shield className="h-3.5 w-3.5 text-emerald-400" />
+            <span className="hidden sm:inline">Central de Comando</span>
+          </Link>
+
+          {/* Fullscreen Button */}
+          {onToggleFullscreen && (
+            <button
+              type="button"
+              onClick={onToggleFullscreen}
+              className="flex items-center gap-1.5 h-9 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-mono font-bold uppercase transition-all cursor-pointer active:scale-95"
+              title={isFullscreen ? 'Sair do Ecrã Total' : 'Explorar em Ecrã Total'}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="h-3.5 w-3.5 text-cyan-400" />
+              ) : (
+                <Maximize2 className="h-3.5 w-3.5 text-cyan-400" />
+              )}
+              <span className="hidden lg:inline">{isFullscreen ? 'Minimizar' : 'Ecrã Total'}</span>
+            </button>
+          )}
+
           {/* Layers Toggle */}
           <div className="relative">
             <button
@@ -256,6 +290,20 @@ export function WorldHUD({
 
         {/* Map Control Buttons */}
         <div className="pointer-events-auto flex flex-col items-center gap-1.5 ml-auto">
+          {onToggleFullscreen && (
+            <button
+              type="button"
+              onClick={onToggleFullscreen}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950/85 border border-white/15 text-slate-300 hover:text-white hover:bg-slate-900 transition-all shadow-xl backdrop-blur-md cursor-pointer active:scale-95"
+              title={isFullscreen ? 'Sair do Ecrã Total' : 'Explorar em Ecrã Total'}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="h-4 w-4 text-cyan-400" />
+              ) : (
+                <Maximize2 className="h-4 w-4 text-cyan-400" />
+              )}
+            </button>
+          )}
           <button
             type="button"
             onClick={onReset}

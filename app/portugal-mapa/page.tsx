@@ -1,8 +1,9 @@
 'use client'
 
-import React, { Component, type ReactNode, type ErrorInfo } from 'react'
+import React, { Component, Suspense, type ReactNode, type ErrorInfo } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { Globe, AlertTriangle, RefreshCw, Play, Home } from 'lucide-react'
 
 interface ErrorBoundaryProps {
@@ -108,42 +109,38 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
   }
 }
 
-// 1. ELIMINAR SSR DO MAPBOX:
-// O componente do mapa é importado exclusivamente via dynamic com { ssr: false }.
-// Nenhuma lógica, canvas ou árvore do Mapbox é executada no servidor.
-const PortugalWorldMap = dynamic(
-  () =>
-    import('@/src/components/portugal-world/PortugalWorldMap').then(
-      (mod) => mod.PortugalWorldMap
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none"
-        suppressHydrationWarning
-      >
-        <div className="relative mb-5">
-          <div className="w-14 h-14 rounded-full border-3 border-cyan-500/20 border-t-cyan-400 animate-spin" />
-          <Globe className="w-6 h-6 text-cyan-400 absolute inset-0 m-auto animate-pulse" />
-        </div>
-        <div className="space-y-1">
-          <h2 className="font-display text-base font-black uppercase tracking-wider text-white">
-            PORTUGAL
-          </h2>
-          <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">
-            A carregar mundo...
-          </p>
-        </div>
-      </div>
-    ),
-  }
-)
+import { PortugalWorldMap } from '@/src/components/portugal-world/PortugalWorldMap'
+
+function PortugalMapaContent() {
+  const searchParams = useSearchParams()
+  const districtParam =
+    searchParams.get('district') ||
+    searchParams.get('dist') ||
+    searchParams.get('distrito') ||
+    'Lisboa'
+
+  const sectorParam = (searchParams.get('sector') || 'continente') as any
+
+  return <PortugalWorldMap mode="world" district={districtParam} sector={sectorParam} />
+}
 
 export default function PortugalMapaPage() {
   return (
     <PortugalMapErrorBoundary>
-      <PortugalWorldMap mode="world" />
+      <main className="w-full h-[100dvh] min-h-[100dvh] overflow-hidden bg-slate-950">
+        <Suspense
+          fallback={
+            <div className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none">
+              <div className="w-14 h-14 rounded-full border-3 border-cyan-500/20 border-t-cyan-400 animate-spin mb-4" />
+              <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">
+                A carregar interface...
+              </p>
+            </div>
+          }
+        >
+          <PortugalMapaContent />
+        </Suspense>
+      </main>
     </PortugalMapErrorBoundary>
   )
 }

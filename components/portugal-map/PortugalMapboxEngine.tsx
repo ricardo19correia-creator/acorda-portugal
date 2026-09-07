@@ -55,25 +55,25 @@ const FALLBACK_SATELLITE_STYLE: mapboxgl.Style = {
   ],
 }
 
-// Tactical Vector Fallback Style (Carto Dark)
+// Tactical Vector Fallback Style (ESRI Dark)
 const TACTICAL_DARK_STYLE: mapboxgl.Style = {
   version: 8,
   sources: {
-    'carto-dark-source': {
+    'esri-dark-source': {
       type: 'raster',
       tiles: [
-        'https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
+        'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
       ],
       tileSize: 256,
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      maxzoom: 19,
+      attribution: '&copy; Esri, DeLorme, NAVTEQ',
+      maxzoom: 16,
     },
   },
   layers: [
     {
-      id: 'carto-dark-layer',
+      id: 'esri-dark-layer',
       type: 'raster',
-      source: 'carto-dark-source',
+      source: 'esri-dark-source',
       minzoom: 0,
       maxzoom: 19,
     },
@@ -419,8 +419,8 @@ export function PortugalMapboxEngine({
         if (map.getLayer('esri-satellite-layer')) {
           map.setLayoutProperty('esri-satellite-layer', 'visibility', 'visible')
         }
-        if (map.getLayer('carto-dark-layer')) {
-          map.setLayoutProperty('carto-dark-layer', 'visibility', 'none')
+        if (map.getLayer('esri-dark-layer')) {
+          map.setLayoutProperty('esri-dark-layer', 'visibility', 'none')
         }
         if (map.getLayer('districts-line')) {
           map.setPaintProperty('districts-line', 'line-color', '#10b981')
@@ -435,8 +435,8 @@ export function PortugalMapboxEngine({
         if (map.getLayer('esri-satellite-layer')) {
           map.setLayoutProperty('esri-satellite-layer', 'visibility', 'none')
         }
-        if (map.getLayer('carto-dark-layer')) {
-          map.setLayoutProperty('carto-dark-layer', 'visibility', 'visible')
+        if (map.getLayer('esri-dark-layer')) {
+          map.setLayoutProperty('esri-dark-layer', 'visibility', 'visible')
         }
         if (map.getLayer('districts-line')) {
           map.setPaintProperty('districts-line', 'line-color', '#06b6d4')

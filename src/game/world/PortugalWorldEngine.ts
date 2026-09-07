@@ -19,18 +19,18 @@ import {
 } from './WorldState'
 
 // High-Tech Dark Style Specification for "PORTUGAL 2150"
-// Zero external token needed, open-source accelerated tiles
+// Zero external token needed, open-source high-resolution tactical basemap
 const PORTUGAL_2150_STYLE: StyleSpecification = {
   version: 8,
   sources: {
-    'carto-dark-basemap': {
+    'tactical-dark-basemap': {
       type: 'raster',
       tiles: [
-        'https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
+        'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
       ],
       tileSize: 256,
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      maxzoom: 19,
+      attribution: '&copy; Esri, DeLorme, NAVTEQ',
+      maxzoom: 16,
     },
   },
   layers: [
@@ -42,12 +42,12 @@ const PORTUGAL_2150_STYLE: StyleSpecification = {
       },
     },
     {
-      id: 'carto-dark-layer',
+      id: 'tactical-dark-layer',
       type: 'raster',
-      source: 'carto-dark-basemap',
+      source: 'tactical-dark-basemap',
       paint: {
-        'raster-opacity': 0.68,
-        'raster-contrast': 0.15,
+        'raster-opacity': 0.72,
+        'raster-contrast': 0.18,
         'raster-brightness-min': 0.05,
       },
       minzoom: 0,
@@ -121,7 +121,8 @@ export class PortugalWorldEngine {
       options.callbacks || {}
     )
 
-    this.map.on('load', () => {
+    const notifyReady = () => {
+      if (this.isLoaded || !this.map || !this.map.isStyleLoaded()) return
       this.isLoaded = true
       try {
         this.initLayers()
@@ -140,6 +141,14 @@ export class PortugalWorldEngine {
         }
       } catch (loadErr) {
         console.warn('[PortugalWorldEngine] Erro durante o evento on(load):', loadErr)
+      }
+    }
+
+    this.map.on('load', notifyReady)
+    this.map.on('style.load', notifyReady)
+    this.map.on('render', () => {
+      if (!this.isLoaded && this.map.isStyleLoaded()) {
+        notifyReady()
       }
     })
   }

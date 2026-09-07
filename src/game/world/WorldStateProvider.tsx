@@ -119,10 +119,21 @@ export function WorldStateProvider({
     }))
   }, [])
 
+  const currentSelectedDistrict = useMemo(() => {
+    if (!selectedDistrict) return null
+    const live = liveDistricts.find(
+      (d) =>
+        d.id.toLowerCase() === selectedDistrict.id.toLowerCase() ||
+        d.slug.toLowerCase() === selectedDistrict.slug.toLowerCase() ||
+        d.name.toLowerCase() === selectedDistrict.name.toLowerCase()
+    )
+    return live || selectedDistrict
+  }, [selectedDistrict, liveDistricts])
+
   const value = useMemo(
     () => ({
       districts: liveDistricts,
-      selectedDistrict,
+      selectedDistrict: currentSelectedDistrict,
       hoveredDistrict,
       selectedArena,
       activeSector,
@@ -138,7 +149,7 @@ export function WorldStateProvider({
     }),
     [
       liveDistricts,
-      selectedDistrict,
+      currentSelectedDistrict,
       hoveredDistrict,
       selectedArena,
       activeSector,
