@@ -123,7 +123,7 @@ export function Hero() {
             DESAFIO NACIONAL 🇵🇹 {ACTIVE_SEASON_01.name}
           </span>
           <span className="text-white/30 hidden sm:inline">•</span>
-          <span className="text-xs font-mono text-cyan-300 font-bold flex items-center gap-1">
+          <span className="text-xs font-mono text-cyan-300 font-bold flex items-center gap-1" suppressHydrationWarning>
             <Clock className="w-3.5 h-3.5" /> {seasonTime.formatted}
           </span>
         </div>

@@ -80,11 +80,15 @@ export class PortugalWorldEngine {
   private layersConfig: WorldLayersConfig
   private isLoaded = false
   private container: HTMLElement
+  private pendingDistrict: string | DistrictItem | null = null
 
   constructor(options: PortugalWorldEngineOptions) {
     this.container = options.container
     this.mode = options.mode || 'world'
     this.layersConfig = { ...DEFAULT_WORLD_LAYERS, ...options.layers }
+    if (options.initialDistrict) {
+      this.pendingDistrict = options.initialDistrict
+    }
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
@@ -119,17 +123,23 @@ export class PortugalWorldEngine {
 
     this.map.on('load', () => {
       this.isLoaded = true
-      this.initLayers()
-      this.interaction.bindEvents()
+      try {
+        this.initLayers()
+        this.interaction.bindEvents()
 
-      if (options.initialDistrict) {
-        this.selectDistrict(options.initialDistrict)
-      } else if (options.initialSector && options.initialSector !== 'continente') {
-        this.camera.goToSector(options.initialSector, 500)
-      }
+        if (this.pendingDistrict) {
+          const target = this.pendingDistrict
+          this.pendingDistrict = null
+          this.selectDistrict(target)
+        } else if (options.initialSector && options.initialSector !== 'continente') {
+          this.camera.goToSector(options.initialSector, 500)
+        }
 
-      if (options.callbacks?.onReady) {
-        options.callbacks.onReady()
+        if (options.callbacks?.onReady) {
+          options.callbacks.onReady()
+        }
+      } catch (loadErr) {
+        console.warn('[PortugalWorldEngine] Erro durante o evento on(load):', loadErr)
       }
     })
   }
@@ -215,33 +225,47 @@ export class PortugalWorldEngine {
   }
 
   private applyLayersConfig() {
-    this.districtLayer.setVisible(this.layersConfig.territorios)
-    this.cityLayer.setVisible(this.layersConfig.cidades)
-    this.arenaLayer.setVisible(this.layersConfig.arenas)
-    this.landmarkLayer.setVisible(this.layersConfig.landmarks)
-    this.eventLayer.setVisible(this.layersConfig.eventos)
-    this.playerLayer.setVisible(this.layersConfig.ranking)
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      this.districtLayer.setVisible(this.layersConfig.territorios)
+      this.cityLayer.setVisible(this.layersConfig.cidades)
+      this.arenaLayer.setVisible(this.layersConfig.arenas)
+      this.landmarkLayer.setVisible(this.layersConfig.landmarks)
+      this.eventLayer.setVisible(this.layersConfig.eventos)
+      this.playerLayer.setVisible(this.layersConfig.ranking)
 
-    const connVal = this.layersConfig.conexoes ? 'visible' : 'none'
-    if (this.map.getLayer('connections-glow')) this.map.setLayoutProperty('connections-glow', 'visibility', connVal)
-    if (this.map.getLayer('connections-line')) this.map.setLayoutProperty('connections-line', 'visibility', connVal)
+      const connVal = this.layersConfig.conexoes ? 'visible' : 'none'
+      if (this.map.getLayer('connections-glow')) this.map.setLayoutProperty('connections-glow', 'visibility', connVal)
+      if (this.map.getLayer('connections-line')) this.map.setLayoutProperty('connections-line', 'visibility', connVal)
+    } catch (err) {
+      console.warn('[PortugalWorldEngine] Erro em applyLayersConfig:', err)
+    }
   }
 
   public selectDistrict(districtQuery: string | DistrictItem | null) {
-    if (!districtQuery) {
-      this.districtLayer.setSelected(null)
+    if (!this.isLoaded || !this.map || !this.map.isStyleLoaded()) {
+      this.pendingDistrict = districtQuery
       return
     }
 
-    const item = typeof districtQuery === 'string' ? getDistrict(districtQuery) : districtQuery
-    if (!item) return
+    try {
+      if (!districtQuery) {
+        this.districtLayer.setSelected(null)
+        return
+      }
 
-    // Find numeric ID (1-based index)
-    const numericId = DISTRICTS_LIST.findIndex((d) => d.id === item.id) + 1
-    if (numericId > 0) {
-      this.districtLayer.setSelected(numericId)
+      const item = typeof districtQuery === 'string' ? getDistrict(districtQuery) : districtQuery
+      if (!item) return
+
+      // Find numeric ID (1-based index)
+      const numericId = DISTRICTS_LIST.findIndex((d) => d.id === item.id) + 1
+      if (numericId > 0) {
+        this.districtLayer.setSelected(numericId)
+      }
+      this.camera.focusDistrict(item, 850)
+    } catch (err) {
+      console.warn('[PortugalWorldEngine] Erro em selectDistrict:', err)
     }
-    this.camera.focusDistrict(item, 850)
   }
 
   public updateCallbacks(callbacks: WorldEngineCallbacks) {
@@ -249,14 +273,23 @@ export class PortugalWorldEngine {
   }
 
   public resize() {
-    if (this.map) {
-      this.map.resize()
+    try {
+      if (this.map) {
+        this.map.resize()
+      }
+    } catch (err) {
+      console.warn('[PortugalWorldEngine] Erro em resize:', err)
     }
   }
 
   public destroy() {
-    if (this.map) {
-      this.map.remove()
+    this.isLoaded = false
+    try {
+      if (this.map) {
+        this.map.remove()
+      }
+    } catch (err) {
+      console.warn('[PortugalWorldEngine] Erro em destroy:', err)
     }
   }
 }

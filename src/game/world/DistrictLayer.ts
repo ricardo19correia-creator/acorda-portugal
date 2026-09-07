@@ -17,18 +17,20 @@ export class DistrictLayer {
   }
 
   public init(initialGeoJSON?: FeatureCollection) {
+    if (!this.map || !this.map.isStyleLoaded()) return
     const data = initialGeoJSON || getDistrictsGeoJSON()
 
-    if (!this.map.getSource(this.sourceId)) {
-      this.map.addSource(this.sourceId, {
-        type: 'geojson',
-        data,
-        generateId: false, // IDs are already set as 1..20
-      })
-    }
+    try {
+      if (!this.map.getSource(this.sourceId)) {
+        this.map.addSource(this.sourceId, {
+          type: 'geojson',
+          data,
+          generateId: false, // IDs are already set as 1..20
+        })
+      }
 
-    // 1. District Fill with GPU feature-state
-    if (!this.map.getLayer(this.fillLayerId)) {
+      // 1. District Fill with GPU feature-state
+      if (!this.map.getLayer(this.fillLayerId)) {
       this.map.addLayer({
         id: this.fillLayerId,
         type: 'fill',
@@ -117,44 +119,64 @@ export class DistrictLayer {
         },
       })
     }
+  } catch (err) {
+      console.warn('[DistrictLayer] Erro ao inicializar camadas:', err)
+    }
   }
 
   public setHover(featureId: number | null) {
-    if (this.currentHoverId !== null) {
-      this.map.setFeatureState(
-        { source: this.sourceId, id: this.currentHoverId },
-        { hover: false }
-      )
-    }
-    this.currentHoverId = featureId
-    if (featureId !== null) {
-      this.map.setFeatureState(
-        { source: this.sourceId, id: featureId },
-        { hover: true }
-      )
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      if (!this.map.getSource(this.sourceId)) return
+      if (this.currentHoverId !== null) {
+        this.map.setFeatureState(
+          { source: this.sourceId, id: this.currentHoverId },
+          { hover: false }
+        )
+      }
+      this.currentHoverId = featureId
+      if (featureId !== null) {
+        this.map.setFeatureState(
+          { source: this.sourceId, id: featureId },
+          { hover: true }
+        )
+      }
+    } catch (err) {
+      console.warn('[DistrictLayer] Erro transitório em setHover:', err)
     }
   }
 
   public setSelected(featureId: number | null) {
-    if (this.currentSelectedId !== null) {
-      this.map.setFeatureState(
-        { source: this.sourceId, id: this.currentSelectedId },
-        { selected: false }
-      )
-    }
-    this.currentSelectedId = featureId
-    if (featureId !== null) {
-      this.map.setFeatureState(
-        { source: this.sourceId, id: featureId },
-        { selected: true }
-      )
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      if (!this.map.getSource(this.sourceId)) return
+      if (this.currentSelectedId !== null) {
+        this.map.setFeatureState(
+          { source: this.sourceId, id: this.currentSelectedId },
+          { selected: false }
+        )
+      }
+      this.currentSelectedId = featureId
+      if (featureId !== null) {
+        this.map.setFeatureState(
+          { source: this.sourceId, id: featureId },
+          { selected: true }
+        )
+      }
+    } catch (err) {
+      console.warn('[DistrictLayer] Erro transitório em setSelected:', err)
     }
   }
 
   public setVisible(visible: boolean) {
-    const val = visible ? 'visible' : 'none'
-    if (this.map.getLayer(this.fillLayerId)) this.map.setLayoutProperty(this.fillLayerId, 'visibility', val)
-    if (this.map.getLayer(this.outlineLayerId)) this.map.setLayoutProperty(this.outlineLayerId, 'visibility', val)
-    if (this.map.getLayer(this.glowLayerId)) this.map.setLayoutProperty(this.glowLayerId, 'visibility', val)
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      const val = visible ? 'visible' : 'none'
+      if (this.map.getLayer(this.fillLayerId)) this.map.setLayoutProperty(this.fillLayerId, 'visibility', val)
+      if (this.map.getLayer(this.outlineLayerId)) this.map.setLayoutProperty(this.outlineLayerId, 'visibility', val)
+      if (this.map.getLayer(this.glowLayerId)) this.map.setLayoutProperty(this.glowLayerId, 'visibility', val)
+    } catch (err) {
+      console.warn('[DistrictLayer] Erro transitório em setVisible:', err)
+    }
   }
 }

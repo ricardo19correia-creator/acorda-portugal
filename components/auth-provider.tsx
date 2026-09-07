@@ -703,9 +703,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     console.log('[AUTH][STATE] loading')
     console.log('[AUTH] A inicializar listener onAuthStateChanged do Firebase...')
 
+    let resolved = false
+    const safetyTimeout = setTimeout(() => {
+      if (!resolved) {
+        setAuthStatus((curr) => {
+          if (curr === 'AUTH_INITIALIZING') {
+            console.warn('[AUTH] Safety fallback timeout atingido (1500ms). Definindo AUTH_UNAUTHENTICATED.')
+            setProfileLoading(false)
+            return 'AUTH_UNAUTHENTICATED'
+          }
+          return curr
+        })
+      }
+    }, 1500)
+
     const unsubscribeAuth = onAuthStateChanged(
       auth,
       (currentAuthUser) => {
+        resolved = true
+        clearTimeout(safetyTimeout)
         console.log('[AUTH] onAuthStateChanged emitiu estado:', currentAuthUser ? `UID: ${currentAuthUser.uid}` : 'Não autenticado')
 
         setUser(currentAuthUser)
@@ -731,6 +747,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       },
       (authErr) => {
+        resolved = true
+        clearTimeout(safetyTimeout)
         console.error('[AUTH] Erro crítico no Firebase Auth:', authErr)
         setAuthInitializationError(authErr?.message || 'Erro de autenticação')
         setAuthStatus('AUTH_ERROR_REAL')
@@ -739,6 +757,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     )
 
     return () => {
+      clearTimeout(safetyTimeout)
       unsubscribeAuth()
       if (snapshotUnsubRef.current) {
         snapshotUnsubRef.current()

@@ -13,12 +13,14 @@ export class ArenaLayer {
   }
 
   public init() {
-    if (!this.map.getSource(this.sourceId)) {
-      this.map.addSource(this.sourceId, {
-        type: 'geojson',
-        data: getArenasGeoJSON(),
-      })
-    }
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      if (!this.map.getSource(this.sourceId)) {
+        this.map.addSource(this.sourceId, {
+          type: 'geojson',
+          data: getArenasGeoJSON(),
+        })
+      }
 
     // 1. Arena Glow Pulse Halo
     if (!this.map.getLayer(this.glowLayerId)) {
@@ -103,12 +105,20 @@ export class ArenaLayer {
         },
       })
     }
+  } catch (err) {
+    console.warn('[ArenaLayer] Erro ao inicializar camadas:', err)
   }
+}
 
   public setVisible(visible: boolean) {
-    const val = visible ? 'visible' : 'none'
-    if (this.map.getLayer(this.glowLayerId)) this.map.setLayoutProperty(this.glowLayerId, 'visibility', val)
-    if (this.map.getLayer(this.coreLayerId)) this.map.setLayoutProperty(this.coreLayerId, 'visibility', val)
-    if (this.map.getLayer(this.labelLayerId)) this.map.setLayoutProperty(this.labelLayerId, 'visibility', val)
+    if (!this.map || !this.map.isStyleLoaded()) return
+    try {
+      const val = visible ? 'visible' : 'none'
+      if (this.map.getLayer(this.glowLayerId)) this.map.setLayoutProperty(this.glowLayerId, 'visibility', val)
+      if (this.map.getLayer(this.coreLayerId)) this.map.setLayoutProperty(this.coreLayerId, 'visibility', val)
+      if (this.map.getLayer(this.labelLayerId)) this.map.setLayoutProperty(this.labelLayerId, 'visibility', val)
+    } catch (err) {
+      console.warn('[ArenaLayer] Erro em setVisible:', err)
+    }
   }
 }

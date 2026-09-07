@@ -78,8 +78,13 @@ function QuizPageContent() {
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null)
 
-  const [generatedGameId] = useState(() => safeRandomUUID())
-  const gameId = gameIdFromUrl ?? generatedGameId
+  const [generatedGameId, setGeneratedGameId] = useState<string>('')
+  useEffect(() => {
+    if (!gameIdFromUrl && !generatedGameId) {
+      setGeneratedGameId(safeRandomUUID())
+    }
+  }, [gameIdFromUrl, generatedGameId])
+  const gameId = gameIdFromUrl || generatedGameId || 'sessao-ativa'
 
   useEffect(() => {
     if (!categorySlug || gameIdFromUrl) return

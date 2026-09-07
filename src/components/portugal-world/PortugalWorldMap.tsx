@@ -129,22 +129,34 @@ function PortugalWorldMapInner({
 
   // 3. React to mode changes
   useEffect(() => {
-    if (engineRef.current) {
-      engineRef.current.setMode(mode)
+    try {
+      if (engineRef.current) {
+        engineRef.current.setMode(mode)
+      }
+    } catch (e) {
+      console.warn('[PortugalWorldMap] Erro ao alterar modo:', e)
     }
   }, [mode])
 
   // 4. React to external district focus
   useEffect(() => {
-    if (district && engineRef.current) {
-      engineRef.current.selectDistrict(district)
+    try {
+      if (district && engineRef.current) {
+        engineRef.current.selectDistrict(district)
+      }
+    } catch (e) {
+      console.warn('[PortugalWorldMap] Erro ao selecionar distrito:', e)
     }
   }, [district])
 
   // 5. React to layer toggles
   useEffect(() => {
-    if (engineRef.current) {
-      engineRef.current.setLayers(layers)
+    try {
+      if (engineRef.current) {
+        engineRef.current.setLayers(layers)
+      }
+    } catch (e) {
+      console.warn('[PortugalWorldMap] Erro ao alterar camadas:', e)
     }
   }, [layers])
 
@@ -247,18 +259,53 @@ function PortugalWorldMapInner({
   )
 }
 
+interface WorldMapErrorBoundaryProps {
+  children: React.ReactNode
+}
+
+interface WorldMapErrorBoundaryState {
+  hasError: boolean
+}
+
+class WorldMapErrorBoundary extends React.Component<
+  WorldMapErrorBoundaryProps,
+  WorldMapErrorBoundaryState
+> {
+  constructor(props: WorldMapErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(): WorldMapErrorBoundaryState {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.warn('[PortugalWorldMap] Erro interno capturado com segurança pelo boundary do mapa:', error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <WorldFallback onRetry={() => this.setState({ hasError: false })} />
+    }
+    return this.props.children
+  }
+}
+
 /**
  * Self-contained Master Reusable PortugalWorldMap Component
  */
 export function PortugalWorldMap(props: PortugalWorldMapProps) {
   return (
-    <WorldStateProvider
-      initialMode={props.mode}
-      initialDistrict={props.district}
-      initialSector={props.sector}
-    >
-      <PortugalWorldMapInner {...props} />
-    </WorldStateProvider>
+    <WorldMapErrorBoundary>
+      <WorldStateProvider
+        initialMode={props.mode}
+        initialDistrict={props.district}
+        initialSector={props.sector}
+      >
+        <PortugalWorldMapInner {...props} />
+      </WorldStateProvider>
+    </WorldMapErrorBoundary>
   )
 }
 

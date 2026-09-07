@@ -87,9 +87,7 @@ export default function RankingsPage() {
   const [copiedShare, setCopiedShare] = useState<boolean>(false)
   const [seasonTime, setSeasonTime] = useState(() => calculateTimeRemaining(ACTIVE_SEASON_01.endDate))
 
-  const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>(() =>
-    getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)
-  )
+  const [userDisplayAvatar, setUserDisplayAvatar] = useState<string>(DEFAULT_AVATAR.image)
 
   // Atualizar contador da temporada a cada segundo
   useEffect(() => {
@@ -374,7 +372,7 @@ export default function RankingsPage() {
                       <Trophy className="h-3.5 w-3.5" />
                       CAMPEONATO NACIONAL OFICIAL
                     </span>
-                    <span className="badge-hud text-cyan-400 border-cyan-500/40 bg-cyan-500/10 font-mono flex items-center gap-1.5">
+                    <span className="badge-hud text-cyan-400 border-cyan-500/40 bg-cyan-500/10 font-mono flex items-center gap-1.5" suppressHydrationWarning>
                       <Clock className="h-3.5 w-3.5 animate-pulse" />
                       {`${ACTIVE_SEASON_01.name} • ${seasonTime.formatted}`}
                     </span>
@@ -497,7 +495,7 @@ export default function RankingsPage() {
                     <h2 className="text-2xl sm:text-3xl font-black text-white font-display">
                       {ACTIVE_SEASON_01.subtitle}
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                    <p className="text-xs sm:text-sm text-slate-400 mt-1" suppressHydrationWarning>
                       Tema: «{ACTIVE_SEASON_01.theme}» • Termina em {seasonTime.formatted}
                     </p>
                   </div>

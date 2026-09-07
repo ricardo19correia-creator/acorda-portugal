@@ -98,25 +98,30 @@ export class WorldInteraction {
 
     // 5. Click on empty space (Deselects)
     map.on('click', (e) => {
-      const bbox: [PointLike, PointLike] = [
-        [e.point.x - 3, e.point.y - 3],
-        [e.point.x + 3, e.point.y + 3],
-      ]
-      const interactiveFeatures = map.queryRenderedFeatures(bbox, {
-        layers: ['districts-fill', 'arenas-core', 'landmarks-core', 'events-core'].filter((id) =>
-          Boolean(map.getLayer(id))
-        ),
-      })
+      if (!map.isStyleLoaded()) return
+      try {
+        const bbox: [PointLike, PointLike] = [
+          [e.point.x - 3, e.point.y - 3],
+          [e.point.x + 3, e.point.y + 3],
+        ]
+        const interactiveFeatures = map.queryRenderedFeatures(bbox, {
+          layers: ['districts-fill', 'arenas-core', 'landmarks-core', 'events-core'].filter((id) =>
+            Boolean(map.getLayer(id))
+          ),
+        })
 
-      if (interactiveFeatures.length === 0) {
-        this.districtLayer.setSelected(null)
-        if (this.callbacks.onSelectDistrict) {
-          // Deselect
-          (this.callbacks.onSelectDistrict as any)(null)
+        if (interactiveFeatures.length === 0) {
+          this.districtLayer.setSelected(null)
+          if (this.callbacks.onSelectDistrict) {
+            // Deselect
+            (this.callbacks.onSelectDistrict as any)(null)
+          }
+          if (this.callbacks.onSelectArena) {
+            (this.callbacks.onSelectArena as any)(null)
+          }
         }
-        if (this.callbacks.onSelectArena) {
-          (this.callbacks.onSelectArena as any)(null)
-        }
+      } catch (err) {
+        console.warn('[WorldInteraction] Erro em click handler:', err)
       }
     })
 
