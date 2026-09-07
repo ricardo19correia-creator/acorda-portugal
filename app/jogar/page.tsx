@@ -139,7 +139,7 @@ function JogarContainer() {
     searchParams.get('event') ||
     searchParams.get('evento')
 
-  const districtParam = searchParams.get('dist') || searchParams.get('distrito')
+  const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
   const cityParam = searchParams.get('city') || searchParams.get('cidade')
   const gameParam = searchParams.get('game') || searchParams.get('gameId')
   const arenaParam =

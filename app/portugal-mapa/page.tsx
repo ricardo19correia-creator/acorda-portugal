@@ -111,10 +111,10 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
 // 1. ELIMINAR SSR DO MAPBOX:
 // O componente do mapa é importado exclusivamente via dynamic com { ssr: false }.
 // Nenhuma lógica, canvas ou árvore do Mapbox é executada no servidor.
-const PortugalMapComponent = dynamic(
+const PortugalWorldMap = dynamic(
   () =>
-    import('@/components/portugal-map/PortugalMapComponent').then(
-      (mod) => mod.PortugalMapComponent
+    import('@/src/components/portugal-world/PortugalWorldMap').then(
+      (mod) => mod.PortugalWorldMap
     ),
   {
     ssr: false,
@@ -123,16 +123,18 @@ const PortugalMapComponent = dynamic(
         className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none"
         suppressHydrationWarning
       >
-        <div className="relative mb-4">
-          <div className="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin" />
-          <Globe className="w-7 h-7 text-cyan-400 absolute inset-0 m-auto animate-pulse" />
+        <div className="relative mb-5">
+          <div className="w-14 h-14 rounded-full border-3 border-cyan-500/20 border-t-cyan-400 animate-spin" />
+          <Globe className="w-6 h-6 text-cyan-400 absolute inset-0 m-auto animate-pulse" />
         </div>
-        <span
-          className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400"
-          suppressHydrationWarning
-        >
-          A INICIALIZAR RELEVO // PORTUGAL 2150
-        </span>
+        <div className="space-y-1">
+          <h2 className="font-display text-base font-black uppercase tracking-wider text-white">
+            PORTUGAL
+          </h2>
+          <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">
+            A carregar mundo...
+          </p>
+        </div>
       </div>
     ),
   }
@@ -141,7 +143,7 @@ const PortugalMapComponent = dynamic(
 export default function PortugalMapaPage() {
   return (
     <PortugalMapErrorBoundary>
-      <PortugalMapComponent />
+      <PortugalWorldMap mode="world" />
     </PortugalMapErrorBoundary>
   )
 }

@@ -34,9 +34,21 @@ import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
+import dynamic from 'next/dynamic'
 import { UserAvatar } from '@/components/ui/UserAvatar'
-import { PortugalVectorFallback } from '@/components/portugal-map/PortugalVectorFallback'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
+
+const PortugalWorldMap = dynamic(
+  () => import('@/src/components/portugal-world/PortugalWorldMap'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[520px] flex items-center justify-center bg-slate-950/80 rounded-2xl border border-white/10">
+        <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">A carregar ranking territorial...</span>
+      </div>
+    ),
+  }
+)
 import {
   ALL_DISTRICTS_LIST,
   subscribeRankings,
@@ -458,15 +470,17 @@ export default function RankingsPage() {
                     href="/portugal-mapa"
                     className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg shadow-cyan-500/25 hover:scale-102 transition-all cursor-pointer"
                   >
-                    <span>Abrir Portugal 2150 em 3D</span>
+                    <span>Explorar Mundo em Ecrã Total</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
-                <PortugalVectorFallback
-                  territories={districtWarTerritories}
-                  selectedDistrict={selectedDistrict}
-                  onSelectDistrict={(dist) => setSelectedDistrict(dist)}
-                />
+                <div className="w-full h-[520px] rounded-2xl overflow-hidden relative border border-white/10">
+                  <PortugalWorldMap
+                    mode="ranking"
+                    district={selectedDistrict}
+                    onSelectDistrict={(dist) => setSelectedDistrict(dist.name)}
+                  />
+                </div>
               </div>
             </div>
           )}

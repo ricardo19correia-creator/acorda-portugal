@@ -133,7 +133,7 @@ export function PortugalVectorFallback({
       <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-slate-950/85 border border-cyan-500/40 backdrop-blur-md shadow-2xl flex items-center gap-2.5 text-cyan-300 text-xs font-mono">
         <div className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
         <span className="font-black tracking-widest text-[10px] sm:text-xs uppercase">
-          COMANDO HOLOGRÁFICO // MAP2150-V2
+          ACORDA PORTUGAL // MODO TÁTICO
         </span>
         <span className="text-[10px] text-emerald-400 hidden sm:inline">
           • 18 DISTRITOS SOBERANOS • {OFFICIAL_MAP_ARENAS.length} ARENAS
@@ -460,11 +460,6 @@ export function PortugalVectorFallback({
         >
           <Crosshair className="w-4 h-4" />
         </button>
-      </div>
-
-      {/* 6. CORNER TACTICAL TELEMETRY FOOTER */}
-      <div className="absolute bottom-2 left-3 z-20 pointer-events-none opacity-80 font-mono text-[9px] text-cyan-400/90 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-cyan-500/30 backdrop-blur-sm">
-        PORTUGAL MAP 2150 // MAP2150-V2 • SISTEMA DE COMANDO HOLOGRÁFICO
       </div>
     </div>
   )

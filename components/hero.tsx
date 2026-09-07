@@ -24,15 +24,15 @@ import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { logGameFlow } from '@/lib/game-session'
 
-const PortugalNexus3DEngine = dynamic(
-  () => import('@/components/portugal-map/PortugalNexus3DEngine'),
+const PortugalWorldMap = dynamic(
+  () => import('@/src/components/portugal-world/PortugalWorldMap'),
   {
     ssr: false,
     loading: () => (
       <div className="w-full h-full min-h-[500px] flex items-center justify-center bg-slate-950/80 rounded-4xl">
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-full border-2 border-cyan-500/20 border-t-cyan-400 animate-spin" />
-          <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest">Carregando Portugal 3D...</span>
+          <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest">A carregar Portugal...</span>
         </div>
       </div>
     ),
@@ -241,37 +241,20 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Real-time 3D Engine Instance */}
+        {/* Real-time World Engine Instance */}
         <div className="w-full h-full">
-          <PortugalNexus3DEngine
-            selectedDistrict={selectedDistrict}
-            hoveredDistrict={null}
-            activeRegion="continente"
-            activeMode="terrain"
-            showArenas={true}
-            isCinematic={false}
-            layers={{
-              territorios: true,
-              cidades: true,
-              arenas: true,
-              jogadores: false,
-              eventos: true,
-              ranking: false,
-              conexoes: true,
-              landmarks: true,
-            }}
-            territories={territories}
-            onSelectDistrict={(d) => setSelectedDistrict(d)}
-            onHoverDistrict={() => {}}
+          <PortugalWorldMap
+            mode="world"
+            district={selectedDistrict}
+            onSelectDistrict={(d) => setSelectedDistrict(d.name)}
             onSelectArena={(arena) => router.push(`/arenas?id=${encodeURIComponent(arena.id)}`)}
-            onToggleCinematic={() => router.push('/portugal-mapa')}
           />
         </div>
 
         {/* Bottom Floating Legend / Instructions */}
         <div className="absolute bottom-4 left-4 right-4 z-20 pointer-events-none flex items-center justify-between text-slate-400 text-[11px] font-mono px-3">
           <span className="bg-slate-950/80 px-3 py-1 rounded-lg border border-white/10 backdrop-blur-sm hidden sm:inline">
-            💡 Arrasta com o rato para orbitar em 3D • Roda do rato para zoom
+            💡 Arrasta para explorar • Roda do rato para zoom • Clica para selecionar
           </span>
           <Link
             href="/portugal-mapa"
