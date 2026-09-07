@@ -149,11 +149,28 @@ function PortugalWorldMapInner({
     engineRef.current = engine
 
     const handleResize = () => {
-      engine.resize()
+      if (engineRef.current) {
+        engineRef.current.resize()
+      }
     }
     window.addEventListener('resize', handleResize)
 
+    let ro: ResizeObserver | null = null
+    if (typeof ResizeObserver !== 'undefined' && mapContainerRef.current) {
+      ro = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
+            if (engineRef.current) {
+              engineRef.current.resize()
+            }
+          }
+        }
+      })
+      ro.observe(mapContainerRef.current)
+    }
+
     return () => {
+      if (ro) ro.disconnect()
       window.removeEventListener('resize', handleResize)
       engine.destroy()
       engineRef.current = null
@@ -197,11 +214,12 @@ function PortugalWorldMapInner({
   const handleSelectSector = useCallback(
     (newSector: WorldSector) => {
       setSector(newSector)
+      selectDistrict(null) // Deselect district to display full regional sector cleanly
       if (engineRef.current) {
         engineRef.current.camera.goToSector(newSector)
       }
     },
-    [setSector]
+    [setSector, selectDistrict]
   )
 
   const handleSelectDistrictItem = useCallback(
@@ -281,7 +299,12 @@ function PortugalWorldMapInner({
       {selectedDistrict && (
         <DistrictContextCard
           district={selectedDistrict}
-          onClose={() => selectDistrict(null)}
+          onClose={() => {
+            selectDistrict(null)
+            if (engineRef.current) {
+              engineRef.current.camera.fitSector(activeSector, { duration: 750 })
+            }
+          }}
           onPlay={handlePlayDistrict}
         />
       )}

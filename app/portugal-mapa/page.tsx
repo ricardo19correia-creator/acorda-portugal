@@ -117,7 +117,7 @@ function PortugalMapaContent() {
     searchParams.get('district') ||
     searchParams.get('dist') ||
     searchParams.get('distrito') ||
-    'Lisboa'
+    undefined
 
   const sectorParam = (searchParams.get('sector') || 'continente') as any
 

@@ -22,6 +22,7 @@ import {
 // Zero external token needed, open-source high-resolution tactical basemap
 const PORTUGAL_2150_STYLE: StyleSpecification = {
   version: 8,
+  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
   sources: {
     'tactical-dark-basemap': {
       type: 'raster',
@@ -92,17 +93,17 @@ export class PortugalWorldEngine {
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
-    // Initialize MapLibre WebGL instance
+    // Initialize MapLibre WebGL instance centered on mainland Portugal
     this.map = new Map({
       container: options.container,
       style: PORTUGAL_2150_STYLE,
-      center: [-8.2245, 39.55],
-      zoom: isMobile ? 5.3 : 6.3,
-      pitch: 35,
-      bearing: -4,
+      center: [-7.95, 39.60], // True geographic centroid of mainland Portugal
+      zoom: isMobile ? 5.5 : 6.5,
+      pitch: 0, // Clean upright 2D perspective on overview
+      bearing: 0,
       maxBounds: [
-        [-34.0, 31.0], // West/South bounds covering Azores & Madeira
-        [-4.5, 43.5],  // East/North bounds covering Portugal and borders
+        [-38.0, 28.0], // Generous non-clamping bounds covering Atlantic, Azores, Madeira & Portugal
+        [4.0, 46.0],
       ],
       attributionControl: false,
     })
@@ -125,6 +126,9 @@ export class PortugalWorldEngine {
       if (this.isLoaded || !this.map || !this.map.isStyleLoaded()) return
       this.isLoaded = true
       try {
+        // Ensure map canvas dimensions match DOM container precisely before calculating bounds
+        this.map.resize()
+
         this.initLayers()
         this.interaction.bindEvents()
 
@@ -132,8 +136,10 @@ export class PortugalWorldEngine {
           const target = this.pendingDistrict
           this.pendingDistrict = null
           this.selectDistrict(target)
-        } else if (options.initialSector && options.initialSector !== 'continente') {
-          this.camera.goToSector(options.initialSector, 500)
+        } else {
+          // ALWAYS fit sector on initial load (defaults to 'continente')
+          const initialSector = options.initialSector || 'continente'
+          this.camera.fitSector(initialSector, { animate: false })
         }
 
         if (options.callbacks?.onReady) {
