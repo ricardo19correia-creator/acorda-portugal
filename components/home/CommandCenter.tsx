@@ -23,7 +23,7 @@ import { UserAvatar } from '@/components/ui/UserAvatar'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { calculateCompetitiveDivision, DIVISION_COLORS } from '@/lib/rankings'
-import type { UserProfile } from '@/types'
+import type { UserProfile } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
 
 interface CommandCenterProps {
@@ -60,7 +60,7 @@ export function CommandCenter({
   const divColor = DIVISION_COLORS[division] || DIVISION_COLORS['Bronze']
   const title = getPlayerDisplayTitle(profile, currentLevel.title)
   const streak = typeof profile?.streak === 'number' ? profile.streak : wins > 0 ? Math.min(wins, 5) : 1
-  const coins = profile?.virtualMoney ?? (profile as any)?.coins ?? (xp * 2)
+  const coins = (profile as any)?.virtualMoney ?? (profile as any)?.coins ?? (xp * 2)
 
   const displayName = profile?.displayName || user?.displayName || 'Jogador'
 

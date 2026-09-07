@@ -369,7 +369,7 @@ export function PortugalMapboxEngine({
       el.setAttribute('aria-label', `Arena ${arena.name}`)
 
       const rarityBg =
-        arena.rarity === 'VIP' || arena.rarity === 'Exclusiva'
+        (arena.rarity as string) === 'VIP' || arena.rarity === 'Exclusiva'
           ? 'bg-amber-400 text-slate-950 border-amber-300'
           : arena.rarity === 'Lendária'
           ? 'bg-amber-500 text-slate-950 border-amber-300'

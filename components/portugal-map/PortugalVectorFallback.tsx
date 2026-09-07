@@ -279,7 +279,7 @@ export function PortugalVectorFallback({
           {/* 4.2. ARENAS POIS ON THE VECTOR MAP */}
           {OFFICIAL_MAP_ARENAS.map((arena) => {
             const [x, y] = projectToSvg(arena.coordinates[0], arena.coordinates[1])
-            const isVip = arena.rarity === 'VIP'
+            const isVip = (arena.rarity as string) === 'VIP' || arena.rarity === 'Exclusiva'
             const isLegendary = arena.rarity === 'Lendária'
             const isHovered = hoveredArena?.id === arena.id
 

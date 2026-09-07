@@ -23,7 +23,7 @@ export function ArenaDetailsModal({
   if (!isOpen || !arena) return null
 
   const rarityColor =
-    arena.rarity === 'VIP' || arena.rarity === 'Exclusiva'
+    (arena.rarity as string) === 'VIP' || arena.rarity === 'Exclusiva'
       ? 'from-amber-500 to-yellow-300 text-amber-950 border-amber-400'
       : arena.rarity === 'Lendária'
       ? 'from-amber-500 to-orange-500 text-slate-950 border-amber-400'

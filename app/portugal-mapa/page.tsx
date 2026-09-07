@@ -131,13 +131,7 @@ const PortugalMapComponent = dynamic(
           className="font-mono text-xs font-black uppercase tracking-widest text-cyan-400"
           suppressHydrationWarning
         >
-          A CARREGAR MAPA NACIONAL // PORTUGAL 2150
-        </span>
-        <span
-          className="text-[10px] font-mono text-emerald-400/90 mt-2 uppercase tracking-widest"
-          suppressHydrationWarning
-        >
-          BUILD-ID: MAP2150-V2
+          A INICIALIZAR RELEVO // PORTUGAL 2150
         </span>
       </div>
     ),

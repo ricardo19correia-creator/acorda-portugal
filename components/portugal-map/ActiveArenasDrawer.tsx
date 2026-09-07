@@ -36,7 +36,7 @@ export function ActiveArenasDrawer({ onSelectArena, className }: ActiveArenasDra
 
           <div className="overflow-y-auto space-y-1.5 pr-1 scrollbar-thin scrollbar-thumb-amber-500/30">
             {OFFICIAL_MAP_ARENAS.map((arena) => {
-              const isVip = arena.rarity === 'VIP'
+              const isVip = (arena.rarity as string) === 'VIP' || arena.rarity === 'Exclusiva'
               const isLegendary = arena.rarity === 'Lendária'
 
               return (

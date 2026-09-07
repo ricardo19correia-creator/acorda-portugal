@@ -389,3 +389,9 @@ export function playEmoteSound(labelOrText?: string) {
     osc2.stop(t + 0.35)
   } catch (e) {}
 }
+
+// 11. Função de Áudio Genérica para Efeitos Sonoros
+export function playSound(soundName?: string) {
+  playEmoteSound(soundName)
+}
+

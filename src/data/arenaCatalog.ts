@@ -1424,3 +1424,6 @@ export function isVipArena(arenaId: string): boolean {
   if (!resolved) return false
   return resolved.category === 'vip_supreme' || resolved.category === 'vip_ultimate'
 }
+
+export default MASTER_ARENA_CATALOG
+
