@@ -4,7 +4,7 @@ import React from 'react'
 import { Swords, Crown, Users, MapPin, ChevronRight, Shield } from 'lucide-react'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import type { DistrictWarTerritory } from '@/lib/district-war'
-import { getTerritoryByName } from '@/lib/portugal-geojson'
+import { getTerritoryByName } from '@/lib/territory-metadata'
 import { cn } from '@/lib/utils'
 
 interface DistrictIntelCardProps {
@@ -24,10 +24,10 @@ export function DistrictIntelCard({
 }: DistrictIntelCardProps) {
   const metadata = getTerritoryByName(districtName)
   const displayName = territory?.name || metadata?.name || districtName
-  const pos = territory?.pos || 1
-  const power = territory?.powerFormatted || '50.000'
-  const players = territory?.activePlayers ?? 120
-  const arenaCount = (metadata as any)?.arenasCount || 2
+  const pos = territory?.pos ? `#${territory.pos}` : 'Em análise'
+  const power = territory?.powerFormatted || (territory?.power ? `${Math.round(territory.power / 100) / 10}K` : '0')
+  const players = territory?.activePlayers ?? 0
+  const arenaCount = (metadata as any)?.arenasCount || 0
   const king = territory?.king
 
   return (

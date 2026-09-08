@@ -38,17 +38,7 @@ import dynamic from 'next/dynamic'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
 
-const PortugalWorldMap = dynamic(
-  () => import('@/src/components/portugal-world/PortugalWorldMap'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-[520px] flex items-center justify-center bg-slate-950/80 rounded-2xl border border-white/10">
-        <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">A carregar ranking territorial...</span>
-      </div>
-    ),
-  }
-)
+import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
 import {
   ALL_DISTRICTS_LIST,
   subscribeRankings,
@@ -473,10 +463,13 @@ export default function RankingsPage() {
                   </Link>
                 </div>
                 <div className="w-full h-[520px] rounded-2xl overflow-hidden relative border border-white/10">
-                  <PortugalWorldMap
+                  <PortugalMapEngine
                     mode="ranking"
-                    district={selectedDistrict}
-                    onSelectDistrict={(dist) => setSelectedDistrict(dist.name)}
+                    compact={true}
+                    initialDistrict={selectedDistrict}
+                    onSelectDistrict={(dist) => {
+                      if (dist) setSelectedDistrict(dist.name)
+                    }}
                   />
                 </div>
               </div>

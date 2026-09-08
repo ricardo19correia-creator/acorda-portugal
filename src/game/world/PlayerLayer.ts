@@ -12,7 +12,7 @@ export class PlayerLayer {
   }
 
   public init() {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       const geojson: FeatureCollection = {
         type: 'FeatureCollection',
@@ -81,7 +81,7 @@ export class PlayerLayer {
   }
 
   public setVisible(visible: boolean) {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       const val = visible ? 'visible' : 'none'
       if (this.map.getLayer(this.rankingLayerId)) {

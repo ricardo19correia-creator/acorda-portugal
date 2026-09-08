@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Acorda Portugal — Portugal 2150',
+  title: 'Mapa de Portugal — Acorda Portugal | O Desafio Nacional',
   description:
-    'Explore Portugal em 3D, descubra distritos, arenas e o mundo do Acorda Portugal.',
+    'Mapa estratégico nacional: 18 distritos, Açores, Madeira, cidades, arenas históricas e ranking territorial em tempo real.',
   openGraph: {
-    title: 'Acorda Portugal — Portugal 2150',
+    title: 'Mapa de Portugal — Acorda Portugal',
     description:
-      'Explore Portugal em 3D, descubra distritos, arenas e o mundo do Acorda Portugal.',
+      'Mapa estratégico nacional: 18 distritos, Açores, Madeira, cidades, arenas históricas e ranking territorial em tempo real.',
     url: 'https://acordaportugal.pt/portugal-mapa',
     siteName: 'Acorda Portugal',
     images: [
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
         url: '/images/og-map.jpg',
         width: 1200,
         height: 630,
-        alt: 'Portugal 2150 — Mapa Tático 3D',
+        alt: 'Mapa de Portugal — Acorda Portugal',
       },
     ],
     locale: 'pt_PT',

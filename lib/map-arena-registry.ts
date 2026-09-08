@@ -216,6 +216,56 @@ export const OFFICIAL_MAP_ARENAS: MapArenaPOI[] = [
     description: 'A metrópole futurista com vias elevadas e arranha-céus no Parque das Nações.',
     category: 'futuro',
   },
+  {
+    id: 'arena_santa_luzia',
+    name: 'Santuário de Santa Luzia & Foz do Lima',
+    district: 'Viana do Castelo',
+    coordinates: [-8.8353, 41.7019],
+    rarity: 'Épica',
+    image: getOfficialArenaImage('arena_era_descobrimentos'),
+    description: 'Bastião do Alto Minho coroando a foz do Rio Lima frente ao oceano infinito.',
+    category: 'monumento',
+  },
+  {
+    id: 'arena_solar_mateus',
+    name: 'Solar de Mateus & Alto Douro',
+    district: 'Vila Real',
+    coordinates: [-7.7183, 41.2969],
+    rarity: 'Rara',
+    image: getOfficialArenaImage('arena_final_nacional'),
+    description: 'Arquitetura barroca singular guardando as encostas heroicas do Douro Vinhateiro.',
+    category: 'monumento',
+  },
+  {
+    id: 'arena_cidadela_braganca',
+    name: 'Cidadela Medieval & Domus Municipalis',
+    district: 'Bragança',
+    coordinates: [-6.7497, 41.8039],
+    rarity: 'Lendária',
+    image: getOfficialArenaImage('arena_excl_fundadores'),
+    description: 'Fortaleza granítica inexpugnável no cume transmontano do Nordeste.',
+    category: 'historia',
+  },
+  {
+    id: 'arena_monsanto_castelo',
+    name: 'Aldeia Histórica de Monsanto & Raia',
+    district: 'Castelo Branco',
+    coordinates: [-7.1154, 40.0389],
+    rarity: 'Épica',
+    image: getOfficialArenaImage('arena_megalopolis_lusa'),
+    description: 'A aldeia mais portuguesa esculpida entre gigantescos blocos graníticos da Beira Baixa.',
+    category: 'historia',
+  },
+  {
+    id: 'arena_torre_beja',
+    name: 'Torre de Menagem de Beja & Planície',
+    district: 'Beja',
+    coordinates: [-7.8643, 38.0169],
+    rarity: 'Rara',
+    image: getOfficialArenaImage('arena_cyber_laboratorio'),
+    description: 'A mais imponente torre gótica de Portugal dominando a vastidão da planície alentejana.',
+    category: 'monumento',
+  },
 ]
 
 export function getArenaPOIById(arenaId: string): MapArenaPOI | undefined {
@@ -224,4 +274,13 @@ export function getArenaPOIById(arenaId: string): MapArenaPOI | undefined {
   return OFFICIAL_MAP_ARENAS.find(
     (a) => a.id.toLowerCase() === clean || a.name.toLowerCase() === clean
   )
+}
+
+export function getArenasByDistrict(districtNameOrSlug: string): MapArenaPOI[] {
+  if (!districtNameOrSlug) return []
+  const clean = districtNameOrSlug.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+  return OFFICIAL_MAP_ARENAS.filter((a) => {
+    const dClean = a.district.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+    return dClean === clean || clean.includes(dClean) || dClean.includes(clean)
+  })
 }

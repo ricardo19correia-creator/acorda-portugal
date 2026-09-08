@@ -39,7 +39,7 @@ const PORTUGAL_2150_STYLE: StyleSpecification = {
       id: 'background',
       type: 'background',
       paint: {
-        'background-color': '#020617', // Deep Atlantic Oceanic Blue
+        'background-color': '#020617', // Deep Atlantic Cyber Void
       },
     },
     {
@@ -47,9 +47,9 @@ const PORTUGAL_2150_STYLE: StyleSpecification = {
       type: 'raster',
       source: 'tactical-dark-basemap',
       paint: {
-        'raster-opacity': 0.72,
-        'raster-contrast': 0.18,
-        'raster-brightness-min': 0.05,
+        'raster-opacity': 0.14,
+        'raster-contrast': 0.15,
+        'raster-brightness-min': 0.02,
       },
       minzoom: 0,
       maxzoom: 19,
@@ -122,9 +122,11 @@ export class PortugalWorldEngine {
       options.callbacks || {}
     )
 
-    const notifyReady = () => {
-      if (this.isLoaded || !this.map || !this.map.isStyleLoaded()) return
+    const notifyReady = (force = false) => {
+      if (this.isLoaded || !this.map) return
+      if (!force && !this.map.getStyle()) return
       this.isLoaded = true
+
       try {
         // Ensure map canvas dimensions match DOM container precisely before calculating bounds
         this.map.resize()
@@ -141,22 +143,43 @@ export class PortugalWorldEngine {
           const initialSector = options.initialSector || 'continente'
           this.camera.fitSector(initialSector, { animate: false })
         }
-
+      } catch (loadErr) {
+        console.warn('[PortugalWorldEngine] Erro durante o evento on(load):', loadErr)
+      } finally {
         if (options.callbacks?.onReady) {
           options.callbacks.onReady()
         }
-      } catch (loadErr) {
-        console.warn('[PortugalWorldEngine] Erro durante o evento on(load):', loadErr)
       }
     }
 
-    this.map.on('load', notifyReady)
-    this.map.on('style.load', notifyReady)
+    this.map.on('load', () => notifyReady())
+    this.map.on('styledata', () => notifyReady())
+    this.map.on('idle', () => notifyReady())
     this.map.on('render', () => {
-      if (!this.isLoaded && this.map.isStyleLoaded()) {
+      if (!this.isLoaded && this.map.getStyle()) {
         notifyReady()
       }
     })
+
+    // Polling safety interval
+    const checkInterval = setInterval(() => {
+      if (this.isLoaded) {
+        clearInterval(checkInterval)
+        return
+      }
+      if (this.map && this.map.getStyle()) {
+        clearInterval(checkInterval)
+        notifyReady()
+      }
+    }, 200)
+
+    // Absolute fallback: after 2.5s, force ready state
+    setTimeout(() => {
+      clearInterval(checkInterval)
+      if (!this.isLoaded && this.map) {
+        notifyReady(true)
+      }
+    }, 2500)
   }
 
   private initLayers() {
@@ -240,9 +263,14 @@ export class PortugalWorldEngine {
   }
 
   private applyLayersConfig() {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
-      this.districtLayer.setVisible(this.layersConfig.territorios)
+      this.districtLayer.setTerritoriosVisible(this.layersConfig.territorios)
+      this.districtLayer.setFronteirasVisible(this.layersConfig.fronteiras)
+      this.districtLayer.setNomesVisible(this.layersConfig.nomes)
+      this.districtLayer.setJogadoresOnlineVisible(this.layersConfig.jogadoresOnline)
+      this.districtLayer.setAtividadeVisible(this.layersConfig.atividade)
+
       this.cityLayer.setVisible(this.layersConfig.cidades)
       this.arenaLayer.setVisible(this.layersConfig.arenas)
       this.landmarkLayer.setVisible(this.layersConfig.landmarks)
@@ -257,8 +285,13 @@ export class PortugalWorldEngine {
     }
   }
 
+  public updateOnlinePresence(districtCounts: Record<string, number>) {
+    if (!this.isLoaded || !this.map || !this.map.getStyle()) return
+    this.districtLayer.updateOnlinePresence(districtCounts)
+  }
+
   public selectDistrict(districtQuery: string | DistrictItem | null) {
-    if (!this.isLoaded || !this.map || !this.map.isStyleLoaded()) {
+    if (!this.isLoaded || !this.map || !this.map.getStyle()) {
       this.pendingDistrict = districtQuery
       return
     }
@@ -272,8 +305,8 @@ export class PortugalWorldEngine {
       const item = typeof districtQuery === 'string' ? getDistrict(districtQuery) : districtQuery
       if (!item) return
 
-      // Find numeric ID (1-based index)
-      const numericId = DISTRICTS_LIST.findIndex((d) => d.id === item.id) + 1
+      // Use assigned numeric ID (1-based index)
+      const numericId = item.numericId || DISTRICTS_LIST.findIndex((d) => d.id === item.id) + 1
       if (numericId > 0) {
         this.districtLayer.setSelected(numericId)
       }

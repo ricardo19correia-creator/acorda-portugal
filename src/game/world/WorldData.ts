@@ -148,4 +148,30 @@ export function getConnectionsGeoJSON(): FeatureCollection {
   }
 }
 
+/**
+ * Builds GeoJSON for District Centroids for Online Presence Beacons
+ */
+export function getDistrictsCentersGeoJSON(): FeatureCollection {
+  return {
+    type: 'FeatureCollection',
+    features: DISTRICTS_LIST.map((district) => ({
+      type: 'Feature',
+      id: district.numericId,
+      properties: {
+        id: district.id,
+        numericId: district.numericId,
+        name: district.name,
+        canonicalName: district.canonicalName,
+        region: district.region,
+        type: district.type,
+        color: district.dominantColor,
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: district.center,
+      },
+    })),
+  }
+}
+
 export { getDistrictsGeoJSON }

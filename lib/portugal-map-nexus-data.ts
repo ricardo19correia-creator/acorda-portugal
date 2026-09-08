@@ -1,5 +1,5 @@
 import { PORTUGAL_GEO_DATA, type DistrictGeoItem } from '@/lib/portugal-geo-data'
-import { TERRITORY_METADATA, type TerritoryGeoMetadata } from '@/lib/portugal-geojson'
+import { TERRITORY_METADATA, type TerritoryMetadata as TerritoryGeoMetadata } from '@/lib/territory-metadata'
 import { OFFICIAL_MAP_ARENAS } from '@/lib/map-arena-registry'
 import { getOfficialArenaImage } from '@/src/data/shopArenas'
 import type { MapArenaPOI } from '@/components/portugal-map/types'

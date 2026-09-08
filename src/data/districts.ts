@@ -1,10 +1,5 @@
 import type { FeatureCollection, Feature, Geometry, Polygon, MultiPolygon } from 'geojson'
-import {
-  PORTUGAL_DISTRICTS_GEOJSON,
-  TERRITORY_METADATA,
-  REGION_CAMERA_PRESETS,
-  type TerritoryGeoMetadata,
-} from '@/lib/portugal-geojson'
+import { REGION_CAMERA_PRESETS } from '@/lib/territory-metadata'
 import {
   CANONICAL_CITIES,
   CANONICAL_LANDMARKS,
@@ -17,6 +12,7 @@ import {
   type NexusEvent,
 } from '@/lib/portugal-map-nexus-data'
 import type { MapArenaPOI } from '@/components/portugal-map/types'
+import nationalGeoJSONRaw from '@/src/data/maps/portugal-national.json'
 
 export {
   VALID_DISTRICTS,
@@ -46,6 +42,18 @@ export type DistrictId =
   | 'viseu'
   | 'acores'
   | 'madeira'
+  | 'acores_santa_maria'
+  | 'acores_sao_miguel'
+  | 'acores_terceira'
+  | 'acores_graciosa'
+  | 'acores_sao_jorge'
+  | 'acores_pico'
+  | 'acores_faial'
+  | 'acores_flores'
+  | 'acores_corvo'
+  | 'madeira_ilha'
+  | 'madeira_porto_santo'
+  | (string & {})
 
 export interface DistrictBounds {
   southWest: [number, number] // [lng, lat]
@@ -54,12 +62,14 @@ export interface DistrictBounds {
 
 export interface DistrictItem {
   id: DistrictId
+  numericId: number
   slug: string
   name: string
   canonicalName: string
   capital: string
   region: 'Norte' | 'Centro' | 'Lisboa e Vale do Tejo' | 'Alentejo' | 'Algarve' | 'Açores' | 'Madeira'
   type: 'mainland' | 'island'
+  parentRegion: 'continente' | 'acores' | 'madeira'
   center: [number, number] // [lng, lat]
   bounds: DistrictBounds
   zoom: number
@@ -78,7 +88,7 @@ export interface DistrictItem {
   geometry: Geometry
 }
 
-// Calculate bounding box from polygon or multipolygon coordinates
+// Bounding box computation from geometry coordinates
 function computeBoundingBox(geometry: Geometry): DistrictBounds {
   let minLng = Infinity
   let minLat = Infinity
@@ -116,67 +126,135 @@ function computeBoundingBox(geometry: Geometry): DistrictBounds {
   }
 }
 
-// Map canonical district metadata to unified DistrictItem array
-export const DISTRICTS_LIST: DistrictItem[] = Object.entries(TERRITORY_METADATA).map(([key, meta], idx) => {
-  const matchingFeature = PORTUGAL_DISTRICTS_GEOJSON.features.find((f) => {
-    const pName = (f.properties?.name || '').toString().toLowerCase()
-    const pId = (f.properties?.id || '').toString().toLowerCase()
-    return (
-      pName === key.toLowerCase() ||
-      pName === meta.canonicalName.toLowerCase() ||
-      pId === meta.id.toLowerCase()
-    )
-  })
+// Canonical island and district mottos
+const TERRITORY_MOTTOS: Record<string, string> = {
+  aveiro: 'Veneza de Portugal & Rota dos Moliceiros',
+  beja: 'Coração Dourado do Baixo Alentejo',
+  braga: 'Capital dos Arcebispos & Berço de Guerreiros',
+  braganca: 'Baluarte Transmontano & Sentinela do Nordeste',
+  castelo_branco: 'Guardiã da Beira Baixa & Fronteira Heroica',
+  coimbra: 'Cidade dos Doutores & Trono do Conhecimento',
+  evora: 'Templo de Diana & Joia Alentejana',
+  faro: 'Costa Dourada & Bastião do Algarve',
+  guarda: 'A Mais Alta & Mais Nobre Sentinela da Beira',
+  leiria: 'Castelo Templário & Pinhal do Rei',
+  lisboa: 'Capital Imperial & Coração do Império Lusitano',
+  portalegre: 'Sentinela do Alto Alentejo & Forte de São Mamede',
+  porto: 'Invicta & Berço da Nação Heroica',
+  santarem: 'Capital do Gótico & Ribatejo Imortal',
+  setubal: 'Baía dos Golfinhos & Trono da Arrábida',
+  viana_do_castelo: 'Coração do Minho & Princesa do Lima',
+  vila_real: 'Porta de Trás-os-Montes & Reino Maravilhoso',
+  viseu: 'Cidade de Viriato & Coração da Beira Alta',
+  acores_sao_miguel: 'A Ilha Verde & Lagoa das Sete Cidades',
+  acores_santa_maria: 'A Ilha Amarela & Primeira a Despontar',
+  acores_terceira: 'A Ilha Lilás & Angra Heroica',
+  acores_graciosa: 'A Ilha Branca & Caldeira Enigmática',
+  acores_sao_jorge: 'A Ilha Castanha & Freguesias de Fajãs',
+  acores_pico: 'A Ilha Cinzenta & Ponto Mais Alto de Portugal',
+  acores_faial: 'A Ilha Azul & Marina dos Navegadores',
+  acores_flores: 'A Ilha Rosa & Jardim do Atlântico',
+  acores_corvo: 'A Ilha Preta & Sentinela do Extremo Ocidente',
+  madeira_ilha: 'Pérola do Atlântico & Laurissilva Eterna',
+  madeira_porto_santo: 'A Ilha Dourada & Praia dos Descobrimentos',
+}
 
-  const geometry: Geometry = matchingFeature?.geometry || {
-    type: 'Point',
-    coordinates: meta.center,
+// Map the 29 authentic features to typed DistrictItem structures
+export const DISTRICTS_LIST: DistrictItem[] = ((nationalGeoJSONRaw as unknown as FeatureCollection).features || []).map(
+  (feature, idx) => {
+    const props = feature.properties || {}
+    const id = (props.id || `territory_${idx}`).toString().toLowerCase() as DistrictId
+    const numericId = Number(props.numericId || feature.id || idx + 1)
+    const name = props.name || id
+    const canonicalName = props.canonicalName || name
+    const capital = props.capital || name
+    const region = (props.region || 'Centro') as DistrictItem['region']
+    const type = (props.type || 'mainland') as DistrictItem['type']
+    const parentRegion: DistrictItem['parentRegion'] =
+      region === 'Açores' ? 'acores' : region === 'Madeira' ? 'madeira' : 'continente'
+
+    const geometry = feature.geometry as Geometry
+    const bounds = computeBoundingBox(geometry)
+
+    const center: [number, number] = [
+      Number(props.centerLng) || (bounds.southWest[0] + bounds.northEast[0]) / 2,
+      Number(props.centerLat) || (bounds.southWest[1] + bounds.northEast[1]) / 2,
+    ]
+
+    const dominantColor = props.color || (type === 'island' ? '#00e5ff' : '#38bdf8')
+    const accentColor = dominantColor
+    const selectionColor = '#00e5ff'
+    const motto = TERRITORY_MOTTOS[id] || `${name} // Bastião Nacional 2150`
+
+    // Count arenas mapped in this district or island
+    const arenasCount = CANONICAL_ARENAS.filter(
+      (a) =>
+        a.district.toLowerCase() === name.toLowerCase() ||
+        a.district.toLowerCase() === canonicalName.toLowerCase() ||
+        a.district.toLowerCase() === id.toLowerCase()
+    ).length
+
+    // Camera preset based on type
+    const zoom = type === 'island' ? 10.2 : 9.0
+    const pitch = 30
+    const bearing = 0
+
+    return {
+      id,
+      numericId,
+      slug: id.replace(/_/g, '-'),
+      name,
+      canonicalName,
+      capital,
+      region,
+      type,
+      parentRegion,
+      center,
+      bounds,
+      zoom,
+      pitch,
+      bearing,
+      selectionColor,
+      dominantColor,
+      accentColor,
+      motto,
+      ranking: idx + 1,
+      score: 1000 + (30 - idx) * 35,
+      players: 0, // Injected dynamically via WorldStateProvider
+      arenasCount: arenasCount || 1,
+      status: idx % 4 === 0 ? 'contested' : 'active',
+      events: idx === 0 ? ['Guerra dos Distritos // Batalha Ativa'] : [],
+      geometry,
+    }
   }
+)
 
-  const bounds = computeBoundingBox(geometry)
-  const arenasCount = CANONICAL_ARENAS.filter(
-    (a) => a.district.toLowerCase() === meta.name.toLowerCase() || a.district.toLowerCase() === meta.canonicalName.toLowerCase()
-  ).length
-
-  return {
-    id: meta.id as DistrictId,
-    slug: meta.id.replace(/_/g, '-'),
-    name: meta.name,
-    canonicalName: meta.canonicalName,
-    capital: meta.capital,
-    region: meta.region,
-    type: meta.type,
-    center: meta.center,
-    bounds,
-    zoom: meta.zoom,
-    pitch: meta.pitch,
-    bearing: meta.bearing,
-    selectionColor: meta.dominantColor || '#00e5ff',
-    dominantColor: meta.dominantColor,
-    accentColor: meta.accentColor,
-    motto: meta.motto,
-    ranking: idx + 1,
-    score: 1000 + (20 - idx) * 45,
-    players: 0, // Injected dynamically via WorldStateProvider
-    arenasCount: arenasCount || 1,
-    status: idx % 4 === 0 ? 'contested' : 'active',
-    events: idx === 0 ? ['Guerra dos Distritos // Batalha Ativa'] : [],
-    geometry,
-  }
-})
-
-// Quick Lookup Map by slug, id, or lower-case name
+// Quick Lookup Map by slug, id, lower-case name, and aliases
 const DISTRICTS_MAP = new Map<string, DistrictItem>()
 for (const d of DISTRICTS_LIST) {
   DISTRICTS_MAP.set(d.id.toLowerCase(), d)
   DISTRICTS_MAP.set(d.slug.toLowerCase(), d)
   DISTRICTS_MAP.set(d.name.toLowerCase(), d)
   DISTRICTS_MAP.set(d.canonicalName.toLowerCase(), d)
+  DISTRICTS_MAP.set(String(d.numericId), d)
+}
+
+// Aliases for regional lookups
+const saoMiguel = DISTRICTS_LIST.find((d) => d.id === 'acores_sao_miguel')
+if (saoMiguel) {
+  DISTRICTS_MAP.set('acores', saoMiguel)
+  DISTRICTS_MAP.set('açores', saoMiguel)
+}
+
+const madeiraIlha = DISTRICTS_LIST.find((d) => d.id === 'madeira_ilha')
+if (madeiraIlha) {
+  DISTRICTS_MAP.set('madeira', madeiraIlha)
 }
 
 export function getDistrict(query: string): DistrictItem | undefined {
   if (!query) return undefined
-  return DISTRICTS_MAP.get(query.trim().toLowerCase())
+  const q = query.trim().toLowerCase()
+  return DISTRICTS_MAP.get(q)
 }
 
 export function getAllDistricts(): DistrictItem[] {
@@ -187,16 +265,19 @@ export function getAllDistricts(): DistrictItem[] {
 export function getDistrictsGeoJSON(): FeatureCollection {
   return {
     type: 'FeatureCollection',
-    features: DISTRICTS_LIST.map((district, idx) => ({
+    features: DISTRICTS_LIST.map((district) => ({
       type: 'Feature',
-      id: idx + 1, // numeric ID for feature-state
+      id: district.numericId, // numeric ID for MapLibre feature-state
       properties: {
+        numericId: district.numericId,
         id: district.id,
         slug: district.slug,
         name: district.name,
         canonicalName: district.canonicalName,
+        capital: district.capital,
         region: district.region,
         type: district.type,
+        parentRegion: district.parentRegion,
         ranking: district.ranking,
         score: district.score,
         players: district.players,

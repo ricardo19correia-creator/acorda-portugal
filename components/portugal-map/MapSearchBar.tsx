@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { Search, MapPin, Trophy, X, ChevronRight } from 'lucide-react'
-import { getAllTerritoriesList } from '@/lib/portugal-geojson'
+import { getAllTerritoriesList } from '@/lib/territory-metadata'
 import { OFFICIAL_MAP_ARENAS } from '@/lib/map-arena-registry'
 import type { MapSearchResult } from './types'
 import { cn } from '@/lib/utils'

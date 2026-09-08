@@ -24,20 +24,7 @@ import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { logGameFlow } from '@/lib/game-session'
 
-const PortugalWorldMap = dynamic(
-  () => import('@/src/components/portugal-world/PortugalWorldMap'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full min-h-[500px] flex items-center justify-center bg-slate-950/80 rounded-4xl">
-        <div className="flex flex-col items-center gap-2">
-          <div className="w-10 h-10 rounded-full border-2 border-cyan-500/20 border-t-cyan-400 animate-spin" />
-          <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest">A carregar Portugal...</span>
-        </div>
-      </div>
-    ),
-  }
-)
+import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
 
 const HERO_STATS = [
   {
@@ -243,10 +230,13 @@ export function Hero() {
 
         {/* Real-time World Engine Instance */}
         <div className="w-full h-full">
-          <PortugalWorldMap
-            mode="world"
-            district={selectedDistrict}
-            onSelectDistrict={(d) => setSelectedDistrict(d.name)}
+          <PortugalMapEngine
+            mode="mapa"
+            compact={true}
+            initialDistrict={selectedDistrict}
+            onSelectDistrict={(d) => {
+              if (d) setSelectedDistrict(d.name)
+            }}
             onSelectArena={(arena) => router.push(`/arenas?id=${encodeURIComponent(arena.id)}`)}
           />
         </div>

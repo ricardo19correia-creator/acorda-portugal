@@ -13,7 +13,7 @@ export class CityLayer {
   }
 
   public init() {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       if (!this.map.getSource(this.sourceId)) {
         this.map.addSource(this.sourceId, {
@@ -108,7 +108,7 @@ export class CityLayer {
 }
 
   public setVisible(visible: boolean) {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       const val = visible ? 'visible' : 'none'
       if (this.map.getLayer(this.glowLayerId)) this.map.setLayoutProperty(this.glowLayerId, 'visibility', val)

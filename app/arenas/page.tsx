@@ -33,17 +33,7 @@ import { useAuth } from '@/components/auth-provider'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
-const PortugalWorldMap = dynamic(
-  () => import('@/src/components/portugal-world/PortugalWorldMap'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-[520px] flex items-center justify-center bg-slate-950/80 rounded-2xl border border-white/10">
-        <span className="font-mono text-xs text-amber-400 uppercase tracking-widest animate-pulse">A carregar mapa de arenas...</span>
-      </div>
-    ),
-  }
-)
+import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
 
 export default function ArenasPage() {
   const router = useRouter()
@@ -236,8 +226,9 @@ export default function ArenasPage() {
 
         {viewMode === 'map' ? (
           <section className="mb-12 rounded-4xl border border-cyan-500/35 bg-slate-950/90 overflow-hidden shadow-2xl relative" style={{ height: 'min(75vh, 620px)', minHeight: '480px' }}>
-            <PortugalWorldMap
+            <PortugalMapEngine
               mode="arena"
+              compact={true}
               onSelectArena={(a) => setSelectedArenaId(a.id)}
             />
           </section>

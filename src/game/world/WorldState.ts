@@ -8,6 +8,10 @@ export type WorldSector = 'continente' | 'acores' | 'madeira'
 
 export interface WorldLayersConfig {
   territorios: boolean
+  fronteiras: boolean
+  nomes: boolean
+  jogadoresOnline: boolean
+  atividade: boolean
   cidades: boolean
   arenas: boolean
   landmarks: boolean
@@ -18,6 +22,10 @@ export interface WorldLayersConfig {
 
 export const DEFAULT_WORLD_LAYERS: WorldLayersConfig = {
   territorios: true,
+  fronteiras: true,
+  nomes: true,
+  jogadoresOnline: true,
+  atividade: false,
   cidades: true,
   arenas: true,
   landmarks: true,
@@ -26,9 +34,15 @@ export const DEFAULT_WORLD_LAYERS: WorldLayersConfig = {
   conexoes: true,
 }
 
+export interface ScreenPoint {
+  x: number
+  y: number
+}
+
 export interface WorldEngineCallbacks {
   onSelectDistrict?: (district: DistrictItem) => void
   onHoverDistrict?: (district: DistrictItem | null) => void
+  onHoverDistrictWithPos?: (district: DistrictItem | null, pos: ScreenPoint | null) => void
   onSelectArena?: (arena: MapArenaPOI) => void
   onSelectCity?: (city: NexusCity) => void
   onSelectLandmark?: (landmark: NexusLandmark) => void
@@ -41,9 +55,15 @@ export interface WorldStateData {
   districts: DistrictItem[]
   selectedDistrict: DistrictItem | null
   hoveredDistrict: DistrictItem | null
+  hoverPos: ScreenPoint | null
   selectedArena: MapArenaPOI | null
   activeSector: WorldSector
   activeMode: WorldMapMode
   layers: WorldLayersConfig
   isReady: boolean
+  nationalOnline: number
+  continenteOnline: number
+  acoresOnline: number
+  madeiraOnline: number
+  districtOnlineCounts: Record<string, number>
 }

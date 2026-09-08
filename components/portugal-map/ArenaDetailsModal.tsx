@@ -34,7 +34,7 @@ export function ArenaDetailsModal({
       : 'from-slate-600 to-slate-500 text-white border-slate-400'
 
   const handlePlay = () => {
-    const route = `/jogar?distrito=${encodeURIComponent(arena.district)}`
+    const route = `/jogar?distrito=${encodeURIComponent(arena.district)}&arena=${encodeURIComponent(arena.id)}&cat=o-meu-distrito`
     if (onStartGame) {
       onStartGame(route)
     }

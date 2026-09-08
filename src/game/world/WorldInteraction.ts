@@ -36,15 +36,24 @@ export class WorldInteraction {
       const feat = e.features[0]
       const fId = feat.id as number
       const districtId = feat.properties?.id || feat.properties?.slug || feat.properties?.name
+      const district = getDistrict(districtId) || null
+
+      const pos = {
+        x: e.originalEvent?.clientX ?? e.point.x,
+        y: e.originalEvent?.clientY ?? e.point.y,
+      }
 
       if (this.hoveredFeatureId !== fId) {
         this.hoveredFeatureId = fId
         this.districtLayer.setHover(fId)
 
-        const district = getDistrict(districtId)
         if (this.callbacks.onHoverDistrict) {
-          this.callbacks.onHoverDistrict(district || null)
+          this.callbacks.onHoverDistrict(district)
         }
+      }
+
+      if (this.callbacks.onHoverDistrictWithPos) {
+        this.callbacks.onHoverDistrictWithPos(district, pos)
       }
     })
 
@@ -56,6 +65,9 @@ export class WorldInteraction {
         if (this.callbacks.onHoverDistrict) {
           this.callbacks.onHoverDistrict(null)
         }
+      }
+      if (this.callbacks.onHoverDistrictWithPos) {
+        this.callbacks.onHoverDistrictWithPos(null, null)
       }
     })
 

@@ -20,6 +20,7 @@ data/geo-portugal/geo-portugal/*.csv
 data/geo-portugal/__MACOSX/
 .vercel
 .env*
+scratch/
 *.keystore
 *.jks
 

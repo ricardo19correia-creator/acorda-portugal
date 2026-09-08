@@ -1,10 +1,10 @@
 import {
-  PORTUGAL_DISTRICTS_GEOJSON,
   TERRITORY_METADATA,
   REGION_CAMERA_PRESETS,
   getTerritoryByName,
   getAllTerritoriesList,
-} from '../lib/portugal-geojson'
+} from '../lib/territory-metadata'
+import { PORTUGAL_TERRITORIES } from '../lib/portugal-territories'
 import {
   CANONICAL_TERRITORIES,
   CANONICAL_CITIES,

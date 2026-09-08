@@ -14,9 +14,11 @@ import {
   Shield,
   Maximize2,
   Minimize2,
+  Users,
 } from 'lucide-react'
 import { DISTRICTS_LIST, type DistrictItem } from '@/src/data/districts'
 import type { WorldSector, WorldLayersConfig } from '@/src/game/world/WorldState'
+import { useWorldState } from '@/src/game/world/WorldStateProvider'
 import { cn } from '@/lib/utils'
 
 interface WorldHUDProps {
@@ -48,6 +50,8 @@ export function WorldHUD({
   const [searchQuery, setSearchQuery] = useState('')
   const [layersOpen, setLayersOpen] = useState(false)
 
+  const { nationalOnline, continenteOnline, acoresOnline, madeiraOnline } = useWorldState()
+
   const filteredDistricts = searchQuery.trim()
     ? DISTRICTS_LIST.filter(
         (d) =>
@@ -59,6 +63,10 @@ export function WorldHUD({
 
   const LAYER_KEYS: { key: keyof WorldLayersConfig; label: string }[] = [
     { key: 'territorios', label: 'Territórios' },
+    { key: 'fronteiras', label: 'Fronteiras Laser' },
+    { key: 'nomes', label: 'Nomes Distritais' },
+    { key: 'jogadoresOnline', label: 'Jogadores Online' },
+    { key: 'atividade', label: 'Atividade (Heatmap)' },
     { key: 'cidades', label: 'Cidades' },
     { key: 'arenas', label: 'Arenas' },
     { key: 'landmarks', label: 'Landmarks' },
@@ -70,7 +78,7 @@ export function WorldHUD({
   return (
     <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-3 sm:p-5 select-none isolate">
       {/* 1. TOP HEADER */}
-      <header className="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 rounded-2xl border border-cyan-500/20 bg-slate-950/80 px-3 py-2 sm:px-4 sm:py-2.5 shadow-2xl backdrop-blur-xl">
+      <header className="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 rounded-2xl border border-cyan-500/20 bg-slate-950/85 px-3 py-2 sm:px-4 sm:py-2.5 shadow-2xl backdrop-blur-xl">
         {/* Left: Brand & Return */}
         <div className="flex items-center gap-2.5 sm:gap-3">
           <Link
@@ -134,7 +142,26 @@ export function WorldHUD({
           </button>
         </div>
 
-        {/* Right: Quick Search & Layers */}
+        {/* Center-Right: Authentic National Online Players Counter */}
+        <div className="flex flex-col items-end text-right font-mono px-2.5 py-1 sm:px-3 sm:py-1 rounded-xl bg-slate-900/80 border border-emerald-500/30 shadow-inner">
+          <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-black tracking-wide text-emerald-400">
+            <span>🇵🇹</span>
+            <span className="hidden sm:inline text-slate-300">PORTUGAL //</span>
+            <span className="text-slate-200">ONLINE:</span>
+            <span className="text-white bg-emerald-500/25 border border-emerald-500/50 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-black">
+              {nationalOnline} REAL
+            </span>
+          </div>
+          <div className="hidden lg:flex items-center gap-2 text-[9px] text-slate-400 font-bold tracking-wider mt-0.5">
+            <span>CONT: <strong className="text-slate-200">{continenteOnline}</strong></span>
+            <span>•</span>
+            <span>AÇORES: <strong className="text-slate-200">{acoresOnline}</strong></span>
+            <span>•</span>
+            <span>MADEIRA: <strong className="text-slate-200">{madeiraOnline}</strong></span>
+          </div>
+        </div>
+
+        {/* Right: Quick Search, Layers & Controls */}
         <div className="flex items-center gap-2">
           {/* Search Button */}
           <div className="relative">
@@ -153,7 +180,7 @@ export function WorldHUD({
             </button>
 
             {searchOpen && (
-              <div className="absolute top-12 right-0 w-64 rounded-2xl border border-white/15 bg-slate-950/95 p-3 shadow-2xl backdrop-blur-2xl">
+              <div className="absolute top-12 right-0 w-64 rounded-2xl border border-white/15 bg-slate-950/95 p-3 shadow-2xl backdrop-blur-2xl z-50">
                 <input
                   type="text"
                   placeholder="Pesquisar território..."
@@ -194,7 +221,7 @@ export function WorldHUD({
             title="Abrir Central de Comando"
           >
             <Shield className="h-3.5 w-3.5 text-emerald-400" />
-            <span className="hidden sm:inline">Central de Comando</span>
+            <span className="hidden sm:inline">Comando</span>
           </Link>
 
           {/* Fullscreen Button */}
@@ -210,7 +237,7 @@ export function WorldHUD({
               ) : (
                 <Maximize2 className="h-3.5 w-3.5 text-cyan-400" />
               )}
-              <span className="hidden lg:inline">{isFullscreen ? 'Minimizar' : 'Ecrã Total'}</span>
+              <span className="hidden xl:inline">{isFullscreen ? 'Minimizar' : 'Ecrã Total'}</span>
             </button>
           )}
 
@@ -232,7 +259,7 @@ export function WorldHUD({
             </button>
 
             {layersOpen && (
-              <div className="absolute top-12 right-0 w-48 rounded-2xl border border-white/15 bg-slate-950/95 p-2.5 shadow-2xl backdrop-blur-2xl space-y-1">
+              <div className="absolute top-12 right-0 w-52 rounded-2xl border border-white/15 bg-slate-950/95 p-2.5 shadow-2xl backdrop-blur-2xl space-y-1 z-50">
                 {LAYER_KEYS.map(({ key, label }) => (
                   <button
                     key={key}

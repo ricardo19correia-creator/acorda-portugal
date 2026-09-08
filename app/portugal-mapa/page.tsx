@@ -109,7 +109,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
   }
 }
 
-import { PortugalWorldMap } from '@/src/components/portugal-world/PortugalWorldMap'
+import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
 
 function PortugalMapaContent() {
   const searchParams = useSearchParams()
@@ -119,9 +119,7 @@ function PortugalMapaContent() {
     searchParams.get('distrito') ||
     undefined
 
-  const sectorParam = (searchParams.get('sector') || 'continente') as any
-
-  return <PortugalWorldMap mode="world" district={districtParam} sector={sectorParam} />
+  return <PortugalMapEngine initialDistrict={districtParam} mode="mapa" />
 }
 
 export default function PortugalMapaPage() {

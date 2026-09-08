@@ -17,7 +17,7 @@ const eslintConfig = defineConfig([
       '@next/next/no-img-element': 'warn',
     },
   },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'android/**', 'ios/**', 'next-env.d.ts']),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'android/**', 'ios/**', 'scratch/**', 'next-env.d.ts']),
 ])
 
 export default eslintConfig

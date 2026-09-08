@@ -1,9 +1,9 @@
 import {
-  PORTUGAL_DISTRICTS_GEOJSON,
   TERRITORY_METADATA,
   REGION_CAMERA_PRESETS,
   getTerritoryByName,
-} from '../lib/portugal-geojson'
+} from '../lib/territory-metadata'
+import { PORTUGAL_TERRITORIES } from '../lib/portugal-territories'
 import { OFFICIAL_MAP_ARENAS, getArenaPOIById } from '../lib/map-arena-registry'
 
 function runTests() {
@@ -24,35 +24,18 @@ function runTests() {
     }
   }
 
-  // 1. Contagem dos 20 Territórios no GeoJSON
-  const features = PORTUGAL_DISTRICTS_GEOJSON.features
-  assert(features.length === 20, '[GEOJSON] Contagem de 20 Territórios Canónicos', `Features=${features.length}/20`)
+  // 1. Contagem dos 20 Territórios na Geometria Única
+  assert(PORTUGAL_TERRITORIES.length === 20, '[GEOMETRY] Contagem de 20 Territórios Canónicos', `Territórios=${PORTUGAL_TERRITORIES.length}/20`)
 
-  // 2. Validação de Coordenadas WGS84 (Portugal Continental e Ilhas)
-  let allCoordsValid = true
-  for (const f of features) {
-    if (f.geometry.type === 'Polygon') {
-      const ring = f.geometry.coordinates[0]
-      for (const [lng, lat] of ring) {
-        if (lng < -32 || lng > -5 || lat < 32 || lat > 43) {
-          allCoordsValid = false
-          console.error(`Coordenada fora dos limites para ${f.properties?.name}: [${lng}, ${lat}]`)
-        }
-      }
-    } else if (f.geometry.type === 'MultiPolygon') {
-      for (const poly of f.geometry.coordinates) {
-        for (const ring of poly) {
-          for (const [lng, lat] of ring) {
-            if (lng < -32 || lng > -5 || lat < 32 || lat > 43) {
-              allCoordsValid = false
-              console.error(`Coordenada fora dos limites para ${f.properties?.name}: [${lng}, ${lat}]`)
-            }
-          }
-        }
-      }
+  // 2. Validação de Paths SVG (não vazios, fechados)
+  let allPathsValid = true
+  for (const t of PORTUGAL_TERRITORIES) {
+    if (!t.path || !t.path.startsWith('M') || !t.path.trim().endsWith('Z')) {
+      allPathsValid = false
+      console.error(`Path inválido para ${t.name}`)
     }
   }
-  assert(allCoordsValid, '[GEOJSON] Coordenadas WGS84 Válidas no Território Português')
+  assert(allPathsValid, '[GEOMETRY] Paths SVG Válidos e Fechados')
 
   // 3. Metadados dos 20 Territórios
   const metaKeys = Object.keys(TERRITORY_METADATA)

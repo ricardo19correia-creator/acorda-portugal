@@ -265,18 +265,30 @@ export async function fetchRankings(
  * Subscrição em Tempo Real aos Rankings exclusivamente com Jogadores Humanos Reais (publicProfiles)
  */
 export function subscribeRankings(
-  districtFilter: string = 'all',
+  districtFilter: string | ((players: RankingPlayer[]) => void) = 'all',
   mode: 'xp' | 'duelos' | 'rating' = 'xp',
-  callback: (players: RankingPlayer[]) => void,
+  callback?: (players: RankingPlayer[]) => void,
   queryLimit: number = 50
 ): () => void {
+  let effectiveDistrictFilter = 'all'
+  let effectiveMode = mode
+  let effectiveCallback = callback
+
+  if (typeof districtFilter === 'function') {
+    effectiveCallback = districtFilter
+    effectiveDistrictFilter = 'all'
+    effectiveMode = 'xp'
+  } else {
+    effectiveDistrictFilter = districtFilter
+  }
+
   let currentHumans: RankingPlayer[] = []
 
   const emitRankings = () => {
     let list = [...currentHumans]
 
-    if (districtFilter !== 'all') {
-      list = list.filter((p) => (p.district || p.region || '').toLowerCase() === districtFilter.toLowerCase())
+    if (effectiveDistrictFilter !== 'all') {
+      list = list.filter((p) => (p.district || p.region || '').toLowerCase() === effectiveDistrictFilter.toLowerCase())
     }
 
     list.sort((a, b) => {
@@ -298,7 +310,9 @@ export function subscribeRankings(
       pos: idx + 1,
     }))
 
-    callback(ranked)
+    if (effectiveCallback) {
+      effectiveCallback(ranked)
+    }
   }
 
   // Emissão imediata inicial

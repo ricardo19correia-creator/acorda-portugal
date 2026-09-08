@@ -12,7 +12,7 @@ export class EventLayer {
   }
 
   public init() {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       if (!this.map.getSource(this.sourceId)) {
         this.map.addSource(this.sourceId, {
@@ -62,7 +62,7 @@ export class EventLayer {
   }
 
   public setVisible(visible: boolean) {
-    if (!this.map || !this.map.isStyleLoaded()) return
+    if (!this.map || !this.map.getStyle()) return
     try {
       const val = visible ? 'visible' : 'none'
       if (this.map.getLayer(this.coreLayerId)) this.map.setLayoutProperty(this.coreLayerId, 'visibility', val)

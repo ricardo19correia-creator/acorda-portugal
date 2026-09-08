@@ -63,7 +63,7 @@ export function DistrictContextCard({
               style={{ backgroundColor: district.dominantColor || '#00e5ff' }}
             />
             <span className="font-mono text-[10px] font-black text-cyan-400 uppercase tracking-widest">
-              #{district.ranking} DISTRITO // {district.region.toUpperCase()}
+              #{district.ranking} {district.type === 'island' ? 'ILHA' : 'DISTRITO'} • {district.region.toUpperCase()}
             </span>
           </div>
 
@@ -92,32 +92,40 @@ export function DistrictContextCard({
         <div className="p-2.5 rounded-2xl bg-slate-900/90 border border-white/5">
           <div className="flex items-center justify-center gap-1 text-[10px] font-mono uppercase text-slate-400 mb-0.5">
             <Users className="h-3 w-3 text-cyan-400" />
-            <span>Jogadores</span>
+            <span>Online</span>
           </div>
           <span className="font-mono text-base font-black text-cyan-200">
             {formattedPlayers}
           </span>
         </div>
 
-        {/* Arenas */}
+        {/* Atividade Real */}
         <div className="p-2.5 rounded-2xl bg-slate-900/90 border border-white/5">
           <div className="flex items-center justify-center gap-1 text-[10px] font-mono uppercase text-slate-400 mb-0.5">
-            <Swords className="h-3 w-3 text-purple-400" />
-            <span>Arenas</span>
+            <Sparkles className="h-3 w-3 text-emerald-400" />
+            <span>Atividade</span>
           </div>
-          <span className="font-mono text-base font-black text-purple-200">
-            {district.arenasCount}
+          <span className="font-mono text-[11px] font-black uppercase text-emerald-300">
+            {district.players >= 50
+              ? 'Muito Alta'
+              : district.players >= 21
+              ? 'Alta'
+              : district.players >= 6
+              ? 'Média'
+              : district.players >= 1
+              ? 'Baixa'
+              : 'Sem Ativ.'}
           </span>
         </div>
 
-        {/* Score / Poder */}
+        {/* Ranking Nacional */}
         <div className="p-2.5 rounded-2xl bg-slate-900/90 border border-white/5">
           <div className="flex items-center justify-center gap-1 text-[10px] font-mono uppercase text-slate-400 mb-0.5">
             <Trophy className="h-3 w-3 text-amber-400" />
-            <span>Poder</span>
+            <span>Ranking</span>
           </div>
           <span className="font-mono text-base font-black text-amber-200">
-            {formattedScore}
+            #{district.ranking}
           </span>
         </div>
       </div>
