@@ -49,9 +49,13 @@ export default function ArenasPage() {
   const [toastMsg, setToastMsg] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<'showcase' | 'map'>('showcase')
 
-  // Sincronizar arena equipada
+  // Sincronizar arena equipada e query params
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const search = new URLSearchParams(window.location.search)
+      if (search.get('tab') === 'map' || search.get('view') === 'map' || window.location.hash === '#map') {
+        setViewMode('map')
+      }
       const saved = localStorage.getItem('equipped_arena')
       if (saved) {
         setEquippedArenaId(saved)
@@ -157,7 +161,7 @@ export default function ArenasPage() {
               </div>
               <div>
                 <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-3d-chrome">
-                  Câmara de Arenas 2150
+                  Câmara de Arenas 2026
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">
                   Catálogo Oficial com todas as 43 Arenas Nacionais: 11 Supremas VIP e 32 Regionais.
@@ -234,7 +238,7 @@ export default function ArenasPage() {
           </section>
         ) : (
           /* ========================================================= */
-          /* SHOWCASE HERO PRINCIPAL: RENDERIZADOR AO VIVO (ENGINE 2150) */
+          /* SHOWCASE HERO PRINCIPAL: RENDERIZADOR AO VIVO (ENGINE 2026) */
           /* ========================================================= */
           <section className="mb-12 rounded-4xl border border-white/15 bg-slate-950/80 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">

@@ -128,7 +128,7 @@ export function Hero() {
           </h2>
         </div>
 
-        {/* Subtítulo Oficial 2150 */}
+        {/* Subtítulo Oficial 2026 */}
         <p
           className="animate-rise mt-5 max-w-2xl text-pretty text-base sm:text-lg md:text-xl leading-relaxed text-slate-200 font-bold mx-auto"
           style={{ animationDelay: '200ms' }}
@@ -201,7 +201,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* HERO MAP EXPERIENCE: PORTUGAL 2150 EM 3D (70-85% DA ÁREA VISUAL) */}
+      {/* HERO MAP EXPERIENCE: PORTUGAL 2026 EM 3D (70-85% DA ÁREA VISUAL) */}
       <div className="mt-10 sm:mt-12 w-full max-w-7xl mx-auto rounded-4xl border border-cyan-500/35 bg-slate-950/95 overflow-hidden shadow-2xl relative isolate" style={{ height: 'min(75vh, 680px)', minHeight: '520px' }}>
         {/* Top Floating Glass Header */}
         <div className="absolute top-4 left-4 right-4 z-20 pointer-events-none flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl bg-slate-950/85 border border-white/10 backdrop-blur-xl shadow-xl">
@@ -209,7 +209,7 @@ export function Hero() {
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
             <div>
               <div className="font-mono text-[10px] font-black uppercase tracking-widest text-cyan-400">
-                PORTUGAL 2150 // NÚCLEO HOLOGRÁFICO
+                PORTUGAL 2026 // MAPA TÁTICO NACIONAL
               </div>
               <div className="font-display text-xs sm:text-sm font-black uppercase text-white">
                 Território Selecionado: <span className="text-cyan-300">{selectedDistrict}</span>

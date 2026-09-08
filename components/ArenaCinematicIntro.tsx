@@ -111,7 +111,7 @@ export function ArenaCinematicIntro({
         {/* Badge da Raridade */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/20 text-amber-300 font-black tracking-widest text-xs uppercase mb-3 shadow-[0_0_20px_rgba(245,158,11,0.4)]">
           <Crown className="w-4 h-4 text-amber-400" />
-          <span>ARENA {arena.rarity} // 2150</span>
+          <span>ARENA {arena.rarity} // 2026</span>
         </div>
 
         {/* Nome Monumental da Arena */}

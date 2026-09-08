@@ -22,6 +22,9 @@ import {
   CAPITAL_LABEL_OFFSETS,
   PortugalMapDefs,
   PortugalBackgroundAtmosphere,
+  PortugalCoastlineGlow,
+  PortugalTopographicRelief,
+  PortugalNationalNetwork,
   type MapViewMode,
 } from './PortugalMapLayers'
 import {
@@ -111,7 +114,7 @@ export function PortugalMapEngine({
     }
   }, [initialDistrict])
 
-  // Seleção e Deseleção
+  // Seleção e Deseleção com Auto-Enquadramento Anti-Sobreposição
   const handleSelect = useCallback(
     (territory: PortugalTerritory) => {
       const nextId = selectedId === territory.id ? null : territory.id
@@ -119,16 +122,26 @@ export function PortugalMapEngine({
       if (externalSelectDistrict) {
         externalSelectDistrict(nextId ? territory : null)
       }
+      if (nextId && !isMobile && territory.type !== 'island') {
+        // Enquadramento inteligente: desloca suavemente a visualização para a esquerda
+        // garantindo que Portugal Continental NUNCA fica tapado pelo painel lateral
+        setPan((prev) => ({ ...prev, x: -110 }))
+      } else if (!nextId && !isMobile) {
+        setPan((prev) => ({ ...prev, x: 0 }))
+      }
     },
-    [selectedId, externalSelectDistrict]
+    [selectedId, externalSelectDistrict, isMobile]
   )
 
   const handleDeselect = useCallback(() => {
     setSelectedId(null)
+    if (!isMobile) {
+      setPan((prev) => ({ ...prev, x: 0 }))
+    }
     if (externalSelectDistrict) {
       externalSelectDistrict(null)
     }
-  }, [externalSelectDistrict])
+  }, [externalSelectDistrict, isMobile])
 
   // Focar câmara num distrito
   const handleFocusTerritory = useCallback((territory: PortugalTerritory) => {
@@ -362,7 +375,6 @@ export function PortugalMapEngine({
     <div
       ref={rootRef}
       data-debug-map="REAL-MAP"
-      data-map-engine="PORTUGAL-MAP-ENGINE-V2"
       className={cn(
         'relative w-full h-full overflow-hidden select-none isolate flex flex-col',
         compact ? 'min-h-[480px] rounded-3xl' : 'min-h-[100dvh] max-h-[100dvh]',
@@ -370,21 +382,8 @@ export function PortugalMapEngine({
       )}
       style={{
         background: 'radial-gradient(ellipse at 50% 50%, #082142 0%, #031329 45%, #020b18 80%, #01060f 100%)',
-        border: '5px solid magenta',
-        boxSizing: 'border-box',
       }}
     >
-      {/* BANNER TEMPORÁRIO DE VALIDAÇÃO VISUAL */}
-      <div
-        id="map-engine-v2-verification-banner"
-        className="relative z-50 w-full py-2 px-4 bg-fuchsia-600 text-white font-mono font-black text-center text-sm sm:text-base tracking-widest shadow-2xl border-b-2 border-white flex items-center justify-center gap-2 select-text shrink-0"
-        style={{ backgroundColor: '#d946ef', color: '#ffffff', fontWeight: 900 }}
-      >
-        <span>🚨</span>
-        <span>PORTUGAL MAP ENGINE V2 — LIVE</span>
-        <span>🚨</span>
-      </div>
-
       {/* 1. LUZES DE AMBIENTE ATLÂNTICAS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[20%] right-[30%] w-[520px] h-[650px] rounded-full bg-cyan-500/12 blur-[140px]" />
@@ -688,23 +687,27 @@ export function PortugalMapEngine({
             {/* ========================================================= */}
             {/* 4.3. PORTUGAL CONTINENTAL (18 DISTRITOS CENTRADOS E GRANDES) */}
             {/* ========================================================= */}
-            <g transform={MAINLAND_CENTER_OFFSET}>
-              {/* Aura Costeira de Portugal Continental */}
-              <g className="pointer-events-none opacity-40">
+            <g id="mainland-portugal-group" transform={MAINLAND_CENTER_OFFSET}>
+              {/* Costa Iluminada com Brilho Oceânico e Onda Viva */}
+              <PortugalCoastlineGlow mainlandTerritories={data.mainlandTerritories} />
+
+              {/* Camada 1: Base de Extrusão 3D (Sombra e Relevo Territorial NW 315°) */}
+              <g id="mainland-3d-extrusion" className="pointer-events-none opacity-85">
                 {data.mainlandTerritories.map((t) => (
                   <path
-                    key={`aura-${t.id}`}
+                    key={`extrude-${t.id}`}
                     d={t.path}
-                    fill="none"
-                    stroke="rgba(14, 165, 233, 0.35)"
-                    strokeWidth={14}
+                    transform="translate(2.5, 4.5)"
+                    fill="#010814"
+                    stroke="#031122"
+                    strokeWidth="2.2"
                     strokeLinejoin="round"
                     strokeLinecap="round"
                   />
                 ))}
               </g>
 
-              {/* Os 18 Distritos Continentais com Cores Saturadas Vivas */}
+              {/* Camada 2: Os 18 Distritos Continentais com Cores Saturadas Vivas */}
               {data.mainlandTerritories.map((t) => {
                 const visuals = getDistrictVisuals(t)
 
@@ -729,7 +732,7 @@ export function PortugalMapEngine({
                       strokeLinejoin="round"
                       strokeLinecap="round"
                       style={{
-                        filter: visuals.filter,
+                        filter: visuals.filter || 'url(#district-3d-shadow)',
                         transition: 'all 0.16s ease-out',
                       }}
                     />
@@ -775,7 +778,13 @@ export function PortugalMapEngine({
                 )
               })}
 
-              {/* Capitais e Rótulos Canónicos de Portugal */}
+              {/* Camada 3: Relevo Topográfico das Serras (Gerês, Estrela Torre 1993m, Monchique) */}
+              <PortugalTopographicRelief />
+
+              {/* Camada 4: Rede Nacional Estratégica Intercidades */}
+              <PortugalNationalNetwork />
+
+              {/* Camada 5: Capitais e Rótulos Canónicos de Portugal */}
               <g className="pointer-events-none">
                 {data.cities.filter((c) => c.isCapital).map((city) => {
                   const offset = CAPITAL_LABEL_OFFSETS[city.districtId] || {
@@ -789,7 +798,13 @@ export function PortugalMapEngine({
 
                   return (
                     <g key={city.id} transform={`translate(${city.x}, ${city.y})`}>
-                      {/* Ponto da Cidade Capital */}
+                      {/* Halo Laranja/Cyan de Capital */}
+                      <circle
+                        r="6"
+                        fill="rgba(245, 158, 11, 0.3)"
+                        className="anim-capital-beacon"
+                      />
+                      {/* Ponto Central da Cidade Capital */}
                       <circle
                         r="3.5"
                         fill="#ffffff"

@@ -77,7 +77,7 @@ export default function Page() {
         <SiteHeader />
 
         <main className="flex-1 flex flex-col justify-center gap-8 py-4 bg-transparent">
-          {/* SE LOGADO: COMMAND CENTER 2150. SE NÃO LOGADO: HERO CINEMATOGRÁFICO */}
+          {/* SE LOGADO: COMMAND CENTER 2026. SE NÃO LOGADO: HERO CINEMATOGRÁFICO */}
           {user ? (
             <CommandCenter
               user={user}

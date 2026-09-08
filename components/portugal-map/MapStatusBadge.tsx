@@ -56,7 +56,7 @@ export function MapStatusBadge({ state, className }: MapStatusBadgeProps) {
 
     if (state.activeMode === 'tactical') {
       return {
-        label: 'GRELHA TÁTICA 2150 — ATIVA',
+        label: 'GRELHA TÁTICA 2026 — ATIVA',
         sub: 'Dados distritais em tempo real',
         color: 'text-cyan-400',
         dot: 'bg-cyan-400',

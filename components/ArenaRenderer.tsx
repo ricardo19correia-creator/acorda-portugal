@@ -65,7 +65,7 @@ export function ArenaRenderer({
             <ShieldAlert className="w-7 h-7" />
           </div>
           <span className="text-[10px] font-mono font-black uppercase tracking-widest text-rose-400 mb-1">
-            FALHA DE RESOLUÇÃO // MOTOR 2150
+            FALHA DE RESOLUÇÃO // MOTOR 2026
           </span>
           <h2 className="text-xl font-black text-white uppercase tracking-wider mb-2 font-display">
             ARENA NÃO DEFINIDA

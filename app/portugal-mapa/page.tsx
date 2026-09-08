@@ -53,7 +53,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
             <div className="space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10">
                 <span>🇵🇹</span>
-                <span>Portugal 2150</span>
+                <span>Portugal 2026</span>
               </div>
 
               <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">

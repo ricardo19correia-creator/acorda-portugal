@@ -45,7 +45,7 @@ export function DistrictIntelCard({
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
           <span className="font-mono text-[9px] uppercase font-black tracking-widest text-cyan-400">
-            Dossiê Tático // 2150
+            Dossiê Tático // 2026
           </span>
         </div>
         <span className="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">

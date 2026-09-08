@@ -74,7 +74,7 @@ export function CommandCenter({
 
   return (
     <div className="mx-auto max-w-7xl px-4 pt-4 pb-8 sm:px-6 lg:px-8">
-      {/* CARD PRINCIPAL: COMMAND CENTER PESSOAL 2150 */}
+      {/* CARD PRINCIPAL: COMMAND CENTER PESSOAL 2026 */}
       <div className="command-center-hud rounded-4xl p-6 sm:p-8 lg:p-10 border border-cyan-500/30 overflow-hidden relative shadow-2xl">
         {/* Luzes dinâmicas de energia */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />

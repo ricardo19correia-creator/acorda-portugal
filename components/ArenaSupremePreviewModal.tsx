@@ -130,7 +130,7 @@ export function ArenaSupremePreviewModal({
             </p>
           </div>
 
-          {/* Detalhes Arquitetónicos 2150 */}
+          {/* Detalhes Arquitetónicos 2026 */}
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
               <Sparkles className="w-4 h-4 text-amber-400" />

@@ -264,14 +264,14 @@ export function GameHub() {
       </div>
 
       {/* ========================================================= */}
-      {/* 2.5 ARENA ATIVA & SELETOR 2150                            */}
+      {/* 2.5 ARENA ATIVA & SELETOR 2026                            */}
       {/* ========================================================= */}
       <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl border border-amber-500/20 bg-card/60 p-4 backdrop-blur-xl">
         <div className="flex items-center gap-2.5">
           <Crown className="h-5 w-5 text-amber-400" />
           <div>
             <p className="text-xs font-black uppercase tracking-wider text-foreground">
-              Arena do Desafio // 2150
+              Arena do Desafio // 2026
             </p>
             <p className="text-[0.72rem] text-muted-foreground">
               {currentArenaObj ? (
