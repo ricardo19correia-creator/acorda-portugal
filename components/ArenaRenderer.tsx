@@ -162,7 +162,7 @@ export function ArenaRenderer({
               {arena.name}
             </span>
             <span className="text-[9px] font-bold text-amber-300/80 uppercase">
-              // {arena.rarity}
+              {'//'} {arena.rarity}
             </span>
           </div>
         </div>

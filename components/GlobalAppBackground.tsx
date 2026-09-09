@@ -1,13 +1,12 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React from 'react'
 import { cn } from '@/lib/utils'
 
 /**
- * IMAGEM OFICIAL DO BACKGROUND GLOBAL DO ACORDA PORTUGAL (bg-loja)
- * Única fonte de verdade para todas as páginas da aplicação fora de jogo.
+ * Constante legada mantida sem fallback de imagem estática.
  */
-export const GLOBAL_OFFICIAL_BACKGROUND = '/images/bg-loja.jpg'
+export const GLOBAL_OFFICIAL_BACKGROUND = ''
 
 export interface GlobalAppBackgroundProps {
   /** Permite sobrepor uma imagem de arena quando o jogador está em partida ativa (gameplay) */
@@ -21,43 +20,57 @@ export interface GlobalAppBackgroundProps {
 
 /**
  * Componente Global Oficial de Fundo do Acorda Portugal.
- * Todas as páginas da aplicação (Home, Login, Registo, Perfil, Loja, Ranking, Definições, etc.)
- * usam a mesma imagem oficial do ecrã inicial.
- * Apenas partidas ativas de jogo sobrepõem com a imagem da arena equipada.
+ * Todas as páginas da aplicação usam o GlobalBackgroundVideo (vídeo contínuo no layout).
+ * Partidas ativas de jogo com arena específica sobrepõem o cenário através de customImage.
  */
 export function GlobalAppBackground({
   customImage,
   className,
   children,
 }: GlobalAppBackgroundProps) {
-  // Se estiver em jogo com arena específica usa customImage, senão usa SEMPRE a imagem global oficial
-  const bgImage = customImage || GLOBAL_OFFICIAL_BACKGROUND
-
-  return (
-    <div
-      aria-hidden="true"
-      className={cn(
-        'pointer-events-none fixed inset-0 -z-50 overflow-hidden select-none',
-        className
-      )}
-    >
-      {/* Imagem de Fundo Global Oficial 100% Pura, Natural e Nítida sem Overlays */}
+  // Se estiver em jogo com arena específica sobrepõe com a arte da arena
+  if (customImage) {
+    return (
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat will-change-transform"
-        style={{
-          backgroundImage: `url('${bgImage}')`,
-          backgroundPosition: 'center center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          opacity: 1,
-          filter: 'none',
-          WebkitFilter: 'none',
-          mixBlendMode: 'normal',
-          backgroundColor: 'transparent',
-        }}
-      />
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none fixed inset-0 z-[5] overflow-hidden select-none',
+          className
+        )}
+      >
+        <div
+          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat will-change-transform"
+          style={{
+            backgroundImage: `url('${customImage}')`,
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            opacity: 1,
+            filter: 'none',
+            WebkitFilter: 'none',
+          }}
+        />
+        {/* Overlay subtil para a arena de jogo */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        {children}
+      </div>
+    )
+  }
 
-      {children}
-    </div>
-  )
+  // Se não há arena personalizada, o GlobalBackgroundVideo no RootLayout é a fonte de verdade.
+  if (children) {
+    return (
+      <div
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none fixed inset-0 z-[5] overflow-hidden select-none',
+          className
+        )}
+      >
+        {children}
+      </div>
+    )
+  }
+
+  return null
 }

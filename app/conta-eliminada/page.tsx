@@ -5,7 +5,7 @@ import { ShieldCheck, UserPlus, Home } from 'lucide-react'
 
 export default function ContaEliminadaPage() {
   return (
-    <main className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-transparent flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-slate-900/90 border border-slate-800 rounded-3xl p-8 text-center shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200">
         <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
           <ShieldCheck className="w-9 h-9" />

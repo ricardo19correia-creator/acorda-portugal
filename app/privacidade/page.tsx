@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-200 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="relative min-h-screen bg-transparent text-slate-200 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
       <BackgroundFx />
       <SiteHeader />
 

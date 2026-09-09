@@ -341,7 +341,7 @@ export default function RankingsPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-950 flex flex-col selection:bg-cyan-500 selection:text-black">
+    <div className="relative min-h-screen bg-transparent flex flex-col selection:bg-cyan-500 selection:text-black">
       <BackgroundFx variant="ranking" />
 
       <div className="relative z-20 flex-1 flex flex-col">

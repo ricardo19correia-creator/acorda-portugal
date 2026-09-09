@@ -106,22 +106,6 @@ function DuelPageContent() {
   if (!effectiveDuelId) {
     return (
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
-        {/* 1. FUNDO DINÂMICO DA ARENA DE DUELOS (FOTOGRAFIA OFICIAL & EFEITOS) */}
-        {currentArena.image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={currentArena.image}
-            alt={currentArena.name}
-            className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none transition-opacity duration-700"
-          />
-        )}
-        <div className="fixed inset-0 -z-10 bg-black/65 backdrop-blur-[1px] pointer-events-none" />
-        <ArenaEffectsLayer
-          effect={currentArena.effect || 'particles'}
-          intensity="medium"
-          className="fixed inset-0 -z-10 pointer-events-none"
-        />
-
         <div className="relative z-20 flex-1 flex flex-col">
           <SiteHeader />
 
@@ -195,14 +179,14 @@ function DuelPageContent() {
         <img
           src={currentArena.image}
           alt={currentArena.name}
-          className="fixed inset-0 -z-20 w-full h-full object-cover object-center pointer-events-none select-none transition-opacity duration-700"
+          className="fixed inset-0 z-[5] w-full h-full object-cover object-center pointer-events-none select-none transition-opacity duration-700"
         />
       )}
-      <div className="fixed inset-0 -z-10 bg-black/65 backdrop-blur-[1px] pointer-events-none" />
+      <div className="fixed inset-0 z-[5] bg-black/65 backdrop-blur-[1px] pointer-events-none" />
       <ArenaEffectsLayer
         effect={currentArena.effect || 'particles'}
         intensity="medium"
-        className="fixed inset-0 -z-10 pointer-events-none"
+        className="fixed inset-0 z-[5] pointer-events-none"
       />
 
       {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}

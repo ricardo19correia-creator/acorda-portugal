@@ -125,7 +125,7 @@ function PortugalMapaContent() {
 export default function PortugalMapaPage() {
   return (
     <PortugalMapErrorBoundary>
-      <main className="w-full h-[100dvh] min-h-[100dvh] overflow-hidden bg-slate-950">
+      <main className="w-full h-[100dvh] min-h-[100dvh] overflow-hidden bg-transparent">
         <Suspense
           fallback={
             <div className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none">

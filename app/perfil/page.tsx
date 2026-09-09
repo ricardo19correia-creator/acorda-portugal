@@ -8,8 +8,9 @@ import {
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Building2, Check, Plus, Globe, 
   User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
-  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck
+  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Film, Video, VideoOff
 } from 'lucide-react'
+import { useBackgroundVideoSettings } from '@/lib/video-background-settings'
 import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
 import { 
   signOut, 
@@ -149,6 +150,7 @@ function PerfilContent() {
   const initialTab = searchParams.get('tab') as 'inventario' | 'estatisticas' | 'conquistas' | 'historico' | null
 
   const { user, profile, profileLoading, authResolved } = useAuth()
+  const { isVideoEnabled, setVideoEnabled } = useBackgroundVideoSettings()
   const [mounted, setMounted] = useState(false)
   const [nationalRank, setNationalRank] = useState<number | null>(null)
 
@@ -2314,6 +2316,75 @@ function PerfilContent() {
             )}
           </div>
         )}
+      </div>
+
+      {/* ========================================================= */}
+      {/* SECÇÃO: DEFINIÇÕES DE VÍDEO & DESEMPENHO */}
+      {/* ========================================================= */}
+      <div className="w-full max-w-5xl mt-12 pt-8 border-t border-slate-800/80">
+        <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-xl backdrop-blur-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-inner">
+                <Film className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-base font-black text-white">Definições de Vídeo &amp; Desempenho</h4>
+                <p className="text-xs text-slate-400">Controla os efeitos cinematográficos e o consumo de recursos do dispositivo.</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                isVideoEnabled
+                  ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300'
+                  : 'bg-slate-800 border border-slate-700 text-slate-400'
+              }`}>
+                {isVideoEnabled ? <Video className="w-3.5 h-3.5 text-emerald-400" /> : <VideoOff className="w-3.5 h-3.5 text-slate-400" />}
+                <span>{isVideoEnabled ? 'Vídeo Ativo' : 'Fallback Estático'}</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-white">Vídeo de Fundo Global</span>
+                <span className="text-[10px] font-mono font-black uppercase tracking-wider text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded-md">
+                  global-background.mp4
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed max-w-xl">
+                Apresenta o vídeo cinematográfico em alta definição como fundo global da aplicação. Durante partidas ativas nas arenas, o vídeo desliga-se automaticamente para poupar bateria e garantir máxima fluidez.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => setVideoEnabled(true)}
+                className={`cursor-pointer px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  isVideoEnabled
+                    ? 'bg-emerald-500 text-slate-950 font-black shadow-lg shadow-emerald-500/20'
+                    : 'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'
+                }`}
+              >
+                Ativado
+              </button>
+              <button
+                type="button"
+                onClick={() => setVideoEnabled(false)}
+                className={`cursor-pointer px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  !isVideoEnabled
+                    ? 'bg-amber-500 text-slate-950 font-black shadow-lg shadow-amber-500/20'
+                    : 'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'
+                }`}
+              >
+                Desativado
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ========================================================= */}

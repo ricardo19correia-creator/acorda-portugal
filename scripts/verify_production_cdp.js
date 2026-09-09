@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const REMOTE_PORT = 9255;
+const REMOTE_PORT = 9260;
 
 async function wait(ms) {
   return new Promise(r => setTimeout(r, ms));
@@ -24,8 +24,8 @@ function fetchJson(url) {
 }
 
 async function run() {
-  console.log('>>> [PROD TEST] A iniciar Chrome em modo incógnito na porta', REMOTE_PORT);
-  const tempProfile = path.join(process.cwd(), 'scratch', 'chrome_prof_prod_' + Date.now());
+  console.log('>>> [FINAL PRODUCTION TEST] A iniciar Chrome em modo incógnito na porta', REMOTE_PORT);
+  const tempProfile = path.join(process.cwd(), 'scratch', 'chrome_prof_final_' + Date.now());
   const chrome = spawn(CHROME_PATH, [
     `--remote-debugging-port=${REMOTE_PORT}`,
     '--headless=new',
@@ -77,63 +77,86 @@ async function run() {
   await send('Runtime.enable');
   await send('Network.enable');
 
-  // Ignorar cache HTTP
+  // Forçar bypass total de cache
   await send('Network.setCacheDisabled', { cacheDisabled: true });
 
   const routes = [
-    { url: 'https://acordaportugal.pt/', name: 'homepage' },
-    { url: 'https://acordaportugal.pt/portugal-mapa', name: 'portugal_mapa' },
-    { url: 'https://acordaportugal.pt/rankings', name: 'rankings' },
-    { url: 'https://acordaportugal.pt/arenas', name: 'arenas' },
+    { url: 'https://acordaportugal.pt/', name: 'final_homepage' },
+    { url: 'https://acordaportugal.pt/portugal-mapa', name: 'final_portugal_mapa' },
+    { url: 'https://acordaportugal.pt/rankings', name: 'final_rankings' },
+    { url: 'https://acordaportugal.pt/arenas?tab=map', name: 'final_arenas_map' },
   ];
 
   const results = {};
 
   for (const r of routes) {
     console.log(`\n========================================`);
-    console.log(`>>> [PROD TEST] A testar rota: ${r.url}`);
+    console.log(`>>> [FINAL TEST] A testar: ${r.url}`);
     console.log(`========================================`);
 
     await send('Page.navigate', { url: r.url });
-    await wait(4000);
+    await wait(4500);
 
     const check = await send('Runtime.evaluate', {
       expression: `(() => {
-        const container = document.querySelector('[data-map-engine="PORTUGAL-MAP-ENGINE-V2"]');
-        const banner = document.querySelector('#map-engine-v2-verification-banner');
-        const textFound = document.body.innerText.includes('PORTUGAL MAP ENGINE V2 — LIVE');
-
-        let hasMagenta = false;
-        if (container) {
-          const s = window.getComputedStyle(container);
-          hasMagenta = s.borderColor.includes('255, 0, 255') || container.style.border.includes('magenta');
+        // 1. Verificação de Debug Removido
+        const hasDebugBanner = Boolean(document.querySelector('#map-engine-v2-verification-banner'));
+        const hasLiveDebugText = document.body.innerText.includes('PORTUGAL MAP ENGINE V2');
+        
+        let hasMagentaBorder = false;
+        const allElements = document.querySelectorAll('*');
+        for (const el of allElements) {
+          const s = window.getComputedStyle(el);
+          if (s.borderColor.includes('255, 0, 255') || (el.style && el.style.border && el.style.border.includes('magenta'))) {
+            hasMagentaBorder = true;
+            break;
+          }
         }
 
+        // 2. Verificação de 2150 Removido
+        const has2150InMap = document.body.innerText.includes('2150');
+
+        // 3. Verificação do SVG e Camadas AAA
         const svg = document.querySelector('svg[data-debug-map="REAL-MAP"]');
         const paths = svg ? svg.querySelectorAll('path').length : 0;
+        const has3dExtrusion = Boolean(document.getElementById('mainland-3d-extrusion'));
+        const hasTopographicRelief = Boolean(document.getElementById('portugal-topographic-relief'));
+        const hasNationalNetwork = Boolean(document.getElementById('portugal-national-network'));
+        const hasCoastlineLuminescence = Boolean(document.getElementById('portugal-coastline-luminescence'));
+        const hasAcores = Boolean(document.getElementById('inset-acores'));
+        const hasMadeira = Boolean(document.getElementById('inset-madeira'));
+        const hasTorre = document.body.innerText.includes('TORRE 1993m') || Boolean(document.getElementById('serra-da-estrela-relief'));
+        const hasFoia = document.body.innerText.includes('FÓIA 902m') || Boolean(document.getElementById('serra-de-monchique-relief'));
 
+        // 4. Motores antigos eliminados
         const hasOldMapLibre = Boolean(document.querySelector('.maplibregl-map'));
         const hasArcgisCanvas = Boolean(document.querySelector('canvas.maplibregl-canvas'));
 
+        // 5. Distritos e Capitais
         const expectedDistricts = [
-          'aveiro', 'beja', 'braga', 'braganca', 'castelo-branco',
-          'coimbra', 'evora', 'faro', 'guarda', 'leiria',
-          'lisboa', 'portalegre', 'porto', 'santarem', 'setubal',
-          'viana-do-castelo', 'vila-real', 'viseu', 'acores', 'madeira'
+          'aveiro', 'beja', 'braga', 'braganca', 'coimbra',
+          'evora', 'faro', 'guarda', 'leiria', 'lisboa',
+          'portalegre', 'porto', 'santarem', 'setubal', 'viseu'
         ];
         const foundDistricts = expectedDistricts.filter(d => document.getElementById('territory-' + d) !== null);
 
         return {
           url: window.location.href,
-          hasEngineContainer: Boolean(container),
-          hasBannerText: textFound,
-          hasMagentaBorder: hasMagenta,
+          debugRemoved: !hasDebugBanner && !hasLiveDebugText && !hasMagentaBorder,
+          no2150: !has2150InMap,
           hasRealSvg: Boolean(svg),
           pathCount: paths,
-          hasOldMapLibre: hasOldMapLibre,
-          hasArcgisCanvas: hasArcgisCanvas,
-          foundDistrictsCount: foundDistricts.length,
-          foundDistricts: foundDistricts
+          has3dExtrusion,
+          hasTopographicRelief,
+          hasNationalNetwork,
+          hasCoastlineLuminescence,
+          hasAcores,
+          hasMadeira,
+          hasTorrePeak: hasTorre,
+          hasFoiaPeak: hasFoia,
+          hasOldMapLibre,
+          hasArcgisCanvas,
+          foundDistrictsCount: foundDistricts.length
         };
       })()`,
       returnByValue: true
@@ -143,28 +166,28 @@ async function run() {
     console.log(`Resultado para ${r.name}:`, JSON.stringify(val, null, 2));
     results[r.name] = val;
 
-    // Scroll para focar o mapa se for rankings ou homepage
+    // Scroll para focar o mapa se necessário
     await send('Runtime.evaluate', {
       expression: `(() => {
-        const el = document.querySelector('[data-map-engine="PORTUGAL-MAP-ENGINE-V2"]');
-        if (el) el.scrollIntoView({ behavior: 'instant', block: 'center' });
+        const svg = document.querySelector('svg[data-debug-map="REAL-MAP"]');
+        if (svg) svg.scrollIntoView({ behavior: 'instant', block: 'center' });
       })()`
     });
-    await wait(800);
+    await wait(1000);
 
     const ss = await send('Page.captureScreenshot', { format: 'png' });
-    const localScratch = path.join(process.cwd(), 'scratch', `prod_${r.name}.png`);
+    const localScratch = path.join(process.cwd(), 'scratch', `${r.name}.png`);
     fs.writeFileSync(localScratch, Buffer.from(ss.data, 'base64'));
     console.log(`Saved screenshot to ${localScratch}`);
 
     const artifactDir = 'C:\\Users\\Riky Moreira\\.gemini\\antigravity\\brain\\a526ebae-8b25-41bc-90cf-11992f69ad6f';
-    const artifactPath = path.join(artifactDir, `prod_${r.name}.png`);
+    const artifactPath = path.join(artifactDir, `${r.name}.png`);
     fs.writeFileSync(artifactPath, Buffer.from(ss.data, 'base64'));
   }
 
   chrome.kill();
   console.log('\n========================================');
-  console.log('>>> [RESUMO GERAL PRODUÇÃO]');
+  console.log('>>> [RESUMO FINAL DE PRODUÇÃO]');
   console.log('========================================');
   console.log(JSON.stringify(results, null, 2));
   process.exit(0);

@@ -61,6 +61,7 @@ import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { GameExitControl } from '@/components/game-exit-modal'
+import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
@@ -97,6 +98,14 @@ export function DuelArena({
   const { user, profile, authResolved } = useAuth()
   const { addCoins, deductCoins } = useEconomy()
   const { playSound, streakEffectId } = useGameTheme()
+
+  // Sinalizar partida ativa de duelo para desligar o vídeo global
+  useEffect(() => {
+    setGlobalArenaMatchActive(true)
+    return () => {
+      setGlobalArenaMatchActive(false)
+    }
+  }, [])
 
   // Bloqueio Absoluto: Redirecionar se não autenticado
   useEffect(() => {

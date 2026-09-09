@@ -227,7 +227,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden bg-background">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden bg-transparent">
       <BackgroundFx variant="home" />
 
       {/* Header com Navegação */}

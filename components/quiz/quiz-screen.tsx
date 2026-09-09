@@ -26,6 +26,7 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
+import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
 import { logGameFlow } from '@/lib/game-session'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
@@ -404,6 +405,14 @@ export function QuizScreen({
   arenaParam?: string | null
 }) {
   const router = useRouter()
+
+  // Sinalizar partida ativa para desligar imediatamente o vídeo global e dar 100% de foco à arena
+  useEffect(() => {
+    setGlobalArenaMatchActive(true)
+    return () => {
+      setGlobalArenaMatchActive(false)
+    }
+  }, [])
   const category = useMemo(
     () => resolveCategoryInfo(categorySlug, subcategorySlug, districtParam, cityParam),
     [categorySlug, subcategorySlug, districtParam, cityParam]
@@ -1173,7 +1182,7 @@ export function QuizScreen({
   }
 
   // Resolução da Arena
-  if (arenaResolution.error || !activeArena) {
+  if ((arenaResolution as any)?.error || !activeArena) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center p-4">
         <ArenaRenderer

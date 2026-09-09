@@ -169,7 +169,7 @@ export default function DownloadPage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-transparent text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white overflow-x-hidden">
       {/* 1. FUNDO GLOBAL OFICIAL */}
       <AppBackground />
       <SiteHeader />
