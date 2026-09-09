@@ -211,23 +211,9 @@ export default function VipShopSection({
   const [inspectingProduct, setInspectingProduct] = useState<VipProduct | null>(null)
   const [tauntModalProduct, setTauntModalProduct] = useState<VipProduct | null>(null)
 
-  // ESTADOS DO CHECKOUT HÍBRIDO (MB WAY & STRIPE)
+  // ESTADOS DO CHECKOUT VIP
   const [checkoutProduct, setCheckoutProduct] = useState<VipProduct | null>(null)
-  const [paymentMethod, setPaymentMethod] = useState<'mbway' | 'stripe'>('mbway')
-  const [mbwayPhone, setMbwayPhone] = useState('')
-  const [phoneError, setPhoneError] = useState('')
-  const [mbwayStep, setMbwayStep] = useState<'form' | 'waiting' | 'success'>('form')
-  const [countdown, setCountdown] = useState(240) // 4 minutos de timer MB WAY
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
-
-  // Timer para aguardar confirmação MB WAY
-  useEffect(() => {
-    let timer: NodeJS.Timeout
-    if (mbwayStep === 'waiting' && countdown > 0) {
-      timer = setInterval(() => setCountdown((c) => c - 1), 1000)
-    }
-    return () => clearInterval(timer)
-  }, [mbwayStep, countdown])
 
   // Verificar posse no inventário
   const isOwned = (productId: string): boolean => {
@@ -260,74 +246,25 @@ export default function VipShopSection({
     return true
   })
 
-  // Abrir o Modal de Checkout Híbrido ao clicar em Comprar
+  // Abrir o Checkout ao clicar em Comprar
   const handleOpenCheckout = (product: VipProduct) => {
     if (product.isSoldOut || (product.isLimited && product.stock === 0)) {
       if (onErrorToast) onErrorToast('Este item de edição limitada encontra-se esgotado.')
       return
     }
 
-    setCheckoutProduct(product)
-    setPaymentMethod('mbway')
-    setMbwayPhone('')
-    setPhoneError('')
-    setMbwayStep('form')
-    setCountdown(240)
-  }
+    // No Android nativo, produtos digitais são adquiridos via Google Play Billing
+    const isAndroid = typeof window !== 'undefined' &&
+      Boolean((window as any).Capacitor?.isNativePlatform?.() && (window as any).Capacitor?.getPlatform?.() === 'android')
 
-  // Validação e Envio de Pagamento MB WAY
-  const handleMbwaySubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!checkoutProduct) return
-
-    const clean = mbwayPhone.replace(/\D/g, '')
-
-    // Validação estrita para telemóveis nacionais portugueses: 9 dígitos começados por 91, 92, 93 ou 96
-    const ptMobileRegex = /^(91|92|93|96)\d{7}$/
-    if (!ptMobileRegex.test(clean)) {
-      setPhoneError('Insere um número português válido com 9 dígitos começado por 91, 92, 93 ou 96.')
+    if (isAndroid) {
+      if (onErrorToast) {
+        onErrorToast('No Android, adquire Acordas na secção «Comprar Acordas» através do Google Play.')
+      }
       return
     }
 
-    setPhoneError('')
-    setIsProcessingPayment(true)
-
-    try {
-      const res = await fetch('/api/pagamento/mbway', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone: clean,
-          amount: checkoutProduct.priceEUR,
-          itemId: checkoutProduct.id,
-          userId: userId || 'guest',
-        }),
-      })
-
-      const data = await res.json().catch(() => ({}))
-
-      // Desbloquear no inventário local do jogador
-      try {
-        const savedInv = JSON.parse(localStorage.getItem('ap_user_inventory') || '[]')
-        if (!savedInv.includes(checkoutProduct.id)) {
-          savedInv.push(checkoutProduct.id)
-          localStorage.setItem('ap_user_inventory', JSON.stringify(savedInv))
-        }
-      } catch (err) {
-        console.error('Erro ao salvar no inventário local:', err)
-      }
-
-      setMbwayStep('waiting')
-      if (onSuccessToast) {
-        onSuccessToast(`Pedido MB WAY enviado para +351 ${clean}!`)
-      }
-    } catch (err: any) {
-      console.error('[MB WAY ERROR]:', err)
-      // Modo sandbox / fallback amigável
-      setMbwayStep('waiting')
-    } finally {
-      setIsProcessingPayment(false)
-    }
+    setCheckoutProduct(product)
   }
 
   // Envio de Checkout Stripe
@@ -737,173 +674,29 @@ export default function VipShopSection({
               </div>
             </div>
 
-            {/* SELEÇÃO DO MÉTODO DE PAGAMENTO */}
-            {mbwayStep === 'form' && (
-              <div className="space-y-4">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
-                  Escolhe o Método de Pagamento:
-                </label>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {/* MB WAY Option */}
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('mbway')}
-                    className={`p-3.5 rounded-2xl border transition-all text-left flex flex-col justify-between cursor-pointer ${
-                      paymentMethod === 'mbway'
-                        ? 'bg-emerald-950/40 border-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.25)]'
-                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl">📲</span>
-                      {paymentMethod === 'mbway' && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-                    </div>
-                    <div className="mt-2">
-                      <span className="text-xs font-black text-white block">MB WAY</span>
-                      <span className="text-[10px] text-slate-400">Portugal (+351)</span>
-                    </div>
-                  </button>
-
-                  {/* Stripe / Cartão Option */}
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('stripe')}
-                    className={`p-3.5 rounded-2xl border transition-all text-left flex flex-col justify-between cursor-pointer ${
-                      paymentMethod === 'stripe'
-                        ? 'bg-blue-950/40 border-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.25)]'
-                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl">💳</span>
-                      {paymentMethod === 'stripe' && <CheckCircle2 className="w-4 h-4 text-blue-400" />}
-                    </div>
-                    <div className="mt-2">
-                      <span className="text-xs font-black text-white block">Cartão / Stripe</span>
-                      <span className="text-[10px] text-slate-400">Visa, Master, Apple</span>
-                    </div>
-                  </button>
-                </div>
-
-                {/* FORMULÁRIO MB WAY */}
-                {paymentMethod === 'mbway' && (
-                  <form onSubmit={handleMbwaySubmit} className="space-y-4 pt-2">
-                    <div>
-                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-300 block mb-1.5">
-                        Número de Telemóvel MB WAY (Portugal):
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/30">
-                          🇵🇹 +351
-                        </span>
-                        <input
-                          type="tel"
-                          placeholder="912 345 678"
-                          value={mbwayPhone}
-                          onChange={(e) => {
-                            setMbwayPhone(e.target.value)
-                            setPhoneError('')
-                          }}
-                          maxLength={12}
-                          className="w-full pl-24 pr-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-base font-bold text-white focus:outline-none focus:border-emerald-500 transition-colors"
-                          required
-                          autoFocus
-                        />
-                      </div>
-                      <span className="text-[10px] text-slate-500 mt-1 block">
-                        Válido para telemóveis nacionais começados por 91, 92, 93 ou 96.
-                      </span>
-                    </div>
-
-                    {phoneError && (
-                      <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-xs font-bold text-rose-300 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 shrink-0" />
-                        <span>{phoneError}</span>
-                      </div>
-                    )}
-
-                    <button
-                      type="submit"
-                      disabled={isProcessingPayment}
-                      className="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50"
-                    >
-                      <span>Pagar com MB WAY ({formatVipPrice(checkoutProduct.priceCents)})</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </form>
-                )}
-
-                {/* FORMULÁRIO STRIPE */}
-                {paymentMethod === 'stripe' && (
-                  <div className="space-y-4 pt-2">
-                    <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/30 text-xs text-blue-200 leading-relaxed">
-                      Serás redirecionado para a página segura da Stripe para concluir o pagamento de{' '}
-                      <strong>{formatVipPrice(checkoutProduct.priceCents)}</strong> com Cartão de Crédito/Débito, Apple Pay ou Google Pay.
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={handleStripeSubmit}
-                      disabled={isProcessingPayment}
-                      className="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50"
-                    >
-                      <CreditCard className="w-4 h-4" />
-                      <span>Ir para Checkout Stripe ({formatVipPrice(checkoutProduct.priceCents)})</span>
-                    </button>
-                  </div>
-                )}
+            {/* CHECKOUT STRIPE (WEB OFICIAL) */}
+            <div className="space-y-4 pt-2">
+              <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/30 text-xs text-blue-200 leading-relaxed">
+                Serás redirecionado para a página segura da Stripe para concluir o pagamento de{' '}
+                <strong className="text-white">{formatVipPrice(checkoutProduct.priceCents)}</strong> com Cartão de Crédito/Débito, Apple Pay ou Google Pay.
               </div>
-            )}
 
-            {/* ESTADO DE ESPERA DA NOTIFICAÇÃO MB WAY */}
-            {mbwayStep === 'waiting' && (
-              <div className="space-y-5 text-center py-2">
-                <div className="relative w-20 h-20 mx-auto rounded-3xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-4xl shadow-[0_0_35px_rgba(16,185,129,0.3)]">
-                  <Smartphone className="w-10 h-10 text-emerald-400 animate-bounce" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 animate-ping" />
-                </div>
-
-                <div>
-                  <h4 className="text-xl font-black text-white">Notificação MB WAY Enviada!</h4>
-                  <p className="text-xs text-slate-300 mt-1 max-w-xs mx-auto leading-relaxed">
-                    Abre a app <strong>MB WAY</strong> no teu smartphone associada ao número{' '}
-                    <strong className="text-emerald-400">+351 {mbwayPhone}</strong> e aprova a transação de{' '}
-                    <strong className="text-amber-300">{formatVipPrice(checkoutProduct.priceCents)}</strong>.
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 text-xs font-mono text-amber-300 bg-black/40 border border-amber-500/30 rounded-xl py-2 px-4 w-fit mx-auto">
-                  <Clock className="w-4 h-4 text-amber-400" />
-                  <span>Tempo restante para aprovação: <strong>{formatTimer(countdown)}</strong></span>
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button
-                    onClick={() => {
-                      if (onSuccessToast) onSuccessToast(`Item ${checkoutProduct.name} desbloqueado!`)
-                      if (onRefreshData) onRefreshData()
-                      setCheckoutProduct(null)
-                    }}
-                    className="flex-1 py-3 rounded-xl font-black text-xs bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md cursor-pointer transition-all"
-                  >
-                    Já Aprovei no Telemóvel ✓
-                  </button>
-                  <button
-                    onClick={() => setCheckoutProduct(null)}
-                    className="px-4 py-3 rounded-xl font-bold text-xs bg-slate-800 text-slate-300 hover:text-white transition cursor-pointer"
-                  >
-                    Fechar
-                  </button>
-                </div>
-              </div>
-            )}
+              <button
+                type="button"
+                onClick={handleStripeSubmit}
+                disabled={isProcessingPayment}
+                className="w-full py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>Ir para Checkout Stripe ({formatVipPrice(checkoutProduct.priceCents)})</span>
+              </button>
+            </div>
 
             {/* AVISO DE SEGURANÇA NO RODAPÉ DO MODAL */}
             <div className="pt-3 border-t border-slate-800 text-center">
               <div className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 font-medium">
                 <Lock className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Transações Seguras e Encriptadas via MB WAY & Stripe</span>
+                <span>Transação Segura com Encriptação SSL 256-bit</span>
               </div>
             </div>
           </div>
@@ -1040,7 +833,7 @@ export default function VipShopSection({
                     disabled={inspectingProduct.isSoldOut || (inspectingProduct.isLimited && inspectingProduct.stock === 0)}
                     className="px-6 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 shadow-lg flex items-center gap-2 cursor-pointer disabled:opacity-50"
                   >
-                    <span>Comprar com MB WAY / Stripe</span>
+                    <span>Adquirir Produto VIP</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 )}

@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       aidId,
       gameMode = 'solo',
       questionData,
+      duelId,
     } = body
 
     if (!userId && uid && typeof uid === 'string') {
@@ -43,17 +44,9 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // 2. Regra Anti-Pay-to-Win Absoluta: Ajudas terminantemente desativadas em Duelos 1v1
-    if (gameMode === 'duel' || gameMode === '1v1' || gameMode === 'competitive') {
-      console.warn('[AID_BLOCKED_DUEL] Tentativa de usar ajuda em duelo 1v1:', { userId, aidId, gameMode })
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'As Ajudas & Utilidades estão rigorosamente desativadas no modo Duelo 1v1 (competitivo com igualdade estrita).',
-        },
-        { status: 403 }
-      )
-    }
+    // Validação de modo de jogo (1v1 multiplayer e solo são totalmente suportados com inventário real)
+    const isMultiplayerDuel = gameMode === 'duel' || gameMode === '1v1' || gameMode === 'competitive'
+
 
     // 3. Localização da Regra da Ajuda
     const aidRule = getConsumableAidRule(aidId)
@@ -185,6 +178,34 @@ export async function POST(req: NextRequest) {
         bonusSeconds,
         freezeGrantedAt: now,
         expiresAt: now + bonusSeconds * 1000,
+      }
+
+      // Se for um duelo 1v1, estender o deadline de resposta no servidor
+      if (duelId && typeof duelId === 'string') {
+        try {
+          const duelRef = db.collection('duels').doc(duelId)
+          await db.runTransaction(async (t) => {
+            const dSnap = await t.get(duelRef)
+            if (dSnap.exists) {
+              const dData = dSnap.data()
+              const isPlayerA = dData?.playerA?.uid === userId
+              const isPlayerB = dData?.playerB?.uid === userId
+              const targetKey = isPlayerA ? 'playerA' : isPlayerB ? 'playerB' : null
+              if (targetKey) {
+                const currentDeadline = Number(dData?.[targetKey]?.questionDeadline || (now + 60000))
+                const newDeadline = currentDeadline + (bonusSeconds * 1000)
+                t.update(duelRef, {
+                  [`${targetKey}.questionDeadline`]: newDeadline,
+                  [`${targetKey}.isFrozen`]: true,
+                  [`${targetKey}.frozenAt`]: now,
+                  updatedAt: FieldValue.serverTimestamp(),
+                })
+              }
+            }
+          })
+        } catch (syncErr) {
+          console.warn('[AID_CONSUME_DUEL_FREEZE_SYNC_WARN]', syncErr)
+        }
       }
     } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
       // Pista inteligente

@@ -1,47 +1,38 @@
 'use client'
 
 import React from 'react'
-import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
-import type { MapArenaPOI } from '@/components/portugal-map/types'
-import type { MapViewMode } from '@/components/portugal-engine/PortugalMapLayers'
+import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 export interface PortugalWorldMapProps {
-  mode?: 'world' | 'ranking' | 'arena' | 'district' | 'event' | string
+  mode?: string
   district?: string
   sector?: string
   showHUD?: boolean
   className?: string
   onSelectDistrict?: (district: any) => void
-  onSelectArena?: (arena: MapArenaPOI) => void
+  onSelectArena?: (arena: any) => void
 }
 
 /**
  * PortugalWorldMap Unificado
- * Encaminha todas as chamadas globais diretamente para o PortugalMapEngine canónico.
+ * Encaminha todas as chamadas globais diretamente para o PortugalMap oficial de alta performance.
  */
 export function PortugalWorldMap({
-  mode = 'mapa',
   district,
   showHUD = true,
   className,
   onSelectDistrict,
-  onSelectArena,
 }: PortugalWorldMapProps) {
-  const mappedMode: MapViewMode =
-    mode === 'ranking' ? 'ranking' : mode === 'arena' ? 'arena' : 'mapa'
-
   return (
-    <PortugalMapEngine
-      mode={mappedMode}
+    <PortugalMap
       initialDistrict={district}
       showHUD={showHUD}
       className={className}
       onSelectDistrict={(t) => {
         if (onSelectDistrict) {
-          onSelectDistrict(t ? { name: t.name, slug: t.id, id: t.id } : null)
+          onSelectDistrict(t ? { name: t.name, slug: t.slug, id: t.id } : null)
         }
       }}
-      onSelectArena={onSelectArena}
     />
   )
 }

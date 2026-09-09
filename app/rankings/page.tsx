@@ -37,8 +37,7 @@ import { BackgroundFx } from '@/components/background-fx'
 import dynamic from 'next/dynamic'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
-
-import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
+import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 import {
   ALL_DISTRICTS_LIST,
   subscribeRankings,
@@ -463,8 +462,7 @@ export default function RankingsPage() {
                   </Link>
                 </div>
                 <div className="w-full h-[520px] rounded-2xl overflow-hidden relative border border-white/10">
-                  <PortugalMapEngine
-                    mode="ranking"
+                  <PortugalMap
                     compact={true}
                     initialDistrict={selectedDistrict}
                     onSelectDistrict={(dist) => {

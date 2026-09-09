@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Mapa de Portugal — Acorda Portugal | O Desafio Nacional',
+  title: 'Mapa de Portugal — Acorda Portugal',
   description:
-    'Mapa estratégico nacional: 18 distritos, Açores, Madeira, cidades, arenas históricas e ranking territorial em tempo real.',
+    'Mapa nacional oficial de Portugal 2026: 18 distritos continentais, Açores, Madeira, atividade de jogadores reais e classificação territorial em tempo real.',
   openGraph: {
     title: 'Mapa de Portugal — Acorda Portugal',
     description:
-      'Mapa estratégico nacional: 18 distritos, Açores, Madeira, cidades, arenas históricas e ranking territorial em tempo real.',
+      'Mapa nacional oficial de Portugal 2026: 18 distritos continentais, Açores, Madeira, atividade de jogadores reais e classificação territorial em tempo real.',
     url: 'https://acordaportugal.pt/portugal-mapa',
     siteName: 'Acorda Portugal',
     images: [

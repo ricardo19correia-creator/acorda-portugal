@@ -1,4 +1,4 @@
-// Catálogo oficial de pacotes com dinheiro real (Stripe / MB WAY) do Acorda Portugal
+// Catálogo oficial de pacotes e produtos do Acorda Portugal
 // O backend é a fonte de verdade para preços, recompensas e inventário.
 
 export type RealProductType = 'arena_theme' | 'coins' | 'pass' | 'pack' | 'license'

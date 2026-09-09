@@ -1653,3 +1653,45 @@ export async function surrenderDuel(duelId: string, surrenderingUid: string): Pr
 }
 
 export const forfeitDuel = surrenderDuel
+
+/**
+ * Estende o deadline de resposta de um jogador específico num duelo 1v1
+ * Usado pelo poder «Congelar Tempo» (+15 segundos)
+ */
+export async function extendDuelPlayerDeadline(
+  duelId: string,
+  userUid: string,
+  bonusMs: number = 15000,
+): Promise<{ success: boolean; newDeadline?: number }> {
+  try {
+    const duelRef = doc(db, 'duels', duelId)
+    return await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(duelRef)
+      if (!snap.exists()) {
+        return { success: false }
+      }
+      const duel = snap.data() as DuelDocument
+      const isPlayerA = duel.playerA?.uid === userUid
+      const isPlayerB = duel.playerB?.uid === userUid
+      if (!isPlayerA && !isPlayerB) {
+        return { success: false }
+      }
+      const targetKey = isPlayerA ? 'playerA' : 'playerB'
+      const now = Date.now()
+      const currentDeadline = Number(duel[targetKey]?.questionDeadline || (now + QUESTION_TIME_MS))
+      const newDeadline = currentDeadline + bonusMs
+
+      transaction.update(duelRef, {
+        [`${targetKey}.questionDeadline`]: newDeadline,
+        [`${targetKey}.isFrozen`]: true,
+        [`${targetKey}.frozenAt`]: now,
+        updatedAt: serverTimestamp(),
+      })
+
+      return { success: true, newDeadline }
+    })
+  } catch (err) {
+    console.error('Erro ao estender deadline no duelo:', err)
+    return { success: false }
+  }
+}

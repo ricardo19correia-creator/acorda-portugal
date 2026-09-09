@@ -32,8 +32,7 @@ import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
-
-import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
+import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 export default function ArenasPage() {
   const router = useRouter()
@@ -230,10 +229,8 @@ export default function ArenasPage() {
 
         {viewMode === 'map' ? (
           <section className="mb-12 rounded-4xl border border-cyan-500/35 bg-slate-950/90 overflow-hidden shadow-2xl relative" style={{ height: 'min(75vh, 620px)', minHeight: '480px' }}>
-            <PortugalMapEngine
-              mode="arena"
+            <PortugalMap
               compact={true}
-              onSelectArena={(a) => setSelectedArenaId(a.id)}
             />
           </section>
         ) : (

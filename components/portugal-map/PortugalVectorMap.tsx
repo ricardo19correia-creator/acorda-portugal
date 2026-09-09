@@ -1,7 +1,7 @@
 'use client'
 
 export {
-  PortugalMapEngine as PortugalVectorMap,
-  PortugalMapEngine as default,
-} from '@/components/portugal-engine/PortugalMapEngine'
-export type { PortugalMapEngineProps as PortugalVectorMapProps } from '@/components/portugal-engine/PortugalMapEngine'
+  PortugalMap as PortugalVectorMap,
+  PortugalMap as default,
+} from '@/components/portugal-map/PortugalMap'
+export type { PortugalMapProps as PortugalVectorMapProps } from '@/components/portugal-map/PortugalMap'

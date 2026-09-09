@@ -20,6 +20,7 @@ import { MissoesView } from '@/components/admin/views/MissoesView'
 import { EventosView } from '@/components/admin/views/EventosView'
 import { ConquistasView } from '@/components/admin/views/ConquistasView'
 import { EconomiaView } from '@/components/admin/views/EconomiaView'
+import { MonetizacaoView } from '@/components/admin/views/MonetizacaoView'
 import { EstatisticasView } from '@/components/admin/views/EstatisticasView'
 import { AlertasView } from '@/components/admin/views/AlertasView'
 import { SegurancaView } from '@/components/admin/views/SegurancaView'
@@ -265,6 +266,8 @@ export default function CentroDeControloPage() {
           {activeModule === 'conquistas' && <ConquistasView />}
 
           {activeModule === 'economia' && <EconomiaView getIdToken={getIdToken} />}
+
+          {activeModule === 'monetizacao' && <MonetizacaoView getIdToken={getIdToken} />}
 
           {activeModule === 'estatisticas' && <EstatisticasView />}
 

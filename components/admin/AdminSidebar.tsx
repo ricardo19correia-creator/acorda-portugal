@@ -12,6 +12,7 @@ import {
   Sparkles,
   Award,
   Coins,
+  CreditCard,
   BarChart3,
   AlertTriangle,
   ShieldCheck,
@@ -34,6 +35,7 @@ export type AdminModuleId =
   | 'eventos'
   | 'conquistas'
   | 'economia'
+  | 'monetizacao'
   | 'estatisticas'
   | 'alertas'
   | 'seguranca'
@@ -61,6 +63,7 @@ export const ADMIN_NAV_ITEMS: NavItem[] = [
   { id: 'eventos', label: 'Eventos', icon: Sparkles },
   { id: 'conquistas', label: 'Conquistas', icon: Award },
   { id: 'economia', label: 'Economia & Moedas', icon: Coins },
+  { id: 'monetizacao', label: 'Monetização (Google Play)', icon: CreditCard, badge: 'Google Play', badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
   { id: 'estatisticas', label: 'Estatísticas', icon: BarChart3 },
   { id: 'alertas', label: 'Alertas do Sistema', icon: AlertTriangle },
   { id: 'seguranca', label: 'Segurança', icon: ShieldCheck },

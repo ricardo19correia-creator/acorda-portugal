@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X, Coins } from 'lucide-react'
+import { ArrowLeft, Sparkles, User, Layers, Zap, Trophy, Globe, Check, Filter, MessageSquare, Eye, X, Coins, RotateCw, ShieldCheck, AlertTriangle, Loader2 } from 'lucide-react'
 import { doc, updateDoc, setDoc, increment, arrayUnion, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { cn } from '@/lib/utils'
@@ -45,8 +45,10 @@ import {
 } from '@/lib/titles'
 import VipShopSection from '@/components/shop/VipShopSection'
 import { AID_SHOP_ITEMS } from '@/lib/shop-catalog'
+import { googlePlayBillingService, type BillingProductDisplay, type BillingPurchaseState } from '@/lib/google-play-billing'
+import { GOOGLE_PLAY_PRODUCTS } from '@/config/google-play-products'
 
-type Category = 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
+type Category = 'comprar_acordas' | 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
 interface ShopItem {
   id: string
@@ -234,17 +236,168 @@ function LojaContent() {
   const tabParam = searchParams.get('tab') as Category | null
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<Category>(() => {
-    if (tabParam && ['vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+    if (tabParam && ['comprar_acordas', 'vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
       return tabParam
     }
-    return 'avatars'
+    return 'comprar_acordas'
   })
 
   useEffect(() => {
-    if (tabParam && ['vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+    if (tabParam && ['comprar_acordas', 'vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
       setActiveTab(tabParam)
     }
   }, [tabParam])
+
+  const [billingProducts, setBillingProducts] = useState<BillingProductDisplay[]>(() => {
+    return GOOGLE_PLAY_PRODUCTS
+      .filter((p) => p.type === 'CONSUMABLE')
+      .map((p) => ({
+        productId: p.productId,
+        name: p.name,
+        subtitle: p.subtitle,
+        description: p.description,
+        acordas: p.acordas,
+        priceString: p.referencePriceString,
+        currency: 'EUR',
+        popular: p.popular,
+        bestValue: p.bestValue,
+        badgeText: p.badgeText,
+        icon: p.icon,
+        isNativePrice: false,
+      }))
+  })
+  const [isPurchasingId, setIsPurchasingId] = useState<string | null>(null)
+  const [isRestoring, setIsRestoring] = useState<boolean>(false)
+  const [isNativeAndroidPlatform, setIsNativeAndroidPlatform] = useState<boolean>(false)
+  const [purchaseModalState, setPurchaseModalState] = useState<{
+    open: boolean
+    state: BillingPurchaseState
+    title: string
+    message: string
+    acordasGranted?: number
+    orderId?: string
+  } | null>(null)
+
+  useEffect(() => {
+    let active = true
+    setIsNativeAndroidPlatform(googlePlayBillingService.isNativeAndroid())
+    googlePlayBillingService.getProductCatalog().then((prods) => {
+      if (active && prods && prods.length > 0) {
+        setBillingProducts(prods)
+      }
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const handleBuyCoinPack = async (prod: BillingProductDisplay) => {
+    if (!user) {
+      showToast('Inicia sessão para adquirires Acordas.', 'error')
+      return
+    }
+
+    if (!googlePlayBillingService.isNativeAndroid()) {
+      setPurchaseModalState({
+        open: true,
+        state: 'ERROR',
+        title: 'Disponível na App Android',
+        message: `A compra de ${prod.name} (${prod.priceString}) é processada de forma oficial através do Google Play Billing na aplicação Android do Acorda Portugal. Transfere a app para realizares compras protegidas e diretas!`,
+      })
+      return
+    }
+
+    setIsPurchasingId(prod.productId)
+    setPurchaseModalState({
+      open: true,
+      state: 'PURCHASING',
+      title: 'A contactar Google Play',
+      message: `A preparar a compra de ${prod.name}...`,
+    })
+
+    try {
+      const result = await googlePlayBillingService.purchaseProduct(
+        prod.productId,
+        user.uid,
+        (state, msg) => {
+          if (state === 'PURCHASING') {
+            setPurchaseModalState({
+              open: true,
+              state: 'PURCHASING',
+              title: 'Google Play Store',
+              message: msg || 'A aguardar confirmação da Google Play...',
+            })
+          } else if (state === 'VERIFYING') {
+            setPurchaseModalState({
+              open: true,
+              state: 'VERIFYING',
+              title: 'A Validar com o Servidor',
+              message: msg || 'A verificar recibo criptográfico e a creditar Acordas...',
+            })
+          }
+        }
+      )
+
+      if (result.success) {
+        setPurchaseModalState({
+          open: true,
+          state: 'SUCCESS',
+          title: 'Compra Concluída!',
+          message: result.message || `+${result.acordasGranted.toLocaleString('pt-PT')} Acordas adicionadas com sucesso à tua conta!`,
+          acordasGranted: result.acordasGranted,
+          orderId: result.orderId || undefined,
+        })
+        showToast(`+${result.acordasGranted.toLocaleString('pt-PT')} Acordas adicionadas com sucesso!`)
+      } else if (result.state === 'CANCELED') {
+        setPurchaseModalState(null)
+        showToast('Compra cancelada pelo utilizador.')
+      } else {
+        setPurchaseModalState({
+          open: true,
+          state: 'ERROR',
+          title: 'Não foi possível concluir a compra',
+          message: result.message || 'Ocorreu um erro ao processar a compra com a Google Play.',
+        })
+      }
+    } catch (err: any) {
+      setPurchaseModalState({
+        open: true,
+        state: 'ERROR',
+        title: 'Erro de Pagamento',
+        message: err?.message || 'Falha inesperada ao comunicar com o Google Play.',
+      })
+    } finally {
+      setIsPurchasingId(null)
+    }
+  }
+
+  const handleRestorePurchases = async () => {
+    if (!user) {
+      showToast('Inicia sessão para restaurar compras.', 'error')
+      return
+    }
+
+    if (!googlePlayBillingService.isNativeAndroid()) {
+      showToast('A restauração de compras Google Play só está disponível na App Android.', 'error')
+      return
+    }
+
+    setIsRestoring(true)
+    try {
+      const res = await googlePlayBillingService.restorePurchases(user.uid)
+      if (res.restoredCount > 0) {
+        showToast(`Restauradas ${res.restoredCount} compras (+${res.acordasGrantedTotal.toLocaleString('pt-PT')} Acordas creditadas)!`)
+      } else if (res.errors.length > 0) {
+        showToast(`Aviso: ${res.errors[0]}`, 'error')
+      } else {
+        showToast('Nenhuma compra pendente por restaurar.')
+      }
+    } catch (e: any) {
+      showToast(e.message || 'Erro ao restaurar compras.', 'error')
+    } finally {
+      setIsRestoring(false)
+    }
+  }
   const [avatarCategoryFilter, setAvatarCategoryFilter] = useState<string>('todos')
   const [avatarRarityFilter, setAvatarRarityFilter] = useState<AvatarRarity | 'todas'>('todas')
   const [frameCategoryFilter, setFrameCategoryFilter] = useState<string>('todas')
@@ -1092,6 +1245,7 @@ function LojaContent() {
   if (!mounted) return <div className="min-h-screen bg-transparent" />
 
   const filteredItems = SHOP_ITEMS.filter((item) => {
+    if (activeTab === 'comprar_acordas') return false
     if (activeTab === 'vip') return false
     if (activeTab === 'todos') return true
     if (activeTab === 'avatars') {
@@ -1178,13 +1332,24 @@ function LojaContent() {
             <div className="flex items-center justify-end gap-1.5 text-2xl font-black text-amber-300">
               <Coins className="w-5 h-5 text-amber-400 shrink-0" />
               <span>{userBalance.toLocaleString('pt-PT')}</span>
-              <span className="text-xs text-amber-400 font-bold uppercase tracking-wider ml-1">Moedas</span>
+              <span className="text-xs text-amber-400 font-bold uppercase tracking-wider ml-1">Acordas</span>
             </div>
           </div>
         </div>
 
         {/* Categories Bar */}
         <div className="w-full max-w-6xl flex flex-wrap gap-2 mb-6">
+          <button
+            onClick={() => setActiveTab('comprar_acordas')}
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
+              activeTab === 'comprar_acordas'
+                ? 'bg-amber-400 text-slate-950 shadow-[0_0_20px_rgba(251,191,36,0.5)] ring-2 ring-amber-300 scale-105'
+                : 'bg-slate-900/80 text-amber-300 border border-amber-500/50 hover:bg-slate-800'
+            }`}
+          >
+            <Coins className="w-3.5 h-3.5 text-amber-500" /> COMPRAR ACORDAS
+          </button>
+
           <button
             onClick={() => setActiveTab('avatars')}
             className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
@@ -1549,8 +1714,170 @@ function LojaContent() {
           </div>
         )}
 
-        {/* VIP Section Oficial (€ Real) */}
-        {activeTab === 'vip' ? (
+        {/* SECÇÃO OFICIAL COMPRAR ACORDAS (GOOGLE PLAY BILLING) */}
+        {activeTab === 'comprar_acordas' ? (
+          <div className="w-full max-w-6xl flex flex-col items-center animate-fade-in">
+            {/* Header Banner com Destaque de Segurança Google Play */}
+            <div className="w-full bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border border-amber-500/30 rounded-3xl p-6 sm:p-8 mb-8 text-center relative overflow-hidden backdrop-blur-md shadow-2xl">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
+
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-black uppercase tracking-widest mb-3 shadow-inner">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Google Play Billing Oficial</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-2">
+                PACOTES OFICIAIS DE <span className="text-amber-400">ACORDAS</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Adquire moedas virtuais Acordas para desbloquear avatares nacionais, molduras animadas, ajudas pedagógicas e cenários exclusivos. Pagamento 100% seguro processado diretamente pela Google Play.
+              </p>
+
+              {/* Ações & Estado da Plataforma */}
+              <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+                <button
+                  type="button"
+                  onClick={handleRestorePurchases}
+                  disabled={isRestoring}
+                  className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-all shadow-md active:scale-95 disabled:opacity-50"
+                >
+                  <RotateCw className={cn("w-3.5 h-3.5 text-amber-400", isRestoring && "animate-spin")} />
+                  <span>{isRestoring ? 'A restaurar transações...' : 'Restaurar Compras Anteriores'}</span>
+                </button>
+
+                {!isNativeAndroidPlatform ? (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-medium">
+                    <span>📱</span>
+                    <span>Versão Web (preços oficiais de referência; faturados via Google Play na app Android)</span>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Dispositivo Android pronto para compras seguras</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Grelha dos 5 Pacotes de Acordas */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full">
+              {billingProducts.map((prod) => {
+                const isThisPurchasing = isPurchasingId === prod.productId
+
+                return (
+                  <div
+                    key={prod.productId}
+                    className={cn(
+                      "relative rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-xl backdrop-blur-md group",
+                      prod.popular
+                        ? "bg-gradient-to-b from-cyan-950/70 via-slate-900/90 to-slate-950 border-2 border-cyan-500/60 shadow-[0_0_25px_rgba(6,182,212,0.2)]"
+                        : prod.bestValue
+                        ? "bg-gradient-to-b from-amber-950/70 via-slate-900/90 to-slate-950 border-2 border-amber-500/70 shadow-[0_0_30px_rgba(245,158,11,0.25)]"
+                        : prod.badgeText === 'Supremo'
+                        ? "bg-gradient-to-b from-purple-950/70 via-slate-900/90 to-slate-950 border-2 border-purple-500/60 shadow-[0_0_30px_rgba(168,85,247,0.2)]"
+                        : prod.badgeText === 'Melhor Valor'
+                        ? "bg-gradient-to-b from-emerald-950/70 via-slate-900/90 to-slate-950 border-2 border-emerald-500/60 shadow-[0_0_25px_rgba(16,185,129,0.2)]"
+                        : "bg-slate-900/80 border border-slate-800 hover:border-slate-700"
+                    )}
+                  >
+                    {/* Badge de Destaque */}
+                    {prod.badgeText && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                        <span
+                          className={cn(
+                            "px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg",
+                            prod.popular
+                              ? "bg-cyan-500 text-slate-950"
+                              : prod.bestValue
+                              ? "bg-amber-400 text-slate-950 shadow-amber-500/50"
+                              : prod.badgeText === 'Supremo'
+                              ? "bg-purple-500 text-white shadow-purple-500/50"
+                              : "bg-emerald-500 text-slate-950 shadow-emerald-500/50"
+                          )}
+                        >
+                          {prod.badgeText}
+                        </span>
+                      </div>
+                    )}
+
+                    <div>
+                      {/* Ícone e Quantidade de Acordas */}
+                      <div className="text-center pt-2 pb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-3 text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                          {prod.icon || '🟡'}
+                        </div>
+                        <div className="text-3xl font-black text-amber-300 tracking-tight flex items-center justify-center gap-1">
+                          <span>{prod.acordas.toLocaleString('pt-PT')}</span>
+                        </div>
+                        <span className="text-[11px] font-black tracking-widest text-amber-400/80 uppercase">
+                          ACORDAS
+                        </span>
+                      </div>
+
+                      {/* Informações do Pack */}
+                      <div className="border-t border-slate-800/80 pt-3 pb-4 text-center">
+                        <h3 className="text-sm font-black text-white">{prod.name}</h3>
+                        {prod.subtitle && (
+                          <span className="text-[11px] font-bold text-slate-400 block mt-0.5">
+                            {prod.subtitle}
+                          </span>
+                        )}
+                        <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
+                          {prod.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Botão de Compra com Preço Oficial */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => handleBuyCoinPack(prod)}
+                        disabled={Boolean(isPurchasingId)}
+                        className={cn(
+                          "w-full cursor-pointer py-3 px-4 rounded-2xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95 disabled:opacity-50 disabled:pointer-events-none",
+                          prod.bestValue
+                            ? "bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 shadow-amber-500/30"
+                            : prod.popular
+                            ? "bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-400 hover:to-cyan-300 text-slate-950 shadow-cyan-500/30"
+                            : prod.badgeText === 'Supremo'
+                            ? "bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-400 hover:to-purple-300 text-white shadow-purple-500/30"
+                            : prod.badgeText === 'Melhor Valor'
+                            ? "bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 shadow-emerald-500/30"
+                            : "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700"
+                        )}
+                      >
+                        {isThisPurchasing ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>A processar...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Comprar por</span>
+                            <span className="underline decoration-current font-black">{prod.priceString}</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Garantia de Segurança Google Play */}
+            <div className="w-full max-w-3xl mt-10 p-5 rounded-2xl bg-slate-950/60 border border-slate-800 text-center space-y-2 text-xs text-slate-400">
+              <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Pagamento Oficial Google Play Store</span>
+              </div>
+              <p>
+                As moedas virtuais Acordas não têm valor monetário no mundo real e são de uso exclusivo dentro da aplicação Acorda Portugal. A entrega de produtos digitais no Android é validada de forma criptográfica através da API oficial Android Publisher v3.
+              </p>
+            </div>
+          </div>
+        ) : activeTab === 'vip' ? (
           <VipShopSection
             userId={auth.currentUser?.uid}
             userEmail={auth.currentUser?.email || undefined}
@@ -1568,9 +1895,150 @@ function LojaContent() {
               }
             }}
           />
+        ) : activeTab === 'ajudas' ? (
+          <div className="w-full max-w-6xl flex flex-col items-center">
+            {/* Header da Secção ⚡ AJUDAS */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-black uppercase tracking-wider mb-2">
+                <span>⚡</span>
+                <span>Packs Consumíveis de Gameplay</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight flex items-center justify-center gap-2">
+                <span className="text-amber-400">⚡</span>
+                <span>AJUDAS</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl mx-auto leading-relaxed">
+                Adquire ajudas pedagógicas e táticas para utilizares tanto no modo Normal como nas partidas 1v1 Multiplayer.
+              </p>
+            </div>
+
+            {/* Os 3 Cards Exclusivos */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+              {OTHER_SHOP_ITEMS.map((item) => {
+                const st = aidStatus[item.id]
+                const aidStock = typeof st?.stock === 'number' ? st.stock : getAidStock(item.id)
+                const maxLimit = typeof st?.maxOwned === 'number' ? st.maxOwned : (item.maxOwned || 50)
+                const purchases24h = typeof st?.purchasesLast24h === 'number' ? st.purchasesLast24h : 0
+                const limit24h = typeof st?.purchaseLimit24h === 'number' ? st.purchaseLimit24h : 3
+                const remaining24h = typeof st?.remainingPurchases24h === 'number' ? st.remainingPurchases24h : Math.max(0, limit24h - purchases24h)
+
+                const is24hLimitReached = Boolean(st?.is24hLimitReached || remaining24h <= 0 || purchases24h >= limit24h)
+                const isStockFull = Boolean(st?.isStockFull || aidStock >= maxLimit)
+                const hasEnoughCoins = userBalance >= item.priceValue
+                const isDisabled = is24hLimitReached || isStockFull || !hasEnoughCoins
+
+                const isAid5050 = item.id === 'AID_002'
+                const isAidPublic = item.id === 'AID_003'
+
+                return (
+                  <div
+                    key={item.id}
+                    className={cn(
+                      "group relative flex flex-col justify-between rounded-3xl border p-5 sm:p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-xl",
+                      isAid5050
+                        ? "border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-cyan-950/20"
+                        : isAidPublic
+                          ? "border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.25)] bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-purple-950/20"
+                          : "border-blue-500/40 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(56,189,248,0.25)] bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-blue-950/20"
+                    )}
+                  >
+                    <div>
+                      {/* Top Badges */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className={cn(
+                          "text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border",
+                          item.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                        )}>
+                          {item.badge}
+                        </span>
+
+                        <span className="text-[11px] font-bold text-slate-400">
+                          Tens: <strong className={isStockFull ? 'text-amber-400 font-black' : 'text-cyan-300'}>{aidStock}</strong> / {maxLimit}
+                        </span>
+                      </div>
+
+                      {/* Grande Ilustração Oficial WebP */}
+                      <div className="relative aspect-square w-full rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900 to-black border border-white/10 p-4 flex items-center justify-center overflow-hidden mb-4 shadow-inner">
+                        <div
+                          className="absolute inset-0 opacity-30 blur-2xl pointer-events-none group-hover:opacity-50 transition-opacity"
+                          style={{
+                            background: isAid5050
+                              ? 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+                              : isAidPublic
+                                ? 'radial-gradient(circle, #a855f7 0%, transparent 70%)'
+                                : 'radial-gradient(circle, #38bdf8 0%, transparent 70%)',
+                          }}
+                        />
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+
+                      {/* Nome da Ajuda */}
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="text-xl">{item.icon}</span>
+                        <h3 className="text-lg font-black text-white tracking-wide group-hover:text-amber-300 transition-colors">
+                          {item.name}
+                        </h3>
+                      </div>
+
+                      {/* Descrição Curta e Clara */}
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed min-h-[44px]">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {/* Preço e Ação */}
+                    <div className="mt-5 pt-4 border-t border-slate-800/80 flex flex-col gap-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 font-mono text-base font-black text-amber-400">
+                          <Coins className="w-4 h-4 text-amber-400 shrink-0" />
+                          <span>{item.price}</span>
+                        </div>
+                        <span className="text-[10px] font-bold text-slate-400">
+                          Hoje: <strong className={is24hLimitReached ? 'text-rose-400 font-black' : 'text-amber-300'}>{purchases24h}</strong> / {limit24h}
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        disabled={isDisabled}
+                        onClick={() => handleAction(item)}
+                        className={cn(
+                          "w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-lg flex items-center justify-center gap-2 cursor-pointer",
+                          is24hLimitReached
+                            ? "bg-rose-950/60 text-rose-400 border border-rose-800/60 cursor-not-allowed select-none shadow-none"
+                            : isStockFull
+                              ? "bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed select-none"
+                              : !hasEnoughCoins
+                                ? "bg-slate-800/80 text-slate-400 border border-slate-700 cursor-not-allowed select-none"
+                                : isAid5050
+                                  ? "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-cyan-500/25"
+                                  : isAidPublic
+                                    ? "bg-purple-500 hover:bg-purple-400 text-white shadow-purple-500/25"
+                                    : "bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-amber-400/25"
+                        )}
+                      >
+                        {is24hLimitReached
+                          ? 'Limite 24h Esgotado'
+                          : isStockFull
+                            ? 'Inventário Cheio (50 un.)'
+                            : !hasEnoughCoins
+                              ? 'Saldo Insuficiente'
+                              : 'COMPRAR'}
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         ) : (
           /* Items Grid */
           <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
             {filteredItems.length === 0 ? (
               <div className="col-span-full py-12 text-center rounded-2xl bg-slate-900/40 border border-slate-800 text-slate-400">
                 <p className="text-sm font-medium">Nenhum item encontrado com os filtros selecionados.</p>
@@ -2126,6 +2594,77 @@ function LojaContent() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* MODAL DE ESTADO / FEEDBACK DE COMPRA GOOGLE PLAY */}
+        {purchaseModalState?.open && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+            <div className="w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-7 shadow-2xl space-y-5 text-center relative">
+              {purchaseModalState.state !== 'PURCHASING' && purchaseModalState.state !== 'VERIFYING' && (
+                <button
+                  type="button"
+                  onClick={() => setPurchaseModalState(null)}
+                  className="cursor-pointer absolute top-4 right-4 p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+
+              {/* Ícone de Estado */}
+              <div className="flex justify-center">
+                {purchaseModalState.state === 'PURCHASING' || purchaseModalState.state === 'VERIFYING' ? (
+                  <div className="w-16 h-16 rounded-3xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)]">
+                    <Loader2 className="w-8 h-8 animate-spin" />
+                  </div>
+                ) : purchaseModalState.state === 'SUCCESS' ? (
+                  <div className="w-16 h-16 rounded-3xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-3xl shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+                    ✓
+                  </div>
+                ) : purchaseModalState.state === 'CANCELED' ? (
+                  <div className="w-16 h-16 rounded-3xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 text-2xl">
+                    ✕
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-3xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 text-2xl shadow-[0_0_25px_rgba(244,63,94,0.3)]">
+                    <AlertTriangle className="w-8 h-8" />
+                  </div>
+                )}
+              </div>
+
+              {/* Título & Mensagem */}
+              <div>
+                <h3 className="text-xl font-black text-white">{purchaseModalState.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                  {purchaseModalState.message}
+                </p>
+
+                {purchaseModalState.acordasGranted ? (
+                  <div className="mt-4 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 inline-flex items-center gap-2 text-amber-300 font-black text-lg">
+                    <span>+{purchaseModalState.acordasGranted.toLocaleString('pt-PT')} Acordas</span>
+                  </div>
+                ) : null}
+
+                {purchaseModalState.orderId && (
+                  <p className="text-[10px] text-slate-500 mt-3 font-mono">
+                    ID: {purchaseModalState.orderId}
+                  </p>
+                )}
+              </div>
+
+              {/* Botões de Ação */}
+              {purchaseModalState.state !== 'PURCHASING' && purchaseModalState.state !== 'VERIFYING' && (
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setPurchaseModalState(null)}
+                    className="w-full py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition cursor-pointer shadow-lg shadow-amber-500/20 active:scale-95"
+                  >
+                    Continuar
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

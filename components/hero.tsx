@@ -24,7 +24,7 @@ import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { logGameFlow } from '@/lib/game-session'
 
-import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
+import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 const HERO_STATS = [
   {
@@ -230,14 +230,12 @@ export function Hero() {
 
         {/* Real-time World Engine Instance */}
         <div className="w-full h-full">
-          <PortugalMapEngine
-            mode="mapa"
+          <PortugalMap
             compact={true}
             initialDistrict={selectedDistrict}
             onSelectDistrict={(d) => {
               if (d) setSelectedDistrict(d.name)
             }}
-            onSelectArena={(arena) => router.push(`/arenas?id=${encodeURIComponent(arena.id)}`)}
           />
         </div>
 

@@ -45,6 +45,7 @@ import type { Question } from '@/src/types/quiz'
 import { calculateMatchCoinReward, getDifficultyMultiplier } from '@/src/data/economy'
 import { calculate5050Eliminated, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
+import { getUserAidStock } from '@/lib/aid-service'
 import { GameExitControl } from '@/components/game-exit-modal'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
@@ -681,44 +682,19 @@ export function QuizScreen({
     router.push('/jogar')
   }, [router])
 
-  // Sincronização segura de power-ups stock
+  // Sincronização segura de power-ups stock (SSOT)
   useEffect(() => {
     const syncStock = () => {
       try {
-        let h5050 = 1
-        let fTime = 1
-        let pVote = 1
-
-        const savedConsumables = localStorage.getItem('user_consumables')
-        if (savedConsumables) {
-          const parsed = JSON.parse(savedConsumables)
-          if (typeof parsed.help5050 === 'number') h5050 = parsed.help5050
-          if (typeof parsed.freezeTime === 'number') fTime = parsed.freezeTime
-          if (typeof parsed.publicVote === 'number') pVote = parsed.publicVote
-        }
-
-        const savedH = localStorage.getItem('user_help5050')
-        if (savedH !== null) h5050 = Number(savedH) || 0
-
-        const savedF = localStorage.getItem('user_freezeTime')
-        if (savedF !== null) fTime = Number(savedF) || 0
-
-        const savedP = localStorage.getItem('user_publicVote')
-        if (savedP !== null) pVote = Number(savedP) || 0
-
-        if (profile?.consumables) {
-          if (typeof profile.consumables.help5050 === 'number') h5050 = profile.consumables.help5050
-          if (typeof profile.consumables.freezeTime === 'number') fTime = profile.consumables.freezeTime
-          if (typeof (profile.consumables as any).publicVote === 'number') pVote = (profile.consumables as any).publicVote
-        }
-
-        setStock5050(h5050)
-        setStockFreeze(fTime)
-        setStockPublicVote(pVote)
+        const stocks = getUserAidStock(profile)
+        setStock5050(stocks.stock5050)
+        setStockFreeze(stocks.stockFreeze)
+        setStockPublicVote(stocks.stockPublicVote)
       } catch (err) {
         console.warn('[QuizScreen] Aviso ao sincronizar stock:', err)
       }
     }
+
 
     syncStock()
     window.addEventListener('consumables_updated', syncStock)

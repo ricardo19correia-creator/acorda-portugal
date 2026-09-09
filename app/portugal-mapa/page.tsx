@@ -1,10 +1,10 @@
 'use client'
 
 import React, { Component, Suspense, type ReactNode, type ErrorInfo } from 'react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { Globe, AlertTriangle, RefreshCw, Play, Home } from 'lucide-react'
+import { AlertTriangle, RefreshCw, Play, Home } from 'lucide-react'
+import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -17,8 +17,7 @@ interface ErrorBoundaryState {
 
 /**
  * Error Boundary específico da rota /portugal-mapa.
- * Impede que qualquer falha do Mapbox, WebGL ou chunk loading derrube a aplicação
- * com erro global ou cause Hydration Mismatch (#418).
+ * Garante recuperação amigável de qualquer erro de execução sem derrubar a aplicação.
  */
 export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
@@ -31,7 +30,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[CRASH /portugal-mapa]:', error, errorInfo)
+    console.error('[ERRO /portugal-mapa]:', error, errorInfo)
   }
 
   handleReset = () => {
@@ -45,7 +44,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
           <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
           <div className="pointer-events-none absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-emerald-500/10 blur-[120px]" />
 
-          <div className="relative z-10 w-full max-w-md rounded-3xl border border-cyan-500/30 bg-slate-900/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl text-center space-y-6 animate-fadeIn">
+          <div className="relative z-10 w-full max-w-md rounded-3xl border border-cyan-500/30 bg-slate-900/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl text-center space-y-6">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30">
               <AlertTriangle className="h-8 w-8 text-cyan-400" />
             </div>
@@ -57,11 +56,11 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
               </div>
 
               <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">
-                Falha ao Carregar Mapa
+                Aviso do Mapa Nacional
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Não foi possível inicializar a interface do mapa. Clica abaixo para tentar novamente ou regressar à central.
+                Ocorreu uma interrupção ao carregar o mapa. Clica abaixo para recarregar ou regressar à central de jogos.
               </p>
 
               {this.state.error?.message && (
@@ -109,8 +108,6 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
   }
 }
 
-import { PortugalMapEngine } from '@/components/portugal-engine/PortugalMapEngine'
-
 function PortugalMapaContent() {
   const searchParams = useSearchParams()
   const districtParam =
@@ -119,7 +116,7 @@ function PortugalMapaContent() {
     searchParams.get('distrito') ||
     undefined
 
-  return <PortugalMapEngine initialDistrict={districtParam} mode="mapa" />
+  return <PortugalMap initialDistrict={districtParam} />
 }
 
 export default function PortugalMapaPage() {
@@ -131,7 +128,7 @@ export default function PortugalMapaPage() {
             <div className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none">
               <div className="w-14 h-14 rounded-full border-3 border-cyan-500/20 border-t-cyan-400 animate-spin mb-4" />
               <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">
-                A carregar interface...
+                A carregar mapa oficial...
               </p>
             </div>
           }

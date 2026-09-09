@@ -70,6 +70,14 @@ import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import {
+  getUserAidStock,
+  consumeGameAid,
+  CANONICAL_AIDS,
+  type AidType,
+  type UserAidStock,
+} from '@/lib/aid-service'
+import { AidPreviewModal } from '@/components/quiz/aid-preview-modal'
+import {
   QUESTION_TIME_SECONDS,
   WARNING_TIME_THRESHOLD,
   calculateTimePercentage,
@@ -144,15 +152,34 @@ export function DuelArena({
   const [isSurrendering, setIsSurrendering] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
-  // Live Inventory
+  // Live Inventory & Aid Stocks (SSOT canónico de inventário de ajudas)
   const effectiveUid = user?.uid || profile?.uid || ''
-  const rawInventory: Record<string, number> = (profile as any)?.inventory || {}
-  const [inventory, setInventory] = useState<Record<string, number>>(rawInventory)
+  const rawInventory: Record<string, any> = (profile as any)?.inventory || {}
+  const [inventory, setInventory] = useState<Record<string, any>>(rawInventory)
+  const [aidStocks, setAidStocks] = useState<UserAidStock>(() => getUserAidStock(profile, rawInventory))
+  const [selectedPreviewAid, setSelectedPreviewAid] = useState<AidType | null>(null)
+  const [isHelpProcessing, setIsHelpProcessing] = useState(false)
+  const [aidToast, setAidToast] = useState<string | null>(null)
 
   useEffect(() => {
-    const inv: Record<string, number> = (profile as any)?.inventory || {}
-    setInventory(inv)
+    const syncStocks = () => {
+      const inv: Record<string, any> = (profile as any)?.inventory || {}
+      setInventory(inv)
+      setAidStocks(getUserAidStock(profile, inv))
+    }
+
+    syncStocks()
+    window.addEventListener('consumables_updated', syncStocks)
+    window.addEventListener('inventory_updated', syncStocks)
+    window.addEventListener('storage', syncStocks)
+
+    return () => {
+      window.removeEventListener('consumables_updated', syncStocks)
+      window.removeEventListener('inventory_updated', syncStocks)
+      window.removeEventListener('storage', syncStocks)
+    }
   }, [profile])
+
 
 
   // Reward state
@@ -509,60 +536,100 @@ export function DuelArena({
     }
   }, [currentQIndex, isFinishedForMe])
 
-  // Handlers dos Power-Ups no Duelo
-  const handleUse5050 = async () => {
-    if (feedback !== null || isSubmitting || eliminatedOptions.length > 0 || !currentQuestion) return
-    if ((inventory['consumable_50_50'] || 0) <= 0) return
+  // Handlers Unificados das Ajudas no Duelo 1v1
+  const handleRequestAidPreview = (aidType: AidType) => {
+    if (feedback !== null || isSubmitting || isHelpProcessing || !currentQuestion) return
+    setSelectedPreviewAid(aidType)
+  }
 
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_50_50')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_50_50: res.remainingCount }))
-      const toEliminate = calculate5050Eliminated(currentQuestion.options, currentQuestion.correct)
-      setEliminatedOptions(toEliminate)
+  const handleConfirmUseAid = async () => {
+    if (!selectedPreviewAid || !currentQuestion || feedback !== null || isSubmitting || isHelpProcessing) {
+      return
+    }
+
+    const aidType = selectedPreviewAid
+    const currentStock =
+      aidType === '5050'
+        ? aidStocks.stock5050
+        : aidType === 'publicVote'
+          ? aidStocks.stockPublicVote
+          : aidStocks.stockFreeze
+
+    if (currentStock <= 0) return
+
+    // Prevenir duplo efeito na mesma pergunta
+    if (aidType === '5050' && eliminatedOptions.length > 0) return
+    if (aidType === 'publicVote' && publicVoteResults !== null) return
+    if (aidType === 'freeze' && isFrozen) return
+
+    setIsHelpProcessing(true)
+
+    try {
+      const res = await consumeGameAid({
+        userId: effectiveUid,
+        aidType,
+        gameMode: 'duel',
+        currentStock,
+        questionData: currentQuestion,
+        duelId: duel?.id,
+      })
+
+      if (res.success) {
+        // Fechar modal imediatamente
+        setSelectedPreviewAid(null)
+
+        // Atualizar estoque local
+        setAidStocks((prev) => ({
+          ...prev,
+          ...(aidType === '5050' && { stock5050: res.remainingStock }),
+          ...(aidType === 'publicVote' && { stockPublicVote: res.remainingStock }),
+          ...(aidType === 'freeze' && { stockFreeze: res.remainingStock }),
+        }))
+
+        // Aplicar o efeito exclusivamente ao jogador local
+        if (aidType === '5050') {
+          const eliminated =
+            res.effect?.eliminatedOptions ||
+            calculate5050Eliminated(currentQuestion.options, currentQuestion.correct)
+          setEliminatedOptions(eliminated)
+        } else if (aidType === 'publicVote') {
+          const percentages =
+            res.effect?.percentages ||
+            simulatePublicVote(
+              Math.max(
+                0,
+                currentQuestion.options.findIndex((o) => o.key === currentQuestion.correct),
+              ),
+            )
+          setPublicVoteResults(percentages)
+        } else if (aidType === 'freeze') {
+          setIsFrozen(true)
+          setFreezeTimeLeft(15)
+          setTimeLeft((prev) => prev + 15)
+        }
+
+        // Confirmação visual clara
+        setAidToast(`💡 ${CANONICAL_AIDS[aidType].shortName.toUpperCase()} UTILIZADA — Restam ${res.remainingStock}`)
+        setTimeout(() => setAidToast(null), 3000)
+      } else {
+        alert(res.message || 'Erro ao utilizar ajuda.')
+      }
+    } catch (err) {
+      console.error('Erro ao consumir ajuda:', err)
+    } finally {
+      setIsHelpProcessing(false)
     }
   }
+
+  // Handlers legados / atalhos diretos
+  const handleUse5050 = () => handleRequestAidPreview('5050')
+  const handleUseFreeze = () => handleRequestAidPreview('freeze')
+  const handleUsePublicVote = () => handleRequestAidPreview('publicVote')
 
   const handleUseClue = async () => {
     if (feedback !== null || isSubmitting || activeClue !== null || !currentQuestion) return
-    if ((inventory['consumable_pista'] || 0) <= 0) return
-
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_pista')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_pista: res.remainingCount }))
-      const clue = generateQuestionClue(currentQuestion)
-      setActiveClue(clue)
-    }
-  }
-
-  const handleUseFreeze = async () => {
-    if (feedback !== null || isSubmitting || isFrozen || timeLeft <= 0 || !currentQuestion) return
-    if ((inventory['consumable_congelar_tempo'] || 0) <= 0) return
-
-    const res = await useConsumablePowerUp(effectiveUid, 'consumable_congelar_tempo')
-    if (res.success) {
-      setInventory((prev) => ({ ...prev, consumable_congelar_tempo: res.remainingCount }))
-      setIsFrozen(true)
-      setFreezeTimeLeft(15)
-    }
-  }
-
-  const handleUsePublicVote = async () => {
-    if (feedback !== null || isSubmitting || publicVoteResults !== null || !currentQuestion) return
-    const currentStock =
-      inventory['HELP_005'] ?? inventory['consumable_public_vote'] ?? (profile as any)?.consumables?.publicVote ?? 0
-    if (currentStock <= 0) return
-
-    const res = await useConsumablePowerUp(effectiveUid, 'HELP_005')
-    if (res.success) {
-      setInventory((prev) => ({
-        ...prev,
-        HELP_005: res.remainingCount,
-        consumable_public_vote: res.remainingCount,
-      }))
-      const correctIdx = currentQuestion.options.findIndex((o) => o.key === currentQuestion.correct)
-      const results = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
-      setPublicVoteResults(results)
-    }
+    const clue = generateQuestionClue(currentQuestion)
+    setActiveClue(clue)
   }
 
   // Freeze Countdown loop no Duelo (pausa por 15s)
@@ -1250,10 +1317,24 @@ export function DuelArena({
         {/* ========================================================= */}
         <div className="w-full flex flex-col gap-2 shrink-0">
           {/* Barra de Ajudas */}
+          {/* Toast / Confirmação de Uso de Ajuda no Duelo */}
+          {aidToast && (
+            <div className="flex justify-center mb-1 w-full animate-pop">
+              <div className="px-3.5 py-1 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-xs font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
+                <span>{aidToast}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Barra de Ajudas Canónicas */}
           <div className="flex justify-center gap-3 mb-1">
             <QuizPowerUpsBar
+              stock5050={aidStocks.stock5050}
+              stockFreeze={aidStocks.stockFreeze}
+              stockPublicVote={aidStocks.stockPublicVote}
               inventory={inventory}
               disabled={feedback !== null || isSubmitting || timeLeft <= 0}
+              isProcessing={isHelpProcessing}
               used5050={eliminatedOptions.length > 0}
               usedPublicVote={publicVoteResults !== null}
               usedClue={activeClue !== null}
@@ -1263,6 +1344,7 @@ export function DuelArena({
               onUsePublicVote={handleUsePublicVote}
               onUseClue={handleUseClue}
               onUseFreeze={handleUseFreeze}
+              onRequestPreview={handleRequestAidPreview}
             />
           </div>
 
@@ -1343,6 +1425,28 @@ export function DuelArena({
             })}
           </div>
         </div>
+
+        {/* ========================================================= */}
+        {/* MODAL DE PRÉ-VISUALIZAÇÃO / CONFIRMAÇÃO DE AJUDA 1V1      */}
+        {/* ========================================================= */}
+        {selectedPreviewAid && (
+          <AidPreviewModal
+            aid={CANONICAL_AIDS[selectedPreviewAid]}
+            stock={
+              selectedPreviewAid === '5050'
+                ? aidStocks.stock5050
+                : selectedPreviewAid === 'publicVote'
+                  ? aidStocks.stockPublicVote
+                  : aidStocks.stockFreeze
+            }
+            isOpen={selectedPreviewAid !== null}
+            isProcessing={isHelpProcessing}
+            onConfirm={handleConfirmUseAid}
+            onClose={() => {
+              if (!isHelpProcessing) setSelectedPreviewAid(null)
+            }}
+          />
+        )}
 
         {/* ========================================================= */}
         {/* MODAL / POPUP DE SELEÇÃO DE REAÇÕES (FIXED Z-50)           */}

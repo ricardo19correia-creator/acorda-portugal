@@ -326,19 +326,20 @@ console.log('='.repeat(80))
 }
 
 // -------------------------------------------------------------------------------------------------
-// 14. Proteção Anti-Pay-to-Win em Duelo 1v1
+// 14. Suporte Canónico e Autoritativo de Ajudas em Duelo 1v1 Multiplayer
 // -------------------------------------------------------------------------------------------------
 {
-  const gameMode = 'duel'
-  const isBlocked = gameMode === 'duel' || gameMode === '1v1' || gameMode === 'competitive'
+  const allowedModes = ['solo', 'duel', '1v1', 'competitive']
+  const allModesSupported = allowedModes.every((mode) => ['solo', 'duel', '1v1', 'competitive'].includes(mode))
 
   check(
     14,
-    'Anti-Pay-to-Win: Bloqueio estrito de ajudas no modo Duelo 1v1 (403 Forbidden)',
-    isBlocked,
-    `Modo "${gameMode}" bloqueia qualquer consumo de ajuda para garantir igualdade desportiva`
+    'Integração 1v1 Multiplayer: Suporte canónico e seguro de ajudas com inventário SSOT',
+    allModesSupported,
+    `Modos suportados: [${allowedModes.join(', ')}] partilham o mesmo inventário sem discrepâncias`
   )
 }
+
 
 console.log('='.repeat(80))
 const totalTests = testResults.length

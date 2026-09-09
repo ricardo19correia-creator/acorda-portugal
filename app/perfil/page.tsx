@@ -8,7 +8,7 @@ import {
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Building2, Check, Plus, Globe, 
   User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
-  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Film, Video, VideoOff
+  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Film, Video, VideoOff, Coins
 } from 'lucide-react'
 import { useBackgroundVideoSettings } from '@/lib/video-background-settings'
 import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
@@ -183,6 +183,40 @@ function PerfilContent() {
   const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'molduras' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'>('todos')
   const [achievementCategory, setAchievementCategory] = useState<AchievementCategory>('todas')
   
+  // Histórico de Compras Oficiais (Google Play)
+  const [historicoSubTab, setHistoricoSubTab] = useState<'duelos' | 'compras'>('duelos')
+  const [purchaseHistory, setPurchaseHistory] = useState<any[]>([])
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false)
+  const [historyError, setHistoryError] = useState<string | null>(null)
+
+  const fetchPurchaseHistory = async () => {
+    if (!user) return
+    setIsLoadingHistory(true)
+    setHistoryError(null)
+    try {
+      const token = await user.getIdToken().catch(() => null)
+      const res = await fetch('/api/billing/google-play/history', {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setPurchaseHistory(data.transactions || [])
+      } else {
+        setHistoryError(data.error || 'Não foi possível obter o histórico.')
+      }
+    } catch (err: any) {
+      setHistoryError(err?.message || 'Erro de ligação.')
+    } finally {
+      setIsLoadingHistory(false)
+    }
+  }
+
+  useEffect(() => {
+    if (activeTab === 'historico' && historicoSubTab === 'compras' && user?.uid) {
+      fetchPurchaseHistory()
+    }
+  }, [activeTab, historicoSubTab, user?.uid])
+
   // Conquistas Reclamadas
   const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
 
@@ -2260,58 +2294,184 @@ function PerfilContent() {
         )}
 
         {/* ========================================================= */}
-        {/* ABA 4: HISTÓRICO DE DUELOS */}
+        {/* ABA 4: HISTÓRICO DE DUELOS & COMPRAS */}
         {/* ========================================================= */}
         {activeTab === 'historico' && (
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 className="text-sm font-black text-white flex items-center gap-2">
-                <Swords className="w-4 h-4 text-purple-400" /> Histórico de Confrontos 1v1
-              </h3>
-              <span className="text-xs text-slate-400">
-                Total: {profile?.gamesPlayed ?? (profile as any)?.stats?.totalDuels ?? 0} Duelos
-              </span>
-            </div>
-
-            {/* Resumo Estatístico do Histórico 1v1 */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
-                <span className="text-xs text-slate-400 font-bold block mb-1">Vitórias</span>
-                <span className="text-lg font-black text-emerald-400">
-                  {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
-                </span>
-              </div>
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
-                <span className="text-xs text-slate-400 font-bold block mb-1">Derrotas</span>
-                <span className="text-lg font-black text-rose-400">
-                  {Math.max(0, (profile?.gamesPlayed ?? 0) - (profile?.wins ?? 0))}
-                </span>
-              </div>
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
-                <span className="text-xs text-slate-400 font-bold block mb-1">Taxa de Vitória</span>
-                <span className="text-lg font-black text-cyan-400">
-                  {profile?.gamesPlayed && profile.gamesPlayed > 0
-                    ? Math.round(((profile.wins || 0) / profile.gamesPlayed) * 100)
-                    : 0}%
-                </span>
-              </div>
-            </div>
-
-            {(!profile?.gamesPlayed || profile.gamesPlayed === 0) && (
-              <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center justify-center mx-auto text-xl">
-                  ⚔️
-                </div>
-                <p className="text-sm font-bold text-slate-300">Nenhum duelo registado ainda</p>
-                <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                  Entra na Arena de Duelos 1v1 para desafiar outros jogadores e acumular vitórias no teu histórico oficial.
-                </p>
-                <Link
-                  href="/jogar/duelo"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-purple-600/30"
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-5 shadow-xl">
+            {/* Seletor de Sub-Abas do Histórico */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setHistoricoSubTab('duelos')}
+                  className={cn(
+                    "cursor-pointer px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-2",
+                    historicoSubTab === 'duelos'
+                      ? "bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400"
+                      : "bg-slate-800/80 text-slate-400 hover:text-white border border-slate-700/60"
+                  )}
                 >
-                  <Swords className="w-4 h-4" /> Jogar Duelo 1v1
-                </Link>
+                  <Swords className="w-3.5 h-3.5" />
+                  <span>Duelos 1v1</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setHistoricoSubTab('compras')}
+                  className={cn(
+                    "cursor-pointer px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-2",
+                    historicoSubTab === 'compras'
+                      ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30 ring-1 ring-amber-300"
+                      : "bg-slate-800/80 text-slate-400 hover:text-white border border-slate-700/60"
+                  )}
+                >
+                  <Coins className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Histórico de Compras (Google Play)</span>
+                </button>
+              </div>
+
+              {historicoSubTab === 'duelos' ? (
+                <span className="text-xs text-slate-400">
+                  Total: {profile?.gamesPlayed ?? (profile as any)?.stats?.totalDuels ?? 0} Duelos
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={fetchPurchaseHistory}
+                  disabled={isLoadingHistory}
+                  className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs transition border border-slate-700 disabled:opacity-50"
+                  title="Atualizar histórico"
+                >
+                  <RefreshCw className={cn("w-3 h-3 text-amber-400", isLoadingHistory && "animate-spin")} />
+                  <span>Atualizar</span>
+                </button>
+              )}
+            </div>
+
+            {/* Visualização: Duelos 1v1 */}
+            {historicoSubTab === 'duelos' && (
+              <div className="space-y-4">
+                {/* Resumo Estatístico do Histórico 1v1 */}
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                    <span className="text-xs text-slate-400 font-bold block mb-1">Vitórias</span>
+                    <span className="text-lg font-black text-emerald-400">
+                      {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
+                    </span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                    <span className="text-xs text-slate-400 font-bold block mb-1">Derrotas</span>
+                    <span className="text-lg font-black text-rose-400">
+                      {Math.max(0, (profile?.gamesPlayed ?? 0) - (profile?.wins ?? 0))}
+                    </span>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+                    <span className="text-xs text-slate-400 font-bold block mb-1">Taxa de Vitória</span>
+                    <span className="text-lg font-black text-cyan-400">
+                      {profile?.gamesPlayed && profile.gamesPlayed > 0
+                        ? Math.round(((profile.wins || 0) / profile.gamesPlayed) * 100)
+                        : 0}%
+                    </span>
+                  </div>
+                </div>
+
+                {(!profile?.gamesPlayed || profile.gamesPlayed === 0) && (
+                  <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center justify-center mx-auto text-xl">
+                      ⚔️
+                    </div>
+                    <p className="text-sm font-bold text-slate-300">Nenhum duelo registado ainda</p>
+                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                      Entra na Arena de Duelos 1v1 para desafiar outros jogadores e acumular vitórias no teu histórico oficial.
+                    </p>
+                    <Link
+                      href="/jogar/duelo"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-purple-600/30"
+                    >
+                      <Swords className="w-4 h-4" /> Jogar Duelo 1v1
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Visualização: Histórico de Compras Google Play */}
+            {historicoSubTab === 'compras' && (
+              <div className="space-y-4">
+                {isLoadingHistory ? (
+                  <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-2">
+                    <RefreshCw className="w-6 h-6 text-amber-400 animate-spin mx-auto" />
+                    <p className="text-xs text-slate-400">A carregar histórico oficial de transações...</p>
+                  </div>
+                ) : historyError ? (
+                  <div className="p-6 text-center bg-rose-500/10 rounded-2xl border border-rose-500/30 text-rose-300 space-y-2">
+                    <AlertCircle className="w-6 h-6 mx-auto text-rose-400" />
+                    <p className="text-xs font-bold">{historyError}</p>
+                    <button
+                      type="button"
+                      onClick={fetchPurchaseHistory}
+                      className="cursor-pointer px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition"
+                    >
+                      Tentar novamente
+                    </button>
+                  </div>
+                ) : purchaseHistory.length === 0 ? (
+                  <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 border border-amber-500/30 flex items-center justify-center mx-auto text-xl">
+                      🟡
+                    </div>
+                    <p className="text-sm font-bold text-slate-300">Nenhuma compra registada</p>
+                    <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                      Todas as transações oficiais de Acordas e passes validadas pela Google Play Store aparecerão aqui com data, recibo e comprovativo.
+                    </p>
+                    <Link
+                      href="/loja?tab=comprar_acordas"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20"
+                    >
+                      <Coins className="w-4 h-4" /> Comprar Acordas na Loja
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/50 p-1">
+                    <table className="w-full text-left text-xs">
+                      <thead>
+                        <tr className="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-slate-900/40">
+                          <th className="p-3 font-bold">Data</th>
+                          <th className="p-3 font-bold">Produto</th>
+                          <th className="p-3 font-bold text-center">Acordas</th>
+                          <th className="p-3 font-bold text-right">Preço</th>
+                          <th className="p-3 font-bold text-right">Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-800/50">
+                        {purchaseHistory.map((tx) => (
+                          <tr key={tx.id} className="hover:bg-slate-800/40 transition-colors">
+                            <td className="p-3 text-slate-400 font-mono text-[11px] whitespace-nowrap">
+                              {tx.date}
+                            </td>
+                            <td className="p-3 font-bold text-white whitespace-nowrap">
+                              {tx.productName}
+                            </td>
+                            <td className="p-3 text-center whitespace-nowrap">
+                              <span className="inline-flex items-center gap-1 font-black text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+                                <span>+{tx.acordasGranted?.toLocaleString('pt-PT')}</span>
+                                <span className="text-[10px] text-amber-400">🟡</span>
+                              </span>
+                            </td>
+                            <td className="p-3 text-right font-bold text-slate-300 whitespace-nowrap">
+                              {tx.priceEur}
+                            </td>
+                            <td className="p-3 text-right whitespace-nowrap">
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/30">
+                                <ShieldCheck className="w-3 h-3" /> {tx.status || 'Concluída'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -2528,6 +2688,21 @@ function PerfilContent() {
             </p>
 
             <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('historico')
+                  setHistoricoSubTab('compras')
+                  if (typeof window !== 'undefined') {
+                    window.scrollTo({ top: 350, behavior: 'smooth' })
+                  }
+                }}
+                className="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+              >
+                <Coins className="w-3.5 h-3.5" />
+                <span>Histórico de Compras</span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => setIsLogoutModalOpen(true)}
