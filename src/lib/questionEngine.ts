@@ -248,24 +248,59 @@ export function loadQuestionsPool(
     const all = registry.getAllQuestions()
     const distTarget = (district || '').toLowerCase().trim()
 
-    filtered = all.filter((q) => {
-      if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
-      if (distTarget) {
-        const matchesDistField = Boolean(q.district && (q.district.toLowerCase().includes(distTarget) || distTarget.includes(q.district.toLowerCase())))
-        const matchesPrompt = q.question.toLowerCase().includes(distTarget) || (q.explanation && q.explanation.toLowerCase().includes(distTarget))
-        return matchesDistField || matchesPrompt
-      }
-      return q.category === 'o-meu-distrito' || Boolean(q.district)
-    })
+    const ALL_KNOWN_DISTRICTS = [
+      'aveiro', 'beja', 'braga', 'bragança', 'castelo branco', 'coimbra',
+      'évora', 'faro', 'guarda', 'leiria', 'lisboa', 'portalegre',
+      'porto', 'santarém', 'setúbal', 'viana do castelo', 'vila real',
+      'viseu', 'açores', 'madeira'
+    ]
 
-    // Fallback: se o distrito tiver poucas perguntas específicas, complementar com geografia e territórios de Portugal
-    if (filtered.length < 10) {
-      const distPoolAdditions = all.filter((q) => {
+    if (distTarget) {
+      filtered = all.filter((q) => {
         if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
-        const sub = (q.subcategory || '').toLowerCase()
-        return sub.includes('distrito') || sub.includes('geografia de portugal') || sub.includes('regi') || sub.includes('serras')
+
+        const qDist = (q.district || '').toLowerCase().trim()
+        // 1. Se tem distrito atribuído: deve coincidir com o distrito selecionado
+        if (qDist) {
+          return qDist === distTarget || distTarget.includes(qDist) || qDist.includes(distTarget)
+        }
+
+        // 2. Se não tem distrito explícito: verifica contexto e resposta correta
+        const prompt = (q.question || '').toLowerCase()
+        const exp = (q.explanation || '').toLowerCase()
+        const correctOptIdx = typeof q.correctAnswer === 'number' ? q.correctAnswer : 0
+        const correctOpt = String(q.options?.[correctOptIdx] || '').toLowerCase()
+        const fullText = `${prompt} ${correctOpt} ${exp}`
+
+        const matchesTarget =
+          fullText.includes(`distrito de ${distTarget}`) ||
+          fullText.includes(`distrito do ${distTarget}`) ||
+          fullText.includes(`distrito da ${distTarget}`) ||
+          fullText.includes(`em ${distTarget}`) ||
+          fullText.includes(`no ${distTarget}`) ||
+          fullText.includes(`na ${distTarget}`) ||
+          fullText.includes(`de ${distTarget}`) ||
+          fullText.includes(`do ${distTarget}`) ||
+          fullText.includes(`da ${distTarget}`) ||
+          new RegExp(`\\b${distTarget}\\b`, 'i').test(correctOpt)
+
+        if (!matchesTarget) return false
+
+        // 3. Bloqueio absoluto: descarta se a resposta correta ou o foco principal for de outro distrito
+        const otherDistricts = ALL_KNOWN_DISTRICTS.filter((d) => d !== distTarget)
+        const isAboutOtherDistrict = otherDistricts.some((od) => {
+          return (
+            new RegExp(`\\b${od}\\b`, 'i').test(correctOpt) ||
+            prompt.includes(`distrito de ${od}`) ||
+            prompt.includes(`distrito do ${od}`) ||
+            prompt.includes(`distrito da ${od}`)
+          )
+        })
+
+        return !isAboutOtherDistrict
       })
-      filtered = Array.from(new Set([...filtered, ...distPoolAdditions]))
+    } else {
+      filtered = all.filter((q) => q.category === 'o-meu-distrito' || Boolean(q.district))
     }
   } else if (subcategory && subcategory !== 'all' && subcategory !== 'todas' && subcategory !== 'todos') {
     // Subtema Específico dentro do Tema
@@ -279,6 +314,14 @@ export function loadQuestionsPool(
   if (filtered.length === 0) {
     if (isMaluco) {
       filtered = registry.getTemaCompleto('modo-maluco', targetDiff)
+    } else if (isDistrict) {
+      const all = registry.getAllQuestions()
+      filtered = all.filter((q) => {
+        if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
+        if (q.district) return false
+        const prompt = (q.question || '').toLowerCase()
+        return !prompt.includes('distrito')
+      })
     } else {
       filtered = registry.getTemaCompleto('portugal', targetDiff)
     }

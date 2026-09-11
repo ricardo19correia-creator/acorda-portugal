@@ -109,17 +109,17 @@ function resolveCategoryInfo(
     const distName = districtParam || 'Portugal'
     const distInfo = getDistrictTerritory(distName)
     return {
-      name: `Conquista de ${distName}`,
-      subtitle: distInfo?.titleBadge || 'Classificação & Poder Territorial',
+      name: `Meu Distrito: ${distName}`,
+      subtitle: distInfo?.titleBadge || 'Classificação & Poder Territorial Distrital',
       emoji: '📍',
       special: false,
     }
   }
   if (cityParam || categorySlug === 'desafio-cidade' || categorySlug === 'cidade') {
-    const cityName = cityParam || 'Concelho'
+    const cityName = cityParam || 'Local'
     return {
-      name: `Meu Distrito`,
-      subtitle: `Desafio do Concelho de ${cityName}`,
+      name: `Desafio Local`,
+      subtitle: `Conhecimento Local de ${cityName}`,
       emoji: '🏙️',
       special: false,
     }
