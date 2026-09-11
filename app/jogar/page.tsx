@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
 import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { AppBackground } from '@/components/AppBackground'
-import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
@@ -212,9 +211,9 @@ function JogarContainer() {
     (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
     (gameParam ? 'desafio-nacional' : null) ||
-    (isFresh ? 'desafio-nacional' : null)
+    'desafio-nacional'
 
-  const isPlaying = Boolean(effectiveCategory || gameParam || isFresh)
+  const isPlaying = true
   const [equippedArena, setEquippedArena] = useState<string | null>(null)
 
   // Leitura segura de localStorage exclusivamente dentro de useEffect com try/catch
@@ -251,7 +250,6 @@ function JogarContainer() {
 
   // Resolução da arena com fallback seguro
   const activeArena = useMemo(() => {
-    if (!isPlaying) return null
     try {
       const res = resolveArenaForGame({
         arenaId: arenaParam,
@@ -263,21 +261,10 @@ function JogarContainer() {
       console.warn('[JogarContainer] Aviso ao resolver arena:', e)
       return null
     }
-  }, [isPlaying, arenaParam, effectiveCategory, equippedArena])
+  }, [arenaParam, effectiveCategory, equippedArena])
 
-  // Blindagem do Ciclo de Vida da Sessão Firebase com Failsafe de 6 segundos
-  const [authFailsafe, setAuthFailsafe] = useState(false)
-  useEffect(() => {
-    if (authResolved && !(user && profileLoading)) return
-    const timer = setTimeout(() => {
-      console.warn('[JogarContainer] Timeout de segurança (6s) na autenticação/perfil. A desbloquear ecrã...')
-      setAuthFailsafe(true)
-    }, 6000)
-    return () => clearTimeout(timer)
-  }, [authResolved, user, profileLoading])
-
-  if (!authFailsafe && (!authResolved || (user && profileLoading))) {
-    return <LoadingQuiz message="A sincronizar sessão..." submessage="A verificar credenciais e perfil..." />
+  if (!authResolved && !user) {
+    return null
   }
 
   // 🔒 BLOQUEIO DEFINITIVO DE JOGADORES CONVIDADOS
@@ -312,7 +299,7 @@ function JogarContainer() {
 export default function JogarPage() {
   return (
     <JogarErrorBoundary>
-      <Suspense fallback={<LoadingQuiz message="A carregar desafio..." />}>
+      <Suspense fallback={null}>
         <JogarContainer />
       </Suspense>
     </JogarErrorBoundary>
