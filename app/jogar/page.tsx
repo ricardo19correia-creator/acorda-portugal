@@ -35,14 +35,43 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[CRASH /jogar]:', error, errorInfo)
+    console.error('[CRASH /jogar / RECUPERAÇÃO SESSÃO]:', error, errorInfo)
+    try {
+      if (typeof window !== 'undefined') {
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        localStorage.removeItem('active_session_id')
+      }
+    } catch (cleanupErr) {
+      console.error('[CRASH /jogar]: Erro na limpeza de armazenamento:', cleanupErr)
+    }
   }
 
   handleReset = () => {
     try {
       if (typeof window !== 'undefined') {
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_'))) {
+            sessionStorage.removeItem(key)
+          }
+        }
+        sessionStorage.removeItem('active_session_id')
         sessionStorage.removeItem('ap_error_auto_retried')
-        window.location.reload()
+        window.location.replace('/jogar')
+        return
       }
     } catch {
       this.setState({ hasError: false, error: null })
@@ -211,8 +240,18 @@ function JogarContainer() {
     }
   }, [isPlaying, arenaParam, effectiveCategory, equippedArena])
 
-  // Blindagem do Ciclo de Vida da Sessão Firebase
-  if (!authResolved || (user && profileLoading)) {
+  // Blindagem do Ciclo de Vida da Sessão Firebase com Failsafe de 6 segundos
+  const [authFailsafe, setAuthFailsafe] = useState(false)
+  useEffect(() => {
+    if (authResolved && !(user && profileLoading)) return
+    const timer = setTimeout(() => {
+      console.warn('[JogarContainer] Timeout de segurança (6s) na autenticação/perfil. A desbloquear ecrã...')
+      setAuthFailsafe(true)
+    }, 6000)
+    return () => clearTimeout(timer)
+  }, [authResolved, user, profileLoading])
+
+  if (!authFailsafe && (!authResolved || (user && profileLoading))) {
     return <LoadingQuiz message="A sincronizar sessão..." submessage="A verificar credenciais e perfil..." />
   }
 

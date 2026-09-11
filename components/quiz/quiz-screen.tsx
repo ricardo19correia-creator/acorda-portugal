@@ -516,12 +516,48 @@ export function QuizScreen({
   const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
   const [savingReward, setSavingReward] = useState<boolean>(false)
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+  const [isLoadingMatch, setIsLoadingMatch] = useState<boolean>(true)
   const recordedAnswersRef = React.useRef<MatchAnswerPayload[]>([])
 
   // BLINDAGEM DO BANCO DE PERGUNTAS (DECLARAÇÃO ESTÁVEL PARA EXECUÇÃO SEGURA DOS HOOKS)
-  const questions = quizQuestions
+  const questions = quizQuestions && quizQuestions.length > 0 ? quizQuestions : EMERGENCY_FALLBACK_QUESTIONS
   const currentIndex = Math.min(Math.max(0, step), Math.max(0, (questions?.length || 1) - 1))
-  const currentQuestion = questions[currentIndex] || questions[0] || EMERGENCY_FALLBACK_QUESTIONS[0]
+  const rawQ = questions[currentIndex] || questions[0] || EMERGENCY_FALLBACK_QUESTIONS[0]
+
+  // Normalização estrita da pergunta ativa para impedir qualquer runtime crash ou loading infinito
+  const currentQuestion = useMemo(() => {
+    const prompt = rawQ?.question || rawQ?.pergunta || 'Pergunta sobre Portugal'
+    const opts =
+      Array.isArray(rawQ?.options) && rawQ.options.length >= 2
+        ? rawQ.options
+        : Array.isArray(rawQ?.opcoes)
+        ? rawQ.opcoes.map((o: any, idx: number) => ({
+            key: (['A', 'B', 'C', 'D'][idx] || 'A') as OptionKey,
+            text: typeof o === 'string' ? o : o?.text || String(o || ''),
+          }))
+        : [
+            { key: 'A' as OptionKey, text: 'Opção A' },
+            { key: 'B' as OptionKey, text: 'Opção B' },
+            { key: 'C' as OptionKey, text: 'Opção C' },
+            { key: 'D' as OptionKey, text: 'Opção D' },
+          ]
+
+    const opcoesList: [string, string, string, string] =
+      Array.isArray(rawQ?.opcoes) && rawQ.opcoes.length >= 2
+        ? (rawQ.opcoes as [string, string, string, string])
+        : (opts.map((o: any) => o.text || String(o)) as [string, string, string, string])
+
+    return {
+      ...rawQ,
+      question: prompt,
+      pergunta: prompt,
+      options: opts,
+      opcoes: opcoesList,
+      correct: rawQ?.correct || 'A',
+      explanation: rawQ?.explanation || rawQ?.explicacao || '',
+      explicacao: rawQ?.explicacao || rawQ?.explanation || '',
+    }
+  }, [rawQ])
   const q = currentQuestion
   const total = questions?.length || 10
 
@@ -562,54 +598,112 @@ export function QuizScreen({
   // Provocações / Reações no Tabuleiro
   const [reactionCooldown, setReactionCooldown] = useState(0)
 
-  // Sincronizar estado e carregar perguntas anti-repetição
+  // Timeout de segurança global de 6 segundos para garantir que o loader nunca fica preso infinitamente
+  useEffect(() => {
+    if (!isLoadingMatch) return
+    const failsafe = setTimeout(() => {
+      console.error(
+        '[FAILSAFE /jogar]: Timeout de 6 segundos atingido no carregamento da partida. A forçar desativação do loader e aplicação de perguntas de emergência...'
+      )
+      setIsLoadingMatch(false)
+      setQuizQuestions((prev) => (prev && prev.length > 0 ? prev : EMERGENCY_FALLBACK_QUESTIONS))
+    }, 6000)
+
+    return () => clearTimeout(failsafe)
+  }, [isLoadingMatch])
+
+  // Sincronizar estado e carregar perguntas anti-repetição com try/catch/finally e failsafe
   useEffect(() => {
     let isCancelled = false
+    let timeoutId: NodeJS.Timeout | null = null
 
-    // 1. Tentar recuperar sessão ativa de jogo de sessionStorage dentro de try/catch
+    // 1. Tentar recuperar sessão ativa de jogo de sessionStorage dentro de try/catch/finally
     if (typeof window !== 'undefined' && gameId) {
       try {
         const savedSession = sessionStorage.getItem(`ap_quiz_state_${gameId}`)
         if (savedSession) {
           const parsed = JSON.parse(savedSession)
           if (parsed && Array.isArray(parsed.quizQuestions) && parsed.quizQuestions.length > 0) {
-            setQuizQuestions(parsed.quizQuestions)
-            setStep(parsed.step ?? 0)
-            setSelected(parsed.selected ?? null)
-            setSeconds(parsed.seconds ?? 60)
-            setScore(parsed.score ?? 0)
-            setCorrectCount(parsed.correctCount ?? 0)
-            setStreak(parsed.streak ?? 0)
-            setBestStreak(parsed.bestStreak ?? 0)
-            setPhase(parsed.phase ?? 'answering')
-            if (Array.isArray(parsed.recordedAnswers)) {
-              recordedAnswersRef.current = parsed.recordedAnswers
+            const isValid = parsed.quizQuestions.every(
+              (item: any) =>
+                item &&
+                (item.question || item.pergunta) &&
+                ((Array.isArray(item.options) && item.options.length >= 2) ||
+                  (Array.isArray(item.opcoes) && item.opcoes.length >= 2))
+            )
+
+            if (isValid) {
+              setQuizQuestions(parsed.quizQuestions)
+              setStep(
+                typeof parsed.step === 'number' ? Math.min(parsed.step, parsed.quizQuestions.length - 1) : 0
+              )
+              setSelected(parsed.selected ?? null)
+              setSeconds(parsed.seconds ?? 60)
+              setScore(parsed.score ?? 0)
+              setCorrectCount(parsed.correctCount ?? 0)
+              setStreak(parsed.streak ?? 0)
+              setBestStreak(parsed.bestStreak ?? 0)
+              setPhase(parsed.phase ?? 'answering')
+              if (Array.isArray(parsed.recordedAnswers)) {
+                recordedAnswersRef.current = parsed.recordedAnswers
+              }
+              setIsLoadingMatch(false)
+              return
+            } else {
+              console.warn(
+                '[QuizScreen] Sessão em cache com perguntas corrompidas. A descartar e gerar novo desafio limpo...'
+              )
+              sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
             }
-            return
           }
         }
       } catch (e) {
-        console.warn('[QuizScreen] Aviso ao ler cache de sessão:', e)
+        console.error('[QuizScreen] Erro ao recuperar sessão em cache:', e)
+        try {
+          sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+        } catch {}
       }
     }
 
-    getUniqueMatchQuestions(
-      effectiveUserId,
-      categorySlug,
-      diffLevel,
-      QUESTIONS_PER_GAME,
-      subcategorySlug || undefined,
-      districtParam || undefined,
-      cityParam || undefined
-    )
+    // 2. Failsafe Timeout de 6 segundos no carregamento das perguntas da arena
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => {
+        console.error(
+          '[FAILSAFE /jogar]: Timeout de 6 segundos atingido ao carregar perguntas anti-repetição. A ativar fallback de emergência...'
+        )
+        reject(new Error('TIMEOUT_6S: Tempo limite de carregamento de perguntas excedido'))
+      }, 6000)
+    })
+
+    Promise.race([
+      getUniqueMatchQuestions(
+        effectiveUserId,
+        categorySlug,
+        diffLevel,
+        QUESTIONS_PER_GAME,
+        subcategorySlug || undefined,
+        districtParam || undefined,
+        cityParam || undefined
+      ),
+      timeoutPromise,
+    ])
       .then((uniqueQuestions) => {
         if (isCancelled) return
         if (Array.isArray(uniqueQuestions) && uniqueQuestions.length > 0) {
-          const formatted = uniqueQuestions.map((q, i) => formatEngineQuestion(q, i, uniqueQuestions.length))
+          const formatted = uniqueQuestions.map((item, i) =>
+            formatEngineQuestion(item, i, uniqueQuestions.length)
+          )
           recordedAnswersRef.current = []
           setQuizQuestions(formatted)
         } else {
-          const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+          console.warn('[QuizScreen] Nenhuma pergunta retornada pelo motor. A ativar fallback de emergência.')
+          const fallback = createGameQuestions(
+            categorySlug,
+            subcategorySlug,
+            difficultyParam,
+            districtParam,
+            cityParam
+          )
           recordedAnswersRef.current = []
           setQuizQuestions(fallback.length > 0 ? fallback : EMERGENCY_FALLBACK_QUESTIONS)
         }
@@ -624,9 +718,18 @@ export function QuizScreen({
         setPhase('answering')
       })
       .catch((err) => {
-        console.error('[CRASH /jogar]: Erro ao carregar perguntas anti-repetição:', err)
+        console.error('[CRASH /jogar]: Erro ou timeout na recuperação/carregamento das perguntas do desafio:', err)
         if (!isCancelled) {
-          const fallback = createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+          try {
+            sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+          } catch {}
+          const fallback = createGameQuestions(
+            categorySlug,
+            subcategorySlug,
+            difficultyParam,
+            districtParam,
+            cityParam
+          )
           recordedAnswersRef.current = []
           setQuizQuestions(fallback.length > 0 ? fallback : EMERGENCY_FALLBACK_QUESTIONS)
           setStep(0)
@@ -640,9 +743,16 @@ export function QuizScreen({
           setPhase('answering')
         }
       })
+      .finally(() => {
+        if (timeoutId) clearTimeout(timeoutId)
+        if (!isCancelled) {
+          setIsLoadingMatch(false)
+        }
+      })
 
     return () => {
       isCancelled = true
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [gameId, categorySlug, subcategorySlug, diffLevel, difficultyParam, districtParam, cityParam, effectiveUserId])
 
@@ -974,13 +1084,14 @@ export function QuizScreen({
     return <AuthWallView targetUrl={currentTarget} />
   }
 
-  // 2. Validação segura do banco de perguntas
-  if (!questions || !Array.isArray(questions) || questions.length === 0) {
-    return <LoadingQuiz message="A preparar perguntas do desafio..." />
+  // 2. Validação segura do banco de perguntas e estado de carregamento
+  if (isLoadingMatch) {
+    return <LoadingQuiz message="A preparar perguntas do desafio..." submessage="A preparar a arena e os desafios para ti..." />
   }
 
-  if (!currentQuestion?.opcoes || !currentQuestion?.pergunta) {
-    return <LoadingQuiz message="A carregar questão..." />
+  if (!questions || !Array.isArray(questions) || questions.length === 0) {
+    console.warn('[QuizScreen] Perguntas vazias após carregamento. A forçar perguntas de emergência.')
+    return <LoadingQuiz message="A carregar desafio limpo..." submessage="A preparar perguntas de emergência..." />
   }
 
   // 3. Fim de jogo: Apresentar ecrã de resultados
