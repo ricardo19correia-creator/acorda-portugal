@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Gamepad2, Flag, Trophy, ShoppingBag, User } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Home, Gamepad2, Flag, Trophy, ShoppingBag, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function MobileBottomBar() {
@@ -15,23 +15,24 @@ export function MobileBottomBar() {
   useEffect(() => {
     const checkArena = () => {
       try {
-        if (typeof window === 'undefined') return
-        const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
-        const isJogo = window.location.pathname.startsWith('/jogo')
-        const isArenaRoute = window.location.pathname.startsWith('/arenas')
-        const search = window.location.search.toLowerCase()
-        const hasQuizParams =
-          search.includes('cat=') ||
-          search.includes('category=') ||
-          search.includes('game=') ||
-          search.includes('theme=') ||
-          search.includes('district=') ||
-          search.includes('city=') ||
-          search.includes('distrito=') ||
-          search.includes('cidade=')
-        const isDueloActive = window.location.pathname.startsWith('/jogar/duelo') && search.includes('id=')
+        if (typeof window !== 'undefined') {
+          const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
+          const isJogo = window.location.pathname.startsWith('/jogo')
+          const isArenaRoute = window.location.pathname.startsWith('/arenas')
+          const search = window.location.search.toLowerCase()
+          const hasQuizParams =
+            search.includes('cat=') ||
+            search.includes('category=') ||
+            search.includes('game=') ||
+            search.includes('theme=') ||
+            search.includes('district=') ||
+            search.includes('city=') ||
+            search.includes('distrito=') ||
+            search.includes('cidade=')
+          const isDueloActive = window.location.pathname.startsWith('/jogar/duelo') && search.includes('id=')
 
-        setIsInArena(Boolean(isMatchClass || isJogo || isArenaRoute || (window.location.pathname === '/jogar' && hasQuizParams) || isDueloActive))
+          setIsInArena(Boolean(isMatchClass || isJogo || isArenaRoute || (window.location.pathname === '/jogar' && hasQuizParams) || isDueloActive))
+        }
       } catch {
         setIsInArena(false)
       }
@@ -52,6 +53,7 @@ export function MobileBottomBar() {
   }
 
   const NAV_ITEMS = [
+    { label: 'Início', href: '/', icon: Home },
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
@@ -68,13 +70,15 @@ export function MobileBottomBar() {
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}
     >
-      <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-2">
+      <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-1 sm:px-2">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon
           const isActive =
-            pathname === item.href ||
-            (item.href !== '/' && pathname.startsWith(item.href)) ||
-            (item.href === '/mapa' && pathname.startsWith('/portugal-mapa'))
+            item.href === '/'
+              ? pathname === '/'
+              : pathname === item.href ||
+                (item.href !== '/' && pathname.startsWith(item.href)) ||
+                (item.href === '/mapa' && pathname.startsWith('/portugal-mapa'))
 
           return (
             <Link
@@ -89,7 +93,7 @@ export function MobileBottomBar() {
             >
               <div
                 className={cn(
-                  'relative flex items-center justify-center w-8 h-8 rounded-xl transition-all',
+                  'relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-xl transition-all',
                   isActive
                     ? 'bg-emerald-500/20 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.4)] ring-1 ring-emerald-500/40'
                     : 'text-slate-400'
@@ -97,7 +101,7 @@ export function MobileBottomBar() {
               >
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="text-[10px] tracking-tight mt-0.5 font-medium leading-none">
+              <span className="text-[9.5px] sm:text-[10px] tracking-tight mt-0.5 font-medium leading-none">
                 {item.label}
               </span>
             </Link>

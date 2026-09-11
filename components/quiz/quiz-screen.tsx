@@ -446,7 +446,7 @@ export function QuizScreen({
   )
 
   const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
-  const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(true)
+  const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(false)
 
   // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
