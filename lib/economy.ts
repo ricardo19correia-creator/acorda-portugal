@@ -785,15 +785,21 @@ export type ConsumablePowerUpId =
   | 'HELP_005'
   | 'ajuda_publico'
   | 'consumable_protecao_streak'
+  | '5050'
+  | 'publicVote'
+  | 'freeze'
+  | 'hint'
+  | 'pista_historica'
+  | 'ajuda_pista'
 
 /**
- * Consome 1 unidade de power-up do inventário de forma atómica no Firestore
+ * Consome 1 unidade de power-up do inventário de forma estritamente atómica no Firestore (SSOT)
  */
 export async function useConsumablePowerUp(
   userId: string,
   powerUpId: ConsumablePowerUpId | string,
 ): Promise<{ success: boolean; remainingCount: number; message?: string }> {
-  if (!userId || userId.startsWith('guest_')) {
+  if (!userId || userId.startsWith('guest_') || userId.startsWith('anon_') || userId === 'guest') {
     return { success: false, remainingCount: 0, message: 'Inicia sessão para usar ajudas.' }
   }
 
@@ -804,10 +810,11 @@ export async function useConsumablePowerUp(
       const userDoc = await transaction.get(userRef)
       if (!userDoc.exists()) throw new Error('Utilizador não encontrado.')
 
-      const data = userDoc.data()
+      const data = userDoc.data() || {}
       const inventory: Record<string, any> = data.inventory || {}
       const consumables: Record<string, any> = data.consumables || {}
-      
+      const utilities: Record<string, any> = inventory.utilities || {}
+
       let currentCount = 0
       let canonicalId = powerUpId
 
@@ -820,14 +827,22 @@ export async function useConsumablePowerUp(
         powerUpId === '5050'
       ) {
         canonicalId = 'AID_002'
-        currentCount = Math.max(
-          Number(inventory['AID_002']) || 0,
-          Number(inventory['aid_50_50']) || 0,
-          Number(inventory['consumable_50_50']) || 0,
-          Number(inventory['help5050']) || 0,
-          Number(inventory['utilities']?.fiftyFifty) || 0,
-          Number(consumables.help5050) || 0
-        )
+        // Priorizar campo canónico consumables / utilities
+        if (typeof consumables.help5050 === 'number') {
+          currentCount = consumables.help5050
+        } else if (typeof utilities.fiftyFifty === 'number') {
+          currentCount = utilities.fiftyFifty
+        } else if (typeof inventory['AID_002'] === 'number') {
+          currentCount = inventory['AID_002']
+        } else {
+          currentCount = Math.max(
+            Number(inventory['aid_50_50']) || 0,
+            Number(inventory['consumable_50_50']) || 0,
+            Number(inventory['help5050']) || 0,
+            Number(inventory['ajuda_5050']) || 0,
+            0
+          )
+        }
       } else if (
         powerUpId === 'AID_003' ||
         powerUpId === 'aid_public_vote' ||
@@ -837,15 +852,22 @@ export async function useConsumablePowerUp(
         powerUpId === 'publicVote'
       ) {
         canonicalId = 'AID_003'
-        currentCount = Math.max(
-          Number(inventory['AID_003']) || 0,
-          Number(inventory['aid_public_vote']) || 0,
-          Number(inventory['HELP_005']) || 0,
-          Number(inventory['consumable_public_vote']) || 0,
-          Number(inventory['publicVote']) || 0,
-          Number(inventory['utilities']?.publicVote) || 0,
-          Number(consumables.publicVote) || 0
-        )
+        if (typeof consumables.publicVote === 'number') {
+          currentCount = consumables.publicVote
+        } else if (typeof utilities.publicVote === 'number') {
+          currentCount = utilities.publicVote
+        } else if (typeof inventory['AID_003'] === 'number') {
+          currentCount = inventory['AID_003']
+        } else {
+          currentCount = Math.max(
+            Number(inventory['aid_public_vote']) || 0,
+            Number(inventory['HELP_005']) || 0,
+            Number(inventory['consumable_public_vote']) || 0,
+            Number(inventory['publicVote']) || 0,
+            Number(inventory['ajuda_publico']) || 0,
+            0
+          )
+        }
       } else if (
         powerUpId === 'AID_004' ||
         powerUpId === 'aid_freeze_time' ||
@@ -855,30 +877,63 @@ export async function useConsumablePowerUp(
         powerUpId === 'freeze'
       ) {
         canonicalId = 'AID_004'
-        currentCount = Math.max(
-          Number(inventory['AID_004']) || 0,
-          Number(inventory['aid_freeze_time']) || 0,
-          Number(inventory['consumable_congelar_tempo']) || 0,
-          Number(inventory['freezeTime']) || 0,
-          Number(inventory['utilities']?.freezeTime) || 0,
-          Number(consumables.freezeTime) || 0
-        )
-      } else if (powerUpId === 'AID_001' || powerUpId === 'aid_hint' || powerUpId === 'consumable_pista') {
+        if (typeof consumables.freezeTime === 'number') {
+          currentCount = consumables.freezeTime
+        } else if (typeof utilities.freezeTime === 'number') {
+          currentCount = utilities.freezeTime
+        } else if (typeof inventory['AID_004'] === 'number') {
+          currentCount = inventory['AID_004']
+        } else {
+          currentCount = Math.max(
+            Number(inventory['aid_freeze_time']) || 0,
+            Number(inventory['consumable_congelar_tempo']) || 0,
+            Number(inventory['freezeTime']) || 0,
+            Number(inventory['ajuda_congelar']) || 0,
+            0
+          )
+        }
+      } else if (
+        powerUpId === 'AID_001' ||
+        powerUpId === 'aid_hint' ||
+        powerUpId === 'consumable_pista' ||
+        powerUpId === 'pista_historica' ||
+        powerUpId === 'ajuda_pista' ||
+        powerUpId === 'hint'
+      ) {
         canonicalId = 'AID_001'
-        currentCount = Math.max(
-          Number(inventory['AID_001']) || 0,
-          Number(inventory['aid_hint']) || 0,
-          Number(inventory['consumable_pista']) || 0,
-          Number(consumables.hints) || 0
-        )
-      } else if (powerUpId === 'AID_008' || powerUpId === 'aid_streak_protection' || powerUpId === 'consumable_protecao_streak') {
+        if (typeof consumables.hints === 'number') {
+          currentCount = consumables.hints
+        } else if (typeof utilities.hints === 'number') {
+          currentCount = utilities.hints
+        } else if (typeof inventory['AID_001'] === 'number') {
+          currentCount = inventory['AID_001']
+        } else {
+          currentCount = Math.max(
+            Number(inventory['aid_hint']) || 0,
+            Number(inventory['consumable_pista']) || 0,
+            Number(inventory['pista_historica']) || 0,
+            Number(inventory['ajuda_pista']) || 0,
+            0
+          )
+        }
+      } else if (
+        powerUpId === 'AID_008' ||
+        powerUpId === 'aid_streak_protection' ||
+        powerUpId === 'consumable_protecao_streak'
+      ) {
         canonicalId = 'AID_008'
-        currentCount = Math.max(
-          Number(inventory['AID_008']) || 0,
-          Number(inventory['aid_streak_protection']) || 0,
-          Number(inventory['consumable_protecao_streak']) || 0,
-          Number(consumables.streakProtection) || 0
-        )
+        if (typeof consumables.streakProtection === 'number') {
+          currentCount = consumables.streakProtection
+        } else if (typeof utilities.streakProtection === 'number') {
+          currentCount = utilities.streakProtection
+        } else {
+          currentCount = Math.max(
+            Number(inventory['AID_008']) || 0,
+            Number(inventory['aid_streak_protection']) || 0,
+            Number(inventory['consumable_protecao_streak']) || 0,
+            0
+          )
+        }
       } else {
         currentCount = Number(inventory[powerUpId]) || 0
       }
@@ -888,46 +943,49 @@ export async function useConsumablePowerUp(
       }
 
       const newCount = Math.max(0, currentCount - 1)
-      const updatedInventory = {
-        ...inventory,
-        [powerUpId]: newCount,
-        [canonicalId]: newCount,
-      }
 
+      // Payload atómico com dot-notation estrito (NUNCA incluir { inventory: ... } completo para evitar colisão de propriedades)
       const updatePayload: Record<string, any> = {
-        inventory: updatedInventory,
         updatedAt: serverTimestamp(),
       }
 
       if (canonicalId === 'AID_002') {
         updatePayload['consumables.help5050'] = newCount
+        updatePayload['inventory.utilities.fiftyFifty'] = newCount
         updatePayload['inventory.AID_002'] = newCount
         updatePayload['inventory.aid_50_50'] = newCount
         updatePayload['inventory.consumable_50_50'] = newCount
         updatePayload['inventory.help5050'] = newCount
-        updatePayload['inventory.utilities.fiftyFifty'] = newCount
+        updatePayload['inventory.ajuda_5050'] = newCount
       } else if (canonicalId === 'AID_003') {
         updatePayload['consumables.publicVote'] = newCount
+        updatePayload['inventory.utilities.publicVote'] = newCount
         updatePayload['inventory.AID_003'] = newCount
         updatePayload['inventory.aid_public_vote'] = newCount
-        updatePayload['inventory.HELP_005'] = newCount
         updatePayload['inventory.consumable_public_vote'] = newCount
+        updatePayload['inventory.HELP_005'] = newCount
         updatePayload['inventory.publicVote'] = newCount
-        updatePayload['inventory.utilities.publicVote'] = newCount
+        updatePayload['inventory.ajuda_publico'] = newCount
       } else if (canonicalId === 'AID_004') {
         updatePayload['consumables.freezeTime'] = newCount
+        updatePayload['inventory.utilities.freezeTime'] = newCount
         updatePayload['inventory.AID_004'] = newCount
         updatePayload['inventory.aid_freeze_time'] = newCount
         updatePayload['inventory.consumable_congelar_tempo'] = newCount
         updatePayload['inventory.freezeTime'] = newCount
-        updatePayload['inventory.utilities.freezeTime'] = newCount
+        updatePayload['inventory.ajuda_congelar'] = newCount
       } else if (canonicalId === 'AID_001') {
         updatePayload['consumables.hints'] = newCount
+        updatePayload['inventory.utilities.hints'] = newCount
         updatePayload['inventory.AID_001'] = newCount
         updatePayload['inventory.aid_hint'] = newCount
         updatePayload['inventory.consumable_pista'] = newCount
+        updatePayload['inventory.pista_historica'] = newCount
+        updatePayload['inventory.ajuda_pista'] = newCount
+        updatePayload['inventory.hint'] = newCount
       } else if (canonicalId === 'AID_008') {
         updatePayload['consumables.streakProtection'] = newCount
+        updatePayload['inventory.utilities.streakProtection'] = newCount
         updatePayload['inventory.AID_008'] = newCount
         updatePayload['inventory.aid_streak_protection'] = newCount
         updatePayload['inventory.consumable_protecao_streak'] = newCount
@@ -937,7 +995,7 @@ export async function useConsumablePowerUp(
 
       transaction.update(userRef, updatePayload)
 
-      // Atualizar também na subcoleção aid_inventory pelo ID canónico e alias
+      // Atualizar também na subcoleção aid_inventory pelo ID canónico
       const aidDocRef = doc(db, 'users', userId, 'aid_inventory', canonicalId)
       transaction.set(aidDocRef, {
         userId,
@@ -951,6 +1009,7 @@ export async function useConsumablePowerUp(
 
     return { success: true, remainingCount: result.remainingCount }
   } catch (err: any) {
+    console.error('[useConsumablePowerUp] Erro transacional:', err)
     return { success: false, remainingCount: 0, message: err?.message || 'Erro ao usar power-up.' }
   }
 }

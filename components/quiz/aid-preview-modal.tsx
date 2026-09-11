@@ -59,7 +59,9 @@ export function AidPreviewModal({
                   ? 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
                   : aid.type === 'publicVote'
                     ? 'radial-gradient(circle, #a855f7 0%, transparent 70%)'
-                    : 'radial-gradient(circle, #38bdf8 0%, transparent 70%)',
+                    : aid.type === 'hint'
+                      ? 'radial-gradient(circle, #f59e0b 0%, transparent 70%)'
+                      : 'radial-gradient(circle, #38bdf8 0%, transparent 70%)',
             }}
           />
           <img

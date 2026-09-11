@@ -1,0 +1,222 @@
+[
+  {
+    "id": "p472k_portugal_historiaportugal_00914",
+    "question": "Em que ano ocorreu a histórica Batalha das Linhas de Elvas, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1659",
+      "1644",
+      "1681",
+      "1707"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha das Linhas de Elvas travou-se em 1659 em Elvas. Batalha fundamental na Guerra da Restauração que travou a invasão espanhola do Alentejo.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00915",
+    "question": "Em que ano ocorreu a histórica Batalha do Buçaco, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1810",
+      "1795",
+      "1832",
+      "1858"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha do Buçaco travou-se em 1810 em Serra do Buçaco. Travou o avanço das tropas napoleónicas comandadas pelo marechal Massena durante a terceira invasão francesa.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00916",
+    "question": "Em que ano ocorreu a histórica Batalha de La Lys, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1918",
+      "1903",
+      "1940",
+      "1966"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de La Lys travou-se em 1918 em Flandres (França). Resistência heroica e trágica do Corpo Expedicionário Português (CEP) na Frente Ocidental.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00917",
+    "question": "Em que ano ocorreu a histórica Batalha de Aljubarrota, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1385",
+      "1370",
+      "1407",
+      "1433"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de Aljubarrota travou-se em 1385 em Leiria / Batalha. Vitória decisiva com a tática do quadrado contra o exército castelhano, garantindo a independência nacional.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00918",
+    "question": "Em que ano ocorreu a histórica Batalha de Alcácer-Quibir, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1578",
+      "1563",
+      "1600",
+      "1626"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de Alcácer-Quibir travou-se em 1578 em Norte de Marrocos. Derrota trágica que ditou o desaparecimento de D. Sebastião e a consequente crise dinástica de 1580.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00919",
+    "question": "Em que ano ocorreu a histórica Batalha de Montes Claros, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1665",
+      "1650",
+      "1687",
+      "1713"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de Montes Claros travou-se em 1665 em Borba / Vila Viçosa. Última grande batalha campal da Guerra da Restauração, consolidando a independência portuguesa.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00920",
+    "question": "Em que ano ocorreu a histórica Batalha de São Mamede, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1128",
+      "1113",
+      "1150",
+      "1176"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de São Mamede travou-se em 1128 em Guimarães. Confronto entre Afonso Henriques e os partidários de sua mãe D. Teresa, marcando o início da autonomia portuguesa.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00921",
+    "question": "Em que ano ocorreu a histórica Batalha de Ourique, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1139",
+      "1124",
+      "1161",
+      "1187"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha de Ourique travou-se em 1139 em Baixo Alentejo. Momento lendário onde Afonso Henriques foi aclamado rei pelos seus soldados após derrotar cinco reis mouros.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00922",
+    "question": "Qual destes reis de Portugal realizou o seguinte feito: «Fundador do Reino de Portugal e vencedor da Batalha de Ourique»?",
+    "options": [
+      "D. Sebastião",
+      "D. Dinis",
+      "D. Afonso Henriques",
+      "Opção Extra 4"
+    ],
+    "correctAnswer": 2,
+    "difficulty": 2,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "Foi D. Afonso Henriques quem se destacou pelo marco: Fundador do Reino de Portugal e vencedor da Batalha de Ourique.",
+    "fonte": "História de Portugal — Dicionário de Monarcas",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  },
+  {
+    "id": "p472k_portugal_historiaportugal_00923",
+    "question": "Em que ano ocorreu a histórica Batalha dos Atoleiros, decisiva para a independência e soberania de Portugal?",
+    "options": [
+      "1384",
+      "1369",
+      "1406",
+      "1432"
+    ],
+    "correctAnswer": 0,
+    "difficulty": 3,
+    "category": "Portugal",
+    "subcategory": "História de Portugal",
+    "explanation": "A Batalha dos Atoleiros travou-se em 1384 em Fronteira (Alentejo). Primeira vitória militar de D. Nuno Álvares Pereira recorrendo a táticas de infantaria sem sofrer baixas.",
+    "fonte": "Arquivo Histórico Militar de Portugal",
+    "tema": "Portugal",
+    "temaSlug": "portugal",
+    "subtema": "História de Portugal",
+    "subtemaSlug": "historia-portugal",
+    "status": "approved",
+    "ativa": true
+  }
+]

@@ -129,7 +129,7 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
         titles: [DEFAULT_STARTER_TITLE_ID],
         taunts: ['pack_basico'],
         frames: ['default'],
-        utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
+        utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0, hints: 0 },
       },
       equipped: {
         avatar: resolvedAvatar.image,
@@ -139,7 +139,7 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
         titleName: savedTitleName,
         arena: 'arena_1',
       },
-      consumables: { help5050: 0, freezeTime: 0, publicVote: 0 },
+      consumables: { help5050: 0, freezeTime: 0, publicVote: 0, hints: 0 },
     }
   } catch {
     return null
@@ -501,6 +501,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 help5050: invData.utilities.fiftyFifty,
                 freezeTime: invData.utilities.freezeTime,
                 publicVote: invData.utilities.publicVote,
+                hints: invData.utilities.hints,
               },
             }
 

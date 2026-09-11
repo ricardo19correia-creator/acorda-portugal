@@ -10,8 +10,7 @@ import {
   consumeGameAid,
   syncAidStockToLocalStorage,
 } from '@/lib/aid-service'
-import { useConsumablePowerUp } from '@/lib/economy'
-import { calculate5050Eliminated, simulatePublicVote } from '@/lib/powerup-helpers'
+import { calculate5050Eliminated, simulatePublicVote, generateQuestionClue } from '@/lib/powerup-helpers'
 
 export interface UseGameAidsOptions {
   gameMode: 'solo' | 'duel' | '1v1'
@@ -29,6 +28,7 @@ export interface UseGameAidsOptions {
   onFreezeApplied?: (bonusSeconds: number) => void
   onOptionEliminated?: (eliminated: ('A' | 'B' | 'C' | 'D')[]) => void
   onPublicVoteReceived?: (distribution: number[]) => void
+  onClueReceived?: (clue: string) => void
 }
 
 export function useGameAids({
@@ -39,6 +39,7 @@ export function useGameAids({
   onFreezeApplied,
   onOptionEliminated,
   onPublicVoteReceived,
+  onClueReceived,
 }: UseGameAidsOptions) {
   const { user, profile, updateProfileLocally } = useAuth()
   const effectiveUid = user?.uid || ''
@@ -47,7 +48,7 @@ export function useGameAids({
   // 1. Estado Unificado de Stocks (SSOT com inventário real do jogador)
   const [stocks, setStocks] = useState<UserAidStock>(() => {
     if (isGuest) {
-      return { stock5050: 0, stockFreeze: 0, stockPublicVote: 0 }
+      return { stockHint: 0, stock5050: 0, stockFreeze: 0, stockPublicVote: 0 }
     }
     return getUserAidStock(profile, profile?.inventory as any)
   })
@@ -55,6 +56,7 @@ export function useGameAids({
   // 2. Estado de Efeitos Ativos na Pergunta Atual (100% Individual para este Jogador)
   const [eliminatedOptions, setEliminatedOptions] = useState<('A' | 'B' | 'C' | 'D')[]>([])
   const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
+  const [activeClue, setActiveClue] = useState<string | null>(null)
   const [isFrozen, setIsFrozen] = useState(false)
   const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
 
@@ -64,7 +66,7 @@ export function useGameAids({
   const [aidToast, setAidToast] = useState<string | null>(null)
   const toastTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Sincronização reativa de stocks em tempo real
+  // Sincronização reativa de stocks em tempo real a partir do perfil Firestore (SSOT)
   useEffect(() => {
     const sync = () => {
       const inv: Record<string, any> = (profile as any)?.inventory || {}
@@ -122,6 +124,7 @@ export function useGameAids({
   const resetQuestionAids = useCallback(() => {
     setEliminatedOptions([])
     setPublicVoteResults(null)
+    setActiveClue(null)
     setIsFrozen(false)
     setFreezeTimeLeft(0)
     setSelectedPreviewAid(null)
@@ -134,13 +137,14 @@ export function useGameAids({
       if (!user?.uid || disabled || isHelpProcessing || !currentQuestion) return
 
       // Prevenir reabertura se a ajuda já foi gasta nesta pergunta
+      if (aidType === 'hint' && activeClue !== null) return
       if (aidType === '5050' && eliminatedOptions.length > 0) return
       if (aidType === 'publicVote' && publicVoteResults !== null) return
       if (aidType === 'freeze' && isFrozen) return
 
       setSelectedPreviewAid(aidType)
     },
-    [user?.uid, disabled, isHelpProcessing, currentQuestion, eliminatedOptions, publicVoteResults, isFrozen],
+    [user?.uid, disabled, isHelpProcessing, currentQuestion, activeClue, eliminatedOptions, publicVoteResults, isFrozen],
   )
 
   // Fechar modal de pré-visualização
@@ -150,7 +154,7 @@ export function useGameAids({
     }
   }, [isHelpProcessing])
 
-  // Execução Instantânea e Autoritativa da Ajuda (Com aplicação imediata no cliente + sync de fundo)
+  // Execução Instantânea e Autoritativa da Ajuda (Com aplicação imediata no cliente + sync atómico no Firestore)
   const executeUseAid = useCallback(
     async (aidType: AidType): Promise<boolean> => {
       if (!user?.uid || !currentQuestion || disabled || isHelpProcessing) {
@@ -158,17 +162,20 @@ export function useGameAids({
       }
 
       // Prevenir reativação na mesma pergunta
+      if (aidType === 'hint' && activeClue !== null) return false
       if (aidType === '5050' && eliminatedOptions.length > 0) return false
       if (aidType === 'publicVote' && publicVoteResults !== null) return false
       if (aidType === 'freeze' && isFrozen) return false
 
       const aidMeta = CANONICAL_AIDS[aidType]
       const currentStock =
-        aidType === '5050'
-          ? stocks.stock5050
-          : aidType === 'publicVote'
-            ? stocks.stockPublicVote
-            : stocks.stockFreeze
+        aidType === 'hint'
+          ? (stocks.stockHint ?? stocks.stockPista ?? 0)
+          : aidType === '5050'
+            ? stocks.stock5050
+            : aidType === 'publicVote'
+              ? stocks.stockPublicVote
+              : stocks.stockFreeze
 
       if (currentStock <= 0) {
         showAidToast(`⚠️ Sem unidades de «${aidMeta?.shortName || aidType}». Adquire na Loja!`)
@@ -207,6 +214,7 @@ export function useGameAids({
         // 1. Atualizar contadores de estoque locais imediatamente no hook
         setStocks((prev) => ({
           ...prev,
+          ...(aidType === 'hint' && { stockHint: remainingStock, stockPista: remainingStock, stockClue: remainingStock }),
           ...(aidType === '5050' && { stock5050: remainingStock }),
           ...(aidType === 'publicVote' && { stockPublicVote: remainingStock }),
           ...(aidType === 'freeze' && { stockFreeze: remainingStock }),
@@ -220,13 +228,23 @@ export function useGameAids({
             const nextInventory = { ...(prev.inventory || {}) }
             const nextUtilities = { ...(nextInventory.utilities || {}) }
 
-            if (aidType === '5050') {
+            if (aidType === 'hint') {
+              nextConsumables.hints = remainingStock
+              nextUtilities.hints = remainingStock
+              nextInventory['AID_001'] = remainingStock
+              nextInventory['aid_hint'] = remainingStock
+              nextInventory['consumable_pista'] = remainingStock
+              nextInventory['pista_historica'] = remainingStock
+              nextInventory['ajuda_pista'] = remainingStock
+              nextInventory['hint'] = remainingStock
+            } else if (aidType === '5050') {
               nextConsumables.help5050 = remainingStock
               nextUtilities.fiftyFifty = remainingStock
               nextInventory['AID_002'] = remainingStock
               nextInventory['aid_50_50'] = remainingStock
               nextInventory['consumable_50_50'] = remainingStock
               nextInventory['help5050'] = remainingStock
+              nextInventory['ajuda_5050'] = remainingStock
             } else if (aidType === 'publicVote') {
               nextConsumables.publicVote = remainingStock
               nextUtilities.publicVote = remainingStock
@@ -235,6 +253,7 @@ export function useGameAids({
               nextInventory['consumable_public_vote'] = remainingStock
               nextInventory['HELP_005'] = remainingStock
               nextInventory['publicVote'] = remainingStock
+              nextInventory['ajuda_publico'] = remainingStock
             } else if (aidType === 'freeze') {
               nextConsumables.freezeTime = remainingStock
               nextUtilities.freezeTime = remainingStock
@@ -242,6 +261,7 @@ export function useGameAids({
               nextInventory['aid_freeze_time'] = remainingStock
               nextInventory['consumable_congelar_tempo'] = remainingStock
               nextInventory['freezeTime'] = remainingStock
+              nextInventory['ajuda_congelar'] = remainingStock
             }
 
             nextInventory.utilities = nextUtilities
@@ -254,15 +274,24 @@ export function useGameAids({
           })
         }
 
-        // 3. Atualizar localStorage imediatamente
+        // 3. Atualizar localStorage imediatamente de forma passiva
         syncAidStockToLocalStorage({
+          ...(aidType === 'hint' && { stockHint: remainingStock }),
           ...(aidType === '5050' && { stock5050: remainingStock }),
           ...(aidType === 'publicVote' && { stockPublicVote: remainingStock }),
           ...(aidType === 'freeze' && { stockFreeze: remainingStock }),
         })
 
         // 4. Aplicar o efeito visual e de gameplay DE IMEDIATO
-        if (aidType === '5050') {
+        if (aidType === 'hint') {
+          const clue = generateQuestionClue({
+            question: currentQuestion.question || currentQuestion.prompt || '',
+            explanation: currentQuestion.explanation,
+            category: currentQuestion.category,
+          })
+          setActiveClue(clue)
+          if (onClueReceived) onClueReceived(clue)
+        } else if (aidType === '5050') {
           const eliminated = calculate5050Eliminated(normalizedOptions, normalizedCorrect)
           setEliminatedOptions(eliminated)
           if (onOptionEliminated) onOptionEliminated(eliminated)
@@ -284,19 +313,8 @@ export function useGameAids({
           `💡 ${aidMeta?.shortName?.toUpperCase() || aidType} UTILIZADA — Restam ${remainingStock}`,
         )
 
-        // 5. Disparar persistência atómica no Firestore / backend DE IMEDIATO
+        // 5. Disparar persistência atómica no Firestore através do serviço unificado
         if (effectiveUid) {
-          const fallbackId =
-            aidType === '5050'
-              ? 'consumable_50_50'
-              : aidType === 'publicVote'
-                ? 'HELP_005'
-                : 'consumable_congelar_tempo'
-
-          useConsumablePowerUp(effectiveUid, fallbackId).catch((err) => {
-            console.warn('[useGameAids] Erro ao persistir power-up no Firestore:', err)
-          })
-
           consumeGameAid({
             userId: effectiveUid,
             aidType,
@@ -310,9 +328,22 @@ export function useGameAids({
               category: currentQuestion.category,
             },
             duelId,
-          }).catch((err) => {
-            console.warn('[useGameAids] Aviso na sincronização em background:', err)
           })
+            .then((res) => {
+              if (!res.success && typeof res.remainingStock === 'number') {
+                // Reconciliar UI caso o servidor reporte stock diferente
+                setStocks((prev) => ({
+                  ...prev,
+                  ...(aidType === 'hint' && { stockHint: res.remainingStock, stockPista: res.remainingStock }),
+                  ...(aidType === '5050' && { stock5050: res.remainingStock }),
+                  ...(aidType === 'publicVote' && { stockPublicVote: res.remainingStock }),
+                  ...(aidType === 'freeze' && { stockFreeze: res.remainingStock }),
+                }))
+              }
+            })
+            .catch((err) => {
+              console.warn('[useGameAids] Erro na sincronização com Firestore:', err)
+            })
         }
 
         return true
@@ -328,6 +359,7 @@ export function useGameAids({
       currentQuestion,
       disabled,
       isHelpProcessing,
+      activeClue,
       eliminatedOptions,
       publicVoteResults,
       isFrozen,
@@ -336,6 +368,7 @@ export function useGameAids({
       onOptionEliminated,
       onPublicVoteReceived,
       onFreezeApplied,
+      onClueReceived,
       effectiveUid,
       gameMode,
       duelId,
@@ -354,6 +387,7 @@ export function useGameAids({
     isHelpProcessing,
     eliminatedOptions,
     publicVoteResults,
+    activeClue,
     isFrozen,
     freezeTimeLeft,
     selectedPreviewAid,
@@ -365,6 +399,7 @@ export function useGameAids({
     resetQuestionAids,
     setEliminatedOptions,
     setPublicVoteResults,
+    setActiveClue,
     setIsFrozen,
   }
 }

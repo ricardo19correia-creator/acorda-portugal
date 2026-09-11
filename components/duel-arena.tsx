@@ -530,11 +530,7 @@ export function DuelArena({
   const handleUseFreeze = () => executeUseAid('freeze')
   const handleUsePublicVote = () => executeUseAid('publicVote')
 
-  const handleUseClue = async () => {
-    if (feedback !== null || isSubmitting || activeClue !== null || !currentQuestion) return
-    const clue = generateQuestionClue(currentQuestion)
-    setActiveClue(clue)
-  }
+  const handleUseClue = () => executeUseAid('hint')
 
   // 3. Temporizador de 60 Segundos 100% Individual (Pausado se isFrozen === true)
   useEffect(() => {
@@ -1296,20 +1292,21 @@ export function DuelArena({
             {/* Barra das 3 Ajudas Canónicas (Abaixo das Respostas) */}
             <div className="flex justify-center w-full mt-1">
               <QuizPowerUpsBar
+                stockHint={aidStocks.stockHint}
                 stock5050={aidStocks.stock5050}
                 stockFreeze={aidStocks.stockFreeze}
                 stockPublicVote={aidStocks.stockPublicVote}
                 disabled={feedback !== null || isSubmitting || timeLeft <= 0}
                 isProcessing={isHelpProcessing}
+                usedClue={activeClue !== null}
                 used5050={eliminatedOptions.length > 0}
                 usedPublicVote={publicVoteResults !== null}
-                usedClue={activeClue !== null}
                 isFrozen={isFrozen}
                 freezeTimeLeft={freezeTimeLeft}
-                onUse5050={handleUse5050}
-                onUsePublicVote={handleUsePublicVote}
                 onUseClue={handleUseClue}
+                onUse5050={handleUse5050}
                 onUseFreeze={handleUseFreeze}
+                onUsePublicVote={handleUsePublicVote}
               />
             </div>
           </div>
@@ -1322,11 +1319,13 @@ export function DuelArena({
           <AidPreviewModal
             aid={CANONICAL_AIDS[selectedPreviewAid]}
             stock={
-              selectedPreviewAid === '5050'
-                ? aidStocks.stock5050
-                : selectedPreviewAid === 'publicVote'
-                  ? aidStocks.stockPublicVote
-                  : aidStocks.stockFreeze
+              selectedPreviewAid === 'hint'
+                ? aidStocks.stockHint
+                : selectedPreviewAid === '5050'
+                  ? aidStocks.stock5050
+                  : selectedPreviewAid === 'publicVote'
+                    ? aidStocks.stockPublicVote
+                    : aidStocks.stockFreeze
             }
             isOpen={selectedPreviewAid !== null}
             isProcessing={isHelpProcessing}

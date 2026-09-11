@@ -615,6 +615,7 @@ export function QuizScreen({
     isHelpProcessing,
     eliminatedOptions,
     publicVoteResults,
+    activeClue,
     isFrozen,
     freezeTimeLeft,
     selectedPreviewAid,
@@ -1224,6 +1225,14 @@ export function QuizScreen({
                 </div>
               </div>
 
+              {/* Pista Histórica */}
+              {activeClue && (
+                <div className="mt-1.5 rounded-xl border border-amber-500/50 bg-amber-500/15 px-3 py-1.5 text-xs text-amber-100 flex items-center gap-2 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
+                  <Lightbulb className="h-4 w-4 text-amber-400 shrink-0" />
+                  <span className="font-medium break-words leading-tight">{activeClue}</span>
+                </div>
+              )}
+
               {/* Banner de tempo congelado */}
               {isFrozen && (
                 <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
@@ -1260,15 +1269,18 @@ export function QuizScreen({
             ) : (
               <div className="flex justify-center gap-3 my-1 shrink-0">
                 <QuizPowerUpsBar
+                  stockHint={aidStocks.stockHint}
                   stock5050={aidStocks.stock5050}
                   stockFreeze={aidStocks.stockFreeze}
                   stockPublicVote={aidStocks.stockPublicVote}
+                  usedClue={activeClue !== null}
                   used5050={eliminatedOptions.length > 0}
                   usedPublicVote={publicVoteResults !== null}
                   isFrozen={isFrozen}
                   freezeTimeLeft={freezeTimeLeft}
                   isProcessing={isHelpProcessing}
                   disabled={phase !== 'answering'}
+                  onUseClue={() => executeUseAid('hint')}
                   onUse5050={() => executeUseAid('5050')}
                   onUseFreeze={() => executeUseAid('freeze')}
                   onUsePublicVote={() => executeUseAid('publicVote')}
@@ -1367,11 +1379,13 @@ export function QuizScreen({
           <AidPreviewModal
             aid={CANONICAL_AIDS[selectedPreviewAid]}
             stock={
-              selectedPreviewAid === '5050'
-                ? aidStocks.stock5050
-                : selectedPreviewAid === 'publicVote'
-                  ? aidStocks.stockPublicVote
-                  : aidStocks.stockFreeze
+              selectedPreviewAid === 'hint'
+                ? aidStocks.stockHint
+                : selectedPreviewAid === '5050'
+                  ? aidStocks.stock5050
+                  : selectedPreviewAid === 'publicVote'
+                    ? aidStocks.stockPublicVote
+                    : aidStocks.stockFreeze
             }
             isOpen={selectedPreviewAid !== null}
             isProcessing={isHelpProcessing}

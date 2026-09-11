@@ -274,6 +274,7 @@ export type UserProfile = {
     help5050?: number
     freezeTime?: number
     publicVote?: number
+    hints?: number
   }
   inventory?: any
   equipped?: EquippedCosmetics

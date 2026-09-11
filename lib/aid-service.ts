@@ -2,22 +2,22 @@
  * 🇵🇹 ACORDA PORTUGAL — SERVIÇO UNIFICADO DE AJUDAS (SSOT)
  *
  * Ponto único de verdade para:
- * 1. Definição das 3 Ajudas Canónicas (50/50, Público, Congelar Tempo)
+ * 1. Definição das 4 Ajudas Canónicas (Pista Histórica, 50/50, Público, Congelar Tempo)
  * 2. Leitura consistente do inventário e estoque do jogador
  * 3. Consumo atómico e autoritativo (tanto no modo Normal como no 1v1 Multiplayer)
  * 4. Proteção contra duplo clique e idempotência
  */
 
 import { useConsumablePowerUp } from '@/lib/economy'
-import { calculate5050Eliminated, simulatePublicVote } from '@/lib/powerup-helpers'
+import { calculate5050Eliminated, simulatePublicVote, generateQuestionClue } from '@/lib/powerup-helpers'
 import { extendDuelPlayerDeadline } from '@/lib/duel'
 import { auth } from '@/lib/firebase'
 
-export type AidType = '5050' | 'publicVote' | 'freeze'
+export type AidType = '5050' | 'publicVote' | 'freeze' | 'hint'
 
 export interface AidMetadata {
   type: AidType
-  canonicalId: 'AID_002' | 'AID_003' | 'AID_004'
+  canonicalId: 'AID_001' | 'AID_002' | 'AID_003' | 'AID_004'
   name: string
   shortName: string
   icon: string
@@ -29,6 +29,18 @@ export interface AidMetadata {
 }
 
 export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
+  hint: {
+    type: 'hint',
+    canonicalId: 'AID_001',
+    name: 'Pista Histórica',
+    shortName: 'Pista Histórica',
+    icon: '💡',
+    description: 'Revela uma dica contextual educativa sem entregar a resposta diretamente.',
+    image: '/assets/shop/aids/aid-pista-historica.webp',
+    priceCoins: 750,
+    unitsPerPack: 1,
+    aliases: ['aid_hint', 'consumable_pista', 'pista_historica', 'ajuda_pista', 'hint'],
+  },
   5050: {
     type: '5050',
     canonicalId: 'AID_002',
@@ -68,103 +80,149 @@ export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
 }
 
 export interface UserAidStock {
+  stockHint: number
   stock5050: number
   stockPublicVote: number
   stockFreeze: number
+  // Aliases retrocompatíveis opcionais
+  stockPista?: number
+  stockClue?: number
 }
 
 /**
- * Lê e consolida o estoque real das 3 ajudas de forma retrocompatível e segura (SSOT)
+ * Lê e consolida o estoque real das ajudas de forma estritamente canónica (SSOT).
+ * O Firestore / Perfil é a ÚNICA fonte de verdade absoluta.
+ * localStorage é usado exclusivamente para hidratação inicial antes do perfil carregar.
+ * NUNCA usa Math.max contra o localStorage para evitar a ressurreição de ajudas consumidas.
  */
 export function getUserAidStock(
   profile?: any,
   inventory?: Record<string, any>,
 ): UserAidStock {
+  let sHint = 0
   let s5050 = 0
   let sPublic = 0
   let sFreeze = 0
 
-  // 1. Fallback / Inicialização a partir do localStorage
-  if (typeof window !== 'undefined') {
+  // 1. Se o Perfil estiver presente (do Firestore / AuthProvider), ele é a autoridade absoluta
+  if (profile) {
+    const cons = profile.consumables || {}
+    const utils = profile.inventory?.utilities || {}
+    const invMap = inventory || profile.inventory || {}
+
+    // 50/50
+    if (typeof cons.help5050 === 'number') {
+      s5050 = cons.help5050
+    } else if (typeof utils.fiftyFifty === 'number') {
+      s5050 = utils.fiftyFifty
+    } else if (typeof invMap['AID_002'] === 'number') {
+      s5050 = invMap['AID_002']
+    } else {
+      s5050 = Math.max(
+        Number(invMap['aid_50_50']) || 0,
+        Number(invMap['consumable_50_50']) || 0,
+        Number(invMap['help5050']) || 0,
+        Number(invMap['ajuda_5050']) || 0,
+        0
+      )
+    }
+
+    // Pergunta ao Público
+    if (typeof cons.publicVote === 'number') {
+      sPublic = cons.publicVote
+    } else if (typeof utils.publicVote === 'number') {
+      sPublic = utils.publicVote
+    } else if (typeof invMap['AID_003'] === 'number') {
+      sPublic = invMap['AID_003']
+    } else {
+      sPublic = Math.max(
+        Number(invMap['aid_public_vote']) || 0,
+        Number(invMap['consumable_public_vote']) || 0,
+        Number(invMap['HELP_005']) || 0,
+        Number(invMap['publicVote']) || 0,
+        Number(invMap['ajuda_publico']) || 0,
+        0
+      )
+    }
+
+    // Congelar Tempo
+    if (typeof cons.freezeTime === 'number') {
+      sFreeze = cons.freezeTime
+    } else if (typeof utils.freezeTime === 'number') {
+      sFreeze = utils.freezeTime
+    } else if (typeof invMap['AID_004'] === 'number') {
+      sFreeze = invMap['AID_004']
+    } else {
+      sFreeze = Math.max(
+        Number(invMap['aid_freeze_time']) || 0,
+        Number(invMap['consumable_congelar_tempo']) || 0,
+        Number(invMap['freezeTime']) || 0,
+        Number(invMap['ajuda_congelar']) || 0,
+        0
+      )
+    }
+
+    // Pista Histórica
+    if (typeof cons.hints === 'number') {
+      sHint = cons.hints
+    } else if (typeof utils.hints === 'number') {
+      sHint = utils.hints
+    } else if (typeof invMap['AID_001'] === 'number') {
+      sHint = invMap['AID_001']
+    } else {
+      sHint = Math.max(
+        Number(invMap['aid_hint']) || 0,
+        Number(invMap['consumable_pista']) || 0,
+        Number(invMap['pista_historica']) || 0,
+        Number(invMap['ajuda_pista']) || 0,
+        Number(invMap['hint']) || 0,
+        0
+      )
+    }
+  } else if (typeof window !== 'undefined') {
+    // 2. Cold start transitório APENAS se profile ainda for indefinido/nulo
     try {
       const rawConsumables = localStorage.getItem('user_consumables')
       if (rawConsumables) {
         const parsed = JSON.parse(rawConsumables)
-        if (typeof parsed.help5050 === 'number') s5050 = Math.max(s5050, parsed.help5050)
-        if (typeof parsed.publicVote === 'number') sPublic = Math.max(sPublic, parsed.publicVote)
-        if (typeof parsed.freezeTime === 'number') sFreeze = Math.max(sFreeze, parsed.freezeTime)
+        if (typeof parsed.hints === 'number') sHint = parsed.hints
+        if (typeof parsed.help5050 === 'number') s5050 = parsed.help5050
+        if (typeof parsed.publicVote === 'number') sPublic = parsed.publicVote
+        if (typeof parsed.freezeTime === 'number') sFreeze = parsed.freezeTime
       }
+      const rawHint = localStorage.getItem('user_hints') || localStorage.getItem('user_pista')
+      if (rawHint !== null) sHint = Number(rawHint) || sHint
+
       const raw50 = localStorage.getItem('user_help5050')
-      if (raw50 !== null) s5050 = Math.max(s5050, Number(raw50) || 0)
+      if (raw50 !== null) s5050 = Number(raw50) || s5050
 
       const rawPub = localStorage.getItem('user_publicVote')
-      if (rawPub !== null) sPublic = Math.max(sPublic, Number(rawPub) || 0)
+      if (rawPub !== null) sPublic = Number(rawPub) || sPublic
 
       const rawFrz = localStorage.getItem('user_freezeTime')
-      if (rawFrz !== null) sFreeze = Math.max(sFreeze, Number(rawFrz) || 0)
+      if (rawFrz !== null) sFreeze = Number(rawFrz) || sFreeze
     } catch {
       // Falha não crítica de leitura de cache local
     }
   }
 
-  // 2. Extração a partir do Perfil Normalizado
-  if (profile) {
-    if (profile.consumables) {
-      if (typeof profile.consumables.help5050 === 'number') {
-        s5050 = Math.max(s5050, profile.consumables.help5050)
-      }
-      if (typeof profile.consumables.publicVote === 'number') {
-        sPublic = Math.max(sPublic, profile.consumables.publicVote)
-      }
-      if (typeof profile.consumables.freezeTime === 'number') {
-        sFreeze = Math.max(sFreeze, profile.consumables.freezeTime)
-      }
-    }
-
-    if (profile.inventory?.utilities) {
-      if (typeof profile.inventory.utilities.fiftyFifty === 'number') {
-        s5050 = Math.max(s5050, profile.inventory.utilities.fiftyFifty)
-      }
-      if (typeof profile.inventory.utilities.publicVote === 'number') {
-        sPublic = Math.max(sPublic, profile.inventory.utilities.publicVote)
-      }
-      if (typeof profile.inventory.utilities.freezeTime === 'number') {
-        sFreeze = Math.max(sFreeze, profile.inventory.utilities.freezeTime)
-      }
-    }
-  }
-
-  // 3. Extração a partir do mapa direto de Inventário
-  const inv = inventory || (profile?.inventory as Record<string, any>) || {}
-
-  // 50/50
-  if (typeof inv['AID_002'] === 'number') s5050 = Math.max(s5050, inv['AID_002'])
-  if (typeof inv['aid_50_50'] === 'number') s5050 = Math.max(s5050, inv['aid_50_50'])
-  if (typeof inv['consumable_50_50'] === 'number') s5050 = Math.max(s5050, inv['consumable_50_50'])
-  if (typeof inv['help5050'] === 'number') s5050 = Math.max(s5050, inv['help5050'])
-
-  // Pergunta ao Público
-  if (typeof inv['AID_003'] === 'number') sPublic = Math.max(sPublic, inv['AID_003'])
-  if (typeof inv['aid_public_vote'] === 'number') sPublic = Math.max(sPublic, inv['aid_public_vote'])
-  if (typeof inv['consumable_public_vote'] === 'number') sPublic = Math.max(sPublic, inv['consumable_public_vote'])
-  if (typeof inv['HELP_005'] === 'number') sPublic = Math.max(sPublic, inv['HELP_005'])
-  if (typeof inv['publicVote'] === 'number') sPublic = Math.max(sPublic, inv['publicVote'])
-
-  // Congelar Tempo
-  if (typeof inv['AID_004'] === 'number') sFreeze = Math.max(sFreeze, inv['AID_004'])
-  if (typeof inv['aid_freeze_time'] === 'number') sFreeze = Math.max(sFreeze, inv['aid_freeze_time'])
-  if (typeof inv['consumable_congelar_tempo'] === 'number') sFreeze = Math.max(sFreeze, inv['consumable_congelar_tempo'])
-  if (typeof inv['freezeTime'] === 'number') sFreeze = Math.max(sFreeze, inv['freezeTime'])
+  const safe5050 = Math.max(0, s5050)
+  const safePublic = Math.max(0, sPublic)
+  const safeFreeze = Math.max(0, sFreeze)
+  const safeHint = Math.max(0, sHint)
 
   return {
-    stock5050: Math.max(0, s5050),
-    stockPublicVote: Math.max(0, sPublic),
-    stockFreeze: Math.max(0, sFreeze),
+    stockHint: safeHint,
+    stock5050: safe5050,
+    stockPublicVote: safePublic,
+    stockFreeze: safeFreeze,
+    stockPista: safeHint,
+    stockClue: safeHint,
   }
 }
 
 /**
- * Atualiza o cache local e emite os eventos de sincronização em tempo real
+ * Atualiza o cache local passivamente e emite os eventos de sincronização em tempo real
  */
 export function syncAidStockToLocalStorage(stocks: Partial<UserAidStock>) {
   if (typeof window === 'undefined') return
@@ -172,6 +230,11 @@ export function syncAidStockToLocalStorage(stocks: Partial<UserAidStock>) {
     const raw = localStorage.getItem('user_consumables')
     const parsed = raw ? JSON.parse(raw) : {}
 
+    if (typeof stocks.stockHint === 'number') {
+      parsed.hints = stocks.stockHint
+      localStorage.setItem('user_hints', String(stocks.stockHint))
+      localStorage.setItem('user_pista', String(stocks.stockHint))
+    }
     if (typeof stocks.stock5050 === 'number') {
       parsed.help5050 = stocks.stock5050
       localStorage.setItem('user_help5050', String(stocks.stock5050))
@@ -261,6 +324,13 @@ export async function consumeGameAid({
       }
     } else if (aidType === 'freeze') {
       effect = { bonusSeconds: 15 }
+    } else if (aidType === 'hint' && questionData) {
+      const clue = generateQuestionClue({
+        question: questionData.prompt || '',
+        explanation: questionData.explanation,
+        category: questionData.category,
+      })
+      effect = { clue }
     }
     return effect
   }
@@ -272,6 +342,7 @@ export async function consumeGameAid({
     if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
     else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
     else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+    else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
     return {
       success: true,
@@ -321,6 +392,7 @@ export async function consumeGameAid({
       if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
       else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
       else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+      else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
       return {
         success: true,
@@ -337,6 +409,7 @@ export async function consumeGameAid({
       if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
       else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
       else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+      else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
       try {
         const fallbackId =
@@ -344,7 +417,9 @@ export async function consumeGameAid({
             ? 'consumable_50_50'
             : aidType === 'publicVote'
               ? 'HELP_005'
-              : 'consumable_congelar_tempo'
+              : aidType === 'freeze'
+                ? 'consumable_congelar_tempo'
+                : 'consumable_pista'
         await useConsumablePowerUp(userId, fallbackId)
       } catch (fErr) {
         console.warn('[consumeGameAid] Aviso ao persistir Firestore:', fErr)
@@ -377,7 +452,9 @@ export async function consumeGameAid({
         ? 'consumable_50_50'
         : aidType === 'publicVote'
           ? 'HELP_005'
-          : 'consumable_congelar_tempo'
+          : aidType === 'freeze'
+            ? 'consumable_congelar_tempo'
+            : 'consumable_pista'
 
     const clientRes = await useConsumablePowerUp(userId, fallbackId)
     if (clientRes.success) {
@@ -387,6 +464,7 @@ export async function consumeGameAid({
       if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
       else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
       else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+      else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
       // Sincronizar deadline no duelo caso tenha sido congelar tempo
       if (aidType === 'freeze' && duelId) {
@@ -407,6 +485,7 @@ export async function consumeGameAid({
         if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
         else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
         else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+        else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
         return {
           success: true,
@@ -428,6 +507,7 @@ export async function consumeGameAid({
       if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
       else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
       else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+      else if (aidType === 'hint') syncAidStockToLocalStorage({ stockHint: remainingStock })
 
       return {
         success: true,

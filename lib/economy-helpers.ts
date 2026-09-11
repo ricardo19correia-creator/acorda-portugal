@@ -153,10 +153,11 @@ export function extractUserInventory(data: any): {
   titles: string[]
   taunts: string[]
   emotes: string[]
-  utilities: { fiftyFifty: number; freezeTime: number; publicVote: number }
+  utilities: { fiftyFifty: number; freezeTime: number; publicVote: number; hints: number }
   rawMap: Record<string, number>
 } {
   const inv = (data?.inventory && typeof data.inventory === 'object') ? data.inventory : {}
+  const cons = (data?.consumables && typeof data.consumables === 'object') ? data.consumables : {}
   const rawMap: Record<string, number> = {}
 
   // 1. Avatares (garantir STARTER_AVATAR_ID + todos os avatares de inventory.avatars e unlockedAvatars)
@@ -224,34 +225,55 @@ export function extractUserInventory(data: any): {
     })
   }
 
-  // 6. Consumíveis e Utilitários (Consolidação retrocompatível das 3 ajudas canónicas)
-  const fiftyFifty = Math.max(
-    parseSafeNumber(inv?.AID_002) ?? 0,
-    parseSafeNumber(inv?.aid_50_50) ?? 0,
-    parseSafeNumber(inv?.consumable_50_50) ?? 0,
-    parseSafeNumber(inv?.help5050) ?? 0,
-    parseSafeNumber(inv?.utilities?.fiftyFifty) ?? 0,
-    parseSafeNumber(data?.consumables?.help5050) ?? 0,
-    0
+  // Helper canónico de resolução estrita de saldo de ajudas (SSOT):
+  // Prioriza o campo canónico mais recente (consumables -> utilities -> ID canónico -> aliases legados)
+  // NUNCA faz Math.max entre campos canónicos e aliases obsoletos para evitar ressuscitação de ajudas já consumidas.
+  const resolveAidCount = (
+    primaryVal: unknown,
+    secondaryVal: unknown,
+    tertiaryVal: unknown,
+    fallbackAliases: unknown[]
+  ): number => {
+    const p = parseSafeNumber(primaryVal)
+    if (p !== null) return p
+    const s = parseSafeNumber(secondaryVal)
+    if (s !== null) return s
+    const t = parseSafeNumber(tertiaryVal)
+    if (t !== null) return t
+    for (const val of fallbackAliases) {
+      const parsed = parseSafeNumber(val)
+      if (parsed !== null) return parsed
+    }
+    return 0
+  }
+
+  // 6. Consumíveis e Utilitários Canónicos
+  const fiftyFifty = resolveAidCount(
+    cons.help5050,
+    inv?.utilities?.fiftyFifty,
+    inv?.AID_002,
+    [inv?.aid_50_50, inv?.consumable_50_50, inv?.help5050, inv?.ajuda_5050]
   )
-  const freezeTime = Math.max(
-    parseSafeNumber(inv?.AID_004) ?? 0,
-    parseSafeNumber(inv?.aid_freeze_time) ?? 0,
-    parseSafeNumber(inv?.consumable_congelar_tempo) ?? 0,
-    parseSafeNumber(inv?.freezeTime) ?? 0,
-    parseSafeNumber(inv?.utilities?.freezeTime) ?? 0,
-    parseSafeNumber(data?.consumables?.freezeTime) ?? 0,
-    0
+
+  const freezeTime = resolveAidCount(
+    cons.freezeTime,
+    inv?.utilities?.freezeTime,
+    inv?.AID_004,
+    [inv?.aid_freeze_time, inv?.consumable_congelar_tempo, inv?.freezeTime, inv?.ajuda_congelar]
   )
-  const publicVote = Math.max(
-    parseSafeNumber(inv?.AID_003) ?? 0,
-    parseSafeNumber(inv?.aid_public_vote) ?? 0,
-    parseSafeNumber(inv?.consumable_public_vote) ?? 0,
-    parseSafeNumber(inv?.HELP_005) ?? 0,
-    parseSafeNumber(inv?.publicVote) ?? 0,
-    parseSafeNumber(inv?.utilities?.publicVote) ?? 0,
-    parseSafeNumber(data?.consumables?.publicVote) ?? 0,
-    0
+
+  const publicVote = resolveAidCount(
+    cons.publicVote,
+    inv?.utilities?.publicVote,
+    inv?.AID_003,
+    [inv?.aid_public_vote, inv?.consumable_public_vote, inv?.HELP_005, inv?.publicVote, inv?.ajuda_publico]
+  )
+
+  const hints = resolveAidCount(
+    cons.hints,
+    inv?.utilities?.hints,
+    inv?.AID_001,
+    [inv?.aid_hint, inv?.consumable_pista, inv?.pista_historica, inv?.ajuda_pista, inv?.hint]
   )
 
   // Preenchimento de rawMap para consultas rápidas por ID de item
@@ -266,19 +288,32 @@ export function extractUserInventory(data: any): {
   tauntsSet.forEach((ta) => { rawMap[ta] = 1 })
 
   // Garantir que os IDs canónicos e aliases de ajudas estão sincronizados em rawMap
+  rawMap['AID_001'] = hints
+  rawMap['aid_hint'] = hints
+  rawMap['consumable_pista'] = hints
+  rawMap['pista_historica'] = hints
+  rawMap['ajuda_pista'] = hints
+  rawMap['hint'] = hints
+  rawMap['hints'] = hints
+
   rawMap['AID_002'] = fiftyFifty
   rawMap['aid_50_50'] = fiftyFifty
   rawMap['consumable_50_50'] = fiftyFifty
   rawMap['help5050'] = fiftyFifty
+  rawMap['ajuda_5050'] = fiftyFifty
+
   rawMap['AID_003'] = publicVote
   rawMap['aid_public_vote'] = publicVote
   rawMap['consumable_public_vote'] = publicVote
   rawMap['HELP_005'] = publicVote
   rawMap['publicVote'] = publicVote
+  rawMap['ajuda_publico'] = publicVote
+
   rawMap['AID_004'] = freezeTime
   rawMap['aid_freeze_time'] = freezeTime
   rawMap['consumable_congelar_tempo'] = freezeTime
   rawMap['freezeTime'] = freezeTime
+  rawMap['ajuda_congelar'] = freezeTime
 
   return {
     avatars: Array.from(avatarsSet),
@@ -291,6 +326,7 @@ export function extractUserInventory(data: any): {
       fiftyFifty,
       freezeTime,
       publicVote,
+      hints,
     },
     rawMap,
   }

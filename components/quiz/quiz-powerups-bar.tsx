@@ -1,45 +1,67 @@
 'use client'
 
 import React from 'react'
-import { Snowflake, Check, Users, Loader2 } from 'lucide-react'
+import { Snowflake, Check, Users, Loader2, Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface QuizPowerUpsBarProps {
+  stockHint?: number
+  stockClue?: number
   stock5050?: number
   stockFreeze?: number
   stockPublicVote?: number
   inventory?: Record<string, any>
   disabled?: boolean
   isProcessing?: boolean
+  usedClue?: boolean
   used5050: boolean
   usedPublicVote?: boolean
   isFrozen?: boolean
   freezeTimeLeft?: number
+  onUseClue?: () => void
   onUse5050: () => void
   onUseFreeze: () => void
   onUsePublicVote?: () => void
-  onRequestPreview?: (aidType: '5050' | 'publicVote' | 'freeze') => void
-  usedClue?: boolean
-  onUseClue?: () => void
+  onRequestPreview?: (aidType: '5050' | 'publicVote' | 'freeze' | 'hint') => void
 }
 
 export function QuizPowerUpsBar({
+  stockHint,
+  stockClue,
   stock5050,
   stockFreeze,
   stockPublicVote,
   inventory = {},
   disabled = false,
   isProcessing = false,
+  usedClue = false,
   used5050,
   usedPublicVote = false,
   isFrozen = false,
   freezeTimeLeft = 0,
+  onUseClue,
   onUse5050,
   onUseFreeze,
   onUsePublicVote,
   onRequestPreview,
 }: QuizPowerUpsBarProps) {
   // Resolução canónica e retrocompatível de stocks
+  const countClue =
+    typeof stockHint === 'number'
+      ? stockHint
+      : typeof stockClue === 'number'
+        ? stockClue
+        : Number(
+            inventory['AID_001'] ??
+              inventory['aid_hint'] ??
+              inventory['consumable_pista'] ??
+              inventory['pista_historica'] ??
+              inventory['ajuda_pista'] ??
+              inventory['hints'] ??
+              inventory['utilities']?.hints ??
+              0,
+          )
+
   const count5050 =
     typeof stock5050 === 'number'
       ? stock5050
@@ -79,12 +101,25 @@ export function QuizPowerUpsBar({
 
   const isGloballyDisabled = disabled || isProcessing
 
+  const canUseClue =
+    !isGloballyDisabled &&
+    !usedClue &&
+    (typeof onUseClue === 'function' || typeof onRequestPreview === 'function')
   const canUse5050 = !isGloballyDisabled && !used5050
   const canUsePublicVote =
     !isGloballyDisabled &&
     !usedPublicVote &&
     (typeof onUsePublicVote === 'function' || typeof onRequestPreview === 'function')
   const canUseFreeze = !isGloballyDisabled && !isFrozen
+
+  const handleClickClue = () => {
+    if (!canUseClue) return
+    if (onRequestPreview && countClue > 0) {
+      onRequestPreview('hint')
+    } else if (onUseClue) {
+      onUseClue()
+    }
+  }
 
   const handleClick5050 = () => {
     if (!canUse5050) return
@@ -114,7 +149,49 @@ export function QuizPowerUpsBar({
   }
 
   return (
-    <div className="flex items-center justify-center gap-2 sm:gap-3 select-none shrink-0 w-full max-w-md mx-auto px-1">
+    <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 select-none shrink-0 w-full max-w-lg mx-auto px-1">
+      {/* 0. POWER-UP PISTA HISTÓRICA */}
+      <button
+        type="button"
+        disabled={!canUseClue}
+        onClick={handleClickClue}
+        aria-label={`Usar Pista Histórica (${countClue} disponíveis)`}
+        className={cn(
+          'flex-1 min-w-0 h-9 sm:h-10 px-2 sm:px-3 rounded-xl border font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all select-none shadow-sm',
+          usedClue
+            ? 'bg-slate-900 border-amber-500/60 text-amber-400 opacity-80 cursor-default'
+            : canUseClue
+              ? countClue > 0
+                ? 'bg-slate-800/95 border-amber-500/40 text-amber-300 hover:border-amber-400 hover:bg-slate-800 cursor-pointer shadow-amber-500/10'
+                : 'bg-slate-900/90 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-300 cursor-pointer'
+              : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-45 cursor-not-allowed',
+        )}
+      >
+        <span className="flex items-center gap-1 truncate">
+          {isProcessing ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin text-amber-400" />
+          ) : usedClue ? (
+            <Check className="h-3.5 w-3.5 text-amber-400 stroke-[3]" />
+          ) : (
+            <>
+              <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+              <span className="truncate">Pista</span>
+            </>
+          )}
+        </span>
+        <span
+          className={cn(
+            'px-1.5 py-0.5 rounded text-[10px] font-black shrink-0 font-mono',
+            usedClue
+              ? 'bg-amber-500/20 text-amber-300'
+              : countClue > 0
+                ? 'bg-amber-500/20 text-amber-300'
+                : 'bg-slate-800 text-rose-400/80 border border-slate-700/50',
+          )}
+        >
+          {usedClue ? 'OK' : countClue}
+        </span>
+      </button>
       {/* 1. POWER-UP 50/50 */}
       <button
         type="button"

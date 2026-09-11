@@ -800,6 +800,7 @@ export async function POST(req: NextRequest) {
           userUpdatePayload['inventory.utilities.freezeTime'] = FieldValue.increment(quantityToAdd)
         } else if (canonicalAidId === 'AID_001' || item.aliases?.includes('consumable_pista')) {
           userUpdatePayload['consumables.hints'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['inventory.utilities.hints'] = FieldValue.increment(quantityToAdd)
         } else if (canonicalAidId === 'AID_008' || item.aliases?.includes('consumable_protecao_streak')) {
           userUpdatePayload['consumables.streakProtection'] = FieldValue.increment(quantityToAdd)
         }

@@ -236,10 +236,11 @@ function PerfilContent() {
   const [claimedAchievements, setClaimedAchievements] = useState<Record<string, boolean>>({})
 
   // Consumíveis & Inventário Reais (Zero por defeito se não adquiridos)
-  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number }>({
+  const [consumables, setConsumables] = useState<{ help5050: number; freezeTime: number; publicVote: number; hints: number }>({
     help5050: (profile as any)?.inventory?.utilities?.fiftyFifty ?? (profile as any)?.consumables?.help5050 ?? 0,
     freezeTime: (profile as any)?.inventory?.utilities?.freezeTime ?? (profile as any)?.consumables?.freezeTime ?? 0,
     publicVote: (profile as any)?.inventory?.utilities?.publicVote ?? (profile as any)?.consumables?.publicVote ?? 0,
+    hints: (profile as any)?.inventory?.utilities?.hints ?? (profile as any)?.consumables?.hints ?? 0,
   })
   const [inventory, setInventory] = useState<{ avatars: string[]; frames: string[]; arenas: string[]; titles: string[]; taunts: string[] }>(() => {
     return {
@@ -573,6 +574,7 @@ function PerfilContent() {
             help5050: typeof profile.consumables.help5050 === 'number' ? profile.consumables.help5050 : 0,
             freezeTime: typeof profile.consumables.freezeTime === 'number' ? profile.consumables.freezeTime : 0,
             publicVote: typeof (profile.consumables as any).publicVote === 'number' ? (profile.consumables as any).publicVote : 0,
+            hints: typeof (profile.consumables as any).hints === 'number' ? (profile.consumables as any).hints : 0,
           })
         }
         if (profile?.inventory) {
@@ -650,6 +652,7 @@ function PerfilContent() {
                 help5050: invData.utilities.fiftyFifty,
                 freezeTime: invData.utilities.freezeTime,
                 publicVote: invData.utilities.publicVote,
+                hints: invData.utilities.hints,
               })
               localStorage.setItem('user_consumables', JSON.stringify(invData.utilities))
 
@@ -930,11 +933,13 @@ function PerfilContent() {
       const f50 = ach.reward.utilities.fiftyFifty || 0
       const fz = ach.reward.utilities.freezeTime || 0
       const pv = (ach.reward.utilities as any).publicVote || 0
+      const ht = (ach.reward.utilities as any).hints || 0
       setConsumables((prev) => {
         const next = {
           help5050: prev.help5050 + f50,
           freezeTime: prev.freezeTime + fz,
           publicVote: (prev.publicVote || 0) + pv,
+          hints: (prev.hints || 0) + ht,
         }
         localStorage.setItem('user_consumables', JSON.stringify(next))
         return next
@@ -969,6 +974,10 @@ function PerfilContent() {
         if ((ach.reward.utilities as any)?.publicVote) {
           updatePayload['inventory.utilities.publicVote'] = increment((ach.reward.utilities as any).publicVote)
           updatePayload['consumables.publicVote'] = increment((ach.reward.utilities as any).publicVote)
+        }
+        if ((ach.reward.utilities as any)?.hints) {
+          updatePayload['inventory.utilities.hints'] = increment((ach.reward.utilities as any).hints)
+          updatePayload['consumables.hints'] = increment((ach.reward.utilities as any).hints)
         }
         if (ach.reward.title) {
           updatePayload['inventory.titles'] = arrayUnion(ach.reward.title)
@@ -1990,7 +1999,31 @@ function PerfilContent() {
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Pista Histórica Card */}
+                  <div className="bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-4 flex items-center justify-between backdrop-blur-md transition-all shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-black/40 border border-amber-500/30 flex items-center justify-center text-xl shrink-0">
+                        💡
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-sm text-white">Pista Histórica</h3>
+                        <p className="text-[11px] text-slate-400 mt-0.5 leading-tight">Revela uma pista contextual sobre a pergunta.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0 ml-2">
+                      <span className="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 font-mono text-sm font-black border border-amber-400/40 shadow-inner">
+                        x{consumables.hints || 0}
+                      </span>
+                      <Link
+                        href="/loja"
+                        className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 transition-all"
+                      >
+                        Loja
+                      </Link>
+                    </div>
+                  </div>
+
                   {/* 50/50 Card */}
                   <div className="bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 rounded-2xl p-4 flex items-center justify-between backdrop-blur-md transition-all shadow-lg">
                     <div className="flex items-center gap-4">

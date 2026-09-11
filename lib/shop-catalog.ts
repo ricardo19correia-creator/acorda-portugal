@@ -89,6 +89,28 @@ export const AID_PURCHASE_DAILY_LIMIT = 3
 // ============================================================================
 export const AID_SHOP_ITEMS: ShopCatalogItem[] = [
   {
+    id: 'AID_001',
+    type: 'aid',
+    name: 'Pista Histórica',
+    description: 'Revela uma dica contextual educativa inteligente sem entregar a resposta diretamente.',
+    rarity: 'rare',
+    currency: 'coins',
+    priceCoins: 750,
+    consumable: true,
+    quantity: 1,
+    unlockType: 'purchase',
+    asset: '/assets/shop/aids/aid-pista-historica.webp',
+    active: true,
+    category: 'ajudas',
+    categoryTitle: 'Ajudas & Utilidades',
+    badgeText: 'Pack x1 · Dica',
+    badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+    icon: '💡',
+    maxOwned: AID_MAX_OWNED_LIMIT,
+    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
+    aliases: ['aid_hint', 'ajuda_pista', 'consumable_pista', 'pista_historica', 'hint'],
+  },
+  {
     id: 'AID_002',
     type: 'aid',
     name: 'Pack x5 Ajudas 50/50',
@@ -161,28 +183,6 @@ export const AID_SHOP_ITEMS: ShopCatalogItem[] = [
 // Não aparecem na loja nem no catálogo ativo, mas permanecem no inventário de quem os possui.
 // ============================================================================
 export const LEGACY_AID_ITEMS: ShopCatalogItem[] = [
-  {
-    id: 'AID_001',
-    type: 'aid',
-    name: 'Pista Histórica',
-    description: 'Revela uma dica contextual educativa sem entregar a resposta diretamente.',
-    rarity: 'rare',
-    currency: 'coins',
-    priceCoins: 750,
-    consumable: true,
-    quantity: 1,
-    unlockType: 'purchase',
-    asset: '/images/shop/aids/aid-pista-historica.webp',
-    active: false,
-    category: 'ajudas',
-    categoryTitle: 'Ajudas & Utilidades',
-    badgeText: 'Legado',
-    badgeColor: 'bg-slate-700 text-slate-400',
-    icon: '💡',
-    maxOwned: AID_MAX_OWNED_LIMIT,
-    purchaseLimit24h: AID_PURCHASE_DAILY_LIMIT,
-    aliases: ['aid_hint', 'ajuda_pista', 'consumable_pista', 'pista_historica', 'hint'],
-  },
   {
     id: 'AID_005',
     type: 'aid',

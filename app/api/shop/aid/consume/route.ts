@@ -165,48 +165,72 @@ export async function POST(req: NextRequest) {
       const cons = userSnap.data()?.consumables || {}
       let legacyStock = 0
 
+      // Resolução estrita priorizando fontes canónicas (SSOT)
       if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
-        legacyStock = Math.max(
-          Number(inv['AID_002']) || 0,
-          Number(inv['aid_50_50']) || 0,
-          Number(inv['consumable_50_50']) || 0,
-          Number(inv['help5050']) || 0,
-          Number(inv['utilities']?.fiftyFifty) || 0,
-          Number(cons.help5050) || 0
-        )
+        if (typeof cons.help5050 === 'number') legacyStock = cons.help5050
+        else if (typeof inv['utilities']?.fiftyFifty === 'number') legacyStock = inv['utilities'].fiftyFifty
+        else if (typeof inv['AID_002'] === 'number') legacyStock = inv['AID_002']
+        else {
+          legacyStock = Math.max(
+            Number(inv['aid_50_50']) || 0,
+            Number(inv['consumable_50_50']) || 0,
+            Number(inv['help5050']) || 0,
+            Number(inv['ajuda_5050']) || 0,
+            0
+          )
+        }
       } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
-        legacyStock = Math.max(
-          Number(inv['AID_003']) || 0,
-          Number(inv['aid_public_vote']) || 0,
-          Number(inv['consumable_public_vote']) || 0,
-          Number(inv['HELP_005']) || 0,
-          Number(inv['publicVote']) || 0,
-          Number(inv['utilities']?.publicVote) || 0,
-          Number(cons.publicVote) || 0
-        )
+        if (typeof cons.publicVote === 'number') legacyStock = cons.publicVote
+        else if (typeof inv['utilities']?.publicVote === 'number') legacyStock = inv['utilities'].publicVote
+        else if (typeof inv['AID_003'] === 'number') legacyStock = inv['AID_003']
+        else {
+          legacyStock = Math.max(
+            Number(inv['aid_public_vote']) || 0,
+            Number(inv['consumable_public_vote']) || 0,
+            Number(inv['HELP_005']) || 0,
+            Number(inv['publicVote']) || 0,
+            Number(inv['ajuda_publico']) || 0,
+            0
+          )
+        }
       } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
-        legacyStock = Math.max(
-          Number(inv['AID_004']) || 0,
-          Number(inv['aid_freeze_time']) || 0,
-          Number(inv['consumable_congelar_tempo']) || 0,
-          Number(inv['freezeTime']) || 0,
-          Number(inv['utilities']?.freezeTime) || 0,
-          Number(cons.freezeTime) || 0
-        )
+        if (typeof cons.freezeTime === 'number') legacyStock = cons.freezeTime
+        else if (typeof inv['utilities']?.freezeTime === 'number') legacyStock = inv['utilities'].freezeTime
+        else if (typeof inv['AID_004'] === 'number') legacyStock = inv['AID_004']
+        else {
+          legacyStock = Math.max(
+            Number(inv['aid_freeze_time']) || 0,
+            Number(inv['consumable_congelar_tempo']) || 0,
+            Number(inv['freezeTime']) || 0,
+            Number(inv['ajuda_congelar']) || 0,
+            0
+          )
+        }
       } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
-        legacyStock = Math.max(
-          Number(inv['AID_001']) || 0,
-          Number(inv['aid_hint']) || 0,
-          Number(inv['consumable_pista']) || 0,
-          Number(cons.hints) || 0
-        )
+        if (typeof cons.hints === 'number') legacyStock = cons.hints
+        else if (typeof inv['utilities']?.hints === 'number') legacyStock = inv['utilities'].hints
+        else if (typeof inv['AID_001'] === 'number') legacyStock = inv['AID_001']
+        else {
+          legacyStock = Math.max(
+            Number(inv['aid_hint']) || 0,
+            Number(inv['consumable_pista']) || 0,
+            Number(inv['pista_historica']) || 0,
+            Number(inv['ajuda_pista']) || 0,
+            Number(inv['hint']) || 0,
+            0
+          )
+        }
       } else if (aidRule.id === 'AID_008' || aidRule.id === 'aid_streak_protection' || aidRule.aliases?.includes('consumable_protecao_streak')) {
-        legacyStock = Math.max(
-          Number(inv['AID_008']) || 0,
-          Number(inv['aid_streak_protection']) || 0,
-          Number(inv['consumable_protecao_streak']) || 0,
-          Number(cons.streakProtection) || 0
-        )
+        if (typeof cons.streakProtection === 'number') legacyStock = cons.streakProtection
+        else if (typeof inv['utilities']?.streakProtection === 'number') legacyStock = inv['utilities'].streakProtection
+        else {
+          legacyStock = Math.max(
+            Number(inv['AID_008']) || 0,
+            Number(inv['aid_streak_protection']) || 0,
+            Number(inv['consumable_protecao_streak']) || 0,
+            0
+          )
+        }
       } else {
         legacyStock = Number(inv[aidRule.id]) || 0
       }
@@ -255,6 +279,7 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.aid_50_50'] = newStock
         updatePayload['inventory.consumable_50_50'] = newStock
         updatePayload['inventory.help5050'] = newStock
+        updatePayload['inventory.ajuda_5050'] = newStock
         updatePayload['inventory.utilities.fiftyFifty'] = newStock
       } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
         updatePayload['consumables.publicVote'] = newStock
@@ -263,6 +288,7 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.consumable_public_vote'] = newStock
         updatePayload['inventory.HELP_005'] = newStock
         updatePayload['inventory.publicVote'] = newStock
+        updatePayload['inventory.ajuda_publico'] = newStock
         updatePayload['inventory.utilities.publicVote'] = newStock
       } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
         updatePayload['consumables.freezeTime'] = newStock
@@ -270,15 +296,23 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.aid_freeze_time'] = newStock
         updatePayload['inventory.consumable_congelar_tempo'] = newStock
         updatePayload['inventory.freezeTime'] = newStock
+        updatePayload['inventory.ajuda_congelar'] = newStock
         updatePayload['inventory.utilities.freezeTime'] = newStock
       } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
         updatePayload['consumables.hints'] = newStock
         updatePayload['inventory.AID_001'] = newStock
         updatePayload['inventory.aid_hint'] = newStock
+        updatePayload['inventory.consumable_pista'] = newStock
+        updatePayload['inventory.pista_historica'] = newStock
+        updatePayload['inventory.ajuda_pista'] = newStock
+        updatePayload['inventory.hint'] = newStock
+        updatePayload['inventory.utilities.hints'] = newStock
       } else if (aidRule.id === 'AID_008' || aidRule.id === 'aid_streak_protection' || aidRule.aliases?.includes('consumable_protecao_streak')) {
         updatePayload['consumables.streakProtection'] = newStock
         updatePayload['inventory.AID_008'] = newStock
         updatePayload['inventory.aid_streak_protection'] = newStock
+        updatePayload['inventory.consumable_protecao_streak'] = newStock
+        updatePayload['inventory.utilities.streakProtection'] = newStock
       }
 
       transaction.update(userRef, updatePayload)
