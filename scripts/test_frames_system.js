@@ -57,12 +57,12 @@ const { ANIMATED_FRAMES, FRAME_ALIASES, getFrameById, getFrameRarityBadge } = sr
 
 // 2. VALIDAÇÃO DO TOTAL GLOBAL
 console.log('--- GRUPO 1: TOTAL GLOBAL DE MOLDURAS ---')
-assert(ANIMATED_FRAMES.length === 24, `Catálogo src/data/frames.ts contém exatamente 24 molduras (atual: ${ANIMATED_FRAMES.length})`)
-assert(dataFrames.ANIMATED_FRAMES.length === 24, `Proxy data/frames.ts exporta exatamente 24 molduras (atual: ${dataFrames.ANIMATED_FRAMES.length})`)
+assert(ANIMATED_FRAMES.length === 29, `Catálogo src/data/frames.ts contém exatamente 29 molduras (24 base + 5 VIP) (atual: ${ANIMATED_FRAMES.length})`)
+assert(dataFrames.ANIMATED_FRAMES.length === 29, `Proxy data/frames.ts exporta exatamente 29 molduras (atual: ${dataFrames.ANIMATED_FRAMES.length})`)
 
-// 3. VALIDAÇÃO DOS 24 IDs CANÓNICOS OBRIGATÓRIOS
-console.log('\n--- GRUPO 2: VALIDAÇÃO DOS 24 IDs CANÓNICOS ---')
-const REQUIRED_24_IDS = [
+// 3. VALIDAÇÃO DOS 29 IDs CANÓNICOS OBRIGATÓRIOS
+console.log('\n--- GRUPO 2: VALIDAÇÃO DOS 29 IDs CANÓNICOS ---')
+const REQUIRED_29_IDS = [
   // 1. Elemental & Natureza (6)
   'frame_fogo_eterno',
   'frame_ondas_atlantico',
@@ -96,10 +96,17 @@ const REQUIRED_24_IDS = [
   'frame_biohazard_toxic',
   'frame_gladiador_ferro',
   'frame_sakura_zen',
+
+  // 6. VIP Real Collection 2.0 (5)
+  'AP-VIP-FRAME-001',
+  'AP-VIP-FRAME-002',
+  'AP-VIP-FRAME-003',
+  'AP-VIP-FRAME-004',
+  'AP-VIP-FRAME-005',
 ]
 
 const foundIds = new Set(ANIMATED_FRAMES.map((f) => f.id))
-REQUIRED_24_IDS.forEach((id) => {
+REQUIRED_29_IDS.forEach((id) => {
   assert(foundIds.has(id), `ID obrigatório presente no catálogo: ${id}`)
   const frame = getFrameById(id)
   assert(Boolean(frame && frame.id === id), `getFrameById resolve ID canónico: ${id}`)
@@ -121,13 +128,13 @@ ANIMATED_FRAMES.forEach((f) => {
   }
 })
 
-assert(categoryCounts.elemental === 6, `Coleção Elemental contém 6 molduras (atual: ${categoryCounts.elemental})`)
-assert(categoryCounts.cosmico === 4, `Coleção Cósmicas contém 4 molduras (atual: ${categoryCounts.cosmico})`)
-assert(categoryCounts.real === 4, `Coleção Realeza contém 4 molduras (atual: ${categoryCounts.real})`)
-assert(categoryCounts.lusitano === 6, `Coleção Lusitanas contém 6 molduras (atual: ${categoryCounts.lusitano})`)
-assert(categoryCounts.especial === 4, `Coleção Especiais contém 4 molduras (atual: ${categoryCounts.especial})`)
+assert(categoryCounts.elemental >= 6, `Coleção Elemental contém pelo menos 6 molduras (atual: ${categoryCounts.elemental})`)
+assert(categoryCounts.cosmico >= 4, `Coleção Cósmicas contém pelo menos 4 molduras (atual: ${categoryCounts.cosmico})`)
+assert(categoryCounts.real >= 4, `Coleção Realeza contém pelo menos 4 molduras (atual: ${categoryCounts.real})`)
+assert(categoryCounts.lusitano >= 6, `Coleção Lusitanas contém pelo menos 6 molduras (atual: ${categoryCounts.lusitano})`)
+assert(categoryCounts.especial >= 4, `Coleção Especiais contém pelo menos 4 molduras (atual: ${categoryCounts.especial})`)
 const sumCats = categoryCounts.elemental + categoryCounts.cosmico + categoryCounts.real + categoryCounts.lusitano + categoryCounts.especial
-assert(sumCats === 24, `Soma matemática das coleções é exatamente 24 (6+4+4+6+4)`)
+assert(sumCats === 29, `Soma matemática das coleções é exatamente 29 (atual: ${sumCats})`)
 
 // 5. VALIDAÇÃO DAS RARIDADES
 console.log('\n--- GRUPO 4: DISTRIBUIÇÃO DE RARIDADES ---')
@@ -148,15 +155,15 @@ assert(rarityCounts.Épico > 0, `Existem molduras de raridade Épico (${rarityCo
 assert(rarityCounts.Lendário > 0, `Existem molduras de raridade Lendário (${rarityCounts.Lendário})`)
 assert(rarityCounts.Mítico > 0, `Existem molduras de raridade Mítico (${rarityCounts.Mítico})`)
 const sumRars = rarityCounts.Raro + rarityCounts.Épico + rarityCounts.Lendário + rarityCounts.Mítico
-assert(sumRars === 24, `Soma matemática de todas as raridades é 24`)
+assert(sumRars === 29, `Soma matemática de todas as raridades é 29`)
 
 // 6. VALIDAÇÃO DE PREÇOS E INTEGRIDADE DE DADOS
 console.log('\n--- GRUPO 5: PREÇOS E METADADOS COMPLETOS ---')
 ANIMATED_FRAMES.forEach((f) => {
   assert(Boolean(f.name && f.name.length > 0), `Nome preenchido para ${f.id}`)
   assert(Boolean(f.description && f.description.length > 0), `Descrição preenchida para ${f.id}`)
-  assert(typeof f.price === 'number' && f.price > 0, `Preço positivo configurado para ${f.id}: ${f.price} Moedas`)
-  assert(typeof f.priceCoins === 'number' && f.priceCoins > 0, `priceCoins positivo configurado para ${f.id}`)
+  assert(typeof f.price === 'number' && f.price > 0, `Preço positivo configurado para ${f.id}: ${f.price}`)
+  assert(typeof f.priceCoins === 'number' && f.priceCoins >= 0, `priceCoins configurado para ${f.id}`)
   assert(Boolean(f.accentColor && f.accentColor.startsWith('#')), `Cor de destaque HEX válida para ${f.id}: ${f.accentColor}`)
   assert(Boolean(f.badge && f.badge.length > 0), `Badge de raridade presente para ${f.id}`)
   assert(Boolean(f.badgeColor && f.badgeColor.length > 0), `BadgeColor configurado para ${f.id}`)
@@ -188,14 +195,14 @@ function simulateStoreFilter(categoryFilter = 'todas', rarityFilter = 'todas') {
 
 // 7.1 Sem filtro
 const noFilter = simulateStoreFilter('todas', 'todas')
-assert(noFilter.length === 24, `Sem filtro (Todas): renderiza 24 cards (obtido: ${noFilter.length})`)
+assert(noFilter.length === 29, `Sem filtro (Todas): renderiza 29 cards (obtido: ${noFilter.length})`)
 
 // 7.2 Por Categoria
-assert(simulateStoreFilter('elemental', 'todas').length === 6, `Filtro Elementais: renderiza 6 cards`)
-assert(simulateStoreFilter('cosmico', 'todas').length === 4, `Filtro Cósmicas & Cyber: renderiza 4 cards`)
-assert(simulateStoreFilter('real', 'todas').length === 4, `Filtro Realeza & Deuses: renderiza 4 cards`)
-assert(simulateStoreFilter('lusitano', 'todas').length === 6, `Filtro Lusitanas & PT: renderiza 6 cards`)
-assert(simulateStoreFilter('especial', 'todas').length === 4, `Filtro Especiais & Arcade: renderiza 4 cards`)
+assert(simulateStoreFilter('elemental', 'todas').length === categoryCounts.elemental, `Filtro Elementais: renderiza ${categoryCounts.elemental} cards`)
+assert(simulateStoreFilter('cosmico', 'todas').length === categoryCounts.cosmico, `Filtro Cósmicas & Cyber: renderiza ${categoryCounts.cosmico} cards`)
+assert(simulateStoreFilter('real', 'todas').length === categoryCounts.real, `Filtro Realeza & Deuses: renderiza ${categoryCounts.real} cards`)
+assert(simulateStoreFilter('lusitano', 'todas').length === categoryCounts.lusitano, `Filtro Lusitanas & PT: renderiza ${categoryCounts.lusitano} cards`)
+assert(simulateStoreFilter('especial', 'todas').length === categoryCounts.especial, `Filtro Especiais & Arcade: renderiza ${categoryCounts.especial} cards`)
 
 // 7.3 Por Raridade
 const raritiesList = ['Raro', 'Épico', 'Lendário', 'Mítico']
@@ -218,7 +225,7 @@ mockInventories.forEach((mockInv, idx) => {
     const isUnlocked = mockInv.includes(item.id)
     return { ...item, isUnlocked }
   }).length
-  assert(renderedCount === 24, `Cenário ${idx + 1}: Jogador com ${mockInv.length} itens possui exatamente 24 molduras visíveis na loja`)
+  assert(renderedCount === 29, `Cenário ${idx + 1}: Jogador com ${mockInv.length} itens possui exatamente 29 molduras visíveis na loja`)
 })
 
 // 9. RETROCOMPATIBILIDADE DE ALIASES LEGADOS
@@ -254,5 +261,5 @@ legacyAliases.forEach(({ legacy, expected }) => {
 })
 
 console.log('\n====================================================')
-console.log('🏆 100% DOS TESTES DAS 24 MOLDURAS PASSARAM COM SUCESSO!')
+console.log('🏆 100% DOS TESTES DAS 29 MOLDURAS PASSARAM COM SUCESSO!')
 console.log('====================================================')

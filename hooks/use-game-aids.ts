@@ -41,10 +41,18 @@ export function useGameAids({
   const { user, profile } = useAuth()
   const effectiveUid = user?.uid || profile?.uid || ''
 
-  // 1. Estado Unificado de Stocks (SSOT)
-  const [stocks, setStocks] = useState<UserAidStock>(() =>
-    getUserAidStock(profile, profile?.inventory as any),
-  )
+  // 1. Estado Unificado de Stocks (SSOT com cortesia de partida em modo solo)
+  const [stocks, setStocks] = useState<UserAidStock>(() => {
+    const base = getUserAidStock(profile, profile?.inventory as any)
+    if (gameMode === 'solo') {
+      return {
+        stock5050: Math.max(1, base.stock5050),
+        stockFreeze: Math.max(1, base.stockFreeze),
+        stockPublicVote: Math.max(1, base.stockPublicVote),
+      }
+    }
+    return base
+  })
 
   // 2. Estado de Efeitos Ativos na Pergunta Atual (100% Individual para este Jogador)
   const [eliminatedOptions, setEliminatedOptions] = useState<('A' | 'B' | 'C' | 'D')[]>([])
@@ -62,7 +70,17 @@ export function useGameAids({
   useEffect(() => {
     const sync = () => {
       const inv: Record<string, any> = (profile as any)?.inventory || {}
-      setStocks(getUserAidStock(profile, inv))
+      const base = getUserAidStock(profile, inv)
+      setStocks((prev) => {
+        if (gameMode === 'solo') {
+          return {
+            stock5050: Math.max(prev.stock5050, base.stock5050),
+            stockFreeze: Math.max(prev.stockFreeze, base.stockFreeze),
+            stockPublicVote: Math.max(prev.stockPublicVote, base.stockPublicVote),
+          }
+        }
+        return base
+      })
     }
 
     sync()
@@ -75,7 +93,7 @@ export function useGameAids({
       window.removeEventListener('inventory_updated', sync)
       window.removeEventListener('storage', sync)
     }
-  }, [profile])
+  }, [profile, gameMode])
 
   // Temporizador do Congelamento de Tempo (+15s)
   useEffect(() => {
@@ -143,89 +161,79 @@ export function useGameAids({
     }
   }, [isHelpProcessing])
 
-  // Consumo Autorizado da Ajuda Selecionada
-  const confirmUseAid = useCallback(async (): Promise<boolean> => {
-    if (!selectedPreviewAid || !currentQuestion || disabled || isHelpProcessing) {
-      return false
-    }
+  // Execução Instantânea e Autoritativa da Ajuda (Com aplicação imediata no cliente + sync de fundo)
+  const executeUseAid = useCallback(
+    async (aidType: AidType): Promise<boolean> => {
+      if (!currentQuestion || disabled || isHelpProcessing) {
+        return false
+      }
 
-    const aidType = selectedPreviewAid
-    const aidMeta = CANONICAL_AIDS[aidType]
-    const currentStock =
-      aidType === '5050'
-        ? stocks.stock5050
-        : aidType === 'publicVote'
-          ? stocks.stockPublicVote
-          : stocks.stockFreeze
+      // Prevenir reativação na mesma pergunta
+      if (aidType === '5050' && eliminatedOptions.length > 0) return false
+      if (aidType === 'publicVote' && publicVoteResults !== null) return false
+      if (aidType === 'freeze' && isFrozen) return false
 
-    if (currentStock <= 0) {
-      showAidToast(`⚠️ Sem unidades de «${aidMeta.shortName}». Adquire na Loja!`)
-      setSelectedPreviewAid(null)
-      return false
-    }
+      const aidMeta = CANONICAL_AIDS[aidType]
+      const currentStock =
+        aidType === '5050'
+          ? stocks.stock5050
+          : aidType === 'publicVote'
+            ? stocks.stockPublicVote
+            : stocks.stockFreeze
 
-    // Blindagem de execução única
-    setIsHelpProcessing(true)
-
-    try {
-      // Normalizar dados da pergunta
-      const normalizedOptions = Array.isArray(currentQuestion.options)
-        ? currentQuestion.options.map((opt: any, idx: number) => {
-            if (typeof opt === 'string') {
-              return { key: ['A', 'B', 'C', 'D'][idx] || String(idx), text: opt }
-            }
-            return {
-              key: opt.key || ['A', 'B', 'C', 'D'][idx] || String(idx),
-              text: opt.text || String(opt),
-            }
-          })
-        : []
-
-      const normalizedCorrect = String(currentQuestion.correct || 'A').toUpperCase()
-
-      const res = await consumeGameAid({
-        userId: effectiveUid,
-        aidType,
-        gameMode,
-        currentStock,
-        questionData: {
-          prompt: currentQuestion.question || currentQuestion.prompt || '',
-          options: normalizedOptions,
-          correct: normalizedCorrect,
-          explanation: currentQuestion.explanation,
-          category: currentQuestion.category,
-        },
-        duelId,
-      })
-
-      if (res.success) {
-        // Fechar modal de pré-visualização
+      if (currentStock <= 0) {
+        showAidToast(`⚠️ Sem unidades de «${aidMeta?.shortName || aidType}». Adquire na Loja!`)
         setSelectedPreviewAid(null)
+        return false
+      }
 
-        // Atualizar contadores locais de stock imediatamente
+      // Fechar modal de pré-visualização se estiver aberto
+      setSelectedPreviewAid(null)
+      setIsHelpProcessing(true)
+
+      try {
+        // Normalizar opções e resposta correta com chave maiúscula garantida
+        const normalizedOptions = Array.isArray(currentQuestion.options)
+          ? currentQuestion.options.map((opt: any, idx: number) => {
+              const defaultKey = (['A', 'B', 'C', 'D'][idx] || String(idx)) as 'A' | 'B' | 'C' | 'D'
+              if (typeof opt === 'string') {
+                return { key: defaultKey, text: opt }
+              }
+              return {
+                key: String(opt.key || defaultKey).toUpperCase() as 'A' | 'B' | 'C' | 'D',
+                text: String(opt.text || opt.label || opt || ''),
+              }
+            })
+          : []
+
+        const rawCorrect = String(currentQuestion.correct || 'A').toUpperCase()
+        const normalizedCorrect = (['A', 'B', 'C', 'D'].includes(rawCorrect) ? rawCorrect : 'A') as
+          | 'A'
+          | 'B'
+          | 'C'
+          | 'D'
+
+        const remainingStock = Math.max(0, currentStock - 1)
+
+        // 1. Atualizar contadores de estoque locais imediatamente
         setStocks((prev) => ({
           ...prev,
-          ...(aidType === '5050' && { stock5050: res.remainingStock }),
-          ...(aidType === 'publicVote' && { stockPublicVote: res.remainingStock }),
-          ...(aidType === 'freeze' && { stockFreeze: res.remainingStock }),
+          ...(aidType === '5050' && { stock5050: remainingStock }),
+          ...(aidType === 'publicVote' && { stockPublicVote: remainingStock }),
+          ...(aidType === 'freeze' && { stockFreeze: remainingStock }),
         }))
 
-        // Aplicar o efeito 100% individualmente para este jogador
+        // 2. Aplicar o efeito visual e de gameplay DE IMEDIATO
         if (aidType === '5050') {
-          const eliminated =
-            res.effect?.eliminatedOptions ||
-            calculate5050Eliminated(normalizedOptions, normalizedCorrect)
+          const eliminated = calculate5050Eliminated(normalizedOptions, normalizedCorrect)
           setEliminatedOptions(eliminated)
           if (onOptionEliminated) onOptionEliminated(eliminated)
         } else if (aidType === 'publicVote') {
-          const percentages =
-            res.effect?.percentages ||
-            simulatePublicVote(
-              Math.max(
-                0,
-                normalizedOptions.findIndex((o: any) => o.key === normalizedCorrect),
-              ),
-            )
+          const correctIdx = Math.max(
+            0,
+            normalizedOptions.findIndex((o: any) => o.key === normalizedCorrect),
+          )
+          const percentages = simulatePublicVote(correctIdx)
           setPublicVoteResults(percentages)
           if (onPublicVoteReceived) onPublicVoteReceived(percentages)
         } else if (aidType === 'freeze') {
@@ -234,36 +242,60 @@ export function useGameAids({
           if (onFreezeApplied) onFreezeApplied(15)
         }
 
-        // Feedback visual amigável com contador atualizado
         showAidToast(
-          `💡 ${aidMeta.shortName.toUpperCase()} UTILIZADA — Restam ${res.remainingStock}`,
+          `💡 ${aidMeta?.shortName?.toUpperCase() || aidType} UTILIZADA — Restam ${remainingStock}`,
         )
+
+        // 3. Disparar sincronização atómica com Firestore / backend em background
+        consumeGameAid({
+          userId: effectiveUid,
+          aidType,
+          gameMode,
+          currentStock,
+          questionData: {
+            prompt: currentQuestion.question || currentQuestion.prompt || '',
+            options: normalizedOptions,
+            correct: normalizedCorrect,
+            explanation: currentQuestion.explanation,
+            category: currentQuestion.category,
+          },
+          duelId,
+        }).catch((err) => {
+          console.warn('[useGameAids] Aviso na sincronização em background:', err)
+        })
+
         return true
-      } else {
-        showAidToast(`❌ ${res.message || 'Não foi possível utilizar a ajuda.'}`)
+      } catch (err: any) {
+        console.error('[useGameAids] Erro ao executar ajuda:', err)
+        showAidToast('❌ Ocorreu um erro ao processar a ajuda.')
         return false
+      } finally {
+        setIsHelpProcessing(false)
       }
-    } catch (err: any) {
-      console.error('[useGameAids] Erro ao consumir ajuda:', err)
-      showAidToast('❌ Ocorreu um erro ao processar a ajuda.')
-      return false
-    } finally {
-      setIsHelpProcessing(false)
-    }
-  }, [
-    selectedPreviewAid,
-    currentQuestion,
-    disabled,
-    isHelpProcessing,
-    stocks,
-    effectiveUid,
-    gameMode,
-    duelId,
-    showAidToast,
-    onOptionEliminated,
-    onPublicVoteReceived,
-    onFreezeApplied,
-  ])
+    },
+    [
+      currentQuestion,
+      disabled,
+      isHelpProcessing,
+      eliminatedOptions,
+      publicVoteResults,
+      isFrozen,
+      stocks,
+      showAidToast,
+      onOptionEliminated,
+      onPublicVoteReceived,
+      onFreezeApplied,
+      effectiveUid,
+      gameMode,
+      duelId,
+    ],
+  )
+
+  // Consumo Autorizado via Modal (delegação transparente em executeUseAid)
+  const confirmUseAid = useCallback(async (): Promise<boolean> => {
+    if (!selectedPreviewAid) return false
+    return executeUseAid(selectedPreviewAid)
+  }, [selectedPreviewAid, executeUseAid])
 
   return {
     stocks,
@@ -276,6 +308,7 @@ export function useGameAids({
     aidToast,
     requestPreview,
     cancelPreview,
+    executeUseAid,
     confirmUseAid,
     resetQuestionAids,
     setEliminatedOptions,

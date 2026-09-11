@@ -92,8 +92,9 @@ export function DistrictIntelCard({
               <UserAvatar
                 src={king.photoURL}
                 alt={king.displayName}
+                activeFrame={king.equippedFrame}
                 size="sm"
-                className="w-8 h-8 ring-2 ring-amber-400/60"
+                className="w-8 h-8"
               />
               <Crown className="w-3 h-3 text-amber-400 absolute -top-1 -right-1" />
             </div>

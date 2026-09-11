@@ -79,17 +79,16 @@ export function QuizPowerUpsBar({
 
   const isGloballyDisabled = disabled || isProcessing
 
-  const canUse5050 = !isGloballyDisabled && !used5050 && count5050 > 0
+  const canUse5050 = !isGloballyDisabled && !used5050
   const canUsePublicVote =
     !isGloballyDisabled &&
     !usedPublicVote &&
-    countPublicVote > 0 &&
     (typeof onUsePublicVote === 'function' || typeof onRequestPreview === 'function')
-  const canUseFreeze = !isGloballyDisabled && !isFrozen && countFreeze > 0
+  const canUseFreeze = !isGloballyDisabled && !isFrozen
 
   const handleClick5050 = () => {
     if (!canUse5050) return
-    if (onRequestPreview) {
+    if (onRequestPreview && count5050 > 0) {
       onRequestPreview('5050')
     } else {
       onUse5050()
@@ -98,7 +97,7 @@ export function QuizPowerUpsBar({
 
   const handleClickPublicVote = () => {
     if (!canUsePublicVote) return
-    if (onRequestPreview) {
+    if (onRequestPreview && countPublicVote > 0) {
       onRequestPreview('publicVote')
     } else if (onUsePublicVote) {
       onUsePublicVote()
@@ -107,7 +106,7 @@ export function QuizPowerUpsBar({
 
   const handleClickFreeze = () => {
     if (!canUseFreeze) return
-    if (onRequestPreview) {
+    if (onRequestPreview && countFreeze > 0) {
       onRequestPreview('freeze')
     } else {
       onUseFreeze()
@@ -127,7 +126,9 @@ export function QuizPowerUpsBar({
           used5050
             ? 'bg-slate-900 border-emerald-500/60 text-emerald-400 opacity-80 cursor-default'
             : canUse5050
-              ? 'bg-slate-800/95 border-cyan-500/40 text-cyan-300 hover:border-cyan-400 hover:bg-slate-800 cursor-pointer shadow-cyan-500/10'
+              ? count5050 > 0
+                ? 'bg-slate-800/95 border-cyan-500/40 text-cyan-300 hover:border-cyan-400 hover:bg-slate-800 cursor-pointer shadow-cyan-500/10'
+                : 'bg-slate-900/90 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-300 cursor-pointer'
               : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-45 cursor-not-allowed',
         )}
       >
@@ -165,7 +166,9 @@ export function QuizPowerUpsBar({
           usedPublicVote
             ? 'bg-slate-900 border-purple-500/60 text-purple-300 opacity-80 cursor-default'
             : canUsePublicVote
-              ? 'bg-slate-800/95 border-purple-500/40 text-purple-300 hover:border-purple-400 hover:bg-slate-800 cursor-pointer shadow-purple-500/10'
+              ? countPublicVote > 0
+                ? 'bg-slate-800/95 border-purple-500/40 text-purple-300 hover:border-purple-400 hover:bg-slate-800 cursor-pointer shadow-purple-500/10'
+                : 'bg-slate-900/90 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-300 cursor-pointer'
               : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-45 cursor-not-allowed',
         )}
       >
@@ -206,7 +209,9 @@ export function QuizPowerUpsBar({
           isFrozen
             ? 'bg-slate-900 border-blue-400 text-blue-200 shadow-[0_0_15px_rgba(96,165,250,0.5)] animate-pulse'
             : canUseFreeze
-              ? 'bg-slate-800/95 border-amber-500/40 text-amber-300 hover:border-amber-400 hover:bg-slate-800 cursor-pointer shadow-amber-500/10'
+              ? countFreeze > 0
+                ? 'bg-slate-800/95 border-amber-500/40 text-amber-300 hover:border-amber-400 hover:bg-slate-800 cursor-pointer shadow-amber-500/10'
+                : 'bg-slate-900/90 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-300 cursor-pointer'
               : 'bg-slate-900/80 border-slate-800 text-slate-500 opacity-45 cursor-not-allowed',
         )}
       >

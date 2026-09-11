@@ -136,6 +136,7 @@ export function Ranking() {
           district: p.district,
           pos: idx + 1,
           equippedTitle: p.equippedTitle || p.title,
+          equippedFrame: p.equippedFrame || (p as any).equipped?.frameId,
           equipped: (p as any).equipped,
           duelWins: p.wins1v1 || 0,
           duelsTotal: p.gamesPlayed || 0,
@@ -192,6 +193,7 @@ export function Ranking() {
         district: profile.district || 'Portugal',
         pos: rankPos,
         equippedTitle: profile.equippedTitle || '',
+        equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
       } as RankedPlayer
     }
     return null
@@ -216,6 +218,7 @@ export function Ranking() {
       id: p.uid,
       username: p.name,
       avatarUrl: p.photoURL || undefined,
+      equippedFrame: p.equippedFrame || (p as any)?.equipped?.frameId,
       level: p.level || 1,
       xp: p.xp || 0,
       district: p.district || 'Portugal',
@@ -397,6 +400,7 @@ export function Ranking() {
                         isCurrentUser={isCurrentUser}
                         size="sm"
                         showBadge={false}
+                        equippedFrame={isCurrentUser ? undefined : row.equippedFrame}
                       />
 
                       <div className="min-w-0 flex-1">
@@ -579,6 +583,8 @@ function PodiumCard({
           isCurrentUser={isCurrentUser}
           rank={player.pos}
           size={isFirst ? 'lg' : 'md'}
+          showBadge={false}
+          equippedFrame={isCurrentUser ? undefined : player.equippedFrame}
         />
       </div>
 

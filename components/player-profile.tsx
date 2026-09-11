@@ -116,28 +116,15 @@ function formatRelativeTime(date: Date): string {
 }
 
 function Avatar({ profile, small = false, avatarIcon, avatarImage }: { profile: UserProfile; small?: boolean; avatarIcon?: string; avatarImage?: string }) {
-  if (avatarImage) {
-    return (
-      <div className={cn(
-        "overflow-hidden rounded-3xl bg-zinc-900 border-2 border-primary/40 shadow-xl select-none",
-        small ? "h-16 w-16" : "h-28 w-28 sm:h-32 sm:w-32"
-      )}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover object-center" />
-      </div>
-    )
-  }
-  if (avatarIcon && avatarIcon !== '👤') {
-    return (
-      <div className={cn(
-        "grid place-items-center rounded-3xl bg-zinc-900 border-2 border-primary/40 shadow-xl select-none",
-        small ? "h-16 w-16 text-2xl" : "h-28 w-28 sm:h-32 sm:w-32 text-5xl"
-      )}>
-        {avatarIcon}
-      </div>
-    )
-  }
-  return <PlayerAvatar profile={profile} size={small ? 'md' : 'xl'} />
+  return (
+    <PlayerAvatar
+      profile={profile}
+      avatarImage={avatarImage}
+      size={small ? 'md' : 'xl'}
+      isCurrentUser
+      showBadge={false}
+    />
+  )
 }
 
 export function PlayerProfile() {

@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import { X, Flame, Swords, Compass, MapPin, Shield } from 'lucide-react'
 import type { RealPlayerPresence } from '@/lib/real-presence'
+import { UserAvatar } from '@/components/ui/UserAvatar'
 import { cn } from '@/lib/utils'
 
 interface LivePlayersModalProps {
@@ -98,18 +99,16 @@ export function LivePlayersModal({
                   {/* Avatar + Info */}
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="relative shrink-0">
-                      {/* Imagem do Avatar */}
-                      <img
-                        src={player.photoURL || '/images/avatars/avatar_01.png'}
+                      <UserAvatar
+                        src={player.photoURL}
                         alt={player.displayName}
-                        className="h-11 w-11 rounded-full object-cover border-2 border-emerald-400/50 bg-slate-800"
-                        onError={(e) => {
-                          // Fallback gracioso caso a imagem quebre
-                          (e.target as HTMLImageElement).src = '/images/avatars/avatar_01.png'
-                        }}
+                        activeFrame={player.equippedFrame}
+                        size="sm"
+                        isCurrentUser={Boolean(isMe)}
+                        showBadge={false}
                       />
                       {/* Ponto indicador no avatar */}
-                      <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-slate-900 shadow-[0_0_6px_#10b981]" />
+                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 border-2 border-slate-900 shadow-[0_0_6px_#10b981] z-20 pointer-events-none" />
                     </div>
 
                     <div className="min-w-0">

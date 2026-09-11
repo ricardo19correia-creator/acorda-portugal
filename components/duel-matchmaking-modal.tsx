@@ -798,6 +798,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       profile={profile ?? undefined}
                       photoURL={playerPhoto}
                       displayName={playerName || 'Tu'}
+                      activeFrame={(profile as any)?.equippedFrame || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : undefined) || undefined}
                       isCurrentUser={true}
                       size="lg"
                     />
@@ -835,6 +836,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                     <PlayerAvatar
                       photoURL={ticket?.opponentInfo?.photoURL || (ticket?.opponentInfo as any)?.avatarUrl || (ticket?.opponentInfo as any)?.avatar}
                       displayName={ticket?.opponentInfo?.displayName || 'Adversário'}
+                      activeFrame={ticket?.opponentInfo?.equippedFrame || (ticket?.opponentInfo as any)?.frameId}
                       isCurrentUser={false}
                       size="lg"
                     />

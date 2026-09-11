@@ -555,6 +555,7 @@ export function QuizScreen({
     requestPreview: handleRequestAidPreview,
     cancelPreview: handleCancelAidPreview,
     confirmUseAid: handleConfirmUseAid,
+    executeUseAid,
     resetQuestionAids,
     setIsFrozen,
   } = useGameAids({
@@ -570,6 +571,9 @@ export function QuizScreen({
         }
       : null,
     disabled: phase !== 'answering',
+    onFreezeApplied: (bonus) => {
+      setSeconds((prev) => Math.min(MAX_SECONDS + 15, prev + bonus))
+    },
   })
 
   // Provocações / Reações no Tabuleiro
@@ -1150,10 +1154,14 @@ export function QuizScreen({
                   <span
                     className={cn(
                       'font-mono text-[10px] font-bold mt-0.5 leading-none',
-                      seconds <= WARNING_TIME_THRESHOLD ? 'text-flag-red animate-pulse' : 'text-slate-400'
+                      isFrozen
+                        ? 'text-cyan-300 animate-pulse font-extrabold'
+                        : seconds <= WARNING_TIME_THRESHOLD
+                          ? 'text-flag-red animate-pulse'
+                          : 'text-slate-400'
                     )}
                   >
-                    {seconds}s
+                    {isFrozen ? `${seconds}s (❄️ ${freezeTimeLeft}s)` : `${seconds}s`}
                   </span>
                 </div>
               </div>
@@ -1163,19 +1171,25 @@ export function QuizScreen({
                 <div
                   className={cn(
                     'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
-                    seconds <= WARNING_TIME_THRESHOLD ? 'border-flag-red/60' : 'border-slate-700/40'
+                    isFrozen
+                      ? 'border-cyan-400/60'
+                      : seconds <= WARNING_TIME_THRESHOLD
+                        ? 'border-flag-red/60'
+                        : 'border-slate-700/40'
                   )}
                 >
                   <div
                     className={cn(
                       'h-full rounded-full transition-all duration-1000 ease-linear shadow-sm',
-                      seconds > 15
-                        ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
-                        : seconds > WARNING_TIME_THRESHOLD
-                          ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
-                          : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
+                      isFrozen
+                        ? 'bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] animate-pulse'
+                        : seconds > 15
+                          ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
+                          : seconds > WARNING_TIME_THRESHOLD
+                            ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
+                            : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
                     )}
-                    style={{ width: `${(seconds / MAX_SECONDS) * 100}%` }}
+                    style={{ width: `${Math.min(100, (seconds / MAX_SECONDS) * 100)}%` }}
                   />
                 </div>
               </div>
@@ -1300,10 +1314,9 @@ export function QuizScreen({
                   freezeTimeLeft={freezeTimeLeft}
                   isProcessing={isHelpProcessing}
                   disabled={phase !== 'answering'}
-                  onUse5050={() => handleRequestAidPreview('5050')}
-                  onUseFreeze={() => handleRequestAidPreview('freeze')}
-                  onUsePublicVote={() => handleRequestAidPreview('publicVote')}
-                  onRequestPreview={handleRequestAidPreview}
+                  onUse5050={() => executeUseAid('5050')}
+                  onUseFreeze={() => executeUseAid('freeze')}
+                  onUsePublicVote={() => executeUseAid('publicVote')}
                 />
               </div>
             )}

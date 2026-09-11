@@ -2076,8 +2076,38 @@ function LojaContent() {
                       {/* Badge & Category Tag com Altura Reservada */}
                       <div className="flex justify-between items-center mb-2 gap-1 min-h-[24px]">
                         <div className="flex items-center gap-1.5 flex-wrap">
+                          {/* Crachá evidente de Categoria (Avatar, Moldura, Título, Arena, Provocação, Ajuda) */}
+                          <span className={cn(
+                            "text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg border flex items-center gap-1 shadow-sm",
+                            item.category === 'molduras'
+                              ? "bg-purple-950/80 text-purple-300 border-purple-500/40"
+                              : item.category === 'avatars'
+                              ? "bg-cyan-950/80 text-cyan-300 border-cyan-500/40"
+                              : item.category === 'titulos'
+                              ? "bg-amber-950/80 text-amber-300 border-amber-500/40"
+                              : item.category === 'arenas'
+                              ? "bg-blue-950/80 text-blue-300 border-blue-500/40"
+                              : item.category === 'taunts'
+                              ? "bg-rose-950/80 text-rose-300 border-rose-500/40"
+                              : "bg-emerald-950/80 text-emerald-300 border-emerald-500/40"
+                          )}>
+                            <span>
+                              {item.category === 'molduras'
+                                ? '🖼️ MOLDURA'
+                                : item.category === 'avatars'
+                                ? '👤 AVATAR'
+                                : item.category === 'titulos'
+                                ? '👑 TÍTULO'
+                                : item.category === 'arenas'
+                                ? '🏟️ ARENA'
+                                : item.category === 'taunts'
+                                ? '💬 PROVOCAÇÃO'
+                                : '⚡ AJUDA'}
+                            </span>
+                          </span>
+
                           {item.badge && (
-                            <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${
+                            <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
                               item.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/30'
                             }`}>
                               {item.badge}
@@ -2106,20 +2136,10 @@ function LojaContent() {
                       {item.category === 'molduras' ? (
                         <div 
                           onClick={() => setInspectingFrameItem(item)}
-                          className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/40 border border-purple-500/30 p-4 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame cursor-pointer transition-all hover:border-purple-400"
+                          className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-purple-500/20 p-3 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame cursor-pointer transition-all hover:border-purple-400/50"
                         >
-                          {/* Ambient Glow */}
-                          <div
-                            className="pointer-events-none absolute -inset-4 opacity-35 blur-2xl transition-opacity group-hover/frame:opacity-75"
-                            style={{
-                              background: item.accentColor
-                                ? `radial-gradient(circle, ${item.accentColor} 0%, transparent 70%)`
-                                : 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
-                            }}
-                          />
-
-                          {/* Avatar com Moldura */}
-                          <div className="relative z-10 w-24 h-24 flex items-center justify-center transition-transform duration-300 group-hover/frame:scale-105">
+                          {/* Avatar com Moldura perfeitamente enquadrada */}
+                          <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center transition-transform duration-300 group-hover/frame:scale-105">
                             <UserAvatar
                               avatarUrl={
                                 previewAvatarId === 'equipped'
@@ -2132,16 +2152,16 @@ function LojaContent() {
                             />
                           </div>
 
-                          {/* Tag de raridade & Botão Inspecionar */}
+                          {/* Botão Inspecionar */}
                           <div className="absolute top-2 right-2 z-20">
-                            <span className="px-2 py-0.5 rounded-lg bg-purple-600/90 hover:bg-purple-500 text-white font-black text-[10px] flex items-center gap-1 shadow-md backdrop-blur-sm group-hover/frame:opacity-100 transition">
-                              <Eye className="w-3 h-3" /> Inspecionar
+                            <span className="px-2 py-0.5 rounded-lg bg-slate-900/90 hover:bg-purple-600 border border-white/10 text-white font-black text-[10px] flex items-center gap-1 shadow-md backdrop-blur-sm group-hover/frame:opacity-100 transition">
+                              <Eye className="w-3 h-3 text-purple-300" /> Inspecionar
                             </span>
                           </div>
 
                           <span className="mt-2 text-[10px] font-black uppercase tracking-wider text-purple-300 z-10 flex items-center gap-1">
-                            <span>{item.icon}</span>
-                            <span>{item.categoryTitle || 'Moldura Viva'}</span>
+                            <span>{item.icon || '🖼️'}</span>
+                            <span>{item.categoryTitle || 'Moldura'}</span>
                           </span>
                         </div>
                       ) : item.category === 'titulos' ? (

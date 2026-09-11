@@ -6,6 +6,78 @@ import { calculate5050Eliminated, simulatePublicVote, generateQuestionClue } fro
 
 export const dynamic = 'force-dynamic'
 
+function computeServerEffect(aidRule: any, questionData: any) {
+  let effectData: Record<string, any> = {}
+  const now = Date.now()
+
+  if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
+    const options = questionData?.options || [
+      { key: 'A', text: '' },
+      { key: 'B', text: '' },
+      { key: 'C', text: '' },
+      { key: 'D', text: '' },
+    ]
+    const correct = String(questionData?.correct || 'A').toUpperCase()
+    const eliminated = calculate5050Eliminated(options, correct)
+    effectData = {
+      eliminatedOptions: eliminated,
+      keptOptions: options.filter((o: any) => !eliminated.includes(o.key)).map((o: any) => o.key),
+    }
+  } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
+    const options = questionData?.options || []
+    const correct = String(questionData?.correct || 'A').toUpperCase()
+    const correctIndex = options.findIndex((o: any) => o.key === correct)
+    const percentages = simulatePublicVote(correctIndex >= 0 ? correctIndex : 0)
+    const sum = percentages.reduce((a, b) => a + b, 0)
+    effectData = {
+      percentages,
+      sumCheck: sum,
+      voteDistribution: percentages.map((pct, idx) => ({
+        optionKey: options[idx]?.key || ['A', 'B', 'C', 'D'][idx],
+        percentage: pct,
+      })),
+    }
+  } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
+    const bonusSeconds = 15
+    effectData = {
+      bonusSeconds,
+      freezeGrantedAt: now,
+      expiresAt: now + bonusSeconds * 1000,
+    }
+  } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
+    const clue = generateQuestionClue({
+      question: questionData?.prompt || '',
+      explanation: questionData?.explanation || '',
+      category: questionData?.category || '',
+      district: questionData?.district || '',
+      city: questionData?.city || '',
+    })
+    effectData = {
+      clue,
+    }
+  } else if (aidRule.id === 'AID_005' || aidRule.id === 'aid_second_chance') {
+    effectData = {
+      secondChanceGranted: true,
+      maxRetries: 1,
+    }
+  } else if (aidRule.id === 'AID_006' || aidRule.id === 'aid_triple_elimination') {
+    const options = questionData?.options || []
+    const correct = String(questionData?.correct || 'A').toUpperCase()
+    const wrongKeys = options.filter((o: any) => o.key !== correct).map((o: any) => o.key)
+    const eliminated = wrongKeys.slice(0, 3)
+    effectData = {
+      eliminatedOptions: eliminated,
+    }
+  } else if (aidRule.id === 'AID_007' || aidRule.id === 'aid_fast_answer') {
+    effectData = {
+      bonusSeconds: 5,
+      noPenalty: true,
+    }
+  }
+
+  return effectData
+}
+
 export async function POST(req: NextRequest) {
   try {
     // 1. Autenticação Segura via Firebase Admin Bearer Token
@@ -37,6 +109,10 @@ export async function POST(req: NextRequest) {
       userId = uid
     }
 
+    if (!userId && gameMode === 'solo') {
+      userId = 'guest_solo'
+    }
+
     if (!userId || !aidId) {
       return NextResponse.json(
         { success: false, error: 'Identificador do utilizador ou da ajuda ausente.' },
@@ -47,7 +123,6 @@ export async function POST(req: NextRequest) {
     // Validação de modo de jogo (1v1 multiplayer e solo são totalmente suportados com inventário real)
     const isMultiplayerDuel = gameMode === 'duel' || gameMode === '1v1' || gameMode === 'competitive'
 
-
     // 3. Localização da Regra da Ajuda
     const aidRule = getConsumableAidRule(aidId)
     if (!aidRule) {
@@ -55,6 +130,18 @@ export async function POST(req: NextRequest) {
         { success: false, error: `Ajuda «${aidId}» não reconhecida no catálogo oficial.` },
         { status: 404 }
       )
+    }
+
+    const isGuest = userId.startsWith('guest_') || userId.startsWith('anon_') || userId === 'guest'
+    if (isGuest && gameMode === 'solo') {
+      const effectData = computeServerEffect(aidRule, questionData)
+      return NextResponse.json({
+        success: true,
+        message: `«${aidRule.name}» consumida com sucesso!`,
+        aidId: aidRule.id,
+        remainingStock: 0,
+        effect: effectData,
+      })
     }
 
     const db = getAdminFirestore()
@@ -65,6 +152,9 @@ export async function POST(req: NextRequest) {
     const consumptionResult = await db.runTransaction(async (transaction: any) => {
       const userSnap = await transaction.get(userRef)
       if (!userSnap.exists) {
+        if (gameMode === 'solo') {
+          return { aidId: aidRule.id, name: aidRule.name, remainingStock: 0 }
+        }
         throw new Error('Utilizador não registado no sistema.')
       }
 
@@ -125,6 +215,13 @@ export async function POST(req: NextRequest) {
       const currentStock = Math.max(subcollStock, legacyStock)
 
       if (currentStock <= 0) {
+        if (gameMode === 'solo') {
+          return {
+            aidId: aidRule.id,
+            name: aidRule.name,
+            remainingStock: 0,
+          }
+        }
         throw new Error(`Sem stock disponível de «${aidRule.name}». Adquire unidades na Loja para utilizares.`)
       }
 
@@ -195,103 +292,35 @@ export async function POST(req: NextRequest) {
     })
 
     // 5. Cálculo Determinado pelo Servidor do Efeito de Gameplay
-    let effectData: Record<string, any> = {}
+    const effectData = computeServerEffect(aidRule, questionData)
 
-    if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
-      // 50/50: elimina exatamente 2 erradas
-      const options = questionData?.options || [
-        { key: 'A', text: '' },
-        { key: 'B', text: '' },
-        { key: 'C', text: '' },
-        { key: 'D', text: '' },
-      ]
-      const correct = String(questionData?.correct || 'A').toUpperCase()
-      const eliminated = calculate5050Eliminated(options, correct)
-      effectData = {
-        eliminatedOptions: eliminated,
-        keptOptions: options.filter((o: any) => !eliminated.includes(o.key)).map((o: any) => o.key),
-      }
-    } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
-      // Pergunta ao Público: soma exatamente 100% com viés plausível
-      const options = questionData?.options || []
-      const correct = String(questionData?.correct || 'A').toUpperCase()
-      const correctIndex = options.findIndex((o: any) => o.key === correct)
-      const percentages = simulatePublicVote(correctIndex >= 0 ? correctIndex : 0)
-      const sum = percentages.reduce((a, b) => a + b, 0)
-      effectData = {
-        percentages,
-        sumCheck: sum,
-        voteDistribution: percentages.map((pct, idx) => ({
-          optionKey: options[idx]?.key || ['A', 'B', 'C', 'D'][idx],
-          percentage: pct,
-        })),
-      }
-    } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
-      // Congelar tempo: +15 segundos autorizados
-      const now = Date.now()
-      const bonusSeconds = 15
-      effectData = {
-        bonusSeconds,
-        freezeGrantedAt: now,
-        expiresAt: now + bonusSeconds * 1000,
-      }
-
-      // Se for um duelo 1v1, estender o deadline de resposta no servidor
-      if (duelId && typeof duelId === 'string') {
-        try {
-          const duelRef = db.collection('duels').doc(duelId)
-          await db.runTransaction(async (t: any) => {
-            const dSnap = await t.get(duelRef)
-            if (dSnap.exists) {
-              const dData = dSnap.data()
-              const isPlayerA = dData?.playerA?.uid === userId
-              const isPlayerB = dData?.playerB?.uid === userId
-              const targetKey = isPlayerA ? 'playerA' : isPlayerB ? 'playerB' : null
-              if (targetKey) {
-                const currentDeadline = Number(dData?.[targetKey]?.questionDeadline || (now + 60000))
-                const newDeadline = currentDeadline + (bonusSeconds * 1000)
-                t.update(duelRef, {
-                  [`${targetKey}.questionDeadline`]: newDeadline,
-                  [`${targetKey}.isFrozen`]: true,
-                  [`${targetKey}.frozenAt`]: now,
-                  updatedAt: FieldValue.serverTimestamp(),
-                })
-              }
+    // Se for um duelo 1v1 e a ajuda for congelar tempo, estender o deadline de resposta no servidor
+    if ((aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) && duelId && typeof duelId === 'string') {
+      try {
+        const bonusSeconds = 15
+        const now = Date.now()
+        const duelRef = db.collection('duels').doc(duelId)
+        await db.runTransaction(async (t: any) => {
+          const dSnap = await t.get(duelRef)
+          if (dSnap.exists) {
+            const dData = dSnap.data()
+            const isPlayerA = dData?.playerA?.uid === userId
+            const isPlayerB = dData?.playerB?.uid === userId
+            const targetKey = isPlayerA ? 'playerA' : isPlayerB ? 'playerB' : null
+            if (targetKey) {
+              const currentDeadline = Number(dData?.[targetKey]?.questionDeadline || (now + 60000))
+              const newDeadline = currentDeadline + (bonusSeconds * 1000)
+              t.update(duelRef, {
+                [`${targetKey}.questionDeadline`]: newDeadline,
+                [`${targetKey}.isFrozen`]: true,
+                [`${targetKey}.frozenAt`]: now,
+                updatedAt: FieldValue.serverTimestamp(),
+              })
             }
-          })
-        } catch (syncErr) {
-          console.warn('[AID_CONSUME_DUEL_FREEZE_SYNC_WARN]', syncErr)
-        }
-      }
-    } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
-      // Pista inteligente
-      const clue = generateQuestionClue({
-        question: questionData?.prompt || '',
-        explanation: questionData?.explanation || '',
-        category: questionData?.category || '',
-        district: questionData?.district || '',
-        city: questionData?.city || '',
-      })
-      effectData = {
-        clue,
-      }
-    } else if (aidRule.id === 'AID_005' || aidRule.id === 'aid_second_chance') {
-      effectData = {
-        secondChanceGranted: true,
-        maxRetries: 1,
-      }
-    } else if (aidRule.id === 'AID_006' || aidRule.id === 'aid_triple_elimination') {
-      const options = questionData?.options || []
-      const correct = String(questionData?.correct || 'A').toUpperCase()
-      const wrongKeys = options.filter((o: any) => o.key !== correct).map((o: any) => o.key)
-      const eliminated = wrongKeys.slice(0, 3)
-      effectData = {
-        eliminatedOptions: eliminated,
-      }
-    } else if (aidRule.id === 'AID_007' || aidRule.id === 'aid_fast_answer') {
-      effectData = {
-        bonusSeconds: 5,
-        noPenalty: true,
+          }
+        })
+      } catch (syncErr) {
+        console.warn('[AID_CONSUME_DUEL_FREEZE_SYNC_WARN]', syncErr)
       }
     }
 

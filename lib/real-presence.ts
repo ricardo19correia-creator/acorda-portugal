@@ -13,6 +13,7 @@ export interface RealPlayerPresence {
   online: boolean
   level?: number
   title?: string
+  equippedFrame?: string
 }
 
 export interface RealCommunityState {
@@ -58,6 +59,11 @@ export async function sendRealHeartbeat(
     const photoURL = profile?.photoURL || user.photoURL || null
     const level = typeof profile?.level === 'number' && profile.level > 0 ? profile.level : 1
     const title = profile?.equippedTitle || 'Patriota'
+    const equippedFrame =
+      (profile as any)?.equippedFrame ||
+      (profile as any)?.equipped?.frameId ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
+      undefined
 
     const payload: RealPlayerPresence = {
       userId: user.uid,
@@ -69,6 +75,7 @@ export async function sendRealHeartbeat(
       online: true,
       level,
       title,
+      ...(equippedFrame ? { equippedFrame } : {}),
     }
 
     await setDoc(presenceRef, {
@@ -134,6 +141,7 @@ export function filterActiveRealPlayers(
         online: true,
         level: typeof d.level === 'number' ? d.level : 1,
         title: d.title || 'Patriota',
+        equippedFrame: d.equippedFrame || undefined,
       }
 
       activeMap.set(player.userId, player)

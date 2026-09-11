@@ -103,7 +103,8 @@ export function DistrictWarLeaderboardWidget({
                           src={t.king.photoURL}
                           alt={t.king.displayName}
                           size="xs"
-                          className="w-5 h-5 ring-1 ring-white/20"
+                          activeFrame={t.king.equippedFrame}
+                          className="w-5 h-5"
                         />
                       </div>
                     )}

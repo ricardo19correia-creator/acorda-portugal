@@ -92,6 +92,8 @@ export interface DuelPlayerData {
   elo?: number
   rating?: number
   accuracy?: number
+  equippedFrame?: string | null
+  frameId?: string | null
 }
 
 export interface DuelQuestion {
@@ -290,6 +292,11 @@ export async function findOrCreateMatchmakingRoom(
     answers: [],
     finished: false,
     finishedAt: null,
+    equippedFrame:
+      (profile as any)?.equippedFrame ||
+      (profile as any)?.equipped?.frameId ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
+      'default',
   }
 
   console.log('[Matchmaking] A procurar sala para:', user.uid, `(${playerName}, Nível ${playerLevel})`)
@@ -507,6 +514,11 @@ export async function checkAndJoinWaitingRoom(
     answers: [],
     finished: false,
     finishedAt: null,
+    equippedFrame:
+      (profile as any)?.equippedFrame ||
+      (profile as any)?.equipped?.frameId ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
+      'default',
   }
 
   try {
@@ -847,6 +859,11 @@ export async function createDuelRoom(
     answers: [],
     finished: false,
     finishedAt: null,
+    equippedFrame:
+      (profile as any)?.equippedFrame ||
+      (profile as any)?.equipped?.frameId ||
+      (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
+      'default',
   }
 
   const duelDoc: DuelDocument = {

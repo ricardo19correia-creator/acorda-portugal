@@ -240,7 +240,48 @@ export async function consumeGameAid({
     }
   }
 
-  // 1. Obter Token Bearer de Autenticação do Firebase se disponível
+  // Helper local de cálculo determinístico do efeito para gameplay ininterrupto
+  const computeLocalEffect = () => {
+    let effect: any = {}
+    if (aidType === '5050' && questionData?.options && questionData.correct) {
+      const eliminated = calculate5050Eliminated(
+        questionData.options as any,
+        questionData.correct as any
+      )
+      effect = { eliminatedOptions: eliminated }
+    } else if (aidType === 'publicVote' && questionData?.options && questionData.correct) {
+      const correctIdx = questionData.options.findIndex((o) => o.key === questionData.correct)
+      const percentages = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
+      effect = {
+        percentages,
+        voteDistribution: percentages.map((pct, idx) => ({
+          optionKey: questionData.options?.[idx]?.key || ['A', 'B', 'C', 'D'][idx],
+          percentage: pct,
+        })),
+      }
+    } else if (aidType === 'freeze') {
+      effect = { bonusSeconds: 15 }
+    }
+    return effect
+  }
+
+  // 1. Suporte imediato para Utilizadores Convidados / Anónimos
+  const isGuest = !userId || userId.startsWith('guest_') || userId.startsWith('anon_') || userId === 'guest'
+  if (isGuest) {
+    const remainingStock = Math.max(0, currentStock - 1)
+    if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
+    else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
+    else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+
+    return {
+      success: true,
+      remainingStock,
+      effect: computeLocalEffect(),
+      message: `«${aidMeta.shortName}» utilizada com sucesso!`,
+    }
+  }
+
+  // 2. Obter Token Bearer de Autenticação do Firebase se disponível
   let idToken: string | null = null
   try {
     if (auth?.currentUser) {
@@ -250,7 +291,7 @@ export async function consumeGameAid({
     console.warn('[consumeGameAid] Falha ao obter token:', tErr)
   }
 
-  // 2. Tentativa Autoritativa no Servidor (/api/shop/aid/consume)
+  // 3. Tentativa Autoritativa no Servidor (/api/shop/aid/consume)
   try {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -284,12 +325,28 @@ export async function consumeGameAid({
       return {
         success: true,
         remainingStock,
-        effect: data.effect,
+        effect: data.effect || computeLocalEffect(),
         message: data.message || `«${aidMeta.shortName}» utilizada com sucesso!`,
       }
     }
 
-    // Se o servidor respondeu com erro explícito de stock ou utilizador
+    // Se for modo solo e a API falhar, não bloquear o utilizador
+    if (gameMode === 'solo') {
+      console.warn('[consumeGameAid] Servidor devolveu erro em modo solo, aplicando fallback resiliente:', data.error)
+      const remainingStock = Math.max(0, currentStock - 1)
+      if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
+      else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
+      else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+
+      return {
+        success: true,
+        remainingStock,
+        effect: computeLocalEffect(),
+        message: `«${aidMeta.shortName}» utilizada com sucesso!`,
+      }
+    }
+
+    // Se o servidor respondeu com erro explícito de stock ou utilizador no modo multiplayer
     if (data.error && !res.ok && res.status !== 404 && res.status !== 500) {
       return {
         success: false,
@@ -301,7 +358,7 @@ export async function consumeGameAid({
     console.warn('[consumeGameAid] Servidor inacessível, a acionar fallback transacional do cliente:', apiErr)
   }
 
-  // 3. Fallback de Contingência Direto no Firestore (Offline ou Token Pendente)
+  // 4. Fallback de Contingência Direto no Firestore (Offline ou Token Pendente)
   try {
     const fallbackId =
       aidType === '5050'
@@ -326,35 +383,26 @@ export async function consumeGameAid({
         )
       }
 
-      // Calcular efeito localmente
-      let effect: any = {}
-      if (aidType === '5050' && questionData?.options && questionData.correct) {
-        const eliminated = calculate5050Eliminated(
-          questionData.options as any,
-          questionData.correct as any
-        )
-        effect = { eliminatedOptions: eliminated }
-      } else if (aidType === 'publicVote' && questionData?.options && questionData.correct) {
-        const correctIdx = questionData.options.findIndex((o) => o.key === questionData.correct)
-        const percentages = simulatePublicVote(correctIdx >= 0 ? correctIdx : 0)
-        effect = {
-          percentages,
-          voteDistribution: percentages.map((pct, idx) => ({
-            optionKey: questionData.options?.[idx]?.key || ['A', 'B', 'C', 'D'][idx],
-            percentage: pct,
-          })),
-        }
-      } else if (aidType === 'freeze') {
-        effect = { bonusSeconds: 15 }
-      }
-
       return {
         success: true,
         remainingStock,
-        effect,
+        effect: computeLocalEffect(),
         message: `«${aidMeta.shortName}» utilizada com sucesso!`,
       }
     } else {
+      if (gameMode === 'solo') {
+        const remainingStock = Math.max(0, currentStock - 1)
+        if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
+        else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
+        else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+
+        return {
+          success: true,
+          remainingStock,
+          effect: computeLocalEffect(),
+          message: `«${aidMeta.shortName}» utilizada com sucesso!`,
+        }
+      }
       return {
         success: false,
         remainingStock: currentStock,
@@ -362,7 +410,20 @@ export async function consumeGameAid({
       }
     }
   } catch (err: any) {
-    console.error('[consumeGameAid] Erro fatal:', err)
+    console.error('[consumeGameAid] Erro no fallback do Firestore:', err)
+    if (gameMode === 'solo') {
+      const remainingStock = Math.max(0, currentStock - 1)
+      if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
+      else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
+      else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+
+      return {
+        success: true,
+        remainingStock,
+        effect: computeLocalEffect(),
+        message: `«${aidMeta.shortName}» utilizada com sucesso!`,
+      }
+    }
     return {
       success: false,
       remainingStock: currentStock,

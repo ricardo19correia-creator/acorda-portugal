@@ -495,28 +495,56 @@ export default function VipShopSection({
               }`}
             >
               <div>
-                {/* Cabeçalho do Card: Badge de Raridade com Gradiente Vibrante */}
+                {/* Cabeçalho do Card: Badge de Categoria e Raridade */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span
-                    className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${rarityStyle.badge}`}
-                  >
-                    {product.rarityBadge || product.prestigeTier || rarityStyle.label}
-                  </span>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    {/* Crachá evidente de Categoria VIP */}
+                    <span className="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-wider bg-slate-800/90 text-amber-300 border border-amber-500/30 flex items-center gap-1 shadow-sm">
+                      {product.category === 'frame'
+                        ? '🖼️ MOLDURA'
+                        : product.category === 'avatar'
+                        ? '👤 AVATAR'
+                        : product.category === 'arena'
+                        ? '🏟️ ARENA'
+                        : product.category === 'title'
+                        ? '👑 TÍTULO'
+                        : product.category === 'tauntpack'
+                        ? '💬 PROVOCAÇÕES'
+                        : '💎 PACOTE'}
+                    </span>
+                    <span
+                      className={`px-2.5 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-wider ${rarityStyle.badge}`}
+                    >
+                      {product.rarityBadge || product.prestigeTier || rarityStyle.label}
+                    </span>
+                  </div>
+
                   {product.isLimited && product.limitedUnits && (
-                    <span className="text-[10px] font-black text-rose-400 uppercase tracking-wider bg-rose-950/60 px-2 py-0.5 rounded-md border border-rose-800/50">
-                      ED. LIMITADA · {product.limitedUnits} UN.
+                    <span className="text-[9px] font-black text-rose-400 uppercase tracking-wider bg-rose-950/60 px-2 py-0.5 rounded-md border border-rose-800/50 shrink-0">
+                      {product.limitedUnits} UN.
                     </span>
                   )}
                 </div>
 
-                {/* SHOWCASE VISUAL MASTER (SEM PLACEHOLDER PRETO) */}
+                {/* SHOWCASE VISUAL MASTER */}
                 <div className="relative w-full h-48 rounded-2xl bg-gradient-to-b from-slate-950 to-slate-900/90 border border-white/10 flex items-center justify-center p-3 mb-4 overflow-hidden group-hover:border-amber-500/30 transition-all shadow-inner">
                   {/* Aura luminescente dinâmica de fundo */}
-                  <div className={`pointer-events-none absolute inset-0 opacity-20 blur-xl bg-gradient-to-b ${rarityStyle.glow} group-hover:opacity-45 transition-all`} />
+                  <div className={`pointer-events-none absolute inset-0 opacity-15 blur-xl bg-gradient-to-b ${rarityStyle.glow} group-hover:opacity-35 transition-all`} />
 
-                  {/* Componente seguro de imagem com fallback elegante */}
+                  {/* Componente de Imagem ou Avatar com Moldura Aplicada */}
                   <div className="relative w-full h-full flex items-center justify-center">
-                    <VipCardImage item={product} />
+                    {product.category === 'frame' ? (
+                      <div className="w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                        <UserAvatar
+                          avatarUrl={equippedAvatar}
+                          activeFrame={product.id}
+                          size="lg"
+                          showBadge={false}
+                        />
+                      </div>
+                    ) : (
+                      <VipCardImage item={product} />
+                    )}
                   </div>
 
                   {/* Badges de Edição Limitada / Bundles */}
@@ -750,6 +778,15 @@ export default function VipShopSection({
                   showBadge={false}
                   className="w-full h-full"
                 />
+              ) : inspectingProduct.category === 'frame' ? (
+                <div className="w-36 h-36 sm:w-40 sm:h-40 flex items-center justify-center">
+                  <UserAvatar
+                    avatarUrl={equippedAvatar}
+                    activeFrame={inspectingProduct.id}
+                    size="xl"
+                    showBadge={false}
+                  />
+                </div>
               ) : (
                 <VipCardImage item={inspectingProduct} />
               )}

@@ -10,6 +10,7 @@ import {
   filterActiveRealPlayers,
 } from '@/lib/real-presence'
 import { LivePlayersModal } from '@/components/live-players-modal'
+import { UserAvatar } from '@/components/ui/UserAvatar'
 import { ArrowRight, Flame, Swords, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -146,13 +147,13 @@ export function LiveOnlineCard() {
                       className="relative inline-block transition-transform duration-200 hover:scale-110 hover:z-20 cursor-pointer"
                       onClick={() => setIsModalOpen(true)}
                     >
-                      <img
-                        src={player.photoURL || '/images/avatars/avatar_01.png'}
+                      <UserAvatar
+                        src={player.photoURL}
                         alt={player.displayName}
-                        className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border-2 border-slate-900 bg-slate-800 shadow-md ring-1 ring-emerald-500/30"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/images/avatars/avatar_01.png'
-                        }}
+                        activeFrame={player.equippedFrame}
+                        size="sm"
+                        showBadge={false}
+                        className="shadow-md"
                       />
                     </div>
                   ))}

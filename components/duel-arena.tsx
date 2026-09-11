@@ -496,12 +496,16 @@ export function DuelArena({
     requestPreview: handleRequestAidPreview,
     cancelPreview: handleCancelAidPreview,
     confirmUseAid: handleConfirmUseAid,
+    executeUseAid,
     resetQuestionAids,
   } = useGameAids({
     gameMode: 'duel',
     duelId: duel?.id,
     currentQuestion,
     disabled: feedback !== null || isSubmitting || timeLeft <= 0,
+    onFreezeApplied: (bonus) => {
+      setTimeLeft((prev) => Math.min(QUESTION_TIME_LIMIT + 15, prev + bonus))
+    },
   })
 
   // 2. Transição local quando o jogador avança de pergunta
@@ -520,10 +524,10 @@ export function DuelArena({
     }
   }, [currentQIndex, isFinishedForMe, resetQuestionAids])
 
-  // Handlers legados / atalhos diretos
-  const handleUse5050 = () => handleRequestAidPreview('5050')
-  const handleUseFreeze = () => handleRequestAidPreview('freeze')
-  const handleUsePublicVote = () => handleRequestAidPreview('publicVote')
+  // Handlers legados / atalhos diretos com execução imediata
+  const handleUse5050 = () => executeUseAid('5050')
+  const handleUseFreeze = () => executeUseAid('freeze')
+  const handleUsePublicVote = () => executeUseAid('publicVote')
 
   const handleUseClue = async () => {
     if (feedback !== null || isSubmitting || activeClue !== null || !currentQuestion) return
@@ -1036,6 +1040,8 @@ export function DuelArena({
                       displayName={me?.displayName || 'Tu'}
                       isCurrentUser={true}
                       size="sm"
+                      activeFrame={me?.equippedFrame || (profile as any)?.equippedFrame}
+                      showBadge={false}
                     />
                     {playerReaction && (
                       <ProvocationBubble
@@ -1106,6 +1112,8 @@ export function DuelArena({
                       displayName={opponent?.displayName || 'Adversário'}
                       isCurrentUser={false}
                       size="sm"
+                      activeFrame={opponent?.equippedFrame || (opponent as any)?.frameId}
+                      showBadge={false}
                     />
                     {opponentReaction && (
                       <ProvocationBubble
@@ -1303,7 +1311,6 @@ export function DuelArena({
                 onUsePublicVote={handleUsePublicVote}
                 onUseClue={handleUseClue}
                 onUseFreeze={handleUseFreeze}
-                onRequestPreview={handleRequestAidPreview}
               />
             </div>
           </div>
@@ -1480,6 +1487,8 @@ export function DuelArena({
                 displayName={duel.playerA?.displayName || 'Jogador'}
                 isCurrentUser={duel.playerA?.uid === currentPlayer.uid}
                 size="xl"
+                activeFrame={duel.playerA?.equippedFrame || (duel.playerA?.uid === currentPlayer.uid ? (profile as any)?.equippedFrame : undefined)}
+                showBadge={false}
               />
               {duel.winnerUid === duel.playerA?.uid && (
                 <Crown className="absolute -top-3.5 -right-2.5 h-7 w-7 text-gold fill-current drop-shadow-lg animate-bounce" />
@@ -1508,6 +1517,8 @@ export function DuelArena({
                 displayName={duel.playerB?.displayName || 'Adversário'}
                 isCurrentUser={duel.playerB?.uid === currentPlayer.uid}
                 size="xl"
+                activeFrame={duel.playerB?.equippedFrame || (duel.playerB?.uid === currentPlayer.uid ? (profile as any)?.equippedFrame : undefined)}
+                showBadge={false}
               />
               {duel.winnerUid === duel.playerB?.uid && (
                 <Crown className="absolute -top-3.5 -right-2.5 h-7 w-7 text-gold fill-current drop-shadow-lg animate-bounce" />
