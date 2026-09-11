@@ -20,6 +20,7 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { CreatorsHero } from '@/components/creators/CreatorsHero'
 import { CreatorsSidebar } from '@/components/creators/CreatorsSidebar'
+import { GuzmaniaSection } from '@/components/guzmania-section'
 import { VALID_DISTRICTS } from '@/data/districts'
 import { Heart, MessageSquare, Send, PenSquare, Search, Sparkles, Clock } from 'lucide-react'
 import { formatPostDate, getFullFormattedDate, type CommunityPost, type PublicacaoComunidade } from '@/types/community'
@@ -566,6 +567,11 @@ export default function CriadoresPage() {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Símbolo do Desafio Nacional preservado na área de Criadores/Comunidade */}
+          <div className="mt-12">
+            <GuzmaniaSection />
           </div>
         </main>
 

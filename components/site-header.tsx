@@ -60,7 +60,7 @@ export function SiteHeader() {
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Mapa', href: '/portugal-mapa', icon: Flag },
+    { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Criadores', href: '/criadores', icon: Sparkles },
@@ -69,17 +69,15 @@ export function SiteHeader() {
   ]
 
   const MOBILE_NAV = [
-    { label: 'Jogar Agora', href: '/jogar', icon: Gamepad2 },
-    { label: '🗺️ Mapa de Portugal 3D', href: '/portugal-mapa', icon: Flag },
-    { label: '🏆 Ranking Nacional & Distritos', href: '/rankings', icon: Trophy },
-    { label: '🛒 Loja Oficial', href: '/loja', icon: ShoppingBag },
-    { label: '📱 Descarregar App Android', href: '/download', icon: Smartphone },
-    { label: '🇵🇹 Os Criadores (Comunidade)', href: '/criadores', icon: Sparkles },
-    { label: 'Explorar o Desafio', href: '/explorar', icon: Sparkles },
-    { label: 'Categorias de Quiz', href: '/categorias', icon: LayoutGrid },
-    { label: 'Eventos em Direto', href: '/eventos', icon: Flame },
-    { label: 'Central de Ajuda', href: '/ajuda', icon: HelpCircle },
-    { label: 'O Meu Perfil', href: '/perfil', icon: User },
+    { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
+    { label: 'Meu Distrito', href: '/meu-distrito', icon: Flag },
+    { label: 'Mapa', href: '/mapa', icon: Flag },
+    { label: 'Rankings', href: '/rankings', icon: Trophy },
+    { label: 'Loja', href: '/loja', icon: ShoppingBag },
+    { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
+    { label: 'Criadores', href: '/criadores', icon: Sparkles },
+    { label: 'App', href: '/download', icon: Smartphone },
+    { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
   const [scrolled, setScrolled] = useState(false)
@@ -114,7 +112,7 @@ export function SiteHeader() {
       }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-        {/* Esquerda: Brand Logo (Oculta subtítulos longos no mobile para evitar sobreposição) */}
+        {/* Esquerda: Brand Logo */}
         <div className="flex items-center min-w-0 shrink">
           <Link
             href="/"
@@ -125,21 +123,6 @@ export function SiteHeader() {
             <BrandLogo />
           </Link>
         </div>
-
-        {/* Centro: Badge Global de Saldo de Moedas (€ Acorda) com shrink-0 */}
-        <Link
-          href="/loja"
-          title="O teu Saldo de € Acorda - Clica para abrir a Loja"
-          className={cn(
-            'flex items-center gap-1 sm:gap-1.5 rounded-full border px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-xs sm:text-sm font-black transition-all cursor-pointer shadow-sm active:scale-95 shrink-0 select-none',
-            isBalancePulsing
-              ? 'border-emerald-400 bg-emerald-500/30 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.8)] scale-105 ring-2 ring-emerald-400/50'
-              : 'border-emerald-500/40 bg-emerald-950/80 text-emerald-300 hover:border-emerald-400 hover:bg-emerald-900/60 hover:shadow-[0_0_12px_rgba(16,185,129,0.35)]',
-          )}
-        >
-          <span className="font-extrabold text-emerald-400">€</span>
-          <span className="tabular-nums tracking-wide">{formattedCoins}</span>
-        </Link>
 
         {/* Desktop Navigation (lg+) */}
         <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">
@@ -159,13 +142,46 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop Controls (lg+) */}
+        {/* Desktop Controls (lg+): Moedas discretas + Perfil/Login + Botão Jogar */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {/* Indicador Elegante e Discreto de Saldo */}
+          <Link
+            href="/loja"
+            title="O teu Saldo de € Acorda - Clica para abrir a Loja"
+            className={cn(
+              'flex items-center gap-1 rounded-xl border px-2.5 py-1 text-xs font-bold transition-all cursor-pointer select-none',
+              isBalancePulsing
+                ? 'border-emerald-400 bg-emerald-500/20 text-emerald-200'
+                : 'border-emerald-500/30 bg-emerald-950/50 text-emerald-400 hover:border-emerald-400 hover:bg-emerald-900/40',
+            )}
+          >
+            <span className="font-extrabold text-emerald-400">€</span>
+            <span className="tabular-nums font-mono">{formattedCoins}</span>
+          </Link>
+
+          {!user && (
+            <Link
+              href="/entrar"
+              className="text-xs font-bold text-slate-300 hover:text-emerald-400 transition-colors px-2 py-1"
+            >
+              Entrar
+            </Link>
+          )}
+
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </div>
 
-        {/* Mobile / Tablet Controls (< lg): Botão Hambúrguer sempre visível */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 lg:hidden">
+        {/* Mobile / Tablet Controls (< lg): Moedas discretas + Botão Hambúrguer */}
+        <div className="flex items-center gap-2 shrink-0 lg:hidden">
+          {/* Indicador Discreto no Mobile */}
+          <Link
+            href="/loja"
+            title="O teu Saldo de € Acorda"
+            className="flex items-center gap-1 rounded-xl border border-emerald-500/30 bg-emerald-950/60 px-2 py-1 text-xs font-bold text-emerald-400"
+          >
+            <span className="font-extrabold text-emerald-400">€</span>
+            <span className="tabular-nums font-mono text-[11px]">{formattedCoins}</span>
+          </Link>
 
           {/* Botão Hambúrguer (Mobile) */}
           <button

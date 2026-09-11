@@ -416,21 +416,23 @@ export function GameHub() {
         </div>
       </div>
 
+
       {/* ========================================================= */}
-      {/* PILAR 1: PRINCIPAIS // 🏆 DESAFIO NACIONAL (FLAGSHIP HERO) */}
+      {/* 1. PRINCIPAL // 🏆 JOGAR AGORA, ⚔️ DUELO 1v1, 📍 MEU DISTRITO */}
       {/* ========================================================= */}
-      <section aria-labelledby="heading-principais" className="mt-8">
+      <section aria-labelledby="heading-principal" className="mt-8">
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-gold animate-ping" />
-            <h2 id="heading-principais" className="font-display text-xs font-black uppercase tracking-widest text-gold">
-              1. Pilares Principais // Competição Nacional
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <h2 id="heading-principal" className="font-display text-xs font-black uppercase tracking-widest text-emerald-400">
+              1. Modos Principais // Ação Imediata &amp; Competição
             </h2>
           </div>
-          <span className="text-[0.7rem] font-bold text-muted-foreground">Classificação Geral de Portugal</span>
+          <span className="text-[0.7rem] font-bold text-muted-foreground">Competição Geral, PvP &amp; Território</span>
         </div>
 
-        <div className="relative overflow-hidden rounded-4xl border-2 border-gold/50 bg-gradient-to-br from-card/95 via-card/85 to-gold/15 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl transition-all duration-300 hover:border-gold">
+        {/* MODO 1: 🏆 JOGAR AGORA (DESAFIO NACIONAL) */}
+        <div className="relative overflow-hidden rounded-4xl border-2 border-gold/50 bg-gradient-to-br from-card/95 via-card/85 to-gold/15 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl transition-all duration-300 hover:border-gold mb-6">
           <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-gold/15 blur-3xl animate-pulse-glow" />
           <div className="pointer-events-none absolute -left-12 -bottom-12 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
 
@@ -438,67 +440,88 @@ export function GameHub() {
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-3 py-1 text-[0.68rem] font-black uppercase tracking-widest text-gold">
                 <Trophy className="h-3.5 w-3.5" />
-                Modo Oficial N.º 1 de Portugal
+                Modo Rápido • Conhecimento Geral
               </div>
 
               <h3 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-foreground">
-                🏆 Desafio Nacional
+                🏆 Jogar Agora
               </h3>
               <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
                 A grande prova do conhecimento luso. 10 perguntas sorteadas e rigorosamente balanceadas por todas as categorias oficiais do país. O teu resultado define a tua posição no Ranking Nacional.
               </p>
 
-              {/* 4 Atributos Mandatórios */}
               <ModeSpecs
                 whatIs="A principal competição nacional de conhecimento de Portugal."
                 againstWhom="Todos os jogadores de Portugal e da diáspora no Ranking Geral."
-                questionsType="10 perguntas balanceadas de todas as 18 categorias oficiais."
+                questionsType="10 perguntas balanceadas de conhecimento geral nacional."
                 rewards="+300 XP Base, €75 Acorda e pontuação direta para a Tabela Nacional Top 50."
               />
             </div>
 
-            {/* Launch Button */}
             <div className="flex flex-col items-center gap-3 shrink-0 self-start lg:self-auto w-full sm:w-auto">
               <button
                 onClick={() => handleLaunchGame({ categorySlug: 'desafio-nacional' })}
                 className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-gold via-amber-400 to-amber-500 px-8 py-5 font-display text-lg sm:text-xl font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-gold/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer w-full sm:w-auto"
               >
                 <Play className="h-6 w-6 fill-current transition-transform group-hover:scale-110" />
-                <span>Jogar Desafio Nacional</span>
+                <span>Jogar Agora</span>
               </button>
               <span className="text-[0.7rem] text-muted-foreground font-bold">
-                10 Perguntas • Cronómetro Oficial • Todas as Categorias
+                10 Perguntas • Cronómetro Oficial • 60s
               </span>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ========================================================= */}
-      {/* PILAR 2: TERRITÓRIO // 📍 CONQUISTA DO DISTRITO vs 🏙️ DESAFIO DA CIDADE */}
-      {/* ========================================================= */}
-      <section aria-labelledby="heading-territorio" className="mt-10">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
-            <h2 id="heading-territorio" className="font-display text-xs font-black uppercase tracking-widest text-emerald-400">
-              2. Território // Conquista Distrital &amp; Competição Local
-            </h2>
-          </div>
-          <span className="text-[0.7rem] font-bold text-muted-foreground">Guerra Territorial vs Municipal</span>
-        </div>
-
+        {/* MODOS 2 E 3: ⚔️ DUELO 1V1 E 📍 MEU DISTRITO */}
         <div className="grid gap-6 md:grid-cols-2">
-          {/* CARD A: 📍 CONQUISTA DO DISTRITO */}
-          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-card/90 via-card/80 to-primary/10 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-primary">
+          {/* MODO 2: ⚔️ DUELO 1V1 */}
+          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-purple-500/40 bg-gradient-to-br from-card/90 via-card/80 to-purple-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-purple-400">
             <div>
               <div className="flex items-center justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/20 text-primary ring-1 ring-primary/40">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-500/20 text-purple-400 ring-1 ring-purple-500/40">
+                  <Swords className="h-6 w-6" />
+                </div>
+                <span className="rounded-full bg-purple-500/20 border border-purple-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-purple-300">
+                  ⚔️ Matchmaking 1v1
+                </span>
+              </div>
+
+              <h3 className="mt-4 font-display text-2xl font-black uppercase text-foreground">
+                ⚔️ Duelo 1v1
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                Confronto direto contra outro jogador em tempo real. As mesmas perguntas, o mesmo tempo. Quem acertar melhor e mais rápido sobe no ranking Elo competitivo.
+              </p>
+
+              <ModeSpecs
+                whatIs="Duelo PvP direto em tempo real com contagem decrescente."
+                againstWhom="Adversário humano emparelhado pelo teu nível e Elo."
+                questionsType="Perguntas rápidas e idênticas para ambos os jogadores."
+                rewards="+300 XP ao vencedor, Troféus de Duelo e subida de Divisão Elo."
+              />
+            </div>
+
+            <button
+              onClick={() => setShowDuelModal(true)}
+              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:brightness-110 shadow-lg shadow-purple-600/30 transition-all cursor-pointer"
+            >
+              <Swords className="h-4 w-4" />
+              <span>Entrar no Duelo 1v1</span>
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+
+          {/* MODO 3: 📍 MEU DISTRITO (ÚNICO MODO TERRITORIAL: DISTRITO + CONCELHO) */}
+          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-br from-card/90 via-card/80 to-cyan-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-cyan-400">
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/40">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-primary">
-                    {userDistrict}
+                  <span className="rounded-full bg-cyan-500/20 border border-cyan-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-cyan-300">
+                    {userDistrict} {userCity ? `• ${userCity}` : ''}
                   </span>
                   <button
                     onClick={() => setShowDistrictModal(true)}
@@ -510,128 +533,114 @@ export function GameHub() {
               </div>
 
               <h3 className="mt-4 font-display text-2xl font-black uppercase text-foreground">
-                📍 Conquista do Distrito
+                📍 Meu Distrito
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Representação territorial oficial. Defende o distrito de <strong className="text-primary font-bold">{userDistrict}</strong>. Os teus pontos somam diretamente à classificação do teu distrito na Guerra dos Distritos.
+                Modo territorial único: representa o distrito de <strong className="text-cyan-400 font-bold">{userDistrict}</strong> e o concelho de <strong className="text-amber-400 font-bold">{userCity}</strong>. Conquista poder territorial e sobe nos rankings distrital e municipal.
               </p>
 
               <ModeSpecs
-                whatIs="Competição territorial por distritos e regiões de Portugal."
-                againstWhom="Jogadores dos outros 19 distritos na Guerra dos Distritos."
+                whatIs="Sistema territorial integrado: Portugal → Distrito → Concelho."
+                againstWhom="Outros 19 distritos e concorrentes municipais da tua terra."
                 questionsType={`Geografia, história, património e concelhos de ${userDistrict}.`}
-                rewards="XP + Moedas + Poder Territorial Direto que sobe o teu distrito no mapa."
+                rewards="XP + Moedas + Poder Territorial e disputa pelo Rei do Distrito."
               />
             </div>
 
-            <button
-              onClick={() => handleLaunchGame({ categorySlug: 'conquista-do-distrito', district: userDistrict })}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/25 transition-all cursor-pointer"
-            >
-              <span>Conquistar por {userDistrict}</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-2">
+              <button
+                onClick={() => handleLaunchGame({ categorySlug: 'conquista-do-distrito', district: userDistrict })}
+                className="flex-1 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-md transition-all cursor-pointer"
+              >
+                <MapPin className="h-4 w-4 fill-current" />
+                <span>Distrito ({userDistrict})</span>
+              </button>
 
-          {/* CARD B: 🏙️ DESAFIO DA CIDADE */}
-          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-br from-card/90 via-card/80 to-cyan-500/10 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-cyan-400">
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/40">
-                  <Building2 className="h-6 w-6" />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-cyan-500/20 border border-cyan-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-cyan-300">
-                    {userCity}
-                  </span>
-                  <button
-                    onClick={() => setShowCityModal(true)}
-                    className="text-[0.68rem] text-muted-foreground hover:text-white underline font-bold cursor-pointer"
-                  >
-                    Mudar
-                  </button>
-                </div>
-              </div>
-
-              <h3 className="mt-4 font-display text-2xl font-black uppercase text-foreground">
-                🏙️ Desafio da Cidade
-              </h3>
-              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Competição exclusivamente local no município de <strong className="text-cyan-400 font-bold">{userCity}</strong>. Testa o teu conhecimento sobre monumentos, ruas e freguesias locais. <span className="text-amber-400 font-semibold">Não contribui para a pontuação distrital.</span>
-              </p>
-
-              <ModeSpecs
-                whatIs="Torneio hiperlocal de conhecimento municipal."
-                againstWhom={`Residentes, vizinhos e profundos conhecedores de ${userCity}.`}
-                questionsType={`Ruas, praças, freguesias, monumentos e história de ${userCity}.`}
-                rewards="XP + Moedas + Posição no Ranking da Cidade (sem alterar o distrito)."
-              />
+              <Link
+                href="/meu-distrito"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-cyan-300 hover:bg-cyan-500/20 transition-all cursor-pointer"
+              >
+                <span>Painel Territorial</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
             </div>
-
-            <button
-              onClick={() => handleLaunchGame({ categorySlug: 'desafio-cidade', city: userCity, district: userDistrict })}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500/20 border border-cyan-500/50 px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition-all cursor-pointer"
-            >
-              <span>Jogar Desafio de {userCity}</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
           </div>
         </div>
       </section>
-
       {/* ========================================================= */}
-      {/* PILAR 3: COMPETIÇÃO // ⚔️ DUELO 1v1 & 🏟️ ARENAS */}
+      {/* 2. MODOS ESPECIAIS // 🤪 MODO MALUCO, 👁️ DESAFIO VISUAL, 🏟️ ARENAS */}
       {/* ========================================================= */}
-      <section aria-labelledby="heading-competicao" className="mt-10">
+      <section aria-labelledby="heading-especiais" className="mt-12">
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-purple-400" />
-            <h2 id="heading-competicao" className="font-display text-xs font-black uppercase tracking-widest text-purple-400">
-              3. Competição Direta // PvP &amp; Cenários Lendários
+            <h2 id="heading-especiais" className="font-display text-xs font-black uppercase tracking-widest text-purple-400">
+              2. Modos Especiais // Humor Absurdo, Visual &amp; Arenas
             </h2>
           </div>
-          <span className="text-[0.7rem] font-bold text-muted-foreground">Tempo Real &amp; Batalhas</span>
+          <span className="text-[0.7rem] font-bold text-muted-foreground">Desafios Alternativos</span>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* CARD A: ⚔️ DUELO 1v1 */}
-          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-purple-500/40 bg-gradient-to-br from-card/90 via-card/80 to-purple-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-purple-400">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* CARD A: 🤪 MODO MALUCO */}
+          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-flag-red/40 bg-gradient-to-br from-card/90 via-card/80 to-flag-red/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-flag-red">
             <div>
               <div className="flex items-center justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-500/20 text-purple-400 ring-1 ring-purple-500/40">
-                  <Swords className="h-6 w-6" />
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-flag-red/20 text-flag-red ring-1 ring-flag-red/40">
+                  <Laugh className="h-6 w-6" />
                 </div>
-                <span className="rounded-full bg-purple-500/20 border border-purple-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-purple-300">
-                  ⚔️ Matchmaking em Direto
+                <span className="rounded-full bg-flag-red/20 border border-flag-red/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-flag-red">
+                  Humor &amp; Caos
                 </span>
               </div>
 
-              <h3 className="mt-4 font-display text-2xl font-black uppercase text-foreground">
-                ⚔️ Duelo 1v1
+              <h3 className="mt-4 font-display text-2xl font-black uppercase text-flag-red">
+                🤪 Modo Maluco
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Confronto direto contra outro jogador. 10 perguntas simultâneas com contagem decrescente, validação no servidor, emotes e taunts de provocação.
+                As perguntas que não deviam existir. Raciocínio absurdo, rasteiras inacreditáveis, humor luso e diversão sem filtros.
               </p>
-
-              <ModeSpecs
-                whatIs="Duelo PvP direto em tempo real com cronómetro de 10s por pergunta."
-                againstWhom="Adversário humano emparelhado pelo teu nível de habilidade e ELO."
-                questionsType="Perguntas rápidas e idênticas para ambos os jogadores."
-                rewards="+300 XP por vitória, Troféus de Duelo e subida no Ranking 1v1."
-              />
             </div>
 
             <button
-              onClick={() => setShowDuelModal(true)}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:brightness-110 shadow-lg shadow-purple-600/30 transition-all cursor-pointer"
+              onClick={() => handleLaunchGame({ categorySlug: 'modo-maluco' })}
+              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-flag-red px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:brightness-110 shadow-lg shadow-flag-red/30 transition-all cursor-pointer"
             >
-              <Swords className="h-4 w-4" />
-              <span>Procurar Adversário 1v1</span>
+              <span>Entrar no Modo Maluco</span>
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
-          {/* CARD B: 🏟️ ARENAS */}
+          {/* CARD B: 👁️ DESAFIO VISUAL */}
+          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-br from-card/90 via-card/80 to-cyan-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-cyan-400">
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/40">
+                  <Eye className="h-6 w-6" />
+                </div>
+                <span className="rounded-full bg-cyan-500/20 border border-cyan-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-cyan-300">
+                  Perguntas com Imagem
+                </span>
+              </div>
+
+              <h3 className="mt-4 font-display text-2xl font-black uppercase text-cyan-300">
+                👁️ Desafio Visual
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                Perguntas baseadas em imagens, mapas históricos, monumentos e pormenores fotográficos de Portugal.
+              </p>
+            </div>
+
+            <button
+              onClick={() => handleLaunchGame({ categorySlug: 'desafio-visual' })}
+              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-cyan-500/30 transition-all cursor-pointer"
+            >
+              <span>Jogar Desafio Visual</span>
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+
+          {/* CARD C: 🏟️ ARENAS DE PORTUGAL */}
           <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-card/90 via-card/80 to-amber-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-amber-400">
             <div>
               <div className="flex items-center justify-between">
@@ -647,31 +656,24 @@ export function GameHub() {
                 🏟️ Arenas de Portugal
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Batalhas em cenários históricos, distritais e futuristas. Desbloqueia novas arenas na loja, equipa o teu palco favorito e ganha bónus visuais exclusivos.
+                Batalhas em cenários históricos, distritais e futuristas com fundos e efeitos únicos.
               </p>
-
-              <ModeSpecs
-                whatIs="Partidas em arenas personalizadas com fundos e efeitos únicos."
-                againstWhom="Líderes de arena e recordistas de cada um dos 43 palcos nacionais."
-                questionsType="Perguntas contextualizadas com o tema e a raridade da Arena ativa."
-                rewards="Multiplicadores de prestígio, títulos honoríficos e insígnias de Arena."
-              />
             </div>
 
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-2">
+            <div className="mt-6 flex items-center gap-2">
               <Link
                 href="/arenas"
-                className="flex-1 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500/20 border border-amber-500/50 px-4 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition-all cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-amber-500/50 bg-amber-500/20 px-3 py-3.5 font-display text-xs font-black uppercase tracking-wider text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition-all cursor-pointer"
               >
                 <Compass className="h-4 w-4" />
-                <span>Explorar as 43 Arenas</span>
+                <span>Explorar Arenas</span>
               </Link>
               <button
                 onClick={() => handleLaunchGame({ categorySlug: 'desafio-nacional', arenaId: selectedArenaId !== 'auto' ? selectedArenaId : undefined })}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:brightness-110 transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-500 px-4 py-3.5 font-display text-xs font-black uppercase tracking-wider text-slate-950 hover:brightness-110 transition-all cursor-pointer"
               >
                 <Play className="h-4 w-4 fill-current" />
-                <span>Combater</span>
+                <span>Jogar</span>
               </button>
             </div>
           </div>
@@ -679,96 +681,8 @@ export function GameHub() {
       </section>
 
       {/* ========================================================= */}
-      {/* PILAR 4: MODOS ESPECIAIS // 🤪 MODO MALUCO & 🎲 MODO ALEATÓRIO */}
       {/* ========================================================= */}
-      <section aria-labelledby="heading-especiais" className="mt-10">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-flag-red" />
-            <h2 id="heading-especiais" className="font-display text-xs font-black uppercase tracking-widest text-flag-red">
-              4. Modos Especiais // Humor Absurdo &amp; Roleta Sem Filtros
-            </h2>
-          </div>
-          <span className="text-[0.7rem] font-bold text-muted-foreground">Diversão &amp; Caos</span>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* CARD A: 🤪 MODO MALUCO */}
-          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-flag-red/40 bg-gradient-to-br from-card/90 via-card/80 to-flag-red/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-flag-red">
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-flag-red/20 text-flag-red ring-1 ring-flag-red/40">
-                  <Laugh className="h-6 w-6" />
-                </div>
-                <span className="rounded-full bg-flag-red/20 border border-flag-red/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-flag-red">
-                  5.000 Perguntas Caóticas
-                </span>
-              </div>
-
-              <h3 className="mt-4 font-display text-2xl font-black uppercase text-flag-red">
-                🤪 Modo Maluco
-              </h3>
-              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                As perguntas que não deviam existir. Raciocínio absurdo, rasteiras inacreditáveis, humor luso e diversão sem filtros.
-              </p>
-
-              <ModeSpecs
-                whatIs="O modo mais divertido e caótico com lógica invertida."
-                againstWhom="Contra ti próprio, armadilhas cómicas e mestres do absurdo."
-                questionsType="Humor absurdo, trocadilhos, cultura pop e rasteiras insanas."
-                rewards="Multiplicador Caos de XP (+200 XP), moedas extras e troféu Maluco."
-              />
-            </div>
-
-            <button
-              onClick={() => handleLaunchGame({ categorySlug: 'modo-maluco' })}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-flag-red px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-white hover:brightness-110 shadow-lg shadow-flag-red/30 transition-all cursor-pointer"
-            >
-              <span>Entrar no Modo Maluco</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-
-          {/* CARD B: 🎲 MODO ALEATÓRIO */}
-          <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-br from-card/90 via-card/80 to-emerald-500/15 p-6 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-emerald-400">
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/40">
-                  <Dices className="h-6 w-6" />
-                </div>
-                <span className="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-emerald-300">
-                  Roleta Total • 100% Imprevisível
-                </span>
-              </div>
-
-              <h3 className="mt-4 font-display text-2xl font-black uppercase text-foreground">
-                🎲 Modo Aleatório
-              </h3>
-              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Zero previsibilidade. Cada pergunta vem de uma categoria e de um nível de dificuldade completamente aleatórios (Fácil a Mestre).
-              </p>
-
-              <ModeSpecs
-                whatIs="Roleta de conhecimento puro sem filtros ou padrões fixos."
-                againstWhom="A comunidade de jogadores versáteis que domina qualquer matéria."
-                questionsType="Qualquer tema oficial de Portugal com dificuldade surpresa a cada ronda."
-                rewards="Bónus da Sorte de XP (+250 XP), moedas virtuais e distintivo Versátil."
-              />
-            </div>
-
-            <button
-              onClick={() => handleLaunchGame({ categorySlug: 'modo-aleatorio' })}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/30 transition-all cursor-pointer"
-            >
-              <span>Girar Roleta Aleatória</span>
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* PILAR 5: CATEGORIAS // 🧠 BANCO DE PERGUNTAS (FILTRO & TREINO) */}
+      {/* 3. CATEGORIAS // 🧠 EXPLORAR CATEGORIAS & BANCO TEMÁTICO */}
       {/* ========================================================= */}
       <section aria-labelledby="heading-categorias" className="mt-12 pt-6 border-t border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -776,14 +690,22 @@ export function GameHub() {
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-blue-400" />
               <h2 id="heading-categorias" className="font-display text-xs font-black uppercase tracking-widest text-blue-400">
-                5. Banco de Perguntas // Exploração &amp; Treino por Categoria
+                3. Categorias // Explorar Categorias &amp; Treino Temático
               </h2>
             </div>
-            <h3 className="mt-1 font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-foreground">
-              Estudo e Domínio Temático
-            </h3>
+            <div className="mt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-foreground">
+                Explorar Categorias
+              </h3>
+              <Link
+                href="/categorias"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/20 transition-colors self-start"
+              >
+                <span>Ver Catálogo Oficial ➔</span>
+              </Link>
+            </div>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-2xl">
-              As categorias abaixo não são modos competitivos isolados — funcionam como <strong>filtros de seleção</strong> do banco oficial de 20.000+ perguntas para treino e estudo específico.
+              Treina temas específicos de Portugal ao Mundo ou entra diretamente no catálogo oficial de categorias.
             </p>
           </div>
 
@@ -890,7 +812,7 @@ export function GameHub() {
       </section>
 
       {/* ========================================================= */}
-      {/* PILAR 6: EVENTOS // 🔥 TEMPORADAS & CAMPEONATOS ESPECIAIS */}
+      {/* 4. EVENTOS // 🔥 TEMPORADAS & CAMPEONATOS ESPECIAIS */}
       {/* ========================================================= */}
       <section aria-labelledby="heading-eventos" className="mt-12 pt-6 border-t border-white/10">
         <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -898,7 +820,7 @@ export function GameHub() {
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-amber-400" />
               <h2 id="heading-eventos" className="font-display text-xs font-black uppercase tracking-widest text-amber-400">
-                6. Eventos // Temporadas &amp; Campeonatos Especiais
+                4. Eventos // Temporadas &amp; Campeonatos Especiais
               </h2>
             </div>
             <h3 className="mt-1 font-display text-2xl font-black uppercase tracking-tight text-foreground">

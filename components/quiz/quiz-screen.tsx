@@ -119,10 +119,10 @@ function resolveCategoryInfo(
     }
   }
   if (cityParam || categorySlug === 'desafio-cidade' || categorySlug === 'cidade') {
-    const cityName = cityParam || 'Cidade'
+    const cityName = cityParam || 'Concelho'
     return {
-      name: `Desafio de ${cityName}`,
-      subtitle: 'Competição Municipal Local',
+      name: `Meu Distrito`,
+      subtitle: `Desafio do Concelho de ${cityName}`,
       emoji: '🏙️',
       special: false,
     }

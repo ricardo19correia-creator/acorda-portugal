@@ -1,23 +1,64 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { Gamepad2, Flag, Trophy, ShoppingBag, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function MobileBottomBar() {
   const pathname = usePathname()
 
+  // Verificar se está em jogo ativo/arena para esconder completamente a barra
+  const [isInArena, setIsInArena] = useState(false)
+
+  useEffect(() => {
+    const checkArena = () => {
+      try {
+        if (typeof window === 'undefined') return
+        const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
+        const isJogo = window.location.pathname.startsWith('/jogo')
+        const isArenaRoute = window.location.pathname.startsWith('/arenas')
+        const search = window.location.search.toLowerCase()
+        const hasQuizParams =
+          search.includes('cat=') ||
+          search.includes('category=') ||
+          search.includes('game=') ||
+          search.includes('theme=') ||
+          search.includes('district=') ||
+          search.includes('city=') ||
+          search.includes('distrito=') ||
+          search.includes('cidade=')
+        const isDueloActive = window.location.pathname.startsWith('/jogar/duelo') && search.includes('id=')
+
+        setIsInArena(Boolean(isMatchClass || isJogo || isArenaRoute || (window.location.pathname === '/jogar' && hasQuizParams) || isDueloActive))
+      } catch {
+        setIsInArena(false)
+      }
+    }
+
+    checkArena()
+    const interval = setInterval(checkArena, 500)
+    window.addEventListener('popstate', checkArena)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('popstate', checkArena)
+    }
+  }, [pathname])
+
+  if (isInArena) {
+    return null
+  }
+
   const NAV_ITEMS = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Mapa', href: '/portugal-mapa', icon: Flag },
+    { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
-  // Se estiver numa rota que já tem navegação específica ou se estiver na raiz
   return (
     <nav
       id="mobile-bottom-dock"
@@ -30,7 +71,10 @@ export function MobileBottomBar() {
       <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-2">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          const isActive =
+            pathname === item.href ||
+            (item.href !== '/' && pathname.startsWith(item.href)) ||
+            (item.href === '/mapa' && pathname.startsWith('/portugal-mapa'))
 
           return (
             <Link

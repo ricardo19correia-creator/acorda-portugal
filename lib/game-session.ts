@@ -114,11 +114,11 @@ export function resolveCategoryMetadata(
   if (slug === 'desafio-nacional' || slug === 'nacional' || slug === 'quick' || slug === 'todos') {
     return { name: 'Desafio Nacional', subtitle: 'Conhecimento Geral de Portugal', emoji: '🇵🇹', special: false }
   }
-  if (slug === 'o-meu-distrito' || slug === 'distrito') {
-    return { name: 'O Meu Distrito', subtitle: 'Conquista Territorial', emoji: '📍', special: false }
+  if (slug === 'o-meu-distrito' || slug === 'distrito' || slug === 'conquista-do-distrito') {
+    return { name: 'Meu Distrito', subtitle: 'Conquista Territorial', emoji: '📍', special: false }
   }
   if (slug === 'desafio-cidade' || slug === 'cidade') {
-    return { name: 'Desafio da Cidade', subtitle: 'Conhecimento Local', emoji: '🏘️', special: false }
+    return { name: 'Meu Distrito', subtitle: 'Desafio Local do Concelho', emoji: '🏘️', special: false }
   }
   if (slug === 'modo-maluco' || slug === 'perguntas-idiotas') {
     return { name: 'Modo Maluco', subtitle: 'Humor & Caos Insano', emoji: '🤪', special: true }

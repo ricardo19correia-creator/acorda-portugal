@@ -1852,7 +1852,7 @@ function PerfilContent() {
                   <p className="text-xs text-slate-400 mt-1">No concelho de <strong>{city || 'Geral'}</strong></p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500">
-                  Desafio da Cidade
+                  Ranking Municipal // Meu Distrito
                 </div>
               </div>
 
@@ -1869,11 +1869,11 @@ function PerfilContent() {
                   <p className="text-xs text-slate-400 mt-1">
                     {districtKing && districtKing === displayName
                       ? '👑 És o Soberano atual deste território!'
-                      : 'Disputa a liderança no Conquista do Distrito'}
+                      : 'Disputa a liderança no Meu Distrito'}
                   </p>
                 </div>
                 <Link
-                  href="/conquista-do-distrito"
+                  href="/meu-distrito"
                   className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] font-bold text-amber-400 hover:text-amber-300 transition-colors flex items-center justify-between"
                 >
                   <span>Batalhar pelo Distrito</span>

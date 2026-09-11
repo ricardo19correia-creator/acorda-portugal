@@ -50,11 +50,13 @@ import { ACTIVE_SEASON_01, HISTORICAL_HALL_OF_FAME, calculateTimeRemaining } fro
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { DISTRICT_CITIES_MAP, type ValidDistrict } from '@/data/districts'
 import { cn } from '@/lib/utils'
 
 export type RankingNavTab =
   | 'nacional'
   | 'distritos'
+  | 'municipios'
   | 'duelos'
   | 'guerra'
   | 'temporada'
@@ -66,7 +68,22 @@ export default function RankingsPage() {
   const { user, profile } = useAuth()
 
   const [activeTab, setActiveTab] = useState<RankingNavTab>('nacional')
-  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => profile?.district || 'Lisboa')
+  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => {
+    if (profile?.district && profile.district.trim() !== '') return profile.district.trim()
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('user_district')
+      if (saved && saved.trim() !== '') return saved.trim()
+    }
+    return 'Aveiro'
+  })
+  const [selectedCity, setSelectedCity] = useState<string>(() => {
+    if ((profile as any)?.city && (profile as any).city.trim() !== '') return (profile as any).city.trim()
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('user_city')
+      if (saved && saved.trim() !== '') return saved.trim()
+    }
+    return 'Aveiro'
+  })
   const [rankingLimit, setRankingLimit] = useState<number>(50)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week' | 'today'>('all')
@@ -116,7 +133,7 @@ export default function RankingsPage() {
   // Subscrição aos Rankings no Firestore
   useEffect(() => {
     setLoading(true)
-    const districtFilter = activeTab === 'distritos' ? selectedDistrict : 'all'
+    const districtFilter = activeTab === 'distritos' || activeTab === 'municipios' ? selectedDistrict : 'all'
     const queryMode = activeTab === 'duelos' ? 'duelos' : 'xp'
 
     const unsubscribe = subscribeRankings(
@@ -136,7 +153,8 @@ export default function RankingsPage() {
           const rating = Math.max(500, Math.round(1000 + (userWins * 25) - (userLosses * 15) + (userXp / 100)))
 
           const matchesDistrict =
-            activeTab !== 'distritos' || userDistrict.toLowerCase() === selectedDistrict.toLowerCase()
+            (activeTab !== 'distritos' && activeTab !== 'municipios') ||
+            userDistrict.toLowerCase() === selectedDistrict.toLowerCase()
 
           if (matchesDistrict) {
             const hasCurrentUser = list.some((p) => p.uid === user.uid)
@@ -414,13 +432,13 @@ export default function RankingsPage() {
             {/* NAVEGAÇÃO PREMIUM DE ABAS */}
             <div className="mt-8 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
               {[
-                { id: 'nacional', label: '🏆 Nacional', desc: 'Classificação Geral' },
-                { id: 'distritos', label: '📍 Distritos', desc: 'Por Território' },
-                { id: 'duelos', label: '⚔️ Duelos 1v1', desc: 'Elo e Divisões' },
+                { id: 'nacional', label: '🏆 Nacional', desc: 'Ranking Geral de Portugal' },
+                { id: 'distritos', label: '📍 Distritos', desc: 'Ranking Territorial' },
+                { id: 'municipios', label: '🏙️ Municípios', desc: 'Ranking Local por Concelho' },
+                { id: 'duelos', label: '⚔️ 1v1', desc: 'Ranking Competitivo Elo' },
                 { id: 'guerra', label: '⚔️ Guerra dos Distritos', desc: 'Domínio Territorial' },
                 { id: 'temporada', label: '🔥 Temporada 01', desc: 'Recompensas & Regras' },
                 { id: 'hall-of-fame', label: '🏛️ Hall of Fame', desc: 'Campeões Históricos' },
-                { id: 'subidas', label: '🚀 Subidas da Semana', desc: 'Maiores Movimentos' },
               ].map((tab) => {
                 const isActive = activeTab === tab.id
                 return (
@@ -621,8 +639,8 @@ export default function RankingsPage() {
             </div>
           )}
 
-          {/* TABELA DE RANKING & PÓDIO (ABAS NACIONAL / DISTRITOS / DUELOS / GUERRA) */}
-          {(activeTab === 'nacional' || activeTab === 'distritos' || activeTab === 'duelos' || activeTab === 'guerra') && (
+          {/* TABELA DE RANKING & PÓDIO (ABAS NACIONAL / DISTRITOS / MUNICÍPIOS / DUELOS / GUERRA) */}
+          {(activeTab === 'nacional' || activeTab === 'distritos' || activeTab === 'municipios' || activeTab === 'duelos' || activeTab === 'guerra') && (
             <div className="mx-auto max-w-5xl px-4 mt-10 sm:px-6 lg:px-8">
               {/* Barra de Pesquisa e Filtros */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-white/10 pb-4">
@@ -638,7 +656,7 @@ export default function RankingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center gap-3 self-end sm:self-auto">
+                <div className="flex items-center gap-3 self-end sm:self-auto flex-wrap">
                   {/* Seletor de Distrito no Modo 'distritos' */}
                   {activeTab === 'distritos' && (
                     <select
@@ -652,6 +670,39 @@ export default function RankingsPage() {
                         </option>
                       ))}
                     </select>
+                  )}
+
+                  {/* Seletor Duplo de Distrito + Concelho no Modo 'municipios' */}
+                  {activeTab === 'municipios' && (
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={selectedDistrict}
+                        onChange={(e) => {
+                          const nextD = e.target.value
+                          setSelectedDistrict(nextD)
+                          const nextC = DISTRICT_CITIES_MAP[nextD as ValidDistrict]?.[0] || nextD
+                          setSelectedCity(nextC)
+                        }}
+                        className="rounded-2xl border border-cyan-500/40 bg-slate-900 px-3.5 py-2 text-xs font-bold text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer"
+                      >
+                        {ALL_DISTRICTS_LIST.map((dist) => (
+                          <option key={dist} value={dist}>
+                            📍 {dist}
+                          </option>
+                        ))}
+                      </select>
+                      <select
+                        value={selectedCity}
+                        onChange={(e) => setSelectedCity(e.target.value)}
+                        className="rounded-2xl border border-amber-500/40 bg-slate-900 px-3.5 py-2 text-xs font-bold text-amber-300 focus:outline-none focus:ring-1 focus:ring-amber-400 cursor-pointer"
+                      >
+                        {(DISTRICT_CITIES_MAP[selectedDistrict as ValidDistrict] || [selectedDistrict]).map((c) => (
+                          <option key={c} value={c}>
+                            🏙️ {c}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   )}
 
                   {/* Limite */}
