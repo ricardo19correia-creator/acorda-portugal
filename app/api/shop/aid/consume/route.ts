@@ -62,35 +62,67 @@ export async function POST(req: NextRequest) {
     const aidDocRef = userRef.collection('aid_inventory').doc(aidRule.id)
 
     // 4. Execução Transacional Atómica de Consumo (Verificação de Stock + Débito)
-    const consumptionResult = await db.runTransaction(async (transaction) => {
+    const consumptionResult = await db.runTransaction(async (transaction: any) => {
       const userSnap = await transaction.get(userRef)
       if (!userSnap.exists) {
         throw new Error('Utilizador não registado no sistema.')
       }
 
       const aidSnap = await transaction.get(aidDocRef)
-      let currentStock = 0
+      const subcollStock = aidSnap.exists ? Number(aidSnap.data()?.quantity || 0) : 0
 
-      if (aidSnap.exists) {
-        currentStock = Number(aidSnap.data()?.quantity || 0)
+      // Fallback abrangente para campos legados e canónicos no documento do utilizador
+      const inv = userSnap.data()?.inventory || {}
+      const cons = userSnap.data()?.consumables || {}
+      let legacyStock = 0
+
+      if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
+        legacyStock = Math.max(
+          Number(inv['AID_002']) || 0,
+          Number(inv['aid_50_50']) || 0,
+          Number(inv['consumable_50_50']) || 0,
+          Number(inv['help5050']) || 0,
+          Number(inv['utilities']?.fiftyFifty) || 0,
+          Number(cons.help5050) || 0
+        )
+      } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
+        legacyStock = Math.max(
+          Number(inv['AID_003']) || 0,
+          Number(inv['aid_public_vote']) || 0,
+          Number(inv['consumable_public_vote']) || 0,
+          Number(inv['HELP_005']) || 0,
+          Number(inv['publicVote']) || 0,
+          Number(inv['utilities']?.publicVote) || 0,
+          Number(cons.publicVote) || 0
+        )
+      } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
+        legacyStock = Math.max(
+          Number(inv['AID_004']) || 0,
+          Number(inv['aid_freeze_time']) || 0,
+          Number(inv['consumable_congelar_tempo']) || 0,
+          Number(inv['freezeTime']) || 0,
+          Number(inv['utilities']?.freezeTime) || 0,
+          Number(cons.freezeTime) || 0
+        )
+      } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
+        legacyStock = Math.max(
+          Number(inv['AID_001']) || 0,
+          Number(inv['aid_hint']) || 0,
+          Number(inv['consumable_pista']) || 0,
+          Number(cons.hints) || 0
+        )
+      } else if (aidRule.id === 'AID_008' || aidRule.id === 'aid_streak_protection' || aidRule.aliases?.includes('consumable_protecao_streak')) {
+        legacyStock = Math.max(
+          Number(inv['AID_008']) || 0,
+          Number(inv['aid_streak_protection']) || 0,
+          Number(inv['consumable_protecao_streak']) || 0,
+          Number(cons.streakProtection) || 0
+        )
       } else {
-        // Fallback para campos legados se ainda não transferidos
-        const inv = userSnap.data()?.inventory || {}
-        if (aidRule.aliases) {
-          for (const alias of aidRule.aliases) {
-            if (typeof inv[alias] === 'number') {
-              currentStock = Math.max(currentStock, inv[alias])
-            }
-          }
-        }
-        if (aidRule.id === 'aid_50_50') {
-          currentStock = Math.max(currentStock, Number(userSnap.data()?.consumables?.help5050 || 0))
-        } else if (aidRule.id === 'aid_public_vote') {
-          currentStock = Math.max(currentStock, Number(userSnap.data()?.consumables?.publicVote || 0))
-        } else if (aidRule.id === 'aid_freeze_time') {
-          currentStock = Math.max(currentStock, Number(userSnap.data()?.consumables?.freezeTime || 0))
-        }
+        legacyStock = Number(inv[aidRule.id]) || 0
       }
+
+      const currentStock = Math.max(subcollStock, legacyStock)
 
       if (currentStock <= 0) {
         throw new Error(`Sem stock disponível de «${aidRule.name}». Adquire unidades na Loja para utilizares.`)
@@ -110,25 +142,49 @@ export async function POST(req: NextRequest) {
         { merge: true }
       )
 
-      // Atualizar campos legados para retrocompatibilidade
+      // Atualizar todos os campos canónicos e legados para retrocompatibilidade
       const updatePayload: Record<string, any> = {
         [`inventory.${aidRule.id}`]: newStock,
         updatedAt: FieldValue.serverTimestamp(),
       }
+      if (aidRule.aliases) {
+        for (const alias of aidRule.aliases) {
+          updatePayload[`inventory.${alias}`] = newStock
+        }
+      }
+
       if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
         updatePayload['consumables.help5050'] = newStock
+        updatePayload['inventory.AID_002'] = newStock
+        updatePayload['inventory.aid_50_50'] = newStock
+        updatePayload['inventory.consumable_50_50'] = newStock
+        updatePayload['inventory.help5050'] = newStock
         updatePayload['inventory.utilities.fiftyFifty'] = newStock
       } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
         updatePayload['consumables.publicVote'] = newStock
+        updatePayload['inventory.AID_003'] = newStock
+        updatePayload['inventory.aid_public_vote'] = newStock
+        updatePayload['inventory.consumable_public_vote'] = newStock
+        updatePayload['inventory.HELP_005'] = newStock
+        updatePayload['inventory.publicVote'] = newStock
         updatePayload['inventory.utilities.publicVote'] = newStock
       } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
         updatePayload['consumables.freezeTime'] = newStock
+        updatePayload['inventory.AID_004'] = newStock
+        updatePayload['inventory.aid_freeze_time'] = newStock
+        updatePayload['inventory.consumable_congelar_tempo'] = newStock
+        updatePayload['inventory.freezeTime'] = newStock
         updatePayload['inventory.utilities.freezeTime'] = newStock
       } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
         updatePayload['consumables.hints'] = newStock
+        updatePayload['inventory.AID_001'] = newStock
+        updatePayload['inventory.aid_hint'] = newStock
       } else if (aidRule.id === 'AID_008' || aidRule.id === 'aid_streak_protection' || aidRule.aliases?.includes('consumable_protecao_streak')) {
         updatePayload['consumables.streakProtection'] = newStock
+        updatePayload['inventory.AID_008'] = newStock
+        updatePayload['inventory.aid_streak_protection'] = newStock
       }
+
       transaction.update(userRef, updatePayload)
 
       return {
@@ -184,7 +240,7 @@ export async function POST(req: NextRequest) {
       if (duelId && typeof duelId === 'string') {
         try {
           const duelRef = db.collection('duels').doc(duelId)
-          await db.runTransaction(async (t) => {
+          await db.runTransaction(async (t: any) => {
             const dSnap = await t.get(duelRef)
             if (dSnap.exists) {
               const dData = dSnap.data()

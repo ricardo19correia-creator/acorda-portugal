@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
     const publicProfileRef = db.collection('publicProfiles').doc(userId)
     const gameRef = gameId ? db.collection('games').doc(String(gameId)) : null
 
-    const result = await db.runTransaction(async (transaction) => {
+    const result = await db.runTransaction(async (transaction: any) => {
       // 2.1 Verificação de idempotência: se o jogo já foi processado, não duplicar recompensas
       if (gameRef) {
         const gameSnap = await transaction.get(gameRef)

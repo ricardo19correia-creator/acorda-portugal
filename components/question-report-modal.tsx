@@ -78,8 +78,8 @@ export function QuestionReportModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-xl text-left">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl border border-white/15 bg-slate-900/95 p-4 sm:p-6 landscape:p-4 shadow-2xl backdrop-blur-xl text-left">
         {/* Fechar */}
         <button
           type="button"

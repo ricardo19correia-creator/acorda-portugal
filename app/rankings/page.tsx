@@ -854,7 +854,7 @@ export default function RankingsPage() {
 
         {/* BARRA FIXA «A TUA POSIÇÃO» (STICKY FOOTER HUD) */}
         {user?.uid && (
-          <div className="fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 border-t border-cyan-500/40 p-3 sm:p-4 backdrop-blur-2xl shadow-2xl">
+          <div className="fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 border-t border-cyan-500/40 p-2.5 sm:p-4 landscape:py-1.5 landscape:px-4 safe-area-bottom safe-area-x backdrop-blur-2xl shadow-2xl">
             <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <UserAvatar

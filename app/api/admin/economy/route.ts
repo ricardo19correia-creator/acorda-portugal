@@ -18,14 +18,14 @@ export async function GET(req: Request) {
     // 1. Amostra de saldo em circulação
     const usersSnap = await db.collection('users').select('coins').limit(500).get().catch(() => ({ docs: [] }))
     let totalSampleCoins = 0
-    usersSnap.docs.forEach((d) => {
+    usersSnap.docs.forEach((d: any) => {
       const c = Number(d.data()?.coins || 0)
       totalSampleCoins += isNaN(c) ? 0 : c
     })
 
     // 2. Transações Recentes
     const txSnap = await db.collection('transactions').orderBy('createdAt', 'desc').limit(25).get().catch(() => ({ docs: [] }))
-    const recentTransactions = txSnap.docs.map((d) => ({ id: d.id, ...d.data() }))
+    const recentTransactions = txSnap.docs.map((d: any) => ({ id: d.id, ...d.data() }))
 
     return NextResponse.json({
       success: true,

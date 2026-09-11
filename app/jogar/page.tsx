@@ -148,9 +148,14 @@ function JogarContainer() {
     searchParams.get('arena_id')
 
   // Se passou distrito ou cidade sem categoria explícita, seleciona o modo territorial
+  const normalizedRawCat =
+    rawCategoryParam === 'o-meu-distrito' || rawCategoryParam === 'distrito'
+      ? 'conquista-do-distrito'
+      : rawCategoryParam
+
   const effectiveCategory =
-    rawCategoryParam ||
-    (districtParam ? 'o-meu-distrito' : null) ||
+    normalizedRawCat ||
+    (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
     (gameParam ? 'desafio-nacional' : null)
 

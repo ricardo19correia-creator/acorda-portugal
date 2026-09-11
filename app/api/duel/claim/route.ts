@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const userRef = db.collection('users').doc(userId)
     const publicProfileRef = db.collection('publicProfiles').doc(userId)
 
-    const rewardResult = await db.runTransaction(async (transaction) => {
+    const rewardResult = await db.runTransaction(async (transaction: any) => {
       const duelSnap = await transaction.get(duelRef)
       if (!duelSnap.exists) {
         throw new Error('Duelo não encontrado.')

@@ -2772,8 +2772,8 @@ function PerfilContent() {
       {/* MODAL: ALTERAR EMAIL */}
       {/* ========================================================= */}
       {isEmailModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-slate-800 rounded-3xl p-5 sm:p-7 landscape:p-4 shadow-2xl text-white">
             <h3 className="text-lg font-black text-white flex items-center gap-2 mb-1">
               <Mail className="w-5 h-5 text-indigo-400" /> Alterar Email da Conta
             </h3>
@@ -2865,8 +2865,8 @@ function PerfilContent() {
       {/* MODAL: ALTERAR PALAVRA-PASSE */}
       {/* ========================================================= */}
       {isPasswordModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-md bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-slate-800 rounded-3xl p-5 sm:p-7 landscape:p-4 shadow-2xl text-white">
             <h3 className="text-lg font-black text-white flex items-center gap-2 mb-1">
               <Lock className="w-5 h-5 text-indigo-400" /> Alterar Palavra-passe
             </h3>
@@ -2985,8 +2985,8 @@ function PerfilContent() {
       {/* MODAL 1: EDITAR PERFIL */}
       {/* ========================================================= */}
       {isEditModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-lg bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-slate-800 rounded-3xl p-5 sm:p-7 landscape:p-4 shadow-2xl text-white">
             <h3 className="text-lg font-black text-white flex items-center gap-2 mb-1">
               <Edit3 className="w-5 h-5 text-emerald-400" /> Editar Perfil
             </h3>
@@ -3151,8 +3151,8 @@ function PerfilContent() {
       {/* MODAL 2: CONFIRMAÇÃO DE LOGOUT */}
       {/* ========================================================= */}
       {isLogoutModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-sm bg-slate-950 border border-slate-800 rounded-3xl p-6 shadow-2xl text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-sm max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-slate-800 rounded-3xl p-5 sm:p-6 landscape:p-4 shadow-2xl text-center">
             <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-700 text-rose-400 flex items-center justify-center mx-auto mb-4">
               <LogOut className="w-6 h-6" />
             </div>
@@ -3188,8 +3188,8 @@ function PerfilContent() {
       {/* MODAL 3: ZONA DE PERIGO - ELIMINAR CONTA */}
       {/* ========================================================= */}
       {isDeleteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-          <div className="relative w-full max-w-md bg-slate-950 border border-rose-500/40 rounded-3xl p-6 shadow-2xl text-center my-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+          <div className="relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-rose-500/40 rounded-3xl p-5 sm:p-6 landscape:p-4 shadow-2xl text-center my-4 sm:my-8">
             <div className="w-14 h-14 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-rose-500/20">
               <AlertTriangle className="w-7 h-7" />
             </div>

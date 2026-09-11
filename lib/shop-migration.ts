@@ -150,7 +150,7 @@ export async function migrateUserInventory(userId: string): Promise<MigrationRes
   const hasUpdates = Object.keys(updates).length > 0
 
   if (hasBatchWrites) {
-    await aidInventoryBatch.commit().catch((err) => {
+    await aidInventoryBatch.commit().catch((err: any) => {
       console.warn('[MIGRATION_BATCH_FAIL] Erro ao gravar subcoleção aid_inventory:', err)
     })
   }
@@ -158,7 +158,7 @@ export async function migrateUserInventory(userId: string): Promise<MigrationRes
   if (hasUpdates) {
     updates.updatedAt = FieldValue.serverTimestamp()
     updates.migrationVersion = '2026.09.ssot'
-    await userRef.update(updates).catch((err) => {
+    await userRef.update(updates).catch((err: any) => {
       console.warn('[MIGRATION_UPDATE_FAIL] Erro ao atualizar utilizador:', err)
     })
   }

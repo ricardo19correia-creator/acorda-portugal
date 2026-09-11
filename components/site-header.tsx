@@ -187,7 +187,7 @@ export function SiteHeader() {
 
       {/* Mobile menu */}
       {open && (
-        <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden">
+        <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto safe-area-bottom">
           <div className="mb-3 flex flex-col gap-2">
             <Link
               href="/loja"

@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
         const pubSnap = await db.collection('publicProfiles').limit(300).get()
 
         if (pubSnap && !pubSnap.empty) {
-          pubSnap.docs.forEach((d) => {
+          pubSnap.docs.forEach((d: any) => {
             const p = mapDocToRankingPlayer(d.id, d.data())
             rawPlayers.push(p)
           })

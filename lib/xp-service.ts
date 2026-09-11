@@ -14,7 +14,9 @@ export interface AwardMatchRewardParams {
   matchId: string
   categorySlug: string
   categoryName?: string
-  matchType?: 'solo_quiz' | 'duel_1v1'
+  matchType?: 'solo_quiz' | 'duel_1v1' | 'conquista_distrito' | 'desafio_cidade' | 'modo_aleatorio'
+  district?: string
+  city?: string
   correctAnswers: number
   totalQuestions: number
   score: number
@@ -78,6 +80,8 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
     categorySlug,
     categoryName = 'Portugal',
     matchType = 'solo_quiz',
+    district,
+    city,
     correctAnswers,
     totalQuestions,
     score,
@@ -341,6 +345,16 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         if (isWinner) userUpdatePayload.wins = increment(1)
         else if (isDraw) userUpdatePayload.draws = increment(1)
         else userUpdatePayload.losses = increment(1)
+      } else if (matchType === 'conquista_distrito') {
+        const targetDistrict = district || userData.district || 'Portugal'
+        userUpdatePayload.districtPoints = increment(calculatedXp)
+        userUpdatePayload.districtGamesPlayed = increment(1)
+        console.log(`[TERRITORY] DISTRICT_POINTS_CONTRIBUTED (district: ${targetDistrict}, points: +${calculatedXp})`)
+      } else if (matchType === 'desafio_cidade') {
+        const targetCity = city || userData.city || 'Portugal'
+        userUpdatePayload.cityPoints = increment(calculatedXp)
+        userUpdatePayload.cityGamesPlayed = increment(1)
+        console.log(`[CITY] LOCAL_CITY_SCORE (city: ${targetCity}, points: +${calculatedXp}, NO_DISTRICT_CONTRIBUTION)`)
       }
 
       if (bestStreak > 0) {

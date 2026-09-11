@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-02T14:05:38.105Z",
-  "totalDatasetRaw": 24310,
-  "totalValidRaw": 24310,
+  "generatedAt": "2026-09-10T00:17:07.496Z",
+  "totalDatasetRaw": 24366,
+  "totalValidRaw": 24366,
   "totalDuplicatesExcluded": 4249,
   "totalInvalidRejected": 0,
-  "totalUniqueActiveInGame": 20061,
-  "totalPublished": 24310,
-  "totalPlayable": 20061,
+  "totalUniqueActiveInGame": 20117,
+  "totalPublished": 24366,
+  "totalPlayable": 20117,
   "totalWithoutCategory": 0,
   "totalWithoutSubcategory": 0,
   "categoriesCount": 18,
   "subcategoriesOfficialCount": 233,
   "emptyCategoriesCount": 0,
-  "emptySubcategoriesCount": 95,
+  "emptySubcategoriesCount": 94,
   "sourcesInventory": [
     {
       "id": "cat_portugal",
@@ -47,7 +47,7 @@
     {
       "id": "cat_politica",
       "path": "lib/data/categories/portugal-politico.json",
-      "count": 950,
+      "count": 986,
       "isCategoryFile": true,
       "isExternal": false,
       "isSnapshot": false,
@@ -207,7 +207,7 @@
     {
       "id": "data_vila_real_500",
       "path": "data/perguntas_vila_real_500.json",
-      "count": 500,
+      "count": 520,
       "isCategoryFile": false,
       "isExternal": true,
       "isSnapshot": false,
@@ -265,7 +265,7 @@
       "valid": 3247,
       "published": 3247,
       "playable": 3247,
-      "percentageOfTotal": 16.19,
+      "percentageOfTotal": 16.14,
       "subcategories": [
         {
           "id": "historia-portugal",
@@ -374,7 +374,7 @@
       "valid": 750,
       "published": 750,
       "playable": 750,
-      "percentageOfTotal": 3.74,
+      "percentageOfTotal": 3.73,
       "subcategories": [
         {
           "id": "politica-governo",
@@ -519,27 +519,27 @@
       "slug": "portugal-politico",
       "name": "Portugal Político",
       "emoji": "🏛️",
-      "total": 950,
-      "valid": 950,
-      "published": 950,
-      "playable": 950,
-      "percentageOfTotal": 4.74,
+      "total": 986,
+      "valid": 986,
+      "published": 986,
+      "playable": 986,
+      "percentageOfTotal": 4.9,
       "subcategories": [
         {
           "id": "partidos",
           "name": "Partidos",
-          "total": 100,
-          "valid": 100,
-          "published": 100,
-          "playable": 100
+          "total": 125,
+          "valid": 125,
+          "published": 125,
+          "playable": 125
         },
         {
           "id": "representacao-parlamentar",
           "name": "Representação Parlamentar",
-          "total": 0,
-          "valid": 0,
-          "published": 0,
-          "playable": 0
+          "total": 11,
+          "valid": 11,
+          "published": 11,
+          "playable": 11
         },
         {
           "id": "lideres",
@@ -632,7 +632,7 @@
       "valid": 850,
       "published": 850,
       "playable": 850,
-      "percentageOfTotal": 4.24,
+      "percentageOfTotal": 4.23,
       "subcategories": [
         {
           "id": "empresas",
@@ -733,7 +733,7 @@
       "valid": 1110,
       "published": 1110,
       "playable": 1110,
-      "percentageOfTotal": 5.53,
+      "percentageOfTotal": 5.52,
       "subcategories": [
         {
           "id": "clubes",
@@ -882,7 +882,7 @@
       "valid": 750,
       "published": 750,
       "playable": 750,
-      "percentageOfTotal": 3.74,
+      "percentageOfTotal": 3.73,
       "subcategories": [
         {
           "id": "que-lugar-e-este",
@@ -1047,7 +1047,7 @@
       "valid": 1418,
       "published": 1418,
       "playable": 1418,
-      "percentageOfTotal": 7.07,
+      "percentageOfTotal": 7.05,
       "subcategories": [
         {
           "id": "perguntas-absurdas",
@@ -1140,7 +1140,7 @@
       "valid": 1300,
       "published": 1300,
       "playable": 1300,
-      "percentageOfTotal": 6.48,
+      "percentageOfTotal": 6.46,
       "subcategories": [
         {
           "id": "historia-de-portugal",
@@ -1269,19 +1269,19 @@
       "slug": "geografia",
       "name": "Geografia",
       "emoji": "🌍",
-      "total": 1405,
-      "valid": 1405,
-      "published": 1405,
-      "playable": 1405,
-      "percentageOfTotal": 7,
+      "total": 1425,
+      "valid": 1425,
+      "published": 1425,
+      "playable": 1425,
+      "percentageOfTotal": 7.08,
       "subcategories": [
         {
           "id": "geografia-portugal",
           "name": "Geografia de Portugal",
-          "total": 663,
-          "valid": 663,
-          "published": 663,
-          "playable": 663
+          "total": 683,
+          "valid": 683,
+          "published": 683,
+          "playable": 683
         },
         {
           "id": "geografia-europa",
@@ -1398,7 +1398,7 @@
       "valid": 918,
       "published": 918,
       "playable": 918,
-      "percentageOfTotal": 4.58,
+      "percentageOfTotal": 4.56,
       "subcategories": [
         {
           "id": "ciencia-geral",
@@ -1507,7 +1507,7 @@
       "valid": 1324,
       "published": 1324,
       "playable": 1324,
-      "percentageOfTotal": 6.6,
+      "percentageOfTotal": 6.58,
       "subcategories": [
         {
           "id": "cultura-portuguesa-geral",
@@ -1608,7 +1608,7 @@
       "valid": 1068,
       "published": 1068,
       "playable": 1068,
-      "percentageOfTotal": 5.32,
+      "percentageOfTotal": 5.31,
       "subcategories": [
         {
           "id": "gastronomia-portuguesa-geral",
@@ -1709,7 +1709,7 @@
       "valid": 830,
       "published": 830,
       "playable": 830,
-      "percentageOfTotal": 4.14,
+      "percentageOfTotal": 4.13,
       "subcategories": [
         {
           "id": "futebol-modalidade",
@@ -1842,7 +1842,7 @@
       "valid": 800,
       "published": 800,
       "playable": 800,
-      "percentageOfTotal": 3.99,
+      "percentageOfTotal": 3.98,
       "subcategories": [
         {
           "id": "humor-portugues",
@@ -1919,7 +1919,7 @@
       "valid": 824,
       "published": 824,
       "playable": 824,
-      "percentageOfTotal": 4.11,
+      "percentageOfTotal": 4.1,
       "subcategories": [
         {
           "id": "musica-portuguesa-geral",
@@ -2036,7 +2036,7 @@
       "valid": 917,
       "published": 917,
       "playable": 917,
-      "percentageOfTotal": 4.57,
+      "percentageOfTotal": 4.56,
       "subcategories": [
         {
           "id": "filmes",
@@ -2137,7 +2137,7 @@
       "valid": 800,
       "published": 800,
       "playable": 800,
-      "percentageOfTotal": 3.99,
+      "percentageOfTotal": 3.98,
       "subcategories": [
         {
           "id": "figuras-historicas",
@@ -2246,7 +2246,7 @@
       "valid": 800,
       "published": 800,
       "playable": 800,
-      "percentageOfTotal": 3.99,
+      "percentageOfTotal": 3.98,
       "subcategories": [
         {
           "id": "paises-mundo",
@@ -2898,12 +2898,6 @@
         "categoryName": "Atualidade — Portugal Agora",
         "subcategoryId": "desporto-atual",
         "subcategoryName": "Desporto"
-      },
-      {
-        "categoryId": "portugal-politico",
-        "categoryName": "Portugal Político",
-        "subcategoryId": "representacao-parlamentar",
-        "subcategoryName": "Representação Parlamentar"
       },
       {
         "categoryId": "portugal-politico",

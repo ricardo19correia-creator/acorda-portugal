@@ -272,7 +272,7 @@ export function PortugalHeroMap() {
               title: profile.equippedTitle || calculateLevelProgress(userXp).currentLevel.title,
               playerType: 'human',
               isNpc: false,
-            })
+            } as any)
           }
         }
 

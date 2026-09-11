@@ -210,6 +210,7 @@ export function PortugalMapInteractive({
           onClick={() => onSelect('Açores')}
           onMouseEnter={() =>
             setHovered({
+              id: 'acores',
               name: 'Açores',
               type: 'island',
               path: '',
@@ -218,6 +219,7 @@ export function PortugalMapInteractive({
           }
           onFocus={() => {
             setHovered({
+              id: 'acores',
               name: 'Açores',
               type: 'island',
               path: '',
@@ -395,6 +397,7 @@ export function PortugalMapInteractive({
           onClick={() => onSelect('Madeira')}
           onMouseEnter={() =>
             setHovered({
+              id: 'madeira',
               name: 'Madeira',
               type: 'island',
               path: '',
@@ -403,6 +406,7 @@ export function PortugalMapInteractive({
           }
           onFocus={() => {
             setHovered({
+              id: 'madeira',
               name: 'Madeira',
               type: 'island',
               path: '',

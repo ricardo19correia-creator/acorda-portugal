@@ -56,7 +56,7 @@ export function GameExitControl({
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="relative w-full max-w-sm sm:max-w-md rounded-3xl border border-red-500/40 bg-slate-950/95 p-6 shadow-2xl text-white backdrop-blur-xl animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-sm sm:max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl border border-red-500/40 bg-slate-950/95 p-5 sm:p-6 landscape:p-4 shadow-2xl text-white backdrop-blur-xl animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Fechar X */}

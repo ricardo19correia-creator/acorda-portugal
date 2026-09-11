@@ -143,7 +143,7 @@ export function resolveCategoryMetadata(
 
   const foundInCatalog = CATEGORIES.find((item) => item.slug === slug)
   if (foundInCatalog) {
-    return { name: foundInCatalog.name, emoji: foundInCatalog.emoji || '🇵🇹', special: Boolean(foundInCatalog.special) }
+    return { name: foundInCatalog.name, emoji: (foundInCatalog as any).emoji || (foundInCatalog as any).icon || '🇵🇹', special: Boolean((foundInCatalog as any).special) }
   }
 
   const formatted = (categorySlug || 'Desafio').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())

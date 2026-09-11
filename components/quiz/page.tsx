@@ -72,9 +72,14 @@ function QuizPageContent() {
     searchParams.get('arena_id')
 
   // Se passou distrito ou cidade sem cat explícito, ativa o modo correspondente
+  const normalizedRawCat =
+    rawCategorySlug === 'o-meu-distrito' || rawCategorySlug === 'distrito'
+      ? 'conquista-do-distrito'
+      : rawCategorySlug
+
   const categorySlug =
-    rawCategorySlug ||
-    (district ? 'o-meu-distrito' : null) ||
+    normalizedRawCat ||
+    (district ? 'conquista-do-distrito' : null) ||
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null)
 

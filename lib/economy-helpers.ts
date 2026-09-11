@@ -224,10 +224,35 @@ export function extractUserInventory(data: any): {
     })
   }
 
-  // 6. Consumíveis e Utilitários
-  const fiftyFifty = parseSafeNumber(inv?.utilities?.fiftyFifty) ?? parseSafeNumber(data?.consumables?.help5050) ?? parseSafeNumber(inv?.consumable_50_50) ?? 0
-  const freezeTime = parseSafeNumber(inv?.utilities?.freezeTime) ?? parseSafeNumber(data?.consumables?.freezeTime) ?? parseSafeNumber(inv?.consumable_congelar_tempo) ?? 0
-  const publicVote = parseSafeNumber(inv?.utilities?.publicVote) ?? parseSafeNumber(data?.consumables?.publicVote) ?? parseSafeNumber(inv?.HELP_005) ?? parseSafeNumber(inv?.consumable_public_vote) ?? 0
+  // 6. Consumíveis e Utilitários (Consolidação retrocompatível das 3 ajudas canónicas)
+  const fiftyFifty = Math.max(
+    parseSafeNumber(inv?.AID_002) ?? 0,
+    parseSafeNumber(inv?.aid_50_50) ?? 0,
+    parseSafeNumber(inv?.consumable_50_50) ?? 0,
+    parseSafeNumber(inv?.help5050) ?? 0,
+    parseSafeNumber(inv?.utilities?.fiftyFifty) ?? 0,
+    parseSafeNumber(data?.consumables?.help5050) ?? 0,
+    0
+  )
+  const freezeTime = Math.max(
+    parseSafeNumber(inv?.AID_004) ?? 0,
+    parseSafeNumber(inv?.aid_freeze_time) ?? 0,
+    parseSafeNumber(inv?.consumable_congelar_tempo) ?? 0,
+    parseSafeNumber(inv?.freezeTime) ?? 0,
+    parseSafeNumber(inv?.utilities?.freezeTime) ?? 0,
+    parseSafeNumber(data?.consumables?.freezeTime) ?? 0,
+    0
+  )
+  const publicVote = Math.max(
+    parseSafeNumber(inv?.AID_003) ?? 0,
+    parseSafeNumber(inv?.aid_public_vote) ?? 0,
+    parseSafeNumber(inv?.consumable_public_vote) ?? 0,
+    parseSafeNumber(inv?.HELP_005) ?? 0,
+    parseSafeNumber(inv?.publicVote) ?? 0,
+    parseSafeNumber(inv?.utilities?.publicVote) ?? 0,
+    parseSafeNumber(data?.consumables?.publicVote) ?? 0,
+    0
+  )
 
   // Preenchimento de rawMap para consultas rápidas por ID de item
   for (const [k, v] of Object.entries(inv)) {
@@ -239,6 +264,21 @@ export function extractUserInventory(data: any): {
   arenasSet.forEach((ar) => { rawMap[ar] = 1 })
   titlesSet.forEach((t) => { rawMap[t] = 1 })
   tauntsSet.forEach((ta) => { rawMap[ta] = 1 })
+
+  // Garantir que os IDs canónicos e aliases de ajudas estão sincronizados em rawMap
+  rawMap['AID_002'] = fiftyFifty
+  rawMap['aid_50_50'] = fiftyFifty
+  rawMap['consumable_50_50'] = fiftyFifty
+  rawMap['help5050'] = fiftyFifty
+  rawMap['AID_003'] = publicVote
+  rawMap['aid_public_vote'] = publicVote
+  rawMap['consumable_public_vote'] = publicVote
+  rawMap['HELP_005'] = publicVote
+  rawMap['publicVote'] = publicVote
+  rawMap['AID_004'] = freezeTime
+  rawMap['aid_freeze_time'] = freezeTime
+  rawMap['consumable_congelar_tempo'] = freezeTime
+  rawMap['freezeTime'] = freezeTime
 
   return {
     avatars: Array.from(avatarsSet),

@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     let queryRef = db.collection('users').limit(limitCount * 2)
 
     const snap = await queryRef.get()
-    let players = snap.docs.map((d) => ({
+    let players = snap.docs.map((d: any) => ({
       uid: d.id,
       ...d.data(),
     })) as any[]

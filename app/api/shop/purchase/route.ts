@@ -629,7 +629,7 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    const result = await db.runTransaction(async (transaction) => {
+    const result = await db.runTransaction(async (transaction: any) => {
       const userSnap = await transaction.get(userRef)
       if (!userSnap.exists) {
         const err: any = new Error('Conta de utilizador não registada no sistema.')

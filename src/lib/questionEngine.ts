@@ -191,8 +191,22 @@ export function loadQuestionsPool(
     catLower === 'maluco' ||
     catLower.includes('maluco')
 
-  const isCity = catLower === 'desafio-cidade'
-  const isDistrict = catLower === 'o-meu-distrito'
+  const isRandom =
+    catLower === 'modo-aleatorio' ||
+    catLower === 'modo aleatorio' ||
+    catLower === 'aleatorio' ||
+    catLower === 'roleta'
+
+  const isCity =
+    catLower === 'desafio-cidade' ||
+    catLower === 'desafio-da-cidade' ||
+    catLower === 'cidade'
+
+  const isDistrict =
+    catLower === 'conquista-do-distrito' ||
+    catLower === 'conquista-distrito' ||
+    catLower === 'o-meu-distrito' ||
+    catLower === 'distrito'
 
   let filtered: Question[] = []
 
@@ -202,26 +216,57 @@ export function loadQuestionsPool(
   } else if (isMaluco) {
     // EXCLUSIVAMENTE Modo Maluco
     filtered = registry.getTemaCompleto('modo-maluco', targetDiff)
+  } else if (isRandom) {
+    // MODO ALEATÓRIO: Roleta com todas as categorias (exceto maluco) e dificuldades diversas
+    filtered = shuffleQuestions(registry.getJogarTudo())
   } else if (isCity) {
-    // Desafio de Cidade
+    // DESAFIO DA CIDADE: Competição local e municipal (ruas, monumentos, freguesias, história e cultura local)
     const all = registry.getAllQuestions()
+    const cityTarget = (city || '').toLowerCase().trim()
+
     filtered = all.filter((q) => {
       if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
-      if (city) {
-        return Boolean(q.city && (q.city.toLowerCase().includes(city.toLowerCase()) || city.toLowerCase().includes(q.city.toLowerCase())))
+      if (cityTarget) {
+        const matchesCityField = Boolean(q.city && (q.city.toLowerCase().includes(cityTarget) || cityTarget.includes(q.city.toLowerCase())))
+        const matchesPrompt = q.question.toLowerCase().includes(cityTarget) || (q.explanation && q.explanation.toLowerCase().includes(cityTarget))
+        return matchesCityField || matchesPrompt
       }
       return q.category === 'desafio-cidade' || Boolean(q.city)
     })
+
+    // Fallback: se a cidade tiver poucas perguntas específicas, complementar com perguntas de cidades, monumentos e vilas de Portugal
+    if (filtered.length < 10) {
+      const cityPoolAdditions = all.filter((q) => {
+        if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
+        const sub = (q.subcategory || '').toLowerCase()
+        return sub.includes('cidade') || sub.includes('monumento') || sub.includes('vilas') || sub.includes('concelho')
+      })
+      filtered = Array.from(new Set([...filtered, ...cityPoolAdditions]))
+    }
   } else if (isDistrict) {
-    // O Meu Distrito
+    // CONQUISTA DO DISTRITO: Representação territorial e perguntas exclusivamente do distrito
     const all = registry.getAllQuestions()
+    const distTarget = (district || '').toLowerCase().trim()
+
     filtered = all.filter((q) => {
       if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
-      if (district) {
-        return Boolean(q.district && (q.district.toLowerCase().includes(district.toLowerCase()) || district.toLowerCase().includes(q.district.toLowerCase())))
+      if (distTarget) {
+        const matchesDistField = Boolean(q.district && (q.district.toLowerCase().includes(distTarget) || distTarget.includes(q.district.toLowerCase())))
+        const matchesPrompt = q.question.toLowerCase().includes(distTarget) || (q.explanation && q.explanation.toLowerCase().includes(distTarget))
+        return matchesDistField || matchesPrompt
       }
       return q.category === 'o-meu-distrito' || Boolean(q.district)
     })
+
+    // Fallback: se o distrito tiver poucas perguntas específicas, complementar com geografia e territórios de Portugal
+    if (filtered.length < 10) {
+      const distPoolAdditions = all.filter((q) => {
+        if (q.category.toLowerCase().includes('maluco') || q.id.startsWith('mm_')) return false
+        const sub = (q.subcategory || '').toLowerCase()
+        return sub.includes('distrito') || sub.includes('geografia de portugal') || sub.includes('regi') || sub.includes('serras')
+      })
+      filtered = Array.from(new Set([...filtered, ...distPoolAdditions]))
+    }
   } else if (subcategory && subcategory !== 'all' && subcategory !== 'todas' && subcategory !== 'todos') {
     // Subtema Específico dentro do Tema
     filtered = registry.getBySubtheme(catLower, subcategory, targetDiff)
@@ -398,7 +443,9 @@ export async function getUniqueMatchQuestions(
     catLower === 'nacional' ||
     catLower === 'quick' ||
     catLower === 'todos' ||
-    catLower === 'jogar-tudo'
+    catLower === 'jogar-tudo' ||
+    catLower === 'modo-aleatorio' ||
+    catLower === 'aleatorio'
 
   // 1. Carregar pool da categoria e dificuldade
   const allCategoryQuestions = loadQuestionsPool(category, difficultyLevel, subcategory, district, city)

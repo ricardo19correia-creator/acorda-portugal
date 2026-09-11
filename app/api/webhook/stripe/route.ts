@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
         ? db.collection('vip_limited_editions').doc(vipProduct.id)
         : null
 
-      const deliveryResult = await db.runTransaction(async (t) => {
+      const deliveryResult = await db.runTransaction(async (t: any) => {
         // A. Verificação de Idempotência do Evento / Sessão
         const eventSnap = await t.get(eventRef)
         if (eventSnap.exists && eventSnap.data()?.processed === true) {

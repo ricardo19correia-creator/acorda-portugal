@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
       ])
 
       if (pubSnap && !pubSnap.empty) {
-        pubSnap.docs.forEach((d) => {
+        pubSnap.docs.forEach((d: any) => {
           allPlayers.push(mapDocToRankingPlayer(d.id, d.data()))
         })
       }

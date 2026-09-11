@@ -41,9 +41,9 @@ export function ArenaDetailsModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-lg rounded-3xl bg-slate-950 border border-white/20 p-5 sm:p-6 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl bg-slate-950 border border-white/20 p-4 sm:p-6 landscape:p-4 shadow-2xl animate-in zoom-in-95 duration-200"
         style={{
           boxShadow: '0 0 50px rgba(245, 158, 11, 0.25), 0 25px 50px rgba(0,0,0,0.9)',
         }}

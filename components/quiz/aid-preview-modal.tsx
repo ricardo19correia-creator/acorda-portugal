@@ -35,7 +35,7 @@ export function AidPreviewModal({
       onClick={isProcessing ? undefined : onClose}
     >
       <div
-        className="relative w-full max-w-sm rounded-3xl border border-slate-700/80 bg-slate-900/95 p-5 sm:p-6 shadow-2xl backdrop-blur-xl text-white animate-in zoom-in-95 duration-200 flex flex-col items-center text-center"
+        className="relative w-full max-w-sm max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl border border-slate-700/80 bg-slate-900/95 p-4 sm:p-6 landscape:p-3 shadow-2xl backdrop-blur-xl text-white animate-in zoom-in-95 duration-200 flex flex-col items-center text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Botão Fechar X */}
@@ -50,7 +50,7 @@ export function AidPreviewModal({
         </button>
 
         {/* Ilustração / Imagem Oficial da Ajuda */}
-        <div className="relative w-28 h-28 sm:w-32 sm:h-32 mb-3 flex items-center justify-center rounded-2xl bg-gradient-to-b from-slate-800/60 to-slate-950/80 border border-slate-700/50 p-2 shadow-inner overflow-hidden">
+        <div className="relative w-24 h-24 sm:w-32 sm:h-32 landscape:w-16 landscape:h-16 mb-2 sm:mb-3 landscape:mb-1 flex items-center justify-center rounded-2xl bg-gradient-to-b from-slate-800/60 to-slate-950/80 border border-slate-700/50 p-2 shadow-inner overflow-hidden">
           <div
             className="absolute inset-0 opacity-25 blur-xl pointer-events-none"
             style={{

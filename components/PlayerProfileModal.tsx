@@ -94,8 +94,8 @@ export default function PlayerProfileModal({
   ]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-slate-950 border border-cyan-500/30 rounded-4xl p-6 sm:p-7 shadow-2xl text-slate-100 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto bg-slate-950 border border-cyan-500/30 rounded-3xl sm:rounded-4xl p-5 sm:p-7 landscape:p-4 shadow-2xl text-slate-100">
         {/* Glow Superior Temático */}
         <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-cyan-500/15 via-emerald-500/10 to-transparent pointer-events-none" />
 

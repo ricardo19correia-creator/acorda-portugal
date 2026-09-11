@@ -183,8 +183,8 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-5 sm:p-8 landscape:p-4 max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto w-full text-center shadow-2xl space-y-4 sm:space-y-5 landscape:space-y-3 animate-in fade-in duration-200">
         <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto text-emerald-400 text-2xl shadow-lg shadow-emerald-500/20">
           🇵🇹
         </div>

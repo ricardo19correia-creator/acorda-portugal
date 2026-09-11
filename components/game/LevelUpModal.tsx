@@ -22,7 +22,7 @@ export function LevelUpModal({ from, to, onClose }: LevelUpModalProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="animate-level-up-pop relative w-full max-w-sm overflow-hidden rounded-4xl border border-gold/50 bg-gradient-to-b from-card via-slate-900 to-background p-6 sm:p-8 text-center shadow-2xl shadow-gold/25 cursor-default"
+        className="animate-level-up-pop relative w-full max-w-sm max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl sm:rounded-4xl border border-gold/50 bg-gradient-to-b from-card via-slate-900 to-background p-5 sm:p-8 landscape:p-4 text-center shadow-2xl shadow-gold/25 cursor-default"
       >
         <div className="sheen absolute inset-0 pointer-events-none" />
         <div className="animate-level-up-glow absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-gold/30 to-transparent pointer-events-none" />

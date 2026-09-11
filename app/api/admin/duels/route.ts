@@ -21,18 +21,18 @@ export async function GET(req: Request) {
       .limit(50)
       .get()
 
-    const activeDuels = duelsSnap.docs.map((d) => ({
+    const activeDuels = duelsSnap.docs.map((d: any) => ({
       id: d.id,
       ...d.data(),
     }))
 
     // 2. Fila de Matchmaking ativa
     const queueSnap = await db.collection('duelQueue').limit(30).get().catch(() => ({ docs: [] }))
-    const queueTickets = queueSnap.docs.map((d) => ({ id: d.id, ...d.data() }))
+    const queueTickets = queueSnap.docs.map((d: any) => ({ id: d.id, ...d.data() }))
 
     // 3. Histórico recente de jogos terminados
     const finishedSnap = await db.collection('games').orderBy('createdAt', 'desc').limit(20).get().catch(() => ({ docs: [] }))
-    const recentFinishedGames = finishedSnap.docs.map((d) => ({ id: d.id, ...d.data() }))
+    const recentFinishedGames = finishedSnap.docs.map((d: any) => ({ id: d.id, ...d.data() }))
 
     return NextResponse.json({
       success: true,

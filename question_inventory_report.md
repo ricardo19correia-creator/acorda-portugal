@@ -1,6 +1,6 @@
 # 🇵🇹 ACORDA PORTUGAL — RELATÓRIO FORENSE DO BANCO DE PERGUNTAS
 
-**Data de Execução:** 02/09/2026 12:05:38
+**Data de Execução:** 09/09/2026 22:17:07
 **Motor Auditado:** `QuestionRegistry` & `questionEngine` (Runtime de Produção)
 **Total de Ficheiros Auditados:** 24
 **Método:** Execução direta determinística (sem estimativas, sem contadores hardcoded).
@@ -18,7 +18,7 @@ O jogo **Acorda Portugal** utiliza uma arquitetura unificada de banco de dados e
 | `lib/data/categories/portugal.json` | 🔥 Fonte Canónica (18 Temas) | **1250** | Ativo no Runtime |
 | `lib/data/categories/futebol-portugues.json` | 🔥 Fonte Canónica (18 Temas) | **1110** | Ativo no Runtime |
 | `lib/data/categories/atualidade.json` | 🔥 Fonte Canónica (18 Temas) | **750** | Ativo no Runtime |
-| `lib/data/categories/portugal-politico.json` | 🔥 Fonte Canónica (18 Temas) | **950** | Ativo no Runtime |
+| `lib/data/categories/portugal-politico.json` | 🔥 Fonte Canónica (18 Temas) | **986** | Ativo no Runtime |
 | `lib/data/categories/empresas-portuguesas.json` | 🔥 Fonte Canónica (18 Temas) | **850** | Ativo no Runtime |
 | `lib/data/categories/historia.json` | 🔥 Fonte Canónica (18 Temas) | **1304** | Ativo no Runtime |
 | `lib/data/categories/geografia.json` | 🔥 Fonte Canónica (18 Temas) | **905** | Ativo no Runtime |
@@ -34,7 +34,7 @@ O jogo **Acorda Portugal** utiliza uma arquitetura unificada de banco de dados e
 | `lib/data/categories/desafio-visual.json` | 🔥 Fonte Canónica (18 Temas) | **750** | Ativo no Runtime |
 | `lib/data/categories/modo-maluco.json` | 🔥 Fonte Canónica (18 Temas) | **660** | Ativo no Runtime |
 | `src/data/questions_desafio_nacional.json` | ⚡ Fonte Especial Ativa | **2000** | Ativo no Runtime |
-| `data/perguntas_vila_real_500.json` | ⚡ Fonte Especial Ativa | **500** | Ativo no Runtime |
+| `data/perguntas_vila_real_500.json` | ⚡ Fonte Especial Ativa | **520** | Ativo no Runtime |
 | `data/perguntas_modo_maluco_5000.json` | ⚡ Fonte Especial Ativa | **5000** | Ativo no Runtime |
 | `lib/data/questions.json` | 📦 Snapshot Consolidado | **12 017** | Não Usado Diretamente |
 | `lib/data/questions-backup.json` | 💾 Backup Legado | **332** | Não Usado Diretamente |
@@ -62,10 +62,10 @@ TOTAL BRUTO INGERIDO NO PIPELINE ............................ 24.310 perguntas
 ======================================================================
 CONTAGEM GLOBAL FORENSE
 ======================================================================
-TOTAL DE PERGUNTAS NO DATASET BRUTO ............ 24 310
-TOTAL DE PERGUNTAS VÁLIDAS ..................... 24 310
-TOTAL DE PERGUNTAS PUBLICADAS / ATIVAS ......... 20 061
-TOTAL DE PERGUNTAS JOGÁVEIS NO QUIZ ............ 20 061
+TOTAL DE PERGUNTAS NO DATASET BRUTO ............ 24 366
+TOTAL DE PERGUNTAS VÁLIDAS ..................... 24 366
+TOTAL DE PERGUNTAS PUBLICADAS / ATIVAS ......... 20 117
+TOTAL DE PERGUNTAS JOGÁVEIS NO QUIZ ............ 20 117
 TOTAL DE PERGUNTAS DUPLICADAS DESCONTADAS ...... 4249
 TOTAL DE PERGUNTAS INVÁLIDAS REJEITADAS ........ 0
 TOTAL DE PERGUNTAS SEM CATEGORIA ORIGINAL ...... 0
@@ -79,25 +79,25 @@ TOTAL DE PERGUNTAS SEM SUBCATEGORIA ORIGINAL ... 0
 
 | Categoria | Total Único | Válidas | Publicadas | Jogáveis | % do Banco |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| 🇵🇹 **Portugal** | **3247** | 3247 | 3247 | 3247 | 16.19% |
-| 📰 **Atualidade — Portugal Agora** | **750** | 750 | 750 | 750 | 3.74% |
-| 🏛️ **Portugal Político** | **950** | 950 | 950 | 950 | 4.74% |
-| 🏢 **Empresas Portuguesas** | **850** | 850 | 850 | 850 | 4.24% |
-| ⚽ **Futebol Português** | **1110** | 1110 | 1110 | 1110 | 5.53% |
-| 👁️ **Desafio Visual** | **750** | 750 | 750 | 750 | 3.74% |
-| 🤪 **Modo Maluco** | **1418** | 1418 | 1418 | 1418 | 7.07% |
-| 🏺 **História** | **1300** | 1300 | 1300 | 1300 | 6.48% |
-| 🌍 **Geografia** | **1405** | 1405 | 1405 | 1405 | 7% |
-| 🔬 **Ciência e Tecnologia** | **918** | 918 | 918 | 918 | 4.58% |
-| 🎭 **Cultura** | **1324** | 1324 | 1324 | 1324 | 6.6% |
-| 🍲 **Gastronomia** | **1068** | 1068 | 1068 | 1068 | 5.32% |
-| 🏆 **Desporto** | **830** | 830 | 830 | 830 | 4.14% |
-| 😂 **Humor** | **800** | 800 | 800 | 800 | 3.99% |
-| 🎵 **Música** | **824** | 824 | 824 | 824 | 4.11% |
-| 🎬 **Cinema e Televisão** | **917** | 917 | 917 | 917 | 4.57% |
-| 👤 **Personalidades** | **800** | 800 | 800 | 800 | 3.99% |
-| 🌐 **Mundo** | **800** | 800 | 800 | 800 | 3.99% |
-| **TOTAL GERAL** | **20 061** | **20 061** | **20 061** | **20 061** | **100.00%** |
+| 🇵🇹 **Portugal** | **3247** | 3247 | 3247 | 3247 | 16.14% |
+| 📰 **Atualidade — Portugal Agora** | **750** | 750 | 750 | 750 | 3.73% |
+| 🏛️ **Portugal Político** | **986** | 986 | 986 | 986 | 4.9% |
+| 🏢 **Empresas Portuguesas** | **850** | 850 | 850 | 850 | 4.23% |
+| ⚽ **Futebol Português** | **1110** | 1110 | 1110 | 1110 | 5.52% |
+| 👁️ **Desafio Visual** | **750** | 750 | 750 | 750 | 3.73% |
+| 🤪 **Modo Maluco** | **1418** | 1418 | 1418 | 1418 | 7.05% |
+| 🏺 **História** | **1300** | 1300 | 1300 | 1300 | 6.46% |
+| 🌍 **Geografia** | **1425** | 1425 | 1425 | 1425 | 7.08% |
+| 🔬 **Ciência e Tecnologia** | **918** | 918 | 918 | 918 | 4.56% |
+| 🎭 **Cultura** | **1324** | 1324 | 1324 | 1324 | 6.58% |
+| 🍲 **Gastronomia** | **1068** | 1068 | 1068 | 1068 | 5.31% |
+| 🏆 **Desporto** | **830** | 830 | 830 | 830 | 4.13% |
+| 😂 **Humor** | **800** | 800 | 800 | 800 | 3.98% |
+| 🎵 **Música** | **824** | 824 | 824 | 824 | 4.1% |
+| 🎬 **Cinema e Televisão** | **917** | 917 | 917 | 917 | 4.56% |
+| 👤 **Personalidades** | **800** | 800 | 800 | 800 | 3.98% |
+| 🌐 **Mundo** | **800** | 800 | 800 | 800 | 3.98% |
+| **TOTAL GERAL** | **20 117** | **20 117** | **20 117** | **20 117** | **100.00%** |
 
 ---
 
@@ -144,12 +144,12 @@ ATUALIDADE — PORTUGAL AGORA
 └── Notícias e Factos Verificáveis ............... 50 perguntas
 ```
 
-### 🏛️ PORTUGAL POLÍTICO (Total: 950)
+### 🏛️ PORTUGAL POLÍTICO (Total: 986)
 
 ```text
 PORTUGAL POLÍTICO
-├── Partidos ..................................... 100 perguntas
-├── Representação Parlamentar .................... 0 perguntas
+├── Partidos ..................................... 125 perguntas
+├── Representação Parlamentar .................... 11 perguntas
 ├── Líderes ...................................... 0 perguntas
 ├── História Política ............................ 0 perguntas
 ├── Instituições ................................. 9 perguntas
@@ -264,11 +264,11 @@ HISTÓRIA
 └── História Contemporânea ....................... 3 perguntas
 ```
 
-### 🌍 GEOGRAFIA (Total: 1405)
+### 🌍 GEOGRAFIA (Total: 1425)
 
 ```text
 GEOGRAFIA
-├── Geografia de Portugal ........................ 663 perguntas
+├── Geografia de Portugal ........................ 683 perguntas
 ├── Europa ....................................... 0 perguntas
 ├── Mundo ........................................ 1 perguntas
 ├── Países ....................................... 8 perguntas
@@ -450,7 +450,7 @@ MUNDO
 
 ```text
 CATEGORIAS COM 0 PERGUNTAS ................. 0
-SUBCATEGORIAS COM 0 PERGUNTAS .............. 95
+SUBCATEGORIAS COM 0 PERGUNTAS .............. 94
 CATEGORIAS NO FRONTEND SEM PERGUNTAS ....... 0
 CATEGORIAS NO DATASET SEM FRONTEND ......... 0
 ```
@@ -470,7 +470,6 @@ CATEGORIAS NO DATASET SEM FRONTEND ......... 0
 - **Atualidade — Portugal Agora** → `Turismo` (ID: `turismo`)
 - **Atualidade — Portugal Agora** → `Cultura` (ID: `cultura-atual`)
 - **Atualidade — Portugal Agora** → `Desporto` (ID: `desporto-atual`)
-- **Portugal Político** → `Representação Parlamentar` (ID: `representacao-parlamentar`)
 - **Portugal Político** → `Líderes` (ID: `lideres`)
 - **Portugal Político** → `História Política` (ID: `historia-politica`)
 - **Portugal Político** → `Sistema Político` (ID: `sistema-politico`)
@@ -561,13 +560,13 @@ CATEGORIAS NO DATASET SEM FRONTEND ......... 0
 | :--- | :--- | :--- | :---: | :---: |
 | `portugal` | Portugal | `portugal` | 🇵🇹 | 3247 |
 | `atualidade` | Atualidade — Portugal Agora | `atualidade` | 📰 | 750 |
-| `portugal-politico` | Portugal Político | `portugal-politico` | 🏛️ | 950 |
+| `portugal-politico` | Portugal Político | `portugal-politico` | 🏛️ | 986 |
 | `empresas-portuguesas` | Empresas Portuguesas | `empresas-portuguesas` | 🏢 | 850 |
 | `futebol-portugues` | Futebol Português | `futebol-portugues` | ⚽ | 1110 |
 | `desafio-visual` | Desafio Visual | `desafio-visual` | 👁️ | 750 |
 | `modo-maluco` | Modo Maluco | `modo-maluco` | 🤪 | 1418 |
 | `historia` | História | `historia` | 🏺 | 1300 |
-| `geografia` | Geografia | `geografia` | 🌍 | 1405 |
+| `geografia` | Geografia | `geografia` | 🌍 | 1425 |
 | `ciencia-tecnologia` | Ciência e Tecnologia | `ciencia-tecnologia` | 🔬 | 918 |
 | `cultura` | Cultura | `cultura` | 🎭 | 1324 |
 | `gastronomia` | Gastronomia | `gastronomia` | 🍲 | 1068 |
@@ -617,9 +616,9 @@ TOTAL DE DUPLICADOS EXPULSOS DO RUNTIME ....... 4249
 ## 8. VALIDAÇÃO DE PERGUNTAS JOGÁVEIS
 
 ```text
-TOTAL ANALISADO NO PIPELINE ................... 24 310
-VALIDADAS ..................................... 24 310
-JOGÁVEIS NO QUIZSCREEN (100% ESTRUTURA OK) .... 20 061
+TOTAL ANALISADO NO PIPELINE ................... 24 366
+VALIDADAS ..................................... 24 366
+JOGÁVEIS NO QUIZSCREEN (100% ESTRUTURA OK) .... 20 117
 REJEITADAS POR INVALIDEZ ESTRUTURAL ........... 0
 ```
 
@@ -632,7 +631,7 @@ O perfil do utilizador (`app/perfil/page.tsx` e `lib/category-registry.ts`) calc
 | Categoria Mestre Perfil | ID Canónico | Perguntas Disponíveis no Banco | Métricas do Perfil |
 | :--- | :--- | :---: | :--- |
 | **História de Portugal** | `historia` | **1300** | Disponíveis vs Respondidas vs Corretas (%) |
-| **Geografia & Território** | `geografia` | **1405** | Disponíveis vs Respondidas vs Corretas (%) |
+| **Geografia & Território** | `geografia` | **1425** | Disponíveis vs Respondidas vs Corretas (%) |
 | **Desporto Nacional** | `desporto` | **1940** | Disponíveis vs Respondidas vs Corretas (%) |
 | **Cultura & Tradições** | `cultura` | **3065** | Disponíveis vs Respondidas vs Corretas (%) |
 | **Símbolos & Gastronomia** | `simbolos` | **4315** | Disponíveis vs Respondidas vs Corretas (%) |
@@ -646,11 +645,11 @@ O perfil do utilizador (`app/perfil/page.tsx` e `lib/category-registry.ts`) calc
 
 ```text
 EDITORIAL TARGET GLOBAL (233 Subtemas × 2.000) .. 466.000
-QUESTÕES BRUTAS GERADAS / ARQUIVADAS .......... 24 310
-QUESTÕES VÁLIDAS ESTRUTURALMENTE .............. 24 310
-QUESTÕES APROVADAS E DEDUPLICADAS ............. 20 061
-QUESTÕES PUBLICADAS E ATIVAS NO JOGO .......... 20 061
-QUESTÕES 100% JOGÁVEIS NO QUIZSCREEN .......... 20 061
+QUESTÕES BRUTAS GERADAS / ARQUIVADAS .......... 24 366
+QUESTÕES VÁLIDAS ESTRUTURALMENTE .............. 24 366
+QUESTÕES APROVADAS E DEDUPLICADAS ............. 20 117
+QUESTÕES PUBLICADAS E ATIVAS NO JOGO .......... 20 117
+QUESTÕES 100% JOGÁVEIS NO QUIZSCREEN .......... 20 117
 ```
 
 ---
@@ -663,15 +662,15 @@ ACORDA PORTUGAL
 INVENTÁRIO REAL DE PERGUNTAS
 ========================================
 
-TOTAL REALMENTE JOGÁVEL ...... 20 061
+TOTAL REALMENTE JOGÁVEL ...... 20 117
 
 PORTUGAL ..................... 3247
 FUTEBOL PORTUGUÊS ............ 1110
 HISTÓRIA ..................... 1300
 CULTURA ...................... 1324
 GASTRONOMIA .................. 1068
-PORTUGAL POLÍTICO ............ 950
-GEOGRAFIA .................... 1405
+PORTUGAL POLÍTICO ............ 986
+GEOGRAFIA .................... 1425
 CIÊNCIA E TECNOLOGIA ......... 918
 EMPRESAS PORTUGUESAS ......... 850
 DESPORTO ..................... 830

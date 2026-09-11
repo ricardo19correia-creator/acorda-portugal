@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     let queryRef = db.collection('adminAuditLogs').orderBy('timestamp', 'desc').limit(limitCount)
 
     const snap = await queryRef.get()
-    let logs = snap.docs.map((d) => ({
+    let logs = snap.docs.map((d: any) => ({
       id: d.id,
       ...d.data(),
     }))

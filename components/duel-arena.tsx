@@ -67,15 +67,13 @@ import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 import { getArenaById } from '@/data/shopArenas'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
-import { calculate5050Eliminated, generateQuestionClue, simulatePublicVote } from '@/lib/powerup-helpers'
+import { generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import {
-  getUserAidStock,
-  consumeGameAid,
   CANONICAL_AIDS,
   type AidType,
-  type UserAidStock,
 } from '@/lib/aid-service'
+import { useGameAids } from '@/hooks/use-game-aids'
 import { AidPreviewModal } from '@/components/quiz/aid-preview-modal'
 import {
   QUESTION_TIME_SECONDS,
@@ -143,42 +141,10 @@ export function DuelArena({
   const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now())
   const [feedback, setFeedback] = useState<AnswerFeedback | null>(null)
 
-  // Power-Ups State (100% individual para este jogador no Duelo)
-  const [eliminatedOptions, setEliminatedOptions] = useState<('A' | 'B' | 'C' | 'D')[]>([])
+  // Power-Ups & Game State
   const [activeClue, setActiveClue] = useState<string | null>(null)
-  const [publicVoteResults, setPublicVoteResults] = useState<number[] | null>(null)
-  const [isFrozen, setIsFrozen] = useState(false)
   const [isSurrenderModalOpen, setIsSurrenderModalOpen] = useState(false)
   const [isSurrendering, setIsSurrendering] = useState(false)
-  const [freezeTimeLeft, setFreezeTimeLeft] = useState(0)
-
-  // Live Inventory & Aid Stocks (SSOT canónico de inventário de ajudas)
-  const effectiveUid = user?.uid || profile?.uid || ''
-  const rawInventory: Record<string, any> = (profile as any)?.inventory || {}
-  const [inventory, setInventory] = useState<Record<string, any>>(rawInventory)
-  const [aidStocks, setAidStocks] = useState<UserAidStock>(() => getUserAidStock(profile, rawInventory))
-  const [selectedPreviewAid, setSelectedPreviewAid] = useState<AidType | null>(null)
-  const [isHelpProcessing, setIsHelpProcessing] = useState(false)
-  const [aidToast, setAidToast] = useState<string | null>(null)
-
-  useEffect(() => {
-    const syncStocks = () => {
-      const inv: Record<string, any> = (profile as any)?.inventory || {}
-      setInventory(inv)
-      setAidStocks(getUserAidStock(profile, inv))
-    }
-
-    syncStocks()
-    window.addEventListener('consumables_updated', syncStocks)
-    window.addEventListener('inventory_updated', syncStocks)
-    window.addEventListener('storage', syncStocks)
-
-    return () => {
-      window.removeEventListener('consumables_updated', syncStocks)
-      window.removeEventListener('inventory_updated', syncStocks)
-      window.removeEventListener('storage', syncStocks)
-    }
-  }, [profile])
 
 
 
@@ -517,6 +483,27 @@ export function DuelArena({
 
   const activeQuestionIndexRef = useRef<number>(-1)
 
+  // Hook Unificado de Ajudas (SSOT Canónico partilhado com modo Solo)
+  const {
+    stocks: aidStocks,
+    isHelpProcessing,
+    eliminatedOptions,
+    publicVoteResults,
+    isFrozen,
+    freezeTimeLeft,
+    selectedPreviewAid,
+    aidToast,
+    requestPreview: handleRequestAidPreview,
+    cancelPreview: handleCancelAidPreview,
+    confirmUseAid: handleConfirmUseAid,
+    resetQuestionAids,
+  } = useGameAids({
+    gameMode: 'duel',
+    duelId: duel?.id,
+    currentQuestion,
+    disabled: feedback !== null || isSubmitting || timeLeft <= 0,
+  })
+
   // 2. Transição local quando o jogador avança de pergunta
   useEffect(() => {
     if (isFinishedForMe) return
@@ -526,100 +513,12 @@ export function DuelArena({
       setSelectedOption(null)
       setFeedback(null)
       setIsSubmitting(false)
-      setEliminatedOptions([])
+      resetQuestionAids()
       setActiveClue(null)
-      setPublicVoteResults(null)
-      setIsFrozen(false)
-      setFreezeTimeLeft(0)
       setQuestionStartTime(Date.now())
       setTimeLeft(QUESTION_TIME_LIMIT)
     }
-  }, [currentQIndex, isFinishedForMe])
-
-  // Handlers Unificados das Ajudas no Duelo 1v1
-  const handleRequestAidPreview = (aidType: AidType) => {
-    if (feedback !== null || isSubmitting || isHelpProcessing || !currentQuestion) return
-    setSelectedPreviewAid(aidType)
-  }
-
-  const handleConfirmUseAid = async () => {
-    if (!selectedPreviewAid || !currentQuestion || feedback !== null || isSubmitting || isHelpProcessing) {
-      return
-    }
-
-    const aidType = selectedPreviewAid
-    const currentStock =
-      aidType === '5050'
-        ? aidStocks.stock5050
-        : aidType === 'publicVote'
-          ? aidStocks.stockPublicVote
-          : aidStocks.stockFreeze
-
-    if (currentStock <= 0) return
-
-    // Prevenir duplo efeito na mesma pergunta
-    if (aidType === '5050' && eliminatedOptions.length > 0) return
-    if (aidType === 'publicVote' && publicVoteResults !== null) return
-    if (aidType === 'freeze' && isFrozen) return
-
-    setIsHelpProcessing(true)
-
-    try {
-      const res = await consumeGameAid({
-        userId: effectiveUid,
-        aidType,
-        gameMode: 'duel',
-        currentStock,
-        questionData: currentQuestion,
-        duelId: duel?.id,
-      })
-
-      if (res.success) {
-        // Fechar modal imediatamente
-        setSelectedPreviewAid(null)
-
-        // Atualizar estoque local
-        setAidStocks((prev) => ({
-          ...prev,
-          ...(aidType === '5050' && { stock5050: res.remainingStock }),
-          ...(aidType === 'publicVote' && { stockPublicVote: res.remainingStock }),
-          ...(aidType === 'freeze' && { stockFreeze: res.remainingStock }),
-        }))
-
-        // Aplicar o efeito exclusivamente ao jogador local
-        if (aidType === '5050') {
-          const eliminated =
-            res.effect?.eliminatedOptions ||
-            calculate5050Eliminated(currentQuestion.options, currentQuestion.correct)
-          setEliminatedOptions(eliminated)
-        } else if (aidType === 'publicVote') {
-          const percentages =
-            res.effect?.percentages ||
-            simulatePublicVote(
-              Math.max(
-                0,
-                currentQuestion.options.findIndex((o) => o.key === currentQuestion.correct),
-              ),
-            )
-          setPublicVoteResults(percentages)
-        } else if (aidType === 'freeze') {
-          setIsFrozen(true)
-          setFreezeTimeLeft(15)
-          setTimeLeft((prev) => prev + 15)
-        }
-
-        // Confirmação visual clara
-        setAidToast(`💡 ${CANONICAL_AIDS[aidType].shortName.toUpperCase()} UTILIZADA — Restam ${res.remainingStock}`)
-        setTimeout(() => setAidToast(null), 3000)
-      } else {
-        alert(res.message || 'Erro ao utilizar ajuda.')
-      }
-    } catch (err) {
-      console.error('Erro ao consumir ajuda:', err)
-    } finally {
-      setIsHelpProcessing(false)
-    }
-  }
+  }, [currentQIndex, isFinishedForMe, resetQuestionAids])
 
   // Handlers legados / atalhos diretos
   const handleUse5050 = () => handleRequestAidPreview('5050')
@@ -631,23 +530,6 @@ export function DuelArena({
     const clue = generateQuestionClue(currentQuestion)
     setActiveClue(clue)
   }
-
-  // Freeze Countdown loop no Duelo (pausa por 15s)
-  useEffect(() => {
-    if (!isFrozen || freezeTimeLeft <= 0 || feedback !== null) return
-
-    const interval = setInterval(() => {
-      setFreezeTimeLeft((current) => {
-        if (current <= 1) {
-          setIsFrozen(false)
-          return 0
-        }
-        return current - 1
-      })
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [isFrozen, freezeTimeLeft, feedback])
 
   // 3. Temporizador de 60 Segundos 100% Individual (Pausado se isFrozen === true)
   useEffect(() => {
@@ -1091,338 +973,339 @@ export function DuelArena({
           : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
 
     return (
-      <div className="min-h-[100dvh] w-full flex flex-col justify-between gap-3 sm:gap-4 p-2.5 sm:p-4 pb-8 sm:pb-6 max-w-lg mx-auto select-none animate-rise">
-        {/* ========================================================= */}
-        {/* 1. TOPO: VS HEADER + REAGIR + TEMPO (SHRINK-0)            */}
-        {/* ========================================================= */}
-        <div className="w-full shrink-0">
-          <div className="card-game flex items-center justify-between gap-2 rounded-2xl py-1.5 px-3 shadow-lg border border-white/15 relative overflow-visible bg-slate-900/90">
-            {/* 1v1 VFX OVERLAYS CLIPPED INSIDE INNER CONTAINER */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-              {/* 1v1 VFX OVERLAY: Raio Lusitano */}
-              {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
-              )}
-
-              {/* 1v1 VFX OVERLAY: Cravos de Abril */}
-              {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-                  <span className="text-lg animate-bounce">🌺</span>
-                  <span className="text-base animate-ping ml-2">🌸</span>
-                </div>
-              )}
-
-              {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
-              {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
-                <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
-              )}
-
-              {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
-              {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
-                  <span className="text-lg animate-bounce">🪙</span>
-                  <span className="text-xl animate-ping">✨</span>
-                </div>
-              )}
-
-              {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
-              {feedback?.status === 'CORRECT' &&
-                (streakEffectId === 'sfx_espada_conquistador' ||
-                  streakEffectId === 'streak_espada_conquistador') && (
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
-                    <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
-                      ⚔️
-                    </span>
-                  </div>
-                )}
-            </div>
-
-            {/* Linha dos Jogadores VS */}
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0 relative">
-              {/* Botão Discreto de Desistência 1v1 */}
-              <GameExitControl
-                mode="1v1"
-                onConfirmExit={handleConfirmSurrender}
-              />
-              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
-                <PlayerAvatar
-                  profile={profile ?? undefined}
-                  photoURL={me?.photoURL || (me as any)?.avatarUrl || (me as any)?.avatar}
-                  displayName={me?.displayName || 'Tu'}
-                  isCurrentUser={true}
-                  size="sm"
-                />
-                {playerReaction && (
-                  <ProvocationBubble
-                    message={playerReaction.message}
-                    sender="player"
-                    onDismiss={() => setPlayerReaction(null)}
-                  />
-                )}
-              </div>
-
-              <div className="min-w-0">
-                <span className="font-display text-xs font-black text-foreground truncate block leading-none">
-                  {me?.displayName || 'Jogador'} <span className="text-primary text-[10px]">(Tu)</span>
-                </span>
-                <p className="font-display text-xs font-black text-primary text-glow-primary leading-none mt-1">
-                  {me?.score || 0} <span className="text-[0.6rem] text-muted-foreground font-normal">pts</span>
-                </p>
-              </div>
-            </div>
-
-            {/* Center VS Indicator + Reagir Button */}
-            <div className="flex flex-col items-center px-1.5 shrink-0 relative z-30">
-              <div className="flex items-center gap-1">
-                <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1.5 text-[9px] font-black">
-                  VS
-                </span>
-                <span className="font-mono text-[10px] font-black text-gold">
-                  Q{currentQIndex + 1}/10
-                </span>
-              </div>
-
-              {/* Botão Mini Reagir Desbloqueado */}
-              <div className="relative mt-1">
-                <button
-                  type="button"
-                  disabled={tauntCooldown > 0}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setTauntModalOpen((prev) => !prev)
-                  }}
-                  className={cn(
-                    'relative z-30 pointer-events-auto px-2.5 py-1 rounded-full border border-purple-500/50 bg-purple-500/20 text-purple-300 text-[10px] font-black transition flex items-center gap-1 active:scale-95 cursor-pointer shadow-sm',
-                    tauntCooldown > 0
-                      ? 'opacity-50 cursor-not-allowed'
-                      : 'hover:bg-purple-600/30 hover:border-purple-400'
+      <div className="min-h-[100dvh] w-full flex flex-col justify-between p-2.5 sm:p-4 pb-8 sm:pb-6 safe-area-x max-w-lg landscape:max-w-5xl mx-auto select-none animate-rise">
+        <div className="w-full flex-1 flex flex-col justify-between gap-3 sm:gap-4 landscape:grid landscape:grid-cols-2 landscape:gap-5 landscape:items-center my-auto">
+          {/* COLUNA ESQUERDA (LANDSCAPE): VS HEADER + PERGUNTA */}
+          <div className="w-full flex flex-col gap-2 sm:gap-3 justify-center">
+            {/* ========================================================= */}
+            {/* 1. TOPO: VS HEADER + REAGIR + TEMPO (SHRINK-0)            */}
+            {/* ========================================================= */}
+            <div className="w-full shrink-0">
+              <div className="card-game flex items-center justify-between gap-2 rounded-2xl py-1.5 px-3 shadow-lg border border-white/15 relative overflow-visible bg-slate-900/90">
+                {/* 1v1 VFX OVERLAYS CLIPPED INSIDE INNER CONTAINER */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+                  {/* 1v1 VFX OVERLAY: Raio Lusitano */}
+                  {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_raio_lusitano' || streakEffectId === 'sfx_raio_lusitano') && (
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-yellow-400/40 to-transparent animate-ping" />
                   )}
-                >
-                  <span>💬</span>
-                  <span>{tauntCooldown > 0 ? `${tauntCooldown}s` : 'Reagir'}</span>
-                </button>
-              </div>
-            </div>
 
-            {/* Player Right (Opponent) */}
-            <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right relative">
-              <div className="min-w-0">
-                <span className="font-display text-xs font-black text-foreground truncate block leading-none">
-                  {opponent?.displayName || 'Adversário'}
-                </span>
-                <p className="font-display text-xs font-bold text-muted-foreground truncate leading-none mt-1">
-                  P{Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10
-                </p>
-              </div>
-
-              <div className="relative shrink-0 w-9 h-9 flex items-center justify-center">
-                <PlayerAvatar
-                  photoURL={opponent?.photoURL || (opponent as any)?.avatarUrl || (opponent as any)?.avatar}
-                  displayName={opponent?.displayName || 'Adversário'}
-                  isCurrentUser={false}
-                  size="sm"
-                />
-                {opponentReaction && (
-                  <ProvocationBubble
-                    message={opponentReaction.message}
-                    sender="opponent"
-                    onDismiss={() => setOpponentReaction(null)}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Barra de Tempo Compacta */}
-          <div className="flex items-center gap-1.5 mt-1.5 w-full px-0.5">
-            <div
-              className={cn(
-                'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
-                isUrgent ? 'border-flag-red/60' : 'border-slate-700/40',
-              )}
-            >
-              <div
-                className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-sm', timeColor)}
-                style={{ width: `${timePercentage}%` }}
-              />
-            </div>
-            <span className={cn('font-mono font-bold text-xs shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
-              {timeLeft}s
-            </span>
-          </div>
-        </div>
-
-        {/* ========================================================= */}
-        {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, H-AUTO)             */}
-        {/* ========================================================= */}
-        <div className="my-auto py-2 w-full flex flex-col items-center justify-center relative">
-          {/* Banner de Identidade Visual da Arena & Significado */}
-          <div className="w-full mb-2 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-white/15 backdrop-blur-md flex items-center justify-between gap-2 shadow-sm">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span className="text-sm shrink-0">{currentArenaDef.icon}</span>
-              <span className="text-[11px] font-black text-white uppercase tracking-wider truncate">
-                {currentArenaDef.name}
-              </span>
-            </div>
-            {currentArenaDef.meaning && (
-              <span className="text-[10px] text-amber-300/90 font-medium italic truncate max-w-[240px] hidden sm:inline">
-                “{currentArenaDef.meaning}”
-              </span>
-            )}
-          </div>
-
-          {/* Feedback visual instantâneo overlay */}
-          {feedback && (
-            <div
-              className={cn(
-                'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
-                feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
-                feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
-                feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
-              )}
-            >
-              {feedback.status === 'CORRECT' && <CheckCircle2 className="h-4 w-4 shrink-0" />}
-              {feedback.status === 'WRONG' && <XCircle className="h-4 w-4 shrink-0" />}
-              {feedback.status === 'TIMEOUT' && <Clock className="h-4 w-4 shrink-0" />}
-              <span className="break-words">{feedback.message}</span>
-            </div>
-          )}
-
-          {/* Card com corpo e presença visual elegante adaptativa */}
-          <div className="w-full min-h-[100px] h-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
-            <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
-              {currentQuestion?.question}
-            </h1>
-          </div>
-
-          {/* Pista Histórica no Duelo */}
-          {activeClue && (
-            <div className="mt-2 rounded-xl border border-amber-500/50 bg-amber-500/15 px-3 py-1.5 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
-              <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-              <span className="font-medium break-words">{activeClue}</span>
-            </div>
-          )}
-
-          {/* Freeze Banner no Duelo */}
-          {isFrozen && (
-            <div className="mt-2 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1.5 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
-              <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
-              <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
-            </div>
-          )}
-        </div>
-
-        {/* ========================================================= */}
-        {/* 3. FUNDO: AJUDAS + GRELHA DE RESPOSTAS RESPONSIVA         */}
-        {/* ========================================================= */}
-        <div className="w-full flex flex-col gap-2 shrink-0">
-          {/* Barra de Ajudas */}
-          {/* Toast / Confirmação de Uso de Ajuda no Duelo */}
-          {aidToast && (
-            <div className="flex justify-center mb-1 w-full animate-pop">
-              <div className="px-3.5 py-1 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-xs font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
-                <span>{aidToast}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Barra de Ajudas Canónicas */}
-          <div className="flex justify-center gap-3 mb-1">
-            <QuizPowerUpsBar
-              stock5050={aidStocks.stock5050}
-              stockFreeze={aidStocks.stockFreeze}
-              stockPublicVote={aidStocks.stockPublicVote}
-              inventory={inventory}
-              disabled={feedback !== null || isSubmitting || timeLeft <= 0}
-              isProcessing={isHelpProcessing}
-              used5050={eliminatedOptions.length > 0}
-              usedPublicVote={publicVoteResults !== null}
-              usedClue={activeClue !== null}
-              isFrozen={isFrozen}
-              freezeTimeLeft={freezeTimeLeft}
-              onUse5050={handleUse5050}
-              onUsePublicVote={handleUsePublicVote}
-              onUseClue={handleUseClue}
-              onUseFreeze={handleUseFreeze}
-              onRequestPreview={handleRequestAidPreview}
-            />
-          </div>
-
-          {/* Grelha 100% adaptativa (1 coluna em mobile, 2 colunas em tablets/desktops) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full">
-            {currentQuestion?.options.map((opt, idx) => {
-              const isSelected = selectedOption === opt.key
-              const isCorrectOption = opt.key === currentQuestion.correct
-              const showFeedback = feedback !== null
-              const isEliminated = eliminatedOptions.includes(opt.key)
-              const optionKey = (['A', 'B', 'C', 'D'][idx] || opt.key) as 'A' | 'B' | 'C' | 'D'
-
-              if (isEliminated) {
-                return (
-                  <div
-                    key={opt.key}
-                    className="min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
-                  >
-                    <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 line-through">
-                      {optionKey}
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
-                      {opt.text}
-                    </span>
-                  </div>
-                )
-              }
-
-              let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
-
-              if (showFeedback) {
-                if (isCorrectOption) {
-                  buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
-                } else if (isSelected && !isCorrectOption) {
-                  buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
-                } else {
-                  buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
-                }
-              } else if (isSelected) {
-                buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white'
-              }
-
-              return (
-                <button
-                  key={opt.key}
-                  disabled={selectedOption !== null || isSubmitting}
-                  onClick={() => handleSelectOption(opt.key)}
-                  className={cn(
-                    'min-h-[3.75rem] h-auto w-full p-2.5 sm:p-3 rounded-xl flex items-center gap-2.5 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
-                    buttonStyles,
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'w-7 h-7 sm:w-8 sm:h-8 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center shrink-0 border transition-colors',
-                      showFeedback && isCorrectOption
-                        ? 'bg-emerald-500 border-emerald-300 text-slate-950'
-                        : showFeedback && isSelected
-                          ? 'bg-rose-600 border-rose-400 text-white'
-                          : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30',
-                    )}
-                  >
-                    {optionKey}
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
-                    {opt.text}
-                  </span>
-
-                  {/* Exibe a percentagem se a votação do público foi usada */}
-                  {publicVoteResults && publicVoteResults[idx] !== undefined && (
-                    <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
-                      <span className="text-[10px]">👥</span>
-                      <span>{publicVoteResults[idx]}%</span>
+                  {/* 1v1 VFX OVERLAY: Cravos de Abril */}
+                  {feedback?.status === 'CORRECT' && (profile?.equipped?.sfx === 'sfx_cravos_abril' || streakEffectId === 'sfx_cravos_abril') && (
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+                      <span className="text-lg animate-bounce">🌺</span>
+                      <span className="text-base animate-ping ml-2">🌸</span>
                     </div>
                   )}
-                </button>
-              )
-            })}
+
+                  {/* 1v1 VFX OVERLAY: Chama Tripla Verde Néon */}
+                  {feedback?.status === 'CORRECT' && streakEffectId === 'streak_chama_tripla' && (
+                    <div className="pointer-events-none absolute inset-0 bg-emerald-500/20 shadow-[inset_0_0_30px_rgba(16,185,129,0.7)] animate-pulse" />
+                  )}
+
+                  {/* 1v1 VFX OVERLAY: Explosão de Moedas de Ouro */}
+                  {feedback?.status === 'CORRECT' && streakEffectId === 'streak_moedas_ouro' && (
+                    <div className="pointer-events-none absolute inset-0 flex items-center justify-around overflow-hidden">
+                      <span className="text-lg animate-bounce">🪙</span>
+                      <span className="text-xl animate-ping">✨</span>
+                    </div>
+                  )}
+
+                  {/* 1v1 VFX OVERLAY: Espada de D. Afonso Henriques */}
+                  {feedback?.status === 'CORRECT' &&
+                    (streakEffectId === 'sfx_espada_conquistador' ||
+                      streakEffectId === 'streak_espada_conquistador') && (
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-30 animate-pop">
+                        <span className="text-2xl animate-bounce drop-shadow-[0_0_15px_rgba(234,179,8,0.95)]">
+                          ⚔️
+                        </span>
+                      </div>
+                    )}
+                </div>
+
+                {/* Linha dos Jogadores VS */}
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0 relative">
+                  {/* Botão Discreto de Desistência 1v1 */}
+                  <GameExitControl
+                    mode="1v1"
+                    onConfirmExit={handleConfirmSurrender}
+                  />
+                  <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+                    <PlayerAvatar
+                      profile={profile ?? undefined}
+                      photoURL={me?.photoURL || (me as any)?.avatarUrl || (me as any)?.avatar}
+                      displayName={me?.displayName || 'Tu'}
+                      isCurrentUser={true}
+                      size="sm"
+                    />
+                    {playerReaction && (
+                      <ProvocationBubble
+                        message={playerReaction.message}
+                        sender="player"
+                        onDismiss={() => setPlayerReaction(null)}
+                      />
+                    )}
+                  </div>
+
+                  <div className="min-w-0">
+                    <span className="font-display text-xs font-black text-foreground truncate block leading-none">
+                      {me?.displayName || 'Jogador'} <span className="text-primary text-[10px]">(Tu)</span>
+                    </span>
+                    <p className="font-display text-xs font-black text-primary text-glow-primary leading-none mt-1">
+                      {me?.score || 0} <span className="text-[0.6rem] text-muted-foreground font-normal">pts</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Center VS Indicator + Reagir Button */}
+                <div className="flex flex-col items-center px-1.5 shrink-0 relative z-30">
+                  <div className="flex items-center gap-1">
+                    <span className="badge-hud text-flag-red border-flag-red/50 bg-flag-red/20 py-0.2 px-1.5 text-[9px] font-black">
+                      VS
+                    </span>
+                    <span className="font-mono text-[10px] font-black text-gold">
+                      Q{currentQIndex + 1}/10
+                    </span>
+                  </div>
+
+                  {/* Botão Mini Reagir Desbloqueado */}
+                  <div className="relative mt-1">
+                    <button
+                      type="button"
+                      disabled={tauntCooldown > 0}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setTauntModalOpen((prev) => !prev)
+                      }}
+                      className={cn(
+                        'relative z-30 pointer-events-auto px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-purple-500/50 bg-purple-500/20 text-purple-300 text-[9px] sm:text-[10px] font-black transition flex items-center gap-1 active:scale-95 cursor-pointer shadow-sm',
+                        tauntCooldown > 0
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:bg-purple-600/30 hover:border-purple-400'
+                      )}
+                    >
+                      <span>💬</span>
+                      <span>{tauntCooldown > 0 ? `${tauntCooldown}s` : 'Reagir'}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Player Right (Opponent) */}
+                <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right relative">
+                  <div className="min-w-0">
+                    <span className="font-display text-xs font-black text-foreground truncate block leading-none">
+                      {opponent?.displayName || 'Adversário'}
+                    </span>
+                    <p className="font-display text-xs font-bold text-muted-foreground truncate leading-none mt-1">
+                      P{Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10
+                    </p>
+                  </div>
+
+                  <div className="relative shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+                    <PlayerAvatar
+                      photoURL={opponent?.photoURL || (opponent as any)?.avatarUrl || (opponent as any)?.avatar}
+                      displayName={opponent?.displayName || 'Adversário'}
+                      isCurrentUser={false}
+                      size="sm"
+                    />
+                    {opponentReaction && (
+                      <ProvocationBubble
+                        message={opponentReaction.message}
+                        sender="opponent"
+                        onDismiss={() => setOpponentReaction(null)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Barra de Tempo Compacta */}
+              <div className="flex items-center gap-1.5 mt-1.5 w-full px-0.5">
+                <div
+                  className={cn(
+                    'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+                    isUrgent ? 'border-flag-red/60' : 'border-slate-700/40',
+                  )}
+                >
+                  <div
+                    className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-sm', timeColor)}
+                    style={{ width: `${timePercentage}%` }}
+                  />
+                </div>
+                <span className={cn('font-mono font-bold text-[10px] sm:text-xs shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
+                  {timeLeft}s
+                </span>
+              </div>
+            </div>
+
+            {/* ========================================================= */}
+            {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, H-AUTO)             */}
+            {/* ========================================================= */}
+            <div className="py-1 w-full flex flex-col items-center justify-center relative">
+              {/* Banner de Identidade Visual da Arena & Significado */}
+              <div className="w-full mb-1.5 px-2.5 py-1 rounded-xl bg-slate-950/80 border border-white/15 backdrop-blur-md flex items-center justify-between gap-2 shadow-sm">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="text-xs sm:text-sm shrink-0">{currentArenaDef.icon}</span>
+                  <span className="text-[10px] sm:text-[11px] font-black text-white uppercase tracking-wider truncate">
+                    {currentArenaDef.name}
+                  </span>
+                </div>
+                {currentArenaDef.meaning && (
+                  <span className="text-[9px] sm:text-[10px] text-amber-300/90 font-medium italic truncate max-w-[200px] hidden sm:inline">
+                    “{currentArenaDef.meaning}”
+                  </span>
+                )}
+              </div>
+
+              {/* Feedback visual instantâneo overlay */}
+              {feedback && (
+                <div
+                  className={cn(
+                    'mb-1.5 px-3 py-1 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
+                    feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
+                    feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
+                    feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
+                  )}
+                >
+                  {feedback.status === 'CORRECT' && <CheckCircle2 className="h-4 w-4 shrink-0" />}
+                  {feedback.status === 'WRONG' && <XCircle className="h-4 w-4 shrink-0" />}
+                  {feedback.status === 'TIMEOUT' && <Clock className="h-4 w-4 shrink-0" />}
+                  <span className="break-words">{feedback.message}</span>
+                </div>
+              )}
+
+              {/* Card com corpo e presença visual elegante adaptativa */}
+              <div className="w-full min-h-[85px] sm:min-h-[100px] h-auto p-3 sm:p-6 md:p-8 landscape:p-3.5 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
+                <h1 className="text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
+                  {currentQuestion?.question}
+                </h1>
+              </div>
+
+              {/* Pista Histórica no Duelo */}
+              {activeClue && (
+                <div className="mt-1.5 rounded-xl border border-amber-500/50 bg-amber-500/15 px-2.5 py-1 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
+                  <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                  <span className="font-medium break-words">{activeClue}</span>
+                </div>
+              )}
+
+              {/* Freeze Banner no Duelo */}
+              {isFrozen && (
+                <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-2.5 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
+                  <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
+                  <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* COLUNA DIREITA (LANDSCAPE): GRELHA DE RESPOSTAS + AJUDAS */}
+          <div className="w-full flex flex-col gap-2 justify-center shrink-0">
+            {/* Toast / Confirmação de Uso de Ajuda no Duelo */}
+            {aidToast && (
+              <div className="flex justify-center mb-0.5 w-full animate-pop">
+                <div className="px-3.5 py-1 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-xs font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
+                  <span>{aidToast}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Grelha 100% adaptativa (1 coluna em mobile, 2 colunas em landscape/tablets) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 gap-2 sm:gap-2.5 w-full">
+              {currentQuestion?.options.map((opt, idx) => {
+                const isSelected = selectedOption === opt.key
+                const isCorrectOption = opt.key === currentQuestion.correct
+                const showFeedback = feedback !== null
+                const isEliminated = eliminatedOptions.includes(opt.key)
+                const optionKey = (['A', 'B', 'C', 'D'][idx] || opt.key) as 'A' | 'B' | 'C' | 'D'
+
+                if (isEliminated) {
+                  return (
+                    <div
+                      key={opt.key}
+                      className="min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
+                    >
+                      <span className="w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 line-through">
+                        {optionKey}
+                      </span>
+                      <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
+                        {opt.text}
+                      </span>
+                    </div>
+                  )
+                }
+
+                let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
+
+                if (showFeedback) {
+                  if (isCorrectOption) {
+                    buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
+                  } else if (isSelected && !isCorrectOption) {
+                    buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+                  } else {
+                    buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+                  }
+                } else if (isSelected) {
+                  buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white'
+                }
+
+                return (
+                  <button
+                    key={opt.key}
+                    disabled={selectedOption !== null || isSubmitting}
+                    onClick={() => handleSelectOption(opt.key)}
+                    className={cn(
+                      'min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 rounded-xl flex items-center gap-2 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
+                      buttonStyles,
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        'w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 border transition-colors',
+                        showFeedback && isCorrectOption
+                          ? 'bg-emerald-500 border-emerald-300 text-slate-950'
+                          : showFeedback && isSelected
+                            ? 'bg-rose-600 border-rose-400 text-white'
+                            : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30',
+                      )}
+                    >
+                      {optionKey}
+                    </span>
+                    <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
+                      {opt.text}
+                    </span>
+
+                    {/* Exibe a percentagem se a votação do público foi usada */}
+                    {publicVoteResults && publicVoteResults[idx] !== undefined && (
+                      <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
+                        <span className="text-[10px]">👥</span>
+                        <span>{publicVoteResults[idx]}%</span>
+                      </div>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Barra das 3 Ajudas Canónicas (Abaixo das Respostas) */}
+            <div className="flex justify-center w-full mt-1">
+              <QuizPowerUpsBar
+                stock5050={aidStocks.stock5050}
+                stockFreeze={aidStocks.stockFreeze}
+                stockPublicVote={aidStocks.stockPublicVote}
+                disabled={feedback !== null || isSubmitting || timeLeft <= 0}
+                isProcessing={isHelpProcessing}
+                used5050={eliminatedOptions.length > 0}
+                usedPublicVote={publicVoteResults !== null}
+                usedClue={activeClue !== null}
+                isFrozen={isFrozen}
+                freezeTimeLeft={freezeTimeLeft}
+                onUse5050={handleUse5050}
+                onUsePublicVote={handleUsePublicVote}
+                onUseClue={handleUseClue}
+                onUseFreeze={handleUseFreeze}
+                onRequestPreview={handleRequestAidPreview}
+              />
+            </div>
           </div>
         </div>
 
@@ -1442,9 +1325,7 @@ export function DuelArena({
             isOpen={selectedPreviewAid !== null}
             isProcessing={isHelpProcessing}
             onConfirm={handleConfirmUseAid}
-            onClose={() => {
-              if (!isHelpProcessing) setSelectedPreviewAid(null)
-            }}
+            onClose={handleCancelAidPreview}
           />
         )}
 

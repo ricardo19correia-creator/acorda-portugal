@@ -539,8 +539,8 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
   if (authResolved && !canEnterMatchmaking && (!user || !user.uid)) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
-        <div className="card-game-purple relative w-full max-w-md rounded-4xl p-6 sm:p-8 shadow-2xl animate-scale-in text-center overflow-hidden border border-purple-500/50">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
+        <div className="card-game-purple relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl sm:rounded-4xl p-5 sm:p-8 landscape:p-4 shadow-2xl animate-scale-in text-center border border-purple-500/50">
           <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-purple-500/25 blur-3xl animate-pulse" />
           <div className="pointer-events-none absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-gold/20 blur-3xl" />
 
@@ -589,8 +589,8 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
-      <div className="card-game-purple relative w-full max-w-lg rounded-4xl p-6 sm:p-8 shadow-2xl animate-scale-in text-center overflow-hidden border border-purple-500/50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
+      <div className="card-game-purple relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl sm:rounded-4xl p-5 sm:p-8 landscape:p-4 shadow-2xl animate-scale-in text-center border border-purple-500/50">
         {/* Luminous Glow Ambient Effects */}
         <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-purple-500/25 blur-3xl animate-pulse" />
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-emerald-500/20 blur-3xl" />

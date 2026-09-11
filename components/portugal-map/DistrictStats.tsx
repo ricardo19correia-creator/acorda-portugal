@@ -83,7 +83,9 @@ export function DistrictStats({
           'fixed z-40 text-white select-none shadow-2xl',
           // Mobile Portrait (abaixo de 640px)
           'inset-x-0 bottom-0 rounded-t-3xl border-t border-x border-cyan-500/30 bg-slate-950/95 max-h-[55vh] overflow-y-auto pb-safe',
-          // Landscape & Tablets/Desktop (sm e superior)
+          // Mobile Landscape (Right Side Panel)
+          'landscape:inset-x-auto landscape:right-2 landscape:top-2 landscape:bottom-2 landscape:w-[290px] landscape:max-h-[calc(100dvh-1rem)] landscape:rounded-2xl landscape:border landscape:border-cyan-500/35 landscape:p-3 landscape:gap-2.5 landscape:overflow-y-auto',
+          // Tablets/Desktop (sm e superior)
           'sm:inset-x-auto sm:right-4 sm:top-20 sm:bottom-auto sm:w-[320px] md:w-[340px] lg:w-[360px] sm:max-h-[calc(100dvh-100px)] sm:rounded-3xl sm:border sm:border-cyan-500/35',
           'backdrop-blur-2xl p-4 sm:p-5 flex flex-col gap-3.5',
           'animate-in fade-in slide-in-from-bottom-6 sm:slide-in-from-right-6 duration-200 ease-out',
@@ -97,8 +99,8 @@ export function DistrictStats({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Mobile Swipe Handle */}
-        <div className="w-12 h-1.5 rounded-full bg-white/20 mx-auto sm:hidden shrink-0" />
+        {/* Mobile Swipe Handle (oculto em landscape) */}
+        <div className="w-12 h-1.5 rounded-full bg-white/20 mx-auto sm:hidden landscape:hidden shrink-0" />
 
         {/* 1. TOPO: Nome do Distrito & Classificação Nacional */}
         <div className="flex items-start justify-between gap-3 border-b border-white/10 pb-3">

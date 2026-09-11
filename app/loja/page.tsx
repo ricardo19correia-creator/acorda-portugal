@@ -1761,7 +1761,7 @@ function LojaContent() {
             </div>
 
             {/* Grelha dos 5 Pacotes de Acordas */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 w-full">
               {billingProducts.map((prod) => {
                 const isThisPurchasing = isPurchasingId === prod.productId
 
@@ -1913,7 +1913,7 @@ function LojaContent() {
             </div>
 
             {/* Os 3 Cards Exclusivos */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 landscape:grid-cols-3 gap-4 sm:gap-6 w-full">
               {OTHER_SHOP_ITEMS.map((item) => {
                 const st = aidStatus[item.id]
                 const aidStock = typeof st?.stock === 'number' ? st.stock : getAidStock(item.id)
@@ -1934,7 +1934,7 @@ function LojaContent() {
                   <div
                     key={item.id}
                     className={cn(
-                      "group relative flex flex-col justify-between rounded-3xl border p-5 sm:p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-xl",
+                      "group relative flex flex-col justify-between rounded-3xl border p-4 sm:p-6 landscape:p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-xl",
                       isAid5050
                         ? "border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)] bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-cyan-950/20"
                         : isAidPublic
@@ -1944,7 +1944,7 @@ function LojaContent() {
                   >
                     <div>
                       {/* Top Badges */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
                         <span className={cn(
                           "text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border",
                           item.badgeColor || 'bg-amber-500/20 text-amber-300 border-amber-500/30'
@@ -1958,7 +1958,7 @@ function LojaContent() {
                       </div>
 
                       {/* Grande Ilustração Oficial WebP */}
-                      <div className="relative aspect-square w-full rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900 to-black border border-white/10 p-4 flex items-center justify-center overflow-hidden mb-4 shadow-inner">
+                      <div className="relative aspect-square landscape:aspect-video landscape:max-h-28 w-full rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900 to-black border border-white/10 p-3 sm:p-4 landscape:p-2 flex items-center justify-center overflow-hidden mb-3 sm:mb-4 landscape:mb-2 shadow-inner">
                         <div
                           className="absolute inset-0 opacity-30 blur-2xl pointer-events-none group-hover:opacity-50 transition-opacity"
                           style={{
@@ -2037,7 +2037,7 @@ function LojaContent() {
           </div>
         ) : (
           /* Items Grid */
-          <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 landscape:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 
             {filteredItems.length === 0 ? (
               <div className="col-span-full py-12 text-center rounded-2xl bg-slate-900/40 border border-slate-800 text-slate-400">

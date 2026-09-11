@@ -57,8 +57,8 @@ export function DailyRewardModal({ isOpen, onClose }: DailyRewardModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg rounded-4xl border border-white/15 bg-slate-900/95 p-6 sm:p-7 shadow-2xl backdrop-blur-2xl text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl sm:rounded-4xl border border-white/15 bg-slate-900/95 p-5 sm:p-7 landscape:p-4 shadow-2xl backdrop-blur-2xl text-center">
         {/* Fechar */}
         <button
           type="button"

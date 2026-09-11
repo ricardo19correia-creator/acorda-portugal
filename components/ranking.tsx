@@ -117,7 +117,7 @@ export function Ranking() {
               isFounder: Boolean((profile as any)?.isFounder),
               playerType: 'human',
               isNpc: false,
-            })
+            } as any)
           }
         }
 

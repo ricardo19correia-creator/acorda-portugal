@@ -117,6 +117,19 @@
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 
+  .safe-area-left {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .safe-area-right {
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .safe-area-x {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
   .touch-target {
     min-height: 44px;
     min-width: 44px;
