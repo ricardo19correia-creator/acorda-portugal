@@ -29,6 +29,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import {
   HUB_CATEGORIES,
@@ -228,7 +229,10 @@ export function GameHub() {
     })
   }, [activeCategoryTab, searchCategory])
 
-  // Handlers to launch solo games with safe UUID and guest support
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
+
+  // Handlers to launch solo games with safe UUID (Requer utilizador autenticado)
   const handleLaunchGame = (params: {
     categorySlug: string
     subcategorySlug?: string
@@ -254,6 +258,12 @@ export function GameHub() {
       url += `&arena=${encodeURIComponent(chosenArena)}`
     }
 
+    if (!user) {
+      setAuthWallTarget(url)
+      setAuthWallOpen(true)
+      return
+    }
+
     logGameFlow('JOGAR_CLICK', {
       from: 'GameHub',
       categorySlug: params.categorySlug,
@@ -272,6 +282,11 @@ export function GameHub() {
   }
 
   const handleOpenDuelModal = () => {
+    if (!user) {
+      setAuthWallTarget('/jogar/duelo')
+      setAuthWallOpen(true)
+      return
+    }
     setShowDuelModal(true)
   }
 
@@ -862,13 +877,14 @@ export function GameHub() {
                 </div>
               </div>
 
-              <Link
-                href={`/jogar?cat=desafio-nacional&event=${encodeURIComponent(event.title)}`}
+              <button
+                type="button"
+                onClick={() => handleLaunchGame({ categorySlug: 'desafio-nacional' })}
                 className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 px-3 py-2 text-xs font-bold text-white transition cursor-pointer"
               >
                 <span>Participar no Evento</span>
                 <ChevronRight className="h-3.5 w-3.5" />
-              </Link>
+              </button>
             </div>
           ))}
         </div>
@@ -1094,6 +1110,13 @@ export function GameHub() {
           setShowDuelModal(false)
           router.push(`/jogar/duelo?id=${id}`)
         }}
+      />
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
       />
     </div>
   )

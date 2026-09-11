@@ -1,8 +1,10 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import type { DistrictMapItem } from '@/lib/district-map-data'
 import {
   X,
@@ -34,7 +36,9 @@ export function DistrictStats({
   onPlayDistrict,
   className,
 }: DistrictStatsProps) {
-  const router = useRouter()
+  const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
 
   // Fechar com tecla ESC
   useEffect(() => {
@@ -52,10 +56,16 @@ export function DistrictStats({
   if (!isOpen || !district) return null
 
   const handleActionClick = () => {
+    const target = `/jogar?dist=${encodeURIComponent(district.slug)}&cat=o-meu-distrito`
+    if (!user) {
+      setAuthWallTarget(target)
+      setAuthWallOpen(true)
+      return
+    }
     if (onPlayDistrict) {
       onPlayDistrict(district.slug)
     } else {
-      router.push(`/jogar?dist=${encodeURIComponent(district.slug)}&cat=o-meu-distrito`)
+      router.push(target)
     }
   }
 
@@ -293,6 +303,13 @@ export function DistrictStats({
           </Link>
         </div>
       </aside>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </>
   )
 }

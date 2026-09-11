@@ -10,6 +10,7 @@ import { QuizScreen } from '@/components/quiz/quiz-screen'
 import { safeRandomUUID } from '@/lib/utils'
 import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallView } from '@/components/auth-wall-modal'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -112,6 +113,12 @@ function QuizPageContent() {
   // Impede a montagem do motor de quiz e o acesso a user.uid enquanto a autenticação/perfil sincronizam
   if (!authResolved || (user && profileLoading)) {
     return <LoadingQuiz message="A sincronizar sessão..." submessage="A preparar os dados de jogador..." />
+  }
+
+  // 🔒 BLOQUEIO DEFINITIVO DE CONVIDADO / NÃO AUTENTICADO
+  if (categorySlug && !user) {
+    const currentTarget = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : `/jogar?cat=${encodeURIComponent(categorySlug)}`
+    return <AuthWallView targetUrl={currentTarget} />
   }
 
   return (

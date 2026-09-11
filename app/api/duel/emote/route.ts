@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { getEmoteById } from '@/src/data/emotes'
+import { getAdminAuth } from '@/lib/firebase-admin'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,10 +11,23 @@ const playerCooldowns = new Map<string, number>()
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json()
+    const authHeader = req.headers.get('Authorization')
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
+    }
+
+    const idToken = authHeader.split('Bearer ')[1]
+    const adminAuth = getAdminAuth()
+    const decodedToken = await adminAuth.verifyIdToken(idToken).catch(() => null)
+
+    if (!decodedToken || !decodedToken.uid) {
+      return NextResponse.json({ error: 'Sessão inválida ou expirada.' }, { status: 401 })
+    }
+
+    const body = await req.json().catch(() => ({}))
     const duelId = body.duelId || body.roomId
-    const senderId = body.senderId
-    const senderName = body.senderName
+    const senderId = decodedToken.uid
+    const senderName = body.senderName || decodedToken.email?.split('@')[0]
     const emoteId = body.emoteId || body.reaction?.id
 
     if (!duelId || !senderId || !emoteId) {

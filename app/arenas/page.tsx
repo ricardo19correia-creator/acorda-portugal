@@ -30,6 +30,7 @@ import {
 import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 import { PortugalMap } from '@/components/portugal-map/PortugalMap'
@@ -37,6 +38,8 @@ import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 export default function ArenasPage() {
   const router = useRouter()
   const { user, profile } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
 
   const allArenas = useMemo(() => getAllArenas(), [])
   const vipArenas = useMemo(() => getVipArenas(), [])
@@ -118,7 +121,13 @@ export default function ArenasPage() {
   }
 
   const handlePlayInArena = (arena: CanonicalArena) => {
-    router.push(`/jogar?cat=desafio-nacional&arena=${encodeURIComponent(arena.id)}`)
+    const target = `/jogar?cat=desafio-nacional&arena=${encodeURIComponent(arena.id)}`
+    if (!user) {
+      setAuthWallTarget(target)
+      setAuthWallOpen(true)
+      return
+    }
+    router.push(target)
   }
 
   const showToast = (msg: string) => {
@@ -426,6 +435,13 @@ export default function ArenasPage() {
           </div>
         )}
       </main>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </div>
   )
 }

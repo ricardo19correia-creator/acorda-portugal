@@ -14,6 +14,7 @@ import { generateDuelQuestions, generateDuelCode, type DuelDocument, type DuelPl
 import { getArenaById, getRandomArena } from '@/src/data/arenas'
 import { QUESTION_TIME_MS } from '@/config/quiz'
 import { getAvatarImage } from '@/lib/avatars'
+import { getAdminAuth } from '@/lib/firebase-admin'
 
 export const dynamic = 'force-dynamic'
 
@@ -275,9 +276,22 @@ async function handleMatchmaking(params: {
 
 export async function GET(request: NextRequest) {
   try {
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Não autorizado. Inicia sessão para aceder ao matchmaking.' }, { status: 401 })
+    }
+
+    const idToken = authHeader.split('Bearer ')[1]
+    const adminAuth = getAdminAuth()
+    const decodedToken = await adminAuth.verifyIdToken(idToken).catch(() => null)
+
+    if (!decodedToken || !decodedToken.uid) {
+      return NextResponse.json({ error: 'Sessão inválida ou expirada.' }, { status: 401 })
+    }
+
+    const userId = decodedToken.uid
     const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId') || ''
-    const name = searchParams.get('name') || ''
+    const name = searchParams.get('name') || decodedToken.email?.split('@')[0] || ''
     const photo = searchParams.get('photo') || null
     const level = searchParams.get('level')
     const district = searchParams.get('district')
@@ -309,10 +323,24 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Não autorizado. Inicia sessão para aceder ao matchmaking.' }, { status: 401 })
+    }
+
+    const idToken = authHeader.split('Bearer ')[1]
+    const adminAuth = getAdminAuth()
+    const decodedToken = await adminAuth.verifyIdToken(idToken).catch(() => null)
+
+    if (!decodedToken || !decodedToken.uid) {
+      return NextResponse.json({ error: 'Sessão inválida ou expirada.' }, { status: 401 })
+    }
+
+    const userId = decodedToken.uid
+    const body = await request.json().catch(() => ({}))
     const result = await handleMatchmaking({
-      userId: body.userId || body.uid,
-      name: body.displayName || body.userName || body.name,
+      userId,
+      name: body.displayName || body.userName || body.name || decodedToken.email?.split('@')[0],
       photo: body.photoURL || body.avatar || body.photo,
       level: body.level,
       district: body.district,

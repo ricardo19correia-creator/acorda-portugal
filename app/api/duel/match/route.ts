@@ -1,16 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { findOrCreateMatchmakingRoom } from '@/lib/duel'
+import { getAdminAuth } from '@/lib/firebase-admin'
 
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { userId, displayName, photoURL, level, district } = body
-
-    if (!userId) {
-      return NextResponse.json({ error: 'userId obrigatório' }, { status: 400 })
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Não autorizado. Inicia sessão para jogar duelos.' }, { status: 401 })
     }
+
+    const idToken = authHeader.split('Bearer ')[1]
+    const adminAuth = getAdminAuth()
+    const decodedToken = await adminAuth.verifyIdToken(idToken).catch(() => null)
+
+    if (!decodedToken || !decodedToken.uid) {
+      return NextResponse.json({ error: 'Sessão inválida ou expirada. Inicia sessão novamente.' }, { status: 401 })
+    }
+
+    const userId = decodedToken.uid
+    const body = await request.json().catch(() => ({}))
+    const { displayName, photoURL, level, district } = body
 
     const res = await findOrCreateMatchmakingRoom(
       {

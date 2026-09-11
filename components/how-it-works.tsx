@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { PlayButton } from '@/components/play-button'
 import { Play, Sparkles, MapPin, Trophy, ArrowRight, Zap, Target, Coins, ShieldCheck, Flame, Compass } from 'lucide-react'
 
 const STEPS = [
@@ -138,13 +139,12 @@ export function HowItWorks() {
 
         {/* CTAs Finais de Ação */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
-          <Link
+          <PlayButton
             href="/jogar"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider shadow-lg shadow-emerald-500/25 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <Play className="h-4 w-4 fill-current" />
-            <span>Jogar Agora</span>
-          </Link>
+            label="Jogar Agora"
+            size="md"
+            className="w-full sm:w-auto"
+          />
 
           <Link
             href="/explorar"

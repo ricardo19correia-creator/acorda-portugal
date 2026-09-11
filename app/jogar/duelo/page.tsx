@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { ArrowLeft, Swords, Sparkles, Lock } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
+import { AuthWallView } from '@/components/auth-wall-modal'
 import { getArenaById, getDefaultArena, type ArenaDefinition } from '@/src/data/shopArenas'
 import { getArenaDuelBackground } from '@/lib/arena-assets'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -80,23 +81,7 @@ function DuelPageContent() {
       <div className="relative min-h-screen bg-transparent flex flex-col justify-between overflow-x-hidden">
         <SiteHeader />
         <main className="flex-1 mx-auto w-full max-w-md px-4 py-12 flex items-center justify-center">
-          <div className="rounded-4xl border border-purple-500/40 bg-slate-900/95 p-8 text-center backdrop-blur-xl shadow-2xl">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-purple-500/20 text-purple-400 border border-purple-500/40 animate-pulse">
-              <Lock className="h-8 w-8" />
-            </div>
-            <h2 className="font-display text-2xl font-black uppercase tracking-tight text-white">
-              Login Obrigatório
-            </h2>
-            <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Os Duelos 1v1 exigem autenticação para registar vitórias, pontuações e atribuir recompensas no ranking nacional.
-            </p>
-            <Link
-              href="/entrar?redirect=%2Fjogar%2Fduelo"
-              className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 py-3.5 px-4 font-display text-sm font-black uppercase tracking-wider text-white shadow-lg shadow-purple-500/25 transition cursor-pointer"
-            >
-              Iniciar Sessão para Jogar 1v1
-            </Link>
-          </div>
+          <AuthWallView targetUrl="/jogar/duelo" />
         </main>
         <SiteFooter />
       </div>

@@ -1,5 +1,5 @@
 import { doc, runTransaction, serverTimestamp, increment, arrayUnion } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { db, auth } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { calculateLevelUpCoinReward, calculateMatchCoinReward, ECONOMY_CONFIG } from '@/lib/economy'
 import type { UserProfile } from '@/lib/game-data'
@@ -95,6 +95,11 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
 
   if (!userId || !matchId) {
     throw new Error('userId e matchId são obrigatórios para atribuir recompensa.')
+  }
+
+  // Bloqueio Absoluto: Utilizador sem sessão nunca pode receber XP ou moedas
+  if (!auth?.currentUser || !auth.currentUser.uid || auth.currentUser.uid !== userId) {
+    throw new Error('Não autorizado: apenas utilizadores autenticados podem receber recompensas de jogo.')
   }
 
   console.log(`[GAME] MATCH_COMPLETE (id: ${matchId}, type: ${matchType}, correct: ${correctAnswers}/${totalQuestions}, score: ${score})`)

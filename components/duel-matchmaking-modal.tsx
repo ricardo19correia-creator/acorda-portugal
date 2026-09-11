@@ -19,9 +19,9 @@ import {
   ArrowLeft,
   RefreshCw,
 } from 'lucide-react'
-import { signInAnonymously } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import { PlayerAvatar } from '@/components/player-avatar'
 import {
   type MatchmakingTicket,
@@ -49,35 +49,11 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
   const router = useRouter()
   const { user, profile, authResolved } = useAuth()
 
-  // Sessão Única por Separador/Browser para impedir colisões em testes locais ou convidados
-  const [sessionGuestId] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      let saved = sessionStorage.getItem('guest_duel_session_id')
-      if (!saved) {
-        saved = `guest_${Math.random().toString(36).substring(2, 9)}`
-        sessionStorage.setItem('guest_duel_session_id', saved)
-      }
-      return saved
-    }
-    return `guest_${Date.now()}`
-  })
+  const isAccountUser = authResolved && !!user?.uid && !!auth?.currentUser
+  const canEnterMatchmaking = isAccountUser
 
-  const [playAsGuest, setPlayAsGuest] = useState(false)
-
-  // Assegurar token autenticado anónimo para convidados no Firebase
-  useEffect(() => {
-    if (isOpen && authResolved && !auth.currentUser) {
-      signInAnonymously(auth).catch((err) => {
-        console.warn('[Matchmaking Auth] Anonymous login notice:', err)
-      })
-    }
-  }, [isOpen, authResolved])
-
-  const isAccountUser = authResolved && !!user?.uid
-  const canEnterMatchmaking = isAccountUser || playAsGuest
-
-  const playerUid = user?.uid || auth.currentUser?.uid || sessionGuestId
-  const playerName = profile?.displayName || user?.displayName || (playAsGuest ? `Convidado #${sessionGuestId.slice(-4)}` : 'Jogador')
+  const playerUid = user?.uid || ''
+  const playerName = profile?.displayName || user?.displayName || 'Jogador'
   const playerPhoto = resolveUserAvatar(user, profile)
   const playerLevel = profile?.level || 1
   const playerDistrict = profile?.district || 'Portugal'
@@ -537,54 +513,13 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
 
   if (!isOpen) return null
 
-  if (authResolved && !canEnterMatchmaking && (!user || !user.uid)) {
+  if (authResolved && !canEnterMatchmaking) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-xl animate-fade-in">
-        <div className="card-game-purple relative w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-3xl sm:rounded-4xl p-5 sm:p-8 landscape:p-4 shadow-2xl animate-scale-in text-center border border-purple-500/50">
-          <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-purple-500/25 blur-3xl animate-pulse" />
-          <div className="pointer-events-none absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-gold/20 blur-3xl" />
-
-          <button
-            onClick={onClose}
-            className="absolute top-5 right-5 rounded-2xl border border-white/15 bg-white/10 p-2.5 text-muted-foreground hover:text-foreground hover:bg-white/20 cursor-pointer transition shadow-md"
-          >
-            ✕
-          </button>
-
-          <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-purple-500/20 text-purple-400 ring-1 ring-purple-500/40 shadow-xl shadow-purple-500/20">
-            <Swords className="h-8 w-8" />
-          </div>
-
-          <div className="badge-hud mt-4 text-purple-300 border-purple-500/50 bg-purple-500/20 shadow-md shadow-purple-500/20">
-            <Sparkles className="h-3.5 w-3.5 text-purple-400" />
-            <span>Multiplayer 1v1 Online</span>
-          </div>
-
-          <h2 className="mt-3 font-display text-2xl sm:text-3xl font-black uppercase text-foreground text-glow-purple tracking-tight">
-            Login Obrigatório para 1v1
-          </h2>
-
-          <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            Para disputar partidas multiplayer 1v1, acumular vitórias e subir na classificação nacional, precisas de iniciar sessão.
-          </p>
-
-          <div className="mt-6 flex flex-col gap-3">
-            <Link
-              href="/entrar?redirect=/jogar/duelo"
-              className="button-game-purple w-full inline-flex items-center justify-center gap-2 rounded-2xl py-3.5 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-lg shadow-purple-500/30"
-            >
-              <span>Entrar / Criar Conta</span>
-            </Link>
-
-            <button
-              onClick={onClose}
-              className="w-full rounded-2xl border border-white/15 bg-white/10 py-3 font-display text-xs font-bold uppercase tracking-wider text-muted-foreground hover:bg-white/20 hover:text-foreground transition cursor-pointer"
-            >
-              Voltar
-            </button>
-          </div>
-        </div>
-      </div>
+      <AuthWallModal
+        isOpen={isOpen}
+        onClose={onClose}
+        targetUrl="/jogar/duelo"
+      />
     )
   }
 

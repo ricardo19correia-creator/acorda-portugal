@@ -10,13 +10,19 @@ import { ArrowLeft, Play, Flame, Calendar } from 'lucide-react'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
+import React, { useState } from 'react'
+import { AuthWallModal } from '@/components/auth-wall-modal'
+
 export default function EventosPage() {
   const router = useRouter()
   const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
 
   const handleStartGame = (gameRoute: string) => {
     if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(gameRoute)}`)
+      setAuthWallTarget(gameRoute)
+      setAuthWallOpen(true)
       return
     }
     router.push(gameRoute)
@@ -72,6 +78,13 @@ export default function EventosPage() {
 
         <SiteFooter />
       </div>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </div>
   )
 }

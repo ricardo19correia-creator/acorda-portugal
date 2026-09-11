@@ -39,10 +39,14 @@ export function useGameAids({
   onPublicVoteReceived,
 }: UseGameAidsOptions) {
   const { user, profile } = useAuth()
-  const effectiveUid = user?.uid || profile?.uid || ''
+  const effectiveUid = user?.uid || ''
+  const isGuest = !user?.uid
 
-  // 1. Estado Unificado de Stocks (SSOT com cortesia de partida em modo solo)
+  // 1. Estado Unificado de Stocks (SSOT com cortesia de partida em modo solo para utilizadores autenticados)
   const [stocks, setStocks] = useState<UserAidStock>(() => {
+    if (isGuest) {
+      return { stock5050: 0, stockFreeze: 0, stockPublicVote: 0 }
+    }
     const base = getUserAidStock(profile, profile?.inventory as any)
     if (gameMode === 'solo') {
       return {
@@ -142,7 +146,7 @@ export function useGameAids({
   // Abrir modal de pré-visualização da ajuda
   const requestPreview = useCallback(
     (aidType: AidType) => {
-      if (disabled || isHelpProcessing || !currentQuestion) return
+      if (!user?.uid || disabled || isHelpProcessing || !currentQuestion) return
 
       // Prevenir reabertura se a ajuda já foi gasta nesta pergunta
       if (aidType === '5050' && eliminatedOptions.length > 0) return
@@ -151,7 +155,7 @@ export function useGameAids({
 
       setSelectedPreviewAid(aidType)
     },
-    [disabled, isHelpProcessing, currentQuestion, eliminatedOptions, publicVoteResults, isFrozen],
+    [user?.uid, disabled, isHelpProcessing, currentQuestion, eliminatedOptions, publicVoteResults, isFrozen],
   )
 
   // Fechar modal de pré-visualização
@@ -164,7 +168,7 @@ export function useGameAids({
   // Execução Instantânea e Autoritativa da Ajuda (Com aplicação imediata no cliente + sync de fundo)
   const executeUseAid = useCallback(
     async (aidType: AidType): Promise<boolean> => {
-      if (!currentQuestion || disabled || isHelpProcessing) {
+      if (!user?.uid || !currentQuestion || disabled || isHelpProcessing) {
         return false
       }
 

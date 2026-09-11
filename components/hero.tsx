@@ -23,6 +23,8 @@ import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { logGameFlow } from '@/lib/game-session'
+import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 
 import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
@@ -88,11 +90,20 @@ export function Hero() {
     return calculateDistrictWarTerritories(nationalPlayers)
   }, [nationalPlayers])
 
+  const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
+
   const handleStartGame = (gameRoute: string) => {
     logGameFlow('JOGAR_CLICK', {
       from: 'Hero',
       route: gameRoute,
     })
+    if (!user) {
+      setAuthWallTarget(gameRoute)
+      setAuthWallOpen(true)
+      return
+    }
     router.push(gameRoute)
   }
 
@@ -182,10 +193,14 @@ export function Hero() {
           className="animate-rise mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-bold text-slate-400"
           style={{ animationDelay: '360ms' }}
         >
-          <Link href="/jogar/duelo" className="hover:text-purple-400 transition flex items-center gap-1.5 group">
+          <button
+            type="button"
+            onClick={() => handleStartGame('/jogar/duelo')}
+            className="hover:text-purple-400 transition flex items-center gap-1.5 group cursor-pointer"
+          >
             <Swords className="w-3.5 h-3.5 text-purple-400" />
             <span className="group-hover:translate-x-0.5 transition">⚔️ Duelos 1v1 Elo</span>
-          </Link>
+          </button>
           <span className="text-white/20">•</span>
           <Link href="/loja" className="hover:text-amber-300 transition flex items-center gap-1.5 group">
             <span className="group-hover:translate-x-0.5 transition">🛒 Loja & VIP</span>
@@ -282,6 +297,13 @@ export function Hero() {
           })}
         </div>
       </div>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </section>
   )
 }

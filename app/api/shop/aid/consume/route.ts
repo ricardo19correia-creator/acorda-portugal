@@ -105,17 +105,16 @@ export async function POST(req: NextRequest) {
       duelId,
     } = body
 
-    if (!userId && uid && typeof uid === 'string') {
-      userId = uid
-    }
-
-    if (!userId && gameMode === 'solo') {
-      userId = 'guest_solo'
-    }
-
-    if (!userId || !aidId) {
+    if (!userId) {
       return NextResponse.json(
-        { success: false, error: 'Identificador do utilizador ou da ajuda ausente.' },
+        { success: false, error: 'Não autorizado. Inicia sessão para utilizar ajudas.' },
+        { status: 401 }
+      )
+    }
+
+    if (!aidId) {
+      return NextResponse.json(
+        { success: false, error: 'Identificador da ajuda ausente.' },
         { status: 400 }
       )
     }

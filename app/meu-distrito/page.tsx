@@ -25,6 +25,7 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import { db } from '@/lib/firebase'
 import { doc, updateDoc, setDoc, serverTimestamp } from 'firebase/firestore'
 import {
@@ -51,6 +52,8 @@ export default function MeuDistritoPage() {
   const [isChangingDistrict, setIsChangingDistrict] = useState(false)
   const [districtSearch, setDistrictSearch] = useState('')
   const [citySearch, setCitySearch] = useState('')
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/meu-distrito')
 
   // Dados em tempo real dos rankings distritais
   const [players, setPlayers] = useState<RankingPlayer[]>([])
@@ -206,13 +209,25 @@ export default function MeuDistritoPage() {
   // Jogar pelo Distrito
   const handlePlayDistrict = () => {
     if (!selectedDistrict) return
-    router.push(`/jogar?cat=conquista-do-distrito&dist=${encodeURIComponent(selectedDistrict)}`)
+    const target = `/jogar?cat=conquista-do-distrito&dist=${encodeURIComponent(selectedDistrict)}`
+    if (!user) {
+      setAuthWallTarget(target)
+      setAuthWallOpen(true)
+      return
+    }
+    router.push(target)
   }
 
   // Jogar pelo Concelho
   const handlePlayCity = () => {
     if (!selectedDistrict || !selectedCity) return
-    router.push(`/jogar?cat=desafio-cidade&city=${encodeURIComponent(selectedCity)}&dist=${encodeURIComponent(selectedDistrict)}`)
+    const target = `/jogar?cat=desafio-cidade&city=${encodeURIComponent(selectedCity)}&dist=${encodeURIComponent(selectedDistrict)}`
+    if (!user) {
+      setAuthWallTarget(target)
+      setAuthWallOpen(true)
+      return
+    }
+    router.push(target)
   }
 
   const meta = selectedDistrict ? DISTRICT_METADATA[selectedDistrict] : null
@@ -524,6 +539,13 @@ export default function MeuDistritoPage() {
 
         <SiteFooter />
       </div>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </div>
   )
 }

@@ -30,6 +30,7 @@ import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
 import { logGameFlow } from '@/lib/game-session'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
+import { AuthWallView } from '@/components/auth-wall-modal'
 import { useEconomy } from '@/context/economy-context'
 import { useGameTheme } from '@/context/game-theme-context'
 import {
@@ -434,26 +435,9 @@ export function QuizScreen({
   const { addCoins } = useEconomy()
   const { playSound, setCurrentStreak } = useGameTheme()
 
-  // 1. GESTÃO SEGURA DE AUTENTICAÇÃO E CONVIDADO
-  // Criação automática de fallback anónimo/temporário para convidados jogarem de imediato sem rebentar a app
-  const [guestId, setGuestId] = useState<string>('anon_guest')
-  useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        let storedGuest = localStorage.getItem('ap_guest_player_id')
-        if (!storedGuest) {
-          storedGuest = `anon_${safeRandomUUID().slice(0, 8)}`
-          localStorage.setItem('ap_guest_player_id', storedGuest)
-        }
-        setGuestId(storedGuest)
-      }
-    } catch (err) {
-      console.warn('[QuizScreen] Erro seguro ao ler guestId:', err)
-    }
-  }, [])
-
-  const effectiveUserId = user?.uid || guestId
-  const effectiveDisplayName = user?.displayName || profile?.displayName || 'Explorador Convidado'
+  // 1. GESTÃO ESTRITA DE AUTENTICAÇÃO
+  const effectiveUserId = user?.uid || ''
+  const effectiveDisplayName = user?.displayName || profile?.displayName || 'Explorador'
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
@@ -812,43 +796,8 @@ export function QuizScreen({
     async (gid: string, finalResult: QuizResult) => {
       if (rewardOutcome && !rewardOutcome.alreadyProcessed) return
 
-      // Utilizador Convidado (sem conta autenticada): processamento local 100% seguro sem crash
+      // Apenas utilizadores autenticados podem processar partidas e receber recompensas
       if (!user?.uid) {
-        try {
-          const savedXp = Number(localStorage.getItem('user_xp') || 0)
-          const savedCoins = Number(localStorage.getItem('user_coins') || 50)
-          const newTotalXp = savedXp + finalResult.xp
-          const newTotalCoins = savedCoins + finalResult.euros
-          const oldLevel = calculateLevelProgress(savedXp).currentLevel.level
-          const newLevel = calculateLevelProgress(newTotalXp).currentLevel.level
-
-          localStorage.setItem('user_xp', String(newTotalXp))
-          localStorage.setItem('user_coins', String(newTotalCoins))
-          localStorage.setItem('user_euros', String(newTotalCoins))
-          localStorage.setItem('user_level', String(newLevel))
-
-          const guestOutcome: MatchRewardOutcome = {
-            alreadyProcessed: false,
-            matchId: gid,
-            xpEarned: finalResult.xp,
-            coinsEarned: finalResult.euros,
-            oldXp: savedXp,
-            newTotalXp: newTotalXp,
-            oldCoins: savedCoins,
-            newTotalCoins: newTotalCoins,
-            oldLevel: oldLevel,
-            newLevel: newLevel,
-            leveledUp: newLevel > oldLevel,
-            levelTitle: calculateLevelProgress(newTotalXp).currentLevel.title,
-            oldStreak: 0,
-            newStreak: 1,
-            unlockedAchievements: [],
-            completedMissions: [],
-          }
-          setRewardOutcome(guestOutcome)
-        } catch (e) {
-          console.warn('[QuizScreen] Erro ao gravar progresso local de convidado:', e)
-        }
         return
       }
 
@@ -1019,6 +968,12 @@ export function QuizScreen({
     return <LoadingQuiz message="A sincronizar sessão de jogo..." submessage="A preparar perfil e progresso..." />
   }
 
+  // 🔒 BLOQUEIO DEFINITIVO DE CONVIDADO / NÃO AUTENTICADO
+  if (!user) {
+    const currentTarget = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '/jogar'
+    return <AuthWallView targetUrl={currentTarget} />
+  }
+
   // 2. Validação segura do banco de perguntas
   if (!questions || !Array.isArray(questions) || questions.length === 0) {
     return <LoadingQuiz message="A preparar perguntas do desafio..." />
@@ -1084,7 +1039,7 @@ export function QuizScreen({
         <ArenaCinematicIntro
           arena={activeArena}
           playerName={effectiveDisplayName}
-          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'CONVIDADO'}
+          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'NÍVEL 1'}
           onComplete={handleCompleteIntro}
           onSkip={handleCompleteIntro}
         />
@@ -1127,7 +1082,7 @@ export function QuizScreen({
                       {effectiveDisplayName}
                     </span>
                     <span className="text-[10px] text-muted-foreground leading-none mt-0.5 block font-medium">
-                      {profile?.level ? `Nível ${profile.level}` : 'Convidado'}
+                      {profile?.level ? `Nível ${profile.level}` : 'Nível 1'}
                     </span>
                   </div>
                 </div>

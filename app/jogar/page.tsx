@@ -8,6 +8,7 @@ import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { AppBackground } from '@/components/AppBackground'
 import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallView } from '@/components/auth-wall-modal'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
 
 interface ErrorBoundaryProps {
@@ -213,6 +214,19 @@ function JogarContainer() {
   // Blindagem do Ciclo de Vida da Sessão Firebase
   if (!authResolved || (user && profileLoading)) {
     return <LoadingQuiz message="A sincronizar sessão..." submessage="A verificar credenciais e perfil..." />
+  }
+
+  // 🔒 BLOQUEIO DEFINITIVO DE JOGADORES CONVIDADOS
+  if (isPlaying && !user) {
+    const currentTarget = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '/jogar'
+    return (
+      <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+        <AppBackground />
+        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex items-center justify-center bg-transparent">
+          <AuthWallView targetUrl={currentTarget} />
+        </main>
+      </div>
+    )
   }
 
   return (

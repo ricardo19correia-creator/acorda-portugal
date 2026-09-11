@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Sparkles } from 'lucide-react'
 import type { Category, Tone } from '@/lib/game-data'
 import { cn } from '@/lib/utils'
-import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
 import { logGameFlow } from '@/lib/game-session'
 
 const TONE_TEXT: Record<Tone, string> = {
@@ -37,11 +37,16 @@ const DIFFICULTY: Record<string, string> = {
 export function CategoryCard({ cat, className }: { cat: Category; className?: string }) {
   const router = useRouter()
   const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = React.useState(false)
   const special = cat.special
   const targetUrl = `/jogar?cat=${cat.slug}`
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
+    if (!user) {
+      setAuthWallOpen(true)
+      return
+    }
     logGameFlow('JOGAR_CLICK', {
       from: 'CategoryCard',
       categorySlug: cat.slug,
@@ -56,6 +61,7 @@ export function CategoryCard({ cat, className }: { cat: Category; className?: st
   }
 
   return (
+    <>
     <button
       type="button"
       onClick={handleClick}
@@ -110,5 +116,13 @@ export function CategoryCard({ cat, className }: { cat: Category; className?: st
         <span className={DIFFICULTY[cat.difficulty]}>{cat.difficulty}</span>
       </div>
     </button>
+
+    {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+    <AuthWallModal
+      isOpen={authWallOpen}
+      onClose={() => setAuthWallOpen(false)}
+      targetUrl={targetUrl}
+    />
+    </>
   )
 }

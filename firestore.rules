@@ -82,14 +82,18 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
-    // Fila de Matchmaking 1v1
+    // Fila de Matchmaking 1v1 (Acesso exclusivo a utilizadores autenticados)
     match /duelQueue/{ticketId} {
-      allow read, create, update, delete: if true;
+      allow read, write: if isAuthenticated();
     }
 
-    // Salas e Arenas de Duelo 1v1 em tempo real
+    // Salas e Arenas de Duelo 1v1 em tempo real (Acesso exclusivo a utilizadores autenticados)
     match /duels/{duelId} {
-      allow read, create, update, delete: if true;
+      allow read, write: if isAuthenticated();
+
+      match /reactions/{reactionId} {
+        allow read, write: if isAuthenticated();
+      }
     }
 
     // Histórico de Jogos e Partidas Concluídas

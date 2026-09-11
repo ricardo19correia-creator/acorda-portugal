@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
+import { AuthWallModal } from '@/components/auth-wall-modal'
+
 const ICONS = { flag: Flag, flame: Flame, medal: Medal, laugh: Laugh }
 
 const TONE_STYLES: Record<Tone, { wash: string; icon: string; tag: string; ring: string }> = {
@@ -47,6 +49,20 @@ function getEventSlug(title: string): string {
 }
 
 export function Events() {
+  const router = useRouter()
+  const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = React.useState(false)
+  const [authWallTarget, setAuthWallTarget] = React.useState('/jogar')
+
+  const handleSelectEvent = (targetUrl: string) => {
+    if (!user && !auth?.currentUser) {
+      setAuthWallTarget(targetUrl)
+      setAuthWallOpen(true)
+      return
+    }
+    router.push(targetUrl)
+  }
+
   return (
     <section id="eventos" className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-transparent">
       <SectionHeading
@@ -57,16 +73,21 @@ export function Events() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {EVENTS.map((event) => (
-          <EventCard key={event.title} event={event} />
+          <EventCard key={event.title} event={event} onSelect={handleSelectEvent} />
         ))}
       </div>
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
+      />
     </section>
   )
 }
 
-function EventCard({ event }: { event: GameEvent }) {
-  const router = useRouter()
-  const { user } = useAuth()
+function EventCard({ event, onSelect }: { event: GameEvent; onSelect: (targetUrl: string) => void }) {
   const Icon = ICONS[event.icon]
   const s = TONE_STYLES[event.tone]
   const eventSlug = getEventSlug(event.title)
@@ -74,11 +95,7 @@ function EventCard({ event }: { event: GameEvent }) {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    if (!user && !auth?.currentUser) {
-      router.push(`/entrar?redirect=${encodeURIComponent(targetUrl)}`)
-      return
-    }
-    router.push(targetUrl)
+    onSelect(targetUrl)
   }
 
   return (

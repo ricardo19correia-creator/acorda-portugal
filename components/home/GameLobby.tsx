@@ -200,7 +200,9 @@ export function GameLobby({ user, profile, onStartGame }: GameLobbyProps) {
         {/* MODO 3: MEU DISTRITO (ÚNICO MODO TERRITORIAL) */}
         <div
           onClick={() => {
-            if (userDistrict) {
+            if (!user) {
+              onStartGame('/meu-distrito')
+            } else if (userDistrict) {
               onStartGame(`/meu-distrito`)
             } else {
               router.push('/meu-distrito')
@@ -342,9 +344,10 @@ export function GameLobby({ user, profile, onStartGame }: GameLobbyProps) {
 
           {/* Modos Especiais */}
           <div className="flex items-center gap-2">
-            <Link
-              href="/jogar?cat=modo-maluco"
-              className="flex-1 group flex items-center gap-3 p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-purple-500/50 transition-all shadow-md"
+            <button
+              type="button"
+              onClick={() => onStartGame('/jogar?cat=modo-maluco')}
+              className="flex-1 group flex items-center gap-3 p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-purple-500/50 transition-all shadow-md text-left cursor-pointer"
             >
               <div className="h-10 w-10 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Laugh className="w-5 h-5" />
@@ -357,11 +360,12 @@ export function GameLobby({ user, profile, onStartGame }: GameLobbyProps) {
                   Humor, absurdo e caos
                 </span>
               </div>
-            </Link>
+            </button>
 
-            <Link
-              href="/jogar?cat=desafio-visual"
-              className="flex-1 group flex items-center gap-3 p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-cyan-500/50 transition-all shadow-md"
+            <button
+              type="button"
+              onClick={() => onStartGame('/jogar?cat=desafio-visual')}
+              className="flex-1 group flex items-center gap-3 p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-cyan-500/50 transition-all shadow-md text-left cursor-pointer"
             >
               <div className="h-10 w-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Eye className="w-5 h-5" />
@@ -374,7 +378,7 @@ export function GameLobby({ user, profile, onStartGame }: GameLobbyProps) {
                   Perguntas por imagem
                 </span>
               </div>
-            </Link>
+            </button>
           </div>
         </div>
       </div>

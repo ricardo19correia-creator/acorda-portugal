@@ -25,6 +25,9 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+import { useAuth } from '@/components/auth-provider'
+import { AuthWallModal } from '@/components/auth-wall-modal'
+
 export interface PortugalMapProps {
   initialDistrict?: string
   compact?: boolean
@@ -41,6 +44,9 @@ export function PortugalMap({
   onSelectDistrict: externalSelectDistrict,
 }: PortugalMapProps) {
   const router = useRouter()
+  const { user } = useAuth()
+  const [authWallOpen, setAuthWallOpen] = useState(false)
+  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
   const rootRef = useRef<HTMLDivElement>(null)
 
   // 1. Dados em Tempo Real do Firestore
@@ -300,8 +306,21 @@ export function PortugalMap({
         isOpen={Boolean(selectedDistrict)}
         onClose={handleCloseDetails}
         onPlayDistrict={(slug) => {
-          router.push(`/jogar?dist=${encodeURIComponent(slug)}&cat=o-meu-distrito`)
+          const target = `/jogar?dist=${encodeURIComponent(slug)}&cat=o-meu-distrito`
+          if (!user) {
+            setAuthWallTarget(target)
+            setAuthWallOpen(true)
+            return
+          }
+          router.push(target)
         }}
+      />
+
+      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
+      <AuthWallModal
+        isOpen={authWallOpen}
+        onClose={() => setAuthWallOpen(false)}
+        targetUrl={authWallTarget}
       />
     </div>
   )

@@ -268,8 +268,8 @@ export async function findOrCreateMatchmakingRoom(
   profile?: { level?: number; district?: string; equippedArena?: string },
   options?: { arenaId?: string; arenaImage?: string; arenaName?: string },
 ): Promise<MatchmakingRoomResult> {
-  if (!user || !user.uid) {
-    throw new Error('Identificador de jogador ausente.')
+  if (!user || !user.uid || !auth.currentUser) {
+    throw new Error('Identificador de jogador ausente ou utilizador não autenticado.')
   }
 
   const now = Date.now()
@@ -492,7 +492,7 @@ export async function checkAndJoinWaitingRoom(
   profile?: { level?: number; district?: string },
   currentWaitingRoomId?: string | null,
 ): Promise<{ matched: boolean; roomId?: string; duel?: DuelDocument; opponent?: DuelPlayerData | null }> {
-  if (!user || !user.uid) return { matched: false }
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) return { matched: false }
 
   const now = Date.now()
   const playerLevel = profile?.level || 1
@@ -696,7 +696,7 @@ export async function joinMatchmakingQueue(
   profile?: { level?: number; district?: string },
   matchAttemptId: string = safeRandomUUID(),
 ): Promise<string> {
-  if (!user || !user.uid) return matchAttemptId
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) return matchAttemptId
   try {
     const now = Date.now()
     const playerPhoto = resolveUserAvatar(user, profile)
@@ -726,7 +726,7 @@ export async function heartbeatMatchmaking(
   userUid: string,
   matchAttemptId: string,
 ): Promise<void> {
-  if (!userUid) return
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) return
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await updateDoc(ticketRef, {
@@ -737,7 +737,7 @@ export async function heartbeatMatchmaking(
 }
 
 export async function cancelMatchmakingQueue(userUid: string): Promise<void> {
-  if (!userUid) return
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) return
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await deleteDoc(ticketRef)
@@ -748,7 +748,7 @@ export async function cancelMatchmakingQueue(userUid: string): Promise<void> {
 }
 
 export async function cleanMatchmakingQueue(userUid: string): Promise<void> {
-  if (!userUid) return
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) return
   try {
     const ticketRef = doc(db, 'duelQueue', userUid)
     await deleteDoc(ticketRef)
@@ -817,8 +817,8 @@ export async function createDuelRoom(
   profile?: { level?: number; district?: string; equippedArena?: string },
   options?: { arenaId?: string; arenaImage?: string; arenaName?: string },
 ): Promise<{ duelId: string; code: string }> {
-  if (!user || !user.uid) {
-    throw new Error('Identificador de jogador ausente.')
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) {
+    throw new Error('Identificador de jogador ausente ou utilizador não autenticado.')
   }
 
   const duelId = `duel_${safeRandomUUID()}`
@@ -903,8 +903,8 @@ export async function joinDuelByCode(
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
   profile?: { level?: number; district?: string },
 ): Promise<{ duelId: string }> {
-  if (!user || !user.uid) {
-    throw new Error('Identificador de jogador ausente.')
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) {
+    throw new Error('Identificador de jogador ausente ou utilizador não autenticado.')
   }
 
   const cleanCode = code.trim().toUpperCase()
@@ -989,6 +989,9 @@ export async function submitDuelAnswer(
   selectedOption: 'A' | 'B' | 'C' | 'D' | null,
   timeSpentSeconds: number,
 ): Promise<{ isCorrect: boolean; status: DuelAnswerStatus; isDuelFinished: boolean }> {
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) {
+    throw new Error('Utilizador não autenticado ou não autorizado.')
+  }
   const duelRef = doc(db, 'duels', duelId)
 
   return await runTransaction(db, async (transaction) => {
@@ -1138,6 +1141,9 @@ export async function claimDuelRewards(
   duelId: string,
   userUid: string,
 ): Promise<DuelRewardResult> {
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) {
+    throw new Error('Utilizador não autenticado ou não autorizado.')
+  }
   const duelRef = doc(db, 'duels', duelId)
   const userRef = doc(db, 'users', userUid)
   const publicProfileRef = doc(db, 'publicProfiles', userUid)
@@ -1402,6 +1408,7 @@ export async function requestDuelRematch(
   user: { uid: string; displayName?: string | null },
   opponentUid: string,
 ): Promise<void> {
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) return
   const duelRef = doc(db, 'duels', duelId)
   await updateDoc(duelRef, {
     rematch: {
@@ -1419,6 +1426,9 @@ export async function respondDuelRematch(
   accept: boolean,
   user: { uid: string; displayName?: string | null; photoURL?: string | null },
 ): Promise<{ newDuelId?: string }> {
+  if (!user || !user.uid || !auth?.currentUser || auth.currentUser.uid !== user.uid) {
+    throw new Error('Utilizador não autenticado.')
+  }
   const duelRef = doc(db, 'duels', duelId)
   const duelSnap = await getDoc(duelRef)
   if (!duelSnap.exists()) {
@@ -1538,7 +1548,7 @@ export async function sendDuelTaunt(
   senderName: string,
   text: string
 ): Promise<void> {
-  if (!duelId || !senderId || !text) return
+  if (!duelId || !senderId || !text || !auth?.currentUser || auth.currentUser.uid !== senderId) return
   try {
     const duelRef = doc(db, 'duels', duelId)
     await updateDoc(duelRef, {
@@ -1564,7 +1574,7 @@ export async function sendDuelEmote(
   emoteId: string,
   customText?: string
 ): Promise<void> {
-  if (!duelId || !senderId || !emoteId) return
+  if (!duelId || !senderId || !emoteId || !auth?.currentUser || auth.currentUser.uid !== senderId) return
   try {
     const emote = getEmoteById(emoteId)
     const emoji = emote?.emoji || '💬'
@@ -1611,6 +1621,9 @@ export async function sendDuelEmote(
  * Atribui vitória imediata ao adversário com reason: 'surrender'
  */
 export async function surrenderDuel(duelId: string, surrenderingUid: string): Promise<{ success: boolean; winnerUid?: string }> {
+  if (!surrenderingUid || !auth?.currentUser || auth.currentUser.uid !== surrenderingUid) {
+    return { success: false }
+  }
   try {
     const duelRef = doc(db, 'duels', duelId)
     const now = Date.now()
@@ -1680,6 +1693,9 @@ export async function extendDuelPlayerDeadline(
   userUid: string,
   bonusMs: number = 15000,
 ): Promise<{ success: boolean; newDeadline?: number }> {
+  if (!userUid || !auth?.currentUser || auth.currentUser.uid !== userUid) {
+    return { success: false }
+  }
   try {
     const duelRef = doc(db, 'duels', duelId)
     return await runTransaction(db, async (transaction) => {
