@@ -38,6 +38,11 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
     console.error('[CRASH /jogar / RECUPERAÇÃO SESSÃO]:', error, errorInfo)
     try {
       if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
         for (let i = sessionStorage.length - 1; i >= 0; i--) {
           const key = sessionStorage.key(i)
           if (
@@ -50,9 +55,18 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
             sessionStorage.removeItem(key)
           }
         }
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        localStorage.removeItem('active_session_id')
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
       }
     } catch (cleanupErr) {
       console.error('[CRASH /jogar]: Erro na limpeza de armazenamento:', cleanupErr)
@@ -62,15 +76,24 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
   handleReset = () => {
     try {
       if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
         for (let i = sessionStorage.length - 1; i >= 0; i--) {
           const key = sessionStorage.key(i)
-          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_'))) {
+          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
             sessionStorage.removeItem(key)
           }
         }
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        window.location.replace('/jogar')
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
+            localStorage.removeItem(key)
+          }
+        }
+        window.location.replace('/jogar?fresh=true')
         return
       }
     } catch {
@@ -155,6 +178,7 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
 function JogarContainer() {
   const searchParams = useSearchParams()
   const { user, authResolved, profileLoading } = useAuth()
+  const isFresh = searchParams.get('fresh') === 'true'
 
   const rawCategoryParam =
     searchParams.get('cat') ||
@@ -187,9 +211,10 @@ function JogarContainer() {
     normalizedRawCat ||
     (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
-    (gameParam ? 'desafio-nacional' : null)
+    (gameParam ? 'desafio-nacional' : null) ||
+    (isFresh ? 'desafio-nacional' : null)
 
-  const isPlaying = Boolean(effectiveCategory || gameParam)
+  const isPlaying = Boolean(effectiveCategory || gameParam || isFresh)
   const [equippedArena, setEquippedArena] = useState<string | null>(null)
 
   // Leitura segura de localStorage exclusivamente dentro de useEffect com try/catch

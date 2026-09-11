@@ -17,6 +17,7 @@ import { RefreshCw, Home, AlertTriangle } from 'lucide-react'
 
 interface ErrorBoundaryProps {
   children: ReactNode
+  categorySlug?: string | null
 }
 
 interface ErrorBoundaryState {
@@ -26,25 +27,45 @@ interface ErrorBoundaryState {
 
 /**
  * 🔒 Componente de Recuperação Resiliente da Sessão do Desafio
- * - Limpa referências antigas/corrompidas do LocalStorage/SessionStorage
- * - Implementa Timeout de Segurança (Failsafe) de 6 segundos
- * - Assegura try/catch/finally e feedback imediato para nunca travar no loader
+ * - Força o cancelamento imediato de watchers pendentes
+ * - Limpa explicitamente do LocalStorage/SessionStorage as chaves da sessão antiga ('active_game_session', etc.)
+ * - Elimina o loop visual do loader, permitindo transição direta para novo desafio
  */
 function QuizSessionRecoveryView({
   error,
   onReset,
+  categorySlug,
 }: {
   error: Error | null
   onReset: () => void
+  categorySlug?: string | null
 }) {
-  const [countdown, setCountdown] = useState(6)
+  const router = useRouter()
+  const [countdown, setCountdown] = useState(5)
+  const isTriggeredRef = useRef(false)
 
-  // 1. Limpeza de emergência com tratamento de erros em try/catch/finally
+  // 1. Limpeza de emergência explícita no LocalStorage e SessionStorage
   useEffect(() => {
     try {
       console.error('[CRASH /jogar / RECUPERAÇÃO SESSÃO]: Erro capturado ao inicializar sessão:', error)
       if (typeof window !== 'undefined') {
-        // Limpar sessões corrompidas de sessionStorage e localStorage
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
         for (let i = sessionStorage.length - 1; i >= 0; i--) {
           const key = sessionStorage.key(i)
           if (
@@ -57,31 +78,72 @@ function QuizSessionRecoveryView({
             sessionStorage.removeItem(key)
           }
         }
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        localStorage.removeItem('active_session_id')
       }
     } catch (cleanupErr) {
       console.error('[CRASH /jogar]: Erro ao limpar referências corrompidas de sessão:', cleanupErr)
     }
   }, [error])
 
-  // 2. Timeout de segurança de 6 segundos (Failsafe)
+  const handleStartCleanChallenge = useCallback(() => {
+    if (isTriggeredRef.current) return
+    isTriggeredRef.current = true
+
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
+      }
+    } catch (cleanupErr) {
+      console.error('[QuizSessionRecoveryView] Erro ao limpar storage:', cleanupErr)
+    }
+
+    onReset()
+
+    const targetCat = categorySlug || 'desafio-nacional'
+    const cleanUrl = `/jogar?cat=${encodeURIComponent(targetCat)}&fresh=true&t=${Date.now()}`
+    try {
+      router.replace(cleanUrl)
+    } catch {
+      if (typeof window !== 'undefined') {
+        window.location.replace(cleanUrl)
+      }
+    }
+  }, [categorySlug, onReset, router])
+
+  // 2. Failsafe: Quando o timer esgotar, aciona a transição imediata para partida limpa
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer)
-          console.error(
-            '[FAILSAFE /jogar]: Timeout de 6 segundos esgotado ao recuperar sessão. A redirecionar para novo desafio limpo...'
-          )
-          try {
-            if (typeof window !== 'undefined') {
-              window.location.replace('/jogar')
-              return 0
-            }
-          } catch {}
-          onReset()
+          handleStartCleanChallenge()
           return 0
         }
         return prev - 1
@@ -89,36 +151,35 @@ function QuizSessionRecoveryView({
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [onReset])
-
-  const handleStartCleanChallenge = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        for (let i = sessionStorage.length - 1; i >= 0; i--) {
-          const key = sessionStorage.key(i)
-          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_'))) {
-            sessionStorage.removeItem(key)
-          }
-        }
-        window.location.replace('/jogar')
-        return
-      }
-    } catch {}
-    onReset()
-  }
+  }, [handleStartCleanChallenge])
 
   return (
     <div className="flex min-h-[60vh] sm:min-h-[70vh] w-full flex-col items-center justify-center p-6 text-center select-none animate-fadeIn">
-      <LoadingQuiz
-        message="A recuperar sessão do desafio..."
-        submessage={`A preparar a arena e os desafios para ti (novo jogo limpo em ${countdown}s)...`}
-      />
+      <div className="relative flex items-center justify-center">
+        <div className="absolute h-24 w-24 rounded-full bg-emerald-500/20 blur-xl animate-pulse" />
+        <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900/90 border border-emerald-500/30 shadow-2xl backdrop-blur-md">
+          <RefreshCw className="h-8 w-8 text-emerald-400" />
+        </div>
+      </div>
+
+      <div className="mt-6 max-w-sm space-y-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span>🇵🇹</span>
+          <span>Acorda Portugal</span>
+        </div>
+        <p className="font-display text-base sm:text-lg font-bold text-white tracking-wide">
+          Recuperação Resiliente de Desafio
+        </p>
+        <p className="text-xs text-slate-400 leading-relaxed">
+          A preparar novo desafio limpo em {countdown}s...
+        </p>
+      </div>
 
       <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           type="button"
           onClick={handleStartCleanChallenge}
-          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer hover:shadow-emerald-500/40"
         >
           <RefreshCw className="h-4 w-4" />
           <span>Iniciar Novo Desafio Agora</span>
@@ -162,7 +223,13 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
 
   render() {
     if (this.state.hasError) {
-      return <QuizSessionRecoveryView error={this.state.error} onReset={this.handleReset} />
+      return (
+        <QuizSessionRecoveryView
+          error={this.state.error}
+          onReset={this.handleReset}
+          categorySlug={this.props.categorySlug}
+        />
+      )
     }
     return this.props.children
   }
@@ -172,6 +239,8 @@ function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { user, authResolved, profileLoading } = useAuth()
+
+  const isFresh = searchParams.get('fresh') === 'true'
 
   // Extrair parâmetros flexíveis com fallbacks seguros
   const rawCategorySlug =
@@ -207,14 +276,15 @@ function QuizPageContent() {
     normalizedRawCat ||
     (district ? 'conquista-do-distrito' : null) ||
     (city ? 'desafio-cidade' : null) ||
-    (gameIdFromUrl ? 'desafio-nacional' : null)
+    (gameIdFromUrl ? 'desafio-nacional' : null) ||
+    (isFresh ? 'desafio-nacional' : null)
 
   // Gerar ID de partida seguro desde o primeiro instante para evitar renderização com gameId vazio
-  const [generatedGameId] = useState<string>(() => safeRandomUUID())
-  const gameId = gameIdFromUrl || generatedGameId || 'sessao-ativa'
+  const [generatedGameId] = useState<string>(() => (isFresh ? `fresh_${safeRandomUUID()}` : safeRandomUUID()))
+  const gameId = isFresh ? generatedGameId : (gameIdFromUrl || generatedGameId || 'sessao-ativa')
 
   useEffect(() => {
-    if (!categorySlug || gameIdFromUrl) return
+    if (!categorySlug || (gameIdFromUrl && !isFresh)) return
 
     try {
       let nextUrl = `/jogar?cat=${encodeURIComponent(categorySlug)}&game=${gameId}`
@@ -223,12 +293,13 @@ function QuizPageContent() {
       if (district) nextUrl += `&dist=${encodeURIComponent(district)}`
       if (city) nextUrl += `&city=${encodeURIComponent(city)}`
       if (rawArena) nextUrl += `&arena=${encodeURIComponent(rawArena)}`
+      if (isFresh) nextUrl += '&fresh=true'
 
       router.replace(nextUrl)
     } catch (e) {
       console.warn('[QuizPageContent] Erro na navegação de parâmetros:', e)
     }
-  }, [categorySlug, subcategorySlug, difficulty, district, city, rawArena, gameIdFromUrl, gameId, router])
+  }, [categorySlug, subcategorySlug, difficulty, district, city, rawArena, gameIdFromUrl, gameId, isFresh, router])
 
   // Blindagem do Ciclo de Vida da Sessão Firebase com Failsafe de 6 segundos:
   const [authFailsafeTriggered, setAuthFailsafeTriggered] = useState(false)
@@ -255,11 +326,11 @@ function QuizPageContent() {
   }
 
   return (
-    <QuizErrorBoundary>
+    <QuizErrorBoundary categorySlug={categorySlug}>
       <div className="relative bg-transparent">
         {categorySlug ? (
           <QuizScreen
-            key={gameId}
+            key={`${gameId}_${isFresh ? 'fresh' : 'normal'}`}
             categorySlug={categorySlug}
             subcategorySlug={subcategorySlug}
             difficultyParam={difficulty}
@@ -267,6 +338,7 @@ function QuizPageContent() {
             cityParam={city}
             gameId={gameId}
             arenaParam={rawArena}
+            isFresh={isFresh}
           />
         ) : (
           <GameHub />
