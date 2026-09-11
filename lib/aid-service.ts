@@ -59,7 +59,7 @@ export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
     name: 'Pack x3 Congelar Tempo',
     shortName: 'Congelar Tempo',
     icon: '⏳',
-    description: 'Pausa o cronómetro e adiciona +15 segundos autorizados para responderes com calma.',
+    description: 'Pausa o cronómetro durante 15 segundos para responderes com calma, sem consumir tempo de jogo.',
     image: '/assets/shop/aids/aid-freeze-time.webp',
     priceCoins: 900,
     unitsPerPack: 3,
@@ -330,13 +330,25 @@ export async function consumeGameAid({
       }
     }
 
-    // Se for modo solo e a API falhar, não bloquear o utilizador
+    // Se for modo solo e a API falhar, garantir persistência direta no Firestore
     if (gameMode === 'solo') {
-      console.warn('[consumeGameAid] Servidor devolveu erro em modo solo, aplicando fallback resiliente:', data.error)
+      console.warn('[consumeGameAid] Servidor devolveu aviso em modo solo, aplicando fallback com persistência Firestore:', data.error)
       const remainingStock = Math.max(0, currentStock - 1)
       if (aidType === '5050') syncAidStockToLocalStorage({ stock5050: remainingStock })
       else if (aidType === 'publicVote') syncAidStockToLocalStorage({ stockPublicVote: remainingStock })
       else if (aidType === 'freeze') syncAidStockToLocalStorage({ stockFreeze: remainingStock })
+
+      try {
+        const fallbackId =
+          aidType === '5050'
+            ? 'consumable_50_50'
+            : aidType === 'publicVote'
+              ? 'HELP_005'
+              : 'consumable_congelar_tempo'
+        await useConsumablePowerUp(userId, fallbackId)
+      } catch (fErr) {
+        console.warn('[consumeGameAid] Aviso ao persistir Firestore:', fErr)
+      }
 
       return {
         success: true,

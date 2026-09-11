@@ -638,8 +638,8 @@ export function QuizScreen({
         }
       : null,
     disabled: phase !== 'answering',
-    onFreezeApplied: (bonus) => {
-      setSeconds((prev) => Math.min(MAX_SECONDS + 15, prev + bonus))
+    onFreezeApplied: () => {
+      // Congela o cronómetro durante 15s sem somar segundos ao relógio
     },
   })
 
@@ -679,9 +679,31 @@ export function QuizScreen({
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [phase])
 
+  // 1. DESISTÊNCIA / ABANDONAR PARTIDA: Limpeza completa e redirecionamento imediato para a página inicial ("/")
   const handleAbandonSolo = useCallback(() => {
-    router.push('/jogar')
-  }, [router])
+    try {
+      // 1. Sinalizar saída de partida para restaurar UI global
+      setGlobalArenaMatchActive(false)
+
+      // 2. Limpar referências de sessão e storage
+      cleanOldSessionStorage()
+
+      // 3. Forçar paragem de timers e estado
+      setPhase('finished')
+      setIsFrozen(false)
+    } catch (e) {
+      console.warn('[handleAbandonSolo] Erro ao limpar estado:', e)
+    }
+
+    // 4. Redirecionar imediatamente para a página inicial ("/")
+    try {
+      router.push('/')
+    } catch {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/'
+      }
+    }
+  }, [cleanOldSessionStorage, router])
 
 
 

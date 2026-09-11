@@ -8,7 +8,9 @@ import {
   CANONICAL_AIDS,
   getUserAidStock,
   consumeGameAid,
+  syncAidStockToLocalStorage,
 } from '@/lib/aid-service'
+import { useConsumablePowerUp } from '@/lib/economy'
 import { calculate5050Eliminated, simulatePublicVote } from '@/lib/powerup-helpers'
 
 export interface UseGameAidsOptions {
@@ -38,24 +40,16 @@ export function useGameAids({
   onOptionEliminated,
   onPublicVoteReceived,
 }: UseGameAidsOptions) {
-  const { user, profile } = useAuth()
+  const { user, profile, updateProfileLocally } = useAuth()
   const effectiveUid = user?.uid || ''
   const isGuest = !user?.uid
 
-  // 1. Estado Unificado de Stocks (SSOT com cortesia de partida em modo solo para utilizadores autenticados)
+  // 1. Estado Unificado de Stocks (SSOT com inventário real do jogador)
   const [stocks, setStocks] = useState<UserAidStock>(() => {
     if (isGuest) {
       return { stock5050: 0, stockFreeze: 0, stockPublicVote: 0 }
     }
-    const base = getUserAidStock(profile, profile?.inventory as any)
-    if (gameMode === 'solo') {
-      return {
-        stock5050: Math.max(1, base.stock5050),
-        stockFreeze: Math.max(1, base.stockFreeze),
-        stockPublicVote: Math.max(1, base.stockPublicVote),
-      }
-    }
-    return base
+    return getUserAidStock(profile, profile?.inventory as any)
   })
 
   // 2. Estado de Efeitos Ativos na Pergunta Atual (100% Individual para este Jogador)
@@ -75,16 +69,7 @@ export function useGameAids({
     const sync = () => {
       const inv: Record<string, any> = (profile as any)?.inventory || {}
       const base = getUserAidStock(profile, inv)
-      setStocks((prev) => {
-        if (gameMode === 'solo') {
-          return {
-            stock5050: Math.max(prev.stock5050, base.stock5050),
-            stockFreeze: Math.max(prev.stockFreeze, base.stockFreeze),
-            stockPublicVote: Math.max(prev.stockPublicVote, base.stockPublicVote),
-          }
-        }
-        return base
-      })
+      setStocks(base)
     }
 
     sync()
@@ -97,7 +82,7 @@ export function useGameAids({
       window.removeEventListener('inventory_updated', sync)
       window.removeEventListener('storage', sync)
     }
-  }, [profile, gameMode])
+  }, [profile])
 
   // Temporizador do Congelamento de Tempo (+15s)
   useEffect(() => {
@@ -219,7 +204,7 @@ export function useGameAids({
 
         const remainingStock = Math.max(0, currentStock - 1)
 
-        // 1. Atualizar contadores de estoque locais imediatamente
+        // 1. Atualizar contadores de estoque locais imediatamente no hook
         setStocks((prev) => ({
           ...prev,
           ...(aidType === '5050' && { stock5050: remainingStock }),
@@ -227,7 +212,56 @@ export function useGameAids({
           ...(aidType === 'freeze' && { stockFreeze: remainingStock }),
         }))
 
-        // 2. Aplicar o efeito visual e de gameplay DE IMEDIATO
+        // 2. Atualizar perfil local imediatamente no AuthProvider
+        if (typeof updateProfileLocally === 'function') {
+          updateProfileLocally((prev) => {
+            if (!prev) return prev
+            const nextConsumables = { ...(prev.consumables || {}) }
+            const nextInventory = { ...(prev.inventory || {}) }
+            const nextUtilities = { ...(nextInventory.utilities || {}) }
+
+            if (aidType === '5050') {
+              nextConsumables.help5050 = remainingStock
+              nextUtilities.fiftyFifty = remainingStock
+              nextInventory['AID_002'] = remainingStock
+              nextInventory['aid_50_50'] = remainingStock
+              nextInventory['consumable_50_50'] = remainingStock
+              nextInventory['help5050'] = remainingStock
+            } else if (aidType === 'publicVote') {
+              nextConsumables.publicVote = remainingStock
+              nextUtilities.publicVote = remainingStock
+              nextInventory['AID_003'] = remainingStock
+              nextInventory['aid_public_vote'] = remainingStock
+              nextInventory['consumable_public_vote'] = remainingStock
+              nextInventory['HELP_005'] = remainingStock
+              nextInventory['publicVote'] = remainingStock
+            } else if (aidType === 'freeze') {
+              nextConsumables.freezeTime = remainingStock
+              nextUtilities.freezeTime = remainingStock
+              nextInventory['AID_004'] = remainingStock
+              nextInventory['aid_freeze_time'] = remainingStock
+              nextInventory['consumable_congelar_tempo'] = remainingStock
+              nextInventory['freezeTime'] = remainingStock
+            }
+
+            nextInventory.utilities = nextUtilities
+
+            return {
+              ...prev,
+              consumables: nextConsumables,
+              inventory: nextInventory,
+            }
+          })
+        }
+
+        // 3. Atualizar localStorage imediatamente
+        syncAidStockToLocalStorage({
+          ...(aidType === '5050' && { stock5050: remainingStock }),
+          ...(aidType === 'publicVote' && { stockPublicVote: remainingStock }),
+          ...(aidType === 'freeze' && { stockFreeze: remainingStock }),
+        })
+
+        // 4. Aplicar o efeito visual e de gameplay DE IMEDIATO
         if (aidType === '5050') {
           const eliminated = calculate5050Eliminated(normalizedOptions, normalizedCorrect)
           setEliminatedOptions(eliminated)
@@ -250,23 +284,36 @@ export function useGameAids({
           `💡 ${aidMeta?.shortName?.toUpperCase() || aidType} UTILIZADA — Restam ${remainingStock}`,
         )
 
-        // 3. Disparar sincronização atómica com Firestore / backend em background
-        consumeGameAid({
-          userId: effectiveUid,
-          aidType,
-          gameMode,
-          currentStock,
-          questionData: {
-            prompt: currentQuestion.question || currentQuestion.prompt || '',
-            options: normalizedOptions,
-            correct: normalizedCorrect,
-            explanation: currentQuestion.explanation,
-            category: currentQuestion.category,
-          },
-          duelId,
-        }).catch((err) => {
-          console.warn('[useGameAids] Aviso na sincronização em background:', err)
-        })
+        // 5. Disparar persistência atómica no Firestore / backend DE IMEDIATO
+        if (effectiveUid) {
+          const fallbackId =
+            aidType === '5050'
+              ? 'consumable_50_50'
+              : aidType === 'publicVote'
+                ? 'HELP_005'
+                : 'consumable_congelar_tempo'
+
+          useConsumablePowerUp(effectiveUid, fallbackId).catch((err) => {
+            console.warn('[useGameAids] Erro ao persistir power-up no Firestore:', err)
+          })
+
+          consumeGameAid({
+            userId: effectiveUid,
+            aidType,
+            gameMode,
+            currentStock,
+            questionData: {
+              prompt: currentQuestion.question || currentQuestion.prompt || '',
+              options: normalizedOptions,
+              correct: normalizedCorrect,
+              explanation: currentQuestion.explanation,
+              category: currentQuestion.category,
+            },
+            duelId,
+          }).catch((err) => {
+            console.warn('[useGameAids] Aviso na sincronização em background:', err)
+          })
+        }
 
         return true
       } catch (err: any) {
@@ -292,6 +339,7 @@ export function useGameAids({
       effectiveUid,
       gameMode,
       duelId,
+      updateProfileLocally,
     ],
   )
 

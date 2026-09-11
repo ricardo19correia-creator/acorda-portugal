@@ -26,7 +26,19 @@ export function GameExitControl({
   const handleConfirm = async () => {
     setIsExiting(true)
     try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+      }
       await onConfirmExit()
+    } catch (err) {
+      console.warn('[GameExitControl] Erro ao abandonar partida:', err)
+      if (typeof window !== 'undefined') {
+        window.location.href = '/'
+      }
     } finally {
       setIsExiting(false)
       setIsOpen(false)
