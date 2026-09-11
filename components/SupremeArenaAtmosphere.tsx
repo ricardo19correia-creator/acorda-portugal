@@ -36,37 +36,9 @@ export function SupremeArenaAtmosphere({
   const burstTimeRef = useRef<number>(0)
   const burstTypeRef = useRef<'correct' | 'wrong' | null>(null)
 
-  // Disparar efeito explosivo em resposta
+  // Efeito de burst de partículas removido completamente para gameplay limpa
   useEffect(() => {
-    if (burstTrigger) {
-      burstTimeRef.current = Date.now()
-      burstTypeRef.current = burstTrigger
-
-      // Injetar 40 partículas explosivas no centro
-      const canvas = canvasRef.current
-      if (canvas) {
-        const cx = canvas.width / 2
-        const cy = canvas.height / 2
-        const isCorrect = burstTrigger === 'correct'
-        const burstColor = isCorrect ? '#fbbf24' : '#ef4444'
-
-        for (let i = 0; i < 45; i++) {
-          const angle = Math.random() * Math.PI * 2
-          const speed = Math.random() * 8 + 4
-          particlesRef.current.push({
-            x: cx,
-            y: cy,
-            size: Math.random() * 4 + 2,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            alpha: 1,
-            baseAlpha: 1,
-            color: isCorrect ? (Math.random() > 0.5 ? '#fef08a' : '#f59e0b') : burstColor,
-            pulseSpeed: 0.05,
-          })
-        }
-      }
-    }
+    // Sem injeção de partículas amarelas ou efeitos acumulativos
   }, [burstTrigger])
 
   useEffect(() => {
@@ -151,26 +123,6 @@ export function SupremeArenaAtmosphere({
       tick++
       ctx.clearRect(0, 0, width, height)
 
-      // Efeito de onda de choque no acerto/erro
-      if (burstTimeRef.current > 0) {
-        const elapsed = Date.now() - burstTimeRef.current
-        if (elapsed < 800) {
-          const progress = elapsed / 800
-          const radius = progress * Math.max(width, height) * 0.8
-          const alpha = (1 - progress) * 0.35
-
-          ctx.save()
-          ctx.beginPath()
-          ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2)
-          ctx.strokeStyle =
-            burstTypeRef.current === 'correct'
-              ? `rgba(250, 204, 21, ${alpha})`
-              : `rgba(239, 68, 68, ${alpha})`
-          ctx.lineWidth = 14 * (1 - progress)
-          ctx.stroke()
-          ctx.restore()
-        }
-      }
 
       // Desenhar holofotes dinâmicos para Estádio
       if (effectType === 'estadio_holofotes') {

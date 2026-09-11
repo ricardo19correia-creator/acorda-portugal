@@ -7,6 +7,7 @@ import { GameThemeProvider } from '@/context/game-theme-context'
 import { AudioProvider } from '@/context/AudioContext'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
 import { GlobalBackgroundVideo } from '@/components/GlobalBackgroundVideo'
+import { MobileBottomBar } from '@/components/navigation/MobileBottomBar'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -67,7 +68,8 @@ export default function RootLayout({
             __html: `
 html.ap-arena-match #global-background-container,
 html.ap-arena-match #global-background-video,
-html.ap-arena-match #global-background-overlay {
+html.ap-arena-match #global-background-overlay,
+html.ap-arena-match #mobile-bottom-dock {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -84,9 +86,10 @@ html.ap-arena-match #global-background-overlay {
             <GameThemeProvider>
               <AudioProvider>
                 <GlobalBackgroundVideo />
-                <div className="relative z-10 min-h-screen flex flex-col">
+                <div className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">
                   {children}
                 </div>
+                <MobileBottomBar />
               </AudioProvider>
             </GameThemeProvider>
           </EconomyProvider>

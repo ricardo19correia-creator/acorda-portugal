@@ -578,7 +578,7 @@ export function DuelArena({
 
     setFeedback({
       status: 'TIMEOUT',
-      message: '⏰ TEMPO ESGOTADO! Não respondeste a tempo.',
+      message: 'TEMPO ESGOTADO',
       selectedKey: null,
       correctKey: currentQuestion.correct,
     })
@@ -616,9 +616,7 @@ export function DuelArena({
 
     setFeedback({
       status: isCorrect ? 'CORRECT' : 'WRONG',
-      message: isCorrect
-        ? '✅ CORRETO! +100 pts'
-        : `❌ ERRADO! A resposta correta era a opção ${currentQuestion.correct}`,
+      message: isCorrect ? 'CORRETO' : 'ERRADO',
       selectedKey: optionKey,
       correctKey: currentQuestion.correct,
     })
@@ -1164,20 +1162,35 @@ export function DuelArena({
                 )}
               </div>
 
-              {/* Feedback visual instantâneo overlay */}
+              {/* Feedback visual rápido e discreto */}
               {feedback && (
                 <div
                   className={cn(
-                    'mb-1.5 px-3 py-1 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
-                    feedback.status === 'CORRECT' && 'bg-primary/30 border border-primary text-primary text-glow-primary',
-                    feedback.status === 'WRONG' && 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red',
-                    feedback.status === 'TIMEOUT' && 'bg-gold/30 border border-gold text-gold text-glow-gold',
+                    'mb-1.5 px-3.5 py-1 rounded-full font-display text-xs font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center shadow-md animate-pop select-none',
+                    feedback.status === 'CORRECT' && 'bg-emerald-500 text-slate-950 border border-emerald-400 shadow-emerald-500/30',
+                    feedback.status === 'WRONG' && 'bg-rose-500 text-white border border-rose-400 shadow-rose-500/30',
+                    feedback.status === 'TIMEOUT' && 'bg-amber-500 text-slate-950 border border-amber-400 shadow-amber-500/30',
                   )}
                 >
-                  {feedback.status === 'CORRECT' && <CheckCircle2 className="h-4 w-4 shrink-0" />}
-                  {feedback.status === 'WRONG' && <XCircle className="h-4 w-4 shrink-0" />}
-                  {feedback.status === 'TIMEOUT' && <Clock className="h-4 w-4 shrink-0" />}
-                  <span className="break-words">{feedback.message}</span>
+                  {feedback.status === 'CORRECT' && (
+                    <>
+                      <CheckCircle2 className="h-3.5 w-3.5 stroke-[3] shrink-0" />
+                      <span>CORRETO</span>
+                      <span className="font-mono text-[11px] font-extrabold opacity-95">+100 XP</span>
+                    </>
+                  )}
+                  {feedback.status === 'WRONG' && (
+                    <>
+                      <XCircle className="h-3.5 w-3.5 stroke-[3] shrink-0" />
+                      <span>ERRADO</span>
+                    </>
+                  )}
+                  {feedback.status === 'TIMEOUT' && (
+                    <>
+                      <Clock className="h-3.5 w-3.5 shrink-0" />
+                      <span>TEMPO ESGOTADO</span>
+                    </>
+                  )}
                 </div>
               )}
 

@@ -8,7 +8,8 @@ import {
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Building2, Check, Plus, Globe, 
   User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
-  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Film, Video, VideoOff, Coins
+  Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Film, Video, VideoOff, Coins,
+  Settings, Target, TrendingUp
 } from 'lucide-react'
 import { useBackgroundVideoSettings } from '@/lib/video-background-settings'
 import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
@@ -47,6 +48,8 @@ import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 import { equipTitle } from '@/lib/titles-service'
+import { subscribeRankings, calculateCompetitiveDivision, DIVISION_COLORS } from '@/lib/rankings'
+import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import {
   MASTER_TITLE_CATALOG,
   DEFAULT_STARTER_TITLE_ID,
@@ -153,6 +156,9 @@ function PerfilContent() {
   const { isVideoEnabled, setVideoEnabled } = useBackgroundVideoSettings()
   const [mounted, setMounted] = useState(false)
   const [nationalRank, setNationalRank] = useState<number | null>(null)
+  const [districtRank, setDistrictRank] = useState<number | null>(null)
+  const [cityRank, setCityRank] = useState<number | null>(null)
+  const [districtKing, setDistrictKing] = useState<string | null>(null)
 
   // Redirecionamento de utilizadores não autenticados
   useEffect(() => {
@@ -164,6 +170,7 @@ function PerfilContent() {
   // Perfil Base (100% Dinâmico do Firestore / Auth)
   const [displayName, setDisplayName] = useState<string>(() => profile?.displayName || user?.displayName || user?.email?.split('@')[0] || '')
   const [district, setDistrict] = useState<string>(() => profile?.district || '')
+  const [city, setCity] = useState<string>(() => (profile as any)?.city || '')
   const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)))
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
   const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId || null))
@@ -176,9 +183,17 @@ function PerfilContent() {
   const [userXp, setUserXp] = useState<number>(() => profile?.xp ?? 0)
   const [userLevel, setUserLevel] = useState<number>(() => profile?.level ?? 1)
 
-  // Abas Principais & Sub-Filtros
-  const [activeTab, setActiveTab] = useState<'inventario' | 'estatisticas' | 'conquistas' | 'historico'>(
-    initialTab === 'conquistas' || initialTab === 'estatisticas' || initialTab === 'historico' ? initialTab : 'inventario'
+  // Abas Principais & Sub-Filtros Estruturados
+  const [activeTab, setActiveTab] = useState<'progressao' | 'rankings' | 'estatisticas' | 'conquistas' | 'colecao' | 'historico'>(
+    initialTab === 'conquistas'
+      ? 'conquistas'
+      : initialTab === 'estatisticas'
+      ? 'estatisticas'
+      : initialTab === 'historico'
+      ? 'historico'
+      : initialTab === 'inventario'
+      ? 'colecao'
+      : 'progressao'
   )
   const [inventoryFilter, setInventoryFilter] = useState<'todos' | 'avatars' | 'molduras' | 'arenas' | 'titulos' | 'taunts' | 'ajudas'>('todos')
   const [achievementCategory, setAchievementCategory] = useState<AchievementCategory>('todas')
@@ -473,34 +488,46 @@ function PerfilContent() {
 
   useEffect(() => {
     setMounted(true)
-    // Sincronizar Posição no Ranking Nacional
+    // Sincronizar Posição no Ranking Nacional, Distrital e Cidade em Tempo Real
+    let unsubscribeRankings: (() => void) | undefined
     if (user?.uid) {
       try {
-        const qRank = query(collection(db, 'publicProfiles'), limit(100))
-        getDocs(qRank)
-          .then((snap) => {
-            if (!snap || snap.empty) {
-              setNationalRank(1)
-              return
-            }
-            const sorted = snap.docs
-              .map((d: any) => ({
-                id: d.id,
-                xp: typeof d.data()?.xp === 'number' ? d.data().xp : 0,
-              }))
-              .sort((a: { xp: number }, b: { xp: number }) => b.xp - a.xp)
+        unsubscribeRankings = subscribeRankings(
+          'all',
+          'xp',
+          (players) => {
+            const userUid = user.uid
+            const uDist = (profile?.district || district || 'Portugal').toLowerCase()
+            const uCity = ((profile as any)?.city || city || '').toLowerCase()
 
-            const idx = sorted.findIndex((p: { id: string }) => p.id === user.uid)
-            if (idx !== -1) {
-              setNationalRank(idx + 1)
+            // 1. Posição Nacional
+            const natIndex = players.findIndex((p) => p.uid === userUid)
+            setNationalRank(natIndex >= 0 ? natIndex + 1 : 1)
+
+            // 2. Posição Distrital
+            const distPlayers = players.filter((p) => (p.district || '').toLowerCase() === uDist)
+            const dIndex = distPlayers.findIndex((p) => p.uid === userUid)
+            setDistrictRank(dIndex >= 0 ? dIndex + 1 : 1)
+
+            // 3. Posição na Cidade
+            if (uCity) {
+              const cityPlayers = players.filter((p) => ((p as any)?.city || '').toLowerCase() === uCity)
+              const cIndex = cityPlayers.findIndex((p) => p.uid === userUid)
+              setCityRank(cIndex >= 0 ? cIndex + 1 : 1)
             } else {
-              const currentXp = profile?.xp ?? (typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0)
-              const higher = sorted.filter((p: { xp: number }) => p.xp > currentXp).length
-              setNationalRank(higher + 1)
+              setCityRank(1)
             }
-          })
-          .catch(() => {})
-      } catch (e) {}
+
+            // 4. Rei do Território Distrital
+            const territories = calculateDistrictWarTerritories(players)
+            const myTerritory = territories.find((t) => t.name.toLowerCase() === uDist)
+            setDistrictKing(myTerritory?.king?.displayName || null)
+          },
+          100
+        )
+      } catch (e) {
+        console.warn('[PERFIL] Aviso na subscrição de rankings:', e)
+      }
     }
 
     const syncProfile = () => {
@@ -692,6 +719,7 @@ function PerfilContent() {
     window.addEventListener('storage', syncProfile)
 
     return () => {
+      if (unsubscribeRankings) unsubscribeRankings()
       if (unsubscribeSnapshot) unsubscribeSnapshot()
       window.removeEventListener('avatarChanged', syncProfile)
       window.removeEventListener('frameChanged', syncProfile)
@@ -1343,6 +1371,23 @@ function PerfilContent() {
     })
   }, [profile])
 
+  const currentLp = profile?.rating ?? (profile as any)?.elo ?? (1000 + (profile?.wins || 0) * 20)
+  const division = calculateCompetitiveDivision(currentLp)
+  const divisionColor = (DIVISION_COLORS as Record<string, string>)[division.name] || 'text-amber-400'
+  const streak = profile?.streak ?? (profile as any)?.currentStreak ?? (profile as any)?.streakCount ?? 0
+  const bestStreak = profile?.bestStreak ?? (profile as any)?.maxStreak ?? streak
+  const xpCurrent = userXp % 1000
+  const xpTotalNext = 1000
+  const xpProgressPct = Math.min(100, Math.round((xpCurrent / xpTotalNext) * 100))
+  const wins = profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0
+  const losses = profile?.losses ?? (profile as any)?.stats?.duelsLost ?? Math.max(0, (profile?.gamesPlayed || 0) - wins)
+  const totalGames = profile?.gamesPlayed ?? (wins + losses)
+  const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0
+  const totalAnswered = profile?.questionsAnswered ?? profile?.totalQuestions ?? 0
+  const totalCorrect = profile?.correctAnswers ?? 0
+  const accuracyRate = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : ((profile as any)?.stats?.accuracyRate ?? 0)
+  const avgResponseTime = (profile as any)?.stats?.avgResponseTime ? `${(profile as any).stats.avgResponseTime}s` : '2.4s'
+
   if (!mounted || !authResolved || (profileLoading && !profile) || !user) {
     return (
       <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center justify-center overflow-x-hidden">
@@ -1441,6 +1486,14 @@ function PerfilContent() {
 
           {/* Botões de Ação Rápida no Perfil */}
           <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/definicoes"
+              className="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-600 transition-all shadow-md active:scale-95"
+            >
+              <Settings className="w-4 h-4 text-cyan-400" />
+              <span>Definições</span>
+            </Link>
+
             <button
               onClick={openEditModal}
               className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-600 transition-all shadow-md active:scale-95"
@@ -1476,57 +1529,64 @@ function PerfilContent() {
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
             <Zap className="w-5 h-5 text-cyan-400 mb-1" />
             <span className="text-xl font-black text-white">
-              {profile?.totalQuestions && profile.totalQuestions > 0
-                ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
-                : profile?.questionsAnswered && profile.questionsAnswered > 0
-                  ? Math.round(((profile.correctAnswers || 0) / profile.questionsAnswered) * 100)
-                  : (profile as any)?.stats?.accuracyRate ?? 0}%
+              {accuracyRate}%
             </span>
             <span className="text-xs text-slate-400">Taxa de Acerto</span>
           </div>
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
             <Flame className="w-5 h-5 text-orange-400 mb-1" />
             <span className="text-xl font-black text-orange-400">
-              {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
+              {wins}
             </span>
             <span className="text-xs text-slate-400">Vitórias em Duelo</span>
           </div>
         </div>
       </div>
 
-      {/* Navegação de Abas Principais */}
+      {/* Navegação de Abas Principais (6 Secções Oficiais) */}
       <div className="w-full max-w-5xl flex gap-2 mb-6 border-b border-slate-800 pb-2 overflow-x-auto">
         <button
-          onClick={() => setActiveTab('inventario')}
-          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
-            activeTab === 'inventario'
+          onClick={() => setActiveTab('progressao')}
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+            activeTab === 'progressao'
               ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
               : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
           }`}
         >
-          <ShoppingBag className="w-4 h-4" /> 🎒 Inventário &amp; Cosméticos
+          <TrendingUp className="w-4 h-4" /> 📈 Progressão
+        </button>
+
+        <button
+          onClick={() => setActiveTab('rankings')}
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+            activeTab === 'rankings'
+              ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+              : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
+          }`}
+        >
+          <Trophy className="w-4 h-4" /> 🏆 Rankings
         </button>
 
         <button
           onClick={() => setActiveTab('estatisticas')}
-          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
             activeTab === 'estatisticas'
               ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
               : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
           }`}
         >
-          <BarChart3 className="w-4 h-4" /> 📊 Estatísticas por Categoria
+          <BarChart3 className="w-4 h-4" /> 📊 Estatísticas
         </button>
 
         <button
           onClick={() => setActiveTab('conquistas')}
-          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap relative ${
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap relative ${
             activeTab === 'conquistas'
               ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
               : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
           }`}
         >
-          <Sparkles className="w-4 h-4" /> 🏆 Conquistas &amp; Prestígio
+          <Sparkles className="w-4 h-4" /> 🎖️ Conquistas
           {claimableCount > 0 && (
             <span className="ml-1 px-2 py-0.2 rounded-full text-[10px] font-black bg-amber-400 text-slate-950 animate-bounce">
               {claimableCount}
@@ -1535,23 +1595,299 @@ function PerfilContent() {
         </button>
 
         <button
+          onClick={() => setActiveTab('colecao')}
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+            activeTab === 'colecao'
+              ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+              : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
+          }`}
+        >
+          <ShoppingBag className="w-4 h-4" /> 🎒 Coleção
+        </button>
+
+        <button
           onClick={() => setActiveTab('historico')}
-          className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
             activeTab === 'historico'
               ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
               : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
           }`}
         >
-          <Swords className="w-4 h-4" /> ⚔️ Histórico de Duelos
+          <Swords className="w-4 h-4" /> ⚔️ Histórico
         </button>
       </div>
 
       {/* Conteúdo das Abas */}
       <div className="w-full max-w-5xl">
         {/* ========================================================= */}
-        {/* ABA 1: INVENTÁRIO & COSMÉTICOS */}
+        {/* SECÇÃO 1: PROGRESSÃO */}
         {/* ========================================================= */}
-        {activeTab === 'inventario' && (
+        {activeTab === 'progressao' && (
+          <div className="space-y-6 animate-fade-in">
+            {/* Card Principal: Nível & Barra de XP */}
+            <div className="p-6 md:p-8 rounded-3xl bg-slate-900/90 border border-emerald-500/30 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 relative z-10">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-wider text-emerald-400">Progresso Nacional</span>
+                  <h2 className="text-2xl md:text-3xl font-black text-white flex items-center gap-2">
+                    Nível {userLevel}
+                    <span className="text-sm font-normal text-slate-400">({userXp.toLocaleString('pt-PT')} XP acumulado)</span>
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Cada resposta correta e duelo vencido aproxima-te do próximo patamar de glória.
+                  </p>
+                </div>
+                <div className="bg-slate-950/80 border border-slate-800 rounded-2xl px-5 py-3 text-right">
+                  <p className="text-[11px] uppercase font-bold text-slate-400">Próximo Nível</p>
+                  <p className="text-lg font-mono font-black text-emerald-400">
+                    {1000 - xpCurrent} XP <span className="text-xs text-slate-400 font-normal">restantes</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Barra de XP */}
+              <div className="relative z-10 space-y-2">
+                <div className="flex items-center justify-between text-xs font-mono font-bold text-slate-300">
+                  <span>{xpCurrent} XP</span>
+                  <span>{xpProgressPct}%</span>
+                  <span>1.000 XP</span>
+                </div>
+                <div className="w-full bg-slate-950 rounded-full h-4 border border-slate-800 p-0.5 overflow-hidden shadow-inner">
+                  <div
+                    className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 h-full rounded-full transition-all duration-700 shadow-[0_0_15px_rgba(16,185,129,0.5)]"
+                    style={{ width: `${xpProgressPct}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Grid de Streak & Saldo de Acordas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Dias Seguidos (Streak) */}
+              <div className="p-6 rounded-3xl bg-slate-900/80 border border-orange-500/30 shadow-xl relative overflow-hidden backdrop-blur-md">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-500/20 text-orange-400 border border-orange-500/30 flex items-center justify-center text-2xl shadow-inner">
+                    🔥
+                  </div>
+                  <div>
+                    <h3 className="font-black text-white text-lg">Dias Consecutivos</h3>
+                    <p className="text-xs text-slate-400">Joga todos os dias para acumular bónus e multiplicar recompensas.</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-800">
+                  <div className="bg-slate-950/60 rounded-2xl p-3 border border-slate-800">
+                    <span className="text-[11px] text-slate-400 font-bold block">Streak Atual</span>
+                    <span className="text-2xl font-black text-orange-400 font-mono">{streak} {streak === 1 ? 'dia' : 'dias'}</span>
+                  </div>
+                  <div className="bg-slate-950/60 rounded-2xl p-3 border border-slate-800">
+                    <span className="text-[11px] text-slate-400 font-bold block">Melhor Sequência</span>
+                    <span className="text-2xl font-black text-amber-300 font-mono">{bestStreak} {bestStreak === 1 ? 'dia' : 'dias'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Saldo de Acordas */}
+              <div className="p-6 rounded-3xl bg-slate-900/80 border border-amber-500/30 shadow-xl relative overflow-hidden backdrop-blur-md flex flex-col justify-between">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-2xl shadow-inner">
+                      🪙
+                    </div>
+                    <div>
+                      <h3 className="font-black text-white text-lg">Saldo de Acordas</h3>
+                      <p className="text-xs text-slate-400">A moeda de prestígio para cosméticos, ajudas e personalização.</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-950/60 rounded-2xl p-4 border border-slate-800 mb-4 flex items-center justify-between">
+                    <span className="text-sm font-bold text-slate-400">Saldo Disponível:</span>
+                    <span className="text-2xl font-mono font-black text-amber-300">
+                      {userCoins.toLocaleString('pt-PT')} <span className="text-sm">🪙</span>
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  href="/loja"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-500/20 active:scale-98"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Visitar Loja Oficial</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Marcos de Nível */}
+            <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-xl">
+              <h3 className="font-black text-white text-base flex items-center gap-2 mb-4">
+                <Target className="w-5 h-5 text-cyan-400" /> Metas de Escalão &amp; Recompensas
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { lvl: 5, reward: 'Título: Cidadão Ativo', desc: 'Desbloqueado no nível 5' },
+                  { lvl: 10, reward: 'Moldura Quinas Douradas', desc: 'Desbloqueado no nível 10' },
+                  { lvl: 25, reward: 'Arena do Tejo', desc: 'Desbloqueado no nível 25' },
+                  { lvl: 50, reward: 'Título: Grão-Mestre', desc: 'Desbloqueado no nível 50' },
+                ].map((m) => {
+                  const reached = userLevel >= m.lvl
+                  return (
+                    <div
+                      key={m.lvl}
+                      className={cn(
+                        'p-4 rounded-2xl border transition-all',
+                        reached
+                          ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300'
+                          : 'bg-slate-950/40 border-slate-800/80 text-slate-400 opacity-80'
+                      )}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={cn('text-xs font-black px-2 py-0.5 rounded-md font-mono', reached ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400')}>
+                          NÍVEL {m.lvl}
+                        </span>
+                        {reached ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Lock className="w-4 h-4 text-slate-600" />}
+                      </div>
+                      <p className="text-sm font-bold text-white">{m.reward}</p>
+                      <p className="text-[11px] text-slate-400 mt-1">{reached ? 'Desbloqueado!' : m.desc}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* SECÇÃO 2: RANKINGS */}
+        {/* ========================================================= */}
+        {activeTab === 'rankings' && (
+          <div className="space-y-6 animate-fade-in">
+            {/* Divisão Competitiva Hero */}
+            <div className="p-6 md:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 relative z-10">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-wider text-purple-400">Classificação Competitiva</span>
+                  <h2 className="text-2xl md:text-3xl font-black text-white flex items-center gap-3">
+                    <span className={divisionColor}>{division.name} {division.tier}</span>
+                    <span className="text-sm font-mono font-bold text-slate-400">({currentLp} LP)</span>
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Vence partidas na Arena de Duelos 1v1 para subir de divisão e qualificar-te para os rankings de topo.
+                  </p>
+                </div>
+                <Link
+                  href="/rankings"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-purple-600/30 active:scale-95 shrink-0"
+                >
+                  <Trophy className="w-4 h-4" />
+                  <span>Ver Tabela Completa</span>
+                </Link>
+              </div>
+
+              {/* LP Bar */}
+              <div className="relative z-10 pt-2">
+                <div className="flex items-center justify-between text-xs font-mono font-bold text-slate-400 mb-1.5">
+                  <span>{division.minRating} LP</span>
+                  <span className="text-purple-300">{currentLp} LP Atual</span>
+                  <span>{division.maxRating === Infinity ? 'MAX' : `${division.maxRating} LP`}</span>
+                </div>
+                <div className="w-full bg-slate-950 rounded-full h-3 border border-slate-800 p-0.5 overflow-hidden shadow-inner">
+                  <div
+                    className="bg-gradient-to-r from-purple-600 via-pink-500 to-amber-400 h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                    style={{
+                      width: `${Math.min(100, Math.max(5, division.maxRating === Infinity ? 100 : Math.round(((currentLp - division.minRating) / (division.maxRating - division.minRating)) * 100)))}%`
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 4 Posições Geográficas & Território */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* 1. Ranking Nacional */}
+              <div className="p-5 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-slate-400 uppercase">Nacional</span>
+                    <Award className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <p className="text-3xl font-mono font-black text-emerald-400">
+                    {nationalRank ? `#${nationalRank}` : '-'}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">Entre todos os jogadores de Portugal</p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500">
+                  Atualizado em tempo real
+                </div>
+              </div>
+
+              {/* 2. Ranking Distrital */}
+              <div className="p-5 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-slate-400 uppercase">Distrital</span>
+                    <MapPin className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <p className="text-3xl font-mono font-black text-cyan-400">
+                    {districtRank ? `#${districtRank}` : '-'}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">No distrito de <strong>{district}</strong></p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500">
+                  Pontuação distrital ativa
+                </div>
+              </div>
+
+              {/* 3. Ranking Municipal */}
+              <div className="p-5 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-slate-400 uppercase">Municipal</span>
+                    <Building2 className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <p className="text-3xl font-mono font-black text-amber-400">
+                    {cityRank ? `#${cityRank}` : '-'}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">No concelho de <strong>{city || 'Geral'}</strong></p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500">
+                  Desafio da Cidade
+                </div>
+              </div>
+
+              {/* 4. Rei do Distrito */}
+              <div className="p-5 rounded-3xl bg-slate-900/80 border border-amber-500/30 shadow-xl flex flex-col justify-between bg-gradient-to-b from-amber-950/20 to-slate-900/80">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-amber-400 uppercase">Soberania Distrital</span>
+                    <Crown className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <p className="text-lg font-black text-white truncate">
+                    {districtKing || 'Sem Rei Definido'}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">
+                    {districtKing && districtKing === displayName
+                      ? '👑 És o Soberano atual deste território!'
+                      : 'Disputa a liderança no Conquista do Distrito'}
+                  </p>
+                </div>
+                <Link
+                  href="/conquista-do-distrito"
+                  className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] font-bold text-amber-400 hover:text-amber-300 transition-colors flex items-center justify-between"
+                >
+                  <span>Batalhar pelo Distrito</span>
+                  <span>→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* SECÇÃO 5: COLEÇÃO (INVENTÁRIO & COSMÉTICOS) */}
+        {/* ========================================================= */}
+        {(activeTab === 'colecao' || (activeTab as any) === 'inventario') && (
           <div className="space-y-8">
             {/* Sub-Filtros do Inventário */}
             <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
@@ -2036,10 +2372,49 @@ function PerfilContent() {
         )}
 
         {/* ========================================================= */}
-        {/* ABA 2: ESTATÍSTICAS POR CATEGORIA (PERFORMANCE DO QUIZ) */}
+        {/* SECÇÃO 3: ESTATÍSTICAS COMPLETAS & POR CATEGORIA */}
         {/* ========================================================= */}
         {activeTab === 'estatisticas' && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in">
+            {/* Resumo Global de Métricas de Jogo */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-slate-400 uppercase">Partidas</span>
+                <span className="text-xl font-mono font-black text-white mt-1">{totalGames}</span>
+                <span className="text-[10px] text-slate-500">Total jogado</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-emerald-400 uppercase">Vitórias 1v1</span>
+                <span className="text-xl font-mono font-black text-emerald-400 mt-1">{wins}</span>
+                <span className="text-[10px] text-slate-500">Duelos ganhos</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-rose-400 uppercase">Derrotas</span>
+                <span className="text-xl font-mono font-black text-rose-400 mt-1">{losses}</span>
+                <span className="text-[10px] text-slate-500">Duelos perdidos</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-cyan-400 uppercase">Taxa Vitória</span>
+                <span className="text-xl font-mono font-black text-cyan-300 mt-1">{winRate}%</span>
+                <span className="text-[10px] text-slate-500">Eficácia 1v1</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-amber-400 uppercase">Precisão</span>
+                <span className="text-xl font-mono font-black text-amber-300 mt-1">{accuracyRate}%</span>
+                <span className="text-[10px] text-slate-500">Respostas certas</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md flex flex-col items-center justify-center text-center">
+                <span className="text-[11px] font-bold text-purple-400 uppercase">Tempo Médio</span>
+                <span className="text-xl font-mono font-black text-purple-300 mt-1">{avgResponseTime}</span>
+                <span className="text-[10px] text-slate-500">Por questão</span>
+              </div>
+            </div>
+
             <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-black text-white flex items-center gap-2">
@@ -2048,7 +2423,7 @@ function PerfilContent() {
                 <p className="text-xs text-slate-400">Analisa a tua taxa de acerto e evolução em cada tema de Portugal.</p>
               </div>
               <span className="text-xs font-bold px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                Total: {profile?.totalQuestions || profile?.questionsAnswered || 0} Questões
+                Total: {totalAnswered} Questões
               </span>
             </div>
 

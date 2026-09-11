@@ -465,7 +465,6 @@ export function QuizScreen({
 
   const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
   const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(true)
-  const [arenaBurstTrigger, setArenaBurstTrigger] = useState<'correct' | 'wrong' | null>(null)
 
   // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
@@ -735,8 +734,6 @@ export function QuizScreen({
       } catch {}
 
       if (hit) {
-        setArenaBurstTrigger('correct')
-        setTimeout(() => setArenaBurstTrigger(null), 1000)
         const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
         const nextStreak = streak + 1
 
@@ -757,8 +754,6 @@ export function QuizScreen({
           setTimeout(() => playSound('streak'), 400)
         }
       } else {
-        setArenaBurstTrigger('wrong')
-        setTimeout(() => setArenaBurstTrigger(null), 1000)
         setStreak(0)
         setCurrentStreak(0)
         playSound('wrong')
@@ -1095,14 +1090,13 @@ export function QuizScreen({
         />
       )}
 
-      {/* Camada Master da Arena */}
+      {/* Camada Master da Arena: Cenário Imersivo sem Partículas Distrativas */}
       {activeArena && (
         <ArenaRenderer
           arenaId={activeArena.id}
           streak={streak}
-          burstTrigger={arenaBurstTrigger}
           className="fixed inset-0 pointer-events-none -z-40"
-          showAtmosphere={true}
+          showAtmosphere={false}
           showLighting={true}
           showBadge={false}
         />
@@ -1199,32 +1193,33 @@ export function QuizScreen({
             {/* 2. ZONA CENTRAL: CARD DA PERGUNTA                         */}
             {/* ========================================================= */}
             <div className="py-1 w-full flex flex-col items-center justify-center relative">
-              {/* Feedback visual instantâneo overlay */}
+              {/* Feedback visual rápido e discreto */}
               {phase === 'revealed' && (
                 <div
                   className={cn(
-                    'mb-2 px-3 py-1.5 rounded-xl font-display text-xs sm:text-sm font-black tracking-wide shadow-lg transition-all duration-300 animate-pop z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center',
+                    'mb-2 px-3.5 py-1 rounded-full font-display text-xs font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center shadow-md animate-pop select-none',
                     selected === q.correct
-                      ? 'bg-primary/30 border border-primary text-primary text-glow-primary'
+                      ? 'bg-emerald-500 text-slate-950 border border-emerald-400 shadow-emerald-500/30'
                       : selected === null
-                        ? 'bg-gold/30 border border-gold text-gold text-glow-gold'
-                        : 'bg-flag-red/30 border border-flag-red text-flag-red text-glow-red'
+                        ? 'bg-amber-500 text-slate-950 border border-amber-400 shadow-amber-500/30'
+                        : 'bg-rose-500 text-white border border-rose-400 shadow-rose-500/30'
                   )}
                 >
                   {selected === q.correct ? (
                     <>
-                      <CheckCircle2 className="h-4 w-4 shrink-0" />
-                      <span className="break-words">Resposta Correta! (+{q.points} pts)</span>
+                      <CheckCircle2 className="h-3.5 w-3.5 stroke-[3] shrink-0" />
+                      <span>CORRETO</span>
+                      <span className="font-mono text-[11px] font-extrabold opacity-95">+{q.points} XP</span>
                     </>
                   ) : selected === null ? (
                     <>
-                      <Clock className="h-4 w-4 shrink-0" />
-                      <span className="break-words">Tempo Esgotado!</span>
+                      <Clock className="h-3.5 w-3.5 shrink-0" />
+                      <span>TEMPO ESGOTADO</span>
                     </>
                   ) : (
                     <>
-                      <XCircle className="h-4 w-4 shrink-0" />
-                      <span className="break-words">Resposta Incorreta</span>
+                      <XCircle className="h-3.5 w-3.5 stroke-[3] shrink-0" />
+                      <span>ERRADO</span>
                     </>
                   )}
                 </div>

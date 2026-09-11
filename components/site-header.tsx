@@ -60,11 +60,11 @@ export function SiteHeader() {
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Mapa 3D', href: '/portugal-mapa', icon: Flag },
-    { label: 'Ranking', href: '/rankings', icon: Trophy },
+    { label: 'Mapa', href: '/portugal-mapa', icon: Flag },
+    { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
-    { label: 'Os Criadores 🇵🇹', href: '/criadores', icon: Sparkles },
-    { label: '📱 App', href: '/download', icon: Smartphone },
+    { label: 'Criadores', href: '/criadores', icon: Sparkles },
+    { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
