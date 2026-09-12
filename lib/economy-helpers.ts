@@ -158,6 +158,7 @@ export function extractUserInventory(data: any): {
 } {
   const inv = (data?.inventory && typeof data.inventory === 'object') ? data.inventory : {}
   const cons = (data?.consumables && typeof data.consumables === 'object') ? data.consumables : {}
+  const powerUps = (data?.powerUps && typeof data.powerUps === 'object') ? data.powerUps : {}
   const rawMap: Record<string, number> = {}
 
   // 1. Avatares (garantir STARTER_AVATAR_ID + todos os avatares de inventory.avatars e unlockedAvatars)
@@ -226,7 +227,7 @@ export function extractUserInventory(data: any): {
   }
 
   // Helper canónico de resolução estrita de saldo de ajudas (SSOT):
-  // Prioriza o campo canónico mais recente (consumables -> utilities -> ID canónico -> aliases legados)
+  // Prioriza o campo canónico mais recente (powerUps -> consumables -> utilities -> ID canónico -> aliases legados)
   // NUNCA faz Math.max entre campos canónicos e aliases obsoletos para evitar ressuscitação de ajudas já consumidas.
   const resolveAidCount = (
     primaryVal: unknown,
@@ -247,33 +248,33 @@ export function extractUserInventory(data: any): {
     return 0
   }
 
-  // 6. Consumíveis e Utilitários Canónicos
+  // 6. Consumíveis e Utilitários Canónicos (powerUps -> consumables -> utilities -> AID_xxx -> legados)
   const fiftyFifty = resolveAidCount(
-    cons.help5050,
+    powerUps.fiftyFifty ?? powerUps.help5050 ?? powerUps['5050'],
+    cons.help5050 ?? cons.fiftyFifty,
     inv?.utilities?.fiftyFifty,
-    inv?.AID_002,
-    [inv?.aid_50_50, inv?.consumable_50_50, inv?.help5050, inv?.ajuda_5050]
+    [inv?.AID_002, inv?.aid_50_50, inv?.consumable_50_50, inv?.help5050, inv?.ajuda_5050]
   )
 
   const freezeTime = resolveAidCount(
+    powerUps.freezeTime ?? powerUps.freeze ?? powerUps.congelar,
     cons.freezeTime,
     inv?.utilities?.freezeTime,
-    inv?.AID_004,
-    [inv?.aid_freeze_time, inv?.consumable_congelar_tempo, inv?.freezeTime, inv?.ajuda_congelar]
+    [inv?.AID_004, inv?.aid_freeze_time, inv?.consumable_congelar_tempo, inv?.freezeTime, inv?.ajuda_congelar]
   )
 
   const publicVote = resolveAidCount(
-    cons.publicVote,
+    powerUps.publicVote ?? powerUps.publico,
+    cons.publicVote ?? cons.publico,
     inv?.utilities?.publicVote,
-    inv?.AID_003,
-    [inv?.aid_public_vote, inv?.consumable_public_vote, inv?.HELP_005, inv?.publicVote, inv?.ajuda_publico]
+    [inv?.AID_003, inv?.aid_public_vote, inv?.consumable_public_vote, inv?.HELP_005, inv?.publicVote, inv?.ajuda_publico]
   )
 
   const hints = resolveAidCount(
-    cons.hints,
+    powerUps.hints ?? powerUps.hint ?? powerUps.dica ?? powerUps.pista,
+    cons.hints ?? cons.hint ?? cons.dica,
     inv?.utilities?.hints,
-    inv?.AID_001,
-    [inv?.aid_hint, inv?.consumable_pista, inv?.pista_historica, inv?.ajuda_pista, inv?.hint]
+    [inv?.AID_001, inv?.aid_hint, inv?.consumable_pista, inv?.pista_historica, inv?.ajuda_pista, inv?.hint]
   )
 
   // Preenchimento de rawMap para consultas rápidas por ID de item

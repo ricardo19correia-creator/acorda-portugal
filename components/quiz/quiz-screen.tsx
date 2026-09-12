@@ -1267,7 +1267,7 @@ export function QuizScreen({
                 </button>
               </div>
             ) : (
-              <div className="flex justify-center gap-3 my-1 shrink-0">
+              <div className="w-full flex justify-center my-1 shrink-0">
                 <QuizPowerUpsBar
                   stockHint={aidStocks.stockHint}
                   stock5050={aidStocks.stock5050}

@@ -163,11 +163,15 @@ export async function POST(req: NextRequest) {
       // Fallback abrangente para campos legados e canónicos no documento do utilizador
       const inv = userSnap.data()?.inventory || {}
       const cons = userSnap.data()?.consumables || {}
+      const powerUps = userSnap.data()?.powerUps || {}
       let legacyStock = 0
 
       // Resolução estrita priorizando fontes canónicas (SSOT)
       if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
-        if (typeof cons.help5050 === 'number') legacyStock = cons.help5050
+        if (typeof powerUps.fiftyFifty === 'number') legacyStock = powerUps.fiftyFifty
+        else if (typeof powerUps.help5050 === 'number') legacyStock = powerUps.help5050
+        else if (typeof cons.help5050 === 'number') legacyStock = cons.help5050
+        else if (typeof cons.fiftyFifty === 'number') legacyStock = cons.fiftyFifty
         else if (typeof inv['utilities']?.fiftyFifty === 'number') legacyStock = inv['utilities'].fiftyFifty
         else if (typeof inv['AID_002'] === 'number') legacyStock = inv['AID_002']
         else {
@@ -180,7 +184,9 @@ export async function POST(req: NextRequest) {
           )
         }
       } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
-        if (typeof cons.publicVote === 'number') legacyStock = cons.publicVote
+        if (typeof powerUps.publicVote === 'number') legacyStock = powerUps.publicVote
+        else if (typeof powerUps.publico === 'number') legacyStock = powerUps.publico
+        else if (typeof cons.publicVote === 'number') legacyStock = cons.publicVote
         else if (typeof inv['utilities']?.publicVote === 'number') legacyStock = inv['utilities'].publicVote
         else if (typeof inv['AID_003'] === 'number') legacyStock = inv['AID_003']
         else {
@@ -194,7 +200,10 @@ export async function POST(req: NextRequest) {
           )
         }
       } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
-        if (typeof cons.freezeTime === 'number') legacyStock = cons.freezeTime
+        if (typeof powerUps.freezeTime === 'number') legacyStock = powerUps.freezeTime
+        else if (typeof powerUps.freeze === 'number') legacyStock = powerUps.freeze
+        else if (typeof powerUps.congelar === 'number') legacyStock = powerUps.congelar
+        else if (typeof cons.freezeTime === 'number') legacyStock = cons.freezeTime
         else if (typeof inv['utilities']?.freezeTime === 'number') legacyStock = inv['utilities'].freezeTime
         else if (typeof inv['AID_004'] === 'number') legacyStock = inv['AID_004']
         else {
@@ -207,7 +216,11 @@ export async function POST(req: NextRequest) {
           )
         }
       } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
-        if (typeof cons.hints === 'number') legacyStock = cons.hints
+        if (typeof powerUps.hints === 'number') legacyStock = powerUps.hints
+        else if (typeof powerUps.hint === 'number') legacyStock = powerUps.hint
+        else if (typeof powerUps.dica === 'number') legacyStock = powerUps.dica
+        else if (typeof powerUps.pista === 'number') legacyStock = powerUps.pista
+        else if (typeof cons.hints === 'number') legacyStock = cons.hints
         else if (typeof inv['utilities']?.hints === 'number') legacyStock = inv['utilities'].hints
         else if (typeof inv['AID_001'] === 'number') legacyStock = inv['AID_001']
         else {
@@ -274,7 +287,9 @@ export async function POST(req: NextRequest) {
       }
 
       if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
+        updatePayload['powerUps.fiftyFifty'] = newStock
         updatePayload['consumables.help5050'] = newStock
+        updatePayload['consumables.fiftyFifty'] = newStock
         updatePayload['inventory.AID_002'] = newStock
         updatePayload['inventory.aid_50_50'] = newStock
         updatePayload['inventory.consumable_50_50'] = newStock
@@ -282,7 +297,10 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.ajuda_5050'] = newStock
         updatePayload['inventory.utilities.fiftyFifty'] = newStock
       } else if (aidRule.id === 'AID_003' || aidRule.id === 'aid_public_vote' || aidRule.aliases?.includes('consumable_public_vote')) {
+        updatePayload['powerUps.publicVote'] = newStock
+        updatePayload['powerUps.publico'] = newStock
         updatePayload['consumables.publicVote'] = newStock
+        updatePayload['consumables.publico'] = newStock
         updatePayload['inventory.AID_003'] = newStock
         updatePayload['inventory.aid_public_vote'] = newStock
         updatePayload['inventory.consumable_public_vote'] = newStock
@@ -291,6 +309,9 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.ajuda_publico'] = newStock
         updatePayload['inventory.utilities.publicVote'] = newStock
       } else if (aidRule.id === 'AID_004' || aidRule.id === 'aid_freeze_time' || aidRule.aliases?.includes('consumable_congelar_tempo')) {
+        updatePayload['powerUps.freezeTime'] = newStock
+        updatePayload['powerUps.freeze'] = newStock
+        updatePayload['powerUps.congelar'] = newStock
         updatePayload['consumables.freezeTime'] = newStock
         updatePayload['inventory.AID_004'] = newStock
         updatePayload['inventory.aid_freeze_time'] = newStock
@@ -299,7 +320,12 @@ export async function POST(req: NextRequest) {
         updatePayload['inventory.ajuda_congelar'] = newStock
         updatePayload['inventory.utilities.freezeTime'] = newStock
       } else if (aidRule.id === 'AID_001' || aidRule.id === 'aid_hint' || aidRule.aliases?.includes('consumable_pista')) {
+        updatePayload['powerUps.hints'] = newStock
+        updatePayload['powerUps.hint'] = newStock
+        updatePayload['powerUps.dica'] = newStock
+        updatePayload['powerUps.pista'] = newStock
         updatePayload['consumables.hints'] = newStock
+        updatePayload['consumables.hint'] = newStock
         updatePayload['inventory.AID_001'] = newStock
         updatePayload['inventory.aid_hint'] = newStock
         updatePayload['inventory.consumable_pista'] = newStock

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { doc, getDoc, updateDoc, increment, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import {
   type AidType,
@@ -66,7 +68,7 @@ export function useGameAids({
   const [aidToast, setAidToast] = useState<string | null>(null)
   const toastTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Sincronização reativa de stocks em tempo real a partir do perfil Firestore (SSOT)
+  // Sincronização reativa e direta com Firestore (SSOT - Leitura Real da BD)
   useEffect(() => {
     const sync = () => {
       const inv: Record<string, any> = (profile as any)?.inventory || {}
@@ -75,16 +77,51 @@ export function useGameAids({
     }
 
     sync()
+
+    if (!effectiveUid || isGuest) return
+
+    let isMounted = true
+
+    // Leitura direta imediata do Firestore ao iniciar uma partida (regra 2.c: nunca valores fixos hardcoded)
+    getDoc(doc(db, 'users', effectiveUid))
+      .then((snap) => {
+        if (snap.exists() && isMounted) {
+          const data = snap.data()
+          const realStocks = getUserAidStock(data, data.inventory)
+          setStocks(realStocks)
+        }
+      })
+      .catch((err) => {
+        console.warn('[useGameAids] Erro ao carregar stocks reais do Firestore:', err)
+      })
+
+    // Subscrição em tempo real para refletir consumos e compras atómicas instantaneamente
+    const unsub = onSnapshot(
+      doc(db, 'users', effectiveUid),
+      (snap) => {
+        if (snap.exists() && isMounted) {
+          const data = snap.data()
+          const realStocks = getUserAidStock(data, data.inventory)
+          setStocks(realStocks)
+        }
+      },
+      (err) => {
+        console.warn('[useGameAids] Erro no listener de stocks Firestore:', err)
+      },
+    )
+
     window.addEventListener('consumables_updated', sync)
     window.addEventListener('inventory_updated', sync)
     window.addEventListener('storage', sync)
 
     return () => {
+      isMounted = false
+      unsub()
       window.removeEventListener('consumables_updated', sync)
       window.removeEventListener('inventory_updated', sync)
       window.removeEventListener('storage', sync)
     }
-  }, [profile])
+  }, [profile, effectiveUid, isGuest])
 
   // Temporizador do Congelamento de Tempo (+15s)
   useEffect(() => {
@@ -224,11 +261,16 @@ export function useGameAids({
         if (typeof updateProfileLocally === 'function') {
           updateProfileLocally((prev) => {
             if (!prev) return prev
+            const nextPowerUps = { ...(prev.powerUps || {}) }
             const nextConsumables = { ...(prev.consumables || {}) }
             const nextInventory = { ...(prev.inventory || {}) }
             const nextUtilities = { ...(nextInventory.utilities || {}) }
 
             if (aidType === 'hint') {
+              nextPowerUps.hints = remainingStock
+              nextPowerUps.hint = remainingStock
+              nextPowerUps.dica = remainingStock
+              nextPowerUps.pista = remainingStock
               nextConsumables.hints = remainingStock
               nextUtilities.hints = remainingStock
               nextInventory['AID_001'] = remainingStock
@@ -238,6 +280,8 @@ export function useGameAids({
               nextInventory['ajuda_pista'] = remainingStock
               nextInventory['hint'] = remainingStock
             } else if (aidType === '5050') {
+              nextPowerUps.fiftyFifty = remainingStock
+              nextPowerUps.help5050 = remainingStock
               nextConsumables.help5050 = remainingStock
               nextUtilities.fiftyFifty = remainingStock
               nextInventory['AID_002'] = remainingStock
@@ -246,6 +290,8 @@ export function useGameAids({
               nextInventory['help5050'] = remainingStock
               nextInventory['ajuda_5050'] = remainingStock
             } else if (aidType === 'publicVote') {
+              nextPowerUps.publicVote = remainingStock
+              nextPowerUps.publico = remainingStock
               nextConsumables.publicVote = remainingStock
               nextUtilities.publicVote = remainingStock
               nextInventory['AID_003'] = remainingStock
@@ -255,6 +301,9 @@ export function useGameAids({
               nextInventory['publicVote'] = remainingStock
               nextInventory['ajuda_publico'] = remainingStock
             } else if (aidType === 'freeze') {
+              nextPowerUps.freezeTime = remainingStock
+              nextPowerUps.freeze = remainingStock
+              nextPowerUps.congelar = remainingStock
               nextConsumables.freezeTime = remainingStock
               nextUtilities.freezeTime = remainingStock
               nextInventory['AID_004'] = remainingStock
@@ -268,6 +317,7 @@ export function useGameAids({
 
             return {
               ...prev,
+              powerUps: nextPowerUps,
               consumables: nextConsumables,
               inventory: nextInventory,
             }
@@ -313,7 +363,55 @@ export function useGameAids({
           `💡 ${aidMeta?.shortName?.toUpperCase() || aidType} UTILIZADA — Restam ${remainingStock}`,
         )
 
-        // 5. Disparar persistência atómica no Firestore através do serviço unificado
+        // 5. Persistência REAL E IMEDIATA no Firestore (Regra 2.a: users/{uid} -> powerUps.fiftyFifty = increment(-1))
+        if (effectiveUid && !isGuest) {
+          const userRef = doc(db, 'users', effectiveUid)
+          const firestoreUpdates: Record<string, any> = {
+            updatedAt: serverTimestamp(),
+          }
+
+          if (aidType === '5050') {
+            firestoreUpdates['powerUps.fiftyFifty'] = increment(-1)
+            firestoreUpdates['powerUps.help5050'] = increment(-1)
+            firestoreUpdates['consumables.help5050'] = increment(-1)
+            firestoreUpdates['consumables.fiftyFifty'] = increment(-1)
+            firestoreUpdates['inventory.utilities.fiftyFifty'] = increment(-1)
+            firestoreUpdates['inventory.AID_002'] = increment(-1)
+            firestoreUpdates['inventory.aid_50_50'] = increment(-1)
+          } else if (aidType === 'hint') {
+            firestoreUpdates['powerUps.hints'] = increment(-1)
+            firestoreUpdates['powerUps.hint'] = increment(-1)
+            firestoreUpdates['powerUps.dica'] = increment(-1)
+            firestoreUpdates['powerUps.pista'] = increment(-1)
+            firestoreUpdates['consumables.hints'] = increment(-1)
+            firestoreUpdates['consumables.hint'] = increment(-1)
+            firestoreUpdates['inventory.utilities.hints'] = increment(-1)
+            firestoreUpdates['inventory.AID_001'] = increment(-1)
+            firestoreUpdates['inventory.aid_hint'] = increment(-1)
+          } else if (aidType === 'publicVote') {
+            firestoreUpdates['powerUps.publicVote'] = increment(-1)
+            firestoreUpdates['powerUps.publico'] = increment(-1)
+            firestoreUpdates['consumables.publicVote'] = increment(-1)
+            firestoreUpdates['consumables.publico'] = increment(-1)
+            firestoreUpdates['inventory.utilities.publicVote'] = increment(-1)
+            firestoreUpdates['inventory.AID_003'] = increment(-1)
+            firestoreUpdates['inventory.aid_public_vote'] = increment(-1)
+          } else if (aidType === 'freeze') {
+            firestoreUpdates['powerUps.freezeTime'] = increment(-1)
+            firestoreUpdates['powerUps.freeze'] = increment(-1)
+            firestoreUpdates['powerUps.congelar'] = increment(-1)
+            firestoreUpdates['consumables.freezeTime'] = increment(-1)
+            firestoreUpdates['inventory.utilities.freezeTime'] = increment(-1)
+            firestoreUpdates['inventory.AID_004'] = increment(-1)
+            firestoreUpdates['inventory.aid_freeze_time'] = increment(-1)
+          }
+
+          updateDoc(userRef, firestoreUpdates).catch((fErr) => {
+            console.warn('[useGameAids] Aviso ao atualizar Firestore imediatamente:', fErr)
+          })
+        }
+
+        // 6. Sincronização secundária via API/serviço unificado (extensão de duelo, logging e subcoleções)
         if (effectiveUid) {
           consumeGameAid({
             userId: effectiveUid,

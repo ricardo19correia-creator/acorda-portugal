@@ -813,6 +813,7 @@ export async function useConsumablePowerUp(
       const data = userDoc.data() || {}
       const inventory: Record<string, any> = data.inventory || {}
       const consumables: Record<string, any> = data.consumables || {}
+      const powerUps: Record<string, any> = data.powerUps || {}
       const utilities: Record<string, any> = inventory.utilities || {}
 
       let currentCount = 0
@@ -827,9 +828,17 @@ export async function useConsumablePowerUp(
         powerUpId === '5050'
       ) {
         canonicalId = 'AID_002'
-        // Priorizar campo canónico consumables / utilities
-        if (typeof consumables.help5050 === 'number') {
+        // Priorizar campo canónico powerUps / consumables / utilities
+        if (typeof powerUps.fiftyFifty === 'number') {
+          currentCount = powerUps.fiftyFifty
+        } else if (typeof powerUps.help5050 === 'number') {
+          currentCount = powerUps.help5050
+        } else if (typeof powerUps['5050'] === 'number') {
+          currentCount = powerUps['5050']
+        } else if (typeof consumables.help5050 === 'number') {
           currentCount = consumables.help5050
+        } else if (typeof consumables.fiftyFifty === 'number') {
+          currentCount = consumables.fiftyFifty
         } else if (typeof utilities.fiftyFifty === 'number') {
           currentCount = utilities.fiftyFifty
         } else if (typeof inventory['AID_002'] === 'number') {
@@ -852,7 +861,11 @@ export async function useConsumablePowerUp(
         powerUpId === 'publicVote'
       ) {
         canonicalId = 'AID_003'
-        if (typeof consumables.publicVote === 'number') {
+        if (typeof powerUps.publicVote === 'number') {
+          currentCount = powerUps.publicVote
+        } else if (typeof powerUps.publico === 'number') {
+          currentCount = powerUps.publico
+        } else if (typeof consumables.publicVote === 'number') {
           currentCount = consumables.publicVote
         } else if (typeof utilities.publicVote === 'number') {
           currentCount = utilities.publicVote
@@ -877,7 +890,13 @@ export async function useConsumablePowerUp(
         powerUpId === 'freeze'
       ) {
         canonicalId = 'AID_004'
-        if (typeof consumables.freezeTime === 'number') {
+        if (typeof powerUps.freezeTime === 'number') {
+          currentCount = powerUps.freezeTime
+        } else if (typeof powerUps.freeze === 'number') {
+          currentCount = powerUps.freeze
+        } else if (typeof powerUps.congelar === 'number') {
+          currentCount = powerUps.congelar
+        } else if (typeof consumables.freezeTime === 'number') {
           currentCount = consumables.freezeTime
         } else if (typeof utilities.freezeTime === 'number') {
           currentCount = utilities.freezeTime
@@ -901,7 +920,15 @@ export async function useConsumablePowerUp(
         powerUpId === 'hint'
       ) {
         canonicalId = 'AID_001'
-        if (typeof consumables.hints === 'number') {
+        if (typeof powerUps.hints === 'number') {
+          currentCount = powerUps.hints
+        } else if (typeof powerUps.hint === 'number') {
+          currentCount = powerUps.hint
+        } else if (typeof powerUps.dica === 'number') {
+          currentCount = powerUps.dica
+        } else if (typeof powerUps.pista === 'number') {
+          currentCount = powerUps.pista
+        } else if (typeof consumables.hints === 'number') {
           currentCount = consumables.hints
         } else if (typeof utilities.hints === 'number') {
           currentCount = utilities.hints
@@ -950,7 +977,9 @@ export async function useConsumablePowerUp(
       }
 
       if (canonicalId === 'AID_002') {
+        updatePayload['powerUps.fiftyFifty'] = newCount
         updatePayload['consumables.help5050'] = newCount
+        updatePayload['consumables.fiftyFifty'] = newCount
         updatePayload['inventory.utilities.fiftyFifty'] = newCount
         updatePayload['inventory.AID_002'] = newCount
         updatePayload['inventory.aid_50_50'] = newCount
@@ -958,7 +987,10 @@ export async function useConsumablePowerUp(
         updatePayload['inventory.help5050'] = newCount
         updatePayload['inventory.ajuda_5050'] = newCount
       } else if (canonicalId === 'AID_003') {
+        updatePayload['powerUps.publicVote'] = newCount
+        updatePayload['powerUps.publico'] = newCount
         updatePayload['consumables.publicVote'] = newCount
+        updatePayload['consumables.publico'] = newCount
         updatePayload['inventory.utilities.publicVote'] = newCount
         updatePayload['inventory.AID_003'] = newCount
         updatePayload['inventory.aid_public_vote'] = newCount
@@ -967,6 +999,9 @@ export async function useConsumablePowerUp(
         updatePayload['inventory.publicVote'] = newCount
         updatePayload['inventory.ajuda_publico'] = newCount
       } else if (canonicalId === 'AID_004') {
+        updatePayload['powerUps.freezeTime'] = newCount
+        updatePayload['powerUps.freeze'] = newCount
+        updatePayload['powerUps.congelar'] = newCount
         updatePayload['consumables.freezeTime'] = newCount
         updatePayload['inventory.utilities.freezeTime'] = newCount
         updatePayload['inventory.AID_004'] = newCount
@@ -975,7 +1010,13 @@ export async function useConsumablePowerUp(
         updatePayload['inventory.freezeTime'] = newCount
         updatePayload['inventory.ajuda_congelar'] = newCount
       } else if (canonicalId === 'AID_001') {
+        updatePayload['powerUps.hints'] = newCount
+        updatePayload['powerUps.hint'] = newCount
+        updatePayload['powerUps.dica'] = newCount
+        updatePayload['powerUps.pista'] = newCount
         updatePayload['consumables.hints'] = newCount
+        updatePayload['consumables.hint'] = newCount
+        updatePayload['consumables.dica'] = newCount
         updatePayload['inventory.utilities.hints'] = newCount
         updatePayload['inventory.AID_001'] = newCount
         updatePayload['inventory.aid_hint'] = newCount

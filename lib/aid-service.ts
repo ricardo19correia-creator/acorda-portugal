@@ -109,10 +109,19 @@ export function getUserAidStock(
     const cons = profile.consumables || {}
     const utils = profile.inventory?.utilities || {}
     const invMap = inventory || profile.inventory || {}
+    const powerUps = profile.powerUps || {}
 
     // 50/50
-    if (typeof cons.help5050 === 'number') {
+    if (typeof powerUps.fiftyFifty === 'number') {
+      s5050 = powerUps.fiftyFifty
+    } else if (typeof powerUps.help5050 === 'number') {
+      s5050 = powerUps.help5050
+    } else if (typeof powerUps['5050'] === 'number') {
+      s5050 = powerUps['5050']
+    } else if (typeof cons.help5050 === 'number') {
       s5050 = cons.help5050
+    } else if (typeof cons.fiftyFifty === 'number') {
+      s5050 = cons.fiftyFifty
     } else if (typeof utils.fiftyFifty === 'number') {
       s5050 = utils.fiftyFifty
     } else if (typeof invMap['AID_002'] === 'number') {
@@ -128,7 +137,11 @@ export function getUserAidStock(
     }
 
     // Pergunta ao Público
-    if (typeof cons.publicVote === 'number') {
+    if (typeof powerUps.publicVote === 'number') {
+      sPublic = powerUps.publicVote
+    } else if (typeof powerUps.publico === 'number') {
+      sPublic = powerUps.publico
+    } else if (typeof cons.publicVote === 'number') {
       sPublic = cons.publicVote
     } else if (typeof utils.publicVote === 'number') {
       sPublic = utils.publicVote
@@ -146,7 +159,13 @@ export function getUserAidStock(
     }
 
     // Congelar Tempo
-    if (typeof cons.freezeTime === 'number') {
+    if (typeof powerUps.freezeTime === 'number') {
+      sFreeze = powerUps.freezeTime
+    } else if (typeof powerUps.freeze === 'number') {
+      sFreeze = powerUps.freeze
+    } else if (typeof powerUps.congelar === 'number') {
+      sFreeze = powerUps.congelar
+    } else if (typeof cons.freezeTime === 'number') {
       sFreeze = cons.freezeTime
     } else if (typeof utils.freezeTime === 'number') {
       sFreeze = utils.freezeTime
@@ -163,8 +182,18 @@ export function getUserAidStock(
     }
 
     // Pista Histórica
-    if (typeof cons.hints === 'number') {
+    if (typeof powerUps.hints === 'number') {
+      sHint = powerUps.hints
+    } else if (typeof powerUps.hint === 'number') {
+      sHint = powerUps.hint
+    } else if (typeof powerUps.dica === 'number') {
+      sHint = powerUps.dica
+    } else if (typeof powerUps.pista === 'number') {
+      sHint = powerUps.pista
+    } else if (typeof cons.hints === 'number') {
       sHint = cons.hints
+    } else if (typeof cons.hint === 'number') {
+      sHint = cons.hint
     } else if (typeof utils.hints === 'number') {
       sHint = utils.hints
     } else if (typeof invMap['AID_001'] === 'number') {
