@@ -791,18 +791,21 @@ export async function POST(req: NextRequest) {
         }
         if (canonicalAidId === 'AID_002' || item.aliases?.includes('consumable_50_50')) {
           userUpdatePayload['consumables.help5050'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['consumables.fiftyFifty'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.fiftyFifty'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.help5050'] = FieldValue.increment(quantityToAdd)
           userUpdatePayload['inventory.utilities.fiftyFifty'] = FieldValue.increment(quantityToAdd)
         } else if (canonicalAidId === 'AID_003' || item.aliases?.includes('consumable_public_vote')) {
           userUpdatePayload['consumables.publicVote'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.publicVote'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.publico'] = FieldValue.increment(quantityToAdd)
           userUpdatePayload['inventory.utilities.publicVote'] = FieldValue.increment(quantityToAdd)
         } else if (canonicalAidId === 'AID_004' || item.aliases?.includes('consumable_congelar_tempo')) {
           userUpdatePayload['consumables.freezeTime'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.freezeTime'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.freeze'] = FieldValue.increment(quantityToAdd)
+          userUpdatePayload['powerUps.congelar'] = FieldValue.increment(quantityToAdd)
           userUpdatePayload['inventory.utilities.freezeTime'] = FieldValue.increment(quantityToAdd)
-        } else if (canonicalAidId === 'AID_001' || item.aliases?.includes('consumable_pista')) {
-          userUpdatePayload['consumables.hints'] = FieldValue.increment(quantityToAdd)
-          userUpdatePayload['inventory.utilities.hints'] = FieldValue.increment(quantityToAdd)
-        } else if (canonicalAidId === 'AID_008' || item.aliases?.includes('consumable_protecao_streak')) {
-          userUpdatePayload['consumables.streakProtection'] = FieldValue.increment(quantityToAdd)
         }
       } else {
         const typeCategory =

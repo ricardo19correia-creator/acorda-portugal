@@ -2,8 +2,8 @@
  * 🇵🇹 ACORDA PORTUGAL — SERVIÇO UNIFICADO DE AJUDAS (SSOT)
  *
  * Ponto único de verdade para:
- * 1. Definição das 4 Ajudas Canónicas (Pista Histórica, 50/50, Público, Congelar Tempo)
- * 2. Leitura consistente do inventário e estoque do jogador
+ * 1. Definição das 3 Ajudas Canónicas Oficiais (50/50, Congelar Tempo, Pergunta ao Público)
+ * 2. Leitura consistente do inventário e estoque real do jogador
  * 3. Consumo atómico e autoritativo (tanto no modo Normal como no 1v1 Multiplayer)
  * 4. Proteção contra duplo clique e idempotência
  */
@@ -28,19 +28,7 @@ export interface AidMetadata {
   aliases: string[]
 }
 
-export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
-  hint: {
-    type: 'hint',
-    canonicalId: 'AID_001',
-    name: 'Pista Histórica',
-    shortName: 'Pista Histórica',
-    icon: '💡',
-    description: 'Revela uma dica contextual educativa sem entregar a resposta diretamente.',
-    image: '/assets/shop/aids/aid-pista-historica.webp',
-    priceCoins: 750,
-    unitsPerPack: 1,
-    aliases: ['aid_hint', 'consumable_pista', 'pista_historica', 'ajuda_pista', 'hint'],
-  },
+export const CANONICAL_AIDS: Record<string, AidMetadata> = {
   5050: {
     type: '5050',
     canonicalId: 'AID_002',
@@ -52,18 +40,6 @@ export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
     priceCoins: 750,
     unitsPerPack: 5,
     aliases: ['aid_50_50', 'consumable_50_50', 'help5050', 'ajuda_5050'],
-  },
-  publicVote: {
-    type: 'publicVote',
-    canonicalId: 'AID_003',
-    name: 'Pack x3 Pergunta ao Público',
-    shortName: 'Pergunta ao Público',
-    icon: '👥',
-    description: 'Simula a votação do público com percentagens realistas e forte tendência para a opção correta.',
-    image: '/assets/shop/aids/aid-publico.webp',
-    priceCoins: 1500,
-    unitsPerPack: 3,
-    aliases: ['aid_public_vote', 'consumable_public_vote', 'HELP_005', 'publicVote', 'ajuda_publico'],
   },
   freeze: {
     type: 'freeze',
@@ -77,159 +53,118 @@ export const CANONICAL_AIDS: Record<AidType, AidMetadata> = {
     unitsPerPack: 3,
     aliases: ['aid_freeze_time', 'consumable_congelar_tempo', 'freezeTime', 'ajuda_congelar'],
   },
+  publicVote: {
+    type: 'publicVote',
+    canonicalId: 'AID_003',
+    name: 'Pack x3 Pergunta ao Público',
+    shortName: 'Pergunta ao Público',
+    icon: '👥',
+    description: 'Simula a votação do público com percentagens realistas e forte tendência para a opção correta.',
+    image: '/assets/shop/aids/aid-publico.webp',
+    priceCoins: 1500,
+    unitsPerPack: 3,
+    aliases: ['aid_public_vote', 'consumable_public_vote', 'HELP_005', 'publicVote', 'ajuda_publico'],
+  },
 }
 
 export interface UserAidStock {
-  stockHint: number
   stock5050: number
-  stockPublicVote: number
   stockFreeze: number
+  stockPublicVote: number
+  stockHint: number
   // Aliases retrocompatíveis opcionais
   stockPista?: number
   stockClue?: number
 }
 
 /**
- * Lê e consolida o estoque real das ajudas de forma estritamente canónica (SSOT).
- * O Firestore / Perfil é a ÚNICA fonte de verdade absoluta.
- * localStorage é usado exclusivamente para hidratação inicial antes do perfil carregar.
- * NUNCA usa Math.max contra o localStorage para evitar a ressurreição de ajudas consumidas.
+ * Lê e consolida o estoque real das 3 ajudas canónicas (50/50, Congelar, Público) (SSOT).
+ * Evita mascaramento onde um valor 0 num campo legacy oculta unidades reais de compras.
  */
 export function getUserAidStock(
   profile?: any,
   inventory?: Record<string, any>,
 ): UserAidStock {
-  let sHint = 0
   let s5050 = 0
   let sPublic = 0
   let sFreeze = 0
 
-  // 1. Se o Perfil estiver presente (do Firestore / AuthProvider), ele é a autoridade absoluta
   if (profile) {
     const cons = profile.consumables || {}
     const utils = profile.inventory?.utilities || {}
     const invMap = inventory || profile.inventory || {}
     const powerUps = profile.powerUps || {}
 
-    // 50/50
-    if (typeof powerUps.fiftyFifty === 'number') {
-      s5050 = powerUps.fiftyFifty
-    } else if (typeof powerUps.help5050 === 'number') {
-      s5050 = powerUps.help5050
-    } else if (typeof powerUps['5050'] === 'number') {
-      s5050 = powerUps['5050']
-    } else if (typeof cons.help5050 === 'number') {
-      s5050 = cons.help5050
-    } else if (typeof cons.fiftyFifty === 'number') {
-      s5050 = cons.fiftyFifty
-    } else if (typeof utils.fiftyFifty === 'number') {
-      s5050 = utils.fiftyFifty
-    } else if (typeof invMap['AID_002'] === 'number') {
-      s5050 = invMap['AID_002']
-    } else {
-      s5050 = Math.max(
-        Number(invMap['aid_50_50']) || 0,
-        Number(invMap['consumable_50_50']) || 0,
-        Number(invMap['help5050']) || 0,
-        Number(invMap['ajuda_5050']) || 0,
-        0
-      )
-    }
+    // 1. 50/50: Resolução estrita do maior valor positivo encontrado em todas as fontes
+    s5050 = Math.max(
+      Number(powerUps.fiftyFifty) || 0,
+      Number(powerUps.help5050) || 0,
+      Number(powerUps['5050']) || 0,
+      Number(cons.help5050) || 0,
+      Number(cons.fiftyFifty) || 0,
+      Number(utils.fiftyFifty) || 0,
+      Number(invMap['AID_002']) || 0,
+      Number(invMap['aid_50_50']) || 0,
+      Number(invMap['consumable_50_50']) || 0,
+      Number(invMap['help5050']) || 0,
+      Number(invMap['ajuda_5050']) || 0,
+      0
+    )
 
-    // Pergunta ao Público
-    if (typeof powerUps.publicVote === 'number') {
-      sPublic = powerUps.publicVote
-    } else if (typeof powerUps.publico === 'number') {
-      sPublic = powerUps.publico
-    } else if (typeof cons.publicVote === 'number') {
-      sPublic = cons.publicVote
-    } else if (typeof utils.publicVote === 'number') {
-      sPublic = utils.publicVote
-    } else if (typeof invMap['AID_003'] === 'number') {
-      sPublic = invMap['AID_003']
-    } else {
-      sPublic = Math.max(
-        Number(invMap['aid_public_vote']) || 0,
-        Number(invMap['consumable_public_vote']) || 0,
-        Number(invMap['HELP_005']) || 0,
-        Number(invMap['publicVote']) || 0,
-        Number(invMap['ajuda_publico']) || 0,
-        0
-      )
-    }
+    // 2. Congelar Tempo: Resolução estrita do maior valor positivo encontrado em todas as fontes
+    sFreeze = Math.max(
+      Number(powerUps.freezeTime) || 0,
+      Number(powerUps.freeze) || 0,
+      Number(powerUps.congelar) || 0,
+      Number(cons.freezeTime) || 0,
+      Number(utils.freezeTime) || 0,
+      Number(invMap['AID_004']) || 0,
+      Number(invMap['aid_freeze_time']) || 0,
+      Number(invMap['consumable_congelar_tempo']) || 0,
+      Number(invMap['freezeTime']) || 0,
+      Number(invMap['ajuda_congelar']) || 0,
+      0
+    )
 
-    // Congelar Tempo
-    if (typeof powerUps.freezeTime === 'number') {
-      sFreeze = powerUps.freezeTime
-    } else if (typeof powerUps.freeze === 'number') {
-      sFreeze = powerUps.freeze
-    } else if (typeof powerUps.congelar === 'number') {
-      sFreeze = powerUps.congelar
-    } else if (typeof cons.freezeTime === 'number') {
-      sFreeze = cons.freezeTime
-    } else if (typeof utils.freezeTime === 'number') {
-      sFreeze = utils.freezeTime
-    } else if (typeof invMap['AID_004'] === 'number') {
-      sFreeze = invMap['AID_004']
-    } else {
-      sFreeze = Math.max(
-        Number(invMap['aid_freeze_time']) || 0,
-        Number(invMap['consumable_congelar_tempo']) || 0,
-        Number(invMap['freezeTime']) || 0,
-        Number(invMap['ajuda_congelar']) || 0,
-        0
-      )
-    }
+    // 3. Pergunta ao Público: Resolução estrita do maior valor positivo encontrado em todas as fontes
+    sPublic = Math.max(
+      Number(powerUps.publicVote) || 0,
+      Number(powerUps.publico) || 0,
+      Number(cons.publicVote) || 0,
+      Number(cons.publico) || 0,
+      Number(utils.publicVote) || 0,
+      Number(invMap['AID_003']) || 0,
+      Number(invMap['aid_public_vote']) || 0,
+      Number(invMap['consumable_public_vote']) || 0,
+      Number(invMap['HELP_005']) || 0,
+      Number(invMap['publicVote']) || 0,
+      Number(invMap['ajuda_publico']) || 0,
+      0
+    )
+  }
 
-    // Pista Histórica
-    if (typeof powerUps.hints === 'number') {
-      sHint = powerUps.hints
-    } else if (typeof powerUps.hint === 'number') {
-      sHint = powerUps.hint
-    } else if (typeof powerUps.dica === 'number') {
-      sHint = powerUps.dica
-    } else if (typeof powerUps.pista === 'number') {
-      sHint = powerUps.pista
-    } else if (typeof cons.hints === 'number') {
-      sHint = cons.hints
-    } else if (typeof cons.hint === 'number') {
-      sHint = cons.hint
-    } else if (typeof utils.hints === 'number') {
-      sHint = utils.hints
-    } else if (typeof invMap['AID_001'] === 'number') {
-      sHint = invMap['AID_001']
-    } else {
-      sHint = Math.max(
-        Number(invMap['aid_hint']) || 0,
-        Number(invMap['consumable_pista']) || 0,
-        Number(invMap['pista_historica']) || 0,
-        Number(invMap['ajuda_pista']) || 0,
-        Number(invMap['hint']) || 0,
-        0
-      )
-    }
-  } else if (typeof window !== 'undefined') {
-    // 2. Cold start transitório APENAS se profile ainda for indefinido/nulo
+  // Fallback para cache local se ainda estiver a zero e houver valor salvo em localStorage
+  if (typeof window !== 'undefined') {
     try {
+      if (s5050 === 0) {
+        const raw50 = localStorage.getItem('user_help5050')
+        if (raw50 !== null && Number(raw50) > 0) s5050 = Number(raw50)
+      }
+      if (sFreeze === 0) {
+        const rawFrz = localStorage.getItem('user_freezeTime')
+        if (rawFrz !== null && Number(rawFrz) > 0) sFreeze = Number(rawFrz)
+      }
+      if (sPublic === 0) {
+        const rawPub = localStorage.getItem('user_publicVote')
+        if (rawPub !== null && Number(rawPub) > 0) sPublic = Number(rawPub)
+      }
       const rawConsumables = localStorage.getItem('user_consumables')
       if (rawConsumables) {
         const parsed = JSON.parse(rawConsumables)
-        if (typeof parsed.hints === 'number') sHint = parsed.hints
-        if (typeof parsed.help5050 === 'number') s5050 = parsed.help5050
-        if (typeof parsed.publicVote === 'number') sPublic = parsed.publicVote
-        if (typeof parsed.freezeTime === 'number') sFreeze = parsed.freezeTime
+        if (s5050 === 0 && typeof parsed.help5050 === 'number' && parsed.help5050 > 0) s5050 = parsed.help5050
+        if (sFreeze === 0 && typeof parsed.freezeTime === 'number' && parsed.freezeTime > 0) sFreeze = parsed.freezeTime
+        if (sPublic === 0 && typeof parsed.publicVote === 'number' && parsed.publicVote > 0) sPublic = parsed.publicVote
       }
-      const rawHint = localStorage.getItem('user_hints') || localStorage.getItem('user_pista')
-      if (rawHint !== null) sHint = Number(rawHint) || sHint
-
-      const raw50 = localStorage.getItem('user_help5050')
-      if (raw50 !== null) s5050 = Number(raw50) || s5050
-
-      const rawPub = localStorage.getItem('user_publicVote')
-      if (rawPub !== null) sPublic = Number(rawPub) || sPublic
-
-      const rawFrz = localStorage.getItem('user_freezeTime')
-      if (rawFrz !== null) sFreeze = Number(rawFrz) || sFreeze
     } catch {
       // Falha não crítica de leitura de cache local
     }
@@ -238,15 +173,14 @@ export function getUserAidStock(
   const safe5050 = Math.max(0, s5050)
   const safePublic = Math.max(0, sPublic)
   const safeFreeze = Math.max(0, sFreeze)
-  const safeHint = Math.max(0, sHint)
 
   return {
-    stockHint: safeHint,
     stock5050: safe5050,
-    stockPublicVote: safePublic,
     stockFreeze: safeFreeze,
-    stockPista: safeHint,
-    stockClue: safeHint,
+    stockPublicVote: safePublic,
+    stockHint: 0,
+    stockPista: 0,
+    stockClue: 0,
   }
 }
 

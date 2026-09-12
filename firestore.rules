@@ -48,6 +48,10 @@ service cloud.firestore {
       match /walletTransactions/{txId} {
         allow read, write: if isOwner(userId) || isAdmin();
       }
+
+      match /aid_inventory/{aidId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
     }
 
     // Registo de transações globais (Append-only)

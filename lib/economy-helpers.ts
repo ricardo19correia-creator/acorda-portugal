@@ -227,28 +227,30 @@ export function extractUserInventory(data: any): {
   }
 
   // Helper canónico de resolução estrita de saldo de ajudas (SSOT):
-  // Prioriza o campo canónico mais recente (powerUps -> consumables -> utilities -> ID canónico -> aliases legados)
-  // NUNCA faz Math.max entre campos canónicos e aliases obsoletos para evitar ressuscitação de ajudas já consumidas.
+  // Resolve o maior saldo numérico válido entre todas as fontes do perfil (powerUps, consumables, utilities, AID_xxx, aliases)
+  // Impedindo que um valor 0 num campo obsoleto anule stocks legítimos adquiridos na Loja.
   const resolveAidCount = (
     primaryVal: unknown,
     secondaryVal: unknown,
     tertiaryVal: unknown,
     fallbackAliases: unknown[]
   ): number => {
+    const numbers: number[] = []
     const p = parseSafeNumber(primaryVal)
-    if (p !== null) return p
+    if (p !== null) numbers.push(p)
     const s = parseSafeNumber(secondaryVal)
-    if (s !== null) return s
+    if (s !== null) numbers.push(s)
     const t = parseSafeNumber(tertiaryVal)
-    if (t !== null) return t
+    if (t !== null) numbers.push(t)
     for (const val of fallbackAliases) {
       const parsed = parseSafeNumber(val)
-      if (parsed !== null) return parsed
+      if (parsed !== null) numbers.push(parsed)
     }
-    return 0
+    if (numbers.length === 0) return 0
+    return Math.max(...numbers)
   }
 
-  // 6. Consumíveis e Utilitários Canónicos (powerUps -> consumables -> utilities -> AID_xxx -> legados)
+  // 6. Consumíveis e Utilitários Canónicos das 3 Ajudas Oficiais (50/50, Congelar Tempo, Pergunta ao Público)
   const fiftyFifty = resolveAidCount(
     powerUps.fiftyFifty ?? powerUps.help5050 ?? powerUps['5050'],
     cons.help5050 ?? cons.fiftyFifty,
@@ -270,12 +272,7 @@ export function extractUserInventory(data: any): {
     [inv?.AID_003, inv?.aid_public_vote, inv?.consumable_public_vote, inv?.HELP_005, inv?.publicVote, inv?.ajuda_publico]
   )
 
-  const hints = resolveAidCount(
-    powerUps.hints ?? powerUps.hint ?? powerUps.dica ?? powerUps.pista,
-    cons.hints ?? cons.hint ?? cons.dica,
-    inv?.utilities?.hints,
-    [inv?.AID_001, inv?.aid_hint, inv?.consumable_pista, inv?.pista_historica, inv?.ajuda_pista, inv?.hint]
-  )
+  const hints = 0
 
   // Preenchimento de rawMap para consultas rápidas por ID de item
   for (const [k, v] of Object.entries(inv)) {

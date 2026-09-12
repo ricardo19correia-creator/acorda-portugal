@@ -288,6 +288,7 @@ export async function POST(req: NextRequest) {
 
       if (aidRule.id === 'AID_002' || aidRule.id === 'aid_50_50' || aidRule.aliases?.includes('consumable_50_50')) {
         updatePayload['powerUps.fiftyFifty'] = newStock
+        updatePayload['powerUps.help5050'] = newStock
         updatePayload['consumables.help5050'] = newStock
         updatePayload['consumables.fiftyFifty'] = newStock
         updatePayload['inventory.AID_002'] = newStock

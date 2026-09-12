@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { doc, getDoc, updateDoc, increment, onSnapshot, serverTimestamp } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { doc, getDoc, updateDoc, increment, onSnapshot, serverTimestamp, collection } from 'firebase/firestore'
+import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import {
   type AidType,
@@ -68,41 +68,97 @@ export function useGameAids({
   const [aidToast, setAidToast] = useState<string | null>(null)
   const toastTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Sincronização reativa e direta com Firestore (SSOT - Leitura Real da BD)
+  // Sincronização reativa, robusta e autoritativa com Firestore, Subcoleções e API da Loja
   useEffect(() => {
+    let isMounted = true
+
     const sync = () => {
       const inv: Record<string, any> = (profile as any)?.inventory || {}
       const base = getUserAidStock(profile, inv)
-      setStocks(base)
+      setStocks((prev) => ({
+        ...prev,
+        stock5050: Math.max(prev.stock5050, base.stock5050),
+        stockFreeze: Math.max(prev.stockFreeze, base.stockFreeze),
+        stockPublicVote: Math.max(prev.stockPublicVote, base.stockPublicVote),
+        stockHint: 0,
+      }))
     }
 
     sync()
 
     if (!effectiveUid || isGuest) return
 
-    let isMounted = true
+    // 1. Sincronização imediata com a rota autoritativa /api/shop/purchase (a mesma da Loja)
+    const syncFromAuthoritativeApi = async () => {
+      try {
+        if (!auth?.currentUser) return
+        const token = await auth.currentUser.getIdToken().catch(() => null)
+        if (!token) return
 
-    // Leitura direta imediata do Firestore ao iniciar uma partida (regra 2.c: nunca valores fixos hardcoded)
+        const res = await fetch('/api/shop/purchase', {
+          headers: { Authorization: `Bearer ${token}` },
+          cache: 'no-store',
+        })
+        if (res.ok && isMounted) {
+          const json = await res.json().catch(() => ({}))
+          if (json.success && json.aids) {
+            const api5050 = Number(json.aids['AID_002']?.stock ?? 0)
+            const apiFreeze = Number(json.aids['AID_004']?.stock ?? 0)
+            const apiPublic = Number(json.aids['AID_003']?.stock ?? 0)
+
+            setStocks((prev) => {
+              const updated = {
+                ...prev,
+                stock5050: Math.max(prev.stock5050, api5050),
+                stockFreeze: Math.max(prev.stockFreeze, apiFreeze),
+                stockPublicVote: Math.max(prev.stockPublicVote, apiPublic),
+                stockHint: 0,
+              }
+              syncAidStockToLocalStorage(updated)
+              return updated
+            })
+          }
+        }
+      } catch (err) {
+        console.warn('[useGameAids] Erro ao sincronizar com /api/shop/purchase:', err)
+      }
+    }
+
+    syncFromAuthoritativeApi()
+
+    // 2. Leitura direta imediata do documento Firestore do utilizador
     getDoc(doc(db, 'users', effectiveUid))
       .then((snap) => {
         if (snap.exists() && isMounted) {
           const data = snap.data()
           const realStocks = getUserAidStock(data, data.inventory)
-          setStocks(realStocks)
+          setStocks((prev) => ({
+            ...prev,
+            stock5050: Math.max(prev.stock5050, realStocks.stock5050),
+            stockFreeze: Math.max(prev.stockFreeze, realStocks.stockFreeze),
+            stockPublicVote: Math.max(prev.stockPublicVote, realStocks.stockPublicVote),
+            stockHint: 0,
+          }))
         }
       })
       .catch((err) => {
         console.warn('[useGameAids] Erro ao carregar stocks reais do Firestore:', err)
       })
 
-    // Subscrição em tempo real para refletir consumos e compras atómicas instantaneamente
-    const unsub = onSnapshot(
+    // 3. Subscrição em tempo real ao documento raiz do utilizador
+    const unsubDoc = onSnapshot(
       doc(db, 'users', effectiveUid),
       (snap) => {
         if (snap.exists() && isMounted) {
           const data = snap.data()
           const realStocks = getUserAidStock(data, data.inventory)
-          setStocks(realStocks)
+          setStocks((prev) => ({
+            ...prev,
+            stock5050: realStocks.stock5050,
+            stockFreeze: realStocks.stockFreeze,
+            stockPublicVote: realStocks.stockPublicVote,
+            stockHint: 0,
+          }))
         }
       },
       (err) => {
@@ -110,13 +166,49 @@ export function useGameAids({
       },
     )
 
+    // 4. Subscrição em tempo real à subcoleção aid_inventory
+    let unsubSubcoll: (() => void) | undefined
+    try {
+      unsubSubcoll = onSnapshot(
+        collection(db, 'users', effectiveUid, 'aid_inventory'),
+        (snapshot) => {
+          if (!isMounted) return
+          let sub50 = 0
+          let subFrz = 0
+          let subPub = 0
+          snapshot.forEach((docSnap) => {
+            const id = docSnap.id
+            const qty = Number(docSnap.data()?.quantity || 0)
+            if (id === 'AID_002' || id === 'aid_50_50' || id === 'help5050') sub50 = Math.max(sub50, qty)
+            if (id === 'AID_004' || id === 'aid_freeze_time' || id === 'freezeTime') subFrz = Math.max(subFrz, qty)
+            if (id === 'AID_003' || id === 'aid_public_vote' || id === 'publicVote') subPub = Math.max(subPub, qty)
+          })
+          if (snapshot.size > 0) {
+            setStocks((prev) => {
+              const updated = {
+                ...prev,
+                stock5050: Math.max(prev.stock5050, sub50),
+                stockFreeze: Math.max(prev.stockFreeze, subFrz),
+                stockPublicVote: Math.max(prev.stockPublicVote, subPub),
+                stockHint: 0,
+              }
+              syncAidStockToLocalStorage(updated)
+              return updated
+            })
+          }
+        },
+        () => {} // Fallback silencioso caso não existam documentos
+      )
+    } catch {}
+
     window.addEventListener('consumables_updated', sync)
     window.addEventListener('inventory_updated', sync)
     window.addEventListener('storage', sync)
 
     return () => {
       isMounted = false
-      unsub()
+      unsubDoc()
+      if (unsubSubcoll) unsubSubcoll()
       window.removeEventListener('consumables_updated', sync)
       window.removeEventListener('inventory_updated', sync)
       window.removeEventListener('storage', sync)
@@ -206,13 +298,13 @@ export function useGameAids({
 
       const aidMeta = CANONICAL_AIDS[aidType]
       const currentStock =
-        aidType === 'hint'
-          ? (stocks.stockHint ?? stocks.stockPista ?? 0)
-          : aidType === '5050'
-            ? stocks.stock5050
-            : aidType === 'publicVote'
-              ? stocks.stockPublicVote
-              : stocks.stockFreeze
+        aidType === '5050'
+          ? stocks.stock5050
+          : aidType === 'publicVote'
+            ? stocks.stockPublicVote
+            : aidType === 'freeze'
+              ? stocks.stockFreeze
+              : 0
 
       if (currentStock <= 0) {
         showAidToast(`⚠️ Sem unidades de «${aidMeta?.shortName || aidType}». Adquire na Loja!`)
@@ -261,9 +353,9 @@ export function useGameAids({
         if (typeof updateProfileLocally === 'function') {
           updateProfileLocally((prev) => {
             if (!prev) return prev
-            const nextPowerUps = { ...(prev.powerUps || {}) }
-            const nextConsumables = { ...(prev.consumables || {}) }
-            const nextInventory = { ...(prev.inventory || {}) }
+            const nextPowerUps = { ...((prev as any).powerUps || {}) }
+            const nextConsumables = { ...((prev as any).consumables || {}) }
+            const nextInventory = { ...((prev as any).inventory || {}) }
             const nextUtilities = { ...(nextInventory.utilities || {}) }
 
             if (aidType === 'hint') {

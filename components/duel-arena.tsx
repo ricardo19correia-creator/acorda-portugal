@@ -143,7 +143,6 @@ export function DuelArena({
   const [feedback, setFeedback] = useState<AnswerFeedback | null>(null)
 
   // Power-Ups & Game State
-  const [activeClue, setActiveClue] = useState<string | null>(null)
   const [isSurrenderModalOpen, setIsSurrenderModalOpen] = useState(false)
   const [isSurrendering, setIsSurrendering] = useState(false)
 
@@ -519,7 +518,6 @@ export function DuelArena({
       setFeedback(null)
       setIsSubmitting(false)
       resetQuestionAids()
-      setActiveClue(null)
       setQuestionStartTime(Date.now())
       setTimeLeft(QUESTION_TIME_LIMIT)
     }
@@ -529,8 +527,6 @@ export function DuelArena({
   const handleUse5050 = () => executeUseAid('5050')
   const handleUseFreeze = () => executeUseAid('freeze')
   const handleUsePublicVote = () => executeUseAid('publicVote')
-
-  const handleUseClue = () => executeUseAid('hint')
 
   // 3. Temporizador de 60 Segundos 100% Individual (Pausado se isFrozen === true)
   useEffect(() => {
@@ -1183,14 +1179,6 @@ export function DuelArena({
                 </h1>
               </div>
 
-              {/* Pista Histórica no Duelo */}
-              {activeClue && (
-                <div className="mt-1.5 rounded-xl border border-amber-500/50 bg-amber-500/15 px-2.5 py-1 text-xs text-amber-100 flex items-center gap-1.5 backdrop-blur-xl animate-rise shadow-sm shrink-0 w-full">
-                  <Lightbulb className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                  <span className="font-medium break-words">{activeClue}</span>
-                </div>
-              )}
-
               {/* Freeze Banner no Duelo */}
               {isFrozen && (
                 <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-2.5 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
@@ -1292,18 +1280,15 @@ export function DuelArena({
             {/* Barra das 3 Ajudas Canónicas (Abaixo das Respostas) */}
             <div className="flex justify-center w-full mt-1">
               <QuizPowerUpsBar
-                stockHint={aidStocks.stockHint}
                 stock5050={aidStocks.stock5050}
                 stockFreeze={aidStocks.stockFreeze}
                 stockPublicVote={aidStocks.stockPublicVote}
                 disabled={feedback !== null || isSubmitting || timeLeft <= 0}
                 isProcessing={isHelpProcessing}
-                usedClue={activeClue !== null}
                 used5050={eliminatedOptions.length > 0}
                 usedPublicVote={publicVoteResults !== null}
                 isFrozen={isFrozen}
                 freezeTimeLeft={freezeTimeLeft}
-                onUseClue={handleUseClue}
                 onUse5050={handleUse5050}
                 onUseFreeze={handleUseFreeze}
                 onUsePublicVote={handleUsePublicVote}
@@ -1319,13 +1304,11 @@ export function DuelArena({
           <AidPreviewModal
             aid={CANONICAL_AIDS[selectedPreviewAid]}
             stock={
-              selectedPreviewAid === 'hint'
-                ? aidStocks.stockHint
-                : selectedPreviewAid === '5050'
-                  ? aidStocks.stock5050
-                  : selectedPreviewAid === 'publicVote'
-                    ? aidStocks.stockPublicVote
-                    : aidStocks.stockFreeze
+              selectedPreviewAid === '5050'
+                ? aidStocks.stock5050
+                : selectedPreviewAid === 'publicVote'
+                  ? aidStocks.stockPublicVote
+                  : aidStocks.stockFreeze
             }
             isOpen={selectedPreviewAid !== null}
             isProcessing={isHelpProcessing}

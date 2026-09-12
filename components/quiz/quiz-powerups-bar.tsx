@@ -8,21 +8,17 @@ export interface QuizPowerUpsBarProps {
   stock5050?: number
   stockFreeze?: number
   stockPublicVote?: number
-  stockHint?: number
-  stockClue?: number
   inventory?: Record<string, any>
   disabled?: boolean
   isProcessing?: boolean
   used5050: boolean
   usedPublicVote?: boolean
-  usedClue?: boolean
   isFrozen?: boolean
   freezeTimeLeft?: number
   onUse5050: () => void
   onUseFreeze?: () => void
   onUsePublicVote?: () => void
-  onUseClue?: () => void
-  onRequestPreview?: (aidType: '5050' | 'publicVote' | 'freeze' | 'hint') => void
+  onRequestPreview?: (aidType: '5050' | 'publicVote' | 'freeze') => void
 }
 
 export function QuizPowerUpsBar({
