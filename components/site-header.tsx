@@ -32,6 +32,7 @@ import { performLogout } from '@/lib/auth-helpers'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { useEconomy } from '@/context/economy-context'
+import { HeaderOnlineBadge } from '@/components/header-online-badge'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -142,8 +143,10 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop Controls (lg+): Moedas discretas + Perfil/Login + Botão Jogar */}
+        {/* Desktop Controls (lg+): Online + Moedas discretas + Perfil/Login + Botão Jogar */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <HeaderOnlineBadge />
+
           {/* Indicador Elegante e Discreto de Saldo */}
           <Link
             href="/loja"
@@ -171,8 +174,10 @@ export function SiteHeader() {
           <PlayButton href="/jogar" size="md" label="Jogar" />
         </div>
 
-        {/* Mobile / Tablet Controls (< lg): Moedas discretas + Botão Hambúrguer */}
+        {/* Mobile / Tablet Controls (< lg): Online + Moedas discretas + Botão Hambúrguer */}
         <div className="flex items-center gap-2 shrink-0 lg:hidden">
+          <HeaderOnlineBadge className="px-2 py-1 text-xs" />
+
           {/* Indicador Discreto no Mobile */}
           <Link
             href="/loja"
