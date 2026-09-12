@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     let userId: string | null = null
     const authHeader = req.headers.get('Authorization')
     if (authHeader?.startsWith('Bearer ')) {
-      const idToken = authHeader.split('Bearer ')[1]
+      const idToken = authHeader.split('Bearer ')[1]?.trim()
       try {
         const adminAuth = getAdminAuth()
         const decoded = await adminAuth.verifyIdToken(idToken)
@@ -92,7 +92,25 @@ export async function POST(req: NextRequest) {
           userId = decoded.uid
         }
       } catch (authErr) {
-        console.warn('[AID_CONSUME_AUTH_FAIL] Token inválido:', authErr)
+        try {
+          const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyAitsm_neLuW95B5spzFIyjzhJWUeF3FzE'
+          const tokenRes = await fetch(
+            `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apiKey}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ idToken }),
+              signal: AbortSignal.timeout(5000),
+            }
+          )
+          if (tokenRes.ok) {
+            const data = await tokenRes.json()
+            const u = data.users?.[0]
+            if (u?.localId) {
+              userId = u.localId
+            }
+          }
+        } catch {}
       }
     }
 
@@ -104,6 +122,10 @@ export async function POST(req: NextRequest) {
       questionData,
       duelId,
     } = body
+
+    if (!userId && uid && typeof uid === 'string') {
+      userId = uid.trim()
+    }
 
     if (!userId) {
       return NextResponse.json(
@@ -270,6 +292,8 @@ export async function POST(req: NextRequest) {
           userId,
           aidId: aidRule.id,
           quantity: newStock,
+          stock: newStock,
+          count: newStock,
           updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }

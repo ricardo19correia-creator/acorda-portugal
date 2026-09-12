@@ -143,8 +143,8 @@ export function getUserAidStock(
     )
   }
 
-  // Fallback para cache local se ainda estiver a zero e houver valor salvo em localStorage
-  if (typeof window !== 'undefined') {
+  // Fallback para cache local se ainda estiver a zero e não tiver sido fornecido documento do Firestore
+  if (typeof window !== 'undefined' && !data) {
     try {
       if (s5050 === 0) {
         const raw50 = localStorage.getItem('user_help5050')

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { doc, getDoc, updateDoc, increment, onSnapshot, serverTimestamp, collection } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, setDoc, increment, onSnapshot, serverTimestamp, collection } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import {
@@ -178,18 +178,18 @@ export function useGameAids({
           let subPub = 0
           snapshot.forEach((docSnap) => {
             const id = docSnap.id
-            const qty = Number(docSnap.data()?.quantity || 0)
-            if (id === 'AID_002' || id === 'aid_50_50' || id === 'help5050') sub50 = Math.max(sub50, qty)
-            if (id === 'AID_004' || id === 'aid_freeze_time' || id === 'freezeTime') subFrz = Math.max(subFrz, qty)
+            const qty = Number(docSnap.data()?.quantity ?? docSnap.data()?.stock ?? docSnap.data()?.count ?? 0)
+            if (id === 'AID_002' || id === 'aid_50_50' || id === 'help5050' || id === '5050') sub50 = Math.max(sub50, qty)
+            if (id === 'AID_004' || id === 'aid_freeze_time' || id === 'freezeTime' || id === 'freeze') subFrz = Math.max(subFrz, qty)
             if (id === 'AID_003' || id === 'aid_public_vote' || id === 'publicVote') subPub = Math.max(subPub, qty)
           })
           if (snapshot.size > 0) {
             setStocks((prev) => {
               const updated = {
                 ...prev,
-                stock5050: Math.max(prev.stock5050, sub50),
-                stockFreeze: Math.max(prev.stockFreeze, subFrz),
-                stockPublicVote: Math.max(prev.stockPublicVote, subPub),
+                stock5050: sub50,
+                stockFreeze: subFrz,
+                stockPublicVote: subPub,
                 stockHint: 0,
               }
               syncAidStockToLocalStorage(updated)
@@ -455,7 +455,7 @@ export function useGameAids({
           `💡 ${aidMeta?.shortName?.toUpperCase() || aidType} UTILIZADA — Restam ${remainingStock}`,
         )
 
-        // 5. Persistência REAL E IMEDIATA no Firestore (Regra 2.a: users/{uid} -> powerUps.fiftyFifty = increment(-1))
+        // 5. Persistência REAL E IMEDIATA no Firestore (Documento do Utilizador + Subcoleção aid_inventory)
         if (effectiveUid && !isGuest) {
           const userRef = doc(db, 'users', effectiveUid)
           const firestoreUpdates: Record<string, any> = {
@@ -463,43 +463,61 @@ export function useGameAids({
           }
 
           if (aidType === '5050') {
-            firestoreUpdates['powerUps.fiftyFifty'] = increment(-1)
-            firestoreUpdates['powerUps.help5050'] = increment(-1)
-            firestoreUpdates['consumables.help5050'] = increment(-1)
-            firestoreUpdates['consumables.fiftyFifty'] = increment(-1)
-            firestoreUpdates['inventory.utilities.fiftyFifty'] = increment(-1)
-            firestoreUpdates['inventory.AID_002'] = increment(-1)
-            firestoreUpdates['inventory.aid_50_50'] = increment(-1)
-          } else if (aidType === 'hint') {
-            firestoreUpdates['powerUps.hints'] = increment(-1)
-            firestoreUpdates['powerUps.hint'] = increment(-1)
-            firestoreUpdates['powerUps.dica'] = increment(-1)
-            firestoreUpdates['powerUps.pista'] = increment(-1)
-            firestoreUpdates['consumables.hints'] = increment(-1)
-            firestoreUpdates['consumables.hint'] = increment(-1)
-            firestoreUpdates['inventory.utilities.hints'] = increment(-1)
-            firestoreUpdates['inventory.AID_001'] = increment(-1)
-            firestoreUpdates['inventory.aid_hint'] = increment(-1)
+            firestoreUpdates['powerUps.fiftyFifty'] = remainingStock
+            firestoreUpdates['powerUps.help5050'] = remainingStock
+            firestoreUpdates['consumables.help5050'] = remainingStock
+            firestoreUpdates['consumables.fiftyFifty'] = remainingStock
+            firestoreUpdates['inventory.utilities.fiftyFifty'] = remainingStock
+            firestoreUpdates['inventory.AID_002'] = remainingStock
+            firestoreUpdates['inventory.aid_50_50'] = remainingStock
+            firestoreUpdates['inventory.consumable_50_50'] = remainingStock
+            firestoreUpdates['inventory.help5050'] = remainingStock
+            firestoreUpdates['inventory.ajuda_5050'] = remainingStock
           } else if (aidType === 'publicVote') {
-            firestoreUpdates['powerUps.publicVote'] = increment(-1)
-            firestoreUpdates['powerUps.publico'] = increment(-1)
-            firestoreUpdates['consumables.publicVote'] = increment(-1)
-            firestoreUpdates['consumables.publico'] = increment(-1)
-            firestoreUpdates['inventory.utilities.publicVote'] = increment(-1)
-            firestoreUpdates['inventory.AID_003'] = increment(-1)
-            firestoreUpdates['inventory.aid_public_vote'] = increment(-1)
+            firestoreUpdates['powerUps.publicVote'] = remainingStock
+            firestoreUpdates['powerUps.publico'] = remainingStock
+            firestoreUpdates['consumables.publicVote'] = remainingStock
+            firestoreUpdates['consumables.publico'] = remainingStock
+            firestoreUpdates['inventory.utilities.publicVote'] = remainingStock
+            firestoreUpdates['inventory.AID_003'] = remainingStock
+            firestoreUpdates['inventory.aid_public_vote'] = remainingStock
+            firestoreUpdates['inventory.consumable_public_vote'] = remainingStock
+            firestoreUpdates['inventory.HELP_005'] = remainingStock
+            firestoreUpdates['inventory.publicVote'] = remainingStock
+            firestoreUpdates['inventory.ajuda_publico'] = remainingStock
           } else if (aidType === 'freeze') {
-            firestoreUpdates['powerUps.freezeTime'] = increment(-1)
-            firestoreUpdates['powerUps.freeze'] = increment(-1)
-            firestoreUpdates['powerUps.congelar'] = increment(-1)
-            firestoreUpdates['consumables.freezeTime'] = increment(-1)
-            firestoreUpdates['inventory.utilities.freezeTime'] = increment(-1)
-            firestoreUpdates['inventory.AID_004'] = increment(-1)
-            firestoreUpdates['inventory.aid_freeze_time'] = increment(-1)
+            firestoreUpdates['powerUps.freezeTime'] = remainingStock
+            firestoreUpdates['powerUps.freeze'] = remainingStock
+            firestoreUpdates['powerUps.congelar'] = remainingStock
+            firestoreUpdates['consumables.freezeTime'] = remainingStock
+            firestoreUpdates['inventory.utilities.freezeTime'] = remainingStock
+            firestoreUpdates['inventory.AID_004'] = remainingStock
+            firestoreUpdates['inventory.aid_freeze_time'] = remainingStock
+            firestoreUpdates['inventory.consumable_congelar_tempo'] = remainingStock
+            firestoreUpdates['inventory.freezeTime'] = remainingStock
+            firestoreUpdates['inventory.ajuda_congelar'] = remainingStock
           }
 
           updateDoc(userRef, firestoreUpdates).catch((fErr) => {
             console.warn('[useGameAids] Aviso ao atualizar Firestore imediatamente:', fErr)
+          })
+
+          // Atualizar também na subcoleção aid_inventory pelo ID canónico
+          const aidCanonicalId = aidType === '5050' ? 'AID_002' : aidType === 'publicVote' ? 'AID_003' : 'AID_004'
+          const aidDocRef = doc(db, 'users', effectiveUid, 'aid_inventory', aidCanonicalId)
+          setDoc(
+            aidDocRef,
+            {
+              userId: effectiveUid,
+              aidId: aidCanonicalId,
+              quantity: remainingStock,
+              stock: remainingStock,
+              count: remainingStock,
+              updatedAt: serverTimestamp(),
+            },
+            { merge: true },
+          ).catch((subErr) => {
+            console.warn('[useGameAids] Aviso ao atualizar aid_inventory:', subErr)
           })
         }
 
@@ -520,8 +538,8 @@ export function useGameAids({
             duelId,
           })
             .then((res) => {
-              if (!res.success && typeof res.remainingStock === 'number') {
-                // Reconciliar UI caso o servidor reporte stock diferente
+              if (res.success && typeof res.remainingStock === 'number') {
+                // Reconciliar UI caso o servidor reporte stock atualizado
                 setStocks((prev) => ({
                   ...prev,
                   ...(aidType === 'hint' && { stockHint: res.remainingStock, stockPista: res.remainingStock }),

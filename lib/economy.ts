@@ -1042,6 +1042,8 @@ export async function useConsumablePowerUp(
         userId,
         aidId: canonicalId,
         quantity: newCount,
+        count: newCount,
+        stock: newCount,
         updatedAt: serverTimestamp(),
       }, { merge: true })
 
