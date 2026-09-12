@@ -7,19 +7,6 @@ import { QuizScreen } from '@/components/quiz/quiz-screen'
 import { safeRandomUUID } from '@/lib/utils'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
-import { clearAllMatchStorage } from '@/lib/match-storage'
-import { RefreshCw } from 'lucide-react'
-
-export interface QuizPageProps {
-  categorySlug?: string | null
-  subcategorySlug?: string | null
-  difficultyParam?: string | null
-  districtParam?: string | null
-  cityParam?: string | null
-  gameId?: string | null
-  arenaParam?: string | null
-  isFresh?: boolean
-}
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -42,59 +29,76 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.warn('[QuizErrorBoundary] Erro contornado automaticamente:', error, errorInfo)
-    clearAllMatchStorage()
-  }
-
-  handleRestart = () => {
-    clearAllMatchStorage()
-    this.setState({ hasError: false })
-    if (typeof window !== 'undefined') {
-      window.location.href = `/jogar?fresh=true&reset=${Date.now()}`
-    }
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+      }
+    } catch {}
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-[360px] w-full flex flex-col items-center justify-center p-6 text-center space-y-4 rounded-3xl border border-white/10 bg-slate-900/90 backdrop-blur-xl my-auto">
-          <p className="text-sm text-slate-300 font-medium leading-relaxed max-w-sm">
-            Ocorreu uma inconsistência no carregamento da partida. Clica abaixo para iniciar uma nova ronda limpa.
-          </p>
-          <button
-            type="button"
-            onClick={this.handleRestart}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer"
-          >
-            <RefreshCw className="h-4 w-4" />
-            <span>Recarregar Partida</span>
-          </button>
-        </div>
+        <QuizScreen
+          key={safeRandomUUID()}
+          categorySlug={this.props.categorySlug || 'desafio-nacional'}
+          gameId={safeRandomUUID()}
+          isFresh={true}
+        />
       )
     }
     return this.props.children
   }
 }
 
-function QuizPageContent(props: QuizPageProps = {}) {
+function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { user, authResolved } = useAuth()
 
-  const isFresh =
-    Boolean(props.isFresh) ||
-    searchParams.get('fresh') === 'true' ||
-    searchParams.has('reset')
-
-  // 1. Limpeza total de qualquer resíduo de sessão pendente ao montar ou quando fresh=true
+  // 1. Limpeza total de qualquer resíduo de sessão pendente ao montar
   useEffect(() => {
-    if (isFresh) {
-      clearAllMatchStorage()
-    }
-  }, [isFresh])
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('session') ||
+              key.includes('challenge'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('session') ||
+              key.includes('challenge'))
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
+      }
+    } catch {}
+  }, [])
 
-  // 2. Extrair parâmetros flexíveis com prioridade para props e fallback para searchParams
+  // 2. Extrair parâmetros flexíveis com fallback direto para 'desafio-nacional'
   const rawCategorySlug =
-    props.categorySlug ||
     searchParams.get('cat') ||
     searchParams.get('category') ||
     searchParams.get('categoria') ||
@@ -107,23 +111,20 @@ function QuizPageContent(props: QuizPageProps = {}) {
     searchParams.get('event') ||
     searchParams.get('evento')
 
-  const subcategorySlug = props.subcategorySlug || searchParams.get('subcat') || searchParams.get('subcategoria') || null
-  const difficulty = props.difficultyParam || searchParams.get('diff') || searchParams.get('dificuldade') || null
-  const district = props.districtParam || searchParams.get('dist') || searchParams.get('distrito') || null
-  const city = props.cityParam || searchParams.get('city') || searchParams.get('cidade') || null
-  const gameIdFromUrl = searchParams.get('game') || searchParams.get('gameId') || null
+  const subcategorySlug = searchParams.get('subcat') || searchParams.get('subcategoria')
+  const difficulty = searchParams.get('diff') || searchParams.get('dificuldade')
+  const district = searchParams.get('dist') || searchParams.get('distrito')
+  const city = searchParams.get('city') || searchParams.get('cidade')
+  const gameIdFromUrl = searchParams.get('game') || searchParams.get('gameId')
   const rawArena =
-    props.arenaParam ||
     searchParams.get('arena') ||
     searchParams.get('arenaId') ||
-    searchParams.get('arena_id') ||
-    null
+    searchParams.get('arena_id')
 
-  const cleanRawCat = typeof rawCategorySlug === 'string' ? rawCategorySlug.trim() : null
   const normalizedRawCat =
-    cleanRawCat === 'o-meu-distrito' || cleanRawCat === 'distrito'
+    rawCategorySlug === 'o-meu-distrito' || rawCategorySlug === 'distrito'
       ? 'conquista-do-distrito'
-      : cleanRawCat
+      : rawCategorySlug
 
   // Entrada direta no jogo: se não houver categoria explícita, inicia logo 'desafio-nacional'
   const categorySlug =
@@ -134,7 +135,7 @@ function QuizPageContent(props: QuizPageProps = {}) {
     'desafio-nacional'
 
   const [generatedGameId] = useState<string>(() => safeRandomUUID())
-  const gameId = isFresh ? generatedGameId : (props.gameId || gameIdFromUrl || generatedGameId)
+  const gameId = gameIdFromUrl || generatedGameId
 
   // 🔒 Bloqueio apenas se já resolveu auth e não há utilizador
   if (authResolved && !user) {
@@ -154,20 +155,19 @@ function QuizPageContent(props: QuizPageProps = {}) {
           cityParam={city}
           gameId={gameId}
           arenaParam={rawArena}
-          isFresh={isFresh}
+          isFresh={true}
         />
       </div>
     </QuizErrorBoundary>
   )
 }
 
-export function QuizPage(props?: QuizPageProps) {
+export function QuizPage() {
   return (
     <div className="relative h-full w-full bg-transparent">
       <Suspense fallback={null}>
-        <QuizPageContent {...props} />
+        <QuizPageContent />
       </Suspense>
     </div>
   )
 }
-

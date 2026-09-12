@@ -48,7 +48,6 @@ import { GameExitControl } from '@/components/game-exit-modal'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { type EmoteItem } from '@/src/data/emotes'
 import { safeRandomUUID } from '@/lib/utils'
-import { clearAllMatchStorage } from '@/lib/match-storage'
 
 import {
   CATEGORIES,
@@ -101,83 +100,62 @@ function shuffle<T>(array: T[]): T[] {
 }
 
 function resolveCategoryInfo(
-  categorySlug?: string | null,
+  categorySlug: string,
   subcategorySlug?: string | null,
   districtParam?: string | null,
   cityParam?: string | null,
 ): { name: string; subtitle?: string; emoji: string; special?: boolean } {
-  try {
-    const cleanCat = (categorySlug || '').toLowerCase().trim()
-    const cleanDist = (districtParam || '').trim()
-    const cleanCity = (cityParam || '').trim()
-
-    if (cleanDist || cleanCat === 'conquista-do-distrito' || cleanCat === 'o-meu-distrito' || cleanCat === 'distrito') {
-      const distName = cleanDist || 'Portugal'
-      let distInfo: any = null
-      try {
-        distInfo = getDistrictTerritory(distName)
-      } catch {}
-      return {
-        name: `Meu Distrito: ${distName}`,
-        subtitle: distInfo?.titleBadge || 'Classificação & Poder Territorial Distrital',
-        emoji: '📍',
-        special: false,
-      }
+  if (districtParam || categorySlug === 'conquista-do-distrito' || categorySlug === 'o-meu-distrito' || categorySlug === 'distrito') {
+    const distName = districtParam || 'Portugal'
+    const distInfo = getDistrictTerritory(distName)
+    return {
+      name: `Meu Distrito: ${distName}`,
+      subtitle: distInfo?.titleBadge || 'Classificação & Poder Territorial Distrital',
+      emoji: '📍',
+      special: false,
     }
-    if (cleanCity || cleanCat === 'desafio-cidade' || cleanCat === 'cidade') {
-      const cityName = cleanCity || 'Local'
-      return {
-        name: `Desafio Local`,
-        subtitle: `Conhecimento Local de ${cityName}`,
-        emoji: '🏙️',
-        special: false,
-      }
+  }
+  if (cityParam || categorySlug === 'desafio-cidade' || categorySlug === 'cidade') {
+    const cityName = cityParam || 'Local'
+    return {
+      name: `Desafio Local`,
+      subtitle: `Conhecimento Local de ${cityName}`,
+      emoji: '🏙️',
+      special: false,
     }
-    if (cleanCat === 'desafio-nacional' || cleanCat === 'nacional' || cleanCat === 'quick' || !cleanCat) {
-      return { name: 'Desafio Nacional', subtitle: 'Conhecimento Geral de Portugal', emoji: '🇵🇹', special: false }
-    }
-    if (cleanCat === 'modo-aleatorio' || cleanCat === 'aleatorio') {
-      return { name: 'Modo Aleatório', subtitle: 'Roleta de Conhecimento Imprevisível', emoji: '🎲', special: true }
-    }
-    if (cleanCat === 'modo-maluco' || cleanCat === 'perguntas-idiotas') {
-      return { name: 'Modo Maluco', subtitle: 'Humor & Caos Insano', emoji: '🤪', special: true }
-    }
-    if (cleanCat === 'desafio-visual') {
-      return { name: 'Desafio Visual', subtitle: 'Observação & Detalhe', emoji: '👁️', special: true }
-    }
-
-    try {
-      const cat = getCategoryBySlug(cleanCat)
-      if (cat) {
-        let subTitle = cat.description || ''
-        if (subcategorySlug && Array.isArray(cat.subcategories)) {
-          const subTarget = String(subcategorySlug).toLowerCase().trim()
-          const sub = cat.subcategories.find(
-            (s) =>
-              s &&
-              ((s.id && s.id.toLowerCase() === subTarget) ||
-                (s.name && s.name.toLowerCase() === subTarget))
-          )
-          if (sub?.name) {
-            subTitle = sub.name
-          }
-        }
-        return { name: cat.name || 'Desafio Nacional', subtitle: subTitle, emoji: cat.emoji || '🇵🇹', special: Boolean(cat.special) }
-      }
-    } catch {}
-
-    try {
-      const category = CATEGORIES.find((item) => item?.slug === cleanCat)
-      if (category) {
-        return { name: category.name, emoji: '🇵🇹', special: Boolean(category.special) }
-      }
-    } catch {}
-
-    const formatted = (cleanCat || 'Desafio').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
-    return { name: formatted, emoji: '🇵🇹', special: false }
-  } catch {
+  }
+  if (categorySlug === 'desafio-nacional' || categorySlug === 'nacional' || categorySlug === 'quick') {
     return { name: 'Desafio Nacional', subtitle: 'Conhecimento Geral de Portugal', emoji: '🇵🇹', special: false }
   }
+  if (categorySlug === 'modo-aleatorio' || categorySlug === 'aleatorio') {
+    return { name: 'Modo Aleatório', subtitle: 'Roleta de Conhecimento Imprevisível', emoji: '🎲', special: true }
+  }
+  if (categorySlug === 'modo-maluco' || categorySlug === 'perguntas-idiotas') {
+    return { name: 'Modo Maluco', subtitle: 'Humor & Caos Insano', emoji: '🤪', special: true }
+  }
+  if (categorySlug === 'desafio-visual') {
+    return { name: 'Desafio Visual', subtitle: 'Observação & Detalhe', emoji: '👁️', special: true }
+  }
+
+  const cat = getCategoryBySlug(categorySlug)
+  if (cat) {
+    let subTitle = cat.description
+    if (subcategorySlug) {
+      const sub = cat.subcategories.find((s) => s.id === subcategorySlug || s.name.toLowerCase() === subcategorySlug.toLowerCase())
+      if (sub) {
+        subTitle = sub.name
+      }
+    }
+    return { name: cat.name, subtitle: subTitle, emoji: cat.emoji, special: cat.special }
+  }
+
+  const category = CATEGORIES.find((item) => item.slug === categorySlug)
+  if (category) {
+    return { name: category.name, emoji: '🇵🇹', special: category.special }
+  }
+
+  const formatted = (categorySlug || 'Desafio').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  return { name: formatted, emoji: '🇵🇹', special: false }
 }
 
 /**
@@ -297,81 +275,76 @@ const EMERGENCY_FALLBACK_QUESTIONS: GameQuestion[] = [
 ]
 
 function formatEngineQuestion(q: any, index: number, total: number): GameQuestion {
-  try {
-    const rawPrompt = q?.question || q?.pergunta || 'Pergunta sobre Portugal'
-    const cleanPrompt = cleanQuestionPrompt(rawPrompt)
+  const rawPrompt = q?.question || q?.pergunta || 'Pergunta sobre Portugal'
+  const cleanPrompt = cleanQuestionPrompt(rawPrompt)
 
-    let rawOpts: string[] = []
-    if (Array.isArray(q?.options)) {
-      rawOpts = q.options.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
-    } else if (Array.isArray(q?.opcoes)) {
-      rawOpts = q.opcoes.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
-    }
+  let rawOpts: string[] = []
+  if (Array.isArray(q?.options)) {
+    rawOpts = q.options.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
+  } else if (Array.isArray(q?.opcoes)) {
+    rawOpts = q.opcoes.map((opt: any) => (typeof opt === 'string' ? opt : opt?.text || opt?.label || String(opt || '')))
+  }
 
-    if (rawOpts.length === 0) {
-      rawOpts = ['Opção A', 'Opção B', 'Opção C', 'Opção D']
-    }
-    while (rawOpts.length < 4) {
-      rawOpts.push(`Alternativa ${rawOpts.length + 1}`)
-    }
+  if (rawOpts.length === 0) {
+    rawOpts = ['Opção A', 'Opção B', 'Opção C', 'Opção D']
+  }
+  while (rawOpts.length < 4) {
+    rawOpts.push(`Alternativa ${rawOpts.length + 1}`)
+  }
 
-    let correctIndex = 0
-    if (typeof q?.correctAnswer === 'number' && q.correctAnswer >= 0 && q.correctAnswer <= 3) {
-      correctIndex = q.correctAnswer
-    } else if (typeof q?.respostaCorreta === 'number' && q.respostaCorreta >= 0 && q.respostaCorreta <= 3) {
-      correctIndex = q.respostaCorreta
-    } else if (typeof q?.correct === 'number' && q.correct >= 0 && q.correct <= 3) {
-      correctIndex = q.correct
-    } else if (typeof q?.correct === 'string') {
-      const keyIdx = ['A', 'B', 'C', 'D'].indexOf(q.correct.toUpperCase())
-      if (keyIdx >= 0) correctIndex = keyIdx
-    }
+  let correctIndex = 0
+  if (typeof q?.correctAnswer === 'number' && q.correctAnswer >= 0 && q.correctAnswer <= 3) {
+    correctIndex = q.correctAnswer
+  } else if (typeof q?.respostaCorreta === 'number' && q.respostaCorreta >= 0 && q.respostaCorreta <= 3) {
+    correctIndex = q.respostaCorreta
+  } else if (typeof q?.correct === 'number' && q.correct >= 0 && q.correct <= 3) {
+    correctIndex = q.correct
+  } else if (typeof q?.correct === 'string') {
+    const keyIdx = ['A', 'B', 'C', 'D'].indexOf(q.correct.toUpperCase())
+    if (keyIdx >= 0) correctIndex = keyIdx
+  }
 
-    const correctText = rawOpts[correctIndex] || rawOpts[0]
+  const correctText = rawOpts[correctIndex] || rawOpts[0]
 
-    const shuffled = shuffle(
-      rawOpts.map((text, i) => ({
-        originalIndex: i,
-        text,
-      }))
-    )
-    const reindexed = shuffled.map((item, i) => ({
-      key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
-      text: item.text,
+  const shuffled = shuffle(
+    rawOpts.map((text, i) => ({
+      originalIndex: i,
+      text,
     }))
-    const newCorrectKey = reindexed.find((opt) => opt.text === correctText)?.key ?? 'A'
-    const newCorrectIdx = ['A', 'B', 'C', 'D'].indexOf(newCorrectKey)
-    const explanation = q?.explanation || q?.explicacao || `Resposta correta: ${correctText}`
+  )
+  const reindexed = shuffled.map((item, i) => ({
+    key: (['A', 'B', 'C', 'D'][i] || 'A') as OptionKey,
+    text: item.text,
+  }))
+  const newCorrectKey = reindexed.find((opt) => opt.text === correctText)?.key ?? 'A'
+  const newCorrectIdx = ['A', 'B', 'C', 'D'].indexOf(newCorrectKey)
+  const explanation = q?.explanation || q?.explicacao || `Resposta correta: ${correctText}`
 
-    return {
-      id: q?.id ? String(q.id) : `q_${index + 1}`,
-      index: index + 1,
-      total,
-      question: cleanPrompt,
-      pergunta: cleanPrompt,
-      category: q?.category || q?.tema || 'geral',
-      subcategory: q?.subcategory || q?.subtema,
-      district: q?.district || q?.distrito,
-      city: q?.city || q?.cidade,
-      difficulty: Number(q?.difficulty || q?.dificuldadeNivel) || 2,
-      options: reindexed,
-      opcoes: reindexed.map((o) => o.text) as [string, string, string, string],
-      correct: newCorrectKey,
-      correctAnswer: newCorrectIdx,
-      respostaCorreta: newCorrectIdx,
-      explanation,
-      explicacao: explanation,
-      points: (Number(q?.difficulty) || 2) >= 4 ? 300 : (Number(q?.difficulty) || 2) === 3 ? 200 : 100,
-      image: q?.image || q?.visual?.imageUrl,
-    }
-  } catch (err) {
-    console.warn('[formatEngineQuestion] Erro ao formatar pergunta, usando fallback:', err)
-    return EMERGENCY_FALLBACK_QUESTIONS[index % EMERGENCY_FALLBACK_QUESTIONS.length] || EMERGENCY_FALLBACK_QUESTIONS[0]
+  return {
+    id: q?.id ? String(q.id) : `q_${index + 1}`,
+    index: index + 1,
+    total,
+    question: cleanPrompt,
+    pergunta: cleanPrompt,
+    category: q?.category || q?.tema || 'geral',
+    subcategory: q?.subcategory || q?.subtema,
+    district: q?.district || q?.distrito,
+    city: q?.city || q?.cidade,
+    difficulty: Number(q?.difficulty || q?.dificuldadeNivel) || 2,
+    options: reindexed,
+    opcoes: reindexed.map((o) => o.text) as [string, string, string, string],
+    correct: newCorrectKey,
+    correctAnswer: newCorrectIdx,
+    respostaCorreta: newCorrectIdx,
+    explanation,
+    explicacao: explanation,
+    points: (Number(q?.difficulty) || 2) >= 4 ? 300 : (Number(q?.difficulty) || 2) === 3 ? 200 : 100,
+    image: q?.image || q?.visual?.imageUrl,
   }
 }
 
 function createGameQuestions(
-  categorySlug?: string | null,
+  categorySlug: string,
   subcategorySlug?: string | null,
   difficultyParam?: string | null,
   districtParam?: string | null,
@@ -379,15 +352,14 @@ function createGameQuestions(
 ): GameQuestion[] {
   try {
     const diff = difficultyParam ? Number(difficultyParam) || 2 : 2
-    const safeCat = (categorySlug && categorySlug.trim()) || 'desafio-nacional'
     const rawPool = loadQuestionsPool(
-      safeCat,
+      categorySlug,
       diff,
       subcategorySlug || undefined,
       districtParam || undefined,
       cityParam || undefined
     )
-    const catLower = safeCat.toLowerCase().trim()
+    const catLower = (categorySlug || '').toLowerCase().trim()
     const isNational =
       !catLower ||
       catLower === 'desafio-nacional' ||
@@ -553,10 +525,40 @@ export function QuizScreen({
 
   const cleanOldSessionStorage = useCallback(() => {
     try {
-      clearAllMatchStorage()
-      if (typeof window !== 'undefined' && gameId) {
-        sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
-        localStorage.removeItem(`ap_quiz_state_${gameId}`)
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        if (gameId) {
+          sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+          localStorage.removeItem(`ap_quiz_state_${gameId}`)
+        }
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('session') ||
+              key.includes('challenge'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('session') ||
+              key.includes('challenge'))
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
       }
     } catch (cleanErr) {
       console.warn('[QuizScreen] Erro na limpeza segura de storage:', cleanErr)
@@ -664,7 +666,7 @@ export function QuizScreen({
     setPhase('answering')
     recordedAnswersRef.current = []
     resetQuestionAids()
-  }, [cleanOldSessionStorage, resetQuestionAids, isFresh])
+  }, [cleanOldSessionStorage, resetQuestionAids])
 
   // Prevenção de fecho acidental no meio de uma partida
   useEffect(() => {

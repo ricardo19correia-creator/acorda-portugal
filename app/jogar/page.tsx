@@ -10,8 +10,6 @@ import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
 
-import { clearAllMatchStorage } from '@/lib/match-storage'
-
 interface ErrorBoundaryProps {
   children: ReactNode
 }
@@ -23,7 +21,7 @@ interface ErrorBoundaryState {
 
 /**
  * Error Boundary específico da rota /jogar para blindar a aplicação
- * contra quedas de runtime e impedir ativação de loops de recuperação.
+ * contra quedas de runtime e impedir ativação do ecrã global de erro.
  */
 export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
@@ -37,28 +35,64 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('[CRASH /jogar / RECUPERAÇÃO SESSÃO]:', error, errorInfo)
-    clearAllMatchStorage()
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key.includes('challenge') ||
+              key.includes('session'))
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
+      }
+    } catch (cleanupErr) {
+      console.error('[CRASH /jogar]: Erro na limpeza de armazenamento:', cleanupErr)
+    }
   }
 
   handleReset = () => {
     try {
-      clearAllMatchStorage()
-      this.setState({ hasError: false, error: null })
       if (typeof window !== 'undefined') {
-        window.location.href = `/jogar?fresh=true&reset=${Date.now()}`
-        return
-      }
-    } catch {
-      this.setState({ hasError: false, error: null })
-    }
-  }
-
-  handleGoCentral = () => {
-    try {
-      clearAllMatchStorage()
-      this.setState({ hasError: false, error: null })
-      if (typeof window !== 'undefined') {
-        window.location.href = '/'
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
+            sessionStorage.removeItem(key)
+          }
+        }
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
+            localStorage.removeItem(key)
+          }
+        }
+        window.location.replace('/jogar?fresh=true')
         return
       }
     } catch {
@@ -109,25 +143,24 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
                 <span>Recarregar Jogo</span>
               </button>
 
-              <button
-                type="button"
-                onClick={this.handleGoCentral}
+              <Link
+                href="/jogar"
+                onClick={() => this.setState({ hasError: false, error: null })}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-5 py-3 text-xs font-bold text-slate-200 transition-all active:scale-95 cursor-pointer"
               >
                 <Play className="h-4 w-4 text-emerald-400" />
                 <span>Central de Jogos</span>
-              </button>
+              </Link>
             </div>
 
             <div className="pt-2">
-              <button
-                type="button"
-                onClick={this.handleGoCentral}
-                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors bg-transparent border-none cursor-pointer"
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
               >
                 <Home className="h-3.5 w-3.5" />
                 <span>Voltar à Página Principal</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -144,16 +177,8 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
 function JogarContainer() {
   const searchParams = useSearchParams()
   const { user, authResolved, profileLoading } = useAuth()
-  const isFresh = searchParams.get('fresh') === 'true' || searchParams.has('reset')
+  const isFresh = searchParams.get('fresh') === 'true'
 
-  // Limpeza explícita e obrigatória de qualquer resíduo anterior ao carregar com fresh=true ou reset
-  useEffect(() => {
-    if (isFresh) {
-      clearAllMatchStorage()
-    }
-  }, [isFresh])
-
-  // Validação segura e sanitização de parâmetros de entrada
   const rawCategoryParam =
     searchParams.get('cat') ||
     searchParams.get('category') ||
@@ -167,23 +192,19 @@ function JogarContainer() {
     searchParams.get('event') ||
     searchParams.get('evento')
 
-  const subcategoryParam = searchParams.get('subcat') || searchParams.get('subcategoria') || null
-  const difficultyParam = searchParams.get('diff') || searchParams.get('dificuldade') || null
-  const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito') || null
-  const cityParam = searchParams.get('city') || searchParams.get('cidade') || null
-  const gameParam = searchParams.get('game') || searchParams.get('gameId') || null
+  const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
+  const cityParam = searchParams.get('city') || searchParams.get('cidade')
+  const gameParam = searchParams.get('game') || searchParams.get('gameId')
   const arenaParam =
     searchParams.get('arena') ||
     searchParams.get('arenaId') ||
-    searchParams.get('arena_id') ||
-    null
+    searchParams.get('arena_id')
 
   // Se passou distrito ou cidade sem categoria explícita, seleciona o modo territorial
-  const cleanRawCategory = typeof rawCategoryParam === 'string' ? rawCategoryParam.trim() : null
   const normalizedRawCat =
-    cleanRawCategory === 'o-meu-distrito' || cleanRawCategory === 'distrito'
+    rawCategoryParam === 'o-meu-distrito' || rawCategoryParam === 'distrito'
       ? 'conquista-do-distrito'
-      : cleanRawCategory
+      : rawCategoryParam
 
   const effectiveCategory =
     normalizedRawCat ||
@@ -266,16 +287,7 @@ function JogarContainer() {
 
       {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
       <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex flex-col justify-between bg-transparent">
-        <QuizPage
-          categorySlug={effectiveCategory}
-          subcategorySlug={subcategoryParam}
-          difficultyParam={difficultyParam}
-          districtParam={districtParam}
-          cityParam={cityParam}
-          gameId={isFresh ? null : gameParam}
-          arenaParam={arenaParam}
-          isFresh={isFresh}
-        />
+        <QuizPage />
       </main>
     </div>
   )
