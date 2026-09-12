@@ -31,16 +31,7 @@ export function GlobalBackgroundVideo() {
     return !isActiveArenaGame && isVideoEnabled
   }, [isActiveArenaGame, isVideoEnabled])
 
-  if (typeof window !== 'undefined') {
-    ;(window as any).__GLOBAL_BG_DEBUG = {
-      isActiveArenaGame,
-      isVideoEnabled,
-      shouldPlayVideo,
-      time: Date.now()
-    }
-  }
-
-  // 1. Gestão e Autoplay do Vídeo com Retry Seguro
+  // 1. Gestão e Autoplay do Vídeo com Retry Seguro e Resiliente
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -51,24 +42,35 @@ export function GlobalBackgroundVideo() {
     video.playsInline = true
     video.setAttribute('muted', '')
     video.setAttribute('playsinline', '')
+    video.setAttribute('webkit-playsinline', 'true')
 
     let retryTimeout: NodeJS.Timeout | null = null
+    let rafId: number | null = null
 
     const attemptPlay = () => {
       if (!shouldPlayVideo || !video) return
       if (typeof document !== 'undefined' && document.documentElement.classList.contains('ap-arena-match')) return
+
       video.muted = true
       const p = video.play()
       if (p !== undefined) {
         p.catch(() => {
-          // Retry seguro caso o browser ainda esteja a descodificar o primeiro frame
+          // Retry no próximo frame de animação ou timeout caso o decoder ainda esteja a preparar o primeiro frame
+          if (typeof window !== 'undefined') {
+            rafId = window.requestAnimationFrame(() => {
+              if (shouldPlayVideo && video && video.paused) {
+                video.muted = true
+                video.play().catch(() => {})
+              }
+            })
+          }
           if (retryTimeout) clearTimeout(retryTimeout)
           retryTimeout = setTimeout(() => {
             if (shouldPlayVideo && video && video.paused) {
               video.muted = true
               video.play().catch(() => {})
             }
-          }, 400)
+          }, 300)
         })
       }
     }
@@ -79,21 +81,22 @@ export function GlobalBackgroundVideo() {
       video.pause()
     }
 
-    video.addEventListener('loadeddata', attemptPlay)
     video.addEventListener('loadedmetadata', attemptPlay)
+    video.addEventListener('loadeddata', attemptPlay)
     video.addEventListener('canplay', attemptPlay)
     video.addEventListener('canplaythrough', attemptPlay)
 
     return () => {
       if (retryTimeout) clearTimeout(retryTimeout)
-      video.removeEventListener('loadeddata', attemptPlay)
+      if (rafId && typeof window !== 'undefined') window.cancelAnimationFrame(rafId)
       video.removeEventListener('loadedmetadata', attemptPlay)
+      video.removeEventListener('loadeddata', attemptPlay)
       video.removeEventListener('canplay', attemptPlay)
       video.removeEventListener('canplaythrough', attemptPlay)
     }
   }, [shouldPlayVideo])
 
-  // 2. Desbloquear autoplay em interações do utilizador caso o browser restrinja
+  // 2. Desbloquear autoplay em interações do utilizador caso o browser/WebView exija gesto inicial
   useEffect(() => {
     if (!shouldPlayVideo || typeof window === 'undefined') return
 
@@ -105,10 +108,10 @@ export function GlobalBackgroundVideo() {
       }
     }
 
-    window.addEventListener('click', handleInteraction, { passive: true })
-    window.addEventListener('touchstart', handleInteraction, { passive: true })
-    window.addEventListener('pointerdown', handleInteraction, { passive: true })
-    window.addEventListener('scroll', handleInteraction, { passive: true })
+    window.addEventListener('click', handleInteraction, { passive: true, once: true })
+    window.addEventListener('touchstart', handleInteraction, { passive: true, once: true })
+    window.addEventListener('pointerdown', handleInteraction, { passive: true, once: true })
+    window.addEventListener('scroll', handleInteraction, { passive: true, once: true })
 
     return () => {
       window.removeEventListener('click', handleInteraction)
@@ -118,7 +121,7 @@ export function GlobalBackgroundVideo() {
     }
   }, [shouldPlayVideo])
 
-  // 3. Gestão de Mudança de Visibilidade (Tab / Mobile Backgrounding)
+  // 3. Gestão de Mudança de Visibilidade (Troca de Tab / Segundo Plano no Mobile/APK)
   useEffect(() => {
     if (typeof document === 'undefined') return
 
@@ -138,11 +141,10 @@ export function GlobalBackgroundVideo() {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
   }, [shouldPlayVideo])
 
-  // 4. Blindagem direta de DOM: pausa e oculta se estiver em partida ativa de arena
+  // 4. Blindagem direta do DOM para a Exceção da Arena
   useEffect(() => {
     if (typeof document === 'undefined') return
     const v = videoRef.current || (document.getElementById('global-background-video') as HTMLVideoElement | null)
-    const o = document.getElementById('global-background-overlay')
     const c = document.getElementById('global-background-container')
 
     if (!shouldPlayVideo) {
@@ -151,7 +153,6 @@ export function GlobalBackgroundVideo() {
         v.pause()
         v.style.setProperty('display', 'none', 'important')
       }
-      if (o) o.style.setProperty('display', 'none', 'important')
       if (c) c.style.setProperty('display', 'none', 'important')
     } else {
       document.documentElement.classList.remove('ap-arena-match')
@@ -160,7 +161,6 @@ export function GlobalBackgroundVideo() {
         v.muted = true
         v.play().catch(() => {})
       }
-      if (o) o.style.display = 'block'
       if (c) c.style.display = 'block'
     }
   }, [shouldPlayVideo])
@@ -168,11 +168,25 @@ export function GlobalBackgroundVideo() {
   return (
     <div
       id="global-background-container"
-      className={shouldPlayVideo ? 'block' : 'hidden'}
-      style={{ display: shouldPlayVideo ? 'block' : 'none' }}
+      className={
+        shouldPlayVideo
+          ? 'fixed inset-0 w-full h-full pointer-events-none select-none overflow-hidden block'
+          : 'hidden'
+      }
+      style={{
+        position: 'fixed',
+        inset: 0,
+        width: '100vw',
+        height: '100dvh',
+        zIndex: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        backgroundColor: '#050706',
+        display: shouldPlayVideo ? 'block' : 'none',
+      }}
       aria-hidden={!shouldPlayVideo}
     >
-      {/* 0 → GLOBAL VIDEO */}
+      {/* 0 → VÍDEO GLOBAL DE FUNDO */}
       <video
         ref={videoRef}
         id="global-background-video"
@@ -184,42 +198,35 @@ export function GlobalBackgroundVideo() {
         // @ts-ignore - atributo específico para iOS WebKit / Safari / Capacitor
         webkit-playsinline="true"
         preload="auto"
-        className={
-          shouldPlayVideo
-            ? 'fixed inset-0 w-screen h-screen object-cover pointer-events-none select-none block'
-            : 'hidden'
-        }
+        controls={false}
+        disablePictureInPicture
+        // @ts-ignore
+        disableRemotePlayback
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none block"
         style={{
-          position: 'fixed',
+          position: 'absolute',
           inset: 0,
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
-          zIndex: 0,
           pointerEvents: 'none',
-          display: shouldPlayVideo ? 'block' : 'none',
+          display: 'block',
         }}
       >
         <source src="/videos/global-background.mp4" type="video/mp4" />
       </video>
 
-      {/* 1 → OVERLAY TRANSPARENTE PARA CONTRASTE DA UI */}
+      {/* 1 → OVERLAY SUAVE PARA GARANTIR CONTRASTE E LEGIBILIDADE DA UI */}
       <div
         id="global-background-overlay"
-        className={
-          shouldPlayVideo
-            ? 'fixed inset-0 w-screen h-screen pointer-events-none select-none block'
-            : 'hidden'
-        }
+        className="absolute inset-0 w-full h-full pointer-events-none select-none block"
         style={{
-          position: 'fixed',
+          position: 'absolute',
           inset: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 1,
+          width: '100%',
+          height: '100%',
           pointerEvents: 'none',
           background: 'rgba(5, 7, 6, 0.18)',
-          display: shouldPlayVideo ? 'block' : 'none',
         }}
       />
     </div>

@@ -45,6 +45,12 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
+        <link
+          rel="preload"
+          href="/videos/global-background.mp4"
+          as="video"
+          type="video/mp4"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -79,13 +85,15 @@ html.ap-arena-match #mobile-bottom-dock {
           }}
         />
       </head>
-      <body className="relative min-h-screen bg-transparent text-zinc-100 antialiased overflow-x-hidden">
+      <body className="relative min-h-screen bg-[#050706] text-zinc-100 antialiased overflow-x-hidden">
+        {/* 0 → VÍDEO DE FUNDO GLOBAL OFICIAL (IMEDIATO, PERSISTENTE E EM Z-INDEX: 0) */}
+        <GlobalBackgroundVideo />
+
         <AuthProvider>
           <EconomyProvider>
             <DeepLinkHandler />
             <GameThemeProvider>
               <AudioProvider>
-                <GlobalBackgroundVideo />
                 <div className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">
                   {children}
                 </div>

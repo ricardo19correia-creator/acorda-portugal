@@ -40,14 +40,6 @@ const nextConfig = {
       },
     ]
   },
-  async rewrites() {
-    return [
-      {
-        source: '/videos/global-background.mp4',
-        destination: '/videos/global-background.mp4',
-      },
-    ]
-  },
 }
 
 export default nextConfig
