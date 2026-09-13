@@ -87,9 +87,13 @@ export function getPostLoginRedirectTarget(fallback = '/jogar'): string {
       sessionStorage.getItem(REDIRECT_TARGET_KEY) ||
       localStorage.getItem(REDIRECT_TARGET_KEY) ||
       safeFallback
-    sessionStorage.removeItem(REDIRECT_TARGET_KEY)
-    localStorage.removeItem(REDIRECT_TARGET_KEY)
-    return sanitizeRedirectUrl(rawTarget, safeFallback)
+    const sanitized = sanitizeRedirectUrl(rawTarget, safeFallback)
+    // Salvaguarda: O login NUNCA pode iniciar automaticamente uma partida.
+    // Qualquer tentativa de redirecionamento para /jogar ou /jogo com parâmetros é normalizada para a Central de Jogo limpa.
+    if (sanitized.startsWith('/jogar') || sanitized.startsWith('/jogo')) {
+      return '/jogar'
+    }
+    return sanitized
   } catch {
     return safeFallback
   }

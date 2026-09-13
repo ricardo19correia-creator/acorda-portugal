@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback, Suspense, Component, type ReactNode, type ErrorInfo } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
+import { JogarHub } from '@/components/jogar/JogarHub'
 import { resolveArenaForGame } from '@/src/data/arenaCatalog'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
+import { safeRandomUUID } from '@/lib/utils'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
 
 interface ErrorBoundaryProps {
@@ -175,8 +177,9 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
  * Content container que lê com segurança os parâmetros de pesquisa da rota.
  */
 function JogarContainer() {
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const { user, authResolved, profileLoading } = useAuth()
+  const { user, authResolved } = useAuth()
   const isFresh = searchParams.get('fresh') === 'true'
 
   const rawCategoryParam =
@@ -195,10 +198,31 @@ function JogarContainer() {
   const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
   const cityParam = searchParams.get('city') || searchParams.get('cidade')
   const gameParam = searchParams.get('game') || searchParams.get('gameId')
+  const playParam = searchParams.get('play') === 'true'
   const arenaParam =
     searchParams.get('arena') ||
     searchParams.get('arenaId') ||
     searchParams.get('arena_id')
+
+  // Uma partida só começa após uma ação explícita do utilizador (parâmetros de partida presentes)
+  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam)
+
+  // Limpeza de resíduos de sessão se estiver na Central de Jogo (evita retoma acidental)
+  useEffect(() => {
+    if (!isMatch) {
+      try {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('active_game_session')
+          localStorage.removeItem('active_session_id')
+          sessionStorage.removeItem('active_game_session')
+          sessionStorage.removeItem('active_session_id')
+          sessionStorage.removeItem('ap_error_auto_retried')
+        }
+      } catch (err) {
+        console.warn('[JogarContainer] Limpeza segura de sessão:', err)
+      }
+    }
+  }, [isMatch])
 
   // Se passou distrito ou cidade sem categoria explícita, seleciona o modo territorial
   const normalizedRawCat =
@@ -213,7 +237,6 @@ function JogarContainer() {
     (gameParam ? 'desafio-nacional' : null) ||
     'desafio-nacional'
 
-  const isPlaying = true
   const [equippedArena, setEquippedArena] = useState<string | null>(null)
 
   // Leitura segura de localStorage exclusivamente dentro de useEffect com try/catch
@@ -267,8 +290,8 @@ function JogarContainer() {
     return null
   }
 
-  // 🔒 BLOQUEIO DEFINITIVO DE JOGADORES CONVIDADOS
-  if (isPlaying && !user) {
+  // 🔒 BLOQUEIO DE VISITANTES DURANTE UMA PARTIDA ATIVA
+  if (isMatch && !user) {
     const currentTarget = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '/jogar'
     return (
       <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
@@ -280,14 +303,31 @@ function JogarContainer() {
     )
   }
 
+  // 1. PARTIDA ATIVA: Renderiza o motor de quiz oficial sem qualquer alteração interna
+  if (isMatch) {
+    return (
+      <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+        {/* FUNDO DA ARENA OFICIAL DO JOGO */}
+        <AppBackground customImage={activeArena ? activeArena.assetPath : undefined} />
+
+        {/* CONTEÚDO DO TABULEIRO DE QUIZ */}
+        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex flex-col justify-between bg-transparent">
+          <QuizPage />
+        </main>
+      </div>
+    )
+  }
+
+  // 2. CENTRAL DE JOGO (LOBBY): Interface limpa, rápida e premium
   return (
     <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
-      {/* 1. FUNDO GLOBAL OFICIAL DO JOGO */}
-      <AppBackground customImage={isPlaying && activeArena ? activeArena.assetPath : undefined} />
-
-      {/* 2. CONTEÚDO DA CENTRAL DE JOGO / TABULEIRO DE QUIZ */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex flex-col justify-between bg-transparent">
-        <QuizPage />
+      <main className="relative z-10 w-full min-h-[100dvh] flex flex-col justify-start bg-transparent">
+        <JogarHub
+          onStartClassicMatch={(gameId) => {
+            const nextId = gameId || safeRandomUUID()
+            router.push(`/jogar?cat=desafio-nacional&game=${nextId}`)
+          }}
+        />
       </main>
     </div>
   )
