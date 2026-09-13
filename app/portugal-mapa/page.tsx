@@ -2,9 +2,31 @@
 
 import React, { Component, Suspense, type ReactNode, type ErrorInfo } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation'
 import { AlertTriangle, RefreshCw, Play, Home } from 'lucide-react'
-import { PortugalMap } from '@/components/portugal-map/PortugalMap'
+
+// Carregamento dinâmico sem SSR do motor MapLibre GL
+const PortugalVivoMap = dynamic(
+  () => import('@/src/components/portugal-vivo/PortugalVivoMap').then((m) => m.PortugalVivoMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full h-[100dvh] min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8 text-center select-none">
+        <div className="relative flex h-16 w-16 items-center justify-center mb-4">
+          <div className="absolute h-full w-full rounded-full border-2 border-cyan-500/20 border-t-cyan-400 animate-spin" />
+          <span className="text-2xl">🇵🇹</span>
+        </div>
+        <h2 className="font-display text-sm font-black uppercase tracking-widest text-slate-200 mb-1">
+          Portugal Vivo
+        </h2>
+        <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest animate-pulse">
+          A carregar satélite nacional...
+        </p>
+      </div>
+    ),
+  }
+)
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -52,7 +74,7 @@ export class PortugalMapErrorBoundary extends Component<ErrorBoundaryProps, Erro
             <div className="space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10">
                 <span>🇵🇹</span>
-                <span>Portugal 2026</span>
+                <span>Portugal Vivo</span>
               </div>
 
               <h1 className="font-display text-2xl font-black uppercase text-white tracking-tight">
@@ -116,7 +138,7 @@ function PortugalMapaContent() {
     searchParams.get('distrito') ||
     undefined
 
-  return <PortugalMap initialDistrict={districtParam} />
+  return <PortugalVivoMap initialDistrict={districtParam} />
 }
 
 export default function PortugalMapaPage() {

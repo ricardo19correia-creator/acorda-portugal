@@ -1,7 +1,12 @@
 'use client'
 
 import React from 'react'
-import { PortugalMap } from '@/components/portugal-map/PortugalMap'
+import dynamic from 'next/dynamic'
+
+const PortugalVivoMap = dynamic(
+  () => import('@/src/components/portugal-vivo/PortugalVivoMap').then((m) => m.PortugalVivoMap),
+  { ssr: false }
+)
 
 export interface PortugalWorldMapProps {
   mode?: string
@@ -15,18 +20,16 @@ export interface PortugalWorldMapProps {
 
 /**
  * PortugalWorldMap Unificado
- * Encaminha todas as chamadas globais diretamente para o PortugalMap oficial de alta performance.
+ * Encaminha todas as chamadas globais diretamente para o PortugalVivoMap oficial MapLibre GL.
  */
 export function PortugalWorldMap({
   district,
-  showHUD = true,
   className,
   onSelectDistrict,
 }: PortugalWorldMapProps) {
   return (
-    <PortugalMap
+    <PortugalVivoMap
       initialDistrict={district}
-      showHUD={showHUD}
       className={className}
       onSelectDistrict={(t) => {
         if (onSelectDistrict) {
