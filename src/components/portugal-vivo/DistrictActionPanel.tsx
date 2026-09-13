@@ -41,7 +41,7 @@ export function DistrictActionPanel({
   const inDispute = Boolean(district.inDisputeWith)
 
   return (
-    <div className="pointer-events-auto absolute bottom-4 left-3 right-3 sm:right-auto sm:left-4 z-40 w-auto sm:w-96 rounded-3xl bg-slate-950/92 p-4 sm:p-5 border border-white/15 shadow-2xl backdrop-blur-xl animate-slideUp select-none">
+    <div className="pointer-events-auto absolute bottom-[calc(4.25rem+env(safe-area-inset-bottom,0px))] sm:bottom-5 left-3 right-3 sm:right-auto sm:left-4 z-40 w-auto sm:w-96 rounded-3xl bg-slate-950/92 p-4 sm:p-5 border border-white/15 shadow-2xl backdrop-blur-xl animate-slideUp select-none">
       {/* Topo do Painel */}
       <div className="flex items-start justify-between gap-2 pb-3 border-b border-white/10">
         <div className="space-y-1">
