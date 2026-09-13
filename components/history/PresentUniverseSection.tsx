@@ -72,7 +72,7 @@ const PILLARS = [
     color: 'border-teal-500/30 bg-teal-500/10 text-teal-400',
     features: [
       'Mapa Nacional Interativo com Presença ao Vivo',
-      'Comunidade de Criadores e Sugestões',
+      'Partilha e Sugestões da Comunidade',
       'Arquivo e Dicionário Cultural Integrado',
       'Central de Ajuda e Suporte Completo',
       'Aplicação Nativa Android (APK)',

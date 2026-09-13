@@ -14,7 +14,6 @@ export default function Error({
 }) {
   const pathname = usePathname()
   const isPublicRoute =
-    pathname?.startsWith('/criadores') ||
     pathname === '/termos' ||
     pathname === '/privacidade' ||
     pathname === '/contacto'
