@@ -8,108 +8,107 @@ export interface DistrictProps {
   district: DistrictMapItem
   isSelected: boolean
   isHovered: boolean
+  hasSelection?: boolean
+  showAllMarkers?: boolean
   onClick: (district: DistrictMapItem) => void
   onHover: (district: DistrictMapItem | null, event?: React.MouseEvent) => void
   viewMode?: 'mapa' | 'ranking' | 'atividade' | 'jogadores'
 }
 
 /**
- * Retorna as cores de estilo tático baseado na classificação nacional e estado
+ * Retorna as especificações de estilo e material tático baseado na classificação e no estado
  */
-function getDistrictStyle(district: DistrictMapItem, isSelected: boolean, isHovered: boolean) {
-  const { pos, onlineNow, activePlayers } = district
+function getDistrictStyle(
+  district: DistrictMapItem,
+  isSelected: boolean,
+  isHovered: boolean,
+  hasSelection: boolean
+) {
+  const { pos } = district
 
-  // 1. Estado Selecionado: Ciano Brilhante Neon (Destaque Máximo de Foco)
+  // 1. Estado Selecionado: Ciano Laser Neon (Foco Supremo)
   if (isSelected) {
     return {
       fill: 'url(#grad-selected)',
       stroke: '#ffffff',
       strokeWidth: 2.8,
-      filter: 'drop-shadow(0 0 10px rgba(34, 211, 238, 0.8))',
+      filter: 'drop-shadow(0 0 16px rgba(34, 211, 238, 0.95))',
       opacity: 1,
-      cursor: 'pointer',
+      elevation: 14,
     }
   }
 
-  // 2. Estado Hover: Destaque de Iluminação Imediata
+  // 2. Estado Hover: Iluminação Imediata e Aresta Laser
   if (isHovered) {
     return {
       fill: 'url(#grad-hover)',
-      stroke: '#ffffff',
+      stroke: '#67e8f9',
       strokeWidth: 2.4,
-      filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))',
+      filter: 'drop-shadow(0 0 14px rgba(56, 189, 248, 0.85))',
       opacity: 1,
-      cursor: 'pointer',
+      elevation: 10,
     }
   }
 
-  // 3. Posição #1: Ouro Imperial com Destaque Máximo
+  // 3. Quando outro distrito está selecionado: suavizar vizinhança sem apagar
+  const baseOpacity = hasSelection ? 0.58 : 1
+
+  // 4. Posição #1: Ouro Imperial
   if (pos === 1) {
     return {
       fill: 'url(#grad-podium-gold)',
       stroke: '#fef08a',
       strokeWidth: 2.2,
-      filter: 'drop-shadow(0 0 6px rgba(245, 158, 11, 0.5))',
-      opacity: 0.98,
-      cursor: 'pointer',
+      filter: 'drop-shadow(0 0 10px rgba(245, 158, 11, 0.55))',
+      opacity: baseOpacity,
+      elevation: 12,
     }
   }
 
-  // 4. Posições #2 e #3: Prata e Bronze
+  // 5. Posição #2: Prata Tática
   if (pos === 2) {
     return {
       fill: 'url(#grad-podium-silver)',
       stroke: '#f8fafc',
       strokeWidth: 1.8,
-      filter: undefined,
-      opacity: 0.95,
-      cursor: 'pointer',
+      filter: 'drop-shadow(0 0 7px rgba(203, 213, 225, 0.35))',
+      opacity: baseOpacity,
+      elevation: 9.5,
     }
   }
 
+  // 6. Posição #3: Bronze Nobre
   if (pos === 3) {
     return {
       fill: 'url(#grad-podium-bronze)',
       stroke: '#fed7aa',
       strokeWidth: 1.8,
-      filter: undefined,
-      opacity: 0.95,
-      cursor: 'pointer',
+      filter: 'drop-shadow(0 0 7px rgba(217, 119, 6, 0.35))',
+      opacity: baseOpacity,
+      elevation: 8,
     }
   }
 
-  // 5. Posições #4 a #8: Vanguarda Nacional (Ciano Estratégico)
-  if (pos <= 8) {
+  // 7. Posições #4 a #10: Vanguarda Nacional (Ciano Estratégico)
+  if (pos <= 10) {
     return {
       fill: 'url(#grad-vanguard)',
-      stroke: 'rgba(56, 189, 248, 0.65)',
-      strokeWidth: 1.6,
-      filter: undefined,
-      opacity: 0.92,
-      cursor: 'pointer',
+      stroke: 'rgba(56, 189, 248, 0.55)',
+      strokeWidth: 1.5,
+      filter: 'drop-shadow(0 0 5px rgba(2, 132, 199, 0.25))',
+      opacity: baseOpacity,
+      elevation: 5,
     }
   }
 
-  // 6. Posições #9 a #14: Batalhão Central (Azul Tático)
-  if (pos <= 14) {
-    return {
-      fill: 'url(#grad-tactical-mid)',
-      stroke: 'rgba(148, 163, 184, 0.45)',
-      strokeWidth: 1.4,
-      filter: undefined,
-      opacity: 0.88,
-      cursor: 'pointer',
-    }
-  }
-
-  // 7. Posições #15 a #20: Força Base (Ardósia Estratégica)
+  // 8. Posições #11 a #20: Base Territorial Tática (Ardósia / Obsidiana com contraste)
   return {
     fill: 'url(#grad-tactical-base)',
-    stroke: 'rgba(100, 116, 139, 0.35)',
+    stroke: 'rgba(56, 189, 248, 0.28)',
     strokeWidth: 1.2,
     filter: undefined,
-    opacity: 0.82,
-    cursor: 'pointer',
+    opacity: hasSelection ? 0.45 : 0.92,
+    elevation: 2.5,
   }
 }
 
@@ -117,20 +116,30 @@ export const District = memo(function District({
   district,
   isSelected,
   isHovered,
+  hasSelection = false,
+  showAllMarkers = false,
   onClick,
   onHover,
   viewMode = 'mapa',
 }: DistrictProps) {
-  const style = getDistrictStyle(district, isSelected, isHovered)
-  const isPodium = district.pos <= 3
+  const style = getDistrictStyle(district, isSelected, isHovered, hasSelection)
   const [cx, cy] = district.centroid
 
-  const accessibleLabel = `${district.name}, ${district.pos}º lugar no ranking nacional. ${district.activePlayers} jogadores registados, ${district.totalXp.toLocaleString('pt-PT')} XP.${district.onlineNow > 0 ? ` ${district.onlineNow} jogadores online.` : ''}`
+  // Regra Canónica de Ruído: apenas Top 5 mostram markers na vista geral normal.
+  // Posições #6-#20 aparecem sob hover, foco, seleção ou zoom elevado.
+  const isVisibleMarker =
+    district.pos <= 5 || isHovered || isSelected || showAllMarkers
+
+  const isTop1 = district.pos === 1
+  const isTop2 = district.pos === 2
+  const isTop3 = district.pos === 3
+
+  const accessibleLabel = `${district.name}, ${district.pos}º lugar no ranking nacional. ${district.activePlayers} jogadores, ${district.totalXp.toLocaleString('pt-PT')} XP.${district.onlineNow > 0 ? ` ${district.onlineNow} jogadores online.` : ''}`
 
   return (
     <g
       id={`district-group-${district.id}`}
-      className="district-interactive-group transition-all duration-150"
+      className="district-interactive-group transition-all duration-200"
       role="button"
       tabIndex={0}
       aria-label={accessibleLabel}
@@ -148,7 +157,7 @@ export const District = memo(function District({
       }}
       style={{ outline: 'none' }}
     >
-      {/* 1. Base Geométrica com Fronteiras e Gradiente de Jogo */}
+      {/* 1. GEOMETRIA DO DISTRITO (POLÍGONO PRINCIPAL COM RELEVO & MATERIAIS) */}
       <path
         d={district.path}
         fill={style.fill}
@@ -159,66 +168,187 @@ export const District = memo(function District({
         style={{
           filter: style.filter,
           opacity: style.opacity,
-          transition: 'fill 0.15s ease, stroke 0.15s ease, stroke-width 0.15s ease',
+          transition:
+            'fill 0.2s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.2s ease, stroke-width 0.2s ease, opacity 0.2s ease, filter 0.2s ease',
         }}
       />
 
-      {/* 2. Marcador Centroid: Badge de Ranking (#X) & Pulso Ativo */}
+      {/* 2. REALCE SUPERIOR DE CHANFRO (Top Bevel Edge Light para sensação 3D) */}
+      {(isHovered || isSelected || isTop1) && (
+        <path
+          d={district.path}
+          fill="none"
+          stroke={isSelected ? '#ffffff' : isHovered ? '#a5f3fc' : '#fef08a'}
+          strokeWidth={isSelected ? 1.5 : 1.2}
+          strokeOpacity={isSelected ? 0.9 : 0.65}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          className="pointer-events-none"
+        />
+      )}
+
+      {/* 3. MARCADORES TÁTICOS CENTROID (Top 1 Pill Glass, Top 2-5 Badges, Pulsos Ativos) */}
       {district.centroid && (
         <g
           transform={`translate(${cx}, ${cy})`}
-          className="pointer-events-none select-none"
+          className="pointer-events-none select-none transition-transform duration-200"
+          style={{
+            transform: `translate(${cx}px, ${cy}px) scale(${
+              isSelected ? 1.2 : isHovered ? 1.15 : 1
+            })`,
+          }}
         >
-          {/* Indicador de Jogadores Online no Distrito */}
+          {/* Pulso de Jogadores Online no Distrito */}
           {district.onlineNow > 0 && (
-            <circle
-              r="7"
-              fill="#10b981"
-              opacity="0.3"
-              className="animate-ping"
-            />
+            <g className="pointer-events-none">
+              <circle
+                r={isSelected ? 10 : 8}
+                fill="#10b981"
+                opacity={0.35}
+                className="animate-ping"
+              />
+              <circle
+                r={2.5}
+                fill="#34d399"
+                stroke="#064e3b"
+                strokeWidth={0.8}
+              />
+            </g>
           )}
 
-          {/* Fundo do Badge */}
-          <rect
-            x={district.pos === 1 ? -16 : -13}
-            y="-8"
-            width={district.pos === 1 ? 32 : 26}
-            height="16"
-            rx="8"
-            fill={
-              isSelected
-                ? '#0284c7'
-                : isHovered
-                  ? '#0369a1'
-                  : district.pos === 1
-                    ? '#b45309'
-                    : district.pos === 2
-                      ? '#475569'
-                      : district.pos === 3
-                        ? '#7c2d12'
-                        : 'rgba(2, 6, 23, 0.88)'
-            }
-            stroke={isSelected || isHovered ? '#ffffff' : style.stroke}
-            strokeWidth={isSelected ? 1.8 : 1.1}
-            style={{
-              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.85))',
-            }}
-          />
+          {/* Marcador Top 1 de Alta Fidelidade (Pill Glass com Coroa Estilizada) */}
+          {isTop1 && (
+            <g
+              transform="translate(0, -1)"
+              className="transition-all duration-300"
+            >
+              {/* Brilho de Fundo Dourado com Respiração Suave */}
+              <rect
+                x="-22"
+                y="-10"
+                width="44"
+                height="20"
+                rx="10"
+                fill="none"
+                stroke="#f59e0b"
+                strokeWidth="2.5"
+                opacity={0.5}
+                className="animate-pulse"
+              />
 
-          {/* Texto do Ranking (#1 com Coroa) */}
-          <text
-            x="0"
-            y="3.5"
-            textAnchor="middle"
-            fill="#ffffff"
-            fontSize={district.pos === 1 ? '9' : '8.5'}
-            fontWeight="900"
-            fontFamily="var(--font-mono, monospace)"
-            letterSpacing="-0.03em"
-          >
-            {district.pos === 1 ? '👑 #1' : `#${district.pos}`}
-          </text>
+              {/* Corpo Pill Glass Ouro Imperial */}
+              <rect
+                x="-21"
+                y="-9"
+                width="42"
+                height="18"
+                rx="9"
+                fill="rgba(15, 23, 42, 0.92)"
+                stroke="#f59e0b"
+                strokeWidth="1.6"
+                style={{
+                  filter: 'drop-shadow(0 2px 8px rgba(245, 158, 11, 0.65))',
+                }}
+              />
+
+              {/* Ícone Coroa Estilizada Dourada */}
+              <path
+                d="M-13,-2.5 L-11,2 L-5,2 L-3,-2.5 L-6,-0.5 L-8,-4.5 L-10,-0.5 Z"
+                fill="#f59e0b"
+                stroke="#fef08a"
+                strokeWidth="0.5"
+                strokeLinejoin="round"
+              />
+
+              {/* Rótulo #1 */}
+              <text
+                x="4"
+                y="3.5"
+                textAnchor="middle"
+                fill="#fef08a"
+                fontSize="9"
+                fontWeight="900"
+                fontFamily="var(--font-mono, monospace)"
+                letterSpacing="-0.02em"
+              >
+                #1
+              </text>
+            </g>
+          )}
+
+          {/* Marcadores Top 2 e Top 3 (Pill Prata / Bronze de Elite) */}
+          {(isTop2 || isTop3) && isVisibleMarker && (
+            <g transform="translate(0, -1)">
+              <rect
+                x="-16"
+                y="-8"
+                width="32"
+                height="16"
+                rx="8"
+                fill="rgba(15, 23, 42, 0.90)"
+                stroke={isTop2 ? '#cbd5e1' : '#fb923c'}
+                strokeWidth={1.4}
+                style={{
+                  filter: `drop-shadow(0 2px 6px ${
+                    isTop2 ? 'rgba(203, 213, 225, 0.45)' : 'rgba(251, 146, 60, 0.45)'
+                  })`,
+                }}
+              />
+              <text
+                x="0"
+                y="3.5"
+                textAnchor="middle"
+                fill={isTop2 ? '#f8fafc' : '#fed7aa'}
+                fontSize="8.5"
+                fontWeight="900"
+                fontFamily="var(--font-mono, monospace)"
+              >
+                #{district.pos}
+              </text>
+            </g>
+          )}
+
+          {/* Marcadores Top 4 e Top 5 (ou restantes revelados no hover/select) */}
+          {!isTop1 && !isTop2 && !isTop3 && isVisibleMarker && (
+            <g transform="translate(0, -1)">
+              <rect
+                x="-14"
+                y="-7.5"
+                width="28"
+                height="15"
+                rx="7.5"
+                fill={
+                  isSelected
+                    ? '#0284c7'
+                    : isHovered
+                      ? '#0369a1'
+                      : 'rgba(15, 23, 42, 0.88)'
+                }
+                stroke={
+                  isSelected
+                    ? '#ffffff'
+                    : isHovered
+                      ? '#67e8f9'
+                      : 'rgba(56, 189, 248, 0.5)'
+                }
+                strokeWidth={isSelected ? 1.6 : 1}
+                style={{
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.85))',
+                }}
+              />
+              <text
+                x="0"
+                y="3.2"
+                textAnchor="middle"
+                fill={isSelected || isHovered ? '#ffffff' : '#38bdf8'}
+                fontSize="8"
+                fontWeight="800"
+                fontFamily="var(--font-mono, monospace)"
+              >
+                #{district.pos}
+              </text>
+            </g>
+          )}
         </g>
       )}
     </g>

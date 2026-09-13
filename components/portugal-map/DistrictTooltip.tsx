@@ -3,6 +3,7 @@
 import React from 'react'
 import type { DistrictMapItem } from '@/lib/district-map-data'
 import { Trophy, Users, Zap, Crown } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export interface DistrictTooltipProps {
   district: DistrictMapItem | null
@@ -38,13 +39,18 @@ export function DistrictTooltip({ district, mousePosition }: DistrictTooltipProp
         </div>
 
         <span
-          className={`shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-black ${
+          className={cn(
+            'shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-black',
             district.pos === 1
-              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-              : district.pos <= 3
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                : 'bg-white/10 text-slate-300 border border-white/10'
-          }`}
+              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_8px_rgba(245,158,11,0.3)]'
+              : district.pos === 2
+                ? 'bg-slate-200/20 text-slate-100 border border-slate-300/40'
+                : district.pos === 3
+                  ? 'bg-orange-500/20 text-orange-200 border border-orange-500/40'
+                  : district.pos <= 10
+                    ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
+                    : 'bg-white/5 text-slate-300 border border-white/10'
+          )}
         >
           {district.pos === 1 && '👑'}
           #{district.pos} Nacional

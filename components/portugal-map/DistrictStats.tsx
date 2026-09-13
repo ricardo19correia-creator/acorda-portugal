@@ -82,9 +82,9 @@ export function DistrictStats({
       />
 
       {/* Painel do Distrito Responsivo:
-          - Mobile Portrait: Bottom Sheet (max-h-[55vh], sobreposto na base com handle de arrasto)
-          - Mobile Landscape: Painel lateral direito compacto (w-[270px] a w-[300px])
-          - Desktop: Painel lateral elegante acoplado à direita (w-[340px] a w-[370px])
+          - Mobile Portrait: Bottom Sheet Compacto (max-h-[42vh], deixando o distrito 100% visível acima)
+          - Mobile Landscape: Painel lateral direito compacto (w-[290px])
+          - Desktop: Painel lateral elegante acoplado à direita (w-[350px])
       */}
       <aside
         role="dialog"
@@ -92,26 +92,30 @@ export function DistrictStats({
         aria-modal="true"
         className={cn(
           'fixed z-40 text-white select-none shadow-2xl',
-          // Mobile Portrait (abaixo de 640px)
-          'inset-x-0 bottom-0 rounded-t-3xl border-t border-x border-cyan-500/30 bg-slate-950/95 max-h-[55vh] overflow-y-auto pb-safe',
+          // Mobile Portrait (abaixo de 640px): Compacto (42vh) para nunca tapar a região selecionada
+          'inset-x-0 bottom-0 rounded-t-3xl border-t border-x border-cyan-500/30 bg-slate-950/95 max-h-[42vh] overflow-y-auto pb-safe',
           // Mobile Landscape (Right Side Panel)
           'landscape:inset-x-auto landscape:right-2 landscape:top-2 landscape:bottom-2 landscape:w-[290px] landscape:max-h-[calc(100dvh-1rem)] landscape:rounded-2xl landscape:border landscape:border-cyan-500/35 landscape:p-3 landscape:gap-2.5 landscape:overflow-y-auto',
           // Tablets/Desktop (sm e superior)
           'sm:inset-x-auto sm:right-4 sm:top-20 sm:bottom-auto sm:w-[320px] md:w-[340px] lg:w-[360px] sm:max-h-[calc(100dvh-100px)] sm:rounded-3xl sm:border sm:border-cyan-500/35',
-          'backdrop-blur-2xl p-4 sm:p-5 flex flex-col gap-3.5',
+          'backdrop-blur-2xl p-4 sm:p-5 flex flex-col gap-3',
           'animate-in fade-in slide-in-from-bottom-6 sm:slide-in-from-right-6 duration-200 ease-out',
           className
         )}
         style={{
           boxShadow:
             district.pos === 1
-              ? '0 0 35px rgba(245, 158, 11, 0.25), 0 20px 40px rgba(0,0,0,0.95)'
-              : '0 0 30px rgba(6, 182, 212, 0.2), 0 20px 40px rgba(0,0,0,0.95)',
+              ? '0 0 40px rgba(245, 158, 11, 0.3), 0 20px 40px rgba(0,0,0,0.95)'
+              : district.pos === 2
+                ? '0 0 30px rgba(203, 213, 225, 0.25), 0 20px 40px rgba(0,0,0,0.95)'
+                : district.pos === 3
+                  ? '0 0 30px rgba(251, 146, 60, 0.25), 0 20px 40px rgba(0,0,0,0.95)'
+                  : '0 0 30px rgba(6, 182, 212, 0.2), 0 20px 40px rgba(0,0,0,0.95)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Mobile Swipe Handle (oculto em landscape) */}
-        <div className="w-12 h-1.5 rounded-full bg-white/20 mx-auto sm:hidden landscape:hidden shrink-0" />
+        <div className="w-12 h-1.5 rounded-full bg-white/20 mx-auto sm:hidden landscape:hidden shrink-0 cursor-pointer" onClick={onClose} />
 
         {/* 1. TOPO: Nome do Distrito & Classificação Nacional */}
         <div className="flex items-start justify-between gap-3 border-b border-white/10 pb-3">
@@ -284,15 +288,15 @@ export function DistrictStats({
           </span>
         </div>
 
-        {/* 6. BOTÃO DE AÇÃO PRINCIPAL: VER DISTRITO / JOGAR */}
+        {/* 6. BOTÃO DE AÇÃO PRINCIPAL: ENTRAR NO DESAFIO */}
         <div className="flex flex-col sm:flex-row gap-2 pt-1 mt-auto">
           <button
             type="button"
             onClick={handleActionClick}
-            className="flex-1 inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-display text-xs font-black uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition cursor-pointer active:scale-95"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-display text-xs font-black uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition cursor-pointer active:scale-95"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
-            <span>Ver Distrito</span>
+            <span>ENTRAR NO DESAFIO</span>
             <ChevronRight className="w-3.5 h-3.5 ml-auto" />
           </button>
 

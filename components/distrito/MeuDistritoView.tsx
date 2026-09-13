@@ -194,7 +194,7 @@ export function MeuDistritoView({ initialDistrict }: MeuDistritoViewProps) {
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
             <span>PORTUGAL</span>
           </Link>
-          <span className="text-cyan-500/70 font-bold">//</span>
+          <span className="text-cyan-500/70 font-bold">{'//'}</span>
           <span className={cn('font-black tracking-wider', selectedDistrict ? 'text-cyan-300' : 'text-slate-500')}>
             {selectedDistrict ? selectedDistrict.toUpperCase() : 'SELECIONA O TEU DISTRITO'}
           </span>

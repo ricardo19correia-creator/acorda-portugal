@@ -60,12 +60,12 @@ export function RankingOverlay({
             <span className="truncate">#2-#3 Pódio</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-sky-400 shrink-0" />
-            <span className="truncate">#4-#8 Top</span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />
+            <span className="truncate">#4-#10 Vanguarda</span>
           </div>
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-slate-500 shrink-0" />
-            <span className="truncate">#9-#20 Geral</span>
+            <span className="truncate">#11-#20 Base</span>
           </div>
         </div>
       </div>
