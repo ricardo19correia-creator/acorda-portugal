@@ -8,6 +8,7 @@ import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories, type DistrictWarTerritory } from '@/lib/district-war'
 import { DISTRICTS_LIST, type DistrictItem } from '@/src/data/districts'
 import { CANONICAL_EVENTS, CANONICAL_CITIES, type NexusEvent } from '@/lib/portugal-map-nexus-data'
+import { PORTUGAL_CONCELHOS_COORDS } from '@/src/data/concelhos-coords'
 
 export interface ActiveConfrontation {
   id: string
@@ -236,9 +237,13 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
     return counts
   }, [activeHumanState])
 
-  // 7. Mapeamento de Cidades Oficiais para Coordenadas Rápidas
+  // 7. Mapeamento de Todos os Concelhos e Cidades Canónicas para Coordenadas Rápidas
   const cityCoordsLookup = useMemo(() => {
     const map = new Map<string, [number, number]>()
+    for (const [key, item] of Object.entries(PORTUGAL_CONCELHOS_COORDS)) {
+      map.set(key, item.coordinates)
+      map.set(normalizeKey(item.name), item.coordinates)
+    }
     for (const city of CANONICAL_CITIES) {
       map.set(normalizeKey(city.name), city.coordinates)
     }

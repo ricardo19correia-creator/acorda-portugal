@@ -59,12 +59,47 @@ export function PortugalVivoMap({
   // 1. Hook de Dados Reais da Nação em Tempo Real (Firestore)
   const data = usePortugalVivoData(user?.uid)
 
-  // Enviar heartbeat de presença imediato ao abrir o mapa de Portugal
+  // Enviar heartbeat de presença imediato e resolver localização geográfica
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    let initialCoords: [number, number] | undefined = undefined
+    try {
+      const cached = localStorage.getItem('ap_user_geo_coords') || sessionStorage.getItem('ap_user_geo_coords')
+      if (cached) {
+        const parsed = JSON.parse(cached)
+        if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number') {
+          initialCoords = [parsed[0], parsed[1]]
+        }
+      }
+    } catch {}
+
     if (user?.uid) {
-      sendRealHeartbeat(user, profile, 'browsing')
+      sendRealHeartbeat(user, profile, 'browsing', initialCoords)
     }
-  }, [user?.uid, profile?.district])
+
+    // Se o browser já tiver permissão de GPS concedida, renovar silenciosamente com coordenadas reais
+    if (typeof navigator !== 'undefined' && navigator.geolocation && (navigator as any).permissions) {
+      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+        if (result.state === 'granted') {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude]
+              try {
+                localStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
+                sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
+              } catch {}
+              if (user?.uid) {
+                sendRealHeartbeat(user, profile, 'browsing', coords)
+              }
+            },
+            () => {},
+            { enableHighAccuracy: true, timeout: 6000, maximumAge: 60000 }
+          )
+        }
+      }).catch(() => {})
+    }
+  }, [user?.uid, profile?.district, profile?.city])
 
   // Distrito selecionado derivado diretamente dos dados reativos
   const selectedDistrict = useMemo(() => {
@@ -191,16 +226,8 @@ export function PortugalVivoMap({
   // 7. Localização do Próprio Jogador ("📍 MINHA LOCALIZAÇÃO")
   const handleLocateMe = useCallback(() => {
     if (isLocating || !engineRef.current) return
-
-    // Se já tivermos o pino do utilizador resolvido com coordenadas GPS
-    if (data.currentUserPin?.coords) {
-      engineRef.current.locateUser(data.currentUserPin.coords, 13.5)
-      setGeoNoticeText('Posição identificada — centrado na tua localização!')
-      setTimeout(() => setGeoNoticeText(null), 4000)
-      return
-    }
-
     setIsLocating(true)
+    setGeoNoticeText('A obter localização GPS de alta precisão...')
 
     if (typeof navigator !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -208,47 +235,51 @@ export function PortugalVivoMap({
           setIsLocating(false)
           const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude]
 
-          // Guardar na sessão para próximas requisições
+          // Guardar na sessão e localStorage para persistência
           try {
+            localStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
             sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
           } catch {}
 
           // Atualizar presença com coordenadas GPS exatas no Firestore
           sendRealHeartbeat(user, profile, 'browsing', coords)
 
-          // Voar até ao local com zoom adequado
-          engineRef.current?.locateUser(coords, 13.5)
-          setGeoNoticeText('GPS confirmado — centrado na tua posição!')
+          // Voar até ao local com zoom de satélite de alta aproximação
+          engineRef.current?.locateUser(coords, 14.5)
+          setGeoNoticeText('📍 GPS Confirmado — Centrado exatamente na tua posição!')
           setTimeout(() => setGeoNoticeText(null), 4000)
         },
         (err) => {
           setIsLocating(false)
           console.debug('[GEOLOCATION] Não autorizada ou indisponível:', err?.message)
 
-          // Fallback gracioso: focar o distrito do perfil com aviso não-bloqueante
-          const userDistrict = profile?.district || 'Lisboa'
-          const targetDist = data.districtMap.get(userDistrict.toLowerCase())
-          if (targetDist) {
-            engineRef.current?.locateUser(targetDist.center, 10.5)
-            setSelectedDistrictId(targetDist.id)
-            setGeoNoticeText(`Localização GPS indisponível — a focar ${targetDist.name}.`)
+          // Se tiver coordenadas do concelho do perfil (ex: Alijó) ou cache
+          if (data.currentUserPin?.coords) {
+            engineRef.current?.locateUser(data.currentUserPin.coords, 13)
+            setGeoNoticeText(`Localização aproximada por concelho (${data.currentUserPin.city || data.currentUserPin.district}).`)
           } else {
-            engineRef.current?.fitSector('continente')
-            setGeoNoticeText('Localização GPS indisponível — a mostrar Continente.')
+            const userDistrict = profile?.district || 'Vila Real'
+            const targetDist = data.districtMap.get(userDistrict.toLowerCase())
+            if (targetDist) {
+              engineRef.current?.locateUser(targetDist.center, 11)
+              setSelectedDistrictId(targetDist.id)
+              setGeoNoticeText(`GPS recusado — a focar distrito de ${targetDist.name}.`)
+            } else {
+              engineRef.current?.fitSector('continente')
+              setGeoNoticeText('GPS indisponível — a mostrar Continente.')
+            }
           }
           setTimeout(() => setGeoNoticeText(null), 4500)
         },
-        { timeout: 8000, enableHighAccuracy: false }
+        { timeout: 10000, enableHighAccuracy: true, maximumAge: 30000 }
       )
     } else {
       setIsLocating(false)
-      const userDistrict = profile?.district || 'Lisboa'
-      const targetDist = data.districtMap.get(userDistrict.toLowerCase())
-      if (targetDist) {
-        engineRef.current?.locateUser(targetDist.center, 10.5)
-        setGeoNoticeText(`Navegador sem GPS — a focar ${targetDist.name}.`)
-        setTimeout(() => setGeoNoticeText(null), 4000)
+      if (data.currentUserPin?.coords) {
+        engineRef.current?.locateUser(data.currentUserPin.coords, 13)
+        setGeoNoticeText(`Navegador sem GPS — a focar concelho de ${data.currentUserPin.city || data.currentUserPin.district}.`)
       }
+      setTimeout(() => setGeoNoticeText(null), 4000)
     }
   }, [isLocating, data.currentUserPin, data.districtMap, user, profile])
 

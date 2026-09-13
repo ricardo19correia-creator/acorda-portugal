@@ -1,7 +1,17 @@
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { PORTUGAL_CONCELHOS_COORDS } from '@/src/data/concelhos-coords'
 
 export type RealUserActivity = 'playing' | 'duel' | 'browsing'
+
+function normalizeKey(str: string): string {
+  return (str || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[-_]/g, ' ')
+    .trim()
+}
 
 export interface RealPlayerPresence {
   userId: string
@@ -71,11 +81,13 @@ export async function sendRealHeartbeat(
       (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
       undefined
 
-    // Se coordenadas explícitas não foram passadas, verificar cache local de GPS recente
+    // 1. Se coordenadas explícitas foram passadas (ex: GPS ativo no momento)
     let userCoords: [number, number] | undefined = coords
+
+    // 2. Verificar cache local de GPS recente no localStorage ou sessionStorage
     if (!userCoords && typeof window !== 'undefined') {
       try {
-        const cached = sessionStorage.getItem('ap_user_geo_coords')
+        const cached = localStorage.getItem('ap_user_geo_coords') || sessionStorage.getItem('ap_user_geo_coords')
         if (cached) {
           const parsed = JSON.parse(cached)
           if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number' && typeof parsed[1] === 'number') {
@@ -83,6 +95,22 @@ export async function sendRealHeartbeat(
           }
         }
       } catch {}
+    }
+
+    // 3. Resolução automática das coordenadas do concelho/cidade do perfil
+    if (!userCoords && city) {
+      const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(city)]
+      if (concelhoMatch?.coordinates) {
+        userCoords = concelhoMatch.coordinates
+      }
+    }
+
+    // 4. Fallback para concelho capital de distrito
+    if (!userCoords && district && district !== 'Portugal') {
+      const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(district)]
+      if (distMatch?.coordinates) {
+        userCoords = distMatch.coordinates
+      }
     }
 
     const payload: RealPlayerPresence = {
@@ -159,6 +187,16 @@ export function filterActiveRealPlayers(
         validCoords = [d.coords[0], d.coords[1]]
       } else if (d.coordinates && typeof d.coordinates.lat === 'number' && typeof d.coordinates.lng === 'number') {
         validCoords = [d.coordinates.lng, d.coordinates.lat]
+      } else if (d.city) {
+        const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(d.city)]
+        if (concelhoMatch?.coordinates) {
+          validCoords = concelhoMatch.coordinates
+        }
+      } else if (d.district && d.district !== 'Portugal') {
+        const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(d.district)]
+        if (distMatch?.coordinates) {
+          validCoords = distMatch.coordinates
+        }
       }
 
       const player: RealPlayerPresence = {

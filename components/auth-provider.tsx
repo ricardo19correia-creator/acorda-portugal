@@ -810,7 +810,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       clearInterval(interval)
       window.removeEventListener('beforeunload', handleUnload)
     }
-  }, [user?.uid, profile?.displayName, profile?.district, profile?.photoURL, profile?.level, pathname])
+  }, [user?.uid, profile?.displayName, profile?.district, profile?.city, profile?.photoURL, profile?.level, pathname])
 
   const authResolved = authStatus !== 'AUTH_INITIALIZING'
 
