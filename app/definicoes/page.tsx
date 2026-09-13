@@ -22,9 +22,11 @@ import {
   ExternalLink,
   Sparkles,
   Zap,
+  Music,
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { useBackgroundVideoSettings } from '@/lib/video-background-settings'
+import { useAudio } from '@/context/AudioContext'
 import { performLogout } from '@/lib/auth-helpers'
 import { AppBackground } from '@/components/AppBackground'
 import { cn } from '@/lib/utils'
@@ -33,6 +35,15 @@ export default function DefinicoesPage() {
   const router = useRouter()
   const { user, profile, authResolved } = useAuth()
   const { isVideoEnabled, setVideoEnabled } = useBackgroundVideoSettings()
+  const {
+    isPlaying: isBgmPlaying,
+    togglePlay: toggleBgm,
+    isMuted: isBgmMuted,
+    toggleMute: toggleBgmMute,
+    volume: bgmVolume,
+    setVolume: setBgmVolume,
+    currentTrackIndex,
+  } = useAudio()
 
   // Configurações locais persistidas
   const [sfxEnabled, setSfxEnabled] = useState(true)
@@ -246,6 +257,71 @@ export default function DefinicoesPage() {
               <p className="text-xs text-slate-400">Efeitos acústicos de resposta, apitos e comemorações.</p>
             </div>
           </div>
+
+          {/* Toggle Música de Fundo (BGM) */}
+          <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
+            <div className="space-y-1 pr-4">
+              <span className="text-sm font-bold text-white flex items-center gap-2">
+                Música de Fundo (BGM)
+                <span className="text-[10px] font-mono uppercase bg-amber-950/80 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-md">
+                  Faixa {currentTrackIndex + 1}/4
+                </span>
+              </span>
+              <p className="text-xs text-slate-400">
+                Banda sonora contínua de 4 músicas temáticas que acompanham a navegação no jogo.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                toggleBgm()
+                showToast(!isBgmPlaying ? 'Música de fundo ativada' : 'Música de fundo pausada')
+              }}
+              className={cn(
+                'cursor-pointer px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0',
+                isBgmPlaying
+                  ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                  : 'bg-slate-800 text-slate-400 border border-slate-700'
+              )}
+            >
+              {isBgmPlaying ? 'Ligada' : 'Desligada'}
+            </button>
+          </div>
+
+          {/* Volume da Música de Fundo */}
+          {isBgmPlaying && (
+            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-950/40 border border-slate-800/60">
+              <div className="space-y-1 pr-4">
+                <span className="text-xs font-bold text-slate-300">Volume da Música</span>
+                <p className="text-[11px] text-slate-500">
+                  {isBgmMuted ? 'Em silêncio (Mute ativo)' : `${Math.round(bgmVolume * 100)}%`}
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => {
+                    toggleBgmMute()
+                    showToast(!isBgmMuted ? 'Música silenciada' : 'Música com som')
+                  }}
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer"
+                  title={isBgmMuted ? 'Ativar som' : 'Silenciar'}
+                >
+                  {isBgmMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-amber-400" />}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={isBgmMuted ? 0 : bgmVolume}
+                  onChange={(e) => {
+                    if (isBgmMuted) toggleBgmMute()
+                    setBgmVolume(parseFloat(e.target.value))
+                  }}
+                  className="w-24 sm:w-32 accent-amber-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Toggle Efeitos Sonoros */}
           <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
