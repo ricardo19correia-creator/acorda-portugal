@@ -26,6 +26,7 @@ import {
   Clock,
   X,
   Shield,
+  Eye,
 } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'

@@ -75,6 +75,13 @@ export default function ExplorarPage() {
                   <LayoutGrid className="h-4 w-4 text-accent" />
                   <span>Categorias</span>
                 </Link>
+                <Link
+                  href="/historia"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition shadow-md"
+                >
+                  <Sparkles className="h-4 w-4 text-emerald-400" />
+                  <span>A Nossa História</span>
+                </Link>
               </div>
             </div>
           </div>

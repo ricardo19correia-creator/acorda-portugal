@@ -36,6 +36,7 @@ export function DistrictStats({
   onPlayDistrict,
   className,
 }: DistrictStatsProps) {
+  const router = useRouter()
   const { user } = useAuth()
   const [authWallOpen, setAuthWallOpen] = useState(false)
   const [authWallTarget, setAuthWallTarget] = useState('/jogar')

@@ -253,11 +253,11 @@ export default function ConquistasPage() {
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">Recompensa:</span>
                   <span className="inline-flex items-center gap-1 text-xs font-mono font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md">
-                    🪙 +{ach.rewardCoins} Acordas
+                    🪙 +{ach.reward?.coins ?? 0} Acordas
                   </span>
-                  {ach.rewardTitle && (
+                  {ach.reward?.title && (
                     <span className="text-[10px] font-bold text-purple-300 bg-purple-950/80 border border-purple-500/40 px-2 py-0.5 rounded-md">
-                      « {ach.rewardTitle} »
+                      « {ach.reward.title} »
                     </span>
                   )}
                 </div>

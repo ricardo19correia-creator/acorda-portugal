@@ -48,7 +48,7 @@ import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
 import { equipTitle } from '@/lib/titles-service'
-import { subscribeRankings, calculateCompetitiveDivision, DIVISION_COLORS } from '@/lib/rankings'
+import { subscribeRankings, calculateCompetitiveDivision, DIVISION_COLORS, type CompetitiveDivision } from '@/lib/rankings'
 import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import {
   MASTER_TITLE_CATALOG,
@@ -1382,9 +1382,20 @@ function PerfilContent() {
     })
   }, [profile])
 
-  const currentLp = profile?.rating ?? (profile as any)?.elo ?? (1000 + (profile?.wins || 0) * 20)
-  const division = calculateCompetitiveDivision(currentLp)
-  const divisionColor = (DIVISION_COLORS as Record<string, string>)[division.name] || 'text-amber-400'
+  const DIVISION_THRESHOLDS: Record<CompetitiveDivision, { name: string; tier: string; minRating: number; maxRating: number }> = {
+    Bronze: { name: 'Bronze', tier: 'I', minRating: 0, maxRating: 1000 },
+    Prata: { name: 'Prata', tier: 'I', minRating: 1000, maxRating: 1300 },
+    Ouro: { name: 'Ouro', tier: 'I', minRating: 1300, maxRating: 1600 },
+    Platina: { name: 'Platina', tier: 'I', minRating: 1600, maxRating: 1900 },
+    Diamante: { name: 'Diamante', tier: 'I', minRating: 1900, maxRating: 2200 },
+    Mestre: { name: 'Mestre', tier: 'I', minRating: 2200, maxRating: 2500 },
+    'Lendário': { name: 'Lendário', tier: 'Elite', minRating: 2500, maxRating: Infinity },
+  }
+
+  const currentLp = (profile as any)?.rating ?? (profile as any)?.elo ?? (1000 + (profile?.wins || 0) * 20)
+  const divisionKey = calculateCompetitiveDivision(currentLp)
+  const division = DIVISION_THRESHOLDS[divisionKey] || DIVISION_THRESHOLDS.Bronze
+  const divisionColor = DIVISION_COLORS[divisionKey]?.text || 'text-amber-400'
   const streak = profile?.streak ?? (profile as any)?.currentStreak ?? (profile as any)?.streakCount ?? 0
   const bestStreak = profile?.bestStreak ?? (profile as any)?.maxStreak ?? streak
   const xpCurrent = userXp % 1000

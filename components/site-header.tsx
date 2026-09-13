@@ -21,6 +21,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Smartphone,
+  BookOpen,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -65,6 +66,7 @@ export function SiteHeader() {
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Criadores', href: '/criadores', icon: Sparkles },
+    { label: 'História', href: '/historia', icon: BookOpen },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]
@@ -77,6 +79,7 @@ export function SiteHeader() {
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
     { label: 'Criadores', href: '/criadores', icon: Sparkles },
+    { label: 'A Nossa História', href: '/historia', icon: BookOpen },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]

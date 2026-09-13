@@ -31,6 +31,7 @@ export type RankedPlayer = {
   district: string
   pos: number
   equippedTitle?: string
+  equippedFrame?: string
   equipped?: EquippedCosmetics
   duelWins?: number
   duelsTotal?: number

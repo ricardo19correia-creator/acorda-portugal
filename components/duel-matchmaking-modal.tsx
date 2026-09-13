@@ -771,7 +771,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                     <PlayerAvatar
                       photoURL={ticket?.opponentInfo?.photoURL || (ticket?.opponentInfo as any)?.avatarUrl || (ticket?.opponentInfo as any)?.avatar}
                       displayName={ticket?.opponentInfo?.displayName || 'Adversário'}
-                      activeFrame={ticket?.opponentInfo?.equippedFrame || (ticket?.opponentInfo as any)?.frameId}
+                      activeFrame={(ticket?.opponentInfo as any)?.equippedFrame || (ticket?.opponentInfo as any)?.frameId}
                       isCurrentUser={false}
                       size="lg"
                     />
