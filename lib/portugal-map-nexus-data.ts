@@ -350,39 +350,8 @@ export const CANONICAL_CONNECTIONS: NexusConnection[] = [
   { id: 'conn_acores_madeira', fromCoords: [-25.6687, 37.7412], toCoords: [-16.9085, 32.6500], fromName: 'Açores', toName: 'Madeira', type: 'atlantic_relay', color: '#10b981' },
 ]
 
-// 6. EVENTOS TEMPORÁRIOS // ATIVIDADE DINÂMICA
-export const CANONICAL_EVENTS: NexusEvent[] = [
-  {
-    id: 'evt_guerra_douro',
-    title: 'Guerra do Douro',
-    district: 'Porto',
-    coordinates: [-8.6110, 41.1496],
-    type: 'war',
-    status: 'active',
-    description: 'Batalha territorial pelo domínio das margens e pontes da Invicta.',
-    xpReward: 2500,
-  },
-  {
-    id: 'evt_torneio_nacional',
-    title: 'Torneio Imperial do Tejo',
-    district: 'Lisboa',
-    coordinates: [-9.1393, 38.7223],
-    type: 'tournament',
-    status: 'active',
-    description: 'Competição suprema de mestres no Terreiro do Paço.',
-    xpReward: 5000,
-  },
-  {
-    id: 'evt_invasao_sul',
-    title: 'Invasão da Costa Sul',
-    district: 'Faro',
-    coordinates: [-7.9304, 37.0194],
-    type: 'invasion',
-    status: 'upcoming',
-    description: 'Disputa feroz pelas fortificações marítimas do Algarve.',
-    xpReward: 3200,
-  },
-]
+// 6. EVENTOS TEMPORÁRIOS // ATIVIDADE DINÂMICA (ZERO MOCK DATA — DINÂMICO APENAS)
+export const CANONICAL_EVENTS: NexusEvent[] = []
 
 // 7. ARENAS CANÓNICAS COM IMAGENS VERIFICADAS
 export const CANONICAL_ARENAS: MapArenaPOI[] = OFFICIAL_MAP_ARENAS.map((arena) => ({

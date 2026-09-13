@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Users,
   MapPin,
@@ -10,10 +10,15 @@ import {
   Compass,
   Radar,
   RotateCcw,
-  Sparkles,
+  Crosshair,
+  Search,
+  CheckCircle2,
+  Activity,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { MapSector } from '@/src/game/world/PortugalSatelliteEngine'
+import type { LivePulseMessage } from '@/src/hooks/usePortugalVivoData'
+import { MapSearchBar, type SearchResultItem } from './MapSearchBar'
 
 interface PortugalAgoraHUDProps {
   onlineCount: number
@@ -26,7 +31,12 @@ interface PortugalAgoraHUDProps {
   onToggle3D: () => void
   onResetView: () => void
   onTriggerScan: () => void
+  onLocateMe: () => void
+  onSelectSearchResult: (result: SearchResultItem) => void
   isScanning: boolean
+  scanResultText?: string | null
+  isLocating?: boolean
+  livePulseMessages?: LivePulseMessage[]
 }
 
 export function PortugalAgoraHUD({
@@ -40,14 +50,33 @@ export function PortugalAgoraHUD({
   onToggle3D,
   onResetView,
   onTriggerScan,
+  onLocateMe,
+  onSelectSearchResult,
   isScanning,
+  scanResultText,
+  isLocating,
+  livePulseMessages = [],
 }: PortugalAgoraHUDProps) {
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [pulseIndex, setPulseIndex] = useState(0)
+
+  // Rotação suave do feed contextual "O que está a acontecer"
+  useEffect(() => {
+    if (!livePulseMessages || livePulseMessages.length <= 1) return
+    const interval = setInterval(() => {
+      setPulseIndex((prev) => (prev + 1) % livePulseMessages.length)
+    }, 5500)
+    return () => clearInterval(interval)
+  }, [livePulseMessages])
+
+  const currentPulse = livePulseMessages[pulseIndex] || livePulseMessages[0]
+
   return (
     <div className="pointer-events-none absolute top-0 left-0 right-0 z-30 flex flex-col gap-2 p-3 sm:p-4 select-none">
       <div className="flex items-center justify-between gap-2">
-        {/* Bloco 1: PORTUGAL AGORA — Métricas 100% Reais */}
-        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2.5 rounded-2xl bg-slate-950/80 px-3 py-2 border border-white/10 backdrop-blur-md shadow-2xl">
-          <div className="flex items-center gap-2">
+        {/* Bloco 1: PORTUGAL AGORA — 4 Métricas Estritamente Reais (ZERO MOCK DATA) */}
+        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2.5 rounded-2xl bg-slate-950/85 px-3 py-2 border border-white/10 backdrop-blur-md shadow-2xl overflow-x-auto scrollbar-none max-w-full">
+          <div className="flex items-center gap-2 shrink-0">
             <div className="relative flex h-2.5 w-2.5">
               <span
                 className={cn(
@@ -67,51 +96,71 @@ export function PortugalAgoraHUD({
             </span>
           </div>
 
-          <div className="h-3.5 w-px bg-white/15" />
+          <div className="h-3.5 w-px bg-white/15 shrink-0" />
 
-          {/* Jogadores Online */}
-          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300">
+          {/* 1. Jogadores Online */}
+          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300 shrink-0">
             <Users className="h-3.5 w-3.5 text-emerald-400" />
             <span className="font-bold text-white font-mono">{onlineCount}</span>
             <span className="hidden sm:inline text-slate-400">online</span>
           </div>
 
-          <div className="h-3.5 w-px bg-white/15" />
+          <div className="h-3.5 w-px bg-white/15 shrink-0" />
 
-          {/* Distritos Ativos */}
-          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300">
+          {/* 2. Distritos Ativos */}
+          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300 shrink-0">
             <MapPin className="h-3.5 w-3.5 text-cyan-400" />
             <span className="font-bold text-white font-mono">{activeDistrictsCount}</span>
-            <span className="hidden sm:inline text-slate-400">distritos</span>
+            <span className="hidden sm:inline text-slate-400">
+              {activeDistrictsCount === 1 ? 'distrito' : 'distritos'}
+            </span>
           </div>
 
-          {/* Confrontos (Apenas se > 0) */}
-          {confrontationsCount > 0 && (
-            <>
-              <div className="h-3.5 w-px bg-white/15" />
-              <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-amber-300">
-                <Swords className="h-3.5 w-3.5 text-amber-400" />
-                <span className="font-bold font-mono">{confrontationsCount}</span>
-                <span className="hidden sm:inline">disputas</span>
-              </div>
-            </>
-          )}
+          <div className="h-3.5 w-px bg-white/15 shrink-0" />
 
-          {/* Eventos Ativos */}
-          {eventsCount > 0 && (
-            <>
-              <div className="h-3.5 w-px bg-white/15" />
-              <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-rose-300">
-                <Zap className="h-3.5 w-3.5 text-rose-400" />
-                <span className="font-bold font-mono">{eventsCount}</span>
-                <span className="hidden md:inline">eventos</span>
-              </div>
-            </>
-          )}
+          {/* 3. Disputas Reais (sempre exibido, 0 se vazio) */}
+          <div
+            className={cn(
+              'flex items-center gap-1 text-[11px] sm:text-xs font-medium shrink-0',
+              confrontationsCount > 0 ? 'text-amber-300' : 'text-slate-400'
+            )}
+          >
+            <Swords
+              className={cn(
+                'h-3.5 w-3.5',
+                confrontationsCount > 0 ? 'text-amber-400' : 'text-slate-500'
+              )}
+            />
+            <span className="font-bold font-mono text-white">{confrontationsCount}</span>
+            <span className="hidden md:inline">
+              {confrontationsCount === 1 ? 'disputa' : 'disputas'}
+            </span>
+          </div>
+
+          <div className="h-3.5 w-px bg-white/15 shrink-0" />
+
+          {/* 4. Eventos Reais (sempre exibido, 0 se vazio) */}
+          <div
+            className={cn(
+              'flex items-center gap-1 text-[11px] sm:text-xs font-medium shrink-0',
+              eventsCount > 0 ? 'text-rose-300' : 'text-slate-400'
+            )}
+          >
+            <Zap
+              className={cn(
+                'h-3.5 w-3.5',
+                eventsCount > 0 ? 'text-rose-400' : 'text-slate-500'
+              )}
+            />
+            <span className="font-bold font-mono text-white">{eventsCount}</span>
+            <span className="hidden md:inline">
+              {eventsCount === 1 ? 'evento' : 'eventos'}
+            </span>
+          </div>
         </div>
 
-        {/* Bloco 2: Seletor Rápido de Arquipélagos (Continente / Açores / Madeira) */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-1 rounded-2xl bg-slate-950/80 p-1 border border-white/10 backdrop-blur-md shadow-2xl">
+        {/* Bloco 2: Seletor Rápido de Arquipélagos (Desktop) */}
+        <div className="pointer-events-auto hidden lg:flex items-center gap-1 rounded-2xl bg-slate-950/80 p-1 border border-white/10 backdrop-blur-md shadow-2xl">
           <button
             type="button"
             onClick={() => onSelectSector('continente')}
@@ -150,8 +199,40 @@ export function PortugalAgoraHUD({
           </button>
         </div>
 
-        {/* Bloco 3: Botões de Ação Tática (Scan, Camadas, 3D, Reset) */}
+        {/* Bloco 3: Botões de Ação Tática */}
         <div className="pointer-events-auto flex items-center gap-1.5">
+          {/* Botão de Pesquisa Instantânea */}
+          <button
+            type="button"
+            onClick={() => setSearchOpen((prev) => !prev)}
+            title="Pesquisar território ou cidade"
+            className={cn(
+              'flex h-9 w-9 items-center justify-center rounded-2xl border backdrop-blur-md shadow-2xl transition-colors cursor-pointer',
+              searchOpen
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400'
+                : 'bg-slate-950/80 text-slate-200 border-white/10 hover:bg-white/10'
+            )}
+          >
+            <Search className="h-4 w-4" />
+          </button>
+
+          {/* Botão "Minha Localização" */}
+          <button
+            type="button"
+            onClick={onLocateMe}
+            disabled={isLocating}
+            title="Localizar a minha posição no mapa"
+            className={cn(
+              'flex items-center gap-1.5 rounded-2xl px-2.5 sm:px-3 py-2 text-xs font-bold transition-all shadow-2xl backdrop-blur-md border cursor-pointer',
+              isLocating
+                ? 'bg-emerald-500 text-slate-950 border-emerald-400 animate-pulse'
+                : 'bg-slate-950/80 text-emerald-300 border-emerald-500/30 hover:bg-emerald-950/40 hover:border-emerald-400'
+            )}
+          >
+            <Crosshair className={cn('h-3.5 w-3.5', isLocating && 'animate-spin')} />
+            <span className="hidden sm:inline">Minha Posição</span>
+          </button>
+
           {/* Scan Territorial */}
           <button
             type="button"
@@ -159,14 +240,14 @@ export function PortugalAgoraHUD({
             disabled={isScanning}
             title="Executar Scan Territorial"
             className={cn(
-              'flex items-center gap-1.5 rounded-2xl px-3 py-2 text-xs font-bold transition-all shadow-2xl backdrop-blur-md border cursor-pointer',
+              'flex items-center gap-1.5 rounded-2xl px-2.5 sm:px-3 py-2 text-xs font-bold transition-all shadow-2xl backdrop-blur-md border cursor-pointer',
               isScanning
                 ? 'bg-cyan-500 text-slate-950 border-cyan-400 animate-pulse'
-                : 'bg-slate-950/80 text-cyan-300 border-cyan-500/30 hover:bg-cyan-950/50 hover:border-cyan-400'
+                : 'bg-slate-950/80 text-cyan-300 border-cyan-500/30 hover:bg-cyan-950/40 hover:border-cyan-400'
             )}
           >
             <Radar className={cn('h-3.5 w-3.5', isScanning && 'animate-spin')} />
-            <span className="hidden sm:inline">Scan Territorial</span>
+            <span className="hidden md:inline">Scan Territorial</span>
           </button>
 
           {/* Camadas */}
@@ -184,7 +265,7 @@ export function PortugalAgoraHUD({
             type="button"
             onClick={onToggle3D}
             title="Alternar Perspetiva 2D/3D"
-            className="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-950/80 text-slate-200 border border-white/10 backdrop-blur-md shadow-2xl hover:bg-white/10 transition-colors cursor-pointer"
+            className="hidden sm:flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-950/80 text-slate-200 border border-white/10 backdrop-blur-md shadow-2xl hover:bg-white/10 transition-colors cursor-pointer"
           >
             <Compass className="h-4 w-4" />
           </button>
@@ -201,8 +282,42 @@ export function PortugalAgoraHUD({
         </div>
       </div>
 
-      {/* Seletor Mobile de Arquipélagos */}
-      <div className="pointer-events-auto flex md:hidden self-center items-center gap-1 rounded-2xl bg-slate-950/80 p-1 border border-white/10 backdrop-blur-md shadow-xl">
+      {/* Feed Contextual em Tempo Real "O Que Está a Acontecer" (ZERO MOCK DATA) */}
+      {currentPulse && (
+        <div className="pointer-events-auto self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-slate-950/85 border border-white/10 text-xs shadow-xl backdrop-blur-md animate-fadeIn">
+          <Activity className="h-3.5 w-3.5 text-cyan-400 shrink-0 animate-pulse" />
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 shrink-0">
+            Em Direto:
+          </span>
+          <span className={cn('text-xs font-medium truncate max-w-[280px] sm:max-w-lg', currentPulse.color)}>
+            {currentPulse.icon} {currentPulse.text}
+          </span>
+        </div>
+      )}
+
+      {/* Barra de Pesquisa Expansível */}
+      {searchOpen && (
+        <div className="pointer-events-auto self-start w-full sm:w-80 mt-1 animate-fadeIn">
+          <MapSearchBar
+            onSelectResult={(item) => {
+              onSelectSearchResult(item)
+              setSearchOpen(false)
+            }}
+            onClose={() => setSearchOpen(false)}
+          />
+        </div>
+      )}
+
+      {/* Banner de Resultado do Scan Territorial */}
+      {scanResultText && (
+        <div className="pointer-events-auto self-center sm:self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-cyan-950/90 border border-cyan-400 text-cyan-200 text-xs font-bold shadow-2xl backdrop-blur-xl animate-fadeIn">
+          <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0" />
+          <span>{scanResultText}</span>
+        </div>
+      )}
+
+      {/* Seletor Mobile / Tablet de Arquipélagos */}
+      <div className="pointer-events-auto flex lg:hidden self-center items-center gap-1 rounded-2xl bg-slate-950/80 p-1 border border-white/10 backdrop-blur-md shadow-xl mt-0.5">
         <button
           type="button"
           onClick={() => onSelectSector('continente')}

@@ -2,7 +2,8 @@ import { Map as MapLibreMap, type StyleSpecification } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import nationalGeoJSONRaw from '@/src/data/maps/portugal-national.json'
 import type { FeatureCollection } from 'geojson'
-import type { PortugalVivoDistrict, ActiveConfrontation } from '@/src/hooks/usePortugalVivoData'
+import type { PortugalVivoDistrict, ActiveConfrontation, ResolvedPlayerPin } from '@/src/hooks/usePortugalVivoData'
+import { CANONICAL_CITIES, type NexusEvent } from '@/lib/portugal-map-nexus-data'
 
 export type MapSector = 'continente' | 'acores' | 'madeira'
 
@@ -14,6 +15,8 @@ export interface MapLayersState {
   districts: boolean
   players: boolean
   confrontations: boolean
+  events: boolean
+  hotspots: boolean
 }
 
 export const DEFAULT_MAP_LAYERS: MapLayersState = {
@@ -24,6 +27,8 @@ export const DEFAULT_MAP_LAYERS: MapLayersState = {
   districts: true,
   players: true,
   confrontations: true,
+  events: true,
+  hotspots: true,
 }
 
 // Bounding boxes geográficas rigorosas
@@ -145,6 +150,9 @@ export interface PortugalSatelliteEngineOptions {
   layers?: Partial<MapLayersState>
   onSelectDistrict?: (district: PortugalVivoDistrict | null) => void
   onHoverDistrict?: (district: PortugalVivoDistrict | null) => void
+  onSelectPlayer?: (player: ResolvedPlayerPin | null) => void
+  onSelectEvent?: (event: NexusEvent | null) => void
+  onSelectDispute?: (dispute: ActiveConfrontation | null) => void
   onSectorChange?: (sector: MapSector) => void
   onReady?: () => void
 }
@@ -159,6 +167,12 @@ export class PortugalSatelliteEngine {
   private layersState: MapLayersState
   private districtsData: PortugalVivoDistrict[] = []
   private districtMap = new Map<string, PortugalVivoDistrict>()
+  private playersData: ResolvedPlayerPin[] = []
+  private playersMap = new Map<string, ResolvedPlayerPin>()
+  private eventsData: NexusEvent[] = []
+  private eventsMap = new Map<string, NexusEvent>()
+  private confrontationsData: ActiveConfrontation[] = []
+  private confrontationsMap = new Map<string, ActiveConfrontation>()
   private callbacks: PortugalSatelliteEngineOptions
 
   private scanAnimFrame: number | null = null
@@ -238,6 +252,8 @@ export class PortugalSatelliteEngine {
             '#f97316',
             ['boolean', ['feature-state', 'leader'], false],
             '#f59e0b',
+            ['>', ['to-number', ['feature-state', 'online'], 0], 0],
+            '#059669', // Verde Esmeralda Tático para Território Ativo com Jogadores Online
             '#ffffff',
           ],
           'fill-opacity': [
@@ -249,7 +265,9 @@ export class PortugalSatelliteEngine {
             ['boolean', ['feature-state', 'dispute'], false],
             0.14,
             ['boolean', ['feature-state', 'leader'], false],
-            0.10,
+            0.12,
+            ['>', ['to-number', ['feature-state', 'online'], 0], 0],
+            0.18, // Território ativo destacado com elegância preservando o satélite
             0.02, // 98% transparente para o satélite real aparecer majestosamente!
           ],
         },
@@ -273,6 +291,8 @@ export class PortugalSatelliteEngine {
             '#fb923c',
             ['boolean', ['feature-state', 'leader'], false],
             '#fbbf24',
+            ['>', ['to-number', ['feature-state', 'online'], 0], 0],
+            '#34d399', // Contorno luminoso no distrito ativo
             '#94a3b8',
           ],
           'line-width': [
@@ -281,6 +301,8 @@ export class PortugalSatelliteEngine {
             2.8,
             ['boolean', ['feature-state', 'hover'], false],
             2.2,
+            ['>', ['to-number', ['feature-state', 'online'], 0], 0],
+            2.2, // Contorno reforçado no distrito ativo
             1.2,
           ],
           'line-opacity': [
@@ -288,6 +310,8 @@ export class PortugalSatelliteEngine {
             ['boolean', ['feature-state', 'selected'], false],
             1.0,
             ['boolean', ['feature-state', 'hover'], false],
+            0.95,
+            ['>', ['to-number', ['feature-state', 'online'], 0], 0],
             0.95,
             0.60,
           ],
@@ -313,6 +337,181 @@ export class PortugalSatelliteEngine {
           'line-width': 2.5,
           'line-dasharray': [2, 2],
           'line-opacity': 0.85,
+        },
+      })
+    }
+
+    // 1.3.1. POIs de Disputas em Direto (Marcador ⚔️ no ponto médio)
+    if (!this.map.getSource('disputes-pois-source')) {
+      this.map.addSource('disputes-pois-source', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+    }
+
+    if (!this.map.getLayer('disputes-pois-glow')) {
+      this.map.addLayer({
+        id: 'disputes-pois-glow',
+        type: 'circle',
+        source: 'disputes-pois-source',
+        paint: {
+          'circle-radius': 22,
+          'circle-color': '#f59e0b',
+          'circle-opacity': 0.35,
+          'circle-blur': 0.8,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('disputes-pois-core')) {
+      this.map.addLayer({
+        id: 'disputes-pois-core',
+        type: 'circle',
+        source: 'disputes-pois-source',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#d97706',
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.95,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('disputes-pois-label')) {
+      this.map.addLayer({
+        id: 'disputes-pois-label',
+        type: 'symbol',
+        source: 'disputes-pois-source',
+        minzoom: 6.5,
+        layout: {
+          'text-field': ['concat', '⚔️ ', ['get', 'title']],
+          'text-size': 10,
+          'text-offset': [0, 1.4],
+          'text-anchor': 'top',
+        },
+        paint: {
+          'text-color': '#fde68a',
+          'text-halo-color': '#020617',
+          'text-halo-width': 2,
+        },
+      })
+    }
+
+    // 1.3.2. Fonte e Camadas de Eventos Especiais Reais (⚡ EVENTO)
+    if (!this.map.getSource('events-source')) {
+      this.map.addSource('events-source', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+    }
+
+    if (!this.map.getLayer('events-glow')) {
+      this.map.addLayer({
+        id: 'events-glow',
+        type: 'circle',
+        source: 'events-source',
+        paint: {
+          'circle-radius': 22,
+          'circle-color': '#f43f5e',
+          'circle-opacity': 0.35,
+          'circle-blur': 0.8,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('events-core')) {
+      this.map.addLayer({
+        id: 'events-core',
+        type: 'circle',
+        source: 'events-source',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#e11d48',
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.95,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('events-label')) {
+      this.map.addLayer({
+        id: 'events-label',
+        type: 'symbol',
+        source: 'events-source',
+        minzoom: 6.5,
+        layout: {
+          'text-field': ['concat', '⚡ ', ['get', 'title']],
+          'text-size': 10,
+          'text-offset': [0, 1.4],
+          'text-anchor': 'top',
+        },
+        paint: {
+          'text-color': '#fda4af',
+          'text-halo-color': '#020617',
+          'text-halo-width': 2,
+        },
+      })
+    }
+
+    // 1.3.3. Fonte e Camada de Cidades Canónicas do Acorda Portugal
+    const cityFeatures = CANONICAL_CITIES.map((c) => ({
+      type: 'Feature' as const,
+      geometry: {
+        type: 'Point' as const,
+        coordinates: c.coordinates,
+      },
+      properties: {
+        id: c.id,
+        name: c.name,
+        district: c.district,
+        tier: c.tier,
+      },
+    }))
+
+    if (!this.map.getSource('canonical-cities-source')) {
+      this.map.addSource('canonical-cities-source', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: cityFeatures,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('canonical-cities-beacon')) {
+      this.map.addLayer({
+        id: 'canonical-cities-beacon',
+        type: 'circle',
+        source: 'canonical-cities-source',
+        minzoom: 7.2,
+        paint: {
+          'circle-radius': 3.5,
+          'circle-color': '#38bdf8',
+          'circle-stroke-width': 1.2,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.9,
+        },
+      })
+    }
+
+    if (!this.map.getLayer('canonical-cities-label')) {
+      this.map.addLayer({
+        id: 'canonical-cities-label',
+        type: 'symbol',
+        source: 'canonical-cities-source',
+        minzoom: 7.4,
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 10,
+          'text-offset': [0, 1.1],
+          'text-anchor': 'top',
+        },
+        paint: {
+          'text-color': '#f1f5f9',
+          'text-halo-color': '#020617',
+          'text-halo-width': 2,
         },
       })
     }
@@ -355,12 +554,202 @@ export class PortugalSatelliteEngine {
         },
       })
     }
+
+    // Etiqueta de Distrito Ativo com contagem de jogadores online
+    if (!this.map.getLayer('presence-label')) {
+      this.map.addLayer({
+        id: 'presence-label',
+        type: 'symbol',
+        source: 'presence-source',
+        filter: ['>', ['to-number', ['get', 'online'], 0], 0],
+        minzoom: 5.2,
+        layout: {
+          'text-field': [
+            'concat',
+            '📍 ',
+            ['get', 'name'],
+            ' (',
+            ['to-string', ['get', 'online']],
+            ' online)',
+          ],
+          'text-size': 11,
+          'text-offset': [0, -1.8],
+          'text-anchor': 'bottom',
+        },
+        paint: {
+          'text-color': '#34d399',
+          'text-halo-color': '#020617',
+          'text-halo-width': 2.5,
+        },
+      })
+    }
+
+    // 1.5. Fonte e Camadas de Jogadores Reais com Clustering Inteligente e Hotspots 🔥
+    if (!this.map.getSource('players-source')) {
+      this.map.addSource('players-source', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+        cluster: true,
+        clusterMaxZoom: 13,
+        clusterRadius: 42,
+      })
+    }
+
+    // Glow de Clusters com Deteção de Hotspot Térmico (>= 3 jogadores vira Hotspot 🔥)
+    if (!this.map.getLayer('players-clusters-glow')) {
+      this.map.addLayer({
+        id: 'players-clusters-glow',
+        type: 'circle',
+        source: 'players-source',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': [
+            'case',
+            ['>=', ['get', 'point_count'], 3],
+            '#f59e0b',
+            '#00e5ff',
+          ],
+          'circle-radius': ['step', ['get', 'point_count'], 20, 3, 26, 8, 34],
+          'circle-opacity': 0.32,
+          'circle-blur': 0.75,
+        },
+      })
+    }
+
+    // Núcleo de Clusters com contagem de jogadores e estilo Hotspot
+    if (!this.map.getLayer('players-clusters-core')) {
+      this.map.addLayer({
+        id: 'players-clusters-core',
+        type: 'circle',
+        source: 'players-source',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': [
+            'case',
+            ['>=', ['get', 'point_count'], 3],
+            '#d97706',
+            '#0284c7',
+          ],
+          'circle-radius': ['step', ['get', 'point_count'], 14, 3, 18, 8, 24],
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.95,
+        },
+      })
+    }
+
+    // Texto numérico dentro do Cluster (mostra 🔥 se >= 3 jogadores)
+    if (!this.map.getLayer('players-clusters-count')) {
+      this.map.addLayer({
+        id: 'players-clusters-count',
+        type: 'symbol',
+        source: 'players-source',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': [
+            'case',
+            ['>=', ['get', 'point_count'], 3],
+            ['concat', '🔥 ', '{point_count_abbreviated}'],
+            '{point_count_abbreviated}',
+          ],
+          'text-size': 11,
+        },
+        paint: {
+          'text-color': '#ffffff',
+        },
+      })
+    }
+
+    // Jogadores Individuais (Unclustered) — Halo de Presença
+    if (!this.map.getLayer('players-unclustered-halo')) {
+      this.map.addLayer({
+        id: 'players-unclustered-halo',
+        type: 'circle',
+        source: 'players-source',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-radius': ['get', 'haloRadius'],
+          'circle-color': ['get', 'haloColor'],
+          'circle-opacity': [
+            'case',
+            ['boolean', ['get', 'isCurrentUser'], false],
+            0.60,
+            0.32,
+          ],
+          'circle-blur': 0.75,
+        },
+      })
+    }
+
+    // Jogadores Individuais — Ponto de Beacon Nítido
+    if (!this.map.getLayer('players-unclustered-core')) {
+      this.map.addLayer({
+        id: 'players-unclustered-core',
+        type: 'circle',
+        source: 'players-source',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-radius': ['get', 'beaconRadius'],
+          'circle-color': ['get', 'color'],
+          'circle-stroke-width': [
+            'case',
+            ['boolean', ['get', 'isCurrentUser'], false],
+            3,
+            2,
+          ],
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 1.0,
+        },
+      })
+    }
+
+    // Jogadores Individuais — Etiqueta de Nome / "VOCÊ ESTÁ AQUI" (zoom >= 5.0)
+    if (!this.map.getLayer('players-unclustered-label')) {
+      this.map.addLayer({
+        id: 'players-unclustered-label',
+        type: 'symbol',
+        source: 'players-source',
+        minzoom: 5.0,
+        filter: ['!', ['has', 'point_count']],
+        layout: {
+          'text-field': [
+            'case',
+            ['boolean', ['get', 'isCurrentUser'], false],
+            ['concat', '📍 VOCÊ ESTÁ AQUI (Nv. ', ['to-string', ['get', 'level']], ')'],
+            ['concat', '🟢 ', ['get', 'displayName'], ' (Nv. ', ['to-string', ['get', 'level']], ')'],
+          ],
+          'text-size': [
+            'case',
+            ['boolean', ['get', 'isCurrentUser'], false],
+            11,
+            9.5,
+          ],
+          'text-offset': [0, 1.4],
+          'text-anchor': 'top',
+        },
+        paint: {
+          'text-color': [
+            'case',
+            ['boolean', ['get', 'isCurrentUser'], false],
+            '#38bdf8',
+            '#f1f5f9',
+          ],
+          'text-halo-color': '#020617',
+          'text-halo-width': 2.5,
+        },
+      })
+    }
   }
 
   // =========================================================
   // 2. ATUALIZAÇÃO DE DADOS EM TEMPO REAL
   // =========================================================
-  public updateData(districts: PortugalVivoDistrict[], confrontations: ActiveConfrontation[]) {
+  public updateData(
+    districts: PortugalVivoDistrict[],
+    confrontations: ActiveConfrontation[],
+    players?: ResolvedPlayerPin[],
+    events?: NexusEvent[]
+  ) {
     this.districtsData = districts
     this.districtMap.clear()
     for (const d of districts) {
@@ -368,6 +757,24 @@ export class PortugalSatelliteEngine {
       this.districtMap.set(d.slug.toLowerCase(), d)
       this.districtMap.set(d.name.toLowerCase(), d)
       this.districtMap.set(d.canonicalName.toLowerCase(), d)
+    }
+
+    this.confrontationsData = confrontations
+    this.confrontationsMap.clear()
+    for (const c of confrontations) {
+      this.confrontationsMap.set(c.id, c)
+    }
+
+    if (events) {
+      this.eventsData = events
+      this.eventsMap.clear()
+      for (const ev of events) {
+        this.eventsMap.set(ev.id, ev)
+      }
+    }
+
+    if (players) {
+      this.updatePlayers(players)
     }
 
     if (!this.isLoaded || !this.map || !this.map.getSource('districts-source')) return
@@ -421,7 +828,53 @@ export class PortugalSatelliteEngine {
       })
     }
 
-    // 2.3. Atualizar Balizas de Presença Real (Apenas onde existem jogadores reais online)
+    // 2.2.1. Atualizar POIs de Disputas em Direto no ponto médio
+    const disputePOIFeatures = confrontations.map((c) => ({
+      type: 'Feature' as const,
+      geometry: {
+        type: 'Point' as const,
+        coordinates: c.centerMid || [
+          (c.centerA[0] + c.centerB[0]) / 2,
+          (c.centerA[1] + c.centerB[1]) / 2,
+        ],
+      },
+      properties: {
+        id: c.id,
+        title: `${c.districtA} vs ${c.districtB}`,
+      },
+    }))
+
+    const disputePOISource = this.map.getSource('disputes-pois-source') as any
+    if (disputePOISource && disputePOISource.setData) {
+      disputePOISource.setData({
+        type: 'FeatureCollection',
+        features: disputePOIFeatures,
+      })
+    }
+
+    // 2.2.2. Atualizar POIs de Eventos Especiais Reais
+    const eventFeatures = (events || this.eventsData).map((ev) => ({
+      type: 'Feature' as const,
+      geometry: {
+        type: 'Point' as const,
+        coordinates: ev.coordinates,
+      },
+      properties: {
+        id: ev.id,
+        title: ev.title,
+        district: ev.district,
+      },
+    }))
+
+    const eventsSource = this.map.getSource('events-source') as any
+    if (eventsSource && eventsSource.setData) {
+      eventsSource.setData({
+        type: 'FeatureCollection',
+        features: eventFeatures,
+      })
+    }
+
+    // 2.3. Atualizar Balizas de Presença Real por Distrito (Apenas onde existem jogadores reais online)
     const presenceFeatures = districts
       .filter((d) => d.onlineNow > 0 || d.isLeader)
       .map((d) => ({
@@ -446,6 +899,48 @@ export class PortugalSatelliteEngine {
       presenceSource.setData({
         type: 'FeatureCollection',
         features: presenceFeatures,
+      })
+    }
+  }
+
+  // 2.4. Atualizar Posição Geográfica Exata de Cada Jogador Online
+  public updatePlayers(players: ResolvedPlayerPin[]) {
+    this.playersData = players
+    this.playersMap.clear()
+    for (const p of players) {
+      this.playersMap.set(p.userId, p)
+    }
+
+    if (!this.isLoaded || !this.map) return
+
+    const playerFeatures = players.map((p) => ({
+      type: 'Feature' as const,
+      geometry: {
+        type: 'Point' as const,
+        coordinates: p.coords,
+      },
+      properties: {
+        userId: p.userId,
+        displayName: p.displayName,
+        photoURL: p.photoURL || '',
+        district: p.district,
+        city: p.city || '',
+        level: p.level,
+        xp: p.xp || 0,
+        activity: p.activity,
+        isCurrentUser: p.isCurrentUser,
+        color: p.isCurrentUser ? '#00e5ff' : '#10b981',
+        haloColor: p.isCurrentUser ? '#38bdf8' : '#34d399',
+        beaconRadius: p.isCurrentUser ? 10 : 7,
+        haloRadius: p.isCurrentUser ? 30 : 18,
+      },
+    }))
+
+    const playersSource = this.map.getSource('players-source') as any
+    if (playersSource && playersSource.setData) {
+      playersSource.setData({
+        type: 'FeatureCollection',
+        features: playerFeatures,
       })
     }
   }
@@ -590,6 +1085,21 @@ export class PortugalSatelliteEngine {
     const currentBearing = this.map.getBearing()
     const currentPitch = this.map.getPitch()
 
+    // Destaque transitório em distritos com presença online
+    const geoData = nationalGeoJSONRaw as unknown as FeatureCollection
+    geoData.features.forEach((feat, idx) => {
+      const p = feat.properties || {}
+      const dId = (p.id || '').toString().toLowerCase()
+      const dName = (p.name || '').toString().toLowerCase()
+      const district = this.districtMap.get(dId) || this.districtMap.get(dName)
+      if (district && district.onlineNow > 0) {
+        this.map.setFeatureState(
+          { source: 'districts-source', id: idx },
+          { hover: true }
+        )
+      }
+    })
+
     this.map.easeTo({
       pitch: Math.min(45, currentPitch + 15),
       bearing: currentBearing + 6,
@@ -602,6 +1112,23 @@ export class PortugalSatelliteEngine {
         bearing: currentBearing,
         duration: 900,
       })
+
+      // Restaurar estado dos distritos após o scan
+      setTimeout(() => {
+        geoData.features.forEach((feat, idx) => {
+          const p = feat.properties || {}
+          const dId = (p.id || '').toString().toLowerCase()
+          const dName = (p.name || '').toString().toLowerCase()
+          const district = this.districtMap.get(dId) || this.districtMap.get(dName)
+          if (district) {
+            this.map.setFeatureState(
+              { source: 'districts-source', id: idx },
+              { hover: this.hoveredDistrictId === district.id }
+            )
+          }
+        })
+      }, 2500)
+
       if (onComplete) onComplete()
     }, 1200)
   }
@@ -613,22 +1140,65 @@ export class PortugalSatelliteEngine {
     this.layersState[key] = visible
     if (!this.map || !this.map.getStyle()) return
 
+    const vis = visible ? 'visible' : 'none'
+
     if (key === 'satellite') {
-      this.map.setLayoutProperty('satellite-layer', 'visibility', visible ? 'visible' : 'none')
+      this.map.setLayoutProperty('satellite-layer', 'visibility', vis)
     } else if (key === 'terrain') {
-      this.map.setLayoutProperty('terrain-layer', 'visibility', visible ? 'visible' : 'none')
+      this.map.setLayoutProperty('terrain-layer', 'visibility', vis)
     } else if (key === 'roads') {
-      this.map.setLayoutProperty('roads-layer', 'visibility', visible ? 'visible' : 'none')
+      this.map.setLayoutProperty('roads-layer', 'visibility', vis)
     } else if (key === 'cities') {
-      this.map.setLayoutProperty('places-layer', 'visibility', visible ? 'visible' : 'none')
+      if (this.map.getLayer('places-layer')) this.map.setLayoutProperty('places-layer', 'visibility', vis)
+      if (this.map.getLayer('canonical-cities-beacon')) this.map.setLayoutProperty('canonical-cities-beacon', 'visibility', vis)
+      if (this.map.getLayer('canonical-cities-label')) this.map.setLayoutProperty('canonical-cities-label', 'visibility', vis)
     } else if (key === 'districts') {
-      this.map.setLayoutProperty('districts-line', 'visibility', visible ? 'visible' : 'none')
-      this.map.setLayoutProperty('districts-fill', 'visibility', visible ? 'visible' : 'none')
+      if (this.map.getLayer('districts-line')) this.map.setLayoutProperty('districts-line', 'visibility', vis)
+      if (this.map.getLayer('districts-fill')) this.map.setLayoutProperty('districts-fill', 'visibility', vis)
     } else if (key === 'players') {
-      this.map.setLayoutProperty('presence-beacon', 'visibility', visible ? 'visible' : 'none')
-      this.map.setLayoutProperty('presence-halo', 'visibility', visible ? 'visible' : 'none')
+      const playerLayers = [
+        'players-clusters-glow',
+        'players-clusters-core',
+        'players-clusters-count',
+        'players-unclustered-halo',
+        'players-unclustered-core',
+        'players-unclustered-label',
+        'presence-beacon',
+        'presence-halo',
+        'presence-label',
+      ]
+      for (const id of playerLayers) {
+        if (this.map.getLayer(id)) {
+          this.map.setLayoutProperty(id, 'visibility', vis)
+        }
+      }
     } else if (key === 'confrontations') {
-      this.map.setLayoutProperty('disputes-lines', 'visibility', visible ? 'visible' : 'none')
+      const disputeLayers = [
+        'disputes-lines',
+        'disputes-pois-glow',
+        'disputes-pois-core',
+        'disputes-pois-label',
+      ]
+      for (const id of disputeLayers) {
+        if (this.map.getLayer(id)) {
+          this.map.setLayoutProperty(id, 'visibility', vis)
+        }
+      }
+    } else if (key === 'events') {
+      const eventLayers = [
+        'events-glow',
+        'events-core',
+        'events-label',
+      ]
+      for (const id of eventLayers) {
+        if (this.map.getLayer(id)) {
+          this.map.setLayoutProperty(id, 'visibility', vis)
+        }
+      }
+    } else if (key === 'hotspots') {
+      if (this.map.getLayer('players-clusters-glow')) {
+        this.map.setLayoutProperty('players-clusters-glow', 'visibility', vis)
+      }
     }
   }
 
@@ -637,9 +1207,74 @@ export class PortugalSatelliteEngine {
   }
 
   // =========================================================
-  // 7. EVENTOS DE RATO E TOQUE
+  // 7. LOCALIZAÇÃO DO UTILIZADOR & PESQUISA INTELIGENTE
+  // =========================================================
+  public locateUser(coords: [number, number], zoom = 13.2) {
+    if (!this.map) return
+    this.map.flyTo({
+      center: coords,
+      zoom,
+      duration: 1400,
+      pitch: 20,
+      essential: true,
+    })
+  }
+
+  public searchAndFocus(queryStr: string): boolean {
+    if (!this.map || !queryStr.trim()) return false
+    const q = queryStr.toLowerCase().trim()
+
+    // 1. Procurar por distrito
+    const district = this.districtMap.get(q)
+    if (district) {
+      this.focusDistrict(district)
+      if (this.callbacks.onSelectDistrict) {
+        this.callbacks.onSelectDistrict(district)
+      }
+      return true
+    }
+
+    // 2. Procurar por cidade canónica
+    const city = CANONICAL_CITIES.find(
+      (c) => c.name.toLowerCase() === q || c.id.toLowerCase() === q
+    )
+    if (city) {
+      this.map.flyTo({
+        center: city.coordinates,
+        zoom: 12.5,
+        duration: 1200,
+        pitch: 20,
+        essential: true,
+      })
+      const parentDist = this.districtMap.get(city.district.toLowerCase())
+      if (parentDist && this.callbacks.onSelectDistrict) {
+        this.callbacks.onSelectDistrict(parentDist)
+      }
+      return true
+    }
+
+    // 3. Procurar por arquipélago
+    if (q.includes('acores') || q.includes('açores')) {
+      this.fitSector('acores')
+      return true
+    }
+    if (q.includes('madeira')) {
+      this.fitSector('madeira')
+      return true
+    }
+    if (q.includes('continente') || q.includes('portugal')) {
+      this.fitSector('continente')
+      return true
+    }
+
+    return false
+  }
+
+  // =========================================================
+  // 8. EVENTOS DE RATO E TOQUE
   // =========================================================
   private bindEvents() {
+    // 8.1. Hover e Clique em Distritos
     this.map.on('mousemove', 'districts-fill', (e) => {
       if (e.features && e.features.length > 0) {
         this.map.getCanvas().style.cursor = 'pointer'
@@ -683,6 +1318,88 @@ export class PortugalSatelliteEngine {
           }
         }
       }
+    })
+
+    // 8.2. Clique em Clusters de Jogadores — Expansão fluida com zoom
+    this.map.on('click', 'players-clusters-core', (e) => {
+      const features = this.map.queryRenderedFeatures(e.point, { layers: ['players-clusters-core'] })
+      if (!features.length) return
+      const clusterId = features[0].properties.cluster_id
+      const source = this.map.getSource('players-source') as any
+      if (source && source.getClusterExpansionZoom) {
+        source.getClusterExpansionZoom(clusterId, (err: any, zoom: number) => {
+          if (err) return
+          const coords = (features[0].geometry as any).coordinates
+          this.map.easeTo({
+            center: coords,
+            zoom: Math.min(zoom + 0.6, 14),
+            duration: 700,
+          })
+        })
+      }
+    })
+
+    this.map.on('mouseenter', 'players-clusters-core', () => {
+      this.map.getCanvas().style.cursor = 'pointer'
+    })
+    this.map.on('mouseleave', 'players-clusters-core', () => {
+      this.map.getCanvas().style.cursor = ''
+    })
+
+    // 8.3. Clique em Jogador Individual — Dispara painel contextual
+    this.map.on('click', 'players-unclustered-core', (e) => {
+      if (e.features && e.features.length > 0) {
+        const feat = e.features[0]
+        const p = feat.properties || {}
+        const userId = p.userId
+        const player = this.playersMap.get(userId)
+        if (player && this.callbacks.onSelectPlayer) {
+          this.callbacks.onSelectPlayer(player)
+        }
+      }
+    })
+
+    this.map.on('mouseenter', 'players-unclustered-core', () => {
+      this.map.getCanvas().style.cursor = 'pointer'
+    })
+    this.map.on('mouseleave', 'players-unclustered-core', () => {
+      this.map.getCanvas().style.cursor = ''
+    })
+
+    // 8.4. Clique em Disputa Territorial — Dispara painel contextual
+    this.map.on('click', 'disputes-pois-core', (e) => {
+      if (e.features && e.features.length > 0) {
+        const feat = e.features[0]
+        const p = feat.properties || {}
+        const dispute = this.confrontationsMap.get(p.id)
+        if (dispute && this.callbacks.onSelectDispute) {
+          this.callbacks.onSelectDispute(dispute)
+        }
+      }
+    })
+    this.map.on('mouseenter', 'disputes-pois-core', () => {
+      this.map.getCanvas().style.cursor = 'pointer'
+    })
+    this.map.on('mouseleave', 'disputes-pois-core', () => {
+      this.map.getCanvas().style.cursor = ''
+    })
+
+    // 8.5. Clique em Evento Especial — Dispara painel contextual
+    this.map.on('click', 'events-core', (e) => {
+      if (e.features && e.features.length > 0) {
+        const feat = e.features[0]
+        const p = feat.properties || {}
+        const ev = this.eventsMap.get(p.id)
+        if (ev && this.callbacks.onSelectEvent) {
+          this.callbacks.onSelectEvent(ev)
+        }
+      }
+    })
+    this.map.on('mouseenter', 'events-core', () => {
+      this.map.getCanvas().style.cursor = 'pointer'
+    })
+    this.map.on('mouseleave', 'events-core', () => {
+      this.map.getCanvas().style.cursor = ''
     })
   }
 

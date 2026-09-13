@@ -7,38 +7,66 @@ import {
   type MapLayersState,
   DEFAULT_MAP_LAYERS,
 } from '@/src/game/world/PortugalSatelliteEngine'
-import { usePortugalVivoData, type PortugalVivoDistrict } from '@/src/hooks/usePortugalVivoData'
+import {
+  usePortugalVivoData,
+  type PortugalVivoDistrict,
+  type ResolvedPlayerPin,
+  type ActiveConfrontation,
+} from '@/src/hooks/usePortugalVivoData'
+import type { NexusEvent } from '@/lib/portugal-map-nexus-data'
+import { useAuth } from '@/components/auth-provider'
+import { sendRealHeartbeat } from '@/lib/real-presence'
 import { PortugalAgoraHUD } from './PortugalAgoraHUD'
 import { MapLayersWidget } from './MapLayersWidget'
 import { DistrictActionPanel } from './DistrictActionPanel'
-import { ZoomIn, ZoomOut, Compass, RotateCcw } from 'lucide-react'
+import { PlayerContextCard } from './PlayerContextCard'
+import { EventContextCard } from './EventContextCard'
+import { DisputeContextCard } from './DisputeContextCard'
+import type { SearchResultItem } from './MapSearchBar'
+import { ZoomIn, ZoomOut, Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface PortugalVivoMapProps {
   initialDistrict?: string
   className?: string
   onSelectDistrict?: (district: PortugalVivoDistrict | null) => void
+  onSelectPlayer?: (player: ResolvedPlayerPin | null) => void
 }
 
 export function PortugalVivoMap({
   initialDistrict,
   className,
   onSelectDistrict: externalSelectDistrict,
+  onSelectPlayer: externalSelectPlayer,
 }: PortugalVivoMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const engineRef = useRef<PortugalSatelliteEngine | null>(null)
 
+  const { user, profile } = useAuth()
   const [isEngineReady, setIsEngineReady] = useState(false)
   const [currentSector, setCurrentSector] = useState<MapSector>('continente')
   const [selectedDistrictId, setSelectedDistrictId] = useState<string | null>(() => initialDistrict || null)
+  const [selectedPlayer, setSelectedPlayer] = useState<ResolvedPlayerPin | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<NexusEvent | null>(null)
+  const [selectedDispute, setSelectedDispute] = useState<ActiveConfrontation | null>(null)
   const [layersOpen, setLayersOpen] = useState(false)
   const [layersState, setLayersState] = useState<MapLayersState>(DEFAULT_MAP_LAYERS)
   const [isScanning, setIsScanning] = useState(false)
+  const [scanResultText, setScanResultText] = useState<string | null>(null)
+  const [geoNoticeText, setGeoNoticeText] = useState<string | null>(null)
+  const [isLocating, setIsLocating] = useState(false)
 
   // 1. Hook de Dados Reais da Nação em Tempo Real (Firestore)
-  const data = usePortugalVivoData()
+  const data = usePortugalVivoData(user?.uid)
 
-  // Distrito selecionado derivado diretamente dos dados reativos em tempo real
+  // Enviar heartbeat de presença imediato ao abrir o mapa de Portugal
+  useEffect(() => {
+    if (user?.uid) {
+      sendRealHeartbeat(user, profile, 'browsing')
+    }
+  }, [user?.uid, profile?.district])
+
+  // Distrito selecionado derivado diretamente dos dados reativos
   const selectedDistrict = useMemo(() => {
     if (!selectedDistrictId) return null
     return data.districtMap.get(selectedDistrictId.toLowerCase()) || null
@@ -55,10 +83,34 @@ export function PortugalVivoMap({
       initialDistrictId: initialDistrict,
       layers: layersState,
       onSelectDistrict: (district) => {
+        setSelectedPlayer(null)
+        setSelectedEvent(null)
+        setSelectedDispute(null)
         setSelectedDistrictId(district ? district.id : null)
         if (externalSelectDistrict) {
           externalSelectDistrict(district)
         }
+      },
+      onSelectPlayer: (player) => {
+        setSelectedDistrictId(null)
+        setSelectedEvent(null)
+        setSelectedDispute(null)
+        setSelectedPlayer(player)
+        if (externalSelectPlayer) {
+          externalSelectPlayer(player)
+        }
+      },
+      onSelectEvent: (event) => {
+        setSelectedDistrictId(null)
+        setSelectedPlayer(null)
+        setSelectedDispute(null)
+        setSelectedEvent(event)
+      },
+      onSelectDispute: (dispute) => {
+        setSelectedDistrictId(null)
+        setSelectedPlayer(null)
+        setSelectedEvent(null)
+        setSelectedDispute(dispute)
       },
       onSectorChange: (sector) => {
         setCurrentSector(sector)
@@ -83,19 +135,25 @@ export function PortugalVivoMap({
       engine.destroy()
       engineRef.current = null
     }
-  }, [initialDistrict, externalSelectDistrict]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [initialDistrict, externalSelectDistrict, externalSelectPlayer]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 3. Propagação de Dados Reais para o Motor
+  // 3. Propagação de Dados Reais para o Motor (Distritos, Duelos, Jogadores e Eventos)
   useEffect(() => {
     if (engineRef.current && isEngineReady && data.districts.length > 0) {
-      engineRef.current.updateData(data.districts, data.confrontations)
+      engineRef.current.updateData(
+        data.districts,
+        data.confrontations,
+        data.onlinePlayers,
+        data.activeEvents
+      )
     }
-  }, [data.districts, data.confrontations, isEngineReady])
+  }, [data.districts, data.confrontations, data.onlinePlayers, data.activeEvents, isEngineReady])
 
   // 4. Seleção Geográfica de Arquipélago / Continente
   const handleSelectSector = useCallback((sector: MapSector) => {
     setCurrentSector(sector)
     setSelectedDistrictId(null)
+    setSelectedPlayer(null)
     engineRef.current?.fitSector(sector)
   }, [])
 
@@ -108,22 +166,119 @@ export function PortugalVivoMap({
     })
   }, [])
 
-  // 6. Varredura Tática "Scan Territorial"
+  // 6. Varredura Tática "Scan Territorial" Real
   const handleTriggerScan = useCallback(() => {
     if (isScanning || !engineRef.current) return
     setIsScanning(true)
+    setScanResultText(null)
+
     engineRef.current.triggerTerritorialScan(() => {
       setIsScanning(false)
-    })
-  }, [isScanning])
+      const distStr = data.activeDistrictsCount === 1 ? '1 distrito ativo' : `${data.activeDistrictsCount} distritos ativos`
+      const playStr = data.onlineCount === 1 ? '1 jogador online' : `${data.onlineCount} jogadores online`
+      const dispStr = data.confrontations.length === 1 ? '1 disputa' : `${data.confrontations.length} disputas`
+      const evtStr = data.activeEvents.length === 1 ? '1 evento' : `${data.activeEvents.length} eventos`
 
-  // 7. Repor Visão Nacional
+      setScanResultText(`SCAN CONCLUÍDO: ${playStr} • ${distStr} • ${dispStr} • ${evtStr}`)
+
+      // Auto-limpeza do banner após 7 segundos
+      setTimeout(() => {
+        setScanResultText(null)
+      }, 7000)
+    })
+  }, [isScanning, data.onlineCount, data.activeDistrictsCount, data.confrontations.length, data.activeEvents.length])
+
+  // 7. Localização do Próprio Jogador ("📍 MINHA LOCALIZAÇÃO")
+  const handleLocateMe = useCallback(() => {
+    if (isLocating || !engineRef.current) return
+
+    // Se já tivermos o pino do utilizador resolvido com coordenadas GPS
+    if (data.currentUserPin?.coords) {
+      engineRef.current.locateUser(data.currentUserPin.coords, 13.5)
+      setGeoNoticeText('Posição identificada — centrado na tua localização!')
+      setTimeout(() => setGeoNoticeText(null), 4000)
+      return
+    }
+
+    setIsLocating(true)
+
+    if (typeof navigator !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setIsLocating(false)
+          const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude]
+
+          // Guardar na sessão para próximas requisições
+          try {
+            sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
+          } catch {}
+
+          // Atualizar presença com coordenadas GPS exatas no Firestore
+          sendRealHeartbeat(user, profile, 'browsing', coords)
+
+          // Voar até ao local com zoom adequado
+          engineRef.current?.locateUser(coords, 13.5)
+          setGeoNoticeText('GPS confirmado — centrado na tua posição!')
+          setTimeout(() => setGeoNoticeText(null), 4000)
+        },
+        (err) => {
+          setIsLocating(false)
+          console.debug('[GEOLOCATION] Não autorizada ou indisponível:', err?.message)
+
+          // Fallback gracioso: focar o distrito do perfil com aviso não-bloqueante
+          const userDistrict = profile?.district || 'Lisboa'
+          const targetDist = data.districtMap.get(userDistrict.toLowerCase())
+          if (targetDist) {
+            engineRef.current?.locateUser(targetDist.center, 10.5)
+            setSelectedDistrictId(targetDist.id)
+            setGeoNoticeText(`Localização GPS indisponível — a focar ${targetDist.name}.`)
+          } else {
+            engineRef.current?.fitSector('continente')
+            setGeoNoticeText('Localização GPS indisponível — a mostrar Continente.')
+          }
+          setTimeout(() => setGeoNoticeText(null), 4500)
+        },
+        { timeout: 8000, enableHighAccuracy: false }
+      )
+    } else {
+      setIsLocating(false)
+      const userDistrict = profile?.district || 'Lisboa'
+      const targetDist = data.districtMap.get(userDistrict.toLowerCase())
+      if (targetDist) {
+        engineRef.current?.locateUser(targetDist.center, 10.5)
+        setGeoNoticeText(`Navegador sem GPS — a focar ${targetDist.name}.`)
+        setTimeout(() => setGeoNoticeText(null), 4000)
+      }
+    }
+  }, [isLocating, data.currentUserPin, data.districtMap, user, profile])
+
+  // 8. Seleção de Resultado de Pesquisa
+  const handleSelectSearchResult = useCallback(
+    (item: SearchResultItem) => {
+      setSelectedPlayer(null)
+      if (item.coordinates) {
+        const zoom = item.type === 'city' ? 12.8 : item.type === 'island' ? 10.5 : 9.5
+        engineRef.current?.locateUser(item.coordinates, zoom)
+      }
+
+      if (item.slug && (item.type === 'district' || item.type === 'island')) {
+        const dist = data.districtMap.get(item.slug.toLowerCase())
+        if (dist) {
+          setSelectedDistrictId(dist.id)
+        }
+      }
+    },
+    [data.districtMap]
+  )
+
+  // 9. Repor Visão Nacional
   const handleResetView = useCallback(() => {
     setSelectedDistrictId(null)
+    setSelectedPlayer(null)
     engineRef.current?.clearSelection()
   }, [])
 
-  // 8. Alternar Modo 3D Orbital
+  // 10. Alternar Modo 3D Orbital
   const handleToggle3D = useCallback(() => {
     engineRef.current?.toggle3D()
   }, [])
@@ -143,7 +298,7 @@ export function PortugalVivoMap({
         className
       )}
     >
-      {/* HUD Superior Oficial com Dados Reais */}
+      {/* HUD Superior Oficial com Dados 100% Reais e Ações Rápidas */}
       <PortugalAgoraHUD
         onlineCount={data.onlineCount}
         activeDistrictsCount={data.activeDistrictsCount}
@@ -155,8 +310,20 @@ export function PortugalVivoMap({
         onToggle3D={handleToggle3D}
         onResetView={handleResetView}
         onTriggerScan={handleTriggerScan}
+        onLocateMe={handleLocateMe}
+        onSelectSearchResult={handleSelectSearchResult}
         isScanning={isScanning}
+        scanResultText={scanResultText}
+        isLocating={isLocating}
+        livePulseMessages={data.livePulseMessages}
       />
+
+      {/* Notificação Flutuante de Localização GPS */}
+      {geoNoticeText && (
+        <div className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 z-40 px-4 py-2 rounded-xl bg-slate-950/90 border border-cyan-500/30 text-cyan-300 font-mono text-xs shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200">
+          {geoNoticeText}
+        </div>
+      )}
 
       {/* Widget de Camadas */}
       {layersOpen && (
@@ -201,8 +368,32 @@ export function PortugalVivoMap({
         </button>
       </div>
 
+      {/* Painel Contextual de Jogador Selecionado */}
+      {selectedPlayer && (
+        <PlayerContextCard
+          player={selectedPlayer}
+          onClose={() => setSelectedPlayer(null)}
+        />
+      )}
+
+      {/* Painel Contextual de Evento Selecionado */}
+      {selectedEvent && (
+        <EventContextCard
+          event={selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+        />
+      )}
+
+      {/* Painel Contextual de Disputa Selecionada */}
+      {selectedDispute && (
+        <DisputeContextCard
+          dispute={selectedDispute}
+          onClose={() => setSelectedDispute(null)}
+        />
+      )}
+
       {/* Painel de Ação de Distrito Selecionado */}
-      {selectedDistrict && (
+      {selectedDistrict && !selectedPlayer && !selectedEvent && !selectedDispute && (
         <DistrictActionPanel
           district={selectedDistrict}
           onClose={() => {

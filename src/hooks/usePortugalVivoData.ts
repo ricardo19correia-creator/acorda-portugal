@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { collection, query, where, limit, onSnapshot } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { db, auth } from '@/lib/firebase'
 import { filterActiveRealPlayers } from '@/lib/real-presence'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories, type DistrictWarTerritory } from '@/lib/district-war'
 import { DISTRICTS_LIST, type DistrictItem } from '@/src/data/districts'
-import { CANONICAL_EVENTS, type NexusEvent } from '@/lib/portugal-map-nexus-data'
+import { CANONICAL_EVENTS, CANONICAL_CITIES, type NexusEvent } from '@/lib/portugal-map-nexus-data'
 
 export interface ActiveConfrontation {
   id: string
@@ -23,8 +23,18 @@ export interface ActiveConfrontation {
   onlineB: number
   centerA: [number, number]
   centerB: [number, number]
+  centerMid: [number, number]
   leaderName: string
   gapPower: number
+  player1Name?: string
+  player2Name?: string
+}
+
+export interface LivePulseMessage {
+  id: string
+  icon: string
+  text: string
+  color: string
 }
 
 export interface PortugalVivoDistrict extends DistrictItem {
@@ -44,6 +54,23 @@ export interface PortugalVivoDistrict extends DistrictItem {
   topContributors: DistrictWarTerritory['topContributors']
 }
 
+export interface ResolvedPlayerPin {
+  userId: string
+  displayName: string
+  photoURL?: string | null
+  district: string
+  city?: string
+  coords: [number, number] // [lng, lat]
+  activity: 'playing' | 'duel' | 'browsing'
+  lastSeen: number
+  online: boolean
+  level: number
+  xp?: number
+  title?: string
+  equippedFrame?: string
+  isCurrentUser: boolean
+}
+
 export interface PortugalVivoDataState {
   districts: PortugalVivoDistrict[]
   districtMap: Map<string, PortugalVivoDistrict>
@@ -52,6 +79,9 @@ export interface PortugalVivoDataState {
   nationalLeader: PortugalVivoDistrict | null
   onlineCount: number
   activeDistrictsCount: number
+  onlinePlayers: ResolvedPlayerPin[]
+  currentUserPin: ResolvedPlayerPin | null
+  livePulseMessages: LivePulseMessage[]
   loading: boolean
   error: string | null
   lastUpdated: number
@@ -67,11 +97,25 @@ function normalizeKey(str: string): string {
     .trim()
 }
 
-export function usePortugalVivoData(): PortugalVivoDataState {
+// Dispersão determinística suave para que múltiplos jogadores no mesmo centroide não se sobreponham
+function getDeterministicOffset(str: string): [number, number] {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i)
+    hash |= 0
+  }
+  const angle = Math.abs(hash % 360) * (Math.PI / 180)
+  // Desvio entre ~500m e ~1.6km (0.005 a 0.015 graus)
+  const dist = 0.006 + (Math.abs(hash >> 8) % 100) / 9000
+  return [Math.cos(angle) * dist, Math.sin(angle) * dist]
+}
+
+export function usePortugalVivoData(overrideUserId?: string | null): PortugalVivoDataState {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
   const [rawPresenceDocs, setRawPresenceDocs] = useState<any[]>([])
+  const [activeDuels, setActiveDuels] = useState<any[]>([])
   const [presenceTick, setPresenceTick] = useState(() => Date.now())
   const [lastUpdated, setLastUpdated] = useState(() => Date.now())
 
@@ -108,7 +152,34 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     }
   }, [])
 
-  // 2. Tique periódico para expirar heartbeats com TTL de 75s
+  // 2. Subscrição a Duelos Reais em Andamento (Disputas Reais — ZERO fake data)
+  useEffect(() => {
+    let unsubscribe: (() => void) | undefined
+    try {
+      const duelsCol = collection(db, 'duels')
+      const q = query(duelsCol, where('status', '==', 'playing'), limit(15))
+
+      unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          const docs: any[] = []
+          snapshot.forEach((snap) => {
+            docs.push({ id: snap.id, ...snap.data() })
+          })
+          setActiveDuels(docs)
+        },
+        (err) => {
+          console.debug('[usePortugalVivoData] Duelos em direto (não-crítico):', err?.message)
+        }
+      )
+    } catch {}
+
+    return () => {
+      if (unsubscribe) unsubscribe()
+    }
+  }, [])
+
+  // 3. Tique periódico para expirar heartbeats com TTL de 75s
   useEffect(() => {
     const timer = setInterval(() => {
       setPresenceTick(Date.now())
@@ -116,7 +187,7 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     return () => clearInterval(timer)
   }, [])
 
-  // 3. Subscrição aos Rankings Oficiais da Nação
+  // 4. Subscrição aos Rankings Oficiais da Nação
   useEffect(() => {
     let isSubscribed = true
     try {
@@ -147,12 +218,13 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     }
   }, [])
 
-  // 4. Filtragem estrita de Humanos Reais sem duplicação e dentro do TTL
+  // 5. Filtragem estrita de Humanos Reais sem duplicação e dentro do TTL
+  const currentUid = overrideUserId !== undefined ? (overrideUserId || undefined) : auth.currentUser?.uid
   const activeHumanState = useMemo(() => {
-    return filterActiveRealPlayers(rawPresenceDocs, undefined, presenceTick)
-  }, [rawPresenceDocs, presenceTick])
+    return filterActiveRealPlayers(rawPresenceDocs, currentUid, presenceTick)
+  }, [rawPresenceDocs, currentUid, presenceTick])
 
-  // 5. Contagem real por distrito a partir de utilizadores ativos
+  // 6. Contagem real por distrito a partir de utilizadores ativos
   const districtOnlineMap = useMemo(() => {
     const counts = new Map<string, number>()
     for (const player of activeHumanState.players) {
@@ -164,12 +236,21 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     return counts
   }, [activeHumanState])
 
-  // 6. Cálculo Territorial Autorizado (XP, Vitórias, Jogos e Poder)
+  // 7. Mapeamento de Cidades Oficiais para Coordenadas Rápidas
+  const cityCoordsLookup = useMemo(() => {
+    const map = new Map<string, [number, number]>()
+    for (const city of CANONICAL_CITIES) {
+      map.set(normalizeKey(city.name), city.coordinates)
+    }
+    return map
+  }, [])
+
+  // 8. Cálculo Territorial Autorizado (XP, Vitórias, Jogos e Poder)
   const warTerritories = useMemo(() => {
     return calculateDistrictWarTerritories(nationalPlayers)
   }, [nationalPlayers])
 
-  // 7. Agregação e Mapeamento dos 29 Distritos e Ilhas de Portugal
+  // 9. Agregação e Mapeamento dos 29 Distritos e Ilhas de Portugal
   const { districts, districtMap, nationalLeader } = useMemo(() => {
     const warLookup = new Map<string, DistrictWarTerritory>()
     for (const war of warTerritories) {
@@ -221,7 +302,7 @@ export function usePortugalVivoData(): PortugalVivoDataState {
         pos,
         dominancePercentage: dominance,
         isLeader: pos === 1 && power > 0,
-        inDisputeWith: null, // Preenchido no passo de confrontos
+        inDisputeWith: null,
         activeEvent: ev,
         king: war?.king || null,
         topContributors: war?.topContributors || [],
@@ -248,64 +329,186 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     }
   }, [warTerritories, districtOnlineMap])
 
-  // 8. Deteção Real de Confrontos Territoriais (Disputas Reais Ativas)
+  // 10. Resolução Geográfica de Jogadores Online (GPS real ou centroide com dispersão suave)
+  const { onlinePlayers, currentUserPin } = useMemo(() => {
+    let currentPin: ResolvedPlayerPin | null = null
+
+    const resolved: ResolvedPlayerPin[] = activeHumanState.players.map((p) => {
+      const isCurrent = Boolean(currentUid && p.userId === currentUid)
+      let coords: [number, number]
+
+      if (p.coords && Array.isArray(p.coords) && p.coords.length === 2) {
+        // Coordenadas GPS exatas fornecidas pelo utilizador
+        coords = [p.coords[0], p.coords[1]]
+      } else {
+        // Fallback para cidade ou distrito
+        let baseCoords: [number, number] | null = null
+        if (p.city) {
+          baseCoords = cityCoordsLookup.get(normalizeKey(p.city)) || null
+        }
+        if (!baseCoords) {
+          const d = districtMap.get(normalizeKey(p.district))
+          baseCoords = d ? d.center : [-8.2245, 39.3999] // Centro de Portugal
+        }
+
+        const offset = getDeterministicOffset(p.userId)
+        coords = [baseCoords[0] + offset[0], baseCoords[1] + offset[1]]
+      }
+
+      const pin: ResolvedPlayerPin = {
+        userId: p.userId,
+        displayName: p.displayName,
+        photoURL: p.photoURL,
+        district: p.district || 'Portugal',
+        city: p.city,
+        coords,
+        activity: p.activity,
+        lastSeen: p.lastSeen,
+        online: true,
+        level: p.level || 1,
+        xp: p.xp,
+        title: p.title,
+        equippedFrame: p.equippedFrame,
+        isCurrentUser: isCurrent,
+      }
+
+      if (isCurrent) {
+        currentPin = pin
+      }
+
+      return pin
+    })
+
+    return { onlinePlayers: resolved, currentUserPin: currentPin }
+  }, [activeHumanState.players, currentUid, cityCoordsLookup, districtMap])
+
+  // 11. Deteção Real de Confrontos Territoriais (Apenas Duelos em Direto — ZERO fake data)
   const confrontations = useMemo<ActiveConfrontation[]>(() => {
-    const activeContenders = districts.filter((d) => d.power > 0)
-    if (activeContenders.length < 2) return []
+    if (activeDuels.length === 0) return []
 
     const disputes: ActiveConfrontation[] = []
-    const processedPairs = new Set<string>()
+    for (const duel of activeDuels) {
+      const p1 = duel.player1 || duel.players?.[0]
+      const p2 = duel.player2 || duel.players?.[1]
+      if (!p1 || !p2) continue
 
-    for (let i = 0; i < Math.min(activeContenders.length - 1, 6); i++) {
-      const a = activeContenders[i]
-      const b = activeContenders[i + 1]
+      const dName1 = p1.district || 'Portugal'
+      const dName2 = p2.district || 'Portugal'
+      const distA = districtMap.get(normalizeKey(dName1))
+      const distB = districtMap.get(normalizeKey(dName2))
 
-      if (!a || !b) continue
-      const pairKey = [a.id, b.id].sort().join('-')
-      if (processedPairs.has(pairKey)) continue
-
-      const higher = Math.max(a.power, b.power)
-      const lower = Math.min(a.power, b.power)
-      const diffRatio = higher > 0 ? (higher - lower) / higher : 1
-
-      if (diffRatio <= 0.25) {
-        processedPairs.add(pairKey)
-        const gap = higher - lower
-        const leaderName = a.power >= b.power ? a.name : b.name
-
-        a.inDisputeWith = b.name
-        b.inDisputeWith = a.name
-
+      if (distA && distB && distA.id !== distB.id) {
+        const centerMid: [number, number] = [
+          (distA.center[0] + distB.center[0]) / 2,
+          (distA.center[1] + distB.center[1]) / 2,
+        ]
         disputes.push({
-          id: `dispute_${a.id}_${b.id}`,
-          districtA: a.name,
-          districtB: b.name,
-          slugA: a.slug,
-          slugB: b.slug,
-          powerA: a.power,
-          powerB: b.power,
-          powerFormattedA: a.powerFormatted,
-          powerFormattedB: b.powerFormatted,
-          onlineA: a.onlineNow,
-          onlineB: b.onlineNow,
-          centerA: a.center,
-          centerB: b.center,
-          leaderName,
-          gapPower: gap,
+          id: `duel_${duel.id}`,
+          districtA: distA.name,
+          districtB: distB.name,
+          slugA: distA.slug,
+          slugB: distB.slug,
+          powerA: distA.power,
+          powerB: distB.power,
+          powerFormattedA: distA.powerFormatted,
+          powerFormattedB: distB.powerFormatted,
+          onlineA: distA.onlineNow,
+          onlineB: distB.onlineNow,
+          centerA: distA.center,
+          centerB: distB.center,
+          centerMid,
+          leaderName: distA.power >= distB.power ? distA.name : distB.name,
+          gapPower: Math.abs(distA.power - distB.power),
+          player1Name: p1.displayName || 'Jogador 1',
+          player2Name: p2.displayName || 'Jogador 2',
         })
       }
     }
-
     return disputes
-  }, [districts])
+  }, [activeDuels, districtMap])
 
-  // 9. Métricas Nacionais Agregadas
+  // 12. Métricas Nacionais Agregadas Estritamente Reais (ZERO MOCK DATA)
   const onlineCount = activeHumanState.humanOnline
-  const activeDistrictsCount = districts.filter((d) => d.onlineNow > 0 || d.power > 0).length
 
+  // Regra Master: Apenas distritos que possuem pelo menos 1 jogador real online agora!
+  const activeDistrictsCount = districts.filter((d) => d.onlineNow > 0).length
+
+  // Eventos reais ativos (0 se não houver eventos ativos)
   const activeEvents = useMemo(() => {
     return CANONICAL_EVENTS.filter((e) => e.status === 'active')
   }, [])
+
+  // 13. Feed Contextual em Tempo Real "O Que Está a Acontecer" (ZERO FAKE DATA)
+  const livePulseMessages = useMemo<LivePulseMessage[]>(() => {
+    const msgs: LivePulseMessage[] = []
+
+    if (onlineCount === 0) {
+      msgs.push({
+        id: 'quiet',
+        icon: '🇵🇹',
+        text: 'Portugal tranquilo — entra e sê o primeiro a marcar presença!',
+        color: 'text-slate-400',
+      })
+      return msgs
+    }
+
+    // 1. Mensagem de presença geral
+    msgs.push({
+      id: 'presence',
+      icon: '🟢',
+      text:
+        onlineCount === 1
+          ? '1 jogador ativo a explorar Portugal agora'
+          : `${onlineCount} jogadores online em atividade pelo país`,
+      color: 'text-emerald-400',
+    })
+
+    // 2. Hotspots distritais (distrito com maior número de jogadores online > 1)
+    const sortedByOnline = [...districts].sort((a, b) => b.onlineNow - a.onlineNow)
+    if (sortedByOnline[0] && sortedByOnline[0].onlineNow >= 2) {
+      const top = sortedByOnline[0]
+      msgs.push({
+        id: `hotspot_${top.id}`,
+        icon: '🔥',
+        text: `${top.name} está em alta com ${top.onlineNow} jogadores online`,
+        color: 'text-amber-400',
+      })
+    }
+
+    // 3. Disputas em direto
+    if (confrontations.length > 0) {
+      const disp = confrontations[0]
+      msgs.push({
+        id: `duel_${disp.id}`,
+        icon: '⚔️',
+        text: `Duelo em direto: ${disp.districtA} vs ${disp.districtB}`,
+        color: 'text-amber-300',
+      })
+    }
+
+    // 4. Eventos especiais ativos
+    if (activeEvents.length > 0) {
+      const ev = activeEvents[0]
+      msgs.push({
+        id: `evt_${ev.id}`,
+        icon: '⚡',
+        text: `Evento ativo: ${ev.title} em ${ev.district}`,
+        color: 'text-rose-400',
+      })
+    }
+
+    // 5. Liderança nacional
+    if (nationalLeader && nationalLeader.power > 0) {
+      msgs.push({
+        id: `leader_${nationalLeader.id}`,
+        icon: '👑',
+        text: `${nationalLeader.name} comanda o ranking nacional (#1)`,
+        color: 'text-amber-400',
+      })
+    }
+
+    return msgs
+  }, [onlineCount, districts, confrontations, activeEvents, nationalLeader])
 
   const refetch = useCallback(() => {
     setLoading(true)
@@ -320,6 +523,9 @@ export function usePortugalVivoData(): PortugalVivoDataState {
     nationalLeader,
     onlineCount,
     activeDistrictsCount,
+    onlinePlayers,
+    currentUserPin,
+    livePulseMessages,
     loading,
     error,
     lastUpdated,

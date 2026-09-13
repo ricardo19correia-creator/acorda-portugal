@@ -42,6 +42,11 @@ export function DistrictActionPanel({
 
   return (
     <div className="pointer-events-auto absolute bottom-[calc(4.25rem+env(safe-area-inset-bottom,0px))] sm:bottom-5 left-3 right-3 sm:right-auto sm:left-4 z-40 w-auto sm:w-96 rounded-3xl bg-slate-950/92 p-4 sm:p-5 border border-white/15 shadow-2xl backdrop-blur-xl animate-slideUp select-none">
+      {/* Puxador táctil mobile */}
+      <div className="flex sm:hidden justify-center pb-2">
+        <div className="h-1 w-10 rounded-full bg-white/20" />
+      </div>
+
       {/* Topo do Painel */}
       <div className="flex items-start justify-between gap-2 pb-3 border-b border-white/10">
         <div className="space-y-1">

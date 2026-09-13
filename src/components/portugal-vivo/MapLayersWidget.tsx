@@ -17,13 +17,15 @@ export function MapLayersWidget({
   onClose,
 }: MapLayersWidgetProps) {
   const layerOptions: Array<{ key: keyof MapLayersState; label: string; icon: string }> = [
-    { key: 'satellite', label: 'Satélite Real', icon: '🛰️' },
+    { key: 'players', label: 'Jogadores Online', icon: '🟢' },
+    { key: 'hotspots', label: 'Hotspots de Atividade', icon: '🔥' },
+    { key: 'districts', label: 'Territórios / Distritos', icon: '🗺️' },
+    { key: 'cities', label: 'Cidades Oficiais', icon: '🏙️' },
+    { key: 'events', label: 'Eventos Especiais', icon: '⚡' },
+    { key: 'confrontations', label: 'Disputas Territoriais', icon: '⚔️' },
+    { key: 'satellite', label: 'Satélite Natural', icon: '🛰️' },
     { key: 'terrain', label: 'Relevo / Topografia', icon: '🏔️' },
     { key: 'roads', label: 'Rede Viária', icon: '🛣️' },
-    { key: 'cities', label: 'Cidades & Povoados', icon: '🏙️' },
-    { key: 'districts', label: 'Limites Distritais', icon: '🗺️' },
-    { key: 'players', label: 'Presença de Jogadores', icon: '🟢' },
-    { key: 'confrontations', label: 'Confrontos Territoriais', icon: '⚔️' },
   ]
 
   return (

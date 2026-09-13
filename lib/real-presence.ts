@@ -8,10 +8,13 @@ export interface RealPlayerPresence {
   displayName: string
   photoURL?: string | null
   district: string
+  city?: string
+  coords?: [number, number] // [lng, lat]
   activity: RealUserActivity
   lastSeen: number
   online: boolean
   level?: number
+  xp?: number
   title?: string
   equippedFrame?: string
 }
@@ -24,7 +27,7 @@ export interface RealCommunityState {
 }
 
 export const HEARTBEAT_INTERVAL_MS = 35_000 // 35 segundos
-export const OFFLINE_TTL_MS = 75_000 // 75 segundos de tolerância para desconexões
+export const OFFLINE_TTL_MS = 90_000 // 90 segundos de tolerância para desconexões e throttling em background
 
 /**
  * Sanitiza o nome público de exibição (nunca expõe emails ou dados sensíveis)
@@ -47,8 +50,9 @@ export function sanitizePublicDisplayName(name?: string | null, district?: strin
  */
 export async function sendRealHeartbeat(
   user: { uid: string; displayName?: string | null; photoURL?: string | null } | null,
-  profile?: { displayName?: string; photoURL?: string; district?: string; level?: number; equippedTitle?: string } | null,
-  activity: RealUserActivity = 'browsing'
+  profile?: { displayName?: string; photoURL?: string; district?: string; city?: string; level?: number; xp?: number; equippedTitle?: string } | null,
+  activity: RealUserActivity = 'browsing',
+  coords?: [number, number]
 ): Promise<void> {
   if (!user?.uid) return // Apenas humanos autenticados reais
 
@@ -56,8 +60,10 @@ export async function sendRealHeartbeat(
     const presenceRef = doc(db, 'publicPresence', user.uid)
     const displayName = sanitizePublicDisplayName(profile?.displayName || user.displayName, profile?.district)
     const district = (profile?.district || '').trim() || 'Portugal'
+    const city = (profile?.city || '').trim() || undefined
     const photoURL = profile?.photoURL || user.photoURL || null
     const level = typeof profile?.level === 'number' && profile.level > 0 ? profile.level : 1
+    const xp = typeof profile?.xp === 'number' && profile.xp >= 0 ? profile.xp : undefined
     const title = profile?.equippedTitle || 'Patriota'
     const equippedFrame =
       (profile as any)?.equippedFrame ||
@@ -65,15 +71,32 @@ export async function sendRealHeartbeat(
       (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
       undefined
 
+    // Se coordenadas explícitas não foram passadas, verificar cache local de GPS recente
+    let userCoords: [number, number] | undefined = coords
+    if (!userCoords && typeof window !== 'undefined') {
+      try {
+        const cached = sessionStorage.getItem('ap_user_geo_coords')
+        if (cached) {
+          const parsed = JSON.parse(cached)
+          if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number' && typeof parsed[1] === 'number') {
+            userCoords = [parsed[0], parsed[1]]
+          }
+        }
+      } catch {}
+    }
+
     const payload: RealPlayerPresence = {
       userId: user.uid,
       displayName,
       photoURL,
       district,
+      ...(city ? { city } : {}),
+      ...(userCoords ? { coords: userCoords } : {}),
       activity,
       lastSeen: Date.now(),
       online: true,
       level,
+      ...(typeof xp === 'number' ? { xp } : {}),
       title,
       ...(equippedFrame ? { equippedFrame } : {}),
     }
@@ -131,15 +154,25 @@ export function filterActiveRealPlayers(
     if (isOnline && isWithinTTL) {
       const act: RealUserActivity = d.activity === 'playing' || d.activity === 'duel' ? d.activity : 'browsing'
       
+      let validCoords: [number, number] | undefined = undefined
+      if (Array.isArray(d.coords) && d.coords.length === 2 && typeof d.coords[0] === 'number' && typeof d.coords[1] === 'number') {
+        validCoords = [d.coords[0], d.coords[1]]
+      } else if (d.coordinates && typeof d.coordinates.lat === 'number' && typeof d.coordinates.lng === 'number') {
+        validCoords = [d.coordinates.lng, d.coordinates.lat]
+      }
+
       const player: RealPlayerPresence = {
         userId: String(d.userId),
         displayName: sanitizePublicDisplayName(d.displayName, d.district),
         photoURL: d.photoURL || null,
         district: (d.district || '').trim() || 'Portugal',
+        ...(d.city ? { city: String(d.city).trim() } : {}),
+        ...(validCoords ? { coords: validCoords } : {}),
         activity: act,
         lastSeen,
         online: true,
         level: typeof d.level === 'number' ? d.level : 1,
+        ...(typeof d.xp === 'number' ? { xp: d.xp } : {}),
         title: d.title || 'Patriota',
         equippedFrame: d.equippedFrame || undefined,
       }
