@@ -4,26 +4,17 @@ import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import {
   PortugalSatelliteEngine,
   type MapSector,
-  type MapLayersState,
-  DEFAULT_MAP_LAYERS,
 } from '@/src/game/world/PortugalSatelliteEngine'
 import {
   usePortugalVivoData,
   type PortugalVivoDistrict,
   type ResolvedPlayerPin,
-  type ActiveConfrontation,
 } from '@/src/hooks/usePortugalVivoData'
-import type { NexusEvent } from '@/lib/portugal-map-nexus-data'
 import { useAuth } from '@/components/auth-provider'
 import { sendRealHeartbeat } from '@/lib/real-presence'
 import { PortugalAgoraHUD } from './PortugalAgoraHUD'
-import { MapLayersWidget } from './MapLayersWidget'
 import { DistrictActionPanel } from './DistrictActionPanel'
 import { PlayerContextCard } from './PlayerContextCard'
-import { EventContextCard } from './EventContextCard'
-import { DisputeContextCard } from './DisputeContextCard'
-import type { SearchResultItem } from './MapSearchBar'
-import { ZoomIn, ZoomOut, Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface PortugalVivoMapProps {
@@ -31,6 +22,22 @@ export interface PortugalVivoMapProps {
   className?: string
   onSelectDistrict?: (district: PortugalVivoDistrict | null) => void
   onSelectPlayer?: (player: ResolvedPlayerPin | null) => void
+}
+
+// Cálculo de distância haversine em metros entre duas coordenadas geográficas
+function getDistanceMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371e3 // Raio da Terra em metros
+  const φ1 = (lat1 * Math.PI) / 180
+  const φ2 = (lat2 * Math.PI) / 180
+  const Δφ = ((lat2 - lat1) * Math.PI) / 180
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+  return R * c
 }
 
 export function PortugalVivoMap({
@@ -47,59 +54,94 @@ export function PortugalVivoMap({
   const [currentSector, setCurrentSector] = useState<MapSector>('continente')
   const [selectedDistrictId, setSelectedDistrictId] = useState<string | null>(() => initialDistrict || null)
   const [selectedPlayer, setSelectedPlayer] = useState<ResolvedPlayerPin | null>(null)
-  const [selectedEvent, setSelectedEvent] = useState<NexusEvent | null>(null)
-  const [selectedDispute, setSelectedDispute] = useState<ActiveConfrontation | null>(null)
-  const [layersOpen, setLayersOpen] = useState(false)
-  const [layersState, setLayersState] = useState<MapLayersState>(DEFAULT_MAP_LAYERS)
-  const [isScanning, setIsScanning] = useState(false)
-  const [scanResultText, setScanResultText] = useState<string | null>(null)
   const [geoNoticeText, setGeoNoticeText] = useState<string | null>(null)
   const [isLocating, setIsLocating] = useState(false)
 
   // 1. Hook de Dados Reais da Nação em Tempo Real (Firestore)
   const data = usePortugalVivoData(user?.uid)
 
-  // Enviar heartbeat de presença imediato e resolver localização geográfica
-  useEffect(() => {
-    if (typeof window === 'undefined') return
+  // Rastreio da última posição e timestamp enviados para evitar flooding
+  const lastLocationRef = useRef<{ lat: number; lng: number; time: number } | null>(null)
 
-    let initialCoords: [number, number] | undefined = undefined
+  // 2. GPS Contínuo (navigator.geolocation.watchPosition) com throttling inteligente
+  useEffect(() => {
+    if (typeof window === 'undefined' || !navigator.geolocation) return
+
+    // 2.1. Heartbeat inicial imediato com cache se existir
+    let cachedCoords: [number, number] | undefined = undefined
     try {
       const cached = localStorage.getItem('ap_user_geo_coords') || sessionStorage.getItem('ap_user_geo_coords')
       if (cached) {
         const parsed = JSON.parse(cached)
         if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number') {
-          initialCoords = [parsed[0], parsed[1]]
+          cachedCoords = [parsed[0], parsed[1]]
         }
       }
     } catch {}
 
     if (user?.uid) {
-      sendRealHeartbeat(user, profile, 'browsing', initialCoords)
+      sendRealHeartbeat(
+        user,
+        profile,
+        'browsing',
+        cachedCoords,
+        cachedCoords ? 15 : null,
+        cachedCoords ? 'gps' : undefined
+      )
     }
 
-    // Se o browser já tiver permissão de GPS concedida, renovar silenciosamente com coordenadas reais
-    if (typeof navigator !== 'undefined' && navigator.geolocation && (navigator as any).permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-        if (result.state === 'granted') {
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude]
-              try {
-                localStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
-                sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
-              } catch {}
-              if (user?.uid) {
-                sendRealHeartbeat(user, profile, 'browsing', coords)
-              }
-            },
-            () => {},
-            { enableHighAccuracy: true, timeout: 6000, maximumAge: 60000 }
-          )
+    // 2.2. watchPosition contínuo de alta precisão
+    const handlePositionUpdate = (pos: GeolocationPosition) => {
+      const lat = pos.coords.latitude
+      const lng = pos.coords.longitude
+      const accuracy = Math.round(pos.coords.accuracy)
+      const now = Date.now()
+
+      const last = lastLocationRef.current
+      if (last) {
+        const distance = getDistanceMeters(last.lat, last.lng, lat, lng)
+        const timeElapsed = now - last.time
+
+        // Só enviar nova posição se houver alteração relevante (>= 25 metros) ou após 30 segundos
+        if (distance < 25 && timeElapsed < 30_000) {
+          return
         }
-      }).catch(() => {})
+      }
+
+      lastLocationRef.current = { lat, lng, time: now }
+      const coords: [number, number] = [lng, lat]
+
+      try {
+        localStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
+        sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
+      } catch {}
+
+      if (user?.uid) {
+        sendRealHeartbeat(user, profile, 'browsing', coords, accuracy, 'gps')
+      }
     }
-  }, [user?.uid, profile?.district, profile?.city])
+
+    let watchId: number | null = null
+    try {
+      watchId = navigator.geolocation.watchPosition(
+        handlePositionUpdate,
+        () => {}, // Falhas silenciosas no watch não devem incomodar o utilizador
+        {
+          enableHighAccuracy: true,
+          timeout: 12000,
+          maximumAge: 10000,
+        }
+      )
+    } catch (e) {
+      console.debug('[GPS] watchPosition não suportado:', e)
+    }
+
+    return () => {
+      if (watchId !== null && navigator.geolocation) {
+        navigator.geolocation.clearWatch(watchId)
+      }
+    }
+  }, [user?.uid, profile?.displayName, profile?.district, profile?.city])
 
   // Distrito selecionado derivado diretamente dos dados reativos
   const selectedDistrict = useMemo(() => {
@@ -107,7 +149,7 @@ export function PortugalVivoMap({
     return data.districtMap.get(selectedDistrictId.toLowerCase()) || null
   }, [selectedDistrictId, data.districtMap])
 
-  // 2. Inicialização do Motor MapLibre GL
+  // 3. Inicialização do Motor MapLibre GL
   useEffect(() => {
     if (!mapContainerRef.current) return
     if (engineRef.current) return
@@ -115,12 +157,9 @@ export function PortugalVivoMap({
     const engine = new PortugalSatelliteEngine({
       container: mapContainerRef.current,
       initialSector: 'continente',
-      initialDistrictId: initialDistrict,
-      layers: layersState,
+      initialDistrictId,
       onSelectDistrict: (district) => {
         setSelectedPlayer(null)
-        setSelectedEvent(null)
-        setSelectedDispute(null)
         setSelectedDistrictId(district ? district.id : null)
         if (externalSelectDistrict) {
           externalSelectDistrict(district)
@@ -128,24 +167,10 @@ export function PortugalVivoMap({
       },
       onSelectPlayer: (player) => {
         setSelectedDistrictId(null)
-        setSelectedEvent(null)
-        setSelectedDispute(null)
         setSelectedPlayer(player)
         if (externalSelectPlayer) {
           externalSelectPlayer(player)
         }
-      },
-      onSelectEvent: (event) => {
-        setSelectedDistrictId(null)
-        setSelectedPlayer(null)
-        setSelectedDispute(null)
-        setSelectedEvent(event)
-      },
-      onSelectDispute: (dispute) => {
-        setSelectedDistrictId(null)
-        setSelectedPlayer(null)
-        setSelectedEvent(null)
-        setSelectedDispute(dispute)
       },
       onSectorChange: (sector) => {
         setCurrentSector(sector)
@@ -172,19 +197,19 @@ export function PortugalVivoMap({
     }
   }, [initialDistrict, externalSelectDistrict, externalSelectPlayer]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 3. Propagação de Dados Reais para o Motor (Distritos, Duelos, Jogadores e Eventos)
+  // 4. Propagação Reativa Instantânea para o Motor (Distritos e Jogadores Online)
   useEffect(() => {
     if (engineRef.current && isEngineReady && data.districts.length > 0) {
       engineRef.current.updateData(
         data.districts,
-        data.confrontations,
+        [],
         data.onlinePlayers,
-        data.activeEvents
+        []
       )
     }
-  }, [data.districts, data.confrontations, data.onlinePlayers, data.activeEvents, isEngineReady])
+  }, [data.districts, data.onlinePlayers, isEngineReady])
 
-  // 4. Seleção Geográfica de Arquipélago / Continente
+  // 5. Seleção de Setor (Continente | Açores | Madeira)
   const handleSelectSector = useCallback((sector: MapSector) => {
     setCurrentSector(sector)
     setSelectedDistrictId(null)
@@ -192,86 +217,59 @@ export function PortugalVivoMap({
     engineRef.current?.fitSector(sector)
   }, [])
 
-  // 5. Controlo de Camadas
-  const handleToggleLayer = useCallback((layerKey: keyof MapLayersState) => {
-    setLayersState((prev) => {
-      const next = !prev[layerKey]
-      engineRef.current?.setLayerVisibility(layerKey, next)
-      return { ...prev, [layerKey]: next }
-    })
-  }, [])
-
-  // 6. Varredura Tática "Scan Territorial" Real
-  const handleTriggerScan = useCallback(() => {
-    if (isScanning || !engineRef.current) return
-    setIsScanning(true)
-    setScanResultText(null)
-
-    engineRef.current.triggerTerritorialScan(() => {
-      setIsScanning(false)
-      const distStr = data.activeDistrictsCount === 1 ? '1 distrito ativo' : `${data.activeDistrictsCount} distritos ativos`
-      const playStr = data.onlineCount === 1 ? '1 jogador online' : `${data.onlineCount} jogadores online`
-      const dispStr = data.confrontations.length === 1 ? '1 disputa' : `${data.confrontations.length} disputas`
-      const evtStr = data.activeEvents.length === 1 ? '1 evento' : `${data.activeEvents.length} eventos`
-
-      setScanResultText(`SCAN CONCLUÍDO: ${playStr} • ${distStr} • ${dispStr} • ${evtStr}`)
-
-      // Auto-limpeza do banner após 7 segundos
-      setTimeout(() => {
-        setScanResultText(null)
-      }, 7000)
-    })
-  }, [isScanning, data.onlineCount, data.activeDistrictsCount, data.confrontations.length, data.activeEvents.length])
-
-  // 7. Localização do Próprio Jogador ("📍 MINHA LOCALIZAÇÃO")
+  // 6. Botão "Minha Localização" (Sem condições impeditivas — Pede GPS Real e Voa para a Posição)
   const handleLocateMe = useCallback(() => {
     if (isLocating || !engineRef.current) return
     setIsLocating(true)
-    setGeoNoticeText('A obter localização GPS de alta precisão...')
+    setGeoNoticeText('A obter sinal GPS de alta precisão...')
 
     if (typeof navigator !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           setIsLocating(false)
           const coords: [number, number] = [pos.coords.longitude, pos.coords.latitude]
+          const accuracy = Math.round(pos.coords.accuracy)
 
-          // Guardar na sessão e localStorage para persistência
           try {
             localStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
             sessionStorage.setItem('ap_user_geo_coords', JSON.stringify(coords))
           } catch {}
 
-          // Atualizar presença com coordenadas GPS exatas no Firestore
-          sendRealHeartbeat(user, profile, 'browsing', coords)
+          // Atualizar Firestore com GPS real e atualizar marcador
+          if (user?.uid) {
+            sendRealHeartbeat(user, profile, 'browsing', coords, accuracy, 'gps')
+          }
 
-          // Voar até ao local com zoom de satélite de alta aproximação
-          engineRef.current?.locateUser(coords, 14.5)
-          setGeoNoticeText('📍 GPS Confirmado — Centrado exatamente na tua posição!')
-          setTimeout(() => setGeoNoticeText(null), 4000)
+          // Voar suavemente até à posição real com zoom aproximado
+          engineRef.current?.locateUser(coords, 14)
+          setGeoNoticeText('📍 GPS Confirmado — Centrado na tua posição!')
+          setTimeout(() => setGeoNoticeText(null), 3500)
         },
         (err) => {
           setIsLocating(false)
-          console.debug('[GEOLOCATION] Não autorizada ou indisponível:', err?.message)
+          console.debug('[GPS] Erro de geolocalização:', err?.message)
 
-          // Se tiver coordenadas do concelho do perfil (ex: Alijó) ou cache
+          // Se tiver posição de concelho ou cache prévia
           if (data.currentUserPin?.coords) {
             engineRef.current?.locateUser(data.currentUserPin.coords, 13)
-            setGeoNoticeText(`Localização aproximada por concelho (${data.currentUserPin.city || data.currentUserPin.district}).`)
+            setGeoNoticeText(
+              `Localização aproximada por concelho (${data.currentUserPin.city || data.currentUserPin.district}).`
+            )
           } else {
-            const userDistrict = profile?.district || 'Vila Real'
+            const userDistrict = profile?.district || 'Lisboa'
             const targetDist = data.districtMap.get(userDistrict.toLowerCase())
             if (targetDist) {
               engineRef.current?.locateUser(targetDist.center, 11)
               setSelectedDistrictId(targetDist.id)
-              setGeoNoticeText(`GPS recusado — a focar distrito de ${targetDist.name}.`)
+              setGeoNoticeText(`Focado no distrito de ${targetDist.name}.`)
             } else {
               engineRef.current?.fitSector('continente')
               setGeoNoticeText('GPS indisponível — a mostrar Continente.')
             }
           }
-          setTimeout(() => setGeoNoticeText(null), 4500)
+          setTimeout(() => setGeoNoticeText(null), 4000)
         },
-        { timeout: 10000, enableHighAccuracy: true, maximumAge: 30000 }
+        { timeout: 10000, enableHighAccuracy: true, maximumAge: 0 }
       )
     } else {
       setIsLocating(false)
@@ -279,37 +277,18 @@ export function PortugalVivoMap({
         engineRef.current?.locateUser(data.currentUserPin.coords, 13)
         setGeoNoticeText(`Navegador sem GPS — a focar concelho de ${data.currentUserPin.city || data.currentUserPin.district}.`)
       }
-      setTimeout(() => setGeoNoticeText(null), 4000)
+      setTimeout(() => setGeoNoticeText(null), 3500)
     }
   }, [isLocating, data.currentUserPin, data.districtMap, user, profile])
 
-  // 8. Seleção de Resultado de Pesquisa
-  const handleSelectSearchResult = useCallback(
-    (item: SearchResultItem) => {
-      setSelectedPlayer(null)
-      if (item.coordinates) {
-        const zoom = item.type === 'city' ? 12.8 : item.type === 'island' ? 10.5 : 9.5
-        engineRef.current?.locateUser(item.coordinates, zoom)
-      }
-
-      if (item.slug && (item.type === 'district' || item.type === 'island')) {
-        const dist = data.districtMap.get(item.slug.toLowerCase())
-        if (dist) {
-          setSelectedDistrictId(dist.id)
-        }
-      }
-    },
-    [data.districtMap]
-  )
-
-  // 9. Repor Visão Nacional
+  // 7. Repor Visão Nacional
   const handleResetView = useCallback(() => {
     setSelectedDistrictId(null)
     setSelectedPlayer(null)
     engineRef.current?.clearSelection()
   }, [])
 
-  // 10. Alternar Modo 3D Orbital
+  // 8. Alternar Modo 3D
   const handleToggle3D = useCallback(() => {
     engineRef.current?.toggle3D()
   }, [])
@@ -325,106 +304,32 @@ export function PortugalVivoMap({
   return (
     <div
       className={cn(
-        'relative w-full h-full min-h-[100dvh] overflow-hidden bg-slate-950 select-none',
+        'relative w-full h-full min-h-[100dvh] overflow-hidden bg-slate-950 select-none touch-none',
         className
       )}
     >
-      {/* HUD Superior Oficial com Dados 100% Reais e Ações Rápidas */}
+      {/* HUD Superior Minimalista Oficial */}
       <PortugalAgoraHUD
         onlineCount={data.onlineCount}
-        activeDistrictsCount={data.activeDistrictsCount}
-        confrontationsCount={data.confrontations.length}
-        eventsCount={data.activeEvents.length}
         currentSector={currentSector}
         onSelectSector={handleSelectSector}
-        onToggleLayers={() => setLayersOpen((prev) => !prev)}
         onToggle3D={handleToggle3D}
         onResetView={handleResetView}
-        onTriggerScan={handleTriggerScan}
         onLocateMe={handleLocateMe}
-        onSelectSearchResult={handleSelectSearchResult}
-        isScanning={isScanning}
-        scanResultText={scanResultText}
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
         isLocating={isLocating}
-        livePulseMessages={data.livePulseMessages}
+        geoNoticeText={geoNoticeText}
       />
 
-      {/* Notificação Flutuante de Localização GPS */}
-      {geoNoticeText && (
-        <div className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 z-40 px-4 py-2 rounded-xl bg-slate-950/90 border border-cyan-500/30 text-cyan-300 font-mono text-xs shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200">
-          {geoNoticeText}
-        </div>
-      )}
-
-      {/* Widget de Camadas */}
-      {layersOpen && (
-        <MapLayersWidget
-          layers={layersState}
-          onToggleLayer={handleToggleLayer}
-          onClose={() => setLayersOpen(false)}
-        />
-      )}
-
-      {/* Efeito Visual de Scan Territorial (Overlay transitório sutil) */}
-      {isScanning && (
-        <div className="pointer-events-none absolute inset-0 z-20 bg-cyan-500/5 animate-pulse backdrop-contrast-125 transition-all">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-[matrix-scan-line_1.2s_ease-in-out_infinite] opacity-80" />
-        </div>
-      )}
-
-      {/* Container Principal do Mapa MapLibre */}
+      {/* Contentor do Mapa MapLibre GL */}
       <div
         ref={mapContainerRef}
-        className="w-full h-full min-h-[100dvh] absolute inset-0 z-0 outline-none"
+        className="w-full h-full min-h-[100dvh] cursor-grab active:cursor-grabbing outline-none"
       />
 
-      {/* Controlos Flutuantes de Zoom (Canto inferior direito) */}
-      <div className="pointer-events-auto absolute bottom-5 right-4 z-30 hidden sm:flex flex-col gap-1.5 rounded-2xl bg-slate-950/80 p-1 border border-white/10 backdrop-blur-md shadow-2xl">
-        <button
-          type="button"
-          onClick={handleZoomIn}
-          title="Aproximar mapa"
-          className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
-        >
-          <ZoomIn className="h-4 w-4" />
-        </button>
-        <div className="h-px w-full bg-white/10" />
-        <button
-          type="button"
-          onClick={handleZoomOut}
-          title="Afastar mapa"
-          className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
-        >
-          <ZoomOut className="h-4 w-4" />
-        </button>
-      </div>
-
-      {/* Painel Contextual de Jogador Selecionado */}
-      {selectedPlayer && (
-        <PlayerContextCard
-          player={selectedPlayer}
-          onClose={() => setSelectedPlayer(null)}
-        />
-      )}
-
-      {/* Painel Contextual de Evento Selecionado */}
-      {selectedEvent && (
-        <EventContextCard
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
-      )}
-
-      {/* Painel Contextual de Disputa Selecionada */}
-      {selectedDispute && (
-        <DisputeContextCard
-          dispute={selectedDispute}
-          onClose={() => setSelectedDispute(null)}
-        />
-      )}
-
-      {/* Painel de Ação de Distrito Selecionado */}
-      {selectedDistrict && !selectedPlayer && !selectedEvent && !selectedDispute && (
+      {/* Painel Contextual de Distrito Selecionado */}
+      {selectedDistrict && (
         <DistrictActionPanel
           district={selectedDistrict}
           onClose={() => {
@@ -434,22 +339,13 @@ export function PortugalVivoMap({
         />
       )}
 
-      {/* Ecrã de Carregamento Geográfico Leve e Premium */}
-      {!isEngineReady && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 text-white select-none">
-          <div className="relative flex h-16 w-16 items-center justify-center mb-4">
-            <div className="absolute h-full w-full rounded-full border-2 border-cyan-500/20 border-t-cyan-400 animate-spin" />
-            <span className="text-2xl">🇵🇹</span>
-          </div>
-          <h2 className="font-display text-sm font-black uppercase tracking-widest text-slate-200 mb-1">
-            Portugal Vivo
-          </h2>
-          <p className="font-mono text-[11px] text-cyan-400 uppercase tracking-widest animate-pulse">
-            A carregar território satélite...
-          </p>
-        </div>
+      {/* Painel Contextual de Jogador Selecionado */}
+      {selectedPlayer && (
+        <PlayerContextCard
+          player={selectedPlayer}
+          onClose={() => setSelectedPlayer(null)}
+        />
       )}
     </div>
   )
 }
-export default PortugalVivoMap

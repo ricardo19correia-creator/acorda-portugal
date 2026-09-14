@@ -7,7 +7,7 @@ import { filterActiveRealPlayers } from '@/lib/real-presence'
 import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
 import { calculateDistrictWarTerritories, type DistrictWarTerritory } from '@/lib/district-war'
 import { DISTRICTS_LIST, type DistrictItem } from '@/src/data/districts'
-import { CANONICAL_EVENTS, CANONICAL_CITIES, type NexusEvent } from '@/lib/portugal-map-nexus-data'
+import { CANONICAL_CITIES, type NexusEvent } from '@/lib/portugal-map-nexus-data'
 import { PORTUGAL_CONCELHOS_COORDS } from '@/src/data/concelhos-coords'
 
 export interface ActiveConfrontation {
@@ -59,11 +59,17 @@ export interface ResolvedPlayerPin {
   userId: string
   displayName: string
   photoURL?: string | null
+  avatar?: string | null
   district: string
   city?: string
+  lat: number
+  lng: number
   coords: [number, number] // [lng, lat]
+  accuracy?: number | null
+  locationSource: 'gps' | 'concelho' | 'ip'
   activity: 'playing' | 'duel' | 'browsing'
   lastSeen: number
+  expiresAt?: number
   online: boolean
   level: number
   xp?: number
@@ -263,13 +269,6 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
       warLookup.set(normalizeKey(war.id), war)
     }
 
-    const eventLookup = new Map<string, NexusEvent>()
-    for (const ev of CANONICAL_EVENTS) {
-      if (ev.status === 'active') {
-        eventLookup.set(normalizeKey(ev.district), ev)
-      }
-    }
-
     const nationalPowerSum = warTerritories.reduce((acc, w) => acc + (w.power || 0), 0)
 
     const list: PortugalVivoDistrict[] = DISTRICTS_LIST.map((geo) => {
@@ -278,7 +277,6 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
       const normId = normalizeKey(geo.id)
 
       const war = warLookup.get(normName) || warLookup.get(normCanon) || warLookup.get(normId)
-      const ev = eventLookup.get(normName) || eventLookup.get(normCanon) || null
 
       const online =
         districtOnlineMap.get(normName) ||
@@ -308,7 +306,7 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
         dominancePercentage: dominance,
         isLeader: pos === 1 && power > 0,
         inDisputeWith: null,
-        activeEvent: ev,
+        activeEvent: null,
         king: war?.king || null,
         topContributors: war?.topContributors || [],
       }
@@ -341,21 +339,34 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
     const resolved: ResolvedPlayerPin[] = activeHumanState.players.map((p) => {
       const isCurrent = Boolean(currentUid && p.userId === currentUid)
       let coords: [number, number]
+      let locSource: 'gps' | 'concelho' | 'ip' = p.locationSource || 'concelho'
 
-      if (p.coords && Array.isArray(p.coords) && p.coords.length === 2) {
-        // Coordenadas GPS exatas fornecidas pelo utilizador
+      // 1.º Prioridade: GPS Real válido (nunca aplicar desvio a GPS real)
+      if (p.locationSource === 'gps' && p.coords && Array.isArray(p.coords) && p.coords.length === 2) {
         coords = [p.coords[0], p.coords[1]]
+        locSource = 'gps'
+      } else if (typeof p.lat === 'number' && typeof p.lng === 'number' && !isNaN(p.lat) && !isNaN(p.lng)) {
+        coords = [p.lng, p.lat]
+        locSource = p.locationSource || 'gps'
+      } else if (p.coords && Array.isArray(p.coords) && p.coords.length === 2) {
+        coords = [p.coords[0], p.coords[1]]
+        locSource = p.locationSource || 'gps'
       } else {
-        // Fallback para cidade ou distrito
+        // 2.º Prioridade: Concelho Canónico
         let baseCoords: [number, number] | null = null
-        if (p.city) {
-          baseCoords = cityCoordsLookup.get(normalizeKey(p.city)) || null
+        const concelhoCandidate = p.city || (p as any).concelho
+        if (concelhoCandidate) {
+          baseCoords = cityCoordsLookup.get(normalizeKey(concelhoCandidate)) || null
+          if (baseCoords) locSource = 'concelho'
         }
+        // 3.º Prioridade: Distrito / IP Fallback
         if (!baseCoords) {
           const d = districtMap.get(normalizeKey(p.district))
-          baseCoords = d ? d.center : [-8.2245, 39.3999] // Centro de Portugal
+          baseCoords = d ? d.center : [-8.2245, 39.3999] // Centroide nacional
+          locSource = 'ip'
         }
 
+        // Apenas aplicar pequena dispersão determinística para evitar sobreposição total em centroides idênticos
         const offset = getDeterministicOffset(p.userId)
         coords = [baseCoords[0] + offset[0], baseCoords[1] + offset[1]]
       }
@@ -363,12 +374,18 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
       const pin: ResolvedPlayerPin = {
         userId: p.userId,
         displayName: p.displayName,
-        photoURL: p.photoURL,
+        photoURL: p.photoURL || p.avatar || null,
+        avatar: p.avatar || p.photoURL || null,
         district: p.district || 'Portugal',
         city: p.city,
+        lat: coords[1],
+        lng: coords[0],
         coords,
+        accuracy: p.accuracy ?? (locSource === 'gps' ? 15 : null),
+        locationSource: locSource,
         activity: p.activity,
         lastSeen: p.lastSeen,
+        expiresAt: p.expiresAt,
         online: true,
         level: p.level || 1,
         xp: p.xp,
@@ -438,9 +455,9 @@ export function usePortugalVivoData(overrideUserId?: string | null): PortugalViv
   // Regra Master: Apenas distritos que possuem pelo menos 1 jogador real online agora!
   const activeDistrictsCount = districts.filter((d) => d.onlineNow > 0).length
 
-  // Eventos reais ativos (0 se não houver eventos ativos)
-  const activeEvents = useMemo(() => {
-    return CANONICAL_EVENTS.filter((e) => e.status === 'active')
+  // Eventos reais ativos (ZERO FAKE DATA)
+  const activeEvents = useMemo<NexusEvent[]>(() => {
+    return []
   }, [])
 
   // 13. Feed Contextual em Tempo Real "O Que Está a Acontecer" (ZERO FAKE DATA)

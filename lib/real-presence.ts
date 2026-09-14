@@ -17,12 +17,19 @@ export interface RealPlayerPresence {
   userId: string
   displayName: string
   photoURL?: string | null
+  avatar?: string | null
   district: string
   city?: string
+  lat?: number
+  lng?: number
   coords?: [number, number] // [lng, lat]
+  accuracy?: number | null
+  locationSource?: 'gps' | 'concelho' | 'ip'
   activity: RealUserActivity
   lastSeen: number
+  expiresAt?: number
   online: boolean
+  isOnline?: boolean
   level?: number
   xp?: number
   title?: string
@@ -62,7 +69,9 @@ export async function sendRealHeartbeat(
   user: { uid: string; displayName?: string | null; photoURL?: string | null } | null,
   profile?: { displayName?: string; photoURL?: string; district?: string; city?: string; level?: number; xp?: number; equippedTitle?: string } | null,
   activity: RealUserActivity = 'browsing',
-  coords?: [number, number]
+  coords?: [number, number],
+  accuracy?: number | null,
+  source?: 'gps' | 'concelho' | 'ip'
 ): Promise<void> {
   if (!user?.uid) return // Apenas humanos autenticados reais
 
@@ -70,7 +79,7 @@ export async function sendRealHeartbeat(
     const presenceRef = doc(db, 'publicPresence', user.uid)
     const displayName = sanitizePublicDisplayName(profile?.displayName || user.displayName, profile?.district)
     const district = (profile?.district || '').trim() || 'Portugal'
-    const city = (profile?.city || '').trim() || undefined
+    const city = (profile?.city || (profile as any)?.concelho || '').trim() || undefined
     const photoURL = profile?.photoURL || user.photoURL || null
     const level = typeof profile?.level === 'number' && profile.level > 0 ? profile.level : 1
     const xp = typeof profile?.xp === 'number' && profile.xp >= 0 ? profile.xp : undefined
@@ -81,8 +90,9 @@ export async function sendRealHeartbeat(
       (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
       undefined
 
-    // 1. Se coordenadas explícitas foram passadas (ex: GPS ativo no momento)
+    // 1. Prioridade estrita de localização: 1.º GPS REAL > 2.º CONCELHO > 3.º IP / DISTRITO
     let userCoords: [number, number] | undefined = coords
+    let locSource: 'gps' | 'concelho' | 'ip' = source || (coords ? 'gps' : 'concelho')
 
     // 2. Verificar cache local de GPS recente no localStorage ou sessionStorage
     if (!userCoords && typeof window !== 'undefined') {
@@ -92,47 +102,60 @@ export async function sendRealHeartbeat(
           const parsed = JSON.parse(cached)
           if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number' && typeof parsed[1] === 'number') {
             userCoords = [parsed[0], parsed[1]]
+            locSource = 'gps'
           }
         }
       } catch {}
     }
 
-    // 3. Resolução automática das coordenadas do concelho/cidade do perfil
+    // 3. Resolução automática das coordenadas do concelho canónico (FALLBACK)
     if (!userCoords && city) {
       const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(city)]
       if (concelhoMatch?.coordinates) {
         userCoords = concelhoMatch.coordinates
+        locSource = 'concelho'
       }
     }
 
-    // 4. Fallback para concelho capital de distrito
+    // 4. Fallback terminal para centroide de distrito / Portugal
     if (!userCoords && district && district !== 'Portugal') {
       const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(district)]
       if (distMatch?.coordinates) {
         userCoords = distMatch.coordinates
+        locSource = 'ip'
       }
     }
 
-    const payload: RealPlayerPresence = {
+    const now = Date.now()
+    const expiresAt = now + OFFLINE_TTL_MS
+
+    const payload = {
       userId: user.uid,
       displayName,
       photoURL,
+      avatar: photoURL,
       district,
       ...(city ? { city } : {}),
-      ...(userCoords ? { coords: userCoords } : {}),
+      ...(userCoords ? {
+        lat: userCoords[1],
+        lng: userCoords[0],
+        coords: userCoords,
+        accuracy: accuracy !== undefined ? accuracy : (locSource === 'gps' ? 15 : null),
+        locationSource: locSource,
+      } : {}),
       activity,
-      lastSeen: Date.now(),
+      lastSeen: now,
+      expiresAt,
       online: true,
+      isOnline: true,
       level,
       ...(typeof xp === 'number' ? { xp } : {}),
       title,
       ...(equippedFrame ? { equippedFrame } : {}),
+      updatedAt: serverTimestamp(),
     }
 
-    await setDoc(presenceRef, {
-      ...payload,
-      updatedAt: serverTimestamp(),
-    }, { merge: true })
+    await setDoc(presenceRef, payload, { merge: true })
   } catch (err) {
     // Falha silenciosa de rede para não interromper a experiência do utilizador
     console.debug('[PRESENCE] Erro no envio de heartbeat:', err)
@@ -175,40 +198,65 @@ export function filterActiveRealPlayers(
 
   rawDocs.forEach((d) => {
     if (!d || !d.userId) return
-    const isOnline = d.online !== false
+    const isOnline = d.online !== false && d.isOnline !== false
     const lastSeen = typeof d.lastSeen === 'number' ? d.lastSeen : 0
-    const isWithinTTL = now - lastSeen <= OFFLINE_TTL_MS
+    const expiresAt = typeof d.expiresAt === 'number' ? d.expiresAt : (lastSeen + OFFLINE_TTL_MS)
+    const isWithinTTL = expiresAt > now && (now - lastSeen <= OFFLINE_TTL_MS * 1.5)
 
     if (isOnline && isWithinTTL) {
       const act: RealUserActivity = d.activity === 'playing' || d.activity === 'duel' ? d.activity : 'browsing'
       
       let validCoords: [number, number] | undefined = undefined
-      if (Array.isArray(d.coords) && d.coords.length === 2 && typeof d.coords[0] === 'number' && typeof d.coords[1] === 'number') {
+      let locSource: 'gps' | 'concelho' | 'ip' = d.locationSource || 'concelho'
+
+      // 1. Prioridade absoluta: campos lat/lng diretos
+      if (typeof d.lat === 'number' && typeof d.lng === 'number' && !isNaN(d.lat) && !isNaN(d.lng)) {
+        validCoords = [d.lng, d.lat]
+        locSource = d.locationSource || 'gps'
+      } else if (Array.isArray(d.coords) && d.coords.length === 2 && typeof d.coords[0] === 'number' && typeof d.coords[1] === 'number') {
         validCoords = [d.coords[0], d.coords[1]]
+        locSource = d.locationSource || 'gps'
       } else if (d.coordinates && typeof d.coordinates.lat === 'number' && typeof d.coordinates.lng === 'number') {
         validCoords = [d.coordinates.lng, d.coordinates.lat]
-      } else if (d.city) {
-        const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(d.city)]
+        locSource = d.locationSource || 'gps'
+      } else if (d.city || d.concelho) {
+        const concelhoStr = String(d.city || d.concelho)
+        const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(concelhoStr)]
         if (concelhoMatch?.coordinates) {
           validCoords = concelhoMatch.coordinates
+          locSource = 'concelho'
         }
       } else if (d.district && d.district !== 'Portugal') {
         const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(d.district)]
         if (distMatch?.coordinates) {
           validCoords = distMatch.coordinates
+          locSource = 'ip'
         }
       }
+
+      const avatar = d.avatar || d.photoURL || null
+      const accuracy = typeof d.accuracy === 'number' ? d.accuracy : null
+      const resolvedConcelho = d.city || d.concelho ? String(d.city || d.concelho).trim() : undefined
 
       const player: RealPlayerPresence = {
         userId: String(d.userId),
         displayName: sanitizePublicDisplayName(d.displayName, d.district),
-        photoURL: d.photoURL || null,
+        photoURL: avatar,
+        avatar,
         district: (d.district || '').trim() || 'Portugal',
-        ...(d.city ? { city: String(d.city).trim() } : {}),
-        ...(validCoords ? { coords: validCoords } : {}),
+        ...(resolvedConcelho ? { city: resolvedConcelho } : {}),
+        ...(validCoords ? {
+          coords: validCoords,
+          lat: validCoords[1],
+          lng: validCoords[0],
+          accuracy,
+          locationSource: locSource,
+        } : {}),
         activity: act,
         lastSeen,
+        expiresAt,
         online: true,
+        isOnline: true,
         level: typeof d.level === 'number' ? d.level : 1,
         ...(typeof d.xp === 'number' ? { xp: d.xp } : {}),
         title: d.title || 'Patriota',

@@ -8,7 +8,7 @@ export interface ConcelhoGeoInfo {
 export const PORTUGAL_CONCELHOS_COORDS: Record<string, ConcelhoGeoInfo> = {
   "santa cruz": {
     "name": "Santa Cruz",
-    "district": "",
+    "district": "Madeira",
     "coordinates": [
       -16.77948,
       32.65869
@@ -1840,7 +1840,7 @@ export const PORTUGAL_CONCELHOS_COORDS: Record<string, ConcelhoGeoInfo> = {
   },
   "funchal": {
     "name": "Funchal",
-    "district": "",
+    "district": "Madeira",
     "coordinates": [
       -16.88293,
       32.58842
