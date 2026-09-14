@@ -41,7 +41,7 @@ test(`Catálogo de Avatares carregado (${totalAvatars} avatares no jogo incluind
 
 // 1.2 Molduras
 const totalFrames = ANIMATED_FRAMES.length
-test(`Molduras: ${totalFrames} Molduras Vivas AAA oficiais no catálogo`, totalFrames === 9)
+test(`Molduras: ${totalFrames} Molduras ativas no catálogo (sistema purgado e em modo Em Breve)`, totalFrames === 0)
 
 // 1.3 Títulos
 const totalTitles = TITLE_SHOP_CATALOG.length
@@ -83,7 +83,7 @@ consumableKeys.forEach(k => {
 // 2. SSOT VIP: VALIDAÇÃO FINANCEIRA E INDEPENDÊNCIA
 // -------------------------------------------------------------------------
 console.log('\n2. SSOT VIP & Regra de Ouro Económica:')
-test('Catálogo VIP possui exatamente 38 produtos', VIP_CATALOG.length === 38)
+test('Catálogo VIP possui exatamente 33 produtos (sem molduras antigas)', VIP_CATALOG.length === 33)
 
 let allPriceInCentsValid = true
 let allCurrencyEur = true
@@ -155,10 +155,13 @@ const attack1 = simulateServerPriceValidation(0, 'AP-VIP-SIGNATURE-001')
 test(`Ataque 1: Cliente envia preço 0 → Servidor força preço SSOT (${(sig001ExpectedPrice / 100).toFixed(2)}€ / ${sig001ExpectedPrice}c)`, attack1.valid && attack1.chargedPrice === sig001ExpectedPrice)
 
 // Vetor 2: Tentativa de forçar preço irrisório em item VIP
-const frm001 = getVipProductById('AP-VIP-FRAME-001')
-const frm001ExpectedPrice = frm001?.priceCents ?? 0
-const attack2 = simulateServerPriceValidation(50, 'AP-VIP-FRAME-001')
-test(`Ataque 2: Cliente tenta forçar 50c em Moldura "Ordem de Cristo" (${(frm001ExpectedPrice / 100).toFixed(2)}€) → Servidor força ${frm001ExpectedPrice}c`, attack2.valid && attack2.chargedPrice === frm001ExpectedPrice)
+const tit001 = getVipProductById('AP-VIP-TITLE-001')
+const tit001ExpectedPrice = tit001?.priceCents ?? 0
+const attack2 = simulateServerPriceValidation(50, 'AP-VIP-TITLE-001')
+test(`Ataque 2: Cliente tenta forçar 50c em Título VIP (${(tit001ExpectedPrice / 100).toFixed(2)}€) → Servidor força ${tit001ExpectedPrice}c`, attack2.valid && attack2.chargedPrice === tit001ExpectedPrice)
+
+const attackFrameOld = simulateServerPriceValidation(249, 'AP-VIP-FRAME-001')
+test('Tentativa de comprar moldura antiga desativada -> Rejeitado (Produto inexistente)', !attackFrameOld.valid)
 
 // Vetor 3: Tentativa de compra com produto inexistente
 const attack3 = simulateServerPriceValidation(999, 'vip_hacked_item_999')

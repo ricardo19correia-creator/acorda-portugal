@@ -355,17 +355,6 @@ export const SHOP_CATALOG: ShopItem[] = [
     icon: 'Swords',
   },
   {
-    id: 'frame_fundador_ouro',
-    name: 'Moldura Fundador da Nação',
-    description: 'Moldura exclusiva em ouro nobre com a bandeira de Portugal animada.',
-    category: 'personalizacao',
-    rarity: 'lendario',
-    type: 'permanent',
-    slot: 'frame',
-    price: 11500,
-    icon: 'Crown',
-  },
-  {
     id: 'title_conquistador_supremo',
     name: 'Título: «O Conquistador Supremo»',
     description: 'Título régio 3D banhado a ouro em honra ao primeiro Rei de Portugal.',
@@ -530,13 +519,11 @@ export async function buyShopItem(userId: string, itemId: string): Promise<Purch
       if (itemId === 'pack_iniciado') {
         updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 1
         updatedInventory['consumable_pista'] = (updatedInventory['consumable_pista'] || 0) + 1
-        updatedInventory['frame_verde_esperanca'] = 1
         updatePayload['consumables.help5050'] = updatedInventory['consumable_50_50']
       } else if (itemId === 'pack_mestre') {
         updatedInventory['consumable_50_50'] = (updatedInventory['consumable_50_50'] || 0) + 2
         updatedInventory['consumable_congelar_tempo'] = (updatedInventory['consumable_congelar_tempo'] || 0) + 1
         updatedInventory['consumable_protecao_streak'] = (updatedInventory['consumable_protecao_streak'] || 0) + 1
-        updatedInventory['frame_azulejo_nobre'] = 1
         updatePayload['consumables.help5050'] = updatedInventory['consumable_50_50']
         updatePayload['consumables.freezeTime'] = updatedInventory['consumable_congelar_tempo']
       } else if (consumableRule) {

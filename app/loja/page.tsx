@@ -31,7 +31,7 @@ import {
   parseSafeNumber,
   safeSyncLog,
 } from '@/lib/economy-helpers'
-import { ANIMATED_FRAMES, FRAME_ALIASES, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
+import { ANIMATED_FRAMES, FRAME_ALIASES, getFrameById, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
 import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { equipTitle } from '@/lib/titles-service'
@@ -406,7 +406,17 @@ function LojaContent() {
   const [arenaCategoryFilter, setArenaCategoryFilter] = useState<string>('todos')
   const [previewArenaItem, setPreviewArenaItem] = useState<ShopItem | null>(null)
   const [equippedAvatar, setEquippedAvatar] = useState<string>(() => getAvatarImage(typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null))
-  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null))
+  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('user_equipped_frame')
+      if (stored && !getFrameById(stored)) {
+        localStorage.removeItem('user_equipped_frame')
+        return null
+      }
+      return stored
+    }
+    return null
+  })
   const [equippedArena, setEquippedArena] = useState<string>('arena_1')
   const [equippedTitleId, setEquippedTitleId] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID : DEFAULT_STARTER_TITLE_ID))
   const [equippedTitle, setEquippedTitle] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME : DEFAULT_STARTER_TITLE_NAME))
@@ -497,7 +507,14 @@ function LojaContent() {
         if (savedAvatar) setEquippedAvatar(getAvatarImage(savedAvatar))
 
         const savedFrame = localStorage.getItem('user_equipped_frame')
-        if (savedFrame) setEquippedFrame(savedFrame)
+        if (savedFrame) {
+          if (!getFrameById(savedFrame)) {
+            localStorage.removeItem('user_equipped_frame')
+            setEquippedFrame(null)
+          } else {
+            setEquippedFrame(savedFrame)
+          }
+        }
         
         const savedArena = localStorage.getItem('equipped_arena')
         if (savedArena) setEquippedArena(savedArena)
@@ -614,7 +631,14 @@ function LojaContent() {
               setEquippedAvatar(equippedData.avatarImage)
             }
             if (equippedData.frameId) {
-              setEquippedFrame(equippedData.frameId)
+              if (getFrameById(equippedData.frameId)) {
+                setEquippedFrame(equippedData.frameId)
+              } else {
+                setEquippedFrame(null)
+                if (typeof window !== 'undefined') {
+                  localStorage.removeItem('user_equipped_frame')
+                }
+              }
             }
             if (equippedData.arenaId) {
               setEquippedArena(equippedData.arenaId)
@@ -1371,7 +1395,7 @@ function LojaContent() {
                 : 'bg-slate-900/70 text-purple-300 border border-purple-500/30 hover:bg-slate-800'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-purple-300" /> MOLDURAS VIVAS ({ANIMATED_FRAMES.length})
+            <Sparkles className="w-3.5 h-3.5 text-purple-300" /> MOLDURAS VIVAS {ANIMATED_FRAMES.length > 0 ? `(${ANIMATED_FRAMES.length})` : '(Em breve)'}
           </button>
 
           <button
@@ -1509,7 +1533,7 @@ function LojaContent() {
         )}
 
         {/* SUB-FILTROS DE MOLDURAS VIVAS (COLEÇÃO, RARIDADE & TESTE DE AVATAR) */}
-        {activeTab === 'molduras' && (
+        {activeTab === 'molduras' && ANIMATED_FRAMES.length > 0 && (
           <div className="w-full max-w-6xl space-y-3 mb-6 p-4 rounded-2xl bg-slate-900/70 border border-purple-500/30 backdrop-blur-md shadow-[0_0_25px_rgba(168,85,247,0.15)]">
             {/* Categorias Temáticas */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
@@ -2007,6 +2031,22 @@ function LojaContent() {
                 )
               })}
             </div>
+          </div>
+        ) : activeTab === 'molduras' && ANIMATED_FRAMES.length === 0 ? (
+          /* Aviso Profissional Molduras Vivas Em Breve */
+          <div className="w-full max-w-2xl mx-auto my-12 p-8 sm:p-10 rounded-3xl bg-slate-900/80 border border-purple-500/30 backdrop-blur-md text-center shadow-[0_0_30px_rgba(168,85,247,0.15)] flex flex-col items-center justify-center animate-fade-in">
+            <div className="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center mb-5 text-3xl shadow-[0_0_20px_rgba(168,85,247,0.25)]">
+              ✨
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-white tracking-wide uppercase mb-2">
+              MOLDURAS VIVAS
+            </h3>
+            <span className="inline-block px-3.5 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs font-black uppercase tracking-widest mb-4 shadow-sm">
+              Em breve
+            </span>
+            <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto leading-relaxed italic">
+              As novas molduras vivas do Acorda Portugal estão a ser preparadas e estarão disponíveis brevemente.
+            </p>
           </div>
         ) : (
           /* Items Grid */

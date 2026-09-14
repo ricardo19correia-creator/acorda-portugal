@@ -31,8 +31,8 @@ function assert(condition: boolean, testName: string, detail?: string) {
 // -------------------------------------------------------------------------
 // 1. CONTAGEM E COMPOSIÇÃO OFICIAL DA VIP COLLECTION 2.0
 // -------------------------------------------------------------------------
-console.log('1. Contagem e Composição Oficial (38 Itens em 8 Tiers):')
-assert(VIP_CATALOG.length === 38, 'Catálogo VIP SSOT tem exatamente 38 produtos', `Obtido: ${VIP_CATALOG.length}`)
+console.log('1. Contagem e Composição Oficial (33 Itens):')
+assert(VIP_CATALOG.length === 33, 'Catálogo VIP SSOT tem exatamente 33 produtos (sem molduras ativas)', `Obtido: ${VIP_CATALOG.length}`)
 
 const signatureAvatars = VIP_CATALOG.filter(p => p.storeSection === 'signature')
 const ultimateArenas = VIP_CATALOG.filter(p => p.storeSection === 'arenas')
@@ -44,7 +44,7 @@ const crownJewels = VIP_CATALOG.filter(p => p.storeSection === 'ultimate')
 
 assert(signatureAvatars.length === 4, 'Tier I: Exatamente 4 Avatares Signature', `Obtido: ${signatureAvatars.length}`)
 assert(ultimateArenas.length === 5, 'Tier II: Exatamente 5 Ultimate Arenas', `Obtido: ${ultimateArenas.length}`)
-assert(royalIdentities.length === 11, 'Tiers III & IV: Exatamente 11 Royal Identities (5 Molduras + 6 Títulos)', `Obtido: ${royalIdentities.length}`)
+assert(royalIdentities.length === 6, 'Tier IV: Exatamente 6 Títulos de Prestígio (Molduras removidas)', `Obtido: ${royalIdentities.length}`)
 assert(cinematicReactions.length === 6, 'Tier V: Exatamente 6 Cinematic Reactions (Emotes)', `Obtido: ${cinematicReactions.length}`)
 assert(eliteTaunts.length === 4, 'Tier VI: Exatamente 4 Elite Taunt Packs', `Obtido: ${eliteTaunts.length}`)
 assert(completeSets.length === 3, 'Tier VII: Exatamente 3 Complete Sets (Bundles)', `Obtido: ${completeSets.length}`)
@@ -185,14 +185,9 @@ avatars.forEach(av => {
 })
 assert(registeredAvatars === 4, '4/4 Avatares Signature integrados e resolvidos em REAL_AVATARS', `Encontrados: ${registeredAvatars}`)
 
-// 5.2 Molduras em src/data/frames.ts (Resolução canónica via FRAME_ALIASES / getFrameById para as 9 Molduras Vivas AAA)
+// 5.2 Molduras em src/data/frames.ts (Total de 0 molduras ativas - sistema purgado)
 const frames = VIP_CATALOG.filter(p => p.category === 'frame')
-let registeredFrames = 0
-frames.forEach(fr => {
-  const resolved = getFrameById(fr.id)
-  if (resolved && resolved.id) registeredFrames++
-})
-assert(registeredFrames === 5, '5/5 Molduras VIP integradas e resolvidas via getFrameById / FRAME_ALIASES', `Encontradas: ${registeredFrames}`)
+assert(frames.length === 0, '0 Molduras VIP no catálogo VIP (sistema de molduras vivas purgado)', `Encontradas: ${frames.length}`)
 
 // 5.3 Títulos em src/data/shopTitles.ts
 const titles = VIP_CATALOG.filter(p => p.category === 'title')
@@ -254,7 +249,7 @@ bundlesAndUltimate.forEach(b => {
 })
 
 assert(missingComponentsCount === 0, 'Todos os componentes referenciados em Bundles e Ultimates existem no catálogo')
-assert(validComponentsCount >= 20, `Componentes desempacotáveis validados com sucesso (${validComponentsCount} referências)`)
+assert(validComponentsCount >= 16, `Componentes desempacotáveis validados com sucesso (${validComponentsCount} referências)`)
 
 const limitedItems = VIP_CATALOG.filter(p => p.isLimited)
 assert(limitedItems.length >= 3, 'Edições Limitadas com tracking de stock configuradas no catálogo', `Total: ${limitedItems.length}`)

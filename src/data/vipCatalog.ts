@@ -504,200 +504,6 @@ export const VIP_CATALOG: VipProduct[] = [
     },
   },
 
-  // =========================================================================
-  // ✨ TIER III — MOLDURAS REAIS / FRAMES (5 itens · storeSection: 'identities')
-  // Preços: €9,99–€29,99 | Raridades: Mythic → Epic
-  // =========================================================================
-  {
-    id: 'AP-VIP-FRAME-001',
-    sku: 'AP-VIP-FRAME-001',
-    name: 'Coroa do Império',
-    tier: 3,
-    tierName: 'Molduras Reais',
-    storeSection: 'identities',
-    category: 'frame',
-    rarity: 'Mythic',
-    rarityBadge: 'COLECIONADOR MÍTICO',
-    prestigeTier: 'MÍTICO',
-    profileBannerTag: 'ED. LIMITADA',
-    priceEUR: 2.49,
-    priceCents: 249,
-    currency: 'EUR',
-    isLimited: true,
-    limitedUnits: 200,
-    stock: 200,
-    serialised: true,
-    description: 'A coroa monumental do império forjada a ouro puro com rubis e esmeraldas.',
-    visualConcept: 'Coroa real em ouro maciço com pedras preciosas e brilho imperial.',
-    animation: 'A coroa orbita com partículas solares douradas.',
-    effect: 'Pulsar dourado da coroa ilumina o avatar.',
-    visualEffectsList: [
-      'Partículas solares douradas',
-      'Brilho no centro da coroa',
-      'Halo tridimensional',
-    ],
-    bundleDescription: 'Moldura animada + brilho de perfil + badge.',
-    image: '/store/vip/AP-VIP-FRAME-001.webp',
-    assetPath: '/images/frames/vip/coroa-imperio.webp',
-    thumbnailPath: '/images/frames/vip/coroa-imperio.webp',
-    previewPath: '/images/frames/vip/coroa-imperio.webp',
-    purchaseRules: 'Edição limitada a 200 unidades numeradas. Propriedade permanente. Cosmético exclusivo.',
-    payToWin: false,
-    badgeColor: 'border-amber-400/80 bg-amber-950/60 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]',
-    accentColor: '#f59e0b',
-    providerMapping: {
-      stripeProductId: 'prod_vip_frm_001',
-      stripePriceId: 'price_vip_frm_001',
-    },
-  },
-  {
-    id: 'AP-VIP-FRAME-002',
-    sku: 'AP-VIP-FRAME-002',
-    name: 'Diamante Lusitano',
-    tier: 3,
-    tierName: 'Molduras Reais',
-    storeSection: 'identities',
-    category: 'frame',
-    rarity: 'Legendary',
-    rarityBadge: 'EDIÇÃO LENDÁRIA',
-    prestigeTier: 'LENDÁRIO',
-    profileBannerTag: 'COLEÇÃO EXCLUSIVA',
-    priceEUR: 2.29,
-    priceCents: 229,
-    currency: 'EUR',
-    description: 'Moldura geométrica lapidada em diamante puro com reflexos prismáticos de luz.',
-    visualConcept: 'Faceta de diamante puro com reflexos das quinas e luz brilhante.',
-    animation: 'Reflexos de luz prismática percorrem a moldura.',
-    effect: 'Brilho de cristal a cada vitória.',
-    visualEffectsList: [
-      'Reflexos de luz prismática',
-      'Brilho cristalino pulsante',
-    ],
-    bundleDescription: 'Moldura + efeito prismático.',
-    image: '/store/vip/AP-VIP-FRAME-002.webp',
-    assetPath: '/images/frames/vip/diamante-lusitano.webp',
-    thumbnailPath: '/images/frames/vip/diamante-lusitano.webp',
-    previewPath: '/images/frames/vip/diamante-lusitano.webp',
-    purchaseRules: 'Propriedade permanente. Cosmético exclusivo.',
-    payToWin: false,
-    badgeColor: 'border-amber-400/80 bg-amber-950/60 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.5)]',
-    accentColor: '#fbbf24',
-    providerMapping: {
-      stripeProductId: 'prod_vip_frm_002',
-      stripePriceId: 'price_vip_frm_002',
-    },
-  },
-  {
-    id: 'AP-VIP-FRAME-003',
-    sku: 'AP-VIP-FRAME-003',
-    name: 'Fogo do Campeão',
-    tier: 3,
-    tierName: 'Molduras Reais',
-    storeSection: 'identities',
-    category: 'frame',
-    rarity: 'Legendary',
-    rarityBadge: 'EDIÇÃO LENDÁRIA',
-    prestigeTier: 'LENDÁRIO',
-    profileBannerTag: 'COLEÇÃO EXCLUSIVA',
-    priceEUR: 2.19,
-    priceCents: 219,
-    currency: 'EUR',
-    description: 'Chamas vivas de glória que ardem sem cessar ao redor da fotografia do campeão.',
-    visualConcept: 'Labaredas ardentes e brasas em ascensão.',
-    animation: 'Chamas dinâmicas a arder com brasas ascendentes.',
-    effect: 'Labaredas de vitória.',
-    visualEffectsList: [
-      'Chamas vivas animadas',
-      'Brasas ascendentes',
-    ],
-    bundleDescription: 'Moldura ardente de campeão.',
-    image: '/store/vip/AP-VIP-FRAME-003.webp',
-    assetPath: '/images/frames/vip/fogo-campeao.webp',
-    thumbnailPath: '/images/frames/vip/fogo-campeao.webp',
-    previewPath: '/images/frames/vip/fogo-campeao.webp',
-    purchaseRules: 'Propriedade permanente. Cosmético exclusivo.',
-    payToWin: false,
-    badgeColor: 'border-sky-400/80 bg-sky-950/60 text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.5)]',
-    accentColor: '#38bdf8',
-    providerMapping: {
-      stripeProductId: 'prod_vip_frm_003',
-      stripePriceId: 'price_vip_frm_003',
-    },
-  },
-  {
-    id: 'AP-VIP-FRAME-004',
-    sku: 'AP-VIP-FRAME-004',
-    name: 'Portugal Ouro',
-    tier: 3,
-    tierName: 'Molduras Reais',
-    storeSection: 'identities',
-    category: 'frame',
-    rarity: 'Epic',
-    rarityBadge: 'COLEÇÃO EXCLUSIVA',
-    prestigeTier: 'ÉPICO',
-    profileBannerTag: 'VIP EXCLUSIVO',
-    priceEUR: 1.99,
-    priceCents: 199,
-    currency: 'EUR',
-    description: 'A arte do azulejo português, tradição secular, redefinida em ouro e azul profundo.',
-    visualConcept: 'Estrutura geométrica de azulejo português em azul e branco com banhado a ouro, com facetas cortadas no formato do escudo nacional.',
-    animation: 'Refrações de luz contínuas atravessam as bordas de azulejo com brilho suave.',
-    effect: 'Flash dourado ao carregar o perfil, como luz sobre azulejo antigo.',
-    visualEffectsList: [
-      'Refrações de luz em azulejo',
-      'Flash dourado no perfil',
-      'Bordas animadas com brilho',
-    ],
-    image: '/store/vip/AP-VIP-FRAME-004.webp',
-    assetPath: '/images/frames/vip/portugal-ouro.webp',
-    thumbnailPath: '/images/frames/vip/portugal-ouro.webp',
-    previewPath: '/images/frames/vip/portugal-ouro.webp',
-    purchaseRules: 'Propriedade permanente. Cosmético exclusivo.',
-    payToWin: false,
-    badgeColor: 'border-teal-400/80 bg-teal-950/60 text-teal-300 shadow-[0_0_15px_rgba(167,243,208,0.5)]',
-    accentColor: '#2dd4bf',
-    providerMapping: {
-      stripeProductId: 'prod_vip_frm_004',
-      stripePriceId: 'price_vip_frm_004',
-    },
-  },
-  {
-    id: 'AP-VIP-FRAME-005',
-    sku: 'AP-VIP-FRAME-005',
-    name: 'Trono Celestial',
-    tier: 3,
-    tierName: 'Molduras Reais',
-    storeSection: 'identities',
-    category: 'frame',
-    rarity: 'Epic',
-    rarityBadge: 'COLEÇÃO EXCLUSIVA',
-    prestigeTier: 'ÉPICO',
-    profileBannerTag: 'VIP EXCLUSIVO',
-    priceEUR: 1.99,
-    priceCents: 199,
-    currency: 'EUR',
-    description: 'Moldura celestial translúcida com partículas astrais de alta resolução.',
-    visualConcept: 'Cristal etéreo translúcido com energia cósmica.',
-    animation: 'Partículas astrais em rotação.',
-    effect: 'Aura celeste suave.',
-    visualEffectsList: [
-      'Cristal translúcido',
-      'Partículas celestes',
-    ],
-    bundleDescription: 'Moldura celestial etérea.',
-    image: '/store/vip/AP-VIP-FRAME-005.webp',
-    assetPath: '/images/frames/vip/trono-celestial.webp',
-    thumbnailPath: '/images/frames/vip/trono-celestial.webp',
-    previewPath: '/images/frames/vip/trono-celestial.webp',
-    purchaseRules: 'Propriedade permanente. Cosmético exclusivo.',
-    payToWin: false,
-    badgeColor: 'border-rose-400/80 bg-rose-950/60 text-rose-300 shadow-[0_0_15px_rgba(248,113,113,0.5)]',
-    accentColor: '#fb7185',
-    providerMapping: {
-      stripeProductId: 'prod_vip_frm_005',
-      stripePriceId: 'price_vip_frm_005',
-    },
-  },
 
   // =========================================================================
   // 🏅 TIER IV — TÍTULOS DE PRESTÍGIO (6 itens · storeSection: 'identities')
@@ -1349,13 +1155,11 @@ export const VIP_CATALOG: VipProduct[] = [
     ],
     bundleDescription: `Inclui:
 ✓ Avatar "Soberano de Ourique"
-✓ Moldura "Ordem de Cristo" (Ed. Limitada)
 ✓ Título "Imperador de Portugal"
 ✓ Emote "A Coroa Desce"
 ✓ Efeito de Vitória Real exclusivo`,
     bundleComponents: [
       'AP-VIP-SIGNATURE-001',
-      'AP-VIP-FRAME-001',
       'AP-VIP-TITLE-001',
       'AP-VIP-EMOTE-001',
     ],
@@ -1519,7 +1323,6 @@ export const VIP_CATALOG: VipProduct[] = [
     bundleDescription: `Inclui:
 ✓ Avatar "Dragão de Viriato"
 ✓ Arena "Palácio dos Descobrimentos"
-✓ Moldura "Quinas Reais de Portugal"
 ✓ Título "Lenda da Nação"
 ✓ Emote "Orgulho Português"
 ✓ Pack "Duelos de Campeões"
@@ -1527,7 +1330,6 @@ export const VIP_CATALOG: VipProduct[] = [
     bundleComponents: [
       'AP-VIP-SIGNATURE-002',
       'AP-VIP-ARENA-ULTIMATE-002',
-      'AP-VIP-FRAME-002',
       'AP-VIP-TITLE-002',
       'AP-VIP-EMOTE-002',
       'AP-VIP-TAUNTPACK-002',
@@ -1607,13 +1409,11 @@ export const VIP_CATALOG: VipProduct[] = [
     bundleDescription: `Inclui:
 ✓ Avatar "Navegador dos Descobrimentos"
 ✓ Arena "Muralhas do Além-Tejo"
-✓ Moldura "Azulejo Dourado"
 ✓ Título "Mestre dos Saberes"
 ✓ Emote "Vénia do Cavaleiro"`,
     bundleComponents: [
       'AP-VIP-SIGNATURE-003',
       'AP-VIP-ARENA-ULTIMATE-005',
-      'AP-VIP-FRAME-004',
       'AP-VIP-TITLE-004',
       'AP-VIP-EMOTE-006',
     ],
@@ -1658,14 +1458,12 @@ export const VIP_CATALOG: VipProduct[] = [
     profileBadge: 'FUNDADOR',
     bundleDescription: `Inclui:
 ✓ Avatar "Guardião das Quinas"
-✓ Moldura "Calçada da Glória"
 ✓ Título "Filho da Lusitânia"
 ✓ Emote "Salva do Vencedor"
 ✓ Pack "Lusitano Implacável"
 ✓ Badge exclusivo "FUNDADOR"`,
     bundleComponents: [
       'AP-VIP-SIGNATURE-004',
-      'AP-VIP-FRAME-005',
       'AP-VIP-TITLE-005',
       'AP-VIP-EMOTE-004',
       'AP-VIP-TAUNTPACK-003',
@@ -1698,11 +1496,6 @@ export const VIP_LEGACY_ALIASES: Record<string, string> = {
   'vip_arena_003': 'AP-VIP-ARENA-ULTIMATE-003',
   'vip_arena_004': 'AP-VIP-ARENA-ULTIMATE-004',
   'vip_arena_005': 'AP-VIP-ARENA-ULTIMATE-005',
-  'vip_frame_001': 'AP-VIP-FRAME-001',
-  'vip_frame_002': 'AP-VIP-FRAME-002',
-  'vip_frame_003': 'AP-VIP-FRAME-003',
-  'vip_frame_004': 'AP-VIP-FRAME-004',
-  'vip_frame_005': 'AP-VIP-FRAME-005',
   'vip_title_001': 'AP-VIP-TITLE-001',
   'vip_title_002': 'AP-VIP-TITLE-002',
   'vip_title_003': 'AP-VIP-TITLE-003',
@@ -1729,11 +1522,6 @@ export const VIP_LEGACY_ALIASES: Record<string, string> = {
   'coliseu-campeoes': 'AP-VIP-ARENA-ULTIMATE-003',
   'palacio-reis': 'AP-VIP-ARENA-ULTIMATE-004',
   'cidadela-eterna': 'AP-VIP-ARENA-ULTIMATE-005',
-  'coroa-imperio': 'AP-VIP-FRAME-001',
-  'portugal-ouro': 'AP-VIP-FRAME-002',
-  'trono-celestial': 'AP-VIP-FRAME-003',
-  'diamante-lusitano': 'AP-VIP-FRAME-004',
-  'fogo-campeao': 'AP-VIP-FRAME-005',
   'conjunto-imperial': 'AP-VIP-BUNDLE-001',
   'conjunto-campeao-eterno': 'AP-VIP-BUNDLE-002',
   'conjunto-lusitano-supremo': 'AP-VIP-BUNDLE-003',

@@ -78,7 +78,12 @@ export function UserAvatar({
         setLocalAvatar(storedAvatar ? getAvatarImage(storedAvatar) : getEquippedAvatarImage());
 
         const storedFrame = localStorage.getItem('user_equipped_frame');
-        setLocalFrame(storedFrame || null);
+        if (storedFrame && !getFrameById(storedFrame)) {
+          localStorage.removeItem('user_equipped_frame');
+          setLocalFrame(null);
+        } else {
+          setLocalFrame(storedFrame || null);
+        }
       }
     };
 

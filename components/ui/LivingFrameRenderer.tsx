@@ -443,6 +443,10 @@ export function LivingFrameRenderer({
   size = 'md',
 }: LivingFrameRendererProps) {
   const frame = getFrameById(frameId);
+  if (!frame) {
+    return <div className={cn('relative w-full h-full rounded-[inherit] overflow-hidden', className)}>{children}</div>;
+  }
+
   const style = getLivingFrameStyle(frame, size);
   const thicknessClass = THICKNESS_PADDING[size] || THICKNESS_PADDING.md;
 
