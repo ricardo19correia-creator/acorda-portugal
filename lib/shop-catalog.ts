@@ -11,6 +11,7 @@ import { VIP_CATALOG } from '../src/data/vipCatalog'
 import { TITLE_SHOP_CATALOG } from '../src/data/shopTitles'
 import { OFFICIAL_EMOTES } from '../src/data/emotes'
 import { ANIMATED_FRAMES, type AnimatedFrame, type FrameRarity } from '../src/data/frames'
+import { ARENA_SHOP_CATALOG, LEGACY_ARENA_ALIASES } from '../src/data/shopArenas'
 
 export type ShopItemType =
   | 'avatar'
@@ -352,60 +353,25 @@ export const FRAME_SHOP_ITEMS: ShopCatalogItem[] = ANIMATED_FRAMES.map((f): Shop
 }))
 
 // ============================================================================
-// 4. ARENAS & CENÁRIOS (43 BASE + 3 ULTRA-EXCLUSIVAS POR MÉRITO)
+// 4. ARENAS & CENÁRIOS (50 ARENAS OFICIAIS CANÓNICAS)
 // ============================================================================
-export const ARENA_SHOP_ITEMS: ShopCatalogItem[] = [
-  // Grátis (1)
-  { id: 'arena_praca_liberdade', type: 'arena', name: 'Praça da Liberdade', description: 'O coração cívico da cidade com calçada portuguesa e arquitetura imponente.', rarity: 'common', currency: 'free', priceCoins: 0, unlockType: 'free', asset: '/arenas/praca-liberdade.jpg', active: true, category: 'porto', icon: '🏛️' },
-  // Comuns (1.500–2.800 moedas)
-  { id: 'arena_cidade_norte', type: 'arena', name: 'Cidade Histórica do Norte', description: 'Ruas de granito e casario típico de uma cidade nortenha secular.', rarity: 'common', currency: 'coins', priceCoins: 2000, unlockType: 'purchase', asset: '/arenas/arena-3.jpg', active: true, category: 'porto', icon: '🏰' },
-  { id: 'arena_costa_selvagem', type: 'arena', name: 'Falésias da Costa Selvagem', description: 'Encostas rochosas batidas pelas ondas impetuosas do oceano.', rarity: 'common', currency: 'coins', priceCoins: 2500, unlockType: 'purchase', asset: '/arenas/arena-4.jpg', active: true, category: 'natureza', icon: '🌊' },
-  { id: 'arena_mosteiro_antigo', type: 'arena', name: 'Claustros do Mosteiro', description: 'Arcadas góticas e silêncio monumental num mosteiro carregado de história.', rarity: 'common', currency: 'coins', priceCoins: 2200, unlockType: 'purchase', asset: '/arenas/arena-5.jpg', active: true, category: 'historia', icon: '⛪' },
-  { id: 'arena_festival_portugues', type: 'arena', name: 'Noite de Santos Populares', description: 'Manjericos, balões coloridos e arraiais iluminados sob o céu de junho.', rarity: 'common', currency: 'coins', priceCoins: 2800, unlockType: 'purchase', asset: '/arenas/festival-santos.jpg', active: true, category: 'cultura', icon: '🎉' },
-  // Raras (3.000–6.000 moedas)
-  { id: 'arena_costa_atlantica', type: 'arena', name: 'Costa Atlântica', description: 'A imensidão do Atlântico a perder de vista sob um pôr do sol dourado.', rarity: 'rare', currency: 'coins', priceCoins: 3500, unlockType: 'purchase', asset: '/arenas/costa-atlantica.jpg', active: true, category: 'natureza', icon: '🌊' },
-  { id: 'arena_ponte_d_luis', type: 'arena', name: 'Ponte D. Luís I', description: 'A imponente estrutura de ferro forjado sobre as águas serenas do Rio Douro.', rarity: 'rare', currency: 'coins', priceCoins: 4000, unlockType: 'purchase', asset: '/arenas/ponte-d-luis.jpg', active: true, category: 'porto', icon: '🌉' },
-  { id: 'arena_madeira_tropical', type: 'arena', name: 'Madeira Tropical', description: 'Encostas verdejantes e flora exótica na pérola do Atlântico.', rarity: 'rare', currency: 'coins', priceCoins: 4200, unlockType: 'purchase', asset: '/arenas/madeira-tropical.jpg', active: true, category: 'ilhas', icon: '🌺' },
-  { id: 'arena_castelo_obidos', type: 'arena', name: 'Castelo de Óbidos', description: 'Muralhas de pedra medievais intactas que guardam séculos de histórias e lendas.', rarity: 'rare', currency: 'coins', priceCoins: 4500, unlockType: 'purchase', asset: '/arenas/castelo-obidos.jpg', active: true, category: 'historia', icon: '🏰' },
-  { id: 'arena_madeira_noite', type: 'arena', name: 'Noite do Funchal', description: 'A baía do Funchal iluminada pelas luzes que sobem pelas encostas até às estrelas.', rarity: 'rare', currency: 'coins', priceCoins: 4500, unlockType: 'purchase', asset: '/arenas/madeira-noite.jpg', active: true, category: 'ilhas', icon: '✨' },
-  { id: 'arena_fado_alfama', type: 'arena', name: 'Calçadas de Alfama', description: 'Lanternas ambarinas e becos sinuosos onde ecoa a guitarra portuguesa.', rarity: 'rare', currency: 'coins', priceCoins: 4800, unlockType: 'purchase', asset: '/arenas/fado-alfama.jpg', active: true, category: 'cultura', icon: '🎸' },
-  { id: 'arena_torre_belem', type: 'arena', name: 'Torre de Belém', description: 'Bastião manuelino das navegações, plantado nas margens douradas do Tejo.', rarity: 'rare', currency: 'coins', priceCoins: 5000, unlockType: 'purchase', asset: '/arenas/torre-belem.jpg', active: true, category: 'lisboa', icon: '⛵' },
-  // Épicas (6.000–12.000 moedas)
-  { id: 'arena_lisboa_imperial_noturna', type: 'arena', name: 'Lisboa Imperial Noturna', description: 'Os monumentos do Terreiro do Paço banhados por iluminação cénica dourada.', rarity: 'epic', currency: 'coins', priceCoins: 7500, unlockType: 'purchase', asset: '/arenas/arena-lisboa-imperial.jpg', active: true, category: 'lisboa', icon: '🌙' },
-  { id: 'arena_ponte_douro_panoramica', type: 'arena', name: 'Ponte do Douro Panorâmica', description: 'Vista aérea épica sobre as pontes e as encostas vinícolas do Douro.', rarity: 'epic', currency: 'coins', priceCoins: 8000, unlockType: 'purchase', asset: '/arenas/arena-ponte-d-luis.jpg', active: true, category: 'porto', icon: '🍷' },
-  { id: 'arena_lisboa_imperial', type: 'arena', name: 'Lisboa Imperial', description: 'A grandiosidade pombalina e a luz branca e límpida que só a capital tem.', rarity: 'epic', currency: 'coins', priceCoins: 8500, unlockType: 'purchase', asset: '/arenas/lisboa-imperial.jpg', active: true, category: 'lisboa', icon: '👑' },
-  { id: 'arena_portugal_medieval', type: 'arena', name: 'Muralhas Medievais', description: 'Pedras batidas por batalhas que moldaram a fundação da nacionalidade.', rarity: 'epic', currency: 'coins', priceCoins: 8500, unlockType: 'purchase', asset: '/arenas/portugal-medieval.jpg', active: true, category: 'historia', icon: '🛡️' },
-  { id: 'arena_vulcao_erupcao', type: 'arena', name: 'Vulcão dos Açores', description: 'A força telúrica das caldeiras e fumarolas vulcânicas em plena atividade.', rarity: 'epic', currency: 'coins', priceCoins: 9000, unlockType: 'purchase', asset: '/arenas/vulcao-acores.jpg', active: true, category: 'ilhas', icon: '🌋' },
-  { id: 'arena_vulcao_furnas', type: 'arena', name: 'Caldeiras das Furnas', description: 'Vapor místico e água termal a ferver no coração de São Miguel.', rarity: 'epic', currency: 'coins', priceCoins: 9500, unlockType: 'purchase', asset: '/arenas/arena-vulcao-erupcao.jpg', active: true, category: 'ilhas', icon: '♨️' },
-  { id: 'arena_batalha_medieval', type: 'arena', name: 'Campo de Batalha Real', description: 'Estandartes ao vento e espadas cravadas na terra dos heróis de Aljubarrota.', rarity: 'epic', currency: 'coins', priceCoins: 10000, unlockType: 'purchase', asset: '/arenas/batalha-medieval.jpg', active: true, category: 'historia', icon: '⚔️' },
-  { id: 'arena_caos_patos', type: 'arena', name: 'Ria de Aveiro & Moliceiros Cyber', description: 'Canais serenos com moliceiros luminosos que rasgam a névoa com néon.', rarity: 'epic', currency: 'coins', priceCoins: 10500, unlockType: 'purchase', asset: '/arenas/patos-aveiro.jpg', active: true, category: 'cyber', icon: '🦆' },
-  { id: 'arena_teatro_nacional', type: 'arena', name: 'Palco do Teatro Nacional', description: 'Veludo carmesim, camarotes dourados e o peso das grandes dramaturgias lusas.', rarity: 'epic', currency: 'coins', priceCoins: 11000, unlockType: 'purchase', asset: '/arenas/teatro-nacional.jpg', active: true, category: 'cultura', icon: '🎭' },
-  // Lendárias (12.000–22.500 moedas)
-  { id: 'arena_estadio_nacional', type: 'arena', name: 'Estádio Nacional do Jamor', description: 'A mítica tribuna de madeira e a atmosfera sagrada das grandes finais da Taça.', rarity: 'legendary', currency: 'coins', priceCoins: 13500, unlockType: 'purchase', asset: '/arenas/estadio-jamor.jpg', active: true, category: 'desporto', icon: '⚽' },
-  { id: 'arena_pico_estrelas', type: 'arena', name: 'Pico Sob as Estrelas', description: 'O ponto mais alto de Portugal a tocar o céu nocturno carregado de estrelas.', rarity: 'legendary', currency: 'coins', priceCoins: 14000, unlockType: 'purchase', asset: '/arenas/pico-estrelas.jpg', active: true, category: 'ilhas', icon: '⭐' },
-  { id: 'arena_pico_aurora', type: 'arena', name: 'Pico com Aurora Mística', description: 'A majestosa montanha do Pico coroada por feixes de luz mística.', rarity: 'legendary', currency: 'coins', priceCoins: 15000, unlockType: 'purchase', asset: '/arenas/arena-pico-estrelas.jpg', active: true, category: 'ilhas', icon: '🏔️' },
-  { id: 'arena_noite_jogo', type: 'arena', name: 'Noite de Clássico', description: 'Relvado iluminado por holofotes potentes sob o rugido ensurdecedor das bancadas.', rarity: 'legendary', currency: 'coins', priceCoins: 15500, unlockType: 'purchase', asset: '/arenas/derbi-noite.jpg', active: true, category: 'desporto', icon: '🏟️' },
-  { id: 'arena_era_descobrimentos', type: 'arena', name: 'Cais dos Descobrimentos', description: 'Caravelas prontas a partir rumo ao desconhecido sob a bênção da Cruz de Cristo.', rarity: 'legendary', currency: 'coins', priceCoins: 16000, unlockType: 'purchase', asset: '/arenas/era-descobrimentos.jpg', active: true, category: 'historia', icon: '⛵' },
-  { id: 'arena_corte_portuguesa', type: 'arena', name: 'Salão Nobre da Corte', description: 'Tapeçarias sumptuosas, azulejos barrocos e tronos dourados de reis e rainhas.', rarity: 'legendary', currency: 'coins', priceCoins: 17500, unlockType: 'purchase', asset: '/arenas/corte-portuguesa.jpg', active: true, category: 'historia', icon: '👑' },
-  { id: 'arena_final_nacional', type: 'arena', name: 'Final da Taça de Portugal', description: 'Chuva de confetes e taça reluzente no centro do relvado sagrado.', rarity: 'legendary', currency: 'coins', priceCoins: 18000, unlockType: 'purchase', asset: '/arenas/final-campeoes.jpg', active: true, category: 'desporto', icon: '🏆' },
-  { id: 'arena_noite_selecao', type: 'arena', name: 'Conquista da Seleção das Quinas', description: 'O estádio pintado de verde e rubro na noite em que Portugal foi campeão.', rarity: 'legendary', currency: 'coins', priceCoins: 20000, unlockType: 'purchase', asset: '/arenas/conquista-selecao.jpg', active: true, category: 'desporto', icon: '🇵🇹' },
-  { id: 'arena_duelo_1v1_oficial', type: 'arena', name: 'Arena Oficial Multiplayer', description: 'A câmara de competição direta onde apenas a velocidade e conhecimento prevalecem.', rarity: 'legendary', currency: 'coins', priceCoins: 22500, unlockType: 'purchase', asset: '/arenas/arena-1v1.png', active: true, category: 'desporto', icon: '⚔️' },
-  // Míticas (22.500–40.000 moedas)
-  { id: 'arena_ponte_2077', type: 'arena', name: 'Ponte 25 de Abril Cyber 2077', description: 'A ponte suspensa envolta em néons vermelhos e veículos voadores cortando o Tejo.', rarity: 'mythic', currency: 'coins', priceCoins: 26000, unlockType: 'purchase', asset: '/arenas/ponte-2077.jpg', active: true, category: 'cyber', icon: '🌆' },
-  { id: 'arena_cyber_laboratorio', type: 'arena', name: 'Laboratório de Matriz Quântica', description: 'Fibras óticas e servidores holográficos a processar o saber universal.', rarity: 'mythic', currency: 'coins', priceCoins: 28000, unlockType: 'purchase', asset: '/arenas/arena-7.jpg', active: true, category: 'cyber', icon: '🔬' },
-  { id: 'arena_portugal_ao_contrario', type: 'arena', name: 'Portugal Invertido', description: 'O mapa do país reflectido numa dimensão paralela de gravidade zero.', rarity: 'mythic', currency: 'coins', priceCoins: 29000, unlockType: 'purchase', asset: '/arenas/portugal-invertido.jpg', active: true, category: 'cyber', icon: '🌀' },
-  { id: 'arena_lisboa_cybercore', type: 'arena', name: 'Lisboa Cybercore Néon', description: 'Aranha-céus translúcidos e hologramas gigantes das Quinas projetados nas nuvens.', rarity: 'mythic', currency: 'coins', priceCoins: 30000, unlockType: 'purchase', asset: '/arenas/lisboa-cybercore.jpg', active: true, category: 'cyber', icon: '🌃' },
-  { id: 'arena_dimensao_psicadelica', type: 'arena', name: 'Vórtice Onírico Transcendente', description: 'Caleidoscópio cromático infinito de azulejos e calçada em expansão.', rarity: 'mythic', currency: 'coins', priceCoins: 30000, unlockType: 'purchase', asset: '/arenas/arena-8.jpg', active: true, category: 'cyber', icon: '🔮' },
-  { id: 'arena_estacao_orbital', type: 'arena', name: 'Estação Orbital Lusitana', description: 'Módulos espaciais em órbita com vista panorâmica para a costa portuguesa.', rarity: 'mythic', currency: 'coins', priceCoins: 32000, unlockType: 'purchase', asset: '/arenas/estacao-orbital.jpg', active: true, category: 'cyber', icon: '🛰️' },
-  { id: 'arena_labirinto_onirico', type: 'arena', name: 'Labirinto Sem Fim das Quinas', description: 'Corredores infinitos de espelhos e livros antigos que desafiam a lógica do tempo.', rarity: 'mythic', currency: 'coins', priceCoins: 33000, unlockType: 'purchase', asset: '/arenas/arena-9.jpg', active: true, category: 'cyber', icon: '🧩' },
-  { id: 'arena_dentro_cerebro', type: 'arena', name: 'Sinapses do Saber Absoluto', description: 'Impulsos elétricos azuis e dourados a viajar por redes neuronais do conhecimento.', rarity: 'mythic', currency: 'coins', priceCoins: 34000, unlockType: 'purchase', asset: '/arenas/dentro-cerebro.jpg', active: true, category: 'cyber', icon: '🧠' },
-  { id: 'arena_megalopolis_lusa', type: 'arena', name: 'Megalópole Atlântica 2077', description: 'Visão futurista de Portugal integrada numa super-cidade conectada aos oceanos.', rarity: 'mythic', currency: 'coins', priceCoins: 35000, unlockType: 'purchase', asset: '/arenas/arena-10.jpg', active: true, category: 'cyber', icon: '🚀' },
-  { id: 'arena_portal_galactico', type: 'arena', name: 'Portal Quântico dos Descobrimentos', description: 'Vórtice dimensional estelar que liga o passado marítimo ao futuro interestelar.', rarity: 'mythic', currency: 'coins', priceCoins: 38000, unlockType: 'purchase', asset: '/arenas/portal-galactico.jpg', active: true, category: 'cyber', icon: '🌌' },
-  // Ultra-Exclusivas por Mérito (NÃO Comprar com Moedas)
-  { id: 'arena_excl_campeao', type: 'arena', name: 'Trono Sagrado do Campeão Nacional', description: 'Destinada exclusivamente ao número 1 do Ranking Nacional de Portugal.', rarity: 'exclusive', currency: 'merit', unlockType: 'ranking', unlockCondition: 'Top 1 no Ranking Nacional', asset: '/arenas/trono-campeao.jpg', active: true, category: 'exclusivos', icon: '👑' },
-  { id: 'arena_excl_fundadores', type: 'arena', name: 'Monumento Perpétuo dos Fundadores', description: 'Símbolo eterno de homenagem aos pioneiros e fundadores do Acorda Portugal.', rarity: 'exclusive', currency: 'merit', unlockType: 'founder', unlockCondition: 'Passe Fundador / Pioneiro Oficial', asset: '/arenas/monumento-fundadores.jpg', active: true, category: 'exclusivos', icon: '🏛️' },
-  { id: 'arena_excl_lenda_100', type: 'arena', name: 'Coliseu dos Imortais — 100 Vitórias', description: 'Monumento reservado à elite que alcançou a marca mítica de 100 vitórias 1v1.', rarity: 'exclusive', currency: 'merit', unlockType: 'achievement', unlockCondition: 'Conquista de 100 Vitórias em Duelos 1v1', asset: '/arenas/coliseu-100.jpg', active: true, category: 'exclusivos', icon: '⚔️' },
-]
+export const ARENA_SHOP_ITEMS: ShopCatalogItem[] = ARENA_SHOP_CATALOG.map((a) => ({
+  id: a.id,
+  type: 'arena' as const,
+  name: a.name,
+  description: a.description,
+  rarity: (a.rarity === 'Comum' ? 'common' : a.rarity === 'Rara' ? 'rare' : a.rarity === 'Épica' ? 'epic' : a.rarity === 'Lendária' ? 'legendary' : 'mythic') as ShopRarity,
+  currency: (a.price === 0 ? 'free' : 'coins') as ShopCurrency,
+  priceCoins: a.price || 0,
+  unlockType: (a.price === 0 ? 'free' : 'purchase') as ShopUnlockType,
+  asset: a.image || '',
+  active: true,
+  category: a.category,
+  categoryTitle: a.categoryLabel,
+  icon: a.icon || '🏟️',
+  badgeText: a.rarity,
+  badgeColor: a.badgeColor,
+}))
 
 // ============================================================================
 // 5. TÍTULOS DE PERFIL (STARTER, TEMÁTICOS & MÉRITO)
@@ -650,7 +616,8 @@ export function getShopCatalogItem(itemId: string): ShopCatalogItem | undefined 
     vip_arena_006: 'AP-VIP-ARENA-ULTIMATE-002',
   }
 
-  const resolvedId = vipAliases[normalized] || normalized
+  const arenaAlias = LEGACY_ARENA_ALIASES[normalized] || LEGACY_ARENA_ALIASES[itemId.trim()]
+  const resolvedId = vipAliases[normalized] || arenaAlias || normalized
 
   const direct = SHOP_CATALOG.find((item) => item.id === resolvedId)
   if (direct) return direct

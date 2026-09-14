@@ -26,6 +26,9 @@ export const ARENAS: ArenaItem[] = ARENA_SHOP_CATALOG.map((arena) => ({
   category: arena.category,
   effect: arena.effect,
   meaning: arena.meaning,
+  width: arena.width,
+  height: arena.height,
+  aspectRatio: arena.aspectRatio,
 }))
 
 export default ARENAS

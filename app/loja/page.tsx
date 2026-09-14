@@ -76,6 +76,9 @@ interface ShopItem {
   badge?: string
   badgeColor?: string
   phrases?: string[]
+  width?: number
+  height?: number
+  aspectRatio?: number
 }
 
 const getRarityBadgeColor = (rarity: AvatarRarity) => {
@@ -88,10 +91,11 @@ const getRarityBadgeColor = (rarity: AvatarRarity) => {
       return 'bg-purple-500/20 text-purple-300 border-purple-500/40'
     case 'Lendário':
       return 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
+    case 'Mítico':
     case 'Exclusivo':
       return 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(244,63,94,0.35)]'
     default:
-      return 'bg-slate-700 text-slate-300 border-slate-600'
+      return 'bg-slate-800 text-slate-300 border-slate-700'
   }
 }
 
@@ -154,6 +158,9 @@ const ARENA_SHOP_ITEMS: ShopItem[] = shopArenas.map((a) => ({
   effect: a.effect,
   badge: a.rarity,
   badgeColor: a.badgeColor,
+  width: a.width,
+  height: a.height,
+  aspectRatio: a.aspectRatio || 1.7917,
 }))
 
 const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
@@ -2191,14 +2198,14 @@ function LojaContent() {
                       ) : item.category === 'arenas' ? (
                         <div 
                           onClick={() => setPreviewArenaItem(item)}
-                          className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md bg-slate-950"
+                          className="relative w-full overflow-hidden rounded-xl border border-slate-700/60 mb-3 cursor-pointer group/arena shadow-md bg-slate-950"
+                          style={{ aspectRatio: item.aspectRatio || 1.7917 }}
                         >
                           <img 
                             src={item.image || (item as any).shopImage || ''} 
                             alt={item.name} 
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105" 
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover/arena:scale-105 block" 
                           />
-                          <ArenaEffectsLayer effect={item.effect || 'particles'} intensity="low" showContrastOverlay={false} className="z-10" />
                           
                           {/* Botão de Testar */}
                           <div className="absolute top-2 right-2 z-20">
@@ -2397,14 +2404,18 @@ function LojaContent() {
         {previewArenaItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
             <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-blue-500/40 bg-slate-950 shadow-[0_0_50px_rgba(59,130,246,0.3)]">
-              {/* Arena Background Layer with Particle Engine */}
+              {/* Arena Background Layer com Enquadramento Perfeito */}
               <div 
-                className="relative h-72 sm:h-96 w-full bg-cover bg-center overflow-hidden flex flex-col justify-between p-6"
+                className="relative w-full overflow-hidden flex flex-col justify-between p-6 bg-slate-950 max-h-[70vh]"
                 style={{
-                  backgroundImage: `url('${(previewArenaItem as any).gameBackground || previewArenaItem.image || (previewArenaItem as any).shopImage || ''}')`,
+                  aspectRatio: (previewArenaItem as any).aspectRatio || 1.7917,
                 }}
               >
-                <ArenaEffectsLayer effect={previewArenaItem.effect || 'particles'} intensity="high" showContrastOverlay={false} />
+                <img
+                  src={(previewArenaItem as any).gameBackground || previewArenaItem.image || (previewArenaItem as any).shopImage || ''}
+                  alt={previewArenaItem.name}
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+                />
                 
                 {/* Header Preview */}
                 <div className="relative z-20 flex items-center justify-between">

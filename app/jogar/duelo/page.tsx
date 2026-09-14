@@ -14,7 +14,6 @@ import { auth } from '@/lib/firebase'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { getArenaById, getDefaultArena, type ArenaDefinition } from '@/src/data/shopArenas'
 import { getArenaDuelBackground } from '@/lib/arena-assets'
-import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 
 function DuelPageContent() {
   const router = useRouter()
@@ -158,7 +157,7 @@ function DuelPageContent() {
 
   return (
     <div className="relative w-full min-h-[100dvh] overflow-x-hidden bg-transparent">
-      {/* 1. FUNDO DINÂMICO DA ARENA DE DUELOS (FOTOGRAFIA OFICIAL & EFEITOS) */}
+      {/* 1. FUNDO DINÂMICO DA ARENA DE DUELOS (FOTOGRAFIA OFICIAL) */}
       {currentArena.image && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -168,11 +167,6 @@ function DuelPageContent() {
         />
       )}
       <div className="fixed inset-0 z-[5] bg-black/65 backdrop-blur-[1px] pointer-events-none" />
-      <ArenaEffectsLayer
-        effect={currentArena.effect || 'particles'}
-        intensity="medium"
-        className="fixed inset-0 z-[5] pointer-events-none"
-      />
 
       {/* 2. CONTEÚDO DO DUELO (Cards translúcidos sobre a arena) */}
       <div className="relative z-10 w-full min-h-[100dvh] flex flex-col justify-between p-2 sm:p-3 pb-8 max-w-lg mx-auto bg-transparent">

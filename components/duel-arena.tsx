@@ -438,7 +438,7 @@ export function DuelArena({
       setDuel(updatedDuel)
 
       if (onArenaLoaded) {
-        const resolvedArena = getArenaById(updatedDuel.arenaId || updatedDuel.arenaImage || 'arena_praca_liberdade')
+        const resolvedArena = getArenaById(updatedDuel.arenaId || updatedDuel.arenaImage || 'arena_terreiro_dourado')
         onArenaLoaded(resolvedArena as any)
       }
 
@@ -473,7 +473,7 @@ export function DuelArena({
   }, [duel, currentPlayer.uid])
 
   const currentArenaDef = useMemo(() => {
-    return getArenaById(duel?.arenaId || duel?.arenaImage || 'arena_praca_liberdade')
+    return getArenaById(duel?.arenaId || duel?.arenaImage || 'arena_terreiro_dourado')
   }, [duel?.arenaId, duel?.arenaImage])
 
   // Índice da pergunta atual deste jogador

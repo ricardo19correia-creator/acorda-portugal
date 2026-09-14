@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo } from 'react'
 import { resolveArena, resolveArenaForGame, type CanonicalArena } from '@/src/data/arenaCatalog'
-import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 import { AlertTriangle, Crown, ShieldAlert } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -17,27 +16,30 @@ export interface ArenaRendererProps {
   showLighting?: boolean
   showBadge?: boolean
   className?: string
+  aspectRatio?: number
+  autoAspect?: boolean
   children?: React.ReactNode
 }
 
 /**
  * 🇵🇹 ACORDA PORTUGAL — MASTER ARENA RENDERER (SSOT)
- * Componente unificado e autoritativo de renderização visual de Arenas de Jogo e Previews da Loja.
+ * Componente unificado e autoritativo de renderização visual das 50 Arenas Oficiais.
  * 
- * Regra Absoluta:
- * NUNCA recorre silenciosamente a Palácio Nacional.
- * Se a arena for inválida, exibe 'ARENA NÃO DEFINIDA'.
+ * Regra Crítica:
+ * - 100% da imagem da arena visível
+ * - Nenhuma parte cortada
+ * - Nenhum espaço vazio desnecessário / sem barras pretas ou brancas
+ * - Nenhuma distorção ou imagem esticada/esmagada
+ * - Nenhum efeito artificial para esconder problemas de enquadramento
  */
 export function ArenaRenderer({
   arenaId,
   categorySlug,
   equippedArenaId,
-  burstTrigger = null,
-  quality = 'ultra',
-  showAtmosphere = true,
-  showLighting = true,
   showBadge = false,
   className = '',
+  aspectRatio,
+  autoAspect = false,
   children,
 }: ArenaRendererProps) {
   const [imgError, setImgError] = useState(false)
@@ -81,41 +83,29 @@ export function ArenaRenderer({
     )
   }
 
-  // 2. Renderização Autoritativa da Arena Selecionada
+  const effectiveRatio = aspectRatio || (autoAspect ? arena.aspectRatio : undefined)
+
+  // 2. Renderização Fiel, Íntegra e Adaptativa da Arte da Arena
   return (
     <div
       className={cn(
-        'relative w-full h-full overflow-hidden select-none isolate',
+        'relative w-full overflow-hidden select-none bg-slate-950',
+        !effectiveRatio && 'h-full',
         className
       )}
-      style={{
-        backgroundColor: arena.lightingProfile?.ambientColor || '#09090b',
-      }}
+      style={effectiveRatio ? { aspectRatio: effectiveRatio } : undefined}
     >
-      {/* 2.1 Camada Base de Background Visual com Suporte Completo a Todas as Resoluções */}
       {!imgError ? (
-        <>
-          {/* Camada Ambiente Desfocada (Preenche ecrãs verticais de telemóvel e ultrawide sem barras pretas nem cortes) */}
-          <img
-            src={encodeURI(arena.assetPath)}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center blur-2xl scale-110 opacity-35 pointer-events-none select-none"
-            loading="eager"
-          />
-
-          {/* Arte Principal Preservada na Totalidade (100% visível, proporção perfeita, sem deformação nem cortes) */}
-          <img
-            src={encodeURI(arena.assetPath)}
-            alt={arena.name}
-            onError={() => {
-              console.error(`[ArenaRenderer] Erro ao carregar asset da arena: ${arena.assetPath}`)
-              setImgError(true)
-            }}
-            className="relative z-0 w-full h-full object-contain object-center pointer-events-none select-none transition-transform duration-700 will-change-transform drop-shadow-2xl"
-            loading="eager"
-          />
-        </>
+        <img
+          src={encodeURI(arena.assetPath)}
+          alt={arena.name}
+          onError={() => {
+            console.error(`[ArenaRenderer] Erro ao carregar asset da arena: ${arena.assetPath}`)
+            setImgError(true)
+          }}
+          className="w-full h-full object-cover object-center pointer-events-none select-none block"
+          loading="eager"
+        />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950 p-6 text-center">
           <AlertTriangle className="w-10 h-10 text-amber-400 mb-2" />
@@ -128,44 +118,7 @@ export function ArenaRenderer({
         </div>
       )}
 
-      {/* 2.2 Camada de Iluminação Volumétrica e Feixes Focalizados */}
-      {showLighting && arena.lightingProfile && (
-        <>
-          {/* Brilho Primário e Secundário de Ambiência */}
-          <div
-            className="absolute inset-0 pointer-events-none mix-blend-screen opacity-70 transition-opacity duration-700"
-            style={{
-              background: `radial-gradient(circle at 50% 35%, ${arena.lightingProfile.primaryGlow} 0%, ${arena.lightingProfile.secondaryGlow} 40%, transparent 80%)`,
-            }}
-          />
-
-          {/* Feixe de Holofote / Spotlight Focal se configurado */}
-          {arena.lightingProfile.spotlightBeam && arena.lightingProfile.spotlightBeam !== 'none' && (
-            <div
-              className="absolute inset-0 pointer-events-none opacity-60 mix-blend-overlay transition-opacity duration-700"
-              style={{
-                background: arena.lightingProfile.spotlightBeam,
-              }}
-            />
-          )}
-
-          {/* Vignette de Contraste Cinematográfico para Leitura de Quiz */}
-          <div className="absolute inset-0 pointer-events-none bg-radial from-transparent via-black/20 to-black/85" />
-        </>
-      )}
-
-      {/* 2.3 Camada de Partículas e Atmosfera Viva */}
-      {showAtmosphere && (
-        <div className="absolute inset-0 pointer-events-none z-10">
-          <SupremeArenaAtmosphere
-            effectType={arena.effects}
-            quality={quality}
-            burstTrigger={burstTrigger}
-          />
-        </div>
-      )}
-
-      {/* 2.4 Badge HUD Opcional no Topo da Arena */}
+      {/* Badge HUD Opcional no Topo da Arena */}
       {showBadge && (
         <div className="absolute top-4 left-4 z-20 pointer-events-none">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950/80 border border-white/20 backdrop-blur-md shadow-lg">

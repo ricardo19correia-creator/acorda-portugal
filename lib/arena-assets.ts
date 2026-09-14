@@ -21,30 +21,9 @@ export interface ArenaAssetProfile {
 }
 
 /**
- * Obtém os metadados e imagem oficial 1:1 de uma arena (com prioridade para as 11 Arenas Supremas 2150)
+ * Obtém os metadados e imagem oficial 1:1 de uma arena (50 Arenas Oficiais)
  */
 export function getArenaAssets(arenaIdOrDef: string | ArenaDefinition | null | undefined): ArenaAssetProfile {
-  if (typeof arenaIdOrDef === 'string' && arenaIdOrDef) {
-    const supreme = getSupremeArenaById(arenaIdOrDef)
-    if (supreme) {
-      return {
-        id: supreme.id,
-        name: supreme.name,
-        image: supreme.assetPath,
-        shopImage: supreme.assetPath,
-        gameBackground: supreme.assetPath,
-        gameImage: supreme.assetPath,
-        duelBackground: supreme.assetPath,
-        duelImage: supreme.assetPath,
-        thumbnail: supreme.thumbnailPath,
-        effect: supreme.effectType,
-        meaning: supreme.description,
-        isSupreme: true,
-        supremeData: supreme,
-      }
-    }
-  }
-
   const arena: ArenaDefinition =
     typeof arenaIdOrDef === 'string'
       ? getArenaById(arenaIdOrDef)
@@ -62,7 +41,7 @@ export function getArenaAssets(arenaIdOrDef: string | ArenaDefinition | null | u
     duelBackground: img,
     duelImage: img,
     thumbnail: img,
-    effect: arena.effect || 'none',
+    effect: 'none',
     meaning: arena.meaning || '',
     isSupreme: false,
   }

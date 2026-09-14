@@ -61,9 +61,9 @@ async function handleMatchmaking(params: {
   const userLevel = Number(params.level) || 1
   const userDistrict = params.district || 'Portugal'
   const arena = params.arenaId ? getArenaById(params.arenaId) : getRandomArena()
-  const chosenArenaId = arena?.id || 'arena_praca_liberdade'
+  const chosenArenaId = arena?.id || 'arena_terreiro_dourado'
   const chosenArenaImage = params.arenaImage || arena?.image || ''
-  const chosenArenaName = params.arenaName || arena?.name || 'Praça da Liberdade'
+  const chosenArenaName = params.arenaName || arena?.name || 'Terreiro Dourado'
 
   const myUserTicketRef = doc(db, 'duelQueue', userId)
 

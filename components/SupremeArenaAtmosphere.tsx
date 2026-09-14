@@ -30,7 +30,11 @@ export function SupremeArenaAtmosphere({
   burstTrigger = null,
   className = '',
 }: SupremeArenaAtmosphereProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  // Conforme Diretiva: ZERO efeitos visuais nas arenas. Imagens limpas e estáveis.
+  return null
+}
+
+function _unusedSupremeAtmosphere({
   const particlesRef = useRef<Particle[]>([])
   const animFrameRef = useRef<number | null>(null)
   const burstTimeRef = useRef<number>(0)

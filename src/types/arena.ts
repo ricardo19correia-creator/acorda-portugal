@@ -46,6 +46,9 @@ export interface ArenaItem {
   category?: string
   effect?: string
   meaning?: string
+  width?: number
+  height?: number
+  aspectRatio?: number
 }
 
 export interface ArenaDefinition {
@@ -79,6 +82,9 @@ export interface ArenaDefinition {
   badgeColor?: string
   available: boolean
   order: number
+  width?: number
+  height?: number
+  aspectRatio?: number
 }
 
 export type Arena = ArenaDefinition

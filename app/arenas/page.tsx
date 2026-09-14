@@ -27,11 +27,9 @@ import {
   type CanonicalArena,
   type ArenaCategoryType,
 } from '@/src/data/arenaCatalog'
-import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallModal } from '@/components/auth-wall-modal'
-import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
 export default function ArenasPage() {
@@ -43,9 +41,9 @@ export default function ArenasPage() {
   const allArenas = useMemo(() => getAllArenas(), [])
   const vipArenas = useMemo(() => getVipArenas(), [])
 
-  const [selectedArenaId, setSelectedArenaId] = useState<string>('arena_palacio_nacional')
+  const [selectedArenaId, setSelectedArenaId] = useState<string>(() => allArenas[0]?.id || 'arena_terreiro_dourado')
   const [equippedArenaId, setEquippedArenaId] = useState<string>('')
-  const [categoryFilter, setCategoryFilter] = useState<'all' | 'vip' | 'distrital' | 'historica' | 'futurista'>('all')
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'escalao_1' | 'escalao_2' | 'escalao_3' | 'escalao_4' | 'escalao_5'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [toastMsg, setToastMsg] = useState<string | null>(null)
 
@@ -56,11 +54,11 @@ export default function ArenasPage() {
       if (saved) {
         setEquippedArenaId(saved)
         setSelectedArenaId(saved)
-      } else {
-        setSelectedArenaId('arena_palacio_nacional')
+      } else if (allArenas[0]) {
+        setSelectedArenaId(allArenas[0].id)
       }
     }
-  }, [])
+  }, [allArenas])
 
   const selectedArena = useMemo(() => {
     return resolveArena(selectedArenaId) || allArenas[0]
@@ -76,19 +74,8 @@ export default function ArenasPage() {
 
       if (!matchesSearch) return false
 
-      if (categoryFilter === 'vip') {
-        return arena.category === 'vip_supreme' || arena.category === 'vip_ultimate'
-      }
-      if (categoryFilter === 'distrital') {
-        return arena.category === 'distrital'
-      }
-      if (categoryFilter === 'historica') {
-        return arena.category === 'historica' || arena.category === 'especial'
-      }
-      if (categoryFilter === 'futurista') {
-        return arena.category === 'futurista' || arena.category === 'tematica'
-      }
-      return true
+      if (categoryFilter === 'all') return true
+      return arena.category === categoryFilter
     })
   }, [allArenas, categoryFilter, searchQuery])
 
@@ -110,7 +97,7 @@ export default function ArenasPage() {
       window.dispatchEvent(new Event('arenaChanged'))
       window.dispatchEvent(new Event('inventory_updated'))
       setEquippedArenaId('')
-      showToast('Modo Automático reativado: a arena mudará com a categoria do jogo.')
+      showToast('Modo Automático reativado: a arena mudará com o escalão do jogo.')
     }
   }
 
@@ -126,59 +113,94 @@ export default function ArenasPage() {
 
   const showToast = (msg: string) => {
     setToastMsg(msg)
-    setTimeout(() => setToastMsg(null), 3500)
+    setTimeout(() => setToastMsg(null), 3000)
   }
 
-  const isSelectedEquipped = equippedArenaId === selectedArena.id
+  const isSelectedEquipped = selectedArena && equippedArenaId === selectedArena.id
 
   return (
-    <div className="relative min-h-[100dvh] w-full text-white isolate overflow-x-hidden bg-transparent">
-      {/* Background Global */}
+    <div className="relative min-h-screen text-slate-100 font-sans pb-24 overflow-x-hidden selection:bg-amber-500 selection:text-slate-950">
+      {/* Background Global Seguro */}
       <AppBackground />
 
       {/* Toast Notification */}
       {toastMsg && (
-        <div className="fixed top-6 right-6 z-50 flex items-center gap-2 rounded-2xl bg-emerald-500 text-slate-950 px-4 py-3 font-bold text-xs shadow-2xl animate-in fade-in slide-in-from-top-4">
-          <Check className="w-4 h-4" />
-          <span>{toastMsg}</span>
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900/95 border border-amber-500/60 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in backdrop-blur-xl">
+          <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
+          <span className="text-xs sm:text-sm font-bold">{toastMsg}</span>
         </div>
       )}
 
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        {/* ========================================================= */}
-        {/* 1. NAVEGAÇÃO SUPERIOR & TÍTULO */}
-        {/* ========================================================= */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-          <div>
+      {/* HEADER NAVEGAÇÃO */}
+      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
             <Link
-              href="/jogar"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-card/60 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white"
+              href="/"
+              className="p-2 -ml-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition"
+              title="Voltar ao Início"
             >
-              <ArrowLeft className="h-4 w-4" />
-              Central de Jogo
+              <ArrowLeft className="w-5 h-5" />
             </Link>
-            <div className="flex items-center gap-3 mt-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-slate-950 font-black shadow-lg">
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 <Crown className="w-5 h-5" />
               </div>
               <div>
-                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-3d-chrome">
-                  Câmara de Arenas 2026
+                <h1 className="text-base sm:text-lg font-black uppercase tracking-tight text-white font-display">
+                  Cenários & Arenas
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">
-                  Catálogo Oficial com todas as 43 Arenas Nacionais: 11 Supremas VIP e 32 Regionais.
-                </p>
+                <span className="text-[10px] sm:text-xs text-amber-400/90 font-mono block -mt-0.5">
+                  50 Arenas Oficiais 100% Autênticas
+                </span>
               </div>
             </div>
           </div>
 
+          <div className="flex items-center gap-2">
+            <Link
+              href="/loja"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-amber-300 hover:bg-slate-800 text-xs font-bold transition shadow-sm"
+            >
+              <Coins className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Loja de Arenas</span>
+              <span className="sm:hidden">Loja</span>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+        {/* ========================================================= */}
+        {/* 1. STATUS & PAINEL DE CONTROLO DE ARENA */}
+        {/* ========================================================= */}
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/60 border border-white/10 rounded-3xl p-4 sm:p-5 backdrop-blur-xl">
+          <div className="flex items-start gap-3">
+            <div className="p-2.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 shrink-0">
+              <Compass className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black uppercase tracking-wider text-white">
+                  Motor de Cenários Oficiais
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] font-black uppercase tracking-widest">
+                  Ativo
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 mt-1 max-w-xl leading-relaxed">
+                As 50 arenas foram concebidas com fidelidade artística total. Cada cenário adapta-se de forma responsiva ao teu ecrã sem cortes, sem margens vazias e sem distorção.
+              </p>
+            </div>
+          </div>
+
           {/* Status do Modo Atual */}
-          <div className="flex items-center gap-3 self-start sm:self-auto">
+          <div className="flex items-center gap-3 self-start sm:self-auto shrink-0">
             {equippedArenaId ? (
               <button
                 onClick={handleResetToAuto}
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-amber-500/40 text-amber-300 text-xs font-bold transition cursor-pointer shadow-lg"
-                title="Voltar a alternar arenas automaticamente conforme a categoria"
+                title="Voltar a alternar arenas automaticamente conforme o escalão"
               >
                 <Sparkles className="w-4 h-4 text-amber-400" />
                 <span>Modo Fixo Ativo (Repor Auto)</span>
@@ -186,7 +208,7 @@ export default function ArenasPage() {
             ) : (
               <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>Modo Automático: Por Categoria</span>
+                <span>Modo Automático: Por Escalão</span>
               </div>
             )}
 
@@ -201,19 +223,38 @@ export default function ArenasPage() {
         </div>
 
         {/* ========================================================= */}
-        {/* SHOWCASE HERO PRINCIPAL: RENDERIZADOR AO VIVO (ENGINE 2026) */}
+        {/* 2. SHOWCASE HERO PRINCIPAL: ENQUADRAMENTO RESPONSIVO 100% */}
         {/* ========================================================= */}
-        <section className="mb-12 rounded-4xl border border-white/15 bg-slate-950/80 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+        <section className="mb-10 rounded-4xl border border-white/15 bg-slate-950/90 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            {/* Visual da Arena em Renderização Direta */}
-            <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-              <ArenaRenderer
-                arenaId={selectedArena.id}
-                showAtmosphere={true}
-                showLighting={true}
-                showBadge={true}
-                className="w-full h-full"
-              />
+            {/* Visual da Arena em Enquadramento Responsivo Perfeito (100% Visível, 0% Corte, 0% Barras) */}
+            <div className="lg:col-span-7 w-full flex items-center justify-center">
+              <div
+                className="relative w-full rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-slate-950 max-h-[65vh] sm:max-h-[72vh] flex items-center justify-center"
+                style={{
+                  aspectRatio: selectedArena.aspectRatio || 1.7917,
+                }}
+              >
+                <img
+                  src={encodeURI(selectedArena.assetPath)}
+                  alt={selectedArena.name}
+                  className="w-full h-full object-cover object-center pointer-events-none select-none block"
+                  loading="eager"
+                />
+
+                {/* Badge HUD da Arena Selecionada */}
+                <div className="absolute top-4 left-4 z-20 pointer-events-none">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950/80 border border-white/20 backdrop-blur-md shadow-lg">
+                    <Crown className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="text-[10px] font-black uppercase tracking-wider text-white">
+                      {selectedArena.name}
+                    </span>
+                    <span className="text-[9px] font-bold text-amber-300/80 uppercase">
+                      {'//'} {selectedArena.rarity}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Informações e Ações da Arena Selecionada */}
@@ -223,8 +264,8 @@ export default function ArenasPage() {
                   <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
                     {selectedArena.rarity}
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">
-                    {(selectedArena as any).district || selectedArena.subtitle}
+                  <span className="text-xs text-slate-400 font-mono uppercase">
+                    {selectedArena.category.replace('_', ' ')}
                   </span>
                 </div>
 
@@ -275,14 +316,15 @@ export default function ArenasPage() {
         {/* 3. FILTROS & BARRA DE PESQUISA */}
         {/* ========================================================= */}
         <div className="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Categorias */}
+          {/* Categorias dos Escalões */}
           <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
             {[
-              { id: 'all', label: `Todas (${allArenas.length})` },
-              { id: 'vip', label: `VIP Supremas (${vipArenas.length})` },
-              { id: 'distrital', label: 'Distritais (20)' },
-              { id: 'historica', label: 'Históricas (5)' },
-              { id: 'futurista', label: 'Futuristas (7)' },
+              { id: 'all', label: `Todas as 50 Arenas (${allArenas.length})` },
+              { id: 'escalao_1', label: 'Escalão 1 (10)' },
+              { id: 'escalao_2', label: 'Escalão 2 (10)' },
+              { id: 'escalao_3', label: 'Escalão 3 (10)' },
+              { id: 'escalao_4', label: 'Escalão 4 (10)' },
+              { id: 'escalao_5', label: 'Escalão 5 — VIP (10)' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -312,7 +354,7 @@ export default function ArenasPage() {
         </div>
 
         {/* ========================================================= */}
-        {/* 4. GRELHA DE TODAS AS ARENAS */}
+        {/* 4. GRELHA DAS 50 ARENAS */}
         {/* ========================================================= */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredArenas.map((arena) => {
@@ -330,19 +372,17 @@ export default function ArenasPage() {
                     : 'bg-slate-950/60 hover:bg-slate-900/80 border-white/10 hover:border-white/20'
                 )}
               >
-                {/* Thumbnail Visual com Preservação Integral de Proporção */}
-                <div className="relative w-full h-40 rounded-2xl bg-slate-950 border border-white/10 overflow-hidden mb-3 flex items-center justify-center">
-                  <img
-                    src={encodeURI(arena.thumbnail || arena.assetPath)}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 pointer-events-none"
-                    loading="lazy"
-                  />
+                {/* Thumbnail com Proporção Real da Imagem (100% Arte Visível, Zero Barras, Zero Distorção) */}
+                <div
+                  className="relative w-full rounded-2xl bg-slate-950 border border-white/10 overflow-hidden mb-3"
+                  style={{
+                    aspectRatio: arena.aspectRatio || 1.7917,
+                  }}
+                >
                   <img
                     src={encodeURI(arena.thumbnail || arena.assetPath)}
                     alt={arena.name}
-                    className="relative z-10 max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 block"
                     loading="lazy"
                   />
 

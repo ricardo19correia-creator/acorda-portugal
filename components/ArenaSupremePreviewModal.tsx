@@ -15,7 +15,6 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import type { SupremeArenaDefinition } from '@/lib/supreme-arenas'
-import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 import { playSound } from '@/lib/sound-engine'
 
 interface ArenaSupremePreviewModalProps {
@@ -67,20 +66,6 @@ export function ArenaSupremePreviewModal({
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
             style={{ backgroundImage: `url(${arena.assetPath})` }}
           />
-
-          {/* Partículas e Atmosfera Vivas */}
-          <SupremeArenaAtmosphere
-            effectType={arena.effectType}
-            quality="ultra"
-            burstTrigger={testFeedback}
-          />
-
-          {/* Iluminação Volumétrica */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: arena.lightingProfile.spotlightBeam }}
-          />
-
           {/* Gradiente de Escurecimento Inferior */}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 

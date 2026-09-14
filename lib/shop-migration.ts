@@ -55,13 +55,13 @@ export async function migrateUserInventory(userId: string): Promise<MigrationRes
     }
   }
 
-  const defaultArenas = ['arena_praca_liberdade']
+  const defaultArenas = ['arena_terreiro_dourado']
   const existingArenas: string[] = Array.isArray(inventory.arenas) ? inventory.arenas : []
   const missingArenas = defaultArenas.filter((ar) => !existingArenas.includes(ar))
   if (missingArenas.length > 0) {
     updates['inventory.arenas'] = FieldValue.arrayUnion(...missingArenas)
-    updates['inventory.arena_praca_liberdade'] = 1
-    addedItems.push('arena_praca_liberdade')
+    updates['inventory.arena_terreiro_dourado'] = 1
+    addedItems.push('arena_terreiro_dourado')
   }
 
   const defaultTitles = ['tit_novico']

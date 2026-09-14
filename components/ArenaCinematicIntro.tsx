@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { Sparkles, Crown, Shield, Zap } from 'lucide-react'
 import type { SupremeArenaDefinition } from '@/lib/supreme-arenas'
 import type { CanonicalArena } from '@/src/data/arenaCatalog'
-import { SupremeArenaAtmosphere } from '@/components/SupremeArenaAtmosphere'
 
 interface ArenaCinematicIntroProps {
   arena: SupremeArenaDefinition | CanonicalArena
@@ -91,21 +90,6 @@ export function ArenaCinematicIntro({
         }`}
         style={{ backgroundImage: `url("${encodeURI(arena.assetPath)}")` }}
       />
-
-      {/* Camada de Partículas Vivas da Arena */}
-      <SupremeArenaAtmosphere effectType={effectType} quality="ultra" />
-
-      {/* Brilho de Iluminação Volumétrica */}
-      {spotlightBeam && (
-        <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-700"
-          style={{
-            background: spotlightBeam,
-            opacity: phase === 'reveal' || phase === 'ready' ? 0.8 : 0,
-          }}
-        />
-      )}
-
       {/* Cartão de Apresentação Central do Palco */}
       <div className="relative z-10 text-center max-w-xl px-6 animate-in fade-in zoom-in duration-500">
         {/* Badge da Raridade */}

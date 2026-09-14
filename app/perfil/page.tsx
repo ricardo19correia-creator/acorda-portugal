@@ -134,6 +134,9 @@ const MASTER_PROFILE_CATALOG: InventoryItem[] = [
     badgeColor: ar.badgeColor,
     effect: ar.effect,
     price: ar.price,
+    width: ar.width,
+    height: ar.height,
+    aspectRatio: ar.aspectRatio || 1.7917,
   })),
   ...MASTER_TITLE_CATALOG.map((t) => ({
     id: t.id,
@@ -2181,12 +2184,15 @@ function PerfilContent() {
                                 <UserAvatar avatarUrl={avatar} activeFrame={item.id} size="lg" showBadge={false} />
                               </div>
                             ) : item.category === 'arenas' ? (
-                              <div className="relative w-full h-36 overflow-hidden bg-slate-950">
+                              <div 
+                                className="relative w-full overflow-hidden bg-slate-950 rounded-xl"
+                                style={{ aspectRatio: (item as any).aspectRatio || 1.7917 }}
+                              >
                                 {item.image ? (
                                   <img 
                                     src={item.image} 
                                     alt={item.name} 
-                                    className="w-full h-full object-cover" 
+                                    className="w-full h-full object-cover block" 
                                   />
                                 ) : (
                                   <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center">
@@ -2198,7 +2204,6 @@ function PerfilContent() {
                                     </span>
                                   </div>
                                 )}
-                                <ArenaEffectsLayer effect={(item.effect as any) || 'particles'} intensity="low" showContrastOverlay={false} />
                               </div>
                             ) : item.category === 'titulos' ? (
                               <div className="flex flex-col items-center justify-center p-4 text-center w-full h-36 bg-slate-950">
