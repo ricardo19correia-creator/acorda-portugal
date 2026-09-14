@@ -1302,10 +1302,10 @@ export async function claimDuelRewards(
           type: 'earn',
           amount: coinReward,
           reason: isWinner
-            ? `⚔️ Vitória em Duelo 1v1 (${duel.code})`
+            ? `⚔️ Vitória em Partida Multiplayer (${duel.code})`
             : isDraw
-              ? `🤝 Empate em Duelo 1v1 (${duel.code})`
-              : `💪 Participação em Duelo 1v1 (${duel.code})`,
+              ? `🤝 Empate em Partida Multiplayer (${duel.code})`
+              : `💪 Participação em Partida Multiplayer (${duel.code})`,
           matchId: duelId,
           createdAt: serverTimestamp(),
         })

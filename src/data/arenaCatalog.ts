@@ -920,8 +920,8 @@ export const STANDARD_ARENAS: CanonicalArena[] = [
   {
     id: 'arena_duelo_1v1_oficial',
     slug: 'duelo-1v1',
-    name: 'Arena Duelo 1v1 Oficial',
-    subtitle: 'O Octógono Intelectual do Duelo em Direto',
+    name: 'Arena Multiplayer Oficial',
+    subtitle: 'O Octógono Intelectual do Jogo em Direto',
     rarity: 'Épica',
     category: 'especial',
     description: 'Dois lados, duas mentes brilhantes, 10 perguntas e contagem decrescente em tempo real.',
@@ -930,7 +930,7 @@ export const STANDARD_ARENAS: CanonicalArena[] = [
     background: '/arenas/arena-1v1.png',
     effects: 'sparks',
     unlockRule: 'unlocked_by_default',
-    purchaseRule: 'Arena oficial padrão do modo Duelo 1v1.',
+    purchaseRule: 'Arena oficial padrão do modo Multiplayer.',
     gameplayAvailability: true,
     visualType: 'jpg_raster',
     lightingProfile: {
