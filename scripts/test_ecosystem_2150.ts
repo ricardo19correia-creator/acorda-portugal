@@ -170,9 +170,9 @@ async function runEcosystemTests() {
   {
     console.log('▶ [6/6] Testando Catálogo da Loja, Molduras Vivas e VIPs...')
     assert(
-      ANIMATED_FRAMES.length >= 24,
+      ANIMATED_FRAMES.length === 9,
       'SHOP',
-      '24 Canonical Animated Living Frames',
+      '9 Canonical AAA Animated Living Frames',
       `Count=${ANIMATED_FRAMES.length}`
     )
 

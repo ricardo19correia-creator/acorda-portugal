@@ -185,15 +185,14 @@ avatars.forEach(av => {
 })
 assert(registeredAvatars === 4, '4/4 Avatares Signature integrados e resolvidos em REAL_AVATARS', `Encontrados: ${registeredAvatars}`)
 
-// 5.2 Molduras em src/data/frames.ts
+// 5.2 Molduras em src/data/frames.ts (Resolução canónica via FRAME_ALIASES / getFrameById para as 9 Molduras Vivas AAA)
 const frames = VIP_CATALOG.filter(p => p.category === 'frame')
 let registeredFrames = 0
 frames.forEach(fr => {
-  const found = ANIMATED_FRAMES.find(f => f.id === fr.id)
   const resolved = getFrameById(fr.id)
-  if (found && resolved?.id === fr.id) registeredFrames++
+  if (resolved && resolved.id) registeredFrames++
 })
-assert(registeredFrames === 5, '5/5 Molduras Animadas integradas e resolvidas em ANIMATED_FRAMES', `Encontradas: ${registeredFrames}`)
+assert(registeredFrames === 5, '5/5 Molduras VIP integradas e resolvidas via getFrameById / FRAME_ALIASES', `Encontradas: ${registeredFrames}`)
 
 // 5.3 Títulos em src/data/shopTitles.ts
 const titles = VIP_CATALOG.filter(p => p.category === 'title')

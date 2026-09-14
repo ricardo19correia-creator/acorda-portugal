@@ -39,7 +39,7 @@ import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
-import { ANIMATED_FRAMES, type AnimatedFrame } from '@/data/frames'
+import { ANIMATED_FRAMES, FRAME_ALIASES, type AnimatedFrame } from '@/data/frames'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -840,7 +840,8 @@ function PerfilContent() {
       window.dispatchEvent(new Event('storage'))
       showToast(`Avatar "${item.name}" equipado com sucesso!`)
     } else if (item.category === 'molduras') {
-      if (equippedFrame === item.id) {
+      const isCurrentlyEquipped = equippedFrame === item.id || (equippedFrame ? FRAME_ALIASES[equippedFrame] === item.id : false)
+      if (isCurrentlyEquipped) {
         setEquippedFrame(null)
         localStorage.removeItem('user_equipped_frame')
         if (auth.currentUser) {
@@ -1253,11 +1254,18 @@ function PerfilContent() {
         const isFree = item.id === DEFAULT_AVATAR_ID
         isUnlocked = isFree || inventory.avatars.includes(item.id) || unlockedItems.includes(item.id)
       } else if (item.category === 'molduras') {
-        isUnlocked =
+        const ownedDirectly =
           item.id === 'default' ||
           inventory.frames.includes(item.id) ||
           unlockedItems.includes(item.id) ||
-          ((profile as any)?.unlockedFrames && (profile as any)?.unlockedFrames.includes(item.id))
+          Boolean((profile as any)?.unlockedFrames?.includes(item.id))
+
+        const ownedViaAlias =
+          inventory.frames.some((fId) => FRAME_ALIASES[fId] === item.id) ||
+          unlockedItems.some((fId) => FRAME_ALIASES[fId] === item.id) ||
+          Boolean((profile as any)?.unlockedFrames?.some((fId: string) => FRAME_ALIASES[fId] === item.id))
+
+        isUnlocked = ownedDirectly || ownedViaAlias
       } else if (item.category === 'arenas') {
         const isDefault = item.id === 'arena_1'
         isUnlocked = isDefault || inventory.arenas.includes(item.id) || unlockedItems.includes(item.id)
@@ -2099,7 +2107,7 @@ function PerfilContent() {
                   {unlockedCosmetics.map((item) => {
                     const isEquipped = 
                       (item.category === 'avatars' && (avatar === item.image || equippedAvatarId === item.id || normalizeAvatarId(avatar) === normalizeAvatarId(item.id))) ||
-                      (item.category === 'molduras' && equippedFrame === item.id) ||
+                      (item.category === 'molduras' && (equippedFrame === item.id || (equippedFrame ? FRAME_ALIASES[equippedFrame] === item.id : false))) ||
                       (item.category === 'arenas' && arena === item.id) ||
                       (item.category === 'titulos' && (
                         equippedTitleId === item.id ||

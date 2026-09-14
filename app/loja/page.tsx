@@ -31,7 +31,7 @@ import {
   parseSafeNumber,
   safeSyncLog,
 } from '@/lib/economy-helpers'
-import { ANIMATED_FRAMES, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
+import { ANIMATED_FRAMES, FRAME_ALIASES, type AnimatedFrame, type FrameRarity, getFrameRarityBadge } from '@/data/frames'
 import { UserAvatar } from '@/components/user-avatar'
 import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { equipTitle } from '@/lib/titles-service'
@@ -172,12 +172,10 @@ const TAUNT_SHOP_ITEMS: ShopItem[] = OFFICIAL_EMOTES.map((e) => ({
 }))
 
 export const FRAME_CATEGORIES_LIST = [
-  { key: 'todas', title: 'Todas as Molduras', icon: '✨' },
-  { key: 'elemental', title: 'Elementais', icon: '🔥' },
-  { key: 'cosmico', title: 'Cósmicas & Cyber', icon: '🌌' },
-  { key: 'real', title: 'Realeza & Deuses', icon: '👑' },
-  { key: 'lusitano', title: 'Lusitanas & PT', icon: '🇵🇹' },
-  { key: 'especial', title: 'Especiais & Arcade', icon: '👾' },
+  { key: 'todas', title: 'Todas as Molduras (9)', icon: '✨' },
+  { key: 'elemental', title: 'Elementais & Natureza', icon: '🔥' },
+  { key: 'cosmico', title: 'Cosmo & Vazio', icon: '🌌' },
+  { key: 'real', title: 'Realeza & Ouro Real', icon: '👑' },
 ]
 
 export const FRAME_RARITIES: (FrameRarity | 'todas')[] = ['todas', 'Raro', 'Épico', 'Lendário', 'Mítico']
@@ -687,12 +685,20 @@ function LojaContent() {
       if (isFounder) return true
     }
     if (item.category === 'molduras') {
-      return (
+      const ownedDirectly =
         item.id === 'default' ||
         unlockedItems.includes(item.id) ||
         inventory.frames.includes(item.id) ||
-        (inventory as any)?.unlockedFrames?.includes(item.id)
-      )
+        Boolean((inventory as any)?.unlockedFrames?.includes(item.id))
+
+      if (ownedDirectly) return true
+
+      const ownedViaAlias =
+        inventory.frames.some((fId) => FRAME_ALIASES[fId] === item.id) ||
+        unlockedItems.some((fId) => FRAME_ALIASES[fId] === item.id) ||
+        Boolean((inventory as any)?.unlockedFrames?.some((fId: string) => FRAME_ALIASES[fId] === item.id))
+
+      return ownedViaAlias
     }
     if (item.category === 'avatars') {
       const isFree = item.id === DEFAULT_AVATAR_ID || item.id === STARTER_AVATAR_ID
@@ -710,15 +716,17 @@ function LojaContent() {
         item.id === 'pack_basico' ||
         inventory.taunts?.includes(item.id) ||
         unlockedItems.includes(item.id) ||
-        DEFAULT_EQUIPPED_EMOTES.includes(item.id)
+        (inventory as any)?.unlockedTaunts?.includes(item.id)
       )
     }
-    return false
+    return unlockedItems.includes(item.id)
   }
 
   const isItemEquipped = (item: ShopItem) => {
     if (item.category === 'ajudas') return false
-    if (item.category === 'molduras') return equippedFrame === item.id
+    if (item.category === 'molduras') {
+      return equippedFrame === item.id || (equippedFrame ? FRAME_ALIASES[equippedFrame] === item.id : false)
+    }
     if (item.category === 'taunts') {
       if (equippedTauntId && equippedTauntId === item.id) return true
       const active = (equippedEmotes && equippedEmotes.length > 0)

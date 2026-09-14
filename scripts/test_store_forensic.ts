@@ -41,9 +41,7 @@ test(`Catálogo de Avatares carregado (${totalAvatars} avatares no jogo incluind
 
 // 1.2 Molduras
 const totalFrames = ANIMATED_FRAMES.length
-const vipFrames = ANIMATED_FRAMES.filter(f => f.id.startsWith('AP-VIP-FRAME-') || f.id.startsWith('vip_frame_'))
-const baseFrames = ANIMATED_FRAMES.filter(f => !f.id.startsWith('AP-VIP-FRAME-') && !f.id.startsWith('vip_frame_'))
-test(`Molduras: ${baseFrames.length} base + ${vipFrames.length} VIP = ${totalFrames} total`, vipFrames.length >= 5 && totalFrames >= 24)
+test(`Molduras: ${totalFrames} Molduras Vivas AAA oficiais no catálogo`, totalFrames === 9)
 
 // 1.3 Títulos
 const totalTitles = TITLE_SHOP_CATALOG.length
