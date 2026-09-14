@@ -157,7 +157,7 @@ export function PortugalVivoMap({
     const engine = new PortugalSatelliteEngine({
       container: mapContainerRef.current,
       initialSector: 'continente',
-      initialDistrictId,
+      initialDistrictId: initialDistrict,
       onSelectDistrict: (district) => {
         setSelectedPlayer(null)
         setSelectedDistrictId(district ? district.id : null)
