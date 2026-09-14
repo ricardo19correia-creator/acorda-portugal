@@ -26,7 +26,7 @@ export function ThreeChallengePaths({ onStartGame }: ThreeChallengePathsProps) {
     },
     {
       id: 'duelo',
-      title: '1V1',
+      title: 'MULTIPLAYER',
       badge: 'MULTIJOGADOR DIRETO',
       icon: Zap,
       description: 'Enfrenta outro jogador em tempo real.',
