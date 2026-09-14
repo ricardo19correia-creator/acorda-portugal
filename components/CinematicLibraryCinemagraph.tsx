@@ -5,13 +5,11 @@ import React, { useEffect, useRef } from 'react';
 interface CinematicLibraryCinemagraphProps {
   className?: string;
   intensity?: number;
-  showMapHologram?: boolean;
 }
 
 export default function CinematicLibraryCinemagraph({
   className = '',
   intensity = 1,
-  showMapHologram = true,
 }: CinematicLibraryCinemagraphProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -114,26 +112,7 @@ export default function CinematicLibraryCinemagraph({
         }}
       />
 
-      {/* 4. ONDAS DE ENERGIA HOLOGRÁFICA NO MAPA DE PORTUGAL (DIREITA) */}
-      {showMapHologram && (
-        <div
-          className="absolute top-[20%] right-[8%] w-[260px] h-[560px] pointer-events-none hidden lg:block"
-          style={{
-            animation: 'map-hover 6s ease-in-out infinite alternate',
-          }}
-        >
-          {/* Varredura Laser de Norte a Sul */}
-          <div
-            className="absolute inset-0 w-full h-24 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent"
-            style={{
-              animation: 'scanline-down 3.5s linear infinite',
-            }}
-          />
 
-          {/* Brilho de Contorno Holográfico */}
-          <div className="absolute inset-0 bg-cyan-400/10 rounded-3xl blur-2xl animate-pulse" />
-        </div>
-      )}
 
       {/* 5. CÍRCULO ASTROLÓGICO E RÚNICO NO CHÃO COM ENERGIA DINÂMICA */}
       <div
@@ -187,34 +166,7 @@ export default function CinematicLibraryCinemagraph({
           }
         }
 
-        @keyframes map-hover {
-          0% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-10px) rotate(0.5deg);
-          }
-          100% {
-            transform: translateY(4px) rotate(-0.3deg);
-          }
-        }
 
-        @keyframes scanline-down {
-          0% {
-            transform: translateY(-100%);
-            opacity: 0;
-          }
-          20% {
-            opacity: 0.8;
-          }
-          80% {
-            opacity: 0.8;
-          }
-          100% {
-            transform: translateY(450%);
-            opacity: 0;
-          }
-        }
 
         @keyframes floor-glow {
           0% {

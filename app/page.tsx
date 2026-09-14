@@ -11,8 +11,6 @@ import { logGameFlow } from '@/lib/game-session'
 import { HomeHero } from '@/components/home/HomeHero'
 import { PlayerStatusHud } from '@/components/home/PlayerStatusHud'
 import { ThreeChallengePaths } from '@/components/home/ThreeChallengePaths'
-import { LivePortugalSection } from '@/components/home/LivePortugalSection'
-import { FeaturedChallengeSection } from '@/components/home/FeaturedChallengeSection'
 import { QuickNavigationSection } from '@/components/home/QuickNavigationSection'
 import { HomeFooter } from '@/components/home/HomeFooter'
 
@@ -52,34 +50,32 @@ export default function HomePage() {
         <SiteHeader />
 
         {/* Menu Principal de Jogo — Hierarquia e Foco Absoluto */}
-        <main className="flex-1 flex flex-col justify-start bg-transparent">
-          {/* 1. HERO PRINCIPAL — "ACORDA PORTUGAL" / "Portugal está em jogo." / "JOGAR AGORA" */}
-          <HomeHero
-            onStartGame={handleStartGame}
-            isAuthenticated={Boolean(user)}
-          />
+        <main className="flex-1 flex flex-col justify-between items-center w-full bg-transparent px-4 py-4 sm:py-6">
+          <div className="w-full flex flex-col items-center">
+            {/* 1. HERO PRINCIPAL — "ACORDA PORTUGAL" / "Portugal está em jogo." / "JOGAR AGORA" */}
+            <HomeHero
+              onStartGame={handleStartGame}
+              isAuthenticated={Boolean(user)}
+            />
 
-          {/* 2. ESTADO DO JOGADOR — HUD Compacto ou Cartão Elegante de Entrada */}
-          <PlayerStatusHud
-            user={user}
-            profile={profile}
-            onOpenAuth={handleOpenAuth}
-          />
+            {/* 2. ESTADO DO JOGADOR — HUD Compacto ou Cartão Elegante de Entrada */}
+            <PlayerStatusHud
+              user={user}
+              profile={profile}
+              onOpenAuth={handleOpenAuth}
+            />
 
-          {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🗺️ PORTUGAL */}
-          <ThreeChallengePaths onStartGame={handleStartGame} />
+            {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🏆 RANKINGS */}
+            <ThreeChallengePaths onStartGame={handleStartGame} />
+          </div>
 
-          {/* 4. PORTUGAL ESTÁ VIVO — Presença Real da Comunidade e Temporada */}
-          <LivePortugalSection />
-
-          {/* 5. EVENTO / DESAFIO DINÂMICO — Destaque Único Real (apenas se existir) */}
-          <FeaturedChallengeSection onStartGame={handleStartGame} />
-
-          {/* 6. NAVEGAÇÃO PARA O RESTO DO JOGO — Atalhos Rápidos */}
-          <QuickNavigationSection />
+          {/* 4. BARRA DE NAVEGAÇÃO INFERIOR — (Rankings, Categorias, Loja, Conquistas, Perfil) */}
+          <div className="w-full mt-6 sm:mt-8 mb-2">
+            <QuickNavigationSection />
+          </div>
         </main>
 
-        {/* 7. FOOTER MÍNIMO DO MENU PRINCIPAL */}
+        {/* 5. FOOTER MÍNIMO DO MENU PRINCIPAL */}
         <HomeFooter />
       </div>
 

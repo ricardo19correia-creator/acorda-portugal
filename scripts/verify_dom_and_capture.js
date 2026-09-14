@@ -219,7 +219,6 @@ async function run() {
   }
 
   try {
-    await inspectPage('http://localhost:3000/portugal-mapa', 'portugal_mapa');
     await inspectPage('http://localhost:3000/rankings', 'rankings');
   } catch (err) {
     console.error('Erro na inspeção:', err);

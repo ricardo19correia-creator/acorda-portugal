@@ -1,5 +1,4 @@
 import { ALL_DISTRICTS_LIST, type RankingPlayer } from './rankings'
-import { PORTUGAL_GEO_DATA } from './portugal-geo-data'
 
 export interface DistrictWarTerritory {
   id: string

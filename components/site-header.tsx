@@ -62,7 +62,6 @@ export function SiteHeader() {
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'História', href: '/historia', icon: BookOpen },
@@ -73,7 +72,6 @@ export function SiteHeader() {
   const MOBILE_NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Meu Distrito', href: '/meu-distrito', icon: Flag },
-    { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Categorias', href: '/categorias', icon: LayoutGrid },

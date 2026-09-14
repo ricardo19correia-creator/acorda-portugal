@@ -1,17 +1,7 @@
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
-import { PORTUGAL_CONCELHOS_COORDS } from '@/src/data/concelhos-coords'
 
 export type RealUserActivity = 'playing' | 'duel' | 'browsing'
-
-function normalizeKey(str: string): string {
-  return (str || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[-_]/g, ' ')
-    .trim()
-}
 
 export interface RealPlayerPresence {
   userId: string
@@ -20,11 +10,6 @@ export interface RealPlayerPresence {
   avatar?: string | null
   district: string
   city?: string
-  lat?: number
-  lng?: number
-  coords?: [number, number] // [lng, lat]
-  accuracy?: number | null
-  locationSource?: 'gps' | 'concelho' | 'ip'
   activity: RealUserActivity
   lastSeen: number
   expiresAt?: number
@@ -69,9 +54,9 @@ export async function sendRealHeartbeat(
   user: { uid: string; displayName?: string | null; photoURL?: string | null } | null,
   profile?: { displayName?: string; photoURL?: string; district?: string; city?: string; level?: number; xp?: number; equippedTitle?: string } | null,
   activity: RealUserActivity = 'browsing',
-  coords?: [number, number],
-  accuracy?: number | null,
-  source?: 'gps' | 'concelho' | 'ip'
+  _coords?: unknown,
+  _accuracy?: unknown,
+  _source?: unknown
 ): Promise<void> {
   if (!user?.uid) return // Apenas humanos autenticados reais
 
@@ -90,42 +75,6 @@ export async function sendRealHeartbeat(
       (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : null) ||
       undefined
 
-    // 1. Prioridade estrita de localização: 1.º GPS REAL > 2.º CONCELHO > 3.º IP / DISTRITO
-    let userCoords: [number, number] | undefined = coords
-    let locSource: 'gps' | 'concelho' | 'ip' = source || (coords ? 'gps' : 'concelho')
-
-    // 2. Verificar cache local de GPS recente no localStorage ou sessionStorage
-    if (!userCoords && typeof window !== 'undefined') {
-      try {
-        const cached = localStorage.getItem('ap_user_geo_coords') || sessionStorage.getItem('ap_user_geo_coords')
-        if (cached) {
-          const parsed = JSON.parse(cached)
-          if (Array.isArray(parsed) && parsed.length === 2 && typeof parsed[0] === 'number' && typeof parsed[1] === 'number') {
-            userCoords = [parsed[0], parsed[1]]
-            locSource = 'gps'
-          }
-        }
-      } catch {}
-    }
-
-    // 3. Resolução automática das coordenadas do concelho canónico (FALLBACK)
-    if (!userCoords && city) {
-      const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(city)]
-      if (concelhoMatch?.coordinates) {
-        userCoords = concelhoMatch.coordinates
-        locSource = 'concelho'
-      }
-    }
-
-    // 4. Fallback terminal para centroide de distrito / Portugal
-    if (!userCoords && district && district !== 'Portugal') {
-      const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(district)]
-      if (distMatch?.coordinates) {
-        userCoords = distMatch.coordinates
-        locSource = 'ip'
-      }
-    }
-
     const now = Date.now()
     const expiresAt = now + OFFLINE_TTL_MS
 
@@ -136,13 +85,6 @@ export async function sendRealHeartbeat(
       avatar: photoURL,
       district,
       ...(city ? { city } : {}),
-      ...(userCoords ? {
-        lat: userCoords[1],
-        lng: userCoords[0],
-        coords: userCoords,
-        accuracy: accuracy !== undefined ? accuracy : (locSource === 'gps' ? 15 : null),
-        locationSource: locSource,
-      } : {}),
       activity,
       lastSeen: now,
       expiresAt,
@@ -205,37 +147,7 @@ export function filterActiveRealPlayers(
 
     if (isOnline && isWithinTTL) {
       const act: RealUserActivity = d.activity === 'playing' || d.activity === 'duel' ? d.activity : 'browsing'
-      
-      let validCoords: [number, number] | undefined = undefined
-      let locSource: 'gps' | 'concelho' | 'ip' = d.locationSource || 'concelho'
-
-      // 1. Prioridade absoluta: campos lat/lng diretos
-      if (typeof d.lat === 'number' && typeof d.lng === 'number' && !isNaN(d.lat) && !isNaN(d.lng)) {
-        validCoords = [d.lng, d.lat]
-        locSource = d.locationSource || 'gps'
-      } else if (Array.isArray(d.coords) && d.coords.length === 2 && typeof d.coords[0] === 'number' && typeof d.coords[1] === 'number') {
-        validCoords = [d.coords[0], d.coords[1]]
-        locSource = d.locationSource || 'gps'
-      } else if (d.coordinates && typeof d.coordinates.lat === 'number' && typeof d.coordinates.lng === 'number') {
-        validCoords = [d.coordinates.lng, d.coordinates.lat]
-        locSource = d.locationSource || 'gps'
-      } else if (d.city || d.concelho) {
-        const concelhoStr = String(d.city || d.concelho)
-        const concelhoMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(concelhoStr)]
-        if (concelhoMatch?.coordinates) {
-          validCoords = concelhoMatch.coordinates
-          locSource = 'concelho'
-        }
-      } else if (d.district && d.district !== 'Portugal') {
-        const distMatch = PORTUGAL_CONCELHOS_COORDS[normalizeKey(d.district)]
-        if (distMatch?.coordinates) {
-          validCoords = distMatch.coordinates
-          locSource = 'ip'
-        }
-      }
-
       const avatar = d.avatar || d.photoURL || null
-      const accuracy = typeof d.accuracy === 'number' ? d.accuracy : null
       const resolvedConcelho = d.city || d.concelho ? String(d.city || d.concelho).trim() : undefined
 
       const player: RealPlayerPresence = {
@@ -245,13 +157,6 @@ export function filterActiveRealPlayers(
         avatar,
         district: (d.district || '').trim() || 'Portugal',
         ...(resolvedConcelho ? { city: resolvedConcelho } : {}),
-        ...(validCoords ? {
-          coords: validCoords,
-          lat: validCoords[1],
-          lng: validCoords[0],
-          accuracy,
-          locationSource: locSource,
-        } : {}),
         activity: act,
         lastSeen,
         expiresAt,

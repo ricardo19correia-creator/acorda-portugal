@@ -40,6 +40,40 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/mapa',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/portugal-mapa',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/mapa-portugal',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/map',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/mapa/:path*',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/portugal-mapa/:path*',
+        destination: '/',
+        permanent: false,
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Swords, Zap, Compass, ChevronRight, Play } from 'lucide-react'
+import { Swords, Zap, Trophy, ChevronRight, Play } from 'lucide-react'
 
 interface ThreeChallengePathsProps {
   onStartGame: (route: string) => void
@@ -40,13 +40,13 @@ export function ThreeChallengePaths({ onStartGame }: ThreeChallengePathsProps) {
       iconStyle: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
     },
     {
-      id: 'portugal',
-      title: 'PORTUGAL',
-      badge: 'TERRITÓRIO & DISTRITOS',
-      icon: Compass,
-      description: 'Explora o país, o teu distrito e a competição nacional.',
-      cta: 'EXPLORAR',
-      route: '/portugal-mapa',
+      id: 'rankings',
+      title: 'RANKINGS',
+      badge: 'COMPETIÇÃO & DISTRITOS',
+      icon: Trophy,
+      description: 'Representa o teu distrito e compete pelo topo nacional.',
+      cta: 'VER RANKINGS',
+      route: '/rankings',
       accentColor: 'amber',
       bgGlow: 'bg-amber-500/10 group-hover:bg-amber-500/20',
       borderStyle: 'border-amber-500/30 group-hover:border-amber-400/60',
@@ -59,7 +59,7 @@ export function ThreeChallengePaths({ onStartGame }: ThreeChallengePathsProps) {
   return (
     <section
       aria-label="Escolhe o Teu Desafio"
-      className="w-full max-w-6xl mx-auto px-4 py-8 sm:py-12 select-none"
+      className="w-full max-w-6xl mx-auto px-4 pt-6 sm:pt-8 pb-3 sm:pb-4 select-none"
     >
       {/* Título da Secção */}
       <div className="text-center mb-6 sm:mb-10">

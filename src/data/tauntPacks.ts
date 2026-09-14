@@ -61,7 +61,7 @@ export const TAUNT_PACKS: TauntPack[] = [
       { id: 't_distrito', text: 'O meu distrito não perdoa! 🏰' },
       { id: 't_francesinha', text: 'Vai mas é comer uma francesinha! 🥪' },
       { id: 't_lisboa_porto', text: 'Norte a Sul ninguém me pára! 🇵🇹' },
-      { id: 't_mapa', text: 'Nem com mapa lá chegavas! 🗺️' },
+      { id: 't_bussola', text: 'Nem com bússola lá chegavas! 🧭' },
       { id: 't_orgulho', text: 'Orgulho Lusitano! 🛡️' },
       { id: 't_tradicao', text: 'Aqui manda a tradição! 👑' }
     ]

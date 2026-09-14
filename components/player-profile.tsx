@@ -540,7 +540,7 @@ export function PlayerProfile() {
                 </span>
 
                 <Link
-                  href="/#mapa"
+                  href="/rankings"
                   className="flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-primary border border-primary/20 hover:bg-primary/25 transition"
                 >
                   <MapPin className="h-3.5 w-3.5" />

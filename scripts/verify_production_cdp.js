@@ -82,9 +82,7 @@ async function run() {
 
   const routes = [
     { url: 'https://acordaportugal.pt/', name: 'final_homepage' },
-    { url: 'https://acordaportugal.pt/portugal-mapa', name: 'final_portugal_mapa' },
     { url: 'https://acordaportugal.pt/rankings', name: 'final_rankings' },
-    { url: 'https://acordaportugal.pt/arenas?tab=map', name: 'final_arenas_map' },
   ];
 
   const results = {};

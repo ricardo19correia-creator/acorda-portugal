@@ -443,7 +443,7 @@ const CATALOG_43: ArenaDef[] = [
   {
     id: 'arena_era_descobrimentos',
     name: 'Rota das Naus & Astrolábio',
-    description: 'Mapas antigos, cartas de marear e caravelas a singrar oceanos nunca dantes navegados.',
+    description: 'Cartas náuticas, astrolábios e caravelas a singrar oceanos nunca dantes navegados.',
     meaning: 'A revolução científica e marítima que deu novos mundos ao mundo.',
     theme: 'historia',
     image: ARENA_IMAGES_MAP.arena_era_descobrimentos,

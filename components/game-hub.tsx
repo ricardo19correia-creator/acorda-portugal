@@ -643,7 +643,7 @@ export function GameHub() {
                 👁️ Desafio Visual
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Perguntas baseadas em imagens, mapas históricos, monumentos e pormenores fotográficos de Portugal.
+                Perguntas baseadas em imagens, documentos históricos, monumentos e pormenores fotográficos de Portugal.
               </p>
             </div>
 

@@ -51,11 +51,18 @@ async function runAcceptanceTests() {
   assert(!headerCode.includes('OnlineUsersBadge'), 'components/site-header.tsx sem OnlineUsersBadge')
   assert(!headerCode.includes('onlineCount'), 'components/site-header.tsx sem contadores online')
 
-  // --- TESTE 15: AUSÊNCIA DE INDICADORES DE PRESENÇA NO MAPA INTERATIVO ---
-  const mapCode = fs.readFileSync(path.join(process.cwd(), 'components', 'portugal-hero-map.tsx'), 'utf8')
-  assert(!mapCode.includes('usePresence'), 'components/portugal-hero-map.tsx sem usePresence')
-  assert(!mapCode.includes('districtOnlineCounts'), 'components/portugal-hero-map.tsx sem districtOnlineCounts')
-  assert(!mapCode.includes('Online Indicator'), 'components/portugal-hero-map.tsx sem badges de jogadores online')
+  // --- TESTE 15: AUSÊNCIA TOTAL DE COMPONENTES E ROTAS DE MAPA ---
+  const mapFiles = [
+    'components/portugal-hero-map.tsx',
+    'app/portugal-mapa',
+    'app/mapa',
+    'components/portugal-map',
+    'src/components/portugal-vivo',
+  ]
+  mapFiles.forEach((file) => {
+    const exists = fs.existsSync(path.join(process.cwd(), file))
+    assert(!exists, `Ficheiro/pasta de mapa eliminado: ${file} não existe no projeto`)
+  })
 
   // --- TESTE 16: AUSÊNCIA DE SETACTIVITY NO QUIZ SCREEN ---
   const quizCode = fs.readFileSync(path.join(process.cwd(), 'components', 'quiz', 'quiz-screen.tsx'), 'utf8')

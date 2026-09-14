@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
-import dynamic from 'next/dynamic'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -20,13 +19,9 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
-import { subscribeRankings, type RankingPlayer } from '@/lib/rankings'
-import { calculateDistrictWarTerritories } from '@/lib/district-war'
 import { logGameFlow } from '@/lib/game-session'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallModal } from '@/components/auth-wall-modal'
-
-import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 const HERO_STATS = [
   {
@@ -62,8 +57,6 @@ const HERO_STATS = [
 export function Hero() {
   const router = useRouter()
   const [seasonTime, setSeasonTime] = useState(() => calculateTimeRemaining(ACTIVE_SEASON_01.endDate))
-  const [nationalPlayers, setNationalPlayers] = useState<RankingPlayer[]>([])
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('Lisboa')
 
   // Atualizar temporizador decrescente a cada segundo
   useEffect(() => {
@@ -72,23 +65,6 @@ export function Hero() {
     }, 1000)
     return () => clearInterval(timer)
   }, [])
-
-  // Subscrição em Tempo Real para alimentar o radar do Hero
-  useEffect(() => {
-    const unsub = subscribeRankings(
-      'all',
-      'xp',
-      (players) => {
-        setNationalPlayers(players)
-      },
-      100
-    )
-    return () => unsub()
-  }, [])
-
-  const territories = useMemo(() => {
-    return calculateDistrictWarTerritories(nationalPlayers)
-  }, [nationalPlayers])
 
   const { user } = useAuth()
   const [authWallOpen, setAuthWallOpen] = useState(false)
@@ -144,7 +120,7 @@ export function Hero() {
           className="animate-rise mt-5 max-w-2xl text-pretty text-base sm:text-lg md:text-xl leading-relaxed text-slate-200 font-bold mx-auto"
           style={{ animationDelay: '200ms' }}
         >
-          Portugal entrou no futuro. Agora és tu que decides quem domina o mapa.
+          Portugal entrou no futuro. Agora és tu que decides quem domina o ranking nacional.
         </p>
 
         <p
@@ -154,7 +130,7 @@ export function Hero() {
           Joga a solo, desafia em Duelos 1v1, ganha Acordas Virtuais e defende o teu território na Guerra dos Distritos.
         </p>
 
-        {/* Os 3 CTAs Principais Requeridos */}
+        {/* Os CTAs Principais */}
         <div
           className="animate-rise mt-8 flex w-full flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4"
           style={{ animationDelay: '300ms' }}
@@ -169,19 +145,10 @@ export function Hero() {
             <span>Jogar Agora</span>
           </button>
 
-          {/* CTA 2: Explorar Portugal 3D */}
-          <Link
-            href="/portugal-mapa"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-cyan-300 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/50 hover:border-cyan-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-cyan-950/50"
-          >
-            <Globe className="h-5 w-5 text-cyan-400" />
-            <span>Explorar Portugal 3D</span>
-          </Link>
-
-          {/* CTA 3: Classificação Nacional */}
+          {/* CTA 2: Classificação Nacional */}
           <Link
             href="/rankings"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-amber-300 bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 hover:border-amber-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-amber-950/50"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm sm:text-base font-black uppercase tracking-wider text-amber-300 bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 hover:border-amber-400 backdrop-blur-xl cursor-pointer shadow-xl hover:scale-105 transition-all duration-300 shadow-amber-950/50"
           >
             <Trophy className="h-5 w-5 text-amber-400" />
             <span>Classificação Nacional</span>
@@ -212,58 +179,6 @@ export function Hero() {
           <span className="text-white/20">•</span>
           <Link href="/download" className="hover:text-emerald-300 transition flex items-center gap-1.5 group">
             <span className="group-hover:translate-x-0.5 transition">📱 App Android</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* HERO MAP EXPERIENCE: PORTUGAL 2026 EM 3D (70-85% DA ÁREA VISUAL) */}
-      <div className="mt-10 sm:mt-12 w-full max-w-7xl mx-auto rounded-4xl border border-cyan-500/35 bg-slate-950/95 overflow-hidden shadow-2xl relative isolate" style={{ height: 'min(75vh, 680px)', minHeight: '520px' }}>
-        {/* Top Floating Glass Header */}
-        <div className="absolute top-4 left-4 right-4 z-20 pointer-events-none flex flex-wrap items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl bg-slate-950/85 border border-white/10 backdrop-blur-xl shadow-xl">
-          <div className="flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
-            <div>
-              <div className="font-mono text-[10px] font-black uppercase tracking-widest text-cyan-400">
-                PORTUGAL 2026 // MAPA TÁTICO NACIONAL
-              </div>
-              <div className="font-display text-xs sm:text-sm font-black uppercase text-white">
-                Território Selecionado: <span className="text-cyan-300">{selectedDistrict}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="pointer-events-auto flex items-center gap-2">
-            <Link
-              href="/portugal-mapa"
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-display text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-cyan-500/25 hover:scale-105 transition-all cursor-pointer"
-            >
-              <span>Explorar em Ecrã Total</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Real-time World Engine Instance */}
-        <div className="w-full h-full">
-          <PortugalMap
-            compact={true}
-            initialDistrict={selectedDistrict}
-            onSelectDistrict={(d) => {
-              if (d) setSelectedDistrict(d.name)
-            }}
-          />
-        </div>
-
-        {/* Bottom Floating Legend / Instructions */}
-        <div className="absolute bottom-4 left-4 right-4 z-20 pointer-events-none flex items-center justify-between text-slate-400 text-[11px] font-mono px-3">
-          <span className="bg-slate-950/80 px-3 py-1 rounded-lg border border-white/10 backdrop-blur-sm hidden sm:inline">
-            💡 Arrasta para explorar • Roda do rato para zoom • Clica para selecionar
-          </span>
-          <Link
-            href="/portugal-mapa"
-            className="pointer-events-auto ml-auto bg-slate-900/90 hover:bg-slate-800 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-sm font-bold uppercase transition-all"
-          >
-            Abrir Central de Comando &rarr;
           </Link>
         </div>
       </div>

@@ -135,7 +135,7 @@ export const VIP_ARENAS: CanonicalArena[] = [
     rarity: 'Mítica',
     category: 'vip_supreme',
     description: 'Digital Twin gamificado de Portugal flutuando sobre uma grelha de radar tático. Relevos montanhosos, litoral atlântico iluminado por neon ciano e 20 nós territoriais de energia interconectados.',
-    quote: '«Portugal inteiro mapeado em luz quântica. O mapa é o teu tabuleiro.»',
+    quote: '«Portugal inteiro em luz quântica. O território é o teu tabuleiro.»',
     assetPath: '/arenas/vip/portugal-3d.svg',
     thumbnail: '/arenas/vip/portugal-3d.svg',
     background: '/arenas/vip/portugal-3d.svg',
@@ -1288,7 +1288,6 @@ export function getDefaultArenaForCategory(categorySlug?: string | null): Canoni
 
     case 'geografia':
     case 'geografia-portugal':
-    case 'mapa':
     case 'territorio':
       return resolveArena('arena_portugal_3d') || MASTER_ARENA_CATALOG[2]
 

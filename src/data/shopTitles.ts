@@ -135,7 +135,7 @@ export const TITLE_SHOP_CATALOG: TitleItem[] = [
   { id: 'tit_geo_3', name: 'Cartógrafo', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 500, rarity: 'Raro', badgeColor: getTitleRarityBadge('Raro') },
   { id: 'tit_geo_4', name: 'Navegador dos Mares', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 800, rarity: 'Raro', badgeColor: getTitleRarityBadge('Raro') },
   { id: 'tit_geo_5', name: 'Geógrafo', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 1500, rarity: 'Épico', badgeColor: getTitleRarityBadge('Épico') },
-  { id: 'tit_geo_6', name: 'Mestre dos Mapas', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 2500, rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
+  { id: 'tit_geo_6', name: 'Mestre do Território', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 2500, rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
   { id: 'tit_geo_7', name: 'Senhor do Mundo', categoryKey: 'geografia', categoryTitle: 'Geografia', group: 'tematico', price: 4000, rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
 
   // ============================================================================

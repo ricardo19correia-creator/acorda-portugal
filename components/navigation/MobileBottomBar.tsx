@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Gamepad2, Flag, Trophy, ShoppingBag, User } from 'lucide-react'
+import { Home, Gamepad2, Trophy, ShoppingBag, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function MobileBottomBar() {
@@ -55,7 +55,6 @@ export function MobileBottomBar() {
   const NAV_ITEMS = [
     { label: 'Início', href: '/', icon: Home },
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Mapa', href: '/mapa', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Perfil', href: '/perfil', icon: User },
@@ -77,8 +76,7 @@ export function MobileBottomBar() {
             item.href === '/'
               ? pathname === '/'
               : pathname === item.href ||
-                (item.href !== '/' && pathname.startsWith(item.href)) ||
-                (item.href === '/mapa' && pathname.startsWith('/portugal-mapa'))
+                (item.href !== '/' && pathname.startsWith(item.href))
 
           return (
             <Link

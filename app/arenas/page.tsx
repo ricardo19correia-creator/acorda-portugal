@@ -33,7 +33,6 @@ import { useAuth } from '@/components/auth-provider'
 import { AuthWallModal } from '@/components/auth-wall-modal'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
-import { PortugalMap } from '@/components/portugal-map/PortugalMap'
 
 export default function ArenasPage() {
   const router = useRouter()
@@ -49,15 +48,10 @@ export default function ArenasPage() {
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'vip' | 'distrital' | 'historica' | 'futurista'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [toastMsg, setToastMsg] = useState<string | null>(null)
-  const [viewMode, setViewMode] = useState<'showcase' | 'map'>('showcase')
 
   // Sincronizar arena equipada e query params
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const search = new URLSearchParams(window.location.search)
-      if (search.get('tab') === 'map' || search.get('view') === 'map' || window.location.hash === '#map') {
-        setViewMode('map')
-      }
       const saved = localStorage.getItem('equipped_arena')
       if (saved) {
         setEquippedArenaId(saved)
@@ -207,46 +201,9 @@ export default function ArenasPage() {
         </div>
 
         {/* ========================================================= */}
-        {/* 2. SELETOR DE VISUALIZAÇÃO: CÂMARA 3D VS MAPA MUNDIAL */}
+        {/* SHOWCASE HERO PRINCIPAL: RENDERIZADOR AO VIVO (ENGINE 2026) */}
         {/* ========================================================= */}
-        <div className="flex items-center gap-2 mb-6">
-          <button
-            type="button"
-            onClick={() => setViewMode('showcase')}
-            className={cn(
-              'px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer',
-              viewMode === 'showcase'
-                ? 'bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 shadow-lg shadow-amber-500/25'
-                : 'bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10'
-            )}
-          >
-            <span>🏛️ Câmara de Arena</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('map')}
-            className={cn(
-              'px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5',
-              viewMode === 'map'
-                ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 shadow-lg shadow-cyan-500/25'
-                : 'bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10'
-            )}
-          >
-            <span>🗺️ Mapa Mundial de Arenas</span>
-          </button>
-        </div>
-
-        {viewMode === 'map' ? (
-          <section className="mb-12 rounded-4xl border border-cyan-500/35 bg-slate-950/90 overflow-hidden shadow-2xl relative" style={{ height: 'min(75vh, 620px)', minHeight: '480px' }}>
-            <PortugalMap
-              compact={true}
-            />
-          </section>
-        ) : (
-          /* ========================================================= */
-          /* SHOWCASE HERO PRINCIPAL: RENDERIZADOR AO VIVO (ENGINE 2026) */
-          /* ========================================================= */
-          <section className="mb-12 rounded-4xl border border-white/15 bg-slate-950/80 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+        <section className="mb-12 rounded-4xl border border-white/15 bg-slate-950/80 p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Visual da Arena em Renderização Direta */}
             <div className="lg:col-span-7 relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
@@ -259,37 +216,27 @@ export default function ArenasPage() {
               />
             </div>
 
-            {/* Metadados e Ações da Arena Selecionada */}
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+            {/* Informações e Ações da Arena Selecionada */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div>
-                <div className="flex items-center gap-2 flex-wrap mb-2">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-amber-500/40 bg-amber-500/20 text-amber-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
                     {selectedArena.rarity}
                   </span>
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/10 text-slate-300">
-                    {selectedArena.visualType === 'webp_raster' ? '3D Renderizado (WebP)' : 'Gráfico Vetorial (SVG)'}
+                  <span className="text-xs text-slate-400 font-mono">
+                    {(selectedArena as any).district || selectedArena.subtitle}
                   </span>
-                  {isSelectedEquipped && (
-                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-500 text-slate-950 flex items-center gap-1">
-                      <Check className="w-3 h-3" />
-                      Equipada
-                    </span>
-                  )}
                 </div>
 
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white font-display">
+                <h2 className="text-2xl sm:text-3xl font-black text-white font-display tracking-tight">
                   {selectedArena.name}
                 </h2>
-                <p className="text-xs sm:text-sm text-amber-200/90 font-medium italic mt-1">
-                  «{selectedArena.subtitle}»
-                </p>
-
-                <p className="text-xs text-slate-300 leading-relaxed mt-4">
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
                   {selectedArena.description}
                 </p>
 
                 {selectedArena.quote && (
-                  <blockquote className="mt-3 p-3 rounded-2xl bg-white/5 border border-white/10 text-xs text-slate-400 italic">
+                  <blockquote className="mt-3 text-xs italic text-slate-400 border-l-2 border-amber-500/50 pl-3">
                     {selectedArena.quote}
                   </blockquote>
                 )}
@@ -298,6 +245,7 @@ export default function ArenasPage() {
               {/* Botões de Ação Imediata */}
               <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-3">
                 <button
+                  type="button"
                   onClick={() => handlePlayInArena(selectedArena)}
                   className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-sm uppercase tracking-wider shadow-xl shadow-emerald-500/25 transition cursor-pointer hover:scale-[1.02] active:scale-95"
                 >
@@ -306,6 +254,7 @@ export default function ArenasPage() {
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => handleEquip(selectedArena)}
                   className={cn(
                     'inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition cursor-pointer border',
@@ -321,7 +270,6 @@ export default function ArenasPage() {
             </div>
           </div>
         </section>
-        )}
 
         {/* ========================================================= */}
         {/* 3. FILTROS & BARRA DE PESQUISA */}

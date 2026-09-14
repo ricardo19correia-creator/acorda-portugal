@@ -25,7 +25,6 @@ export default function Footer() {
         <button type="button" onClick={handleStartGame} className="hover:text-emerald-400 transition-colors cursor-pointer">Jogar</button>
         <Link href="/ranking" className="hover:text-emerald-400 transition-colors">Rankings</Link>
         <Link href="/explorar" className="hover:text-emerald-400 transition-colors">Categorias</Link>
-        <Link href="/portugal" className="hover:text-emerald-400 transition-colors">Portugal &amp; Mapa</Link>
         <Link href="/eventos" className="hover:text-emerald-400 transition-colors">Eventos</Link>
         <Link href="/explorar" className="hover:text-emerald-400 transition-colors">Explorar &amp; Sobre</Link>
         <Link href="/loja" className="hover:text-emerald-400 transition-colors">Loja</Link>

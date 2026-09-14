@@ -37,7 +37,7 @@ const FAQ_ITEMS: FAQItem[] = [
     id: 'faq-2',
     question: 'Como funciona a pontuação distrital e o Ranking?',
     answer:
-      'Cada pergunta acertada nos modos a solo ou duelos concede pontos de experiência (XP). Os pontos acumulados por todos os jogadores de um mesmo distrito somam para a classificação distrital coletiva, determinando qual é o distrito líder no mapa de Portugal.',
+      'Cada pergunta acertada nos modos a solo ou duelos concede pontos de experiência (XP). Os pontos acumulados por todos os jogadores de um mesmo distrito somam para a classificação distrital coletiva, determinando qual é o distrito líder na classificação nacional de Portugal.',
     icon: Trophy,
     badge: 'Rankings',
     categoryTone: 'text-gold bg-amber-500/10 border-amber-500/30',

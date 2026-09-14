@@ -11,7 +11,6 @@ const LINKS = [
   { label: '📱 App Android', href: '/download' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Categorias', href: '/categorias' },
-  { label: 'Portugal & Mapa', href: '/portugal' },
   { label: 'Onde Tudo Começou', href: '/historia' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Explorar & Sobre', href: '/explorar' },

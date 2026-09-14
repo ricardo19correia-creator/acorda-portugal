@@ -113,7 +113,7 @@ const FAQ_DATABASE: FAQQuestion[] = [
     isPopular: true,
     question: 'O que é o Acorda Portugal?',
     answer:
-      'O Acorda Portugal é o maior videojogo de trivia nacional em tempo real. Podes testar os teus conhecimentos sobre cultura geral, história, geografia, desporto, gastronomia e tradições de Portugal, representando o teu distrito natal ou de residência para levar a tua região ao topo do mapa nacional.',
+      'O Acorda Portugal é o maior videojogo de trivia nacional em tempo real. Podes testar os teus conhecimentos sobre cultura geral, história, geografia, desporto, gastronomia e tradições de Portugal, representando o teu distrito natal ou de residência para levar a tua região ao topo da classificação nacional.',
   },
   {
     id: 'faq-ajudas',

@@ -1,6 +1,6 @@
 # 🇵🇹 ACORDA PORTUGAL — RELATÓRIO FORENSE DO BANCO DE PERGUNTAS
 
-**Data de Execução:** 09/09/2026 22:17:07
+**Data de Execução:** 14/09/2026 00:20:59
 **Motor Auditado:** `QuestionRegistry` & `questionEngine` (Runtime de Produção)
 **Total de Ficheiros Auditados:** 24
 **Método:** Execução direta determinística (sem estimativas, sem contadores hardcoded).
