@@ -2132,13 +2132,13 @@ function PerfilContent() {
                           </div>
 
                           {/* Preview Adaptada por Tipo */}
-                          <div className="w-full rounded-xl overflow-hidden bg-black/40 border border-slate-800 flex items-center justify-center mb-3 relative">
+                          <div className={cn("w-full rounded-xl bg-black/40 border border-slate-800 flex items-center justify-center mb-3 relative", item.category === 'molduras' ? 'overflow-visible p-4' : 'overflow-hidden')}>
                             {item.category === 'avatars' && item.image ? (
                               <div className="w-full h-36 flex items-center justify-center p-2">
                                 <img src={item.image} alt={item.name} className="w-24 h-24 rounded-2xl object-cover border border-slate-700 shadow-md" />
                               </div>
                             ) : item.category === 'molduras' ? (
-                              <div className="w-full h-36 flex flex-col items-center justify-center p-2">
+                              <div className="w-full h-36 flex flex-col items-center justify-center p-2 overflow-visible">
                                 <UserAvatar avatarUrl={avatar} activeFrame={item.id} size="lg" showBadge={false} />
                               </div>
                             ) : item.category === 'arenas' ? (

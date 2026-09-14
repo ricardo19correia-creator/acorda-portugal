@@ -2097,14 +2097,14 @@ function LojaContent() {
                         )}
                       </div>
 
-                      {/* Image / Preview */}
+                      {/* Image / Preview de Molduras Vivas AAA */}
                       {item.category === 'molduras' ? (
                         <div 
                           onClick={() => setInspectingFrameItem(item)}
-                          className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-purple-500/20 p-3 flex flex-col items-center justify-center overflow-hidden mb-3 shadow-inner group/frame cursor-pointer transition-all hover:border-purple-400/50"
+                          className="relative aspect-square w-full rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-purple-500/30 p-5 sm:p-6 flex flex-col items-center justify-center overflow-visible mb-3 shadow-inner group/frame cursor-pointer transition-all hover:border-purple-400/60"
                         >
-                          {/* Avatar com Moldura perfeitamente enquadrada */}
-                          <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center transition-transform duration-300 group-hover/frame:scale-105">
+                          {/* Palco do Avatar com Moldura Viva Viva e Efeitos Transbordantes */}
+                          <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center transition-transform duration-300 group-hover/frame:scale-105 overflow-visible">
                             <UserAvatar
                               avatarUrl={
                                 previewAvatarId === 'equipped'
@@ -2124,7 +2124,7 @@ function LojaContent() {
                             </span>
                           </div>
 
-                          <span className="mt-2 text-[10px] font-black uppercase tracking-wider text-purple-300 z-10 flex items-center gap-1">
+                          <span className="mt-3 text-[10px] font-black uppercase tracking-wider text-purple-300 z-10 flex items-center gap-1">
                             <span>{item.icon || '🖼️'}</span>
                             <span>{item.categoryTitle || 'Moldura'}</span>
                           </span>

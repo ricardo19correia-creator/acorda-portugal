@@ -134,7 +134,7 @@ export function UserAvatar({
       <div
         onClick={onClick}
         className={cn(
-          'relative inline-flex shrink-0 aspect-square select-none items-center justify-center group/avatar',
+          'relative inline-flex shrink-0 aspect-square select-none items-center justify-center group/avatar overflow-visible',
           sizeClass,
           onClick && 'cursor-pointer',
           className
@@ -142,11 +142,11 @@ export function UserAvatar({
       >
         {/* Aura dourada prestigiosa subtil */}
         {hasAura && (
-          <div className="pointer-events-none absolute -inset-1 rounded-[inherit] bg-amber-400/20 blur-sm animate-pulse z-0" />
+          <div className="pointer-events-none absolute -inset-1.5 rounded-[inherit] bg-amber-400/25 blur-sm animate-pulse z-0" />
         )}
 
-        {/* Moldura Viva Concêntrica */}
-        <AnimatedFrameWrapper frameId={effectiveFrameId} className="w-full h-full">
+        {/* Moldura Viva Concêntrica com Presença AAA */}
+        <AnimatedFrameWrapper frameId={effectiveFrameId} size={size} className="w-full h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageSrc}
