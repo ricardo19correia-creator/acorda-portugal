@@ -92,18 +92,30 @@ export function ArenaRenderer({
         backgroundColor: arena.lightingProfile?.ambientColor || '#09090b',
       }}
     >
-      {/* 2.1 Camada Base de Background Visual (SVG ou Raster WebP/JPG) */}
+      {/* 2.1 Camada Base de Background Visual com Suporte Completo a Todas as Resoluções */}
       {!imgError ? (
-        <img
-          src={arena.assetPath}
-          alt={arena.name}
-          onError={() => {
-            console.error(`[ArenaRenderer] Erro ao carregar asset da arena: ${arena.assetPath}`)
-            setImgError(true)
-          }}
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 will-change-transform"
-          loading="eager"
-        />
+        <>
+          {/* Camada Ambiente Desfocada (Preenche ecrãs verticais de telemóvel e ultrawide sem barras pretas nem cortes) */}
+          <img
+            src={encodeURI(arena.assetPath)}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center blur-2xl scale-110 opacity-35 pointer-events-none select-none"
+            loading="eager"
+          />
+
+          {/* Arte Principal Preservada na Totalidade (100% visível, proporção perfeita, sem deformação nem cortes) */}
+          <img
+            src={encodeURI(arena.assetPath)}
+            alt={arena.name}
+            onError={() => {
+              console.error(`[ArenaRenderer] Erro ao carregar asset da arena: ${arena.assetPath}`)
+              setImgError(true)
+            }}
+            className="relative z-0 w-full h-full object-contain object-center pointer-events-none select-none transition-transform duration-700 will-change-transform drop-shadow-2xl"
+            loading="eager"
+          />
+        </>
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950 p-6 text-center">
           <AlertTriangle className="w-10 h-10 text-amber-400 mb-2" />

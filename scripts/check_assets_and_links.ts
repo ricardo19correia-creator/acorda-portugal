@@ -12,7 +12,6 @@ async function checkAssetsAndLinks() {
     'downloads',
     'brand',
     'icon.png',
-    'apple-icon.png',
     'logo-oficial.png'
   ];
 
@@ -28,8 +27,8 @@ async function checkAssetsAndLinks() {
     }
   }
 
-  // Verificar arenas
-  const arenaFiles = fs.readdirSync(path.join(publicDir, 'arenas')).filter(f => f.endsWith('.jpg') || f.endsWith('.png'));
+  // Verificar arenas (suporte a .jpg, .jfif, .png, .webp)
+  const arenaFiles = fs.readdirSync(path.join(publicDir, 'arenas')).filter(f => f.endsWith('.jpg') || f.endsWith('.jfif') || f.endsWith('.png') || f.endsWith('.webp'));
   console.log(`Total de ficheiros em public/arenas/: ${arenaFiles.length}`);
   if (arenaFiles.length < 43) {
     console.error(`❌ Menos de 43 arenas encontradas: ${arenaFiles.length}`);

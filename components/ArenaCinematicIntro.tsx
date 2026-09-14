@@ -89,7 +89,7 @@ export function ArenaCinematicIntro({
             ? 'scale-125 blur-xl opacity-0'
             : 'scale-100 blur-0 opacity-70'
         }`}
-        style={{ backgroundImage: `url(${arena.assetPath})` }}
+        style={{ backgroundImage: `url("${encodeURI(arena.assetPath)}")` }}
       />
 
       {/* Camada de Partículas Vivas da Arena */}

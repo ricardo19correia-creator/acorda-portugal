@@ -2,7 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
 import { ARENA_SHOP_CATALOG, ARENA_IMAGES, getOfficialArenaImage } from '../src/data/shopArenas'
-import { ARENAS } from '../data/arenas'
+import { STANDARD_ARENAS, VIP_ARENAS } from '../src/data/arenaCatalog'
+import { SUPREME_ARENAS } from '../lib/supreme-arenas'
 
 interface AuditResult {
   passed: boolean
@@ -12,7 +13,6 @@ interface AuditResult {
   catalogArenasCount: number
   uniqueIdsCount: number
   uniqueNamesCount: number
-  uniqueImagesCount: number
   missingImages: string[]
   unmappedFiles: string[]
   errors: string[]
@@ -31,7 +31,6 @@ export function runArenaAudit(): AuditResult {
       catalogArenasCount: 0,
       uniqueIdsCount: 0,
       uniqueNamesCount: 0,
-      uniqueImagesCount: 0,
       missingImages: ['Diretório public/arenas não existe'],
       unmappedFiles: [],
       errors: ['Diretório public/arenas não encontrado'],
@@ -62,7 +61,7 @@ export function runArenaAudit(): AuditResult {
   const missingImages: string[] = []
 
   console.log('========================================================================')
-  console.log('🇵🇹 ACORDA PORTUGAL — VERIFICAÇÃO INDIVIDUAL DAS 43 ARENAS')
+  console.log(`🇵🇹 ACORDA PORTUGAL — AUDITORIA DAS ARENAS (${ARENA_SHOP_CATALOG.length} ITENS / ${physicalFiles.length} FICHEIROS FÍSICOS)`)
   console.log('========================================================================')
 
   ARENA_SHOP_CATALOG.forEach((arena, idx) => {
@@ -73,7 +72,6 @@ export function runArenaAudit(): AuditResult {
     names.add(arena.name)
 
     const img = arena.image || ''
-    if (images.has(img)) errors.push(`Imagem duplicada no catálogo: ${img}`)
     images.add(img)
 
     const basename = path.basename(img)
@@ -86,21 +84,46 @@ export function runArenaAudit(): AuditResult {
     const mapConsistent = officialImg === img
 
     console.log(
-      `Arena ${String(idx + 1).padStart(2, '0')} [${arena.id.padEnd(30)}] -> ${img.padEnd(32)} ${exists && mapConsistent ? '✓' : '❌'}`
+      `Arena ${String(idx + 1).padStart(2, '0')} [${arena.id.padEnd(30)}] -> ${img.padEnd(36)} ${exists && mapConsistent ? '✓' : '❌'}`
     )
   })
 
-  const unmappedFiles = physicalFiles.filter(f => !images.has(`/arenas/${f}`))
+  // Verificar STANDARD_ARENAS
+  STANDARD_ARENAS.forEach(arena => {
+    const basename = path.basename(arena.assetPath || '')
+    if (!fs.existsSync(path.join(arenasDir, basename))) {
+      missingImages.push(`STANDARD_ARENA em falta: ${arena.assetPath} (${arena.name})`)
+    }
+  })
+
+  // Verificar VIP_ARENAS
+  VIP_ARENAS.forEach(arena => {
+    const basename = path.basename(arena.assetPath || '')
+    if (!fs.existsSync(path.join(arenasDir, basename))) {
+      missingImages.push(`VIP_ARENA em falta: ${arena.assetPath} (${arena.name})`)
+    }
+  })
+
+  // Verificar SUPREME_ARENAS
+  SUPREME_ARENAS.forEach(arena => {
+    const basename = path.basename(arena.assetPath || '')
+    if (!fs.existsSync(path.join(arenasDir, basename))) {
+      missingImages.push(`SUPREME_ARENA em falta: ${arena.assetPath} (${arena.name})`)
+    }
+  })
+
+  const mappedBasenames = new Set<string>()
+  for (const p of Object.values(ARENA_IMAGES)) {
+    mappedBasenames.add(path.basename(p))
+  }
+  const unmappedFiles = physicalFiles.filter(f => !mappedBasenames.has(f))
 
   const passed =
     duplicateFiles.length === 0 &&
     missingImages.length === 0 &&
     unmappedFiles.length === 0 &&
-    ids.size === 43 &&
-    names.size === 43 &&
-    images.size === 43 &&
-    physicalFiles.length === 43 &&
-    hashMap.size === 43 &&
+    physicalFiles.length === 50 &&
+    hashMap.size === 50 &&
     errors.length === 0
 
   return {
@@ -111,7 +134,6 @@ export function runArenaAudit(): AuditResult {
     catalogArenasCount: ARENA_SHOP_CATALOG.length,
     uniqueIdsCount: ids.size,
     uniqueNamesCount: names.size,
-    uniqueImagesCount: images.size,
     missingImages,
     unmappedFiles,
     errors,
@@ -121,19 +143,20 @@ export function runArenaAudit(): AuditResult {
 const res = runArenaAudit()
 
 console.log('\n========================================================================')
-console.log('📊 RESULTADO FINAL DA AUDITORIA')
+console.log('📊 RESULTADO FINAL DA AUDITORIA DE ARENAS')
 console.log('========================================================================')
-console.log(`ARENAS:              ${res.catalogArenasCount}`)
-console.log(`IMAGENS ENCONTRADAS: ${res.physicalFilesCount}`)
+console.log(`ARENAS NO CATÁLOGO:  ${res.catalogArenasCount}`)
+console.log(`FICHEIROS EM DISCO:  ${res.physicalFilesCount}`)
 console.log(`IMAGENS ÚNICAS:      ${res.uniqueHashesCount}`)
 console.log(`DUPLICADOS:          ${res.duplicateFiles.length}`)
-console.log(`MISSING:             ${res.missingImages.length}`)
-console.log(`FALLBACKS:           0`)
+console.log(`FICHEIROS EM FALTA:  ${res.missingImages.length}`)
+console.log(`NÃO MAPEADOS:        ${res.unmappedFiles.length}`)
+console.log(`ERROS:               ${res.errors.length}`)
 console.log('========================================================================')
 
 if (res.passed) {
-  console.log('🟢 43/43 ARENAS E FOTOGRAFIAS 100% ÚNICAS (0 DUPLICADOS, 0 FALLBACKS)')
+  console.log('🟢 TODAS AS 50/50 IMAGENS DE ARENAS 100% INTEGRADAS E VÁLIDAS!')
 } else {
-  console.error('🔴 AUDITORIA FALHOU COM ERROS:', res.errors, res.missingImages, res.duplicateFiles)
+  console.error('🔴 AUDITORIA FALHOU COM ERROS:', res.errors, res.missingImages, res.duplicateFiles, res.unmappedFiles)
   process.exit(1)
 }

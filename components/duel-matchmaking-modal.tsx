@@ -613,7 +613,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       <div
                         className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
                         style={{
-                          backgroundImage: `url('${selectedArena.shopImage || selectedArena.imagePath || selectedArena.image}')`,
+                          backgroundImage: `url('${encodeURI(selectedArena.shopImage || selectedArena.imagePath || selectedArena.image || '')}')`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -666,7 +666,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                             <div
                               className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
                               style={{
-                                backgroundImage: `url('${arena.shopImage || arena.imagePath || arena.image}')`,
+                                backgroundImage: `url('${encodeURI(arena.shopImage || arena.imagePath || arena.image || '')}')`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
@@ -909,7 +909,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                       <div
                         className="h-10 w-14 rounded-lg bg-cover bg-center border border-white/20 shadow-md shrink-0"
                         style={{
-                          backgroundImage: `url('${selectedArena.shopImage || selectedArena.imagePath || selectedArena.image}')`,
+                          backgroundImage: `url('${encodeURI(selectedArena.shopImage || selectedArena.imagePath || selectedArena.image || '')}')`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           backgroundRepeat: 'no-repeat',
@@ -962,7 +962,7 @@ export function DuelMatchmakingModal({ isOpen, onClose, onMatchStart }: DuelMatc
                             <div
                               className="h-12 w-full rounded-lg bg-cover bg-center border border-white/10 group-hover:scale-105 transition"
                               style={{
-                                backgroundImage: `url('${arena.shopImage || arena.imagePath || arena.image}')`,
+                                backgroundImage: `url('${encodeURI(arena.shopImage || arena.imagePath || arena.image || '')}')`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',

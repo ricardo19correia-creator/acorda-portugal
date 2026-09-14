@@ -84,37 +84,37 @@ const SHOWCASE_ARENAS = [
   {
     name: 'Praça da Liberdade',
     location: 'Porto',
-    image: '/arenas/praca-liberdade.jpg',
+    image: '/arenas/Terreiro Dourado.jpg',
     tag: 'Arena Oficial',
   },
   {
     name: 'Torre de Belém',
     location: 'Lisboa',
-    image: '/arenas/torre-belem.jpg',
+    image: '/arenas/lisboa Imperial.jpg',
     tag: 'Monumento Nacional',
   },
   {
     name: 'Castelo de Óbidos',
     location: 'Leiria',
-    image: '/arenas/castelo-obidos.jpg',
+    image: '/arenas/Muralhas de Prata.jpg',
     tag: 'História Medieval',
   },
   {
     name: 'Lisboa Cybercore 2077',
     location: 'Futuro Luso',
-    image: '/arenas/lisboa-cybercore.jpg',
+    image: '/arenas/Alfama 2077.jpg',
     tag: 'Cyberpunk',
   },
   {
     name: 'Conquista da Seleção',
     location: 'Glória Lusitana',
-    image: '/arenas/conquista-selecao.jpg',
+    image: '/arenas/Santuário das Quedas.jfif',
     tag: 'Futebol & Emoção',
   },
   {
     name: 'Taberna de Fado Vadio',
     location: 'Alfama',
-    image: '/arenas/fado-alfama.jpg',
+    image: '/arenas/Tasca da Saudade.jpg',
     tag: 'Cultura & Alma',
   },
 ]
