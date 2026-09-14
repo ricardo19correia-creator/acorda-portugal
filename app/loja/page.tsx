@@ -43,12 +43,11 @@ import {
   isTitleOwned,
   sanitizeTitleName,
 } from '@/lib/titles'
-import VipShopSection from '@/components/shop/VipShopSection'
 import { AID_SHOP_ITEMS } from '@/lib/shop-catalog'
 import { googlePlayBillingService, type BillingProductDisplay, type BillingPurchaseState } from '@/lib/google-play-billing'
 import { GOOGLE_PLAY_PRODUCTS } from '@/config/google-play-products'
 
-type Category = 'comprar_acordas' | 'vip' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
+type Category = 'comprar_acordas' | 'avatars' | 'todos' | 'molduras' | 'taunts' | 'ajudas' | 'titulos' | 'arenas'
 
 interface ShopItem {
   id: string
@@ -236,14 +235,14 @@ function LojaContent() {
   const tabParam = searchParams.get('tab') as Category | null
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<Category>(() => {
-    if (tabParam && ['comprar_acordas', 'vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+    if (tabParam && ['comprar_acordas', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
       return tabParam
     }
     return 'comprar_acordas'
   })
 
   useEffect(() => {
-    if (tabParam && ['comprar_acordas', 'vip', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
+    if (tabParam && ['comprar_acordas', 'avatars', 'todos', 'molduras', 'taunts', 'ajudas', 'titulos', 'arenas'].includes(tabParam)) {
       setActiveTab(tabParam)
     }
   }, [tabParam])
@@ -491,7 +490,6 @@ function LojaContent() {
   ])
   const [feedbackMessage, setFeedbackMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
   const [rawInventory, setRawInventory] = useState<Record<string, number>>({})
-  const [vipEntitlements, setVipEntitlements] = useState<string[]>([])
 
   useEffect(() => {
     setMounted(true)
@@ -588,9 +586,6 @@ function LojaContent() {
                 ]),
               ),
             )
-            if (Array.isArray(data.vipEntitlements)) {
-              setVipEntitlements(data.vipEntitlements)
-            }
             setConsumables({
               help5050: invData.utilities.fiftyFifty,
               freezeTime: invData.utilities.freezeTime,
@@ -1246,7 +1241,6 @@ function LojaContent() {
 
   const filteredItems = SHOP_ITEMS.filter((item) => {
     if (activeTab === 'comprar_acordas') return false
-    if (activeTab === 'vip') return false
     if (activeTab === 'todos') return true
     if (activeTab === 'avatars') {
       if (item.category !== 'avatars') return false
@@ -1425,17 +1419,6 @@ function LojaContent() {
             }`}
           >
             <MessageSquare className="w-3.5 h-3.5" /> Provocações 1v1
-          </button>
-
-          <button
-            onClick={() => setActiveTab('vip')}
-            className={`cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs transition-all ${
-              activeTab === 'vip'
-                ? 'bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
-                : 'bg-slate-900/70 text-amber-400 border border-amber-500/30 hover:bg-slate-800'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5" /> EXCLUSIVOS VIP (€ Real)
           </button>
         </div>
 
@@ -1877,24 +1860,6 @@ function LojaContent() {
               </p>
             </div>
           </div>
-        ) : activeTab === 'vip' ? (
-          <VipShopSection
-            userId={auth.currentUser?.uid}
-            userEmail={auth.currentUser?.email || undefined}
-            equippedAvatar={equippedAvatar}
-            equippedFrame={equippedFrame || 'default'}
-            equippedTitle={equippedTitle}
-            equippedArena={equippedArena}
-            userInventory={rawInventory}
-            vipEntitlements={vipEntitlements}
-            onSuccessToast={(msg) => showToast(msg)}
-            onErrorToast={(msg) => showToast(msg, 'error')}
-            onRefreshData={() => {
-              if (auth.currentUser?.uid) {
-                // Sincronização em tempo real via snapshot
-              }
-            }}
-          />
         ) : activeTab === 'ajudas' ? (
           <div className="w-full max-w-6xl flex flex-col items-center">
             {/* Header da Secção ⚡ AJUDAS */}
