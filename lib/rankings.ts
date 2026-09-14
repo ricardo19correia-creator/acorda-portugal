@@ -323,7 +323,7 @@ export function subscribeRankings(
   try {
     const pubRef = collection(db, 'publicProfiles')
     unsubPub = onSnapshot(
-      query(pubRef, limit(200)),
+      query(pubRef, limit(500)),
       (snapshot) => {
         currentHumans = []
         snapshot.docs.forEach((doc) => {
@@ -341,5 +341,123 @@ export function subscribeRankings(
 
   return () => {
     if (unsubPub) unsubPub()
+  }
+}
+
+export interface DistrictCardData {
+  name: string
+  pos: number
+  totalPlayers: number
+  totalXp: number
+  leader: RankingPlayer | null
+  leaderName: string
+  leaderXp: number
+  leaderPhotoURL?: string
+}
+
+/**
+ * Calcula os cartões dos 18 distritos + regiões com os dados reais de liderança e jogadores
+ */
+export function computeDistrictCards(players: RankingPlayer[]): DistrictCardData[] {
+  const statsMap = computeDistrictStats(players)
+  const result: DistrictCardData[] = []
+  const sortedByXp = [...players].sort((a, b) => b.xp - a.xp)
+
+  ALL_DISTRICTS_LIST.forEach((districtName) => {
+    const stat = statsMap.get(districtName)
+    const districtPlayers = sortedByXp.filter(
+      (p) => (p.district || p.region || '').toLowerCase() === districtName.toLowerCase()
+    )
+    const leader = districtPlayers.length > 0 ? districtPlayers[0] : null
+
+    result.push({
+      name: districtName,
+      pos: stat?.pos || 0,
+      totalPlayers: stat?.players || 0,
+      totalXp: stat?.xp || 0,
+      leader,
+      leaderName: leader ? leader.displayName : 'Sem líder ativo',
+      leaderXp: leader ? leader.xp : 0,
+      leaderPhotoURL: leader?.photoURL,
+    })
+  })
+
+  return result.sort((a, b) => {
+    if (a.pos > 0 && b.pos > 0) return a.pos - b.pos
+    if (a.pos > 0) return -1
+    if (b.pos > 0) return 1
+    return a.name.localeCompare(b.name, 'pt-PT')
+  })
+}
+
+export interface NearbyRankingsResult {
+  userPlayer: RankingPlayer | null
+  userRank: number | null
+  rivalAbove: RankingPlayer | null
+  xpToRivalAbove: number | null
+  rivalBelow: RankingPlayer | null
+  nearbyPlayers: RankingPlayer[]
+  isTop10: boolean
+  distanceToTop10: number | null
+}
+
+/**
+ * Extrai os jogadores à volta do utilizador autenticado
+ */
+export function findUserNearbyRankings(
+  rankedList: RankingPlayer[],
+  userId?: string | null,
+  rangeAbove = 3,
+  rangeBelow = 2
+): NearbyRankingsResult {
+  if (!userId || rankedList.length === 0) {
+    return {
+      userPlayer: null,
+      userRank: null,
+      rivalAbove: null,
+      xpToRivalAbove: null,
+      rivalBelow: null,
+      nearbyPlayers: [],
+      isTop10: false,
+      distanceToTop10: null,
+    }
+  }
+
+  const userIndex = rankedList.findIndex((p) => p.uid === userId)
+  if (userIndex === -1) {
+    return {
+      userPlayer: null,
+      userRank: null,
+      rivalAbove: null,
+      xpToRivalAbove: null,
+      rivalBelow: null,
+      nearbyPlayers: [],
+      isTop10: false,
+      distanceToTop10: null,
+    }
+  }
+
+  const userPlayer = rankedList[userIndex]
+  const userRank = userPlayer.pos || userIndex + 1
+  const rivalAbove = userIndex > 0 ? rankedList[userIndex - 1] : null
+  const rivalBelow = userIndex < rankedList.length - 1 ? rankedList[userIndex + 1] : null
+  const xpToRivalAbove = rivalAbove ? Math.max(0, rivalAbove.xp - userPlayer.xp) : null
+
+  const startIndex = Math.max(0, userIndex - rangeAbove)
+  const endIndex = Math.min(rankedList.length, userIndex + rangeBelow + 1)
+  const nearbyPlayers = rankedList.slice(startIndex, endIndex)
+
+  const isTop10 = userRank <= 10
+  const distanceToTop10 = userRank > 10 ? userRank - 10 : null
+
+  return {
+    userPlayer,
+    userRank,
+    rivalAbove,
+    xpToRivalAbove,
+    rivalBelow,
+    nearbyPlayers,
+    isTop10,
+    distanceToTop10,
   }
 }
