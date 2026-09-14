@@ -117,7 +117,7 @@ export function SiteHeader() {
           <Link
             href="/"
             onClick={handleLogoClick}
-            aria-label="Acorda Portugal — início"
+            aria-label="Acorda Portugal — Desafio Nacional"
             className="group flex items-center min-w-0"
           >
             <BrandLogo />

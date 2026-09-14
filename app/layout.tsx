@@ -23,10 +23,48 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://acordaportugal.pt'),
   title: 'Acorda Portugal — Desafio Nacional',
   description:
-    'O jogo de perguntas oficial de Portugal. Testa o teu conhecimento, representa o teu distrito e chega ao topo do ranking nacional.',
-  generator: 'v0.app',
+    'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+  alternates: {
+    canonical: 'https://acordaportugal.pt/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_PT',
+    url: 'https://acordaportugal.pt/',
+    siteName: 'Acorda Portugal — Desafio Nacional',
+    title: 'Acorda Portugal — Desafio Nacional',
+    description:
+      'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+    images: [
+      {
+        url: 'https://acordaportugal.pt/logo-oficial.png',
+        width: 512,
+        height: 512,
+        alt: 'Acorda Portugal — Desafio Nacional',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Acorda Portugal — Desafio Nacional',
+    description:
+      'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+    images: ['https://acordaportugal.pt/logo-oficial.png'],
+  },
 }
 
 export const viewport: Viewport = {
@@ -45,6 +83,32 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
+        {/* Dados Estruturados Schema.org para Google (WebSite & Organization) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Acorda Portugal — Desafio Nacional',
+              alternateName: 'Acorda Portugal',
+              url: 'https://acordaportugal.pt/',
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Acorda Portugal — Desafio Nacional',
+              alternateName: 'Acorda Portugal',
+              url: 'https://acordaportugal.pt/',
+              logo: 'https://acordaportugal.pt/logo-oficial.png',
+            }),
+          }}
+        />
         <link
           rel="preload"
           href="/videos/global-background.mp4"

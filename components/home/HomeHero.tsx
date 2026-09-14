@@ -33,6 +33,10 @@ export function HomeHero({ onStartGame, isAuthenticated }: HomeHeroProps) {
         <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 drop-shadow-[0_0_35px_rgba(16,185,129,0.35)]">
           PORTUGAL
         </span>
+        <span className="sr-only"> — </span>
+        <span className="block mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.3em] text-amber-400 uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+          Desafio Nacional
+        </span>
       </h1>
 
       {/* Subheadline Curta e Direta */}

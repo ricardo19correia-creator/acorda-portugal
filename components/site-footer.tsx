@@ -33,7 +33,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-md">
-            <BrandLogo />
+            <Link
+              href="/"
+              aria-label="Acorda Portugal — Desafio Nacional"
+              className="inline-block"
+            >
+              <BrandLogo />
+            </Link>
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
               O jogo de perguntas que junta todo o país. Joga, compete e mostra que sabes.
             </p>

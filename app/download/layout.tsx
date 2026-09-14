@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'Descarregar Acorda Portugal — Desafio Nacional',
   description:
     'Descarrega a aplicação oficial Android do Acorda Portugal — Desafio Nacional e entra no desafio.',
+  alternates: {
+    canonical: 'https://acordaportugal.pt/download',
+  },
   openGraph: {
     title: 'Descarregar Acorda Portugal — Desafio Nacional',
     description:

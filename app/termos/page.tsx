@@ -29,6 +29,18 @@ export const metadata: Metadata = {
   title: 'Termos e Condições — Acorda Portugal',
   description:
     'Termos e Condições de Utilização da plataforma Acorda Portugal. Regras de jogo, contas, rankings e direitos.',
+  alternates: {
+    canonical: 'https://acordaportugal.pt/termos',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_PT',
+    url: 'https://acordaportugal.pt/termos',
+    siteName: 'Acorda Portugal — Desafio Nacional',
+    title: 'Termos e Condições — Acorda Portugal',
+    description:
+      'Termos e Condições de Utilização da plataforma Acorda Portugal. Regras de jogo, contas, rankings e direitos.',
+  },
 }
 
 const SECTIONS = [
@@ -356,6 +368,8 @@ export default function TermosPage() {
           <div className="mb-8">
             <Link
               href="/"
+              aria-label="Página Inicial — Acorda Portugal"
+              title="Acorda Portugal — Página Inicial"
               className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-card/60 px-4 py-2 text-sm font-semibold text-muted-foreground backdrop-blur transition hover:border-primary/30 hover:bg-card hover:text-foreground"
             >
               <ArrowLeft className="h-4 w-4 text-primary" />

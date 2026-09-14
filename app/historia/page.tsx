@@ -20,6 +20,18 @@ export const metadata: Metadata = {
   title: 'A História do Acorda Portugal — Da Ideia Original ao Desafio Nacional',
   description:
     'A verdadeira história do Acorda Portugal: a visão original de uma aplicação móvel de informação em tempo real com cidadãos-repórteres e a sua evolução para o Desafio Nacional.',
+  alternates: {
+    canonical: 'https://acordaportugal.pt/historia',
+  },
+  openGraph: {
+    type: 'article',
+    locale: 'pt_PT',
+    url: 'https://acordaportugal.pt/historia',
+    siteName: 'Acorda Portugal — Desafio Nacional',
+    title: 'A História do Acorda Portugal — Da Ideia Original ao Desafio Nacional',
+    description:
+      'A verdadeira história do Acorda Portugal: a visão original de uma aplicação móvel de informação em tempo real com cidadãos-repórteres e a sua evolução para o Desafio Nacional.',
+  },
 }
 
 export default function HistoriaPage() {

@@ -22,6 +22,18 @@ export const metadata: Metadata = {
   title: 'Política de Privacidade — Acorda Portugal',
   description:
     'Política de Privacidade e Proteção de Dados da plataforma Acorda Portugal em conformidade com o RGPD.',
+  alternates: {
+    canonical: 'https://acordaportugal.pt/privacidade',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_PT',
+    url: 'https://acordaportugal.pt/privacidade',
+    siteName: 'Acorda Portugal — Desafio Nacional',
+    title: 'Política de Privacidade — Acorda Portugal',
+    description:
+      'Política de Privacidade e Proteção de Dados da plataforma Acorda Portugal em conformidade com o RGPD.',
+  },
 }
 
 export default function PrivacyPolicy() {
