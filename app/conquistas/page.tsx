@@ -80,7 +80,7 @@ export default function ConquistasPage() {
   }, [userAchievements, selectedCategory])
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
       <AppBackground />
 
       {/* Top Header */}

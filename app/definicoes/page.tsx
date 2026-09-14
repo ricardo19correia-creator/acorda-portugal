@@ -141,7 +141,7 @@ export default function DefinicoesPage() {
   }
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center overflow-x-hidden">
       <AppBackground />
 
       {/* Top Header */}
@@ -197,33 +197,22 @@ export default function DefinicoesPage() {
             </div>
           </div>
 
-          {/* Toggle Vídeo */}
+          {/* Fundo Global Oficial */}
           <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
             <div className="space-y-1 pr-4">
               <span className="text-sm font-bold text-white flex items-center gap-2">
-                Vídeo de Fundo Global
-                <span className="text-[10px] font-mono uppercase bg-cyan-950 text-cyan-400 border border-cyan-500/30 px-2 py-0.2 rounded-md">
+                Fundo Global Oficial
+                <span className="text-[10px] font-mono uppercase bg-emerald-950 text-emerald-400 border border-emerald-500/30 px-2 py-0.2 rounded-md">
                   HD
                 </span>
               </span>
               <p className="text-xs text-slate-400">
-                Apresenta vídeo cinematográfico de fundo. Desativa se preferires máxima poupança de bateria.
+                Apresenta a arte oficial de estúdio em alta definição. Otimizado para máxima poupança de bateria e fluidez.
               </p>
             </div>
-            <button
-              onClick={() => {
-                setVideoEnabled(!isVideoEnabled)
-                showToast(!isVideoEnabled ? 'Vídeo de fundo ativado' : 'Vídeo de fundo desativado')
-              }}
-              className={cn(
-                'cursor-pointer px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0',
-                isVideoEnabled
-                  ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                  : 'bg-slate-800 text-slate-400 border border-slate-700'
-              )}
-            >
-              {isVideoEnabled ? 'Ativado' : 'Desativado'}
-            </button>
+            <div className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">
+              Oficial
+            </div>
           </div>
 
           {/* Toggle Redução de Movimento */}

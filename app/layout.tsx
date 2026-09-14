@@ -6,7 +6,7 @@ import { EconomyProvider } from '@/context/economy-context'
 import { GameThemeProvider } from '@/context/game-theme-context'
 import { AudioProvider } from '@/context/AudioContext'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
-import { GlobalBackgroundVideo } from '@/components/GlobalBackgroundVideo'
+import { GlobalBackgroundImage } from '@/components/GlobalBackgroundImage'
 import { MobileBottomBar } from '@/components/navigation/MobileBottomBar'
 import './globals.css'
 
@@ -120,9 +120,9 @@ export default function RootLayout({
         />
         <link
           rel="preload"
-          href="/videos/global-background.mp4"
-          as="video"
-          type="video/mp4"
+          href="/images/desafio-nacional-background.jpg"
+          as="image"
+          type="image/jpeg"
         />
         <script
           dangerouslySetInnerHTML={{
@@ -147,6 +147,7 @@ export default function RootLayout({
             __html: `
 html.ap-arena-match #global-background-container,
 html.ap-arena-match #global-background-video,
+html.ap-arena-match #global-background-image,
 html.ap-arena-match #global-background-overlay,
 html.ap-arena-match #mobile-bottom-dock {
   display: none !important;
@@ -159,8 +160,8 @@ html.ap-arena-match #mobile-bottom-dock {
         />
       </head>
       <body className="relative min-h-screen bg-[#050706] text-zinc-100 antialiased overflow-x-hidden">
-        {/* 0 → VÍDEO DE FUNDO GLOBAL OFICIAL (IMEDIATO, PERSISTENTE E EM Z-INDEX: 0) */}
-        <GlobalBackgroundVideo />
+        {/* 0 → IMAGEM DE FUNDO GLOBAL OFICIAL (IMEDIATO, PERSISTENTE E EM Z-INDEX: 0) */}
+        <GlobalBackgroundImage />
 
         <AuthProvider>
           <EconomyProvider>

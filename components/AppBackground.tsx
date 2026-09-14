@@ -36,7 +36,7 @@ export interface AppBackgroundProps extends GlobalAppBackgroundProps {
 
 /**
  * Componente Global Oficial de Fundo do Acorda Portugal.
- * Todas as páginas normais usam o GlobalBackgroundVideo montado no layout.
+ * Todas as páginas normais usam o GlobalBackgroundImage montado no layout.
  * Apenas partidas ativas de jogo sobrepõem o cenário com customImage da arena.
  */
 export function AppBackground({

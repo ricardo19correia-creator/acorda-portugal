@@ -39,7 +39,7 @@ import { TITLE_SHOP_CATALOG, type TitleItem } from '@/data/shopTitles'
 import { ARENA_SHOP_CATALOG, type ArenaItem } from '@/data/shopArenas'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteById, getEmoteRarityBadge, type EmoteItem } from '@/src/data/emotes'
-import { ANIMATED_FRAMES, FRAME_ALIASES, type AnimatedFrame } from '@/data/frames'
+import { ANIMATED_FRAMES, FRAME_ALIASES, getFrameById, type AnimatedFrame } from '@/data/frames'
 import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
@@ -173,7 +173,18 @@ function PerfilContent() {
   const [city, setCity] = useState<string>(() => (profile as any)?.city || '')
   const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)))
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
-  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_frame') : (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId || null))
+  const [equippedFrame, setEquippedFrame] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('user_equipped_frame')
+      if (stored && !getFrameById(stored)) {
+        localStorage.removeItem('user_equipped_frame')
+        return null
+      }
+      return stored
+    }
+    const profileFrame = (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId
+    return profileFrame && getFrameById(profileFrame) ? profileFrame : null
+  })
   const [arena, setArena] = useState<string>(() => (profile as any)?.equippedArena || (profile as any)?.equipped?.arena || 'arena_1')
   const [equippedTitleId, setEquippedTitleId] = useState<string>(() => (profile as any)?.equippedTitleId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID : DEFAULT_STARTER_TITLE_ID))
   const [title, setTitle] = useState<string>(() => (profile as any)?.equippedTitle || (profile as any)?.title || (typeof window !== 'undefined' ? localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME : DEFAULT_STARTER_TITLE_NAME))
@@ -665,8 +676,13 @@ function PerfilContent() {
                 localStorage.setItem('equipped_avatar_id', equippedData.avatarId)
               }
               if (equippedData.frameId) {
-                setEquippedFrame(equippedData.frameId)
-                localStorage.setItem('user_equipped_frame', equippedData.frameId)
+                if (getFrameById(equippedData.frameId)) {
+                  setEquippedFrame(equippedData.frameId)
+                  localStorage.setItem('user_equipped_frame', equippedData.frameId)
+                } else {
+                  setEquippedFrame(null)
+                  localStorage.removeItem('user_equipped_frame')
+                }
               }
               if (equippedData.arenaId) {
                 setArena(equippedData.arenaId)
@@ -1957,7 +1973,7 @@ function PerfilContent() {
                       : 'bg-slate-900/80 text-purple-300 hover:text-white border border-purple-500/30'
                   }`}
                 >
-                  Molduras Vivas ({unlockedCosmetics.filter((i) => i.category === 'molduras').length})
+                  Molduras Vivas {ANIMATED_FRAMES.length > 0 ? `(${unlockedCosmetics.filter((i) => i.category === 'molduras').length})` : '(Em breve)'}
                 </button>
                 <button
                   onClick={() => setInventoryFilter('arenas')}
@@ -2097,7 +2113,22 @@ function PerfilContent() {
             )}
 
             {/* SEÇÃO: COSMÉTICOS (AVATARES, MOLDURAS, ARENAS, TÍTULOS) */}
-            {(inventoryFilter === 'todos' || inventoryFilter === 'avatars' || inventoryFilter === 'molduras' || inventoryFilter === 'arenas' || inventoryFilter === 'titulos') && (
+            {inventoryFilter === 'molduras' && ANIMATED_FRAMES.length === 0 ? (
+              <div className="w-full max-w-2xl mx-auto my-8 p-8 sm:p-10 rounded-3xl bg-slate-900/80 border border-purple-500/30 backdrop-blur-md text-center shadow-[0_0_30px_rgba(168,85,247,0.15)] flex flex-col items-center justify-center animate-fade-in">
+                <div className="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center mb-5 text-3xl shadow-[0_0_20px_rgba(168,85,247,0.25)]">
+                  ✨
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-wide uppercase mb-2">
+                  MOLDURAS VIVAS
+                </h3>
+                <span className="inline-block px-3.5 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs font-black uppercase tracking-widest mb-4 shadow-sm">
+                  Em breve
+                </span>
+                <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto leading-relaxed italic">
+                  As novas molduras vivas do Acorda Portugal estão a ser preparadas e estarão disponíveis brevemente.
+                </p>
+              </div>
+            ) : (inventoryFilter === 'todos' || inventoryFilter === 'avatars' || inventoryFilter === 'molduras' || inventoryFilter === 'arenas' || inventoryFilter === 'titulos') && (
               <div>
                 <h2 className="text-lg font-black text-white flex items-center gap-2 mb-4">
                   <Star className="w-5 h-5 text-purple-400" /> Coleção de Cosméticos Ativos
@@ -2900,13 +2931,9 @@ function PerfilContent() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                isVideoEnabled
-                  ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300'
-                  : 'bg-slate-800 border border-slate-700 text-slate-400'
-              }`}>
-                {isVideoEnabled ? <Video className="w-3.5 h-3.5 text-emerald-400" /> : <VideoOff className="w-3.5 h-3.5 text-slate-400" />}
-                <span>{isVideoEnabled ? 'Vídeo Ativo' : 'Fallback Estático'}</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Imagem Oficial Ativa</span>
               </span>
             </div>
           </div>
@@ -2914,13 +2941,13 @@ function PerfilContent() {
           <div className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-white">Vídeo de Fundo Global</span>
+                <span className="text-sm font-bold text-white">Fundo Global Oficial</span>
                 <span className="text-[10px] font-mono font-black uppercase tracking-wider text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded-md">
-                  global-background.mp4
+                  desafio-nacional-background.jpg
                 </span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed max-w-xl">
-                Apresenta o vídeo cinematográfico em alta definição como fundo global da aplicação. Durante partidas ativas nas arenas, o vídeo desliga-se automaticamente para poupar bateria e garantir máxima fluidez.
+                Apresenta a imagem oficial do estúdio em alta definição como fundo global da aplicação. Durante partidas ativas nas arenas, o fundo adapta-se automaticamente ao cenário específico da arena.
               </p>
             </div>
 

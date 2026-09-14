@@ -4,9 +4,9 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 
 /**
- * Constante legada mantida sem fallback de imagem estática.
+ * Constante oficial da imagem de fundo global do Desafio Nacional.
  */
-export const GLOBAL_OFFICIAL_BACKGROUND = ''
+export const GLOBAL_OFFICIAL_BACKGROUND = '/images/desafio-nacional-background.jpg'
 
 export interface GlobalAppBackgroundProps {
   /** Permite sobrepor uma imagem de arena quando o jogador está em partida ativa (gameplay) */
@@ -20,7 +20,7 @@ export interface GlobalAppBackgroundProps {
 
 /**
  * Componente Global Oficial de Fundo do Acorda Portugal.
- * Todas as páginas da aplicação usam o GlobalBackgroundVideo (vídeo contínuo no layout).
+ * Todas as páginas da aplicação usam o GlobalBackgroundImage (imagem contínua no layout).
  * Partidas ativas de jogo com arena específica sobrepõem o cenário através de customImage.
  */
 export function GlobalAppBackground({
