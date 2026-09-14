@@ -123,6 +123,62 @@ function runPresenceTests() {
   const nullName = sanitizePublicDisplayName(null, '')
   assert(nullName === 'Jogador Nacional', 'Nome nulo recebe fallback nacional')
 
+  // TESTE 7: Tolerância a Desfasamento de Relógio (Clock Skew / Fuso Horário)
+  console.log('\n--- TESTE 7: TOLERÂNCIA A DESFASAMENTO DE RELÓGIO (CLOCK SKEW) ---')
+  const serverNow = now
+  const clockSkewDocs = [
+    {
+      userId: 'user_local',
+      displayName: 'Jogador Local (Fuso UTC+0)',
+      district: 'Lisboa',
+      activity: 'browsing',
+      lastSeen: serverNow - 5_000,
+      updatedAt: { toMillis: () => serverNow - 5_000 },
+      online: true,
+    },
+    {
+      userId: 'user_skewed',
+      displayName: 'Jogador com Relógio Desfasado (3 horas à frente)',
+      district: 'Porto',
+      activity: 'playing',
+      lastSeen: serverNow + 10_800_000, // 3h no futuro pelo relógio local
+      updatedAt: { toMillis: () => serverNow - 10_000 }, // Mas servidor gravou há 10s
+      online: true,
+    },
+  ]
+  const skewState = filterActiveRealPlayers(clockSkewDocs, 'user_local', serverNow)
+  assert(skewState.humanOnline === 2, 'Dois jogadores com relógios desfasados contados como 2 online através do servidor')
+  assert(skewState.players.some((p) => p.userId === 'user_skewed'), 'Jogador com relógio desfasado incluído na lista')
+
+  // TESTE 8: Exatamente 1 Jogador Real -> 1 Online (Sem Math.max artificial)
+  console.log('\n--- TESTE 8: CONTAGEM EXATA 1 E 2 JOGADORES REAIS ---')
+  const singlePlayerDocs = [
+    {
+      userId: 'player_solo',
+      displayName: 'Solo Player',
+      district: 'Faro',
+      activity: 'playing',
+      lastSeen: now - 5_000,
+      online: true,
+    },
+  ]
+  const stateOne = filterActiveRealPlayers(singlePlayerDocs, undefined, now)
+  assert(stateOne.humanOnline === 1, 'Exatamente 1 jogador online quando apenas 1 está ativo')
+
+  const twoPlayersDocs = [
+    ...singlePlayerDocs,
+    {
+      userId: 'player_two',
+      displayName: 'Segundo Jogador',
+      district: 'Braga',
+      activity: 'duel',
+      lastSeen: now - 10_000,
+      online: true,
+    },
+  ]
+  const stateTwo = filterActiveRealPlayers(twoPlayersDocs, undefined, now)
+  assert(stateTwo.humanOnline === 2, 'Exatamente 2 jogadores online quando 2 estão ativos')
+
   console.log('\n================================================================================')
   console.log('🌟 TODOS OS TESTES DO SISTEMA DE PRESENÇA REAL PASSARAM COM 100% DE SUCESSO!')
   console.log('================================================================================')

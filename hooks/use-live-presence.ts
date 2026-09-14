@@ -1,68 +1,25 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
-import { collection, query, where, onSnapshot, limit } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/components/auth-provider'
 import {
   type RealCommunityState,
-  filterActiveRealPlayers,
+  presenceManager,
 } from '@/lib/real-presence'
 
-export function useLivePresence() {
+export function useLivePresence(): RealCommunityState {
   const { user } = useAuth()
-  const [rawDocs, setRawDocs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [now, setNow] = useState(() => Date.now())
+  const [state, setState] = useState<RealCommunityState>(() => presenceManager.getState())
 
   useEffect(() => {
-    let unsubscribe: (() => void) | undefined
+    presenceManager.updateCurrentUid(user?.uid)
+    const unsubscribe = presenceManager.subscribe((newState) => {
+      setState(newState)
+    }, user?.uid)
 
-    try {
-      const presenceCol = collection(db, 'publicPresence')
-      const q = query(presenceCol, where('online', '==', true), limit(250))
+    return unsubscribe
+  }, [user?.uid])
 
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const docs: any[] = []
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data()
-            if (data && data.userId) {
-              docs.push(data)
-            }
-          })
-          setRawDocs(docs)
-          setLoading(false)
-        },
-        (error) => {
-          console.debug('[PRESENCE_HOOK] Erro:', error)
-          setLoading(false)
-        }
-      )
-    } catch (err) {
-      console.debug('[PRESENCE_HOOK] Falha na subscrição:', err)
-      setLoading(false)
-    }
-
-    return () => {
-      if (unsubscribe) unsubscribe()
-    }
-  }, [])
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setNow(Date.now())
-    }, 15_000)
-    return () => clearInterval(timer)
-  }, [])
-
-  const community: RealCommunityState = useMemo(() => {
-    return filterActiveRealPlayers(rawDocs, user?.uid, now)
-  }, [rawDocs, user?.uid, now])
-
-  return {
-    ...community,
-    loading,
-  }
+  return state
 }
+

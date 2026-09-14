@@ -1,14 +1,8 @@
 'use client'
 
-import React, { useEffect, useState, useMemo } from 'react'
-import { collection, query, where, onSnapshot, limit } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import React, { useState } from 'react'
 import { useAuth } from '@/components/auth-provider'
-import {
-  type RealPlayerPresence,
-  type RealCommunityState,
-  filterActiveRealPlayers,
-} from '@/lib/real-presence'
+import { useLivePresence } from '@/hooks/use-live-presence'
 import { LivePlayersModal } from '@/components/live-players-modal'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import { ArrowRight, Flame, Swords, Users } from 'lucide-react'
@@ -16,61 +10,9 @@ import { cn } from '@/lib/utils'
 
 export function LiveOnlineCard() {
   const { user } = useAuth()
-  const [rawDocs, setRawDocs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [now, setNow] = useState(() => Date.now())
+  const { humanOnline, playingCount, duelCount, players, loading } = useLivePresence()
 
-  // Subscrição única ao Firestore para a coleção de presença pública
-  useEffect(() => {
-    let unsubscribe: (() => void) | undefined
-
-    try {
-      const presenceCol = collection(db, 'publicPresence')
-      const q = query(presenceCol, where('online', '==', true), limit(250))
-
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const docs: any[] = []
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data()
-            if (data && data.userId) {
-              docs.push(data)
-            }
-          })
-          setRawDocs(docs)
-          setLoading(false)
-        },
-        (error) => {
-          console.debug('[PRESENCE] Erro na subscrição:', error)
-          setLoading(false)
-        }
-      )
-    } catch (err) {
-      console.debug('[PRESENCE] Falha ao configurar listener:', err)
-      setLoading(false)
-    }
-
-    return () => {
-      if (unsubscribe) unsubscribe()
-    }
-  }, [])
-
-  // Atualização periódica a cada 15s para expirar jogadores inativos (TTL) sem nova query ao Firestore
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setNow(Date.now())
-    }, 15_000)
-    return () => clearInterval(timer)
-  }, [])
-
-  // Derivação pura do estado comunitário (100% Humano e Real)
-  const community: RealCommunityState = useMemo(() => {
-    return filterActiveRealPlayers(rawDocs, user?.uid, now)
-  }, [rawDocs, user?.uid, now])
-
-  const { humanOnline, playingCount, duelCount, players } = community
 
   // Primeiros 5 avatares visíveis
   const displayedPlayers = players.slice(0, 5)

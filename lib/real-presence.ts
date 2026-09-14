@@ -1,10 +1,11 @@
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, serverTimestamp, collection, query, where, onSnapshot, limit } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 
 export type RealUserActivity = 'playing' | 'duel' | 'browsing'
 
 export interface RealPlayerPresence {
   userId: string
+  sessionId?: string
   displayName: string
   photoURL?: string | null
   avatar?: string | null
@@ -26,10 +27,20 @@ export interface RealCommunityState {
   playingCount: number
   duelCount: number
   players: RealPlayerPresence[]
+  loading?: boolean
 }
 
-export const HEARTBEAT_INTERVAL_MS = 35_000 // 35 segundos
+export const HEARTBEAT_INTERVAL_MS = 25_000 // 25 segundos (mais frequente e seguro para o TTL de 90s)
 export const OFFLINE_TTL_MS = 90_000 // 90 segundos de tolerância para desconexões e throttling em background
+
+/**
+ * Anonimiza o identificador de utilizador para logs seguros de desenvolvimento
+ */
+export function anonymizeUserId(userId?: string | null): string {
+  if (!userId) return 'anon'
+  if (userId.length <= 8) return userId
+  return `${userId.slice(0, 4)}...${userId.slice(-4)}`
+}
 
 /**
  * Sanitiza o nome público de exibição (nunca expõe emails ou dados sensíveis)
@@ -47,6 +58,73 @@ export function sanitizePublicDisplayName(name?: string | null, district?: strin
 }
 
 /**
+ * Obtém ou cria um ID exclusivo para a aba / sessão de browser atual
+ */
+export function getPresenceTabId(): string {
+  if (typeof window === 'undefined') return 'server'
+  try {
+    let tabId = sessionStorage.getItem('ap_presence_tab_id')
+    if (!tabId) {
+      tabId = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `tab_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`
+      sessionStorage.setItem('ap_presence_tab_id', tabId)
+    }
+    return tabId
+  } catch {
+    return 'fallback_tab'
+  }
+}
+
+/**
+ * Regista esta aba no armazenamento partilhado do browser para a conta do utilizador
+ */
+export function registerActiveTab(userId: string): void {
+  if (typeof window === 'undefined' || !userId) return
+  try {
+    const tabId = getPresenceTabId()
+    const storageKey = `ap_active_tabs_${userId}`
+    const raw = localStorage.getItem(storageKey)
+    const tabs: Record<string, number> = raw ? JSON.parse(raw) : {}
+    tabs[tabId] = Date.now()
+    localStorage.setItem(storageKey, JSON.stringify(tabs))
+  } catch (e) {
+    console.debug('[PRESENCE] Aviso ao registar aba:', e)
+  }
+}
+
+/**
+ * Remove esta aba e verifica se ainda existem outras abas ativas do mesmo utilizador
+ */
+export function unregisterActiveTab(userId: string): { hasRemainingTabs: boolean } {
+  if (typeof window === 'undefined' || !userId) return { hasRemainingTabs: false }
+  try {
+    const tabId = getPresenceTabId()
+    const storageKey = `ap_active_tabs_${userId}`
+    const raw = localStorage.getItem(storageKey)
+    if (!raw) return { hasRemainingTabs: false }
+
+    const tabs: Record<string, number> = JSON.parse(raw)
+    delete tabs[tabId]
+
+    const now = Date.now()
+    // Limpar abas mortas há mais de 45 segundos
+    const aliveTabs = Object.entries(tabs).filter(([_, lastPing]) => now - lastPing < 45_000)
+
+    if (aliveTabs.length > 0) {
+      const remaining: Record<string, number> = Object.fromEntries(aliveTabs)
+      localStorage.setItem(storageKey, JSON.stringify(remaining))
+      return { hasRemainingTabs: true }
+    } else {
+      localStorage.removeItem(storageKey)
+      return { hasRemainingTabs: false }
+    }
+  } catch {
+    return { hasRemainingTabs: false }
+  }
+}
+
+/**
  * Envia um heartbeat de presença para um utilizador autenticado real.
  * NUNCA é acionado para bots, NPCs ou visitantes anónimos.
  */
@@ -61,6 +139,7 @@ export async function sendRealHeartbeat(
   if (!user?.uid) return // Apenas humanos autenticados reais
 
   try {
+    registerActiveTab(user.uid)
     const presenceRef = doc(db, 'publicPresence', user.uid)
     const displayName = sanitizePublicDisplayName(profile?.displayName || user.displayName, profile?.district)
     const district = (profile?.district || '').trim() || 'Portugal'
@@ -77,9 +156,11 @@ export async function sendRealHeartbeat(
 
     const now = Date.now()
     const expiresAt = now + OFFLINE_TTL_MS
+    const tabId = getPresenceTabId()
 
     const payload = {
       userId: user.uid,
+      sessionId: tabId,
       displayName,
       photoURL,
       avatar: photoURL,
@@ -98,36 +179,71 @@ export async function sendRealHeartbeat(
     }
 
     await setDoc(presenceRef, payload, { merge: true })
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[PRESENCE] heartbeat: user=${anonymizeUserId(user.uid)} tab=${tabId} activity=${activity} district=${district}`)
+    }
   } catch (err) {
-    // Falha silenciosa de rede para não interromper a experiência do utilizador
     console.debug('[PRESENCE] Erro no envio de heartbeat:', err)
   }
 }
 
 /**
- * Marca o utilizador explicitamente como offline no Firestore
+ * Marca o utilizador como offline no Firestore apenas se não existirem outras abas ativas
  */
-export async function markRealOffline(userId: string | null | undefined): Promise<void> {
+export async function markRealOffline(userId: string | null | undefined, force: boolean = false): Promise<void> {
   if (!userId) return
 
   try {
+    if (!force) {
+      const { hasRemainingTabs } = unregisterActiveTab(userId)
+      if (hasRemainingTabs) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`[PRESENCE] Aba fechada mas utilizador ${anonymizeUserId(userId)} continua ativo noutra aba. Offline cancelado.`)
+        }
+        return
+      }
+    }
+
     const presenceRef = doc(db, 'publicPresence', userId)
     await setDoc(
       presenceRef,
       {
         online: false,
+        isOnline: false,
         lastSeen: Date.now(),
         updatedAt: serverTimestamp(),
       },
       { merge: true }
     )
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[PRESENCE] session removed: user=${anonymizeUserId(userId)} marcado offline`)
+    }
   } catch (err) {
     console.debug('[PRESENCE] Erro ao marcar offline:', err)
   }
 }
 
 /**
- * Filtra e consolida estritamente utilizadores humanos reais ativos dentro do TTL
+ * Extrai o timestamp numérico canónico de um documento (priorizando o serverTimestamp de updatedAt)
+ */
+export function extractDocTimestamp(d: any): number {
+  if (!d) return 0
+  if (d.updatedAt) {
+    if (typeof d.updatedAt.toMillis === 'function') {
+      return d.updatedAt.toMillis()
+    }
+    if (typeof d.updatedAt.seconds === 'number') {
+      return d.updatedAt.seconds * 1000 + (d.updatedAt.nanoseconds ? Math.floor(d.updatedAt.nanoseconds / 1e6) : 0)
+    }
+  }
+  return typeof d.lastSeen === 'number' ? d.lastSeen : 0
+}
+
+/**
+ * Filtra e consolida estritamente utilizadores humanos reais ativos dentro do TTL,
+ * com tolerância robusta a desfasamentos de relógio (clock skew) entre clientes.
  */
 export function filterActiveRealPlayers(
   rawDocs: any[],
@@ -138,28 +254,65 @@ export function filterActiveRealPlayers(
   let playingCount = 0
   let duelCount = 0
 
+  if (!rawDocs || rawDocs.length === 0) {
+    return {
+      humanOnline: 0,
+      playingCount: 0,
+      duelCount: 0,
+      players: [],
+      loading: false,
+    }
+  }
+
+  // 1. Encontrar o timestamp de servidor mais recente entre todos os documentos
+  let latestServerTimestamp = 0
+  rawDocs.forEach((d) => {
+    if (!d) return
+    const ts = extractDocTimestamp(d)
+    if (ts > latestServerTimestamp) {
+      latestServerTimestamp = ts
+    }
+  })
+
+  // 2. Determinar o tempo de referência de forma imune a desfasamentos de relógio
+  // Se o relógio do cliente estiver desfasado (>45s) do servidor, ancorar no último timestamp do servidor
+  let referenceTime = now
+  if (latestServerTimestamp > 0) {
+    const skew = Math.abs(now - latestServerTimestamp)
+    if (skew > 45_000) {
+      referenceTime = latestServerTimestamp
+    } else {
+      referenceTime = Math.max(now, latestServerTimestamp)
+    }
+  }
+
   rawDocs.forEach((d) => {
     if (!d || !d.userId) return
-    const isOnline = d.online !== false && d.isOnline !== false
-    const lastSeen = typeof d.lastSeen === 'number' ? d.lastSeen : 0
-    const expiresAt = typeof d.expiresAt === 'number' ? d.expiresAt : (lastSeen + OFFLINE_TTL_MS)
-    const isWithinTTL = expiresAt > now && (now - lastSeen <= OFFLINE_TTL_MS * 1.5)
 
-    if (isOnline && isWithinTTL) {
+    const isOnlineFlag = d.online !== false && d.isOnline !== false
+    const docTime = extractDocTimestamp(d)
+    const age = referenceTime - docTime
+
+    // Válido se online for true e o heartbeat tiver ocorrido nos últimos 90 segundos
+    // (com margem de 30s para relógios ligeiramente futuros)
+    const isWithinTTL = age >= -30_000 && age <= OFFLINE_TTL_MS
+
+    if (isOnlineFlag && isWithinTTL) {
       const act: RealUserActivity = d.activity === 'playing' || d.activity === 'duel' ? d.activity : 'browsing'
       const avatar = d.avatar || d.photoURL || null
       const resolvedConcelho = d.city || d.concelho ? String(d.city || d.concelho).trim() : undefined
 
       const player: RealPlayerPresence = {
         userId: String(d.userId),
+        sessionId: d.sessionId,
         displayName: sanitizePublicDisplayName(d.displayName, d.district),
         photoURL: avatar,
         avatar,
         district: (d.district || '').trim() || 'Portugal',
         ...(resolvedConcelho ? { city: resolvedConcelho } : {}),
         activity: act,
-        lastSeen,
-        expiresAt,
+        lastSeen: docTime,
+        expiresAt: docTime + OFFLINE_TTL_MS,
         online: true,
         isOnline: true,
         level: typeof d.level === 'number' ? d.level : 1,
@@ -168,13 +321,23 @@ export function filterActiveRealPlayers(
         equippedFrame: d.equippedFrame || undefined,
       }
 
-      activeMap.set(player.userId, player)
+      // Deduplicação: se o utilizador já existir (ex.: múltiplas abas), manter o com atividade mais recente
+      const existing = activeMap.get(player.userId)
+      if (!existing || player.lastSeen > existing.lastSeen) {
+        activeMap.set(player.userId, player)
+      }
+    } else if (process.env.NODE_ENV === 'development') {
+      if (!isOnlineFlag) {
+        console.debug(`[PRESENCE] Descartado offline: user=${anonymizeUserId(d.userId)} (online=false)`)
+      } else if (!isWithinTTL) {
+        console.debug(`[PRESENCE] Descartado por TTL: user=${anonymizeUserId(d.userId)} (age=${Math.round(age / 1000)}s > ${OFFLINE_TTL_MS / 1000}s)`)
+      }
     }
   })
 
   const players = Array.from(activeMap.values())
 
-  // Ordenar: primeiro utilizador atual, depois os com atividade mais recente
+  // Ordenar: primeiro o utilizador atual, depois os com atividade mais recente
   players.sort((a, b) => {
     if (currentUid && a.userId === currentUid) return -1
     if (currentUid && b.userId === currentUid) return 1
@@ -191,5 +354,136 @@ export function filterActiveRealPlayers(
     playingCount,
     duelCount,
     players,
+    loading: false,
   }
 }
+
+/**
+ * ============================================================================
+ * PRESENCE SUBSCRIPTION MANAGER (SINGLETON - SINGLE SOURCE OF TRUTH)
+ * ============================================================================
+ * Garante que existe exatamente UMA subscrição onSnapshot ao Firestore
+ * partilhada por todos os componentes da aplicação, eliminando duplicações,
+ * estados inconsistentes e consumos desnecessários de rede.
+ */
+class PresenceSubscriptionManager {
+  private subscribers = new Set<(state: RealCommunityState) => void>()
+  private rawDocs: any[] = []
+  private unsubscribeFirestore: (() => void) | null = null
+  private refreshTimer: NodeJS.Timeout | null = null
+  private currentUid: string | undefined = undefined
+  private isInitialLoading = true
+
+  public subscribe(callback: (state: RealCommunityState) => void, uid?: string): () => void {
+    if (uid) this.currentUid = uid
+    this.subscribers.add(callback)
+
+    // Notificar imediatamente com o estado atual em cache
+    callback(this.getState())
+
+    // Se é o primeiro subscritor, iniciar o listener Firestore
+    if (this.subscribers.size === 1) {
+      this.startListening()
+    }
+
+    return () => {
+      this.subscribers.delete(callback)
+      // Se não restam subscritores, limpar listener e temporizador após carência
+      if (this.subscribers.size === 0) {
+        this.stopListening()
+      }
+    }
+  }
+
+  public updateCurrentUid(uid?: string) {
+    if (this.currentUid !== uid) {
+      this.currentUid = uid
+      this.notifySubscribers()
+    }
+  }
+
+  public getState(): RealCommunityState {
+    const community = filterActiveRealPlayers(this.rawDocs, this.currentUid, Date.now())
+    return {
+      ...community,
+      loading: this.isInitialLoading,
+    }
+  }
+
+  private startListening() {
+    if (typeof window === 'undefined') return
+    if (this.unsubscribeFirestore) return
+
+    try {
+      const presenceCol = collection(db, 'publicPresence')
+      const q = query(presenceCol, where('online', '==', true), limit(250))
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[PRESENCE] A iniciar subscrição centralizada onSnapshot ao Firestore...')
+      }
+
+      this.unsubscribeFirestore = onSnapshot(
+        q,
+        (snapshot) => {
+          const docs: any[] = []
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data()
+            if (data && data.userId) {
+              docs.push(data)
+            }
+          })
+
+          this.rawDocs = docs
+          this.isInitialLoading = false
+
+          if (process.env.NODE_ENV === 'development') {
+            const state = filterActiveRealPlayers(docs, this.currentUid, Date.now())
+            console.log(`[PRESENCE] snapshot: recebidos ${docs.length} docs, ${state.humanOnline} jogadores online reais`)
+          }
+
+          this.notifySubscribers()
+        },
+        (error) => {
+          console.debug('[PRESENCE] Erro no listener central:', error)
+          this.isInitialLoading = false
+          this.notifySubscribers()
+        }
+      )
+
+      // Temporizador de 10s para re-avaliação pura de TTL (expirar desconexões sem queries ao Firestore)
+      this.refreshTimer = setInterval(() => {
+        this.notifySubscribers()
+      }, 10_000)
+    } catch (err) {
+      console.debug('[PRESENCE] Falha ao iniciar listener central:', err)
+      this.isInitialLoading = false
+    }
+  }
+
+  private stopListening() {
+    if (this.unsubscribeFirestore) {
+      this.unsubscribeFirestore()
+      this.unsubscribeFirestore = null
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[PRESENCE] Subscrição centralizada onSnapshot desativada (0 subscritores)')
+      }
+    }
+    if (this.refreshTimer) {
+      clearInterval(this.refreshTimer)
+      this.refreshTimer = null
+    }
+  }
+
+  private notifySubscribers() {
+    const state = this.getState()
+    this.subscribers.forEach((cb) => {
+      try {
+        cb(state)
+      } catch (e) {
+        console.error('[PRESENCE] Erro ao notificar subscritor:', e)
+      }
+    })
+  }
+}
+
+export const presenceManager = new PresenceSubscriptionManager()

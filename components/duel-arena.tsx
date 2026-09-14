@@ -758,7 +758,7 @@ export function DuelArena({
     const url = `${window.location.origin}/jogar/duelo?id=${duel.id}`
     if (navigator.share) {
       navigator.share({
-        title: 'Duelo 1v1 no Acorda Portugal',
+        title: 'Partida Multiplayer no Acorda Portugal',
         text: `Desafio-te para um duelo de conhecimento sobre Portugal! Código: ${duel.code}`,
         url,
       }).catch(() => {})
@@ -826,7 +826,7 @@ export function DuelArena({
 
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-gold">
             <Swords className="h-4 w-4" />
-            Sala de Duelo 1v1
+            Sala Multiplayer
           </div>
 
           <h2 className="mt-4 font-display text-3xl sm:text-4xl font-black uppercase text-foreground">
@@ -1424,15 +1424,15 @@ export function DuelArena({
         <div className="badge-hud mb-3 border-white/20 bg-white/5 shadow-md">
           {isWinner ? (
             <span className="text-gold flex items-center gap-1.5 font-black">
-              <Crown className="h-4 w-4 fill-current animate-pulse" /> Duelo 1v1 Concluído
+              <Crown className="h-4 w-4 fill-current animate-pulse" /> Partida Multiplayer Concluída
             </span>
           ) : isDraw ? (
             <span className="text-primary flex items-center gap-1.5 font-black">
-              <Shield className="h-4 w-4" /> Duelo 1v1 Concluído
+              <Shield className="h-4 w-4" /> Partida Multiplayer Concluída
             </span>
           ) : (
             <span className="text-muted-foreground flex items-center gap-1.5 font-black">
-              <Swords className="h-4 w-4" /> Duelo 1v1 Concluído
+              <Swords className="h-4 w-4" /> Partida Multiplayer Concluída
             </span>
           )}
         </div>

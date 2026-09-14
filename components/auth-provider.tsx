@@ -8,7 +8,7 @@ import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
-import { sendRealHeartbeat, markRealOffline, HEARTBEAT_INTERVAL_MS } from '@/lib/real-presence'
+import { sendRealHeartbeat, markRealOffline, HEARTBEAT_INTERVAL_MS, type RealUserActivity } from '@/lib/real-presence'
 import {
   getAvatarById,
   DEFAULT_AVATAR,
@@ -783,34 +783,81 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     pathname?.startsWith('/perfil') ||
     pathname?.startsWith('/jogo')
   )
-  // 4. Heartbeat de Presença Real (100% Utilizadores Autenticados Reais)
+  // 4. Heartbeat de Presença Real Robusto e Resiliente (100% Utilizadores Autenticados Reais)
+  const lastHeartbeatTimeRef = useRef(0)
+  const userRef = useRef(user)
+  const profileRef = useRef(profile)
+  userRef.current = user
+  profileRef.current = profile
+
+  const getPathActivity = useCallback((): RealUserActivity => {
+    if (pathname?.startsWith('/jogar/duelo')) return 'duel'
+    if (pathname?.startsWith('/jogar') || pathname?.startsWith('/jogo')) return 'playing'
+    return 'browsing'
+  }, [pathname])
+
+  const triggerHeartbeat = useCallback((force = false) => {
+    const currentUser = userRef.current
+    if (!currentUser?.uid) return
+
+    const now = Date.now()
+    if (!force && now - lastHeartbeatTimeRef.current < 10_000) {
+      return // Evitar heartbeats frequentes com menos de 10s de intervalo
+    }
+
+    lastHeartbeatTimeRef.current = now
+    sendRealHeartbeat(currentUser, profileRef.current, getPathActivity())
+  }, [getPathActivity])
+
+  // Heartbeat imediato quando a rota ou perfil mudam
+  useEffect(() => {
+    if (user?.uid) {
+      triggerHeartbeat(true)
+    }
+  }, [user?.uid, profile?.displayName, profile?.district, profile?.city, profile?.photoURL, pathname, triggerHeartbeat])
+
+  // Gestor de ciclo de vida, temporizador periódico e eventos de foco / visibilidade
   useEffect(() => {
     if (!user?.uid) return
 
-    const getPathActivity = () => {
-      if (pathname?.startsWith('/jogar/duelo')) return 'duel'
-      if (pathname?.startsWith('/jogar') || pathname?.startsWith('/jogo')) return 'playing'
-      return 'browsing'
-    }
+    const currentUid = user.uid
 
     // Heartbeat inicial
-    sendRealHeartbeat(user, profile, getPathActivity())
+    triggerHeartbeat(true)
 
-    // Heartbeat periódico (35s)
+    // Heartbeat periódico (25s)
     const interval = setInterval(() => {
-      sendRealHeartbeat(user, profile, getPathActivity())
+      triggerHeartbeat(false)
     }, HEARTBEAT_INTERVAL_MS)
 
-    const handleUnload = () => {
-      markRealOffline(user.uid)
+    // Reatividade imediata ao reativar a aba (elimina o congelamento por throttling do browser)
+    const handleVisibilityOrFocus = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        triggerHeartbeat(false)
+      }
     }
+
+    const handleNetworkOnline = () => {
+      triggerHeartbeat(true)
+    }
+
+    const handleUnload = () => {
+      markRealOffline(currentUid, false)
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityOrFocus)
+    window.addEventListener('focus', handleVisibilityOrFocus)
+    window.addEventListener('online', handleNetworkOnline)
     window.addEventListener('beforeunload', handleUnload)
 
     return () => {
       clearInterval(interval)
+      document.removeEventListener('visibilitychange', handleVisibilityOrFocus)
+      window.removeEventListener('focus', handleVisibilityOrFocus)
+      window.removeEventListener('online', handleNetworkOnline)
       window.removeEventListener('beforeunload', handleUnload)
     }
-  }, [user?.uid, profile?.displayName, profile?.district, profile?.city, profile?.photoURL, profile?.level, pathname])
+  }, [user?.uid, triggerHeartbeat])
 
   const authResolved = authStatus !== 'AUTH_INITIALIZING'
 

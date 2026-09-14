@@ -110,7 +110,7 @@ function DuelPageContent() {
 
               <span className="badge-hud mt-6 text-purple-300 border-purple-500/40 bg-purple-500/20 shadow-sm shadow-purple-500/20">
                 <Sparkles className="h-3.5 w-3.5 text-purple-400" />
-                Modo Multiplayer 1v1
+                Modo Multiplayer
               </span>
 
               <h1 className="mt-4 font-display text-4xl sm:text-6xl font-black uppercase tracking-tight text-foreground text-glow-purple">

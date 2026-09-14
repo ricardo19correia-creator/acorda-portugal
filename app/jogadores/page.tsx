@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Users, Flame, Swords, Shield } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, onSnapshot, limit } from 'firebase/firestore'
+import { ArrowLeft, Users, Flame, Swords } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
-import { filterActiveRealPlayers } from '@/lib/real-presence'
+import { useLivePresence } from '@/hooks/use-live-presence'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -15,47 +13,8 @@ import { SiteFooter } from '@/components/site-footer'
 export default function JogadoresPage() {
   const router = useRouter()
   const { user } = useAuth()
-  const [rawDocs, setRawDocs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [now, setNow] = useState(() => Date.now())
+  const { players, humanOnline, loading } = useLivePresence()
 
-  useEffect(() => {
-    let unsubscribe: (() => void) | undefined
-    try {
-      const presenceCol = collection(db, 'publicPresence')
-      const q = query(presenceCol, where('online', '==', true), limit(250))
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const docs: any[] = []
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data()
-            if (data && data.userId) docs.push(data)
-          })
-          setRawDocs(docs)
-          setLoading(false)
-        },
-        () => setLoading(false)
-      )
-    } catch {
-      setLoading(false)
-    }
-
-    return () => {
-      if (unsubscribe) unsubscribe()
-    }
-  }, [])
-
-  useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), 15_000)
-    return () => clearInterval(timer)
-  }, [])
-
-  const community = useMemo(() => {
-    return filterActiveRealPlayers(rawDocs, user?.uid, now)
-  }, [rawDocs, user?.uid, now])
-
-  const { players, humanOnline } = community
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between bg-transparent text-foreground">

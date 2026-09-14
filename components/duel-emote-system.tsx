@@ -248,7 +248,7 @@ export function DuelEmotePicker({
               <MessageSquare className="h-4 w-4" />
             </span>
             <h3 className="font-display text-sm font-black uppercase tracking-wider text-white">
-              Reações Rápidas 1v1
+              Reações Rápidas
             </h3>
           </div>
           <button

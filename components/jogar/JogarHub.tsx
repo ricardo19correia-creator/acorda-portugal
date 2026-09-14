@@ -231,7 +231,7 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
           <span className="text-xs font-mono text-slate-400">Arenas Oficiais</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {/* Card 1: 🎯 CLÁSSICO */}
           <div
             role="button"
@@ -262,37 +262,7 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
             </div>
           </div>
 
-          {/* Card 2: ⚔️ 1V1 */}
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={() => handleAction('/jogar/duelo')}
-            onKeyDown={(e) => e.key === 'Enter' && handleAction('/jogar/duelo')}
-            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/30 bg-slate-900/70 hover:bg-slate-900/90 hover:border-purple-400/60 p-4 sm:p-5 backdrop-blur-xl shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
-          >
-            <div className="space-y-2.5">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                  Tempo Real
-                </span>
-                <span className="text-xl">⚔️</span>
-              </div>
-              <h3 className="font-display font-black text-lg sm:text-xl uppercase text-white group-hover:text-purple-300 transition-colors">
-                1V1
-              </h3>
-              <p className="text-xs text-slate-300 font-medium leading-relaxed">
-                Desafia outro jogador num duelo direto. Mesmas perguntas, ranking Elo.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-bold text-purple-300">
-              <span className="font-mono text-[11px] text-slate-400">Liga Elo</span>
-              <span className="inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                Duelo →
-              </span>
-            </div>
-          </div>
-
-          {/* Card 3: 🏆 MULTIPLAYER */}
+          {/* Card 2: 🏆 MULTIPLAYER */}
           <div
             role="button"
             tabIndex={0}
