@@ -8,7 +8,7 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import Link from 'next/link'
-import { ArrowLeft, Swords, Sparkles, Lock } from 'lucide-react'
+import { Swords, Sparkles, Lock } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { auth } from '@/lib/firebase'
 import { AuthWallView } from '@/components/auth-wall-modal'
@@ -94,14 +94,6 @@ function DuelPageContent() {
           <SiteHeader />
 
           <main className="flex-1 mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-            <Link
-              href="/jogar"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Voltar à Central de Jogo
-            </Link>
-
             <div className="card-game-purple mt-6 overflow-hidden rounded-4xl p-8 sm:p-12 text-center shadow-2xl backdrop-blur-xl border border-white/20">
               <div className="mx-auto grid h-20 w-20 place-items-center rounded-3xl border border-purple-500/50 bg-purple-500/20 text-purple-400 shadow-xl shadow-purple-500/30 animate-pulse">
                 <Swords className="h-10 w-10" />

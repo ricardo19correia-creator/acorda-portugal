@@ -6,7 +6,7 @@ import { Categories } from '@/components/categories'
 import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Play, LayoutGrid, Sparkles } from 'lucide-react'
+import { Play, LayoutGrid, Sparkles } from 'lucide-react'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
@@ -40,14 +40,7 @@ export default function CategoriasPage() {
           <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
               <div>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Voltar ao Início
-                </Link>
-                <div className="mt-3 flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <span className="badge-hud text-primary border-primary/40 bg-primary/15 shadow-md shadow-primary/20 flex items-center gap-1.5">
                     <LayoutGrid className="h-3.5 w-3.5" />
                     18 Temas de Conteúdo

@@ -28,6 +28,7 @@ import {
   type ArenaCategoryType,
 } from '@/src/data/arenaCatalog'
 import { AppBackground } from '@/components/AppBackground'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallModal } from '@/components/auth-wall-modal'
 import { cn } from '@/lib/utils'
@@ -135,13 +136,7 @@ export default function ArenasPage() {
       <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="p-2 -ml-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition"
-              title="Voltar ao Início"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
+            <GlobalBackButton showAlways={true} fallbackUrl="/" variant="header" />
             <div className="flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 <Crown className="w-5 h-5" />

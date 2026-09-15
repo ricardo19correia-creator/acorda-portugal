@@ -19,6 +19,7 @@ import { TITLE_SHOP_CATALOG, type TitleItem, type TitleGroup, type TitleRarity, 
 import { shopArenas, ARENA_SHOP_CATALOG, ARENA_CATEGORIES_LIST, type ArenaItem, type ArenaRarity, type ArenaEffect, getArenaRarityBadge } from '@/data/shopArenas'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { TAUNT_PACKS } from '@/data/tauntPacks'
 import { OFFICIAL_EMOTES, DEFAULT_EQUIPPED_EMOTES, getEmoteRarityBadge } from '@/src/data/emotes'
 import { playEmoteSound } from '@/lib/sound-engine'
@@ -1326,12 +1327,7 @@ function LojaContent() {
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center">
         {/* Navigation & Feedback Toast */}
         <div className="w-full flex items-center justify-between mb-4">
-          <Link
-            href="/jogar"
-            className="inline-flex items-center gap-2 text-xs font-black tracking-wider uppercase text-slate-400 hover:text-white transition-colors bg-slate-900/80 px-3.5 py-2 rounded-xl border border-slate-800 backdrop-blur-sm"
-          >
-            <ArrowLeft className="w-4 h-4" /> Voltar ao Menu
-          </Link>
+          <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
 
           {feedbackMessage && (
             <div className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xl animate-fade-in ${

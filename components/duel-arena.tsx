@@ -1185,7 +1185,7 @@ export function DuelArena({
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-0.5 rounded-full bg-slate-950 border border-amber-400/70 shadow-[0_0_15px_rgba(245,158,11,0.35)] flex items-center gap-1.5 z-10">
                   <span className="text-[10px]">⚔️</span>
                   <span className="font-display text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
-                    DUELO 1V1 • RONDA {duelData?.currentRound ?? 1}
+                    DUELO 1V1 • RONDA {currentQIndex + 1}
                   </span>
                 </div>
 

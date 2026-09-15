@@ -29,6 +29,7 @@ import { ConfiguracaoView } from '@/components/admin/views/ConfiguracaoView'
 import { EmergenciaView } from '@/components/admin/views/EmergenciaView'
 
 import { ShieldAlert, Lock, ArrowLeft, RefreshCw } from 'lucide-react'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 
 export default function CentroDeControloPage() {
   const router = useRouter()
@@ -201,14 +202,12 @@ export default function CentroDeControloPage() {
               </>
             )}
 
-            <button
-              type="button"
-              onClick={() => router.push('/')}
-              className="flex items-center justify-center gap-2 py-3 rounded-2xl border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 font-bold text-xs transition-all cursor-pointer"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Voltar à Página Inicial</span>
-            </button>
+            <GlobalBackButton
+              showAlways={true}
+              fallbackUrl="/"
+              variant="standalone"
+              className="w-full py-3 justify-center"
+            />
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import DeepLinkHandler from '@/components/DeepLinkHandler'
 import { GlobalBackgroundImage } from '@/components/GlobalBackgroundImage'
 import { MobileBottomBar } from '@/components/navigation/MobileBottomBar'
 import { ArenaLayoutSync } from '@/components/navigation/ArenaLayoutSync'
+import { RouteTracker } from '@/components/navigation/RouteTracker'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -169,6 +170,7 @@ html.ap-arena-match #mobile-bottom-dock {
         <AuthProvider>
           <EconomyProvider>
             <DeepLinkHandler />
+            <RouteTracker />
             <ArenaLayoutSync />
             <GameThemeProvider>
               <AudioProvider>

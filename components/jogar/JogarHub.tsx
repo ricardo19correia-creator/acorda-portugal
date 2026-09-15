@@ -29,6 +29,7 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { MISSIONS } from '@/lib/game-data'
 import { UserAvatar } from '@/components/UserAvatar'
 import { AuthWallModal } from '@/components/auth-wall-modal'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { safeRandomUUID, cn } from '@/lib/utils'
 
 export interface JogarHubProps {
@@ -81,6 +82,11 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
 
   return (
     <div className="relative w-full max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 lg:pb-12 text-white select-none animate-fadeIn space-y-6 sm:space-y-8">
+      {/* Top Navigation */}
+      <div className="flex items-center justify-between">
+        <GlobalBackButton showAlways={true} fallbackUrl="/" />
+      </div>
+
       {/* ========================================================================= */}
       {/* 1. CABEÇALHO COMPACTO                                                     */}
       {/* ========================================================================= */}
@@ -175,29 +181,38 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
       </header>
 
       {/* ========================================================================= */}
-      {/* 2. HERO PRINCIPAL — JOGAR AGORA                                            */}
+      {/* 2. HERO PRINCIPAL — PALCO NACIONAL / JOGAR AGORA                         */}
       {/* ========================================================================= */}
       <section
         aria-label="Ação principal: Jogar Agora"
-        className="relative overflow-hidden rounded-3xl sm:rounded-4xl border-2 border-emerald-500/50 bg-gradient-to-br from-emerald-950/80 via-slate-900/90 to-slate-950 p-6 sm:p-10 backdrop-blur-2xl shadow-[0_0_40px_rgba(16,185,129,0.2)] hover:border-emerald-400/80 transition-all duration-300"
+        className="relative overflow-hidden rounded-3xl sm:rounded-4xl border-2 border-amber-400/50 bg-gradient-to-b from-slate-950/90 via-blue-950/80 to-slate-950/95 p-6 sm:p-10 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(245,158,11,0.2)] hover:border-amber-400/80 transition-all duration-300"
       >
-        {/* Glow de fundo */}
-        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-emerald-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-teal-500/15 blur-3xl" />
+        {/* Cantoneiras Heráldicas Douradas (Estilo Palco Game Show) */}
+        <span className="pointer-events-none absolute top-3.5 left-3.5 w-4 h-4 border-t-2 border-l-2 border-amber-400 rounded-tl-sm shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+        <span className="pointer-events-none absolute top-3.5 right-3.5 w-4 h-4 border-t-2 border-r-2 border-amber-400 rounded-tr-sm shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+        <span className="pointer-events-none absolute bottom-3.5 left-3.5 w-4 h-4 border-b-2 border-l-2 border-amber-400 rounded-bl-sm shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+        <span className="pointer-events-none absolute bottom-3.5 right-3.5 w-4 h-4 border-b-2 border-r-2 border-amber-400 rounded-br-sm shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+
+        {/* Glows volumétricos de holofotes de estúdio */}
+        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-amber-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>DESAFIO NACIONAL • 10 PERGUNTAS</span>
+          <div className="space-y-3 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest bg-gradient-to-r from-amber-500/20 via-cyan-500/10 to-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span>EM TRANSMISSÃO • DESAFIO NACIONAL</span>
             </div>
 
-            <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white drop-shadow-md">
-              JOGAR AGORA
+            <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+              ARENA NACIONAL
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed">
-              Entra em jogo e testa os teus conhecimentos sobre a história, geografia, cultura e património de Portugal.
+            <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed drop-shadow-sm">
+              Entra no grande palco televisivo e responde às 10 perguntas cronometradas. Mostra o teu conhecimento sobre a história, cultura e geografia de Portugal!
             </p>
           </div>
 
@@ -205,12 +220,12 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
             <button
               type="button"
               onClick={handleStartClassic}
-              className="group relative w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-display font-black text-base sm:text-xl uppercase tracking-wider shadow-[0_0_35px_rgba(16,185,129,0.5)] hover:shadow-[0_0_50px_rgba(16,185,129,0.7)] active:scale-95 transition-all duration-300 cursor-pointer"
+              className="group relative w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-12 py-4 sm:py-5 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-slate-950 font-display font-black text-base sm:text-xl uppercase tracking-wider shadow-[0_0_35px_rgba(245,158,11,0.6)] hover:shadow-[0_0_55px_rgba(245,158,11,0.9)] active:scale-95 transition-all duration-300 cursor-pointer"
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-950/20 flex items-center justify-center text-slate-950 group-hover:scale-110 transition-transform">
                 <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current ml-0.5" />
               </div>
-              <span>JOGAR AGORA</span>
+              <span>ENTRAR NO PALCO</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

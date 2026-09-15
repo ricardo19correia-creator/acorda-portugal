@@ -27,6 +27,7 @@ import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { BrandLogo } from '@/components/brand-logo'
 import { BackgroundFx } from '@/components/background-fx'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import GoogleAuthButton from '@/components/google-auth-button'
 import {
   useCheckRedirectLogin,
@@ -232,13 +233,7 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
       {/* Header com Navegação */}
       <div className="relative z-20 mx-auto max-w-7xl w-full px-4 pt-6 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-foreground backdrop-blur-md"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Voltar ao Início
-        </Link>
+        <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
       </div>
 
       {/* Cartão Central de Autenticação */}

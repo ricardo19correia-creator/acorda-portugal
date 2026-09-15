@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton';
 import { REAL_AVATARS, AvatarItem } from '@/lib/avatars';
 
 export default function AdminAvatarsPage() {
@@ -34,12 +35,7 @@ export default function AdminAvatarsPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-800 pb-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Link
-                href="/"
-                className="text-xs font-semibold px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition"
-              >
-                ← Voltar à Home
-              </Link>
+              <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
               <span className="text-xs uppercase font-bold tracking-wider px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded">
                 Painel Canónico Oficial
               </span>

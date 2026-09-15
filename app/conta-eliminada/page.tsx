@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ShieldCheck, UserPlus, Home } from 'lucide-react'
+import { ShieldCheck, UserPlus } from 'lucide-react'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 
 export default function ContaEliminadaPage() {
   return (
@@ -27,13 +28,12 @@ export default function ContaEliminadaPage() {
             Criar Nova Conta
           </Link>
 
-          <Link
-            className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm transition-all border border-slate-700/60 active:scale-[0.98]"
-            href="/"
-          >
-            <Home className="w-4 h-4" />
-            Voltar ao Início
-          </Link>
+          <GlobalBackButton
+            showAlways={true}
+            fallbackUrl="/"
+            variant="standalone"
+            className="w-full py-3 justify-center"
+          />
         </div>
       </div>
     </main>

@@ -1063,23 +1063,33 @@ export function QuizScreen({
         />
       )}
 
-      <div className="relative min-h-[100dvh] w-full flex flex-col justify-between p-2.5 sm:p-4 pb-8 sm:pb-6 safe-area-x max-w-lg landscape:max-w-5xl mx-auto select-none animate-rise">
-        <div className="w-full flex-1 flex flex-col justify-between gap-3 sm:gap-4 landscape:grid landscape:grid-cols-2 landscape:gap-5 landscape:items-center my-auto">
+      {/* Luzes Volumétricas de Grande Estúdio / Game Show e Vinheta Atmosférica */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none">
+        {/* Foco de Luz Ciano Superior Esquerdo */}
+        <div className="absolute -top-32 -left-24 w-[480px] h-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(6,182,212,0.22)_0%,transparent_70%)] blur-3xl" />
+        {/* Foco de Luz Dourado Superior Direito */}
+        <div className="absolute -top-32 -right-24 w-[480px] h-[600px] bg-[radial-gradient(ellipse_at_top_right,rgba(245,158,11,0.22)_0%,transparent_70%)] blur-3xl" />
+        {/* Vinheta de Tensão Periférica */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+      </div>
+
+      <div className="relative min-h-[100dvh] w-full flex flex-col justify-between p-2.5 sm:p-4 pb-8 sm:pb-6 safe-area-x max-w-xl md:max-w-3xl lg:max-w-4xl landscape:max-w-5xl mx-auto select-none animate-rise">
+        <div className="w-full flex-1 flex flex-col justify-between gap-3.5 sm:gap-5 landscape:grid landscape:grid-cols-2 landscape:gap-6 landscape:items-center my-auto">
           {/* COLUNA ESQUERDA (LANDSCAPE): CABEÇALHO + PERGUNTA */}
-          <div className="w-full flex flex-col gap-2 sm:gap-3 justify-center">
+          <div className="w-full flex flex-col gap-2.5 sm:gap-3.5 justify-center">
             {/* ========================================================= */}
             {/* 1. CABEÇALHO BROADCAST TOURNAMENT HUD                    */}
             {/* ========================================================= */}
             <div className="w-full shrink-0">
-              <div className="national-show-hud w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl sm:rounded-3xl shadow-2xl">
+              <div className="national-show-hud w-full flex items-center justify-between px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-2xl sm:rounded-3xl shadow-2xl">
                 {/* Lado Esquerdo: Sair + Avatar com Aro de Luz + Jogador e Nível */}
-                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <GameExitControl mode="solo" onConfirmExit={handleAbandonSolo} />
                   
                   {/* Avatar Circular com Aro Dourado & Ciano */}
                   <div className="relative shrink-0 flex items-center justify-center">
-                    <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-amber-400 via-cyan-400 to-emerald-400 opacity-75 blur-[2px] animate-pulse" />
-                    <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full p-0.5 bg-slate-950 border border-white/20 flex items-center justify-center shadow-md">
+                    <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-amber-400 via-cyan-400 to-emerald-400 opacity-80 blur-[2px] animate-pulse" />
+                    <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full p-0.5 bg-slate-950 border border-white/25 flex items-center justify-center shadow-lg">
                       <PlayerAvatar
                         profile={profile ?? undefined}
                         displayName={effectiveDisplayName}
@@ -1094,7 +1104,7 @@ export function QuizScreen({
                       {effectiveDisplayName}
                     </span>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className="px-1.5 py-0.2 rounded-md bg-amber-500/20 border border-amber-400/40 text-[9px] sm:text-[10px] font-black uppercase text-amber-300 tracking-wider">
+                      <span className="px-1.5 py-0.2 rounded-md bg-amber-500/20 border border-amber-400/50 text-[9px] sm:text-[10px] font-black uppercase text-amber-300 tracking-wider shadow-sm">
                         {profile?.level ? `Nível ${profile.level}` : 'Nível 1'}
                       </span>
                     </div>
@@ -1103,7 +1113,7 @@ export function QuizScreen({
 
                 {/* Centro: Marcador de Ronda Estilizado (Scorebug) */}
                 <div className="flex flex-col items-center justify-center px-1.5 sm:px-2 shrink-0">
-                  <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-slate-950/80 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.2)]">
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1 rounded-xl bg-slate-950/90 border border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
                     <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400">
                       Ronda
                     </span>
@@ -1117,10 +1127,10 @@ export function QuizScreen({
                 </div>
 
                 {/* Lado Direito: Pontuação Atual + Temporizador Broadcast */}
-                <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                   {/* Pontos */}
                   <div className="flex flex-col items-end">
-                    <div className="flex items-center gap-1 font-display text-xs sm:text-sm font-black text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">
+                    <div className="flex items-center gap-1 font-display text-xs sm:text-sm font-black text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
                       <Sparkles className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
                       <span>{score}</span>
                       <span className="text-[9px] font-mono font-extrabold text-amber-400/80">PTS</span>
@@ -1130,24 +1140,24 @@ export function QuizScreen({
                   {/* Relógio Digital de Precisão */}
                   <div
                     className={cn(
-                      'flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-xl border transition-all duration-300 font-mono text-xs font-black shadow-inner',
+                      'flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-xl border transition-all duration-300 font-mono text-xs font-black shadow-inner',
                       isFrozen
-                        ? 'border-cyan-300 bg-cyan-950/80 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.5)] animate-pulse'
+                        ? 'border-cyan-300 bg-cyan-950/90 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.6)] animate-pulse'
                         : seconds <= WARNING_TIME_THRESHOLD
-                          ? 'border-rose-500/80 bg-rose-950/80 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.6)] animate-pulse'
+                          ? 'border-rose-500 bg-rose-950/90 text-rose-300 shadow-[0_0_20px_rgba(244,63,94,0.7)] animate-pulse'
                           : seconds <= 15
-                            ? 'border-amber-500/60 bg-amber-950/60 text-amber-300'
-                            : 'border-cyan-500/40 bg-slate-950/80 text-cyan-300'
+                            ? 'border-amber-500/70 bg-amber-950/70 text-amber-300'
+                            : 'border-cyan-500/50 bg-slate-950/90 text-cyan-300'
                     )}
                   >
                     {isFrozen ? (
                       <>
-                        <Snowflake className="h-3 w-3 text-cyan-300 animate-spin" />
+                        <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
                         <span>{seconds}s</span>
                       </>
                     ) : (
                       <>
-                        <Clock className={cn('h-3 w-3', seconds <= WARNING_TIME_THRESHOLD ? 'text-rose-400 animate-pulse' : 'text-cyan-400')} />
+                        <Clock className={cn('h-3.5 w-3.5', seconds <= WARNING_TIME_THRESHOLD ? 'text-rose-400 animate-pulse' : 'text-cyan-400')} />
                         <span>{seconds}s</span>
                       </>
                     )}
@@ -1192,12 +1202,12 @@ export function QuizScreen({
               {phase === 'revealed' && (
                 <div
                   className={cn(
-                    'mb-2 px-4 py-1.5 rounded-2xl font-display text-xs sm:text-sm font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-2 shrink-0 max-w-full text-center shadow-xl animate-pop select-none border',
+                    'mb-2.5 px-5 py-2 rounded-2xl font-display text-xs sm:text-sm font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-2 shrink-0 max-w-full text-center shadow-2xl animate-pop select-none border',
                     selected === q.correct
-                      ? 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-slate-950 border-emerald-300 shadow-emerald-500/50'
+                      ? 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-slate-950 border-emerald-300 shadow-emerald-500/60'
                       : selected === null
-                        ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 border-amber-300 shadow-amber-500/50'
-                        : 'bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-300 shadow-rose-500/50'
+                        ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 border-amber-300 shadow-amber-500/60'
+                        : 'bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-300 shadow-rose-500/60'
                   )}
                 >
                   {selected === q.correct ? (
@@ -1220,70 +1230,71 @@ export function QuizScreen({
                 </div>
               )}
 
-              {/* O Painel Flutuante da Pergunta */}
-              <div className="national-show-panel w-full min-h-[90px] sm:min-h-[110px] h-auto p-4 sm:p-6 md:p-7 landscape:p-4 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl relative">
-                {/* Cantoneiras Heráldicas Douradas (Inspiração Náutica e Manuelina) */}
-                <span className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-amber-400/80 rounded-tl-sm" />
-                <span className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-amber-400/80 rounded-tr-sm" />
-                <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-amber-400/80 rounded-bl-sm" />
-                <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-amber-400/80 rounded-br-sm" />
+              {/* O Painel Flutuante da Pergunta — Monólito Cenográfico */}
+              <div className="relative w-full p-[1.5px] rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_30px_rgba(6,182,212,0.2)]">
+                {/* Filete de Borda Gradiente Ouro & Ciano */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-500/40 via-amber-400/60 to-cyan-500/40 p-[1.5px]" />
 
-                {/* Placa Heráldica Superior com Nível e Categoria */}
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-0.5 rounded-full bg-slate-950 border border-amber-400/70 shadow-[0_0_15px_rgba(245,158,11,0.35)] flex items-center gap-1.5 z-10">
-                  <span className="text-[10px] text-amber-300">🛡️</span>
-                  <span className="font-display text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
-                    NÍVEL {diffLevel}
-                  </span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-wider">
-                    {category?.name || 'DESAFIO NACIONAL'}
-                  </span>
-                </div>
+                <div className="relative w-full min-h-[105px] sm:min-h-[125px] h-auto p-4 sm:p-7 md:p-8 landscape:p-4 flex flex-col justify-center items-center text-center rounded-3xl bg-gradient-to-b from-slate-950/85 via-blue-950/80 to-slate-950/90 backdrop-blur-2xl">
+                  {/* Cantoneiras Heráldicas Douradas (Estilo Náutico / Manuelino) */}
+                  <span className="pointer-events-none absolute top-3 left-3 w-3.5 h-3.5 border-t-2 border-l-2 border-amber-400 rounded-tl-sm shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                  <span className="pointer-events-none absolute top-3 right-3 w-3.5 h-3.5 border-t-2 border-r-2 border-amber-400 rounded-tr-sm shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                  <span className="pointer-events-none absolute bottom-3 left-3 w-3.5 h-3.5 border-b-2 border-l-2 border-amber-400 rounded-bl-sm shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                  <span className="pointer-events-none absolute bottom-3 right-3 w-3.5 h-3.5 border-b-2 border-r-2 border-amber-400 rounded-br-sm shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
 
-                {/* Texto da Pergunta — Grande, Nítido e com Autoridade Visual */}
-                <h1 className="mt-1 text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-                  {q.question || q.pergunta}
-                </h1>
-
-                {/* Explicação Contextual quando Revelada */}
-                {phase === 'revealed' && (q.explanation || q.explicacao) && (
-                  <div className="mt-3 w-full p-2.5 sm:p-3 rounded-xl bg-slate-950/70 border border-cyan-500/30 text-left animate-fadeIn">
-                    <div className="flex items-center gap-1.5 text-cyan-300 text-[10px] font-black uppercase tracking-wider mb-1">
-                      <Lightbulb className="h-3 w-3 text-amber-400" />
-                      <span>Sabias que?</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words">
-                      {q.explanation || q.explicacao}
-                    </p>
+                  {/* Insígnia Heráldica Superior */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-slate-950 border-2 border-amber-400/80 shadow-[0_0_20px_rgba(245,158,11,0.5)] flex items-center gap-2 z-10 whitespace-nowrap">
+                    <span className="text-xs">🛡️</span>
+                    <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-amber-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                      NÍVEL {diffLevel} • {category?.name || 'DESAFIO NACIONAL'}
+                    </span>
                   </div>
-                )}
 
-                {/* Broadcast Lower-Third Ticker (Metadados e Denúncia de Pergunta) */}
-                <div className="mt-3 w-full flex flex-wrap items-center justify-center gap-1.5 px-3 py-1 rounded-xl border border-white/10 bg-slate-950/60 text-[9px] sm:text-[10px] font-mono text-slate-400 select-none">
-                  <span className="text-cyan-400 font-bold">ID #{q.id}</span>
-                  {q.subcategory && (
-                    <>
-                      <span className="text-white/20">•</span>
-                      <span className="text-slate-300 truncate max-w-[150px]">{q.subcategory}</span>
-                    </>
+                  {/* Texto da Pergunta — Grande, Nítido e com Autoridade Visual */}
+                  <h1 className="mt-2 text-base sm:text-xl md:text-2xl landscape:text-base sm:landscape:text-lg font-black text-center leading-snug sm:leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_3px_6px_rgba(0,0,0,0.95)]">
+                    {q.question || q.pergunta}
+                  </h1>
+
+                  {/* Explicação Contextual quando Revelada */}
+                  {phase === 'revealed' && (q.explanation || q.explicacao) && (
+                    <div className="mt-4 w-full p-3 sm:p-4 rounded-2xl bg-slate-950/80 border border-cyan-500/40 text-left animate-fadeIn shadow-lg">
+                      <div className="flex items-center gap-1.5 text-cyan-300 text-xs font-black uppercase tracking-wider mb-1.5">
+                        <Lightbulb className="h-3.5 w-3.5 text-amber-400" />
+                        <span>Sabias que?</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words">
+                        {q.explanation || q.explicacao}
+                      </p>
+                    </div>
                   )}
-                  <span className="text-white/20">•</span>
-                  <button
-                    type="button"
-                    onClick={() => setIsReportModalOpen(true)}
-                    className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition cursor-pointer font-bold px-1.5 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
-                    title="Reportar erro editorial nesta pergunta"
-                  >
-                    <Flag className="h-2.5 w-2.5 text-amber-400" />
-                    <span>Reportar</span>
-                  </button>
+
+                  {/* Broadcast Lower-Third Ticker (Metadados e Denúncia de Pergunta) */}
+                  <div className="mt-3.5 w-full flex flex-wrap items-center justify-center gap-2 px-3 py-1 rounded-xl border border-white/10 bg-black/50 text-[10px] font-mono text-slate-400 select-none">
+                    <span className="text-cyan-400 font-bold">PERGUNTA #{q.id}</span>
+                    {q.subcategory && (
+                      <>
+                        <span className="text-white/20">•</span>
+                        <span className="text-slate-300">{q.subcategory}</span>
+                      </>
+                    )}
+                    <span className="text-white/20">•</span>
+                    <button
+                      type="button"
+                      onClick={() => setIsReportModalOpen(true)}
+                      className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition cursor-pointer font-bold px-1.5 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30"
+                      title="Reportar erro editorial nesta pergunta"
+                    >
+                      <Flag className="h-2.5 w-2.5 text-amber-400" />
+                      <span>Reportar</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Banner de tempo congelado */}
               {isFrozen && (
-                <div className="mt-2 rounded-xl border border-cyan-400/80 bg-cyan-950/80 px-4 py-1.5 text-xs text-cyan-200 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-[0_0_15px_rgba(6,182,212,0.4)] shrink-0 w-full">
-                  <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
+                <div className="mt-2.5 rounded-2xl border border-cyan-400/80 bg-cyan-950/90 px-5 py-2 text-xs text-cyan-200 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-[0_0_20px_rgba(6,182,212,0.5)] shrink-0 w-full">
+                  <Snowflake className="h-4 w-4 text-cyan-300 animate-spin" />
                   <span className="font-black tracking-wider uppercase">Tempo Congelado ({freezeTimeLeft}s)</span>
                 </div>
               )}

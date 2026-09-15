@@ -29,6 +29,7 @@ import { useBackgroundVideoSettings } from '@/lib/video-background-settings'
 import { useAudio } from '@/context/AudioContext'
 import { performLogout } from '@/lib/auth-helpers'
 import { AppBackground } from '@/components/AppBackground'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { cn } from '@/lib/utils'
 
 export default function DefinicoesPage() {
@@ -146,26 +147,13 @@ export default function DefinicoesPage() {
 
       {/* Top Header */}
       <div className="w-full max-w-4xl flex items-center justify-between mb-8 relative z-10">
-        <Link
-          href="/perfil"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Voltar ao Perfil</span>
-        </Link>
+        <GlobalBackButton showAlways={true} fallbackUrl="/perfil" variant="standalone" />
 
         {toastMessage && (
           <div className="px-4 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 shadow-xl border border-emerald-400 animate-fade-in">
             {toastMessage}
           </div>
         )}
-
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md"
-        >
-          <span>Lobby Principal</span>
-        </Link>
       </div>
 
       {/* Hero Title */}

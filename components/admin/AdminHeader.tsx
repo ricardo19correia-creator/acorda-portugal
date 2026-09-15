@@ -9,6 +9,7 @@ import {
   Radio,
   ExternalLink,
 } from 'lucide-react'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import type { AdminUserRecord } from '@/lib/admin-auth'
 
 interface AdminHeaderProps {
@@ -39,6 +40,14 @@ export function AdminHeader({
         >
           <Menu className="h-4 w-4" />
         </button>
+
+        <GlobalBackButton
+          showAlways={true}
+          fallbackUrl="/"
+          variant="header"
+          label="Sair do Cockpit"
+          className="hidden sm:inline-flex text-xs py-1"
+        />
 
         <div className="flex items-center gap-2">
           <h1 className="font-display text-sm sm:text-base font-black uppercase tracking-wider text-white">

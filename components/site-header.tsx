@@ -34,6 +34,7 @@ import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { useEconomy } from '@/context/economy-context'
 import { HeaderOnlineBadge } from '@/components/header-online-badge'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -112,8 +113,9 @@ export function SiteHeader() {
       }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-        {/* Esquerda: Brand Logo */}
-        <div className="flex items-center min-w-0 shrink">
+        {/* Esquerda: Botão Voltar + Brand Logo */}
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 shrink">
+          <GlobalBackButton variant="header" />
           <Link
             href="/"
             onClick={handleLogoClick}

@@ -44,6 +44,7 @@ import { playEmoteSound } from '@/lib/sound-engine'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { ArenaEffectsLayer } from '@/components/ArenaEffectsLayer'
 import { AppBackground } from '@/components/AppBackground'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data/constants'
 import { calculateLevelProgress } from '@/lib/progression'
 import { cn } from '@/lib/utils'
@@ -1456,13 +1457,7 @@ function PerfilContent() {
 
       {/* Top Navigation */}
       <div className="w-full max-w-5xl flex items-center justify-between mb-6">
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Voltar ao Início</span>
-        </Link>
+        <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
 
         {toastMessage && (
           <div className="px-4 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 shadow-xl border border-emerald-400 animate-fade-in">

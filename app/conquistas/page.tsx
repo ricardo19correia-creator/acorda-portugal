@@ -19,6 +19,7 @@ import {
 import { useAuth } from '@/components/auth-provider'
 import { ACHIEVEMENTS_LIST, type AchievementItem, type AchievementCategory } from '@/data/achievements'
 import { AppBackground } from '@/components/AppBackground'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { cn } from '@/lib/utils'
 
 export default function ConquistasPage() {
@@ -85,13 +86,7 @@ export default function ConquistasPage() {
 
       {/* Top Header */}
       <div className="w-full max-w-5xl flex items-center justify-between mb-8 relative z-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 text-sm font-medium transition-all shadow-md"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Lobby Principal</span>
-        </Link>
+        <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
 
         <div className="flex items-center gap-3">
           <Link
