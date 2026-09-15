@@ -48,8 +48,7 @@ export function resolveUserAvatar(
     (profile as any)?.equippedAvatar ||
     profile?.photoURL ||
     (profile as any)?.avatar ||
-    (profile as any)?.avatarUrl ||
-    user?.photoURL
+    (profile as any)?.avatarUrl
 
   if (candidate) return getAvatarImage(candidate)
   return getEquippedAvatarImage()
@@ -1457,7 +1456,7 @@ export async function respondDuelRematch(
   const playerBOriginal = duel.playerB || {
     uid: user.uid,
     displayName: user.displayName || 'Jogador',
-    photoURL: user.photoURL || null,
+    photoURL: getEquippedAvatarImage() || DEFAULT_AVATAR.image,
     level: 1,
     district: 'Portugal',
     score: 0,

@@ -63,8 +63,8 @@ export function Ranking() {
         const equipped = localStorage.getItem('user_equipped_avatar')
         if (equipped) {
           setUserDisplayAvatar(getAvatarImage(equipped))
-        } else if (user?.photoURL) {
-          setUserDisplayAvatar(getAvatarImage(user.photoURL))
+        } else if (profile?.photoURL) {
+          setUserDisplayAvatar(getAvatarImage(profile.photoURL))
         } else {
           setUserDisplayAvatar(DEFAULT_AVATAR.image)
         }
@@ -81,7 +81,7 @@ export function Ranking() {
       window.removeEventListener('inventory_updated', updateAvatar)
       window.removeEventListener('storage', updateAvatar)
     }
-  }, [user?.photoURL])
+  }, [profile?.photoURL])
 
   // Subscrição em Tempo Real de Jogadores Reais (publicProfiles)
   useEffect(() => {
@@ -104,7 +104,7 @@ export function Ranking() {
             playersList.push({
               uid: user.uid,
               displayName: profile.displayName || user.displayName || 'Jogador',
-              photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+              photoURL: profile.photoURL || userDisplayAvatar || DEFAULT_AVATAR.image,
               level: userLevel,
               xp: userXp,
               district: userDistrict,
@@ -188,7 +188,7 @@ export function Ranking() {
       return {
         uid: user.uid,
         name: profile.displayName || user.displayName || 'Jogador',
-        photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+        photoURL: profile.photoURL || userDisplayAvatar || DEFAULT_AVATAR.image,
         level: profile.level ?? 1,
         xp: userXp,
         district: profile.district || 'Portugal',

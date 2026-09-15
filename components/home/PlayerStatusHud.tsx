@@ -7,6 +7,7 @@ import { UserAvatar } from '@/components/ui/UserAvatar'
 import { calculateLevelProgress } from '@/lib/progression'
 import { useEconomy } from '@/context/economy-context'
 import type { UserProfile } from '@/lib/game-data'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
 
 interface PlayerStatusHudProps {
   user: any
@@ -39,7 +40,7 @@ export function PlayerStatusHud({ user, profile, onOpenAuth }: PlayerStatusHudPr
               <div className="shrink-0">
                 <UserAvatar
                   profile={profile}
-                  src={profile?.photoURL || user?.photoURL}
+                  src={profile?.photoURL || DEFAULT_AVATAR.image}
                   size="sm"
                   isCurrentUser
                 />

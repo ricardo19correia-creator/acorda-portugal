@@ -35,6 +35,7 @@ import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { useEconomy } from '@/context/economy-context'
 import { HeaderOnlineBadge } from '@/components/header-online-badge'
 import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -237,7 +238,7 @@ export function SiteHeader() {
                 className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-card/90 p-3.5 text-sm font-semibold text-foreground transition-all hover:border-emerald-500/40 hover:bg-card shadow-lg"
               >
                 <UserAvatar
-                  avatarUrl={profile?.photoURL || user?.photoURL || undefined}
+                  avatarUrl={profile?.photoURL || DEFAULT_AVATAR.image}
                   isCurrentUser={true}
                   size="md"
                 />

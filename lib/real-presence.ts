@@ -1,5 +1,6 @@
 import { doc, setDoc, serverTimestamp, collection, query, where, onSnapshot, limit } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
 
 export type RealUserActivity = 'playing' | 'duel' | 'browsing'
 
@@ -144,7 +145,7 @@ export async function sendRealHeartbeat(
     const displayName = sanitizePublicDisplayName(profile?.displayName || user.displayName, profile?.district)
     const district = (profile?.district || '').trim() || 'Portugal'
     const city = (profile?.city || (profile as any)?.concelho || '').trim() || undefined
-    const photoURL = profile?.photoURL || user.photoURL || null
+    const photoURL = profile?.photoURL || (profile as any)?.avatar || DEFAULT_AVATAR.image
     const level = typeof profile?.level === 'number' && profile.level > 0 ? profile.level : 1
     const xp = typeof profile?.xp === 'number' && profile.xp >= 0 ? profile.xp : undefined
     const title = profile?.equippedTitle || 'Patriota'

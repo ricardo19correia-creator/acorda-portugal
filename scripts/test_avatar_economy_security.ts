@@ -65,6 +65,13 @@ async function runAvatarSecurityTests() {
     `Raridade: ${DEFAULT_AVATAR.rarity}, Currency: ${DEFAULT_AVATAR.currency}`
   )
 
+  const starterAvatars = REAL_AVATARS.filter((a) => a.badge === 'Inicial' || a.currency === 'free')
+  assert(
+    starterAvatars.length === 1 && starterAvatars[0].id === STARTER_AVATAR_ID,
+    `Existe estritamente 1 avatar inicial gratuito no catálogo canónico: ${STARTER_AVATAR_ID}`,
+    `Encontrados: ${starterAvatars.map((a) => `${a.id} (${a.name})`).join(', ')}`
+  )
+
   // TEST 2: Proteção de Avatares de Mérito e Raros (Não são 'free')
   const meritIds = ['avatar_30', 'avatar_35', 'avatar_36']
   meritIds.forEach((mId) => {

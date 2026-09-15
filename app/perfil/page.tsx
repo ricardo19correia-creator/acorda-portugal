@@ -175,7 +175,7 @@ function PerfilContent() {
   const [displayName, setDisplayName] = useState<string>(() => profile?.displayName || user?.displayName || user?.email?.split('@')[0] || '')
   const [district, setDistrict] = useState<string>(() => profile?.district || '')
   const [city, setCity] = useState<string>(() => (profile as any)?.city || '')
-  const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)))
+  const [avatar, setAvatar] = useState<string>(() => getAvatarImage((profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null) || DEFAULT_AVATAR.image))
   const [equippedAvatarId, setEquippedAvatarId] = useState<string>(() => normalizeAvatarId((profile as any)?.equippedAvatar || (profile as any)?.avatarId || (typeof window !== 'undefined' ? localStorage.getItem('equipped_avatar_id') : null)))
   const [equippedFrame, setEquippedFrame] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -557,7 +557,7 @@ function PerfilContent() {
         const savedDistrict = profile?.district || (typeof window !== 'undefined' ? localStorage.getItem('user_district') : null) || 'Portugal'
         setDistrict(savedDistrict)
 
-        const rawSavedAvatar = (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || user?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null)
+        const rawSavedAvatar = (profile as any)?.equipped?.avatar || (profile as any)?.avatar || profile?.photoURL || (typeof window !== 'undefined' ? localStorage.getItem('user_equipped_avatar') : null) || DEFAULT_AVATAR.image
         const resolvedSavedAvatar = getAvatarImage(rawSavedAvatar)
         setAvatar(resolvedSavedAvatar)
 

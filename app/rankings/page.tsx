@@ -157,8 +157,8 @@ export default function RankingsPage() {
         const equipped = localStorage.getItem('user_equipped_avatar')
         if (equipped) {
           setUserDisplayAvatar(getAvatarImage(equipped))
-        } else if (user?.photoURL) {
-          setUserDisplayAvatar(getAvatarImage(user.photoURL))
+        } else if (profile?.photoURL) {
+          setUserDisplayAvatar(getAvatarImage(profile.photoURL))
         } else {
           setUserDisplayAvatar(DEFAULT_AVATAR.image)
         }
@@ -175,7 +175,7 @@ export default function RankingsPage() {
       window.removeEventListener('inventory_updated', updateAvatar)
       window.removeEventListener('storage', updateAvatar)
     }
-  }, [user?.photoURL])
+  }, [profile?.photoURL])
 
   // Subscrição Global de Posicionamento Oficial Nacional
   useEffect(() => {
@@ -201,7 +201,7 @@ export default function RankingsPage() {
               allList.push({
                 uid: user.uid,
                 displayName: profile.displayName || user.displayName || 'Jogador',
-                photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+                photoURL: profile.photoURL || userDisplayAvatar || DEFAULT_AVATAR.image,
                 level: userLevel,
                 xp: userXp,
                 district: userDistrict,
@@ -278,7 +278,7 @@ export default function RankingsPage() {
                 list.push({
                   uid: user.uid,
                   displayName: profile.displayName || user.displayName || 'Jogador',
-                  photoURL: profile.photoURL || user.photoURL || userDisplayAvatar,
+                  photoURL: profile.photoURL || userDisplayAvatar || DEFAULT_AVATAR.image,
                   level: userLevel,
                   xp: userXp,
                   district: userDistrict,
