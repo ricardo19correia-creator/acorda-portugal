@@ -3727,7 +3727,15 @@ function PerfilContent() {
 
 export default function PerfilPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#050706] p-4 relative">
+          <div className="max-w-5xl mx-auto px-4 py-6">
+            <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+          </div>
+        </div>
+      }
+    >
       <PerfilContent />
     </Suspense>
   )
