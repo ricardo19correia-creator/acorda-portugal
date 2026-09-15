@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
 import { ARENA_SHOP_CATALOG, ARENA_IMAGES, getOfficialArenaImage } from '../src/data/shopArenas'
-import { STANDARD_ARENAS, VIP_ARENAS } from '../src/data/arenaCatalog'
+import { CANONICAL_ARENAS, STANDARD_ARENAS, VIP_ARENAS } from '../src/data/arenaCatalog'
 import { SUPREME_ARENAS } from '../lib/supreme-arenas'
 
 interface AuditResult {
@@ -104,13 +104,50 @@ export function runArenaAudit(): AuditResult {
     }
   })
 
-  // Verificar SUPREME_ARENAS
-  SUPREME_ARENAS.forEach(arena => {
+  // Verificar CANONICAL_ARENAS
+  CANONICAL_ARENAS.forEach(arena => {
     const basename = path.basename(arena.assetPath || '')
     if (!fs.existsSync(path.join(arenasDir, basename))) {
-      missingImages.push(`SUPREME_ARENA em falta: ${arena.assetPath} (${arena.name})`)
+      missingImages.push(`CANONICAL_ARENA em falta: ${arena.assetPath} (${arena.name})`)
+    }
+    if (arena.effects !== 'none') {
+      errors.push(`Efeito visual ativo na arena ${arena.id}: ${arena.effects}`)
     }
   })
+
+  // Verificar 5 escalões (10 arenas por escalão)
+  const tierCounts: Record<string, number> = {
+    escalao_1: 0,
+    escalao_2: 0,
+    escalao_3: 0,
+    escalao_4: 0,
+    escalao_5: 0,
+  }
+
+  ARENA_SHOP_CATALOG.forEach(a => {
+    if (a.category in tierCounts) {
+      tierCounts[a.category]++
+    } else {
+      errors.push(`Categoria desconhecida: ${a.category} na arena ${a.id}`)
+    }
+    if (a.effect !== 'none') {
+      errors.push(`Efeito ativo em ARENA_SHOP_CATALOG para ${a.id}: ${a.effect}`)
+    }
+  })
+
+  Object.entries(tierCounts).forEach(([tier, count]) => {
+    if (count !== 10) {
+      errors.push(`Escalão ${tier} deve ter exatamente 10 arenas, mas tem ${count}`)
+    }
+  })
+
+  // Starter arena
+  const starter = ARENA_SHOP_CATALOG.find(a => a.id === 'arena_terreiro_dourado')
+  if (!starter) {
+    errors.push('Arena inicial arena_terreiro_dourado não encontrada no catálogo')
+  } else if (starter.price !== 0 || !starter.unlockedByDefault) {
+    errors.push(`Arena inicial deve ser grátis e unlockedByDefault (price=${starter.price}, unlocked=${starter.unlockedByDefault})`)
+  }
 
   const mappedBasenames = new Set<string>()
   for (const p of Object.values(ARENA_IMAGES)) {
@@ -123,7 +160,8 @@ export function runArenaAudit(): AuditResult {
     missingImages.length === 0 &&
     unmappedFiles.length === 0 &&
     physicalFiles.length === 50 &&
-    hashMap.size === 50 &&
+    ARENA_SHOP_CATALOG.length === 50 &&
+    CANONICAL_ARENAS.length === 50 &&
     errors.length === 0
 
   return {
@@ -143,7 +181,7 @@ export function runArenaAudit(): AuditResult {
 const res = runArenaAudit()
 
 console.log('\n========================================================================')
-console.log('📊 RESULTADO FINAL DA AUDITORIA DE ARENAS')
+console.log('📊 RESULTADO FINAL DA AUDITORIA DE ARENAS (50 ARENAS SSOT)')
 console.log('========================================================================')
 console.log(`ARENAS NO CATÁLOGO:  ${res.catalogArenasCount}`)
 console.log(`FICHEIROS EM DISCO:  ${res.physicalFilesCount}`)
@@ -155,7 +193,7 @@ console.log(`ERROS:               ${res.errors.length}`)
 console.log('========================================================================')
 
 if (res.passed) {
-  console.log('🟢 TODAS AS 50/50 IMAGENS DE ARENAS 100% INTEGRADAS E VÁLIDAS!')
+  console.log('🟢 TODAS AS 50/50 ARENAS 100% INTEGRADAS, VÁLIDAS E SEM EFEITOS VISUAIS!')
 } else {
   console.error('🔴 AUDITORIA FALHOU COM ERROS:', res.errors, res.missingImages, res.duplicateFiles, res.unmappedFiles)
   process.exit(1)

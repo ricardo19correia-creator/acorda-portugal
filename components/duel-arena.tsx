@@ -70,6 +70,7 @@ import { getArenaById } from '@/data/shopArenas'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
 import { generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
+import { AnswerOption, type AnswerState } from '@/components/quiz/answer-option'
 import {
   CANONICAL_AIDS,
   type AidType,
@@ -708,6 +709,7 @@ export function DuelArena({
     }
 
     setIsSurrenderModalOpen(false)
+    setGlobalArenaMatchActive(false)
     router.push('/jogar')
   }
 
@@ -732,6 +734,7 @@ export function DuelArena({
         await cleanMatchmakingQueue(currentPlayer.uid)
       } catch (e) {}
     }
+    setGlobalArenaMatchActive(false)
     router.push('/jogar')
   }
 
@@ -1140,50 +1143,62 @@ export function DuelArena({
                 )}
               </div>
 
-              {/* Feedback visual rápido e discreto */}
+              {/* Feedback visual rápido e impactante */}
               {feedback && (
                 <div
                   className={cn(
-                    'mb-1.5 px-3.5 py-1 rounded-full font-display text-xs font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center shadow-md animate-pop select-none',
-                    feedback.status === 'CORRECT' && 'bg-emerald-500 text-slate-950 border border-emerald-400 shadow-emerald-500/30',
-                    feedback.status === 'WRONG' && 'bg-rose-500 text-white border border-rose-400 shadow-rose-500/30',
-                    feedback.status === 'TIMEOUT' && 'bg-amber-500 text-slate-950 border border-amber-400 shadow-amber-500/30',
+                    'mb-2 px-4 py-1.5 rounded-2xl font-display text-xs sm:text-sm font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-2 shrink-0 max-w-full text-center shadow-xl animate-pop select-none border',
+                    feedback.status === 'CORRECT' && 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-slate-950 border-emerald-300 shadow-emerald-500/50',
+                    feedback.status === 'WRONG' && 'bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-300 shadow-rose-500/50',
+                    feedback.status === 'TIMEOUT' && 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 border-amber-300 shadow-amber-500/50',
                   )}
                 >
                   {feedback.status === 'CORRECT' && (
                     <>
-                      <CheckCircle2 className="h-3.5 w-3.5 stroke-[3] shrink-0" />
-                      <span>CORRETO</span>
-                      <span className="font-mono text-[11px] font-extrabold opacity-95">+100 XP</span>
+                      <CheckCircle2 className="h-4 w-4 stroke-[3.5] shrink-0" />
+                      <span>RESPOSTA CORRETA</span>
+                      <span className="font-mono text-xs font-black bg-black/20 px-2 py-0.5 rounded-lg">+100 XP</span>
                     </>
                   )}
                   {feedback.status === 'WRONG' && (
                     <>
-                      <XCircle className="h-3.5 w-3.5 stroke-[3] shrink-0" />
-                      <span>ERRADO</span>
+                      <XCircle className="h-4 w-4 stroke-[3.5] shrink-0" />
+                      <span>RESPOSTA ERRADA</span>
                     </>
                   )}
                   {feedback.status === 'TIMEOUT' && (
                     <>
-                      <Clock className="h-3.5 w-3.5 shrink-0" />
+                      <Clock className="h-4 w-4 shrink-0" />
                       <span>TEMPO ESGOTADO</span>
                     </>
                   )}
                 </div>
               )}
 
-              {/* Card com corpo e presença visual elegante adaptativa */}
-              <div className="w-full min-h-[85px] sm:min-h-[100px] h-auto p-3 sm:p-6 md:p-8 landscape:p-3.5 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
-                <h1 className="text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
+              {/* Card da Pergunta no Duelo (Floating Stage Glass com Cantoneiras Heráldicas) */}
+              <div className="national-show-panel w-full min-h-[90px] sm:min-h-[110px] h-auto p-4 sm:p-6 md:p-7 landscape:p-4 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl relative">
+                <span className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-amber-400/80 rounded-tl-sm" />
+                <span className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-amber-400/80 rounded-tr-sm" />
+                <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-amber-400/80 rounded-bl-sm" />
+                <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-amber-400/80 rounded-br-sm" />
+
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-0.5 rounded-full bg-slate-950 border border-amber-400/70 shadow-[0_0_15px_rgba(245,158,11,0.35)] flex items-center gap-1.5 z-10">
+                  <span className="text-[10px]">⚔️</span>
+                  <span className="font-display text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
+                    DUELO 1V1 • RONDA {duelData?.currentRound ?? 1}
+                  </span>
+                </div>
+
+                <h1 className="mt-1 text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                   {currentQuestion?.question}
                 </h1>
               </div>
 
               {/* Freeze Banner no Duelo */}
               {isFrozen && (
-                <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-2.5 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
-                  <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
-                  <span className="font-bold">Congelado ({freezeTimeLeft}s)</span>
+                <div className="mt-2 rounded-xl border border-cyan-400/80 bg-cyan-950/80 px-4 py-1.5 text-xs text-cyan-200 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-[0_0_15px_rgba(6,182,212,0.4)] shrink-0 w-full">
+                  <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
+                  <span className="font-black tracking-wider uppercase">Tempo Congelado ({freezeTimeLeft}s)</span>
                 </div>
               )}
             </div>
@@ -1200,7 +1215,7 @@ export function DuelArena({
               </div>
             )}
 
-            {/* Grelha 100% adaptativa (1 coluna em mobile, 2 colunas em landscape/tablets) */}
+            {/* Grelha de Portas de Competição (1 coluna mobile portrait, 2 colunas landscape/tablet) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 gap-2 sm:gap-2.5 w-full">
               {currentQuestion?.options.map((opt, idx) => {
                 const isSelected = selectedOption === opt.key
@@ -1209,70 +1224,31 @@ export function DuelArena({
                 const isEliminated = eliminatedOptions.includes(opt.key)
                 const optionKey = (['A', 'B', 'C', 'D'][idx] || opt.key) as 'A' | 'B' | 'C' | 'D'
 
-                if (isEliminated) {
-                  return (
-                    <div
-                      key={opt.key}
-                      className="min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
-                    >
-                      <span className="w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 line-through">
-                        {optionKey}
-                      </span>
-                      <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
-                        {opt.text}
-                      </span>
-                    </div>
-                  )
-                }
-
-                let buttonStyles = 'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
-
+                let state: AnswerState = 'idle'
                 if (showFeedback) {
                   if (isCorrectOption) {
-                    buttonStyles = 'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
-                  } else if (isSelected && !isCorrectOption) {
-                    buttonStyles = 'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
+                    state = 'correct'
+                  } else if (isSelected) {
+                    state = 'wrong'
                   } else {
-                    buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
+                    state = 'muted'
                   }
                 } else if (isSelected) {
-                  buttonStyles = 'bg-purple-950/95 border-2 border-purple-400 ring-2 ring-purple-500/40 text-white'
+                  state = 'selected'
                 }
 
                 return (
-                  <button
+                  <AnswerOption
                     key={opt.key}
+                    optionKey={optionKey}
+                    text={opt.text}
+                    state={state}
                     disabled={selectedOption !== null || isSubmitting}
-                    onClick={() => handleSelectOption(opt.key)}
-                    className={cn(
-                      'min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 rounded-xl flex items-center gap-2 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
-                      buttonStyles,
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        'w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 border transition-colors',
-                        showFeedback && isCorrectOption
-                          ? 'bg-emerald-500 border-emerald-300 text-slate-950'
-                          : showFeedback && isSelected
-                            ? 'bg-rose-600 border-rose-400 text-white'
-                            : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30',
-                      )}
-                    >
-                      {optionKey}
-                    </span>
-                    <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
-                      {opt.text}
-                    </span>
-
-                    {/* Exibe a percentagem se a votação do público foi usada */}
-                    {publicVoteResults && publicVoteResults[idx] !== undefined && (
-                      <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
-                        <span className="text-[10px]">👥</span>
-                        <span>{publicVoteResults[idx]}%</span>
-                      </div>
-                    )}
-                  </button>
+                    eliminated={isEliminated}
+                    isSelected={isSelected}
+                    publicVotePercent={publicVoteResults?.[idx]}
+                    onSelect={() => handleSelectOption(opt.key)}
+                  />
                 )
               })}
             </div>

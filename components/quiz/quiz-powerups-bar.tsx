@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Snowflake, Check, Users, Loader2 } from 'lucide-react'
+import { Snowflake, Check, Users, Loader2, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface QuizPowerUpsBarProps {
@@ -21,6 +21,13 @@ export interface QuizPowerUpsBarProps {
   onRequestPreview?: (aidType: '5050' | 'publicVote' | 'freeze') => void
 }
 
+/**
+ * 🇵🇹 ACORDA PORTUGAL — BARRA DE ARTEFACTOS DE PODER (LIFELINES)
+ * Apresentação dos poderes do jogo como artefactos sagrados de competição:
+ * - 50:50 (Cisão Dourada)
+ * - Congelar Tempo (Cristal Glacial +15s)
+ * - Ajuda do Público (Voz da Nação)
+ */
 export function QuizPowerUpsBar({
   stock5050,
   stockFreeze,
@@ -37,7 +44,7 @@ export function QuizPowerUpsBar({
   onUsePublicVote,
   onRequestPreview,
 }: QuizPowerUpsBarProps) {
-  // 1. 50:50 stock
+  // 1. Stock do 50:50
   const count5050 = Math.max(
     0,
     typeof stock5050 === 'number'
@@ -53,7 +60,7 @@ export function QuizPowerUpsBar({
         ),
   )
 
-  // 2. Congelar Tempo stock
+  // 2. Stock de Congelar Tempo
   const countFreeze = Math.max(
     0,
     typeof stockFreeze === 'number'
@@ -71,7 +78,7 @@ export function QuizPowerUpsBar({
         ),
   )
 
-  // 3. Ajuda do Público stock
+  // 3. Stock de Ajuda do Público
   const countPublicVote = Math.max(
     0,
     typeof stockPublicVote === 'number'
@@ -98,6 +105,7 @@ export function QuizPowerUpsBar({
     !isFrozen &&
     countFreeze > 0 &&
     typeof onUseFreeze === 'function'
+
   const canUsePublicVote =
     !isGloballyDisabled &&
     !usedPublicVote &&
@@ -132,118 +140,155 @@ export function QuizPowerUpsBar({
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2.5 w-full max-w-sm mx-auto my-3 select-none shrink-0">
-      {/* 1. POWER-UP 50:50 */}
+    <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-sm sm:max-w-md mx-auto my-1.5 select-none shrink-0">
+      {/* ========================================================= */}
+      {/* 1. ARTEFACTO: 50:50 (CISÃO DOURADA)                       */}
+      {/* ========================================================= */}
       <button
         type="button"
         disabled={!canUse5050}
         onClick={handleClick5050}
         aria-label={`Ajuda 50:50 (${count5050} disponíveis)`}
         className={cn(
-          'w-full h-11 px-2.5 rounded-xl border font-bold text-xs flex items-center justify-between gap-1 active:scale-95 transition-all select-none shadow-sm',
+          'artifact-pedestal relative w-full h-12 sm:h-13 px-2 sm:px-3 rounded-2xl flex items-center justify-between gap-1.5 outline-none select-none cursor-pointer',
           used5050
-            ? 'bg-slate-900 border-emerald-500/60 text-emerald-400 opacity-80 cursor-default'
+            ? 'border-emerald-500/50 bg-emerald-950/40 text-emerald-400 opacity-80 cursor-default'
             : canUse5050
-              ? 'bg-slate-800/95 border-cyan-500/40 text-cyan-200 hover:border-cyan-400 hover:bg-slate-800 cursor-pointer shadow-cyan-500/10'
-              : 'bg-slate-900/60 border-slate-800 text-slate-500 opacity-40 pointer-events-none cursor-not-allowed',
+              ? 'hover:border-amber-400/80 active:scale-95 shadow-amber-500/10'
+              : 'opacity-35 pointer-events-none cursor-not-allowed border-white/5 bg-slate-950/60 text-slate-500'
         )}
       >
         <span className="flex items-center gap-1.5 min-w-0">
-          {isProcessing ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin text-cyan-400 shrink-0" />
-          ) : used5050 ? (
-            <Check className="h-3.5 w-3.5 text-emerald-400 stroke-[3] shrink-0" />
-          ) : (
-            <span className="shrink-0 text-sm leading-none">🌓</span>
-          )}
-          <span className="truncate text-xs font-bold">50:50</span>
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-300">
+            {isProcessing ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin text-amber-400" />
+            ) : used5050 ? (
+              <Check className="h-4 w-4 text-emerald-400 stroke-[3]" />
+            ) : (
+              <span className="text-xs sm:text-sm font-black font-display text-amber-300">½</span>
+            )}
+          </span>
+          <div className="flex flex-col text-left min-w-0">
+            <span className="truncate text-[11px] sm:text-xs font-black uppercase tracking-wider text-slate-100">
+              50:50
+            </span>
+            <span className="text-[9px] text-amber-300/80 font-medium leading-none hidden sm:block">
+              Cisão
+            </span>
+          </div>
         </span>
+
+        {/* Badge de Stock Dourado */}
         <span
           className={cn(
-            'px-1.5 py-0.5 rounded text-[10px] font-black shrink-0 font-mono leading-none',
+            'px-1.5 py-0.5 rounded-lg text-[10px] font-black shrink-0 font-mono leading-none border',
             used5050
-              ? 'bg-emerald-500/20 text-emerald-300'
+              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
               : count5050 > 0
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                : 'bg-slate-800/80 text-slate-500 border border-slate-700/50',
+                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_8px_rgba(245,158,11,0.25)]'
+                : 'bg-black/40 text-slate-600 border-white/5'
           )}
         >
           {used5050 ? 'OK' : `x${count5050}`}
         </span>
       </button>
 
-      {/* 2. POWER-UP CONGELAR TEMPO */}
+      {/* ========================================================= */}
+      {/* 2. ARTEFACTO: CONGELAR TEMPO (CRISTAL GLACIAL)            */}
+      {/* ========================================================= */}
       <button
         type="button"
         disabled={!canUseFreeze}
         onClick={handleClickFreeze}
         aria-label={`Congelar Tempo (${countFreeze} disponíveis)`}
         className={cn(
-          'w-full h-11 px-2.5 rounded-xl border font-bold text-xs flex items-center justify-between gap-1 active:scale-95 transition-all select-none shadow-sm',
+          'artifact-pedestal relative w-full h-12 sm:h-13 px-2 sm:px-3 rounded-2xl flex items-center justify-between gap-1.5 outline-none select-none cursor-pointer',
           isFrozen
-            ? 'bg-slate-900 border-blue-400 text-blue-200 shadow-[0_0_15px_rgba(96,165,250,0.5)] animate-pulse'
+            ? 'border-cyan-300 bg-cyan-950/70 text-cyan-200 shadow-[0_0_20px_rgba(6,182,212,0.6)] animate-pulse'
             : canUseFreeze
-              ? 'bg-slate-800/95 border-blue-500/40 text-blue-300 hover:border-blue-400 hover:bg-slate-800 cursor-pointer shadow-blue-500/10'
-              : 'bg-slate-900/60 border-slate-800 text-slate-500 opacity-40 pointer-events-none cursor-not-allowed',
+              ? 'hover:border-cyan-400/80 active:scale-95 shadow-cyan-500/10'
+              : 'opacity-35 pointer-events-none cursor-not-allowed border-white/5 bg-slate-950/60 text-slate-500'
         )}
       >
         <span className="flex items-center gap-1.5 min-w-0">
-          {isProcessing ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-400 shrink-0" />
-          ) : isFrozen ? (
-            <Snowflake className="h-3.5 w-3.5 animate-spin text-blue-300 shrink-0" />
-          ) : (
-            <Snowflake className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-          )}
-          <span className="truncate text-xs font-bold">Gelo +15s</span>
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300">
+            {isProcessing ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin text-cyan-400" />
+            ) : (
+              <Snowflake className={cn('h-4 w-4 text-cyan-300', isFrozen && 'animate-spin')} />
+            )}
+          </span>
+          <div className="flex flex-col text-left min-w-0">
+            <span className="truncate text-[11px] sm:text-xs font-black uppercase tracking-wider text-slate-100">
+              Gelo
+            </span>
+            <span className="text-[9px] text-cyan-300/80 font-medium leading-none hidden sm:block">
+              +15s
+            </span>
+          </div>
         </span>
+
+        {/* Badge de Stock Glacial */}
         <span
           className={cn(
-            'px-1.5 py-0.5 rounded text-[10px] font-black shrink-0 font-mono leading-none',
+            'px-1.5 py-0.5 rounded-lg text-[10px] font-black shrink-0 font-mono leading-none border',
             isFrozen
-              ? 'bg-blue-500/30 text-white'
+              ? 'bg-cyan-500/30 text-white border-cyan-400'
               : countFreeze > 0
-                ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                : 'bg-slate-800/80 text-slate-500 border border-slate-700/50',
+                ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-[0_0_8px_rgba(6,182,212,0.25)]'
+                : 'bg-black/40 text-slate-600 border-white/5'
           )}
         >
           {isFrozen ? `${freezeTimeLeft}s` : `x${countFreeze}`}
         </span>
       </button>
 
-      {/* 3. POWER-UP AJUDA DO PÚBLICO */}
+      {/* ========================================================= */}
+      {/* 3. ARTEFACTO: AJUDA DO PÚBLICO (VOZ DA NAÇÃO)             */}
+      {/* ========================================================= */}
       <button
         type="button"
         disabled={!canUsePublicVote}
         onClick={handleClickPublicVote}
         aria-label={`Ajuda do Público (${countPublicVote} disponíveis)`}
         className={cn(
-          'w-full h-11 px-2.5 rounded-xl border font-bold text-xs flex items-center justify-between gap-1 active:scale-95 transition-all select-none shadow-sm',
+          'artifact-pedestal relative w-full h-12 sm:h-13 px-2 sm:px-3 rounded-2xl flex items-center justify-between gap-1.5 outline-none select-none cursor-pointer',
           usedPublicVote
-            ? 'bg-slate-900 border-purple-500/60 text-purple-300 opacity-80 cursor-default'
+            ? 'border-purple-500/50 bg-purple-950/40 text-purple-300 opacity-80 cursor-default'
             : canUsePublicVote
-              ? 'bg-slate-800/95 border-purple-500/40 text-purple-300 hover:border-purple-400 hover:bg-slate-800 cursor-pointer shadow-purple-500/10'
-              : 'bg-slate-900/60 border-slate-800 text-slate-500 opacity-40 pointer-events-none cursor-not-allowed',
+              ? 'hover:border-purple-400/80 active:scale-95 shadow-purple-500/10'
+              : 'opacity-35 pointer-events-none cursor-not-allowed border-white/5 bg-slate-950/60 text-slate-500'
         )}
       >
         <span className="flex items-center gap-1.5 min-w-0">
-          {isProcessing ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin text-purple-400 shrink-0" />
-          ) : usedPublicVote ? (
-            <Check className="h-3.5 w-3.5 text-purple-400 stroke-[3] shrink-0" />
-          ) : (
-            <Users className="h-3.5 w-3.5 text-purple-400 shrink-0" />
-          )}
-          <span className="truncate text-xs font-bold">Público</span>
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-purple-500/15 border border-purple-400/30 text-purple-300">
+            {isProcessing ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin text-purple-400" />
+            ) : usedPublicVote ? (
+              <Check className="h-4 w-4 text-purple-300 stroke-[3]" />
+            ) : (
+              <Users className="h-4 w-4 text-purple-300" />
+            )}
+          </span>
+          <div className="flex flex-col text-left min-w-0">
+            <span className="truncate text-[11px] sm:text-xs font-black uppercase tracking-wider text-slate-100">
+              Público
+            </span>
+            <span className="text-[9px] text-purple-300/80 font-medium leading-none hidden sm:block">
+              Votação
+            </span>
+          </div>
         </span>
+
+        {/* Badge de Stock Púrpura Imperial */}
         <span
           className={cn(
-            'px-1.5 py-0.5 rounded text-[10px] font-black shrink-0 font-mono leading-none',
+            'px-1.5 py-0.5 rounded-lg text-[10px] font-black shrink-0 font-mono leading-none border',
             usedPublicVote
-              ? 'bg-purple-500/20 text-purple-300'
+              ? 'bg-purple-500/20 text-purple-300 border-purple-500/30'
               : countPublicVote > 0
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                : 'bg-slate-800/80 text-slate-500 border border-slate-700/50',
+                ? 'bg-purple-500/20 text-purple-300 border-purple-500/40 shadow-[0_0_8px_rgba(168,85,247,0.25)]'
+                : 'bg-black/40 text-slate-600 border-white/5'
           )}
         >
           {usedPublicVote ? 'OK' : `x${countPublicVote}`}

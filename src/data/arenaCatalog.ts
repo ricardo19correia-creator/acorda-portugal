@@ -204,20 +204,26 @@ export function resolveArenaForGame(params: {
   arenaId?: string | null
   categorySlug?: string | null
   equippedArenaId?: string | null
-}): { arena: CanonicalArena; error?: string } {
+}): {
+  arena: CanonicalArena
+  isExplicit: boolean
+  isFallback: boolean
+  warning?: string
+  error?: string
+} {
   const { arenaId, equippedArenaId } = params
 
   if (arenaId) {
     const resolved = resolveArena(arenaId)
-    if (resolved) return { arena: resolved }
+    if (resolved) return { arena: resolved, isExplicit: true, isFallback: false }
   }
 
   if (equippedArenaId) {
     const resolved = resolveArena(equippedArenaId)
-    if (resolved) return { arena: resolved }
+    if (resolved) return { arena: resolved, isExplicit: false, isFallback: false }
   }
 
-  return { arena: CANONICAL_ARENAS[0] }
+  return { arena: CANONICAL_ARENAS[0], isExplicit: false, isFallback: true }
 }
 
 export default CANONICAL_ARENAS

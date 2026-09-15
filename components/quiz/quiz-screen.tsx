@@ -60,6 +60,7 @@ import { awardMatchReward, type MatchRewardOutcome } from '@/lib/xp-service'
 import { getCanonicalCategory, type MatchAnswerPayload } from '@/lib/category-registry'
 
 import {
+  AnswerOption,
   type AnswerState,
 } from '@/components/quiz/answer-option'
 import {
@@ -1067,81 +1068,115 @@ export function QuizScreen({
           {/* COLUNA ESQUERDA (LANDSCAPE): CABEÇALHO + PERGUNTA */}
           <div className="w-full flex flex-col gap-2 sm:gap-3 justify-center">
             {/* ========================================================= */}
-            {/* 1. CABEÇALHO SOLO COMPACTO                                */}
+            {/* 1. CABEÇALHO BROADCAST TOURNAMENT HUD                    */}
             {/* ========================================================= */}
             <div className="w-full shrink-0">
-              <div className="w-full flex items-center justify-between px-3 py-1.5 sm:py-2 bg-slate-900/80 border border-slate-800 rounded-xl shadow-md">
-                {/* Lado Esquerdo: Sair + Avatar + Jogador */}
-                <div className="flex items-center gap-2 min-w-0">
+              <div className="national-show-hud w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl sm:rounded-3xl shadow-2xl">
+                {/* Lado Esquerdo: Sair + Avatar com Aro de Luz + Jogador e Nível */}
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                   <GameExitControl mode="solo" onConfirmExit={handleAbandonSolo} />
-                  <div className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
-                    <PlayerAvatar
-                      profile={profile ?? undefined}
-                      displayName={effectiveDisplayName}
-                      isCurrentUser={true}
-                      size="sm"
-                    />
+                  
+                  {/* Avatar Circular com Aro Dourado & Ciano */}
+                  <div className="relative shrink-0 flex items-center justify-center">
+                    <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-amber-400 via-cyan-400 to-emerald-400 opacity-75 blur-[2px] animate-pulse" />
+                    <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full p-0.5 bg-slate-950 border border-white/20 flex items-center justify-center shadow-md">
+                      <PlayerAvatar
+                        profile={profile ?? undefined}
+                        displayName={effectiveDisplayName}
+                        isCurrentUser={true}
+                        size="sm"
+                      />
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <span className="font-display text-xs font-bold text-white truncate block leading-none">
+
+                  <div className="min-w-0 flex flex-col">
+                    <span className="font-display text-xs sm:text-sm font-black text-white tracking-wide truncate block leading-tight">
                       {effectiveDisplayName}
                     </span>
-                    <span className="text-[10px] text-muted-foreground leading-none mt-0.5 block font-medium">
-                      {profile?.level ? `Nível ${profile.level}` : 'Nível 1'}
+                    <div className="flex items-center gap-1 mt-0.5">
+                      <span className="px-1.5 py-0.2 rounded-md bg-amber-500/20 border border-amber-400/40 text-[9px] sm:text-[10px] font-black uppercase text-amber-300 tracking-wider">
+                        {profile?.level ? `Nível ${profile.level}` : 'Nível 1'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Centro: Marcador de Ronda Estilizado (Scorebug) */}
+                <div className="flex flex-col items-center justify-center px-1.5 sm:px-2 shrink-0">
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-slate-950/80 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.2)]">
+                    <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-400">
+                      Ronda
+                    </span>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-300">
+                      {step + 1}
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] text-slate-500 font-bold">
+                      /{total}
                     </span>
                   </div>
                 </div>
 
-                {/* Centro: Progresso da Ronda */}
-                <div className="flex items-center px-1.5 shrink-0">
-                  <span className="badge-hud text-gold border-gold/50 bg-gold/20 py-0.5 px-2 text-[10px] font-black rounded-lg">
-                    Q{step + 1}/{total}
-                  </span>
-                </div>
-
-                {/* Lado Direito: Pontuação Atual + Tempo */}
-                <div className="flex flex-col items-end shrink-0">
-                  <div className="flex items-center gap-1 font-display text-xs font-bold text-cyan-400">
-                    <Sparkles className="h-3 w-3 text-gold" />
-                    <span>{score} pts</span>
+                {/* Lado Direito: Pontuação Atual + Temporizador Broadcast */}
+                <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                  {/* Pontos */}
+                  <div className="flex flex-col items-end">
+                    <div className="flex items-center gap-1 font-display text-xs sm:text-sm font-black text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
+                      <span>{score}</span>
+                      <span className="text-[9px] font-mono font-extrabold text-amber-400/80">PTS</span>
+                    </div>
                   </div>
-                  <span
+
+                  {/* Relógio Digital de Precisão */}
+                  <div
                     className={cn(
-                      'font-mono text-[10px] font-bold mt-0.5 leading-none',
+                      'flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-xl border transition-all duration-300 font-mono text-xs font-black shadow-inner',
                       isFrozen
-                        ? 'text-cyan-300 animate-pulse font-extrabold'
+                        ? 'border-cyan-300 bg-cyan-950/80 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.5)] animate-pulse'
                         : seconds <= WARNING_TIME_THRESHOLD
-                          ? 'text-flag-red animate-pulse'
-                          : 'text-slate-400'
+                          ? 'border-rose-500/80 bg-rose-950/80 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.6)] animate-pulse'
+                          : seconds <= 15
+                            ? 'border-amber-500/60 bg-amber-950/60 text-amber-300'
+                            : 'border-cyan-500/40 bg-slate-950/80 text-cyan-300'
                     )}
                   >
-                    {isFrozen ? `${seconds}s (❄️ ${freezeTimeLeft}s)` : `${seconds}s`}
-                  </span>
+                    {isFrozen ? (
+                      <>
+                        <Snowflake className="h-3 w-3 text-cyan-300 animate-spin" />
+                        <span>{seconds}s</span>
+                      </>
+                    ) : (
+                      <>
+                        <Clock className={cn('h-3 w-3', seconds <= WARNING_TIME_THRESHOLD ? 'text-rose-400 animate-pulse' : 'text-cyan-400')} />
+                        <span>{seconds}s</span>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Barra de Tempo Compacta */}
-              <div className="flex items-center gap-1 mt-1.5 w-full px-0.5">
+              {/* Barra de Tempo Contínua com Gradiente e Iluminação */}
+              <div className="mt-1.5 w-full px-0.5">
                 <div
                   className={cn(
-                    'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
+                    'h-1.5 sm:h-2 w-full rounded-full bg-slate-950/80 overflow-hidden border transition-colors duration-300 p-0.5',
                     isFrozen
-                      ? 'border-cyan-400/60'
+                      ? 'border-cyan-400/60 shadow-[0_0_10px_rgba(6,182,212,0.4)]'
                       : seconds <= WARNING_TIME_THRESHOLD
-                        ? 'border-flag-red/60'
-                        : 'border-slate-700/40'
+                        ? 'border-rose-500/60 shadow-[0_0_10px_rgba(239,68,68,0.5)]'
+                        : 'border-cyan-500/25'
                   )}
                 >
                   <div
                     className={cn(
-                      'h-full rounded-full transition-all duration-1000 ease-linear shadow-sm',
+                      'h-full rounded-full transition-all duration-1000 ease-linear',
                       isFrozen
-                        ? 'bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] animate-pulse'
+                        ? 'bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse'
                         : seconds > 15
-                          ? 'bg-primary shadow-[0_0_10px_rgba(0,255,162,0.4)]'
+                          ? 'bg-gradient-to-r from-emerald-500 via-cyan-400 to-amber-400 shadow-[0_0_10px_rgba(16,185,129,0.5)]'
                           : seconds > WARNING_TIME_THRESHOLD
-                            ? 'bg-gold shadow-[0_0_10px_rgba(255,200,0,0.4)]'
-                            : 'bg-flag-red shadow-[0_0_15px_rgba(244,63,94,0.8)] animate-pulse'
+                            ? 'bg-gradient-to-r from-amber-500 to-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.6)]'
+                            : 'bg-gradient-to-r from-rose-600 to-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.9)] animate-pulse'
                     )}
                     style={{ width: `${Math.min(100, (seconds / MAX_SECONDS) * 100)}%` }}
                   />
@@ -1150,67 +1185,88 @@ export function QuizScreen({
             </div>
 
             {/* ========================================================= */}
-            {/* 2. ZONA CENTRAL: CARD DA PERGUNTA                         */}
+            {/* 2. ZONA CENTRAL: PAINEL DA PERGUNTA "NATIONAL SHOW"       */}
             {/* ========================================================= */}
             <div className="py-1 w-full flex flex-col items-center justify-center relative">
-              {/* Feedback visual rápido e discreto */}
+              {/* Feedback Visual Rápido com Impacto (CORRETO / ERRADO / TEMPO) */}
               {phase === 'revealed' && (
                 <div
                   className={cn(
-                    'mb-2 px-3.5 py-1 rounded-full font-display text-xs font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-1.5 shrink-0 max-w-full text-center shadow-md animate-pop select-none',
+                    'mb-2 px-4 py-1.5 rounded-2xl font-display text-xs sm:text-sm font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-2 shrink-0 max-w-full text-center shadow-xl animate-pop select-none border',
                     selected === q.correct
-                      ? 'bg-emerald-500 text-slate-950 border border-emerald-400 shadow-emerald-500/30'
+                      ? 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-slate-950 border-emerald-300 shadow-emerald-500/50'
                       : selected === null
-                        ? 'bg-amber-500 text-slate-950 border border-amber-400 shadow-amber-500/30'
-                        : 'bg-rose-500 text-white border border-rose-400 shadow-rose-500/30'
+                        ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 border-amber-300 shadow-amber-500/50'
+                        : 'bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-300 shadow-rose-500/50'
                   )}
                 >
                   {selected === q.correct ? (
                     <>
-                      <CheckCircle2 className="h-3.5 w-3.5 stroke-[3] shrink-0" />
-                      <span>CORRETO</span>
-                      <span className="font-mono text-[11px] font-extrabold opacity-95">+{q.points} XP</span>
+                      <CheckCircle2 className="h-4 w-4 stroke-[3.5] shrink-0" />
+                      <span>RESPOSTA CORRETA</span>
+                      <span className="font-mono text-xs font-black bg-black/20 px-2 py-0.5 rounded-lg">+{q.points} XP</span>
                     </>
                   ) : selected === null ? (
                     <>
-                      <Clock className="h-3.5 w-3.5 shrink-0" />
+                      <Clock className="h-4 w-4 shrink-0" />
                       <span>TEMPO ESGOTADO</span>
                     </>
                   ) : (
                     <>
-                      <XCircle className="h-3.5 w-3.5 stroke-[3] shrink-0" />
-                      <span>ERRADO</span>
+                      <XCircle className="h-4 w-4 stroke-[3.5] shrink-0" />
+                      <span>RESPOSTA ERRADA</span>
                     </>
                   )}
                 </div>
               )}
 
-              {/* Card da Pergunta */}
-              <div className="w-full min-h-[85px] sm:min-h-[100px] h-auto p-3 sm:p-6 md:p-8 landscape:p-3.5 flex flex-col justify-center items-center text-center bg-slate-900/90 border border-slate-800 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl relative">
-                <h1 className="text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-extrabold text-center leading-relaxed text-white break-words hyphens-auto w-full">
+              {/* O Painel Flutuante da Pergunta */}
+              <div className="national-show-panel w-full min-h-[90px] sm:min-h-[110px] h-auto p-4 sm:p-6 md:p-7 landscape:p-4 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl relative">
+                {/* Cantoneiras Heráldicas Douradas (Inspiração Náutica e Manuelina) */}
+                <span className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-amber-400/80 rounded-tl-sm" />
+                <span className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-amber-400/80 rounded-tr-sm" />
+                <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-amber-400/80 rounded-bl-sm" />
+                <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-amber-400/80 rounded-br-sm" />
+
+                {/* Placa Heráldica Superior com Nível e Categoria */}
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-0.5 rounded-full bg-slate-950 border border-amber-400/70 shadow-[0_0_15px_rgba(245,158,11,0.35)] flex items-center gap-1.5 z-10">
+                  <span className="text-[10px] text-amber-300">🛡️</span>
+                  <span className="font-display text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
+                    NÍVEL {diffLevel}
+                  </span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-wider">
+                    {category?.name || 'DESAFIO NACIONAL'}
+                  </span>
+                </div>
+
+                {/* Texto da Pergunta — Grande, Nítido e com Autoridade Visual */}
+                <h1 className="mt-1 text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                   {q.question || q.pergunta}
                 </h1>
 
-                {/* Explicação contextual */}
+                {/* Explicação Contextual quando Revelada */}
                 {phase === 'revealed' && (q.explanation || q.explicacao) && (
-                  <p className="mt-2 text-xs sm:text-sm text-slate-300 border-t border-white/10 pt-2 break-words leading-relaxed w-full">
-                    {q.explanation || q.explicacao}
-                  </p>
+                  <div className="mt-3 w-full p-2.5 sm:p-3 rounded-xl bg-slate-950/70 border border-cyan-500/30 text-left animate-fadeIn">
+                    <div className="flex items-center gap-1.5 text-cyan-300 text-[10px] font-black uppercase tracking-wider mb-1">
+                      <Lightbulb className="h-3 w-3 text-amber-400" />
+                      <span>Sabias que?</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words">
+                      {q.explanation || q.explicacao}
+                    </p>
+                  </div>
                 )}
 
-                {/* HUD Diagnóstico de Runtime */}
-                <div className="mt-2.5 w-full flex flex-wrap items-center justify-center gap-1.5 px-2 py-0.5 sm:py-1 rounded-xl border border-white/10 bg-black/40 text-[9px] sm:text-[10px] font-mono text-slate-400 select-all">
-                  <span className="text-emerald-400 font-bold">ID: {q.id}</span>
-                  <span className="text-white/20">•</span>
-                  <span>Cat: <strong className="text-cyan-300">{q.category}</strong></span>
+                {/* Broadcast Lower-Third Ticker (Metadados e Denúncia de Pergunta) */}
+                <div className="mt-3 w-full flex flex-wrap items-center justify-center gap-1.5 px-3 py-1 rounded-xl border border-white/10 bg-slate-950/60 text-[9px] sm:text-[10px] font-mono text-slate-400 select-none">
+                  <span className="text-cyan-400 font-bold">ID #{q.id}</span>
                   {q.subcategory && (
                     <>
                       <span className="text-white/20">•</span>
-                      <span>Sub: <strong className="text-amber-300">{q.subcategory}</strong></span>
+                      <span className="text-slate-300 truncate max-w-[150px]">{q.subcategory}</span>
                     </>
                   )}
-                  <span className="text-white/20">•</span>
-                  <span>NVL: <strong className="text-purple-300">{diffLevel}</strong></span>
                   <span className="text-white/20">•</span>
                   <button
                     type="button"
@@ -1226,9 +1282,9 @@ export function QuizScreen({
 
               {/* Banner de tempo congelado */}
               {isFrozen && (
-                <div className="mt-1.5 rounded-xl border border-blue-400/60 bg-blue-500/20 px-3 py-1 text-xs text-blue-100 flex items-center justify-center gap-1.5 backdrop-blur-xl animate-pulse shadow-sm shrink-0 w-full">
-                  <Snowflake className="h-3.5 w-3.5 text-blue-300 animate-spin" />
-                  <span className="font-bold">Tempo Congelado ({freezeTimeLeft}s)</span>
+                <div className="mt-2 rounded-xl border border-cyan-400/80 bg-cyan-950/80 px-4 py-1.5 text-xs text-cyan-200 flex items-center justify-center gap-2 backdrop-blur-xl animate-pulse shadow-[0_0_15px_rgba(6,182,212,0.4)] shrink-0 w-full">
+                  <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
+                  <span className="font-black tracking-wider uppercase">Tempo Congelado ({freezeTimeLeft}s)</span>
                 </div>
               )}
             </div>
@@ -1251,10 +1307,10 @@ export function QuizScreen({
                 <button
                   type="button"
                   onClick={next}
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-emerald-400 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-xl shadow-primary/25 hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-400 via-primary to-emerald-500 px-7 py-3 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:brightness-110 cursor-pointer active:scale-95 transition-all"
                 >
                   <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 stroke-[3]" />
                 </button>
               </div>
             ) : (
@@ -1276,77 +1332,25 @@ export function QuizScreen({
               </div>
             )}
 
-            {/* Grelha de Respostas Adaptativa (1 coluna mobile portrait, 2 colunas landscape/tablet) */}
+            {/* Grelha de Portas de Competição (1 coluna mobile portrait, 2 colunas landscape/tablet) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 gap-2 sm:gap-2.5 w-full">
               {q.options.map((option, idx) => {
                 const isEliminated = eliminatedOptions.includes(option.key)
                 const state = stateFor(option.key)
                 const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
 
-                if (isEliminated) {
-                  return (
-                    <div
-                      key={option.key}
-                      className="min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 bg-slate-950/80 border border-slate-800/80 rounded-xl flex items-center gap-2 sm:gap-3 text-left opacity-35 select-none cursor-not-allowed shadow-inner"
-                    >
-                      <span className="w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg bg-slate-900 border border-slate-800 text-slate-500 font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 line-through">
-                        {optionKey}
-                      </span>
-                      <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-slate-500 leading-snug line-through break-words hyphens-auto flex-1 min-w-0">
-                        {option.text}
-                      </span>
-                    </div>
-                  )
-                }
-
-                let buttonStyles =
-                  'bg-slate-900/90 border border-slate-700/80 active:border-cyan-400 hover:border-slate-500 shadow-lg'
-
-                if (phase === 'revealed') {
-                  if (state === 'correct') {
-                    buttonStyles =
-                      'bg-emerald-950/95 border-2 border-emerald-400 text-white ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/30'
-                  } else if (state === 'wrong') {
-                    buttonStyles =
-                      'bg-rose-950/95 border-2 border-rose-500 text-white ring-2 ring-rose-500/40 shadow-lg shadow-rose-500/30'
-                  } else {
-                    buttonStyles = 'bg-slate-900/80 border border-slate-800/80 opacity-35 text-slate-500'
-                  }
-                }
-
                 return (
-                  <button
+                  <AnswerOption
                     key={option.key}
+                    optionKey={optionKey}
+                    text={option.text}
+                    state={state}
                     disabled={phase !== 'answering'}
-                    onClick={() => reveal(option.key)}
-                    className={cn(
-                      'min-h-[3rem] sm:min-h-[3.75rem] landscape:min-h-[2.85rem] h-auto w-full p-2 sm:p-3 landscape:p-2 rounded-xl flex items-center gap-2 sm:gap-3 text-left transition-all select-none cursor-pointer active:scale-98 relative',
-                      buttonStyles
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        'w-7 h-7 sm:w-8 sm:h-8 landscape:w-6 landscape:h-6 rounded-lg font-extrabold text-xs sm:text-sm landscape:text-xs flex items-center justify-center shrink-0 border transition-colors',
-                        phase === 'revealed' && state === 'correct'
-                          ? 'bg-emerald-500 border-emerald-300 text-slate-950'
-                          : phase === 'revealed' && state === 'wrong'
-                            ? 'bg-rose-600 border-rose-400 text-white'
-                            : 'bg-cyan-950/80 text-cyan-400 border-cyan-500/30'
-                      )}
-                    >
-                      {optionKey}
-                    </span>
-                    <span className="text-xs sm:text-sm landscape:text-xs font-semibold text-white leading-snug break-words hyphens-auto flex-1 min-w-0">
-                      {option.text}
-                    </span>
-
-                    {publicVoteResults && publicVoteResults[idx] !== undefined && (
-                      <div className="ml-auto px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/60 text-purple-300 font-mono font-black text-xs shadow-sm flex items-center gap-1 shrink-0 animate-pop">
-                        <span className="text-[10px]">👥</span>
-                        <span>{publicVoteResults[idx]}%</span>
-                      </div>
-                    )}
-                  </button>
+                    eliminated={isEliminated}
+                    isSelected={selected === option.key}
+                    publicVotePercent={publicVoteResults?.[idx]}
+                    onSelect={() => reveal(option.key)}
+                  />
                 )
               })}
             </div>

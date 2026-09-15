@@ -11,6 +11,7 @@ import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { safeRandomUUID } from '@/lib/utils'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
+import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -210,6 +211,7 @@ function JogarContainer() {
   // Limpeza de resíduos de sessão se estiver na Central de Jogo (evita retoma acidental)
   useEffect(() => {
     if (!isMatch) {
+      setGlobalArenaMatchActive(false)
       try {
         if (typeof window !== 'undefined') {
           localStorage.removeItem('active_game_session')

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, Gamepad2, Trophy, ShoppingBag, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { isMatchActiveFromRoute } from '@/lib/game-active-state'
 
 export function MobileBottomBar() {
   const pathname = usePathname()
@@ -15,36 +16,38 @@ export function MobileBottomBar() {
   useEffect(() => {
     const checkArena = () => {
       try {
-        if (typeof window !== 'undefined') {
-          const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
-          const isJogo = window.location.pathname.startsWith('/jogo')
-          const isArenaRoute = window.location.pathname.startsWith('/arenas')
-          const search = window.location.search.toLowerCase()
-          const hasQuizParams =
-            search.includes('cat=') ||
-            search.includes('category=') ||
-            search.includes('game=') ||
-            search.includes('theme=') ||
-            search.includes('district=') ||
-            search.includes('city=') ||
-            search.includes('distrito=') ||
-            search.includes('cidade=')
-          const isDueloActive = window.location.pathname.startsWith('/jogar/duelo') && search.includes('id=')
+        if (typeof window === 'undefined') return
+        const currentPath = window.location.pathname
+        const currentSearch = window.location.search
 
-          setIsInArena(Boolean(isMatchClass || isJogo || isArenaRoute || (window.location.pathname === '/jogar' && hasQuizParams) || isDueloActive))
+        // Se estamos na Home ('/'), a barra de navegação DEVE estar sempre visível
+        if (currentPath === '/' || pathname === '/') {
+          document.documentElement.classList.remove('ap-arena-match')
+          setIsInArena(false)
+          return
         }
+
+        const isMatch = isMatchActiveFromRoute(currentPath, currentSearch)
+        const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
+        setIsInArena(Boolean(isMatch || (isMatchClass && currentPath.startsWith('/jogar'))))
       } catch {
         setIsInArena(false)
       }
     }
 
     checkArena()
-    const interval = setInterval(checkArena, 500)
+    const interval = setInterval(checkArena, 200)
     window.addEventListener('popstate', checkArena)
+    window.addEventListener('hashchange', checkArena)
+    window.addEventListener('ap_route_change', checkArena)
+    window.addEventListener('ap_match_state_change', checkArena)
 
     return () => {
       clearInterval(interval)
       window.removeEventListener('popstate', checkArena)
+      window.removeEventListener('hashchange', checkArena)
+      window.removeEventListener('ap_route_change', checkArena)
+      window.removeEventListener('ap_match_state_change', checkArena)
     }
   }, [pathname])
 

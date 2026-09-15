@@ -8,6 +8,7 @@ import { AudioProvider } from '@/context/AudioContext'
 import DeepLinkHandler from '@/components/DeepLinkHandler'
 import { GlobalBackgroundImage } from '@/components/GlobalBackgroundImage'
 import { MobileBottomBar } from '@/components/navigation/MobileBottomBar'
+import { ArenaLayoutSync } from '@/components/navigation/ArenaLayoutSync'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -136,6 +137,8 @@ export default function RootLayout({
     var isDuelo = p === '/jogar/duelo' && s.indexOf('id=') !== -1;
     if ((isJogar && hasMatchParam) || isDuelo) {
       document.documentElement.classList.add('ap-arena-match');
+    } else {
+      document.documentElement.classList.remove('ap-arena-match');
     }
   } catch(e) {}
 })();
@@ -166,6 +169,7 @@ html.ap-arena-match #mobile-bottom-dock {
         <AuthProvider>
           <EconomyProvider>
             <DeepLinkHandler />
+            <ArenaLayoutSync />
             <GameThemeProvider>
               <AudioProvider>
                 <div className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">

@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallModal } from '@/components/auth-wall-modal'
 import { logGameFlow } from '@/lib/game-session'
+import { resetGlobalArenaState } from '@/lib/game-active-state'
 
 // Módulos Oficiais do Menu Principal Vivo do Acorda Portugal
 import { HomeHero } from '@/components/home/HomeHero'
@@ -19,6 +20,11 @@ export default function HomePage() {
   const { user, profile } = useAuth()
   const [authWallOpen, setAuthWallOpen] = useState(false)
   const [authWallTarget, setAuthWallTarget] = useState('/jogar')
+
+  // Garantir que a Home nunca retém resíduos visuais de uma partida anterior
+  useEffect(() => {
+    resetGlobalArenaState()
+  }, [])
 
   const handleStartGame = (gameRoute: string) => {
     logGameFlow('JOGAR_CLICK', {

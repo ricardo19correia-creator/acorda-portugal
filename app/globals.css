@@ -427,6 +427,160 @@
     animation: sheen-sweep 4.5s ease-in-out infinite;
     pointer-events: none;
   }
+
+  /* ========================================================= */
+  /* 🇵🇹 ACORDA PORTUGAL — NATIONAL SHOW UI DESIGN SYSTEM      */
+  /* ========================================================= */
+
+  /* 1. HUD Superior Broadcast Tournament */
+  .national-show-hud {
+    position: relative;
+    background: linear-gradient(180deg, rgba(6, 14, 32, 0.82) 0%, rgba(3, 8, 20, 0.9) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.65),
+      0 0 20px rgba(6, 182, 212, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  /* 2. Painel Central da Pergunta (Floating Stage Glass) */
+  .national-show-panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(8, 20, 48, 0.78) 0%, rgba(4, 10, 26, 0.88) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-top: 1.5px solid rgba(251, 191, 36, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 18px 45px -8px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba(14, 165, 233, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* 3. Portas de Competição (Respostas A / B / C / D) */
+  .national-show-door {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(9, 22, 48, 0.82) 0%, rgba(4, 10, 24, 0.9) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .national-show-door:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.7);
+    background: linear-gradient(135deg, rgba(14, 34, 72, 0.88) 0%, rgba(6, 16, 38, 0.94) 100%);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.7),
+      0 0 25px rgba(56, 189, 248, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .national-show-door:active:not(:disabled) {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  /* Estados Especiais da Porta de Competição */
+  .national-show-door-selected {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+    border: 2px solid #f59e0b !important;
+    box-shadow:
+      0 0 28px rgba(245, 158, 11, 0.5),
+      0 8px 24px rgba(0, 0, 0, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  }
+
+  .national-show-door-correct {
+    background: linear-gradient(135deg, rgba(6, 78, 59, 0.92) 0%, rgba(2, 44, 34, 0.98) 100%) !important;
+    border: 2px solid #10b981 !important;
+    box-shadow:
+      0 0 35px rgba(16, 185, 129, 0.65),
+      0 10px 32px rgba(0, 0, 0, 0.85),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+    animation: correct-pulse 1.8s ease-in-out infinite;
+  }
+
+  .national-show-door-wrong {
+    background: linear-gradient(135deg, rgba(127, 29, 29, 0.92) 0%, rgba(69, 10, 10, 0.98) 100%) !important;
+    border: 2px solid #ef4444 !important;
+    box-shadow:
+      0 0 32px rgba(239, 68, 68, 0.65),
+      0 10px 32px rgba(0, 0, 0, 0.85),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  }
+
+  .national-show-door-muted {
+    opacity: 0.35 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(8, 14, 28, 0.75) !important;
+    box-shadow: none !important;
+  }
+
+  .national-show-door-eliminated {
+    opacity: 0.22 !important;
+    pointer-events: none !important;
+    border: 1px dashed rgba(255, 255, 255, 0.12) !important;
+    background: rgba(4, 7, 15, 0.6) !important;
+    filter: grayscale(0.85);
+  }
+
+  /* 4. Medalhões Hexagonais das Letras (A, B, C, D) */
+  .door-medallion {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    transition: all 0.2s ease;
+    border: 1.5px solid rgba(56, 189, 248, 0.45);
+    background: linear-gradient(180deg, rgba(14, 38, 77, 0.9) 0%, rgba(7, 18, 38, 0.95) 100%);
+    box-shadow:
+      0 0 12px rgba(56, 189, 248, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* 5. Artefactos de Poder (Lifelines Power-Ups) */
+  .artifact-pedestal {
+    position: relative;
+    background: linear-gradient(180deg, rgba(10, 24, 52, 0.8) 0%, rgba(4, 10, 24, 0.92) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .artifact-pedestal:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.65);
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.65),
+      0 0 20px rgba(56, 189, 248, 0.3);
+  }
+}
+
+@keyframes correct-pulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 10px 32px rgba(0, 0, 0, 0.85);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(16, 185, 129, 0.85), 0 10px 32px rgba(0, 0, 0, 0.85);
+  }
 }
 
 @keyframes glow-pulse {

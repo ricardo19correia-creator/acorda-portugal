@@ -1712,7 +1712,7 @@ function LojaContent() {
               </span>
               {ARENA_CATEGORIES_LIST.map((cat) => {
                 const isSelected = arenaCategoryFilter === cat.key
-                const isExcl = cat.key === 'exclusivas'
+                const isExcl = cat.key === 'escalao_5'
                 return (
                   <button
                     key={cat.key}

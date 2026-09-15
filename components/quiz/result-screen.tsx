@@ -16,6 +16,7 @@ import {
   RefreshCw,
   Target,
   Zap,
+  Home,
 } from 'lucide-react'
 import { LevelUpModal } from '@/components/game/LevelUpModal'
 import { cn } from '@/lib/utils'
@@ -390,6 +391,27 @@ export function ResultScreen({
               <ArrowLeft className="h-4 w-4 text-primary" />
               <span>Central de Jogo</span>
             </Link>
+          </div>
+
+          <div className="pt-1 text-center">
+            {onExit ? (
+              <button
+                type="button"
+                onClick={onExit}
+                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors cursor-pointer py-1"
+              >
+                <Home className="h-3.5 w-3.5" />
+                <span>Voltar ao Menu Principal</span>
+              </button>
+            ) : (
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors py-1"
+              >
+                <Home className="h-3.5 w-3.5" />
+                <span>Voltar ao Menu Principal</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

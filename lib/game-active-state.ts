@@ -38,17 +38,33 @@ if (typeof window !== 'undefined' && !(window as any).__AP_HISTORY_PATCHED) {
  * o início ou fim de uma partida ativa.
  */
 export function setGlobalArenaMatchActive(active: boolean) {
-  if (imperativeMatchActive !== active) {
-    imperativeMatchActive = active
-    listeners.forEach((listener) => listener())
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('ap_match_state_change', { detail: { active } }))
-      if (active) {
-        document.documentElement.classList.add('ap-arena-match')
-      } else if (!isMatchActiveFromRoute(window.location.pathname, window.location.search)) {
-        document.documentElement.classList.remove('ap-arena-match')
-      }
+  const changed = imperativeMatchActive !== active
+  imperativeMatchActive = active
+
+  if (typeof window !== 'undefined') {
+    if (active) {
+      document.documentElement.classList.add('ap-arena-match')
+    } else {
+      document.documentElement.classList.remove('ap-arena-match')
     }
+
+    if (changed) {
+      listeners.forEach((listener) => listener())
+      window.dispatchEvent(new CustomEvent('ap_match_state_change', { detail: { active } }))
+    }
+  }
+}
+
+/**
+ * Força o reset imediato e total de qualquer estado de arena/partida.
+ * Utilizado para garantir restauração instantânea do layout oficial ao voltar à Home.
+ */
+export function resetGlobalArenaState() {
+  imperativeMatchActive = false
+  if (typeof window !== 'undefined') {
+    document.documentElement.classList.remove('ap-arena-match')
+    listeners.forEach((listener) => listener())
+    window.dispatchEvent(new CustomEvent('ap_match_state_change', { detail: { active: false } }))
   }
 }
 
@@ -80,6 +96,10 @@ export function isMatchActiveFromRoute(
   if (!pathname) return false
 
   const path = pathname.toLowerCase()
+
+  // A Home ('/') NUNCA é uma partida ativa de arena
+  if (path === '/' || path === '') return false
+
   const search = searchString || ''
 
   // 1. Rota /jogar ou /jogo
@@ -105,6 +125,7 @@ export function isMatchActiveFromRoute(
       searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
     const cityParam = searchParams.get('city') || searchParams.get('cidade')
     const gameParam = searchParams.get('game') || searchParams.get('gameId')
+    const playParam = searchParams.get('play') === 'true'
 
     const effectiveCategory =
       rawCategory ||
@@ -112,7 +133,7 @@ export function isMatchActiveFromRoute(
       (cityParam ? 'desafio-cidade' : null) ||
       (gameParam ? 'desafio-nacional' : null)
 
-    return Boolean(effectiveCategory || gameParam)
+    return Boolean(effectiveCategory || gameParam || playParam)
   }
 
   // 2. Rota /jogar/duelo
@@ -135,7 +156,8 @@ export function isMatchActiveFromRoute(
 export function useIsActiveArenaGame(): boolean {
   const [isActive, setIsActive] = useState(() => {
     if (typeof window === 'undefined') return false
-    const active = getImperativeMatchActive() || isMatchActiveFromRoute(window.location.pathname, window.location.search)
+    const isRoute = isMatchActiveFromRoute(window.location.pathname, window.location.search)
+    const active = isRoute && getImperativeMatchActive()
     if (active) {
       document.documentElement.classList.add('ap-arena-match')
     } else {
@@ -148,21 +170,24 @@ export function useIsActiveArenaGame(): boolean {
     if (typeof window === 'undefined') return
 
     const evaluate = () => {
-      const isImperative = getImperativeMatchActive()
       const isRoute = isMatchActiveFromRoute(window.location.pathname, window.location.search)
-      const active = isImperative || isRoute
+      const isImperative = getImperativeMatchActive()
+      const active = isRoute && isImperative
 
       if (active) {
         document.documentElement.classList.add('ap-arena-match')
       } else {
         document.documentElement.classList.remove('ap-arena-match')
+        if (!isRoute && isImperative) {
+          imperativeMatchActive = false
+        }
       }
 
       setIsActive(active)
     }
 
     evaluate()
-    const interval = setInterval(evaluate, 100)
+    const interval = setInterval(evaluate, 150)
     window.addEventListener('popstate', evaluate)
     window.addEventListener('hashchange', evaluate)
     window.addEventListener('ap_route_change', evaluate)
