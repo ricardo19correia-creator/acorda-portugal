@@ -623,6 +623,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               console.warn('[AUTH] Aviso ao criar documento inicial:', createErr)
             )
 
+            const publicProfileRef = doc(db, 'publicProfiles', currentUser.uid)
+            setDoc(
+              publicProfileRef,
+              {
+                uid: currentUser.uid,
+                displayName: fallbackName,
+                photoURL: fallbackAvatar,
+                avatar: fallbackAvatar,
+                avatarId: fallbackAvatarId,
+                equippedAvatar: fallbackAvatarId,
+                'equipped.avatar': fallbackAvatar,
+                'equipped.avatarId': fallbackAvatarId,
+                level: 1,
+                xp: 0,
+                title: DEFAULT_STARTER_TITLE_NAME,
+                equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+                equippedTitleId: DEFAULT_STARTER_TITLE_ID,
+                equippedFrame: 'default',
+                updatedAt: serverTimestamp(),
+              },
+              { merge: true }
+            ).catch((pubErr) => console.warn('[AUTH] Aviso ao criar publicProfile inicial:', pubErr))
+
             setProfile({
               uid: currentUser.uid,
               displayName: fallbackName,

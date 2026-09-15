@@ -63,6 +63,12 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             representedDistrict: selectedDistrict,
             updatedAt: serverTimestamp(),
             ...(existingData.displayName || existingData.name ? {} : { displayName: cleanName }),
+            photoURL: existingData.photoURL || existingData.avatar || chosenAvatarUrl,
+            avatar: existingData.avatar || chosenAvatarUrl,
+            avatarId: existingData.avatarId || chosenAvatarId,
+            equippedAvatar: existingData.equippedAvatar || chosenAvatarId,
+            'equipped.avatar': existingData.photoURL || existingData.avatar || chosenAvatarUrl,
+            'equipped.avatarId': existingData.avatarId || chosenAvatarId,
           },
           { merge: true }
         )

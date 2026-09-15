@@ -12,6 +12,7 @@
 import { getAdminFirestore } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 import { AID_MAX_OWNED_LIMIT, AID_SHOP_ITEMS } from '@/lib/shop-catalog'
+import { STARTER_AVATAR_ID } from '@/lib/avatars'
 
 export interface MigrationResult {
   migrated: boolean
@@ -43,8 +44,8 @@ export async function migrateUserInventory(userId: string): Promise<MigrationRes
   const addedItems: string[] = []
   const consolidatedAids: Record<string, number> = {}
 
-  // 1. Garantir Itens Iniciais Gratuitos
-  const defaultAvatars = ['avatar_01', 'avatar_02', 'avatar_03', 'avatar_04']
+  // 1. Garantir Item Inicial Gratuito Canónico Único
+  const defaultAvatars = [STARTER_AVATAR_ID]
   const existingAvatars: string[] = Array.isArray(inventory.avatars) ? inventory.avatars : []
   const missingAvatars = defaultAvatars.filter((av) => !existingAvatars.includes(av))
   if (missingAvatars.length > 0) {

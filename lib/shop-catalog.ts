@@ -278,11 +278,12 @@ export const LEGACY_AID_ITEMS: ShopCatalogItem[] = [
 // 2. AVATARES OFICIAIS (36 ITENS)
 // ============================================================================
 export const AVATAR_SHOP_ITEMS: ShopCatalogItem[] = [
-  // 1-4: Iniciais Gratuitos
+  // 1: Inicial Gratuito
   { id: 'avatar_01', type: 'avatar', name: 'O Estratega', description: 'Mente tática, calculista e frio sob pressão.', rarity: 'common', currency: 'free', priceCoins: 0, unlockType: 'free', asset: '/images/avatars/avatar_01.png', active: true, category: 'Cidadania', icon: '🧠' },
-  { id: 'avatar_02', type: 'avatar', name: 'A Líder', description: 'Presença imponente, determinação e espírito de liderança.', rarity: 'common', currency: 'free', priceCoins: 0, unlockType: 'free', asset: '/images/avatars/avatar_02.png', active: true, category: 'Cidadania', icon: '👑' },
-  { id: 'avatar_03', type: 'avatar', name: 'O Explorador', description: 'Curiosidade insaciável e audácia nas grandes rotas.', rarity: 'common', currency: 'free', priceCoins: 0, unlockType: 'free', asset: '/images/avatars/avatar_03.png', active: true, category: 'Cultura', icon: '🧭' },
-  { id: 'avatar_04', type: 'avatar', name: 'A Competidora', description: 'Foco absoluto, garra atlética e sede incansável de vitória.', rarity: 'common', currency: 'free', priceCoins: 0, unlockType: 'free', asset: '/images/avatars/avatar_04.png', active: true, category: 'Desporto', icon: '⚡' },
+  // 2-4: Comuns da Loja (500 moedas)
+  { id: 'avatar_02', type: 'avatar', name: 'A Líder', description: 'Presença imponente, determinação e espírito de liderança.', rarity: 'common', currency: 'coins', priceCoins: 500, unlockType: 'purchase', asset: '/images/avatars/avatar_02.png', active: true, category: 'Cidadania', icon: '👑' },
+  { id: 'avatar_03', type: 'avatar', name: 'O Explorador', description: 'Curiosidade insaciável e audácia nas grandes rotas.', rarity: 'common', currency: 'coins', priceCoins: 500, unlockType: 'purchase', asset: '/images/avatars/avatar_03.png', active: true, category: 'Cultura', icon: '🧭' },
+  { id: 'avatar_04', type: 'avatar', name: 'A Competidora', description: 'Foco absoluto, garra atlética e sede incansável de vitória.', rarity: 'common', currency: 'coins', priceCoins: 500, unlockType: 'purchase', asset: '/images/avatars/avatar_04.png', active: true, category: 'Desporto', icon: '⚡' },
   // 5-10 & 19: Raros (500–1.000 moedas)
   { id: 'avatar_05', type: 'avatar', name: 'O Mestre', description: 'Sabedoria profunda e serenidade nos momentos decisivos.', rarity: 'rare', currency: 'coins', priceCoins: 500, unlockType: 'purchase', asset: '/images/avatars/avatar_05.png', active: true, category: 'História', icon: '📜' },
   { id: 'avatar_06', type: 'avatar', name: 'A Gamer', description: 'Reflexos ultrarrápidos e mestria no ecossistema digital.', rarity: 'rare', currency: 'coins', priceCoins: 600, unlockType: 'purchase', asset: '/images/avatars/avatar_06.png', active: true, category: 'Cultura', icon: '🎮' },

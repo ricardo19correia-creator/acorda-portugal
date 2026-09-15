@@ -567,9 +567,13 @@ export function DuelArena({
   const handleTimeOut = async () => {
     if (isSubmitting || !currentPlayer.uid || !duel || !currentQuestion) return
     setIsSubmitting(true)
+    setSelectedOption(null)
 
     playSound('wrong')
 
+    // 7. REGRA ABSOLUTA QUANDO O TEMPO TERMINA:
+    // A resposta deve ser considerada ERRADA / NÃO RESPONDIDA.
+    // NÃO revelar a resposta correta. NÃO pintar a resposta correta de verde.
     setFeedback({
       status: 'TIMEOUT',
       message: 'TEMPO ESGOTADO',
@@ -585,47 +589,54 @@ export function DuelArena({
       setTimeout(() => {
         setIsSubmitting(false)
         setFeedback(null)
-      }, 1500)
+        setSelectedOption(null)
+      }, 1000)
     }
   }
 
-  // Answer selection handler
+  // Answer selection handler com lock-in televisivo
   const handleSelectOption = async (optionKey: 'A' | 'B' | 'C' | 'D') => {
     if (selectedOption !== null || isSubmitting || !currentPlayer.uid || !duel || !currentQuestion) return
+    // 4. QUANDO O JOGADOR SELECIONA UMA RESPOSTA:
+    // Destacar imediatamente a opção selecionada
     setSelectedOption(optionKey)
     setIsSubmitting(true)
 
-    const timeSpent = Math.max(1, Math.round((Date.now() - questionStartTime) / 1000))
-    const isCorrect = optionKey === currentQuestion.correct
+    // Suspense lock-in televisivo de 350ms antes de validar
+    setTimeout(async () => {
+      const timeSpent = Math.max(1, Math.round((Date.now() - questionStartTime) / 1000))
+      const isCorrect = optionKey === currentQuestion.correct
 
-    if (isCorrect) {
-      if (timeLeft <= WARNING_TIME_THRESHOLD) {
-        playSound('last_second_correct')
+      if (isCorrect) {
+        if (timeLeft <= WARNING_TIME_THRESHOLD) {
+          playSound('last_second_correct')
+        } else {
+          playSound('correct')
+        }
       } else {
-        playSound('correct')
+        playSound('wrong')
       }
-    } else {
-      playSound('wrong')
-    }
 
-    setFeedback({
-      status: isCorrect ? 'CORRECT' : 'WRONG',
-      message: isCorrect ? 'CORRETO' : 'ERRADO',
-      selectedKey: optionKey,
-      correctKey: currentQuestion.correct,
-    })
+      setFeedback({
+        status: isCorrect ? 'CORRECT' : 'WRONG',
+        message: isCorrect ? 'CORRETO' : 'ERRADO',
+        selectedKey: optionKey,
+        correctKey: currentQuestion.correct,
+      })
 
-    try {
-      await submitDuelAnswer(duel.id, currentPlayer.uid, currentQIndex, optionKey, timeSpent)
-    } catch (e) {
-      console.error('Erro ao submeter resposta:', e)
-    } finally {
-      const delayMs = isCorrect ? 1200 : 1800
-      setTimeout(() => {
-        setIsSubmitting(false)
-        setFeedback(null)
-      }, delayMs)
-    }
+      try {
+        await submitDuelAnswer(duel.id, currentPlayer.uid, currentQIndex, optionKey, timeSpent)
+      } catch (e) {
+        console.error('Erro ao submeter resposta:', e)
+      } finally {
+        const delayMs = isCorrect ? 1200 : 1600
+        setTimeout(() => {
+          setIsSubmitting(false)
+          setFeedback(null)
+          setSelectedOption(null)
+        }, delayMs)
+      }
+    }, 350)
   }
 
   // Rematch request handler (Player initiating)
@@ -1105,91 +1116,71 @@ export function DuelArena({
                 </div>
               </div>
 
-              {/* Barra de Tempo Compacta */}
-              <div className="flex items-center gap-1.5 mt-1.5 w-full px-0.5">
+              {/* Barra de Tempo TV Integrada */}
+              <div className="flex flex-col gap-1 mt-1.5 w-full px-0.5">
+                <div className="flex items-center justify-between text-xs font-mono font-black">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-400 font-bold">
+                    {isFrozen ? 'Tempo Congelado' : 'Temporizador'}
+                  </span>
+                  <div
+                    className={cn(
+                      'flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border transition-all duration-300 font-mono text-xs font-black shadow-sm',
+                      isFrozen
+                        ? 'border-cyan-400 bg-cyan-950/90 text-cyan-200 shadow-[0_0_12px_rgba(6,182,212,0.5)] animate-pulse'
+                        : isUrgent
+                          ? 'border-rose-500 bg-rose-950/90 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.7)] animate-pulse'
+                          : timeLeft <= 15
+                            ? 'border-amber-500/70 bg-amber-950/70 text-amber-300'
+                            : 'border-blue-500/40 bg-[#0c1b3d]/90 text-sky-300'
+                    )}
+                  >
+                    {isFrozen ? (
+                      <>
+                        <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
+                        <span>{timeLeft}s</span>
+                      </>
+                    ) : (
+                      <>
+                        <Clock className={cn('h-3.5 w-3.5', isUrgent ? 'text-rose-400 animate-pulse' : 'text-sky-400')} />
+                        <span>{timeLeft}s</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
                 <div
                   className={cn(
-                    'h-1.5 w-full rounded-full bg-slate-800 overflow-hidden border transition-colors duration-300 flex-1',
-                    isUrgent ? 'border-flag-red/60' : 'border-slate-700/40',
+                    'h-1.5 sm:h-2 w-full rounded-full bg-slate-950/80 overflow-hidden border transition-colors duration-300 p-0.5',
+                    isFrozen
+                      ? 'border-cyan-400/60 shadow-[0_0_10px_rgba(6,182,212,0.4)]'
+                      : isUrgent
+                        ? 'border-rose-500/60 shadow-[0_0_10px_rgba(239,68,68,0.5)]'
+                        : 'border-blue-500/30'
                   )}
                 >
                   <div
-                    className={cn('h-full rounded-full transition-all duration-1000 ease-linear shadow-sm', timeColor)}
+                    className={cn(
+                      'h-full rounded-full transition-all duration-1000 ease-linear',
+                      isFrozen
+                        ? 'bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse'
+                        : timeLeft > 15
+                          ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.4)]'
+                          : timeLeft > WARNING_TIME_THRESHOLD
+                            ? 'bg-gradient-to-r from-amber-500 to-yellow-400 shadow-[0_0_10px_rgba(245,158,11,0.5)]'
+                            : 'bg-gradient-to-r from-rose-600 to-red-500 shadow-[0_0_15px_rgba(244,63,94,0.9)] animate-pulse'
+                    )}
                     style={{ width: `${timePercentage}%` }}
                   />
                 </div>
-                <span className={cn('font-mono font-bold text-[10px] sm:text-xs shrink-0 leading-none', isUrgent ? 'text-flag-red animate-pulse' : 'text-slate-300')}>
-                  {timeLeft}s
-                </span>
               </div>
             </div>
 
             {/* ========================================================= */}
-            {/* 2. CENTRO: CARD DA PERGUNTA (MY-AUTO, H-AUTO)             */}
+            {/* 2. CENTRO: PAINEL DA PERGUNTA (O CENTRO DO DUELO)         */}
             {/* ========================================================= */}
-            <div className="py-1 w-full flex flex-col items-center justify-center relative">
-              {/* Banner de Identidade Visual da Arena & Significado */}
-              <div className="w-full mb-1.5 px-2.5 py-1 rounded-xl bg-slate-950/80 border border-white/15 backdrop-blur-md flex items-center justify-between gap-2 shadow-sm">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="text-xs sm:text-sm shrink-0">{currentArenaDef.icon}</span>
-                  <span className="text-[10px] sm:text-[11px] font-black text-white uppercase tracking-wider truncate">
-                    {currentArenaDef.name}
-                  </span>
-                </div>
-                {currentArenaDef.meaning && (
-                  <span className="text-[9px] sm:text-[10px] text-amber-300/90 font-medium italic truncate max-w-[200px] hidden sm:inline">
-                    “{currentArenaDef.meaning}”
-                  </span>
-                )}
-              </div>
-
-              {/* Feedback visual rápido e impactante */}
-              {feedback && (
-                <div
-                  className={cn(
-                    'mb-2 px-4 py-1.5 rounded-2xl font-display text-xs sm:text-sm font-black tracking-wider transition-all duration-200 z-20 flex items-center gap-2 shrink-0 max-w-full text-center shadow-xl animate-pop select-none border',
-                    feedback.status === 'CORRECT' && 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-slate-950 border-emerald-300 shadow-emerald-500/50',
-                    feedback.status === 'WRONG' && 'bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-300 shadow-rose-500/50',
-                    feedback.status === 'TIMEOUT' && 'bg-gradient-to-r from-amber-600 to-amber-500 text-slate-950 border-amber-300 shadow-amber-500/50',
-                  )}
-                >
-                  {feedback.status === 'CORRECT' && (
-                    <>
-                      <CheckCircle2 className="h-4 w-4 stroke-[3.5] shrink-0" />
-                      <span>RESPOSTA CORRETA</span>
-                      <span className="font-mono text-xs font-black bg-black/20 px-2 py-0.5 rounded-lg">+100 XP</span>
-                    </>
-                  )}
-                  {feedback.status === 'WRONG' && (
-                    <>
-                      <XCircle className="h-4 w-4 stroke-[3.5] shrink-0" />
-                      <span>RESPOSTA ERRADA</span>
-                    </>
-                  )}
-                  {feedback.status === 'TIMEOUT' && (
-                    <>
-                      <Clock className="h-4 w-4 shrink-0" />
-                      <span>TEMPO ESGOTADO</span>
-                    </>
-                  )}
-                </div>
-              )}
-
-              {/* Card da Pergunta no Duelo (Floating Stage Glass com Cantoneiras Heráldicas) */}
-              <div className="national-show-panel w-full min-h-[90px] sm:min-h-[110px] h-auto p-4 sm:p-6 md:p-7 landscape:p-4 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl relative">
-                <span className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-amber-400/80 rounded-tl-sm" />
-                <span className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-amber-400/80 rounded-tr-sm" />
-                <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-amber-400/80 rounded-bl-sm" />
-                <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-amber-400/80 rounded-br-sm" />
-
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-0.5 rounded-full bg-slate-950 border border-amber-400/70 shadow-[0_0_15px_rgba(245,158,11,0.35)] flex items-center gap-1.5 z-10">
-                  <span className="text-[10px]">⚔️</span>
-                  <span className="font-display text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
-                    DUELO 1V1 • RONDA {currentQIndex + 1}
-                  </span>
-                </div>
-
-                <h1 className="mt-1 text-sm sm:text-lg md:text-xl landscape:text-sm sm:landscape:text-base font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            <div className="py-2 w-full flex flex-col items-center justify-center relative">
+              <div className="national-show-panel w-full min-h-[110px] sm:min-h-[140px] md:min-h-[160px] p-5 sm:p-8 md:p-10 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(30,58,138,0.25)] border border-blue-500/30 bg-[#0c1836]/95 backdrop-blur-2xl">
+                <h1 className="text-base sm:text-xl md:text-2xl lg:text-[25px] font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
                   {currentQuestion?.question}
                 </h1>
               </div>
@@ -1226,7 +1217,8 @@ export function DuelArena({
 
                 let state: AnswerState = 'idle'
                 if (showFeedback) {
-                  if (isCorrectOption) {
+                  // 7. REGRA ABSOLUTA: No TIMEOUT NUNCA revelar correta nem pintar de verde!
+                  if (feedback.status !== 'TIMEOUT' && isCorrectOption) {
                     state = 'correct'
                   } else if (isSelected) {
                     state = 'wrong'

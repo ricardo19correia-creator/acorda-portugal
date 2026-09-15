@@ -14,6 +14,8 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { PlayerCard, type UserProfile } from './player-card'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 import { cn } from '@/lib/utils'
+import { DEFAULT_AVATAR, STARTER_AVATAR_ID } from '@/lib/avatars'
+import { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } from '@/lib/titles'
 import {
   Coins,
   Flame,
@@ -45,7 +47,10 @@ function createDefaultUserProfile(user: User): UserProfile {
     uid: user.uid,
     displayName: user.displayName ?? 'Jogador',
     email: user.email ?? '',
-    photoURL: user.photoURL ?? '',
+    photoURL: DEFAULT_AVATAR.image,
+    avatar: DEFAULT_AVATAR.image,
+    avatarId: STARTER_AVATAR_ID,
+    equippedAvatar: STARTER_AVATAR_ID,
     level: 1,
     xp: 0,
     euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
@@ -58,7 +63,30 @@ function createDefaultUserProfile(user: User): UserProfile {
     bestStreak: 0,
     unlockedAchievements: [],
     streak: 0,
-  }
+    title: DEFAULT_STARTER_TITLE_NAME,
+    equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+    equippedTitleId: DEFAULT_STARTER_TITLE_ID,
+    equippedFrame: 'default',
+    unlockedFrames: ['default'],
+    unlockedAvatars: [STARTER_AVATAR_ID],
+    inventory: {
+      avatars: [STARTER_AVATAR_ID],
+      arenas: ['arena_1'],
+      titles: [DEFAULT_STARTER_TITLE_ID],
+      taunts: ['pack_basico'],
+      frames: ['default'],
+      utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
+    },
+    equipped: {
+      avatar: DEFAULT_AVATAR.image,
+      avatarId: STARTER_AVATAR_ID,
+      title: DEFAULT_STARTER_TITLE_ID,
+      titleId: DEFAULT_STARTER_TITLE_ID,
+      titleName: DEFAULT_STARTER_TITLE_NAME,
+      arena: 'arena_1',
+      frameId: 'default',
+    },
+  } as any
 }
 
 function withTimeout<T>(promise: Promise<T>, operation: string): Promise<T> {
@@ -219,6 +247,22 @@ export function ProfilePanel({
     const newUserProfile = createDefaultUserProfile(user)
     try {
       await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+      await setDoc(doc(db, 'publicProfiles', user.uid), {
+        uid: user.uid,
+        displayName: newUserProfile.displayName,
+        photoURL: DEFAULT_AVATAR.image,
+        avatar: DEFAULT_AVATAR.image,
+        avatarId: STARTER_AVATAR_ID,
+        equippedAvatar: STARTER_AVATAR_ID,
+        'equipped.avatar': DEFAULT_AVATAR.image,
+        'equipped.avatarId': STARTER_AVATAR_ID,
+        level: 1,
+        xp: 0,
+        title: DEFAULT_STARTER_TITLE_NAME,
+        equippedTitle: DEFAULT_STARTER_TITLE_NAME,
+        equippedTitleId: DEFAULT_STARTER_TITLE_ID,
+        equippedFrame: 'default',
+      }, { merge: true }).catch(() => {})
     } catch (cause) {
       throw { operation: 'setDoc', cause } satisfies ProfileSyncFailure
     }

@@ -34,7 +34,7 @@ export interface AvatarCategoryMeta {
 }
 
 export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
-  // 1-4: Iniciais / Grátis (0 moedas)
+  // 1: Inicial / Grátis (0 moedas)
   {
     id: 'avatar_01',
     name: 'O Estratega',
@@ -44,6 +44,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     rarity: 'COMUM',
     price: 0,
   },
+  // 2-4: Comuns da Loja (500 moedas)
   {
     id: 'avatar_02',
     name: 'A Líder',
@@ -51,7 +52,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_02.png',
     category: 'Cidadania',
     rarity: 'COMUM',
-    price: 0,
+    price: 500,
   },
   {
     id: 'avatar_03',
@@ -60,7 +61,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_03.png',
     category: 'Cultura',
     rarity: 'COMUM',
-    price: 0,
+    price: 500,
   },
   {
     id: 'avatar_04',
@@ -69,7 +70,7 @@ export const OFFICIAL_SHOP_AVATARS: ShopAvatar[] = [
     image: '/images/avatars/avatar_04.png',
     category: 'Desporto',
     rarity: 'COMUM',
-    price: 0,
+    price: 500,
   },
   // 5-10 & 19: Raros (500–1.000 moedas)
   {
