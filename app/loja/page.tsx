@@ -2717,7 +2717,10 @@ export default function LojaPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative">
+          <div className="absolute top-4 left-4 z-20">
+            <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+          </div>
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500" />
         </div>
       }

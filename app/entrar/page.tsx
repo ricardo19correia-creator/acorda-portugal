@@ -613,7 +613,15 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
 export default function EntrarPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#050706] p-4 relative">
+          <div className="mx-auto max-w-7xl w-full px-4 pt-6">
+            <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+          </div>
+        </div>
+      }
+    >
       <EntrarPageContent />
     </Suspense>
   )

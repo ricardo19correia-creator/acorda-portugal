@@ -1442,6 +1442,9 @@ function PerfilContent() {
     return (
       <div className="relative min-h-screen w-full bg-transparent text-white p-4 md:p-8 flex flex-col items-center justify-center overflow-x-hidden">
         <AppBackground />
+        <div className="absolute top-4 left-4 z-20">
+          <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+        </div>
         <div className="relative z-10 flex flex-col items-center gap-4 bg-slate-900/80 border border-slate-800 p-8 rounded-3xl backdrop-blur-xl shadow-2xl">
           <div className="h-12 w-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-400 animate-spin" />
           <p className="text-sm font-bold text-slate-300 animate-pulse">A carregar o perfil oficial...</p>

@@ -11,6 +11,7 @@ import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { safeRandomUUID } from '@/lib/utils'
 import { AlertTriangle, RefreshCw, Home, Play } from 'lucide-react'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
 
 interface ErrorBoundaryProps {
@@ -298,7 +299,10 @@ function JogarContainer() {
     return (
       <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
         <AppBackground />
-        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex items-center justify-center bg-transparent">
+        <div className="relative z-20 w-full max-w-4xl mx-auto pt-4 px-4">
+          <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+        </div>
+        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[calc(100dvh-5rem)] p-2 sm:p-4 flex items-center justify-center bg-transparent">
           <AuthWallView targetUrl={currentTarget} />
         </main>
       </div>
@@ -341,7 +345,15 @@ function JogarContainer() {
 export default function JogarPage() {
   return (
     <JogarErrorBoundary>
-      <Suspense fallback={null}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-[#050706] p-4 relative">
+            <div className="max-w-5xl mx-auto px-4 py-6">
+              <GlobalBackButton showAlways={true} fallbackUrl="/" variant="standalone" />
+            </div>
+          </div>
+        }
+      >
         <JogarContainer />
       </Suspense>
     </JogarErrorBoundary>

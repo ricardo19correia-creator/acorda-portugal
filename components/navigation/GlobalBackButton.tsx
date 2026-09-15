@@ -70,11 +70,19 @@ export function useSafeBack(fallbackUrl: string = '/') {
           }
         }, 300)
       } else {
-        // Sem histórico interno válido -> Navegar para o Início/Home
-        router.push(fallbackUrl)
+        // Sem histórico interno válido -> Navegar para o Início/Home ou scroll para o topo se já na raiz
+        if (pathname === fallbackUrl) {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+          router.push(fallbackUrl)
+        }
       }
     } catch {
-      router.push(fallbackUrl)
+      if (pathname === fallbackUrl) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        router.push(fallbackUrl)
+      }
     }
   }, [pathname, router, fallbackUrl])
 
@@ -84,29 +92,24 @@ export function useSafeBack(fallbackUrl: string = '/') {
 /**
  * 🇵🇹 ACORDA PORTUGAL — COMPONENTE GLOBAL DE NAVEGAÇÃO REUTILIZÁVEL «← VOLTAR»
  *
- * Garante que em qualquer página do jogo o utilizador tem uma saída clara e direta:
+ * Garante que em QUALQUER página do jogo o utilizador tem uma saída clara e direta:
  * - Se existir histórico de navegação anterior -> recua para a página anterior real.
  * - Se não houver histórico válido -> conduz diretamente para o Início/Home.
  * - Compatível a 100% com Website e Capacitor APK (Android/iOS).
- * - Oculta-se automaticamente na página inicial ('/') por omissão.
+ * - Visível em todas as páginas por omissão para total consistência de saída.
  */
 export function GlobalBackButton({
   label = 'Voltar',
   fallbackUrl = '/',
   className,
   variant = 'header',
-  showAlways = false,
+  showAlways = true,
   iconOnly = false,
   title,
   onClick,
 }: GlobalBackButtonProps) {
   const pathname = usePathname()
   const { goBack } = useSafeBack(fallbackUrl)
-
-  // Por defeito, não exibir na página inicial a menos que explicitamente solicitado
-  if (!showAlways && pathname === '/') {
-    return null
-  }
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -123,7 +126,7 @@ export function GlobalBackButton({
 
   const variantStyles = {
     header:
-      'gap-1.5 rounded-xl border border-white/15 bg-slate-900/85 px-3 py-1.5 text-xs sm:text-sm hover:bg-slate-800 hover:text-white hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.25)] backdrop-blur-md shrink-0 shadow-sm min-h-[36px] sm:min-h-[38px]',
+      'gap-1.5 rounded-xl border border-white/15 bg-slate-900/85 px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm hover:bg-slate-800 hover:text-white hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.25)] backdrop-blur-md shrink-0 shadow-sm min-h-[36px] sm:min-h-[38px]',
     standalone:
       'gap-2 rounded-xl border border-slate-700/60 bg-slate-900/85 px-3.5 py-2 text-xs sm:text-sm hover:bg-slate-800 hover:text-white hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.25)] backdrop-blur-md shadow-md min-h-[40px]',
     inline:
@@ -136,6 +139,7 @@ export function GlobalBackButton({
       onClick={handleClick}
       aria-label={label || 'Voltar à página anterior'}
       title={title || 'Voltar à página anterior (ou Início)'}
+      data-global-back-button="true"
       className={cn(baseStyles, variantStyles[variant], className)}
     >
       <ArrowLeft className="h-4 w-4 shrink-0 text-emerald-400 transition-transform group-hover:-translate-x-0.5 pointer-events-none" />
