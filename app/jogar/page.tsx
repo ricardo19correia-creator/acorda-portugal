@@ -314,10 +314,10 @@ function JogarContainer() {
     return (
       <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
         {/* FUNDO DA ARENA OFICIAL DO JOGO */}
-        <AppBackground customImage={activeArena ? activeArena.assetPath : undefined} />
+        <AppBackground customImage={activeArena ? activeArena.assetPath : '/images/match-throne-bg.jpg'} />
 
         {/* CONTEÚDO DO TABULEIRO DE QUIZ */}
-        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-2 sm:p-4 flex flex-col justify-between bg-transparent">
+        <main className="relative z-10 w-full max-w-4xl mx-auto min-h-[100dvh] p-0 sm:p-2 flex flex-col justify-between bg-transparent">
           <QuizPage />
         </main>
       </div>

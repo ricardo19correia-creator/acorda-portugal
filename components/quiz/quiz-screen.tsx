@@ -17,6 +17,9 @@ import {
   Lock,
   Flag,
   AlertTriangle,
+  Star,
+  Crown,
+  FastForward,
 } from 'lucide-react'
 import { QuestionReportModal } from '@/components/question-report-modal'
 import type { UserProfile } from '@/components/player-card'
@@ -706,7 +709,26 @@ export function QuizScreen({
     }
   }, [cleanOldSessionStorage, router])
 
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false)
 
+  const handleSkipQuestion = useCallback(() => {
+    if (phase !== 'answering' || !q) return
+    try {
+      recordedAnswersRef.current.push({
+        questionId: String(q.id),
+        categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
+        category: q.category,
+        subcategory: q.subcategory,
+        prompt: q.question,
+        selectedOption: '',
+        isCorrect: false,
+        answeredAt: Date.now(),
+      })
+    } catch {}
+    setStreak(0)
+    setCurrentStreak(0)
+    advanceToNextOrFinish()
+  }, [phase, q, advanceToNextOrFinish, setCurrentStreak])
 
   const isLockingInRef = useRef(false)
 
@@ -1108,124 +1130,206 @@ export function QuizScreen({
         />
       )}
 
-      {/* Camada Master da Arena: Cenário Imersivo sem Partículas Distrativas */}
-      {activeArena && (
-        <ArenaRenderer
-          arenaId={activeArena.id}
-          streak={streak}
-          className="fixed inset-0 pointer-events-none -z-40"
-          showAtmosphere={false}
-          showLighting={true}
-          showBadge={false}
-        />
-      )}
+      {/* Cenário Cinematográfico da Partida: Sala do Trono Gótica com Vitrais e o Rei */}
+      <div
+        className="fixed inset-0 pointer-events-none -z-40 bg-cover bg-center bg-no-repeat transition-all duration-700 select-none"
+        style={{ backgroundImage: "url('/images/match-throne-bg.jpg')" }}
+      >
+        {/* Vinheta e Atmosfera para Legibilidade Perfeita e Foco Absoluto */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020614]/80 via-transparent to-[#020614]/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.75)_100%)]" />
+      </div>
 
       {/* Luzes Volumétricas de Grande Estúdio / Game Show e Vinheta Atmosférica */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none">
         <div className="absolute -top-32 -left-24 w-[480px] h-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(6,182,212,0.18)_0%,transparent_70%)] blur-3xl" />
         <div className="absolute -top-32 -right-24 w-[480px] h-[600px] bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.18)_0%,transparent_70%)] blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.65)_100%)]" />
       </div>
 
-      <div className="relative min-h-[100dvh] w-full flex flex-col justify-between p-3 sm:p-5 pb-6 safe-area-x max-w-4xl mx-auto select-none animate-rise">
+      <div className="relative min-h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-between px-2.5 sm:px-4 py-2 sm:py-3 safe-area-x max-w-md sm:max-w-lg md:max-w-xl mx-auto select-none overflow-x-hidden overflow-y-auto">
         {/* ========================================================= */}
-        {/* 1. CABEÇALHO BROADCAST MINIMALISTA E DISCRETO             */}
+        {/* 1. BARRA SUPERIOR: LOGO | JOGADOR | PERGUNTA & PONTOS     */}
         {/* ========================================================= */}
-        <header className="w-full flex items-center justify-between py-1 px-0.5 shrink-0">
-          <GameExitControl mode="solo" onConfirmExit={handleAbandonSolo} />
-
-          {/* Indicador de Ronda */}
-          <div className="px-3.5 py-1 rounded-full bg-[#0b1633]/85 border border-blue-500/25 shadow-sm">
-            <span className="font-mono text-xs sm:text-sm font-bold text-slate-300">
-              Pergunta <strong className="text-white">{step + 1}</strong> <span className="text-slate-500">/ {total}</span>
-            </span>
+        <header className="w-full flex items-center justify-between gap-2 py-1 px-0.5 shrink-0">
+          {/* Esquerda: Logo Acorda Portugal - Desafio Nacional */}
+          <div className="flex items-center gap-1 shrink-0">
+            <img
+              src="/brand/logo.png"
+              alt="Acorda Portugal — Desafio Nacional"
+              className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-none"
+            />
           </div>
 
-          {/* Pontuação Atual */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0b1633]/85 border border-blue-500/25 text-amber-300 font-display text-xs sm:text-sm font-black shadow-sm">
-            <Sparkles className="h-3 w-3 text-amber-400" />
-            <span>{score.toLocaleString('pt-PT')}</span>
-            <span className="text-[10px] font-mono text-amber-400/70">PTS</span>
+          {/* Centro: Avatar com Coroa + Nome + Nível + Barra XP */}
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            {/* Avatar com Mini-Coroa Dourada e Anel Neon */}
+            <div className="relative shrink-0 flex items-center justify-center">
+              <Crown className="absolute -top-2.5 left-1/2 -translate-x-1/2 h-3.5 w-3.5 text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] z-10" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-amber-300 shadow-[0_0_14px_rgba(34,211,238,0.7)] flex items-center justify-center overflow-hidden">
+                <PlayerAvatar
+                  avatar={profile?.avatar || (user as any)?.photoURL || '/images/avatars/avatar_01.png'}
+                  size="sm"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
+            </div>
+
+            {/* Dados do Jogador */}
+            <div className="flex flex-col min-w-0 text-left">
+              <span className="text-xs sm:text-sm font-black text-white truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] leading-tight">
+                {effectiveDisplayName}
+              </span>
+              <span className="text-[10px] font-bold text-sky-300 font-mono leading-tight mt-0.5">
+                Nível {profile?.level || 11}
+              </span>
+              {/* Barra de Progresso / XP em Neon Azul */}
+              <div className="w-16 sm:w-22 h-1 sm:h-1.5 mt-1 rounded-full bg-slate-950/90 border border-blue-500/40 overflow-hidden p-[0.5px]">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-300 shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-500"
+                  style={{
+                    width: `${Math.min(100, Math.max(15, calculateLevelProgress(profile?.xp || 0).percent))}%`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Direita: Indicador Q 1/10 + Pontuação com Estrela */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Pílula Dourada: Q 1/10 */}
+            <div className="px-2 sm:px-2.5 py-1 rounded-full bg-[#06122d]/95 border border-amber-400/90 shadow-[0_0_12px_rgba(245,158,11,0.35)] flex items-center gap-1 sm:gap-1.5">
+              <div className="w-4 h-4 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] flex items-center justify-center font-display leading-none">
+                Q
+              </div>
+              <span className="font-mono text-xs font-black text-white tracking-tight">
+                {step + 1}/{total}
+              </span>
+            </div>
+
+            {/* Pontos e Percentagem */}
+            <div className="flex flex-col items-end leading-none">
+              <div className="flex items-center gap-1 text-cyan-200 font-display text-xs sm:text-sm font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-400 fill-amber-400" />
+                <span>{score.toLocaleString('pt-PT')} pts</span>
+              </div>
+              <span className="text-[10px] font-mono text-cyan-300/80 font-bold mt-0.5">
+                {Math.round(((step + 1) / total) * 100)}%
+              </span>
+            </div>
           </div>
         </header>
 
         {/* ========================================================= */}
-        {/* 2. TEMPORIZADOR TV INTEGRADO NO SISTEMA                   */}
+        {/* 2. NÍVEL DA PARTIDA + PAINEL CENTRAL DA PERGUNTA          */}
         {/* ========================================================= */}
-        <div className="w-full my-1.5 sm:my-2 px-0.5 flex flex-col gap-1.5 shrink-0">
-          <div className="flex items-center justify-between text-xs font-mono font-black">
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-400 font-bold">
-              {isFrozen ? 'Tempo Congelado' : 'Temporizador'}
-            </span>
+        <div className="w-full flex flex-col items-center shrink-0 my-auto py-1">
+          {/* EMBLEMA CENTRAL METÁLICO: NÍVEL 2 */}
+          <div
+            className="relative z-10 px-4 py-0.5 mb-[-10px] bg-gradient-to-r from-amber-400 via-cyan-400 to-amber-400 p-[1.5px] shadow-[0_0_16px_rgba(245,158,11,0.5)]"
+            style={{
+              clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
+            }}
+          >
             <div
-              className={cn(
-                'flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border transition-all duration-300 font-mono text-xs font-black shadow-sm',
-                isFrozen
-                  ? 'border-cyan-400 bg-cyan-950/90 text-cyan-200 shadow-[0_0_12px_rgba(6,182,212,0.5)] animate-pulse'
-                  : seconds <= WARNING_TIME_THRESHOLD
-                    ? 'border-rose-500 bg-rose-950/90 text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.7)] animate-pulse'
-                    : seconds <= 15
-                      ? 'border-amber-500/70 bg-amber-950/70 text-amber-300'
-                      : 'border-blue-500/40 bg-[#0c1b3d]/90 text-sky-300'
-              )}
+              className="px-4 sm:px-5 py-0.5 bg-gradient-to-b from-[#0c1a3b] to-[#040817] flex items-center justify-center"
+              style={{
+                clipPath: 'polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%)',
+              }}
             >
-              {isFrozen ? (
-                <>
-                  <Snowflake className="h-3.5 w-3.5 text-cyan-300 animate-spin" />
-                  <span>{seconds}s</span>
-                </>
-              ) : (
-                <>
-                  <Clock className={cn('h-3.5 w-3.5', seconds <= WARNING_TIME_THRESHOLD ? 'text-rose-400 animate-pulse' : 'text-sky-400')} />
-                  <span>{seconds}s</span>
-                </>
-              )}
+              <span className="font-display font-black text-[11px] sm:text-xs uppercase tracking-widest text-amber-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                NÍVEL {diffLevel >= 4 ? 3 : diffLevel === 3 ? 2 : 2}
+              </span>
             </div>
           </div>
 
-          {/* Barra de Tempo Contínua */}
-          <div
-            className={cn(
-              'h-1.5 sm:h-2 w-full rounded-full bg-slate-950/80 overflow-hidden border transition-colors duration-300 p-0.5',
-              isFrozen
-                ? 'border-cyan-400/60 shadow-[0_0_10px_rgba(6,182,212,0.4)]'
-                : seconds <= WARNING_TIME_THRESHOLD
-                  ? 'border-rose-500/60 shadow-[0_0_10px_rgba(239,68,68,0.5)]'
-                  : 'border-blue-500/30'
-            )}
-          >
-            <div
-              className={cn(
-                'h-full rounded-full transition-all duration-1000 ease-linear',
-                isFrozen
-                  ? 'bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse'
-                  : seconds > 15
-                    ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.4)]'
-                    : seconds > WARNING_TIME_THRESHOLD
-                      ? 'bg-gradient-to-r from-amber-500 to-yellow-400 shadow-[0_0_10px_rgba(245,158,11,0.5)]'
-                      : 'bg-gradient-to-r from-rose-600 to-red-500 shadow-[0_0_15px_rgba(244,63,94,0.9)] animate-pulse'
+          {/* GRANDE PAINEL CENTRAL CHANFRADO */}
+          <div className="relative w-full p-[2px] bg-gradient-to-b from-amber-400/90 via-blue-500/80 to-cyan-400/90 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(30,58,138,0.4)]">
+            <div className="relative w-full min-h-[95px] sm:min-h-[125px] md:min-h-[145px] px-4 sm:px-8 py-4 sm:py-6 flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#08183d]/98 via-[#040c24]/98 to-[#061333]/98 backdrop-blur-2xl rounded-2xl overflow-hidden">
+              {/* Néon azul superior e inferior */}
+              <div className="absolute top-0 inset-x-6 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
+              <div className="absolute bottom-0 inset-x-6 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
+
+              {/* Imagem do Desafio Visual quando aplicável */}
+              {q.image && (
+                <div className="mb-2 max-h-32 sm:max-h-40 overflow-hidden rounded-xl border border-amber-400/40 shadow-md">
+                  <img src={q.image} alt="Desafio Visual" className="w-full h-full object-contain" />
+                </div>
               )}
-              style={{ width: `${Math.min(100, (seconds / MAX_SECONDS) * 100)}%` }}
-            />
+
+              {/* Foco Absoluto na Pergunta (Texto Branco Grande e Legível) */}
+              <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-center leading-snug sm:leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
+                {q.question || q.pergunta}
+              </h1>
+            </div>
+
+            {/* Losango Dourado Heráldico Inferior */}
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-gradient-to-br from-amber-300 to-amber-500 rotate-45 border border-amber-200 shadow-[0_0_8px_rgba(245,158,11,0.9)]" />
+          </div>
+
+          {/* TEMPORIZADOR TV INTEGRADO */}
+          <div className="w-full mt-2 px-1 flex flex-col gap-1">
+            <div className="flex items-center justify-between text-[10px] font-mono font-bold text-slate-400">
+              <span className={cn(isFrozen && 'text-cyan-300 animate-pulse font-black')}>
+                {isFrozen ? '❄️ Tempo Congelado (+15s)' : 'Temporizador'}
+              </span>
+              <span
+                className={cn(
+                  'px-2 py-0.5 rounded-full border text-[10px] font-black font-mono',
+                  isFrozen
+                    ? 'border-cyan-400 bg-cyan-950/90 text-cyan-200 shadow-[0_0_10px_rgba(6,182,212,0.6)] animate-pulse'
+                    : seconds <= WARNING_TIME_THRESHOLD
+                      ? 'border-rose-500 bg-rose-950/90 text-rose-300 animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.7)]'
+                      : 'border-blue-500/40 bg-[#081530]/80 text-sky-300'
+                )}
+              >
+                {seconds}s
+              </span>
+            </div>
+            <div className="h-1 sm:h-1.5 w-full rounded-full bg-slate-950/80 overflow-hidden border border-blue-500/30 p-[1px]">
+              <div
+                className={cn(
+                  'h-full rounded-full transition-all duration-1000 ease-linear',
+                  isFrozen
+                    ? 'bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse'
+                    : seconds > 15
+                      ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]'
+                      : seconds > WARNING_TIME_THRESHOLD
+                        ? 'bg-gradient-to-r from-amber-500 to-yellow-400'
+                        : 'bg-gradient-to-r from-rose-600 to-red-500 animate-pulse shadow-[0_0_12px_rgba(244,63,94,0.9)]'
+                )}
+                style={{ width: `${Math.min(100, (seconds / MAX_SECONDS) * 100)}%` }}
+              />
+            </div>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* 3. ZONA CENTRAL: PAINEL DA PERGUNTA (O CENTRO DO JOGO)    */}
+        {/* 3. BARRA HORIZONTAL DE POWER-UPS                          */}
         {/* ========================================================= */}
-        <main className="w-full flex-1 flex flex-col justify-center my-auto py-2 sm:py-3">
-          <div className="national-show-panel w-full min-h-[110px] sm:min-h-[140px] md:min-h-[160px] p-5 sm:p-8 md:p-10 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(30,58,138,0.25)] border border-blue-500/30 bg-[#0c1836]/95 backdrop-blur-2xl">
-            <h1 className="text-base sm:text-xl md:text-2xl lg:text-[25px] font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
-              {q.question || q.pergunta}
-            </h1>
-          </div>
-        </main>
+        <div className="w-full my-1 shrink-0">
+          {phase === 'answering' && (
+            <QuizPowerUpsBar
+              stock5050={aidStocks.stock5050}
+              stockFreeze={aidStocks.stockFreeze}
+              stockPublicVote={aidStocks.stockPublicVote}
+              used5050={eliminatedOptions.length > 0}
+              usedPublicVote={publicVoteResults !== null}
+              isFrozen={isFrozen}
+              freezeTimeLeft={freezeTimeLeft}
+              isProcessing={isHelpProcessing}
+              disabled={phase !== 'answering' || selected !== null}
+              onUse5050={() => executeUseAid('5050')}
+              onUseFreeze={() => executeUseAid('freeze')}
+              onUsePublicVote={() => executeUseAid('publicVote')}
+            />
+          )}
+        </div>
 
         {/* ========================================================= */}
-        {/* 4. GRELHA DE RESPOSTAS (A, B, C, D)                       */}
+        {/* 4. AS QUATRO RESPOSTAS ALINHADAS VERTICALMENTE (A, B, C, D)*/}
         {/* ========================================================= */}
-        <div className="w-full flex flex-col gap-2 shrink-0">
-          {/* Toast de Feedback de Ajuda */}
+        <div className="w-full flex flex-col gap-1 sm:gap-1.5 shrink-0 my-1">
+          {/* Toast de Feedback de Ajuda se ativo */}
           {aidToast && (
             <div className="flex justify-center mb-0.5 w-full animate-pop">
               <div className="px-3.5 py-1 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-xs font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
@@ -1234,73 +1338,110 @@ export function QuizScreen({
             </div>
           )}
 
-          {/* 4 Grandes Botões A / B / C / D */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 w-full">
-            {q.options.map((option, idx) => {
-              const isEliminated = eliminatedOptions.includes(option.key)
-              const state = stateFor(option.key)
-              const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
+          {q.options.map((option, idx) => {
+            const isEliminated = eliminatedOptions.includes(option.key)
+            const state = stateFor(option.key)
+            const optionKey = (['A', 'B', 'C', 'D'][idx] || option.key) as OptionKey
 
-              return (
-                <AnswerOption
-                  key={option.key}
-                  optionKey={optionKey}
-                  text={option.text}
-                  state={state}
-                  disabled={phase !== 'answering' || selected !== null}
-                  eliminated={isEliminated}
-                  isSelected={selected === option.key}
-                  publicVotePercent={publicVoteResults?.[idx]}
-                  onSelect={() => reveal(option.key)}
-                />
-              )
-            })}
+            return (
+              <AnswerOption
+                key={option.key}
+                optionKey={optionKey}
+                text={option.text}
+                state={state}
+                disabled={phase !== 'answering' || selected !== null}
+                eliminated={isEliminated}
+                isSelected={selected === option.key}
+                publicVotePercent={publicVoteResults?.[idx]}
+                onSelect={() => reveal(option.key)}
+              />
+            )
+          })}
+
+          {/* Botão de avanço rápido quando a resposta for revelada */}
+          {phase === 'revealed' && (
+            <div className="flex justify-center mt-1">
+              <button
+                type="button"
+                onClick={next}
+                className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-primary to-teal-500 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+              >
+                <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
+                <ChevronRight className="h-4 w-4 stroke-[3]" />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ========================================================= */}
+        {/* 5. RODAPÉ DE NAVEGAÇÃO: DESISTIR | BRASÃO REAL | PULAR    */}
+        {/* ========================================================= */}
+        <footer className="w-full flex items-center justify-between pt-1 pb-1 sm:pb-2 shrink-0">
+          {/* Botão Desistir */}
+          <button
+            type="button"
+            onClick={() => setIsExitModalOpen(true)}
+            className="group relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer"
+          >
+            <ArrowLeft className="h-3.5 w-3.5 text-amber-400 group-hover:-translate-x-0.5 transition-transform" />
+            <span>Desistir</span>
+          </button>
+
+          {/* Brasão Real Português Central */}
+          <div className="flex items-center justify-center relative">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full p-[1.5px] bg-gradient-to-b from-amber-300 via-amber-500 to-amber-600 shadow-[0_0_18px_rgba(245,158,11,0.5)] flex items-center justify-center overflow-hidden">
+              <img
+                src="/images/portuguese-royal-crest.jpg"
+                alt="Escudo de Portugal"
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
           </div>
 
-          {/* ========================================================= */}
-          {/* 5. RODAPÉ DE CONTROLOS: AJUDAS + REPORTAR                 */}
-          {/* ========================================================= */}
-          <footer className="w-full flex items-center justify-between pt-1.5 pb-1 sm:pb-0">
-            <div className="flex-1 flex justify-center">
-              {phase === 'answering' && (
-                <QuizPowerUpsBar
-                  stock5050={aidStocks.stock5050}
-                  stockFreeze={aidStocks.stockFreeze}
-                  stockPublicVote={aidStocks.stockPublicVote}
-                  used5050={eliminatedOptions.length > 0}
-                  usedPublicVote={publicVoteResults !== null}
-                  isFrozen={isFrozen}
-                  freezeTimeLeft={freezeTimeLeft}
-                  isProcessing={isHelpProcessing}
-                  disabled={phase !== 'answering' || selected !== null}
-                  onUse5050={() => executeUseAid('5050')}
-                  onUseFreeze={() => executeUseAid('freeze')}
-                  onUsePublicVote={() => executeUseAid('publicVote')}
-                />
-              )}
-              {phase === 'revealed' && (
+          {/* Botão Pular Pergunta */}
+          <button
+            type="button"
+            onClick={handleSkipQuestion}
+            disabled={phase !== 'answering'}
+            className="group relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+          >
+            <FastForward className="h-3.5 w-3.5 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
+            <span>Pular Pergunta</span>
+          </button>
+        </footer>
+
+        {/* MODAL DE CONFIRMAÇÃO DE DESISTÊNCIA */}
+        {isExitModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+            <div className="relative w-full max-w-sm rounded-3xl border border-amber-400/50 bg-[#071433] p-6 text-center shadow-[0_0_30px_rgba(0,0,0,0.9)] space-y-4">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-400/40">
+                <AlertTriangle className="h-6 w-6" />
+              </div>
+              <h3 className="font-display text-lg font-black uppercase text-white">
+                Abandonar Partida?
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Se desistires agora, a partida será encerrada e regressarás à Central de Jogos.
+              </p>
+              <div className="flex gap-2 pt-2">
                 <button
                   type="button"
-                  onClick={next}
-                  className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-primary to-teal-500 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:brightness-110 cursor-pointer active:scale-95 transition-all"
+                  onClick={() => setIsExitModalOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl border border-white/20 bg-white/10 text-xs font-bold text-white hover:bg-white/15 active:scale-95 transition cursor-pointer"
                 >
-                  <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
-                  <ChevronRight className="h-4 w-4 stroke-[3]" />
+                  Continuar
                 </button>
-              )}
+                <button
+                  type="button"
+                  onClick={handleAbandonSolo}
+                  className="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-xs font-bold text-white shadow-lg shadow-rose-600/30 active:scale-95 transition cursor-pointer"
+                >
+                  Desistir
+                </button>
+              </div>
             </div>
-
-            <button
-              type="button"
-              onClick={() => setIsReportModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors cursor-pointer px-2 py-1 rounded-lg shrink-0"
-              title="Reportar erro editorial nesta pergunta"
-            >
-              <Flag className="h-3 w-3 text-slate-400" />
-              <span className="hidden sm:inline">Reportar</span>
-            </button>
-          </footer>
-        </div>
+          </div>
+        )}
 
         <QuestionReportModal
           isOpen={isReportModalOpen}

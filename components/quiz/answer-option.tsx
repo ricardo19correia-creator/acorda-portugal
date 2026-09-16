@@ -18,9 +18,16 @@ export interface AnswerOptionProps {
 }
 
 /**
- * 🇵🇹 ACORDA PORTUGAL — PORTA DE COMPETIÇÃO "NATIONAL SHOW"
- * Painel chanfrado angular aeroespacial com moldura metálica vetorial,
- * medalhão heráldico octogonal em ouro para a letra e vidro translúcido sobre o cenário.
+ * 🇵🇹 ACORDA PORTUGAL — BARRA DE RESPOSTA ANGULAR (DESIGN FIDELIDADE TOTAL)
+ * Barra horizontal angular com pontas chanfradas, compartimento hexagonal metálico dourado
+ * para a letra (A, B, C, D) e tipografia branca cristalina de alto contraste.
+ *
+ * Estados visuais:
+ * - Normal: Vidro azul noite profundo, contorno neon azul e remates dourados.
+ * - Hover: Brilho aumentado e feedback luminoso.
+ * - Selecionado (Lock-in): Destaque âmbar/ouro luminoso.
+ * - Correto: Verde esmeralda neon vibrante (#00ff88) com glow radiante (como a opção C da referência).
+ * - Errado: Vermelho rubi neon vibrante (#ff2244) com glow radiante.
  */
 export function AnswerOption({
   optionKey,
@@ -37,17 +44,33 @@ export function AnswerOption({
     return (
       <div
         aria-hidden="true"
-        className="relative w-full min-h-[3.75rem] sm:min-h-[4.25rem] px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border border-white/5 bg-[#060c1d]/30 flex items-center gap-3.5 sm:gap-4 opacity-20 select-none cursor-not-allowed filter grayscale transition-opacity duration-300"
+        className="relative w-full min-h-[3.25rem] sm:min-h-[3.65rem] my-1 opacity-20 select-none cursor-not-allowed filter grayscale transition-opacity duration-300 pointer-events-none"
       >
-        <span className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 border border-white/10 font-display text-xs sm:text-sm font-black text-slate-600 line-through">
-          {optionKey}
-        </span>
-        <span className="flex-1 min-w-0 text-xs sm:text-sm md:text-base font-semibold text-slate-600 line-through truncate">
-          {text}
-        </span>
-        <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-wider shrink-0">
-          50:50
-        </span>
+        <div
+          className="relative w-full h-full p-[1.5px] bg-slate-800/40"
+          style={{
+            clipPath:
+              'polygon(16px 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0% 50%)',
+          }}
+        >
+          <div
+            className="w-full h-full px-5 py-2 bg-[#050b18]/80 flex items-center gap-3.5"
+            style={{
+              clipPath:
+                'polygon(15px 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 15px 100%, 0% 50%)',
+            }}
+          >
+            <div className="w-8 h-8 rounded-md bg-slate-900 flex items-center justify-center font-display font-bold text-slate-600 line-through text-sm">
+              {optionKey}
+            </div>
+            <span className="flex-1 text-xs sm:text-sm font-semibold text-slate-600 line-through truncate">
+              {text}
+            </span>
+            <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-wider">
+              50:50
+            </span>
+          </div>
+        </div>
       </div>
     )
   }
@@ -57,33 +80,53 @@ export function AnswerOption({
   const isMuted = state === 'muted'
   const isCurrentlySelected = state === 'selected' || isSelected
 
-  // Cores, bordas e iluminação de concurso televisivo profissional
-  let containerStyles = 'bg-[#0a1532]/90 hover:bg-[#102047] border-blue-500/30 hover:border-blue-400/60 shadow-[0_4px_16px_rgba(0,0,0,0.5),0_0_15px_rgba(30,58,138,0.2)]'
-  let letterBadgeStyles = 'bg-[#122247] border-blue-400/35 text-blue-200 group-hover:text-white group-hover:border-blue-300/80 group-hover:bg-[#182e5e]'
-  let textStyles = 'text-slate-100 group-hover:text-white'
+  // Paleta de bordas e preenchimento conforme o estado
+  let outerBorderGradient =
+    'from-amber-400/80 via-blue-500/80 to-cyan-400/80 hover:from-amber-300 hover:via-blue-400 hover:to-cyan-300'
+  let innerBg = 'bg-[#06122d]/95 hover:bg-[#091b3f]/95'
+  let containerGlow =
+    'shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_14px_rgba(30,58,138,0.35)] hover:shadow-[0_0_20px_rgba(56,189,248,0.45)]'
+  let hexagonBorder = 'border-amber-400/90 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.35)]'
+  let hexagonBg = 'bg-gradient-to-b from-[#1b2b52] to-[#0d172e]'
+  let textStyles = 'text-white'
   let animationClass = ''
 
   if (isCorrect) {
-    // 5. RESPOSTA CERTA: Verde premium, texto branco, glow verde subtil
-    containerStyles = 'bg-[#0a3821] border-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.45),0_6px_24px_rgba(0,0,0,0.6)]'
-    letterBadgeStyles = 'bg-emerald-500 text-slate-950 border-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
-    textStyles = 'text-white font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
+    // 5. RESPOSTA CORRETA: Verde neon radiante (IDÊNTICO À OPÇÃO C NA IMAGEM)
+    outerBorderGradient = 'from-emerald-400 via-[#00ff88] to-teal-400'
+    innerBg = 'bg-gradient-to-r from-[#06381d]/95 via-[#0a4d29]/95 to-[#06381d]/95'
+    containerGlow =
+      'shadow-[0_0_35px_rgba(0,255,136,0.6),0_0_15px_rgba(16,185,129,0.8),0_6px_24px_rgba(0,0,0,0.8)]'
+    hexagonBorder = 'border-emerald-300 text-slate-950 bg-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.8)]'
+    hexagonBg = 'bg-emerald-400'
+    textStyles = 'text-white font-extrabold drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]'
     animationClass = 'animate-[pulse-gentle_1.5s_ease-in-out_infinite]'
   } else if (isWrong) {
-    // 6. RESPOSTA ERRADA: Vermelho premium, texto branco, glow vermelho subtil
-    containerStyles = 'bg-[#3b1219] border-rose-500 shadow-[0_0_30px_rgba(239,68,68,0.45),0_6px_24px_rgba(0,0,0,0.6)]'
-    letterBadgeStyles = 'bg-rose-600 text-white border-rose-400 shadow-[0_0_12px_rgba(239,68,68,0.5)]'
-    textStyles = 'text-white font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
+    // 6. RESPOSTA ERRADA: Vermelho rubi neon radiante
+    outerBorderGradient = 'from-rose-500 via-[#ff2244] to-red-600'
+    innerBg = 'bg-gradient-to-r from-[#420f18]/95 via-[#541420]/95 to-[#420f18]/95'
+    containerGlow =
+      'shadow-[0_0_35px_rgba(255,34,68,0.6),0_0_15px_rgba(239,68,68,0.8),0_6px_24px_rgba(0,0,0,0.8)]'
+    hexagonBorder = 'border-rose-300 text-white bg-rose-600 shadow-[0_0_15px_rgba(255,34,68,0.8)]'
+    hexagonBg = 'bg-rose-600'
+    textStyles = 'text-white font-extrabold drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]'
     animationClass = 'animate-[shake-subtle_0.35s_ease-in-out]'
   } else if (isCurrentlySelected) {
-    // 4. SELECIONADO: Destaque imediato âmbar/ouro de lock-in
-    containerStyles = 'bg-[#15274d] border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.4),0_6px_20px_rgba(0,0,0,0.6)] ring-1 ring-amber-400/50'
-    letterBadgeStyles = 'bg-amber-500 text-slate-950 border-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.6)]'
-    textStyles = 'text-amber-100 font-black'
+    // 4. SELECIONADO: Âmbar/Ouro com suspensa lock-in
+    outerBorderGradient = 'from-amber-300 via-yellow-400 to-amber-500'
+    innerBg = 'bg-gradient-to-r from-[#1b2b52]/95 via-[#233866]/95 to-[#1b2b52]/95'
+    containerGlow =
+      'shadow-[0_0_30px_rgba(245,158,11,0.55),0_0_12px_rgba(251,191,36,0.7)]'
+    hexagonBorder = 'border-amber-200 text-slate-950 bg-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.7)]'
+    hexagonBg = 'bg-amber-400'
+    textStyles = 'text-amber-100 font-extrabold'
     animationClass = 'animate-[pop-subtle_0.2s_ease-out]'
   } else if (isMuted) {
-    containerStyles = 'bg-[#081022]/60 border-white/5 opacity-35 shadow-none'
-    letterBadgeStyles = 'bg-slate-900/60 border-slate-700/30 text-slate-500'
+    outerBorderGradient = 'from-slate-700/40 via-blue-900/30 to-slate-800/40'
+    innerBg = 'bg-[#050b18]/60'
+    containerGlow = 'opacity-40 shadow-none'
+    hexagonBorder = 'border-slate-700/50 text-slate-500'
+    hexagonBg = 'bg-slate-900/60'
     textStyles = 'text-slate-400'
   }
 
@@ -94,46 +137,96 @@ export function AnswerOption({
       onClick={onSelect}
       aria-label={`Opção ${optionKey}: ${text}`}
       className={cn(
-        'group relative w-full min-h-[3.75rem] sm:min-h-[4.25rem] px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border flex items-center gap-3.5 sm:gap-4.5 text-left outline-none select-none transition-all duration-200 cursor-pointer backdrop-blur-xl',
-        containerStyles,
+        'group relative w-full min-h-[3.25rem] sm:min-h-[3.65rem] my-1 outline-none select-none transition-all duration-200 cursor-pointer block',
         animationClass,
-        !disabled && !isMuted && !isCurrentlySelected && !isCorrect && !isWrong && 'hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.995]',
+        containerGlow,
+        !disabled && !isMuted && !isCurrentlySelected && !isCorrect && !isWrong && 'hover:scale-[1.01] active:scale-[0.99] active:brightness-110',
         (disabled || isMuted) && 'cursor-default'
       )}
     >
-      {/* 1. MEDALHÃO DA LETRA (A, B, C, D) */}
-      <span
+      {/* MOLDURA EXTERIOR CHANFRADA (Bordas metálicas neon com chanfro a 45º) */}
+      <div
         className={cn(
-          'relative flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border font-display font-black text-sm sm:text-base tracking-wider transition-all duration-200 shadow-sm',
-          letterBadgeStyles
+          'relative w-full h-full p-[1.8px] sm:p-[2px] transition-all duration-200 bg-gradient-to-r',
+          outerBorderGradient
         )}
+        style={{
+          clipPath:
+            'polygon(16px 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0% 50%)',
+        }}
       >
-        {isCorrect ? (
-          <Check className="h-5 w-5 sm:h-6 sm:w-6 stroke-[3.5] text-slate-950" />
-        ) : isWrong ? (
-          <X className="h-5 w-5 sm:h-6 sm:w-6 stroke-[3.5] text-white" />
-        ) : (
-          <span>{optionKey}</span>
-        )}
-      </span>
+        {/* CORPO INTERIOR CHANFRADO */}
+        <div
+          className={cn(
+            'w-full h-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center gap-3 sm:gap-4 transition-all duration-200 backdrop-blur-xl',
+            innerBg
+          )}
+          style={{
+            clipPath:
+              'polygon(14.5px 0%, calc(100% - 14.5px) 0%, 100% 50%, calc(100% - 14.5px) 100%, 14.5px 100%, 0% 50%)',
+          }}
+        >
+          {/* 1. MÓDULO HEXAGONAL METÁLICO DOURADO PARA A LETRA A / B / C / D */}
+          <div className="relative flex items-center justify-center shrink-0 w-8 h-8 sm:w-9 sm:h-9">
+            <div
+              className={cn(
+                'w-full h-full p-[1.5px] transition-all duration-200 flex items-center justify-center',
+                isCorrect
+                  ? 'bg-emerald-300'
+                  : isWrong
+                    ? 'bg-rose-300'
+                    : isCurrentlySelected
+                      ? 'bg-amber-300'
+                      : 'bg-gradient-to-b from-amber-300 via-amber-500 to-amber-600'
+              )}
+              style={{
+                clipPath:
+                  'polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%)',
+              }}
+            >
+              <div
+                className={cn(
+                  'w-full h-full flex items-center justify-center font-display font-black text-sm sm:text-base tracking-wider transition-colors duration-200',
+                  hexagonBg,
+                  isCorrect || isWrong || isCurrentlySelected ? '' : 'text-amber-300'
+                )}
+                style={{
+                  clipPath:
+                    'polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%)',
+                }}
+              >
+                {isCorrect ? (
+                  <Check className="h-4.5 w-4.5 sm:h-5 sm:w-5 stroke-[3.5] text-slate-950" />
+                ) : isWrong ? (
+                  <X className="h-4.5 w-4.5 sm:h-5 sm:w-5 stroke-[3.5] text-white" />
+                ) : (
+                  <span className={cn(isCurrentlySelected ? 'text-slate-950' : 'text-amber-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]')}>
+                    {optionKey}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
 
-      {/* 2. TEXTO DA RESPOSTA (GRANDE, LEGÍVEL E CRISTALINO) */}
-      <span
-        className={cn(
-          'flex-1 min-w-0 text-sm sm:text-base md:text-[17px] font-bold leading-snug sm:leading-relaxed tracking-wide break-words hyphens-auto transition-colors duration-200',
-          textStyles
-        )}
-      >
-        {text}
-      </span>
+          {/* 2. TEXTO DA RESPOSTA (BRANCO, GRANDE, DE ALTA LEGIBILIDADE) */}
+          <span
+            className={cn(
+              'flex-1 min-w-0 text-sm sm:text-base md:text-[17px] font-bold leading-snug tracking-wide break-words hyphens-auto text-left transition-colors duration-200 select-none drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]',
+              textStyles
+            )}
+          >
+            {text}
+          </span>
 
-      {/* 3. PERCENTAGEM DO VOTO DO PÚBLICO (SE APLICÁVEL) */}
-      {publicVotePercent !== undefined && !eliminated && (
-        <span className="ml-auto px-2.5 py-1 rounded-xl bg-purple-950/90 border border-purple-400/80 text-purple-200 font-mono font-black text-xs sm:text-sm shadow-md shadow-purple-500/30 flex items-center gap-1 shrink-0">
-          <span className="text-[11px]">👥</span>
-          <span>{publicVotePercent}%</span>
-        </span>
-      )}
+          {/* 3. PERCENTAGEM DO VOTO DO PÚBLICO (QUANDO ATIVA) */}
+          {publicVotePercent !== undefined && !eliminated && (
+            <div className="ml-auto px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-purple-950/90 border border-purple-400/80 text-purple-200 font-mono font-black text-xs sm:text-sm shadow-md shadow-purple-500/30 flex items-center gap-1 shrink-0">
+              <span className="text-[10px] sm:text-[11px]">👥</span>
+              <span>{publicVotePercent}%</span>
+            </div>
+          )}
+        </div>
+      </div>
     </button>
   )
 }
