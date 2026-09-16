@@ -1102,11 +1102,14 @@ export function QuizScreen({
     return 'muted'
   }
 
-  // Resolução segura da progressão do jogador
   const safeXp = typeof profile?.xp === 'number' ? profile.xp : (typeof userProfile?.xp === 'number' ? userProfile.xp : 0)
   const levelInfo = calculateLevelProgress(safeXp)
   const playerLevel = profile?.level || userProfile?.level || levelInfo?.currentLevel?.level || 1
   const playerProgressPercent = Math.min(100, Math.max(10, Math.round(levelInfo?.progressPercentage || 0)))
+
+  const qPrompt = q?.question || q?.pergunta || ''
+  const isLongQuestion = qPrompt.length > 120
+  const isMediumQuestion = qPrompt.length > 65
 
   return (
     <>
@@ -1137,26 +1140,26 @@ export function QuizScreen({
         <div className="absolute -top-32 -right-24 w-[480px] h-[600px] bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.18)_0%,transparent_70%)] blur-3xl" />
       </div>
 
-      <div className="relative min-h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-between px-2.5 sm:px-4 py-2 sm:py-3 safe-area-x max-w-md sm:max-w-lg md:max-w-xl mx-auto select-none overflow-x-hidden overflow-y-auto">
+      <div className="relative h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-between px-2 sm:px-4 py-1 sm:py-2.5 safe-area-x max-w-md sm:max-w-lg md:max-w-xl mx-auto select-none overflow-hidden match-fullscreen-container">
         {/* ========================================================= */}
         {/* 1. BARRA SUPERIOR: LOGO | JOGADOR | PERGUNTA & PONTOS     */}
         {/* ========================================================= */}
-        <header className="w-full flex items-center justify-between gap-2 py-1 px-0.5 shrink-0">
+        <header className="w-full flex items-center justify-between gap-1.5 sm:gap-2 py-0.5 sm:py-1 px-0.5 shrink-0">
           {/* Esquerda: Logo Acorda Portugal - Desafio Nacional */}
           <div className="flex items-center gap-1 shrink-0">
             <img
               src="/brand/logo.png"
               alt="Acorda Portugal — Desafio Nacional"
-              className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-none"
+              className="h-7 sm:h-9 md:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-none"
             />
           </div>
 
           {/* Centro: Avatar com Coroa + Nome + Nível + Barra XP */}
-          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
             {/* Avatar com Mini-Coroa Dourada e Anel Neon */}
             <div className="relative shrink-0 flex items-center justify-center">
-              <Crown className="absolute -top-2.5 left-1/2 -translate-x-1/2 h-3.5 w-3.5 text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] z-10" />
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-amber-300 shadow-[0_0_14px_rgba(34,211,238,0.7)] flex items-center justify-center overflow-hidden">
+              <Crown className="absolute -top-2 left-1/2 -translate-x-1/2 h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] z-10" />
+              <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-amber-300 shadow-[0_0_12px_rgba(34,211,238,0.7)] flex items-center justify-center overflow-hidden">
                 <PlayerAvatar
                   profile={profile || userProfile}
                   src={profile?.avatar || (user as any)?.photoURL || '/images/avatars/avatar_01.png'}
@@ -1169,14 +1172,14 @@ export function QuizScreen({
 
             {/* Dados do Jogador */}
             <div className="flex flex-col min-w-0 text-left">
-              <span className="text-xs sm:text-sm font-black text-white truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] leading-tight">
+              <span className="text-[11px] sm:text-xs md:text-sm font-black text-white truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] leading-tight">
                 {effectiveDisplayName}
               </span>
-              <span className="text-[10px] font-bold text-sky-300 font-mono leading-tight mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-bold text-sky-300 font-mono leading-tight">
                 Nível {playerLevel}
               </span>
               {/* Barra de Progresso / XP em Neon Azul */}
-              <div className="w-16 sm:w-22 h-1 sm:h-1.5 mt-1 rounded-full bg-slate-950/90 border border-blue-500/40 overflow-hidden p-[0.5px]">
+              <div className="w-14 sm:w-20 h-1 mt-0.5 rounded-full bg-slate-950/90 border border-blue-500/40 overflow-hidden p-[0.5px]">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-300 shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-500"
                   style={{
@@ -1188,24 +1191,24 @@ export function QuizScreen({
           </div>
 
           {/* Direita: Indicador Q 1/10 + Pontuação com Estrela */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             {/* Pílula Dourada: Q 1/10 */}
-            <div className="px-2 sm:px-2.5 py-1 rounded-full bg-[#06122d]/95 border border-amber-400/90 shadow-[0_0_12px_rgba(245,158,11,0.35)] flex items-center gap-1 sm:gap-1.5">
-              <div className="w-4 h-4 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] flex items-center justify-center font-display leading-none">
+            <div className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[#06122d]/95 border border-amber-400/90 shadow-[0_0_10px_rgba(245,158,11,0.35)] flex items-center gap-1">
+              <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-amber-400 text-slate-950 font-black text-[9px] sm:text-[10px] flex items-center justify-center font-display leading-none">
                 Q
               </div>
-              <span className="font-mono text-xs font-black text-white tracking-tight">
+              <span className="font-mono text-[10px] sm:text-xs font-black text-white tracking-tight">
                 {step + 1}/{total}
               </span>
             </div>
 
             {/* Pontos e Percentagem */}
             <div className="flex flex-col items-end leading-none">
-              <div className="flex items-center gap-1 text-cyan-200 font-display text-xs sm:text-sm font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-400 fill-amber-400" />
+              <div className="flex items-center gap-0.5 sm:gap-1 text-cyan-200 font-display text-[11px] sm:text-xs md:text-sm font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                <Star className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 text-amber-400 fill-amber-400" />
                 <span>{score.toLocaleString('pt-PT')} pts</span>
               </div>
-              <span className="text-[10px] font-mono text-cyan-300/80 font-bold mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-mono text-cyan-300/80 font-bold mt-0.5">
                 {Math.round(((step + 1) / total) * 100)}%
               </span>
             </div>
@@ -1215,63 +1218,72 @@ export function QuizScreen({
         {/* ========================================================= */}
         {/* 2. NÍVEL DA PARTIDA + PAINEL CENTRAL DA PERGUNTA          */}
         {/* ========================================================= */}
-        <div className="w-full flex flex-col items-center shrink-0 my-auto py-1">
+        <div className="w-full flex-1 min-h-0 flex flex-col justify-center items-center py-0.5 sm:py-1">
           {/* EMBLEMA CENTRAL METÁLICO: NÍVEL 2 */}
           <div
-            className="relative z-10 px-4 py-0.5 mb-[-10px] bg-gradient-to-r from-amber-400 via-cyan-400 to-amber-400 p-[1.5px] shadow-[0_0_16px_rgba(245,158,11,0.5)]"
+            className="relative z-10 px-3 sm:px-4 py-0.5 mb-[-8px] bg-gradient-to-r from-amber-400 via-cyan-400 to-amber-400 p-[1.5px] shadow-[0_0_14px_rgba(245,158,11,0.4)] shrink-0"
             style={{
               clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
             }}
           >
             <div
-              className="px-4 sm:px-5 py-0.5 bg-gradient-to-b from-[#0c1a3b] to-[#040817] flex items-center justify-center"
+              className="px-3 sm:px-5 py-0.5 bg-gradient-to-b from-[#0c1a3b] to-[#040817] flex items-center justify-center"
               style={{
                 clipPath: 'polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%)',
               }}
             >
-              <span className="font-display font-black text-[11px] sm:text-xs uppercase tracking-widest text-amber-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+              <span className="font-display font-black text-[10px] sm:text-xs uppercase tracking-widest text-amber-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
                 NÍVEL {diffLevel >= 4 ? 3 : diffLevel === 3 ? 2 : 2}
               </span>
             </div>
           </div>
 
           {/* GRANDE PAINEL CENTRAL CHANFRADO */}
-          <div className="relative w-full p-[2px] bg-gradient-to-b from-amber-400/90 via-blue-500/80 to-cyan-400/90 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(30,58,138,0.4)]">
-            <div className="relative w-full min-h-[95px] sm:min-h-[125px] md:min-h-[145px] px-4 sm:px-8 py-4 sm:py-6 flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#08183d]/98 via-[#040c24]/98 to-[#061333]/98 backdrop-blur-2xl rounded-2xl overflow-hidden">
+          <div className="relative w-full p-[1.5px] sm:p-[2px] bg-gradient-to-b from-amber-400/90 via-blue-500/80 to-cyan-400/90 rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.85),0_0_24px_rgba(30,58,138,0.4)]">
+            <div className="relative w-full min-h-[56px] max-h-[125px] sm:min-h-[85px] sm:max-h-[175px] md:min-h-[110px] md:max-h-[220px] px-3 sm:px-6 py-2 sm:py-4 flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#08183d]/98 via-[#040c24]/98 to-[#061333]/98 backdrop-blur-2xl rounded-xl sm:rounded-2xl overflow-y-auto">
               {/* Néon azul superior e inferior */}
               <div className="absolute top-0 inset-x-6 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
               <div className="absolute bottom-0 inset-x-6 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
 
               {/* Imagem do Desafio Visual quando aplicável */}
               {q.image && (
-                <div className="mb-2 max-h-32 sm:max-h-40 overflow-hidden rounded-xl border border-amber-400/40 shadow-md">
+                <div className="mb-1 max-h-20 sm:max-h-32 overflow-hidden rounded-lg border border-amber-400/40 shadow-md shrink-0">
                   <img src={q.image} alt="Desafio Visual" className="w-full h-full object-contain" />
                 </div>
               )}
 
               {/* Foco Absoluto na Pergunta (Texto Branco Grande e Legível) */}
-              <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-center leading-snug sm:leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
-                {q.question || q.pergunta}
+              <h1
+                className={cn(
+                  'font-black text-center text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]',
+                  isLongQuestion
+                    ? 'text-xs sm:text-sm md:text-base leading-tight sm:leading-snug'
+                    : isMediumQuestion
+                      ? 'text-xs sm:text-base md:text-lg leading-snug sm:leading-normal'
+                      : 'text-sm sm:text-lg md:text-xl leading-snug sm:leading-relaxed'
+                )}
+              >
+                {qPrompt}
               </h1>
             </div>
 
             {/* Losango Dourado Heráldico Inferior */}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-gradient-to-br from-amber-300 to-amber-500 rotate-45 border border-amber-200 shadow-[0_0_8px_rgba(245,158,11,0.9)]" />
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-gradient-to-br from-amber-300 to-amber-500 rotate-45 border border-amber-200 shadow-[0_0_8px_rgba(245,158,11,0.9)]" />
           </div>
 
           {/* TEMPORIZADOR TV INTEGRADO */}
-          <div className="w-full mt-2 px-1 flex flex-col gap-1">
-            <div className="flex items-center justify-between text-[10px] font-mono font-bold text-slate-400">
+          <div className="w-full mt-1 sm:mt-1.5 px-0.5 flex flex-col gap-0.5 sm:gap-1 shrink-0">
+            <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono font-bold text-slate-400 leading-none">
               <span className={cn(isFrozen && 'text-cyan-300 animate-pulse font-black')}>
                 {isFrozen ? '❄️ Tempo Congelado (+15s)' : 'Temporizador'}
               </span>
               <span
                 className={cn(
-                  'px-2 py-0.5 rounded-full border text-[10px] font-black font-mono',
+                  'px-1.5 py-0.5 rounded-full border text-[9px] sm:text-[10px] font-black font-mono leading-none',
                   isFrozen
-                    ? 'border-cyan-400 bg-cyan-950/90 text-cyan-200 shadow-[0_0_10px_rgba(6,182,212,0.6)] animate-pulse'
+                    ? 'border-cyan-400 bg-cyan-950/90 text-cyan-200 shadow-[0_0_8px_rgba(6,182,212,0.6)] animate-pulse'
                     : seconds <= WARNING_TIME_THRESHOLD
-                      ? 'border-rose-500 bg-rose-950/90 text-rose-300 animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.7)]'
+                      ? 'border-rose-500 bg-rose-950/90 text-rose-300 animate-pulse shadow-[0_0_8px_rgba(244,63,94,0.7)]'
                       : 'border-blue-500/40 bg-[#081530]/80 text-sky-300'
                 )}
               >
@@ -1285,10 +1297,10 @@ export function QuizScreen({
                   isFrozen
                     ? 'bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse'
                     : seconds > 15
-                      ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]'
+                      ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 shadow-[0_0_8px_rgba(56,189,248,0.5)]'
                       : seconds > WARNING_TIME_THRESHOLD
                         ? 'bg-gradient-to-r from-amber-500 to-yellow-400'
-                        : 'bg-gradient-to-r from-rose-600 to-red-500 animate-pulse shadow-[0_0_12px_rgba(244,63,94,0.9)]'
+                        : 'bg-gradient-to-r from-rose-600 to-red-500 animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.9)]'
                 )}
                 style={{ width: `${Math.min(100, (seconds / MAX_SECONDS) * 100)}%` }}
               />
@@ -1299,7 +1311,7 @@ export function QuizScreen({
         {/* ========================================================= */}
         {/* 3. BARRA HORIZONTAL DE POWER-UPS                          */}
         {/* ========================================================= */}
-        <div className="w-full my-1 shrink-0">
+        <div className="w-full shrink-0">
           {phase === 'answering' && (
             <QuizPowerUpsBar
               stock5050={aidStocks.stock5050}
@@ -1321,11 +1333,11 @@ export function QuizScreen({
         {/* ========================================================= */}
         {/* 4. AS QUATRO RESPOSTAS ALINHADAS VERTICALMENTE (A, B, C, D)*/}
         {/* ========================================================= */}
-        <div className="w-full flex flex-col gap-1 sm:gap-1.5 shrink-0 my-1">
+        <div className="w-full flex flex-col gap-0.5 sm:gap-1 shrink-0 my-0.5">
           {/* Toast de Feedback de Ajuda se ativo */}
           {aidToast && (
             <div className="flex justify-center mb-0.5 w-full animate-pop">
-              <div className="px-3.5 py-1 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-xs font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
+              <div className="px-3 py-0.5 rounded-xl bg-cyan-950/90 border border-cyan-400/80 text-cyan-200 text-[11px] font-black shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 backdrop-blur-md">
                 <span>{aidToast}</span>
               </div>
             </div>
@@ -1350,39 +1362,25 @@ export function QuizScreen({
               />
             )
           })}
-
-          {/* Botão de avanço rápido quando a resposta for revelada */}
-          {phase === 'revealed' && (
-            <div className="flex justify-center mt-1">
-              <button
-                type="button"
-                onClick={next}
-                className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-primary to-teal-500 px-6 py-2.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:brightness-110 cursor-pointer active:scale-95 transition-all"
-              >
-                <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima Pergunta'}</span>
-                <ChevronRight className="h-4 w-4 stroke-[3]" />
-              </button>
-            </div>
-          )}
         </div>
 
         {/* ========================================================= */}
-        {/* 5. RODAPÉ DE NAVEGAÇÃO: DESISTIR | BRASÃO REAL | PULAR    */}
+        {/* 5. RODAPÉ DE NAVEGAÇÃO: DESISTIR | BRASÃO REAL | PULAR / PRÓXIMA */}
         {/* ========================================================= */}
-        <footer className="w-full flex items-center justify-between pt-1 pb-1 sm:pb-2 shrink-0">
+        <footer className="w-full flex items-center justify-between pt-0.5 pb-0.5 sm:pb-1.5 shrink-0">
           {/* Botão Desistir */}
           <button
             type="button"
             onClick={() => setIsExitModalOpen(true)}
-            className="group relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer"
+            className="group relative px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-[11px] sm:text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1 sm:gap-1.5 active:scale-95 cursor-pointer"
           >
-            <ArrowLeft className="h-3.5 w-3.5 text-amber-400 group-hover:-translate-x-0.5 transition-transform" />
+            <ArrowLeft className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-400 group-hover:-translate-x-0.5 transition-transform" />
             <span>Desistir</span>
           </button>
 
           {/* Brasão Real Português Central */}
           <div className="flex items-center justify-center relative">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full p-[1.5px] bg-gradient-to-b from-amber-300 via-amber-500 to-amber-600 shadow-[0_0_18px_rgba(245,158,11,0.5)] flex items-center justify-center overflow-hidden">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full p-[1.5px] bg-gradient-to-b from-amber-300 via-amber-500 to-amber-600 shadow-[0_0_16px_rgba(245,158,11,0.5)] flex items-center justify-center overflow-hidden">
               <img
                 src="/images/portuguese-royal-crest.jpg"
                 alt="Escudo de Portugal"
@@ -1391,16 +1389,27 @@ export function QuizScreen({
             </div>
           </div>
 
-          {/* Botão Pular Pergunta */}
-          <button
-            type="button"
-            onClick={handleSkipQuestion}
-            disabled={phase !== 'answering'}
-            className="group relative px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
-          >
-            <FastForward className="h-3.5 w-3.5 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
-            <span>Pular Pergunta</span>
-          </button>
+          {/* Botão Dinâmico: Pular Pergunta (answering) OU Próxima / Resultados (revealed) */}
+          {phase === 'revealed' ? (
+            <button
+              type="button"
+              onClick={next}
+              className="group relative px-3 sm:px-5 py-1.5 sm:py-2 rounded-xl border border-emerald-400/80 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-display text-[11px] sm:text-xs font-black uppercase tracking-wider shadow-[0_0_16px_rgba(16,185,129,0.5)] hover:brightness-110 flex items-center gap-1 sm:gap-1.5 active:scale-95 cursor-pointer animate-pulse"
+            >
+              <span>{step + 1 >= total ? 'Ver Resultados' : 'Próxima'}</span>
+              <ChevronRight className="h-3.5 w-3.5 stroke-[3] text-white group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSkipQuestion}
+              disabled={phase !== 'answering'}
+              className="group relative px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-400/60 bg-[#06112d]/95 hover:bg-[#0b1c47] text-slate-200 hover:text-white text-[11px] sm:text-xs font-bold transition-all shadow-[0_0_12px_rgba(30,58,138,0.3)] hover:shadow-[0_0_16px_rgba(245,158,11,0.35)] flex items-center gap-1 sm:gap-1.5 active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <FastForward className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
+              <span>Pular Pergunta</span>
+            </button>
+          )}
         </footer>
 
         {/* MODAL DE CONFIRMAÇÃO DE DESISTÊNCIA */}

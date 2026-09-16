@@ -139,6 +139,18 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Full-Screen No-Scroll Match Viewport (Mobile First Fullscreen Game UI) */
+  .match-fullscreen-container {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding-top: max(0.25rem, env(safe-area-inset-top, 0.25rem));
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom, 0.25rem));
+    padding-left: max(0.5rem, env(safe-area-inset-left, 0.5rem));
+    padding-right: max(0.5rem, env(safe-area-inset-right, 0.5rem));
+    overflow: hidden !important;
+    touch-action: manipulation;
+  }
+
   /* 3D Glassmorphic Cards across All Game Screens */
   .card-game,
   .card-hud-cyber,

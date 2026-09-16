@@ -125,7 +125,7 @@ function QuizPageContent() {
 
   return (
     <QuizErrorBoundary categorySlug={categorySlug}>
-      <div className="relative bg-transparent">
+      <div className="relative h-full w-full bg-transparent overflow-hidden flex flex-col">
         <QuizScreen
           key={gameId}
           categorySlug={categorySlug}
@@ -144,7 +144,7 @@ function QuizPageContent() {
 
 export function QuizPage() {
   return (
-    <div className="relative h-full w-full bg-transparent">
+    <div className="relative h-full w-full bg-transparent overflow-hidden">
       <Suspense fallback={null}>
         <QuizPageContent />
       </Suspense>

@@ -149,6 +149,20 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
+html.ap-arena-match,
+html.ap-arena-match body {
+  overflow: hidden !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  touch-action: manipulation;
+}
+html.ap-arena-match #app-main-layout {
+  padding-bottom: 0 !important;
+  min-height: 100dvh !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow: hidden !important;
+}
 html.ap-arena-match #global-background-container,
 html.ap-arena-match #global-background-video,
 html.ap-arena-match #global-background-image,
@@ -174,7 +188,7 @@ html.ap-arena-match #mobile-bottom-dock {
             <ArenaLayoutSync />
             <GameThemeProvider>
               <AudioProvider>
-                <div className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">
+                <div id="app-main-layout" className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">
                   {children}
                 </div>
                 <MobileBottomBar />

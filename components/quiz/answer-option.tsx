@@ -44,7 +44,7 @@ export function AnswerOption({
     return (
       <div
         aria-hidden="true"
-        className="relative w-full min-h-[3.25rem] sm:min-h-[3.65rem] my-1 opacity-20 select-none cursor-not-allowed filter grayscale transition-opacity duration-300 pointer-events-none"
+        className="relative w-full min-h-[2.5rem] sm:min-h-[2.85rem] md:min-h-[3.25rem] my-0.5 sm:my-1 opacity-20 select-none cursor-not-allowed filter grayscale transition-opacity duration-300 pointer-events-none"
       >
         <div
           className="relative w-full h-full p-[1.5px] bg-slate-800/40"
@@ -54,19 +54,19 @@ export function AnswerOption({
           }}
         >
           <div
-            className="w-full h-full px-5 py-2 bg-[#050b18]/80 flex items-center gap-3.5"
+            className="w-full h-full px-3 sm:px-5 py-1 sm:py-2 bg-[#050b18]/80 flex items-center gap-2.5 sm:gap-3.5"
             style={{
               clipPath:
                 'polygon(15px 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 15px 100%, 0% 50%)',
             }}
           >
-            <div className="w-8 h-8 rounded-md bg-slate-900 flex items-center justify-center font-display font-bold text-slate-600 line-through text-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-slate-900 flex items-center justify-center font-display font-bold text-slate-600 line-through text-xs sm:text-sm">
               {optionKey}
             </div>
             <span className="flex-1 text-xs sm:text-sm font-semibold text-slate-600 line-through truncate">
               {text}
             </span>
-            <span className="text-[10px] font-mono text-slate-600 uppercase font-black tracking-wider">
+            <span className="text-[9px] sm:text-[10px] font-mono text-slate-600 uppercase font-black tracking-wider">
               50:50
             </span>
           </div>
@@ -137,7 +137,7 @@ export function AnswerOption({
       onClick={onSelect}
       aria-label={`Opção ${optionKey}: ${text}`}
       className={cn(
-        'group relative w-full min-h-[3.25rem] sm:min-h-[3.65rem] my-1 outline-none select-none transition-all duration-200 cursor-pointer block',
+        'group relative w-full min-h-[2.5rem] sm:min-h-[2.85rem] md:min-h-[3.25rem] my-0.5 sm:my-1 outline-none select-none transition-all duration-200 cursor-pointer block',
         animationClass,
         containerGlow,
         !disabled && !isMuted && !isCurrentlySelected && !isCorrect && !isWrong && 'hover:scale-[1.01] active:scale-[0.99] active:brightness-110',
@@ -147,27 +147,27 @@ export function AnswerOption({
       {/* MOLDURA EXTERIOR CHANFRADA (Bordas metálicas neon com chanfro a 45º) */}
       <div
         className={cn(
-          'relative w-full h-full p-[1.8px] sm:p-[2px] transition-all duration-200 bg-gradient-to-r',
+          'relative w-full h-full p-[1.5px] sm:p-[2px] transition-all duration-200 bg-gradient-to-r',
           outerBorderGradient
         )}
         style={{
           clipPath:
-            'polygon(16px 0%, calc(100% - 16px) 0%, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0% 50%)',
+            'polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%)',
         }}
       >
         {/* CORPO INTERIOR CHANFRADO */}
         <div
           className={cn(
-            'w-full h-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center gap-3 sm:gap-4 transition-all duration-200 backdrop-blur-xl',
+            'w-full h-full px-3 sm:px-5 py-1 sm:py-2 flex items-center gap-2.5 sm:gap-3.5 transition-all duration-200 backdrop-blur-xl',
             innerBg
           )}
           style={{
             clipPath:
-              'polygon(14.5px 0%, calc(100% - 14.5px) 0%, 100% 50%, calc(100% - 14.5px) 100%, 14.5px 100%, 0% 50%)',
+              'polygon(13px 0%, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 13px 100%, 0% 50%)',
           }}
         >
           {/* 1. MÓDULO HEXAGONAL METÁLICO DOURADO PARA A LETRA A / B / C / D */}
-          <div className="relative flex items-center justify-center shrink-0 w-8 h-8 sm:w-9 sm:h-9">
+          <div className="relative flex items-center justify-center shrink-0 w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9">
             <div
               className={cn(
                 'w-full h-full p-[1.5px] transition-all duration-200 flex items-center justify-center',
@@ -186,7 +186,7 @@ export function AnswerOption({
             >
               <div
                 className={cn(
-                  'w-full h-full flex items-center justify-center font-display font-black text-sm sm:text-base tracking-wider transition-colors duration-200',
+                  'w-full h-full flex items-center justify-center font-display font-black text-xs sm:text-sm md:text-base tracking-wider transition-colors duration-200',
                   hexagonBg,
                   isCorrect || isWrong || isCurrentlySelected ? '' : 'text-amber-300'
                 )}
@@ -196,9 +196,9 @@ export function AnswerOption({
                 }}
               >
                 {isCorrect ? (
-                  <Check className="h-4.5 w-4.5 sm:h-5 sm:w-5 stroke-[3.5] text-slate-950" />
+                  <Check className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 stroke-[3.5] text-slate-950" />
                 ) : isWrong ? (
-                  <X className="h-4.5 w-4.5 sm:h-5 sm:w-5 stroke-[3.5] text-white" />
+                  <X className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 stroke-[3.5] text-white" />
                 ) : (
                   <span className={cn(isCurrentlySelected ? 'text-slate-950' : 'text-amber-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]')}>
                     {optionKey}
@@ -211,7 +211,7 @@ export function AnswerOption({
           {/* 2. TEXTO DA RESPOSTA (BRANCO, GRANDE, DE ALTA LEGIBILIDADE) */}
           <span
             className={cn(
-              'flex-1 min-w-0 text-sm sm:text-base md:text-[17px] font-bold leading-snug tracking-wide break-words hyphens-auto text-left transition-colors duration-200 select-none drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]',
+              'flex-1 min-w-0 text-xs sm:text-sm md:text-[15px] font-bold leading-tight sm:leading-snug tracking-wide break-words hyphens-auto text-left transition-colors duration-200 select-none drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]',
               textStyles
             )}
           >
@@ -220,8 +220,8 @@ export function AnswerOption({
 
           {/* 3. PERCENTAGEM DO VOTO DO PÚBLICO (QUANDO ATIVA) */}
           {publicVotePercent !== undefined && !eliminated && (
-            <div className="ml-auto px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-purple-950/90 border border-purple-400/80 text-purple-200 font-mono font-black text-xs sm:text-sm shadow-md shadow-purple-500/30 flex items-center gap-1 shrink-0">
-              <span className="text-[10px] sm:text-[11px]">👥</span>
+            <div className="ml-auto px-1.5 sm:px-2 py-0.5 rounded-lg bg-purple-950/90 border border-purple-400/80 text-purple-200 font-mono font-black text-[10px] sm:text-xs shadow-md shadow-purple-500/30 flex items-center gap-1 shrink-0">
+              <span className="text-[9px] sm:text-[10px]">👥</span>
               <span>{publicVotePercent}%</span>
             </div>
           )}
