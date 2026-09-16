@@ -28,27 +28,29 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.warn('[QuizErrorBoundary] Erro contornado automaticamente:', error, errorInfo)
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('active_game_session')
-        localStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('active_game_session')
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-      }
-    } catch {}
+    console.error('[QuizErrorBoundary] Erro capturado no ecrã de quiz:', error, errorInfo)
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <QuizScreen
-          key={safeRandomUUID()}
-          categorySlug={this.props.categorySlug || 'desafio-nacional'}
-          gameId={safeRandomUUID()}
-          isFresh={true}
-        />
+        <div className="min-h-[50vh] flex flex-col items-center justify-center p-6 text-center text-white select-none">
+          <div className="p-6 rounded-3xl bg-slate-900/90 border border-amber-500/30 max-w-md shadow-2xl backdrop-blur-xl space-y-4">
+            <h2 className="font-display text-xl font-bold uppercase text-amber-400">
+              Desafio Nacional
+            </h2>
+            <p className="text-xs text-slate-300">
+              Ocorreu uma oscilação momentânea na partida.
+            </p>
+            <button
+              type="button"
+              onClick={() => this.setState({ hasError: false })}
+              className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition cursor-pointer active:scale-95"
+            >
+              Continuar Partida
+            </button>
+          </div>
+        </div>
       )
     }
     return this.props.children
@@ -59,9 +61,11 @@ function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { user, authResolved } = useAuth()
+  const isFresh = searchParams.get('fresh') === 'true'
 
-  // 1. Limpeza total de qualquer resíduo de sessão pendente ao montar
+  // Limpeza apenas se explicitamente solicitado via fresh=true
   useEffect(() => {
+    if (!isFresh) return
     try {
       if (typeof window !== 'undefined') {
         localStorage.removeItem('active_game_session')
@@ -69,33 +73,9 @@ function QuizPageContent() {
         sessionStorage.removeItem('active_game_session')
         sessionStorage.removeItem('active_session_id')
         sessionStorage.removeItem('ap_error_auto_retried')
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-          const key = localStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('session') ||
-              key.includes('challenge'))
-          ) {
-            localStorage.removeItem(key)
-          }
-        }
-        for (let i = sessionStorage.length - 1; i >= 0; i--) {
-          const key = sessionStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('session') ||
-              key.includes('challenge'))
-          ) {
-            sessionStorage.removeItem(key)
-          }
-        }
       }
     } catch {}
-  }, [])
+  }, [isFresh])
 
   // 2. Extrair parâmetros flexíveis com fallback direto para 'desafio-nacional'
   const rawCategorySlug =

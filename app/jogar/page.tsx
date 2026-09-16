@@ -38,70 +38,11 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[CRASH /jogar / RECUPERAÇÃO SESSÃO]:', error, errorInfo)
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('active_game_session')
-        localStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('active_game_session')
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        for (let i = sessionStorage.length - 1; i >= 0; i--) {
-          const key = sessionStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('challenge') ||
-              key.includes('session'))
-          ) {
-            sessionStorage.removeItem(key)
-          }
-        }
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-          const key = localStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('challenge') ||
-              key.includes('session'))
-          ) {
-            localStorage.removeItem(key)
-          }
-        }
-      }
-    } catch (cleanupErr) {
-      console.error('[CRASH /jogar]: Erro na limpeza de armazenamento:', cleanupErr)
-    }
+    console.error('[CRASH /jogar]:', error, errorInfo)
   }
 
   handleReset = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('active_game_session')
-        localStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('active_game_session')
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        for (let i = sessionStorage.length - 1; i >= 0; i--) {
-          const key = sessionStorage.key(i)
-          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
-            sessionStorage.removeItem(key)
-          }
-        }
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-          const key = localStorage.key(i)
-          if (key && (key.startsWith('ap_quiz_state_') || key.startsWith('quiz_') || key.includes('session') || key.includes('challenge'))) {
-            localStorage.removeItem(key)
-          }
-        }
-        window.location.replace('/jogar?fresh=true')
-        return
-      }
-    } catch {
-      this.setState({ hasError: false, error: null })
-    }
+    this.setState({ hasError: false, error: null })
   }
 
   render() {
@@ -130,7 +71,7 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
                 O teu progresso e dados de conta estão protegidos. Clica abaixo para recarregar o jogo ou voltar à central.
               </p>
 
-              {process.env.NODE_ENV !== 'production' && this.state.error?.message && (
+              {this.state.error?.message && (
                 <div className="p-2.5 rounded-xl bg-black/60 border border-white/10 text-left font-mono text-[11px] text-rose-300 max-h-24 overflow-y-auto">
                   {this.state.error.message}
                 </div>

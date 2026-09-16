@@ -24,7 +24,7 @@ import {
 import { QuestionReportModal } from '@/components/question-report-modal'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
-import { resolveArenaForGame } from '@/src/data/arenaCatalog'
+import { resolveArenaForGame, CANONICAL_ARENAS } from '@/src/data/arenaCatalog'
 import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
 import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
@@ -481,11 +481,11 @@ export function QuizScreen({
       })
     } catch (err) {
       console.warn('[QuizScreen] Erro na resolução da arena:', err)
-      return { arena: null, isExplicit: false, isFallback: true }
+      return { arena: CANONICAL_ARENAS[0], isExplicit: false, isFallback: true }
     }
   }, [arenaParam, categorySlug, equippedArenaId])
 
-  const activeArena = arenaResolution.arena
+  const activeArena = arenaResolution?.arena || CANONICAL_ARENAS[0]
 
   // Registo de fluxo autoritativo: criação de partida e seleção de arena
   useEffect(() => {
@@ -710,89 +710,7 @@ export function QuizScreen({
   }, [cleanOldSessionStorage, router])
 
   const [isExitModalOpen, setIsExitModalOpen] = useState(false)
-
-  const handleSkipQuestion = useCallback(() => {
-    if (phase !== 'answering' || !q) return
-    try {
-      recordedAnswersRef.current.push({
-        questionId: String(q.id),
-        categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
-        category: q.category,
-        subcategory: q.subcategory,
-        prompt: q.question,
-        selectedOption: '',
-        isCorrect: false,
-        answeredAt: Date.now(),
-      })
-    } catch {}
-    setStreak(0)
-    setCurrentStreak(0)
-    advanceToNextOrFinish()
-  }, [phase, q, advanceToNextOrFinish, setCurrentStreak])
-
   const isLockingInRef = useRef(false)
-
-  const reveal = useCallback(
-    (choice: OptionKey) => {
-      if (phase !== 'answering' || !q || selected !== null || isLockingInRef.current) {
-        return
-      }
-
-      // 4. QUANDO O JOGADOR SELECIONA UMA RESPOSTA:
-      // Destacar imediatamente a opção selecionada (âmbar de lock-in de concurso)
-      isLockingInRef.current = true
-      setSelected(choice)
-      setIsFrozen(false)
-
-      // Breve suspensa profissional de concurso televisivo (350ms) antes de validar
-      setTimeout(() => {
-        const hit = choice === q.correct
-
-        // Registo da resposta canónica para relatório final
-        try {
-          recordedAnswersRef.current.push({
-            questionId: String(q.id),
-            categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
-            category: q.category,
-            subcategory: q.subcategory,
-            prompt: q.question,
-            selectedOption: choice,
-            isCorrect: hit,
-            answeredAt: Date.now(),
-          })
-        } catch {}
-
-        if (hit) {
-          const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
-          const nextStreak = streak + 1
-
-          setScore((currentScore) => currentScore + q.points + timeBonus)
-          setCorrectCount((current) => current + 1)
-          setStreak(nextStreak)
-          setCurrentStreak(nextStreak)
-          setBestStreak((best) => Math.max(best, nextStreak))
-
-          if (seconds <= WARNING_TIME_THRESHOLD) {
-            playSound('last_second_correct')
-          } else {
-            playSound('correct')
-          }
-
-          if (nextStreak > 1 && nextStreak % 3 === 0) {
-            setTimeout(() => playSound('streak'), 400)
-          }
-        } else {
-          setStreak(0)
-          setCurrentStreak(0)
-          playSound('wrong')
-        }
-
-        setPhase('revealed')
-        isLockingInRef.current = false
-      }, 350)
-    },
-    [phase, q, selected, seconds, streak, playSound, setCurrentStreak]
-  )
 
   const result: QuizResult = useMemo(() => {
     const earnedCoins = calculateMatchCoinReward({
@@ -905,7 +823,7 @@ export function QuizScreen({
         setSavingReward(false)
       }
     },
-    [user?.uid, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome]
+    [user?.uid, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome, effectiveUserId, districtParam, cityParam]
   )
 
   const advanceToNextOrFinish = useCallback(() => {
@@ -922,6 +840,87 @@ export function QuizScreen({
     setSeconds(60)
     setPhase('answering')
   }, [step, total, gameId, result, processMatchCompletion, resetQuestionAids])
+
+  const handleSkipQuestion = useCallback(() => {
+    if (phase !== 'answering' || !q) return
+    try {
+      recordedAnswersRef.current.push({
+        questionId: String(q.id),
+        categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
+        category: q.category,
+        subcategory: q.subcategory,
+        prompt: q.question,
+        selectedOption: '',
+        isCorrect: false,
+        answeredAt: Date.now(),
+      })
+    } catch {}
+    setStreak(0)
+    setCurrentStreak(0)
+    advanceToNextOrFinish()
+  }, [phase, q, advanceToNextOrFinish, setCurrentStreak])
+
+  const reveal = useCallback(
+    (choice: OptionKey) => {
+      if (phase !== 'answering' || !q || selected !== null || isLockingInRef.current) {
+        return
+      }
+
+      // 4. QUANDO O JOGADOR SELECIONA UMA RESPOSTA:
+      // Destacar imediatamente a opção selecionada (âmbar de lock-in de concurso)
+      isLockingInRef.current = true
+      setSelected(choice)
+      setIsFrozen(false)
+
+      // Breve suspensa profissional de concurso televisivo (350ms) antes de validar
+      setTimeout(() => {
+        const hit = choice === q.correct
+
+        // Registo da resposta canónica para relatório final
+        try {
+          recordedAnswersRef.current.push({
+            questionId: String(q.id),
+            categoryId: getCanonicalCategory(q.category, q.subcategory, String(q.id), q.question),
+            category: q.category,
+            subcategory: q.subcategory,
+            prompt: q.question,
+            selectedOption: choice,
+            isCorrect: hit,
+            answeredAt: Date.now(),
+          })
+        } catch {}
+
+        if (hit) {
+          const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
+          const nextStreak = streak + 1
+
+          setScore((currentScore) => currentScore + q.points + timeBonus)
+          setCorrectCount((current) => current + 1)
+          setStreak(nextStreak)
+          setCurrentStreak(nextStreak)
+          setBestStreak((best) => Math.max(best, nextStreak))
+
+          if (seconds <= WARNING_TIME_THRESHOLD) {
+            playSound('last_second_correct')
+          } else {
+            playSound('correct')
+          }
+
+          if (nextStreak > 1 && nextStreak % 3 === 0) {
+            setTimeout(() => playSound('streak'), 400)
+          }
+        } else {
+          setStreak(0)
+          setCurrentStreak(0)
+          playSound('wrong')
+        }
+
+        setPhase('revealed')
+        isLockingInRef.current = false
+      }, 350)
+    },
+    [phase, q, selected, seconds, streak, playSound, setCurrentStreak]
+  )
 
   const next = useCallback(() => {
     advanceToNextOrFinish()
@@ -1103,19 +1102,11 @@ export function QuizScreen({
     return 'muted'
   }
 
-  // Resolução da Arena
-  if ((arenaResolution as any)?.error || !activeArena) {
-    return (
-      <div className="min-h-screen w-full flex items-center justify-center p-4">
-        <ArenaRenderer
-          arenaId={arenaParam}
-          categorySlug={categorySlug}
-          equippedArenaId={equippedArenaId}
-          className="max-w-xl shadow-2xl"
-        />
-      </div>
-    )
-  }
+  // Resolução segura da progressão do jogador
+  const safeXp = typeof profile?.xp === 'number' ? profile.xp : (typeof userProfile?.xp === 'number' ? userProfile.xp : 0)
+  const levelInfo = calculateLevelProgress(safeXp)
+  const playerLevel = profile?.level || userProfile?.level || levelInfo?.currentLevel?.level || 1
+  const playerProgressPercent = Math.min(100, Math.max(10, Math.round(levelInfo?.progressPercentage || 0)))
 
   return (
     <>
@@ -1124,7 +1115,7 @@ export function QuizScreen({
         <ArenaCinematicIntro
           arena={activeArena}
           playerName={effectiveDisplayName}
-          playerTier={profile?.level ? `NÍVEL ${profile.level}` : 'NÍVEL 1'}
+          playerTier={`NÍVEL ${playerLevel}`}
           onComplete={handleCompleteIntro}
           onSkip={handleCompleteIntro}
         />
@@ -1167,8 +1158,10 @@ export function QuizScreen({
               <Crown className="absolute -top-2.5 left-1/2 -translate-x-1/2 h-3.5 w-3.5 text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)] z-10" />
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-amber-300 shadow-[0_0_14px_rgba(34,211,238,0.7)] flex items-center justify-center overflow-hidden">
                 <PlayerAvatar
-                  avatar={profile?.avatar || (user as any)?.photoURL || '/images/avatars/avatar_01.png'}
+                  profile={profile || userProfile}
+                  src={profile?.avatar || (user as any)?.photoURL || '/images/avatars/avatar_01.png'}
                   size="sm"
+                  showBadge={false}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -1180,14 +1173,14 @@ export function QuizScreen({
                 {effectiveDisplayName}
               </span>
               <span className="text-[10px] font-bold text-sky-300 font-mono leading-tight mt-0.5">
-                Nível {profile?.level || 11}
+                Nível {playerLevel}
               </span>
               {/* Barra de Progresso / XP em Neon Azul */}
               <div className="w-16 sm:w-22 h-1 sm:h-1.5 mt-1 rounded-full bg-slate-950/90 border border-blue-500/40 overflow-hidden p-[0.5px]">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-300 shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-500"
                   style={{
-                    width: `${Math.min(100, Math.max(15, calculateLevelProgress(profile?.xp || 0).percent))}%`,
+                    width: `${playerProgressPercent}%`,
                   }}
                 />
               </div>
