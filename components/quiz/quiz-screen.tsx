@@ -501,6 +501,7 @@ export function QuizScreen({
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
   const [isExitModalOpen, setIsExitModalOpen] = useState(false)
   const [reactionCooldown, setReactionCooldown] = useState(0)
+  const [isFinalizingMatch, setIsFinalizingMatch] = useState(false)
 
   // 3. REFS ESTÁVEIS
   const authSyncDoneRef = useRef(false)
@@ -865,7 +866,6 @@ export function QuizScreen({
         return
       }
 
-      // Utilizador Autenticado: Gravação na nuvem com tratamento de exceções
       setSavingReward(true)
       try {
         const answeredIds = quizQuestions.map((quest) => String(quest.id)).filter(Boolean)
@@ -896,54 +896,64 @@ export function QuizScreen({
           ? 'modo_aleatorio'
           : 'solo_quiz'
 
-        const outcome = await awardMatchReward({
-          userId: user?.uid || effectiveUserId,
-          matchId: gid,
-          categorySlug: categorySlug || 'geral',
-          categoryName: category?.name || 'Portugal',
-          matchType,
-          district: districtParam || undefined,
-          city: cityParam || undefined,
-          correctAnswers: finalResult.correct,
-          totalQuestions: finalResult.total,
-          score: finalResult.score,
-          bestStreak: finalResult.bestStreak,
-          difficultyMultiplier: getDifficultyMultiplier(diffLevel),
-          answeredQuestionIds: answeredIds,
-          answers: recordedAnswersRef.current,
-        })
-
-        setRewardOutcome(outcome)
-
-        setUserProfile((currentProfile) =>
-          currentProfile
-            ? {
-                ...currentProfile,
-                level: outcome.newLevel,
-                xp: outcome.newTotalXp,
-                euros: outcome.newTotalCoins,
-                coins: outcome.newTotalCoins,
-                streak: outcome.newStreak,
-                categoryStats: outcome.categoryStats
-                  ? { ...(currentProfile.categoryStats || {}), ...outcome.categoryStats }
-                  : currentProfile.categoryStats,
-              }
-            : currentProfile
-        )
-
-        if (updateProfileLocally) {
-          updateProfileLocally({
-            xp: outcome.newTotalXp,
-            level: outcome.newLevel,
-            coins: outcome.newTotalCoins,
-            euros: outcome.newTotalCoins,
+        // 1. Gravação das recompensas normais da conta (XP, Moedas, Níveis, Estatísticas)
+        try {
+          const outcome = await awardMatchReward({
+            userId: user?.uid || effectiveUserId,
+            matchId: gid,
+            categorySlug: categorySlug || 'geral',
+            categoryName: category?.name || 'Portugal',
+            matchType,
+            district: districtParam || undefined,
+            city: cityParam || undefined,
+            correctAnswers: finalResult.correct,
+            totalQuestions: finalResult.total,
+            score: finalResult.score,
+            bestStreak: finalResult.bestStreak,
+            difficultyMultiplier: getDifficultyMultiplier(diffLevel),
+            answeredQuestionIds: answeredIds,
+            answers: recordedAnswersRef.current,
           })
+
+          setRewardOutcome(outcome)
+
+          setUserProfile((currentProfile) =>
+            currentProfile
+              ? {
+                  ...currentProfile,
+                  level: outcome.newLevel,
+                  xp: outcome.newTotalXp,
+                  euros: outcome.newTotalCoins,
+                  coins: outcome.newTotalCoins,
+                  streak: outcome.newStreak,
+                  categoryStats: outcome.categoryStats
+                    ? { ...(currentProfile.categoryStats || {}), ...outcome.categoryStats }
+                    : currentProfile.categoryStats,
+                }
+              : currentProfile
+          )
+
+          if (updateProfileLocally) {
+            updateProfileLocally({
+              xp: outcome.newTotalXp,
+              level: outcome.newLevel,
+              coins: outcome.newTotalCoins,
+              euros: outcome.newTotalCoins,
+            })
+          }
+        } catch (rewardErr) {
+          console.error('[CRASH /jogar]: Erro na atribuição de recompensa normal:', rewardErr)
         }
 
-        // Registo de Pontos de Evento caso exista evento oficial ativo ou partida de evento
+        // 2. Gravação autoritativa do evento oficial no Backend Firestore
+        const targetEventId =
+          eventId || (categorySlug === 'portugal-em-jogo' ? 'portugal-em-jogo-2026' : undefined) || 'portugal-em-jogo-2026'
+        const targetEventSlug = eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo'
+
         try {
           const idToken = await (user as any)?.getIdToken?.()
           if (idToken) {
+            console.log(`[EVENT] A submeter resultado da partida ${gid} para o evento ${targetEventId}...`)
             const evRes = await fetch('/api/events/record-match', {
               method: 'POST',
               headers: {
@@ -952,42 +962,61 @@ export function QuizScreen({
               },
               body: JSON.stringify({
                 matchId: gid,
-                eventId: eventId || (categorySlug === 'portugal-em-jogo' ? 'portugal-em-jogo-2026' : undefined),
-                eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
+                eventId: targetEventId,
+                eventSlug: targetEventSlug,
                 score: finalResult.score,
                 correctAnswers: finalResult.correct,
                 totalQuestions: finalResult.total,
                 categorySlug: categorySlug || 'portugal-em-jogo',
               }),
-            }).catch((e) => {
-              console.warn('[EVENT_MATCH_SUBMISSION_WARN]', e)
-              return null
             })
 
-            if (evRes && evRes.ok) {
+            if (evRes.ok) {
               const evData = await evRes.json().catch(() => null)
               if (evData) {
+                console.log('[EVENT] Gravação do evento confirmada com sucesso:', evData)
                 setEventMatchOutcome(evData)
               }
+            } else {
+              const errBody = await evRes.json().catch(() => ({}))
+              console.warn('[EVENT] Resposta de erro do endpoint /api/events/record-match:', errBody)
             }
           }
         } catch (eventErr) {
           console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
         }
       } catch (err) {
-        console.error('[CRASH /jogar]: Erro na atribuição de recompensa:', err)
+        console.error('[CRASH /jogar]: Erro geral na conclusão da partida:', err)
       } finally {
         setSavingReward(false)
       }
     },
-    [user?.uid, categorySlug, category?.name, diffLevel, quizQuestions, updateProfileLocally, rewardOutcome, effectiveUserId, districtParam, cityParam]
+    [
+      user,
+      categorySlug,
+      category?.name,
+      diffLevel,
+      quizQuestions,
+      updateProfileLocally,
+      rewardOutcome,
+      effectiveUserId,
+      districtParam,
+      cityParam,
+      eventId,
+      eventSlug,
+    ]
   )
 
-  const advanceToNextOrFinish = useCallback(() => {
+  const advanceToNextOrFinish = useCallback(async () => {
     isLockingInRef.current = false
     if (step + 1 >= total) {
-      setPhase('finished')
-      void processMatchCompletion(gameId, result)
+      setIsFinalizingMatch(true)
+      try {
+        await processMatchCompletion(gameId, result)
+      } finally {
+        setIsFinalizingMatch(false)
+        setPhase('finished')
+      }
       return
     }
 
@@ -1234,6 +1263,27 @@ export function QuizScreen({
   if (!user) {
     const currentTarget = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '/jogar'
     return <AuthWallView targetUrl={currentTarget} />
+  }
+
+  // 2.5 A processar e a registar resultado de partida oficial no servidor
+  if (isFinalizingMatch) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-[#020614]/95 text-white backdrop-blur-2xl select-none">
+        <div className="relative max-w-sm w-full rounded-3xl border border-amber-500/30 bg-slate-900/90 p-8 text-center space-y-5 shadow-2xl">
+          <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40">
+            <div className="h-8 w-8 rounded-full border-3 border-amber-400 border-t-transparent animate-spin" />
+          </div>
+          <div className="space-y-1.5">
+            <h2 className="font-display text-lg font-black uppercase text-white tracking-wider">
+              A Concluir Partida
+            </h2>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              A registar o teu resultado oficial, pontos e classificação nacional...
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   // 3. Fim de jogo: Apresentar ecrã de resultados

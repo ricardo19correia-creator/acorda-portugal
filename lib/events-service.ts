@@ -60,13 +60,18 @@ export interface EventParticipant {
   userId: string
   displayName: string
   photoURL?: string | null
+  avatar?: string | null
   district?: string
+  distrito?: string
   eventPoints: number
+  points?: number
   countedMatches?: number
   totalMatches: number
+  matchesToday?: number
   dailyMatches?: Record<string, number>
   bestScore?: number
   totalScore?: number
+  lastPlayedDate?: string
   lastPlayedAt?: any
   updatedAt?: any
   pos?: number
@@ -252,9 +257,15 @@ export function getDailyMatchesCount(
   participant: EventParticipant | null,
   dateStr?: string
 ): number {
-  if (!participant || !participant.dailyMatches) return 0
+  if (!participant) return 0
   const targetDate = dateStr || getLisbonDateString()
-  return Number(participant.dailyMatches[targetDate] || 0)
+  if (participant.dailyMatches && typeof participant.dailyMatches[targetDate] === 'number') {
+    return Number(participant.dailyMatches[targetDate])
+  }
+  if (participant.lastPlayedDate === targetDate && typeof participant.matchesToday === 'number') {
+    return Number(participant.matchesToday)
+  }
+  return 0
 }
 
 /**
@@ -270,8 +281,8 @@ export function getDailyMatchesCount(
 export function sortEventParticipants(list: EventParticipant[]): EventParticipant[] {
   return [...list]
     .sort((a, b) => {
-      const ptsA = Number(a.eventPoints || 0)
-      const ptsB = Number(b.eventPoints || 0)
+      const ptsA = Number(a.eventPoints ?? a.points ?? 0)
+      const ptsB = Number(b.eventPoints ?? b.points ?? 0)
       if (ptsB !== ptsA) return ptsB - ptsA
 
       const totA = Number(a.totalScore || 0)
@@ -282,8 +293,8 @@ export function sortEventParticipants(list: EventParticipant[]): EventParticipan
       const bestB = Number(b.bestScore || 0)
       if (bestB !== bestA) return bestB - bestA
 
-      const matchesA = Number(a.countedMatches || a.totalMatches || 0)
-      const matchesB = Number(b.countedMatches || b.totalMatches || 0)
+      const matchesA = Number(a.countedMatches ?? a.totalMatches ?? 0)
+      const matchesB = Number(b.countedMatches ?? b.totalMatches ?? 0)
       if (matchesA !== matchesB) return matchesA - matchesB
 
       const nameDiff = (a.displayName || '').localeCompare(b.displayName || '', 'pt-PT')
@@ -372,6 +383,8 @@ export function subscribePublishedEvents(
 
 /**
  * Subscrição em tempo real aos participantes reais de um evento no Firestore
+ * Usa consulta simples de campo único com indexação padrão automática,
+ * aplicando critérios determinísticos de desempate via JavaScript para máxima resiliência.
  */
 export function subscribeEventRanking(
   eventId: string = OFFICIAL_PORTUGAL_EM_JOGO_ID,
@@ -385,64 +398,80 @@ export function subscribeEventRanking(
 
   try {
     const participantsRef = collection(db, 'events', eventId, 'participants')
+    // Indexação padrão automática de campo único por eventPoints
     const q = query(
       participantsRef,
       orderBy('eventPoints', 'desc'),
-      orderBy('totalScore', 'desc'),
       limit(limitCount)
     )
+
+    const mapDocToParticipant = (docSnap: any): EventParticipant => {
+      const data = docSnap.data() || {}
+      const ep =
+        typeof data.eventPoints === 'number'
+          ? data.eventPoints
+          : typeof data.points === 'number'
+          ? data.points
+          : 0
+      const cm =
+        typeof data.countedMatches === 'number'
+          ? data.countedMatches
+          : typeof data.totalMatches === 'number'
+          ? data.totalMatches
+          : 0
+      const tm = typeof data.totalMatches === 'number' ? data.totalMatches : cm
+      return {
+        userId: docSnap.id,
+        displayName: data.displayName || 'Jogador',
+        photoURL: data.photoURL || data.avatar || null,
+        avatar: data.avatar || data.photoURL || null,
+        district: data.district || data.distrito || 'Portugal',
+        distrito: data.distrito || data.district || 'Portugal',
+        eventPoints: ep,
+        points: ep,
+        countedMatches: cm,
+        totalMatches: tm,
+        matchesToday:
+          typeof data.matchesToday === 'number'
+            ? data.matchesToday
+            : undefined,
+        dailyMatches: data.dailyMatches || {},
+        bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
+        totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
+        lastPlayedDate: data.lastPlayedDate,
+        lastPlayedAt: data.lastPlayedAt,
+        updatedAt: data.updatedAt,
+      }
+    }
 
     return onSnapshot(
       q,
       (snapshot) => {
         const rawList: EventParticipant[] = []
         snapshot.forEach((docSnap) => {
-          const data = docSnap.data() || {}
-          rawList.push({
-            userId: docSnap.id,
-            displayName: data.displayName || 'Jogador',
-            photoURL: data.photoURL || null,
-            district: data.district || 'Portugal',
-            eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
-            countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
-            totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
-            dailyMatches: data.dailyMatches || {},
-            bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
-            totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
-            lastPlayedAt: data.lastPlayedAt,
-            updatedAt: data.updatedAt,
-          })
+          rawList.push(mapDocToParticipant(docSnap))
         })
 
         const sorted = sortEventParticipants(rawList)
         callback(sorted)
       },
       (error) => {
-        console.warn('[EVENTS] Aviso no orderBy composto do ranking, a usar consulta simples:', error)
+        console.warn('[EVENTS] Aviso no orderBy do ranking, a usar escuta direta sem índice:', error)
         const fallbackQ = query(participantsRef, limit(limitCount))
-        getDocs(fallbackQ)
-          .then((fallbackSnap) => {
+        return onSnapshot(
+          fallbackQ,
+          (fallbackSnap) => {
             const rawList: EventParticipant[] = []
             fallbackSnap.forEach((docSnap) => {
-              const data = docSnap.data() || {}
-              rawList.push({
-                userId: docSnap.id,
-                displayName: data.displayName || 'Jogador',
-                photoURL: data.photoURL || null,
-                district: data.district || 'Portugal',
-                eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
-                countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
-                totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
-                dailyMatches: data.dailyMatches || {},
-                bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
-                totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
-                lastPlayedAt: data.lastPlayedAt,
-                updatedAt: data.updatedAt,
-              })
+              rawList.push(mapDocToParticipant(docSnap))
             })
             callback(sortEventParticipants(rawList))
-          })
-          .catch(() => callback([]))
+          },
+          (err2) => {
+            console.error('[EVENTS] Falha na subscrição fallback de ranking:', err2)
+            callback([])
+          }
+        )
       }
     )
   } catch (err) {
@@ -475,17 +504,39 @@ export function subscribeUserEventProgress(
           return
         }
         const data = docSnap.data() || {}
+        const ep =
+          typeof data.eventPoints === 'number'
+            ? data.eventPoints
+            : typeof data.points === 'number'
+            ? data.points
+            : 0
+        const cm =
+          typeof data.countedMatches === 'number'
+            ? data.countedMatches
+            : typeof data.totalMatches === 'number'
+            ? data.totalMatches
+            : 0
+        const tm = typeof data.totalMatches === 'number' ? data.totalMatches : cm
+
         callback({
           userId: docSnap.id,
           displayName: data.displayName || 'Jogador',
-          photoURL: data.photoURL || null,
-          district: data.district || 'Portugal',
-          eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
-          countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
-          totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
+          photoURL: data.photoURL || data.avatar || null,
+          avatar: data.avatar || data.photoURL || null,
+          district: data.district || data.distrito || 'Portugal',
+          distrito: data.distrito || data.district || 'Portugal',
+          eventPoints: ep,
+          points: ep,
+          countedMatches: cm,
+          totalMatches: tm,
+          matchesToday:
+            typeof data.matchesToday === 'number'
+              ? data.matchesToday
+              : undefined,
           dailyMatches: data.dailyMatches || {},
           bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
           totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
+          lastPlayedDate: data.lastPlayedDate,
           lastPlayedAt: data.lastPlayedAt,
           updatedAt: data.updatedAt,
         })

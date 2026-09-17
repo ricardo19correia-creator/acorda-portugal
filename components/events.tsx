@@ -67,23 +67,42 @@ export function Events() {
     text: string
   } | null>(null)
 
-  // 1. Obter hora oficial do servidor e dados do evento via API
+  // 1. Obter hora oficial do servidor, dados do evento e ranking inicial via API sem cache
   useEffect(() => {
     let isMounted = true
 
     const syncServerTime = async () => {
       try {
-        const res = await fetch('/api/events', { cache: 'no-store' })
+        const headers: Record<string, string> = {}
+        if (user) {
+          try {
+            const token = await user.getIdToken()
+            if (token) headers['Authorization'] = `Bearer ${token}`
+          } catch {}
+        }
+
+        const res = await fetch('/api/events', { cache: 'no-store', headers })
         if (res.ok) {
           const data = await res.json()
-          if (data && data.serverTimestampMs && isMounted) {
-            const clientNow = Date.now()
-            const skew = data.serverTimestampMs - clientNow
-            setServerClockSkewMs(skew)
-            setNowDate(new Date(clientNow + skew))
+          if (data && isMounted) {
+            if (data.serverTimestampMs) {
+              const clientNow = Date.now()
+              const skew = data.serverTimestampMs - clientNow
+              setServerClockSkewMs(skew)
+              setNowDate(new Date(clientNow + skew))
+            }
 
             if (data.event) {
               setEventConfig(data.event)
+            }
+
+            if (Array.isArray(data.ranking) && data.ranking.length > 0) {
+              setRanking((prev) => (prev.length === 0 ? data.ranking : prev))
+              setRankingLoading(false)
+            }
+
+            if (data.userProgress) {
+              setUserProgress((prev) => prev || data.userProgress)
             }
           }
         }
@@ -98,7 +117,7 @@ export function Events() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [user])
 
   // 2. Relógio em tempo real sincronizado com a hora do servidor
   useEffect(() => {
@@ -140,7 +159,9 @@ export function Events() {
       return
     }
     const unsubscribe = subscribeUserEventProgress(user.uid, eventId, (progress) => {
-      setUserProgress(progress)
+      if (progress) {
+        setUserProgress(progress)
+      }
     })
     return () => unsubscribe()
   }, [user?.uid, eventId])
@@ -158,13 +179,32 @@ export function Events() {
     return getEventCountdown(eventConfig, nowDate)
   }, [eventConfig, nowDate])
 
-  // Posição do utilizador no ranking
-  const userRankIndex = useMemo(() => {
-    if (!user?.uid || ranking.length === 0) return -1
-    return ranking.findIndex((p) => p.userId === user.uid)
-  }, [user?.uid, ranking])
+  // Ranking unificado e posição autoritativa real do jogador
+  const effectiveRanking = useMemo(() => {
+    if (!userProgress || !userProgress.userId) return ranking
+    const exists = ranking.some((p) => p.userId === userProgress.userId)
+    const hasPoints = (userProgress.eventPoints || 0) > 0 || (userProgress.points || 0) > 0
+    const hasMatches = (userProgress.totalMatches || 0) > 0 || (userProgress.countedMatches || 0) > 0
+    if (!exists && (hasPoints || hasMatches)) {
+      return sortEventParticipants([...ranking, userProgress])
+    }
+    return ranking
+  }, [ranking, userProgress])
 
-  const userRankPosition = userRankIndex >= 0 ? userRankIndex + 1 : null
+  const userRankIndex = useMemo(() => {
+    if (!user?.uid || effectiveRanking.length === 0) return -1
+    return effectiveRanking.findIndex((p) => p.userId === user.uid)
+  }, [user?.uid, effectiveRanking])
+
+  const userRankPosition = useMemo(() => {
+    if (userRankIndex >= 0) return userRankIndex + 1
+    const userPts = userProgress?.eventPoints ?? userProgress?.points ?? 0
+    const userMatches = userProgress?.totalMatches ?? userProgress?.countedMatches ?? 0
+    if (userPts > 0 || userMatches > 0) {
+      return effectiveRanking.length > 0 ? effectiveRanking.length + 1 : 1
+    }
+    return null
+  }, [userRankIndex, userProgress, effectiveRanking.length])
 
   // Partidas do utilizador hoje no fuso Europe/Lisbon
   const lisbonToday = useMemo(() => getLisbonDateString(nowDate), [nowDate])
@@ -467,7 +507,7 @@ export function Events() {
                 </span>
                 <div className="flex items-baseline gap-2">
                   <span className="font-display text-2xl sm:text-3xl font-black text-white">
-                    {userRankPosition ? `#${userRankPosition}` : 'Sem Posição'}
+                    {userRankPosition ? `${userRankPosition}.º Lugar` : 'Sem Posição'}
                   </span>
                   {userRankPosition && userRankPosition <= 3 && (
                     <span className="text-sm">
@@ -477,7 +517,7 @@ export function Events() {
                 </div>
                 <p className="text-[11px] text-slate-400">
                   {userRankPosition
-                    ? `Entre ${ranking.length} participantes reais`
+                    ? `Entre ${effectiveRanking.length} participantes reais`
                     : 'Ainda não entraste no ranking'}
                 </p>
               </div>
@@ -489,7 +529,7 @@ export function Events() {
                 </span>
                 <div className="flex items-baseline gap-2">
                   <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">
-                    {(userProgress?.eventPoints || 0).toLocaleString('pt-PT')}
+                    {(userProgress?.eventPoints ?? userProgress?.points ?? 0).toLocaleString('pt-PT')}
                   </span>
                   <span className="text-xs text-amber-300/80 font-bold uppercase">pts</span>
                 </div>
@@ -681,16 +721,16 @@ export function Events() {
           </div>
 
           <span className="text-xs font-bold text-slate-400">
-            {ranking.length === 1 ? '1 participante' : `${ranking.length} participantes`}
+            {effectiveRanking.length === 1 ? '1 participante' : `${effectiveRanking.length} participantes`}
           </span>
         </div>
 
-        {rankingLoading ? (
+        {rankingLoading && effectiveRanking.length === 0 ? (
           <div className="py-12 text-center space-y-3">
             <div className="h-8 w-8 mx-auto rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
             <p className="text-xs text-slate-400 font-medium">A carregar classificação oficial...</p>
           </div>
-        ) : ranking.length === 0 ? (
+        ) : effectiveRanking.length === 0 ? (
           /* Estado Vazio 100% Real */
           <div className="py-12 text-center space-y-4 rounded-2xl border border-dashed border-white/10 bg-slate-950/40 p-6">
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-400/10 text-amber-400 border border-amber-400/20">
@@ -717,7 +757,7 @@ export function Events() {
         ) : (
           /* Tabela de Classificação Real */
           <div className="space-y-2 overflow-hidden">
-            {ranking.map((participant, index) => {
+            {effectiveRanking.map((participant, index) => {
               const pos = participant.pos || index + 1
               const isTop1 = pos === 1
               const isTop2 = pos === 2
@@ -760,10 +800,10 @@ export function Events() {
                       <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border border-white/15 bg-slate-900">
                         <PlayerAvatar
                           profile={{
-                            avatar: participant.photoURL || '/images/avatars/avatar_01.png',
+                            avatar: participant.photoURL || participant.avatar || '/images/avatars/avatar_01.png',
                             displayName: participant.displayName,
                           }}
-                          src={participant.photoURL || '/images/avatars/avatar_01.png'}
+                          src={participant.photoURL || participant.avatar || '/images/avatars/avatar_01.png'}
                           size="sm"
                           showBadge={false}
                           className="h-full w-full object-cover"
@@ -784,7 +824,7 @@ export function Events() {
                         )}
                       </div>
                       <p className="text-[10px] sm:text-[11px] text-slate-400 truncate">
-                        {participant.district || 'Portugal'} •{' '}
+                        {participant.district || participant.distrito || 'Portugal'} •{' '}
                         {participant.countedMatches || participant.totalMatches} partidas
                       </p>
                     </div>
@@ -793,7 +833,7 @@ export function Events() {
                   {/* Direita: Pontos de Evento */}
                   <div className="shrink-0 text-right">
                     <span className="font-display text-base sm:text-xl font-black text-amber-400">
-                      {(participant.eventPoints || 0).toLocaleString('pt-PT')}
+                      {(participant.eventPoints ?? participant.points ?? 0).toLocaleString('pt-PT')}
                     </span>
                     <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
                   </div>

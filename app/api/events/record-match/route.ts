@@ -110,6 +110,10 @@ export async function POST(request: NextRequest) {
     // Cálculo determinístico e normalizado: máx 100 pontos de evento por partida
     const potentialEventPoints = calculateEventPoints(score, pointDivisor, maxPointsPerMatch)
 
+    console.log(`[EVENT] partida terminada: matchId=${matchId}, userId=${userId}, score=${score}`)
+    console.log(`[EVENT] evento identificado: eventId=${targetEventId}`)
+    console.log(`[EVENT] resultado calculado: score=${score}, potentialEventPoints=${potentialEventPoints}`)
+
     const matchRef = eventDocRef.collection('matches').doc(matchId)
     const participantRef = eventDocRef.collection('participants').doc(userId)
     const userRef = db.collection('users').doc(userId)
@@ -127,11 +131,12 @@ export async function POST(request: NextRequest) {
 
         // Se a partida já foi concluída/processada anteriormente: IDEMPOTÊNCIA TOTAL
         if (mData.status === 'completed' || mData.processed === true) {
+          console.log(`[EVENT] partida já processada previamente (idempotência): matchId=${matchId}`)
           return {
             alreadyProcessed: true,
-            eventPointsAdded: mData.eventPoints || 0,
+            eventPointsAdded: mData.eventPoints || mData.points || 0,
             dailyLimitReached: Boolean(mData.dailyCapReached),
-            dailyMatchesToday: mData.dailyMatchesToday ?? null,
+            dailyMatchesToday: mData.dailyMatchesToday ?? mData.matchesToday ?? null,
             message: 'Partida já registada anteriormente no evento.',
           }
         }
@@ -146,7 +151,27 @@ export async function POST(request: NextRequest) {
       const uData = uSnap.exists ? uSnap.data() : {}
 
       const dailyMatches = pData.dailyMatches || {}
-      const todayCount = Number(dailyMatches[todayDateStr] || 0)
+      const todayCount = Number(dailyMatches[todayDateStr] ?? pData.matchesToday ?? 0)
+
+      const displayName =
+        pData.displayName ||
+        uData.displayName ||
+        uData.username ||
+        uData.email?.split('@')[0] ||
+        decodedToken.email?.split('@')[0] ||
+        'Jogador'
+      const photoURL =
+        pData.photoURL ??
+        pData.avatar ??
+        uData.photoURL ??
+        uData.avatar ??
+        '/images/avatars/avatar_01.png'
+      const district =
+        pData.district ||
+        pData.distrito ||
+        uData.district ||
+        uData.distrito ||
+        'Portugal'
 
       // Se já atingiu o limite de 10 partidas no dia atual em Lisboa:
       if (todayCount >= maxDailyMatches) {
@@ -162,9 +187,11 @@ export async function POST(request: NextRequest) {
             correctAnswers,
             totalQuestions,
             eventPoints: 0,
+            points: 0,
             date: todayDateStr,
             dailyCapReached: true,
             dailyMatchesToday: todayCount,
+            matchesToday: todayCount,
             status: 'completed',
             processed: true,
             completedAt: FieldValue.serverTimestamp(),
@@ -177,18 +204,27 @@ export async function POST(request: NextRequest) {
           participantRef,
           {
             userId,
+            displayName,
+            photoURL,
+            avatar: photoURL,
+            district,
+            distrito: district,
             totalMatches: FieldValue.increment(1),
+            lastPlayedDate: todayDateStr,
             lastPlayedAt: FieldValue.serverTimestamp(),
             updatedAt: FieldValue.serverTimestamp(),
           },
           { merge: true }
         )
 
+        console.log(`[EVENT] limite diário de ${maxDailyMatches} partidas atingido: userId=${userId}`)
+
         return {
           alreadyProcessed: false,
           eventPointsAdded: 0,
           dailyLimitReached: true,
           dailyMatchesToday: todayCount,
+          matchesToday: todayCount,
           maxDailyMatches,
           message: `Limite diário de ${maxDailyMatches} partidas atingido hoje. O teu XP e moedas normais foram creditados a 100%!`,
         }
@@ -196,21 +232,12 @@ export async function POST(request: NextRequest) {
 
       // Dentro do limite de 10 partidas válidas do dia:
       const newDailyCount = todayCount + 1
-      const currentEventPoints = Number(pData.eventPoints || 0)
+      const currentEventPoints = Number(pData.eventPoints ?? pData.points ?? 0)
       const newEventPoints = currentEventPoints + potentialEventPoints
-      const countedMatches = Number(pData.countedMatches || 0) + 1
-      const totalMatches = Number(pData.totalMatches || 0) + 1
+      const countedMatches = Number(pData.countedMatches ?? pData.totalMatches ?? 0) + 1
+      const totalMatches = Number(pData.totalMatches ?? pData.countedMatches ?? 0) + 1
       const totalScore = Number(pData.totalScore || 0) + score
       const bestScore = Math.max(Number(pData.bestScore || 0), score)
-
-      const displayName =
-        pData.displayName ||
-        uData.displayName ||
-        uData.username ||
-        uData.email?.split('@')[0] ||
-        'Jogador'
-      const photoURL = pData.photoURL ?? uData.photoURL ?? null
-      const district = pData.district || uData.district || 'Portugal'
 
       transaction.set(
         matchRef,
@@ -224,9 +251,11 @@ export async function POST(request: NextRequest) {
           correctAnswers,
           totalQuestions,
           eventPoints: potentialEventPoints,
+          points: potentialEventPoints,
           date: todayDateStr,
           dailyCapReached: false,
           dailyMatchesToday: newDailyCount,
+          matchesToday: newDailyCount,
           status: 'completed',
           processed: true,
           completedAt: FieldValue.serverTimestamp(),
@@ -240,27 +269,41 @@ export async function POST(request: NextRequest) {
           userId,
           displayName,
           photoURL,
+          avatar: photoURL,
           district,
+          distrito: district,
           eventPoints: newEventPoints,
+          points: newEventPoints,
           countedMatches,
           totalMatches,
+          matchesToday: newDailyCount,
           totalScore,
           bestScore,
           dailyMatches: {
             ...dailyMatches,
             [todayDateStr]: newDailyCount,
           },
+          lastPlayedDate: todayDateStr,
           lastPlayedAt: FieldValue.serverTimestamp(),
           updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       )
 
+      console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}`)
+      console.log(`[EVENT] participante atualizado: userId=${userId}, newPoints=${newEventPoints}, matches=${countedMatches}`)
+      console.log(`[EVENT] ranking atualizado`)
+
       return {
         alreadyProcessed: false,
         eventPointsAdded: potentialEventPoints,
         newEventPoints,
+        points: newEventPoints,
+        eventPoints: newEventPoints,
         dailyMatchesToday: newDailyCount,
+        matchesToday: newDailyCount,
+        countedMatches,
+        totalMatches,
         maxDailyMatches,
         dailyLimitReached: newDailyCount >= maxDailyMatches,
         message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (${newDailyCount}/${maxDailyMatches} partidas hoje)`,
