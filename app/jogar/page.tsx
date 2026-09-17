@@ -136,19 +136,26 @@ function JogarContainer() {
     searchParams.get('topic') ||
     searchParams.get('topico') ||
     searchParams.get('event') ||
-    searchParams.get('evento')
+    searchParams.get('evento') ||
+    searchParams.get('eventId') ||
+    searchParams.get('event_id')
 
   const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
   const cityParam = searchParams.get('city') || searchParams.get('cidade')
   const gameParam = searchParams.get('game') || searchParams.get('gameId')
   const playParam = searchParams.get('play') === 'true'
+  const eventParam =
+    searchParams.get('event') ||
+    searchParams.get('evento') ||
+    searchParams.get('eventId') ||
+    searchParams.get('event_id')
   const arenaParam =
     searchParams.get('arena') ||
     searchParams.get('arenaId') ||
     searchParams.get('arena_id')
 
   // Uma partida só começa após uma ação explícita do utilizador (parâmetros de partida presentes)
-  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam)
+  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || eventParam)
 
   // Limpeza de resíduos de sessão se estiver na Central de Jogo (evita retoma acidental)
   useEffect(() => {
@@ -176,6 +183,7 @@ function JogarContainer() {
 
   const effectiveCategory =
     normalizedRawCat ||
+    (eventParam ? 'portugal-em-jogo' : null) ||
     (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
     (gameParam ? 'desafio-nacional' : null) ||

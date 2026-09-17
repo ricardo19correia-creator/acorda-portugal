@@ -209,9 +209,31 @@ export function loadQuestionsPool(
     catLower === 'o-meu-distrito' ||
     catLower === 'distrito'
 
+  const isEvent =
+    catLower === 'portugal-em-jogo' ||
+    catLower === 'portugal-em-jogo-2026' ||
+    catLower === 'evento' ||
+    catLower === 'evento-portugal-em-jogo' ||
+    catLower === 'primeiro-desafio-nacional-portugal-em-jogo'
+
   let filtered: Question[] = []
 
-  if (isNational) {
+  if (isEvent) {
+    // EVENTO OFICIAL: Portugal em Jogo (Multi-tema: História, Geografia, Cultura, Desporto, etc. 0% Maluco)
+    const all = registry.getAllQuestions()
+    const ELIGIBLE_THEMES = new Set([
+      'portugal', 'historia', 'geografia', 'cultura', 'personalidades',
+      'desporto', 'futebol-portugues', 'atualidade', 'portugal-politico',
+      'empresas-portuguesas', 'gastronomia', 'ciencia-tecnologia',
+      'cinema-tv', 'musica', 'desafio-nacional'
+    ])
+    filtered = all.filter((q) => {
+      const qCat = (q.category || '').toLowerCase().trim()
+      const qId = String(q.id).toLowerCase()
+      if (qCat.includes('maluco') || qCat.includes('idiota') || qId.startsWith('mm_')) return false
+      return ELIGIBLE_THEMES.has(qCat) || qCat === 'desafio nacional' || qCat === 'geral' || qId.startsWith('dn_') || qId.startsWith('q_dn_')
+    })
+  } else if (isNational) {
     // Jogar Tudo / Desafio Nacional (Garante 0% de Modo Maluco)
     filtered = registry.getJogarTudo(targetDiff)
   } else if (isMaluco) {

@@ -35,13 +35,14 @@ export async function POST(request: NextRequest) {
       totalQuestions = 0,
       isAbandoned = false,
       eventId: requestedEventId,
+      eventSlug,
     } = body
 
     if (!matchId || typeof matchId !== 'string') {
       return NextResponse.json({ error: 'matchId inválido.' }, { status: 400 })
     }
 
-    // Validação estrita: partidas abandonadas, incompletas ou corruptas não geram pontos
+    // Validação estrita: partidas abandonadas, incompletas ou corruptas não geram pontos de evento
     if (isAbandoned === true || totalQuestions < 3 || typeof score !== 'number' || isNaN(score) || score < 0) {
       return NextResponse.json({
         success: false,
@@ -60,7 +61,6 @@ export async function POST(request: NextRequest) {
     let activeEvent: OfficialEventConfig
 
     if (!eventSnap || !eventSnap.exists) {
-      // Auto-criação do evento canónico caso ainda não tenha sido populado
       activeEvent = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
       await eventDocRef
         .set(
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
     // Data de hoje calculada de forma autoritativa no fuso de Lisboa
     const todayDateStr = getLisbonDateString()
 
-    // Cálculo proporcional e determinístico: máx 100 pontos por partida
+    // Cálculo determinístico e normalizado: máx 100 pontos de evento por partida
     const potentialEventPoints = calculateEventPoints(score, pointDivisor, maxPointsPerMatch)
 
     const matchRef = eventDocRef.collection('matches').doc(matchId)
@@ -120,12 +120,20 @@ export async function POST(request: NextRequest) {
       const matchSnap = await transaction.get(matchRef)
       if (matchSnap.exists) {
         const mData = matchSnap.data() || {}
-        return {
-          alreadyProcessed: true,
-          eventPointsAdded: mData.eventPoints || 0,
-          dailyLimitReached: Boolean(mData.dailyCapReached),
-          dailyMatchesToday: mData.dailyMatchesToday ?? null,
-          message: 'Partida já registada anteriormente no evento.',
+        // Se a partida pertencer a outro utilizador
+        if (mData.userId && mData.userId !== userId) {
+          throw new Error('Esta partida pertence a outro jogador.')
+        }
+
+        // Se a partida já foi concluída/processada anteriormente: IDEMPOTÊNCIA TOTAL
+        if (mData.status === 'completed' || mData.processed === true) {
+          return {
+            alreadyProcessed: true,
+            eventPointsAdded: mData.eventPoints || 0,
+            dailyLimitReached: Boolean(mData.dailyCapReached),
+            dailyMatchesToday: mData.dailyMatchesToday ?? null,
+            message: 'Partida já registada anteriormente no evento.',
+          }
         }
       }
 
@@ -142,22 +150,29 @@ export async function POST(request: NextRequest) {
 
       // Se já atingiu o limite de 10 partidas no dia atual em Lisboa:
       if (todayCount >= maxDailyMatches) {
-        transaction.set(matchRef, {
-          id: matchId,
-          matchId,
-          eventId: targetEventId,
-          userId,
-          score,
-          correctAnswers,
-          totalQuestions,
-          eventPoints: 0,
-          date: todayDateStr,
-          dailyCapReached: true,
-          dailyMatchesToday: todayCount,
-          createdAt: FieldValue.serverTimestamp(),
-        })
+        transaction.set(
+          matchRef,
+          {
+            id: matchId,
+            matchId,
+            eventId: targetEventId,
+            eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
+            userId,
+            score,
+            correctAnswers,
+            totalQuestions,
+            eventPoints: 0,
+            date: todayDateStr,
+            dailyCapReached: true,
+            dailyMatchesToday: todayCount,
+            status: 'completed',
+            processed: true,
+            completedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
 
-        // Incrementar apenas totalMatches informativo sem dar pontos nem incrementar countedMatches
+        // Incrementar apenas totalMatches informativo sem dar pontos de evento nem incrementar countedMatches
         transaction.set(
           participantRef,
           {
@@ -203,6 +218,7 @@ export async function POST(request: NextRequest) {
           id: matchId,
           matchId,
           eventId: targetEventId,
+          eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
           userId,
           score,
           correctAnswers,
@@ -211,7 +227,9 @@ export async function POST(request: NextRequest) {
           date: todayDateStr,
           dailyCapReached: false,
           dailyMatchesToday: newDailyCount,
-          createdAt: FieldValue.serverTimestamp(),
+          status: 'completed',
+          processed: true,
+          completedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       )

@@ -130,6 +130,19 @@ function resolveCategoryInfo(
       special: false,
     }
   }
+  if (
+    categorySlug === 'portugal-em-jogo' ||
+    categorySlug.includes('portugal-em-jogo') ||
+    categorySlug === 'evento' ||
+    categorySlug === 'evento-portugal-em-jogo'
+  ) {
+    return {
+      name: 'PORTUGAL EM JOGO',
+      subtitle: 'Primeiro Desafio Nacional — Evento Oficial',
+      emoji: '🏆',
+      special: true,
+    }
+  }
   if (categorySlug === 'desafio-nacional' || categorySlug === 'nacional' || categorySlug === 'quick') {
     return { name: 'Desafio Nacional', subtitle: 'Conhecimento Geral de Portugal', emoji: '🇵🇹', special: false }
   }
@@ -377,7 +390,9 @@ function createGameQuestions(
       catLower === 'todos' ||
       catLower === 'jogar-tudo' ||
       catLower === 'modo-aleatorio' ||
-      catLower === 'aleatorio'
+      catLower === 'aleatorio' ||
+      catLower.includes('portugal-em-jogo') ||
+      catLower.includes('evento')
 
     // Obter histórico individual do utilizador (local cache + Firestore)
     const { seenSet, recentOrder } = getUserAnsweredHistory(userId, cloudAnsweredIds)
@@ -411,6 +426,8 @@ export function QuizScreen({
   cityParam,
   gameId,
   arenaParam,
+  eventId,
+  eventSlug,
   isFresh = false,
   userId,
   accountProfile,
@@ -422,6 +439,8 @@ export function QuizScreen({
   cityParam?: string | null
   gameId: string
   arenaParam?: string | null
+  eventId?: string | null
+  eventSlug?: string | null
   isFresh?: boolean
   userId?: string
   accountProfile?: any
@@ -499,6 +518,48 @@ export function QuizScreen({
       }
     }
   }, [user?.uid, profile?.answeredQuestionIds, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
+
+  // Inicialização e reserva segura da partida do evento no backend
+  useEffect(() => {
+    if (!eventId) return
+    let cancelled = false
+    const initBackendEventMatch = async () => {
+      try {
+        const idToken = await (user as any)?.getIdToken?.()
+        if (!idToken) return
+        const res = await fetch('/api/events/match/init', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({
+            eventId,
+            eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
+            matchId: gameId,
+          }),
+        })
+        if (res.ok && !cancelled) {
+          const data = await res.json()
+          if (Array.isArray(data.questions) && data.questions.length >= 10) {
+            // Se o jogador ainda estiver no início, aplicar as perguntas canónicas selecionadas pelo backend
+            if (step === 0 && phase === 'answering' && recordedAnswersRef.current.length === 0) {
+              const formatted = data.questions.map((q: any, i: number) =>
+                formatEngineQuestion(q, i, data.questions.length)
+              )
+              setQuizQuestions(formatted)
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('[EVENT_MATCH_INIT_WARN]', err)
+      }
+    }
+    void initBackendEventMatch()
+    return () => {
+      cancelled = true
+    }
+  }, [eventId, eventSlug, gameId, user, step, phase])
 
   const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
   const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(false)
@@ -892,7 +953,7 @@ export function QuizScreen({
           })
         }
 
-        // Registo de Pontos de Evento caso exista evento oficial ativo
+        // Registo de Pontos de Evento caso exista evento oficial ativo ou partida de evento
         try {
           const idToken = await (user as any)?.getIdToken?.()
           if (idToken) {
@@ -904,10 +965,12 @@ export function QuizScreen({
               },
               body: JSON.stringify({
                 matchId: gid,
+                eventId: eventId || (categorySlug === 'portugal-em-jogo' ? 'portugal-em-jogo-2026' : undefined),
+                eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
                 score: finalResult.score,
                 correctAnswers: finalResult.correct,
                 totalQuestions: finalResult.total,
-                categorySlug: categorySlug || 'geral',
+                categorySlug: categorySlug || 'portugal-em-jogo',
               }),
             }).catch((e) => {
               console.warn('[EVENT_MATCH_SUBMISSION_WARN]', e)

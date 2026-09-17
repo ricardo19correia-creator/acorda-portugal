@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   Calendar,
   Gamepad2,
@@ -40,9 +41,10 @@ import {
   type EventParticipant,
   type CountdownDetails,
 } from '@/lib/events-service'
-import { cn } from '@/lib/utils'
+import { cn, safeRandomUUID } from '@/lib/utils'
 
 export function Events() {
+  const router = useRouter()
   const { user, profile } = useAuth()
 
   // Configuração oficial do evento
@@ -173,6 +175,18 @@ export function Events() {
   const maxDailyMatches = eventConfig.rules?.maxDailyMatches || 10
   const dailyLimitReached = dailyMatchesToday >= maxDailyMatches
 
+  // Início oficial de partida do evento com identificadores autoritativos
+  const handleStartEventMatch = useCallback(() => {
+    if (!user) {
+      router.push('/entrar?redirect=/eventos')
+      return
+    }
+    const matchId = safeRandomUUID()
+    router.push(
+      `/jogar?cat=portugal-em-jogo&event=${eventId}&eventId=${eventId}&eventSlug=primeiro-desafio-nacional-portugal-em-jogo&game=${matchId}`
+    )
+  }, [user, router, eventId])
+
   // Reivindicação de Recompensa
   const canClaimReward =
     dynamicStatus === 'ended' &&
@@ -294,6 +308,24 @@ export function Events() {
             </p>
           </div>
 
+          {/* Botão Oficial Principal Jogar Agora */}
+          {dynamicStatus === 'active' && (
+            <div className="pt-1 flex flex-col sm:flex-row items-center gap-3.5">
+              <button
+                type="button"
+                onClick={handleStartEventMatch}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-display text-sm sm:text-base font-black uppercase tracking-wider px-8 py-4 shadow-[0_0_25px_rgba(245,158,11,0.45)] hover:shadow-[0_0_35px_rgba(245,158,11,0.65)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
+              >
+                <Gamepad2 className="h-5 w-5 text-slate-950" />
+                <span>Jogar Agora — Portugal em Jogo</span>
+                <ChevronRight className="h-5 w-5 text-slate-950" />
+              </button>
+              <span className="text-xs text-slate-300">
+                10 perguntas • 100 pontos máx. • 10 partidas diárias
+              </span>
+            </div>
+          )}
+
           {/* Relógio de Contagem Decrescente Sincronizado */}
           {countdown && (
             <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 sm:p-5 backdrop-blur-md">
@@ -413,14 +445,15 @@ export function Events() {
             </div>
           </div>
 
-          <Link
-            href="/jogar"
+          <button
+            type="button"
+            onClick={handleStartEventMatch}
             className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-display text-xs font-black uppercase tracking-wider px-5 py-2.5 shadow-lg shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
           >
             <Gamepad2 className="h-4 w-4" />
             <span>Jogar Agora</span>
             <ChevronRight className="h-4 w-4" />
-          </Link>
+          </button>
         </div>
 
         {user ? (
@@ -671,14 +704,15 @@ export function Events() {
                 Sê o primeiro a jogar uma partida normal do jogo para assumir a liderança e entrar no ranking oficial do Desafio Nacional!
               </p>
             </div>
-            <Link
-              href="/jogar"
+            <button
+              type="button"
+              onClick={handleStartEventMatch}
               className="inline-flex items-center gap-2 rounded-2xl button-game-gold px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-transform"
             >
               <Gamepad2 className="h-4 w-4" />
               <span>Jogar Primeira Partida</span>
               <ChevronRight className="h-4 w-4" />
-            </Link>
+            </button>
           </div>
         ) : (
           /* Tabela de Classificação Real */

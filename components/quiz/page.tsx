@@ -101,14 +101,22 @@ function QuizPageContent() {
     searchParams.get('arenaId') ||
     searchParams.get('arena_id')
 
+  const eventId =
+    searchParams.get('eventId') ||
+    searchParams.get('event_id') ||
+    searchParams.get('event') ||
+    searchParams.get('evento')
+  const eventSlug = searchParams.get('eventSlug') || searchParams.get('event_slug')
+
   const normalizedRawCat =
     rawCategorySlug === 'o-meu-distrito' || rawCategorySlug === 'distrito'
       ? 'conquista-do-distrito'
       : rawCategorySlug
 
-  // Entrada direta no jogo: se não houver categoria explícita, inicia logo 'desafio-nacional'
+  // Entrada direta no jogo: se for evento oficial, usa 'portugal-em-jogo'
   const categorySlug =
     normalizedRawCat ||
+    (eventId ? 'portugal-em-jogo' : null) ||
     (district ? 'conquista-do-distrito' : null) ||
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null) ||
@@ -135,6 +143,8 @@ function QuizPageContent() {
           cityParam={city}
           gameId={gameId}
           arenaParam={rawArena}
+          eventId={eventId}
+          eventSlug={eventSlug}
           isFresh={true}
           userId={user?.uid}
           accountProfile={profile}

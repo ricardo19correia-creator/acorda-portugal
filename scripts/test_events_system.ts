@@ -29,7 +29,6 @@ const forbiddenNames = [
   'Especial Desporto',
   'Termina em 2d 14h',
   'Termina em 5d 03h',
-  'Portugal em Jogo',
 ]
 for (const fn of forbiddenNames) {
   assert(!gameDataCode.includes(fn), `Evento/dado fictício proibido "${fn}" não pode existir em lib/game-data.ts`)
@@ -37,12 +36,16 @@ for (const fn of forbiddenNames) {
 assert.strictEqual(EVENTS.length, 0, 'Array EVENTS em lib/game-data.ts deve estar 100% vazio')
 console.log('✅ Array EVENTS está vazio e livre de qualquer evento placeholder.')
 
-// 2. Ausência de Evento Fictício Hardcoded
-console.log('\n[2] Teste de Ausência de Evento Hardcoded...')
-assert.strictEqual(OFFICIAL_EVENT, null, 'OFFICIAL_EVENT deve ser null (sem evento fictício)')
-assert.strictEqual(getEventStatus(null), null, 'getEventStatus(null) deve retornar null')
-assert.strictEqual(getEventCountdown(null), null, 'getEventCountdown(null) deve retornar null')
-console.log('✅ Nenhum evento simulado ou fake existe como fallback.')
+// 2. Validação do Evento Canónico Oficial
+console.log('\n[2] Teste de Configuração do Evento Canónico Oficial...')
+assert(OFFICIAL_EVENT !== null, 'OFFICIAL_EVENT deve estar configurado')
+assert.strictEqual(OFFICIAL_EVENT.id, 'portugal-em-jogo-2026', 'ID oficial do evento')
+assert.strictEqual(OFFICIAL_EVENT.rules.maxDailyMatches, 10, 'Limite diário de 10 partidas')
+assert.strictEqual(OFFICIAL_EVENT.rules.maxEventPointsPerMatch, 100, 'Teto de 100 pontos por partida')
+assert.strictEqual(OFFICIAL_EVENT.rewards[0].acordas, 10000, '1.º lugar: 10.000 Acordas')
+assert.strictEqual(OFFICIAL_EVENT.rewards[1].acordas, 7500, '2.º lugar: 7.500 Acordas')
+assert.strictEqual(OFFICIAL_EVENT.rewards[2].acordas, 5000, '3.º lugar: 5.000 Acordas')
+console.log('✅ Evento oficial configurado rigorosamente.')
 
 // 3. Teste de Cálculo com Evento Real (Simulado em Teste)
 console.log('\n[3] Teste de Mudança Automática de Estado com Objeto Real...')
