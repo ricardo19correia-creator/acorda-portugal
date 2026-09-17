@@ -22,7 +22,6 @@ import {
   Apple,
 } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { AppBackground } from '@/components/AppBackground'
 import { BUILD_INFO } from '@/lib/build-info'
 
@@ -418,8 +417,6 @@ export default function DownloadPage() {
         </section>
 
       </main>
-
-      <SiteFooter />
     </div>
   )
 }

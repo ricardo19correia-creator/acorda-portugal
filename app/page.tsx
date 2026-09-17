@@ -13,7 +13,7 @@ import { HomeHero } from '@/components/home/HomeHero'
 import { PlayerStatusHud } from '@/components/home/PlayerStatusHud'
 import { ThreeChallengePaths } from '@/components/home/ThreeChallengePaths'
 import { QuickNavigationSection } from '@/components/home/QuickNavigationSection'
-import { HomeFooter } from '@/components/home/HomeFooter'
+import { SiteFooter } from '@/components/site-footer'
 
 export default function HomePage() {
   const router = useRouter()
@@ -81,8 +81,8 @@ export default function HomePage() {
           </div>
         </main>
 
-        {/* 5. FOOTER MÍNIMO DO MENU PRINCIPAL */}
-        <HomeFooter />
+        {/* 5. RODAPÉ DE NAVEGAÇÃO COMPLETO DA PÁGINA INICIAL */}
+        <SiteFooter />
       </div>
 
       {/* 🔒 Modal de Bloqueio de Convidado / Login Obrigatório */}

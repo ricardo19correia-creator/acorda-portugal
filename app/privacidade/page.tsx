@@ -16,7 +16,6 @@ import {
 } from 'lucide-react'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
   title: 'Política de Privacidade — Acorda Portugal',
@@ -213,8 +212,6 @@ export default function PrivacyPolicy() {
 
         </div>
       </main>
-
-      <SiteFooter />
     </div>
   )
 }

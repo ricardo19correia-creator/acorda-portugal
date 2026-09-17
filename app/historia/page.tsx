@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { HistoryHero } from '@/components/history/HistoryHero'
 import { OriginalIdeaSection } from '@/components/history/OriginalIdeaSection'
@@ -80,9 +79,6 @@ export default function HistoriaPage() {
         {/* 13 — Epílogo Cinematográfico (Não esperes pela notícia. Esteja onde ela acontece.) */}
         <EpilogueClosingSection />
       </main>
-
-      {/* Rodapé Oficial */}
-      <SiteFooter />
     </div>
   )
 }

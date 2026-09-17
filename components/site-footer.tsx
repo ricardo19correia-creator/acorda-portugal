@@ -1,14 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { BrandLogo } from '@/components/brand-logo'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
 const LINKS = [
   { label: 'Jogar', href: '/jogar' },
-  { label: '📱 App Android', href: '/download' },
+  { label: 'App Android', href: '/download' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Categorias', href: '/categorias' },
   { label: 'Onde Tudo Começou', href: '/historia' },
@@ -21,15 +21,21 @@ const LINKS = [
 ]
 
 export function SiteFooter() {
+  const pathname = usePathname()
   const router = useRouter()
   const { user } = useAuth()
+
+  // O conjunto de links de navegação/rodapé deve existir APENAS no fundo/rodapé da PÁGINA INICIAL (/)
+  if (pathname !== '/') {
+    return null
+  }
 
   const handleLinkClick = (_e: React.MouseEvent, _href: string) => {
     // Permite navegação direta standard
   }
 
   return (
-    <footer className="relative border-t border-white/10 bg-zinc-950/40 backdrop-blur-md mt-16">
+    <footer className="relative border-t border-white/10 bg-zinc-950/40 backdrop-blur-md mt-16 select-none">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-md">

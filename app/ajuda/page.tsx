@@ -29,7 +29,6 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { cn } from '@/lib/utils'
 
@@ -783,8 +782,6 @@ export default function AjudaPage() {
             </div>
           </section>
         </main>
-
-        <SiteFooter />
       </div>
 
       {/* ========================================================= */}

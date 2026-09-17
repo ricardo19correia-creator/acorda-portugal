@@ -3,7 +3,6 @@
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Events } from '@/components/events'
-import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Play, Flame, Calendar } from 'lucide-react'
@@ -75,8 +74,6 @@ export default function EventosPage() {
           {/* Events Grid Section */}
           <Events />
         </main>
-
-        <SiteFooter />
       </div>
 
       {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}

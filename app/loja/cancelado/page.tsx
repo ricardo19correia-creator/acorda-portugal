@@ -3,7 +3,6 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { XCircle, ShoppingBag, Gamepad2, ArrowLeft } from 'lucide-react'
 
@@ -58,7 +57,6 @@ export default function ShopCancelPage() {
       <Suspense fallback={null}>
         <CancelContent />
       </Suspense>
-      <SiteFooter />
     </div>
   )
 }

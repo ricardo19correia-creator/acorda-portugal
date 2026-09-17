@@ -4,7 +4,6 @@ import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import {
   CheckCircle2,
@@ -270,7 +269,6 @@ export default function ShopSuccessPage() {
       <Suspense fallback={null}>
         <SuccessContent />
       </Suspense>
-      <SiteFooter />
     </div>
   )
 }

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { DuelArena } from '@/components/duel-arena'
 import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { LoadingQuiz } from '@/components/quiz/loading-quiz'
 import Link from 'next/link'
 import { Swords, Sparkles, Lock } from 'lucide-react'
@@ -82,7 +81,6 @@ function DuelPageContent() {
         <main className="flex-1 mx-auto w-full max-w-md px-4 py-12 flex items-center justify-center">
           <AuthWallView targetUrl="/jogar/duelo" />
         </main>
-        <SiteFooter />
       </div>
     )
   }
@@ -130,8 +128,6 @@ function DuelPageContent() {
               </div>
             </div>
           </main>
-
-          <SiteFooter />
         </div>
 
         <DuelMatchmakingModal

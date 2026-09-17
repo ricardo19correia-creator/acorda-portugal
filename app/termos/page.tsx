@@ -23,7 +23,6 @@ import {
 } from 'lucide-react'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
   title: 'Termos e Condições — Acorda Portugal',
@@ -472,8 +471,6 @@ export default function TermosPage() {
             </p>
           </div>
         </main>
-
-        <SiteFooter />
       </div>
     </div>
   )

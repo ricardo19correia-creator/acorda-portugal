@@ -8,7 +8,6 @@ import { useAuth } from '@/components/auth-provider'
 import { useLivePresence } from '@/hooks/use-live-presence'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 
 export default function JogadoresPage() {
   const router = useRouter()
@@ -125,8 +124,6 @@ export default function JogadoresPage() {
           )}
         </div>
       </main>
-
-      <SiteFooter />
     </div>
   )
 }

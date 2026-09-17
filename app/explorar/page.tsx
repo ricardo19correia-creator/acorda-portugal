@@ -5,7 +5,6 @@ import { SiteHeader } from '@/components/site-header'
 import { HowItWorks } from '@/components/how-it-works'
 import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
-import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Gamepad2, Trophy, LayoutGrid, Sparkles } from 'lucide-react'
@@ -95,8 +94,6 @@ export default function ExplorarPage() {
           {/* Section: Recompensas */}
           <Rewards />
         </main>
-
-        <SiteFooter />
       </div>
     </div>
   )

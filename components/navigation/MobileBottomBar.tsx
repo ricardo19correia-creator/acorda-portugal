@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Gamepad2, Trophy, ShoppingBag, User } from 'lucide-react'
+import { Home, Gamepad2, Trophy, Calendar, ShoppingBag, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { isMatchActiveFromRoute } from '@/lib/game-active-state'
 
 export function MobileBottomBar() {
   const pathname = usePathname()
 
-  // Verificar se está em jogo ativo/arena para esconder completamente a barra
+  // Verificar se está em jogo ativo/arena para esconder a barra apenas durante a partida
   const [isInArena, setIsInArena] = useState(false)
 
   useEffect(() => {
@@ -20,16 +20,17 @@ export function MobileBottomBar() {
         const currentPath = window.location.pathname
         const currentSearch = window.location.search
 
-        // Se estamos na Home ('/'), a barra de navegação DEVE estar sempre visível
-        if (currentPath === '/' || pathname === '/') {
-          document.documentElement.classList.remove('ap-arena-match')
+        // Verificar rigorosamente se está numa partida ativa (/jogar?cat=... ou /jogar/duelo?id=...)
+        const isMatch = isMatchActiveFromRoute(currentPath, currentSearch)
+        if (!isMatch) {
+          if (document.documentElement.classList.contains('ap-arena-match')) {
+            document.documentElement.classList.remove('ap-arena-match')
+          }
           setIsInArena(false)
           return
         }
 
-        const isMatch = isMatchActiveFromRoute(currentPath, currentSearch)
-        const isMatchClass = document.documentElement.classList.contains('ap-arena-match')
-        setIsInArena(Boolean(isMatch || (isMatchClass && currentPath.startsWith('/jogar'))))
+        setIsInArena(true)
       } catch {
         setIsInArena(false)
       }
@@ -55,10 +56,12 @@ export function MobileBottomBar() {
     return null
   }
 
+  // Ordem estrita obrigatória: INÍCIO → JOGAR → RANKINGS → EVENTOS → LOJA → PERFIL
   const NAV_ITEMS = [
     { label: 'Início', href: '/', icon: Home },
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
+    { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]

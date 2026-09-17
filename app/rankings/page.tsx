@@ -33,7 +33,6 @@ import {
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { UserAvatar } from '@/components/ui/UserAvatar'
 import PlayerProfileModal, { type PlayerProfileData } from '@/components/PlayerProfileModal'
@@ -1931,8 +1930,6 @@ export default function RankingsPage() {
             </div>
           </div>
         )}
-
-        <SiteFooter />
       </div>
 
       {/* Modal de Perfil Competitivo Compacto */}

@@ -3,7 +3,6 @@
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Categories } from '@/components/categories'
-import { SiteFooter } from '@/components/site-footer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Play, LayoutGrid, Sparkles } from 'lucide-react'
@@ -68,8 +67,6 @@ export default function CategoriasPage() {
           {/* Categories Grid Section */}
           <Categories />
         </main>
-
-        <SiteFooter />
       </div>
 
       {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}

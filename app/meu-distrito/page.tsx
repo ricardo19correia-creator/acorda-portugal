@@ -3,7 +3,6 @@
 import React, { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { BackgroundFx } from '@/components/background-fx'
 import { MeuDistritoView } from '@/components/distrito/MeuDistritoView'
 
@@ -27,8 +26,6 @@ export default function MeuDistritoPage() {
             <MeuDistritoContent />
           </Suspense>
         </main>
-
-        <SiteFooter />
       </div>
     </div>
   )
