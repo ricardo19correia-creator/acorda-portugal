@@ -123,44 +123,49 @@ function JogarContainer() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, profile, authResolved } = useAuth()
-  const isFresh = searchParams.get('fresh') === 'true'
+  const isFresh = searchParams?.get('fresh') === 'true'
+
+  const gameParam = searchParams?.get('game') ?? searchParams?.get('gameId') ?? null
 
   const rawCategoryParam =
-    searchParams.get('cat') ||
-    searchParams.get('category') ||
-    searchParams.get('categoria') ||
-    searchParams.get('theme') ||
-    searchParams.get('tema') ||
-    searchParams.get('mode') ||
-    searchParams.get('modo') ||
-    searchParams.get('topic') ||
-    searchParams.get('topico') ||
-    searchParams.get('event') ||
-    searchParams.get('evento') ||
-    searchParams.get('eventId') ||
-    searchParams.get('event_id')
+    searchParams?.get('cat') ||
+    searchParams?.get('category') ||
+    searchParams?.get('categoria') ||
+    searchParams?.get('theme') ||
+    searchParams?.get('tema') ||
+    searchParams?.get('mode') ||
+    searchParams?.get('modo') ||
+    searchParams?.get('topic') ||
+    searchParams?.get('topico') ||
+    searchParams?.get('event') ||
+    searchParams?.get('evento') ||
+    searchParams?.get('eventId') ||
+    searchParams?.get('event_id')
 
-  const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
-  const cityParam = searchParams.get('city') || searchParams.get('cidade')
+  const districtParam = searchParams?.get('district') || searchParams?.get('dist') || searchParams?.get('distrito')
+  const cityParam = searchParams?.get('city') || searchParams?.get('cidade')
   const playParam =
-    searchParams.get('play') === 'true' ||
-    searchParams.get('play') === '1' ||
-    searchParams.get('start') === 'true' ||
-    searchParams.get('start') === '1' ||
-    searchParams.get('jogar') === 'true' ||
-    searchParams.get('jogar') === '1'
+    searchParams?.get('play') === 'true' ||
+    searchParams?.get('play') === '1' ||
+    searchParams?.get('start') === 'true' ||
+    searchParams?.get('start') === '1' ||
+    searchParams?.get('jogar') === 'true' ||
+    searchParams?.get('jogar') === '1'
   const eventParam =
-    searchParams.get('event') ||
-    searchParams.get('evento') ||
-    searchParams.get('eventId') ||
-    searchParams.get('event_id')
+    searchParams?.get('event') ||
+    searchParams?.get('evento') ||
+    searchParams?.get('eventId') ||
+    searchParams?.get('event_id')
+  const eventSlugParam =
+    searchParams?.get('eventSlug') ||
+    searchParams?.get('event_slug')
   const arenaParam =
-    searchParams.get('arena') ||
-    searchParams.get('arenaId') ||
-    searchParams.get('arena_id')
+    searchParams?.get('arena') ||
+    searchParams?.get('arenaId') ||
+    searchParams?.get('arena_id')
 
   // Uma partida só começa após uma ação explícita do utilizador (parâmetros de partida presentes)
-  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || eventParam)
+  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || eventParam || eventSlugParam)
 
   // Limpeza de resíduos de sessão se estiver na Central de Jogo (evita retoma acidental)
   useEffect(() => {

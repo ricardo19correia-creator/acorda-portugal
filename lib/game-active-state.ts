@@ -119,7 +119,11 @@ export function isMatchActiveFromRoute(
       searchParams.get('topic') ||
       searchParams.get('topico') ||
       searchParams.get('event') ||
-      searchParams.get('evento')
+      searchParams.get('evento') ||
+      searchParams.get('eventId') ||
+      searchParams.get('event_id') ||
+      searchParams.get('eventSlug') ||
+      searchParams.get('event_slug')
 
     const districtParam =
       searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
