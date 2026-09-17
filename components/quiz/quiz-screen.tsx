@@ -480,8 +480,86 @@ export function QuizScreen({
   const effectiveDisplayName = user?.displayName || profile?.displayName || 'Explorador'
   const effectiveAnsweredIds = (accountProfile as any)?.answeredQuestionIds || profile?.answeredQuestionIds || []
 
+  // 2. ESTADOS DA PARTIDA (DECLARADOS NO TOPO PARA EVITAR QUALQUER TDZ REFERENCEERROR)
+  const [step, setStep] = useState(0)
+  const [phase, setPhase] = useState<Phase>('answering')
+  const [selected, setSelected] = useState<OptionKey | null>(null)
+  const [seconds, setSeconds] = useState(60)
+  const [score, setScore] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
+  const [streak, setStreak] = useState(0)
+  const [bestStreak, setBestStreak] = useState(0)
+  const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
+  const [eventMatchOutcome, setEventMatchOutcome] = useState<any>(null)
+  const [savingReward, setSavingReward] = useState<boolean>(false)
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+  const [isLoadingMatch, setIsLoadingMatch] = useState<boolean>(false)
+  const [isRecovering, setIsRecovering] = useState<boolean>(false)
+  const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
+  const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(false)
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false)
+  const [reactionCooldown, setReactionCooldown] = useState(0)
+
+  // 3. REFS ESTÁVEIS
+  const authSyncDoneRef = useRef(false)
+  const eventInitDoneRef = useRef(false)
+  const recordedAnswersRef = useRef<MatchAnswerPayload[]>([])
+  const isLockingInRef = useRef(false)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const hasCleanedSessionRef = useRef(false)
+
+  // Limpeza autoritativa de sessões anteriores
+  const cleanOldSessionStorage = useCallback(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('active_game_session')
+        localStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('active_game_session')
+        sessionStorage.removeItem('active_session_id')
+        sessionStorage.removeItem('ap_error_auto_retried')
+        if (gameId) {
+          sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+          localStorage.removeItem(`ap_quiz_state_${gameId}`)
+        }
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const key = localStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key === 'active_game_session' ||
+              key === 'active_session_id')
+          ) {
+            localStorage.removeItem(key)
+          }
+        }
+        for (let i = sessionStorage.length - 1; i >= 0; i--) {
+          const key = sessionStorage.key(i)
+          if (
+            key &&
+            (key.startsWith('ap_quiz_state_') ||
+              key.startsWith('quiz_') ||
+              key === 'active_game_session' ||
+              key === 'active_session_id')
+          ) {
+            sessionStorage.removeItem(key)
+          }
+        }
+      }
+    } catch (cleanErr) {
+      console.warn('[QuizScreen] Erro na limpeza segura de storage:', cleanErr)
+    }
+  }, [gameId])
+
+  // Limpeza única e segura ao montar a partida
+  useEffect(() => {
+    if (!hasCleanedSessionRef.current) {
+      hasCleanedSessionRef.current = true
+      cleanOldSessionStorage()
+    }
+  }, [cleanOldSessionStorage])
 
   // Perguntas iniciais geradas com o motor anti-repetição por utilizador
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(() =>
@@ -498,7 +576,6 @@ export function QuizScreen({
 
   // Sincronização reactiva: quando o utilizador autenticado carrega o perfil do Firestore
   // e o jogador ainda está na pergunta 1 sem ter dado respostas, atualiza a pool com o histórico completo
-  const authSyncDoneRef = useRef(false)
   useEffect(() => {
     if (!authSyncDoneRef.current && user?.uid && profile?.answeredQuestionIds?.length) {
       authSyncDoneRef.current = true
@@ -517,11 +594,12 @@ export function QuizScreen({
         }
       }
     }
-  }, [user?.uid, profile?.answeredQuestionIds, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
+  }, [user?.uid, profile?.answeredQuestionIds, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam, step, phase])
 
   // Inicialização e reserva segura da partida do evento no backend
   useEffect(() => {
-    if (!eventId) return
+    if (!eventId || eventInitDoneRef.current) return
+    eventInitDoneRef.current = true
     let cancelled = false
     const initBackendEventMatch = async () => {
       try {
@@ -560,9 +638,6 @@ export function QuizScreen({
       cancelled = true
     }
   }, [eventId, eventSlug, gameId, user, step, phase])
-
-  const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
-  const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(false)
 
   // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
@@ -640,70 +715,10 @@ export function QuizScreen({
     }
   }, [gameId, categorySlug, category?.name, diffLevel, equippedArenaId, activeArena, arenaResolution.isFallback, arenaResolution.isExplicit])
 
-  const [step, setStep] = useState(0)
-  const [phase, setPhase] = useState<Phase>('answering')
-  const [selected, setSelected] = useState<OptionKey | null>(null)
-  const [seconds, setSeconds] = useState(60)
-  const [score, setScore] = useState(0)
-  const [correctCount, setCorrectCount] = useState(0)
-  const [streak, setStreak] = useState(0)
-  const [bestStreak, setBestStreak] = useState(0)
-  const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
-  const [eventMatchOutcome, setEventMatchOutcome] = useState<any>(null)
-  const [savingReward, setSavingReward] = useState<boolean>(false)
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
-  const [isLoadingMatch, setIsLoadingMatch] = useState<boolean>(false)
-  const [isRecovering, setIsRecovering] = useState<boolean>(false)
-  const abortControllerRef = useRef<AbortController | null>(null)
-
   // Aliases canónicos para controlo de carregamento (desativados incondicionalmente para entrada direta)
   const isLoading = false
   const setIsLoading = useCallback((_: boolean) => {}, [])
   const setRecovering = useCallback((_: boolean) => {}, [])
-
-  const cleanOldSessionStorage = useCallback(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('active_game_session')
-        localStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('active_game_session')
-        sessionStorage.removeItem('active_session_id')
-        sessionStorage.removeItem('ap_error_auto_retried')
-        if (gameId) {
-          sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
-          localStorage.removeItem(`ap_quiz_state_${gameId}`)
-        }
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-          const key = localStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('session') ||
-              key.includes('challenge'))
-          ) {
-            localStorage.removeItem(key)
-          }
-        }
-        for (let i = sessionStorage.length - 1; i >= 0; i--) {
-          const key = sessionStorage.key(i)
-          if (
-            key &&
-            (key.startsWith('ap_quiz_state_') ||
-              key.startsWith('quiz_') ||
-              key.includes('session') ||
-              key.includes('challenge'))
-          ) {
-            sessionStorage.removeItem(key)
-          }
-        }
-      }
-    } catch (cleanErr) {
-      console.warn('[QuizScreen] Erro na limpeza segura de storage:', cleanErr)
-    }
-  }, [gameId])
-
-  const recordedAnswersRef = React.useRef<MatchAnswerPayload[]>([])
 
   // BLINDAGEM DO BANCO DE PERGUNTAS (DECLARAÇÃO ESTÁVEL PARA EXECUÇÃO SEGURA DOS HOOKS)
   const questions = quizQuestions && quizQuestions.length > 0 ? quizQuestions : EMERGENCY_FALLBACK_QUESTIONS
@@ -782,31 +797,6 @@ export function QuizScreen({
     },
   })
 
-  // Provocações / Reações no Tabuleiro
-  const [reactionCooldown, setReactionCooldown] = useState(0)
-
-  // ENTRADA DIRETA NO JOGO: Limpeza total de sessões anteriores e garantia de jogo ativo imediato
-  useEffect(() => {
-    // 1. Limpeza total de storage para evitar qualquer sessão fantasma residual
-    cleanOldSessionStorage()
-
-    // 2. Garantir estados de controlo inativos
-    setIsLoadingMatch(false)
-    setIsRecovering(false)
-
-    // 3. Forçar estado de jogo ativo com a pergunta 1
-    setStep(0)
-    setSelected(null)
-    setSeconds(60)
-    setScore(0)
-    setCorrectCount(0)
-    setStreak(0)
-    setBestStreak(0)
-    setPhase('answering')
-    recordedAnswersRef.current = []
-    resetQuestionAids()
-  }, [cleanOldSessionStorage, resetQuestionAids])
-
   // Prevenção de fecho acidental no meio de uma partida
   useEffect(() => {
     if (phase === 'finished') return
@@ -842,10 +832,7 @@ export function QuizScreen({
         window.location.href = '/'
       }
     }
-  }, [cleanOldSessionStorage, router])
-
-  const [isExitModalOpen, setIsExitModalOpen] = useState(false)
-  const isLockingInRef = useRef(false)
+  }, [cleanOldSessionStorage, router, setIsFrozen])
 
   const result: QuizResult = useMemo(() => {
     const earnedCoins = calculateMatchCoinReward({
@@ -1164,12 +1151,23 @@ export function QuizScreen({
   const restart = () => {
     try {
       sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
+      localStorage.removeItem(`ap_quiz_state_${gameId}`)
     } catch {}
     recordedAnswersRef.current = []
     isLockingInRef.current = false
     const nextGameId = safeRandomUUID()
     router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
-    setQuizQuestions(createGameQuestions(categorySlug))
+    setQuizQuestions(
+      createGameQuestions(
+        categorySlug,
+        subcategorySlug,
+        difficultyParam,
+        districtParam,
+        cityParam,
+        effectiveUserId,
+        effectiveAnsweredIds
+      )
+    )
     setStep(0)
     setSelected(null)
     resetQuestionAids()

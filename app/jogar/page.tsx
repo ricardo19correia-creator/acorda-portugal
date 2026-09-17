@@ -142,8 +142,13 @@ function JogarContainer() {
 
   const districtParam = searchParams.get('district') || searchParams.get('dist') || searchParams.get('distrito')
   const cityParam = searchParams.get('city') || searchParams.get('cidade')
-  const gameParam = searchParams.get('game') || searchParams.get('gameId')
-  const playParam = searchParams.get('play') === 'true'
+  const playParam =
+    searchParams.get('play') === 'true' ||
+    searchParams.get('play') === '1' ||
+    searchParams.get('start') === 'true' ||
+    searchParams.get('start') === '1' ||
+    searchParams.get('jogar') === 'true' ||
+    searchParams.get('jogar') === '1'
   const eventParam =
     searchParams.get('event') ||
     searchParams.get('evento') ||
