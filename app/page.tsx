@@ -12,7 +12,6 @@ import { resetGlobalArenaState } from '@/lib/game-active-state'
 import { HomeHero } from '@/components/home/HomeHero'
 import { PlayerStatusHud } from '@/components/home/PlayerStatusHud'
 import { ThreeChallengePaths } from '@/components/home/ThreeChallengePaths'
-import { QuickNavigationSection } from '@/components/home/QuickNavigationSection'
 import { SiteFooter } from '@/components/site-footer'
 
 export default function HomePage() {
@@ -56,7 +55,7 @@ export default function HomePage() {
         <SiteHeader />
 
         {/* Menu Principal de Jogo — Hierarquia e Foco Absoluto */}
-        <main className="flex-1 flex flex-col justify-between items-center w-full bg-transparent px-4 py-4 sm:py-6">
+        <main className="flex-1 flex flex-col items-center w-full bg-transparent px-4 py-4 sm:py-6">
           <div className="w-full flex flex-col items-center">
             {/* 1. HERO PRINCIPAL — "ACORDA PORTUGAL" / "Portugal está em jogo." / "JOGAR AGORA" */}
             <HomeHero
@@ -74,14 +73,9 @@ export default function HomePage() {
             {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🏆 RANKINGS */}
             <ThreeChallengePaths onStartGame={handleStartGame} />
           </div>
-
-          {/* 4. BARRA DE NAVEGAÇÃO INFERIOR — (Rankings, Categorias, Loja, Conquistas, Perfil) */}
-          <div className="w-full mt-6 sm:mt-8 mb-2">
-            <QuickNavigationSection />
-          </div>
         </main>
 
-        {/* 5. RODAPÉ DE NAVEGAÇÃO COMPLETO DA PÁGINA INICIAL */}
+        {/* 4. RODAPÉ DE NAVEGAÇÃO COMPLETO DA PÁGINA INICIAL */}
         <SiteFooter />
       </div>
 
