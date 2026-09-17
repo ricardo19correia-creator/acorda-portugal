@@ -1216,28 +1216,9 @@ export function QuizScreen({
         </header>
 
         {/* ========================================================= */}
-        {/* 2. NÍVEL DA PARTIDA + PAINEL CENTRAL DA PERGUNTA          */}
+        {/* 2. PAINEL CENTRAL DA PERGUNTA                             */}
         {/* ========================================================= */}
         <div className="w-full flex-1 min-h-0 flex flex-col justify-center items-center py-0.5 sm:py-1">
-          {/* EMBLEMA CENTRAL METÁLICO: NÍVEL 2 */}
-          <div
-            className="relative z-10 px-3 sm:px-4 py-0.5 mb-[-8px] bg-gradient-to-r from-amber-400 via-cyan-400 to-amber-400 p-[1.5px] shadow-[0_0_14px_rgba(245,158,11,0.4)] shrink-0"
-            style={{
-              clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
-            }}
-          >
-            <div
-              className="px-3 sm:px-5 py-0.5 bg-gradient-to-b from-[#0c1a3b] to-[#040817] flex items-center justify-center"
-              style={{
-                clipPath: 'polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%)',
-              }}
-            >
-              <span className="font-display font-black text-[10px] sm:text-xs uppercase tracking-widest text-amber-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                NÍVEL {diffLevel >= 4 ? 3 : diffLevel === 3 ? 2 : 2}
-              </span>
-            </div>
-          </div>
-
           {/* GRANDE PAINEL CENTRAL CHANFRADO */}
           <div className="relative w-full p-[1.5px] sm:p-[2px] bg-gradient-to-b from-amber-400/90 via-blue-500/80 to-cyan-400/90 rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.85),0_0_24px_rgba(30,58,138,0.4)]">
             <div className="relative w-full min-h-[56px] max-h-[125px] sm:min-h-[85px] sm:max-h-[175px] md:min-h-[110px] md:max-h-[220px] px-3 sm:px-6 py-2 sm:py-4 flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#08183d]/98 via-[#040c24]/98 to-[#061333]/98 backdrop-blur-2xl rounded-xl sm:rounded-2xl overflow-y-auto">
