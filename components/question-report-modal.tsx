@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import { Flag, X, CheckCircle2, AlertCircle, Send } from 'lucide-react'
+import { cleanQuestionPrompt } from '@/src/lib/cleanPrompt'
+
 
 export interface QuestionReportModalProps {
   isOpen: boolean
@@ -98,15 +100,16 @@ export function QuestionReportModal({
               Reportar Pergunta
             </h3>
             <p className="text-[11px] text-muted-foreground">
-              {categoryName ? `${categoryName} • ` : ''}ID #{questionId}
+              Reportar incorreção editorial
             </p>
           </div>
         </div>
 
         {/* Resumo da Pergunta */}
         <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs text-slate-300 font-medium line-clamp-2">
-          &ldquo;{questionText}&rdquo;
+          &ldquo;{cleanQuestionPrompt(questionText)}&rdquo;
         </div>
+
 
         {submitted ? (
           <div className="py-8 text-center space-y-2">

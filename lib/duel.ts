@@ -19,7 +19,8 @@ import {
 } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { QuestionRegistry } from '@/lib/question-system/registry'
-import { selectBalancedMatchQuestions, shuffleQuestions } from '@/src/lib/questionEngine'
+import { selectBalancedMatchQuestions, shuffleQuestions, cleanQuestionPrompt } from '@/src/lib/questionEngine'
+
 import type { QuizQuestion } from '@/lib/game-data'
 import { calculateLevelProgress } from '@/lib/progression'
 import { ECONOMY_CONFIG, calculateLevelUpCoinReward } from '@/src/data/economy'
@@ -237,9 +238,10 @@ export function generateDuelQuestions(count = 10): DuelQuestion[] {
 
     return {
       id: q.id,
-      question: q.question,
+      question: cleanQuestionPrompt(q.question),
       category: q.category,
       options: remappedOptions,
+
       correct: newCorrectKey,
       explanation: q.explanation || `Resposta correta: ${correctText}`,
     }

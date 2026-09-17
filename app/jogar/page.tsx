@@ -122,7 +122,7 @@ export class JogarErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
 function JogarContainer() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { user, authResolved } = useAuth()
+  const { user, profile, authResolved } = useAuth()
   const isFresh = searchParams.get('fresh') === 'true'
 
   const rawCategoryParam =
@@ -218,17 +218,23 @@ function JogarContainer() {
   // Resolução da arena com fallback seguro
   const activeArena = useMemo(() => {
     try {
+      const effectiveEquipped =
+        equippedArena ||
+        (profile as any)?.equippedArena ||
+        profile?.equipped?.arena ||
+        (profile as any)?.equipped_arena
+
       const res = resolveArenaForGame({
         arenaId: arenaParam,
         categorySlug: effectiveCategory,
-        equippedArenaId: equippedArena,
+        equippedArenaId: effectiveEquipped,
       })
       return res?.arena || null
     } catch (e) {
       console.warn('[JogarContainer] Aviso ao resolver arena:', e)
       return null
     }
-  }, [arenaParam, effectiveCategory, equippedArena])
+  }, [arenaParam, effectiveCategory, equippedArena, profile])
 
   if (!authResolved && !user) {
     return null
@@ -255,7 +261,7 @@ function JogarContainer() {
     return (
       <div className="relative h-[100dvh] max-h-[100dvh] w-full isolate overflow-hidden bg-transparent text-white flex flex-col justify-between">
         {/* FUNDO DA ARENA OFICIAL DO JOGO */}
-        <AppBackground customImage={activeArena ? activeArena.assetPath : '/images/match-throne-bg.jpg'} />
+        <AppBackground customImage={activeArena ? activeArena.assetPath : '/arenas/Terreiro Dourado.jpg'} />
 
         {/* CONTEÚDO DO TABULEIRO DE QUIZ */}
         <main className="relative z-10 w-full max-w-4xl mx-auto h-full max-h-[100dvh] p-0 flex flex-col justify-between bg-transparent overflow-hidden">

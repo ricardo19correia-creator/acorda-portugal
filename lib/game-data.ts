@@ -24,6 +24,8 @@ import {
 } from 'lucide-react'
 import { PROGRESSION_LEVELS, calculateLevelProgress, type LevelTier, type LevelProgressInfo } from '@/lib/progression'
 import questions from './data/questions.json'
+import { cleanQuestionPrompt } from '@/src/lib/cleanPrompt'
+
 
 export * from '@/lib/categories-data'
 export type { LevelTier, LevelProgressInfo }
@@ -472,8 +474,9 @@ const allQuestions: QuizQuestion[] = (questions as any[]).map((q, i) => {
 
   const rawQuestionText = String(q.question || '').trim()
   const isMaluco = rawQuestionText.toLowerCase().includes('modo maluco') || String(q.category || '').toLowerCase().includes('maluco')
-  const cleanQuestion = rawQuestionText.replace(/^Modo\s+Maluco\s*#?\d*:\s*/i, '').replace(/^Pergunta\s*#?\d*:\s*/i, '').trim()
+  const cleanQuestion = cleanQuestionPrompt(rawQuestionText)
   const cleanCategory = isMaluco ? 'Modo Maluco' : (q.category || 'Portugal')
+
 
   return {
     ...q,

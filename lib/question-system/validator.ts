@@ -5,6 +5,7 @@
 
 import { MAIN_CATEGORIES, getCategoryBySlug, normalizeCategorySlug } from '@/lib/categories-data'
 import type { OfficialQuestion, QuestionDifficulty, QuestionType, QuestionStatus } from '@/src/types/quiz'
+import { cleanQuestionPrompt } from '@/src/lib/cleanPrompt'
 
 export interface ValidationError {
   field: string
@@ -145,14 +146,9 @@ export function validateQuestion(input: Partial<OfficialQuestion> | Record<strin
     }
   }
 
-  // 3. Texto da Pergunta
-  let rawPergunta = String(raw.pergunta || raw.question || '').trim()
-  // Limpeza preventiva de prefixos de produção editorial
-  rawPergunta = rawPergunta
-    .replace(/^Modo\s+Maluco\s*#?\d*:\s*/i, '')
-    .replace(/^Pergunta\s*#?\d*:\s*/i, '')
-    .replace(/^Quest[aã]o\s*#?\d*:\s*/i, '')
-    .trim()
+  // 3. Texto da Pergunta — Sanitização estrita de qualquer categoria, número (#123), ID ou nível técnico
+  let rawPergunta = cleanQuestionPrompt(String(raw.pergunta || raw.question || ''))
+
 
   if (!rawPergunta) {
     errors.push({ field: 'pergunta', code: 'REQUIRED', message: 'O texto da pergunta é obrigatório.', severity: 'error' })

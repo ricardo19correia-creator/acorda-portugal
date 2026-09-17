@@ -41,7 +41,7 @@ export function GlobalAppBackground({
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat will-change-transform"
           style={{
-            backgroundImage: `url('${customImage}')`,
+            backgroundImage: `url('${encodeURI(customImage)}')`,
             backgroundPosition: 'center center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',

@@ -661,7 +661,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Circuito Internacional",
-    "question": "[Desafio Local] Em Vila Real: Qual é o traçado citadino lendário de Vila Real conhecido mundialmente?",
+    "question": "Em Vila Real: Qual é o traçado citadino lendário de Vila Real conhecido mundialmente?",
     "options": [
       "Circuito Internacional de Vila Real",
       "Autódromo do Estoril",
@@ -677,7 +677,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Automobilismo",
-    "question": "[Desafio Local] Em Vila Real: Em que ano se realizou a primeira corrida oficial do Circuito de Vila Real?",
+    "question": "Em Vila Real: Em que ano se realizou a primeira corrida oficial do Circuito de Vila Real?",
     "options": [
       "1931",
       "1950",
@@ -693,7 +693,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Desporto",
-    "question": "[Desafio Local] Em Vila Real: Qual é a curva mais famosa e temida do antigo traçado do Circuito de Vila Real?",
+    "question": "Em Vila Real: Qual é a curva mais famosa e temida do antigo traçado do Circuito de Vila Real?",
     "options": [
       "Curva da Salsicharia",
       "Curva da Boavista",
@@ -709,7 +709,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Futebol",
-    "question": "[Desafio Local] Em Vila Real: O Sport Clube Vila Real joga habitualmente em que estádio municipal?",
+    "question": "Em Vila Real: O Sport Clube Vila Real joga habitualmente em que estádio municipal?",
     "options": [
       "Complexo Desportivo do Monte da Forca",
       "Estádio do Bessa",
@@ -725,7 +725,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Desporto Motorizado",
-    "question": "[Desafio Local] Em Vila Real: Que piloto lendário português venceu corridas históricas no Circuito de Vila Real?",
+    "question": "Em Vila Real: Que piloto lendário português venceu corridas históricas no Circuito de Vila Real?",
     "options": [
       "Tiago Monteiro",
       "Pedro Lamy",
@@ -741,7 +741,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Palácio de Mateus",
-    "question": "[Desafio Local] Em Vila Real: Quem foi o célebre arquiteto barroco responsável pelo projeto do Palácio de Mateus?",
+    "question": "Em Vila Real: Quem foi o célebre arquiteto barroco responsável pelo projeto do Palácio de Mateus?",
     "options": [
       "Nicolau Nasoni",
       "André Soares",
@@ -757,7 +757,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Sé Catedral",
-    "question": "[Desafio Local] Em Vila Real: A Sé Catedral de Vila Real pertencia originalmente a que ordem religiosa?",
+    "question": "Em Vila Real: A Sé Catedral de Vila Real pertencia originalmente a que ordem religiosa?",
     "options": [
       "Dominicanos (Convento de São Domingos)",
       "Franciscanos",
@@ -773,7 +773,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Capela Nova",
-    "question": "[Desafio Local] Em Vila Real: Que outro nome é dado à Capela Nova, situada na Rua dos Combatentes em Vila Real?",
+    "question": "Em Vila Real: Que outro nome é dado à Capela Nova, situada na Rua dos Combatentes em Vila Real?",
     "options": [
       "Igreja dos Clérigos",
       "Igreja de São Pedro",
@@ -789,7 +789,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Santuário de Panóias",
-    "question": "[Desafio Local] Em Vila Real: A que divindades era dedicado o culto nos sacrifícios do Santuário Rupestre de Panóias?",
+    "question": "Em Vila Real: A que divindades era dedicado o culto nos sacrifícios do Santuário Rupestre de Panóias?",
     "options": [
       "Serápis e Deuses ctónicos",
       "Júpiter e Marte",
@@ -805,7 +805,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Vila Velha",
-    "question": "[Desafio Local] Em Vila Real: Como se chama o núcleo histórico original e promontório fortificado de Vila Real?",
+    "question": "Em Vila Real: Como se chama o núcleo histórico original e promontório fortificado de Vila Real?",
     "options": [
       "Vila Velha",
       "Cidadela de Mateus",
@@ -821,7 +821,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Casa de Diogo Cão",
-    "question": "[Desafio Local] Em Vila Real: Em que avenida principal de Vila Real se situa a histórica Casa de Diogo Cão?",
+    "question": "Em Vila Real: Em que avenida principal de Vila Real se situa a histórica Casa de Diogo Cão?",
     "options": [
       "Avenida Carvalho de Araújo",
       "Avenida Aureliano Barrigas",
@@ -837,7 +837,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Casa dos Marqueses",
-    "question": "[Desafio Local] Em Vila Real: Que elemento arquitetónico de estilo manuelino se destaca na fachada da Casa dos Marqueses de Vila Real?",
+    "question": "Em Vila Real: Que elemento arquitetónico de estilo manuelino se destaca na fachada da Casa dos Marqueses de Vila Real?",
     "options": [
       "Janela geminada manuelina e ameias",
       "Portal barroco com volutas",
@@ -853,7 +853,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Ponte Metálica",
-    "question": "[Desafio Local] Em Vila Real: Que rio é atravessado pela imponente Ponte Metálica em Vila Real?",
+    "question": "Em Vila Real: Que rio é atravessado pela imponente Ponte Metálica em Vila Real?",
     "options": [
       "Rio Corgo",
       "Rio Cabril",
@@ -869,7 +869,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Jardim da Carreira",
-    "question": "[Desafio Local] Em Vila Real: De onde foram trazidas as árvores originais plantadas no Jardim da Carreira no século XVIII?",
+    "question": "Em Vila Real: De onde foram trazidas as árvores originais plantadas no Jardim da Carreira no século XVIII?",
     "options": [
       "Serra do Gerês",
       "Serra da Estrela",
@@ -885,7 +885,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Teatro",
-    "question": "[Desafio Local] Em Vila Real: Em que ano foi inaugurado o moderno edifício do Teatro de Vila Real?",
+    "question": "Em Vila Real: Em que ano foi inaugurado o moderno edifício do Teatro de Vila Real?",
     "options": [
       "2004",
       "1998",
@@ -901,7 +901,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Doces Regionais",
-    "question": "[Desafio Local] Em Vila Real: Qual o recheio tradicional que compõe as deliciosas Cristas de Galo de Vila Real?",
+    "question": "Em Vila Real: Qual o recheio tradicional que compõe as deliciosas Cristas de Galo de Vila Real?",
     "options": [
       "Ovos moles e amêndoa",
       "Doce de gila e noz",
@@ -917,7 +917,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Gastronomia",
-    "question": "[Desafio Local] Em Vila Real: Qual destas especialidades salgadas é a mais emblemática de Vila Real?",
+    "question": "Em Vila Real: Qual destas especialidades salgadas é a mais emblemática de Vila Real?",
     "options": [
       "Covilhete de Vila Real",
       "Pastel de Bacalhau",
@@ -933,7 +933,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Doces Regionais",
-    "question": "[Desafio Local] Em Vila Real: Que outros pastéis conventuais partilham o mesmo recheio das Cristas de Galo?",
+    "question": "Em Vila Real: Que outros pastéis conventuais partilham o mesmo recheio das Cristas de Galo?",
     "options": [
       "Pastéis de Santa Clara",
       "Pastéis de Vouzela",
@@ -949,7 +949,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Enchidos",
-    "question": "[Desafio Local] Em Vila Real: Que feira anual em Vila Real celebra a gastronomia transmontana e os produtos regionais?",
+    "question": "Em Vila Real: Que feira anual em Vila Real celebra a gastronomia transmontana e os produtos regionais?",
     "options": [
       "Feira dos Enchidos e Produtos Tradicionais",
       "Feira Nacional da Agricultura",
@@ -965,7 +965,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Vinhos",
-    "question": "[Desafio Local] Em Vila Real: Que vinho de renome internacional tem no seu rótulo a imagem ilustrada do Palácio de Mateus?",
+    "question": "Em Vila Real: Que vinho de renome internacional tem no seu rótulo a imagem ilustrada do Palácio de Mateus?",
     "options": [
       "Mateus Rosé",
       "Vinho da Madeira",
@@ -981,7 +981,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Barro de Bisalhães",
-    "question": "[Desafio Local] Em Vila Real: Como é obtida a cor preta característica na cozedura do Barro de Bisalhães?",
+    "question": "Em Vila Real: Como é obtida a cor preta característica na cozedura do Barro de Bisalhães?",
     "options": [
       "Cozedura redutora em soenga (debaixo da terra com caruma e terra)",
       "Pintura a tinta de carvão",
@@ -997,7 +997,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Festas e Feiras",
-    "question": "[Desafio Local] Em Vila Real: A Feira dos Pucarinhos realiza-se durante as festividades em honra de que santo?",
+    "question": "Em Vila Real: A Feira dos Pucarinhos realiza-se durante as festividades em honra de que santo?",
     "options": [
       "São Pedro",
       "Santo António",
@@ -1013,7 +1013,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Lendas e Símbolos",
-    "question": "[Desafio Local] Em Vila Real: Qual é a palavra cravada no brasão e lema histórico de Vila Real associada a D. Pedro de Menezes?",
+    "question": "Em Vila Real: Qual é a palavra cravada no brasão e lema histórico de Vila Real associada a D. Pedro de Menezes?",
     "options": [
       "Aleo",
       "Victoria",
@@ -1029,7 +1029,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Lendas e Símbolos",
-    "question": "[Desafio Local] Em Vila Real: O que segurava D. Pedro de Menezes ao proferir a palavra 'Aleo'?",
+    "question": "Em Vila Real: O que segurava D. Pedro de Menezes ao proferir a palavra 'Aleo'?",
     "options": [
       "Um pau de zambujeiro (zambujo)",
       "Uma espada de ferro",
@@ -1045,7 +1045,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Tradições",
-    "question": "[Desafio Local] Em Vila Real: Que aldeia do concelho de Vila Real é a capital da produção tradicional do Barro Preto?",
+    "question": "Em Vila Real: Que aldeia do concelho de Vila Real é a capital da produção tradicional do Barro Preto?",
     "options": [
       "Bisalhães",
       "Arroios",
@@ -1061,7 +1061,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Linho",
-    "question": "[Desafio Local] Em Vila Real: Que freguesias serranas de Vila Real são famosas pelo fabrico tradicional do linho?",
+    "question": "Em Vila Real: Que freguesias serranas de Vila Real são famosas pelo fabrico tradicional do linho?",
     "options": [
       "Agarez e Mondrões",
       "Folhadela e Guiães",
@@ -1077,7 +1077,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Parque Natural",
-    "question": "[Desafio Local] Em Vila Real: Qual é a cascata mais alta e famosa do Parque Natural do Alvão perto de Vila Real?",
+    "question": "Em Vila Real: Qual é a cascata mais alta e famosa do Parque Natural do Alvão perto de Vila Real?",
     "options": [
       "Fisgas de Ermelo",
       "Cascata do Arado",
@@ -1093,7 +1093,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Montanhas",
-    "question": "[Desafio Local] Em Vila Real: Qual é a serra que divide os distritos do Porto e Vila Real e que atinge 1416 metros no vértice da Senhora da Serra?",
+    "question": "Em Vila Real: Qual é a serra que divide os distritos do Porto e Vila Real e que atinge 1416 metros no vértice da Senhora da Serra?",
     "options": [
       "Serra do Marão",
       "Serra da Padrela",
@@ -1109,7 +1109,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Rios",
-    "question": "[Desafio Local] Em Vila Real: Qual é o rio que escava as profundas gargantas rochosas junto à cidade de Vila Real?",
+    "question": "Em Vila Real: Qual é o rio que escava as profundas gargantas rochosas junto à cidade de Vila Real?",
     "options": [
       "Rio Corgo",
       "Rio Lima",
@@ -1125,7 +1125,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Parque Urbano",
-    "question": "[Desafio Local] Em Vila Real: Qual o nome do parque verde ao longo do vale que atravessa Vila Real?",
+    "question": "Em Vila Real: Qual o nome do parque verde ao longo do vale que atravessa Vila Real?",
     "options": [
       "Parque Urbano do Corgo",
       "Parque da Cidade do Porto",
@@ -1141,7 +1141,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Ecopista",
-    "question": "[Desafio Local] Em Vila Real: A antiga linha ferroviária que ligava Vila Real a Chaves e Régua foi transformada em:",
+    "question": "Em Vila Real: A antiga linha ferroviária que ligava Vila Real a Chaves e Régua foi transformada em:",
     "options": [
       "Ecopista da Linha do Corgo",
       "Trilho do Sabor",
@@ -1157,7 +1157,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Freguesias",
-    "question": "[Desafio Local] Em Vila Real: Qual destas é a freguesia mais a sul do concelho de Vila Real, com raízes germânicas?",
+    "question": "Em Vila Real: Qual destas é a freguesia mais a sul do concelho de Vila Real, com raízes germânicas?",
     "options": [
       "Guiães",
       "Campeã",
@@ -1173,7 +1173,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Freguesias",
-    "question": "[Desafio Local] Em Vila Real: Que freguesia é famosa pela vasta planície serrana e pela Feira da Campeã?",
+    "question": "Em Vila Real: Que freguesia é famosa pela vasta planície serrana e pela Feira da Campeã?",
     "options": [
       "Campeã",
       "Mateus",
@@ -1189,7 +1189,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Freguesias",
-    "question": "[Desafio Local] Em Vila Real: Em que freguesia de Vila Real se situa a sede e o campus principal da UTAD?",
+    "question": "Em Vila Real: Em que freguesia de Vila Real se situa a sede e o campus principal da UTAD?",
     "options": [
       "Folhadela (Quinta de Prados)",
       "Mateus",
@@ -1205,7 +1205,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Freguesias",
-    "question": "[Desafio Local] Em Vila Real: A aldeia típica de Lamas de Olo, com casas de colmo e gado maronês, situa-se na freguesia de:",
+    "question": "Em Vila Real: A aldeia típica de Lamas de Olo, com casas de colmo e gado maronês, situa-se na freguesia de:",
     "options": [
       "Borba de Godim / Alvão",
       "Mouçós e Lamares",
@@ -1221,7 +1221,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "UTAD",
-    "question": "[Desafio Local] Em Vila Real: O Jardim Botânico da UTAD é considerado um dos maiores da Europa por:",
+    "question": "Em Vila Real: O Jardim Botânico da UTAD é considerado um dos maiores da Europa por:",
     "options": [
       "Estar integrado em todo o campus universitário",
       "Ser uma estufa gigante fechada",
@@ -1237,7 +1237,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "UTAD",
-    "question": "[Desafio Local] Em Vila Real: Em que ano o Instituto Universitário de Trás-os-Montes e Alto Douro foi elevado a Universidade (UTAD)?",
+    "question": "Em Vila Real: Em que ano o Instituto Universitário de Trás-os-Montes e Alto Douro foi elevado a Universidade (UTAD)?",
     "options": [
       "1986",
       "1974",
@@ -1253,7 +1253,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "História",
-    "question": "[Desafio Local] Em Vila Real: Que rei fundou a povoação em 1289 como 'Vila Real de Panóias'?",
+    "question": "Em Vila Real: Que rei fundou a povoação em 1289 como 'Vila Real de Panóias'?",
     "options": [
       "D. Dinis",
       "D. Afonso III",
@@ -1269,7 +1269,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Descobrimentos",
-    "question": "[Desafio Local] Em Vila Real: O navegador Diogo Cão, natural de Vila Real, colocava que marcos de pedra na costa africana?",
+    "question": "Em Vila Real: O navegador Diogo Cão, natural de Vila Real, colocava que marcos de pedra na costa africana?",
     "options": [
       "Padrões de pedra",
       "Cruzeiros de ferro",
@@ -1285,7 +1285,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Literatura",
-    "question": "[Desafio Local] Em Vila Real: Que grande escritor português do 'Reino Maravilhoso' viveu e tem forte ligação a Trás-os-Montes e São Leonardo de Galafura?",
+    "question": "Em Vila Real: Que grande escritor português do 'Reino Maravilhoso' viveu e tem forte ligação a Trás-os-Montes e São Leonardo de Galafura?",
     "options": [
       "Miguel Torga",
       "Eça de Queirós",
@@ -1301,7 +1301,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "História",
-    "question": "[Desafio Local] Em Vila Real: Porque era Vila Real outrora apelidada de 'Corte de Trás-os-Montes'?",
+    "question": "Em Vila Real: Porque era Vila Real outrora apelidada de 'Corte de Trás-os-Montes'?",
     "options": [
       "Pela grande quantidade de famílias nobres e casas brasonadas",
       "Por ter sido capital de Portugal",
@@ -7877,7 +7877,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Circuito Internacional",
-    "question": "Desafio Municipal #493: Qual é o traçado citadino lendário de Vila Real conhecido mundialmente?",
+    "question": "Qual é o traçado citadino lendário de Vila Real conhecido mundialmente?",
     "options": [
       "Circuito Internacional de Vila Real",
       "Autódromo do Estoril",
@@ -7893,7 +7893,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Automobilismo",
-    "question": "Desafio Municipal #494: Em que ano se realizou a primeira corrida oficial do Circuito de Vila Real?",
+    "question": "Em que ano se realizou a primeira corrida oficial do Circuito de Vila Real?",
     "options": [
       "1931",
       "1950",
@@ -7909,7 +7909,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Desporto",
-    "question": "Desafio Municipal #495: Qual é a curva mais famosa e temida do antigo traçado do Circuito de Vila Real?",
+    "question": "Qual é a curva mais famosa e temida do antigo traçado do Circuito de Vila Real?",
     "options": [
       "Curva da Salsicharia",
       "Curva da Boavista",
@@ -7925,7 +7925,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Futebol",
-    "question": "Desafio Municipal #496: O Sport Clube Vila Real joga habitualmente em que estádio municipal?",
+    "question": "O Sport Clube Vila Real joga habitualmente em que estádio municipal?",
     "options": [
       "Complexo Desportivo do Monte da Forca",
       "Estádio do Bessa",
@@ -7941,7 +7941,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Desporto Motorizado",
-    "question": "Desafio Municipal #497: Que piloto lendário português venceu corridas históricas no Circuito de Vila Real?",
+    "question": "Que piloto lendário português venceu corridas históricas no Circuito de Vila Real?",
     "options": [
       "Tiago Monteiro",
       "Pedro Lamy",
@@ -7957,7 +7957,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Palácio de Mateus",
-    "question": "Desafio Municipal #498: Quem foi o célebre arquiteto barroco responsável pelo projeto do Palácio de Mateus?",
+    "question": "Quem foi o célebre arquiteto barroco responsável pelo projeto do Palácio de Mateus?",
     "options": [
       "Nicolau Nasoni",
       "André Soares",
@@ -7973,7 +7973,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Sé Catedral",
-    "question": "Desafio Municipal #499: A Sé Catedral de Vila Real pertencia originalmente a que ordem religiosa?",
+    "question": "A Sé Catedral de Vila Real pertencia originalmente a que ordem religiosa?",
     "options": [
       "Dominicanos (Convento de São Domingos)",
       "Franciscanos",
@@ -7989,7 +7989,7 @@
     "city": "Vila Real",
     "district": "Vila Real",
     "topic": "Capela Nova",
-    "question": "Desafio Municipal #500: Que outro nome é dado à Capela Nova, situada na Rua dos Combatentes em Vila Real?",
+    "question": "Que outro nome é dado à Capela Nova, situada na Rua dos Combatentes em Vila Real?",
     "options": [
       "Igreja dos Clérigos",
       "Igreja de São Pedro",

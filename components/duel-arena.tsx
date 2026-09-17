@@ -68,6 +68,8 @@ import { useConsumablePowerUp, SHOP_CATALOG } from '@/lib/economy'
 import { TITLE_SHOP_CATALOG } from '@/data/shopTitles'
 import { getArenaById } from '@/data/shopArenas'
 import { getTitleBadgeStyle } from '@/lib/cosmetics'
+import { cleanQuestionPrompt } from '@/src/lib/cleanPrompt'
+
 import { generateQuestionClue } from '@/lib/powerup-helpers'
 import { QuizPowerUpsBar } from '@/components/quiz/quiz-powerups-bar'
 import { AnswerOption, type AnswerState } from '@/components/quiz/answer-option'
@@ -1181,8 +1183,9 @@ export function DuelArena({
             <div className="py-2 w-full flex flex-col items-center justify-center relative">
               <div className="national-show-panel w-full min-h-[110px] sm:min-h-[140px] md:min-h-[160px] p-5 sm:p-8 md:p-10 flex flex-col justify-center items-center text-center rounded-2xl sm:rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(30,58,138,0.25)] border border-blue-500/30 bg-[#0c1836]/95 backdrop-blur-2xl">
                 <h1 className="text-base sm:text-xl md:text-2xl lg:text-[25px] font-black text-center leading-relaxed text-white tracking-wide break-words hyphens-auto w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
-                  {currentQuestion?.question}
+                  {cleanQuestionPrompt(currentQuestion?.question || '')}
                 </h1>
+
               </div>
 
               {/* Freeze Banner no Duelo */}

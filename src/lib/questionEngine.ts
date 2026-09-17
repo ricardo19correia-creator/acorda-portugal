@@ -27,17 +27,9 @@ const LOCAL_STORAGE_ANSWERED_KEY = 'answered_question_ids'
 // Memória em runtime caso localStorage não esteja disponível (SSR / Node)
 let memoryRecentIds: string[] = []
 
-/**
- * Limpa prefixos indesejados no texto da pergunta
- */
-export function cleanQuestionPrompt(text: string): string {
-  if (!text) return ''
-  return text
-    .replace(/^Modo\s+Maluco\s*#?\d*:\s*/i, '')
-    .replace(/^Pergunta\s*#?\d*:\s*/i, '')
-    .replace(/^Quest[aã]o\s*#?\d*:\s*/i, '')
-    .trim()
-}
+import { cleanQuestionPrompt } from './cleanPrompt'
+export { cleanQuestionPrompt }
+
 
 /**
  * Normaliza qualquer objeto de pergunta para a interface estrita Question

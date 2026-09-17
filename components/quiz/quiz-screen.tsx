@@ -505,36 +505,57 @@ export function QuizScreen({
 
   // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem('equipped_arena')
-        if (saved && saved !== 'arena_palacio_nacional') {
-          setEquippedArenaId(saved)
-        } else if (saved === 'arena_palacio_nacional') {
-          const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
-          if (explicitlyEquipped) {
+    const sync = () => {
+      try {
+        if (typeof window !== 'undefined') {
+          const saved = localStorage.getItem('equipped_arena')
+          if (saved && saved !== 'arena_palacio_nacional') {
             setEquippedArenaId(saved)
+          } else if (saved === 'arena_palacio_nacional') {
+            const explicitlyEquipped = localStorage.getItem('arena_explicitly_equipped') === 'true'
+            if (explicitlyEquipped) {
+              setEquippedArenaId(saved)
+            }
           }
         }
+      } catch (err) {
+        console.warn('[QuizScreen] Erro ao ler arena do storage:', err)
       }
-    } catch (err) {
-      console.warn('[QuizScreen] Erro ao ler arena do storage:', err)
+    }
+
+    sync()
+    window.addEventListener('arenaChanged', sync)
+    window.addEventListener('inventory_updated', sync)
+    window.addEventListener('storage', sync)
+
+    return () => {
+      window.removeEventListener('arenaChanged', sync)
+      window.removeEventListener('inventory_updated', sync)
+      window.removeEventListener('storage', sync)
     }
   }, [])
 
-  // Resolução Autoritativa da Arena
+  // Resolução Autoritativa da Arena (Prioridade: URL -> LocalStorage -> Perfil -> Padrão SSOT)
   const arenaResolution = useMemo(() => {
     try {
+      const effectiveEquipped =
+        equippedArenaId ||
+        (accountProfile as any)?.equippedArena ||
+        accountProfile?.equipped?.arena ||
+        (accountProfile as any)?.equipped_arena ||
+        (profile as any)?.equippedArena ||
+        profile?.equipped?.arena
+
       return resolveArenaForGame({
         arenaId: arenaParam,
         categorySlug,
-        equippedArenaId,
+        equippedArenaId: effectiveEquipped,
       })
     } catch (err) {
       console.warn('[QuizScreen] Erro na resolução da arena:', err)
       return { arena: CANONICAL_ARENAS[0], isExplicit: false, isFallback: true }
     }
-  }, [arenaParam, categorySlug, equippedArenaId])
+  }, [arenaParam, categorySlug, equippedArenaId, accountProfile, profile])
 
   const activeArena = arenaResolution?.arena || CANONICAL_ARENAS[0]
 
@@ -631,6 +652,7 @@ export function QuizScreen({
   // Normalização estrita da pergunta ativa para impedir qualquer runtime crash ou loading infinito
   const currentQuestion = useMemo(() => {
     const prompt = rawQ?.question || rawQ?.pergunta || 'Pergunta sobre Portugal'
+
     const opts =
       Array.isArray(rawQ?.options) && rawQ.options.length >= 2
         ? rawQ.options
@@ -1196,6 +1218,7 @@ export function QuizScreen({
 
   const qPrompt = q?.question || q?.pergunta || ''
   const isLongQuestion = qPrompt.length > 120
+
   const isMediumQuestion = qPrompt.length > 65
 
   return (
@@ -1211,10 +1234,15 @@ export function QuizScreen({
         />
       )}
 
-      {/* Cenário Cinematográfico da Partida: Sala do Trono Gótica com Vitrais e o Rei */}
+      {/* Cenário Cinematográfico da Partida: Arena Oficial Selecionada pelo Jogador */}
       <div
         className="fixed inset-0 pointer-events-none -z-40 bg-cover bg-center bg-no-repeat transition-all duration-700 select-none"
-        style={{ backgroundImage: "url('/images/match-throne-bg.jpg')" }}
+        style={{
+          backgroundImage: `url('${encodeURI(activeArena?.assetPath || '/arenas/Terreiro Dourado.jpg')}')`,
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
         {/* Vinheta e Atmosfera para Legibilidade Perfeita e Foco Absoluto */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#020614]/80 via-transparent to-[#020614]/90" />
