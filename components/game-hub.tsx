@@ -50,7 +50,6 @@ import { DuelMatchmakingModal } from '@/components/duel-matchmaking-modal'
 import { resolveArena, VIP_ARENAS } from '@/src/data/arenaCatalog'
 import { cn, safeRandomUUID } from '@/lib/utils'
 import { logGameFlow } from '@/lib/game-session'
-import { EVENTS } from '@/lib/game-data'
 
 /**
  * Subcomponente para exibir com máxima clareza os 4 atributos mandatórios de cada modo:
@@ -852,42 +851,32 @@ export function GameHub() {
           </Link>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {EVENTS.map((event) => (
-            <div
-              key={event.title}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-card/80 via-card/60 to-white/5 p-4 backdrop-blur-xl shadow-lg flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 text-[0.62rem] font-black uppercase text-amber-400">
-                    {event.tag}
-                  </span>
-                  <div className="flex items-center gap-1 text-[0.65rem] text-muted-foreground font-bold">
-                    <Clock className="h-3 w-3" />
-                    <span>{event.timeLeft}</span>
-                  </div>
-                </div>
-
-                <h4 className="mt-3 font-display text-base font-black text-foreground">
-                  {event.title}
-                </h4>
-                <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-gold">
-                  <Award className="h-3.5 w-3.5" />
-                  <span>{event.reward}</span>
-                </div>
+        <div className="w-full">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-slate-900/90 via-[#0a1633] to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-xl">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-slate-800 border border-white/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase text-slate-400">
+                  Sem eventos ativos
+                </span>
               </div>
-
-              <button
-                type="button"
-                onClick={() => handleLaunchGame({ categorySlug: 'desafio-nacional' })}
-                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 px-3 py-2 text-xs font-bold text-white transition cursor-pointer"
-              >
-                <span>Participar no Evento</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-              </button>
+              <h4 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-tight">
+                Nenhum evento disponível neste momento.
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Fica atento às próximas novidades. Novas competições nacionais e desafios temporários serão anunciados aqui.
+              </p>
             </div>
-          ))}
+
+            <div className="flex items-center shrink-0">
+              <Link
+                href="/eventos"
+                className="button-game-gold inline-flex items-center gap-2 rounded-2xl px-6 py-3 font-display text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-transform"
+              >
+                <span>Ver Página de Eventos</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

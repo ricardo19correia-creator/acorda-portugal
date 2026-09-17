@@ -8,6 +8,15 @@ import { doc, getDoc, updateDoc, arrayUnion, serverTimestamp } from 'firebase/fi
 import { db } from '@/lib/firebase'
 import type { Question, QuizDifficulty } from '@/src/types/quiz'
 import { QuestionRegistry } from '@/lib/question-system/registry'
+import {
+  getLocalUserHistory,
+  fetchUserQuestionHistory,
+  recordQuestionPresentedAndAnswered,
+  recordQuestionBatchAnswered,
+  reserveQuestionsForMatch,
+  releaseUnusedQuestionsFromMatch,
+  clearAllMemoryHistories,
+} from '@/lib/question-history-service'
 
 let cachedGlobalPool: Question[] | null = null
 
@@ -368,89 +377,37 @@ export function getUserQuestionStorageKey(userId?: string): string {
 export function getUserAnsweredHistory(
   userId?: string,
   cloudAnsweredIds?: string[]
-): { seenSet: Set<string>; recentOrder: string[] } {
-  const key = getUserQuestionStorageKey(userId)
-  let localList: string[] = []
-
-  if (typeof window !== 'undefined') {
-    try {
-      const raw = localStorage.getItem(key)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (Array.isArray(parsed)) {
-          localList = parsed.map(String).filter(Boolean)
-        }
-      }
-    } catch {}
-  } else {
-    localList = memoryUserHistories.get(key) || []
-  }
-
-  // Fallback para legacy recent_question_ids caso o histórico do utilizador esteja vazio
-  if (localList.length === 0 && (!userId || userId.startsWith('guest_'))) {
-    localList = getRecentQuestionIds()
-  }
+): { seenSet: Set<string>; recentOrder: string[]; activeReservedIds: string[] } {
+  const local = getLocalUserHistory(userId)
+  const seenSet = new Set<string>(local.seenSet)
 
   // Sincronizar com os IDs do Firestore (se fornecidos pelo perfil da conta)
   if (Array.isArray(cloudAnsweredIds) && cloudAnsweredIds.length > 0) {
-    const localSet = new Set(localList)
-    const newFromCloud = cloudAnsweredIds.map(String).filter((id) => Boolean(id) && !localSet.has(id))
-    if (newFromCloud.length > 0) {
-      // IDs da nuvem que não estavam locais entram no fim (como perguntas vistas anteriormente)
-      localList = [...localList, ...newFromCloud]
+    for (const id of cloudAnsweredIds) {
+      if (id) seenSet.add(String(id))
     }
   }
 
-  if (localList.length > MAX_USER_HISTORY) {
-    localList = localList.slice(0, MAX_USER_HISTORY)
-  }
-
-  // Atualizar cache
-  if (typeof window !== 'undefined') {
-    try {
-      localStorage.setItem(key, JSON.stringify(localList))
-    } catch {}
-  } else {
-    memoryUserHistories.set(key, localList)
-  }
-
   return {
-    seenSet: new Set(localList),
-    recentOrder: localList,
+    seenSet,
+    recentOrder: local.recentOrder,
+    activeReservedIds: local.activeReservedIds,
   }
 }
 
 /**
  * Regista um lote de IDs de perguntas no histórico individual do jogador.
- * Garante que os novos IDs ficam no topo (mais recentes).
  */
 export function recordUserQuestionBatch(userId: string | undefined, questionIds: string[]): void {
   if (!questionIds || questionIds.length === 0) return
-  const cleanNew = questionIds.map(String).filter(Boolean)
-  const key = getUserQuestionStorageKey(userId)
-
-  const { recentOrder } = getUserAnsweredHistory(userId)
-  // Novos IDs no topo (índice 0 = mais recente), sem duplicados
-  const combined = Array.from(new Set([...cleanNew, ...recentOrder])).slice(0, MAX_USER_HISTORY)
-
-  if (typeof window !== 'undefined') {
-    try {
-      localStorage.setItem(key, JSON.stringify(combined))
-    } catch {}
-  } else {
-    memoryUserHistories.set(key, combined)
-  }
-
-  // Manter retrocompatibilidade com a chave legada
-  saveRecentQuestionIds(cleanNew)
+  void recordQuestionBatchAnswered(userId, questionIds)
 }
 
 /**
  * Limpa o histórico em memória (útil para testes automáticos)
  */
 export function clearMemoryUserHistories(): void {
-  memoryUserHistories.clear()
-  memoryRecentIds = []
+  clearAllMemoryHistories()
 }
 
 /**

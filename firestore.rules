@@ -54,6 +54,20 @@ service cloud.firestore {
       }
     }
 
+    // Histórico Anti-Repetição Global por Utilizador (Conta Oficial)
+    match /userQuestionHistory/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow write: if isAuthenticated() && (isOwner(userId) || isAdmin());
+
+      match /chunks/{chunkId} {
+        allow read, write: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      }
+
+      match /activeMatches/{matchId} {
+        allow read, write: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      }
+    }
+
     // Registo de transações globais (Append-only)
     match /transactions/{txId} {
       allow read: if isAuthenticated();
@@ -106,6 +120,30 @@ service cloud.firestore {
       allow create: if isAuthenticated();
       allow update: if isAuthenticated() && (request.auth.uid == resource.data.userId || request.auth.uid == request.resource.data.userId || isAdmin());
       allow delete: if isAdmin();
+    }
+
+    // Eventos Oficiais, Participantes e Rankings de Competição
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      // Participantes do Evento (Leitura pública para rankings; escrita restrita a Admin/Backend API)
+      match /participants/{userId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+
+      // Registo de partidas processadas para o evento
+      match /matches/{matchId} {
+        allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+        allow write: if isAdmin();
+      }
+
+      // Recompensas atribuídas do evento
+      match /rewards_claimed/{userId} {
+        allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+        allow write: if isAdmin();
+      }
     }
 
     // Reportes de Perguntas e Suporte

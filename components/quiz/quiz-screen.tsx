@@ -868,6 +868,29 @@ export function QuizScreen({
             euros: outcome.newTotalCoins,
           })
         }
+
+        // Registo de Pontos de Evento caso exista evento oficial ativo
+        try {
+          const idToken = await (user as any)?.getIdToken?.()
+          if (idToken) {
+            void fetch('/api/events/record-match', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${idToken}`,
+              },
+              body: JSON.stringify({
+                matchId: gid,
+                score: finalResult.score,
+                correctAnswers: finalResult.correct,
+                totalQuestions: finalResult.total,
+                categorySlug: categorySlug || 'geral',
+              }),
+            }).catch((e) => console.warn('[EVENT_MATCH_SUBMISSION_WARN]', e))
+          }
+        } catch (eventErr) {
+          console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
+        }
       } catch (err) {
         console.error('[CRASH /jogar]: Erro na atribuição de recompensa:', err)
       } finally {

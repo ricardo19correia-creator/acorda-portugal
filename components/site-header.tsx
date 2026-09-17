@@ -22,6 +22,7 @@ import {
   ShieldCheck,
   Smartphone,
   BookOpen,
+  Calendar,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -65,6 +66,7 @@ export function SiteHeader() {
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
+    { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'História', href: '/historia', icon: BookOpen },
     { label: 'App', href: '/download', icon: Smartphone },
@@ -75,6 +77,7 @@ export function SiteHeader() {
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
     { label: 'Meu Distrito', href: '/meu-distrito', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
+    { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
     { label: 'A Nossa História', href: '/historia', icon: BookOpen },

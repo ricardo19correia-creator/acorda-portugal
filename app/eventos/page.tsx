@@ -1,32 +1,11 @@
 'use client'
 
+import React from 'react'
 import { BackgroundFx } from '@/components/background-fx'
 import { SiteHeader } from '@/components/site-header'
 import { Events } from '@/components/events'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { ArrowLeft, Play, Flame, Calendar } from 'lucide-react'
-import { auth } from '@/lib/firebase'
-import { useAuth } from '@/components/auth-provider'
-
-import React, { useState } from 'react'
-import { AuthWallModal } from '@/components/auth-wall-modal'
 
 export default function EventosPage() {
-  const router = useRouter()
-  const { user } = useAuth()
-  const [authWallOpen, setAuthWallOpen] = useState(false)
-  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
-
-  const handleStartGame = (gameRoute: string) => {
-    if (!user && !auth?.currentUser) {
-      setAuthWallTarget(gameRoute)
-      setAuthWallOpen(true)
-      return
-    }
-    router.push(gameRoute)
-  }
-
   return (
     <div className="relative min-h-screen bg-transparent flex flex-col">
       <BackgroundFx variant="challenges" />
@@ -34,54 +13,10 @@ export default function EventosPage() {
       <div className="relative z-20 flex-1 flex flex-col">
         <SiteHeader />
 
-        <main className="flex-1">
-          {/* Header Banner */}
-          <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
-              <div>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Voltar ao Início
-                </Link>
-                <div className="mt-3 flex items-center gap-2">
-                  <span className="badge-hud text-flag-red border-flag-red/40 bg-flag-red/15 shadow-md shadow-flag-red/20 flex items-center gap-1.5">
-                    <Flame className="h-3.5 w-3.5" />
-                    Tempo Limitado
-                  </span>
-                </div>
-                <h1 className="mt-2 font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-foreground text-glow-red">
-                  Eventos &amp; Temporadas
-                </h1>
-                <p className="mt-1.5 text-sm sm:text-base text-muted-foreground font-medium">
-                  Desafios temáticos por tempo limitado com bónus de XP e recompensas exclusivas.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => handleStartGame('/jogar')}
-                className="button-game-gold inline-flex items-center gap-2.5 rounded-2xl px-7 py-4 font-display text-sm font-black uppercase tracking-wider cursor-pointer shadow-xl"
-              >
-                <Play className="h-4 w-4 fill-current" />
-                <span>Jogar Eventos</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Events Grid Section */}
+        <main className="flex-1 pb-16 sm:pb-24">
           <Events />
         </main>
       </div>
-
-      {/* 🔒 MODAL DE BLOQUEIO DE CONVIDADO / LOGIN OBRIGATÓRIO */}
-      <AuthWallModal
-        isOpen={authWallOpen}
-        onClose={() => setAuthWallOpen(false)}
-        targetUrl={authWallTarget}
-      />
     </div>
   )
 }

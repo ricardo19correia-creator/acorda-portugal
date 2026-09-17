@@ -380,40 +380,7 @@ export type GameEvent = {
   icon: 'flag' | 'flame' | 'medal' | 'laugh'
 }
 
-export const EVENTS: GameEvent[] = [
-  {
-    title: 'Desafio Nacional',
-    tag: 'Ao vivo',
-    tone: 'primary',
-    reward: '5.000 XP + €500',
-    timeLeft: 'Termina em 2d 14h',
-    icon: 'flag',
-  },
-  {
-    title: 'Semana de Portugal',
-    tag: 'Especial',
-    tone: 'red',
-    reward: 'Distintivo exclusivo',
-    timeLeft: 'Termina em 5d 03h',
-    icon: 'flame',
-  },
-  {
-    title: 'Especial Desporto',
-    tag: 'Temático',
-    tone: 'gold',
-    reward: '+€250',
-    timeLeft: 'Termina em 1d 08h',
-    icon: 'medal',
-  },
-  {
-    title: 'Modo Maluco',
-    tag: 'Divertido',
-    tone: 'accent',
-    reward: '2× XP',
-    timeLeft: 'Termina em 3d 20h',
-    icon: 'laugh',
-  },
-]
+export const EVENTS: GameEvent[] = []
 
 export type Achievement = {
   id: string

@@ -250,14 +250,6 @@ export class QuestionRegistry {
   public getTemaCompleto(themeSlug: string, difficulty?: number): Question[] {
     const normTheme = normalizeCategorySlug(themeSlug)
     const list = this.byTheme.get(normTheme) || []
-
-    if (difficulty && difficulty >= 1 && difficulty <= 5) {
-      const exact = list.filter((q) => q.difficulty === difficulty)
-      if (exact.length >= 10) return exact
-      const adjacent = list.filter((q) => Math.abs(q.difficulty - difficulty) <= 1)
-      if (adjacent.length >= 10) return adjacent
-    }
-
     return list
   }
 
@@ -269,14 +261,6 @@ export class QuestionRegistry {
       const cat = q.category.toLowerCase()
       return !cat.includes('maluco') && !q.id.startsWith('mm_')
     })
-
-    if (difficulty && difficulty >= 1 && difficulty <= 5) {
-      const exact = list.filter((q) => q.difficulty === difficulty)
-      if (exact.length >= 10) return exact
-      const adjacent = list.filter((q) => Math.abs(q.difficulty - difficulty) <= 1)
-      if (adjacent.length >= 10) return adjacent
-    }
-
     return list
   }
 
@@ -302,13 +286,6 @@ export class QuestionRegistry {
     if (!list || list.length === 0) {
       // Fallback gracioso: Tema Completo
       list = this.getTemaCompleto(themeSlug, difficulty)
-    }
-
-    if (difficulty && difficulty >= 1 && difficulty <= 5 && list.length >= 15) {
-      const exact = list.filter((q) => q.difficulty === difficulty)
-      if (exact.length >= 10) return exact
-      const adjacent = list.filter((q) => Math.abs(q.difficulty - difficulty) <= 1)
-      if (adjacent.length >= 10) return adjacent
     }
 
     return list
