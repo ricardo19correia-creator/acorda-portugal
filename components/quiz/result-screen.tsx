@@ -51,6 +51,7 @@ export function ResultScreen({
   difficultyLabel,
   answers,
   onExit,
+  eventOutcome,
 }: {
   result: QuizResult
   gameId: string
@@ -65,6 +66,14 @@ export function ResultScreen({
   difficultyLabel?: string
   answers?: any
   onExit?: () => void
+  eventOutcome?: {
+    success?: boolean
+    eventPointsAdded?: number
+    dailyMatchesToday?: number
+    maxDailyMatches?: number
+    dailyLimitReached?: boolean
+    message?: string
+  } | null
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
   const [showLevelUpModal, setShowLevelUpModal] = useState(false)
@@ -278,6 +287,50 @@ export function ResultScreen({
             sub={rewardOutcome && rewardOutcome.newStreak > rewardOutcome.oldStreak ? '🔥 +1 Hoje!' : undefined}
           />
         </div>
+
+        {/* ========================================================= */}
+        {/* BANNER DO PRIMEIRO EVENTO OFICIAL REAL                    */}
+        {/* ========================================================= */}
+        {eventOutcome && typeof eventOutcome.eventPointsAdded === 'number' && eventOutcome.eventPointsAdded > 0 && (
+          <div className="relative mt-3 overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-slate-900/85 to-slate-900/95 p-3.5 text-left shadow-lg backdrop-blur-md">
+            <div className="flex items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/30 text-lg shadow-sm">
+                  🏆
+                </div>
+                <div className="min-w-0">
+                  <p className="font-display text-xs font-black uppercase tracking-wider text-amber-300 truncate">
+                    Portugal em Jogo — Evento Oficial
+                  </p>
+                  <p className="text-[11px] text-slate-300 font-medium truncate mt-0.5">
+                    {eventOutcome.dailyMatchesToday
+                      ? `Partida contabilizada (${eventOutcome.dailyMatchesToday}/10 hoje)`
+                      : 'Partida contabilizada com sucesso no ranking!'}
+                  </p>
+                </div>
+              </div>
+              <span className="shrink-0 inline-flex items-center font-display text-xs sm:text-sm font-black text-amber-300 bg-amber-400/20 border border-amber-400/40 px-3 py-1.5 rounded-xl shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+                +{eventOutcome.eventPointsAdded} Pts
+              </span>
+            </div>
+          </div>
+        )}
+
+        {eventOutcome && eventOutcome.dailyLimitReached && eventOutcome.eventPointsAdded === 0 && (
+          <div className="relative mt-3 overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/80 p-3 text-left backdrop-blur-md shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <span className="text-base">🎯</span>
+              <div className="min-w-0">
+                <p className="font-display text-xs font-black uppercase tracking-wider text-slate-300">
+                  Portugal em Jogo
+                </p>
+                <p className="text-[11px] text-slate-400 font-medium">
+                  Limite de 10 partidas diárias atingido hoje. O teu XP e moedas normais continuam a contar a 100%!
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Status de Sincronização da Recompensa / Retry Seguro */}
         <div className="mt-3 text-center text-xs">

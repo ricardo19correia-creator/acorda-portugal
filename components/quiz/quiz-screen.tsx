@@ -567,6 +567,7 @@ export function QuizScreen({
   const [streak, setStreak] = useState(0)
   const [bestStreak, setBestStreak] = useState(0)
   const [rewardOutcome, setRewardOutcome] = useState<MatchRewardOutcome | null>(null)
+  const [eventMatchOutcome, setEventMatchOutcome] = useState<any>(null)
   const [savingReward, setSavingReward] = useState<boolean>(false)
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const [isLoadingMatch, setIsLoadingMatch] = useState<boolean>(false)
@@ -873,7 +874,7 @@ export function QuizScreen({
         try {
           const idToken = await (user as any)?.getIdToken?.()
           if (idToken) {
-            void fetch('/api/events/record-match', {
+            const evRes = await fetch('/api/events/record-match', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -886,7 +887,17 @@ export function QuizScreen({
                 totalQuestions: finalResult.total,
                 categorySlug: categorySlug || 'geral',
               }),
-            }).catch((e) => console.warn('[EVENT_MATCH_SUBMISSION_WARN]', e))
+            }).catch((e) => {
+              console.warn('[EVENT_MATCH_SUBMISSION_WARN]', e)
+              return null
+            })
+
+            if (evRes && evRes.ok) {
+              const evData = await evRes.json().catch(() => null)
+              if (evData) {
+                setEventMatchOutcome(evData)
+              }
+            }
           }
         } catch (eventErr) {
           console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
@@ -1083,6 +1094,7 @@ export function QuizScreen({
     setStreak(0)
     setBestStreak(0)
     setRewardOutcome(null)
+    setEventMatchOutcome(null)
     setSavingReward(false)
     setPhase('answering')
   }
@@ -1157,6 +1169,7 @@ export function QuizScreen({
             levelUpInfo={levelUpInfo}
             answers={recordedAnswersRef.current}
             onExit={handleAbandonSolo}
+            eventOutcome={eventMatchOutcome}
           />
         </div>
       </div>

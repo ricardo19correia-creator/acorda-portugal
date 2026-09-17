@@ -1,112 +1,774 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { Calendar, Gamepad2, ChevronRight, Trophy, Sparkles } from 'lucide-react'
+import {
+  Calendar,
+  Gamepad2,
+  ChevronRight,
+  Trophy,
+  Sparkles,
+  Clock,
+  Medal,
+  Award,
+  Flame,
+  Shield,
+  User,
+  AlertCircle,
+  CheckCircle2,
+  Star,
+  Target,
+  ArrowRight,
+  Gift,
+  HelpCircle,
+} from 'lucide-react'
+import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
+import { PlayerAvatar } from '@/components/player-avatar'
+import { useAuth } from '@/components/auth-provider'
 import {
   subscribePublishedEvents,
+  subscribeEventRanking,
+  subscribeUserEventProgress,
+  getEventStatus,
+  getEventStatusLabel,
+  getEventCountdown,
+  getDailyMatchesCount,
+  getLisbonDateString,
+  OFFICIAL_PORTUGAL_EM_JOGO_ID,
+  OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   type OfficialEventConfig,
+  type EventParticipant,
+  type CountdownDetails,
 } from '@/lib/events-service'
+import { cn } from '@/lib/utils'
 
 export function Events() {
-  const [events, setEvents] = useState<OfficialEventConfig[]>([])
-  const [loading, setLoading] = useState(false)
+  const { user, profile } = useAuth()
 
+  // Configuração oficial do evento
+  const [eventConfig, setEventConfig] = useState<OfficialEventConfig>(
+    OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+  )
+  const [ranking, setRanking] = useState<EventParticipant[]>([])
+  const [userProgress, setUserProgress] = useState<EventParticipant | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [rankingLoading, setRankingLoading] = useState(true)
+
+  // Sincronização temporal de alta precisão com o servidor (relógio autoritativo)
+  const [serverClockSkewMs, setServerClockSkewMs] = useState<number>(0)
+  const [nowDate, setNowDate] = useState<Date>(() => new Date())
+
+  // Estado de resgate de recompensa
+  const [claiming, setClaiming] = useState(false)
+  const [claimFeedback, setClaimFeedback] = useState<{
+    type: 'success' | 'error'
+    text: string
+  } | null>(null)
+
+  // 1. Obter hora oficial do servidor e dados do evento via API
   useEffect(() => {
-    const unsubscribe = subscribePublishedEvents((published) => {
-      setEvents(published)
+    let isMounted = true
+
+    const syncServerTime = async () => {
+      try {
+        const res = await fetch('/api/events', { cache: 'no-store' })
+        if (res.ok) {
+          const data = await res.json()
+          if (data && data.serverTimestampMs && isMounted) {
+            const clientNow = Date.now()
+            const skew = data.serverTimestampMs - clientNow
+            setServerClockSkewMs(skew)
+            setNowDate(new Date(clientNow + skew))
+
+            if (data.event) {
+              setEventConfig(data.event)
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('[EVENTS] Aviso ao sincronizar hora do servidor:', err)
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+
+    void syncServerTime()
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  // 2. Relógio em tempo real sincronizado com a hora do servidor
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNowDate(new Date(Date.now() + serverClockSkewMs))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [serverClockSkewMs])
+
+  // 3. Subscrição em tempo real aos eventos publicados no Firestore
+  useEffect(() => {
+    const unsubscribe = subscribePublishedEvents((events) => {
+      if (events && events.length > 0) {
+        // Encontrar o evento Portugal em Jogo ou usar o primeiro
+        const found =
+          events.find((e) => e.id === OFFICIAL_PORTUGAL_EM_JOGO_ID) || events[0]
+        setEventConfig(found)
+      }
       setLoading(false)
     })
     return () => unsubscribe()
   }, [])
 
+  // 4. Subscrição em tempo real ao ranking de participantes reais
+  const eventId = eventConfig.id || OFFICIAL_PORTUGAL_EM_JOGO_ID
+  useEffect(() => {
+    setRankingLoading(true)
+    const unsubscribe = subscribeEventRanking(eventId, (participants) => {
+      setRanking(participants)
+      setRankingLoading(false)
+    })
+    return () => unsubscribe()
+  }, [eventId])
+
+  // 5. Subscrição em tempo real ao progresso do utilizador autenticado
+  useEffect(() => {
+    if (!user?.uid) {
+      setUserProgress(null)
+      return
+    }
+    const unsubscribe = subscribeUserEventProgress(user.uid, eventId, (progress) => {
+      setUserProgress(progress)
+    })
+    return () => unsubscribe()
+  }, [user?.uid, eventId])
+
+  // Cálculo dinâmico do estado e contagem decrescente com base no relógio do servidor
+  const dynamicStatus = useMemo(() => {
+    return getEventStatus(eventConfig, nowDate) || 'active'
+  }, [eventConfig, nowDate])
+
+  const dynamicStatusLabel = useMemo(() => {
+    return getEventStatusLabel(dynamicStatus)
+  }, [dynamicStatus])
+
+  const countdown = useMemo(() => {
+    return getEventCountdown(eventConfig, nowDate)
+  }, [eventConfig, nowDate])
+
+  // Posição do utilizador no ranking
+  const userRankIndex = useMemo(() => {
+    if (!user?.uid || ranking.length === 0) return -1
+    return ranking.findIndex((p) => p.userId === user.uid)
+  }, [user?.uid, ranking])
+
+  const userRankPosition = userRankIndex >= 0 ? userRankIndex + 1 : null
+
+  // Partidas do utilizador hoje no fuso Europe/Lisbon
+  const lisbonToday = useMemo(() => getLisbonDateString(nowDate), [nowDate])
+  const dailyMatchesToday = useMemo(() => {
+    return getDailyMatchesCount(userProgress, lisbonToday)
+  }, [userProgress, lisbonToday])
+
+  const maxDailyMatches = eventConfig.rules?.maxDailyMatches || 10
+  const dailyLimitReached = dailyMatchesToday >= maxDailyMatches
+
+  // Reivindicação de Recompensa
+  const canClaimReward =
+    dynamicStatus === 'ended' &&
+    userRankPosition !== null &&
+    userRankPosition <= 3 &&
+    Boolean(user?.uid)
+
+  const handleClaimReward = async () => {
+    if (!user || claiming) return
+    setClaiming(true)
+    setClaimFeedback(null)
+    try {
+      const idToken = await user.getIdToken()
+      const res = await fetch('/api/events/claim-reward', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ eventId }),
+      })
+
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setClaimFeedback({
+          type: 'success',
+          text: data.message || 'Recompensa creditada com sucesso!',
+        })
+      } else {
+        setClaimFeedback({
+          type: 'error',
+          text: data.error || 'Erro ao resgatar recompensa.',
+        })
+      }
+    } catch (err: any) {
+      setClaimFeedback({
+        type: 'error',
+        text: err?.message || 'Erro de conexão ao servidor.',
+      })
+    } finally {
+      setClaiming(false)
+    }
+  }
+
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 space-y-10">
+    <div className="w-full max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-10 space-y-6 sm:space-y-10 overflow-x-hidden select-none">
       {/* ========================================================================= */}
-      {/* CABEÇALHO OFICIAL: EVENTOS                                               */}
+      {/* 1. BARRA SUPERIOR DE NAVEGAÇÃO SEGURA                                     */}
       {/* ========================================================================= */}
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 border border-amber-500/30 px-4 py-1.5 shadow-lg backdrop-blur-md">
-          <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-          <span className="text-[11px] font-black uppercase tracking-widest text-amber-300">
-            Competições &amp; Temporadas
+      <div className="flex items-center justify-between gap-3">
+        <GlobalBackButton label="Voltar" fallbackUrl="/" variant="header" />
+
+        <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 border border-amber-500/30 px-3 sm:px-4 py-1.5 shadow-lg backdrop-blur-md">
+          <Sparkles className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300">
+            Competição Oficial
           </span>
         </div>
-
-        <h1 className="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
-          EVENTOS
-        </h1>
-
-        <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto">
-          Desafios especiais e competições oficiais do Acorda Portugal — Desafio Nacional.
-        </p>
       </div>
 
       {/* ========================================================================= */}
-      {/* ESTADO VAZIO PROFISSIONAL                                                */}
+      {/* 2. CARD PREMIUM HERÓICO: PRIMEIRO DESAFIO NACIONAL — PORTUGAL EM JOGO     */}
       {/* ========================================================================= */}
-      {loading ? (
-        <div className="py-20 text-center space-y-3">
-          <div className="h-9 w-9 mx-auto rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
-          <p className="text-xs text-slate-400 font-medium">A verificar eventos disponíveis...</p>
-        </div>
-      ) : events.length === 0 ? (
-        <section
-          aria-label="Nenhum evento disponível"
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1633]/85 via-[#050c1f]/90 to-[#020612]/95 p-8 sm:p-14 shadow-[0_0_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl text-center"
-        >
-          {/* Efeitos de luz ambiente subtis (Portugal: verde, rubi e ouro) */}
-          <div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-rose-600/10 blur-3xl pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-56 w-56 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+      <section
+        aria-label="Primeiro Desafio Nacional"
+        className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#0a1633]/90 via-[#050c1f]/95 to-[#020612]/98 p-5 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl"
+      >
+        {/* Luzes de fundo temáticas (Verde, Rubi e Ouro de Portugal) */}
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-rose-600/15 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-amber-500/15 blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-md mx-auto space-y-6">
-            <div className="mx-auto grid h-16 w-16 sm:h-20 sm:w-20 place-items-center rounded-3xl bg-amber-400/10 border border-amber-400/20 text-amber-400 shadow-[0_0_30px_rgba(245,158,11,0.15)]">
-              <Calendar className="h-8 w-8 sm:h-10 sm:w-10 text-amber-400" />
+        <div className="relative z-10 space-y-6">
+          {/* Header do Card com Badge de Estado Dinâmico */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="inline-flex items-center gap-2 rounded-xl bg-slate-950/80 border border-white/10 px-3 py-1.5 text-xs font-bold text-slate-300 shadow-inner">
+              <Shield className="h-4 w-4 text-emerald-400" />
+              <span>{eventConfig.type || 'Evento Especial'}</span>
             </div>
 
-            <div className="space-y-2">
-              <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-white drop-shadow-md">
-                Nenhum evento disponível neste momento.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Fica atento às próximas novidades e desafios nacionais. Novas competições e temporadas serão anunciadas aqui.
+            {/* Badge Dinâmico de Estado */}
+            <div
+              className={cn(
+                'inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-black uppercase tracking-wider shadow-lg',
+                dynamicStatus === 'active' &&
+                  'bg-emerald-500/20 text-emerald-300 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.35)]',
+                dynamicStatus === 'upcoming' &&
+                  'bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.35)]',
+                dynamicStatus === 'ended' &&
+                  'bg-slate-800 text-slate-400 border border-slate-700'
+              )}
+            >
+              {dynamicStatus === 'active' && (
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+              )}
+              {dynamicStatus === 'upcoming' && (
+                <Clock className="h-3.5 w-3.5 text-amber-400" />
+              )}
+              {dynamicStatus === 'ended' && (
+                <Award className="h-3.5 w-3.5 text-slate-400" />
+              )}
+              <span>{dynamicStatusLabel}</span>
+            </div>
+          </div>
+
+          {/* Título Oficial e Tema */}
+          <div className="space-y-2 text-left">
+            <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-400">
+              PRIMEIRO DESAFIO NACIONAL
+            </p>
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+              PORTUGAL EM JOGO
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+              {eventConfig.description}
+            </p>
+          </div>
+
+          {/* Relógio de Contagem Decrescente Sincronizado */}
+          {countdown && (
+            <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 sm:p-5 backdrop-blur-md">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center gap-2.5 text-left">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                      {dynamicStatus === 'upcoming'
+                        ? 'Início do Evento em'
+                        : dynamicStatus === 'active'
+                          ? 'Tempo Restante da Competição'
+                          : 'Competição Oficial Concluída'}
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      16 Set 2026, 20:00 ➔ 30 Set 2026, 23:59 (Europe/Lisbon)
+                    </p>
+                  </div>
+                </div>
+
+                {/* Unidades da Contagem */}
+                {dynamicStatus !== 'ended' ? (
+                  <div className="grid grid-cols-4 gap-2 text-center">
+                    <div className="rounded-xl border border-white/10 bg-slate-900/80 px-2.5 py-1.5 min-w-[54px]">
+                      <span className="font-display text-lg sm:text-2xl font-black text-white">
+                        {String(countdown.days).padStart(2, '0')}
+                      </span>
+                      <p className="text-[9px] uppercase font-bold text-slate-400">Dias</p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-slate-900/80 px-2.5 py-1.5 min-w-[54px]">
+                      <span className="font-display text-lg sm:text-2xl font-black text-white">
+                        {String(countdown.hours).padStart(2, '0')}
+                      </span>
+                      <p className="text-[9px] uppercase font-bold text-slate-400">Horas</p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-slate-900/80 px-2.5 py-1.5 min-w-[54px]">
+                      <span className="font-display text-lg sm:text-2xl font-black text-white">
+                        {String(countdown.minutes).padStart(2, '0')}
+                      </span>
+                      <p className="text-[9px] uppercase font-bold text-slate-400">Min</p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-slate-900/80 px-2.5 py-1.5 min-w-[54px]">
+                      <span className="font-display text-lg sm:text-2xl font-black text-amber-400">
+                        {String(countdown.seconds).padStart(2, '0')}
+                      </span>
+                      <p className="text-[9px] uppercase font-bold text-slate-400">Seg</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-right">
+                    <span className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-3 py-1.5 text-xs font-black uppercase text-slate-300 border border-white/10">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                      Classificação Final Congelada
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Como Participar (Regras Claras) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-left">
+            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-emerald-400 font-black text-xs uppercase tracking-wider">
+                <Gamepad2 className="h-4 w-4" />
+                <span>Partidas Normais</span>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Sem modo separado: joga normalmente no jogo. Todas as partidas válidas contam automaticamente para o evento!
               </p>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href="/jogar"
-                className="w-full sm:w-auto button-game-gold inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 font-display text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-transform"
-              >
-                <Gamepad2 className="h-4 w-4" />
-                <span>Jogar Agora</span>
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/rankings"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-slate-900/80 hover:bg-slate-800 px-6 py-3.5 font-display text-xs font-black uppercase tracking-wider text-slate-200 transition"
-              >
-                <Trophy className="h-4 w-4 text-amber-400" />
-                <span>Ver Rankings Globais</span>
-              </Link>
+            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-wider">
+                <Target className="h-4 w-4" />
+                <span>Conversão Real</span>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                A tua pontuação na partida converte-se diretamente em Pontos de Evento (1.000 pts = 100 pontos, teto máx. 100 por jogo).
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 space-y-1">
+              <div className="flex items-center gap-2 text-cyan-400 font-black text-xs uppercase tracking-wider">
+                <Flame className="h-4 w-4" />
+                <span>10 Partidas / Dia</span>
+              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Contam até 10 partidas válidas por dia (fuso de Lisboa). Continuas a jogar normalmente para XP e moedas após o limite!
+              </p>
             </div>
           </div>
-        </section>
-      ) : (
-        // Renderização dinâmica caso no futuro existam eventos reais publicados no Firestore
-        <div className="space-y-6">
-          {events.map((evt) => (
-            <div
-              key={evt.id}
-              className="rounded-3xl border border-amber-500/30 bg-slate-900/80 p-6 sm:p-8 backdrop-blur-xl shadow-xl"
-            >
-              <h3 className="font-display text-xl font-black uppercase text-white">{evt.title}</h3>
-              <p className="text-sm text-slate-300 mt-1">{evt.description}</p>
-            </div>
-          ))}
         </div>
-      )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. ÁREA DO JOGADOR AUTENTICADO                                            */}
+      {/* ========================================================================= */}
+      <section
+        aria-label="A tua participação no evento"
+        className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-5 text-left"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400">
+              <User className="h-5 w-5" />
+            </div>
+            <div>
+              <h2 className="font-display text-lg sm:text-xl font-black uppercase text-white">
+                O Teu Desempenho
+              </h2>
+              <p className="text-xs text-slate-400">
+                {user ? `Conta oficial: ${profile?.displayName || user.email?.split('@')[0] || 'Jogador'}` : 'Inicia sessão para guardar pontos e subir no ranking'}
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/jogar"
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-display text-xs font-black uppercase tracking-wider px-5 py-2.5 shadow-lg shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
+          >
+            <Gamepad2 className="h-4 w-4" />
+            <span>Jogar Agora</span>
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        {user ? (
+          <div className="space-y-4">
+            {/* Grelha de Métricas Reais do Jogador */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Posição */}
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 space-y-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  A Tua Posição
+                </span>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-2xl sm:text-3xl font-black text-white">
+                    {userRankPosition ? `#${userRankPosition}` : 'Sem Posição'}
+                  </span>
+                  {userRankPosition && userRankPosition <= 3 && (
+                    <span className="text-sm">
+                      {userRankPosition === 1 ? '🥇' : userRankPosition === 2 ? '🥈' : '🥉'}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  {userRankPosition
+                    ? `Entre ${ranking.length} participantes reais`
+                    : 'Ainda não entraste no ranking'}
+                </p>
+              </div>
+
+              {/* Pontos de Evento */}
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 space-y-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Os Teus Pontos
+                </span>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-2xl sm:text-3xl font-black text-amber-400">
+                    {(userProgress?.eventPoints || 0).toLocaleString('pt-PT')}
+                  </span>
+                  <span className="text-xs text-amber-300/80 font-bold uppercase">pts</span>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  {userProgress && (userProgress.countedMatches || userProgress.totalMatches)
+                    ? `${userProgress.countedMatches || userProgress.totalMatches} partidas contabilizadas`
+                    : 'Joga uma partida normal para pontuar'}
+                </p>
+              </div>
+
+              {/* Partidas Contabilizadas Hoje */}
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4 space-y-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Partidas Hoje
+                </span>
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className={cn(
+                      'font-display text-2xl sm:text-3xl font-black',
+                      dailyLimitReached ? 'text-amber-400' : 'text-emerald-400'
+                    )}
+                  >
+                    {dailyMatchesToday}
+                  </span>
+                  <span className="text-xs text-slate-400 font-bold">/ {maxDailyMatches}</span>
+                </div>
+                {/* Barra de Progresso Diária */}
+                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-900 border border-white/10">
+                  <div
+                    className={cn(
+                      'h-full rounded-full transition-all duration-500',
+                      dailyLimitReached
+                        ? 'bg-amber-400'
+                        : 'bg-gradient-to-r from-emerald-500 to-teal-400'
+                    )}
+                    style={{
+                      width: `${Math.min(100, (dailyMatchesToday / maxDailyMatches) * 100)}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Aviso quando o limite diário de 10 foi atingido */}
+            {dailyLimitReached && (
+              <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 flex items-center gap-3">
+                <Sparkles className="h-5 w-5 text-amber-400 shrink-0" />
+                <p className="text-xs text-amber-200 leading-relaxed">
+                  Atingiste o limite de <strong>10 partidas contabilizadas hoje</strong> no evento. Podes continuar a jogar à vontade: o teu XP, moedas e estatísticas normais continuam a contar a 100%! O limite do evento reinicia à meia-noite (fuso de Lisboa).
+                </p>
+              </div>
+            )}
+
+            {/* Reclamação de Prémio se o Evento Terminou e ficou no Top 3 */}
+            {canClaimReward && (
+              <div className="rounded-2xl border border-amber-500/50 bg-gradient-to-r from-amber-500/20 via-slate-900 to-slate-900 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-amber-300 font-black text-sm uppercase">
+                    <Trophy className="h-5 w-5 text-amber-400" />
+                    <span>Terminaste no Pódio Nacional!</span>
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    A tua posição final foi #{userRankPosition}. Clica para receber o teu prémio oficial de Acordas.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleClaimReward}
+                  disabled={claiming}
+                  className="w-full sm:w-auto button-game-gold rounded-xl px-5 py-2.5 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-transform"
+                >
+                  {claiming ? 'A creditar...' : 'Resgatar Recompensa'}
+                </button>
+              </div>
+            )}
+
+            {claimFeedback && (
+              <div
+                className={cn(
+                  'rounded-xl p-3 text-xs font-bold flex items-center gap-2',
+                  claimFeedback.type === 'success'
+                    ? 'bg-emerald-500/20 text-emerald-200 border border-emerald-500/40'
+                    : 'bg-rose-500/20 text-rose-200 border border-rose-500/40'
+                )}
+              >
+                {claimFeedback.type === 'success' ? (
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                ) : (
+                  <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+                )}
+                <span>{claimFeedback.text}</span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-white/15 bg-slate-950/40 p-6 text-center space-y-3">
+            <p className="text-sm text-slate-300">
+              Ainda não tens sessão iniciada. Entra na tua conta para guardar o teu progresso, subir no ranking e ganhar prémios.
+            </p>
+            <Link
+              href="/entrar"
+              className="inline-flex items-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2 transition"
+            >
+              <User className="h-4 w-4 text-amber-400" />
+              <span>Entrar / Criar Conta</span>
+            </Link>
+          </div>
+        )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. RECOMPENSAS OFICIAIS DO EVENTO                                         */}
+      {/* ========================================================================= */}
+      <section
+        aria-label="Recompensas Oficiais"
+        className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-5 text-left"
+      >
+        <div className="flex items-center gap-2.5 border-b border-white/10 pb-4">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400">
+            <Trophy className="h-5 w-5" />
+          </div>
+          <div>
+            <h2 className="font-display text-lg sm:text-xl font-black uppercase text-white">
+              Prémios Oficiais
+            </h2>
+            <p className="text-xs text-slate-400">
+              Recompensas virtuais atribuídas automaticamente aos 3 primeiros classificados no final do evento
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          {/* 1.º Lugar */}
+          <div className="relative overflow-hidden rounded-2xl border border-amber-400/50 bg-gradient-to-b from-amber-500/20 via-slate-900/80 to-slate-950/90 p-5 text-center shadow-lg shadow-amber-500/10 space-y-2">
+            <span className="text-3xl">🥇</span>
+            <p className="text-xs font-black uppercase tracking-wider text-amber-300">1.º Lugar</p>
+            <p className="font-display text-2xl sm:text-3xl font-black text-white">
+              10.000 <span className="text-sm font-bold text-amber-400">Acordas</span>
+            </p>
+            <p className="text-[11px] text-slate-300">Grande Campeão Nacional</p>
+          </div>
+
+          {/* 2.º Lugar */}
+          <div className="relative overflow-hidden rounded-2xl border border-slate-300/40 bg-gradient-to-b from-slate-400/15 via-slate-900/80 to-slate-950/90 p-5 text-center shadow-lg space-y-2">
+            <span className="text-3xl">🥈</span>
+            <p className="text-xs font-black uppercase tracking-wider text-slate-300">2.º Lugar</p>
+            <p className="font-display text-2xl sm:text-3xl font-black text-white">
+              7.500 <span className="text-sm font-bold text-slate-300">Acordas</span>
+            </p>
+            <p className="text-[11px] text-slate-300">Vice-Campeão Nacional</p>
+          </div>
+
+          {/* 3.º Lugar */}
+          <div className="relative overflow-hidden rounded-2xl border border-amber-700/40 bg-gradient-to-b from-amber-700/15 via-slate-900/80 to-slate-950/90 p-5 text-center shadow-lg space-y-2">
+            <span className="text-3xl">🥉</span>
+            <p className="text-xs font-black uppercase tracking-wider text-amber-500">3.º Lugar</p>
+            <p className="font-display text-2xl sm:text-3xl font-black text-white">
+              5.000 <span className="text-sm font-bold text-amber-500">Acordas</span>
+            </p>
+            <p className="text-[11px] text-slate-300">Pódio de Honra Nacional</p>
+          </div>
+        </div>
+
+        <p className="text-[11px] text-slate-400 text-center italic">
+          * As Acordas são a moeda virtual oficial do jogo (não são euros). As recompensas são atribuídas diretamente na carteira de jogo pelo backend após 30/09/2026 às 23:59.
+        </p>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. RANKING REAL DO EVENTO (SEM BOTS, SEM DADOS FALSOS)                    */}
+      {/* ========================================================================= */}
+      <section
+        aria-label="Ranking do Evento"
+        className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-7 backdrop-blur-xl shadow-xl space-y-5 text-left"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-amber-400/10 border border-amber-400/20 text-amber-400">
+              <Medal className="h-5 w-5" />
+            </div>
+            <div>
+              <h2 className="font-display text-lg sm:text-xl font-black uppercase text-white">
+                RANKING — PORTUGAL EM JOGO
+              </h2>
+              <p className="text-xs text-slate-400">
+                Classificação nacional oficial atualizada em tempo real (100% participantes reais)
+              </p>
+            </div>
+          </div>
+
+          <span className="text-xs font-bold text-slate-400">
+            {ranking.length === 1 ? '1 participante' : `${ranking.length} participantes`}
+          </span>
+        </div>
+
+        {rankingLoading ? (
+          <div className="py-12 text-center space-y-3">
+            <div className="h-8 w-8 mx-auto rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
+            <p className="text-xs text-slate-400 font-medium">A carregar classificação oficial...</p>
+          </div>
+        ) : ranking.length === 0 ? (
+          /* Estado Vazio 100% Real */
+          <div className="py-12 text-center space-y-4 rounded-2xl border border-dashed border-white/10 bg-slate-950/40 p-6">
+            <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-400/10 text-amber-400 border border-amber-400/20">
+              <Trophy className="h-7 w-7" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-display text-lg font-black uppercase text-white">
+                Ainda não existem participantes.
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
+                Sê o primeiro a jogar uma partida normal do jogo para assumir a liderança e entrar no ranking oficial do Desafio Nacional!
+              </p>
+            </div>
+            <Link
+              href="/jogar"
+              className="inline-flex items-center gap-2 rounded-2xl button-game-gold px-6 py-3 font-display text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-transform"
+            >
+              <Gamepad2 className="h-4 w-4" />
+              <span>Jogar Primeira Partida</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+        ) : (
+          /* Tabela de Classificação Real */
+          <div className="space-y-2 overflow-hidden">
+            {ranking.map((participant, index) => {
+              const pos = participant.pos || index + 1
+              const isTop1 = pos === 1
+              const isTop2 = pos === 2
+              const isTop3 = pos === 3
+              const isCurrentUser = user?.uid === participant.userId
+
+              return (
+                <div
+                  key={participant.userId}
+                  className={cn(
+                    'flex items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl border transition-all',
+                    isCurrentUser
+                      ? 'border-emerald-500/50 bg-emerald-950/30 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
+                      : isTop1
+                        ? 'border-amber-400/40 bg-amber-950/20'
+                        : isTop2
+                          ? 'border-slate-300/30 bg-slate-900/60'
+                          : isTop3
+                            ? 'border-amber-700/30 bg-slate-900/40'
+                            : 'border-white/5 bg-slate-950/40 hover:bg-slate-900/60'
+                  )}
+                >
+                  {/* Esquerda: Posição + Avatar + Nome + Distrito */}
+                  <div className="flex items-center gap-3 min-w-0">
+                    {/* Badge de Posição */}
+                    <div className="w-8 shrink-0 text-center font-display font-black text-sm sm:text-base">
+                      {isTop1 ? (
+                        <span className="text-xl">🥇</span>
+                      ) : isTop2 ? (
+                        <span className="text-xl">🥈</span>
+                      ) : isTop3 ? (
+                        <span className="text-xl">🥉</span>
+                      ) : (
+                        <span className="text-slate-400">#{pos}</span>
+                      )}
+                    </div>
+
+                    {/* Avatar do Jogador */}
+                    <div className="relative shrink-0">
+                      <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border border-white/15 bg-slate-900">
+                        <PlayerAvatar
+                          profile={{
+                            avatar: participant.photoURL || '/images/avatars/avatar_01.png',
+                            displayName: participant.displayName,
+                          }}
+                          src={participant.photoURL || '/images/avatars/avatar_01.png'}
+                          size="sm"
+                          showBadge={false}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Dados Públicos */}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <p className="font-display text-xs sm:text-sm font-black text-white truncate">
+                          {participant.displayName || 'Jogador'}
+                        </p>
+                        {isCurrentUser && (
+                          <span className="rounded-md bg-emerald-500/20 px-1.5 py-0.5 text-[9px] font-black uppercase text-emerald-300 border border-emerald-500/30">
+                            Tu
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[10px] sm:text-[11px] text-slate-400 truncate">
+                        {participant.district || 'Portugal'} •{' '}
+                        {participant.countedMatches || participant.totalMatches} partidas
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Direita: Pontos de Evento */}
+                  <div className="shrink-0 text-right">
+                    <span className="font-display text-base sm:text-xl font-black text-amber-400">
+                      {(participant.eventPoints || 0).toLocaleString('pt-PT')}
+                    </span>
+                    <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </section>
     </div>
   )
 }

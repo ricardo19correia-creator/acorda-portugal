@@ -1,5 +1,5 @@
-// Acorda Portugal — Sistema Canónico de Gestão de Eventos
-// Quando não existem eventos publicados no Firestore, devolve vazio sem qualquer fallback simulado.
+// Acorda Portugal — Sistema Canónico de Gestão de Eventos Oficiais
+// SSOT para modelos, cálculo de datas no fuso Europe/Lisbon, pontuação e rankings reais.
 
 import {
   collection,
@@ -25,19 +25,35 @@ export interface OfficialEventReward {
 
 export interface OfficialEventConfig {
   id: string
+  name: string
   title: string
   subtitle: string
   tag: string
   type: string
+  theme?: string
   description: string
   startDate: string
   endDate: string
+  startAt?: string
+  endAt?: string
   timezone: string
+  published?: boolean
+  active?: boolean
+  enabled?: boolean
   rewards: OfficialEventReward[]
   rules: {
     maxDailyMatches: number
     pointDivisor: number
+    maxEventPointsPerMatch?: number
   }
+  scoring?: {
+    pointDivisor: number
+    maxEventPointsPerMatch: number
+  }
+  dailyMatchLimit?: number
+  rewardsDistributed?: boolean
+  createdAt?: any
+  updatedAt?: any
 }
 
 export interface EventParticipant {
@@ -46,6 +62,7 @@ export interface EventParticipant {
   photoURL?: string | null
   district?: string
   eventPoints: number
+  countedMatches?: number
   totalMatches: number
   dailyMatches?: Record<string, number>
   bestScore?: number
@@ -65,11 +82,47 @@ export interface CountdownDetails {
   statusLabel: string
 }
 
-/**
- * Nenhum evento fictício hardcoded.
- * Mantido como null quando não há evento estático definido.
- */
-export const OFFICIAL_EVENT: OfficialEventConfig | null = null
+export const OFFICIAL_PORTUGAL_EM_JOGO_ID = 'portugal-em-jogo-2026'
+export const DEFAULT_OFFICIAL_EVENT_ID = OFFICIAL_PORTUGAL_EM_JOGO_ID
+
+export const OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO: OfficialEventConfig = {
+  id: OFFICIAL_PORTUGAL_EM_JOGO_ID,
+  name: 'PRIMEIRO DESAFIO NACIONAL — PORTUGAL EM JOGO',
+  title: 'PRIMEIRO DESAFIO NACIONAL — PORTUGAL EM JOGO',
+  subtitle: 'PORTUGAL EM JOGO',
+  tag: 'Oficial',
+  type: 'Evento Especial',
+  theme:
+    'História, Geografia, Cultura, Tradições, Sociedade, Atualidade, Desporto, Curiosidades, Personalidades e Património',
+  description:
+    'Um grande desafio sobre Portugal, misturando conhecimento de História, Geografia, Cultura, Tradições, Sociedade, Atualidade, Desporto, Curiosidades, Personalidades e Património. Joga partidas normais válidas do jogo para subir no ranking nacional!',
+  startDate: '2026-09-16T20:00:00+01:00',
+  endDate: '2026-09-30T23:59:59+01:00',
+  startAt: '2026-09-16T20:00:00+01:00',
+  endAt: '2026-09-30T23:59:59+01:00',
+  timezone: 'Europe/Lisbon',
+  published: true,
+  active: true,
+  enabled: true,
+  dailyMatchLimit: 10,
+  scoring: {
+    pointDivisor: 10,
+    maxEventPointsPerMatch: 100,
+  },
+  rules: {
+    maxDailyMatches: 10,
+    pointDivisor: 10,
+    maxEventPointsPerMatch: 100,
+  },
+  rewards: [
+    { position: 1, title: '1.º Lugar', acordas: 10000, medal: '🥇', label: '10.000 Acordas' },
+    { position: 2, title: '2.º Lugar', acordas: 7500, medal: '🥈', label: '7.500 Acordas' },
+    { position: 3, title: '3.º Lugar', acordas: 5000, medal: '🥉', label: '5.000 Acordas' },
+  ],
+  rewardsDistributed: false,
+}
+
+export const OFFICIAL_EVENT: OfficialEventConfig = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
 
 /**
  * Devolve a data atual em formato YYYY-MM-DD no fuso horário Europe/Lisbon (Portugal Continental)
@@ -91,10 +144,17 @@ export function getLisbonDateString(date: Date = new Date()): string {
 /**
  * Calcula o estado dinâmico de um evento ("upcoming", "active", "ended") com base nas datas reais
  */
-export function getEventStatus(event?: OfficialEventConfig | null, now: Date = new Date()): EventStatus | null {
-  if (!event || !event.startDate || !event.endDate) return null
-  const startMs = new Date(event.startDate).getTime()
-  const endMs = new Date(event.endDate).getTime()
+export function getEventStatus(
+  event?: OfficialEventConfig | null,
+  now: Date = new Date()
+): EventStatus | null {
+  if (!event) return null
+  const startStr = event.startDate || event.startAt
+  const endStr = event.endDate || event.endAt
+  if (!startStr || !endStr) return null
+
+  const startMs = new Date(startStr).getTime()
+  const endMs = new Date(endStr).getTime()
   const curMs = now.getTime()
 
   if (curMs < startMs) return 'upcoming'
@@ -121,14 +181,21 @@ export function getEventStatusLabel(status: EventStatus | null): string {
 /**
  * Calcula a contagem decrescente com base no fuso horário e datas reais de um evento
  */
-export function getEventCountdown(event?: OfficialEventConfig | null, now: Date = new Date()): CountdownDetails | null {
-  if (!event || !event.startDate || !event.endDate) return null
+export function getEventCountdown(
+  event?: OfficialEventConfig | null,
+  now: Date = new Date()
+): CountdownDetails | null {
+  if (!event) return null
+  const startStr = event.startDate || event.startAt
+  const endStr = event.endDate || event.endAt
+  if (!startStr || !endStr) return null
+
   const status = getEventStatus(event, now)
   if (!status) return null
 
   const statusLabel = getEventStatusLabel(status)
-  const startMs = new Date(event.startDate).getTime()
-  const endMs = new Date(event.endDate).getTime()
+  const startMs = new Date(startStr).getTime()
+  const endMs = new Date(endStr).getTime()
   const curMs = now.getTime()
 
   let targetMs = endMs
@@ -156,13 +223,26 @@ export function getEventCountdown(event?: OfficialEventConfig | null, now: Date 
 }
 
 /**
- * Converte a pontuação da partida em Pontos de Evento com divisor configurável (padrão: 10)
+ * Converte a pontuação da partida em Pontos de Evento:
+ * - Divisor configurável (padrão: 10)
+ * - Teto máximo por partida válida de 100 pontos de evento
+ * - Arredondamento determinístico
+ *   1000 pts jogo -> 100 pts evento
+ *   800 pts jogo  -> 80 pts evento
+ *   600 pts jogo  -> 60 pts evento
+ *   400 pts jogo  -> 40 pts evento
+ *   200 pts jogo  -> 20 pts evento
  */
-export function calculateEventPoints(matchScore: number, divisor: number = 10): number {
+export function calculateEventPoints(
+  matchScore: number,
+  divisor: number = 10,
+  maxPoints: number = 100
+): number {
   if (typeof matchScore !== 'number' || isNaN(matchScore) || matchScore <= 0 || divisor <= 0) {
     return 0
   }
-  return Math.round(matchScore / divisor)
+  const raw = Math.round(matchScore / divisor)
+  return Math.min(maxPoints, Math.max(0, raw))
 }
 
 /**
@@ -179,20 +259,37 @@ export function getDailyMatchesCount(
 
 /**
  * Ordenação determinística de ranking de participantes reais
+ * Critérios rigorosos de desempate:
+ * 1. Pontos de evento DESC
+ * 2. Pontuação total bruta no jogo DESC
+ * 3. Melhor pontuação numa única partida DESC
+ * 4. Menor número de partidas contabilizadas ASC (eficiência)
+ * 5. Nome de exibição ASC
+ * 6. userId ASC (estabilidade matemática total)
  */
 export function sortEventParticipants(list: EventParticipant[]): EventParticipant[] {
   return [...list]
     .sort((a, b) => {
-      if ((b.eventPoints || 0) !== (a.eventPoints || 0)) {
-        return (b.eventPoints || 0) - (a.eventPoints || 0)
-      }
-      if ((b.totalScore || 0) !== (a.totalScore || 0)) {
-        return (b.totalScore || 0) - (a.totalScore || 0)
-      }
-      if ((b.bestScore || 0) !== (a.bestScore || 0)) {
-        return (b.bestScore || 0) - (a.bestScore || 0)
-      }
-      return (a.displayName || '').localeCompare(b.displayName || '', 'pt-PT')
+      const ptsA = Number(a.eventPoints || 0)
+      const ptsB = Number(b.eventPoints || 0)
+      if (ptsB !== ptsA) return ptsB - ptsA
+
+      const totA = Number(a.totalScore || 0)
+      const totB = Number(b.totalScore || 0)
+      if (totB !== totA) return totB - totA
+
+      const bestA = Number(a.bestScore || 0)
+      const bestB = Number(b.bestScore || 0)
+      if (bestB !== bestA) return bestB - bestA
+
+      const matchesA = Number(a.countedMatches || a.totalMatches || 0)
+      const matchesB = Number(b.countedMatches || b.totalMatches || 0)
+      if (matchesA !== matchesB) return matchesA - matchesB
+
+      const nameDiff = (a.displayName || '').localeCompare(b.displayName || '', 'pt-PT')
+      if (nameDiff !== 0) return nameDiff
+
+      return (a.userId || '').localeCompare(b.userId || '')
     })
     .map((p, idx) => ({ ...p, pos: idx + 1 }))
 }
@@ -204,7 +301,7 @@ export function subscribePublishedEvents(
   callback: (events: OfficialEventConfig[]) => void
 ): Unsubscribe {
   if (!db) {
-    callback([])
+    callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
     return () => {}
   }
 
@@ -216,32 +313,59 @@ export function subscribePublishedEvents(
         const list: OfficialEventConfig[] = []
         snapshot.forEach((docSnap) => {
           const data = docSnap.data() || {}
-          if (data.published === true || data.active === true) {
+          if (data.published === true || data.active === true || data.enabled === true) {
             list.push({
               id: docSnap.id,
-              title: data.title || '',
+              name: data.name || data.title || 'Evento Especial',
+              title: data.title || data.name || 'Evento Especial',
               subtitle: data.subtitle || '',
-              tag: data.tag || '',
-              type: data.type || 'Evento',
+              tag: data.tag || 'Oficial',
+              type: data.type || 'Evento Especial',
+              theme: data.theme || '',
               description: data.description || '',
-              startDate: data.startDate || '',
-              endDate: data.endDate || '',
+              startDate: data.startDate || data.startAt || '',
+              endDate: data.endDate || data.endAt || '',
+              startAt: data.startAt || data.startDate || '',
+              endAt: data.endAt || data.endDate || '',
               timezone: data.timezone || 'Europe/Lisbon',
-              rewards: data.rewards || [],
-              rules: data.rules || { maxDailyMatches: 10, pointDivisor: 10 },
+              published: Boolean(data.published ?? true),
+              active: Boolean(data.active ?? true),
+              enabled: Boolean(data.enabled ?? true),
+              rewards: Array.isArray(data.rewards)
+                ? data.rewards
+                : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.rewards,
+              rules: {
+                maxDailyMatches: Number(data.rules?.maxDailyMatches || 10),
+                pointDivisor: Number(data.rules?.pointDivisor || 10),
+                maxEventPointsPerMatch: Number(data.rules?.maxEventPointsPerMatch || 100),
+              },
+              scoring: {
+                pointDivisor: Number(data.scoring?.pointDivisor || data.rules?.pointDivisor || 10),
+                maxEventPointsPerMatch: Number(
+                  data.scoring?.maxEventPointsPerMatch || data.rules?.maxEventPointsPerMatch || 100
+                ),
+              },
+              dailyMatchLimit: Number(data.dailyMatchLimit || data.rules?.maxDailyMatches || 10),
+              rewardsDistributed: Boolean(data.rewardsDistributed),
             })
           }
         })
-        callback(list)
+
+        if (list.length === 0) {
+          // Fallback autoritativo para o evento canónico oficial
+          callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
+        } else {
+          callback(list)
+        }
       },
       (err) => {
-        console.warn('[EVENTS] Erro ao subscrever eventos:', err)
-        callback([])
+        console.warn('[EVENTS] Aviso na subscrição de eventos, a usar configuração oficial:', err)
+        callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
       }
     )
   } catch (err) {
     console.error('[EVENTS] Falha na subscrição de eventos:', err)
-    callback([])
+    callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
     return () => {}
   }
 }
@@ -250,7 +374,7 @@ export function subscribePublishedEvents(
  * Subscrição em tempo real aos participantes reais de um evento no Firestore
  */
 export function subscribeEventRanking(
-  eventId?: string | null,
+  eventId: string = OFFICIAL_PORTUGAL_EM_JOGO_ID,
   callback?: (participants: EventParticipant[]) => void,
   limitCount: number = 50
 ): Unsubscribe {
@@ -280,6 +404,7 @@ export function subscribeEventRanking(
             photoURL: data.photoURL || null,
             district: data.district || 'Portugal',
             eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
+            countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
             totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
             dailyMatches: data.dailyMatches || {},
             bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
@@ -293,7 +418,7 @@ export function subscribeEventRanking(
         callback(sorted)
       },
       (error) => {
-        console.warn('[EVENTS] Erro ao subscrever ranking de evento:', error)
+        console.warn('[EVENTS] Aviso no orderBy composto do ranking, a usar consulta simples:', error)
         const fallbackQ = query(participantsRef, limit(limitCount))
         getDocs(fallbackQ)
           .then((fallbackSnap) => {
@@ -306,6 +431,7 @@ export function subscribeEventRanking(
                 photoURL: data.photoURL || null,
                 district: data.district || 'Portugal',
                 eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
+                countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
                 totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
                 dailyMatches: data.dailyMatches || {},
                 bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
@@ -331,7 +457,7 @@ export function subscribeEventRanking(
  */
 export function subscribeUserEventProgress(
   userId?: string | null,
-  eventId?: string | null,
+  eventId: string = OFFICIAL_PORTUGAL_EM_JOGO_ID,
   callback?: (participant: EventParticipant | null) => void
 ): Unsubscribe {
   if (!db || !userId || !eventId || !callback) {
@@ -355,6 +481,7 @@ export function subscribeUserEventProgress(
           photoURL: data.photoURL || null,
           district: data.district || 'Portugal',
           eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
+          countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
           totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
           dailyMatches: data.dailyMatches || {},
           bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,

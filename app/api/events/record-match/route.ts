@@ -4,6 +4,8 @@ import { FieldValue } from 'firebase-admin/firestore'
 import {
   calculateEventPoints,
   getLisbonDateString,
+  OFFICIAL_PORTUGAL_EM_JOGO_ID,
+  OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   type OfficialEventConfig,
 } from '@/lib/events-service'
 
@@ -32,65 +34,88 @@ export async function POST(request: NextRequest) {
       correctAnswers = 0,
       totalQuestions = 0,
       isAbandoned = false,
+      eventId: requestedEventId,
     } = body
 
     if (!matchId || typeof matchId !== 'string') {
       return NextResponse.json({ error: 'matchId inválido.' }, { status: 400 })
     }
 
-    // Validação: partidas abandonadas ou inválidas não geram pontos de evento
-    if (isAbandoned === true || totalQuestions < 3 || score < 0) {
+    // Validação estrita: partidas abandonadas, incompletas ou corruptas não geram pontos
+    if (isAbandoned === true || totalQuestions < 3 || typeof score !== 'number' || isNaN(score) || score < 0) {
       return NextResponse.json({
         success: false,
-        message: 'Partida não elegível para pontos de evento.',
+        message: 'Partida não elegível para pontos de evento (abandonada, incompleta ou inválida).',
         eventPointsAdded: 0,
       })
     }
 
     const db = getAdminFirestore()
+    const targetEventId = requestedEventId || OFFICIAL_PORTUGAL_EM_JOGO_ID
 
-    // Consulta por evento ativo real na coleção Firestore
-    const activeEventsSnap = await db
-      .collection('events')
-      .where('active', '==', true)
-      .limit(1)
-      .get()
+    // Obter documento do evento oficial no Firestore
+    const eventDocRef = db.collection('events').doc(targetEventId)
+    let eventSnap = await eventDocRef.get().catch(() => null)
 
-    if (activeEventsSnap.empty) {
-      return NextResponse.json({
-        success: true,
-        message: 'Nenhum evento ativo no momento.',
-        eventPointsAdded: 0,
-      })
+    let activeEvent: OfficialEventConfig
+
+    if (!eventSnap || !eventSnap.exists) {
+      // Auto-criação do evento canónico caso ainda não tenha sido populado
+      activeEvent = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+      await eventDocRef
+        .set(
+          {
+            ...activeEvent,
+            createdAt: FieldValue.serverTimestamp(),
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
+        .catch((e: any) => console.warn('[RECORD_MATCH_SEED_WARN]', e))
+    } else {
+      activeEvent = eventSnap.data() as OfficialEventConfig
     }
 
-    const activeEventDoc = activeEventsSnap.docs[0]
-    const activeEvent = activeEventDoc.data() as OfficialEventConfig
-    const eventId = activeEventDoc.id
-
-    // Verificar se as datas do evento estão no período ativo
+    // Verificar datas oficiais de vigência (Europe/Lisbon)
     const now = Date.now()
-    const startMs = activeEvent.startDate ? new Date(activeEvent.startDate).getTime() : 0
-    const endMs = activeEvent.endDate ? new Date(activeEvent.endDate).getTime() : 0
+    const startStr = activeEvent.startDate || activeEvent.startAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.startDate
+    const endStr = activeEvent.endDate || activeEvent.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate
+    const startMs = new Date(startStr).getTime()
+    const endMs = new Date(endStr).getTime()
 
-    if ((startMs && now < startMs) || (endMs && now > endMs)) {
+    if (now < startMs) {
       return NextResponse.json({
         success: false,
-        message: 'O evento não está no período ativo.',
+        message: 'O evento ainda não iniciou (início a 16/09/2026 às 20:00).',
         eventPointsAdded: 0,
       })
     }
 
-    const maxDailyMatches = activeEvent.rules?.maxDailyMatches || 10
-    const pointDivisor = activeEvent.rules?.pointDivisor || 10
-    const todayDateStr = getLisbonDateString()
-    const potentialEventPoints = calculateEventPoints(score, pointDivisor)
+    if (now > endMs) {
+      return NextResponse.json({
+        success: false,
+        message: 'O evento já terminou (encerrado a 30/09/2026 às 23:59). Novas partidas não pontuam.',
+        eventPointsAdded: 0,
+        eventEnded: true,
+      })
+    }
 
-    const eventDocRef = db.collection('events').doc(eventId)
+    const maxDailyMatches = Number(activeEvent.rules?.maxDailyMatches || 10)
+    const pointDivisor = Number(activeEvent.rules?.pointDivisor || 10)
+    const maxPointsPerMatch = Number(activeEvent.rules?.maxEventPointsPerMatch || 100)
+
+    // Data de hoje calculada de forma autoritativa no fuso de Lisboa
+    const todayDateStr = getLisbonDateString()
+
+    // Cálculo proporcional e determinístico: máx 100 pontos por partida
+    const potentialEventPoints = calculateEventPoints(score, pointDivisor, maxPointsPerMatch)
+
     const matchRef = eventDocRef.collection('matches').doc(matchId)
     const participantRef = eventDocRef.collection('participants').doc(userId)
     const userRef = db.collection('users').doc(userId)
 
+    // TRANSAÇÃO ATÓMICA E IDEMPOTENTE:
+    // Garante atomicamente que o mesmo matchId NUNCA é processado duas vezes.
     const result = await db.runTransaction(async (transaction: any) => {
       const matchSnap = await transaction.get(matchRef)
       if (matchSnap.exists) {
@@ -99,7 +124,8 @@ export async function POST(request: NextRequest) {
           alreadyProcessed: true,
           eventPointsAdded: mData.eventPoints || 0,
           dailyLimitReached: Boolean(mData.dailyCapReached),
-          message: 'Partida já registada anteriormente.',
+          dailyMatchesToday: mData.dailyMatchesToday ?? null,
+          message: 'Partida já registada anteriormente no evento.',
         }
       }
 
@@ -114,9 +140,12 @@ export async function POST(request: NextRequest) {
       const dailyMatches = pData.dailyMatches || {}
       const todayCount = Number(dailyMatches[todayDateStr] || 0)
 
+      // Se já atingiu o limite de 10 partidas no dia atual em Lisboa:
       if (todayCount >= maxDailyMatches) {
         transaction.set(matchRef, {
           id: matchId,
+          matchId,
+          eventId: targetEventId,
           userId,
           score,
           correctAnswers,
@@ -124,20 +153,37 @@ export async function POST(request: NextRequest) {
           eventPoints: 0,
           date: todayDateStr,
           dailyCapReached: true,
+          dailyMatchesToday: todayCount,
           createdAt: FieldValue.serverTimestamp(),
         })
+
+        // Incrementar apenas totalMatches informativo sem dar pontos nem incrementar countedMatches
+        transaction.set(
+          participantRef,
+          {
+            userId,
+            totalMatches: FieldValue.increment(1),
+            lastPlayedAt: FieldValue.serverTimestamp(),
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
 
         return {
           alreadyProcessed: false,
           eventPointsAdded: 0,
           dailyLimitReached: true,
-          message: `Limite diário de ${maxDailyMatches} partidas atingido hoje.`,
+          dailyMatchesToday: todayCount,
+          maxDailyMatches,
+          message: `Limite diário de ${maxDailyMatches} partidas atingido hoje. O teu XP e moedas normais foram creditados a 100%!`,
         }
       }
 
+      // Dentro do limite de 10 partidas válidas do dia:
       const newDailyCount = todayCount + 1
       const currentEventPoints = Number(pData.eventPoints || 0)
       const newEventPoints = currentEventPoints + potentialEventPoints
+      const countedMatches = Number(pData.countedMatches || 0) + 1
       const totalMatches = Number(pData.totalMatches || 0) + 1
       const totalScore = Number(pData.totalScore || 0) + score
       const bestScore = Math.max(Number(pData.bestScore || 0), score)
@@ -155,6 +201,8 @@ export async function POST(request: NextRequest) {
         matchRef,
         {
           id: matchId,
+          matchId,
+          eventId: targetEventId,
           userId,
           score,
           correctAnswers,
@@ -162,6 +210,7 @@ export async function POST(request: NextRequest) {
           eventPoints: potentialEventPoints,
           date: todayDateStr,
           dailyCapReached: false,
+          dailyMatchesToday: newDailyCount,
           createdAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
@@ -175,6 +224,7 @@ export async function POST(request: NextRequest) {
           photoURL,
           district,
           eventPoints: newEventPoints,
+          countedMatches,
           totalMatches,
           totalScore,
           bestScore,
@@ -193,8 +243,9 @@ export async function POST(request: NextRequest) {
         eventPointsAdded: potentialEventPoints,
         newEventPoints,
         dailyMatchesToday: newDailyCount,
+        maxDailyMatches,
         dailyLimitReached: newDailyCount >= maxDailyMatches,
-        message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso!`,
+        message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (${newDailyCount}/${maxDailyMatches} partidas hoje)`,
       }
     })
 
@@ -203,7 +254,7 @@ export async function POST(request: NextRequest) {
       ...result,
     })
   } catch (error: any) {
-    console.error('[API /api/events/record-match] Erro ao processar:', error)
+    console.error('[API /api/events/record-match ERROR]:', error)
     return NextResponse.json(
       { error: error?.message || 'Erro interno ao registar partida no evento.' },
       { status: 500 }
