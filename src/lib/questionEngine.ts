@@ -344,7 +344,117 @@ export function shuffleQuestions<T>(array: T[]): T[] {
 }
 
 /**
- * Obtém a lista de IDs recentemente apresentados (Janela Deslizante)
+ * Limite máximo de IDs de perguntas gravados no histórico local por jogador
+ */
+const MAX_USER_HISTORY = 5000
+
+// Memória em runtime por utilizador caso localStorage não esteja disponível (SSR / Node / Testes)
+const memoryUserHistories = new Map<string, string[]>()
+
+/**
+ * Retorna a chave de armazenamento isolada por utilizador
+ */
+export function getUserQuestionStorageKey(userId?: string): string {
+  if (userId && !userId.startsWith('guest_')) {
+    return `ap_user_seen_qids_${userId.trim()}`
+  }
+  return 'ap_guest_seen_qids'
+}
+
+/**
+ * Obtém o histórico completo e ordenado de perguntas vistas pelo jogador (mais recente no índice 0).
+ * Sincroniza a cache local individual com o histórico do Firestore (cloudAnsweredIds).
+ */
+export function getUserAnsweredHistory(
+  userId?: string,
+  cloudAnsweredIds?: string[]
+): { seenSet: Set<string>; recentOrder: string[] } {
+  const key = getUserQuestionStorageKey(userId)
+  let localList: string[] = []
+
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem(key)
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (Array.isArray(parsed)) {
+          localList = parsed.map(String).filter(Boolean)
+        }
+      }
+    } catch {}
+  } else {
+    localList = memoryUserHistories.get(key) || []
+  }
+
+  // Fallback para legacy recent_question_ids caso o histórico do utilizador esteja vazio
+  if (localList.length === 0 && (!userId || userId.startsWith('guest_'))) {
+    localList = getRecentQuestionIds()
+  }
+
+  // Sincronizar com os IDs do Firestore (se fornecidos pelo perfil da conta)
+  if (Array.isArray(cloudAnsweredIds) && cloudAnsweredIds.length > 0) {
+    const localSet = new Set(localList)
+    const newFromCloud = cloudAnsweredIds.map(String).filter((id) => Boolean(id) && !localSet.has(id))
+    if (newFromCloud.length > 0) {
+      // IDs da nuvem que não estavam locais entram no fim (como perguntas vistas anteriormente)
+      localList = [...localList, ...newFromCloud]
+    }
+  }
+
+  if (localList.length > MAX_USER_HISTORY) {
+    localList = localList.slice(0, MAX_USER_HISTORY)
+  }
+
+  // Atualizar cache
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(key, JSON.stringify(localList))
+    } catch {}
+  } else {
+    memoryUserHistories.set(key, localList)
+  }
+
+  return {
+    seenSet: new Set(localList),
+    recentOrder: localList,
+  }
+}
+
+/**
+ * Regista um lote de IDs de perguntas no histórico individual do jogador.
+ * Garante que os novos IDs ficam no topo (mais recentes).
+ */
+export function recordUserQuestionBatch(userId: string | undefined, questionIds: string[]): void {
+  if (!questionIds || questionIds.length === 0) return
+  const cleanNew = questionIds.map(String).filter(Boolean)
+  const key = getUserQuestionStorageKey(userId)
+
+  const { recentOrder } = getUserAnsweredHistory(userId)
+  // Novos IDs no topo (índice 0 = mais recente), sem duplicados
+  const combined = Array.from(new Set([...cleanNew, ...recentOrder])).slice(0, MAX_USER_HISTORY)
+
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(key, JSON.stringify(combined))
+    } catch {}
+  } else {
+    memoryUserHistories.set(key, combined)
+  }
+
+  // Manter retrocompatibilidade com a chave legada
+  saveRecentQuestionIds(cleanNew)
+}
+
+/**
+ * Limpa o histórico em memória (útil para testes automáticos)
+ */
+export function clearMemoryUserHistories(): void {
+  memoryUserHistories.clear()
+  memoryRecentIds = []
+}
+
+/**
+ * Obtém a lista de IDs recentemente apresentados (Janela Deslizante Legada)
  */
 export function getRecentQuestionIds(): string[] {
   if (typeof window !== 'undefined') {
@@ -369,9 +479,7 @@ export function saveRecentQuestionIds(newIds: string[]): void {
   const current = getRecentQuestionIds()
   const cleanNew = newIds.map(String).filter(Boolean)
 
-  // Prepend new IDs and remove duplicates while preserving recency order
   const combined = Array.from(new Set([...cleanNew, ...current])).slice(0, RECENT_WINDOW_SIZE)
-
   memoryRecentIds = combined
 
   if (typeof window !== 'undefined') {
@@ -384,90 +492,168 @@ export function saveRecentQuestionIds(newIds: string[]): void {
 }
 
 /**
- * SELEÇÃO EQUITATIVA E BALANCEADA DE PERGUNTAS POR CATEGORIA
- * - No Desafio Nacional / Jogar Agora: Distribui as 10 perguntas por categorias distintas de Portugal
- *   (ex: 1 de História, 1 de Geografia, 1 de Gastronomia, 1 de Futebol, 1 de Ciência, 1 de Cultura, etc.)
- * - Exclui estritamente as perguntas na janela recente.
- * - Garante 0 duplicados na partida.
+ * SELEÇÃO ANTI-REPETIÇÃO ESTRITA E BALANCEADA DE PERGUNTAS
+ * 
+ * Regras Obrigatórias:
+ * 1. DENTRO DA MESMA PARTIDA: 0 duplicados garantidos (selectedIds.has(q.id)).
+ * 2. ENTRE PARTIDAS DO MESMO JOGADOR: Exclusão estrita de perguntas vistas recentemente pelo ID único.
+ * 3. PRIORIDADE ABSOLUTA ÀS NÃO VISTAS: Se unseenPool.length >= count, 100% das perguntas vêm das não vistas!
+ * 4. ALEATORIEDADE REAL: Fisher-Yates shuffle nas perguntas elegíveis e balanceamento de temas.
+ * 5. ISOLAMENTO POR JOGADOR: Baseado no seenSet individual do utilizador.
+ * 6. REUTILIZAÇÃO INTELIGENTE APENAS QUANDO A POOL SE ESGOTA:
+ *    - Aproveita todas as não vistas restantes;
+ *    - Completa com as perguntas vistas HÁ MAIS TEMPO (fim do recentOrder);
+ *    - Exclui estritamente as perguntas das partidas imediatamente anteriores (cooldown);
+ *    - Nunca repete dentro da mesma partida.
  */
 export function selectBalancedMatchQuestions(
   pool: Question[],
   count: number = 10,
   recentIds: Set<string> = new Set(),
-  isNational: boolean = true
+  isNational: boolean = true,
+  recentOrder: string[] = []
 ): Question[] {
   if (!pool || pool.length === 0) return []
 
-  // 1. Filtrar perguntas que não estão na janela recente
-  let available = pool.filter((q) => !recentIds.has(q.id))
-
-  // Se o pool disponível for menor que o necessário, relaxa o filtro recente gradualmente
-  if (available.length < count) {
-    available = pool
+  // 1. Deduplicação estrita do próprio pool de entrada (garante unicidade absoluta de cada q.id)
+  const cleanPool: Question[] = []
+  const seenPoolIds = new Set<string>()
+  for (const q of pool) {
+    if (q && q.id && !seenPoolIds.has(q.id)) {
+      seenPoolIds.add(q.id)
+      cleanPool.push(q)
+    }
   }
 
-  // 2. Modo Desafio Nacional / Jogar Tudo: Distribuição Equitativa por Categorias
-  if (isNational) {
-    const byCategory = new Map<string, Question[]>()
-    for (const q of available) {
-      const catKey = (q.category || 'portugal').toLowerCase()
-      if (!byCategory.has(catKey)) {
-        byCategory.set(catKey, [])
-      }
-      byCategory.get(catKey)!.push(q)
-    }
+  if (cleanPool.length === 0) return []
+  const targetCount = Math.min(count, cleanPool.length)
 
-    const categories = shuffleQuestions(Array.from(byCategory.keys()))
-    const selected: Question[] = []
-    const selectedIds = new Set<string>()
+  // 2. Partição estrita: Perguntas NUNCA vistas vs Perguntas já vistas
+  const unseenPool = cleanPool.filter((q) => !recentIds.has(q.id))
+  const seenPool = cleanPool.filter((q) => recentIds.has(q.id))
 
-    // Ronda 1: Uma pergunta de cada categoria distinta
-    for (const cat of categories) {
-      if (selected.length >= count) break
-      const catQuestions = shuffleQuestions(byCategory.get(cat) || [])
-      const candidate = catQuestions.find((q) => !selectedIds.has(q.id))
-      if (candidate) {
-        selected.push(candidate)
-        selectedIds.add(candidate.id)
-      }
-    }
-
-    // Ronda 2: Se ainda faltarem, completa com as restantes disponíveis
-    if (selected.length < count) {
-      const remaining = shuffleQuestions(available.filter((q) => !selectedIds.has(q.id)))
-      for (const q of remaining) {
-        if (selected.length >= count) break
-        selected.push(q)
-        selectedIds.add(q.id)
-      }
-    }
-
-    return shuffleQuestions(selected)
-  }
-
-  // 3. Modo de Categoria Específica / Subtema
-  const shuffled = shuffleQuestions(available)
   const selected: Question[] = []
   const selectedIds = new Set<string>()
 
-  for (const q of shuffled) {
-    if (selected.length >= count) break
-    if (!selectedIds.has(q.id)) {
-      selected.push(q)
-      selectedIds.add(q.id)
+  // Helper para adicionar pergunta com garantia absoluta de unicidade na partida
+  const addQuestion = (q: Question): boolean => {
+    if (!q || !q.id || selectedIds.has(q.id)) return false
+    selected.push(q)
+    selectedIds.add(q.id)
+    return true
+  }
+
+  // =========================================================================
+  // CENÁRIO A: Existem perguntas não vistas suficientes (unseenPool.length >= targetCount)
+  // PRIORIDADE ABSOLUTA: 100% das perguntas são retiradas das NÃO VISTAS!
+  // =========================================================================
+  if (unseenPool.length >= targetCount) {
+    if (isNational) {
+      // Balanceamento por categorias distintas de Portugal
+      const byCategory = new Map<string, Question[]>()
+      for (const q of unseenPool) {
+        const catKey = (q.category || 'portugal').toLowerCase()
+        if (!byCategory.has(catKey)) {
+          byCategory.set(catKey, [])
+        }
+        byCategory.get(catKey)!.push(q)
+      }
+
+      const categories = shuffleQuestions(Array.from(byCategory.keys()))
+
+      // Ronda 1: Uma pergunta não vista de cada categoria distinta
+      for (const cat of categories) {
+        if (selected.length >= targetCount) break
+        const catQuestions = shuffleQuestions(byCategory.get(cat) || [])
+        const candidate = catQuestions.find((q) => !selectedIds.has(q.id))
+        if (candidate) {
+          addQuestion(candidate)
+        }
+      }
+
+      // Ronda 2: Se ainda faltarem para o total, completa com as restantes não vistas
+      if (selected.length < targetCount) {
+        const remainingUnseen = shuffleQuestions(unseenPool.filter((q) => !selectedIds.has(q.id)))
+        for (const q of remainingUnseen) {
+          if (selected.length >= targetCount) break
+          addQuestion(q)
+        }
+      }
+
+      return shuffleQuestions(selected)
+    } else {
+      // Modo de tema específico: aleatoriedade Fisher-Yates dentro das não vistas
+      const shuffledUnseen = shuffleQuestions(unseenPool)
+      for (const q of shuffledUnseen) {
+        if (selected.length >= targetCount) break
+        addQuestion(q)
+      }
+      return shuffleQuestions(selected)
     }
   }
 
-  return selected
+  // =========================================================================
+  // CENÁRIO B: O jogador já viu a maior parte da pool (unseenPool.length < targetCount)
+  // REUTILIZAÇÃO INTELIGENTE:
+  // 1. Aproveita TODAS as perguntas não vistas restantes.
+  // 2. Completa com as perguntas vistas HÁ MAIS TEMPO (mais antigas).
+  // 3. Exclui estritamente as perguntas das partidas imediatamente anteriores.
+  // 4. Garante ZERO duplicações dentro da mesma partida.
+  // =========================================================================
+
+  // Passo 1: Inclui todas as não vistas disponíveis
+  const shuffledUnseen = shuffleQuestions(unseenPool)
+  for (const q of shuffledUnseen) {
+    addQuestion(q)
+  }
+
+  // Passo 2: Calcular a antiguidade de visualização das perguntas vistas
+  // recentOrder tem o índice 0 = mais recente, índice N = mais antigo.
+  // Quanto maior o índice, há mais tempo foi vista. Se não estiver em recentOrder, rank = 999999 (mais antiga).
+  const recencyRank = new Map<string, number>()
+  for (let idx = 0; idx < recentOrder.length; idx++) {
+    recencyRank.set(recentOrder[idx], idx)
+  }
+
+  // Conjunto de perguntas em "cooldown imediato" (as vistas nas partidas mais recentes, até 50)
+  const neededFromSeen = targetCount - selected.length
+  const maxCooldownSize = Math.max(0, seenPool.length - neededFromSeen)
+  const cooldownLimit = Math.min(50, maxCooldownSize)
+  const immediateCooldownIds = new Set<string>(recentOrder.slice(0, cooldownLimit))
+
+  // Ordenar as perguntas vistas das mais antigas (maior rank) para as mais recentes (menor rank)
+  const sortedSeenCandidates = [...seenPool]
+    .filter((q) => !selectedIds.has(q.id))
+    .sort((a, b) => {
+      const rankA = recencyRank.has(a.id) ? recencyRank.get(a.id)! : 999999
+      const rankB = recencyRank.has(b.id) ? recencyRank.get(b.id)! : 999999
+      return rankB - rankA // Maiores índices primeiro (mais antigas)
+    })
+
+  // Fase 2.1: Selecionar das mais antigas que NÃO estão em cooldown imediato
+  const nonCooldownCandidates = sortedSeenCandidates.filter((q) => !immediateCooldownIds.has(q.id))
+  for (const q of nonCooldownCandidates) {
+    if (selected.length >= targetCount) break
+    addQuestion(q)
+  }
+
+  // Fase 2.2: Se mesmo assim faltarem (pool extremamente pequena), aceita das restantes sem duplicar
+  if (selected.length < targetCount) {
+    for (const q of sortedSeenCandidates) {
+      if (selected.length >= targetCount) break
+      addQuestion(q)
+    }
+  }
+
+  return shuffleQuestions(selected)
 }
 
 /**
  * MOTOR DE SELEÇÃO ANTI-REPETIÇÃO ESTRITA
  * 1. Obtém pool da categoria/modo.
- * 2. Consulta histórico da janela deslizante recente (100 IDs).
- * 3. Seleciona 10 perguntas únicas e bem distribuídas.
- * 4. Regista na janela de recentes.
- * 5. Atualiza Firestore de forma não-bloqueante.
+ * 2. Consulta histórico individual do utilizador (local cache + Firestore).
+ * 3. Seleciona 10 perguntas únicas com prioridade a não vistas.
+ * 4. Regista os IDs no histórico do utilizador.
  */
 export async function getUniqueMatchQuestions(
   userId: string,
@@ -477,6 +663,7 @@ export async function getUniqueMatchQuestions(
   subcategory?: string,
   district?: string,
   city?: string,
+  cloudAnsweredIds?: string[],
 ): Promise<Question[]> {
   const catLower = (category || '').toLowerCase().trim()
   const isNational =
@@ -493,22 +680,21 @@ export async function getUniqueMatchQuestions(
   // 1. Carregar pool da categoria e dificuldade
   const allCategoryQuestions = loadQuestionsPool(category, difficultyLevel, subcategory, district, city)
 
-  // 2. Obter lista de IDs recentes
-  const recentList = getRecentQuestionIds()
-  const recentSet = new Set(recentList)
+  // 2. Obter histórico individual do utilizador
+  const { seenSet, recentOrder } = getUserAnsweredHistory(userId, cloudAnsweredIds)
 
-  // 3. Selecionar perguntas com distribuição e anti-repetição
-  const selected = selectBalancedMatchQuestions(allCategoryQuestions, count, recentSet, isNational)
+  // 3. Selecionar perguntas com prioridade absoluta a não vistas e zero duplicados
+  const selected = selectBalancedMatchQuestions(allCategoryQuestions, count, seenSet, isNational, recentOrder)
 
   const selectedIds = selected.map((q) => q.id)
 
-  // 4. Gravar IDs selecionados na Janela Deslizante de Recentes
-  saveRecentQuestionIds(selectedIds)
+  // 4. Gravar IDs selecionados no histórico do utilizador
+  recordUserQuestionBatch(userId, selectedIds)
 
   // 5. Logging estruturado em ambiente de desenvolvimento
   if (process.env.NODE_ENV !== 'production') {
     console.log(
-      `[QUIZ] Pool total: ${allCategoryQuestions.length} | Recentes excluídos: ${recentSet.size} | Selecionados: ${selected.length} | IDs: [${selectedIds.slice(0, 4).join(', ')}...]`
+      `[QUIZ ANTI-REPETIÇÃO] User: ${userId || 'guest'} | Pool: ${allCategoryQuestions.length} | Vistas: ${seenSet.size} | Selecionadas: ${selected.length} | IDs: [${selectedIds.slice(0, 4).join(', ')}...]`
     )
   }
 
@@ -516,15 +702,17 @@ export async function getUniqueMatchQuestions(
 }
 
 /**
- * Grava os IDs das perguntas respondidas no Firestore e LocalStorage para estatísticas
+ * Grava os IDs das perguntas respondidas no Firestore e LocalStorage associados à conta
  */
 export async function saveAnsweredQuestions(userId: string, questionIds: string[]): Promise<void> {
   if (!questionIds || questionIds.length === 0) return
 
   const cleanIds = questionIds.map(String).filter(Boolean)
-  saveRecentQuestionIds(cleanIds)
 
-  // Atualizar histórico acumulado local
+  // 1. Atualizar histórico cronológico individual do utilizador
+  recordUserQuestionBatch(userId, cleanIds)
+
+  // 2. Atualizar histórico acumulado local
   if (typeof window !== 'undefined') {
     try {
       const localAnswered: string[] = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ANSWERED_KEY) || '[]')
@@ -535,7 +723,7 @@ export async function saveAnsweredQuestions(userId: string, questionIds: string[
     }
   }
 
-  // Persistir no Firestore em background sem bloquear
+  // 3. Persistir no Firestore na conta do utilizador em background sem bloquear
   if (userId && !userId.startsWith('guest_')) {
     try {
       const userRef = doc(db, 'users', userId)

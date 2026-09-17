@@ -38,6 +38,8 @@ import {
   saveAnsweredQuestions,
   loadQuestionsPool,
   selectBalancedMatchQuestions,
+  getUserAnsweredHistory,
+  recordUserQuestionBatch,
   getRecentQuestionIds,
   cleanQuestionPrompt,
 } from '@/src/lib/questionEngine'
@@ -353,6 +355,8 @@ function createGameQuestions(
   difficultyParam?: string | null,
   districtParam?: string | null,
   cityParam?: string | null,
+  userId?: string,
+  cloudAnsweredIds?: string[],
 ): GameQuestion[] {
   try {
     const diff = difficultyParam ? Number(difficultyParam) || 2 : 2
@@ -371,15 +375,26 @@ function createGameQuestions(
       catLower === 'nacional' ||
       catLower === 'quick' ||
       catLower === 'todos' ||
-      catLower === 'jogar-tudo'
+      catLower === 'jogar-tudo' ||
+      catLower === 'modo-aleatorio' ||
+      catLower === 'aleatorio'
 
-    let recentSet = new Set<string>()
-    try {
-      recentSet = new Set(getRecentQuestionIds())
-    } catch {}
+    // Obter histórico individual do utilizador (local cache + Firestore)
+    const { seenSet, recentOrder } = getUserAnsweredHistory(userId, cloudAnsweredIds)
 
-    const selected = selectBalancedMatchQuestions(rawPool, QUESTIONS_PER_GAME, recentSet, isNational)
+    const selected = selectBalancedMatchQuestions(
+      rawPool,
+      QUESTIONS_PER_GAME,
+      seenSet,
+      isNational,
+      recentOrder
+    )
+
     if (Array.isArray(selected) && selected.length > 0) {
+      // Registar imediatamente os IDs na cache local do jogador para evitar repetição em partidas consecutivas
+      const selectedIds = selected.map((q) => q.id)
+      recordUserQuestionBatch(userId, selectedIds)
+
       return selected.map((q, i) => formatEngineQuestion(q, i, selected.length))
     }
   } catch (err) {
@@ -397,6 +412,8 @@ export function QuizScreen({
   gameId,
   arenaParam,
   isFresh = false,
+  userId,
+  accountProfile,
 }: {
   categorySlug: string
   subcategorySlug?: string | null
@@ -406,6 +423,8 @@ export function QuizScreen({
   gameId: string
   arenaParam?: string | null
   isFresh?: boolean
+  userId?: string
+  accountProfile?: any
 }) {
   const router = useRouter()
 
@@ -438,16 +457,48 @@ export function QuizScreen({
   const { playSound, setCurrentStreak } = useGameTheme()
 
   // 1. GESTÃO ESTRITA DE AUTENTICAÇÃO
-  const effectiveUserId = user?.uid || ''
+  const effectiveUserId = userId || user?.uid || ''
   const effectiveDisplayName = user?.displayName || profile?.displayName || 'Explorador'
+  const effectiveAnsweredIds = (accountProfile as any)?.answeredQuestionIds || profile?.answeredQuestionIds || []
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [previousLevel, setPreviousLevel] = useState<number | null>(null)
 
-  // Perguntas iniciais seguras
+  // Perguntas iniciais geradas com o motor anti-repetição por utilizador
   const [quizQuestions, setQuizQuestions] = useState<GameQuestion[]>(() =>
-    createGameQuestions(categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam)
+    createGameQuestions(
+      categorySlug,
+      subcategorySlug,
+      difficultyParam,
+      districtParam,
+      cityParam,
+      effectiveUserId,
+      effectiveAnsweredIds
+    )
   )
+
+  // Sincronização reactiva: quando o utilizador autenticado carrega o perfil do Firestore
+  // e o jogador ainda está na pergunta 1 sem ter dado respostas, atualiza a pool com o histórico completo
+  const authSyncDoneRef = useRef(false)
+  useEffect(() => {
+    if (!authSyncDoneRef.current && user?.uid && profile?.answeredQuestionIds?.length) {
+      authSyncDoneRef.current = true
+      if (step === 0 && phase === 'answering' && recordedAnswersRef.current.length === 0) {
+        const fresh = createGameQuestions(
+          categorySlug,
+          subcategorySlug,
+          difficultyParam,
+          districtParam,
+          cityParam,
+          user.uid,
+          profile.answeredQuestionIds
+        )
+        if (fresh && fresh.length > 0) {
+          setQuizQuestions(fresh)
+        }
+      }
+    }
+  }, [user?.uid, profile?.answeredQuestionIds, categorySlug, subcategorySlug, difficultyParam, districtParam, cityParam])
 
   const [equippedArenaId, setEquippedArenaId] = useState<string | null>(null)
   const [showCinematicIntro, setShowCinematicIntro] = useState<boolean>(false)

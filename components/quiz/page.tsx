@@ -60,7 +60,7 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
 function QuizPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { user, authResolved } = useAuth()
+  const { user, profile, authResolved } = useAuth()
   const isFresh = searchParams.get('fresh') === 'true'
 
   // Limpeza apenas se explicitamente solicitado via fresh=true
@@ -136,6 +136,8 @@ function QuizPageContent() {
           gameId={gameId}
           arenaParam={rawArena}
           isFresh={true}
+          userId={user?.uid}
+          accountProfile={profile}
         />
       </div>
     </QuizErrorBoundary>
