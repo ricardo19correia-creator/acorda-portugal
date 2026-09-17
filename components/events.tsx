@@ -10,7 +10,7 @@ import {
 
 export function Events() {
   const [events, setEvents] = useState<OfficialEventConfig[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const unsubscribe = subscribePublishedEvents((published) => {
