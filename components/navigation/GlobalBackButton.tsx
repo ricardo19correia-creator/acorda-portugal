@@ -17,19 +17,34 @@ export interface GlobalBackButtonProps {
 }
 
 /**
+ * Resolução inteligente do caminho de retorno por hierarquia de rotas.
+ * Evita router.back() cego quando o utilizador entra por link direto ou quando há um ascendente canónico.
+ */
+export function resolveSmartFallback(pathname: string, explicitFallback?: string): string {
+  if (explicitFallback && explicitFallback !== '/') return explicitFallback
+  if (pathname.startsWith('/jogar/duelo')) return '/jogar'
+  if (pathname.startsWith('/definicoes')) return '/perfil'
+  if (pathname.startsWith('/loja/')) return '/loja'
+  if (pathname.startsWith('/conquistas')) return '/perfil'
+  if (pathname.startsWith('/admin/') && pathname !== '/admin') return '/admin'
+  return explicitFallback || '/'
+}
+
+/**
  * Hook para navegação segura de regresso.
  * Se existir histórico interno válido na sessão -> router.back()
- * Se não existir histórico interno (ex: link direto, nova janela, referrer externo) -> fallbackUrl ('/')
+ * Se não existir histórico interno (ex: link direto, nova janela, referrer externo) -> targetFallback
  */
 export function useSafeBack(fallbackUrl: string = '/') {
   const router = useRouter()
   const pathname = usePathname()
+  const targetFallback = resolveSmartFallback(pathname || '', fallbackUrl)
 
   const goBack = useCallback(() => {
     if (typeof window === 'undefined') return
 
     // Se já estivermos na raiz e o destino for a raiz, nada a fazer
-    if (pathname === '/' && fallbackUrl === '/') return
+    if ((pathname === '/' || !pathname) && targetFallback === '/') return
 
     try {
       // 1. Verificar profundidade registada na sessão
@@ -66,37 +81,37 @@ export function useSafeBack(fallbackUrl: string = '/') {
         // Salvaguarda caso router.back() fique retido
         setTimeout(() => {
           if (typeof window !== 'undefined' && window.location.pathname + window.location.search === initialLoc) {
-            router.push(fallbackUrl)
+            router.push(targetFallback)
           }
-        }, 300)
+        }, 250)
       } else {
-        // Sem histórico interno válido -> Navegar para o Início/Home ou scroll para o topo se já na raiz
-        if (pathname === fallbackUrl) {
+        // Sem histórico interno válido -> Navegar para a rota pai ou scroll para o topo se já no destino
+        if (pathname === targetFallback) {
           window.scrollTo({ top: 0, behavior: 'smooth' })
         } else {
-          router.push(fallbackUrl)
+          router.push(targetFallback)
         }
       }
     } catch {
-      if (pathname === fallbackUrl) {
+      if (pathname === targetFallback) {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
-        router.push(fallbackUrl)
+        router.push(targetFallback)
       }
     }
-  }, [pathname, router, fallbackUrl])
+  }, [pathname, router, targetFallback])
 
-  return { goBack }
+  return { goBack, targetFallback }
 }
 
 /**
  * 🇵🇹 ACORDA PORTUGAL — COMPONENTE GLOBAL DE NAVEGAÇÃO REUTILIZÁVEL «← VOLTAR»
  *
- * Garante que em QUALQUER página do jogo o utilizador tem uma saída clara e direta:
- * - Se existir histórico de navegação anterior -> recua para a página anterior real.
- * - Se não houver histórico válido -> conduz diretamente para o Início/Home.
- * - Compatível a 100% com Website e Capacitor APK (Android/iOS).
- * - Visível em todas as páginas por omissão para total consistência de saída.
+ * REGRA CANÓNICA DE NAVEGAÇÃO:
+ * - Na Home (pathname === '/' ou vazio): NUNCA renderizar botão Voltar (retorna null).
+ * - Em páginas secundárias: Exibe botão acessível e seguro que respeita o histórico interno
+ *   ou conduz à rota ascendente apropriada.
+ * - 100% compatível com Web e Capacitor APK (Android/iOS).
  */
 export function GlobalBackButton({
   label = 'Voltar',
@@ -109,7 +124,13 @@ export function GlobalBackButton({
   onClick,
 }: GlobalBackButtonProps) {
   const pathname = usePathname()
-  const { goBack } = useSafeBack(fallbackUrl)
+  const { goBack, targetFallback } = useSafeBack(fallbackUrl)
+
+  // 🔒 REGRA INVIOLÁVEL: Na página inicial (/), o botão Voltar não deve existir
+  const isHome = !pathname || pathname === '/' || pathname === ''
+  if (isHome) {
+    return null
+  }
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -138,7 +159,7 @@ export function GlobalBackButton({
       type="button"
       onClick={handleClick}
       aria-label={label || 'Voltar à página anterior'}
-      title={title || 'Voltar à página anterior (ou Início)'}
+      title={title || `Voltar à página anterior (ou ${targetFallback})`}
       data-global-back-button="true"
       className={cn(baseStyles, variantStyles[variant], className)}
     >

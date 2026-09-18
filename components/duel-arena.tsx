@@ -54,6 +54,7 @@ import {
   sendDuelTaunt,
   sendDuelEmote,
   surrenderDuel,
+  claimDuelTimeoutVictory,
 } from '@/lib/duel'
 import { TAUNT_PACKS, type TauntPack } from '@/data/tauntPacks'
 import { DuelEmoteBubble, DuelEmotePicker, DuelEmoteQuickDock, DuelEmoteFloatingBar } from '@/components/duel-emote-system'
@@ -700,7 +701,12 @@ export function DuelArena({
         // 1. Notificar Firebase via surrenderDuel
         await surrenderDuel(duelId, currentPlayer.uid)
 
-        // 2. Broadcast local e API
+        // 2. Persistir atomicamente a derrota na conta Firebase antes de sair
+        await claimDuelRewards(duelId, currentPlayer.uid).catch((cErr) => {
+          console.warn('[DUEL] Registo atómico de desistência:', cErr)
+        })
+
+        // 3. Broadcast local e notificação de cancelamento com token de autenticação
         const surrenderPayload = {
           event: 'player_surrendered',
           type: 'PLAYER_SURRENDERED',
@@ -711,11 +717,17 @@ export function DuelArena({
         }
         window.dispatchEvent(new CustomEvent('player_surrendered', { detail: surrenderPayload }))
 
-        fetch('/api/duel/cancel', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ duelId, userId: currentPlayer.uid, uid: currentPlayer.uid }),
-        }).catch(() => {})
+        const idToken = await (auth?.currentUser as any)?.getIdToken?.().catch(() => null)
+        if (idToken) {
+          fetch('/api/duel/cancel', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify({ duelId }),
+          }).catch(() => {})
+        }
       } catch (e) {
         console.error('Erro ao desistir:', e)
       }
@@ -949,9 +961,25 @@ export function DuelArena({
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-pulse">
-              <Clock className="h-4 w-4" />
-              <span>A aguardar que o adversário submeta todas as respostas...</span>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3">
+              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground animate-pulse">
+                <Clock className="h-4 w-4" />
+                <span>A aguardar que o adversário submeta todas as respostas...</span>
+              </div>
+
+              {opponent && !opponent.finished && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (duelId && currentPlayer.uid) {
+                      await claimDuelTimeoutVictory(duelId, currentPlayer.uid)
+                    }
+                  }}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition active:scale-95 cursor-pointer"
+                >
+                  ⏱️ Adversário Inativo? Reivindicar Vitória
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -1553,6 +1581,15 @@ export function DuelArena({
         )}
 
         {/* 5. REWARDS CARD */}
+        {!claimedReward && (
+          <div className="card-game mt-6 rounded-3xl p-5 text-center shadow-xl border border-white/10 bg-black/40">
+            <div className="flex items-center justify-center gap-2.5 text-primary font-display text-xs font-bold uppercase tracking-wider animate-pulse">
+              <Sparkles className="h-4 w-4 animate-spin" />
+              <span>A confirmar resultado e recompensas com o Firebase...</span>
+            </div>
+          </div>
+        )}
+
         {claimedReward && (
           <div className="card-game-gold mt-6 rounded-3xl p-5 sm:p-6 backdrop-blur-md shadow-xl">
             <p className="text-[0.68rem] font-black uppercase tracking-[0.24em] text-gold mb-3 text-glow-gold">

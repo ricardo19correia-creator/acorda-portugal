@@ -71,6 +71,11 @@ import {
   CANONICAL_PROFILE_CATEGORIES,
   getCanonicalCategoryData,
 } from '@/lib/category-registry'
+import {
+  getUserGameStats,
+  getUserCategoryStats,
+  getCategoryMasteryTitle,
+} from '@/lib/user-stats'
 
 interface InventoryItem {
   id: string
@@ -161,6 +166,22 @@ function PerfilContent() {
   const [districtRank, setDistrictRank] = useState<number | null>(null)
   const [cityRank, setCityRank] = useState<number | null>(null)
   const [districtKing, setDistrictKing] = useState<string | null>(null)
+  const [totalOfficialQuestions, setTotalOfficialQuestions] = useState<number | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+    fetch('/api/questions/count')
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data?.success && typeof data?.count === 'number') {
+          setTotalOfficialQuestions(data.count)
+        }
+      })
+      .catch(() => {})
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   // Redirecionamento de utilizadores não autenticados
   useEffect(() => {
@@ -1381,27 +1402,9 @@ function PerfilContent() {
     return userAchievements.filter((a) => a.category === achievementCategory)
   }, [userAchievements, achievementCategory])
 
-  // Estatísticas por Categoria (Performance Real de Quiz 100% Determinística e Fiel)
-  const categoryStats = useMemo(() => {
-    const userCatStats = (profile as any)?.categoryStats || {}
-
-    return CANONICAL_PROFILE_CATEGORIES.map((catConfig) => {
-      const catData = getCanonicalCategoryData(userCatStats, catConfig.id, catConfig.aliases)
-
-      return {
-        id: catConfig.id,
-        name: catConfig.name,
-        icon: catConfig.icon,
-        accuracy: catData.accuracy,
-        answered: catData.totalQuestions,
-        correct: catData.correctAnswers,
-        levelName: catConfig.levelName,
-        gradient: catConfig.gradient,
-        borderColor: catConfig.borderColor,
-        barColor: catConfig.barColor,
-      }
-    })
-  }, [profile])
+  // Estatísticas Canónicas do Utilizador (Fonte Única da Verdade — 100% Determinístico e Real)
+  const gameStats = useMemo(() => getUserGameStats(profile), [profile])
+  const categoryStats = useMemo(() => getUserCategoryStats(profile), [profile])
 
   const DIVISION_THRESHOLDS: Record<CompetitiveDivision, { name: string; tier: string; minRating: number; maxRating: number }> = {
     Bronze: { name: 'Bronze', tier: 'I', minRating: 0, maxRating: 1000 },
@@ -1422,14 +1425,14 @@ function PerfilContent() {
   const xpCurrent = progressInfo.xpIntoLevel
   const xpTotalNext = progressInfo.xpNeededForLevel || 1000
   const xpProgressPct = Math.min(100, Math.round(progressInfo.progressPercentage))
-  const wins = profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0
-  const losses = profile?.losses ?? (profile as any)?.stats?.duelsLost ?? Math.max(0, (profile?.gamesPlayed || 0) - wins)
-  const totalGames = profile?.gamesPlayed ?? (wins + losses)
-  const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0
-  const totalAnswered = profile?.questionsAnswered ?? profile?.totalQuestions ?? 0
-  const totalCorrect = profile?.correctAnswers ?? 0
-  const accuracyRate = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : ((profile as any)?.stats?.accuracyRate ?? 0)
-  const avgResponseTime = (profile as any)?.stats?.avgResponseTime ? `${(profile as any).stats.avgResponseTime}s` : '2.4s'
+  const wins = gameStats.wins1v1
+  const losses = gameStats.losses1v1
+  const totalGames = gameStats.gamesPlayed
+  const winRate = gameStats.winRate
+  const totalAnswered = gameStats.totalAnswered
+  const totalCorrect = gameStats.totalCorrect
+  const accuracyRate = gameStats.accuracy
+  const avgResponseTime = gameStats.avgResponseTime
 
   if (!mounted || !authResolved || (profileLoading && !profile) || !user) {
     return (
@@ -2480,16 +2483,23 @@ function PerfilContent() {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-black text-white flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-emerald-400" /> Domínio por Categoria de Conhecimento
                 </h2>
                 <p className="text-xs text-slate-400">Analisa a tua taxa de acerto e evolução em cada tema de Portugal.</p>
               </div>
-              <span className="text-xs font-bold px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                Total: {totalAnswered} Questões
-              </span>
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <span className="text-xs font-bold px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                  {totalAnswered} Respondidas
+                </span>
+                {totalOfficialQuestions !== null && totalOfficialQuestions > 0 && (
+                  <span className="text-xs font-bold px-3 py-1 rounded-xl bg-slate-800 text-slate-300 border border-slate-700">
+                    {totalOfficialQuestions.toLocaleString('pt-PT')} no Jogo
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

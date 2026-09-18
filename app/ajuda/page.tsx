@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import {
-  ArrowLeft,
   Search,
   X,
   HelpCircle,
@@ -456,19 +455,6 @@ export default function AjudaPage() {
         <SiteHeader />
 
         <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-          {/* ========================================================= */}
-          {/* 1. TOP NAVIGATION / VOLTAR AO INÍCIO */}
-          {/* ========================================================= */}
-          <div className="mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-800/80 bg-slate-900/60 px-4 py-2 text-xs font-bold text-muted-foreground transition hover:border-slate-700 hover:bg-slate-900 hover:text-white backdrop-blur-md cursor-pointer"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>Voltar ao Início</span>
-            </Link>
-          </div>
-
           {/* ========================================================= */}
           {/* 1.1 HERO — CENTRAL DE AJUDA */}
           {/* ========================================================= */}

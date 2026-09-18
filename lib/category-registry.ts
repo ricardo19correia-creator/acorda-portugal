@@ -594,20 +594,16 @@ export function reconcileUserCategoryStats(
       const catKey = getCanonicalCategory(q?.category, q?.subcategory, qId, q?.prompt)
       if (reconstructed[catKey]) {
         reconstructed[catKey].totalQuestions += 1
-        // Estimativa proporcional de acertos históricos baseada na taxa global do perfil
-        const globalAccuracy =
-          userData.totalQuestions && userData.totalQuestions > 0
-            ? (userData.correctAnswers || 0) / userData.totalQuestions
-            : 0.75
-        const isEstimatedCorrect = Math.random() < globalAccuracy
-        if (isEstimatedCorrect) {
-          reconstructed[catKey].correctAnswers += 1
-        }
       }
     }
 
+    const globalTotal = userData.totalQuestions || userData.questionsAnswered || 0
+    const globalCorrect = userData.correctAnswers || 0
+    const globalRatio = globalTotal > 0 ? Math.min(1, globalCorrect / globalTotal) : 0
+
     for (const key of Object.keys(reconstructed)) {
       const item = reconstructed[key]
+      item.correctAnswers = Math.min(item.totalQuestions, Math.round(item.totalQuestions * globalRatio))
       item.total = item.totalQuestions
       item.correct = item.correctAnswers
       item.accuracy = item.totalQuestions > 0 ? Math.round((item.correctAnswers / item.totalQuestions) * 100) : 0

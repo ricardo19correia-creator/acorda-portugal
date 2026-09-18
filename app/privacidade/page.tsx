@@ -7,7 +7,6 @@ import {
   Database,
   CreditCard,
   Mail,
-  ArrowLeft,
   Eye,
   FileText,
   Share2,
@@ -55,12 +54,6 @@ export default function PrivacyPolicy() {
                 Política de Privacidade
               </h1>
             </div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 self-start sm:self-center px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 font-bold text-xs transition-all border border-slate-700 hover:border-cyan-500/40 shadow-sm"
-            >
-              <ArrowLeft className="w-4 h-4" /> Voltar ao Início
-            </Link>
           </div>
 
           <p className="text-xs font-mono text-slate-400">

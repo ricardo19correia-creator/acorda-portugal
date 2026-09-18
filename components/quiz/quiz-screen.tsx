@@ -947,14 +947,93 @@ export function QuizScreen({
                 if (evData) {
                   console.log('[EVENT] Gravação do evento confirmada com sucesso:', evData)
                   setEventMatchOutcome(evData)
+
+                  if (evData.newTotalXp !== undefined) {
+                    setUserProfile((currentProfile) =>
+                      currentProfile
+                        ? {
+                            ...currentProfile,
+                            level: evData.newLevel || currentProfile.level,
+                            xp: evData.newTotalXp,
+                            euros: evData.newTotalCoins,
+                            coins: evData.newTotalCoins,
+                          }
+                        : currentProfile
+                    )
+
+                    if (updateProfileLocally) {
+                      updateProfileLocally({
+                        xp: evData.newTotalXp,
+                        level: evData.newLevel,
+                        coins: evData.newTotalCoins,
+                        euros: evData.newTotalCoins,
+                      })
+                    }
+
+                    if (typeof window !== 'undefined') {
+                      try {
+                        localStorage.setItem('user_xp', String(evData.newTotalXp))
+                        localStorage.setItem('user_level', String(evData.newLevel))
+                        localStorage.setItem('user_coins', String(evData.newTotalCoins))
+                        localStorage.setItem('user_euros', String(evData.newTotalCoins))
+                      } catch {}
+                      window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: evData.newTotalCoins } }))
+                      window.dispatchEvent(
+                        new CustomEvent('profile_updated', {
+                          detail: {
+                            xp: evData.newTotalXp,
+                            level: evData.newLevel,
+                            coins: evData.newTotalCoins,
+                            euros: evData.newTotalCoins,
+                          },
+                        })
+                      )
+                    }
+                  }
                 }
               } else {
                 const errBody = await evRes.json().catch(() => ({}))
                 console.warn('[EVENT] Resposta de erro do endpoint /api/events/record-match:', errBody)
+                // Fallback de resiliência: atribuir recompensa da partida para nunca perder progresso
+                try {
+                  const fallbackOutcome = await awardMatchReward({
+                    userId: user?.uid || effectiveUserId,
+                    matchId: gid,
+                    categorySlug: categorySlug || 'portugal-em-jogo',
+                    categoryName: 'Portugal em Jogo',
+                    matchType: 'solo_quiz',
+                    gameType: 'event',
+                    eventId,
+                    correctAnswers: finalResult.correct,
+                    totalQuestions: finalResult.total,
+                    score: finalResult.score,
+                    bestStreak: finalResult.bestStreak,
+                  })
+                  setRewardOutcome(fallbackOutcome)
+                } catch (fbErr) {
+                  console.warn('[EVENT_FALLBACK_ERR]', fbErr)
+                }
               }
             }
           } catch (eventErr) {
             console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
+            // Fallback de segurança em caso de exceção de rede
+            try {
+              const fallbackOutcome = await awardMatchReward({
+                userId: user?.uid || effectiveUserId,
+                matchId: gid,
+                categorySlug: categorySlug || 'portugal-em-jogo',
+                categoryName: 'Portugal em Jogo',
+                matchType: 'solo_quiz',
+                gameType: 'event',
+                eventId,
+                correctAnswers: finalResult.correct,
+                totalQuestions: finalResult.total,
+                score: finalResult.score,
+                bestStreak: finalResult.bestStreak,
+              })
+              setRewardOutcome(fallbackOutcome)
+            } catch {}
           }
         } else {
           // ===================================================================

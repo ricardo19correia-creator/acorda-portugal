@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Users, Flame, Swords } from 'lucide-react'
+import { Users, Flame, Swords } from 'lucide-react'
 import { useAuth } from '@/components/auth-provider'
 import { useLivePresence } from '@/hooks/use-live-presence'
 import { UserAvatar } from '@/components/ui/UserAvatar'
@@ -14,20 +14,15 @@ export default function JogadoresPage() {
   const { user } = useAuth()
   const { players, humanOnline, loading } = useLivePresence()
 
-
   return (
     <div className="relative min-h-screen flex flex-col justify-between bg-transparent text-foreground">
       <SiteHeader />
 
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-cyan-400 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Voltar ao Início</span>
-          </Link>
+          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-slate-400">
+            <span>Presença Nacional</span>
+          </div>
 
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="relative flex h-2 w-2">

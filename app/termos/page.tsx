@@ -15,7 +15,6 @@ import {
   Layers,
   Lock,
   Globe2,
-  ArrowLeft,
   CheckCircle2,
   HelpCircle,
   Clock,
@@ -363,19 +362,6 @@ export default function TermosPage() {
         <SiteHeader />
 
         <main className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-          {/* Voltar ao início */}
-          <div className="mb-8">
-            <Link
-              href="/"
-              aria-label="Página Inicial — Acorda Portugal"
-              title="Acorda Portugal — Página Inicial"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-card/60 px-4 py-2 text-sm font-semibold text-muted-foreground backdrop-blur transition hover:border-primary/30 hover:bg-card hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4 text-primary" />
-              Voltar ao início
-            </Link>
-          </div>
-
           {/* Cabeçalho da Página */}
           <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/10 bg-card/60 p-8 backdrop-blur-xl sm:p-12">
             <div className="pointer-events-none absolute -right-8 -top-12 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import {
   Menu,
   X,
@@ -41,6 +41,8 @@ import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
   const router = useRouter()
+  const pathname = usePathname()
+  const isHome = !pathname || pathname === '/' || pathname === ''
   const { user, profile, authResolved } = useAuth()
   const { formattedCoins, isBalancePulsing, isLoaded: isEconomyLoaded } = useEconomy()
   const [open, setOpen] = useState(false)
@@ -120,9 +122,9 @@ export function SiteHeader() {
       }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-        {/* Esquerda: Botão Voltar + Brand Logo */}
+        {/* Esquerda: Botão Voltar (apenas em páginas secundárias) + Brand Logo */}
         <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 shrink">
-          <GlobalBackButton variant="header" />
+          {!isHome && <GlobalBackButton variant="header" />}
           <Link
             href="/"
             onClick={handleLogoClick}

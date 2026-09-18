@@ -1280,7 +1280,18 @@ export async function claimDuelRewards(
           questionsAnswered: increment(questionsList.length),
           correctAnswers: increment(player.correctCount || 0),
           incorrectAnswers: increment(Math.max(0, questionsList.length - (player.correctCount || 0))),
+          wins1v1: increment(isWinner ? 1 : 0),
+          losses1v1: increment(isLoser ? 1 : 0),
+          draws1v1: increment(isDraw ? 1 : 0),
+          'multiplayer.wins': increment(isWinner ? 1 : 0),
+          'multiplayer.losses': increment(isLoser ? 1 : 0),
+          'multiplayer.draws': increment(isDraw ? 1 : 0),
+          'multiplayer.gamesPlayed': increment(1),
+          'multiplayer.points': increment(player.score || 0),
+          'multiplayer.xp': increment(xpReward),
           'stats.totalGames': increment(1),
+          'stats.totalScore': increment(player.score || 0),
+          'stats.totalXp': increment(xpReward),
           'stats.totalDuels': increment(1),
           'stats.duelsWon': increment(isWinner ? 1 : 0),
           'stats.duelsLost': increment(isLoser ? 1 : 0),
@@ -1301,7 +1312,7 @@ export async function claimDuelRewards(
           userUpdates[`categoryStats.${catKey}`] = catData
         }
 
-        transaction.update(userRef, userUpdates)
+        transaction.set(userRef, userUpdates, { merge: true })
 
         transaction.set(
           publicProfileRef,
@@ -1720,6 +1731,67 @@ export async function surrenderDuel(duelId: string, surrenderingUid: string): Pr
 }
 
 export const forfeitDuel = surrenderDuel
+
+/**
+ * Permite a um jogador reivindicar a vitória se o adversário excedeu o tempo limite da pergunta
+ * e não respondeu após a margem de tolerância (25s de margem após deadline).
+ */
+export async function claimDuelTimeoutVictory(
+  duelId: string,
+  claimingUid: string,
+): Promise<{ success: boolean; winnerUid?: string }> {
+  if (!claimingUid || !auth?.currentUser || auth.currentUser.uid !== claimingUid) {
+    return { success: false }
+  }
+  const duelRef = doc(db, 'duels', duelId)
+  try {
+    return await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(duelRef)
+      if (!snap.exists()) return { success: false }
+      const duel = snap.data() as DuelDocument
+      if (duel.status === 'finished') {
+        return { success: true, winnerUid: duel.winnerUid || undefined }
+      }
+
+      const isPlayerA = duel.playerA?.uid === claimingUid
+      const isPlayerB = duel.playerB?.uid === claimingUid
+      if (!isPlayerA && !isPlayerB) return { success: false }
+
+      const opponent = isPlayerA ? duel.playerB : duel.playerA
+      if (!opponent) return { success: false }
+
+      const now = Date.now()
+      const deadline = opponent.questionDeadline || 0
+      const isOverdue = deadline > 0 && now > (deadline + 25_000)
+
+      if (!isOverdue && !opponent.finished) {
+        return { success: false }
+      }
+
+      const nowTs = Date.now()
+      const updates: Partial<DuelDocument> & Record<string, any> = {
+        status: 'finished',
+        winnerUid: claimingUid,
+        winnerReason: 'opponent_forfeit',
+        finishedAt: nowTs,
+        lastEvent: {
+          type: 'OPPONENT_TIMEOUT',
+          event: 'opponent_timeout',
+          senderId: claimingUid,
+          duelId,
+          winnerUid: claimingUid,
+          timestamp: nowTs,
+        },
+      }
+
+      transaction.update(duelRef, updates)
+      return { success: true, winnerUid: claimingUid }
+    })
+  } catch (err) {
+    console.error('[claimDuelTimeoutVictory ERROR]:', err)
+    return { success: false }
+  }
+}
 
 /**
  * Estende o deadline de resposta de um jogador específico num duelo 1v1

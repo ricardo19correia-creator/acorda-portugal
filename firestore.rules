@@ -56,6 +56,10 @@ service cloud.firestore {
       match /activeSession/{docId} {
         allow read, write: if isOwner(userId) || isAdmin();
       }
+
+      match /xp_transactions/{txId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
     }
 
     // Histórico Anti-Repetição Global por Utilizador (Conta Oficial)

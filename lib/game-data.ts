@@ -255,6 +255,10 @@ export type UserProfile = {
   gamesPlayed: number
   wins?: number
   losses?: number
+  draws?: number
+  wins1v1?: number
+  losses1v1?: number
+  draws1v1?: number
   questionsAnswered?: number
   correctAnswers: number
   incorrectAnswers: number

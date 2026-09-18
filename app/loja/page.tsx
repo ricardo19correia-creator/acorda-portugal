@@ -815,32 +815,75 @@ function LojaContent() {
         if (item.image) localStorage.setItem('equipped_arena_image', item.image)
         if (auth.currentUser) {
           try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            await setDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedArena: item.id,
               'equipped.arena': item.id,
-            })
+              'equipped.arenaId': item.id,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
           } catch (e) {
             console.error(e)
           }
         }
         window.dispatchEvent(new Event('arenaChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
         showToast(`Arena exclusiva "${item.name}" equipada no jogo!`)
         return
       }
       if (item.category === 'avatars' && item.image) {
         setEquippedAvatar(item.image)
         localStorage.setItem('user_equipped_avatar', item.image)
+        localStorage.setItem('user_equipped_avatar_id', item.id)
+        localStorage.setItem('equipped_avatar_id', item.id)
         if (auth.currentUser) {
           try {
-            await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            await setDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedAvatar: item.id,
+              avatarId: item.id,
               'equipped.avatar': item.image,
+              'equipped.avatarId': item.id,
               avatar: item.image,
-            })
+              photoURL: item.image,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              photoURL: item.image,
+              avatar: item.image,
+              avatarId: item.id,
+              equippedAvatar: item.id,
+              'equipped.avatar': item.image,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
           } catch (e) {
             console.error(e)
           }
         }
         window.dispatchEvent(new Event('avatarChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
         showToast(`Avatar exclusivo "${item.name}" equipado com sucesso!`)
+        return
+      }
+      if (item.category === 'molduras') {
+        localStorage.setItem('user_equipped_frame', item.id)
+        if (auth.currentUser) {
+          try {
+            await setDoc(doc(db, 'users', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              'equipped.frameId': item.id,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
+            await setDoc(doc(db, 'publicProfiles', auth.currentUser.uid), {
+              equippedFrame: item.id,
+              'equipped.frameId': item.id,
+              updatedAt: serverTimestamp(),
+            }, { merge: true })
+          } catch (e) {
+            console.error(e)
+          }
+        }
+        window.dispatchEvent(new Event('frameChanged'))
+        window.dispatchEvent(new Event('inventory_updated'))
+        showToast(`Moldura exclusiva "${item.name}" equipada com sucesso!`)
         return
       }
       return

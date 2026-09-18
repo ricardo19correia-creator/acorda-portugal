@@ -494,6 +494,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               wins: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
               losses: typeof data.losses === 'number' ? data.losses : Math.max(0, (data.gamesPlayed || 0) - (data.wins || 0)),
               draws: typeof data.draws === 'number' ? data.draws : (data.stats?.duelsDrawn || 0),
+              wins1v1: typeof data.wins1v1 === 'number' ? data.wins1v1 : (data.stats?.duelsWon || data.wins || 0),
+              losses1v1: typeof data.losses1v1 === 'number' ? data.losses1v1 : (data.stats?.duelsLost || data.losses || 0),
+              draws1v1: typeof data.draws1v1 === 'number' ? data.draws1v1 : (data.stats?.duelsDrawn || data.draws || 0),
               questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : (data.totalQuestions || 0),
               correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
               incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
@@ -580,6 +583,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 window.dispatchEvent(new Event('avatarChanged'))
                 window.dispatchEvent(new Event('frameChanged'))
                 window.dispatchEvent(new Event('arenaChanged'))
+                window.dispatchEvent(new Event('titleChanged'))
+                window.dispatchEvent(new Event('consumables_updated'))
               } catch (storageErr) {
                 console.warn('[AUTH] Storage local restrito:', storageErr)
               }

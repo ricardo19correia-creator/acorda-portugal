@@ -7,7 +7,7 @@ import { Progression } from '@/components/progression'
 import { Rewards } from '@/components/rewards'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Gamepad2, Trophy, LayoutGrid, Sparkles } from 'lucide-react'
+import { Gamepad2, Trophy, LayoutGrid, Sparkles } from 'lucide-react'
 import { auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 
@@ -35,14 +35,7 @@ export default function ExplorarPage() {
           <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
               <div>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-muted-foreground transition hover:bg-white/10 hover:text-white backdrop-blur-md"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Voltar ao Início
-                </Link>
-                <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-foreground text-glow-primary">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-foreground text-glow-primary">
                   Explorar o Acorda Portugal
                 </h1>
                 <p className="mt-1.5 text-sm sm:text-base text-muted-foreground font-medium">

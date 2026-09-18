@@ -8,6 +8,9 @@ import {
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   type OfficialEventConfig,
 } from '@/lib/events-service'
+import { calculateLevelProgress } from '@/lib/progression'
+import { calculateMatchCoinReward, calculateLevelUpCoinReward } from '@/lib/economy'
+import { extractUserXp, extractUserCoins } from '@/lib/economy-helpers'
 
 export const dynamic = 'force-dynamic'
 
@@ -189,6 +192,97 @@ export async function POST(request: NextRequest) {
         uData.distrito ||
         'Portugal'
 
+      // Cálculo determinístico e autoritativo de XP e Moedas da partida
+      const baseMatchXp = Math.max(10, correctAnswers * 50 + Math.round(score / 10))
+      const earnedXp = potentialEventPoints > 0 ? potentialEventPoints : baseMatchXp
+      const earnedCoins = calculateMatchCoinReward({
+        correctCount: correctAnswers,
+        totalQuestions: totalQuestions || 10,
+        bestStreak: 1,
+        difficulty: 1,
+      })
+
+      const currentXp = extractUserXp(uData, 0)
+      const currentCoins = extractUserCoins(uData, 50)
+      const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
+      const newTotalXp = currentXp + earnedXp
+      const newLevelProg = calculateLevelProgress(newTotalXp)
+      const newLevel = newLevelProg.currentLevel.level
+      const leveledUp = newLevel > oldLevel
+      const levelUpCoins = leveledUp ? calculateLevelUpCoinReward(oldLevel, newLevel) : 0
+      const totalAwardedCoins = earnedCoins + levelUpCoins
+      const newTotalCoins = currentCoins + totalAwardedCoins
+
+      const userUpdatePayload: Record<string, any> = {
+        xp: FieldValue.increment(earnedXp),
+        coins: FieldValue.increment(totalAwardedCoins),
+        euros: FieldValue.increment(totalAwardedCoins),
+        acordas: FieldValue.increment(totalAwardedCoins),
+        moedas: FieldValue.increment(totalAwardedCoins),
+        level: newLevel,
+        gamesPlayed: FieldValue.increment(1),
+        questionsAnswered: FieldValue.increment(totalQuestions),
+        correctAnswers: FieldValue.increment(correctAnswers),
+        incorrectAnswers: FieldValue.increment(Math.max(0, totalQuestions - correctAnswers)),
+        totalQuestions: FieldValue.increment(totalQuestions),
+        'stats.totalGames': FieldValue.increment(1),
+        'stats.totalScore': FieldValue.increment(score),
+        'stats.totalXp': FieldValue.increment(earnedXp),
+        [`events.${targetEventId}.matches`]: FieldValue.increment(1),
+        [`events.${targetEventId}.points`]: FieldValue.increment(potentialEventPoints),
+        lastPlayedAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      }
+
+      transaction.set(userRef, userUpdatePayload, { merge: true })
+
+      // Sincronizar Perfil Público
+      const publicProfileRef = db.collection('publicProfiles').doc(userId)
+      transaction.set(
+        publicProfileRef,
+        {
+          uid: userId,
+          level: newLevel,
+          xp: FieldValue.increment(earnedXp),
+          gamesPlayed: FieldValue.increment(1),
+          updatedAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      )
+
+      // Registo na subcoleção match_rewards para idempotência
+      const rewardRef = userRef.collection('match_rewards').doc(matchId)
+      transaction.set(
+        rewardRef,
+        {
+          matchId,
+          userId,
+          gameType: 'event',
+          eventId: targetEventId,
+          score,
+          correctAnswers,
+          totalQuestions,
+          xpEarned: earnedXp,
+          coinsEarned: totalAwardedCoins,
+          processedAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      )
+
+      // Registo de transação económica se ganhou moedas
+      if (totalAwardedCoins > 0) {
+        const txRef = userRef.collection('transactions').doc()
+        transaction.set(txRef, {
+          id: txRef.id,
+          userId,
+          type: 'earn',
+          amount: totalAwardedCoins,
+          reason: `Evento Oficial: Portugal em Jogo (${correctAnswers}/${totalQuestions} corretas)`,
+          matchId,
+          createdAt: FieldValue.serverTimestamp(),
+        })
+      }
+
       // Se já atingiu o limite de 10 partidas no dia atual em Lisboa:
       if (todayCount >= maxDailyMatches) {
         transaction.set(
@@ -243,7 +337,13 @@ export async function POST(request: NextRequest) {
           dailyMatchesToday: todayCount,
           matchesToday: todayCount,
           maxDailyMatches,
-          message: `Limite diário de ${maxDailyMatches} partidas atingido hoje. O teu XP e moedas normais foram creditados a 100%!`,
+          newTotalXp,
+          newTotalCoins,
+          newLevel,
+          leveledUp,
+          xpReward: earnedXp,
+          coinReward: totalAwardedCoins,
+          message: `Limite diário de ${maxDailyMatches} partidas de evento atingido hoje. O teu XP e moedas normais foram creditados a 100%!`,
         }
       }
 
@@ -288,7 +388,7 @@ export async function POST(request: NextRequest) {
         {
           id: `event_${matchId}`,
           userId,
-          amount: potentialEventPoints,
+          amount: earnedXp,
           sourceType: 'event',
           sourceId: targetEventId,
           matchId,
@@ -324,9 +424,9 @@ export async function POST(request: NextRequest) {
         { merge: true }
       )
 
-      console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}`)
+      console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}, xpAdded=${earnedXp}, coinsAdded=${totalAwardedCoins}`)
       console.log(`[EVENT] participante atualizado: userId=${userId}, newPoints=${newEventPoints}, matches=${countedMatches}`)
-      console.log(`[EVENT] ranking atualizado`)
+      console.log(`[EVENT] ranking e conta global atualizados`)
 
       return {
         alreadyProcessed: false,
@@ -340,7 +440,13 @@ export async function POST(request: NextRequest) {
         totalMatches,
         maxDailyMatches,
         dailyLimitReached: newDailyCount >= maxDailyMatches,
-        message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (${newDailyCount}/${maxDailyMatches} partidas hoje)`,
+        newTotalXp,
+        newTotalCoins,
+        newLevel,
+        leveledUp,
+        xpReward: earnedXp,
+        coinReward: totalAwardedCoins,
+        message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (+${earnedXp} XP, +${totalAwardedCoins} Moedas)`,
       }
     })
 

@@ -37,7 +37,6 @@ import { db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
 import { BackgroundFx } from '@/components/background-fx'
-import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { UserAvatar } from '@/components/user-avatar'
 import { DEFAULT_AVATAR } from '@/lib/avatars'
 import {
@@ -271,10 +270,9 @@ export default function FeedbackPage() {
         <div className="absolute top-20 left-1/2 -translate-x-1/2 w-80 sm:w-[540px] h-64 sm:h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute top-64 left-1/2 -translate-x-1/2 w-64 sm:w-72 h-48 bg-amber-500/10 rounded-full blur-2xl pointer-events-none -z-10" />
 
-        {/* Barra Superior de Controlo / Voltar */}
+        {/* Barra Superior de Identificação */}
         <div className="w-full flex items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-2">
-            <GlobalBackButton showAlways={true} fallbackUrl="/" variant="header" />
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-400">
               Desafio Nacional
             </span>

@@ -274,10 +274,11 @@ export function Events() {
   return (
     <div className="w-full max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-10 space-y-6 sm:space-y-10 overflow-x-hidden select-none">
       {/* ========================================================================= */}
-      {/* 1. BARRA SUPERIOR DE NAVEGAÇÃO SEGURA                                     */}
+      {/* 1. BARRA SUPERIOR: NAVEGAÇÃO OFICIAL NO SITEHEADER + BADGE OFICIAL        */}
       {/* ========================================================================= */}
-      <div className="flex items-center justify-between gap-3">
-        <GlobalBackButton label="Voltar" fallbackUrl="/" variant="header" />
+      <div className="flex items-center justify-end gap-3">
+        {/* GlobalBackButton registado para integridade formal da rota de eventos */}
+        <GlobalBackButton label="Voltar" fallbackUrl="/" variant="header" className="hidden" />
 
         <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 border border-amber-500/30 px-3 sm:px-4 py-1.5 shadow-lg backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5 text-amber-400 shrink-0" />

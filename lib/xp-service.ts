@@ -380,15 +380,24 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       if (matchType === 'duel_1v1') {
         if (isWinner) {
           userUpdatePayload.wins = increment(1)
+          userUpdatePayload.wins1v1 = increment(1)
           userUpdatePayload['stats.duelsWon'] = increment(1)
+          userUpdatePayload['multiplayer.wins'] = increment(1)
         } else if (isDraw) {
           userUpdatePayload.draws = increment(1)
+          userUpdatePayload.draws1v1 = increment(1)
           userUpdatePayload['stats.duelsDrawn'] = increment(1)
+          userUpdatePayload['multiplayer.draws'] = increment(1)
         } else {
           userUpdatePayload.losses = increment(1)
+          userUpdatePayload.losses1v1 = increment(1)
           userUpdatePayload['stats.duelsLost'] = increment(1)
+          userUpdatePayload['multiplayer.losses'] = increment(1)
         }
         userUpdatePayload['stats.totalDuels'] = increment(1)
+        userUpdatePayload['multiplayer.gamesPlayed'] = increment(1)
+        userUpdatePayload['multiplayer.points'] = increment(score)
+        userUpdatePayload['multiplayer.xp'] = increment(calculatedXp)
       } else if (matchType === 'conquista_distrito') {
         const targetDistrict = district || userData.district || 'Portugal'
         userUpdatePayload.districtPoints = increment(calculatedXp)
@@ -399,6 +408,11 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         userUpdatePayload.cityPoints = increment(calculatedXp)
         userUpdatePayload.cityGamesPlayed = increment(1)
         console.log(`[CITY] LOCAL_CITY_SCORE (city: ${targetCity}, points: +${calculatedXp}, NO_DISTRICT_CONTRIBUTION)`)
+      }
+
+      if (effectiveEventId) {
+        userUpdatePayload[`events.${effectiveEventId}.matches`] = increment(1)
+        userUpdatePayload[`events.${effectiveEventId}.points`] = increment(score)
       }
 
       if (bestStreak > 0) {
@@ -412,7 +426,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         userUpdatePayload.answeredQuestionIds = arrayUnion(...answeredQuestionIds.slice(0, 50))
       }
 
-      transaction.update(userRef, userUpdatePayload)
+      transaction.set(userRef, userUpdatePayload, { merge: true })
 
       // J. Atualizar Perfil Público
       transaction.set(
