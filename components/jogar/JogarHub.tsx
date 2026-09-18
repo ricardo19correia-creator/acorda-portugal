@@ -101,6 +101,18 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
       {/* 1. CABEÇALHO COMPACTO                                                     */}
       {/* ========================================================================= */}
       <header className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-xl p-3.5 sm:p-5 shadow-xl transition-all">
+        {user && !profile ? (
+          <div className="flex items-center justify-between gap-3 sm:gap-4 animate-pulse">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-slate-800 shrink-0" />
+              <div className="space-y-2 flex-1">
+                <div className="h-4 w-28 bg-slate-800 rounded" />
+                <div className="h-2 w-40 bg-slate-800/50 rounded" />
+              </div>
+            </div>
+            <div className="h-9 w-20 bg-slate-800/40 rounded-xl" />
+          </div>
+        ) : (
         <div className="flex items-center justify-between gap-3 sm:gap-4">
           {/* Jogador: Avatar + Nome + Nível + Barra XP */}
           <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -188,6 +200,7 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
             )}
           </div>
         </div>
+        )}
       </header>
 
       {/* ========================================================================= */}

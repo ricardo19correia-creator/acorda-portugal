@@ -16,10 +16,33 @@ interface PlayerStatusHudProps {
 }
 
 export function PlayerStatusHud({ user, profile, onOpenAuth }: PlayerStatusHudProps) {
-  const { formattedCoins } = useEconomy()
+  const { formattedCoins, isLoaded: isEconomyLoaded } = useEconomy()
 
-  // 1. Estado Autenticado: HUD Compacto de Jogo
-  if (user) {
+  // 1. Estado de Carregamento: Exibir esqueleto elegante em vez de 0 XP / Nível 1
+  if (user && !profile) {
+    return (
+      <section
+        aria-label="A carregar estado do jogador"
+        className="w-full max-w-3xl mx-auto px-4 mt-2 mb-8 select-none animate-pulse"
+      >
+        <div className="relative rounded-2xl bg-slate-950/70 border border-emerald-500/20 backdrop-blur-xl p-4 sm:p-5 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5 min-w-0 w-full sm:w-auto">
+              <div className="w-10 h-10 rounded-full bg-slate-800 shrink-0" />
+              <div className="space-y-2 flex-1 min-w-0">
+                <div className="h-4 w-32 bg-slate-800 rounded" />
+                <div className="h-3 w-48 bg-slate-850 rounded" />
+              </div>
+            </div>
+            <div className="h-8 w-24 bg-slate-800/40 rounded-xl" />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // 2. Estado Autenticado: HUD Compacto de Jogo Oficial
+  if (user && profile) {
     const xp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
     const levelInfo = calculateLevelProgress(xp)
     const level = levelInfo.currentLevel.level

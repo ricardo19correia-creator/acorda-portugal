@@ -2,7 +2,7 @@ import { doc, runTransaction, serverTimestamp, increment } from 'firebase/firest
 import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { extractUserXp } from '@/lib/economy-helpers'
-import { getLocalSessionId } from '@/lib/session-manager'
+
 
 export interface DailyRewardItem {
   day: number
@@ -154,13 +154,6 @@ export async function claimDailyReward(userId: string): Promise<ClaimRewardResul
       }
 
       const userData = userSnap.data() || {}
-
-      // Validação de Sessão Única Oficial
-      const activeSessionId = userData.activeSession?.sessionId || userData.currentSessionId
-      const localSessionId = getLocalSessionId()
-      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
-        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
-      }
 
       const dailyInfo = userData.dailyReward || {}
       const lastDate = dailyInfo.lastClaimedDate

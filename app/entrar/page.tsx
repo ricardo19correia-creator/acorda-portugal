@@ -71,21 +71,6 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
   // Hook que processa retorno do redirecionamento do Google de forma resiliente
   useCheckRedirectLogin(redirectTarget, (err) => setError(err))
 
-  // Detetar se o utilizador foi redirecionado devido a início de sessão noutro dispositivo
-  useEffect(() => {
-    const reason = searchParams.get('reason')
-    if (reason === 'session_conflict') {
-      const msg =
-        typeof window !== 'undefined'
-          ? localStorage.getItem('ap_session_conflict_message') || 'A tua conta foi iniciada noutro dispositivo.'
-          : 'A tua conta foi iniciada noutro dispositivo.'
-      setError(msg)
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('ap_session_conflict_message')
-      }
-    }
-  }, [searchParams])
-
   // Redirecionar apenas quando o utilizador estiver autenticado E já tiver distrito confirmado
   useEffect(() => {
     if (authResolved && user && profile && !needsDistrictSelection) {
@@ -333,25 +318,10 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
           {/* Mensagens de Alerta / Erro */}
           {error && (
-            <div
-              className={`mb-5 flex items-start gap-3 rounded-2xl p-4 text-xs sm:text-sm font-semibold animate-in fade-in duration-200 ${
-                error.includes('outro dispositivo')
-                  ? 'border-2 border-amber-500/50 bg-amber-500/15 text-amber-200 shadow-lg shadow-amber-500/10'
-                  : 'border border-flag-red/30 bg-flag-red/10 text-flag-red'
-              }`}
-            >
-              <AlertCircle
-                className={`h-5 w-5 shrink-0 mt-0.5 ${
-                  error.includes('outro dispositivo') ? 'text-amber-400' : 'text-flag-red'
-                }`}
-              />
+            <div className="mb-5 flex items-start gap-3 rounded-2xl p-4 text-xs sm:text-sm font-semibold animate-in fade-in duration-200 border border-flag-red/30 bg-flag-red/10 text-flag-red">
+              <AlertCircle className="h-5 w-5 shrink-0 mt-0.5 text-flag-red" />
               <div className="space-y-0.5 text-left">
                 <span className="block font-bold">{error}</span>
-                {error.includes('outro dispositivo') && (
-                  <span className="block text-xs font-normal text-amber-300/80">
-                    A sessão anterior foi terminada para proteger a tua conta. Podes iniciar sessão novamente aqui a qualquer momento.
-                  </span>
-                )}
               </div>
             </div>
           )}

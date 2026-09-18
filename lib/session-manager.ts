@@ -154,8 +154,8 @@ export function clearLocalSession(): void {
 }
 
 /**
- * Regista uma nova sessão oficial no Firebase Firestore e no armazenamento local
- * Substitui atomicamente a sessão anterior do utilizador no servidor.
+ * Regista o acesso da sessão atual de forma não-bloqueante no Firestore e no armazenamento local.
+ * Suporta múltiplos dispositivos e abas em simultâneo sob a mesma conta Firebase.
  */
 export async function registerUserSession(user: { uid: string }): Promise<string> {
   if (!user?.uid) return ''
@@ -165,10 +165,9 @@ export async function registerUserSession(user: { uid: string }): Promise<string
   const deviceId = getOrCreateDeviceId()
   const { platform, deviceInfo } = getDeviceInfo()
 
-  // 1. Guardar imediatamente no armazenamento local deste dispositivo
+  // Guardar no armazenamento local para fins de telemetria/diagnóstico
   setLocalSessionId(sessionId)
 
-  // 2. Gravar no Firestore como sessão oficial única
   try {
     const sessionData: ActiveSessionData = {
       sessionId,
@@ -185,21 +184,17 @@ export async function registerUserSession(user: { uid: string }): Promise<string
       userRef,
       {
         activeSession: sessionData,
-        currentSessionId: sessionId, // Retrocompatibilidade 100%
+        currentSessionId: sessionId, // Mantido para compatibilidade sem efeito de bloqueio
         lastLoginAt: new Date().toISOString(),
         lastSessionUpdate: serverTimestamp(),
+        lastPlatform: platform,
+        lastDeviceInfo: deviceInfo,
       },
       { merge: true }
     )
 
-    // Também registar na subcoleção conceptual users/{uid}/activeSession/current
-    const sessionDocRef = doc(db, 'users', user.uid, 'activeSession', 'current')
-    await setDoc(sessionDocRef, sessionData, { merge: true }).catch(() => null)
-
-    console.log('[SESSION] Nova sessão única registada com sucesso no Firebase:', {
+    console.log('[SESSION] Sessão registada com sucesso no Firebase (Multi-dispositivo ativo):', {
       uid: user.uid,
-      sessionId,
-      deviceId,
       platform,
       deviceInfo,
     })
@@ -211,56 +206,45 @@ export async function registerUserSession(user: { uid: string }): Promise<string
 }
 
 /**
- * Valida se os dados do perfil no Firestore correspondem à sessão local atual.
+ * Valida a sessão local.
+ * No modelo multi-dispositivo, qualquer dispositivo autenticado com a conta é válido.
  */
 export function isSessionValid(userData: any): boolean {
-  if (isSessionTerminated()) return false
-  const localSessionId = getLocalSessionId()
-  if (!localSessionId) return false
-
-  const remoteSessionId = userData?.activeSession?.sessionId || userData?.currentSessionId
-  if (!remoteSessionId) return true // Sem sessão registada ainda
-
-  return remoteSessionId === localSessionId
+  if (!userData) return false
+  return true
 }
 
 /**
- * Valida ativamente a sessão deste cliente contra o servidor Firestore
+ * Valida a existência do utilizador no servidor Firestore.
+ * Não bloqueia por dispositivo nem compara sessionIds exclusivos.
  */
 export async function validateSessionWithServer(userId: string): Promise<boolean> {
   if (!userId || typeof window === 'undefined') return false
-  const localSessionId = getLocalSessionId()
-  if (!localSessionId) return false
 
   try {
     const userRef = doc(db, 'users', userId)
     const serverSnap = await getDocFromServer(userRef)
-    if (!serverSnap.exists()) return false
-
-    const data = serverSnap.data() || {}
-    const remoteSessionId = data.activeSession?.sessionId || data.currentSessionId
-    if (!remoteSessionId) return true
-
-    return remoteSessionId === localSessionId
+    return serverSnap.exists()
   } catch (err) {
-    console.warn('[SESSION] Aviso ao validar sessão com servidor:', err)
-    return true // Falhas momentâneas de rede não expulsam imediatamente
+    console.warn('[SESSION] Aviso na verificação de conectividade com servidor:', err)
+    return true // Falhas momentâneas de rede não invalidam o utilizador
   }
 }
 
 /**
- * Termina a sessão local, executa signOut e prepara redirecionamento com mensagem
+ * Termina apenas a sessão do cliente local (ex.: logout explícito do utilizador).
+ * Nunca bloqueia a conta global nem exibe mensagem de conflito de dispositivos.
  */
 export async function terminateLocalSession(
-  reason = 'A tua conta foi iniciada noutro dispositivo.'
+  _reason?: string
 ): Promise<void> {
   markSessionTerminated()
   clearLocalSession()
 
   if (typeof window !== 'undefined') {
     try {
-      localStorage.setItem(SESSION_CONFLICT_MESSAGE_KEY, reason)
-      sessionStorage.setItem(SESSION_CONFLICT_MESSAGE_KEY, reason)
+      localStorage.removeItem(SESSION_CONFLICT_MESSAGE_KEY)
+      sessionStorage.removeItem(SESSION_CONFLICT_MESSAGE_KEY)
     } catch {}
   }
 
@@ -270,12 +254,7 @@ export async function terminateLocalSession(
       await signOut(auth)
     }
   } catch (err) {
-    console.warn('[SESSION] Erro ao executar signOut durante terminação de sessão:', err)
-  }
-
-  if (typeof window !== 'undefined') {
-    try {
-      window.dispatchEvent(new CustomEvent('session_superseded', { detail: { reason } }))
-    } catch {}
+    console.warn('[SESSION] Erro ao executar signOut local:', err)
   }
 }
+

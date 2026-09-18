@@ -14,6 +14,7 @@ import {
   writeBatch,
   runTransaction,
   serverTimestamp,
+  increment,
   type Unsubscribe,
   onSnapshot,
 } from 'firebase/firestore'
@@ -36,7 +37,7 @@ import {
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
 import { extractUserXp } from '@/lib/economy-helpers'
-import { getLocalSessionId } from '@/lib/session-manager'
+
 
 export function resolveUserAvatar(
   user?: { photoURL?: string | null } | null,
@@ -1183,14 +1184,6 @@ export async function claimDuelRewards(
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? userSnap.data() : {}
 
-      // Validação de Sessão Única Oficial
-      const activeSessionId = (userData as any)?.activeSession?.sessionId || (userData as any)?.currentSessionId
-      const localSessionId = getLocalSessionId()
-      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
-        console.error(`[DUEL][SECURITY] Tentativa de resgate por sessão revogada! Remote: ${activeSessionId}, Local: ${localSessionId}`)
-        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
-      }
-
       const currentXp = extractUserXp(userData, 0)
       const currentEuros = typeof userData.euros === 'number' ? userData.euros : typeof userData.coins === 'number' ? userData.coins : 50
       const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
@@ -1273,18 +1266,35 @@ export async function claimDuelRewards(
         }
 
         const userUpdates: Record<string, any> = {
-          xp: newTotalXp,
-          euros: newTotalEuros,
-          coins: newTotalEuros,
+          xp: increment(xpReward),
+          euros: increment(totalAwardedEuros),
+          coins: increment(totalAwardedEuros),
+          acordas: increment(totalAwardedEuros),
+          moedas: increment(totalAwardedEuros),
           level: newLevel,
-          gamesPlayed: (userData.gamesPlayed || 0) + 1,
-          wins: (userData.wins || 0) + (isWinner ? 1 : 0),
-          losses: (userData.losses || 0) + (isLoser ? 1 : 0),
-          draws: (userData.draws || 0) + (isDraw ? 1 : 0),
-          totalQuestions: (userData.totalQuestions || 0) + questionsList.length,
-          questionsAnswered: (userData.questionsAnswered || 0) + questionsList.length,
-          correctAnswers: (userData.correctAnswers || 0) + (player.correctCount || 0),
-          incorrectAnswers: (userData.incorrectAnswers || 0) + Math.max(0, questionsList.length - (player.correctCount || 0)),
+          gamesPlayed: increment(1),
+          wins: increment(isWinner ? 1 : 0),
+          losses: increment(isLoser ? 1 : 0),
+          draws: increment(isDraw ? 1 : 0),
+          totalQuestions: increment(questionsList.length),
+          questionsAnswered: increment(questionsList.length),
+          correctAnswers: increment(player.correctCount || 0),
+          incorrectAnswers: increment(Math.max(0, questionsList.length - (player.correctCount || 0))),
+          'stats.totalGames': increment(1),
+          'stats.totalDuels': increment(1),
+          'stats.duelsWon': increment(isWinner ? 1 : 0),
+          'stats.duelsLost': increment(isLoser ? 1 : 0),
+          'stats.duelsDrawn': increment(isDraw ? 1 : 0),
+          'stats.duelPoints': increment(player.score || 0),
+          'stats.duelXp': increment(xpReward),
+          'stats.multiplayerGames': increment(1),
+          'stats.multiplayerWins': increment(isWinner ? 1 : 0),
+          'stats.multiplayerLosses': increment(isLoser ? 1 : 0),
+          'stats.multiplayerDraws': increment(isDraw ? 1 : 0),
+          'stats.multiplayerPoints': increment(player.score || 0),
+          'stats.multiplayerXp': increment(xpReward),
+          lastPlayedAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
         }
 
         for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {
@@ -1300,8 +1310,11 @@ export async function claimDuelRewards(
             displayName: userData.displayName || 'Jogador',
             photoURL: userData.photoURL || null,
             district: userData.district || 'Portugal',
-            xp: newTotalXp,
+            xp: increment(xpReward),
             level: newLevel,
+            wins1v1: increment(isWinner ? 1 : 0),
+            losses1v1: increment(isLoser ? 1 : 0),
+            gamesPlayed: increment(1),
             updatedAt: serverTimestamp(),
           },
           { merge: true },

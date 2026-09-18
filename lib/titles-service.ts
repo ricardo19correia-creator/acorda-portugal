@@ -3,7 +3,6 @@
 
 import { doc, getDoc, runTransaction, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
-import { getLocalSessionId } from '@/lib/session-manager'
 import {
   DEFAULT_STARTER_TITLE_ID,
   DEFAULT_STARTER_TITLE_NAME,
@@ -59,13 +58,6 @@ export async function equipTitle(
       }
 
       const userData = userDoc.data() || {}
-
-      // Validação de Sessão Única Oficial
-      const activeSessionId = userData.activeSession?.sessionId || userData.currentSessionId
-      const localSessionId = getLocalSessionId()
-      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
-        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
-      }
 
       const inventoryTitles = userData.inventory?.titles || []
 

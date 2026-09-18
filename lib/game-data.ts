@@ -271,7 +271,18 @@ export type UserProfile = {
   equippedTitle?: string
   equippedTitleId?: string
   ownedTitleIds?: string[]
-  equippedFrame?: string
+  equippedFrame?: string | null
+  equippedArena?: string | null
+  equippedEmotes?: string[]
+  equippedTaunts?: string[]
+  preferences?: Record<string, any>
+  draws?: number
+  districtPoints?: number
+  districtGamesPlayed?: number
+  cityPoints?: number
+  cityGamesPlayed?: number
+  multiplayer?: Record<string, any>
+  events?: Record<string, any>
   consumables?: {
     help5050?: number
     freezeTime?: number

@@ -15,16 +15,8 @@ import {
   STARTER_AVATAR_ID,
 } from '@/lib/avatars'
 
-import {
-  registerUserSession,
-  getLocalSessionId,
-  setLocalSessionId,
-  clearLocalSession,
-  terminateLocalSession,
-  getOrCreateDeviceId,
-  isSessionTerminated,
-} from '@/lib/session-manager'
-import { SessionConflictModal } from '@/components/session-conflict-modal'
+import { registerUserSession } from '@/lib/session-manager'
+
 import {
   VALID_DISTRICTS,
   getDistrictCities,
@@ -82,6 +74,13 @@ const AuthContext = createContext<AuthState | null>(null)
 function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmail: string): UserProfile | null {
   if (typeof window === 'undefined') return null
   try {
+    const cachedUid = localStorage.getItem('cached_uid')
+    // Apenas utilizar cache se pertencer comprovadamente a este utilizador autenticado
+    if (!cachedUid || cachedUid !== uid) return null
+
+    const savedXpRaw = localStorage.getItem('user_xp')
+    if (savedXpRaw === null || isNaN(Number(savedXpRaw))) return null
+
     const savedCoins = localStorage.getItem('user_coins') || localStorage.getItem('user_euros')
     const savedName = localStorage.getItem('user_display_name') || fallbackName
     const savedDistrict = localStorage.getItem('user_district') || ''
@@ -89,8 +88,11 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
     const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || STARTER_AVATAR_ID
     const savedTitleId = localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID
     const savedTitleName = localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME
-    const savedXpRaw = localStorage.getItem('user_xp')
-    const savedXp = savedXpRaw && !isNaN(Number(savedXpRaw)) ? Math.max(0, Number(savedXpRaw)) : 0
+    const savedFrame = localStorage.getItem('user_equipped_frame') || null
+    const savedArena = localStorage.getItem('equipped_arena') || 'arena_1'
+    const savedStreakRaw = localStorage.getItem('user_streak')
+    const savedStreak = savedStreakRaw ? Number(savedStreakRaw) : 0
+    const savedXp = Math.max(0, Number(savedXpRaw))
     const savedLevel = calculateLevelProgress(savedXp).currentLevel.level
 
     const coinsVal = savedCoins && !isNaN(Number(savedCoins)) ? Number(savedCoins) : ECONOMY_CONFIG.INITIAL_BONUS_COINS
@@ -110,20 +112,23 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       title: savedTitleName,
       equippedTitle: savedTitleName,
       equippedTitleId: savedTitleId,
+      equippedFrame: savedFrame,
+      equippedArena: savedArena,
       level: savedLevel,
       xp: savedXp,
       coins: coinsVal,
       euros: coinsVal,
       photoURL: resolvedAvatar.image,
-      streak: 0,
+      streak: savedStreak,
       gamesPlayed: 0,
       wins: 0,
       losses: 0,
+      draws: 0,
       questionsAnswered: 0,
       correctAnswers: 0,
       incorrectAnswers: 0,
       totalQuestions: 0,
-      bestStreak: 0,
+      bestStreak: savedStreak,
       unlockedAchievements: [],
       claimedAchievements: {},
       categoryStats: {},
@@ -140,10 +145,11 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       equipped: {
         avatar: resolvedAvatar.image,
         avatarId: resolvedAvatar.id || STARTER_AVATAR_ID,
+        frameId: savedFrame || 'default',
         title: savedTitleId,
         titleId: savedTitleId,
         titleName: savedTitleName,
-        arena: 'arena_1',
+        arena: savedArena,
       },
       consumables: { help5050: 0, freezeTime: 0, publicVote: 0, hints: 0 },
     }
@@ -163,22 +169,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [selectedDistrictInput, setSelectedDistrictInput] = useState('')
   const [selectedCityInput, setSelectedCityInput] = useState('')
   const [isSubmittingDistrict, setIsSubmittingDistrict] = useState(false)
-  const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
-  const [sessionConflictMessage, setSessionConflictMessage] = useState('A tua conta foi iniciada noutro dispositivo.')
 
   // Referências para controlo de listeners e retries sem re-render excessivo
   const snapshotUnsubRef = useRef<(() => void) | null>(null)
-
-  const handleSessionExpulsion = useCallback(async (msg = 'A tua conta foi iniciada noutro dispositivo.') => {
-    console.warn('[AUTH][SESSION] Sessão terminada por conflito:', msg)
-    setSessionConflictMessage(msg)
-    setIsSessionConflictOpen(true)
-    if (snapshotUnsubRef.current) {
-      snapshotUnsubRef.current()
-      snapshotUnsubRef.current = null
-    }
-    await terminateLocalSession(msg)
-  }, [])
   const firestoreRetryCountRef = useRef(0)
   const firestoreRetryTimerRef = useRef<NodeJS.Timeout | null>(null)
   const currentUidRef = useRef<string | null>(null)
@@ -253,28 +246,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('[AUTH] Ligação de rede restaurada.')
       setAuthStatus((prev) => (prev === 'NETWORK_TEMPORARY_ERROR' ? (user ? 'AUTHENTICATED' : 'AUTH_UNAUTHENTICATED') : prev))
 
-      if (user?.uid) {
-        // Validação autoritativa imediata contra o servidor ao regressar a ligação
-        try {
-          const { getDocFromServer } = await import('firebase/firestore')
-          const serverSnap = await getDocFromServer(doc(db, 'users', user.uid))
-          if (serverSnap.exists()) {
-            const sData = serverSnap.data() || {}
-            const sRemoteSessionId = sData.activeSession?.sessionId || sData.currentSessionId
-            const curLocalSessionId = getLocalSessionId()
-            if (sRemoteSessionId && curLocalSessionId && sRemoteSessionId !== curLocalSessionId) {
-              console.warn('[AUTH][RECONNECT] Sessão foi assumida por outro dispositivo durante a quebra de ligação!')
-              void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
-              return
-            }
-          }
-        } catch (reconnectErr) {
-          console.warn('[AUTH][RECONNECT] Aviso ao revalidar sessão no servidor pós-reconexão:', reconnectErr)
-        }
-
-        if (!profile) {
-          subscribeToUserProfile(user)
-        }
+      if (user?.uid && !profile) {
+        subscribeToUserProfile(user)
       }
     }
 
@@ -400,37 +373,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (docSnap.exists()) {
             const data = docSnap.data()
 
-            // 1. Verificação Estrita de Sessão Única Oficial (1 Conta = 1 Sessão Ativa)
-            const remoteSession = data.activeSession
-            const remoteSessionId = remoteSession?.sessionId || data.currentSessionId
-            const localSessionId = getLocalSessionId()
-
-            if (!remoteSessionId) {
-              // Conta sem sessão registada no Firestore (ex: legado ou inicial)
+            // Sincronização multi-dispositivo: a conta Firebase é a única autoridade.
+            // Todos os dispositivos (PC, Telemóvel, APK) acedem em simultâneo aos mesmos dados.
+            if (!data.activeSession?.sessionId && !data.currentSessionId) {
               void registerUserSession(currentUser)
-            } else if (localSessionId) {
-              if (remoteSessionId !== localSessionId) {
-                // A CONTA FOI INICIADA NOUTRO DISPOSITIVO!
-                if (docSnap.metadata.fromCache && !navigator.onLine) {
-                  console.warn('[AUTH][SESSION] Snapshot de cache offline detetado durante instabilidade de rede. Sessão preservada.')
-                } else {
-                  console.warn('[AUTH][SESSION] Sessão remota (' + remoteSessionId + ') != Sessão local (' + localSessionId + '). A conta foi iniciada noutro dispositivo!')
-                  void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
-                  return
-                }
-              }
-            } else {
-              // localSessionId é nulo (ex: primeira abertura da aba no mesmo browser ou storage limpo)
-              const currentDeviceId = getOrCreateDeviceId()
-              if (remoteSession?.deviceId && remoteSession.deviceId === currentDeviceId) {
-                // Mesmo dispositivo/browser físico: sincroniza ID da sessão oficial
-                setLocalSessionId(remoteSessionId)
-              } else {
-                // A sessão ativa pertence a OUTRO dispositivo! Expulsa esta sessão para não sobrescrever o dispositivo ativo
-                console.warn('[AUTH][SESSION] Sessão ativa pertence a outro dispositivo:', remoteSession?.deviceId)
-                void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
-                return
-              }
             }
 
             const coinsVal = extractUserCoins(data)
@@ -533,6 +479,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               title: equippedTitleNameVal,
               equippedTitle: equippedTitleNameVal,
               equippedTitleId: equippedTitleIdVal,
+              equippedFrame: equippedData.frameId || data.equippedFrame || (data.equipped as any)?.frameId || null,
+              equippedArena: equippedData.arenaId || data.equippedArena || (data.equipped as any)?.arena || 'arena_1',
+              equippedEmotes: Array.isArray(data.equippedEmotes) ? data.equippedEmotes : (Array.isArray(data.equipped?.emotes) ? data.equipped.emotes : ['provocacao_1', 'provocacao_2', 'provocacao_3', 'provocacao_4']),
+              equippedTaunts: Array.isArray(data.equippedTaunts) ? data.equippedTaunts : (Array.isArray(data.equipped?.taunts) ? data.equipped.taunts : ['pack_basico']),
+              preferences: data.preferences || {},
               level: levelVal,
               xp: xpVal,
               coins: coinsVal,
@@ -542,11 +493,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
               wins: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
               losses: typeof data.losses === 'number' ? data.losses : Math.max(0, (data.gamesPlayed || 0) - (data.wins || 0)),
+              draws: typeof data.draws === 'number' ? data.draws : (data.stats?.duelsDrawn || 0),
               questionsAnswered: typeof data.questionsAnswered === 'number' ? data.questionsAnswered : (data.totalQuestions || 0),
               correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
               incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
               totalQuestions: typeof data.totalQuestions === 'number' ? data.totalQuestions : 0,
               bestStreak: typeof data.bestStreak === 'number' ? data.bestStreak : 0,
+              districtPoints: typeof data.districtPoints === 'number' ? data.districtPoints : 0,
+              districtGamesPlayed: typeof data.districtGamesPlayed === 'number' ? data.districtGamesPlayed : 0,
+              cityPoints: typeof data.cityPoints === 'number' ? data.cityPoints : 0,
+              cityGamesPlayed: typeof data.cityGamesPlayed === 'number' ? data.cityGamesPlayed : 0,
+              multiplayer: data.multiplayer || {},
+              events: data.events || {},
               unlockedAchievements: Array.isArray(data.unlockedAchievements) ? data.unlockedAchievements : [],
               claimedAchievements: (data.claimedAchievements as Record<string, boolean>) || {},
               categoryStats: (data.categoryStats as Record<string, any>) || {},
@@ -567,10 +525,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 ...(data.equipped || {}),
                 avatar: avatarVal,
                 avatarId: avatarIdVal,
+                frameId: equippedData.frameId || data.equippedFrame || 'default',
                 title: equippedTitleIdVal,
                 titleId: equippedTitleIdVal,
                 titleName: equippedTitleNameVal,
-                arena: (data.equipped as any)?.arena || 'arena_1',
+                arena: equippedData.arenaId || (data.equipped as any)?.arena || 'arena_1',
               },
               consumables: {
                 help5050: invData.utilities.fiftyFifty,
@@ -588,6 +547,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             // Cache local para restauração imediata em futuros carregamentos
             if (typeof window !== 'undefined') {
               try {
+                localStorage.setItem('cached_uid', currentUser.uid)
                 localStorage.setItem('user_coins', String(coinsVal))
                 localStorage.setItem('user_euros', String(coinsVal))
                 localStorage.setItem('user_xp', String(xpVal))
@@ -604,6 +564,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_equipped_avatar', avatarVal)
                 localStorage.setItem('user_equipped_avatar_id', avatarIdVal)
                 localStorage.setItem('equipped_avatar_id', avatarIdVal)
+                if (equippedData.frameId) {
+                  localStorage.setItem('user_equipped_frame', equippedData.frameId)
+                }
+                if (equippedData.arenaId) {
+                  localStorage.setItem('equipped_arena', equippedData.arenaId)
+                }
                 localStorage.setItem('equipped_title_id', equippedTitleIdVal)
                 localStorage.setItem('equipped_title', equippedTitleNameVal)
                 localStorage.setItem('user_equipped_title', equippedTitleNameVal)
@@ -611,6 +577,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: coinsVal } }))
                 window.dispatchEvent(new CustomEvent('profile_updated', { detail: loadedProfile }))
                 window.dispatchEvent(new CustomEvent('inventory_updated'))
+                window.dispatchEvent(new Event('avatarChanged'))
+                window.dispatchEvent(new Event('frameChanged'))
+                window.dispatchEvent(new Event('arenaChanged'))
               } catch (storageErr) {
                 console.warn('[AUTH] Storage local restrito:', storageErr)
               }
@@ -635,6 +604,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                   title: equippedTitleNameVal,
                   equippedTitle: equippedTitleNameVal,
                   equippedTitleId: equippedTitleIdVal,
+                  equippedFrame: equippedData.frameId || null,
+                  wins1v1: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
+                  losses1v1: typeof data.losses === 'number' ? data.losses : (data.stats?.duelsLost || 0),
+                  gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
                   updatedAt: serverTimestamp(),
                 },
                 { merge: true },
@@ -867,24 +840,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
   }, [subscribeToUserProfile])
-
-  const handleSessionConflictConfirm = useCallback(() => {
-    setIsSessionConflictOpen(false)
-    if (typeof window !== 'undefined') {
-      window.location.href = '/entrar?reason=session_conflict'
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleSupersededEvent = (e: Event) => {
-      const detail = (e as CustomEvent<{ reason?: string }>)?.detail
-      const msg = detail?.reason || 'A tua conta foi iniciada noutro dispositivo.'
-      setSessionConflictMessage(msg)
-      setIsSessionConflictOpen(true)
-    }
-    window.addEventListener('session_superseded', handleSupersededEvent)
-    return () => window.removeEventListener('session_superseded', handleSupersededEvent)
-  }, [])
 
   const pathname = usePathname()
   const isGameOrProfileRoute = Boolean(
@@ -1136,12 +1091,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           </div>
         </div>
       )}
-
-      <SessionConflictModal
-        isOpen={isSessionConflictOpen}
-        message={sessionConflictMessage}
-        onConfirm={handleSessionConflictConfirm}
-      />
     </AuthContext.Provider>
   )
 }

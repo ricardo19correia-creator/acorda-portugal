@@ -167,20 +167,18 @@ function JogarContainer() {
   // Uma partida só começa após uma ação explícita do utilizador (parâmetros de partida presentes)
   const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || eventParam || eventSlugParam)
 
-  // Limpeza de resíduos de sessão se estiver na Central de Jogo (evita retoma acidental)
+  // Limpeza de resíduos de partida se estiver na Central de Jogo (evita retoma acidental)
   useEffect(() => {
     if (!isMatch) {
       setGlobalArenaMatchActive(false)
       try {
         if (typeof window !== 'undefined') {
           localStorage.removeItem('active_game_session')
-          localStorage.removeItem('active_session_id')
           sessionStorage.removeItem('active_game_session')
-          sessionStorage.removeItem('active_session_id')
           sessionStorage.removeItem('ap_error_auto_retried')
         }
       } catch (err) {
-        console.warn('[JogarContainer] Limpeza segura de sessão:', err)
+        console.warn('[JogarContainer] Limpeza segura de partida:', err)
       }
     }
   }, [isMatch])

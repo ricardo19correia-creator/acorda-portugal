@@ -9,7 +9,7 @@ import {
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
 import { extractUserXp } from '@/lib/economy-helpers'
-import { getLocalSessionId } from '@/lib/session-manager'
+
 
 export interface AwardMatchRewardParams {
   userId: string
@@ -173,14 +173,6 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? (userSnap.data() as Partial<UserProfile>) : {}
 
-      // B.1. Validação Estrita de Sessão Única Oficial (Impede gravação de resultados por sessão revogada)
-      const activeSessionId = (userData as any)?.activeSession?.sessionId || (userData as any)?.currentSessionId
-      const localSessionId = getLocalSessionId()
-      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
-        console.error(`[XP][SECURITY] Tentativa de gravação de resultado por sessão revogada! Remote: ${activeSessionId}, Local: ${localSessionId}`)
-        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
-      }
-
       const currentXp = extractUserXp(userData, 0)
       const currentCoins = typeof userData.coins === 'number' ? userData.coins : (typeof userData.euros === 'number' ? userData.euros : 50)
       const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
@@ -331,11 +323,13 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         processedAt: serverTimestamp(),
       })
 
-      // I. Atualizar documento do utilizador
+      // I. Atualizar documento do utilizador (Operações Estritamente Atómicas para Concorrência Multi-Dispositivo)
       const userUpdatePayload: Record<string, any> = {
-        xp: nextTotalXp,
-        coins: nextTotalCoins,
-        euros: nextTotalCoins,
+        xp: increment(calculatedXp),
+        coins: increment(totalAwardedCoins),
+        euros: increment(totalAwardedCoins),
+        acordas: increment(totalAwardedCoins),
+        moedas: increment(totalAwardedCoins),
         level: newLevel,
         streak: nextStreak,
         lastPlayedDate: todayStr,
@@ -344,6 +338,12 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         correctAnswers: increment(correctAnswers),
         incorrectAnswers: increment(Math.max(0, totalQuestions - correctAnswers)),
         totalQuestions: increment(totalQuestions),
+        'stats.totalGames': increment(1),
+        'stats.totalQuestions': increment(totalQuestions),
+        'stats.correctAnswers': increment(correctAnswers),
+        'stats.incorrectAnswers': increment(Math.max(0, totalQuestions - correctAnswers)),
+        'stats.totalScore': increment(score),
+        'stats.totalXp': increment(calculatedXp),
         lastPlayedAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       }
@@ -357,9 +357,17 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       }
 
       if (matchType === 'duel_1v1') {
-        if (isWinner) userUpdatePayload.wins = increment(1)
-        else if (isDraw) userUpdatePayload.draws = increment(1)
-        else userUpdatePayload.losses = increment(1)
+        if (isWinner) {
+          userUpdatePayload.wins = increment(1)
+          userUpdatePayload['stats.duelsWon'] = increment(1)
+        } else if (isDraw) {
+          userUpdatePayload.draws = increment(1)
+          userUpdatePayload['stats.duelsDrawn'] = increment(1)
+        } else {
+          userUpdatePayload.losses = increment(1)
+          userUpdatePayload['stats.duelsLost'] = increment(1)
+        }
+        userUpdatePayload['stats.totalDuels'] = increment(1)
       } else if (matchType === 'conquista_distrito') {
         const targetDistrict = district || userData.district || 'Portugal'
         userUpdatePayload.districtPoints = increment(calculatedXp)
@@ -394,7 +402,8 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
           photoURL: userData.photoURL || null,
           district: userData.district || 'Portugal',
           level: newLevel,
-          xp: nextTotalXp,
+          xp: increment(calculatedXp),
+          gamesPlayed: increment(1),
           updatedAt: serverTimestamp(),
         },
         { merge: true }

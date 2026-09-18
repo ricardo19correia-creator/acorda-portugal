@@ -42,7 +42,7 @@ import { cn } from '@/lib/utils'
 export function SiteHeader() {
   const router = useRouter()
   const { user, profile, authResolved } = useAuth()
-  const { formattedCoins, isBalancePulsing } = useEconomy()
+  const { formattedCoins, isBalancePulsing, isLoaded: isEconomyLoaded } = useEconomy()
   const [open, setOpen] = useState(false)
 
   const effectiveXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
@@ -167,7 +167,13 @@ export function SiteHeader() {
             )}
           >
             <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums font-mono">{formattedCoins}</span>
+            <span className="tabular-nums font-mono">
+              {user && !isEconomyLoaded ? (
+                <span className="inline-block w-8 h-3.5 bg-emerald-500/20 rounded animate-pulse" />
+              ) : (
+                formattedCoins
+              )}
+            </span>
           </Link>
 
           {!user && (
@@ -193,7 +199,13 @@ export function SiteHeader() {
             className="flex items-center gap-1 rounded-xl border border-emerald-500/30 bg-emerald-950/60 px-2 py-1 text-xs font-bold text-emerald-400"
           >
             <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums font-mono text-[11px]">{formattedCoins}</span>
+            <span className="tabular-nums font-mono text-[11px]">
+              {user && !isEconomyLoaded ? (
+                <span className="inline-block w-6 h-3 bg-emerald-500/20 rounded animate-pulse" />
+              ) : (
+                formattedCoins
+              )}
+            </span>
           </Link>
 
           {/* Botão Hambúrguer (Mobile) */}

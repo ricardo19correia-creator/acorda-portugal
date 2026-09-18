@@ -28,6 +28,7 @@ export interface EconomyContextType {
   coins: number
   formattedCoins: string
   isBalancePulsing: boolean
+  isLoaded: boolean
   addCoins: (amount: number, reason?: string) => Promise<number>
   deductCoins: (amount: number, reason?: string) => Promise<boolean>
   refreshBalance: () => Promise<number>
@@ -38,6 +39,7 @@ const EconomyContext = createContext<EconomyContextType | null>(null)
 export function EconomyProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth()
   const [coins, setCoins] = useState<number>(0)
+  const [isLoaded, setIsLoaded] = useState(false)
   const [isBalancePulsing, setIsBalancePulsing] = useState(false)
 
   // Leitura segura de localStorage exclusivamente dentro de useEffect (elimina Hydration Mismatch #418)
@@ -63,6 +65,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
   // 1. Subscrição em Tempo Real ao Firestore (users/{uid})
   useEffect(() => {
     if (!user?.uid) {
+      setIsLoaded(true)
       return
     }
 
@@ -72,6 +75,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
       unsubscribe = onSnapshot(
         userRef,
         (snapshot) => {
+          setIsLoaded(true)
           if (snapshot.exists()) {
             const data = snapshot.data()
             const firestoreBalance = extractUserCoins(data)
@@ -101,10 +105,12 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
           }
         },
         (err) => {
+          setIsLoaded(true)
           console.warn('[ECONOMY] Aviso transitório no listener de saldo:', err)
         },
       )
     } catch (err) {
+      setIsLoaded(true)
       console.warn('[ECONOMY] Erro ao subscrever listener de saldo:', err)
     }
 
@@ -285,6 +291,7 @@ export function EconomyProvider({ children }: { children: ReactNode }) {
         coins,
         formattedCoins,
         isBalancePulsing,
+        isLoaded,
         addCoins,
         deductCoins,
         refreshBalance,
@@ -299,6 +306,7 @@ const fallbackEconomy: EconomyContextType = {
   coins: 0,
   formattedCoins: '0',
   isBalancePulsing: false,
+  isLoaded: false,
   addCoins: async () => 0,
   deductCoins: async () => false,
   refreshBalance: async () => 0,
