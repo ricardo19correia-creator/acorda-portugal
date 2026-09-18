@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import {
   collection,
+  doc,
   addDoc,
   serverTimestamp,
   query,
@@ -192,42 +193,64 @@ export default function FeedbackPage() {
       const sanitizedDescription = sanitizeInput(description)
       const sanitizedSteps = sanitizeInput(reproductionSteps)
 
-      const feedbackData = {
-        userId: user.uid,
-        userDisplayName: user.displayName || profile?.displayName || 'Jogador Anónimo',
-        userEmail: user.email || '',
-        userPhotoURL: profile?.photoURL || user.photoURL || '',
+      // 1. Obter token de autenticação seguro do utilizador
+      const idToken = await user.getIdToken()
+      if (!idToken) {
+        throw new Error('Não foi possível verificar a tua sessão. Por favor, reinicia a sessão.')
+      }
+
+      // 2. Gerar ID único para o feedback (idempotência)
+      const feedbackId = doc(collection(db, 'feedback')).id
+
+      const payload = {
+        feedbackId,
         type,
         title: sanitizedTitle,
         description: sanitizedDescription,
+        message: sanitizedDescription,
         location: location || 'Outro',
         reproductionSteps: type === 'erro' ? sanitizedSteps : '',
-        status: 'NEW',
-        priority: 'MEDIUM',
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        appVersion: APP_FEEDBACK_VERSION,
+        pageUrl: typeof window !== 'undefined' ? window.location.href : 'https://acordaportugal.pt/feedback',
         platform: detectPlatform(),
         userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+        appVersion: APP_FEEDBACK_VERSION,
+        userName: user.displayName || profile?.displayName || 'Jogador Anónimo',
+        userDisplayName: user.displayName || profile?.displayName || 'Jogador Anónimo',
+        userEmail: user.email || '',
+        userPhotoURL: profile?.photoURL || user.photoURL || '',
       }
 
-      await addDoc(collection(db, 'feedback'), feedbackData)
+      // 3. Enviar para backend seguro que grava no Firestore e despacha email oficial
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify(payload),
+      })
 
-      // Record cooldown in localStorage
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Não foi possível enviar o feedback. Tenta novamente.')
+      }
+
+      // 4. Sucesso confirmado pelo backend: gravar cooldown e limpar formulário
       try {
         localStorage.setItem(STORAGE_KEY_COOLDOWN, Date.now().toString())
         setCooldownRemaining(COOLDOWN_SECONDS)
       } catch {}
 
-      // Reset form
       setTitle('')
       setDescription('')
       setReproductionSteps('')
       setSubmitSuccess(true)
     } catch (err: any) {
       console.error('[FEEDBACK SUBMIT ERROR]', err)
+      // Preserva o texto escrito pelo utilizador e apresenta a mensagem exata requerida
       setErrorMessage(
-        err?.message || 'Ocorreu um erro ao submeter o feedback. Por favor, tenta novamente.'
+        err?.message || 'Não foi possível enviar o feedback. Tenta novamente.'
       )
     } finally {
       setIsSubmitting(false)
@@ -391,11 +414,10 @@ export default function FeedbackPage() {
 
                 <div className="space-y-2 max-w-md mx-auto">
                   <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
-                    Obrigado pelo teu feedback!
+                    Feedback enviado com sucesso.
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    A tua mensagem foi registada com sucesso e associada à tua conta. A equipa de
-                    desenvolvimento irá analisar as informações.
+                  <p className="text-xs sm:text-sm text-emerald-400 font-medium leading-relaxed">
+                    Obrigado por ajudares a melhorar o Desafio Nacional.
                   </p>
                 </div>
 
@@ -614,7 +636,7 @@ export default function FeedbackPage() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>A ENVIAR FEEDBACK...</span>
+                        <span>Enviando...</span>
                       </>
                     ) : cooldownRemaining > 0 ? (
                       <>

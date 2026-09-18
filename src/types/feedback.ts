@@ -50,6 +50,15 @@ export interface FeedbackItem {
   createdAt: any
   updatedAt: any
 
+  userName?: string
+  message?: string
+  pageUrl?: string
+
+  emailSent?: boolean
+  emailSentAt?: any
+  emailError?: string | null
+  emailMessageId?: string | null
+
   adminNotes?: string
   resolvedAt?: any
   resolvedBy?: string

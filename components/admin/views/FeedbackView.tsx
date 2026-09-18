@@ -141,7 +141,9 @@ export function FeedbackView({ getIdToken, adminUser }: FeedbackViewProps) {
   }
 
   // Save Modal Changes
-  const handleSaveAction = async (action: 'UPDATE_STATUS' | 'UPDATE_PRIORITY' | 'UPDATE_NOTES' | 'RESOLVE' | 'DELETE') => {
+  const handleSaveAction = async (
+    action: 'UPDATE_STATUS' | 'UPDATE_PRIORITY' | 'UPDATE_NOTES' | 'RESOLVE' | 'DELETE' | 'RESEND_EMAIL'
+  ) => {
     if (!activeFeedback) return
     setIsSavingAction(true)
     setActionSuccessMsg(null)
@@ -503,6 +505,7 @@ export function FeedbackView({ getIdToken, adminUser }: FeedbackViewProps) {
                     <th className="px-4 py-3.5">Data</th>
                     <th className="px-4 py-3.5">Prioridade</th>
                     <th className="px-4 py-3.5">Status</th>
+                    <th className="px-4 py-3.5">Email Suporte</th>
                     <th className="px-4 py-3.5 text-right">Ação</th>
                   </tr>
                 </thead>
@@ -604,6 +607,21 @@ export function FeedbackView({ getIdToken, adminUser }: FeedbackViewProps) {
                           </span>
                         </td>
 
+                        {/* Email Suporte Status */}
+                        <td className="px-4 py-3.5 whitespace-nowrap">
+                          {item.emailSent ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                              <span>Email enviado ✓</span>
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                              <AlertTriangle className="w-3 h-3 text-amber-400" />
+                              <span>Email pendente/erro ⚠️</span>
+                            </span>
+                          )}
+                        </td>
+
                         {/* Ação */}
                         <td className="px-4 py-3.5 text-right whitespace-nowrap">
                           <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 group-hover:translate-x-0.5 transition-transform">
@@ -669,6 +687,18 @@ export function FeedbackView({ getIdToken, adminUser }: FeedbackViewProps) {
                           <span className={cn('w-1 h-1 rounded-full', statusCfg.dotClass)} />
                           <span>{statusCfg.label}</span>
                         </span>
+
+                        {item.emailSent ? (
+                          <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                            <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400" />
+                            <span>Email ✓</span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                            <AlertTriangle className="w-2.5 h-2.5 text-amber-400" />
+                            <span>Email ⚠️</span>
+                          </span>
+                        )}
                       </div>
                     </div>
 
@@ -799,6 +829,48 @@ export function FeedbackView({ getIdToken, adminUser }: FeedbackViewProps) {
                     {activeFeedback.reproductionSteps}
                   </p>
                 </div>
+              )}
+            </div>
+
+            {/* Estado do Envio de Email para suporte@acordaportugal.pt */}
+            <div
+              className={cn(
+                'p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs',
+                activeFeedback.emailSent
+                  ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                  : 'border-amber-500/30 bg-amber-500/10 text-amber-300'
+              )}
+            >
+              <div className="flex items-start gap-2.5">
+                {activeFeedback.emailSent ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                ) : (
+                  <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                )}
+                <div>
+                  <span className="block font-display font-black text-xs uppercase tracking-wide">
+                    {activeFeedback.emailSent
+                      ? 'Email enviado para suporte@acordaportugal.pt ✓'
+                      : 'Email pendente / erro de envio SMTP ⚠️'}
+                  </span>
+                  <span className="block text-[11px] text-slate-300 mt-0.5">
+                    {activeFeedback.emailSent
+                      ? `Despachado com sucesso${activeFeedback.emailSentAt ? ` a ${activeFeedback.emailSentAt}` : ''}`
+                      : `Registo: ${activeFeedback.emailError || 'O email ainda não foi entregue ao suporte.'}`}
+                  </span>
+                </div>
+              </div>
+
+              {!activeFeedback.emailSent && (
+                <button
+                  type="button"
+                  disabled={isSavingAction}
+                  onClick={() => handleSaveAction('RESEND_EMAIL')}
+                  className="shrink-0 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-display text-xs font-black uppercase tracking-wider transition cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center gap-1.5"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Reenviar Email</span>
+                </button>
               )}
             </div>
 

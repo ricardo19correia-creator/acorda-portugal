@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { verifyAdminRequest, recordAdminAuditLog } from '@/lib/admin-auth'
 import { getAdminFirestore } from '@/lib/firebase-admin'
+import { sendFeedbackNotificationEmail } from '@/lib/email-service'
 import type { FeedbackStatus, FeedbackPriority } from '@/types/feedback'
 
 export const dynamic = 'force-dynamic'
@@ -176,6 +177,42 @@ export async function PATCH(req: Request) {
         }
         auditAction = 'FEEDBACK_RESOLVED'
         details = `Feedback marcado como resolvido por ${adminIdentifier}`
+        break
+      }
+
+      case 'RESEND_EMAIL': {
+        try {
+          const emailResult = await sendFeedbackNotificationEmail({
+            feedbackId,
+            userName: currentData.userName || currentData.userDisplayName || 'Jogador',
+            userEmail: currentData.userEmail || '',
+            userId: currentData.userId || 'N/A',
+            type: currentData.type,
+            title: currentData.title,
+            message: currentData.message || currentData.description || '',
+            location: currentData.location,
+            reproductionSteps: currentData.reproductionSteps,
+            pageUrl: currentData.pageUrl || 'https://acordaportugal.pt/feedback',
+            device: `${currentData.platform || 'web'} • ${currentData.userAgent || 'N/A'}`,
+            date: new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),
+          })
+
+          updatePayload.emailSent = true
+          updatePayload.emailSentAt = nowIso
+          updatePayload.emailError = null
+          updatePayload.emailMessageId = emailResult.messageId
+
+          auditAction = 'FEEDBACK_EMAIL_RESENT'
+          details = `Email para suporte@acordaportugal.pt reenviado com sucesso por ${adminIdentifier}`
+        } catch (mailErr: any) {
+          updatePayload.emailSent = false
+          updatePayload.emailError = mailErr?.message || 'Falha ao reenviar email.'
+          await feedbackDocRef.update(updatePayload)
+          return NextResponse.json(
+            { error: `Falha ao reenviar email: ${mailErr?.message || 'Erro de transporte SMTP'}` },
+            { status: 502 }
+          )
+        }
         break
       }
 
