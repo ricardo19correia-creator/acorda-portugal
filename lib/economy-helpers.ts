@@ -132,15 +132,7 @@ export function extractUserXp(data: any, fallback = 0): number {
  */
 export function extractUserLevel(data: any, xp?: number): number {
   const resolvedXp = typeof xp === 'number' ? xp : extractUserXp(data, 0)
-  const calcLevel = calculateLevelProgress(resolvedXp).currentLevel.level
-  
-  // Se existir nível explícito no documento, validar que seja >= calcLevel
-  const explicitLevel = parseSafeNumber(data?.level || data?.nivel)
-  if (explicitLevel !== null && explicitLevel > calcLevel) {
-    return explicitLevel
-  }
-
-  return calcLevel
+  return calculateLevelProgress(resolvedXp).currentLevel.level
 }
 
 /**

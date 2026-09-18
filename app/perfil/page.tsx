@@ -195,8 +195,10 @@ function PerfilContent() {
   const [equippedEmotes, setEquippedEmotes] = useState<string[]>(DEFAULT_EQUIPPED_EMOTES)
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userCoins, setUserCoins] = useState<number>(() => profile?.coins ?? profile?.euros ?? 0)
-  const [userXp, setUserXp] = useState<number>(() => profile?.xp ?? 0)
-  const [userLevel, setUserLevel] = useState<number>(() => profile?.level ?? 1)
+  // XP e Nível canónicos e globais sincronizados em tempo real a partir do AuthProvider / Firestore
+  const userXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+  const progressInfo = calculateLevelProgress(userXp)
+  const userLevel = progressInfo.currentLevel.level
 
   // Abas Principais & Sub-Filtros Estruturados
   const [activeTab, setActiveTab] = useState<'progressao' | 'rankings' | 'estatisticas' | 'conquistas' | 'colecao' | 'historico'>(
@@ -579,11 +581,6 @@ function PerfilContent() {
         const liveBalance = profile?.coins !== undefined ? profile.coins : profile?.euros !== undefined ? profile.euros : savedCoins
         setUserCoins(liveBalance)
 
-        const cachedXp = typeof window !== 'undefined' ? Number(localStorage.getItem('user_xp') || 0) : 0
-        const currentXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? profile.xp : cachedXp
-        setUserXp(currentXp)
-        setUserLevel(calculateLevelProgress(currentXp).currentLevel.level)
-
         if (profile?.claimedAchievements) {
           setClaimedAchievements(profile.claimedAchievements)
         }
@@ -656,8 +653,6 @@ function PerfilContent() {
               localStorage.setItem('user_coins', String(coinsVal))
               localStorage.setItem('user_euros', String(coinsVal))
 
-              setUserXp(liveXp)
-              setUserLevel(liveLevel)
               localStorage.setItem('user_xp', String(liveXp))
               localStorage.setItem('user_level', String(liveLevel))
 
@@ -1426,9 +1421,9 @@ function PerfilContent() {
   const divisionColor = DIVISION_COLORS[divisionKey]?.text || 'text-amber-400'
   const streak = profile?.streak ?? (profile as any)?.currentStreak ?? (profile as any)?.streakCount ?? 0
   const bestStreak = profile?.bestStreak ?? (profile as any)?.maxStreak ?? streak
-  const xpCurrent = userXp % 1000
-  const xpTotalNext = 1000
-  const xpProgressPct = Math.min(100, Math.round((xpCurrent / xpTotalNext) * 100))
+  const xpCurrent = progressInfo.xpIntoLevel
+  const xpTotalNext = progressInfo.xpNeededForLevel || 1000
+  const xpProgressPct = Math.min(100, Math.round(progressInfo.progressPercentage))
   const wins = profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0
   const losses = profile?.losses ?? (profile as any)?.stats?.duelsLost ?? Math.max(0, (profile?.gamesPlayed || 0) - wins)
   const totalGames = profile?.gamesPlayed ?? (wins + losses)
@@ -1522,11 +1517,13 @@ function PerfilContent() {
               <div className="w-full bg-slate-800/90 rounded-full h-3 max-w-md mt-2 border border-slate-700/50 overflow-hidden shadow-inner">
                 <div 
                   className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 h-full rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" 
-                  style={{ width: `${Math.min(100, (userXp % 1000) / 10)}%` }}
+                  style={{ width: `${progressInfo.progressPercentage}%` }}
                 />
               </div>
               <p className="text-[11px] text-slate-400 font-medium">
-                {userXp % 1000} / 1.000 XP para Nível {userLevel + 1}
+                {progressInfo.isMaxLevel
+                  ? 'Nível Máximo Atingido!'
+                  : `${progressInfo.xpIntoLevel.toLocaleString('pt-PT')} / ${progressInfo.xpNeededForLevel.toLocaleString('pt-PT')} XP para Nível ${progressInfo.currentLevel.level + 1}`}
               </p>
             </div>
           </div>
@@ -1688,7 +1685,13 @@ function PerfilContent() {
                 <div className="bg-slate-950/80 border border-slate-800 rounded-2xl px-5 py-3 text-right">
                   <p className="text-[11px] uppercase font-bold text-slate-400">Próximo Nível</p>
                   <p className="text-lg font-mono font-black text-emerald-400">
-                    {1000 - xpCurrent} XP <span className="text-xs text-slate-400 font-normal">restantes</span>
+                    {progressInfo.isMaxLevel ? (
+                      'Nível Máximo'
+                    ) : (
+                      <>
+                        {progressInfo.xpRemaining.toLocaleString('pt-PT')} XP <span className="text-xs text-slate-400 font-normal">restantes</span>
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
@@ -1696,14 +1699,14 @@ function PerfilContent() {
               {/* Barra de XP */}
               <div className="relative z-10 space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono font-bold text-slate-300">
-                  <span>{xpCurrent} XP</span>
-                  <span>{xpProgressPct}%</span>
-                  <span>1.000 XP</span>
+                  <span>{progressInfo.xpIntoLevel.toLocaleString('pt-PT')} XP</span>
+                  <span>{Math.round(progressInfo.progressPercentage)}%</span>
+                  <span>{progressInfo.isMaxLevel ? 'Nível Máximo' : `${progressInfo.xpNeededForLevel.toLocaleString('pt-PT')} XP`}</span>
                 </div>
                 <div className="w-full bg-slate-950 rounded-full h-4 border border-slate-800 p-0.5 overflow-hidden shadow-inner">
                   <div
                     className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 h-full rounded-full transition-all duration-700 shadow-[0_0_15px_rgba(16,185,129,0.5)]"
-                    style={{ width: `${xpProgressPct}%` }}
+                    style={{ width: `${progressInfo.progressPercentage}%` }}
                   />
                 </div>
               </div>

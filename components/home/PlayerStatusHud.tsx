@@ -22,7 +22,7 @@ export function PlayerStatusHud({ user, profile, onOpenAuth }: PlayerStatusHudPr
   if (user) {
     const xp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
     const levelInfo = calculateLevelProgress(xp)
-    const level = profile?.level || levelInfo.currentLevel.level || 1
+    const level = levelInfo.currentLevel.level
     const district = (profile?.district || 'Portugal').trim()
     const streak = typeof profile?.streak === 'number' ? profile.streak : 0
     const displayName = profile?.displayName || user?.displayName || 'Jogador'

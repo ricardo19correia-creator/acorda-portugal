@@ -20,6 +20,9 @@ import {
   getLocalSessionId,
   setLocalSessionId,
   clearLocalSession,
+  terminateLocalSession,
+  getOrCreateDeviceId,
+  isSessionTerminated,
 } from '@/lib/session-manager'
 import { SessionConflictModal } from '@/components/session-conflict-modal'
 import {
@@ -86,6 +89,9 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
     const savedAvatarId = localStorage.getItem('user_equipped_avatar_id') || localStorage.getItem('equipped_avatar_id') || STARTER_AVATAR_ID
     const savedTitleId = localStorage.getItem('equipped_title_id') || DEFAULT_STARTER_TITLE_ID
     const savedTitleName = localStorage.getItem('equipped_title') || DEFAULT_STARTER_TITLE_NAME
+    const savedXpRaw = localStorage.getItem('user_xp')
+    const savedXp = savedXpRaw && !isNaN(Number(savedXpRaw)) ? Math.max(0, Number(savedXpRaw)) : 0
+    const savedLevel = calculateLevelProgress(savedXp).currentLevel.level
 
     const coinsVal = savedCoins && !isNaN(Number(savedCoins)) ? Number(savedCoins) : ECONOMY_CONFIG.INITIAL_BONUS_COINS
     const resolvedAvatar = getAvatarById(savedAvatarId)
@@ -104,8 +110,8 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
       title: savedTitleName,
       equippedTitle: savedTitleName,
       equippedTitleId: savedTitleId,
-      level: 1,
-      xp: 0,
+      level: savedLevel,
+      xp: savedXp,
       coins: coinsVal,
       euros: coinsVal,
       photoURL: resolvedAvatar.image,
@@ -158,9 +164,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [selectedCityInput, setSelectedCityInput] = useState('')
   const [isSubmittingDistrict, setIsSubmittingDistrict] = useState(false)
   const [isSessionConflictOpen, setIsSessionConflictOpen] = useState(false)
+  const [sessionConflictMessage, setSessionConflictMessage] = useState('A tua conta foi iniciada noutro dispositivo.')
 
   // Referências para controlo de listeners e retries sem re-render excessivo
   const snapshotUnsubRef = useRef<(() => void) | null>(null)
+
+  const handleSessionExpulsion = useCallback(async (msg = 'A tua conta foi iniciada noutro dispositivo.') => {
+    console.warn('[AUTH][SESSION] Sessão terminada por conflito:', msg)
+    setSessionConflictMessage(msg)
+    setIsSessionConflictOpen(true)
+    if (snapshotUnsubRef.current) {
+      snapshotUnsubRef.current()
+      snapshotUnsubRef.current = null
+    }
+    await terminateLocalSession(msg)
+  }, [])
   const firestoreRetryCountRef = useRef(0)
   const firestoreRetryTimerRef = useRef<NodeJS.Timeout | null>(null)
   const currentUidRef = useRef<string | null>(null)
@@ -231,11 +249,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 1. Resiliência de Rede Passiva e Sincronização em Tempo Real via Eventos
   useEffect(() => {
-    const handleOnline = () => {
+    const handleOnline = async () => {
       console.log('[AUTH] Ligação de rede restaurada.')
       setAuthStatus((prev) => (prev === 'NETWORK_TEMPORARY_ERROR' ? (user ? 'AUTHENTICATED' : 'AUTH_UNAUTHENTICATED') : prev))
-      if (user?.uid && !profile) {
-        subscribeToUserProfile(user)
+
+      if (user?.uid) {
+        // Validação autoritativa imediata contra o servidor ao regressar a ligação
+        try {
+          const { getDocFromServer } = await import('firebase/firestore')
+          const serverSnap = await getDocFromServer(doc(db, 'users', user.uid))
+          if (serverSnap.exists()) {
+            const sData = serverSnap.data() || {}
+            const sRemoteSessionId = sData.activeSession?.sessionId || sData.currentSessionId
+            const curLocalSessionId = getLocalSessionId()
+            if (sRemoteSessionId && curLocalSessionId && sRemoteSessionId !== curLocalSessionId) {
+              console.warn('[AUTH][RECONNECT] Sessão foi assumida por outro dispositivo durante a quebra de ligação!')
+              void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
+              return
+            }
+          }
+        } catch (reconnectErr) {
+          console.warn('[AUTH][RECONNECT] Aviso ao revalidar sessão no servidor pós-reconexão:', reconnectErr)
+        }
+
+        if (!profile) {
+          subscribeToUserProfile(user)
+        }
       }
     }
 
@@ -361,13 +400,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (docSnap.exists()) {
             const data = docSnap.data()
 
-            // Sincronização segura de ID de sessão única
-            const remoteSessionId = data.currentSessionId
+            // 1. Verificação Estrita de Sessão Única Oficial (1 Conta = 1 Sessão Ativa)
+            const remoteSession = data.activeSession
+            const remoteSessionId = remoteSession?.sessionId || data.currentSessionId
             const localSessionId = getLocalSessionId()
+
             if (!remoteSessionId) {
+              // Conta sem sessão registada no Firestore (ex: legado ou inicial)
               void registerUserSession(currentUser)
-            } else if (!localSessionId || remoteSessionId !== localSessionId) {
-              setLocalSessionId(remoteSessionId)
+            } else if (localSessionId) {
+              if (remoteSessionId !== localSessionId) {
+                // A CONTA FOI INICIADA NOUTRO DISPOSITIVO!
+                if (docSnap.metadata.fromCache && !navigator.onLine) {
+                  console.warn('[AUTH][SESSION] Snapshot de cache offline detetado durante instabilidade de rede. Sessão preservada.')
+                } else {
+                  console.warn('[AUTH][SESSION] Sessão remota (' + remoteSessionId + ') != Sessão local (' + localSessionId + '). A conta foi iniciada noutro dispositivo!')
+                  void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
+                  return
+                }
+              }
+            } else {
+              // localSessionId é nulo (ex: primeira abertura da aba no mesmo browser ou storage limpo)
+              const currentDeviceId = getOrCreateDeviceId()
+              if (remoteSession?.deviceId && remoteSession.deviceId === currentDeviceId) {
+                // Mesmo dispositivo/browser físico: sincroniza ID da sessão oficial
+                setLocalSessionId(remoteSessionId)
+              } else {
+                // A sessão ativa pertence a OUTRO dispositivo! Expulsa esta sessão para não sobrescrever o dispositivo ativo
+                console.warn('[AUTH][SESSION] Sessão ativa pertence a outro dispositivo:', remoteSession?.deviceId)
+                void handleSessionExpulsion('A tua conta foi iniciada noutro dispositivo.')
+                return
+              }
             }
 
             const coinsVal = extractUserCoins(data)
@@ -439,6 +502,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 },
                 { merge: true }
               ).catch((mErr) => console.warn('[AUTH] Auto-migração não fatal:', mErr))
+            }
+
+            // Se o documento Firestore ainda não tem o campo oficial 'xp' mas contém valor equivalente
+            if (data.xp === undefined && xpVal > 0) {
+              setDoc(
+                userDocRef,
+                {
+                  xp: xpVal,
+                  level: levelVal,
+                },
+                { merge: true }
+              ).catch((xpErr) => console.warn('[AUTH] Auto-migração não fatal de XP:', xpErr))
             }
 
             const invData = extractUserInventory(data)
@@ -796,8 +871,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const handleSessionConflictConfirm = useCallback(() => {
     setIsSessionConflictOpen(false)
     if (typeof window !== 'undefined') {
-      window.location.href = '/entrar'
+      window.location.href = '/entrar?reason=session_conflict'
     }
+  }, [])
+
+  useEffect(() => {
+    const handleSupersededEvent = (e: Event) => {
+      const detail = (e as CustomEvent<{ reason?: string }>)?.detail
+      const msg = detail?.reason || 'A tua conta foi iniciada noutro dispositivo.'
+      setSessionConflictMessage(msg)
+      setIsSessionConflictOpen(true)
+    }
+    window.addEventListener('session_superseded', handleSupersededEvent)
+    return () => window.removeEventListener('session_superseded', handleSupersededEvent)
   }, [])
 
   const pathname = usePathname()
@@ -1053,6 +1139,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       <SessionConflictModal
         isOpen={isSessionConflictOpen}
+        message={sessionConflictMessage}
         onConfirm={handleSessionConflictConfirm}
       />
     </AuthContext.Provider>
@@ -1078,3 +1165,22 @@ export function useAuth(): AuthState {
   const context = useContext(AuthContext)
   return context || fallbackAuthState
 }
+
+/**
+ * Hook oficial canónico de Estado Global de Perfil e XP.
+ * Sincronizado em tempo real via Firestore listener em todas as páginas e dispositivos.
+ */
+export function useUserProfile() {
+  const authState = useAuth()
+  const xp = typeof authState.profile?.xp === 'number' && !isNaN(authState.profile.xp) ? Math.max(0, authState.profile.xp) : 0
+  const progressInfo = calculateLevelProgress(xp)
+  const level = progressInfo.currentLevel.level
+
+  return {
+    ...authState,
+    xp,
+    level,
+    progressInfo,
+  }
+}
+

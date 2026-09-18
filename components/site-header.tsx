@@ -21,7 +21,6 @@ import {
   ChevronRight,
   ShieldCheck,
   Smartphone,
-  BookOpen,
   Calendar,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
@@ -45,9 +44,10 @@ export function SiteHeader() {
   const { formattedCoins, isBalancePulsing } = useEconomy()
   const [open, setOpen] = useState(false)
 
-  const progressInfo = profile?.xp ? calculateLevelProgress(profile.xp) : null
-  const userLevel = profile?.level || progressInfo?.currentLevel.level || 1
-  const userTier = getPlayerDisplayTitle(profile, progressInfo?.currentLevel.cleanTitle || 'Curioso')
+  const effectiveXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+  const progressInfo = calculateLevelProgress(effectiveXp)
+  const userLevel = progressInfo.currentLevel.level
+  const userTier = getPlayerDisplayTitle(profile, progressInfo.currentLevel.cleanTitle)
 
   const handleLogout = async () => {
     setOpen(false)
@@ -68,7 +68,7 @@ export function SiteHeader() {
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
-    { label: 'História', href: '/historia', icon: BookOpen },
+    { label: 'Beta', href: '/beta', icon: Sparkles },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]
@@ -80,7 +80,7 @@ export function SiteHeader() {
     { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
-    { label: 'A Nossa História', href: '/historia', icon: BookOpen },
+    { label: 'Beta', href: '/beta', icon: Sparkles },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
   ]

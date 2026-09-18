@@ -8,6 +8,8 @@ import {
   getCanonicalCategory,
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
+import { extractUserXp } from '@/lib/economy-helpers'
+import { getLocalSessionId } from '@/lib/session-manager'
 
 export interface AwardMatchRewardParams {
   userId: string
@@ -171,9 +173,17 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? (userSnap.data() as Partial<UserProfile>) : {}
 
-      const currentXp = typeof userData.xp === 'number' && !isNaN(userData.xp) ? Math.max(0, userData.xp) : 0
+      // B.1. Validação Estrita de Sessão Única Oficial (Impede gravação de resultados por sessão revogada)
+      const activeSessionId = (userData as any)?.activeSession?.sessionId || (userData as any)?.currentSessionId
+      const localSessionId = getLocalSessionId()
+      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+        console.error(`[XP][SECURITY] Tentativa de gravação de resultado por sessão revogada! Remote: ${activeSessionId}, Local: ${localSessionId}`)
+        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+      }
+
+      const currentXp = extractUserXp(userData, 0)
       const currentCoins = typeof userData.coins === 'number' ? userData.coins : (typeof userData.euros === 'number' ? userData.euros : 50)
-      const oldLevel = typeof userData.level === 'number' ? userData.level : calculateLevelProgress(currentXp).currentLevel.level
+      const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
 
       // C. Novo Total e Subida de Nível
       const nextTotalXp = currentXp + calculatedXp

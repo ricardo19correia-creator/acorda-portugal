@@ -1,6 +1,7 @@
 import { doc, runTransaction, serverTimestamp, increment } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
+import { extractUserXp } from '@/lib/economy-helpers'
 
 export interface DailyRewardItem {
   day: number
@@ -171,7 +172,7 @@ export async function claimDailyReward(userId: string): Promise<ClaimRewardResul
 
       const reward = DAILY_REWARDS_SCHEDULE.find((r) => r.day === dayToClaim) || DAILY_REWARDS_SCHEDULE[0]
 
-      const currentXp = typeof userData.xp === 'number' && !isNaN(userData.xp) ? userData.xp : 0
+      const currentXp = extractUserXp(userData, 0)
       const currentCoins = typeof userData.coins === 'number' && !isNaN(userData.coins) ? userData.coins : (typeof userData.euros === 'number' ? userData.euros : 0)
 
       const xpGain = reward.xp || 0

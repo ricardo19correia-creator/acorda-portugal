@@ -11,7 +11,7 @@ const LINKS = [
   { label: 'App Android', href: '/download' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Categorias', href: '/categorias' },
-  { label: 'Onde Tudo Começou', href: '/historia' },
+  { label: 'Beta', href: '/beta' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Explorar & Sobre', href: '/explorar' },
   { label: 'Loja', href: '/loja' },
@@ -76,9 +76,9 @@ export function SiteFooter() {
           <p className="text-center font-medium tracking-wide">
             Uma criação de{' '}
             <Link
-              href="/historia"
+              href="/beta"
               className="font-bold text-foreground hover:text-emerald-400 transition-colors underline decoration-emerald-500/30 underline-offset-4"
-              title="A Nossa História — Onde Tudo Começou"
+              title="Acorda Portugal — Beta Público"
             >
               Riky Moreira
             </Link>{' '}

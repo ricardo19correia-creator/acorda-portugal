@@ -8,6 +8,7 @@ import {
   computeCategoryBreakdownFromAnswers,
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
+import { extractUserXp } from '@/lib/economy-helpers'
 
 export const dynamic = 'force-dynamic'
 
@@ -116,9 +117,9 @@ export async function POST(request: NextRequest) {
       }
 
       const userData = userSnap.data() || {}
-      const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+      const currentXp = extractUserXp(userData, 0)
       const currentCoins = typeof userData.coins === 'number' ? userData.coins : typeof userData.euros === 'number' ? userData.euros : 50
-      const oldLevel = typeof userData.level === 'number' ? userData.level : 1
+      const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
 
       const newTotalXp = currentXp + xpReward
       const levelProgress = calculateLevelProgress(newTotalXp)

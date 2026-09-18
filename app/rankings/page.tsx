@@ -193,9 +193,19 @@ export default function RankingsPage() {
             const userLevel = calculateLevelProgress(userXp).currentLevel.level
             const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
             const userDistrict = (profile.district || 'Portugal').trim()
-            const hasCurrentUser = allList.some((p) => p.uid === user.uid)
-
-            if (!hasCurrentUser) {
+            const currentIndex = allList.findIndex((p) => p.uid === user.uid)
+            if (currentIndex >= 0) {
+              allList[currentIndex] = {
+                ...allList[currentIndex],
+                xp: userXp,
+                level: userLevel,
+                title: userTitle,
+                equippedTitle: userTitle,
+                district: userDistrict,
+                displayName: profile.displayName || allList[currentIndex].displayName,
+                photoURL: profile.photoURL || allList[currentIndex].photoURL,
+              }
+            } else {
               const rating = Math.max(500, Math.round(1000 + (userWins * 25) - (userLosses * 15) + (userXp / 100)))
               allList.push({
                 uid: user.uid,

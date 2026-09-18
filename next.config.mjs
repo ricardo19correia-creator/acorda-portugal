@@ -43,6 +43,21 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/historia',
+        destination: '/beta',
+        permanent: true,
+      },
+      {
+        source: '/historia/:path*',
+        destination: '/beta',
+        permanent: true,
+      },
+      {
+        source: '/onde-tudo-comecou',
+        destination: '/beta',
+        permanent: true,
+      },
+      {
         source: '/mapa',
         destination: '/',
         permanent: false,

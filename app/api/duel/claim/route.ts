@@ -3,6 +3,7 @@ import { getAdminFirestore, getAdminAuth } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 import { calculateLevelProgress } from '@/lib/progression'
 import { ECONOMY_CONFIG, calculateLevelUpCoinReward } from '@/lib/economy'
+import { extractUserXp } from '@/lib/economy-helpers'
 import type { DuelDocument } from '@/lib/duel'
 
 export const dynamic = 'force-dynamic'
@@ -61,10 +62,10 @@ export async function POST(request: NextRequest) {
 
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists ? userSnap.data() || {} : {}
-      const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
+      const currentXp = extractUserXp(userData, 0)
       const currentCoins = typeof userData.coins === 'number' ? userData.coins : typeof userData.euros === 'number' ? userData.euros : 50
       const currentRating = typeof userData.rating === 'number' ? userData.rating : 1000
-      const oldLevel = typeof userData.level === 'number' ? userData.level : 1
+      const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
 
       const rewardsClaimed = duel.rewardsClaimed || {}
       if (rewardsClaimed[userId]) {

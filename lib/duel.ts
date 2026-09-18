@@ -35,6 +35,8 @@ import {
   computeCategoryBreakdownFromAnswers,
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
+import { extractUserXp } from '@/lib/economy-helpers'
+import { getLocalSessionId } from '@/lib/session-manager'
 
 export function resolveUserAvatar(
   user?: { photoURL?: string | null } | null,
@@ -1180,9 +1182,9 @@ export async function claimDuelRewards(
 
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? userSnap.data() : {}
-      const currentXp = typeof userData.xp === 'number' ? userData.xp : 0
-      const currentEuros = typeof userData.euros === 'number' ? userData.euros : 50
-      const oldLevel = typeof userData.level === 'number' ? userData.level : 1
+      const currentXp = extractUserXp(userData, 0)
+      const currentEuros = typeof userData.euros === 'number' ? userData.euros : typeof userData.coins === 'number' ? userData.coins : 50
+      const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
 
       const rewardsClaimed = duel.rewardsClaimed || {}
       if (rewardsClaimed[userUid] || rewardSnap.exists()) {

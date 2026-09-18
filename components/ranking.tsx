@@ -99,8 +99,20 @@ export function Ranking() {
           const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
           const userDistrict = (profile.district || 'Portugal').trim()
 
-          const hasCurrentUser = playersList.some((p) => p.uid === user.uid)
-          if (!hasCurrentUser) {
+          const currentIndex = playersList.findIndex((p) => p.uid === user.uid)
+          if (currentIndex >= 0) {
+            playersList[currentIndex] = {
+              ...playersList[currentIndex],
+              xp: userXp,
+              level: userLevel,
+              title: userTitle,
+              equippedTitle: userTitle,
+              district: userDistrict,
+              region: userDistrict,
+              displayName: profile.displayName || playersList[currentIndex].displayName,
+              photoURL: profile.photoURL || playersList[currentIndex].photoURL,
+            }
+          } else {
             playersList.push({
               uid: user.uid,
               displayName: profile.displayName || user.displayName || 'Jogador',
