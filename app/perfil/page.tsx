@@ -1416,7 +1416,7 @@ function PerfilContent() {
     'Lendário': { name: 'Lendário', tier: 'Elite', minRating: 2500, maxRating: Infinity },
   }
 
-  const currentLp = (profile as any)?.rating ?? (profile as any)?.elo ?? (1000 + (profile?.wins || 0) * 20)
+  const currentLp = (profile as any)?.rating ?? (profile as any)?.elo ?? Math.max(500, Math.round(1000 + (gameStats.wins1v1 * 25) - (gameStats.losses1v1 * 15) + (profile?.xp ? profile.xp / 100 : 0)))
   const divisionKey = calculateCompetitiveDivision(currentLp)
   const division = DIVISION_THRESHOLDS[divisionKey] || DIVISION_THRESHOLDS.Bronze
   const divisionColor = DIVISION_COLORS[divisionKey]?.text || 'text-amber-400'

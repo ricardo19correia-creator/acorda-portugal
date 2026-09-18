@@ -75,8 +75,11 @@ export interface UserGameStats {
   totalDuels1v1: number        // Total duelos 1v1
   winRate: number              // vitórias 1v1 / (vitórias 1v1 + derrotas 1v1) * 100
   totalAnswered: number        // Total de perguntas respondidas em partidas
+  totalQuestions: number       // Alias para totalAnswered
   totalCorrect: number         // Total de respostas corretas
+  correctAnswers: number       // Alias para totalCorrect
   totalIncorrect: number       // Total de respostas incorretas
+  incorrectAnswers: number     // Alias para totalIncorrect
   accuracy: number             // totalCorrect / totalAnswered * 100 (0 se 0 respondidas)
   avgResponseTime: string      // Média real calculada ex: "2.1s" ou "—" se sem histórico
   avgResponseTimeSeconds: number | null
@@ -410,8 +413,11 @@ export function getUserGameStats(profile: Partial<UserProfile> | null | undefine
     totalDuels1v1: duels.totalDuels,
     winRate: duels.winRate,
     totalAnswered: answers.totalAnswered,
+    totalQuestions: answers.totalAnswered,
     totalCorrect: answers.totalCorrect,
+    correctAnswers: answers.totalCorrect,
     totalIncorrect: answers.totalIncorrect,
+    incorrectAnswers: answers.totalIncorrect,
     accuracy: answers.accuracy,
     avgResponseTime: answers.avgResponseTime,
     avgResponseTimeSeconds: answers.avgResponseTimeSeconds,

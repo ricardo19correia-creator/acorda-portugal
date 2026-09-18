@@ -21,6 +21,7 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { subscribeRankings } from '@/lib/rankings'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { getUserGameStats } from '@/lib/user-stats'
 
 export type RankedPlayer = {
   uid: string
@@ -34,6 +35,7 @@ export type RankedPlayer = {
   equippedFrame?: string
   equipped?: EquippedCosmetics
   duelWins?: number
+  losses1v1?: number
   duelsTotal?: number
   accuracyRate?: number
 }
@@ -94,6 +96,7 @@ export function Ranking() {
 
         // Garantir que o utilizador autenticado atual está presente
         if (user?.uid && profile) {
+          const gameStats = getUserGameStats(profile)
           const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
           const userLevel = calculateLevelProgress(userXp).currentLevel.level
           const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
@@ -111,6 +114,10 @@ export function Ranking() {
               region: userDistrict,
               displayName: profile.displayName || playersList[currentIndex].displayName,
               photoURL: profile.photoURL || playersList[currentIndex].photoURL,
+              wins1v1: gameStats.wins1v1,
+              losses1v1: gameStats.losses1v1,
+              gamesPlayed: gameStats.gamesPlayed,
+              accuracyRate: gameStats.accuracy,
             }
           } else {
             playersList.push({
@@ -124,9 +131,10 @@ export function Ranking() {
               title: userTitle,
               equippedTitle: userTitle,
               equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
-              wins1v1: profile.wins || 0,
-              gamesPlayed: profile.gamesPlayed || 0,
-              accuracyRate: profile.totalQuestions && profile.totalQuestions > 0 ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100) : 0,
+              wins1v1: gameStats.wins1v1,
+              losses1v1: gameStats.losses1v1,
+              gamesPlayed: gameStats.gamesPlayed,
+              accuracyRate: gameStats.accuracy,
               isFounder: Boolean((profile as any)?.isFounder),
               playerType: 'human',
               isNpc: false,
@@ -152,7 +160,8 @@ export function Ranking() {
           equippedFrame: p.equippedFrame || (p as any).equipped?.frameId,
           equipped: (p as any).equipped,
           duelWins: p.wins1v1 || 0,
-          duelsTotal: p.gamesPlayed || 0,
+          losses1v1: (p as any).losses1v1 || 0,
+          duelsTotal: (p.wins1v1 || 0) + ((p as any).losses1v1 || 0),
           accuracyRate: p.accuracyRate || 0,
           playerType: p.playerType,
           isNpc: p.isNpc,
@@ -240,8 +249,8 @@ export function Ranking() {
       title: rawTitle,
       stats: {
         duelsWon: p.duelWins || (p as any)?.wins1v1 || 0,
-        duelsLost: (p as any)?.losses1v1 || (p as any)?.duelLosses || 0,
-        duelsTotal: p.duelsTotal || ((p.duelWins || (p as any)?.wins1v1 || 0) + ((p as any)?.losses1v1 || 0)),
+        duelsLost: p.losses1v1 ?? (p as any)?.losses1v1 ?? (p as any)?.duelLosses ?? 0,
+        duelsTotal: (p.duelWins || (p as any)?.wins1v1 || 0) + (p.losses1v1 ?? (p as any)?.losses1v1 ?? (p as any)?.duelLosses ?? 0),
         accuracyRate: typeof p.accuracyRate === 'number' ? p.accuracyRate : 0,
       },
       badges: [

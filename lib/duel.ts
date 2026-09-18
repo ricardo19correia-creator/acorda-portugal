@@ -1233,8 +1233,24 @@ export async function claimDuelRewards(
             subcategory: q?.subcategory,
             prompt: q?.question || q?.pergunta,
             isCorrect: isAnsCorrect,
+            timeSpentSeconds: ansObj?.timeSpentSeconds,
+            isTimeout: ansObj?.status === 'TIMEOUT',
           })
         }
+
+        const validDuelTimes = (Array.isArray(player.answers) ? player.answers : [])
+          .filter(
+            (a) =>
+              a &&
+              a.status !== 'TIMEOUT' &&
+              typeof a.timeSpentSeconds === 'number' &&
+              !isNaN(a.timeSpentSeconds) &&
+              a.timeSpentSeconds >= 0.3 &&
+              a.timeSpentSeconds <= 60,
+          )
+          .map((a) => a.timeSpentSeconds)
+        const totalDuelResponseTime = validDuelTimes.reduce((acc, t) => acc + t, 0)
+        const validDuelResponseCount = validDuelTimes.length
 
         const existingCatStats = (userData.categoryStats as Record<string, any>) || {}
         const categoryBreakdown = computeCategoryBreakdownFromAnswers(duelAnswers, 'desafio-nacional')
@@ -1306,6 +1322,11 @@ export async function claimDuelRewards(
           'stats.multiplayerXp': increment(xpReward),
           lastPlayedAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
+        }
+
+        if (validDuelResponseCount > 0) {
+          userUpdates['stats.totalResponseTime'] = increment(Number(totalDuelResponseTime.toFixed(1)))
+          userUpdates['stats.validResponseTimeCount'] = increment(validDuelResponseCount)
         }
 
         for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {

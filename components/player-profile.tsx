@@ -69,6 +69,7 @@ import { getEquippedCosmetics, getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { MASTER_TITLE_CATALOG, isTitleOwned } from '@/lib/titles'
 import { getInventory, equipTheme, equipAvatar, type InventoryState } from '@/lib/inventory'
 import { AVATAR_CATALOG, getAvatarById, DEFAULT_AVATAR, type AvatarItem } from '@/lib/avatars'
+import { getUserGameStats } from '@/lib/user-stats'
 import { cn } from '@/lib/utils'
 
 const districts = [
@@ -470,16 +471,14 @@ export function PlayerProfile() {
     setEquipping(null)
   }
 
-  const totalQuestions = (player as any)?.totalQuestions ?? (player as any)?.questionsAnswered ?? 0
-  const correctAnswers = player?.correctAnswers ?? 0
-  const incorrectAnswers = (player as any)?.incorrectAnswers ?? Math.max(0, totalQuestions - correctAnswers)
+  const gameStats = useMemo(() => getUserGameStats(player), [player])
 
   const stats = [
-    [Target, 'Perguntas respondidas', format(totalQuestions), 'text-primary'],
-    [CheckCircle2, 'Respostas certas', format(correctAnswers), 'text-accent'],
-    [XCircle, 'Respostas erradas', format(incorrectAnswers), 'text-flag-red'],
-    [Sparkles, 'Taxa de acerto', `${accuracy.toFixed(1)}%`, 'text-gold'],
-    [Gamepad2, 'Partidas jogadas', format(player.gamesPlayed ?? 0), 'text-primary'],
+    [Target, 'Perguntas respondidas', format(gameStats.totalQuestions), 'text-primary'],
+    [CheckCircle2, 'Respostas certas', format(gameStats.correctAnswers), 'text-accent'],
+    [XCircle, 'Respostas erradas', format(gameStats.incorrectAnswers), 'text-flag-red'],
+    [Sparkles, 'Taxa de acerto', `${gameStats.accuracy.toFixed(1)}%`, 'text-gold'],
+    [Gamepad2, 'Partidas jogadas', format(gameStats.gamesPlayed), 'text-primary'],
     [Sparkles, 'XP total acumulado', format(player.xp ?? 0), 'text-accent'],
     [Coins, 'Euros Acorda ganhos', `€${format(player.coins ?? player.euros ?? 0)}`, 'text-gold'],
     [Flame, 'Melhor sequência', `${player.bestStreak ?? 0} dias`, 'text-flag-red'],

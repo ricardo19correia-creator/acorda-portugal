@@ -80,12 +80,9 @@ export default function PlayerProfileModal({
 
   const wins = player.stats?.duelsWon ?? 0
   const losses = player.stats?.duelsLost ?? 0
-  const totalGames =
-    player.stats?.duelsTotal && player.stats.duelsTotal > 0
-      ? player.stats.duelsTotal
-      : wins + losses
+  const totalGames = wins + losses
   const winRate =
-    wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0
+    totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0
   const accuracy = typeof player.stats?.accuracyRate === 'number' ? player.stats.accuracyRate : 0
 
   return (

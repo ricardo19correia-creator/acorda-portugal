@@ -50,6 +50,7 @@ import { ACTIVE_SEASON_01, calculateTimeRemaining } from '@/lib/seasons'
 import { getAvatarImage, DEFAULT_AVATAR } from '@/lib/avatars'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
+import { getUserGameStats } from '@/lib/user-stats'
 import { cn } from '@/lib/utils'
 
 export type RankingFilterMode = 'nacional' | 'distrito' | 'duelos' | 'temporada'
@@ -93,6 +94,7 @@ function EvolutionBadge({ movement }: { movement?: number | null }) {
 export default function RankingsPage() {
   const router = useRouter()
   const { user, profile } = useAuth()
+  const userGameStats = useMemo(() => getUserGameStats(profile), [profile])
 
   // Separador Ativo
   const [activeTab, setActiveTab] = useState<RankingFilterMode>('nacional')
@@ -201,8 +203,8 @@ export default function RankingsPage() {
           // Integrar o utilizador autenticado se ainda não existir
           if (user?.uid && profile) {
             const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
-            const userWins = profile.wins ?? 0
-            const userLosses = profile.losses ?? 0
+            const userWins = userGameStats.wins1v1
+            const userLosses = userGameStats.losses1v1
             const userLevel = calculateLevelProgress(userXp).currentLevel.level
             const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
             const userDistrict = (profile.district || 'Portugal').trim()
@@ -217,6 +219,10 @@ export default function RankingsPage() {
                 district: userDistrict,
                 displayName: profile.displayName || allList[currentIndex].displayName,
                 photoURL: profile.photoURL || allList[currentIndex].photoURL,
+                wins1v1: userWins,
+                losses1v1: userLosses,
+                gamesPlayed: userGameStats.gamesPlayed,
+                accuracyRate: userGameStats.accuracy,
               }
             } else {
               const rating = Math.max(500, Math.round(1000 + (userWins * 25) - (userLosses * 15) + (userXp / 100)))
@@ -232,11 +238,8 @@ export default function RankingsPage() {
                 equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
                 wins1v1: userWins,
                 losses1v1: userLosses,
-                gamesPlayed: userWins + userLosses,
-                accuracyRate:
-                  profile.totalQuestions && profile.totalQuestions > 0
-                    ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
-                    : 0,
+                gamesPlayed: userGameStats.gamesPlayed,
+                accuracyRate: userGameStats.accuracy,
                 rating,
                 division: calculateCompetitiveDivision(rating),
                 streak: typeof profile.streak === 'number' ? profile.streak : 0,
@@ -303,8 +306,8 @@ export default function RankingsPage() {
           // Integrar o utilizador autenticado
           if (user?.uid && profile) {
             const userXp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
-            const userWins = profile.wins ?? 0
-            const userLosses = profile.losses ?? 0
+            const userWins = userGameStats.wins1v1
+            const userLosses = userGameStats.losses1v1
             const userLevel = calculateLevelProgress(userXp).currentLevel.level
             const userTitle = getPlayerDisplayTitle(profile, calculateLevelProgress(userXp).currentLevel.title)
             const userDistrict = (profile.district || 'Portugal').trim()
@@ -329,11 +332,8 @@ export default function RankingsPage() {
                   equippedFrame: (profile as any)?.equippedFrame || (profile as any)?.equipped?.frameId,
                   wins1v1: userWins,
                   losses1v1: userLosses,
-                  gamesPlayed: userWins + userLosses,
-                  accuracyRate:
-                    profile.totalQuestions && profile.totalQuestions > 0
-                      ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
-                      : 0,
+                  gamesPlayed: userGameStats.gamesPlayed,
+                  accuracyRate: userGameStats.accuracy,
                   rating,
                   division: calculateCompetitiveDivision(rating),
                   streak: typeof profile.streak === 'number' ? profile.streak : 0,
@@ -1657,8 +1657,8 @@ export default function RankingsPage() {
                               500,
                               Math.round(
                                 1000 +
-                                  ((profile?.wins ?? 0) * 25) -
-                                  ((profile?.losses ?? 0) * 15) +
+                                  (userGameStats.wins1v1 * 25) -
+                                  (userGameStats.losses1v1 * 15) +
                                   ((profile?.xp || 0) / 100)
                               )
                             )}
@@ -1668,7 +1668,7 @@ export default function RankingsPage() {
                         <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
                           <span className="text-[10px] font-mono uppercase text-slate-400 block">Registo V/D</span>
                           <span className="text-sm sm:text-base font-bold text-emerald-400 font-mono">
-                            {profile?.wins ?? 0}V - {profile?.losses ?? 0}D
+                            {userGameStats.wins1v1}V - {userGameStats.losses1v1}D
                           </span>
                         </div>
 
@@ -1680,8 +1680,8 @@ export default function RankingsPage() {
                                 500,
                                 Math.round(
                                   1000 +
-                                    ((profile?.wins ?? 0) * 25) -
-                                    ((profile?.losses ?? 0) * 15) +
+                                    (userGameStats.wins1v1 * 25) -
+                                    (userGameStats.losses1v1 * 15) +
                                     ((profile?.xp || 0) / 100)
                                 )
                               )
