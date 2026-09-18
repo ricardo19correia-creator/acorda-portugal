@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SiteHeader } from '@/components/site-header'
 import { BackgroundFx } from '@/components/background-fx'
-import { Play, Home, Sparkles, ShieldCheck, Terminal } from 'lucide-react'
+import { Play, Home, Sparkles, ShieldCheck, Terminal, MessageSquarePlus } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Beta Público — Acorda Portugal | Desafio Nacional',
@@ -143,6 +143,15 @@ export default function BetaPage() {
                 <Play className="w-4 h-4 fill-current ml-0.5" />
               </div>
               <span className="relative z-10 text-slate-950 font-black">JOGAR AGORA</span>
+            </Link>
+
+            {/* Botão Secundário: ENVIAR FEEDBACK */}
+            <Link
+              href="/feedback"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-4.5 rounded-2xl border border-amber-500/40 bg-amber-500/15 hover:bg-amber-500/25 hover:border-amber-400 text-amber-300 font-display font-bold text-sm sm:text-base uppercase tracking-wider transition-all active:scale-[0.98] cursor-pointer shadow-md"
+            >
+              <MessageSquarePlus className="w-4 h-4 text-amber-400" />
+              <span>ENVIAR FEEDBACK</span>
             </Link>
 
             {/* Botão Secundário: VOLTAR AO INÍCIO */}

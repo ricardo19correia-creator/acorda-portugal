@@ -44,17 +44,17 @@ const nextConfig = {
     return [
       {
         source: '/historia',
-        destination: '/beta',
+        destination: '/feedback',
         permanent: true,
       },
       {
         source: '/historia/:path*',
-        destination: '/beta',
+        destination: '/feedback',
         permanent: true,
       },
       {
         source: '/onde-tudo-comecou',
-        destination: '/beta',
+        destination: '/feedback',
         permanent: true,
       },
       {
