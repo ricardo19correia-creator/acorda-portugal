@@ -1182,6 +1182,15 @@ export async function claimDuelRewards(
 
       const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? userSnap.data() : {}
+
+      // Validação de Sessão Única Oficial
+      const activeSessionId = (userData as any)?.activeSession?.sessionId || (userData as any)?.currentSessionId
+      const localSessionId = getLocalSessionId()
+      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+        console.error(`[DUEL][SECURITY] Tentativa de resgate por sessão revogada! Remote: ${activeSessionId}, Local: ${localSessionId}`)
+        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+      }
+
       const currentXp = extractUserXp(userData, 0)
       const currentEuros = typeof userData.euros === 'number' ? userData.euros : typeof userData.coins === 'number' ? userData.coins : 50
       const oldLevel = calculateLevelProgress(currentXp).currentLevel.level

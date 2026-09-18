@@ -85,6 +85,16 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
       {/* Top Navigation */}
       <div className="flex items-center justify-between">
         <GlobalBackButton showAlways={true} fallbackUrl="/" />
+        <Link
+          href="/beta"
+          title="Acorda Portugal — Versão Beta Pública"
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/90 border border-amber-500/30 text-[10px] sm:text-xs font-mono text-slate-300 hover:border-amber-400/50 transition-colors shadow-sm"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <span className="font-bold text-amber-400">BETA PÚBLICO</span>
+          <span className="text-white/30">·</span>
+          <span className="text-slate-300">EM DESENVOLVIMENTO</span>
+        </Link>
       </div>
 
       {/* ========================================================================= */}

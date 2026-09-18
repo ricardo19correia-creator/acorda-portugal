@@ -25,6 +25,7 @@ import {
 } from '@/src/data/economy'
 import { equipTitle } from '@/lib/titles-service'
 import { getAvatarById } from '@/lib/avatars'
+import { getLocalSessionId } from '@/lib/session-manager'
 
 export {
   ECONOMY_CONFIG,
@@ -474,6 +475,13 @@ export async function buyShopItem(userId: string, itemId: string): Promise<Purch
       }
 
       const userData = userDoc.data()
+      // Validação de Sessão Única Oficial
+      const activeSessionId = userData.activeSession?.sessionId || userData.currentSessionId
+      const localSessionId = getLocalSessionId()
+      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+      }
+
       const currentBalance = typeof userData.euros === 'number' ? userData.euros : (userData.coins || 0)
       const currentInventory: Record<string, number> = userData.inventory || {}
       const todayStr = new Date().toISOString().slice(0, 10)
@@ -630,6 +638,13 @@ export async function equipItem(
       if (!userDoc.exists()) throw new Error('Utilizador não encontrado.')
 
       const data = userDoc.data()
+      // Validação de Sessão Única Oficial
+      const activeSessionId = data.activeSession?.sessionId || data.currentSessionId
+      const localSessionId = getLocalSessionId()
+      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+      }
+
       const inventory = data.inventory || {}
       const equipped = data.equipped || {}
       const vipEntitlements: string[] = data.vipEntitlements || []
@@ -721,7 +736,16 @@ export async function processMatchEurosReward({
     }
 
     const userSnap = await transaction.get(userRef)
-    const currentEuros = typeof userSnap.data()?.euros === 'number' ? userSnap.data()?.euros : 0
+    const userData = userSnap.data() || {}
+
+    // Validação de Sessão Única Oficial
+    const activeSessionId = userData.activeSession?.sessionId || userData.currentSessionId
+    const localSessionId = getLocalSessionId()
+    if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+      throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+    }
+
+    const currentEuros = typeof userData.euros === 'number' ? userData.euros : 0
     const newBalance = currentEuros + totalEuros
 
     // Marcar matchId como processado
@@ -798,6 +822,14 @@ export async function useConsumablePowerUp(
       if (!userDoc.exists()) throw new Error('Utilizador não encontrado.')
 
       const data = userDoc.data() || {}
+
+      // Validação de Sessão Única Oficial
+      const activeSessionId = data.activeSession?.sessionId || data.currentSessionId
+      const localSessionId = getLocalSessionId()
+      if (activeSessionId && localSessionId && activeSessionId !== localSessionId) {
+        throw new Error('SESSION_SUPERSEDED: A tua conta foi iniciada noutro dispositivo.')
+      }
+
       const inventory: Record<string, any> = data.inventory || {}
       const consumables: Record<string, any> = data.consumables || {}
       const powerUps: Record<string, any> = data.powerUps || {}

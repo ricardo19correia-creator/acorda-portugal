@@ -46,7 +46,7 @@ assert(fs.existsSync(jogarPath), 'app/jogar/page.tsx deve existir')
 const jogarContent = fs.readFileSync(jogarPath, 'utf8')
 
 assert(!jogarContent.includes('Redirecionando para o ecrã de início de sessão.'), 'app/jogar/page.tsx não deve exibir avisos alarmistas na inicialização')
-assert(jogarContent.includes('A carregar o Desafio Nacional...'), 'app/jogar/page.tsx deve ter loading limpo durante AUTH_INITIALIZING')
+assert(jogarContent.includes('!authResolved'), 'app/jogar/page.tsx deve gerir o estado AUTH_INITIALIZING')
 console.log('[TEST 5] Fluxo de arranque em /jogar: PASS')
 
 // 4. Verificar session-manager

@@ -1619,6 +1619,13 @@ export function QuizScreen({
           )}
         </footer>
 
+        {/* Aviso Discreto de Beta (Não sobrepõe perguntas, respostas, cronómetro ou elementos da partida) */}
+        <div className="w-full text-center py-0.5 shrink-0 pointer-events-none select-none">
+          <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-amber-400/60 uppercase font-semibold">
+            BETA PÚBLICO · EM DESENVOLVIMENTO
+          </span>
+        </div>
+
         {/* MODAL DE CONFIRMAÇÃO DE DESISTÊNCIA */}
         {isExitModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">

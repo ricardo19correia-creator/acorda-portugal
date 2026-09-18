@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Play } from 'lucide-react'
+import Link from 'next/link'
+import { Play, ChevronRight } from 'lucide-react'
 
 interface HomeHeroProps {
   onStartGame: (route: string) => void
@@ -43,6 +44,22 @@ export function HomeHero({ onStartGame, isAuthenticated }: HomeHeroProps) {
       <p className="mt-4 sm:mt-5 text-lg sm:text-2xl font-bold text-slate-100 max-w-xl leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
         Portugal está em jogo.
       </p>
+
+      {/* Aviso Elegante Beta Público */}
+      <Link
+        href="/beta"
+        title="Saber mais sobre a versão Beta Pública"
+        className="mt-4 sm:mt-5 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-amber-500/35 bg-slate-950/60 backdrop-blur-md hover:bg-slate-900/80 hover:border-amber-400/60 transition-all shadow-[0_0_16px_rgba(245,158,11,0.15)] group cursor-pointer"
+      >
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-mono font-black text-[10px] sm:text-[11px] uppercase tracking-wider border border-amber-500/40">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          BETA PÚBLICO
+        </span>
+        <span className="text-slate-300 text-xs sm:text-sm font-medium">
+          Disponível para todos — em desenvolvimento contínuo
+        </span>
+        <ChevronRight className="w-3.5 h-3.5 text-amber-400/80 group-hover:translate-x-0.5 transition-transform" />
+      </Link>
 
       {/* CTA PRINCIPAL — O elemento visual mais importante da página */}
       <div className="mt-8 sm:mt-10 w-full sm:w-auto flex justify-center">
