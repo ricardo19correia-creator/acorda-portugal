@@ -112,21 +112,21 @@ export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const title = resolvedTitle.cleanName || levelInfo.currentLevel.cleanTitle || 'Jogador Nacional'
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
 
-  const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
-  const losses1v1 = typeof data.losses1v1 === 'number' ? data.losses1v1 : typeof data.losses === 'number' ? data.losses : typeof data.duelLosses === 'number' ? data.duelLosses : 0
-  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + losses1v1))
-  const accuracyRate = typeof data.accuracyRate === 'number' ? data.accuracyRate : (data.stats?.accuracyRate || (xp > 0 ? 80 : 0))
+  const wins1v1 = typeof data.stats?.duelsWon === 'number' ? data.stats.duelsWon : typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
+  const losses1v1 = typeof data.stats?.duelsLost === 'number' ? data.stats.duelsLost : typeof data.losses1v1 === 'number' ? data.losses1v1 : typeof data.duelLosses === 'number' ? data.duelLosses : 0
+  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalGames || (wins1v1 + losses1v1))
+  const accuracyRate = typeof data.accuracyRate === 'number' ? data.accuracyRate : (data.stats?.accuracyRate || 0)
 
   // Rating Elo calculado ou lido do perfil
   const rawRating = typeof data.rating === 'number' ? data.rating : typeof data.elo === 'number' ? data.elo : null
   const rating = rawRating ?? Math.max(500, Math.round(1000 + (wins1v1 * 25) - (losses1v1 * 15) + (xp / 100)))
   const division = calculateCompetitiveDivision(rating)
-  const streak = typeof data.streak === 'number' ? data.streak : (wins1v1 > 0 ? Math.min(wins1v1, 5) : 0)
+  const streak = typeof data.streak === 'number' ? data.streak : 0
 
   // Movimento semanal determinístico (armazenado ou calculado a partir do histórico)
-  const weeklyMovement = typeof data.weeklyMovement === 'number' ? data.weeklyMovement : (data.posVariation ?? (xp > 5000 ? 5 : xp > 1000 ? 2 : 0))
+  const weeklyMovement = typeof data.weeklyMovement === 'number' ? data.weeklyMovement : (data.posVariation ?? 0)
   const isNewWeekly = Boolean(data.isNew || data.isNewWeekly)
-  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : (xp * 2)
+  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : (typeof data.euros === 'number' ? data.euros : 0)
 
   return {
     uid: id,

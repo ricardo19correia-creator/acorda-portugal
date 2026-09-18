@@ -79,19 +79,14 @@ export default function PlayerProfileModal({
   const divStyle = DIVISION_COLORS[division] || DIVISION_COLORS['Bronze']
 
   const wins = player.stats?.duelsWon ?? 0
-  const totalGames = player.stats?.duelsTotal ?? wins
+  const losses = player.stats?.duelsLost ?? 0
+  const totalGames =
+    player.stats?.duelsTotal && player.stats.duelsTotal > 0
+      ? player.stats.duelsTotal
+      : wins + losses
   const winRate =
-    totalGames > 0 ? Math.round((wins / totalGames) * 100) : wins > 0 ? 100 : 0
-  const accuracy = player.stats?.accuracyRate ?? (player.xp > 0 ? 82 : 0)
-
-  // Curva de performance dos últimos 30 dias calculada
-  const performanceCurve = [
-    { day: 'D1', val: Math.max(10, Math.round(accuracy * 0.75)) },
-    { day: 'D7', val: Math.max(20, Math.round(accuracy * 0.85)) },
-    { day: 'D14', val: Math.max(30, Math.round(accuracy * 0.92)) },
-    { day: 'D21', val: Math.max(35, Math.round(accuracy * 0.96)) },
-    { day: 'D30', val: Math.max(40, accuracy) },
-  ]
+    wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0
+  const accuracy = typeof player.stats?.accuracyRate === 'number' ? player.stats.accuracyRate : 0
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
@@ -186,7 +181,7 @@ export default function PlayerProfileModal({
           </div>
         </div>
 
-        {/* Grid de Estatísticas */}
+        {/* Grid de Estatísticas 1v1 Oficiais */}
         <div className="grid grid-cols-3 gap-2.5 my-3 text-center">
           <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-2.5">
             <span className="text-[10px] uppercase font-bold text-slate-400 block">
@@ -199,43 +194,46 @@ export default function PlayerProfileModal({
 
           <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-2.5">
             <span className="text-[10px] uppercase font-bold text-slate-400 block">
+              Derrotas 1v1
+            </span>
+            <span className="text-base font-black text-rose-400 font-mono">
+              {losses}
+            </span>
+          </div>
+
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-2.5">
+            <span className="text-[10px] uppercase font-bold text-slate-400 block">
               Taxa Vitórias
             </span>
             <span className="text-base font-black text-cyan-400 font-mono">
               {winRate}%
             </span>
           </div>
-
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-2.5">
-            <span className="text-[10px] uppercase font-bold text-slate-400 block">
-              Precisão
-            </span>
-            <span className="text-base font-black text-amber-400 font-mono">
-              {accuracy}%
-            </span>
-          </div>
         </div>
 
-        {/* Gráfico Visual de Evolução (Últimos 30 Dias) */}
-        <div className="my-3.5 p-3 rounded-2xl bg-white/[0.02] border border-white/10">
-          <div className="flex items-center justify-between text-[11px] text-slate-400 mb-2">
-            <span className="flex items-center gap-1 font-bold">
-              <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-              Evolução Competitiva (30 Dias)
-            </span>
-            <span className="font-mono text-emerald-400 font-bold">↑ Em Ascensão</span>
+        {/* Resumo de Eficácia e Duelos Oficiais */}
+        <div className="my-3.5 p-3 rounded-2xl bg-white/[0.02] border border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <TrendingUp className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                Total de Duelos
+              </span>
+              <span className="text-xs font-bold text-slate-200">
+                {totalGames} disputados
+              </span>
+            </div>
           </div>
 
-          <div className="h-12 flex items-end justify-between gap-1.5 pt-1 px-1">
-            {performanceCurve.map((p, i) => (
-              <div key={p.day} className="flex-1 flex flex-col items-center gap-1">
-                <div
-                  className="w-full bg-gradient-to-t from-cyan-500/40 to-emerald-400 rounded-t-md transition-all"
-                  style={{ height: `${Math.max(15, (p.val / 100) * 36)}px` }}
-                />
-                <span className="text-[9px] font-mono text-slate-500">{p.day}</span>
-              </div>
-            ))}
+          <div className="text-right">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+              Precisão Geral
+            </span>
+            <span className="text-sm font-black font-mono text-amber-400">
+              {accuracy > 0 ? `${accuracy}%` : '—'}
+            </span>
           </div>
         </div>
 

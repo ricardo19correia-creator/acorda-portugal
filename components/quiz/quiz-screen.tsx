@@ -510,6 +510,7 @@ export function QuizScreen({
   const authSyncDoneRef = useRef(false)
   const eventInitDoneRef = useRef(false)
   const recordedAnswersRef = useRef<MatchAnswerPayload[]>([])
+  const questionStartTimeRef = useRef<number>(Date.now())
   const isLockingInRef = useRef(false)
   const abortControllerRef = useRef<AbortController | null>(null)
   const hasCleanedSessionRef = useRef(false)
@@ -1130,11 +1131,13 @@ export function QuizScreen({
     setSelected(null)
     resetQuestionAids()
     setSeconds(60)
+    questionStartTimeRef.current = Date.now()
     setPhase('answering')
   }, [step, total, gameId, result, processMatchCompletion, resetQuestionAids])
 
   const handleSkipQuestion = useCallback(() => {
     if (phase !== 'answering' || !q) return
+    const elapsedSec = Math.max(0.3, Math.min(60, Number(((Date.now() - questionStartTimeRef.current) / 1000).toFixed(1))))
     try {
       recordedAnswersRef.current.push({
         questionId: String(q.id),
@@ -1145,6 +1148,7 @@ export function QuizScreen({
         selectedOption: '',
         isCorrect: false,
         answeredAt: Date.now(),
+        timeSpentSeconds: elapsedSec,
       })
     } catch {}
     setStreak(0)
@@ -1164,6 +1168,8 @@ export function QuizScreen({
       setSelected(choice)
       setIsFrozen(false)
 
+      const elapsedSec = Math.max(0.3, Math.min(60, Number(((Date.now() - questionStartTimeRef.current) / 1000).toFixed(1))))
+
       // Breve suspensa profissional de concurso televisivo (350ms) antes de validar
       setTimeout(() => {
         const hit = choice === q.correct
@@ -1179,6 +1185,7 @@ export function QuizScreen({
             selectedOption: choice,
             isCorrect: hit,
             answeredAt: Date.now(),
+            timeSpentSeconds: elapsedSec,
           })
         } catch {}
 
@@ -1249,6 +1256,8 @@ export function QuizScreen({
         selectedOption: '',
         isCorrect: false,
         answeredAt: Date.now(),
+        timeSpentSeconds: 60,
+        isTimeout: true,
       })
     } catch {}
 

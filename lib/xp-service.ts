@@ -369,6 +369,27 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         updatedAt: serverTimestamp(),
       }
 
+      // Agregação atómica de tempos de resposta válidos (filtragem estrita 0.3s a 60s)
+      const validTimingAnswers = Array.isArray(answers)
+        ? answers.filter(
+            (a) =>
+              typeof a.timeSpentSeconds === 'number' &&
+              !isNaN(a.timeSpentSeconds) &&
+              a.timeSpentSeconds >= 0.3 &&
+              a.timeSpentSeconds <= 60 &&
+              !a.isTimeout &&
+              Boolean(a.selectedOption),
+          )
+        : []
+
+      const batchResponseTime = validTimingAnswers.reduce((sum, a) => sum + a.timeSpentSeconds!, 0)
+      const batchResponseCount = validTimingAnswers.length
+
+      if (batchResponseCount > 0) {
+        userUpdatePayload['stats.totalResponseTime'] = increment(batchResponseTime)
+        userUpdatePayload['stats.validResponseTimeCount'] = increment(batchResponseCount)
+      }
+
       for (const [catKey, catData] of Object.entries(updatedCategoryStatsMap)) {
         userUpdatePayload[`categoryStats.${catKey}`] = catData
       }

@@ -221,7 +221,6 @@ export function Ranking() {
     const isVip = Boolean(
       (p as any)?.is_founder ||
       (p as any)?.isFounder ||
-      p.name?.toLowerCase().includes('riky') ||
       p.equippedTitle?.toLowerCase().includes('fundador')
     )
 
@@ -236,13 +235,14 @@ export function Ranking() {
       xp: p.xp || 0,
       district: p.district || 'Portugal',
       rankPosition: p.pos,
-      virtualMoney: p.xp * 2,
+      virtualMoney: (p as any)?.virtualMoney ?? (p as any)?.coins ?? (p as any)?.euros ?? 0,
       isVip,
       title: rawTitle,
       stats: {
-        duelsWon: p.duelWins || 0,
-        duelsTotal: p.duelsTotal || 0,
-        accuracyRate: p.accuracyRate || (p.xp > 0 ? 85 : 0),
+        duelsWon: p.duelWins || (p as any)?.wins1v1 || 0,
+        duelsLost: (p as any)?.losses1v1 || (p as any)?.duelLosses || 0,
+        duelsTotal: p.duelsTotal || ((p.duelWins || (p as any)?.wins1v1 || 0) + ((p as any)?.losses1v1 || 0)),
+        accuracyRate: typeof p.accuracyRate === 'number' ? p.accuracyRate : 0,
       },
       badges: [
         { icon: '🇵🇹', name: p.district || 'Portugal' },

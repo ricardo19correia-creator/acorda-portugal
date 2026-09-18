@@ -41,7 +41,7 @@ export interface ProfileCategoryConfig {
   id: CanonicalCategoryKey
   name: string
   icon: string
-  levelName: string
+  apexTitle: string
   gradient: string
   borderColor: string
   barColor: string
@@ -56,7 +56,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'historia',
     name: 'História de Portugal',
     icon: '🏛️',
-    levelName: 'Mestre da Lusitânia',
+    apexTitle: 'Mestre da Lusitânia',
     gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
     borderColor: 'border-amber-500/40',
     barColor: 'bg-amber-500',
@@ -84,7 +84,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'geografia',
     name: 'Geografia & Território',
     icon: '🌍',
-    levelName: 'Navegador Cartógrafo',
+    apexTitle: 'Navegador Cartógrafo',
     gradient: 'from-emerald-500/20 via-teal-500/10 to-transparent',
     borderColor: 'border-emerald-500/40',
     barColor: 'bg-emerald-500',
@@ -118,7 +118,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'desporto',
     name: 'Desporto Nacional',
     icon: '⚽',
-    levelName: 'Campeão Ibérico',
+    apexTitle: 'Campeão Ibérico',
     gradient: 'from-blue-500/20 via-indigo-500/10 to-transparent',
     borderColor: 'border-blue-500/40',
     barColor: 'bg-blue-500',
@@ -144,7 +144,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'cultura',
     name: 'Cultura & Tradições',
     icon: '🎭',
-    levelName: 'Erudito das Beiras',
+    apexTitle: 'Erudito das Beiras',
     gradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
     borderColor: 'border-purple-500/40',
     barColor: 'bg-purple-500',
@@ -176,7 +176,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'simbolos',
     name: 'Símbolos & Gastronomia',
     icon: '🇵🇹',
-    levelName: 'Paladar Lusitano',
+    apexTitle: 'Paladar Lusitano',
     gradient: 'from-red-500/20 via-amber-500/10 to-transparent',
     borderColor: 'border-red-500/40',
     barColor: 'bg-red-500',
@@ -203,7 +203,7 @@ export const CANONICAL_PROFILE_CATEGORIES: ProfileCategoryConfig[] = [
     id: 'maluco',
     name: 'Modo Maluco',
     icon: '🤪',
-    levelName: 'Maluco Veterano',
+    apexTitle: 'Maluco Veterano',
     gradient: 'from-yellow-500/20 via-lime-500/10 to-transparent',
     borderColor: 'border-yellow-500/40',
     barColor: 'bg-yellow-500',
@@ -261,15 +261,14 @@ export function getCanonicalCategory(
     }
   }
 
-  // 1. Deteção estrita de Modo Maluco por ID ou categoria
+  // 1. Deteção estrita de Modo Maluco por ID ou categoria oficial
   if (
     qId.startsWith('mm_') ||
     catSlug === 'modo-maluco' ||
     catSlug === 'maluco' ||
     catSlug === 'perguntas-idiotas' ||
     catSlug === 'humor' ||
-    subSlug.includes('maluco') ||
-    promptLower.startsWith('modo maluco')
+    subSlug.includes('maluco')
   ) {
     return 'maluco'
   }
@@ -448,7 +447,12 @@ export function getCanonicalCategoryData(
   let score = 0
   let lastPlayedAt: any = null
 
-  for (const key of allKeys) {
+  const seenSnapshots = new Set<string>()
+
+  // 1. Processar primeiro a chave canónica oficial (se existir)
+  const orderedKeys = [catId, ...allKeys.filter((k) => k !== catId)]
+
+  for (const key of orderedKeys) {
     const raw = stats[key]
     if (raw && typeof raw === 'object') {
       const qTotal =
@@ -475,6 +479,17 @@ export function getCanonicalCategoryData(
             : 0
 
       const qScore = typeof raw.score === 'number' ? raw.score : 0
+
+      if (qTotal === 0 && qCorrect === 0 && qGames === 0 && qScore === 0) {
+        continue
+      }
+
+      // Prevenção de duplicação: se uma chave legada tiver os mesmos valores espelho da canónica
+      const fingerprint = `${qTotal}:${qCorrect}:${qScore}`
+      if (seenSnapshots.has(fingerprint) && key !== catId) {
+        continue
+      }
+      seenSnapshots.add(fingerprint)
 
       totalQuestions += qTotal
       correctAnswers += qCorrect
@@ -512,6 +527,8 @@ export interface MatchAnswerPayload {
   selectedOption?: string
   isCorrect: boolean
   answeredAt?: number
+  timeSpentSeconds?: number
+  isTimeout?: boolean
 }
 
 export interface CategoryIncrement {

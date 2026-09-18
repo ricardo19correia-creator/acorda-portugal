@@ -2782,7 +2782,7 @@ function PerfilContent() {
 
               {historicoSubTab === 'duelos' ? (
                 <span className="text-xs text-slate-400">
-                  Total: {profile?.gamesPlayed ?? (profile as any)?.stats?.totalDuels ?? 0} Duelos
+                  Total: {gameStats.totalDuels1v1} Duelos
                 </span>
               ) : (
                 <button
@@ -2806,26 +2806,24 @@ function PerfilContent() {
                   <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
                     <span className="text-xs text-slate-400 font-bold block mb-1">Vitórias</span>
                     <span className="text-lg font-black text-emerald-400">
-                      {profile?.wins ?? (profile as any)?.stats?.duelsWon ?? 0}
+                      {gameStats.wins1v1}
                     </span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
                     <span className="text-xs text-slate-400 font-bold block mb-1">Derrotas</span>
                     <span className="text-lg font-black text-rose-400">
-                      {Math.max(0, (profile?.gamesPlayed ?? 0) - (profile?.wins ?? 0))}
+                      {gameStats.losses1v1}
                     </span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
                     <span className="text-xs text-slate-400 font-bold block mb-1">Taxa de Vitória</span>
                     <span className="text-lg font-black text-cyan-400">
-                      {profile?.gamesPlayed && profile.gamesPlayed > 0
-                        ? Math.round(((profile.wins || 0) / profile.gamesPlayed) * 100)
-                        : 0}%
+                      {gameStats.winRate}%
                     </span>
                   </div>
                 </div>
 
-                {(!profile?.gamesPlayed || profile.gamesPlayed === 0) && (
+                {gameStats.totalDuels1v1 === 0 && (
                   <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800/60 space-y-3">
                     <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center justify-center mx-auto text-xl">
                       ⚔️

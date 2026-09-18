@@ -74,10 +74,11 @@ export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
   const resolvedTitle = resolvePlayerEquippedTitle(data, xp)
   const title = resolvedTitle.cleanName || levelInfo.currentLevel.cleanTitle || 'Jogador Nacional'
   const equippedFrame = data.equippedFrame || data.equipped?.frameId || data.frameId || undefined
-  const wins1v1 = typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
-  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.duelsTotal || (wins1v1 + (data.losses || 0)))
+  const wins1v1 = typeof data.stats?.duelsWon === 'number' ? data.stats.duelsWon : typeof data.wins1v1 === 'number' ? data.wins1v1 : typeof data.wins === 'number' ? data.wins : typeof data.duelWins === 'number' ? data.duelWins : 0
+  const losses1v1 = typeof data.stats?.duelsLost === 'number' ? data.stats.duelsLost : typeof data.losses1v1 === 'number' ? data.losses1v1 : typeof data.duelLosses === 'number' ? data.duelLosses : 0
+  const gamesPlayed = typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalGames || (wins1v1 + losses1v1))
   const accuracyRate = typeof data.accuracyRate === 'number' ? data.accuracyRate : (data.stats?.accuracyRate || 0)
-  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : 100
+  const virtualMoney = typeof data.virtualMoney === 'number' ? data.virtualMoney : typeof data.coins === 'number' ? data.coins : (typeof data.euros === 'number' ? data.euros : 0)
 
   return {
     uid: id,

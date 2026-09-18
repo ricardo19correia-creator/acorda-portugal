@@ -40,11 +40,13 @@ function StatCard({
 import { PlayerAvatar } from '@/components/player-avatar'
 import { getPlayerDisplayTitle } from '@/lib/cosmetics'
 import { calculateLevelProgress } from '@/lib/progression'
+import { getUserGameStats } from '@/lib/user-stats'
 
 export function ProfileDetails({ user, profile }: { user: User; profile: UserProfile }) {
   const progressInfo = calculateLevelProgress(profile.xp)
   const isMaxLevel = progressInfo.isMaxLevel
   const displayTitle = getPlayerDisplayTitle(profile, progressInfo.currentLevel.title)
+  const stats = getUserGameStats(profile as any)
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
@@ -92,10 +94,9 @@ export function ProfileDetails({ user, profile }: { user: User; profile: UserPro
           <StatCard icon={Coins} label="Euros" value={`€${profile.euros.toLocaleString('pt-PT')}`} tone="gold" />
           <StatCard icon={Flame} label="Streak Atual" value={profile.streak} tone="red" />
 
-          {/* Placeholder stats */}
-          <StatCard icon={BarChart3} label="Partidas Jogadas" value="0" tone="primary" />
-          <StatCard icon={Trophy} label="Vitórias" value="0" tone="gold" />
-          <StatCard icon={Percent} label="Taxa de Acerto" value="0%" tone="primary" />
+          <StatCard icon={BarChart3} label="Partidas Jogadas" value={stats.gamesPlayed.toLocaleString('pt-PT')} tone="primary" />
+          <StatCard icon={Trophy} label="Vitórias 1v1" value={stats.wins1v1.toLocaleString('pt-PT')} tone="gold" />
+          <StatCard icon={Percent} label="Taxa de Acerto" value={`${stats.accuracy}%`} tone="primary" />
         </div>
       </div>
     </section>

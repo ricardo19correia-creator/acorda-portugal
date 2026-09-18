@@ -236,13 +236,13 @@ export default function RankingsPage() {
                 accuracyRate:
                   profile.totalQuestions && profile.totalQuestions > 0
                     ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
-                    : 85,
+                    : 0,
                 rating,
                 division: calculateCompetitiveDivision(rating),
-                streak: userWins > 0 ? Math.min(userWins, 5) : 0,
+                streak: typeof profile.streak === 'number' ? profile.streak : 0,
                 weeklyMovement: (profile as any)?.posVariation ?? 0,
                 isFounder: Boolean((profile as any)?.isFounder),
-                virtualMoney: (profile as any)?.virtualMoney ?? userXp * 2,
+                virtualMoney: (profile as any)?.virtualMoney ?? profile.coins ?? profile.euros ?? 0,
               })
             }
           }
@@ -333,13 +333,13 @@ export default function RankingsPage() {
                   accuracyRate:
                     profile.totalQuestions && profile.totalQuestions > 0
                       ? Math.round((profile.correctAnswers / profile.totalQuestions) * 100)
-                      : 85,
+                      : 0,
                   rating,
                   division: calculateCompetitiveDivision(rating),
-                  streak: userWins > 0 ? Math.min(userWins, 5) : 0,
+                  streak: typeof profile.streak === 'number' ? profile.streak : 0,
                   weeklyMovement: (profile as any)?.posVariation ?? 0,
                   isFounder: Boolean((profile as any)?.isFounder),
-                  virtualMoney: (profile as any)?.virtualMoney ?? userXp * 2,
+                  virtualMoney: (profile as any)?.virtualMoney ?? profile.coins ?? profile.euros ?? 0,
                 })
               }
             }
@@ -475,7 +475,7 @@ export default function RankingsPage() {
       district: p.district || 'Portugal',
       rankPosition: p.pos || 1,
       districtRankPosition: distPos,
-      virtualMoney: p.virtualMoney ?? p.xp * 2,
+      virtualMoney: p.virtualMoney ?? (p as any)?.coins ?? (p as any)?.euros ?? 0,
       isVip,
       title: p.title || (p.pos === 1 ? 'Líder Nacional' : 'Competidor'),
       rating: p.rating,
@@ -483,8 +483,8 @@ export default function RankingsPage() {
       stats: {
         duelsWon: p.wins1v1 || 0,
         duelsLost: p.losses1v1 || 0,
-        duelsTotal: p.gamesPlayed || (p.wins1v1 || 0) + 5,
-        accuracyRate: p.accuracyRate || (p.xp > 0 ? 85 : 0),
+        duelsTotal: (p.wins1v1 || 0) + (p.losses1v1 || 0),
+        accuracyRate: typeof p.accuracyRate === 'number' ? p.accuracyRate : 0,
         streak: p.streak,
       },
       badges: [
