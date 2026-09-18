@@ -150,6 +150,19 @@ export async function POST(request: NextRequest) {
             createdAt: FieldValue.serverTimestamp(),
           })
         }
+
+        if (xpReward > 0) {
+          const xpTxRef = userRef.collection('xp_transactions').doc(duelId)
+          transaction.set(xpTxRef, {
+            id: `1v1_${duelId}`,
+            userId,
+            amount: xpReward,
+            sourceType: '1v1',
+            sourceId: duelId,
+            matchId: duelId,
+            createdAt: FieldValue.serverTimestamp(),
+          })
+        }
       }
 
       transaction.update(duelRef, {
