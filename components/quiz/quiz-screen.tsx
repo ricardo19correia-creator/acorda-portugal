@@ -63,6 +63,7 @@ import {
 import { calculateLevelProgress } from '@/lib/progression'
 import { awardMatchReward, type MatchRewardOutcome } from '@/lib/xp-service'
 import { getCanonicalCategory, type MatchAnswerPayload } from '@/lib/category-registry'
+import { type GameActivityType } from '@/src/types/quiz'
 
 import {
   AnswerOption,
@@ -428,6 +429,7 @@ export function QuizScreen({
   arenaParam,
   eventId,
   eventSlug,
+  gameType = 'normal',
   isFresh = false,
   userId,
   accountProfile,
@@ -441,6 +443,7 @@ export function QuizScreen({
   arenaParam?: string | null
   eventId?: string | null
   eventSlug?: string | null
+  gameType?: GameActivityType
   isFresh?: boolean
   userId?: string
   accountProfile?: any
@@ -520,6 +523,18 @@ export function QuizScreen({
         sessionStorage.removeItem('active_game_session')
         sessionStorage.removeItem('active_session_id')
         sessionStorage.removeItem('ap_error_auto_retried')
+        if (gameType !== 'event') {
+          localStorage.removeItem('active_event')
+          localStorage.removeItem('activeEvent')
+          localStorage.removeItem('currentEvent')
+          localStorage.removeItem('eventId')
+          localStorage.removeItem('event_id')
+          sessionStorage.removeItem('active_event')
+          sessionStorage.removeItem('activeEvent')
+          sessionStorage.removeItem('currentEvent')
+          sessionStorage.removeItem('eventId')
+          sessionStorage.removeItem('event_id')
+        }
         if (gameId) {
           sessionStorage.removeItem(`ap_quiz_state_${gameId}`)
           localStorage.removeItem(`ap_quiz_state_${gameId}`)
@@ -599,7 +614,7 @@ export function QuizScreen({
 
   // Inicialização e reserva segura da partida do evento no backend
   useEffect(() => {
-    if (!eventId || eventInitDoneRef.current) return
+    if (gameType !== 'event' || !eventId || eventInitDoneRef.current) return
     eventInitDoneRef.current = true
     let cancelled = false
     const initBackendEventMatch = async () => {
@@ -616,6 +631,7 @@ export function QuizScreen({
             eventId,
             eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
             matchId: gameId,
+            gameType: 'event',
           }),
         })
         if (res.ok && !cancelled) {
@@ -638,7 +654,7 @@ export function QuizScreen({
     return () => {
       cancelled = true
     }
-  }, [eventId, eventSlug, gameId, user, step, phase])
+  }, [gameType, eventId, eventSlug, gameId, user, step, phase])
 
   // Sincronização segura de arena equipada com try/catch dentro de useEffect
   useEffect(() => {
@@ -896,94 +912,104 @@ export function QuizScreen({
           ? 'modo_aleatorio'
           : 'solo_quiz'
 
-        // 1. Gravação das recompensas normais da conta (XP, Moedas, Níveis, Estatísticas)
-        try {
-          const outcome = await awardMatchReward({
-            userId: user?.uid || effectiveUserId,
-            matchId: gid,
-            categorySlug: categorySlug || 'geral',
-            categoryName: category?.name || 'Portugal',
-            matchType,
-            district: districtParam || undefined,
-            city: cityParam || undefined,
-            correctAnswers: finalResult.correct,
-            totalQuestions: finalResult.total,
-            score: finalResult.score,
-            bestStreak: finalResult.bestStreak,
-            difficultyMultiplier: getDifficultyMultiplier(diffLevel),
-            answeredQuestionIds: answeredIds,
-            answers: recordedAnswersRef.current,
-          })
+        // =====================================================================
+        // DECISÃO ESTRITA DE FINALIZAÇÃO DA PARTIDA:
+        // A partida NUNCA pertence ao evento se não for gameType === 'event' && eventId
+        // =====================================================================
+        if (gameType === 'event' && eventId) {
+          // ===================================================================
+          // RAMO EVENTO: FINALIZAÇÃO EXCLUSIVA DE PARTIDA DE EVENTO
+          // ===================================================================
+          try {
+            const idToken = await (user as any)?.getIdToken?.()
+            if (idToken) {
+              console.log(`[EVENT] A submeter resultado da partida de evento ${gid} para o evento ${eventId}...`)
+              const evRes = await fetch('/api/events/record-match', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${idToken}`,
+                },
+                body: JSON.stringify({
+                  matchId: gid,
+                  eventId,
+                  eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
+                  score: finalResult.score,
+                  correctAnswers: finalResult.correct,
+                  totalQuestions: finalResult.total,
+                  categorySlug: categorySlug || 'portugal-em-jogo',
+                  gameType: 'event',
+                }),
+              })
 
-          setRewardOutcome(outcome)
-
-          setUserProfile((currentProfile) =>
-            currentProfile
-              ? {
-                  ...currentProfile,
-                  level: outcome.newLevel,
-                  xp: outcome.newTotalXp,
-                  euros: outcome.newTotalCoins,
-                  coins: outcome.newTotalCoins,
-                  streak: outcome.newStreak,
-                  categoryStats: outcome.categoryStats
-                    ? { ...(currentProfile.categoryStats || {}), ...outcome.categoryStats }
-                    : currentProfile.categoryStats,
+              if (evRes.ok) {
+                const evData = await evRes.json().catch(() => null)
+                if (evData) {
+                  console.log('[EVENT] Gravação do evento confirmada com sucesso:', evData)
+                  setEventMatchOutcome(evData)
                 }
-              : currentProfile
-          )
-
-          if (updateProfileLocally) {
-            updateProfileLocally({
-              xp: outcome.newTotalXp,
-              level: outcome.newLevel,
-              coins: outcome.newTotalCoins,
-              euros: outcome.newTotalCoins,
-            })
-          }
-        } catch (rewardErr) {
-          console.error('[CRASH /jogar]: Erro na atribuição de recompensa normal:', rewardErr)
-        }
-
-        // 2. Gravação autoritativa do evento oficial no Backend Firestore
-        const targetEventId =
-          eventId || (categorySlug === 'portugal-em-jogo' ? 'portugal-em-jogo-2026' : undefined) || 'portugal-em-jogo-2026'
-        const targetEventSlug = eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo'
-
-        try {
-          const idToken = await (user as any)?.getIdToken?.()
-          if (idToken) {
-            console.log(`[EVENT] A submeter resultado da partida ${gid} para o evento ${targetEventId}...`)
-            const evRes = await fetch('/api/events/record-match', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${idToken}`,
-              },
-              body: JSON.stringify({
-                matchId: gid,
-                eventId: targetEventId,
-                eventSlug: targetEventSlug,
-                score: finalResult.score,
-                correctAnswers: finalResult.correct,
-                totalQuestions: finalResult.total,
-                categorySlug: categorySlug || 'portugal-em-jogo',
-              }),
-            })
-
-            if (evRes.ok) {
-              const evData = await evRes.json().catch(() => null)
-              if (evData) {
-                console.log('[EVENT] Gravação do evento confirmada com sucesso:', evData)
-                setEventMatchOutcome(evData)
+              } else {
+                const errBody = await evRes.json().catch(() => ({}))
+                console.warn('[EVENT] Resposta de erro do endpoint /api/events/record-match:', errBody)
               }
-            } else {
-              const errBody = await evRes.json().catch(() => ({}))
-              console.warn('[EVENT] Resposta de erro do endpoint /api/events/record-match:', errBody)
             }
+          } catch (eventErr) {
+            console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
           }
-        } catch (eventErr) {
-          console.warn('[EVENT_MATCH_SUBMISSION_ERROR]', eventErr)
+        } else {
+          // ===================================================================
+          // RAMO NORMAL: FINALIZAÇÃO EXCLUSIVA DE PARTIDA NORMAL
+          // NUNCA TOCA NO EVENTO! NUNCA CHAMA /api/events/record-match!
+          // ===================================================================
+          setEventMatchOutcome(null)
+          try {
+            const outcome = await awardMatchReward({
+              userId: user?.uid || effectiveUserId,
+              matchId: gid,
+              categorySlug: categorySlug || 'geral',
+              categoryName: category?.name || 'Portugal',
+              matchType,
+              gameType: 'normal',
+              district: districtParam || undefined,
+              city: cityParam || undefined,
+              correctAnswers: finalResult.correct,
+              totalQuestions: finalResult.total,
+              score: finalResult.score,
+              bestStreak: finalResult.bestStreak,
+              difficultyMultiplier: getDifficultyMultiplier(diffLevel),
+              answeredQuestionIds: answeredIds,
+              answers: recordedAnswersRef.current,
+            })
+
+            setRewardOutcome(outcome)
+
+            setUserProfile((currentProfile) =>
+              currentProfile
+                ? {
+                    ...currentProfile,
+                    level: outcome.newLevel,
+                    xp: outcome.newTotalXp,
+                    euros: outcome.newTotalCoins,
+                    coins: outcome.newTotalCoins,
+                    streak: outcome.newStreak,
+                    categoryStats: outcome.categoryStats
+                      ? { ...(currentProfile.categoryStats || {}), ...outcome.categoryStats }
+                      : currentProfile.categoryStats,
+                  }
+                : currentProfile
+            )
+
+            if (updateProfileLocally) {
+              updateProfileLocally({
+                xp: outcome.newTotalXp,
+                level: outcome.newLevel,
+                coins: outcome.newTotalCoins,
+                euros: outcome.newTotalCoins,
+              })
+            }
+          } catch (rewardErr) {
+            console.error('[CRASH /jogar]: Erro na atribuição de recompensa normal:', rewardErr)
+          }
         }
       } catch (err) {
         console.error('[CRASH /jogar]: Erro geral na conclusão da partida:', err)
@@ -993,6 +1019,7 @@ export function QuizScreen({
     },
     [
       user,
+      gameType,
       categorySlug,
       category?.name,
       diffLevel,
@@ -1184,8 +1211,17 @@ export function QuizScreen({
     } catch {}
     recordedAnswersRef.current = []
     isLockingInRef.current = false
+    eventInitDoneRef.current = false
     const nextGameId = safeRandomUUID()
-    router.replace(`/jogar?cat=${encodeURIComponent(categorySlug)}&game=${nextGameId}`)
+    if (gameType === 'event' && eventId) {
+      router.replace(
+        `/jogar?cat=${encodeURIComponent(categorySlug)}&gameType=event&eventId=${encodeURIComponent(eventId)}&eventSlug=${encodeURIComponent(eventSlug || '')}&game=${nextGameId}`
+      )
+    } else {
+      router.replace(
+        `/jogar?cat=${encodeURIComponent(categorySlug)}&gameType=normal&game=${nextGameId}`
+      )
+    }
     setQuizQuestions(
       createGameQuestions(
         categorySlug,
@@ -1302,7 +1338,8 @@ export function QuizScreen({
             levelUpInfo={levelUpInfo}
             answers={recordedAnswersRef.current}
             onExit={handleAbandonSolo}
-            eventOutcome={eventMatchOutcome}
+            gameType={gameType}
+            eventOutcome={gameType === 'event' ? eventMatchOutcome : null}
           />
         </div>
       </div>

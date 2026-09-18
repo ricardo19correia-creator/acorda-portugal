@@ -17,6 +17,8 @@ export interface AwardMatchRewardParams {
   categorySlug: string
   categoryName?: string
   matchType?: 'solo_quiz' | 'duel_1v1' | 'conquista_distrito' | 'desafio_cidade' | 'modo_aleatorio'
+  gameType?: 'normal' | 'event' | '1v1' | 'multiplayer'
+  eventId?: string | null
   district?: string
   city?: string
   correctAnswers: number
@@ -82,6 +84,8 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
     categorySlug,
     categoryName = 'Portugal',
     matchType = 'solo_quiz',
+    gameType = 'normal',
+    eventId = null,
     district,
     city,
     correctAnswers,
@@ -298,11 +302,16 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         completedMissions.push({ id: 'daily_correct_5', title: 'Precisão Lusa', reward: '+€100' })
       }
 
+      const effectiveGameType = gameType || (matchType === 'duel_1v1' ? '1v1' : 'normal')
+      const effectiveEventId = effectiveGameType === 'event' && eventId ? eventId : null
+
       // H. Registar documento de recompensa única (Garante idempotência absoluta)
       transaction.set(rewardRef, {
         matchId,
         userId,
+        gameType: effectiveGameType,
         matchType,
+        ...(effectiveEventId ? { eventId: effectiveEventId } : {}),
         categorySlug,
         score,
         correctAnswers,
@@ -321,6 +330,18 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         completedMissions,
         categoryBreakdown,
         processedAt: serverTimestamp(),
+      })
+
+      // H2. Registar Transação Canónica de XP (Rastreabilidade e Isolamento de Origem)
+      const xpTxRef = doc(db, 'users', userId, 'xp_transactions', matchId)
+      transaction.set(xpTxRef, {
+        id: `${effectiveGameType}_${matchId}`,
+        userId,
+        amount: calculatedXp,
+        sourceType: effectiveGameType,
+        sourceId: effectiveEventId || matchType || categorySlug,
+        matchId,
+        createdAt: serverTimestamp(),
       })
 
       // I. Atualizar documento do utilizador (Operações Estritamente Atómicas para Concorrência Multi-Dispositivo)
@@ -415,7 +436,9 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         {
           id: matchId,
           userId,
+          gameType: effectiveGameType,
           matchType,
+          ...(effectiveEventId ? { eventId: effectiveEventId } : {}),
           category: categorySlug,
           categoryName,
           score,

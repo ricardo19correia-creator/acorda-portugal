@@ -223,7 +223,7 @@ export function Events() {
     }
     const matchId = safeRandomUUID()
     router.push(
-      `/jogar?cat=portugal-em-jogo&event=${eventId}&eventId=${eventId}&eventSlug=primeiro-desafio-nacional-portugal-em-jogo&game=${matchId}`
+      `/jogar?cat=portugal-em-jogo&gameType=event&event=${eventId}&eventId=${eventId}&eventSlug=primeiro-desafio-nacional-portugal-em-jogo&game=${matchId}`
     )
   }, [user, router, eventId])
 

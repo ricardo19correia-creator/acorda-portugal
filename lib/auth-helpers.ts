@@ -398,6 +398,55 @@ export async function createNewUserDocument(
   }
 
   const userRef = doc(db, 'users', user.uid)
+  const { getDoc, getDocFromServer } = await import('firebase/firestore')
+  let existingSnap: any = null
+  try {
+    existingSnap = await getDocFromServer(userRef)
+  } catch {
+    try {
+      existingSnap = await getDoc(userRef)
+    } catch {}
+  }
+
+  if (existingSnap && existingSnap.exists()) {
+    const existing = existingSnap.data()
+    // Documento já existe: NUNCA reiniciar xp, level, moedas ou inventário!
+    const updateData: Record<string, any> = {
+      updatedAt: serverTimestamp(),
+      displayName: existing.displayName || cleanName,
+      name: existing.name || cleanName,
+    }
+    if (!existing.district && canonicalDistrict) {
+      updateData.district = canonicalDistrict
+      updateData.representedDistrict = canonicalDistrict
+      updateData.districtLocked = true
+    }
+    if (!existing.city && canonicalCity) {
+      updateData.city = canonicalCity
+      updateData.representedCity = canonicalCity
+      updateData.cityLocked = true
+    }
+    await setDoc(userRef, updateData, { merge: true })
+
+    try {
+      const publicProfileRef = doc(db, 'publicProfiles', user.uid)
+      await setDoc(
+        publicProfileRef,
+        {
+          uid: user.uid,
+          displayName: existing.displayName || cleanName,
+          district: existing.district || canonicalDistrict || 'Portugal',
+          city: existing.city || canonicalCity || '',
+          representedDistrict: existing.district || canonicalDistrict || 'Portugal',
+          representedCity: existing.city || canonicalCity || '',
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      )
+    } catch {}
+    return
+  }
+
   await setDoc(userRef, initialData, { merge: true })
 
   try {

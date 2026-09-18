@@ -5,6 +5,18 @@
 
 export type QuizDifficulty = 1 | 2 | 3 | 4 | 5
 
+export type GameActivityType = 'normal' | 'event' | '1v1' | 'multiplayer'
+
+export interface XpTransaction {
+  id: string
+  userId: string
+  amount: number
+  sourceType: GameActivityType
+  sourceId: string
+  matchId: string
+  createdAt: any
+}
+
 export type QuestionDifficulty = 'facil' | 'media' | 'dificil' | 'especialista'
 
 export type QuestionType =

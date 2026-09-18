@@ -140,6 +140,21 @@ export async function POST(req: Request) {
 
     await userDocRef.update(updatePayload)
 
+    // Sincronizar em publicProfiles para consistência de Rankings e perfis públicos
+    if (action === 'update_stats' || action === 'ban' || action === 'restore') {
+      try {
+        const pubDocRef = db.collection('publicProfiles').doc(targetUid)
+        const pubPayload: Record<string, any> = { updatedAt: FieldValue.serverTimestamp() }
+        if (typeof updatePayload.xp === 'number') pubPayload.xp = updatePayload.xp
+        if (typeof updatePayload.level === 'number') pubPayload.level = updatePayload.level
+        if (typeof updatePayload.district === 'string') pubPayload.district = updatePayload.district
+        if (typeof updatePayload.banned === 'boolean') pubPayload.banned = updatePayload.banned
+        await pubDocRef.set(pubPayload, { merge: true })
+      } catch (pubErr) {
+        console.warn('[ADMIN] Aviso ao sincronizar publicProfiles:', pubErr)
+      }
+    }
+
     // Gravar no log de auditoria
     await recordAdminAuditLog({
       adminUid: authResult.adminUser.uid,

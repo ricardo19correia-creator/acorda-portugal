@@ -29,10 +29,15 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
       const chosenAvatarId = STARTER_AVATAR_ID
       const chosenAvatarUrl = DEFAULT_AVATAR_URL
       const userRef = doc(db, 'users', user.uid)
-      const { getDoc } = await import('firebase/firestore')
-      const userSnap = await getDoc(userRef)
+      const { getDoc, getDocFromServer } = await import('firebase/firestore')
+      let userSnap = null
+      try {
+        userSnap = await getDocFromServer(userRef)
+      } catch {
+        userSnap = await getDoc(userRef)
+      }
 
-      if (userSnap.exists()) {
+      if (userSnap && userSnap.exists()) {
         const existingData = userSnap.data()
         // 1. Atualizar apenas território e campos em falta (NUNCA sobrescrever progresso nem moedas)
         await setDoc(

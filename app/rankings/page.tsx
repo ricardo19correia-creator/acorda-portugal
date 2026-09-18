@@ -177,12 +177,25 @@ export default function RankingsPage() {
   }, [profile?.photoURL])
 
   // Subscrição Global de Posicionamento Oficial Nacional
+  // Subscrição Global de Posicionamento Oficial Nacional
   useEffect(() => {
+    let isMounted = true
+
+    // Carregamento Imediato de Alta Velocidade via API do Servidor
+    fetch('/api/rankings?mode=nacional&limit=100')
+      .then((res) => res.json())
+      .then((apiData) => {
+        if (!isMounted || !apiData?.success || !Array.isArray(apiData.players)) return
+        setNationalPlayers((prev) => (prev.length === 0 ? apiData.players : prev))
+      })
+      .catch((apiErr) => console.warn('[RANKINGS] Aviso no carregamento inicial da API:', apiErr))
+
     try {
       const unsub = subscribeRankings(
         'all',
         'xp',
         (data) => {
+          if (!isMounted) return
           let allList = [...data]
 
           // Integrar o utilizador autenticado se ainda não existir
@@ -246,7 +259,10 @@ export default function RankingsPage() {
         },
         500
       )
-      return () => unsub()
+      return () => {
+        isMounted = false
+        unsub()
+      }
     } catch (err: any) {
       console.error('[RANKINGS] Erro ao subscrever ranking nacional:', err)
       setFetchError('Não foi possível conectar ao ranking oficial. Tenta novamente.')
@@ -255,16 +271,33 @@ export default function RankingsPage() {
 
   // Subscrição ao Ranking do Modo Ativo (Nacional / Distrito / Duelos)
   useEffect(() => {
+    let isMounted = true
     setLoading(true)
     setFetchError(null)
     const districtFilter = activeTab === 'distrito' ? selectedDistrict : 'all'
     const queryMode = activeTab === 'duelos' ? 'duelos' : 'xp'
+
+    // Carregamento Imediato de Alta Velocidade via API do Servidor
+    fetch(`/api/rankings?mode=${queryMode}&limit=100&district=${encodeURIComponent(districtFilter)}`)
+      .then((res) => res.json())
+      .then((apiData) => {
+        if (!isMounted || !apiData?.success || !Array.isArray(apiData.players)) return
+        setPlayers((prev) => {
+          if (prev.length === 0 && apiData.players.length > 0) {
+            setLoading(false)
+            return apiData.players
+          }
+          return prev
+        })
+      })
+      .catch((apiErr) => console.warn('[RANKINGS] Aviso no carregamento de separador da API:', apiErr))
 
     try {
       const unsubscribe = subscribeRankings(
         districtFilter,
         queryMode,
         (data) => {
+          if (!isMounted) return
           let list = [...data]
 
           // Integrar o utilizador autenticado
@@ -331,7 +364,10 @@ export default function RankingsPage() {
         500
       )
 
-      return () => unsubscribe()
+      return () => {
+        isMounted = false
+        unsubscribe()
+      }
     } catch (err: any) {
       console.error('[RANKINGS] Erro ao subscrever ranking filtrado:', err)
       setFetchError('Não foi possível carregar os dados deste separador.')

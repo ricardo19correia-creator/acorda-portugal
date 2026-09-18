@@ -127,6 +127,17 @@ function JogarContainer() {
 
   const gameParam = searchParams?.get('game') ?? searchParams?.get('gameId') ?? null
 
+  // 🔒 DETERMINAÇÃO ESTRITA DO TIPO DE PARTIDA (CANÓNICO)
+  // Uma partida SÓ é evento se gameType === 'event' E tiver eventId real.
+  const rawGameType = searchParams?.get('gameType') || searchParams?.get('type')
+  const rawEventId = searchParams?.get('eventId') || searchParams?.get('event_id')
+  const isEventMatch = rawGameType === 'event' && Boolean(rawEventId)
+  const gameType: 'normal' | 'event' = isEventMatch ? 'event' : 'normal'
+  const eventId = isEventMatch ? rawEventId : null
+  const eventSlug = isEventMatch
+    ? searchParams?.get('eventSlug') || searchParams?.get('event_slug') || 'primeiro-desafio-nacional-portugal-em-jogo'
+    : null
+
   const rawCategoryParam =
     searchParams?.get('cat') ||
     searchParams?.get('category') ||
@@ -136,11 +147,7 @@ function JogarContainer() {
     searchParams?.get('mode') ||
     searchParams?.get('modo') ||
     searchParams?.get('topic') ||
-    searchParams?.get('topico') ||
-    searchParams?.get('event') ||
-    searchParams?.get('evento') ||
-    searchParams?.get('eventId') ||
-    searchParams?.get('event_id')
+    searchParams?.get('topico')
 
   const districtParam = searchParams?.get('district') || searchParams?.get('dist') || searchParams?.get('distrito')
   const cityParam = searchParams?.get('city') || searchParams?.get('cidade')
@@ -151,21 +158,13 @@ function JogarContainer() {
     searchParams?.get('start') === '1' ||
     searchParams?.get('jogar') === 'true' ||
     searchParams?.get('jogar') === '1'
-  const eventParam =
-    searchParams?.get('event') ||
-    searchParams?.get('evento') ||
-    searchParams?.get('eventId') ||
-    searchParams?.get('event_id')
-  const eventSlugParam =
-    searchParams?.get('eventSlug') ||
-    searchParams?.get('event_slug')
   const arenaParam =
     searchParams?.get('arena') ||
     searchParams?.get('arenaId') ||
     searchParams?.get('arena_id')
 
   // Uma partida só começa após uma ação explícita do utilizador (parâmetros de partida presentes)
-  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || eventParam || eventSlugParam)
+  const isMatch = Boolean(rawCategoryParam || districtParam || cityParam || gameParam || playParam || isEventMatch)
 
   // Limpeza de resíduos de partida se estiver na Central de Jogo (evita retoma acidental)
   useEffect(() => {
@@ -191,7 +190,7 @@ function JogarContainer() {
 
   const effectiveCategory =
     normalizedRawCat ||
-    (eventParam ? 'portugal-em-jogo' : null) ||
+    (isEventMatch ? 'portugal-em-jogo' : null) ||
     (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
     (gameParam ? 'desafio-nacional' : null) ||
@@ -281,7 +280,12 @@ function JogarContainer() {
 
         {/* CONTEÚDO DO TABULEIRO DE QUIZ */}
         <main className="relative z-10 w-full max-w-4xl mx-auto h-full max-h-[100dvh] p-0 flex flex-col justify-between bg-transparent overflow-hidden">
-          <QuizPage />
+          <QuizPage
+            gameType={gameType}
+            eventId={eventId}
+            eventSlug={eventSlug}
+            categorySlug={effectiveCategory}
+          />
         </main>
       </div>
     )
@@ -294,7 +298,7 @@ function JogarContainer() {
         <JogarHub
           onStartClassicMatch={(gameId) => {
             const nextId = gameId || safeRandomUUID()
-            router.push(`/jogar?cat=desafio-nacional&game=${nextId}`)
+            router.push(`/jogar?gameType=normal&cat=desafio-nacional&game=${nextId}`)
           }}
         />
       </main>

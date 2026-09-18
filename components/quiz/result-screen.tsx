@@ -52,6 +52,7 @@ export function ResultScreen({
   answers,
   onExit,
   eventOutcome,
+  gameType = 'normal',
 }: {
   result: QuizResult
   gameId: string
@@ -66,6 +67,7 @@ export function ResultScreen({
   difficultyLabel?: string
   answers?: any
   onExit?: () => void
+  gameType?: 'normal' | 'event' | '1v1' | 'multiplayer'
   eventOutcome?: {
     success?: boolean
     eventPointsAdded?: number
@@ -289,9 +291,9 @@ export function ResultScreen({
         </div>
 
         {/* ========================================================= */}
-        {/* BANNER DO PRIMEIRO EVENTO OFICIAL REAL                    */}
+        {/* BANNER DO PRIMEIRO EVENTO OFICIAL REAL (EXCLUSIVO EVENTO) */}
         {/* ========================================================= */}
-        {eventOutcome && typeof eventOutcome.eventPointsAdded === 'number' && eventOutcome.eventPointsAdded > 0 && (
+        {gameType === 'event' && eventOutcome && typeof eventOutcome.eventPointsAdded === 'number' && eventOutcome.eventPointsAdded > 0 && (
           <div className="relative mt-3 overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-slate-900/85 to-slate-900/95 p-3.5 text-left shadow-lg backdrop-blur-md">
             <div className="flex items-center justify-between gap-2.5">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -316,7 +318,7 @@ export function ResultScreen({
           </div>
         )}
 
-        {eventOutcome && eventOutcome.dailyLimitReached && eventOutcome.eventPointsAdded === 0 && (
+        {gameType === 'event' && eventOutcome && eventOutcome.dailyLimitReached && eventOutcome.eventPointsAdded === 0 && (
           <div className="relative mt-3 overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/80 p-3 text-left backdrop-blur-md shadow-sm">
             <div className="flex items-center gap-2.5">
               <span className="text-base">🎯</span>
@@ -430,11 +432,11 @@ export function ResultScreen({
 
           <div className="grid grid-cols-2 gap-2.5">
             <Link
-              href={eventOutcome ? '/eventos' : '/#ranking'}
+              href={gameType === 'event' && eventOutcome ? '/eventos' : '/#ranking'}
               className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 py-2.5 px-3 text-xs font-bold text-foreground transition-all hover:bg-white/10 hover:border-white/20"
             >
               <Trophy className="h-4 w-4 text-gold" />
-              <span>{eventOutcome ? 'Ranking do Evento' : 'Ver Ranking'}</span>
+              <span>{gameType === 'event' && eventOutcome ? 'Ranking do Evento' : 'Ver Ranking'}</span>
             </Link>
 
             <Link

@@ -45,6 +45,21 @@ export async function GET(req: NextRequest) {
             rawPlayers.push(p)
           })
         }
+
+        // Redundância de segurança: incorporar qualquer utilizador de 'users' que ainda não tenha doc em 'publicProfiles'
+        const seenUids = new Set(rawPlayers.map((p) => p.uid))
+        try {
+          const usersSnap = await db.collection('users').limit(300).get()
+          usersSnap.docs.forEach((d: any) => {
+            if (!seenUids.has(d.id)) {
+              const uData = d.data()
+              rawPlayers.push(mapDocToRankingPlayer(d.id, uData))
+              seenUids.add(d.id)
+            }
+          })
+        } catch (uErr) {
+          console.warn('[RANKINGS_API_USERS_FALLBACK_WARN]', uErr)
+        }
       } catch (dbErr) {
         console.warn('[RANKINGS_API_DB_FETCH_WARN]', dbErr)
       }

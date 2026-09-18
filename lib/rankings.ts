@@ -315,26 +315,69 @@ export function subscribeRankings(
     }
   }
 
-  // Emissão imediata inicial
-  emitRankings()
-
   let unsubPub: (() => void) | undefined
+  let hasEmitted = false
 
   try {
     const pubRef = collection(db, 'publicProfiles')
     unsubPub = onSnapshot(
       query(pubRef, limit(500)),
       (snapshot) => {
-        currentHumans = []
+        hasEmitted = true
+        const nextHumans: RankingPlayer[] = []
         snapshot.docs.forEach((doc) => {
-          currentHumans.push(mapDocToRankingPlayer(doc.id, doc.data()))
+          try {
+            nextHumans.push(mapDocToRankingPlayer(doc.id, doc.data()))
+          } catch (docErr) {
+            console.warn('[RANKINGS] Erro ao mapear jogador:', doc.id, docErr)
+          }
         })
+        currentHumans = nextHumans
         emitRankings()
       },
       (err) => {
-        console.warn('[RANKINGS] publicProfiles listener notice:', err)
+        console.warn('[RANKINGS] publicProfiles onSnapshot notice:', err)
+        // Fallback robusto para getDocs se onSnapshot falhar ou tiver restrições de rede
+        getDocs(query(pubRef, limit(500)))
+          .then((snapshot) => {
+            const nextHumans: RankingPlayer[] = []
+            snapshot.docs.forEach((doc) => {
+              try {
+                nextHumans.push(mapDocToRankingPlayer(doc.id, doc.data()))
+              } catch (docErr) {
+                console.warn('[RANKINGS] Erro no fallback ao mapear jogador:', doc.id, docErr)
+              }
+            })
+            if (nextHumans.length > 0) {
+              currentHumans = nextHumans
+              emitRankings()
+            }
+          })
+          .catch((fetchErr) => {
+            console.warn('[RANKINGS] Fallback getDocs também falhou:', fetchErr)
+          })
       }
     )
+
+    // Fallback de segurança se onSnapshot não disparar em 2 segundos
+    setTimeout(() => {
+      if (!hasEmitted) {
+        getDocs(query(pubRef, limit(500)))
+          .then((snapshot) => {
+            if (!hasEmitted && snapshot.docs.length > 0) {
+              const nextHumans: RankingPlayer[] = []
+              snapshot.docs.forEach((doc) => {
+                try {
+                  nextHumans.push(mapDocToRankingPlayer(doc.id, doc.data()))
+                } catch (docErr) {}
+              })
+              currentHumans = nextHumans
+              emitRankings()
+            }
+          })
+          .catch(() => {})
+      }
+    }, 2000)
   } catch (e) {
     console.warn('[RANKINGS] Erro no listener de publicProfiles:', e)
   }

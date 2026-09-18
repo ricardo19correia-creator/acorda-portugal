@@ -56,9 +56,15 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
       return
     }
 
-    if (isMatchAction && onStartClassicMatch && route.startsWith('/jogar?cat=desafio-nacional')) {
+    if (isMatchAction && onStartClassicMatch && route.includes('desafio-nacional')) {
       const matchGameId = safeRandomUUID()
       onStartClassicMatch(matchGameId)
+      return
+    }
+
+    if (isMatchAction && !route.includes('gameType=')) {
+      const separator = route.includes('?') ? '&' : '?'
+      router.push(`${route}${separator}gameType=normal`)
       return
     }
 
@@ -67,7 +73,7 @@ export function JogarHub({ onStartClassicMatch }: JogarHubProps) {
 
   const handleStartClassic = () => {
     const gameId = safeRandomUUID()
-    const target = `/jogar?cat=desafio-nacional&game=${gameId}`
+    const target = `/jogar?gameType=normal&cat=desafio-nacional&game=${gameId}`
     if (!user) {
       setAuthWallTarget(target)
       setAuthWallOpen(true)

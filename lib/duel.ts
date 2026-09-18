@@ -1338,12 +1338,24 @@ export async function claimDuelRewards(
         transaction.set(rewardRef, {
           matchId: duelId,
           userId: userUid,
+          gameType: '1v1',
           matchType: 'duel_1v1',
           xpEarned: xpReward,
           coinsEarned: totalAwardedEuros,
           newTotalXp,
           newLevel,
           processedAt: serverTimestamp(),
+        })
+
+        const xpTxRef = doc(db, 'users', userUid, 'xp_transactions', duelId)
+        transaction.set(xpTxRef, {
+          id: `1v1_${duelId}`,
+          userId: userUid,
+          amount: xpReward,
+          sourceType: '1v1',
+          sourceId: duelId,
+          matchId: duelId,
+          createdAt: serverTimestamp(),
         })
       }
 

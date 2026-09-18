@@ -36,10 +36,26 @@ export async function POST(request: NextRequest) {
       isAbandoned = false,
       eventId: requestedEventId,
       eventSlug,
+      gameType,
     } = body
 
     if (!matchId || typeof matchId !== 'string') {
       return NextResponse.json({ error: 'matchId inválido.' }, { status: 400 })
+    }
+
+    // 🔒 VALIDAÇÃO ESTRITA: APENAS PARTIDAS DE EVENTO COM eventId EXPLÍCITO SÃO ACEITES
+    if (!requestedEventId || typeof requestedEventId !== 'string') {
+      return NextResponse.json(
+        { error: 'eventId obrigatório para registar partida de evento. Partidas normais não podem entrar no evento.' },
+        { status: 400 }
+      )
+    }
+
+    if (gameType && gameType !== 'event') {
+      return NextResponse.json(
+        { error: 'Apenas partidas com gameType === "event" podem ser registadas no evento.' },
+        { status: 400 }
+      )
     }
 
     // Validação estrita: partidas abandonadas, incompletas ou corruptas não geram pontos de evento
@@ -52,7 +68,7 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getAdminFirestore()
-    const targetEventId = requestedEventId || OFFICIAL_PORTUGAL_EM_JOGO_ID
+    const targetEventId = requestedEventId
 
     // Obter documento do evento oficial no Firestore
     const eventDocRef = db.collection('events').doc(targetEventId)
@@ -180,6 +196,7 @@ export async function POST(request: NextRequest) {
           {
             id: matchId,
             matchId,
+            gameType: 'event',
             eventId: targetEventId,
             eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
             userId,
@@ -244,6 +261,7 @@ export async function POST(request: NextRequest) {
         {
           id: matchId,
           matchId,
+          gameType: 'event',
           eventId: targetEventId,
           eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
           userId,
@@ -259,6 +277,22 @@ export async function POST(request: NextRequest) {
           status: 'completed',
           processed: true,
           completedAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      )
+
+      // Registo de xpTransaction para rastreabilidade de origem (sourceType: 'event')
+      const xpTxRef = userRef.collection('xp_transactions').doc(matchId)
+      transaction.set(
+        xpTxRef,
+        {
+          id: `event_${matchId}`,
+          userId,
+          amount: potentialEventPoints,
+          sourceType: 'event',
+          sourceId: targetEventId,
+          matchId,
+          createdAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       )

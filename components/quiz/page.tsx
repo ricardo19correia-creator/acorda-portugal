@@ -57,7 +57,14 @@ export class QuizErrorBoundary extends Component<ErrorBoundaryProps, ErrorBounda
   }
 }
 
-function QuizPageContent() {
+export interface QuizPageProps {
+  gameType?: 'normal' | 'event' | '1v1' | 'multiplayer'
+  eventId?: string | null
+  eventSlug?: string | null
+  categorySlug?: string | null
+}
+
+function QuizPageContent(props: QuizPageProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { user, profile, authResolved } = useAuth()
@@ -77,8 +84,20 @@ function QuizPageContent() {
     } catch {}
   }, [isFresh])
 
-  // 2. Extrair parâmetros flexíveis com fallback direto para 'desafio-nacional'
+  // 1. Determinar gameType com estrito rigor:
+  // Uma partida SÓ é evento se gameType === 'event' E tiver eventId real.
+  const rawGameType = props.gameType || searchParams.get('gameType') || searchParams.get('type')
+  const rawEventId = props.eventId || searchParams.get('eventId') || searchParams.get('event_id')
+  const isEventMatch = rawGameType === 'event' && Boolean(rawEventId)
+  const gameType: 'normal' | 'event' = isEventMatch ? 'event' : 'normal'
+  const eventId = isEventMatch ? rawEventId : null
+  const eventSlug = isEventMatch
+    ? props.eventSlug || searchParams.get('eventSlug') || searchParams.get('event_slug') || 'primeiro-desafio-nacional-portugal-em-jogo'
+    : null
+
+  // 2. Extrair parâmetros de categoria
   const rawCategorySlug =
+    props.categorySlug ||
     searchParams.get('cat') ||
     searchParams.get('category') ||
     searchParams.get('categoria') ||
@@ -87,9 +106,7 @@ function QuizPageContent() {
     searchParams.get('mode') ||
     searchParams.get('modo') ||
     searchParams.get('topic') ||
-    searchParams.get('topico') ||
-    searchParams.get('event') ||
-    searchParams.get('evento')
+    searchParams.get('topico')
 
   const subcategorySlug = searchParams.get('subcat') || searchParams.get('subcategoria')
   const difficulty = searchParams.get('diff') || searchParams.get('dificuldade')
@@ -101,13 +118,6 @@ function QuizPageContent() {
     searchParams.get('arenaId') ||
     searchParams.get('arena_id')
 
-  const eventId =
-    searchParams.get('eventId') ||
-    searchParams.get('event_id') ||
-    searchParams.get('event') ||
-    searchParams.get('evento')
-  const eventSlug = searchParams.get('eventSlug') || searchParams.get('event_slug')
-
   const normalizedRawCat =
     rawCategorySlug === 'o-meu-distrito' || rawCategorySlug === 'distrito'
       ? 'conquista-do-distrito'
@@ -116,7 +126,7 @@ function QuizPageContent() {
   // Entrada direta no jogo: se for evento oficial, usa 'portugal-em-jogo'
   const categorySlug =
     normalizedRawCat ||
-    (eventId ? 'portugal-em-jogo' : null) ||
+    (isEventMatch ? 'portugal-em-jogo' : null) ||
     (district ? 'conquista-do-distrito' : null) ||
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null) ||
@@ -136,6 +146,7 @@ function QuizPageContent() {
       <div className="relative h-full w-full bg-transparent overflow-hidden flex flex-col">
         <QuizScreen
           key={gameId}
+          gameType={gameType}
           categorySlug={categorySlug}
           subcategorySlug={subcategorySlug}
           difficultyParam={difficulty}
@@ -154,11 +165,11 @@ function QuizPageContent() {
   )
 }
 
-export function QuizPage() {
+export function QuizPage(props: QuizPageProps) {
   return (
     <div className="relative h-full w-full bg-transparent overflow-hidden">
       <Suspense fallback={null}>
-        <QuizPageContent />
+        <QuizPageContent {...props} />
       </Suspense>
     </div>
   )

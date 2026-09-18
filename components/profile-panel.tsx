@@ -10,7 +10,7 @@ import {
 } from 'firebase/auth'
 import { auth, db } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, getDocFromServer, setDoc } from 'firebase/firestore'
 import { PlayerCard, type UserProfile } from './player-card'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 import { cn } from '@/lib/utils'
@@ -236,17 +236,22 @@ export function ProfilePanel({
 
   const getOrCreateUserProfile = async (user: User): Promise<UserProfile> => {
     const userRef = doc(db, 'users', user.uid)
-    const userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil').catch((cause) => {
-      throw { operation: 'getDoc', cause } satisfies ProfileSyncFailure
-    })
+    let userSnap: any
+    try {
+      userSnap = await withTimeout(getDocFromServer(userRef), 'A leitura do perfil')
+    } catch {
+      userSnap = await withTimeout(getDoc(userRef), 'A leitura do perfil').catch((cause) => {
+        throw { operation: 'getDoc', cause } satisfies ProfileSyncFailure
+      })
+    }
 
-    if (userSnap.exists()) {
+    if (userSnap && userSnap.exists()) {
       return userSnap.data() as UserProfile
     }
 
     const newUserProfile = createDefaultUserProfile(user)
     try {
-      await withTimeout(setDoc(userRef, newUserProfile), 'A criação do perfil')
+      await withTimeout(setDoc(userRef, newUserProfile, { merge: true }), 'A criação do perfil')
       await setDoc(doc(db, 'publicProfiles', user.uid), {
         uid: user.uid,
         displayName: newUserProfile.displayName,

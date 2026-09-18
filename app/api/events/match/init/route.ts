@@ -97,17 +97,32 @@ export async function POST(request: NextRequest) {
     const userId = decodedToken.uid
     const body = await request.json().catch(() => ({}))
     const {
-      eventId: requestedEventId = OFFICIAL_PORTUGAL_EM_JOGO_ID,
+      eventId: requestedEventId,
       eventSlug = 'primeiro-desafio-nacional-portugal-em-jogo',
       matchId,
+      gameType,
     } = body
 
     if (!matchId || typeof matchId !== 'string') {
       return NextResponse.json({ error: 'matchId obrigatório.' }, { status: 400 })
     }
 
+    if (!requestedEventId || typeof requestedEventId !== 'string') {
+      return NextResponse.json(
+        { error: 'eventId obrigatório para inicializar partida de evento.' },
+        { status: 400 }
+      )
+    }
+
+    if (gameType && gameType !== 'event') {
+      return NextResponse.json(
+        { error: 'Apenas partidas com gameType === "event" podem ser inicializadas no evento.' },
+        { status: 400 }
+      )
+    }
+
     const db = getAdminFirestore()
-    const targetEventId = requestedEventId || OFFICIAL_PORTUGAL_EM_JOGO_ID
+    const targetEventId = requestedEventId
 
     // 1. Obter e validar o evento oficial no Firestore
     const eventDocRef = db.collection('events').doc(targetEventId)
@@ -294,6 +309,7 @@ export async function POST(request: NextRequest) {
       {
         matchId,
         id: matchId,
+        gameType: 'event',
         eventId: targetEventId,
         eventSlug,
         userId,

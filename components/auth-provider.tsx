@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { onAuthStateChanged, type User } from 'firebase/auth'
-import { doc, setDoc, onSnapshot, serverTimestamp, getDoc } from 'firebase/firestore'
+import { doc, setDoc, onSnapshot, serverTimestamp, getDoc, getDocFromServer } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
 import type { UserProfile } from '@/lib/game-data'
@@ -363,7 +363,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const unsub = onSnapshot(
         userDocRef,
-        (docSnap) => {
+        async (docSnap) => {
           firestoreRetryCountRef.current = 0
           if (firestoreRetryTimerRef.current) {
             clearTimeout(firestoreRetryTimerRef.current)
@@ -612,8 +612,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 },
                 { merge: true },
               ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles:', syncErr))
+            } else {
+              // Sincronização fallback para utilizadores ainda sem distrito definido (para garantir presença nos rankings)
+              const publicProfileRef = doc(db, 'publicProfiles', currentUser.uid)
+              setDoc(
+                publicProfileRef,
+                {
+                  uid: currentUser.uid,
+                  displayName: nameVal,
+                  photoURL: avatarVal,
+                  avatarId: avatarIdVal,
+                  district: 'Portugal',
+                  city: cityVal || '',
+                  representedDistrict: 'Portugal',
+                  representedCity: cityVal || '',
+                  level: levelVal,
+                  xp: xpVal,
+                  title: equippedTitleNameVal,
+                  equippedTitle: equippedTitleNameVal,
+                  equippedTitleId: equippedTitleIdVal,
+                  equippedFrame: equippedData.frameId || null,
+                  wins1v1: typeof data.wins === 'number' ? data.wins : (data.stats?.duelsWon || 0),
+                  losses1v1: typeof data.losses === 'number' ? data.losses : (data.stats?.duelsLost || 0),
+                  gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalDuels || 0),
+                  updatedAt: serverTimestamp(),
+                },
+                { merge: true },
+              ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles (fallback Portugal):', syncErr))
             }
           } else {
+            // PROTEÇÃO CRÍTICA ANTI-RESET:
+            // Se docSnap veio da cache local (novo browser, aba incógnita, limpeza de cookies),
+            // NUNCA criar documento default nem sobrescrever XP! Aguardar pelo snapshot do servidor.
+            if (docSnap.metadata.fromCache) {
+              console.log('[AUTH] docSnap ausente na cache local, aguardando resposta autoritativa do servidor...')
+              return
+            }
+
+            // Confirmar ativamente no servidor Firestore se o utilizador existe antes de criar qualquer default
+            try {
+              const serverCheck = await getDocFromServer(userDocRef)
+              if (serverCheck.exists()) {
+                console.warn('[AUTH] Documento do utilizador já existe no servidor! Abortando criação default.')
+                return
+              }
+            } catch (checkErr) {
+              console.warn('[AUTH] Verificação no servidor falhou, adiando criação para evitar sobrescrita acidental:', checkErr)
+              return
+            }
+
             // Novo Utilizador — Criar documento com defaults e merge seguro
             const fallbackName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
             const fallbackAvatar = DEFAULT_AVATAR.image
@@ -683,6 +730,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 equippedAvatar: fallbackAvatarId,
                 'equipped.avatar': fallbackAvatar,
                 'equipped.avatarId': fallbackAvatarId,
+                district: 'Portugal',
                 level: 1,
                 xp: 0,
                 title: DEFAULT_STARTER_TITLE_NAME,
