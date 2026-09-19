@@ -950,6 +950,26 @@ export function QuizScreen({
                   setEventMatchOutcome(evData)
 
                   if (evData.newTotalXp !== undefined) {
+                    const eventOutcomeObj: MatchRewardOutcome = {
+                      alreadyProcessed: Boolean(evData.alreadyProcessed),
+                      matchId: gid,
+                      xpEarned: evData.xpReward || evData.eventPointsAdded || 0,
+                      coinsEarned: evData.coinReward || 0,
+                      oldXp: evData.oldXp ?? Math.max(0, (evData.newTotalXp || 0) - (evData.xpReward || 0)),
+                      newTotalXp: evData.newTotalXp,
+                      oldCoins: evData.oldCoins ?? Math.max(0, (evData.newTotalCoins || 0) - (evData.coinReward || 0)),
+                      newTotalCoins: evData.newTotalCoins,
+                      oldLevel: evData.oldLevel ?? calculateLevelProgress(evData.oldXp || 0).currentLevel.level,
+                      newLevel: evData.newLevel,
+                      leveledUp: Boolean(evData.leveledUp),
+                      levelTitle: calculateLevelProgress(evData.newTotalXp).currentLevel.title,
+                      oldStreak: typeof evData.oldStreak === 'number' ? evData.oldStreak : 0,
+                      newStreak: typeof evData.newStreak === 'number' ? evData.newStreak : 1,
+                      unlockedAchievements: [],
+                      completedMissions: [],
+                    }
+                    setRewardOutcome(eventOutcomeObj)
+
                     setUserProfile((currentProfile) =>
                       currentProfile
                         ? {
@@ -1089,6 +1109,29 @@ export function QuizScreen({
             }
           } catch (rewardErr) {
             console.error('[CRASH /jogar]: Erro na atribuição de recompensa normal:', rewardErr)
+            const fallbackOldXp = typeof profile?.xp === 'number' ? profile.xp : 0
+            const fallbackXpEarned = finalResult.xp || 10
+            const fallbackNewTotalXp = fallbackOldXp + fallbackXpEarned
+            const fallbackProg = calculateLevelProgress(fallbackNewTotalXp)
+            const fallbackOutcome: MatchRewardOutcome = {
+              alreadyProcessed: false,
+              matchId: gid,
+              xpEarned: fallbackXpEarned,
+              coinsEarned: finalResult.euros || 0,
+              oldXp: fallbackOldXp,
+              newTotalXp: fallbackNewTotalXp,
+              oldCoins: typeof profile?.coins === 'number' ? profile.coins : 50,
+              newTotalCoins: (typeof profile?.coins === 'number' ? profile.coins : 50) + (finalResult.euros || 0),
+              oldLevel: typeof profile?.level === 'number' ? profile.level : 1,
+              newLevel: fallbackProg.currentLevel.level,
+              leveledUp: fallbackProg.currentLevel.level > (profile?.level || 1),
+              levelTitle: fallbackProg.currentLevel.title,
+              oldStreak: typeof profile?.streak === 'number' ? profile.streak : 0,
+              newStreak: (profile?.streak || 0) + 1,
+              unlockedAchievements: [],
+              completedMissions: [],
+            }
+            setRewardOutcome(fallbackOutcome)
           }
         }
       } catch (err) {

@@ -13,6 +13,7 @@
 import { doc, getDoc, onSnapshot, type Unsubscribe } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { UserProfile } from '@/lib/game-data'
+import { extractUserXp, extractUserLevel } from '@/lib/economy-helpers'
 import {
   CANONICAL_PROFILE_CATEGORIES,
   getCanonicalCategoryData,
@@ -255,8 +256,8 @@ export function getUserMatchStats(profile: Partial<UserProfile> | null | undefin
         ? Math.max(0, (profile as any).stats.totalGames)
         : 0
 
-  const xp = typeof profile.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
-  const level = typeof profile.level === 'number' && profile.level >= 1 ? profile.level : 1
+  const xp = extractUserXp(profile, 0)
+  const level = extractUserLevel(profile, xp)
   const coins = typeof profile.coins === 'number' ? profile.coins : typeof profile.euros === 'number' ? profile.euros : 0
   const streak = typeof profile.streak === 'number' ? Math.max(0, profile.streak) : 0
   const bestStreak = typeof (profile as any)?.bestStreak === 'number' ? Math.max(streak, (profile as any).bestStreak) : streak

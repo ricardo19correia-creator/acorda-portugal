@@ -424,6 +424,7 @@ export async function POST(request: NextRequest) {
         { merge: true }
       )
 
+      console.log(`[GAME_COMPLETE]\nuid=${userId}\nmatchId=${matchId}\nxpBefore=${currentXp}\nxpEarned=${earnedXp}\nxpAfter=${newTotalXp}\npersisted=true`)
       console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}, xpAdded=${earnedXp}, coinsAdded=${totalAwardedCoins}`)
       console.log(`[EVENT] participante atualizado: userId=${userId}, newPoints=${newEventPoints}, matches=${countedMatches}`)
       console.log(`[EVENT] ranking e conta global atualizados`)
@@ -440,8 +441,11 @@ export async function POST(request: NextRequest) {
         totalMatches,
         maxDailyMatches,
         dailyLimitReached: newDailyCount >= maxDailyMatches,
+        oldXp: currentXp,
         newTotalXp,
+        oldCoins: currentCoins,
         newTotalCoins,
+        oldLevel,
         newLevel,
         leveledUp,
         xpReward: earnedXp,

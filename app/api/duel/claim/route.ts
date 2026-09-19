@@ -170,6 +170,8 @@ export async function POST(request: NextRequest) {
         updatedAt: FieldValue.serverTimestamp(),
       })
 
+      console.log(`[GAME_COMPLETE]\nuid=${userId}\nmatchId=${duelId}\nxpBefore=${currentXp}\nxpEarned=${xpReward}\nxpAfter=${newTotalXp}\npersisted=true`)
+
       return {
         xp: xpReward,
         coins: totalAwardedCoins,

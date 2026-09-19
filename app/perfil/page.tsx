@@ -215,7 +215,18 @@ function PerfilContent() {
   const [testingEmoteId, setTestingEmoteId] = useState<string | null>(null)
   const [userCoins, setUserCoins] = useState<number>(() => profile?.coins ?? profile?.euros ?? 0)
   // XP e Nível canónicos e globais sincronizados em tempo real a partir do AuthProvider / Firestore
-  const userXp = typeof profile?.xp === 'number' && !isNaN(profile.xp) ? Math.max(0, profile.xp) : 0
+  const [realtimeXp, setRealtimeXp] = useState<number | null>(null)
+  const cachedLocalXp = useMemo(() => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
+      const n = Number(raw)
+      return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
+    } catch {
+      return 0
+    }
+  }, [])
+  const profileXp = extractUserXp(profile, 0)
+  const userXp = realtimeXp !== null ? realtimeXp : Math.max(profileXp, cachedLocalXp)
   const progressInfo = calculateLevelProgress(userXp)
   const userLevel = progressInfo.currentLevel.level
 
@@ -672,8 +683,21 @@ function PerfilContent() {
               localStorage.setItem('user_coins', String(coinsVal))
               localStorage.setItem('user_euros', String(coinsVal))
 
+              setRealtimeXp(liveXp)
               localStorage.setItem('user_xp', String(liveXp))
               localStorage.setItem('user_level', String(liveLevel))
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(
+                  new CustomEvent('profile_updated', {
+                    detail: {
+                      xp: liveXp,
+                      level: liveLevel,
+                      coins: coinsVal,
+                      euros: coinsVal,
+                    },
+                  })
+                )
+              }
 
               if (data.claimedAchievements) {
                 setClaimedAchievements(data.claimedAchievements)

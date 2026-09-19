@@ -1155,11 +1155,75 @@ export async function claimDuelRewards(
 
   console.log(`[GAME] MATCH_COMPLETE (duelId: ${duelId}, userUid: ${userUid})`)
 
+  // 1. Tentar endpoint autoritativo de servidor primeiro
+  try {
+    const idToken = await auth?.currentUser?.getIdToken().catch(() => null)
+    if (idToken) {
+      const resp = await fetch('/api/duel/claim', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ duelId }),
+      })
+      if (resp.ok) {
+        const data = await resp.json()
+        if (data.success) {
+          const outcome: DuelRewardResult = {
+            xp: data.xpEarned ?? 0,
+            euros: data.coinsEarned ?? 0,
+            isWinner: Boolean(data.isWinner),
+            isDraw: Boolean(data.isDraw),
+            isLoser: Boolean(data.isLoser),
+            oldXp: data.oldXp ?? 0,
+            newXp: data.newXp ?? ((data.oldXp ?? 0) + (data.xpEarned ?? 0)),
+            oldEuros: data.oldCoins ?? data.oldEuros ?? 0,
+            newEuros: data.newCoins ?? data.newEuros ?? 0,
+            oldLevel: data.oldLevel ?? 1,
+            newLevel: data.newLevel ?? 1,
+            leveledUp: Boolean(data.leveledUp),
+            levelTitle: data.levelTitle || '',
+          }
+          console.log(`[GAME_COMPLETE]\nuid=${userUid}\nmatchId=${duelId}\nxpBefore=${outcome.oldXp}\nxpEarned=${outcome.xp}\nxpAfter=${outcome.newXp}\npersisted=true`)
+          if (typeof window !== 'undefined') {
+            try {
+              localStorage.setItem('user_xp', String(outcome.newXp))
+              localStorage.setItem('user_level', String(outcome.newLevel))
+              localStorage.setItem('user_coins', String(outcome.newEuros))
+              localStorage.setItem('user_euros', String(outcome.newEuros))
+              localStorage.setItem(`match_reward_${duelId}`, '1')
+            } catch {}
+            window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: outcome.newEuros } }))
+            window.dispatchEvent(
+              new CustomEvent('profile_updated', {
+                detail: {
+                  xp: outcome.newXp,
+                  level: outcome.newLevel,
+                  coins: outcome.newEuros,
+                  euros: outcome.newEuros,
+                  gamesPlayed: 1,
+                },
+              })
+            )
+          }
+          return outcome
+        }
+      }
+    }
+  } catch (serverErr) {
+    console.warn('[DUEL] Erro na rota autoritativa de duelo, prosseguindo com fallback local:', serverErr)
+  }
+
   const outcome = await silentAsyncRetry(() =>
     runTransaction(db, async (transaction) => {
-      // 1. Idempotência por match_rewards
-      const rewardSnap = await transaction.get(rewardRef)
-      const duelSnap = await transaction.get(duelRef)
+      // 1. Idempotência por match_rewards e leituras atómicas iniciais
+      const [rewardSnap, duelSnap, userSnap, publicProfileSnap] = await Promise.all([
+        transaction.get(rewardRef),
+        transaction.get(duelRef),
+        transaction.get(userRef),
+        transaction.get(publicProfileRef),
+      ])
       if (!duelSnap.exists()) {
         throw new Error('Duelo não encontrado.')
       }
@@ -1181,7 +1245,6 @@ export async function claimDuelRewards(
       const baseWin = ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS
       const coinReward = isWinner ? baseWin + ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : isDraw ? baseWin : 5
 
-      const userSnap = await transaction.get(userRef)
       const userData = userSnap.exists() ? userSnap.data() : {}
 
       const currentXp = extractUserXp(userData, 0)
@@ -1436,6 +1499,7 @@ export async function claimDuelRewards(
     )
   }
 
+  console.log(`[GAME_COMPLETE]\nuid=${userUid}\nmatchId=${duelId}\nxpBefore=${outcome.oldXp}\nxpEarned=${outcome.xp}\nxpAfter=${outcome.newXp}\npersisted=true`)
   console.log(`[XP] PERSIST_SUCCESS (duelId: ${duelId}, newTotalXp: ${outcome.newXp}, newLevel: ${outcome.newLevel})`)
   console.log(`[XP] CURRENT_TOTAL (xp: ${outcome.newXp}, level: ${outcome.newLevel})`)
   console.log(`[PROFILE] XP_REFRESH (dispatched events and updated localStorage)`)

@@ -220,6 +220,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const currentXp = extractUserXp(data)
         const coinsVal = extractUserCoins(data)
         const levelVal = extractUserLevel(data, currentXp)
+        try {
+          if (typeof window !== 'undefined' && Number.isFinite(currentXp)) {
+            localStorage.setItem('user_xp', String(currentXp))
+            localStorage.setItem('user_level', String(levelVal))
+          }
+        } catch {}
         setProfile((prev) => {
           if (!prev) return prev
           return {
@@ -451,7 +457,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
 
             // Se o documento Firestore ainda não tem o campo oficial 'xp' mas contém valor equivalente
-            if (data.xp === undefined && xpVal > 0) {
+            if ((data.xp === undefined || data.xp === 0) && xpVal > 0) {
               setDoc(
                 userDocRef,
                 {
@@ -671,6 +677,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const fallbackAvatar = DEFAULT_AVATAR.image
             const fallbackAvatarId = STARTER_AVATAR_ID
 
+            const cachedXp = (() => {
+              try {
+                const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
+                const n = Number(raw)
+                return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
+              } catch {
+                return 0
+              }
+            })()
+            const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
+
             const defaultProfileData = {
               uid: currentUser.uid,
               displayName: fallbackName,
@@ -682,8 +699,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               equippedAvatar: fallbackAvatarId,
               district: '',
               districtLocked: false,
-              level: 1,
-              xp: 0,
+              level: initialLevel,
+              xp: cachedXp,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
@@ -736,8 +753,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 'equipped.avatar': fallbackAvatar,
                 'equipped.avatarId': fallbackAvatarId,
                 district: 'Portugal',
-                level: 1,
-                xp: 0,
+                level: initialLevel,
+                xp: cachedXp,
                 title: DEFAULT_STARTER_TITLE_NAME,
                 equippedTitle: DEFAULT_STARTER_TITLE_NAME,
                 equippedTitleId: DEFAULT_STARTER_TITLE_ID,
@@ -754,8 +771,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               photoURL: fallbackAvatar,
               district: '',
               districtLocked: false,
-              level: 1,
-              xp: 0,
+              level: initialLevel,
+              xp: cachedXp,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,

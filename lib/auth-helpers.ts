@@ -320,6 +320,7 @@ export async function createNewUserDocument(
   const { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID } = await import('@/data/constants')
   const { normalizeDistrict, getDefaultCityForDistrict, isValidCityForDistrict } = await import('@/data/districts')
   const { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } = await import('@/lib/titles')
+  const { extractUserLevel } = await import('@/lib/economy-helpers')
 
   const cleanName = (username || user.displayName || user.email?.split('@')[0] || 'Jogador').trim()
   const photoURL = DEFAULT_AVATAR_URL
@@ -330,6 +331,17 @@ export async function createNewUserDocument(
     rawCity && isValidCityForDistrict(canonicalDistrict, rawCity)
       ? rawCity
       : rawCity || getDefaultCityForDistrict(canonicalDistrict)
+
+  const cachedXp = (() => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
+      const n = Number(raw)
+      return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
+    } catch {
+      return 0
+    }
+  })()
+  const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
 
   const initialData = {
     uid: user.uid,
@@ -346,8 +358,8 @@ export async function createNewUserDocument(
     representedCity: canonicalCity,
     districtLocked: true,
     cityLocked: true,
-    level: 1,
-    xp: 0,
+    level: initialLevel,
+    xp: cachedXp,
     coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     streak: 0,
@@ -466,8 +478,8 @@ export async function createNewUserDocument(
         city: canonicalCity,
         representedDistrict: canonicalDistrict,
         representedCity: canonicalCity,
-        level: 1,
-        xp: 0,
+        level: initialLevel,
+        xp: cachedXp,
         title: DEFAULT_STARTER_TITLE_NAME,
         equippedTitle: DEFAULT_STARTER_TITLE_NAME,
         equippedTitleId: DEFAULT_STARTER_TITLE_ID,

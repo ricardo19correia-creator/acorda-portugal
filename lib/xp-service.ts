@@ -116,7 +116,107 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
     return clientProcessedMatches.get(matchId)!
   }
 
-  // 2. Cálculo determinístico da recompensa
+  // 2. Tentar submeter prioritariamente para a API Server-Authoritative /api/quiz/complete
+  if (gameType === 'normal' && matchType !== 'duel_1v1') {
+    try {
+      const currentUser = auth?.currentUser
+      if (currentUser && typeof window !== 'undefined') {
+        const idToken = await currentUser.getIdToken(false).catch(() => null)
+        if (idToken) {
+          console.log(`[XP] A submeter partida ${matchId} para /api/quiz/complete...`)
+          const apiRes = await fetch('/api/quiz/complete', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify({
+              gameId: matchId,
+              categorySlug,
+              categoryName,
+              matchType,
+              score,
+              correctCount: correctAnswers,
+              totalQuestions,
+              bestStreak,
+              difficultyMultiplier,
+              district,
+              city,
+              answers:
+                Array.isArray(answers) && answers.length > 0
+                  ? answers
+                  : answeredQuestionIds.map((qid) => ({ questionId: qid, isCorrect: true })),
+            }),
+          }).catch(() => null)
+
+          if (apiRes && apiRes.ok) {
+            const resJson = await apiRes.json().catch(() => null)
+            if (resJson && resJson.success && resJson.data) {
+              const serverData = resJson.data
+              console.log('[XP] Recompensa confirmada pelo servidor:', serverData)
+
+              const outcome: MatchRewardOutcome = {
+                alreadyProcessed: Boolean(serverData.alreadyProcessed),
+                matchId,
+                xpEarned: serverData.xpReward,
+                coinsEarned: serverData.coinReward,
+                oldXp: serverData.oldXp ?? Math.max(0, (serverData.newTotalXp || 0) - (serverData.xpReward || 0)),
+                newTotalXp: serverData.newTotalXp,
+                oldCoins: serverData.oldCoins ?? Math.max(0, (serverData.newTotalCoins || 0) - (serverData.coinReward || 0)),
+                newTotalCoins: serverData.newTotalCoins,
+                oldLevel: serverData.oldLevel ?? calculateLevelProgress(serverData.oldXp || 0).currentLevel.level,
+                newLevel: serverData.newLevel,
+                leveledUp: Boolean(serverData.leveledUp),
+                levelTitle: calculateLevelProgress(serverData.newTotalXp).currentLevel.title,
+                oldStreak: serverData.oldStreak || 0,
+                newStreak: serverData.newStreak || 1,
+                unlockedAchievements: serverData.unlockedAchievements || [],
+                completedMissions: serverData.completedMissions || [],
+                categoryStats: serverData.categoryStats,
+              }
+
+              clientProcessedMatches.set(matchId, outcome)
+
+              if (typeof window !== 'undefined') {
+                try {
+                  localStorage.setItem('user_xp', String(outcome.newTotalXp))
+                  localStorage.setItem('user_level', String(outcome.newLevel))
+                  localStorage.setItem('user_coins', String(outcome.newTotalCoins))
+                  localStorage.setItem('user_euros', String(outcome.newTotalCoins))
+                  localStorage.setItem('user_streak', String(outcome.newStreak))
+                  localStorage.setItem(`match_reward_${matchId}`, '1')
+                } catch {}
+
+                window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: outcome.newTotalCoins } }))
+                window.dispatchEvent(
+                  new CustomEvent('profile_updated', {
+                    detail: {
+                      xp: outcome.newTotalXp,
+                      level: outcome.newLevel,
+                      coins: outcome.newTotalCoins,
+                      euros: outcome.newTotalCoins,
+                      streak: outcome.newStreak,
+                      gamesPlayed: 1,
+                      correctAnswers,
+                      questionsAnswered: totalQuestions,
+                      bestStreak,
+                      categoryStats: outcome.categoryStats,
+                    },
+                  })
+                )
+              }
+
+              return outcome
+            }
+          }
+        }
+      }
+    } catch (apiErr) {
+      console.warn('[XP] Falha ao comunicar com /api/quiz/complete, a executar fallback local Firestore:', apiErr)
+    }
+  }
+
+  // 3. Cálculo determinístico da recompensa (Fallback local e Duelos 1v1)
   let calculatedXp = 0
   let calculatedCoins = 0
 
@@ -147,8 +247,14 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
 
   try {
     const outcome = await runTransaction(db, async (transaction) => {
-      // A. Verificar idempotência no Firestore
-      const rewardSnap = await transaction.get(rewardRef)
+      // A. Todas as leituras CONCORRENTES no início da transação (exigência estrita do Firestore)
+      const [rewardSnap, userSnap, publicProfileSnap, gameSnap] = await Promise.all([
+        transaction.get(rewardRef),
+        transaction.get(userRef),
+        transaction.get(publicProfileRef),
+        transaction.get(gameRef),
+      ])
+
       if (rewardSnap.exists()) {
         const rData = rewardSnap.data() || {}
         console.log(`[XP] REWARD_ALREADY_PROCESSED (firestore matchId: ${matchId})`)
@@ -173,8 +279,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         return existingOutcome
       }
 
-      // B. Ler utilizador atual
-      const userSnap = await transaction.get(userRef)
+      // B. Processar dados do utilizador atual
       const userData = userSnap.exists() ? (userSnap.data() as Partial<UserProfile>) : {}
 
       const currentXp = extractUserXp(userData, 0)
@@ -346,6 +451,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
 
       // I. Atualizar documento do utilizador (Operações Estritamente Atómicas para Concorrência Multi-Dispositivo)
       const userUpdatePayload: Record<string, any> = {
+        uid: userId,
         xp: increment(calculatedXp),
         coins: increment(totalAwardedCoins),
         euros: increment(totalAwardedCoins),
@@ -458,7 +564,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
           photoURL: userData.photoURL || null,
           district: userData.district || 'Portugal',
           level: newLevel,
-          xp: increment(calculatedXp),
+          xp: nextTotalXp,
           gamesPlayed: increment(1),
           updatedAt: serverTimestamp(),
         },
@@ -488,6 +594,8 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         },
         { merge: true }
       )
+
+      console.log(`[GAME_COMPLETE]\nuid=${userId}\nmatchId=${matchId}\nxpBefore=${currentXp}\nxpEarned=${calculatedXp}\nxpAfter=${nextTotalXp}\npersisted=true`)
 
       return {
         alreadyProcessed: false,

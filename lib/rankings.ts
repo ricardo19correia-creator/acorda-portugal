@@ -3,6 +3,7 @@ import { db } from '@/lib/firebase'
 import { calculateLevelProgress } from '@/lib/progression'
 import { getAvatarImage } from '@/lib/avatars'
 import { resolvePlayerEquippedTitle } from '@/lib/titles'
+import { extractUserXp } from '@/lib/economy-helpers'
 
 export type CompetitiveDivision =
   | 'Bronze'
@@ -101,7 +102,7 @@ export const DIVISION_COLORS: Record<CompetitiveDivision, { bg: string; text: st
  * Normaliza os dados de qualquer documento de jogador humano (publicProfiles) para RankingPlayer
  */
 export function mapDocToRankingPlayer(id: string, data: any): RankingPlayer {
-  const xp = typeof data.xp === 'number' && !isNaN(data.xp) ? Math.max(0, data.xp) : 0
+  const xp = extractUserXp(data, 0)
   const levelInfo = calculateLevelProgress(xp)
   const level = levelInfo.currentLevel.level
   const rawName = (data.displayName || data.name || data.username || data.email?.split('@')[0] || '').trim()

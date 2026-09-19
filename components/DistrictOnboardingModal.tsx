@@ -8,6 +8,7 @@ import { DEFAULT_AVATAR_URL, DEFAULT_AVATAR_ID, STARTER_AVATAR_ID } from '@/data
 import { DEFAULT_AVATAR } from '@/lib/avatars'
 import { ECONOMY_CONFIG } from '@/src/data/economy'
 import { DEFAULT_STARTER_TITLE_ID, DEFAULT_STARTER_TITLE_NAME } from '@/lib/titles'
+import { extractUserLevel } from '@/lib/economy-helpers'
 
 export interface DistrictOnboardingModalProps {
   user: any
@@ -84,7 +85,18 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           window.dispatchEvent(new CustomEvent('profile_updated'))
         }
       } else {
-        // 1. Novo registo completo com saldo e inventário inicial
+        // 1. Novo registo completo com saldo e inventário inicial (preservando XP e nível se já existentes)
+        const cachedXp = (() => {
+          try {
+            const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
+            const n = Number(raw)
+            return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
+          } catch {
+            return 0
+          }
+        })()
+        const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
+
         await setDoc(
           userRef,
           {
@@ -99,8 +111,8 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             district: selectedDistrict,
             representedDistrict: selectedDistrict,
             districtLocked: true,
-            level: 1,
-            xp: 0,
+            level: initialLevel,
+            xp: cachedXp,
             coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
             euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
             title: DEFAULT_STARTER_TITLE_NAME,
@@ -158,8 +170,8 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             'equipped.avatarId': chosenAvatarId,
             district: selectedDistrict,
             representedDistrict: selectedDistrict,
-            level: 1,
-            xp: 0,
+            level: initialLevel,
+            xp: cachedXp,
             title: DEFAULT_STARTER_TITLE_NAME,
             equippedTitle: DEFAULT_STARTER_TITLE_NAME,
             equippedTitleId: DEFAULT_STARTER_TITLE_ID,
