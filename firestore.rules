@@ -122,6 +122,15 @@ service cloud.firestore {
       }
     }
 
+    // Salas de Jogo e Reações alternativas (compatibilidade retroativa)
+    match /gameRooms/{roomId} {
+      allow read, write: if isAuthenticated();
+
+      match /reactions/{reactionId} {
+        allow read, write: if isAuthenticated();
+      }
+    }
+
     // Histórico de Jogos e Partidas Concluídas
     match /games/{gameId} {
       allow read: if true;

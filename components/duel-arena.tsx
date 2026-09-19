@@ -40,6 +40,7 @@ import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
 import { useEconomy } from '@/context/economy-context'
 import { useGameTheme } from '@/context/game-theme-context'
+import { sendRealHeartbeat } from '@/lib/real-presence'
 import {
   type DuelDocument,
   type DuelPlayerData,
@@ -118,6 +119,17 @@ export function DuelArena({
       setGlobalArenaMatchActive(false)
     }
   }, [])
+
+  // Sincronizar presença em tempo real: declarar que este jogador está ativamente no duelo
+  useEffect(() => {
+    if (user?.uid && duelId) {
+      sendRealHeartbeat(user, profile, {
+        activity: 'duel',
+        currentGameId: duelId,
+        currentPage: `/jogar/duelo?id=${duelId}`,
+      })
+    }
+  }, [user?.uid, duelId, profile])
 
   // Bloqueio Absoluto: Redirecionar se não autenticado
   useEffect(() => {
@@ -535,7 +547,16 @@ export function DuelArena({
   const handleUseFreeze = () => executeUseAid('freeze')
   const handleUsePublicVote = () => executeUseAid('publicVote')
 
-  // 3. Temporizador de 60 Segundos 100% Individual (Pausado se isFrozen === true)
+  // 3. Temporizador de 60 Segundos 100% Sincronizado e Ancorado no Prazo Real (Deadline)
+  const computeTimeLeft = useCallback(() => {
+    if (isFrozen) return timeLeft
+    if (me?.questionDeadline && typeof me.questionDeadline === 'number') {
+      const remainingSeconds = Math.max(0, Math.round((me.questionDeadline - Date.now()) / 1000))
+      return remainingSeconds
+    }
+    return QUESTION_TIME_LIMIT
+  }, [me?.questionDeadline, isFrozen, timeLeft])
+
   useEffect(() => {
     const isPlaying = duel?.status === 'playing' || duel?.status === 'matched'
     if (!isPlaying || isFinishedForMe || !currentQuestion || feedback !== null || isFrozen) {
@@ -546,27 +567,50 @@ export function DuelArena({
       return
     }
 
+    // Atualização imediata baseada no deadline
+    const initialRemaining = computeTimeLeft()
+    setTimeLeft(initialRemaining)
+    if (initialRemaining <= 0) {
+      handleTimeOut()
+      return
+    }
+
     const interval = setInterval(() => {
       if (feedback !== null || isFrozen) return
 
-      setTimeLeft((prev) => {
-        const next = Math.max(0, prev - 1)
-        if (next <= 0) {
-          clearInterval(interval)
-          timerRef.current = null
-          handleTimeOut()
-        }
-        return next
-      })
-    }, 1000)
+      const remaining = computeTimeLeft()
+      setTimeLeft(remaining)
+
+      if (remaining <= 0) {
+        clearInterval(interval)
+        timerRef.current = null
+        handleTimeOut()
+      }
+    }, 500)
 
     timerRef.current = interval
+
+    // Reatividade imediata ao focar na janela ou voltar da aba em background
+    const handleFocus = () => {
+      if (!isFinishedForMe && !isFrozen && feedback === null) {
+        const remaining = computeTimeLeft()
+        setTimeLeft(remaining)
+        if (remaining <= 0) {
+          handleTimeOut()
+        }
+      }
+    }
+
+    window.addEventListener('focus', handleFocus)
+    document.addEventListener('visibilitychange', handleFocus)
 
     return () => {
       clearInterval(interval)
       timerRef.current = null
+      window.removeEventListener('focus', handleFocus)
+      document.removeEventListener('visibilitychange', handleFocus)
     }
-  }, [duel?.status, isFinishedForMe, currentQIndex, feedback, isFrozen])
+  }, [duel?.status, isFinishedForMe, currentQIndex, feedback, isFrozen, computeTimeLeft])
 
 
   // Submissão automática por Timeout (60s esgotados)
@@ -1138,11 +1182,26 @@ export function DuelArena({
                 {/* Player Right (Opponent) */}
                 <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right relative">
                   <div className="min-w-0">
-                    <span className="font-display text-xs font-black text-foreground truncate block leading-none">
-                      {opponent?.displayName || 'Adversário'}
-                    </span>
-                    <p className="font-display text-xs font-bold text-muted-foreground truncate leading-none mt-1">
-                      P{Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10
+                    <div className="flex items-center justify-end gap-1.5 leading-none">
+                      <span className="font-display text-xs font-black text-foreground truncate block">
+                        {opponent?.displayName || 'Adversário'}
+                      </span>
+                      <span
+                        className={cn(
+                          'w-2 h-2 rounded-full inline-block shrink-0',
+                          opponent?.finished
+                            ? 'bg-blue-400 shadow-[0_0_6px_#60a5fa]'
+                            : 'bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse'
+                        )}
+                        title={opponent?.finished ? 'Concluiu as perguntas' : 'Conectado e a responder'}
+                      />
+                    </div>
+                    <p className="font-display text-xs font-black text-amber-400 text-glow-amber leading-none mt-1">
+                      {opponent?.score || 0} <span className="text-[0.6rem] text-muted-foreground font-normal">pts</span>
+                      <span className="text-muted-foreground/60 mx-1">·</span>
+                      <span className="text-[10px] text-muted-foreground font-medium">
+                        {opponent?.finished ? 'Fim' : `P${Math.min(10, (opponent?.currentQuestionIndex || 0) + 1)}/10`}
+                      </span>
                     </p>
                   </div>
 

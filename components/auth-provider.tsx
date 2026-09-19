@@ -930,18 +930,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return 'browsing'
   }, [pathname])
 
+  const getActiveGameId = useCallback((): string | null => {
+    if (typeof window === 'undefined') return null
+    try {
+      const search = window.location.search
+      if (search) {
+        const params = new URLSearchParams(search)
+        const id = params.get('id')
+        if (id && (pathname?.startsWith('/jogar/duelo') || pathname?.startsWith('/jogo'))) {
+          return id
+        }
+      }
+    } catch {}
+    return null
+  }, [pathname])
+
   const triggerHeartbeat = useCallback((force = false) => {
     const currentUser = userRef.current
     if (!currentUser?.uid) return
 
     const now = Date.now()
-    if (!force && now - lastHeartbeatTimeRef.current < 10_000) {
-      return // Evitar heartbeats frequentes com menos de 10s de intervalo
+    if (!force && now - lastHeartbeatTimeRef.current < 8_000) {
+      return // Evitar heartbeats com menos de 8s de intervalo
     }
 
     lastHeartbeatTimeRef.current = now
-    sendRealHeartbeat(currentUser, profileRef.current, getPathActivity())
-  }, [getPathActivity])
+    const activity = getPathActivity()
+    const currentGameId = getActiveGameId()
+    const currentPage = pathname || (typeof window !== 'undefined' ? window.location.pathname : '/')
+
+    sendRealHeartbeat(currentUser, profileRef.current, {
+      activity,
+      currentPage,
+      currentGameId,
+    })
+  }, [getPathActivity, getActiveGameId, pathname])
 
   // Heartbeat imediato quando a rota ou perfil mudam
   useEffect(() => {
@@ -956,7 +979,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const currentUid = user.uid
 
-    // Heartbeat inicial
+    // Heartbeat inicial forçado
     triggerHeartbeat(true)
 
     // Heartbeat periódico (25s)
@@ -964,14 +987,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       triggerHeartbeat(false)
     }, HEARTBEAT_INTERVAL_MS)
 
-    // Reatividade imediata ao reativar a aba (elimina o congelamento por throttling do browser)
+    // Reatividade imediata ao reativar a aba (elimina congelamento por throttling do browser)
     const handleVisibilityOrFocus = () => {
       if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
-        triggerHeartbeat(false)
+        triggerHeartbeat(true)
       }
     }
 
     const handleNetworkOnline = () => {
+      console.log('[AUTH] Ligação de rede restaurada - enviando heartbeat forçado.')
+      setAuthStatus((prev) => (prev === 'NETWORK_TEMPORARY_ERROR' ? (userRef.current ? 'AUTHENTICATED' : 'AUTH_UNAUTHENTICATED') : prev))
       triggerHeartbeat(true)
     }
 

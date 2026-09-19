@@ -99,17 +99,20 @@ export default function JogadoresPage() {
 
                     <div className="text-xs">
                       {p.activity === 'playing' ? (
-                        <span className="inline-flex items-center gap-1 text-amber-400 font-semibold">
+                        <span className="inline-flex items-center gap-1.5 text-amber-400 font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">
                           <Flame className="w-3.5 h-3.5" />
-                          Em Partida
+                          A Jogar
                         </span>
                       ) : p.activity === 'duel' ? (
-                        <span className="inline-flex items-center gap-1 text-purple-400 font-semibold">
+                        <span className="inline-flex items-center gap-1.5 text-purple-400 font-semibold px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20">
                           <Swords className="w-3.5 h-3.5" />
                           Em Duelo
                         </span>
                       ) : (
-                        <span className="text-emerald-400 font-medium">Online</span>
+                        <span className="inline-flex items-center gap-1.5 text-emerald-400 font-medium px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          Online
+                        </span>
                       )}
                     </div>
                   </div>

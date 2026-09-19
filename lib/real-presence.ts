@@ -1,4 +1,4 @@
-import { doc, setDoc, serverTimestamp, collection, query, where, onSnapshot, limit } from 'firebase/firestore'
+import { doc, setDoc, serverTimestamp, collection, query, orderBy, onSnapshot, limit } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { DEFAULT_AVATAR } from '@/lib/avatars'
 
@@ -7,6 +7,10 @@ export type RealUserActivity = 'playing' | 'duel' | 'browsing'
 export interface RealPlayerPresence {
   userId: string
   sessionId?: string
+  currentSessionId?: string
+  currentDeviceId?: string
+  currentPage?: string
+  currentGameId?: string | null
   displayName: string
   photoURL?: string | null
   avatar?: string | null
@@ -21,6 +25,7 @@ export interface RealPlayerPresence {
   xp?: number
   title?: string
   equippedFrame?: string
+  updatedAt?: any
 }
 
 export interface RealCommunityState {
@@ -31,8 +36,16 @@ export interface RealCommunityState {
   loading?: boolean
 }
 
-export const HEARTBEAT_INTERVAL_MS = 25_000 // 25 segundos (mais frequente e seguro para o TTL de 90s)
-export const OFFLINE_TTL_MS = 90_000 // 90 segundos de tolerância para desconexões e throttling em background
+export const HEARTBEAT_INTERVAL_MS = 25_000 // 25 segundos entre heartbeats normais
+export const OFFLINE_TTL_MS = 75_000 // 75 segundos (3 heartbeats falhados) para marcar offline
+
+export interface HeartbeatMeta {
+  activity?: RealUserActivity
+  currentPage?: string
+  currentGameId?: string | null
+  deviceId?: string
+  sessionId?: string
+}
 
 /**
  * Anonimiza o identificador de utilizador para logs seguros de desenvolvimento
@@ -74,6 +87,25 @@ export function getPresenceTabId(): string {
     return tabId
   } catch {
     return 'fallback_tab'
+  }
+}
+
+/**
+ * Obtém ou cria um identificador persistente de dispositivo
+ */
+export function getPresenceDeviceId(): string {
+  if (typeof window === 'undefined') return 'server_device'
+  try {
+    let deviceId = localStorage.getItem('ap_device_id')
+    if (!deviceId || deviceId.trim() === '') {
+      deviceId = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? `dev_${crypto.randomUUID()}`
+        : `dev_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
+      localStorage.setItem('ap_device_id', deviceId)
+    }
+    return deviceId
+  } catch {
+    return 'fallback_device'
   }
 }
 
@@ -132,7 +164,7 @@ export function unregisterActiveTab(userId: string): { hasRemainingTabs: boolean
 export async function sendRealHeartbeat(
   user: { uid: string; displayName?: string | null; photoURL?: string | null } | null,
   profile?: { displayName?: string; photoURL?: string; district?: string; city?: string; level?: number; xp?: number; equippedTitle?: string } | null,
-  activity: RealUserActivity = 'browsing',
+  activityOrMeta: RealUserActivity | HeartbeatMeta = 'browsing',
   _coords?: unknown,
   _accuracy?: unknown,
   _source?: unknown
@@ -142,6 +174,14 @@ export async function sendRealHeartbeat(
   try {
     registerActiveTab(user.uid)
     const presenceRef = doc(db, 'publicPresence', user.uid)
+
+    const meta: HeartbeatMeta = typeof activityOrMeta === 'string' ? { activity: activityOrMeta } : activityOrMeta
+    const activity: RealUserActivity = meta.activity || 'browsing'
+    const currentPage: string = meta.currentPage || (typeof window !== 'undefined' ? window.location.pathname : '/')
+    const currentGameId: string | null = meta.currentGameId ?? null
+    const deviceId: string = meta.deviceId || getPresenceDeviceId()
+    const tabId: string = meta.sessionId || getPresenceTabId()
+
     const displayName = sanitizePublicDisplayName(profile?.displayName || user.displayName, profile?.district)
     const district = (profile?.district || '').trim() || 'Portugal'
     const city = (profile?.city || (profile as any)?.concelho || '').trim() || undefined
@@ -157,11 +197,14 @@ export async function sendRealHeartbeat(
 
     const now = Date.now()
     const expiresAt = now + OFFLINE_TTL_MS
-    const tabId = getPresenceTabId()
 
     const payload = {
       userId: user.uid,
       sessionId: tabId,
+      currentSessionId: tabId,
+      currentDeviceId: deviceId,
+      currentPage,
+      currentGameId,
       displayName,
       photoURL,
       avatar: photoURL,
@@ -182,7 +225,7 @@ export async function sendRealHeartbeat(
     await setDoc(presenceRef, payload, { merge: true })
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[PRESENCE] heartbeat: user=${anonymizeUserId(user.uid)} tab=${tabId} activity=${activity} district=${district}`)
+      console.log(`[PRESENCE] heartbeat: user=${anonymizeUserId(user.uid)} tab=${tabId} dev=${deviceId.slice(0, 8)} page=${currentPage} act=${activity} game=${currentGameId || 'none'}`)
     }
   } catch (err) {
     console.debug('[PRESENCE] Erro no envio de heartbeat:', err)
@@ -214,6 +257,7 @@ export async function markRealOffline(userId: string | null | undefined, force: 
         isOnline: false,
         lastSeen: Date.now(),
         updatedAt: serverTimestamp(),
+        currentGameId: null,
       },
       { merge: true }
     )
@@ -276,7 +320,6 @@ export function filterActiveRealPlayers(
   })
 
   // 2. Determinar o tempo de referência de forma imune a desfasamentos de relógio
-  // Se o relógio do cliente estiver desfasado (>45s) do servidor, ancorar no último timestamp do servidor
   let referenceTime = now
   if (latestServerTimestamp > 0) {
     const skew = Math.abs(now - latestServerTimestamp)
@@ -294,7 +337,7 @@ export function filterActiveRealPlayers(
     const docTime = extractDocTimestamp(d)
     const age = referenceTime - docTime
 
-    // Válido se online for true e o heartbeat tiver ocorrido nos últimos 90 segundos
+    // Válido se online for true e o heartbeat tiver ocorrido nos últimos 75 segundos
     // (com margem de 30s para relógios ligeiramente futuros)
     const isWithinTTL = age >= -30_000 && age <= OFFLINE_TTL_MS
 
@@ -305,7 +348,11 @@ export function filterActiveRealPlayers(
 
       const player: RealPlayerPresence = {
         userId: String(d.userId),
-        sessionId: d.sessionId,
+        sessionId: d.sessionId || d.currentSessionId,
+        currentSessionId: d.currentSessionId || d.sessionId,
+        currentDeviceId: d.currentDeviceId,
+        currentPage: d.currentPage,
+        currentGameId: d.currentGameId || null,
         displayName: sanitizePublicDisplayName(d.displayName, d.district),
         photoURL: avatar,
         avatar,
@@ -320,18 +367,13 @@ export function filterActiveRealPlayers(
         ...(typeof d.xp === 'number' ? { xp: d.xp } : {}),
         title: d.title || 'Patriota',
         equippedFrame: d.equippedFrame || undefined,
+        updatedAt: d.updatedAt,
       }
 
-      // Deduplicação: se o utilizador já existir (ex.: múltiplas abas), manter o com atividade mais recente
+      // Deduplicação: se o utilizador já existir (ex.: múltiplas abas ou dispositivos), manter o mais recente
       const existing = activeMap.get(player.userId)
       if (!existing || player.lastSeen > existing.lastSeen) {
         activeMap.set(player.userId, player)
-      }
-    } else if (process.env.NODE_ENV === 'development') {
-      if (!isOnlineFlag) {
-        console.debug(`[PRESENCE] Descartado offline: user=${anonymizeUserId(d.userId)} (online=false)`)
-      } else if (!isWithinTTL) {
-        console.debug(`[PRESENCE] Descartado por TTL: user=${anonymizeUserId(d.userId)} (age=${Math.round(age / 1000)}s > ${OFFLINE_TTL_MS / 1000}s)`)
       }
     }
   })
@@ -364,8 +406,9 @@ export function filterActiveRealPlayers(
  * PRESENCE SUBSCRIPTION MANAGER (SINGLETON - SINGLE SOURCE OF TRUTH)
  * ============================================================================
  * Garante que existe exatamente UMA subscrição onSnapshot ao Firestore
- * partilhada por todos os componentes da aplicação, eliminando duplicações,
- * estados inconsistentes e consumos desnecessários de rede.
+ * ordenada pelos mais recentes ativos (orderBy('lastSeen', 'desc'), limit(150)),
+ * imune ao problema de corte alfabético por ID de utilizador.
+ * Um ticker local re-avalia o TTL a cada 5 segundos sem emitir novas queries.
  */
 class PresenceSubscriptionManager {
   private subscribers = new Set<(state: RealCommunityState) => void>()
@@ -389,7 +432,7 @@ class PresenceSubscriptionManager {
 
     return () => {
       this.subscribers.delete(callback)
-      // Se não restam subscritores, limpar listener e temporizador após carência
+      // Se não restam subscritores, limpar listener e temporizador
       if (this.subscribers.size === 0) {
         this.stopListening()
       }
@@ -417,10 +460,12 @@ class PresenceSubscriptionManager {
 
     try {
       const presenceCol = collection(db, 'publicPresence')
-      const q = query(presenceCol, where('online', '==', true), limit(250))
+      // Ordenação nativa indexada por lastSeen desc: garante que os 150 jogadores
+      // com atividade mais recente em Portugal são recebidos em tempo real.
+      const q = query(presenceCol, orderBy('lastSeen', 'desc'), limit(150))
 
       if (process.env.NODE_ENV === 'development') {
-        console.log('[PRESENCE] A iniciar subscrição centralizada onSnapshot ao Firestore...')
+        console.log('[PRESENCE] A iniciar subscrição centralizada onSnapshot ao Firestore (orderBy lastSeen desc)...')
       }
 
       this.unsubscribeFirestore = onSnapshot(
@@ -439,7 +484,7 @@ class PresenceSubscriptionManager {
 
           if (process.env.NODE_ENV === 'development') {
             const state = filterActiveRealPlayers(docs, this.currentUid, Date.now())
-            console.log(`[PRESENCE] snapshot: recebidos ${docs.length} docs, ${state.humanOnline} jogadores online reais`)
+            console.log(`[PRESENCE] snapshot: ${docs.length} docs recebidos, ${state.humanOnline} jogadores online reais`)
           }
 
           this.notifySubscribers()
@@ -451,10 +496,10 @@ class PresenceSubscriptionManager {
         }
       )
 
-      // Temporizador de 10s para re-avaliação pura de TTL (expirar desconexões sem queries ao Firestore)
+      // Temporizador de 5s para expiração local puramente em memória (sem reads nem writes no Firestore)
       this.refreshTimer = setInterval(() => {
         this.notifySubscribers()
-      }, 10_000)
+      }, 5_000)
     } catch (err) {
       console.debug('[PRESENCE] Falha ao iniciar listener central:', err)
       this.isInitialLoading = false

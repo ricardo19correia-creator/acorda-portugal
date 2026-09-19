@@ -177,7 +177,32 @@ function runPresenceTests() {
     },
   ]
   const stateTwo = filterActiveRealPlayers(twoPlayersDocs, undefined, now)
-  assert(stateTwo.humanOnline === 2, 'Exatamente 2 jogadores online quando 2 estão ativos')
+  // TESTE 9: Preservação de Metadados Canónicos (currentDeviceId, currentSessionId, currentPage, currentGameId)
+  console.log('\n--- TESTE 9: PRESERVAÇÃO DE METADADOS CANÓNICOS E MULTI-DISPOSITIVO ---')
+  const metadataDocs = [
+    {
+      userId: 'user_meta_1',
+      displayName: 'Capitão Lusitano',
+      district: 'Viseu',
+      activity: 'duel',
+      currentDeviceId: 'dev_pc_chrome_998',
+      currentSessionId: 'sess_tab_111',
+      currentPage: '/jogar/duelo?id=duel_super_match_123',
+      currentGameId: 'duel_super_match_123',
+      lastSeen: now - 8_000,
+      online: true,
+      isOnline: true,
+    },
+  ]
+  const metaState = filterActiveRealPlayers(metadataDocs, undefined, now)
+  assert(metaState.humanOnline === 1, 'Jogador com metadados detetado como 1 online')
+  const metaPlayer = metaState.players[0]
+  assert(metaPlayer.currentDeviceId === 'dev_pc_chrome_998', 'currentDeviceId preservado corretamente')
+  assert(metaPlayer.currentSessionId === 'sess_tab_111', 'currentSessionId preservado corretamente')
+  assert(metaPlayer.currentPage === '/jogar/duelo?id=duel_super_match_123', 'currentPage preservado corretamente')
+  assert(metaPlayer.currentGameId === 'duel_super_match_123', 'currentGameId do duelo preservado corretamente')
+  assert(metaPlayer.activity === 'duel', 'activity duel reconhecida')
+  assert(metaState.duelCount === 1, 'Contagem de duelos incrementada para 1')
 
   console.log('\n================================================================================')
   console.log('🌟 TODOS OS TESTES DO SISTEMA DE PRESENÇA REAL PASSARAM COM 100% DE SUCESSO!')
