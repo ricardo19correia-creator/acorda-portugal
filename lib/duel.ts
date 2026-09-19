@@ -1170,20 +1170,51 @@ export async function claimDuelRewards(
       if (resp.ok) {
         const data = await resp.json()
         if (data.success) {
+          const resData = data.data || data
+          const xp =
+            typeof resData.xp === 'number'
+              ? resData.xp
+              : typeof resData.xpEarned === 'number'
+              ? resData.xpEarned
+              : null
+          const euros =
+            typeof resData.coins === 'number'
+              ? resData.coins
+              : typeof resData.coinsEarned === 'number'
+              ? resData.coinsEarned
+              : typeof resData.euros === 'number'
+              ? resData.euros
+              : null
+
+          if (xp === null || euros === null) {
+            console.error('[DUEL] Servidor retornou payload de recompensa incompleto:', data)
+            throw new Error('Servidor retornou valores de recompensa inválidos.')
+          }
+
           const outcome: DuelRewardResult = {
-            xp: data.xpEarned ?? 0,
-            euros: data.coinsEarned ?? 0,
-            isWinner: Boolean(data.isWinner),
-            isDraw: Boolean(data.isDraw),
-            isLoser: Boolean(data.isLoser),
-            oldXp: data.oldXp ?? 0,
-            newXp: data.newXp ?? ((data.oldXp ?? 0) + (data.xpEarned ?? 0)),
-            oldEuros: data.oldCoins ?? data.oldEuros ?? 0,
-            newEuros: data.newCoins ?? data.newEuros ?? 0,
-            oldLevel: data.oldLevel ?? 1,
-            newLevel: data.newLevel ?? 1,
-            leveledUp: Boolean(data.leveledUp),
-            levelTitle: data.levelTitle || '',
+            xp,
+            euros,
+            isWinner: Boolean(resData.isWinner),
+            isDraw: Boolean(resData.isDraw),
+            isLoser: Boolean(resData.isLoser),
+            oldXp: typeof resData.oldXp === 'number' ? resData.oldXp : 0,
+            newXp: typeof resData.newXp === 'number' ? resData.newXp : xp,
+            oldEuros:
+              typeof resData.oldCoins === 'number'
+                ? resData.oldCoins
+                : typeof resData.oldEuros === 'number'
+                ? resData.oldEuros
+                : 0,
+            newEuros:
+              typeof resData.newCoins === 'number'
+                ? resData.newCoins
+                : typeof resData.newEuros === 'number'
+                ? resData.newEuros
+                : euros,
+            oldLevel: typeof resData.oldLevel === 'number' ? resData.oldLevel : 1,
+            newLevel: typeof resData.newLevel === 'number' ? resData.newLevel : 1,
+            leveledUp: Boolean(resData.leveledUp),
+            levelTitle: resData.levelTitle || '',
           }
           console.log(`[GAME_COMPLETE]\nuid=${userUid}\nmatchId=${duelId}\nxpBefore=${outcome.oldXp}\nxpEarned=${outcome.xp}\nxpAfter=${outcome.newXp}\npersisted=true`)
           if (typeof window !== 'undefined') {
@@ -1241,9 +1272,19 @@ export async function claimDuelRewards(
       const isDraw = duel.winnerUid === null
       const isLoser = !isWinner && !isDraw
 
-      const xpReward = isWinner ? 300 : isDraw ? 150 : 100
+      const correctCount = Math.max(0, Math.min(10, Number(player.correctCount) || 0))
+      const performanceXp = correctCount * 15
+      const baseOutcomeXp = isWinner ? 300 : isDraw ? 150 : 100
+      const xpReward = baseOutcomeXp + performanceXp
+
       const baseWin = ECONOMY_CONFIG.MATCH_REWARDS.BASE_WIN_COINS
-      const coinReward = isWinner ? baseWin + ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : isDraw ? baseWin : 5
+      const perfectBonus = correctCount === 10 ? ECONOMY_CONFIG.MATCH_REWARDS.PERFECT_SCORE_BONUS : 0
+      const performanceCoins = Math.round(correctCount * 1)
+      const coinReward = isWinner
+        ? baseWin + perfectBonus + performanceCoins
+        : isDraw
+        ? 10 + performanceCoins
+        : 5 + performanceCoins
 
       const userData = userSnap.exists() ? userSnap.data() : {}
 
@@ -1252,22 +1293,27 @@ export async function claimDuelRewards(
       const oldLevel = calculateLevelProgress(currentXp).currentLevel.level
 
       const rewardsClaimed = duel.rewardsClaimed || {}
-      if (rewardsClaimed[userUid] || rewardSnap.exists()) {
+      const savedDuelRewards = (duel as any).rewards || {}
+      const existingSavedReward = savedDuelRewards[userUid]
+
+      if (rewardsClaimed[userUid] || rewardSnap.exists() || existingSavedReward) {
         console.log(`[XP] REWARD_ALREADY_PROCESSED (duelId: ${duelId})`)
         const levelProg = calculateLevelProgress(currentXp)
+        const persistedXp = existingSavedReward?.xp ?? rewardSnap.data()?.xpEarned ?? xpReward
+        const persistedCoins = existingSavedReward?.coins ?? rewardSnap.data()?.coinsEarned ?? coinReward
         return {
-          xp: xpReward,
-          euros: coinReward,
+          xp: persistedXp,
+          euros: persistedCoins,
           isWinner,
           isDraw,
           isLoser,
-          oldXp: currentXp,
-          newXp: currentXp,
-          oldEuros: currentEuros,
-          newEuros: currentEuros,
+          oldXp: existingSavedReward?.oldXp ?? currentXp,
+          newXp: existingSavedReward?.newXp ?? currentXp,
+          oldEuros: existingSavedReward?.oldCoins ?? currentEuros,
+          newEuros: existingSavedReward?.newCoins ?? currentEuros,
           oldLevel,
-          newLevel: levelProg.currentLevel.level,
-          leveledUp: false,
+          newLevel: existingSavedReward?.newLevel ?? levelProg.currentLevel.level,
+          leveledUp: Boolean(existingSavedReward?.leveledUp),
           levelTitle: levelProg.currentLevel.title,
         }
       }
@@ -1456,6 +1502,22 @@ export async function claimDuelRewards(
 
       transaction.update(duelRef, {
         [`rewardsClaimed.${userUid}`]: true,
+        [`rewards.${userUid}`]: {
+          xp: xpReward,
+          coins: totalAwardedEuros,
+          isWinner,
+          isDraw,
+          isLoser,
+          oldXp: currentXp,
+          newXp: newTotalXp,
+          oldCoins: currentEuros,
+          newCoins: newTotalEuros,
+          oldLevel,
+          newLevel,
+          leveledUp,
+          levelTitle: levelProgress.currentLevel.title,
+          processedAt: Date.now(),
+        },
       })
 
       return {

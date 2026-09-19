@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -32,6 +32,7 @@ import {
   Lock,
   X,
   AlertTriangle,
+  RefreshCw,
 } from 'lucide-react'
 import { doc, updateDoc, arrayUnion, addDoc, collection, query, orderBy, limit, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
@@ -154,6 +155,8 @@ export function DuelArena({
 
   // Reward state
   const [claimedReward, setClaimedReward] = useState<DuelRewardResult | null>(null)
+  const [isClaimingReward, setIsClaimingReward] = useState(false)
+  const [claimRewardError, setClaimRewardError] = useState<string | null>(null)
 
   // Rematch action state
   const [rematchLoading, setRematchLoading] = useState(false)
@@ -764,15 +767,32 @@ export function DuelArena({
   }
 
   // Claim rewards when finished
-  useEffect(() => {
-    if (duel?.status === 'finished' && currentPlayer.uid && !claimedReward) {
-      claimDuelRewards(duel.id, currentPlayer.uid)
-        .then((res) => {
-          setClaimedReward(res)
-        })
-        .catch((e) => console.error('Erro ao resgatar recompensas:', e))
+  const handleClaimRewards = useCallback(async () => {
+    if (!duel || duel.status !== 'finished' || !currentPlayer.uid) return
+    setIsClaimingReward(true)
+    setClaimRewardError(null)
+    try {
+      const res = await claimDuelRewards(duel.id, currentPlayer.uid)
+      setClaimedReward(res)
+    } catch (e: any) {
+      console.error('Erro ao resgatar recompensas:', e)
+      setClaimRewardError(e?.message || 'Falha ao sincronizar recompensas da partida.')
+    } finally {
+      setIsClaimingReward(false)
     }
-  }, [duel?.status, currentPlayer.uid, claimedReward])
+  }, [duel, currentPlayer.uid])
+
+  useEffect(() => {
+    if (
+      duel?.status === 'finished' &&
+      currentPlayer.uid &&
+      !claimedReward &&
+      !isClaimingReward &&
+      !claimRewardError
+    ) {
+      handleClaimRewards()
+    }
+  }, [duel?.status, currentPlayer.uid, claimedReward, isClaimingReward, claimRewardError, handleClaimRewards])
 
   const copyCode = () => {
     if (!duel) return
@@ -1583,10 +1603,27 @@ export function DuelArena({
         {/* 5. REWARDS CARD */}
         {!claimedReward && (
           <div className="card-game mt-6 rounded-3xl p-5 text-center shadow-xl border border-white/10 bg-black/40">
-            <div className="flex items-center justify-center gap-2.5 text-primary font-display text-xs font-bold uppercase tracking-wider animate-pulse">
-              <Sparkles className="h-4 w-4 animate-spin" />
-              <span>A confirmar resultado e recompensas com o Firebase...</span>
-            </div>
+            {claimRewardError ? (
+              <div className="flex flex-col items-center justify-center gap-3">
+                <p className="text-xs font-bold text-flag-red">
+                  ⚠️ {claimRewardError}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleClaimRewards}
+                  disabled={isClaimingReward}
+                  className="inline-flex items-center gap-2 rounded-xl bg-gold/20 text-gold hover:bg-gold/30 border border-gold/40 px-4 py-2 text-xs font-black uppercase tracking-wider transition cursor-pointer"
+                >
+                  <RefreshCw className={cn('h-3.5 w-3.5', isClaimingReward && 'animate-spin')} />
+                  <span>{isClaimingReward ? 'A sincronizar...' : 'Tentar Novamente'}</span>
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-2.5 text-primary font-display text-xs font-bold uppercase tracking-wider animate-pulse">
+                <Sparkles className="h-4 w-4 animate-spin" />
+                <span>A confirmar resultado e recompensas com o Firebase...</span>
+              </div>
+            )}
           </div>
         )}
 
