@@ -197,6 +197,7 @@ export async function PATCH(req: Request) {
             date: new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),
           })
 
+          updatePayload.emailStatus = 'sent'
           updatePayload.emailSent = true
           updatePayload.emailSentAt = nowIso
           updatePayload.emailError = null
@@ -205,6 +206,7 @@ export async function PATCH(req: Request) {
           auditAction = 'FEEDBACK_EMAIL_RESENT'
           details = `Email para suporte@acordaportugal.pt reenviado com sucesso por ${adminIdentifier}`
         } catch (mailErr: any) {
+          updatePayload.emailStatus = 'failed'
           updatePayload.emailSent = false
           updatePayload.emailError = mailErr?.message || 'Falha ao reenviar email.'
           await feedbackDocRef.update(updatePayload)

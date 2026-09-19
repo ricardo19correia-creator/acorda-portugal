@@ -196,6 +196,7 @@ export async function POST(req: Request) {
       platform: platform || 'web',
       userAgent: finalUserAgent,
       appVersion: appVersion || '1.0.0-beta',
+      emailStatus: 'pending',
       emailSent: false,
       emailSentAt: null,
       emailError: null,
@@ -227,6 +228,7 @@ export async function POST(req: Request) {
 
       // 7. Atualizar Firestore com confirmação de email entregue
       await feedbackDocRef.update({
+        emailStatus: 'sent',
         emailSent: true,
         emailSentAt: new Date().toISOString(),
         emailSending: false,
@@ -237,9 +239,10 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: true,
         feedbackId,
+        emailStatus: 'sent',
         emailSent: true,
         emailSentAt: new Date().toISOString(),
-        message: 'Feedback enviado com sucesso para suporte@acordaportugal.pt. Obrigado por ajudares a melhorar o Desafio Nacional.',
+        message: 'Feedback enviado com sucesso! Obrigado por ajudares a melhorar o Desafio Nacional.',
       })
     } catch (emailError: any) {
       console.error('[API FEEDBACK] Falha no disparo de email:', emailError)
@@ -248,6 +251,7 @@ export async function POST(req: Request) {
 
       // Se falhar o envio de email, NÃO perder o feedback gravado no Firestore
       await feedbackDocRef.update({
+        emailStatus: 'failed',
         emailSent: false,
         emailSending: false,
         emailError: technicalMessage,
@@ -256,10 +260,11 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: `O teu feedback foi registado, mas não foi possível entregar a notificação por email para suporte@acordaportugal.pt: ${technicalMessage}`,
-          technicalDetails: technicalMessage,
+          error: 'O teu feedback foi registado, mas não foi possível entregar a notificação por email de momento. A nossa equipa irá analisar o teu relato diretamente na plataforma.',
+          technicalDetails: process.env.NODE_ENV === 'development' ? technicalMessage : undefined,
           feedbackId,
           savedInFirestore: true,
+          emailStatus: 'failed',
         },
         { status: 502 }
       )
