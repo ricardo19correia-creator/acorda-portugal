@@ -13,7 +13,8 @@
     "build:aab": "cmd /c \"set JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr& set PATH=C:\\Program Files\\Android\\Android Studio\\jbr\\bin;%PATH%& cd android & gradlew.bat bundleRelease\"",
     "audit:release": "npx tsx scripts/master_release_audit.ts",
     "audit:questions": "node scripts/audit_question_inventory.js && node scripts/test_question_integrity.js",
-    "test:questions": "node scripts/test_question_integrity.js"
+    "test:questions": "node scripts/test_question_integrity.js",
+    "test:feedback": "npx tsx scripts/test_feedback_suite.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
