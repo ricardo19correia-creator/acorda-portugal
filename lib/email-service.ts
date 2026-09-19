@@ -22,23 +22,42 @@ export function getFeedbackTypeLabel(type: string): string {
   return type || 'Geral'
 }
 
+export interface EmailServiceStatus {
+  configured: boolean
+  provider: 'resend' | 'smtp' | 'none'
+  details?: string
+}
+
+/**
+ * Verifica se existe algum provedor de email configurado no ambiente.
+ */
+export function checkEmailConfig(): EmailServiceStatus {
+  if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY.trim().length > 0) {
+    return { configured: true, provider: 'resend' }
+  }
+  const smtpHost = process.env.SMTP_HOST
+  const smtpPass = process.env.SMTP_PASS
+  if (smtpHost && smtpPass) {
+    return { configured: true, provider: 'smtp' }
+  }
+  return {
+    configured: false,
+    provider: 'none',
+    details: 'Nenhum serviço de email configurado (necessário RESEND_API_KEY ou SMTP_HOST + SMTP_PASS nas variáveis de ambiente da Vercel).',
+  }
+}
+
 /**
  * Cria o transporter Nodemailer configurado com as variáveis de ambiente do sistema.
  */
 export function createMailTransporter() {
-  const smtpHost = process.env.SMTP_HOST || 'mail.acordaportugal.pt'
-  const smtpPort = Number(process.env.SMTP_PORT || 465)
+  const smtpHost = process.env.SMTP_HOST || 'authsmtp.amen.pt'
+  const smtpPort = Number(process.env.SMTP_PORT || (process.env.SMTP_SECURE === 'true' ? 465 : 587))
   const smtpUser = process.env.SMTP_USER || 'suporte@acordaportugal.pt'
   const smtpPass = process.env.SMTP_PASS || ''
   const isSecure = process.env.SMTP_SECURE
     ? process.env.SMTP_SECURE === 'true'
     : smtpPort === 465
-
-  if (!smtpPass) {
-    console.warn(
-      '[EMAIL SERVICE] Variável de ambiente SMTP_PASS não encontrada. O envio SMTP falhará caso o servidor exija autenticação.'
-    )
-  }
 
   return nodemailer.createTransport({
     host: smtpHost,
@@ -48,6 +67,9 @@ export function createMailTransporter() {
       user: smtpUser,
       pass: smtpPass,
     },
+    connectionTimeout: 8000,
+    greetingTimeout: 5000,
+    socketTimeout: 10000,
     tls: {
       rejectUnauthorized: false,
     },
@@ -350,26 +372,80 @@ https://acordaportugal.pt/feedback`
 </body>
 </html>`
 
-  const transporter = createMailTransporter()
-  const smtpUser = process.env.SMTP_USER || 'suporte@acordaportugal.pt'
+  const emailStatus = checkEmailConfig()
 
-  const mailOptions: nodemailer.SendMailOptions = {
-    from: `"Acorda Portugal — Feedback" <${smtpUser}>`,
-    to: 'suporte@acordaportugal.pt',
-    subject,
-    text: plainText,
-    html: htmlBody,
+  // Provedor 1: Resend API (HTTPS REST — recomendado e ultra-rápido na Vercel)
+  if (emailStatus.provider === 'resend') {
+    const resendApiKey = process.env.RESEND_API_KEY!.trim()
+    const fromAddress = process.env.EMAIL_FROM || 'Acorda Portugal <onboarding@resend.dev>'
+
+    const payloadBody: Record<string, any> = {
+      from: fromAddress,
+      to: ['suporte@acordaportugal.pt'],
+      subject,
+      text: plainText,
+      html: htmlBody,
+    }
+
+    if (userEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+      payloadBody.reply_to = userEmail
+    }
+
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${resendApiKey}`,
+      },
+      body: JSON.stringify(payloadBody),
+      signal: AbortSignal.timeout(10000),
+    })
+
+    if (!resendResponse.ok) {
+      const errorJson = await resendResponse.json().catch(() => ({}))
+      const errMsg = errorJson?.message || `Erro HTTP ${resendResponse.status} na API Resend`
+      throw new Error(`Falha no envio via Resend: ${errMsg}`)
+    }
+
+    const resendData = await resendResponse.json().catch(() => ({}))
+    return {
+      success: true,
+      messageId: resendData?.id || feedbackId,
+    }
   }
 
-  // Permite resposta direta caso o utilizador tenha email associado
-  if (userEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
-    mailOptions.replyTo = userEmail
+  // Provedor 2: SMTP Nodemailer
+  if (emailStatus.provider === 'smtp') {
+    const transporter = createMailTransporter()
+    const smtpUser = process.env.SMTP_USER || 'suporte@acordaportugal.pt'
+
+    const mailOptions: nodemailer.SendMailOptions = {
+      from: `"Acorda Portugal — Feedback" <${smtpUser}>`,
+      to: 'suporte@acordaportugal.pt',
+      subject,
+      text: plainText,
+      html: htmlBody,
+    }
+
+    if (userEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+      mailOptions.replyTo = userEmail
+    }
+
+    try {
+      const info = await transporter.sendMail(mailOptions)
+      return {
+        success: true,
+        messageId: info.messageId || feedbackId,
+      }
+    } catch (smtpErr: any) {
+      throw new Error(
+        `Falha no servidor SMTP (${process.env.SMTP_HOST || 'authsmtp.amen.pt'}): ${smtpErr?.message || 'Erro de conexão/autenticação'}`
+      )
+    }
   }
 
-  const info = await transporter.sendMail(mailOptions)
-
-  return {
-    success: true,
-    messageId: info.messageId || feedbackId,
-  }
+  // Nenhum provedor configurado
+  throw new Error(
+    'Nenhum serviço de email configurado no servidor. É necessário configurar RESEND_API_KEY ou SMTP_HOST + SMTP_PASS nas variáveis de ambiente da Vercel para entrega de emails para suporte@acordaportugal.pt.'
+  )
 }

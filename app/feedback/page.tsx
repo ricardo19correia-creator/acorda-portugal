@@ -71,6 +71,8 @@ export default function FeedbackPage() {
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState<FeedbackLocation>('Jogar')
   const [reproductionSteps, setReproductionSteps] = useState('')
+  const [guestName, setGuestName] = useState('')
+  const [guestEmail, setGuestEmail] = useState('')
 
   // Submission Status
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -162,17 +164,18 @@ export default function FeedbackPage() {
   const isFormValid = useMemo(() => {
     const cleanTitle = sanitizeInput(title)
     const cleanDesc = sanitizeInput(description)
-    return cleanTitle.length >= 4 && cleanTitle.length <= 100 && cleanDesc.length >= 15 && cleanDesc.length <= 2000
-  }, [title, description])
+    const basicValid =
+      cleanTitle.length >= 4 && cleanTitle.length <= 100 && cleanDesc.length >= 15 && cleanDesc.length <= 2000
+    if (!basicValid) return false
+    if (!user && guestEmail.trim().length > 0) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guestEmail.trim())
+    }
+    return true
+  }, [title, description, user, guestEmail])
 
   // Handle Submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!user) {
-      setErrorMessage('Precisas de iniciar sessão para enviar feedback.')
-      return
-    }
 
     if (cooldownRemaining > 0) {
       setErrorMessage(`Aguarda mais ${cooldownRemaining}s antes de enviar outro feedback.`)
@@ -180,7 +183,9 @@ export default function FeedbackPage() {
     }
 
     if (!isFormValid) {
-      setErrorMessage('Por favor, preenche o título (mín. 4 letras) e descrição (mín. 15 letras).')
+      setErrorMessage(
+        'Por favor, preenche o título (mín. 4 letras) e descrição (mín. 15 letras). Se introduziste um email, verifica o formato.'
+      )
       return
     }
 
@@ -191,11 +196,17 @@ export default function FeedbackPage() {
       const sanitizedTitle = sanitizeInput(title)
       const sanitizedDescription = sanitizeInput(description)
       const sanitizedSteps = sanitizeInput(reproductionSteps)
+      const sanitizedGuestName = sanitizeInput(guestName)
+      const sanitizedGuestEmail = sanitizeInput(guestEmail)
 
-      // 1. Obter token de autenticação seguro do utilizador
-      const idToken = await user.getIdToken()
-      if (!idToken) {
-        throw new Error('Não foi possível verificar a tua sessão. Por favor, reinicia a sessão.')
+      // 1. Obter token de autenticação seguro caso exista utilizador logado
+      let idToken: string | null = null
+      if (user) {
+        try {
+          idToken = await user.getIdToken()
+        } catch {
+          // prosseguir como convidado caso o token falhe
+        }
       }
 
       // 2. Gerar ID único para o feedback (idempotência)
@@ -213,19 +224,25 @@ export default function FeedbackPage() {
         platform: detectPlatform(),
         userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
         appVersion: APP_FEEDBACK_VERSION,
-        userName: user.displayName || profile?.displayName || 'Jogador Anónimo',
-        userDisplayName: user.displayName || profile?.displayName || 'Jogador Anónimo',
-        userEmail: user.email || '',
-        userPhotoURL: profile?.photoURL || user.photoURL || '',
+        userName: user?.displayName || profile?.displayName || sanitizedGuestName || 'Jogador Convidado',
+        userDisplayName: user?.displayName || profile?.displayName || sanitizedGuestName || 'Jogador Convidado',
+        userEmail: user?.email || sanitizedGuestEmail || '',
+        userPhotoURL: profile?.photoURL || user?.photoURL || '',
+        contactName: sanitizedGuestName,
+        contactEmail: sanitizedGuestEmail,
+      }
+
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      }
+      if (idToken) {
+        headers['Authorization'] = `Bearer ${idToken}`
       }
 
       // 3. Enviar para backend seguro que grava no Firestore e despacha email oficial
       const res = await fetch('/api/feedback', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${idToken}`,
-        },
+        headers,
         body: JSON.stringify(payload),
       })
 
@@ -244,10 +261,12 @@ export default function FeedbackPage() {
       setTitle('')
       setDescription('')
       setReproductionSteps('')
+      setGuestName('')
+      setGuestEmail('')
       setSubmitSuccess(true)
     } catch (err: any) {
       console.error('[FEEDBACK SUBMIT ERROR]', err)
-      // Preserva o texto escrito pelo utilizador e apresenta a mensagem exata requerida
+      // Preserva o texto escrito pelo utilizador e apresenta a mensagem exata
       setErrorMessage(
         err?.message || 'Não foi possível enviar o feedback. Tenta novamente.'
       )
@@ -373,36 +392,6 @@ export default function FeedbackPage() {
                   A verificar sessão...
                 </span>
               </div>
-            ) : !user ? (
-              /* Bloqueio Elegante de Autenticação */
-              <div className="w-full rounded-3xl border border-amber-500/30 bg-slate-950/85 backdrop-blur-xl p-8 sm:p-12 text-center space-y-5 shadow-2xl">
-                <div className="w-16 h-16 rounded-3xl bg-amber-500/15 text-amber-400 border border-amber-500/30 flex items-center justify-center mx-auto shadow-lg shadow-amber-500/10">
-                  <LogIn className="w-8 h-8" />
-                </div>
-
-                <div className="space-y-2 max-w-md mx-auto">
-                  <span className="text-[11px] font-black uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
-                    Acesso Autenticado
-                  </span>
-                  <h2 className="font-display text-2xl font-black uppercase text-white">
-                    Inicia sessão para enviar feedback.
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                    Para garantir a qualidade dos relatórios e permitir-te acompanhar o progresso das
-                    tuas sugestões, precisas de ter sessão iniciada.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <Link
-                    href="/entrar?redirect=/feedback"
-                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>INICIAR SESSÃO</span>
-                  </Link>
-                </div>
-              </div>
             ) : submitSuccess ? (
               /* Ecrã de Sucesso */
               <div className="w-full rounded-3xl border border-emerald-500/30 bg-slate-950/85 backdrop-blur-xl p-8 sm:p-12 text-center space-y-6 shadow-2xl animate-fadeIn">
@@ -412,10 +401,10 @@ export default function FeedbackPage() {
 
                 <div className="space-y-2 max-w-md mx-auto">
                   <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
-                    Feedback enviado com sucesso.
+                    Feedback enviado com sucesso!
                   </h3>
                   <p className="text-xs sm:text-sm text-emerald-400 font-medium leading-relaxed">
-                    Obrigado por ajudares a melhorar o Desafio Nacional.
+                    Obrigado por ajudares a melhorar o Desafio Nacional. A tua mensagem foi entregue diretamente à equipa oficial em suporte@acordaportugal.pt.
                   </p>
                 </div>
 
@@ -590,31 +579,81 @@ export default function FeedbackPage() {
                   </div>
                 )}
 
-                {/* Info do Utilizador Conectado (Automático) */}
-                <div className="p-3.5 rounded-2xl border border-white/10 bg-white/[0.02] flex items-center justify-between text-xs text-slate-400">
-                  <div className="flex items-center gap-2.5">
-                    <UserAvatar
-                      avatarUrl={profile?.photoURL || user.photoURL || DEFAULT_AVATAR.image}
-                      size="sm"
-                    />
-                    <div>
-                      <span className="block font-bold text-white">
-                        {user.displayName || profile?.displayName || 'Jogador'}
+                {/* Info do Utilizador Conectado ou Campos de Convidado */}
+                {user ? (
+                  <div className="p-3.5 rounded-2xl border border-white/10 bg-white/[0.02] flex items-center justify-between text-xs text-slate-400">
+                    <div className="flex items-center gap-2.5">
+                      <UserAvatar
+                        avatarUrl={profile?.photoURL || user.photoURL || DEFAULT_AVATAR.image}
+                        size="sm"
+                      />
+                      <div>
+                        <span className="block font-bold text-white">
+                          {user.displayName || profile?.displayName || 'Jogador'}
+                        </span>
+                        <span className="block text-[11px] text-slate-400">
+                          {user.email || 'Conta Vinculada'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono text-emerald-400 block">
+                        v{APP_FEEDBACK_VERSION}
                       </span>
-                      <span className="block text-[11px] text-slate-400">
-                        {user.email || 'Conta Vinculada'}
+                      <span className="text-[10px] font-mono text-slate-500 block uppercase">
+                        {detectPlatform()}
                       </span>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <span className="text-[10px] font-mono text-emerald-400 block">
-                      v{APP_FEEDBACK_VERSION}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-500 block uppercase">
-                      {detectPlatform()}
-                    </span>
+                ) : (
+                  <div className="space-y-3 p-4 rounded-2xl border border-white/10 bg-white/[0.02]">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-300 uppercase tracking-wider">
+                        <User className="w-4 h-4 text-emerald-400" />
+                        <span>Identificação (Opcional)</span>
+                      </div>
+                      <Link
+                        href="/entrar?redirect=/feedback"
+                        className="text-[11px] text-emerald-400 hover:text-emerald-300 font-bold underline"
+                      >
+                        Iniciar Sessão
+                      </Link>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label htmlFor="guest-name" className="block text-[11px] text-slate-400 mb-1">
+                          O teu Nome (Opcional)
+                        </label>
+                        <input
+                          id="guest-name"
+                          type="text"
+                          maxLength={60}
+                          value={guestName}
+                          onChange={(e) => setGuestName(e.target.value)}
+                          placeholder="Ex.: Manuel Silva"
+                          className="w-full rounded-xl border border-white/15 bg-slate-900/90 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-emerald-500 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="guest-email" className="block text-[11px] text-slate-400 mb-1">
+                          Email de Contacto (Opcional)
+                        </label>
+                        <input
+                          id="guest-email"
+                          type="email"
+                          maxLength={100}
+                          value={guestEmail}
+                          onChange={(e) => setGuestEmail(e.target.value)}
+                          placeholder="Ex.: manuel@exemplo.pt"
+                          className="w-full rounded-xl border border-white/15 bg-slate-900/90 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-emerald-500 outline-none"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-slate-400">
+                      O feedback é enviado diretamente para <strong className="text-slate-300">suporte@acordaportugal.pt</strong>. Podes indicar o teu email caso pretendas receber uma resposta.
+                    </p>
                   </div>
-                </div>
+                )}
 
                 {/* Mensagem de Erro */}
                 {errorMessage && (
@@ -634,7 +673,7 @@ export default function FeedbackPage() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Enviando...</span>
+                        <span>A ENVIAR FEEDBACK...</span>
                       </>
                     ) : cooldownRemaining > 0 ? (
                       <>

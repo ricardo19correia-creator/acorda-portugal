@@ -1,9 +1,31 @@
 import { NextResponse } from 'next/server'
 import { verifyFirebaseIdToken, getAdminFirestore } from '@/lib/firebase-admin'
-import { sendFeedbackNotificationEmail } from '@/lib/email-service'
+import { sendFeedbackNotificationEmail, checkEmailConfig } from '@/lib/email-service'
 import { FEEDBACK_TYPES, type FeedbackType } from '@/types/feedback'
 
 export const dynamic = 'force-dynamic'
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// In-memory rate limiting para prevenir spam no endpoint
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+
+function isRateLimited(identifier: string, limit = 5, windowMs = 600000): boolean {
+  const now = Date.now()
+  const entry = rateLimitMap.get(identifier)
+
+  if (!entry || entry.resetAt <= now) {
+    rateLimitMap.set(identifier, { count: 1, resetAt: now + windowMs })
+    return false
+  }
+
+  if (entry.count >= limit) {
+    return true
+  }
+
+  entry.count += 1
+  return false
+}
 
 function sanitizeText(text: string): string {
   if (!text || typeof text !== 'string') return ''
@@ -12,26 +34,38 @@ function sanitizeText(text: string): string {
 
 export async function POST(req: Request) {
   try {
-    // 1. Identificar e autenticar o utilizador via Firebase Auth ID Token
+    const clientIp =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      'unknown-client'
+
+    if (isRateLimited(clientIp, 6, 600000)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Demasiados pedidos num curto intervalo. Por favor, aguarda alguns minutos antes de submeter outro feedback.',
+        },
+        { status: 429 }
+      )
+    }
+
+    // 1. Identificar utilizador (autenticado ou convidado)
     const authHeader = req.headers.get('authorization') || ''
-    if (!authHeader.startsWith('Bearer ')) {
-      return NextResponse.json(
-        { error: 'Não autenticado. Inicia sessão para enviar feedback.' },
-        { status: 401 }
-      )
+    let verifiedUid: string | null = null
+    let verifiedEmailFromToken: string | null = null
+    let isGuest = true
+
+    if (authHeader.startsWith('Bearer ')) {
+      const idToken = authHeader.replace('Bearer ', '').trim()
+      if (idToken && idToken !== 'null' && idToken !== 'undefined') {
+        const verifiedAuth = await verifyFirebaseIdToken(idToken)
+        if (verifiedAuth && verifiedAuth.uid) {
+          verifiedUid = verifiedAuth.uid
+          verifiedEmailFromToken = verifiedAuth.email || null
+          isGuest = false
+        }
+      }
     }
-
-    const idToken = authHeader.replace('Bearer ', '').trim()
-    const verifiedAuth = await verifyFirebaseIdToken(idToken)
-
-    if (!verifiedAuth || !verifiedAuth.uid) {
-      return NextResponse.json(
-        { error: 'Sessão inválida ou expirada. Por favor, reinicia a sessão.' },
-        { status: 401 }
-      )
-    }
-
-    const verifiedUid = verifiedAuth.uid
 
     // 2. Extração e validação do payload
     const body = await req.json().catch(() => ({}))
@@ -46,22 +80,42 @@ export async function POST(req: Request) {
       platform = 'web',
       userAgent = '',
       appVersion = '1.0.0-beta',
+      contactName = '',
+      contactEmail = '',
     } = body
 
     const sanitizedTitle = sanitizeText(title)
     const sanitizedDescription = sanitizeText(description || message)
     const sanitizedSteps = sanitizeText(reproductionSteps)
+    const sanitizedContactName = sanitizeText(contactName || body.userName || body.userDisplayName || '')
+    const sanitizedContactEmail = (contactEmail || body.userEmail || verifiedEmailFromToken || '').trim()
 
     if (sanitizedTitle.length < 4 || sanitizedTitle.length > 100) {
       return NextResponse.json(
-        { error: 'O título do feedback deve conter entre 4 e 100 caracteres.' },
+        {
+          success: false,
+          error: 'O título do feedback deve conter entre 4 e 100 caracteres.',
+        },
         { status: 400 }
       )
     }
 
     if (sanitizedDescription.length < 15 || sanitizedDescription.length > 2000) {
       return NextResponse.json(
-        { error: 'A descrição detalhada do feedback deve conter entre 15 e 2000 caracteres.' },
+        {
+          success: false,
+          error: 'A descrição detalhada do feedback deve conter entre 15 e 2000 caracteres.',
+        },
+        { status: 400 }
+      )
+    }
+
+    if (sanitizedContactEmail && !EMAIL_REGEX.test(sanitizedContactEmail)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'O endereço de email fornecido não tem um formato válido.',
+        },
         { status: 400 }
       )
     }
@@ -71,25 +125,30 @@ export async function POST(req: Request) {
       ? (type as FeedbackType)
       : 'outro'
 
-    // Obter dados de perfil do utilizador na BD Firestore para enriquecer nome e avatar
+    // 3. Resolução de perfil e identidade
     const db = getAdminFirestore()
-    let resolvedDisplayName = body.userName || body.userDisplayName || 'Jogador'
-    let resolvedEmail = verifiedAuth.email || body.userEmail || ''
+    let resolvedDisplayName = sanitizedContactName || (isGuest ? 'Jogador Convidado' : 'Jogador')
+    let resolvedEmail = sanitizedContactEmail || verifiedEmailFromToken || ''
     let resolvedPhotoURL = body.userPhotoURL || ''
 
-    try {
-      const userDoc = await db.collection('users').doc(verifiedUid).get()
-      if (userDoc.exists) {
-        const uData = userDoc.data() || {}
-        if (uData.displayName) resolvedDisplayName = uData.displayName
-        if (uData.email) resolvedEmail = uData.email
-        if (uData.photoURL) resolvedPhotoURL = uData.photoURL
+    if (!isGuest && verifiedUid) {
+      try {
+        const userDoc = await db.collection('users').doc(verifiedUid).get()
+        if (userDoc.exists) {
+          const uData = userDoc.data() || {}
+          if (!sanitizedContactName && uData.displayName) resolvedDisplayName = uData.displayName
+          if (!resolvedEmail && uData.email) resolvedEmail = uData.email
+          if (uData.photoURL) resolvedPhotoURL = uData.photoURL
+        }
+      } catch (dbReadErr) {
+        console.warn('[API FEEDBACK] Aviso ao carregar perfil do utilizador:', dbReadErr)
       }
-    } catch (dbReadErr) {
-      console.warn('[API FEEDBACK] Aviso ao carregar perfil do utilizador:', dbReadErr)
+    } else {
+      // Identificador único para convidado
+      verifiedUid = `guest_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 7)}`
     }
 
-    // 3. Gerar ou validar ID único para idempotência
+    // 4. Gerar ou validar ID único para idempotência
     const feedbackId = (body.feedbackId && typeof body.feedbackId === 'string' && body.feedbackId.trim().length > 5)
       ? body.feedbackId.trim()
       : db.collection('feedback').doc().id
@@ -97,7 +156,7 @@ export async function POST(req: Request) {
     const feedbackDocRef = db.collection('feedback').doc(feedbackId)
     const existingSnap = await feedbackDocRef.get()
 
-    // Idempotência: se o mesmo feedbackId já foi enviado com sucesso por email, não duplicar!
+    // Idempotência: se o mesmo feedbackId já foi enviado com sucesso por email, não duplicar
     if (existingSnap.exists) {
       const existingData = existingSnap.data() || {}
       if (existingData.emailSent === true) {
@@ -105,7 +164,8 @@ export async function POST(req: Request) {
           success: true,
           feedbackId,
           alreadySent: true,
-          message: 'Feedback enviado com sucesso. Obrigado por ajudares a melhorar o Desafio Nacional.',
+          emailSent: true,
+          message: 'Feedback enviado com sucesso para suporte@acordaportugal.pt. Obrigado por ajudares a melhorar o Desafio Nacional.',
         })
       }
     }
@@ -113,10 +173,11 @@ export async function POST(req: Request) {
     const nowIso = new Date().toISOString()
     const finalUserAgent = req.headers.get('user-agent') || userAgent || 'N/A'
 
-    // 4. Gravar o feedback no Firestore (Garantir persistência prévia)
+    // 5. Gravar o feedback no Firestore (Garantir persistência prévia imutável)
     const feedbackDocument = {
       id: feedbackId,
       userId: verifiedUid,
+      isGuest,
       userName: resolvedDisplayName,
       userDisplayName: resolvedDisplayName,
       userEmail: resolvedEmail,
@@ -143,7 +204,7 @@ export async function POST(req: Request) {
 
     await feedbackDocRef.set(feedbackDocument, { merge: true })
 
-    // 5. Enviar imediatamente o email para suporte@acordaportugal.pt
+    // 6. Enviar imediatamente o email oficial para suporte@acordaportugal.pt
     try {
       const emailResult = await sendFeedbackNotificationEmail({
         feedbackId,
@@ -164,7 +225,7 @@ export async function POST(req: Request) {
         }),
       })
 
-      // 6. Atualizar estado com confirmação de email enviado
+      // 7. Atualizar Firestore com confirmação de email entregue
       await feedbackDocRef.update({
         emailSent: true,
         emailSentAt: new Date().toISOString(),
@@ -178,23 +239,25 @@ export async function POST(req: Request) {
         feedbackId,
         emailSent: true,
         emailSentAt: new Date().toISOString(),
-        message: 'Feedback enviado com sucesso. Obrigado por ajudares a melhorar o Desafio Nacional.',
+        message: 'Feedback enviado com sucesso para suporte@acordaportugal.pt. Obrigado por ajudares a melhorar o Desafio Nacional.',
       })
     } catch (emailError: any) {
-      console.error('[API FEEDBACK] Falha no disparo de email SMTP:', emailError)
+      console.error('[API FEEDBACK] Falha no disparo de email:', emailError)
+
+      const technicalMessage = emailError?.message || 'Falha de entrega no serviço de email.'
 
       // Se falhar o envio de email, NÃO perder o feedback gravado no Firestore
       await feedbackDocRef.update({
         emailSent: false,
         emailSending: false,
-        emailError: emailError?.message || 'Erro desconhecido no servidor de email SMTP.',
+        emailError: technicalMessage,
       }).catch(() => {})
 
       return NextResponse.json(
         {
           success: false,
-          error: 'Não foi possível enviar o feedback. Tenta novamente.',
-          technicalDetails: emailError?.message || 'Falha de entrega no servidor SMTP.',
+          error: `O teu feedback foi registado, mas não foi possível entregar a notificação por email para suporte@acordaportugal.pt: ${technicalMessage}`,
+          technicalDetails: technicalMessage,
           feedbackId,
           savedInFirestore: true,
         },
@@ -206,7 +269,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: 'Não foi possível enviar o feedback. Tenta novamente.',
+        error: 'Erro interno ao processar o feedback. Por favor, tenta novamente.',
         details: error?.message || 'Erro interno do servidor.',
       },
       { status: 500 }

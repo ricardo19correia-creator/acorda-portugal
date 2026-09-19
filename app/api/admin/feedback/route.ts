@@ -209,7 +209,7 @@ export async function PATCH(req: Request) {
           updatePayload.emailError = mailErr?.message || 'Falha ao reenviar email.'
           await feedbackDocRef.update(updatePayload)
           return NextResponse.json(
-            { error: `Falha ao reenviar email: ${mailErr?.message || 'Erro de transporte SMTP'}` },
+            { error: `Falha ao reenviar email para suporte@acordaportugal.pt: ${mailErr?.message || 'Erro no serviço de email'}` },
             { status: 502 }
           )
         }
