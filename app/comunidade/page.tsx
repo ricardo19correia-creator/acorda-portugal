@@ -168,12 +168,28 @@ export default function ComunidadePage() {
 
   // 1. Escuta em tempo real do Feed de publicações
   useEffect(() => {
+    // Não iniciar query protegida antes de a autenticação estar resolvida
+    if (!authResolved) {
+      setLoading(true)
+      return
+    }
+
     setLoading(true)
     setError(null)
+
+    console.log('[COMMUNITY FEED] A iniciar listener Firestore em tempo real:', {
+      authResolved,
+      userUid: user?.uid || null,
+      collection: 'community_posts',
+      where: "status == 'published'",
+      orderBy: 'createdAt desc',
+      limit: postsLimit,
+    })
 
     try {
       const q = query(
         collection(db, 'community_posts'),
+        where('status', '==', 'published'),
         orderBy('createdAt', 'desc'),
         limit(postsLimit)
       )
@@ -181,18 +197,26 @@ export default function ComunidadePage() {
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          const fetchedPosts: CommunityPost[] = snapshot.docs
-            .map((d) => ({
-              postId: d.id,
-              ...(d.data() as any),
-            }))
-            .filter((p) => p.status === 'published')
+          const fetchedPosts: CommunityPost[] = snapshot.docs.map((d) => ({
+            postId: d.id,
+            ...(d.data() as any),
+          }))
+          console.log('[COMMUNITY FEED] Publicações atualizadas em tempo real:', fetchedPosts.length)
           setPosts(fetchedPosts)
           setHasMore(snapshot.docs.length >= postsLimit)
           setLoading(false)
+          setError(null)
         },
         (err) => {
-          console.error('[COMMUNITY FEED SNAPSHOT ERROR]', err)
+          console.error('[COMMUNITY FEED SNAPSHOT ERROR]', {
+            code: err?.code,
+            message: err?.message,
+            authResolved,
+            userUid: user?.uid || null,
+            collection: 'community_posts',
+            filter: "status == 'published'",
+            orderBy: 'createdAt desc',
+          })
           setError('Não foi possível carregar as publicações da comunidade em tempo real.')
           setLoading(false)
         }
@@ -201,13 +225,15 @@ export default function ComunidadePage() {
       return () => unsubscribe()
     } catch (err: any) {
       console.error('[COMMUNITY INITIALIZATION ERROR]', err)
-      setError('Erro de ligação ao feed.')
+      setError('Erro de ligação ao feed da comunidade.')
       setLoading(false)
     }
-  }, [postsLimit])
+  }, [authResolved, user?.uid, postsLimit])
 
   // 2. Escuta em tempo real dos comentários para publicações abertas
   useEffect(() => {
+    if (!authResolved) return
+
     const unsubscribes: Array<() => void> = []
 
     expandedPostIds.forEach((postId) => {
@@ -215,6 +241,7 @@ export default function ComunidadePage() {
       try {
         const commentsQuery = query(
           collection(db, 'community_posts', postId, 'comments'),
+          where('status', '==', 'published'),
           orderBy('createdAt', 'asc'),
           limit(100)
         )
@@ -222,18 +249,20 @@ export default function ComunidadePage() {
         const unsub = onSnapshot(
           commentsQuery,
           (snapshot) => {
-            const comments: CommunityComment[] = snapshot.docs
-              .map((d) => ({
-                commentId: d.id,
-                postId,
-                ...(d.data() as any),
-              }))
-              .filter((c) => c.status === 'published')
+            const comments: CommunityComment[] = snapshot.docs.map((d) => ({
+              commentId: d.id,
+              postId,
+              ...(d.data() as any),
+            }))
             setCommentsMap((prev) => ({ ...prev, [postId]: comments }))
             setLoadingCommentsMap((prev) => ({ ...prev, [postId]: false }))
           },
           (err) => {
-            console.error(`[COMMENTS SNAPSHOT ERROR ${postId}]`, err)
+            console.error(`[COMMENTS SNAPSHOT ERROR ${postId}]`, {
+              code: err?.code,
+              message: err?.message,
+              postId,
+            })
             setLoadingCommentsMap((prev) => ({ ...prev, [postId]: false }))
           }
         )
@@ -247,11 +276,11 @@ export default function ComunidadePage() {
     return () => {
       unsubscribes.forEach((fn) => fn())
     }
-  }, [expandedPostIds])
+  }, [authResolved, expandedPostIds])
 
   // 3. Escuta em tempo real dos likes do utilizador autenticado
   useEffect(() => {
-    if (!user || posts.length === 0) {
+    if (!authResolved || !user || posts.length === 0) {
       setUserLikes({})
       return
     }
@@ -266,12 +295,21 @@ export default function ComunidadePage() {
           where('__name__', '==', user.uid)
         )
 
-        const unsub = onSnapshot(likeRef, (snap) => {
-          setUserLikes((prev) => ({
-            ...prev,
-            [post.postId]: !snap.empty,
-          }))
-        })
+        const unsub = onSnapshot(
+          likeRef,
+          (snap) => {
+            setUserLikes((prev) => ({
+              ...prev,
+              [post.postId]: !snap.empty,
+            }))
+          },
+          (err) => {
+            console.warn(`[LIKES SNAPSHOT ERROR ${post.postId}]`, {
+              code: err?.code,
+              message: err?.message,
+            })
+          }
+        )
 
         unsubscribes.push(unsub)
       } catch {}
@@ -280,7 +318,7 @@ export default function ComunidadePage() {
     return () => {
       unsubscribes.forEach((fn) => fn())
     }
-  }, [user, posts])
+  }, [authResolved, user?.uid, posts])
 
   // Filtragem local por categoria
   const filteredPosts = useMemo(() => {

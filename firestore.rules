@@ -202,30 +202,57 @@ service cloud.firestore {
     // 💬 COMUNIDADE OFICIAL ACORDA PORTUGAL
     // ==========================================
     match /community_posts/{postId} {
-      allow read: if true;
+      // Leitura permitida para publicações publicadas, ou pelo próprio autor, ou por administradores
+      allow read: if (resource.data.status == 'published') ||
+                     (isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin()));
 
+      // Criação permitida apenas para utilizadores autenticados com o seu próprio UID e valores iniciais limpos
       allow create: if isAuthenticated() && 
                        request.resource.data.userId == request.auth.uid && 
                        request.resource.data.status == 'published' &&
                        request.resource.data.likesCount == 0 &&
                        request.resource.data.commentsCount == 0;
 
-      allow update: if isAuthenticated();
+      // Alteração:
+      // 1. O próprio autor pode editar a mensagem/categoria ou atualizar status (e.g. 'removed'), mantendo o userId
+      // 2. Outros utilizadores autenticados apenas podem alterar likesCount ou commentsCount (+1 / -1)
+      // 3. Administradores podem moderar qualquer campo
+      allow update: if (
+        isAuthenticated() && (
+          (
+            resource.data.userId == request.auth.uid &&
+            request.resource.data.userId == resource.data.userId
+          ) ||
+          (
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount']) ||
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['commentsCount']) ||
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount', 'commentsCount'])
+          )
+        )
+      ) || isAdmin();
 
+      // Eliminação permitida apenas ao autor da publicação ou a administradores
       allow delete: if (isAuthenticated() && resource.data.userId == request.auth.uid) || isAdmin();
 
+      // Subcoleção de comentários
       match /comments/{commentId} {
-        allow read: if true;
+        allow read: if (resource.data.status == 'published') ||
+                       (isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin()));
 
         allow create: if isAuthenticated() && 
                          request.resource.data.userId == request.auth.uid &&
                          request.resource.data.status == 'published';
 
-        allow update: if isAuthenticated();
+        allow update: if (
+          isAuthenticated() &&
+          resource.data.userId == request.auth.uid &&
+          request.resource.data.userId == resource.data.userId
+        ) || isAdmin();
 
         allow delete: if (isAuthenticated() && resource.data.userId == request.auth.uid) || isAdmin();
       }
 
+      // Subcoleção de likes (um registo por utilizador autenticado)
       match /likes/{likeUserId} {
         allow read: if true;
         allow create, delete: if isAuthenticated() && request.auth.uid == likeUserId;
@@ -233,8 +260,9 @@ service cloud.firestore {
       }
     }
 
+    // Denúncias de publicações e comentários (acesso de leitura exclusivo a administradores)
     match /community_reports/{reportId} {
-      allow read: if isAuthenticated() || isAdmin();
+      allow read: if isAdmin();
       allow create: if isAuthenticated() && request.resource.data.reporterId == request.auth.uid;
       allow update, delete: if isAdmin();
     }
