@@ -43,7 +43,7 @@ export function checkEmailConfig(): EmailServiceStatus {
   return {
     configured: false,
     provider: 'none',
-    details: 'Nenhum serviço de email configurado (necessário RESEND_API_KEY ou SMTP_HOST + SMTP_PASS nas variáveis de ambiente da Vercel).',
+    details: 'Nenhum serviço de email configurado no servidor.',
   }
 }
 
@@ -377,7 +377,12 @@ https://acordaportugal.pt/feedback`
   // Provedor 1: Resend API (HTTPS REST — recomendado e ultra-rápido na Vercel)
   if (emailStatus.provider === 'resend') {
     const resendApiKey = process.env.RESEND_API_KEY!.trim()
-    const fromAddress = process.env.EMAIL_FROM || 'Acorda Portugal <onboarding@resend.dev>'
+    const fromAddress =
+      (process.env.EMAIL_FROM && process.env.EMAIL_FROM.trim().length > 0)
+        ? process.env.EMAIL_FROM.trim()
+        : (process.env.RESEND_FROM && process.env.RESEND_FROM.trim().length > 0)
+          ? process.env.RESEND_FROM.trim()
+          : 'Acorda Portugal <onboarding@resend.dev>'
 
     const payloadBody: Record<string, any> = {
       from: fromAddress,
@@ -403,7 +408,7 @@ https://acordaportugal.pt/feedback`
 
     if (!resendResponse.ok) {
       const errorJson = await resendResponse.json().catch(() => ({}))
-      const errMsg = errorJson?.message || `Erro HTTP ${resendResponse.status} na API Resend`
+      const errMsg = errorJson?.message || errorJson?.error?.message || `Erro HTTP ${resendResponse.status} na API Resend`
       throw new Error(`Falha no envio via Resend: ${errMsg}`)
     }
 
@@ -439,13 +444,11 @@ https://acordaportugal.pt/feedback`
       }
     } catch (smtpErr: any) {
       throw new Error(
-        `Falha no servidor SMTP (${process.env.SMTP_HOST || 'authsmtp.amen.pt'}): ${smtpErr?.message || 'Erro de conexão/autenticação'}`
+        `Falha no servidor SMTP: ${smtpErr?.message || 'Erro de conexão/autenticação'}`
       )
     }
   }
 
   // Nenhum provedor configurado
-  throw new Error(
-    'Nenhum serviço de email configurado no servidor. É necessário configurar RESEND_API_KEY ou SMTP_HOST + SMTP_PASS nas variáveis de ambiente da Vercel para entrega de emails para suporte@acordaportugal.pt.'
-  )
+  throw new Error('Nenhum serviço de email configurado no servidor.')
 }

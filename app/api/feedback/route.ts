@@ -164,8 +164,9 @@ export async function POST(req: Request) {
           success: true,
           feedbackId,
           alreadySent: true,
+          emailStatus: 'sent',
           emailSent: true,
-          message: 'Feedback enviado com sucesso para suporte@acordaportugal.pt. Obrigado por ajudares a melhorar o Desafio Nacional.',
+          message: 'Feedback enviado com sucesso! Obrigado por ajudares a melhorar o Desafio Nacional.',
         })
       }
     }
@@ -275,7 +276,7 @@ export async function POST(req: Request) {
       {
         success: false,
         error: 'Erro interno ao processar o feedback. Por favor, tenta novamente.',
-        details: error?.message || 'Erro interno do servidor.',
+        details: process.env.NODE_ENV === 'development' ? error?.message : undefined,
       },
       { status: 500 }
     )
