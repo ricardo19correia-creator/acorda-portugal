@@ -16,8 +16,7 @@ const LINKS = [
   { label: 'Eventos', href: '/eventos' },
   { label: 'Explorar & Sobre', href: '/explorar' },
   { label: 'Loja', href: '/loja' },
-  { label: 'Termos', href: '/termos' },
-  { label: 'Privacidade', href: '/privacidade' },
+  { label: 'Termos & Privacidade', href: '/termos' },
   { label: 'Central de Ajuda', href: '/ajuda' },
 ]
 

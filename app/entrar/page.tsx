@@ -582,15 +582,11 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
 
           {/* Termos & Privacidade */}
           <div className="pt-4 border-t border-white/5 text-center text-[11px] text-muted-foreground/80 leading-relaxed">
-            Ao continuar, concordas com os nossos{' '}
+            Ao criar uma conta ou continuar, aceitas os{' '}
             <Link href="/termos" className="text-primary hover:underline font-semibold">
-              Termos
+              Termos &amp; Privacidade
             </Link>{' '}
-            e{' '}
-            <Link href="/privacidade" className="text-cyan-400 hover:underline font-semibold">
-              Política de Privacidade
-            </Link>
-            .
+            do Acorda Portugal.
           </div>
         </div>
       </div>
@@ -601,11 +597,11 @@ export function EntrarPageContent({ defaultMode = 'login' }: { defaultMode?: 'lo
         <span className="hidden sm:inline">•</span>
         <div className="flex items-center gap-3">
           <Link href="/termos" className="hover:text-foreground transition-colors">
-            Termos
+            Termos &amp; Privacidade
           </Link>
           <span>•</span>
-          <Link href="/privacidade" className="hover:text-cyan-300 text-cyan-400/80 transition-colors">
-            Privacidade
+          <Link href="/ajuda" className="hover:text-foreground transition-colors">
+            Central de Ajuda
           </Link>
         </div>
       </div>

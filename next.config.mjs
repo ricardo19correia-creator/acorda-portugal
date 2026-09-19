@@ -43,6 +43,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/privacidade',
+        destination: '/termos#privacidade',
+        permanent: true,
+      },
+      {
+        source: '/privacidade/:path*',
+        destination: '/termos#privacidade',
+        permanent: true,
+      },
+      {
         source: '/historia',
         destination: '/feedback',
         permanent: true,

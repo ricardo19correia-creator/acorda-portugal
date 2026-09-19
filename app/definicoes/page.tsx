@@ -440,13 +440,9 @@ export default function DefinicoesPage() {
           </div>
 
           <div className="flex flex-wrap gap-4 text-xs text-slate-400">
-            <Link href="/termos" className="hover:text-emerald-400 flex items-center gap-1 transition">
+            <Link href="/termos" className="hover:text-emerald-400 flex items-center gap-1.5 transition">
               <FileText className="w-3.5 h-3.5" />
-              <span>Termos de Serviço</span>
-            </Link>
-            <Link href="/privacidade" className="hover:text-emerald-400 flex items-center gap-1 transition">
-              <Shield className="w-3.5 h-3.5" />
-              <span>Política de Privacidade</span>
+              <span>Termos &amp; Privacidade</span>
             </Link>
           </div>
 
