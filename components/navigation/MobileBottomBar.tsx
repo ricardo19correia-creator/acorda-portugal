@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Gamepad2, Trophy, Calendar, ShoppingBag, User } from 'lucide-react'
+import { Home, Gamepad2, Trophy, Calendar, MessageSquare } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { isMatchActiveFromRoute } from '@/lib/game-active-state'
 
@@ -56,14 +56,13 @@ export function MobileBottomBar() {
     return null
   }
 
-  // Ordem estrita obrigatória: INÍCIO → JOGAR → RANKINGS → EVENTOS → LOJA → PERFIL
+  // Navegação Principal Móvel Oficial: Início → Jogar → Ranking → Eventos → Comunidade
   const NAV_ITEMS = [
     { label: 'Início', href: '/', icon: Home },
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Rankings', href: '/rankings', icon: Trophy },
+    { label: 'Ranking', href: '/rankings', icon: Trophy },
     { label: 'Eventos', href: '/eventos', icon: Calendar },
-    { label: 'Loja', href: '/loja', icon: ShoppingBag },
-    { label: 'Perfil', href: '/perfil', icon: User },
+    { label: 'Comunidade', href: '/comunidade', icon: MessageSquare },
   ]
 
   return (
@@ -97,7 +96,7 @@ export function MobileBottomBar() {
             >
               <div
                 className={cn(
-                  'relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-xl transition-all',
+                  'relative flex items-center justify-center w-8 h-8 rounded-xl transition-all',
                   isActive
                     ? 'bg-emerald-500/20 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.4)] ring-1 ring-emerald-500/40'
                     : 'text-slate-400'
@@ -105,7 +104,7 @@ export function MobileBottomBar() {
               >
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="text-[9.5px] sm:text-[10px] tracking-tight mt-0.5 font-medium leading-none">
+              <span className="text-[10px] sm:text-[10.5px] tracking-tight mt-0.5 font-semibold leading-none">
                 {item.label}
               </span>
             </Link>

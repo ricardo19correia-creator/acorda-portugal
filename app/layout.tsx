@@ -188,7 +188,7 @@ html.ap-arena-match #mobile-bottom-dock {
             <ArenaLayoutSync />
             <GameThemeProvider>
               <AudioProvider>
-                <div id="app-main-layout" className="relative z-10 min-h-screen flex flex-col pb-16 lg:pb-0">
+                <div id="app-main-layout" className="relative z-10 min-h-screen flex flex-col pb-[calc(4rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
                   {children}
                 </div>
                 <MobileBottomBar />

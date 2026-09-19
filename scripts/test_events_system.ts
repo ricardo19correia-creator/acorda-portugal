@@ -140,15 +140,14 @@ const mobileNavCode = fs.readFileSync(path.join(process.cwd(), 'components', 'na
 const expectedNavItems = [
   "{ label: 'Início', href: '/', icon: Home }",
   "{ label: 'Jogar', href: '/jogar', icon: Gamepad2 }",
-  "{ label: 'Rankings', href: '/rankings', icon: Trophy }",
+  "{ label: 'Ranking', href: '/rankings', icon: Trophy }",
   "{ label: 'Eventos', href: '/eventos', icon: Calendar }",
-  "{ label: 'Loja', href: '/loja', icon: ShoppingBag }",
-  "{ label: 'Perfil', href: '/perfil', icon: User }",
+  "{ label: 'Comunidade', href: '/comunidade', icon: MessageSquare }",
 ]
 for (const item of expectedNavItems) {
   assert(mobileNavCode.includes(item), `Item de navegação obrigatório presente: ${item}`)
 }
-console.log('✅ Ordem da barra móvel confirmada: Início → Jogar → Rankings → Eventos → Loja → Perfil.')
+console.log('✅ Ordem da barra móvel confirmada: Início → Jogar → Ranking → Eventos → Comunidade.')
 
 console.log('\n================================================================================')
 console.log('🎉 RESULTADO: TODOS OS TESTES PASSARAM COM 100% DE SUCESSO!')
