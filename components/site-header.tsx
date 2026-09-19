@@ -23,6 +23,7 @@ import {
   Smartphone,
   Calendar,
   MessageSquarePlus,
+  Users,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -71,7 +72,7 @@ export function SiteHeader() {
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
-    { label: 'Feedback', href: '/feedback', icon: MessageSquarePlus },
+    { label: 'Comunidade', href: '/comunidade', icon: Users },
     { label: 'Beta', href: '/beta', icon: Sparkles },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },
@@ -84,7 +85,7 @@ export function SiteHeader() {
     { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
     { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
-    { label: 'Feedback', href: '/feedback', icon: MessageSquarePlus },
+    { label: 'Comunidade', href: '/comunidade', icon: Users },
     { label: 'Beta', href: '/beta', icon: Sparkles },
     { label: 'App', href: '/download', icon: Smartphone },
     { label: 'Perfil', href: '/perfil', icon: User },

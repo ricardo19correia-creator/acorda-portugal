@@ -11,7 +11,7 @@ const LINKS = [
   { label: 'App Android', href: '/download' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Categorias', href: '/categorias' },
-  { label: 'Feedback', href: '/feedback' },
+  { label: 'Comunidade', href: '/comunidade' },
   { label: 'Beta', href: '/beta' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Explorar & Sobre', href: '/explorar' },

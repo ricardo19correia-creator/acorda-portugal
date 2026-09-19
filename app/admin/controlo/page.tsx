@@ -12,6 +12,7 @@ import type { AdminUserRecord } from '@/lib/admin-auth'
 // 18 Views dos Módulos
 import { DashboardView } from '@/components/admin/views/DashboardView'
 import { JogadoresView } from '@/components/admin/views/JogadoresView'
+import { ComunidadeView } from '@/components/admin/views/ComunidadeView'
 import { FeedbackView } from '@/components/admin/views/FeedbackView'
 import { MultiplayerView } from '@/components/admin/views/MultiplayerView'
 import { PerguntasView } from '@/components/admin/views/PerguntasView'
@@ -260,8 +261,8 @@ export default function CentroDeControloPage() {
 
           {activeModule === 'jogadores' && <JogadoresView getIdToken={getIdToken} />}
 
-          {activeModule === 'feedback' && (
-            <FeedbackView getIdToken={getIdToken} adminUser={adminUser} />
+          {(activeModule === 'comunidade' || activeModule === 'feedback') && (
+            <ComunidadeView getIdToken={getIdToken} adminUser={adminUser} />
           )}
 
           {activeModule === 'multiplayer' && <MultiplayerView getIdToken={getIdToken} />}
