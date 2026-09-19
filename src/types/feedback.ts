@@ -1,5 +1,10 @@
 export type FeedbackType =
   | 'erro'
+  | 'pergunta'
+  | 'bug_visual'
+  | 'audio'
+  | 'ligacao'
+  | 'conta'
   | 'melhoria'
   | 'funcionalidade'
   | 'experiencia'
@@ -29,6 +34,7 @@ export type FeedbackLocation =
   | 'Perfil'
   | 'Loja'
   | 'Login/Registo'
+  | 'Central de Ajuda'
   | 'Outro'
 
 export interface FeedbackItem {
@@ -38,11 +44,12 @@ export interface FeedbackItem {
   userEmail?: string
   userPhotoURL?: string
 
-  type: FeedbackType
+  type: FeedbackType | string
   title: string
   description: string
-  location?: FeedbackLocation
+  location?: FeedbackLocation | string
   reproductionSteps?: string
+  source?: 'ajuda' | 'feedback' | string
 
   status: FeedbackStatus
   priority: FeedbackPriority
@@ -79,8 +86,48 @@ export interface FeedbackTypeConfig {
 
 export const FEEDBACK_TYPES: FeedbackTypeConfig[] = [
   {
+    id: 'pergunta',
+    label: 'Erro em Pergunta / Resposta',
+    emoji: '❓',
+    badgeClass: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    borderClass: 'border-amber-500/40 hover:border-amber-500',
+    description: 'Pergunta incorreta, resposta errada ou gralha detetada',
+  },
+  {
+    id: 'bug_visual',
+    label: 'Bug Visual ou Interface',
+    emoji: '🖥️',
+    badgeClass: 'bg-rose-500/15 text-rose-300 border-rose-500/30',
+    borderClass: 'border-rose-500/40 hover:border-rose-500',
+    description: 'Elementos sobrepostos, texto cortado ou falhas no ecrã',
+  },
+  {
+    id: 'audio',
+    label: 'Problema de Áudio / Som',
+    emoji: '🔊',
+    badgeClass: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
+    borderClass: 'border-purple-500/40 hover:border-purple-500',
+    description: 'Música que não toca, efeitos mudos ou áudio distorcido',
+  },
+  {
+    id: 'ligacao',
+    label: 'Falha de Ligação / Partida',
+    emoji: '⚡',
+    badgeClass: 'bg-red-500/15 text-red-300 border-red-500/30',
+    borderClass: 'border-red-500/40 hover:border-red-500',
+    description: 'Desconexão durante partidas 1v1 ou atrasos de rede',
+  },
+  {
+    id: 'conta',
+    label: 'Conta, Login ou Moedas',
+    emoji: '👤',
+    badgeClass: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
+    borderClass: 'border-cyan-500/40 hover:border-cyan-500',
+    description: 'Problemas de autenticação, perfil ou saldo de moedas € Acorda',
+  },
+  {
     id: 'erro',
-    label: 'Reportar erro',
+    label: 'Outro Erro Técnico',
     emoji: '🐛',
     badgeClass: 'bg-rose-500/15 text-rose-300 border-rose-500/30',
     borderClass: 'border-rose-500/40 hover:border-rose-500',
@@ -112,8 +159,8 @@ export const FEEDBACK_TYPES: FeedbackTypeConfig[] = [
   },
   {
     id: 'outro',
-    label: 'Outro',
-    emoji: '❓',
+    label: 'Outro assunto',
+    emoji: '📝',
     badgeClass: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
     borderClass: 'border-purple-500/40 hover:border-purple-500',
     description: 'Qualquer outra dúvida, sugestão ou questão geral',

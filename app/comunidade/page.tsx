@@ -25,6 +25,12 @@ import {
 } from 'lucide-react'
 import {
   collection,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  increment,
   query,
   where,
   orderBy,
@@ -168,7 +174,6 @@ export default function ComunidadePage() {
     try {
       const q = query(
         collection(db, 'community_posts'),
-        where('status', '==', 'published'),
         orderBy('createdAt', 'desc'),
         limit(postsLimit)
       )
@@ -176,10 +181,12 @@ export default function ComunidadePage() {
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          const fetchedPosts: CommunityPost[] = snapshot.docs.map((d) => ({
-            postId: d.id,
-            ...(d.data() as any),
-          }))
+          const fetchedPosts: CommunityPost[] = snapshot.docs
+            .map((d) => ({
+              postId: d.id,
+              ...(d.data() as any),
+            }))
+            .filter((p) => p.status === 'published')
           setPosts(fetchedPosts)
           setHasMore(snapshot.docs.length >= postsLimit)
           setLoading(false)
@@ -208,7 +215,6 @@ export default function ComunidadePage() {
       try {
         const commentsQuery = query(
           collection(db, 'community_posts', postId, 'comments'),
-          where('status', '==', 'published'),
           orderBy('createdAt', 'asc'),
           limit(100)
         )
@@ -216,11 +222,13 @@ export default function ComunidadePage() {
         const unsub = onSnapshot(
           commentsQuery,
           (snapshot) => {
-            const comments: CommunityComment[] = snapshot.docs.map((d) => ({
-              commentId: d.id,
-              postId,
-              ...(d.data() as any),
-            }))
+            const comments: CommunityComment[] = snapshot.docs
+              .map((d) => ({
+                commentId: d.id,
+                postId,
+                ...(d.data() as any),
+              }))
+              .filter((c) => c.status === 'published')
             setCommentsMap((prev) => ({ ...prev, [postId]: comments }))
             setLoadingCommentsMap((prev) => ({ ...prev, [postId]: false }))
           },
@@ -298,28 +306,24 @@ export default function ComunidadePage() {
     setPublishError(null)
 
     try {
-      const token = await getIdToken()
-      if (!token) throw new Error('Sessão expirada. Inicia sessão novamente.')
-
-      const res = await fetch('/api/community/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          message: trimmed,
-          category: newCategory,
-          authorName: profile?.displayName || profile?.username || user.displayName || 'Explorador',
-          authorAvatar: profile?.equipped?.avatar || profile?.avatar || user.photoURL || DEFAULT_AVATAR,
-        }),
-      })
-
-      const data = await res.json().catch(() => ({}))
-
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Não foi possível publicar. Tenta novamente.')
+      const docRef = doc(collection(db, 'community_posts'))
+      const now = new Date().toISOString()
+      const postData: CommunityPost = {
+        postId: docRef.id,
+        userId: user.uid,
+        authorName: profile?.displayName || profile?.username || user.displayName || 'Explorador',
+        authorAvatar: profile?.equipped?.avatar || profile?.avatar || user.photoURL || DEFAULT_AVATAR,
+        message: trimmed,
+        category: newCategory,
+        createdAt: now,
+        updatedAt: now,
+        likesCount: 0,
+        commentsCount: 0,
+        status: 'published',
+        isEdited: false,
       }
+
+      await setDoc(docRef, postData)
 
       // Limpar formulário após confirmação de sucesso
       setNewMessage('')
@@ -355,21 +359,17 @@ export default function ComunidadePage() {
     )
 
     try {
-      const token = await getIdToken()
-      if (!token) throw new Error('Sem token')
-
-      const res = await fetch(`/api/community/posts/${postId}/like`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-      })
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        // Reverter em caso de falha
-        setUserLikes((prev) => ({ ...prev, [postId]: currentlyLiked }))
+      const likeRef = doc(db, 'community_posts', postId, 'likes', user.uid)
+      const postRef = doc(db, 'community_posts', postId)
+      if (currentlyLiked) {
+        await deleteDoc(likeRef)
+        await updateDoc(postRef, { likesCount: increment(-1) })
+      } else {
+        await setDoc(likeRef, { userId: user.uid, createdAt: new Date().toISOString() })
+        await updateDoc(postRef, { likesCount: increment(1) })
       }
     } catch (err) {
-      // Reverter
+      console.error('[LIKE ERROR]', err)
       setUserLikes((prev) => ({ ...prev, [postId]: currentlyLiked }))
     }
   }
@@ -401,30 +401,28 @@ export default function ComunidadePage() {
     setSubmittingCommentMap((prev) => ({ ...prev, [postId]: true }))
 
     try {
-      const token = await getIdToken()
-      if (!token) throw new Error('Sessão expirada')
-
-      const res = await fetch(`/api/community/posts/${postId}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          message: commentText,
-          authorName: profile?.displayName || profile?.username || user.displayName || 'Explorador',
-          authorAvatar: profile?.equipped?.avatar || profile?.avatar || user.photoURL || DEFAULT_AVATAR,
-        }),
-      })
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Erro ao publicar comentário.')
+      const postRef = doc(db, 'community_posts', postId)
+      const commentRef = doc(collection(db, 'community_posts', postId, 'comments'))
+      const now = new Date().toISOString()
+      const commentData: CommunityComment = {
+        commentId: commentRef.id,
+        postId,
+        userId: user.uid,
+        authorName: profile?.displayName || profile?.username || user.displayName || 'Explorador',
+        authorAvatar: profile?.equipped?.avatar || profile?.avatar || user.photoURL || DEFAULT_AVATAR,
+        message: commentText,
+        createdAt: now,
+        updatedAt: now,
+        status: 'published',
+        isEdited: false,
       }
+      await setDoc(commentRef, commentData)
+      await updateDoc(postRef, { commentsCount: increment(1) })
 
       // Limpar campo após confirmação
       setCommentInputs((prev) => ({ ...prev, [postId]: '' }))
     } catch (err: any) {
+      console.error('[COMMENT ERROR]', err)
       alert(err?.message || 'Não foi possível enviar o comentário. O teu texto foi mantido.')
     } finally {
       setSubmittingCommentMap((prev) => ({ ...prev, [postId]: false }))
@@ -439,24 +437,12 @@ export default function ComunidadePage() {
 
     setIsSavingPostEdit(true)
     try {
-      const token = await getIdToken()
-      const res = await fetch(`/api/community/posts/${editingPost.postId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          message: trimmed,
-          category: editPostCategory,
-        }),
+      await updateDoc(doc(db, 'community_posts', editingPost.postId), {
+        message: trimmed,
+        category: editPostCategory,
+        updatedAt: new Date().toISOString(),
+        isEdited: true,
       })
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Erro ao guardar edição.')
-      }
-
       setEditingPost(null)
     } catch (err: any) {
       alert(err?.message || 'Falha ao editar a publicação.')
@@ -473,24 +459,14 @@ export default function ComunidadePage() {
 
     setIsSavingCommentEdit(true)
     try {
-      const token = await getIdToken()
-      const res = await fetch(
-        `/api/community/posts/${editingComment.postId}/comments/${editingComment.commentId}`,
+      await updateDoc(
+        doc(db, 'community_posts', editingComment.postId, 'comments', editingComment.commentId),
         {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ message: trimmed }),
+          message: trimmed,
+          updatedAt: new Date().toISOString(),
+          isEdited: true,
         }
       )
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Erro ao guardar comentário.')
-      }
-
       setEditingComment(null)
     } catch (err: any) {
       alert(err?.message || 'Falha ao editar o comentário.')
@@ -505,29 +481,23 @@ export default function ComunidadePage() {
     setIsDeleting(true)
 
     try {
-      const token = await getIdToken()
-      let res: Response
-
       if (itemToDelete.type === 'post') {
-        res = await fetch(`/api/community/posts/${itemToDelete.postId}`, {
-          method: 'DELETE',
-          headers: { Authorization: `Bearer ${token}` },
+        await updateDoc(doc(db, 'community_posts', itemToDelete.postId), {
+          status: 'removed',
+          updatedAt: new Date().toISOString(),
         })
-      } else {
-        res = await fetch(
-          `/api/community/posts/${itemToDelete.postId}/comments/${itemToDelete.commentId}`,
+      } else if (itemToDelete.commentId) {
+        await updateDoc(
+          doc(db, 'community_posts', itemToDelete.postId, 'comments', itemToDelete.commentId),
           {
-            method: 'DELETE',
-            headers: { Authorization: `Bearer ${token}` },
+            status: 'removed',
+            updatedAt: new Date().toISOString(),
           }
         )
+        await updateDoc(doc(db, 'community_posts', itemToDelete.postId), {
+          commentsCount: increment(-1),
+        })
       }
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Erro ao apagar.')
-      }
-
       setItemToDelete(null)
     } catch (err: any) {
       alert(err?.message || 'Não foi possível apagar o item.')
@@ -543,29 +513,22 @@ export default function ComunidadePage() {
     setReportFeedback(null)
 
     try {
-      const token = await getIdToken()
-      const res = await fetch('/api/community/reports', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          targetType: reportingTarget.targetType,
-          targetId: reportingTarget.targetId,
-          postId: reportingTarget.postId,
-          reason: reportReason,
-          targetContent: reportingTarget.content,
-          targetAuthorName: reportingTarget.authorName,
-        }),
+      const reportRef = doc(collection(db, 'community_reports'))
+      await setDoc(reportRef, {
+        reportId: reportRef.id,
+        reporterId: user.uid,
+        reporterName: profile?.displayName || profile?.username || user.displayName || 'Utilizador',
+        targetType: reportingTarget.targetType,
+        targetId: reportingTarget.targetId,
+        postId: reportingTarget.postId,
+        reason: reportReason,
+        targetContent: reportingTarget.content,
+        targetAuthorName: reportingTarget.authorName,
+        createdAt: new Date().toISOString(),
+        status: 'pending',
       })
 
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Erro ao submeter denúncia.')
-      }
-
-      setReportFeedback(data.message || 'Denúncia recebida com sucesso.')
+      setReportFeedback('Denúncia enviada com sucesso. Obrigado por manteres a comunidade segura.')
       setTimeout(() => {
         setReportingTarget(null)
         setReportFeedback(null)

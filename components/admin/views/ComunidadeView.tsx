@@ -31,6 +31,16 @@ import {
   type CommunityCategory,
   COMMUNITY_CATEGORIES,
 } from '@/types/community'
+import {
+  collection,
+  doc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  updateDoc,
+} from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 import { UserAvatar } from '@/components/user-avatar'
 import { DEFAULT_AVATAR } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
@@ -66,75 +76,71 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
     setTimeout(() => setNotificationMsg(null), 4000)
   }
 
-  // Carregar dados da API
-  const fetchData = useCallback(
-    async (isManualRefresh = false) => {
-      if (isManualRefresh) setRefreshing(true)
-      else setLoading(true)
-
-      try {
-        const token = await getIdToken()
-        if (!token) return
-
-        const res = await fetch(
-          `/api/admin/comunidade?tab=${activeTab}&status=${statusFilter}&category=${categoryFilter}&search=${encodeURIComponent(
-            searchQuery
-          )}&limit=100`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-
-        const data = await res.json()
-        if (data.success) {
-          if (activeTab === 'posts') setPosts(data.posts || [])
-          if (activeTab === 'comments') setComments(data.comments || [])
-          if (activeTab === 'reports') setReports(data.reports || [])
-        } else {
-          notify(data.error || 'Erro ao carregar dados.', 'error')
-        }
-      } catch (err: any) {
-        console.error('[ADMIN COMUNIDADE FETCH ERROR]', err)
-        notify('Falha ao comunicar com o servidor.', 'error')
-      } finally {
-        setLoading(false)
-        setRefreshing(false)
-      }
-    },
-    [getIdToken, activeTab, statusFilter, categoryFilter, searchQuery]
-  )
-
+  // 1. Escuta em tempo real das publicações
   useEffect(() => {
-    fetchData()
-  }, [fetchData])
+    setLoading(true)
+    const q = query(
+      collection(db, 'community_posts'),
+      orderBy('createdAt', 'desc'),
+      limit(200)
+    )
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const items: CommunityPost[] = snapshot.docs.map((d) => ({
+          postId: d.id,
+          ...(d.data() as any),
+        }))
+        setPosts(items)
+        setLoading(false)
+      },
+      (err) => {
+        console.error('[ADMIN POSTS SNAPSHOT ERROR]', err)
+        setLoading(false)
+      }
+    )
+
+    return () => unsubscribe()
+  }, [])
+
+  // 2. Escuta em tempo real das denúncias
+  useEffect(() => {
+    const q = query(
+      collection(db, 'community_reports'),
+      orderBy('createdAt', 'desc'),
+      limit(200)
+    )
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const items: CommunityReport[] = snapshot.docs.map((d) => ({
+          reportId: d.id,
+          ...(d.data() as any),
+        }))
+        setReports(items)
+      },
+      (err) => {
+        console.error('[ADMIN REPORTS SNAPSHOT ERROR]', err)
+      }
+    )
+
+    return () => unsubscribe()
+  }, [])
 
   // Moderação de Post
   const handleUpdatePostStatus = async (postId: string, status: CommunityPostStatus) => {
     setActionLoadingId(`post_${postId}`)
     try {
-      const token = await getIdToken()
-      const res = await fetch('/api/admin/comunidade', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          action: 'update_post_status',
-          postId,
-          status,
-        }),
+      await updateDoc(doc(db, 'community_posts', postId), {
+        status,
+        updatedAt: new Date().toISOString(),
+        moderatedAt: new Date().toISOString(),
       })
-
-      const data = await res.json()
-      if (data.success) {
-        setPosts((prev) => prev.map((p) => (p.postId === postId ? { ...p, status } : p)))
-        notify(`Publicação marcada como ${status}.`)
-      } else {
-        notify(data.error || 'Erro ao moderar.', 'error')
-      }
+      notify(`Publicação marcada como ${status}.`)
     } catch {
-      notify('Erro de comunicação.', 'error')
+      notify('Erro ao moderar.', 'error')
     } finally {
       setActionLoadingId(null)
     }
@@ -148,30 +154,14 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
   ) => {
     setActionLoadingId(`comment_${commentId}`)
     try {
-      const token = await getIdToken()
-      const res = await fetch('/api/admin/comunidade', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          action: 'update_comment_status',
-          postId,
-          commentId,
-          status,
-        }),
+      await updateDoc(doc(db, 'community_posts', postId, 'comments', commentId), {
+        status,
+        updatedAt: new Date().toISOString(),
+        moderatedAt: new Date().toISOString(),
       })
-
-      const data = await res.json()
-      if (data.success) {
-        setComments((prev) => prev.map((c) => (c.commentId === commentId ? { ...c, status } : c)))
-        notify(`Comentário marcado como ${status}.`)
-      } else {
-        notify(data.error || 'Erro ao moderar.', 'error')
-      }
+      notify(`Comentário marcado como ${status}.`)
     } catch {
-      notify('Erro de comunicação.', 'error')
+      notify('Erro ao moderar.', 'error')
     } finally {
       setActionLoadingId(null)
     }
@@ -181,29 +171,13 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
   const handleResolveReport = async (reportId: string, status: 'resolved' | 'dismissed') => {
     setActionLoadingId(`report_${reportId}`)
     try {
-      const token = await getIdToken()
-      const res = await fetch('/api/admin/comunidade', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          action: 'resolve_report',
-          reportId,
-          status,
-        }),
+      await updateDoc(doc(db, 'community_reports', reportId), {
+        status,
+        reviewedAt: new Date().toISOString(),
       })
-
-      const data = await res.json()
-      if (data.success) {
-        setReports((prev) => prev.map((r) => (r.reportId === reportId ? { ...r, status } : r)))
-        notify(`Denúncia marcada como ${status}.`)
-      } else {
-        notify(data.error || 'Erro ao processar.', 'error')
-      }
+      notify(`Denúncia marcada como ${status}.`)
     } catch {
-      notify('Erro de comunicação.', 'error')
+      notify('Erro ao processar.', 'error')
     } finally {
       setActionLoadingId(null)
     }
@@ -213,28 +187,21 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
   const handleModerateReportTarget = async (report: CommunityReport, actionStatus: 'hidden' | 'removed') => {
     setActionLoadingId(`report_target_${report.reportId}`)
     try {
-      const token = await getIdToken()
-
       if (report.targetType === 'post') {
-        await fetch('/api/admin/comunidade', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ action: 'update_post_status', postId: report.targetId, status: actionStatus }),
+        await updateDoc(doc(db, 'community_posts', report.targetId), {
+          status: actionStatus,
+          updatedAt: new Date().toISOString(),
         })
-      } else {
-        await fetch('/api/admin/comunidade', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({
-            action: 'update_comment_status',
-            postId: report.postId,
-            commentId: report.targetId,
-            status: actionStatus,
-          }),
+      } else if (report.postId) {
+        await updateDoc(doc(db, 'community_posts', report.postId, 'comments', report.targetId), {
+          status: actionStatus,
+          updatedAt: new Date().toISOString(),
         })
       }
-
-      await handleResolveReport(report.reportId, 'resolved')
+      await updateDoc(doc(db, 'community_reports', report.reportId), {
+        status: 'resolved',
+        reviewedAt: new Date().toISOString(),
+      })
       notify(`Conteúdo marcado como ${actionStatus} e denúncia resolvida.`)
     } catch {
       notify('Erro ao moderar denúncia.', 'error')
@@ -242,6 +209,61 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
       setActionLoadingId(null)
     }
   }
+
+  // Filtros em memória em tempo real
+  const filteredPosts = useMemo(() => {
+    let list = [...posts]
+    if (statusFilter !== 'all') {
+      list = list.filter((p) => p.status === statusFilter)
+    }
+    if (categoryFilter !== 'all') {
+      list = list.filter((p) => p.category === categoryFilter)
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim()
+      list = list.filter(
+        (p) =>
+          p.message?.toLowerCase().includes(q) ||
+          p.authorName?.toLowerCase().includes(q) ||
+          p.category?.toLowerCase().includes(q)
+      )
+    }
+    return list
+  }, [posts, statusFilter, categoryFilter, searchQuery])
+
+  const filteredReports = useMemo(() => {
+    let list = [...reports]
+    if (statusFilter !== 'all') {
+      list = list.filter((r) => r.status === statusFilter)
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim()
+      list = list.filter(
+        (r) =>
+          r.targetContent?.toLowerCase().includes(q) ||
+          r.reason?.toLowerCase().includes(q) ||
+          r.reporterName?.toLowerCase().includes(q) ||
+          r.targetAuthorName?.toLowerCase().includes(q)
+      )
+    }
+    return list
+  }, [reports, statusFilter, searchQuery])
+
+  const filteredComments = useMemo(() => {
+    let list = [...comments]
+    if (statusFilter !== 'all') {
+      list = list.filter((c) => c.status === statusFilter)
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim()
+      list = list.filter(
+        (c) =>
+          c.message?.toLowerCase().includes(q) ||
+          c.authorName?.toLowerCase().includes(q)
+      )
+    }
+    return list
+  }, [comments, statusFilter, searchQuery])
 
   return (
     <div className="space-y-6 animate-fadeIn pb-12">
@@ -413,7 +435,7 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
         </div>
       ) : activeTab === 'posts' ? (
         /* SEPARADOR 1: PUBLICAÇÕES */
-        posts.length === 0 ? (
+        filteredPosts.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-slate-900/40 p-12 text-center text-slate-400 space-y-2">
             <MessageSquare className="w-8 h-8 mx-auto text-slate-500" />
             <p className="text-sm font-bold text-white">Nenhuma publicação encontrada</p>
@@ -421,7 +443,7 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
           </div>
         ) : (
           <div className="space-y-3">
-            {posts.map((post) => {
+            {filteredPosts.map((post) => {
               const cat = COMMUNITY_CATEGORIES[post.category] || COMMUNITY_CATEGORIES.sugestao
               const isLoading = actionLoadingId === `post_${post.postId}`
 
@@ -525,14 +547,14 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
         )
       ) : activeTab === 'comments' ? (
         /* SEPARADOR 2: COMENTÁRIOS */
-        comments.length === 0 ? (
+        filteredComments.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-slate-900/40 p-12 text-center text-slate-400 space-y-2">
             <Users className="w-8 h-8 mx-auto text-slate-500" />
             <p className="text-sm font-bold text-white">Nenhum comentário encontrado</p>
           </div>
         ) : (
           <div className="space-y-3">
-            {comments.map((comment) => {
+            {filteredComments.map((comment) => {
               const isLoading = actionLoadingId === `comment_${comment.commentId}`
 
               return (
@@ -614,7 +636,7 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
         )
       ) : (
         /* SEPARADOR 3: DENÚNCIAS */
-        reports.length === 0 ? (
+        filteredReports.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-slate-900/40 p-12 text-center text-slate-400 space-y-2">
             <Flag className="w-8 h-8 mx-auto text-slate-500" />
             <p className="text-sm font-bold text-white">Nenhuma denúncia registada</p>
@@ -622,7 +644,7 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
           </div>
         ) : (
           <div className="space-y-3">
-            {reports.map((report) => {
+            {filteredReports.map((report) => {
               const isLoading =
                 actionLoadingId === `report_${report.reportId}` ||
                 actionLoadingId === `report_target_${report.reportId}`

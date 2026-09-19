@@ -44,16 +44,16 @@ function createMockFirestore(shouldFail = false) {
 // Validador de payload reproduzindo a rota
 function validateFeedbackPayload(body: Record<string, any>) {
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const title = (body.title || '').trim()
+  const title = (body.title || body.subject || body.problemType || '').trim()
   const description = (body.description || body.message || '').trim()
   const contactEmail = (body.contactEmail || body.userEmail || '').trim()
 
-  if (title.length < 4 || title.length > 100) {
-    return { valid: false, status: 400, error: 'O título do feedback deve conter entre 4 e 100 caracteres.' }
+  if (title.length < 3 || title.length > 120) {
+    return { valid: false, status: 400, error: 'O assunto/título do problema deve conter entre 3 e 120 caracteres.' }
   }
 
-  if (description.length < 15 || description.length > 2000) {
-    return { valid: false, status: 400, error: 'A descrição detalhada do feedback deve conter entre 15 e 2000 caracteres.' }
+  if (description.length < 10 || description.length > 3000) {
+    return { valid: false, status: 400, error: 'A descrição detalhada do problema deve conter pelo menos 10 caracteres.' }
   }
 
   if (contactEmail && !EMAIL_REGEX.test(contactEmail)) {
@@ -84,16 +84,16 @@ async function runTests() {
   {
     console.log('\n2. Teste: Validação de Payload Inválido')
     // Título curto
-    const resShortTitle = validateFeedbackPayload({ title: 'Abc', description: 'Descrição longa com mais de 15 caracteres' })
+    const resShortTitle = validateFeedbackPayload({ title: 'Ab', description: 'Descrição longa com mais de 15 caracteres' })
     assert.equal(resShortTitle.valid, false)
     assert.equal(resShortTitle.status, 400)
-    assert.match(resShortTitle.error!, /título do feedback deve conter entre 4 e 100/)
+    assert.match(resShortTitle.error!, /assunto\/título do problema deve conter entre 3 e 120/)
 
     // Descrição curta
-    const resShortDesc = validateFeedbackPayload({ title: 'Título válido', description: 'Curto demais' })
+    const resShortDesc = validateFeedbackPayload({ title: 'Título válido', description: 'Curto' })
     assert.equal(resShortDesc.valid, false)
     assert.equal(resShortDesc.status, 400)
-    assert.match(resShortDesc.error!, /descrição detalhada do feedback deve conter entre 15 e 2000/)
+    assert.match(resShortDesc.error!, /descrição detalhada do problema deve conter pelo menos 10/)
 
     // Email inválido
     const resBadEmail = validateFeedbackPayload({

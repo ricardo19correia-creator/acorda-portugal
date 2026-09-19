@@ -58,6 +58,7 @@ interface NavItem {
 export const ADMIN_NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'jogadores', label: 'Jogadores', icon: Users },
+  { id: 'feedback', label: 'Feedbacks & Suporte', icon: MessageSquarePlus, badge: 'Tickets', badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
   { id: 'comunidade', label: 'Comunidade', icon: MessageSquarePlus, badge: 'Live', badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
   { id: 'multiplayer', label: 'Multiplayer 1v1', icon: Swords, badge: 'Live' },
   { id: 'perguntas', label: 'Perguntas & Duplicados', icon: HelpCircle, badge: '20K' },

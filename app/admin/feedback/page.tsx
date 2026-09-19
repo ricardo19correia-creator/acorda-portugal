@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
 export default function AdminFeedbackRedirectPage() {
-  redirect('/admin/controlo?tab=comunidade')
+  redirect('/admin/controlo?tab=feedback')
 }

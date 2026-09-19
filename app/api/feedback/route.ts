@@ -69,42 +69,50 @@ export async function POST(req: Request) {
 
     // 2. Extração e validação do payload
     const body = await req.json().catch(() => ({}))
+    const metadata = body.metadata || {}
     const {
-      type = 'erro',
+      type = body.problemType || 'erro',
       title = '',
       description = '',
       message = '',
-      location = 'Outro',
+      location = '',
       reproductionSteps = '',
-      pageUrl = 'https://acordaportugal.pt/feedback',
+      pageUrl = '',
       platform = 'web',
       userAgent = '',
       appVersion = '1.0.0-beta',
       contactName = '',
       contactEmail = '',
+      source = '',
     } = body
 
-    const sanitizedTitle = sanitizeText(title)
-    const sanitizedDescription = sanitizeText(description || message)
-    const sanitizedSteps = sanitizeText(reproductionSteps)
-    const sanitizedContactName = sanitizeText(contactName || body.userName || body.userDisplayName || '')
-    const sanitizedContactEmail = (contactEmail || body.userEmail || verifiedEmailFromToken || '').trim()
+    const isAjuda = source === 'ajuda' || pageUrl.includes('/ajuda') || metadata.page?.includes('/ajuda') || body.problemType !== undefined
+    const finalPageUrl = pageUrl || body.url || metadata.url || metadata.page || (isAjuda ? 'https://acordaportugal.pt/ajuda' : 'https://acordaportugal.pt/feedback')
+    const finalLocation = location || (isAjuda ? 'Central de Ajuda' : 'Outro')
+    const finalPlatform = platform !== 'web' ? platform : (metadata.platform || metadata.screenResolution ? `Web (${metadata.screenResolution})` : 'web')
+    const finalUserAgent = req.headers.get('user-agent') || userAgent || metadata.userAgent || 'N/A'
 
-    if (sanitizedTitle.length < 4 || sanitizedTitle.length > 100) {
+    const sanitizedTitle = sanitizeText(title || body.subject || body.problemType || '')
+    const sanitizedDescription = sanitizeText(description || message || body.details || '')
+    const sanitizedSteps = sanitizeText(reproductionSteps)
+    const sanitizedContactName = sanitizeText(contactName || body.userName || body.userDisplayName || metadata.userDisplayName || '')
+    const sanitizedContactEmail = (contactEmail || body.userEmail || body.email || verifiedEmailFromToken || '').trim()
+
+    if (sanitizedTitle.length < 3 || sanitizedTitle.length > 120) {
       return NextResponse.json(
         {
           success: false,
-          error: 'O título do feedback deve conter entre 4 e 100 caracteres.',
+          error: 'O assunto/título do problema deve conter entre 3 e 120 caracteres.',
         },
         { status: 400 }
       )
     }
 
-    if (sanitizedDescription.length < 15 || sanitizedDescription.length > 2000) {
+    if (sanitizedDescription.length < 10 || sanitizedDescription.length > 3000) {
       return NextResponse.json(
         {
           success: false,
-          error: 'A descrição detalhada do feedback deve conter entre 15 e 2000 caracteres.',
+          error: 'A descrição detalhada do problema deve conter pelo menos 10 caracteres.',
         },
         { status: 400 }
       )
@@ -172,7 +180,6 @@ export async function POST(req: Request) {
     }
 
     const nowIso = new Date().toISOString()
-    const finalUserAgent = req.headers.get('user-agent') || userAgent || 'N/A'
 
     // 5. Gravar o feedback no Firestore (Garantir persistência prévia imutável)
     const feedbackDocument = {
@@ -187,14 +194,15 @@ export async function POST(req: Request) {
       title: sanitizedTitle,
       description: sanitizedDescription,
       message: sanitizedDescription,
-      location: location || 'Outro',
-      reproductionSteps: finalType === 'erro' ? sanitizedSteps : '',
+      location: finalLocation,
+      reproductionSteps: finalType === 'erro' || finalType === 'bug_visual' || finalType === 'pergunta' ? sanitizedSteps : '',
+      source: isAjuda ? 'ajuda' : 'feedback',
       status: 'NEW',
       priority: 'MEDIUM',
       createdAt: existingSnap.exists ? existingSnap.data()?.createdAt || nowIso : nowIso,
       updatedAt: nowIso,
-      pageUrl: pageUrl || 'https://acordaportugal.pt/feedback',
-      platform: platform || 'web',
+      pageUrl: finalPageUrl,
+      platform: finalPlatform,
       userAgent: finalUserAgent,
       appVersion: appVersion || '1.0.0-beta',
       emailStatus: 'pending',
@@ -216,10 +224,11 @@ export async function POST(req: Request) {
         type: finalType,
         title: sanitizedTitle,
         message: sanitizedDescription,
-        location: location || 'Outro',
-        reproductionSteps: finalType === 'erro' ? sanitizedSteps : '',
-        pageUrl: pageUrl || 'https://acordaportugal.pt/feedback',
-        device: `${platform} • ${finalUserAgent}`,
+        location: finalLocation,
+        reproductionSteps: finalType === 'erro' || finalType === 'bug_visual' || finalType === 'pergunta' ? sanitizedSteps : '',
+        pageUrl: finalPageUrl,
+        device: `${finalPlatform} • ${finalUserAgent}`,
+        source: isAjuda ? 'ajuda' : 'feedback',
         date: new Date().toLocaleString('pt-PT', {
           timeZone: 'Europe/Lisbon',
           dateStyle: 'full',
@@ -243,7 +252,9 @@ export async function POST(req: Request) {
         emailStatus: 'sent',
         emailSent: true,
         emailSentAt: new Date().toISOString(),
-        message: 'Feedback enviado com sucesso! Obrigado por ajudares a melhorar o Desafio Nacional.',
+        message: isAjuda
+          ? 'Problema enviado com sucesso. Obrigado pelo teu reporte. A equipa do Acorda Portugal recebeu a informação.'
+          : 'Feedback enviado com sucesso! Obrigado por ajudares a melhorar o Desafio Nacional.',
       })
     } catch (emailError: any) {
       console.error('[API FEEDBACK] Falha no disparo de email:', emailError)
@@ -261,11 +272,14 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: 'O teu feedback foi registado, mas não foi possível entregar a notificação por email de momento. A nossa equipa irá analisar o teu relato diretamente na plataforma.',
+          error: isAjuda
+            ? 'Não foi possível enviar o email para o suporte de momento. Por favor, tenta novamente mais tarde.'
+            : 'O teu feedback foi registado, mas não foi possível entregar a notificação por email de momento. A nossa equipa irá analisar o teu relato diretamente na plataforma.',
           technicalDetails: process.env.NODE_ENV === 'development' ? technicalMessage : undefined,
           feedbackId,
           savedInFirestore: true,
           emailStatus: 'failed',
+          emailSent: false,
         },
         { status: 502 }
       )

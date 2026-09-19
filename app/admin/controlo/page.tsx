@@ -261,7 +261,11 @@ export default function CentroDeControloPage() {
 
           {activeModule === 'jogadores' && <JogadoresView getIdToken={getIdToken} />}
 
-          {(activeModule === 'comunidade' || activeModule === 'feedback') && (
+          {activeModule === 'feedback' && (
+            <FeedbackView getIdToken={getIdToken} adminUser={adminUser} />
+          )}
+
+          {activeModule === 'comunidade' && (
             <ComunidadeView getIdToken={getIdToken} adminUser={adminUser} />
           )}
 

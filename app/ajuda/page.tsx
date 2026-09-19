@@ -23,12 +23,14 @@ import {
   Send,
   Loader2,
   Mail,
+  Laptop,
+  ShieldCheck,
 } from 'lucide-react'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db, auth } from '@/lib/firebase'
 import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
 import { BackgroundFx } from '@/components/background-fx'
+import { UserAvatar } from '@/components/user-avatar'
+import { DEFAULT_AVATAR } from '@/lib/avatars'
 import { cn } from '@/lib/utils'
 
 export type HelpCategoryKey =
@@ -264,21 +266,54 @@ export default function AjudaPage() {
 
   // Report Problem Modal State
   const [reportModalOpen, setReportModalOpen] = useState(false)
-  const [reportType, setReportType] = useState('Erro numa pergunta / resposta')
+  const [reportTitle, setReportTitle] = useState('')
+  const [reportCategory, setReportCategory] = useState('pergunta')
   const [reportDescription, setReportDescription] = useState('')
-  const [reportEmail, setReportEmail] = useState(user?.email || '')
+  const [reportSteps, setReportSteps] = useState('')
+  const [reportPageUrl, setReportPageUrl] = useState('')
+  const [reportPlatform, setReportPlatform] = useState('Web Desktop')
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
   const [reportSubmitting, setReportSubmitting] = useState(false)
   const [reportStatus, setReportStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [reportErrorMsg, setReportErrorMsg] = useState('')
 
   const faqListRef = useRef<HTMLDivElement | null>(null)
 
-  // Sincronizar email do utilizador quando autenticado
+  // Deteção automática da plataforma e URL da página
   useEffect(() => {
-    if (user?.email && !reportEmail) {
-      setReportEmail(user.email)
+    if (typeof window !== 'undefined') {
+      setReportPageUrl(window.location.href)
+
+      const ua = navigator.userAgent
+      let os = 'Desktop'
+      if (/android/i.test(ua)) os = 'Android'
+      else if (/iPad|iPhone|iPod/.test(ua)) os = 'iOS'
+      else if (/windows/i.test(ua)) os = 'Windows'
+      else if (/macintosh|mac os x/i.test(ua)) os = 'macOS'
+      else if (/linux/i.test(ua)) os = 'Linux'
+
+      const isCapacitor = typeof (window as any).Capacitor !== 'undefined' || Boolean((window as any).isCapacitor)
+      let browser = 'Web'
+      if (isCapacitor) browser = 'App Android'
+      else if (/chrome|crios/i.test(ua) && !/edge|opr\//i.test(ua)) browser = 'Chrome'
+      else if (/safari/i.test(ua) && !/chrome|crios/i.test(ua)) browser = 'Safari'
+      else if (/firefox|fxios/i.test(ua)) browser = 'Firefox'
+      else if (/edg/i.test(ua)) browser = 'Edge'
+
+      setReportPlatform(`${browser} • ${os}`)
     }
-  }, [user, reportEmail])
+  }, [])
+
+  // Sincronizar dados do utilizador quando autenticado
+  useEffect(() => {
+    if (user?.email && !contactEmail) {
+      setContactEmail(user.email)
+    }
+    if ((profile?.displayName || user?.displayName) && !contactName) {
+      setContactName(profile?.displayName || user?.displayName || '')
+    }
+  }, [user, profile, contactEmail, contactName])
 
   // Fechar modal ao pressionar tecla Escape
   useEffect(() => {
@@ -360,8 +395,10 @@ export default function AjudaPage() {
   const handleCloseReportModal = () => {
     setReportModalOpen(false)
     if (reportStatus === 'success') {
+      setReportTitle('')
       setReportDescription('')
-      setReportType('Erro numa pergunta / resposta')
+      setReportSteps('')
+      setReportCategory('pergunta')
       setReportStatus('idle')
     }
   }
@@ -371,8 +408,16 @@ export default function AjudaPage() {
     e.preventDefault()
     setReportErrorMsg('')
 
+    const cleanTitle = reportTitle.trim()
     const cleanDesc = reportDescription.trim()
-    const cleanEmail = reportEmail.trim()
+    const cleanEmail = (user?.email || contactEmail).trim()
+    const cleanName = (profile?.displayName || user?.displayName || contactName).trim()
+
+    if (!cleanTitle || cleanTitle.length < 3) {
+      setReportErrorMsg('Por favor, indica um assunto/título claro para o problema (mínimo 3 caracteres).')
+      setReportStatus('error')
+      return
+    }
 
     if (!cleanDesc || cleanDesc.length < 10) {
       setReportErrorMsg('A descrição do problema deve ter pelo menos 10 caracteres.')
@@ -382,7 +427,7 @@ export default function AjudaPage() {
 
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!cleanEmail || !EMAIL_REGEX.test(cleanEmail)) {
-      setReportErrorMsg('Por favor, introduz um endereço de email válido para contacto.')
+      setReportErrorMsg('Por favor, introduz um endereço de email válido para podermos responder.')
       setReportStatus('error')
       return
     }
@@ -390,55 +435,61 @@ export default function AjudaPage() {
     setReportSubmitting(true)
     setReportStatus('idle')
 
-    const payload = {
-      problemType: reportType,
-      type: reportType,
-      email: cleanEmail,
-      userEmail: cleanEmail,
-      description: cleanDesc,
-      metadata: {
-        userId: user?.uid || null,
-        userDisplayName: profile?.displayName || user?.displayName || 'Anónimo',
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A',
-        screenResolution: typeof window !== 'undefined' ? `${window.screen.width}x${window.screen.height}` : 'N/A',
-        url: typeof window !== 'undefined' ? window.location.href : '/ajuda',
-        page: '/ajuda',
-        timestamp: new Date().toISOString(),
-      },
-    }
-
     try {
-      // 1. Tenta gravar diretamente no Firestore do cliente
-      try {
-        await addDoc(collection(db, 'support_tickets'), {
-          type: reportType,
-          description: cleanDesc,
-          userEmail: cleanEmail,
-          ...payload.metadata,
-          createdAt: serverTimestamp(),
-          status: 'pendente',
-        })
-      } catch (clientDbErr) {
-        console.warn('Fallback direto Firestore para API route:', clientDbErr)
+      let idToken: string | null = null
+      if (user) {
+        try {
+          idToken = await user.getIdToken()
+        } catch (tokenErr) {
+          console.warn('Não foi possível obter ID token:', tokenErr)
+        }
       }
 
-      // 2. Disparo do Email e Registo no Servidor via /api/support
-      const res = await fetch('/api/support', {
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      }
+      if (idToken) {
+        headers['Authorization'] = `Bearer ${idToken}`
+      }
+
+      const payload = {
+        title: cleanTitle,
+        type: reportCategory,
+        description: cleanDesc,
+        reproductionSteps: reportSteps.trim(),
+        pageUrl: reportPageUrl || (typeof window !== 'undefined' ? window.location.href : 'https://acordaportugal.pt/ajuda'),
+        location: 'Central de Ajuda',
+        platform: reportPlatform,
+        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A',
+        contactName: cleanName || (user ? 'Jogador' : 'Convidado'),
+        contactEmail: cleanEmail,
+        source: 'ajuda',
+      }
+
+      const res = await fetch('/api/feedback', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(payload),
       })
 
-      const data = await res.json()
+      const data = await res.json().catch(() => ({}))
 
-      if (!res.ok || data.error) {
-        throw new Error(data.error || 'Erro na resposta do servidor.')
+      if (!res.ok || !data.success || !data.emailSent) {
+        throw new Error(
+          data.error ||
+          (data.emailStatus === 'failed'
+            ? 'Não foi possível entregar a notificação por email de momento. Por favor, tenta novamente.'
+            : 'Erro ao processar o relatório de suporte. Por favor, tenta novamente.')
+        )
       }
 
       setReportStatus('success')
     } catch (err: any) {
       console.error('Erro no envio do relatório:', err)
-      setReportErrorMsg(err?.message || 'Não foi possível enviar o relatório. Por favor, tenta novamente ou envia email para suporte@acordaportugal.pt.')
+      setReportErrorMsg(
+        err?.message ||
+        'Não foi possível enviar o relatório. Por favor, tenta novamente ou envia email para suporte@acordaportugal.pt.'
+      )
       setReportStatus('error')
     } finally {
       setReportSubmitting(false)
@@ -783,43 +834,43 @@ export default function AjudaPage() {
           }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
         >
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/15 bg-slate-900/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
+          <div className="relative w-full max-w-xl max-h-[92vh] flex flex-col rounded-3xl border border-white/15 bg-slate-900/95 p-6 sm:p-7 shadow-2xl backdrop-blur-xl overflow-hidden">
             {/* Close button */}
             <button
               type="button"
               onClick={handleCloseReportModal}
               aria-label="Fechar modal"
-              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer"
+              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-xl bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white transition cursor-pointer z-10"
             >
               <X className="h-5 w-5" />
             </button>
 
             {/* Modal Header */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <div className="flex items-center gap-3 mb-5 shrink-0">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
                 <AlertCircle className="h-5 w-5" />
               </div>
               <div>
-                <h3 id="report-modal-title" className="font-display text-lg font-black uppercase text-foreground">
+                <h3 id="report-modal-title" className="font-display text-lg sm:text-xl font-black uppercase text-foreground">
                   Reportar um Problema
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  Ajuda-nos a melhorar o Acorda Portugal enviando detalhes do erro.
+                  O relatório será enviado diretamente para a equipa oficial em <span className="text-emerald-400 font-mono">suporte@acordaportugal.pt</span>.
                 </p>
               </div>
             </div>
 
             {reportStatus === 'success' ? (
-              <div className="py-6 sm:py-8 text-center space-y-4">
+              <div className="py-8 sm:py-10 text-center space-y-4 animate-fade-in my-auto">
                 <div className="relative mx-auto w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.35)]">
                   <CheckCircle2 className="h-9 w-9 text-emerald-400" />
                 </div>
                 <div>
                   <h4 className="font-display text-lg sm:text-xl font-black uppercase text-white">
-                    Relatório Enviado com Sucesso!
+                    Problema enviado com sucesso.
                   </h4>
                   <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
-                    Obrigado por ajudares a melhorar o Acorda Portugal. A nossa equipa irá analisar a situação.
+                    Obrigado pelo teu reporte. A equipa do Acorda Portugal recebeu a informação.
                   </p>
                 </div>
 
@@ -827,81 +878,201 @@ export default function AjudaPage() {
                   <button
                     type="button"
                     onClick={handleCloseReportModal}
-                    className="cursor-pointer px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all active:scale-95"
+                    className="cursor-pointer px-7 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all active:scale-95"
                   >
-                    Fechar
+                    Concluir
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmitReport} className="space-y-4">
-                {/* Tipo de problema */}
-                <div>
-                  <label htmlFor="report-type" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Tipo de problema *
-                  </label>
-                  <select
-                    id="report-type"
-                    value={reportType}
-                    onChange={(e) => setReportType(e.target.value)}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  >
-                    <option value="Erro numa pergunta / resposta">Erro numa pergunta / resposta</option>
-                    <option value="Bug visual ou de interface">Bug visual ou de interface</option>
-                    <option value="Problema de áudio / som">Problema de áudio / som</option>
-                    <option value="Falha de ligação / partida">Falha de ligação / partida</option>
-                    <option value="Outro assunto">Outro assunto</option>
-                  </select>
-                </div>
+              <form onSubmit={handleSubmitReport} className="space-y-4 overflow-y-auto pr-1 flex-1">
+                {/* 1. Card de Identificação de Conta */}
+                {user ? (
+                  <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3 sm:p-3.5 flex items-center gap-3">
+                    <UserAvatar
+                      avatarUrl={profile?.photoURL || user?.photoURL || DEFAULT_AVATAR.image}
+                      size="md"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-xs sm:text-sm text-white truncate">
+                          {profile?.displayName || user.displayName || 'Jogador'}
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-300">
+                          <ShieldCheck className="h-3 w-3" />
+                          <span>Autenticado</span>
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-slate-400 mt-0.5 font-mono truncate">
+                        <span>{user.email}</span>
+                        <span className="text-slate-600">•</span>
+                        <span className="text-emerald-400/80">UID: {user.uid.substring(0, 10)}...</span>
+                      </div>
+                      <p className="text-[10px] text-emerald-400/70 mt-1 leading-none">
+                        Conta associada automaticamente. Não precisas de escrever os teus dados de contacto.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3 sm:p-3.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                        Identificação de Visitante
+                      </span>
+                      <span className="text-[10px] text-amber-400/80">Sessão não iniciada</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div>
+                        <label htmlFor="contact-name" className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                          O teu nome ou alcunha *
+                        </label>
+                        <input
+                          id="contact-name"
+                          type="text"
+                          required
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                          placeholder="Ex: João Silva"
+                          className="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="contact-email" className="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">
+                          Email de Contacto *
+                        </label>
+                        <input
+                          id="contact-email"
+                          type="email"
+                          required
+                          value={contactEmail}
+                          onChange={(e) => setContactEmail(e.target.value)}
+                          placeholder="email@exemplo.pt"
+                          className="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-                {/* Email de contacto */}
+                {/* 2. Assunto / Título do Problema */}
                 <div>
-                  <label htmlFor="report-email" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Email de Contacto *
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor="report-title" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                      Assunto / Título do Problema *
+                    </label>
+                    <span className="text-[10px] text-slate-500 font-medium">
+                      {reportTitle.length}/100
+                    </span>
+                  </div>
                   <input
-                    id="report-email"
-                    type="email"
+                    id="report-title"
+                    type="text"
                     required
-                    value={reportEmail}
-                    onChange={(e) => setReportEmail(e.target.value)}
-                    placeholder="email@exemplo.pt"
+                    maxLength={100}
+                    value={reportTitle}
+                    onChange={(e) => setReportTitle(e.target.value)}
+                    placeholder="Ex: Resposta incorreta na pergunta sobre o Tratado de Zamora"
                     className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   />
                 </div>
 
-                {/* Descrição */}
+                {/* 3. Categoria do Problema */}
+                <div>
+                  <label htmlFor="report-category" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Categoria do Problema *
+                  </label>
+                  <select
+                    id="report-category"
+                    value={reportCategory}
+                    onChange={(e) => setReportCategory(e.target.value)}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="pergunta">❓ Erro em Pergunta / Resposta</option>
+                    <option value="bug_visual">🖥️ Bug Visual ou de Interface</option>
+                    <option value="audio">🔊 Problema de Áudio / Som</option>
+                    <option value="ligacao">⚡ Falha de Ligação / Partida 1v1</option>
+                    <option value="conta">👤 Conta, Login ou Moedas € Acorda</option>
+                    <option value="erro">🐛 Outro Erro Técnico</option>
+                    <option value="melhoria">💡 Sugerir Melhoria</option>
+                    <option value="outro">📝 Outro Assunto</option>
+                  </select>
+                </div>
+
+                {/* 4. Página onde aconteceu & Dispositivo detetado */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="report-page" className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                      Página onde aconteceu *
+                    </label>
+                    <input
+                      id="report-page"
+                      type="text"
+                      required
+                      value={reportPageUrl}
+                      onChange={(e) => setReportPageUrl(e.target.value)}
+                      placeholder="https://acordaportugal.pt/..."
+                      className="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-xs font-mono text-slate-300 transition focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <span className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                      Dispositivo / Plataforma
+                    </span>
+                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-950/80 px-3 py-2 text-xs text-slate-300">
+                      <Laptop className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span className="truncate font-mono text-[11px]">{reportPlatform}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5. Descrição Detalhada */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <label htmlFor="report-description" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
-                      Descrição do problema *
+                      Descrição Detalhada *
                     </label>
                     <span className="text-[10px] text-slate-500 font-medium">
-                      Mínimo 10 caracteres
+                      Mínimo 10 caracteres ({reportDescription.length})
                     </span>
                   </div>
                   <textarea
                     id="report-description"
-                    rows={4}
+                    rows={3}
                     value={reportDescription}
                     onChange={(e) => setReportDescription(e.target.value)}
-                    placeholder="Descreve o que aconteceu com o máximo de detalhe possível..."
+                    placeholder="Descreve detalhadamente o que estavas a fazer, o que aconteceu e o que esperavas que acontecesse..."
                     minLength={10}
                     className="w-full rounded-xl border border-white/15 bg-slate-950 p-3 text-xs sm:text-sm font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
                     required
                   />
                 </div>
 
+                {/* 6. Passos para Reproduzir (Opcional) */}
+                <div>
+                  <label htmlFor="report-steps" className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                    Passos para Reproduzir (Opcional)
+                  </label>
+                  <input
+                    id="report-steps"
+                    type="text"
+                    value={reportSteps}
+                    onChange={(e) => setReportSteps(e.target.value)}
+                    placeholder="Ex: 1. Iniciei duelo; 2. O cronómetro parou; 3. Resposta bloqueou."
+                    className="w-full rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2 text-xs font-medium text-foreground placeholder:text-muted-foreground transition focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+
                 {/* Mensagem de Erro */}
                 {reportStatus === 'error' && (
-                  <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-xs text-rose-200 flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
-                    <span>{reportErrorMsg || 'Não foi possível enviar o relatório. Tenta novamente.'}</span>
+                  <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-xs text-rose-200 flex items-start gap-2 animate-shake">
+                    <AlertCircle className="h-4 w-4 shrink-0 text-rose-400 mt-0.5" />
+                    <span className="leading-snug">{reportErrorMsg || 'Não foi possível enviar o relatório. Por favor tenta novamente.'}</span>
                   </div>
                 )}
 
-                {/* Submit Action */}
-                <div className="pt-2 flex items-center justify-end gap-3">
+                {/* Submit Actions */}
+                <div className="pt-2 flex items-center justify-end gap-3 shrink-0">
                   <button
                     type="button"
                     onClick={handleCloseReportModal}
@@ -911,13 +1082,18 @@ export default function AjudaPage() {
                   </button>
                   <button
                     type="submit"
-                    disabled={reportSubmitting || reportDescription.trim().length < 10}
+                    disabled={
+                      reportSubmitting ||
+                      reportTitle.trim().length < 3 ||
+                      reportDescription.trim().length < 10 ||
+                      (!user && (!contactEmail.trim() || !contactName.trim()))
+                    }
                     className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 font-display text-xs font-black uppercase tracking-wider text-slate-950 hover:brightness-110 shadow-lg shadow-emerald-500/25 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {reportSubmitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>A enviar...</span>
+                        <span>A enviar reporte...</span>
                       </>
                     ) : (
                       <>

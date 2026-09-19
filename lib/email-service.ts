@@ -14,6 +14,7 @@ export interface FeedbackEmailPayload {
   pageUrl?: string
   device?: string
   date?: string
+  source?: 'ajuda' | 'feedback' | string
 }
 
 export function getFeedbackTypeLabel(type: string): string {
@@ -92,12 +93,14 @@ export async function sendFeedbackNotificationEmail(
     message,
     location,
     reproductionSteps,
-    pageUrl = 'https://acordaportugal.pt/feedback',
+    pageUrl = 'https://acordaportugal.pt/ajuda',
     device = 'Web / Desconhecido',
     date,
+    source = 'ajuda',
   } = payload
 
   const typeLabel = getFeedbackTypeLabel(type)
+  const displayTitle = title ? title.trim() : typeLabel
   const formattedDate =
     date ||
     new Date().toLocaleString('pt-PT', {
@@ -106,11 +109,47 @@ export async function sendFeedbackNotificationEmail(
       timeStyle: 'medium',
     })
 
-  // 1. Assunto canónico exigido
-  const subject = `[NOVO FEEDBACK] Desafio Nacional — ${typeLabel}`
+  const isAjuda = source === 'ajuda' || pageUrl.includes('/ajuda')
 
-  // 2. Corpo em Texto Simples Canónico exigido
-  const plainText = `NOVO FEEDBACK — ACORDA PORTUGAL
+  // 1. Assunto canónico exigido
+  const subject = isAjuda
+    ? `[AJUDA] Novo problema reportado — ${displayTitle}`
+    : `[NOVO FEEDBACK] Desafio Nacional — ${displayTitle}`
+
+  // 2. Corpo em Texto Simples estruturado
+  const plainText = isAjuda
+    ? `Novo problema reportado através da Central de Ajuda do Acorda Portugal
+
+Assunto:
+${displayTitle}
+
+Categoria:
+${typeLabel}
+
+Descrição:
+${message}${reproductionSteps ? `\n\nPassos para Reproduzir:\n${reproductionSteps}` : ''}
+
+Página:
+${pageUrl}
+
+Utilizador:
+${userName}
+
+Email:
+${userEmail || 'Não fornecido'}
+
+UID:
+${userId}
+
+Dispositivo/plataforma:
+${device}
+
+Data/hora:
+${formattedDate}
+
+ID do Relatório:
+${feedbackId}`
+    : `NOVO FEEDBACK — ACORDA PORTUGAL
 Desafio Nacional — Beta Público
 
 Utilizador:
@@ -142,7 +181,7 @@ Dispositivo:
 ${device}
 
 Este feedback foi enviado através de:
-https://acordaportugal.pt/feedback`
+${pageUrl}`
 
   // 3. Corpo HTML Profissional e Responsivo
   const htmlBody = `<!DOCTYPE html>
@@ -289,16 +328,24 @@ https://acordaportugal.pt/feedback`
 <body>
   <div class="wrapper">
     <div class="header">
-      <div class="brand-title">Acorda Portugal &bull; Desafio Nacional</div>
-      <h1 class="main-title">Novo Feedback Recebido</h1>
+      <div class="brand-title">${isAjuda ? 'Acorda Portugal &bull; Central de Ajuda' : 'Acorda Portugal &bull; Desafio Nacional'}</div>
+      <h1 class="main-title">${isAjuda ? 'Novo Problema Reportado' : 'Novo Feedback Recebido'}</h1>
       <div class="badge">${typeLabel}</div>
     </div>
 
     <div class="content">
       <table class="table-info">
         <tr>
+          <td class="name">Assunto</td>
+          <td class="val" style="color: #ffffff; font-weight: bold;">${displayTitle}</td>
+        </tr>
+        <tr>
+          <td class="name">Categoria</td>
+          <td class="val" style="color: #34d399; font-weight: bold;">${typeLabel}</td>
+        </tr>
+        <tr>
           <td class="name">Utilizador</td>
-          <td class="val" style="color: #34d399; font-weight: bold;">${userName}</td>
+          <td class="val" style="color: #38bdf8; font-weight: bold;">${userName}</td>
         </tr>
         <tr>
           <td class="name">Email</td>
@@ -311,28 +358,26 @@ https://acordaportugal.pt/feedback`
           <td class="val">${userId}</td>
         </tr>
         <tr>
-          <td class="name">Tipo</td>
-          <td class="val">${typeLabel}</td>
+          <td class="name">Página</td>
+          <td class="val"><a href="${pageUrl}" style="color: #38bdf8; text-decoration: none;">${pageUrl}</a></td>
+        </tr>
+        <tr>
+          <td class="name">Dispositivo / Plataforma</td>
+          <td class="val" style="font-size: 11px;">${device}</td>
         </tr>
         <tr>
           <td class="name">Data / Hora</td>
           <td class="val">${formattedDate}</td>
         </tr>
         <tr>
-          <td class="name">ID do Feedback</td>
+          <td class="name">ID do Relatório</td>
           <td class="val" style="color: #fbbf24;">${feedbackId}</td>
         </tr>
         ${location ? `<tr><td class="name">Local / Ecrã</td><td class="val">${location}</td></tr>` : ''}
       </table>
 
-      ${title ? `
       <div class="field-group">
-        <div class="label">Título</div>
-        <div class="value-box" style="font-weight: 700; color: #ffffff;">${title}</div>
-      </div>` : ''}
-
-      <div class="field-group">
-        <div class="label">Mensagem Completa</div>
+        <div class="label">Descrição Detalhada</div>
         <div class="value-box">${message}</div>
       </div>
 
@@ -342,31 +387,17 @@ https://acordaportugal.pt/feedback`
         <div class="value-box" style="border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.03);">${reproductionSteps}</div>
       </div>` : ''}
 
-      <div class="field-group">
-        <div class="label">Informações Adicionais</div>
-        <table class="table-info">
-          <tr>
-            <td class="name">Página</td>
-            <td class="val"><a href="${pageUrl}" style="color: #38bdf8; text-decoration: none;">${pageUrl}</a></td>
-          </tr>
-          <tr>
-            <td class="name">Dispositivo / UserAgent</td>
-            <td class="val" style="font-size: 11px;">${device}</td>
-          </tr>
-        </table>
-      </div>
-
       ${userEmail ? `
       <div style="text-align: center; margin-top: 24px;">
-        <a href="mailto:${userEmail}?subject=Re: [Feedback Acorda Portugal] ${encodeURIComponent(title || typeLabel)}" class="action-btn">
+        <a href="mailto:${userEmail}?subject=Re: ${encodeURIComponent(subject)}" class="action-btn">
           Responder Diretamente ao Jogador
         </a>
       </div>` : ''}
     </div>
 
     <div class="footer">
-      Este feedback foi enviado automaticamente através de <a href="https://acordaportugal.pt/feedback">https://acordaportugal.pt/feedback</a>.<br>
-      Sistema de Feedback Automatizado &bull; Acorda Portugal &bull; ${new Date().getFullYear()}
+      ${isAjuda ? 'Este reporte foi enviado através da Central de Ajuda: <a href="https://acordaportugal.pt/ajuda">https://acordaportugal.pt/ajuda</a>.<br>' : 'Este feedback foi enviado através de: <a href="https://acordaportugal.pt/feedback">https://acordaportugal.pt/feedback</a>.<br>'}
+      Central de Ajuda &bull; Acorda Portugal &bull; ${new Date().getFullYear()}
     </div>
   </div>
 </body>
