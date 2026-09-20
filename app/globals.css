@@ -1235,3 +1235,134 @@ iframe[title*="chat"],
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   COFRE DIÁRIO OFICIAL — MOTOR DE ANIMAÇÃO DE VIDEOJOGO AAA
+   ========================================================================== */
+
+@keyframes vault-breathing {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.012);
+  }
+}
+
+@keyframes vault-shadow-pulse {
+  0%, 100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleX(0.92) scaleY(0.92);
+    opacity: 0.38;
+  }
+}
+
+@keyframes vault-metallic-sheen {
+  0% {
+    transform: translateX(-160%) rotate(25deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.65;
+  }
+  30% {
+    transform: translateX(260%) rotate(25deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(260%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+@keyframes vault-conduit-pulse {
+  0%, 100% {
+    opacity: 0.55;
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(16, 185, 129, 1)) drop-shadow(0 0 28px rgba(52, 211, 153, 0.85));
+  }
+}
+
+@keyframes vault-rumble {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+  20% { transform: translate(3px, -2px) rotate(0.5deg); }
+  30% { transform: translate(-2px, -3px) rotate(-0.3deg); }
+  40% { transform: translate(3px, 1px) rotate(0.4deg); }
+  50% { transform: translate(-1px, 3px) rotate(-0.2deg); }
+  60% { transform: translate(2px, -2px) rotate(0.3deg); }
+  70% { transform: translate(-3px, 1px) rotate(-0.4deg); }
+  80% { transform: translate(1px, -2px) rotate(0.2deg); }
+  90% { transform: translate(-2px, 2px) rotate(-0.3deg); }
+}
+
+@keyframes vault-god-rays {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.18); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes reward-ascend {
+  0% {
+    transform: translateY(35px) scale(0.55);
+    opacity: 0;
+  }
+  65% {
+    transform: translateY(-12px) scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes lock-shockwave {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-vault-breathing {
+  animation: vault-breathing 4.6s ease-in-out infinite;
+}
+
+.animate-vault-shadow {
+  animation: vault-shadow-pulse 4.6s ease-in-out infinite;
+}
+
+.animate-vault-sheen {
+  animation: vault-metallic-sheen 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-vault-conduit {
+  animation: vault-conduit-pulse 2.8s ease-in-out infinite;
+}
+
+.animate-vault-rumble {
+  animation: vault-rumble 0.25s linear infinite;
+}
+
+.animate-god-rays {
+  animation: vault-god-rays 18s linear infinite;
+}
+
+.animate-reward-ascend {
+  animation: reward-ascend 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-lock-shockwave {
+  animation: lock-shockwave 0.6s ease-out forwards;
+}
+
