@@ -11,6 +11,7 @@ import { resetGlobalArenaState } from '@/lib/game-active-state'
 // Módulos Oficiais do Menu Principal Vivo do Acorda Portugal
 import { HomeHero } from '@/components/home/HomeHero'
 import { PlayerStatusHud } from '@/components/home/PlayerStatusHud'
+import { DailyVaultCard } from '@/components/home/DailyVaultCard'
 import { ThreeChallengePaths } from '@/components/home/ThreeChallengePaths'
 import { SiteFooter } from '@/components/site-footer'
 
@@ -69,6 +70,9 @@ export default function HomePage() {
               profile={profile}
               onOpenAuth={handleOpenAuth}
             />
+
+            {/* 🔐 CARD PREMIUM DO COFRE DIÁRIO */}
+            <DailyVaultCard />
 
             {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🏆 RANKINGS */}
             <ThreeChallengePaths onStartGame={handleStartGame} />

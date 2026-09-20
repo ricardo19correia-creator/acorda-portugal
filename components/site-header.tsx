@@ -24,6 +24,7 @@ import {
   Calendar,
   MessageSquarePlus,
   Users,
+  Lock,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -69,6 +70,7 @@ export function SiteHeader() {
 
   const NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
+    { label: 'Cofre', href: '/cofre', icon: Lock },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Eventos', href: '/eventos', icon: Calendar },
     { label: 'Loja', href: '/loja', icon: ShoppingBag },
@@ -80,6 +82,7 @@ export function SiteHeader() {
 
   const MOBILE_NAV = [
     { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
+    { label: 'Cofre Diário', href: '/cofre', icon: Lock },
     { label: 'Meu Distrito', href: '/meu-distrito', icon: Flag },
     { label: 'Rankings', href: '/rankings', icon: Trophy },
     { label: 'Eventos', href: '/eventos', icon: Calendar },

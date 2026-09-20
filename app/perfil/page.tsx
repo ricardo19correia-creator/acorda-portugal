@@ -1170,7 +1170,7 @@ function PerfilContent() {
     }
   }
 
-  // Eliminar Conta Definitivamente com Limpeza em Cascata e Reautenticação Segura
+  // Eliminar Conta Definitivamente com Limpeza Centralizada no Servidor, Presença e Caches
   const handleDeleteAccount = async () => {
     if (deleteConfirmationText.trim().toUpperCase() !== 'ELIMINAR') {
       setDeleteError('Por favor escreve "ELIMINAR" para confirmar a remoção permanente.')
@@ -1198,7 +1198,23 @@ function PerfilContent() {
     try {
       const uid = currentUser.uid
 
-      // Se for exigida reautenticação por password prévia
+      // 1. Sinalizar localmente de imediato que a conta está em processo de eliminação
+      // Isso impede qualquer listener onSnapshot de tentar ressuscitar dados ou criar perfis default
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('account_deleted', 'true')
+        sessionStorage.setItem('account_deleted', 'true')
+        localStorage.setItem(`account_deleted_${uid}`, 'true')
+      }
+
+      // 2. Parar de imediato a presença online e apagar o documento publicPresence
+      try {
+        const { stopPresenceCompletely } = await import('@/lib/real-presence')
+        await stopPresenceCompletely(uid)
+      } catch (presErr) {
+        console.warn('[DELETE] Aviso ao parar presença local:', presErr)
+      }
+
+      // 3. Se for exigida reautenticação prévia por palavra-passe
       if (needsReauth && deletePassword && currentUser.email) {
         try {
           const credential = EmailAuthProvider.credential(currentUser.email, deletePassword)
@@ -1210,78 +1226,68 @@ function PerfilContent() {
         }
       }
 
-      // 1. Apagar documento do Firestore primeiro (enquanto o utilizador ainda está autenticado)
+      // 4. Obter token de autenticação atualizado para a API segura
+      let idToken = ''
       try {
-        const userDocRef = doc(db, 'users', uid)
-        await deleteDoc(userDocRef)
-      } catch (e) {
-        console.warn('[DELETE] Aviso ao apagar doc users:', e)
-      }
-
-      try {
-        const publicDocRef = doc(db, 'publicProfiles', uid)
-        await deleteDoc(publicDocRef)
-      } catch (e) {
-        console.warn('[DELETE] Aviso ao apagar doc publicProfiles:', e)
-      }
-
-      // 2. Apagar subcoleção walletTransactions se existir
-      try {
-        const { getDocs, collection } = await import('firebase/firestore')
-        const txSnap = await getDocs(collection(db, 'users', uid, 'walletTransactions'))
-        for (const d of txSnap.docs) {
-          await deleteDoc(d.ref).catch(() => {})
-        }
-      } catch (e) {
-        console.warn('[DELETE] Aviso ao limpar walletTransactions:', e)
-      }
-
-      // 3. Eliminar conta no Firebase Authentication com reautenticação se necessário
-      try {
-        await deleteUser(currentUser)
-      } catch (authError: any) {
-        // Se exigir login recente (auth/requires-recent-login), dispara popup de reautenticação
-        if (authError?.code === 'auth/requires-recent-login' || authError?.code === 'auth/user-token-expired') {
+        idToken = await currentUser.getIdToken(true)
+      } catch (tokenErr: any) {
+        if (tokenErr?.code === 'auth/user-token-expired' || tokenErr?.code === 'auth/requires-recent-login') {
           const isGoogle = currentUser.providerData.some((p) => p.providerId === 'google.com')
           if (isGoogle) {
             const { GoogleAuthProvider, reauthenticateWithPopup } = await import('firebase/auth')
             const provider = new GoogleAuthProvider()
             provider.setCustomParameters({ prompt: 'select_account' })
             await reauthenticateWithPopup(currentUser, provider)
-            await deleteUser(currentUser)
-          } else if (deletePassword && currentUser.email) {
-            const credential = EmailAuthProvider.credential(currentUser.email, deletePassword)
-            await reauthenticateWithCredential(currentUser, credential)
-            await deleteUser(currentUser)
+            idToken = await currentUser.getIdToken(true)
           } else {
             setNeedsReauth(true)
             setIsDeleting(false)
-            setDeleteError(
-              isGoogle
-                ? 'Por motivos de segurança, clica no botão abaixo para reautenticar com o Google antes de eliminar.'
-                : 'Por motivos de segurança, introduz a tua palavra-passe atual abaixo para confirmar a eliminação.'
-            )
+            setDeleteError('Por favor introduz a tua palavra-passe abaixo para confirmar a eliminação.')
             return
           }
         } else {
-          throw authError
+          throw tokenErr
         }
       }
 
-      // 4. Limpeza total de cache local, storage e indexedDB
+      // 5. Invocação do Serviço Central de Eliminação Atómica no Backend (Admin SDK)
+      // Executa a purga total de Auth, Firestore (todas as coleções), Storage, Presença, Duelos e Referências
+      const deleteResponse = await fetch('/api/account/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ idToken }),
+      })
+
+      const deleteResult = await deleteResponse.json().catch(() => ({}))
+      if (!deleteResponse.ok || !deleteResult.success) {
+        throw new Error(deleteResult.error || 'Falha ao processar a eliminação definitiva no servidor.')
+      }
+
+      // 6. Terminar sessão no cliente Firebase Auth
+      try {
+        const { signOut } = await import('firebase/auth')
+        await signOut(auth)
+      } catch {}
+
+      // 7. Limpeza Total e Irreversível de Memória, Caches, LocalStorage e IndexedDB
       if (typeof window !== 'undefined') {
         localStorage.clear()
         sessionStorage.clear()
+        localStorage.setItem('account_deleted', 'true')
         try {
           window.indexedDB.deleteDatabase('firebaseLocalStorageDb')
           window.indexedDB.deleteDatabase('firebase-heartbeat-database')
+          window.indexedDB.deleteDatabase('firestore/[DEFAULT]/desafio-nacional-5fe71/main')
         } catch (e) {}
       }
 
-      // 5. Redirecionar imediatamente para a página de confirmação /conta-eliminada
+      // 8. Redirecionar imediatamente para a página de confirmação
       setIsDeleting(false)
       setIsDeleteModalOpen(false)
-      window.location.href = '/conta-eliminada'
+      window.location.replace('/conta-eliminada')
     } catch (err: any) {
       console.error('[DELETE ACCOUNT ERROR]', err)
       setIsDeleting(false)
@@ -1444,8 +1450,13 @@ function PerfilContent() {
   const divisionKey = calculateCompetitiveDivision(currentLp)
   const division = DIVISION_THRESHOLDS[divisionKey] || DIVISION_THRESHOLDS.Bronze
   const divisionColor = DIVISION_COLORS[divisionKey]?.text || 'text-amber-400'
-  const streak = profile?.streak ?? (profile as any)?.currentStreak ?? (profile as any)?.streakCount ?? 0
-  const bestStreak = profile?.bestStreak ?? (profile as any)?.maxStreak ?? streak
+  const dailyVault = (profile as any)?.dailyVault || {}
+  const streak = typeof dailyVault.currentStreak === 'number' ? dailyVault.currentStreak : (profile?.streak ?? (profile as any)?.currentStreak ?? (profile as any)?.streakCount ?? 0)
+  const bestStreak = typeof dailyVault.bestStreak === 'number' ? dailyVault.bestStreak : (profile?.bestStreak ?? (profile as any)?.maxStreak ?? streak)
+  const vaultTotalOpened = typeof dailyVault.totalOpened === 'number' ? dailyVault.totalOpened : 0
+  const vaultTotalAcordas = typeof dailyVault.totalAcordasWon === 'number' ? dailyVault.totalAcordasWon : 0
+  const vaultTotalAids = typeof dailyVault.totalAidsWon === 'number' ? dailyVault.totalAidsWon : 0
+  const vaultLastReward = dailyVault.lastReward ? (dailyVault.lastReward.label || dailyVault.lastReward.shortLabel || 'Nenhuma') : 'Nenhuma'
   const xpCurrent = progressInfo.xpIntoLevel
   const xpTotalNext = progressInfo.xpNeededForLevel || 1000
   const xpProgressPct = Math.min(100, Math.round(progressInfo.progressPercentage))
@@ -1739,26 +1750,63 @@ function PerfilContent() {
 
             {/* Grid de Streak & Saldo de Acordas */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Dias Seguidos (Streak) */}
-              <div className="p-6 rounded-3xl bg-slate-900/80 border border-orange-500/30 shadow-xl relative overflow-hidden backdrop-blur-md">
+              {/* Dias Seguidos (Streak) & Cofre Diário */}
+              <div className="p-6 rounded-3xl bg-slate-900/80 border border-orange-500/30 shadow-xl relative overflow-hidden backdrop-blur-md flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-orange-500/20 text-orange-400 border border-orange-500/30 flex items-center justify-center text-2xl shadow-inner">
-                    🔥
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-2xl bg-orange-500/20 text-orange-400 border border-orange-500/30 flex items-center justify-center text-2xl shadow-inner">
+                        🔥
+                      </div>
+                      <div>
+                        <h3 className="font-black text-white text-lg">Cofre Diário &amp; Streaks</h3>
+                        <p className="text-xs text-slate-400">Progresso e recompensas conquistadas a cada 24 horas.</p>
+                      </div>
+                    </div>
+
+                    <Link
+                      href="/cofre"
+                      className="px-3 py-1.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/40 text-orange-300 text-xs font-bold transition flex items-center gap-1 shrink-0"
+                    >
+                      <span>Abrir</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
-                  <div>
-                    <h3 className="font-black text-white text-lg">Dias Consecutivos</h3>
-                    <p className="text-xs text-slate-400">Joga todos os dias para acumular bónus e multiplicar recompensas.</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-800">
-                  <div className="bg-slate-950/60 rounded-2xl p-3 border border-slate-800">
-                    <span className="text-[11px] text-slate-400 font-bold block">Streak Atual</span>
-                    <span className="text-2xl font-black text-orange-400 font-mono">{streak} {streak === 1 ? 'dia' : 'dias'}</span>
-                  </div>
-                  <div className="bg-slate-950/60 rounded-2xl p-3 border border-slate-800">
-                    <span className="text-[11px] text-slate-400 font-bold block">Melhor Sequência</span>
-                    <span className="text-2xl font-black text-amber-300 font-mono">{bestStreak} {bestStreak === 1 ? 'dia' : 'dias'}</span>
+
+                  {/* Grelha de Métricas Reais do Cofre */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-3 border-t border-slate-800">
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Streak Atual</span>
+                      <span className="text-xl font-black text-orange-400 font-mono">{streak} {streak === 1 ? 'dia' : 'dias'}</span>
+                    </div>
+
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Melhor Streak</span>
+                      <span className="text-xl font-black text-amber-300 font-mono">{bestStreak} {bestStreak === 1 ? 'dia' : 'dias'}</span>
+                    </div>
+
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Cofres Abertos</span>
+                      <span className="text-xl font-black text-emerald-400 font-mono">{vaultTotalOpened}</span>
+                    </div>
+
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Acordas Recebidas</span>
+                      <span className="text-base font-black text-amber-300 font-mono">+{vaultTotalAcordas} 🪙</span>
+                    </div>
+
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Ajudas Ganhas</span>
+                      <span className="text-base font-black text-cyan-300 font-mono">{vaultTotalAids} un.</span>
+                    </div>
+
+                    <div className="bg-slate-950/60 rounded-2xl p-2.5 border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Última Recompensa</span>
+                      <span className="text-xs font-bold text-white truncate block mt-0.5" title={vaultLastReward}>
+                        {vaultLastReward}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

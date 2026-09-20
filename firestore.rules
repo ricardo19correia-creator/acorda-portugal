@@ -20,9 +20,9 @@ service cloud.firestore {
     // Coleção de Utilizadores (Perfis, moedas, inventário e estatísticas)
     match /users/{userId} {
       allow read: if true;
-      allow create: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid);
-      allow update: if isAuthenticated() && (
-        (isOwner(userId) && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['vipEntitlements']))) ||
+      allow create: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.uid == request.auth.uid) && !exists(/databases/$(database)/documents/deleted_accounts/$(userId));
+      allow update: if isAuthenticated() && !exists(/databases/$(database)/documents/deleted_accounts/$(userId)) && (
+        (isOwner(userId) && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['vipEntitlements', 'dailyVault']))) ||
         isAdmin()
       );
       allow delete: if isOwner(userId) || isAdmin();
@@ -89,18 +89,30 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Registo oficial de aberturas do Cofre Diário (Escrita exclusiva do Servidor/Admin; Leitura apenas do dono)
+    match /daily_vault_claims/{claimId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
     // Perfis públicos para Rankings Nacionais e Disputa Distrital
     match /publicProfiles/{profileId} {
       allow read: if true;
-      allow create, update: if isAuthenticated() && (request.auth.uid == profileId || request.resource.data.uid == request.auth.uid || isAdmin());
+      allow create, update: if isAuthenticated() && (request.auth.uid == profileId || request.resource.data.uid == request.auth.uid || isAdmin()) && !exists(/databases/$(database)/documents/deleted_accounts/$(profileId));
       allow delete: if isOwner(profileId) || isAdmin();
     }
 
     // Presença pública em tempo real (100% Utilizadores Humanos Reais Autenticados)
     match /publicPresence/{userId} {
       allow read: if true;
-      allow create, update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isAuthenticated() && (request.auth.uid == userId || request.resource.data.userId == request.auth.uid || isAdmin()) && !exists(/databases/$(database)/documents/deleted_accounts/$(userId));
       allow delete: if isOwner(userId) || isAdmin();
+    }
+
+    // Registo Canónico de Contas Eliminadas Definitivamente (Tombstone)
+    match /deleted_accounts/{deletedId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     // Coleção legada desativada (Acesso exclusivo de administração para higienização)

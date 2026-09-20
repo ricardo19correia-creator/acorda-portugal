@@ -395,3 +395,217 @@ export function playSound(soundName?: string) {
   playEmoteSound(soundName)
 }
 
+// ==========================================
+// 🔐 EFEITOS SONOROS & HÁPTICA DO COFRE DIÁRIO
+// ==========================================
+
+export function isSfxAllowed(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    const sfx = localStorage.getItem('ap_sfx_enabled')
+    return sfx !== 'false'
+  } catch {
+    return true
+  }
+}
+
+export function isHapticsAllowed(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    const hap = localStorage.getItem('ap_haptics_enabled')
+    return hap !== 'false'
+  } catch {
+    return true
+  }
+}
+
+/**
+ * Vibração háptica tátil para dispositivos móveis
+ */
+export function triggerVaultHaptic(pattern: 'click' | 'lock' | 'burst' | 'success') {
+  if (!isHapticsAllowed() || typeof navigator === 'undefined' || !('vibrate' in navigator)) return
+  try {
+    switch (pattern) {
+      case 'click':
+        navigator.vibrate(30)
+        break
+      case 'lock':
+        navigator.vibrate([40, 30, 40])
+        break
+      case 'burst':
+        navigator.vibrate([60, 40, 100])
+        break
+      case 'success':
+        navigator.vibrate([80, 50, 120, 60, 200])
+        break
+    }
+  } catch {}
+}
+
+/**
+ * 1. Clique do Botão de Abertura do Cofre
+ */
+export function playVaultButtonClick() {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = 'triangle'
+    osc.frequency.setValueAtTime(440, t)
+    osc.frequency.exponentialRampToValueAtTime(160, t + 0.08)
+
+    gain.gain.setValueAtTime(0.25, t)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09)
+
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.start(t)
+    osc.stop(t + 0.09)
+  } catch {}
+}
+
+/**
+ * 2. Som de Mecanismo Interno a Rodar / Acumulação de Energia
+ */
+export function playVaultMechanismHum() {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+    const osc = ctx.createOscillator()
+    const filter = ctx.createBiquadFilter()
+    const gain = ctx.createGain()
+
+    osc.type = 'sawtooth'
+    osc.frequency.setValueAtTime(90, t)
+    osc.frequency.linearRampToValueAtTime(180, t + 0.8)
+
+    filter.type = 'lowpass'
+    filter.frequency.setValueAtTime(300, t)
+    filter.frequency.linearRampToValueAtTime(900, t + 0.8)
+
+    gain.gain.setValueAtTime(0.01, t)
+    gain.gain.linearRampToValueAtTime(0.18, t + 0.4)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.9)
+
+    osc.connect(filter)
+    filter.connect(gain)
+    gain.connect(ctx.destination)
+
+    osc.start(t)
+    osc.stop(t + 0.9)
+  } catch {}
+}
+
+/**
+ * 3. Desbloqueio Mecânico das Trancas (CLIC 1, 2, 3)
+ */
+export function playVaultLockClick(lockIndex: number) {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+    const baseFreq = 520 + lockIndex * 180 // Tom ascendente a cada tranca (CLIC, CLIC, CLIC)
+
+    // Componente metálica aguda
+    const oscMet = ctx.createOscillator()
+    const gainMet = ctx.createGain()
+    oscMet.type = 'square'
+    oscMet.frequency.setValueAtTime(baseFreq * 2, t)
+    oscMet.frequency.exponentialRampToValueAtTime(baseFreq * 4, t + 0.04)
+
+    gainMet.gain.setValueAtTime(0.2, t)
+    gainMet.gain.exponentialRampToValueAtTime(0.001, t + 0.06)
+
+    // Componente de impacto pesado
+    const oscThud = ctx.createOscillator()
+    const gainThud = ctx.createGain()
+    oscThud.type = 'sine'
+    oscThud.frequency.setValueAtTime(baseFreq, t)
+    oscThud.frequency.exponentialRampToValueAtTime(90, t + 0.12)
+
+    gainThud.gain.setValueAtTime(0.3, t)
+    gainThud.gain.exponentialRampToValueAtTime(0.001, t + 0.14)
+
+    oscMet.connect(gainMet)
+    gainMet.connect(ctx.destination)
+    oscThud.connect(gainThud)
+    gainThud.connect(ctx.destination)
+
+    oscMet.start(t)
+    oscMet.stop(t + 0.06)
+    oscThud.start(t)
+    oscThud.stop(t + 0.14)
+  } catch {}
+}
+
+/**
+ * 4. Explosão de Luz e Abertura da Tampa
+ */
+export function playVaultLightBurst() {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+
+    // Swell de luz
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(320, t)
+    osc.frequency.exponentialRampToValueAtTime(960, t + 0.35)
+
+    gain.gain.setValueAtTime(0.01, t)
+    gain.gain.linearRampToValueAtTime(0.28, t + 0.25)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6)
+
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.start(t)
+    osc.stop(t + 0.6)
+  } catch {}
+}
+
+/**
+ * 5. Fanfarra Triunfal da Recompensa
+ */
+export function playVaultRewardFanfare() {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    // Acordes maiores triunfais (F4, A4, C5, F5)
+    const chord = [349.23, 440.0, 523.25, 698.46]
+    chord.forEach((freq, idx) => {
+      const t = ctx.currentTime + idx * 0.08
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+
+      osc.type = 'triangle'
+      osc.frequency.setValueAtTime(freq, t)
+
+      gain.gain.setValueAtTime(0.01, t)
+      gain.gain.linearRampToValueAtTime(0.24, t + 0.05)
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.8)
+
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+
+      osc.start(t)
+      osc.stop(t + 0.8)
+    })
+
+    // Efeito de chuva de moedas no final
+    setTimeout(() => {
+      playGoldCoinsShower()
+    }, 280)
+  } catch {}
+}
+
+

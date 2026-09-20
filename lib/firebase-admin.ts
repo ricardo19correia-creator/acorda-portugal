@@ -96,6 +96,38 @@ export function hasAdminCredentials(): boolean {
   return Boolean(pk && (pk.includes('BEGIN PRIVATE KEY') || pk.includes('BEGIN RSA PRIVATE KEY') || pk.length > 50))
 }
 
+let clockSynced = false
+export async function syncClockSkewIfAny(): Promise<void> {
+  if (clockSynced) return
+  clockSynced = true
+  try {
+    const res = await fetch('https://www.google.com', { method: 'HEAD', signal: AbortSignal.timeout(3000) })
+    const dateHeader = res.headers.get('date')
+    if (dateHeader) {
+      const googleTime = new Date(dateHeader).getTime()
+      const localTime = Date.now()
+      const offset = localTime - googleTime
+      if (Math.abs(offset) > 15_000) {
+        const OriginalDate = Date
+        class PatchedDate extends OriginalDate {
+          constructor(...args: any[]) {
+            if (args.length === 0) {
+              super(OriginalDate.now() - offset)
+            } else {
+              super(...(args as [any]))
+            }
+          }
+          static now() {
+            return OriginalDate.now() - offset
+          }
+        }
+        // @ts-ignore
+        globalThis.Date = PatchedDate
+      }
+    }
+  } catch {}
+}
+
 /**
  * Inicialização Singleton Lazy do Firebase Admin SDK
  */

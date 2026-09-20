@@ -354,6 +354,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     currentUidRef.current = currentUser.uid
     const userDocRef = doc(db, 'users', currentUser.uid)
 
+    // Se a conta estiver marcada como eliminada localmente, abortar imediatamente e desautenticar
+    if (typeof window !== 'undefined' && (
+      localStorage.getItem('account_deleted') === 'true' ||
+      sessionStorage.getItem('account_deleted') === 'true' ||
+      localStorage.getItem(`account_deleted_${currentUser.uid}`) === 'true'
+    )) {
+      console.log('[AUTH] Conta marcada como eliminada. Ignorando subscrição e terminando sessão.')
+      setProfile(null)
+      setUser(null)
+      setIsLoading(false)
+      try {
+        const { signOut } = require('firebase/auth')
+        signOut(auth)
+      } catch {}
+      return
+    }
+
     // Hidratação instantânea da cache se ainda não houver perfil
     setProfile((prev) => {
       if (prev && prev.uid === currentUser.uid) return prev
@@ -652,15 +669,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles (fallback Portugal):', syncErr))
             }
           } else {
-            // PROTEÇÃO CRÍTICA ANTI-RESET:
-            // Se docSnap veio da cache local (novo browser, aba incógnita, limpeza de cookies),
+            // PROTEÇÃO CRÍTICA ANTI-RESET E ANTI-RESSURREIÇÃO:
+            // 1. Se a conta foi eliminada localmente, abortar imediatamente e desautenticar
+            const isDeletedLocally = typeof window !== 'undefined' && (
+              localStorage.getItem('account_deleted') === 'true' ||
+              sessionStorage.getItem('account_deleted') === 'true' ||
+              localStorage.getItem(`account_deleted_${currentUser.uid}`) === 'true'
+            )
+            if (isDeletedLocally) {
+              console.log('[AUTH] Conta marcada como eliminada. Ignorando criação default e encerrando sessão.')
+              setProfile(null)
+              setUser(null)
+              setIsLoading(false)
+              try {
+                const { signOut } = await import('firebase/auth')
+                await signOut(auth)
+              } catch {}
+              return
+            }
+
+            // 2. Se docSnap veio da cache local (novo browser, aba incógnita, limpeza de cookies),
             // NUNCA criar documento default nem sobrescrever XP! Aguardar pelo snapshot do servidor.
             if (docSnap.metadata.fromCache) {
               console.log('[AUTH] docSnap ausente na cache local, aguardando resposta autoritativa do servidor...')
               return
             }
 
-            // Confirmar ativamente no servidor Firestore se o utilizador existe antes de criar qualquer default
+            // 3. Confirmar se a conta está registada em deleted_accounts (tombstone)
+            try {
+              const { getDoc, doc } = await import('firebase/firestore')
+              const tombSnap = await getDoc(doc(db, 'deleted_accounts', currentUser.uid))
+              if (tombSnap.exists()) {
+                console.log('[AUTH] Conta registada no índice deleted_accounts. Encerrando sessão imediatamente.')
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('account_deleted', 'true')
+                  sessionStorage.setItem('account_deleted', 'true')
+                  localStorage.setItem(`account_deleted_${currentUser.uid}`, 'true')
+                }
+                setProfile(null)
+                setUser(null)
+                setIsLoading(false)
+                try {
+                  const { signOut } = await import('firebase/auth')
+                  await signOut(auth)
+                } catch {}
+                return
+              }
+            } catch {}
+
+            // 4. Confirmar ativamente no servidor Firestore se o utilizador existe antes de criar qualquer default
             try {
               const serverCheck = await getDocFromServer(userDocRef)
               if (serverCheck.exists()) {
@@ -672,7 +729,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               return
             }
 
-            // Novo Utilizador — Criar documento com defaults e merge seguro
+            // 5. Se a conta não é recém-criada (< 3 minutos), trata-se de conta apagada ou sem permissão.
+            // NUNCA criar documento default para contas antigas que não tenham documento no Firestore!
+            const accountCreationTime = currentUser.metadata.creationTime ? new Date(currentUser.metadata.creationTime).getTime() : 0
+            const isBrandNewAccount = accountCreationTime > 0 && (Date.now() - accountCreationTime < 180_000)
+            if (!isBrandNewAccount) {
+              console.warn('[AUTH] Conta antiga sem documento no Firestore. Abortando recriação fantasma e encerrando sessão.')
+              setProfile(null)
+              setUser(null)
+              setIsLoading(false)
+              try {
+                const { signOut } = await import('firebase/auth')
+                await signOut(auth)
+              } catch {}
+              return
+            }
+
+            // Novo Utilizador Legítimo (< 3 min) — Criar documento com defaults e merge seguro
             const fallbackName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Jogador'
             const fallbackAvatar = DEFAULT_AVATAR.image
             const fallbackAvatarId = STARTER_AVATAR_ID

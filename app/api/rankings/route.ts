@@ -60,6 +60,17 @@ export async function GET(req: NextRequest) {
         } catch (uErr) {
           console.warn('[RANKINGS_API_USERS_FALLBACK_WARN]', uErr)
         }
+
+        // HIGIENIZAÇÃO MÁXIMA: Excluir estritamente qualquer UID registado como eliminado
+        try {
+          const deletedSnap = await db.collection('deleted_accounts').limit(500).get()
+          if (!deletedSnap.empty) {
+            const deletedUids = new Set(deletedSnap.docs.map((d: any) => d.id))
+            rawPlayers = rawPlayers.filter((p) => !deletedUids.has(p.uid))
+          }
+        } catch (delErr) {
+          console.warn('[RANKINGS_API_DELETED_FILTER_WARN]', delErr)
+        }
       } catch (dbErr) {
         console.warn('[RANKINGS_API_DB_FETCH_WARN]', dbErr)
       }

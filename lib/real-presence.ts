@@ -171,6 +171,15 @@ export async function sendRealHeartbeat(
 ): Promise<void> {
   if (!user?.uid) return // Apenas humanos autenticados reais
 
+  // Bloqueio rigoroso: contas marcadas como eliminadas NUNCA enviam heartbeat
+  if (typeof window !== 'undefined' && (
+    localStorage.getItem('account_deleted') === 'true' ||
+    sessionStorage.getItem('account_deleted') === 'true' ||
+    localStorage.getItem(`account_deleted_${user.uid}`) === 'true'
+  )) {
+    return
+  }
+
   try {
     registerActiveTab(user.uid)
     const presenceRef = doc(db, 'publicPresence', user.uid)
@@ -239,17 +248,28 @@ export async function markRealOffline(userId: string | null | undefined, force: 
   if (!userId) return
 
   try {
-    if (!force) {
-      const { hasRemainingTabs } = unregisterActiveTab(userId)
-      if (hasRemainingTabs) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`[PRESENCE] Aba fechada mas utilizador ${anonymizeUserId(userId)} continua ativo noutra aba. Offline cancelado.`)
-        }
-        return
+    const presenceRef = doc(db, 'publicPresence', userId)
+
+    if (force) {
+      // Na eliminação de conta ou desconexão forçada, APAGAR o documento definitivamente
+      try {
+        const { deleteDoc } = await import('firebase/firestore')
+        await deleteDoc(presenceRef).catch(() => {})
+      } catch {}
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[PRESENCE] Documento de presença de ${anonymizeUserId(userId)} eliminado forçadamente.`)
       }
+      return
     }
 
-    const presenceRef = doc(db, 'publicPresence', userId)
+    const { hasRemainingTabs } = unregisterActiveTab(userId)
+    if (hasRemainingTabs) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[PRESENCE] Aba fechada mas utilizador ${anonymizeUserId(userId)} continua ativo noutra aba. Offline cancelado.`)
+      }
+      return
+    }
+
     await setDoc(
       presenceRef,
       {
@@ -268,6 +288,20 @@ export async function markRealOffline(userId: string | null | undefined, force: 
   } catch (err) {
     console.debug('[PRESENCE] Erro ao marcar offline:', err)
   }
+}
+
+/**
+ * Desativa imediatamente a presença do utilizador e apaga o documento publicPresence (utilizado na eliminação de conta)
+ */
+export async function stopPresenceCompletely(userId: string): Promise<void> {
+  if (!userId) return
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('account_deleted', 'true')
+    sessionStorage.setItem('account_deleted', 'true')
+    localStorage.setItem(`account_deleted_${userId}`, 'true')
+  }
+  presenceManager.stop()
+  await markRealOffline(userId, true)
 }
 
 /**
@@ -518,6 +552,12 @@ class PresenceSubscriptionManager {
       clearInterval(this.refreshTimer)
       this.refreshTimer = null
     }
+  }
+
+  public stop() {
+    this.stopListening()
+    this.subscribers.clear()
+    this.rawDocs = []
   }
 
   private notifySubscribers() {
